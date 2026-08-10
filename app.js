@@ -26,6 +26,12 @@
   // ---------- Στατικά strings (UI chrome, όχι περιεχόμενο δεδομένων) ----------
   const STRINGS = {
     el: {
+      heroTitle: "Ποιο AI εργαλείο ταιριάζει στο παιδί σου — και για ποια δουλειά",
+      heroSubtitle:
+        "Δεν είναι ακόμα ένας οδηγός ασφάλειας. Δείχνουμε ποιο συγκεκριμένο εργαλείο ταιριάζει σε ποια σχολική δουλειά, ανά ηλικία — για γονείς, μαθητές 6–18 και εκπαιδευτικούς.",
+      badgeFree: "Δωρεάν",
+      badgeIndependent: "Ανεξάρτητο",
+      badgeBilingual: "Δίγλωσσο EL / EN",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading:
         "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
@@ -39,6 +45,12 @@
       visitLink: "Άνοιγμα εργαλείου ↗",
     },
     en: {
+      heroTitle: "Which AI tool fits your child — and for which task",
+      heroSubtitle:
+        "This isn't another safety guide. We show which specific tool fits which schoolwork, by age — for parents, students 6–18, and educators.",
+      badgeFree: "Free",
+      badgeIndependent: "Independent",
+      badgeBilingual: "Bilingual EL / EN",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading:
         "Each zone has different suitable tools and a different level of independence.",

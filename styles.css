@@ -114,6 +114,57 @@ main {
   padding: 32px 0 64px;
 }
 
+/* ---------- Hero section (μόνο στην αρχική οθόνη) ---------- */
+.hero {
+  padding: 8px 0 32px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 32px;
+}
+
+.hero__title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  max-width: 640px;
+}
+
+.hero__subtitle {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 20px;
+  max-width: 560px;
+}
+
+.hero__badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+
+.badge--success {
+  background: rgba(76, 175, 125, 0.12);
+  color: #2E6F4E;
+}
+
+.badge--accent {
+  background: rgba(59, 130, 196, 0.12);
+  color: #1D5D8C;
+}
+
+.badge--pro {
+  background: rgba(124, 92, 191, 0.12);
+  color: #5C4590;
+}
+
 /* ---------- Πλοήγηση: Ζώνες ---------- */
 .section-heading {
   font-size: 1.4rem;

@@ -4,7 +4,7 @@
    ------------------------------------------------------------ */
 
 :root {
-  /* Χρώματα ανά ζώνη — προσαρμόσιμα */
+  /* Χρώματα ανά ζώνη, προσαρμόσιμα */
   --color-primary-zone: #4CAF7D;   /* Δημοτικό */
   --color-middle-zone: #3B82C4;    /* Γυμνάσιο */
   --color-high-zone: #7C5CBF;      /* Λύκειο */
@@ -375,6 +375,22 @@ main {
   text-align: center;
   font-size: 0.8rem;
   color: var(--color-text-muted);
+}
+
+.site-footer__credit {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.site-footer__credit a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-footer__credit a:hover {
+  text-decoration: underline;
 }
 
 /* ---------- Responsive ---------- */

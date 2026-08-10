@@ -26,18 +26,18 @@
   // ---------- Στατικά strings (UI chrome, όχι περιεχόμενο δεδομένων) ----------
   const STRINGS = {
     el: {
-      heroTitle: "Ποιο AI εργαλείο ταιριάζει στο παιδί σου — και για ποια δουλειά",
+      heroTitle: "Ποιο AI εργαλείο ταιριάζει στο παιδί σου και για ποια δουλειά",
       heroSubtitle:
-        "Δεν είναι ακόμα ένας οδηγός ασφάλειας. Δείχνουμε ποιο συγκεκριμένο εργαλείο ταιριάζει σε ποια σχολική δουλειά, ανά ηλικία — για γονείς, μαθητές 6–18 και εκπαιδευτικούς.",
+        "Δεν είναι ακόμα ένας οδηγός ασφάλειας. Δείχνουμε ποιο συγκεκριμένο εργαλείο ταιριάζει σε ποια σχολική δουλειά, ανά ηλικία, για γονείς, μαθητές 6 έως 18 και εκπαιδευτικούς.",
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading:
         "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
-      backToZones: "← Πίσω σε όλες τις ζώνες",
+      backToZones: "Πίσω σε όλες τις ζώνες",
       footerText:
-        "Ανεξάρτητο έργο — δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.",
+        "Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.",
       emptyState: "Δεν έχουν προστεθεί ακόμα εργαλεία για αυτόν τον συνδυασμό. Έρχονται σύντομα.",
       useCaseLabel: "Για ποια δουλειά",
       howToLabel: "Πώς να το χρησιμοποιήσεις",
@@ -45,18 +45,18 @@
       visitLink: "Άνοιγμα εργαλείου ↗",
     },
     en: {
-      heroTitle: "Which AI tool fits your child — and for which task",
+      heroTitle: "Which AI tool fits your child, and for which task",
       heroSubtitle:
-        "This isn't another safety guide. We show which specific tool fits which schoolwork, by age — for parents, students 6–18, and educators.",
+        "This isn't another safety guide. We show which specific tool fits which schoolwork, by age, for parents, students 6 to 18, and educators.",
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading:
         "Each zone has different suitable tools and a different level of independence.",
-      backToZones: "← Back to all zones",
+      backToZones: "Back to all zones",
       footerText:
-        "Independent project — not affiliated with any organization or AI tool vendor.",
+        "Independent project. Not affiliated with any organization or AI tool vendor.",
       emptyState: "No tools added yet for this combination. Coming soon.",
       useCaseLabel: "Best for",
       howToLabel: "How to use it",

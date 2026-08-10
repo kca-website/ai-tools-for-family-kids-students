@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tools for Family, Kids & Students</title>
+  <meta name="description" content="Ανεξάρτητο, δωρεάν, δίγλωσσο εργαλείο που βοηθά γονείς, μαθητές και εκπαιδευτικούς να βρουν ποια AI εργαλεία είναι κατάλληλα ανά ηλικία." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <p class="site-title">
+        <span aria-hidden="true">🤖</span>
+        <span id="siteTitleText">AI Tools for Family, Kids &amp; Students</span>
+      </p>
+      <div class="lang-toggle" role="group" aria-label="Language switch">
+        <button type="button" id="langEl" class="active" data-lang="el">ΕΛ</button>
+        <button type="button" id="langEn" data-lang="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ΒΗΜΑ 1: Επιλογή ζώνης -->
+    <section id="zoneSelectView">
+      <h1 class="section-heading" data-i18n="chooseZoneHeading">Διάλεξε ηλικιακή ζώνη</h1>
+      <p class="section-subheading" data-i18n="chooseZoneSubheading">
+        Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.
+      </p>
+      <div class="zone-grid" id="zoneGrid">
+        <!-- Γεμίζει δυναμικά από το app.js με βάση το ZONES -->
+      </div>
+    </section>
+
+    <!-- ΒΗΜΑ 2: Ζώνη επιλεγμένη -> επιλογή ρόλου + λίστα εργαλείων -->
+    <section id="pathView" hidden>
+      <p class="breadcrumb">
+        <button type="button" id="backToZones" data-i18n="backToZones">← Πίσω σε όλες τις ζώνες</button>
+      </p>
+
+      <h1 class="section-heading" id="pathZoneHeading"></h1>
+
+      <div class="role-tabs" id="roleTabs" role="tablist">
+        <!-- Γεμίζει δυναμικά από το app.js με βάση το ROLES -->
+      </div>
+
+      <div class="path-intro" id="pathIntro"></div>
+
+      <div class="tool-grid" id="toolGrid">
+        <!-- Γεμίζει δυναμικά από το app.js με βάση το PATHS[zone][role].tools -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p data-i18n="footerText">
+      Ανεξάρτητο έργο — δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.
+    </p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

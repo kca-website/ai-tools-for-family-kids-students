@@ -2,14 +2,6 @@
  * app.js
  * ------------------------------------------------------------
  * Εφαρμογή vanilla JS. Χωρίς build step, χωρίς framework.
- * Διαβάζει τα δεδομένα από το ZONES / ROLES / TOOLS / PATHS (data.js)
- * και κάνει render / πλοήγηση.
- *
- * State machine (πολύ απλή):
- *   VIEW: "zoneSelect" | "path"
- *   currentZone: null | zoneId
- *   currentRole: null | roleId
- *   lang: "el" | "en"
  * ------------------------------------------------------------
  */
 
@@ -20,16 +12,16 @@
   const state = {
     lang: "el",
     currentZone: null,
-    currentRole: "guardian", // default λεωφορείο όταν μπαίνεις σε ζώνη
-    currentView: "tools", // "tools" | "prompts" | "quiz", ποια υπο-όψη δείχνουμε μέσα στο path view
-    // Quiz sub-state (Learning Compass)
-    quizSubjectId: null, // ποιο quiz είναι επιλεγμένο μέσα στη ζώνη (π.χ. "math-e-dimotikou")
-    quizCurrentIndex: 0, // δείκτης τρέχουσας ερώτησης
-    quizAnswers: [], // [{ questionId, gapTag: string|null }] ανά ερώτηση που απαντήθηκε
+    currentRole: "guardian",
+    currentView: "tools", // "tools" | "expert" | "prompts" | "quiz" | "guide"
+    // Quiz sub-state
+    quizSubjectId: null,
+    quizCurrentIndex: 0,
+    quizAnswers: [],
     quizFinished: false,
   };
 
-  // ---------- Στατικά strings (UI chrome, όχι περιεχόμενο δεδομένων) ----------
+  // ---------- Στατικά strings ----------
   const STRINGS = {
     el: {
       heroTitle: "Ποιο AI εργαλείο ταιριάζει στο παιδί σου και για ποια δουλειά",
@@ -39,20 +31,19 @@
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
-      chooseZoneSubheading:
-        "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
+      chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
       backToZones: "Πίσω σε όλες τις ζώνες",
-      footerText:
-        "Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.",
+      footerText: "Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.",
       emptyState: "Δεν έχουν προστεθεί ακόμα εργαλεία για αυτόν τον συνδυασμό. Έρχονται σύντομα.",
       useCaseLabel: "Για ποια δουλειά",
       howToLabel: "Πώς να το χρησιμοποιήσεις",
       cautionLabel: "Προσοχή",
       visitLink: "Άνοιγμα εργαλείου ↗",
       viewTabTools: "Εργαλεία",
+      viewTabExpert: "🔍 Προχωρημένα",
+      expertIntro: "Εξειδικευμένα εργαλεία για προχωρημένες ανάγκες: μαθηματικά, ακαδημαϊκή έρευνα, προγραμματισμός, σχεδίαση.",
       viewTabPrompts: "Prompt Generator",
-      promptsIntro:
-        "Αυτά τα prompts δεν γράφουν την εργασία για εσένα. Σε ρωτάνε πρώτα τι σκέφτεσαι, και το AI απαντάει πάνω σε αυτό. Γράψε τη δική σου σκέψη μέσα στις αγκύλες πριν το αντιγράψεις.",
+      promptsIntro: "Αυτά τα prompts δεν γράφουν την εργασία για εσένα. Σε ρωτάνε πρώτα τι σκέφτεσαι, και το AI απαντάει πάνω σε αυτό. Γράψε τη δική σου σκέψη μέσα στις αγκύλες πριν το αντιγράψεις.",
       promptsEmptyState: "Δεν έχουν προστεθεί ακόμα prompts για αυτή τη ζώνη. Έρχονται σύντομα.",
       copyPrompt: "Αντιγραφή prompt",
       copiedPrompt: "Αντιγράφηκε",
@@ -62,36 +53,34 @@
       quizPickSubject: "Διάλεξε μάθημα",
       quizStartBtn: "Ξεκίνα το κουίζ",
       quizQuestionOf: "Ερώτηση {current} από {total}",
-      quizNextBtn: "Επόμενη",
       quizResultsTitle: "Το αποτέλεσμα του Χάρτη",
       quizAllCorrect: "Απάντησε σωστά σε όλα! Καμία συγκεκριμένη δυσκολία δεν εντοπίστηκε αυτή τη φορά.",
       quizGapsFound: "Εντοπίστηκαν σημεία για εξάσκηση:",
       quizRecommendedTools: "Προτεινόμενα εργαλεία",
       quizRetakeBtn: "Ξανακάνε το κουίζ",
       quizBackToStart: "Πίσω στην αρχή του κουίζ",
+      viewTabGuide: "📘 Οδηγός",
     },
     en: {
       heroTitle: "Which AI tool fits your child, and for which task",
-      heroSubtitle:
-        "This isn't another safety guide. We show which specific tool fits which schoolwork, by age, for parents, students 6 to 18, and educators.",
+      heroSubtitle: "This isn't another safety guide. We show which specific tool fits which schoolwork, by age, for parents, students 6 to 18, and educators.",
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
       chooseZoneHeading: "Choose an age zone",
-      chooseZoneSubheading:
-        "Each zone has different suitable tools and a different level of independence.",
+      chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
       backToZones: "Back to all zones",
-      footerText:
-        "Independent project. Not affiliated with any organization or AI tool vendor.",
+      footerText: "Independent project. Not affiliated with any organization or AI tool vendor.",
       emptyState: "No tools added yet for this combination. Coming soon.",
       useCaseLabel: "Best for",
       howToLabel: "How to use it",
       cautionLabel: "Caution",
       visitLink: "Open tool ↗",
       viewTabTools: "Tools",
+      viewTabExpert: "🔍 Advanced",
+      expertIntro: "Specialized tools for advanced needs: math, academic research, coding, design.",
       viewTabPrompts: "Prompt Generator",
-      promptsIntro:
-        "These prompts don't write the assignment for you. They ask what you're thinking first, and the AI responds to that. Fill in your own thinking inside the brackets before copying.",
+      promptsIntro: "These prompts don't write the assignment for you. They ask what you're thinking first, and the AI responds to that. Fill in your own thinking inside the brackets before copying.",
       promptsEmptyState: "No prompts added yet for this zone. Coming soon.",
       copyPrompt: "Copy prompt",
       copiedPrompt: "Copied",
@@ -101,13 +90,13 @@
       quizPickSubject: "Choose a subject",
       quizStartBtn: "Start the quiz",
       quizQuestionOf: "Question {current} of {total}",
-      quizNextBtn: "Next",
       quizResultsTitle: "Your Compass Result",
       quizAllCorrect: "All correct! No specific gap spotted this time.",
       quizGapsFound: "Spots worth some extra practice:",
       quizRecommendedTools: "Recommended tools",
       quizRetakeBtn: "Retake the quiz",
       quizBackToStart: "Back to quiz start",
+      viewTabGuide: "📘 Guide",
     },
   };
 
@@ -132,20 +121,26 @@
     els.roleTabs = document.getElementById("roleTabs");
     els.pathIntro = document.getElementById("pathIntro");
     els.toolGrid = document.getElementById("toolGrid");
+    els.expertGrid = document.getElementById("expertGrid");
     els.backToZones = document.getElementById("backToZones");
     els.langElBtn = document.getElementById("langEl");
     els.langEnBtn = document.getElementById("langEn");
     els.viewTabTools = document.getElementById("viewTabTools");
+    els.viewTabExpert = document.getElementById("viewTabExpert");
     els.viewTabPrompts = document.getElementById("viewTabPrompts");
     els.viewTabQuiz = document.getElementById("viewTabQuiz");
+    els.viewTabGuide = document.getElementById("viewTabGuide");
     els.toolsView = document.getElementById("toolsView");
+    els.expertView = document.getElementById("expertView");
     els.promptsView = document.getElementById("promptsView");
-    els.promptList = document.getElementById("promptList");
     els.quizView = document.getElementById("quizView");
+    els.guideView = document.getElementById("guideView");
+    els.promptList = document.getElementById("promptList");
     els.quizContent = document.getElementById("quizContent");
+    els.guideContent = document.getElementById("guideContent");
   }
 
-  // ---------- Rendering: στατικό UI κείμενο ----------
+  // ---------- Rendering: static strings ----------
   function renderStaticStrings() {
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       const key = node.getAttribute("data-i18n");
@@ -156,7 +151,7 @@
     document.documentElement.lang = state.lang;
   }
 
-  // ---------- Rendering: Ζώνες (Βήμα 1) ----------
+  // ---------- Rendering: Zone grid ----------
   function renderZoneGrid() {
     els.zoneGrid.innerHTML = "";
     ZONES.forEach((zone) => {
@@ -181,7 +176,7 @@
     });
   }
 
-  // ---------- Rendering: Role tabs (Βήμα 2) ----------
+  // ---------- Rendering: Role tabs ----------
   function renderRoleTabs() {
     els.roleTabs.innerHTML = "";
     ROLES.forEach((role) => {
@@ -199,7 +194,7 @@
     });
   }
 
-  // ---------- Rendering: Path intro + tool grid ----------
+  // ---------- Rendering: Path content ----------
   function renderPathContent() {
     const zone = ZONES.find((z) => z.id === state.currentZone);
     const role = ROLES.find((r) => r.id === state.currentRole);
@@ -219,20 +214,21 @@
 
     els.pathIntro.textContent = state.lang === "el" ? pathData.introEl : pathData.introEn;
 
-    renderToolGrid(pathData.tools || []);
+    renderToolGrid(pathData.tools || [], els.toolGrid);
   }
 
-  function renderToolGrid(pathTools) {
-    els.toolGrid.innerHTML = "";
+  // ---------- Rendering: Tool grid (generic) ----------
+  function renderToolGrid(pathTools, container) {
+    container.innerHTML = "";
 
     if (!pathTools.length) {
-      els.toolGrid.innerHTML = `<div class="empty-state">${t("emptyState")}</div>`;
+      container.innerHTML = `<div class="empty-state">${t("emptyState")}</div>`;
       return;
     }
 
     pathTools.forEach((entry) => {
       const tool = TOOLS[entry.toolId];
-      if (!tool) return; // αγνόησε broken references αντί να σκάσει η σελίδα
+      if (!tool) return;
 
       const category = CATEGORIES.find((c) => c.id === tool.category);
       const categoryLabel = category ? (state.lang === "el" ? category.labelEl : category.labelEn) : "";
@@ -250,41 +246,159 @@
           <p class="tool-card__name">${escapeHtml(tool.name)}</p>
         </div>
         ${categoryLabel ? `<span class="tool-card__category">${escapeHtml(categoryLabel)}</span>` : ""}
-
-        ${useCase ? `
-          <p class="tool-card__field-label">${t("useCaseLabel")}</p>
-          <p class="tool-card__field-value">${escapeHtml(useCase)}</p>
-        ` : ""}
-
-        ${howTo ? `
-          <p class="tool-card__field-label">${t("howToLabel")}</p>
-          <p class="tool-card__field-value">${escapeHtml(howTo)}</p>
-        ` : ""}
-
-        ${caution ? `
-          <div class="tool-card__caution">
-            <strong>${t("cautionLabel")}:</strong> ${escapeHtml(caution)}
-          </div>
-        ` : ""}
-
+        ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}
+        ${howTo ? `<p class="tool-card__field-label">${t("howToLabel")}</p><p class="tool-card__field-value">${escapeHtml(howTo)}</p>` : ""}
+        ${caution ? `<div class="tool-card__caution"><strong>${t("cautionLabel")}:</strong> ${escapeHtml(caution)}</div>` : ""}
         ${tool.url ? `<a class="tool-card__link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${t("visitLink")}</a>` : ""}
       `;
 
-      els.toolGrid.appendChild(card);
+      container.appendChild(card);
     });
   }
 
-  // ---------- Rendering: View tabs (Εργαλεία / Prompt Generator / Learning Compass) ----------
-  function renderViewTabs() {
-    els.viewTabTools.classList.toggle("active", state.currentView === "tools");
-    els.viewTabPrompts.classList.toggle("active", state.currentView === "prompts");
-    els.viewTabQuiz.classList.toggle("active", state.currentView === "quiz");
-    els.toolsView.hidden = state.currentView !== "tools";
-    els.promptsView.hidden = state.currentView !== "prompts";
-    els.quizView.hidden = state.currentView !== "quiz";
+  // ---------- Rendering: Expert tools (φιλτράρισμα isExpert: true) ----------
+  function renderExpertTools() {
+    const expertTools = Object.values(TOOLS).filter(t => t.isExpert === true);
+    const pathTools = expertTools.map(tool => ({
+      toolId: tool.id,
+      useCaseEl: tool.shortDescEl || "",
+      useCaseEn: tool.shortDescEn || "",
+      howToEl: "",
+      howToEn: "",
+      cautionEl: "",
+      cautionEn: "",
+    }));
+    renderToolGrid(pathTools, els.expertGrid);
   }
 
-  // ---------- Rendering: Learning Compass (Διαγνωστικός Χάρτης Μάθησης) ----------
+  // ---------- Rendering: View tabs ----------
+  function renderViewTabs() {
+    els.viewTabTools.classList.toggle("active", state.currentView === "tools");
+    els.viewTabExpert.classList.toggle("active", state.currentView === "expert");
+    els.viewTabPrompts.classList.toggle("active", state.currentView === "prompts");
+    els.viewTabQuiz.classList.toggle("active", state.currentView === "quiz");
+    els.viewTabGuide.classList.toggle("active", state.currentView === "guide");
+    els.toolsView.hidden = state.currentView !== "tools";
+    els.expertView.hidden = state.currentView !== "expert";
+    els.promptsView.hidden = state.currentView !== "prompts";
+    els.quizView.hidden = state.currentView !== "quiz";
+    els.guideView.hidden = state.currentView !== "guide";
+  }
+
+  // ---------- Rendering: Prompt List ----------
+  function renderPromptList() {
+    const zonePrompts = (typeof PROMPTS !== "undefined" && PROMPTS[state.currentZone]) || [];
+    els.promptList.innerHTML = "";
+
+    if (!zonePrompts.length) {
+      els.promptList.innerHTML = `<div class="empty-state">${t("promptsEmptyState")}</div>`;
+      return;
+    }
+
+    zonePrompts.forEach((prompt) => {
+      const subject = state.lang === "el" ? prompt.subjectEl : prompt.subjectEn;
+      const taskType = state.lang === "el" ? prompt.taskTypeEl : prompt.taskTypeEn;
+      const promptText = state.lang === "el" ? prompt.promptTextEl : prompt.promptTextEn;
+      const tip = state.lang === "el" ? prompt.tipEl : prompt.tipEn;
+
+      const card = document.createElement("article");
+      card.className = "prompt-card";
+
+      card.innerHTML = `
+        <div class="prompt-card__header">
+          <span class="prompt-card__subject">${escapeHtml(subject)}</span>
+          <span class="prompt-card__task-type">${escapeHtml(taskType)}</span>
+        </div>
+        <p class="prompt-card__text">${escapeHtml(promptText)}</p>
+        ${tip ? `<p class="prompt-card__tip"><strong>${t("tipLabel")}:</strong> ${escapeHtml(tip)}</p>` : ""}
+        <button type="button" class="prompt-card__copy">${t("copyPrompt")}</button>
+      `;
+
+      const copyBtn = card.querySelector(".prompt-card__copy");
+      copyBtn.addEventListener("click", () => copyPromptToClipboard(promptText, copyBtn));
+
+      els.promptList.appendChild(card);
+    });
+  }
+
+  function copyPromptToClipboard(text, buttonEl) {
+    const originalLabel = t("copyPrompt");
+    const copiedLabel = t("copiedPrompt");
+
+    const markCopied = () => {
+      buttonEl.textContent = copiedLabel;
+      buttonEl.classList.add("copied");
+      setTimeout(() => {
+        buttonEl.textContent = originalLabel;
+        buttonEl.classList.remove("copied");
+      }, 1800);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(markCopied).catch(() => {
+        fallbackCopy(text);
+        markCopied();
+      });
+    } else {
+      fallbackCopy(text);
+      markCopied();
+    }
+  }
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      // σιωπηλή αποτυχία
+    }
+    document.body.removeChild(textarea);
+  }
+
+  // ---------- Rendering: Guide ----------
+  function renderGuide() {
+    const data = state.lang === "el" ? GUIDE_CONTENT.el : GUIDE_CONTENT.en;
+    let html = `
+      <div class="guide-content">
+        <h1>${escapeHtml(data.title)}</h1>
+        <p class="guide-subtitle">${escapeHtml(data.subtitle)}</p>
+    `;
+
+    data.parts.forEach((part) => {
+      html += `<h2>${part.number}. ${escapeHtml(part.title)}</h2>`;
+      part.sections.forEach((section) => {
+        html += `<h3>${escapeHtml(section.heading)}</h3>`;
+        html += section.content;
+      });
+    });
+
+    html += `
+      <div class="guide-cta">
+        <p>${escapeHtml(data.cta.title)}</p>
+        <p style="font-weight:normal;color:var(--color-text-muted);">${escapeHtml(data.cta.description)}</p>
+        <a class="btn" href="#" id="guideDownloadBtn">${escapeHtml(data.cta.buttonText)}</a>
+      </div>
+    </div>
+    `;
+
+    els.guideContent.innerHTML = html;
+
+    // PDF download (placeholder – θα το συνδέσουμε αργότερα)
+    const downloadBtn = document.getElementById("guideDownloadBtn");
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        alert("Η δυνατότητα PDF θα προστεθεί σύντομα!");
+      });
+    }
+  }
+
+  // ---------- Quiz functions (από προηγούμενο) ----------
   function resetQuizState() {
     state.quizSubjectId = null;
     state.quizCurrentIndex = 0;
@@ -396,9 +510,7 @@
     });
   }
 
-  // ---------- renderQuizResults (ΑΝΑΝΕΩΜΕΝΗ με την κάρτα achievement) ----------
   function renderQuizResults(quiz) {
-    // Μάζεψε τα μοναδικά gapTags από τις λάθος απαντήσεις
     const gapTagIds = [...new Set(state.quizAnswers.map((a) => a.gapTag).filter(Boolean))];
 
     let gapsHtml = "";
@@ -437,17 +549,14 @@
       `;
     }
 
-    // 🔽 ΔΗΜΙΟΥΡΓΙΑ SVG ΚΑΡΤΑΣ
+    // Achievement card
     const svgCard = renderAchievementCard(gapTagIds);
     const encodedSvg = encodeURIComponent(svgCard);
     const svgDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodedSvg;
 
-    // 🔽 HTML ΑΠΟΤΕΛΕΣΜΑΤΟΣ (με την κάρτα)
     els.quizContent.innerHTML = `
       <h3 class="quiz-results-title">${t("quizResultsTitle")}</h3>
       ${gapsHtml}
-      
-      <!-- 🏅 HERO CARD SECTION -->
       <div class="quiz-achievement-section" style="margin-top: 32px; padding-top: 24px; border-top: 2px solid #E4E6EA;">
         <h4 style="font-size: 1rem; font-weight: 700; margin: 0 0 12px; color: var(--color-text-muted);">
           🏅 ${state.lang === 'el' ? 'Η Κάρτα Σου' : 'Your Card'}
@@ -464,23 +573,18 @@
           </div>
         </div>
       </div>
-
       <div class="quiz-results-actions" style="margin-top:24px;">
         <button type="button" class="quiz-retake-btn">${t("quizRetakeBtn")}</button>
         <button type="button" class="quiz-back-btn">${t("quizBackToStart")}</button>
       </div>
     `;
 
-    // 🔽 EVENT LISTENERS
-    // Download button
     els.quizContent.querySelector('.quiz-download-btn').addEventListener('click', () => {
       downloadSVG(encodedSvg, 'achievement.svg');
     });
 
-    // Share button
     els.quizContent.querySelector('.quiz-share-btn').addEventListener('click', shareCard);
 
-    // Retake button
     els.quizContent.querySelector('.quiz-retake-btn').addEventListener('click', () => {
       state.quizCurrentIndex = 0;
       state.quizAnswers = [];
@@ -488,20 +592,17 @@
       renderQuizView();
     });
 
-    // Back button
     els.quizContent.querySelector('.quiz-back-btn').addEventListener('click', () => {
       resetQuizState();
       renderQuizView();
     });
   }
 
-  // ---------- renderAchievementCard (ΝΕΑ ΣΥΝΑΡΤΗΣΗ) ----------
+  // ---------- Achievement Card ----------
   function renderAchievementCard(gapTagIds) {
-    // 1. Μάζεψε τα gapTags
     const gaps = gapTagIds.map(id => GAP_TAGS[id]).filter(Boolean);
     const isGreek = state.lang === "el";
     
-    // 2. Δημιούργησε achievements
     let titles = gaps.map(g => isGreek ? g.achievementEl : g.achievementEn);
     let skillTags = gaps.map(g => isGreek ? g.skillTagEl : g.skillTagEn);
     let positiveMessages = gaps.map(g => isGreek ? g.positiveMessageEl : g.positiveMessageEn);
@@ -510,7 +611,6 @@
       return toolId ? TOOLS[toolId]?.name : '';
     }).filter(Boolean);
     
-    // 3. Αν κανένα κενό → γενικό achievement
     if (!titles.length) {
       titles = isGreek ? ["Ο Ολοκληρωμένος Μαθητής"] : ["The Complete Student"];
       skillTags = isGreek ? ["Όλες οι δεξιότητες σε καλό επίπεδο"] : ["All skills at a good level"];
@@ -518,7 +618,6 @@
       toolNames = [];
     }
 
-    // 4. Κατασκευή SVG (Mobile-first, 400x500)
     const titleText = titles.join(' & ');
     const skillText = skillTags.join(' + ');
     const messageText = positiveMessages[0] || (isGreek ? 'Συνέχισε έτσι!' : 'Keep it up!');
@@ -530,50 +629,22 @@
 
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
-        <!-- Background -->
         <rect width="400" height="500" rx="24" fill="#F8F9FA" stroke="#E4E6EA" stroke-width="2"/>
-        
-        <!-- Top accent line -->
         <rect width="400" height="6" rx="3" fill="${accentColor}"/>
-        
-        <!-- Emoji / Icon -->
         <text x="200" y="70" font-size="48" text-anchor="middle">${emoji}</text>
-        
-        <!-- Title (achievement name) -->
-        <text x="200" y="120" font-size="22" font-weight="700" fill="#1F2430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
-          ${escapeHtml(titleText)}
-        </text>
-        
-        <!-- Subtitle: positive message -->
-        <text x="200" y="160" font-size="14" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
-          ${escapeHtml(messageText)}
-        </text>
-        
-        <!-- Divider -->
+        <text x="200" y="120" font-size="22" font-weight="700" fill="#1F2430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(titleText)}</text>
+        <text x="200" y="160" font-size="14" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(messageText)}</text>
         <line x1="60" y1="185" x2="340" y2="185" stroke="#E4E6EA" stroke-width="1"/>
-        
-        <!-- Skill tags -->
-        <text x="200" y="220" font-size="13" font-weight="600" fill="${accentColor}" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
-          ${isGreek ? '🔥 Δύναμη: ' : '🔥 Strength: '}${escapeHtml(skillText)}
-        </text>
-        
-        <!-- Tool suggestion -->
-        <text x="200" y="260" font-size="13" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
-          ${escapeHtml(toolText)}
-        </text>
-        
-        <!-- Footer -->
+        <text x="200" y="220" font-size="13" font-weight="600" fill="${accentColor}" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? '🔥 Δύναμη: ' : '🔥 Strength: '}${escapeHtml(skillText)}</text>
+        <text x="200" y="260" font-size="13" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(toolText)}</text>
         <line x1="60" y1="310" x2="340" y2="310" stroke="#E4E6EA" stroke-width="1"/>
-        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
-          aitools4kids.vercel.app  🤖
-        </text>
+        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.vercel.app  🤖</text>
       </svg>
     `;
 
     return svg;
   }
 
-  // ---------- Achievement Card: Download & Share (ΝΕΕΣ ΣΥΝΑΡΤΗΣΕΙΣ) ----------
   function downloadSVG(svgData, filename = 'achievement.svg') {
     const blob = new Blob([decodeURIComponent(svgData)], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
@@ -593,7 +664,6 @@
         text: 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids!',
         url: 'https://aitools4kids.vercel.app'
       }).catch(() => {
-        // Αν ο χρήστης ακυρώσει, απλά κάνουμε fallback
         fallbackShare();
       });
     } else {
@@ -611,82 +681,7 @@
       });
   }
 
-  // ---------- Rendering: Prompt Generator ----------
-  function renderPromptList() {
-    const zonePrompts = (typeof PROMPTS !== "undefined" && PROMPTS[state.currentZone]) || [];
-    els.promptList.innerHTML = "";
-
-    if (!zonePrompts.length) {
-      els.promptList.innerHTML = `<div class="empty-state">${t("promptsEmptyState")}</div>`;
-      return;
-    }
-
-    zonePrompts.forEach((prompt) => {
-      const subject = state.lang === "el" ? prompt.subjectEl : prompt.subjectEn;
-      const taskType = state.lang === "el" ? prompt.taskTypeEl : prompt.taskTypeEn;
-      const promptText = state.lang === "el" ? prompt.promptTextEl : prompt.promptTextEn;
-      const tip = state.lang === "el" ? prompt.tipEl : prompt.tipEn;
-
-      const card = document.createElement("article");
-      card.className = "prompt-card";
-
-      card.innerHTML = `
-        <div class="prompt-card__header">
-          <span class="prompt-card__subject">${escapeHtml(subject)}</span>
-          <span class="prompt-card__task-type">${escapeHtml(taskType)}</span>
-        </div>
-        <p class="prompt-card__text">${escapeHtml(promptText)}</p>
-        ${tip ? `<p class="prompt-card__tip"><strong>${t("tipLabel")}:</strong> ${escapeHtml(tip)}</p>` : ""}
-        <button type="button" class="prompt-card__copy">${t("copyPrompt")}</button>
-      `;
-
-      const copyBtn = card.querySelector(".prompt-card__copy");
-      copyBtn.addEventListener("click", () => copyPromptToClipboard(promptText, copyBtn));
-
-      els.promptList.appendChild(card);
-    });
-  }
-
-  function copyPromptToClipboard(text, buttonEl) {
-    const originalLabel = t("copyPrompt");
-    const copiedLabel = t("copiedPrompt");
-
-    const markCopied = () => {
-      buttonEl.textContent = copiedLabel;
-      buttonEl.classList.add("copied");
-      setTimeout(() => {
-        buttonEl.textContent = originalLabel;
-        buttonEl.classList.remove("copied");
-      }, 1800);
-    };
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(markCopied).catch(() => {
-        fallbackCopy(text);
-        markCopied();
-      });
-    } else {
-      fallbackCopy(text);
-      markCopied();
-    }
-  }
-
-  function fallbackCopy(text) {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-    textarea.style.position = "fixed";
-    textarea.style.opacity = "0";
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      document.execCommand("copy");
-    } catch (err) {
-      // Σιωπηλή αποτυχία, ο χρήστης μπορεί ακόμα να επιλέξει το κείμενο χειροκίνητα.
-    }
-    document.body.removeChild(textarea);
-  }
-
-  // ---------- Βοηθητικά: escaping (βασική προστασία αφού το περιεχόμενο ζει σε JS αρχείο) ----------
+  // ---------- Helpers ----------
   function escapeHtml(str) {
     if (!str) return "";
     const div = document.createElement("div");
@@ -701,8 +696,8 @@
   // ---------- Navigation ----------
   function selectZone(zoneId) {
     state.currentZone = zoneId;
-    state.currentRole = "guardian"; // reset σε default λεωφορείο κάθε φορά που μπαίνεις σε ζώνη
-    resetQuizState(); // το quiz είναι per-ζώνη, οπότε ξεκινάμε καθαρά
+    state.currentRole = "guardian";
+    resetQuizState();
     showPathView();
   }
 
@@ -713,18 +708,22 @@
   }
 
   function selectView(viewId) {
-    if (viewId !== "tools" && viewId !== "prompts" && viewId !== "quiz") return;
+    if (!["tools", "expert", "prompts", "quiz", "guide"].includes(viewId)) return;
     state.currentView = viewId;
     renderViewTabs();
-    if (viewId === "quiz") {
+    if (viewId === "expert") {
+      renderExpertTools();
+    } else if (viewId === "quiz") {
       renderQuizView();
+    } else if (viewId === "guide") {
+      renderGuide();
     }
   }
 
   function showPathView() {
     els.zoneSelectView.hidden = true;
     els.pathView.hidden = false;
-    state.currentView = "tools"; // πάντα ξεκινάμε από τα εργαλεία όταν μπαίνουμε σε νέα ζώνη
+    state.currentView = "tools";
     renderRoleTabs();
     renderPathContent();
     renderViewTabs();
@@ -750,6 +749,10 @@
       renderPromptList();
       if (state.currentView === "quiz") {
         renderQuizView();
+      } else if (state.currentView === "guide") {
+        renderGuide();
+      } else if (state.currentView === "expert") {
+        renderExpertTools();
       }
     }
   }
@@ -764,8 +767,10 @@
     els.langElBtn.addEventListener("click", () => setLang("el"));
     els.langEnBtn.addEventListener("click", () => setLang("en"));
     els.viewTabTools.addEventListener("click", () => selectView("tools"));
+    els.viewTabExpert.addEventListener("click", () => selectView("expert"));
     els.viewTabPrompts.addEventListener("click", () => selectView("prompts"));
     els.viewTabQuiz.addEventListener("click", () => selectView("quiz"));
+    els.viewTabGuide.addEventListener("click", () => selectView("guide"));
   }
 
   document.addEventListener("DOMContentLoaded", init);

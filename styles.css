@@ -368,6 +368,106 @@ main {
   border-radius: var(--radius-md);
 }
 
+/* ---------- View tabs (Εργαλεία / Prompt Generator) ---------- */
+.view-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.view-tab {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.view-tab.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #FFFFFF;
+}
+
+/* ---------- Prompt Generator ---------- */
+.prompt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.prompt-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.prompt-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.prompt-card__subject {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.prompt-card__task-type {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background: rgba(46, 111, 94, 0.08);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.prompt-card__text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 0 0 10px;
+  white-space: pre-wrap;
+}
+
+.prompt-card__tip {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin: 0 0 12px;
+}
+
+.prompt-card__copy {
+  border: 1px solid var(--color-accent);
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.prompt-card__copy:hover {
+  background: var(--color-accent);
+  color: #FFFFFF;
+}
+
+.prompt-card__copy.copied {
+  background: var(--color-primary-zone);
+  border-color: var(--color-primary-zone);
+  color: #FFFFFF;
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   border-top: 1px solid var(--color-border);

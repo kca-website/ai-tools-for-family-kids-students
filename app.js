@@ -21,6 +21,7 @@
     lang: "el",
     currentZone: null,
     currentRole: "guardian", // default λεωφορείο όταν μπαίνεις σε ζώνη
+    currentView: "tools", // "tools" | "prompts", ποια υπο-όψη δείχνουμε μέσα στο path view
   };
 
   // ---------- Στατικά strings (UI chrome, όχι περιεχόμενο δεδομένων) ----------
@@ -43,6 +44,14 @@
       howToLabel: "Πώς να το χρησιμοποιήσεις",
       cautionLabel: "Προσοχή",
       visitLink: "Άνοιγμα εργαλείου ↗",
+      viewTabTools: "Εργαλεία",
+      viewTabPrompts: "Prompt Generator",
+      promptsIntro:
+        "Αυτά τα prompts δεν γράφουν την εργασία για εσένα. Σε ρωτάνε πρώτα τι σκέφτεσαι, και το AI απαντάει πάνω σε αυτό. Γράψε τη δική σου σκέψη μέσα στις αγκύλες πριν το αντιγράψεις.",
+      promptsEmptyState: "Δεν έχουν προστεθεί ακόμα prompts για αυτή τη ζώνη. Έρχονται σύντομα.",
+      copyPrompt: "Αντιγραφή prompt",
+      copiedPrompt: "Αντιγράφηκε",
+      tipLabel: "Συμβουλή",
     },
     en: {
       heroTitle: "Which AI tool fits your child, and for which task",
@@ -62,6 +71,14 @@
       howToLabel: "How to use it",
       cautionLabel: "Caution",
       visitLink: "Open tool ↗",
+      viewTabTools: "Tools",
+      viewTabPrompts: "Prompt Generator",
+      promptsIntro:
+        "These prompts don't write the assignment for you. They ask what you're thinking first, and the AI responds to that. Fill in your own thinking inside the brackets before copying.",
+      promptsEmptyState: "No prompts added yet for this zone. Coming soon.",
+      copyPrompt: "Copy prompt",
+      copiedPrompt: "Copied",
+      tipLabel: "Tip",
     },
   };
 
@@ -83,6 +100,11 @@
     els.backToZones = document.getElementById("backToZones");
     els.langElBtn = document.getElementById("langEl");
     els.langEnBtn = document.getElementById("langEn");
+    els.viewTabTools = document.getElementById("viewTabTools");
+    els.viewTabPrompts = document.getElementById("viewTabPrompts");
+    els.toolsView = document.getElementById("toolsView");
+    els.promptsView = document.getElementById("promptsView");
+    els.promptList = document.getElementById("promptList");
   }
 
   // ---------- Rendering: στατικό UI κείμενο ----------
@@ -214,6 +236,89 @@
     });
   }
 
+  // ---------- Rendering: View tabs (Εργαλεία / Prompt Generator) ----------
+  function renderViewTabs() {
+    els.viewTabTools.classList.toggle("active", state.currentView === "tools");
+    els.viewTabPrompts.classList.toggle("active", state.currentView === "prompts");
+    els.toolsView.hidden = state.currentView !== "tools";
+    els.promptsView.hidden = state.currentView !== "prompts";
+  }
+
+  // ---------- Rendering: Prompt Generator ----------
+  function renderPromptList() {
+    const zonePrompts = (typeof PROMPTS !== "undefined" && PROMPTS[state.currentZone]) || [];
+    els.promptList.innerHTML = "";
+
+    if (!zonePrompts.length) {
+      els.promptList.innerHTML = `<div class="empty-state">${t("promptsEmptyState")}</div>`;
+      return;
+    }
+
+    zonePrompts.forEach((prompt) => {
+      const subject = state.lang === "el" ? prompt.subjectEl : prompt.subjectEn;
+      const taskType = state.lang === "el" ? prompt.taskTypeEl : prompt.taskTypeEn;
+      const promptText = state.lang === "el" ? prompt.promptTextEl : prompt.promptTextEn;
+      const tip = state.lang === "el" ? prompt.tipEl : prompt.tipEn;
+
+      const card = document.createElement("article");
+      card.className = "prompt-card";
+
+      card.innerHTML = `
+        <div class="prompt-card__header">
+          <span class="prompt-card__subject">${escapeHtml(subject)}</span>
+          <span class="prompt-card__task-type">${escapeHtml(taskType)}</span>
+        </div>
+        <p class="prompt-card__text">${escapeHtml(promptText)}</p>
+        ${tip ? `<p class="prompt-card__tip"><strong>${t("tipLabel")}:</strong> ${escapeHtml(tip)}</p>` : ""}
+        <button type="button" class="prompt-card__copy">${t("copyPrompt")}</button>
+      `;
+
+      const copyBtn = card.querySelector(".prompt-card__copy");
+      copyBtn.addEventListener("click", () => copyPromptToClipboard(promptText, copyBtn));
+
+      els.promptList.appendChild(card);
+    });
+  }
+
+  function copyPromptToClipboard(text, buttonEl) {
+    const originalLabel = t("copyPrompt");
+    const copiedLabel = t("copiedPrompt");
+
+    const markCopied = () => {
+      buttonEl.textContent = copiedLabel;
+      buttonEl.classList.add("copied");
+      setTimeout(() => {
+        buttonEl.textContent = originalLabel;
+        buttonEl.classList.remove("copied");
+      }, 1800);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(markCopied).catch(() => {
+        fallbackCopy(text);
+        markCopied();
+      });
+    } else {
+      fallbackCopy(text);
+      markCopied();
+    }
+  }
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      // Σιωπηλή αποτυχία, ο χρήστης μπορεί ακόμα να επιλέξει το κείμενο χειροκίνητα.
+    }
+    document.body.removeChild(textarea);
+  }
+
   // ---------- Βοηθητικά: escaping (βασική προστασία αφού το περιεχόμενο ζει σε JS αρχείο) ----------
   function escapeHtml(str) {
     if (!str) return "";
@@ -239,11 +344,20 @@
     renderPathContent();
   }
 
+  function selectView(viewId) {
+    if (viewId !== "tools" && viewId !== "prompts") return;
+    state.currentView = viewId;
+    renderViewTabs();
+  }
+
   function showPathView() {
     els.zoneSelectView.hidden = true;
     els.pathView.hidden = false;
+    state.currentView = "tools"; // πάντα ξεκινάμε από τα εργαλεία όταν μπαίνουμε σε νέα ζώνη
     renderRoleTabs();
     renderPathContent();
+    renderViewTabs();
+    renderPromptList();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -262,6 +376,7 @@
     if (state.currentZone) {
       renderRoleTabs();
       renderPathContent();
+      renderPromptList();
     }
   }
 
@@ -274,6 +389,8 @@
     els.backToZones.addEventListener("click", showZoneSelectView);
     els.langElBtn.addEventListener("click", () => setLang("el"));
     els.langEnBtn.addEventListener("click", () => setLang("en"));
+    els.viewTabTools.addEventListener("click", () => selectView("tools"));
+    els.viewTabPrompts.addEventListener("click", () => selectView("prompts"));
   }
 
   document.addEventListener("DOMContentLoaded", init);

@@ -493,6 +493,201 @@ main {
   text-decoration: underline;
 }
 
+/* ---------- Learning Compass (Διαγνωστικός Χάρτης Μάθησης) ---------- */
+.quiz-pick-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 14px;
+  color: var(--color-text-muted);
+}
+
+.quiz-subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.quiz-subject-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.quiz-subject-card__subject {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+  margin: 0 0 6px;
+}
+
+.quiz-subject-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.quiz-subject-card__intro {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.quiz-start-btn,
+.quiz-retake-btn,
+.quiz-back-btn {
+  border: none;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.quiz-start-btn:hover,
+.quiz-retake-btn:hover {
+  background: var(--color-accent-hover);
+}
+
+.quiz-back-btn {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.quiz-progress {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
+.quiz-question-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+  max-width: 560px;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+}
+
+.quiz-option {
+  text-align: left;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.quiz-option:hover {
+  border-color: var(--color-accent);
+  background: rgba(46, 111, 94, 0.05);
+}
+
+.quiz-results-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.quiz-all-correct {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+}
+
+.quiz-gaps-found-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  margin: 0 0 14px;
+}
+
+.quiz-gap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.quiz-gap-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-high-zone);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.quiz-gap-card__label {
+  font-weight: 700;
+  font-size: 0.98rem;
+  margin: 0 0 8px;
+}
+
+.quiz-gap-card__explain {
+  font-size: 0.87rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+.quiz-gap-card__tools-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.quiz-tool-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.quiz-tool-chip {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--color-accent);
+  background: rgba(46, 111, 94, 0.08);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.quiz-tool-chip:hover {
+  background: rgba(46, 111, 94, 0.16);
+}
+
+.quiz-results-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
   .site-header__inner {
@@ -502,5 +697,8 @@ main {
   }
   .role-tabs {
     flex-wrap: wrap;
+  }
+  .quiz-options {
+    max-width: 100%;
   }
 }

@@ -21,7 +21,12 @@
     lang: "el",
     currentZone: null,
     currentRole: "guardian", // default λεωφορείο όταν μπαίνεις σε ζώνη
-    currentView: "tools", // "tools" | "prompts", ποια υπο-όψη δείχνουμε μέσα στο path view
+    currentView: "tools", // "tools" | "prompts" | "quiz", ποια υπο-όψη δείχνουμε μέσα στο path view
+    // Quiz sub-state (Learning Compass)
+    quizSubjectId: null, // ποιο quiz είναι επιλεγμένο μέσα στη ζώνη (π.χ. "math-e-dimotikou")
+    quizCurrentIndex: 0, // δείκτης τρέχουσας ερώτησης
+    quizAnswers: [], // [{ questionId, gapTag: string|null }] ανά ερώτηση που απαντήθηκε
+    quizFinished: false,
   };
 
   // ---------- Στατικά strings (UI chrome, όχι περιεχόμενο δεδομένων) ----------
@@ -52,6 +57,18 @@
       copyPrompt: "Αντιγραφή prompt",
       copiedPrompt: "Αντιγράφηκε",
       tipLabel: "Συμβουλή",
+      viewTabQuiz: "Διαγνωστικός Χάρτης",
+      quizEmptyState: "Δεν υπάρχει ακόμα διαγνωστικό κουίζ για αυτή τη ζώνη. Έρχεται σύντομα.",
+      quizPickSubject: "Διάλεξε μάθημα",
+      quizStartBtn: "Ξεκίνα το κουίζ",
+      quizQuestionOf: "Ερώτηση {current} από {total}",
+      quizNextBtn: "Επόμενη",
+      quizResultsTitle: "Το αποτέλεσμα του Χάρτη",
+      quizAllCorrect: "Απάντησε σωστά σε όλα! Καμία συγκεκριμένη δυσκολία δεν εντοπίστηκε αυτή τη φορά.",
+      quizGapsFound: "Εντοπίστηκαν σημεία για εξάσκηση:",
+      quizRecommendedTools: "Προτεινόμενα εργαλεία",
+      quizRetakeBtn: "Ξανακάνε το κουίζ",
+      quizBackToStart: "Πίσω στην αρχή του κουίζ",
     },
     en: {
       heroTitle: "Which AI tool fits your child, and for which task",
@@ -79,11 +96,29 @@
       copyPrompt: "Copy prompt",
       copiedPrompt: "Copied",
       tipLabel: "Tip",
+      viewTabQuiz: "Learning Compass",
+      quizEmptyState: "No diagnostic quiz yet for this zone. Coming soon.",
+      quizPickSubject: "Choose a subject",
+      quizStartBtn: "Start the quiz",
+      quizQuestionOf: "Question {current} of {total}",
+      quizNextBtn: "Next",
+      quizResultsTitle: "Your Compass Result",
+      quizAllCorrect: "All correct! No specific gap spotted this time.",
+      quizGapsFound: "Spots worth some extra practice:",
+      quizRecommendedTools: "Recommended tools",
+      quizRetakeBtn: "Retake the quiz",
+      quizBackToStart: "Back to quiz start",
     },
   };
 
-  function t(key) {
-    return STRINGS[state.lang][key] || key;
+  function t(key, vars) {
+    let str = STRINGS[state.lang][key] || key;
+    if (vars) {
+      Object.keys(vars).forEach((k) => {
+        str = str.replace(`{${k}}`, vars[k]);
+      });
+    }
+    return str;
   }
 
   // ---------- DOM refs ----------
@@ -102,9 +137,12 @@
     els.langEnBtn = document.getElementById("langEn");
     els.viewTabTools = document.getElementById("viewTabTools");
     els.viewTabPrompts = document.getElementById("viewTabPrompts");
+    els.viewTabQuiz = document.getElementById("viewTabQuiz");
     els.toolsView = document.getElementById("toolsView");
     els.promptsView = document.getElementById("promptsView");
     els.promptList = document.getElementById("promptList");
+    els.quizView = document.getElementById("quizView");
+    els.quizContent = document.getElementById("quizContent");
   }
 
   // ---------- Rendering: στατικό UI κείμενο ----------
@@ -236,12 +274,188 @@
     });
   }
 
-  // ---------- Rendering: View tabs (Εργαλεία / Prompt Generator) ----------
+  // ---------- Rendering: View tabs (Εργαλεία / Prompt Generator / Learning Compass) ----------
   function renderViewTabs() {
     els.viewTabTools.classList.toggle("active", state.currentView === "tools");
     els.viewTabPrompts.classList.toggle("active", state.currentView === "prompts");
+    els.viewTabQuiz.classList.toggle("active", state.currentView === "quiz");
     els.toolsView.hidden = state.currentView !== "tools";
     els.promptsView.hidden = state.currentView !== "prompts";
+    els.quizView.hidden = state.currentView !== "quiz";
+  }
+
+  // ---------- Rendering: Learning Compass (Διαγνωστικός Χάρτης Μάθησης) ----------
+  function resetQuizState() {
+    state.quizSubjectId = null;
+    state.quizCurrentIndex = 0;
+    state.quizAnswers = [];
+    state.quizFinished = false;
+  }
+
+  function getZoneQuizzes() {
+    return (typeof QUIZZES !== "undefined" && QUIZZES[state.currentZone]) || null;
+  }
+
+  function renderQuizView() {
+    const zoneQuizzes = getZoneQuizzes();
+    const subjectIds = zoneQuizzes ? Object.keys(zoneQuizzes) : [];
+
+    if (!subjectIds.length) {
+      els.quizContent.innerHTML = `<div class="empty-state">${t("quizEmptyState")}</div>`;
+      return;
+    }
+
+    if (!state.quizSubjectId) {
+      renderQuizSubjectPicker(zoneQuizzes, subjectIds);
+      return;
+    }
+
+    const quiz = zoneQuizzes[state.quizSubjectId];
+    if (!quiz) {
+      renderQuizSubjectPicker(zoneQuizzes, subjectIds);
+      return;
+    }
+
+    if (state.quizFinished) {
+      renderQuizResults(quiz);
+    } else {
+      renderQuizQuestion(quiz);
+    }
+  }
+
+  function renderQuizSubjectPicker(zoneQuizzes, subjectIds) {
+    const cards = subjectIds
+      .map((sid) => {
+        const q = zoneQuizzes[sid];
+        const subjectLabel = state.lang === "el" ? q.subjectLabelEl : q.subjectLabelEn;
+        const title = state.lang === "el" ? q.titleEl : q.titleEn;
+        const intro = state.lang === "el" ? q.introEl : q.introEn;
+        return `
+          <article class="quiz-subject-card">
+            <p class="quiz-subject-card__subject">${escapeHtml(subjectLabel)}</p>
+            <p class="quiz-subject-card__title">${escapeHtml(title)}</p>
+            <p class="quiz-subject-card__intro">${escapeHtml(intro)}</p>
+            <button type="button" class="quiz-start-btn" data-subject-id="${escapeAttr(sid)}">${t("quizStartBtn")}</button>
+          </article>
+        `;
+      })
+      .join("");
+
+    els.quizContent.innerHTML = `
+      <p class="quiz-pick-heading">${t("quizPickSubject")}</p>
+      <div class="quiz-subject-grid">${cards}</div>
+    `;
+
+    els.quizContent.querySelectorAll(".quiz-start-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.quizSubjectId = btn.dataset.subjectId;
+        state.quizCurrentIndex = 0;
+        state.quizAnswers = [];
+        state.quizFinished = false;
+        renderQuizView();
+      });
+    });
+  }
+
+  function renderQuizQuestion(quiz) {
+    const question = quiz.questions[state.quizCurrentIndex];
+    const questionText = state.lang === "el" ? question.textEl : question.textEn;
+    const total = quiz.questions.length;
+    const current = state.quizCurrentIndex + 1;
+
+    const optionsHtml = question.options
+      .map((opt, idx) => {
+        const label = state.lang === "el" ? opt.textEl : opt.textEn;
+        return `<button type="button" class="quiz-option" data-option-index="${idx}">${escapeHtml(label)}</button>`;
+      })
+      .join("");
+
+    els.quizContent.innerHTML = `
+      <div class="quiz-progress">${t("quizQuestionOf", { current, total })}</div>
+      <p class="quiz-question-text">${escapeHtml(questionText)}</p>
+      <div class="quiz-options">${optionsHtml}</div>
+    `;
+
+    els.quizContent.querySelectorAll(".quiz-option").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.dataset.optionIndex);
+        const chosen = question.options[idx];
+        state.quizAnswers.push({
+          questionId: question.id,
+          gapTag: chosen.isCorrect ? null : chosen.gapTag || null,
+        });
+
+        if (state.quizCurrentIndex < quiz.questions.length - 1) {
+          state.quizCurrentIndex += 1;
+          renderQuizQuestion(quiz);
+        } else {
+          state.quizFinished = true;
+          renderQuizView();
+        }
+      });
+    });
+  }
+
+  function renderQuizResults(quiz) {
+    // Μάζεψε τα μοναδικά gapTags από τις λάθος απαντήσεις
+    const gapTagIds = [...new Set(state.quizAnswers.map((a) => a.gapTag).filter(Boolean))];
+
+    let gapsHtml = "";
+    if (!gapTagIds.length) {
+      gapsHtml = `<p class="quiz-all-correct">${t("quizAllCorrect")}</p>`;
+    } else {
+      const gapCards = gapTagIds
+        .map((tagId) => {
+          const gap = (typeof GAP_TAGS !== "undefined" && GAP_TAGS[tagId]) || null;
+          if (!gap) return "";
+
+          const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
+          const explain = state.lang === "el" ? gap.explainEl : gap.explainEn;
+
+          const toolsHtml = (gap.recommendedToolIds || [])
+            .map((toolId) => {
+              const tool = TOOLS[toolId];
+              if (!tool) return "";
+              return `<a class="quiz-tool-chip" href="${escapeAttr(tool.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>`;
+            })
+            .join("");
+
+          return `
+            <article class="quiz-gap-card">
+              <p class="quiz-gap-card__label">${escapeHtml(label)}</p>
+              <p class="quiz-gap-card__explain">${escapeHtml(explain)}</p>
+              ${toolsHtml ? `<p class="quiz-gap-card__tools-label">${t("quizRecommendedTools")}</p><div class="quiz-tool-chips">${toolsHtml}</div>` : ""}
+            </article>
+          `;
+        })
+        .join("");
+
+      gapsHtml = `
+        <p class="quiz-gaps-found-label">${t("quizGapsFound")}</p>
+        <div class="quiz-gap-grid">${gapCards}</div>
+      `;
+    }
+
+    els.quizContent.innerHTML = `
+      <h3 class="quiz-results-title">${t("quizResultsTitle")}</h3>
+      ${gapsHtml}
+      <div class="quiz-results-actions">
+        <button type="button" class="quiz-retake-btn">${t("quizRetakeBtn")}</button>
+        <button type="button" class="quiz-back-btn">${t("quizBackToStart")}</button>
+      </div>
+    `;
+
+    els.quizContent.querySelector(".quiz-retake-btn").addEventListener("click", () => {
+      state.quizCurrentIndex = 0;
+      state.quizAnswers = [];
+      state.quizFinished = false;
+      renderQuizView();
+    });
+
+    els.quizContent.querySelector(".quiz-back-btn").addEventListener("click", () => {
+      resetQuizState();
+      renderQuizView();
+    });
   }
 
   // ---------- Rendering: Prompt Generator ----------
@@ -335,6 +549,7 @@
   function selectZone(zoneId) {
     state.currentZone = zoneId;
     state.currentRole = "guardian"; // reset σε default λεωφορείο κάθε φορά που μπαίνεις σε ζώνη
+    resetQuizState(); // το quiz είναι per-ζώνη, οπότε ξεκινάμε καθαρά
     showPathView();
   }
 
@@ -345,9 +560,12 @@
   }
 
   function selectView(viewId) {
-    if (viewId !== "tools" && viewId !== "prompts") return;
+    if (viewId !== "tools" && viewId !== "prompts" && viewId !== "quiz") return;
     state.currentView = viewId;
     renderViewTabs();
+    if (viewId === "quiz") {
+      renderQuizView();
+    }
   }
 
   function showPathView() {
@@ -377,6 +595,9 @@
       renderRoleTabs();
       renderPathContent();
       renderPromptList();
+      if (state.currentView === "quiz") {
+        renderQuizView();
+      }
     }
   }
 
@@ -391,6 +612,7 @@
     els.langEnBtn.addEventListener("click", () => setLang("en"));
     els.viewTabTools.addEventListener("click", () => selectView("tools"));
     els.viewTabPrompts.addEventListener("click", () => selectView("prompts"));
+    els.viewTabQuiz.addEventListener("click", () => selectView("quiz"));
   }
 
   document.addEventListener("DOMContentLoaded", init);

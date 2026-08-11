@@ -67,6 +67,7 @@
       <div class="view-tabs" id="viewTabs" role="tablist">
         <button type="button" class="view-tab active" id="viewTabTools" data-view="tools" data-i18n="viewTabTools">Εργαλεία</button>
         <button type="button" class="view-tab" id="viewTabPrompts" data-view="prompts" data-i18n="viewTabPrompts">Prompt Generator</button>
+        <button type="button" class="view-tab" id="viewTabQuiz" data-view="quiz" data-i18n="viewTabQuiz">Διαγνωστικός Χάρτης</button>
       </div>
 
       <!-- Υπο-όψη: Λίστα εργαλείων -->
@@ -88,6 +89,13 @@
           <!-- Γεμίζει δυναμικά από το app.js με βάση το PROMPTS[zone] -->
         </div>
       </div>
+
+      <!-- Υπο-όψη: Learning Compass (Διαγνωστικός Χάρτης Μάθησης) -->
+      <div id="quizView" hidden>
+        <div class="quiz-content" id="quizContent">
+          <!-- Γεμίζει δυναμικά από το app.js με βάση το QUIZZES[zone] -->
+        </div>
+      </div>
     </section>
 
   </main>
@@ -103,6 +111,7 @@
   </footer>
 
   <script src="data.js"></script>
+  <script src="quiz-data.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

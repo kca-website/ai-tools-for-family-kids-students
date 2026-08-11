@@ -6,6 +6,8 @@
   <title>AI Tools for Family, Kids & Students</title>
   <meta name="description" content="Ανεξάρτητο, δωρεάν, δίγλωσσο εργαλείο που βοηθά γονείς, μαθητές και εκπαιδευτικούς να βρουν ποια AI εργαλεία είναι κατάλληλα ανά ηλικία." />
   <link rel="stylesheet" href="styles.css" />
+  <!-- html2pdf για πραγματικό PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
@@ -66,26 +68,26 @@
 
       <div class="view-tabs" id="viewTabs" role="tablist">
         <button type="button" class="view-tab active" id="viewTabTools" data-view="tools" data-i18n="viewTabTools">Εργαλεία</button>
-        <button type="button" class="view-tab" id="viewTabExpert" data-view="expert" data-i18n="viewTabExpert">🔍 Προχωρημένα</button>
+        <button type="button" class="view-tab" id="viewTabAdvanced" data-view="advanced" data-i18n="viewTabAdvanced">Προχωρημένα</button>
         <button type="button" class="view-tab" id="viewTabPrompts" data-view="prompts" data-i18n="viewTabPrompts">Prompt Generator</button>
         <button type="button" class="view-tab" id="viewTabQuiz" data-view="quiz" data-i18n="viewTabQuiz">Διαγνωστικός Χάρτης</button>
-        <button type="button" class="view-tab" id="viewTabGuide" data-view="guide" data-i18n="viewTabGuide">📘 Οδηγός</button>
+        <button type="button" class="view-tab" id="viewTabGuide" data-view="guide" data-i18n="viewTabGuide">Οδηγός</button>
       </div>
 
       <!-- Υπο-όψη: Λίστα εργαλείων -->
       <div id="toolsView">
         <div class="path-intro" id="pathIntro"></div>
         <div class="tool-grid" id="toolGrid">
-          <!-- Γεμίζει δυναμικά από το app.js με βάση το PATHS[zone][role].tools -->
+          <!-- Γεμίζει δυναμικά από το app.js -->
         </div>
       </div>
 
-      <!-- Υπο-όψη: Προχωρημένα Εργαλεία -->
-      <div id="expertView" hidden>
-        <div class="path-intro" data-i18n="expertIntro">
-          Εξειδικευμένα εργαλεία για προχωρημένες ανάγκες: μαθηματικά, ακαδημαϊκή έρευνα, προγραμματισμός, σχεδίαση.
+      <!-- Υπο-όψη: Προχωρημένα εργαλεία (εξειδικευμένα) -->
+      <div id="advancedView" hidden>
+        <div class="path-intro" data-i18n="advancedIntro">
+          Εργαλεία που δεν είναι διάσημα αλλά λύνουν συγκεκριμένες δύσκολες ανάγκες.
         </div>
-        <div class="tool-grid" id="expertGrid">
+        <div class="tool-grid" id="advancedGrid">
           <!-- Γεμίζει δυναμικά από το app.js -->
         </div>
       </div>
@@ -97,7 +99,7 @@
           και το AI απαντάει πάνω σε αυτό. Γράψε τη δική σου σκέψη μέσα στις αγκύλες πριν το αντιγράψεις.
         </div>
         <div class="prompt-list" id="promptList">
-          <!-- Γεμίζει δυναμικά από το app.js με βάση το PROMPTS[zone] -->
+          <!-- Γεμίζει δυναμικά από το app.js -->
         </div>
       </div>
 
@@ -108,7 +110,7 @@
         </div>
       </div>
 
-      <!-- Υπο-όψη: Οδηγός -->
+      <!-- Υπο-όψη: Οδηγός (Guide) -->
       <div id="guideView" hidden>
         <div class="guide-content" id="guideContent">
           <!-- Γεμίζει δυναμικά από το app.js -->

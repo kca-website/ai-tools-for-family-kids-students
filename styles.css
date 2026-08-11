@@ -4,10 +4,9 @@
    ------------------------------------------------------------ */
 
 :root {
-  /* Χρώματα ανά ζώνη, προσαρμόσιμα */
-  --color-primary-zone: #4CAF7D;   /* Δημοτικό */
-  --color-middle-zone: #3B82C4;    /* Γυμνάσιο */
-  --color-high-zone: #7C5CBF;      /* Λύκειο */
+  --color-primary-zone: #4CAF7D;
+  --color-middle-zone: #3B82C4;
+  --color-high-zone: #7C5CBF;
 
   --color-bg: #FAFAF8;
   --color-surface: #FFFFFF;
@@ -84,36 +83,6 @@ a {
   gap: 8px;
 }
 
-/* ---------- Footer ---------- */
-.site-footer {
-  border-top: 1px solid var(--color-border);
-  padding: 32px 0 24px;
-  text-align: center;
-  color: var(--color-text-muted);
-}
-
-.site-footer p {
-  margin: 0 auto 8px;
-  max-width: 640px;
-  font-size: 0.85rem;
-  line-height: 1.5;
-}
-
-.site-footer__credit {
-  font-size: 0.78rem;
-  margin-top: 4px;
-}
-
-.site-footer__credit a {
-  color: var(--color-accent);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.site-footer__credit a:hover {
-  text-decoration: underline;
-}
-
 .lang-toggle {
   display: flex;
   gap: 4px;
@@ -144,7 +113,7 @@ main {
   padding: 32px 0 64px;
 }
 
-/* ---------- Hero section (μόνο στην αρχική οθόνη) ---------- */
+/* ---------- Hero ---------- */
 .hero {
   padding: 8px 0 32px;
   border-bottom: 1px solid var(--color-border);
@@ -195,7 +164,7 @@ main {
   color: #5C4590;
 }
 
-/* ---------- Πλοήγηση: Ζώνες ---------- */
+/* ---------- Ζώνες ---------- */
 .section-heading {
   font-size: 1.4rem;
   font-weight: 700;
@@ -259,7 +228,7 @@ main {
   margin: 0;
 }
 
-/* ---------- Πλοήγηση: Ρόλοι ("λεωφορεία") ---------- */
+/* ---------- Ρόλοι ---------- */
 .role-tabs {
   display: flex;
   gap: 8px;
@@ -311,7 +280,7 @@ main {
   color: var(--color-text-muted);
 }
 
-/* ---------- Κάρτες Εργαλείων ---------- */
+/* ---------- Εργαλεία ---------- */
 .tool-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -398,11 +367,12 @@ main {
   border-radius: var(--radius-md);
 }
 
-/* ---------- View tabs (Εργαλεία / Prompt Generator) ---------- */
+/* ---------- View tabs ---------- */
 .view-tabs {
   display: flex;
   gap: 8px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .view-tab {
@@ -498,7 +468,7 @@ main {
   color: #FFFFFF;
 }
 
-/* ---------- Learning Compass (Διαγνωστικός Χάρτης Μάθησης) ---------- */
+/* ---------- Quiz ---------- */
 .quiz-pick-heading {
   font-size: 0.95rem;
   font-weight: 700;
@@ -709,6 +679,171 @@ main {
   background: rgba(46, 111, 94, 0.08) !important;
 }
 
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 32px 0 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.site-footer p {
+  margin: 0 auto 8px;
+  max-width: 640px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.site-footer__credit {
+  font-size: 0.78rem;
+  margin-top: 4px;
+}
+
+.site-footer__credit a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-footer__credit a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Guide ---------- */
+.guide-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.guide-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.guide-content .guide-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin: 0 0 32px;
+}
+
+.guide-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 40px 0 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.guide-content h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 24px 0 10px;
+}
+
+.guide-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 16px;
+  color: var(--color-text-muted);
+}
+
+.guide-content ul, .guide-content ol {
+  padding-left: 24px;
+  margin: 0 0 16px;
+  color: var(--color-text-muted);
+}
+
+.guide-content li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.guide-content .guide-badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-right: 6px;
+}
+
+.guide-content .guide-tip {
+  background: #F0F7F4;
+  border-left: 4px solid var(--color-accent);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin: 16px 0;
+}
+
+.guide-content .guide-tip strong {
+  color: var(--color-accent);
+}
+
+.guide-content .banned-list {
+  background: #FFF7E6;
+  border-left: 4px solid #E0A800;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin: 16px 0;
+}
+
+.guide-content .banned-list strong {
+  color: #B87A00;
+}
+
+.guide-content .guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 0.9rem;
+}
+
+.guide-content .guide-table th,
+.guide-content .guide-table td {
+  border: 1px solid var(--color-border);
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.guide-content .guide-table th {
+  background: var(--color-bg);
+  font-weight: 700;
+}
+
+.guide-content .guide-cta {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  text-align: center;
+  margin: 32px 0 0;
+}
+
+.guide-content .guide-cta p {
+  margin: 0 0 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.guide-content .guide-cta .btn {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #FFFFFF;
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.guide-content .guide-cta .btn:hover {
+  background: var(--color-accent-hover);
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
   .site-header__inner {
@@ -719,7 +854,23 @@ main {
   .role-tabs {
     flex-wrap: wrap;
   }
+  .view-tabs {
+    flex-wrap: wrap;
+  }
   .quiz-options {
     max-width: 100%;
+  }
+  .guide-content h1 {
+    font-size: 1.5rem;
+  }
+  .guide-content h2 {
+    font-size: 1.25rem;
+  }
+  .guide-content .guide-table {
+    font-size: 0.8rem;
+  }
+  .guide-content .guide-table th,
+  .guide-content .guide-table td {
+    padding: 6px 8px;
   }
 }

@@ -28,7 +28,10 @@
  *   GAP_TAGS[tagId] = {
  *     labelEl/En:      σύντομη περιγραφή του κενού για τον γονιό,
  *     explainEl/En:    1-2 προτάσεις τι σημαίνει αυτό στην πράξη,
- *     recommendedToolIds: [toolId, ...]  -> αναφορά σε TOOLS (data.js)
+ *     recommendedToolIds: [toolId, ...]  -> αναφορά σε TOOLS (data.js),
+ *     achievementEl/En: θετικός τίτλος επίτευγματος (π.χ. "Αστέρι των Κλασμάτων"),
+ *     positiveMessageEl/En: θετικό μήνυμα για το παιδί,
+ *     skillTagEl/En: ετικέτα της δεξιότητας (π.χ. "Κλάσματα & Σύγκριση"),
  *   }
  * ------------------------------------------------------------
  */
@@ -44,6 +47,12 @@ const GAP_TAGS = {
     explainEn:
       "Struggles to compare fractions when the denominator is a bigger number. Often treats the numerator and denominator as two separate whole numbers instead of one combined quantity.",
     recommendedToolIds: ["khanmigo", "photomath"],
+    achievementEl: "Αστέρι των Κλασμάτων",
+    achievementEn: "Star of Fractions",
+    positiveMessageEl: "Έχεις το ταλέντο να σκέφτεσαι σαν μαθηματικός!",
+    positiveMessageEn: "You have the talent to think like a mathematician!",
+    skillTagEl: "Κλάσματα & Σύγκριση",
+    skillTagEn: "Fractions & Comparison",
   },
   "fractions.add_across": {
     id: "fractions.add_across",
@@ -54,6 +63,12 @@ const GAP_TAGS = {
     explainEn:
       "Adds numerators and denominators separately instead of finding a common denominator first. This is the most common error in fraction addition at this age.",
     recommendedToolIds: ["khanmigo", "wolfram-alpha"],
+    achievementEl: "Ο Μάστερ της Πρόσθεσης",
+    achievementEn: "Master of Addition",
+    positiveMessageEl: "Η επιμονή σου σε δύσκολες ασκήσεις σε κάνει δυνατό!",
+    positiveMessageEn: "Your persistence in tough exercises makes you strong!",
+    skillTagEl: "Πρόσθεση Κλασμάτων",
+    skillTagEn: "Fraction Addition",
   },
   "decimals.longer_is_larger": {
     id: "decimals.longer_is_larger",
@@ -64,6 +79,12 @@ const GAP_TAGS = {
     explainEn:
       "Believes a decimal with more digits is always bigger (e.g. thinks 0.45 is greater than 0.8). Very common at this age and needs targeted practice on place value.",
     recommendedToolIds: ["khanmigo", "wolfram-alpha"],
+    achievementEl: "Ο Κυνηγός των Δεκαδικών",
+    achievementEn: "Decimal Hunter",
+    positiveMessageEl: "Ανακαλύπτεις τα μυστικά των δεκαδικών αριθμών!",
+    positiveMessageEn: "You're discovering the secrets of decimal numbers!",
+    skillTagEl: "Δεκαδικοί & Θεσιακή Αξία",
+    skillTagEn: "Decimals & Place Value",
   },
   "division.remainder": {
     id: "division.remainder",
@@ -74,6 +95,12 @@ const GAP_TAGS = {
     explainEn:
       "Struggles with division by a 2-digit divisor, especially remembering the remainder at the end. Needs step-by-step practice with the division algorithm.",
     recommendedToolIds: ["photomath", "wolfram-alpha"],
+    achievementEl: "Ο Αρχιτέκτονας της Διαίρεσης",
+    achievementEn: "Architect of Division",
+    positiveMessageEl: "Κάθε δύσκολη διαίρεση σε κάνει πιο δυνατό!",
+    positiveMessageEn: "Every tough division makes you stronger!",
+    skillTagEl: "Διαίρεση & Υπόλοιπο",
+    skillTagEn: "Division & Remainders",
   },
   "percent.as_fraction": {
     id: "percent.as_fraction",
@@ -82,18 +109,30 @@ const GAP_TAGS = {
     explainEl:
       "Δεν έχει ακόμα καταλάβει καλά ότι το ποσοστό σημαίνει «τόσο στα εκατό». Μπερδεύει τη μετατροπή ποσοστού σε κλάσμα.",
     explainEn:
-      "Hasn't yet fully grasped that percent means \"out of a hundred.\" Confuses converting a percentage into a fraction.",
+      "Hasn't yet fully grasped that percent means 'out of a hundred.' Confuses converting a percentage into a fraction.",
     recommendedToolIds: ["khanmigo", "wolfram-alpha"],
+    achievementEl: "Ο Εξερευνητής των Ποσοστών",
+    achievementEn: "Percentage Explorer",
+    positiveMessageEl: "Τα ποσοστά γίνονται παιχνίδι για σένα!",
+    positiveMessageEn: "Percentages are becoming a game for you!",
+    skillTagEl: "Ποσοστά & Κλάσματα",
+    skillTagEn: "Percentages & Fractions",
   },
   "measurement.area_perimeter_confusion": {
     id: "measurement.area_perimeter_confusion",
     labelEl: "Εμβαδόν και περίμετρος",
     labelEn: "Area and perimeter",
     explainEl:
-      "Μπερδεύει τον τύπο του εμβαδού με τον τύπο της περιμέτρου. Χρειάζεται οπτικοποίηση της διαφοράς: η περίμετρος μετράει το «γύρω-γύρω», το εμβαδόν μετράει την επιφάνεια.",
+      "Μπερδεύει τον τύπο του εμβαδού με τον τύπο της περιμέτρου. Χρειάζεται οπτικοποίηση της διαφοράς: η περίμετρος μετράει το 'γύρω-γύρω', το εμβαδόν μετράει την επιφάνεια.",
     explainEn:
-      "Mixes up the area formula with the perimeter formula. Needs a visual reminder of the difference: perimeter measures the \"way around,\" area measures the surface.",
+      "Mixes up the area formula with the perimeter formula. Needs a visual reminder of the difference: perimeter measures the 'way around,' area measures the surface.",
     recommendedToolIds: ["khanmigo", "photomath"],
+    achievementEl: "Ο Μάγος των Μετρήσεων",
+    achievementEn: "Wizard of Measurements",
+    positiveMessageEl: "Η φαντασία σου βλέπει το εμβαδόν παντού!",
+    positiveMessageEn: "Your imagination sees area everywhere!",
+    skillTagEl: "Εμβαδόν & Περίμετρος",
+    skillTagEn: "Area & Perimeter",
   },
 };
 

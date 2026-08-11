@@ -396,6 +396,7 @@
     });
   }
 
+  // ---------- renderQuizResults (ΑΝΑΝΕΩΜΕΝΗ με την κάρτα achievement) ----------
   function renderQuizResults(quiz) {
     // Μάζεψε τα μοναδικά gapTags από τις λάθος απαντήσεις
     const gapTagIds = [...new Set(state.quizAnswers.map((a) => a.gapTag).filter(Boolean))];
@@ -436,26 +437,178 @@
       `;
     }
 
+    // 🔽 ΔΗΜΙΟΥΡΓΙΑ SVG ΚΑΡΤΑΣ
+    const svgCard = renderAchievementCard(gapTagIds);
+    const encodedSvg = encodeURIComponent(svgCard);
+    const svgDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodedSvg;
+
+    // 🔽 HTML ΑΠΟΤΕΛΕΣΜΑΤΟΣ (με την κάρτα)
     els.quizContent.innerHTML = `
       <h3 class="quiz-results-title">${t("quizResultsTitle")}</h3>
       ${gapsHtml}
-      <div class="quiz-results-actions">
+      
+      <!-- 🏅 HERO CARD SECTION -->
+      <div class="quiz-achievement-section" style="margin-top: 32px; padding-top: 24px; border-top: 2px solid #E4E6EA;">
+        <h4 style="font-size: 1rem; font-weight: 700; margin: 0 0 12px; color: var(--color-text-muted);">
+          🏅 ${state.lang === 'el' ? 'Η Κάρτα Σου' : 'Your Card'}
+        </h4>
+        <div style="max-width: 400px; margin: 0 auto;">
+          <img src="${svgDataUrl}" alt="Achievement Card" style="width:100%; height:auto; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" />
+          <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; justify-content:center;">
+            <button type="button" class="quiz-download-btn" style="border:none; background:var(--color-accent); color:#FFFFFF; font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+              ⬇️ ${state.lang === 'el' ? 'Κατέβασε την κάρτα' : 'Download card'}
+            </button>
+            <button type="button" class="quiz-share-btn" style="border:1px solid var(--color-accent); background:transparent; color:var(--color-accent); font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+              📤 ${state.lang === 'el' ? 'Μοιράσου τη' : 'Share it'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-results-actions" style="margin-top:24px;">
         <button type="button" class="quiz-retake-btn">${t("quizRetakeBtn")}</button>
         <button type="button" class="quiz-back-btn">${t("quizBackToStart")}</button>
       </div>
     `;
 
-    els.quizContent.querySelector(".quiz-retake-btn").addEventListener("click", () => {
+    // 🔽 EVENT LISTENERS
+    // Download button
+    els.quizContent.querySelector('.quiz-download-btn').addEventListener('click', () => {
+      downloadSVG(encodedSvg, 'achievement.svg');
+    });
+
+    // Share button
+    els.quizContent.querySelector('.quiz-share-btn').addEventListener('click', shareCard);
+
+    // Retake button
+    els.quizContent.querySelector('.quiz-retake-btn').addEventListener('click', () => {
       state.quizCurrentIndex = 0;
       state.quizAnswers = [];
       state.quizFinished = false;
       renderQuizView();
     });
 
-    els.quizContent.querySelector(".quiz-back-btn").addEventListener("click", () => {
+    // Back button
+    els.quizContent.querySelector('.quiz-back-btn').addEventListener('click', () => {
       resetQuizState();
       renderQuizView();
     });
+  }
+
+  // ---------- renderAchievementCard (ΝΕΑ ΣΥΝΑΡΤΗΣΗ) ----------
+  function renderAchievementCard(gapTagIds) {
+    // 1. Μάζεψε τα gapTags
+    const gaps = gapTagIds.map(id => GAP_TAGS[id]).filter(Boolean);
+    const isGreek = state.lang === "el";
+    
+    // 2. Δημιούργησε achievements
+    let titles = gaps.map(g => isGreek ? g.achievementEl : g.achievementEn);
+    let skillTags = gaps.map(g => isGreek ? g.skillTagEl : g.skillTagEn);
+    let positiveMessages = gaps.map(g => isGreek ? g.positiveMessageEl : g.positiveMessageEn);
+    let toolNames = gaps.map(g => {
+      const toolId = g.recommendedToolIds?.[0];
+      return toolId ? TOOLS[toolId]?.name : '';
+    }).filter(Boolean);
+    
+    // 3. Αν κανένα κενό → γενικό achievement
+    if (!titles.length) {
+      titles = isGreek ? ["Ο Ολοκληρωμένος Μαθητής"] : ["The Complete Student"];
+      skillTags = isGreek ? ["Όλες οι δεξιότητες σε καλό επίπεδο"] : ["All skills at a good level"];
+      positiveMessages = isGreek ? ["Συνέχισε έτσι!"] : ["Keep it up!"];
+      toolNames = [];
+    }
+
+    // 4. Κατασκευή SVG (Mobile-first, 400x500)
+    const titleText = titles.join(' & ');
+    const skillText = skillTags.join(' + ');
+    const messageText = positiveMessages[0] || (isGreek ? 'Συνέχισε έτσι!' : 'Keep it up!');
+    const toolText = toolNames.length 
+      ? (isGreek ? '💡 Εξασκήσου με: ' : '💡 Practice with: ') + toolNames.join(', ')
+      : (isGreek ? '💡 Συνέχισε την εξάσκηση!' : '💡 Keep practicing!');
+    const emoji = gaps.length ? '🌟' : '🏆';
+    const accentColor = gaps.length ? '#4CAF7D' : '#3B82C4';
+
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+        <!-- Background -->
+        <rect width="400" height="500" rx="24" fill="#F8F9FA" stroke="#E4E6EA" stroke-width="2"/>
+        
+        <!-- Top accent line -->
+        <rect width="400" height="6" rx="3" fill="${accentColor}"/>
+        
+        <!-- Emoji / Icon -->
+        <text x="200" y="70" font-size="48" text-anchor="middle">${emoji}</text>
+        
+        <!-- Title (achievement name) -->
+        <text x="200" y="120" font-size="22" font-weight="700" fill="#1F2430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
+          ${escapeHtml(titleText)}
+        </text>
+        
+        <!-- Subtitle: positive message -->
+        <text x="200" y="160" font-size="14" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
+          ${escapeHtml(messageText)}
+        </text>
+        
+        <!-- Divider -->
+        <line x1="60" y1="185" x2="340" y2="185" stroke="#E4E6EA" stroke-width="1"/>
+        
+        <!-- Skill tags -->
+        <text x="200" y="220" font-size="13" font-weight="600" fill="${accentColor}" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
+          ${isGreek ? '🔥 Δύναμη: ' : '🔥 Strength: '}${escapeHtml(skillText)}
+        </text>
+        
+        <!-- Tool suggestion -->
+        <text x="200" y="260" font-size="13" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
+          ${escapeHtml(toolText)}
+        </text>
+        
+        <!-- Footer -->
+        <line x1="60" y1="310" x2="340" y2="310" stroke="#E4E6EA" stroke-width="1"/>
+        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">
+          aitools4kids.vercel.app  🤖
+        </text>
+      </svg>
+    `;
+
+    return svg;
+  }
+
+  // ---------- Achievement Card: Download & Share (ΝΕΕΣ ΣΥΝΑΡΤΗΣΕΙΣ) ----------
+  function downloadSVG(svgData, filename = 'achievement.svg') {
+    const blob = new Blob([decodeURIComponent(svgData)], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  function shareCard() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Η κάρτα επίτευγμά μου',
+        text: 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids!',
+        url: 'https://aitools4kids.vercel.app'
+      }).catch(() => {
+        // Αν ο χρήστης ακυρώσει, απλά κάνουμε fallback
+        fallbackShare();
+      });
+    } else {
+      fallbackShare();
+    }
+  }
+
+  function fallbackShare() {
+    navigator.clipboard.writeText('https://aitools4kids.vercel.app')
+      .then(() => {
+        alert('📋 Αντιγράφηκε το link! Μοιράσου το με τους φίλους σου.');
+      })
+      .catch(() => {
+        prompt('Αντέγραψε αυτό το link:', 'https://aitools4kids.vercel.app');
+      });
   }
 
   // ---------- Rendering: Prompt Generator ----------

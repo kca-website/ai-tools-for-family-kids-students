@@ -1,40 +1,9 @@
 /**
- * quiz-data.js
- * ------------------------------------------------------------
- * Δεδομένα για το "Ο Διαγνωστικός Χάρτης Μάθησης" (Learning Compass).
- *
- * Φιλοσοφία: ΔΕΝ είναι τεστ βαθμολόγησης. Κάθε ερώτηση στοχεύει ΜΙΑ
- * συγκεκριμένη, τεκμηριωμένη παρανόηση (misconception). Κάθε λάθος
- * απάντηση αντιστοιχεί σε ένα gapTag, και κάθε gapTag οδηγεί σε
- * 1-2 συγκεκριμένα εργαλεία από το TOOLS (data.js) κατάλληλα για
- * ΑΥΤΟ το συγκεκριμένο κενό.
- *
- * v1 (MVP): απλό quiz, χωρίς confidence-check tier (έρχεται σε v2).
- *
- * ΔΟΜΗ:
- *   QUIZZES[zoneId][subjectId] = {
- *     titleEl/En, introEl/En,
- *     questions: [
- *       {
- *         id,
- *         textEl/En,
- *         options: [
- *           { textEl/En, isCorrect, gapTag (μόνο αν !isCorrect) }
- *         ]
- *       }
- *     ]
- *   }
- *
- *   GAP_TAGS[tagId] = {
- *     labelEl/En:      σύντομη περιγραφή του κενού για τον γονιό,
- *     explainEl/En:    1-2 προτάσεις τι σημαίνει αυτό στην πράξη,
- *     recommendedToolIds: [toolId, ...]  -> αναφορά σε TOOLS (data.js),
- *     achievementEl/En: θετικός τίτλος επίτευγματος (π.χ. "Αστέρι των Κλασμάτων"),
- *     positiveMessageEl/En: θετικό μήνυμα για το παιδί,
- *     skillTagEl/En: ετικέτα της δεξιότητας (π.χ. "Κλάσματα & Σύγκριση"),
- *   }
- * ------------------------------------------------------------
- */
+quiz-data.js
+Δεδομένα για το "Ο Διαγνωστικός Χάρτης Μάθησης" (Learning Compass).
+Φιλοσοφία: ΔΕΝ είναι τεστ βαθμολόγησης. Κάθε ερώτηση στοχεύει ΜΙΑ
+συγκεκριμένη, τεκμηριωμένη παρανόηση (misconception).
+*/
 
 // ---------- GAP TAGS ----------
 const GAP_TAGS = {
@@ -42,10 +11,8 @@ const GAP_TAGS = {
     id: "fractions.whole_number_bias",
     labelEl: "Σύγκριση κλασμάτων",
     labelEn: "Comparing fractions",
-    explainEl:
-      "Δυσκολεύεται να συγκρίνει κλάσματα όταν ο παρονομαστής είναι μεγαλύτερος αριθμός. Συχνά σκέφτεται τον αριθμητή και τον παρονομαστή σαν δύο ξεχωριστούς ακέραιους αριθμούς, αντί για ένα ενιαίο μέγεθος.",
-    explainEn:
-      "Struggles to compare fractions when the denominator is a bigger number. Often treats the numerator and denominator as two separate whole numbers instead of one combined quantity.",
+    explainEl: "Δυσκολεύεται να συγκρίνει κλάσματα όταν ο παρονομαστής είναι μεγαλύτερος αριθμός. Συχνά σκέφτεται τον αριθμητή και τον παρονομαστή σαν δύο ξεχωριστούς ακέραιους αριθμούς, αντί για ένα ενιαίο μέγεθος.",
+    explainEn: "Struggles to compare fractions when the denominator is a bigger number. Often treats the numerator and denominator as two separate whole numbers instead of one combined quantity.",
     recommendedToolIds: ["khanmigo", "photomath"],
     achievementEl: "Αστέρι των Κλασμάτων",
     achievementEn: "Star of Fractions",
@@ -58,10 +25,8 @@ const GAP_TAGS = {
     id: "fractions.add_across",
     labelEl: "Πρόσθεση κλασμάτων",
     labelEn: "Adding fractions",
-    explainEl:
-      "Προσθέτει ξεχωριστά αριθμητές και παρονομαστές αντί να βρει πρώτα κοινό παρονομαστή. Είναι το πιο συχνό λάθος στην πρόσθεση κλασμάτων σε αυτή την ηλικία.",
-    explainEn:
-      "Adds numerators and denominators separately instead of finding a common denominator first. This is the most common error in fraction addition at this age.",
+    explainEl: "Προσθέτει ξεχωριστά αριθμητές και παρονομαστές αντί να βρει πρώτα κοινό παρονομαστή. Είναι το πιο συχνό λάθος στην πρόσθεση κλασμάτων σε αυτή την ηλικία.",
+    explainEn: "Adds numerators and denominators separately instead of finding a common denominator first. This is the most common error in fraction addition at this age.",
     recommendedToolIds: ["khanmigo", "wolfram-alpha"],
     achievementEl: "Ο Μάστερ της Πρόσθεσης",
     achievementEn: "Master of Addition",
@@ -74,10 +39,8 @@ const GAP_TAGS = {
     id: "decimals.longer_is_larger",
     labelEl: "Σύγκριση δεκαδικών",
     labelEn: "Comparing decimals",
-    explainEl:
-      "Πιστεύει ότι ο δεκαδικός με περισσότερα ψηφία είναι πάντα ο μεγαλύτερος (π.χ. νομίζει ότι το 0,45 είναι μεγαλύτερο από το 0,8). Είναι πολύ κοινή παρανόηση σε αυτή την ηλικία και χρειάζεται συγκεκριμένη εξάσκηση στη θεσιακή αξία.",
-    explainEn:
-      "Believes a decimal with more digits is always bigger (e.g. thinks 0.45 is greater than 0.8). Very common at this age and needs targeted practice on place value.",
+    explainEl: "Πιστεύει ότι ο δεκαδικός με περισσότερα ψηφία είναι πάντα ο μεγαλύτερος (π.χ. νομίζει ότι το 0,45 είναι μεγαλύτερο από το 0,8). Είναι πολύ κοινή παρανόηση σε αυτή την ηλικία και χρειάζεται συγκεκριμένη εξάσκηση στη θεσιακή αξία.",
+    explainEn: "Believes a decimal with more digits is always bigger (e.g. thinks 0.45 is greater than 0.8). Very common at this age and needs targeted practice on place value.",
     recommendedToolIds: ["khanmigo", "wolfram-alpha"],
     achievementEl: "Ο Κυνηγός των Δεκαδικών",
     achievementEn: "Decimal Hunter",
@@ -90,10 +53,8 @@ const GAP_TAGS = {
     id: "division.remainder",
     labelEl: "Διαίρεση με υπόλοιπο",
     labelEn: "Division with remainder",
-    explainEl:
-      "Δυσκολεύεται στη διαίρεση με διψήφιο διαιρέτη, ειδικά στο να θυμηθεί το υπόλοιπο στο τέλος. Χρειάζεται βήμα-βήμα εξάσκηση στον αλγόριθμο της διαίρεσης.",
-    explainEn:
-      "Struggles with division by a 2-digit divisor, especially remembering the remainder at the end. Needs step-by-step practice with the division algorithm.",
+    explainEl: "Δυσκολεύεται στη διαίρεση με διψήφιο διαιρέτη, ειδικά στο να θυμηθεί το υπόλοιπο στο τέλος. Χρειάζεται βήμα-βήμα εξάσκηση στον αλγόριθμο της διαίρεσης.",
+    explainEn: "Struggles with division by a 2-digit divisor, especially remembering the remainder at the end. Needs step-by-step practice with the division algorithm.",
     recommendedToolIds: ["photomath", "wolfram-alpha"],
     achievementEl: "Ο Αρχιτέκτονας της Διαίρεσης",
     achievementEn: "Architect of Division",
@@ -106,10 +67,8 @@ const GAP_TAGS = {
     id: "percent.as_fraction",
     labelEl: "Ποσοστά",
     labelEn: "Percentages",
-    explainEl:
-      "Δεν έχει ακόμα καταλάβει καλά ότι το ποσοστό σημαίνει «τόσο στα εκατό». Μπερδεύει τη μετατροπή ποσοστού σε κλάσμα.",
-    explainEn:
-      "Hasn't yet fully grasped that percent means 'out of a hundred.' Confuses converting a percentage into a fraction.",
+    explainEl: "Δεν έχει ακόμα καταλάβει καλά ότι το ποσοστό σημαίνει «τόσο στα εκατό». Μπερδεύει τη μετατροπή ποσοστού σε κλάσμα.",
+    explainEn: "Hasn't yet fully grasped that percent means 'out of a hundred.' Confuses converting a percentage into a fraction.",
     recommendedToolIds: ["khanmigo", "wolfram-alpha"],
     achievementEl: "Ο Εξερευνητής των Ποσοστών",
     achievementEn: "Percentage Explorer",
@@ -122,10 +81,8 @@ const GAP_TAGS = {
     id: "measurement.area_perimeter_confusion",
     labelEl: "Εμβαδόν και περίμετρος",
     labelEn: "Area and perimeter",
-    explainEl:
-      "Μπερδεύει τον τύπο του εμβαδού με τον τύπο της περιμέτρου. Χρειάζεται οπτικοποίηση της διαφοράς: η περίμετρος μετράει το 'γύρω-γύρω', το εμβαδόν μετράει την επιφάνεια.",
-    explainEn:
-      "Mixes up the area formula with the perimeter formula. Needs a visual reminder of the difference: perimeter measures the 'way around,' area measures the surface.",
+    explainEl: "Μπερδεύει τον τύπο του εμβαδού με τον τύπο της περιμέτρου. Χρειάζεται οπτικοποίηση της διαφοράς: η περίμετρος μετράει το 'γύρω-γύρω', το εμβαδόν μετράει την επιφάνεια.",
+    explainEn: "Mixes up the area formula with the perimeter formula. Needs a visual reminder of the difference: perimeter measures the 'way around,' area measures the surface.",
     recommendedToolIds: ["khanmigo", "photomath"],
     achievementEl: "Ο Μάγος των Μετρήσεων",
     achievementEn: "Wizard of Measurements",
@@ -133,6 +90,91 @@ const GAP_TAGS = {
     positiveMessageEn: "Your imagination sees area everywhere!",
     skillTagEl: "Εμβαδόν & Περίμετρος",
     skillTagEn: "Area & Perimeter",
+  },
+  // ---------- ΝΕΑ GAP TAGS: ΙΣΤΟΡΙΑ, ΓΛΩΣΣΑ, ΦΥΣΙΚΗ ----------
+  "history.athens-sparta-confusion": {
+    id: "history.athens-sparta-confusion",
+    labelEl: "Αθήνα vs Σπάρτη",
+    labelEn: "Athens vs Sparta",
+    explainEl: "Μπερδεύει τα χαρακτηριστικά της Αθηναϊκής Δημοκρατίας με τη Σπαρτιατική Ολιγαρχία. Χρειάζεται οπτική σύγκριση των δύο συστημάτων.",
+    explainEn: "Confuses characteristics of Athenian Democracy with Spartan Oligarchy. Needs visual comparison of the two systems.",
+    recommendedToolIds: ["khanmigo"],
+    achievementEl: "Ο Μικρός Ιστορικός",
+    achievementEn: "The Little Historian",
+    positiveMessageEl: "Η ιστορία ζωντανεύει μέσα από τα μάτια σου!",
+    positiveMessageEn: "History comes alive through your eyes!",
+    skillTagEl: "Αρχαία Ελλάδα",
+    skillTagEn: "Ancient Greece",
+  },
+  "history.byzantine-confusion": {
+    id: "history.byzantine-confusion",
+    labelEl: "Βυζαντινή Αυτοκρατορία",
+    labelEn: "Byzantine Empire",
+    explainEl: "Δυσκολεύεται να συνδέσει τη Βυζαντινή περίοδο με τη συνέχεια της Ρωμαϊκής Αυτοκρατορίας. Χρειάζεται χρονολογική τοποθέτηση.",
+    explainEn: "Struggles to connect the Byzantine period with the continuation of the Roman Empire. Needs chronological placement.",
+    recommendedToolIds: ["khanmigo"],
+    achievementEl: "Ο Βυζαντινός Εξερευνητής",
+    achievementEn: "Byzantine Explorer",
+    positiveMessageEl: "Ανακαλύπτεις τους θησαυρούς του Βυζαντίου!",
+    positiveMessageEn: "You're discovering the treasures of Byzantium!",
+    skillTagEl: "Βυζαντινή Ιστορία",
+    skillTagEn: "Byzantine History",
+  },
+  "grammar.subject-verb-agreement": {
+    id: "grammar.subject-verb-agreement",
+    labelEl: "Συμφωνία υποκειμένου-ρήματος",
+    labelEn: "Subject-verb agreement",
+    explainEl: "Δυσκολεύεται με τη συμφωνία υποκειμένου και ρήματος, ειδικά σε σύνθετες προτάσεις. Χρειάζεται εξάσκηση στην αναγνώριση του υποκειμένου.",
+    explainEn: "Struggles with subject-verb agreement, especially in complex sentences. Needs practice in identifying the subject.",
+    recommendedToolIds: ["chatgpt"],
+    achievementEl: "Ο Μάστερ της Γραμματικής",
+    achievementEn: "Grammar Master",
+    positiveMessageEl: "Η γλώσσα γίνεται το superpower σου!",
+    positiveMessageEn: "Language becomes your superpower!",
+    skillTagEl: "Γραμματική",
+    skillTagEn: "Grammar",
+  },
+  "grammar.comma-usage": {
+    id: "grammar.comma-usage",
+    labelEl: "Χρήση κομμάτων",
+    labelEn: "Comma usage",
+    explainEl: "Μπερδεύεται με τη χρήση κομμάτων σε απαριθμήσεις, προτάσεις και κλήσεις. Χρειάζεται κανόνες και παραδείγματα.",
+    explainEn: "Confused about comma usage in lists, clauses, and addresses. Needs rules and examples.",
+    recommendedToolIds: ["chatgpt"],
+    achievementEl: "Ο Στιγματίας των Κομμάτων",
+    achievementEn: "Comma Champion",
+    positiveMessageEl: "Κάθε κόμμα σε κάνει καλύτερο συγγραφέα!",
+    positiveMessageEn: "Every comma makes you a better writer!",
+    skillTagEl: "Στίξη",
+    skillTagEn: "Punctuation",
+  },
+  "physics.force-motion-confusion": {
+    id: "physics.force-motion-confusion",
+    labelEl: "Δύναμη και κίνηση",
+    labelEn: "Force and motion",
+    explainEl: "Πιστεύει ότι χρειάζεται συνεχής δύναμη για να διατηρηθεί η κίνηση (Αριστοτελική αντίληψη). Χρειάζεται κατανόηση του 1ου νόμου του Νεύτωνα.",
+    explainEn: "Believes continuous force is needed to maintain motion (Aristotelian view). Needs understanding of Newton's 1st law.",
+    recommendedToolIds: ["wolfram-alpha"],
+    achievementEl: "Ο Μικρός Νεύτωνας",
+    achievementEn: "The Little Newton",
+    positiveMessageEl: "Ανακαλύπτεις τους νόμους της φύσης!",
+    positiveMessageEn: "You're discovering the laws of nature!",
+    skillTagEl: "Φυσική - Δυνάμεις",
+    skillTagEn: "Physics - Forces",
+  },
+  "physics.density-mass-confusion": {
+    id: "physics.density-mass-confusion",
+    labelEl: "Πυκνότητα vs Μάζα",
+    labelEn: "Density vs Mass",
+    explainEl: "Μπερδεύει τη μάζα με την πυκνότητα. Πιστεύει ότι μεγάλο αντικείμενο = μεγάλη πυκνότητα. Χρειάζεται οπτικά παραδείγματα.",
+    explainEn: "Confuses mass with density. Believes big object = high density. Needs visual examples.",
+    recommendedToolIds: ["wolfram-alpha"],
+    achievementEl: "Ο Εξερευνητής της Πυκνότητας",
+    achievementEn: "Density Explorer",
+    positiveMessageEl: "Κατανοείς τα μυστικά της ύλης!",
+    positiveMessageEn: "You understand the secrets of matter!",
+    skillTagEl: "Φυσική - Ιδιότητες",
+    skillTagEn: "Physics - Properties",
   },
 };
 
@@ -145,10 +187,8 @@ const QUIZZES = {
       subjectLabelEn: "Math, 5th Grade",
       titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
       titleEn: "The Learning Compass",
-      introEl:
-        "6 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό. Στο τέλος θα δούμε ακριβώς πού χρειάζεται λίγη παραπάνω εξάσκηση, και ποιο εργαλείο ταιριάζει σε αυτό το σημείο.",
-      introEn:
-        "6 short questions. It's not a test, there's no grade. At the end we'll see exactly where a bit more practice would help, and which tool fits that specific spot.",
+      introEl: "6 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό. Στο τέλος θα δούμε ακριβώς πού χρειάζεται λίγη παραπάνω εξάσκηση, και ποιο εργαλείο ταιριάζει σε αυτό το σημείο.",
+      introEn: "6 short questions. It's not a test, there's no grade. At the end we'll see exactly where a bit more practice would help, and which tool fits that specific spot.",
       questions: [
         {
           id: "q1-fractions-compare",
@@ -212,5 +252,174 @@ const QUIZZES = {
         },
       ],
     },
+    // ---------- ΝΕΟ QUIZ: ΙΣΤΟΡΙΑ ΔΗΜΟΤΙΚΟΥ ----------
+    "history-st-dimotikou": {
+      id: "history-st-dimotikou",
+      subjectLabelEl: "Ιστορία, Ε' Δημοτικού",
+      subjectLabelEn: "History, 5th Grade",
+      titleEl: "Ο Διαγνωστικός Χάρτης Ιστορίας",
+      titleEn: "The History Learning Compass",
+      introEl: "5 σύντομες ερωτήσεις για την Αρχαία Ελλάδα. Δεν είναι διαγώνισμα, δεν έχει βαθμό. Στο τέλος θα δούμε πού χρειάζεται λίγη παραπάνω μελέτη.",
+      introEn: "5 short questions about Ancient Greece. It's not a test, there's no grade. At the end we'll see where a bit more study would help.",
+      questions: [
+        {
+          id: "q1-athens-sparta",
+          textEl: "Ποια ήταν η κύρια διαφορά μεταξύ Αθήνας και Σπάρτης;",
+          textEn: "What was the main difference between Athens and Sparta?",
+          options: [
+            { textEl: "Η Αθήνα ήταν δημοκρατία, η Σπάρτη ολιγαρχία", textEn: "Athens was a democracy, Sparta an oligarchy", isCorrect: true },
+            { textEl: "Η Αθήνα είχε πιο ισχυρό στρατό", textEn: "Athens had a stronger army", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+            { textEl: "Δεν υπήρχε διαφορά", textEn: "There was no difference", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+          ],
+        },
+        {
+          id: "q2-democracy",
+          textEl: "Τι σημαίνει η λέξη 'δημοκρατία';",
+          textEn: "What does the word 'democracy' mean?",
+          options: [
+            { textEl: "Δύναμη του λαού", textEn: "Power of the people", isCorrect: true },
+            { textEl: "Δύναμη των στρατιωτών", textEn: "Power of the soldiers", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+            { textEl: "Δύναμη των θεών", textEn: "Power of the gods", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+          ],
+        },
+        {
+          id: "q3-byzantine",
+          textEl: "Ποια ήταν η πρωτεύουσα της Βυζαντινής Αυτοκρατορίας;",
+          textEn: "What was the capital of the Byzantine Empire?",
+          options: [
+            { textEl: "Κωνσταντινούπολη", textEn: "Constantinople", isCorrect: true },
+            { textEl: "Αθήνα", textEn: "Athens", isCorrect: false, gapTag: "history.byzantine-confusion" },
+            { textEl: "Ρώμη", textEn: "Rome", isCorrect: false, gapTag: "history.byzantine-confusion" },
+          ],
+        },
+        {
+          id: "q4-olympics",
+          textEl: "Πού διεξάγονταν οι Αρχαίοι Ολυμπιακοί Αγώνες;",
+          textEn: "Where were the Ancient Olympic Games held?",
+          options: [
+            { textEl: "Ολυμπία", textEn: "Olympia", isCorrect: true },
+            { textEl: "Αθήνα", textEn: "Athens", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+            { textEl: "Δελφοί", textEn: "Delphi", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+          ],
+        },
+        {
+          id: "q5-philosophers",
+          textEl: "Ποιος ήταν ο δάσκαλος του Αριστοτέλη;",
+          textEn: "Who was Aristotle's teacher?",
+          options: [
+            { textEl: "Πλάτων", textEn: "Plato", isCorrect: true },
+            { textEl: "Σωκράτης", textEn: "Socrates", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+            { textEl: "Πυθαγόρας", textEn: "Pythagoras", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
+          ],
+        },
+      ],
+    },
   },
+  middle: {
+    // ---------- ΝΕΟ QUIZ: ΝΕΟΕΛΛΗΝΙΚΗ ΓΛΩΣΣΑ ΓΥΜΝΑΣΙΟΥ ----------
+    "glossa-gymnasiou": {
+      id: "glossa-gymnasiou",
+      subjectLabelEl: "Νεοελληνική Γλώσσα, Γ' Γυμνασίου",
+      subjectLabelEn: "Modern Greek Language, 3rd Grade Middle School",
+      titleEl: "Ο Διαγνωστικός Χάρτης Γραμματικής",
+      titleEn: "The Grammar Learning Compass",
+      introEl: "4 σύντομες ερωτήσεις για γραμματική και στίξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      introEn: "4 short questions about grammar and punctuation. It's not a test, there's no grade.",
+      questions: [
+        {
+          id: "q1-subject-verb",
+          textEl: "Ποια πρόταση είναι σωστή;",
+          textEn: "Which sentence is correct?",
+          options: [
+            { textEl: "Οι μαθητές διαβάζουν τα βιβλία τους.", textEn: "The students read their books.", isCorrect: true },
+            { textEl: "Οι μαθητές διαβάζει τα βιβλία τους.", textEn: "The students reads their books.", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
+            { textEl: "Οι μαθητές διαβάζουν το βιβλίο τους.", textEn: "The students read their book.", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
+          ],
+        },
+        {
+          id: "q2-comma-list",
+          textEl: "Πού χρειάζεται κόμμα; 'Αγόρασα μήλα πορτοκάλια μπανάνες και αχλάδια.'",
+          textEn: "Where are commas needed? 'I bought apples oranges bananas and pears.'",
+          options: [
+            { textEl: "Αγόρασα μήλα, πορτοκάλια, μπανάνες και αχλάδια.", textEn: "I bought apples, oranges, bananas, and pears.", isCorrect: true },
+            { textEl: "Αγόρασα μήλα πορτοκάλια, μπανάνες και αχλάδια.", textEn: "I bought apples oranges, bananas and pears.", isCorrect: false, gapTag: "grammar.comma-usage" },
+            { textEl: "Δεν χρειάζεται κόμμα.", textEn: "No commas needed.", isCorrect: false, gapTag: "grammar.comma-usage" },
+          ],
+        },
+        {
+          id: "q3-comma-clause",
+          textEl: "Ποια πρόταση είναι σωστά γραμμένη;",
+          textEn: "Which sentence is correctly written?",
+          options: [
+            { textEl: "Όταν βρέχει, μένουμε σπίτι.", textEn: "When it rains, we stay home.", isCorrect: true },
+            { textEl: "Όταν βρέχει μένουμε σπίτι.", textEn: "When it rains we stay home.", isCorrect: false, gapTag: "grammar.comma-usage" },
+            { textEl: "Όταν, βρέχει μένουμε σπίτι.", textEn: "When, it rains we stay home.", isCorrect: false, gapTag: "grammar.comma-usage" },
+          ],
+        },
+        {
+          id: "q4-subject-complex",
+          textEl: "Ποιο είναι το υποκείμενο; 'Ο δάσκαλος με τους μαθητές πήγαν εκδρομή.'",
+          textEn: "What is the subject? 'The teacher with the students went on a trip.'",
+          options: [
+            { textEl: "Ο δάσκαλος με τους μαθητές", textEn: "The teacher with the students", isCorrect: true },
+            { textEl: "Ο δάσκαλος", textEn: "The teacher", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
+            { textEl: "Οι μαθητές", textEn: "The students", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
+          ],
+        },
+      ],
+    },
+    // ---------- ΝΕΟ QUIZ: ΦΥΣΙΚΗ ΓΥΜΝΑΣΙΟΥ ----------
+    "physics-gymnasiou": {
+      id: "physics-gymnasiou",
+      subjectLabelEl: "Φυσική, Β' Γυμνασίου",
+      subjectLabelEn: "Physics, 2nd Grade Middle School",
+      titleEl: "Ο Διαγνωστικός Χάρτης Φυσικής",
+      titleEn: "The Physics Learning Compass",
+      introEl: "4 σύντομες ερωτήσεις για δυνάμεις και κίνηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      introEn: "4 short questions about forces and motion. It's not a test, there's no grade.",
+      questions: [
+        {
+          id: "q1-newton-first",
+          textEl: "Τι συμβαίνει σε ένα αντικείμενο που κινείται αν δεν ασκηθεί δύναμη πάνω του;",
+          textEn: "What happens to a moving object if no force is applied to it?",
+          options: [
+            { textEl: "Συνεχίζει να κινείται με την ίδια ταχύτητα", textEn: "It continues moving at the same speed", isCorrect: true },
+            { textEl: "Σταματάει αμέσως", textEn: "It stops immediately", isCorrect: false, gapTag: "physics.force-motion-confusion" },
+            { textEl: "Επιβραδύνεται σταδιακά", textEn: "It gradually slows down", isCorrect: false, gapTag: "physics.force-motion-confusion" },
+          ],
+        },
+        {
+          id: "q2-density",
+          textEl: "Ποιο αντικείμενο έχει μεγαλύτερη πυκνότητα;",
+          textEn: "Which object has higher density?",
+          options: [
+            { textEl: "Ένα μικρό σιδερένιο καρφί", textEn: "A small iron nail", isCorrect: true },
+            { textEl: "Ένα μεγάλο ξύλινο κουτί", textEn: "A large wooden box", isCorrect: false, gapTag: "physics.density-mass-confusion" },
+            { textEl: "Έχουν την ίδια πυκνότητα", textEn: "They have the same density", isCorrect: false, gapTag: "physics.density-mass-confusion" },
+          ],
+        },
+        {
+          id: "q3-force-unit",
+          textEl: "Ποια είναι η μονάδα μέτρησης της δύναμης;",
+          textEn: "What is the unit of measurement for force?",
+          options: [
+            { textEl: "Newton (N)", textEn: "Newton (N)", isCorrect: true },
+            { textEl: "Kilogram (kg)", textEn: "Kilogram (kg)", isCorrect: false, gapTag: "physics.force-motion-confusion" },
+            { textEl: "Meter (m)", textEn: "Meter (m)", isCorrect: false, gapTag: "physics.force-motion-confusion" },
+          ],
+        },
+        {
+          id: "q4-density-formula",
+          textEl: "Πώς υπολογίζεται η πυκνότητα;",
+          textEn: "How is density calculated?",
+          options: [
+            { textEl: "Μάζα ÷ Όγκος", textEn: "Mass ÷ Volume", isCorrect: true },
+            { textEl: "Όγκος ÷ Μάζα", textEn: "Volume ÷ Mass", isCorrect: false, gapTag: "physics.density-mass-confusion" },
+            { textEl: "Μάζα × Όγκος", textEn: "Mass × Volume", isCorrect: false, gapTag: "physics.density-mass-confusion" },
+          ],
+        },
+      ],
+    },
+  },
+  high: {},
 };

@@ -4,106 +4,136 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Tools for Family, Kids & Students</title>
+  <meta name="description" content="Ανεξάρτητο, δωρεάν, δίγλωσσο εργαλείο που βοηθά γονείς, μαθητές και εκπαιδευτικούς να βρουν ποια AI εργαλεία είναι κατάλληλα ανά ηλικία." />
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/4.2.2/html2pdf.bundle.min.js" defer></script>
-  <script src="data.js" defer></script>
-  <script src="quiz-data.js" defer></script>
-  <script src="guide-data.js" defer></script>
-  <script src="app.js" defer></script>
+  <!-- html2pdf για πραγματικό PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+
   <header class="site-header">
     <div class="site-header__inner">
-      <div class="site-header__brand">🤖 AI Tools for Family, Kids & Students</div>
-      <div class="lang-switcher">
-        <button id="langEl" type="button" class="lang-btn active">ΕΛ</button>
-        <button id="langEn" type="button" class="lang-btn">EN</button>
+      <p class="site-title">
+        <span aria-hidden="true">🤖</span>
+        <span id="siteTitleText">AI Tools for Family, Kids &amp; Students</span>
+      </p>
+      <div class="lang-toggle" role="group" aria-label="Language switch">
+        <button type="button" id="langEl" class="active" data-lang="el">ΕΛ</button>
+        <button type="button" id="langEn" data-lang="en">EN</button>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- Zone selection view -->
-    <section id="zoneSelectView" class="view">
+  <main class="container">
+
+    <!-- ΒΗΜΑ 1: Επιλογή ζώνης -->
+    <section id="zoneSelectView">
+
       <div class="hero">
-        <h1 data-i18n="heroTitle">Ποιο AI εργαλείο ταιριάζει στο παιδί σου και για ποια δουλειά</h1>
-        <p data-i18n="heroSubtitle">
+        <h1 class="hero__title" data-i18n="heroTitle">
+          Ποιο AI εργαλείο ταιριάζει στο παιδί σου και για ποια δουλειά
+        </h1>
+        <p class="hero__subtitle" data-i18n="heroSubtitle">
           Δεν είναι ακόμα ένας οδηγός ασφάλειας. Δείχνουμε ποιο συγκεκριμένο εργαλείο
           ταιριάζει σε ποια σχολική δουλειά, ανά ηλικία, για γονείς, μαθητές 6 έως 18
           και εκπαιδευτικούς.
         </p>
-        <div class="hero-badges">
-          <span class="badge" data-i18n="badgeFree">Δωρεάν</span>
-          <span class="badge" data-i18n="badgeIndependent">Ανεξάρτητο</span>
-          <span class="badge" data-i18n="badgeBilingual">Δίγλωσσο EL / EN</span>
+        <div class="hero__badges">
+          <span class="badge badge--success" data-i18n="badgeFree">Δωρεάν</span>
+          <span class="badge badge--accent" data-i18n="badgeIndependent">Ανεξάρτητο</span>
+          <span class="badge badge--pro" data-i18n="badgeBilingual">Δίγλωσσο EL / EN</span>
         </div>
       </div>
 
-      <div class="zone-section">
-        <h2 data-i18n="chooseZoneHeading">Διάλεξε ηλικιακή ζώνη</h2>
-        <p class="zone-section__sub" data-i18n="chooseZoneSubheading">
-          Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.
-        </p>
-        <div id="zoneGrid" class="zone-grid"></div>
+      <h2 class="section-heading" data-i18n="chooseZoneHeading">Διάλεξε ηλικιακή ζώνη</h2>
+      <p class="section-subheading" data-i18n="chooseZoneSubheading">
+        Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.
+      </p>
+      <div class="zone-grid" id="zoneGrid">
+        <!-- Γεμίζει δυναμικά από το app.js με βάση το ZONES -->
       </div>
     </section>
 
-    <!-- Path view (after zone selected) -->
-    <section id="pathView" class="view" hidden>
-      <div class="path-header">
-        <button id="backToZones" type="button" class="back-btn">
-          ← <span data-i18n="backToZones">Πίσω σε όλες τις ζώνες</span>
-        </button>
-        <h2 id="pathZoneHeading"></h2>
+    <!-- ΒΗΜΑ 2: Ζώνη επιλεγμένη -> επιλογή ρόλου + λίστα εργαλείων -->
+    <section id="pathView" hidden>
+      <p class="breadcrumb">
+        <button type="button" id="backToZones" data-i18n="backToZones">Πίσω σε όλες τις ζώνες</button>
+      </p>
+
+      <h1 class="section-heading" id="pathZoneHeading"></h1>
+
+      <div class="role-tabs" id="roleTabs" role="tablist">
+        <!-- Γεμίζει δυναμικά από το app.js με βάση το ROLES -->
       </div>
 
-      <div id="roleTabs" class="role-tabs" role="tablist"></div>
-
-      <div class="view-tabs">
-        <button id="viewTabTools" type="button" class="view-tab active" data-i18n="viewTabTools">Εργαλεία</button>
-        <button id="viewTabAdvanced" type="button" class="view-tab" data-i18n="viewTabAdvanced">Προχωρημένα</button>
-        <button id="viewTabPrompts" type="button" class="view-tab" data-i18n="viewTabPrompts">Prompt Generator</button>
-        <button id="viewTabQuiz" type="button" class="view-tab" data-i18n="viewTabQuiz">Διαγνωστικός Χάρτης</button>
-        <button id="viewTabGuide" type="button" class="view-tab" data-i18n="viewTabGuide">Οδηγός</button>
+      <div class="view-tabs" id="viewTabs" role="tablist">
+        <button type="button" class="view-tab active" id="viewTabTools" data-view="tools" data-i18n="viewTabTools">Εργαλεία</button>
+        <button type="button" class="view-tab" id="viewTabAdvanced" data-view="advanced" data-i18n="viewTabAdvanced">Προχωρημένα</button>
+        <button type="button" class="view-tab" id="viewTabPrompts" data-view="prompts" data-i18n="viewTabPrompts">Prompt Generator</button>
+        <button type="button" class="view-tab" id="viewTabQuiz" data-view="quiz" data-i18n="viewTabQuiz">Διαγνωστικός Χάρτης</button>
+        <button type="button" class="view-tab" id="viewTabGuide" data-view="guide" data-i18n="viewTabGuide">Οδηγός</button>
       </div>
 
-      <div id="toolsView" class="subview">
-        <p id="pathIntro" class="path-intro"></p>
-        <div id="toolGrid" class="tool-grid"></div>
+      <!-- Υπο-όψη: Λίστα εργαλείων -->
+      <div id="toolsView">
+        <div class="path-intro" id="pathIntro"></div>
+        <div class="tool-grid" id="toolGrid">
+          <!-- Γεμίζει δυναμικά από το app.js -->
+        </div>
       </div>
 
-      <div id="advancedView" class="subview" hidden>
-        <p class="path-intro" data-i18n="advancedIntro">
+      <!-- Υπο-όψη: Προχωρημένα εργαλεία (εξειδικευμένα) -->
+      <div id="advancedView" hidden>
+        <div class="path-intro" data-i18n="advancedIntro">
           Εργαλεία που δεν είναι διάσημα αλλά λύνουν συγκεκριμένες δύσκολες ανάγκες.
-        </p>
-        <div id="advancedGrid" class="tool-grid"></div>
+        </div>
+        <div class="tool-grid" id="advancedGrid">
+          <!-- Γεμίζει δυναμικά από το app.js -->
+        </div>
       </div>
 
-      <div id="promptsView" class="subview" hidden>
-        <p class="path-intro" data-i18n="promptsIntro">
+      <!-- Υπο-όψη: Prompt Generator -->
+      <div id="promptsView" hidden>
+        <div class="path-intro" data-i18n="promptsIntro">
           Αυτά τα prompts δεν γράφουν την εργασία για εσένα. Σε ρωτάνε πρώτα τι σκέφτεσαι,
           και το AI απαντάει πάνω σε αυτό. Γράψε τη δική σου σκέψη μέσα στις αγκύλες πριν το αντιγράψεις.
-        </p>
-        <div id="promptList" class="prompt-list"></div>
+        </div>
+        <div class="prompt-list" id="promptList">
+          <!-- Γεμίζει δυναμικά από το app.js -->
+        </div>
       </div>
 
-      <div id="quizView" class="subview" hidden>
-        <div id="quizContent" class="quiz-content"></div>
+      <!-- Υπο-όψη: Learning Compass (Διαγνωστικός Χάρτης Μάθησης) -->
+      <div id="quizView" hidden>
+        <div class="quiz-content" id="quizContent">
+          <!-- Γεμίζει δυναμικά από το app.js -->
+        </div>
       </div>
 
-      <div id="guideView" class="subview" hidden>
-        <div id="guideContent" class="guide-content"></div>
+      <!-- Υπο-όψη: Οδηγός (Guide) -->
+      <div id="guideView" hidden>
+        <div class="guide-content" id="guideContent">
+          <!-- Γεμίζει δυναμικά από το app.js -->
+        </div>
       </div>
+
     </section>
+
   </main>
 
   <footer class="site-footer">
-    <p data-i18n="footerText">Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.</p>
-    <p><a href="privacy-policy.html" style="color: #3B82C4; text-decoration: none;">🔒 Πολιτική Απορρήτου</a></p>
-    <p>
+    <p data-i18n="footerText">
+      Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.
+    </p>
+    <p class="site-footer__credit">
       Φτιαγμένο από τον Κωνσταντίνο Κούστα.
-      <a href="https://www.linkedin.com/in/kostaskoustas" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/kostaskoustas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </p>
   </footer>
+
+  <script src="data.js"></script>
+  <script src="quiz-data.js"></script>
+  <script src="guide-data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

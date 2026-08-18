@@ -897,3 +897,23 @@ main {
   vertical-align: middle;
 }
 }
+.tool-card__logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.tool-card__logo-placeholder {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-accent, #3B82C4), var(--color-accent-secondary, #4CAF7D));
+  border-radius: 8px;
+}
+
+.tool-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}

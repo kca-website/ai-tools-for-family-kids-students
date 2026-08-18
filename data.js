@@ -92,6 +92,7 @@ const TOOLS = {
     shortDescEn: "Pilot AI program in Greek schools. Personalized support across all subjects.",
     isGreek: true,
     greekSource: "Υπουργείο Παιδείας",
+    linkTypeInfo: true,
   },
   "magicschool": {
     id: "magicschool",

@@ -27,9 +27,9 @@ const SUBJECTS = [
 const CURRICULUM = {
   primary: {
     language: {
-      toolIds: ["khanmigo", "imaginarium"],
-      noteEl: "Κατανόηση κειμένου με καθοδηγητικές ερωτήσεις, δημιουργία ιστοριών.",
-      noteEn: "Reading comprehension through guided questions, story creation.",
+      toolIds: ["khanmigo", "autodraw"],
+      noteEl: "Κατανόηση κειμένου με καθοδηγητικές ερωτήσεις, οπτικοποίηση ιστοριών με ζωγραφική.",
+      noteEn: "Reading comprehension through guided questions, visualizing stories through drawing.",
     },
     math: {
       toolIds: ["khanmigo", "photomath"],
@@ -42,9 +42,9 @@ const CURRICULUM = {
       noteEn: "Simple science concept explanations through questions, not ready answers.",
     },
     history: {
-      toolIds: ["imaginarium"],
-      noteEl: "Δημιουργική αφήγηση γύρω από ιστορικά ή μυθολογικά θέματα.",
-      noteEn: "Creative storytelling around historical or mythological topics.",
+      toolIds: ["khanmigo"],
+      noteEl: "Απλή εξήγηση ιστορικών γεγονότων με καθοδηγητικές ερωτήσεις.",
+      noteEn: "Simple explanation of historical events through guided questions.",
     },
     "foreign-language": {
       toolIds: ["duolingo"],

@@ -265,12 +265,13 @@ function renderToolGrid(pathTools, targetElement) {
     const caution = state.lang === "el" ? entry.cautionEl : entry.cautionEn;
 
     // Δημιουργία logo HTML
+    // Χρησιμοποιούμε favicon από το domain του εργαλείου (Google favicon service).
+    // Αν αποτύχει να φορτώσει, το onerror πέφτει πίσω στο gradient placeholder.
     let logoHtml = '';
-    if (tool.logo) {
-      // Αν υπάρχει URL, βάλε εικόνα
-      logoHtml = `<img class="tool-card__logo-img" src="${escapeAttr(tool.logo)}" alt="${escapeHtml(tool.name)} logo" />`;
+    const faviconUrl = getFaviconUrl(tool);
+    if (faviconUrl) {
+      logoHtml = `<img class="tool-card__logo-img" src="${escapeAttr(faviconUrl)}" alt="${escapeHtml(tool.name)} logo" loading="lazy" onerror="this.onerror=null; this.outerHTML='&lt;div class=&quot;tool-card__logo-placeholder&quot;&gt;&lt;/div&gt;';" />`;
     } else {
-      // Αλλιώς βάλε το placeholder
       logoHtml = `<div class="tool-card__logo-placeholder"></div>`;
     }
 
@@ -709,6 +710,18 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   // ---------- Helpers ----------
+  function getFaviconUrl(tool) {
+    // Αν υπάρχει χειροκίνητα ορισμένο logo, αυτό έχει προτεραιότητα.
+    if (tool.logo) return tool.logo;
+    if (!tool.url) return null;
+    try {
+      const domain = new URL(tool.url).hostname;
+      return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+    } catch (err) {
+      return null;
+    }
+  }
+
   function escapeHtml(str) {
     if (!str) return "";
     const div = document.createElement("div");

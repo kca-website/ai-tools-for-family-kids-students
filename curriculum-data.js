@@ -83,7 +83,7 @@ const CURRICULUM = {
 
   high: {
     language: {
-      toolIds: ["chatgpt", "talos"],
+      toolIds: ["chatgpt", "grammarly"],
       noteEl: "Ανάπτυξη και έλεγχος επιχειρημάτων για έκθεση, προετοιμασία Πανελληνίων.",
       noteEn: "Developing and stress-testing essay arguments, Panhellenic exam prep.",
     },
@@ -103,7 +103,7 @@ const CURRICULUM = {
       noteEn: "Forming a research question, understanding AI ethical dilemmas.",
     },
     "foreign-language": {
-      toolIds: ["talos"],
+      toolIds: ["grammarly"],
       noteEl: "Υποστήριξη στη συγγραφή επιστημονικών/ακαδημαϊκών κειμένων.",
       noteEn: "Support for writing scientific/academic texts.",
     },

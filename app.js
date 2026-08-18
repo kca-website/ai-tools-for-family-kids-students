@@ -53,6 +53,7 @@
       howToLabel: "Πώς να το χρησιμοποιήσεις",
       cautionLabel: "Προσοχή",
       visitLink: "Άνοιγμα εργαλείου ↗",
+      infoLink: "Περισσότερα ↗",
       viewTabTools: "Εργαλεία",
       viewTabAdvanced: "Προχωρημένα",
       viewTabPrompts: "Prompt Generator",
@@ -112,6 +113,7 @@
       howToLabel: "How to use it",
       cautionLabel: "Caution",
       visitLink: "Open tool ↗",
+      infoLink: "Learn more ↗",
       viewTabTools: "Tools",
       viewTabAdvanced: "Advanced",
       viewTabPrompts: "Prompt Generator",
@@ -498,7 +500,7 @@ function renderToolGrid(pathTools, targetElement) {
       ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}
       ${howTo ? `<p class="tool-card__field-label">${t("howToLabel")}</p><p class="tool-card__field-value">${escapeHtml(howTo)}</p>` : ""}
       ${caution ? `<div class="tool-card__caution"><strong>${t("cautionLabel")}:</strong> ${escapeHtml(caution)}</div>` : ""}
-      ${tool.url ? `<a class="tool-card__link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${t("visitLink")}</a>` : ""}
+      ${tool.url ? `<a class="tool-card__link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${t(tool.linkTypeInfo ? "infoLink" : "visitLink")}</a>` : ""}
     `;
     targetElement.appendChild(card);
   });

@@ -161,7 +161,99 @@ const GUIDE_DATA = {
           <p><strong>Replace with:</strong> "Help me to", "How can I", "What's missing from", "Where am I wrong".</p>
         `
       },
-      // ... (τα υπόλοιπα μέρη στα Αγγλικά, αντίστοιχα)
+      {
+        id: "part2",
+        title: "Part 2️⃣: The Pipeline – From idea to submission",
+        content: `
+          <p>A 6-step process for any school assignment, with the right tool for each step:</p>
+          <div class="guide-table-wrapper">
+            <table class="guide-table">
+              <thead><tr><th>Step</th><th>What you do</th><th>Suggested tool</th></tr></thead>
+              <tbody>
+                <tr><td>1. Understanding</td><td>Read the prompt 3 times. Write in your own words what it's asking.</td><td>ChatGPT / Gemini (explanation)</td></tr>
+                <tr><td>2. Ideas</td><td>Brainstorm. Write down whatever comes to mind, no filter.</td><td>Miro AI / Xmind</td></tr>
+                <tr><td>3. Research</td><td>Find information from 3 different sources.</td><td>Perplexity / Elicit</td></tr>
+                <tr><td>4. Structure</td><td>Organize your ideas into an outline (intro, main points, conclusion).</td><td>Notion AI / Obsidian</td></tr>
+                <tr><td>5. Composition</td><td>Write it yourself. AI only for questions.</td><td>—</td></tr>
+                <tr><td>6. Review</td><td>Read it out loud. Check spelling, flow, logic.</td><td>Grammarly / Hemingway</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      {
+        id: "part3",
+        title: "Part 3️⃣: How to evaluate AI answers – The 'slop' of education",
+        content: `
+          <p>Just like Magnific reveals "slop" in images, here we reveal <strong>"slop" in education</strong>.</p>
+          <div class="guide-table-wrapper">
+            <table class="guide-table">
+              <thead><tr><th>What you see</th><th>What it means</th><th>How to fix it</th></tr></thead>
+              <tbody>
+                <tr><td>Generalities with no examples</td><td>AI doesn't actually know the topic</td><td>Ask for specific examples</td></tr>
+                <tr><td>The language is overly formal</td><td>AI is writing "academically" with no real substance</td><td>Ask it to say it simply, like explaining to a friend</td></tr>
+                <tr><td>It keeps repeating itself</td><td>AI has no real depth here</td><td>Ask for different angles or perspectives</td></tr>
+                <tr><td>No sources given</td><td>AI is making things up</td><td>Ask it to cite sources or explain how it knows</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>🚫 Banned phrases that signal AI slop:</h4>
+          <ul>
+            <li>"It is important to..."</li>
+            <li>"As is well known..."</li>
+            <li>"In today's modern world..."</li>
+            <li>"Undoubtedly..."</li>
+          </ul>
+        `
+      },
+      {
+        id: "part4",
+        title: "Part 4️⃣: Official IEP (Greek Institute of Educational Policy) sources",
+        content: `
+          <p>The Institute of Educational Policy (ΙΕΠ) runs free, public platforms that can complement the use of AI tools. No account is needed to explore them.</p>
+          <div class="guide-table-wrapper">
+            <table class="guide-table">
+              <thead><tr><th>Platform</th><th>What it offers</th><th>Link</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Aesop</td>
+                  <td>Hundreds of scientifically and pedagogically certified digital teaching scenarios, by grade level and subject.</td>
+                  <td><a href="https://aesop.iep.edu.gr" target="_blank" rel="noopener">aesop.iep.edu.gr ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Graded Difficulty Question Bank</td>
+                  <td>Search past high-school exam questions by subject, with indicative answers.</td>
+                  <td><a href="https://trapeza.iep.edu.gr" target="_blank" rel="noopener">trapeza.iep.edu.gr ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Note:</strong> This tool is not affiliated with ΙΕΠ nor an official partner. The links above are shared as useful, publicly available resources.</p>
+        `
+      },
+      {
+        id: "part5",
+        title: "Part 5️⃣: Cheat Sheet – Everything on one page",
+        content: `
+          <div class="guide-table-wrapper">
+            <table class="guide-table">
+              <thead><tr><th>Subject</th><th>Useful prompt</th><th>Banned phrase</th></tr></thead>
+              <tbody>
+                <tr><td>Essay</td><td>"Help me organize my ideas about..."</td><td>"Write my essay for me"</td></tr>
+                <tr><td>Math</td><td>"Where did I go wrong in this exercise?"</td><td>"Solve this exercise for me"</td></tr>
+                <tr><td>History</td><td>"What's the most common misconception about..."</td><td>"Tell me everything about..."</td></tr>
+                <tr><td>Physics</td><td>"Explain this concept to me like I'm 10"</td><td>"Give me the formula"</td></tr>
+                <tr><td>Foreign languages</td><td>"Correct my text but explain every change"</td><td>"Translate this for me"</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="guide-principle">
+            <p><strong>The golden rule:</strong> AI is a thinking tool, not a replacement tool. The more you write yourself, the more you learn. AI is your conversation partner, not your author.</p>
+          </div>
+          <p><strong>Share it!</strong> This guide is free for everyone. Save it, share it, help others learn how to use AI the right way.</p>
+          <button id="pdfDownloadBtn" class="guide-download-btn">📄 Download the guide as PDF</button>
+        `
+      }
     ]
   }
 };

@@ -704,10 +704,8 @@ const PROMPTS = {
       subjectEn: "Language, Reading",
       taskTypeEl: "Κατανόηση κειμένου",
       taskTypeEn: "Reading comprehension",
-      promptTextEl:
-        "Διάβασα αυτό το κείμενο και νομίζω ότι μιλάει για [γράψε με δικά σου λόγια τι κατάλαβες, έστω και λίγες προτάσεις]. Ρώτησέ με μία ερώτηση για να δεις αν το κατάλαβα σωστά. Μην μου πεις εσύ την περίληψη.",
-      promptTextEn:
-        "I read this text and I think it's about [write in your own words what you understood, even a couple of sentences]. Ask me one question to check if I understood it correctly. Don't tell me the summary yourself.",
+      promptTextEl: "Διάβασα αυτό το κείμενο και νομίζω ότι μιλάει για [γράψε με δικά σου λόγια τι κατάλαβες, έστω και λίγες προτάσεις]. Ρώτησέ με μία ερώτηση για να δεις αν το κατάλαβα σωστά. Μην μου πεις εσύ την περίληψη.",
+      promptTextEn: "I read this text and I think it's about [write in your own words what you understood, even a couple of sentences]. Ask me one question to check if I understood it correctly. Don't tell me the summary yourself.",
       tipEl: "Γράψε πρώτα ό,τι θυμάσαι, χωρίς να ξαναδιαβάσεις. Μετά ρώτα.",
       tipEn: "Write down what you remember first, without rereading. Then ask.",
     },
@@ -717,15 +715,24 @@ const PROMPTS = {
       subjectEn: "Math",
       taskTypeEl: "Έλεγχος άσκησης",
       taskTypeEn: "Checking an exercise",
-      promptTextEl:
-        "Έλυσα αυτή την άσκηση και βρήκα ότι [γράψε τη λύση σου]. Πες μου μόνο αν είναι σωστό ή λάθος. Αν είναι λάθος, μη μου δώσεις τη σωστή λύση, ρώτησέ με πού νομίζεις ότι έκανα λάθος.",
-      promptTextEn:
-        "I solved this exercise and got [write your solution]. Just tell me if it's right or wrong. If it's wrong, don't give me the correct solution, ask me where I think I made the mistake.",
+      promptTextEl: "Έλυσα αυτή την άσκηση και βρήκα ότι [γράψε τη λύση σου]. Πες μου μόνο αν είναι σωστό ή λάθος. Αν είναι λάθος, μη μου δώσεις τη σωστή λύση, ρώτησέ με πού νομίζεις ότι έκανα λάθος.",
+      promptTextEn: "I solved this exercise and got [write your solution]. Just tell me if it's right or wrong. If it's wrong, don't give me the correct solution, ask me where I think I made the mistake.",
       tipEl: "Λύσε πρώτα μόνος σου με το χέρι, μετά έλεγξε.",
       tipEn: "Solve it yourself by hand first, then check.",
     },
+    // ---------- ΝΕΟ: ΙΣΤΟΡΙΑ ----------
+    {
+      id: "primary-history-story",
+      subjectEl: "Ιστορία",
+      subjectEn: "History",
+      taskTypeEl: "Δημιουργική γραφή",
+      taskTypeEn: "Creative writing",
+      promptTextEl: "Φαντάζομαι ότι είμαι ένας μαθητής στην Αρχαία Αθήνα την εποχή του Περικλή. Έγραψα αυτές τις 3 προτάσεις για τη ζωή μου: [γράψε 3 προτάσεις]. Ρώτησέ με τι άλλο θα ήθελα να μάθω για την καθημερινή ζωή στην Αθήνα, χωρίς να μου δώσεις εσύ πληροφορίες.",
+      promptTextEn: "I imagine I'm a student in Ancient Athens during Pericles' time. I wrote these 3 sentences about my life: [write 3 sentences]. Ask me what else I'd like to learn about daily life in Athens, without giving me information yourself.",
+      tipEl: "Σκέψου τι θα έκανες από το πρωί μέχρι το βράδυ.",
+      tipEn: "Think about what you'd do from morning to night.",
+    },
   ],
-
   middle: [
     {
       id: "middle-essay-structure",
@@ -733,10 +740,8 @@ const PROMPTS = {
       subjectEn: "Modern Greek Language",
       taskTypeEl: "Έκθεση",
       taskTypeEn: "Essay",
-      promptTextEl:
-        "Γράφω έκθεση με θέμα [γράψε το θέμα σου]. Η δική μου θέση είναι ότι [γράψε με λίγα λόγια τι πιστεύεις εσύ πάνω στο θέμα]. Κάνε μου 3 ερωτήσεις που θα με βοηθήσουν να αναπτύξω αυτή τη θέση με δικά μου επιχειρήματα. Μη γράψεις εσύ την έκθεση ή παραγράφους έτοιμες προς χρήση.",
-      promptTextEn:
-        "I'm writing an essay on [write your topic]. My own position is that [write in a few words what you think about it]. Ask me 3 questions that will help me develop this position with my own arguments. Don't write the essay yourself or ready to use paragraphs.",
+      promptTextEl: "Γράφω έκθεση με θέμα [γράψε το θέμα σου]. Η δική μου θέση είναι ότι [γράψε με λίγα λόγια τι πιστεύεις εσύ πάνω στο θέμα]. Κάνε μου 3 ερωτήσεις που θα με βοηθήσουν να αναπτύξω αυτή τη θέση με δικά μου επιχειρήματα. Μη γράψεις εσύ την έκθεση ή παραγράφους έτοιμες προς χρήση.",
+      promptTextEn: "I'm writing an essay on [write your topic]. My own position is that [write in a few words what you think about it]. Ask me 3 questions that will help me develop this position with my own arguments. Don't write the essay yourself or ready to use paragraphs.",
       tipEl: "Ξεκίνα πάντα από τη δική σου θέση, ακόμα κι αν δεν είσαι σίγουρος.",
       tipEn: "Always start from your own position, even if you're not sure.",
     },
@@ -746,10 +751,8 @@ const PROMPTS = {
       subjectEn: "History",
       taskTypeEl: "Παρουσίαση",
       taskTypeEn: "Presentation",
-      promptTextEl:
-        "Κάνω παρουσίαση για [γράψε το θέμα]. Έχω ήδη σκεφτεί αυτά τα σημεία: [γράψε 2 με 3 πράγματα που ήδη ξέρεις ή θυμάσαι]. Ρώτησέ με τι άλλο νομίζω ότι χρειάζεται η παρουσίαση, χωρίς να μου δώσεις εσύ τα υπόλοιπα σημεία.",
-      promptTextEn:
-        "I'm making a presentation about [write the topic]. I've already thought of these points: [write 2 to 3 things you already know or remember]. Ask me what else I think the presentation needs, without giving me the remaining points yourself.",
+      promptTextEl: "Κάνω παρουσίαση για [γράψε το θέμα]. Έχω ήδη σκεφτεί αυτά τα σημεία: [γράψε 2 με 3 πράγματα που ήδη ξέρεις ή θυμάσαι]. Ρώτησέ με τι άλλο νομίζω ότι χρειάζεται η παρουσίαση, χωρίς να μου δώσεις εσύ τα υπόλοιπα σημεία.",
+      promptTextEn: "I'm making a presentation about [write the topic]. I've already thought of these points: [write 2 to 3 things you already know or remember]. Ask me what else I think the presentation needs, without giving me the remaining points yourself.",
       tipEl: "Φτιάξε πρώτα τη δική σου λίστα σημείων, όσο μικρή κι αν είναι.",
       tipEn: "Make your own list of points first, however small.",
     },
@@ -759,15 +762,35 @@ const PROMPTS = {
       subjectEn: "Physics, Chemistry",
       taskTypeEl: "Κατανόηση έννοιας",
       taskTypeEn: "Understanding a concept",
-      promptTextEl:
-        "Δεν καταλαβαίνω καλά την έννοια [γράψε την έννοια, π.χ. πυκνότητα, ταχύτητα]. Νομίζω ότι σημαίνει [γράψε τη δική σου εξήγηση, έστω κι αν δεν είσαι σίγουρος]. Πες μου τι απ' αυτά είναι σωστό και τι όχι, και εξήγησέ μου με ένα παράδειγμα από την καθημερινή ζωή.",
-      promptTextEn:
-        "I don't fully understand the concept of [write the concept, e.g. density, speed]. I think it means [write your own explanation, even if you're not sure]. Tell me what's right and what's not, and explain it with an everyday example.",
+      promptTextEl: "Δεν καταλαβαίνω καλά την έννοια [γράψε την έννοια, π.χ. πυκνότητα, ταχύτητα]. Νομίζω ότι σημαίνει [γράψε τη δική σου εξήγηση, έστω κι αν δεν είσαι σίγουρος]. Πες μου τι απ' αυτά είναι σωστό και τι όχι, και εξήγησέ μου με ένα παράδειγμα από την καθημερινή ζωή.",
+      promptTextEn: "I don't fully understand the concept of [write the concept, e.g. density, speed]. I think it means [write your own explanation, even if you're not sure]. Tell me what's right and what's not, and explain it with an everyday example.",
       tipEl: "Δοκίμασε πρώτα να το εξηγήσεις με δικά σου λόγια, ακόμα κι αν κάνεις λάθος.",
       tipEn: "Try to explain it in your own words first, even if you get it wrong.",
     },
+    // ---------- ΝΕΑ: ΛΟΓΟΤΕΧΝΙΑ & ΑΡΧΑΙΑ ----------
+    {
+      id: "middle-greek-poetry",
+      subjectEl: "Νεοελληνική Λογοτεχνία",
+      subjectEn: "Modern Greek Literature",
+      taskTypeEl: "Ανάλυση ποιήματος",
+      taskTypeEn: "Poem analysis",
+      promptTextEl: "Διαβάζω το ποίημα '[γράψε τίτλο ποιήματος, π.χ. του Σεφέρη ή Ελύτη]' και νομίζω ότι ο ποιητής μιλάει για [γράψε τη δική σου ερμηνεία σε 2 προτάσεις]. Κάνε μου 2 ερωτήσεις που θα με βοηθήσουν να σκεφτώ βαθύτερα το νόημα, χωρίς να μου δώσεις εσύ την ερμηνεία.",
+      promptTextEn: "I'm reading the poem '[write poem title, e.g. by Seferis or Elytis]' and I think the poet is talking about [write your interpretation in 2 sentences]. Ask me 2 questions that will help me think deeper about the meaning, without giving me the interpretation yourself.",
+      tipEl: "Διάβασε το ποίημα 2 φορές πριν γράψεις τη σκέψη σου.",
+      tipEn: "Read the poem twice before writing your thought.",
+    },
+    {
+      id: "middle-ancient-greek-translation",
+      subjectEl: "Αρχαία Ελληνικά",
+      subjectEn: "Ancient Greek",
+      taskTypeEl: "Κατανόηση κειμένου",
+      taskTypeEn: "Text comprehension",
+      promptTextEl: "Προσπαθώ να μεταφράσω αυτή την αρχαία ελληνική πρόταση: '[γράψε την πρόταση]'. Η δική μου μετάφραση είναι: [γράψε τη μετάφρασή σου]. Πες μου αν η σκέψη μου είναι σωστή και ρώτησέ με για λέξεις που μπορεί να μην κατάλαβα καλά, χωρίς να μου δώσεις εσύ τη σωστή μετάφραση.",
+      promptTextEn: "I'm trying to translate this ancient Greek sentence: '[write the sentence]'. My translation is: [write your translation]. Tell me if my thinking is correct and ask me about words I might not have understood well, without giving me the correct translation yourself.",
+      tipEl: "Κοίτα πρώτα τα ρήματα και τα ουσιαστικά.",
+      tipEn: "Look at the verbs and nouns first.",
+    },
   ],
-
   high: [
     {
       id: "high-essay-argument",
@@ -775,10 +798,8 @@ const PROMPTS = {
       subjectEn: "Modern Greek Language, Essay",
       taskTypeEl: "Ανάπτυξη επιχειρήματος",
       taskTypeEn: "Developing an argument",
-      promptTextEl:
-        "Γράφω έκθεση με θέμα [γράψε το θέμα]. Το επιχείρημά μου είναι [γράψε το επιχείρημά σου με 2 με 3 προτάσεις]. Βρες αδυναμίες ή κενά στη σκέψη μου και κάνε μου ερωτήσεις που θα με βάλουν να το σκεφτώ καλύτερα. Μη γράψεις εσύ βελτιωμένη εκδοχή του επιχειρήματος.",
-      promptTextEn:
-        "I'm writing an essay on [write the topic]. My argument is [write your argument in 2 to 3 sentences]. Find weaknesses or gaps in my reasoning and ask me questions that will make me think it through better. Don't write an improved version of the argument yourself.",
+      promptTextEl: "Γράφω έκθεση με θέμα [γράψε το θέμα]. Το επιχείρημά μου είναι [γράψε το επιχείρημά σου με 2 με 3 προτάσεις]. Βρες αδυναμίες ή κενά στη σκέψη μου και κάνε μου ερωτήσεις που θα με βάλουν να το σκεφτώ καλύτερα. Μη γράψεις εσύ βελτιωμένη εκδοχή του επιχειρήματος.",
+      promptTextEn: "I'm writing an essay on [write the topic]. My argument is [write your argument in 2 to 3 sentences]. Find weaknesses or gaps in my reasoning and ask me questions that will make me think it through better. Don't write an improved version of the argument yourself.",
       tipEl: "Όσο πιο ατελές είναι το πρώτο σου επιχείρημα, τόσο πιο χρήσιμη γίνεται η συζήτηση.",
       tipEn: "The more imperfect your first argument is, the more useful the discussion becomes.",
     },
@@ -788,10 +809,8 @@ const PROMPTS = {
       subjectEn: "Math",
       taskTypeEl: "Μαθηματική απόδειξη",
       taskTypeEn: "Mathematical proof",
-      promptTextEl:
-        "Προσπαθώ να αποδείξω ότι [γράψε τι θέλεις να αποδείξεις]. Μέχρι τώρα έχω σκεφτεί αυτά τα βήματα: [γράψε ό,τι έχεις μέχρι στιγμής, ακόμα κι αν είναι ημιτελές]. Πες μου αν το βήμα που κόλλησα είναι σωστή κατεύθυνση, χωρίς να μου δώσεις το επόμενο βήμα της απόδειξης.",
-      promptTextEn:
-        "I'm trying to prove that [write what you want to prove]. So far I've thought of these steps: [write what you have so far, even if incomplete]. Tell me if the step where I'm stuck is the right direction, without giving me the next step of the proof.",
+      promptTextEl: "Προσπαθώ να αποδείξω ότι [γράψε τι θέλεις να αποδείξεις]. Μέχρι τώρα έχω σκεφτεί αυτά τα βήματα: [γράψε ό,τι έχεις μέχρι στιγμής, ακόμα κι αν είναι ημιτελές]. Πες μου αν το βήμα που κόλλησα είναι σωστή κατεύθυνση, χωρίς να μου δώσεις το επόμενο βήμα της απόδειξης.",
+      promptTextEn: "I'm trying to prove that [write what you want to prove]. So far I've thought of these steps: [write what you have so far, even if incomplete]. Tell me if the step where I'm stuck is the right direction, without giving me the next step of the proof.",
       tipEl: "Γράψε ακριβώς πού κόλλησες, όχι μόνο το τελικό αποτέλεσμα που θέλεις.",
       tipEn: "Write exactly where you got stuck, not just the final result you want.",
     },
@@ -801,12 +820,22 @@ const PROMPTS = {
       subjectEn: "Research Project",
       taskTypeEl: "Διαμόρφωση ερευνητικού ερωτήματος",
       taskTypeEn: "Forming a research question",
-      promptTextEl:
-        "Θέλω να κάνω ερευνητική εργασία πάνω σε [γράψε το γενικό θέμα]. Το ερώτημα που με ενδιαφέρει είναι [γράψε το δικό σου ερώτημα, όσο ασαφές κι αν είναι ακόμα]. Βοήθησέ με να το κάνω πιο συγκεκριμένο με ερωτήσεις, χωρίς να μου προτείνεις εσύ το τελικό ερευνητικό ερώτημα.",
-      promptTextEn:
-        "I want to do a research project on [write the general topic]. The question I'm interested in is [write your own question, however unclear it still is]. Help me make it more specific through questions, without suggesting the final research question yourself.",
+      promptTextEl: "Θέλω να κάνω ερευνητική εργασία πάνω σε [γράψε το γενικό θέμα]. Το ερώτημα που με ενδιαφέρει είναι [γράψε το δικό σου ερώτημα, όσο ασαφές κι αν είναι ακόμα]. Βοήθησέ με να το κάνω πιο συγκεκριμένο με ερωτήσεις, χωρίς να μου προτείνεις εσύ το τελικό ερευνητικό ερώτημα.",
+      promptTextEn: "I want to do a research project on [write the general topic]. The question I'm interested in is [write your own question, however unclear it still is]. Help me make it more specific through questions, without suggesting the final research question yourself.",
       tipEl: "Ένα ασαφές ερώτημα δικό σου είναι καλύτερη αφετηρία από ένα έτοιμο ερώτημα του AI.",
       tipEn: "A vague question of your own is a better starting point than a ready made question from AI.",
+    },
+    // ---------- ΝΕΟ: ΠΑΝΕΛΛΗΝΙΕΣ ----------
+    {
+      id: "high-panhellenic-essay",
+      subjectEl: "Νεοελληνική Γλώσσα (Πανελλήνιες)",
+      subjectEn: "Modern Greek Language (Panhellenic Exams)",
+      taskTypeEl: "Δομή έκθεσης",
+      taskTypeEn: "Essay structure",
+      promptTextEl: "Ετοιμάζομαι για τις Πανελλήνιες και εξασκούμαι σε έκθεση με θέμα: '[γράψε το θέμα]'. Η δική μου θέση είναι: [γράψε τη θέση σου σε 2 προτάσεις]. Τα 3 επιχειρήματά μου είναι: [γράψε τα 3 επιχειρήματά σου]. Βρες αδυναμίες στη δομή μου και κάνε μου ερωτήσεις που θα με βοηθήσουν να τα αναπτύξω καλύτερα. Μη γράψεις εσύ βελτιωμένη εκδοχή.",
+      promptTextEn: "I'm preparing for Panhellenic exams and practicing an essay on: '[write the topic]'. My position is: [write your position in 2 sentences]. My 3 arguments are: [write your 3 arguments]. Find weaknesses in my structure and ask me questions that will help me develop them better. Don't write an improved version yourself.",
+      tipEl: "Ξεκίνα με ένα ισχυρό εισαγωγικό επιχείρημα.",
+      tipEn: "Start with a strong introductory argument.",
     },
   ],
 };

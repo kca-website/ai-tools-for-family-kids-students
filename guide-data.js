@@ -82,7 +82,32 @@ const GUIDE_DATA = {
       },
       {
         id: "part4",
-        title: "Μέρος 4️⃣: Cheat Sheet – Όλα σε μία σελίδα",
+        title: "Μέρος 4️⃣: Επίσημες πηγές του ΙΕΠ",
+        content: `
+          <p>Το Ινστιτούτο Εκπαιδευτικής Πολιτικής (ΙΕΠ) διαθέτει δημόσιες, δωρεάν πλατφόρμες που μπορούν να συμπληρώσουν τη χρήση AI εργαλείων. Δεν χρειάζεται λογαριασμός για να τις εξερευνήσεις.</p>
+          <div class="guide-table-wrapper">
+            <table class="guide-table">
+              <thead><tr><th>Πλατφόρμα</th><th>Τι προσφέρει</th><th>Σύνδεσμος</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Αίσωπος</td>
+                  <td>Εκατοντάδες επιστημονικά και παιδαγωγικά πιστοποιημένα ψηφιακά διδακτικά σενάρια, ανά βαθμίδα και μάθημα.</td>
+                  <td><a href="https://aesop.iep.edu.gr" target="_blank" rel="noopener">aesop.iep.edu.gr ↗</a></td>
+                </tr>
+                <tr>
+                  <td>Τράπεζα Θεμάτων Διαβαθμισμένης Δυσκολίας</td>
+                  <td>Αναζήτηση θεμάτων εξετάσεων Λυκείου ανά μάθημα, με ενδεικτικές απαντήσεις.</td>
+                  <td><a href="https://trapeza.iep.edu.gr" target="_blank" rel="noopener">trapeza.iep.edu.gr ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Σημείωση:</strong> Αυτό το εργαλείο δεν σχετίζεται με το ΙΕΠ ούτε είναι επίσημος συνεργάτης του. Οι παραπάνω σύνδεσμοι δίνονται ως χρήσιμες, δημόσια διαθέσιμες πηγές.</p>
+        `
+      },
+      {
+        id: "part5",
+        title: "Μέρος 5️⃣: Cheat Sheet – Όλα σε μία σελίδα",
         content: `
           <div class="guide-table-wrapper">
             <table class="guide-table">

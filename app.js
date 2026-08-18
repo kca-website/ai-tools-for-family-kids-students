@@ -27,6 +27,12 @@
     quizCurrentIndex: 0,
     quizAnswers: [],
     quizFinished: false,
+    // Parent Quiz sub-state (νέο)
+    parentQuizActive: false,
+    parentQuizIndex: 0,
+    parentQuizAnswers: [],
+    parentQuizFinished: false,
+    childScorePercent: null,
   };
 
   // ---------- Στατικά strings ----------
@@ -37,6 +43,7 @@
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
+      badgeZeroTracking: "Χωρίς Tracking",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
       backToZones: "Πίσω σε όλες τις ζώνες",
@@ -66,11 +73,28 @@
       quizRecommendedTools: "Προτεινόμενα εργαλεία",
       quizRetakeBtn: "Ξανακάνε το κουίζ",
       quizBackToStart: "Πίσω στην αρχή του κουίζ",
+      quizDownloadStory: "Για Story",
       advancedIntro: "Εργαλεία που δεν είναι διάσημα αλλά λύνουν συγκεκριμένες δύσκολες ανάγκες.",
       pdfDownloading: "Δημιουργία PDF...",
       subjectFilterLabel: "Φίλτρο μαθήματος",
       subjectAll: "Όλα",
       subjectEmptyState: "Δεν υπάρχει ακόμα αντιστοίχιση εργαλείου για αυτό το μάθημα σε αυτή τη ζώνη.",
+      // ---------- Parent Quiz (νέο) ----------
+      parentQuizCta: "🧑‍🤝‍🧑 Δοκίμασε κι εσύ, γονιέ!",
+      parentQuizCtaSub: "Δες αν ξέρεις τόσο καλά όσο νομίζεις τι κάνει το παιδί σου με το AI.",
+      parentQuizTitle: "Πόσο καλά ξέρεις τι κάνει το παιδί σου με το AI;",
+      parentQuizIntro: "5 σύντομες ερωτήσεις, χωρίς καταγραφή απαντήσεων. Μόνο για εσένα.",
+      parentQuizStartBtn: "Ξεκίνα",
+      parentQuizResultsTitle: "Η σύγκριση",
+      parentQuizChildLabel: "Το παιδί σου",
+      parentQuizYouLabel: "Εσύ",
+      parentQuizCorrectOf: "{correct} σωστά από {total}",
+      parentQuizMsgChildWins: "Το παιδί σου τα πήγε καλύτερα από σένα σε αυτό το κουίζ. Ίσως άξιζε μια δεύτερη κουβέντα μαζί του για το πώς χρησιμοποιεί το AI.",
+      parentQuizMsgParentWins: "Τα πήγες καλύτερα από το παιδί σου! Καλή ευκαιρία να του δείξεις τι ξέρεις.",
+      parentQuizMsgTie: "Ισοπαλία! Φαίνεται πως το συζητάτε ήδη σωστά στο σπίτι.",
+      parentQuizRetake: "Ξανακάνε το κουίζ γονιού",
+      parentQuizBack: "Πίσω στο αποτέλεσμα του παιδιού",
+      parentQuizShareCta: "Μοιράσου τη σύγκριση με άλλους γονείς",
     },
     en: {
       heroTitle: "Which AI tool fits your child, and for which task",
@@ -78,6 +102,7 @@
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
+      badgeZeroTracking: "0% Tracking",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
       backToZones: "Back to all zones",
@@ -107,11 +132,28 @@
       quizRecommendedTools: "Recommended tools",
       quizRetakeBtn: "Retake the quiz",
       quizBackToStart: "Back to quiz start",
+      quizDownloadStory: "For Story",
       advancedIntro: "Tools that aren't famous but solve specific difficult needs.",
       pdfDownloading: "Generating PDF...",
       subjectFilterLabel: "Subject filter",
       subjectAll: "All",
       subjectEmptyState: "No tool mapping yet for this subject in this zone.",
+      // ---------- Parent Quiz (new) ----------
+      parentQuizCta: "🧑‍🤝‍🧑 Try it yourself, parent!",
+      parentQuizCtaSub: "See if you know as well as you think what your child does with AI.",
+      parentQuizTitle: "How well do you know what your child does with AI?",
+      parentQuizIntro: "5 quick questions. Nothing is recorded. Just for you.",
+      parentQuizStartBtn: "Start",
+      parentQuizResultsTitle: "The comparison",
+      parentQuizChildLabel: "Your child",
+      parentQuizYouLabel: "You",
+      parentQuizCorrectOf: "{correct} correct out of {total}",
+      parentQuizMsgChildWins: "Your child did better than you on this quiz. Might be worth a chat about how they use AI.",
+      parentQuizMsgParentWins: "You beat your child on this one! Good chance to show them what you know.",
+      parentQuizMsgTie: "It's a tie! Looks like you're already talking about this the right way at home.",
+      parentQuizRetake: "Retake the parent quiz",
+      parentQuizBack: "Back to your child's result",
+      parentQuizShareCta: "Share the comparison with other parents",
     },
   };
 
@@ -124,6 +166,102 @@
     }
     return str;
   }
+
+  // ---------- PARENT QUIZ DATA (αυτόνομο, δεν εξαρτάται από quiz-data.js) ----------
+  const PARENT_QUIZ = {
+    el: {
+      questions: [
+        {
+          id: "pq1",
+          text: "Ποια είναι η ελάχιστη ηλικία πρόσβασης στο ChatGPT με προσωπικό λογαριασμό (με γονική συγκατάθεση μέχρι τα 17);",
+          options: [
+            { text: "13 ετών", correct: true },
+            { text: "16 ετών", correct: false },
+            { text: "Δεν υπάρχει όριο", correct: false },
+          ],
+        },
+        {
+          id: "pq2",
+          text: "Ποιο από αυτά τα εργαλεία ΔΕΝ προσφέρει καμία πρόσβαση σε ανηλίκους, ούτε με γονική άδεια;",
+          options: [
+            { text: "Khanmigo", correct: false },
+            { text: "Claude", correct: true },
+            { text: "Duolingo", correct: false },
+          ],
+        },
+        {
+          id: "pq3",
+          text: "Το παιδί σου λύνει μια άσκηση Μαθηματικών με το Photomath. Ποια είναι η σωστή σειρά;",
+          options: [
+            { text: "Πρώτα προσπαθεί μόνο του, μετά ελέγχει με το εργαλείο", correct: true },
+            { text: "Φωτογραφίζει την άσκηση αμέσως για να δει τη λύση", correct: false },
+          ],
+        },
+        {
+          id: "pq4",
+          text: "Το παιδί σου γράφει σε ένα AI chatbot 'γράψε μου την έκθεσή μου'. Τι θα έπρεπε ιδανικά να γράψει αντί αυτού;",
+          options: [
+            { text: "Να ζητήσει βοήθεια να οργανώσει τις δικές του ιδέες", correct: true },
+            { text: "Τίποτα διαφορετικό, είναι το ίδιο", correct: false },
+          ],
+        },
+        {
+          id: "pq5",
+          text: "Τι δεδομένα συλλέγει το aitools4kids.vercel.app όταν κάνετε το quiz;",
+          options: [
+            { text: "Email και όνομα", correct: false },
+            { text: "Τίποτα, δεν αποθηκεύει καμία απάντηση", correct: true },
+          ],
+        },
+      ],
+    },
+    en: {
+      questions: [
+        {
+          id: "pq1",
+          text: "What is the minimum age for a personal ChatGPT account (with parental consent up to 17)?",
+          options: [
+            { text: "13 years old", correct: true },
+            { text: "16 years old", correct: false },
+            { text: "No age limit", correct: false },
+          ],
+        },
+        {
+          id: "pq2",
+          text: "Which of these tools offers NO access path for minors, even with parental consent?",
+          options: [
+            { text: "Khanmigo", correct: false },
+            { text: "Claude", correct: true },
+            { text: "Duolingo", correct: false },
+          ],
+        },
+        {
+          id: "pq3",
+          text: "Your child is solving a math exercise with Photomath. What's the right order?",
+          options: [
+            { text: "Try it themselves first, then check with the tool", correct: true },
+            { text: "Photograph the exercise right away to see the solution", correct: false },
+          ],
+        },
+        {
+          id: "pq4",
+          text: "Your child types 'write my essay for me' into an AI chatbot. What should they ideally write instead?",
+          options: [
+            { text: "Ask for help organizing their own ideas", correct: true },
+            { text: "Nothing different, it's the same thing", correct: false },
+          ],
+        },
+        {
+          id: "pq5",
+          text: "What data does aitools4kids.vercel.app collect when you take the quiz?",
+          options: [
+            { text: "Email and name", correct: false },
+            { text: "Nothing, no answers are stored", correct: true },
+          ],
+        },
+      ],
+    },
+  };
 
   // ---------- DOM refs ----------
   const els = {};
@@ -539,6 +677,15 @@ function renderToolGrid(pathTools, targetElement) {
     state.quizCurrentIndex = 0;
     state.quizAnswers = [];
     state.quizFinished = false;
+    resetParentQuizState();
+  }
+
+  function resetParentQuizState() {
+    state.parentQuizActive = false;
+    state.parentQuizIndex = 0;
+    state.parentQuizAnswers = [];
+    state.parentQuizFinished = false;
+    state.childScorePercent = null;
   }
 
   function getZoneQuizzes() {
@@ -546,6 +693,10 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   function renderQuizView() {
+    if (state.parentQuizActive) {
+      renderParentQuizView();
+      return;
+    }
     const zoneQuizzes = getZoneQuizzes();
     const subjectIds = zoneQuizzes ? Object.keys(zoneQuizzes) : [];
     if (!subjectIds.length) {
@@ -655,6 +806,13 @@ function renderToolGrid(pathTools, targetElement) {
       gapsHtml = `<p class="quiz-gaps-found-label">${t("quizGapsFound")}</p><div class="quiz-gap-grid">${gapCards}</div>`;
     }
 
+    // Υπολογισμός % επιτυχίας παιδιού (για τη σύγκριση με το Parent Quiz)
+    const childTotal = quiz.questions.length;
+    const childCorrect = childTotal - gapTagIds.length >= 0
+      ? state.quizAnswers.filter((a) => !a.gapTag).length
+      : 0;
+    state.childScorePercent = childTotal ? Math.round((childCorrect / childTotal) * 100) : null;
+
     // Achievement card (SVG)
     const svgCard = renderAchievementCard(gapTagIds);
     const encodedSvg = encodeURIComponent(svgCard);
@@ -673,11 +831,21 @@ function renderToolGrid(pathTools, targetElement) {
             <button type="button" class="quiz-download-btn" style="border:none; background:var(--color-accent); color:#FFFFFF; font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;">
               ⬇️ ${state.lang === 'el' ? 'Κατέβασε την κάρτα' : 'Download card'}
             </button>
+            <button type="button" class="quiz-download-story-btn" style="border:1px solid var(--color-accent); background:transparent; color:var(--color-accent); font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;">
+              📱 ${t('quizDownloadStory')}
+            </button>
             <button type="button" class="quiz-share-btn" style="border:1px solid var(--color-accent); background:transparent; color:var(--color-accent); font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer; display:flex; align-items:center; gap:6px;">
               📤 ${state.lang === 'el' ? 'Μοιράσου τη' : 'Share it'}
             </button>
           </div>
         </div>
+      </div>
+      <div class="parent-quiz-cta" style="margin-top:28px; padding:20px; border-radius:12px; background:linear-gradient(135deg, rgba(59,130,196,0.08), rgba(76,175,125,0.08)); text-align:center;">
+        <p style="font-weight:700; margin:0 0 6px;">${t('parentQuizCta')}</p>
+        <p style="margin:0 0 14px; color:var(--color-text-muted); font-size:0.92rem;">${t('parentQuizCtaSub')}</p>
+        <button type="button" class="parent-quiz-start-btn" style="border:none; background:var(--color-accent); color:#FFFFFF; font-size:0.9rem; font-weight:600; padding:10px 20px; border-radius:6px; cursor:pointer;">
+          ${t('parentQuizStartBtn')}
+        </button>
       </div>
       <div class="quiz-results-actions" style="margin-top:24px;">
         <button type="button" class="quiz-retake-btn">${t("quizRetakeBtn")}</button>
@@ -686,9 +854,19 @@ function renderToolGrid(pathTools, targetElement) {
     `;
 
     els.quizContent.querySelector('.quiz-download-btn').addEventListener('click', () => {
-      downloadSVG(encodedSvg, 'achievement.svg');
+      downloadCardAsSquarePng(svgCard, 'aitools4kids-karta.png');
+    });
+    els.quizContent.querySelector('.quiz-download-story-btn').addEventListener('click', () => {
+      downloadCardAsStoryPng(svgCard, 'aitools4kids-story.png');
     });
     els.quizContent.querySelector('.quiz-share-btn').addEventListener('click', shareCard);
+    els.quizContent.querySelector('.parent-quiz-start-btn').addEventListener('click', () => {
+      state.parentQuizActive = true;
+      state.parentQuizIndex = 0;
+      state.parentQuizAnswers = [];
+      state.parentQuizFinished = false;
+      renderQuizView();
+    });
     els.quizContent.querySelector('.quiz-retake-btn').addEventListener('click', () => {
       state.quizCurrentIndex = 0;
       state.quizAnswers = [];
@@ -697,6 +875,105 @@ function renderToolGrid(pathTools, targetElement) {
     });
     els.quizContent.querySelector('.quiz-back-btn').addEventListener('click', () => {
       resetQuizState();
+      renderQuizView();
+    });
+  }
+
+  // ---------- Parent Quiz: rendering ----------
+  function renderParentQuizView() {
+    if (state.parentQuizFinished) {
+      renderParentQuizResults();
+      return;
+    }
+    renderParentQuizQuestion();
+  }
+
+  function renderParentQuizQuestion() {
+    const data = PARENT_QUIZ[state.lang];
+    const question = data.questions[state.parentQuizIndex];
+    const total = data.questions.length;
+    const current = state.parentQuizIndex + 1;
+    const optionsHtml = question.options.map((opt, idx) => {
+      return `<button type="button" class="quiz-option" data-option-index="${idx}">${escapeHtml(opt.text)}</button>`;
+    }).join("");
+    els.quizContent.innerHTML = `
+      <p class="quiz-pick-heading">${t('parentQuizTitle')}</p>
+      <div class="quiz-progress">${t("quizQuestionOf", { current, total })}</div>
+      <p class="quiz-question-text">${escapeHtml(question.text)}</p>
+      <div class="quiz-options">${optionsHtml}</div>
+    `;
+    els.quizContent.querySelectorAll(".quiz-option").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.dataset.optionIndex);
+        const chosen = question.options[idx];
+        state.parentQuizAnswers.push({ questionId: question.id, correct: !!chosen.correct });
+        if (state.parentQuizIndex < data.questions.length - 1) {
+          state.parentQuizIndex += 1;
+          renderParentQuizQuestion();
+        } else {
+          state.parentQuizFinished = true;
+          renderQuizView();
+        }
+      });
+    });
+  }
+
+  function renderParentQuizResults() {
+    const data = PARENT_QUIZ[state.lang];
+    const total = data.questions.length;
+    const correct = state.parentQuizAnswers.filter((a) => a.correct).length;
+    const parentPercent = Math.round((correct / total) * 100);
+    const childPercent = state.childScorePercent;
+
+    let messageKey = "parentQuizMsgTie";
+    if (childPercent !== null) {
+      if (childPercent > parentPercent) messageKey = "parentQuizMsgChildWins";
+      else if (parentPercent > childPercent) messageKey = "parentQuizMsgParentWins";
+    }
+
+    const svgCard = renderComparisonCard(childPercent, parentPercent);
+    const encodedSvg = encodeURIComponent(svgCard);
+    const svgDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodedSvg;
+
+    els.quizContent.innerHTML = `
+      <h3 class="quiz-results-title">${t('parentQuizResultsTitle')}</h3>
+      <p style="text-align:center; margin:0 0 18px;">${t('parentQuizCorrectOf', { correct, total })}</p>
+      <p style="text-align:center; max-width:480px; margin:0 auto 20px; color:var(--color-text-muted);">${t(messageKey)}</p>
+      <div style="max-width: 400px; margin: 0 auto;">
+        <img src="${svgDataUrl}" alt="Comparison Card" style="width:100%; height:auto; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" />
+        <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="parent-quiz-download-btn" style="border:none; background:var(--color-accent); color:#FFFFFF; font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer;">
+            ⬇️ ${state.lang === 'el' ? 'Κατέβασε την κάρτα' : 'Download card'}
+          </button>
+          <button type="button" class="parent-quiz-download-story-btn" style="border:1px solid var(--color-accent); background:transparent; color:var(--color-accent); font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer;">
+            📱 ${t('quizDownloadStory')}
+          </button>
+          <button type="button" class="parent-quiz-share-btn" style="border:1px solid var(--color-accent); background:transparent; color:var(--color-accent); font-size:0.88rem; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer;">
+            📤 ${t('parentQuizShareCta')}
+          </button>
+        </div>
+      </div>
+      <div class="quiz-results-actions" style="margin-top:24px;">
+        <button type="button" class="parent-quiz-retake-btn">${t('parentQuizRetake')}</button>
+        <button type="button" class="parent-quiz-back-btn">${t('parentQuizBack')}</button>
+      </div>
+    `;
+
+    els.quizContent.querySelector('.parent-quiz-download-btn').addEventListener('click', () => {
+      downloadCardAsSquarePng(svgCard, 'aitools4kids-sygrisi.png');
+    });
+    els.quizContent.querySelector('.parent-quiz-download-story-btn').addEventListener('click', () => {
+      downloadCardAsStoryPng(svgCard, 'aitools4kids-sygrisi-story.png');
+    });
+    els.quizContent.querySelector('.parent-quiz-share-btn').addEventListener('click', shareCard);
+    els.quizContent.querySelector('.parent-quiz-retake-btn').addEventListener('click', () => {
+      state.parentQuizIndex = 0;
+      state.parentQuizAnswers = [];
+      state.parentQuizFinished = false;
+      renderQuizView();
+    });
+    els.quizContent.querySelector('.parent-quiz-back-btn').addEventListener('click', () => {
+      resetParentQuizState();
       renderQuizView();
     });
   }
@@ -743,6 +1020,104 @@ function renderToolGrid(pathTools, targetElement) {
         <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.vercel.app  🤖</text>
       </svg>
     `;
+  }
+
+  // ---------- Comparison Card (SVG) — Γονιός vs Παιδί ----------
+  function renderComparisonCard(childPercent, parentPercent) {
+    const isGreek = state.lang === "el";
+    const childLabel = t('parentQuizChildLabel');
+    const parentLabel = t('parentQuizYouLabel');
+    const childVal = childPercent === null ? 0 : childPercent;
+    const parentVal = parentPercent === null ? 0 : parentPercent;
+    const barMaxWidth = 260;
+    const childBarWidth = Math.max(4, Math.round((childVal / 100) * barMaxWidth));
+    const parentBarWidth = Math.max(4, Math.round((parentVal / 100) * barMaxWidth));
+    const winnerColor = childVal >= parentVal ? '#4CAF7D' : '#3B82C4';
+
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+        <rect width="400" height="500" rx="24" fill="#F8F9FA" stroke="#E4E6EA" stroke-width="2"/>
+        <rect width="400" height="6" rx="3" fill="${winnerColor}"/>
+        <text x="200" y="70" font-size="42" text-anchor="middle">🧑‍🤝‍🧑</text>
+        <text x="200" y="118" font-size="20" font-weight="700" fill="#1F2430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? 'Γονιός εναντίον Παιδιού' : 'Parent vs Child'}</text>
+        <line x1="60" y1="150" x2="340" y2="150" stroke="#E4E6EA" stroke-width="1"/>
+
+        <text x="70" y="195" font-size="14" font-weight="600" fill="#1F2430" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(childLabel)}</text>
+        <rect x="70" y="205" width="${barMaxWidth}" height="22" rx="11" fill="#E4E6EA"/>
+        <rect x="70" y="205" width="${childBarWidth}" height="22" rx="11" fill="#4CAF7D"/>
+        <text x="340" y="221" font-size="14" font-weight="700" fill="#4CAF7D" text-anchor="end" font-family="system-ui, -apple-system, sans-serif">${childVal}%</text>
+
+        <text x="70" y="265" font-size="14" font-weight="600" fill="#1F2430" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(parentLabel)}</text>
+        <rect x="70" y="275" width="${barMaxWidth}" height="22" rx="11" fill="#E4E6EA"/>
+        <rect x="70" y="275" width="${parentBarWidth}" height="22" rx="11" fill="#3B82C4"/>
+        <text x="340" y="291" font-size="14" font-weight="700" fill="#3B82C4" text-anchor="end" font-family="system-ui, -apple-system, sans-serif">${parentVal}%</text>
+
+        <line x1="60" y1="330" x2="340" y2="330" stroke="#E4E6EA" stroke-width="1"/>
+        <text x="200" y="365" font-size="12" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? 'Learning Compass' : 'Learning Compass'}</text>
+        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.vercel.app  🤖</text>
+      </svg>
+    `;
+  }
+
+  // ---------- PNG export (κάρτα + comparison), 2 μεγέθη: post / story ----------
+  function svgToPngDataUrl(svgMarkup, targetWidth, targetHeight, drawFn) {
+    return new Promise((resolve, reject) => {
+      const blob = new Blob([svgMarkup], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        const ctx = canvas.getContext('2d');
+        drawFn(ctx, img, targetWidth, targetHeight);
+        URL.revokeObjectURL(url);
+        resolve(canvas.toDataURL('image/png'));
+      };
+      img.onerror = (err) => { URL.revokeObjectURL(url); reject(err); };
+      img.src = url;
+    });
+  }
+
+  function downloadDataUrl(dataUrl, filename) {
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  function downloadCardAsSquarePng(svgMarkup, filename) {
+    svgToPngDataUrl(svgMarkup, 1080, 1080, (ctx, img, w, h) => {
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#3B82C4');
+      grad.addColorStop(1, '#4CAF7D');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+      const cardW = 800, cardH = 1000;
+      ctx.drawImage(img, (w - cardW) / 2, (h - cardH) / 2, cardW, cardH);
+    }).then((dataUrl) => downloadDataUrl(dataUrl, filename || 'aitools4kids-karta.png'))
+      .catch(() => alert(state.lang === 'el' ? 'Κάτι πήγε στραβά. Δοκίμασε ξανά.' : 'Something went wrong. Try again.'));
+  }
+
+  function downloadCardAsStoryPng(svgMarkup, filename) {
+    svgToPngDataUrl(svgMarkup, 1080, 1920, (ctx, img, w, h) => {
+      const grad = ctx.createLinearGradient(0, 0, w, h);
+      grad.addColorStop(0, '#3B82C4');
+      grad.addColorStop(1, '#4CAF7D');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+      const cardW = 880, cardH = 1100;
+      ctx.drawImage(img, (w - cardW) / 2, (h - cardH) / 2, cardW, cardH);
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '600 34px system-ui, -apple-system, sans-serif';
+      ctx.fillText(state.lang === 'el' ? 'Δοκίμασε το κι εσύ 👇' : 'Try it yourself 👇', w / 2, h - 140);
+      ctx.font = '400 28px system-ui, -apple-system, sans-serif';
+      ctx.fillText('aitools4kids.vercel.app', w / 2, h - 90);
+    }).then((dataUrl) => downloadDataUrl(dataUrl, filename || 'aitools4kids-story.png'))
+      .catch(() => alert(state.lang === 'el' ? 'Κάτι πήγε στραβά. Δοκίμασε ξανά.' : 'Something went wrong. Try again.'));
   }
 
   function downloadSVG(svgData, filename) {

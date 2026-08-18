@@ -985,10 +985,10 @@ function renderToolGrid(pathTools, targetElement) {
     let titles = gaps.map(g => isGreek ? g.achievementEl : g.achievementEn);
     let skillTags = gaps.map(g => isGreek ? g.skillTagEl : g.skillTagEn);
     let positiveMessages = gaps.map(g => isGreek ? g.positiveMessageEl : g.positiveMessageEn);
-    let toolNames = gaps.map(g => {
+    let toolNames = [...new Set(gaps.map(g => {
       const toolId = g.recommendedToolIds?.[0];
       return toolId ? TOOLS[toolId]?.name : '';
-    }).filter(Boolean);
+    }).filter(Boolean))];
 
     if (!titles.length) {
       titles = isGreek ? ["Ο Ολοκληρωμένος Μαθητής"] : ["The Complete Student"];
@@ -997,12 +997,24 @@ function renderToolGrid(pathTools, targetElement) {
       toolNames = [];
     }
 
-    const titleText = titles.join(' & ');
-    const skillText = skillTags.join(' + ');
+    // Αν βρέθηκαν πολλά gaps, δείχνουμε μόνο τον 1ο τίτλο + μετρητή, ώστε να μη
+    // ξεχειλίζει η κάρτα (τα υπόλοιπα gaps φαίνονται ήδη στις κάρτες από πάνω).
+    const extraCount = titles.length - 1;
+    let titleText = titles[0];
+    if (extraCount > 0) {
+      titleText += isGreek ? ` +${extraCount} ακόμα` : ` +${extraCount} more`;
+    }
+    if (titleText.length > 34) titleText = titleText.slice(0, 31) + '...';
+    const titleFontSize = titleText.length > 28 ? 14 : titleText.length > 20 ? 17 : 22;
+
+    let skillText = skillTags.slice(0, 2).join(' + ');
+    if (skillText.length > 46) skillText = skillText.slice(0, 43) + '...';
+
     const messageText = positiveMessages[0] || (isGreek ? 'Συνέχισε έτσι!' : 'Keep it up!');
-    const toolText = toolNames.length 
+    let toolText = toolNames.length
       ? (isGreek ? '💡 Εξασκήσου με: ' : '💡 Practice with: ') + toolNames.join(', ')
       : (isGreek ? '💡 Συνέχισε την εξάσκηση!' : '💡 Keep practicing!');
+    if (toolText.length > 52) toolText = toolText.slice(0, 49) + '...';
     const emoji = gaps.length ? '🌟' : '🏆';
     const accentColor = gaps.length ? '#4CAF7D' : '#3B82C4';
 
@@ -1011,7 +1023,7 @@ function renderToolGrid(pathTools, targetElement) {
         <rect width="400" height="500" rx="24" fill="#F8F9FA" stroke="#E4E6EA" stroke-width="2"/>
         <rect width="400" height="6" rx="3" fill="${accentColor}"/>
         <text x="200" y="70" font-size="48" text-anchor="middle">${emoji}</text>
-        <text x="200" y="120" font-size="22" font-weight="700" fill="#1F2430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(titleText)}</text>
+        <text x="200" y="120" font-size="${titleFontSize}" font-weight="700" fill="#1F2430" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(titleText)}</text>
         <text x="200" y="160" font-size="14" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(messageText)}</text>
         <line x1="60" y1="185" x2="340" y2="185" stroke="#E4E6EA" stroke-width="1"/>
         <text x="200" y="220" font-size="13" font-weight="600" fill="${accentColor}" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? '🔥 Δύναμη: ' : '🔥 Strength: '}${escapeHtml(skillText)}</text>

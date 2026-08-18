@@ -853,4 +853,47 @@ main {
   .guide-download-btn {
     display: none !important;
   }
+   /* ---------- Ελληνικές Προσθήκες ---------- */
+/* Ετικέτα "Ελληνικό" στα εργαλεία */
+.tool-card__greek-badge {
+  display: inline-block;
+  background: #1a73e8;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tool-card__greek-badge--program {
+  background: #e8b81a;
+  color: #1f2430;
+}
+
+/* Ελληνικά χρώματα για κατηγορίες */
+.zone-card[data-zone="primary"] {
+  border-top-color: #1a73e8;
+}
+
+.zone-card[data-zone="middle"] {
+  border-top-color: #e8b81a;
+}
+
+.zone-card[data-zone="high"] {
+  border-top-color: #0f9d58;
+}
+
+/* Ελληνική σημαία σε badges */
+.flag-greek {
+  display: inline-block;
+  width: 18px;
+  height: 12px;
+  background: linear-gradient(to bottom, #0d5eaf 33%, #ffffff 33%, #ffffff 66%, #0d5eaf 66%);
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
 }

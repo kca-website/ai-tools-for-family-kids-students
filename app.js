@@ -253,26 +253,41 @@ function renderToolGrid(pathTools, targetElement) {
     targetElement.innerHTML = `<div class="empty-state">${t("emptyState")}</div>`;
     return;
   }
+
   pathTools.forEach((entry) => {
     const tool = TOOLS[entry.toolId];
     if (!tool) return;
+
     const category = CATEGORIES.find((c) => c.id === tool.category);
     const categoryLabel = category ? (state.lang === "el" ? category.labelEl : category.labelEn) : "";
     const useCase = state.lang === "el" ? entry.useCaseEl : entry.useCaseEn;
     const howTo = state.lang === "el" ? entry.howToEl : entry.howToEn;
     const caution = state.lang === "el" ? entry.cautionEl : entry.cautionEn;
-    
-    // ΕΔΩ είναι η μαγική αλλαγή: Ελέγχουμε αν υπάρχει logo και το εμφανίζουμε!
-    const logoHtml = tool.logo 
-      ? `<img src="${tool.logo}" alt="${escapeHtml(tool.name)}" class="tool-card__logo-img" />`
-      : `<div class="tool-card__logo-placeholder" aria-hidden="true"></div>`;
+
+    // Δημιουργία logo HTML
+    let logoHtml = '';
+    if (tool.logo) {
+      // Αν υπάρχει URL, βάλε εικόνα
+      logoHtml = `<img class="tool-card__logo-img" src="${escapeAttr(tool.logo)}" alt="${escapeHtml(tool.name)} logo" />`;
+    } else {
+      // Αλλιώς βάλε το placeholder
+      logoHtml = `<div class="tool-card__logo-placeholder"></div>`;
+    }
+
+    // Έλεγχος αν είναι ελληνικό εργαλείο
+    let greekBadge = '';
+    if (tool.isGreek) {
+      greekBadge = `<span class="tool-card__greek-badge">🇬🇷 Ελληνικό</span>`;
+    }
 
     const card = document.createElement("article");
     card.className = "tool-card";
     card.innerHTML = `
       <div class="tool-card__header">
-        ${logoHtml}
-        <p class="tool-card__name">${escapeHtml(tool.name)}</p>
+        <div class="tool-card__logo" aria-hidden="true">
+          ${logoHtml}
+        </div>
+        <p class="tool-card__name">${escapeHtml(tool.name)} ${greekBadge}</p>
       </div>
       ${categoryLabel ? `<span class="tool-card__category">${escapeHtml(categoryLabel)}</span>` : ""}
       ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}

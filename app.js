@@ -246,7 +246,7 @@
 
     renderToolGrid(pathTools, els.advancedGrid);
   }
-  // ---------- Generic tool grid renderer ----------
+ // ---------- Generic tool grid renderer ----------
 function renderToolGrid(pathTools, targetElement) {
   targetElement.innerHTML = "";
   if (!pathTools.length) {
@@ -262,7 +262,7 @@ function renderToolGrid(pathTools, targetElement) {
     const howTo = state.lang === "el" ? entry.howToEl : entry.howToEn;
     const caution = state.lang === "el" ? entry.cautionEl : entry.cautionEn;
     
-    // ΕΔΩ είναι η αλλαγή: Ελέγχουμε αν υπάρχει logo και το εμφανίζουμε ως εικόνα
+    // ΕΔΩ είναι η μαγική αλλαγή: Ελέγχουμε αν υπάρχει logo και το εμφανίζουμε!
     const logoHtml = tool.logo 
       ? `<img src="${tool.logo}" alt="${escapeHtml(tool.name)}" class="tool-card__logo-img" />`
       : `<div class="tool-card__logo-placeholder" aria-hidden="true"></div>`;

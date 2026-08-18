@@ -1186,49 +1186,114 @@ function renderToolGrid(pathTools, targetElement) {
     return escapeHtml(str).replace(/"/g, "&quot;");
   }
 
+  // ---------- Routing (deep links: /{zone}/{role}/{view}) ----------
+  const VALID_VIEWS = ["tools", "advanced", "prompts", "quiz", "guide"];
+
+  function routePath(zoneId, roleId, viewId) {
+    return `/${zoneId}/${roleId}/${viewId}`;
+  }
+
+  function pushRoute() {
+    if (!state.currentZone) return;
+    const path = routePath(state.currentZone, state.currentRole, state.currentView);
+    if (location.pathname === path) return; // avoid duplicate history entries
+    history.pushState(
+      { zone: state.currentZone, role: state.currentRole, view: state.currentView },
+      "",
+      path
+    );
+  }
+
+  // Διαβάζει το URL και ενημερώνει το state, ΧΩΡΙΣ να ξαναγράψει το URL
+  // (χρησιμοποιείται στο αρχικό load και στο popstate/back-button).
+  function restoreStateFromPath(pathname) {
+    const parts = pathname.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+    const [zoneId, roleId, viewId] = parts;
+    const zoneOk = ZONES.some((z) => z.id === zoneId);
+    if (!zoneOk) {
+      state.currentZone = null;
+      return;
+    }
+    state.currentZone = zoneId;
+    state.currentRole = ROLES.some((r) => r.id === roleId) ? roleId : "guardian";
+    state.currentView = VALID_VIEWS.includes(viewId) ? viewId : "tools";
+    state.currentSubject = null;
+    resetQuizState();
+  }
+
+  // Ζωγραφίζει ό,τι χρειάζεται με βάση το ΤΡΕΧΟΝ state.
+  // Δεν αγγίζει το URL — αυτό το κάνει ξεχωριστά το pushRoute().
+  function renderCurrentRoute() {
+    if (!state.currentZone) {
+      els.pathView.hidden = true;
+      els.zoneSelectView.hidden = false;
+      updateDocumentTitle();
+      return;
+    }
+    els.zoneSelectView.hidden = true;
+    els.pathView.hidden = false;
+
+    const zone = ZONES.find((z) => z.id === state.currentZone);
+    if (zone) {
+      const zoneLabel = state.lang === "el" ? zone.labelEl : zone.labelEn;
+      const zoneAge = state.lang === "el" ? zone.ageRangeEl : zone.ageRangeEn;
+      els.pathZoneHeading.textContent = `${zone.icon} ${zoneLabel} (${zoneAge})`;
+    }
+
+    renderRoleTabs();
+    renderSubjectFilter();
+    renderPathContent();
+    renderAdvancedTools();
+    renderViewTabs();
+    renderPromptList();
+    if (state.currentView === "quiz") renderQuizView();
+    if (state.currentView === "guide") renderGuide();
+    updateDocumentTitle();
+  }
+
+  function updateDocumentTitle() {
+    const base = "AI Tools for Family, Kids & Students";
+    if (!state.currentZone) {
+      document.title = `${t("heroTitle")} — ${base}`;
+      return;
+    }
+    const zone = ZONES.find((z) => z.id === state.currentZone);
+    const zoneLabel = zone ? (state.lang === "el" ? zone.labelEl : zone.labelEn) : "";
+    const viewKey = "viewTab" + state.currentView.charAt(0).toUpperCase() + state.currentView.slice(1);
+    document.title = `${zoneLabel} · ${t(viewKey)} — ${base}`;
+  }
+
   // ---------- Navigation ----------
   function selectZone(zoneId) {
     state.currentZone = zoneId;
     state.currentRole = "guardian";
     state.currentSubject = null;
+    state.currentView = "tools";
     resetQuizState();
-    showPathView();
-    renderSubjectFilter();
+    pushRoute();
+    renderCurrentRoute();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function selectRole(roleId) {
     state.currentRole = roleId;
-    renderRoleTabs();
-    renderPathContent();
-    renderAdvancedTools();
+    pushRoute();
+    renderCurrentRoute();
   }
 
   function selectView(viewId) {
-    if (!["tools", "advanced", "prompts", "quiz", "guide"].includes(viewId)) return;
+    if (!VALID_VIEWS.includes(viewId)) return;
     state.currentView = viewId;
-    renderViewTabs();
-    if (viewId === "quiz") renderQuizView();
-    if (viewId === "guide") renderGuide();
-    if (viewId === "advanced") renderAdvancedTools();
-    if (viewId === "tools") renderPathContent();
-  }
-
-  function showPathView() {
-    els.zoneSelectView.hidden = true;
-    els.pathView.hidden = false;
-    state.currentView = "tools";
-    renderRoleTabs();
-    renderPathContent();
-    renderAdvancedTools();
-    renderViewTabs();
-    renderPromptList();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    pushRoute();
+    renderCurrentRoute();
   }
 
   function showZoneSelectView() {
     state.currentZone = null;
-    els.pathView.hidden = true;
-    els.zoneSelectView.hidden = false;
+    if (location.pathname !== "/") {
+      history.pushState({}, "", "/");
+    }
+    renderCurrentRoute();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -1246,6 +1311,7 @@ function renderToolGrid(pathTools, targetElement) {
       if (state.currentView === "quiz") renderQuizView();
       if (state.currentView === "guide") renderGuide();
     }
+    updateDocumentTitle();
   }
 
   // ---------- Init ----------
@@ -1262,6 +1328,16 @@ function renderToolGrid(pathTools, targetElement) {
     els.viewTabPrompts.addEventListener("click", () => selectView("prompts"));
     els.viewTabQuiz.addEventListener("click", () => selectView("quiz"));
     els.viewTabGuide.addEventListener("click", () => selectView("guide"));
+
+    // Deep link: URL όπως /primary/guardian/quiz φορτώνει κατευθείαν εκεί.
+    restoreStateFromPath(location.pathname);
+    renderCurrentRoute();
+
+    // Back/forward browser buttons.
+    window.addEventListener("popstate", () => {
+      restoreStateFromPath(location.pathname);
+      renderCurrentRoute();
+    });
   }
 
   document.addEventListener("DOMContentLoaded", init);

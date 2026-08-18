@@ -21,6 +21,7 @@
     currentZone: null,
     currentRole: "guardian",
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "guide"
+    currentSubject: null, // subjectId ή null = "Όλα"
     // Quiz sub-state
     quizSubjectId: null,
     quizCurrentIndex: 0,
@@ -67,6 +68,9 @@
       quizBackToStart: "Πίσω στην αρχή του κουίζ",
       advancedIntro: "Εργαλεία που δεν είναι διάσημα αλλά λύνουν συγκεκριμένες δύσκολες ανάγκες.",
       pdfDownloading: "Δημιουργία PDF...",
+      subjectFilterLabel: "Φίλτρο μαθήματος",
+      subjectAll: "Όλα",
+      subjectEmptyState: "Δεν υπάρχει ακόμα αντιστοίχιση εργαλείου για αυτό το μάθημα σε αυτή τη ζώνη.",
     },
     en: {
       heroTitle: "Which AI tool fits your child, and for which task",
@@ -105,6 +109,9 @@
       quizBackToStart: "Back to quiz start",
       advancedIntro: "Tools that aren't famous but solve specific difficult needs.",
       pdfDownloading: "Generating PDF...",
+      subjectFilterLabel: "Subject filter",
+      subjectAll: "All",
+      subjectEmptyState: "No tool mapping yet for this subject in this zone.",
     },
   };
 
@@ -127,6 +134,7 @@
     els.zoneGrid = document.getElementById("zoneGrid");
     els.pathZoneHeading = document.getElementById("pathZoneHeading");
     els.roleTabs = document.getElementById("roleTabs");
+    els.subjectFilter = document.getElementById("subjectFilter");
     els.pathIntro = document.getElementById("pathIntro");
     els.toolGrid = document.getElementById("toolGrid");
     els.advancedGrid = document.getElementById("advancedGrid");
@@ -197,6 +205,44 @@
     });
   }
 
+  // ---------- Rendering: Subject filter chips ----------
+  function renderSubjectFilter() {
+    if (!els.subjectFilter) return;
+    els.subjectFilter.innerHTML = "";
+
+    const zoneSubjects = (CURRICULUM && CURRICULUM[state.currentZone]) || {};
+    const availableSubjects = SUBJECTS.filter((s) => zoneSubjects[s.id]);
+
+    if (!availableSubjects.length) {
+      els.subjectFilter.hidden = true;
+      return;
+    }
+    els.subjectFilter.hidden = false;
+
+    const allChip = document.createElement("button");
+    allChip.type = "button";
+    allChip.className = "subject-chip" + (state.currentSubject === null ? " active" : "");
+    allChip.textContent = t("subjectAll");
+    allChip.addEventListener("click", () => selectSubject(null));
+    els.subjectFilter.appendChild(allChip);
+
+    availableSubjects.forEach((subject) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "subject-chip" + (state.currentSubject === subject.id ? " active" : "");
+      const label = state.lang === "el" ? subject.labelEl : subject.labelEn;
+      chip.innerHTML = `<span aria-hidden="true">${subject.icon}</span> ${label}`;
+      chip.addEventListener("click", () => selectSubject(subject.id));
+      els.subjectFilter.appendChild(chip);
+    });
+  }
+
+  function selectSubject(subjectId) {
+    state.currentSubject = subjectId;
+    renderSubjectFilter();
+    renderPathContent();
+  }
+
   // ---------- Rendering: Path intro + tool grid (βασικά εργαλεία) ----------
   function renderPathContent() {
     const zone = ZONES.find((z) => z.id === state.currentZone);
@@ -214,7 +260,27 @@
       return;
     }
     els.pathIntro.textContent = state.lang === "el" ? pathData.introEl : pathData.introEn;
-    renderToolGrid(pathData.tools || [], els.toolGrid);
+
+    let toolsToShow = pathData.tools || [];
+
+    if (state.currentSubject) {
+      const subjectData =
+        CURRICULUM[state.currentZone] && CURRICULUM[state.currentZone][state.currentSubject];
+      const allowedToolIds = subjectData ? subjectData.toolIds : [];
+      toolsToShow = toolsToShow.filter((entry) => allowedToolIds.includes(entry.toolId));
+
+      if (subjectData && subjectData.noteEl) {
+        const note = state.lang === "el" ? subjectData.noteEl : subjectData.noteEn;
+        els.pathIntro.textContent = note;
+      }
+
+      if (!toolsToShow.length) {
+        els.toolGrid.innerHTML = `<div class="empty-state">${t("subjectEmptyState")}</div>`;
+        return;
+      }
+    }
+
+    renderToolGrid(toolsToShow, els.toolGrid);
   }
 
   // ---------- Rendering: Advanced tools (εξειδικευμένα) ----------
@@ -737,8 +803,10 @@ function renderToolGrid(pathTools, targetElement) {
   function selectZone(zoneId) {
     state.currentZone = zoneId;
     state.currentRole = "guardian";
+    state.currentSubject = null;
     resetQuizState();
     showPathView();
+    renderSubjectFilter();
   }
 
   function selectRole(roleId) {
@@ -784,6 +852,7 @@ function renderToolGrid(pathTools, targetElement) {
     renderZoneGrid();
     if (state.currentZone) {
       renderRoleTabs();
+      renderSubjectFilter();
       renderPathContent();
       renderAdvancedTools();
       renderPromptList();

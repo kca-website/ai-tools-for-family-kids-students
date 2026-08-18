@@ -2,18 +2,8 @@
  * data.js
  * ------------------------------------------------------------
  * Πηγή δεδομένων για το AI Tools for Family, Kids & Students.
- *
- * ΔΟΜΗ (path-first):
- *   ZONES        -> ορισμός των 3 ηλικιακών ζωνών
- *   ROLES        -> ορισμός των 2 "λεωφορείων" (γονιός/εκπαιδευτικός, μαθητής)
- *   TOOLS        -> master λίστα εργαλείων (κοινά στοιχεία: όνομα, link, κατηγορία,
- *                   επίσημο ελάχιστο όριο ηλικίας βάσει Terms of Service, LOGO)
- *   PATHS        -> για κάθε ζώνη+ρόλο, ποια tools εμφανίζονται και ζώνη-specific
- *                   καθοδήγηση (πώς/γιατί να το χρησιμοποιήσεις σε αυτή τη ζώνη)
- *
- * Το app.js διαβάζει PATHS[zoneId][roleId] για να αποφασίσει τι δείχνει.
- * Κάθε entry μέσα σε ένα path παραπέμπει σε toolId από το TOOLS και προσθέτει
- * ζώνη-specific πεδία (useCase, howTo, caution).
+ * 
+ * ΕΚΔΟΣΗ: Ελληνική προσαρμογή 2026
  * ------------------------------------------------------------
  */
 
@@ -80,34 +70,122 @@ const CATEGORIES = [
   { id: "coding", labelEl: "Προγραμματισμός", labelEn: "Coding" },
   { id: "organization", labelEl: "Οργάνωση & Παραγωγικότητα", labelEn: "Organization & Productivity" },
   { id: "language", labelEl: "Γλώσσες", labelEn: "Languages" },
+  // ΝΕΕΣ ΚΑΤΗΓΟΡΙΕΣ ΓΙΑ ΕΛΛΗΝΙΚΑ
+  { id: "greek-edtech", labelEl: "🇬🇷 Ελληνική EdTech", labelEn: "🇬🇷 Greek EdTech" },
+  { id: "greek-program", labelEl: "🇬🇷 Ελληνικό Πρόγραμμα", labelEn: "🇬🇷 Greek Program" },
 ];
 
 /**
  * ---------- MASTER ΛΙΣΤΑ ΕΡΓΑΛΕΙΩΝ ----------
- * Κοινά, ανεξάρτητα από ζώνη στοιχεία.
- * minAge: επίσημο ελάχιστο όριο βάσει Terms of Service.
- * minAgeNote: συνοπτική εξήγηση του πλαισίου.
- * logo: URL του λογότυπου του εργαλείου.
  */
 const TOOLS = {
-  // ---------- ΓΡΑΦΗ & ΚΕΙΜΕΝΟ / ΓΕΝΙΚΟΙ ΒΟΗΘΟΙ ----------
+  // ---------- ΕΛΛΗΝΙΚΑ ΕΡΓΑΛΕΙΑ & ΠΡΟΓΡΑΜΜΑΤΑ ----------
+  "chatgpt-edu": {
+    id: "chatgpt-edu",
+    name: "ChatGPT Edu (Πιλοτικό)",
+    url: "https://openai.com/chatgpt/education",
+    category: "greek-program",
+    logo: null,
+    minAge: 12,
+    minAgeNote: "Πιλοτικό πρόγραμμα σε ελληνικά σχολεία από το 2026. Μέσω σχολικού λογαριασμού.",
+    shortDescEl: "Πιλοτικό πρόγραμμα AI στα ελληνικά σχολεία. Εξατομικευμένη υποστήριξη σε όλα τα μαθήματα.",
+    shortDescEn: "Pilot AI program in Greek schools. Personalized support across all subjects.",
+    isGreek: true,
+    greekSource: "Υπουργείο Παιδείας",
+  },
+  "imagi": {
+    id: "imagi",
+    name: "Imagi",
+    url: "https://imagi.gr",
+    category: "greek-edtech",
+    logo: null,
+    minAge: 8,
+    minAgeNote: "Ελληνική edtech startup. Κατάλληλο για παιδιά 8-15 ετών.",
+    shortDescEl: "Ελληνική startup που διδάσκει προγραμματισμό με δημιουργικό τρόπο, μέσα από παιχνίδι.",
+    shortDescEn: "Greek startup teaching coding in a creative, game-based way.",
+    isGreek: true,
+  },
+  "talos": {
+    id: "talos",
+    name: "Talos",
+    url: "https://talos.gr",
+    category: "greek-edtech",
+    logo: null,
+    minAge: 15,
+    minAgeNote: "Ελληνικό chatbot για υποστήριξη μαθητών στη συγγραφή κειμένων.",
+    shortDescEl: "Εξειδικευμένο ελληνικό chatbot για υποστήριξη μαθητών στη συγγραφή επιστημονικών κειμένων.",
+    shortDescEn: "Specialized Greek chatbot for student support in scientific writing.",
+    isGreek: true,
+  },
+  "no-unity": {
+    id: "no-unity",
+    name: "NoUnity.ai",
+    url: "https://nounity.ai",
+    category: "greek-edtech",
+    logo: null,
+    minAge: 18,
+    minAgeNote: "Ελληνικό εργαλείο για εκπαιδευτικούς.",
+    shortDescEl: "Ελληνικό εργαλείο AI σχεδιασμένο ειδικά για εκπαιδευτικούς.",
+    shortDescEn: "Greek AI tool designed specifically for educators.",
+    isGreek: true,
+  },
+  "erla": {
+    id: "erla",
+    name: "Erla",
+    url: "https://erla.gr",
+    category: "greek-edtech",
+    logo: null,
+    minAge: 10,
+    minAgeNote: "Ελληνικό εργαλείο για εκμάθηση της ελληνικής γλώσσας.",
+    shortDescEl: "Εργαλείο για εκμάθηση της ελληνικής γλώσσας με τη βοήθεια AI.",
+    shortDescEn: "Tool for learning the Greek language with AI assistance.",
+    isGreek: true,
+  },
+  "imaginarium": {
+    id: "imaginarium",
+    name: "Imaginarium",
+    url: "https://imaginarium.gr",
+    category: "greek-edtech",
+    logo: null,
+    minAge: 6,
+    minAgeNote: "Εφαρμογή από μαθητές του Pierce. Δωρεάν.",
+    shortDescEl: "Εφαρμογή από μαθητές του Pierce που ενισχύει τη φαντασία και τη δημιουργικότητα.",
+    shortDescEn: "App by Pierce students that enhances imagination and creativity.",
+    isGreek: true,
+  },
+  "elements-of-ai": {
+    id: "elements-of-ai",
+    name: "Elements of AI (Ελληνικά)",
+    url: "https://www.elementsofai.gr",
+    category: "greek-program",
+    logo: null,
+    minAge: 15,
+    minAgeNote: "Δωρεάν μάθημα AI προσβάσιμο στα ελληνικά.",
+    shortDescEl: "Δωρεάν μάθημα για την τεχνητή νοημοσύνη, πλήρως μεταφρασμένο στα ελληνικά.",
+    shortDescEn: "Free AI course, fully translated into Greek.",
+    isGreek: true,
+    greekSource: "AI HUB / ΕΕ",
+  },
+
+  // ---------- ΥΠΑΡΧΟΝΤΑ ΕΡΓΑΛΕΙΑ ----------
   "chatgpt": {
     id: "chatgpt",
     name: "ChatGPT",
     url: "https://chatgpt.com",
     category: "writing",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "13 ετών και άνω, με γονική συγκατάθεση από 13 έως 17 (OpenAI Terms of Use).",
     shortDescEl: "Γενικός chatbot AI για γραφή, εξηγήσεις και βοήθεια σε πολλά μαθήματα.",
     shortDescEn: "General purpose AI chatbot for writing, explanations, and help across subjects.",
+    greekTips: "Ιδανικό για επεξήγηση αρχαίων κειμένων και νεοελληνικής λογοτεχνίας.",
   },
   "gemini": {
     id: "gemini",
     name: "Google Gemini",
     url: "https://gemini.google.com",
     category: "writing",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "13 ετών και άνω για προσωπικό λογαριασμό. Κάτω των 13, μόνο μέσω Google Family Link ή σχολικού λογαριασμού Google Classroom.",
     shortDescEl: "Chatbot AI της Google, ενσωματωμένο σε Google Classroom για μαθητές μέσω σχολείου.",
@@ -118,7 +196,7 @@ const TOOLS = {
     name: "Microsoft Copilot",
     url: "https://copilot.microsoft.com",
     category: "writing",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Microsoft_Copilot_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "13 ετών και άνω (μπορεί να είναι υψηλότερο ανά χώρα). Χωρίς πρόσβαση κάτω του ορίου, ακόμη και με γονική άδεια.",
     shortDescEl: "AI βοηθός της Microsoft, ενσωματωμένος σε Word, Excel, PowerPoint και ως ανεξάρτητο chatbot.",
@@ -129,7 +207,7 @@ const TOOLS = {
     name: "Claude",
     url: "https://claude.ai",
     category: "writing",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/6/68/Claude_AI_logo.svg",
+    logo: null,
     minAge: 18,
     minAgeNote: "Μόνο 18 ετών και άνω. Δεν υπάρχει διαδρομή γονικής συγκατάθεσης για κάτω των 18.",
     shortDescEl: "AI chatbot της Anthropic. Δεν προσφέρει πρόσβαση σε ανηλίκους, ούτε με γονική άδεια.",
@@ -140,7 +218,7 @@ const TOOLS = {
     name: "Grammarly",
     url: "https://www.grammarly.com",
     category: "writing",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Grammarly_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "13 ετών και άνω βάσει Όρων Χρήσης. Υπάρχει και εκπαιδευτική έκδοση (Grammarly for Education) για σχολικούς λογαριασμούς.",
     shortDescEl: "Εργαλείο διόρθωσης γραμματικής, ορθογραφίας και ύφους σε αγγλικό κείμενο.",
@@ -153,18 +231,19 @@ const TOOLS = {
     name: "Khanmigo (Khan Academy)",
     url: "https://www.khanacademy.org/khan-labs",
     category: "research",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/42/Khan_Academy_logo.svg",
+    logo: null,
     minAge: 5,
     minAgeNote: "Σχεδιασμένο για μαθητές όλων των βαθμίδων. Κάτω των 13, ο λογαριασμός δημιουργείται και διαχειρίζεται από γονέα.",
     shortDescEl: "AI εκπαιδευτικός βοηθός πάνω στο Khan Academy. Καθοδηγεί με ερωτήσεις αντί να δίνει έτοιμη απάντηση.",
     shortDescEn: "AI tutor built on Khan Academy. Guides with Socratic questions instead of handing over answers.",
+    greekTips: "Διαθέσιμο και στα ελληνικά. Εξαιρετικό για εξάσκηση στα Μαθηματικά Δημοτικού.",
   },
   "notebooklm": {
     id: "notebooklm",
     name: "NotebookLM",
     url: "https://notebooklm.google.com",
     category: "research",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg",
+    logo: null,
     minAge: 18,
     minAgeNote: "Απαιτεί προσωπικό λογαριασμό Google 18 ετών και άνω, ή σχολικό λογαριασμό Google Workspace for Education.",
     shortDescEl: "Εργαλείο της Google που συνοψίζει και οργανώνει σημειώσεις και πηγές που ανεβάζεις εσύ.",
@@ -175,7 +254,7 @@ const TOOLS = {
     name: "Perplexity",
     url: "https://www.perplexity.ai",
     category: "research",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Perplexity_AI_logo.svg",
+    logo: null,
     minAge: 18,
     minAgeNote: "18 ετών και άνω βάσει Όρων Χρήσης (κάτω των 18 απαιτείται γονική συγκατάθεση ή επίβλεψη, ανάλογα με τη χώρα).",
     shortDescEl: "Μηχανή έρευνας με AI που απαντά με βάση πηγές και παραθέτει τις πηγές του.",
@@ -186,7 +265,7 @@ const TOOLS = {
     name: "Wolfram Alpha",
     url: "https://www.wolframalpha.com",
     category: "math",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Wolfram_Alpha_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "13 ετών και άνω βάσει Όρων Χρήσης. Χωρίς κοινωνικά χαρακτηριστικά ή chat ελεύθερης μορφής.",
     shortDescEl: "Υπολογιστική μηχανή γνώσης. Λύνει μαθηματικά, φυσική και χημεία βήμα βήμα.",
@@ -197,7 +276,7 @@ const TOOLS = {
     name: "Quizlet",
     url: "https://quizlet.com",
     category: "organization",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Quizlet_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "13 ετών και άνω βάσει Όρων Χρήσης. Οι εκπαιδευτικοί μπορούν να δημιουργήσουν λογαριασμούς τάξης για μικρότερους μαθητές.",
     shortDescEl: "Φλασκάρτες και quiz με AI υποβοηθούμενη δημιουργία για διάβασμα και απομνημόνευση.",
@@ -210,7 +289,7 @@ const TOOLS = {
     name: "Photomath",
     url: "https://photomath.com",
     category: "math",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/56/Photomath_logo.svg",
+    logo: null,
     minAge: 4,
     minAgeNote: "Χωρίς αυστηρό όριο ηλικίας στους Όρους Χρήσης. Δεν έχει chat ελεύθερης μορφής ή κοινωνικά χαρακτηριστικά.",
     shortDescEl: "Φωτογραφίζεις ένα μαθηματικό πρόβλημα και σου δείχνει τη λύση βήμα βήμα.",
@@ -223,7 +302,7 @@ const TOOLS = {
     name: "Canva (Magic Studio)",
     url: "https://www.canva.com",
     category: "creative",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/0/0e/Canva_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "13 ετών και άνω για προσωπικό λογαριασμό. Υπάρχει Canva for Education με σχολικούς λογαριασμούς για μικρότερες ηλικίες υπό επίβλεψη εκπαιδευτικού.",
     shortDescEl: "Εργαλείο σχεδίασης με AI χαρακτηριστικά όπως δημιουργία εικόνων, αφαίρεση φόντου και κείμενο σε σχέδιο.",
@@ -236,7 +315,7 @@ const TOOLS = {
     name: "GitHub Copilot",
     url: "https://github.com/features/copilot",
     category: "coding",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/c/cb/GitHub_Copilot_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "Απαιτεί λογαριασμό GitHub (13 ετών και άνω). Δωρεάν έκδοση για επαληθευμένους μαθητές και φοιτητές μέσω GitHub Education.",
     shortDescEl: "AI βοηθός προγραμματισμού που προτείνει κώδικα μέσα στον επεξεργαστή κώδικα.",
@@ -249,9 +328,9 @@ const TOOLS = {
     name: "Duolingo",
     url: "https://www.duolingo.com",
     category: "language",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Duolingo_logo_%282021%29.svg",
+    logo: null,
     minAge: 5,
-    minAgeNote: "Δεν υπάρχει αυστηρό κατώτατο όριο. Κάτω των 13 ο λογαριασμός συνδέεται με email γονέα, με περιορισμένα κοινωνικά χαρακτηριστικά.",
+    minAgeNote: "Δεν υπάρχει αυστηρό κατώτατο όριο. Κάτω των 13 ο λογαριασμός συνδέεται με email γονέα, με περιορισμένα κοινωνικά χαρακτηριστικά. Υπάρχει και ξεχωριστή εφαρμογή Duolingo Kids/ABC για μικρότερες ηλικίες.",
     shortDescEl: "Εκμάθηση γλωσσών με μικρά, παιχνιδοποιημένα μαθήματα. Οι νεότερες εκδόσεις χρησιμοποιούν AI για εξατομίκευση.",
     shortDescEn: "Language learning through short, gamified lessons. Newer features use AI for personalization.",
   },
@@ -262,7 +341,7 @@ const TOOLS = {
     name: "Symbolab",
     url: "https://www.symbolab.com",
     category: "math",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/3/35/Symbolab_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "Δωρεάν με περιορισμούς, επί πληρωμή για πλήρη βήματα.",
     shortDescEl: "Λύνει βήμα-βήμα εξισώσεις, ολοκληρώματα, παράγωγα, πίνακες.",
@@ -274,7 +353,7 @@ const TOOLS = {
     name: "Desmos",
     url: "https://www.desmos.com",
     category: "math",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Desmos_logo.svg",
+    logo: null,
     minAge: 5,
     minAgeNote: "Δωρεάν, χωρίς όριο ηλικίας.",
     shortDescEl: "Διαδραστική γραφική απεικόνιση συναρτήσεων και δεδομένων.",
@@ -286,7 +365,7 @@ const TOOLS = {
     name: "Scite",
     url: "https://scite.ai",
     category: "research",
-    logo: "https://cdn.scite.ai/logo.svg",
+    logo: null,
     minAge: 18,
     minAgeNote: "Ακαδημαϊκό εργαλείο, απαιτεί λογαριασμό.",
     shortDescEl: "Δείχνει αν μια επιστημονική αναφορά υποστηρίζει ή αντικρούει μια δήλωση.",
@@ -298,7 +377,7 @@ const TOOLS = {
     name: "Elicit",
     url: "https://elicit.org",
     category: "research",
-    logo: "https://elicit.org/images/elicit-logo.png",
+    logo: null,
     minAge: 18,
     minAgeNote: "Ακαδημαϊκό εργαλείο.",
     shortDescEl: "Βρίσκει ακαδημαϊκές εργασίες και εξάγει βασικά σημεία.",
@@ -310,7 +389,7 @@ const TOOLS = {
     name: "Hemingway Editor",
     url: "https://hemingwayapp.com",
     category: "writing",
-    logo: "https://hemingwayapp.com/img/hemingway.png",
+    logo: null,
     minAge: 5,
     minAgeNote: "Δωρεάν online έκδοση.",
     shortDescEl: "Διορθώνει βαριά σύνταξη, δείχνει δείκτη αναγνωσιμότητας.",
@@ -322,7 +401,7 @@ const TOOLS = {
     name: "Scribbr",
     url: "https://www.scribbr.com",
     category: "writing",
-    logo: "https://www.scribbr.com/wp-content/uploads/2020/09/scribbr-logo.png",
+    logo: null,
     minAge: 13,
     minAgeNote: "Επί πληρωμή, με δωρεάν έλεγχο λογοκλοπής.",
     shortDescEl: "Έλεγχος λογοκλοπής και πρόταση βελτίωσης ύφους.",
@@ -334,7 +413,7 @@ const TOOLS = {
     name: "Replit AI",
     url: "https://replit.com",
     category: "coding",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/0/06/Replit_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "Δωρεάν για βασική χρήση.",
     shortDescEl: "Επεξεργαστής κώδικα με AI που τρέχει online, χωρίς εγκατάσταση.",
@@ -346,7 +425,7 @@ const TOOLS = {
     name: "Miro AI",
     url: "https://miro.com/ai",
     category: "organization",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Miro_logo.svg",
+    logo: null,
     minAge: 13,
     minAgeNote: "Δωρεάν με περιορισμούς.",
     shortDescEl: "Δημιουργία mind maps, διαγραμμάτων ροής με AI βοήθεια.",
@@ -357,27 +436,31 @@ const TOOLS = {
 
 /**
  * ---------- PATHS ----------
- * PATHS[zoneId][roleId] = {
- *   introEl / introEn: σύντομη εισαγωγή για αυτόν τον συνδυασμό ζώνης και ρόλου,
- *   tools: [
- *     {
- *       toolId: αναφορά σε TOOLS,
- *       useCaseEl/En: για ποια δουλειά είναι κατάλληλο εδώ (το κύριο focus),
- *       howToEl/En: πώς να το χρησιμοποιήσει ο μαθητής ή πώς να εποπτεύσει ο γονιός,
- *       cautionEl/En: τυχόν προσοχή, προαιρετικό, δεν είναι το κέντρο βάρους,
- *     }
- *   ]
- * }
  */
 const PATHS = {
-  // ============================================================
-  // 🧒 ΔΗΜΟΤΙΚΟ (6 έως 12)
-  // ============================================================
   primary: {
     guardian: {
       introEl: "Σε αυτή την ηλικία, κάθε εργαλείο AI χρειάζεται δικό σου λογαριασμό, δική σου ρύθμιση ή άμεση παρουσία σου. Παρακάτω θα βρεις ποιο εργαλείο ταιριάζει σε ποια συγκεκριμένη σχολική δουλειά, και πώς αποκτά πρόσβαση το παιδί με τον σωστό τρόπο.",
       introEn: "At this age, every AI tool needs your account, your setup, or your direct presence. Below: which tool fits which specific schoolwork, and how the child gets access the right way.",
       tools: [
+        {
+          toolId: "imaginarium",
+          useCaseEl: "Δημιουργικές δραστηριότητες, ενίσχυση φαντασίας και αφήγησης.",
+          useCaseEn: "Creative activities, enhancing imagination and storytelling.",
+          howToEl: "Δωρεάν εφαρμογή. Κατάλληλη για παιδιά Δημοτικού.",
+          howToEn: "Free app. Suitable for primary school children.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
+          toolId: "imagi",
+          useCaseEl: "Πρώτη επαφή με τον προγραμματισμό μέσα από παιχνίδι.",
+          useCaseEn: "First contact with programming through games.",
+          howToEl: "Ελληνική εφαρμογή. Ιδανική για εξωσχολικές δραστηριότητες.",
+          howToEn: "Greek app. Ideal for extracurricular activities.",
+          cautionEl: "",
+          cautionEn: "",
+        },
         {
           toolId: "khanmigo",
           useCaseEl: "Εξάσκηση μαθηματικών και ανάγνωσης με καθοδήγηση, όχι έτοιμες απαντήσεις.",
@@ -397,15 +480,6 @@ const PATHS = {
           cautionEn: "No chat or social features, so it is safe from a communication standpoint. It is easy to misuse as a shortcut instead of learning though.",
         },
         {
-          toolId: "gemini",
-          useCaseEl: "Μετατροπή υλικού τάξης σε flashcards ή quiz για επανάληψη.",
-          useCaseEn: "Turning classroom material into flashcards or quizzes for review.",
-          howToEl: "Πρόσβαση μόνο αν το σχολείο έχει ενεργοποιήσει Gemini στο Google Classroom, ή μέσω δικού σου εποπτευόμενου λογαριασμού Family Link.",
-          howToEn: "Access only if the school has enabled Gemini in Google Classroom, or via your own supervised Family Link account.",
-          cautionEl: "Χωρίς σχολική ενεργοποίηση ή Family Link, δεν υπάρχει τρόπος πρόσβασης κάτω των 13.",
-          cautionEn: "Without school enablement or Family Link, there is no way to access it under 13.",
-        },
-        {
           toolId: "duolingo",
           useCaseEl: "Πρώτη επαφή με ξένη γλώσσα μέσα από σύντομα, παιχνιδοποιημένα μαθήματα.",
           useCaseEn: "First exposure to a foreign language through short, gamified lessons.",
@@ -420,6 +494,24 @@ const PATHS = {
       introEl: "Αυτά τα εργαλεία τα χρησιμοποιείς πάντα με λογαριασμό που έφτιαξε ο γονιός ή ο δάσκαλός σου, όχι μόνος σου.",
       introEn: "You always use these tools through an account your parent or teacher set up, not on your own.",
       tools: [
+        {
+          toolId: "imaginarium",
+          useCaseEl: "Για να δημιουργήσεις ιστορίες και να εξασκήσεις τη φαντασία σου.",
+          useCaseEn: "To create stories and practice your imagination.",
+          howToEl: "Παίξε με τις εικόνες και φτιάξε τις δικές σου ιστορίες.",
+          howToEn: "Play with images and create your own stories.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
+          toolId: "imagi",
+          useCaseEl: "Μάθε προγραμματισμό παίζοντας με ελληνική εφαρμογή.",
+          useCaseEn: "Learn coding by playing with a Greek app.",
+          howToEl: "Ακολούθησε τα μαθήματα βήμα-βήμα.",
+          howToEn: "Follow the lessons step by step.",
+          cautionEl: "",
+          cautionEn: "",
+        },
         {
           toolId: "khanmigo",
           useCaseEl: "Όταν κολλάς σε μαθηματικά ή ανάγνωση, σε βοηθάει με ερωτήσεις να βρεις μόνος σου τη λύση.",
@@ -451,14 +543,29 @@ const PATHS = {
     },
   },
 
-  // ============================================================
-  // 🎒 ΓΥΜΝΑΣΙΟ (12 έως 15)
-  // ============================================================
   middle: {
     guardian: {
       introEl: "Στα 13, ανοίγει η πρόσβαση στα περισσότερα mainstream AI chatbots, αλλά σχεδόν όλα απαιτούν τη δική σου συγκατάθεση μέχρι τα 17. Εδώ θα βρεις ποιο εργαλείο ταιριάζει σε ποια σχολική δουλειά, ώστε να καθοδηγήσεις τη χρήση αντί απλώς να την επιτρέψεις ή να την απαγορεύσεις.",
       introEn: "At 13, access opens up to most mainstream AI chatbots, but nearly all require your consent until age 17. Here's which tool fits which schoolwork, so you can guide the use rather than just allow or ban it.",
       tools: [
+        {
+          toolId: "imagi",
+          useCaseEl: "Εξωσχολική εκμάθηση προγραμματισμού.",
+          useCaseEn: "Extracurricular coding learning.",
+          howToEl: "Ιδανικό για μαθητές Γυμνασίου που ενδιαφέρονται για STEM.",
+          howToEn: "Ideal for middle school students interested in STEM.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
+          toolId: "erla",
+          useCaseEl: "Ενίσχυση της ελληνικής γλώσσας, ορθογραφία και εκφραστικότητα.",
+          useCaseEn: "Strengthening Greek language, spelling, and expression.",
+          howToEl: "Ελληνικό εργαλείο. Κατάλληλο για μαθήματα Νεοελληνικής Γλώσσας.",
+          howToEn: "Greek tool. Suitable for Modern Greek Language classes.",
+          cautionEl: "",
+          cautionEn: "",
+        },
         {
           toolId: "chatgpt",
           useCaseEl: "Εξήγηση δύσκολων εννοιών με διαφορετικούς τρόπους, brainstorming για εργασίες.",
@@ -478,24 +585,6 @@ const PATHS = {
           cautionEn: "",
         },
         {
-          toolId: "grammarly",
-          useCaseEl: "Έλεγχος γραμματικής και ορθογραφίας σε αγγλικές εργασίες, μάθημα Αγγλικών.",
-          useCaseEn: "Grammar and spelling checking for English assignments and English class.",
-          howToEl: "Καλή επιλογή για μάθημα ξένης γλώσσας. Δείχνει το γιατί ενός λάθους, όχι μόνο τη διόρθωση.",
-          howToEn: "A good fit for foreign language class. It explains why something is wrong, not just the fix.",
-          cautionEl: "",
-          cautionEn: "",
-        },
-        {
-          toolId: "quizlet",
-          useCaseEl: "Διάβασμα για διαγωνίσματα με φλασκάρτες, ιστορία, γεωγραφία, βιολογία.",
-          useCaseEn: "Studying for tests with flashcards. History, geography, biology.",
-          howToEl: "Ενθάρρυνε το παιδί να φτιάχνει τις δικές του φλασκάρτες πρώτα, μετά να χρησιμοποιεί τις προτάσεις που παράγει το AI.",
-          howToEn: "Encourage the child to make their own flashcards first, then use AI generated suggestions.",
-          cautionEl: "",
-          cautionEn: "",
-        },
-        {
           toolId: "wolfram-alpha",
           useCaseEl: "Επίλυση εξισώσεων και προβλημάτων φυσικής ή χημείας βήμα βήμα.",
           useCaseEn: "Solving equations and physics or chemistry problems step by step.",
@@ -511,6 +600,15 @@ const PATHS = {
       introEn: "You're starting to use AI more on your own, but your parent needs to give permission for most chatbots. See which tool fits which task.",
       tools: [
         {
+          toolId: "erla",
+          useCaseEl: "Για να βελτιώσεις τα ελληνικά σου και να γράφεις σωστά.",
+          useCaseEn: "To improve your Greek and write correctly.",
+          howToEl: "Χρησιμοποίησέ το για να ελέγχεις τις εκθέσεις σου.",
+          howToEn: "Use it to check your essays.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
           toolId: "chatgpt",
           useCaseEl: "Για να σου εξηγήσει κάτι με άλλον τρόπο όταν δεν καταλαβαίνεις τον καθηγητή.",
           useCaseEn: "To explain something a different way when you don't understand your teacher.",
@@ -518,24 +616,6 @@ const PATHS = {
           howToEn: "Ask for an explanation, not a ready answer. Write 'explain why', not 'give me the solution'.",
           cautionEl: "Μπορεί να κάνει λάθη χωρίς να το καταλάβεις. Έλεγξε πάντα με το βιβλίο σου.",
           cautionEn: "It can make mistakes without you noticing. Always double check with your textbook.",
-        },
-        {
-          toolId: "grammarly",
-          useCaseEl: "Για να ελέγξεις τα Αγγλικά σου πριν παραδώσεις μια εργασία.",
-          useCaseEn: "To check your English before turning in an assignment.",
-          howToEl: "Διάβασε γιατί προτείνει κάθε διόρθωση. Έτσι μαθαίνεις, δεν διορθώνεις μόνο.",
-          howToEn: "Read why it suggests each correction. That way you learn, not just correct.",
-          cautionEl: "",
-          cautionEn: "",
-        },
-        {
-          toolId: "quizlet",
-          useCaseEl: "Για να διαβάσεις για διαγώνισμα με φλασκάρτες που φτιάχνεις μόνος σου.",
-          useCaseEn: "To study for a test with flashcards you make yourself.",
-          howToEl: "Φτιάξε πρώτα τις δικές σου κάρτες. Το να τις γράφεις σε βοηθάει να θυμάσαι.",
-          howToEn: "Make your own cards first. Writing them helps you remember.",
-          cautionEl: "",
-          cautionEn: "",
         },
         {
           toolId: "wolfram-alpha",
@@ -550,38 +630,44 @@ const PATHS = {
     },
   },
 
-  // ============================================================
-  // 🎓 ΛΥΚΕΙΟ (15 έως 18)
-  // ============================================================
   high: {
     guardian: {
       introEl: "Στο Λύκειο το φάσμα εργαλείων είναι σχεδόν πλήρες, αλλά μερικά σοβαρά εργαλεία, όπως το Claude, το Perplexity και το NotebookLM, παραμένουν επίσημα 18 ετών και άνω χωρίς διαδρομή γονικής συγκατάθεσης. Η έμφαση μετατοπίζεται από τον περιορισμό στη σωστή, παραγωγική χρήση για προετοιμασία εξετάσεων, έρευνα και εργασίες.",
       introEn: "In high school the range of tools is nearly full, but a few serious tools, like Claude, Perplexity, and NotebookLM, remain officially 18 and up with no parental consent path. The focus shifts from restriction to proper, productive use for exam prep, research, and projects.",
       tools: [
         {
+          toolId: "talos",
+          useCaseEl: "Συγγραφή επιστημονικών κειμένων, εργασιών και έκθεσης.",
+          useCaseEn: "Writing scientific texts, assignments, and essays.",
+          howToEl: "Ελληνικό chatbot. Ιδανικό για προετοιμασία Πανελλαδικών.",
+          howToEn: "Greek chatbot. Ideal for Panhellenic exam preparation.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
+          toolId: "elements-of-ai",
+          useCaseEl: "Εισαγωγή στην Τεχνητή Νοημοσύνη για μαθήματα Πληροφορικής.",
+          useCaseEn: "Introduction to Artificial Intelligence for Computer Science classes.",
+          howToEl: "Δωρεάν μάθημα στα ελληνικά. Κατάλληλο για εξωσχολική μελέτη.",
+          howToEn: "Free course in Greek. Suitable for extracurricular study.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
+          toolId: "chatgpt-edu",
+          useCaseEl: "Πιλοτικό πρόγραμμα του Υπουργείου Παιδείας σε επιλεγμένα σχολεία.",
+          useCaseEn: "Pilot program of the Ministry of Education in selected schools.",
+          howToEl: "Ενημερώσου αν το σχολείο σου συμμετέχει στο πρόγραμμα.",
+          howToEn: "Check if your school participates in the program.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
           toolId: "chatgpt",
           useCaseEl: "Οργάνωση διαβάσματος, εξηγήσεις σε πολλά μαθήματα, πρώτο draft εργασιών.",
           useCaseEn: "Study organization, explanations across subjects, first drafts of assignments.",
           howToEl: "Στα 15 έως 17 εξακολουθεί να χρειάζεται η γονική σου συγκατάθεση. Στα 18 όχι πια.",
           howToEn: "At 15 to 17 it still needs your parental consent. At 18 it no longer does.",
-          cautionEl: "",
-          cautionEn: "",
-        },
-        {
-          toolId: "github-copilot",
-          useCaseEl: "Μάθημα Πληροφορικής, προετοιμασία για σπουδές σε προγραμματισμό.",
-          useCaseEn: "Computer science class, preparing for programming related studies.",
-          howToEl: "Δωρεάν για επαληθευμένους μαθητές μέσω GitHub Education. Άξιζε τον έλεγχο αν το σχολείο συμμετέχει.",
-          howToEn: "Free for verified students via GitHub Education. Worth checking if the school participates.",
-          cautionEl: "",
-          cautionEn: "",
-        },
-        {
-          toolId: "claude",
-          useCaseEl: "Ενημερωτικά, σοβαρό εργαλείο γραφής και ανάλυσης, αλλά επίσημα 18 ετών και άνω χωρίς εξαίρεση.",
-          useCaseEn: "For your information, a serious writing and analysis tool, but officially 18 and up with no exception.",
-          howToEl: "Δεν υπάρχει τρόπος πρόσβασης πριν τα 18, ούτε με γονική άδεια. Μην το ρυθμίσεις για το παιδί σου πριν την ενηλικίωση.",
-          howToEn: "There is no way to access it before 18, not even with parental permission. Don't set this up for your child before they turn 18.",
           cautionEl: "",
           cautionEn: "",
         },
@@ -601,6 +687,24 @@ const PATHS = {
       introEn: "You have access to nearly the full range of tools. The question isn't whether it's allowed. It's which tool fits which task and how to use it properly, especially now that you're preparing for exams or further studies.",
       tools: [
         {
+          toolId: "talos",
+          useCaseEl: "Για να γράψεις την έκθεση και τις εργασίες σου με σωστή δομή.",
+          useCaseEn: "To write your essay and assignments with proper structure.",
+          howToEl: "Ιδανικό για προετοιμασία Πανελλαδικών στην Έκθεση.",
+          howToEn: "Ideal for Panhellenic exam preparation in Essay writing.",
+          cautionEl: "Μην αντιγράφεις έτοιμα κείμενα. Χρησιμοποίησέ το για δομή και ιδέες.",
+          cautionEn: "Don't copy ready-made texts. Use it for structure and ideas.",
+        },
+        {
+          toolId: "elements-of-ai",
+          useCaseEl: "Για να μάθεις τα βασικά της Τεχνητής Νοημοσύνης.",
+          useCaseEn: "To learn the basics of Artificial Intelligence.",
+          howToEl: "Δωρεάν μάθημα. Μπορείς να το κάνεις παράλληλα με το σχολείο.",
+          howToEn: "Free course. You can do it alongside school.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
           toolId: "chatgpt",
           useCaseEl: "Οργάνωση προγράμματος διαβάσματος, εξηγήσεις εννοιών από διαφορετική οπτική γωνία.",
           useCaseEn: "Organizing a study schedule, explaining concepts from a different angle.",
@@ -618,24 +722,6 @@ const PATHS = {
           cautionEl: "",
           cautionEn: "",
         },
-        {
-          toolId: "github-copilot",
-          useCaseEl: "Αν κάνεις μάθημα ή project Πληροφορικής και προγραμματισμού.",
-          useCaseEn: "If you're taking a Computer Science class or coding project.",
-          howToEl: "Δωρεάν έκδοση για μαθητές μέσω GitHub Student. Χρησιμοποίησέ το για να μάθεις patterns, όχι μόνο να αντιγράφεις προτάσεις.",
-          howToEn: "Free for students via GitHub Student. Use it to learn patterns, not just copy suggestions.",
-          cautionEl: "",
-          cautionEn: "",
-        },
-        {
-          toolId: "canva-magic",
-          useCaseEl: "Δημιουργία παρουσίασης για ομαδική εργασία ή portfolio.",
-          useCaseEn: "Creating a presentation for group work or a portfolio.",
-          howToEl: "Χρησιμοποίησε τον σχολικό σου λογαριασμό, Canva for Education, αν το σχολείο το προσφέρει, για δωρεάν premium χαρακτηριστικά.",
-          howToEn: "Use your school account, Canva for Education, if the school offers it, for free premium features.",
-          cautionEl: "",
-          cautionEn: "",
-        },
       ],
     },
   },
@@ -643,12 +729,6 @@ const PATHS = {
 
 /**
  * ---------- PROMPTS ----------
- * Prompt Generator: έτοιμα, δοκιμασμένα prompts, ένα ανά μάθημα/τύπο εργασίας.
- *
- * Φιλοσοφία: κάθε prompt είναι εργαλείο μάθησης, όχι εργαλείο παραγωγής.
- *   1. Ζητάει πρώτα από τον μαθητή να δώσει τη δική του σκέψη.
- *   2. Το AI απαντά πάνω σε αυτό που έδωσε ο μαθητής, με ερωτήσεις.
- *   3. Κάθε prompt κλείνει με ρητή οδηγία προς το AI να ΜΗΝ γράψει ολόκληρη την εργασία.
  */
 const PROMPTS = {
   primary: [
@@ -675,15 +755,15 @@ const PROMPTS = {
       tipEn: "Solve it yourself by hand first, then check.",
     },
     {
-      id: "primary-history-story",
-      subjectEl: "Ιστορία",
-      subjectEn: "History",
+      id: "primary-greek-myth",
+      subjectEl: "Ιστορία, Μυθολογία",
+      subjectEn: "History, Mythology",
       taskTypeEl: "Δημιουργική γραφή",
       taskTypeEn: "Creative writing",
-      promptTextEl: "Φαντάζομαι ότι είμαι ένας μαθητής στην Αρχαία Αθήνα την εποχή του Περικλή. Έγραψα αυτές τις 3 προτάσεις για τη ζωή μου: [γράψε 3 προτάσεις]. Ρώτησέ με τι άλλο θα ήθελα να μάθω για την καθημερινή ζωή στην Αθήνα, χωρίς να μου δώσεις εσύ πληροφορίες.",
-      promptTextEn: "I imagine I'm a student in Ancient Athens during Pericles' time. I wrote these 3 sentences about my life: [write 3 sentences]. Ask me what else I'd like to learn about daily life in Athens, without giving me information yourself.",
-      tipEl: "Σκέψου τι θα έκανες από το πρωί μέχρι το βράδυ.",
-      tipEn: "Think about what you'd do from morning to night.",
+      promptTextEl: "Θέλω να γράψω μια ιστορία για τον [γράψε έναν ήρωα της ελληνικής μυθολογίας, π.χ. Θησέα]. Νομίζω ότι ο ήρωας είχε αυτές τις ιδιότητες: [γράψε 2-3 χαρακτηριστικά]. Βοήθησέ με να σκεφτώ μια περιπέτεια που να ταιριάζει σε αυτόν τον ήρωα. Μη γράψεις εσύ την ιστορία.",
+      promptTextEn: "I want to write a story about [write a Greek mythology hero, e.g. Theseus]. I think the hero had these qualities: [write 2-3 characteristics]. Help me think of an adventure that fits this hero. Don't write the story yourself.",
+      tipEl: "Σκέψου τι έκανε τον ήρωα ξεχωριστό και ξεκίνα από εκεί.",
+      tipEn: "Think about what made the hero special and start from there.",
     },
   ],
   middle: [
@@ -704,8 +784,8 @@ const PROMPTS = {
       subjectEn: "History",
       taskTypeEl: "Παρουσίαση",
       taskTypeEn: "Presentation",
-      promptTextEl: "Κάνω παρουσίαση για [γράψε το θέμα]. Έχω ήδη σκεφτεί αυτά τα σημεία: [γράψε 2 με 3 πράγματα που ήδη ξέρεις ή θυμάσαι]. Ρώτησέ με τι άλλο νομίζω ότι χρειάζεται η παρουσίαση, χωρίς να μου δώσεις εσύ τα υπόλοιπα σημεία.",
-      promptTextEn: "I'm making a presentation about [write the topic]. I've already thought of these points: [write 2 to 3 things you already know or remember]. Ask me what else I think the presentation needs, without giving me the remaining points yourself.",
+      promptTextEl: "Κάνω παρουσίαση για την Ελληνική Επανάσταση του 1821. Έχω ήδη σκεφτεί αυτά τα σημεία: [γράψε 2 με 3 πράγματα που ήδη ξέρεις ή θυμάσαι]. Ρώτησέ με τι άλλο νομίζω ότι χρειάζεται η παρουσίαση, χωρίς να μου δώσεις εσύ τα υπόλοιπα σημεία.",
+      promptTextEn: "I'm making a presentation about the Greek Revolution of 1821. I've already thought of these points: [write 2 to 3 things you already know or remember]. Ask me what else I think the presentation needs, without giving me the remaining points yourself.",
       tipEl: "Φτιάξε πρώτα τη δική σου λίστα σημείων, όσο μικρή κι αν είναι.",
       tipEn: "Make your own list of points first, however small.",
     },
@@ -730,17 +810,6 @@ const PROMPTS = {
       promptTextEn: "I'm reading the poem '[write poem title, e.g. by Seferis or Elytis]' and I think the poet is talking about [write your interpretation in 2 sentences]. Ask me 2 questions that will help me think deeper about the meaning, without giving me the interpretation yourself.",
       tipEl: "Διάβασε το ποίημα 2 φορές πριν γράψεις τη σκέψη σου.",
       tipEn: "Read the poem twice before writing your thought.",
-    },
-    {
-      id: "middle-ancient-greek-translation",
-      subjectEl: "Αρχαία Ελληνικά",
-      subjectEn: "Ancient Greek",
-      taskTypeEl: "Κατανόηση κειμένου",
-      taskTypeEn: "Text comprehension",
-      promptTextEl: "Προσπαθώ να μεταφράσω αυτή την αρχαία ελληνική πρόταση: '[γράψε την πρόταση]'. Η δική μου μετάφραση είναι: [γράψε τη μετάφρασή σου]. Πες μου αν η σκέψη μου είναι σωστή και ρώτησέ με για λέξεις που μπορεί να μην κατάλαβα καλά, χωρίς να μου δώσεις εσύ τη σωστή μετάφραση.",
-      promptTextEn: "I'm trying to translate this ancient Greek sentence: '[write the sentence]'. My translation is: [write your translation]. Tell me if my thinking is correct and ask me about words I might not have understood well, without giving me the correct translation yourself.",
-      tipEl: "Κοίτα πρώτα τα ρήματα και τα ουσιαστικά.",
-      tipEn: "Look at the verbs and nouns first.",
     },
   ],
   high: [
@@ -772,8 +841,8 @@ const PROMPTS = {
       subjectEn: "Research Project",
       taskTypeEl: "Διαμόρφωση ερευνητικού ερωτήματος",
       taskTypeEn: "Forming a research question",
-      promptTextEl: "Θέλω να κάνω ερευνητική εργασία πάνω σε [γράψε το γενικό θέμα]. Το ερώτημα που με ενδιαφέρει είναι [γράψε το δικό σου ερώτημα, όσο ασαφές κι αν είναι ακόμα]. Βοήθησέ με να το κάνω πιο συγκεκριμένο με ερωτήσεις, χωρίς να μου προτείνεις εσύ το τελικό ερευνητικό ερώτημα.",
-      promptTextEn: "I want to do a research project on [write the general topic]. The question I'm interested in is [write your own question, however unclear it still is]. Help me make it more specific through questions, without suggesting the final research question yourself.",
+      promptTextEl: "Θέλω να κάνω ερευνητική εργασία πάνω στην αρχαία ελληνική τεχνολογία. Το ερώτημα που με ενδιαφέρει είναι [γράψε το δικό σου ερώτημα, όσο ασαφές κι αν είναι ακόμα]. Βοήθησέ με να το κάνω πιο συγκεκριμένο με ερωτήσεις, χωρίς να μου προτείνεις εσύ το τελικό ερευνητικό ερώτημα.",
+      promptTextEn: "I want to do a research project on ancient Greek technology. The question I'm interested in is [write your own question, however unclear it still is]. Help me make it more specific through questions, without suggesting the final research question yourself.",
       tipEl: "Ένα ασαφές ερώτημα δικό σου είναι καλύτερη αφετηρία από ένα έτοιμο ερώτημα του AI.",
       tipEn: "A vague question of your own is a better starting point than a ready made question from AI.",
     },

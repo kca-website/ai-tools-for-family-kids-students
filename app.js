@@ -515,6 +515,22 @@ function renderToolGrid(pathTools, targetElement) {
       greekBadge = `<span class="tool-card__greek-badge">🇬🇷 Ελληνικό</span>`;
     }
 
+    // Εφαρμογή κινητού (όχι web) — π.χ. Erla
+    let mobileBadge = '';
+    if (tool.isMobileApp) {
+      mobileBadge = state.lang === "el"
+        ? `<span class="tool-card__mobile-badge">📱 Μόνο εφαρμογή κινητού</span>`
+        : `<span class="tool-card__mobile-badge">📱 Mobile app only</span>`;
+    }
+
+    // Υπό επανεξέταση — π.χ. προγράμματα που άλλαξαν πρόσφατα
+    let pendingBadge = '';
+    if (tool.pending) {
+      pendingBadge = state.lang === "el"
+        ? `<span class="tool-card__pending-badge">⏳ Υπό επανεξέταση</span>`
+        : `<span class="tool-card__pending-badge">⏳ Under review</span>`;
+    }
+
     const card = document.createElement("article");
     card.className = "tool-card";
     card.innerHTML = `
@@ -522,7 +538,7 @@ function renderToolGrid(pathTools, targetElement) {
         <div class="tool-card__logo" aria-hidden="true">
           ${logoHtml}
         </div>
-        <p class="tool-card__name">${escapeHtml(tool.name)} ${greekBadge}</p>
+        <p class="tool-card__name">${escapeHtml(tool.name)} ${greekBadge}${mobileBadge}${pendingBadge}</p>
       </div>
       ${categoryLabel ? `<span class="tool-card__category">${escapeHtml(categoryLabel)}</span>` : ""}
       ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}

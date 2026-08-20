@@ -56,6 +56,32 @@
 </head>
 <body>
 
+  <noscript>
+    <div style="max-width: 640px; margin: 40px auto; padding: 24px; font-family: sans-serif; line-height: 1.6;">
+      <h1>AI Tools for Family, Kids &amp; Students — Ποιο AI εργαλείο ταιριάζει στο παιδί σου, και για ποια σχολική δουλειά;</h1>
+      <p>
+        Ανεξάρτητο, δωρεάν, δίγλωσσο (Ελληνικά/Αγγλικά) εργαλείο που βοηθά γονείς, μαθητές 6 έως 18 ετών
+        και εκπαιδευτικούς να βρουν ποιο συγκεκριμένο AI εργαλείο ταιριάζει σε ποια σχολική δουλειά, ανά ηλικία.
+        Χωρίς tracking, χωρίς λογαριασμό.
+      </p>
+      <h2>Ηλικιακές ζώνες</h2>
+      <ul>
+        <li><strong>Δημοτικό (6-12 ετών):</strong> περιορισμένα εργαλεία, πάντα με επίβλεψη ενήλικα.</li>
+        <li><strong>Γυμνάσιο (12-15 ετών):</strong> περισσότερα εργαλεία, αρχή αυτόνομης χρήσης.</li>
+        <li><strong>Λύκειο (15-18 ετών):</strong> σχεδόν πλήρες φάσμα εργαλείων, έμφαση στη σωστή χρήση.</li>
+      </ul>
+      <h2>Τι θα βρεις</h2>
+      <ul>
+        <li>Εργαλεία AI ανά σχολικό μάθημα (Μαθηματικά, Γλώσσα, Φυσικές Επιστήμες, Ιστορία, Ξένες Γλώσσες)</li>
+        <li>Έτοιμα, learning-first prompts στα Ελληνικά και Αγγλικά</li>
+        <li>Διαγνωστικό τεστ 2 λεπτών για να δεις πού χρειάζεται εξάσκηση ο μαθητής</li>
+        <li>Πρακτικό οδηγό χρήσης για γονείς, μαθητές και εκπαιδευτικούς</li>
+      </ul>
+      <p>Αυτή η σελίδα χρειάζεται JavaScript για την πλήρη, διαδραστική εμπειρία. Ενεργοποίησε το JavaScript στον browser σου για να δεις όλα τα εργαλεία και τις λειτουργίες.</p>
+      <p><em>This site requires JavaScript for the full interactive experience. Please enable JavaScript to see all tools and features.</em></p>
+    </div>
+  </noscript>
+
   <header class="site-header">
     <div class="site-header__inner">
       <p class="site-title">
@@ -112,6 +138,15 @@
       <div class="zone-grid" id="zoneGrid">
         <!-- Γεμίζει δυναμικά από το app.js με βάση το ZONES -->
       </div>
+
+      <div class="not-guide-box">
+        <p class="not-guide-box__title" data-i18n="notGuideTitle">Τι ΔΕΝ είναι αυτός ο οδηγός</p>
+        <ul class="not-guide-box__list">
+          <li data-i18n="notGuideItem1">Δεν αντικαθιστά τον δάσκαλο ή τον γονιό.</li>
+          <li data-i18n="notGuideItem2">Δεν είναι τρόπος να αντιγράψεις μια εργασία έτοιμη.</li>
+          <li data-i18n="notGuideItem3">Δεν είναι ακόμα πλήρης οδηγός ασφάλειας — δείχνουμε ποιο εργαλείο ταιριάζει σε ποια δουλειά, όχι όλους τους κινδύνους κάθε εργαλείου.</li>
+        </ul>
+      </div>
     </section>
 
     <!-- ΒΗΜΑ 2: Ζώνη επιλεγμένη -> επιλογή ρόλου + λίστα εργαλείων -->
@@ -130,7 +165,7 @@
         <button type="button" class="view-tab active" id="viewTabTools" data-view="tools" data-i18n="viewTabTools">Εργαλεία</button>
         <button type="button" class="view-tab" id="viewTabAdvanced" data-view="advanced" data-i18n="viewTabAdvanced">Προχωρημένα</button>
         <button type="button" class="view-tab" id="viewTabPrompts" data-view="prompts" data-i18n="viewTabPrompts">Prompt Generator</button>
-        <button type="button" class="view-tab" id="viewTabQuiz" data-view="quiz" data-i18n="viewTabQuiz">Διαγνωστικός Χάρτης</button>
+        <button type="button" class="view-tab" id="viewTabQuiz" data-view="quiz" data-i18n="viewTabQuiz">Βρες το Κατάλληλο AI</button>
         <button type="button" class="view-tab" id="viewTabGuide" data-view="guide" data-i18n="viewTabGuide">Οδηγός</button>
       </div>
 
@@ -187,6 +222,9 @@
   <footer class="site-footer">
     <p data-i18n="footerText">
       Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.
+    </p>
+    <p class="site-footer__last-checked" data-i18n="footerLastChecked">
+      Τελευταίος έλεγχος εργαλείων: 20 Αυγούστου 2026
     </p>
     <p class="site-footer__credit">
       Φτιαγμένο από τον Κωνσταντίνο Κούστα.

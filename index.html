@@ -23,6 +23,9 @@
   <meta name="twitter:image" content="https://aitools4kids.vercel.app/assets/icons/og-image.png" />
   <meta name="theme-color" content="#3B82C4" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
   <!-- html2pdf για πραγματικό PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -61,6 +64,20 @@
           <span class="badge badge--accent" data-i18n="badgeIndependent">Ανεξάρτητο</span>
           <span class="badge badge--pro" data-i18n="badgeBilingual">Δίγλωσσο EL / EN</span>
           <span class="badge badge--dark" data-i18n="badgeZeroTracking">Χωρίς Tracking</span>
+        </div>
+
+        <div class="hero__quiz-cta-wrap">
+          <button type="button" id="heroQuizCtaBtn" class="hero__quiz-cta">
+            <span class="hero__quiz-cta-icon" aria-hidden="true">🧭</span>
+            <span class="hero__quiz-cta-text">
+              <span class="hero__quiz-cta-title" data-i18n="heroQuizCta">Κάνε το Διαγνωστικό σε 2 λεπτά</span>
+              <span class="hero__quiz-cta-sub" data-i18n="heroQuizCtaSub">Δες πού χρειάζεσαι εξάσκηση και μοιράσου το αποτέλεσμα</span>
+            </span>
+          </button>
+          <div class="hero__quiz-picker" id="heroQuizPicker" hidden>
+            <p class="hero__quiz-picker-label" data-i18n="heroQuizPickPrompt">Για ποια ζώνη;</p>
+            <div class="hero__quiz-picker-grid" id="heroQuizPickerGrid"></div>
+          </div>
         </div>
       </div>
 
@@ -148,7 +165,7 @@
       Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.
     </p>
     <p class="site-footer__credit">
-      Φτιαγμένο από τον Κωνσταντίνο Κούστα.
+     Created by KKoustas
       <a href="https://www.linkedin.com/in/kostaskoustas" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </p>
   </footer>

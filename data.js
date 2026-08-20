@@ -227,7 +227,6 @@ const TOOLS = {
     minAgeNote: "Απαιτεί προσωπικό λογαριασμό Google 18 ετών και άνω, ή σχολικό λογαριασμό Google Workspace for Education.",
     shortDescEl: "Εργαλείο της Google που συνοψίζει και οργανώνει σημειώσεις και πηγές που ανεβάζεις εσύ.",
     shortDescEn: "Google's tool that summarizes and organizes notes and sources you upload yourself.",
-    isExpert: true,
   },
   "perplexity": {
     id: "perplexity",

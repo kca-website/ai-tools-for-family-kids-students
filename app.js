@@ -905,7 +905,7 @@ function renderToolGrid(pathTools, targetElement) {
     els.quizContent.querySelector('.quiz-download-story-btn').addEventListener('click', () => {
       downloadCardAsStoryPng(svgCard, 'aitools4kids-story.png');
     });
-    els.quizContent.querySelector('.quiz-share-btn').addEventListener('click', shareCard);
+    els.quizContent.querySelector('.quiz-share-btn').addEventListener('click', () => shareCard(svgCard));
     els.quizContent.querySelector('.parent-quiz-start-btn').addEventListener('click', () => {
       state.parentQuizActive = true;
       state.parentQuizIndex = 0;
@@ -1011,7 +1011,7 @@ function renderToolGrid(pathTools, targetElement) {
     els.quizContent.querySelector('.parent-quiz-download-story-btn').addEventListener('click', () => {
       downloadCardAsStoryPng(svgCard, 'aitools4kids-sygrisi-story.png');
     });
-    els.quizContent.querySelector('.parent-quiz-share-btn').addEventListener('click', shareCard);
+    els.quizContent.querySelector('.parent-quiz-share-btn').addEventListener('click', () => shareCard(svgCard));
     els.quizContent.querySelector('.parent-quiz-retake-btn').addEventListener('click', () => {
       state.parentQuizIndex = 0;
       state.parentQuizAnswers = [];
@@ -1138,16 +1138,33 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   function downloadDataUrl(dataUrl, filename) {
-    const link = document.createElement('a');
-    link.href = dataUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Blob + object URL είναι πιο αξιόπιστο από raw data: URL στο iOS Safari,
+    // όπου το attribute "download" σε data: URLs συχνά αγνοείται.
+    fetch(dataUrl)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(url), 4000);
+      })
+      .catch(() => {
+        // Fallback: απευθείας data URL αν κάτι πάει στραβά με το blob conversion.
+        const link = document.createElement('a');
+        link.href = dataUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
   }
 
-  function downloadCardAsSquarePng(svgMarkup, filename) {
-    svgToPngDataUrl(svgMarkup, 1080, 1080, (ctx, img, w, h) => {
+  function generateSquareCardDataUrl(svgMarkup) {
+    return svgToPngDataUrl(svgMarkup, 1080, 1080, (ctx, img, w, h) => {
       const grad = ctx.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, '#3B82C4');
       grad.addColorStop(1, '#4CAF7D');
@@ -1155,7 +1172,12 @@ function renderToolGrid(pathTools, targetElement) {
       ctx.fillRect(0, 0, w, h);
       const cardW = 800, cardH = 1000;
       ctx.drawImage(img, (w - cardW) / 2, (h - cardH) / 2, cardW, cardH);
-    }).then((dataUrl) => downloadDataUrl(dataUrl, filename || 'aitools4kids-karta.png'))
+    });
+  }
+
+  function downloadCardAsSquarePng(svgMarkup, filename) {
+    generateSquareCardDataUrl(svgMarkup)
+      .then((dataUrl) => downloadDataUrl(dataUrl, filename || 'aitools4kids-karta.png'))
       .catch(() => alert(state.lang === 'el' ? 'Κάτι πήγε στραβά. Δοκίμασε ξανά.' : 'Something went wrong. Try again.'));
   }
 
@@ -1190,11 +1212,38 @@ function renderToolGrid(pathTools, targetElement) {
     URL.revokeObjectURL(url);
   }
 
-  function shareCard() {
+  function shareCard(svgMarkup) {
+    // Προσπάθησε πρώτα να μοιράσεις την ίδια την εικόνα (Web Share API Level 2).
+    // Υποστηρίζεται στα περισσότερα σύγχρονα mobile browsers, iOS και Android.
+    if (svgMarkup && navigator.canShare) {
+      generateSquareCardDataUrl(svgMarkup)
+        .then((dataUrl) => fetch(dataUrl))
+        .then((res) => res.blob())
+        .then((blob) => {
+          const file = new File([blob], 'aitools4kids-karta.png', { type: 'image/png' });
+          const shareData = {
+            files: [file],
+            title: state.lang === 'el' ? 'Η κάρτα επίτευγμά μου' : 'My achievement card',
+            text: state.lang === 'el'
+              ? 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids! 👉 https://aitools4kids.vercel.app'
+              : 'I discovered my strengths with aitools4kids! 👉 https://aitools4kids.vercel.app',
+          };
+          if (navigator.canShare(shareData)) {
+            return navigator.share(shareData);
+          }
+          throw new Error('files not shareable');
+        })
+        .catch(() => shareLinkOnly());
+      return;
+    }
+    shareLinkOnly();
+  }
+
+  function shareLinkOnly() {
     if (navigator.share) {
       navigator.share({
-        title: 'Η κάρτα επίτευγμά μου',
-        text: 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids!',
+        title: state.lang === 'el' ? 'Η κάρτα επίτευγμά μου' : 'My achievement card',
+        text: state.lang === 'el' ? 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids!' : 'I discovered my strengths with aitools4kids!',
         url: 'https://aitools4kids.vercel.app'
       }).catch(() => fallbackShare());
     } else {

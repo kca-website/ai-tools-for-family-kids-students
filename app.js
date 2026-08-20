@@ -60,8 +60,17 @@
       viewTabTools: "Εργαλεία",
       viewTabAdvanced: "Προχωρημένα",
       viewTabPrompts: "Prompt Generator",
-      viewTabQuiz: "Διαγνωστικός Χάρτης",
+      viewTabQuiz: "Βρες το Κατάλληλο AI",
       viewTabGuide: "Οδηγός",
+      // ---------- "Τι ΔΕΝ είναι" + Last checked (νέο) ----------
+      notGuideTitle: "Τι ΔΕΝ είναι αυτός ο οδηγός",
+      notGuideItem1: "Δεν αντικαθιστά τον δάσκαλο ή τον γονιό.",
+      notGuideItem2: "Δεν είναι τρόπος να αντιγράψεις μια εργασία έτοιμη.",
+      notGuideItem3: "Δεν είναι ακόμα πλήρης οδηγός ασφάλειας — δείχνουμε ποιο εργαλείο ταιριάζει σε ποια δουλειά, όχι όλους τους κινδύνους κάθε εργαλείου.",
+      footerLastChecked: "Τελευταίος έλεγχος εργαλείων: 20 Αυγούστου 2026",
+      toolAgeLabel: "Όροι Χρήσης",
+      shareToolBtn: "Μοιράσου",
+      shareToolCopied: "Αντιγράφηκε!",
       promptsIntro: "Αυτά τα prompts δεν γράφουν την εργασία για εσένα. Σε ρωτάνε πρώτα τι σκέφτεσαι, και το AI απαντάει πάνω σε αυτό. Γράψε τη δική σου σκέψη μέσα στις αγκύλες πριν το αντιγράψεις.",
       promptsEmptyState: "Δεν έχουν προστεθεί ακόμα prompts για αυτή τη ζώνη. Έρχονται σύντομα.",
       copyPrompt: "Αντιγραφή prompt",
@@ -130,7 +139,7 @@
       viewTabTools: "Tools",
       viewTabAdvanced: "Advanced",
       viewTabPrompts: "Prompt Generator",
-      viewTabQuiz: "Learning Compass",
+      viewTabQuiz: "Find Your AI Match",
       viewTabGuide: "Guide",
       promptsIntro: "These prompts don't write the assignment for you. They ask what you're thinking first, and the AI responds to that. Fill in your own thinking inside the brackets before copying.",
       promptsEmptyState: "No prompts added yet for this zone. Coming soon.",
@@ -155,6 +164,15 @@
       pathStepLabel: "Step {step} of 3",
       pathModalClose: "Close",
       pathOpenTool: "Open tool ↗",
+      // ---------- "What this guide is NOT" + Last checked (new) ----------
+      notGuideTitle: "What this guide is NOT",
+      notGuideItem1: "It doesn't replace a teacher or a parent.",
+      notGuideItem2: "It's not a way to get a finished assignment to copy.",
+      notGuideItem3: "It's not yet a full safety guide — we show which tool fits which task, not every risk of every tool.",
+      footerLastChecked: "Tools last checked: August 20, 2026",
+      toolAgeLabel: "Terms of Use",
+      shareToolBtn: "Share",
+      shareToolCopied: "Copied!",
       advancedIntro: "Tools that aren't famous but solve specific difficult needs.",
       pdfDownloading: "Generating PDF...",
       subjectFilterLabel: "Subject filter",
@@ -560,8 +578,16 @@ function renderToolGrid(pathTools, targetElement) {
       ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}
       ${howTo ? `<p class="tool-card__field-label">${t("howToLabel")}</p><p class="tool-card__field-value">${escapeHtml(howTo)}</p>` : ""}
       ${caution ? `<div class="tool-card__caution"><strong>${t("cautionLabel")}:</strong> ${escapeHtml(caution)}</div>` : ""}
-      ${tool.url ? `<a class="tool-card__link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${t(tool.linkTypeInfo ? "infoLink" : "visitLink")}</a>` : ""}
+      ${typeof tool.minAge === "number" ? `<p class="tool-card__age-note"><strong>${t("toolAgeLabel")}:</strong> ${tool.minAge}+${tool.minAgeNote ? ` · ${escapeHtml(tool.minAgeNote)}` : ""}</p>` : ""}
+      <div class="tool-card__actions">
+        ${tool.url ? `<a class="tool-card__link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${t(tool.linkTypeInfo ? "infoLink" : "visitLink")}</a>` : ""}
+        <button type="button" class="tool-card__share-btn">🔗 ${t("shareToolBtn")}</button>
+      </div>
     `;
+    const shareBtn = card.querySelector(".tool-card__share-btn");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", () => shareToolCard(tool, useCase, shareBtn));
+    }
     targetElement.appendChild(card);
   });
 }
@@ -1326,6 +1352,41 @@ function renderToolGrid(pathTools, targetElement) {
     navigator.clipboard.writeText('https://aitools4kids.vercel.app')
       .then(() => alert('📋 Αντιγράφηκε το link! Μοιράσου το με τους φίλους σου.'))
       .catch(() => prompt('Αντέγραψε αυτό το link:', 'https://aitools4kids.vercel.app'));
+  }
+
+  function shareToolCard(tool, useCase, buttonEl) {
+    const siteUrl = "https://aitools4kids.vercel.app";
+    const text = state.lang === "el"
+      ? `${tool.name}${useCase ? ` — ${useCase}` : ""}\n${tool.url || ""}\nΒρέθηκε στο ${siteUrl}`
+      : `${tool.name}${useCase ? ` — ${useCase}` : ""}\n${tool.url || ""}\nFound via ${siteUrl}`;
+    const shareData = {
+      title: tool.name,
+      text,
+      url: siteUrl,
+    };
+    const markShared = () => {
+      if (!buttonEl) return;
+      const original = buttonEl.textContent;
+      buttonEl.textContent = "✅ " + t("shareToolCopied");
+      setTimeout(() => { buttonEl.textContent = original; }, 1800);
+    };
+    if (navigator.share) {
+      navigator.share(shareData).catch(() => copyToolShareText(text, markShared));
+    } else {
+      copyToolShareText(text, markShared);
+    }
+  }
+
+  function copyToolShareText(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onDone).catch(() => {
+        prompt(state.lang === "el" ? "Αντέγραψε αυτό το κείμενο:" : "Copy this text:", text);
+        onDone();
+      });
+    } else {
+      prompt(state.lang === "el" ? "Αντέγραψε αυτό το κείμενο:" : "Copy this text:", text);
+      onDone();
+    }
   }
 
   // ---------- Helpers ----------

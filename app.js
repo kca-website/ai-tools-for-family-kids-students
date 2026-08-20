@@ -60,13 +60,12 @@
       viewTabTools: "Εργαλεία",
       viewTabAdvanced: "Προχωρημένα",
       viewTabPrompts: "Prompt Generator",
-      viewTabQuiz: "Βρες το Κατάλληλο AI",
+      viewTabQuiz: "Διαγνωστικός Χάρτης",
       viewTabGuide: "Οδηγός",
       // ---------- "Τι ΔΕΝ είναι" + Last checked (νέο) ----------
       notGuideTitle: "Τι ΔΕΝ είναι αυτός ο οδηγός",
       notGuideItem1: "Δεν αντικαθιστά τον δάσκαλο ή τον γονιό.",
       notGuideItem2: "Δεν είναι τρόπος να αντιγράψεις μια εργασία έτοιμη.",
-      notGuideItem3: "Δεν είναι ακόμα πλήρης οδηγός ασφάλειας — δείχνουμε ποιο εργαλείο ταιριάζει σε ποια δουλειά, όχι όλους τους κινδύνους κάθε εργαλείου.",
       footerLastChecked: "Τελευταίος έλεγχος εργαλείων: 20 Αυγούστου 2026",
       toolAgeLabel: "Όροι Χρήσης",
       shareToolBtn: "Μοιράσου",
@@ -139,7 +138,7 @@
       viewTabTools: "Tools",
       viewTabAdvanced: "Advanced",
       viewTabPrompts: "Prompt Generator",
-      viewTabQuiz: "Find Your AI Match",
+      viewTabQuiz: "Learning Compass",
       viewTabGuide: "Guide",
       promptsIntro: "These prompts don't write the assignment for you. They ask what you're thinking first, and the AI responds to that. Fill in your own thinking inside the brackets before copying.",
       promptsEmptyState: "No prompts added yet for this zone. Coming soon.",
@@ -168,7 +167,6 @@
       notGuideTitle: "What this guide is NOT",
       notGuideItem1: "It doesn't replace a teacher or a parent.",
       notGuideItem2: "It's not a way to get a finished assignment to copy.",
-      notGuideItem3: "It's not yet a full safety guide — we show which tool fits which task, not every risk of every tool.",
       footerLastChecked: "Tools last checked: August 20, 2026",
       toolAgeLabel: "Terms of Use",
       shareToolBtn: "Share",
@@ -989,7 +987,7 @@ function renderToolGrid(pathTools, targetElement) {
       const desc = state.lang === "el" ? step.descriptionEl : step.descriptionEn;
       const tool = step.toolId ? TOOLS[step.toolId] : null;
       const toolLinkHtml = tool && tool.url
-        ? `<a class="path-step__tool-link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)} — ${t("pathOpenTool")}</a>`
+        ? `<a class="path-step__tool-link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)} · ${t("pathOpenTool")}</a>`
         : "";
       return `
         <div class="path-step">
@@ -1357,8 +1355,8 @@ function renderToolGrid(pathTools, targetElement) {
   function shareToolCard(tool, useCase, buttonEl) {
     const siteUrl = "https://aitools4kids.vercel.app";
     const text = state.lang === "el"
-      ? `${tool.name}${useCase ? ` — ${useCase}` : ""}\n${tool.url || ""}\nΒρέθηκε στο ${siteUrl}`
-      : `${tool.name}${useCase ? ` — ${useCase}` : ""}\n${tool.url || ""}\nFound via ${siteUrl}`;
+      ? `${tool.name}${useCase ? `: ${useCase}` : ""}\n${tool.url || ""}\nΒρέθηκε στο ${siteUrl}`
+      : `${tool.name}${useCase ? `: ${useCase}` : ""}\n${tool.url || ""}\nFound via ${siteUrl}`;
     const shareData = {
       title: tool.name,
       text,
@@ -1481,13 +1479,13 @@ function renderToolGrid(pathTools, targetElement) {
   function updateDocumentTitle() {
     const base = "AI Tools for Family, Kids & Students";
     if (!state.currentZone) {
-      document.title = `${t("heroTitle")} — ${base}`;
+      document.title = `${t("heroTitle")} · ${base}`;
       return;
     }
     const zone = ZONES.find((z) => z.id === state.currentZone);
     const zoneLabel = zone ? (state.lang === "el" ? zone.labelEl : zone.labelEn) : "";
     const viewKey = "viewTab" + state.currentView.charAt(0).toUpperCase() + state.currentView.slice(1);
-    document.title = `${zoneLabel} · ${t(viewKey)} — ${base}`;
+    document.title = `${zoneLabel} · ${t(viewKey)} · ${base}`;
   }
 
   // ---------- Navigation ----------

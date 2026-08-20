@@ -107,7 +107,29 @@ const GUIDE_DATA = {
       },
       {
         id: "part5",
-        title: "Μέρος 5️⃣: Cheat Sheet – Όλα σε μία σελίδα",
+        title: "Μέρος 5️⃣: Καλή vs Κακή Χρήση – Πραγματικές Καταστάσεις",
+        content: `
+          <p>Το AI δεν είναι κακό ή καλό από μόνο του. Η διαφορά είναι στο πώς το χρησιμοποιείς. Δες πραγματικές καταστάσεις που συναντάς στο σχολείο:</p>
+          <div class="guide-table-wrapper">
+            <table class="guide-table">
+              <thead><tr><th>Κατάσταση</th><th>❌ Κακή χρήση</th><th>✅ Καλή χρήση</th></tr></thead>
+              <tbody>
+                <tr><td>Το AI έδωσε λάθος απάντηση</td><td>Το αντιγράφεις έτσι κι αλλιώς</td><td>Ρωτάς "Είσαι σίγουρο/η; Εξήγησέ μου πώς το υπολόγισες" και ελέγχεις μόνος/η σου</td></tr>
+                <tr><td>Δεν καταλαβαίνεις μια έννοια</td><td>Ζητάς "Δώσε μου την απάντηση"</td><td>Ζητάς "Εξήγησέ το με ένα παράδειγμα από την καθημερινότητα"</td></tr>
+                <tr><td>Πρέπει να παραδώσεις μια έκθεση</td><td>Αντιγράφεις το κείμενο του AI αυτούσιο</td><td>Το χρησιμοποιείς για ιδέες και δομή, γράφεις μόνος/η σου το τελικό κείμενο</td></tr>
+                <tr><td>Ένας φίλος σου λέει ότι το κείμενό του "το έγραψε το AI"</td><td>Δεν το σχολιάζεις, "όλοι το κάνουν"</td><td>Του προτείνεις να το ξαναγράψει με δικά του λόγια — έτσι μαθαίνει περισσότερα</td></tr>
+                <tr><td>Θες να ελέγξεις αν ένα κείμενο είναι γραμμένο από AI</td><td>Εμπιστεύεσαι 100% κάποιο "AI detector" εργαλείο</td><td>Δεν υπάρχει αξιόπιστος τρόπος να το ξέρεις σίγουρα· τα εργαλεία ανίχνευσης κάνουν συχνά λάθος. Καλύτερη ένδειξη: αν το άτομο μπορεί να εξηγήσει προφορικά τι έγραψε</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="guide-principle">
+            <p><strong>Ο κανόνας του αντίχειρα:</strong> Αν δεν θα μπορούσες να εξηγήσεις προφορικά, με δικά σου λόγια, τι μόλις "παρέδωσες" — δεν το έμαθες ακόμα.</p>
+          </div>
+        `
+      },
+      {
+        id: "part6",
+        title: "Μέρος 6️⃣: Cheat Sheet – Όλα σε μία σελίδα",
         content: `
           <div class="guide-table-wrapper">
             <table class="guide-table">
@@ -233,7 +255,29 @@ const GUIDE_DATA = {
       },
       {
         id: "part5",
-        title: "Part 5️⃣: Cheat Sheet – Everything on one page",
+        title: "Part 5️⃣: Good vs Bad Use – Real Situations",
+        content: `
+          <p>AI isn't good or bad on its own. The difference is in how you use it. Here are real situations you'll run into at school:</p>
+          <div class="guide-table-wrapper">
+            <table class="guide-table">
+              <thead><tr><th>Situation</th><th>❌ Bad use</th><th>✅ Good use</th></tr></thead>
+              <tbody>
+                <tr><td>The AI gave a wrong answer</td><td>You copy it anyway</td><td>You ask "Are you sure? Explain how you calculated that" and check it yourself</td></tr>
+                <tr><td>You don't understand a concept</td><td>You ask "Just give me the answer"</td><td>You ask "Explain it with an everyday example"</td></tr>
+                <tr><td>You have to submit an essay</td><td>You copy the AI's text as-is</td><td>You use it for ideas and structure, then write the final text yourself</td></tr>
+                <tr><td>A friend says their text was "written by AI"</td><td>You don't say anything, "everyone does it"</td><td>You suggest they rewrite it in their own words — that's how they actually learn it</td></tr>
+                <tr><td>You want to check if a text was written by AI</td><td>You fully trust some "AI detector" tool</td><td>There's no reliable way to know for sure — detection tools are often wrong. The best signal: can the person explain out loud what they wrote?</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="guide-principle">
+            <p><strong>The rule of thumb:</strong> If you couldn't explain out loud, in your own words, what you just "submitted" — you haven't learned it yet.</p>
+          </div>
+        `
+      },
+      {
+        id: "part6",
+        title: "Part 6️⃣: Cheat Sheet – Everything on one page",
         content: `
           <div class="guide-table-wrapper">
             <table class="guide-table">

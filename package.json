@@ -1,0 +1,23 @@
+{
+  "name": "primary",
+  "version": "1.0.0",
+  "description": "Ανεξάρτητο, δωρεάν, δίγλωσσο (EL/EN) εργαλείο που βοηθά **γονείς, μαθητές (6–18) και εκπαιδευτικούς** να καταλάβουν **ποια AI εργαλεία είναι κατάλληλα, ασφαλή και χρήσιμα ανά ηλικία — και για ΠΟΙΑ δουλειά**.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kca-website/ai-tools-for-family-kids-students.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kca-website/ai-tools-for-family-kids-students/issues"
+  },
+  "homepage": "https://github.com/kca-website/ai-tools-for-family-kids-students#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}

@@ -46,6 +46,9 @@
       badgeZeroTracking: "Χωρίς Tracking",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
+      heroQuizCta: "Κάνε το Διαγνωστικό σε 2 λεπτά",
+      heroQuizCtaSub: "Δες πού χρειάζεσαι εξάσκηση και μοιράσου το αποτέλεσμα",
+      heroQuizPickPrompt: "Για ποια ζώνη;",
       backToZones: "Πίσω σε όλες τις ζώνες",
       footerText: "Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.",
       emptyState: "Δεν έχουν προστεθεί ακόμα εργαλεία για αυτόν τον συνδυασμό. Έρχονται σύντομα.",
@@ -106,6 +109,9 @@
       badgeZeroTracking: "0% Tracking",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
+      heroQuizCta: "Take the 2-minute Diagnostic",
+      heroQuizCtaSub: "See where you need practice and share your result",
+      heroQuizPickPrompt: "For which zone?",
       backToZones: "Back to all zones",
       footerText: "Independent project. Not affiliated with any organization or AI tool vendor.",
       emptyState: "No tools added yet for this combination. Coming soon.",
@@ -272,6 +278,9 @@
     els.zoneSelectView = document.getElementById("zoneSelectView");
     els.pathView = document.getElementById("pathView");
     els.zoneGrid = document.getElementById("zoneGrid");
+    els.heroQuizCtaBtn = document.getElementById("heroQuizCtaBtn");
+    els.heroQuizPicker = document.getElementById("heroQuizPicker");
+    els.heroQuizPickerGrid = document.getElementById("heroQuizPickerGrid");
     els.pathZoneHeading = document.getElementById("pathZoneHeading");
     els.roleTabs = document.getElementById("roleTabs");
     els.subjectFilter = document.getElementById("subjectFilter");
@@ -326,6 +335,25 @@
       `;
       card.addEventListener("click", () => selectZone(zone.id));
       els.zoneGrid.appendChild(card);
+    });
+  }
+
+  // ---------- Rendering: Hero quiz picker (viral shortcut στο Learning Compass) ----------
+  function renderHeroQuizPicker() {
+    if (!els.heroQuizPickerGrid) return;
+    els.heroQuizPickerGrid.innerHTML = "";
+    ZONES.forEach((zone) => {
+      const label = state.lang === "el" ? zone.labelEl : zone.labelEn;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "hero__quiz-picker-btn";
+      btn.dataset.zone = zone.id;
+      btn.innerHTML = `<span aria-hidden="true">${zone.icon}</span> ${label}`;
+      btn.addEventListener("click", () => {
+        els.heroQuizPicker.hidden = true;
+        selectZoneQuiz(zone.id);
+      });
+      els.heroQuizPickerGrid.appendChild(btn);
     });
   }
 
@@ -1277,6 +1305,17 @@ function renderToolGrid(pathTools, targetElement) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function selectZoneQuiz(zoneId) {
+    state.currentZone = zoneId;
+    state.currentRole = "guardian";
+    state.currentSubject = null;
+    state.currentView = "quiz";
+    resetQuizState();
+    pushRoute();
+    renderCurrentRoute();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   function selectRole(roleId) {
     state.currentRole = roleId;
     pushRoute();
@@ -1304,6 +1343,7 @@ function renderToolGrid(pathTools, targetElement) {
     state.lang = lang;
     renderStaticStrings();
     renderZoneGrid();
+    renderHeroQuizPicker();
     if (state.currentZone) {
       renderRoleTabs();
       renderSubjectFilter();
@@ -1321,6 +1361,13 @@ function renderToolGrid(pathTools, targetElement) {
     cacheDom();
     renderStaticStrings();
     renderZoneGrid();
+
+    renderHeroQuizPicker();
+    if (els.heroQuizCtaBtn) {
+      els.heroQuizCtaBtn.addEventListener("click", () => {
+        els.heroQuizPicker.hidden = !els.heroQuizPicker.hidden;
+      });
+    }
 
     els.backToZones.addEventListener("click", showZoneSelectView);
     els.langElBtn.addEventListener("click", () => setLang("el"));

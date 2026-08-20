@@ -615,6 +615,66 @@ main {
   text-decoration: none;
 }
 
+.tool-card__age-note {
+  margin: 10px 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.tool-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tool-card__actions .tool-card__link {
+  margin-top: 0;
+}
+
+.tool-card__share-btn {
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.tool-card__share-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ---------- "Τι ΔΕΝ είναι αυτός ο οδηγός" ---------- */
+.not-guide-box {
+  margin-top: 32px;
+  padding: 20px 22px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  max-width: 640px;
+}
+
+.not-guide-box__title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin: 0 0 10px;
+}
+
+.not-guide-box__list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
 .empty-state {
   color: var(--color-text-muted);
   font-style: italic;
@@ -1179,6 +1239,11 @@ main {
 
 .site-footer__credit a:hover {
   text-decoration: underline;
+}
+
+.site-footer__last-checked {
+  font-size: 0.76rem !important;
+  opacity: 0.75;
 }
 
 /* ---------- Responsive ---------- */

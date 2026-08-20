@@ -78,6 +78,13 @@
       quizRetakeBtn: "Ξανακάνε το κουίζ",
       quizBackToStart: "Πίσω στην αρχή του κουίζ",
       quizDownloadStory: "Για Story",
+      // ---------- Learning Paths (νέο) ----------
+      pathViewBtn: "Δες το Μονοπάτι Μάθησης →",
+      pathModalTitle: "Μονοπάτι Μάθησης",
+      pathModalIntro: "3 βήματα. Το πρώτο δεν χρειάζεται καθόλου AI, το τρίτο επιβεβαιώνει ότι το κατάλαβες πραγματικά.",
+      pathStepLabel: "Βήμα {step} από 3",
+      pathModalClose: "Κλείσιμο",
+      pathOpenTool: "Άνοιγμα εργαλείου ↗",
       advancedIntro: "Εργαλεία που δεν είναι διάσημα αλλά λύνουν συγκεκριμένες δύσκολες ανάγκες.",
       pdfDownloading: "Δημιουργία PDF...",
       subjectFilterLabel: "Φίλτρο μαθήματος",
@@ -141,6 +148,13 @@
       quizRetakeBtn: "Retake the quiz",
       quizBackToStart: "Back to quiz start",
       quizDownloadStory: "For Story",
+      // ---------- Learning Paths (new) ----------
+      pathViewBtn: "View the Learning Path →",
+      pathModalTitle: "Learning Path",
+      pathModalIntro: "3 steps. The first needs no AI at all, the third confirms you actually got it.",
+      pathStepLabel: "Step {step} of 3",
+      pathModalClose: "Close",
+      pathOpenTool: "Open tool ↗",
       advancedIntro: "Tools that aren't famous but solve specific difficult needs.",
       pdfDownloading: "Generating PDF...",
       subjectFilterLabel: "Subject filter",
@@ -303,6 +317,8 @@
     els.quizContent = document.getElementById("quizContent");
     els.guideView = document.getElementById("guideView");
     els.guideContent = document.getElementById("guideContent");
+    els.pathModalOverlay = document.getElementById("pathModalOverlay");
+    els.pathModal = document.getElementById("pathModal");
   }
 
   // ---------- Rendering: στατικό UI κείμενο ----------
@@ -841,11 +857,13 @@ function renderToolGrid(pathTools, targetElement) {
           if (!tool) return "";
           return `<a class="quiz-tool-chip" href="${escapeAttr(tool.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>`;
         }).join("");
+        const hasPath = typeof LEARNING_PATHS !== "undefined" && LEARNING_PATHS[tagId];
         return `
           <article class="quiz-gap-card">
             <p class="quiz-gap-card__label">${escapeHtml(label)}</p>
             <p class="quiz-gap-card__explain">${escapeHtml(explain)}</p>
             ${toolsHtml ? `<p class="quiz-gap-card__tools-label">${t("quizRecommendedTools")}</p><div class="quiz-tool-chips">${toolsHtml}</div>` : ""}
+            ${hasPath ? `<button type="button" class="path-view-btn" data-gap-id="${escapeAttr(tagId)}">${t("pathViewBtn")}</button>` : ""}
           </article>
         `;
       }).join("");
@@ -923,6 +941,59 @@ function renderToolGrid(pathTools, targetElement) {
       resetQuizState();
       renderQuizView();
     });
+    els.quizContent.querySelectorAll('.path-view-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openLearningPathModal(btn.dataset.gapId);
+      });
+    });
+  }
+
+  // ---------- Learning Paths (Μονοπάτια Μάθησης) ----------
+  function openLearningPathModal(gapId) {
+    if (typeof LEARNING_PATHS === "undefined") return;
+    const steps = LEARNING_PATHS[gapId];
+    const gap = (typeof GAP_TAGS !== "undefined" && GAP_TAGS[gapId]) || null;
+    if (!steps || !gap) return;
+
+    const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
+
+    const stepsHtml = steps.map((step, idx) => {
+      const stepNum = idx + 1;
+      const title = state.lang === "el" ? step.titleEl : step.titleEn;
+      const desc = state.lang === "el" ? step.descriptionEl : step.descriptionEn;
+      const tool = step.toolId ? TOOLS[step.toolId] : null;
+      const toolLinkHtml = tool && tool.url
+        ? `<a class="path-step__tool-link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)} — ${t("pathOpenTool")}</a>`
+        : "";
+      return `
+        <div class="path-step">
+          <div class="path-step__number">${stepNum}</div>
+          <div class="path-step__body">
+            <p class="path-step__label">${t("pathStepLabel", { step: stepNum })}</p>
+            <p class="path-step__title">${escapeHtml(title)}</p>
+            <p class="path-step__desc">${escapeHtml(desc)}</p>
+            ${toolLinkHtml}
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    els.pathModal.innerHTML = `
+      <button type="button" class="path-modal__close" aria-label="${t("pathModalClose")}">✕</button>
+      <p class="path-modal__eyebrow">${t("pathModalTitle")}</p>
+      <h3 class="path-modal__title">${escapeHtml(label)}</h3>
+      <p class="path-modal__intro">${t("pathModalIntro")}</p>
+      <div class="path-steps">${stepsHtml}</div>
+    `;
+    els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
+    els.pathModalOverlay.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLearningPathModal() {
+    els.pathModalOverlay.hidden = true;
+    els.pathModal.innerHTML = "";
+    document.body.style.overflow = "";
   }
 
   // ---------- Parent Quiz: rendering ----------
@@ -1442,6 +1513,13 @@ function renderToolGrid(pathTools, targetElement) {
     els.viewTabPrompts.addEventListener("click", () => selectView("prompts"));
     els.viewTabQuiz.addEventListener("click", () => selectView("quiz"));
     els.viewTabGuide.addEventListener("click", () => selectView("guide"));
+
+    els.pathModalOverlay.addEventListener("click", (e) => {
+      if (e.target === els.pathModalOverlay) closeLearningPathModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !els.pathModalOverlay.hidden) closeLearningPathModal();
+    });
 
     // Deep link: URL όπως /primary/guardian/quiz φορτώνει κατευθείαν εκεί.
     restoreStateFromPath(location.pathname);

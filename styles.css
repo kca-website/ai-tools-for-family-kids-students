@@ -1246,6 +1246,20 @@ main {
   opacity: 0.75;
 }
 
+.site-footer__legal {
+  font-size: 0.78rem !important;
+  margin-top: 8px !important;
+}
+
+.site-footer__legal a {
+  color: var(--color-text-muted);
+  text-decoration: underline;
+}
+
+.site-footer__legal a:hover {
+  color: var(--color-accent);
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 600px) {
   .site-header__inner {

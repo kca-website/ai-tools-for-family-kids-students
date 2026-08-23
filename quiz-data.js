@@ -324,7 +324,7 @@ const GAP_TAGS = {
     labelEn: "Free fall",
     explainEl: "Πιστεύει ότι τα βαρύτερα αντικείμενα πέφτουν πιο γρήγορα από τα ελαφρύτερα, μπερδεύοντας το βάρος με την αντίσταση του αέρα.",
     explainEn: "Believes heavier objects fall faster than lighter ones, confusing weight with air resistance.",
-    recommendedToolIds: ["wolfram-alpha"],
+    recommendedToolIds: ["khanmigo"],
     achievementEl: "Ο Μικρός Γαλιλαίος",
     achievementEn: "The Little Galileo",
     positiveMessageEl: "Καταλαβαίνεις πώς πέφτουν πραγματικά τα αντικείμενα!",
@@ -941,10 +941,33 @@ const GAP_TAGS = {
 };
 
 // ---------- QUIZZES ----------
+// ---------- GRADES (ανά ζώνη, για την πλοήγηση ζώνη -> τάξη -> μάθημα) ----------
+const GRADES = {
+  primary: [
+    { id: "a", labelEl: "Α' Δημοτικού", labelEn: "1st Grade" },
+    { id: "b", labelEl: "Β' Δημοτικού", labelEn: "2nd Grade" },
+    { id: "c", labelEl: "Γ' Δημοτικού", labelEn: "3rd Grade" },
+    { id: "d", labelEl: "Δ' Δημοτικού", labelEn: "4th Grade" },
+    { id: "e", labelEl: "Ε' Δημοτικού", labelEn: "5th Grade" },
+    { id: "st", labelEl: "ΣΤ' Δημοτικού", labelEn: "6th Grade" },
+  ],
+  middle: [
+    { id: "a", labelEl: "Α' Γυμνασίου", labelEn: "7th Grade" },
+    { id: "b", labelEl: "Β' Γυμνασίου", labelEn: "8th Grade" },
+    { id: "c", labelEl: "Γ' Γυμνασίου", labelEn: "9th Grade" },
+  ],
+  high: [
+    { id: "a", labelEl: "Α' Λυκείου", labelEn: "10th Grade" },
+    { id: "b", labelEl: "Β' Λυκείου", labelEn: "11th Grade" },
+    { id: "c", labelEl: "Γ' Λυκείου", labelEn: "12th Grade" },
+  ],
+};
+
 const QUIZZES = {
   primary: {
     "math-e-dimotikou": {
       id: "math-e-dimotikou",
+      grades: ["e"],
       subjectLabelEl: "Μαθηματικά, Ε' Δημοτικού",
       subjectLabelEn: "Math, 5th Grade",
       titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
@@ -1017,6 +1040,7 @@ const QUIZZES = {
     // ---------- ΝΕΟ QUIZ: ΙΣΤΟΡΙΑ ΔΗΜΟΤΙΚΟΥ ----------
     "history-st-dimotikou": {
       id: "history-st-dimotikou",
+      grades: ["e"],
       subjectLabelEl: "Ιστορία, Ε' Δημοτικού",
       subjectLabelEn: "History, 5th Grade",
       titleEl: "Ο Διαγνωστικός Χάρτης Ιστορίας",
@@ -1078,6 +1102,7 @@ const QUIZZES = {
     },
     "glossa-e-dimotikou": {
       id: "glossa-e-dimotikou",
+      grades: ["e"],
       subjectLabelEl: "Νεοελληνική Γλώσσα, Ε' Δημοτικού",
       subjectLabelEn: "Modern Greek Language, 5th Grade",
       titleEl: "Ο Διαγνωστικός Χάρτης Ορθογραφίας",
@@ -1140,6 +1165,7 @@ const QUIZZES = {
 
     "science-e-dimotikou": {
       id: "science-e-dimotikou",
+      grades: ["e"],
       subjectLabelEl: "Φυσικές Επιστήμες, Ε' Δημοτικού",
       subjectLabelEn: "Natural Science, 5th Grade",
       titleEl: "Ο Διαγνωστικός Χάρτης Φυσικών Επιστημών",
@@ -1202,6 +1228,7 @@ const QUIZZES = {
 
     "english-e-st-dimotikou": {
       id: "english-e-st-dimotikou",
+      grades: ["e", "st"],
       subjectLabelEl: "Αγγλικά, Ε'/ΣΤ' Δημοτικού",
       subjectLabelEn: "English, 5th/6th Grade",
       titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών",
@@ -1266,6 +1293,7 @@ const QUIZZES = {
     // ---------- ΝΕΟ QUIZ: ΝΕΟΕΛΛΗΝΙΚΗ ΓΛΩΣΣΑ ΓΥΜΝΑΣΙΟΥ ----------
     "glossa-gymnasiou": {
       id: "glossa-gymnasiou",
+      grades: ["c"],
       subjectLabelEl: "Νεοελληνική Γλώσσα, Γ' Γυμνασίου",
       subjectLabelEn: "Modern Greek Language, 3rd Grade Middle School",
       titleEl: "Ο Διαγνωστικός Χάρτης Γραμματικής",
@@ -1318,6 +1346,7 @@ const QUIZZES = {
     // ---------- ΝΕΟ QUIZ: ΦΥΣΙΚΗ ΓΥΜΝΑΣΙΟΥ ----------
     "physics-gymnasiou": {
       id: "physics-gymnasiou",
+      grades: ["b"],
       subjectLabelEl: "Φυσική, Β' Γυμνασίου",
       subjectLabelEn: "Physics, 2nd Grade Middle School",
       titleEl: "Ο Διαγνωστικός Χάρτης Φυσικής",
@@ -1369,6 +1398,7 @@ const QUIZZES = {
     },
     "mathimatika-g-gymnasiou": {
       id: "mathimatika-g-gymnasiou",
+      grades: ["c"],
       subjectLabelEl: "Μαθηματικά, Γ' Γυμνασίου",
       subjectLabelEn: "Mathematics, 3rd Grade Middle School",
       titleEl: "Ο Διαγνωστικός Χάρτης Άλγεβρας",
@@ -1421,6 +1451,7 @@ const QUIZZES = {
 
     "istoria-g-gymnasiou": {
       id: "istoria-g-gymnasiou",
+      grades: ["c"],
       subjectLabelEl: "Ιστορία, Γ' Γυμνασίου",
       subjectLabelEn: "History, 3rd Grade Middle School",
       titleEl: "Ο Διαγνωστικός Χάρτης Νεότερης Ιστορίας",
@@ -1473,6 +1504,7 @@ const QUIZZES = {
 
     "english-g-gymnasiou": {
       id: "english-g-gymnasiou",
+      grades: ["c"],
       subjectLabelEl: "Αγγλικά, Γ' Γυμνασίου",
       subjectLabelEn: "English, 3rd Grade Middle School",
       titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών (B1-B2)",
@@ -1526,6 +1558,7 @@ const QUIZZES = {
   high: {
     "ekthesi-lykeiou": {
       id: "ekthesi-lykeiou",
+      grades: ["a", "b", "c"],
       subjectLabelEl: "Νεοελληνική Γλώσσα & Έκθεση, Λύκειο",
       subjectLabelEn: "Modern Greek Language & Essay, Lyceum",
       titleEl: "Ο Διαγνωστικός Χάρτης Έκθεσης",
@@ -1588,6 +1621,7 @@ const QUIZZES = {
 
     "mathimatika-a-lykeiou": {
       id: "mathimatika-a-lykeiou",
+      grades: ["a"],
       subjectLabelEl: "Μαθηματικά, Α' Λυκείου (Γενικής Παιδείας)",
       subjectLabelEn: "Mathematics, 1st Grade Lyceum (General Education)",
       titleEl: "Ο Διαγνωστικός Χάρτης Συναρτήσεων",
@@ -1650,6 +1684,7 @@ const QUIZZES = {
 
     "fysiki-a-lykeiou": {
       id: "fysiki-a-lykeiou",
+      grades: ["a", "b"],
       subjectLabelEl: "Φυσική, Α'/Β' Λυκείου (Γενικής Παιδείας)",
       subjectLabelEn: "Physics, 1st/2nd Grade Lyceum (General Education)",
       titleEl: "Ο Διαγνωστικός Χάρτης Φυσικής",
@@ -1712,6 +1747,7 @@ const QUIZZES = {
 
     "istoria-lykeiou": {
       id: "istoria-lykeiou",
+      grades: ["a", "b", "c"],
       subjectLabelEl: "Ιστορία, Λύκειο",
       subjectLabelEn: "History, Lyceum",
       titleEl: "Ο Διαγνωστικός Χάρτης Σύγχρονης Ιστορίας",
@@ -1764,6 +1800,7 @@ const QUIZZES = {
 
     "english-lykeiou": {
       id: "english-lykeiou",
+      grades: ["b", "c"],
       subjectLabelEl: "Αγγλικά, Λύκειο (B2)",
       subjectLabelEn: "English, Lyceum (B2)",
       titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών (B2)",

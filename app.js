@@ -28,6 +28,7 @@
     quizCurrentIndex: 0,
     quizAnswers: [],
     quizFinished: false,
+    quizSessionQuestions: [], // Το τυχαίο υποσύνολο ερωτήσεων της τρέχουσας προσπάθειας
     // Parent Quiz sub-state (νέο)
     parentQuizActive: false,
     parentQuizIndex: 0,
@@ -769,12 +770,38 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   // ---------- Quiz functions ----------
+
+  // Πόσες ερωτήσεις δείχνουμε ανά προσπάθεια, αν η "δεξαμενή" ερωτήσεων του
+  // quiz είναι μεγαλύτερη. Αν η δεξαμενή έχει λιγότερες, δείχνουμε όλες.
+  const QUIZ_QUESTIONS_PER_ATTEMPT = 6;
+
+  // Fisher-Yates shuffle — δεν πειράζει τον αρχικό πίνακα, επιστρέφει νέο.
+  function shuffleArray(arr) {
+    const copy = arr.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  // Διαλέγει τυχαίο υποσύνολο ερωτήσεων από τη δεξαμενή του quiz για τη
+  // ΤΡΕΧΟΥΣΑ προσπάθεια. Καλείται τόσο στην εκκίνηση όσο και στο "Ξανακάνε
+  // το κουίζ", ώστε κάθε προσπάθεια να δείχνει διαφορετικό, ή έστω
+  // διαφορετικά διατεταγμένο, σύνολο ερωτήσεων.
+  function startQuizSession(quiz) {
+    const pool = (quiz && quiz.questions) || [];
+    const shuffled = shuffleArray(pool);
+    state.quizSessionQuestions = shuffled.slice(0, Math.min(QUIZ_QUESTIONS_PER_ATTEMPT, shuffled.length));
+  }
+
   function resetQuizState() {
     state.quizGradeId = null;
     state.quizSubjectId = null;
     state.quizCurrentIndex = 0;
     state.quizAnswers = [];
     state.quizFinished = false;
+    state.quizSessionQuestions = [];
     resetParentQuizState();
   }
 
@@ -908,15 +935,17 @@ function renderToolGrid(pathTools, targetElement) {
         state.quizCurrentIndex = 0;
         state.quizAnswers = [];
         state.quizFinished = false;
+        startQuizSession(zoneQuizzes[state.quizSubjectId]);
         renderQuizView();
       });
     });
   }
 
   function renderQuizQuestion(quiz) {
-    const question = quiz.questions[state.quizCurrentIndex];
+    const sessionQuestions = state.quizSessionQuestions;
+    const question = sessionQuestions[state.quizCurrentIndex];
     const questionText = state.lang === "el" ? question.textEl : question.textEn;
-    const total = quiz.questions.length;
+    const total = sessionQuestions.length;
     const current = state.quizCurrentIndex + 1;
     const optionsHtml = question.options.map((opt, idx) => {
       const label = state.lang === "el" ? opt.textEl : opt.textEn;
@@ -935,7 +964,7 @@ function renderToolGrid(pathTools, targetElement) {
           questionId: question.id,
           gapTag: chosen.isCorrect ? null : chosen.gapTag || null,
         });
-        if (state.quizCurrentIndex < quiz.questions.length - 1) {
+        if (state.quizCurrentIndex < sessionQuestions.length - 1) {
           state.quizCurrentIndex += 1;
           renderQuizQuestion(quiz);
         } else {
@@ -1016,7 +1045,7 @@ function renderToolGrid(pathTools, targetElement) {
     }
 
     // Υπολογισμός % επιτυχίας παιδιού (για τη σύγκριση με το Parent Quiz)
-    const childTotal = quiz.questions.length;
+    const childTotal = state.quizSessionQuestions.length;
     const childCorrect = childTotal - gapTagIds.length >= 0
       ? state.quizAnswers.filter((a) => !a.gapTag).length
       : 0;
@@ -1080,6 +1109,7 @@ function renderToolGrid(pathTools, targetElement) {
       state.quizCurrentIndex = 0;
       state.quizAnswers = [];
       state.quizFinished = false;
+      startQuizSession(quiz);
       renderQuizView();
     });
     els.quizContent.querySelector('.quiz-back-btn').addEventListener('click', () => {

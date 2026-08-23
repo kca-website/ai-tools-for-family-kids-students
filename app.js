@@ -796,11 +796,16 @@ function renderToolGrid(pathTools, targetElement) {
 
   // Μέγιστη ηλικία ανά ζώνη — χρησιμοποιείται σαν ασφαλιστική δικλείδα ώστε
   // καμία πρόταση εργαλείου σε αποτέλεσμα κουίζ να μην ξεπερνά την ηλικία της ζώνης,
-  // ακόμα κι αν μπει λάθος recommendedToolIds σε μελλοντική επεξεργασία δεδομένων.
+  // ΟΤΑΝ ο τρέχων ρόλος είναι "μαθητής" (το εργαλείο θα το χρησιμοποιήσει το ίδιο το παιδί).
+  // Όταν ο ρόλος είναι "guardian" (γονιός/εκπαιδευτικός), το φίλτρο δεν ισχύει: ο ενήλικας
+  // είναι αυτός που θα δει/χρησιμοποιήσει το εργαλείο (π.χ. να ρωτήσει το ChatGPT πώς να
+  // εξηγήσει μια έννοια στο παιδί του), όχι το παιδί απευθείας, οπότε η ηλικία του παιδιού
+  // δεν είναι το σχετικό όριο εδώ.
   const ZONE_MAX_AGE = { primary: 12, middle: 15, high: 18 };
 
   function isToolAgeAppropriate(tool) {
     if (!tool) return false;
+    if (state.currentRole === "guardian") return true;
     const maxAge = ZONE_MAX_AGE[state.currentZone];
     if (maxAge === undefined || tool.minAge === undefined) return true;
     return tool.minAge <= maxAge;
@@ -952,11 +957,51 @@ function renderToolGrid(pathTools, targetElement) {
         if (!gap) return "";
         const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
         const explain = state.lang === "el" ? gap.explainEl : gap.explainEn;
-        const toolsHtml = (gap.recommendedToolIds || []).map((toolId) => {
+        const zoneMax = ZONE_MAX_AGE[state.currentZone];
+
+        function renderToolBlock(tool) {
+          const desc = state.lang === "el" ? tool.shortDescEl : tool.shortDescEn;
+          return `
+            <div class="quiz-tool-block" style="margin-bottom: 12px;">
+              <a class="quiz-tool-chip" href="${escapeAttr(tool.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>
+              ${desc ? `<p class="quiz-tool-howto" style="margin: 4px 0 0; font-size: 0.85rem; color: var(--color-text-muted);">${escapeHtml(desc)}</p>` : ""}
+            </div>
+          `;
+        }
+
+        // Χωρίζουμε σε: (α) εργαλεία κατάλληλα για την ίδια τη ζώνη ηλικίας (φαίνονται πάντα),
+        // (β) εργαλεία που φαίνονται ΜΟΝΟ επειδή ο ρόλος είναι "guardian" (π.χ. ChatGPT σε ζώνη
+        // Δημοτικού). Ο ρόλος είναι αυτο-δηλωμένος και ανεπαλήθευτος — ένα παιδί θα μπορούσε να
+        // πατήσει το tab "Γονιός" με ένα κλικ — οπότε τα (β) ΔΕΝ εμφανίζονται αυτόματα μαζί με τα
+        // υπόλοιπα, αλλά μέσα σε ένα κλειστό-από-προεπιλογή <details>, ώστε να χρειάζεται ένα
+        // ξεχωριστό, ξεκάθαρα διατυπωμένο κλικ για να φανούν.
+        const regularTools = [];
+        const adultOnlyTools = [];
+        (gap.recommendedToolIds || []).forEach((toolId) => {
           const tool = TOOLS[toolId];
-          if (!tool || !isToolAgeAppropriate(tool)) return "";
-          return `<a class="quiz-tool-chip" href="${escapeAttr(tool.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>`;
-        }).join("");
+          if (!tool || !isToolAgeAppropriate(tool)) return;
+          const isAdultOnlyHere =
+            state.currentRole === "guardian" &&
+            zoneMax !== undefined &&
+            tool.minAge !== undefined &&
+            tool.minAge > zoneMax;
+          if (isAdultOnlyHere) adultOnlyTools.push(tool);
+          else regularTools.push(tool);
+        });
+
+        const regularToolsHtml = regularTools.map(renderToolBlock).join("");
+        const adultSummaryText = state.lang === "el"
+          ? `Δες προτάσεις και για εσένα (${adultOnlyTools.length}) — όχι για το παιδί`
+          : `Show suggestions for you too (${adultOnlyTools.length}) — not for the child`;
+        const adultToolsHtml = adultOnlyTools.length
+          ? `
+            <details class="quiz-tool-adult-details" style="margin-top: 10px;">
+              <summary style="cursor: pointer; font-size: 0.85rem; color: var(--color-accent); font-weight: 600;">${escapeHtml(adultSummaryText)}</summary>
+              <div style="margin-top: 10px;">${adultOnlyTools.map(renderToolBlock).join("")}</div>
+            </details>
+          `
+          : "";
+        const toolsHtml = regularToolsHtml + adultToolsHtml;
         const hasPath = typeof LEARNING_PATHS !== "undefined" && LEARNING_PATHS[tagId];
         return `
           <article class="quiz-gap-card">

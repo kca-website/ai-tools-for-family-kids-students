@@ -39,8 +39,8 @@
   // ---------- Στατικά strings ----------
   const STRINGS = {
     el: {
-      heroTitle: "Ποιο AI εργαλείο ταιριάζει στο παιδί σου και για ποια δουλειά",
-      heroSubtitle: "Δεν είναι ακόμα ένας οδηγός ασφάλειας. Δείχνουμε ποιο συγκεκριμένο εργαλείο ταιριάζει σε ποια σχολική δουλειά, ανά ηλικία, για γονείς, μαθητές 6 έως 18 και εκπαιδευτικούς.",
+      heroTitle: "Μαθαίνω Έξυπνα με AI",
+      heroSubtitle: "Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί. Για γονείς, μαθητές 6 έως 18 αλλά και εκπαιδευτικούς.",
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
@@ -48,7 +48,7 @@
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
       heroQuizCta: "Κάνε το Διαγνωστικό σε 2 λεπτά",
-      heroQuizCtaSub: "Δες πού χρειάζεσαι εξάσκηση και μοιράσου το αποτέλεσμα",
+      heroQuizCtaSub: "Οποιαδήποτε στιγμή, χωρίς διάβασμα πριν. Δείχνει τι ξέρεις ήδη, και μπορείς να το ξανακάνεις σε λίγες εβδομάδες για να δεις την πρόοδο.",
       heroQuizPickPrompt: "Για ποια ζώνη;",
       backToZones: "Πίσω σε όλες τις ζώνες",
       footerText: "Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.",
@@ -122,8 +122,8 @@
       parentQuizShareCta: "Μοιράσου τη σύγκριση με άλλους γονείς",
     },
     en: {
-      heroTitle: "Which AI tool fits your child, and for which task",
-      heroSubtitle: "This isn't another safety guide. We show which specific tool fits which schoolwork, by age, for parents, students 6 to 18, and educators.",
+      heroTitle: "Learn Smarter with AI",
+      heroSubtitle: "See in 2 minutes where the student or the parent could use a bit more practice, and which free AI tool fits exactly there. For parents, students 6 to 18, and educators.",
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
@@ -131,7 +131,7 @@
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
       heroQuizCta: "Take the 2-minute Diagnostic",
-      heroQuizCtaSub: "See where you need practice and share your result",
+      heroQuizCtaSub: "Anytime, no studying required. It shows what you already know, and you can retake it in a few weeks to see your progress.",
       heroQuizPickPrompt: "For which zone?",
       backToZones: "Back to all zones",
       footerText: "Independent project. Not affiliated with any organization or AI tool vendor.",

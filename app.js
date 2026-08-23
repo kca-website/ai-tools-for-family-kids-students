@@ -23,6 +23,7 @@
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "guide"
     currentSubject: null, // subjectId ή null = "Όλα"
     // Quiz sub-state
+    quizGradeId: null,
     quizSubjectId: null,
     quizCurrentIndex: 0,
     quizAnswers: [],
@@ -77,7 +78,11 @@
       copiedPrompt: "Αντιγράφηκε",
       tipLabel: "Συμβουλή",
       quizEmptyState: "Δεν υπάρχει ακόμα διαγνωστικό κουίζ για αυτή τη ζώνη. Έρχεται σύντομα.",
+      quizPickGrade: "Διάλεξε τάξη",
       quizPickSubject: "Διάλεξε μάθημα",
+      quizBackToGrades: "← Άλλη τάξη",
+      quizGradeComingSoon: "Έρχεται σύντομα",
+      quizGradeEmptyState: "Δεν υπάρχει ακόμα διαγνωστικό κουίζ για αυτή την τάξη. Έρχεται σύντομα.",
       quizStartBtn: "Ξεκίνα το κουίζ",
       quizQuestionOf: "Ερώτηση {current} από {total}",
       quizResultsTitle: "Το αποτέλεσμα του Χάρτη",
@@ -147,7 +152,11 @@
       copiedPrompt: "Copied",
       tipLabel: "Tip",
       quizEmptyState: "No diagnostic quiz yet for this zone. Coming soon.",
+      quizPickGrade: "Choose a grade",
       quizPickSubject: "Choose a subject",
+      quizBackToGrades: "← Change grade",
+      quizGradeComingSoon: "Coming soon",
+      quizGradeEmptyState: "No diagnostic quiz yet for this grade. Coming soon.",
       quizStartBtn: "Start the quiz",
       quizQuestionOf: "Question {current} of {total}",
       quizResultsTitle: "Your Compass Result",
@@ -761,6 +770,7 @@ function renderToolGrid(pathTools, targetElement) {
 
   // ---------- Quiz functions ----------
   function resetQuizState() {
+    state.quizGradeId = null;
     state.quizSubjectId = null;
     state.quizCurrentIndex = 0;
     state.quizAnswers = [];
@@ -780,6 +790,22 @@ function renderToolGrid(pathTools, targetElement) {
     return (typeof QUIZZES !== "undefined" && QUIZZES[state.currentZone]) || null;
   }
 
+  function getZoneGrades() {
+    return (typeof GRADES !== "undefined" && GRADES[state.currentZone]) || [];
+  }
+
+  // Μέγιστη ηλικία ανά ζώνη — χρησιμοποιείται σαν ασφαλιστική δικλείδα ώστε
+  // καμία πρόταση εργαλείου σε αποτέλεσμα κουίζ να μην ξεπερνά την ηλικία της ζώνης,
+  // ακόμα κι αν μπει λάθος recommendedToolIds σε μελλοντική επεξεργασία δεδομένων.
+  const ZONE_MAX_AGE = { primary: 12, middle: 15, high: 18 };
+
+  function isToolAgeAppropriate(tool) {
+    if (!tool) return false;
+    const maxAge = ZONE_MAX_AGE[state.currentZone];
+    if (maxAge === undefined || tool.minAge === undefined) return true;
+    return tool.minAge <= maxAge;
+  }
+
   function renderQuizView() {
     if (state.parentQuizActive) {
       renderParentQuizView();
@@ -791,13 +817,19 @@ function renderToolGrid(pathTools, targetElement) {
       els.quizContent.innerHTML = `<div class="empty-state">${t("quizEmptyState")}</div>`;
       return;
     }
+    if (!state.quizGradeId) {
+      renderQuizGradePicker(zoneQuizzes);
+      return;
+    }
     if (!state.quizSubjectId) {
-      renderQuizSubjectPicker(zoneQuizzes, subjectIds);
+      const gradeSubjectIds = subjectIds.filter((sid) => (zoneQuizzes[sid].grades || []).includes(state.quizGradeId));
+      renderQuizSubjectPicker(zoneQuizzes, gradeSubjectIds);
       return;
     }
     const quiz = zoneQuizzes[state.quizSubjectId];
     if (!quiz) {
-      renderQuizSubjectPicker(zoneQuizzes, subjectIds);
+      const gradeSubjectIds = subjectIds.filter((sid) => (zoneQuizzes[sid].grades || []).includes(state.quizGradeId));
+      renderQuizSubjectPicker(zoneQuizzes, gradeSubjectIds);
       return;
     }
     if (state.quizFinished) {
@@ -807,7 +839,42 @@ function renderToolGrid(pathTools, targetElement) {
     }
   }
 
+  function renderQuizGradePicker(zoneQuizzes) {
+    const grades = getZoneGrades();
+    const cards = grades.map((grade) => {
+      const label = state.lang === "el" ? grade.labelEl : grade.labelEn;
+      const hasContent = Object.values(zoneQuizzes).some((q) => (q.grades || []).includes(grade.id));
+      const comingSoonBadge = hasContent ? "" : `<span class="quiz-grade-card__badge">${t("quizGradeComingSoon")}</span>`;
+      return `
+        <button type="button" class="quiz-grade-card${hasContent ? "" : " quiz-grade-card--soon"}" data-grade-id="${escapeAttr(grade.id)}">
+          <span class="quiz-grade-card__label">${escapeHtml(label)}</span>
+          ${comingSoonBadge}
+        </button>
+      `;
+    }).join("");
+    els.quizContent.innerHTML = `<p class="quiz-pick-heading">${t("quizPickGrade")}</p><div class="quiz-grade-grid">${cards}</div>`;
+    els.quizContent.querySelectorAll(".quiz-grade-card").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.quizGradeId = btn.dataset.gradeId;
+        state.quizSubjectId = null;
+        renderQuizView();
+      });
+    });
+  }
+
   function renderQuizSubjectPicker(zoneQuizzes, subjectIds) {
+    const backBtnHtml = `<button type="button" class="quiz-grade-back-btn" id="quizBackToGradesBtn">${t("quizBackToGrades")}</button>`;
+    if (!subjectIds.length) {
+      els.quizContent.innerHTML = `${backBtnHtml}<div class="empty-state">${t("quizGradeEmptyState")}</div>`;
+      const backBtn = document.getElementById("quizBackToGradesBtn");
+      if (backBtn) {
+        backBtn.addEventListener("click", () => {
+          state.quizGradeId = null;
+          renderQuizView();
+        });
+      }
+      return;
+    }
     const cards = subjectIds.map((sid) => {
       const q = zoneQuizzes[sid];
       const subjectLabel = state.lang === "el" ? q.subjectLabelEl : q.subjectLabelEn;
@@ -822,7 +889,14 @@ function renderToolGrid(pathTools, targetElement) {
         </article>
       `;
     }).join("");
-    els.quizContent.innerHTML = `<p class="quiz-pick-heading">${t("quizPickSubject")}</p><div class="quiz-subject-grid">${cards}</div>`;
+    els.quizContent.innerHTML = `${backBtnHtml}<p class="quiz-pick-heading">${t("quizPickSubject")}</p><div class="quiz-subject-grid">${cards}</div>`;
+    const backBtn = document.getElementById("quizBackToGradesBtn");
+    if (backBtn) {
+      backBtn.addEventListener("click", () => {
+        state.quizGradeId = null;
+        renderQuizView();
+      });
+    }
     els.quizContent.querySelectorAll(".quiz-start-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.quizSubjectId = btn.dataset.subjectId;
@@ -880,7 +954,7 @@ function renderToolGrid(pathTools, targetElement) {
         const explain = state.lang === "el" ? gap.explainEl : gap.explainEn;
         const toolsHtml = (gap.recommendedToolIds || []).map((toolId) => {
           const tool = TOOLS[toolId];
-          if (!tool) return "";
+          if (!tool || !isToolAgeAppropriate(tool)) return "";
           return `<a class="quiz-tool-chip" href="${escapeAttr(tool.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>`;
         }).join("");
         const hasPath = typeof LEARNING_PATHS !== "undefined" && LEARNING_PATHS[tagId];

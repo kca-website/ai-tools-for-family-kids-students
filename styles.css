@@ -828,6 +828,70 @@ main {
   border: 1px solid var(--color-accent);
 }
 
+.quiz-grade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.quiz-grade-card {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px 14px;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+}
+
+.quiz-grade-card:hover {
+  border-color: var(--color-accent);
+}
+
+.quiz-grade-card__label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.quiz-grade-card--soon {
+  opacity: 0.7;
+}
+
+.quiz-grade-card__badge {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.quiz-grade-back-btn {
+  display: inline-block;
+  margin-bottom: 14px;
+  border: none;
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.quiz-grade-back-btn:hover {
+  text-decoration: underline;
+}
+
 .quiz-progress {
   font-size: 0.8rem;
   font-weight: 700;

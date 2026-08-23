@@ -795,6 +795,18 @@ function renderToolGrid(pathTools, targetElement) {
     state.quizSessionQuestions = shuffled.slice(0, Math.min(QUIZ_QUESTIONS_PER_ATTEMPT, shuffled.length));
   }
 
+  // Το intro κειμενο κάθε quiz (π.χ. "4 σύντομες ερωτήσεις...") γράφτηκε όταν
+  // κάθε quiz είχε σταθερό αριθμό ερωτήσεων. Τώρα ο αριθμός που πραγματικά
+  // φαίνεται είναι δυναμικός (Math.min(QUIZ_QUESTIONS_PER_ATTEMPT, pool.length)),
+  // οπότε διορθώνουμε το πρώτο ψηφίο μέσα στο κείμενο ώστε να ταιριάζει πάντα με
+  // την πραγματικότητα, χωρίς να χρειάζεται να ξαναγράφουμε το κείμενο σε κάθε quiz.
+  function getDynamicIntro(quiz) {
+    const rawIntro = state.lang === "el" ? quiz.introEl : quiz.introEn;
+    if (!rawIntro) return rawIntro;
+    const actualCount = Math.min(QUIZ_QUESTIONS_PER_ATTEMPT, (quiz.questions || []).length);
+    return rawIntro.replace(/^\d+(?=\s*(σύντομες|short))/, String(actualCount));
+  }
+
   function resetQuizState() {
     state.quizGradeId = null;
     state.quizSubjectId = null;
@@ -911,7 +923,7 @@ function renderToolGrid(pathTools, targetElement) {
       const q = zoneQuizzes[sid];
       const subjectLabel = state.lang === "el" ? q.subjectLabelEl : q.subjectLabelEn;
       const title = state.lang === "el" ? q.titleEl : q.titleEn;
-      const intro = state.lang === "el" ? q.introEl : q.introEn;
+      const intro = getDynamicIntro(q);
       return `
         <article class="quiz-subject-card">
           <p class="quiz-subject-card__subject">${escapeHtml(subjectLabel)}</p>

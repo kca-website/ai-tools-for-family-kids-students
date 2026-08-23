@@ -217,6 +217,18 @@ const TOOLS = {
     shortDescEn: "AI tutor built on Khan Academy. Guides with Socratic questions instead of handing over answers.",
     greekTips: "Διαθέσιμο και στα ελληνικά. Εξαιρετικό για εξάσκηση στα Μαθηματικά Δημοτικού.",
   },
+  "khan-academy-kids": {
+    id: "khan-academy-kids",
+    name: "Khan Academy Kids",
+    url: "https://learn.khanacademy.org/khan-academy-kids/",
+    category: "research",
+    logo: null,
+    minAge: 2,
+    minAgeNote: "Σχεδιασμένο για ηλικίες 2-8. Εντελώς δωρεάν, χωρίς διαφημίσεις, χωρίς in-app αγορές, χωρίς συλλογή δεδομένων παιδιού (5 αστέρια στο Common Sense Media). Διαφέρει από το Khanmigo: δεν είναι AI chatbot/tutor, είναι βιβλιοθήκη διαδραστικών μαθημάτων/παιχνιδιών ανάγνωσης, μαθηματικών και κοινωνικο-συναισθηματικής μάθησης με προσαρμοστική δυσκολία.",
+    shortDescEl: "Δωρεάν εφαρμογή για τις πιο μικρές ηλικίες (Νηπιαγωγείο, Α'-Β' Δημοτικού). Ανάγνωση, μαθηματικά και παιχνίδια με προσαρμοστική δυσκολία, χωρίς λογαριασμό να χρειάζεται για βασική χρήση.",
+    shortDescEn: "Free app for the youngest ages (kindergarten, 1st-2nd grade). Reading, math, and games with adaptive difficulty, no account required for basic use.",
+    isGreek: false,
+  },
   "notebooklm": {
     id: "notebooklm",
     name: "NotebookLM",

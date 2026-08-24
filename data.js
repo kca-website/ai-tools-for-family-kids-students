@@ -146,6 +146,20 @@ const TOOLS = {
     greekSource: "AI HUB / ΕΕ",
   },
 
+  "claude-academy": {
+    id: "claude-academy",
+    name: "Claude Academy",
+    url: "https://academy.claude.com",
+    category: "research",
+    logo: null,
+    minAge: 15,
+    minAgeNote: "Δωρεάν, δεν χρειάζεται λογαριασμό για να διαβάσεις τα μαθήματα (μόνο για αποθήκευση προόδου). Το περιεχόμενο υποθέτει άνετη ανάγνωση αγγλικών.",
+    shortDescEl: "Δωρεάν μαθήματα από την Anthropic για το πώς λειτουργεί πραγματικά το AI και πώς να συνεργάζεσαι μαζί του σωστά, υπεύθυνα και αποτελεσματικά (πλαίσιο 'AI Fluency': Ανάθεση, Περιγραφή, Κριτική Αξιολόγηση, Επιμέλεια).",
+    shortDescEn: "Free courses from Anthropic on how AI actually works and how to collaborate with it responsibly and effectively (the 'AI Fluency' framework: Delegation, Description, Discernment, Diligence).",
+    greekTips: "Το περιεχόμενο είναι μόνο στα αγγλικά, χωρίς επιλογή ελληνικών — κατάλληλο για μαθητές με άνεση στα αγγλικά, ή με τη βοήθεια εκπαιδευτικού.",
+    isGreek: false,
+  },
+
   // ---------- ΥΠΑΡΧΟΝΤΑ ΕΡΓΑΛΕΙΑ ----------
   "chatgpt": {
     id: "chatgpt",
@@ -706,6 +720,15 @@ const PATHS = {
           cautionEn: "",
         },
         {
+          toolId: "claude-academy",
+          useCaseEl: "Για να καταλάβεις εσύ πρώτος πώς λειτουργεί πραγματικά το AI, ώστε να καθοδηγήσεις σωστά το παιδί σου.",
+          useCaseEn: "To understand yourself how AI really works, so you can properly guide your child.",
+          howToEl: "Ξεκίνα από το 'AI Capabilities and Limitations' (3.5 ώρες) — δείχνει τι μπορεί και τι δεν μπορεί να κάνει αξιόπιστα ένα AI.",
+          howToEn: "Start with 'AI Capabilities and Limitations' (3.5 hours) — it shows what AI can and can't reliably do.",
+          cautionEl: "Μόνο στα αγγλικά.",
+          cautionEn: "English only.",
+        },
+        {
           toolId: "chatgpt-edu",
           useCaseEl: "Πιλοτικό πρόγραμμα του Υπουργείου Παιδείας σε επιλεγμένα σχολεία.",
           useCaseEn: "Pilot program of the Ministry of Education in selected schools.",
@@ -755,6 +778,15 @@ const PATHS = {
           howToEn: "Free course. You can do it alongside school.",
           cautionEl: "",
           cautionEn: "",
+        },
+        {
+          toolId: "claude-academy",
+          useCaseEl: "Για να μάθεις πώς να συνεργάζεσαι σωστά με το AI αντί να το αφήνεις να σκέφτεται για σένα — χρήσιμο πριν αρχίσεις να το χρησιμοποιείς κανονικά για το σχολείο.",
+          useCaseEn: "To learn how to properly collaborate with AI instead of letting it think for you — useful before you start using it regularly for school.",
+          howToEl: "Το μάθημα 'AI Fluency: Framework & Foundations' (4 ώρες) διδάσκει πότε να εμπιστεύεσαι το AI και πότε όχι.",
+          howToEn: "The 'AI Fluency: Framework & Foundations' course (4 hours) teaches when to trust AI and when not to.",
+          cautionEl: "Μόνο στα αγγλικά.",
+          cautionEn: "English only.",
         },
         {
           toolId: "chatgpt",

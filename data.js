@@ -169,6 +169,7 @@ const TOOLS = {
     minAgeNote: "13 ετών και άνω για προσωπικό λογαριασμό. Κάτω των 13, μόνο μέσω Google Family Link ή σχολικού λογαριασμού Google Classroom.",
     shortDescEl: "Chatbot AI της Google, ενσωματωμένο σε Google Classroom για μαθητές μέσω σχολείου.",
     shortDescEn: "Google's AI chatbot, integrated into Google Classroom for school managed student access.",
+    greekTips: "Απαντάει κανονικά στα ελληνικά αν το ρωτήσεις στα ελληνικά. Η διεπαφή αλλάζει γλώσσα από τις ρυθμίσεις του λογαριασμού Google.",
   },
   "copilot": {
     id: "copilot",
@@ -191,6 +192,7 @@ const TOOLS = {
     minAgeNote: "Μόνο 18 ετών και άνω. Δεν υπάρχει διαδρομή γονικής συγκατάθεσης για κάτω των 18.",
     shortDescEl: "AI chatbot της Anthropic. Δεν προσφέρει πρόσβαση σε ανηλίκους, ούτε με γονική άδεια.",
     shortDescEn: "Anthropic's AI chatbot. Offers no access path for minors, even with parental consent.",
+    greekTips: "Απαντάει κανονικά στα ελληνικά αν του μιλήσεις ελληνικά, ακόμα κι αν κάποια κουμπιά της διεπαφής είναι στα αγγλικά.",
   },
   "grammarly": {
     id: "grammarly",
@@ -202,6 +204,7 @@ const TOOLS = {
     minAgeNote: "13 ετών και άνω βάσει Όρων Χρήσης. Υπάρχει και εκπαιδευτική έκδοση (Grammarly for Education) για σχολικούς λογαριασμούς.",
     shortDescEl: "Εργαλείο διόρθωσης γραμματικής, ορθογραφίας και ύφους σε αγγλικό κείμενο.",
     shortDescEn: "Grammar, spelling, and style checking tool for English writing.",
+    greekTips: "Ελέγχει μόνο αγγλικό κείμενο — δεν λειτουργεί για έλεγχο ελληνικών κειμένων.",
   },
 
   // ---------- ΕΡΕΥΝΑ & ΜΑΘΗΣΗ ----------
@@ -227,6 +230,7 @@ const TOOLS = {
     minAgeNote: "Σχεδιασμένο για ηλικίες 2-8. Εντελώς δωρεάν, χωρίς διαφημίσεις, χωρίς in-app αγορές, χωρίς συλλογή δεδομένων παιδιού (5 αστέρια στο Common Sense Media). Διαφέρει από το Khanmigo: δεν είναι AI chatbot/tutor, είναι βιβλιοθήκη διαδραστικών μαθημάτων/παιχνιδιών ανάγνωσης, μαθηματικών και κοινωνικο-συναισθηματικής μάθησης με προσαρμοστική δυσκολία.",
     shortDescEl: "Δωρεάν εφαρμογή για τις πιο μικρές ηλικίες (Νηπιαγωγείο, Α'-Β' Δημοτικού). Ανάγνωση, μαθηματικά και παιχνίδια με προσαρμοστική δυσκολία, χωρίς λογαριασμό να χρειάζεται για βασική χρήση.",
     shortDescEn: "Free app for the youngest ages (kindergarten, 1st-2nd grade). Reading, math, and games with adaptive difficulty, no account required for basic use.",
+    greekTips: "Έχει επιλογή ελληνικής γλώσσας μέσα στην εφαρμογή (Ρυθμίσεις → Language) — βεβαιώσου ότι είναι ενεργοποιημένη πριν τη δώσεις στο παιδί.",
     isGreek: false,
   },
   "notebooklm": {
@@ -261,6 +265,7 @@ const TOOLS = {
     minAgeNote: "13 ετών και άνω βάσει Όρων Χρήσης. Χωρίς κοινωνικά χαρακτηριστικά ή chat ελεύθερης μορφής.",
     shortDescEl: "Υπολογιστική μηχανή γνώσης. Λύνει μαθηματικά, φυσική και χημεία βήμα βήμα.",
     shortDescEn: "Computational knowledge engine. Solves math, physics, and chemistry step by step.",
+    greekTips: "Η διεπαφή και οι περισσότερες εξηγήσεις είναι μόνο στα αγγλικά, χωρίς επιλογή ελληνικών — πιο κατάλληλο για μεγαλύτερα παιδιά ή με τη βοήθεια ενήλικα δίπλα.",
   },
   "quizlet": {
     id: "quizlet",
@@ -285,6 +290,7 @@ const TOOLS = {
     minAgeNote: "Χωρίς αυστηρό όριο ηλικίας στους Όρους Χρήσης. Δεν έχει chat ελεύθερης μορφής ή κοινωνικά χαρακτηριστικά.",
     shortDescEl: "Φωτογραφίζεις ένα μαθηματικό πρόβλημα και σου δείχνει τη λύση βήμα βήμα.",
     shortDescEn: "Point your camera at a math problem and get a step by step solution.",
+    greekTips: "Η λύση δείχνεται κυρίως με μαθηματικά σύμβολα και βήματα, όχι πολύ κείμενο — λειτουργεί καλά ακόμα κι αν το παιδί δεν διαβάζει άπταιστα αγγλικά. Κάποιες επεξηγήσεις παραμένουν στα αγγλικά.",
   },
 
   // ---------- ΔΗΜΙΟΥΡΓΙΚΟΤΗΤΑ ----------
@@ -324,6 +330,7 @@ const TOOLS = {
     minAgeNote: "Δεν υπάρχει αυστηρό κατώτατο όριο. Κάτω των 13 ο λογαριασμός συνδέεται με email γονέα, με περιορισμένα κοινωνικά χαρακτηριστικά. Υπάρχει και ξεχωριστή εφαρμογή Duolingo Kids/ABC για μικρότερες ηλικίες.",
     shortDescEl: "Εκμάθηση γλωσσών με μικρά, παιχνιδοποιημένα μαθήματα. Οι νεότερες εκδόσεις χρησιμοποιούν AI για εξατομίκευση.",
     shortDescEn: "Language learning through short, gamified lessons. Newer features use AI for personalization.",
+    greekTips: "Η εφαρμογή έχει ελληνική διεπαφή (μενού, κουμπιά) — άλλαξε τη γλώσσα εφαρμογής από τις ρυθμίσεις του λογαριασμού αν εμφανιστεί στα αγγλικά.",
   },
 
   // ---------- ΠΡΟΧΩΡΗΜΕΝΑ / ΕΞΕΙΔΙΚΕΥΜΕΝΑ ΕΡΓΑΛΕΙΑ ----------
@@ -361,6 +368,7 @@ const TOOLS = {
     minAgeNote: "Δωρεάν, χωρίς λογαριασμό απαιτούμενο για βασική χρήση. Συμμορφώνεται με COPPA.",
     shortDescEl: "Διαδραστική γεωμετρία, άλγεβρα και στατιστική στο ίδιο παράθυρο. Πολύ διαδεδομένο σε σχολεία.",
     shortDescEn: "Interactive geometry, algebra, and statistics in one window. Widely used in schools.",
+    greekTips: "Έχει ελληνική διεπαφή — άλλαξε τη γλώσσα από το εικονίδιο ρυθμίσεων/globe στο μενού, στα Ελληνικά.",
     isExpert: true,
   },
   "scite": {
@@ -397,6 +405,7 @@ const TOOLS = {
     minAgeNote: "Δωρεάν online έκδοση.",
     shortDescEl: "Διορθώνει βαριά σύνταξη, δείχνει δείκτη αναγνωσιμότητας.",
     shortDescEn: "Fixes heavy syntax, shows readability score.",
+    greekTips: "Λειτουργεί μόνο σε αγγλικό κείμενο — δεν μπορεί να ελέγξει ή να βελτιώσει ελληνικό κείμενο.",
     isExpert: true,
   },
   "scribbr": {
@@ -445,6 +454,7 @@ const TOOLS = {
     minAgeNote: "Δωρεάν, χωρίς λογαριασμό απαιτούμενο για βασική χρήση.",
     shortDescEl: "Απλοί εννοιολογικοί χάρτες, ιδανικοί για οργάνωση εργασιών ή διάρθρωση εργασίας πριν τη γραφή.",
     shortDescEn: "Simple concept maps, ideal for organizing assignments or structuring a project before writing.",
+    greekTips: "Η διεπαφή είναι μόνο στα αγγλικά, χωρίς επιλογή ελληνικών, αλλά είναι κυρίως εικονίδια και σχήματα — το παιδί μπορεί να γράφει κανονικά ελληνικά μέσα στους κόμβους του χάρτη.",
     isExpert: true,
   },
 };

@@ -48,7 +48,7 @@ const GUIDE_DATA = {
                 <tr><td>2. Ιδέες</td><td>Brainstorming. Γράψε ό,τι σου έρχεται στο μυαλό, χωρίς φίλτρο.</td><td>Miro AI / Xmind</td></tr>
                 <tr><td>3. Έρευνα</td><td>Βρες πληροφορίες από 3 διαφορετικές πηγές.</td><td>Perplexity / Elicit</td></tr>
                 <tr><td>4. Δομή</td><td>Οργάνωσε τις ιδέες σε περίγραμμα (εισαγωγή, κύρια σημεία, συμπέρασμα).</td><td>Notion AI / Obsidian</td></tr>
-                <tr><td>5. Σύνθεση</td><td>Γράψε μόνος σου. Το AI μόνο για ερωτήσεις.</td><td>—</td></tr>
+                <tr><td>5. Σύνθεση</td><td>Γράψε μόνος σου. Το AI μόνο για ερωτήσεις.</td><td>Κανένα</td></tr>
                 <tr><td>6. Έλεγχος</td><td>Διάβασε δυνατά. Έλεγξε ορθογραφία, ροή, λογική.</td><td>Grammarly / Hemingway</td></tr>
               </tbody>
             </table>
@@ -117,13 +117,13 @@ const GUIDE_DATA = {
                 <tr><td>Το AI έδωσε λάθος απάντηση</td><td>Το αντιγράφεις έτσι κι αλλιώς</td><td>Ρωτάς "Είσαι σίγουρο/η; Εξήγησέ μου πώς το υπολόγισες" και ελέγχεις μόνος/η σου</td></tr>
                 <tr><td>Δεν καταλαβαίνεις μια έννοια</td><td>Ζητάς "Δώσε μου την απάντηση"</td><td>Ζητάς "Εξήγησέ το με ένα παράδειγμα από την καθημερινότητα"</td></tr>
                 <tr><td>Πρέπει να παραδώσεις μια έκθεση</td><td>Αντιγράφεις το κείμενο του AI αυτούσιο</td><td>Το χρησιμοποιείς για ιδέες και δομή, γράφεις μόνος/η σου το τελικό κείμενο</td></tr>
-                <tr><td>Ένας φίλος σου λέει ότι το κείμενό του "το έγραψε το AI"</td><td>Δεν το σχολιάζεις, "όλοι το κάνουν"</td><td>Του προτείνεις να το ξαναγράψει με δικά του λόγια — έτσι μαθαίνει περισσότερα</td></tr>
+                <tr><td>Ένας φίλος σου λέει ότι το κείμενό του "το έγραψε το AI"</td><td>Δεν το σχολιάζεις, "όλοι το κάνουν"</td><td>Του προτείνεις να το ξαναγράψει με δικά του λόγια, έτσι μαθαίνει περισσότερα</td></tr>
                 <tr><td>Θες να ελέγξεις αν ένα κείμενο είναι γραμμένο από AI</td><td>Εμπιστεύεσαι 100% κάποιο "AI detector" εργαλείο</td><td>Δεν υπάρχει αξιόπιστος τρόπος να το ξέρεις σίγουρα· τα εργαλεία ανίχνευσης κάνουν συχνά λάθος. Καλύτερη ένδειξη: αν το άτομο μπορεί να εξηγήσει προφορικά τι έγραψε</td></tr>
               </tbody>
             </table>
           </div>
           <div class="guide-principle">
-            <p><strong>Ο κανόνας του αντίχειρα:</strong> Αν δεν θα μπορούσες να εξηγήσεις προφορικά, με δικά σου λόγια, τι μόλις "παρέδωσες" — δεν το έμαθες ακόμα.</p>
+            <p><strong>Ο κανόνας του αντίχειρα:</strong> Αν δεν θα μπορούσες να εξηγήσεις προφορικά, με δικά σου λόγια, τι μόλις "παρέδωσες", δεν το έμαθες ακόμα.</p>
           </div>
         `
       },
@@ -146,15 +146,13 @@ const GUIDE_DATA = {
           <div class="guide-principle">
             <p><strong>Η χρυσή αρχή:</strong> Το AI είναι εργαλείο σκέψης, όχι εργαλείο αντικατάστασης. Όσο περισσότερο γράφεις μόνος σου, τόσο πιο πολύ μαθαίνεις. Το AI είναι ο συνομιλητής σου, όχι ο συγγραφέας σου.</p>
           </div>
-          <p><strong>Μοιράσου το!</strong> Αυτός ο οδηγός είναι δωρεάν για όλους. Κάνε save, κάνε share, βοήθησε και άλλους να μάθουν πώς να χρησιμοποιούν το AI σωστά.</p>
-          <button id="pdfDownloadBtn" class="guide-download-btn">📄 Κατέβασε τον οδηγό σε PDF</button>
         `
       },
       {
         id: "part7",
         title: "Μέρος 7️⃣: Οι 4 ερωτήσεις πριν, κατά και μετά τη χρήση AI",
         content: `
-          <p>Η καλή χρήση ενός εργαλείου AI δεν είναι τύχη — είναι δεξιότητα, και μαθαίνεται. Πριν, κατά τη διάρκεια και μετά από κάθε συνομιλία με AI, υπάρχουν 4 απλές ερωτήσεις που αξίζει να κάνεις στον εαυτό σου.</p>
+          <p>Η καλή χρήση ενός εργαλείου AI δεν είναι τύχη. Είναι δεξιότητα, και μαθαίνεται. Πριν, κατά τη διάρκεια και μετά από κάθε συνομιλία με AI, υπάρχουν 4 απλές ερωτήσεις που αξίζει να κάνεις στον εαυτό σου.</p>
           <div class="guide-table-wrapper">
             <table class="guide-table">
               <thead><tr><th>Βήμα</th><th>Η ερώτηση</th><th>Παράδειγμα</th></tr></thead>
@@ -162,14 +160,16 @@ const GUIDE_DATA = {
                 <tr><td><strong>1. Ανάθεση</strong></td><td>Είναι αυτή η δουλειά κατάλληλη να την αναθέσω σε AI, ή πρέπει πρώτα να τη σκεφτώ μόνος/η μου;</td><td>✓ "Εξήγησέ μου μια έννοια που δεν κατάλαβα" · ✗ "Γράψε ολόκληρη την έκθεσή μου"</td></tr>
                 <tr><td><strong>2. Περιγραφή</strong></td><td>Περιέγραψα αρκετά συγκεκριμένα τι χρειάζομαι, ή άφησα το AI να μαντέψει;</td><td>Αντί για "εξήγησέ μου τη φωτοσύνθεση", δοκίμασε "εξήγησέ μου τη φωτοσύνθεση σαν να είμαι 10 χρονών, με ένα παράδειγμα από τον κήπο"</td></tr>
                 <tr><td><strong>3. Κριτική Αξιολόγηση</strong></td><td>Ξέρω αρκετά για το θέμα ώστε να καταλάβω αν κάτι στην απάντηση είναι λάθος;</td><td>Αν όχι, ζήτα πηγές, ή έλεγξε την απάντηση σε ένα σχολικό βιβλίο πριν την εμπιστευτείς</td></tr>
-                <tr><td><strong>4. Επιμέλεια</strong></td><td>Έλεγξα, διόρθωσα και έκανα δικό μου ό,τι πήρα, ή απλά το αντέγραψα;</td><td>Ξαναδιάβασε το αποτέλεσμα με τα δικά σου λόγια πριν το παραδώσεις — αν δεν μπορείς, δεν το έμαθες ακόμα (θυμήσου τον κανόνα του αντίχειρα από το Μέρος 5)</td></tr>
+                <tr><td><strong>4. Επιμέλεια</strong></td><td>Έλεγξα, διόρθωσα και έκανα δικό μου ό,τι πήρα, ή απλά το αντέγραψα;</td><td>Ξαναδιάβασε το αποτέλεσμα με τα δικά σου λόγια πριν το παραδώσεις. Αν δεν μπορείς, δεν το έμαθες ακόμα (θυμήσου τον κανόνα του αντίχειρα από το Μέρος 5)</td></tr>
               </tbody>
             </table>
           </div>
           <div class="guide-principle">
-            <p><strong>Γιατί έχει σημασία η σειρά:</strong> Οι περισσότερες κακές εμπειρίες με AI δεν συμβαίνουν επειδή το εργαλείο είναι κακό, αλλά επειδή παραλείπουμε ένα από αυτά τα 4 βήματα — συνήθως το τελευταίο. Το «Επιμέλεια» είναι το βήμα που κάνει τη διαφορά ανάμεσα στο να μάθεις κάτι και στο να απλώς το παραδώσεις.</p>
+            <p><strong>Γιατί έχει σημασία η σειρά:</strong> Οι περισσότερες κακές εμπειρίες με AI δεν συμβαίνουν επειδή το εργαλείο είναι κακό, αλλά επειδή παραλείπουμε ένα από αυτά τα 4 βήματα, συνήθως το τελευταίο. Το «Επιμέλεια» είναι το βήμα που κάνει τη διαφορά ανάμεσα στο να μάθεις κάτι και στο να απλώς το παραδώσεις.</p>
           </div>
-          <p style="font-size: 0.85em; color: var(--color-text-muted, #5A6270);">Το πλαίσιο αυτό εμπνεύστηκε από το δωρεάν μάθημα «AI Fluency» του <a href="https://academy.claude.com" target="_blank" rel="noopener">Claude Academy</a> (Anthropic) — προσαρμοσμένο εδώ σε απλή γλώσσα για μαθητές.</p>
+          <p style="font-size: 0.85em; color: var(--color-text-muted, #5A6270);">Το πλαίσιο αυτό εμπνεύστηκε από το δωρεάν μάθημα «AI Fluency» του <a href="https://academy.claude.com" target="_blank" rel="noopener">Claude Academy</a> (Anthropic), προσαρμοσμένο εδώ σε απλή γλώσσα για μαθητές.</p>
+          <p><strong>Μοιράσου το!</strong> Αυτός ο οδηγός είναι δωρεάν για όλους. Κάνε save, κάνε share, βοήθησε και άλλους να μάθουν πώς να χρησιμοποιούν το AI σωστά.</p>
+          <button id="pdfDownloadBtn" class="guide-download-btn">📄 Κατέβασε τον οδηγό σε PDF</button>
         `
       }
     ]
@@ -218,7 +218,7 @@ const GUIDE_DATA = {
                 <tr><td>2. Ideas</td><td>Brainstorm. Write down whatever comes to mind, no filter.</td><td>Miro AI / Xmind</td></tr>
                 <tr><td>3. Research</td><td>Find information from 3 different sources.</td><td>Perplexity / Elicit</td></tr>
                 <tr><td>4. Structure</td><td>Organize your ideas into an outline (intro, main points, conclusion).</td><td>Notion AI / Obsidian</td></tr>
-                <tr><td>5. Composition</td><td>Write it yourself. AI only for questions.</td><td>—</td></tr>
+                <tr><td>5. Composition</td><td>Write it yourself. AI only for questions.</td><td>None</td></tr>
                 <tr><td>6. Review</td><td>Read it out loud. Check spelling, flow, logic.</td><td>Grammarly / Hemingway</td></tr>
               </tbody>
             </table>
@@ -287,13 +287,13 @@ const GUIDE_DATA = {
                 <tr><td>The AI gave a wrong answer</td><td>You copy it anyway</td><td>You ask "Are you sure? Explain how you calculated that" and check it yourself</td></tr>
                 <tr><td>You don't understand a concept</td><td>You ask "Just give me the answer"</td><td>You ask "Explain it with an everyday example"</td></tr>
                 <tr><td>You have to submit an essay</td><td>You copy the AI's text as-is</td><td>You use it for ideas and structure, then write the final text yourself</td></tr>
-                <tr><td>A friend says their text was "written by AI"</td><td>You don't say anything, "everyone does it"</td><td>You suggest they rewrite it in their own words — that's how they actually learn it</td></tr>
-                <tr><td>You want to check if a text was written by AI</td><td>You fully trust some "AI detector" tool</td><td>There's no reliable way to know for sure — detection tools are often wrong. The best signal: can the person explain out loud what they wrote?</td></tr>
+                <tr><td>A friend says their text was "written by AI"</td><td>You don't say anything, "everyone does it"</td><td>You suggest they rewrite it in their own words. That's how they actually learn it</td></tr>
+                <tr><td>You want to check if a text was written by AI</td><td>You fully trust some "AI detector" tool</td><td>There's no reliable way to know for sure. Detection tools are often wrong. The best signal: can the person explain out loud what they wrote?</td></tr>
               </tbody>
             </table>
           </div>
           <div class="guide-principle">
-            <p><strong>The rule of thumb:</strong> If you couldn't explain out loud, in your own words, what you just "submitted" — you haven't learned it yet.</p>
+            <p><strong>The rule of thumb:</strong> If you couldn't explain out loud, in your own words, what you just "submitted", you haven't learned it yet.</p>
           </div>
         `
       },
@@ -316,15 +316,13 @@ const GUIDE_DATA = {
           <div class="guide-principle">
             <p><strong>The golden rule:</strong> AI is a thinking tool, not a replacement tool. The more you write yourself, the more you learn. AI is your conversation partner, not your author.</p>
           </div>
-          <p><strong>Share it!</strong> This guide is free for everyone. Save it, share it, help others learn how to use AI the right way.</p>
-          <button id="pdfDownloadBtn" class="guide-download-btn">📄 Download the guide as PDF</button>
         `
       },
       {
         id: "part7",
         title: "Part 7️⃣: 4 questions to ask before, during, and after using AI",
         content: `
-          <p>Using an AI tool well isn't luck — it's a skill, and it can be learned. Before, during, and after every conversation with AI, there are 4 simple questions worth asking yourself.</p>
+          <p>Using an AI tool well isn't luck. It's a skill, and it can be learned. Before, during, and after every conversation with AI, there are 4 simple questions worth asking yourself.</p>
           <div class="guide-table-wrapper">
             <table class="guide-table">
               <thead><tr><th>Step</th><th>The question</th><th>Example</th></tr></thead>
@@ -332,14 +330,16 @@ const GUIDE_DATA = {
                 <tr><td><strong>1. Delegation</strong></td><td>Is this task actually right to hand to AI, or should I think it through myself first?</td><td>✓ "Explain a concept I didn't understand" · ✗ "Write my whole essay"</td></tr>
                 <tr><td><strong>2. Description</strong></td><td>Did I describe specifically enough what I need, or did I leave AI to guess?</td><td>Instead of "explain photosynthesis", try "explain photosynthesis like I'm 10, with an example from a garden"</td></tr>
                 <tr><td><strong>3. Discernment</strong></td><td>Do I know enough about the topic to tell if something in the answer is wrong?</td><td>If not, ask for sources, or check the answer against a textbook before trusting it</td></tr>
-                <tr><td><strong>4. Diligence</strong></td><td>Did I check, correct, and make my own what I got — or did I just copy it?</td><td>Reread the result in your own words before submitting it — if you can't, you haven't learned it yet (remember the rule of thumb from Part 5)</td></tr>
+                <tr><td><strong>4. Diligence</strong></td><td>Did I check, correct, and make my own what I got, or did I just copy it?</td><td>Reread the result in your own words before submitting it. If you can't, you haven't learned it yet (remember the rule of thumb from Part 5)</td></tr>
               </tbody>
             </table>
           </div>
           <div class="guide-principle">
-            <p><strong>Why the order matters:</strong> Most bad experiences with AI don't happen because the tool is bad, but because we skip one of these 4 steps — usually the last one. "Diligence" is the step that makes the difference between actually learning something and just handing it in.</p>
+            <p><strong>Why the order matters:</strong> Most bad experiences with AI don't happen because the tool is bad, but because we skip one of these 4 steps, usually the last one. "Diligence" is the step that makes the difference between actually learning something and just handing it in.</p>
           </div>
-          <p style="font-size: 0.85em; color: var(--color-text-muted, #5A6270);">This framework was inspired by the free "AI Fluency" course from <a href="https://academy.claude.com" target="_blank" rel="noopener">Claude Academy</a> (Anthropic) — adapted here into simple language for students.</p>
+          <p style="font-size: 0.85em; color: var(--color-text-muted, #5A6270);">This framework was inspired by the free "AI Fluency" course from <a href="https://academy.claude.com" target="_blank" rel="noopener">Claude Academy</a> (Anthropic), adapted here into simple language for students.</p>
+          <p><strong>Share it!</strong> This guide is free for everyone. Save it, share it, help others learn how to use AI the right way.</p>
+          <button id="pdfDownloadBtn" class="guide-download-btn">📄 Download the guide as PDF</button>
         `
       }
     ]

@@ -257,7 +257,7 @@
         },
         {
           id: "pq5",
-          text: "Τι δεδομένα συλλέγει το aitools4kids.vercel.app όταν κάνετε το quiz;",
+          text: "Τι δεδομένα συλλέγει το aitools4kids.gr όταν κάνετε το quiz;",
           options: [
             { text: "Email και όνομα", correct: false },
             { text: "Τίποτα, δεν αποθηκεύει καμία απάντηση", correct: true },
@@ -303,7 +303,7 @@
         },
         {
           id: "pq5",
-          text: "What data does aitools4kids.vercel.app collect when you take the quiz?",
+          text: "What data does aitools4kids.gr collect when you take the quiz?",
           options: [
             { text: "Email and name", correct: false },
             { text: "Nothing, no answers are stored", correct: true },
@@ -589,6 +589,7 @@ function renderToolGrid(pathTools, targetElement) {
       ${howTo ? `<p class="tool-card__field-label">${t("howToLabel")}</p><p class="tool-card__field-value">${escapeHtml(howTo)}</p>` : ""}
       ${caution ? `<div class="tool-card__caution"><strong>${t("cautionLabel")}:</strong> ${escapeHtml(caution)}</div>` : ""}
       ${typeof tool.minAge === "number" ? `<p class="tool-card__age-note"><strong>${t("toolAgeLabel")}:</strong> ${tool.minAge}+${tool.minAgeNote ? ` · ${escapeHtml(tool.minAgeNote)}` : ""}</p>` : ""}
+      ${tool.greekTips && state.lang === "el" ? `<p class="tool-card__greek-tips" style="margin-top: 8px; padding: 8px 10px; background: #F0F7FF; border-radius: 8px; font-size: 0.85rem; color: #334155;">🇬🇷 ${escapeHtml(tool.greekTips)}</p>` : ""}
       <div class="tool-card__actions">
         ${tool.url ? `<a class="tool-card__link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${t(tool.linkTypeInfo ? "infoLink" : "visitLink")}</a>` : ""}
         <button type="button" class="tool-card__share-btn">🔗 ${t("shareToolBtn")}</button>
@@ -672,7 +673,7 @@ function renderToolGrid(pathTools, targetElement) {
     container.style.backgroundColor = "#FFFFFF";
     container.innerHTML = `
       <h1 style="font-size:28px; margin-bottom:8px;">${state.lang === 'el' ? GUIDE_DATA.el.title : GUIDE_DATA.en.title}</h1>
-      <p style="color:#5A6270; font-size:14px; margin-bottom:24px;">aitools4kids.vercel.app</p>
+      <p style="color:#5A6270; font-size:14px; margin-bottom:24px;">aitools4kids.gr</p>
       ${clone.innerHTML}
       <p style="margin-top:40px; font-size:12px; color:#9AA1B0; border-top:1px solid #E4E6EA; padding-top:16px; text-align:center;">
         Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.
@@ -1333,7 +1334,7 @@ function renderToolGrid(pathTools, targetElement) {
         <text x="200" y="220" font-size="13" font-weight="600" fill="${accentColor}" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? '🔥 Δύναμη: ' : '🔥 Strength: '}${escapeHtml(skillText)}</text>
         <text x="200" y="260" font-size="13" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${escapeHtml(toolText)}</text>
         <line x1="60" y1="310" x2="340" y2="310" stroke="#E4E6EA" stroke-width="1"/>
-        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.vercel.app  🤖</text>
+        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.gr  🤖</text>
       </svg>
     `;
   }
@@ -1370,7 +1371,7 @@ function renderToolGrid(pathTools, targetElement) {
 
         <line x1="60" y1="330" x2="340" y2="330" stroke="#E4E6EA" stroke-width="1"/>
         <text x="200" y="365" font-size="12" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? 'Learning Compass' : 'Learning Compass'}</text>
-        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.vercel.app  🤖</text>
+        <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.gr  🤖</text>
       </svg>
     `;
   }
@@ -1453,7 +1454,7 @@ function renderToolGrid(pathTools, targetElement) {
       ctx.font = '600 34px system-ui, -apple-system, sans-serif';
       ctx.fillText(state.lang === 'el' ? 'Δοκίμασε το κι εσύ 👇' : 'Try it yourself 👇', w / 2, h - 140);
       ctx.font = '400 28px system-ui, -apple-system, sans-serif';
-      ctx.fillText('aitools4kids.vercel.app', w / 2, h - 90);
+      ctx.fillText('aitools4kids.gr', w / 2, h - 90);
     }).then((dataUrl) => downloadDataUrl(dataUrl, filename || 'aitools4kids-story.png'))
       .catch(() => alert(state.lang === 'el' ? 'Κάτι πήγε στραβά. Δοκίμασε ξανά.' : 'Something went wrong. Try again.'));
   }
@@ -1483,8 +1484,8 @@ function renderToolGrid(pathTools, targetElement) {
             files: [file],
             title: state.lang === 'el' ? 'Η κάρτα επίτευγμά μου' : 'My achievement card',
             text: state.lang === 'el'
-              ? 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids! 👉 https://aitools4kids.vercel.app'
-              : 'I discovered my strengths with aitools4kids! 👉 https://aitools4kids.vercel.app',
+              ? 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids! 👉 https://www.aitools4kids.gr'
+              : 'I discovered my strengths with aitools4kids! 👉 https://www.aitools4kids.gr',
           };
           if (navigator.canShare(shareData)) {
             return navigator.share(shareData);
@@ -1502,7 +1503,7 @@ function renderToolGrid(pathTools, targetElement) {
       navigator.share({
         title: state.lang === 'el' ? 'Η κάρτα επίτευγμά μου' : 'My achievement card',
         text: state.lang === 'el' ? 'Ανακάλυψα τις δυνάμεις μου με το aitools4kids!' : 'I discovered my strengths with aitools4kids!',
-        url: 'https://aitools4kids.vercel.app'
+        url: 'https://www.aitools4kids.gr'
       }).catch(() => fallbackShare());
     } else {
       fallbackShare();
@@ -1510,13 +1511,13 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   function fallbackShare() {
-    navigator.clipboard.writeText('https://aitools4kids.vercel.app')
+    navigator.clipboard.writeText('https://www.aitools4kids.gr')
       .then(() => alert('📋 Αντιγράφηκε το link! Μοιράσου το με τους φίλους σου.'))
-      .catch(() => prompt('Αντέγραψε αυτό το link:', 'https://aitools4kids.vercel.app'));
+      .catch(() => prompt('Αντέγραψε αυτό το link:', 'https://www.aitools4kids.gr'));
   }
 
   function shareToolCard(tool, useCase, buttonEl) {
-    const siteUrl = "https://aitools4kids.vercel.app";
+    const siteUrl = "https://www.aitools4kids.gr";
     const text = state.lang === "el"
       ? `${tool.name}${useCase ? `: ${useCase}` : ""}\n${tool.url || ""}\nΒρέθηκε στο ${siteUrl}`
       : `${tool.name}${useCase ? `: ${useCase}` : ""}\n${tool.url || ""}\nFound via ${siteUrl}`;

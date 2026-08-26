@@ -2775,5 +2775,1085 @@ const LEARNING_PATHS = {
       "descriptionEn": "Ask Wolfram Alpha something related to \"Purpose of reproduction\" (e.g. a definition or a fact) and compare it with what you wrote.",
       "toolId": "wolfram-alpha"
     }
+  ],
+
+  "ekthesi-a.topic-sentence-missing": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε μία παράγραφο (5-6 προτάσεις) πάνω σε ένα θέμα της επιλογής σου, ξεκινώντας με μια σαφή θεματική πρόταση. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει ότι κάθε παράγραφος χρειάζεται μία θεματική πρόταση που δηλώνει το κεντρικό της νόημα· γράφει παραγράφους χωρίς σαφή εστίαση.",
+      "descriptionEn": "Write one paragraph (5-6 sentences) on a topic of your choice, starting with a clear topic sentence. The most common trap on this topic: Doesn't recognize that every paragraph needs one topic sentence stating its central idea; writes paragraphs without clear focus.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Θεματική πρόταση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Topic sentence'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν η πρώτη πρόταση δηλώνει καθαρά το κεντρικό νόημα.",
+      "descriptionEn": "Paste your paragraph into Grammarly and check whether the first sentence clearly states the central idea.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-a.development-method-confusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάλεξε μια θεματική πρόταση και ανάπτυξέ την με έναν συγκεκριμένο τρόπο (π.χ. με παράδειγμα ή με αιτιολόγηση). Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τους τρόπους ανάπτυξης παραγράφου (παράδειγμα, αιτιολόγηση, σύγκριση-αντίθεση, ορισμός, διαίρεση), αφού δεν ξέρει ποιος ταιριάζει σε ποια θεματική πρόταση.",
+      "descriptionEn": "Pick a topic sentence and develop it using one specific method (e.g. example or cause-effect). The most common trap on this topic: Confuses the paragraph development methods (example, cause-effect, comparison-contrast, definition, division), not knowing which fits which topic sentence.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Τρόποι ανάπτυξης παραγράφου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Paragraph development methods'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν ο τρόπος ανάπτυξης που διάλεξες φαίνεται καθαρά.",
+      "descriptionEn": "Paste your paragraph into Grammarly and check whether the development method you chose comes through clearly.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-a.unity-coherence": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε μια παράγραφο και μετά διάβασέ την ξανά, ελέγχοντας αν κάθε πρόταση συνδέεται λογικά με την προηγούμενη. Η πιο συχνή παγίδα σε αυτό το θέμα: Γράφει προτάσεις που δεν συνδέονται λογικά μεταξύ τους μέσα στην ίδια παράγραφο, ή προσθέτει άσχετες πληροφορίες με τη θεματική πρόταση.",
+      "descriptionEn": "Write a paragraph, then reread it, checking whether each sentence logically connects to the previous one. The most common trap on this topic: Writes sentences that don't logically connect within the same paragraph, or adds information unrelated to the topic sentence.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ενότητα & συνοχή παραγράφου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Paragraph unity & coherence'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και δες αν προτείνει βελτιώσεις στη ροή ή τη συνοχή.",
+      "descriptionEn": "Paste your paragraph into Grammarly and see whether it suggests improvements to flow or coherence.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-a.summary-length": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάλεξε ένα κείμενο 200 λέξεων και γράψε περίληψή του σε ακριβώς το ζητούμενο όριο λέξεων (π.χ. 70 λέξεις). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν τηρεί το ζητούμενο όριο λέξεων στην περίληψη· είτε την αφήνει σχεδόν όσο το πρωτότυπο είτε παραλείπει βασικές ιδέες για να χωρέσει.",
+      "descriptionEn": "Pick a 200-word text and write a summary of it in exactly the required word limit (e.g. 70 words). The most common trap on this topic: Doesn't respect the required word limit in a summary; either leaves it nearly as long as the original or drops key ideas just to fit.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Όριο λέξεων περίληψης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Summary word limit'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την περίληψή σου στο Grammarly, μέτρα τις λέξεις, και έλεγξε αν κράτησες τις πιο σημαντικές ιδέες.",
+      "descriptionEn": "Paste your summary into Grammarly, count the words, and check whether you kept the most important ideas.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-b.persuasion-modes-confusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάλεξε ένα σύντομο διαφημιστικό ή πολιτικό κείμενο και σημείωσε πού χρησιμοποιεί λογική, πού συναίσθημα, και πού το ήθος του πομπού. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει την επίκληση στη λογική (λόγος/στοιχεία), στο συναίσθημα (πάθος) και στο ήθος του πομπού, και δεν αναγνωρίζει ποιον χρησιμοποιεί ένα κείμενο.",
+      "descriptionEn": "Pick a short ad or political text and mark where it uses logic, where emotion, and where the speaker's credibility. The most common trap on this topic: Confuses appeals to logic (logos/evidence), emotion (pathos), and the speaker's credibility (ethos), and can't identify which a text is using.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Τρόποι πειθούς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Modes of persuasion'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Ρώτα το Grammarly (ή περιέγραψε στο σχόλιό σου) αν η δική σου ανάλυση φαίνεται σαφής και τεκμηριωμένη.",
+      "descriptionEn": "Ask Grammarly (or describe in a comment) whether your own analysis reads clearly and is well supported.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-b.thesis-antithesis-missing": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε μια σύντομη παράγραφο υπέρ μιας άποψης, και μετά πρόσθεσε 2 προτάσεις που αναγνωρίζουν και απαντούν στην αντίθετη άποψη. Η πιο συχνή παγίδα σε αυτό το θέμα: Γράφει μόνο υπέρ μίας άποψης χωρίς να αναγνωρίζει ή να απαντά στο αντίθετο επιχείρημα, κάτι που αποδυναμώνει το δοκίμιο.",
+      "descriptionEn": "Write a short paragraph in favor of a view, then add 2 sentences that acknowledge and respond to the opposing view. The most common trap on this topic: Argues only one side without acknowledging or answering the opposing argument, which weakens the essay.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Αντίκρουση αντίθετης άποψης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Addressing the counter-view'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε το κείμενό σου στο Grammarly και έλεγξε αν η αντίκρουση της αντίθετης άποψης είναι σαφής.",
+      "descriptionEn": "Paste your text into Grammarly and check whether your response to the counter-view is clear.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-b.essay-structure-imbalance": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε το πλάνο ενός δοκιμίου με 3 παραγράφους επιχειρημάτων, δίνοντας περίπου ίσο αριθμό προτάσεων σε κάθε μία. Η πιο συχνή παγίδα σε αυτό το θέμα: Γράφει δοκίμιο με ένα υπερβολικά μεγάλο επιχείρημα και τα υπόλοιπα ελλιπή, χωρίς ισότιμη ανάπτυξη κάθε παραγράφου επιχειρήματος.",
+      "descriptionEn": "Outline a 3-paragraph argument essay, giving roughly equal length to each paragraph. The most common trap on this topic: Writes an essay with one overdeveloped argument and the rest underdeveloped, without balanced development across argument paragraphs.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ισορροπία δοκιμίου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Essay balance'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε το πλάνο σου στο Grammarly και έλεγξε αν κάποια παράγραφος είναι αισθητά πιο αδύναμη από τις άλλες.",
+      "descriptionEn": "Paste your outline into Grammarly and check whether any paragraph is noticeably weaker than the others.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-b.evidence-generic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Ξαναγράψε μια γενικόλογη πρόταση («όλοι ξέρουν ότι…») δίνοντάς της ένα συγκεκριμένο παράδειγμα, στατιστικό ή αναφορά. Η πιο συχνή παγίδα σε αυτό το θέμα: Στηρίζει τα επιχειρήματά του σε γενικόλογες φράσεις («όλοι ξέρουν ότι…») αντί για συγκεκριμένα παραδείγματα, στατιστικά ή αναφορές.",
+      "descriptionEn": "Rewrite a vague sentence ('everyone knows that…') giving it one concrete example, statistic, or reference. The most common trap on this topic: Supports arguments with vague generalities ('everyone knows that…') instead of concrete examples, statistics, or references.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Συγκεκριμένα τεκμήρια\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Concrete evidence'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε τη νέα πρόταση στο Grammarly και έλεγξε αν το τεκμήριο είναι πλέον συγκεκριμένο.",
+      "descriptionEn": "Paste the new sentence into Grammarly and check whether the evidence is now concrete.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-g.synthesis-sources-missing": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Πάρε 2 σύντομα κείμενα πάνω στο ίδιο θέμα και γράψε μία ενιαία παράγραφο που τα συνδυάζει, αντί να τα σχολιάσεις χωριστά. Η πιο συχνή παγίδα σε αυτό το θέμα: Όταν η εκφώνηση δίνει πολλά κείμενα/πηγές, τα σχολιάζει το ένα μετά το άλλο χωριστά αντί να τα συνθέσει σε ενιαία επιχειρηματολογία.",
+      "descriptionEn": "Take 2 short texts on the same topic and write one unified paragraph combining them, instead of commenting on each separately. The most common trap on this topic: When given multiple texts/sources, comments on each one separately instead of synthesizing them into a unified argument.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Σύνθεση πηγών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Synthesizing sources'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν διαβάζεται σαν ενιαία σκέψη ή σαν δύο χωριστά σχόλια.",
+      "descriptionEn": "Paste your paragraph into Grammarly and check whether it reads as one unified idea or as two separate comments.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-g.proposal-vague": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε μια πρόταση αντιμετώπισης ενός προβλήματος, φροντίζοντας να αναφέρεις ΠΟΙΟΣ θα κάνει τι, όχι μόνο τι πρέπει να αλλάξει. Η πιο συχνή παγίδα σε αυτό το θέμα: Στο τελευταίο μέρος του δοκιμίου προτείνει γενικόλογες λύσεις («πρέπει να αλλάξουμε νοοτροπία») χωρίς συγκεκριμένο, εφαρμόσιμο φορέα δράσης.",
+      "descriptionEn": "Write a proposed solution to a problem, making sure to state WHO will do what, not just what should change. The most common trap on this topic: In the essay's final section, proposes vague solutions ('we must change our mindset') without a concrete, actionable agent of action.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Προτάσεις αντιμετώπισης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Proposed solutions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την πρότασή σου στο Grammarly και έλεγξε αν είναι αρκετά συγκεκριμένη ή ακόμα γενικόλογη.",
+      "descriptionEn": "Paste your proposal into Grammarly and check whether it's concrete enough or still vague.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-g.critical-stance-missing": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε μια παράγραφο για ένα θέμα, προσθέτοντας ρητά τη δική σου κρίση (θετική, αρνητική ή αμφιλεγόμενη) και γιατί. Η πιο συχνή παγίδα σε αυτό το θέμα: Περιγράφει το θέμα αντί να το αξιολογεί κριτικά· λείπει η δική του κρίση για το αν κάτι είναι θετικό, αρνητικό ή αμφιλεγόμενο και γιατί.",
+      "descriptionEn": "Write a paragraph on a topic, explicitly adding your own judgment (positive, negative, or contested) and why. The most common trap on this topic: Describes the topic instead of critically evaluating it; misses their own judgment on whether something is positive, negative, or contested, and why.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Κριτική αποτίμηση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Critical evaluation'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν φαίνεται καθαρά η δική σου άποψη, όχι μόνο περιγραφή.",
+      "descriptionEn": "Paste your paragraph into Grammarly and check whether your own view comes through clearly, not just description.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "ekthesi-g.counterargument-superficial": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε μια αντίκρουση αντίθετης άποψης σε 3-4 προτάσεις, εξηγώντας ΓΙΑΤΙ το δικό σου επιχείρημα υπερισχύει. Η πιο συχνή παγίδα σε αυτό το θέμα: Αναφέρει την αντίθετη άποψη μόνο για να την απορρίψει με μία γραμμή, χωρίς να εξηγήσει γιατί το δικό του επιχείρημα υπερισχύει.",
+      "descriptionEn": "Write a rebuttal of an opposing view in 3-4 sentences, explaining WHY your own argument outweighs it. The most common trap on this topic: Mentions the opposing view only to dismiss it in one line, without explaining why their own argument outweighs it.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Βάθος αντίκρουσης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Depth of rebuttal'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε την αντίκρουσή σου στο Grammarly και έλεγξε αν εξηγεί επαρκώς τον λόγο, ή απλά απορρίπτει την άποψη.",
+      "descriptionEn": "Paste your rebuttal into Grammarly and check whether it sufficiently explains the reason, or just dismisses the view.",
+      "toolId": "grammarly"
+    }
+  ],
+
+  "physics-b-lyk.heat-temperature-confusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια τη διαφορά ανάμεσα σε θερμότητα και θερμοκρασία, με ένα καθημερινό παράδειγμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί τη θερμότητα και τη θερμοκρασία σαν να είναι το ίδιο μέγεθος, ενώ η θερμότητα είναι μεταφερόμενη ενέργεια και η θερμοκρασία μέτρο κινητικής ενέργειας σωματιδίων.",
+      "descriptionEn": "Write in your own words the difference between heat and temperature, with an everyday example. The most common trap on this topic: Treats heat and temperature as the same quantity, when heat is transferred energy and temperature measures particles' kinetic energy.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Θερμότητα vs Θερμοκρασία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Heat vs Temperature'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha 'difference between heat and temperature' και σύγκρινε με τη δική σου εξήγηση.",
+      "descriptionEn": "Ask Wolfram Alpha 'difference between heat and temperature' and compare with your own explanation.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "physics-b-lyk.current-consumed": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε ένα απλό κύκλωμα με μια μπαταρία και μια λάμπα, και γράψε τι πιστεύεις ότι συμβαίνει στην ένταση πριν και μετά τη λάμπα. Η πιο συχνή παγίδα σε αυτό το θέμα: Πιστεύει ότι το ηλεκτρικό ρεύμα «καταναλώνεται» καθώς περνά από τη λάμπα, ενώ η ένταση του ρεύματος παραμένει ίδια σε όλο το απλό κύκλωμα.",
+      "descriptionEn": "Draw a simple circuit with a battery and a bulb, and write what you think happens to the current before and after the bulb. The most common trap on this topic: Believes electric current gets 'used up' as it passes through the bulb, when current is actually the same throughout a simple circuit.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"«Κατανάλωση» ρεύματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Current 'used up''. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha για την ένταση ρεύματος σε ένα απλό κύκλωμα σειράς και έλεγξε αν άλλαξε από σημείο σε σημείο.",
+      "descriptionEn": "Ask Wolfram Alpha about current in a simple series circuit and check whether it changed from point to point.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "physics-b-lyk.voltage-current-confusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τον ορισμό της τάσης και τον ορισμό της έντασης ρεύματος με δικά σου λόγια, χωρίς να κοιτάξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει την ηλεκτρική τάση (V) με την ένταση ρεύματος (Α), χρησιμοποιώντας τους όρους σαν να είναι το ίδιο πράγμα.",
+      "descriptionEn": "Write the definition of voltage and the definition of current in your own words, without looking at the book. The most common trap on this topic: Confuses voltage (V) with current (A), using the terms as if they were the same thing.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Τάση vs Ένταση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Voltage vs Current'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha τη μονάδα μέτρησης της τάσης και της έντασης, και έλεγξε αν τις είχες σωστά.",
+      "descriptionEn": "Ask Wolfram Alpha for the units of voltage and current, and check whether you had them right.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "physics-b-lyk.heat-flow-direction": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2 καθημερινά παραδείγματα όπου η θερμότητα ρέει από θερμότερο προς ψυχρότερο σώμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει παγιώσει ότι η θερμότητα ρέει πάντα αυθόρμητα από το θερμότερο προς το ψυχρότερο σώμα, ποτέ αντίστροφα.",
+      "descriptionEn": "Write 2 everyday examples where heat flows from a hotter to a colder object. The most common trap on this topic: Hasn't fixed the rule that heat always flows spontaneously from hotter to colder, never the reverse.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Κατεύθυνση ροής θερμότητας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Direction of heat flow'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha 'direction of heat flow' και επιβεβαίωσε τα παραδείγματά σου.",
+      "descriptionEn": "Ask Wolfram Alpha 'direction of heat flow' and confirm your examples.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "physics-b-lyk.series-parallel-confusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε ένα κύκλωμα με 2 αντιστάσεις σε σειρά και ένα με 2 αντιστάσεις παράλληλα, και γράψε τι διαφορά περιμένεις στην ολική αντίσταση. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τη συνδεσμολογία σε σειρά με την παράλληλη σύνδεση αντιστάσεων και τις διαφορετικές τους ιδιότητες.",
+      "descriptionEn": "Draw a circuit with 2 series resistors and one with 2 parallel resistors, and write what difference you expect in total resistance. The most common trap on this topic: Confuses series and parallel resistor connections and their different properties.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Σειρά vs Παράλληλη σύνδεση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Series vs Parallel circuits'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha να υπολογίσει την ολική αντίσταση και για τα δύο κυκλώματά σου, με τις δικές σου τιμές.",
+      "descriptionEn": "Ask Wolfram Alpha to calculate the total resistance for both your circuits, using your own values.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "istoria-a-lyk.polis-definition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 βασικά χαρακτηριστικά της αρχαίας ελληνικής πόλης-κράτους, από τη μνήμη σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει τα βασικά χαρακτηριστικά της αρχαίας ελληνικής πόλης-κράτους (αυτόνομη πολιτική/στρατιωτική/θρησκευτική οντότητα με δικούς της νόμους).",
+      "descriptionEn": "Write 3 key characteristics of the ancient Greek city-state, from memory. The most common trap on this topic: Doesn't recognize the defining features of the ancient Greek city-state (an autonomous political/military/religious unit with its own laws).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Η πόλη-κράτος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'The city-state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Η πόλη-κράτος\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"The city-state\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-a-lyk.persian-wars-cause": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με τη σειρά τα γεγονότα που θυμάσαι να οδήγησαν στην έναρξη των Περσικών Πολέμων. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν συνδέει την Ιωνική Επανάσταση με την έναρξη των Περσικών Πολέμων· βλέπει τη σύγκρουση ως ξαφνική, χωρίς προηγούμενη αιτία.",
+      "descriptionEn": "Write in order the events you remember leading to the start of the Persian Wars. The most common trap on this topic: Doesn't connect the Ionian Revolt to the start of the Persian Wars; sees the conflict as sudden, without a prior cause.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Αιτίες Περσικών Πολέμων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Causes of the Persian Wars'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Αιτίες Περσικών Πολέμων\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Causes of the Persian Wars\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-a-lyk.alexander-empire-unity": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι θυμάσαι ότι συνέβη στην αυτοκρατορία του Μεγάλου Αλεξάνδρου μετά τον θάνατό του. Η πιο συχνή παγίδα σε αυτό το θέμα: Πιστεύει ότι η αυτοκρατορία του Μεγάλου Αλεξάνδρου παρέμεινε ενωμένη μετά τον θάνατό του, ενώ στην πραγματικότητα διαλύθηκε στα ελληνιστικά βασίλεια των Διαδόχων.",
+      "descriptionEn": "Write what you remember happening to Alexander the Great's empire after his death. The most common trap on this topic: Believes Alexander the Great's empire remained unified after his death, when it actually broke up into the Hellenistic kingdoms of his Successors.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Διάδοχοι Αλεξάνδρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Alexander's Successors'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Διάδοχοι Αλεξάνδρου\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Alexander's Successors\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-a-lyk.direct-democracy-athens": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια πώς λειτουργούσε η άμεση δημοκρατία στην αρχαία Αθήνα, και πώς διαφέρει από τη σημερινή. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει την αθηναϊκή άμεση δημοκρατία (οι πολίτες αποφασίζουν οι ίδιοι στην Εκκλησία του Δήμου) με τη σύγχρονη αντιπροσωπευτική δημοκρατία.",
+      "descriptionEn": "Write in your own words how direct democracy worked in ancient Athens, and how it differs from today's. The most common trap on this topic: Confuses Athenian direct democracy (citizens themselves decide in the Assembly) with modern representative democracy.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Άμεση δημοκρατία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Direct democracy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Άμεση δημοκρατία\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Direct democracy\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-b-lyk.byzantium-continuation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε γιατί θυμάσαι ότι το Βυζάντιο θεωρείται συνέχεια της Ρωμαϊκής Αυτοκρατορίας. Η πιο συχνή παγίδα σε αυτό το θέμα: Βλέπει τη Βυζαντινή Αυτοκρατορία ως εντελώς ξεχωριστό κράτος, χωρίς να αναγνωρίζει ότι ήταν η άμεση συνέχεια της Ρωμαϊκής Αυτοκρατορίας στην Ανατολή.",
+      "descriptionEn": "Write why you remember Byzantium being considered a continuation of the Roman Empire. The most common trap on this topic: Sees the Byzantine Empire as a completely separate state, without recognizing it as the direct continuation of the Roman Empire in the East.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Βυζάντιο ως συνέχεια της Ρώμης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Byzantium as Rome's continuation'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Βυζάντιο ως συνέχεια της Ρώμης\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Byzantium as Rome's continuation\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-b-lyk.fall-constantinople-1453": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τη χρονολογία και 2 λόγους για τους οποίους η Άλωση του 1453 θεωρείται σημείο-ορόσημο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν γνωρίζει τη χρονολογία ή τη σημασία της Άλωσης του 1453 ως το τέλος της Βυζαντινής Αυτοκρατορίας και σημείο-ορόσημο της ευρωπαϊκής ιστορίας.",
+      "descriptionEn": "Write the date and 2 reasons why the 1453 Fall is considered a landmark event. The most common trap on this topic: Doesn't know the date or significance of the 1453 Fall as the end of the Byzantine Empire and a landmark in European history.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Άλωση της Κωνσταντινούπολης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Fall of Constantinople'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Άλωση της Κωνσταντινούπολης\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Fall of Constantinople\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-b-lyk.renaissance-cause": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2 παράγοντες που θυμάσαι ότι βοήθησαν στη διάδοση της Αναγέννησης στην Ευρώπη. Η πιο συχνή παγίδα σε αυτό το θέμα: Βλέπει την Αναγέννηση ως τυχαίο γεγονός, χωρίς να συνδέει τη διάδοσή της με παράγοντες όπως η μετακίνηση λογίων και χειρογράφων προς τη Δύση.",
+      "descriptionEn": "Write 2 factors you remember helping the Renaissance spread across Europe. The most common trap on this topic: Sees the Renaissance as a random event, without connecting its spread to factors like the movement of scholars and manuscripts westward.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Αιτίες Αναγέννησης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Causes of the Renaissance'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Αιτίες Αναγέννησης\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Causes of the Renaissance\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-b-lyk.ottoman-administration": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 διαφορές που θυμάσαι στην καθημερινή ζωή των Ελλήνων υπό οθωμανική κυριαρχία, ανάλογα με την περιοχή ή την τάξη τους. Η πιο συχνή παγίδα σε αυτό το θέμα: Νομίζει ότι όλοι οι Έλληνες υπό οθωμανική κυριαρχία ζούσαν στην ίδια κατάσταση καθημερινά, αγνοώντας τις διαφορές (π.χ. προνόμια Εκκλησίας, φόρος κεφαλής, αρματολίκια).",
+      "descriptionEn": "Write 2-3 differences you remember in daily life for Greeks under Ottoman rule, depending on region or class. The most common trap on this topic: Thinks all Greeks under Ottoman rule lived under identical daily conditions, ignoring differences (e.g. Church privileges, the head tax, local militias).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Οθωμανική διοίκηση Ελλήνων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Ottoman rule over Greeks'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Οθωμανική διοίκηση Ελλήνων\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Ottoman rule over Greeks\" in 3-4 sentences as if presenting it to a classmate, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-c-lyk.mixed-conditionals": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2 προτάσεις με μεικτό υποθετικό λόγο (υπόθεση στο παρελθόν, αποτέλεσμα στο παρόν, ή αντίστροφα). Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται με μεικτούς υποθετικούς λόγους, όπου η υπόθεση αφορά το παρελθόν και το αποτέλεσμα το παρόν (ή αντίστροφα).",
+      "descriptionEn": "Write 2 sentences with a mixed conditional (past condition, present result, or vice versa). The most common trap on this topic: Struggles with mixed conditionals, where the condition is in the past but the result is in the present (or vice versa).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Μεικτοί υποθετικοί λόγοι\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Mixed conditionals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Μεικτοί υποθετικοί λόγοι\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Mixed conditionals'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "efl-c-lyk.inversion-emphasis": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2 προτάσεις με αντεστραμμένη σύνταξη για έμφαση (π.χ. ξεκινώντας με 'Never', 'Rarely', 'Not only'). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει δομές αντεστραμμένης σύνταξης για έμφαση (π.χ. «Never have I seen…»), τυπικές σε προχωρημένο, επίσημο ύφος.",
+      "descriptionEn": "Write 2 sentences using inversion for emphasis (e.g. starting with 'Never', 'Rarely', 'Not only'). The most common trap on this topic: Doesn't recognize inverted structures used for emphasis (e.g. 'Never have I seen…'), typical of advanced, formal register.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Αντεστραμμένη σύνταξη\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Inversion for emphasis'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Αντεστραμμένη σύνταξη\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Inversion for emphasis'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "efl-c-lyk.academic-collocations": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις σε ακαδημαϊκό ύφος χρησιμοποιώντας τις συνάψεις 'conduct research', 'draw a conclusion', 'raise a question'. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί λάθος ρήμα σε ακαδημαϊκές συνάψεις λέξεων (π.χ. «make research» αντί για «conduct/do research»).",
+      "descriptionEn": "Write 3 sentences in academic style using the collocations 'conduct research', 'draw a conclusion', 'raise a question'. The most common trap on this topic: Uses the wrong verb in academic collocations (e.g. 'make research' instead of 'conduct/do research').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Ακαδημαϊκές συνάψεις\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Academic collocations'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Ακαδημαϊκές συνάψεις\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Academic collocations'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "efl-c-lyk.passive-voice-formal": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Ξαναγράψε 2 προτάσεις που έγραψες σε ενεργητική φωνή, μετατρέποντάς τες σε παθητική για πιο επίσημο ύφος. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν χρησιμοποιεί την παθητική φωνή όπου ταιριάζει σε επίσημο/ακαδημαϊκό κείμενο, κρατώντας πάντα ενεργητική σύνταξη με «I» ή «we».",
+      "descriptionEn": "Rewrite 2 sentences you wrote in active voice, converting them to passive for a more formal tone. The most common trap on this topic: Doesn't use the passive voice where it fits formal/academic writing, always keeping active constructions with 'I' or 'we'.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Παθητική φωνή σε επίσημο ύφος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Passive voice in formal register'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Παθητική φωνή σε επίσημο ύφος\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Passive voice in formal register'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "efl-c-lyk.phrasal-vs-formal-verb": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις με phrasal verbs (π.χ. find out, put off, look into) και μετά ξαναγράψε τις με το πιο επίσημο ισοδύναμο (discover, postpone, investigate). Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί καθημερινά phrasal verbs (π.χ. «find out») σε επίσημο/ακαδημαϊκό κείμενο αντί για το πιο επίσημο ισοδύναμο (π.χ. «discover»).",
+      "descriptionEn": "Write 3 sentences with phrasal verbs (e.g. find out, put off, look into) then rewrite them with the more formal equivalent (discover, postpone, investigate). The most common trap on this topic: Uses everyday phrasal verbs (e.g. 'find out') in formal/academic writing instead of the more formal equivalent (e.g. 'discover').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT Edu",
+      "titleEn": "Ask ChatGPT Edu",
+      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Phrasal vs επίσημο ρήμα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
+      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Phrasal vs formal verb'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
+      "toolId": "chatgpt-edu"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Phrasal vs επίσημο ρήμα\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Phrasal vs formal verb'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "biologia-a-lyk.homeostasis": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια τι είναι η ομοιόσταση, με ένα παράδειγμα (π.χ. ρύθμιση θερμοκρασίας σώματος). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η ομοιόσταση είναι η ικανότητα του οργανισμού να διατηρεί σταθερό το εσωτερικό του περιβάλλον.",
+      "descriptionEn": "Write in your own words what homeostasis is, with an example (e.g. body temperature regulation). The most common trap on this topic: Doesn't know homeostasis is the organism's ability to keep its internal environment stable.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ομοιόσταση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Homeostasis'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Ομοιόσταση\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Homeostasis\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-lyk.red-blood-cell-role": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τον κύριο ρόλο των ερυθρών αιμοσφαιρίων, χωρίς να κοιτάξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ο κύριος ρόλος των ερυθρών αιμοσφαιρίων είναι η μεταφορά οξυγόνου.",
+      "descriptionEn": "Write the main role of red blood cells, without looking at the book. The most common trap on this topic: Doesn't know the main role of red blood cells is transporting oxygen.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ρόλος ερυθρών αιμοσφαιρίων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Role of red blood cells'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Ρόλος ερυθρών αιμοσφαιρίων\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Role of red blood cells\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-lyk.immune-system": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια πώς νομίζεις ότι το σώμα αμύνεται όταν μπει ένα μικρόβιο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι το ανοσοποιητικό σύστημα είναι υπεύθυνο για την άμυνα του οργανισμού απέναντι σε μικρόβια.",
+      "descriptionEn": "Write in your own words how you think the body defends itself when a germ enters. The most common trap on this topic: Doesn't know the immune system is responsible for defending the body against pathogens.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ανοσοποιητικό σύστημα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Immune system'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Ανοσοποιητικό σύστημα\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Immune system\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-lyk.mitochondria-function": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι κάνει το μιτοχόνδριο μέσα στο κύτταρο, με δικά σου λόγια. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι το μιτοχόνδριο είναι το οργανίδιο που παράγει την ενέργεια (ATP) του κυττάρου.",
+      "descriptionEn": "Write what the mitochondrion does inside the cell, in your own words. The most common trap on this topic: Doesn't know the mitochondrion is the organelle that produces the cell's energy (ATP).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Λειτουργία μιτοχονδρίου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Function of the mitochondrion'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Λειτουργία μιτοχονδρίου\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Function of the mitochondrion\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-lyk.digestion-purpose": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε γιατί χρειάζεται το σώμα να πέψει την τροφή, πέρα από «για να τη φάει». Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ο σκοπός της πέψης είναι να διασπάσει την τροφή ώστε να απορροφηθούν τα θρεπτικά συστατικά της.",
+      "descriptionEn": "Write why the body needs to digest food, beyond 'to eat it'. The most common trap on this topic: Doesn't know digestion's purpose is breaking down food so its nutrients can be absorbed.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Σκοπός πέψης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Purpose of digestion'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Σκοπός πέψης\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Purpose of digestion\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-b-lyk.mendel-first-law": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια τι λέει ο πρώτος νόμος του Mendel για τον διαχωρισμό των γονιδίων. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι σύμφωνα με τον πρώτο νόμο του Mendel, τα γονίδια διαχωρίζονται κατά τη δημιουργία γαμετών.",
+      "descriptionEn": "Write in your own words what Mendel's first law says about gene separation. The most common trap on this topic: Doesn't know that according to Mendel's first law, genes separate during gamete formation.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Πρώτος νόμος του Mendel\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Mendel's first law'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha 'Punnett square Aa x Aa' και δες αν το αποτέλεσμα ταιριάζει με αυτό που περίμενες.",
+      "descriptionEn": "Ask Wolfram Alpha 'Punnett square Aa x Aa' and see whether the result matches what you expected.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-b-lyk.transcription-translation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με τη σειρά τα δύο βήματα από το DNA μέχρι την πρωτεΐνη, με δικά σου λόγια. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι το DNA μεταφράζεται σε πρωτεΐνη μέσω δύο βημάτων: πρώτα μεταγραφή σε RNA, μετά μετάφραση.",
+      "descriptionEn": "Write in order the two steps from DNA to protein, in your own words. The most common trap on this topic: Doesn't know DNA is translated into protein through two steps: first transcription to RNA, then translation.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Μεταγραφή & μετάφραση DNA\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Transcription & translation of DNA'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha 'DNA transcription translation steps' και σύγκρινε με αυτό που έγραψες.",
+      "descriptionEn": "Ask Wolfram Alpha 'DNA transcription translation steps' and compare with what you wrote.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-b-lyk.dominant-allele": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε ένα παράδειγμα με ένα κυρίαρχο και ένα υπολειπόμενο αλληλόμορφο, και πες ποιο χαρακτηριστικό θα εκφραστεί. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ένα επικρατές (κυρίαρχο) γονίδιο εκφράζεται ακόμα κι όταν συνυπάρχει με ένα υπολειπόμενο.",
+      "descriptionEn": "Write an example with one dominant and one recessive allele, and say which trait will be expressed. The most common trap on this topic: Doesn't know a dominant allele is expressed even when paired with a recessive one.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Επικρατές γονίδιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Dominant allele'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha να λύσει το παράδειγμά σου με Punnett square και έλεγξε τη λύση σου.",
+      "descriptionEn": "Ask Wolfram Alpha to solve your example with a Punnett square and check your solution.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-b-lyk.biotechnology-definition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια τι είναι η βιοτεχνολογία και δώσε ένα παράδειγμα εφαρμογής της. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η βιοτεχνολογία χρησιμοποιεί βιολογικές διεργασίες ή οργανισμούς για την παραγωγή προϊόντων ή λύσεων.",
+      "descriptionEn": "Write in your own words what biotechnology is and give an example application. The most common trap on this topic: Doesn't know biotechnology uses biological processes or organisms to produce products or solutions.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Έννοια βιοτεχνολογίας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Concept of biotechnology'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha για ένα παράδειγμα βιοτεχνολογικής εφαρμογής και σύγκρινε με το δικό σου.",
+      "descriptionEn": "Ask Wolfram Alpha for an example biotechnology application and compare with your own.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-b-lyk.heterozygous-genotype": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι σημαίνει ο γονότυπος Aa, και τι διαφορά έχει από τον AA και τον aa. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ένας ετερόζυγος γονότυπος (π.χ. Aa) σημαίνει ότι το άτομο έχει ένα κυρίαρχο και ένα υπολειπόμενο αλληλόμορφο.",
+      "descriptionEn": "Write what genotype Aa means, and how it differs from AA and aa. The most common trap on this topic: Doesn't know a heterozygous genotype (e.g. Aa) means the individual has one dominant and one recessive allele.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ετερόζυγος γονότυπος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Heterozygous genotype'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha τη διαφορά ομόζυγου και ετερόζυγου γονότυπου και έλεγξε τη δική σου εξήγηση.",
+      "descriptionEn": "Ask Wolfram Alpha the difference between homozygous and heterozygous genotypes and check your own explanation.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-g-lyk.antibody-source": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε ποια κύτταρα θυμάσαι ότι παράγουν τα αντισώματα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι τα αντισώματα παράγονται από τα Β-λεμφοκύτταρα του ανοσοποιητικού συστήματος.",
+      "descriptionEn": "Write which cells you remember producing antibodies. The most common trap on this topic: Doesn't know antibodies are produced by B-lymphocytes of the immune system.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Παραγωγή αντισωμάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Antibody production'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Παραγωγή αντισωμάτων\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Antibody production\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-g-lyk.natural-selection": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια πώς λειτουργεί η φυσική επιλογή, με ένα παράδειγμα ζώου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η φυσική επιλογή ευνοεί οργανισμούς που είναι καλύτερα προσαρμοσμένοι στο περιβάλλον τους και αναπαράγονται περισσότερο.",
+      "descriptionEn": "Write in your own words how natural selection works, with an animal example. The most common trap on this topic: Doesn't know natural selection favors organisms better adapted to their environment that reproduce more.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Φυσική επιλογή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Natural selection'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Φυσική επιλογή\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Natural selection\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-g-lyk.vaccine-mechanism": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια πώς νομίζεις ότι λειτουργεί ένα εμβόλιο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ένα εμβόλιο λειτουργεί εκπαιδεύοντας το ανοσοποιητικό σύστημα να αναγνωρίζει έναν παθογόνο, χωρίς να προκαλεί πραγματική νόσο.",
+      "descriptionEn": "Write in your own words how you think a vaccine works. The most common trap on this topic: Doesn't know a vaccine works by training the immune system to recognize a pathogen, without causing actual disease.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Μηχανισμός εμβολιασμού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Vaccine mechanism'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Μηχανισμός εμβολιασμού\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Vaccine mechanism\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-g-lyk.energy-food-chain": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε μια απλή τροφική αλυσίδα (4 επίπεδα) και σημείωσε τι νομίζεις ότι συμβαίνει στην ενέργεια σε κάθε βήμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η ενέργεια μειώνεται καθώς περνάει από το ένα τροφικό επίπεδο στο επόμενο σε μια τροφική αλυσίδα.",
+      "descriptionEn": "Draw a simple food chain (4 levels) and note what you think happens to energy at each step. The most common trap on this topic: Doesn't know energy decreases as it passes from one trophic level to the next in a food chain.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ενέργεια σε τροφική αλυσίδα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Energy in a food chain'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Ενέργεια σε τροφική αλυσίδα\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Energy in a food chain\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-g-lyk.evolution-timescale": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια πόσο χρόνο παίρνει η εξέλιξη ενός είδους, και γιατί δεν συμβαίνει σε ένα άτομο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η εξέλιξη ενός είδους συμβαίνει σε πολλές γενιές, μέσω σταδιακών αλλαγών στη συχνότητα γονιδίων, όχι σε ένα άτομο.",
+      "descriptionEn": "Write in your own words how long a species takes to evolve, and why it doesn't happen within one individual. The most common trap on this topic: Doesn't know a species evolves over many generations through gradual gene-frequency changes, not within one individual.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Χρονική κλίμακα εξέλιξης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Timescale of evolution'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Χρονική κλίμακα εξέλιξης\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Timescale of evolution\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
+    }
   ]
 };

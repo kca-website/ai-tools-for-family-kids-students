@@ -1695,5 +1695,197 @@ const LEARNING_PATHS = {
       "descriptionEn": "Make up a new first-degree equation, solve it by hand, and check your solution with Wolfram Alpha.",
       "toolId": "wolfram-alpha"
     }
+  ],
+
+  "glossa-a-gym.parts-of-speech": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Πάρε 2-3 προτάσεις από το βιβλίο σου και υπογράμμισε ουσιαστικά, επίθετα, ρήματα και επιρρήματα με διαφορετικό χρώμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να ξεχωρίσει τα μέρη του λόγου (ουσιαστικό, επίθετο, ρήμα, επίρρημα) μέσα σε μια πρόταση.",
+      "descriptionEn": "Take 2-3 sentences from your textbook and underline nouns, adjectives, verbs, and adverbs in different colors. The most common trap on this topic: Struggles to tell apart parts of speech (noun, adjective, verb, adverb) within a sentence.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Μέρη του λόγου”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του 2 νέες προτάσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Parts of speech'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new sentences this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Γράψε μόνος/η μια νέα πρόταση με τουλάχιστον 4 διαφορετικά μέρη του λόγου και εντόπισέ τα χωρίς βοήθεια.",
+      "descriptionEn": "Write a new sentence of your own with at least 4 different parts of speech and identify them without help.",
+      "toolId": null
+    }
+  ],
+
+  "glossa-a-gym.opinion-vs-fact": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάβασε ένα σύντομο άρθρο και σημείωσε ποιες προτάσεις είναι γεγονότα και ποιες είναι απόψεις. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει μια αντικειμενική πληροφορία (γεγονός) από μια προσωπική άποψη μέσα σε ένα κείμενο.",
+      "descriptionEn": "Read a short article and note which sentences are facts and which are opinions. The most common trap on this topic: Doesn't distinguish objective information (a fact) from a personal opinion within a text.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Άποψη vs Γεγονός”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του 2 νέα κείμενα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Opinion vs Fact'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new texts this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Γράψε μόνος/η μία πρόταση-γεγονός και μία πρόταση-άποψη πάνω στο ίδιο θέμα, και εξήγησε τη διαφορά τους.",
+      "descriptionEn": "Write your own fact sentence and opinion sentence on the same topic, and explain the difference between them.",
+      "toolId": null
+    }
+  ],
+
+  "glossa-a-gym.paragraph-argument-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε μια σύντομη παράγραφο με τη γνώμη σου για ένα θέμα που σε ενδιαφέρει. Η πιο συχνή παγίδα σε αυτό το θέμα: Όταν εκφράζει άποψη, δεν την υποστηρίζει με κανέναν λόγο, απλώς την επαναλαμβάνει με διαφορετικά λόγια.",
+      "descriptionEn": "Write a short paragraph with your opinion on a topic you care about. The most common trap on this topic: When expressing an opinion, doesn't support it with any reason, just repeats it in different words.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Βασικό επιχειρηματολογικό κείμενο”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του την παράγραφό σου με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic argumentative paragraph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on your paragraph this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Ξαναγράψε την παράγραφό σου προσθέτοντας έναν συγκεκριμένο λόγο («γιατί») που υποστηρίζει τη γνώμη σου, χωρίς βοήθεια.",
+      "descriptionEn": "Rewrite your paragraph adding one specific reason (\"because\") that supports your opinion, without help.",
+      "toolId": null
+    }
+  ],
+
+  "glossa-a-gym.verb-mood-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις στην οριστική (π.χ. «Ο Γιάννης διαβάζει») και 3 στην προστακτική (π.χ. «Διάβασε!»). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει την οριστική (δήλωση γεγονότος) από την προστακτική (διαταγή/παράκληση) έγκλιση του ρήματος.",
+      "descriptionEn": "Write 3 sentences in the indicative mood (e.g. \"John reads\") and 3 in the imperative (e.g. \"Read!\"). The most common trap on this topic: Doesn't distinguish the indicative (stating a fact) from the imperative (command/request) verb mood.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Έγκλιση ρήματος”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του 2 νέες προτάσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Verb mood'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new sentences this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Πάρε μια πρόταση στην οριστική από το βιβλίο σου και μετάτρεψέ την σε προστακτική, χωρίς βοήθεια.",
+      "descriptionEn": "Take an indicative-mood sentence from your textbook and convert it to imperative, without help.",
+      "toolId": null
+    }
+  ],
+
+  "glossa-b-gym.essay-intro-function": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε έναν σύντομο πρόλογο (2-3 προτάσεις) για ένα δοκίμιο πάνω σε θέμα που σου δίνει το σχολείο. Η πιο συχνή παγίδα σε αυτό το θέμα: Νομίζει ότι ο πρόλογος ενός δοκιμίου πρέπει να αναλύει ήδη το θέμα σε βάθος, αντί απλώς να το εισάγει.",
+      "descriptionEn": "Write a short introduction (2-3 sentences) for an essay on a topic your school gave you. The most common trap on this topic: Thinks an essay's introduction should already analyze the topic in depth, instead of simply introducing it.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Λειτουργία πρόλογου δοκιμίου”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμο πρόλογο.» Δούλεψε μαζί του τον πρόλογό σου με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'The function of an essay introduction'. Ask me questions so I can figure it out myself, don't just hand me a ready-made intro.\" Work on your introduction this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Επικόλλησε τον πρόλογό σου στο ChatGPT και ρώτα: «Ο πρόλογός μου απλώς εισάγει το θέμα ή αναλύει ήδη πολύ; Πες μου γιατί, μη μου τον ξαναγράψεις.»",
+      "descriptionEn": "Paste your introduction into ChatGPT and ask: \"Does my intro just introduce the topic, or does it already analyze too much? Tell me why, don't rewrite it for me.\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-gym.text-types-purpose": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάλεξε δύο διαφορετικά κειμενικά είδη (π.χ. επιστολή διαμαρτυρίας και προσωπικό ημερολόγιο) και γράψε τι σκοπό εξυπηρετεί το καθένα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν συνδέει το είδος ενός κειμένου με τον σκοπό και το ύφος που του ταιριάζει.",
+      "descriptionEn": "Pick two different text types (e.g. a protest letter and a personal diary entry) and write what purpose each one serves. The most common trap on this topic: Doesn't connect a text's type with the purpose and style that fit it.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Σκοπός κειμενικού είδους”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα κειμενικά είδη με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'The purpose of text types'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new text types this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Γράψε δύο προτάσεις σε λάθος ύφος για ένα κειμενικό είδος (π.χ. πολύ επίσημο ύφος σε προσωπικό ημερολόγιο) και ρώτα το ChatGPT: «Ταιριάζει αυτό το ύφος σε αυτό το είδος κειμένου; Γιατί όχι;»",
+      "descriptionEn": "Write two sentences in the wrong style for a text type (e.g. very formal style in a personal diary) and ask ChatGPT: \"Does this style fit this text type? Why not?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-gym.argument-vs-evidence": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Πάρε μια παράγραφο επιχειρηματολογίας από το βιβλίο σου και υπογράμμισε ξεχωριστά το επιχείρημα (τη γενική θέση) και το τεκμήριο (το συγκεκριμένο στοιχείο). Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το επιχείρημα με το τεκμήριο που το στηρίζει.",
+      "descriptionEn": "Take an argumentative paragraph from your textbook and separately underline the argument (the general claim) and the evidence (the specific supporting detail). The most common trap on this topic: Confuses the argument with the evidence that supports it.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Επιχείρημα vs Τεκμήριο”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέες παραγράφους με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Argument vs Evidence'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new paragraphs this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Γράψε μόνος/η ένα επιχείρημα με ένα τεκμήριο πάνω σε θέμα της επιλογής σου, και ρώτα το ChatGPT: «Ποιο κομμάτι είναι το επιχείρημα και ποιο το τεκμήριο εδώ; Έγραψα σωστά και τα δύο;»",
+      "descriptionEn": "Write your own argument with one piece of evidence on a topic of your choice, and ask ChatGPT: \"Which part is the argument and which is the evidence here? Did I write both correctly?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-gym.summary-vs-opinion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάβασε ένα σύντομο κείμενο και γράψε ξεχωριστά μια αντικειμενική περίληψή του και ένα προσωπικό σχόλιο πάνω σε αυτό. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει την αντικειμενική περίληψη ενός κειμένου με το προσωπικό σχόλιο πάνω σε αυτό.",
+      "descriptionEn": "Read a short text and write a separate objective summary of it and a personal comment on it. The most common trap on this topic: Confuses an objective summary of a text with a personal comment on it.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Περίληψη vs Σχόλιο”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη περίληψη.» Δούλεψε μαζί του ένα νέο κείμενο με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Summary vs Opinion'. Ask me questions so I can figure it out myself, don't just hand me a ready-made summary.\" Work through a new text this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Επικόλλησε την περίληψη και το σχόλιό σου στο ChatGPT και ρώτα: «Η περίληψή μου έχει μέσα προσωπική γνώμη κατά λάθος; Πες μου πού, μη μου την ξαναγράψεις.»",
+      "descriptionEn": "Paste your summary and your comment into ChatGPT and ask: \"Does my summary accidentally include personal opinion? Tell me where, don't rewrite it for me.\"",
+      "toolId": "chatgpt"
+    }
   ]
 };

@@ -697,14 +697,30 @@ function renderToolGrid(pathTools, targetElement) {
     const cloneBtn = clone.querySelector("#pdfDownloadBtn");
     if (cloneBtn) cloneBtn.remove();
 
-    // Δημιουργούμε ένα προσωρινό container για το PDF
+    // Δημιουργούμε ένα προσωρινό container για το PDF.
+    // ΣΗΜΑΝΤΙΚΟ: position: fixed + top/left 0 ΚΑΙ μετατόπιση εκτός οθόνης, ώστε
+    // το html2canvas να "φωτογραφίζει" πάντα από την αρχή του container, ανεξάρτητα
+    // από το πόσο έχει κάνει scroll ο χρήστης τη στιγμή που πάτησε το κουμπί.
+    // Χωρίς αυτό, το html2canvas ξεκινάει τη λήψη από το τρέχον scroll offset της
+    // σελίδας, με αποτέλεσμα κενές σελίδες στην αρχή του PDF ίσες με το scroll.
     const container = document.createElement("div");
+    container.style.position = "fixed";
+    container.style.top = "0";
+    container.style.left = "-10000px";
     container.style.padding = "40px";
     container.style.fontFamily = "system-ui, -apple-system, sans-serif";
     container.style.maxWidth = "800px";
-    container.style.margin = "0 auto";
+    container.style.width = "800px";
+    container.style.margin = "0";
     container.style.backgroundColor = "#FFFFFF";
     container.innerHTML = `
+      <style>
+        /* Αποτρέπει το σκίσιμο πινάκων/γραμμών ανάμεσα σε δύο σελίδες PDF */
+        table { border-collapse: collapse; width: 100%; page-break-inside: auto; }
+        tr, td, th { page-break-inside: avoid; }
+        thead { display: table-header-group; }
+        h1, h2, h3 { page-break-after: avoid; }
+      </style>
       <h1 style="font-size:28px; margin-bottom:8px;">${state.lang === 'el' ? GUIDE_DATA.el.title : GUIDE_DATA.en.title}</h1>
       <p style="color:#5A6270; font-size:14px; margin-bottom:24px;">aitools4kids.gr</p>
       ${clone.innerHTML}
@@ -719,8 +735,9 @@ function renderToolGrid(pathTools, targetElement) {
       margin:        [0.5, 0.5, 0.5, 0.5],
       filename:      state.lang === 'el' ? 'odigos-ai-2026.pdf' : 'ai-guide-2026.pdf',
       image:         { type: 'jpeg', quality: 0.98 },
-      html2canvas:   { scale: 2, useCORS: true, letterRendering: true },
-      jsPDF:         { unit: 'in', format: 'a4', orientation: 'portrait' }
+      html2canvas:   { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: container.scrollWidth, windowHeight: container.scrollHeight },
+      jsPDF:         { unit: 'in', format: 'a4', orientation: 'portrait' },
+      pagebreak:     { mode: ['css', 'legacy'], avoid: ['tr', 'table'] }
     };
 
     html2pdf().set(opt).from(container).save().then(() => {

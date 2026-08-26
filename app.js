@@ -642,13 +642,46 @@ function renderToolGrid(pathTools, targetElement) {
     }
   }
 
-  // ---------- PDF Download με html2pdf.js ----------
+  // ---------- PDF Download με html2pdf.js (lazy-loaded) ----------
+  // Η βιβλιοθήκη (~150KB) φορτώνεται ΜΟΝΟ την πρώτη φορά που ο χρήστης
+  // πατήσει το κουμπί PDF, όχι σε κάθε επίσκεψη της σελίδας.
+  let html2pdfLoadPromise = null;
+  function loadHtml2Pdf() {
+    if (window.html2pdf) return Promise.resolve();
+    if (html2pdfLoadPromise) return html2pdfLoadPromise;
+    html2pdfLoadPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+      script.integrity = "sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==";
+      script.crossOrigin = "anonymous";
+      script.referrerPolicy = "no-referrer";
+      script.onload = () => resolve();
+      script.onerror = () => { html2pdfLoadPromise = null; reject(new Error("html2pdf failed to load")); };
+      document.head.appendChild(script);
+    });
+    return html2pdfLoadPromise;
+  }
+
   function downloadGuidePDF() {
     const btn = document.getElementById("pdfDownloadBtn");
     if (btn) {
       btn.textContent = t("pdfDownloading");
       btn.disabled = true;
     }
+
+    loadHtml2Pdf()
+      .then(() => runGuidePdfExport(btn))
+      .catch((err) => {
+        console.error(err);
+        if (btn) {
+          btn.textContent = "📄 Κατέβασε τον οδηγό σε PDF";
+          btn.disabled = false;
+        }
+        alert(state.lang === "el" ? "Δεν φορτώθηκε το εργαλείο PDF. Δοκίμασε ξανά." : "Could not load the PDF tool. Please try again.");
+      });
+  }
+
+  function runGuidePdfExport(btn) {
 
     // Παίρνουμε το περιεχόμενο του οδηγού (μόνο το guide-content)
     const guideElement = document.getElementById("guideContent");

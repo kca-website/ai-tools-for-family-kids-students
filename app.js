@@ -697,21 +697,12 @@ function renderToolGrid(pathTools, targetElement) {
     const cloneBtn = clone.querySelector("#pdfDownloadBtn");
     if (cloneBtn) cloneBtn.remove();
 
-    // Δημιουργούμε ένα προσωρινό container για το PDF.
-    // ΣΗΜΑΝΤΙΚΟ: position: fixed + top/left 0 ΚΑΙ μετατόπιση εκτός οθόνης, ώστε
-    // το html2canvas να "φωτογραφίζει" πάντα από την αρχή του container, ανεξάρτητα
-    // από το πόσο έχει κάνει scroll ο χρήστης τη στιγμή που πάτησε το κουμπί.
-    // Χωρίς αυτό, το html2canvas ξεκινάει τη λήψη από το τρέχον scroll offset της
-    // σελίδας, με αποτέλεσμα κενές σελίδες στην αρχή του PDF ίσες με το scroll.
+    // Δημιουργούμε ένα προσωρινό container για το PDF (κανονική ροή εγγράφου).
     const container = document.createElement("div");
-    container.style.position = "fixed";
-    container.style.top = "0";
-    container.style.left = "-10000px";
     container.style.padding = "40px";
     container.style.fontFamily = "system-ui, -apple-system, sans-serif";
     container.style.maxWidth = "800px";
-    container.style.width = "800px";
-    container.style.margin = "0";
+    container.style.margin = "0 auto";
     container.style.backgroundColor = "#FFFFFF";
     container.innerHTML = `
       <style>
@@ -731,30 +722,47 @@ function renderToolGrid(pathTools, targetElement) {
 
     document.body.appendChild(container);
 
+    // ΣΗΜΑΝΤΙΚΟ: το κουμπί PDF είναι κάτω στη σελίδα, οπότε ο χρήστης έχει κάνει
+    // scroll όταν το πατάει. Το html2canvas τραβάει "screenshot" από το τρέχον
+    // σημείο scroll, όχι από την αρχή του container -> κενές σελίδες στην αρχή.
+    // Λύση: σκρολάρουμε προγραμματιστικά στην κορυφή ΠΡΙΝ τη λήψη, χωρίς να
+    // χρειάζεται ο χρήστης να κάνει κάτι, και επαναφέρουμε το scroll μετά.
+    const previousScrollX = window.scrollX;
+    const previousScrollY = window.scrollY;
+    window.scrollTo(0, 0);
+
+    const restoreScroll = () => window.scrollTo(previousScrollX, previousScrollY);
+
     const opt = {
       margin:        [0.5, 0.5, 0.5, 0.5],
       filename:      state.lang === 'el' ? 'odigos-ai-2026.pdf' : 'ai-guide-2026.pdf',
       image:         { type: 'jpeg', quality: 0.98 },
-      html2canvas:   { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0, windowWidth: container.scrollWidth, windowHeight: container.scrollHeight },
+      html2canvas:   { scale: 2, useCORS: true, letterRendering: true, scrollX: 0, scrollY: 0 },
       jsPDF:         { unit: 'in', format: 'a4', orientation: 'portrait' },
       pagebreak:     { mode: ['css', 'legacy'], avoid: ['tr', 'table'] }
     };
 
-    html2pdf().set(opt).from(container).save().then(() => {
-      document.body.removeChild(container);
-      if (btn) {
-        btn.textContent = "📄 Κατέβασε τον οδηγό σε PDF";
-        btn.disabled = false;
-      }
-    }).catch((err) => {
-      console.error(err);
-      document.body.removeChild(container);
-      if (btn) {
-        btn.textContent = "📄 Κατέβασε τον οδηγό σε PDF";
-        btn.disabled = false;
-      }
-      alert("Προέκυψε σφάλμα κατά τη δημιουργία του PDF. Δοκίμασε ξανά.");
-    });
+    // Μικρή καθυστέρηση ώστε ο browser να προλάβει να ζωγραφίσει (repaint) τη
+    // σελίδα στη νέα θέση scroll πριν ξεκινήσει το html2canvas.
+    setTimeout(() => {
+      html2pdf().set(opt).from(container).save().then(() => {
+        document.body.removeChild(container);
+        restoreScroll();
+        if (btn) {
+          btn.textContent = "📄 Κατέβασε τον οδηγό σε PDF";
+          btn.disabled = false;
+        }
+      }).catch((err) => {
+        console.error(err);
+        document.body.removeChild(container);
+        restoreScroll();
+        if (btn) {
+          btn.textContent = "📄 Κατέβασε τον οδηγό σε PDF";
+          btn.disabled = false;
+        }
+        alert("Προέκυψε σφάλμα κατά τη δημιουργία του PDF. Δοκίμασε ξανά.");
+      });
+    }, 50);
   }
 
   // ---------- Rendering: Prompt Generator ----------

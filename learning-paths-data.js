@@ -1887,5 +1887,893 @@ const LEARNING_PATHS = {
       "descriptionEn": "Paste your summary and your comment into ChatGPT and ask: \"Does my summary accidentally include personal opinion? Tell me where, don't rewrite it for me.\"",
       "toolId": "chatgpt"
     }
+  ],
+
+  "physics-g-gym.ohms-law": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 απλά κυκλώματα με γνωστή τάση και αντίσταση, και υπολόγισε την ένταση με το χέρι χρησιμοποιώντας τον τύπο V=IR. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει τη σχέση ανάμεσα σε τάση, ένταση και αντίσταση (V=IR), και δεν ξέρει τι συμβαίνει στην ένταση αν αυξηθεί η αντίσταση.",
+      "descriptionEn": "Write 2-3 simple circuits with known voltage and resistance, and calculate the current by hand using V=IR. The most common trap on this topic: Doesn't understand the relationship between voltage, current, and resistance (V=IR), and doesn't know what happens to current when resistance increases.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Νόμος του Ωμ\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Ohm's Law'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Πάρε ένα κύκλωμα που έλυσες και έλεγξε την τιμή της έντασης στο Wolfram Alpha, γράφοντας 'V=IR solve for I' με τις δικές σου τιμές.",
+      "descriptionEn": "Take a circuit you solved and check the current value in Wolfram Alpha by typing 'V=IR solve for I' with your own values.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "physics-g-gym.speed-velocity-formula": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 προβλήματα κίνησης με το χέρι, εφαρμόζοντας τον τύπο ταχύτητα = απόσταση / χρόνος. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τον τύπο της ταχύτητας (απόσταση/χρόνος), εφαρμόζοντάς τον λανθασμένα σε προβλήματα κίνησης.",
+      "descriptionEn": "Solve 2-3 motion problems by hand, applying the formula speed = distance / time. The most common trap on this topic: Confuses the speed formula (distance/time), applying it incorrectly in motion problems.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Τύπος ταχύτητας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Speed formula'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Πάρε ένα πρόβλημα που έλυσες και έλεγξε το αποτέλεσμα στο Wolfram Alpha.",
+      "descriptionEn": "Take a problem you solved and check the result in Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "physics-g-gym.energy-transformation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάλεξε 3 συσκευές του σπιτιού σου (π.χ. λάμπα, σόμπα, ηχείο) και γράψε ποια μετατροπή ενέργειας γίνεται στην καθεμία. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει τις μετατροπές ενέργειας σε καθημερινές συσκευές (π.χ. ηλεκτρική σε φωτεινή/θερμική).",
+      "descriptionEn": "Pick 3 devices from your home (e.g. lamp, heater, speaker) and write which energy transformation happens in each. The most common trap on this topic: Doesn't recognize energy transformations in everyday devices (e.g. electrical to light/heat).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Μετατροπή ενέργειας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Energy transformation'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha να σου δείξει τη μετατροπή ενέργειας μιας συσκευής που διάλεξες, και σύγκρινε με τη δική σου απάντηση.",
+      "descriptionEn": "Ask Wolfram Alpha to show you the energy transformation of a device you picked, and compare it with your own answer.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "chimeia-g-gym.element-vs-compound": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 παραδείγματα χημικών στοιχείων (π.χ. Οξυγόνο, Σίδηρος) και 3 παραδείγματα χημικών ενώσεων (π.χ. Νερό, Αλάτι), εξηγώντας τη διαφορά με δικά σου λόγια. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το χημικό στοιχείο (ένα είδος ατόμου) με τη χημική ένωση (συνδυασμός διαφορετικών ατόμων).",
+      "descriptionEn": "Write 3 examples of chemical elements (e.g. Oxygen, Iron) and 3 examples of chemical compounds (e.g. Water, Salt), explaining the difference in your own words. The most common trap on this topic: Confuses a chemical element (one type of atom) with a chemical compound (a combination of different atoms).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Στοιχείο vs Ένωση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Element vs Compound'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha για τον χημικό τύπο μιας ένωσης που έγραψες, και δες από πόσα διαφορετικά στοιχεία αποτελείται.",
+      "descriptionEn": "Ask Wolfram Alpha for the chemical formula of a compound you wrote, and see how many different elements it's made of.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "chimeia-g-gym.mixture-vs-compound": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 παραδείγματα μειγμάτων (π.χ. αλατόνερο, σαλάτα) και 3 παραδείγματα χημικών ενώσεων, εξηγώντας γιατί διαφέρουν. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει ένα μείγμα (τα συστατικά διατηρούν τις ιδιότητές τους) από μια χημική ένωση (νέα ουσία με νέες ιδιότητες).",
+      "descriptionEn": "Write 3 examples of mixtures (e.g. saltwater, salad) and 3 examples of chemical compounds, explaining why they differ. The most common trap on this topic: Doesn't distinguish a mixture (components keep their properties) from a chemical compound (a new substance with new properties).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Μείγμα vs Ένωση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Mixture vs Compound'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha αν ένα υλικό που διάλεξες (π.χ. αλατόνερο) είναι μείγμα ή ένωση, και έλεγξε τη δική σου απάντηση.",
+      "descriptionEn": "Ask Wolfram Alpha whether a material you picked (e.g. saltwater) is a mixture or a compound, and check your own answer.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "chimeia-g-gym.atom-structure": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε ένα απλό άτομο (π.χ. άνθρακα) και σημείωσε πού βρίσκονται τα πρωτόνια, τα νετρόνια και τα ηλεκτρόνια. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν θυμάται πού βρίσκονται τα πρωτόνια, τα νετρόνια και τα ηλεκτρόνια μέσα στο άτομο.",
+      "descriptionEn": "Draw a simple atom (e.g. carbon) and mark where the protons, neutrons, and electrons are. The most common trap on this topic: Doesn't recall where protons, neutrons, and electrons are located within the atom.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Δομή του ατόμου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Structure of the atom'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha 'atomic structure of carbon' και σύγκρινε με το σχέδιό σου.",
+      "descriptionEn": "Ask Wolfram Alpha 'atomic structure of carbon' and compare it with your drawing.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "istoria-a-gym.bronze-age-civilizations": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Φτιάξε έναν πίνακα με 3 στήλες (Κυκλαδικός, Μινωικός, Μυκηναϊκός) και γράψε από τη μνήμη σου πού αναπτύχθηκε ο καθένας και ένα χαρακτηριστικό του. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τον Κυκλαδικό, τον Μινωικό και τον Μυκηναϊκό πολιτισμό μεταξύ τους, χωρίς να ξέρει ποιος αναπτύχθηκε πού.",
+      "descriptionEn": "Make a 3-column table (Cycladic, Minoan, Mycenaean) and write from memory where each developed and one characteristic of each. The most common trap on this topic: Confuses the Cycladic, Minoan, and Mycenaean civilizations with each other, without knowing which developed where.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολιτισμοί Εποχής Χαλκού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Bronze Age civilizations'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε σε ένα φίλο σου με 3-4 προτάσεις το θέμα \"Πολιτισμοί Εποχής Χαλκού\", χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Bronze Age civilizations\" to a friend in 3-4 sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-a-gym.archaic-democracy-path": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με τη σειρά τα βήματα που θυμάσαι προς την αθηναϊκή δημοκρατία (π.χ. Δράκων, Σόλωνας, Πεισίστρατος, Κλεισθένης). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν γνωρίζει ότι η αθηναϊκή δημοκρατία δεν υπήρξε από την αρχή, αλλά εξελίχθηκε σταδιακά μέσα από μεταρρυθμιστές (π.χ. Σόλωνας, Κλεισθένης).",
+      "descriptionEn": "Write in order the steps you remember toward Athenian democracy (e.g. Draco, Solon, Peisistratos, Cleisthenes). The most common trap on this topic: Doesn't know Athenian democracy wasn't there from the start, but evolved gradually through reformers (e.g. Solon, Cleisthenes).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πορεία προς τη δημοκρατία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Path toward democracy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε σε ένα φίλο σου με 3-4 προτάσεις το θέμα \"Πορεία προς τη δημοκρατία\", χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Path toward democracy\" to a friend in 3-4 sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-a-gym.peloponnesian-war-sides": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε ποιες πόλεις-κράτη και συμμαχίες θυμάσαι ότι ήταν σε κάθε πλευρά του Πελοποννησιακού Πολέμου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν θυμάται ποιες πλευρές αντιπαρατέθηκαν στον Πελοποννησιακό Πόλεμο (Αθήνα εναντίον Σπάρτης και των συμμάχων τους).",
+      "descriptionEn": "Write which city-states and alliances you remember being on each side of the Peloponnesian War. The most common trap on this topic: Doesn't recall which sides fought in the Peloponnesian War (Athens against Sparta and their allies).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πελοποννησιακός Πόλεμος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Peloponnesian War'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε σε ένα φίλο σου με 3-4 προτάσεις το θέμα \"Πελοποννησιακός Πόλεμος\", χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Peloponnesian War\" to a friend in 3-4 sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-a-gym.alexander-legacy": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 πράγματα που θυμάσαι για το τι άφησε πίσω του ο Μέγας Αλέξανδρος, πέρα από τις μάχες. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει ότι το έργο του Μεγάλου Αλεξάνδρου ήταν κυρίως η διάδοση του ελληνικού πολιτισμού σε μια τεράστια έκταση (ελληνιστικός κόσμος).",
+      "descriptionEn": "Write 2-3 things you remember about what Alexander the Great left behind, beyond the battles. The most common trap on this topic: Doesn't recognize that Alexander the Great's main legacy was spreading Greek culture across a vast territory (the Hellenistic world).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έργο Μεγάλου Αλεξάνδρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Alexander the Great's legacy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε σε ένα φίλο σου με 3-4 προτάσεις το θέμα \"Έργο Μεγάλου Αλεξάνδρου\", χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Alexander the Great's legacy\" to a friend in 3-4 sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-b-gym.hellenistic-fusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 παραδείγματα στοιχείων (τέχνη, γλώσσα, θρησκεία) που θυμάσαι ότι αναμείχθηκαν στον ελληνιστικό κόσμο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι ο ελληνιστικός πολιτισμός προέκυψε από τη μείξη ελληνικών και ανατολικών στοιχείων μετά τις κατακτήσεις του Αλεξάνδρου.",
+      "descriptionEn": "Write 2-3 examples of elements (art, language, religion) you remember blending in the Hellenistic world. The most common trap on this topic: Doesn't understand that Hellenistic culture arose from the blending of Greek and Eastern elements after Alexander's conquests.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ελληνιστικός πολιτισμός\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Hellenistic culture'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ελληνιστικός πολιτισμός\" και ρώτα: «Μου λείπει κάτι σημαντικό; Πες μου τι, μη μου το εξηγήσεις εσύ.»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Hellenistic culture\" and ask: \"Am I missing something important? Tell me what, don't explain it for me.\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "istoria-b-gym.rome-greece-conquest": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι θυμάσαι για το πώς η Ρώμη κατέκτησε την Ελλάδα, και τι από τον ελληνικό πολιτισμό συνέχισε να επηρεάζει τους Ρωμαίους. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν γνωρίζει ότι η Ελλάδα έγινε ρωμαϊκή επαρχία, αλλά ο ελληνικός πολιτισμός συνέχισε να επηρεάζει τη Ρώμη.",
+      "descriptionEn": "Write what you remember about how Rome conquered Greece, and what Greek culture continued to influence the Romans. The most common trap on this topic: Doesn't know Greece became a Roman province, but Greek culture kept influencing Rome.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρωμαϊκή κατάκτηση της Ελλάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Roman conquest of Greece'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ρωμαϊκή κατάκτηση της Ελλάδας\" και ρώτα: «Μου λείπει κάτι σημαντικό; Πες μου τι, μη μου το εξηγήσεις εσύ.»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Roman conquest of Greece\" and ask: \"Am I missing something important? Tell me what, don't explain it for me.\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "istoria-b-gym.byzantium-transition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε γιατί θυμάσαι ότι χτίστηκε η Κωνσταντινούπολη και τι σήμαινε αυτό για τη Ρωμαϊκή Αυτοκρατορία. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν συνδέει την ίδρυση της Κωνσταντινούπολης με τη μετατόπιση του κέντρου βάρους της Ρωμαϊκής Αυτοκρατορίας προς την Ανατολή.",
+      "descriptionEn": "Write why you remember Constantinople being built and what that meant for the Roman Empire. The most common trap on this topic: Doesn't connect the founding of Constantinople with the shift of the Roman Empire's center of gravity to the East.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μετάβαση στο Βυζάντιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Transition to Byzantium'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Μετάβαση στο Βυζάντιο\" και ρώτα: «Μου λείπει κάτι σημαντικό; Πες μου τι, μη μου το εξηγήσεις εσύ.»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Transition to Byzantium\" and ask: \"Am I missing something important? Tell me what, don't explain it for me.\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "istoria-b-gym.medieval-feudalism": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε μια απλή πυραμίδα με άρχοντα, ιππότες και υποτελείς, και εξήγησε τι έδινε ο καθένας στον άλλον. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει τη βασική δομή του φεουδαρχικού συστήματος (άρχοντας-υποτελής-γη) στη μεσαιωνική Δυτική Ευρώπη.",
+      "descriptionEn": "Draw a simple pyramid with lord, knights, and vassals, and explain what each gave to the other. The most common trap on this topic: Doesn't understand the basic structure of the feudal system (lord-vassal-land) in medieval Western Europe.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Φεουδαρχία στη Δυτική Ευρώπη\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Feudalism in Western Europe'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Φεουδαρχία στη Δυτική Ευρώπη\" και ρώτα: «Μου λείπει κάτι σημαντικό; Πες μου τι, μη μου το εξηγήσεις εσύ.»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Feudalism in Western Europe\" and ask: \"Am I missing something important? Tell me what, don't explain it for me.\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "efl-a-gym.present-cont-vs-simple": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις στο Present Continuous (κάτι που συμβαίνει τώρα) και 3 στο Present Simple (συνήθεια). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει πότε χρησιμοποιούμε Present Continuous (κάτι που συμβαίνει τώρα) και πότε Present Simple (συνήθεια).",
+      "descriptionEn": "Write 3 sentences in Present Continuous (something happening now) and 3 in Present Simple (a habit). The most common trap on this topic: Doesn't distinguish when to use Present Continuous (happening now) versus Present Simple (habit).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Present Continuous vs Simple\". Οι επαναλαμβανόμενες μικρές ασκήσεις βοηθούν να θυμάσαι τον κανόνα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Present Continuous vs Simple\" grammar. Short repeated exercises help the rule stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος διορθωμένες, με βάση αυτό που εξασκήθηκες στο Duolingo.",
+      "descriptionEn": "Rewrite the sentences from step one, corrected, based on what you practiced in Duolingo.",
+      "toolId": null
+    }
+  ],
+
+  "efl-a-gym.past-cont-vs-simple": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις στο Past Continuous (κάτι σε εξέλιξη) και 3 στο Past Simple (ολοκληρωμένη ενέργεια). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει πότε χρησιμοποιούμε Past Continuous (κάτι που ήταν σε εξέλιξη) και πότε Past Simple (ολοκληρωμένη ενέργεια).",
+      "descriptionEn": "Write 3 sentences in Past Continuous (something in progress) and 3 in Past Simple (a completed action). The most common trap on this topic: Doesn't distinguish when to use Past Continuous (something in progress) versus Past Simple (a completed action).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Past Continuous vs Simple\". Οι επαναλαμβανόμενες μικρές ασκήσεις βοηθούν να θυμάσαι τον κανόνα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Past Continuous vs Simple\" grammar. Short repeated exercises help the rule stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος διορθωμένες, με βάση αυτό που εξασκήθηκες στο Duolingo.",
+      "descriptionEn": "Rewrite the sentences from step one, corrected, based on what you practiced in Duolingo.",
+      "toolId": null
+    }
+  ],
+
+  "efl-a-gym.comparative-forms": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τον συγκριτικό βαθμό 5 επιθέτων (π.χ. big, happy, beautiful) χωρίς να ελέγξεις κανόνα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει πότε προσθέτουμε «-er» και πότε λέμε «more» για τον σχηματισμό του συγκριτικού βαθμού.",
+      "descriptionEn": "Write the comparative form of 5 adjectives (e.g. big, happy, beautiful) without checking a rule. The most common trap on this topic: Doesn't know when to add '-er' versus say 'more' to form the comparative.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Σχηματισμός συγκριτικού\". Οι επαναλαμβανόμενες μικρές ασκήσεις βοηθούν να θυμάσαι τον κανόνα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Σχηματισμός συγκριτικού\" grammar. Short repeated exercises help the rule stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος διορθωμένες, με βάση αυτό που εξασκήθηκες στο Duolingo.",
+      "descriptionEn": "Rewrite the sentences from step one, corrected, based on what you practiced in Duolingo.",
+      "toolId": null
+    }
+  ],
+
+  "efl-a-gym.question-word-order": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 ερωτήσεις στα αγγλικά με βοηθητικό ρήμα (π.χ. Where do you..., What does he...). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν σχηματίζει σωστά τη σειρά λέξεων σε ερωτήσεις με βοηθητικό ρήμα (π.χ. «Where you go?» αντί για «Where do you go?»).",
+      "descriptionEn": "Write 3 English questions using an auxiliary verb (e.g. Where do you..., What does he...). The most common trap on this topic: Doesn't form questions correctly with an auxiliary verb (e.g. 'Where you go?' instead of 'Where do you go?').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Σειρά λέξεων σε ερώτηση\". Οι επαναλαμβανόμενες μικρές ασκήσεις βοηθούν να θυμάσαι τον κανόνα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Σειρά λέξεων σε ερώτηση\" grammar. Short repeated exercises help the rule stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος διορθωμένες, με βάση αυτό που εξασκήθηκες στο Duolingo.",
+      "descriptionEn": "Rewrite the sentences from step one, corrected, based on what you practiced in Duolingo.",
+      "toolId": null
+    }
+  ],
+
+  "efl-b-gym.present-perfect-intro": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις για εμπειρίες σου χωρίς συγκεκριμένο χρόνο (π.χ. ταξίδια, βιβλία) χρησιμοποιώντας Present Perfect. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί Past Simple αντί για Present Perfect όταν μιλάει για εμπειρίες χωρίς συγκεκριμένο χρόνο (π.χ. «I have visited Paris»).",
+      "descriptionEn": "Write 3 sentences about your experiences without a specific time (e.g. trips, books) using Present Perfect. The most common trap on this topic: Uses Past Simple instead of Present Perfect when talking about experiences without a specific time (e.g. 'I have visited Paris').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Εισαγωγή στον Present Perfect\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Introduction to Present Perfect'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Εισαγωγή στον Present Perfect\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Introduction to Present Perfect'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "efl-b-gym.modals-obligation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2 προτάσεις με 'must' (ισχυρή υποχρέωση) και 2 με 'should' (συμβουλή). Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει το «must» (ισχυρή υποχρέωση) από το «should» (συμβουλή), χρησιμοποιώντας τα σαν να σημαίνουν το ίδιο.",
+      "descriptionEn": "Write 2 sentences with 'must' (strong obligation) and 2 with 'should' (advice). The most common trap on this topic: Doesn't distinguish 'must' (strong obligation) from 'should' (advice), using them as if they meant the same thing.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Must vs Should\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Must vs Should'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Must vs Should\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Must vs Should'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "efl-b-gym.passive-voice-intro": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις στην παθητική φωνή, όπου δεν μας ενδιαφέρει ποιος έκανε την ενέργεια. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει πότε μια πρόταση χρειάζεται παθητική φωνή, επειδή δεν ξέρουμε (ή δεν μας ενδιαφέρει) ποιος έκανε την ενέργεια.",
+      "descriptionEn": "Write 3 sentences in the passive voice, where we don't care who performed the action. The most common trap on this topic: Doesn't recognize when a sentence needs the passive voice, because we don't know (or don't care) who performed the action.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Εισαγωγή στην παθητική φωνή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Introduction to the passive voice'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Εισαγωγή στην παθητική φωνή\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Introduction to the passive voice'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "efl-b-gym.relative-clauses": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 3 προτάσεις με αναφορικές προτάσεις, χρησιμοποιώντας σωστά το 'who' για πρόσωπα και το 'which' για πράγματα. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το «who» (για πρόσωπα) με το «which» (για πράγματα) σε αναφορικές προτάσεις.",
+      "descriptionEn": "Write 3 sentences with relative clauses, correctly using 'who' for people and 'which' for things. The most common trap on this topic: Confuses 'who' (for people) with 'which' (for things) in relative clauses.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Αναφορικές προτάσεις\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Relative clauses'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Gemini",
+      "titleEn": "Check with Gemini",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Gemini και ρώτα: «Έχω λάθος στο \"Αναφορικές προτάσεις\"; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
+      "descriptionEn": "Paste your sentences into Gemini and ask: \"Do I have this wrong on 'Relative clauses'? Explain why, don't just correct them for me.\"",
+      "toolId": "gemini"
+    }
+  ],
+
+  "biologia-a-gym.plant-animal-cell": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε ένα φυτικό και ένα ζωικό κύτταρο δίπλα-δίπλα και σημείωσε ποια οργανίδια υπάρχουν μόνο στο φυτικό. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ποια οργανίδια υπάρχουν μόνο στο φυτικό κύτταρο (π.χ. χλωροπλάστης, κυτταρικό τοίχωμα) και όχι στο ζωικό.",
+      "descriptionEn": "Draw a plant cell and an animal cell side by side and mark which organelles exist only in the plant cell. The most common trap on this topic: Doesn't know which organelles exist only in plant cells (e.g. chloroplast, cell wall) and not in animal cells.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Φυτικό vs ζωικό κύτταρο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Plant vs animal cell'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Φυτικό vs ζωικό κύτταρο\" σε ένα μικρότερο αδερφό/ξαδερφό (πραγματικό ή φανταστικό) με πολύ απλά λόγια.",
+      "descriptionEn": "Explain the topic \"Plant vs animal cell\" to a younger sibling or cousin (real or imaginary) in very simple words.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-gym.unicellular-nutrition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι θυμάσαι για το πώς τρέφεται ένας μονοκύτταρος οργανισμός όπως η αμοιβάδα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει πώς τρέφεται ένας μονοκύτταρος οργανισμός (π.χ. αμοιβάδα) χωρίς στόμα ή πεπτικό σύστημα.",
+      "descriptionEn": "Write what you remember about how a unicellular organism like an amoeba feeds. The most common trap on this topic: Doesn't understand how a unicellular organism (e.g. amoeba) feeds without a mouth or digestive system.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Θρέψη μονοκύτταρων οργανισμών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Nutrition in unicellular organisms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Θρέψη μονοκύτταρων οργανισμών\" σε ένα μικρότερο αδερφό/ξαδερφό (πραγματικό ή φανταστικό) με πολύ απλά λόγια.",
+      "descriptionEn": "Explain the topic \"Nutrition in unicellular organisms\" to a younger sibling or cousin (real or imaginary) in very simple words.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-gym.adaptation-misconception": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Διάλεξε 2 ζώα και γράψε ένα χαρακτηριστικό τους και σε τι τα βοηθάει να επιβιώσουν. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν συνδέει ένα χαρακτηριστικό ενός οργανισμού (π.χ. καμπούρα καμήλας) με τη λειτουργία που εξυπηρετεί για την επιβίωσή του.",
+      "descriptionEn": "Pick 2 animals and write one characteristic of each and how it helps them survive. The most common trap on this topic: Doesn't connect an organism's trait (e.g. a camel's hump) with the function it serves for survival.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Προσαρμογές οργανισμών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adaptations of organisms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Προσαρμογές οργανισμών\" σε ένα μικρότερο αδερφό/ξαδερφό (πραγματικό ή φανταστικό) με πολύ απλά λόγια.",
+      "descriptionEn": "Explain the topic \"Adaptations of organisms\" to a younger sibling or cousin (real or imaginary) in very simple words.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-gym.plant-vs-animal-digestion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε πώς παίρνει τροφή ένα φυτό, χωρίς να χρησιμοποιήσεις τη λέξη 'πεπτικό σύστημα'. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι τα φυτά δεν έχουν πεπτικό σύστημα όπως τα ζώα, αλλά παράγουν τη δική τους τροφή μέσω φωτοσύνθεσης.",
+      "descriptionEn": "Write how a plant gets its food, without using the phrase 'digestive system'. The most common trap on this topic: Doesn't know plants don't have a digestive system like animals, but produce their own food through photosynthesis.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πέψη σε φυτά vs ζώα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Digestion in plants vs animals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Πέψη σε φυτά vs ζώα\" σε ένα μικρότερο αδερφό/ξαδερφό (πραγματικό ή φανταστικό) με πολύ απλά λόγια.",
+      "descriptionEn": "Explain the topic \"Digestion in plants vs animals\" to a younger sibling or cousin (real or imaginary) in very simple words.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-a-gym.cell-membrane-function": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια τι κάνει η κυτταρική μεμβράνη, πέρα από το να 'κρατάει το κύτταρο μαζί'. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι η κυτταρική μεμβράνη ελέγχει τι μπαίνει και τι βγαίνει από το κύτταρο, δεν είναι απλώς ένα «περίβλημα».",
+      "descriptionEn": "Write in your own words what the cell membrane does, beyond 'holding the cell together'. The most common trap on this topic: Doesn't understand the cell membrane controls what enters and exits the cell, not just a passive 'wrapper'.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Λειτουργία κυτταρικής μεμβράνης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Function of the cell membrane'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Λειτουργία κυτταρικής μεμβράνης\" σε ένα μικρότερο αδερφό/ξαδερφό (πραγματικό ή φανταστικό) με πολύ απλά λόγια.",
+      "descriptionEn": "Explain the topic \"Function of the cell membrane\" to a younger sibling or cousin (real or imaginary) in very simple words.",
+      "toolId": null
+    }
+  ],
+
+  "biologia-b-gym.gas-exchange-organ": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε ποιο όργανο θυμάσαι ότι κάνει την ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα, και πώς λειτουργεί με απλά λόγια. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι οι πνεύμονες είναι το όργανο όπου γίνεται η ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα, μπερδεύοντάς το με άλλο όργανο.",
+      "descriptionEn": "Write which organ you remember doing the oxygen-carbon dioxide exchange, and how it works in simple words. The most common trap on this topic: Doesn't know the lungs are where oxygen-carbon dioxide exchange happens, confusing it with another organ.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανταλλαγή αερίων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Gas exchange organ'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ανταλλαγή αερίων\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Gas exchange organ\" and ask: \"Is my explanation correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "biologia-b-gym.heart-role": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια ποιος είναι ο κύριος ρόλος της καρδιάς. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ο κύριος ρόλος της καρδιάς είναι να αντλεί το αίμα σε όλο το σώμα, όχι κάποια άλλη λειτουργία.",
+      "descriptionEn": "Write in your own words what the heart's main role is. The most common trap on this topic: Doesn't know the heart's main role is pumping blood throughout the body, not some other function.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρόλος της καρδιάς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Role of the heart'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ρόλος της καρδιάς\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Role of the heart\" and ask: \"Is my explanation correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "biologia-b-gym.blood-function": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Κάνε μια λίστα με όλα όσα θυμάσαι ότι μεταφέρει το αίμα στο σώμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι το αίμα μεταφέρει πολλά διαφορετικά πράγματα (οξυγόνο, θρεπτικά, απόβλητα), όχι μόνο ένα.",
+      "descriptionEn": "Make a list of everything you remember the blood carrying in the body. The most common trap on this topic: Doesn't know blood transports many different things (oxygen, nutrients, waste), not just one.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Λειτουργία του αίματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Function of blood'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Λειτουργία του αίματος\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Function of blood\" and ask: \"Is my explanation correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "biologia-b-gym.producer-definition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 παραδείγματα «παραγωγών» σε ένα οικοσύστημα και εξήγησε γιατί ονομάζονται έτσι. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι οι «παραγωγοί» σε ένα οικοσύστημα είναι οργανισμοί (κυρίως φυτά) που παράγουν τη δική τους τροφή.",
+      "descriptionEn": "Write 2-3 examples of 'producers' in an ecosystem and explain why they're called that. The most common trap on this topic: Doesn't know 'producers' in an ecosystem are organisms (mainly plants) that make their own food.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Παραγωγοί σε οικοσύστημα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Producers in an ecosystem'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Παραγωγοί σε οικοσύστημα\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Producers in an ecosystem\" and ask: \"Is my explanation correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "biologia-b-gym.nervous-system-role": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια τι κάνει το νευρικό σύστημα όταν αγγίζεις κάτι πολύ ζεστό. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ο κύριος ρόλος του νευρικού συστήματος είναι η αντίληψη ερεθισμάτων και η γρήγορη ανταπόκριση σε αυτά.",
+      "descriptionEn": "Write in your own words what the nervous system does when you touch something very hot. The most common trap on this topic: Doesn't know the nervous system's main role is perceiving stimuli and responding to them quickly.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρόλος νευρικού συστήματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Role of the nervous system'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ρόλος νευρικού συστήματος\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT what you understood about \"Role of the nervous system\" and ask: \"Is my explanation correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "biologia-g-gym.dna-location": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε ένα απλό κύτταρο και σημείωσε πού βρίσκεται το DNA. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι το DNA βρίσκεται κυρίως μέσα στον πυρήνα του κυττάρου.",
+      "descriptionEn": "Draw a simple cell and mark where the DNA is located. The most common trap on this topic: Doesn't know DNA is located mainly inside the cell nucleus.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Θέση του DNA\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Location of DNA'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Θέση του DNA\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
+      "descriptionEn": "Ask Wolfram Alpha something related to \"Location of DNA\" (e.g. a definition or a fact) and compare it with what you wrote.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-g-gym.inheritance-both-parents": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 χαρακτηριστικά σου και σκέψου από ποιον γονιό μπορεί να τα κληρονόμησες, ή αν είναι συνδυασμός και των δύο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι τα χαρακτηριστικά ενός παιδιού προέρχονται και από τους δύο γονείς, μέσω των γονιδίων τους.",
+      "descriptionEn": "Write 2-3 of your own traits and think about which parent you may have inherited them from, or if it's a combination of both. The most common trap on this topic: Doesn't know a child's traits come from both parents, through their genes.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Κληρονομικότητα από τους γονείς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Inheritance from parents'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Κληρονομικότητα από τους γονείς\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
+      "descriptionEn": "Ask Wolfram Alpha something related to \"Inheritance from parents\" (e.g. a definition or a fact) and compare it with what you wrote.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-g-gym.biodiversity-definition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια τι σημαίνει «βιοποικιλότητα» και δώσε ένα παράδειγμα οικοσυστήματος με μεγάλη βιοποικιλότητα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η βιοποικιλότητα αναφέρεται στην ποικιλία των ειδών ζωής σε ένα οικοσύστημα, όχι σε κάτι άλλο.",
+      "descriptionEn": "Write in your own words what 'biodiversity' means and give an example of an ecosystem with high biodiversity. The most common trap on this topic: Doesn't know biodiversity refers to the variety of life forms in an ecosystem, not something else.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Έννοια βιοποικιλότητας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Concept of biodiversity'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Έννοια βιοποικιλότητας\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
+      "descriptionEn": "Ask Wolfram Alpha something related to \"Concept of biodiversity\" (e.g. a definition or a fact) and compare it with what you wrote.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-g-gym.extinction-cause": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2 λόγους για τους οποίους ένα είδος μπορεί να εξαφανιστεί. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ένα είδος εξαφανίζεται όταν δεν μπορεί πλέον να αναπαραχθεί ή να επιβιώσει επαρκώς στο περιβάλλον του.",
+      "descriptionEn": "Write 2 reasons why a species might go extinct. The most common trap on this topic: Doesn't know a species goes extinct when it can no longer reproduce or survive sufficiently in its environment.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Αιτία εξαφάνισης είδους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Cause of species extinction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Αιτία εξαφάνισης είδους\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
+      "descriptionEn": "Ask Wolfram Alpha something related to \"Cause of species extinction\" (e.g. a definition or a fact) and compare it with what you wrote.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "biologia-g-gym.reproduction-purpose": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε με δικά σου λόγια γιατί οι οργανισμοί αναπαράγονται, πέρα από «επειδή το κάνουν όλοι». Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ο βασικός βιολογικός σκοπός της αναπαραγωγής είναι η συνέχεια του είδους.",
+      "descriptionEn": "Write in your own words why organisms reproduce, beyond 'because everyone does it'. The most common trap on this topic: Doesn't know the basic biological purpose of reproduction is the continuation of the species.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Σκοπός αναπαραγωγής\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Purpose of reproduction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Σκοπός αναπαραγωγής\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
+      "descriptionEn": "Ask Wolfram Alpha something related to \"Purpose of reproduction\" (e.g. a definition or a fact) and compare it with what you wrote.",
+      "toolId": "wolfram-alpha"
+    }
   ]
 };

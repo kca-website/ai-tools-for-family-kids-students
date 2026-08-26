@@ -3194,11 +3194,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Η πόλη-κράτος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'The city-state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Η πόλη-κράτος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'The city-state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3218,11 +3218,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Αιτίες Περσικών Πολέμων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Causes of the Persian Wars'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Αιτίες Περσικών Πολέμων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Causes of the Persian Wars'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3242,11 +3242,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Διάδοχοι Αλεξάνδρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Alexander's Successors'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Διάδοχοι Αλεξάνδρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Alexander's Successors'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3266,11 +3266,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Άμεση δημοκρατία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Direct democracy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Άμεση δημοκρατία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Direct democracy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3290,11 +3290,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Βυζάντιο ως συνέχεια της Ρώμης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Byzantium as Rome's continuation'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Βυζάντιο ως συνέχεια της Ρώμης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Byzantium as Rome's continuation'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3314,11 +3314,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Άλωση της Κωνσταντινούπολης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Fall of Constantinople'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Άλωση της Κωνσταντινούπολης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Fall of Constantinople'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3338,11 +3338,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Αιτίες Αναγέννησης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Causes of the Renaissance'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Αιτίες Αναγέννησης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Causes of the Renaissance'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3362,11 +3362,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Οθωμανική διοίκηση Ελλήνων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Ottoman rule over Greeks'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
+      "titleEl": "Ρώτα το ChatGPT",
+      "titleEn": "Ask ChatGPT",
+      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Οθωμανική διοίκηση Ελλήνων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό. Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα ChatGPT Edu, μπορείς να το χρησιμοποιήσεις με τον ίδιο τρόπο.",
+      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Ottoman rule over Greeks'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together. If your school participates in the ChatGPT Edu pilot program, you can use it the same way.",
+      "toolId": "chatgpt"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3854,6 +3854,2814 @@ const LEARNING_PATHS = {
       "descriptionEl": "Εξήγησε το θέμα \"Χρονική κλίμακα εξέλιξης\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
       "descriptionEn": "Explain the topic \"Timescale of evolution\" to a classmate in 2-3 sentences, without notes.",
       "toolId": null
+    }
+  ],
+
+  "math-a-dim.number-order": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Σύγκριση αριθμών έως 20» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να συγκρίνει και να διατάξει αριθμούς έως το 20, ειδικά όταν ο μεγαλύτερος αριθμός γράφεται με λιγότερα σύμβολα φαινομενικά μπερδεμένα.",
+      "descriptionEn": "Solve 2-3 exercises on \"Comparing numbers to 20\" by hand, writing out every step. The most common trap on this topic: Struggles to compare and order numbers up to 20, especially when the bigger number looks deceptively similar to a smaller one.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύγκριση αριθμών έως 20\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing numbers to 20'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Σύγκριση αριθμών έως 20» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Comparing numbers to 20\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-a-dim.addition-crossing-ten": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πρόσθεση με πέρασμα δεκάδας» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται στην πρόσθεση όταν το άθροισμα περνά τη δεκάδα (π.χ. 8+5), γιατί δεν έχει ακόμα αυτοματοποιήσει τη στρατηγική «συμπλήρωσε πρώτα τη δεκάδα».",
+      "descriptionEn": "Solve 2-3 exercises on \"Addition crossing ten\" by hand, writing out every step. The most common trap on this topic: Struggles with addition when the sum crosses ten (e.g. 8+5), because they haven't yet automated the 'make ten first' strategy.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πρόσθεση με πέρασμα δεκάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Addition crossing ten'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πρόσθεση με πέρασμα δεκάδας» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Addition crossing ten\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-a-dim.subtraction-borrowing-concept": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Έννοια της αφαίρεσης» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει ακόμα καταλάβει την αφαίρεση ως «πόσα λείπουν για να φτάσω» και προσπαθεί να τη λύσει μόνο μηχανικά, χωρίς νόημα.",
+      "descriptionEn": "Solve 2-3 exercises on \"Meaning of subtraction\" by hand, writing out every step. The most common trap on this topic: Hasn't yet grasped subtraction as 'how many more to reach the total' and tries to solve it mechanically, without meaning.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια της αφαίρεσης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of subtraction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Έννοια της αφαίρεσης» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Meaning of subtraction\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-a-dim.shape-recognition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Βασικά γεωμετρικά σχήματα» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει βασικά σχήματα μεταξύ τους (π.χ. τετράγωνο με ορθογώνιο), γιατί δεν έχει ακόμα σταθερό κριτήριο αναγνώρισης (ίσες πλευρές, γωνίες).",
+      "descriptionEn": "Solve 2-3 exercises on \"Basic geometric shapes\" by hand, writing out every step. The most common trap on this topic: Confuses basic shapes with each other (e.g. square with rectangle), because they don't yet have a stable recognition rule (equal sides, angles).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασικά γεωμετρικά σχήματα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic geometric shapes'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το GeoGebra",
+      "titleEn": "Check with GeoGebra",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο παράδειγμα για «Βασικά γεωμετρικά σχήματα» και μετά έλεγξέ το στο GeoGebra.",
+      "descriptionEn": "Make up a new example on \"Basic geometric shapes\" and then check it in GeoGebra.",
+      "toolId": "geogebra"
+    }
+  ],
+
+  "math-a-dim.ordinal-numbers": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Τακτικοί αριθμοί» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τους τακτικούς αριθμούς (πρώτος, δεύτερος, τρίτος) με τους απλούς απαριθμητικούς (ένα, δύο, τρία).",
+      "descriptionEn": "Solve 2-3 exercises on \"Ordinal numbers\" by hand, writing out every step. The most common trap on this topic: Confuses ordinal numbers (first, second, third) with plain counting numbers (one, two, three).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Τακτικοί αριθμοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Ordinal numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Τακτικοί αριθμοί» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Ordinal numbers\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "math-a-dim.length-comparison": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Σύγκριση μήκους» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να συγκρίνει το μήκος δύο αντικειμένων όταν δεν είναι τοποθετημένα δίπλα-δίπλα με την ίδια αφετηρία.",
+      "descriptionEn": "Solve 2-3 exercises on \"Comparing length\" by hand, writing out every step. The most common trap on this topic: Struggles to compare the length of two objects when they aren't aligned at the same starting point.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύγκριση μήκους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing length'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Σύγκριση μήκους» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Comparing length\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "math-a-dim.subtraction-crossing-ten": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Αφαίρεση με πέρασμα δεκάδας» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται στην αφαίρεση όταν χρειάζεται να «σπάσει» τη δεκάδα (π.χ. 13-5), γιατί δεν έχει ακόμα σταθερή στρατηγική.",
+      "descriptionEn": "Solve 2-3 exercises on \"Subtraction crossing ten\" by hand, writing out every step. The most common trap on this topic: Struggles with subtraction when it requires 'breaking' the ten (e.g. 13-5), without a stable strategy yet.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αφαίρεση με πέρασμα δεκάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Subtraction crossing ten'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Αφαίρεση με πέρασμα δεκάδας» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Subtraction crossing ten\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-a-dim.coin-recognition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Αναγνώριση νομισμάτων» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει την αξία απλών νομισμάτων (π.χ. μπερδεύει το κέρμα του 1 λεπτού με του 1 ευρώ βάσει μεγέθους μόνο).",
+      "descriptionEn": "Solve 2-3 exercises on \"Coin recognition\" by hand, writing out every step. The most common trap on this topic: Doesn't recognize the value of simple coins (e.g. confuses a 1-cent coin with a €1 coin based on size alone).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση νομισμάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Coin recognition'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Αναγνώριση νομισμάτων» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Coin recognition\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "math-b-dim.place-value-tens-ones": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Δεκάδες & μονάδες» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τη θέση των δεκάδων με τη θέση των μονάδων σε αριθμούς έως το 100 (π.χ. νομίζει ότι το 40 είναι μικρότερο από το 14).",
+      "descriptionEn": "Solve 2-3 exercises on \"Tens & ones\" by hand, writing out every step. The most common trap on this topic: Confuses the tens place with the ones place in numbers up to 100 (e.g. thinks 40 is smaller than 14).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δεκάδες & μονάδες\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Tens & ones'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Δεκάδες & μονάδες» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Tens & ones\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-b-dim.multiplication-as-repeated-addition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πολλαπλασιασμός ως πρόσθεση» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει καταλάβει ακόμα ότι ο πολλαπλασιασμός είναι μια γρήγορη πρόσθεση ίδιων αριθμών (π.χ. 3×4 = 4+4+4).",
+      "descriptionEn": "Solve 2-3 exercises on \"Multiplication as repeated addition\" by hand, writing out every step. The most common trap on this topic: Hasn't yet grasped that multiplication is a fast way to add equal groups (e.g. 3×4 = 4+4+4).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός ως πρόσθεση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplication as repeated addition'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πολλαπλασιασμός ως πρόσθεση» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Multiplication as repeated addition\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-b-dim.telling-time-half-hour": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ώρα στη μισή» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να διαβάσει την ώρα όταν ο δείκτης των λεπτών δείχνει τη μισή (π.χ. 6:30), γιατί εστιάζει μόνο στον δείκτη της ώρας.",
+      "descriptionEn": "Solve 2-3 exercises on \"Telling time to the half hour\" by hand, writing out every step. The most common trap on this topic: Struggles to read the time when the minute hand is at the half (e.g. 6:30), because they focus only on the hour hand.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ώρα στη μισή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Telling time to the half hour'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Ώρα στη μισή» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Telling time to the half hour\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-b-dim.money-counting": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Μέτρημα χρημάτων» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να συνδυάσει νομίσματα και χαρτονομίσματα διαφορετικής αξίας για να φτάσει ένα συγκεκριμένο ποσό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Counting money\" by hand, writing out every step. The most common trap on this topic: Struggles to combine coins and notes of different values to reach a specific total.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μέτρημα χρημάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Counting money'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Μέτρημα χρημάτων» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Counting money\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-b-dim.addition-two-digit-no-carry": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πρόσθεση διψήφιων χωρίς κρατούμενο» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν προσθέτει σωστά δεκάδες με δεκάδες και μονάδες με μονάδες όταν προσθέτει δύο διψήφιους αριθμούς.",
+      "descriptionEn": "Solve 2-3 exercises on \"Two-digit addition without carrying\" by hand, writing out every step. The most common trap on this topic: Doesn't correctly add tens with tens and ones with ones when adding two two-digit numbers.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πρόσθεση διψήφιων χωρίς κρατούμενο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Two-digit addition without carrying'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πρόσθεση διψήφιων χωρίς κρατούμενο» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Two-digit addition without carrying\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-b-dim.subtraction-two-digit-borrow": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Αφαίρεση διψήφιων με δανεικό» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει τι να κάνει όταν το ψηφίο των μονάδων του αφαιρετέου είναι μεγαλύτερο από του μειωτέου (χρειάζεται «δανεικό» από τη δεκάδα).",
+      "descriptionEn": "Solve 2-3 exercises on \"Two-digit subtraction with borrowing\" by hand, writing out every step. The most common trap on this topic: Doesn't know what to do when the ones digit being subtracted is bigger than the ones digit it's subtracted from (needs to 'borrow' from the tens).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αφαίρεση διψήφιων με δανεικό\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Two-digit subtraction with borrowing'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Αφαίρεση διψήφιων με δανεικό» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Two-digit subtraction with borrowing\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-b-dim.even-odd-numbers": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ζυγοί και μονοί αριθμοί» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει ζυγούς από μονούς αριθμούς, ειδικά σε μεγαλύτερους αριθμούς (π.χ. νομίζει ότι το 24 είναι μονός).",
+      "descriptionEn": "Solve 2-3 exercises on \"Even and odd numbers\" by hand, writing out every step. The most common trap on this topic: Doesn't distinguish even from odd numbers, especially in bigger numbers (e.g. thinks 24 is odd).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ζυγοί και μονοί αριθμοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Even and odd numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ζυγοί και μονοί αριθμοί» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Even and odd numbers\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "math-b-dim.simple-graph-reading": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ανάγνωση απλού ραβδογράμματος» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να διαβάσει τιμές από ένα απλό ραβδόγραμμα, μπερδεύοντας το ύψος της ράβδου με τον αριθμό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Reading a simple bar graph\" by hand, writing out every step. The most common trap on this topic: Struggles to read values from a simple bar graph, confusing bar height with the actual number.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανάγνωση απλού ραβδογράμματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Reading a simple bar graph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το GeoGebra",
+      "titleEn": "Check with GeoGebra",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο παράδειγμα για «Ανάγνωση απλού ραβδογράμματος» και μετά έλεγξέ το στο GeoGebra.",
+      "descriptionEn": "Make up a new example on \"Reading a simple bar graph\" and then check it in GeoGebra.",
+      "toolId": "geogebra"
+    }
+  ],
+
+  "math-c-dim.times-table-recall": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Προπαίδεια» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει αυτοματοποιήσει ακόμα βασικές προπαίδειες (π.χ. του 6, του 7, του 8) και προσπαθεί να τις υπολογίσει κάθε φορά από την αρχή.",
+      "descriptionEn": "Solve 2-3 exercises on \"Times tables\" by hand, writing out every step. The most common trap on this topic: Hasn't yet automated basic times tables (e.g. 6, 7, 8) and tries to work them out from scratch every time.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Προπαίδεια\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Times tables'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Προπαίδεια» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Times tables\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-c-dim.division-as-sharing": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Έννοια της διαίρεσης» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει καταλάβει ότι η διαίρεση σημαίνει «μοιράζω δίκαια σε ίσα μέρη» και προσπαθεί να τη λύσει μηχανικά, χωρίς νόημα.",
+      "descriptionEn": "Solve 2-3 exercises on \"Meaning of division\" by hand, writing out every step. The most common trap on this topic: Hasn't grasped that division means 'sharing fairly into equal groups' and tries to solve it mechanically, without meaning.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια της διαίρεσης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of division'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Έννοια της διαίρεσης» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Meaning of division\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-c-dim.measurement-units": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Μονάδες μέτρησης μήκους» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το μέτρο με το εκατοστό (π.χ. νομίζει ότι 1 μέτρο = 10 εκατοστά αντί για 100).",
+      "descriptionEn": "Solve 2-3 exercises on \"Units of length\" by hand, writing out every step. The most common trap on this topic: Confuses meters with centimeters (e.g. thinks 1 meter = 10 cm instead of 100).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μονάδες μέτρησης μήκους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Units of length'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Μονάδες μέτρησης μήκους» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Units of length\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-c-dim.quarter-hour": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ώρα σε τέταρτα» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να διαβάσει την ώρα στο τέταρτο (π.χ. 4:15 ή 4:45), γιατί δεν έχει ακόμα σταθερό τρόπο να μετράει τα λεπτά ανά τεταρτημόριο.",
+      "descriptionEn": "Solve 2-3 exercises on \"Telling time in quarters\" by hand, writing out every step. The most common trap on this topic: Struggles to read the time at the quarter hour (e.g. 4:15 or 4:45), without a stable way to count minutes per quarter.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ώρα σε τέταρτα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Telling time in quarters'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Ώρα σε τέταρτα» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Telling time in quarters\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-c-dim.multiplication-two-digit-by-one": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πολλαπλασιασμός διψήφιου επί μονοψήφιο» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν πολλαπλασιάζει σωστά κάθε ψηφίο ξεχωριστά όταν πολλαπλασιάζει διψήφιο αριθμό με μονοψήφιο.",
+      "descriptionEn": "Solve 2-3 exercises on \"Two-digit by one-digit multiplication\" by hand, writing out every step. The most common trap on this topic: Doesn't correctly multiply each digit separately when multiplying a two-digit number by a one-digit number.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός διψήφιου επί μονοψήφιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Two-digit by one-digit multiplication'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πολλαπλασιασμός διψήφιου επί μονοψήφιο» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Two-digit by one-digit multiplication\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-c-dim.weight-units": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Μονάδες βάρους» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το κιλό με το γραμμάριο, δεν ξέρει ότι 1 κιλό = 1000 γραμμάρια.",
+      "descriptionEn": "Solve 2-3 exercises on \"Units of weight\" by hand, writing out every step. The most common trap on this topic: Confuses kilograms with grams, not knowing that 1 kg = 1000 grams.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μονάδες βάρους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Units of weight'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Μονάδες βάρους» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Units of weight\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "math-c-dim.remainder-meaning": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Έννοια του υπολοίπου» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει τι σημαίνει το υπόλοιπο σε μια διαίρεση — ότι είναι όσα «περισσεύουν» και δεν χωράνε σε ίσα μερίδια.",
+      "descriptionEn": "Solve 2-3 exercises on \"Meaning of the remainder\" by hand, writing out every step. The most common trap on this topic: Doesn't understand what the remainder in a division means — the amount 'left over' that doesn't fit into equal groups.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια του υπολοίπου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of the remainder'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Έννοια του υπολοίπου» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Meaning of the remainder\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-c-dim.simple-fraction-recognition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Αναγνώριση απλού κλάσματος» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει οπτικά το μισό ή το τέταρτο ενός σχήματος όταν δεν είναι χωρισμένο σε ίσα μέρη με τον συνηθισμένο τρόπο.",
+      "descriptionEn": "Solve 2-3 exercises on \"Recognizing simple fractions\" by hand, writing out every step. The most common trap on this topic: Doesn't visually recognize half or a quarter of a shape when it's divided into equal parts in an unfamiliar way.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση απλού κλάσματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Recognizing simple fractions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το GeoGebra",
+      "titleEn": "Check with GeoGebra",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο παράδειγμα για «Αναγνώριση απλού κλάσματος» και μετά έλεγξέ το στο GeoGebra.",
+      "descriptionEn": "Make up a new example on \"Recognizing simple fractions\" and then check it in GeoGebra.",
+      "toolId": "geogebra"
+    }
+  ],
+
+  "math-d-dim.fraction-same-denominator": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πρόσθεση κλασμάτων ίδιου παρονομαστή» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Όταν προσθέτει κλάσματα με ίδιο παρονομαστή, προσθέτει και τους παρονομαστές αντί να τον κρατήσει σταθερό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Adding fractions with the same denominator\" by hand, writing out every step. The most common trap on this topic: When adding fractions with the same denominator, adds the denominators too instead of keeping it fixed.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πρόσθεση κλασμάτων ίδιου παρονομαστή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adding fractions with the same denominator'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πρόσθεση κλασμάτων ίδιου παρονομαστή» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Adding fractions with the same denominator\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-d-dim.decimal-intro-place-value": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Εισαγωγή στους δεκαδικούς» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ακόμα ότι το «0,5» σημαίνει το μισό ενός ακέραιου, και το μπερδεύει με άλλο, τυχαίο νόημα.",
+      "descriptionEn": "Solve 2-3 exercises on \"Introduction to decimals\" by hand, writing out every step. The most common trap on this topic: Doesn't yet understand that '0.5' means half of a whole, confusing it with some other, arbitrary meaning.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Εισαγωγή στους δεκαδικούς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Introduction to decimals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Εισαγωγή στους δεκαδικούς» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Introduction to decimals\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-d-dim.perimeter-concept": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Έννοια της περιμέτρου» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει καταλάβει ότι η περίμετρος είναι το άθροισμα όλων των πλευρών «γύρω-γύρω» από ένα σχήμα.",
+      "descriptionEn": "Solve 2-3 exercises on \"Meaning of perimeter\" by hand, writing out every step. The most common trap on this topic: Hasn't grasped that perimeter is the sum of all sides 'around' a shape.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια της περιμέτρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of perimeter'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το GeoGebra",
+      "titleEn": "Check with GeoGebra",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο παράδειγμα για «Έννοια της περιμέτρου» και μετά έλεγξέ το στο GeoGebra.",
+      "descriptionEn": "Make up a new example on \"Meaning of perimeter\" and then check it in GeoGebra.",
+      "toolId": "geogebra"
+    }
+  ],
+
+  "math-d-dim.roman-numerals": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ρωμαϊκοί αριθμοί» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται με βασικούς ρωμαϊκούς αριθμούς (π.χ. μπερδεύει το IV με το VI).",
+      "descriptionEn": "Solve 2-3 exercises on \"Roman numerals\" by hand, writing out every step. The most common trap on this topic: Struggles with basic Roman numerals (e.g. confuses IV with VI).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρωμαϊκοί αριθμοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Roman numerals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Ρωμαϊκοί αριθμοί» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Roman numerals\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-d-dim.fraction-simplify-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Απλοποίηση κλάσματος» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι ένα κλάσμα μπορεί να γραφτεί πιο απλά διαιρώντας αριθμητή και παρονομαστή με τον ίδιο αριθμό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Simplifying a fraction\" by hand, writing out every step. The most common trap on this topic: Doesn't understand that a fraction can be written more simply by dividing numerator and denominator by the same number.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλοποίηση κλάσματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Simplifying a fraction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Απλοποίηση κλάσματος» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Simplifying a fraction\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-d-dim.decimal-compare": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Σύγκριση δεκαδικών» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Νομίζει ότι ο δεκαδικός με περισσότερα ψηφία είναι πάντα ο μεγαλύτερος (π.χ. πιστεύει ότι 0,25 > 0,3).",
+      "descriptionEn": "Solve 2-3 exercises on \"Comparing decimals\" by hand, writing out every step. The most common trap on this topic: Thinks the decimal with more digits is always bigger (e.g. believes 0.25 > 0.3).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύγκριση δεκαδικών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing decimals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Σύγκριση δεκαδικών» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Comparing decimals\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-d-dim.area-basic-concept": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Βασική έννοια εμβαδού» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει το εμβαδόν ως πλήθος τετραγωνικών μονάδων που καλύπτουν ένα σχήμα, μπερδεύοντάς το με την περίμετρο.",
+      "descriptionEn": "Solve 2-3 exercises on \"Basic concept of area\" by hand, writing out every step. The most common trap on this topic: Doesn't understand area as the number of square units covering a shape, confusing it with perimeter.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασική έννοια εμβαδού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic concept of area'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το GeoGebra",
+      "titleEn": "Check with GeoGebra",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο παράδειγμα για «Βασική έννοια εμβαδού» και μετά έλεγξέ το στο GeoGebra.",
+      "descriptionEn": "Make up a new example on \"Basic concept of area\" and then check it in GeoGebra.",
+      "toolId": "geogebra"
+    }
+  ],
+
+  "math-d-dim.multiplication-by-10-100": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πολλαπλασιασμός με 10 και 100» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει καταλάβει τον κανόνα προσθήκης μηδενικών όταν πολλαπλασιάζει με το 10 ή το 100.",
+      "descriptionEn": "Solve 2-3 exercises on \"Multiplying by 10 and 100\" by hand, writing out every step. The most common trap on this topic: Hasn't grasped the rule of adding zeros when multiplying by 10 or 100.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός με 10 και 100\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplying by 10 and 100'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πολλαπλασιασμός με 10 και 100» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Multiplying by 10 and 100\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-e-dim.multiply-fraction-whole": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πολλαπλασιασμός κλάσματος με ακέραιο» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι όταν πολλαπλασιάζει κλάσμα με ακέραιο, πολλαπλασιάζει μόνο τον αριθμητή, κρατώντας τον παρονομαστή σταθερό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Multiplying a fraction by a whole number\" by hand, writing out every step. The most common trap on this topic: Doesn't know that multiplying a fraction by a whole number only multiplies the numerator, keeping the denominator fixed.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός κλάσματος με ακέραιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplying a fraction by a whole number'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πολλαπλασιασμός κλάσματος με ακέραιο» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Multiplying a fraction by a whole number\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-e-dim.average-concept": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Έννοια του μέσου όρου» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι ο μέσος όρος βρίσκεται προσθέτοντας όλες τις τιμές και διαιρώντας με το πλήθος τους.",
+      "descriptionEn": "Solve 2-3 exercises on \"Concept of average\" by hand, writing out every step. The most common trap on this topic: Doesn't understand that the average is found by adding all values and dividing by how many there are.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια του μέσου όρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Concept of average'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Έννοια του μέσου όρου» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Concept of average\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-e-dim.volume-cube-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Όγκος με κύβους μονάδας» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει τον όγκο ως πλήθος κύβων μονάδας που χωράνε μέσα σε ένα στερεό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Volume using unit cubes\" by hand, writing out every step. The most common trap on this topic: Doesn't understand volume as the number of unit cubes that fit inside a solid.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Όγκος με κύβους μονάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Volume using unit cubes'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το GeoGebra",
+      "titleEn": "Check with GeoGebra",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο παράδειγμα για «Όγκος με κύβους μονάδας» και μετά έλεγξέ το στο GeoGebra.",
+      "descriptionEn": "Make up a new example on \"Volume using unit cubes\" and then check it in GeoGebra.",
+      "toolId": "geogebra"
+    }
+  ],
+
+  "math-e-dim.negative-number-intro": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Εισαγωγή σε αρνητικούς αριθμούς» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει την έννοια των αρνητικών αριθμών σε πραγματικό πλαίσιο (π.χ. θερμοκρασία κάτω από το μηδέν).",
+      "descriptionEn": "Solve 2-3 exercises on \"Introduction to negative numbers\" by hand, writing out every step. The most common trap on this topic: Doesn't understand negative numbers in a real context (e.g. temperature below zero).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Εισαγωγή σε αρνητικούς αριθμούς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Introduction to negative numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Εισαγωγή σε αρνητικούς αριθμούς» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Introduction to negative numbers\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "math-st-dim.decimal-multiplication": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Πολλαπλασιασμός δεκαδικών» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν τοποθετεί σωστά την υποδιαστολή στο αποτέλεσμα όταν πολλαπλασιάζει δεκαδικούς αριθμούς.",
+      "descriptionEn": "Solve 2-3 exercises on \"Multiplying decimals\" by hand, writing out every step. The most common trap on this topic: Doesn't correctly place the decimal point in the result when multiplying decimal numbers.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός δεκαδικών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplying decimals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Πολλαπλασιασμός δεκαδικών» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Multiplying decimals\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-st-dim.discount-percent": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ποσοστά έκπτωσης» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να υπολογίσει την τελική τιμή μετά από ποσοστιαία έκπτωση, συχνά αφαιρώντας μόνο το ποσοστό αντί για το αντίστοιχο ποσό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Discount percentages\" by hand, writing out every step. The most common trap on this topic: Struggles to compute the final price after a percentage discount, often subtracting the percent figure itself instead of the corresponding amount.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ποσοστά έκπτωσης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Discount percentages'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Ποσοστά έκπτωσης» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Discount percentages\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-st-dim.ratio-proportion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Αναλογίες» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι μια αναλογία διατηρεί τη σχέση μεγεθών σταθερή, και προσπαθεί να λύσει προβλήματα αναλογίας μόνο με πρόσθεση.",
+      "descriptionEn": "Solve 2-3 exercises on \"Ratios and proportions\" by hand, writing out every step. The most common trap on this topic: Doesn't grasp that a ratio keeps the relationship between quantities constant, and tries to solve ratio problems using addition only.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναλογίες\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Ratios and proportions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Αναλογίες» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Ratios and proportions\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-st-dim.volume-units": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Μονάδες όγκου/χωρητικότητας» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το λίτρο με το κυβικό εκατοστό, δεν ξέρει ότι 1 λίτρο = 1000 κυβικά εκατοστά.",
+      "descriptionEn": "Solve 2-3 exercises on \"Units of volume/capacity\" by hand, writing out every step. The most common trap on this topic: Confuses liters with cubic centimeters, not knowing that 1 liter = 1000 cubic centimeters.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μονάδες όγκου/χωρητικότητας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Units of volume/capacity'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Μονάδες όγκου/χωρητικότητας» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Units of volume/capacity\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-st-dim.percent-increase": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ποσοστό αύξησης» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να υπολογίσει την τελική τιμή μετά από ποσοστιαία αύξηση, συχνά προσθέτοντας μόνο το ποσοστό αντί για το αντίστοιχο ποσό.",
+      "descriptionEn": "Solve 2-3 exercises on \"Percent increase\" by hand, writing out every step. The most common trap on this topic: Struggles to compute the final value after a percentage increase, often adding just the percent figure instead of the corresponding amount.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ποσοστό αύξησης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Percent increase'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Ποσοστό αύξησης» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Photomath.",
+      "descriptionEn": "Make up a brand-new exercise on \"Percent increase\" and solve it without help. If you want, check your solution with Photomath.",
+      "toolId": "photomath"
+    }
+  ],
+
+  "math-st-dim.speed-distance-time-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Σχέση ταχύτητας-απόστασης-χρόνου» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει τη βασική σχέση: ταχύτητα = απόσταση ÷ χρόνος, και μπερδεύει ποιο μέγεθος διαιρεί με ποιο.",
+      "descriptionEn": "Solve 2-3 exercises on \"Speed-distance-time relationship\" by hand, writing out every step. The most common trap on this topic: Doesn't understand the basic relationship: speed = distance ÷ time, confusing which quantity divides which.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σχέση ταχύτητας-απόστασης-χρόνου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Speed-distance-time relationship'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο πρόβλημα για «Σχέση ταχύτητας-απόστασης-χρόνου», λύσε το με το χέρι, και έλεγξέ το στο Wolfram Alpha.",
+      "descriptionEn": "Make up a new problem on \"Speed-distance-time relationship\", solve it by hand, and check it in Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "math-st-dim.negative-number-operations": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Βασικές πράξεις με αρνητικούς» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει τι γίνεται όταν προσθέτει έναν θετικό και έναν αρνητικό αριθμό (π.χ. 5 + (-3)).",
+      "descriptionEn": "Solve 2-3 exercises on \"Basic operations with negative numbers\" by hand, writing out every step. The most common trap on this topic: Doesn't know what happens when adding a positive and a negative number (e.g. 5 + (-3)).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασικές πράξεις με αρνητικούς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic operations with negative numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο πρόβλημα για «Βασικές πράξεις με αρνητικούς», λύσε το με το χέρι, και έλεγξέ το στο Wolfram Alpha.",
+      "descriptionEn": "Make up a new problem on \"Basic operations with negative numbers\", solve it by hand, and check it in Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "math-st-dim.probability-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Βασική πιθανότητα» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει πώς να εκφράσει μια απλή πιθανότητα ως κλάσμα (π.χ. πιθανότητα να φέρει 6 σε ένα ζάρι = 1/6).",
+      "descriptionEn": "Solve 2-3 exercises on \"Basic probability\" by hand, writing out every step. The most common trap on this topic: Doesn't understand how to express a simple probability as a fraction (e.g. the chance of rolling a 6 = 1/6).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασική πιθανότητα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic probability'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Φτιάξε μόνος/η ένα νέο πρόβλημα για «Βασική πιθανότητα», λύσε το με το χέρι, και έλεγξέ το στο Wolfram Alpha.",
+      "descriptionEn": "Make up a new problem on \"Basic probability\", solve it by hand, and check it in Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "glossa-a-dim.letter-sound-confusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Παρόμοια γράμματα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει γράμματα με παρόμοιο σχήμα ή ήχο (π.χ. β/δ, μ/ν), κάτι πολύ συνηθισμένο στην πρώτη φάση εκμάθησης της γραφής.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Similar-looking letters\" in your notebook. The most common trap on this topic: Confuses letters with similar shape or sound (e.g. Greek β/δ, μ/ν), very common in the first stage of learning to write.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Παρόμοια γράμματα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Similar-looking letters'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Παρόμοια γράμματα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Similar-looking letters\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-a-dim.sentence-boundary": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Όρια πρότασης» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει πού αρχίζει και πού τελειώνει μια πρόταση (κεφαλαίο γράμμα στην αρχή, τελεία στο τέλος).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Sentence boundaries\" in your notebook. The most common trap on this topic: Doesn't recognize where a sentence starts and ends (capital letter at the start, full stop at the end).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Όρια πρότασης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Sentence boundaries'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Όρια πρότασης» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Sentence boundaries\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-a-dim.plural-formation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Σχηματισμός πληθυντικού» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται στον σχηματισμό του πληθυντικού απλών ουσιαστικών (π.χ. «το παιδί» → «τα παιδιά»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Forming plurals\" in your notebook. The most common trap on this topic: Struggles to form the plural of simple nouns (e.g. 'το παιδί' → 'τα παιδιά').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σχηματισμός πληθυντικού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Forming plurals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Σχηματισμός πληθυντικού» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Forming plurals\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-a-dim.word-order-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Σειρά λέξεων σε πρόταση» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να συνθέσει μια απλή πρόταση με λογική σειρά λέξεων (υποκείμενο-ρήμα-αντικείμενο).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Basic word order\" in your notebook. The most common trap on this topic: Struggles to build a simple sentence with logical word order (subject-verb-object).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σειρά λέξεων σε πρόταση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic word order'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Σειρά λέξεων σε πρόταση» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Basic word order\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-a-dim.rhyming-words": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ομοιοκαταληξία» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει πότε δύο λέξεις κάνουν ομοιοκαταληξία (τελειώνουν με τον ίδιο ήχο).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Rhyming words\" in your notebook. The most common trap on this topic: Doesn't recognize when two words rhyme (end with the same sound).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ομοιοκαταληξία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Rhyming words'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ομοιοκαταληξία» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Rhyming words\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-a-dim.singular-plural-verb": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Συμφωνία ρήματος-υποκειμένου (ενικός/πληθυντικός)» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν συμφωνεί τον αριθμό του ρήματος με το υποκείμενο (π.χ. «τα παιδιά παίζει» αντί για «παίζουν»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Verb-subject agreement (singular/plural)\" in your notebook. The most common trap on this topic: Doesn't match the verb's number with the subject (e.g. 'the children plays' instead of 'play').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συμφωνία ρήματος-υποκειμένου (ενικός/πληθυντικός)\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Verb-subject agreement (singular/plural)'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Συμφωνία ρήματος-υποκειμένου (ενικός/πληθυντικός)» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Verb-subject agreement (singular/plural)\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-a-dim.question-mark-usage": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Χρήση ερωτηματικού» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει πότε μια πρόταση είναι ερώτηση και χρειάζεται ερωτηματικό στο τέλος.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Using the question mark\" in your notebook. The most common trap on this topic: Doesn't recognize when a sentence is a question and needs a question mark at the end.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Χρήση ερωτηματικού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Using the question mark'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Χρήση ερωτηματικού» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Using the question mark\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-a-dim.opposite-words-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Απλά αντίθετα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει απλά ζευγάρια αντίθετων λέξεων (μεγάλος/μικρός, ζεστός/κρύος).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Basic opposites\" in your notebook. The most common trap on this topic: Doesn't recognize simple pairs of opposite words (big/small, hot/cold).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλά αντίθετα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic opposites'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Απλά αντίθετα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Basic opposites\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.punctuation-question-exclamation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ερωτηματικό vs Θαυμαστικό» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το ερωτηματικό με το θαυμαστικό, γιατί δεν ξεχωρίζει ακόμα αν μια πρόταση ρωτάει κάτι ή εκφράζει έντονο συναίσθημα.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Question mark vs Exclamation mark\" in your notebook. The most common trap on this topic: Confuses the question mark with the exclamation mark, not yet distinguishing whether a sentence asks something or expresses strong feeling.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ερωτηματικό vs Θαυμαστικό\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Question mark vs Exclamation mark'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ερωτηματικό vs Θαυμαστικό» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Question mark vs Exclamation mark\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.story-sequence": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Σειρά γεγονότων ιστορίας» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να βάλει σε λογική σειρά τα γεγονότα μιας μικρής ιστορίας (τι έγινε πρώτα, μετά, στο τέλος).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Story sequence\" in your notebook. The most common trap on this topic: Struggles to put the events of a short story in logical order (what happened first, next, last).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σειρά γεγονότων ιστορίας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Story sequence'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Σειρά γεγονότων ιστορίας» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Story sequence\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.simple-past-tense": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Αόριστος χρόνος ρημάτων» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται στον σχηματισμό του αορίστου απλών ρημάτων (π.χ. «παίζω» → «έπαιξα»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Simple past tense\" in your notebook. The most common trap on this topic: Struggles to form the simple past of common verbs (e.g. 'παίζω' [play] → 'έπαιξα' [played]).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αόριστος χρόνος ρημάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Simple past tense'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Αόριστος χρόνος ρημάτων» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Simple past tense\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.synonym-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Συνώνυμα & αντίθετα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει απλά συνώνυμα («χαρούμενος»/«ευτυχισμένος») ή αντίθετα («μεγάλος»/«μικρός») σε βασικές, καθημερινές λέξεις.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Synonyms & antonyms\" in your notebook. The most common trap on this topic: Doesn't recognize simple synonyms ('happy'/'glad') or antonyms ('big'/'small') among common, everyday words.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συνώνυμα & αντίθετα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Synonyms & antonyms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Συνώνυμα & αντίθετα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Synonyms & antonyms\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.capital-letter-proper-nouns": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Κεφαλαίο σε κύρια ονόματα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν γράφει με κεφαλαίο τα κύρια ονόματα (ονόματα ανθρώπων, πόλεων) μέσα σε μια πρόταση.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Capital letters for proper nouns\" in your notebook. The most common trap on this topic: Doesn't capitalize proper nouns (names of people, cities) within a sentence.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Κεφαλαίο σε κύρια ονόματα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Capital letters for proper nouns'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Κεφαλαίο σε κύρια ονόματα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Capital letters for proper nouns\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.compound-word-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Απλές σύνθετες λέξεις» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει ότι μια σύνθετη λέξη αποτελείται από δύο μικρότερες λέξεις (π.χ. «ανοιχτήρι» = ανοίγω + -τήρι).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Basic compound words\" in your notebook. The most common trap on this topic: Doesn't recognize that a compound word is made of two smaller words.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλές σύνθετες λέξεις\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic compound words'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Απλές σύνθετες λέξεις» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Basic compound words\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.sentence-vs-fragment": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Πλήρης πρόταση vs απόσπασμα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει μια πλήρη πρόταση (έχει υποκείμενο και ρήμα) από ένα απόσπασμα χωρίς νόημα μόνο του.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Complete sentence vs fragment\" in your notebook. The most common trap on this topic: Doesn't distinguish a complete sentence (has subject and verb) from a fragment that doesn't stand alone.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πλήρης πρόταση vs απόσπασμα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Complete sentence vs fragment'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Πλήρης πρόταση vs απόσπασμα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Complete sentence vs fragment\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-b-dim.dialogue-punctuation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Στίξη διαλόγου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν χρησιμοποιεί εισαγωγικά ή παύλες όταν γράφει τι είπε κάποιος σε έναν διάλογο.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Dialogue punctuation\" in your notebook. The most common trap on this topic: Doesn't use quotation marks or dashes when writing what someone said in a dialogue.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Στίξη διαλόγου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Dialogue punctuation'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Στίξη διαλόγου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Dialogue punctuation\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.description-paragraph": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Περιγραφική παράγραφος» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Όταν περιγράφει κάτι (π.χ. έναν χαρακτήρα), απαριθμεί τυχαία στοιχεία αντί να τα οργανώνει λογικά (π.χ. πρώτα εμφάνιση, μετά χαρακτήρας).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Descriptive paragraph\" in your notebook. The most common trap on this topic: When describing something (e.g. a character), lists random details instead of organizing them logically (e.g. appearance first, then personality).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Περιγραφική παράγραφος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Descriptive paragraph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Περιγραφική παράγραφος» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Descriptive paragraph\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.iota-vowel-spelling": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ορθογραφία ι/η/υ» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τα φωνήεντα που ακούγονται ίδια (ι, η, υ, ει, οι) και γράφει τις λέξεις με το λάθος από αυτά.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Spelling ι/η/υ\" in your notebook. The most common trap on this topic: Confuses vowels that sound the same (ι, η, υ, ει, οι) and spells words with the wrong one.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ορθογραφία ι/η/υ\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Spelling ι/η/υ'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ορθογραφία ι/η/υ» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Spelling ι/η/υ\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.pronoun-reference": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Αντωνυμίες αναφοράς» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί αντωνυμίες («αυτός», «τον») χωρίς να είναι σαφές σε ποιον/τι αναφέρονται, μπερδεύοντας τον αναγνώστη.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Referential pronouns\" in your notebook. The most common trap on this topic: Uses pronouns ('he', 'it') without making clear who/what they refer to, confusing the reader.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αντωνυμίες αναφοράς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Referential pronouns'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Αντωνυμίες αναφοράς» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Referential pronouns\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.adjective-agreement": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Συμφωνία επιθέτου-ουσιαστικού» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν συμφωνεί σωστά το γένος/αριθμό/πτώση επιθέτου με το ουσιαστικό (π.χ. «η όμορφος κοπέλα» αντί για «η όμορφη κοπέλα»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Adjective-noun agreement\" in your notebook. The most common trap on this topic: Doesn't correctly match an adjective's gender/number/case with its noun (a common early error pattern in Greek).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συμφωνία επιθέτου-ουσιαστικού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adjective-noun agreement'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Συμφωνία επιθέτου-ουσιαστικού» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Adjective-noun agreement\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.verb-tense-consistency": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Συνέπεια χρόνου στην αφήγηση» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Αλλάζει χρόνο ρήματος μέσα στην ίδια αφήγηση χωρίς λόγο (π.χ. ξεκινά σε παρελθόντα και μπερδεύεται σε ενεστώτα).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Tense consistency in narration\" in your notebook. The most common trap on this topic: Switches verb tense within the same narration without reason (e.g. starts in past, drifts into present).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συνέπεια χρόνου στην αφήγηση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Tense consistency in narration'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Συνέπεια χρόνου στην αφήγηση» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Tense consistency in narration\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.comma-in-list": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Κόμμα σε απαρίθμηση» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν βάζει κόμματα ανάμεσα σε στοιχεία μιας λίστας (π.χ. «Αγόρασα μήλα πορτοκάλια μπανάνες»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Comma in a list\" in your notebook. The most common trap on this topic: Doesn't place commas between items in a list.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Κόμμα σε απαρίθμηση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comma in a list'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Κόμμα σε απαρίθμηση» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Comma in a list\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.homophone-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Απλές ομόηχες λέξεις» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει απλές ομόηχες λέξεις που γράφονται διαφορετικά αλλά ακούγονται ίδια (π.χ. «μία» αριθμητικό vs «μια» άρθρο).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Basic homophones\" in your notebook. The most common trap on this topic: Confuses simple homophones that are spelled differently but sound the same.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλές ομόηχες λέξεις\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic homophones'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Απλές ομόηχες λέξεις» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Basic homophones\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-c-dim.title-choice": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Επιλογή κατάλληλου τίτλου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Διαλέγει τίτλο για ένα κείμενο που είναι πολύ γενικός ή άσχετος με το περιεχόμενο, αντί να αντικατοπτρίζει την κύρια ιδέα.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Choosing a fitting title\" in your notebook. The most common trap on this topic: Picks a title for a text that's too generic or unrelated to the content, instead of reflecting the main idea.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επιλογή κατάλληλου τίτλου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Choosing a fitting title'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Επιλογή κατάλληλου τίτλου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Choosing a fitting title\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.paragraph-structure": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Δομή αφηγηματικής παραγράφου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Γράφει μια ιστορία χωρίς σαφή αρχή-μέση-τέλος, ξεκινώντας απευθείας στη μέση της δράσης χωρίς εισαγωγή.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Narrative paragraph structure\" in your notebook. The most common trap on this topic: Writes a story without a clear beginning-middle-end, diving straight into the action without an introduction.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δομή αφηγηματικής παραγράφου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Narrative paragraph structure'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Δομή αφηγηματικής παραγράφου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Narrative paragraph structure\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.future-tense": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Μέλλοντας χρόνος» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται στον σχηματισμό του μέλλοντα ρημάτων (π.χ. «θα παίξω»), ειδικά όταν το ρήμα αλλάζει θέμα.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Future tense\" in your notebook. The most common trap on this topic: Struggles to form the future tense of verbs, especially when the verb changes stem.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μέλλοντας χρόνος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Future tense'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Μέλλοντας χρόνος» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Future tense\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.adjective-vs-adverb": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Επίθετο vs Επίρρημα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το επίθετο (περιγράφει ουσιαστικό, π.χ. «γρήγορος») με το επίρρημα (περιγράφει ρήμα, π.χ. «γρήγορα»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Adjective vs Adverb\" in your notebook. The most common trap on this topic: Confuses the adjective (describes a noun) with the adverb (describes a verb).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επίθετο vs Επίρρημα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adjective vs Adverb'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Επίθετο vs Επίρρημα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Adjective vs Adverb\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.direct-indirect-speech": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ευθύς vs Πλάγιος λόγος» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει πότε ένα κείμενο μεταφέρει τα λόγια κάποιου αυτούσια (ευθύς λόγος, εισαγωγικά) και πότε αναδιατυπωμένα (πλάγιος λόγος).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Direct vs Indirect speech\" in your notebook. The most common trap on this topic: Doesn't distinguish when a text quotes someone's exact words (direct speech, quotation marks) versus reports them (indirect speech).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ευθύς vs Πλάγιος λόγος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Direct vs Indirect speech'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ευθύς vs Πλάγιος λόγος» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Direct vs Indirect speech\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.subject-predicate": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Υποκείμενο και κατηγόρημα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει το υποκείμενο (ποιος κάνει την ενέργεια) και το κατηγόρημα (τι λέει γι' αυτόν) μέσα σε μια πρόταση.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Subject and predicate\" in your notebook. The most common trap on this topic: Doesn't identify the subject (who does the action) and predicate (what's said about them) in a sentence.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Υποκείμενο και κατηγόρημα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Subject and predicate'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Υποκείμενο και κατηγόρημα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Subject and predicate\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.paragraph-main-idea": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Κύρια ιδέα παραγράφου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν εντοπίζει την κύρια ιδέα μιας παραγράφου, εστιάζοντας αντί αυτού σε μια δευτερεύουσα λεπτομέρεια.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Main idea of a paragraph\" in your notebook. The most common trap on this topic: Doesn't identify a paragraph's main idea, focusing instead on a minor detail.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Κύρια ιδέα παραγράφου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Main idea of a paragraph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Κύρια ιδέα παραγράφου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Main idea of a paragraph\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.conjunction-choice": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Επιλογή κατάλληλου συνδέσμου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί τον ίδιο σύνδεσμο («και») για όλες τις σχέσεις ανάμεσα σε προτάσεις, αντί να διαλέγει τον κατάλληλο (αλλά, γιατί, όμως).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Choosing the right conjunction\" in your notebook. The most common trap on this topic: Uses the same connector ('and') for all relationships between sentences, instead of choosing the right one (but, because, however).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επιλογή κατάλληλου συνδέσμου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Choosing the right conjunction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Επιλογή κατάλληλου συνδέσμου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Choosing the right conjunction\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-d-dim.formal-informal-greeting": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Επίσημος vs ανεπίσημος χαιρετισμός» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί ανεπίσημο χαιρετισμό («Γεια σου») σε επιστολή προς άγνωστο ενήλικα, αντί για επίσημο («Αγαπητέ κύριε»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Formal vs informal greeting\" in your notebook. The most common trap on this topic: Uses an informal greeting ('Hi') in a letter to an unfamiliar adult, instead of a formal one ('Dear Sir').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επίσημος vs ανεπίσημος χαιρετισμός\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formal vs informal greeting'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Επίσημος vs ανεπίσημος χαιρετισμός» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Formal vs informal greeting\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-e-dim.simile-metaphor-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Απλή παρομοίωση» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει την παρομοίωση (σύγκριση με «σαν») ως λογοτεχνικό μέσο μέσα σε ένα κείμενο.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Basic simile\" in your notebook. The most common trap on this topic: Doesn't recognize a simile (a 'like/as' comparison) as a literary device within a text.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλή παρομοίωση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic simile'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Απλή παρομοίωση» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Basic simile\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-e-dim.cause-effect-connector": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Σύνδεσμοι αιτίας-αποτελέσματος» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν χρησιμοποιεί σωστά συνδέσμους αιτίας-αποτελέσματος (γι' αυτό, επομένως, εξαιτίας) για να συνδέσει ιδέες.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Cause-effect connectors\" in your notebook. The most common trap on this topic: Doesn't correctly use cause-effect connectors (therefore, so, because of) to link ideas.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύνδεσμοι αιτίας-αποτελέσματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Cause-effect connectors'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Σύνδεσμοι αιτίας-αποτελέσματος» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Cause-effect connectors\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-e-dim.formal-letter-structure": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Δομή επίσημης επιστολής» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ακολουθεί τη βασική δομή μιας επίσημης επιστολής (τόπος/ημερομηνία, χαιρετισμός, κυρίως θέμα, κλείσιμο, υπογραφή).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Formal letter structure\" in your notebook. The most common trap on this topic: Doesn't follow the basic structure of a formal letter (place/date, greeting, main body, closing, signature).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δομή επίσημης επιστολής\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formal letter structure'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Δομή επίσημης επιστολής» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Formal letter structure\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-e-dim.adjective-degree": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Βαθμοί επιθέτου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τον συγκριτικό βαθμό («πιο όμορφος») με τον υπερθετικό («ο πιο όμορφος από όλους») ενός επιθέτου.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Degrees of adjectives\" in your notebook. The most common trap on this topic: Confuses the comparative degree ('more beautiful') with the superlative ('the most beautiful of all') of an adjective.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βαθμοί επιθέτου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Degrees of adjectives'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Βαθμοί επιθέτου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Degrees of adjectives\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.participle-recognition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Αναγνώριση μετοχής» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει τη μετοχή (π.χ. «τρέχοντας») ως ιδιαίτερο ρηματικό τύπο, μπερδεύοντάς τη με απλό ρήμα ή επίθετο.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Recognizing participles\" in your notebook. The most common trap on this topic: Doesn't recognize the participle (e.g. 'running') as a distinct verb form, confusing it with a plain verb or adjective.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση μετοχής\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Recognizing participles'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Αναγνώριση μετοχής» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Recognizing participles\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.compound-sentence-connectors": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Σύνδεσμοι σύνθετης πρότασης» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί λάθος σύνδεσμο για να ενώσει δύο προτάσεις (π.χ. «επειδή» αντί για «αν και» όταν εννοεί αντίθεση).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Compound sentence connectors\" in your notebook. The most common trap on this topic: Uses the wrong connector to join two clauses (e.g. 'because' instead of 'although' when meaning a contrast).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύνδεσμοι σύνθετης πρότασης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Compound sentence connectors'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Σύνδεσμοι σύνθετης πρότασης» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Compound sentence connectors\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.literary-text-interpretation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ερμηνεία λογοτεχνικού κειμένου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Διαβάζει ένα λογοτεχνικό απόσπασμα κυριολεκτικά, χωρίς να αναζητά το υπονοούμενο νόημα ή το συναίσθημα πίσω από τις λέξεις.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Interpreting a literary text\" in your notebook. The most common trap on this topic: Reads a literary passage literally, without looking for the implied meaning or feeling behind the words.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ερμηνεία λογοτεχνικού κειμένου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Interpreting a literary text'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ερμηνεία λογοτεχνικού κειμένου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Interpreting a literary text\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.paragraph-connectors-flow": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Συνοχή ανάμεσα σε παραγράφους» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Γράφει διαδοχικές παραγράφους χωρίς καμία λέξη-γέφυρα ανάμεσά τους (π.χ. «επιπλέον», «ωστόσο»), κάνοντας το κείμενο να μοιάζει κομματιασμένο.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Flow between paragraphs\" in your notebook. The most common trap on this topic: Writes consecutive paragraphs with no bridging words between them (e.g. 'furthermore', 'however'), making the text feel disjointed.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συνοχή ανάμεσα σε παραγράφους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Flow between paragraphs'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Συνοχή ανάμεσα σε παραγράφους» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Flow between paragraphs\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.passive-voice-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Βασική αναγνώριση παθητικής φωνής» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει πότε ένα ρήμα είναι σε ενεργητική φωνή («έγραψε το γράμμα») και πότε σε παθητική («γράφτηκε το γράμμα»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Basic passive voice recognition\" in your notebook. The most common trap on this topic: Doesn't distinguish when a verb is in active voice versus passive voice.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασική αναγνώριση παθητικής φωνής\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic passive voice recognition'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Βασική αναγνώριση παθητικής φωνής» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Basic passive voice recognition\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.text-purpose-identification": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Αναγνώριση σκοπού κειμένου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει αν ένα κείμενο θέλει να πληροφορήσει, να πείσει ή να διασκεδάσει τον αναγνώστη.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Identifying a text's purpose\" in your notebook. The most common trap on this topic: Doesn't recognize whether a text aims to inform, persuade, or entertain the reader.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση σκοπού κειμένου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Identifying a text's purpose'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Αναγνώριση σκοπού κειμένου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Identifying a text's purpose\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.register-formal-informal": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Επίσημο vs ανεπίσημο ύφος» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει πότε ένα κείμενο είναι γραμμένο σε επίσημο ύφος και πότε σε ανεπίσημο, καθημερινό ύφος.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Formal vs informal register\" in your notebook. The most common trap on this topic: Doesn't distinguish when a text is written in formal register versus informal, everyday register.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επίσημο vs ανεπίσημο ύφος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formal vs informal register'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Επίσημο vs ανεπίσημο ύφος» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Formal vs informal register\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "glossa-st-dim.conclusion-quality": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ποιότητα επιλόγου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Γράφει επίλογο που απλώς επαναλαμβάνει την εισαγωγή λέξη προς λέξη, αντί να συνοψίζει και να κλείνει το κείμενο ουσιαστικά.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Quality of a conclusion\" in your notebook. The most common trap on this topic: Writes a conclusion that just repeats the introduction word for word, instead of meaningfully summarizing and closing the text.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ποιότητα επιλόγου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Quality of a conclusion'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ποιότητα επιλόγου» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Quality of a conclusion\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "efl-c-dim.colors-vocab": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Λεξιλόγιο χρωμάτων» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει βασικά χρώματα στα αγγλικά, ειδικά όσα μοιάζουν στην προφορά (π.χ. «purple»/«pink»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Colors vocabulary\" in your notebook. The most common trap on this topic: Confuses basic colors in English, especially ones that sound similar (e.g. 'purple'/'pink').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Λεξιλόγιο χρωμάτων\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Λεξιλόγιο χρωμάτων\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Λεξιλόγιο χρωμάτων» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Colors vocabulary\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-c-dim.this-that": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «This vs That» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει πότε λέμε «this» (κοντινό αντικείμενο) και πότε «that» (μακρινό αντικείμενο).",
+      "descriptionEn": "Write 2-3 of your own examples on \"This vs That\" in your notebook. The most common trap on this topic: Doesn't distinguish when to say 'this' (nearby object) versus 'that' (far away object).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"This vs That\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"This vs That\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «This vs That» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"This vs That\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-c-dim.numbers-1-20": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Αριθμοί 1-20» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει αριθμούς που μοιάζουν στην προφορά στα αγγλικά (π.χ. «thirteen»/«thirty»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Numbers 1-20\" in your notebook. The most common trap on this topic: Confuses numbers that sound similar in English (e.g. 'thirteen'/'thirty').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Αριθμοί 1-20\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Αριθμοί 1-20\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Αριθμοί 1-20» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Numbers 1-20\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-c-dim.family-vocab": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Λεξιλόγιο οικογένειας» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει βασικές λέξεις οικογένειας στα αγγλικά (π.χ. «brother»/«mother»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Family vocabulary\" in your notebook. The most common trap on this topic: Confuses basic family words in English (e.g. 'brother'/'mother').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Λεξιλόγιο οικογένειας\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Λεξιλόγιο οικογένειας\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Λεξιλόγιο οικογένειας» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Family vocabulary\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-d-dim.present-simple-routines": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Present Simple καθημερινότητας» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να περιγράψει καθημερινές συνήθειες στον Ενεστώτα (π.χ. «I wake up at 7»), μπερδεύοντας τον χρόνο.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Present Simple for routines\" in your notebook. The most common trap on this topic: Struggles to describe daily routines in the Present Simple (e.g. 'I wake up at 7'), confusing the tense.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Present Simple καθημερινότητας\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Present Simple καθημερινότητας\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Present Simple καθημερινότητας» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Present Simple for routines\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-d-dim.house-rooms-vocab": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Λεξιλόγιο σπιτιού» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει βασικές λέξεις για δωμάτια του σπιτιού (π.χ. «kitchen»/«bathroom»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"House vocabulary\" in your notebook. The most common trap on this topic: Confuses basic words for rooms of the house (e.g. 'kitchen'/'bathroom').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Λεξιλόγιο σπιτιού\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Λεξιλόγιο σπιτιού\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Λεξιλόγιο σπιτιού» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"House vocabulary\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-d-dim.can-ability": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Can για ικανότητα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν χρησιμοποιεί σωστά το «can» για να εκφράσει ικανότητα (π.χ. λέει «I can to swim» αντί για «I can swim»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Can for ability\" in your notebook. The most common trap on this topic: Doesn't correctly use 'can' to express ability (e.g. says 'I can to swim' instead of 'I can swim').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Can για ικανότητα\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Can για ικανότητα\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Can για ικανότητα» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Can for ability\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-d-dim.days-months": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Μέρες & μήνες» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τη σειρά ή τα ονόματα των ημερών της εβδομάδας ή των μηνών στα αγγλικά.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Days & months\" in your notebook. The most common trap on this topic: Confuses the order or names of the days of the week or the months in English.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Μέρες & μήνες\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Μέρες & μήνες\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Μέρες & μήνες» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Days & months\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-st.past-simple-irregular": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ανώμαλα ρήματα (Past Simple)» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Προσθέτει «-ed» σε ανώμαλα ρήματα (π.χ. «goed» αντί για «went»), εφαρμόζοντας τον κανόνα των ομαλών ρημάτων παντού.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Irregular verbs (Past Simple)\" in your notebook. The most common trap on this topic: Adds '-ed' to irregular verbs (e.g. 'goed' instead of 'went'), applying the regular-verb rule everywhere.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Ανώμαλα ρήματα (Past Simple)\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Ανώμαλα ρήματα (Past Simple)\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Ανώμαλα ρήματα (Past Simple)» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Irregular verbs (Past Simple)\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-st.comparative-superlative": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Συγκριτικός vs Υπερθετικός» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τον συγκριτικό βαθμό επιθέτου («bigger») με τον υπερθετικό («the biggest»), χρησιμοποιώντας τον λάθος όταν συγκρίνει πάνω από δύο πράγματα.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Comparative vs Superlative\" in your notebook. The most common trap on this topic: Confuses the comparative ('bigger') with the superlative ('the biggest'), using the wrong one when comparing more than two things.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Συγκριτικός vs Υπερθετικός\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Συγκριτικός vs Υπερθετικός\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Συγκριτικός vs Υπερθετικός» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Comparative vs Superlative\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-st.going-to-will": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Going to vs Will» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει πότε χρησιμοποιούμε «going to» (προγραμματισμένο σχέδιο) και πότε «will» (απόφαση τη στιγμή που μιλάμε).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Going to vs Will\" in your notebook. The most common trap on this topic: Doesn't distinguish when to use 'going to' (a planned intention) versus 'will' (a decision made on the spot).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Going to vs Will\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Going to vs Will\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Going to vs Will» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Going to vs Will\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-st.countable-uncountable": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Countable vs Uncountable» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει το «much» με το «many», επειδή δεν ξεχωρίζει αν το ουσιαστικό μετριέται (countable) ή όχι (uncountable).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Countable vs Uncountable\" in your notebook. The most common trap on this topic: Confuses 'much' with 'many', because they can't yet tell if a noun is countable or uncountable.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Countable vs Uncountable\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Countable vs Uncountable\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Countable vs Uncountable» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Countable vs Uncountable\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "efl-st.preposition-time": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Προθέσεις χρόνου» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τις προθέσεις χρόνου «in», «on», «at» (π.χ. «at Monday» αντί για «on Monday»).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Prepositions of time\" in your notebook. The most common trap on this topic: Confuses the time prepositions 'in', 'on', 'at' (e.g. 'at Monday' instead of 'on Monday').",
+      "toolId": null
+    },
+    {
+      "titleEl": "Εξασκήσου στο Duolingo",
+      "titleEn": "Practice in Duolingo",
+      "descriptionEl": "Άνοιξε το Duolingo και κάνε 2-3 ασκήσεις πάνω σε \"Προθέσεις χρόνου\". Οι μικρές, καθημερινές ασκήσεις βοηθούν να θυμάσαι καλύτερα.",
+      "descriptionEn": "Open Duolingo and do 2-3 exercises on \"Προθέσεις χρόνου\". Short, daily exercises help it stick.",
+      "toolId": "duolingo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Προθέσεις χρόνου» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Prepositions of time\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-c-dim.myth-vs-history": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Μύθος vs Ιστορία», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει τον μύθο (φανταστική αφήγηση με θεούς/ήρωες) από την ιστορία (γεγονότα που πραγματικά συνέβησαν).",
+      "descriptionEn": "Write from memory what you remember about \"Myth vs History\", before opening the book. The most common trap on this topic: Doesn't distinguish myth (a fictional story with gods/heroes) from history (events that actually happened).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μύθος vs Ιστορία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Myth vs History'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Μύθος vs Ιστορία» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Myth vs History\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-c-dim.heracles-labors-order": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Άθλοι του Ηρακλή», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν θυμάται βασικά στοιχεία των άθλων του Ηρακλή (π.χ. μπερδεύει το λιοντάρι της Νεμέας με άλλο τέρας).",
+      "descriptionEn": "Write from memory what you remember about \"Labors of Heracles\", before opening the book. The most common trap on this topic: Doesn't recall basic details of Heracles' labors (e.g. confuses the Nemean Lion with another monster).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Άθλοι του Ηρακλή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Labors of Heracles'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Άθλοι του Ηρακλή» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Labors of Heracles\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-c-dim.trojan-war-cause": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Αιτία Τρωικού Πολέμου», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν θυμάται τι πυροδότησε τον Τρωικό Πόλεμο σύμφωνα με τον μύθο (η αρπαγή της Ελένης από τον Πάρη).",
+      "descriptionEn": "Write from memory what you remember about \"Cause of the Trojan War\", before opening the book. The most common trap on this topic: Doesn't recall what triggered the Trojan War according to the myth (Paris's abduction of Helen).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αιτία Τρωικού Πολέμου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Cause of the Trojan War'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Αιτία Τρωικού Πολέμου» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Cause of the Trojan War\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-c-dim.odysseus-journey": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Το ταξίδι του Οδυσσέα», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τη σειρά ή τα πρόσωπα των περιπετειών του Οδυσσέα στο ταξίδι της επιστροφής του στην Ιθάκη.",
+      "descriptionEn": "Write from memory what you remember about \"Odysseus's journey\", before opening the book. The most common trap on this topic: Confuses the order or characters in Odysseus's adventures on his journey home to Ithaca.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Το ταξίδι του Οδυσσέα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Odysseus's journey'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Το ταξίδι του Οδυσσέα» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Odysseus's journey\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-d-dim.minoan-crete": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Μινωικός πολιτισμός», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν συνδέει τον Μινωικό πολιτισμό με την Κρήτη και το ανάκτορο της Κνωσού, μπερδεύοντάς τον με άλλο πολιτισμό.",
+      "descriptionEn": "Write from memory what you remember about \"Minoan civilization\", before opening the book. The most common trap on this topic: Doesn't connect Minoan civilization with Crete and the Palace of Knossos, confusing it with another civilization.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μινωικός πολιτισμός\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Minoan civilization'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Μινωικός πολιτισμός» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Minoan civilization\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-d-dim.mycenaean-achaeans": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Μυκηναίοι/Αχαιοί», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει τους Μυκηναίους (Αχαιούς) ως τους πρώτους Έλληνες, με κέντρο τις Μυκήνες.",
+      "descriptionEn": "Write from memory what you remember about \"Mycenaeans/Achaeans\", before opening the book. The most common trap on this topic: Doesn't recognize the Mycenaeans (Achaeans) as the first Greeks, centered on Mycenae.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μυκηναίοι/Αχαιοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Mycenaeans/Achaeans'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Μυκηναίοι/Αχαιοί» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Mycenaeans/Achaeans\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-d-dim.polis-emergence": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Γέννηση της πόλης-κράτους», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι η αρχαία Ελλάδα δεν ήταν ένα ενιαίο κράτος, αλλά πολλές ανεξάρτητες πόλεις-κράτη με δικούς τους νόμους.",
+      "descriptionEn": "Write from memory what you remember about \"Rise of the city-state\", before opening the book. The most common trap on this topic: Doesn't understand that ancient Greece wasn't one unified state, but many independent city-states with their own laws.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Γέννηση της πόλης-κράτους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Rise of the city-state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Γέννηση της πόλης-κράτους» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Rise of the city-state\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-d-dim.olympic-games-origin": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Καταγωγή Ολυμπιακών Αγώνων», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν γνωρίζει ότι οι αρχαίοι Ολυμπιακοί Αγώνες γίνονταν στην Ολυμπία προς τιμήν του Δία, κάθε τέσσερα χρόνια.",
+      "descriptionEn": "Write from memory what you remember about \"Origin of the Olympic Games\", before opening the book. The most common trap on this topic: Doesn't know that the ancient Olympic Games were held at Olympia in honor of Zeus, every four years.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Καταγωγή Ολυμπιακών Αγώνων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Origin of the Olympic Games'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Καταγωγή Ολυμπιακών Αγώνων» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Origin of the Olympic Games\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-st-dim.revolution-year": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Έτος Ελληνικής Επανάστασης», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν θυμάται ότι η Ελληνική Επανάσταση ξεκίνησε το 1821.",
+      "descriptionEn": "Write from memory what you remember about \"Year of the Greek Revolution\", before opening the book. The most common trap on this topic: Doesn't recall that the Greek Revolution began in 1821.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έτος Ελληνικής Επανάστασης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Year of the Greek Revolution'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Έτος Ελληνικής Επανάστασης» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Year of the Greek Revolution\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-st-dim.kapodistrias-role": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Ο Καποδίστριας», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν αναγνωρίζει τον Ιωάννη Καποδίστρια ως τον πρώτο κυβερνήτη του ανεξάρτητου ελληνικού κράτους.",
+      "descriptionEn": "Write from memory what you remember about \"Kapodistrias\", before opening the book. The most common trap on this topic: Doesn't recognize Ioannis Kapodistrias as the first governor of the independent Greek state.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ο Καποδίστριας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Kapodistrias'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Ο Καποδίστριας» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Kapodistrias\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-st-dim.navarino-battle": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Ναυμαχία του Ναβαρίνου», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν γνωρίζει ότι η Ναυμαχία του Ναβαρίνου (1827), όπου οι Μεγάλες Δυνάμεις βοήθησαν την Ελλάδα, ήταν καθοριστική για την ανεξαρτησία.",
+      "descriptionEn": "Write from memory what you remember about \"Battle of Navarino\", before opening the book. The most common trap on this topic: Doesn't know that the Battle of Navarino (1827), where the Great Powers helped Greece, was decisive for independence.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ναυμαχία του Ναβαρίνου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Battle of Navarino'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Ναυμαχία του Ναβαρίνου» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Battle of Navarino\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "istoria-st-dim.modern-state-formation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε από τη μνήμη σου ό,τι θυμάσαι για «Δημιουργία ελληνικού κράτους», πριν ανοίξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι το πρώτο ελεύθερο ελληνικό κράτος κάλυπτε αρχικά μικρό μέρος της σημερινής Ελλάδας, όχι όλη τη σημερινή επικράτεια.",
+      "descriptionEn": "Write from memory what you remember about \"Formation of the Greek state\", before opening the book. The most common trap on this topic: Doesn't understand that the first free Greek state initially covered only a small part of present-day Greece, not the whole current territory.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δημιουργία ελληνικού κράτους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formation of the Greek state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα «Δημιουργία ελληνικού κράτους» σε έναν γονιό ή αδερφό/ή με 2-3 δικές σου προτάσεις, χωρίς να κοιτάξεις σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Formation of the Greek state\" to a parent or sibling in 2-3 of your own sentences, without looking at notes.",
+      "toolId": null
+    }
+  ],
+
+  "science-st-dim.circuit-open-closed": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ανοιχτό vs κλειστό κύκλωμα» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι ένα ηλεκτρικό κύκλωμα πρέπει να είναι κλειστό (χωρίς διακοπή) για να περάσει ρεύμα και να ανάψει η λάμπα.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Open vs closed circuit\" in your notebook. The most common trap on this topic: Doesn't understand that an electric circuit must be closed (unbroken) for current to flow and light the bulb.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανοιχτό vs κλειστό κύκλωμα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Open vs closed circuit'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ανοιχτό vs κλειστό κύκλωμα» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Open vs closed circuit\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "science-st-dim.digestive-system-order": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Σειρά πεπτικού συστήματος» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν θυμάται τη σωστή σειρά που ακολουθεί η τροφή μέσα στο πεπτικό σύστημα (στόμα, οισοφάγος, στομάχι, έντερα).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Order of the digestive system\" in your notebook. The most common trap on this topic: Doesn't recall the correct order food follows through the digestive system (mouth, esophagus, stomach, intestines).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σειρά πεπτικού συστήματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Order of the digestive system'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Σειρά πεπτικού συστήματος» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Order of the digestive system\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "science-st-dim.renewable-vs-nonrenewable": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Ανανεώσιμες vs μη ανανεώσιμες πηγές» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει ανανεώσιμες πηγές ενέργειας (ήλιος, άνεμος) με μη ανανεώσιμες (πετρέλαιο, κάρβουνο).",
+      "descriptionEn": "Write 2-3 of your own examples on \"Renewable vs non-renewable energy\" in your notebook. The most common trap on this topic: Confuses renewable energy sources (sun, wind) with non-renewable ones (oil, coal).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανανεώσιμες vs μη ανανεώσιμες πηγές\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Renewable vs non-renewable energy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Ανανεώσιμες vs μη ανανεώσιμες πηγές» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Renewable vs non-renewable energy\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
+    }
+  ],
+
+  "science-st-dim.states-of-matter-change": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε 2-3 δικά σου παραδείγματα πάνω σε «Αλλαγές κατάστασης ύλης» στο τετράδιό σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει την τήξη (στερεό→υγρό) με την εξάτμιση (υγρό→αέριο), και δεν ξέρει ποια αλλαγή προκαλεί ποιο φαινόμενο.",
+      "descriptionEn": "Write 2-3 of your own examples on \"Changes of state\" in your notebook. The most common trap on this topic: Confuses melting (solid→liquid) with evaporation (liquid→gas), unsure which change causes which phenomenon.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αλλαγές κατάστασης ύλης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Changes of state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το ChatGPT",
+      "titleEn": "Check with ChatGPT",
+      "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Αλλαγές κατάστασης ύλης» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
+      "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Changes of state\" and ask: \"Is what I understood correct? What am I missing?\"",
+      "toolId": "chatgpt"
     }
   ]
 };

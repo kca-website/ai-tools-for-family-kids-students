@@ -3225,11 +3225,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Αιτίες Περσικών Πολέμων\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Causes of the Persian Wars\" in 3-4 sentences as if presenting it to a classmate, without notes.",
-      "toolId": null
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ρώτα το Perplexity για «Αιτίες Περσικών Πολέμων» και δες τις πηγές κάτω από την απάντηση. Σύγκρινε αν αυτό που έγραψες στο πρώτο βήμα ταιριάζει με τεκμηριωμένες πηγές, όχι μόνο με τη μνήμη σου.",
+      "descriptionEn": "Ask Perplexity about \"Causes of the Persian Wars\" and check the sources under the answer. Compare whether what you wrote in step one matches documented sources, not just your memory.",
+      "toolId": "perplexity"
     }
   ],
 
@@ -3249,11 +3249,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Διάδοχοι Αλεξάνδρου\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Alexander's Successors\" in 3-4 sentences as if presenting it to a classmate, without notes.",
-      "toolId": null
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ρώτα το Perplexity για «Διάδοχοι Αλεξάνδρου» και δες τις πηγές κάτω από την απάντηση. Σύγκρινε αν αυτό που έγραψες στο πρώτο βήμα ταιριάζει με τεκμηριωμένες πηγές, όχι μόνο με τη μνήμη σου.",
+      "descriptionEn": "Ask Perplexity about \"Alexander's Successors\" and check the sources under the answer. Compare whether what you wrote in step one matches documented sources, not just your memory.",
+      "toolId": "perplexity"
     }
   ],
 
@@ -3321,11 +3321,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Άλωση της Κωνσταντινούπολης\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Fall of Constantinople\" in 3-4 sentences as if presenting it to a classmate, without notes.",
-      "toolId": null
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ρώτα το Perplexity για «Άλωση της Κωνσταντινούπολης» και δες τις πηγές κάτω από την απάντηση. Σύγκρινε αν αυτό που έγραψες στο πρώτο βήμα ταιριάζει με τεκμηριωμένες πηγές, όχι μόνο με τη μνήμη σου.",
+      "descriptionEn": "Ask Perplexity about \"Fall of Constantinople\" and check the sources under the answer. Compare whether what you wrote in step one matches documented sources, not just your memory.",
+      "toolId": "perplexity"
     }
   ],
 
@@ -3345,11 +3345,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Αιτίες Αναγέννησης\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Causes of the Renaissance\" in 3-4 sentences as if presenting it to a classmate, without notes.",
-      "toolId": null
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ρώτα το Perplexity για «Αιτίες Αναγέννησης» και δες τις πηγές κάτω από την απάντηση. Σύγκρινε αν αυτό που έγραψες στο πρώτο βήμα ταιριάζει με τεκμηριωμένες πηγές, όχι μόνο με τη μνήμη σου.",
+      "descriptionEn": "Ask Perplexity about \"Causes of the Renaissance\" and check the sources under the answer. Compare whether what you wrote in step one matches documented sources, not just your memory.",
+      "toolId": "perplexity"
     }
   ],
 
@@ -3369,11 +3369,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Οθωμανική διοίκηση Ελλήνων\" σε 3-4 προτάσεις σαν να το παρουσιάζεις σε έναν συμμαθητή, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Ottoman rule over Greeks\" in 3-4 sentences as if presenting it to a classmate, without notes.",
-      "toolId": null
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ρώτα το Perplexity για «Οθωμανική διοίκηση Ελλήνων» και δες τις πηγές κάτω από την απάντηση. Σύγκρινε αν αυτό που έγραψες στο πρώτο βήμα ταιριάζει με τεκμηριωμένες πηγές, όχι μόνο με τη μνήμη σου.",
+      "descriptionEn": "Ask Perplexity about \"Ottoman rule over Greeks\" and check the sources under the answer. Compare whether what you wrote in step one matches documented sources, not just your memory.",
+      "toolId": "perplexity"
     }
   ],
 

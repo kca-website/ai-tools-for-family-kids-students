@@ -1503,5 +1503,197 @@ const LEARNING_PATHS = {
       "descriptionEn": "Rewrite the sentences from step one correctly, then write one brand-new sentence for \"Preposition collocations\" on your own, without any tool.",
       "toolId": null
     }
+  ],
+
+  "math-a-gym.rational-number-order": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Διάταξη ρητών αριθμών» με το χέρι, γράφοντάς τους σε αριθμογραμμή. Η πιο συχνή παγίδα σε αυτό το θέμα: Δυσκολεύεται να συγκρίνει αρνητικούς με θετικούς αριθμούς, πιστεύοντας συχνά ότι το -8 είναι μεγαλύτερο από το -3.",
+      "descriptionEn": "Solve 2-3 exercises on \"Ordering rational numbers\" by hand, placing them on a number line. The most common trap on this topic: Struggles to compare negative with positive numbers, often believing -8 is bigger than -3.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Διάταξη ρητών αριθμών”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Ordering rational numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση με 4 ρητούς αριθμούς (θετικούς και αρνητικούς) και βάλ' τους σε σωστή σειρά χωρίς βοήθεια.",
+      "descriptionEn": "Make up a brand-new exercise with 4 rational numbers (positive and negative) and put them in the correct order without help.",
+      "toolId": null
+    }
+  ],
+
+  "math-a-gym.absolute-value": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Απόλυτη τιμή» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Πιστεύει ότι η απόλυτη τιμή ενός αρνητικού αριθμού παραμένει αρνητική, αντί να καταλαβαίνει ότι είναι η απόστασή του από το μηδέν.",
+      "descriptionEn": "Solve 2-3 exercises on \"Absolute value\" by hand, writing out every step. The most common trap on this topic: Believes the absolute value of a negative number stays negative, instead of understanding it's the distance from zero.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Απόλυτη τιμή”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Absolute value'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση με απόλυτες τιμές θετικών και αρνητικών αριθμών και λύσε την χωρίς βοήθεια.",
+      "descriptionEn": "Make up a brand-new exercise with absolute values of positive and negative numbers and solve it without help.",
+      "toolId": null
+    }
+  ],
+
+  "math-a-gym.gcd-lcm-confusion": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «ΜΚΔ vs ΕΚΠ» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τον Μέγιστο Κοινό Διαιρέτη (μικρότερος αριθμός) με το Ελάχιστο Κοινό Πολλαπλάσιο (μεγαλύτερος αριθμός).",
+      "descriptionEn": "Solve 2-3 exercises on \"GCD vs LCM\" by hand, writing out every step. The most common trap on this topic: Confuses the Greatest Common Divisor (smaller number) with the Least Common Multiple (bigger number).",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “ΜΚΔ vs ΕΚΠ”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'GCD vs LCM'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η δύο ζευγάρια αριθμών και βρες το ΜΚΔ και το ΕΚΠ του καθενός χωρίς βοήθεια.",
+      "descriptionEn": "Make up two pairs of numbers yourself and find the GCD and LCM of each without help.",
+      "toolId": null
+    }
+  ],
+
+  "math-a-gym.proportion-intro": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Εισαγωγή σε αναλογίες» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει ότι σε μια αναλογία δύο κλάσματα είναι ίσα, και προσπαθεί να τη λύσει με τυχαία πράξη αντί για γινόμενο άκρων-μέσων.",
+      "descriptionEn": "Solve 2-3 exercises on \"Introduction to proportions\" by hand, writing out every step. The most common trap on this topic: Doesn't understand that in a proportion two fractions are equal, and tries to solve it with a random operation instead of cross-multiplication.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Εισαγωγή σε αναλογίες”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Introduction to proportions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα αναλογία με άγνωστο όρο και λύσε την με γινόμενο άκρων-μέσων, χωρίς βοήθεια.",
+      "descriptionEn": "Make up a new proportion with an unknown term and solve it using cross-multiplication, without help.",
+      "toolId": null
+    }
+  ],
+
+  "math-b-gym.monomial-like-terms": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Όμοιοι μονόμιοι όροι» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x²) σαν να ήταν όμοιοι όροι.",
+      "descriptionEn": "Solve 2-3 exercises on \"Like monomial terms\" by hand, writing out every step. The most common trap on this topic: Tries to add monomials with a different variable part (e.g. 3x + 2x²) as if they were like terms.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Όμοιοι μονόμιοι όροι”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Like monomial terms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα παράσταση με μονώνυμα, απλοποίησέ την με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
+      "descriptionEn": "Make up a new expression with monomials, simplify it by hand, then check your solution with Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "math-b-gym.identity-square-sum": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ταυτότητα (α+β)²» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
+      "descriptionEn": "Solve 2-3 exercises on the \"(a+b)² identity\" by hand, writing out every step. The most common trap on this topic: Incorrectly simplifies (a+b)² to a²+b², forgetting the middle term 2ab.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Ταυτότητα (α+β)²”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with the '(a+b)² identity'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Ανάπτυξε μόνος/η μια νέα παράσταση (α+β)² με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
+      "descriptionEn": "Expand a new (a+b)² expression by hand yourself, then check your solution with Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "math-b-gym.pythagorean-application": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Εφαρμογή Πυθαγορείου θεωρήματος» με το χέρι, σχεδιάζοντας πρώτα το τρίγωνο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ποια πλευρά είναι η υποτείνουσα σε ένα ορθογώνιο τρίγωνο, και συχνά προσθέτει τα τετράγωνα λάθος πλευρών.",
+      "descriptionEn": "Solve 2-3 exercises on \"Applying the Pythagorean theorem\" by hand, drawing the triangle first. The most common trap on this topic: Doesn't know which side is the hypotenuse in a right triangle, and often adds the squares of the wrong sides.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Εφαρμογή Πυθαγορείου θεωρήματος”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Applying the Pythagorean theorem'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Σχεδίασε μόνος/η ένα νέο ορθογώνιο τρίγωνο με δικά σου μήκη, βρες την τρίτη πλευρά με το χέρι, και έλεγξε τη λύση σου στο Wolfram Alpha.",
+      "descriptionEn": "Draw a new right triangle with your own side lengths, find the third side by hand, and check your solution with Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
+  ],
+
+  "math-b-gym.linear-equation-basic": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Βασική εξίσωση 1ου βαθμού» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Όταν λύνει μια απλή εξίσωση, δεν εφαρμόζει την ίδια πράξη και στα δύο μέλη, χαλώντας την ισότητα.",
+      "descriptionEn": "Solve 2-3 exercises on \"Basic first-degree equations\" by hand, writing out every step. The most common trap on this topic: When solving a simple equation, doesn't apply the same operation to both sides, breaking the equality.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Ρώτα το Khanmigo",
+      "titleEn": "Ask Khanmigo",
+      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Βασική εξίσωση 1ου βαθμού”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
+      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic first-degree equations'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
+      "toolId": "khanmigo"
+    },
+    {
+      "titleEl": "Έλεγξε με το Wolfram Alpha",
+      "titleEn": "Check with Wolfram Alpha",
+      "descriptionEl": "Φτιάξε μόνος/η μια νέα εξίσωση 1ου βαθμού, λύσε την με το χέρι, και έλεγξε τη λύση σου στο Wolfram Alpha.",
+      "descriptionEn": "Make up a new first-degree equation, solve it by hand, and check your solution with Wolfram Alpha.",
+      "toolId": "wolfram-alpha"
+    }
   ]
 };

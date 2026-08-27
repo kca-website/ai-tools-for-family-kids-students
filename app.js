@@ -338,6 +338,7 @@
     els.roleTabs = document.getElementById("roleTabs");
     els.subjectFilter = document.getElementById("subjectFilter");
     els.a11yFilterToggle = document.getElementById("a11yFilterToggle");
+    els.a11yFilterToggleAdvanced = document.getElementById("a11yFilterToggleAdvanced");
     els.pathIntro = document.getElementById("pathIntro");
     els.toolGrid = document.getElementById("toolGrid");
     els.advancedGrid = document.getElementById("advancedGrid");
@@ -519,17 +520,22 @@
 
   // ---------- Rendering: Advanced tools (εξειδικευμένα) ----------
   function renderAdvancedTools() {
+    if (!els.advancedGrid) return;
     // Μαζεύουμε όλα τα εργαλεία που έχουν isExpert: true
     const expertTools = [];
     Object.keys(TOOLS).forEach((id) => {
       const tool = TOOLS[id];
       if (tool.isExpert) {
+        if (state.a11yFilterOnly && typeof ACCESSIBILITY_INFO !== "undefined") {
+          const a11y = ACCESSIBILITY_INFO[id];
+          if (!a11y || a11y.status !== "good") return;
+        }
         expertTools.push({ toolId: id, tool });
       }
     });
 
     if (!expertTools.length) {
-      els.advancedGrid.innerHTML = `<div class="empty-state">${t("emptyState")}</div>`;
+      els.advancedGrid.innerHTML = `<div class="empty-state">${state.a11yFilterOnly ? t("a11yFilterEmptyState") : t("emptyState")}</div>`;
       return;
     }
 
@@ -1095,11 +1101,13 @@ function renderToolGrid(pathTools, targetElement) {
         const explain = state.lang === "el" ? gap.explainEl : gap.explainEn;
         const zoneMax = ZONE_MAX_AGE[state.currentZone];
 
-        function renderToolBlock(tool) {
+        function renderToolBlock(entry) {
+          const tool = entry.tool;
+          const toolId = entry.toolId;
           const desc = state.lang === "el" ? tool.shortDescEl : tool.shortDescEn;
           return `
             <div class="quiz-tool-block" style="margin-bottom: 12px;">
-              <a class="quiz-tool-chip" href="${escapeAttr(tool.url || "#")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>
+              <a class="quiz-tool-chip" href="${escapeAttr("/tools/" + toolId + ".html")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>
               ${desc ? `<p class="quiz-tool-howto" style="margin: 4px 0 0; font-size: 0.85rem; color: var(--color-text-muted);">${escapeHtml(desc)}</p>` : ""}
             </div>
           `;
@@ -1121,8 +1129,8 @@ function renderToolGrid(pathTools, targetElement) {
             zoneMax !== undefined &&
             tool.minAge !== undefined &&
             tool.minAge > zoneMax;
-          if (isAdultOnlyHere) adultOnlyTools.push(tool);
-          else regularTools.push(tool);
+          if (isAdultOnlyHere) adultOnlyTools.push({ tool, toolId });
+          else regularTools.push({ tool, toolId });
         });
 
         const regularToolsHtml = regularTools.map(renderToolBlock).join("");
@@ -1856,7 +1864,17 @@ function renderToolGrid(pathTools, targetElement) {
     if (els.a11yFilterToggle) {
       els.a11yFilterToggle.addEventListener("change", () => {
         state.a11yFilterOnly = els.a11yFilterToggle.checked;
+        if (els.a11yFilterToggleAdvanced) els.a11yFilterToggleAdvanced.checked = state.a11yFilterOnly;
         renderPathContent();
+        renderAdvancedTools();
+      });
+    }
+    if (els.a11yFilterToggleAdvanced) {
+      els.a11yFilterToggleAdvanced.addEventListener("change", () => {
+        state.a11yFilterOnly = els.a11yFilterToggleAdvanced.checked;
+        if (els.a11yFilterToggle) els.a11yFilterToggle.checked = state.a11yFilterOnly;
+        renderPathContent();
+        renderAdvancedTools();
       });
     }
     els.langElBtn.addEventListener("click", () => setLang("el"));

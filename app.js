@@ -103,6 +103,7 @@
       pathStepLabel: "Βήμα {step} από 3",
       pathModalClose: "Κλείσιμο",
       pathOpenTool: "Άνοιγμα εργαλείου ↗",
+      pathExtraToolsLabel: "Άλλα εργαλεία που μπορεί να βοηθήσουν σε αυτό:",
       advancedIntro: "Εργαλεία που δεν είναι διάσημα αλλά λύνουν συγκεκριμένες δύσκολες ανάγκες.",
       pdfDownloading: "Δημιουργία PDF...",
       subjectFilterLabel: "Φίλτρο μαθήματος",
@@ -180,6 +181,7 @@
       pathStepLabel: "Step {step} of 3",
       pathModalClose: "Close",
       pathOpenTool: "Open tool ↗",
+      pathExtraToolsLabel: "Other tools that might help with this:",
       // ---------- "What this guide is NOT" + Last checked (new) ----------
       notGuideTitle: "What this guide is NOT",
       notGuideItem1: "It doesn't replace a teacher or a parent.",
@@ -1242,8 +1244,8 @@ function renderToolGrid(pathTools, targetElement) {
       const title = state.lang === "el" ? step.titleEl : step.titleEn;
       const desc = state.lang === "el" ? step.descriptionEl : step.descriptionEn;
       const tool = step.toolId ? TOOLS[step.toolId] : null;
-      const toolLinkHtml = tool && tool.url
-        ? `<a class="path-step__tool-link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)} · ${t("pathOpenTool")}</a>`
+      const toolLinkHtml = tool
+        ? `<a class="path-step__tool-link" href="${escapeAttr("/tools/" + step.toolId + ".html")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)} · ${t("detailsLink")}</a>`
         : "";
       return `
         <div class="path-step">
@@ -1258,12 +1260,42 @@ function renderToolGrid(pathTools, targetElement) {
       `;
     }).join("");
 
+    // Επιπλέον προτεινόμενα εργαλεία: ό,τι υπάρχει στο GAP_TAGS.recommendedToolIds
+    // αλλά ΔΕΝ εμφανίζεται ήδη στα 3 βήματα παραπάνω. Προτεραιότητα σε πιο ειδικά/
+    // advanced εργαλεία (isExpert ή συγκεκριμένα για το θέμα) πριν τα γενικά chatbots.
+    const usedToolIds = new Set(steps.map((s) => s.toolId).filter(Boolean));
+    const GENERIC_CHATBOTS = ["chatgpt", "claude", "gemini", "copilot"];
+    const extraToolIds = (gap.recommendedToolIds || []).filter((id) => !usedToolIds.has(id) && TOOLS[id]);
+    extraToolIds.sort((a, b) => {
+      const aGeneric = GENERIC_CHATBOTS.includes(a) ? 1 : 0;
+      const bGeneric = GENERIC_CHATBOTS.includes(b) ? 1 : 0;
+      if (aGeneric !== bGeneric) return aGeneric - bGeneric;
+      const aExpert = TOOLS[a].isExpert ? 0 : 1;
+      const bExpert = TOOLS[b].isExpert ? 0 : 1;
+      return aExpert - bExpert;
+    });
+
+    const extraToolsHtml = extraToolIds.length
+      ? `
+        <div class="path-extra-tools">
+          <p class="path-extra-tools__label">${t("pathExtraToolsLabel")}</p>
+          <div class="path-extra-tools__list">
+            ${extraToolIds.map((id) => {
+              const t2 = TOOLS[id];
+              return `<a class="path-extra-tools__link" href="${escapeAttr("/tools/" + id + ".html")}" target="_blank" rel="noopener noreferrer">${escapeHtml(t2.name)}${t2.isExpert ? " ⭐" : ""}</a>`;
+            }).join("")}
+          </div>
+        </div>
+      `
+      : "";
+
     els.pathModal.innerHTML = `
       <button type="button" class="path-modal__close" aria-label="${t("pathModalClose")}">✕</button>
       <p class="path-modal__eyebrow">${t("pathModalTitle")}</p>
       <h3 class="path-modal__title">${escapeHtml(label)}</h3>
       <p class="path-modal__intro">${t("pathModalIntro")}</p>
       <div class="path-steps">${stepsHtml}</div>
+      ${extraToolsHtml}
     `;
     els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
     els.pathModalOverlay.hidden = false;

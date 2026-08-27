@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Προσβασιμότητα εργαλείων - AI Tools for Kids</title>
+  <meta name="description" content="Έρευνα προσβασιμότητας για τα 32 AI εργαλεία του aitools4kids.gr: επίσημες δηλώσεις, VPAT, και ανεξάρτητες αξιολογήσεις screen reader.">
+  <link rel="canonical" href="https://www.aitools4kids.gr/accessibility.html">
+  <style>
+    :root {
+      --blue: #3B82C4; --green: #4CAF7D; --ink: #1F2430; --muted: #5A6270;
+      --bg-soft: #F0F7FF; --border: #E3E8F0;
+      --good-bg: #EAF7EF; --good-fg: #1E7A4C;
+      --caution-bg: #FFF3E0; --caution-fg: #B25E00;
+      --none-bg: #F3F4F6; --none-fg: #6B7280;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    h1 { color: var(--blue); margin-bottom: 4px; font-size: 28px; }
+    h2 { color: var(--green); margin-top: 40px; font-size: 20px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+    .highlight { background: var(--bg-soft); padding: 16px; border-left: 4px solid var(--blue); margin: 16px 0; border-radius: 6px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 24px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 4px 10px; border-radius: 999px; }
+    .badge-good { background: var(--good-bg); color: var(--good-fg); }
+    .badge-partial { background: #FFF8E1; color: #8A6D00; }
+    .badge-caution { background: var(--caution-bg); color: var(--caution-fg); }
+    .badge-none { background: var(--none-bg); color: var(--none-fg); }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 32px; font-size: 14px; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: var(--bg-soft); color: var(--ink); font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; }
+    td.status { white-space: nowrap; }
+    td.note { color: var(--muted); font-size: 13px; }
+    a.source { font-size: 12px; }
+    .back-link { display: inline-block; margin-top: 24px; color: var(--blue); text-decoration: none; font-weight: 600; }
+    .back-link:hover { text-decoration: underline; }
+    .summary-box { background: var(--bg-soft); padding: 16px; border-radius: 8px; margin: 24px 0; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>♿ Προσβασιμότητα εργαλείων</h1>
+  <p class="subtitle">Έρευνα: 27 Αυγούστου 2026 — μόνο επίσημες πηγές και αξιόπιστες ανεξάρτητες αξιολογήσεις</p>
+
+  <div class="highlight">
+    <p><strong>Σημαντικό:</strong> Καμία πληροφορία σε αυτή τη σελίδα δεν είναι επινοημένη. Όπου δεν βρέθηκε καμία επίσημη πηγή, το σημειώνουμε ρητά ως "δεν βρέθηκε" — αυτό <em>δεν</em> σημαίνει ότι το εργαλείο δεν είναι προσβάσιμο, απλά ότι ο κατασκευαστής δεν δημοσιεύει σχετική τεκμηρίωση. Καμία Ελληνική Νοηματική Γλώσσα (ΕΝΓ) δεν εντοπίστηκε σε κανένα από τα 32 εργαλεία.</p>
+  </div>
+
+  <div class="legend">
+    <span class="badge-good">✅ Τεκμηριωμένο θετικό</span>
+    <span class="badge-partial">❓ Μερικό / μεικτό</span>
+    <span class="badge-caution">⚠️ Τεκμηριωμένη ανησυχία</span>
+    <span class="badge-none">— Δεν βρέθηκε</span>
+  </div>
+
+  <h2>Πλήρης πίνακας — 32 εργαλεία</h2>
+  <table>
+    <thead>
+      <tr><th>Εργαλείο</th><th>Status</th><th>Σημείωση</th></tr>
+    </thead>
+    <tbody id="a11yTableBody">
+      <!-- Γεμίζει δυναμικά μέσω JS από το ACCESSIBILITY_INFO + TOOLS -->
+    </tbody>
+  </table>
+
+  <div class="summary-box">
+    <strong>Σύνοψη:</strong> 12 εργαλεία με επίσημη τεκμηρίωση (✅), 11 με μερικά/μεικτά στοιχεία (❓), 1 με τεκμηριωμένη ανησυχία (⚠️ — Wolfram Alpha, αξιολογήθηκε από το Perkins School for the Blind ως μη προσβάσιμο για τυφλούς χρήστες χωρίς βοήθεια), και 8 χωρίς καμία εντοπίσιμη πηγή.
+  </div>
+
+  <a class="back-link" href="/">← Πίσω στην αρχική</a>
+
+  <script src="/data.js"></script>
+  <script src="/accessibility-data.js"></script>
+  <script>
+    (function () {
+      const STATUS_LABEL = {
+        good: '<span class="badge-good">✅ Τεκμηριωμένο</span>',
+        partial: '<span class="badge-partial">❓ Μερικό</span>',
+        caution: '<span class="badge-caution">⚠️ Ανησυχία</span>',
+        none: '<span class="badge-none">— Δεν βρέθηκε</span>',
+      };
+      const tbody = document.getElementById('a11yTableBody');
+      if (!tbody || typeof TOOLS === 'undefined' || typeof ACCESSIBILITY_INFO === 'undefined') return;
+      const rows = Object.keys(TOOLS).map((id) => {
+        const tool = TOOLS[id];
+        const info = ACCESSIBILITY_INFO[id];
+        if (!info) return '';
+        const sourceLink = info.sourceUrl
+          ? ` <a class="source" href="${info.sourceUrl}" target="_blank" rel="noopener noreferrer">πηγή ↗</a>`
+          : '';
+        return `<tr>
+          <td>${tool.name}</td>
+          <td class="status">${STATUS_LABEL[info.status] || ''}</td>
+          <td class="note">${info.noteEl}${sourceLink}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = rows.join('');
+    })();
+  </script>
+</body>
+</html>

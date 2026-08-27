@@ -71,6 +71,7 @@
       notGuideItem2: "Δεν είναι τρόπος να αντιγράψεις μια εργασία έτοιμη.",
       footerLastChecked: "Τελευταίος έλεγχος εργαλείων: 27 Αυγούστου 2026",
       footerPrivacyLink: "Πολιτική Απορρήτου",
+      footerAccessibilityLink: "Προσβασιμότητα εργαλείων",
       toolAgeLabel: "Όροι Χρήσης",
       shareToolBtn: "Μοιράσου",
       shareToolCopied: "Αντιγράφηκε!",
@@ -182,6 +183,7 @@
       notGuideItem2: "It's not a way to get a finished assignment to copy.",
       footerLastChecked: "Tools last checked: August 27, 2026",
       footerPrivacyLink: "Privacy Policy",
+      footerAccessibilityLink: "Tool accessibility",
       toolAgeLabel: "Terms of Use",
       shareToolBtn: "Share",
       shareToolCopied: "Copied!",
@@ -577,6 +579,19 @@ function renderToolGrid(pathTools, targetElement) {
         : `<span class="tool-card__pending-badge">⏳ Under review</span>`;
     }
 
+    // Προσβασιμότητα — μόνο για επιβεβαιωμένα θετικά ή τεκμηριωμένες ανησυχίες
+    let accessibilityBadge = '';
+    const a11y = typeof ACCESSIBILITY_INFO !== "undefined" ? ACCESSIBILITY_INFO[tool.id] : null;
+    if (a11y && a11y.status === "good") {
+      accessibilityBadge = state.lang === "el"
+        ? `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#EAF7EF;color:#1E7A4C;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEl)}">♿ Επίσημη δήλωση προσβασιμότητας</span>`
+        : `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#EAF7EF;color:#1E7A4C;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEn)}">♿ Official accessibility statement</span>`;
+    } else if (a11y && a11y.status === "caution") {
+      accessibilityBadge = state.lang === "el"
+        ? `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#FFF3E0;color:#B25E00;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEl)}">⚠️ Τεκμηριωμένο πρόβλημα προσβασιμότητας</span>`
+        : `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#FFF3E0;color:#B25E00;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEn)}">⚠️ Documented accessibility issue</span>`;
+    }
+
     const card = document.createElement("article");
     card.className = "tool-card";
     card.innerHTML = `
@@ -586,6 +601,7 @@ function renderToolGrid(pathTools, targetElement) {
         </div>
         <p class="tool-card__name">${escapeHtml(tool.name)} ${greekBadge}${mobileBadge}${pendingBadge}</p>
       </div>
+      ${accessibilityBadge}
       ${categoryLabel ? `<span class="tool-card__category">${escapeHtml(categoryLabel)}</span>` : ""}
       ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}
       ${howTo ? `<p class="tool-card__field-label">${t("howToLabel")}</p><p class="tool-card__field-value">${escapeHtml(howTo)}</p>` : ""}

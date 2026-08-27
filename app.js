@@ -22,6 +22,7 @@
     currentRole: "guardian",
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "guide"
     currentSubject: null, // subjectId ή null = "Όλα"
+    a11yFilterOnly: false, // true = δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα
     // Quiz sub-state
     quizGradeId: null,
     quizSubjectId: null,
@@ -107,6 +108,8 @@
       subjectFilterLabel: "Φίλτρο μαθήματος",
       subjectAll: "Όλα",
       subjectEmptyState: "Δεν υπάρχει ακόμα αντιστοίχιση εργαλείου για αυτό το μάθημα σε αυτή τη ζώνη.",
+      a11yFilterLabel: "♿ Δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα",
+      a11yFilterEmptyState: "Κανένα από τα εργαλεία αυτής της ζώνης δεν έχει επίσημη δήλωση προσβασιμότητας. Δες όλα τα εργαλεία στη σελίδα Προσβασιμότητα.",
       // ---------- Parent Quiz (νέο) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Δοκίμασε κι εσύ, γονιέ!",
       parentQuizCtaSub: "Δες αν ξέρεις τόσο καλά όσο νομίζεις τι κάνει το παιδί σου με το AI.",
@@ -192,6 +195,8 @@
       subjectFilterLabel: "Subject filter",
       subjectAll: "All",
       subjectEmptyState: "No tool mapping yet for this subject in this zone.",
+      a11yFilterLabel: "♿ Show only tools with documented accessibility",
+      a11yFilterEmptyState: "None of the tools in this zone have an official accessibility statement. See all tools on the Accessibility page.",
       // ---------- Parent Quiz (new) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Try it yourself, parent!",
       parentQuizCtaSub: "See if you know as well as you think what your child does with AI.",
@@ -330,6 +335,7 @@
     els.pathZoneHeading = document.getElementById("pathZoneHeading");
     els.roleTabs = document.getElementById("roleTabs");
     els.subjectFilter = document.getElementById("subjectFilter");
+    els.a11yFilterToggle = document.getElementById("a11yFilterToggle");
     els.pathIntro = document.getElementById("pathIntro");
     els.toolGrid = document.getElementById("toolGrid");
     els.advancedGrid = document.getElementById("advancedGrid");
@@ -492,6 +498,16 @@
 
       if (!toolsToShow.length) {
         els.toolGrid.innerHTML = `<div class="empty-state">${t("subjectEmptyState")}</div>`;
+        return;
+      }
+    }
+
+    if (state.a11yFilterOnly && typeof ACCESSIBILITY_INFO !== "undefined") {
+      toolsToShow = toolsToShow.filter(
+        (entry) => ACCESSIBILITY_INFO[entry.toolId] && ACCESSIBILITY_INFO[entry.toolId].status === "good"
+      );
+      if (!toolsToShow.length) {
+        els.toolGrid.innerHTML = `<div class="empty-state">${t("a11yFilterEmptyState")}</div>`;
         return;
       }
     }
@@ -1805,6 +1821,12 @@ function renderToolGrid(pathTools, targetElement) {
     }
 
     els.backToZones.addEventListener("click", showZoneSelectView);
+    if (els.a11yFilterToggle) {
+      els.a11yFilterToggle.addEventListener("change", () => {
+        state.a11yFilterOnly = els.a11yFilterToggle.checked;
+        renderPathContent();
+      });
+    }
     els.langElBtn.addEventListener("click", () => setLang("el"));
     els.langEnBtn.addEventListener("click", () => setLang("en"));
     els.viewTabTools.addEventListener("click", () => selectView("tools"));

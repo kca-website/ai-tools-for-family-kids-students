@@ -59,6 +59,7 @@
       cautionLabel: "Προσοχή",
       visitLink: "Άνοιγμα εργαλείου ↗",
       infoLink: "Περισσότερα ↗",
+      detailsLink: "Δες το εργαλείο →",
       viewTabTools: "Εργαλεία",
       viewTabAdvanced: "Προχωρημένα",
       viewTabPrompts: "Prompt Generator",
@@ -68,7 +69,7 @@
       notGuideTitle: "Τι ΔΕΝ είναι αυτός ο οδηγός",
       notGuideItem1: "Δεν αντικαθιστά τον δάσκαλο ή τον γονιό.",
       notGuideItem2: "Δεν είναι τρόπος να αντιγράψεις μια εργασία έτοιμη.",
-      footerLastChecked: "Τελευταίος έλεγχος εργαλείων: 26 Αυγούστου 2026",
+      footerLastChecked: "Τελευταίος έλεγχος εργαλείων: 27 Αυγούστου 2026",
       footerPrivacyLink: "Πολιτική Απορρήτου",
       toolAgeLabel: "Όροι Χρήσης",
       shareToolBtn: "Μοιράσου",
@@ -142,6 +143,7 @@
       cautionLabel: "Caution",
       visitLink: "Open tool ↗",
       infoLink: "Learn more ↗",
+      detailsLink: "See the tool →",
       viewTabTools: "Tools",
       viewTabAdvanced: "Advanced",
       viewTabPrompts: "Prompt Generator",
@@ -178,7 +180,7 @@
       notGuideTitle: "What this guide is NOT",
       notGuideItem1: "It doesn't replace a teacher or a parent.",
       notGuideItem2: "It's not a way to get a finished assignment to copy.",
-      footerLastChecked: "Tools last checked: August 26, 2026",
+      footerLastChecked: "Tools last checked: August 27, 2026",
       footerPrivacyLink: "Privacy Policy",
       toolAgeLabel: "Terms of Use",
       shareToolBtn: "Share",
@@ -591,7 +593,7 @@ function renderToolGrid(pathTools, targetElement) {
       ${typeof tool.minAge === "number" ? `<p class="tool-card__age-note"><strong>${t("toolAgeLabel")}:</strong> ${tool.minAge}+${tool.minAgeNote ? ` · ${escapeHtml(tool.minAgeNote)}` : ""}</p>` : ""}
       ${tool.greekTips && state.lang === "el" ? `<p class="tool-card__greek-tips" style="margin-top: 8px; padding: 8px 10px; background: #F0F7FF; border-radius: 8px; font-size: 0.85rem; color: #334155;">🇬🇷 ${escapeHtml(tool.greekTips)}</p>` : ""}
       <div class="tool-card__actions">
-        ${tool.url ? `<a class="tool-card__link" href="${escapeAttr(tool.url)}" target="_blank" rel="noopener noreferrer">${t(tool.linkTypeInfo ? "infoLink" : "visitLink")}</a>` : ""}
+        <a class="tool-card__link" href="${escapeAttr("/tools/" + tool.id + ".html")}" target="_blank" rel="noopener noreferrer">${t("detailsLink")}</a>
         <button type="button" class="tool-card__share-btn">🔗 ${t("shareToolBtn")}</button>
       </div>
     `;

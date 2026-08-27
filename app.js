@@ -584,12 +584,12 @@ function renderToolGrid(pathTools, targetElement) {
     const a11y = typeof ACCESSIBILITY_INFO !== "undefined" ? ACCESSIBILITY_INFO[tool.id] : null;
     if (a11y && a11y.status === "good") {
       accessibilityBadge = state.lang === "el"
-        ? `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#EAF7EF;color:#1E7A4C;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEl)}">♿ Επίσημη δήλωση προσβασιμότητας</span>`
-        : `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#EAF7EF;color:#1E7A4C;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEn)}">♿ Official accessibility statement</span>`;
+        ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEl)}">♿ Επίσημη δήλωση προσβασιμότητας</span>`
+        : `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEn)}">♿ Official accessibility statement</span>`;
     } else if (a11y && a11y.status === "caution") {
       accessibilityBadge = state.lang === "el"
-        ? `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#FFF3E0;color:#B25E00;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEl)}">⚠️ Τεκμηριωμένο πρόβλημα προσβασιμότητας</span>`
-        : `<span class="tool-card__a11y-badge" style="display:inline-block;margin-top:6px;padding:3px 10px;background:#FFF3E0;color:#B25E00;border-radius:999px;font-size:0.78rem;font-weight:600;" title="${escapeAttr(a11y.noteEn)}">⚠️ Documented accessibility issue</span>`;
+        ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--caution" title="${escapeAttr(a11y.noteEl)}">⚠️ Τεκμηριωμένο πρόβλημα προσβασιμότητας</span>`
+        : `<span class="tool-card__a11y-badge tool-card__a11y-badge--caution" title="${escapeAttr(a11y.noteEn)}">⚠️ Documented accessibility issue</span>`;
     }
 
     const card = document.createElement("article");

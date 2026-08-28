@@ -55,7 +55,7 @@ const CURRICULUM = {
 
   middle: {
     language: {
-      toolIds: ["chatgpt", "erla"],
+      toolIds: ["chatgpt"],
       noteEl: "Ανάπτυξη επιχειρημάτων για έκθεση, εξάσκηση στην ελληνική γλώσσα.",
       noteEn: "Developing essay arguments, Greek language practice.",
     },
@@ -75,15 +75,15 @@ const CURRICULUM = {
       noteEn: "Organizing points for a presentation, not ready-made text.",
     },
     "foreign-language": {
-      toolIds: ["gemini", "chatgpt"],
-      noteEl: "Βοήθεια σε ξένη γλώσσα μέσα από σχολικό λογαριασμό ή γενικό chatbot AI.",
-      noteEn: "Foreign language help through a school account or a general AI chatbot.",
+      toolIds: ["gemini", "chatgpt", "erla"],
+      noteEl: "Βοήθεια σε ξένη γλώσσα μέσα από σχολικό λογαριασμό, γενικό chatbot AI, ή εξάσκηση ακρόασης/ομιλίας με το Erla.",
+      noteEn: "Foreign language help through a school account, a general AI chatbot, or listening/speaking practice with Erla.",
     },
   },
 
   high: {
     language: {
-      toolIds: ["chatgpt", "grammarly"],
+      toolIds: ["chatgpt"],
       noteEl: "Ανάπτυξη και έλεγχος επιχειρημάτων για έκθεση, προετοιμασία Πανελληνίων.",
       noteEn: "Developing and stress-testing essay arguments, Panhellenic exam prep.",
     },
@@ -98,14 +98,14 @@ const CURRICULUM = {
       noteEn: "Physics/Chemistry calculations and support via the school pilot program.",
     },
     history: {
-      toolIds: ["chatgpt", "elements-of-ai"],
-      noteEl: "Διαμόρφωση ερευνητικού ερωτήματος, κατανόηση ηθικών διλημμάτων ΤΝ.",
-      noteEn: "Forming a research question, understanding AI ethical dilemmas.",
+      toolIds: ["chatgpt", "perplexity"],
+      noteEl: "Οργάνωση επιχειρημάτων και έλεγχος ιστορικών γεγονότων με πηγές πριν τα εμπιστευτείς.",
+      noteEn: "Organizing arguments and checking historical facts against sources before trusting them.",
     },
     "foreign-language": {
       toolIds: ["grammarly"],
-      noteEl: "Υποστήριξη στη συγγραφή επιστημονικών/ακαδημαϊκών κειμένων.",
-      noteEn: "Support for writing scientific/academic texts.",
+      noteEl: "Υποστήριξη στη συγγραφή επιστημονικών/ακαδημαϊκών κειμένων στα αγγλικά.",
+      noteEn: "Support for writing scientific/academic texts in English.",
     },
   },
 };

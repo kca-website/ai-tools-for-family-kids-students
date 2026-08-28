@@ -18,11 +18,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Σύγκριση κλασμάτων”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing fractions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σύγκριση κλασμάτων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Comparing fractions\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -41,11 +41,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Πρόσθεση κλασμάτων”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adding fractions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πρόσθεση κλασμάτων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Adding fractions\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -64,11 +64,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Σύγκριση δεκαδικών”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing decimals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σύγκριση δεκαδικών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Comparing decimals\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -94,11 +94,11 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     },
     {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Φτιάξε μόνος/η μια νέα άσκηση για «Διαίρεση με υπόλοιπο» και λύσε την χωρίς βοήθεια. Αν θες, έλεγξε τη λύση σου με Khanmigo.",
-      "descriptionEn": "Make up a brand-new exercise on \"Division with remainder\" and solve it without help. If you want, check your solution with Khanmigo.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Διαίρεση με υπόλοιπο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Division with remainder\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     }
   ],
   "percent.as_fraction": [
@@ -110,11 +110,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Ποσοστά”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Percentages'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ποσοστά» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Percentages\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -133,11 +133,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Εμβαδόν και περίμετρος”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Area and perimeter'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Εμβαδόν και περίμετρος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Area and perimeter\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -156,11 +156,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Ρώτα το Khanmigo: «Ποιες ιστορικές πηγές στηρίζουν ή αναιρούν αυτό που θυμάμαι για “Αθήνα vs Σπάρτη”;» Ζήτησέ του να σου εξηγήσει, όχι απλώς να σου δώσει την απάντηση.",
-      "descriptionEn": "Ask Khanmigo: \"What historical sources support or challenge what I remember about 'Athens vs Sparta'?\" Ask it to walk you through the reasoning, not just hand you the answer.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αθήνα vs Σπάρτη» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Athens vs Sparta\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τι θυμάσαι",
@@ -179,11 +179,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Ρώτα το Khanmigo: «Ποιες ιστορικές πηγές στηρίζουν ή αναιρούν αυτό που θυμάμαι για “Βυζαντινή Αυτοκρατορία”;» Ζήτησέ του να σου εξηγήσει, όχι απλώς να σου δώσει την απάντηση.",
-      "descriptionEn": "Ask Khanmigo: \"What historical sources support or challenge what I remember about 'Byzantine Empire'?\" Ask it to walk you through the reasoning, not just hand you the answer.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βυζαντινή Αυτοκρατορία» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Byzantine Empire\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τι θυμάσαι",
@@ -271,11 +271,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Ρώτα το Khanmigo: «Ποιες ιστορικές πηγές στηρίζουν ή αναιρούν αυτό που θυμάμαι για “Τόπος Αρχαίων Ολυμπιακών”;» Ζήτησέ του να σου εξηγήσει, όχι απλώς να σου δώσει την απάντηση.",
-      "descriptionEn": "Ask Khanmigo: \"What historical sources support or challenge what I remember about 'Ancient Olympics location'?\" Ask it to walk you through the reasoning, not just hand you the answer.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Τόπος Αρχαίων Ολυμπιακών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Ancient Olympics location\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τι θυμάσαι",
@@ -294,11 +294,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Ρώτα το Khanmigo: «Ποιες ιστορικές πηγές στηρίζουν ή αναιρούν αυτό που θυμάμαι για “Αρχαίοι Φιλόσοφοι”;» Ζήτησέ του να σου εξηγήσει, όχι απλώς να σου δώσει την απάντηση.",
-      "descriptionEn": "Ask Khanmigo: \"What historical sources support or challenge what I remember about 'Ancient philosophers'?\" Ask it to walk you through the reasoning, not just hand you the answer.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αρχαίοι Φιλόσοφοι» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Ancient philosophers\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τι θυμάσαι",
@@ -340,11 +340,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Ομόηχες λέξεις”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Khanmigo, show it your sentences, and ask: \"Do I have this wrong on 'Homophones'? Explain why, don't just correct them for me.\"",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ομόηχες λέξεις» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Homophones\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τις προτάσεις σου",
@@ -363,11 +363,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “«Ό,τι» και «ότι»”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Khanmigo, show it your sentences, and ask: \"Do I have this wrong on ''Ó,ti' vs 'óti''? Explain why, don't just correct them for me.\"",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα ««Ό,τι» και «ότι»» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"'Ó,ti' vs 'óti'\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τις προτάσεις σου",
@@ -386,11 +386,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Τελικό -ν”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Khanmigo, show it your sentences, and ask: \"Do I have this wrong on 'Final -n rule'? Explain why, don't just correct them for me.\"",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Τελικό -ν» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Final -n rule\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τις προτάσεις σου",
@@ -409,11 +409,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Κατάληξη ρήματος -ει”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Khanmigo, show it your sentences, and ask: \"Do I have this wrong on 'Verb ending -ei'? Explain why, don't just correct them for me.\"",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Κατάληξη ρήματος -ει» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Verb ending -ei\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τις προτάσεις σου",
@@ -432,11 +432,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Θέμα λέξης”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Khanmigo, show it your sentences, and ask: \"Do I have this wrong on 'Word stem spelling'? Explain why, don't just correct them for me.\"",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Θέμα λέξης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Word stem spelling\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Ξαναγράψε τις προτάσεις σου",
@@ -455,11 +455,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες του την εξήγησή σου για «Αιτία των εποχών». Ζήτησέ του να σου κάνει ερωτήσεις μέχρι να βρεις μόνος/η πού κάνεις λάθος.",
-      "descriptionEn": "Open Khanmigo and tell it your explanation of \"Cause of the seasons\". Ask it to keep asking you questions until you find the mistake yourself.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αιτία των εποχών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Cause of the seasons\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Εξήγησέ το σε κάποιον",
@@ -478,11 +478,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες του την εξήγησή σου για «Αιτία μέρας/νύχτας». Ζήτησέ του να σου κάνει ερωτήσεις μέχρι να βρεις μόνος/η πού κάνεις λάθος.",
-      "descriptionEn": "Open Khanmigo and tell it your explanation of \"Cause of day/night\". Ask it to keep asking you questions until you find the mistake yourself.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αιτία μέρας/νύχτας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Cause of day/night\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Εξήγησέ το σε κάποιον",
@@ -501,11 +501,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες του την εξήγησή σου για «Διατήρηση ύλης». Ζήτησέ του να σου κάνει ερωτήσεις μέχρι να βρεις μόνος/η πού κάνεις λάθος.",
-      "descriptionEn": "Open Khanmigo and tell it your explanation of \"Conservation of matter\". Ask it to keep asking you questions until you find the mistake yourself.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Διατήρηση ύλης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Conservation of matter\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Εξήγησέ το σε κάποιον",
@@ -547,11 +547,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες του την εξήγησή σου για «Φως του φεγγαριού». Ζήτησέ του να σου κάνει ερωτήσεις μέχρι να βρεις μόνος/η πού κάνεις λάθος.",
-      "descriptionEn": "Open Khanmigo and tell it your explanation of \"Moonlight\". Ask it to keep asking you questions until you find the mistake yourself.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Φως του φεγγαριού» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Moonlight\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Εξήγησέ το σε κάποιον",
@@ -1514,11 +1514,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Διάταξη ρητών αριθμών”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Ordering rational numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Διάταξη ρητών αριθμών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Ordering rational numbers\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1538,11 +1538,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Απόλυτη τιμή”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Absolute value'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Απόλυτη τιμή» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Absolute value\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1562,11 +1562,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “ΜΚΔ vs ΕΚΠ”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'GCD vs LCM'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «ΜΚΔ vs ΕΚΠ» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"GCD vs LCM\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1586,11 +1586,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Εισαγωγή σε αναλογίες”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Introduction to proportions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Εισαγωγή σε αναλογίες» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Introduction to proportions\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1610,11 +1610,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Όμοιοι μονόμιοι όροι”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Like monomial terms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Όμοιοι μονόμιοι όροι» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Like monomial terms\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
@@ -1634,11 +1634,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Ταυτότητα (α+β)²”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with the '(a+b)² identity'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ταυτότητα (α+β)²» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Identity (a+b)²\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
@@ -1658,11 +1658,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Εφαρμογή Πυθαγορείου θεωρήματος”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Applying the Pythagorean theorem'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Εφαρμογή Πυθαγορείου θεωρήματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Applying the Pythagorean theorem\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
@@ -1682,11 +1682,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Βασική εξίσωση 1ου βαθμού”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Λύσε μαζί του 2 νέες ασκήσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic first-degree equations'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new exercises this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βασική εξίσωση 1ου βαθμού» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic first-degree equation\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
@@ -1706,11 +1706,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Μέρη του λόγου”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του 2 νέες προτάσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Parts of speech'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new sentences this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μέρη του λόγου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Parts of speech\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1730,11 +1730,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Άποψη vs Γεγονός”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του 2 νέα κείμενα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Opinion vs Fact'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new texts this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Άποψη vs Γεγονός» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Opinion vs Fact\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1754,11 +1754,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Βασικό επιχειρηματολογικό κείμενο”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του την παράγραφό σου με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic argumentative paragraph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on your paragraph this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βασικό επιχειρηματολογικό κείμενο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic argumentative writing\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1778,11 +1778,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Έγκλιση ρήματος”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη λύση.» Δούλεψε μαζί του 2 νέες προτάσεις με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Verb mood'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new sentences this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έγκλιση ρήματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Verb mood\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -1802,11 +1802,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Λειτουργία πρόλογου δοκιμίου”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμο πρόλογο.» Δούλεψε μαζί του τον πρόλογό σου με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'The function of an essay introduction'. Ask me questions so I can figure it out myself, don't just hand me a ready-made intro.\" Work on your introduction this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Λειτουργία πρόλογου δοκιμίου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Function of an essay introduction\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -1826,11 +1826,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Σκοπός κειμενικού είδους”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα κειμενικά είδη με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'The purpose of text types'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new text types this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σκοπός κειμενικού είδους» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Purpose of a text type\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -1850,11 +1850,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Επιχείρημα vs Τεκμήριο”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέες παραγράφους με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Argument vs Evidence'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new paragraphs this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Επιχείρημα vs Τεκμήριο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Argument vs Evidence\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -1874,11 +1874,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο “Περίληψη vs Σχόλιο”. Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη περίληψη.» Δούλεψε μαζί του ένα νέο κείμενο με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Summary vs Opinion'. Ask me questions so I can figure it out myself, don't just hand me a ready-made summary.\" Work through a new text this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Περίληψη vs Σχόλιο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Summary vs Commentary\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2042,11 +2042,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολιτισμοί Εποχής Χαλκού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Bronze Age civilizations'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πολιτισμοί Εποχής Χαλκού» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Bronze Age civilizations\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2066,11 +2066,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πορεία προς τη δημοκρατία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Path toward democracy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πορεία προς τη δημοκρατία» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Path toward democracy\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2090,11 +2090,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πελοποννησιακός Πόλεμος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Peloponnesian War'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πελοποννησιακός Πόλεμος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Peloponnesian War\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2114,11 +2114,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έργο Μεγάλου Αλεξάνδρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Alexander the Great's legacy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έργο Μεγάλου Αλεξάνδρου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Alexander the Great's legacy\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2138,11 +2138,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ελληνιστικός πολιτισμός\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Hellenistic culture'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ελληνιστικός πολιτισμός» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Hellenistic culture\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2162,11 +2162,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρωμαϊκή κατάκτηση της Ελλάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Roman conquest of Greece'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ρωμαϊκή κατάκτηση της Ελλάδας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Roman conquest of Greece\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2186,11 +2186,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μετάβαση στο Βυζάντιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Transition to Byzantium'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μετάβαση στο Βυζάντιο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Transition to Byzantium\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2210,11 +2210,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Φεουδαρχία στη Δυτική Ευρώπη\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Feudalism in Western Europe'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Φεουδαρχία στη Δυτική Ευρώπη» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Feudalism in Western Europe\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2426,11 +2426,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Φυτικό vs ζωικό κύτταρο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Plant vs animal cell'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Φυτικό vs ζωικό κύτταρο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Plant vs animal cell\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2450,11 +2450,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Θρέψη μονοκύτταρων οργανισμών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Nutrition in unicellular organisms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Θρέψη μονοκύτταρων οργανισμών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Nutrition in unicellular organisms\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2474,11 +2474,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Προσαρμογές οργανισμών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adaptations of organisms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Προσαρμογές οργανισμών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Adaptations of organisms\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2498,11 +2498,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πέψη σε φυτά vs ζώα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Digestion in plants vs animals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πέψη σε φυτά vs ζώα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Digestion in plants vs animals\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2522,11 +2522,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Λειτουργία κυτταρικής μεμβράνης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Function of the cell membrane'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Λειτουργία κυτταρικής μεμβράνης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Function of the cell membrane\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -2546,11 +2546,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανταλλαγή αερίων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Gas exchange organ'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ανταλλαγή αερίων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Gas exchange organ\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2570,11 +2570,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρόλος της καρδιάς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Role of the heart'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ρόλος της καρδιάς» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Role of the heart\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2594,11 +2594,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Λειτουργία του αίματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Function of blood'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Λειτουργία του αίματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Function of blood\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2618,11 +2618,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Παραγωγοί σε οικοσύστημα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Producers in an ecosystem'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Παραγωγοί σε οικοσύστημα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Producers in an ecosystem\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -2642,11 +2642,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρόλος νευρικού συστήματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Role of the nervous system'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ρόλος νευρικού συστήματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Role of the nervous system\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -3866,11 +3866,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύγκριση αριθμών έως 20\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing numbers to 20'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σύγκριση αριθμών έως 20» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Comparing numbers to 20\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3890,11 +3890,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πρόσθεση με πέρασμα δεκάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Addition crossing ten'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πρόσθεση με πέρασμα δεκάδας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Addition crossing ten\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3914,11 +3914,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια της αφαίρεσης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of subtraction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έννοια της αφαίρεσης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Meaning of subtraction\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -3938,11 +3938,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασικά γεωμετρικά σχήματα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic geometric shapes'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βασικά γεωμετρικά σχήματα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic geometric shapes\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το GeoGebra",
@@ -3962,11 +3962,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Τακτικοί αριθμοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Ordinal numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Τακτικοί αριθμοί» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Ordinal numbers\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -3986,11 +3986,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύγκριση μήκους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing length'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σύγκριση μήκους» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Comparing length\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4010,11 +4010,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αφαίρεση με πέρασμα δεκάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Subtraction crossing ten'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αφαίρεση με πέρασμα δεκάδας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Subtraction crossing ten\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4034,11 +4034,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση νομισμάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Coin recognition'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αναγνώριση νομισμάτων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Coin recognition\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4058,11 +4058,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δεκάδες & μονάδες\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Tens & ones'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Δεκάδες & μονάδες» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Tens & ones\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4082,11 +4082,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός ως πρόσθεση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplication as repeated addition'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πολλαπλασιασμός ως πρόσθεση» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Multiplication as repeated addition\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4106,11 +4106,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ώρα στη μισή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Telling time to the half hour'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ώρα στη μισή» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Telling time to the half hour\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4130,11 +4130,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μέτρημα χρημάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Counting money'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μέτρημα χρημάτων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Counting money\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4154,11 +4154,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πρόσθεση διψήφιων χωρίς κρατούμενο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Two-digit addition without carrying'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πρόσθεση διψήφιων χωρίς κρατούμενο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Two-digit addition without carrying\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4178,11 +4178,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αφαίρεση διψήφιων με δανεικό\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Two-digit subtraction with borrowing'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αφαίρεση διψήφιων με δανεικό» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Two-digit subtraction with borrowing\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4202,11 +4202,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ζυγοί και μονοί αριθμοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Even and odd numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ζυγοί και μονοί αριθμοί» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Even and odd numbers\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4226,11 +4226,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανάγνωση απλού ραβδογράμματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Reading a simple bar graph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ανάγνωση απλού ραβδογράμματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Reading a simple bar graph\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το GeoGebra",
@@ -4250,11 +4250,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Προπαίδεια\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Times tables'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Προπαίδεια» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Times tables\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4274,11 +4274,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια της διαίρεσης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of division'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έννοια της διαίρεσης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Meaning of division\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4298,11 +4298,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μονάδες μέτρησης μήκους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Units of length'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μονάδες μέτρησης μήκους» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Units of length\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4322,11 +4322,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ώρα σε τέταρτα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Telling time in quarters'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ώρα σε τέταρτα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Telling time in quarters\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4346,11 +4346,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός διψήφιου επί μονοψήφιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Two-digit by one-digit multiplication'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πολλαπλασιασμός διψήφιου επί μονοψήφιο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Two-digit by one-digit multiplication\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4370,11 +4370,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μονάδες βάρους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Units of weight'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μονάδες βάρους» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Units of weight\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4394,11 +4394,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια του υπολοίπου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of the remainder'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έννοια του υπολοίπου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Meaning of the remainder\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4418,11 +4418,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση απλού κλάσματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Recognizing simple fractions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αναγνώριση απλού κλάσματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Recognizing simple fractions\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το GeoGebra",
@@ -4442,11 +4442,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πρόσθεση κλασμάτων ίδιου παρονομαστή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adding fractions with the same denominator'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πρόσθεση κλασμάτων ίδιου παρονομαστή» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Adding fractions with the same denominator\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4466,11 +4466,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Εισαγωγή στους δεκαδικούς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Introduction to decimals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Εισαγωγή στους δεκαδικούς» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Introduction to decimals\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4490,11 +4490,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια της περιμέτρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Meaning of perimeter'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έννοια της περιμέτρου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Meaning of perimeter\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το GeoGebra",
@@ -4514,11 +4514,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ρωμαϊκοί αριθμοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Roman numerals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ρωμαϊκοί αριθμοί» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Roman numerals\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4538,11 +4538,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλοποίηση κλάσματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Simplifying a fraction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Απλοποίηση κλάσματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Simplifying a fraction\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4562,11 +4562,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύγκριση δεκαδικών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comparing decimals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σύγκριση δεκαδικών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Comparing decimals\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4586,11 +4586,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασική έννοια εμβαδού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic concept of area'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βασική έννοια εμβαδού» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic concept of area\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το GeoGebra",
@@ -4610,11 +4610,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός με 10 και 100\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplying by 10 and 100'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πολλαπλασιασμός με 10 και 100» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Multiplying by 10 and 100\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4634,11 +4634,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός κλάσματος με ακέραιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplying a fraction by a whole number'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πολλαπλασιασμός κλάσματος με ακέραιο» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Multiplying a fraction by a whole number\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4658,11 +4658,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έννοια του μέσου όρου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Concept of average'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έννοια του μέσου όρου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Concept of average\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4682,11 +4682,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Όγκος με κύβους μονάδας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Volume using unit cubes'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Όγκος με κύβους μονάδας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Volume using unit cubes\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το GeoGebra",
@@ -4706,11 +4706,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Εισαγωγή σε αρνητικούς αριθμούς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Introduction to negative numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Εισαγωγή σε αρνητικούς αριθμούς» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Introduction to negative numbers\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4730,11 +4730,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πολλαπλασιασμός δεκαδικών\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Multiplying decimals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πολλαπλασιασμός δεκαδικών» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Multiplying decimals\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4754,11 +4754,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ποσοστά έκπτωσης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Discount percentages'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ποσοστά έκπτωσης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Discount percentages\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4778,11 +4778,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναλογίες\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Ratios and proportions'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αναλογίες» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Ratios and proportions\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4802,11 +4802,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μονάδες όγκου/χωρητικότητας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Units of volume/capacity'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μονάδες όγκου/χωρητικότητας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Units of volume/capacity\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4826,11 +4826,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ποσοστό αύξησης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Percent increase'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ποσοστό αύξησης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Percent increase\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -4850,11 +4850,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σχέση ταχύτητας-απόστασης-χρόνου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Speed-distance-time relationship'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σχέση ταχύτητας-απόστασης-χρόνου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Speed-distance-time relationship\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
@@ -4874,11 +4874,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασικές πράξεις με αρνητικούς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic operations with negative numbers'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βασικές πράξεις με αρνητικούς» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic operations with negative numbers\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
@@ -4898,11 +4898,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασική πιθανότητα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic probability'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βασική πιθανότητα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic probability\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
@@ -4922,11 +4922,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Παρόμοια γράμματα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Similar-looking letters'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Παρόμοια γράμματα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Similar-looking letters\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4946,11 +4946,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Όρια πρότασης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Sentence boundaries'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Όρια πρότασης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Sentence boundaries\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4970,11 +4970,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σχηματισμός πληθυντικού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Forming plurals'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σχηματισμός πληθυντικού» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Forming plurals\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -4994,11 +4994,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σειρά λέξεων σε πρόταση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic word order'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σειρά λέξεων σε πρόταση» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic word order\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5018,11 +5018,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ομοιοκαταληξία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Rhyming words'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ομοιοκαταληξία» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Rhyming words\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5042,11 +5042,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συμφωνία ρήματος-υποκειμένου (ενικός/πληθυντικός)\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Verb-subject agreement (singular/plural)'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Συμφωνία ρήματος-υποκειμένου (ενικός/πληθυντικός)» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Verb-subject agreement (singular/plural)\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5066,11 +5066,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Χρήση ερωτηματικού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Using the question mark'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Χρήση ερωτηματικού» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Using the question mark\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5090,11 +5090,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλά αντίθετα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic opposites'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Απλά αντίθετα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic opposites\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5114,11 +5114,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ερωτηματικό vs Θαυμαστικό\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Question mark vs Exclamation mark'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ερωτηματικό vs Θαυμαστικό» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Question mark vs Exclamation mark\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5138,11 +5138,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σειρά γεγονότων ιστορίας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Story sequence'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σειρά γεγονότων ιστορίας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Story sequence\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5162,11 +5162,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αόριστος χρόνος ρημάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Simple past tense'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αόριστος χρόνος ρημάτων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Simple past tense\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5186,11 +5186,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συνώνυμα & αντίθετα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Synonyms & antonyms'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Συνώνυμα & αντίθετα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Synonyms & antonyms\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5210,11 +5210,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Κεφαλαίο σε κύρια ονόματα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Capital letters for proper nouns'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Κεφαλαίο σε κύρια ονόματα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Capital letters for proper nouns\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5234,11 +5234,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλές σύνθετες λέξεις\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic compound words'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Απλές σύνθετες λέξεις» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic compound words\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5258,11 +5258,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Πλήρης πρόταση vs απόσπασμα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Complete sentence vs fragment'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Πλήρης πρόταση vs απόσπασμα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Complete sentence vs fragment\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5282,11 +5282,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Στίξη διαλόγου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Dialogue punctuation'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Στίξη διαλόγου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Dialogue punctuation\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5306,11 +5306,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Περιγραφική παράγραφος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Descriptive paragraph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Περιγραφική παράγραφος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Descriptive paragraph\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5330,11 +5330,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ορθογραφία ι/η/υ\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Spelling ι/η/υ'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ορθογραφία ι/η/υ» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Spelling ι/η/υ\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5354,11 +5354,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αντωνυμίες αναφοράς\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Referential pronouns'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αντωνυμίες αναφοράς» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Referential pronouns\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5378,11 +5378,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συμφωνία επιθέτου-ουσιαστικού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adjective-noun agreement'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Συμφωνία επιθέτου-ουσιαστικού» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Adjective-noun agreement\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5402,11 +5402,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συνέπεια χρόνου στην αφήγηση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Tense consistency in narration'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Συνέπεια χρόνου στην αφήγηση» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Tense consistency in narration\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5426,11 +5426,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Κόμμα σε απαρίθμηση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Comma in a list'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Κόμμα σε απαρίθμηση» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Comma in a list\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5450,11 +5450,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλές ομόηχες λέξεις\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic homophones'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Απλές ομόηχες λέξεις» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic homophones\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5474,11 +5474,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επιλογή κατάλληλου τίτλου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Choosing a fitting title'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Επιλογή κατάλληλου τίτλου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Choosing a fitting title\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5498,11 +5498,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δομή αφηγηματικής παραγράφου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Narrative paragraph structure'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Δομή αφηγηματικής παραγράφου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Narrative paragraph structure\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5522,11 +5522,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μέλλοντας χρόνος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Future tense'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μέλλοντας χρόνος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Future tense\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5546,11 +5546,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επίθετο vs Επίρρημα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Adjective vs Adverb'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Επίθετο vs Επίρρημα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Adjective vs Adverb\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5570,11 +5570,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ευθύς vs Πλάγιος λόγος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Direct vs Indirect speech'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ευθύς vs Πλάγιος λόγος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Direct vs Indirect speech\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5594,11 +5594,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Υποκείμενο και κατηγόρημα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Subject and predicate'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Υποκείμενο και κατηγόρημα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Subject and predicate\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5618,11 +5618,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Κύρια ιδέα παραγράφου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Main idea of a paragraph'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Κύρια ιδέα παραγράφου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Main idea of a paragraph\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5642,11 +5642,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επιλογή κατάλληλου συνδέσμου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Choosing the right conjunction'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Επιλογή κατάλληλου συνδέσμου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Choosing the right conjunction\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5666,11 +5666,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επίσημος vs ανεπίσημος χαιρετισμός\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formal vs informal greeting'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Επίσημος vs ανεπίσημος χαιρετισμός» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Formal vs informal greeting\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5690,11 +5690,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Απλή παρομοίωση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic simile'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Απλή παρομοίωση» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic simile\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5714,11 +5714,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύνδεσμοι αιτίας-αποτελέσματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Cause-effect connectors'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σύνδεσμοι αιτίας-αποτελέσματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Cause-effect connectors\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5738,11 +5738,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δομή επίσημης επιστολής\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formal letter structure'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Δομή επίσημης επιστολής» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Formal letter structure\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5762,11 +5762,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βαθμοί επιθέτου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Degrees of adjectives'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βαθμοί επιθέτου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Degrees of adjectives\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5786,11 +5786,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση μετοχής\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Recognizing participles'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αναγνώριση μετοχής» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Recognizing participles\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5810,11 +5810,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σύνδεσμοι σύνθετης πρότασης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Compound sentence connectors'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σύνδεσμοι σύνθετης πρότασης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Compound sentence connectors\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5834,11 +5834,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ερμηνεία λογοτεχνικού κειμένου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Interpreting a literary text'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ερμηνεία λογοτεχνικού κειμένου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Interpreting a literary text\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5858,11 +5858,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Συνοχή ανάμεσα σε παραγράφους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Flow between paragraphs'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Συνοχή ανάμεσα σε παραγράφους» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Flow between paragraphs\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5882,11 +5882,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Βασική αναγνώριση παθητικής φωνής\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Basic passive voice recognition'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Βασική αναγνώριση παθητικής φωνής» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Basic passive voice recognition\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5906,11 +5906,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αναγνώριση σκοπού κειμένου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Identifying a text's purpose'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αναγνώριση σκοπού κειμένου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Identifying a text's purpose\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5930,11 +5930,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Επίσημο vs ανεπίσημο ύφος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formal vs informal register'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Επίσημο vs ανεπίσημο ύφος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Formal vs informal register\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -5954,11 +5954,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ποιότητα επιλόγου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Quality of a conclusion'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ποιότητα επιλόγου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Quality of a conclusion\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -6290,11 +6290,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μύθος vs Ιστορία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Myth vs History'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μύθος vs Ιστορία» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Myth vs History\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6314,11 +6314,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Άθλοι του Ηρακλή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Labors of Heracles'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Άθλοι του Ηρακλή» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Labors of Heracles\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6338,11 +6338,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αιτία Τρωικού Πολέμου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Cause of the Trojan War'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αιτία Τρωικού Πολέμου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Cause of the Trojan War\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6362,11 +6362,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Το ταξίδι του Οδυσσέα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Odysseus's journey'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Το ταξίδι του Οδυσσέα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Odysseus's journey\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6386,11 +6386,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μινωικός πολιτισμός\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Minoan civilization'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μινωικός πολιτισμός» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Minoan civilization\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6410,11 +6410,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Μυκηναίοι/Αχαιοί\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Mycenaeans/Achaeans'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Μυκηναίοι/Αχαιοί» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Mycenaeans/Achaeans\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6434,11 +6434,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Γέννηση της πόλης-κράτους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Rise of the city-state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Γέννηση της πόλης-κράτους» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Rise of the city-state\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6458,11 +6458,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Καταγωγή Ολυμπιακών Αγώνων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Origin of the Olympic Games'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Καταγωγή Ολυμπιακών Αγώνων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Origin of the Olympic Games\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6482,11 +6482,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Έτος Ελληνικής Επανάστασης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Year of the Greek Revolution'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Έτος Ελληνικής Επανάστασης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Year of the Greek Revolution\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6506,11 +6506,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ο Καποδίστριας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Kapodistrias'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ο Καποδίστριας» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Kapodistrias\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6530,11 +6530,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ναυμαχία του Ναβαρίνου\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Battle of Navarino'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ναυμαχία του Ναβαρίνου» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Battle of Navarino\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6554,11 +6554,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Δημιουργία ελληνικού κράτους\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Formation of the Greek state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Δημιουργία ελληνικού κράτους» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Formation of the Greek state\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
@@ -6578,11 +6578,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανοιχτό vs κλειστό κύκλωμα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Open vs closed circuit'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ανοιχτό vs κλειστό κύκλωμα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Open vs closed circuit\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -6602,11 +6602,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Σειρά πεπτικού συστήματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Order of the digestive system'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Σειρά πεπτικού συστήματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Order of the digestive system\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -6626,11 +6626,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Ανανεώσιμες vs μη ανανεώσιμες πηγές\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Renewable vs non-renewable energy'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Ανανεώσιμες vs μη ανανεώσιμες πηγές» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Renewable vs non-renewable energy\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",
@@ -6650,11 +6650,11 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Khanmigo",
-      "titleEn": "Ask Khanmigo",
-      "descriptionEl": "Άνοιξε το Khanmigo και πες: «Δυσκολεύομαι στο \"Αλλαγές κατάστασης ύλης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του 2 νέα παραδείγματα με αυτόν τον τρόπο.",
-      "descriptionEn": "Open Khanmigo and say: \"I'm struggling with 'Changes of state'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work through 2 new examples this way.",
-      "toolId": "khanmigo"
+      "titleEl": "Έλεγξε με το Perplexity",
+      "titleEn": "Check with Perplexity",
+      "descriptionEl": "Ψάξε το θέμα «Αλλαγές κατάστασης ύλης» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Search for \"Changes of state\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "toolId": "perplexity"
     },
     {
       "titleEl": "Έλεγξε με το ChatGPT",

@@ -1317,7 +1317,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite what you remember",
       "descriptionEl": "Ξαναγράψε τις 2-3 προτάσεις του πρώτου βήματος, αυτή τη φορά σωστά, και σημείωσε ποια πηγή σε βοήθησε να το διορθώσεις.",
       "descriptionEn": "Rewrite the 2-3 sentences from step one, this time correctly, and note which source helped you fix it.",
-      "toolId": "elements-of-ai"
+      "toolId": null
     }
   ],
   "history-lyk.1922-military-defeat-only": [
@@ -1340,7 +1340,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite what you remember",
       "descriptionEl": "Ξαναγράψε τις 2-3 προτάσεις του πρώτου βήματος, αυτή τη φορά σωστά, και σημείωσε ποια πηγή σε βοήθησε να το διορθώσεις.",
       "descriptionEn": "Rewrite the 2-3 sentences from step one, this time correctly, and note which source helped you fix it.",
-      "toolId": "elements-of-ai"
+      "toolId": null
     }
   ],
   "history-lyk.refugee-spontaneous": [
@@ -1363,7 +1363,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite what you remember",
       "descriptionEl": "Ξαναγράψε τις 2-3 προτάσεις του πρώτου βήματος, αυτή τη φορά σωστά, και σημείωσε ποια πηγή σε βοήθησε να το διορθώσεις.",
       "descriptionEn": "Rewrite the 2-3 sentences from step one, this time correctly, and note which source helped you fix it.",
-      "toolId": "elements-of-ai"
+      "toolId": null
     }
   ],
   "history-lyk.greeks-majority-asia-minor": [
@@ -1386,7 +1386,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite what you remember",
       "descriptionEl": "Ξαναγράψε τις 2-3 προτάσεις του πρώτου βήματος, αυτή τη φορά σωστά, και σημείωσε ποια πηγή σε βοήθησε να το διορθώσεις.",
       "descriptionEn": "Rewrite the 2-3 sentences from step one, this time correctly, and note which source helped you fix it.",
-      "toolId": "elements-of-ai"
+      "toolId": null
     }
   ],
   "efl-lyk.present-perfect-discourse": [
@@ -2673,11 +2673,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Θέση του DNA\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
-      "descriptionEn": "Ask Wolfram Alpha something related to \"Location of DNA\" (e.g. a definition or a fact) and compare it with what you wrote.",
-      "toolId": "wolfram-alpha"
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Θέση του DNA\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Location of DNA\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
     }
   ],
 
@@ -2697,11 +2697,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Κληρονομικότητα από τους γονείς\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
-      "descriptionEn": "Ask Wolfram Alpha something related to \"Inheritance from parents\" (e.g. a definition or a fact) and compare it with what you wrote.",
-      "toolId": "wolfram-alpha"
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Κληρονομικότητα από τους γονείς\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Inheritance from parents\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
     }
   ],
 
@@ -2721,11 +2721,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Έννοια βιοποικιλότητας\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
-      "descriptionEn": "Ask Wolfram Alpha something related to \"Concept of biodiversity\" (e.g. a definition or a fact) and compare it with what you wrote.",
-      "toolId": "wolfram-alpha"
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Έννοια βιοποικιλότητας\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Concept of biodiversity\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
     }
   ],
 
@@ -2745,11 +2745,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Αιτία εξαφάνισης είδους\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
-      "descriptionEn": "Ask Wolfram Alpha something related to \"Cause of species extinction\" (e.g. a definition or a fact) and compare it with what you wrote.",
-      "toolId": "wolfram-alpha"
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Αιτία εξαφάνισης είδους\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Cause of species extinction\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
     }
   ],
 
@@ -2769,11 +2769,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha κάτι σχετικό με \"Σκοπός αναπαραγωγής\" (π.χ. έναν ορισμό ή ένα γεγονός) και σύγκρινε με ό,τι έγραψες.",
-      "descriptionEn": "Ask Wolfram Alpha something related to \"Purpose of reproduction\" (e.g. a definition or a fact) and compare it with what you wrote.",
-      "toolId": "wolfram-alpha"
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε το θέμα \"Σκοπός αναπαραγωγής\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
+      "descriptionEn": "Explain the topic \"Purpose of reproduction\" to a classmate in 2-3 sentences, without notes.",
+      "toolId": null
     }
   ],
 

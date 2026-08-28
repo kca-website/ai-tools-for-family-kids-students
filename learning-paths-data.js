@@ -972,7 +972,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite your sentences",
       "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος σωστές, και φτιάξε μία ακόμα καινούρια πρόταση για «Τεκμηρίωση επιχειρήματος» μόνος/η, χωρίς εργαλείο.",
       "descriptionEn": "Rewrite the sentences from step one correctly, then write one brand-new sentence for \"Argument evidence\" on your own, without any tool.",
-      "toolId": "grammarly"
+      "toolId": null
     }
   ],
   "ekthesi.text-type-ignore": [
@@ -995,7 +995,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite your sentences",
       "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος σωστές, και φτιάξε μία ακόμα καινούρια πρόταση για «Κειμενικά είδη» μόνος/η, χωρίς εργαλείο.",
       "descriptionEn": "Rewrite the sentences from step one correctly, then write one brand-new sentence for \"Text types\" on your own, without any tool.",
-      "toolId": "grammarly"
+      "toolId": null
     }
   ],
   "ekthesi.register-confusion": [
@@ -1018,7 +1018,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite your sentences",
       "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος σωστές, και φτιάξε μία ακόμα καινούρια πρόταση για «Επίσημο ύφος» μόνος/η, χωρίς εργαλείο.",
       "descriptionEn": "Rewrite the sentences from step one correctly, then write one brand-new sentence for \"Formal register\" on your own, without any tool.",
-      "toolId": "grammarly"
+      "toolId": null
     }
   ],
   "ekthesi.intro-conclusion-function": [
@@ -1041,7 +1041,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite your sentences",
       "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος σωστές, και φτιάξε μία ακόμα καινούρια πρόταση για «Δομή κειμένου» μόνος/η, χωρίς εργαλείο.",
       "descriptionEn": "Rewrite the sentences from step one correctly, then write one brand-new sentence for \"Text structure\" on your own, without any tool.",
-      "toolId": "grammarly"
+      "toolId": null
     }
   ],
   "ekthesi.summary-copying": [
@@ -1064,7 +1064,7 @@ const LEARNING_PATHS = {
       "titleEn": "Rewrite your sentences",
       "descriptionEl": "Ξαναγράψε τις προτάσεις του πρώτου βήματος σωστές, και φτιάξε μία ακόμα καινούρια πρόταση για «Περίληψη» μόνος/η, χωρίς εργαλείο.",
       "descriptionEn": "Rewrite the sentences from step one correctly, then write one brand-new sentence for \"Summarizing\" on your own, without any tool.",
-      "toolId": "grammarly"
+      "toolId": null
     }
   ],
   "functions.one-formula-only": [
@@ -1398,10 +1398,10 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Grammarly",
-      "titleEn": "Ask Grammarly",
-      "descriptionEl": "Άνοιξε το Grammarly, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Χρόνοι σε αφήγηση”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Grammarly, show it your sentences, and ask: \"Do I have this wrong on 'Tenses in narrative'? Explain why, don't just correct them for me.\"",
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Grammarly και δες τι υπογραμμίζει για «Χρόνοι σε αφήγηση». Σκέψου μόνος/η γιατί, πριν δεις τη διόρθωση που προτείνει.",
+      "descriptionEn": "Paste your sentences into Grammarly and see what it underlines for \"Tenses in narrative\". Think through why yourself before looking at the correction it suggests.",
       "toolId": "grammarly"
     },
     {
@@ -1421,10 +1421,10 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Grammarly",
-      "titleEn": "Ask Grammarly",
-      "descriptionEl": "Άνοιξε το Grammarly, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Πλάγιος λόγος”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Grammarly, show it your sentences, and ask: \"Do I have this wrong on 'Reported speech'? Explain why, don't just correct them for me.\"",
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Grammarly και δες τι υπογραμμίζει για «Πλάγιος λόγος». Σκέψου μόνος/η γιατί, πριν δεις τη διόρθωση που προτείνει.",
+      "descriptionEn": "Paste your sentences into Grammarly and see what it underlines for \"Reported speech\". Think through why yourself before looking at the correction it suggests.",
       "toolId": "grammarly"
     },
     {
@@ -1444,10 +1444,10 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Grammarly",
-      "titleEn": "Ask Grammarly",
-      "descriptionEl": "Άνοιξε το Grammarly, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Προχωρημένα False Friends”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Grammarly, show it your sentences, and ask: \"Do I have this wrong on 'Advanced false friends'? Explain why, don't just correct them for me.\"",
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Grammarly και δες τι υπογραμμίζει για «Προχωρημένα False Friends». Σκέψου μόνος/η γιατί, πριν δεις τη διόρθωση που προτείνει.",
+      "descriptionEn": "Paste your sentences into Grammarly and see what it underlines for \"Advanced false friends\". Think through why yourself before looking at the correction it suggests.",
       "toolId": "grammarly"
     },
     {
@@ -1467,10 +1467,10 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Grammarly",
-      "titleEn": "Ask Grammarly",
-      "descriptionEl": "Άνοιξε το Grammarly, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Since vs For”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Grammarly, show it your sentences, and ask: \"Do I have this wrong on 'Since vs For'? Explain why, don't just correct them for me.\"",
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Grammarly και δες τι υπογραμμίζει για «Since vs For». Σκέψου μόνος/η γιατί, πριν δεις τη διόρθωση που προτείνει.",
+      "descriptionEn": "Paste your sentences into Grammarly and see what it underlines for \"Since vs For\". Think through why yourself before looking at the correction it suggests.",
       "toolId": "grammarly"
     },
     {
@@ -1490,10 +1490,10 @@ const LEARNING_PATHS = {
       "toolId": null
     },
     {
-      "titleEl": "Ρώτα το Grammarly",
-      "titleEn": "Ask Grammarly",
-      "descriptionEl": "Άνοιξε το Grammarly, δείξε του τις προτάσεις σου και ρώτα: «Έχω λάθος στο “Collocations με προθέσεις”; Εξήγησέ μου γιατί, μη μου τις διορθώσεις απλώς.»",
-      "descriptionEn": "Open Grammarly, show it your sentences, and ask: \"Do I have this wrong on 'Preposition collocations'? Explain why, don't just correct them for me.\"",
+      "titleEl": "Έλεγξε με το Grammarly",
+      "titleEn": "Check with Grammarly",
+      "descriptionEl": "Επικόλλησε τις προτάσεις σου στο Grammarly και δες τι υπογραμμίζει για «Collocations με προθέσεις». Σκέψου μόνος/η γιατί, πριν δεις τη διόρθωση που προτείνει.",
+      "descriptionEn": "Paste your sentences into Grammarly and see what it underlines for \"Preposition collocations\". Think through why yourself before looking at the correction it suggests.",
       "toolId": "grammarly"
     },
     {
@@ -2793,11 +2793,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν η πρώτη πρόταση δηλώνει καθαρά το κεντρικό νόημα.",
-      "descriptionEn": "Paste your paragraph into Grammarly and check whether the first sentence clearly states the central idea.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε την παράγραφό σου μόνος/η, ή δώσε τη σε έναν συμμαθητή, και έλεγξε αν η πρώτη πρόταση δηλώνει καθαρά το κεντρικό νόημα.",
+      "descriptionEn": "Re-read your paragraph yourself, or give it to a classmate, and check whether the first sentence clearly states the central idea.",
+      "toolId": null
     }
   ],
 
@@ -2817,11 +2817,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν ο τρόπος ανάπτυξης που διάλεξες φαίνεται καθαρά.",
-      "descriptionEn": "Paste your paragraph into Grammarly and check whether the development method you chose comes through clearly.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε την παράγραφό σου μόνος/η, ή δώσε τη σε έναν συμμαθητή, και έλεγξε αν ο τρόπος ανάπτυξης που διάλεξες φαίνεται καθαρά.",
+      "descriptionEn": "Re-read your paragraph yourself, or give it to a classmate, and check whether the development method you chose comes through clearly.",
+      "toolId": null
     }
   ],
 
@@ -2841,11 +2841,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και δες αν προτείνει βελτιώσεις στη ροή ή τη συνοχή.",
-      "descriptionEn": "Paste your paragraph into Grammarly and see whether it suggests improvements to flow or coherence.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε την παράγραφό σου μόνος/η, ή δώσε τη σε έναν συμμαθητή, και δες αν υπάρχουν σημεία που κόβουν τη ροή ή τη συνοχή.",
+      "descriptionEn": "Re-read your paragraph yourself, or give it to a classmate, and see whether there are spots that break the flow or coherence.",
+      "toolId": null
     }
   ],
 
@@ -2865,11 +2865,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την περίληψή σου στο Grammarly, μέτρα τις λέξεις, και έλεγξε αν κράτησες τις πιο σημαντικές ιδέες.",
-      "descriptionEn": "Paste your summary into Grammarly, count the words, and check whether you kept the most important ideas.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Μέτρα μόνος/η τις λέξεις της περίληψής σου, και έλεγξε αν κράτησες τις πιο σημαντικές ιδέες.",
+      "descriptionEn": "Count the words in your summary yourself, and check whether you kept the most important ideas.",
+      "toolId": null
     }
   ],
 
@@ -2889,11 +2889,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Ρώτα το Grammarly (ή περιέγραψε στο σχόλιό σου) αν η δική σου ανάλυση φαίνεται σαφής και τεκμηριωμένη.",
-      "descriptionEn": "Ask Grammarly (or describe in a comment) whether your own analysis reads clearly and is well supported.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε μόνος/η αν η δική σου ανάλυση φαίνεται σαφής και τεκμηριωμένη.",
+      "descriptionEn": "Re-read it yourself and check whether your own analysis reads clearly and is well supported.",
+      "toolId": null
     }
   ],
 
@@ -2913,11 +2913,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε το κείμενό σου στο Grammarly και έλεγξε αν η αντίκρουση της αντίθετης άποψης είναι σαφής.",
-      "descriptionEn": "Paste your text into Grammarly and check whether your response to the counter-view is clear.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε το κείμενό σου μόνος/η, ή δώσε το σε έναν συμμαθητή, και έλεγξε αν η αντίκρουση της αντίθετης άποψης είναι σαφής.",
+      "descriptionEn": "Re-read your text yourself, or give it to a classmate, and check whether your response to the counter-view is clear.",
+      "toolId": null
     }
   ],
 
@@ -2937,11 +2937,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε το πλάνο σου στο Grammarly και έλεγξε αν κάποια παράγραφος είναι αισθητά πιο αδύναμη από τις άλλες.",
-      "descriptionEn": "Paste your outline into Grammarly and check whether any paragraph is noticeably weaker than the others.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε το πλάνο σου μόνος/η, ή δώσε το σε έναν συμμαθητή, και έλεγξε αν κάποια παράγραφος είναι αισθητά πιο αδύναμη από τις άλλες.",
+      "descriptionEn": "Re-read your outline yourself, or give it to a classmate, and check whether any paragraph is noticeably weaker than the others.",
+      "toolId": null
     }
   ],
 
@@ -2961,11 +2961,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε τη νέα πρόταση στο Grammarly και έλεγξε αν το τεκμήριο είναι πλέον συγκεκριμένο.",
-      "descriptionEn": "Paste the new sentence into Grammarly and check whether the evidence is now concrete.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε τη νέα πρόταση μόνος/η, ή δώσε τη σε έναν συμμαθητή, και έλεγξε αν το τεκμήριο είναι πλέον συγκεκριμένο.",
+      "descriptionEn": "Re-read the new sentence yourself, or give it to a classmate, and check whether the evidence is now concrete.",
+      "toolId": null
     }
   ],
 
@@ -2985,11 +2985,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt-edu"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν διαβάζεται σαν ενιαία σκέψη ή σαν δύο χωριστά σχόλια.",
-      "descriptionEn": "Paste your paragraph into Grammarly and check whether it reads as one unified idea or as two separate comments.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε την παράγραφό σου μόνος/η, ή δώσε τη σε έναν συμμαθητή, και έλεγξε αν διαβάζεται σαν ενιαία σκέψη ή σαν δύο χωριστά σχόλια.",
+      "descriptionEn": "Re-read your paragraph yourself, or give it to a classmate, and check whether it reads as one unified idea or as two separate comments.",
+      "toolId": null
     }
   ],
 
@@ -3009,11 +3009,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt-edu"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την πρότασή σου στο Grammarly και έλεγξε αν είναι αρκετά συγκεκριμένη ή ακόμα γενικόλογη.",
-      "descriptionEn": "Paste your proposal into Grammarly and check whether it's concrete enough or still vague.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε την πρότασή σου μόνος/η, ή δώσε τη σε έναν συμμαθητή, και έλεγξε αν είναι αρκετά συγκεκριμένη ή ακόμα γενικόλογη.",
+      "descriptionEn": "Re-read your proposal yourself, or give it to a classmate, and check whether it's concrete enough or still vague.",
+      "toolId": null
     }
   ],
 
@@ -3033,11 +3033,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt-edu"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την παράγραφό σου στο Grammarly και έλεγξε αν φαίνεται καθαρά η δική σου άποψη, όχι μόνο περιγραφή.",
-      "descriptionEn": "Paste your paragraph into Grammarly and check whether your own view comes through clearly, not just description.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε την παράγραφό σου μόνος/η, ή δώσε τη σε έναν συμμαθητή, και έλεγξε αν φαίνεται καθαρά η δική σου άποψη, όχι μόνο περιγραφή.",
+      "descriptionEn": "Re-read your paragraph yourself, or give it to a classmate, and check whether your own view comes through clearly, not just description.",
+      "toolId": null
     }
   ],
 
@@ -3057,11 +3057,11 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt-edu"
     },
     {
-      "titleEl": "Έλεγξε με το Grammarly",
-      "titleEn": "Check with Grammarly",
-      "descriptionEl": "Επικόλλησε την αντίκρουσή σου στο Grammarly και έλεγξε αν εξηγεί επαρκώς τον λόγο, ή απλά απορρίπτει την άποψη.",
-      "descriptionEn": "Paste your rebuttal into Grammarly and check whether it sufficiently explains the reason, or just dismisses the view.",
-      "toolId": "grammarly"
+      "titleEl": "Ξαναδιάβασε και έλεγξε",
+      "titleEn": "Re-read and check",
+      "descriptionEl": "Ξαναδιάβασε την αντίκρουσή σου μόνος/η, ή δώσε τη σε έναν συμμαθητή, και έλεγξε αν εξηγεί επαρκώς τον λόγο, ή απλά απορρίπτει την άποψη.",
+      "descriptionEn": "Re-read your rebuttal yourself, or give it to a classmate, and check whether it sufficiently explains the reason, or just dismisses the view.",
+      "toolId": null
     }
   ],
 

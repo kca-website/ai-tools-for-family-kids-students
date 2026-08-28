@@ -222,18 +222,6 @@ const TOOLS = {
   },
 
   // ---------- ΕΡΕΥΝΑ & ΜΑΘΗΣΗ ----------
-  "khanmigo": {
-    id: "khanmigo",
-    name: "Khanmigo (Khan Academy)",
-    url: "https://www.khanacademy.org/khan-labs",
-    category: "research",
-    logo: null,
-    minAge: 5,
-    minAgeNote: "Σχεδιασμένο για μαθητές όλων των βαθμίδων. Κάτω των 13, ο λογαριασμός δημιουργείται και διαχειρίζεται από γονέα.",
-    shortDescEl: "AI εκπαιδευτικός βοηθός πάνω στο Khan Academy. Καθοδηγεί με ερωτήσεις αντί να δίνει έτοιμη απάντηση.",
-    shortDescEn: "AI tutor built on Khan Academy. Guides with Socratic questions instead of handing over answers.",
-    greekTips: "Διαθέσιμο και στα ελληνικά. Εξαιρετικό για εξάσκηση στα Μαθηματικά Δημοτικού.",
-  },
   "khan-academy-kids": {
     id: "khan-academy-kids",
     name: "Khan Academy Kids",
@@ -503,15 +491,6 @@ const PATHS = {
           cautionEn: "",
         },
         {
-          toolId: "khanmigo",
-          useCaseEl: "Εξάσκηση μαθηματικών και ανάγνωσης με καθοδήγηση, όχι έτοιμες απαντήσεις.",
-          useCaseEn: "Guided math and reading practice, not handed over answers.",
-          howToEl: "Δημιούργησε εσύ τον λογαριασμό Khan Academy για το παιδί και σύνδεσέ τον με το σχολικό του πρόγραμμα.",
-          howToEn: "Create the Khan Academy account yourself for the child and link it to their school curriculum.",
-          cautionEl: "Επί πληρωμή, περίπου 44 δολάρια το έτος. Υπάρχει δωρεάν εκδοχή του Khan Academy χωρίς τον AI tutor.",
-          cautionEn: "Paid, around $44 a year. A free Khan Academy version without the AI tutor also exists.",
-        },
-        {
           toolId: "photomath",
           useCaseEl: "Γρήγορος έλεγχος αν μια λύση μαθηματικού προβλήματος είναι σωστή.",
           useCaseEn: "Quick check of whether a math problem's solution is correct.",
@@ -604,15 +583,6 @@ const PATHS = {
           useCaseEn: "To draw and see how AI guesses what you're drawing.",
           howToEl: "Απλά ζωγράφισε. Δεν χρειάζεται να γράψεις τίποτα.",
           howToEn: "Just draw. No typing needed.",
-          cautionEl: "",
-          cautionEn: "",
-        },
-        {
-          toolId: "khanmigo",
-          useCaseEl: "Όταν κολλάς σε μαθηματικά ή ανάγνωση, σε βοηθάει με ερωτήσεις να βρεις μόνος σου τη λύση.",
-          useCaseEn: "When you're stuck on math or reading, it helps you find the answer yourself through questions.",
-          howToEl: "Προσπάθησε πρώτα μόνος σου, μετά ρώτα. Δεν σου δίνει την απάντηση αμέσως, και αυτό είναι καλό.",
-          howToEn: "Try it yourself first, then ask. It won't just give you the answer right away, and that's a good thing.",
           cautionEl: "",
           cautionEn: "",
         },

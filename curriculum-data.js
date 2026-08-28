@@ -27,22 +27,22 @@ const SUBJECTS = [
 const CURRICULUM = {
   primary: {
     language: {
-      toolIds: ["khanmigo", "autodraw", "chatgpt", "claude", "gemini", "notebooklm"],
+      toolIds: ["perplexity", "autodraw", "chatgpt", "claude", "gemini", "notebooklm"],
       noteEl: "Κατανόηση κειμένου με καθοδηγητικές ερωτήσεις, οπτικοποίηση ιστοριών με ζωγραφική.",
       noteEn: "Reading comprehension through guided questions, visualizing stories through drawing.",
     },
     math: {
-      toolIds: ["khanmigo", "photomath", "chatgpt", "claude", "gemini", "wolfram-alpha", "notebooklm"],
+      toolIds: ["perplexity", "photomath", "chatgpt", "claude", "gemini", "wolfram-alpha", "notebooklm"],
       noteEl: "Εξάσκηση με καθοδήγηση και έλεγχος λύσης μετά την προσπάθεια.",
       noteEn: "Guided practice and solution checking after the child's attempt.",
     },
     science: {
-      toolIds: ["khanmigo", "chatgpt", "claude", "perplexity", "gemini", "notebooklm"],
+      toolIds: ["chatgpt", "claude", "perplexity", "gemini", "notebooklm"],
       noteEl: "Απλή εξήγηση εννοιών Φυσικών Επιστημών με ερωτήσεις, όχι έτοιμες απαντήσεις.",
       noteEn: "Simple science concept explanations through questions, not ready answers.",
     },
     history: {
-      toolIds: ["khanmigo", "chatgpt", "claude", "perplexity", "gemini", "notebooklm"],
+      toolIds: ["chatgpt", "claude", "perplexity", "gemini", "notebooklm"],
       noteEl: "Απλή εξήγηση ιστορικών γεγονότων με καθοδηγητικές ερωτήσεις.",
       noteEn: "Simple explanation of historical events through guided questions.",
     },

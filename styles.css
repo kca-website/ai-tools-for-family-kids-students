@@ -1431,3 +1431,35 @@ main {
   margin-right: 4px;
   vertical-align: middle;
 }
+
+/* "Χωρίς Cookies" badge -> αναδιπλούμενη εξήγηση, καθαρό HTML <details>,
+   δουλεύει με πληκτρολόγιο/screen reader χωρίς καμία γραμμή JavaScript. */
+.privacy-badge-details {
+  display: inline-block;
+  vertical-align: top;
+}
+.privacy-badge-details summary {
+  list-style: none;
+  cursor: pointer;
+}
+.privacy-badge-details summary::-webkit-details-marker {
+  display: none;
+}
+.privacy-badge-details summary::after {
+  content: " ⓘ";
+  opacity: 0.8;
+}
+.privacy-badge-details[open] summary {
+  border-radius: 999px 999px 0 0;
+}
+.privacy-badge-explainer {
+  max-width: 280px;
+  margin: 4px 0 0;
+  padding: 10px 14px;
+  background: #F0F7FF;
+  border: 1px solid #E3E8F0;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #334155;
+}

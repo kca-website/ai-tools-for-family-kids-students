@@ -47,6 +47,7 @@
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
       badgeZeroTracking: "Χωρίς Cookies",
+      badgeZeroTrackingExplainer: "Δεν αποθηκεύουμε τίποτα για εσάς ή το παιδί σας — ούτε cookies, ούτε λογαριασμό, ούτε ιστορικό. Κάθε φορά που ανοίγετε τη σελίδα ξεκινάτε από το μηδέν, όπως θα διαβάζατε ένα βιβλίο.",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
       heroQuizCta: "Κάνε το Διαγνωστικό σε 2 λεπτά",
@@ -135,6 +136,7 @@
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
       badgeZeroTracking: "No Cookies",
+      badgeZeroTrackingExplainer: "We don't store anything about you or your child — no cookies, no account, no history. Every time you open the page you start fresh, like reading a book.",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
       heroQuizCta: "Take the 2-minute Diagnostic",
@@ -1064,11 +1066,18 @@ function renderToolGrid(pathTools, targetElement) {
       const label = state.lang === "el" ? opt.textEl : opt.textEn;
       return `<button type="button" class="quiz-option" data-option-index="${idx}">${escapeHtml(label)}</button>`;
     }).join("");
+    els.quizContent.setAttribute("aria-live", "polite");
+    els.quizContent.setAttribute("role", "group");
+    els.quizContent.setAttribute("aria-label", t("quizQuestionOf", { current, total }));
     els.quizContent.innerHTML = `
       <div class="quiz-progress">${t("quizQuestionOf", { current, total })}</div>
-      <p class="quiz-question-text">${escapeHtml(questionText)}</p>
+      <p class="quiz-question-text" tabindex="-1">${escapeHtml(questionText)}</p>
       <div class="quiz-options">${optionsHtml}</div>
     `;
+    // Μεταφέρουμε το focus στη νέα ερώτηση, ώστε χρήστες πληκτρολογίου/screen reader
+    // να μην χρειάζεται να κάνουν Tab από την αρχή της σελίδας μετά από κάθε απάντηση.
+    const questionHeading = els.quizContent.querySelector(".quiz-question-text");
+    if (questionHeading) questionHeading.focus();
     els.quizContent.querySelectorAll(".quiz-option").forEach((btn) => {
       btn.addEventListener("click", () => {
         const idx = Number(btn.dataset.optionIndex);
@@ -1333,12 +1342,17 @@ function renderToolGrid(pathTools, targetElement) {
     const optionsHtml = question.options.map((opt, idx) => {
       return `<button type="button" class="quiz-option" data-option-index="${idx}">${escapeHtml(opt.text)}</button>`;
     }).join("");
+    els.quizContent.setAttribute("aria-live", "polite");
+    els.quizContent.setAttribute("role", "group");
+    els.quizContent.setAttribute("aria-label", t("quizQuestionOf", { current, total }));
     els.quizContent.innerHTML = `
       <p class="quiz-pick-heading">${t('parentQuizTitle')}</p>
       <div class="quiz-progress">${t("quizQuestionOf", { current, total })}</div>
-      <p class="quiz-question-text">${escapeHtml(question.text)}</p>
+      <p class="quiz-question-text" tabindex="-1">${escapeHtml(question.text)}</p>
       <div class="quiz-options">${optionsHtml}</div>
     `;
+    const questionHeading = els.quizContent.querySelector(".quiz-question-text");
+    if (questionHeading) questionHeading.focus();
     els.quizContent.querySelectorAll(".quiz-option").forEach((btn) => {
       btn.addEventListener("click", () => {
         const idx = Number(btn.dataset.optionIndex);

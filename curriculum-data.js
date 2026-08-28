@@ -70,9 +70,9 @@ const CURRICULUM = {
       noteEn: "Physics/Chemistry concept explanations and calculations.",
     },
     history: {
-      toolIds: ["chatgpt"],
-      noteEl: "Οργάνωση σημείων για παρουσίαση, όχι έτοιμο κείμενο.",
-      noteEn: "Organizing points for a presentation, not ready-made text.",
+      toolIds: ["chatgpt", "perplexity"],
+      noteEl: "Οργάνωση σημείων για παρουσίαση, και έλεγχος γεγονότων με πηγές πριν τα εμπιστευτείς.",
+      noteEn: "Organizing points for a presentation, and checking facts against sources before trusting them.",
     },
     "foreign-language": {
       toolIds: ["gemini", "chatgpt", "erla"],

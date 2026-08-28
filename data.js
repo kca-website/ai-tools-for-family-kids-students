@@ -654,10 +654,10 @@ const PATHS = {
       tools: [
         {
           toolId: "erla",
-          useCaseEl: "Ενίσχυση της ελληνικής γλώσσας, ορθογραφία και εκφραστικότητα.",
-          useCaseEn: "Strengthening Greek language, spelling, and expression.",
-          howToEl: "Ελληνικό εργαλείο. Κατάλληλο για μαθήματα Νεοελληνικής Γλώσσας.",
-          howToEn: "Greek tool. Suitable for Modern Greek Language classes.",
+          useCaseEl: "Εκμάθηση ξένης γλώσσας (π.χ. Αγγλικά) μέσα από ακρόαση, ανάγνωση και συνομιλία με AI.",
+          useCaseEn: "Foreign language learning (e.g. English) through listening, reading, and conversation with AI.",
+          howToEl: "Εφαρμογή κινητού με ελληνική διεπαφή. ΔΕΝ είναι εργαλείο για το μάθημα Νεοελληνικής Γλώσσας ή για έλεγχο εκθέσεων.",
+          howToEn: "Mobile app with a Greek-language interface. This is NOT a tool for Modern Greek Language class or for checking essays.",
           cautionEl: "",
           cautionEn: "",
         },
@@ -714,10 +714,10 @@ const PATHS = {
       tools: [
         {
           toolId: "erla",
-          useCaseEl: "Για να βελτιώσεις τα ελληνικά σου και να γράφεις σωστά.",
-          useCaseEn: "To improve your Greek and write correctly.",
-          howToEl: "Χρησιμοποίησέ το για να ελέγχεις τις εκθέσεις σου.",
-          howToEn: "Use it to check your essays.",
+          useCaseEl: "Για να εξασκηθείς σε μια ξένη γλώσσα (π.χ. Αγγλικά) με ακρόαση, ανάγνωση και συνομιλία.",
+          useCaseEn: "To practice a foreign language (e.g. English) through listening, reading, and conversation.",
+          howToEl: "Μόνο ως εφαρμογή κινητού (App Store / Google Play). ΔΕΝ ελέγχει ελληνικά κείμενα ή εκθέσεις.",
+          howToEn: "Only as a mobile app (App Store / Google Play). It does NOT check Greek texts or essays.",
           cautionEl: "",
           cautionEn: "",
         },
@@ -763,15 +763,15 @@ const PATHS = {
 
   high: {
     guardian: {
-      introEl: "Στο Λύκειο το φάσμα εργαλείων είναι σχεδόν πλήρες, αλλά μερικά σοβαρά εργαλεία, όπως το Claude, το Perplexity και το NotebookLM, παραμένουν επίσημα 18 ετών και άνω χωρίς διαδρομή γονικής συγκατάθεσης. Η έμφαση μετατοπίζεται από τον περιορισμό στη σωστή, παραγωγική χρήση για προετοιμασία εξετάσεων, έρευνα και εργασίες.",
-      introEn: "In high school the range of tools is nearly full, but a few serious tools, like Claude, Perplexity, and NotebookLM, remain officially 18 and up with no parental consent path. The focus shifts from restriction to proper, productive use for exam prep, research, and projects.",
+      introEl: "Στο Λύκειο το φάσμα εργαλείων είναι σχεδόν πλήρες, αλλά μερικά σοβαρά εργαλεία, όπως το Claude και το NotebookLM, παραμένουν επίσημα 18 ετών και άνω χωρίς διαδρομή γονικής συγκατάθεσης. Η έμφαση μετατοπίζεται από τον περιορισμό στη σωστή, παραγωγική χρήση για προετοιμασία εξετάσεων, έρευνα και εργασίες.",
+      introEn: "In high school the range of tools is nearly full, but a few serious tools, like Claude and NotebookLM, remain officially 18 and up with no parental consent path. The focus shifts from restriction to proper, productive use for exam prep, research, and projects.",
       tools: [
         {
           toolId: "grammarly",
-          useCaseEl: "Έλεγχος γραμματικής, ύφους και δομής σε εργασίες και έκθεση.",
-          useCaseEn: "Grammar, style, and structure checking for assignments and essays.",
-          howToEl: "Δωρεάν βασική έκδοση. Χρήσιμο ως δεύτερο μάτι μετά την πρώτη γραφή.",
-          howToEn: "Free basic version. Useful as a second pair of eyes after the first draft.",
+          useCaseEl: "Έλεγχος γραμματικής, ύφους και δομής σε αγγλικά κείμενα (π.χ. εργασίες Αγγλικών, IELTS/Cambridge προετοιμασία).",
+          useCaseEn: "Grammar, style, and structure checking for English-language texts (e.g. English class assignments, IELTS/Cambridge prep).",
+          howToEl: "Δωρεάν βασική έκδοση. Δουλεύει μόνο σε αγγλικό κείμενο — δεν βοηθάει στην ελληνική έκθεση.",
+          howToEn: "Free basic version. Works only on English text — it does not help with Greek-language essays.",
           cautionEl: "",
           cautionEn: "",
         },
@@ -781,6 +781,15 @@ const PATHS = {
           useCaseEn: "Introduction to Artificial Intelligence for Computer Science classes.",
           howToEl: "Δωρεάν μάθημα στα ελληνικά. Κατάλληλο για εξωσχολική μελέτη.",
           howToEn: "Free course in Greek. Suitable for extracurricular study.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
+          toolId: "perplexity",
+          useCaseEl: "Έρευνα με πηγές για Ιστορία, Έκθεση ή οποιοδήποτε μάθημα χρειάζεται τεκμηρίωση — δείχνει από πού προέρχεται κάθε απάντηση.",
+          useCaseEn: "Sourced research for History, Composition, or any subject that needs evidence — shows where each answer comes from.",
+          howToEl: "13 ετών και άνω βάσει των Όρων Χρήσης (χωρίς επίσημη διαδικασία ηλικιακής επαλήθευσης). Καλή συνήθεια: μάθε στο παιδί να ανοίγει και να ελέγχει τουλάχιστον μία πηγή που παραθέτει.",
+          howToEn: "13 and up per the Terms of Use (no formal age verification process). Good habit to teach: open and check at least one of the sources it cites.",
           cautionEl: "",
           cautionEn: "",
         },
@@ -846,12 +855,12 @@ const PATHS = {
       tools: [
         {
           toolId: "grammarly",
-          useCaseEl: "Για να γράψεις την έκθεση και τις εργασίες σου με σωστή δομή.",
-          useCaseEn: "To write your essay and assignments with proper structure.",
-          howToEl: "Χρησιμοποίησέ το μετά την πρώτη γραφή, για έλεγχο γλώσσας και δομής.",
-          howToEn: "Use it after your first draft, to check language and structure.",
-          cautionEl: "Μην αντιγράφεις έτοιμα κείμενα. Χρησιμοποίησέ το για δομή και ιδέες.",
-          cautionEn: "Don't copy ready-made texts. Use it for structure and ideas.",
+          useCaseEl: "Για να ελέγξεις αγγλικά κείμενα (εργασίες Αγγλικών, προετοιμασία IELTS/Cambridge) με σωστή δομή και γραμματική.",
+          useCaseEn: "To check English-language texts (English class assignments, IELTS/Cambridge prep) for correct structure and grammar.",
+          howToEl: "Χρησιμοποίησέ το μετά την πρώτη γραφή, μόνο σε αγγλικό κείμενο — δεν δουλεύει στα ελληνικά.",
+          howToEn: "Use it after your first draft, only on English text — it doesn't work on Greek.",
+          cautionEl: "Δεν βοηθάει στην ελληνική έκθεση. Μην αποδέχεσαι τυφλά κάθε πρόταση διόρθωσης χωρίς να καταλαβαίνεις γιατί.",
+          cautionEn: "It doesn't help with Greek-language essays. Don't blindly accept every suggested correction without understanding why.",
         },
         {
           toolId: "elements-of-ai",
@@ -859,6 +868,15 @@ const PATHS = {
           useCaseEn: "To learn the basics of Artificial Intelligence.",
           howToEl: "Δωρεάν μάθημα. Μπορείς να το κάνεις παράλληλα με το σχολείο.",
           howToEn: "Free course. You can do it alongside school.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
+          toolId: "perplexity",
+          useCaseEl: "Για έρευνα με πηγές σε Ιστορία, Έκθεση ή οποιοδήποτε μάθημα χρειάζεται τεκμηρίωση — δείχνει από πού βγαίνει κάθε απάντηση.",
+          useCaseEn: "For sourced research in History, Composition, or any subject needing evidence — shows where each answer comes from.",
+          howToEl: "13 ετών και άνω βάσει Όρων Χρήσης. Άνοιξε πάντα τουλάχιστον μία από τις πηγές που παραθέτει πριν το εμπιστευτείς.",
+          howToEn: "13 and up per the Terms of Use. Always open at least one of the sources it cites before trusting it.",
           cautionEl: "",
           cautionEn: "",
         },

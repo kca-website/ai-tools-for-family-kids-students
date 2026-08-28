@@ -671,6 +671,15 @@ const PATHS = {
           cautionEn: "Can confidently give wrong information. Needs source checking for assignments.",
         },
         {
+          toolId: "perplexity",
+          useCaseEl: "Έρευνα με πηγές για Ιστορία ή οποιοδήποτε μάθημα χρειάζεται τεκμηρίωση — δείχνει από πού προέρχεται κάθε απάντηση.",
+          useCaseEn: "Sourced research for History or any subject that needs evidence — shows where each answer comes from.",
+          howToEl: "13 ετών και άνω βάσει των Όρων Χρήσης (χωρίς επίσημη διαδικασία ηλικιακής επαλήθευσης). Μάθε στο παιδί να ανοίγει τουλάχιστον μία πηγή που παραθέτει πριν την εμπιστευτεί.",
+          howToEn: "13 and up per the Terms of Use (no formal age verification process). Teach your child to open at least one cited source before trusting it.",
+          cautionEl: "",
+          cautionEn: "",
+        },
+        {
           toolId: "gemini",
           useCaseEl: "Βοήθεια σε έρευνα μαθήματος με εικόνες και κώδικα, μέσα σε ασφαλές πλαίσιο με φίλτρα περιεχομένου.",
           useCaseEn: "Help with subject research involving images and code, within a safety filtered environment.",
@@ -729,6 +738,15 @@ const PATHS = {
           howToEn: "Ask for an explanation, not a ready answer. Write 'explain why', not 'give me the solution'.",
           cautionEl: "Μπορεί να κάνει λάθη χωρίς να το καταλάβεις. Έλεγξε πάντα με το βιβλίο σου.",
           cautionEn: "It can make mistakes without you noticing. Always double check with your textbook.",
+        },
+        {
+          toolId: "perplexity",
+          useCaseEl: "Για έρευνα με πηγές σε Ιστορία ή οποιοδήποτε μάθημα χρειάζεται τεκμηρίωση — δείχνει από πού βγαίνει κάθε απάντηση.",
+          useCaseEn: "For sourced research in History or any subject needing evidence — shows where each answer comes from.",
+          howToEl: "13 ετών και άνω βάσει Όρων Χρήσης. Άνοιξε πάντα τουλάχιστον μία από τις πηγές που παραθέτει πριν το εμπιστευτείς.",
+          howToEn: "13 and up per the Terms of Use. Always open at least one of the sources it cites before trusting it.",
+          cautionEl: "",
+          cautionEn: "",
         },
         {
           toolId: "wolfram-alpha",

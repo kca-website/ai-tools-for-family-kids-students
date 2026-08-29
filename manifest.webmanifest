@@ -1,0 +1,44 @@
+{
+  "id": "/",
+  "name": "AI Tools for Family, Kids & Students",
+  "short_name": "AI Tools 4 Kids",
+  "description": "Δωρεάν οδηγός και AI Βοήθεια για μαθητές 6–18, γονείς και εκπαιδευτικούς, με διαγνωστικά τεστ, learning paths και κατάλληλα εργαλεία ανά ηλικία.",
+  "lang": "el",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#F8FAFC",
+  "theme_color": "#3B82C4",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/assets/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Διαγνωστικός Χάρτης",
+      "short_name": "Τεστ",
+      "description": "Κάνε ένα σύντομο διαγνωστικό τεστ.",
+      "url": "/middle/student/quiz?source=pwa-shortcut"
+    },
+    {
+      "name": "AI Βοήθεια",
+      "short_name": "AI Βοήθεια",
+      "description": "Καθοδήγηση με ερωτήσεις και υποδείξεις.",
+      "url": "/high/student/tutor?source=pwa-shortcut"
+    }
+  ]
+}

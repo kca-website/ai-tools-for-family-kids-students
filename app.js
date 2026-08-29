@@ -20,7 +20,7 @@
     lang: "el",
     currentZone: null,
     currentRole: "guardian",
-    currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "guide"
+    currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "tutor" | "guide"
     currentSubject: null, // subjectId ή null = "Όλα"
     a11yFilterOnly: false, // true = δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα
     // Quiz sub-state
@@ -47,15 +47,22 @@
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
-      badgeZeroTracking: "Χωρίς Cookies",
-      badgeZeroTrackingExplainer: "Δεν στέλνουμε τίποτα για εσάς ή το παιδί σας σε κανέναν server — ούτε cookies, ούτε λογαριασμό, ούτε tracking. Αν κάνεις το διαγνωστικό τεστ, το αποτέλεσμα αποθηκεύεται μόνο τοπικά σε αυτή τη συσκευή (browser storage), για να μπορείς να συνεχίσεις αργότερα· μπορείς να το διαγράψεις όποτε θες, με ένα κλικ.",
+      badgeZeroTracking: "Χωρίς Cookies στον οδηγό",
+      badgeZeroTrackingExplainer: "Ο οδηγός, τα εργαλεία και το διαγνωστικό δεν χρησιμοποιούν cookies ούτε απαιτούν λογαριασμό. Το αποτέλεσμα του διαγνωστικού μπορεί να αποθηκευτεί μόνο τοπικά στη συσκευή σου. Μόνο η προαιρετική AI Βοήθεια χρησιμοποιεί Puter: όταν επιλέξεις να συνδεθείς, ισχύουν οι όροι και η πολιτική απορρήτου του Puter.",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
       heroQuizCta: "Κάνε το Διαγνωστικό σε 2 λεπτά",
       heroQuizCtaSub: "Οποιαδήποτε στιγμή, χωρίς διάβασμα πριν. Δείχνει τι ξέρεις ήδη, και μπορείς να το ξανακάνεις σε λίγες εβδομάδες για να δεις την πρόοδο.",
       heroQuizPickPrompt: "Για ποια ζώνη;",
+      heroHelpBadge: "Νέο",
+      heroHelpTitle: "Κόλλησες σε άσκηση;",
+      heroHelpSub: "Η AI Βοήθεια σε καθοδηγεί με ερωτήσεις και μικρές υποδείξεις, χωρίς να σου παραδίδει έτοιμη λύση.",
+      heroHelpNote: "Η βασική πλατφόρμα παραμένει χωρίς λογαριασμό. Η AI Βοήθεια είναι προαιρετική, χρησιμοποιεί Puter και υπόκειται στα δικά του όρια χρήσης.",
+      heroHelpPrimary: "Γονιός Δημοτικού",
+      heroHelpMiddle: "Γυμνάσιο 13+",
+      heroHelpHigh: "Λύκειο",
       backToZones: "Πίσω σε όλες τις ζώνες",
-      footerText: "Ανεξάρτητο έργο. Δεν σχετίζεται με κανέναν οργανισμό ή προμηθευτή AI εργαλείων.",
+      footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Η προαιρετική AI Βοήθεια χρησιμοποιεί τεχνικά την υπηρεσία Puter.",
       emptyState: "Δεν έχουν προστεθεί ακόμα εργαλεία για αυτόν τον συνδυασμό. Έρχονται σύντομα.",
       useCaseLabel: "Για ποια δουλειά",
       howToLabel: "Πώς να το χρησιμοποιήσεις",
@@ -67,6 +74,8 @@
       viewTabAdvanced: "Προχωρημένα",
       viewTabPrompts: "Prompt Generator",
       viewTabQuiz: "Διαγνωστικός Χάρτης",
+      viewTabTutor: "AI Βοήθεια",
+      viewTabTutorParent: "Βοηθός Γονέα",
       viewTabGuide: "Οδηγός",
       // ---------- "Τι ΔΕΝ είναι" + Last checked (νέο) ----------
       notGuideTitle: "Τι ΔΕΝ είναι αυτός ο οδηγός",
@@ -141,15 +150,22 @@
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
-      badgeZeroTracking: "No Cookies",
-      badgeZeroTrackingExplainer: "We never send anything about you or your child to any server — no cookies, no account, no tracking. If you take the diagnostic quiz, the result is saved only locally on this device (browser storage) so you can continue later; you can delete it anytime with one click.",
+      badgeZeroTracking: "No Cookies in the guide",
+      badgeZeroTrackingExplainer: "The guide, tool directory and diagnostic use no cookies and require no account. Diagnostic progress may be stored only on your device. Only the optional AI Help feature uses Puter; if you choose to sign in, Puter’s own terms and privacy policy apply.",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
       heroQuizCta: "Take the 2-minute Diagnostic",
       heroQuizCtaSub: "Anytime, no studying required. It shows what you already know, and you can retake it in a few weeks to see your progress.",
       heroQuizPickPrompt: "For which zone?",
+      heroHelpBadge: "New",
+      heroHelpTitle: "Stuck on an exercise?",
+      heroHelpSub: "AI Help guides you with questions and small hints instead of handing over a finished answer.",
+      heroHelpNote: "The core site remains account-free. AI Help is optional, uses Puter, and is subject to Puter’s own usage limits.",
+      heroHelpPrimary: "Primary parent",
+      heroHelpMiddle: "Middle School 13+",
+      heroHelpHigh: "High School",
       backToZones: "Back to all zones",
-      footerText: "Independent project. Not affiliated with any organization or AI tool vendor.",
+      footerText: "Independent project. It is not an official product or partnership of any AI provider. The optional AI Help feature technically uses Puter.",
       emptyState: "No tools added yet for this combination. Coming soon.",
       useCaseLabel: "Best for",
       howToLabel: "How to use it",
@@ -161,6 +177,8 @@
       viewTabAdvanced: "Advanced",
       viewTabPrompts: "Prompt Generator",
       viewTabQuiz: "Learning Compass",
+      viewTabTutor: "AI Help",
+      viewTabTutorParent: "Parent Helper",
       viewTabGuide: "Guide",
       promptsIntro: "These prompts don't write the assignment for you. They ask what you're thinking first, and the AI responds to that. Fill in your own thinking inside the brackets before copying.",
       promptsEmptyState: "No prompts added yet for this zone. Coming soon.",
@@ -362,6 +380,7 @@
     els.viewTabAdvanced = document.getElementById("viewTabAdvanced");
     els.viewTabPrompts = document.getElementById("viewTabPrompts");
     els.viewTabQuiz = document.getElementById("viewTabQuiz");
+    els.viewTabTutor = document.getElementById("viewTabTutor");
     els.viewTabGuide = document.getElementById("viewTabGuide");
     els.toolsView = document.getElementById("toolsView");
     els.advancedView = document.getElementById("advancedView");
@@ -369,6 +388,8 @@
     els.promptList = document.getElementById("promptList");
     els.quizView = document.getElementById("quizView");
     els.quizContent = document.getElementById("quizContent");
+    els.tutorView = document.getElementById("tutorView");
+    els.tutorMount = document.getElementById("tutorMount");
     els.guideView = document.getElementById("guideView");
     els.guideContent = document.getElementById("guideContent");
     els.pathModalOverlay = document.getElementById("pathModalOverlay");
@@ -659,16 +680,43 @@ function renderToolGrid(pathTools, targetElement) {
 }
 
   // ---------- Rendering: View tabs ----------
+  function isTutorViewAvailable(zoneId = state.currentZone, roleId = state.currentRole) {
+    // Στο Δημοτικό ο Tutor εμφανίζεται μόνο στο λεωφορείο Γονιός/Εκπαιδευτικός.
+    return !(zoneId === "primary" && roleId === "student");
+  }
+
+  function renderTutorView() {
+    if (state.currentView !== "tutor" || !els.tutorMount) return;
+    if (!isTutorViewAvailable()) return;
+    if (window.AITutor && typeof window.AITutor.render === "function") {
+      window.AITutor.render({
+        zoneId: state.currentZone,
+        roleId: state.currentRole,
+        lang: state.lang,
+      });
+    } else {
+      els.tutorMount.innerHTML = '<div class="empty-state">Η AI Βοήθεια δεν φορτώθηκε σωστά.</div>';
+    }
+  }
+
   function renderViewTabs() {
+    const tutorAvailable = isTutorViewAvailable();
+    els.viewTabTutor.hidden = !tutorAvailable;
+    if (tutorAvailable) {
+      els.viewTabTutor.textContent = state.currentRole === "guardian" ? t("viewTabTutorParent") : t("viewTabTutor");
+    }
+
     els.viewTabTools.classList.toggle("active", state.currentView === "tools");
     els.viewTabAdvanced.classList.toggle("active", state.currentView === "advanced");
     els.viewTabPrompts.classList.toggle("active", state.currentView === "prompts");
     els.viewTabQuiz.classList.toggle("active", state.currentView === "quiz");
+    els.viewTabTutor.classList.toggle("active", state.currentView === "tutor");
     els.viewTabGuide.classList.toggle("active", state.currentView === "guide");
     els.toolsView.hidden = state.currentView !== "tools";
     els.advancedView.hidden = state.currentView !== "advanced";
     els.promptsView.hidden = state.currentView !== "prompts";
     els.quizView.hidden = state.currentView !== "quiz";
+    els.tutorView.hidden = state.currentView !== "tutor";
     els.guideView.hidden = state.currentView !== "guide";
   }
 
@@ -1857,7 +1905,7 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   // ---------- Routing (deep links: /{zone}/{role}/{view}) ----------
-  const VALID_VIEWS = ["tools", "advanced", "prompts", "quiz", "guide"];
+  const VALID_VIEWS = ["tools", "advanced", "prompts", "quiz", "tutor", "guide"];
 
   function routePath(zoneId, roleId, viewId) {
     return `/${zoneId}/${roleId}/${viewId}`;
@@ -1887,6 +1935,9 @@ function renderToolGrid(pathTools, targetElement) {
     state.currentZone = zoneId;
     state.currentRole = ROLES.some((r) => r.id === roleId) ? roleId : "guardian";
     state.currentView = VALID_VIEWS.includes(viewId) ? viewId : "tools";
+    if (state.currentView === "tutor" && !isTutorViewAvailable(state.currentZone, state.currentRole)) {
+      state.currentView = "tools";
+    }
     state.currentSubject = null;
     resetQuizState();
   }
@@ -1918,6 +1969,7 @@ function renderToolGrid(pathTools, targetElement) {
     renderViewTabs();
     renderPromptList();
     if (state.currentView === "quiz") renderQuizView();
+    if (state.currentView === "tutor") renderTutorView();
     if (state.currentView === "guide") renderGuide();
     updateDocumentTitle();
   }
@@ -2061,6 +2113,9 @@ function renderToolGrid(pathTools, targetElement) {
 
   function selectRole(roleId) {
     state.currentRole = roleId;
+    if (state.currentView === "tutor" && !isTutorViewAvailable(state.currentZone, state.currentRole)) {
+      state.currentView = "tools";
+    }
     pushRoute();
     renderCurrentRoute();
   }
@@ -2095,6 +2150,7 @@ function renderToolGrid(pathTools, targetElement) {
       renderAdvancedTools();
       renderPromptList();
       if (state.currentView === "quiz") renderQuizView();
+      if (state.currentView === "tutor") renderTutorView();
       if (state.currentView === "guide") renderGuide();
     }
     updateDocumentTitle();
@@ -2136,6 +2192,7 @@ function renderToolGrid(pathTools, targetElement) {
     els.viewTabAdvanced.addEventListener("click", () => selectView("advanced"));
     els.viewTabPrompts.addEventListener("click", () => selectView("prompts"));
     els.viewTabQuiz.addEventListener("click", () => selectView("quiz"));
+    els.viewTabTutor.addEventListener("click", () => selectView("tutor"));
     els.viewTabGuide.addEventListener("click", () => selectView("guide"));
 
     els.pathModalOverlay.addEventListener("click", (e) => {

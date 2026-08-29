@@ -1,4 +1,4 @@
-/** DOM-only refinements loaded after app.js — v3.1. */
+/** DOM-only refinements loaded after app.js — v3.1.1. */
 (function(){
   "use strict";
 
@@ -38,7 +38,9 @@
     ensureQuizDisclaimer();
   }
 
+  // Run once immediately, and again after app.js finishes its DOMContentLoaded init.
   queueMicrotask(refresh);
+  document.addEventListener("DOMContentLoaded", refresh);
 
   const quiz=document.getElementById("quizContent");
   if(quiz){

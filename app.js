@@ -2018,14 +2018,14 @@ function renderToolGrid(pathTools, targetElement) {
     const clearText = state.lang === "el" ? "Διαγραφή αποθηκευμένης προόδου" : "Clear saved progress";
 
     const html = `
-      <div id="continueProgressBanner" class="continue-progress-banner" style="background:var(--color-bg-soft,#F0F7FF);border:1px solid var(--color-border,#E3E8F0);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+      <div id="continueProgressBanner" class="continue-progress-banner">
         <div>
-          <p style="margin:0;font-weight:700;">${escapeHtml(titleText)}</p>
-          <p style="margin:2px 0 0;font-size:0.85rem;color:var(--color-text-muted,#5A6270);">${escapeHtml(subText)}</p>
+          <p class="continue-progress-banner__title">${escapeHtml(titleText)}</p>
+          <p class="continue-progress-banner__sub">${escapeHtml(subText)}</p>
         </div>
-        <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
-          <button type="button" id="continueProgressBtn" style="background:var(--color-accent,#2E6BA3);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:600;cursor:pointer;">${escapeHtml(continueText)}</button>
-          <button type="button" id="clearProgressBtn" style="background:none;border:none;color:var(--color-text-muted,#5A6270);font-size:0.78rem;text-decoration:underline;cursor:pointer;padding:0;">${escapeHtml(clearText)}</button>
+        <div class="continue-progress-banner__actions">
+          <button type="button" id="continueProgressBtn" class="quiz-start-btn">${escapeHtml(continueText)}</button>
+          <button type="button" id="clearProgressBtn" class="continue-progress-banner__clear">${escapeHtml(clearText)}</button>
         </div>
       </div>
     `;

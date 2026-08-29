@@ -1,4 +1,4 @@
-/* AI Tools 4 Kids — lightweight PWA/mobile layer v1.0.0 */
+/* AI Tools 4 Kids — lightweight PWA/mobile layer v1.0.1 */
 (function(){
   "use strict";
 
@@ -201,11 +201,11 @@
 
   function registerServiceWorker(){
     if(!("serviceWorker" in navigator) || !window.isSecureContext) return;
-    window.addEventListener("load",()=>{
-      navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch((err)=>{
-        console.warn("PWA service worker registration failed",err);
-      });
-    },{once:true});
+    const register=()=>navigator.serviceWorker.register("/service-worker.js",{scope:"/"}).catch((err)=>{
+      console.warn("PWA service worker registration failed",err);
+    });
+    if(document.readyState==="complete") register();
+    else window.addEventListener("load",register,{once:true});
   }
 
   window.addEventListener("beforeinstallprompt",(event)=>{

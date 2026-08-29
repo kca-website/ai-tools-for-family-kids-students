@@ -4968,6 +4968,28 @@ const GAP_TAGS = {
   }
 };
 
+// ---------- GRADES (ανά ζώνη, για την πλοήγηση ζώνη -> τάξη -> μάθημα) ----------
+const GRADES = {
+  primary: [
+    { id: "a", labelEl: "Α' Δημοτικού", labelEn: "1st Grade" },
+    { id: "b", labelEl: "Β' Δημοτικού", labelEn: "2nd Grade" },
+    { id: "c", labelEl: "Γ' Δημοτικού", labelEn: "3rd Grade" },
+    { id: "d", labelEl: "Δ' Δημοτικού", labelEn: "4th Grade" },
+    { id: "e", labelEl: "Ε' Δημοτικού", labelEn: "5th Grade" },
+    { id: "st", labelEl: "ΣΤ' Δημοτικού", labelEn: "6th Grade" },
+  ],
+  middle: [
+    { id: "a", labelEl: "Α' Γυμνασίου", labelEn: "7th Grade" },
+    { id: "b", labelEl: "Β' Γυμνασίου", labelEn: "8th Grade" },
+    { id: "c", labelEl: "Γ' Γυμνασίου", labelEn: "9th Grade" },
+  ],
+  high: [
+    { id: "a", labelEl: "Α' Λυκείου", labelEn: "10th Grade" },
+    { id: "b", labelEl: "Β' Λυκείου", labelEn: "11th Grade" },
+    { id: "c", labelEl: "Γ' Λυκείου", labelEn: "12th Grade" },
+  ],
+};
+
 const QUIZZES = {
   "primary": {
     "math-a-dimotikou": {

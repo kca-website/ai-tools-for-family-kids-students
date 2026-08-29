@@ -2,155 +2,44 @@
 <html lang="el">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gemini Notebook (NotebookLM) — Είναι κατάλληλο για το παιδί μου; | AI Tools for Kids</title>
-<meta name="description" content="AI εργαλείο έρευνας της Google που απαντά μόνο βάσει των πηγών που του ανεβάζεις — π.χ. το σχολικό βιβλίο. Ηλικία, κόστος, γλώσσα, πλεονεκτήματα και περιορισμοί για το Gemini Notebook (πρώην NotebookLM).">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Gemini Notebook (πρώην NotebookLM) — ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids</title>
+<meta name="description" content="AI βοηθός έρευνας που απαντά πάνω στις πηγές που του δίνεις και εμφανίζει παραπομπές. Με σχολικό Workspace μπορεί να χρησιμοποιείται σε όλες τις ηλικίες, α">
 <link rel="canonical" href="https://www.aitools4kids.gr/tools/notebooklm.html">
-<meta property="og:title" content="Gemini Notebook (NotebookLM) | AI Tools for Kids">
-<meta property="og:description" content="AI εργαλείο έρευνας της Google που απαντά μόνο βάσει των πηγών που του ανεβάζεις — π.χ. το σχολικό βιβλίο.">
 <meta property="og:type" content="article">
+<meta property="og:title" content="Gemini Notebook (πρώην NotebookLM) | AI Tools for Kids">
+<meta property="og:description" content="AI βοηθός έρευνας που απαντά πάνω στις πηγές που του δίνεις και εμφανίζει παραπομπές. Με σχολικό Workspace μπορεί να χρησιμοποιείται σε όλες τις ηλικίες, αν ενεργοποιηθεί από το σχ">
 <meta property="og:url" content="https://www.aitools4kids.gr/tools/notebooklm.html">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Gemini Notebook (NotebookLM)",
-  "description": "AI εργαλείο έρευνας της Google που απαντά μόνο βάσει των πηγών που του ανεβάζεις, με παραπομπή στο ακριβές απόσπασμα.",
-  "url": "https://notebook.google.com",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Web",
-  "inLanguage": ["el", "en"],
-  "audience": {
-    "@type": "EducationalAudience",
-    "audienceType": "students, parents"
-  }
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gemini Notebook (πρώην NotebookLM)","description":"AI βοηθός έρευνας που απαντά πάνω στις πηγές που του δίνεις και εμφανίζει παραπομπές. Με σχολικό Workspace μπορεί να χρησιμοποιείται σε όλες τις ηλικίες, αν ενεργοποιηθεί από το σχολείο.","url":"https://notebook.google.com/","applicationCategory":"EducationalApplication","operatingSystem":"Web","audience":{"@type":"EducationalAudience","audienceType":"students, parents, educators"}}</script>
 <style>
-  :root{
-    --blue:#2E6BA3; --green:#1E7A4C; --ink:#1F2430; --muted:#5A6270;
-    --bg-soft:#F0F7FF; --border:#E3E8F0;
-  }
-  *{box-sizing:border-box}
-  body{font-family:system-ui,-apple-system,sans-serif;max-width:800px;margin:0 auto;padding:24px 20px 60px;line-height:1.65;color:var(--ink);background:#fff}
-  a{color:var(--blue)}
-  .back-link{display:inline-block;margin-bottom:20px;color:var(--blue);text-decoration:none;font-weight:600;font-size:14px}
-  .back-link:hover{text-decoration:underline}
-  h1{font-size:28px;margin:0 0 4px}
-  .tagline{color:var(--muted);font-size:15px;margin:0 0 20px}
-  .cta{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;padding:10px 20px;border-radius:8px;margin-bottom:28px}
-  .cta:hover{opacity:.9}
-  h2{color:var(--green);font-size:16px;text-transform:uppercase;letter-spacing:.03em;margin:28px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
-  .card{background:var(--bg-soft);border-left:4px solid var(--blue);padding:14px 16px;border-radius:6px;margin:8px 0}
-  ul{padding-left:20px;margin:8px 0}
-  li{margin-bottom:6px}
-  .meta{font-size:13px;color:var(--muted);margin-top:36px;border-top:1px solid var(--border);padding-top:16px}
-  .zones{display:inline-flex;gap:6px;flex-wrap:wrap;margin:4px 0 0}
-  .zone-badge{background:#fff;border:1px solid var(--border);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--muted)}
-  .lang-toggle{position:fixed;top:16px;right:16px;font-size:13px}
-  .lang-toggle button{border:1px solid var(--border);background:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:13px}
-  .lang-toggle button.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-  [data-lang="en"]{display:none}
-  body.lang-en [data-lang="el"]{display:none}
-  body.lang-en [data-lang="en"]{display:block}
-  body.lang-en ul[data-lang="en"]{display:block}
-</style>
-</head>
+:root{--blue:#2E6BA3;--green:#1E7A4C;--ink:#1F2430;--muted:#5A6270;--soft:#F0F7FF;--warn:#FFF7ED;--border:#E3E8F0}
+*{box-sizing:border-box} body{font-family:system-ui,-apple-system,sans-serif;max-width:860px;margin:0 auto;padding:26px 20px 64px;line-height:1.65;color:var(--ink)} a{color:var(--blue)}
+.top{display:flex;justify-content:space-between;gap:14px;align-items:start} .back{text-decoration:none;font-weight:700} .lang button{border:1px solid var(--border);background:#fff;border-radius:7px;padding:5px 10px;cursor:pointer} .lang button.active{background:var(--blue);color:#fff}
+h1{font-size:30px;line-height:1.18;margin:22px 0 5px} .tag{color:var(--muted);margin:0 0 14px} .badges{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 22px} .badge{background:#eef2ff;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:9px;margin:0 0 16px} h2{font-size:18px;color:var(--green);margin:30px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.box{background:var(--soft);border:1px solid #dbeafe;border-radius:11px;padding:14px 16px} .warn{background:var(--warn);border-color:#fed7aa} ul{padding-left:20px} .meta{margin-top:34px;border-top:1px solid var(--border);padding-top:14px;color:var(--muted);font-size:13px}
+[data-lang="en"]{display:none} body.lang-en [data-lang="el"]{display:none} body.lang-en [data-lang="en"]{display:inline} body.lang-en p[data-lang="en"],body.lang-en div[data-lang="en"],body.lang-en li[data-lang="en"],body.lang-en h2[data-lang="en"]{display:block}
+</style></head>
 <body>
-<div class="lang-toggle">
-  <button id="btnEl" class="active" onclick="setLang('el')">ΕΛ</button>
-  <button id="btnEn" onclick="setLang('en')">EN</button>
-</div>
-
-<a class="back-link" href="/" data-lang="el">← Πίσω στην αρχική</a>
-<a class="back-link" href="/" data-lang="en">← Back to home</a>
-
+<div class="top"><a class="back" href="/">← <span data-lang="el">Πίσω στην αρχική</span><span data-lang="en">Back to home</span></a><div class="lang"><button id="el" class="active">ΕΛ</button> <button id="en">EN</button></div></div>
 <h1>Gemini Notebook (πρώην NotebookLM)</h1>
-<p class="tagline" data-lang="el">AI εργαλείο έρευνας που απαντά ΜΟΝΟ βάσει των πηγών που του ανεβάζεις εσύ, με παραπομπή στο ακριβές απόσπασμα.</p>
-<p class="tagline" data-lang="en">AI research tool that answers ONLY from the sources you upload, citing the exact passage.</p>
+<p class="tag" data-lang="el">AI βοηθός έρευνας που απαντά πάνω στις πηγές που του δίνεις και εμφανίζει παραπομπές. Με σχολικό Workspace μπορεί να χρησιμοποιείται σε όλες τις ηλικίες, αν ενεργοποιηθεί από το σχολείο.</p><p class="tag" data-lang="en">AI research assistant grounded in the sources you provide, with citations. Education Workspace users can access it at all ages when enabled by the school.</p>
+<div class="badges"><span class="badge"><span data-lang="el">Web εργαλείο</span><span data-lang="en">Web tool</span></span></div>
+<a class="btn" href="https://notebook.google.com/" target="_blank" rel="noopener noreferrer"><span data-lang="el">Άνοιγμα εργαλείου ↗</span><span data-lang="en">Open tool ↗</span></a>
+<h2 data-lang="el">Πρόσβαση & ηλικία</h2><h2 data-lang="en">Access & age</h2>
+<div class="box"><p data-lang="el">Στην Ελλάδα, η προσωπική χρήση ακολουθεί το όριο διαχείρισης Google Account (15+). Σε Google Workspace for Education μπορεί να είναι διαθέσιμο σε μαθητές όλων των ηλικιών όταν το ενεργοποιεί το σχολείο. Ορισμένες προηγμένες λειτουργίες/πλάνα μπορεί να έχουν υψηλότερο όριο.</p><p data-lang="en">In Greece, personal use follows the Google Account management age (15+). With Google Workspace for Education it can be available to students of all ages when enabled by the school. Some advanced features or plans may have a higher age requirement.</p></div>
+<h2 data-lang="el">Πώς το προτείνουμε για σχολείο</h2><h2 data-lang="en">How we recommend it for school</h2>
+<p data-lang="el">Πολύ χρήσιμο όταν ανεβάζεις μόνο το επίσημο σχολικό βιβλίο ή τις δικές σου σημειώσεις ως πηγές. Η συνομιλία του standalone Notebook παραμένει grounded στις πηγές του notebook και εμφανίζει παραπομπές.</p><p data-lang="en">Especially useful when you upload only the official textbook or your own notes as sources. The standalone Notebook chat stays grounded in notebook sources and provides citations.</p>
+<h2 data-lang="el">Ελληνικά</h2><h2 data-lang="en">Greek-language use</h2>
+<p data-lang="el">Η ποιότητα στα ελληνικά μπορεί να διαφέρει ανά λειτουργία. Δοκίμασε με πραγματικό σχολικό παράδειγμα πριν το προτείνεις ως βασικό εργαλείο.</p><p data-lang="en">Greek-language quality can vary by feature. Test it with a real school example before relying on it as a primary tool.</p>
 
-<a class="cta" href="https://notebook.google.com" target="_blank" rel="noopener">
-  <span data-lang="el">Άνοιγμα Gemini Notebook ↗</span>
-  <span data-lang="en">Open Gemini Notebook ↗</span>
-</a>
-
-<h2 data-lang="el">Τι κάνει</h2>
-<h2 data-lang="en">What it does</h2>
-<p data-lang="el">Ανεβάζεις έγγραφα, PDF, ιστοσελίδες ή βίντεο YouTube, και το εργαλείο απαντά αποκλειστικά με βάση αυτές τις πηγές — όχι με ό,τι "ξέρει" γενικά το μοντέλο. Κάθε απάντηση συνοδεύεται από παραπομπή στο ακριβές σημείο της πηγής όπου βασίστηκε. Ονομαζόταν παλιότερα "NotebookLM"· η παλιά διεύθυνση εξακολουθεί να ανακατευθύνει στη νέα.</p>
-<p data-lang="en">You upload documents, PDFs, web pages, or YouTube videos, and the tool answers only from those sources — not from what the model generally "knows". Every answer comes with a citation pointing to the exact spot in the source it came from. It was previously called "NotebookLM"; the old address still redirects to the new one.</p>
-
-<h2 data-lang="el">Ηλικία</h2>
-<h2 data-lang="en">Age</h2>
-<div class="card">
-  <p data-lang="el"><strong>Από 13 ετών.</strong> 13 ετών και άνω για προσωπικό λογαριασμό (Όροι Χρήσης Google). Μέσω σχολικού λογαριασμού Google Workspace for Education είναι διαθέσιμο σε μαθητές όλων των ηλικιών (και Δημοτικού), αν το ενεργοποιήσει το σχολείο. Για οικογενειακή χρήση σε παιδί Δημοτικού, ο ενήλικας είναι αυτός που δημιουργεί το notebook και ανεβάζει τις πηγές — το παιδί συμμετέχει δίπλα του, δεν έχει δικό του ανεξάρτητο λογαριασμό.</p>
-  <p data-lang="en"><strong>From age 13.</strong> 13+ for a personal account (Google Terms of Service). Through a school Google Workspace for Education account it's available to students of all ages (including primary school), if the school enables it. For family use with a primary-school child, the adult is the one who creates the notebook and uploads the sources — the child takes part alongside them, without an independent account of their own.</p>
-</div>
-
-<h2 data-lang="el">Γλώσσα</h2>
-<h2 data-lang="en">Language</h2>
-<p data-lang="el">Υποστηρίζει τα ελληνικά τόσο στις πηγές όσο και στις ερωτήσεις/απαντήσεις. Μπορείς να ανεβάσεις κατευθείαν το επίσημο ελληνικό ψηφιακό σχολικό βιβλίο (ebooks.edu.gr) και να ρωτήσεις στα ελληνικά.</p>
-<p data-lang="en">Supports Greek both in the uploaded sources and in questions/answers. You can upload the official Greek digital school textbook (ebooks.edu.gr) directly and ask questions in Greek.</p>
-
-<h2 data-lang="el">Κόστος</h2>
-<h2 data-lang="en">Cost</h2>
-<div class="card">
-  <p data-lang="el">Δωρεάν βασική έκδοση, με όριο πηγών/ερωτήσεων ανά ημέρα — αρκετό για οικογενειακή χρήση σε ένα κεφάλαιο τη φορά. Ελέγξτε πάντα την επίσημη σελίδα του εργαλείου πριν τη χρήση, καθώς τα όρια αλλάζουν.</p>
-  <p data-lang="en">Free basic tier, with a daily limit on sources/questions — enough for family use one chapter at a time. Always check the tool's official page before use, as limits change.</p>
-</div>
-
-<h2 data-lang="el">Δεδομένα</h2>
-<h2 data-lang="en">Data</h2>
-<p data-lang="el">Το Gemini Notebook είναι εξωτερικό εργαλείο — δεν λειτουργεί μέσα στο aitools4kids.gr και δεν ελέγχεται από εμάς. Το aitools4kids.gr δεν συλλέγει, αποθηκεύει ή διαβιβάζει δεδομένα σε κανένα εξωτερικό εργαλείο, ούτε χρησιμοποιεί cookies. Η Google δηλώνει ότι οι πηγές και οι συνομιλίες σε προσωπικό λογαριασμό δεν χρησιμοποιούνται για εκπαίδευση μοντέλων· δείτε πάντα την επίσημη πολιτική απορρήτου πριν το χρησιμοποιήσετε με ανήλικο, ειδικά αν σκοπεύετε να ανεβάσετε υλικό που περιέχει ονόματα ή στοιχεία άλλων παιδιών.</p>
-<p data-lang="en">Gemini Notebook is an external tool — it does not run inside aitools4kids.gr and is not controlled by us. aitools4kids.gr does not collect, store, or transmit data to any external tool, and does not use cookies. Google states that sources and chats on a personal account are not used to train models; always check the official privacy policy before using it with a minor, especially if you plan to upload material containing other children's names or details.</p>
-
-<h2 data-lang="el">Πλεονεκτήματα</h2>
-<h2 data-lang="en">Advantages</h2>
-<ul data-lang="el">
-  <li>Απαντά ΜΟΝΟ από τις πηγές που του δίνεις — δεν "επινοεί" έξω από αυτές, πολύ πιο ασφαλές για μικρή ηλικία από γενικό chatbot.</li>
-  <li>Ανέβασε το επίσημο ψηφιακό σχολικό βιβλίο (ebooks.edu.gr) ενός κεφαλαίου Ιστορίας ή Φυσικών ως τη μοναδική πηγή.</li>
-  <li>Κάθε απάντηση δείχνει ακριβώς σε ποιο σημείο του βιβλίου βασίστηκε — το παιδί μπορεί να το ανοίξει και να το ελέγξει.</li>
-  <li>Ιδανικό για Ιστορία: ξεχωρίζει γεγονός από ερμηνεία, γιατί δεν βγάζει πληροφορία από πουθενά αλλού.</li>
-  <li>Ιδανικό για Φυσικά: μπορεί να δημιουργήσει ερωτήσεις κατανόησης πάνω στο ίδιο το κεφάλαιο, όχι γενικές ερωτήσεις εκτός ύλης.</li>
-  <li>Φτιάχνει και audio overview (σαν podcast) πάνω στο ανεβασμένο υλικό — χρήσιμο για επανάληψη.</li>
-</ul>
-<ul data-lang="en">
-  <li>Answers ONLY from the sources you give it — it doesn't "invent" beyond them, much safer for young ages than a general chatbot.</li>
-  <li>Upload the official digital school textbook (ebooks.edu.gr) for a History or Science chapter as the sole source.</li>
-  <li>Every answer shows exactly where in the book it came from — the child can open it and check.</li>
-  <li>Great for History: separates fact from interpretation, since it can't pull information from anywhere else.</li>
-  <li>Great for Science: can generate comprehension questions on that exact chapter, not generic off-syllabus questions.</li>
-  <li>Also generates an audio overview (podcast-style) from the uploaded material — useful for review.</li>
-</ul>
-
-<h2 data-lang="el">Περιορισμοί</h2>
-<h2 data-lang="en">Limitations</h2>
-<ul data-lang="el">
-  <li>Λογαριασμός 13+ — το χρησιμοποιεί ο γονιός/εκπαιδευτικός μαζί με το παιδί, όχι το παιδί μόνο του σε αυτή την ηλικία.</li>
-  <li>Η ακρίβεια εξαρτάται εξ ολοκλήρου από την ποιότητα των πηγών που ανεβάζεις — δεν είναι "μηχανή αλήθειας" αν το υλικό είναι ελλιπές ή λάθος.</li>
-  <li>Δεν λειτουργεί χωρίς σύνδεση στο διαδίκτυο, και χρειάζεται λογαριασμό Google.</li>
-</ul>
-<ul data-lang="en">
-  <li>13+ account — used by a parent/teacher together with the child, not by the child alone at this age.</li>
-  <li>Accuracy depends entirely on the quality of the sources you upload — it's not a "truth machine" if the material is incomplete or wrong.</li>
-  <li>Doesn't work offline, and requires a Google account.</li>
-</ul>
-
-<div class="meta">
-  <p data-lang="el">Ημερομηνία ελέγχου: 29 Αυγούστου 2026 · Προτείνεται σε: <span class="zones"><span class="zone-badge">Δημοτικό</span><span class="zone-badge">Γυμνάσιο</span><span class="zone-badge">Λύκειο</span></span></p>
-  <p data-lang="en">Last checked: 29 Αυγούστου 2026</p>
-</div>
-
-<script>
-  function setLang(l){
-    document.body.classList.toggle('lang-en', l === 'en');
-    document.getElementById('btnEl').classList.toggle('active', l === 'el');
-    document.getElementById('btnEn').classList.toggle('active', l === 'en');
-    try { localStorage.setItem('aitools4kids_lang', l); } catch(e){}
-  }
-  try {
-    var saved = localStorage.getItem('aitools4kids_lang');
-    if (saved === 'en') setLang('en');
-  } catch(e){}
-</script>
-</body>
-</html>
+<h2 data-lang="el">Δεδομένα & απόρρητο</h2><h2 data-lang="en">Data & privacy</h2>
+<p data-lang="el">Το Gemini Notebook (πρώην NotebookLM) είναι εξωτερική υπηρεσία. Όταν απλώς διαβάζεις αυτή τη σελίδα, το aitools4kids.gr δεν στέλνει το κείμενό σου ή σχολικό υλικό στο Gemini Notebook (πρώην NotebookLM). Αν πατήσεις «Άνοιγμα εργαλείου», μεταβαίνεις στην υπηρεσία του παρόχου και ισχύουν οι δικοί του όροι και πολιτική απορρήτου. Η προαιρετική AI Βοήθεια του aitools4kids είναι ξεχωριστή λειτουργία και χρησιμοποιεί Puter, όπως περιγράφεται στη δική μας Πολιτική Απορρήτου.</p><p data-lang="en">Gemini Notebook (πρώην NotebookLM) is an external service. Simply reading this page does not send your text or school material from aitools4kids.gr to Gemini Notebook (πρώην NotebookLM). If you select “Open tool”, you leave this site and the provider’s own terms and privacy policy apply. The optional aitools4kids AI Help is a separate feature that uses Puter, as described in our Privacy Policy.</p>
+<p><a href="/privacy-policy.html"><span data-lang="el">Πολιτική Απορρήτου aitools4kids →</span><span data-lang="en">aitools4kids Privacy Policy →</span></a></p>
+<h2 data-lang="el">Τι να θυμάσαι</h2><h2 data-lang="en">What to remember</h2>
+<ul><li data-lang="el">Οι όροι ηλικίας, οι δωρεάν λειτουργίες και τα όρια χρήσης μπορούν να αλλάξουν. Έλεγξε την επίσημη υπηρεσία πριν δημιουργηθεί λογαριασμός ανηλίκου.</li><li data-lang="en">Age rules, free features and usage limits can change. Check the official service before creating an account for a minor.</li><li data-lang="el">Για σχολική εργασία, χρησιμοποίησε AI για κατανόηση και εξάσκηση — όχι για έτοιμο παραδοτέο.</li><li data-lang="en">For schoolwork, use AI for understanding and practice — not for a submit-ready answer.</li></ul>
+<h2 data-lang="el">Πηγές / έλεγχος</h2><h2 data-lang="en">Sources / verification</h2>
+<ul><li><a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/" target="_blank" rel="noopener noreferrer">Google: NotebookLM is now Gemini Notebook ↗</a></li><li><a href="https://support.google.com/notebooklm/answer/16164461?hl=en" target="_blank" rel="noopener noreferrer">NotebookLM / Gemini Notebook Help ↗</a></li><li><a href="https://support.google.com/accounts/answer/1350409?hl=el" target="_blank" rel="noopener noreferrer">Ηλικίες Google Account ↗</a></li></ul>
+<p class="meta"><span data-lang="el">Τελευταίος έλεγχος αυτής της σελίδας: 29 Αυγούστου 2026. Ανεξάρτητο έργο — δεν αποτελεί συνεργασία με τον πάροχο.</span><span data-lang="en">Last checked: 29 August 2026. Independent project — not affiliated with the provider.</span></p>
+<script>(function(){const b=document.body,e=document.getElementById('el'),n=document.getElementById('en');function set(l){b.classList.toggle('lang-en',l==='en');e.classList.toggle('active',l==='el');n.classList.toggle('active',l==='en');document.documentElement.lang=l}e.onclick=()=>set('el');n.onclick=()=>set('en');})();</script>
+</body></html>

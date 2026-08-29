@@ -2,166 +2,44 @@
 <html lang="el">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ChatGPT — Είναι κατάλληλο για το παιδί μου; | AI Tools for Kids</title>
-<meta name="description" content="Γενικός chatbot AI για γραφή, εξηγήσεις και βοήθεια σε πολλά μαθήματα. Ηλικία, κόστος, γλώσσα, πλεονεκτήματα και περιορισμοί για το ChatGPT.">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ChatGPT — ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids</title>
+<meta name="description" content="AI βοηθός γενικής χρήσης. Για σχολική μελέτη σε κατάλληλες ηλικίες προτίμησε το Study Mode, ώστε η συζήτηση να δουλεύει περισσότερο με ερωτήσεις, βήματα κα">
 <link rel="canonical" href="https://www.aitools4kids.gr/tools/chatgpt.html">
-<meta property="og:title" content="ChatGPT | AI Tools for Kids">
-<meta property="og:description" content="Γενικός chatbot AI για γραφή, εξηγήσεις και βοήθεια σε πολλά μαθήματα.">
 <meta property="og:type" content="article">
+<meta property="og:title" content="ChatGPT | AI Tools for Kids">
+<meta property="og:description" content="AI βοηθός γενικής χρήσης. Για σχολική μελέτη σε κατάλληλες ηλικίες προτίμησε το Study Mode, ώστε η συζήτηση να δουλεύει περισσότερο με ερωτήσεις, βήματα και έλεγχο κατανόησης αντί ">
 <meta property="og:url" content="https://www.aitools4kids.gr/tools/chatgpt.html">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "ChatGPT",
-  "description": "Γενικός chatbot AI για γραφή, εξηγήσεις και βοήθεια σε πολλά μαθήματα.",
-  "url": "https://chatgpt.com",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "Web",
-  "inLanguage": ["el", "en"],
-  "audience": {
-    "@type": "EducationalAudience",
-    "audienceType": "students, parents"
-  }
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"ChatGPT","description":"AI βοηθός γενικής χρήσης. Για σχολική μελέτη σε κατάλληλες ηλικίες προτίμησε το Study Mode, ώστε η συζήτηση να δουλεύει περισσότερο με ερωτήσεις, βήματα και έλεγχο κατανόησης αντί για έτοιμη απάντηση.","url":"https://chatgpt.com","applicationCategory":"EducationalApplication","operatingSystem":"Web","audience":{"@type":"EducationalAudience","audienceType":"students, parents, educators"}}</script>
 <style>
-  :root{
-    --blue:#2E6BA3; --green:#1E7A4C; --ink:#1F2430; --muted:#5A6270;
-    --bg-soft:#F0F7FF; --border:#E3E8F0;
-  }
-  *{box-sizing:border-box}
-  body{font-family:system-ui,-apple-system,sans-serif;max-width:800px;margin:0 auto;padding:24px 20px 60px;line-height:1.65;color:var(--ink);background:#fff}
-  a{color:var(--blue)}
-  .back-link{display:inline-block;margin-bottom:20px;color:var(--blue);text-decoration:none;font-weight:600;font-size:14px}
-  .back-link:hover{text-decoration:underline}
-  h1{font-size:28px;margin:0 0 4px}
-  .tagline{color:var(--muted);font-size:15px;margin:0 0 20px}
-  .cta{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:600;padding:10px 20px;border-radius:8px;margin-bottom:28px}
-  .cta:hover{opacity:.9}
-  h2{color:var(--green);font-size:16px;text-transform:uppercase;letter-spacing:.03em;margin:28px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
-  .card{background:var(--bg-soft);border-left:4px solid var(--blue);padding:14px 16px;border-radius:6px;margin:8px 0}
-  ul{padding-left:20px;margin:8px 0}
-  li{margin-bottom:6px}
-  .meta{font-size:13px;color:var(--muted);margin-top:36px;border-top:1px solid var(--border);padding-top:16px}
-  .zones{display:inline-flex;gap:6px;flex-wrap:wrap;margin:4px 0 0}
-  .zone-badge{background:#fff;border:1px solid var(--border);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--muted)}
-  .lang-toggle{position:fixed;top:16px;right:16px;font-size:13px}
-  .lang-toggle button{border:1px solid var(--border);background:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:13px}
-  .lang-toggle button.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-  [data-lang="en"]{display:none}
-  body.lang-en [data-lang="el"]{display:none}
-  body.lang-en [data-lang="en"]{display:block}
-  body.lang-en ul[data-lang="en"]{display:block}
-</style>
-</head>
+:root{--blue:#2E6BA3;--green:#1E7A4C;--ink:#1F2430;--muted:#5A6270;--soft:#F0F7FF;--warn:#FFF7ED;--border:#E3E8F0}
+*{box-sizing:border-box} body{font-family:system-ui,-apple-system,sans-serif;max-width:860px;margin:0 auto;padding:26px 20px 64px;line-height:1.65;color:var(--ink)} a{color:var(--blue)}
+.top{display:flex;justify-content:space-between;gap:14px;align-items:start} .back{text-decoration:none;font-weight:700} .lang button{border:1px solid var(--border);background:#fff;border-radius:7px;padding:5px 10px;cursor:pointer} .lang button.active{background:var(--blue);color:#fff}
+h1{font-size:30px;line-height:1.18;margin:22px 0 5px} .tag{color:var(--muted);margin:0 0 14px} .badges{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 22px} .badge{background:#eef2ff;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700}
+.btn{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:9px;margin:0 0 16px} h2{font-size:18px;color:var(--green);margin:30px 0 8px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.box{background:var(--soft);border:1px solid #dbeafe;border-radius:11px;padding:14px 16px} .warn{background:var(--warn);border-color:#fed7aa} ul{padding-left:20px} .meta{margin-top:34px;border-top:1px solid var(--border);padding-top:14px;color:var(--muted);font-size:13px}
+[data-lang="en"]{display:none} body.lang-en [data-lang="el"]{display:none} body.lang-en [data-lang="en"]{display:inline} body.lang-en p[data-lang="en"],body.lang-en div[data-lang="en"],body.lang-en li[data-lang="en"],body.lang-en h2[data-lang="en"]{display:block}
+</style></head>
 <body>
-<div class="lang-toggle">
-  <button id="btnEl" class="active" onclick="setLang('el')">ΕΛ</button>
-  <button id="btnEn" onclick="setLang('en')">EN</button>
-</div>
-
-<a class="back-link" href="/" data-lang="el">← Πίσω στην αρχική</a>
-<a class="back-link" href="/" data-lang="en">← Back to home</a>
-
+<div class="top"><a class="back" href="/">← <span data-lang="el">Πίσω στην αρχική</span><span data-lang="en">Back to home</span></a><div class="lang"><button id="el" class="active">ΕΛ</button> <button id="en">EN</button></div></div>
 <h1>ChatGPT</h1>
-<p class="tagline" data-lang="el">Γενικός chatbot AI για γραφή, εξηγήσεις και βοήθεια σε πολλά μαθήματα.</p>
-<p class="tagline" data-lang="en">General purpose AI chatbot for writing, explanations, and help across subjects.</p>
+<p class="tag" data-lang="el">AI βοηθός γενικής χρήσης. Για σχολική μελέτη σε κατάλληλες ηλικίες προτίμησε το Study Mode, ώστε η συζήτηση να δουλεύει περισσότερο με ερωτήσεις, βήματα και έλεγχο κατανόησης αντί για έτοιμη απάντηση.</p><p class="tag" data-lang="en">General-purpose AI assistant. For school study at appropriate ages, prefer Study Mode so the conversation uses questions, steps and understanding checks rather than simply handing over an answer.</p>
+<div class="badges"><span class="badge"><span data-lang="el">Web εργαλείο</span><span data-lang="en">Web tool</span></span></div>
+<a class="btn" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><span data-lang="el">Άνοιγμα εργαλείου ↗</span><span data-lang="en">Open tool ↗</span></a>
+<h2 data-lang="el">Πρόσβαση & ηλικία</h2><h2 data-lang="en">Access & age</h2>
+<div class="box"><p data-lang="el">13+ ή το υψηλότερο ελάχιστο όριο που απαιτείται στη χώρα. Κάτω των 18 απαιτείται άδεια γονέα/νόμιμου κηδεμόνα. Σε επιλέξιμους εφηβικούς λογαριασμούς ενεργοποιείται σταδιακά το ChatGPT for Teens με πρόσθετες προστασίες.</p><p data-lang="en">13+ or the higher minimum age required in the user’s country. Users under 18 need permission from a parent or legal guardian. Eligible teen accounts are gradually receiving the ChatGPT for Teens experience with additional safeguards.</p></div>
+<h2 data-lang="el">Πώς το προτείνουμε για σχολείο</h2><h2 data-lang="en">How we recommend it for school</h2>
+<p data-lang="el">Για σχολική μελέτη προτίμησε το Study Mode. Δώσε τάξη, μάθημα, θέμα και τι έχεις ήδη προσπαθήσει και ζήτησε μία υπόδειξη ή ερώτηση τη φορά.</p><p data-lang="en">For school study, prefer Study Mode. Give your grade, subject, topic and what you already tried, then ask for one hint or question at a time.</p>
+<h2 data-lang="el">Ελληνικά</h2><h2 data-lang="en">Greek-language use</h2>
+<p data-lang="el">Για σχολική χρήση: άνοιξε Study Mode και ξεκίνα γράφοντας τάξη, μάθημα, θέμα και τι έχεις ήδη προσπαθήσει. Μην χρησιμοποιείς προσωπικά στοιχεία ή έτοιμη απάντηση ως παραδοτέο.</p><p data-lang="en">Greek-language quality can vary by feature. Test it with a real school example before relying on it as a primary tool.</p>
 
-<a class="cta" href="https://chatgpt.com" target="_blank" rel="noopener">
-  <span data-lang="el">Άνοιγμα ChatGPT ↗</span>
-  <span data-lang="en">Open ChatGPT ↗</span>
-</a>
-
-<h2 data-lang="el">Τι κάνει</h2>
-<h2 data-lang="en">What it does</h2>
-<p data-lang="el">Γενικός chatbot AI για γραφή, εξηγήσεις και βοήθεια σε πολλά μαθήματα.</p>
-<p data-lang="en">General purpose AI chatbot for writing, explanations, and help across subjects.</p>
-
-<h2 data-lang="el">Ηλικία</h2>
-<h2 data-lang="en">Age</h2>
-<div class="card">
-  <p data-lang="el"><strong>Από 13 ετών.</strong> 13 ετών και άνω. Από 18/8/2026, οι χρήστες 13-17 ετών μεταφέρονται αυτόματα στο ChatGPT for Teens (σταδιακό rollout, ολοκληρώνεται περίπου 2 εβδομάδες μετά). Περιλαμβάνει: αυστηρότερους περιορισμούς περιεχομένου (βία, επικίνδυνες προκλήσεις, ερωτικό/σεξουαλικό περιεχόμενο, αυτοτραυματισμό), 'Study Mode' (εξηγήσεις βήμα-βήμα αντί για έτοιμες απαντήσεις), quiz και οπτικοποιήσεις εξάσκησης, εντοπισμό προσπαθειών παράκαμψης εργασιών, και 'Study Hours' όπου ο μαθητής ή ένας συνδεδεμένος γονιός ορίζουν ώρες που το Study Mode ενεργοποιείται αυτόματα. Ο γονιός μπορεί να συνδέσει λογαριασμό και να διαχειριστεί ώρες ησυχίας, Voice Mode, δημιουργία εικόνων και Study Mode — όχι όμως να διαβάσει το περιεχόμενο των συνομιλιών. Ενεργοποιείται όταν ο χρήστης δηλώσει ηλικία 13-17, ή αν το σύστημα το εκτιμήσει (η εκτίμηση ηλικίας δεν είναι αλάνθαστη).</p>
-  <p data-lang="en"><strong>From age 13.</strong> 13 ετών και άνω. Από 18/8/2026, οι χρήστες 13-17 ετών μεταφέρονται αυτόματα στο ChatGPT for Teens (σταδιακό rollout, ολοκληρώνεται περίπου 2 εβδομάδες μετά). Περιλαμβάνει: αυστηρότερους περιορισμούς περιεχομένου (βία, επικίνδυνες προκλήσεις, ερωτικό/σεξουαλικό περιεχόμενο, αυτοτραυματισμό), 'Study Mode' (εξηγήσεις βήμα-βήμα αντί για έτοιμες απαντήσεις), quiz και οπτικοποιήσεις εξάσκησης, εντοπισμό προσπαθειών παράκαμψης εργασιών, και 'Study Hours' όπου ο μαθητής ή ένας συνδεδεμένος γονιός ορίζουν ώρες που το Study Mode ενεργοποιείται αυτόματα. Ο γονιός μπορεί να συνδέσει λογαριασμό και να διαχειριστεί ώρες ησυχίας, Voice Mode, δημιουργία εικόνων και Study Mode — όχι όμως να διαβάσει το περιεχόμενο των συνομιλιών. Ενεργοποιείται όταν ο χρήστης δηλώσει ηλικία 13-17, ή αν το σύστημα το εκτιμήσει (η εκτίμηση ηλικίας δεν είναι αλάνθαστη).</p>
-</div>
-
-<h2 data-lang="el">Γλώσσα</h2>
-<h2 data-lang="en">Language</h2>
-<p data-lang="el">Ιδανικό για επεξήγηση αρχαίων κειμένων και νεοελληνικής λογοτεχνίας.</p>
-<p data-lang="en">See the Greek-language usage tip above (available in the Greek version of this page).</p>
-
-<h2 data-lang="el">Κόστος</h2>
-<h2 data-lang="en">Cost</h2>
-<div class="card">
-  <p data-lang="el">Δεν αναφέρεται ρητό κόστος στα στοιχεία μας — τα βασικά χαρακτηριστικά φαίνονται δωρεάν. Ελέγξτε πάντα την επίσημη σελίδα τιμολόγησης του εργαλείου πριν τη χρήση, καθώς οι πολιτικές αλλάζουν.</p>
-  <p data-lang="en">No explicit cost is recorded in our data — the core features appear to be free. Always check the tool's official pricing page before use, as policies change.</p>
-</div>
-
-<h2 data-lang="el">Δεδομένα</h2>
-<h2 data-lang="en">Data</h2>
-<p data-lang="el">Το ChatGPT είναι εξωτερικό εργαλείο — δεν λειτουργεί μέσα στο aitools4kids.gr και δεν ελέγχεται από εμάς. Το aitools4kids.gr δεν συλλέγει, αποθηκεύει ή διαβιβάζει δεδομένα σε κανένα εξωτερικό εργαλείο, ούτε χρησιμοποιεί cookies. Για το πώς το ChatGPT χειρίζεται τα δικά του δεδομένα χρηστών, δείτε την επίσημη πολιτική απορρήτου του, ειδικά πριν το δώσετε σε ανήλικο.</p>
-<p data-lang="en">ChatGPT is an external tool — it does not run inside aitools4kids.gr and is not controlled by us. aitools4kids.gr does not collect, store, or transmit data to any external tool, and does not use cookies. For how ChatGPT handles its own user data, see its official privacy policy, especially before giving it to a minor.</p>
-
-<h2 data-lang="el">Πλεονεκτήματα</h2>
-<h2 data-lang="en">Advantages</h2>
-<ul data-lang="el">
-  <li>Γενικός chatbot AI για γραφή, εξηγήσεις και βοήθεια σε πολλά μαθήματα.</li>
-  <li>Εξήγηση μιας δύσκολης έννοιας με απλά λόγια πριν την εξηγήσεις εσύ στο παιδί, ή δημιουργία 5 σύντομων ερωτήσεων εξάσκησης πάνω σε ένα κεφάλαιο.</li>
-  <li>Γράψε π.χ. «Εξήγησέ μου την πρόσθεση κλασμάτων σαν να μιλάς σε 10χρονο» ή «Φτιάξε 5 ερωτήσεις πολλαπλής επιλογής πάνω σε αυτό το κεφάλαιο [επικόλλησε το κείμενο]».</li>
-  <li>Εξήγηση δύσκολων εννοιών με διαφορετικούς τρόπους, brainstorming για εργασίες.</li>
-  <li>Δώσε τη γονική συγκατάθεση μέσω των ρυθμίσεων λογαριασμού και ενεργοποίησε τους γονικούς ελέγχους σύνδεσης λογαριασμών.</li>
-  <li>Για να σου εξηγήσει κάτι με άλλον τρόπο όταν δεν καταλαβαίνεις τον καθηγητή.</li>
-  <li>Ζήτα εξήγηση, όχι έτοιμη απάντηση. Γράψε 'εξήγησέ μου γιατί', όχι 'δώσε μου τη λύση'.</li>
-  <li>Οργάνωση διαβάσματος, εξηγήσεις σε πολλά μαθήματα, πρώτο draft εργασιών.</li>
-  <li>Στα 15 έως 17 εξακολουθεί να χρειάζεται η γονική σου συγκατάθεση. Στα 18 όχι πια.</li>
-  <li>Οργάνωση προγράμματος διαβάσματος, εξηγήσεις εννοιών από διαφορετική οπτική γωνία.</li>
-  <li>Χρησιμοποίησέ το για να καταλάβεις, όχι για να αντιγράψεις. Στις εξετάσεις η ικανότητα να λύνεις μόνος σου είναι αυτό που μετράει.</li>
-  <li>Ιδανικό για επεξήγηση αρχαίων κειμένων και νεοελληνικής λογοτεχνίας.</li>
-</ul>
-<ul data-lang="en">
-  <li>General purpose AI chatbot for writing, explanations, and help across subjects.</li>
-  <li>Explaining a tough concept in simple words before you explain it to the child, or creating 5 short practice questions on a chapter.</li>
-  <li>Type e.g. 'Explain adding fractions like you're talking to a 10-year-old' or 'Make 5 multiple-choice questions on this chapter [paste the text]'.</li>
-  <li>Explaining tough concepts multiple ways, brainstorming for assignments.</li>
-  <li>Give parental consent through account settings and enable the parent teen account linking controls.</li>
-  <li>To explain something a different way when you don't understand your teacher.</li>
-  <li>Ask for an explanation, not a ready answer. Write 'explain why', not 'give me the solution'.</li>
-  <li>Study organization, explanations across subjects, first drafts of assignments.</li>
-  <li>At 15 to 17 it still needs your parental consent. At 18 it no longer does.</li>
-  <li>Organizing a study schedule, explaining concepts from a different angle.</li>
-  <li>Use it to understand, not to copy. For exams, your own problem solving ability is what counts.</li>
-</ul>
-
-<h2 data-lang="el">Περιορισμοί</h2>
-<h2 data-lang="en">Limitations</h2>
-<ul data-lang="el">
-  <li>Λογαριασμός 13+ — το χρησιμοποιείς εσύ, όχι απευθείας το παιδί σε αυτή την ηλικία.</li>
-  <li>Μπορεί να δώσει λανθασμένες πληροφορίες με σιγουριά. Χρειάζεται έλεγχος πηγών σε εργασίες.</li>
-  <li>Μπορεί να κάνει λάθη χωρίς να το καταλάβεις. Έλεγξε πάντα με το βιβλίο σου.</li>
-</ul>
-<ul data-lang="en">
-  <li>13+ account — you use it yourself, not the child directly at this age.</li>
-  <li>Can confidently give wrong information. Needs source checking for assignments.</li>
-  <li>It can make mistakes without you noticing. Always double check with your textbook.</li>
-</ul>
-
-<div class="meta">
-  <p data-lang="el">Ημερομηνία ελέγχου: 27 Αυγούστου 2026 · Προτείνεται σε: <span class="zones"><span class="zone-badge">Δημοτικό</span><span class="zone-badge">Γυμνάσιο</span><span class="zone-badge">Λύκειο</span></span></p>
-  <p data-lang="en">Last checked: 27 Αυγούστου 2026</p>
-</div>
-
-<script>
-  function setLang(l){
-    document.body.classList.toggle('lang-en', l === 'en');
-    document.getElementById('btnEl').classList.toggle('active', l === 'el');
-    document.getElementById('btnEn').classList.toggle('active', l === 'en');
-    try { localStorage.setItem('aitools4kids_lang', l); } catch(e){}
-  }
-  try {
-    var saved = localStorage.getItem('aitools4kids_lang');
-    if (saved === 'en') setLang('en');
-  } catch(e){}
-</script>
-</body>
-</html>
+<h2 data-lang="el">Δεδομένα & απόρρητο</h2><h2 data-lang="en">Data & privacy</h2>
+<p data-lang="el">Το ChatGPT είναι εξωτερική υπηρεσία. Όταν απλώς διαβάζεις αυτή τη σελίδα, το aitools4kids.gr δεν στέλνει το κείμενό σου ή σχολικό υλικό στο ChatGPT. Αν πατήσεις «Άνοιγμα εργαλείου», μεταβαίνεις στην υπηρεσία του παρόχου και ισχύουν οι δικοί του όροι και πολιτική απορρήτου. Η προαιρετική AI Βοήθεια του aitools4kids είναι ξεχωριστή λειτουργία και χρησιμοποιεί Puter, όπως περιγράφεται στη δική μας Πολιτική Απορρήτου.</p><p data-lang="en">ChatGPT is an external service. Simply reading this page does not send your text or school material from aitools4kids.gr to ChatGPT. If you select “Open tool”, you leave this site and the provider’s own terms and privacy policy apply. The optional aitools4kids AI Help is a separate feature that uses Puter, as described in our Privacy Policy.</p>
+<p><a href="/privacy-policy.html"><span data-lang="el">Πολιτική Απορρήτου aitools4kids →</span><span data-lang="en">aitools4kids Privacy Policy →</span></a></p>
+<h2 data-lang="el">Τι να θυμάσαι</h2><h2 data-lang="en">What to remember</h2>
+<ul><li data-lang="el">Οι όροι ηλικίας, οι δωρεάν λειτουργίες και τα όρια χρήσης μπορούν να αλλάξουν. Έλεγξε την επίσημη υπηρεσία πριν δημιουργηθεί λογαριασμός ανηλίκου.</li><li data-lang="en">Age rules, free features and usage limits can change. Check the official service before creating an account for a minor.</li><li data-lang="el">Για σχολική εργασία, χρησιμοποίησε AI για κατανόηση και εξάσκηση — όχι για έτοιμο παραδοτέο.</li><li data-lang="en">For schoolwork, use AI for understanding and practice — not for a submit-ready answer.</li></ul>
+<h2 data-lang="el">Πηγές / έλεγχος</h2><h2 data-lang="en">Sources / verification</h2>
+<ul><li><a href="https://openai.com/policies/terms-of-use/" target="_blank" rel="noopener noreferrer">Όροι Χρήσης OpenAI / OpenAI Terms ↗</a></li><li><a href="https://help.openai.com/en/articles/20001421" target="_blank" rel="noopener noreferrer">ChatGPT for Teens ↗</a></li><li><a href="https://help.openai.com/en/articles/11780217-using-study-mode-in-chatgpt" target="_blank" rel="noopener noreferrer">Study Mode ↗</a></li></ul>
+<p class="meta"><span data-lang="el">Τελευταίος έλεγχος αυτής της σελίδας: 29 Αυγούστου 2026. Ανεξάρτητο έργο — δεν αποτελεί συνεργασία με τον πάροχο.</span><span data-lang="en">Last checked: 29 August 2026. Independent project — not affiliated with the provider.</span></p>
+<script>(function(){const b=document.body,e=document.getElementById('el'),n=document.getElementById('en');function set(l){b.classList.toggle('lang-en',l==='en');e.classList.toggle('active',l==='el');n.classList.toggle('active',l==='en');document.documentElement.lang=l}e.onclick=()=>set('el');n.onclick=()=>set('en');})();</script>
+</body></html>

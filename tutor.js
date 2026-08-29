@@ -88,7 +88,9 @@
       micUnsupported: "Η φωνητική εισαγωγή δεν υποστηρίζεται από αυτόν τον browser.",
       micFailed: "Δεν μπόρεσα να μεταγράψω τη φωνή. Δοκίμασε ξανά ή γράψε την ερώτηση.",
       micEmpty: "Δεν αναγνωρίστηκε ομιλία. Δοκίμασε ξανά λίγο πιο κοντά στο μικρόφωνο.",
-      voiceHint: "Μπορείς να γράψεις ή να μιλήσεις. Η μεταγραφή εμφανίζεται πρώτα εδώ πριν σταλεί.",
+      micAutoStop: "Σταμάτησες να μιλάς — γίνεται μεταγραφή…",
+      micAutoSend: "Η φωνή μεταγράφηκε — αποστολή…",
+      voiceHint: "Γράψε ή πάτα 🎤 Μίλα. Όταν σταματήσεις να μιλάς, η ερώτηση μεταγράφεται και στέλνεται αυτόματα.",
       autoSpeak: "🔊 Να διαβάζει αυτόματα τις απαντήσεις",
       listen: "🔊 Άκουσε",
       stopListening: "■ Διακοπή",
@@ -179,7 +181,9 @@
       micUnsupported: "Voice input is not supported by this browser.",
       micFailed: "I couldn't transcribe the voice. Try again or type your question.",
       micEmpty: "No speech was recognized. Try again a little closer to the microphone.",
-      voiceHint: "You can type or speak. The transcript appears here before it is sent.",
+      micAutoStop: "You stopped speaking — transcribing…",
+      micAutoSend: "Voice transcribed — sending…",
+      voiceHint: "Type or tap 🎤 Speak. When you stop talking, your question is transcribed and sent automatically.",
       autoSpeak: "🔊 Read replies aloud automatically",
       listen: "🔊 Listen",
       stopListening: "■ Stop",
@@ -221,6 +225,17 @@
   let recordingTimer = null;
   let recordingStartedAt = 0;
   let speakingButton = null;
+  let currentUtterance = null;
+  let speechSession = 0;
+  let audioPlayerUnlocked = false;
+  let vadAudioContext = null;
+  let vadSource = null;
+  let vadAnalyser = null;
+  let vadData = null;
+  let vadTimer = null;
+  let speechDetected = false;
+  let lastSpeechAt = 0;
+  let vadNoiseFloor = 0.008;
 
   function tr(key) {
     const lang = ctx?.lang === "en" ? "en" : "el";
@@ -607,8 +622,82 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     return ctx?.lang === "en" ? "en-GB" : "el-GR";
   }
 
+  function isMobileLike() {
+    const ua = navigator.userAgent || "";
+    return /Android|iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+  }
+
+  function makeSilentWavBlob() {
+    const sampleRate = 8000;
+    const samples = 400; // 50 ms
+    const buffer = new ArrayBuffer(44 + samples * 2);
+    const view = new DataView(buffer);
+    writeAscii(view, 0, "RIFF");
+    view.setUint32(4, 36 + samples * 2, true);
+    writeAscii(view, 8, "WAVE");
+    writeAscii(view, 12, "fmt ");
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    writeAscii(view, 36, "data");
+    view.setUint32(40, samples * 2, true);
+    return new Blob([buffer], { type: "audio/wav" });
+  }
+
+  function primeAudioOutput() {
+    // iOS/Safari requires each HTMLAudioElement to be started once from a real user gesture.
+    // Prime this same hidden player on mic/send/listen interaction, then reuse it for TTS later.
+    const player = refs.audioPlayer;
+    if (!player || audioPlayerUnlocked) return;
+    try {
+      const silentUrl = URL.createObjectURL(makeSilentWavBlob());
+      player.src = silentUrl;
+      player.volume = 0.001;
+      const promise = player.play();
+      if (promise?.then) {
+        promise.then(() => {
+          try { player.pause(); player.currentTime = 0; } catch (_) {}
+          player.volume = 1;
+          audioPlayerUnlocked = true;
+          setTimeout(() => URL.revokeObjectURL(silentUrl), 500);
+        }).catch(() => {
+          player.volume = 1;
+          setTimeout(() => URL.revokeObjectURL(silentUrl), 500);
+        });
+      } else {
+        audioPlayerUnlocked = true;
+      }
+
+      // Also unlock Web Audio / SpeechSynthesis paths on browsers that use them.
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        const ctxAudio = new AudioCtx();
+        ctxAudio.resume?.().catch(() => {});
+        const osc = ctxAudio.createOscillator();
+        const gain = ctxAudio.createGain();
+        gain.gain.value = 0.00001;
+        osc.connect(gain);
+        gain.connect(ctxAudio.destination);
+        osc.start();
+        osc.stop(ctxAudio.currentTime + 0.02);
+        setTimeout(() => { try { ctxAudio.close(); } catch (_) {} }, 100);
+      }
+    } catch (_) {}
+  }
+
   function stopSpeaking() {
+    speechSession += 1;
     if (speechSupported()) window.speechSynthesis.cancel();
+    currentUtterance = null;
+    const player = refs.audioPlayer;
+    if (player) {
+      try { player.pause(); } catch (_) {}
+      try { player.currentTime = 0; } catch (_) {}
+    }
     if (speakingButton) {
       speakingButton.textContent = tr("listen");
       speakingButton.setAttribute("aria-pressed", "false");
@@ -616,35 +705,202 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     }
   }
 
-  function speakText(text, button = null) {
-    if (!speechSupported()) {
-      if (refs.voiceStatus) refs.voiceStatus.textContent = tr("speechUnsupported");
-      return;
+  async function speakWithPuter(text, button = null, sessionId = null) {
+    const spoken = cleanSpeechText(text).slice(0, 2800);
+    if (!spoken) return false;
+    try {
+      const puterObj = await ensurePuterLoaded();
+      const generated = await puterObj.ai.txt2speech(spoken, {
+        provider: "openai",
+        model: "gpt-4o-mini-tts",
+        voice: "alloy",
+        response_format: "mp3",
+        instructions: ctx?.lang === "en"
+          ? "Speak clearly, calmly and naturally for a school-age learner."
+          : "Μίλα καθαρά, ήρεμα και φυσικά στα ελληνικά, σαν βοηθός μελέτης για μαθητή.",
+      });
+      if (sessionId !== null && sessionId !== speechSession) return false;
+      const src = generated?.src || generated?.currentSrc || String(generated || "");
+      if (!src || !refs.audioPlayer) return false;
+      const player = refs.audioPlayer;
+      player.src = src;
+      player.volume = 1;
+      player.onended = () => { if (sessionId === speechSession) stopSpeaking(); };
+      player.onerror = () => { if (sessionId === speechSession) stopSpeaking(); };
+      await player.play();
+      return true;
+    } catch (err) {
+      console.warn("AI Help: Puter TTS playback failed.", err);
+      return false;
     }
-    if (button && speakingButton === button && window.speechSynthesis.speaking) {
+  }
+
+  function splitSpeechChunks(text, max = 220) {
+    const clean = cleanSpeechText(text);
+    if (clean.length <= max) return clean ? [clean] : [];
+    const parts = clean.match(/[^.!?;:]+[.!?;:]?|[^.!?;:]+$/g) || [clean];
+    const out = [];
+    let current = "";
+    for (const partRaw of parts) {
+      const part = partRaw.trim();
+      if (!part) continue;
+      if ((current + " " + part).trim().length <= max) current = (current + " " + part).trim();
+      else {
+        if (current) out.push(current);
+        if (part.length <= max) current = part;
+        else {
+          for (let i = 0; i < part.length; i += max) out.push(part.slice(i, i + max));
+          current = "";
+        }
+      }
+    }
+    if (current) out.push(current);
+    return out;
+  }
+
+  async function speakText(text, button = null) {
+    if (button && speakingButton === button && (window.speechSynthesis?.speaking || !refs.audioPlayer?.paused)) {
       stopSpeaking();
       return;
     }
     stopSpeaking();
+    primeAudioOutput();
     const spoken = cleanSpeechText(text);
     if (!spoken) return;
-    const utterance = new SpeechSynthesisUtterance(spoken);
-    utterance.lang = getSpeechLang();
-    utterance.rate = 0.96;
-    utterance.pitch = 1;
-    const voices = window.speechSynthesis.getVoices?.() || [];
-    const target = getSpeechLang().toLowerCase();
-    const voice = voices.find((v) => String(v.lang).toLowerCase() === target)
-      || voices.find((v) => String(v.lang).toLowerCase().startsWith(target.slice(0, 2)));
-    if (voice) utterance.voice = voice;
+    const sessionId = speechSession;
     if (button) {
       speakingButton = button;
       button.textContent = tr("stopListening");
       button.setAttribute("aria-pressed", "true");
     }
-    utterance.onend = () => stopSpeaking();
-    utterance.onerror = () => stopSpeaking();
-    window.speechSynthesis.speak(utterance);
+
+    // Mobile Safari is the least reliable environment for delayed SpeechSynthesis.
+    // On mobile-like devices we use Puter TTS first; desktop keeps the free device voice first.
+    if (isMobileLike()) {
+      const ok = await speakWithPuter(spoken, button, sessionId);
+      if (ok || sessionId !== speechSession) return;
+    }
+
+    if (!speechSupported()) {
+      const ok = await speakWithPuter(spoken, button, sessionId);
+      if (!ok && refs.voiceStatus) refs.voiceStatus.textContent = tr("speechUnsupported");
+      if (!ok) stopSpeaking();
+      return;
+    }
+
+    const chunks = splitSpeechChunks(spoken);
+    let index = 0;
+    const voices = window.speechSynthesis.getVoices?.() || [];
+    const target = getSpeechLang().toLowerCase();
+    const voice = voices.find((v) => String(v.lang).toLowerCase() === target)
+      || voices.find((v) => String(v.lang).toLowerCase().startsWith(target.slice(0, 2)));
+
+    const speakNext = () => {
+      if (sessionId !== speechSession) return;
+      if (index >= chunks.length) { stopSpeaking(); return; }
+      try { window.speechSynthesis.resume?.(); } catch (_) {}
+      const utterance = new SpeechSynthesisUtterance(chunks[index++]);
+      currentUtterance = utterance; // keep a strong reference for Safari/iOS
+      utterance.lang = getSpeechLang();
+      utterance.rate = 0.96;
+      utterance.pitch = 1;
+      if (voice) utterance.voice = voice;
+      let started = false;
+      utterance.onstart = () => { started = true; };
+      utterance.onend = () => speakNext();
+      utterance.onerror = async () => {
+        if (sessionId !== speechSession) return;
+        window.speechSynthesis.cancel();
+        currentUtterance = null;
+        const ok = await speakWithPuter(spoken, button, sessionId);
+        if (!ok) stopSpeaking();
+      };
+      window.speechSynthesis.speak(utterance);
+      setTimeout(async () => {
+        if (!started && sessionId === speechSession && currentUtterance === utterance) {
+          window.speechSynthesis.cancel();
+          currentUtterance = null;
+          const ok = await speakWithPuter(spoken, button, sessionId);
+          if (!ok) stopSpeaking();
+        }
+      }, 1400);
+    };
+    speakNext();
+  }
+
+  async function stopVad() {
+    if (vadTimer) clearInterval(vadTimer);
+    vadTimer = null;
+    try { vadSource?.disconnect(); } catch (_) {}
+    try { vadAnalyser?.disconnect(); } catch (_) {}
+    vadSource = null;
+    vadAnalyser = null;
+    vadData = null;
+    if (vadAudioContext) {
+      try { await vadAudioContext.close(); } catch (_) {}
+    }
+    vadAudioContext = null;
+  }
+
+  function stopRecordingNow() {
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+      try { mediaRecorder.stop(); } catch (_) {}
+    }
+  }
+
+  async function startVad(stream) {
+    await stopVad();
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    try {
+      vadAudioContext = new AudioCtx();
+      try { await vadAudioContext.resume(); } catch (_) {}
+      vadSource = vadAudioContext.createMediaStreamSource(stream);
+      vadAnalyser = vadAudioContext.createAnalyser();
+      vadAnalyser.fftSize = 1024;
+      vadAnalyser.smoothingTimeConstant = 0.45;
+      vadData = new Uint8Array(vadAnalyser.fftSize);
+      vadSource.connect(vadAnalyser);
+      speechDetected = false;
+      lastSpeechAt = Date.now();
+      vadNoiseFloor = 0.008;
+
+      vadTimer = setInterval(() => {
+        if (!recording || !vadAnalyser || !vadData) return;
+        vadAnalyser.getByteTimeDomainData(vadData);
+        let sum = 0;
+        for (let i = 0; i < vadData.length; i++) {
+          const sample = (vadData[i] - 128) / 128;
+          sum += sample * sample;
+        }
+        const rms = Math.sqrt(sum / vadData.length);
+        const now = Date.now();
+        const elapsed = now - recordingStartedAt;
+
+        // Adaptive floor without a calibration pause, so speech can begin immediately after tapping the mic.
+        if (!speechDetected || now - lastSpeechAt > 500) {
+          const capped = Math.min(rms, 0.03);
+          vadNoiseFloor = vadNoiseFloor * 0.95 + capped * 0.05;
+        }
+        const threshold = Math.max(0.014, vadNoiseFloor * 2.4);
+        if (rms > threshold) {
+          speechDetected = true;
+          lastSpeechAt = now;
+        }
+
+        // Once real speech has been heard, ~1.35 s of silence means the turn is finished.
+        if (speechDetected && elapsed > 1000 && now - lastSpeechAt >= 1350) {
+          if (refs.voiceStatus) refs.voiceStatus.textContent = tr("micAutoStop");
+          stopRecordingNow();
+        } else if (!speechDetected && elapsed >= 12000) {
+          // Avoid leaving the microphone open indefinitely if the user never speaks.
+          stopRecordingNow();
+        }
+      }, 100);
+    } catch (err) {
+      console.warn("AI Help: automatic end-of-speech detection unavailable; manual stop remains available.", err);
+      await stopVad();
+    }
   }
 
   function preferredRecordingMime() {
@@ -683,6 +939,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
   }
 
   function cancelRecording() {
+    stopVad().catch(() => {});
     if (recordingTimer) clearInterval(recordingTimer);
     recordingTimer = null;
     if (mediaRecorder && mediaRecorder.state !== "inactive") {
@@ -771,7 +1028,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     });
   }
 
-  async function transcribeAudio(blob) {
+  async function transcribeAudio(blob, autoSend = false) {
     if (!blob?.size) return;
     transcribing = true;
     if (refs.voiceStatus) refs.voiceStatus.textContent = tr("micTranscribing");
@@ -797,10 +1054,21 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
       }
       const before = refs.input.value.trim();
       refs.input.value = before ? `${before} ${text}` : text;
-      refs.input.focus();
-      if (refs.voiceStatus) refs.voiceStatus.textContent = tr("voiceHint");
-      refreshAuthStatus().catch(() => {});
       if (firstError) console.info("AI Help: transcription succeeded on fallback model.");
+      refreshAuthStatus().catch(() => {});
+
+      if (autoSend) {
+        const toSend = refs.input.value.trim();
+        refs.input.value = "";
+        if (refs.voiceStatus) refs.voiceStatus.textContent = tr("micAutoSend");
+        // The voice turn is now fully automatic: speech end -> transcript -> send.
+        transcribing = false;
+        updateComposerState();
+        await sendMessage(toSend);
+      } else {
+        refs.input.focus();
+        if (refs.voiceStatus) refs.voiceStatus.textContent = tr("voiceHint");
+      }
     } catch (err) {
       console.error("AI Help: speech transcription failed.", err);
       const raw = String(err?.msg || err?.message || err?.error || err || "");
@@ -817,7 +1085,8 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
 
   async function toggleRecording() {
     if (recording) {
-      if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+      // Manual stop is still available, but the transcript is sent automatically.
+      stopRecordingNow();
       return;
     }
     if (!micSupported()) {
@@ -843,6 +1112,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
         if (event.data?.size) audioChunks.push(event.data);
       });
       mediaRecorder.addEventListener("stop", async () => {
+        await stopVad();
         if (recordingTimer) clearInterval(recordingTimer);
         recordingTimer = null;
         recording = false;
@@ -851,19 +1121,22 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
         audioChunks = [];
         stopMicTracks();
         setMicUi();
-        await transcribeAudio(blob);
+        await transcribeAudio(blob, true);
       }, { once: true });
       mediaRecorder.start(250);
       recording = true;
       recordingStartedAt = Date.now();
+      primeAudioOutput();
+      startVad(micStream).catch(() => {});
       updateRecordingStatus();
       recordingTimer = setInterval(() => {
         updateRecordingStatus();
-        if (Date.now() - recordingStartedAt >= 60000 && mediaRecorder?.state !== "inactive") mediaRecorder.stop();
+        if (Date.now() - recordingStartedAt >= 45000 && mediaRecorder?.state !== "inactive") stopRecordingNow();
       }, 500);
       setMicUi();
     } catch (err) {
       recording = false;
+      stopVad().catch(() => {});
       stopMicTracks();
       if (refs.voiceStatus) refs.voiceStatus.textContent = /permission|denied|notallowed/i.test(String(err?.message || err || "")) ? tr("micPermission") : tr("micFailed");
       setMicUi();
@@ -877,13 +1150,13 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     div.className = `tutor-bubble tutor-bubble--${role}`;
     const label = role === "user" ? tr("you") : (isParentMode() ? tr("parentHelper") : tr("tutor"));
     div.innerHTML = `<div class="tutor-bubble__meta">${escapeHtml(label)}</div><div class="tutor-bubble__text">${escapeHtml(text).replaceAll("\n", "<br>")}</div>`;
-    if (role === "assistant" && speechSupported()) {
+    if (role === "assistant") {
       const speak = document.createElement("button");
       speak.type = "button";
       speak.className = "tutor-speak-btn";
       speak.textContent = tr("listen");
       speak.setAttribute("aria-pressed", "false");
-      speak.addEventListener("click", () => speakText(text, speak));
+      speak.addEventListener("click", () => { primeAudioOutput(); speakText(text, speak); });
       div.appendChild(speak);
     }
     refs.messages.appendChild(div);
@@ -899,6 +1172,8 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
 
   function resetConversation(clearMessages = true) {
     stopSpeaking();
+    if (recording) cancelRecording();
+    else stopVad().catch(() => {});
     conversation = [];
     if (clearMessages && refs.messages) {
       refs.messages.innerHTML = `
@@ -1015,14 +1290,18 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     refs.signIn.addEventListener("click", () => explicitSignIn(false));
     refs.switchAccount.addEventListener("click", () => explicitSignIn(true));
     refs.newChat.addEventListener("click", () => resetConversation());
-    refs.mic?.addEventListener("click", () => toggleRecording());
-    refs.autoSpeak?.addEventListener("change", () => { if (!refs.autoSpeak.checked) stopSpeaking(); });
+    refs.mic?.addEventListener("click", () => { primeAudioOutput(); toggleRecording(); });
+    refs.autoSpeak?.addEventListener("change", () => {
+      if (refs.autoSpeak.checked) primeAudioOutput();
+      else stopSpeaking();
+    });
     refs.sample.addEventListener("click", () => {
       refs.input.value = sampleText();
       refs.input.focus();
     });
     refs.form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      primeAudioOutput();
       const text = refs.input.value;
       refs.input.value = "";
       await sendMessage(text);
@@ -1122,6 +1401,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
                 <button type="submit" class="tutor-btn tutor-btn--primary" id="tutorSend" disabled>${escapeHtml(tr("send"))}</button>
               </div>
               <label class="tutor-auto-speak"><input type="checkbox" id="tutorAutoSpeak"> <span>${escapeHtml(tr("autoSpeak"))}</span></label>
+              <audio id="tutorAudioPlayer" preload="none" playsinline hidden></audio>
             </form>
           </div>
         </div>
@@ -1157,6 +1437,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       mic: byId("tutorMic"),
       voiceStatus: byId("tutorVoiceStatus"),
       autoSpeak: byId("tutorAutoSpeak"),
+      audioPlayer: byId("tutorAudioPlayer"),
       send: byId("tutorSend"),
       busy: byId("tutorBusy"),
       newChat: byId("tutorNewChat"),

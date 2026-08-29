@@ -1,5 +1,5 @@
 /**
- * site-integrity-overrides.js — cleanup v3 (2026-08-29)
+ * site-integrity-overrides.js — refinement v3.1 (2026-08-29)
  * Loaded after all static data files and before tutor.js/app.js.
  * Purpose: keep access rules explicit, add safe browser-based learning alternatives,
  * make AI Help a universal recommendation, and add Environment Studies diagnostics.
@@ -101,6 +101,57 @@
     TOOLS.gemini.minAgeNote = "Για προσωπικό λογαριασμό στην Ελλάδα: 15+ (το ισχύον εθνικό όριο διαχείρισης Google Account). Οι εποπτευόμενοι Family Link λογαριασμοί για μικρότερες ηλικίες δεν έχουν πρόσβαση στο Gemini στον ΕΟΧ. Ξεχωριστή σχολική διαδρομή υπάρχει μέσω Google Workspace for Education όταν το σχολείο την ενεργοποιεί.";
   }
 
+  // v3.1 — make the recommended learning mode explicit on mainstream tools.
+  // These are additions, never replacements for AI Help or browser-based alternatives.
+  if (typeof TOOLS !== "undefined" && TOOLS.chatgpt) {
+    Object.assign(TOOLS.chatgpt, {
+      shortDescEl: "AI βοηθός γενικής χρήσης. Για σχολική μελέτη σε κατάλληλες ηλικίες προτίμησε το Study Mode, ώστε η συζήτηση να δουλεύει περισσότερο με ερωτήσεις, βήματα και έλεγχο κατανόησης αντί για έτοιμη απάντηση.",
+      shortDescEn: "General-purpose AI assistant. For school study at appropriate ages, prefer Study Mode so the conversation uses questions, steps and understanding checks rather than simply handing over an answer.",
+      greekTips: "Για σχολική χρήση: άνοιξε Study Mode και ξεκίνα γράφοντας τάξη, μάθημα, θέμα και τι έχεις ήδη προσπαθήσει. Μην χρησιμοποιείς προσωπικά στοιχεία ή έτοιμη απάντηση ως παραδοτέο."
+    });
+  }
+  if (typeof TOOLS !== "undefined" && TOOLS.copilot) {
+    TOOLS.copilot.shortDescEl = "AI βοηθός της Microsoft. Σε σχολεία με Microsoft 365 Education μπορεί να χρησιμοποιείται μέσω σχολικού λογαριασμού και, όπου είναι διαθέσιμο/ενεργοποιημένο, σε λειτουργία Study and Learn.";
+    TOOLS.copilot.shortDescEn = "Microsoft AI assistant. In schools using Microsoft 365 Education it can be accessed through a school account and, where available/enabled, used with Study and Learn.";
+  }
+
+  function patchPathTool(zone, role, toolId, patch) {
+    const row = PATHS?.[zone]?.[role]?.tools?.find((x) => x.toolId === toolId);
+    if (row) Object.assign(row, patch);
+  }
+
+  ["middle","high"].forEach((zone) => {
+    patchPathTool(zone, "student", "chatgpt", {
+      useCaseEl: "Για καθοδηγούμενη μελέτη, εξήγηση δύσκολης έννοιας και εξάσκηση. Για σχολικές ερωτήσεις προτίμησε το Study Mode.",
+      useCaseEn: "For guided study, explaining a difficult concept and practice. Prefer Study Mode for school questions.",
+      howToEl: "Άνοιξε Study Mode, γράψε την τάξη/μάθημα/θέμα και τι έχεις ήδη δοκιμάσει. Ζήτησε μία υπόδειξη ή ερώτηση τη φορά — όχι την τελική λύση.",
+      howToEn: "Open Study Mode, provide your grade/subject/topic and what you have already tried. Ask for one hint or question at a time — not the final answer.",
+      cautionEl: "Ισχύουν οι όροι και οι ηλικιακοί κανόνες του ChatGPT. Μπορεί να κάνει λάθος· έλεγχε πραγματολογικά στοιχεία με βιβλίο ή αξιόπιστη πηγή.",
+      cautionEn: "ChatGPT's terms and age rules apply. It can be wrong; verify factual claims against the textbook or a reliable source."
+    });
+    patchPathTool(zone, "guardian", "chatgpt", {
+      useCaseEl: "Για να βοηθήσεις τον μαθητή να μελετήσει με ερωτήσεις αντί να πάρει έτοιμη λύση. Όταν χρησιμοποιείται ChatGPT για σχολική μελέτη, προτίμησε Study Mode.",
+      useCaseEn: "To help the student study through questions rather than receive a ready answer. Prefer Study Mode when ChatGPT is used for school study.",
+      howToEl: "Βάλε το παιδί να πει πρώτα τι κατάλαβε ή τι δοκίμασε και ζήτησε από το Study Mode το επόμενο μικρό βήμα.",
+      howToEn: "Have the learner explain what they understood or tried first, then ask Study Mode for the next small step."
+    });
+
+    patchPathTool(zone, "student", "copilot", {
+      useCaseEl: "Πρόσθετη σχολική επιλογή αν το σχολείο σου παρέχει Microsoft 365/Copilot. Όπου είναι ενεργοποιημένο, το Study and Learn είναι προτιμότερο για μελέτη.",
+      useCaseEn: "An additional school option if your school provides Microsoft 365/Copilot. Where enabled, Study and Learn is preferable for studying.",
+      howToEl: "Χρησιμοποίησε τον σχολικό λογαριασμό που σου έχει δώσει το σχολείο. Αν δεν υπάρχει πρόσβαση, χρησιμοποίησε τις άλλες προτάσεις ή την AI Βοήθεια.",
+      howToEn: "Use the school account provided by your school. If you do not have access, use the other recommendations or AI Help.",
+      cautionEl: "Η διαθεσιμότητα και οι ηλικιακές ρυθμίσεις εξαρτώνται από το σχολείο/διαχειριστή.",
+      cautionEn: "Availability and age settings depend on the school/administrator."
+    });
+    patchPathTool(zone, "guardian", "copilot", {
+      useCaseEl: "Για μαθητές σε σχολείο με Microsoft 365 Education: πρόσθετη διαχειριζόμενη επιλογή με Copilot και, όπου διατίθεται, Study and Learn.",
+      useCaseEn: "For students in a school using Microsoft 365 Education: an additional managed option with Copilot and, where available, Study and Learn.",
+      howToEl: "Χρησιμοποιείται μόνο εφόσον το σχολείο έχει δώσει πρόσβαση και έχει ενεργοποιήσει την υπηρεσία για την κατάλληλη ηλικιακή ομάδα.",
+      howToEn: "Use it only if the school has provided access and enabled the service for the appropriate age group."
+    });
+  });
+
   // Remove references to retired/unsupported Khanmigo if any stale data survives elsewhere.
   if (typeof TOOLS !== "undefined") delete TOOLS.khanmigo;
   if (typeof ACCESSIBILITY_INFO !== "undefined") delete ACCESSIBILITY_INFO.khanmigo;
@@ -156,6 +207,9 @@
     ensurePathTool("primary",r,r==="guardian"?phetGuardian:phetStudent);
     ensurePathTool("primary",r,r==="guardian"?gacGuardian:gacStudent);
     ensurePathTool("primary",r,r==="guardian"?gemEduGuardian:gemEduStudent);
+    // School-managed Gemini is an optional extra for older zones too; never the only route.
+    ensurePathTool("middle",r,r==="guardian"?gemEduGuardian:gemEduStudent);
+    ensurePathTool("high",r,r==="guardian"?gemEduGuardian:gemEduStudent);
   });
   ensurePathTool("middle","guardian",phetGuardian); ensurePathTool("middle","student",phetStudent);
   ensurePathTool("high","guardian",phetGuardian); ensurePathTool("high","student",phetStudent);
@@ -169,6 +223,14 @@
   // Google Arts & Culture also has dedicated Physics/Chemistry/Biology learning collections.
   if (CURRICULUM?.primary?.science) ensureSubjectTool("primary","science","google-arts-culture",false);
   ["science","history","language","math","foreign-language"].forEach((s) => { if (CURRICULUM?.primary?.[s]) ensureSubjectTool("primary",s,"gemini-education",false); });
+  // v3.1: school-managed Google/Microsoft routes are additional options across older-zone subjects.
+  ["middle","high"].forEach((z) => {
+    Object.keys(CURRICULUM?.[z] || {}).forEach((subject) => {
+      ensureSubjectTool(z, subject, "gemini-education", false);
+      ensureSubjectTool(z, subject, "copilot", false);
+      ensureSubjectTool(z, subject, "chatgpt", false);
+    });
+  });
   if (CURRICULUM?.primary?.language) ensureSubjectTool("primary","language","reading-coach",true);
 
   // Fix stale Primary Perplexity wording: under 13, the adult operates it; child does not use the service/account.
@@ -362,5 +424,5 @@
   }
 
   // Expose a small audit snapshot for console/debugging without sending data anywhere.
-  window.AITOOLSKIDS_INTEGRITY = Object.freeze({ version:"3.0.0", updated:TODAY, environmentQuizzes:4, newGapTags:20, addedTools:["ai-help","phet","google-arts-culture","gemini-education"] });
+  window.AITOOLSKIDS_INTEGRITY = Object.freeze({ version:"3.1.0", updated:TODAY, environmentQuizzes:4, newGapTags:20, addedTools:["ai-help","phet","google-arts-culture","gemini-education"] });
 })();

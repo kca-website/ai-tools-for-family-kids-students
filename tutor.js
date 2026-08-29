@@ -317,9 +317,23 @@
     if (book?.titleEl) lines.push(`- Official textbook: ${ctx?.lang === "en" ? (book.titleEn || book.titleEl) : book.titleEl}`);
     if (book?.url) lines.push(`- Official textbook URL: ${book.url}`);
     else if (entry.catalogUrl) lines.push(`- Official textbook catalog: ${entry.catalogUrl}`);
-    if (gapAlignment?.sectionEl) {
-      lines.push(`- Verified section related to the selected learning gap: ${gapAlignment.sectionEl}`);
-      lines.push(`- Gap-to-section status: ${gapAlignment.status}`);
+    if (gapAlignment) {
+      const status = gapAlignment.status || "unknown";
+      lines.push(`- Gap-alignment status: ${status}`);
+      if ((status === "exact-section-verified" || status === "related-section-verified") && gapAlignment.sectionEl) {
+        lines.push(`- Verified official section related to the selected learning gap: ${gapAlignment.sectionEl}`);
+        if (gapAlignment.annualScopeVerified) lines.push(`- This gap mapping is also verified against the recorded 2026-27 annual examinable scope.`);
+      } else if (status === "curriculum-mismatch-review-needed") {
+        lines.push(`- CURRICULUM MISMATCH WARNING: the current quiz/topic does not match the currently verified official course scope for the declared grade/subject.`);
+        lines.push(`- Do NOT claim that this topic belongs to the official curriculum of this grade. Treat help as general educational support only until the quiz is corrected.`);
+      } else {
+        const anchor = ctx?.lang === "en" ? (gapAlignment.topicAnchorEn || gapAlignment.topicAnchorEl) : (gapAlignment.topicAnchorEl || gapAlignment.topicAnchorEn);
+        if (anchor) lines.push(`- Curriculum topic anchor (NOT section-level verified): ${anchor}`);
+        lines.push(`- Do not cite this anchor as an official chapter/section or as proof that it is examinable this year.`);
+      }
+      const gapNote = ctx?.lang === "en" ? (gapAlignment.noteEn || gapAlignment.noteEl) : (gapAlignment.noteEl || gapAlignment.noteEn);
+      if (gapNote) lines.push(`- Gap-alignment note: ${gapNote}`);
+      if (gapAlignment.sourceUrl) lines.push(`- Gap source: ${gapAlignment.sourceUrl}`);
     }
     if (sections.length) {
       lines.push(`- Verified textbook scope/index:`);
@@ -328,6 +342,7 @@
     const scopeNote = officialValue(entry, "scopeNoteEl", "scopeNoteEn");
     if (scopeNote) lines.push(`- Scope note: ${scopeNote}`);
     lines.push(`- Annual 2026-27 teaching-instructions status: ${entry.annualInstructionsStatus || "unknown"}`);
+    if (entry.annualInstructionsUrl) lines.push(`- Official annual-syllabus/instructions source: ${entry.annualInstructionsUrl}`);
     const annualNote = officialValue(entry, "annualInstructionsNoteEl", "annualInstructionsNoteEn");
     if (annualNote) lines.push(`- Annual-instructions note: ${annualNote}`);
     lines.push(``, `SOURCE-DISCIPLINE RULES`,
@@ -335,6 +350,8 @@
       `B. Treat "official-book-verified" as verification of the official textbook only. Do not infer that every chapter is taught/examined this year.`,
       `C. Treat "book-index-verified" as verified textbook contents/scope, but still keep annual teaching/exam instructions separate.`,
       `D. When an exact or related gap-to-section mapping is supplied, prefer that section's terminology, sequence and expected level.`,
+      `D2. "official-course-topic-anchor" and "catalog-topic-anchor" are navigation aids only. They are NOT official chapter titles and NOT section-level verification.`,
+      `D3. "curriculum-mismatch-review-needed" means you MUST NOT claim official grade alignment; answer only as general educational support and, when relevant, say the site's curriculum mapping is under review.`,
       `E. Never say "this is in the 2026-27 taught/examined syllabus" unless annual instructions are explicitly marked verified.`,
       `F. If the learner asks something outside verified scope, you may explain it as general knowledge only if useful, but clearly avoid presenting it as required Greek-school curriculum.`,
       `G. Prefer methods and terminology compatible with the official textbook; do not introduce a more advanced method as if it were the expected classroom method.`,
@@ -503,9 +520,13 @@
     const sourceName = officialBook
       ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
       : tr("officialCatalog");
+    const gapOfficial = getOfficialGapAlignment();
+    const gapStatusLabel = gapOfficial ? officialValue(gapOfficial, "statusLabelEl", "statusLabelEn", gapOfficial.status || "") : "";
+    const mismatch = gapOfficial?.status === "curriculum-mismatch-review-needed";
     const officialHtml = official ? `<br><br>
       <b>${escapeHtml(tr("officialBasis"))}:</b> ${escapeHtml(officialLabel)}<br>
-      ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceName)} ↗</a>` : ""}` : "";
+      ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceName)} ↗</a>` : ""}
+      ${gapStatusLabel ? `<br><span${mismatch ? ' style="color:#b45309;font-weight:700"' : ""}>${escapeHtml(gapStatusLabel)}</span>` : ""}` : "";
 
     refs.contextBox.innerHTML = `
       <b>${escapeHtml(tr("contextClass"))}:</b> ${escapeHtml(getSelectedGradeLabel())}<br>

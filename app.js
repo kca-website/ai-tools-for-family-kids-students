@@ -26,6 +26,7 @@
     // Quiz sub-state
     quizGradeId: null,
     quizSubjectId: null,
+    quizBrowseTopicsId: null, // subjectId ενός quiz που περιηγείται ο χρήστης ΧΩΡΙΣ να κάνει το τεστ
     quizCurrentIndex: 0,
     quizAnswers: [],
     quizFinished: false,
@@ -47,7 +48,7 @@
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
       badgeZeroTracking: "Χωρίς Cookies",
-      badgeZeroTrackingExplainer: "Δεν αποθηκεύουμε τίποτα για εσάς ή το παιδί σας — ούτε cookies, ούτε λογαριασμό, ούτε ιστορικό. Κάθε φορά που ανοίγετε τη σελίδα ξεκινάτε από το μηδέν, όπως θα διαβάζατε ένα βιβλίο.",
+      badgeZeroTrackingExplainer: "Δεν στέλνουμε τίποτα για εσάς ή το παιδί σας σε κανέναν server — ούτε cookies, ούτε λογαριασμό, ούτε tracking. Αν κάνεις το διαγνωστικό τεστ, το αποτέλεσμα αποθηκεύεται μόνο τοπικά σε αυτή τη συσκευή (browser storage), για να μπορείς να συνεχίσεις αργότερα· μπορείς να το διαγράψεις όποτε θες, με ένα κλικ.",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
       heroQuizCta: "Κάνε το Διαγνωστικό σε 2 λεπτά",
@@ -89,6 +90,11 @@
       quizGradeComingSoon: "Έρχεται σύντομα",
       quizGradeEmptyState: "Δεν υπάρχει ακόμα διαγνωστικό κουίζ για αυτή την τάξη. Έρχεται σύντομα.",
       quizStartBtn: "Ξεκίνα το κουίζ",
+      quizBrowseBtn: "Δες τα θέματα",
+      quizBrowseHeading: "Θέματα σε αυτό το μάθημα",
+      quizBrowseIntro: "Διάλεξε ένα θέμα για να δεις κατευθείαν το μονοπάτι μάθησης — χωρίς τεστ.",
+      quizBrowseBack: "← Άλλο μάθημα",
+      quizBrowseTakeTest: "Κάνε αντ' αυτού το τεστ (2 λεπτά)",
       quizQuestionOf: "Ερώτηση {current} από {total}",
       quizResultsTitle: "Το αποτέλεσμα του Χάρτη",
       quizAllCorrect: "Απάντησε σωστά σε όλα! Καμία συγκεκριμένη δυσκολία δεν εντοπίστηκε αυτή τη φορά.",
@@ -136,7 +142,7 @@
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
       badgeZeroTracking: "No Cookies",
-      badgeZeroTrackingExplainer: "We don't store anything about you or your child — no cookies, no account, no history. Every time you open the page you start fresh, like reading a book.",
+      badgeZeroTrackingExplainer: "We never send anything about you or your child to any server — no cookies, no account, no tracking. If you take the diagnostic quiz, the result is saved only locally on this device (browser storage) so you can continue later; you can delete it anytime with one click.",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
       heroQuizCta: "Take the 2-minute Diagnostic",
@@ -168,6 +174,11 @@
       quizGradeComingSoon: "Coming soon",
       quizGradeEmptyState: "No diagnostic quiz yet for this grade. Coming soon.",
       quizStartBtn: "Start the quiz",
+      quizBrowseBtn: "See the topics",
+      quizBrowseHeading: "Topics in this subject",
+      quizBrowseIntro: "Pick a topic to see the learning path directly — no quiz needed.",
+      quizBrowseBack: "← Change subject",
+      quizBrowseTakeTest: "Take the quiz instead (2 min)",
       quizQuestionOf: "Question {current} of {total}",
       quizResultsTitle: "Your Compass Result",
       quizAllCorrect: "All correct! No specific gap spotted this time.",
@@ -913,6 +924,7 @@ function renderToolGrid(pathTools, targetElement) {
   function resetQuizState() {
     state.quizGradeId = null;
     state.quizSubjectId = null;
+    state.quizBrowseTopicsId = null;
     state.quizCurrentIndex = 0;
     state.quizAnswers = [];
     state.quizFinished = false;
@@ -967,6 +979,14 @@ function renderToolGrid(pathTools, targetElement) {
     if (!state.quizGradeId) {
       renderQuizGradePicker(zoneQuizzes);
       return;
+    }
+    if (state.quizBrowseTopicsId) {
+      const browseQuiz = zoneQuizzes[state.quizBrowseTopicsId];
+      if (browseQuiz) {
+        renderTopicBrowser(browseQuiz, zoneQuizzes);
+        return;
+      }
+      state.quizBrowseTopicsId = null;
     }
     if (!state.quizSubjectId) {
       const gradeSubjectIds = subjectIds.filter((sid) => (zoneQuizzes[sid].grades || []).includes(state.quizGradeId));
@@ -1033,6 +1053,7 @@ function renderToolGrid(pathTools, targetElement) {
           <p class="quiz-subject-card__title">${escapeHtml(title)}</p>
           <p class="quiz-subject-card__intro">${escapeHtml(intro)}</p>
           <button type="button" class="quiz-start-btn" data-subject-id="${escapeAttr(sid)}">${t("quizStartBtn")}</button>
+          <button type="button" class="quiz-browse-btn" data-subject-id="${escapeAttr(sid)}">${t("quizBrowseBtn")}</button>
         </article>
       `;
     }).join("");
@@ -1053,6 +1074,70 @@ function renderToolGrid(pathTools, targetElement) {
         startQuizSession(zoneQuizzes[state.quizSubjectId]);
         renderQuizView();
       });
+    });
+    els.quizContent.querySelectorAll(".quiz-browse-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.quizBrowseTopicsId = btn.dataset.subjectId;
+        renderQuizView();
+      });
+    });
+  }
+
+  // Λίστα όλων των θεμάτων (gap tags) ενός μαθήματος, ΧΩΡΙΣ να χρειάζεται να κάνει
+  // κανείς το τεστ πρώτα. Κάθε θέμα ανοίγει κατευθείαν το ίδιο Μονοπάτι Μάθησης
+  // που θα έβλεπε αν το τεστ εντόπιζε εκεί κενό — καμία νέα βάση περιεχομένου.
+  function renderTopicBrowser(quiz, zoneQuizzes) {
+    const subjectLabel = state.lang === "el" ? quiz.subjectLabelEl : quiz.subjectLabelEn;
+    const tagIds = [];
+    (quiz.questions || []).forEach((q) => {
+      (q.options || []).forEach((opt) => {
+        if (opt.gapTag && !tagIds.includes(opt.gapTag)) tagIds.push(opt.gapTag);
+      });
+    });
+    const topicCards = tagIds.map((tagId) => {
+      const gap = (typeof GAP_TAGS !== "undefined" && GAP_TAGS[tagId]) || null;
+      if (!gap) return "";
+      const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
+      const explain = state.lang === "el" ? gap.explainEl : gap.explainEn;
+      const hasPath = typeof LEARNING_PATHS !== "undefined" && LEARNING_PATHS[tagId];
+      return `
+        <button type="button" class="quiz-topic-card" data-gap-id="${escapeAttr(tagId)}" ${hasPath ? "" : "disabled"}>
+          <span class="quiz-topic-card__label">${escapeHtml(label)}</span>
+          <span class="quiz-topic-card__explain">${escapeHtml(explain)}</span>
+        </button>
+      `;
+    }).join("");
+
+    els.quizContent.innerHTML = `
+      <button type="button" class="quiz-grade-back-btn" id="quizBrowseBackBtn">${t("quizBrowseBack")}</button>
+      <p class="quiz-pick-heading">${escapeHtml(subjectLabel)} · ${t("quizBrowseHeading")}</p>
+      <p class="quiz-browse-intro">${t("quizBrowseIntro")}</p>
+      <div class="quiz-topic-grid">${topicCards}</div>
+      <button type="button" class="quiz-start-btn" id="quizBrowseTakeTestBtn" style="margin-top:16px;">${t("quizBrowseTakeTest")}</button>
+    `;
+
+    const backBtn = document.getElementById("quizBrowseBackBtn");
+    if (backBtn) {
+      backBtn.addEventListener("click", () => {
+        state.quizBrowseTopicsId = null;
+        renderQuizView();
+      });
+    }
+    const takeTestBtn = document.getElementById("quizBrowseTakeTestBtn");
+    if (takeTestBtn) {
+      takeTestBtn.addEventListener("click", () => {
+        const subjectId = state.quizBrowseTopicsId;
+        state.quizBrowseTopicsId = null;
+        state.quizSubjectId = subjectId;
+        state.quizCurrentIndex = 0;
+        state.quizAnswers = [];
+        state.quizFinished = false;
+        startQuizSession(zoneQuizzes[subjectId]);
+        renderQuizView();
+      });
+    }
+    els.quizContent.querySelectorAll(".quiz-topic-card").forEach((btn) => {
+      btn.addEventListener("click", () => openLearningPathModal(btn.dataset.gapId));
     });
   }
 
@@ -1099,6 +1184,7 @@ function renderToolGrid(pathTools, targetElement) {
 
   function renderQuizResults(quiz) {
     const gapTagIds = [...new Set(state.quizAnswers.map((a) => a.gapTag).filter(Boolean))];
+    saveProgress(state.currentZone, state.quizSubjectId, gapTagIds);
     let gapsHtml = "";
     if (!gapTagIds.length) {
       gapsHtml = `<p class="quiz-all-correct">${t("quizAllCorrect")}</p>`;
@@ -1811,6 +1897,7 @@ function renderToolGrid(pathTools, targetElement) {
     if (!state.currentZone) {
       els.pathView.hidden = true;
       els.zoneSelectView.hidden = false;
+      renderContinueBanner();
       updateDocumentTitle();
       return;
     }
@@ -1845,6 +1932,108 @@ function renderToolGrid(pathTools, targetElement) {
     const zoneLabel = zone ? (state.lang === "el" ? zone.labelEl : zone.labelEn) : "";
     const viewKey = "viewTab" + state.currentView.charAt(0).toUpperCase() + state.currentView.slice(1);
     document.title = `${zoneLabel} · ${t(viewKey)} · ${base}`;
+  }
+
+  // ---------- Η διαδρομή μου (τοπική πρόοδος, μόνο σε αυτή τη συσκευή) ----------
+  // Αποθηκεύει ΜΟΝΟ το τελευταίο αποτέλεσμα διαγνωστικού (ζώνη, quiz, gap tags).
+  // Καμία μεταφορά σε server, κανένα cookie — απλό localStorage, σβήνεται με ένα κλικ.
+  const PROGRESS_KEY = "aitools4kids_progress_v1";
+
+  function saveProgress(zoneId, quizId, gapTagIds) {
+    if (!zoneId || !quizId) return;
+    try {
+      localStorage.setItem(
+        PROGRESS_KEY,
+        JSON.stringify({ zoneId, quizId, gapTagIds, savedAt: Date.now() })
+      );
+    } catch (e) {
+      // Private browsing ή απενεργοποιημένο localStorage — αγνόησε ήσυχα, δεν είναι κρίσιμο.
+    }
+  }
+
+  function loadProgress() {
+    try {
+      const raw = localStorage.getItem(PROGRESS_KEY);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (!data || !data.zoneId || !data.quizId || !Array.isArray(data.gapTagIds)) return null;
+      return data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function clearProgress() {
+    try {
+      localStorage.removeItem(PROGRESS_KEY);
+    } catch (e) {}
+    renderContinueBanner();
+  }
+
+  function resumeProgress() {
+    const progress = loadProgress();
+    if (!progress) return;
+    const zoneQuizzes = QUIZZES[progress.zoneId] || {};
+    const quiz = zoneQuizzes[progress.quizId];
+    if (!quiz) return; // το quiz μπορεί να έχει αφαιρεθεί/μετονομαστεί από τότε
+    state.currentZone = progress.zoneId;
+    state.currentRole = "guardian";
+    state.currentSubject = null;
+    state.currentView = "quiz";
+    resetQuizState();
+    state.quizGradeId = (quiz.grades && quiz.grades[0]) || null;
+    state.quizSubjectId = progress.quizId;
+    state.quizFinished = true;
+    state.quizAnswers = progress.gapTagIds.map((tag) => ({ gapTag: tag }));
+    pushRoute();
+    renderCurrentRoute();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Εμφανίζεται μόνο στην αρχική (καμία ζώνη επιλεγμένη). Χτίζεται δυναμικά,
+  // δεν χρειάζεται νέο στοιχείο στο index.html.
+  function renderContinueBanner() {
+    if (!els.zoneSelectView) return;
+    const existing = document.getElementById("continueProgressBanner");
+    if (existing) existing.remove();
+
+    const progress = loadProgress();
+    if (!progress) return;
+    const zone = ZONES.find((z) => z.id === progress.zoneId);
+    if (!zone) return;
+    const zoneQuizzes = QUIZZES[progress.zoneId] || {};
+    const quiz = zoneQuizzes[progress.quizId];
+    if (!quiz) return;
+
+    const zoneLabel = state.lang === "el" ? zone.labelEl : zone.labelEn;
+    const quizLabel = state.lang === "el" ? quiz.subjectLabelEl : quiz.subjectLabelEn;
+    const daysAgo = Math.floor((Date.now() - progress.savedAt) / (1000 * 60 * 60 * 24));
+    const whenEl = daysAgo <= 0 ? "σήμερα" : daysAgo === 1 ? "χθες" : `πριν ${daysAgo} μέρες`;
+    const whenEn = daysAgo <= 0 ? "today" : daysAgo === 1 ? "yesterday" : `${daysAgo} days ago`;
+    const titleText = state.lang === "el" ? "Συνέχισε από εκεί που έμεινες" : "Continue where you left off";
+    const subText = state.lang === "el"
+      ? `${zoneLabel} · ${quizLabel} · αποθηκεύτηκε ${whenEl}, μόνο σε αυτή τη συσκευή`
+      : `${zoneLabel} · ${quizLabel} · saved ${whenEn}, on this device only`;
+    const continueText = state.lang === "el" ? "Συνέχισε →" : "Continue →";
+    const clearText = state.lang === "el" ? "Διαγραφή αποθηκευμένης προόδου" : "Clear saved progress";
+
+    const html = `
+      <div id="continueProgressBanner" class="continue-progress-banner" style="background:var(--color-bg-soft,#F0F7FF);border:1px solid var(--color-border,#E3E8F0);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+        <div>
+          <p style="margin:0;font-weight:700;">${escapeHtml(titleText)}</p>
+          <p style="margin:2px 0 0;font-size:0.85rem;color:var(--color-text-muted,#5A6270);">${escapeHtml(subText)}</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+          <button type="button" id="continueProgressBtn" style="background:var(--color-accent,#2E6BA3);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-weight:600;cursor:pointer;">${escapeHtml(continueText)}</button>
+          <button type="button" id="clearProgressBtn" style="background:none;border:none;color:var(--color-text-muted,#5A6270);font-size:0.78rem;text-decoration:underline;cursor:pointer;padding:0;">${escapeHtml(clearText)}</button>
+        </div>
+      </div>
+    `;
+    els.zoneSelectView.insertAdjacentHTML("afterbegin", html);
+    const continueBtn = document.getElementById("continueProgressBtn");
+    if (continueBtn) continueBtn.addEventListener("click", resumeProgress);
+    const clearBtn = document.getElementById("clearProgressBtn");
+    if (clearBtn) clearBtn.addEventListener("click", clearProgress);
   }
 
   // ---------- Navigation ----------
@@ -1898,6 +2087,7 @@ function renderToolGrid(pathTools, targetElement) {
     renderStaticStrings();
     renderZoneGrid();
     renderHeroQuizPicker();
+    if (!state.currentZone) renderContinueBanner();
     if (state.currentZone) {
       renderRoleTabs();
       renderSubjectFilter();

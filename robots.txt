@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.aitools4kids.gr/sitemap.xml
+Sitemap: https://www.aitools4kids.gr/sign-language-sitemap.xml

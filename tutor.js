@@ -693,24 +693,103 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     setMicUi();
   }
 
+  function writeAscii(view, offset, text) {
+    for (let i = 0; i < text.length; i++) view.setUint8(offset + i, text.charCodeAt(i));
+  }
+
+  function audioBufferToWavBlob(audioBuffer) {
+    const channels = Math.min(2, audioBuffer.numberOfChannels || 1);
+    const sampleRate = audioBuffer.sampleRate;
+    const length = audioBuffer.length;
+    const bytesPerSample = 2;
+    const blockAlign = channels * bytesPerSample;
+    const buffer = new ArrayBuffer(44 + length * blockAlign);
+    const view = new DataView(buffer);
+
+    writeAscii(view, 0, "RIFF");
+    view.setUint32(4, 36 + length * blockAlign, true);
+    writeAscii(view, 8, "WAVE");
+    writeAscii(view, 12, "fmt ");
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, channels, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * blockAlign, true);
+    view.setUint16(32, blockAlign, true);
+    view.setUint16(34, 16, true);
+    writeAscii(view, 36, "data");
+    view.setUint32(40, length * blockAlign, true);
+
+    const channelData = [];
+    for (let c = 0; c < channels; c++) channelData.push(audioBuffer.getChannelData(c));
+    let offset = 44;
+    for (let i = 0; i < length; i++) {
+      for (let c = 0; c < channels; c++) {
+        const sample = Math.max(-1, Math.min(1, channelData[c][i] || 0));
+        view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7fff, true);
+        offset += 2;
+      }
+    }
+    return new Blob([buffer], { type: "audio/wav" });
+  }
+
+  async function makeTranscriptionFile(blob) {
+    // Browser MediaRecorder output varies (webm/opus, mp4, ogg).
+    // Puter/OpenAI transcription is more reliable when the payload has a
+    // concrete filename/extension; WAV is used when the browser can decode it.
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) {
+        const context = new AudioCtx();
+        try {
+          const arrayBuffer = await blob.arrayBuffer();
+          const decoded = await context.decodeAudioData(arrayBuffer.slice(0));
+          const wav = audioBufferToWavBlob(decoded);
+          return new File([wav], "question.wav", { type: "audio/wav" });
+        } finally {
+          try { await context.close(); } catch (_) {}
+        }
+      }
+    } catch (err) {
+      console.warn("AI Help: WAV conversion unavailable, using original recording.", err);
+    }
+
+    const type = String(blob.type || "audio/webm").toLowerCase();
+    const ext = type.includes("mp4") ? "m4a" : type.includes("ogg") ? "ogg" : type.includes("wav") ? "wav" : "webm";
+    return new File([blob], `question.${ext}`, { type: blob.type || `audio/${ext}` });
+  }
+
+  async function requestTranscript(puterObj, source, model) {
+    return puterObj.ai.speech2txt(source, {
+      provider: "openai",
+      model,
+      response_format: "text",
+      language: ctx?.lang === "en" ? "en" : "el",
+      prompt: ctx?.lang === "en"
+        ? "School question. Preserve mathematical symbols and school subject terminology."
+        : "Σχολική ερώτηση στα ελληνικά. Διατήρησε σωστά μαθηματικά σύμβολα, αριθμούς και σχολική ορολογία.",
+    });
+  }
+
   async function transcribeAudio(blob) {
     if (!blob?.size) return;
     transcribing = true;
-    if (refs.voiceStatus) {
-      refs.voiceStatus.textContent = tr("micTranscribing");
-    }
+    if (refs.voiceStatus) refs.voiceStatus.textContent = tr("micTranscribing");
     updateComposerState();
     try {
       const puterObj = await ensurePuterLoaded();
-      const transcript = await puterObj.ai.speech2txt(blob, {
-        provider: "openai",
-        model: "gpt-4o-mini-transcribe",
-        response_format: "text",
-        language: ctx?.lang === "en" ? "en" : "el",
-        prompt: ctx?.lang === "en"
-          ? "School question. Preserve mathematical symbols and school subject terminology."
-          : "Σχολική ερώτηση στα ελληνικά. Διατήρησε σωστά μαθηματικά σύμβολα, αριθμούς και σχολική ορολογία.",
-      });
+      const source = await makeTranscriptionFile(blob);
+
+      let transcript;
+      let firstError = null;
+      try {
+        transcript = await requestTranscript(puterObj, source, "gpt-4o-mini-transcribe");
+      } catch (err) {
+        firstError = err;
+        console.warn("AI Help: gpt-4o-mini-transcribe failed; retrying with whisper-1.", err);
+        transcript = await requestTranscript(puterObj, source, "whisper-1");
+      }
+
       const text = typeof transcript === "string" ? transcript.trim() : String(transcript?.text || "").trim();
       if (!text) {
         if (refs.voiceStatus) refs.voiceStatus.textContent = tr("micEmpty");
@@ -721,9 +800,15 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
       refs.input.focus();
       if (refs.voiceStatus) refs.voiceStatus.textContent = tr("voiceHint");
       refreshAuthStatus().catch(() => {});
+      if (firstError) console.info("AI Help: transcription succeeded on fallback model.");
     } catch (err) {
-      const permissionish = /permission|denied|notallowed/i.test(String(err?.message || err || ""));
-      if (refs.voiceStatus) refs.voiceStatus.textContent = permissionish ? tr("micPermission") : tr("micFailed");
+      console.error("AI Help: speech transcription failed.", err);
+      const raw = String(err?.msg || err?.message || err?.error || err || "");
+      const permissionish = /permission|denied|notallowed/i.test(raw);
+      if (refs.voiceStatus) {
+        refs.voiceStatus.textContent = permissionish ? tr("micPermission") : tr("micFailed");
+        refs.voiceStatus.title = raw.slice(0, 500);
+      }
     } finally {
       transcribing = false;
       updateComposerState();

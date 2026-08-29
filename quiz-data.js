@@ -1,7624 +1,12502 @@
 /**
-quiz-data.js
-Δεδομένα για το "Ο Διαγνωστικός Χάρτης Μάθησης" (Learning Compass).
-Φιλοσοφία: ΔΕΝ είναι τεστ βαθμολόγησης. Κάθε ερώτηση στοχεύει ΜΙΑ
-συγκεκριμένη, τεκμηριωμένη παρανόηση (misconception).
-*/
+ * quiz-data.js — curriculum-aligned update v2.1 (2026-08-29)
+ * Diagnostic data; preserves 280 gap tags while correcting three high-school quiz scopes against official 2026-27 / 2027 sources.
+ */
 
-// ---------- GAP TAGS ----------
 const GAP_TAGS = {
   "fractions.whole_number_bias": {
-    id: "fractions.whole_number_bias",
-    labelEl: "Σύγκριση κλασμάτων",
-    labelEn: "Comparing fractions",
-    explainEl: "Δυσκολεύεται να συγκρίνει κλάσματα όταν ο παρονομαστής είναι μεγαλύτερος αριθμός. Συχνά σκέφτεται τον αριθμητή και τον παρονομαστή σαν δύο ξεχωριστούς ακέραιους αριθμούς, αντί για ένα ενιαίο μέγεθος.",
-    explainEn: "Struggles to compare fractions when the denominator is a bigger number. Often treats the numerator and denominator as two separate whole numbers instead of one combined quantity.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Αστέρι των Κλασμάτων",
-    achievementEn: "Star of Fractions",
-    positiveMessageEl: "Έχεις το ταλέντο να σκέφτεσαι σαν μαθηματικός!",
-    positiveMessageEn: "You have the talent to think like a mathematician!",
-    skillTagEl: "Κλάσματα & Σύγκριση",
-    skillTagEn: "Fractions & Comparison",
+    "id": "fractions.whole_number_bias",
+    "labelEl": "Σύγκριση κλασμάτων",
+    "labelEn": "Comparing fractions",
+    "explainEl": "Δυσκολεύεται να συγκρίνει κλάσματα όταν ο παρονομαστής είναι μεγαλύτερος αριθμός. Συχνά σκέφτεται τον αριθμητή και τον παρονομαστή σαν δύο ξεχωριστούς ακέραιους αριθμούς, αντί για ένα ενιαίο μέγεθος.",
+    "explainEn": "Struggles to compare fractions when the denominator is a bigger number. Often treats the numerator and denominator as two separate whole numbers instead of one combined quantity.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Αστέρι των Κλασμάτων",
+    "achievementEn": "Star of Fractions",
+    "positiveMessageEl": "Έχεις το ταλέντο να σκέφτεσαι σαν μαθηματικός!",
+    "positiveMessageEn": "You have the talent to think like a mathematician!",
+    "skillTagEl": "Κλάσματα & Σύγκριση",
+    "skillTagEn": "Fractions & Comparison"
   },
   "fractions.add_across": {
-    id: "fractions.add_across",
-    labelEl: "Πρόσθεση κλασμάτων",
-    labelEn: "Adding fractions",
-    explainEl: "Προσθέτει ξεχωριστά αριθμητές και παρονομαστές αντί να βρει πρώτα κοινό παρονομαστή. Είναι το πιο συχνό λάθος στην πρόσθεση κλασμάτων σε αυτή την ηλικία.",
-    explainEn: "Adds numerators and denominators separately instead of finding a common denominator first. This is the most common error in fraction addition at this age.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ της Πρόσθεσης",
-    achievementEn: "Master of Addition",
-    positiveMessageEl: "Η επιμονή σου σε δύσκολες ασκήσεις σε κάνει δυνατό!",
-    positiveMessageEn: "Your persistence in tough exercises makes you strong!",
-    skillTagEl: "Πρόσθεση Κλασμάτων",
-    skillTagEn: "Fraction Addition",
+    "id": "fractions.add_across",
+    "labelEl": "Πρόσθεση κλασμάτων",
+    "labelEn": "Adding fractions",
+    "explainEl": "Προσθέτει ξεχωριστά αριθμητές και παρονομαστές αντί να βρει πρώτα κοινό παρονομαστή. Είναι το πιο συχνό λάθος στην πρόσθεση κλασμάτων σε αυτή την ηλικία.",
+    "explainEn": "Adds numerators and denominators separately instead of finding a common denominator first. This is the most common error in fraction addition at this age.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ της Πρόσθεσης",
+    "achievementEn": "Master of Addition",
+    "positiveMessageEl": "Η επιμονή σου σε δύσκολες ασκήσεις σε κάνει δυνατό!",
+    "positiveMessageEn": "Your persistence in tough exercises makes you strong!",
+    "skillTagEl": "Πρόσθεση Κλασμάτων",
+    "skillTagEn": "Fraction Addition"
   },
   "decimals.longer_is_larger": {
-    id: "decimals.longer_is_larger",
-    labelEl: "Σύγκριση δεκαδικών",
-    labelEn: "Comparing decimals",
-    explainEl: "Πιστεύει ότι ο δεκαδικός με περισσότερα ψηφία είναι πάντα ο μεγαλύτερος (π.χ. νομίζει ότι το 0,45 είναι μεγαλύτερο από το 0,8). Είναι πολύ κοινή παρανόηση σε αυτή την ηλικία και χρειάζεται συγκεκριμένη εξάσκηση στη θεσιακή αξία.",
-    explainEn: "Believes a decimal with more digits is always bigger (e.g. thinks 0.45 is greater than 0.8). Very common at this age and needs targeted practice on place value.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Κυνηγός των Δεκαδικών",
-    achievementEn: "Decimal Hunter",
-    positiveMessageEl: "Ανακαλύπτεις τα μυστικά των δεκαδικών αριθμών!",
-    positiveMessageEn: "You're discovering the secrets of decimal numbers!",
-    skillTagEl: "Δεκαδικοί & Θεσιακή Αξία",
-    skillTagEn: "Decimals & Place Value",
+    "id": "decimals.longer_is_larger",
+    "labelEl": "Σύγκριση δεκαδικών",
+    "labelEn": "Comparing decimals",
+    "explainEl": "Πιστεύει ότι ο δεκαδικός με περισσότερα ψηφία είναι πάντα ο μεγαλύτερος (π.χ. νομίζει ότι το 0,45 είναι μεγαλύτερο από το 0,8). Είναι πολύ κοινή παρανόηση σε αυτή την ηλικία και χρειάζεται συγκεκριμένη εξάσκηση στη θεσιακή αξία.",
+    "explainEn": "Believes a decimal with more digits is always bigger (e.g. thinks 0.45 is greater than 0.8). Very common at this age and needs targeted practice on place value.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Κυνηγός των Δεκαδικών",
+    "achievementEn": "Decimal Hunter",
+    "positiveMessageEl": "Ανακαλύπτεις τα μυστικά των δεκαδικών αριθμών!",
+    "positiveMessageEn": "You're discovering the secrets of decimal numbers!",
+    "skillTagEl": "Δεκαδικοί & Θεσιακή Αξία",
+    "skillTagEn": "Decimals & Place Value"
   },
   "division.remainder": {
-    id: "division.remainder",
-    labelEl: "Διαίρεση με υπόλοιπο",
-    labelEn: "Division with remainder",
-    explainEl: "Δυσκολεύεται στη διαίρεση με διψήφιο διαιρέτη, ειδικά στο να θυμηθεί το υπόλοιπο στο τέλος. Χρειάζεται βήμα-βήμα εξάσκηση στον αλγόριθμο της διαίρεσης.",
-    explainEn: "Struggles with division by a 2-digit divisor, especially remembering the remainder at the end. Needs step-by-step practice with the division algorithm.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Αρχιτέκτονας της Διαίρεσης",
-    achievementEn: "Architect of Division",
-    positiveMessageEl: "Κάθε δύσκολη διαίρεση σε κάνει πιο δυνατό!",
-    positiveMessageEn: "Every tough division makes you stronger!",
-    skillTagEl: "Διαίρεση & Υπόλοιπο",
-    skillTagEn: "Division & Remainders",
+    "id": "division.remainder",
+    "labelEl": "Διαίρεση με υπόλοιπο",
+    "labelEn": "Division with remainder",
+    "explainEl": "Δυσκολεύεται στη διαίρεση με διψήφιο διαιρέτη, ειδικά στο να θυμηθεί το υπόλοιπο στο τέλος. Χρειάζεται βήμα-βήμα εξάσκηση στον αλγόριθμο της διαίρεσης.",
+    "explainEn": "Struggles with division by a 2-digit divisor, especially remembering the remainder at the end. Needs step-by-step practice with the division algorithm.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Αρχιτέκτονας της Διαίρεσης",
+    "achievementEn": "Architect of Division",
+    "positiveMessageEl": "Κάθε δύσκολη διαίρεση σε κάνει πιο δυνατό!",
+    "positiveMessageEn": "Every tough division makes you stronger!",
+    "skillTagEl": "Διαίρεση & Υπόλοιπο",
+    "skillTagEn": "Division & Remainders"
   },
   "percent.as_fraction": {
-    id: "percent.as_fraction",
-    labelEl: "Ποσοστά",
-    labelEn: "Percentages",
-    explainEl: "Δεν έχει ακόμα καταλάβει καλά ότι το ποσοστό σημαίνει «τόσο στα εκατό». Μπερδεύει τη μετατροπή ποσοστού σε κλάσμα.",
-    explainEn: "Hasn't yet fully grasped that percent means 'out of a hundred.' Confuses converting a percentage into a fraction.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Εξερευνητής των Ποσοστών",
-    achievementEn: "Percentage Explorer",
-    positiveMessageEl: "Τα ποσοστά γίνονται παιχνίδι για σένα!",
-    positiveMessageEn: "Percentages are becoming a game for you!",
-    skillTagEl: "Ποσοστά & Κλάσματα",
-    skillTagEn: "Percentages & Fractions",
+    "id": "percent.as_fraction",
+    "labelEl": "Ποσοστά",
+    "labelEn": "Percentages",
+    "explainEl": "Δεν έχει ακόμα καταλάβει καλά ότι το ποσοστό σημαίνει «τόσο στα εκατό». Μπερδεύει τη μετατροπή ποσοστού σε κλάσμα.",
+    "explainEn": "Hasn't yet fully grasped that percent means 'out of a hundred.' Confuses converting a percentage into a fraction.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εξερευνητής των Ποσοστών",
+    "achievementEn": "Percentage Explorer",
+    "positiveMessageEl": "Τα ποσοστά γίνονται παιχνίδι για σένα!",
+    "positiveMessageEn": "Percentages are becoming a game for you!",
+    "skillTagEl": "Ποσοστά & Κλάσματα",
+    "skillTagEn": "Percentages & Fractions"
   },
   "measurement.area_perimeter_confusion": {
-    id: "measurement.area_perimeter_confusion",
-    labelEl: "Εμβαδόν και περίμετρος",
-    labelEn: "Area and perimeter",
-    explainEl: "Μπερδεύει τον τύπο του εμβαδού με τον τύπο της περιμέτρου. Χρειάζεται οπτικοποίηση της διαφοράς: η περίμετρος μετράει το 'γύρω-γύρω', το εμβαδόν μετράει την επιφάνεια.",
-    explainEn: "Mixes up the area formula with the perimeter formula. Needs a visual reminder of the difference: perimeter measures the 'way around,' area measures the surface.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάγος των Μετρήσεων",
-    achievementEn: "Wizard of Measurements",
-    positiveMessageEl: "Η φαντασία σου βλέπει το εμβαδόν παντού!",
-    positiveMessageEn: "Your imagination sees area everywhere!",
-    skillTagEl: "Εμβαδόν & Περίμετρος",
-    skillTagEn: "Area & Perimeter",
+    "id": "measurement.area_perimeter_confusion",
+    "labelEl": "Εμβαδόν και περίμετρος",
+    "labelEn": "Area and perimeter",
+    "explainEl": "Μπερδεύει τον τύπο του εμβαδού με τον τύπο της περιμέτρου. Χρειάζεται οπτικοποίηση της διαφοράς: η περίμετρος μετράει το 'γύρω-γύρω', το εμβαδόν μετράει την επιφάνεια.",
+    "explainEn": "Mixes up the area formula with the perimeter formula. Needs a visual reminder of the difference: perimeter measures the 'way around,' area measures the surface.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάγος των Μετρήσεων",
+    "achievementEn": "Wizard of Measurements",
+    "positiveMessageEl": "Η φαντασία σου βλέπει το εμβαδόν παντού!",
+    "positiveMessageEn": "Your imagination sees area everywhere!",
+    "skillTagEl": "Εμβαδόν & Περίμετρος",
+    "skillTagEn": "Area & Perimeter"
   },
-  // ---------- ΝΕΑ GAP TAGS: ΙΣΤΟΡΙΑ, ΓΛΩΣΣΑ, ΦΥΣΙΚΗ ----------
   "history.athens-sparta-confusion": {
-    id: "history.athens-sparta-confusion",
-    labelEl: "Αθήνα vs Σπάρτη",
-    labelEn: "Athens vs Sparta",
-    explainEl: "Μπερδεύει τα χαρακτηριστικά της Αθηναϊκής Δημοκρατίας με τη Σπαρτιατική Ολιγαρχία. Χρειάζεται οπτική σύγκριση των δύο συστημάτων.",
-    explainEn: "Confuses characteristics of Athenian Democracy with Spartan Oligarchy. Needs visual comparison of the two systems.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μικρός Ιστορικός",
-    achievementEn: "The Little Historian",
-    positiveMessageEl: "Η ιστορία ζωντανεύει μέσα από τα μάτια σου!",
-    positiveMessageEn: "History comes alive through your eyes!",
-    skillTagEl: "Αρχαία Ελλάδα",
-    skillTagEn: "Ancient Greece",
+    "id": "history.athens-sparta-confusion",
+    "labelEl": "Αθήνα vs Σπάρτη",
+    "labelEn": "Athens vs Sparta",
+    "explainEl": "Μπερδεύει τα χαρακτηριστικά της Αθηναϊκής Δημοκρατίας με τη Σπαρτιατική Ολιγαρχία. Χρειάζεται οπτική σύγκριση των δύο συστημάτων.",
+    "explainEn": "Confuses characteristics of Athenian Democracy with Spartan Oligarchy. Needs visual comparison of the two systems.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μικρός Ιστορικός",
+    "achievementEn": "The Little Historian",
+    "positiveMessageEl": "Η ιστορία ζωντανεύει μέσα από τα μάτια σου!",
+    "positiveMessageEn": "History comes alive through your eyes!",
+    "skillTagEl": "Αρχαία Ελλάδα",
+    "skillTagEn": "Ancient Greece"
   },
   "history.byzantine-confusion": {
-    id: "history.byzantine-confusion",
-    labelEl: "Βυζαντινή Αυτοκρατορία",
-    labelEn: "Byzantine Empire",
-    explainEl: "Δυσκολεύεται να συνδέσει τη Βυζαντινή περίοδο με τη συνέχεια της Ρωμαϊκής Αυτοκρατορίας. Χρειάζεται χρονολογική τοποθέτηση.",
-    explainEn: "Struggles to connect the Byzantine period with the continuation of the Roman Empire. Needs chronological placement.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Βυζαντινός Εξερευνητής",
-    achievementEn: "Byzantine Explorer",
-    positiveMessageEl: "Ανακαλύπτεις τους θησαυρούς του Βυζαντίου!",
-    positiveMessageEn: "You're discovering the treasures of Byzantium!",
-    skillTagEl: "Βυζαντινή Ιστορία",
-    skillTagEn: "Byzantine History",
+    "id": "history.byzantine-confusion",
+    "labelEl": "Βυζαντινή Αυτοκρατορία",
+    "labelEn": "Byzantine Empire",
+    "explainEl": "Δυσκολεύεται να συνδέσει τη Βυζαντινή περίοδο με τη συνέχεια της Ρωμαϊκής Αυτοκρατορίας. Χρειάζεται χρονολογική τοποθέτηση.",
+    "explainEn": "Struggles to connect the Byzantine period with the continuation of the Roman Empire. Needs chronological placement.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Βυζαντινός Εξερευνητής",
+    "achievementEn": "Byzantine Explorer",
+    "positiveMessageEl": "Ανακαλύπτεις τους θησαυρούς του Βυζαντίου!",
+    "positiveMessageEn": "You're discovering the treasures of Byzantium!",
+    "skillTagEl": "Βυζαντινή Ιστορία",
+    "skillTagEn": "Byzantine History"
   },
   "grammar.subject-verb-agreement": {
-    id: "grammar.subject-verb-agreement",
-    labelEl: "Συμφωνία υποκειμένου-ρήματος",
-    labelEn: "Subject-verb agreement",
-    explainEl: "Δυσκολεύεται με τη συμφωνία υποκειμένου και ρήματος, ειδικά σε σύνθετες προτάσεις. Χρειάζεται εξάσκηση στην αναγνώριση του υποκειμένου.",
-    explainEn: "Struggles with subject-verb agreement, especially in complex sentences. Needs practice in identifying the subject.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Μάστερ της Γραμματικής",
-    achievementEn: "Grammar Master",
-    positiveMessageEl: "Η γλώσσα γίνεται το superpower σου!",
-    positiveMessageEn: "Language becomes your superpower!",
-    skillTagEl: "Γραμματική",
-    skillTagEn: "Grammar",
+    "id": "grammar.subject-verb-agreement",
+    "labelEl": "Συμφωνία υποκειμένου-ρήματος",
+    "labelEn": "Subject-verb agreement",
+    "explainEl": "Δυσκολεύεται με τη συμφωνία υποκειμένου και ρήματος, ειδικά σε σύνθετες προτάσεις. Χρειάζεται εξάσκηση στην αναγνώριση του υποκειμένου.",
+    "explainEn": "Struggles with subject-verb agreement, especially in complex sentences. Needs practice in identifying the subject.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Μάστερ της Γραμματικής",
+    "achievementEn": "Grammar Master",
+    "positiveMessageEl": "Η γλώσσα γίνεται το superpower σου!",
+    "positiveMessageEn": "Language becomes your superpower!",
+    "skillTagEl": "Γραμματική",
+    "skillTagEn": "Grammar"
   },
   "grammar.comma-usage": {
-    id: "grammar.comma-usage",
-    labelEl: "Χρήση κομμάτων",
-    labelEn: "Comma usage",
-    explainEl: "Μπερδεύεται με τη χρήση κομμάτων σε απαριθμήσεις, προτάσεις και κλήσεις. Χρειάζεται κανόνες και παραδείγματα.",
-    explainEn: "Confused about comma usage in lists, clauses, and addresses. Needs rules and examples.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Στιγματίας των Κομμάτων",
-    achievementEn: "Comma Champion",
-    positiveMessageEl: "Κάθε κόμμα σε κάνει καλύτερο συγγραφέα!",
-    positiveMessageEn: "Every comma makes you a better writer!",
-    skillTagEl: "Στίξη",
-    skillTagEn: "Punctuation",
+    "id": "grammar.comma-usage",
+    "labelEl": "Χρήση κομμάτων",
+    "labelEn": "Comma usage",
+    "explainEl": "Μπερδεύεται με τη χρήση κομμάτων σε απαριθμήσεις, προτάσεις και κλήσεις. Χρειάζεται κανόνες και παραδείγματα.",
+    "explainEn": "Confused about comma usage in lists, clauses, and addresses. Needs rules and examples.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Στιγματίας των Κομμάτων",
+    "achievementEn": "Comma Champion",
+    "positiveMessageEl": "Κάθε κόμμα σε κάνει καλύτερο συγγραφέα!",
+    "positiveMessageEn": "Every comma makes you a better writer!",
+    "skillTagEl": "Στίξη",
+    "skillTagEn": "Punctuation"
   },
   "physics.force-motion-confusion": {
-    id: "physics.force-motion-confusion",
-    labelEl: "Δύναμη και κίνηση",
-    labelEn: "Force and motion",
-    explainEl: "Πιστεύει ότι χρειάζεται συνεχής δύναμη για να διατηρηθεί η κίνηση (Αριστοτελική αντίληψη). Χρειάζεται κατανόηση του 1ου νόμου του Νεύτωνα.",
-    explainEn: "Believes continuous force is needed to maintain motion (Aristotelian view). Needs understanding of Newton's 1st law.",
-    recommendedToolIds: ["wolfram-alpha"],
-    achievementEl: "Ο Μικρός Νεύτωνας",
-    achievementEn: "The Little Newton",
-    positiveMessageEl: "Ανακαλύπτεις τους νόμους της φύσης!",
-    positiveMessageEn: "You're discovering the laws of nature!",
-    skillTagEl: "Φυσική - Δυνάμεις",
-    skillTagEn: "Physics - Forces",
+    "id": "physics.force-motion-confusion",
+    "labelEl": "Δύναμη και κίνηση",
+    "labelEn": "Force and motion",
+    "explainEl": "Πιστεύει ότι χρειάζεται συνεχής δύναμη για να διατηρηθεί η κίνηση (Αριστοτελική αντίληψη). Χρειάζεται κατανόηση του 1ου νόμου του Νεύτωνα.",
+    "explainEn": "Believes continuous force is needed to maintain motion (Aristotelian view). Needs understanding of Newton's 1st law.",
+    "recommendedToolIds": [
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Μικρός Νεύτωνας",
+    "achievementEn": "The Little Newton",
+    "positiveMessageEl": "Ανακαλύπτεις τους νόμους της φύσης!",
+    "positiveMessageEn": "You're discovering the laws of nature!",
+    "skillTagEl": "Φυσική - Δυνάμεις",
+    "skillTagEn": "Physics - Forces"
   },
   "history.olympics-location": {
-    id: "history.olympics-location",
-    labelEl: "Τόπος Αρχαίων Ολυμπιακών",
-    labelEn: "Ancient Olympics location",
-    explainEl: "Μπερδεύει την Ολυμπία, όπου γίνονταν οι Αρχαίοι Ολυμπιακοί Αγώνες, με άλλες σημαντικές πόλεις-κράτη όπως η Αθήνα ή οι Δελφοί. Χρειάζεται γεωγραφική τοποθέτηση στον χάρτη της Αρχαίας Ελλάδας.",
-    explainEn: "Confuses Olympia, where the Ancient Olympic Games were held, with other major city-states like Athens or Delphi. Needs geographic placement on the map of Ancient Greece.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ολυμπιονίκης της Ιστορίας",
-    achievementEn: "The History Olympian",
-    positiveMessageEl: "Γνωρίζεις τα μονοπάτια της Αρχαίας Ελλάδας!",
-    positiveMessageEn: "You know your way around Ancient Greece!",
-    skillTagEl: "Γεωγραφία Αρχαίας Ελλάδας",
-    skillTagEn: "Ancient Greek Geography",
+    "id": "history.olympics-location",
+    "labelEl": "Τόπος Αρχαίων Ολυμπιακών",
+    "labelEn": "Ancient Olympics location",
+    "explainEl": "Μπερδεύει την Ολυμπία, όπου γίνονταν οι Αρχαίοι Ολυμπιακοί Αγώνες, με άλλες σημαντικές πόλεις-κράτη όπως η Αθήνα ή οι Δελφοί. Χρειάζεται γεωγραφική τοποθέτηση στον χάρτη της Αρχαίας Ελλάδας.",
+    "explainEn": "Confuses Olympia, where the Ancient Olympic Games were held, with other major city-states like Athens or Delphi. Needs geographic placement on the map of Ancient Greece.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ολυμπιονίκης της Ιστορίας",
+    "achievementEn": "The History Olympian",
+    "positiveMessageEl": "Γνωρίζεις τα μονοπάτια της Αρχαίας Ελλάδας!",
+    "positiveMessageEn": "You know your way around Ancient Greece!",
+    "skillTagEl": "Γεωγραφία Αρχαίας Ελλάδας",
+    "skillTagEn": "Ancient Greek Geography"
   },
   "history.philosophers-confusion": {
-    id: "history.philosophers-confusion",
-    labelEl: "Αρχαίοι Φιλόσοφοι",
-    labelEn: "Ancient philosophers",
-    explainEl: "Δυσκολεύεται να θυμηθεί ποιος φιλόσοφος δίδαξε ποιον (Σωκράτης → Πλάτων → Αριστοτέλης). Χρειάζεται μια απλή χρονολογική αλυσίδα δασκάλου-μαθητή.",
-    explainEn: "Struggles to remember which philosopher taught whom (Socrates → Plato → Aristotle). Needs a simple teacher-student timeline.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μικρός Φιλόσοφος",
-    achievementEn: "The Little Philosopher",
-    positiveMessageEl: "Σκέφτεσαι σαν τους μεγάλους φιλοσόφους!",
-    positiveMessageEn: "You're thinking like the great philosophers!",
-    skillTagEl: "Αρχαίοι Φιλόσοφοι",
-    skillTagEn: "Ancient Philosophers",
+    "id": "history.philosophers-confusion",
+    "labelEl": "Αρχαίοι Φιλόσοφοι",
+    "labelEn": "Ancient philosophers",
+    "explainEl": "Δυσκολεύεται να θυμηθεί ποιος φιλόσοφος δίδαξε ποιον (Σωκράτης → Πλάτων → Αριστοτέλης). Χρειάζεται μια απλή χρονολογική αλυσίδα δασκάλου-μαθητή.",
+    "explainEn": "Struggles to remember which philosopher taught whom (Socrates → Plato → Aristotle). Needs a simple teacher-student timeline.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μικρός Φιλόσοφος",
+    "achievementEn": "The Little Philosopher",
+    "positiveMessageEl": "Σκέφτεσαι σαν τους μεγάλους φιλοσόφους!",
+    "positiveMessageEn": "You're thinking like the great philosophers!",
+    "skillTagEl": "Αρχαίοι Φιλόσοφοι",
+    "skillTagEn": "Ancient Philosophers"
   },
   "physics.density-mass-confusion": {
-    id: "physics.density-mass-confusion",
-    labelEl: "Πυκνότητα vs Μάζα",
-    labelEn: "Density vs Mass",
-    explainEl: "Μπερδεύει τη μάζα με την πυκνότητα. Πιστεύει ότι μεγάλο αντικείμενο = μεγάλη πυκνότητα. Χρειάζεται οπτικά παραδείγματα.",
-    explainEn: "Confuses mass with density. Believes big object = high density. Needs visual examples.",
-    recommendedToolIds: ["wolfram-alpha"],
-    achievementEl: "Ο Εξερευνητής της Πυκνότητας",
-    achievementEn: "Density Explorer",
-    positiveMessageEl: "Κατανοείς τα μυστικά της ύλης!",
-    positiveMessageEn: "You understand the secrets of matter!",
-    skillTagEl: "Φυσική - Ιδιότητες",
-    skillTagEn: "Physics - Properties",
+    "id": "physics.density-mass-confusion",
+    "labelEl": "Πυκνότητα vs Μάζα",
+    "labelEn": "Density vs Mass",
+    "explainEl": "Μπερδεύει τη μάζα με την πυκνότητα. Πιστεύει ότι μεγάλο αντικείμενο = μεγάλη πυκνότητα. Χρειάζεται οπτικά παραδείγματα.",
+    "explainEn": "Confuses mass with density. Believes big object = high density. Needs visual examples.",
+    "recommendedToolIds": [
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Εξερευνητής της Πυκνότητας",
+    "achievementEn": "Density Explorer",
+    "positiveMessageEl": "Κατανοείς τα μυστικά της ύλης!",
+    "positiveMessageEn": "You understand the secrets of matter!",
+    "skillTagEl": "Φυσική - Ιδιότητες",
+    "skillTagEn": "Physics - Properties"
   },
   "spelling.homophones": {
-    id: "spelling.homophones",
-    labelEl: "Ομόηχες λέξεις",
-    labelEn: "Homophones",
-    explainEl: "Γράφει τις λέξεις όπως ακούγονται, χωρίς να λαμβάνει υπόψη τη σημασία ή το μέρος του λόγου. Μπερδεύει ομόηχες λέξεις όπως «λύπη» και «λείπει».",
-    explainEn: "Spells words by sound alone, ignoring meaning or part of speech. Confuses homophones like 'λύπη' (sadness) and 'λείπει' (is missing).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Κυνηγός των Ομόηχων",
-    achievementEn: "Homophone Hunter",
-    positiveMessageEl: "Ξεχωρίζεις τις λέξεις που ακούγονται ίδιες αλλά σημαίνουν διαφορετικά πράγματα!",
-    positiveMessageEn: "You can tell apart words that sound the same but mean different things!",
-    skillTagEl: "Ομόηχες Λέξεις",
-    skillTagEn: "Homophones",
+    "id": "spelling.homophones",
+    "labelEl": "Ομόηχες λέξεις",
+    "labelEn": "Homophones",
+    "explainEl": "Γράφει τις λέξεις όπως ακούγονται, χωρίς να λαμβάνει υπόψη τη σημασία ή το μέρος του λόγου. Μπερδεύει ομόηχες λέξεις όπως «λύπη» και «λείπει».",
+    "explainEn": "Spells words by sound alone, ignoring meaning or part of speech. Confuses homophones like 'λύπη' (sadness) and 'λείπει' (is missing).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Κυνηγός των Ομόηχων",
+    "achievementEn": "Homophone Hunter",
+    "positiveMessageEl": "Ξεχωρίζεις τις λέξεις που ακούγονται ίδιες αλλά σημαίνουν διαφορετικά πράγματα!",
+    "positiveMessageEn": "You can tell apart words that sound the same but mean different things!",
+    "skillTagEl": "Ομόηχες Λέξεις",
+    "skillTagEn": "Homophones"
   },
   "spelling.oti-otidipote": {
-    id: "spelling.oti-otidipote",
-    labelEl: "«Ό,τι» και «ότι»",
-    labelEn: "'Ó,ti' vs 'óti'",
-    explainEl: "Μπερδεύει το «ό,τι» (=οτιδήποτε) με το «ότι» (σύνδεσμος), επειδή ακούγονται ακριβώς ίδια.",
-    explainEn: "Confuses 'ó,ti' (=whatever) with 'óti' (the conjunction 'that'), because they sound identical.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ του «Ό,τι»",
-    achievementEn: "Master of 'Ó,ti'",
-    positiveMessageEl: "Ξέρεις πότε βάζουμε κόμμα στο «ό,τι» και πότε όχι!",
-    positiveMessageEn: "You know exactly when 'ó,ti' needs that comma and when it doesn't!",
-    skillTagEl: "«Ό,τι» και «Ότι»",
-    skillTagEn: "'Ó,ti' vs 'Óti'",
+    "id": "spelling.oti-otidipote",
+    "labelEl": "«Ό,τι» και «ότι»",
+    "labelEn": "'Ó,ti' vs 'óti'",
+    "explainEl": "Μπερδεύει το «ό,τι» (=οτιδήποτε) με το «ότι» (σύνδεσμος), επειδή ακούγονται ακριβώς ίδια.",
+    "explainEn": "Confuses 'ó,ti' (=whatever) with 'óti' (the conjunction 'that'), because they sound identical.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ του «Ό,τι»",
+    "achievementEn": "Master of 'Ó,ti'",
+    "positiveMessageEl": "Ξέρεις πότε βάζουμε κόμμα στο «ό,τι» και πότε όχι!",
+    "positiveMessageEn": "You know exactly when 'ó,ti' needs that comma and when it doesn't!",
+    "skillTagEl": "«Ό,τι» και «Ότι»",
+    "skillTagEn": "'Ó,ti' vs 'Óti'"
   },
   "spelling.final-n": {
-    id: "spelling.final-n",
-    labelEl: "Τελικό -ν",
-    labelEn: "Final -n rule",
-    explainEl: "Παραλείπει το τελικό -ν στο άρθρο «τον/έναν» επειδή στην προφορά συχνά δεν ακούγεται καθαρά.",
-    explainEn: "Drops the final -n from the article 'ton/énan' because it's often not clearly heard in speech.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Φύλακας του Τελικού -ν",
-    achievementEn: "Guardian of the Final -N",
-    positiveMessageEl: "Δεν σου ξεφεύγει ούτε ένα γράμμα!",
-    positiveMessageEn: "Not a single letter slips past you!",
-    skillTagEl: "Τελικό -ν",
-    skillTagEn: "Final -N Rule",
+    "id": "spelling.final-n",
+    "labelEl": "Τελικό -ν",
+    "labelEn": "Final -n rule",
+    "explainEl": "Παραλείπει το τελικό -ν στο άρθρο «τον/έναν» επειδή στην προφορά συχνά δεν ακούγεται καθαρά.",
+    "explainEn": "Drops the final -n from the article 'ton/énan' because it's often not clearly heard in speech.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Φύλακας του Τελικού -ν",
+    "achievementEn": "Guardian of the Final -N",
+    "positiveMessageEl": "Δεν σου ξεφεύγει ούτε ένα γράμμα!",
+    "positiveMessageEn": "Not a single letter slips past you!",
+    "skillTagEl": "Τελικό -ν",
+    "skillTagEn": "Final -N Rule"
   },
   "spelling.verb-ending": {
-    id: "spelling.verb-ending",
-    labelEl: "Κατάληξη ρήματος -ει",
-    labelEn: "Verb ending -ei",
-    explainEl: "Μπερδεύει την κατάληξη -ει του ρήματος στο γ' ενικό πρόσωπο με άλλες καταλήξεις που ακούγονται παρόμοια.",
-    explainEn: "Confuses the -ei verb ending (3rd person singular) with other similarly-sounding endings.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ειδικός των Ρημάτων",
-    achievementEn: "Verb Ending Expert",
-    positiveMessageEl: "Τα ρήματα δεν έχουν μυστικά για σένα!",
-    positiveMessageEn: "Verbs have no secrets from you!",
-    skillTagEl: "Καταλήξεις Ρημάτων",
-    skillTagEn: "Verb Endings",
+    "id": "spelling.verb-ending",
+    "labelEl": "Κατάληξη ρήματος -ει",
+    "labelEn": "Verb ending -ei",
+    "explainEl": "Μπερδεύει την κατάληξη -ει του ρήματος στο γ' ενικό πρόσωπο με άλλες καταλήξεις που ακούγονται παρόμοια.",
+    "explainEn": "Confuses the -ei verb ending (3rd person singular) with other similarly-sounding endings.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ειδικός των Ρημάτων",
+    "achievementEn": "Verb Ending Expert",
+    "positiveMessageEl": "Τα ρήματα δεν έχουν μυστικά για σένα!",
+    "positiveMessageEn": "Verbs have no secrets from you!",
+    "skillTagEl": "Καταλήξεις Ρημάτων",
+    "skillTagEn": "Verb Endings"
   },
   "spelling.stem-confusion": {
-    id: "spelling.stem-confusion",
-    labelEl: "Θέμα λέξης",
-    labelEn: "Word stem spelling",
-    explainEl: "Γράφει τη λέξη όπως την προφέρει, αγνοώντας τη σωστή γραφή του θέματός της (π.χ. «παιδιά» με «αι» αντί για «ε»).",
-    explainEn: "Spells the word phonetically, ignoring the correct spelling of its stem (e.g. 'παιδιά' with 'αι' instead of 'ε').",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Ρίζας",
-    achievementEn: "Root Word Expert",
-    positiveMessageEl: "Ξέρεις από πού προέρχεται κάθε λέξη!",
-    positiveMessageEn: "You know where every word comes from!",
-    skillTagEl: "Θέμα Λέξης",
-    skillTagEn: "Word Stems",
+    "id": "spelling.stem-confusion",
+    "labelEl": "Θέμα λέξης",
+    "labelEn": "Word stem spelling",
+    "explainEl": "Γράφει τη λέξη όπως την προφέρει, αγνοώντας τη σωστή γραφή του θέματός της (π.χ. «παιδιά» με «αι» αντί για «ε»).",
+    "explainEn": "Spells the word phonetically, ignoring the correct spelling of its stem (e.g. 'παιδιά' with 'αι' instead of 'ε').",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Ρίζας",
+    "achievementEn": "Root Word Expert",
+    "positiveMessageEl": "Ξέρεις από πού προέρχεται κάθε λέξη!",
+    "positiveMessageEn": "You know where every word comes from!",
+    "skillTagEl": "Θέμα Λέξης",
+    "skillTagEn": "Word Stems"
   },
-
-  // ---------- ΔΗΜΟΤΙΚΟ: ΦΥΣΙΚΕΣ ΕΠΙΣΤΗΜΕΣ ----------
   "science-primary.seasons-distance": {
-    id: "science-primary.seasons-distance",
-    labelEl: "Αιτία των εποχών",
-    labelEn: "Cause of the seasons",
-    explainEl: "Πιστεύει ότι οι εποχές οφείλονται στην απόσταση της Γης από τον Ήλιο, ενώ στην πραγματικότητα οφείλονται στην κλίση του άξονα της Γης.",
-    explainEn: "Believes seasons are caused by Earth's changing distance from the Sun, when they're actually caused by the tilt of Earth's axis.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Εξερευνητής των Εποχών",
-    achievementEn: "Season Explorer",
-    positiveMessageEl: "Καταλαβαίνεις γιατί αλλάζουν οι εποχές στον πλανήτη μας!",
-    positiveMessageEn: "You understand why the seasons change on our planet!",
-    skillTagEl: "Εποχές & Κλίση Γης",
-    skillTagEn: "Seasons & Earth's Tilt",
+    "id": "science-primary.seasons-distance",
+    "labelEl": "Αιτία των εποχών",
+    "labelEn": "Cause of the seasons",
+    "explainEl": "Πιστεύει ότι οι εποχές οφείλονται στην απόσταση της Γης από τον Ήλιο, ενώ στην πραγματικότητα οφείλονται στην κλίση του άξονα της Γης.",
+    "explainEn": "Believes seasons are caused by Earth's changing distance from the Sun, when they're actually caused by the tilt of Earth's axis.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Εξερευνητής των Εποχών",
+    "achievementEn": "Season Explorer",
+    "positiveMessageEl": "Καταλαβαίνεις γιατί αλλάζουν οι εποχές στον πλανήτη μας!",
+    "positiveMessageEn": "You understand why the seasons change on our planet!",
+    "skillTagEl": "Εποχές & Κλίση Γης",
+    "skillTagEn": "Seasons & Earth's Tilt"
   },
   "science-primary.day-night-sun-moves": {
-    id: "science-primary.day-night-sun-moves",
-    labelEl: "Αιτία μέρας/νύχτας",
-    labelEn: "Cause of day/night",
-    explainEl: "Πιστεύει ότι η μέρα και η νύχτα γίνονται επειδή ο Ήλιος κινείται γύρω από τη Γη, ενώ στην πραγματικότητα η Γη περιστρέφεται γύρω από τον άξονά της.",
-    explainEn: "Believes day and night happen because the Sun moves around the Earth, when actually the Earth rotates on its axis.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Αστροναύτης της Γνώσης",
-    achievementEn: "Astronaut of Knowledge",
-    positiveMessageEl: "Ξέρεις πώς πραγματικά γυρίζει ο πλανήτης μας!",
-    positiveMessageEn: "You know how our planet really turns!",
-    skillTagEl: "Περιστροφή της Γης",
-    skillTagEn: "Earth's Rotation",
+    "id": "science-primary.day-night-sun-moves",
+    "labelEl": "Αιτία μέρας/νύχτας",
+    "labelEn": "Cause of day/night",
+    "explainEl": "Πιστεύει ότι η μέρα και η νύχτα γίνονται επειδή ο Ήλιος κινείται γύρω από τη Γη, ενώ στην πραγματικότητα η Γη περιστρέφεται γύρω από τον άξονά της.",
+    "explainEn": "Believes day and night happen because the Sun moves around the Earth, when actually the Earth rotates on its axis.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Αστροναύτης της Γνώσης",
+    "achievementEn": "Astronaut of Knowledge",
+    "positiveMessageEl": "Ξέρεις πώς πραγματικά γυρίζει ο πλανήτης μας!",
+    "positiveMessageEn": "You know how our planet really turns!",
+    "skillTagEl": "Περιστροφή της Γης",
+    "skillTagEn": "Earth's Rotation"
   },
   "science-primary.matter-disappears": {
-    id: "science-primary.matter-disappears",
-    labelEl: "Διατήρηση ύλης",
-    labelEn: "Conservation of matter",
-    explainEl: "Πιστεύει ότι όταν κάτι διαλύεται (π.χ. η ζάχαρη στο νερό), εξαφανίζεται και χάνει τη μάζα του.",
-    explainEn: "Believes that when something dissolves (e.g. sugar in water), it disappears and loses its mass.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Φύλακας της Ύλης",
-    achievementEn: "Guardian of Matter",
-    positiveMessageEl: "Ξέρεις ότι η ύλη δεν εξαφανίζεται ποτέ, απλώς αλλάζει μορφή!",
-    positiveMessageEn: "You know matter never disappears, it just changes form!",
-    skillTagEl: "Διατήρηση της Ύλης",
-    skillTagEn: "Conservation of Matter",
+    "id": "science-primary.matter-disappears",
+    "labelEl": "Διατήρηση ύλης",
+    "labelEn": "Conservation of matter",
+    "explainEl": "Πιστεύει ότι όταν κάτι διαλύεται (π.χ. η ζάχαρη στο νερό), εξαφανίζεται και χάνει τη μάζα του.",
+    "explainEn": "Believes that when something dissolves (e.g. sugar in water), it disappears and loses its mass.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Φύλακας της Ύλης",
+    "achievementEn": "Guardian of Matter",
+    "positiveMessageEl": "Ξέρεις ότι η ύλη δεν εξαφανίζεται ποτέ, απλώς αλλάζει μορφή!",
+    "positiveMessageEn": "You know matter never disappears, it just changes form!",
+    "skillTagEl": "Διατήρηση της Ύλης",
+    "skillTagEn": "Conservation of Matter"
   },
   "science-primary.heavier-falls-faster": {
-    id: "science-primary.heavier-falls-faster",
-    labelEl: "Ελεύθερη πτώση",
-    labelEn: "Free fall",
-    explainEl: "Πιστεύει ότι τα βαρύτερα αντικείμενα πέφτουν πιο γρήγορα από τα ελαφρύτερα, μπερδεύοντας το βάρος με την αντίσταση του αέρα.",
-    explainEn: "Believes heavier objects fall faster than lighter ones, confusing weight with air resistance.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Μικρός Γαλιλαίος",
-    achievementEn: "The Little Galileo",
-    positiveMessageEl: "Καταλαβαίνεις πώς πέφτουν πραγματικά τα αντικείμενα!",
-    positiveMessageEn: "You understand how objects really fall!",
-    skillTagEl: "Ελεύθερη Πτώση",
-    skillTagEn: "Free Fall",
+    "id": "science-primary.heavier-falls-faster",
+    "labelEl": "Ελεύθερη πτώση",
+    "labelEn": "Free fall",
+    "explainEl": "Πιστεύει ότι τα βαρύτερα αντικείμενα πέφτουν πιο γρήγορα από τα ελαφρύτερα, μπερδεύοντας το βάρος με την αντίσταση του αέρα.",
+    "explainEn": "Believes heavier objects fall faster than lighter ones, confusing weight with air resistance.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Μικρός Γαλιλαίος",
+    "achievementEn": "The Little Galileo",
+    "positiveMessageEl": "Καταλαβαίνεις πώς πέφτουν πραγματικά τα αντικείμενα!",
+    "positiveMessageEn": "You understand how objects really fall!",
+    "skillTagEl": "Ελεύθερη Πτώση",
+    "skillTagEn": "Free Fall"
   },
   "science-primary.moon-own-light": {
-    id: "science-primary.moon-own-light",
-    labelEl: "Φως του φεγγαριού",
-    labelEn: "Moonlight",
-    explainEl: "Πιστεύει ότι το φεγγάρι φωτίζει με το δικό του φως, ενώ στην πραγματικότητα αντανακλά το φως του Ήλιου.",
-    explainEn: "Believes the Moon shines with its own light, when it actually reflects sunlight.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Γνώστης του Φεγγαριού",
-    achievementEn: "Moon Expert",
-    positiveMessageEl: "Ξέρεις το μυστικό πίσω από το φως του φεγγαριού!",
-    positiveMessageEn: "You know the secret behind the Moon's light!",
-    skillTagEl: "Φεγγάρι & Αντανάκλαση",
-    skillTagEn: "Moon & Reflection",
+    "id": "science-primary.moon-own-light",
+    "labelEl": "Φως του φεγγαριού",
+    "labelEn": "Moonlight",
+    "explainEl": "Πιστεύει ότι το φεγγάρι φωτίζει με το δικό του φως, ενώ στην πραγματικότητα αντανακλά το φως του Ήλιου.",
+    "explainEn": "Believes the Moon shines with its own light, when it actually reflects sunlight.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Γνώστης του Φεγγαριού",
+    "achievementEn": "Moon Expert",
+    "positiveMessageEl": "Ξέρεις το μυστικό πίσω από το φως του φεγγαριού!",
+    "positiveMessageEn": "You know the secret behind the Moon's light!",
+    "skillTagEl": "Φεγγάρι & Αντανάκλαση",
+    "skillTagEn": "Moon & Reflection"
   },
-
-  // ---------- ΔΗΜΟΤΙΚΟ: ΑΓΓΛΙΚΑ ΩΣ ΞΕΝΗ ΓΛΩΣΣΑ ----------
   "efl-primary.third-person-s": {
-    id: "efl-primary.third-person-s",
-    labelEl: "Γ' πρόσωπο Ενεστώτα (-s)",
-    labelEn: "3rd person -s",
-    explainEl: "Παραλείπει το -s στο γ' ενικό πρόσωπο του Ενεστώτα, επειδή στα ελληνικά το πρόσωπο δηλώνεται διαφορετικά.",
-    explainEn: "Omits the 3rd-person -s in Present Simple, because Greek marks person differently on the verb.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Ήρωας του -S",
-    achievementEn: "The -S Hero",
-    positiveMessageEl: "Δεν ξεχνάς ποτέ το -s στο τρίτο πρόσωπο!",
-    positiveMessageEn: "You never forget the -s in third person!",
-    skillTagEl: "Ενεστώτας, Γ' Πρόσωπο",
-    skillTagEn: "Present Simple, 3rd Person",
+    "id": "efl-primary.third-person-s",
+    "labelEl": "Γ' πρόσωπο Ενεστώτα (-s)",
+    "labelEn": "3rd person -s",
+    "explainEl": "Παραλείπει το -s στο γ' ενικό πρόσωπο του Ενεστώτα, επειδή στα ελληνικά το πρόσωπο δηλώνεται διαφορετικά.",
+    "explainEn": "Omits the 3rd-person -s in Present Simple, because Greek marks person differently on the verb.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Ήρωας του -S",
+    "achievementEn": "The -S Hero",
+    "positiveMessageEl": "Δεν ξεχνάς ποτέ το -s στο τρίτο πρόσωπο!",
+    "positiveMessageEn": "You never forget the -s in third person!",
+    "skillTagEl": "Ενεστώτας, Γ' Πρόσωπο",
+    "skillTagEn": "Present Simple, 3rd Person"
   },
   "efl-primary.age-construction": {
-    id: "efl-primary.age-construction",
-    labelEl: "Έκφραση ηλικίας",
-    labelEn: "Age expressions",
-    explainEl: "Λέει «I have ten years» αντί για «I am ten years old», μεταφέροντας τη δομή της ελληνικής («είμαι δέκα χρονών»).",
-    explainEn: "Says 'I have ten years' instead of 'I am ten years old,' transferring the Greek structure ('είμαι δέκα χρονών').",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Ειδικός της Ηλικίας",
-    achievementEn: "Age Expert",
-    positiveMessageEl: "Ξέρεις τη σωστή έκφραση της ηλικίας στα Αγγλικά!",
-    positiveMessageEn: "You know the correct way to say your age in English!",
-    skillTagEl: "Έκφραση Ηλικίας",
-    skillTagEn: "Age Expressions",
+    "id": "efl-primary.age-construction",
+    "labelEl": "Έκφραση ηλικίας",
+    "labelEn": "Age expressions",
+    "explainEl": "Λέει «I have ten years» αντί για «I am ten years old», μεταφέροντας τη δομή της ελληνικής («είμαι δέκα χρονών»).",
+    "explainEn": "Says 'I have ten years' instead of 'I am ten years old,' transferring the Greek structure ('είμαι δέκα χρονών').",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Ειδικός της Ηλικίας",
+    "achievementEn": "Age Expert",
+    "positiveMessageEl": "Ξέρεις τη σωστή έκφραση της ηλικίας στα Αγγλικά!",
+    "positiveMessageEn": "You know the correct way to say your age in English!",
+    "skillTagEl": "Έκφραση Ηλικίας",
+    "skillTagEn": "Age Expressions"
   },
   "efl-primary.definite-article-generic": {
-    id: "efl-primary.definite-article-generic",
-    labelEl: "Άρθρο σε γενικές έννοιες",
-    labelEn: "Article with generics",
-    explainEl: "Βάζει «the» μπροστά από γενικά ουσιαστικά στον πληθυντικό (π.χ. «the dogs» αντί για «dogs»), όπως γίνεται στα ελληνικά.",
-    explainEn: "Adds 'the' before generic plural nouns (e.g. 'the dogs' instead of 'dogs'), as is done in Greek.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Κυνηγός του Άρθρου",
-    achievementEn: "The Article Hunter",
-    positiveMessageEl: "Ξέρεις πότε χρειάζεται «the» και πότε όχι!",
-    positiveMessageEn: "You know exactly when 'the' is needed and when it's not!",
-    skillTagEl: "Χρήση Άρθρων",
-    skillTagEn: "Article Usage",
+    "id": "efl-primary.definite-article-generic",
+    "labelEl": "Άρθρο σε γενικές έννοιες",
+    "labelEn": "Article with generics",
+    "explainEl": "Βάζει «the» μπροστά από γενικά ουσιαστικά στον πληθυντικό (π.χ. «the dogs» αντί για «dogs»), όπως γίνεται στα ελληνικά.",
+    "explainEn": "Adds 'the' before generic plural nouns (e.g. 'the dogs' instead of 'dogs'), as is done in Greek.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Κυνηγός του Άρθρου",
+    "achievementEn": "The Article Hunter",
+    "positiveMessageEl": "Ξέρεις πότε χρειάζεται «the» και πότε όχι!",
+    "positiveMessageEn": "You know exactly when 'the' is needed and when it's not!",
+    "skillTagEl": "Χρήση Άρθρων",
+    "skillTagEn": "Article Usage"
   },
   "efl-primary.phonetic-spelling": {
-    id: "efl-primary.phonetic-spelling",
-    labelEl: "Φωνητική γραφή αγγλικών",
-    labelEn: "Phonetic spelling",
-    explainEl: "Γράφει τις αγγλικές λέξεις όπως ακούγονται (π.χ. «becos» αντί για «because»), επειδή τα ελληνικά είναι πιο φωνητική γλώσσα.",
-    explainEn: "Spells English words the way they sound (e.g. 'becos' instead of 'because'), because Greek is a more phonetic language.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Μάστερ της Ορθογραφίας",
-    achievementEn: "Spelling Master",
-    positiveMessageEl: "Θυμάσαι τη σωστή γραφή ακόμα και σε δύσκολες λέξεις!",
-    positiveMessageEn: "You remember correct spelling even in tricky words!",
-    skillTagEl: "Αγγλική Ορθογραφία",
-    skillTagEn: "English Spelling",
+    "id": "efl-primary.phonetic-spelling",
+    "labelEl": "Φωνητική γραφή αγγλικών",
+    "labelEn": "Phonetic spelling",
+    "explainEl": "Γράφει τις αγγλικές λέξεις όπως ακούγονται (π.χ. «becos» αντί για «because»), επειδή τα ελληνικά είναι πιο φωνητική γλώσσα.",
+    "explainEn": "Spells English words the way they sound (e.g. 'becos' instead of 'because'), because Greek is a more phonetic language.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Μάστερ της Ορθογραφίας",
+    "achievementEn": "Spelling Master",
+    "positiveMessageEl": "Θυμάσαι τη σωστή γραφή ακόμα και σε δύσκολες λέξεις!",
+    "positiveMessageEn": "You remember correct spelling even in tricky words!",
+    "skillTagEl": "Αγγλική Ορθογραφία",
+    "skillTagEn": "English Spelling"
   },
   "efl-primary.false-friend-sympathetic": {
-    id: "efl-primary.false-friend-sympathetic",
-    labelEl: "False friend: sympathetic",
-    labelEn: "False friend: sympathetic",
-    explainEl: "Νομίζει ότι το «sympathetic» σημαίνει «συμπαθητικός» (=likeable), ενώ στα αγγλικά σημαίνει «γεμάτος κατανόηση».",
-    explainEn: "Thinks 'sympathetic' means 'συμπαθητικός' (likeable), when in English it actually means 'showing compassion/understanding.'",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Ανιχνευτής Ψεύτικων Φίλων",
-    achievementEn: "False Friend Detective",
-    positiveMessageEl: "Δεν σε ξεγελούν οι λέξεις που μοιάζουν αλλά σημαίνουν διαφορετικά πράγματα!",
-    positiveMessageEn: "You're not fooled by words that look similar but mean different things!",
-    skillTagEl: "False Friends",
-    skillTagEn: "False Friends",
+    "id": "efl-primary.false-friend-sympathetic",
+    "labelEl": "False friend: sympathetic",
+    "labelEn": "False friend: sympathetic",
+    "explainEl": "Νομίζει ότι το «sympathetic» σημαίνει «συμπαθητικός» (=likeable), ενώ στα αγγλικά σημαίνει «γεμάτος κατανόηση».",
+    "explainEn": "Thinks 'sympathetic' means 'συμπαθητικός' (likeable), when in English it actually means 'showing compassion/understanding.'",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Ανιχνευτής Ψεύτικων Φίλων",
+    "achievementEn": "False Friend Detective",
+    "positiveMessageEl": "Δεν σε ξεγελούν οι λέξεις που μοιάζουν αλλά σημαίνουν διαφορετικά πράγματα!",
+    "positiveMessageEn": "You're not fooled by words that look similar but mean different things!",
+    "skillTagEl": "False Friends",
+    "skillTagEn": "False Friends"
   },
-
-  // ---------- ΓΥΜΝΑΣΙΟ: ΜΑΘΗΜΑΤΙΚΑ ----------
   "algebra.minus-sign": {
-    id: "algebra.minus-sign",
-    labelEl: "Πρόσημο πλην",
-    labelEn: "The minus sign",
-    explainEl: "Αντιμετωπίζει το πρόσημο «-» μόνο ως πράξη αφαίρεσης και όχι ως κομμάτι του όρου, με αποτέλεσμα να το «χάνει» όταν λύνει εξισώσεις.",
-    explainEn: "Treats the '-' sign only as a subtraction operation, not as part of the term, and 'loses' it when solving equations.",
-    recommendedToolIds: ["wolfram-alpha"],
-    achievementEl: "Ο Κυνηγός του Πρόσημου",
-    achievementEn: "Sign Hunter",
-    positiveMessageEl: "Δεν σου ξεφεύγει κανένα πρόσημο!",
-    positiveMessageEn: "No sign escapes you!",
-    skillTagEl: "Πρόσημα σε Εξισώσεις",
-    skillTagEn: "Signs in Equations",
+    "id": "algebra.minus-sign",
+    "labelEl": "Πρόσημο πλην",
+    "labelEn": "The minus sign",
+    "explainEl": "Αντιμετωπίζει το πρόσημο «-» μόνο ως πράξη αφαίρεσης και όχι ως κομμάτι του όρου, με αποτέλεσμα να το «χάνει» όταν λύνει εξισώσεις.",
+    "explainEn": "Treats the '-' sign only as a subtraction operation, not as part of the term, and 'loses' it when solving equations.",
+    "recommendedToolIds": [
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Κυνηγός του Πρόσημου",
+    "achievementEn": "Sign Hunter",
+    "positiveMessageEl": "Δεν σου ξεφεύγει κανένα πρόσημο!",
+    "positiveMessageEn": "No sign escapes you!",
+    "skillTagEl": "Πρόσημα σε Εξισώσεις",
+    "skillTagEn": "Signs in Equations"
   },
   "algebra.equals-balance": {
-    id: "algebra.equals-balance",
-    labelEl: "Ισότητα ως ισορροπία",
-    labelEn: "Equals as balance",
-    explainEl: "Αντιμετωπίζει το «=» σαν «γράψε εδώ την απάντηση» αντί για «οι δύο πλευρές ισορροπούν», με αποτέλεσμα να κάνει πράξεις μόνο στη μία πλευρά.",
-    explainEn: "Treats '=' as 'write the answer here' rather than 'both sides balance,' so performs operations on only one side.",
-    recommendedToolIds: ["wolfram-alpha"],
-    achievementEl: "Ο Φύλακας της Ισορροπίας",
-    achievementEn: "Guardian of Balance",
-    positiveMessageEl: "Καταλαβαίνεις τι πραγματικά σημαίνει το «ίσον»!",
-    positiveMessageEn: "You understand what 'equals' really means!",
-    skillTagEl: "Επίλυση Εξισώσεων",
-    skillTagEn: "Solving Equations",
+    "id": "algebra.equals-balance",
+    "labelEl": "Ισότητα ως ισορροπία",
+    "labelEn": "Equals as balance",
+    "explainEl": "Αντιμετωπίζει το «=» σαν «γράψε εδώ την απάντηση» αντί για «οι δύο πλευρές ισορροπούν», με αποτέλεσμα να κάνει πράξεις μόνο στη μία πλευρά.",
+    "explainEn": "Treats '=' as 'write the answer here' rather than 'both sides balance,' so performs operations on only one side.",
+    "recommendedToolIds": [
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Φύλακας της Ισορροπίας",
+    "achievementEn": "Guardian of Balance",
+    "positiveMessageEl": "Καταλαβαίνεις τι πραγματικά σημαίνει το «ίσον»!",
+    "positiveMessageEn": "You understand what 'equals' really means!",
+    "skillTagEl": "Επίλυση Εξισώσεων",
+    "skillTagEn": "Solving Equations"
   },
   "algebra.distribute-negative": {
-    id: "algebra.distribute-negative",
-    labelEl: "Επιμεριστική με αρνητικό",
-    labelEn: "Distributing a negative",
-    explainEl: "Όταν διανέμει ένα αρνητικό πρόσημο σε παρένθεση, το εφαρμόζει μόνο στον πρώτο όρο, όχι σε όλους.",
-    explainEn: "When distributing a negative sign over parentheses, applies it only to the first term, not to all of them.",
-    recommendedToolIds: ["wolfram-alpha"],
-    achievementEl: "Ο Μάστερ της Επιμεριστικής",
-    achievementEn: "Distribution Master",
-    positiveMessageEl: "Ξέρεις να ανοίγεις σωστά κάθε παρένθεση!",
-    positiveMessageEn: "You know how to expand every parenthesis correctly!",
-    skillTagEl: "Επιμεριστική Ιδιότητα",
-    skillTagEn: "Distributive Property",
+    "id": "algebra.distribute-negative",
+    "labelEl": "Επιμεριστική με αρνητικό",
+    "labelEn": "Distributing a negative",
+    "explainEl": "Όταν διανέμει ένα αρνητικό πρόσημο σε παρένθεση, το εφαρμόζει μόνο στον πρώτο όρο, όχι σε όλους.",
+    "explainEn": "When distributing a negative sign over parentheses, applies it only to the first term, not to all of them.",
+    "recommendedToolIds": [
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Μάστερ της Επιμεριστικής",
+    "achievementEn": "Distribution Master",
+    "positiveMessageEl": "Ξέρεις να ανοίγεις σωστά κάθε παρένθεση!",
+    "positiveMessageEn": "You know how to expand every parenthesis correctly!",
+    "skillTagEl": "Επιμεριστική Ιδιότητα",
+    "skillTagEn": "Distributive Property"
   },
   "algebra.pythagorean-add": {
-    id: "algebra.pythagorean-add",
-    labelEl: "Πυθαγόρειο με κάθετη πλευρά",
-    labelEn: "Pythagorean theorem, finding a leg",
-    explainEl: "Στο Πυθαγόρειο θεώρημα, προσθέτει πάντα τα τετράγωνα των δύο γνωστών πλευρών, ακόμα κι όταν ζητείται μια κάθετη πλευρά (όχι η υποτείνουσα).",
-    explainEn: "In the Pythagorean theorem, always adds the squares of the two known sides, even when solving for a leg (not the hypotenuse).",
-    recommendedToolIds: ["wolfram-alpha"],
-    achievementEl: "Ο Αρχιτέκτονας του Πυθαγόρα",
-    achievementEn: "Architect of Pythagoras",
-    positiveMessageEl: "Ξέρεις πότε προσθέτεις και πότε αφαιρείς στο Πυθαγόρειο θεώρημα!",
-    positiveMessageEn: "You know when to add and when to subtract in the Pythagorean theorem!",
-    skillTagEl: "Πυθαγόρειο Θεώρημα",
-    skillTagEn: "Pythagorean Theorem",
+    "id": "algebra.pythagorean-add",
+    "labelEl": "Πυθαγόρειο με κάθετη πλευρά",
+    "labelEn": "Pythagorean theorem, finding a leg",
+    "explainEl": "Στο Πυθαγόρειο θεώρημα, προσθέτει πάντα τα τετράγωνα των δύο γνωστών πλευρών, ακόμα κι όταν ζητείται μια κάθετη πλευρά (όχι η υποτείνουσα).",
+    "explainEn": "In the Pythagorean theorem, always adds the squares of the two known sides, even when solving for a leg (not the hypotenuse).",
+    "recommendedToolIds": [
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Αρχιτέκτονας του Πυθαγόρα",
+    "achievementEn": "Architect of Pythagoras",
+    "positiveMessageEl": "Ξέρεις πότε προσθέτεις και πότε αφαιρείς στο Πυθαγόρειο θεώρημα!",
+    "positiveMessageEn": "You know when to add and when to subtract in the Pythagorean theorem!",
+    "skillTagEl": "Πυθαγόρειο Θεώρημα",
+    "skillTagEn": "Pythagorean Theorem"
   },
-
-  // ---------- ΓΥΜΝΑΣΙΟ: ΙΣΤΟΡΙΑ ----------
   "history-gym.agia-lavra": {
-    id: "history-gym.agia-lavra",
-    labelEl: "Έναρξη της Επανάστασης",
-    labelEn: "Start of the Revolution",
-    explainEl: "Πιστεύει ότι η Επανάσταση του 1821 ξεκίνησε επίσημα με την ευλογία των όπλων στην Αγία Λαύρα, ενώ πρόκειται για μεταγενέστερο θρύλο χωρίς ιστορική τεκμηρίωση.",
-    explainEn: "Believes the 1821 Revolution officially began with the blessing at Agia Lavra, when this is a later legend with no historical documentation.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Ερευνητής της Επανάστασης",
-    achievementEn: "Revolution Researcher",
-    positiveMessageEl: "Ξεχωρίζεις τον θρύλο από την ιστορική πραγματικότητα!",
-    positiveMessageEn: "You can tell legend apart from historical fact!",
-    skillTagEl: "Επανάσταση του 1821",
-    skillTagEn: "The 1821 Revolution",
+    "id": "history-gym.agia-lavra",
+    "labelEl": "Έναρξη της Επανάστασης",
+    "labelEn": "Start of the Revolution",
+    "explainEl": "Πιστεύει ότι η Επανάσταση του 1821 ξεκίνησε επίσημα με την ευλογία των όπλων στην Αγία Λαύρα, ενώ πρόκειται για μεταγενέστερο θρύλο χωρίς ιστορική τεκμηρίωση.",
+    "explainEn": "Believes the 1821 Revolution officially began with the blessing at Agia Lavra, when this is a later legend with no historical documentation.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ερευνητής της Επανάστασης",
+    "achievementEn": "Revolution Researcher",
+    "positiveMessageEl": "Ξεχωρίζεις τον θρύλο από την ιστορική πραγματικότητα!",
+    "positiveMessageEn": "You can tell legend apart from historical fact!",
+    "skillTagEl": "Επανάσταση του 1821",
+    "skillTagEn": "The 1821 Revolution"
   },
   "history-gym.greeks-united": {
-    id: "history-gym.greeks-united",
-    labelEl: "Ενότητα κατά την Επανάσταση",
-    labelEn: "Unity during the Revolution",
-    explainEl: "Πιστεύει ότι όλοι οι Έλληνες ήταν πάντα ενωμένοι κατά τη διάρκεια της Επανάστασης, αγνοώντας τους εμφύλιους πολέμους της περιόδου 1824-1825.",
-    explainEn: "Believes all Greeks were always united during the Revolution, ignoring the civil wars of 1824-1825.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Γνώστης της Αλήθειας",
-    achievementEn: "Truth Seeker",
-    positiveMessageEl: "Κατανοείς την πολυπλοκότητα της ιστορίας!",
-    positiveMessageEn: "You understand the complexity of history!",
-    skillTagEl: "Εμφύλιες Συγκρούσεις 1821",
-    skillTagEn: "1821 Civil Conflicts",
+    "id": "history-gym.greeks-united",
+    "labelEl": "Ενότητα κατά την Επανάσταση",
+    "labelEn": "Unity during the Revolution",
+    "explainEl": "Πιστεύει ότι όλοι οι Έλληνες ήταν πάντα ενωμένοι κατά τη διάρκεια της Επανάστασης, αγνοώντας τους εμφύλιους πολέμους της περιόδου 1824-1825.",
+    "explainEn": "Believes all Greeks were always united during the Revolution, ignoring the civil wars of 1824-1825.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Αλήθειας",
+    "achievementEn": "Truth Seeker",
+    "positiveMessageEl": "Κατανοείς την πολυπλοκότητα της ιστορίας!",
+    "positiveMessageEn": "You understand the complexity of history!",
+    "skillTagEl": "Εμφύλιες Συγκρούσεις 1821",
+    "skillTagEn": "1821 Civil Conflicts"
   },
   "history-gym.filiki-etaireia-leaders": {
-    id: "history-gym.filiki-etaireia-leaders",
-    labelEl: "Ίδρυση Φιλικής Εταιρείας",
-    labelEn: "Founding of the Filiki Etaireia",
-    explainEl: "Πιστεύει ότι η Φιλική Εταιρεία ιδρύθηκε από μεγάλους στρατιωτικούς ή πολιτικούς ηγέτες, ενώ ιδρύθηκε το 1814 στην Οδησσό από τρεις άνδρες μέτριας κοινωνικής θέσης.",
-    explainEn: "Believes the Filiki Etaireia was founded by major military or political leaders, when it was actually founded in 1814 in Odessa by three men of modest social standing.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Μυημένος της Ιστορίας",
-    achievementEn: "History Initiate",
-    positiveMessageEl: "Ξέρεις πώς ξεκίνησαν πραγματικά τα μεγάλα ιστορικά κινήματα!",
-    positiveMessageEn: "You know how big historical movements really began!",
-    skillTagEl: "Φιλική Εταιρεία",
-    skillTagEn: "The Filiki Etaireia",
+    "id": "history-gym.filiki-etaireia-leaders",
+    "labelEl": "Ίδρυση Φιλικής Εταιρείας",
+    "labelEn": "Founding of the Filiki Etaireia",
+    "explainEl": "Πιστεύει ότι η Φιλική Εταιρεία ιδρύθηκε από μεγάλους στρατιωτικούς ή πολιτικούς ηγέτες, ενώ ιδρύθηκε το 1814 στην Οδησσό από τρεις άνδρες μέτριας κοινωνικής θέσης.",
+    "explainEn": "Believes the Filiki Etaireia was founded by major military or political leaders, when it was actually founded in 1814 in Odessa by three men of modest social standing.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Μυημένος της Ιστορίας",
+    "achievementEn": "History Initiate",
+    "positiveMessageEl": "Ξέρεις πώς ξεκίνησαν πραγματικά τα μεγάλα ιστορικά κινήματα!",
+    "positiveMessageEn": "You know how big historical movements really began!",
+    "skillTagEl": "Φιλική Εταιρεία",
+    "skillTagEn": "The Filiki Etaireia"
   },
   "history-gym.kryfo-sxoleio": {
-    id: "history-gym.kryfo-sxoleio",
-    labelEl: "Εκπαίδευση επί Τουρκοκρατίας",
-    labelEn: "Education under Ottoman rule",
-    explainEl: "Πιστεύει ότι η ελληνική εκπαίδευση ήταν εντελώς απαγορευμένη στην Οθωμανική Αυτοκρατορία, αγνοώντας ότι λειτουργούσαν χιλιάδες νόμιμα σχολεία.",
-    explainEn: "Believes Greek-language education was completely banned in the Ottoman Empire, unaware that thousands of legal schools operated.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Ανιχνευτής Θρύλων",
-    achievementEn: "Legend Detective",
-    positiveMessageEl: "Ξέρεις να ξεχωρίζεις παράδοση από ιστορικά τεκμήρια!",
-    positiveMessageEn: "You can tell tradition apart from historical evidence!",
-    skillTagEl: "Εκπαίδευση επί Οθωμανικής Αυτοκρατορίας",
-    skillTagEn: "Education under Ottoman Rule",
+    "id": "history-gym.kryfo-sxoleio",
+    "labelEl": "Εκπαίδευση επί Τουρκοκρατίας",
+    "labelEn": "Education under Ottoman rule",
+    "explainEl": "Πιστεύει ότι η ελληνική εκπαίδευση ήταν εντελώς απαγορευμένη στην Οθωμανική Αυτοκρατορία, αγνοώντας ότι λειτουργούσαν χιλιάδες νόμιμα σχολεία.",
+    "explainEn": "Believes Greek-language education was completely banned in the Ottoman Empire, unaware that thousands of legal schools operated.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ανιχνευτής Θρύλων",
+    "achievementEn": "Legend Detective",
+    "positiveMessageEl": "Ξέρεις να ξεχωρίζεις παράδοση από ιστορικά τεκμήρια!",
+    "positiveMessageEn": "You can tell tradition apart from historical evidence!",
+    "skillTagEl": "Εκπαίδευση επί Οθωμανικής Αυτοκρατορίας",
+    "skillTagEn": "Education under Ottoman Rule"
   },
-
-  // ---------- ΓΥΜΝΑΣΙΟ: ΑΓΓΛΙΚΑ ΩΣ ΞΕΝΗ ΓΛΩΣΣΑ ----------
   "efl-gym.present-perfect-past-simple": {
-    id: "efl-gym.present-perfect-past-simple",
-    labelEl: "Present Perfect vs Past Simple",
-    labelEn: "Present Perfect vs Past Simple",
-    explainEl: "Χρησιμοποιεί τον Present Perfect με χρονικούς προσδιορισμούς που δηλώνουν συγκεκριμένο παρελθόν (π.χ. «yesterday»), επειδή ο ελληνικός Παρακείμενος χρησιμοποιείται πιο ελεύθερα.",
-    explainEn: "Uses Present Perfect with time markers that indicate a specific past time (e.g. 'yesterday'), because the Greek Παρακείμενος is used more freely.",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Κυρίαρχος του Χρόνου",
-    achievementEn: "Master of Tenses",
-    positiveMessageEl: "Ξέρεις πότε χρησιμοποιείς κάθε αγγλικό χρόνο!",
-    positiveMessageEn: "You know exactly when to use each English tense!",
-    skillTagEl: "Present Perfect vs Past Simple",
-    skillTagEn: "Present Perfect vs Past Simple",
+    "id": "efl-gym.present-perfect-past-simple",
+    "labelEl": "Present Perfect vs Past Simple",
+    "labelEn": "Present Perfect vs Past Simple",
+    "explainEl": "Χρησιμοποιεί τον Present Perfect με χρονικούς προσδιορισμούς που δηλώνουν συγκεκριμένο παρελθόν (π.χ. «yesterday»), επειδή ο ελληνικός Παρακείμενος χρησιμοποιείται πιο ελεύθερα.",
+    "explainEn": "Uses Present Perfect with time markers that indicate a specific past time (e.g. 'yesterday'), because the Greek Παρακείμενος is used more freely.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Κυρίαρχος του Χρόνου",
+    "achievementEn": "Master of Tenses",
+    "positiveMessageEl": "Ξέρεις πότε χρησιμοποιείς κάθε αγγλικό χρόνο!",
+    "positiveMessageEn": "You know exactly when to use each English tense!",
+    "skillTagEl": "Present Perfect vs Past Simple",
+    "skillTagEn": "Present Perfect vs Past Simple"
   },
   "efl-gym.second-conditional-would": {
-    id: "efl-gym.second-conditional-would",
-    labelEl: "Δεύτερος Υποθετικός",
-    labelEn: "Second Conditional",
-    explainEl: "Βάζει «would» και στις δύο προτάσεις μιας υποθετικής (π.χ. «If I would have money»), πιστεύοντας ότι ο υποθετικός δείκτης χρειάζεται και στις δύο πλευρές.",
-    explainEn: "Puts 'would' in both clauses of a conditional (e.g. 'If I would have money'), believing the hypothetical marker is needed on both sides.",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Ειδικός των Υποθετικών",
-    achievementEn: "Conditionals Expert",
-    positiveMessageEl: "Ξέρεις να φτιάχνεις σωστές υποθετικές προτάσεις!",
-    positiveMessageEn: "You know how to build correct conditional sentences!",
-    skillTagEl: "Δεύτερος Υποθετικός Λόγος",
-    skillTagEn: "Second Conditional",
+    "id": "efl-gym.second-conditional-would",
+    "labelEl": "Δεύτερος Υποθετικός",
+    "labelEn": "Second Conditional",
+    "explainEl": "Βάζει «would» και στις δύο προτάσεις μιας υποθετικής (π.χ. «If I would have money»), πιστεύοντας ότι ο υποθετικός δείκτης χρειάζεται και στις δύο πλευρές.",
+    "explainEn": "Puts 'would' in both clauses of a conditional (e.g. 'If I would have money'), believing the hypothetical marker is needed on both sides.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ειδικός των Υποθετικών",
+    "achievementEn": "Conditionals Expert",
+    "positiveMessageEl": "Ξέρεις να φτιάχνεις σωστές υποθετικές προτάσεις!",
+    "positiveMessageEn": "You know how to build correct conditional sentences!",
+    "skillTagEl": "Δεύτερος Υποθετικός Λόγος",
+    "skillTagEn": "Second Conditional"
   },
   "efl-gym.preposition-interference": {
-    id: "efl-gym.preposition-interference",
-    labelEl: "Προθέσεις",
-    labelEn: "Prepositions",
-    explainEl: "Χρησιμοποιεί προθέσεις με άμεση μετάφραση από τα ελληνικά (π.χ. «discuss about» από το «συζητώ για»), αντί για τη σωστή αγγλική δομή.",
-    explainEn: "Uses prepositions transferred directly from Greek (e.g. 'discuss about' from 'συζητώ για'), instead of the correct English structure.",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Κυνηγός των Προθέσεων",
-    achievementEn: "Preposition Hunter",
-    positiveMessageEl: "Ξέρεις ποιες προθέσεις ταιριάζουν σε κάθε ρήμα!",
-    positiveMessageEn: "You know which prepositions go with which verbs!",
-    skillTagEl: "Προθέσεις",
-    skillTagEn: "Prepositions",
+    "id": "efl-gym.preposition-interference",
+    "labelEl": "Προθέσεις",
+    "labelEn": "Prepositions",
+    "explainEl": "Χρησιμοποιεί προθέσεις με άμεση μετάφραση από τα ελληνικά (π.χ. «discuss about» από το «συζητώ για»), αντί για τη σωστή αγγλική δομή.",
+    "explainEn": "Uses prepositions transferred directly from Greek (e.g. 'discuss about' from 'συζητώ για'), instead of the correct English structure.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Κυνηγός των Προθέσεων",
+    "achievementEn": "Preposition Hunter",
+    "positiveMessageEl": "Ξέρεις ποιες προθέσεις ταιριάζουν σε κάθε ρήμα!",
+    "positiveMessageEn": "You know which prepositions go with which verbs!",
+    "skillTagEl": "Προθέσεις",
+    "skillTagEn": "Prepositions"
   },
   "efl-gym.uncountable-nouns": {
-    id: "efl-gym.uncountable-nouns",
-    labelEl: "Μη μετρήσιμα ουσιαστικά",
-    labelEn: "Uncountable nouns",
-    explainEl: "Μεταχειρίζεται μη μετρήσιμα ουσιαστικά σαν να είναι μετρήσιμα (π.χ. «informations», «an advice»), επειδή τα αντίστοιχα ελληνικά ουσιαστικά μπαίνουν σε πληθυντικό.",
-    explainEn: "Treats uncountable nouns as countable (e.g. 'informations', 'an advice'), because the corresponding Greek nouns can be pluralized.",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Γνώστης των Ουσιαστικών",
-    achievementEn: "Noun Expert",
-    positiveMessageEl: "Ξέρεις ποια ουσιαστικά δεν μπαίνουν στον πληθυντικό!",
-    positiveMessageEn: "You know which nouns never take a plural!",
-    skillTagEl: "Μετρήσιμα & Μη Μετρήσιμα Ουσιαστικά",
-    skillTagEn: "Countable & Uncountable Nouns",
+    "id": "efl-gym.uncountable-nouns",
+    "labelEl": "Μη μετρήσιμα ουσιαστικά",
+    "labelEn": "Uncountable nouns",
+    "explainEl": "Μεταχειρίζεται μη μετρήσιμα ουσιαστικά σαν να είναι μετρήσιμα (π.χ. «informations», «an advice»), επειδή τα αντίστοιχα ελληνικά ουσιαστικά μπαίνουν σε πληθυντικό.",
+    "explainEn": "Treats uncountable nouns as countable (e.g. 'informations', 'an advice'), because the corresponding Greek nouns can be pluralized.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης των Ουσιαστικών",
+    "achievementEn": "Noun Expert",
+    "positiveMessageEl": "Ξέρεις ποια ουσιαστικά δεν μπαίνουν στον πληθυντικό!",
+    "positiveMessageEn": "You know which nouns never take a plural!",
+    "skillTagEl": "Μετρήσιμα & Μη Μετρήσιμα Ουσιαστικά",
+    "skillTagEn": "Countable & Uncountable Nouns"
   },
-
-  // ---------- ΛΥΚΕΙΟ: ΝΕΟΕΛΛΗΝΙΚΗ ΓΛΩΣΣΑ / ΕΚΘΕΣΗ ----------
   "ekthesi.unsupported-argument": {
-    id: "ekthesi.unsupported-argument",
-    labelEl: "Τεκμηρίωση επιχειρήματος",
-    labelEn: "Argument evidence",
-    explainEl: "Πιστεύει ότι ένα δυνατό επιχείρημα είναι απλώς μια έντονα διατυπωμένη άποψη, χωρίς τεκμηρίωση ή επίκληση στη λογική.",
-    explainEn: "Believes a strong argument is just a forcefully stated opinion, without evidence or an appeal to reason.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Αρχιτέκτονας του Επιχειρήματος",
-    achievementEn: "Argument Architect",
-    positiveMessageEl: "Ξέρεις τι κάνει ένα επιχείρημα πραγματικά πειστικό!",
-    positiveMessageEn: "You know what actually makes an argument persuasive!",
-    skillTagEl: "Τεκμηρίωση Επιχειρημάτων",
-    skillTagEn: "Argument Evidence",
+    "id": "ekthesi.unsupported-argument",
+    "labelEl": "Τεκμηρίωση επιχειρήματος",
+    "labelEn": "Argument evidence",
+    "explainEl": "Πιστεύει ότι ένα δυνατό επιχείρημα είναι απλώς μια έντονα διατυπωμένη άποψη, χωρίς τεκμηρίωση ή επίκληση στη λογική.",
+    "explainEn": "Believes a strong argument is just a forcefully stated opinion, without evidence or an appeal to reason.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Αρχιτέκτονας του Επιχειρήματος",
+    "achievementEn": "Argument Architect",
+    "positiveMessageEl": "Ξέρεις τι κάνει ένα επιχείρημα πραγματικά πειστικό!",
+    "positiveMessageEn": "You know what actually makes an argument persuasive!",
+    "skillTagEl": "Τεκμηρίωση Επιχειρημάτων",
+    "skillTagEn": "Argument Evidence"
   },
   "ekthesi.text-type-ignore": {
-    id: "ekthesi.text-type-ignore",
-    labelEl: "Κειμενικά είδη",
-    labelEn: "Text types",
-    explainEl: "Γράφει το ίδιο γενικό δοκίμιο ανεξάρτητα από το είδος κειμένου που ζητείται (π.χ. επιστολή, ομιλία, άρθρο), αγνοώντας τον αποδέκτη και τον σκοπό.",
-    explainEn: "Writes the same generic essay regardless of the requested text type (e.g. letter, speech, article), ignoring the addressee and purpose.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Γνώστης των Κειμενικών Ειδών",
-    achievementEn: "Text-Type Expert",
-    positiveMessageEl: "Προσαρμόζεις το ύφος σου ανάλογα με το είδος κειμένου!",
-    positiveMessageEn: "You adapt your style to fit the requested text type!",
-    skillTagEl: "Κειμενικά Είδη",
-    skillTagEn: "Text Types",
+    "id": "ekthesi.text-type-ignore",
+    "labelEl": "Κειμενικά είδη",
+    "labelEn": "Text types",
+    "explainEl": "Γράφει το ίδιο γενικό δοκίμιο ανεξάρτητα από το είδος κειμένου που ζητείται (π.χ. επιστολή, ομιλία, άρθρο), αγνοώντας τον αποδέκτη και τον σκοπό.",
+    "explainEn": "Writes the same generic essay regardless of the requested text type (e.g. letter, speech, article), ignoring the addressee and purpose.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης των Κειμενικών Ειδών",
+    "achievementEn": "Text-Type Expert",
+    "positiveMessageEl": "Προσαρμόζεις το ύφος σου ανάλογα με το είδος κειμένου!",
+    "positiveMessageEn": "You adapt your style to fit the requested text type!",
+    "skillTagEl": "Κειμενικά Είδη",
+    "skillTagEn": "Text Types"
   },
   "ekthesi.register-confusion": {
-    id: "ekthesi.register-confusion",
-    labelEl: "Επίσημο ύφος",
-    labelEn: "Formal register",
-    explainEl: "Χρησιμοποιεί προφορικές/καθημερινές δομές σε επίσημο γραπτό λόγο (π.χ. «το πώς» αντί για «το ότι»), χωρίς να αντιλαμβάνεται τη διαφορά ύφους.",
-    explainEn: "Uses colloquial/spoken structures in formal written language, without recognizing the difference in register.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Μάστερ του Ύφους",
-    achievementEn: "Register Master",
-    positiveMessageEl: "Ξέρεις πότε το ύφος πρέπει να είναι επίσημο!",
-    positiveMessageEn: "You know when your writing needs to be formal!",
-    skillTagEl: "Επίσημο Ύφος",
-    skillTagEn: "Formal Register",
+    "id": "ekthesi.register-confusion",
+    "labelEl": "Επίσημο ύφος",
+    "labelEn": "Formal register",
+    "explainEl": "Χρησιμοποιεί προφορικές/καθημερινές δομές σε επίσημο γραπτό λόγο (π.χ. «το πώς» αντί για «το ότι»), χωρίς να αντιλαμβάνεται τη διαφορά ύφους.",
+    "explainEn": "Uses colloquial/spoken structures in formal written language, without recognizing the difference in register.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Μάστερ του Ύφους",
+    "achievementEn": "Register Master",
+    "positiveMessageEl": "Ξέρεις πότε το ύφος πρέπει να είναι επίσημο!",
+    "positiveMessageEn": "You know when your writing needs to be formal!",
+    "skillTagEl": "Επίσημο Ύφος",
+    "skillTagEn": "Formal Register"
   },
   "ekthesi.intro-conclusion-function": {
-    id: "ekthesi.intro-conclusion-function",
-    labelEl: "Δομή κειμένου",
-    labelEn: "Text structure",
-    explainEl: "Νομίζει ότι ο πρόλογος πρέπει απλώς να επαναλαμβάνει την εκφώνηση και ότι ο επίλογος μπορεί να εισάγει νέα επιχειρήματα, αγνοώντας τη λειτουργία κάθε μέρους.",
-    explainEn: "Thinks the introduction should simply restate the prompt and the conclusion can introduce new arguments, missing the function of each part.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Δομητής του Κειμένου",
-    achievementEn: "Text Structure Builder",
-    positiveMessageEl: "Ξέρεις τι πρέπει να κάνει κάθε μέρος του κειμένου σου!",
-    positiveMessageEn: "You know exactly what each part of your text should do!",
-    skillTagEl: "Δομή Κειμένου",
-    skillTagEn: "Text Structure",
+    "id": "ekthesi.intro-conclusion-function",
+    "labelEl": "Δομή κειμένου",
+    "labelEn": "Text structure",
+    "explainEl": "Νομίζει ότι ο πρόλογος πρέπει απλώς να επαναλαμβάνει την εκφώνηση και ότι ο επίλογος μπορεί να εισάγει νέα επιχειρήματα, αγνοώντας τη λειτουργία κάθε μέρους.",
+    "explainEn": "Thinks the introduction should simply restate the prompt and the conclusion can introduce new arguments, missing the function of each part.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Δομητής του Κειμένου",
+    "achievementEn": "Text Structure Builder",
+    "positiveMessageEl": "Ξέρεις τι πρέπει να κάνει κάθε μέρος του κειμένου σου!",
+    "positiveMessageEn": "You know exactly what each part of your text should do!",
+    "skillTagEl": "Δομή Κειμένου",
+    "skillTagEn": "Text Structure"
   },
   "ekthesi.summary-copying": {
-    id: "ekthesi.summary-copying",
-    labelEl: "Περίληψη",
-    labelEn: "Summarizing",
-    explainEl: "Γράφει περίληψη αντιγράφοντας προτάσεις του κειμένου ή προσθέτοντας προσωπική άποψη, αντί να αναδιατυπώνει αντικειμενικά τις ιδέες του συγγραφέα.",
-    explainEn: "Writes a summary by copying sentences from the text or adding personal opinion, instead of objectively reformulating the author's ideas.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Ειδικός της Περίληψης",
-    achievementEn: "Summary Expert",
-    positiveMessageEl: "Ξέρεις να αποδίδεις αντικειμενικά τις ιδέες ενός κειμένου!",
-    positiveMessageEn: "You know how to objectively convey a text's ideas!",
-    skillTagEl: "Περίληψη",
-    skillTagEn: "Summarizing",
+    "id": "ekthesi.summary-copying",
+    "labelEl": "Περίληψη",
+    "labelEn": "Summarizing",
+    "explainEl": "Γράφει περίληψη αντιγράφοντας προτάσεις του κειμένου ή προσθέτοντας προσωπική άποψη, αντί να αναδιατυπώνει αντικειμενικά τις ιδέες του συγγραφέα.",
+    "explainEn": "Writes a summary by copying sentences from the text or adding personal opinion, instead of objectively reformulating the author's ideas.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ειδικός της Περίληψης",
+    "achievementEn": "Summary Expert",
+    "positiveMessageEl": "Ξέρεις να αποδίδεις αντικειμενικά τις ιδέες ενός κειμένου!",
+    "positiveMessageEn": "You know how to objectively convey a text's ideas!",
+    "skillTagEl": "Περίληψη",
+    "skillTagEn": "Summarizing"
   },
-
-  // ---------- ΛΥΚΕΙΟ: ΜΑΘΗΜΑΤΙΚΑ (Α' ΓΕΝΙΚΗΣ ΠΑΙΔΕΙΑΣ) ----------
   "functions.one-formula-only": {
-    id: "functions.one-formula-only",
-    labelEl: "Έννοια συνάρτησης",
-    labelEn: "Function concept",
-    explainEl: "Πιστεύει ότι μια συνάρτηση πρέπει να δίνεται πάντα από έναν μοναδικό τύπο, απορρίπτοντας συναρτήσεις που ορίζονται με κλάδους ή πίνακες.",
-    explainEn: "Believes a function must always be given by a single formula, rejecting piecewise- or table-defined functions.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Ερμηνευτής Συναρτήσεων",
-    achievementEn: "Function Interpreter",
-    positiveMessageEl: "Αναγνωρίζεις συναρτήσεις σε κάθε τους μορφή!",
-    positiveMessageEn: "You recognize functions in every form they take!",
-    skillTagEl: "Έννοια Συνάρτησης",
-    skillTagEn: "Function Concept",
+    "id": "functions.one-formula-only",
+    "labelEl": "Έννοια συνάρτησης",
+    "labelEn": "Function concept",
+    "explainEl": "Πιστεύει ότι μια συνάρτηση πρέπει να δίνεται πάντα από έναν μοναδικό τύπο, απορρίπτοντας συναρτήσεις που ορίζονται με κλάδους ή πίνακες.",
+    "explainEn": "Believes a function must always be given by a single formula, rejecting piecewise- or table-defined functions.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ερμηνευτής Συναρτήσεων",
+    "achievementEn": "Function Interpreter",
+    "positiveMessageEl": "Αναγνωρίζεις συναρτήσεις σε κάθε τους μορφή!",
+    "positiveMessageEn": "You recognize functions in every form they take!",
+    "skillTagEl": "Έννοια Συνάρτησης",
+    "skillTagEn": "Function Concept"
   },
   "functions.quadratic-always-two-roots": {
-    id: "functions.quadratic-always-two-roots",
-    labelEl: "Δευτεροβάθμια εξίσωση",
-    labelEn: "Quadratic equations",
-    explainEl: "Πιστεύει ότι κάθε δευτεροβάθμια εξίσωση έχει πάντα δύο πραγματικές λύσεις, αγνοώντας τον ρόλο της διακρίνουσας.",
-    explainEn: "Believes every quadratic equation always has two real solutions, ignoring the role of the discriminant.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Κυνηγός της Διακρίνουσας",
-    achievementEn: "Discriminant Hunter",
-    positiveMessageEl: "Ξέρεις πόσες λύσεις έχει πραγματικά μια εξίσωση!",
-    positiveMessageEn: "You know exactly how many solutions an equation really has!",
-    skillTagEl: "Δευτεροβάθμια Εξίσωση",
-    skillTagEn: "Quadratic Equations",
+    "id": "functions.quadratic-always-two-roots",
+    "labelEl": "Δευτεροβάθμια εξίσωση",
+    "labelEn": "Quadratic equations",
+    "explainEl": "Πιστεύει ότι κάθε δευτεροβάθμια εξίσωση έχει πάντα δύο πραγματικές λύσεις, αγνοώντας τον ρόλο της διακρίνουσας.",
+    "explainEn": "Believes every quadratic equation always has two real solutions, ignoring the role of the discriminant.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Κυνηγός της Διακρίνουσας",
+    "achievementEn": "Discriminant Hunter",
+    "positiveMessageEl": "Ξέρεις πόσες λύσεις έχει πραγματικά μια εξίσωση!",
+    "positiveMessageEn": "You know exactly how many solutions an equation really has!",
+    "skillTagEl": "Δευτεροβάθμια Εξίσωση",
+    "skillTagEn": "Quadratic Equations"
   },
   "functions.sqrt-drops-absolute-value": {
-    id: "functions.sqrt-drops-absolute-value",
-    labelEl: "Τετραγωνική ρίζα & απόλυτη τιμή",
-    labelEn: "Square roots & absolute value",
-    explainEl: "Πιστεύει ότι το √(x²) ισούται πάντα με x, αγνοώντας ότι η τετραγωνική ρίζα ενός τετραγώνου δίνει την απόλυτη τιμή.",
-    explainEn: "Believes √(x²) always equals x, ignoring that the square root of a square gives the absolute value.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Φύλακας της Απόλυτης Τιμής",
-    achievementEn: "Absolute Value Guardian",
-    positiveMessageEl: "Δεν χάνεις καμία λύση όταν λύνεις εξισώσεις με ρίζες!",
-    positiveMessageEn: "You never lose a solution when solving equations with roots!",
-    skillTagEl: "Τετραγωνική Ρίζα & Απόλυτη Τιμή",
-    skillTagEn: "Square Roots & Absolute Value",
+    "id": "functions.sqrt-drops-absolute-value",
+    "labelEl": "Τετραγωνική ρίζα & απόλυτη τιμή",
+    "labelEn": "Square roots & absolute value",
+    "explainEl": "Πιστεύει ότι το √(x²) ισούται πάντα με x, αγνοώντας ότι η τετραγωνική ρίζα ενός τετραγώνου δίνει την απόλυτη τιμή.",
+    "explainEn": "Believes √(x²) always equals x, ignoring that the square root of a square gives the absolute value.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Φύλακας της Απόλυτης Τιμής",
+    "achievementEn": "Absolute Value Guardian",
+    "positiveMessageEl": "Δεν χάνεις καμία λύση όταν λύνεις εξισώσεις με ρίζες!",
+    "positiveMessageEn": "You never lose a solution when solving equations with roots!",
+    "skillTagEl": "Τετραγωνική Ρίζα & Απόλυτη Τιμή",
+    "skillTagEn": "Square Roots & Absolute Value"
   },
   "functions.vertex-value-confusion": {
-    id: "functions.vertex-value-confusion",
-    labelEl: "Μέγιστο/ελάχιστο συνάρτησης",
-    labelEn: "Function max/min",
-    explainEl: "Μπερδεύει τη μέγιστη/ελάχιστη τιμή μιας συνάρτησης με το σημείο (x) στο οποίο αυτή εμφανίζεται.",
-    explainEn: "Confuses a function's maximum/minimum value with the x-point where it occurs.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Γνώστης της Κορυφής",
-    achievementEn: "Vertex Expert",
-    positiveMessageEl: "Ξέρεις να διαβάζεις σωστά τη γραφική παράσταση μιας συνάρτησης!",
-    positiveMessageEn: "You know how to correctly read a function's graph!",
-    skillTagEl: "Μέγιστο/Ελάχιστο Συνάρτησης",
-    skillTagEn: "Function Max/Min",
+    "id": "functions.vertex-value-confusion",
+    "labelEl": "Μέγιστο/ελάχιστο συνάρτησης",
+    "labelEn": "Function max/min",
+    "explainEl": "Μπερδεύει τη μέγιστη/ελάχιστη τιμή μιας συνάρτησης με το σημείο (x) στο οποίο αυτή εμφανίζεται.",
+    "explainEn": "Confuses a function's maximum/minimum value with the x-point where it occurs.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Κορυφής",
+    "achievementEn": "Vertex Expert",
+    "positiveMessageEl": "Ξέρεις να διαβάζεις σωστά τη γραφική παράσταση μιας συνάρτησης!",
+    "positiveMessageEn": "You know how to correctly read a function's graph!",
+    "skillTagEl": "Μέγιστο/Ελάχιστο Συνάρτησης",
+    "skillTagEn": "Function Max/Min"
   },
   "functions.inequality-no-sign-flip": {
-    id: "functions.inequality-no-sign-flip",
-    labelEl: "Ανισώσεις",
-    labelEn: "Inequalities",
-    explainEl: "Λύνει μια ανίσωση σαν να ήταν εξίσωση, χωρίς να αντιστρέφει τη φορά της ανισότητας όταν πολλαπλασιάζει/διαιρεί με αρνητικό αριθμό.",
-    explainEn: "Solves an inequality as if it were an equation, without flipping the inequality sign when multiplying/dividing by a negative number.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Κύριος των Ανισώσεων",
-    achievementEn: "Inequality Master",
-    positiveMessageEl: "Θυμάσαι πάντα να αντιστρέφεις το πρόσημο όταν χρειάζεται!",
-    positiveMessageEn: "You always remember to flip the sign when needed!",
-    skillTagEl: "Ανισώσεις",
-    skillTagEn: "Inequalities",
+    "id": "functions.inequality-no-sign-flip",
+    "labelEl": "Ανισώσεις",
+    "labelEn": "Inequalities",
+    "explainEl": "Λύνει μια ανίσωση σαν να ήταν εξίσωση, χωρίς να αντιστρέφει τη φορά της ανισότητας όταν πολλαπλασιάζει/διαιρεί με αρνητικό αριθμό.",
+    "explainEn": "Solves an inequality as if it were an equation, without flipping the inequality sign when multiplying/dividing by a negative number.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Κύριος των Ανισώσεων",
+    "achievementEn": "Inequality Master",
+    "positiveMessageEl": "Θυμάσαι πάντα να αντιστρέφεις το πρόσημο όταν χρειάζεται!",
+    "positiveMessageEn": "You always remember to flip the sign when needed!",
+    "skillTagEl": "Ανισώσεις",
+    "skillTagEn": "Inequalities"
   },
-
-  // ---------- ΛΥΚΕΙΟ: ΦΥΣΙΚΗ (Α'/Β' ΓΕΝΙΚΗΣ ΠΑΙΔΕΙΑΣ) ----------
   "physics-lyk.motion-implies-force": {
-    id: "physics-lyk.motion-implies-force",
-    labelEl: "1ος Νόμος Νεύτωνα",
-    labelEn: "Newton's First Law",
-    explainEl: "Πιστεύει ότι ένα κινούμενο σώμα χρειάζεται πάντα μια δύναμη προς την κατεύθυνση της κίνησής του, αγνοώντας τον 1ο νόμο του Νεύτωνα.",
-    explainEn: "Believes a moving object always needs a force in its direction of motion, ignoring Newton's 1st law.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Διάδοχος του Νεύτωνα",
-    achievementEn: "Newton's Successor",
-    positiveMessageEl: "Καταλαβαίνεις πραγματικά την αδράνεια!",
-    positiveMessageEn: "You truly understand inertia!",
-    skillTagEl: "1ος Νόμος Νεύτωνα",
-    skillTagEn: "Newton's First Law",
+    "id": "physics-lyk.motion-implies-force",
+    "labelEl": "1ος Νόμος Νεύτωνα",
+    "labelEn": "Newton's First Law",
+    "explainEl": "Πιστεύει ότι ένα κινούμενο σώμα χρειάζεται πάντα μια δύναμη προς την κατεύθυνση της κίνησής του, αγνοώντας τον 1ο νόμο του Νεύτωνα.",
+    "explainEn": "Believes a moving object always needs a force in its direction of motion, ignoring Newton's 1st law.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Διάδοχος του Νεύτωνα",
+    "achievementEn": "Newton's Successor",
+    "positiveMessageEl": "Καταλαβαίνεις πραγματικά την αδράνεια!",
+    "positiveMessageEn": "You truly understand inertia!",
+    "skillTagEl": "1ος Νόμος Νεύτωνα",
+    "skillTagEn": "Newton's First Law"
   },
   "physics-lyk.newton-third-law-bigger-force": {
-    id: "physics-lyk.newton-third-law-bigger-force",
-    labelEl: "3ος Νόμος Νεύτωνα",
-    labelEn: "Newton's Third Law",
-    explainEl: "Πιστεύει ότι σε μια σύγκρουση το μεγαλύτερο/βαρύτερο σώμα ασκεί μεγαλύτερη δύναμη από το μικρότερο, αγνοώντας τον 3ο νόμο του Νεύτωνα.",
-    explainEn: "Believes that in a collision, the bigger/heavier object exerts a greater force than the smaller one, ignoring Newton's 3rd law.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Ειδικός της Δράσης-Αντίδρασης",
-    achievementEn: "Action-Reaction Specialist",
-    positiveMessageEl: "Ξέρεις ότι οι δυνάμεις είναι πάντα ίσες και αντίθετες!",
-    positiveMessageEn: "You know forces are always equal and opposite!",
-    skillTagEl: "3ος Νόμος Νεύτωνα",
-    skillTagEn: "Newton's Third Law",
+    "id": "physics-lyk.newton-third-law-bigger-force",
+    "labelEl": "3ος Νόμος Νεύτωνα",
+    "labelEn": "Newton's Third Law",
+    "explainEl": "Πιστεύει ότι σε μια σύγκρουση το μεγαλύτερο/βαρύτερο σώμα ασκεί μεγαλύτερη δύναμη από το μικρότερο, αγνοώντας τον 3ο νόμο του Νεύτωνα.",
+    "explainEn": "Believes that in a collision, the bigger/heavier object exerts a greater force than the smaller one, ignoring Newton's 3rd law.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ειδικός της Δράσης-Αντίδρασης",
+    "achievementEn": "Action-Reaction Specialist",
+    "positiveMessageEl": "Ξέρεις ότι οι δυνάμεις είναι πάντα ίσες και αντίθετες!",
+    "positiveMessageEn": "You know forces are always equal and opposite!",
+    "skillTagEl": "3ος Νόμος Νεύτωνα",
+    "skillTagEn": "Newton's Third Law"
   },
   "physics-lyk.force-energy-same": {
-    id: "physics-lyk.force-energy-same",
-    labelEl: "Δύναμη vs Ενέργεια",
-    labelEn: "Force vs Energy",
-    explainEl: "Μπερδεύει τη δύναμη με την ενέργεια, πιστεύοντας ότι ένα κινούμενο σώμα «έχει δύναμη» που «τελειώνει».",
-    explainEn: "Confuses force with energy, believing a moving object 'has force' that 'runs out.'",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Διαχωριστής Εννοιών",
-    achievementEn: "Concept Separator",
-    positiveMessageEl: "Ξεχωρίζεις καθαρά τη δύναμη από την ενέργεια!",
-    positiveMessageEn: "You clearly tell force and energy apart!",
-    skillTagEl: "Δύναμη vs Ενέργεια",
-    skillTagEn: "Force vs Energy",
+    "id": "physics-lyk.force-energy-same",
+    "labelEl": "Δύναμη vs Ενέργεια",
+    "labelEn": "Force vs Energy",
+    "explainEl": "Μπερδεύει τη δύναμη με την ενέργεια, πιστεύοντας ότι ένα κινούμενο σώμα «έχει δύναμη» που «τελειώνει».",
+    "explainEn": "Confuses force with energy, believing a moving object 'has force' that 'runs out.'",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Διαχωριστής Εννοιών",
+    "achievementEn": "Concept Separator",
+    "positiveMessageEl": "Ξεχωρίζεις καθαρά τη δύναμη από την ενέργεια!",
+    "positiveMessageEn": "You clearly tell force and energy apart!",
+    "skillTagEl": "Δύναμη vs Ενέργεια",
+    "skillTagEn": "Force vs Energy"
   },
   "physics-lyk.energy-used-up": {
-    id: "physics-lyk.energy-used-up",
-    labelEl: "Διατήρηση ενέργειας",
-    labelEn: "Conservation of energy",
-    explainEl: "Πιστεύει ότι η ενέργεια «χρησιμοποιείται και εξαφανίζεται», αντί να μεταφέρεται σε άλλη μορφή σύμφωνα με την αρχή διατήρησης της ενέργειας.",
-    explainEn: "Believes energy 'gets used up and disappears,' instead of being transferred to another form per the conservation of energy.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Φύλακας της Ενέργειας",
-    achievementEn: "Energy Guardian",
-    positiveMessageEl: "Ξέρεις ότι η ενέργεια δεν χάνεται ποτέ, απλώς μεταμορφώνεται!",
-    positiveMessageEn: "You know energy is never lost, only transformed!",
-    skillTagEl: "Διατήρηση της Ενέργειας",
-    skillTagEn: "Conservation of Energy",
+    "id": "physics-lyk.energy-used-up",
+    "labelEl": "Διατήρηση ενέργειας",
+    "labelEn": "Conservation of energy",
+    "explainEl": "Πιστεύει ότι η ενέργεια «χρησιμοποιείται και εξαφανίζεται», αντί να μεταφέρεται σε άλλη μορφή σύμφωνα με την αρχή διατήρησης της ενέργειας.",
+    "explainEn": "Believes energy 'gets used up and disappears,' instead of being transferred to another form per the conservation of energy.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Φύλακας της Ενέργειας",
+    "achievementEn": "Energy Guardian",
+    "positiveMessageEl": "Ξέρεις ότι η ενέργεια δεν χάνεται ποτέ, απλώς μεταμορφώνεται!",
+    "positiveMessageEn": "You know energy is never lost, only transformed!",
+    "skillTagEl": "Διατήρηση της Ενέργειας",
+    "skillTagEn": "Conservation of Energy"
   },
   "physics-lyk.constant-velocity-needs-force": {
-    id: "physics-lyk.constant-velocity-needs-force",
-    labelEl: "Συνισταμένη δύναμη",
-    labelEn: "Net force",
-    explainEl: "Πιστεύει ότι για να κινείται ένα σώμα με σταθερή ταχύτητα χρειάζεται μια συνεχή, μη μηδενική συνισταμένη δύναμη.",
-    explainEn: "Believes a constant net force is needed to keep an object moving at a steady velocity.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Κύριος της Συνισταμένης",
-    achievementEn: "Net Force Master",
-    positiveMessageEl: "Ξέρεις πότε η συνισταμένη δύναμη είναι πραγματικά μηδέν!",
-    positiveMessageEn: "You know exactly when the net force is truly zero!",
-    skillTagEl: "Συνισταμένη Δύναμη",
-    skillTagEn: "Net Force",
+    "id": "physics-lyk.constant-velocity-needs-force",
+    "labelEl": "Συνισταμένη δύναμη",
+    "labelEn": "Net force",
+    "explainEl": "Πιστεύει ότι για να κινείται ένα σώμα με σταθερή ταχύτητα χρειάζεται μια συνεχή, μη μηδενική συνισταμένη δύναμη.",
+    "explainEn": "Believes a constant net force is needed to keep an object moving at a steady velocity.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Κύριος της Συνισταμένης",
+    "achievementEn": "Net Force Master",
+    "positiveMessageEl": "Ξέρεις πότε η συνισταμένη δύναμη είναι πραγματικά μηδέν!",
+    "positiveMessageEn": "You know exactly when the net force is truly zero!",
+    "skillTagEl": "Συνισταμένη Δύναμη",
+    "skillTagEn": "Net Force"
   },
-
-  // ---------- ΛΥΚΕΙΟ: ΙΣΤΟΡΙΑ ----------
   "history-lyk.kryfo-sxoleio-ban": {
-    id: "history-lyk.kryfo-sxoleio-ban",
-    labelEl: "Εκπαίδευση επί Τουρκοκρατίας",
-    labelEn: "Education under Ottoman rule",
-    explainEl: "Πιστεύει ότι η ελληνική εκπαίδευση ήταν επίσημα απαγορευμένη στην Οθωμανική Αυτοκρατορία, ενώ ιστορικά τεκμήρια δείχνουν ότι λειτουργούσαν χιλιάδες νόμιμα σχολεία.",
-    explainEn: "Believes Greek education was officially banned in the Ottoman Empire, when historical evidence shows thousands of legal schools operated.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Ερευνητής Πηγών",
-    achievementEn: "Source Researcher",
-    positiveMessageEl: "Ξέρεις να βασίζεσαι σε ιστορικές πηγές και όχι μόνο σε παράδοση!",
-    positiveMessageEn: "You know to rely on historical sources, not just tradition!",
-    skillTagEl: "Εκπαίδευση επί Τουρκοκρατίας",
-    skillTagEn: "Education under Ottoman Rule",
+    "id": "history-lyk.kryfo-sxoleio-ban",
+    "labelEl": "Εκπαίδευση επί Τουρκοκρατίας",
+    "labelEn": "Education under Ottoman rule",
+    "explainEl": "Πιστεύει ότι η ελληνική εκπαίδευση ήταν επίσημα απαγορευμένη στην Οθωμανική Αυτοκρατορία, ενώ ιστορικά τεκμήρια δείχνουν ότι λειτουργούσαν χιλιάδες νόμιμα σχολεία.",
+    "explainEn": "Believes Greek education was officially banned in the Ottoman Empire, when historical evidence shows thousands of legal schools operated.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ερευνητής Πηγών",
+    "achievementEn": "Source Researcher",
+    "positiveMessageEl": "Ξέρεις να βασίζεσαι σε ιστορικές πηγές και όχι μόνο σε παράδοση!",
+    "positiveMessageEn": "You know to rely on historical sources, not just tradition!",
+    "skillTagEl": "Εκπαίδευση επί Τουρκοκρατίας",
+    "skillTagEn": "Education under Ottoman Rule"
   },
   "history-lyk.1922-military-defeat-only": {
-    id: "history-lyk.1922-military-defeat-only",
-    labelEl: "Μικρασιατική Καταστροφή",
-    labelEn: "The Asia Minor Catastrophe",
-    explainEl: "Πιστεύει ότι η Μικρασιατική Καταστροφή του 1922 οφείλεται αποκλειστικά σε στρατιωτική ήττα στο πεδίο της μάχης, παραβλέποντας την κατάρρευση της διπλωματικής θέσης της Ελλάδας.",
-    explainEn: "Believes the 1922 Asia Minor Catastrophe was purely a battlefield defeat, overlooking the collapse of Greece's diplomatic position.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Αναλυτής Γεγονότων",
-    achievementEn: "Events Analyst",
-    positiveMessageEl: "Βλέπεις τα ιστορικά γεγονότα από πολλές οπτικές γωνίες!",
-    positiveMessageEn: "You see historical events from multiple angles!",
-    skillTagEl: "Μικρασιατική Καταστροφή",
-    skillTagEn: "The Asia Minor Catastrophe",
+    "id": "history-lyk.1922-military-defeat-only",
+    "labelEl": "Μικρασιατική Καταστροφή",
+    "labelEn": "The Asia Minor Catastrophe",
+    "explainEl": "Πιστεύει ότι η Μικρασιατική Καταστροφή του 1922 οφείλεται αποκλειστικά σε στρατιωτική ήττα στο πεδίο της μάχης, παραβλέποντας την κατάρρευση της διπλωματικής θέσης της Ελλάδας.",
+    "explainEn": "Believes the 1922 Asia Minor Catastrophe was purely a battlefield defeat, overlooking the collapse of Greece's diplomatic position.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Αναλυτής Γεγονότων",
+    "achievementEn": "Events Analyst",
+    "positiveMessageEl": "Βλέπεις τα ιστορικά γεγονότα από πολλές οπτικές γωνίες!",
+    "positiveMessageEn": "You see historical events from multiple angles!",
+    "skillTagEl": "Μικρασιατική Καταστροφή",
+    "skillTagEn": "The Asia Minor Catastrophe"
   },
   "history-lyk.refugee-spontaneous": {
-    id: "history-lyk.refugee-spontaneous",
-    labelEl: "Συνθήκη της Λωζάνης",
-    labelEn: "Treaty of Lausanne",
-    explainEl: "Πιστεύει ότι η μετακίνηση των προσφύγων μετά το 1922 ήταν εντελώς αυθόρμητη και χωρίς κανένα θεσμικό πλαίσιο, αγνοώντας τη Συνθήκη της Λωζάνης.",
-    explainEn: "Believes the post-1922 refugee movement was entirely spontaneous with no institutional framework, unaware of the Treaty of Lausanne.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Λωζάνης",
-    achievementEn: "Lausanne Expert",
-    positiveMessageEl: "Ξέρεις το θεσμικό πλαίσιο πίσω από μεγάλα ιστορικά γεγονότα!",
-    positiveMessageEn: "You know the institutional framework behind major historical events!",
-    skillTagEl: "Συνθήκη της Λωζάνης",
-    skillTagEn: "Treaty of Lausanne",
+    "id": "history-lyk.refugee-spontaneous",
+    "labelEl": "Συνθήκη της Λωζάνης",
+    "labelEn": "Treaty of Lausanne",
+    "explainEl": "Πιστεύει ότι η μετακίνηση των προσφύγων μετά το 1922 ήταν εντελώς αυθόρμητη και χωρίς κανένα θεσμικό πλαίσιο, αγνοώντας τη Συνθήκη της Λωζάνης.",
+    "explainEn": "Believes the post-1922 refugee movement was entirely spontaneous with no institutional framework, unaware of the Treaty of Lausanne.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Λωζάνης",
+    "achievementEn": "Lausanne Expert",
+    "positiveMessageEl": "Ξέρεις το θεσμικό πλαίσιο πίσω από μεγάλα ιστορικά γεγονότα!",
+    "positiveMessageEn": "You know the institutional framework behind major historical events!",
+    "skillTagEl": "Συνθήκη της Λωζάνης",
+    "skillTagEn": "Treaty of Lausanne"
   },
   "history-lyk.greeks-majority-asia-minor": {
-    id: "history-lyk.greeks-majority-asia-minor",
-    labelEl: "Πληθυσμοί Μικράς Ασίας",
-    labelEn: "Asia Minor populations",
-    explainEl: "Πιστεύει ότι οι Έλληνες αποτελούσαν την πλειοψηφία του πληθυσμού σε όλη τη Μικρά Ασία, ενώ ήταν μεγάλη μειονότητα με τοπικές συγκεντρώσεις.",
-    explainEn: "Believes Greeks were the majority population across all of Asia Minor, when they were actually a large minority with local concentrations.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Δημογράφος της Ιστορίας",
-    achievementEn: "History Demographer",
-    positiveMessageEl: "Ξέρεις να διαβάζεις τους πληθυσμιακούς χάρτες της ιστορίας!",
-    positiveMessageEn: "You know how to read the population maps of history!",
-    skillTagEl: "Πληθυσμοί Μικράς Ασίας",
-    skillTagEn: "Asia Minor Populations",
+    "id": "history-lyk.greeks-majority-asia-minor",
+    "labelEl": "Πληθυσμοί Μικράς Ασίας",
+    "labelEn": "Asia Minor populations",
+    "explainEl": "Πιστεύει ότι οι Έλληνες αποτελούσαν την πλειοψηφία του πληθυσμού σε όλη τη Μικρά Ασία, ενώ ήταν μεγάλη μειονότητα με τοπικές συγκεντρώσεις.",
+    "explainEn": "Believes Greeks were the majority population across all of Asia Minor, when they were actually a large minority with local concentrations.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Δημογράφος της Ιστορίας",
+    "achievementEn": "History Demographer",
+    "positiveMessageEl": "Ξέρεις να διαβάζεις τους πληθυσμιακούς χάρτες της ιστορίας!",
+    "positiveMessageEn": "You know how to read the population maps of history!",
+    "skillTagEl": "Πληθυσμοί Μικράς Ασίας",
+    "skillTagEn": "Asia Minor Populations"
   },
-
-  // ---------- ΛΥΚΕΙΟ: ΑΓΓΛΙΚΑ ΩΣ ΞΕΝΗ ΓΛΩΣΣΑ ----------
   "efl-lyk.present-perfect-discourse": {
-    id: "efl-lyk.present-perfect-discourse",
-    labelEl: "Χρόνοι σε αφήγηση",
-    labelEn: "Tenses in narrative",
-    explainEl: "Συνεχίζει να χρησιμοποιεί τον Present Perfect για συγκεκριμένες λεπτομέρειες στο παρελθόν, αντί να περνάει στον Past Simple, λόγω επιρροής του ελληνικού Παρακείμενου.",
-    explainEn: "Keeps using Present Perfect for specific past details instead of switching to Past Simple, due to influence from the Greek Παρακείμενος.",
-    recommendedToolIds: ["grammarly"],
-    achievementEl: "Ο Κυρίαρχος του Λόγου",
-    achievementEn: "Discourse Master",
-    positiveMessageEl: "Ξέρεις πότε να αλλάξεις χρόνο μέσα σε μια αφήγηση!",
-    positiveMessageEn: "You know when to switch tenses within a narrative!",
-    skillTagEl: "Χρόνοι σε Αφήγηση",
-    skillTagEn: "Tenses in Narrative",
+    "id": "efl-lyk.present-perfect-discourse",
+    "labelEl": "Χρόνοι σε αφήγηση",
+    "labelEn": "Tenses in narrative",
+    "explainEl": "Συνεχίζει να χρησιμοποιεί τον Present Perfect για συγκεκριμένες λεπτομέρειες στο παρελθόν, αντί να περνάει στον Past Simple, λόγω επιρροής του ελληνικού Παρακείμενου.",
+    "explainEn": "Keeps using Present Perfect for specific past details instead of switching to Past Simple, due to influence from the Greek Παρακείμενος.",
+    "recommendedToolIds": [
+      "grammarly"
+    ],
+    "achievementEl": "Ο Κυρίαρχος του Λόγου",
+    "achievementEn": "Discourse Master",
+    "positiveMessageEl": "Ξέρεις πότε να αλλάξεις χρόνο μέσα σε μια αφήγηση!",
+    "positiveMessageEn": "You know when to switch tenses within a narrative!",
+    "skillTagEl": "Χρόνοι σε Αφήγηση",
+    "skillTagEn": "Tenses in Narrative"
   },
   "efl-lyk.reported-speech-backshift": {
-    id: "efl-lyk.reported-speech-backshift",
-    labelEl: "Πλάγιος λόγος",
-    labelEn: "Reported speech",
-    explainEl: "Δεν εφαρμόζει τη μετατόπιση χρόνου (backshift) στον πλάγιο λόγο, αφήνοντας τα ρήματα στον ίδιο χρόνο με τον ευθύ λόγο.",
-    explainEn: "Doesn't apply tense backshift in reported speech, leaving verbs in the same tense as the direct speech.",
-    recommendedToolIds: ["grammarly"],
-    achievementEl: "Ο Ειδικός του Πλάγιου Λόγου",
-    achievementEn: "Reported Speech Expert",
-    positiveMessageEl: "Ξέρεις να μεταφέρεις σωστά τι είπε κάποιος!",
-    positiveMessageEn: "You know how to correctly report what someone said!",
-    skillTagEl: "Πλάγιος Λόγος",
-    skillTagEn: "Reported Speech",
+    "id": "efl-lyk.reported-speech-backshift",
+    "labelEl": "Πλάγιος λόγος",
+    "labelEn": "Reported speech",
+    "explainEl": "Δεν εφαρμόζει τη μετατόπιση χρόνου (backshift) στον πλάγιο λόγο, αφήνοντας τα ρήματα στον ίδιο χρόνο με τον ευθύ λόγο.",
+    "explainEn": "Doesn't apply tense backshift in reported speech, leaving verbs in the same tense as the direct speech.",
+    "recommendedToolIds": [
+      "grammarly"
+    ],
+    "achievementEl": "Ο Ειδικός του Πλάγιου Λόγου",
+    "achievementEn": "Reported Speech Expert",
+    "positiveMessageEl": "Ξέρεις να μεταφέρεις σωστά τι είπε κάποιος!",
+    "positiveMessageEn": "You know how to correctly report what someone said!",
+    "skillTagEl": "Πλάγιος Λόγος",
+    "skillTagEn": "Reported Speech"
   },
   "efl-lyk.false-friends-advanced": {
-    id: "efl-lyk.false-friends-advanced",
-    labelEl: "Προχωρημένα False Friends",
-    labelEn: "Advanced false friends",
-    explainEl: "Μπερδεύει προχωρημένες αγγλικές λέξεις με τα ελληνικά «ψευδόφιλά» τους (π.χ. «actually» = «τώρα» αντί για «στην πραγματικότητα»).",
-    explainEn: "Confuses advanced English words with their Greek 'false friends' (e.g. 'actually' = 'currently' instead of 'in fact').",
-    recommendedToolIds: ["grammarly"],
-    achievementEl: "Ο Ανώτερος Ανιχνευτής",
-    achievementEn: "Advanced Detective",
-    positiveMessageEl: "Δεν σε ξεγελούν ούτε οι πιο δύσκολες ψεύτικες λέξεις-φίλοι!",
-    positiveMessageEn: "Even the trickiest false friends don't fool you!",
-    skillTagEl: "Προχωρημένα False Friends",
-    skillTagEn: "Advanced False Friends",
+    "id": "efl-lyk.false-friends-advanced",
+    "labelEl": "Προχωρημένα False Friends",
+    "labelEn": "Advanced false friends",
+    "explainEl": "Μπερδεύει προχωρημένες αγγλικές λέξεις με τα ελληνικά «ψευδόφιλά» τους (π.χ. «actually» = «τώρα» αντί για «στην πραγματικότητα»).",
+    "explainEn": "Confuses advanced English words with their Greek 'false friends' (e.g. 'actually' = 'currently' instead of 'in fact').",
+    "recommendedToolIds": [
+      "grammarly"
+    ],
+    "achievementEl": "Ο Ανώτερος Ανιχνευτής",
+    "achievementEn": "Advanced Detective",
+    "positiveMessageEl": "Δεν σε ξεγελούν ούτε οι πιο δύσκολες ψεύτικες λέξεις-φίλοι!",
+    "positiveMessageEn": "Even the trickiest false friends don't fool you!",
+    "skillTagEl": "Προχωρημένα False Friends",
+    "skillTagEn": "Advanced False Friends"
   },
   "efl-lyk.since-for-confusion": {
-    id: "efl-lyk.since-for-confusion",
-    labelEl: "Since vs For",
-    labelEn: "Since vs For",
-    explainEl: "Μπερδεύει το «since» με το «for» σε προτάσεις διάρκειας, επειδή τα ελληνικά δεν κάνουν την ίδια διάκριση.",
-    explainEn: "Confuses 'since' with 'for' in duration sentences, because Greek doesn't make the same distinction.",
-    recommendedToolIds: ["grammarly"],
-    achievementEl: "Ο Κύριος της Διάρκειας",
-    achievementEn: "Duration Master",
-    positiveMessageEl: "Ξέρεις πότε λέμε «since» και πότε «for»!",
-    positiveMessageEn: "You know exactly when to say 'since' and when to say 'for'!",
-    skillTagEl: "Since vs For",
-    skillTagEn: "Since vs For",
+    "id": "efl-lyk.since-for-confusion",
+    "labelEl": "Since vs For",
+    "labelEn": "Since vs For",
+    "explainEl": "Μπερδεύει το «since» με το «for» σε προτάσεις διάρκειας, επειδή τα ελληνικά δεν κάνουν την ίδια διάκριση.",
+    "explainEn": "Confuses 'since' with 'for' in duration sentences, because Greek doesn't make the same distinction.",
+    "recommendedToolIds": [
+      "grammarly"
+    ],
+    "achievementEl": "Ο Κύριος της Διάρκειας",
+    "achievementEn": "Duration Master",
+    "positiveMessageEl": "Ξέρεις πότε λέμε «since» και πότε «for»!",
+    "positiveMessageEn": "You know exactly when to say 'since' and when to say 'for'!",
+    "skillTagEl": "Since vs For",
+    "skillTagEn": "Since vs For"
   },
   "efl-lyk.preposition-collocation": {
-    id: "efl-lyk.preposition-collocation",
-    labelEl: "Collocations με προθέσεις",
-    labelEn: "Preposition collocations",
-    explainEl: "Χρησιμοποιεί λάθος προθέσεις σε συνδυασμούς επιθέτου/ρήματος (π.χ. «interested for» αντί για «interested in»), λόγω μετάφρασης από τα ελληνικά.",
-    explainEn: "Uses the wrong preposition in adjective/verb collocations (e.g. 'interested for' instead of 'interested in'), due to translation from Greek.",
-    recommendedToolIds: ["grammarly"],
-    achievementEl: "Ο Κύριος των Συνδυασμών",
-    achievementEn: "Collocation Master",
-    positiveMessageEl: "Ξέρεις ποια πρόθεση ταιριάζει σε κάθε επίθετο!",
-    positiveMessageEn: "You know which preposition goes with which adjective!",
-    skillTagEl: "Collocations με Προθέσεις",
-    skillTagEn: "Preposition Collocations",
+    "id": "efl-lyk.preposition-collocation",
+    "labelEl": "Collocations με προθέσεις",
+    "labelEn": "Preposition collocations",
+    "explainEl": "Χρησιμοποιεί λάθος προθέσεις σε συνδυασμούς επιθέτου/ρήματος (π.χ. «interested for» αντί για «interested in»), λόγω μετάφρασης από τα ελληνικά.",
+    "explainEn": "Uses the wrong preposition in adjective/verb collocations (e.g. 'interested for' instead of 'interested in'), due to translation from Greek.",
+    "recommendedToolIds": [
+      "grammarly"
+    ],
+    "achievementEl": "Ο Κύριος των Συνδυασμών",
+    "achievementEn": "Collocation Master",
+    "positiveMessageEl": "Ξέρεις ποια πρόθεση ταιριάζει σε κάθε επίθετο!",
+    "positiveMessageEn": "You know which preposition goes with which adjective!",
+    "skillTagEl": "Collocations με Προθέσεις",
+    "skillTagEn": "Preposition Collocations"
   },
-
-  // ================================================================
-  // ΝΕΑ GAP TAGS — ΔΙΑΦΟΡΟΠΟΙΗΣΗ ΑΝΑ ΤΑΞΗ (23/8 audit fix)
-  // ================================================================
-
-  // ---------- ΕΚΘΕΣΗ Α' ΛΥΚΕΙΟΥ: παράγραφος, τρόποι ανάπτυξης, περίληψη ----------
   "ekthesi-a.topic-sentence-missing": {
-    id: "ekthesi-a.topic-sentence-missing",
-    labelEl: "Θεματική πρόταση",
-    labelEn: "Topic sentence",
-    explainEl: "Δεν αναγνωρίζει ότι κάθε παράγραφος χρειάζεται μία θεματική πρόταση που δηλώνει το κεντρικό της νόημα· γράφει παραγράφους χωρίς σαφή εστίαση.",
-    explainEn: "Doesn't recognize that every paragraph needs one topic sentence stating its central idea; writes paragraphs without clear focus.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Αρχιτέκτονας της Παραγράφου",
-    achievementEn: "Paragraph Architect",
-    positiveMessageEl: "Ξέρεις πώς στήνεται μια παράγραφος γύρω από μία ιδέα!",
-    positiveMessageEn: "You know how to build a paragraph around one idea!",
-    skillTagEl: "Θεματική Πρόταση",
-    skillTagEn: "Topic Sentences",
+    "id": "ekthesi-a.topic-sentence-missing",
+    "labelEl": "Θεματική πρόταση",
+    "labelEn": "Topic sentence",
+    "explainEl": "Δεν αναγνωρίζει ότι κάθε παράγραφος χρειάζεται μία θεματική πρόταση που δηλώνει το κεντρικό της νόημα· γράφει παραγράφους χωρίς σαφή εστίαση.",
+    "explainEn": "Doesn't recognize that every paragraph needs one topic sentence stating its central idea; writes paragraphs without clear focus.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Αρχιτέκτονας της Παραγράφου",
+    "achievementEn": "Paragraph Architect",
+    "positiveMessageEl": "Ξέρεις πώς στήνεται μια παράγραφος γύρω από μία ιδέα!",
+    "positiveMessageEn": "You know how to build a paragraph around one idea!",
+    "skillTagEl": "Θεματική Πρόταση",
+    "skillTagEn": "Topic Sentences"
   },
   "ekthesi-a.development-method-confusion": {
-    id: "ekthesi-a.development-method-confusion",
-    labelEl: "Τρόποι ανάπτυξης παραγράφου",
-    labelEn: "Paragraph development methods",
-    explainEl: "Μπερδεύει τους τρόπους ανάπτυξης παραγράφου (παράδειγμα, αιτιολόγηση, σύγκριση-αντίθεση, ορισμός, διαίρεση), αφού δεν ξέρει ποιος ταιριάζει σε ποια θεματική πρόταση.",
-    explainEn: "Confuses the paragraph development methods (example, cause-effect, comparison-contrast, definition, division), not knowing which fits which topic sentence.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Γνώστης της Ανάπτυξης",
-    achievementEn: "Development Expert",
-    positiveMessageEl: "Ξέρεις με ποιον τρόπο θα αναπτύξεις κάθε ιδέα σου!",
-    positiveMessageEn: "You know exactly how to develop each idea you write!",
-    skillTagEl: "Τρόποι Ανάπτυξης",
-    skillTagEn: "Development Methods",
+    "id": "ekthesi-a.development-method-confusion",
+    "labelEl": "Τρόποι ανάπτυξης παραγράφου",
+    "labelEn": "Paragraph development methods",
+    "explainEl": "Μπερδεύει τους τρόπους ανάπτυξης παραγράφου (παράδειγμα, αιτιολόγηση, σύγκριση-αντίθεση, ορισμός, διαίρεση), αφού δεν ξέρει ποιος ταιριάζει σε ποια θεματική πρόταση.",
+    "explainEn": "Confuses the paragraph development methods (example, cause-effect, comparison-contrast, definition, division), not knowing which fits which topic sentence.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Ανάπτυξης",
+    "achievementEn": "Development Expert",
+    "positiveMessageEl": "Ξέρεις με ποιον τρόπο θα αναπτύξεις κάθε ιδέα σου!",
+    "positiveMessageEn": "You know exactly how to develop each idea you write!",
+    "skillTagEl": "Τρόποι Ανάπτυξης",
+    "skillTagEn": "Development Methods"
   },
   "ekthesi-a.unity-coherence": {
-    id: "ekthesi-a.unity-coherence",
-    labelEl: "Ενότητα & συνοχή παραγράφου",
-    labelEn: "Paragraph unity & coherence",
-    explainEl: "Γράφει προτάσεις που δεν συνδέονται λογικά μεταξύ τους μέσα στην ίδια παράγραφο, ή προσθέτει άσχετες πληροφορίες με τη θεματική πρόταση.",
-    explainEn: "Writes sentences that don't logically connect within the same paragraph, or adds information unrelated to the topic sentence.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Φύλακας της Συνοχής",
-    achievementEn: "Guardian of Coherence",
-    positiveMessageEl: "Κάθε πρότασή σου οδηγεί στην επόμενη!",
-    positiveMessageEn: "Every sentence you write leads naturally to the next!",
-    skillTagEl: "Ενότητα & Συνοχή",
-    skillTagEn: "Unity & Coherence",
+    "id": "ekthesi-a.unity-coherence",
+    "labelEl": "Ενότητα & συνοχή παραγράφου",
+    "labelEn": "Paragraph unity & coherence",
+    "explainEl": "Γράφει προτάσεις που δεν συνδέονται λογικά μεταξύ τους μέσα στην ίδια παράγραφο, ή προσθέτει άσχετες πληροφορίες με τη θεματική πρόταση.",
+    "explainEn": "Writes sentences that don't logically connect within the same paragraph, or adds information unrelated to the topic sentence.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Φύλακας της Συνοχής",
+    "achievementEn": "Guardian of Coherence",
+    "positiveMessageEl": "Κάθε πρότασή σου οδηγεί στην επόμενη!",
+    "positiveMessageEn": "Every sentence you write leads naturally to the next!",
+    "skillTagEl": "Ενότητα & Συνοχή",
+    "skillTagEn": "Unity & Coherence"
   },
   "ekthesi-a.summary-length": {
-    id: "ekthesi-a.summary-length",
-    labelEl: "Όριο λέξεων περίληψης",
-    labelEn: "Summary word limit",
-    explainEl: "Δεν τηρεί το ζητούμενο όριο λέξεων στην περίληψη· είτε την αφήνει σχεδόν όσο το πρωτότυπο είτε παραλείπει βασικές ιδέες για να χωρέσει.",
-    explainEn: "Doesn't respect the required word limit in a summary; either leaves it nearly as long as the original or drops key ideas just to fit.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Ειδικός του Ορίου",
-    achievementEn: "Word-Limit Expert",
-    positiveMessageEl: "Ξέρεις να κρατάς τα ουσιώδη μέσα στο όριο λέξεων!",
-    positiveMessageEn: "You know how to keep the essentials within the word limit!",
-    skillTagEl: "Περίληψη & Όριο Λέξεων",
-    skillTagEn: "Summary & Word Limit",
+    "id": "ekthesi-a.summary-length",
+    "labelEl": "Όριο λέξεων περίληψης",
+    "labelEn": "Summary word limit",
+    "explainEl": "Δεν τηρεί το ζητούμενο όριο λέξεων στην περίληψη· είτε την αφήνει σχεδόν όσο το πρωτότυπο είτε παραλείπει βασικές ιδέες για να χωρέσει.",
+    "explainEn": "Doesn't respect the required word limit in a summary; either leaves it nearly as long as the original or drops key ideas just to fit.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ειδικός του Ορίου",
+    "achievementEn": "Word-Limit Expert",
+    "positiveMessageEl": "Ξέρεις να κρατάς τα ουσιώδη μέσα στο όριο λέξεων!",
+    "positiveMessageEn": "You know how to keep the essentials within the word limit!",
+    "skillTagEl": "Περίληψη & Όριο Λέξεων",
+    "skillTagEn": "Summary & Word Limit"
   },
-
-  // ---------- ΕΚΘΕΣΗ Β' ΛΥΚΕΙΟΥ: πλήρες δοκίμιο, τρόποι πειθούς, επιχειρηματολογία ----------
   "ekthesi-b.persuasion-modes-confusion": {
-    id: "ekthesi-b.persuasion-modes-confusion",
-    labelEl: "Τρόποι πειθούς",
-    labelEn: "Modes of persuasion",
-    explainEl: "Μπερδεύει την επίκληση στη λογική (λόγος/στοιχεία), στο συναίσθημα (πάθος) και στο ήθος του πομπού, και δεν αναγνωρίζει ποιον χρησιμοποιεί ένα κείμενο.",
-    explainEn: "Confuses appeals to logic (logos/evidence), emotion (pathos), and the speaker's credibility (ethos), and can't identify which a text is using.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Γνώστης της Πειθούς",
-    achievementEn: "Persuasion Expert",
-    positiveMessageEl: "Ξέρεις πώς πείθει πραγματικά ένα κείμενο!",
-    positiveMessageEn: "You know what actually makes a text persuasive!",
-    skillTagEl: "Τρόποι Πειθούς",
-    skillTagEn: "Modes of Persuasion",
+    "id": "ekthesi-b.persuasion-modes-confusion",
+    "labelEl": "Τρόποι πειθούς",
+    "labelEn": "Modes of persuasion",
+    "explainEl": "Μπερδεύει την επίκληση στη λογική (λόγος/στοιχεία), στο συναίσθημα (πάθος) και στο ήθος του πομπού, και δεν αναγνωρίζει ποιον χρησιμοποιεί ένα κείμενο.",
+    "explainEn": "Confuses appeals to logic (logos/evidence), emotion (pathos), and the speaker's credibility (ethos), and can't identify which a text is using.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Πειθούς",
+    "achievementEn": "Persuasion Expert",
+    "positiveMessageEl": "Ξέρεις πώς πείθει πραγματικά ένα κείμενο!",
+    "positiveMessageEn": "You know what actually makes a text persuasive!",
+    "skillTagEl": "Τρόποι Πειθούς",
+    "skillTagEn": "Modes of Persuasion"
   },
   "ekthesi-b.thesis-antithesis-missing": {
-    id: "ekthesi-b.thesis-antithesis-missing",
-    labelEl: "Αντίκρουση αντίθετης άποψης",
-    labelEn: "Addressing the counter-view",
-    explainEl: "Γράφει μόνο υπέρ μίας άποψης χωρίς να αναγνωρίζει ή να απαντά στο αντίθετο επιχείρημα, κάτι που αποδυναμώνει το δοκίμιο.",
-    explainEn: "Argues only one side without acknowledging or answering the opposing argument, which weakens the essay.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Ισορροπιστής των Επιχειρημάτων",
-    achievementEn: "Argument Balancer",
-    positiveMessageEl: "Βλέπεις και τις δύο πλευρές πριν πάρεις θέση!",
-    positiveMessageEn: "You look at both sides before taking a position!",
-    skillTagEl: "Αντίκρουση",
-    skillTagEn: "Counter-Argument",
+    "id": "ekthesi-b.thesis-antithesis-missing",
+    "labelEl": "Αντίκρουση αντίθετης άποψης",
+    "labelEn": "Addressing the counter-view",
+    "explainEl": "Γράφει μόνο υπέρ μίας άποψης χωρίς να αναγνωρίζει ή να απαντά στο αντίθετο επιχείρημα, κάτι που αποδυναμώνει το δοκίμιο.",
+    "explainEn": "Argues only one side without acknowledging or answering the opposing argument, which weakens the essay.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ισορροπιστής των Επιχειρημάτων",
+    "achievementEn": "Argument Balancer",
+    "positiveMessageEl": "Βλέπεις και τις δύο πλευρές πριν πάρεις θέση!",
+    "positiveMessageEn": "You look at both sides before taking a position!",
+    "skillTagEl": "Αντίκρουση",
+    "skillTagEn": "Counter-Argument"
   },
   "ekthesi-b.essay-structure-imbalance": {
-    id: "ekthesi-b.essay-structure-imbalance",
-    labelEl: "Ισορροπία δοκιμίου",
-    labelEn: "Essay balance",
-    explainEl: "Γράφει δοκίμιο με ένα υπερβολικά μεγάλο επιχείρημα και τα υπόλοιπα ελλιπή, χωρίς ισότιμη ανάπτυξη κάθε παραγράφου επιχειρήματος.",
-    explainEn: "Writes an essay with one overdeveloped argument and the rest underdeveloped, without balanced development across argument paragraphs.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Αρχιτέκτονας του Δοκιμίου",
-    achievementEn: "Essay Architect",
-    positiveMessageEl: "Κάθε επιχείρημά σου έχει τον χώρο που του αξίζει!",
-    positiveMessageEn: "Every argument you make gets the space it deserves!",
-    skillTagEl: "Δομή Δοκιμίου",
-    skillTagEn: "Essay Structure",
+    "id": "ekthesi-b.essay-structure-imbalance",
+    "labelEl": "Ισορροπία δοκιμίου",
+    "labelEn": "Essay balance",
+    "explainEl": "Γράφει δοκίμιο με ένα υπερβολικά μεγάλο επιχείρημα και τα υπόλοιπα ελλιπή, χωρίς ισότιμη ανάπτυξη κάθε παραγράφου επιχειρήματος.",
+    "explainEn": "Writes an essay with one overdeveloped argument and the rest underdeveloped, without balanced development across argument paragraphs.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Αρχιτέκτονας του Δοκιμίου",
+    "achievementEn": "Essay Architect",
+    "positiveMessageEl": "Κάθε επιχείρημά σου έχει τον χώρο που του αξίζει!",
+    "positiveMessageEn": "Every argument you make gets the space it deserves!",
+    "skillTagEl": "Δομή Δοκιμίου",
+    "skillTagEn": "Essay Structure"
   },
   "ekthesi-b.evidence-generic": {
-    id: "ekthesi-b.evidence-generic",
-    labelEl: "Συγκεκριμένα τεκμήρια",
-    labelEn: "Concrete evidence",
-    explainEl: "Στηρίζει τα επιχειρήματά του σε γενικόλογες φράσεις («όλοι ξέρουν ότι…») αντί για συγκεκριμένα παραδείγματα, στατιστικά ή αναφορές.",
-    explainEn: "Supports arguments with vague generalities ('everyone knows that…') instead of concrete examples, statistics, or references.",
-    recommendedToolIds: ["chatgpt"],
-    achievementEl: "Ο Κυνηγός των Τεκμηρίων",
-    achievementEn: "Evidence Hunter",
-    positiveMessageEl: "Τα επιχειρήματά σου στηρίζονται σε στέρεο έδαφος!",
-    positiveMessageEn: "Your arguments stand on solid ground!",
-    skillTagEl: "Συγκεκριμένα Τεκμήρια",
-    skillTagEn: "Concrete Evidence",
+    "id": "ekthesi-b.evidence-generic",
+    "labelEl": "Συγκεκριμένα τεκμήρια",
+    "labelEn": "Concrete evidence",
+    "explainEl": "Στηρίζει τα επιχειρήματά του σε γενικόλογες φράσεις («όλοι ξέρουν ότι…») αντί για συγκεκριμένα παραδείγματα, στατιστικά ή αναφορές.",
+    "explainEn": "Supports arguments with vague generalities ('everyone knows that…') instead of concrete examples, statistics, or references.",
+    "recommendedToolIds": [
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Κυνηγός των Τεκμηρίων",
+    "achievementEn": "Evidence Hunter",
+    "positiveMessageEl": "Τα επιχειρήματά σου στηρίζονται σε στέρεο έδαφος!",
+    "positiveMessageEn": "Your arguments stand on solid ground!",
+    "skillTagEl": "Συγκεκριμένα Τεκμήρια",
+    "skillTagEn": "Concrete Evidence"
   },
-
-  // ---------- ΕΚΘΕΣΗ Γ' ΛΥΚΕΙΟΥ: κριτικό δοκίμιο, σύνθεση πηγών ----------
   "ekthesi-g.synthesis-sources-missing": {
-    id: "ekthesi-g.synthesis-sources-missing",
-    labelEl: "Σύνθεση πηγών",
-    labelEn: "Synthesizing sources",
-    explainEl: "Όταν η εκφώνηση δίνει πολλά κείμενα/πηγές, τα σχολιάζει το ένα μετά το άλλο χωριστά αντί να τα συνθέσει σε ενιαία επιχειρηματολογία.",
-    explainEn: "When given multiple texts/sources, comments on each one separately instead of synthesizing them into a unified argument.",
-    recommendedToolIds: ["chatgpt-edu"],
-    achievementEl: "Ο Συνθέτης των Πηγών",
-    achievementEn: "Source Synthesizer",
-    positiveMessageEl: "Συνδέεις πολλαπλές πηγές σε μία δυνατή επιχειρηματολογία!",
-    positiveMessageEn: "You weave multiple sources into one strong argument!",
-    skillTagEl: "Σύνθεση Πηγών",
-    skillTagEn: "Source Synthesis",
+    "id": "ekthesi-g.synthesis-sources-missing",
+    "labelEl": "Σύνθεση πηγών",
+    "labelEn": "Synthesizing sources",
+    "explainEl": "Όταν η εκφώνηση δίνει πολλά κείμενα/πηγές, τα σχολιάζει το ένα μετά το άλλο χωριστά αντί να τα συνθέσει σε ενιαία επιχειρηματολογία.",
+    "explainEn": "When given multiple texts/sources, comments on each one separately instead of synthesizing them into a unified argument.",
+    "recommendedToolIds": [
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Συνθέτης των Πηγών",
+    "achievementEn": "Source Synthesizer",
+    "positiveMessageEl": "Συνδέεις πολλαπλές πηγές σε μία δυνατή επιχειρηματολογία!",
+    "positiveMessageEn": "You weave multiple sources into one strong argument!",
+    "skillTagEl": "Σύνθεση Πηγών",
+    "skillTagEn": "Source Synthesis"
   },
   "ekthesi-g.proposal-vague": {
-    id: "ekthesi-g.proposal-vague",
-    labelEl: "Προτάσεις αντιμετώπισης",
-    labelEn: "Proposed solutions",
-    explainEl: "Στο τελευταίο μέρος του δοκιμίου προτείνει γενικόλογες λύσεις («πρέπει να αλλάξουμε νοοτροπία») χωρίς συγκεκριμένο, εφαρμόσιμο φορέα δράσης.",
-    explainEn: "In the essay's final section, proposes vague solutions ('we must change our mindset') without a concrete, actionable agent of action.",
-    recommendedToolIds: ["chatgpt-edu"],
-    achievementEl: "Ο Σχεδιαστής Λύσεων",
-    achievementEn: "Solutions Designer",
-    positiveMessageEl: "Οι προτάσεις σου είναι πραγματικά εφαρμόσιμες!",
-    positiveMessageEn: "Your proposals are genuinely actionable!",
-    skillTagEl: "Προτάσεις Αντιμετώπισης",
-    skillTagEn: "Proposed Solutions",
+    "id": "ekthesi-g.proposal-vague",
+    "labelEl": "Προτάσεις αντιμετώπισης",
+    "labelEn": "Proposed solutions",
+    "explainEl": "Στο τελευταίο μέρος του δοκιμίου προτείνει γενικόλογες λύσεις («πρέπει να αλλάξουμε νοοτροπία») χωρίς συγκεκριμένο, εφαρμόσιμο φορέα δράσης.",
+    "explainEn": "In the essay's final section, proposes vague solutions ('we must change our mindset') without a concrete, actionable agent of action.",
+    "recommendedToolIds": [
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Σχεδιαστής Λύσεων",
+    "achievementEn": "Solutions Designer",
+    "positiveMessageEl": "Οι προτάσεις σου είναι πραγματικά εφαρμόσιμες!",
+    "positiveMessageEn": "Your proposals are genuinely actionable!",
+    "skillTagEl": "Προτάσεις Αντιμετώπισης",
+    "skillTagEn": "Proposed Solutions"
   },
   "ekthesi-g.critical-stance-missing": {
-    id: "ekthesi-g.critical-stance-missing",
-    labelEl: "Κριτική αποτίμηση",
-    labelEn: "Critical evaluation",
-    explainEl: "Περιγράφει το θέμα αντί να το αξιολογεί κριτικά· λείπει η δική του κρίση για το αν κάτι είναι θετικό, αρνητικό ή αμφιλεγόμενο και γιατί.",
-    explainEn: "Describes the topic instead of critically evaluating it; misses their own judgment on whether something is positive, negative, or contested, and why.",
-    recommendedToolIds: ["chatgpt-edu"],
-    achievementEl: "Ο Κριτικός Στοχαστής",
-    achievementEn: "Critical Thinker",
-    positiveMessageEl: "Δεν περιγράφεις απλώς, κρίνεις με τεκμήρια!",
-    positiveMessageEn: "You don't just describe, you judge with evidence!",
-    skillTagEl: "Κριτική Αποτίμηση",
-    skillTagEn: "Critical Evaluation",
+    "id": "ekthesi-g.critical-stance-missing",
+    "labelEl": "Κριτική αποτίμηση",
+    "labelEn": "Critical evaluation",
+    "explainEl": "Περιγράφει το θέμα αντί να το αξιολογεί κριτικά· λείπει η δική του κρίση για το αν κάτι είναι θετικό, αρνητικό ή αμφιλεγόμενο και γιατί.",
+    "explainEn": "Describes the topic instead of critically evaluating it; misses their own judgment on whether something is positive, negative, or contested, and why.",
+    "recommendedToolIds": [
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Κριτικός Στοχαστής",
+    "achievementEn": "Critical Thinker",
+    "positiveMessageEl": "Δεν περιγράφεις απλώς, κρίνεις με τεκμήρια!",
+    "positiveMessageEn": "You don't just describe, you judge with evidence!",
+    "skillTagEl": "Κριτική Αποτίμηση",
+    "skillTagEn": "Critical Evaluation"
   },
   "ekthesi-g.counterargument-superficial": {
-    id: "ekthesi-g.counterargument-superficial",
-    labelEl: "Βάθος αντίκρουσης",
-    labelEn: "Depth of rebuttal",
-    explainEl: "Αναφέρει την αντίθετη άποψη μόνο για να την απορρίψει με μία γραμμή, χωρίς να εξηγήσει γιατί το δικό του επιχείρημα υπερισχύει.",
-    explainEn: "Mentions the opposing view only to dismiss it in one line, without explaining why their own argument outweighs it.",
-    recommendedToolIds: ["chatgpt-edu"],
-    achievementEl: "Ο Βαθύς Αντεπιχειρηματολόγος",
-    achievementEn: "Deep Rebuttal Thinker",
-    positiveMessageEl: "Η αντίκρουσή σου έχει πραγματικό βάθος!",
-    positiveMessageEn: "Your rebuttals have real depth!",
-    skillTagEl: "Βάθος Αντίκρουσης",
-    skillTagEn: "Rebuttal Depth",
+    "id": "ekthesi-g.counterargument-superficial",
+    "labelEl": "Βάθος αντίκρουσης",
+    "labelEn": "Depth of rebuttal",
+    "explainEl": "Αναφέρει την αντίθετη άποψη μόνο για να την απορρίψει με μία γραμμή, χωρίς να εξηγήσει γιατί το δικό του επιχείρημα υπερισχύει.",
+    "explainEn": "Mentions the opposing view only to dismiss it in one line, without explaining why their own argument outweighs it.",
+    "recommendedToolIds": [
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Βαθύς Αντεπιχειρηματολόγος",
+    "achievementEn": "Deep Rebuttal Thinker",
+    "positiveMessageEl": "Η αντίκρουσή σου έχει πραγματικό βάθος!",
+    "positiveMessageEn": "Your rebuttals have real depth!",
+    "skillTagEl": "Βάθος Αντίκρουσης",
+    "skillTagEn": "Rebuttal Depth"
   },
-
-  // ---------- ΙΣΤΟΡΙΑ Α' ΛΥΚΕΙΟΥ: Αρχαία Ιστορία ----------
   "istoria-a-lyk.polis-definition": {
-    id: "istoria-a-lyk.polis-definition",
-    labelEl: "Η πόλη-κράτος",
-    labelEn: "The city-state",
-    explainEl: "Δεν αναγνωρίζει τα βασικά χαρακτηριστικά της αρχαίας ελληνικής πόλης-κράτους (αυτόνομη πολιτική/στρατιωτική/θρησκευτική οντότητα με δικούς της νόμους).",
-    explainEn: "Doesn't recognize the defining features of the ancient Greek city-state (an autonomous political/military/religious unit with its own laws).",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Πόλης-Κράτους",
-    achievementEn: "City-State Expert",
-    positiveMessageEl: "Καταλαβαίνεις τι έκανε μοναδική κάθε αρχαία πόλη-κράτος!",
-    positiveMessageEn: "You understand what made each ancient city-state unique!",
-    skillTagEl: "Πόλη-Κράτος",
-    skillTagEn: "City-State",
+    "id": "istoria-a-lyk.polis-definition",
+    "labelEl": "Η πόλη-κράτος",
+    "labelEn": "The city-state",
+    "explainEl": "Δεν αναγνωρίζει τα βασικά χαρακτηριστικά της αρχαίας ελληνικής πόλης-κράτους (αυτόνομη πολιτική/στρατιωτική/θρησκευτική οντότητα με δικούς της νόμους).",
+    "explainEn": "Doesn't recognize the defining features of the ancient Greek city-state (an autonomous political/military/religious unit with its own laws).",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Πόλης-Κράτους",
+    "achievementEn": "City-State Expert",
+    "positiveMessageEl": "Καταλαβαίνεις τι έκανε μοναδική κάθε αρχαία πόλη-κράτος!",
+    "positiveMessageEn": "You understand what made each ancient city-state unique!",
+    "skillTagEl": "Πόλη-Κράτος",
+    "skillTagEn": "City-State"
   },
   "istoria-a-lyk.persian-wars-cause": {
-    id: "istoria-a-lyk.persian-wars-cause",
-    labelEl: "Αιτίες Περσικών Πολέμων",
-    labelEn: "Causes of the Persian Wars",
-    explainEl: "Δεν συνδέει την Ιωνική Επανάσταση με την έναρξη των Περσικών Πολέμων· βλέπει τη σύγκρουση ως ξαφνική, χωρίς προηγούμενη αιτία.",
-    explainEn: "Doesn't connect the Ionian Revolt to the start of the Persian Wars; sees the conflict as sudden, without a prior cause.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Στρατηγός της Ιστορίας",
-    achievementEn: "History Strategist",
-    positiveMessageEl: "Βλέπεις την αλυσίδα των γεγονότων πίσω από κάθε πόλεμο!",
-    positiveMessageEn: "You see the chain of events behind every war!",
-    skillTagEl: "Περσικοί Πόλεμοι",
-    skillTagEn: "Persian Wars",
+    "id": "istoria-a-lyk.persian-wars-cause",
+    "labelEl": "Αιτίες Περσικών Πολέμων",
+    "labelEn": "Causes of the Persian Wars",
+    "explainEl": "Δεν συνδέει την Ιωνική Επανάσταση με την έναρξη των Περσικών Πολέμων· βλέπει τη σύγκρουση ως ξαφνική, χωρίς προηγούμενη αιτία.",
+    "explainEn": "Doesn't connect the Ionian Revolt to the start of the Persian Wars; sees the conflict as sudden, without a prior cause.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Στρατηγός της Ιστορίας",
+    "achievementEn": "History Strategist",
+    "positiveMessageEl": "Βλέπεις την αλυσίδα των γεγονότων πίσω από κάθε πόλεμο!",
+    "positiveMessageEn": "You see the chain of events behind every war!",
+    "skillTagEl": "Περσικοί Πόλεμοι",
+    "skillTagEn": "Persian Wars"
   },
   "istoria-a-lyk.alexander-empire-unity": {
-    id: "istoria-a-lyk.alexander-empire-unity",
-    labelEl: "Διάδοχοι Αλεξάνδρου",
-    labelEn: "Alexander's Successors",
-    explainEl: "Πιστεύει ότι η αυτοκρατορία του Μεγάλου Αλεξάνδρου παρέμεινε ενωμένη μετά τον θάνατό του, ενώ στην πραγματικότητα διαλύθηκε στα ελληνιστικά βασίλεια των Διαδόχων.",
-    explainEn: "Believes Alexander the Great's empire remained unified after his death, when it actually broke up into the Hellenistic kingdoms of his Successors.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Χαρτογράφος των Διαδόχων",
-    achievementEn: "Cartographer of the Successors",
-    positiveMessageEl: "Ξέρεις τι έγινε στ' αλήθεια μετά τον Αλέξανδρο!",
-    positiveMessageEn: "You know what really happened after Alexander!",
-    skillTagEl: "Ελληνιστική Περίοδος",
-    skillTagEn: "Hellenistic Period",
+    "id": "istoria-a-lyk.alexander-empire-unity",
+    "labelEl": "Διάδοχοι Αλεξάνδρου",
+    "labelEn": "Alexander's Successors",
+    "explainEl": "Πιστεύει ότι η αυτοκρατορία του Μεγάλου Αλεξάνδρου παρέμεινε ενωμένη μετά τον θάνατό του, ενώ στην πραγματικότητα διαλύθηκε στα ελληνιστικά βασίλεια των Διαδόχων.",
+    "explainEn": "Believes Alexander the Great's empire remained unified after his death, when it actually broke up into the Hellenistic kingdoms of his Successors.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Χαρτογράφος των Διαδόχων",
+    "achievementEn": "Cartographer of the Successors",
+    "positiveMessageEl": "Ξέρεις τι έγινε στ' αλήθεια μετά τον Αλέξανδρο!",
+    "positiveMessageEn": "You know what really happened after Alexander!",
+    "skillTagEl": "Ελληνιστική Περίοδος",
+    "skillTagEn": "Hellenistic Period"
   },
   "istoria-a-lyk.direct-democracy-athens": {
-    id: "istoria-a-lyk.direct-democracy-athens",
-    labelEl: "Άμεση δημοκρατία",
-    labelEn: "Direct democracy",
-    explainEl: "Μπερδεύει την αθηναϊκή άμεση δημοκρατία (οι πολίτες αποφασίζουν οι ίδιοι στην Εκκλησία του Δήμου) με τη σύγχρονη αντιπροσωπευτική δημοκρατία.",
-    explainEn: "Confuses Athenian direct democracy (citizens themselves decide in the Assembly) with modern representative democracy.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Πολίτης της Εκκλησίας του Δήμου",
-    achievementEn: "Citizen of the Assembly",
-    positiveMessageEl: "Ξέρεις τη διαφορά ανάμεσα στην άμεση και την αντιπροσωπευτική δημοκρατία!",
-    positiveMessageEn: "You know the difference between direct and representative democracy!",
-    skillTagEl: "Αθηναϊκή Δημοκρατία",
-    skillTagEn: "Athenian Democracy",
+    "id": "istoria-a-lyk.direct-democracy-athens",
+    "labelEl": "Άμεση δημοκρατία",
+    "labelEn": "Direct democracy",
+    "explainEl": "Μπερδεύει την αθηναϊκή άμεση δημοκρατία (οι πολίτες αποφασίζουν οι ίδιοι στην Εκκλησία του Δήμου) με τη σύγχρονη αντιπροσωπευτική δημοκρατία.",
+    "explainEn": "Confuses Athenian direct democracy (citizens themselves decide in the Assembly) with modern representative democracy.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Πολίτης της Εκκλησίας του Δήμου",
+    "achievementEn": "Citizen of the Assembly",
+    "positiveMessageEl": "Ξέρεις τη διαφορά ανάμεσα στην άμεση και την αντιπροσωπευτική δημοκρατία!",
+    "positiveMessageEn": "You know the difference between direct and representative democracy!",
+    "skillTagEl": "Αθηναϊκή Δημοκρατία",
+    "skillTagEn": "Athenian Democracy"
   },
-
-  // ---------- ΙΣΤΟΡΙΑ Β' ΛΥΚΕΙΟΥ: Βυζάντιο & απαρχές Νεότερης Ιστορίας ----------
   "istoria-b-lyk.byzantium-continuation": {
-    id: "istoria-b-lyk.byzantium-continuation",
-    labelEl: "Βυζάντιο ως συνέχεια της Ρώμης",
-    labelEn: "Byzantium as Rome's continuation",
-    explainEl: "Βλέπει τη Βυζαντινή Αυτοκρατορία ως εντελώς ξεχωριστό κράτος, χωρίς να αναγνωρίζει ότι ήταν η άμεση συνέχεια της Ρωμαϊκής Αυτοκρατορίας στην Ανατολή.",
-    explainEn: "Sees the Byzantine Empire as a completely separate state, without recognizing it as the direct continuation of the Roman Empire in the East.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Συνέχειας",
-    achievementEn: "Continuity Expert",
-    positiveMessageEl: "Βλέπεις τη μακριά γραμμή από τη Ρώμη ως το Βυζάντιο!",
-    positiveMessageEn: "You see the long thread from Rome to Byzantium!",
-    skillTagEl: "Βυζαντινή Αυτοκρατορία",
-    skillTagEn: "Byzantine Empire",
+    "id": "istoria-b-lyk.byzantium-continuation",
+    "labelEl": "Βυζάντιο ως συνέχεια της Ρώμης",
+    "labelEn": "Byzantium as Rome's continuation",
+    "explainEl": "Βλέπει τη Βυζαντινή Αυτοκρατορία ως εντελώς ξεχωριστό κράτος, χωρίς να αναγνωρίζει ότι ήταν η άμεση συνέχεια της Ρωμαϊκής Αυτοκρατορίας στην Ανατολή.",
+    "explainEn": "Sees the Byzantine Empire as a completely separate state, without recognizing it as the direct continuation of the Roman Empire in the East.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Συνέχειας",
+    "achievementEn": "Continuity Expert",
+    "positiveMessageEl": "Βλέπεις τη μακριά γραμμή από τη Ρώμη ως το Βυζάντιο!",
+    "positiveMessageEn": "You see the long thread from Rome to Byzantium!",
+    "skillTagEl": "Βυζαντινή Αυτοκρατορία",
+    "skillTagEn": "Byzantine Empire"
   },
   "istoria-b-lyk.fall-constantinople-1453": {
-    id: "istoria-b-lyk.fall-constantinople-1453",
-    labelEl: "Άλωση της Κωνσταντινούπολης",
-    labelEn: "Fall of Constantinople",
-    explainEl: "Δεν γνωρίζει τη χρονολογία ή τη σημασία της Άλωσης του 1453 ως το τέλος της Βυζαντινής Αυτοκρατορίας και σημείο-ορόσημο της ευρωπαϊκής ιστορίας.",
-    explainEn: "Doesn't know the date or significance of the 1453 Fall as the end of the Byzantine Empire and a landmark in European history.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Φύλακας της Πόλης",
-    achievementEn: "Guardian of the City",
-    positiveMessageEl: "Ξέρεις γιατί το 1453 άλλαξε την ιστορία της Ευρώπης!",
-    positiveMessageEn: "You know why 1453 changed the course of European history!",
-    skillTagEl: "Άλωση 1453",
-    skillTagEn: "1453 Fall of Constantinople",
+    "id": "istoria-b-lyk.fall-constantinople-1453",
+    "labelEl": "Άλωση της Κωνσταντινούπολης",
+    "labelEn": "Fall of Constantinople",
+    "explainEl": "Δεν γνωρίζει τη χρονολογία ή τη σημασία της Άλωσης του 1453 ως το τέλος της Βυζαντινής Αυτοκρατορίας και σημείο-ορόσημο της ευρωπαϊκής ιστορίας.",
+    "explainEn": "Doesn't know the date or significance of the 1453 Fall as the end of the Byzantine Empire and a landmark in European history.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Φύλακας της Πόλης",
+    "achievementEn": "Guardian of the City",
+    "positiveMessageEl": "Ξέρεις γιατί το 1453 άλλαξε την ιστορία της Ευρώπης!",
+    "positiveMessageEn": "You know why 1453 changed the course of European history!",
+    "skillTagEl": "Άλωση 1453",
+    "skillTagEn": "1453 Fall of Constantinople"
   },
   "istoria-b-lyk.renaissance-cause": {
-    id: "istoria-b-lyk.renaissance-cause",
-    labelEl: "Αιτίες Αναγέννησης",
-    labelEn: "Causes of the Renaissance",
-    explainEl: "Βλέπει την Αναγέννηση ως τυχαίο γεγονός, χωρίς να συνδέει τη διάδοσή της με παράγοντες όπως η μετακίνηση λογίων και χειρογράφων προς τη Δύση.",
-    explainEn: "Sees the Renaissance as a random event, without connecting its spread to factors like the movement of scholars and manuscripts westward.",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Άνθρωπος της Αναγέννησης",
-    achievementEn: "Renaissance Mind",
-    positiveMessageEl: "Βλέπεις τις αιτίες πίσω από τη μεγάλη πνευματική άνθηση!",
-    positiveMessageEn: "You see the causes behind the great intellectual flowering!",
-    skillTagEl: "Αναγέννηση",
-    skillTagEn: "Renaissance",
+    "id": "istoria-b-lyk.renaissance-cause",
+    "labelEl": "Αιτίες Αναγέννησης",
+    "labelEn": "Causes of the Renaissance",
+    "explainEl": "Βλέπει την Αναγέννηση ως τυχαίο γεγονός, χωρίς να συνδέει τη διάδοσή της με παράγοντες όπως η μετακίνηση λογίων και χειρογράφων προς τη Δύση.",
+    "explainEn": "Sees the Renaissance as a random event, without connecting its spread to factors like the movement of scholars and manuscripts westward.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Άνθρωπος της Αναγέννησης",
+    "achievementEn": "Renaissance Mind",
+    "positiveMessageEl": "Βλέπεις τις αιτίες πίσω από τη μεγάλη πνευματική άνθηση!",
+    "positiveMessageEn": "You see the causes behind the great intellectual flowering!",
+    "skillTagEl": "Αναγέννηση",
+    "skillTagEn": "Renaissance"
   },
   "istoria-b-lyk.ottoman-administration": {
-    id: "istoria-b-lyk.ottoman-administration",
-    labelEl: "Οθωμανική διοίκηση Ελλήνων",
-    labelEn: "Ottoman rule over Greeks",
-    explainEl: "Νομίζει ότι όλοι οι Έλληνες υπό οθωμανική κυριαρχία ζούσαν στην ίδια κατάσταση καθημερινά, αγνοώντας τις διαφορές (π.χ. προνόμια Εκκλησίας, φόρος κεφαλής, αρματολίκια).",
-    explainEn: "Thinks all Greeks under Ottoman rule lived under identical daily conditions, ignoring differences (e.g. Church privileges, the head tax, local militias).",
-    recommendedToolIds: ["perplexity", "chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Ερευνητής της Τουρκοκρατίας",
-    achievementEn: "Ottoman-Era Researcher",
-    positiveMessageEl: "Βλέπεις τις αποχρώσεις μέσα σε μια σύνθετη περίοδο!",
-    positiveMessageEn: "You see the nuances within a complex historical period!",
-    skillTagEl: "Οθωμανική Περίοδος",
-    skillTagEn: "Ottoman Period",
+    "id": "istoria-b-lyk.ottoman-administration",
+    "labelEl": "Οθωμανική διοίκηση Ελλήνων",
+    "labelEn": "Ottoman rule over Greeks",
+    "explainEl": "Νομίζει ότι όλοι οι Έλληνες υπό οθωμανική κυριαρχία ζούσαν στην ίδια κατάσταση καθημερινά, αγνοώντας τις διαφορές (π.χ. προνόμια Εκκλησίας, φόρος κεφαλής, αρματολίκια).",
+    "explainEn": "Thinks all Greeks under Ottoman rule lived under identical daily conditions, ignoring differences (e.g. Church privileges, the head tax, local militias).",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ερευνητής της Τουρκοκρατίας",
+    "achievementEn": "Ottoman-Era Researcher",
+    "positiveMessageEl": "Βλέπεις τις αποχρώσεις μέσα σε μια σύνθετη περίοδο!",
+    "positiveMessageEn": "You see the nuances within a complex historical period!",
+    "skillTagEl": "Οθωμανική Περίοδος",
+    "skillTagEn": "Ottoman Period"
   },
-
-  // ---------- ΦΥΣΙΚΗ Β' ΛΥΚΕΙΟΥ: Θερμότητα & Ηλεκτρισμός ----------
-  "physics-b-lyk.heat-temperature-confusion": {
-    id: "physics-b-lyk.heat-temperature-confusion",
-    labelEl: "Θερμότητα vs Θερμοκρασία",
-    labelEn: "Heat vs Temperature",
-    explainEl: "Χρησιμοποιεί τη θερμότητα και τη θερμοκρασία σαν να είναι το ίδιο μέγεθος, ενώ η θερμότητα είναι μεταφερόμενη ενέργεια και η θερμοκρασία μέτρο κινητικής ενέργειας σωματιδίων.",
-    explainEn: "Treats heat and temperature as the same quantity, when heat is transferred energy and temperature measures particles' kinetic energy.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Θερμότητας",
-    achievementEn: "Heat Expert",
-    positiveMessageEl: "Ξεχωρίζεις τη θερμότητα από τη θερμοκρασία σαν φυσικός!",
-    positiveMessageEn: "You tell heat and temperature apart like a physicist!",
-    skillTagEl: "Θερμότητα & Θερμοκρασία",
-    skillTagEn: "Heat & Temperature",
-  },
-  "physics-b-lyk.current-consumed": {
-    id: "physics-b-lyk.current-consumed",
-    labelEl: "«Κατανάλωση» ρεύματος",
-    labelEn: "Current 'used up'",
-    explainEl: "Πιστεύει ότι το ηλεκτρικό ρεύμα «καταναλώνεται» καθώς περνά από τη λάμπα, ενώ η ένταση του ρεύματος παραμένει ίδια σε όλο το απλό κύκλωμα.",
-    explainEn: "Believes electric current gets 'used up' as it passes through the bulb, when current is actually the same throughout a simple circuit.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Μηχανικός του Κυκλώματος",
-    achievementEn: "Circuit Engineer",
-    positiveMessageEl: "Καταλαβαίνεις τι πραγματικά συμβαίνει μέσα σε ένα κύκλωμα!",
-    positiveMessageEn: "You understand what really happens inside a circuit!",
-    skillTagEl: "Ηλεκτρικό Ρεύμα",
-    skillTagEn: "Electric Current",
-  },
-  "physics-b-lyk.voltage-current-confusion": {
-    id: "physics-b-lyk.voltage-current-confusion",
-    labelEl: "Τάση vs Ένταση",
-    labelEn: "Voltage vs Current",
-    explainEl: "Μπερδεύει την ηλεκτρική τάση (V) με την ένταση ρεύματος (Α), χρησιμοποιώντας τους όρους σαν να είναι το ίδιο πράγμα.",
-    explainEn: "Confuses voltage (V) with current (A), using the terms as if they were the same thing.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Ειδικός Τάσης-Έντασης",
-    achievementEn: "Voltage-Current Specialist",
-    positiveMessageEl: "Ξέρεις τι μετράει το βολτόμετρο και τι το αμπερόμετρο!",
-    positiveMessageEn: "You know what a voltmeter measures versus an ammeter!",
-    skillTagEl: "Τάση & Ένταση",
-    skillTagEn: "Voltage & Current",
-  },
-  "physics-b-lyk.heat-flow-direction": {
-    id: "physics-b-lyk.heat-flow-direction",
-    labelEl: "Κατεύθυνση ροής θερμότητας",
-    labelEn: "Direction of heat flow",
-    explainEl: "Δεν έχει παγιώσει ότι η θερμότητα ρέει πάντα αυθόρμητα από το θερμότερο προς το ψυχρότερο σώμα, ποτέ αντίστροφα.",
-    explainEn: "Hasn't fixed the rule that heat always flows spontaneously from hotter to colder, never the reverse.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Χαρτογράφος της Θερμότητας",
-    achievementEn: "Heat-Flow Cartographer",
-    positiveMessageEl: "Ξέρεις προς τα πού ρέει πάντα η θερμότητα!",
-    positiveMessageEn: "You always know which way heat flows!",
-    skillTagEl: "Ροή Θερμότητας",
-    skillTagEn: "Heat Flow",
-  },
-  "physics-b-lyk.series-parallel-confusion": {
-    id: "physics-b-lyk.series-parallel-confusion",
-    labelEl: "Σειρά vs Παράλληλη σύνδεση",
-    labelEn: "Series vs Parallel circuits",
-    explainEl: "Μπερδεύει τη συνδεσμολογία σε σειρά με την παράλληλη σύνδεση αντιστάσεων και τις διαφορετικές τους ιδιότητες.",
-    explainEn: "Confuses series and parallel resistor connections and their different properties.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Σχεδιαστής Κυκλωμάτων",
-    achievementEn: "Circuit Designer",
-    positiveMessageEl: "Ξέρεις τη διαφορά ανάμεσα σε σειρά και παράλληλη σύνδεση!",
-    positiveMessageEn: "You know the difference between series and parallel wiring!",
-    skillTagEl: "Σειρά & Παράλληλη Σύνδεση",
-    skillTagEn: "Series & Parallel Circuits",
-  },
-
-  // ---------- ΑΓΓΛΙΚΑ Γ' ΛΥΚΕΙΟΥ (C1) ----------
   "efl-c-lyk.mixed-conditionals": {
-    id: "efl-c-lyk.mixed-conditionals",
-    labelEl: "Μεικτοί υποθετικοί λόγοι",
-    labelEn: "Mixed conditionals",
-    explainEl: "Δυσκολεύεται με μεικτούς υποθετικούς λόγους, όπου η υπόθεση αφορά το παρελθόν και το αποτέλεσμα το παρόν (ή αντίστροφα).",
-    explainEn: "Struggles with mixed conditionals, where the condition is in the past but the result is in the present (or vice versa).",
-    recommendedToolIds: ["gemini", "chatgpt-edu"],
-    achievementEl: "Ο Μάστερ των Υποθετικών",
-    achievementEn: "Conditionals Master",
-    positiveMessageEl: "Χειρίζεσαι άνετα και τους πιο σύνθετους υποθετικούς λόγους!",
-    positiveMessageEn: "You handle even the trickiest conditionals with ease!",
-    skillTagEl: "Μεικτοί Υποθετικοί",
-    skillTagEn: "Mixed Conditionals",
+    "id": "efl-c-lyk.mixed-conditionals",
+    "labelEl": "Μεικτοί υποθετικοί λόγοι",
+    "labelEn": "Mixed conditionals",
+    "explainEl": "Δυσκολεύεται με μεικτούς υποθετικούς λόγους, όπου η υπόθεση αφορά το παρελθόν και το αποτέλεσμα το παρόν (ή αντίστροφα).",
+    "explainEn": "Struggles with mixed conditionals, where the condition is in the past but the result is in the present (or vice versa).",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Μάστερ των Υποθετικών",
+    "achievementEn": "Conditionals Master",
+    "positiveMessageEl": "Χειρίζεσαι άνετα και τους πιο σύνθετους υποθετικούς λόγους!",
+    "positiveMessageEn": "You handle even the trickiest conditionals with ease!",
+    "skillTagEl": "Μεικτοί Υποθετικοί",
+    "skillTagEn": "Mixed Conditionals"
   },
   "efl-c-lyk.inversion-emphasis": {
-    id: "efl-c-lyk.inversion-emphasis",
-    labelEl: "Αντεστραμμένη σύνταξη",
-    labelEn: "Inversion for emphasis",
-    explainEl: "Δεν αναγνωρίζει δομές αντεστραμμένης σύνταξης για έμφαση (π.χ. «Never have I seen…»), τυπικές σε προχωρημένο, επίσημο ύφος.",
-    explainEn: "Doesn't recognize inverted structures used for emphasis (e.g. 'Never have I seen…'), typical of advanced, formal register.",
-    recommendedToolIds: ["gemini", "chatgpt-edu"],
-    achievementEl: "Ο Ειδικός της Αντιστροφής",
-    achievementEn: "Inversion Specialist",
-    positiveMessageEl: "Δίνεις έμφαση στον λόγο σου σαν φυσικός ομιλητής!",
-    positiveMessageEn: "You add emphasis to your writing like a native speaker!",
-    skillTagEl: "Αντεστραμμένη Σύνταξη",
-    skillTagEn: "Inversion",
+    "id": "efl-c-lyk.inversion-emphasis",
+    "labelEl": "Αντεστραμμένη σύνταξη",
+    "labelEn": "Inversion for emphasis",
+    "explainEl": "Δεν αναγνωρίζει δομές αντεστραμμένης σύνταξης για έμφαση (π.χ. «Never have I seen…»), τυπικές σε προχωρημένο, επίσημο ύφος.",
+    "explainEn": "Doesn't recognize inverted structures used for emphasis (e.g. 'Never have I seen…'), typical of advanced, formal register.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ειδικός της Αντιστροφής",
+    "achievementEn": "Inversion Specialist",
+    "positiveMessageEl": "Δίνεις έμφαση στον λόγο σου σαν φυσικός ομιλητής!",
+    "positiveMessageEn": "You add emphasis to your writing like a native speaker!",
+    "skillTagEl": "Αντεστραμμένη Σύνταξη",
+    "skillTagEn": "Inversion"
   },
   "efl-c-lyk.academic-collocations": {
-    id: "efl-c-lyk.academic-collocations",
-    labelEl: "Ακαδημαϊκές συνάψεις",
-    labelEn: "Academic collocations",
-    explainEl: "Χρησιμοποιεί λάθος ρήμα σε ακαδημαϊκές συνάψεις λέξεων (π.χ. «make research» αντί για «conduct/do research»).",
-    explainEn: "Uses the wrong verb in academic collocations (e.g. 'make research' instead of 'conduct/do research').",
-    recommendedToolIds: ["gemini", "chatgpt-edu"],
-    achievementEl: "Ο Ειδικός Ακαδημαϊκού Λόγου",
-    achievementEn: "Academic Language Expert",
-    positiveMessageEl: "Ο ακαδημαϊκός σου λόγος ακούγεται φυσικός!",
-    positiveMessageEn: "Your academic language sounds natural!",
-    skillTagEl: "Ακαδημαϊκές Συνάψεις",
-    skillTagEn: "Academic Collocations",
+    "id": "efl-c-lyk.academic-collocations",
+    "labelEl": "Ακαδημαϊκές συνάψεις",
+    "labelEn": "Academic collocations",
+    "explainEl": "Χρησιμοποιεί λάθος ρήμα σε ακαδημαϊκές συνάψεις λέξεων (π.χ. «make research» αντί για «conduct/do research»).",
+    "explainEn": "Uses the wrong verb in academic collocations (e.g. 'make research' instead of 'conduct/do research').",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ειδικός Ακαδημαϊκού Λόγου",
+    "achievementEn": "Academic Language Expert",
+    "positiveMessageEl": "Ο ακαδημαϊκός σου λόγος ακούγεται φυσικός!",
+    "positiveMessageEn": "Your academic language sounds natural!",
+    "skillTagEl": "Ακαδημαϊκές Συνάψεις",
+    "skillTagEn": "Academic Collocations"
   },
   "efl-c-lyk.passive-voice-formal": {
-    id: "efl-c-lyk.passive-voice-formal",
-    labelEl: "Παθητική φωνή σε επίσημο ύφος",
-    labelEn: "Passive voice in formal register",
-    explainEl: "Δεν χρησιμοποιεί την παθητική φωνή όπου ταιριάζει σε επίσημο/ακαδημαϊκό κείμενο, κρατώντας πάντα ενεργητική σύνταξη με «I» ή «we».",
-    explainEn: "Doesn't use the passive voice where it fits formal/academic writing, always keeping active constructions with 'I' or 'we'.",
-    recommendedToolIds: ["gemini", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Παθητικής",
-    achievementEn: "Passive Voice Expert",
-    positiveMessageEl: "Ξέρεις πότε η παθητική φωνή κάνει το κείμενό σου πιο επίσημο!",
-    positiveMessageEn: "You know when passive voice makes your writing more formal!",
-    skillTagEl: "Παθητική Φωνή",
-    skillTagEn: "Passive Voice",
+    "id": "efl-c-lyk.passive-voice-formal",
+    "labelEl": "Παθητική φωνή σε επίσημο ύφος",
+    "labelEn": "Passive voice in formal register",
+    "explainEl": "Δεν χρησιμοποιεί την παθητική φωνή όπου ταιριάζει σε επίσημο/ακαδημαϊκό κείμενο, κρατώντας πάντα ενεργητική σύνταξη με «I» ή «we».",
+    "explainEn": "Doesn't use the passive voice where it fits formal/academic writing, always keeping active constructions with 'I' or 'we'.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Παθητικής",
+    "achievementEn": "Passive Voice Expert",
+    "positiveMessageEl": "Ξέρεις πότε η παθητική φωνή κάνει το κείμενό σου πιο επίσημο!",
+    "positiveMessageEn": "You know when passive voice makes your writing more formal!",
+    "skillTagEl": "Παθητική Φωνή",
+    "skillTagEn": "Passive Voice"
   },
   "efl-c-lyk.phrasal-vs-formal-verb": {
-    id: "efl-c-lyk.phrasal-vs-formal-verb",
-    labelEl: "Phrasal vs επίσημο ρήμα",
-    labelEn: "Phrasal vs formal verb",
-    explainEl: "Χρησιμοποιεί καθημερινά phrasal verbs (π.χ. «find out») σε επίσημο/ακαδημαϊκό κείμενο αντί για το πιο επίσημο ισοδύναμο (π.χ. «discover»).",
-    explainEn: "Uses everyday phrasal verbs (e.g. 'find out') in formal/academic writing instead of the more formal equivalent (e.g. 'discover').",
-    recommendedToolIds: ["gemini", "chatgpt-edu"],
-    achievementEl: "Ο Ειδικός του Ύφους",
-    achievementEn: "Register Specialist",
-    positiveMessageEl: "Επιλέγεις τη σωστή λέξη για το σωστό ύφος!",
-    positiveMessageEn: "You pick the right word for the right register!",
-    skillTagEl: "Phrasal vs Formal Verbs",
-    skillTagEn: "Phrasal vs Formal Verbs",
+    "id": "efl-c-lyk.phrasal-vs-formal-verb",
+    "labelEl": "Phrasal vs επίσημο ρήμα",
+    "labelEn": "Phrasal vs formal verb",
+    "explainEl": "Χρησιμοποιεί καθημερινά phrasal verbs (π.χ. «find out») σε επίσημο/ακαδημαϊκό κείμενο αντί για το πιο επίσημο ισοδύναμο (π.χ. «discover»).",
+    "explainEn": "Uses everyday phrasal verbs (e.g. 'find out') in formal/academic writing instead of the more formal equivalent (e.g. 'discover').",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ειδικός του Ύφους",
+    "achievementEn": "Register Specialist",
+    "positiveMessageEl": "Επιλέγεις τη σωστή λέξη για το σωστό ύφος!",
+    "positiveMessageEn": "You pick the right word for the right register!",
+    "skillTagEl": "Phrasal vs Formal Verbs",
+    "skillTagEn": "Phrasal vs Formal Verbs"
   },
-
-  // ---------- ΑΓΓΛΙΚΑ ΣΤ' ΔΗΜΟΤΙΚΟΥ ----------
   "efl-st.past-simple-irregular": {
-    id: "efl-st.past-simple-irregular",
-    labelEl: "Ανώμαλα ρήματα (Past Simple)",
-    labelEn: "Irregular verbs (Past Simple)",
-    explainEl: "Προσθέτει «-ed» σε ανώμαλα ρήματα (π.χ. «goed» αντί για «went»), εφαρμόζοντας τον κανόνα των ομαλών ρημάτων παντού.",
-    explainEn: "Adds '-ed' to irregular verbs (e.g. 'goed' instead of 'went'), applying the regular-verb rule everywhere.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Κυνηγός των Ανώμαλων Ρημάτων",
-    achievementEn: "Irregular Verb Hunter",
-    positiveMessageEl: "Θυμάσαι τις ειδικές μορφές των ανώμαλων ρημάτων!",
-    positiveMessageEn: "You remember the special forms of irregular verbs!",
-    skillTagEl: "Ανώμαλα Ρήματα",
-    skillTagEn: "Irregular Verbs",
+    "id": "efl-st.past-simple-irregular",
+    "labelEl": "Ανώμαλα ρήματα (Past Simple)",
+    "labelEn": "Irregular verbs (Past Simple)",
+    "explainEl": "Προσθέτει «-ed» σε ανώμαλα ρήματα (π.χ. «goed» αντί για «went»), εφαρμόζοντας τον κανόνα των ομαλών ρημάτων παντού.",
+    "explainEn": "Adds '-ed' to irregular verbs (e.g. 'goed' instead of 'went'), applying the regular-verb rule everywhere.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Κυνηγός των Ανώμαλων Ρημάτων",
+    "achievementEn": "Irregular Verb Hunter",
+    "positiveMessageEl": "Θυμάσαι τις ειδικές μορφές των ανώμαλων ρημάτων!",
+    "positiveMessageEn": "You remember the special forms of irregular verbs!",
+    "skillTagEl": "Ανώμαλα Ρήματα",
+    "skillTagEn": "Irregular Verbs"
   },
   "efl-st.comparative-superlative": {
-    id: "efl-st.comparative-superlative",
-    labelEl: "Συγκριτικός vs Υπερθετικός",
-    labelEn: "Comparative vs Superlative",
-    explainEl: "Μπερδεύει τον συγκριτικό βαθμό επιθέτου («bigger») με τον υπερθετικό («the biggest»), χρησιμοποιώντας τον λάθος όταν συγκρίνει πάνω από δύο πράγματα.",
-    explainEn: "Confuses the comparative ('bigger') with the superlative ('the biggest'), using the wrong one when comparing more than two things.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Μάστερ των Συγκρίσεων",
-    achievementEn: "Comparison Master",
-    positiveMessageEl: "Ξέρεις πότε λες «bigger» και πότε «the biggest»!",
-    positiveMessageEn: "You know exactly when to say 'bigger' and when 'the biggest'!",
-    skillTagEl: "Συγκριτικός & Υπερθετικός",
-    skillTagEn: "Comparative & Superlative",
+    "id": "efl-st.comparative-superlative",
+    "labelEl": "Συγκριτικός vs Υπερθετικός",
+    "labelEn": "Comparative vs Superlative",
+    "explainEl": "Μπερδεύει τον συγκριτικό βαθμό επιθέτου («bigger») με τον υπερθετικό («the biggest»), χρησιμοποιώντας τον λάθος όταν συγκρίνει πάνω από δύο πράγματα.",
+    "explainEn": "Confuses the comparative ('bigger') with the superlative ('the biggest'), using the wrong one when comparing more than two things.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Μάστερ των Συγκρίσεων",
+    "achievementEn": "Comparison Master",
+    "positiveMessageEl": "Ξέρεις πότε λες «bigger» και πότε «the biggest»!",
+    "positiveMessageEn": "You know exactly when to say 'bigger' and when 'the biggest'!",
+    "skillTagEl": "Συγκριτικός & Υπερθετικός",
+    "skillTagEn": "Comparative & Superlative"
   },
   "efl-st.going-to-will": {
-    id: "efl-st.going-to-will",
-    labelEl: "Going to vs Will",
-    labelEn: "Going to vs Will",
-    explainEl: "Δεν ξεχωρίζει πότε χρησιμοποιούμε «going to» (προγραμματισμένο σχέδιο) και πότε «will» (απόφαση τη στιγμή που μιλάμε).",
-    explainEn: "Doesn't distinguish when to use 'going to' (a planned intention) versus 'will' (a decision made on the spot).",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Προγνώστης του Μέλλοντα",
-    achievementEn: "Future Forecaster",
-    positiveMessageEl: "Ξέρεις πότε μιλάμε για σχέδιο και πότε για απόφαση της στιγμής!",
-    positiveMessageEn: "You know when we're talking about a plan versus a spur-of-the-moment decision!",
-    skillTagEl: "Going To & Will",
-    skillTagEn: "Going To & Will",
+    "id": "efl-st.going-to-will",
+    "labelEl": "Going to vs Will",
+    "labelEn": "Going to vs Will",
+    "explainEl": "Δεν ξεχωρίζει πότε χρησιμοποιούμε «going to» (προγραμματισμένο σχέδιο) και πότε «will» (απόφαση τη στιγμή που μιλάμε).",
+    "explainEn": "Doesn't distinguish when to use 'going to' (a planned intention) versus 'will' (a decision made on the spot).",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Προγνώστης του Μέλλοντα",
+    "achievementEn": "Future Forecaster",
+    "positiveMessageEl": "Ξέρεις πότε μιλάμε για σχέδιο και πότε για απόφαση της στιγμής!",
+    "positiveMessageEn": "You know when we're talking about a plan versus a spur-of-the-moment decision!",
+    "skillTagEl": "Going To & Will",
+    "skillTagEn": "Going To & Will"
   },
   "efl-st.countable-uncountable": {
-    id: "efl-st.countable-uncountable",
-    labelEl: "Countable vs Uncountable",
-    labelEn: "Countable vs Uncountable",
-    explainEl: "Μπερδεύει το «much» με το «many», επειδή δεν ξεχωρίζει αν το ουσιαστικό μετριέται (countable) ή όχι (uncountable).",
-    explainEn: "Confuses 'much' with 'many', because they can't yet tell if a noun is countable or uncountable.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Μετρητής των Ουσιαστικών",
-    achievementEn: "Noun Counter",
-    positiveMessageEl: "Ξέρεις ποια ουσιαστικά μετριούνται και ποια όχι!",
-    positiveMessageEn: "You know which nouns can be counted and which can't!",
-    skillTagEl: "Countable & Uncountable",
-    skillTagEn: "Countable & Uncountable",
+    "id": "efl-st.countable-uncountable",
+    "labelEl": "Countable vs Uncountable",
+    "labelEn": "Countable vs Uncountable",
+    "explainEl": "Μπερδεύει το «much» με το «many», επειδή δεν ξεχωρίζει αν το ουσιαστικό μετριέται (countable) ή όχι (uncountable).",
+    "explainEn": "Confuses 'much' with 'many', because they can't yet tell if a noun is countable or uncountable.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Μετρητής των Ουσιαστικών",
+    "achievementEn": "Noun Counter",
+    "positiveMessageEl": "Ξέρεις ποια ουσιαστικά μετριούνται και ποια όχι!",
+    "positiveMessageEn": "You know which nouns can be counted and which can't!",
+    "skillTagEl": "Countable & Uncountable",
+    "skillTagEn": "Countable & Uncountable"
   },
   "efl-st.preposition-time": {
-    id: "efl-st.preposition-time",
-    labelEl: "Προθέσεις χρόνου",
-    labelEn: "Prepositions of time",
-    explainEl: "Μπερδεύει τις προθέσεις χρόνου «in», «on», «at» (π.χ. «at Monday» αντί για «on Monday»).",
-    explainEn: "Confuses the time prepositions 'in', 'on', 'at' (e.g. 'at Monday' instead of 'on Monday').",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Ρολογάς του Χρόνου",
-    achievementEn: "Time Prepositions Expert",
-    positiveMessageEl: "Ξέρεις ποια πρόθεση ταιριάζει σε ποια χρονική έκφραση!",
-    positiveMessageEn: "You know which preposition fits which time expression!",
-    skillTagEl: "Προθέσεις Χρόνου",
-    skillTagEn: "Prepositions of Time",
+    "id": "efl-st.preposition-time",
+    "labelEl": "Προθέσεις χρόνου",
+    "labelEn": "Prepositions of time",
+    "explainEl": "Μπερδεύει τις προθέσεις χρόνου «in», «on», «at» (π.χ. «at Monday» αντί για «on Monday»).",
+    "explainEn": "Confuses the time prepositions 'in', 'on', 'at' (e.g. 'at Monday' instead of 'on Monday').",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Ρολογάς του Χρόνου",
+    "achievementEn": "Time Prepositions Expert",
+    "positiveMessageEl": "Ξέρεις ποια πρόθεση ταιριάζει σε ποια χρονική έκφραση!",
+    "positiveMessageEn": "You know which preposition fits which time expression!",
+    "skillTagEl": "Προθέσεις Χρόνου",
+    "skillTagEn": "Prepositions of Time"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Α' ΔΗΜΟΤΙΚΟΥ ----------
   "math-a-dim.number-order": {
-    id: "math-a-dim.number-order",
-    labelEl: "Σύγκριση αριθμών έως 20",
-    labelEn: "Comparing numbers to 20",
-    explainEl: "Δυσκολεύεται να συγκρίνει και να διατάξει αριθμούς έως το 20, ειδικά όταν ο μεγαλύτερος αριθμός γράφεται με λιγότερα σύμβολα φαινομενικά μπερδεμένα.",
-    explainEn: "Struggles to compare and order numbers up to 20, especially when the bigger number looks deceptively similar to a smaller one.",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μικρός Μαθηματικός",
-    achievementEn: "The Little Mathematician",
-    positiveMessageEl: "Ξέρεις ποιος αριθμός είναι μεγαλύτερος με μια ματιά!",
-    positiveMessageEn: "You can tell which number is bigger at a glance!",
-    skillTagEl: "Αριθμοί έως 20",
-    skillTagEn: "Numbers to 20",
+    "id": "math-a-dim.number-order",
+    "labelEl": "Σύγκριση αριθμών έως 20",
+    "labelEn": "Comparing numbers to 20",
+    "explainEl": "Δυσκολεύεται να συγκρίνει και να διατάξει αριθμούς έως το 20, ειδικά όταν ο μεγαλύτερος αριθμός γράφεται με λιγότερα σύμβολα φαινομενικά μπερδεμένα.",
+    "explainEn": "Struggles to compare and order numbers up to 20, especially when the bigger number looks deceptively similar to a smaller one.",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μικρός Μαθηματικός",
+    "achievementEn": "The Little Mathematician",
+    "positiveMessageEl": "Ξέρεις ποιος αριθμός είναι μεγαλύτερος με μια ματιά!",
+    "positiveMessageEn": "You can tell which number is bigger at a glance!",
+    "skillTagEl": "Αριθμοί έως 20",
+    "skillTagEn": "Numbers to 20"
   },
   "math-a-dim.addition-crossing-ten": {
-    id: "math-a-dim.addition-crossing-ten",
-    labelEl: "Πρόσθεση με πέρασμα δεκάδας",
-    labelEn: "Addition crossing ten",
-    explainEl: "Δυσκολεύεται στην πρόσθεση όταν το άθροισμα περνά τη δεκάδα (π.χ. 8+5), γιατί δεν έχει ακόμα αυτοματοποιήσει τη στρατηγική «συμπλήρωσε πρώτα τη δεκάδα».",
-    explainEn: "Struggles with addition when the sum crosses ten (e.g. 8+5), because they haven't yet automated the 'make ten first' strategy.",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ήρωας της Δεκάδας",
-    achievementEn: "Hero of Ten",
-    positiveMessageEl: "Ξέρεις πώς να «περάσεις» τη δεκάδα με ευκολία!",
-    positiveMessageEn: "You know how to cross ten with ease!",
-    skillTagEl: "Πρόσθεση με Πέρασμα",
-    skillTagEn: "Addition Crossing Ten",
+    "id": "math-a-dim.addition-crossing-ten",
+    "labelEl": "Πρόσθεση με πέρασμα δεκάδας",
+    "labelEn": "Addition crossing ten",
+    "explainEl": "Δυσκολεύεται στην πρόσθεση όταν το άθροισμα περνά τη δεκάδα (π.χ. 8+5), γιατί δεν έχει ακόμα αυτοματοποιήσει τη στρατηγική «συμπλήρωσε πρώτα τη δεκάδα».",
+    "explainEn": "Struggles with addition when the sum crosses ten (e.g. 8+5), because they haven't yet automated the 'make ten first' strategy.",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ήρωας της Δεκάδας",
+    "achievementEn": "Hero of Ten",
+    "positiveMessageEl": "Ξέρεις πώς να «περάσεις» τη δεκάδα με ευκολία!",
+    "positiveMessageEn": "You know how to cross ten with ease!",
+    "skillTagEl": "Πρόσθεση με Πέρασμα",
+    "skillTagEn": "Addition Crossing Ten"
   },
   "math-a-dim.subtraction-borrowing-concept": {
-    id: "math-a-dim.subtraction-borrowing-concept",
-    labelEl: "Έννοια της αφαίρεσης",
-    labelEn: "Meaning of subtraction",
-    explainEl: "Δεν έχει ακόμα καταλάβει την αφαίρεση ως «πόσα λείπουν για να φτάσω» και προσπαθεί να τη λύσει μόνο μηχανικά, χωρίς νόημα.",
-    explainEn: "Hasn't yet grasped subtraction as 'how many more to reach the total' and tries to solve it mechanically, without meaning.",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Εξερευνητής της Αφαίρεσης",
-    achievementEn: "Subtraction Explorer",
-    positiveMessageEl: "Καταλαβαίνεις τι σημαίνει πραγματικά η αφαίρεση!",
-    positiveMessageEn: "You understand what subtraction really means!",
-    skillTagEl: "Έννοια Αφαίρεσης",
-    skillTagEn: "Meaning of Subtraction",
+    "id": "math-a-dim.subtraction-borrowing-concept",
+    "labelEl": "Έννοια της αφαίρεσης",
+    "labelEn": "Meaning of subtraction",
+    "explainEl": "Δεν έχει ακόμα καταλάβει την αφαίρεση ως «πόσα λείπουν για να φτάσω» και προσπαθεί να τη λύσει μόνο μηχανικά, χωρίς νόημα.",
+    "explainEn": "Hasn't yet grasped subtraction as 'how many more to reach the total' and tries to solve it mechanically, without meaning.",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εξερευνητής της Αφαίρεσης",
+    "achievementEn": "Subtraction Explorer",
+    "positiveMessageEl": "Καταλαβαίνεις τι σημαίνει πραγματικά η αφαίρεση!",
+    "positiveMessageEn": "You understand what subtraction really means!",
+    "skillTagEl": "Έννοια Αφαίρεσης",
+    "skillTagEn": "Meaning of Subtraction"
   },
   "math-a-dim.shape-recognition": {
-    id: "math-a-dim.shape-recognition",
-    labelEl: "Βασικά γεωμετρικά σχήματα",
-    labelEn: "Basic geometric shapes",
-    explainEl: "Μπερδεύει βασικά σχήματα μεταξύ τους (π.χ. τετράγωνο με ορθογώνιο), γιατί δεν έχει ακόμα σταθερό κριτήριο αναγνώρισης (ίσες πλευρές, γωνίες).",
-    explainEn: "Confuses basic shapes with each other (e.g. square with rectangle), because they don't yet have a stable recognition rule (equal sides, angles).",
-    recommendedToolIds: ["geogebra", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ανιχνευτής των Σχημάτων",
-    achievementEn: "Shape Detective",
-    positiveMessageEl: "Ξεχωρίζεις κάθε σχήμα από τα χαρακτηριστικά του!",
-    positiveMessageEn: "You tell every shape apart by its features!",
-    skillTagEl: "Γεωμετρικά Σχήματα",
-    skillTagEn: "Geometric Shapes",
+    "id": "math-a-dim.shape-recognition",
+    "labelEl": "Βασικά γεωμετρικά σχήματα",
+    "labelEn": "Basic geometric shapes",
+    "explainEl": "Μπερδεύει βασικά σχήματα μεταξύ τους (π.χ. τετράγωνο με ορθογώνιο), γιατί δεν έχει ακόμα σταθερό κριτήριο αναγνώρισης (ίσες πλευρές, γωνίες).",
+    "explainEn": "Confuses basic shapes with each other (e.g. square with rectangle), because they don't yet have a stable recognition rule (equal sides, angles).",
+    "recommendedToolIds": [
+      "geogebra",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ανιχνευτής των Σχημάτων",
+    "achievementEn": "Shape Detective",
+    "positiveMessageEl": "Ξεχωρίζεις κάθε σχήμα από τα χαρακτηριστικά του!",
+    "positiveMessageEn": "You tell every shape apart by its features!",
+    "skillTagEl": "Γεωμετρικά Σχήματα",
+    "skillTagEn": "Geometric Shapes"
   },
-
-  // ---------- ΓΛΩΣΣΑ Α' ΔΗΜΟΤΙΚΟΥ ----------
   "glossa-a-dim.letter-sound-confusion": {
-    id: "glossa-a-dim.letter-sound-confusion",
-    labelEl: "Παρόμοια γράμματα",
-    labelEn: "Similar-looking letters",
-    explainEl: "Μπερδεύει γράμματα με παρόμοιο σχήμα ή ήχο (π.χ. β/δ, μ/ν), κάτι πολύ συνηθισμένο στην πρώτη φάση εκμάθησης της γραφής.",
-    explainEn: "Confuses letters with similar shape or sound (e.g. Greek β/δ, μ/ν), very common in the first stage of learning to write.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης των Γραμμάτων",
-    achievementEn: "Letter Expert",
-    positiveMessageEl: "Ξεχωρίζεις κάθε γράμμα, ακόμα κι όταν μοιάζουν!",
-    positiveMessageEn: "You tell every letter apart, even the tricky look-alikes!",
-    skillTagEl: "Αναγνώριση Γραμμάτων",
-    skillTagEn: "Letter Recognition",
+    "id": "glossa-a-dim.letter-sound-confusion",
+    "labelEl": "Παρόμοια γράμματα",
+    "labelEn": "Similar-looking letters",
+    "explainEl": "Μπερδεύει γράμματα με παρόμοιο σχήμα ή ήχο (π.χ. β/δ, μ/ν), κάτι πολύ συνηθισμένο στην πρώτη φάση εκμάθησης της γραφής.",
+    "explainEn": "Confuses letters with similar shape or sound (e.g. Greek β/δ, μ/ν), very common in the first stage of learning to write.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Γραμμάτων",
+    "achievementEn": "Letter Expert",
+    "positiveMessageEl": "Ξεχωρίζεις κάθε γράμμα, ακόμα κι όταν μοιάζουν!",
+    "positiveMessageEn": "You tell every letter apart, even the tricky look-alikes!",
+    "skillTagEl": "Αναγνώριση Γραμμάτων",
+    "skillTagEn": "Letter Recognition"
   },
   "glossa-a-dim.sentence-boundary": {
-    id: "glossa-a-dim.sentence-boundary",
-    labelEl: "Όρια πρότασης",
-    labelEn: "Sentence boundaries",
-    explainEl: "Δεν αναγνωρίζει πού αρχίζει και πού τελειώνει μια πρόταση (κεφαλαίο γράμμα στην αρχή, τελεία στο τέλος).",
-    explainEn: "Doesn't recognize where a sentence starts and ends (capital letter at the start, full stop at the end).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Φύλακας της Πρότασης",
-    achievementEn: "Guardian of the Sentence",
-    positiveMessageEl: "Ξέρεις πού αρχίζει και πού τελειώνει μια πρόταση!",
-    positiveMessageEn: "You know exactly where a sentence begins and ends!",
-    skillTagEl: "Όρια Πρότασης",
-    skillTagEn: "Sentence Boundaries",
+    "id": "glossa-a-dim.sentence-boundary",
+    "labelEl": "Όρια πρότασης",
+    "labelEn": "Sentence boundaries",
+    "explainEl": "Δεν αναγνωρίζει πού αρχίζει και πού τελειώνει μια πρόταση (κεφαλαίο γράμμα στην αρχή, τελεία στο τέλος).",
+    "explainEn": "Doesn't recognize where a sentence starts and ends (capital letter at the start, full stop at the end).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Φύλακας της Πρότασης",
+    "achievementEn": "Guardian of the Sentence",
+    "positiveMessageEl": "Ξέρεις πού αρχίζει και πού τελειώνει μια πρόταση!",
+    "positiveMessageEn": "You know exactly where a sentence begins and ends!",
+    "skillTagEl": "Όρια Πρότασης",
+    "skillTagEn": "Sentence Boundaries"
   },
   "glossa-a-dim.plural-formation": {
-    id: "glossa-a-dim.plural-formation",
-    labelEl: "Σχηματισμός πληθυντικού",
-    labelEn: "Forming plurals",
-    explainEl: "Δυσκολεύεται στον σχηματισμό του πληθυντικού απλών ουσιαστικών (π.χ. «το παιδί» → «τα παιδιά»).",
-    explainEn: "Struggles to form the plural of simple nouns (e.g. 'το παιδί' → 'τα παιδιά').",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ του Πληθυντικού",
-    achievementEn: "Plural Master",
-    positiveMessageEl: "Ξέρεις πώς γίνεται ένα παιδί... πολλά παιδιά!",
-    positiveMessageEn: "You know how one becomes many!",
-    skillTagEl: "Πληθυντικός Αριθμός",
-    skillTagEn: "Plural Forms",
+    "id": "glossa-a-dim.plural-formation",
+    "labelEl": "Σχηματισμός πληθυντικού",
+    "labelEn": "Forming plurals",
+    "explainEl": "Δυσκολεύεται στον σχηματισμό του πληθυντικού απλών ουσιαστικών (π.χ. «το παιδί» → «τα παιδιά»).",
+    "explainEn": "Struggles to form the plural of simple nouns (e.g. 'το παιδί' → 'τα παιδιά').",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ του Πληθυντικού",
+    "achievementEn": "Plural Master",
+    "positiveMessageEl": "Ξέρεις πώς γίνεται ένα παιδί... πολλά παιδιά!",
+    "positiveMessageEn": "You know how one becomes many!",
+    "skillTagEl": "Πληθυντικός Αριθμός",
+    "skillTagEn": "Plural Forms"
   },
   "glossa-a-dim.word-order-basic": {
-    id: "glossa-a-dim.word-order-basic",
-    labelEl: "Σειρά λέξεων σε πρόταση",
-    labelEn: "Basic word order",
-    explainEl: "Δυσκολεύεται να συνθέσει μια απλή πρόταση με λογική σειρά λέξεων (υποκείμενο-ρήμα-αντικείμενο).",
-    explainEn: "Struggles to build a simple sentence with logical word order (subject-verb-object).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Χτίστης Προτάσεων",
-    achievementEn: "Sentence Builder",
-    positiveMessageEl: "Βάζεις τις λέξεις στη σωστή σειρά σαν μικρός συγγραφέας!",
-    positiveMessageEn: "You put words in the right order like a little writer!",
-    skillTagEl: "Σειρά Λέξεων",
-    skillTagEn: "Word Order",
+    "id": "glossa-a-dim.word-order-basic",
+    "labelEl": "Σειρά λέξεων σε πρόταση",
+    "labelEn": "Basic word order",
+    "explainEl": "Δυσκολεύεται να συνθέσει μια απλή πρόταση με λογική σειρά λέξεων (υποκείμενο-ρήμα-αντικείμενο).",
+    "explainEn": "Struggles to build a simple sentence with logical word order (subject-verb-object).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Χτίστης Προτάσεων",
+    "achievementEn": "Sentence Builder",
+    "positiveMessageEl": "Βάζεις τις λέξεις στη σωστή σειρά σαν μικρός συγγραφέας!",
+    "positiveMessageEn": "You put words in the right order like a little writer!",
+    "skillTagEl": "Σειρά Λέξεων",
+    "skillTagEn": "Word Order"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Β' ΔΗΜΟΤΙΚΟΥ ----------
   "math-b-dim.place-value-tens-ones": {
-    id: "math-b-dim.place-value-tens-ones",
-    labelEl: "Δεκάδες & μονάδες",
-    labelEn: "Tens & ones",
-    explainEl: "Μπερδεύει τη θέση των δεκάδων με τη θέση των μονάδων σε αριθμούς έως το 100 (π.χ. νομίζει ότι το 40 είναι μικρότερο από το 14).",
-    explainEn: "Confuses the tens place with the ones place in numbers up to 100 (e.g. thinks 40 is smaller than 14).",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Θεσιακής Αξίας",
-    achievementEn: "Place Value Expert",
-    positiveMessageEl: "Ξέρεις ποιο ψηφίο μετράει δεκάδες και ποιο μονάδες!",
-    positiveMessageEn: "You know which digit counts tens and which counts ones!",
-    skillTagEl: "Δεκάδες & Μονάδες",
-    skillTagEn: "Tens & Ones",
+    "id": "math-b-dim.place-value-tens-ones",
+    "labelEl": "Δεκάδες & μονάδες",
+    "labelEn": "Tens & ones",
+    "explainEl": "Μπερδεύει τη θέση των δεκάδων με τη θέση των μονάδων σε αριθμούς έως το 100 (π.χ. νομίζει ότι το 40 είναι μικρότερο από το 14).",
+    "explainEn": "Confuses the tens place with the ones place in numbers up to 100 (e.g. thinks 40 is smaller than 14).",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Θεσιακής Αξίας",
+    "achievementEn": "Place Value Expert",
+    "positiveMessageEl": "Ξέρεις ποιο ψηφίο μετράει δεκάδες και ποιο μονάδες!",
+    "positiveMessageEn": "You know which digit counts tens and which counts ones!",
+    "skillTagEl": "Δεκάδες & Μονάδες",
+    "skillTagEn": "Tens & Ones"
   },
   "math-b-dim.multiplication-as-repeated-addition": {
-    id: "math-b-dim.multiplication-as-repeated-addition",
-    labelEl: "Πολλαπλασιασμός ως πρόσθεση",
-    labelEn: "Multiplication as repeated addition",
-    explainEl: "Δεν έχει καταλάβει ακόμα ότι ο πολλαπλασιασμός είναι μια γρήγορη πρόσθεση ίδιων αριθμών (π.χ. 3×4 = 4+4+4).",
-    explainEn: "Hasn't yet grasped that multiplication is a fast way to add equal groups (e.g. 3×4 = 4+4+4).",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Πρωτοπόρος του Πολλαπλασιασμού",
-    achievementEn: "Multiplication Pioneer",
-    positiveMessageEl: "Βλέπεις τον πολλαπλασιασμό σαν γρήγορη πρόσθεση!",
-    positiveMessageEn: "You see multiplication as fast addition!",
-    skillTagEl: "Πολλαπλασιασμός",
-    skillTagEn: "Multiplication",
+    "id": "math-b-dim.multiplication-as-repeated-addition",
+    "labelEl": "Πολλαπλασιασμός ως πρόσθεση",
+    "labelEn": "Multiplication as repeated addition",
+    "explainEl": "Δεν έχει καταλάβει ακόμα ότι ο πολλαπλασιασμός είναι μια γρήγορη πρόσθεση ίδιων αριθμών (π.χ. 3×4 = 4+4+4).",
+    "explainEn": "Hasn't yet grasped that multiplication is a fast way to add equal groups (e.g. 3×4 = 4+4+4).",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Πρωτοπόρος του Πολλαπλασιασμού",
+    "achievementEn": "Multiplication Pioneer",
+    "positiveMessageEl": "Βλέπεις τον πολλαπλασιασμό σαν γρήγορη πρόσθεση!",
+    "positiveMessageEn": "You see multiplication as fast addition!",
+    "skillTagEl": "Πολλαπλασιασμός",
+    "skillTagEn": "Multiplication"
   },
   "math-b-dim.telling-time-half-hour": {
-    id: "math-b-dim.telling-time-half-hour",
-    labelEl: "Ώρα στη μισή",
-    labelEn: "Telling time to the half hour",
-    explainEl: "Δυσκολεύεται να διαβάσει την ώρα όταν ο δείκτης των λεπτών δείχνει τη μισή (π.χ. 6:30), γιατί εστιάζει μόνο στον δείκτη της ώρας.",
-    explainEn: "Struggles to read the time when the minute hand is at the half (e.g. 6:30), because they focus only on the hour hand.",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Ρολογιού",
-    achievementEn: "Clock Expert",
-    positiveMessageEl: "Διαβάζεις το ρολόι σαν μεγάλος/η!",
-    positiveMessageEn: "You read the clock like a pro!",
-    skillTagEl: "Ανάγνωση Ρολογιού",
-    skillTagEn: "Telling Time",
+    "id": "math-b-dim.telling-time-half-hour",
+    "labelEl": "Ώρα στη μισή",
+    "labelEn": "Telling time to the half hour",
+    "explainEl": "Δυσκολεύεται να διαβάσει την ώρα όταν ο δείκτης των λεπτών δείχνει τη μισή (π.χ. 6:30), γιατί εστιάζει μόνο στον δείκτη της ώρας.",
+    "explainEn": "Struggles to read the time when the minute hand is at the half (e.g. 6:30), because they focus only on the hour hand.",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Ρολογιού",
+    "achievementEn": "Clock Expert",
+    "positiveMessageEl": "Διαβάζεις το ρολόι σαν μεγάλος/η!",
+    "positiveMessageEn": "You read the clock like a pro!",
+    "skillTagEl": "Ανάγνωση Ρολογιού",
+    "skillTagEn": "Telling Time"
   },
   "math-b-dim.money-counting": {
-    id: "math-b-dim.money-counting",
-    labelEl: "Μέτρημα χρημάτων",
-    labelEn: "Counting money",
-    explainEl: "Δυσκολεύεται να συνδυάσει νομίσματα και χαρτονομίσματα διαφορετικής αξίας για να φτάσει ένα συγκεκριμένο ποσό.",
-    explainEn: "Struggles to combine coins and notes of different values to reach a specific total.",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μικρός Ταμίας",
-    achievementEn: "The Little Cashier",
-    positiveMessageEl: "Ξέρεις πώς να μαζέψεις το σωστό ποσό με νομίσματα!",
-    positiveMessageEn: "You know how to make the right amount with coins!",
-    skillTagEl: "Μέτρημα Χρημάτων",
-    skillTagEn: "Counting Money",
+    "id": "math-b-dim.money-counting",
+    "labelEl": "Μέτρημα χρημάτων",
+    "labelEn": "Counting money",
+    "explainEl": "Δυσκολεύεται να συνδυάσει νομίσματα και χαρτονομίσματα διαφορετικής αξίας για να φτάσει ένα συγκεκριμένο ποσό.",
+    "explainEn": "Struggles to combine coins and notes of different values to reach a specific total.",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μικρός Ταμίας",
+    "achievementEn": "The Little Cashier",
+    "positiveMessageEl": "Ξέρεις πώς να μαζέψεις το σωστό ποσό με νομίσματα!",
+    "positiveMessageEn": "You know how to make the right amount with coins!",
+    "skillTagEl": "Μέτρημα Χρημάτων",
+    "skillTagEn": "Counting Money"
   },
-
-  // ---------- ΓΛΩΣΣΑ Β' ΔΗΜΟΤΙΚΟΥ ----------
   "glossa-b-dim.punctuation-question-exclamation": {
-    id: "glossa-b-dim.punctuation-question-exclamation",
-    labelEl: "Ερωτηματικό vs Θαυμαστικό",
-    labelEn: "Question mark vs Exclamation mark",
-    explainEl: "Μπερδεύει το ερωτηματικό με το θαυμαστικό, γιατί δεν ξεχωρίζει ακόμα αν μια πρόταση ρωτάει κάτι ή εκφράζει έντονο συναίσθημα.",
-    explainEn: "Confuses the question mark with the exclamation mark, not yet distinguishing whether a sentence asks something or expresses strong feeling.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Στίξης",
-    achievementEn: "Punctuation Expert",
-    positiveMessageEl: "Ξέρεις πότε βάζουμε ερωτηματικό και πότε θαυμαστικό!",
-    positiveMessageEn: "You know when to use a question mark and when an exclamation mark!",
-    skillTagEl: "Ερωτηματικό & Θαυμαστικό",
-    skillTagEn: "Question & Exclamation Marks",
+    "id": "glossa-b-dim.punctuation-question-exclamation",
+    "labelEl": "Ερωτηματικό vs Θαυμαστικό",
+    "labelEn": "Question mark vs Exclamation mark",
+    "explainEl": "Μπερδεύει το ερωτηματικό με το θαυμαστικό, γιατί δεν ξεχωρίζει ακόμα αν μια πρόταση ρωτάει κάτι ή εκφράζει έντονο συναίσθημα.",
+    "explainEn": "Confuses the question mark with the exclamation mark, not yet distinguishing whether a sentence asks something or expresses strong feeling.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Στίξης",
+    "achievementEn": "Punctuation Expert",
+    "positiveMessageEl": "Ξέρεις πότε βάζουμε ερωτηματικό και πότε θαυμαστικό!",
+    "positiveMessageEn": "You know when to use a question mark and when an exclamation mark!",
+    "skillTagEl": "Ερωτηματικό & Θαυμαστικό",
+    "skillTagEn": "Question & Exclamation Marks"
   },
   "glossa-b-dim.story-sequence": {
-    id: "glossa-b-dim.story-sequence",
-    labelEl: "Σειρά γεγονότων ιστορίας",
-    labelEn: "Story sequence",
-    explainEl: "Δυσκολεύεται να βάλει σε λογική σειρά τα γεγονότα μιας μικρής ιστορίας (τι έγινε πρώτα, μετά, στο τέλος).",
-    explainEn: "Struggles to put the events of a short story in logical order (what happened first, next, last).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Αφηγητής της Ιστορίας",
-    achievementEn: "Story Sequencer",
-    positiveMessageEl: "Ξέρεις τι έγινε πρώτα, μετά και στο τέλος!",
-    positiveMessageEn: "You know what happened first, next, and last!",
-    skillTagEl: "Σειρά Γεγονότων",
-    skillTagEn: "Story Sequence",
+    "id": "glossa-b-dim.story-sequence",
+    "labelEl": "Σειρά γεγονότων ιστορίας",
+    "labelEn": "Story sequence",
+    "explainEl": "Δυσκολεύεται να βάλει σε λογική σειρά τα γεγονότα μιας μικρής ιστορίας (τι έγινε πρώτα, μετά, στο τέλος).",
+    "explainEn": "Struggles to put the events of a short story in logical order (what happened first, next, last).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Αφηγητής της Ιστορίας",
+    "achievementEn": "Story Sequencer",
+    "positiveMessageEl": "Ξέρεις τι έγινε πρώτα, μετά και στο τέλος!",
+    "positiveMessageEn": "You know what happened first, next, and last!",
+    "skillTagEl": "Σειρά Γεγονότων",
+    "skillTagEn": "Story Sequence"
   },
   "glossa-b-dim.simple-past-tense": {
-    id: "glossa-b-dim.simple-past-tense",
-    labelEl: "Αόριστος χρόνος ρημάτων",
-    labelEn: "Simple past tense",
-    explainEl: "Δυσκολεύεται στον σχηματισμό του αορίστου απλών ρημάτων (π.χ. «παίζω» → «έπαιξα»).",
-    explainEn: "Struggles to form the simple past of common verbs (e.g. 'παίζω' [play] → 'έπαιξα' [played]).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ταξιδιώτης στον Χρόνο",
-    achievementEn: "Time Traveler",
-    positiveMessageEl: "Ξέρεις πώς λέμε τι έγινε χτες!",
-    positiveMessageEn: "You know how to say what happened yesterday!",
-    skillTagEl: "Αόριστος Χρόνος",
-    skillTagEn: "Simple Past Tense",
+    "id": "glossa-b-dim.simple-past-tense",
+    "labelEl": "Αόριστος χρόνος ρημάτων",
+    "labelEn": "Simple past tense",
+    "explainEl": "Δυσκολεύεται στον σχηματισμό του αορίστου απλών ρημάτων (π.χ. «παίζω» → «έπαιξα»).",
+    "explainEn": "Struggles to form the simple past of common verbs (e.g. 'παίζω' [play] → 'έπαιξα' [played]).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ταξιδιώτης στον Χρόνο",
+    "achievementEn": "Time Traveler",
+    "positiveMessageEl": "Ξέρεις πώς λέμε τι έγινε χτες!",
+    "positiveMessageEn": "You know how to say what happened yesterday!",
+    "skillTagEl": "Αόριστος Χρόνος",
+    "skillTagEn": "Simple Past Tense"
   },
   "glossa-b-dim.synonym-basic": {
-    id: "glossa-b-dim.synonym-basic",
-    labelEl: "Συνώνυμα & αντίθετα",
-    labelEn: "Synonyms & antonyms",
-    explainEl: "Δεν αναγνωρίζει απλά συνώνυμα («χαρούμενος»/«ευτυχισμένος») ή αντίθετα («μεγάλος»/«μικρός») σε βασικές, καθημερινές λέξεις.",
-    explainEn: "Doesn't recognize simple synonyms ('happy'/'glad') or antonyms ('big'/'small') among common, everyday words.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Κυνηγός των Λέξεων",
-    achievementEn: "Word Hunter",
-    positiveMessageEl: "Ξέρεις λέξεις που μοιάζουν και λέξεις που είναι αντίθετες!",
-    positiveMessageEn: "You know words that are alike and words that are opposite!",
-    skillTagEl: "Συνώνυμα & Αντίθετα",
-    skillTagEn: "Synonyms & Antonyms",
+    "id": "glossa-b-dim.synonym-basic",
+    "labelEl": "Συνώνυμα & αντίθετα",
+    "labelEn": "Synonyms & antonyms",
+    "explainEl": "Δεν αναγνωρίζει απλά συνώνυμα («χαρούμενος»/«ευτυχισμένος») ή αντίθετα («μεγάλος»/«μικρός») σε βασικές, καθημερινές λέξεις.",
+    "explainEn": "Doesn't recognize simple synonyms ('happy'/'glad') or antonyms ('big'/'small') among common, everyday words.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Κυνηγός των Λέξεων",
+    "achievementEn": "Word Hunter",
+    "positiveMessageEl": "Ξέρεις λέξεις που μοιάζουν και λέξεις που είναι αντίθετες!",
+    "positiveMessageEn": "You know words that are alike and words that are opposite!",
+    "skillTagEl": "Συνώνυμα & Αντίθετα",
+    "skillTagEn": "Synonyms & Antonyms"
   },
-
-  // ================================================================
-  // ΝΕΑ GAP TAGS — Γ' & Δ' ΔΗΜΟΤΙΚΟΥ (συνέχεια 23/8)
-  // ================================================================
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Γ' ΔΗΜΟΤΙΚΟΥ ----------
   "math-c-dim.times-table-recall": {
-    id: "math-c-dim.times-table-recall",
-    labelEl: "Προπαίδεια",
-    labelEn: "Times tables",
-    explainEl: "Δεν έχει αυτοματοποιήσει ακόμα βασικές προπαίδειες (π.χ. του 6, του 7, του 8) και προσπαθεί να τις υπολογίσει κάθε φορά από την αρχή.",
-    explainEn: "Hasn't yet automated basic times tables (e.g. 6, 7, 8) and tries to work them out from scratch every time.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ της Προπαίδειας",
-    achievementEn: "Times Table Master",
-    positiveMessageEl: "Θυμάσαι τις προπαίδειες σαν να τραγουδάς!",
-    positiveMessageEn: "You remember your times tables like a song!",
-    skillTagEl: "Προπαίδεια",
-    skillTagEn: "Times Tables",
+    "id": "math-c-dim.times-table-recall",
+    "labelEl": "Προπαίδεια",
+    "labelEn": "Times tables",
+    "explainEl": "Δεν έχει αυτοματοποιήσει ακόμα βασικές προπαίδειες (π.χ. του 6, του 7, του 8) και προσπαθεί να τις υπολογίσει κάθε φορά από την αρχή.",
+    "explainEn": "Hasn't yet automated basic times tables (e.g. 6, 7, 8) and tries to work them out from scratch every time.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ της Προπαίδειας",
+    "achievementEn": "Times Table Master",
+    "positiveMessageEl": "Θυμάσαι τις προπαίδειες σαν να τραγουδάς!",
+    "positiveMessageEn": "You remember your times tables like a song!",
+    "skillTagEl": "Προπαίδεια",
+    "skillTagEn": "Times Tables"
   },
   "math-c-dim.division-as-sharing": {
-    id: "math-c-dim.division-as-sharing",
-    labelEl: "Έννοια της διαίρεσης",
-    labelEn: "Meaning of division",
-    explainEl: "Δεν έχει καταλάβει ότι η διαίρεση σημαίνει «μοιράζω δίκαια σε ίσα μέρη» και προσπαθεί να τη λύσει μηχανικά, χωρίς νόημα.",
-    explainEn: "Hasn't grasped that division means 'sharing fairly into equal groups' and tries to solve it mechanically, without meaning.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Δίκαιος Μοιραστής",
-    achievementEn: "Fair Sharer",
-    positiveMessageEl: "Ξέρεις πώς να μοιράσεις δίκαια σε ίσα μέρη!",
-    positiveMessageEn: "You know how to share fairly into equal groups!",
-    skillTagEl: "Έννοια Διαίρεσης",
-    skillTagEn: "Meaning of Division",
+    "id": "math-c-dim.division-as-sharing",
+    "labelEl": "Έννοια της διαίρεσης",
+    "labelEn": "Meaning of division",
+    "explainEl": "Δεν έχει καταλάβει ότι η διαίρεση σημαίνει «μοιράζω δίκαια σε ίσα μέρη» και προσπαθεί να τη λύσει μηχανικά, χωρίς νόημα.",
+    "explainEn": "Hasn't grasped that division means 'sharing fairly into equal groups' and tries to solve it mechanically, without meaning.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Δίκαιος Μοιραστής",
+    "achievementEn": "Fair Sharer",
+    "positiveMessageEl": "Ξέρεις πώς να μοιράσεις δίκαια σε ίσα μέρη!",
+    "positiveMessageEn": "You know how to share fairly into equal groups!",
+    "skillTagEl": "Έννοια Διαίρεσης",
+    "skillTagEn": "Meaning of Division"
   },
   "math-c-dim.measurement-units": {
-    id: "math-c-dim.measurement-units",
-    labelEl: "Μονάδες μέτρησης μήκους",
-    labelEn: "Units of length",
-    explainEl: "Μπερδεύει το μέτρο με το εκατοστό (π.χ. νομίζει ότι 1 μέτρο = 10 εκατοστά αντί για 100).",
-    explainEn: "Confuses meters with centimeters (e.g. thinks 1 meter = 10 cm instead of 100).",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μετρητής του Μήκους",
-    achievementEn: "Length Measurer",
-    positiveMessageEl: "Ξέρεις πόσα εκατοστά χωράει ένα μέτρο!",
-    positiveMessageEn: "You know exactly how many centimeters fit in a meter!",
-    skillTagEl: "Μονάδες Μήκους",
-    skillTagEn: "Units of Length",
+    "id": "math-c-dim.measurement-units",
+    "labelEl": "Μονάδες μέτρησης μήκους",
+    "labelEn": "Units of length",
+    "explainEl": "Μπερδεύει το μέτρο με το εκατοστό (π.χ. νομίζει ότι 1 μέτρο = 10 εκατοστά αντί για 100).",
+    "explainEn": "Confuses meters with centimeters (e.g. thinks 1 meter = 10 cm instead of 100).",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μετρητής του Μήκους",
+    "achievementEn": "Length Measurer",
+    "positiveMessageEl": "Ξέρεις πόσα εκατοστά χωράει ένα μέτρο!",
+    "positiveMessageEn": "You know exactly how many centimeters fit in a meter!",
+    "skillTagEl": "Μονάδες Μήκους",
+    "skillTagEn": "Units of Length"
   },
   "math-c-dim.quarter-hour": {
-    id: "math-c-dim.quarter-hour",
-    labelEl: "Ώρα σε τέταρτα",
-    labelEn: "Telling time in quarters",
-    explainEl: "Δυσκολεύεται να διαβάσει την ώρα στο τέταρτο (π.χ. 4:15 ή 4:45), γιατί δεν έχει ακόμα σταθερό τρόπο να μετράει τα λεπτά ανά τεταρτημόριο.",
-    explainEn: "Struggles to read the time at the quarter hour (e.g. 4:15 or 4:45), without a stable way to count minutes per quarter.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης των Τετάρτων",
-    achievementEn: "Quarter-Hour Expert",
-    positiveMessageEl: "Διαβάζεις την ώρα ακόμα και στο τέταρτο!",
-    positiveMessageEn: "You can read the clock even to the quarter hour!",
-    skillTagEl: "Ώρα σε Τέταρτα",
-    skillTagEn: "Quarter Hours",
+    "id": "math-c-dim.quarter-hour",
+    "labelEl": "Ώρα σε τέταρτα",
+    "labelEn": "Telling time in quarters",
+    "explainEl": "Δυσκολεύεται να διαβάσει την ώρα στο τέταρτο (π.χ. 4:15 ή 4:45), γιατί δεν έχει ακόμα σταθερό τρόπο να μετράει τα λεπτά ανά τεταρτημόριο.",
+    "explainEn": "Struggles to read the time at the quarter hour (e.g. 4:15 or 4:45), without a stable way to count minutes per quarter.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Τετάρτων",
+    "achievementEn": "Quarter-Hour Expert",
+    "positiveMessageEl": "Διαβάζεις την ώρα ακόμα και στο τέταρτο!",
+    "positiveMessageEn": "You can read the clock even to the quarter hour!",
+    "skillTagEl": "Ώρα σε Τέταρτα",
+    "skillTagEn": "Quarter Hours"
   },
-
-  // ---------- ΓΛΩΣΣΑ Γ' ΔΗΜΟΤΙΚΟΥ ----------
   "glossa-c-dim.description-paragraph": {
-    id: "glossa-c-dim.description-paragraph",
-    labelEl: "Περιγραφική παράγραφος",
-    labelEn: "Descriptive paragraph",
-    explainEl: "Όταν περιγράφει κάτι (π.χ. έναν χαρακτήρα), απαριθμεί τυχαία στοιχεία αντί να τα οργανώνει λογικά (π.χ. πρώτα εμφάνιση, μετά χαρακτήρας).",
-    explainEn: "When describing something (e.g. a character), lists random details instead of organizing them logically (e.g. appearance first, then personality).",
-    recommendedToolIds: ["mindmup", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ζωγράφος με Λέξεις",
-    achievementEn: "Word Painter",
-    positiveMessageEl: "Περιγράφεις με τάξη, σαν μικρός συγγραφέας!",
-    positiveMessageEn: "You describe things in order, like a little writer!",
-    skillTagEl: "Περιγραφική Παράγραφος",
-    skillTagEn: "Descriptive Paragraph",
+    "id": "glossa-c-dim.description-paragraph",
+    "labelEl": "Περιγραφική παράγραφος",
+    "labelEn": "Descriptive paragraph",
+    "explainEl": "Όταν περιγράφει κάτι (π.χ. έναν χαρακτήρα), απαριθμεί τυχαία στοιχεία αντί να τα οργανώνει λογικά (π.χ. πρώτα εμφάνιση, μετά χαρακτήρας).",
+    "explainEn": "When describing something (e.g. a character), lists random details instead of organizing them logically (e.g. appearance first, then personality).",
+    "recommendedToolIds": [
+      "mindmup",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ζωγράφος με Λέξεις",
+    "achievementEn": "Word Painter",
+    "positiveMessageEl": "Περιγράφεις με τάξη, σαν μικρός συγγραφέας!",
+    "positiveMessageEn": "You describe things in order, like a little writer!",
+    "skillTagEl": "Περιγραφική Παράγραφος",
+    "skillTagEn": "Descriptive Paragraph"
   },
   "glossa-c-dim.iota-vowel-spelling": {
-    id: "glossa-c-dim.iota-vowel-spelling",
-    labelEl: "Ορθογραφία ι/η/υ",
-    labelEn: "Spelling ι/η/υ",
-    explainEl: "Μπερδεύει τα φωνήεντα που ακούγονται ίδια (ι, η, υ, ει, οι) και γράφει τις λέξεις με το λάθος από αυτά.",
-    explainEn: "Confuses vowels that sound the same (ι, η, υ, ει, οι) and spells words with the wrong one.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης των Φωνηέντων",
-    achievementEn: "Vowel Expert",
-    positiveMessageEl: "Θυμάσαι ποιο φωνήεν γράφεται πού!",
-    positiveMessageEn: "You remember which vowel goes where!",
-    skillTagEl: "Ορθογραφία Φωνηέντων",
-    skillTagEn: "Vowel Spelling",
+    "id": "glossa-c-dim.iota-vowel-spelling",
+    "labelEl": "Ορθογραφία ι/η/υ",
+    "labelEn": "Spelling ι/η/υ",
+    "explainEl": "Μπερδεύει τα φωνήεντα που ακούγονται ίδια (ι, η, υ, ει, οι) και γράφει τις λέξεις με το λάθος από αυτά.",
+    "explainEn": "Confuses vowels that sound the same (ι, η, υ, ει, οι) and spells words with the wrong one.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Φωνηέντων",
+    "achievementEn": "Vowel Expert",
+    "positiveMessageEl": "Θυμάσαι ποιο φωνήεν γράφεται πού!",
+    "positiveMessageEn": "You remember which vowel goes where!",
+    "skillTagEl": "Ορθογραφία Φωνηέντων",
+    "skillTagEn": "Vowel Spelling"
   },
   "glossa-c-dim.pronoun-reference": {
-    id: "glossa-c-dim.pronoun-reference",
-    labelEl: "Αντωνυμίες αναφοράς",
-    labelEn: "Referential pronouns",
-    explainEl: "Χρησιμοποιεί αντωνυμίες («αυτός», «τον») χωρίς να είναι σαφές σε ποιον/τι αναφέρονται, μπερδεύοντας τον αναγνώστη.",
-    explainEn: "Uses pronouns ('he', 'it') without making clear who/what they refer to, confusing the reader.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Καθαρός Αφηγητής",
-    achievementEn: "Clear Narrator",
-    positiveMessageEl: "Το κείμενό σου είναι πάντα ξεκάθαρο σε ποιον αναφέρεσαι!",
-    positiveMessageEn: "Your writing is always clear about who you mean!",
-    skillTagEl: "Αντωνυμίες Αναφοράς",
-    skillTagEn: "Referential Pronouns",
+    "id": "glossa-c-dim.pronoun-reference",
+    "labelEl": "Αντωνυμίες αναφοράς",
+    "labelEn": "Referential pronouns",
+    "explainEl": "Χρησιμοποιεί αντωνυμίες («αυτός», «τον») χωρίς να είναι σαφές σε ποιον/τι αναφέρονται, μπερδεύοντας τον αναγνώστη.",
+    "explainEn": "Uses pronouns ('he', 'it') without making clear who/what they refer to, confusing the reader.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Καθαρός Αφηγητής",
+    "achievementEn": "Clear Narrator",
+    "positiveMessageEl": "Το κείμενό σου είναι πάντα ξεκάθαρο σε ποιον αναφέρεσαι!",
+    "positiveMessageEn": "Your writing is always clear about who you mean!",
+    "skillTagEl": "Αντωνυμίες Αναφοράς",
+    "skillTagEn": "Referential Pronouns"
   },
   "glossa-c-dim.adjective-agreement": {
-    id: "glossa-c-dim.adjective-agreement",
-    labelEl: "Συμφωνία επιθέτου-ουσιαστικού",
-    labelEn: "Adjective-noun agreement",
-    explainEl: "Δεν συμφωνεί σωστά το γένος/αριθμό/πτώση επιθέτου με το ουσιαστικό (π.χ. «η όμορφος κοπέλα» αντί για «η όμορφη κοπέλα»).",
-    explainEn: "Doesn't correctly match an adjective's gender/number/case with its noun (a common early error pattern in Greek).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ της Συμφωνίας",
-    achievementEn: "Agreement Master",
-    positiveMessageEl: "Το επίθετό σου ταιριάζει πάντα με το ουσιαστικό!",
-    positiveMessageEn: "Your adjectives always match their nouns!",
-    skillTagEl: "Συμφωνία Επιθέτου",
-    skillTagEn: "Adjective Agreement",
+    "id": "glossa-c-dim.adjective-agreement",
+    "labelEl": "Συμφωνία επιθέτου-ουσιαστικού",
+    "labelEn": "Adjective-noun agreement",
+    "explainEl": "Δεν συμφωνεί σωστά το γένος/αριθμό/πτώση επιθέτου με το ουσιαστικό (π.χ. «η όμορφος κοπέλα» αντί για «η όμορφη κοπέλα»).",
+    "explainEn": "Doesn't correctly match an adjective's gender/number/case with its noun (a common early error pattern in Greek).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ της Συμφωνίας",
+    "achievementEn": "Agreement Master",
+    "positiveMessageEl": "Το επίθετό σου ταιριάζει πάντα με το ουσιαστικό!",
+    "positiveMessageEn": "Your adjectives always match their nouns!",
+    "skillTagEl": "Συμφωνία Επιθέτου",
+    "skillTagEn": "Adjective Agreement"
   },
-
-  // ---------- ΑΓΓΛΙΚΑ Γ' ΔΗΜΟΤΙΚΟΥ (εισαγωγή) ----------
   "efl-c-dim.colors-vocab": {
-    id: "efl-c-dim.colors-vocab",
-    labelEl: "Λεξιλόγιο χρωμάτων",
-    labelEn: "Colors vocabulary",
-    explainEl: "Μπερδεύει βασικά χρώματα στα αγγλικά, ειδικά όσα μοιάζουν στην προφορά (π.χ. «purple»/«pink»).",
-    explainEn: "Confuses basic colors in English, especially ones that sound similar (e.g. 'purple'/'pink').",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Ζωγράφος των Χρωμάτων",
-    achievementEn: "Color Artist",
-    positiveMessageEl: "Ξέρεις όλα τα χρώματα στα αγγλικά!",
-    positiveMessageEn: "You know all your colors in English!",
-    skillTagEl: "Χρώματα",
-    skillTagEn: "Colors",
+    "id": "efl-c-dim.colors-vocab",
+    "labelEl": "Λεξιλόγιο χρωμάτων",
+    "labelEn": "Colors vocabulary",
+    "explainEl": "Μπερδεύει βασικά χρώματα στα αγγλικά, ειδικά όσα μοιάζουν στην προφορά (π.χ. «purple»/«pink»).",
+    "explainEn": "Confuses basic colors in English, especially ones that sound similar (e.g. 'purple'/'pink').",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Ζωγράφος των Χρωμάτων",
+    "achievementEn": "Color Artist",
+    "positiveMessageEl": "Ξέρεις όλα τα χρώματα στα αγγλικά!",
+    "positiveMessageEn": "You know all your colors in English!",
+    "skillTagEl": "Χρώματα",
+    "skillTagEn": "Colors"
   },
   "efl-c-dim.this-that": {
-    id: "efl-c-dim.this-that",
-    labelEl: "This vs That",
-    labelEn: "This vs That",
-    explainEl: "Δεν ξεχωρίζει πότε λέμε «this» (κοντινό αντικείμενο) και πότε «that» (μακρινό αντικείμενο).",
-    explainEn: "Doesn't distinguish when to say 'this' (nearby object) versus 'that' (far away object).",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Δείκτης της Απόστασης",
-    achievementEn: "Distance Pointer",
-    positiveMessageEl: "Ξέρεις πότε λες 'this' και πότε 'that'!",
-    positiveMessageEn: "You know exactly when to say 'this' and when 'that'!",
-    skillTagEl: "This & That",
-    skillTagEn: "This & That",
+    "id": "efl-c-dim.this-that",
+    "labelEl": "This vs That",
+    "labelEn": "This vs That",
+    "explainEl": "Δεν ξεχωρίζει πότε λέμε «this» (κοντινό αντικείμενο) και πότε «that» (μακρινό αντικείμενο).",
+    "explainEn": "Doesn't distinguish when to say 'this' (nearby object) versus 'that' (far away object).",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Δείκτης της Απόστασης",
+    "achievementEn": "Distance Pointer",
+    "positiveMessageEl": "Ξέρεις πότε λες 'this' και πότε 'that'!",
+    "positiveMessageEn": "You know exactly when to say 'this' and when 'that'!",
+    "skillTagEl": "This & That",
+    "skillTagEn": "This & That"
   },
   "efl-c-dim.numbers-1-20": {
-    id: "efl-c-dim.numbers-1-20",
-    labelEl: "Αριθμοί 1-20",
-    labelEn: "Numbers 1-20",
-    explainEl: "Μπερδεύει αριθμούς που μοιάζουν στην προφορά στα αγγλικά (π.χ. «thirteen»/«thirty»).",
-    explainEn: "Confuses numbers that sound similar in English (e.g. 'thirteen'/'thirty').",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Μετρητής στα Αγγλικά",
-    achievementEn: "English Number Counter",
-    positiveMessageEl: "Μετράς άνετα στα αγγλικά χωρίς μπέρδεμα!",
-    positiveMessageEn: "You count in English with total confidence!",
-    skillTagEl: "Αριθμοί",
-    skillTagEn: "Numbers",
+    "id": "efl-c-dim.numbers-1-20",
+    "labelEl": "Αριθμοί 1-20",
+    "labelEn": "Numbers 1-20",
+    "explainEl": "Μπερδεύει αριθμούς που μοιάζουν στην προφορά στα αγγλικά (π.χ. «thirteen»/«thirty»).",
+    "explainEn": "Confuses numbers that sound similar in English (e.g. 'thirteen'/'thirty').",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Μετρητής στα Αγγλικά",
+    "achievementEn": "English Number Counter",
+    "positiveMessageEl": "Μετράς άνετα στα αγγλικά χωρίς μπέρδεμα!",
+    "positiveMessageEn": "You count in English with total confidence!",
+    "skillTagEl": "Αριθμοί",
+    "skillTagEn": "Numbers"
   },
   "efl-c-dim.family-vocab": {
-    id: "efl-c-dim.family-vocab",
-    labelEl: "Λεξιλόγιο οικογένειας",
-    labelEn: "Family vocabulary",
-    explainEl: "Μπερδεύει βασικές λέξεις οικογένειας στα αγγλικά (π.χ. «brother»/«mother»).",
-    explainEn: "Confuses basic family words in English (e.g. 'brother'/'mother').",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Γνώστης της Οικογένειας",
-    achievementEn: "Family Expert",
-    positiveMessageEl: "Ξέρεις όλη την οικογένεια στα αγγλικά!",
-    positiveMessageEn: "You know the whole family in English!",
-    skillTagEl: "Οικογένεια",
-    skillTagEn: "Family",
+    "id": "efl-c-dim.family-vocab",
+    "labelEl": "Λεξιλόγιο οικογένειας",
+    "labelEn": "Family vocabulary",
+    "explainEl": "Μπερδεύει βασικές λέξεις οικογένειας στα αγγλικά (π.χ. «brother»/«mother»).",
+    "explainEn": "Confuses basic family words in English (e.g. 'brother'/'mother').",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Γνώστης της Οικογένειας",
+    "achievementEn": "Family Expert",
+    "positiveMessageEl": "Ξέρεις όλη την οικογένεια στα αγγλικά!",
+    "positiveMessageEn": "You know the whole family in English!",
+    "skillTagEl": "Οικογένεια",
+    "skillTagEn": "Family"
   },
-
-  // ---------- ΙΣΤΟΡΙΑ Γ' ΔΗΜΟΤΙΚΟΥ: Ελληνική Μυθολογία ----------
   "istoria-c-dim.myth-vs-history": {
-    id: "istoria-c-dim.myth-vs-history",
-    labelEl: "Μύθος vs Ιστορία",
-    labelEn: "Myth vs History",
-    explainEl: "Δεν ξεχωρίζει τον μύθο (φανταστική αφήγηση με θεούς/ήρωες) από την ιστορία (γεγονότα που πραγματικά συνέβησαν).",
-    explainEn: "Doesn't distinguish myth (a fictional story with gods/heroes) from history (events that actually happened).",
-    recommendedToolIds: ["chatgpt", "claude", "gemini", "perplexity", "notebooklm"],
-    achievementEl: "Ο Γνώστης του Μύθου",
-    achievementEn: "Myth Expert",
-    positiveMessageEl: "Ξέρεις τη διαφορά ανάμεσα σε μύθο και ιστορία!",
-    positiveMessageEn: "You know the difference between myth and history!",
-    skillTagEl: "Μύθος & Ιστορία",
-    skillTagEn: "Myth & History",
+    "id": "istoria-c-dim.myth-vs-history",
+    "labelEl": "Μύθος vs Ιστορία",
+    "labelEn": "Myth vs History",
+    "explainEl": "Δεν ξεχωρίζει τον μύθο (φανταστική αφήγηση με θεούς/ήρωες) από την ιστορία (γεγονότα που πραγματικά συνέβησαν).",
+    "explainEn": "Doesn't distinguish myth (a fictional story with gods/heroes) from history (events that actually happened).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "gemini",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Γνώστης του Μύθου",
+    "achievementEn": "Myth Expert",
+    "positiveMessageEl": "Ξέρεις τη διαφορά ανάμεσα σε μύθο και ιστορία!",
+    "positiveMessageEn": "You know the difference between myth and history!",
+    "skillTagEl": "Μύθος & Ιστορία",
+    "skillTagEn": "Myth & History"
   },
   "istoria-c-dim.heracles-labors-order": {
-    id: "istoria-c-dim.heracles-labors-order",
-    labelEl: "Άθλοι του Ηρακλή",
-    labelEn: "Labors of Heracles",
-    explainEl: "Δεν θυμάται βασικά στοιχεία των άθλων του Ηρακλή (π.χ. μπερδεύει το λιοντάρι της Νεμέας με άλλο τέρας).",
-    explainEn: "Doesn't recall basic details of Heracles' labors (e.g. confuses the Nemean Lion with another monster).",
-    recommendedToolIds: ["chatgpt", "claude", "gemini", "perplexity", "notebooklm"],
-    achievementEl: "Ο Μικρός Ηρακλής",
-    achievementEn: "The Little Heracles",
-    positiveMessageEl: "Θυμάσαι τους άθλους του Ηρακλή σαν να τους έζησες!",
-    positiveMessageEn: "You remember Heracles' labors like you lived them!",
-    skillTagEl: "Άθλοι Ηρακλή",
-    skillTagEn: "Labors of Heracles",
+    "id": "istoria-c-dim.heracles-labors-order",
+    "labelEl": "Άθλοι του Ηρακλή",
+    "labelEn": "Labors of Heracles",
+    "explainEl": "Δεν θυμάται βασικά στοιχεία των άθλων του Ηρακλή (π.χ. μπερδεύει το λιοντάρι της Νεμέας με άλλο τέρας).",
+    "explainEn": "Doesn't recall basic details of Heracles' labors (e.g. confuses the Nemean Lion with another monster).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "gemini",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Μικρός Ηρακλής",
+    "achievementEn": "The Little Heracles",
+    "positiveMessageEl": "Θυμάσαι τους άθλους του Ηρακλή σαν να τους έζησες!",
+    "positiveMessageEn": "You remember Heracles' labors like you lived them!",
+    "skillTagEl": "Άθλοι Ηρακλή",
+    "skillTagEn": "Labors of Heracles"
   },
   "istoria-c-dim.trojan-war-cause": {
-    id: "istoria-c-dim.trojan-war-cause",
-    labelEl: "Αιτία Τρωικού Πολέμου",
-    labelEn: "Cause of the Trojan War",
-    explainEl: "Δεν θυμάται τι πυροδότησε τον Τρωικό Πόλεμο σύμφωνα με τον μύθο (η αρπαγή της Ελένης από τον Πάρη).",
-    explainEn: "Doesn't recall what triggered the Trojan War according to the myth (Paris's abduction of Helen).",
-    recommendedToolIds: ["chatgpt", "claude", "gemini", "perplexity", "notebooklm"],
-    achievementEl: "Ο Αφηγητής της Τροίας",
-    achievementEn: "Trojan War Narrator",
-    positiveMessageEl: "Ξέρεις πώς ξεκίνησε ο μεγάλος πόλεμος της Τροίας!",
-    positiveMessageEn: "You know how the great Trojan War began!",
-    skillTagEl: "Τρωικός Πόλεμος",
-    skillTagEn: "Trojan War",
+    "id": "istoria-c-dim.trojan-war-cause",
+    "labelEl": "Αιτία Τρωικού Πολέμου",
+    "labelEn": "Cause of the Trojan War",
+    "explainEl": "Δεν θυμάται τι πυροδότησε τον Τρωικό Πόλεμο σύμφωνα με τον μύθο (η αρπαγή της Ελένης από τον Πάρη).",
+    "explainEn": "Doesn't recall what triggered the Trojan War according to the myth (Paris's abduction of Helen).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "gemini",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Αφηγητής της Τροίας",
+    "achievementEn": "Trojan War Narrator",
+    "positiveMessageEl": "Ξέρεις πώς ξεκίνησε ο μεγάλος πόλεμος της Τροίας!",
+    "positiveMessageEn": "You know how the great Trojan War began!",
+    "skillTagEl": "Τρωικός Πόλεμος",
+    "skillTagEn": "Trojan War"
   },
   "istoria-c-dim.odysseus-journey": {
-    id: "istoria-c-dim.odysseus-journey",
-    labelEl: "Το ταξίδι του Οδυσσέα",
-    labelEn: "Odysseus's journey",
-    explainEl: "Μπερδεύει τη σειρά ή τα πρόσωπα των περιπετειών του Οδυσσέα στο ταξίδι της επιστροφής του στην Ιθάκη.",
-    explainEn: "Confuses the order or characters in Odysseus's adventures on his journey home to Ithaca.",
-    recommendedToolIds: ["chatgpt", "claude", "gemini", "perplexity", "notebooklm"],
-    achievementEl: "Ο Συνταξιδιώτης του Οδυσσέα",
-    achievementEn: "Odysseus's Fellow Traveler",
-    positiveMessageEl: "Ξέρεις όλες τις περιπέτειες του Οδυσσέα με τη σειρά τους!",
-    positiveMessageEn: "You know all of Odysseus's adventures in order!",
-    skillTagEl: "Ταξίδι Οδυσσέα",
-    skillTagEn: "Odysseus's Journey",
+    "id": "istoria-c-dim.odysseus-journey",
+    "labelEl": "Το ταξίδι του Οδυσσέα",
+    "labelEn": "Odysseus's journey",
+    "explainEl": "Μπερδεύει τη σειρά ή τα πρόσωπα των περιπετειών του Οδυσσέα στο ταξίδι της επιστροφής του στην Ιθάκη.",
+    "explainEn": "Confuses the order or characters in Odysseus's adventures on his journey home to Ithaca.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "gemini",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Συνταξιδιώτης του Οδυσσέα",
+    "achievementEn": "Odysseus's Fellow Traveler",
+    "positiveMessageEl": "Ξέρεις όλες τις περιπέτειες του Οδυσσέα με τη σειρά τους!",
+    "positiveMessageEn": "You know all of Odysseus's adventures in order!",
+    "skillTagEl": "Ταξίδι Οδυσσέα",
+    "skillTagEn": "Odysseus's Journey"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Δ' ΔΗΜΟΤΙΚΟΥ ----------
   "math-d-dim.fraction-same-denominator": {
-    id: "math-d-dim.fraction-same-denominator",
-    labelEl: "Πρόσθεση κλασμάτων ίδιου παρονομαστή",
-    labelEn: "Adding fractions with the same denominator",
-    explainEl: "Όταν προσθέτει κλάσματα με ίδιο παρονομαστή, προσθέτει και τους παρονομαστές αντί να τον κρατήσει σταθερό.",
-    explainEn: "When adding fractions with the same denominator, adds the denominators too instead of keeping it fixed.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Πρωτοπόρος των Κλασμάτων",
-    achievementEn: "Fraction Pioneer",
-    positiveMessageEl: "Ξέρεις να κρατάς σταθερό τον παρονομαστή!",
-    positiveMessageEn: "You know how to keep the denominator steady!",
-    skillTagEl: "Πρόσθεση Κλασμάτων",
-    skillTagEn: "Adding Fractions",
+    "id": "math-d-dim.fraction-same-denominator",
+    "labelEl": "Πρόσθεση κλασμάτων ίδιου παρονομαστή",
+    "labelEn": "Adding fractions with the same denominator",
+    "explainEl": "Όταν προσθέτει κλάσματα με ίδιο παρονομαστή, προσθέτει και τους παρονομαστές αντί να τον κρατήσει σταθερό.",
+    "explainEn": "When adding fractions with the same denominator, adds the denominators too instead of keeping it fixed.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Πρωτοπόρος των Κλασμάτων",
+    "achievementEn": "Fraction Pioneer",
+    "positiveMessageEl": "Ξέρεις να κρατάς σταθερό τον παρονομαστή!",
+    "positiveMessageEn": "You know how to keep the denominator steady!",
+    "skillTagEl": "Πρόσθεση Κλασμάτων",
+    "skillTagEn": "Adding Fractions"
   },
   "math-d-dim.decimal-intro-place-value": {
-    id: "math-d-dim.decimal-intro-place-value",
-    labelEl: "Εισαγωγή στους δεκαδικούς",
-    labelEn: "Introduction to decimals",
-    explainEl: "Δεν καταλαβαίνει ακόμα ότι το «0,5» σημαίνει το μισό ενός ακέραιου, και το μπερδεύει με άλλο, τυχαίο νόημα.",
-    explainEn: "Doesn't yet understand that '0.5' means half of a whole, confusing it with some other, arbitrary meaning.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Εξερευνητής των Δεκαδικών",
-    achievementEn: "Decimal Explorer",
-    positiveMessageEl: "Καταλαβαίνεις τι σημαίνει πραγματικά ένας δεκαδικός αριθμός!",
-    positiveMessageEn: "You understand what a decimal number really means!",
-    skillTagEl: "Δεκαδικοί Αριθμοί",
-    skillTagEn: "Decimal Numbers",
+    "id": "math-d-dim.decimal-intro-place-value",
+    "labelEl": "Εισαγωγή στους δεκαδικούς",
+    "labelEn": "Introduction to decimals",
+    "explainEl": "Δεν καταλαβαίνει ακόμα ότι το «0,5» σημαίνει το μισό ενός ακέραιου, και το μπερδεύει με άλλο, τυχαίο νόημα.",
+    "explainEn": "Doesn't yet understand that '0.5' means half of a whole, confusing it with some other, arbitrary meaning.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εξερευνητής των Δεκαδικών",
+    "achievementEn": "Decimal Explorer",
+    "positiveMessageEl": "Καταλαβαίνεις τι σημαίνει πραγματικά ένας δεκαδικός αριθμός!",
+    "positiveMessageEn": "You understand what a decimal number really means!",
+    "skillTagEl": "Δεκαδικοί Αριθμοί",
+    "skillTagEn": "Decimal Numbers"
   },
   "math-d-dim.perimeter-concept": {
-    id: "math-d-dim.perimeter-concept",
-    labelEl: "Έννοια της περιμέτρου",
-    labelEn: "Meaning of perimeter",
-    explainEl: "Δεν έχει καταλάβει ότι η περίμετρος είναι το άθροισμα όλων των πλευρών «γύρω-γύρω» από ένα σχήμα.",
-    explainEn: "Hasn't grasped that perimeter is the sum of all sides 'around' a shape.",
-    recommendedToolIds: ["geogebra", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Περιπατητής της Περιμέτρου",
-    achievementEn: "Perimeter Walker",
-    positiveMessageEl: "Ξέρεις να μετράς όλη τη διαδρομή γύρω από ένα σχήμα!",
-    positiveMessageEn: "You know how to measure the whole path around a shape!",
-    skillTagEl: "Περίμετρος",
-    skillTagEn: "Perimeter",
+    "id": "math-d-dim.perimeter-concept",
+    "labelEl": "Έννοια της περιμέτρου",
+    "labelEn": "Meaning of perimeter",
+    "explainEl": "Δεν έχει καταλάβει ότι η περίμετρος είναι το άθροισμα όλων των πλευρών «γύρω-γύρω» από ένα σχήμα.",
+    "explainEn": "Hasn't grasped that perimeter is the sum of all sides 'around' a shape.",
+    "recommendedToolIds": [
+      "geogebra",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Περιπατητής της Περιμέτρου",
+    "achievementEn": "Perimeter Walker",
+    "positiveMessageEl": "Ξέρεις να μετράς όλη τη διαδρομή γύρω από ένα σχήμα!",
+    "positiveMessageEn": "You know how to measure the whole path around a shape!",
+    "skillTagEl": "Περίμετρος",
+    "skillTagEn": "Perimeter"
   },
   "math-d-dim.roman-numerals": {
-    id: "math-d-dim.roman-numerals",
-    labelEl: "Ρωμαϊκοί αριθμοί",
-    labelEn: "Roman numerals",
-    explainEl: "Δυσκολεύεται με βασικούς ρωμαϊκούς αριθμούς (π.χ. μπερδεύει το IV με το VI).",
-    explainEn: "Struggles with basic Roman numerals (e.g. confuses IV with VI).",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης των Ρωμαϊκών Αριθμών",
-    achievementEn: "Roman Numeral Expert",
-    positiveMessageEl: "Διαβάζεις ρωμαϊκούς αριθμούς σαν αρχαίος Ρωμαίος!",
-    positiveMessageEn: "You read Roman numerals like an ancient Roman!",
-    skillTagEl: "Ρωμαϊκοί Αριθμοί",
-    skillTagEn: "Roman Numerals",
+    "id": "math-d-dim.roman-numerals",
+    "labelEl": "Ρωμαϊκοί αριθμοί",
+    "labelEn": "Roman numerals",
+    "explainEl": "Δυσκολεύεται με βασικούς ρωμαϊκούς αριθμούς (π.χ. μπερδεύει το IV με το VI).",
+    "explainEn": "Struggles with basic Roman numerals (e.g. confuses IV with VI).",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Ρωμαϊκών Αριθμών",
+    "achievementEn": "Roman Numeral Expert",
+    "positiveMessageEl": "Διαβάζεις ρωμαϊκούς αριθμούς σαν αρχαίος Ρωμαίος!",
+    "positiveMessageEn": "You read Roman numerals like an ancient Roman!",
+    "skillTagEl": "Ρωμαϊκοί Αριθμοί",
+    "skillTagEn": "Roman Numerals"
   },
-
-  // ---------- ΓΛΩΣΣΑ Δ' ΔΗΜΟΤΙΚΟΥ ----------
   "glossa-d-dim.paragraph-structure": {
-    id: "glossa-d-dim.paragraph-structure",
-    labelEl: "Δομή αφηγηματικής παραγράφου",
-    labelEn: "Narrative paragraph structure",
-    explainEl: "Γράφει μια ιστορία χωρίς σαφή αρχή-μέση-τέλος, ξεκινώντας απευθείας στη μέση της δράσης χωρίς εισαγωγή.",
-    explainEn: "Writes a story without a clear beginning-middle-end, diving straight into the action without an introduction.",
-    recommendedToolIds: ["mindmup", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Αρχιτέκτονας της Ιστορίας",
-    achievementEn: "Story Architect",
-    positiveMessageEl: "Η ιστορία σου έχει πάντα αρχή, μέση και τέλος!",
-    positiveMessageEn: "Your stories always have a beginning, middle, and end!",
-    skillTagEl: "Δομή Αφήγησης",
-    skillTagEn: "Narrative Structure",
+    "id": "glossa-d-dim.paragraph-structure",
+    "labelEl": "Δομή αφηγηματικής παραγράφου",
+    "labelEn": "Narrative paragraph structure",
+    "explainEl": "Γράφει μια ιστορία χωρίς σαφή αρχή-μέση-τέλος, ξεκινώντας απευθείας στη μέση της δράσης χωρίς εισαγωγή.",
+    "explainEn": "Writes a story without a clear beginning-middle-end, diving straight into the action without an introduction.",
+    "recommendedToolIds": [
+      "mindmup",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Αρχιτέκτονας της Ιστορίας",
+    "achievementEn": "Story Architect",
+    "positiveMessageEl": "Η ιστορία σου έχει πάντα αρχή, μέση και τέλος!",
+    "positiveMessageEn": "Your stories always have a beginning, middle, and end!",
+    "skillTagEl": "Δομή Αφήγησης",
+    "skillTagEn": "Narrative Structure"
   },
   "glossa-d-dim.future-tense": {
-    id: "glossa-d-dim.future-tense",
-    labelEl: "Μέλλοντας χρόνος",
-    labelEn: "Future tense",
-    explainEl: "Δυσκολεύεται στον σχηματισμό του μέλλοντα ρημάτων (π.χ. «θα παίξω»), ειδικά όταν το ρήμα αλλάζει θέμα.",
-    explainEn: "Struggles to form the future tense of verbs, especially when the verb changes stem.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Προφήτης του Μέλλοντα",
-    achievementEn: "Future Prophet",
-    positiveMessageEl: "Ξέρεις πώς να μιλάς για το μέλλον!",
-    positiveMessageEn: "You know how to talk about the future!",
-    skillTagEl: "Μέλλοντας Χρόνος",
-    skillTagEn: "Future Tense",
+    "id": "glossa-d-dim.future-tense",
+    "labelEl": "Μέλλοντας χρόνος",
+    "labelEn": "Future tense",
+    "explainEl": "Δυσκολεύεται στον σχηματισμό του μέλλοντα ρημάτων (π.χ. «θα παίξω»), ειδικά όταν το ρήμα αλλάζει θέμα.",
+    "explainEn": "Struggles to form the future tense of verbs, especially when the verb changes stem.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Προφήτης του Μέλλοντα",
+    "achievementEn": "Future Prophet",
+    "positiveMessageEl": "Ξέρεις πώς να μιλάς για το μέλλον!",
+    "positiveMessageEn": "You know how to talk about the future!",
+    "skillTagEl": "Μέλλοντας Χρόνος",
+    "skillTagEn": "Future Tense"
   },
   "glossa-d-dim.adjective-vs-adverb": {
-    id: "glossa-d-dim.adjective-vs-adverb",
-    labelEl: "Επίθετο vs Επίρρημα",
-    labelEn: "Adjective vs Adverb",
-    explainEl: "Μπερδεύει το επίθετο (περιγράφει ουσιαστικό, π.χ. «γρήγορος») με το επίρρημα (περιγράφει ρήμα, π.χ. «γρήγορα»).",
-    explainEn: "Confuses the adjective (describes a noun) with the adverb (describes a verb).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Επιρρήματος",
-    achievementEn: "Adverb Expert",
-    positiveMessageEl: "Ξέρεις πότε περιγράφεις το ουσιαστικό και πότε το ρήμα!",
-    positiveMessageEn: "You know when to describe the noun and when the verb!",
-    skillTagEl: "Επίθετο & Επίρρημα",
-    skillTagEn: "Adjective & Adverb",
+    "id": "glossa-d-dim.adjective-vs-adverb",
+    "labelEl": "Επίθετο vs Επίρρημα",
+    "labelEn": "Adjective vs Adverb",
+    "explainEl": "Μπερδεύει το επίθετο (περιγράφει ουσιαστικό, π.χ. «γρήγορος») με το επίρρημα (περιγράφει ρήμα, π.χ. «γρήγορα»).",
+    "explainEn": "Confuses the adjective (describes a noun) with the adverb (describes a verb).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Επιρρήματος",
+    "achievementEn": "Adverb Expert",
+    "positiveMessageEl": "Ξέρεις πότε περιγράφεις το ουσιαστικό και πότε το ρήμα!",
+    "positiveMessageEn": "You know when to describe the noun and when the verb!",
+    "skillTagEl": "Επίθετο & Επίρρημα",
+    "skillTagEn": "Adjective & Adverb"
   },
   "glossa-d-dim.direct-indirect-speech": {
-    id: "glossa-d-dim.direct-indirect-speech",
-    labelEl: "Ευθύς vs Πλάγιος λόγος",
-    labelEn: "Direct vs Indirect speech",
-    explainEl: "Δεν ξεχωρίζει πότε ένα κείμενο μεταφέρει τα λόγια κάποιου αυτούσια (ευθύς λόγος, εισαγωγικά) και πότε αναδιατυπωμένα (πλάγιος λόγος).",
-    explainEn: "Doesn't distinguish when a text quotes someone's exact words (direct speech, quotation marks) versus reports them (indirect speech).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Λόγου",
-    achievementEn: "Speech Expert",
-    positiveMessageEl: "Ξέρεις πότε κάποιος μιλάει και πότε τα λόγια του αναδιηγούνται!",
-    positiveMessageEn: "You know when someone is speaking and when their words are being retold!",
-    skillTagEl: "Ευθύς & Πλάγιος Λόγος",
-    skillTagEn: "Direct & Indirect Speech",
+    "id": "glossa-d-dim.direct-indirect-speech",
+    "labelEl": "Ευθύς vs Πλάγιος λόγος",
+    "labelEn": "Direct vs Indirect speech",
+    "explainEl": "Δεν ξεχωρίζει πότε ένα κείμενο μεταφέρει τα λόγια κάποιου αυτούσια (ευθύς λόγος, εισαγωγικά) και πότε αναδιατυπωμένα (πλάγιος λόγος).",
+    "explainEn": "Doesn't distinguish when a text quotes someone's exact words (direct speech, quotation marks) versus reports them (indirect speech).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Λόγου",
+    "achievementEn": "Speech Expert",
+    "positiveMessageEl": "Ξέρεις πότε κάποιος μιλάει και πότε τα λόγια του αναδιηγούνται!",
+    "positiveMessageEn": "You know when someone is speaking and when their words are being retold!",
+    "skillTagEl": "Ευθύς & Πλάγιος Λόγος",
+    "skillTagEn": "Direct & Indirect Speech"
   },
-
-  // ---------- ΑΓΓΛΙΚΑ Δ' ΔΗΜΟΤΙΚΟΥ ----------
   "efl-d-dim.present-simple-routines": {
-    id: "efl-d-dim.present-simple-routines",
-    labelEl: "Present Simple καθημερινότητας",
-    labelEn: "Present Simple for routines",
-    explainEl: "Δυσκολεύεται να περιγράψει καθημερινές συνήθειες στον Ενεστώτα (π.χ. «I wake up at 7»), μπερδεύοντας τον χρόνο.",
-    explainEn: "Struggles to describe daily routines in the Present Simple (e.g. 'I wake up at 7'), confusing the tense.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Γνώστης της Καθημερινότητας",
-    achievementEn: "Routine Expert",
-    positiveMessageEl: "Περιγράφεις τη μέρα σου άνετα στα αγγλικά!",
-    positiveMessageEn: "You describe your day with ease in English!",
-    skillTagEl: "Present Simple",
-    skillTagEn: "Present Simple",
+    "id": "efl-d-dim.present-simple-routines",
+    "labelEl": "Present Simple καθημερινότητας",
+    "labelEn": "Present Simple for routines",
+    "explainEl": "Δυσκολεύεται να περιγράψει καθημερινές συνήθειες στον Ενεστώτα (π.χ. «I wake up at 7»), μπερδεύοντας τον χρόνο.",
+    "explainEn": "Struggles to describe daily routines in the Present Simple (e.g. 'I wake up at 7'), confusing the tense.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Γνώστης της Καθημερινότητας",
+    "achievementEn": "Routine Expert",
+    "positiveMessageEl": "Περιγράφεις τη μέρα σου άνετα στα αγγλικά!",
+    "positiveMessageEn": "You describe your day with ease in English!",
+    "skillTagEl": "Present Simple",
+    "skillTagEn": "Present Simple"
   },
   "efl-d-dim.house-rooms-vocab": {
-    id: "efl-d-dim.house-rooms-vocab",
-    labelEl: "Λεξιλόγιο σπιτιού",
-    labelEn: "House vocabulary",
-    explainEl: "Μπερδεύει βασικές λέξεις για δωμάτια του σπιτιού (π.χ. «kitchen»/«bathroom»).",
-    explainEn: "Confuses basic words for rooms of the house (e.g. 'kitchen'/'bathroom').",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Γνώστης του Σπιτιού",
-    achievementEn: "House Expert",
-    positiveMessageEl: "Ξέρεις κάθε δωμάτιο του σπιτιού στα αγγλικά!",
-    positiveMessageEn: "You know every room of the house in English!",
-    skillTagEl: "Δωμάτια Σπιτιού",
-    skillTagEn: "Rooms of the House",
+    "id": "efl-d-dim.house-rooms-vocab",
+    "labelEl": "Λεξιλόγιο σπιτιού",
+    "labelEn": "House vocabulary",
+    "explainEl": "Μπερδεύει βασικές λέξεις για δωμάτια του σπιτιού (π.χ. «kitchen»/«bathroom»).",
+    "explainEn": "Confuses basic words for rooms of the house (e.g. 'kitchen'/'bathroom').",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Γνώστης του Σπιτιού",
+    "achievementEn": "House Expert",
+    "positiveMessageEl": "Ξέρεις κάθε δωμάτιο του σπιτιού στα αγγλικά!",
+    "positiveMessageEn": "You know every room of the house in English!",
+    "skillTagEl": "Δωμάτια Σπιτιού",
+    "skillTagEn": "Rooms of the House"
   },
   "efl-d-dim.can-ability": {
-    id: "efl-d-dim.can-ability",
-    labelEl: "Can για ικανότητα",
-    labelEn: "Can for ability",
-    explainEl: "Δεν χρησιμοποιεί σωστά το «can» για να εκφράσει ικανότητα (π.χ. λέει «I can to swim» αντί για «I can swim»).",
-    explainEn: "Doesn't correctly use 'can' to express ability (e.g. says 'I can to swim' instead of 'I can swim').",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Ειδικός του Can",
-    achievementEn: "Can Expert",
-    positiveMessageEl: "Ξέρεις πώς να πεις τι μπορείς να κάνεις στα αγγλικά!",
-    positiveMessageEn: "You know how to say what you can do in English!",
-    skillTagEl: "Can για Ικανότητα",
-    skillTagEn: "Can for Ability",
+    "id": "efl-d-dim.can-ability",
+    "labelEl": "Can για ικανότητα",
+    "labelEn": "Can for ability",
+    "explainEl": "Δεν χρησιμοποιεί σωστά το «can» για να εκφράσει ικανότητα (π.χ. λέει «I can to swim» αντί για «I can swim»).",
+    "explainEn": "Doesn't correctly use 'can' to express ability (e.g. says 'I can to swim' instead of 'I can swim').",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Ειδικός του Can",
+    "achievementEn": "Can Expert",
+    "positiveMessageEl": "Ξέρεις πώς να πεις τι μπορείς να κάνεις στα αγγλικά!",
+    "positiveMessageEn": "You know how to say what you can do in English!",
+    "skillTagEl": "Can για Ικανότητα",
+    "skillTagEn": "Can for Ability"
   },
   "efl-d-dim.days-months": {
-    id: "efl-d-dim.days-months",
-    labelEl: "Μέρες & μήνες",
-    labelEn: "Days & months",
-    explainEl: "Μπερδεύει τη σειρά ή τα ονόματα των ημερών της εβδομάδας ή των μηνών στα αγγλικά.",
-    explainEn: "Confuses the order or names of the days of the week or the months in English.",
-    recommendedToolIds: ["duolingo", "chatgpt", "claude"],
-    achievementEl: "Ο Γνώστης του Ημερολογίου",
-    achievementEn: "Calendar Expert",
-    positiveMessageEl: "Ξέρεις όλες τις μέρες και τους μήνες στα αγγλικά!",
-    positiveMessageEn: "You know all the days and months in English!",
-    skillTagEl: "Μέρες & Μήνες",
-    skillTagEn: "Days & Months",
+    "id": "efl-d-dim.days-months",
+    "labelEl": "Μέρες & μήνες",
+    "labelEn": "Days & months",
+    "explainEl": "Μπερδεύει τη σειρά ή τα ονόματα των ημερών της εβδομάδας ή των μηνών στα αγγλικά.",
+    "explainEn": "Confuses the order or names of the days of the week or the months in English.",
+    "recommendedToolIds": [
+      "duolingo",
+      "chatgpt",
+      "claude"
+    ],
+    "achievementEl": "Ο Γνώστης του Ημερολογίου",
+    "achievementEn": "Calendar Expert",
+    "positiveMessageEl": "Ξέρεις όλες τις μέρες και τους μήνες στα αγγλικά!",
+    "positiveMessageEn": "You know all the days and months in English!",
+    "skillTagEl": "Μέρες & Μήνες",
+    "skillTagEn": "Days & Months"
   },
-
-  // ---------- ΙΣΤΟΡΙΑ Δ' ΔΗΜΟΤΙΚΟΥ: Αρχαία Ελληνική Ιστορία ----------
   "istoria-d-dim.minoan-crete": {
-    id: "istoria-d-dim.minoan-crete",
-    labelEl: "Μινωικός πολιτισμός",
-    labelEn: "Minoan civilization",
-    explainEl: "Δεν συνδέει τον Μινωικό πολιτισμό με την Κρήτη και το ανάκτορο της Κνωσού, μπερδεύοντάς τον με άλλο πολιτισμό.",
-    explainEn: "Doesn't connect Minoan civilization with Crete and the Palace of Knossos, confusing it with another civilization.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Εξερευνητής της Κνωσού",
-    achievementEn: "Knossos Explorer",
-    positiveMessageEl: "Ξέρεις τα μυστικά του ανακτόρου της Κνωσού!",
-    positiveMessageEn: "You know the secrets of the Palace of Knossos!",
-    skillTagEl: "Μινωικός Πολιτισμός",
-    skillTagEn: "Minoan Civilization",
+    "id": "istoria-d-dim.minoan-crete",
+    "labelEl": "Μινωικός πολιτισμός",
+    "labelEn": "Minoan civilization",
+    "explainEl": "Δεν συνδέει τον Μινωικό πολιτισμό με την Κρήτη και το ανάκτορο της Κνωσού, μπερδεύοντάς τον με άλλο πολιτισμό.",
+    "explainEn": "Doesn't connect Minoan civilization with Crete and the Palace of Knossos, confusing it with another civilization.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εξερευνητής της Κνωσού",
+    "achievementEn": "Knossos Explorer",
+    "positiveMessageEl": "Ξέρεις τα μυστικά του ανακτόρου της Κνωσού!",
+    "positiveMessageEn": "You know the secrets of the Palace of Knossos!",
+    "skillTagEl": "Μινωικός Πολιτισμός",
+    "skillTagEn": "Minoan Civilization"
   },
   "istoria-d-dim.mycenaean-achaeans": {
-    id: "istoria-d-dim.mycenaean-achaeans",
-    labelEl: "Μυκηναίοι/Αχαιοί",
-    labelEn: "Mycenaeans/Achaeans",
-    explainEl: "Δεν αναγνωρίζει τους Μυκηναίους (Αχαιούς) ως τους πρώτους Έλληνες, με κέντρο τις Μυκήνες.",
-    explainEn: "Doesn't recognize the Mycenaeans (Achaeans) as the first Greeks, centered on Mycenae.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Πολεμιστής των Μυκηνών",
-    achievementEn: "Warrior of Mycenae",
-    positiveMessageEl: "Ξέρεις ποιοι ήταν οι πρώτοι Έλληνες!",
-    positiveMessageEn: "You know who the first Greeks were!",
-    skillTagEl: "Μυκηναϊκός Πολιτισμός",
-    skillTagEn: "Mycenaean Civilization",
+    "id": "istoria-d-dim.mycenaean-achaeans",
+    "labelEl": "Μυκηναίοι/Αχαιοί",
+    "labelEn": "Mycenaeans/Achaeans",
+    "explainEl": "Δεν αναγνωρίζει τους Μυκηναίους (Αχαιούς) ως τους πρώτους Έλληνες, με κέντρο τις Μυκήνες.",
+    "explainEn": "Doesn't recognize the Mycenaeans (Achaeans) as the first Greeks, centered on Mycenae.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Πολεμιστής των Μυκηνών",
+    "achievementEn": "Warrior of Mycenae",
+    "positiveMessageEl": "Ξέρεις ποιοι ήταν οι πρώτοι Έλληνες!",
+    "positiveMessageEn": "You know who the first Greeks were!",
+    "skillTagEl": "Μυκηναϊκός Πολιτισμός",
+    "skillTagEn": "Mycenaean Civilization"
   },
   "istoria-d-dim.polis-emergence": {
-    id: "istoria-d-dim.polis-emergence",
-    labelEl: "Γέννηση της πόλης-κράτους",
-    labelEn: "Rise of the city-state",
-    explainEl: "Δεν καταλαβαίνει ότι η αρχαία Ελλάδα δεν ήταν ένα ενιαίο κράτος, αλλά πολλές ανεξάρτητες πόλεις-κράτη με δικούς τους νόμους.",
-    explainEn: "Doesn't understand that ancient Greece wasn't one unified state, but many independent city-states with their own laws.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Πολίτης της Πόλης-Κράτους",
-    achievementEn: "Citizen of the City-State",
-    positiveMessageEl: "Ξέρεις πώς ήταν οργανωμένη η αρχαία Ελλάδα!",
-    positiveMessageEn: "You know how ancient Greece was organized!",
-    skillTagEl: "Πόλεις-Κράτη",
-    skillTagEn: "City-States",
+    "id": "istoria-d-dim.polis-emergence",
+    "labelEl": "Γέννηση της πόλης-κράτους",
+    "labelEn": "Rise of the city-state",
+    "explainEl": "Δεν καταλαβαίνει ότι η αρχαία Ελλάδα δεν ήταν ένα ενιαίο κράτος, αλλά πολλές ανεξάρτητες πόλεις-κράτη με δικούς τους νόμους.",
+    "explainEn": "Doesn't understand that ancient Greece wasn't one unified state, but many independent city-states with their own laws.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Πολίτης της Πόλης-Κράτους",
+    "achievementEn": "Citizen of the City-State",
+    "positiveMessageEl": "Ξέρεις πώς ήταν οργανωμένη η αρχαία Ελλάδα!",
+    "positiveMessageEn": "You know how ancient Greece was organized!",
+    "skillTagEl": "Πόλεις-Κράτη",
+    "skillTagEn": "City-States"
   },
   "istoria-d-dim.olympic-games-origin": {
-    id: "istoria-d-dim.olympic-games-origin",
-    labelEl: "Καταγωγή Ολυμπιακών Αγώνων",
-    labelEn: "Origin of the Olympic Games",
-    explainEl: "Δεν γνωρίζει ότι οι αρχαίοι Ολυμπιακοί Αγώνες γίνονταν στην Ολυμπία προς τιμήν του Δία, κάθε τέσσερα χρόνια.",
-    explainEn: "Doesn't know that the ancient Olympic Games were held at Olympia in honor of Zeus, every four years.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ολυμπιονίκης",
-    achievementEn: "The Olympian",
-    positiveMessageEl: "Ξέρεις την ιστορία πίσω από τους Ολυμπιακούς Αγώνες!",
-    positiveMessageEn: "You know the history behind the Olympic Games!",
-    skillTagEl: "Ολυμπιακοί Αγώνες",
-    skillTagEn: "Olympic Games",
+    "id": "istoria-d-dim.olympic-games-origin",
+    "labelEl": "Καταγωγή Ολυμπιακών Αγώνων",
+    "labelEn": "Origin of the Olympic Games",
+    "explainEl": "Δεν γνωρίζει ότι οι αρχαίοι Ολυμπιακοί Αγώνες γίνονταν στην Ολυμπία προς τιμήν του Δία, κάθε τέσσερα χρόνια.",
+    "explainEn": "Doesn't know that the ancient Olympic Games were held at Olympia in honor of Zeus, every four years.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ολυμπιονίκης",
+    "achievementEn": "The Olympian",
+    "positiveMessageEl": "Ξέρεις την ιστορία πίσω από τους Ολυμπιακούς Αγώνες!",
+    "positiveMessageEn": "You know the history behind the Olympic Games!",
+    "skillTagEl": "Ολυμπιακοί Αγώνες",
+    "skillTagEn": "Olympic Games"
   },
-
-  // ================================================================
-  // ΝΕΑ GAP TAGS — ΣΤ' ΔΗΜΟΤΙΚΟΥ, Α'/Β' ΓΥΜΝΑΣΙΟΥ, +Β'/Γ' ΓΥΜΝΑΣΙΟΥ (συνέχεια)
-  // ================================================================
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ ΣΤ' ΔΗΜΟΤΙΚΟΥ ----------
   "math-st-dim.decimal-multiplication": {
-    id: "math-st-dim.decimal-multiplication",
-    labelEl: "Πολλαπλασιασμός δεκαδικών",
-    labelEn: "Multiplying decimals",
-    explainEl: "Δεν τοποθετεί σωστά την υποδιαστολή στο αποτέλεσμα όταν πολλαπλασιάζει δεκαδικούς αριθμούς.",
-    explainEn: "Doesn't correctly place the decimal point in the result when multiplying decimal numbers.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ των Δεκαδικών",
-    achievementEn: "Decimal Master",
-    positiveMessageEl: "Ξέρεις πού πάει η υποδιαστολή στο αποτέλεσμα!",
-    positiveMessageEn: "You know exactly where the decimal point goes!",
-    skillTagEl: "Πολλαπλασιασμός Δεκαδικών",
-    skillTagEn: "Multiplying Decimals",
+    "id": "math-st-dim.decimal-multiplication",
+    "labelEl": "Πολλαπλασιασμός δεκαδικών",
+    "labelEn": "Multiplying decimals",
+    "explainEl": "Δεν τοποθετεί σωστά την υποδιαστολή στο αποτέλεσμα όταν πολλαπλασιάζει δεκαδικούς αριθμούς.",
+    "explainEn": "Doesn't correctly place the decimal point in the result when multiplying decimal numbers.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ των Δεκαδικών",
+    "achievementEn": "Decimal Master",
+    "positiveMessageEl": "Ξέρεις πού πάει η υποδιαστολή στο αποτέλεσμα!",
+    "positiveMessageEn": "You know exactly where the decimal point goes!",
+    "skillTagEl": "Πολλαπλασιασμός Δεκαδικών",
+    "skillTagEn": "Multiplying Decimals"
   },
   "math-st-dim.discount-percent": {
-    id: "math-st-dim.discount-percent",
-    labelEl: "Ποσοστά έκπτωσης",
-    labelEn: "Discount percentages",
-    explainEl: "Δυσκολεύεται να υπολογίσει την τελική τιμή μετά από ποσοστιαία έκπτωση, συχνά αφαιρώντας μόνο το ποσοστό αντί για το αντίστοιχο ποσό.",
-    explainEn: "Struggles to compute the final price after a percentage discount, often subtracting the percent figure itself instead of the corresponding amount.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Έξυπνος Αγοραστής",
-    achievementEn: "Smart Shopper",
-    positiveMessageEl: "Υπολογίζεις εκπτώσεις σαν έμπειρος αγοραστής!",
-    positiveMessageEn: "You calculate discounts like a savvy shopper!",
-    skillTagEl: "Εκπτώσεις & Ποσοστά",
-    skillTagEn: "Discounts & Percentages",
+    "id": "math-st-dim.discount-percent",
+    "labelEl": "Ποσοστά έκπτωσης",
+    "labelEn": "Discount percentages",
+    "explainEl": "Δυσκολεύεται να υπολογίσει την τελική τιμή μετά από ποσοστιαία έκπτωση, συχνά αφαιρώντας μόνο το ποσοστό αντί για το αντίστοιχο ποσό.",
+    "explainEn": "Struggles to compute the final price after a percentage discount, often subtracting the percent figure itself instead of the corresponding amount.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Έξυπνος Αγοραστής",
+    "achievementEn": "Smart Shopper",
+    "positiveMessageEl": "Υπολογίζεις εκπτώσεις σαν έμπειρος αγοραστής!",
+    "positiveMessageEn": "You calculate discounts like a savvy shopper!",
+    "skillTagEl": "Εκπτώσεις & Ποσοστά",
+    "skillTagEn": "Discounts & Percentages"
   },
   "math-st-dim.ratio-proportion": {
-    id: "math-st-dim.ratio-proportion",
-    labelEl: "Αναλογίες",
-    labelEn: "Ratios and proportions",
-    explainEl: "Δεν καταλαβαίνει ότι μια αναλογία διατηρεί τη σχέση μεγεθών σταθερή, και προσπαθεί να λύσει προβλήματα αναλογίας μόνο με πρόσθεση.",
-    explainEn: "Doesn't grasp that a ratio keeps the relationship between quantities constant, and tries to solve ratio problems using addition only.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης των Αναλογιών",
-    achievementEn: "Ratio Expert",
-    positiveMessageEl: "Ξέρεις να κρατάς τη σχέση σταθερή σε μια αναλογία!",
-    positiveMessageEn: "You know how to keep a ratio's relationship constant!",
-    skillTagEl: "Αναλογίες",
-    skillTagEn: "Ratios & Proportions",
+    "id": "math-st-dim.ratio-proportion",
+    "labelEl": "Αναλογίες",
+    "labelEn": "Ratios and proportions",
+    "explainEl": "Δεν καταλαβαίνει ότι μια αναλογία διατηρεί τη σχέση μεγεθών σταθερή, και προσπαθεί να λύσει προβλήματα αναλογίας μόνο με πρόσθεση.",
+    "explainEn": "Doesn't grasp that a ratio keeps the relationship between quantities constant, and tries to solve ratio problems using addition only.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Αναλογιών",
+    "achievementEn": "Ratio Expert",
+    "positiveMessageEl": "Ξέρεις να κρατάς τη σχέση σταθερή σε μια αναλογία!",
+    "positiveMessageEn": "You know how to keep a ratio's relationship constant!",
+    "skillTagEl": "Αναλογίες",
+    "skillTagEn": "Ratios & Proportions"
   },
   "math-st-dim.volume-units": {
-    id: "math-st-dim.volume-units",
-    labelEl: "Μονάδες όγκου/χωρητικότητας",
-    labelEn: "Units of volume/capacity",
-    explainEl: "Μπερδεύει το λίτρο με το κυβικό εκατοστό, δεν ξέρει ότι 1 λίτρο = 1000 κυβικά εκατοστά.",
-    explainEn: "Confuses liters with cubic centimeters, not knowing that 1 liter = 1000 cubic centimeters.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μετρητής του Όγκου",
-    achievementEn: "Volume Measurer",
-    positiveMessageEl: "Ξέρεις να μετατρέπεις λίτρα σε κυβικά εκατοστά!",
-    positiveMessageEn: "You know how to convert liters to cubic centimeters!",
-    skillTagEl: "Μονάδες Όγκου",
-    skillTagEn: "Units of Volume",
+    "id": "math-st-dim.volume-units",
+    "labelEl": "Μονάδες όγκου/χωρητικότητας",
+    "labelEn": "Units of volume/capacity",
+    "explainEl": "Μπερδεύει το λίτρο με το κυβικό εκατοστό, δεν ξέρει ότι 1 λίτρο = 1000 κυβικά εκατοστά.",
+    "explainEn": "Confuses liters with cubic centimeters, not knowing that 1 liter = 1000 cubic centimeters.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μετρητής του Όγκου",
+    "achievementEn": "Volume Measurer",
+    "positiveMessageEl": "Ξέρεις να μετατρέπεις λίτρα σε κυβικά εκατοστά!",
+    "positiveMessageEn": "You know how to convert liters to cubic centimeters!",
+    "skillTagEl": "Μονάδες Όγκου",
+    "skillTagEn": "Units of Volume"
   },
-
-  // ---------- ΓΛΩΣΣΑ ΣΤ' ΔΗΜΟΤΙΚΟΥ ----------
   "glossa-st-dim.participle-recognition": {
-    id: "glossa-st-dim.participle-recognition",
-    labelEl: "Αναγνώριση μετοχής",
-    labelEn: "Recognizing participles",
-    explainEl: "Δεν αναγνωρίζει τη μετοχή (π.χ. «τρέχοντας») ως ιδιαίτερο ρηματικό τύπο, μπερδεύοντάς τη με απλό ρήμα ή επίθετο.",
-    explainEn: "Doesn't recognize the participle (e.g. 'running') as a distinct verb form, confusing it with a plain verb or adjective.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Μετοχής",
-    achievementEn: "Participle Expert",
-    positiveMessageEl: "Αναγνωρίζεις τη μετοχή όπου κι αν εμφανιστεί!",
-    positiveMessageEn: "You spot participles wherever they appear!",
-    skillTagEl: "Μετοχή",
-    skillTagEn: "Participles",
+    "id": "glossa-st-dim.participle-recognition",
+    "labelEl": "Αναγνώριση μετοχής",
+    "labelEn": "Recognizing participles",
+    "explainEl": "Δεν αναγνωρίζει τη μετοχή (π.χ. «τρέχοντας») ως ιδιαίτερο ρηματικό τύπο, μπερδεύοντάς τη με απλό ρήμα ή επίθετο.",
+    "explainEn": "Doesn't recognize the participle (e.g. 'running') as a distinct verb form, confusing it with a plain verb or adjective.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Μετοχής",
+    "achievementEn": "Participle Expert",
+    "positiveMessageEl": "Αναγνωρίζεις τη μετοχή όπου κι αν εμφανιστεί!",
+    "positiveMessageEn": "You spot participles wherever they appear!",
+    "skillTagEl": "Μετοχή",
+    "skillTagEn": "Participles"
   },
   "glossa-st-dim.compound-sentence-connectors": {
-    id: "glossa-st-dim.compound-sentence-connectors",
-    labelEl: "Σύνδεσμοι σύνθετης πρότασης",
-    labelEn: "Compound sentence connectors",
-    explainEl: "Χρησιμοποιεί λάθος σύνδεσμο για να ενώσει δύο προτάσεις (π.χ. «επειδή» αντί για «αν και» όταν εννοεί αντίθεση).",
-    explainEn: "Uses the wrong connector to join two clauses (e.g. 'because' instead of 'although' when meaning a contrast).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ των Συνδέσμων",
-    achievementEn: "Connector Master",
-    positiveMessageEl: "Διαλέγεις πάντα τον σωστό σύνδεσμο!",
-    positiveMessageEn: "You always pick the right connector!",
-    skillTagEl: "Σύνδεσμοι",
-    skillTagEn: "Sentence Connectors",
+    "id": "glossa-st-dim.compound-sentence-connectors",
+    "labelEl": "Σύνδεσμοι σύνθετης πρότασης",
+    "labelEn": "Compound sentence connectors",
+    "explainEl": "Χρησιμοποιεί λάθος σύνδεσμο για να ενώσει δύο προτάσεις (π.χ. «επειδή» αντί για «αν και» όταν εννοεί αντίθεση).",
+    "explainEn": "Uses the wrong connector to join two clauses (e.g. 'because' instead of 'although' when meaning a contrast).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ των Συνδέσμων",
+    "achievementEn": "Connector Master",
+    "positiveMessageEl": "Διαλέγεις πάντα τον σωστό σύνδεσμο!",
+    "positiveMessageEn": "You always pick the right connector!",
+    "skillTagEl": "Σύνδεσμοι",
+    "skillTagEn": "Sentence Connectors"
   },
   "glossa-st-dim.literary-text-interpretation": {
-    id: "glossa-st-dim.literary-text-interpretation",
-    labelEl: "Ερμηνεία λογοτεχνικού κειμένου",
-    labelEn: "Interpreting a literary text",
-    explainEl: "Διαβάζει ένα λογοτεχνικό απόσπασμα κυριολεκτικά, χωρίς να αναζητά το υπονοούμενο νόημα ή το συναίσθημα πίσω από τις λέξεις.",
-    explainEn: "Reads a literary passage literally, without looking for the implied meaning or feeling behind the words.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ερμηνευτής Κειμένων",
-    achievementEn: "Text Interpreter",
-    positiveMessageEl: "Βλέπεις πέρα από τις λέξεις, στο νόημα από πίσω!",
-    positiveMessageEn: "You see past the words, to the meaning behind them!",
-    skillTagEl: "Ερμηνεία Κειμένου",
-    skillTagEn: "Text Interpretation",
+    "id": "glossa-st-dim.literary-text-interpretation",
+    "labelEl": "Ερμηνεία λογοτεχνικού κειμένου",
+    "labelEn": "Interpreting a literary text",
+    "explainEl": "Διαβάζει ένα λογοτεχνικό απόσπασμα κυριολεκτικά, χωρίς να αναζητά το υπονοούμενο νόημα ή το συναίσθημα πίσω από τις λέξεις.",
+    "explainEn": "Reads a literary passage literally, without looking for the implied meaning or feeling behind the words.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ερμηνευτής Κειμένων",
+    "achievementEn": "Text Interpreter",
+    "positiveMessageEl": "Βλέπεις πέρα από τις λέξεις, στο νόημα από πίσω!",
+    "positiveMessageEn": "You see past the words, to the meaning behind them!",
+    "skillTagEl": "Ερμηνεία Κειμένου",
+    "skillTagEn": "Text Interpretation"
   },
   "glossa-st-dim.paragraph-connectors-flow": {
-    id: "glossa-st-dim.paragraph-connectors-flow",
-    labelEl: "Συνοχή ανάμεσα σε παραγράφους",
-    labelEn: "Flow between paragraphs",
-    explainEl: "Γράφει διαδοχικές παραγράφους χωρίς καμία λέξη-γέφυρα ανάμεσά τους (π.χ. «επιπλέον», «ωστόσο»), κάνοντας το κείμενο να μοιάζει κομματιασμένο.",
-    explainEn: "Writes consecutive paragraphs with no bridging words between them (e.g. 'furthermore', 'however'), making the text feel disjointed.",
-    recommendedToolIds: ["mindmup", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γεφυροποιός των Ιδεών",
-    achievementEn: "Idea Bridge Builder",
-    positiveMessageEl: "Οι παράγραφοί σου ρέουν ομαλά η μία στην άλλη!",
-    positiveMessageEn: "Your paragraphs flow smoothly into one another!",
-    skillTagEl: "Συνοχή Παραγράφων",
-    skillTagEn: "Paragraph Flow",
+    "id": "glossa-st-dim.paragraph-connectors-flow",
+    "labelEl": "Συνοχή ανάμεσα σε παραγράφους",
+    "labelEn": "Flow between paragraphs",
+    "explainEl": "Γράφει διαδοχικές παραγράφους χωρίς καμία λέξη-γέφυρα ανάμεσά τους (π.χ. «επιπλέον», «ωστόσο»), κάνοντας το κείμενο να μοιάζει κομματιασμένο.",
+    "explainEn": "Writes consecutive paragraphs with no bridging words between them (e.g. 'furthermore', 'however'), making the text feel disjointed.",
+    "recommendedToolIds": [
+      "mindmup",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γεφυροποιός των Ιδεών",
+    "achievementEn": "Idea Bridge Builder",
+    "positiveMessageEl": "Οι παράγραφοί σου ρέουν ομαλά η μία στην άλλη!",
+    "positiveMessageEn": "Your paragraphs flow smoothly into one another!",
+    "skillTagEl": "Συνοχή Παραγράφων",
+    "skillTagEn": "Paragraph Flow"
   },
-
-  // ---------- ΦΥΣΙΚΕΣ ΕΠΙΣΤΗΜΕΣ ΣΤ' ΔΗΜΟΤΙΚΟΥ ----------
   "science-st-dim.circuit-open-closed": {
-    id: "science-st-dim.circuit-open-closed",
-    labelEl: "Ανοιχτό vs κλειστό κύκλωμα",
-    labelEn: "Open vs closed circuit",
-    explainEl: "Δεν καταλαβαίνει ότι ένα ηλεκτρικό κύκλωμα πρέπει να είναι κλειστό (χωρίς διακοπή) για να περάσει ρεύμα και να ανάψει η λάμπα.",
-    explainEn: "Doesn't understand that an electric circuit must be closed (unbroken) for current to flow and light the bulb.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Μηχανικός του Κυκλώματος",
-    achievementEn: "Circuit Engineer",
-    positiveMessageEl: "Ξέρεις πότε ένα κύκλωμα λειτουργεί και πότε όχι!",
-    positiveMessageEn: "You know when a circuit works and when it doesn't!",
-    skillTagEl: "Ηλεκτρικό Κύκλωμα",
-    skillTagEn: "Electric Circuit",
+    "id": "science-st-dim.circuit-open-closed",
+    "labelEl": "Ανοιχτό vs κλειστό κύκλωμα",
+    "labelEn": "Open vs closed circuit",
+    "explainEl": "Δεν καταλαβαίνει ότι ένα ηλεκτρικό κύκλωμα πρέπει να είναι κλειστό (χωρίς διακοπή) για να περάσει ρεύμα και να ανάψει η λάμπα.",
+    "explainEn": "Doesn't understand that an electric circuit must be closed (unbroken) for current to flow and light the bulb.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Μηχανικός του Κυκλώματος",
+    "achievementEn": "Circuit Engineer",
+    "positiveMessageEl": "Ξέρεις πότε ένα κύκλωμα λειτουργεί και πότε όχι!",
+    "positiveMessageEn": "You know when a circuit works and when it doesn't!",
+    "skillTagEl": "Ηλεκτρικό Κύκλωμα",
+    "skillTagEn": "Electric Circuit"
   },
   "science-st-dim.digestive-system-order": {
-    id: "science-st-dim.digestive-system-order",
-    labelEl: "Σειρά πεπτικού συστήματος",
-    labelEn: "Order of the digestive system",
-    explainEl: "Δεν θυμάται τη σωστή σειρά που ακολουθεί η τροφή μέσα στο πεπτικό σύστημα (στόμα, οισοφάγος, στομάχι, έντερα).",
-    explainEn: "Doesn't recall the correct order food follows through the digestive system (mouth, esophagus, stomach, intestines).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Γνώστης του Σώματος",
-    achievementEn: "Body Expert",
-    positiveMessageEl: "Ξέρεις το ταξίδι της τροφής μέσα στο σώμα!",
-    positiveMessageEn: "You know food's journey through the body!",
-    skillTagEl: "Πεπτικό Σύστημα",
-    skillTagEn: "Digestive System",
+    "id": "science-st-dim.digestive-system-order",
+    "labelEl": "Σειρά πεπτικού συστήματος",
+    "labelEn": "Order of the digestive system",
+    "explainEl": "Δεν θυμάται τη σωστή σειρά που ακολουθεί η τροφή μέσα στο πεπτικό σύστημα (στόμα, οισοφάγος, στομάχι, έντερα).",
+    "explainEn": "Doesn't recall the correct order food follows through the digestive system (mouth, esophagus, stomach, intestines).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Γνώστης του Σώματος",
+    "achievementEn": "Body Expert",
+    "positiveMessageEl": "Ξέρεις το ταξίδι της τροφής μέσα στο σώμα!",
+    "positiveMessageEn": "You know food's journey through the body!",
+    "skillTagEl": "Πεπτικό Σύστημα",
+    "skillTagEn": "Digestive System"
   },
   "science-st-dim.renewable-vs-nonrenewable": {
-    id: "science-st-dim.renewable-vs-nonrenewable",
-    labelEl: "Ανανεώσιμες vs μη ανανεώσιμες πηγές",
-    labelEn: "Renewable vs non-renewable energy",
-    explainEl: "Μπερδεύει ανανεώσιμες πηγές ενέργειας (ήλιος, άνεμος) με μη ανανεώσιμες (πετρέλαιο, κάρβουνο).",
-    explainEn: "Confuses renewable energy sources (sun, wind) with non-renewable ones (oil, coal).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Φύλακας της Ενέργειας",
-    achievementEn: "Energy Guardian",
-    positiveMessageEl: "Ξέρεις ποιες πηγές ενέργειας ανανεώνονται και ποιες όχι!",
-    positiveMessageEn: "You know which energy sources renew and which don't!",
-    skillTagEl: "Πηγές Ενέργειας",
-    skillTagEn: "Energy Sources",
+    "id": "science-st-dim.renewable-vs-nonrenewable",
+    "labelEl": "Ανανεώσιμες vs μη ανανεώσιμες πηγές",
+    "labelEn": "Renewable vs non-renewable energy",
+    "explainEl": "Μπερδεύει ανανεώσιμες πηγές ενέργειας (ήλιος, άνεμος) με μη ανανεώσιμες (πετρέλαιο, κάρβουνο).",
+    "explainEn": "Confuses renewable energy sources (sun, wind) with non-renewable ones (oil, coal).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Φύλακας της Ενέργειας",
+    "achievementEn": "Energy Guardian",
+    "positiveMessageEl": "Ξέρεις ποιες πηγές ενέργειας ανανεώνονται και ποιες όχι!",
+    "positiveMessageEn": "You know which energy sources renew and which don't!",
+    "skillTagEl": "Πηγές Ενέργειας",
+    "skillTagEn": "Energy Sources"
   },
   "science-st-dim.states-of-matter-change": {
-    id: "science-st-dim.states-of-matter-change",
-    labelEl: "Αλλαγές κατάστασης ύλης",
-    labelEn: "Changes of state",
-    explainEl: "Μπερδεύει την τήξη (στερεό→υγρό) με την εξάτμιση (υγρό→αέριο), και δεν ξέρει ποια αλλαγή προκαλεί ποιο φαινόμενο.",
-    explainEn: "Confuses melting (solid→liquid) with evaporation (liquid→gas), unsure which change causes which phenomenon.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity", "notebooklm"],
-    achievementEl: "Ο Ερευνητής της Ύλης",
-    achievementEn: "Matter Researcher",
-    positiveMessageEl: "Ξέρεις πώς αλλάζει μορφή η ύλη!",
-    positiveMessageEn: "You know how matter changes form!",
-    skillTagEl: "Καταστάσεις Ύλης",
-    skillTagEn: "States of Matter",
+    "id": "science-st-dim.states-of-matter-change",
+    "labelEl": "Αλλαγές κατάστασης ύλης",
+    "labelEn": "Changes of state",
+    "explainEl": "Μπερδεύει την τήξη (στερεό→υγρό) με την εξάτμιση (υγρό→αέριο), και δεν ξέρει ποια αλλαγή προκαλεί ποιο φαινόμενο.",
+    "explainEn": "Confuses melting (solid→liquid) with evaporation (liquid→gas), unsure which change causes which phenomenon.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "notebooklm"
+    ],
+    "achievementEl": "Ο Ερευνητής της Ύλης",
+    "achievementEn": "Matter Researcher",
+    "positiveMessageEl": "Ξέρεις πώς αλλάζει μορφή η ύλη!",
+    "positiveMessageEn": "You know how matter changes form!",
+    "skillTagEl": "Καταστάσεις Ύλης",
+    "skillTagEn": "States of Matter"
   },
-
-  // ---------- ΙΣΤΟΡΙΑ ΣΤ' ΔΗΜΟΤΙΚΟΥ: Νεότερη/Σύγχρονη Ελληνική Ιστορία ----------
   "istoria-st-dim.revolution-year": {
-    id: "istoria-st-dim.revolution-year",
-    labelEl: "Έτος Ελληνικής Επανάστασης",
-    labelEn: "Year of the Greek Revolution",
-    explainEl: "Δεν θυμάται ότι η Ελληνική Επανάσταση ξεκίνησε το 1821.",
-    explainEn: "Doesn't recall that the Greek Revolution began in 1821.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μικρός Επαναστάτης",
-    achievementEn: "The Little Revolutionary",
-    positiveMessageEl: "Ξέρεις πότε ξεκίνησε ο Αγώνας για την ελευθερία!",
-    positiveMessageEn: "You know when the fight for freedom began!",
-    skillTagEl: "Επανάσταση του 1821",
-    skillTagEn: "1821 Revolution",
+    "id": "istoria-st-dim.revolution-year",
+    "labelEl": "Έτος Ελληνικής Επανάστασης",
+    "labelEn": "Year of the Greek Revolution",
+    "explainEl": "Δεν θυμάται ότι η Ελληνική Επανάσταση ξεκίνησε το 1821.",
+    "explainEn": "Doesn't recall that the Greek Revolution began in 1821.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μικρός Επαναστάτης",
+    "achievementEn": "The Little Revolutionary",
+    "positiveMessageEl": "Ξέρεις πότε ξεκίνησε ο Αγώνας για την ελευθερία!",
+    "positiveMessageEn": "You know when the fight for freedom began!",
+    "skillTagEl": "Επανάσταση του 1821",
+    "skillTagEn": "1821 Revolution"
   },
   "istoria-st-dim.kapodistrias-role": {
-    id: "istoria-st-dim.kapodistrias-role",
-    labelEl: "Ο Καποδίστριας",
-    labelEn: "Kapodistrias",
-    explainEl: "Δεν αναγνωρίζει τον Ιωάννη Καποδίστρια ως τον πρώτο κυβερνήτη του ανεξάρτητου ελληνικού κράτους.",
-    explainEn: "Doesn't recognize Ioannis Kapodistrias as the first governor of the independent Greek state.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Πρώτου Κυβερνήτη",
-    achievementEn: "First Governor Expert",
-    positiveMessageEl: "Ξέρεις ποιος οδήγησε το πρώτο ελεύθερο ελληνικό κράτος!",
-    positiveMessageEn: "You know who led the first free Greek state!",
-    skillTagEl: "Καποδίστριας",
-    skillTagEn: "Kapodistrias",
+    "id": "istoria-st-dim.kapodistrias-role",
+    "labelEl": "Ο Καποδίστριας",
+    "labelEn": "Kapodistrias",
+    "explainEl": "Δεν αναγνωρίζει τον Ιωάννη Καποδίστρια ως τον πρώτο κυβερνήτη του ανεξάρτητου ελληνικού κράτους.",
+    "explainEn": "Doesn't recognize Ioannis Kapodistrias as the first governor of the independent Greek state.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Πρώτου Κυβερνήτη",
+    "achievementEn": "First Governor Expert",
+    "positiveMessageEl": "Ξέρεις ποιος οδήγησε το πρώτο ελεύθερο ελληνικό κράτος!",
+    "positiveMessageEn": "You know who led the first free Greek state!",
+    "skillTagEl": "Καποδίστριας",
+    "skillTagEn": "Kapodistrias"
   },
   "istoria-st-dim.navarino-battle": {
-    id: "istoria-st-dim.navarino-battle",
-    labelEl: "Ναυμαχία του Ναβαρίνου",
-    labelEn: "Battle of Navarino",
-    explainEl: "Δεν γνωρίζει ότι η Ναυμαχία του Ναβαρίνου (1827), όπου οι Μεγάλες Δυνάμεις βοήθησαν την Ελλάδα, ήταν καθοριστική για την ανεξαρτησία.",
-    explainEn: "Doesn't know that the Battle of Navarino (1827), where the Great Powers helped Greece, was decisive for independence.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ναύτης της Ιστορίας",
-    achievementEn: "History's Sailor",
-    positiveMessageEl: "Ξέρεις ποια ναυμαχία βοήθησε αποφασιστικά την Ελλάδα!",
-    positiveMessageEn: "You know which naval battle decisively helped Greece!",
-    skillTagEl: "Ναυμαχία Ναβαρίνου",
-    skillTagEn: "Battle of Navarino",
+    "id": "istoria-st-dim.navarino-battle",
+    "labelEl": "Ναυμαχία του Ναβαρίνου",
+    "labelEn": "Battle of Navarino",
+    "explainEl": "Δεν γνωρίζει ότι η Ναυμαχία του Ναβαρίνου (1827), όπου οι Μεγάλες Δυνάμεις βοήθησαν την Ελλάδα, ήταν καθοριστική για την ανεξαρτησία.",
+    "explainEn": "Doesn't know that the Battle of Navarino (1827), where the Great Powers helped Greece, was decisive for independence.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ναύτης της Ιστορίας",
+    "achievementEn": "History's Sailor",
+    "positiveMessageEl": "Ξέρεις ποια ναυμαχία βοήθησε αποφασιστικά την Ελλάδα!",
+    "positiveMessageEn": "You know which naval battle decisively helped Greece!",
+    "skillTagEl": "Ναυμαχία Ναβαρίνου",
+    "skillTagEn": "Battle of Navarino"
   },
   "istoria-st-dim.modern-state-formation": {
-    id: "istoria-st-dim.modern-state-formation",
-    labelEl: "Δημιουργία ελληνικού κράτους",
-    labelEn: "Formation of the Greek state",
-    explainEl: "Δεν καταλαβαίνει ότι το πρώτο ελεύθερο ελληνικό κράτος κάλυπτε αρχικά μικρό μέρος της σημερινής Ελλάδας, όχι όλη τη σημερινή επικράτεια.",
-    explainEn: "Doesn't understand that the first free Greek state initially covered only a small part of present-day Greece, not the whole current territory.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Χαρτογράφος του Νέου Κράτους",
-    achievementEn: "New State Cartographer",
-    positiveMessageEl: "Ξέρεις πώς μεγάλωσε σταδιακά η Ελλάδα στον χάρτη!",
-    positiveMessageEn: "You know how Greece gradually grew on the map!",
-    skillTagEl: "Δημιουργία Ελληνικού Κράτους",
-    skillTagEn: "Formation of the Greek State",
+    "id": "istoria-st-dim.modern-state-formation",
+    "labelEl": "Δημιουργία ελληνικού κράτους",
+    "labelEn": "Formation of the Greek state",
+    "explainEl": "Δεν καταλαβαίνει ότι το πρώτο ελεύθερο ελληνικό κράτος κάλυπτε αρχικά μικρό μέρος της σημερινής Ελλάδας, όχι όλη τη σημερινή επικράτεια.",
+    "explainEn": "Doesn't understand that the first free Greek state initially covered only a small part of present-day Greece, not the whole current territory.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Χαρτογράφος του Νέου Κράτους",
+    "achievementEn": "New State Cartographer",
+    "positiveMessageEl": "Ξέρεις πώς μεγάλωσε σταδιακά η Ελλάδα στον χάρτη!",
+    "positiveMessageEn": "You know how Greece gradually grew on the map!",
+    "skillTagEl": "Δημιουργία Ελληνικού Κράτους",
+    "skillTagEn": "Formation of the Greek State"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Α' ΓΥΜΝΑΣΙΟΥ ----------
   "math-a-gym.rational-number-order": {
-    id: "math-a-gym.rational-number-order",
-    labelEl: "Διάταξη ρητών αριθμών",
-    labelEn: "Ordering rational numbers",
-    explainEl: "Δυσκολεύεται να συγκρίνει αρνητικούς με θετικούς αριθμούς, πιστεύοντας συχνά ότι το -8 είναι μεγαλύτερο από το -3.",
-    explainEn: "Struggles to compare negative and positive numbers, often believing -8 is greater than -3.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Γνώστης των Ρητών",
-    achievementEn: "Rational Number Expert",
-    positiveMessageEl: "Ξέρεις να συγκρίνεις θετικούς και αρνητικούς αριθμούς!",
-    positiveMessageEn: "You know how to compare positive and negative numbers!",
-    skillTagEl: "Ρητοί Αριθμοί",
-    skillTagEn: "Rational Numbers",
+    "id": "math-a-gym.rational-number-order",
+    "labelEl": "Διάταξη ρητών αριθμών",
+    "labelEn": "Ordering rational numbers",
+    "explainEl": "Δυσκολεύεται να συγκρίνει αρνητικούς με θετικούς αριθμούς, πιστεύοντας συχνά ότι το -8 είναι μεγαλύτερο από το -3.",
+    "explainEn": "Struggles to compare negative and positive numbers, often believing -8 is greater than -3.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Ρητών",
+    "achievementEn": "Rational Number Expert",
+    "positiveMessageEl": "Ξέρεις να συγκρίνεις θετικούς και αρνητικούς αριθμούς!",
+    "positiveMessageEn": "You know how to compare positive and negative numbers!",
+    "skillTagEl": "Ρητοί Αριθμοί",
+    "skillTagEn": "Rational Numbers"
   },
   "math-a-gym.absolute-value": {
-    id: "math-a-gym.absolute-value",
-    labelEl: "Απόλυτη τιμή",
-    labelEn: "Absolute value",
-    explainEl: "Πιστεύει ότι η απόλυτη τιμή ενός αρνητικού αριθμού παραμένει αρνητική, αντί να καταλαβαίνει ότι είναι η απόστασή του από το μηδέν.",
-    explainEn: "Believes the absolute value of a negative number stays negative, instead of understanding it as the distance from zero.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Μετρητής της Απόστασης",
-    achievementEn: "Distance Measurer",
-    positiveMessageEl: "Ξέρεις τι σημαίνει πραγματικά η απόλυτη τιμή!",
-    positiveMessageEn: "You know what absolute value really means!",
-    skillTagEl: "Απόλυτη Τιμή",
-    skillTagEn: "Absolute Value",
+    "id": "math-a-gym.absolute-value",
+    "labelEl": "Απόλυτη τιμή",
+    "labelEn": "Absolute value",
+    "explainEl": "Πιστεύει ότι η απόλυτη τιμή ενός αρνητικού αριθμού παραμένει αρνητική, αντί να καταλαβαίνει ότι είναι η απόστασή του από το μηδέν.",
+    "explainEn": "Believes the absolute value of a negative number stays negative, instead of understanding it as the distance from zero.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μετρητής της Απόστασης",
+    "achievementEn": "Distance Measurer",
+    "positiveMessageEl": "Ξέρεις τι σημαίνει πραγματικά η απόλυτη τιμή!",
+    "positiveMessageEn": "You know what absolute value really means!",
+    "skillTagEl": "Απόλυτη Τιμή",
+    "skillTagEn": "Absolute Value"
   },
   "math-a-gym.gcd-lcm-confusion": {
-    id: "math-a-gym.gcd-lcm-confusion",
-    labelEl: "ΜΚΔ vs ΕΚΠ",
-    labelEn: "GCD vs LCM",
-    explainEl: "Μπερδεύει τον Μέγιστο Κοινό Διαιρέτη (μικρότερος αριθμός) με το Ελάχιστο Κοινό Πολλαπλάσιο (μεγαλύτερος αριθμός).",
-    explainEn: "Confuses the Greatest Common Divisor (smaller number) with the Least Common Multiple (larger number).",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Ειδικός ΜΚΔ-ΕΚΠ",
-    achievementEn: "GCD-LCM Specialist",
-    positiveMessageEl: "Ξέρεις τη διαφορά ανάμεσα σε ΜΚΔ και ΕΚΠ!",
-    positiveMessageEn: "You know the difference between GCD and LCM!",
-    skillTagEl: "ΜΚΔ & ΕΚΠ",
-    skillTagEn: "GCD & LCM",
+    "id": "math-a-gym.gcd-lcm-confusion",
+    "labelEl": "ΜΚΔ vs ΕΚΠ",
+    "labelEn": "GCD vs LCM",
+    "explainEl": "Μπερδεύει τον Μέγιστο Κοινό Διαιρέτη (μικρότερος αριθμός) με το Ελάχιστο Κοινό Πολλαπλάσιο (μεγαλύτερος αριθμός).",
+    "explainEn": "Confuses the Greatest Common Divisor (smaller number) with the Least Common Multiple (larger number).",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ειδικός ΜΚΔ-ΕΚΠ",
+    "achievementEn": "GCD-LCM Specialist",
+    "positiveMessageEl": "Ξέρεις τη διαφορά ανάμεσα σε ΜΚΔ και ΕΚΠ!",
+    "positiveMessageEn": "You know the difference between GCD and LCM!",
+    "skillTagEl": "ΜΚΔ & ΕΚΠ",
+    "skillTagEn": "GCD & LCM"
   },
   "math-a-gym.proportion-intro": {
-    id: "math-a-gym.proportion-intro",
-    labelEl: "Εισαγωγή σε αναλογίες",
-    labelEn: "Introduction to proportions",
-    explainEl: "Δεν καταλαβαίνει ότι σε μια αναλογία δύο κλάσματα είναι ίσα, και προσπαθεί να τη λύσει με τυχαία πράξη αντί για γινόμενο άκρων-μέσων.",
-    explainEn: "Doesn't understand that in a proportion two fractions are equal, and tries to solve it with a random operation instead of cross-multiplication.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Λύτης Αναλογιών",
-    achievementEn: "Proportion Solver",
-    positiveMessageEl: "Λύνεις αναλογίες με σιγουριά!",
-    positiveMessageEn: "You solve proportions with confidence!",
-    skillTagEl: "Αναλογίες",
-    skillTagEn: "Proportions",
+    "id": "math-a-gym.proportion-intro",
+    "labelEl": "Εισαγωγή σε αναλογίες",
+    "labelEn": "Introduction to proportions",
+    "explainEl": "Δεν καταλαβαίνει ότι σε μια αναλογία δύο κλάσματα είναι ίσα, και προσπαθεί να τη λύσει με τυχαία πράξη αντί για γινόμενο άκρων-μέσων.",
+    "explainEn": "Doesn't understand that in a proportion two fractions are equal, and tries to solve it with a random operation instead of cross-multiplication.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Λύτης Αναλογιών",
+    "achievementEn": "Proportion Solver",
+    "positiveMessageEl": "Λύνεις αναλογίες με σιγουριά!",
+    "positiveMessageEn": "You solve proportions with confidence!",
+    "skillTagEl": "Αναλογίες",
+    "skillTagEn": "Proportions"
   },
-
-  // ---------- ΓΛΩΣΣΑ Α' ΓΥΜΝΑΣΙΟΥ ----------
   "glossa-a-gym.parts-of-speech": {
-    id: "glossa-a-gym.parts-of-speech",
-    labelEl: "Μέρη του λόγου",
-    labelEn: "Parts of speech",
-    explainEl: "Δυσκολεύεται να ξεχωρίσει τα μέρη του λόγου (ουσιαστικό, επίθετο, ρήμα, επίρρημα) μέσα σε μια πρόταση.",
-    explainEn: "Struggles to identify parts of speech (noun, adjective, verb, adverb) within a sentence.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Γνώστης των Μερών του Λόγου",
-    achievementEn: "Parts-of-Speech Expert",
-    positiveMessageEl: "Ξεχωρίζεις κάθε λέξη ανάλογα με τη λειτουργία της!",
-    positiveMessageEn: "You tell every word apart by its role!",
-    skillTagEl: "Μέρη του Λόγου",
-    skillTagEn: "Parts of Speech",
+    "id": "glossa-a-gym.parts-of-speech",
+    "labelEl": "Μέρη του λόγου",
+    "labelEn": "Parts of speech",
+    "explainEl": "Δυσκολεύεται να ξεχωρίσει τα μέρη του λόγου (ουσιαστικό, επίθετο, ρήμα, επίρρημα) μέσα σε μια πρόταση.",
+    "explainEn": "Struggles to identify parts of speech (noun, adjective, verb, adverb) within a sentence.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Μερών του Λόγου",
+    "achievementEn": "Parts-of-Speech Expert",
+    "positiveMessageEl": "Ξεχωρίζεις κάθε λέξη ανάλογα με τη λειτουργία της!",
+    "positiveMessageEn": "You tell every word apart by its role!",
+    "skillTagEl": "Μέρη του Λόγου",
+    "skillTagEn": "Parts of Speech"
   },
   "glossa-a-gym.opinion-vs-fact": {
-    id: "glossa-a-gym.opinion-vs-fact",
-    labelEl: "Άποψη vs Γεγονός",
-    labelEn: "Opinion vs Fact",
-    explainEl: "Δεν ξεχωρίζει μια αντικειμενική πληροφορία (γεγονός) από μια προσωπική άποψη μέσα σε ένα κείμενο.",
-    explainEn: "Doesn't distinguish an objective piece of information (fact) from a personal opinion within a text.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Κριτής των Κειμένων",
-    achievementEn: "Text Critic",
-    positiveMessageEl: "Ξεχωρίζεις τι είναι γεγονός και τι άποψη!",
-    positiveMessageEn: "You tell fact from opinion!",
-    skillTagEl: "Άποψη & Γεγονός",
-    skillTagEn: "Opinion & Fact",
+    "id": "glossa-a-gym.opinion-vs-fact",
+    "labelEl": "Άποψη vs Γεγονός",
+    "labelEn": "Opinion vs Fact",
+    "explainEl": "Δεν ξεχωρίζει μια αντικειμενική πληροφορία (γεγονός) από μια προσωπική άποψη μέσα σε ένα κείμενο.",
+    "explainEn": "Doesn't distinguish an objective piece of information (fact) from a personal opinion within a text.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Κριτής των Κειμένων",
+    "achievementEn": "Text Critic",
+    "positiveMessageEl": "Ξεχωρίζεις τι είναι γεγονός και τι άποψη!",
+    "positiveMessageEn": "You tell fact from opinion!",
+    "skillTagEl": "Άποψη & Γεγονός",
+    "skillTagEn": "Opinion & Fact"
   },
   "glossa-a-gym.paragraph-argument-basic": {
-    id: "glossa-a-gym.paragraph-argument-basic",
-    labelEl: "Βασικό επιχειρηματολογικό κείμενο",
-    labelEn: "Basic argumentative writing",
-    explainEl: "Όταν εκφράζει άποψη, δεν την υποστηρίζει με κανέναν λόγο, απλώς την επαναλαμβάνει με διαφορετικά λόγια.",
-    explainEn: "When stating an opinion, doesn't support it with any reason, just restates it in different words.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Πρωτοεπιχειρηματολόγος",
-    achievementEn: "First-Time Arguer",
-    positiveMessageEl: "Υποστηρίζεις την άποψή σου με πραγματικούς λόγους!",
-    positiveMessageEn: "You back up your opinion with real reasons!",
-    skillTagEl: "Επιχειρηματολογία",
-    skillTagEn: "Basic Argumentation",
+    "id": "glossa-a-gym.paragraph-argument-basic",
+    "labelEl": "Βασικό επιχειρηματολογικό κείμενο",
+    "labelEn": "Basic argumentative writing",
+    "explainEl": "Όταν εκφράζει άποψη, δεν την υποστηρίζει με κανέναν λόγο, απλώς την επαναλαμβάνει με διαφορετικά λόγια.",
+    "explainEn": "When stating an opinion, doesn't support it with any reason, just restates it in different words.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Πρωτοεπιχειρηματολόγος",
+    "achievementEn": "First-Time Arguer",
+    "positiveMessageEl": "Υποστηρίζεις την άποψή σου με πραγματικούς λόγους!",
+    "positiveMessageEn": "You back up your opinion with real reasons!",
+    "skillTagEl": "Επιχειρηματολογία",
+    "skillTagEn": "Basic Argumentation"
   },
   "glossa-a-gym.verb-mood-basic": {
-    id: "glossa-a-gym.verb-mood-basic",
-    labelEl: "Έγκλιση ρήματος",
-    labelEn: "Verb mood",
-    explainEl: "Δεν ξεχωρίζει την οριστική (δήλωση γεγονότος) από την προστακτική (διαταγή/παράκληση) έγκλιση του ρήματος.",
-    explainEn: "Doesn't distinguish the indicative mood (stating a fact) from the imperative mood (a command/request).",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Γνώστης της Έγκλισης",
-    achievementEn: "Verb Mood Expert",
-    positiveMessageEl: "Ξέρεις πότε ένα ρήμα δηλώνει γεγονός και πότε διαταγή!",
-    positiveMessageEn: "You know when a verb states a fact and when it gives a command!",
-    skillTagEl: "Έγκλιση Ρήματος",
-    skillTagEn: "Verb Mood",
+    "id": "glossa-a-gym.verb-mood-basic",
+    "labelEl": "Έγκλιση ρήματος",
+    "labelEn": "Verb mood",
+    "explainEl": "Δεν ξεχωρίζει την οριστική (δήλωση γεγονότος) από την προστακτική (διαταγή/παράκληση) έγκλιση του ρήματος.",
+    "explainEn": "Doesn't distinguish the indicative mood (stating a fact) from the imperative mood (a command/request).",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Έγκλισης",
+    "achievementEn": "Verb Mood Expert",
+    "positiveMessageEl": "Ξέρεις πότε ένα ρήμα δηλώνει γεγονός και πότε διαταγή!",
+    "positiveMessageEn": "You know when a verb states a fact and when it gives a command!",
+    "skillTagEl": "Έγκλιση Ρήματος",
+    "skillTagEn": "Verb Mood"
   },
-
-  // ---------- ΙΣΤΟΡΙΑ Α' ΓΥΜΝΑΣΙΟΥ: Προϊστορία - Κλασικά Χρόνια ----------
   "istoria-a-gym.bronze-age-civilizations": {
-    id: "istoria-a-gym.bronze-age-civilizations",
-    labelEl: "Πολιτισμοί Εποχής Χαλκού",
-    labelEn: "Bronze Age civilizations",
-    explainEl: "Μπερδεύει τον Κυκλαδικό, τον Μινωικό και τον Μυκηναϊκό πολιτισμό μεταξύ τους, χωρίς να ξέρει ποιος αναπτύχθηκε πού.",
-    explainEn: "Confuses the Cycladic, Minoan, and Mycenaean civilizations with each other, without knowing which developed where.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Αρχαιολόγος του Αιγαίου",
-    achievementEn: "Aegean Archaeologist",
-    positiveMessageEl: "Ξεχωρίζεις κάθε πολιτισμό της Εποχής του Χαλκού!",
-    positiveMessageEn: "You tell every Bronze Age civilization apart!",
-    skillTagEl: "Πολιτισμοί Εποχής Χαλκού",
-    skillTagEn: "Bronze Age Civilizations",
+    "id": "istoria-a-gym.bronze-age-civilizations",
+    "labelEl": "Πολιτισμοί Εποχής Χαλκού",
+    "labelEn": "Bronze Age civilizations",
+    "explainEl": "Μπερδεύει τον Κυκλαδικό, τον Μινωικό και τον Μυκηναϊκό πολιτισμό μεταξύ τους, χωρίς να ξέρει ποιος αναπτύχθηκε πού.",
+    "explainEn": "Confuses the Cycladic, Minoan, and Mycenaean civilizations with each other, without knowing which developed where.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Αρχαιολόγος του Αιγαίου",
+    "achievementEn": "Aegean Archaeologist",
+    "positiveMessageEl": "Ξεχωρίζεις κάθε πολιτισμό της Εποχής του Χαλκού!",
+    "positiveMessageEn": "You tell every Bronze Age civilization apart!",
+    "skillTagEl": "Πολιτισμοί Εποχής Χαλκού",
+    "skillTagEn": "Bronze Age Civilizations"
   },
   "istoria-a-gym.archaic-democracy-path": {
-    id: "istoria-a-gym.archaic-democracy-path",
-    labelEl: "Πορεία προς τη δημοκρατία",
-    labelEn: "Path toward democracy",
-    explainEl: "Δεν γνωρίζει ότι η αθηναϊκή δημοκρατία δεν υπήρξε από την αρχή, αλλά εξελίχθηκε σταδιακά μέσα από μεταρρυθμιστές (π.χ. Σόλωνας, Κλεισθένης).",
-    explainEn: "Doesn't know Athenian democracy wasn't there from the start, but evolved gradually through reformers (e.g. Solon, Cleisthenes).",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Μεταρρυθμιστής",
-    achievementEn: "The Reformer",
-    positiveMessageEl: "Ξέρεις πώς χτίστηκε βήμα-βήμα η δημοκρατία!",
-    positiveMessageEn: "You know how democracy was built step by step!",
-    skillTagEl: "Πορεία προς τη Δημοκρατία",
-    skillTagEn: "Path to Democracy",
+    "id": "istoria-a-gym.archaic-democracy-path",
+    "labelEl": "Πορεία προς τη δημοκρατία",
+    "labelEn": "Path toward democracy",
+    "explainEl": "Δεν γνωρίζει ότι η αθηναϊκή δημοκρατία δεν υπήρξε από την αρχή, αλλά εξελίχθηκε σταδιακά μέσα από μεταρρυθμιστές (π.χ. Σόλωνας, Κλεισθένης).",
+    "explainEn": "Doesn't know Athenian democracy wasn't there from the start, but evolved gradually through reformers (e.g. Solon, Cleisthenes).",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μεταρρυθμιστής",
+    "achievementEn": "The Reformer",
+    "positiveMessageEl": "Ξέρεις πώς χτίστηκε βήμα-βήμα η δημοκρατία!",
+    "positiveMessageEn": "You know how democracy was built step by step!",
+    "skillTagEl": "Πορεία προς τη Δημοκρατία",
+    "skillTagEn": "Path to Democracy"
   },
   "istoria-a-gym.peloponnesian-war-sides": {
-    id: "istoria-a-gym.peloponnesian-war-sides",
-    labelEl: "Πελοποννησιακός Πόλεμος",
-    labelEn: "Peloponnesian War",
-    explainEl: "Δεν θυμάται ποιες πλευρές αντιπαρατέθηκαν στον Πελοποννησιακό Πόλεμο (Αθήνα εναντίον Σπάρτης και των συμμάχων τους).",
-    explainEn: "Doesn't recall which sides fought in the Peloponnesian War (Athens against Sparta and their allies).",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Στρατηγός της Αρχαίας Ελλάδας",
-    achievementEn: "Ancient Greek Strategist",
-    positiveMessageEl: "Ξέρεις ποιος πολέμησε ποιον στον Πελοποννησιακό Πόλεμο!",
-    positiveMessageEn: "You know who fought whom in the Peloponnesian War!",
-    skillTagEl: "Πελοποννησιακός Πόλεμος",
-    skillTagEn: "Peloponnesian War",
+    "id": "istoria-a-gym.peloponnesian-war-sides",
+    "labelEl": "Πελοποννησιακός Πόλεμος",
+    "labelEn": "Peloponnesian War",
+    "explainEl": "Δεν θυμάται ποιες πλευρές αντιπαρατέθηκαν στον Πελοποννησιακό Πόλεμο (Αθήνα εναντίον Σπάρτης και των συμμάχων τους).",
+    "explainEn": "Doesn't recall which sides fought in the Peloponnesian War (Athens against Sparta and their allies).",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Στρατηγός της Αρχαίας Ελλάδας",
+    "achievementEn": "Ancient Greek Strategist",
+    "positiveMessageEl": "Ξέρεις ποιος πολέμησε ποιον στον Πελοποννησιακό Πόλεμο!",
+    "positiveMessageEn": "You know who fought whom in the Peloponnesian War!",
+    "skillTagEl": "Πελοποννησιακός Πόλεμος",
+    "skillTagEn": "Peloponnesian War"
   },
   "istoria-a-gym.alexander-legacy": {
-    id: "istoria-a-gym.alexander-legacy",
-    labelEl: "Έργο Μεγάλου Αλεξάνδρου",
-    labelEn: "Alexander the Great's legacy",
-    explainEl: "Δεν αναγνωρίζει ότι το έργο του Μεγάλου Αλεξάνδρου ήταν κυρίως η διάδοση του ελληνικού πολιτισμού σε μια τεράστια έκταση (ελληνιστικός κόσμος).",
-    explainEn: "Doesn't recognize that Alexander the Great's main legacy was spreading Greek culture across a vast territory (the Hellenistic world).",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Ταξιδιώτης του Αλεξάνδρου",
-    achievementEn: "Alexander's Fellow Traveler",
-    positiveMessageEl: "Ξέρεις τι άλλαξε στον κόσμο μετά τον Μ. Αλέξανδρο!",
-    positiveMessageEn: "You know what changed in the world after Alexander!",
-    skillTagEl: "Έργο Μ. Αλεξάνδρου",
-    skillTagEn: "Alexander's Legacy",
+    "id": "istoria-a-gym.alexander-legacy",
+    "labelEl": "Έργο Μεγάλου Αλεξάνδρου",
+    "labelEn": "Alexander the Great's legacy",
+    "explainEl": "Δεν αναγνωρίζει ότι το έργο του Μεγάλου Αλεξάνδρου ήταν κυρίως η διάδοση του ελληνικού πολιτισμού σε μια τεράστια έκταση (ελληνιστικός κόσμος).",
+    "explainEn": "Doesn't recognize that Alexander the Great's main legacy was spreading Greek culture across a vast territory (the Hellenistic world).",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ταξιδιώτης του Αλεξάνδρου",
+    "achievementEn": "Alexander's Fellow Traveler",
+    "positiveMessageEl": "Ξέρεις τι άλλαξε στον κόσμο μετά τον Μ. Αλέξανδρο!",
+    "positiveMessageEn": "You know what changed in the world after Alexander!",
+    "skillTagEl": "Έργο Μ. Αλεξάνδρου",
+    "skillTagEn": "Alexander's Legacy"
   },
-
-  // ---------- ΑΓΓΛΙΚΑ Α' ΓΥΜΝΑΣΙΟΥ (A2) ----------
   "efl-a-gym.present-cont-vs-simple": {
-    id: "efl-a-gym.present-cont-vs-simple",
-    labelEl: "Present Continuous vs Simple",
-    labelEn: "Present Continuous vs Simple",
-    explainEl: "Δεν ξεχωρίζει πότε χρησιμοποιούμε Present Continuous (κάτι που συμβαίνει τώρα) και πότε Present Simple (συνήθεια).",
-    explainEn: "Doesn't distinguish when to use Present Continuous (happening now) versus Present Simple (habit).",
-    recommendedToolIds: ["duolingo"],
-    achievementEl: "Ο Ειδικός του Ενεστώτα",
-    achievementEn: "Present Tense Specialist",
-    positiveMessageEl: "Ξέρεις πότε κάτι γίνεται τώρα και πότε είναι συνήθεια!",
-    positiveMessageEn: "You know when something is happening now versus a habit!",
-    skillTagEl: "Ενεστώτας: Continuous vs Simple",
-    skillTagEn: "Present Continuous vs Simple",
+    "id": "efl-a-gym.present-cont-vs-simple",
+    "labelEl": "Present Continuous vs Simple",
+    "labelEn": "Present Continuous vs Simple",
+    "explainEl": "Δεν ξεχωρίζει πότε χρησιμοποιούμε Present Continuous (κάτι που συμβαίνει τώρα) και πότε Present Simple (συνήθεια).",
+    "explainEn": "Doesn't distinguish when to use Present Continuous (happening now) versus Present Simple (habit).",
+    "recommendedToolIds": [
+      "duolingo"
+    ],
+    "achievementEl": "Ο Ειδικός του Ενεστώτα",
+    "achievementEn": "Present Tense Specialist",
+    "positiveMessageEl": "Ξέρεις πότε κάτι γίνεται τώρα και πότε είναι συνήθεια!",
+    "positiveMessageEn": "You know when something is happening now versus a habit!",
+    "skillTagEl": "Ενεστώτας: Continuous vs Simple",
+    "skillTagEn": "Present Continuous vs Simple"
   },
   "efl-a-gym.past-cont-vs-simple": {
-    id: "efl-a-gym.past-cont-vs-simple",
-    labelEl: "Past Continuous vs Simple",
-    labelEn: "Past Continuous vs Simple",
-    explainEl: "Δεν ξεχωρίζει πότε χρησιμοποιούμε Past Continuous (κάτι που ήταν σε εξέλιξη) και πότε Past Simple (ολοκληρωμένη ενέργεια).",
-    explainEn: "Doesn't distinguish when to use Past Continuous (something in progress) versus Past Simple (a completed action).",
-    recommendedToolIds: ["duolingo"],
-    achievementEl: "Ο Ταξιδιώτης του Παρελθόντος",
-    achievementEn: "Past Tense Traveler",
-    positiveMessageEl: "Ξέρεις πότε κάτι ήταν σε εξέλιξη στο παρελθόν!",
-    positiveMessageEn: "You know when something was in progress in the past!",
-    skillTagEl: "Past Continuous vs Simple",
-    skillTagEn: "Past Continuous vs Simple",
+    "id": "efl-a-gym.past-cont-vs-simple",
+    "labelEl": "Past Continuous vs Simple",
+    "labelEn": "Past Continuous vs Simple",
+    "explainEl": "Δεν ξεχωρίζει πότε χρησιμοποιούμε Past Continuous (κάτι που ήταν σε εξέλιξη) και πότε Past Simple (ολοκληρωμένη ενέργεια).",
+    "explainEn": "Doesn't distinguish when to use Past Continuous (something in progress) versus Past Simple (a completed action).",
+    "recommendedToolIds": [
+      "duolingo"
+    ],
+    "achievementEl": "Ο Ταξιδιώτης του Παρελθόντος",
+    "achievementEn": "Past Tense Traveler",
+    "positiveMessageEl": "Ξέρεις πότε κάτι ήταν σε εξέλιξη στο παρελθόν!",
+    "positiveMessageEn": "You know when something was in progress in the past!",
+    "skillTagEl": "Past Continuous vs Simple",
+    "skillTagEn": "Past Continuous vs Simple"
   },
   "efl-a-gym.comparative-forms": {
-    id: "efl-a-gym.comparative-forms",
-    labelEl: "Σχηματισμός συγκριτικού",
-    labelEn: "Forming comparatives",
-    explainEl: "Δεν ξέρει πότε προσθέτουμε «-er» και πότε λέμε «more» για τον σχηματισμό του συγκριτικού βαθμού.",
-    explainEn: "Doesn't know when to add '-er' versus say 'more' to form the comparative.",
-    recommendedToolIds: ["duolingo"],
-    achievementEl: "Ο Μάστερ του Συγκριτικού",
-    achievementEn: "Comparative Master",
-    positiveMessageEl: "Ξέρεις πότε λες «-er» και πότε «more»!",
-    positiveMessageEn: "You know when to say '-er' and when 'more'!",
-    skillTagEl: "Συγκριτικός Βαθμός",
-    skillTagEn: "Comparative Forms",
+    "id": "efl-a-gym.comparative-forms",
+    "labelEl": "Σχηματισμός συγκριτικού",
+    "labelEn": "Forming comparatives",
+    "explainEl": "Δεν ξέρει πότε προσθέτουμε «-er» και πότε λέμε «more» για τον σχηματισμό του συγκριτικού βαθμού.",
+    "explainEn": "Doesn't know when to add '-er' versus say 'more' to form the comparative.",
+    "recommendedToolIds": [
+      "duolingo"
+    ],
+    "achievementEl": "Ο Μάστερ του Συγκριτικού",
+    "achievementEn": "Comparative Master",
+    "positiveMessageEl": "Ξέρεις πότε λες «-er» και πότε «more»!",
+    "positiveMessageEn": "You know when to say '-er' and when 'more'!",
+    "skillTagEl": "Συγκριτικός Βαθμός",
+    "skillTagEn": "Comparative Forms"
   },
   "efl-a-gym.question-word-order": {
-    id: "efl-a-gym.question-word-order",
-    labelEl: "Σειρά λέξεων σε ερώτηση",
-    labelEn: "Question word order",
-    explainEl: "Δεν σχηματίζει σωστά τη σειρά λέξεων σε ερωτήσεις με βοηθητικό ρήμα (π.χ. «Where you go?» αντί για «Where do you go?»).",
-    explainEn: "Doesn't form questions correctly with an auxiliary verb (e.g. 'Where you go?' instead of 'Where do you go?').",
-    recommendedToolIds: ["duolingo"],
-    achievementEl: "Ο Ειδικός των Ερωτήσεων",
-    achievementEn: "Question Specialist",
-    positiveMessageEl: "Σχηματίζεις σωστά κάθε ερώτηση!",
-    positiveMessageEn: "You form every question correctly!",
-    skillTagEl: "Σειρά σε Ερωτήσεις",
-    skillTagEn: "Question Word Order",
+    "id": "efl-a-gym.question-word-order",
+    "labelEl": "Σειρά λέξεων σε ερώτηση",
+    "labelEn": "Question word order",
+    "explainEl": "Δεν σχηματίζει σωστά τη σειρά λέξεων σε ερωτήσεις με βοηθητικό ρήμα (π.χ. «Where you go?» αντί για «Where do you go?»).",
+    "explainEn": "Doesn't form questions correctly with an auxiliary verb (e.g. 'Where you go?' instead of 'Where do you go?').",
+    "recommendedToolIds": [
+      "duolingo"
+    ],
+    "achievementEl": "Ο Ειδικός των Ερωτήσεων",
+    "achievementEn": "Question Specialist",
+    "positiveMessageEl": "Σχηματίζεις σωστά κάθε ερώτηση!",
+    "positiveMessageEn": "You form every question correctly!",
+    "skillTagEl": "Σειρά σε Ερωτήσεις",
+    "skillTagEn": "Question Word Order"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Β' ΓΥΜΝΑΣΙΟΥ ----------
   "math-b-gym.monomial-like-terms": {
-    id: "math-b-gym.monomial-like-terms",
-    labelEl: "Όμοιοι μονόμιοι όροι",
-    labelEn: "Like monomial terms",
-    explainEl: "Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x² ) σαν να ήταν όμοιοι όροι.",
-    explainEn: "Tries to add monomials with different variable parts (e.g. 3x + 2x²) as if they were like terms.",
-    recommendedToolIds: ["wolfram-alpha", "perplexity"],
-    achievementEl: "Ο Γνώστης των Μονωνύμων",
-    achievementEn: "Monomial Expert",
-    positiveMessageEl: "Ξέρεις ποιοι όροι μπορούν να προστεθούν μεταξύ τους!",
-    positiveMessageEn: "You know which terms can be added together!",
-    skillTagEl: "Μονώνυμα",
-    skillTagEn: "Monomials",
+    "id": "math-b-gym.monomial-like-terms",
+    "labelEl": "Όμοιοι μονόμιοι όροι",
+    "labelEn": "Like monomial terms",
+    "explainEl": "Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x² ) σαν να ήταν όμοιοι όροι.",
+    "explainEn": "Tries to add monomials with different variable parts (e.g. 3x + 2x²) as if they were like terms.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Μονωνύμων",
+    "achievementEn": "Monomial Expert",
+    "positiveMessageEl": "Ξέρεις ποιοι όροι μπορούν να προστεθούν μεταξύ τους!",
+    "positiveMessageEn": "You know which terms can be added together!",
+    "skillTagEl": "Μονώνυμα",
+    "skillTagEn": "Monomials"
   },
   "math-b-gym.identity-square-sum": {
-    id: "math-b-gym.identity-square-sum",
-    labelEl: "Ταυτότητα (α+β)²",
-    labelEn: "Identity (a+b)²",
-    explainEl: "Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
-    explainEn: "Incorrectly simplifies (a+b)² to a²+b², forgetting the cross term 2ab.",
-    recommendedToolIds: ["wolfram-alpha", "perplexity"],
-    achievementEl: "Ο Γνώστης των Ταυτοτήτων",
-    achievementEn: "Identity Expert",
-    positiveMessageEl: "Δεν ξεχνάς ποτέ τον διπλό όρο!",
-    positiveMessageEn: "You never forget the cross term!",
-    skillTagEl: "Αλγεβρικές Ταυτότητες",
-    skillTagEn: "Algebraic Identities",
+    "id": "math-b-gym.identity-square-sum",
+    "labelEl": "Ταυτότητα (α+β)²",
+    "labelEn": "Identity (a+b)²",
+    "explainEl": "Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
+    "explainEn": "Incorrectly simplifies (a+b)² to a²+b², forgetting the cross term 2ab.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Ταυτοτήτων",
+    "achievementEn": "Identity Expert",
+    "positiveMessageEl": "Δεν ξεχνάς ποτέ τον διπλό όρο!",
+    "positiveMessageEn": "You never forget the cross term!",
+    "skillTagEl": "Αλγεβρικές Ταυτότητες",
+    "skillTagEn": "Algebraic Identities"
   },
   "math-b-gym.pythagorean-application": {
-    id: "math-b-gym.pythagorean-application",
-    labelEl: "Εφαρμογή Πυθαγορείου θεωρήματος",
-    labelEn: "Applying the Pythagorean theorem",
-    explainEl: "Δεν ξέρει ποια πλευρά είναι η υποτείνουσα σε ένα ορθογώνιο τρίγωνο, και συχνά προσθέτει τα τετράγωνα λάθος πλευρών.",
-    explainEn: "Doesn't know which side is the hypotenuse in a right triangle, and often adds the squares of the wrong sides.",
-    recommendedToolIds: ["wolfram-alpha", "perplexity"],
-    achievementEl: "Ο Γεωμέτρης",
-    achievementEn: "The Geometer",
-    positiveMessageEl: "Ξέρεις πάντα ποια είναι η υποτείνουσα!",
-    positiveMessageEn: "You always know which side is the hypotenuse!",
-    skillTagEl: "Πυθαγόρειο Θεώρημα",
-    skillTagEn: "Pythagorean Theorem",
+    "id": "math-b-gym.pythagorean-application",
+    "labelEl": "Εφαρμογή Πυθαγορείου θεωρήματος",
+    "labelEn": "Applying the Pythagorean theorem",
+    "explainEl": "Δεν ξέρει ποια πλευρά είναι η υποτείνουσα σε ένα ορθογώνιο τρίγωνο, και συχνά προσθέτει τα τετράγωνα λάθος πλευρών.",
+    "explainEn": "Doesn't know which side is the hypotenuse in a right triangle, and often adds the squares of the wrong sides.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γεωμέτρης",
+    "achievementEn": "The Geometer",
+    "positiveMessageEl": "Ξέρεις πάντα ποια είναι η υποτείνουσα!",
+    "positiveMessageEn": "You always know which side is the hypotenuse!",
+    "skillTagEl": "Πυθαγόρειο Θεώρημα",
+    "skillTagEn": "Pythagorean Theorem"
   },
   "math-b-gym.linear-equation-basic": {
-    id: "math-b-gym.linear-equation-basic",
-    labelEl: "Βασική εξίσωση 1ου βαθμού",
-    labelEn: "Basic first-degree equation",
-    explainEl: "Όταν λύνει μια απλή εξίσωση, δεν εφαρμόζει την ίδια πράξη και στα δύο μέλη, χαλώντας την ισότητα.",
-    explainEn: "When solving a simple equation, doesn't apply the same operation to both sides, breaking the equality.",
-    recommendedToolIds: ["wolfram-alpha", "perplexity"],
-    achievementEl: "Ο Λύτης Εξισώσεων",
-    achievementEn: "Equation Solver",
-    positiveMessageEl: "Κρατάς πάντα την ισότητα ισορροπημένη!",
-    positiveMessageEn: "You always keep the equation balanced!",
-    skillTagEl: "Εξισώσεις 1ου Βαθμού",
-    skillTagEn: "First-Degree Equations",
+    "id": "math-b-gym.linear-equation-basic",
+    "labelEl": "Βασική εξίσωση 1ου βαθμού",
+    "labelEn": "Basic first-degree equation",
+    "explainEl": "Όταν λύνει μια απλή εξίσωση, δεν εφαρμόζει την ίδια πράξη και στα δύο μέλη, χαλώντας την ισότητα.",
+    "explainEn": "When solving a simple equation, doesn't apply the same operation to both sides, breaking the equality.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Λύτης Εξισώσεων",
+    "achievementEn": "Equation Solver",
+    "positiveMessageEl": "Κρατάς πάντα την ισότητα ισορροπημένη!",
+    "positiveMessageEn": "You always keep the equation balanced!",
+    "skillTagEl": "Εξισώσεις 1ου Βαθμού",
+    "skillTagEn": "First-Degree Equations"
   },
-
-  // ---------- ΓΛΩΣΣΑ Β' ΓΥΜΝΑΣΙΟΥ ----------
   "glossa-b-gym.essay-intro-function": {
-    id: "glossa-b-gym.essay-intro-function",
-    labelEl: "Λειτουργία πρόλογου δοκιμίου",
-    labelEn: "Function of an essay introduction",
-    explainEl: "Νομίζει ότι ο πρόλογος ενός δοκιμίου πρέπει να αναλύει ήδη το θέμα σε βάθος, αντί απλώς να το εισάγει.",
-    explainEn: "Thinks an essay's introduction should already analyze the topic in depth, instead of simply introducing it.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Εισαγωγέας Ιδεών",
-    achievementEn: "Idea Introducer",
-    positiveMessageEl: "Ξέρεις τι πρέπει να κάνει ένας καλός πρόλογος!",
-    positiveMessageEn: "You know what a good introduction should do!",
-    skillTagEl: "Πρόλογος Δοκιμίου",
-    skillTagEn: "Essay Introduction",
+    "id": "glossa-b-gym.essay-intro-function",
+    "labelEl": "Λειτουργία πρόλογου δοκιμίου",
+    "labelEn": "Function of an essay introduction",
+    "explainEl": "Νομίζει ότι ο πρόλογος ενός δοκιμίου πρέπει να αναλύει ήδη το θέμα σε βάθος, αντί απλώς να το εισάγει.",
+    "explainEn": "Thinks an essay's introduction should already analyze the topic in depth, instead of simply introducing it.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εισαγωγέας Ιδεών",
+    "achievementEn": "Idea Introducer",
+    "positiveMessageEl": "Ξέρεις τι πρέπει να κάνει ένας καλός πρόλογος!",
+    "positiveMessageEn": "You know what a good introduction should do!",
+    "skillTagEl": "Πρόλογος Δοκιμίου",
+    "skillTagEn": "Essay Introduction"
   },
   "glossa-b-gym.text-types-purpose": {
-    id: "glossa-b-gym.text-types-purpose",
-    labelEl: "Σκοπός κειμενικού είδους",
-    labelEn: "Purpose of a text type",
-    explainEl: "Δεν συνδέει το είδος ενός κειμένου (π.χ. επιστολή διαμαρτυρίας) με τον σκοπό και το ύφος που του ταιριάζει.",
-    explainEn: "Doesn't connect a text's type (e.g. a complaint letter) with the purpose and register that fits it.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης των Κειμενικών Ειδών",
-    achievementEn: "Text-Type Expert",
-    positiveMessageEl: "Ξέρεις τι σκοπό εξυπηρετεί κάθε είδος κειμένου!",
-    positiveMessageEn: "You know what purpose each text type serves!",
-    skillTagEl: "Κειμενικά Είδη",
-    skillTagEn: "Text Types",
+    "id": "glossa-b-gym.text-types-purpose",
+    "labelEl": "Σκοπός κειμενικού είδους",
+    "labelEn": "Purpose of a text type",
+    "explainEl": "Δεν συνδέει το είδος ενός κειμένου (π.χ. επιστολή διαμαρτυρίας) με τον σκοπό και το ύφος που του ταιριάζει.",
+    "explainEn": "Doesn't connect a text's type (e.g. a complaint letter) with the purpose and register that fits it.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Κειμενικών Ειδών",
+    "achievementEn": "Text-Type Expert",
+    "positiveMessageEl": "Ξέρεις τι σκοπό εξυπηρετεί κάθε είδος κειμένου!",
+    "positiveMessageEn": "You know what purpose each text type serves!",
+    "skillTagEl": "Κειμενικά Είδη",
+    "skillTagEn": "Text Types"
   },
   "glossa-b-gym.argument-vs-evidence": {
-    id: "glossa-b-gym.argument-vs-evidence",
-    labelEl: "Επιχείρημα vs Τεκμήριο",
-    labelEn: "Argument vs Evidence",
-    explainEl: "Μπερδεύει το επιχείρημα (τη γενική θέση) με το τεκμήριο (το συγκεκριμένο στοιχείο που το στηρίζει).",
-    explainEn: "Confuses the argument (the general claim) with the evidence (the specific detail that supports it).",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Δομητής Επιχειρημάτων",
-    achievementEn: "Argument Builder",
-    positiveMessageEl: "Ξεχωρίζεις τη θέση από το στοιχείο που τη στηρίζει!",
-    positiveMessageEn: "You tell the claim apart from the evidence that supports it!",
-    skillTagEl: "Επιχείρημα & Τεκμήριο",
-    skillTagEn: "Argument & Evidence",
+    "id": "glossa-b-gym.argument-vs-evidence",
+    "labelEl": "Επιχείρημα vs Τεκμήριο",
+    "labelEn": "Argument vs Evidence",
+    "explainEl": "Μπερδεύει το επιχείρημα (τη γενική θέση) με το τεκμήριο (το συγκεκριμένο στοιχείο που το στηρίζει).",
+    "explainEn": "Confuses the argument (the general claim) with the evidence (the specific detail that supports it).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Δομητής Επιχειρημάτων",
+    "achievementEn": "Argument Builder",
+    "positiveMessageEl": "Ξεχωρίζεις τη θέση από το στοιχείο που τη στηρίζει!",
+    "positiveMessageEn": "You tell the claim apart from the evidence that supports it!",
+    "skillTagEl": "Επιχείρημα & Τεκμήριο",
+    "skillTagEn": "Argument & Evidence"
   },
   "glossa-b-gym.summary-vs-opinion": {
-    id: "glossa-b-gym.summary-vs-opinion",
-    labelEl: "Περίληψη vs Σχόλιο",
-    labelEn: "Summary vs Commentary",
-    explainEl: "Μπερδεύει την αντικειμενική περίληψη ενός κειμένου με το προσωπικό σχόλιο πάνω σε αυτό.",
-    explainEn: "Confuses an objective summary of a text with personal commentary on it.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Ειδικός της Αντικειμενικότητας",
-    achievementEn: "Objectivity Expert",
-    positiveMessageEl: "Ξέρεις πότε συνοψίζεις και πότε σχολιάζεις!",
-    positiveMessageEn: "You know when you're summarizing and when you're commenting!",
-    skillTagEl: "Περίληψη & Σχόλιο",
-    skillTagEn: "Summary & Commentary",
+    "id": "glossa-b-gym.summary-vs-opinion",
+    "labelEl": "Περίληψη vs Σχόλιο",
+    "labelEn": "Summary vs Commentary",
+    "explainEl": "Μπερδεύει την αντικειμενική περίληψη ενός κειμένου με το προσωπικό σχόλιο πάνω σε αυτό.",
+    "explainEn": "Confuses an objective summary of a text with personal commentary on it.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ειδικός της Αντικειμενικότητας",
+    "achievementEn": "Objectivity Expert",
+    "positiveMessageEl": "Ξέρεις πότε συνοψίζεις και πότε σχολιάζεις!",
+    "positiveMessageEn": "You know when you're summarizing and when you're commenting!",
+    "skillTagEl": "Περίληψη & Σχόλιο",
+    "skillTagEn": "Summary & Commentary"
   },
-
-  // ---------- ΙΣΤΟΡΙΑ Β' ΓΥΜΝΑΣΙΟΥ: Ελληνιστική/Ρωμαϊκή Περίοδος ----------
   "istoria-b-gym.hellenistic-fusion": {
-    id: "istoria-b-gym.hellenistic-fusion",
-    labelEl: "Ελληνιστικός πολιτισμός",
-    labelEn: "Hellenistic culture",
-    explainEl: "Δεν καταλαβαίνει ότι ο ελληνιστικός πολιτισμός προέκυψε από τη μείξη ελληνικών και ανατολικών στοιχείων μετά τις κατακτήσεις του Αλεξάνδρου.",
-    explainEn: "Doesn't understand that Hellenistic culture arose from the blending of Greek and Eastern elements after Alexander's conquests.",
-    recommendedToolIds: ["perplexity", "chatgpt"],
-    achievementEl: "Ο Γνώστης του Ελληνισμού",
-    achievementEn: "Hellenistic Expert",
-    positiveMessageEl: "Ξέρεις πώς αναμείχθηκαν οι πολιτισμοί μετά τον Αλέξανδρο!",
-    positiveMessageEn: "You know how cultures blended after Alexander!",
-    skillTagEl: "Ελληνιστικός Πολιτισμός",
-    skillTagEn: "Hellenistic Culture",
+    "id": "istoria-b-gym.hellenistic-fusion",
+    "labelEl": "Ελληνιστικός πολιτισμός",
+    "labelEn": "Hellenistic culture",
+    "explainEl": "Δεν καταλαβαίνει ότι ο ελληνιστικός πολιτισμός προέκυψε από τη μείξη ελληνικών και ανατολικών στοιχείων μετά τις κατακτήσεις του Αλεξάνδρου.",
+    "explainEn": "Doesn't understand that Hellenistic culture arose from the blending of Greek and Eastern elements after Alexander's conquests.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης του Ελληνισμού",
+    "achievementEn": "Hellenistic Expert",
+    "positiveMessageEl": "Ξέρεις πώς αναμείχθηκαν οι πολιτισμοί μετά τον Αλέξανδρο!",
+    "positiveMessageEn": "You know how cultures blended after Alexander!",
+    "skillTagEl": "Ελληνιστικός Πολιτισμός",
+    "skillTagEn": "Hellenistic Culture"
   },
   "istoria-b-gym.rome-greece-conquest": {
-    id: "istoria-b-gym.rome-greece-conquest",
-    labelEl: "Ρωμαϊκή κατάκτηση της Ελλάδας",
-    labelEn: "Roman conquest of Greece",
-    explainEl: "Δεν γνωρίζει ότι η Ελλάδα έγινε ρωμαϊκή επαρχία, αλλά ο ελληνικός πολιτισμός συνέχισε να επηρεάζει τη Ρώμη.",
-    explainEn: "Doesn't know Greece became a Roman province, but Greek culture kept influencing Rome.",
-    recommendedToolIds: ["perplexity", "chatgpt"],
-    achievementEl: "Ο Γνώστης Ρώμης-Ελλάδας",
-    achievementEn: "Rome-Greece Expert",
-    positiveMessageEl: "Ξέρεις πώς επηρέασε ο ελληνικός πολιτισμός τη Ρώμη!",
-    positiveMessageEn: "You know how Greek culture influenced Rome!",
-    skillTagEl: "Ρωμαϊκή Κατάκτηση",
-    skillTagEn: "Roman Conquest",
+    "id": "istoria-b-gym.rome-greece-conquest",
+    "labelEl": "Ρωμαϊκή κατάκτηση της Ελλάδας",
+    "labelEn": "Roman conquest of Greece",
+    "explainEl": "Δεν γνωρίζει ότι η Ελλάδα έγινε ρωμαϊκή επαρχία, αλλά ο ελληνικός πολιτισμός συνέχισε να επηρεάζει τη Ρώμη.",
+    "explainEn": "Doesn't know Greece became a Roman province, but Greek culture kept influencing Rome.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης Ρώμης-Ελλάδας",
+    "achievementEn": "Rome-Greece Expert",
+    "positiveMessageEl": "Ξέρεις πώς επηρέασε ο ελληνικός πολιτισμός τη Ρώμη!",
+    "positiveMessageEn": "You know how Greek culture influenced Rome!",
+    "skillTagEl": "Ρωμαϊκή Κατάκτηση",
+    "skillTagEn": "Roman Conquest"
   },
   "istoria-b-gym.byzantium-transition": {
-    id: "istoria-b-gym.byzantium-transition",
-    labelEl: "Μετάβαση στο Βυζάντιο",
-    labelEn: "Transition to Byzantium",
-    explainEl: "Δεν συνδέει την ίδρυση της Κωνσταντινούπολης με τη μετατόπιση του κέντρου βάρους της Ρωμαϊκής Αυτοκρατορίας προς την Ανατολή.",
-    explainEn: "Doesn't connect the founding of Constantinople with the shift of the Roman Empire's center of gravity to the East.",
-    recommendedToolIds: ["perplexity", "chatgpt"],
-    achievementEl: "Ο Γνώστης της Μετάβασης",
-    achievementEn: "Transition Expert",
-    positiveMessageEl: "Ξέρεις πώς μετατοπίστηκε το κέντρο της αυτοκρατορίας!",
-    positiveMessageEn: "You know how the empire's center shifted!",
-    skillTagEl: "Μετάβαση στο Βυζάντιο",
-    skillTagEn: "Transition to Byzantium",
+    "id": "istoria-b-gym.byzantium-transition",
+    "labelEl": "Μετάβαση στο Βυζάντιο",
+    "labelEn": "Transition to Byzantium",
+    "explainEl": "Δεν συνδέει την ίδρυση της Κωνσταντινούπολης με τη μετατόπιση του κέντρου βάρους της Ρωμαϊκής Αυτοκρατορίας προς την Ανατολή.",
+    "explainEn": "Doesn't connect the founding of Constantinople with the shift of the Roman Empire's center of gravity to the East.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Μετάβασης",
+    "achievementEn": "Transition Expert",
+    "positiveMessageEl": "Ξέρεις πώς μετατοπίστηκε το κέντρο της αυτοκρατορίας!",
+    "positiveMessageEn": "You know how the empire's center shifted!",
+    "skillTagEl": "Μετάβαση στο Βυζάντιο",
+    "skillTagEn": "Transition to Byzantium"
   },
   "istoria-b-gym.medieval-feudalism": {
-    id: "istoria-b-gym.medieval-feudalism",
-    labelEl: "Φεουδαρχία στη Δυτική Ευρώπη",
-    labelEn: "Feudalism in Western Europe",
-    explainEl: "Δεν καταλαβαίνει τη βασική δομή του φεουδαρχικού συστήματος (άρχοντας-υποτελής-γη) στη μεσαιωνική Δυτική Ευρώπη.",
-    explainEn: "Doesn't understand the basic structure of the feudal system (lord-vassal-land) in medieval Western Europe.",
-    recommendedToolIds: ["perplexity", "chatgpt"],
-    achievementEl: "Ο Γνώστης της Φεουδαρχίας",
-    achievementEn: "Feudalism Expert",
-    positiveMessageEl: "Ξέρεις πώς λειτουργούσε η μεσαιωνική κοινωνία!",
-    positiveMessageEn: "You know how medieval society worked!",
-    skillTagEl: "Φεουδαρχία",
-    skillTagEn: "Feudalism",
+    "id": "istoria-b-gym.medieval-feudalism",
+    "labelEl": "Φεουδαρχία στη Δυτική Ευρώπη",
+    "labelEn": "Feudalism in Western Europe",
+    "explainEl": "Δεν καταλαβαίνει τη βασική δομή του φεουδαρχικού συστήματος (άρχοντας-υποτελής-γη) στη μεσαιωνική Δυτική Ευρώπη.",
+    "explainEn": "Doesn't understand the basic structure of the feudal system (lord-vassal-land) in medieval Western Europe.",
+    "recommendedToolIds": [
+      "perplexity",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Φεουδαρχίας",
+    "achievementEn": "Feudalism Expert",
+    "positiveMessageEl": "Ξέρεις πώς λειτουργούσε η μεσαιωνική κοινωνία!",
+    "positiveMessageEn": "You know how medieval society worked!",
+    "skillTagEl": "Φεουδαρχία",
+    "skillTagEn": "Feudalism"
   },
-
-  // ---------- ΑΓΓΛΙΚΑ Β' ΓΥΜΝΑΣΙΟΥ (B1) ----------
   "efl-b-gym.present-perfect-intro": {
-    id: "efl-b-gym.present-perfect-intro",
-    labelEl: "Εισαγωγή στον Present Perfect",
-    labelEn: "Introduction to Present Perfect",
-    explainEl: "Χρησιμοποιεί Past Simple αντί για Present Perfect όταν μιλάει για εμπειρίες χωρίς συγκεκριμένο χρόνο (π.χ. «I have visited Paris»).",
-    explainEn: "Uses Past Simple instead of Present Perfect when talking about experiences without a specific time (e.g. 'I have visited Paris').",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Γνώστης της Εμπειρίας",
-    achievementEn: "Experience Expert",
-    positiveMessageEl: "Ξέρεις πώς μιλάμε για εμπειρίες χωρίς συγκεκριμένο χρόνο!",
-    positiveMessageEn: "You know how to talk about experiences without a specific time!",
-    skillTagEl: "Present Perfect",
-    skillTagEn: "Present Perfect",
+    "id": "efl-b-gym.present-perfect-intro",
+    "labelEl": "Εισαγωγή στον Present Perfect",
+    "labelEn": "Introduction to Present Perfect",
+    "explainEl": "Χρησιμοποιεί Past Simple αντί για Present Perfect όταν μιλάει για εμπειρίες χωρίς συγκεκριμένο χρόνο (π.χ. «I have visited Paris»).",
+    "explainEn": "Uses Past Simple instead of Present Perfect when talking about experiences without a specific time (e.g. 'I have visited Paris').",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Εμπειρίας",
+    "achievementEn": "Experience Expert",
+    "positiveMessageEl": "Ξέρεις πώς μιλάμε για εμπειρίες χωρίς συγκεκριμένο χρόνο!",
+    "positiveMessageEn": "You know how to talk about experiences without a specific time!",
+    "skillTagEl": "Present Perfect",
+    "skillTagEn": "Present Perfect"
   },
   "efl-b-gym.modals-obligation": {
-    id: "efl-b-gym.modals-obligation",
-    labelEl: "Must vs Should",
-    labelEn: "Must vs Should",
-    explainEl: "Δεν ξεχωρίζει το «must» (ισχυρή υποχρέωση) από το «should» (συμβουλή), χρησιμοποιώντας τα σαν να σημαίνουν το ίδιο.",
-    explainEn: "Doesn't distinguish 'must' (strong obligation) from 'should' (advice), using them as if they meant the same thing.",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Γνώστης των Τροπικών",
-    achievementEn: "Modal Verb Expert",
-    positiveMessageEl: "Ξέρεις τη διαφορά ανάμεσα σε υποχρέωση και συμβουλή!",
-    positiveMessageEn: "You know the difference between obligation and advice!",
-    skillTagEl: "Must vs Should",
-    skillTagEn: "Must vs Should",
+    "id": "efl-b-gym.modals-obligation",
+    "labelEl": "Must vs Should",
+    "labelEn": "Must vs Should",
+    "explainEl": "Δεν ξεχωρίζει το «must» (ισχυρή υποχρέωση) από το «should» (συμβουλή), χρησιμοποιώντας τα σαν να σημαίνουν το ίδιο.",
+    "explainEn": "Doesn't distinguish 'must' (strong obligation) from 'should' (advice), using them as if they meant the same thing.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης των Τροπικών",
+    "achievementEn": "Modal Verb Expert",
+    "positiveMessageEl": "Ξέρεις τη διαφορά ανάμεσα σε υποχρέωση και συμβουλή!",
+    "positiveMessageEn": "You know the difference between obligation and advice!",
+    "skillTagEl": "Must vs Should",
+    "skillTagEn": "Must vs Should"
   },
   "efl-b-gym.passive-voice-intro": {
-    id: "efl-b-gym.passive-voice-intro",
-    labelEl: "Εισαγωγή στην παθητική φωνή",
-    labelEn: "Introduction to the passive voice",
-    explainEl: "Δεν αναγνωρίζει πότε μια πρόταση χρειάζεται παθητική φωνή, επειδή δεν ξέρουμε (ή δεν μας ενδιαφέρει) ποιος έκανε την ενέργεια.",
-    explainEn: "Doesn't recognize when a sentence needs the passive voice, because we don't know (or don't care) who performed the action.",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Γνώστης της Παθητικής",
-    achievementEn: "Passive Voice Expert",
-    positiveMessageEl: "Ξέρεις πότε χρειάζεται παθητική φωνή!",
-    positiveMessageEn: "You know when the passive voice is needed!",
-    skillTagEl: "Παθητική Φωνή",
-    skillTagEn: "Passive Voice",
+    "id": "efl-b-gym.passive-voice-intro",
+    "labelEl": "Εισαγωγή στην παθητική φωνή",
+    "labelEn": "Introduction to the passive voice",
+    "explainEl": "Δεν αναγνωρίζει πότε μια πρόταση χρειάζεται παθητική φωνή, επειδή δεν ξέρουμε (ή δεν μας ενδιαφέρει) ποιος έκανε την ενέργεια.",
+    "explainEn": "Doesn't recognize when a sentence needs the passive voice, because we don't know (or don't care) who performed the action.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Παθητικής",
+    "achievementEn": "Passive Voice Expert",
+    "positiveMessageEl": "Ξέρεις πότε χρειάζεται παθητική φωνή!",
+    "positiveMessageEn": "You know when the passive voice is needed!",
+    "skillTagEl": "Παθητική Φωνή",
+    "skillTagEn": "Passive Voice"
   },
   "efl-b-gym.relative-clauses": {
-    id: "efl-b-gym.relative-clauses",
-    labelEl: "Αναφορικές προτάσεις",
-    labelEn: "Relative clauses",
-    explainEl: "Μπερδεύει το «who» (για πρόσωπα) με το «which» (για πράγματα) σε αναφορικές προτάσεις.",
-    explainEn: "Confuses 'who' (for people) with 'which' (for things) in relative clauses.",
-    recommendedToolIds: ["gemini", "chatgpt"],
-    achievementEl: "Ο Γνώστης των Αναφορικών",
-    achievementEn: "Relative Clause Expert",
-    positiveMessageEl: "Ξέρεις ποια αναφορική λέξη ταιριάζει σε ποιο υποκείμενο!",
-    positiveMessageEn: "You know which relative word fits which subject!",
-    skillTagEl: "Αναφορικές Προτάσεις",
-    skillTagEn: "Relative Clauses",
+    "id": "efl-b-gym.relative-clauses",
+    "labelEl": "Αναφορικές προτάσεις",
+    "labelEn": "Relative clauses",
+    "explainEl": "Μπερδεύει το «who» (για πρόσωπα) με το «which» (για πράγματα) σε αναφορικές προτάσεις.",
+    "explainEn": "Confuses 'who' (for people) with 'which' (for things) in relative clauses.",
+    "recommendedToolIds": [
+      "gemini",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης των Αναφορικών",
+    "achievementEn": "Relative Clause Expert",
+    "positiveMessageEl": "Ξέρεις ποια αναφορική λέξη ταιριάζει σε ποιο υποκείμενο!",
+    "positiveMessageEn": "You know which relative word fits which subject!",
+    "skillTagEl": "Αναφορικές Προτάσεις",
+    "skillTagEn": "Relative Clauses"
   },
-
-  // ---------- ΦΥΣΙΚΗ Γ' ΓΥΜΝΑΣΙΟΥ ----------
   "physics-g-gym.ohms-law": {
-    id: "physics-g-gym.ohms-law",
-    labelEl: "Νόμος του Ωμ",
-    labelEn: "Ohm's Law",
-    explainEl: "Δεν καταλαβαίνει τη σχέση ανάμεσα σε τάση, ένταση και αντίσταση (V=IR), και δεν ξέρει τι συμβαίνει στην ένταση αν αυξηθεί η αντίσταση.",
-    explainEn: "Doesn't understand the relationship between voltage, current, and resistance (V=IR), and doesn't know what happens to current when resistance increases.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Γνώστης του Νόμου του Ωμ",
-    achievementEn: "Ohm's Law Expert",
-    positiveMessageEl: "Ξέρεις πώς συνδέονται τάση, ένταση και αντίσταση!",
-    positiveMessageEn: "You know how voltage, current, and resistance connect!",
-    skillTagEl: "Νόμος του Ωμ",
-    skillTagEn: "Ohm's Law",
+    "id": "physics-g-gym.ohms-law",
+    "labelEl": "Νόμος του Ωμ",
+    "labelEn": "Ohm's Law",
+    "explainEl": "Δεν καταλαβαίνει τη σχέση ανάμεσα σε τάση, ένταση και αντίσταση (V=IR), και δεν ξέρει τι συμβαίνει στην ένταση αν αυξηθεί η αντίσταση.",
+    "explainEn": "Doesn't understand the relationship between voltage, current, and resistance (V=IR), and doesn't know what happens to current when resistance increases.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης του Νόμου του Ωμ",
+    "achievementEn": "Ohm's Law Expert",
+    "positiveMessageEl": "Ξέρεις πώς συνδέονται τάση, ένταση και αντίσταση!",
+    "positiveMessageEn": "You know how voltage, current, and resistance connect!",
+    "skillTagEl": "Νόμος του Ωμ",
+    "skillTagEn": "Ohm's Law"
   },
   "physics-g-gym.speed-velocity-formula": {
-    id: "physics-g-gym.speed-velocity-formula",
-    labelEl: "Τύπος ταχύτητας",
-    labelEn: "Speed formula",
-    explainEl: "Μπερδεύει τον τύπο της ταχύτητας (απόσταση/χρόνος), εφαρμόζοντάς τον λανθασμένα σε προβλήματα κίνησης.",
-    explainEn: "Confuses the speed formula (distance/time), applying it incorrectly in motion problems.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Γνώστης της Ταχύτητας",
-    achievementEn: "Speed Expert",
-    positiveMessageEl: "Εφαρμόζεις σωστά τον τύπο της ταχύτητας!",
-    positiveMessageEn: "You apply the speed formula correctly!",
-    skillTagEl: "Ταχύτητα",
-    skillTagEn: "Speed",
+    "id": "physics-g-gym.speed-velocity-formula",
+    "labelEl": "Τύπος ταχύτητας",
+    "labelEn": "Speed formula",
+    "explainEl": "Μπερδεύει τον τύπο της ταχύτητας (απόσταση/χρόνος), εφαρμόζοντάς τον λανθασμένα σε προβλήματα κίνησης.",
+    "explainEn": "Confuses the speed formula (distance/time), applying it incorrectly in motion problems.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Γνώστης της Ταχύτητας",
+    "achievementEn": "Speed Expert",
+    "positiveMessageEl": "Εφαρμόζεις σωστά τον τύπο της ταχύτητας!",
+    "positiveMessageEn": "You apply the speed formula correctly!",
+    "skillTagEl": "Ταχύτητα",
+    "skillTagEn": "Speed"
   },
   "physics-g-gym.energy-transformation": {
-    id: "physics-g-gym.energy-transformation",
-    labelEl: "Μετατροπή ενέργειας",
-    labelEn: "Energy transformation",
-    explainEl: "Δεν αναγνωρίζει τις μετατροπές ενέργειας σε καθημερινές συσκευές (π.χ. ηλεκτρική σε φωτεινή/θερμική).",
-    explainEn: "Doesn't recognize energy transformations in everyday devices (e.g. electrical to light/heat).",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt"],
-    achievementEl: "Ο Ιχνηλάτης της Ενέργειας",
-    achievementEn: "Energy Tracker",
-    positiveMessageEl: "Βλέπεις πώς μετατρέπεται η ενέργεια γύρω σου!",
-    positiveMessageEn: "You see how energy transforms all around you!",
-    skillTagEl: "Μετατροπή Ενέργειας",
-    skillTagEn: "Energy Transformation",
+    "id": "physics-g-gym.energy-transformation",
+    "labelEl": "Μετατροπή ενέργειας",
+    "labelEn": "Energy transformation",
+    "explainEl": "Δεν αναγνωρίζει τις μετατροπές ενέργειας σε καθημερινές συσκευές (π.χ. ηλεκτρική σε φωτεινή/θερμική).",
+    "explainEn": "Doesn't recognize energy transformations in everyday devices (e.g. electrical to light/heat).",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt"
+    ],
+    "achievementEl": "Ο Ιχνηλάτης της Ενέργειας",
+    "achievementEn": "Energy Tracker",
+    "positiveMessageEl": "Βλέπεις πώς μετατρέπεται η ενέργεια γύρω σου!",
+    "positiveMessageEn": "You see how energy transforms all around you!",
+    "skillTagEl": "Μετατροπή Ενέργειας",
+    "skillTagEn": "Energy Transformation"
   },
-
-  // ---------- ΧΗΜΕΙΑ Γ' ΓΥΜΝΑΣΙΟΥ ----------
   "chimeia-g-gym.element-vs-compound": {
-    id: "chimeia-g-gym.element-vs-compound",
-    labelEl: "Στοιχείο vs Ένωση",
-    labelEn: "Element vs Compound",
-    explainEl: "Μπερδεύει το χημικό στοιχείο (ένα είδος ατόμου) με τη χημική ένωση (συνδυασμός διαφορετικών ατόμων).",
-    explainEn: "Confuses a chemical element (one type of atom) with a chemical compound (a combination of different atoms).",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha"],
-    achievementEl: "Ο Γνώστης της Ύλης",
-    achievementEn: "Matter Expert",
-    positiveMessageEl: "Ξεχωρίζεις στοιχεία από ενώσεις!",
-    positiveMessageEn: "You tell elements from compounds!",
-    skillTagEl: "Στοιχεία & Ενώσεις",
-    skillTagEn: "Elements & Compounds",
+    "id": "chimeia-g-gym.element-vs-compound",
+    "labelEl": "Στοιχείο vs Ένωση",
+    "labelEn": "Element vs Compound",
+    "explainEl": "Μπερδεύει το χημικό στοιχείο (ένα είδος ατόμου) με τη χημική ένωση (συνδυασμός διαφορετικών ατόμων).",
+    "explainEn": "Confuses a chemical element (one type of atom) with a chemical compound (a combination of different atoms).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Γνώστης της Ύλης",
+    "achievementEn": "Matter Expert",
+    "positiveMessageEl": "Ξεχωρίζεις στοιχεία από ενώσεις!",
+    "positiveMessageEn": "You tell elements from compounds!",
+    "skillTagEl": "Στοιχεία & Ενώσεις",
+    "skillTagEn": "Elements & Compounds"
   },
   "chimeia-g-gym.mixture-vs-compound": {
-    id: "chimeia-g-gym.mixture-vs-compound",
-    labelEl: "Μείγμα vs Ένωση",
-    labelEn: "Mixture vs Compound",
-    explainEl: "Δεν ξεχωρίζει ένα μείγμα (τα συστατικά διατηρούν τις ιδιότητές τους) από μια χημική ένωση (νέα ουσία με νέες ιδιότητες).",
-    explainEn: "Doesn't distinguish a mixture (components keep their properties) from a chemical compound (a new substance with new properties).",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha"],
-    achievementEl: "Ο Χημικός Ερευνητής",
-    achievementEn: "Chemistry Researcher",
-    positiveMessageEl: "Ξέρεις τη διαφορά ανάμεσα σε μείγμα και ένωση!",
-    positiveMessageEn: "You know the difference between a mixture and a compound!",
-    skillTagEl: "Μείγματα & Ενώσεις",
-    skillTagEn: "Mixtures & Compounds",
+    "id": "chimeia-g-gym.mixture-vs-compound",
+    "labelEl": "Μείγμα vs Ένωση",
+    "labelEn": "Mixture vs Compound",
+    "explainEl": "Δεν ξεχωρίζει ένα μείγμα (τα συστατικά διατηρούν τις ιδιότητές τους) από μια χημική ένωση (νέα ουσία με νέες ιδιότητες).",
+    "explainEn": "Doesn't distinguish a mixture (components keep their properties) from a chemical compound (a new substance with new properties).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Χημικός Ερευνητής",
+    "achievementEn": "Chemistry Researcher",
+    "positiveMessageEl": "Ξέρεις τη διαφορά ανάμεσα σε μείγμα και ένωση!",
+    "positiveMessageEn": "You know the difference between a mixture and a compound!",
+    "skillTagEl": "Μείγματα & Ενώσεις",
+    "skillTagEn": "Mixtures & Compounds"
   },
   "chimeia-g-gym.atom-structure": {
-    id: "chimeia-g-gym.atom-structure",
-    labelEl: "Δομή του ατόμου",
-    labelEn: "Structure of the atom",
-    explainEl: "Δεν θυμάται πού βρίσκονται τα πρωτόνια, τα νετρόνια και τα ηλεκτρόνια μέσα στο άτομο.",
-    explainEn: "Doesn't recall where protons, neutrons, and electrons are located within the atom.",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha"],
-    achievementEl: "Ο Εξερευνητής του Ατόμου",
-    achievementEn: "Atom Explorer",
-    positiveMessageEl: "Ξέρεις τι υπάρχει μέσα σε κάθε άτομο!",
-    positiveMessageEn: "You know what's inside every atom!",
-    skillTagEl: "Δομή Ατόμου",
-    skillTagEn: "Atomic Structure",
+    "id": "chimeia-g-gym.atom-structure",
+    "labelEl": "Δομή του ατόμου",
+    "labelEn": "Structure of the atom",
+    "explainEl": "Δεν θυμάται πού βρίσκονται τα πρωτόνια, τα νετρόνια και τα ηλεκτρόνια μέσα στο άτομο.",
+    "explainEn": "Doesn't recall where protons, neutrons, and electrons are located within the atom.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "wolfram-alpha"
+    ],
+    "achievementEl": "Ο Εξερευνητής του Ατόμου",
+    "achievementEn": "Atom Explorer",
+    "positiveMessageEl": "Ξέρεις τι υπάρχει μέσα σε κάθε άτομο!",
+    "positiveMessageEn": "You know what's inside every atom!",
+    "skillTagEl": "Δομή Ατόμου",
+    "skillTagEn": "Atomic Structure"
   },
-
-  // ================================================================
-  // ΝΕΑ GAP TAGS — ΕΠΕΚΤΑΣΗ ΔΕΞΑΜΕΝΗΣ ΕΡΩΤΗΣΕΩΝ ΔΗΜΟΤΙΚΟΥ (Μαθηματικά + Γλώσσα, Α'-ΣΤ')
-  // ================================================================
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Α' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "math-a-dim.ordinal-numbers": {
-    id: "math-a-dim.ordinal-numbers",
-    labelEl: "Τακτικοί αριθμοί",
-    labelEn: "Ordinal numbers",
-    explainEl: "Μπερδεύει τους τακτικούς αριθμούς (πρώτος, δεύτερος, τρίτος) με τους απλούς απαριθμητικούς (ένα, δύο, τρία).",
-    explainEn: "Confuses ordinal numbers (first, second, third) with plain counting numbers (one, two, three).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Σειράς",
-    achievementEn: "Order Expert",
-    positiveMessageEl: "Ξέρεις ποιος είναι πρώτος, δεύτερος και τρίτος!",
-    positiveMessageEn: "You know who's first, second, and third!",
-    skillTagEl: "Τακτικοί Αριθμοί",
-    skillTagEn: "Ordinal Numbers",
+    "id": "math-a-dim.ordinal-numbers",
+    "labelEl": "Τακτικοί αριθμοί",
+    "labelEn": "Ordinal numbers",
+    "explainEl": "Μπερδεύει τους τακτικούς αριθμούς (πρώτος, δεύτερος, τρίτος) με τους απλούς απαριθμητικούς (ένα, δύο, τρία).",
+    "explainEn": "Confuses ordinal numbers (first, second, third) with plain counting numbers (one, two, three).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Σειράς",
+    "achievementEn": "Order Expert",
+    "positiveMessageEl": "Ξέρεις ποιος είναι πρώτος, δεύτερος και τρίτος!",
+    "positiveMessageEn": "You know who's first, second, and third!",
+    "skillTagEl": "Τακτικοί Αριθμοί",
+    "skillTagEn": "Ordinal Numbers"
   },
   "math-a-dim.length-comparison": {
-    id: "math-a-dim.length-comparison",
-    labelEl: "Σύγκριση μήκους",
-    labelEn: "Comparing length",
-    explainEl: "Δυσκολεύεται να συγκρίνει το μήκος δύο αντικειμένων όταν δεν είναι τοποθετημένα δίπλα-δίπλα με την ίδια αφετηρία.",
-    explainEn: "Struggles to compare the length of two objects when they aren't aligned at the same starting point.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μετρητής του Μήκους",
-    achievementEn: "Length Comparer",
-    positiveMessageEl: "Ξέρεις ποιο αντικείμενο είναι πιο μακρύ!",
-    positiveMessageEn: "You know which object is longer!",
-    skillTagEl: "Σύγκριση Μήκους",
-    skillTagEn: "Length Comparison",
+    "id": "math-a-dim.length-comparison",
+    "labelEl": "Σύγκριση μήκους",
+    "labelEn": "Comparing length",
+    "explainEl": "Δυσκολεύεται να συγκρίνει το μήκος δύο αντικειμένων όταν δεν είναι τοποθετημένα δίπλα-δίπλα με την ίδια αφετηρία.",
+    "explainEn": "Struggles to compare the length of two objects when they aren't aligned at the same starting point.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μετρητής του Μήκους",
+    "achievementEn": "Length Comparer",
+    "positiveMessageEl": "Ξέρεις ποιο αντικείμενο είναι πιο μακρύ!",
+    "positiveMessageEn": "You know which object is longer!",
+    "skillTagEl": "Σύγκριση Μήκους",
+    "skillTagEn": "Length Comparison"
   },
   "math-a-dim.subtraction-crossing-ten": {
-    id: "math-a-dim.subtraction-crossing-ten",
-    labelEl: "Αφαίρεση με πέρασμα δεκάδας",
-    labelEn: "Subtraction crossing ten",
-    explainEl: "Δυσκολεύεται στην αφαίρεση όταν χρειάζεται να «σπάσει» τη δεκάδα (π.χ. 13-5), γιατί δεν έχει ακόμα σταθερή στρατηγική.",
-    explainEn: "Struggles with subtraction when it requires 'breaking' the ten (e.g. 13-5), without a stable strategy yet.",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ήρωας της Αφαίρεσης",
-    achievementEn: "Subtraction Hero",
-    positiveMessageEl: "Ξέρεις πώς να «σπάσεις» τη δεκάδα όταν χρειάζεται!",
-    positiveMessageEn: "You know how to break the ten when you need to!",
-    skillTagEl: "Αφαίρεση με Πέρασμα",
-    skillTagEn: "Subtraction Crossing Ten",
+    "id": "math-a-dim.subtraction-crossing-ten",
+    "labelEl": "Αφαίρεση με πέρασμα δεκάδας",
+    "labelEn": "Subtraction crossing ten",
+    "explainEl": "Δυσκολεύεται στην αφαίρεση όταν χρειάζεται να «σπάσει» τη δεκάδα (π.χ. 13-5), γιατί δεν έχει ακόμα σταθερή στρατηγική.",
+    "explainEn": "Struggles with subtraction when it requires 'breaking' the ten (e.g. 13-5), without a stable strategy yet.",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ήρωας της Αφαίρεσης",
+    "achievementEn": "Subtraction Hero",
+    "positiveMessageEl": "Ξέρεις πώς να «σπάσεις» τη δεκάδα όταν χρειάζεται!",
+    "positiveMessageEn": "You know how to break the ten when you need to!",
+    "skillTagEl": "Αφαίρεση με Πέρασμα",
+    "skillTagEn": "Subtraction Crossing Ten"
   },
   "math-a-dim.coin-recognition": {
-    id: "math-a-dim.coin-recognition",
-    labelEl: "Αναγνώριση νομισμάτων",
-    labelEn: "Coin recognition",
-    explainEl: "Δεν αναγνωρίζει την αξία απλών νομισμάτων (π.χ. μπερδεύει το κέρμα του 1 λεπτού με του 1 ευρώ βάσει μεγέθους μόνο).",
-    explainEn: "Doesn't recognize the value of simple coins (e.g. confuses a 1-cent coin with a €1 coin based on size alone).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μικρός Ταμίας",
-    achievementEn: "The Little Cashier",
-    positiveMessageEl: "Ξέρεις την αξία κάθε νομίσματος!",
-    positiveMessageEn: "You know the value of every coin!",
-    skillTagEl: "Νομίσματα",
-    skillTagEn: "Coins",
+    "id": "math-a-dim.coin-recognition",
+    "labelEl": "Αναγνώριση νομισμάτων",
+    "labelEn": "Coin recognition",
+    "explainEl": "Δεν αναγνωρίζει την αξία απλών νομισμάτων (π.χ. μπερδεύει το κέρμα του 1 λεπτού με του 1 ευρώ βάσει μεγέθους μόνο).",
+    "explainEn": "Doesn't recognize the value of simple coins (e.g. confuses a 1-cent coin with a €1 coin based on size alone).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μικρός Ταμίας",
+    "achievementEn": "The Little Cashier",
+    "positiveMessageEl": "Ξέρεις την αξία κάθε νομίσματος!",
+    "positiveMessageEn": "You know the value of every coin!",
+    "skillTagEl": "Νομίσματα",
+    "skillTagEn": "Coins"
   },
-
-  // ---------- ΓΛΩΣΣΑ Α' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "glossa-a-dim.rhyming-words": {
-    id: "glossa-a-dim.rhyming-words",
-    labelEl: "Ομοιοκαταληξία",
-    labelEn: "Rhyming words",
-    explainEl: "Δεν αναγνωρίζει πότε δύο λέξεις κάνουν ομοιοκαταληξία (τελειώνουν με τον ίδιο ήχο).",
-    explainEn: "Doesn't recognize when two words rhyme (end with the same sound).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μικρός Ποιητής",
-    achievementEn: "The Little Poet",
-    positiveMessageEl: "Ακούς τις λέξεις που ταιριάζουν στον ήχο τους!",
-    positiveMessageEn: "You can hear which words sound alike!",
-    skillTagEl: "Ομοιοκαταληξία",
-    skillTagEn: "Rhyming",
+    "id": "glossa-a-dim.rhyming-words",
+    "labelEl": "Ομοιοκαταληξία",
+    "labelEn": "Rhyming words",
+    "explainEl": "Δεν αναγνωρίζει πότε δύο λέξεις κάνουν ομοιοκαταληξία (τελειώνουν με τον ίδιο ήχο).",
+    "explainEn": "Doesn't recognize when two words rhyme (end with the same sound).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μικρός Ποιητής",
+    "achievementEn": "The Little Poet",
+    "positiveMessageEl": "Ακούς τις λέξεις που ταιριάζουν στον ήχο τους!",
+    "positiveMessageEn": "You can hear which words sound alike!",
+    "skillTagEl": "Ομοιοκαταληξία",
+    "skillTagEn": "Rhyming"
   },
   "glossa-a-dim.singular-plural-verb": {
-    id: "glossa-a-dim.singular-plural-verb",
-    labelEl: "Συμφωνία ρήματος-υποκειμένου (ενικός/πληθυντικός)",
-    labelEn: "Verb-subject agreement (singular/plural)",
-    explainEl: "Δεν συμφωνεί τον αριθμό του ρήματος με το υποκείμενο (π.χ. «τα παιδιά παίζει» αντί για «παίζουν»).",
-    explainEn: "Doesn't match the verb's number with the subject (e.g. 'the children plays' instead of 'play').",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Συμφωνίας",
-    achievementEn: "Agreement Expert",
-    positiveMessageEl: "Το ρήμα σου ταιριάζει πάντα με το υποκείμενο!",
-    positiveMessageEn: "Your verb always matches the subject!",
-    skillTagEl: "Συμφωνία Ρήματος",
-    skillTagEn: "Verb Agreement",
+    "id": "glossa-a-dim.singular-plural-verb",
+    "labelEl": "Συμφωνία ρήματος-υποκειμένου (ενικός/πληθυντικός)",
+    "labelEn": "Verb-subject agreement (singular/plural)",
+    "explainEl": "Δεν συμφωνεί τον αριθμό του ρήματος με το υποκείμενο (π.χ. «τα παιδιά παίζει» αντί για «παίζουν»).",
+    "explainEn": "Doesn't match the verb's number with the subject (e.g. 'the children plays' instead of 'play').",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Συμφωνίας",
+    "achievementEn": "Agreement Expert",
+    "positiveMessageEl": "Το ρήμα σου ταιριάζει πάντα με το υποκείμενο!",
+    "positiveMessageEn": "Your verb always matches the subject!",
+    "skillTagEl": "Συμφωνία Ρήματος",
+    "skillTagEn": "Verb Agreement"
   },
   "glossa-a-dim.question-mark-usage": {
-    id: "glossa-a-dim.question-mark-usage",
-    labelEl: "Χρήση ερωτηματικού",
-    labelEn: "Using the question mark",
-    explainEl: "Δεν αναγνωρίζει πότε μια πρόταση είναι ερώτηση και χρειάζεται ερωτηματικό στο τέλος.",
-    explainEn: "Doesn't recognize when a sentence is a question and needs a question mark at the end.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ρωτηματίας",
-    achievementEn: "The Question Asker",
-    positiveMessageEl: "Ξέρεις πότε μια πρόταση ρωτάει κάτι!",
-    positiveMessageEn: "You know when a sentence is asking something!",
-    skillTagEl: "Ερωτηματικό",
-    skillTagEn: "Question Mark",
+    "id": "glossa-a-dim.question-mark-usage",
+    "labelEl": "Χρήση ερωτηματικού",
+    "labelEn": "Using the question mark",
+    "explainEl": "Δεν αναγνωρίζει πότε μια πρόταση είναι ερώτηση και χρειάζεται ερωτηματικό στο τέλος.",
+    "explainEn": "Doesn't recognize when a sentence is a question and needs a question mark at the end.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ρωτηματίας",
+    "achievementEn": "The Question Asker",
+    "positiveMessageEl": "Ξέρεις πότε μια πρόταση ρωτάει κάτι!",
+    "positiveMessageEn": "You know when a sentence is asking something!",
+    "skillTagEl": "Ερωτηματικό",
+    "skillTagEn": "Question Mark"
   },
   "glossa-a-dim.opposite-words-basic": {
-    id: "glossa-a-dim.opposite-words-basic",
-    labelEl: "Απλά αντίθετα",
-    labelEn: "Basic opposites",
-    explainEl: "Δεν αναγνωρίζει απλά ζευγάρια αντίθετων λέξεων (μεγάλος/μικρός, ζεστός/κρύος).",
-    explainEn: "Doesn't recognize simple pairs of opposite words (big/small, hot/cold).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Κυνηγός των Αντιθέτων",
-    achievementEn: "Opposites Hunter",
-    positiveMessageEl: "Ξέρεις τι είναι το αντίθετο κάθε λέξης!",
-    positiveMessageEn: "You know the opposite of every word!",
-    skillTagEl: "Αντίθετες Λέξεις",
-    skillTagEn: "Opposite Words",
+    "id": "glossa-a-dim.opposite-words-basic",
+    "labelEl": "Απλά αντίθετα",
+    "labelEn": "Basic opposites",
+    "explainEl": "Δεν αναγνωρίζει απλά ζευγάρια αντίθετων λέξεων (μεγάλος/μικρός, ζεστός/κρύος).",
+    "explainEn": "Doesn't recognize simple pairs of opposite words (big/small, hot/cold).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Κυνηγός των Αντιθέτων",
+    "achievementEn": "Opposites Hunter",
+    "positiveMessageEl": "Ξέρεις τι είναι το αντίθετο κάθε λέξης!",
+    "positiveMessageEn": "You know the opposite of every word!",
+    "skillTagEl": "Αντίθετες Λέξεις",
+    "skillTagEn": "Opposite Words"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Β' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "math-b-dim.addition-two-digit-no-carry": {
-    id: "math-b-dim.addition-two-digit-no-carry",
-    labelEl: "Πρόσθεση διψήφιων χωρίς κρατούμενο",
-    labelEn: "Two-digit addition without carrying",
-    explainEl: "Δεν προσθέτει σωστά δεκάδες με δεκάδες και μονάδες με μονάδες όταν προσθέτει δύο διψήφιους αριθμούς.",
-    explainEn: "Doesn't correctly add tens with tens and ones with ones when adding two two-digit numbers.",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μάστερ της Στήλης",
-    achievementEn: "Column Master",
-    positiveMessageEl: "Προσθέτεις δεκάδες με δεκάδες και μονάδες με μονάδες σαν έμπειρος!",
-    positiveMessageEn: "You add tens with tens and ones with ones like a pro!",
-    skillTagEl: "Πρόσθεση Διψήφιων",
-    skillTagEn: "Two-Digit Addition",
+    "id": "math-b-dim.addition-two-digit-no-carry",
+    "labelEl": "Πρόσθεση διψήφιων χωρίς κρατούμενο",
+    "labelEn": "Two-digit addition without carrying",
+    "explainEl": "Δεν προσθέτει σωστά δεκάδες με δεκάδες και μονάδες με μονάδες όταν προσθέτει δύο διψήφιους αριθμούς.",
+    "explainEn": "Doesn't correctly add tens with tens and ones with ones when adding two two-digit numbers.",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μάστερ της Στήλης",
+    "achievementEn": "Column Master",
+    "positiveMessageEl": "Προσθέτεις δεκάδες με δεκάδες και μονάδες με μονάδες σαν έμπειρος!",
+    "positiveMessageEn": "You add tens with tens and ones with ones like a pro!",
+    "skillTagEl": "Πρόσθεση Διψήφιων",
+    "skillTagEn": "Two-Digit Addition"
   },
   "math-b-dim.subtraction-two-digit-borrow": {
-    id: "math-b-dim.subtraction-two-digit-borrow",
-    labelEl: "Αφαίρεση διψήφιων με δανεικό",
-    labelEn: "Two-digit subtraction with borrowing",
-    explainEl: "Δεν ξέρει τι να κάνει όταν το ψηφίο των μονάδων του αφαιρετέου είναι μεγαλύτερο από του μειωτέου (χρειάζεται «δανεικό» από τη δεκάδα).",
-    explainEn: "Doesn't know what to do when the ones digit being subtracted is bigger than the ones digit it's subtracted from (needs to 'borrow' from the tens).",
-    recommendedToolIds: ["photomath", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Δανειστής της Δεκάδας",
-    achievementEn: "Ten's Lender",
-    positiveMessageEl: "Ξέρεις πώς να «δανειστείς» από τη δεκάδα!",
-    positiveMessageEn: "You know how to borrow from the tens place!",
-    skillTagEl: "Αφαίρεση με Δανεικό",
-    skillTagEn: "Subtraction with Borrowing",
+    "id": "math-b-dim.subtraction-two-digit-borrow",
+    "labelEl": "Αφαίρεση διψήφιων με δανεικό",
+    "labelEn": "Two-digit subtraction with borrowing",
+    "explainEl": "Δεν ξέρει τι να κάνει όταν το ψηφίο των μονάδων του αφαιρετέου είναι μεγαλύτερο από του μειωτέου (χρειάζεται «δανεικό» από τη δεκάδα).",
+    "explainEn": "Doesn't know what to do when the ones digit being subtracted is bigger than the ones digit it's subtracted from (needs to 'borrow' from the tens).",
+    "recommendedToolIds": [
+      "photomath",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Δανειστής της Δεκάδας",
+    "achievementEn": "Ten's Lender",
+    "positiveMessageEl": "Ξέρεις πώς να «δανειστείς» από τη δεκάδα!",
+    "positiveMessageEn": "You know how to borrow from the tens place!",
+    "skillTagEl": "Αφαίρεση με Δανεικό",
+    "skillTagEn": "Subtraction with Borrowing"
   },
   "math-b-dim.even-odd-numbers": {
-    id: "math-b-dim.even-odd-numbers",
-    labelEl: "Ζυγοί και μονοί αριθμοί",
-    labelEn: "Even and odd numbers",
-    explainEl: "Δεν ξεχωρίζει ζυγούς από μονούς αριθμούς, ειδικά σε μεγαλύτερους αριθμούς (π.χ. νομίζει ότι το 24 είναι μονός).",
-    explainEn: "Doesn't distinguish even from odd numbers, especially in bigger numbers (e.g. thinks 24 is odd).",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης Ζυγού-Μονού",
-    achievementEn: "Even-Odd Expert",
-    positiveMessageEl: "Ξέρεις αμέσως αν ένας αριθμός είναι ζυγός ή μονός!",
-    positiveMessageEn: "You instantly know if a number is even or odd!",
-    skillTagEl: "Ζυγοί & Μονοί",
-    skillTagEn: "Even & Odd",
+    "id": "math-b-dim.even-odd-numbers",
+    "labelEl": "Ζυγοί και μονοί αριθμοί",
+    "labelEn": "Even and odd numbers",
+    "explainEl": "Δεν ξεχωρίζει ζυγούς από μονούς αριθμούς, ειδικά σε μεγαλύτερους αριθμούς (π.χ. νομίζει ότι το 24 είναι μονός).",
+    "explainEn": "Doesn't distinguish even from odd numbers, especially in bigger numbers (e.g. thinks 24 is odd).",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης Ζυγού-Μονού",
+    "achievementEn": "Even-Odd Expert",
+    "positiveMessageEl": "Ξέρεις αμέσως αν ένας αριθμός είναι ζυγός ή μονός!",
+    "positiveMessageEn": "You instantly know if a number is even or odd!",
+    "skillTagEl": "Ζυγοί & Μονοί",
+    "skillTagEn": "Even & Odd"
   },
   "math-b-dim.simple-graph-reading": {
-    id: "math-b-dim.simple-graph-reading",
-    labelEl: "Ανάγνωση απλού ραβδογράμματος",
-    labelEn: "Reading a simple bar graph",
-    explainEl: "Δυσκολεύεται να διαβάσει τιμές από ένα απλό ραβδόγραμμα, μπερδεύοντας το ύψος της ράβδου με τον αριθμό.",
-    explainEn: "Struggles to read values from a simple bar graph, confusing bar height with the actual number.",
-    recommendedToolIds: ["geogebra", "khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Αναγνώστης Γραφημάτων",
-    achievementEn: "Graph Reader",
-    positiveMessageEl: "Διαβάζεις γραφήματα σαν μικρός επιστήμονας!",
-    positiveMessageEn: "You read graphs like a little scientist!",
-    skillTagEl: "Ραβδογράμματα",
-    skillTagEn: "Bar Graphs",
+    "id": "math-b-dim.simple-graph-reading",
+    "labelEl": "Ανάγνωση απλού ραβδογράμματος",
+    "labelEn": "Reading a simple bar graph",
+    "explainEl": "Δυσκολεύεται να διαβάσει τιμές από ένα απλό ραβδόγραμμα, μπερδεύοντας το ύψος της ράβδου με τον αριθμό.",
+    "explainEn": "Struggles to read values from a simple bar graph, confusing bar height with the actual number.",
+    "recommendedToolIds": [
+      "geogebra",
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Αναγνώστης Γραφημάτων",
+    "achievementEn": "Graph Reader",
+    "positiveMessageEl": "Διαβάζεις γραφήματα σαν μικρός επιστήμονας!",
+    "positiveMessageEn": "You read graphs like a little scientist!",
+    "skillTagEl": "Ραβδογράμματα",
+    "skillTagEn": "Bar Graphs"
   },
-
-  // ---------- ΓΛΩΣΣΑ Β' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "glossa-b-dim.capital-letter-proper-nouns": {
-    id: "glossa-b-dim.capital-letter-proper-nouns",
-    labelEl: "Κεφαλαίο σε κύρια ονόματα",
-    labelEn: "Capital letters for proper nouns",
-    explainEl: "Δεν γράφει με κεφαλαίο τα κύρια ονόματα (ονόματα ανθρώπων, πόλεων) μέσα σε μια πρόταση.",
-    explainEn: "Doesn't capitalize proper nouns (names of people, cities) within a sentence.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Φύλακας των Κεφαλαίων",
-    achievementEn: "Capital Letter Guardian",
-    positiveMessageEl: "Ξέρεις ποια ονόματα παίρνουν πάντα κεφαλαίο!",
-    positiveMessageEn: "You know which names always get a capital letter!",
-    skillTagEl: "Κύρια Ονόματα",
-    skillTagEn: "Proper Nouns",
+    "id": "glossa-b-dim.capital-letter-proper-nouns",
+    "labelEl": "Κεφαλαίο σε κύρια ονόματα",
+    "labelEn": "Capital letters for proper nouns",
+    "explainEl": "Δεν γράφει με κεφαλαίο τα κύρια ονόματα (ονόματα ανθρώπων, πόλεων) μέσα σε μια πρόταση.",
+    "explainEn": "Doesn't capitalize proper nouns (names of people, cities) within a sentence.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Φύλακας των Κεφαλαίων",
+    "achievementEn": "Capital Letter Guardian",
+    "positiveMessageEl": "Ξέρεις ποια ονόματα παίρνουν πάντα κεφαλαίο!",
+    "positiveMessageEn": "You know which names always get a capital letter!",
+    "skillTagEl": "Κύρια Ονόματα",
+    "skillTagEn": "Proper Nouns"
   },
   "glossa-b-dim.compound-word-basic": {
-    id: "glossa-b-dim.compound-word-basic",
-    labelEl: "Απλές σύνθετες λέξεις",
-    labelEn: "Basic compound words",
-    explainEl: "Δεν αναγνωρίζει ότι μια σύνθετη λέξη αποτελείται από δύο μικρότερες λέξεις (π.χ. «ανοιχτήρι» = ανοίγω + -τήρι).",
-    explainEn: "Doesn't recognize that a compound word is made of two smaller words.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Χτίστης Λέξεων",
-    achievementEn: "Word Builder",
-    positiveMessageEl: "Βλέπεις τα μικρά κομμάτια μέσα σε μεγάλες λέξεις!",
-    positiveMessageEn: "You see the small pieces inside big words!",
-    skillTagEl: "Σύνθετες Λέξεις",
-    skillTagEn: "Compound Words",
+    "id": "glossa-b-dim.compound-word-basic",
+    "labelEl": "Απλές σύνθετες λέξεις",
+    "labelEn": "Basic compound words",
+    "explainEl": "Δεν αναγνωρίζει ότι μια σύνθετη λέξη αποτελείται από δύο μικρότερες λέξεις (π.χ. «ανοιχτήρι» = ανοίγω + -τήρι).",
+    "explainEn": "Doesn't recognize that a compound word is made of two smaller words.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Χτίστης Λέξεων",
+    "achievementEn": "Word Builder",
+    "positiveMessageEl": "Βλέπεις τα μικρά κομμάτια μέσα σε μεγάλες λέξεις!",
+    "positiveMessageEn": "You see the small pieces inside big words!",
+    "skillTagEl": "Σύνθετες Λέξεις",
+    "skillTagEn": "Compound Words"
   },
   "glossa-b-dim.sentence-vs-fragment": {
-    id: "glossa-b-dim.sentence-vs-fragment",
-    labelEl: "Πλήρης πρόταση vs απόσπασμα",
-    labelEn: "Complete sentence vs fragment",
-    explainEl: "Δεν ξεχωρίζει μια πλήρη πρόταση (έχει υποκείμενο και ρήμα) από ένα απόσπασμα χωρίς νόημα μόνο του.",
-    explainEn: "Doesn't distinguish a complete sentence (has subject and verb) from a fragment that doesn't stand alone.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Πλήρους Πρότασης",
-    achievementEn: "Complete Sentence Expert",
-    positiveMessageEl: "Ξέρεις πότε μια πρόταση είναι πραγματικά πλήρης!",
-    positiveMessageEn: "You know when a sentence is truly complete!",
-    skillTagEl: "Πλήρης Πρόταση",
-    skillTagEn: "Complete Sentences",
+    "id": "glossa-b-dim.sentence-vs-fragment",
+    "labelEl": "Πλήρης πρόταση vs απόσπασμα",
+    "labelEn": "Complete sentence vs fragment",
+    "explainEl": "Δεν ξεχωρίζει μια πλήρη πρόταση (έχει υποκείμενο και ρήμα) από ένα απόσπασμα χωρίς νόημα μόνο του.",
+    "explainEn": "Doesn't distinguish a complete sentence (has subject and verb) from a fragment that doesn't stand alone.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Πλήρους Πρότασης",
+    "achievementEn": "Complete Sentence Expert",
+    "positiveMessageEl": "Ξέρεις πότε μια πρόταση είναι πραγματικά πλήρης!",
+    "positiveMessageEn": "You know when a sentence is truly complete!",
+    "skillTagEl": "Πλήρης Πρόταση",
+    "skillTagEn": "Complete Sentences"
   },
   "glossa-b-dim.dialogue-punctuation": {
-    id: "glossa-b-dim.dialogue-punctuation",
-    labelEl: "Στίξη διαλόγου",
-    labelEn: "Dialogue punctuation",
-    explainEl: "Δεν χρησιμοποιεί εισαγωγικά ή παύλες όταν γράφει τι είπε κάποιος σε έναν διάλογο.",
-    explainEn: "Doesn't use quotation marks or dashes when writing what someone said in a dialogue.",
-    recommendedToolIds: ["khan-academy-kids", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Διαλόγου",
-    achievementEn: "Dialogue Expert",
-    positiveMessageEl: "Ξέρεις πώς να γράψεις τι είπε κάποιος!",
-    positiveMessageEn: "You know how to write what someone said!",
-    skillTagEl: "Στίξη Διαλόγου",
-    skillTagEn: "Dialogue Punctuation",
+    "id": "glossa-b-dim.dialogue-punctuation",
+    "labelEl": "Στίξη διαλόγου",
+    "labelEn": "Dialogue punctuation",
+    "explainEl": "Δεν χρησιμοποιεί εισαγωγικά ή παύλες όταν γράφει τι είπε κάποιος σε έναν διάλογο.",
+    "explainEn": "Doesn't use quotation marks or dashes when writing what someone said in a dialogue.",
+    "recommendedToolIds": [
+      "khan-academy-kids",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Διαλόγου",
+    "achievementEn": "Dialogue Expert",
+    "positiveMessageEl": "Ξέρεις πώς να γράψεις τι είπε κάποιος!",
+    "positiveMessageEn": "You know how to write what someone said!",
+    "skillTagEl": "Στίξη Διαλόγου",
+    "skillTagEn": "Dialogue Punctuation"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Γ' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "math-c-dim.multiplication-two-digit-by-one": {
-    id: "math-c-dim.multiplication-two-digit-by-one",
-    labelEl: "Πολλαπλασιασμός διψήφιου επί μονοψήφιο",
-    labelEn: "Two-digit by one-digit multiplication",
-    explainEl: "Δεν πολλαπλασιάζει σωστά κάθε ψηφίο ξεχωριστά όταν πολλαπλασιάζει διψήφιο αριθμό με μονοψήφιο.",
-    explainEn: "Doesn't correctly multiply each digit separately when multiplying a two-digit number by a one-digit number.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Πολλαπλασιαστής",
-    achievementEn: "The Multiplier",
-    positiveMessageEl: "Πολλαπλασιάζεις διψήφιους αριθμούς με σιγουριά!",
-    positiveMessageEn: "You multiply two-digit numbers with confidence!",
-    skillTagEl: "Πολλαπλασιασμός Διψήφιου",
-    skillTagEn: "Two-Digit Multiplication",
+    "id": "math-c-dim.multiplication-two-digit-by-one",
+    "labelEl": "Πολλαπλασιασμός διψήφιου επί μονοψήφιο",
+    "labelEn": "Two-digit by one-digit multiplication",
+    "explainEl": "Δεν πολλαπλασιάζει σωστά κάθε ψηφίο ξεχωριστά όταν πολλαπλασιάζει διψήφιο αριθμό με μονοψήφιο.",
+    "explainEn": "Doesn't correctly multiply each digit separately when multiplying a two-digit number by a one-digit number.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Πολλαπλασιαστής",
+    "achievementEn": "The Multiplier",
+    "positiveMessageEl": "Πολλαπλασιάζεις διψήφιους αριθμούς με σιγουριά!",
+    "positiveMessageEn": "You multiply two-digit numbers with confidence!",
+    "skillTagEl": "Πολλαπλασιασμός Διψήφιου",
+    "skillTagEn": "Two-Digit Multiplication"
   },
   "math-c-dim.weight-units": {
-    id: "math-c-dim.weight-units",
-    labelEl: "Μονάδες βάρους",
-    labelEn: "Units of weight",
-    explainEl: "Μπερδεύει το κιλό με το γραμμάριο, δεν ξέρει ότι 1 κιλό = 1000 γραμμάρια.",
-    explainEn: "Confuses kilograms with grams, not knowing that 1 kg = 1000 grams.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ζυγιστής",
-    achievementEn: "The Weigher",
-    positiveMessageEl: "Ξέρεις πόσα γραμμάρια χωράει ένα κιλό!",
-    positiveMessageEn: "You know exactly how many grams fit in a kilogram!",
-    skillTagEl: "Μονάδες Βάρους",
-    skillTagEn: "Units of Weight",
+    "id": "math-c-dim.weight-units",
+    "labelEl": "Μονάδες βάρους",
+    "labelEn": "Units of weight",
+    "explainEl": "Μπερδεύει το κιλό με το γραμμάριο, δεν ξέρει ότι 1 κιλό = 1000 γραμμάρια.",
+    "explainEn": "Confuses kilograms with grams, not knowing that 1 kg = 1000 grams.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ζυγιστής",
+    "achievementEn": "The Weigher",
+    "positiveMessageEl": "Ξέρεις πόσα γραμμάρια χωράει ένα κιλό!",
+    "positiveMessageEn": "You know exactly how many grams fit in a kilogram!",
+    "skillTagEl": "Μονάδες Βάρους",
+    "skillTagEn": "Units of Weight"
   },
   "math-c-dim.remainder-meaning": {
-    id: "math-c-dim.remainder-meaning",
-    labelEl: "Έννοια του υπολοίπου",
-    labelEn: "Meaning of the remainder",
-    explainEl: "Δεν καταλαβαίνει τι σημαίνει το υπόλοιπο σε μια διαίρεση — ότι είναι όσα «περισσεύουν» και δεν χωράνε σε ίσα μερίδια.",
-    explainEn: "Doesn't understand what the remainder in a division means — the amount 'left over' that doesn't fit into equal groups.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Υπολοίπου",
-    achievementEn: "Remainder Expert",
-    positiveMessageEl: "Ξέρεις τι σημαίνει πραγματικά το υπόλοιπο!",
-    positiveMessageEn: "You know what a remainder really means!",
-    skillTagEl: "Υπόλοιπο",
-    skillTagEn: "Remainder",
+    "id": "math-c-dim.remainder-meaning",
+    "labelEl": "Έννοια του υπολοίπου",
+    "labelEn": "Meaning of the remainder",
+    "explainEl": "Δεν καταλαβαίνει τι σημαίνει το υπόλοιπο σε μια διαίρεση — ότι είναι όσα «περισσεύουν» και δεν χωράνε σε ίσα μερίδια.",
+    "explainEn": "Doesn't understand what the remainder in a division means — the amount 'left over' that doesn't fit into equal groups.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Υπολοίπου",
+    "achievementEn": "Remainder Expert",
+    "positiveMessageEl": "Ξέρεις τι σημαίνει πραγματικά το υπόλοιπο!",
+    "positiveMessageEn": "You know what a remainder really means!",
+    "skillTagEl": "Υπόλοιπο",
+    "skillTagEn": "Remainder"
   },
   "math-c-dim.simple-fraction-recognition": {
-    id: "math-c-dim.simple-fraction-recognition",
-    labelEl: "Αναγνώριση απλού κλάσματος",
-    labelEn: "Recognizing simple fractions",
-    explainEl: "Δεν αναγνωρίζει οπτικά το μισό ή το τέταρτο ενός σχήματος όταν δεν είναι χωρισμένο σε ίσα μέρη με τον συνηθισμένο τρόπο.",
-    explainEn: "Doesn't visually recognize half or a quarter of a shape when it's divided into equal parts in an unfamiliar way.",
-    recommendedToolIds: ["geogebra", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Εξερευνητής των Κλασμάτων",
-    achievementEn: "Fraction Explorer",
-    positiveMessageEl: "Βλέπεις το μισό και το τέταρτο σε κάθε σχήμα!",
-    positiveMessageEn: "You can spot halves and quarters in any shape!",
-    skillTagEl: "Απλά Κλάσματα",
-    skillTagEn: "Simple Fractions",
+    "id": "math-c-dim.simple-fraction-recognition",
+    "labelEl": "Αναγνώριση απλού κλάσματος",
+    "labelEn": "Recognizing simple fractions",
+    "explainEl": "Δεν αναγνωρίζει οπτικά το μισό ή το τέταρτο ενός σχήματος όταν δεν είναι χωρισμένο σε ίσα μέρη με τον συνηθισμένο τρόπο.",
+    "explainEn": "Doesn't visually recognize half or a quarter of a shape when it's divided into equal parts in an unfamiliar way.",
+    "recommendedToolIds": [
+      "geogebra",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εξερευνητής των Κλασμάτων",
+    "achievementEn": "Fraction Explorer",
+    "positiveMessageEl": "Βλέπεις το μισό και το τέταρτο σε κάθε σχήμα!",
+    "positiveMessageEn": "You can spot halves and quarters in any shape!",
+    "skillTagEl": "Απλά Κλάσματα",
+    "skillTagEn": "Simple Fractions"
   },
-
-  // ---------- ΓΛΩΣΣΑ Γ' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "glossa-c-dim.verb-tense-consistency": {
-    id: "glossa-c-dim.verb-tense-consistency",
-    labelEl: "Συνέπεια χρόνου στην αφήγηση",
-    labelEn: "Tense consistency in narration",
-    explainEl: "Αλλάζει χρόνο ρήματος μέσα στην ίδια αφήγηση χωρίς λόγο (π.χ. ξεκινά σε παρελθόντα και μπερδεύεται σε ενεστώτα).",
-    explainEn: "Switches verb tense within the same narration without reason (e.g. starts in past, drifts into present).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Φύλακας του Χρόνου",
-    achievementEn: "Tense Guardian",
-    positiveMessageEl: "Κρατάς τον ίδιο χρόνο σε όλη την ιστορία σου!",
-    positiveMessageEn: "You keep the same tense throughout your story!",
-    skillTagEl: "Συνέπεια Χρόνου",
-    skillTagEn: "Tense Consistency",
+    "id": "glossa-c-dim.verb-tense-consistency",
+    "labelEl": "Συνέπεια χρόνου στην αφήγηση",
+    "labelEn": "Tense consistency in narration",
+    "explainEl": "Αλλάζει χρόνο ρήματος μέσα στην ίδια αφήγηση χωρίς λόγο (π.χ. ξεκινά σε παρελθόντα και μπερδεύεται σε ενεστώτα).",
+    "explainEn": "Switches verb tense within the same narration without reason (e.g. starts in past, drifts into present).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Φύλακας του Χρόνου",
+    "achievementEn": "Tense Guardian",
+    "positiveMessageEl": "Κρατάς τον ίδιο χρόνο σε όλη την ιστορία σου!",
+    "positiveMessageEn": "You keep the same tense throughout your story!",
+    "skillTagEl": "Συνέπεια Χρόνου",
+    "skillTagEn": "Tense Consistency"
   },
   "glossa-c-dim.comma-in-list": {
-    id: "glossa-c-dim.comma-in-list",
-    labelEl: "Κόμμα σε απαρίθμηση",
-    labelEn: "Comma in a list",
-    explainEl: "Δεν βάζει κόμματα ανάμεσα σε στοιχεία μιας λίστας (π.χ. «Αγόρασα μήλα πορτοκάλια μπανάνες»).",
-    explainEn: "Doesn't place commas between items in a list.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ειδικός της Απαρίθμησης",
-    achievementEn: "Listing Expert",
-    positiveMessageEl: "Ξέρεις πού βάζεις κόμμα σε μια λίστα!",
-    positiveMessageEn: "You know where commas go in a list!",
-    skillTagEl: "Κόμμα σε Λίστα",
-    skillTagEn: "Comma in Lists",
+    "id": "glossa-c-dim.comma-in-list",
+    "labelEl": "Κόμμα σε απαρίθμηση",
+    "labelEn": "Comma in a list",
+    "explainEl": "Δεν βάζει κόμματα ανάμεσα σε στοιχεία μιας λίστας (π.χ. «Αγόρασα μήλα πορτοκάλια μπανάνες»).",
+    "explainEn": "Doesn't place commas between items in a list.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ειδικός της Απαρίθμησης",
+    "achievementEn": "Listing Expert",
+    "positiveMessageEl": "Ξέρεις πού βάζεις κόμμα σε μια λίστα!",
+    "positiveMessageEn": "You know where commas go in a list!",
+    "skillTagEl": "Κόμμα σε Λίστα",
+    "skillTagEn": "Comma in Lists"
   },
   "glossa-c-dim.homophone-basic": {
-    id: "glossa-c-dim.homophone-basic",
-    labelEl: "Απλές ομόηχες λέξεις",
-    labelEn: "Basic homophones",
-    explainEl: "Μπερδεύει απλές ομόηχες λέξεις που γράφονται διαφορετικά αλλά ακούγονται ίδια (π.χ. «μία» αριθμητικό vs «μια» άρθρο).",
-    explainEn: "Confuses simple homophones that are spelled differently but sound the same.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Κυνηγός των Ομόηχων",
-    achievementEn: "Homophone Hunter",
-    positiveMessageEl: "Ξεχωρίζεις λέξεις που ακούγονται ίδια αλλά γράφονται διαφορετικά!",
-    positiveMessageEn: "You tell apart words that sound the same but are spelled differently!",
-    skillTagEl: "Ομόηχες Λέξεις",
-    skillTagEn: "Homophones",
+    "id": "glossa-c-dim.homophone-basic",
+    "labelEl": "Απλές ομόηχες λέξεις",
+    "labelEn": "Basic homophones",
+    "explainEl": "Μπερδεύει απλές ομόηχες λέξεις που γράφονται διαφορετικά αλλά ακούγονται ίδια (π.χ. «μία» αριθμητικό vs «μια» άρθρο).",
+    "explainEn": "Confuses simple homophones that are spelled differently but sound the same.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Κυνηγός των Ομόηχων",
+    "achievementEn": "Homophone Hunter",
+    "positiveMessageEl": "Ξεχωρίζεις λέξεις που ακούγονται ίδια αλλά γράφονται διαφορετικά!",
+    "positiveMessageEn": "You tell apart words that sound the same but are spelled differently!",
+    "skillTagEl": "Ομόηχες Λέξεις",
+    "skillTagEn": "Homophones"
   },
   "glossa-c-dim.title-choice": {
-    id: "glossa-c-dim.title-choice",
-    labelEl: "Επιλογή κατάλληλου τίτλου",
-    labelEn: "Choosing a fitting title",
-    explainEl: "Διαλέγει τίτλο για ένα κείμενο που είναι πολύ γενικός ή άσχετος με το περιεχόμενο, αντί να αντικατοπτρίζει την κύρια ιδέα.",
-    explainEn: "Picks a title for a text that's too generic or unrelated to the content, instead of reflecting the main idea.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Δημιουργός Τίτλων",
-    achievementEn: "Title Creator",
-    positiveMessageEl: "Διαλέγεις τίτλους που ταιριάζουν ακριβώς στο κείμενο!",
-    positiveMessageEn: "You pick titles that fit the text perfectly!",
-    skillTagEl: "Επιλογή Τίτλου",
-    skillTagEn: "Title Choice",
+    "id": "glossa-c-dim.title-choice",
+    "labelEl": "Επιλογή κατάλληλου τίτλου",
+    "labelEn": "Choosing a fitting title",
+    "explainEl": "Διαλέγει τίτλο για ένα κείμενο που είναι πολύ γενικός ή άσχετος με το περιεχόμενο, αντί να αντικατοπτρίζει την κύρια ιδέα.",
+    "explainEn": "Picks a title for a text that's too generic or unrelated to the content, instead of reflecting the main idea.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Δημιουργός Τίτλων",
+    "achievementEn": "Title Creator",
+    "positiveMessageEl": "Διαλέγεις τίτλους που ταιριάζουν ακριβώς στο κείμενο!",
+    "positiveMessageEn": "You pick titles that fit the text perfectly!",
+    "skillTagEl": "Επιλογή Τίτλου",
+    "skillTagEn": "Title Choice"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Δ' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "math-d-dim.fraction-simplify-basic": {
-    id: "math-d-dim.fraction-simplify-basic",
-    labelEl: "Απλοποίηση κλάσματος",
-    labelEn: "Simplifying a fraction",
-    explainEl: "Δεν καταλαβαίνει ότι ένα κλάσμα μπορεί να γραφτεί πιο απλά διαιρώντας αριθμητή και παρονομαστή με τον ίδιο αριθμό.",
-    explainEn: "Doesn't understand that a fraction can be written more simply by dividing numerator and denominator by the same number.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Απλοποιητής",
-    achievementEn: "The Simplifier",
-    positiveMessageEl: "Ξέρεις να κάνεις ένα κλάσμα πιο απλό!",
-    positiveMessageEn: "You know how to make a fraction simpler!",
-    skillTagEl: "Απλοποίηση Κλασμάτων",
-    skillTagEn: "Simplifying Fractions",
+    "id": "math-d-dim.fraction-simplify-basic",
+    "labelEl": "Απλοποίηση κλάσματος",
+    "labelEn": "Simplifying a fraction",
+    "explainEl": "Δεν καταλαβαίνει ότι ένα κλάσμα μπορεί να γραφτεί πιο απλά διαιρώντας αριθμητή και παρονομαστή με τον ίδιο αριθμό.",
+    "explainEn": "Doesn't understand that a fraction can be written more simply by dividing numerator and denominator by the same number.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Απλοποιητής",
+    "achievementEn": "The Simplifier",
+    "positiveMessageEl": "Ξέρεις να κάνεις ένα κλάσμα πιο απλό!",
+    "positiveMessageEn": "You know how to make a fraction simpler!",
+    "skillTagEl": "Απλοποίηση Κλασμάτων",
+    "skillTagEn": "Simplifying Fractions"
   },
   "math-d-dim.decimal-compare": {
-    id: "math-d-dim.decimal-compare",
-    labelEl: "Σύγκριση δεκαδικών",
-    labelEn: "Comparing decimals",
-    explainEl: "Νομίζει ότι ο δεκαδικός με περισσότερα ψηφία είναι πάντα ο μεγαλύτερος (π.χ. πιστεύει ότι 0,25 > 0,3).",
-    explainEn: "Thinks the decimal with more digits is always bigger (e.g. believes 0.25 > 0.3).",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Κριτής των Δεκαδικών",
-    achievementEn: "Decimal Judge",
-    positiveMessageEl: "Ξέρεις ποιος δεκαδικός είναι πραγματικά μεγαλύτερος!",
-    positiveMessageEn: "You know which decimal is really bigger!",
-    skillTagEl: "Σύγκριση Δεκαδικών",
-    skillTagEn: "Comparing Decimals",
+    "id": "math-d-dim.decimal-compare",
+    "labelEl": "Σύγκριση δεκαδικών",
+    "labelEn": "Comparing decimals",
+    "explainEl": "Νομίζει ότι ο δεκαδικός με περισσότερα ψηφία είναι πάντα ο μεγαλύτερος (π.χ. πιστεύει ότι 0,25 > 0,3).",
+    "explainEn": "Thinks the decimal with more digits is always bigger (e.g. believes 0.25 > 0.3).",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Κριτής των Δεκαδικών",
+    "achievementEn": "Decimal Judge",
+    "positiveMessageEl": "Ξέρεις ποιος δεκαδικός είναι πραγματικά μεγαλύτερος!",
+    "positiveMessageEn": "You know which decimal is really bigger!",
+    "skillTagEl": "Σύγκριση Δεκαδικών",
+    "skillTagEn": "Comparing Decimals"
   },
   "math-d-dim.area-basic-concept": {
-    id: "math-d-dim.area-basic-concept",
-    labelEl: "Βασική έννοια εμβαδού",
-    labelEn: "Basic concept of area",
-    explainEl: "Δεν καταλαβαίνει το εμβαδόν ως πλήθος τετραγωνικών μονάδων που καλύπτουν ένα σχήμα, μπερδεύοντάς το με την περίμετρο.",
-    explainEn: "Doesn't understand area as the number of square units covering a shape, confusing it with perimeter.",
-    recommendedToolIds: ["geogebra", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Μετρητής της Επιφάνειας",
-    achievementEn: "Surface Measurer",
-    positiveMessageEl: "Ξέρεις να μετράς πόσο χώρο καλύπτει ένα σχήμα!",
-    positiveMessageEn: "You know how to measure how much space a shape covers!",
-    skillTagEl: "Έννοια Εμβαδού",
-    skillTagEn: "Concept of Area",
+    "id": "math-d-dim.area-basic-concept",
+    "labelEl": "Βασική έννοια εμβαδού",
+    "labelEn": "Basic concept of area",
+    "explainEl": "Δεν καταλαβαίνει το εμβαδόν ως πλήθος τετραγωνικών μονάδων που καλύπτουν ένα σχήμα, μπερδεύοντάς το με την περίμετρο.",
+    "explainEn": "Doesn't understand area as the number of square units covering a shape, confusing it with perimeter.",
+    "recommendedToolIds": [
+      "geogebra",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Μετρητής της Επιφάνειας",
+    "achievementEn": "Surface Measurer",
+    "positiveMessageEl": "Ξέρεις να μετράς πόσο χώρο καλύπτει ένα σχήμα!",
+    "positiveMessageEn": "You know how to measure how much space a shape covers!",
+    "skillTagEl": "Έννοια Εμβαδού",
+    "skillTagEn": "Concept of Area"
   },
   "math-d-dim.multiplication-by-10-100": {
-    id: "math-d-dim.multiplication-by-10-100",
-    labelEl: "Πολλαπλασιασμός με 10 και 100",
-    labelEn: "Multiplying by 10 and 100",
-    explainEl: "Δεν έχει καταλάβει τον κανόνα προσθήκης μηδενικών όταν πολλαπλασιάζει με το 10 ή το 100.",
-    explainEn: "Hasn't grasped the rule of adding zeros when multiplying by 10 or 100.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γρήγορος Πολλαπλασιαστής",
-    achievementEn: "Fast Multiplier",
-    positiveMessageEl: "Πολλαπλασιάζεις με 10 και 100 αστραπιαία!",
-    positiveMessageEn: "You multiply by 10 and 100 in a flash!",
-    skillTagEl: "Πολλαπλασιασμός με 10/100",
-    skillTagEn: "Multiplying by 10/100",
+    "id": "math-d-dim.multiplication-by-10-100",
+    "labelEl": "Πολλαπλασιασμός με 10 και 100",
+    "labelEn": "Multiplying by 10 and 100",
+    "explainEl": "Δεν έχει καταλάβει τον κανόνα προσθήκης μηδενικών όταν πολλαπλασιάζει με το 10 ή το 100.",
+    "explainEn": "Hasn't grasped the rule of adding zeros when multiplying by 10 or 100.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γρήγορος Πολλαπλασιαστής",
+    "achievementEn": "Fast Multiplier",
+    "positiveMessageEl": "Πολλαπλασιάζεις με 10 και 100 αστραπιαία!",
+    "positiveMessageEn": "You multiply by 10 and 100 in a flash!",
+    "skillTagEl": "Πολλαπλασιασμός με 10/100",
+    "skillTagEn": "Multiplying by 10/100"
   },
-
-  // ---------- ΓΛΩΣΣΑ Δ' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "glossa-d-dim.subject-predicate": {
-    id: "glossa-d-dim.subject-predicate",
-    labelEl: "Υποκείμενο και κατηγόρημα",
-    labelEn: "Subject and predicate",
-    explainEl: "Δεν αναγνωρίζει το υποκείμενο (ποιος κάνει την ενέργεια) και το κατηγόρημα (τι λέει γι' αυτόν) μέσα σε μια πρόταση.",
-    explainEn: "Doesn't identify the subject (who does the action) and predicate (what's said about them) in a sentence.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Αναλυτής της Πρότασης",
-    achievementEn: "Sentence Analyst",
-    positiveMessageEl: "Ξέρεις να βρίσκεις το υποκείμενο και το κατηγόρημα!",
-    positiveMessageEn: "You know how to find the subject and predicate!",
-    skillTagEl: "Υποκείμενο & Κατηγόρημα",
-    skillTagEn: "Subject & Predicate",
+    "id": "glossa-d-dim.subject-predicate",
+    "labelEl": "Υποκείμενο και κατηγόρημα",
+    "labelEn": "Subject and predicate",
+    "explainEl": "Δεν αναγνωρίζει το υποκείμενο (ποιος κάνει την ενέργεια) και το κατηγόρημα (τι λέει γι' αυτόν) μέσα σε μια πρόταση.",
+    "explainEn": "Doesn't identify the subject (who does the action) and predicate (what's said about them) in a sentence.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Αναλυτής της Πρότασης",
+    "achievementEn": "Sentence Analyst",
+    "positiveMessageEl": "Ξέρεις να βρίσκεις το υποκείμενο και το κατηγόρημα!",
+    "positiveMessageEn": "You know how to find the subject and predicate!",
+    "skillTagEl": "Υποκείμενο & Κατηγόρημα",
+    "skillTagEn": "Subject & Predicate"
   },
   "glossa-d-dim.paragraph-main-idea": {
-    id: "glossa-d-dim.paragraph-main-idea",
-    labelEl: "Κύρια ιδέα παραγράφου",
-    labelEn: "Main idea of a paragraph",
-    explainEl: "Δεν εντοπίζει την κύρια ιδέα μιας παραγράφου, εστιάζοντας αντί αυτού σε μια δευτερεύουσα λεπτομέρεια.",
-    explainEn: "Doesn't identify a paragraph's main idea, focusing instead on a minor detail.",
-    recommendedToolIds: ["mindmup", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Εντοπιστής της Ιδέας",
-    achievementEn: "Main Idea Spotter",
-    positiveMessageEl: "Βρίσκεις πάντα το πιο σημαντικό σημείο μιας παραγράφου!",
-    positiveMessageEn: "You always find the most important point in a paragraph!",
-    skillTagEl: "Κύρια Ιδέα",
-    skillTagEn: "Main Idea",
+    "id": "glossa-d-dim.paragraph-main-idea",
+    "labelEl": "Κύρια ιδέα παραγράφου",
+    "labelEn": "Main idea of a paragraph",
+    "explainEl": "Δεν εντοπίζει την κύρια ιδέα μιας παραγράφου, εστιάζοντας αντί αυτού σε μια δευτερεύουσα λεπτομέρεια.",
+    "explainEn": "Doesn't identify a paragraph's main idea, focusing instead on a minor detail.",
+    "recommendedToolIds": [
+      "mindmup",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εντοπιστής της Ιδέας",
+    "achievementEn": "Main Idea Spotter",
+    "positiveMessageEl": "Βρίσκεις πάντα το πιο σημαντικό σημείο μιας παραγράφου!",
+    "positiveMessageEn": "You always find the most important point in a paragraph!",
+    "skillTagEl": "Κύρια Ιδέα",
+    "skillTagEn": "Main Idea"
   },
   "glossa-d-dim.conjunction-choice": {
-    id: "glossa-d-dim.conjunction-choice",
-    labelEl: "Επιλογή κατάλληλου συνδέσμου",
-    labelEn: "Choosing the right conjunction",
-    explainEl: "Χρησιμοποιεί τον ίδιο σύνδεσμο («και») για όλες τις σχέσεις ανάμεσα σε προτάσεις, αντί να διαλέγει τον κατάλληλο (αλλά, γιατί, όμως).",
-    explainEn: "Uses the same connector ('and') for all relationships between sentences, instead of choosing the right one (but, because, however).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Επιλογέας Συνδέσμων",
-    achievementEn: "Conjunction Chooser",
-    positiveMessageEl: "Διαλέγεις πάντα τον σύνδεσμο που ταιριάζει!",
-    positiveMessageEn: "You always pick the connector that fits!",
-    skillTagEl: "Επιλογή Συνδέσμου",
-    skillTagEn: "Choosing Conjunctions",
+    "id": "glossa-d-dim.conjunction-choice",
+    "labelEl": "Επιλογή κατάλληλου συνδέσμου",
+    "labelEn": "Choosing the right conjunction",
+    "explainEl": "Χρησιμοποιεί τον ίδιο σύνδεσμο («και») για όλες τις σχέσεις ανάμεσα σε προτάσεις, αντί να διαλέγει τον κατάλληλο (αλλά, γιατί, όμως).",
+    "explainEn": "Uses the same connector ('and') for all relationships between sentences, instead of choosing the right one (but, because, however).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Επιλογέας Συνδέσμων",
+    "achievementEn": "Conjunction Chooser",
+    "positiveMessageEl": "Διαλέγεις πάντα τον σύνδεσμο που ταιριάζει!",
+    "positiveMessageEn": "You always pick the connector that fits!",
+    "skillTagEl": "Επιλογή Συνδέσμου",
+    "skillTagEn": "Choosing Conjunctions"
   },
   "glossa-d-dim.formal-informal-greeting": {
-    id: "glossa-d-dim.formal-informal-greeting",
-    labelEl: "Επίσημος vs ανεπίσημος χαιρετισμός",
-    labelEn: "Formal vs informal greeting",
-    explainEl: "Χρησιμοποιεί ανεπίσημο χαιρετισμό («Γεια σου») σε επιστολή προς άγνωστο ενήλικα, αντί για επίσημο («Αγαπητέ κύριε»).",
-    explainEn: "Uses an informal greeting ('Hi') in a letter to an unfamiliar adult, instead of a formal one ('Dear Sir').",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Επιστολής",
-    achievementEn: "Letter Expert",
-    positiveMessageEl: "Ξέρεις πώς να χαιρετήσεις σωστά σε κάθε περίσταση!",
-    positiveMessageEn: "You know how to greet correctly in every situation!",
-    skillTagEl: "Χαιρετισμός Επιστολής",
-    skillTagEn: "Letter Greeting",
+    "id": "glossa-d-dim.formal-informal-greeting",
+    "labelEl": "Επίσημος vs ανεπίσημος χαιρετισμός",
+    "labelEn": "Formal vs informal greeting",
+    "explainEl": "Χρησιμοποιεί ανεπίσημο χαιρετισμό («Γεια σου») σε επιστολή προς άγνωστο ενήλικα, αντί για επίσημο («Αγαπητέ κύριε»).",
+    "explainEn": "Uses an informal greeting ('Hi') in a letter to an unfamiliar adult, instead of a formal one ('Dear Sir').",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Επιστολής",
+    "achievementEn": "Letter Expert",
+    "positiveMessageEl": "Ξέρεις πώς να χαιρετήσεις σωστά σε κάθε περίσταση!",
+    "positiveMessageEn": "You know how to greet correctly in every situation!",
+    "skillTagEl": "Χαιρετισμός Επιστολής",
+    "skillTagEn": "Letter Greeting"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ Ε' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "math-e-dim.multiply-fraction-whole": {
-    id: "math-e-dim.multiply-fraction-whole",
-    labelEl: "Πολλαπλασιασμός κλάσματος με ακέραιο",
-    labelEn: "Multiplying a fraction by a whole number",
-    explainEl: "Δεν ξέρει ότι όταν πολλαπλασιάζει κλάσμα με ακέραιο, πολλαπλασιάζει μόνο τον αριθμητή, κρατώντας τον παρονομαστή σταθερό.",
-    explainEn: "Doesn't know that multiplying a fraction by a whole number only multiplies the numerator, keeping the denominator fixed.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ειδικός των Κλασμάτων",
-    achievementEn: "Fraction Specialist",
-    positiveMessageEl: "Πολλαπλασιάζεις κλάσματα με ακέραιους με σιγουριά!",
-    positiveMessageEn: "You multiply fractions by whole numbers with confidence!",
-    skillTagEl: "Πολλαπλασιασμός Κλάσματος",
-    skillTagEn: "Multiplying Fractions",
+    "id": "math-e-dim.multiply-fraction-whole",
+    "labelEl": "Πολλαπλασιασμός κλάσματος με ακέραιο",
+    "labelEn": "Multiplying a fraction by a whole number",
+    "explainEl": "Δεν ξέρει ότι όταν πολλαπλασιάζει κλάσμα με ακέραιο, πολλαπλασιάζει μόνο τον αριθμητή, κρατώντας τον παρονομαστή σταθερό.",
+    "explainEn": "Doesn't know that multiplying a fraction by a whole number only multiplies the numerator, keeping the denominator fixed.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ειδικός των Κλασμάτων",
+    "achievementEn": "Fraction Specialist",
+    "positiveMessageEl": "Πολλαπλασιάζεις κλάσματα με ακέραιους με σιγουριά!",
+    "positiveMessageEn": "You multiply fractions by whole numbers with confidence!",
+    "skillTagEl": "Πολλαπλασιασμός Κλάσματος",
+    "skillTagEn": "Multiplying Fractions"
   },
   "math-e-dim.average-concept": {
-    id: "math-e-dim.average-concept",
-    labelEl: "Έννοια του μέσου όρου",
-    labelEn: "Concept of average",
-    explainEl: "Δεν καταλαβαίνει ότι ο μέσος όρος βρίσκεται προσθέτοντας όλες τις τιμές και διαιρώντας με το πλήθος τους.",
-    explainEn: "Doesn't understand that the average is found by adding all values and dividing by how many there are.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Μέσου Όρου",
-    achievementEn: "Average Expert",
-    positiveMessageEl: "Ξέρεις να υπολογίζεις τον μέσο όρο σωστά!",
-    positiveMessageEn: "You know how to calculate an average correctly!",
-    skillTagEl: "Μέσος Όρος",
-    skillTagEn: "Average",
+    "id": "math-e-dim.average-concept",
+    "labelEl": "Έννοια του μέσου όρου",
+    "labelEn": "Concept of average",
+    "explainEl": "Δεν καταλαβαίνει ότι ο μέσος όρος βρίσκεται προσθέτοντας όλες τις τιμές και διαιρώντας με το πλήθος τους.",
+    "explainEn": "Doesn't understand that the average is found by adding all values and dividing by how many there are.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Μέσου Όρου",
+    "achievementEn": "Average Expert",
+    "positiveMessageEl": "Ξέρεις να υπολογίζεις τον μέσο όρο σωστά!",
+    "positiveMessageEn": "You know how to calculate an average correctly!",
+    "skillTagEl": "Μέσος Όρος",
+    "skillTagEn": "Average"
   },
   "math-e-dim.volume-cube-basic": {
-    id: "math-e-dim.volume-cube-basic",
-    labelEl: "Όγκος με κύβους μονάδας",
-    labelEn: "Volume using unit cubes",
-    explainEl: "Δεν καταλαβαίνει τον όγκο ως πλήθος κύβων μονάδας που χωράνε μέσα σε ένα στερεό.",
-    explainEn: "Doesn't understand volume as the number of unit cubes that fit inside a solid.",
-    recommendedToolIds: ["geogebra", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Χτίστης του Όγκου",
-    achievementEn: "Volume Builder",
-    positiveMessageEl: "Ξέρεις να μετράς πόσο χώρο καταλαμβάνει ένα στερεό!",
-    positiveMessageEn: "You know how to measure how much space a solid takes up!",
-    skillTagEl: "Όγκος",
-    skillTagEn: "Volume",
+    "id": "math-e-dim.volume-cube-basic",
+    "labelEl": "Όγκος με κύβους μονάδας",
+    "labelEn": "Volume using unit cubes",
+    "explainEl": "Δεν καταλαβαίνει τον όγκο ως πλήθος κύβων μονάδας που χωράνε μέσα σε ένα στερεό.",
+    "explainEn": "Doesn't understand volume as the number of unit cubes that fit inside a solid.",
+    "recommendedToolIds": [
+      "geogebra",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Χτίστης του Όγκου",
+    "achievementEn": "Volume Builder",
+    "positiveMessageEl": "Ξέρεις να μετράς πόσο χώρο καταλαμβάνει ένα στερεό!",
+    "positiveMessageEn": "You know how to measure how much space a solid takes up!",
+    "skillTagEl": "Όγκος",
+    "skillTagEn": "Volume"
   },
   "math-e-dim.negative-number-intro": {
-    id: "math-e-dim.negative-number-intro",
-    labelEl: "Εισαγωγή σε αρνητικούς αριθμούς",
-    labelEn: "Introduction to negative numbers",
-    explainEl: "Δεν καταλαβαίνει την έννοια των αρνητικών αριθμών σε πραγματικό πλαίσιο (π.χ. θερμοκρασία κάτω από το μηδέν).",
-    explainEn: "Doesn't understand negative numbers in a real context (e.g. temperature below zero).",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Εξερευνητής Κάτω από το Μηδέν",
-    achievementEn: "Below-Zero Explorer",
-    positiveMessageEl: "Καταλαβαίνεις τι σημαίνει αρνητική θερμοκρασία!",
-    positiveMessageEn: "You understand what a negative temperature means!",
-    skillTagEl: "Αρνητικοί Αριθμοί",
-    skillTagEn: "Negative Numbers",
+    "id": "math-e-dim.negative-number-intro",
+    "labelEl": "Εισαγωγή σε αρνητικούς αριθμούς",
+    "labelEn": "Introduction to negative numbers",
+    "explainEl": "Δεν καταλαβαίνει την έννοια των αρνητικών αριθμών σε πραγματικό πλαίσιο (π.χ. θερμοκρασία κάτω από το μηδέν).",
+    "explainEn": "Doesn't understand negative numbers in a real context (e.g. temperature below zero).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εξερευνητής Κάτω από το Μηδέν",
+    "achievementEn": "Below-Zero Explorer",
+    "positiveMessageEl": "Καταλαβαίνεις τι σημαίνει αρνητική θερμοκρασία!",
+    "positiveMessageEn": "You understand what a negative temperature means!",
+    "skillTagEl": "Αρνητικοί Αριθμοί",
+    "skillTagEn": "Negative Numbers"
   },
-
-  // ---------- ΓΛΩΣΣΑ Ε' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "glossa-e-dim.simile-metaphor-basic": {
-    id: "glossa-e-dim.simile-metaphor-basic",
-    labelEl: "Απλή παρομοίωση",
-    labelEn: "Basic simile",
-    explainEl: "Δεν αναγνωρίζει την παρομοίωση (σύγκριση με «σαν») ως λογοτεχνικό μέσο μέσα σε ένα κείμενο.",
-    explainEn: "Doesn't recognize a simile (a 'like/as' comparison) as a literary device within a text.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Παρομοίωσης",
-    achievementEn: "Simile Expert",
-    positiveMessageEl: "Εντοπίζεις παρομοιώσεις σε κάθε κείμενο!",
-    positiveMessageEn: "You spot similes in every text!",
-    skillTagEl: "Παρομοίωση",
-    skillTagEn: "Simile",
+    "id": "glossa-e-dim.simile-metaphor-basic",
+    "labelEl": "Απλή παρομοίωση",
+    "labelEn": "Basic simile",
+    "explainEl": "Δεν αναγνωρίζει την παρομοίωση (σύγκριση με «σαν») ως λογοτεχνικό μέσο μέσα σε ένα κείμενο.",
+    "explainEn": "Doesn't recognize a simile (a 'like/as' comparison) as a literary device within a text.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Παρομοίωσης",
+    "achievementEn": "Simile Expert",
+    "positiveMessageEl": "Εντοπίζεις παρομοιώσεις σε κάθε κείμενο!",
+    "positiveMessageEn": "You spot similes in every text!",
+    "skillTagEl": "Παρομοίωση",
+    "skillTagEn": "Simile"
   },
   "glossa-e-dim.cause-effect-connector": {
-    id: "glossa-e-dim.cause-effect-connector",
-    labelEl: "Σύνδεσμοι αιτίας-αποτελέσματος",
-    labelEn: "Cause-effect connectors",
-    explainEl: "Δεν χρησιμοποιεί σωστά συνδέσμους αιτίας-αποτελέσματος (γι' αυτό, επομένως, εξαιτίας) για να συνδέσει ιδέες.",
-    explainEn: "Doesn't correctly use cause-effect connectors (therefore, so, because of) to link ideas.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Αιτίας",
-    achievementEn: "Cause Expert",
-    positiveMessageEl: "Συνδέεις αιτίες με αποτελέσματα σωστά!",
-    positiveMessageEn: "You connect causes with effects correctly!",
-    skillTagEl: "Αιτία & Αποτέλεσμα",
-    skillTagEn: "Cause & Effect",
+    "id": "glossa-e-dim.cause-effect-connector",
+    "labelEl": "Σύνδεσμοι αιτίας-αποτελέσματος",
+    "labelEn": "Cause-effect connectors",
+    "explainEl": "Δεν χρησιμοποιεί σωστά συνδέσμους αιτίας-αποτελέσματος (γι' αυτό, επομένως, εξαιτίας) για να συνδέσει ιδέες.",
+    "explainEn": "Doesn't correctly use cause-effect connectors (therefore, so, because of) to link ideas.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Αιτίας",
+    "achievementEn": "Cause Expert",
+    "positiveMessageEl": "Συνδέεις αιτίες με αποτελέσματα σωστά!",
+    "positiveMessageEn": "You connect causes with effects correctly!",
+    "skillTagEl": "Αιτία & Αποτέλεσμα",
+    "skillTagEn": "Cause & Effect"
   },
   "glossa-e-dim.formal-letter-structure": {
-    id: "glossa-e-dim.formal-letter-structure",
-    labelEl: "Δομή επίσημης επιστολής",
-    labelEn: "Formal letter structure",
-    explainEl: "Δεν ακολουθεί τη βασική δομή μιας επίσημης επιστολής (τόπος/ημερομηνία, χαιρετισμός, κυρίως θέμα, κλείσιμο, υπογραφή).",
-    explainEn: "Doesn't follow the basic structure of a formal letter (place/date, greeting, main body, closing, signature).",
-    recommendedToolIds: ["mindmup", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Επίσημης Επιστολής",
-    achievementEn: "Formal Letter Expert",
-    positiveMessageEl: "Ξέρεις πώς χτίζεται μια σωστή επίσημη επιστολή!",
-    positiveMessageEn: "You know how a proper formal letter is built!",
-    skillTagEl: "Δομή Επιστολής",
-    skillTagEn: "Letter Structure",
+    "id": "glossa-e-dim.formal-letter-structure",
+    "labelEl": "Δομή επίσημης επιστολής",
+    "labelEn": "Formal letter structure",
+    "explainEl": "Δεν ακολουθεί τη βασική δομή μιας επίσημης επιστολής (τόπος/ημερομηνία, χαιρετισμός, κυρίως θέμα, κλείσιμο, υπογραφή).",
+    "explainEn": "Doesn't follow the basic structure of a formal letter (place/date, greeting, main body, closing, signature).",
+    "recommendedToolIds": [
+      "mindmup",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Επίσημης Επιστολής",
+    "achievementEn": "Formal Letter Expert",
+    "positiveMessageEl": "Ξέρεις πώς χτίζεται μια σωστή επίσημη επιστολή!",
+    "positiveMessageEn": "You know how a proper formal letter is built!",
+    "skillTagEl": "Δομή Επιστολής",
+    "skillTagEn": "Letter Structure"
   },
   "glossa-e-dim.adjective-degree": {
-    id: "glossa-e-dim.adjective-degree",
-    labelEl: "Βαθμοί επιθέτου",
-    labelEn: "Degrees of adjectives",
-    explainEl: "Μπερδεύει τον συγκριτικό βαθμό («πιο όμορφος») με τον υπερθετικό («ο πιο όμορφος από όλους») ενός επιθέτου.",
-    explainEn: "Confuses the comparative degree ('more beautiful') with the superlative ('the most beautiful of all') of an adjective.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης των Βαθμών",
-    achievementEn: "Degree Expert",
-    positiveMessageEl: "Ξέρεις τη διαφορά ανάμεσα σε συγκριτικό και υπερθετικό!",
-    positiveMessageEn: "You know the difference between comparative and superlative!",
-    skillTagEl: "Βαθμοί Επιθέτου",
-    skillTagEn: "Adjective Degrees",
+    "id": "glossa-e-dim.adjective-degree",
+    "labelEl": "Βαθμοί επιθέτου",
+    "labelEn": "Degrees of adjectives",
+    "explainEl": "Μπερδεύει τον συγκριτικό βαθμό («πιο όμορφος») με τον υπερθετικό («ο πιο όμορφος από όλους») ενός επιθέτου.",
+    "explainEn": "Confuses the comparative degree ('more beautiful') with the superlative ('the most beautiful of all') of an adjective.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Βαθμών",
+    "achievementEn": "Degree Expert",
+    "positiveMessageEl": "Ξέρεις τη διαφορά ανάμεσα σε συγκριτικό και υπερθετικό!",
+    "positiveMessageEn": "You know the difference between comparative and superlative!",
+    "skillTagEl": "Βαθμοί Επιθέτου",
+    "skillTagEn": "Adjective Degrees"
   },
-
-  // ---------- ΜΑΘΗΜΑΤΙΚΑ ΣΤ' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "math-st-dim.percent-increase": {
-    id: "math-st-dim.percent-increase",
-    labelEl: "Ποσοστό αύξησης",
-    labelEn: "Percent increase",
-    explainEl: "Δυσκολεύεται να υπολογίσει την τελική τιμή μετά από ποσοστιαία αύξηση, συχνά προσθέτοντας μόνο το ποσοστό αντί για το αντίστοιχο ποσό.",
-    explainEn: "Struggles to compute the final value after a percentage increase, often adding just the percent figure instead of the corresponding amount.",
-    recommendedToolIds: ["photomath", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Αύξησης",
-    achievementEn: "Increase Expert",
-    positiveMessageEl: "Υπολογίζεις ποσοστιαίες αυξήσεις σαν επαγγελματίας!",
-    positiveMessageEn: "You calculate percent increases like a pro!",
-    skillTagEl: "Ποσοστό Αύξησης",
-    skillTagEn: "Percent Increase",
+    "id": "math-st-dim.percent-increase",
+    "labelEl": "Ποσοστό αύξησης",
+    "labelEn": "Percent increase",
+    "explainEl": "Δυσκολεύεται να υπολογίσει την τελική τιμή μετά από ποσοστιαία αύξηση, συχνά προσθέτοντας μόνο το ποσοστό αντί για το αντίστοιχο ποσό.",
+    "explainEn": "Struggles to compute the final value after a percentage increase, often adding just the percent figure instead of the corresponding amount.",
+    "recommendedToolIds": [
+      "photomath",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Αύξησης",
+    "achievementEn": "Increase Expert",
+    "positiveMessageEl": "Υπολογίζεις ποσοστιαίες αυξήσεις σαν επαγγελματίας!",
+    "positiveMessageEn": "You calculate percent increases like a pro!",
+    "skillTagEl": "Ποσοστό Αύξησης",
+    "skillTagEn": "Percent Increase"
   },
   "math-st-dim.speed-distance-time-basic": {
-    id: "math-st-dim.speed-distance-time-basic",
-    labelEl: "Σχέση ταχύτητας-απόστασης-χρόνου",
-    labelEn: "Speed-distance-time relationship",
-    explainEl: "Δεν καταλαβαίνει τη βασική σχέση: ταχύτητα = απόσταση ÷ χρόνος, και μπερδεύει ποιο μέγεθος διαιρεί με ποιο.",
-    explainEn: "Doesn't understand the basic relationship: speed = distance ÷ time, confusing which quantity divides which.",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Ταχύτητας",
-    achievementEn: "Speed Expert",
-    positiveMessageEl: "Ξέρεις πώς συνδέονται απόσταση, χρόνος και ταχύτητα!",
-    positiveMessageEn: "You know how distance, time, and speed connect!",
-    skillTagEl: "Ταχύτητα-Απόσταση-Χρόνος",
-    skillTagEn: "Speed-Distance-Time",
+    "id": "math-st-dim.speed-distance-time-basic",
+    "labelEl": "Σχέση ταχύτητας-απόστασης-χρόνου",
+    "labelEn": "Speed-distance-time relationship",
+    "explainEl": "Δεν καταλαβαίνει τη βασική σχέση: ταχύτητα = απόσταση ÷ χρόνος, και μπερδεύει ποιο μέγεθος διαιρεί με ποιο.",
+    "explainEn": "Doesn't understand the basic relationship: speed = distance ÷ time, confusing which quantity divides which.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Ταχύτητας",
+    "achievementEn": "Speed Expert",
+    "positiveMessageEl": "Ξέρεις πώς συνδέονται απόσταση, χρόνος και ταχύτητα!",
+    "positiveMessageEn": "You know how distance, time, and speed connect!",
+    "skillTagEl": "Ταχύτητα-Απόσταση-Χρόνος",
+    "skillTagEn": "Speed-Distance-Time"
   },
   "math-st-dim.negative-number-operations": {
-    id: "math-st-dim.negative-number-operations",
-    labelEl: "Βασικές πράξεις με αρνητικούς",
-    labelEn: "Basic operations with negative numbers",
-    explainEl: "Δεν ξέρει τι γίνεται όταν προσθέτει έναν θετικό και έναν αρνητικό αριθμό (π.χ. 5 + (-3)).",
-    explainEn: "Doesn't know what happens when adding a positive and a negative number (e.g. 5 + (-3)).",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης των Αρνητικών",
-    achievementEn: "Negative Number Expert",
-    positiveMessageEl: "Κάνεις πράξεις με αρνητικούς αριθμούς με σιγουριά!",
-    positiveMessageEn: "You do operations with negative numbers confidently!",
-    skillTagEl: "Πράξεις με Αρνητικούς",
-    skillTagEn: "Negative Number Operations",
+    "id": "math-st-dim.negative-number-operations",
+    "labelEl": "Βασικές πράξεις με αρνητικούς",
+    "labelEn": "Basic operations with negative numbers",
+    "explainEl": "Δεν ξέρει τι γίνεται όταν προσθέτει έναν θετικό και έναν αρνητικό αριθμό (π.χ. 5 + (-3)).",
+    "explainEn": "Doesn't know what happens when adding a positive and a negative number (e.g. 5 + (-3)).",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Αρνητικών",
+    "achievementEn": "Negative Number Expert",
+    "positiveMessageEl": "Κάνεις πράξεις με αρνητικούς αριθμούς με σιγουριά!",
+    "positiveMessageEn": "You do operations with negative numbers confidently!",
+    "skillTagEl": "Πράξεις με Αρνητικούς",
+    "skillTagEn": "Negative Number Operations"
   },
   "math-st-dim.probability-basic": {
-    id: "math-st-dim.probability-basic",
-    labelEl: "Βασική πιθανότητα",
-    labelEn: "Basic probability",
-    explainEl: "Δεν καταλαβαίνει πώς να εκφράσει μια απλή πιθανότητα ως κλάσμα (π.χ. πιθανότητα να φέρει 6 σε ένα ζάρι = 1/6).",
-    explainEn: "Doesn't understand how to express a simple probability as a fraction (e.g. the chance of rolling a 6 = 1/6).",
-    recommendedToolIds: ["wolfram-alpha", "chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Πιθανότητας",
-    achievementEn: "Probability Expert",
-    positiveMessageEl: "Υπολογίζεις πιθανότητες σαν μικρός στατιστικολόγος!",
-    positiveMessageEn: "You calculate probabilities like a little statistician!",
-    skillTagEl: "Πιθανότητα",
-    skillTagEn: "Probability",
+    "id": "math-st-dim.probability-basic",
+    "labelEl": "Βασική πιθανότητα",
+    "labelEn": "Basic probability",
+    "explainEl": "Δεν καταλαβαίνει πώς να εκφράσει μια απλή πιθανότητα ως κλάσμα (π.χ. πιθανότητα να φέρει 6 σε ένα ζάρι = 1/6).",
+    "explainEn": "Doesn't understand how to express a simple probability as a fraction (e.g. the chance of rolling a 6 = 1/6).",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Πιθανότητας",
+    "achievementEn": "Probability Expert",
+    "positiveMessageEl": "Υπολογίζεις πιθανότητες σαν μικρός στατιστικολόγος!",
+    "positiveMessageEn": "You calculate probabilities like a little statistician!",
+    "skillTagEl": "Πιθανότητα",
+    "skillTagEn": "Probability"
   },
-
-  // ---------- ΓΛΩΣΣΑ ΣΤ' ΔΗΜΟΤΙΚΟΥ (νέα) ----------
   "glossa-st-dim.passive-voice-basic": {
-    id: "glossa-st-dim.passive-voice-basic",
-    labelEl: "Βασική αναγνώριση παθητικής φωνής",
-    labelEn: "Basic passive voice recognition",
-    explainEl: "Δεν ξεχωρίζει πότε ένα ρήμα είναι σε ενεργητική φωνή («έγραψε το γράμμα») και πότε σε παθητική («γράφτηκε το γράμμα»).",
-    explainEn: "Doesn't distinguish when a verb is in active voice versus passive voice.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης της Φωνής",
-    achievementEn: "Voice Expert",
-    positiveMessageEl: "Ξεχωρίζεις ενεργητική από παθητική φωνή!",
-    positiveMessageEn: "You tell active from passive voice!",
-    skillTagEl: "Παθητική Φωνή",
-    skillTagEn: "Passive Voice",
+    "id": "glossa-st-dim.passive-voice-basic",
+    "labelEl": "Βασική αναγνώριση παθητικής φωνής",
+    "labelEn": "Basic passive voice recognition",
+    "explainEl": "Δεν ξεχωρίζει πότε ένα ρήμα είναι σε ενεργητική φωνή («έγραψε το γράμμα») και πότε σε παθητική («γράφτηκε το γράμμα»).",
+    "explainEn": "Doesn't distinguish when a verb is in active voice versus passive voice.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Φωνής",
+    "achievementEn": "Voice Expert",
+    "positiveMessageEl": "Ξεχωρίζεις ενεργητική από παθητική φωνή!",
+    "positiveMessageEn": "You tell active from passive voice!",
+    "skillTagEl": "Παθητική Φωνή",
+    "skillTagEn": "Passive Voice"
   },
   "glossa-st-dim.text-purpose-identification": {
-    id: "glossa-st-dim.text-purpose-identification",
-    labelEl: "Αναγνώριση σκοπού κειμένου",
-    labelEn: "Identifying a text's purpose",
-    explainEl: "Δεν αναγνωρίζει αν ένα κείμενο θέλει να πληροφορήσει, να πείσει ή να διασκεδάσει τον αναγνώστη.",
-    explainEn: "Doesn't recognize whether a text aims to inform, persuade, or entertain the reader.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Ανιχνευτής του Σκοπού",
-    achievementEn: "Purpose Detective",
-    positiveMessageEl: "Ξέρεις γιατί γράφτηκε κάθε κείμενο!",
-    positiveMessageEn: "You know why every text was written!",
-    skillTagEl: "Σκοπός Κειμένου",
-    skillTagEn: "Text Purpose",
+    "id": "glossa-st-dim.text-purpose-identification",
+    "labelEl": "Αναγνώριση σκοπού κειμένου",
+    "labelEn": "Identifying a text's purpose",
+    "explainEl": "Δεν αναγνωρίζει αν ένα κείμενο θέλει να πληροφορήσει, να πείσει ή να διασκεδάσει τον αναγνώστη.",
+    "explainEn": "Doesn't recognize whether a text aims to inform, persuade, or entertain the reader.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Ανιχνευτής του Σκοπού",
+    "achievementEn": "Purpose Detective",
+    "positiveMessageEl": "Ξέρεις γιατί γράφτηκε κάθε κείμενο!",
+    "positiveMessageEn": "You know why every text was written!",
+    "skillTagEl": "Σκοπός Κειμένου",
+    "skillTagEn": "Text Purpose"
   },
   "glossa-st-dim.register-formal-informal": {
-    id: "glossa-st-dim.register-formal-informal",
-    labelEl: "Επίσημο vs ανεπίσημο ύφος",
-    labelEn: "Formal vs informal register",
-    explainEl: "Δεν ξεχωρίζει πότε ένα κείμενο είναι γραμμένο σε επίσημο ύφος και πότε σε ανεπίσημο, καθημερινό ύφος.",
-    explainEn: "Doesn't distinguish when a text is written in formal register versus informal, everyday register.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Γνώστης του Ύφους",
-    achievementEn: "Register Expert",
-    positiveMessageEl: "Ξεχωρίζεις το επίσημο από το ανεπίσημο ύφος!",
-    positiveMessageEn: "You tell formal from informal register!",
-    skillTagEl: "Επίσημο & Ανεπίσημο Ύφος",
-    skillTagEn: "Formal & Informal Register",
+    "id": "glossa-st-dim.register-formal-informal",
+    "labelEl": "Επίσημο vs ανεπίσημο ύφος",
+    "labelEn": "Formal vs informal register",
+    "explainEl": "Δεν ξεχωρίζει πότε ένα κείμενο είναι γραμμένο σε επίσημο ύφος και πότε σε ανεπίσημο, καθημερινό ύφος.",
+    "explainEn": "Doesn't distinguish when a text is written in formal register versus informal, everyday register.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Ύφους",
+    "achievementEn": "Register Expert",
+    "positiveMessageEl": "Ξεχωρίζεις το επίσημο από το ανεπίσημο ύφος!",
+    "positiveMessageEn": "You tell formal from informal register!",
+    "skillTagEl": "Επίσημο & Ανεπίσημο Ύφος",
+    "skillTagEn": "Formal & Informal Register"
   },
   "glossa-st-dim.conclusion-quality": {
-    id: "glossa-st-dim.conclusion-quality",
-    labelEl: "Ποιότητα επιλόγου",
-    labelEn: "Quality of a conclusion",
-    explainEl: "Γράφει επίλογο που απλώς επαναλαμβάνει την εισαγωγή λέξη προς λέξη, αντί να συνοψίζει και να κλείνει το κείμενο ουσιαστικά.",
-    explainEn: "Writes a conclusion that just repeats the introduction word for word, instead of meaningfully summarizing and closing the text.",
-    recommendedToolIds: ["chatgpt", "claude", "perplexity"],
-    achievementEl: "Ο Δομητής του Επιλόγου",
-    achievementEn: "Conclusion Builder",
-    positiveMessageEl: "Γράφεις επιλόγους που πραγματικά κλείνουν το κείμενο!",
-    positiveMessageEn: "You write conclusions that truly close out the text!",
-    skillTagEl: "Επίλογος",
-    skillTagEn: "Conclusion",
+    "id": "glossa-st-dim.conclusion-quality",
+    "labelEl": "Ποιότητα επιλόγου",
+    "labelEn": "Quality of a conclusion",
+    "explainEl": "Γράφει επίλογο που απλώς επαναλαμβάνει την εισαγωγή λέξη προς λέξη, αντί να συνοψίζει και να κλείνει το κείμενο ουσιαστικά.",
+    "explainEn": "Writes a conclusion that just repeats the introduction word for word, instead of meaningfully summarizing and closing the text.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "claude",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Δομητής του Επιλόγου",
+    "achievementEn": "Conclusion Builder",
+    "positiveMessageEl": "Γράφεις επιλόγους που πραγματικά κλείνουν το κείμενο!",
+    "positiveMessageEn": "You write conclusions that truly close out the text!",
+    "skillTagEl": "Επίλογος",
+    "skillTagEn": "Conclusion"
   },
-
-  // ================================================================
-  // ΝΕΑ GAP TAGS — ΒΙΟΛΟΓΙΑ ΓΥΜΝΑΣΙΟΥ & ΛΥΚΕΙΟΥ (Α'-Γ' εκάστοτε)
-  // ================================================================
-
-  // ---------- ΒΙΟΛΟΓΙΑ Α' ΓΥΜΝΑΣΙΟΥ ----------
   "biologia-a-gym.plant-animal-cell": {
-    id: "biologia-a-gym.plant-animal-cell",
-    labelEl: "Φυτικό vs ζωικό κύτταρο",
-    labelEn: "Plant vs animal cell",
-    explainEl: "Δεν ξέρει ποια οργανίδια υπάρχουν μόνο στο φυτικό κύτταρο (π.χ. χλωροπλάστης, κυτταρικό τοίχωμα) και όχι στο ζωικό.",
-    explainEn: "Doesn't know which organelles exist only in plant cells (e.g. chloroplast, cell wall) and not in animal cells.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Γνώστης του Κυττάρου",
-    achievementEn: "Cell Expert",
-    positiveMessageEl: "Ξέρεις τι έχει το φυτικό κύτταρο που δεν έχει το ζωικό!",
-    positiveMessageEn: "You know what a plant cell has that an animal cell doesn't!",
-    skillTagEl: "Φυτικό & Ζωικό Κύτταρο",
-    skillTagEn: "Plant & Animal Cell",
+    "id": "biologia-a-gym.plant-animal-cell",
+    "labelEl": "Φυτικό vs ζωικό κύτταρο",
+    "labelEn": "Plant vs animal cell",
+    "explainEl": "Δεν ξέρει ποια οργανίδια υπάρχουν μόνο στο φυτικό κύτταρο (π.χ. χλωροπλάστης, κυτταρικό τοίχωμα) και όχι στο ζωικό.",
+    "explainEn": "Doesn't know which organelles exist only in plant cells (e.g. chloroplast, cell wall) and not in animal cells.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Κυττάρου",
+    "achievementEn": "Cell Expert",
+    "positiveMessageEl": "Ξέρεις τι έχει το φυτικό κύτταρο που δεν έχει το ζωικό!",
+    "positiveMessageEn": "You know what a plant cell has that an animal cell doesn't!",
+    "skillTagEl": "Φυτικό & Ζωικό Κύτταρο",
+    "skillTagEn": "Plant & Animal Cell"
   },
   "biologia-a-gym.unicellular-nutrition": {
-    id: "biologia-a-gym.unicellular-nutrition",
-    labelEl: "Θρέψη μονοκύτταρων οργανισμών",
-    labelEn: "Nutrition in unicellular organisms",
-    explainEl: "Δεν καταλαβαίνει πώς τρέφεται ένας μονοκύτταρος οργανισμός (π.χ. αμοιβάδα) χωρίς στόμα ή πεπτικό σύστημα.",
-    explainEn: "Doesn't understand how a unicellular organism (e.g. amoeba) feeds without a mouth or digestive system.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Εξερευνητής του Μονοκύτταρου",
-    achievementEn: "Unicellular Explorer",
-    positiveMessageEl: "Ξέρεις πώς τρέφεται ένας οργανισμός με ένα μόνο κύτταρο!",
-    positiveMessageEn: "You know how a single-celled organism feeds itself!",
-    skillTagEl: "Θρέψη Μονοκύτταρων",
-    skillTagEn: "Unicellular Nutrition",
+    "id": "biologia-a-gym.unicellular-nutrition",
+    "labelEl": "Θρέψη μονοκύτταρων οργανισμών",
+    "labelEn": "Nutrition in unicellular organisms",
+    "explainEl": "Δεν καταλαβαίνει πώς τρέφεται ένας μονοκύτταρος οργανισμός (π.χ. αμοιβάδα) χωρίς στόμα ή πεπτικό σύστημα.",
+    "explainEn": "Doesn't understand how a unicellular organism (e.g. amoeba) feeds without a mouth or digestive system.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Εξερευνητής του Μονοκύτταρου",
+    "achievementEn": "Unicellular Explorer",
+    "positiveMessageEl": "Ξέρεις πώς τρέφεται ένας οργανισμός με ένα μόνο κύτταρο!",
+    "positiveMessageEn": "You know how a single-celled organism feeds itself!",
+    "skillTagEl": "Θρέψη Μονοκύτταρων",
+    "skillTagEn": "Unicellular Nutrition"
   },
   "biologia-a-gym.adaptation-misconception": {
-    id: "biologia-a-gym.adaptation-misconception",
-    labelEl: "Προσαρμογές οργανισμών",
-    labelEn: "Adaptations of organisms",
-    explainEl: "Δεν συνδέει ένα χαρακτηριστικό ενός οργανισμού (π.χ. καμπούρα καμήλας) με τη λειτουργία που εξυπηρετεί για την επιβίωσή του.",
-    explainEn: "Doesn't connect an organism's trait (e.g. a camel's hump) with the function it serves for survival.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Γνώστης των Προσαρμογών",
-    achievementEn: "Adaptation Expert",
-    positiveMessageEl: "Ξέρεις γιατί κάθε χαρακτηριστικό βοηθάει έναν οργανισμό να επιβιώσει!",
-    positiveMessageEn: "You know why every trait helps an organism survive!",
-    skillTagEl: "Προσαρμογές",
-    skillTagEn: "Adaptations",
+    "id": "biologia-a-gym.adaptation-misconception",
+    "labelEl": "Προσαρμογές οργανισμών",
+    "labelEn": "Adaptations of organisms",
+    "explainEl": "Δεν συνδέει ένα χαρακτηριστικό ενός οργανισμού (π.χ. καμπούρα καμήλας) με τη λειτουργία που εξυπηρετεί για την επιβίωσή του.",
+    "explainEn": "Doesn't connect an organism's trait (e.g. a camel's hump) with the function it serves for survival.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης των Προσαρμογών",
+    "achievementEn": "Adaptation Expert",
+    "positiveMessageEl": "Ξέρεις γιατί κάθε χαρακτηριστικό βοηθάει έναν οργανισμό να επιβιώσει!",
+    "positiveMessageEn": "You know why every trait helps an organism survive!",
+    "skillTagEl": "Προσαρμογές",
+    "skillTagEn": "Adaptations"
   },
   "biologia-a-gym.plant-vs-animal-digestion": {
-    id: "biologia-a-gym.plant-vs-animal-digestion",
-    labelEl: "Πέψη σε φυτά vs ζώα",
-    labelEn: "Digestion in plants vs animals",
-    explainEl: "Δεν ξέρει ότι τα φυτά δεν έχουν πεπτικό σύστημα όπως τα ζώα, αλλά παράγουν τη δική τους τροφή μέσω φωτοσύνθεσης.",
-    explainEn: "Doesn't know plants don't have a digestive system like animals, but produce their own food through photosynthesis.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Γνώστης της Φωτοσύνθεσης",
-    achievementEn: "Photosynthesis Expert",
-    positiveMessageEl: "Ξέρεις πώς «τρέφονται» τα φυτά χωρίς πεπτικό σύστημα!",
-    positiveMessageEn: "You know how plants 'feed' without a digestive system!",
-    skillTagEl: "Πέψη Φυτών & Ζώων",
-    skillTagEn: "Plant & Animal Digestion",
+    "id": "biologia-a-gym.plant-vs-animal-digestion",
+    "labelEl": "Πέψη σε φυτά vs ζώα",
+    "labelEn": "Digestion in plants vs animals",
+    "explainEl": "Δεν ξέρει ότι τα φυτά δεν έχουν πεπτικό σύστημα όπως τα ζώα, αλλά παράγουν τη δική τους τροφή μέσω φωτοσύνθεσης.",
+    "explainEn": "Doesn't know plants don't have a digestive system like animals, but produce their own food through photosynthesis.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Φωτοσύνθεσης",
+    "achievementEn": "Photosynthesis Expert",
+    "positiveMessageEl": "Ξέρεις πώς «τρέφονται» τα φυτά χωρίς πεπτικό σύστημα!",
+    "positiveMessageEn": "You know how plants 'feed' without a digestive system!",
+    "skillTagEl": "Πέψη Φυτών & Ζώων",
+    "skillTagEn": "Plant & Animal Digestion"
   },
   "biologia-a-gym.cell-membrane-function": {
-    id: "biologia-a-gym.cell-membrane-function",
-    labelEl: "Λειτουργία κυτταρικής μεμβράνης",
-    labelEn: "Function of the cell membrane",
-    explainEl: "Δεν καταλαβαίνει ότι η κυτταρική μεμβράνη ελέγχει τι μπαίνει και τι βγαίνει από το κύτταρο, δεν είναι απλώς ένα «περίβλημα».",
-    explainEn: "Doesn't understand the cell membrane controls what enters and exits the cell, not just a passive 'wrapper'.",
-    recommendedToolIds: ["perplexity"],
-    achievementEl: "Ο Φύλακας του Κυττάρου",
-    achievementEn: "Cell Gatekeeper",
-    positiveMessageEl: "Ξέρεις τι κάνει πραγματικά η κυτταρική μεμβράνη!",
-    positiveMessageEn: "You know what the cell membrane really does!",
-    skillTagEl: "Κυτταρική Μεμβράνη",
-    skillTagEn: "Cell Membrane",
+    "id": "biologia-a-gym.cell-membrane-function",
+    "labelEl": "Λειτουργία κυτταρικής μεμβράνης",
+    "labelEn": "Function of the cell membrane",
+    "explainEl": "Δεν καταλαβαίνει ότι η κυτταρική μεμβράνη ελέγχει τι μπαίνει και τι βγαίνει από το κύτταρο, δεν είναι απλώς ένα «περίβλημα».",
+    "explainEn": "Doesn't understand the cell membrane controls what enters and exits the cell, not just a passive 'wrapper'.",
+    "recommendedToolIds": [
+      "perplexity"
+    ],
+    "achievementEl": "Ο Φύλακας του Κυττάρου",
+    "achievementEn": "Cell Gatekeeper",
+    "positiveMessageEl": "Ξέρεις τι κάνει πραγματικά η κυτταρική μεμβράνη!",
+    "positiveMessageEn": "You know what the cell membrane really does!",
+    "skillTagEl": "Κυτταρική Μεμβράνη",
+    "skillTagEn": "Cell Membrane"
   },
-
-  // ---------- ΒΙΟΛΟΓΙΑ Β' ΓΥΜΝΑΣΙΟΥ ----------
   "biologia-b-gym.gas-exchange-organ": {
-    id: "biologia-b-gym.gas-exchange-organ",
-    labelEl: "Ανταλλαγή αερίων",
-    labelEn: "Gas exchange organ",
-    explainEl: "Δεν ξέρει ότι οι πνεύμονες είναι το όργανο όπου γίνεται η ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα, μπερδεύοντάς το με άλλο όργανο.",
-    explainEn: "Doesn't know the lungs are where oxygen-carbon dioxide exchange happens, confusing it with another organ.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης της Αναπνοής",
-    achievementEn: "Respiration Expert",
-    positiveMessageEl: "Ξέρεις πού γίνεται η ανταλλαγή αερίων στο σώμα σου!",
-    positiveMessageEn: "You know where gas exchange happens in your body!",
-    skillTagEl: "Ανταλλαγή Αερίων",
-    skillTagEn: "Gas Exchange",
+    "id": "biologia-b-gym.gas-exchange-organ",
+    "labelEl": "Ανταλλαγή αερίων",
+    "labelEn": "Gas exchange organ",
+    "explainEl": "Δεν ξέρει ότι οι πνεύμονες είναι το όργανο όπου γίνεται η ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα, μπερδεύοντάς το με άλλο όργανο.",
+    "explainEn": "Doesn't know the lungs are where oxygen-carbon dioxide exchange happens, confusing it with another organ.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Αναπνοής",
+    "achievementEn": "Respiration Expert",
+    "positiveMessageEl": "Ξέρεις πού γίνεται η ανταλλαγή αερίων στο σώμα σου!",
+    "positiveMessageEn": "You know where gas exchange happens in your body!",
+    "skillTagEl": "Ανταλλαγή Αερίων",
+    "skillTagEn": "Gas Exchange"
   },
   "biologia-b-gym.heart-role": {
-    id: "biologia-b-gym.heart-role",
-    labelEl: "Ρόλος της καρδιάς",
-    labelEn: "Role of the heart",
-    explainEl: "Δεν ξέρει ότι ο κύριος ρόλος της καρδιάς είναι να αντλεί το αίμα σε όλο το σώμα, όχι κάποια άλλη λειτουργία.",
-    explainEn: "Doesn't know the heart's main role is pumping blood throughout the body, not some other function.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης της Καρδιάς",
-    achievementEn: "Heart Expert",
-    positiveMessageEl: "Ξέρεις ακριβώς τι κάνει η καρδιά σου!",
-    positiveMessageEn: "You know exactly what your heart does!",
-    skillTagEl: "Ρόλος Καρδιάς",
-    skillTagEn: "Heart Role",
+    "id": "biologia-b-gym.heart-role",
+    "labelEl": "Ρόλος της καρδιάς",
+    "labelEn": "Role of the heart",
+    "explainEl": "Δεν ξέρει ότι ο κύριος ρόλος της καρδιάς είναι να αντλεί το αίμα σε όλο το σώμα, όχι κάποια άλλη λειτουργία.",
+    "explainEn": "Doesn't know the heart's main role is pumping blood throughout the body, not some other function.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Καρδιάς",
+    "achievementEn": "Heart Expert",
+    "positiveMessageEl": "Ξέρεις ακριβώς τι κάνει η καρδιά σου!",
+    "positiveMessageEn": "You know exactly what your heart does!",
+    "skillTagEl": "Ρόλος Καρδιάς",
+    "skillTagEn": "Heart Role"
   },
   "biologia-b-gym.blood-function": {
-    id: "biologia-b-gym.blood-function",
-    labelEl: "Λειτουργία του αίματος",
-    labelEn: "Function of blood",
-    explainEl: "Δεν ξέρει ότι το αίμα μεταφέρει πολλά διαφορετικά πράγματα (οξυγόνο, θρεπτικά, απόβλητα), όχι μόνο ένα.",
-    explainEn: "Doesn't know blood transports many different things (oxygen, nutrients, waste), not just one.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης του Αίματος",
-    achievementEn: "Blood Expert",
-    positiveMessageEl: "Ξέρεις όλα όσα μεταφέρει το αίμα σου!",
-    positiveMessageEn: "You know everything your blood transports!",
-    skillTagEl: "Λειτουργία Αίματος",
-    skillTagEn: "Blood Function",
+    "id": "biologia-b-gym.blood-function",
+    "labelEl": "Λειτουργία του αίματος",
+    "labelEn": "Function of blood",
+    "explainEl": "Δεν ξέρει ότι το αίμα μεταφέρει πολλά διαφορετικά πράγματα (οξυγόνο, θρεπτικά, απόβλητα), όχι μόνο ένα.",
+    "explainEn": "Doesn't know blood transports many different things (oxygen, nutrients, waste), not just one.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Αίματος",
+    "achievementEn": "Blood Expert",
+    "positiveMessageEl": "Ξέρεις όλα όσα μεταφέρει το αίμα σου!",
+    "positiveMessageEn": "You know everything your blood transports!",
+    "skillTagEl": "Λειτουργία Αίματος",
+    "skillTagEn": "Blood Function"
   },
   "biologia-b-gym.producer-definition": {
-    id: "biologia-b-gym.producer-definition",
-    labelEl: "Παραγωγοί σε οικοσύστημα",
-    labelEn: "Producers in an ecosystem",
-    explainEl: "Δεν ξέρει ότι οι «παραγωγοί» σε ένα οικοσύστημα είναι οργανισμοί (κυρίως φυτά) που παράγουν τη δική τους τροφή.",
-    explainEn: "Doesn't know 'producers' in an ecosystem are organisms (mainly plants) that make their own food.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης του Οικοσυστήματος",
-    achievementEn: "Ecosystem Expert",
-    positiveMessageEl: "Ξέρεις ποιος ρόλο παίζουν οι παραγωγοί σε ένα οικοσύστημα!",
-    positiveMessageEn: "You know the role producers play in an ecosystem!",
-    skillTagEl: "Παραγωγοί",
-    skillTagEn: "Producers",
+    "id": "biologia-b-gym.producer-definition",
+    "labelEl": "Παραγωγοί σε οικοσύστημα",
+    "labelEn": "Producers in an ecosystem",
+    "explainEl": "Δεν ξέρει ότι οι «παραγωγοί» σε ένα οικοσύστημα είναι οργανισμοί (κυρίως φυτά) που παράγουν τη δική τους τροφή.",
+    "explainEn": "Doesn't know 'producers' in an ecosystem are organisms (mainly plants) that make their own food.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Οικοσυστήματος",
+    "achievementEn": "Ecosystem Expert",
+    "positiveMessageEl": "Ξέρεις ποιος ρόλο παίζουν οι παραγωγοί σε ένα οικοσύστημα!",
+    "positiveMessageEn": "You know the role producers play in an ecosystem!",
+    "skillTagEl": "Παραγωγοί",
+    "skillTagEn": "Producers"
   },
   "biologia-b-gym.nervous-system-role": {
-    id: "biologia-b-gym.nervous-system-role",
-    labelEl: "Ρόλος νευρικού συστήματος",
-    labelEn: "Role of the nervous system",
-    explainEl: "Δεν ξέρει ότι ο κύριος ρόλος του νευρικού συστήματος είναι η αντίληψη ερεθισμάτων και η γρήγορη ανταπόκριση σε αυτά.",
-    explainEn: "Doesn't know the nervous system's main role is perceiving stimuli and responding to them quickly.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης του Νευρικού Συστήματος",
-    achievementEn: "Nervous System Expert",
-    positiveMessageEl: "Ξέρεις πώς το σώμα σου αντιδράει γρήγορα σε ερεθίσματα!",
-    positiveMessageEn: "You know how your body reacts quickly to stimuli!",
-    skillTagEl: "Νευρικό Σύστημα",
-    skillTagEn: "Nervous System",
+    "id": "biologia-b-gym.nervous-system-role",
+    "labelEl": "Ρόλος νευρικού συστήματος",
+    "labelEn": "Role of the nervous system",
+    "explainEl": "Δεν ξέρει ότι ο κύριος ρόλος του νευρικού συστήματος είναι η αντίληψη ερεθισμάτων και η γρήγορη ανταπόκριση σε αυτά.",
+    "explainEn": "Doesn't know the nervous system's main role is perceiving stimuli and responding to them quickly.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του Νευρικού Συστήματος",
+    "achievementEn": "Nervous System Expert",
+    "positiveMessageEl": "Ξέρεις πώς το σώμα σου αντιδράει γρήγορα σε ερεθίσματα!",
+    "positiveMessageEn": "You know how your body reacts quickly to stimuli!",
+    "skillTagEl": "Νευρικό Σύστημα",
+    "skillTagEn": "Nervous System"
   },
-
-  // ---------- ΒΙΟΛΟΓΙΑ Γ' ΓΥΜΝΑΣΙΟΥ ----------
   "biologia-g-gym.dna-location": {
-    id: "biologia-g-gym.dna-location",
-    labelEl: "Θέση του DNA",
-    labelEn: "Location of DNA",
-    explainEl: "Δεν ξέρει ότι το DNA βρίσκεται κυρίως μέσα στον πυρήνα του κυττάρου.",
-    explainEn: "Doesn't know DNA is located mainly inside the cell nucleus.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης του DNA",
-    achievementEn: "DNA Expert",
-    positiveMessageEl: "Ξέρεις πού βρίσκεται το DNA μέσα στο κύτταρο!",
-    positiveMessageEn: "You know where DNA is located inside the cell!",
-    skillTagEl: "Θέση DNA",
-    skillTagEn: "DNA Location",
+    "id": "biologia-g-gym.dna-location",
+    "labelEl": "Θέση του DNA",
+    "labelEn": "Location of DNA",
+    "explainEl": "Δεν ξέρει ότι το DNA βρίσκεται κυρίως μέσα στον πυρήνα του κυττάρου.",
+    "explainEn": "Doesn't know DNA is located mainly inside the cell nucleus.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης του DNA",
+    "achievementEn": "DNA Expert",
+    "positiveMessageEl": "Ξέρεις πού βρίσκεται το DNA μέσα στο κύτταρο!",
+    "positiveMessageEn": "You know where DNA is located inside the cell!",
+    "skillTagEl": "Θέση DNA",
+    "skillTagEn": "DNA Location"
   },
   "biologia-g-gym.inheritance-both-parents": {
-    id: "biologia-g-gym.inheritance-both-parents",
-    labelEl: "Κληρονομικότητα από τους γονείς",
-    labelEn: "Inheritance from parents",
-    explainEl: "Δεν ξέρει ότι τα χαρακτηριστικά ενός παιδιού προέρχονται και από τους δύο γονείς, μέσω των γονιδίων τους.",
-    explainEn: "Doesn't know a child's traits come from both parents, through their genes.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης της Κληρονομικότητας",
-    achievementEn: "Inheritance Expert",
-    positiveMessageEl: "Ξέρεις πώς κληρονομούνται τα χαρακτηριστικά!",
-    positiveMessageEn: "You know how traits are inherited!",
-    skillTagEl: "Κληρονομικότητα",
-    skillTagEn: "Inheritance",
+    "id": "biologia-g-gym.inheritance-both-parents",
+    "labelEl": "Κληρονομικότητα από τους γονείς",
+    "labelEn": "Inheritance from parents",
+    "explainEl": "Δεν ξέρει ότι τα χαρακτηριστικά ενός παιδιού προέρχονται και από τους δύο γονείς, μέσω των γονιδίων τους.",
+    "explainEn": "Doesn't know a child's traits come from both parents, through their genes.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Κληρονομικότητας",
+    "achievementEn": "Inheritance Expert",
+    "positiveMessageEl": "Ξέρεις πώς κληρονομούνται τα χαρακτηριστικά!",
+    "positiveMessageEn": "You know how traits are inherited!",
+    "skillTagEl": "Κληρονομικότητα",
+    "skillTagEn": "Inheritance"
   },
   "biologia-g-gym.biodiversity-definition": {
-    id: "biologia-g-gym.biodiversity-definition",
-    labelEl: "Έννοια βιοποικιλότητας",
-    labelEn: "Concept of biodiversity",
-    explainEl: "Δεν ξέρει ότι η βιοποικιλότητα αναφέρεται στην ποικιλία των ειδών ζωής σε ένα οικοσύστημα, όχι σε κάτι άλλο.",
-    explainEn: "Doesn't know biodiversity refers to the variety of life forms in an ecosystem, not something else.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης της Βιοποικιλότητας",
-    achievementEn: "Biodiversity Expert",
-    positiveMessageEl: "Ξέρεις τι σημαίνει πραγματικά η βιοποικιλότητα!",
-    positiveMessageEn: "You know what biodiversity really means!",
-    skillTagEl: "Βιοποικιλότητα",
-    skillTagEn: "Biodiversity",
+    "id": "biologia-g-gym.biodiversity-definition",
+    "labelEl": "Έννοια βιοποικιλότητας",
+    "labelEn": "Concept of biodiversity",
+    "explainEl": "Δεν ξέρει ότι η βιοποικιλότητα αναφέρεται στην ποικιλία των ειδών ζωής σε ένα οικοσύστημα, όχι σε κάτι άλλο.",
+    "explainEn": "Doesn't know biodiversity refers to the variety of life forms in an ecosystem, not something else.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Βιοποικιλότητας",
+    "achievementEn": "Biodiversity Expert",
+    "positiveMessageEl": "Ξέρεις τι σημαίνει πραγματικά η βιοποικιλότητα!",
+    "positiveMessageEn": "You know what biodiversity really means!",
+    "skillTagEl": "Βιοποικιλότητα",
+    "skillTagEn": "Biodiversity"
   },
   "biologia-g-gym.extinction-cause": {
-    id: "biologia-g-gym.extinction-cause",
-    labelEl: "Αιτία εξαφάνισης είδους",
-    labelEn: "Cause of species extinction",
-    explainEl: "Δεν ξέρει ότι ένα είδος εξαφανίζεται όταν δεν μπορεί πλέον να αναπαραχθεί ή να επιβιώσει επαρκώς στο περιβάλλον του.",
-    explainEn: "Doesn't know a species goes extinct when it can no longer reproduce or survive sufficiently in its environment.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης της Εξαφάνισης",
-    achievementEn: "Extinction Expert",
-    positiveMessageEl: "Ξέρεις γιατί πραγματικά εξαφανίζεται ένα είδος!",
-    positiveMessageEn: "You know why a species really goes extinct!",
-    skillTagEl: "Εξαφάνιση Είδους",
-    skillTagEn: "Species Extinction",
+    "id": "biologia-g-gym.extinction-cause",
+    "labelEl": "Αιτία εξαφάνισης είδους",
+    "labelEn": "Cause of species extinction",
+    "explainEl": "Δεν ξέρει ότι ένα είδος εξαφανίζεται όταν δεν μπορεί πλέον να αναπαραχθεί ή να επιβιώσει επαρκώς στο περιβάλλον του.",
+    "explainEn": "Doesn't know a species goes extinct when it can no longer reproduce or survive sufficiently in its environment.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Εξαφάνισης",
+    "achievementEn": "Extinction Expert",
+    "positiveMessageEl": "Ξέρεις γιατί πραγματικά εξαφανίζεται ένα είδος!",
+    "positiveMessageEn": "You know why a species really goes extinct!",
+    "skillTagEl": "Εξαφάνιση Είδους",
+    "skillTagEn": "Species Extinction"
   },
   "biologia-g-gym.reproduction-purpose": {
-    id: "biologia-g-gym.reproduction-purpose",
-    labelEl: "Σκοπός αναπαραγωγής",
-    labelEn: "Purpose of reproduction",
-    explainEl: "Δεν ξέρει ότι ο βασικός βιολογικός σκοπός της αναπαραγωγής είναι η συνέχεια του είδους.",
-    explainEn: "Doesn't know the basic biological purpose of reproduction is the continuation of the species.",
-    recommendedToolIds: ["chatgpt", "perplexity"],
-    achievementEl: "Ο Γνώστης της Αναπαραγωγής",
-    achievementEn: "Reproduction Expert",
-    positiveMessageEl: "Ξέρεις γιατί υπάρχει η αναπαραγωγή στη φύση!",
-    positiveMessageEn: "You know why reproduction exists in nature!",
-    skillTagEl: "Σκοπός Αναπαραγωγής",
-    skillTagEn: "Purpose of Reproduction",
+    "id": "biologia-g-gym.reproduction-purpose",
+    "labelEl": "Σκοπός αναπαραγωγής",
+    "labelEn": "Purpose of reproduction",
+    "explainEl": "Δεν ξέρει ότι ο βασικός βιολογικός σκοπός της αναπαραγωγής είναι η συνέχεια του είδους.",
+    "explainEn": "Doesn't know the basic biological purpose of reproduction is the continuation of the species.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "perplexity"
+    ],
+    "achievementEl": "Ο Γνώστης της Αναπαραγωγής",
+    "achievementEn": "Reproduction Expert",
+    "positiveMessageEl": "Ξέρεις γιατί υπάρχει η αναπαραγωγή στη φύση!",
+    "positiveMessageEn": "You know why reproduction exists in nature!",
+    "skillTagEl": "Σκοπός Αναπαραγωγής",
+    "skillTagEn": "Purpose of Reproduction"
   },
-
-  // ---------- ΒΙΟΛΟΓΙΑ Α' ΛΥΚΕΙΟΥ (Γενικής Παιδείας) ----------
   "biologia-a-lyk.homeostasis": {
-    id: "biologia-a-lyk.homeostasis",
-    labelEl: "Ομοιόσταση",
-    labelEn: "Homeostasis",
-    explainEl: "Δεν ξέρει ότι η ομοιόσταση είναι η ικανότητα του οργανισμού να διατηρεί σταθερό το εσωτερικό του περιβάλλον.",
-    explainEn: "Doesn't know homeostasis is the organism's ability to keep its internal environment stable.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Ομοιόστασης",
-    achievementEn: "Homeostasis Expert",
-    positiveMessageEl: "Ξέρεις πώς το σώμα σου κρατάει τη σταθερότητά του!",
-    positiveMessageEn: "You know how your body keeps its stability!",
-    skillTagEl: "Ομοιόσταση",
-    skillTagEn: "Homeostasis",
+    "id": "biologia-a-lyk.homeostasis",
+    "labelEl": "Ομοιόσταση",
+    "labelEn": "Homeostasis",
+    "explainEl": "Δεν ξέρει ότι η ομοιόσταση είναι η ικανότητα του οργανισμού να διατηρεί σταθερό το εσωτερικό του περιβάλλον.",
+    "explainEn": "Doesn't know homeostasis is the organism's ability to keep its internal environment stable.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Ομοιόστασης",
+    "achievementEn": "Homeostasis Expert",
+    "positiveMessageEl": "Ξέρεις πώς το σώμα σου κρατάει τη σταθερότητά του!",
+    "positiveMessageEn": "You know how your body keeps its stability!",
+    "skillTagEl": "Ομοιόσταση",
+    "skillTagEn": "Homeostasis"
   },
   "biologia-a-lyk.red-blood-cell-role": {
-    id: "biologia-a-lyk.red-blood-cell-role",
-    labelEl: "Ρόλος ερυθρών αιμοσφαιρίων",
-    labelEn: "Role of red blood cells",
-    explainEl: "Δεν ξέρει ότι ο κύριος ρόλος των ερυθρών αιμοσφαιρίων είναι η μεταφορά οξυγόνου.",
-    explainEn: "Doesn't know the main role of red blood cells is transporting oxygen.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης των Ερυθρών Αιμοσφαιρίων",
-    achievementEn: "Red Blood Cell Expert",
-    positiveMessageEl: "Ξέρεις τι μεταφέρουν τα ερυθρά αιμοσφαίρια!",
-    positiveMessageEn: "You know what red blood cells transport!",
-    skillTagEl: "Ερυθρά Αιμοσφαίρια",
-    skillTagEn: "Red Blood Cells",
+    "id": "biologia-a-lyk.red-blood-cell-role",
+    "labelEl": "Ρόλος ερυθρών αιμοσφαιρίων",
+    "labelEn": "Role of red blood cells",
+    "explainEl": "Δεν ξέρει ότι ο κύριος ρόλος των ερυθρών αιμοσφαιρίων είναι η μεταφορά οξυγόνου.",
+    "explainEn": "Doesn't know the main role of red blood cells is transporting oxygen.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης των Ερυθρών Αιμοσφαιρίων",
+    "achievementEn": "Red Blood Cell Expert",
+    "positiveMessageEl": "Ξέρεις τι μεταφέρουν τα ερυθρά αιμοσφαίρια!",
+    "positiveMessageEn": "You know what red blood cells transport!",
+    "skillTagEl": "Ερυθρά Αιμοσφαίρια",
+    "skillTagEn": "Red Blood Cells"
   },
   "biologia-a-lyk.immune-system": {
-    id: "biologia-a-lyk.immune-system",
-    labelEl: "Ανοσοποιητικό σύστημα",
-    labelEn: "Immune system",
-    explainEl: "Δεν ξέρει ότι το ανοσοποιητικό σύστημα είναι υπεύθυνο για την άμυνα του οργανισμού απέναντι σε μικρόβια.",
-    explainEn: "Doesn't know the immune system is responsible for defending the body against pathogens.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Ανοσίας",
-    achievementEn: "Immunity Expert",
-    positiveMessageEl: "Ξέρεις ποιο σύστημα σε προστατεύει από μικρόβια!",
-    positiveMessageEn: "You know which system protects you from germs!",
-    skillTagEl: "Ανοσοποιητικό Σύστημα",
-    skillTagEn: "Immune System",
+    "id": "biologia-a-lyk.immune-system",
+    "labelEl": "Ανοσοποιητικό σύστημα",
+    "labelEn": "Immune system",
+    "explainEl": "Δεν ξέρει ότι το ανοσοποιητικό σύστημα είναι υπεύθυνο για την άμυνα του οργανισμού απέναντι σε μικρόβια.",
+    "explainEn": "Doesn't know the immune system is responsible for defending the body against pathogens.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Ανοσίας",
+    "achievementEn": "Immunity Expert",
+    "positiveMessageEl": "Ξέρεις ποιο σύστημα σε προστατεύει από μικρόβια!",
+    "positiveMessageEn": "You know which system protects you from germs!",
+    "skillTagEl": "Ανοσοποιητικό Σύστημα",
+    "skillTagEn": "Immune System"
   },
   "biologia-a-lyk.mitochondria-function": {
-    id: "biologia-a-lyk.mitochondria-function",
-    labelEl: "Λειτουργία μιτοχονδρίου",
-    labelEn: "Function of the mitochondrion",
-    explainEl: "Δεν ξέρει ότι το μιτοχόνδριο είναι το οργανίδιο που παράγει την ενέργεια (ATP) του κυττάρου.",
-    explainEn: "Doesn't know the mitochondrion is the organelle that produces the cell's energy (ATP).",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης του Μιτοχονδρίου",
-    achievementEn: "Mitochondria Expert",
-    positiveMessageEl: "Ξέρεις ποιο οργανίδιο παράγει την ενέργεια του κυττάρου!",
-    positiveMessageEn: "You know which organelle produces the cell's energy!",
-    skillTagEl: "Μιτοχόνδριο",
-    skillTagEn: "Mitochondrion",
+    "id": "biologia-a-lyk.mitochondria-function",
+    "labelEl": "Λειτουργία μιτοχονδρίου",
+    "labelEn": "Function of the mitochondrion",
+    "explainEl": "Δεν ξέρει ότι το μιτοχόνδριο είναι το οργανίδιο που παράγει την ενέργεια (ATP) του κυττάρου.",
+    "explainEn": "Doesn't know the mitochondrion is the organelle that produces the cell's energy (ATP).",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης του Μιτοχονδρίου",
+    "achievementEn": "Mitochondria Expert",
+    "positiveMessageEl": "Ξέρεις ποιο οργανίδιο παράγει την ενέργεια του κυττάρου!",
+    "positiveMessageEn": "You know which organelle produces the cell's energy!",
+    "skillTagEl": "Μιτοχόνδριο",
+    "skillTagEn": "Mitochondrion"
   },
   "biologia-a-lyk.digestion-purpose": {
-    id: "biologia-a-lyk.digestion-purpose",
-    labelEl: "Σκοπός πέψης",
-    labelEn: "Purpose of digestion",
-    explainEl: "Δεν ξέρει ότι ο σκοπός της πέψης είναι να διασπάσει την τροφή ώστε να απορροφηθούν τα θρεπτικά συστατικά της.",
-    explainEn: "Doesn't know digestion's purpose is breaking down food so its nutrients can be absorbed.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Πέψης",
-    achievementEn: "Digestion Expert",
-    positiveMessageEl: "Ξέρεις γιατί πραγματικά χρειάζεται η πέψη!",
-    positiveMessageEn: "You know why digestion is really needed!",
-    skillTagEl: "Σκοπός Πέψης",
-    skillTagEn: "Purpose of Digestion",
+    "id": "biologia-a-lyk.digestion-purpose",
+    "labelEl": "Σκοπός πέψης",
+    "labelEn": "Purpose of digestion",
+    "explainEl": "Δεν ξέρει ότι ο σκοπός της πέψης είναι να διασπάσει την τροφή ώστε να απορροφηθούν τα θρεπτικά συστατικά της.",
+    "explainEn": "Doesn't know digestion's purpose is breaking down food so its nutrients can be absorbed.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Πέψης",
+    "achievementEn": "Digestion Expert",
+    "positiveMessageEl": "Ξέρεις γιατί πραγματικά χρειάζεται η πέψη!",
+    "positiveMessageEn": "You know why digestion is really needed!",
+    "skillTagEl": "Σκοπός Πέψης",
+    "skillTagEn": "Purpose of Digestion"
   },
-
-  // ---------- ΒΙΟΛΟΓΙΑ Β' ΛΥΚΕΙΟΥ (Προσανατολισμού) ----------
-  "biologia-b-lyk.mendel-first-law": {
-    id: "biologia-b-lyk.mendel-first-law",
-    labelEl: "Πρώτος νόμος του Mendel",
-    labelEn: "Mendel's first law",
-    explainEl: "Δεν ξέρει ότι σύμφωνα με τον πρώτο νόμο του Mendel, τα γονίδια διαχωρίζονται κατά τη δημιουργία γαμετών.",
-    explainEn: "Doesn't know that according to Mendel's first law, genes separate during gamete formation.",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης του Mendel",
-    achievementEn: "Mendel Expert",
-    positiveMessageEl: "Ξέρεις πώς διαχωρίζονται τα γονίδια στους γαμέτες!",
-    positiveMessageEn: "You know how genes separate in gametes!",
-    skillTagEl: "Νόμος του Mendel",
-    skillTagEn: "Mendel's Law",
+  "physics-b-lyk.circular-motion-tangent-velocity": {
+    "id": "physics-b-lyk.circular-motion-tangent-velocity",
+    "labelEl": "Διεύθυνση ταχύτητας στην κυκλική κίνηση",
+    "labelEn": "Velocity direction in circular motion",
+    "explainEl": "Θεωρεί ότι η στιγμιαία ταχύτητα στην ομαλή κυκλική κίνηση δείχνει προς το κέντρο ή προς τα έξω, αντί να είναι εφαπτομενική στην τροχιά.",
+    "explainEn": "Thinks instantaneous velocity in uniform circular motion points toward the centre or outward instead of tangent to the path.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Χαρτογράφος της Κίνησης",
+    "achievementEn": "Motion Mapper",
+    "positiveMessageEl": "Ξέρεις προς τα πού δείχνει η στιγμιαία ταχύτητα!",
+    "positiveMessageEn": "You know where instantaneous velocity points!",
+    "skillTagEl": "Ομαλή Κυκλική Κίνηση",
+    "skillTagEn": "Uniform Circular Motion"
   },
-  "biologia-b-lyk.transcription-translation": {
-    id: "biologia-b-lyk.transcription-translation",
-    labelEl: "Μεταγραφή & μετάφραση DNA",
-    labelEn: "Transcription & translation of DNA",
-    explainEl: "Δεν ξέρει ότι το DNA μεταφράζεται σε πρωτεΐνη μέσω δύο βημάτων: πρώτα μεταγραφή σε RNA, μετά μετάφραση.",
-    explainEn: "Doesn't know DNA is translated into protein through two steps: first transcription to RNA, then translation.",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Πρωτεϊνοσύνθεσης",
-    achievementEn: "Protein Synthesis Expert",
-    positiveMessageEl: "Ξέρεις τα βήματα από το DNA μέχρι την πρωτεΐνη!",
-    positiveMessageEn: "You know the steps from DNA to protein!",
-    skillTagEl: "Μεταγραφή & Μετάφραση",
-    skillTagEn: "Transcription & Translation",
+  "physics-b-lyk.centripetal-force-direction": {
+    "id": "physics-b-lyk.centripetal-force-direction",
+    "labelEl": "Κατεύθυνση κεντρομόλου δύναμης",
+    "labelEn": "Direction of centripetal force",
+    "explainEl": "Μπερδεύει την κεντρομόλο δύναμη με μια πρόσθετη δύναμη ή θεωρεί ότι κατευθύνεται προς τα έξω, ενώ η συνισταμένη που προκαλεί την κεντρομόλο επιτάχυνση κατευθύνεται προς το κέντρο.",
+    "explainEn": "Treats centripetal force as an extra force or thinks it points outward, while the resultant producing centripetal acceleration points toward the centre.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Πλοηγός της Τροχιάς",
+    "achievementEn": "Orbit Navigator",
+    "positiveMessageEl": "Εντοπίζεις σωστά την κεντρομόλο κατεύθυνση!",
+    "positiveMessageEn": "You identify the centripetal direction correctly!",
+    "skillTagEl": "Κεντρομόλος Δύναμη",
+    "skillTagEn": "Centripetal Force"
   },
-  "biologia-b-lyk.dominant-allele": {
-    id: "biologia-b-lyk.dominant-allele",
-    labelEl: "Επικρατές γονίδιο",
-    labelEn: "Dominant allele",
-    explainEl: "Δεν ξέρει ότι ένα επικρατές (κυρίαρχο) γονίδιο εκφράζεται ακόμα κι όταν συνυπάρχει με ένα υπολειπόμενο.",
-    explainEn: "Doesn't know a dominant allele is expressed even when paired with a recessive one.",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης των Αλληλομόρφων",
-    achievementEn: "Allele Expert",
-    positiveMessageEl: "Ξέρεις πότε εκφράζεται ένα επικρατές γονίδιο!",
-    positiveMessageEn: "You know when a dominant allele gets expressed!",
-    skillTagEl: "Επικρατές Γονίδιο",
-    skillTagEn: "Dominant Allele",
+  "physics-b-lyk.momentum-definition": {
+    "id": "physics-b-lyk.momentum-definition",
+    "labelEl": "Ορμή: μάζα, ταχύτητα και κατεύθυνση",
+    "labelEn": "Momentum: mass, velocity and direction",
+    "explainEl": "Αντιμετωπίζει την ορμή σαν να εξαρτάται μόνο από την ταχύτητα ή ξεχνά ότι είναι διανυσματικό μέγεθος με p = m·v.",
+    "explainEn": "Treats momentum as depending only on velocity or forgets that it is a vector quantity with p = m·v.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Αναλυτής της Ορμής",
+    "achievementEn": "Momentum Analyst",
+    "positiveMessageEl": "Συνδέεις σωστά μάζα, ταχύτητα και ορμή!",
+    "positiveMessageEn": "You correctly connect mass, velocity and momentum!",
+    "skillTagEl": "Ορμή",
+    "skillTagEn": "Momentum"
   },
-  "biologia-b-lyk.biotechnology-definition": {
-    id: "biologia-b-lyk.biotechnology-definition",
-    labelEl: "Έννοια βιοτεχνολογίας",
-    labelEn: "Concept of biotechnology",
-    explainEl: "Δεν ξέρει ότι η βιοτεχνολογία χρησιμοποιεί βιολογικές διεργασίες ή οργανισμούς για την παραγωγή προϊόντων ή λύσεων.",
-    explainEn: "Doesn't know biotechnology uses biological processes or organisms to produce products or solutions.",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Βιοτεχνολογίας",
-    achievementEn: "Biotechnology Expert",
-    positiveMessageEl: "Ξέρεις πώς η βιολογία γίνεται τεχνολογία!",
-    positiveMessageEn: "You know how biology becomes technology!",
-    skillTagEl: "Βιοτεχνολογία",
-    skillTagEn: "Biotechnology",
+  "physics-b-lyk.momentum-conservation": {
+    "id": "physics-b-lyk.momentum-conservation",
+    "labelEl": "Διατήρηση ορμής στις κρούσεις",
+    "labelEn": "Conservation of momentum in collisions",
+    "explainEl": "Πιστεύει ότι σε μια κρούση η συνολική ορμή ενός μονωμένου συστήματος χάνεται όταν μειώνεται η κινητική ενέργεια.",
+    "explainEn": "Believes total momentum of an isolated system is lost in a collision when kinetic energy decreases.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ελεγκτής των Κρούσεων",
+    "achievementEn": "Collision Checker",
+    "positiveMessageEl": "Ξεχωρίζεις τη διατήρηση ορμής από τη διατήρηση κινητικής ενέργειας!",
+    "positiveMessageEn": "You distinguish momentum conservation from kinetic-energy conservation!",
+    "skillTagEl": "Διατήρηση Ορμής",
+    "skillTagEn": "Momentum Conservation"
   },
-  "biologia-b-lyk.heterozygous-genotype": {
-    id: "biologia-b-lyk.heterozygous-genotype",
-    labelEl: "Ετερόζυγος γονότυπος",
-    labelEn: "Heterozygous genotype",
-    explainEl: "Δεν ξέρει ότι ένας ετερόζυγος γονότυπος (π.χ. Aa) σημαίνει ότι το άτομο έχει ένα κυρίαρχο και ένα υπολειπόμενο αλληλόμορφο.",
-    explainEn: "Doesn't know a heterozygous genotype (e.g. Aa) means the individual has one dominant and one recessive allele.",
-    recommendedToolIds: ["chatgpt", "wolfram-alpha", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης του Γονότυπου",
-    achievementEn: "Genotype Expert",
-    positiveMessageEl: "Ξέρεις τι σημαίνει ένας ετερόζυγος γονότυπος!",
-    positiveMessageEn: "You know what a heterozygous genotype means!",
-    skillTagEl: "Ετερόζυγος Γονότυπος",
-    skillTagEn: "Heterozygous Genotype",
+  "physics-b-lyk.first-law-energy-balance": {
+    "id": "physics-b-lyk.first-law-energy-balance",
+    "labelEl": "1ος θερμοδυναμικός νόμος: ενεργειακό ισοζύγιο",
+    "labelEn": "First law of thermodynamics: energy balance",
+    "explainEl": "Θεωρεί ότι η θερμότητα που δέχεται ένα αέριο μετατρέπεται μόνο σε έργο ή μόνο σε εσωτερική ενέργεια, αντί να εφαρμόζει το ενεργειακό ισοζύγιο του 1ου θερμοδυναμικού νόμου.",
+    "explainEn": "Assumes heat supplied to a gas becomes only work or only internal energy instead of applying the first-law energy balance.",
+    "recommendedToolIds": [
+      "wolfram-alpha",
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Λογιστής της Ενέργειας",
+    "achievementEn": "Energy Accountant",
+    "positiveMessageEl": "Κρατάς σωστά το ενεργειακό ισοζύγιο!",
+    "positiveMessageEn": "You keep the energy balance straight!",
+    "skillTagEl": "1ος Θερμοδυναμικός Νόμος",
+    "skillTagEn": "First Law of Thermodynamics"
   },
-
-  // ---------- ΒΙΟΛΟΓΙΑ Γ' ΛΥΚΕΙΟΥ (Προσανατολισμού) ----------
-  "biologia-g-lyk.antibody-source": {
-    id: "biologia-g-lyk.antibody-source",
-    labelEl: "Παραγωγή αντισωμάτων",
-    labelEn: "Antibody production",
-    explainEl: "Δεν ξέρει ότι τα αντισώματα παράγονται από τα Β-λεμφοκύτταρα του ανοσοποιητικού συστήματος.",
-    explainEn: "Doesn't know antibodies are produced by B-lymphocytes of the immune system.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης των Αντισωμάτων",
-    achievementEn: "Antibody Expert",
-    positiveMessageEl: "Ξέρεις ποια κύτταρα παράγουν τα αντισώματα!",
-    positiveMessageEn: "You know which cells produce antibodies!",
-    skillTagEl: "Αντισώματα",
-    skillTagEn: "Antibodies",
+  "biologia-b-lyk.specific-nonspecific-immunity": {
+    "id": "biologia-b-lyk.specific-nonspecific-immunity",
+    "labelEl": "Ειδική και μη ειδική άμυνα",
+    "labelEn": "Specific and non-specific immunity",
+    "explainEl": "Μπερδεύει τους γενικούς φραγμούς/μηχανισμούς άμυνας με την ειδική ανοσολογική απόκριση και τα λεμφοκύτταρα.",
+    "explainEn": "Confuses general barriers/non-specific defence mechanisms with the specific immune response and lymphocytes.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Χαρτογράφος της Άμυνας",
+    "achievementEn": "Defence Mapper",
+    "positiveMessageEl": "Ξεχωρίζεις την ειδική από τη μη ειδική άμυνα!",
+    "positiveMessageEn": "You distinguish specific from non-specific defence!",
+    "skillTagEl": "Ανοσία",
+    "skillTagEn": "Immunity"
   },
-  "biologia-g-lyk.natural-selection": {
-    id: "biologia-g-lyk.natural-selection",
-    labelEl: "Φυσική επιλογή",
-    labelEn: "Natural selection",
-    explainEl: "Δεν ξέρει ότι η φυσική επιλογή ευνοεί οργανισμούς που είναι καλύτερα προσαρμοσμένοι στο περιβάλλον τους και αναπαράγονται περισσότερο.",
-    explainEn: "Doesn't know natural selection favors organisms better adapted to their environment that reproduce more.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Φυσικής Επιλογής",
-    achievementEn: "Natural Selection Expert",
-    positiveMessageEl: "Ξέρεις πώς λειτουργεί πραγματικά η φυσική επιλογή!",
-    positiveMessageEn: "You know how natural selection really works!",
-    skillTagEl: "Φυσική Επιλογή",
-    skillTagEn: "Natural Selection",
+  "biologia-b-lyk.vaccine-immune-memory": {
+    "id": "biologia-b-lyk.vaccine-immune-memory",
+    "labelEl": "Εμβολιασμός και ανοσολογική μνήμη",
+    "labelEn": "Vaccination and immune memory",
+    "explainEl": "Πιστεύει ότι το εμβόλιο σκοτώνει άμεσα τα μικρόβια ή λειτουργεί σαν αντιβιοτικό, αντί να προκαλεί ειδική ανοσολογική απόκριση και μνήμη.",
+    "explainEn": "Believes a vaccine directly kills microbes or works like an antibiotic instead of inducing a specific immune response and memory.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Γνώστης της Ανοσολογικής Μνήμης",
+    "achievementEn": "Immune Memory Expert",
+    "positiveMessageEl": "Καταλαβαίνεις γιατί το ανοσοποιητικό θυμάται!",
+    "positiveMessageEn": "You understand why the immune system remembers!",
+    "skillTagEl": "Εμβολιασμός",
+    "skillTagEn": "Vaccination"
   },
-  "biologia-g-lyk.vaccine-mechanism": {
-    id: "biologia-g-lyk.vaccine-mechanism",
-    labelEl: "Μηχανισμός εμβολιασμού",
-    labelEn: "Vaccine mechanism",
-    explainEl: "Δεν ξέρει ότι ένα εμβόλιο λειτουργεί εκπαιδεύοντας το ανοσοποιητικό σύστημα να αναγνωρίζει έναν παθογόνο, χωρίς να προκαλεί πραγματική νόσο.",
-    explainEn: "Doesn't know a vaccine works by training the immune system to recognize a pathogen, without causing actual disease.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης των Εμβολίων",
-    achievementEn: "Vaccine Expert",
-    positiveMessageEl: "Ξέρεις πώς λειτουργεί πραγματικά ένα εμβόλιο!",
-    positiveMessageEn: "You know how a vaccine really works!",
-    skillTagEl: "Μηχανισμός Εμβολίου",
-    skillTagEn: "Vaccine Mechanism",
+  "biologia-b-lyk.producers-ecosystem": {
+    "id": "biologia-b-lyk.producers-ecosystem",
+    "labelEl": "Παραγωγοί σε ένα οικοσύστημα",
+    "labelEn": "Producers in an ecosystem",
+    "explainEl": "Δεν αναγνωρίζει ότι οι παραγωγοί αποτελούν τη βάση της ροής ενέργειας, μετατρέποντας εξωτερική ενέργεια σε χημική ενέργεια οργανικής ύλης.",
+    "explainEn": "Does not recognize producers as the base of energy flow, converting external energy into chemical energy in organic matter.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Οικολόγος της Βάσης",
+    "achievementEn": "Foundation Ecologist",
+    "positiveMessageEl": "Ξέρεις γιατί οι παραγωγοί στηρίζουν το οικοσύστημα!",
+    "positiveMessageEn": "You know why producers support the ecosystem!",
+    "skillTagEl": "Παραγωγοί & Οικοσύστημα",
+    "skillTagEn": "Producers & Ecosystems"
   },
-  "biologia-g-lyk.energy-food-chain": {
-    id: "biologia-g-lyk.energy-food-chain",
-    labelEl: "Ενέργεια σε τροφική αλυσίδα",
-    labelEn: "Energy in a food chain",
-    explainEl: "Δεν ξέρει ότι η ενέργεια μειώνεται καθώς περνάει από το ένα τροφικό επίπεδο στο επόμενο σε μια τροφική αλυσίδα.",
-    explainEn: "Doesn't know energy decreases as it passes from one trophic level to the next in a food chain.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Τροφικής Αλυσίδας",
-    achievementEn: "Food Chain Expert",
-    positiveMessageEl: "Ξέρεις τι συμβαίνει στην ενέργεια σε μια τροφική αλυσίδα!",
-    positiveMessageEn: "You know what happens to energy in a food chain!",
-    skillTagEl: "Τροφική Αλυσίδα",
-    skillTagEn: "Food Chain",
+  "biologia-b-lyk.energy-trophic-levels": {
+    "id": "biologia-b-lyk.energy-trophic-levels",
+    "labelEl": "Ροή ενέργειας στα τροφικά επίπεδα",
+    "labelEn": "Energy flow across trophic levels",
+    "explainEl": "Θεωρεί ότι όλη η ενέργεια περνά αμετάβλητη από ένα τροφικό επίπεδο στο επόμενο ή ότι η ενέργεια ανακυκλώνεται όπως η ύλη.",
+    "explainEn": "Thinks all energy passes unchanged to the next trophic level or that energy cycles like matter.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Αναλυτής της Ροής Ενέργειας",
+    "achievementEn": "Energy Flow Analyst",
+    "positiveMessageEl": "Παρακολουθείς σωστά τη ροή ενέργειας!",
+    "positiveMessageEn": "You track energy flow correctly!",
+    "skillTagEl": "Τροφικά Επίπεδα",
+    "skillTagEn": "Trophic Levels"
   },
-  "biologia-g-lyk.evolution-timescale": {
-    id: "biologia-g-lyk.evolution-timescale",
-    labelEl: "Χρονική κλίμακα εξέλιξης",
-    labelEn: "Timescale of evolution",
-    explainEl: "Δεν ξέρει ότι η εξέλιξη ενός είδους συμβαίνει σε πολλές γενιές, μέσω σταδιακών αλλαγών στη συχνότητα γονιδίων, όχι σε ένα άτομο.",
-    explainEn: "Doesn't know a species evolves over many generations through gradual gene-frequency changes, not within one individual.",
-    recommendedToolIds: ["chatgpt", "chatgpt-edu"],
-    achievementEl: "Ο Γνώστης της Εξέλιξης",
-    achievementEn: "Evolution Expert",
-    positiveMessageEl: "Ξέρεις σε ποια χρονική κλίμακα συμβαίνει η εξέλιξη!",
-    positiveMessageEn: "You know on what timescale evolution happens!",
-    skillTagEl: "Χρονική Κλίμακα Εξέλιξης",
-    skillTagEn: "Evolution Timescale",
+  "biologia-b-lyk.natural-selection-population": {
+    "id": "biologia-b-lyk.natural-selection-population",
+    "labelEl": "Φυσική επιλογή σε πληθυσμούς",
+    "labelEn": "Natural selection in populations",
+    "explainEl": "Πιστεύει ότι ένα άτομο αλλάζει επειδή «χρειάζεται» να προσαρμοστεί, αντί η φυσική επιλογή να μεταβάλλει τη συχνότητα κληρονομήσιμων χαρακτηριστικών σε πληθυσμούς μέσα σε γενιές.",
+    "explainEn": "Believes an individual changes because it “needs” to adapt, instead of natural selection changing frequencies of heritable traits in populations across generations.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ερευνητής της Εξέλιξης",
+    "achievementEn": "Evolution Researcher",
+    "positiveMessageEl": "Σκέφτεσαι την εξέλιξη σε επίπεδο πληθυσμού και γενεών!",
+    "positiveMessageEn": "You think about evolution at the population and generational level!",
+    "skillTagEl": "Φυσική Επιλογή",
+    "skillTagEn": "Natural Selection"
   },
-};
-
-// ---------- QUIZZES ----------
-// ---------- GRADES (ανά ζώνη, για την πλοήγηση ζώνη -> τάξη -> μάθημα) ----------
-const GRADES = {
-  primary: [
-    { id: "a", labelEl: "Α' Δημοτικού", labelEn: "1st Grade" },
-    { id: "b", labelEl: "Β' Δημοτικού", labelEn: "2nd Grade" },
-    { id: "c", labelEl: "Γ' Δημοτικού", labelEn: "3rd Grade" },
-    { id: "d", labelEl: "Δ' Δημοτικού", labelEn: "4th Grade" },
-    { id: "e", labelEl: "Ε' Δημοτικού", labelEn: "5th Grade" },
-    { id: "st", labelEl: "ΣΤ' Δημοτικού", labelEn: "6th Grade" },
-  ],
-  middle: [
-    { id: "a", labelEl: "Α' Γυμνασίου", labelEn: "7th Grade" },
-    { id: "b", labelEl: "Β' Γυμνασίου", labelEn: "8th Grade" },
-    { id: "c", labelEl: "Γ' Γυμνασίου", labelEn: "9th Grade" },
-  ],
-  high: [
-    { id: "a", labelEl: "Α' Λυκείου", labelEn: "10th Grade" },
-    { id: "b", labelEl: "Β' Λυκείου", labelEn: "11th Grade" },
-    { id: "c", labelEl: "Γ' Λυκείου", labelEn: "12th Grade" },
-  ],
+  "biologia-g-lyk.genetic-material-dna": {
+    "id": "biologia-g-lyk.genetic-material-dna",
+    "labelEl": "DNA ως γενετικό υλικό",
+    "labelEn": "DNA as genetic material",
+    "explainEl": "Δεν έχει παγιώσει ότι στα ανθρώπινα κύτταρα το DNA αποθηκεύει τη γενετική πληροφορία και οργανώνεται σε χρωμοσώματα.",
+    "explainEn": "Has not consolidated that DNA stores genetic information in human cells and is organized into chromosomes.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Χαρτογράφος του DNA",
+    "achievementEn": "DNA Mapper",
+    "positiveMessageEl": "Εντοπίζεις σωστά πού βρίσκεται η γενετική πληροφορία!",
+    "positiveMessageEn": "You correctly identify where genetic information is stored!",
+    "skillTagEl": "Γενετικό Υλικό",
+    "skillTagEn": "Genetic Material"
+  },
+  "biologia-g-lyk.transcription-translation": {
+    "id": "biologia-g-lyk.transcription-translation",
+    "labelEl": "Μεταγραφή και μετάφραση",
+    "labelEn": "Transcription and translation",
+    "explainEl": "Μπερδεύει τη μεταγραφή με τη μετάφραση ή θεωρεί ότι το DNA μετατρέπεται απευθείας σε πρωτεΐνη χωρίς RNA και ριβόσωμα.",
+    "explainEn": "Confuses transcription with translation or thinks DNA turns directly into protein without RNA and a ribosome.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Αποκωδικοποιητής της Έκφρασης",
+    "achievementEn": "Gene Expression Decoder",
+    "positiveMessageEl": "Ξέρεις τη διαδρομή της πληροφορίας από DNA σε πρωτεΐνη!",
+    "positiveMessageEn": "You know the information path from DNA to protein!",
+    "skillTagEl": "Γονιδιακή Έκφραση",
+    "skillTagEn": "Gene Expression"
+  },
+  "biologia-g-lyk.heterozygous-genotype": {
+    "id": "biologia-g-lyk.heterozygous-genotype",
+    "labelEl": "Ομόζυγος και ετερόζυγος γονότυπος",
+    "labelEn": "Homozygous and heterozygous genotype",
+    "explainEl": "Μπερδεύει τον ετερόζυγο γονότυπο με τον ομόζυγο ή θεωρεί ότι Aa περιέχει δύο ίδια αλληλόμορφα.",
+    "explainEn": "Confuses heterozygous with homozygous genotype or thinks Aa contains two identical alleles.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Αναλυτής του Γονότυπου",
+    "achievementEn": "Genotype Analyst",
+    "positiveMessageEl": "Ξεχωρίζεις σωστά ομόζυγο και ετερόζυγο!",
+    "positiveMessageEn": "You correctly distinguish homozygous and heterozygous genotypes!",
+    "skillTagEl": "Μενδελική Κληρονομικότητα",
+    "skillTagEn": "Mendelian Inheritance"
+  },
+  "biologia-g-lyk.mutation-definition": {
+    "id": "biologia-g-lyk.mutation-definition",
+    "labelEl": "Μεταλλάξεις και γενετικό υλικό",
+    "labelEn": "Mutations and genetic material",
+    "explainEl": "Θεωρεί ότι κάθε μετάλλαξη είναι πάντα βλαβερή ή ότι μετάλλαξη είναι οποιαδήποτε αλλαγή σε ένα χαρακτηριστικό χωρίς αλλαγή στο γενετικό υλικό.",
+    "explainEn": "Assumes every mutation is always harmful or that any trait change counts as a mutation without a change in genetic material.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Ερευνητής των Μεταλλάξεων",
+    "achievementEn": "Mutation Researcher",
+    "positiveMessageEl": "Καταλαβαίνεις τι είναι μετάλλαξη και ότι τα αποτελέσματά της διαφέρουν!",
+    "positiveMessageEn": "You understand what a mutation is and that its effects can differ!",
+    "skillTagEl": "Μεταλλάξεις",
+    "skillTagEn": "Mutations"
+  },
+  "biologia-g-lyk.recombinant-dna": {
+    "id": "biologia-g-lyk.recombinant-dna",
+    "labelEl": "Ανασυνδυασμένο DNA",
+    "labelEn": "Recombinant DNA",
+    "explainEl": "Δεν ξεχωρίζει την τεχνολογία ανασυνδυασμένου DNA από τη φυσική αναπαραγωγή ή θεωρεί ότι δεν απαιτεί απομόνωση, κοπή και σύνδεση τμημάτων DNA.",
+    "explainEn": "Does not distinguish recombinant-DNA technology from natural reproduction or thinks it does not involve isolating, cutting, and joining DNA fragments.",
+    "recommendedToolIds": [
+      "chatgpt",
+      "chatgpt-edu"
+    ],
+    "achievementEl": "Ο Μηχανικός του DNA",
+    "achievementEn": "DNA Engineer",
+    "positiveMessageEl": "Καταλαβαίνεις τη βασική λογική της τεχνολογίας ανασυνδυασμένου DNA!",
+    "positiveMessageEn": "You understand the core logic of recombinant-DNA technology!",
+    "skillTagEl": "Τεχνολογία Ανασυνδυασμένου DNA",
+    "skillTagEn": "Recombinant DNA Technology"
+  }
 };
 
 const QUIZZES = {
-  primary: {
+  "primary": {
     "math-a-dimotikou": {
-      id: "math-a-dimotikou",
-      grades: ["a"],
-      subjectLabelEl: "Μαθηματικά, Α' Δημοτικού",
-      subjectLabelEn: "Math, 1st Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-number-order",
-          textEl: "Ποιος αριθμός είναι ο μεγαλύτερος;",
-          textEn: "Which number is the biggest?",
-          options: [
-            { textEl: "17", textEn: "17", isCorrect: true },
-            { textEl: "12", textEn: "12", isCorrect: false, gapTag: "math-a-dim.number-order" },
-            { textEl: "Είναι ίδιοι", textEn: "They're the same", isCorrect: false, gapTag: "math-a-dim.number-order" },
-          ],
-        },
-        {
-          id: "q2-crossing-ten",
-          textEl: "Πόσο κάνει 8 + 5;",
-          textEn: "What is 8 + 5?",
-          options: [
-            { textEl: "13", textEn: "13", isCorrect: true },
-            { textEl: "12", textEn: "12", isCorrect: false, gapTag: "math-a-dim.addition-crossing-ten" },
-            { textEl: "14", textEn: "14", isCorrect: false, gapTag: "math-a-dim.addition-crossing-ten" },
-          ],
-        },
-        {
-          id: "q3-subtraction-meaning",
-          textEl: "Ο Νίκος έχει 10 αυτοκινητάκια και δίνει 4 στον φίλο του. Πόσα του μένουν;",
-          textEn: "Nick has 10 toy cars and gives 4 to his friend. How many are left?",
-          options: [
-            { textEl: "6", textEn: "6", isCorrect: true },
-            { textEl: "14", textEn: "14", isCorrect: false, gapTag: "math-a-dim.subtraction-borrowing-concept" },
-            { textEl: "4", textEn: "4", isCorrect: false, gapTag: "math-a-dim.subtraction-borrowing-concept" },
-          ],
-        },
-        {
-          id: "q4-shapes",
-          textEl: "Ποιο σχήμα έχει 4 ίσες πλευρές;",
-          textEn: "Which shape has 4 equal sides?",
-          options: [
-            { textEl: "Το τετράγωνο.", textEn: "The square.", isCorrect: true },
-            { textEl: "Το ορθογώνιο (με 2 μακριές και 2 κοντές πλευρές).", textEn: "The rectangle (with 2 long and 2 short sides).", isCorrect: false, gapTag: "math-a-dim.shape-recognition" },
-            { textEl: "Το τρίγωνο.", textEn: "The triangle.", isCorrect: false, gapTag: "math-a-dim.shape-recognition" },
-          ],
-        },
-        {
-          id: "q5-ordinal",
-          textEl: "Σε μια ουρά, ο Πέτρος είναι τρίτος. Πόσα παιδιά είναι μπροστά του;",
-          textEn: "In a line, Peter is third. How many children are in front of him?",
-          options: [
-            { textEl: "2", textEn: "2", isCorrect: true },
-            { textEl: "3", textEn: "3", isCorrect: false, gapTag: "math-a-dim.ordinal-numbers" },
-            { textEl: "1", textEn: "1", isCorrect: false, gapTag: "math-a-dim.ordinal-numbers" },
-          ],
-        },
-        {
-          id: "q6-length",
-          textEl: "Δύο μολύβια είναι στο τραπέζι, το ένα πιο μπροστά από το άλλο. Πώς θα δεις σίγουρα ποιο είναι πιο μακρύ;",
-          textEn: "Two pencils are on the table, one further forward than the other. How can you be sure which is longer?",
-          options: [
-            { textEl: "Βάζοντας τις άκρες τους στην ίδια αφετηρία και συγκρίνοντας.", textEn: "Aligning their ends at the same starting point and comparing.", isCorrect: true },
-            { textEl: "Κοιτάζοντας μόνο ποιο φαίνεται πιο μπροστά.", textEn: "Just looking at which one appears further forward.", isCorrect: false, gapTag: "math-a-dim.length-comparison" },
-            { textEl: "Δεν μπορείς ποτέ να το καταλάβεις.", textEn: "You can never tell.", isCorrect: false, gapTag: "math-a-dim.length-comparison" },
-          ],
-        },
-        {
-          id: "q7-subtraction-cross",
-          textEl: "Πόσο κάνει 13 - 5;",
-          textEn: "What is 13 - 5?",
-          options: [
-            { textEl: "8", textEn: "8", isCorrect: true },
-            { textEl: "18", textEn: "18", isCorrect: false, gapTag: "math-a-dim.subtraction-crossing-ten" },
-            { textEl: "7", textEn: "7", isCorrect: false, gapTag: "math-a-dim.subtraction-crossing-ten" },
-          ],
-        },
-        {
-          id: "q8-coins",
-          textEl: "Ποιο νόμισμα αξίζει περισσότερο;",
-          textEn: "Which coin is worth more?",
-          options: [
-            { textEl: "Το κέρμα του 1 ευρώ.", textEn: "The €1 coin.", isCorrect: true },
-            { textEl: "Το κέρμα του 1 λεπτού, γιατί μπορεί να είναι μεγαλύτερο σε μέγεθος.", textEn: "The 1-cent coin, because it may be bigger in size.", isCorrect: false, gapTag: "math-a-dim.coin-recognition" },
-            { textEl: "Έχουν πάντα την ίδια αξία.", textEn: "They're always worth the same.", isCorrect: false, gapTag: "math-a-dim.coin-recognition" },
-          ],
-        },
+      "id": "math-a-dimotikou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Μαθηματικά, Α' Δημοτικού",
+      "subjectLabelEn": "Math, 1st Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-number-order",
+          "textEl": "Ποιος αριθμός είναι ο μεγαλύτερος;",
+          "textEn": "Which number is the biggest?",
+          "options": [
+            {
+              "textEl": "17",
+              "textEn": "17",
+              "isCorrect": true
+            },
+            {
+              "textEl": "12",
+              "textEn": "12",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.number-order"
+            },
+            {
+              "textEl": "Είναι ίδιοι",
+              "textEn": "They're the same",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.number-order"
+            }
+          ]
+        },
+        {
+          "id": "q2-crossing-ten",
+          "textEl": "Πόσο κάνει 8 + 5;",
+          "textEn": "What is 8 + 5?",
+          "options": [
+            {
+              "textEl": "13",
+              "textEn": "13",
+              "isCorrect": true
+            },
+            {
+              "textEl": "12",
+              "textEn": "12",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.addition-crossing-ten"
+            },
+            {
+              "textEl": "14",
+              "textEn": "14",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.addition-crossing-ten"
+            }
+          ]
+        },
+        {
+          "id": "q3-subtraction-meaning",
+          "textEl": "Ο Νίκος έχει 10 αυτοκινητάκια και δίνει 4 στον φίλο του. Πόσα του μένουν;",
+          "textEn": "Nick has 10 toy cars and gives 4 to his friend. How many are left?",
+          "options": [
+            {
+              "textEl": "6",
+              "textEn": "6",
+              "isCorrect": true
+            },
+            {
+              "textEl": "14",
+              "textEn": "14",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.subtraction-borrowing-concept"
+            },
+            {
+              "textEl": "4",
+              "textEn": "4",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.subtraction-borrowing-concept"
+            }
+          ]
+        },
+        {
+          "id": "q4-shapes",
+          "textEl": "Ποιο σχήμα έχει 4 ίσες πλευρές;",
+          "textEn": "Which shape has 4 equal sides?",
+          "options": [
+            {
+              "textEl": "Το τετράγωνο.",
+              "textEn": "The square.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το ορθογώνιο (με 2 μακριές και 2 κοντές πλευρές).",
+              "textEn": "The rectangle (with 2 long and 2 short sides).",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.shape-recognition"
+            },
+            {
+              "textEl": "Το τρίγωνο.",
+              "textEn": "The triangle.",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.shape-recognition"
+            }
+          ]
+        },
+        {
+          "id": "q5-ordinal",
+          "textEl": "Σε μια ουρά, ο Πέτρος είναι τρίτος. Πόσα παιδιά είναι μπροστά του;",
+          "textEn": "In a line, Peter is third. How many children are in front of him?",
+          "options": [
+            {
+              "textEl": "2",
+              "textEn": "2",
+              "isCorrect": true
+            },
+            {
+              "textEl": "3",
+              "textEn": "3",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.ordinal-numbers"
+            },
+            {
+              "textEl": "1",
+              "textEn": "1",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.ordinal-numbers"
+            }
+          ]
+        },
+        {
+          "id": "q6-length",
+          "textEl": "Δύο μολύβια είναι στο τραπέζι, το ένα πιο μπροστά από το άλλο. Πώς θα δεις σίγουρα ποιο είναι πιο μακρύ;",
+          "textEn": "Two pencils are on the table, one further forward than the other. How can you be sure which is longer?",
+          "options": [
+            {
+              "textEl": "Βάζοντας τις άκρες τους στην ίδια αφετηρία και συγκρίνοντας.",
+              "textEn": "Aligning their ends at the same starting point and comparing.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Κοιτάζοντας μόνο ποιο φαίνεται πιο μπροστά.",
+              "textEn": "Just looking at which one appears further forward.",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.length-comparison"
+            },
+            {
+              "textEl": "Δεν μπορείς ποτέ να το καταλάβεις.",
+              "textEn": "You can never tell.",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.length-comparison"
+            }
+          ]
+        },
+        {
+          "id": "q7-subtraction-cross",
+          "textEl": "Πόσο κάνει 13 - 5;",
+          "textEn": "What is 13 - 5?",
+          "options": [
+            {
+              "textEl": "8",
+              "textEn": "8",
+              "isCorrect": true
+            },
+            {
+              "textEl": "18",
+              "textEn": "18",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.subtraction-crossing-ten"
+            },
+            {
+              "textEl": "7",
+              "textEn": "7",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.subtraction-crossing-ten"
+            }
+          ]
+        },
+        {
+          "id": "q8-coins",
+          "textEl": "Ποιο νόμισμα αξίζει περισσότερο;",
+          "textEn": "Which coin is worth more?",
+          "options": [
+            {
+              "textEl": "Το κέρμα του 1 ευρώ.",
+              "textEn": "The €1 coin.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το κέρμα του 1 λεπτού, γιατί μπορεί να είναι μεγαλύτερο σε μέγεθος.",
+              "textEn": "The 1-cent coin, because it may be bigger in size.",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.coin-recognition"
+            },
+            {
+              "textEl": "Έχουν πάντα την ίδια αξία.",
+              "textEn": "They're always worth the same.",
+              "isCorrect": false,
+              "gapTag": "math-a-dim.coin-recognition"
+            }
+          ]
+        }
+      ]
     },
-
     "glossa-a-dimotikou": {
-      id: "glossa-a-dimotikou",
-      grades: ["a"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Α' Δημοτικού",
-      subjectLabelEn: "Modern Greek Language, 1st Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-letters",
-          textEl: "Ποιο γράμμα ακούγεται στην αρχή της λέξης «βάρκα»;",
-          textEn: "Which letter starts the Greek word 'βάρκα' (boat)?",
-          options: [
-            { textEl: "β", textEn: "β (v)", isCorrect: true },
-            { textEl: "δ", textEn: "δ (dh)", isCorrect: false, gapTag: "glossa-a-dim.letter-sound-confusion" },
-            { textEl: "μ", textEn: "μ (m)", isCorrect: false, gapTag: "glossa-a-dim.letter-sound-confusion" },
-          ],
-        },
-        {
-          id: "q2-sentence-boundary",
-          textEl: "«ο σκυλος τρεχει στο παρκο» — Τι λείπει από αυτή την πρόταση;",
-          textEn: "'the dog runs in the park' (no capital, no full stop) — What is this sentence missing?",
-          options: [
-            { textEl: "Κεφαλαίο γράμμα στην αρχή και τελεία στο τέλος.", textEn: "A capital letter at the start and a full stop at the end.", isCorrect: true },
-            { textEl: "Τίποτα, είναι σωστή όπως είναι.", textEn: "Nothing, it's fine as it is.", isCorrect: false, gapTag: "glossa-a-dim.sentence-boundary" },
-            { textEl: "Ένα ερωτηματικό στο τέλος.", textEn: "A question mark at the end.", isCorrect: false, gapTag: "glossa-a-dim.sentence-boundary" },
-          ],
-        },
-        {
-          id: "q3-plural",
-          textEl: "«Ένα παιδί» → Πολλά...",
-          textEn: "'One child' (Greek: «παιδί») → Many...",
-          options: [
-            { textEl: "παιδιά", textEn: "«παιδιά» (children)", isCorrect: true },
-            { textEl: "παιδί", textEn: "«παιδί» (unchanged)", isCorrect: false, gapTag: "glossa-a-dim.plural-formation" },
-            { textEl: "παιδίες", textEn: "«παιδίες» (invented form)", isCorrect: false, gapTag: "glossa-a-dim.plural-formation" },
-          ],
-        },
-        {
-          id: "q4-word-order",
-          textEl: "Ποια σειρά λέξεων σχηματίζει σωστή πρόταση;",
-          textEn: "Which word order forms a correct sentence?",
-          options: [
-            { textEl: "«Η Μαρία παίζει μπάλα.»", textEn: "'Maria plays ball.'", isCorrect: true },
-            { textEl: "«Μπάλα Μαρία παίζει η.»", textEn: "'Ball Maria plays the.' (scrambled)", isCorrect: false, gapTag: "glossa-a-dim.word-order-basic" },
-            { textEl: "«Παίζει η μπάλα Μαρία.»", textEn: "'Plays the ball Maria.' (scrambled)", isCorrect: false, gapTag: "glossa-a-dim.word-order-basic" },
-          ],
-        },
-        {
-          id: "q5-rhyme",
-          textEl: "Ποιες δύο λέξεις κάνουν ομοιοκαταληξία;",
-          textEn: "Which two words rhyme?",
-          options: [
-            { textEl: "«γάτα» - «πάτα»", textEn: "'γάτα' (cat) - 'πάτα' (step)", isCorrect: true },
-            { textEl: "«γάτα» - «σκύλος»", textEn: "'γάτα' (cat) - 'σκύλος' (dog)", isCorrect: false, gapTag: "glossa-a-dim.rhyming-words" },
-            { textEl: "«γάτα» - «τραπέζι»", textEn: "'γάτα' (cat) - 'τραπέζι' (table)", isCorrect: false, gapTag: "glossa-a-dim.rhyming-words" },
-          ],
-        },
-        {
-          id: "q6-verb-agreement",
-          textEl: "Ποια πρόταση είναι σωστή;",
-          textEn: "Which sentence is correct?",
-          options: [
-            { textEl: "«Τα παιδιά παίζουν στην αυλή.»", textEn: "'The children play in the yard.'", isCorrect: true },
-            { textEl: "«Τα παιδιά παίζει στην αυλή.»", textEn: "'The children plays in the yard.' (wrong agreement)", isCorrect: false, gapTag: "glossa-a-dim.singular-plural-verb" },
-            { textEl: "«Το παιδί παίζουν στην αυλή.»", textEn: "'The child play in the yard.' (wrong agreement)", isCorrect: false, gapTag: "glossa-a-dim.singular-plural-verb" },
-          ],
-        },
-        {
-          id: "q7-question-mark",
-          textEl: "Ποια πρόταση χρειάζεται ερωτηματικό στο τέλος;",
-          textEn: "Which sentence needs a question mark at the end?",
-          options: [
-            { textEl: "«Πού πήγες χθες»", textEn: "'Where did you go yesterday'", isCorrect: true },
-            { textEl: "«Πήγα στο σχολείο»", textEn: "'I went to school'", isCorrect: false, gapTag: "glossa-a-dim.question-mark-usage" },
-            { textEl: "«Μου αρέσει το παγωτό»", textEn: "'I like ice cream'", isCorrect: false, gapTag: "glossa-a-dim.question-mark-usage" },
-          ],
-        },
-        {
-          id: "q8-opposites",
-          textEl: "Ποιο είναι το αντίθετο του «ζεστός»;",
-          textEn: "What is the opposite of 'hot'?",
-          options: [
-            { textEl: "κρύος", textEn: "cold", isCorrect: true },
-            { textEl: "μεγάλος", textEn: "big", isCorrect: false, gapTag: "glossa-a-dim.opposite-words-basic" },
-            { textEl: "γρήγορος", textEn: "fast", isCorrect: false, gapTag: "glossa-a-dim.opposite-words-basic" },
-          ],
-        },
+      "id": "glossa-a-dimotikou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Α' Δημοτικού",
+      "subjectLabelEn": "Modern Greek Language, 1st Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-letters",
+          "textEl": "Ποιο γράμμα ακούγεται στην αρχή της λέξης «βάρκα»;",
+          "textEn": "Which letter starts the Greek word 'βάρκα' (boat)?",
+          "options": [
+            {
+              "textEl": "β",
+              "textEn": "β (v)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "δ",
+              "textEn": "δ (dh)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.letter-sound-confusion"
+            },
+            {
+              "textEl": "μ",
+              "textEn": "μ (m)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.letter-sound-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q2-sentence-boundary",
+          "textEl": "«ο σκυλος τρεχει στο παρκο» — Τι λείπει από αυτή την πρόταση;",
+          "textEn": "'the dog runs in the park' (no capital, no full stop) — What is this sentence missing?",
+          "options": [
+            {
+              "textEl": "Κεφαλαίο γράμμα στην αρχή και τελεία στο τέλος.",
+              "textEn": "A capital letter at the start and a full stop at the end.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Τίποτα, είναι σωστή όπως είναι.",
+              "textEn": "Nothing, it's fine as it is.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.sentence-boundary"
+            },
+            {
+              "textEl": "Ένα ερωτηματικό στο τέλος.",
+              "textEn": "A question mark at the end.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.sentence-boundary"
+            }
+          ]
+        },
+        {
+          "id": "q3-plural",
+          "textEl": "«Ένα παιδί» → Πολλά...",
+          "textEn": "'One child' (Greek: «παιδί») → Many...",
+          "options": [
+            {
+              "textEl": "παιδιά",
+              "textEn": "«παιδιά» (children)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "παιδί",
+              "textEn": "«παιδί» (unchanged)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.plural-formation"
+            },
+            {
+              "textEl": "παιδίες",
+              "textEn": "«παιδίες» (invented form)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.plural-formation"
+            }
+          ]
+        },
+        {
+          "id": "q4-word-order",
+          "textEl": "Ποια σειρά λέξεων σχηματίζει σωστή πρόταση;",
+          "textEn": "Which word order forms a correct sentence?",
+          "options": [
+            {
+              "textEl": "«Η Μαρία παίζει μπάλα.»",
+              "textEn": "'Maria plays ball.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Μπάλα Μαρία παίζει η.»",
+              "textEn": "'Ball Maria plays the.' (scrambled)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.word-order-basic"
+            },
+            {
+              "textEl": "«Παίζει η μπάλα Μαρία.»",
+              "textEn": "'Plays the ball Maria.' (scrambled)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.word-order-basic"
+            }
+          ]
+        },
+        {
+          "id": "q5-rhyme",
+          "textEl": "Ποιες δύο λέξεις κάνουν ομοιοκαταληξία;",
+          "textEn": "Which two words rhyme?",
+          "options": [
+            {
+              "textEl": "«γάτα» - «πάτα»",
+              "textEn": "'γάτα' (cat) - 'πάτα' (step)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«γάτα» - «σκύλος»",
+              "textEn": "'γάτα' (cat) - 'σκύλος' (dog)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.rhyming-words"
+            },
+            {
+              "textEl": "«γάτα» - «τραπέζι»",
+              "textEn": "'γάτα' (cat) - 'τραπέζι' (table)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.rhyming-words"
+            }
+          ]
+        },
+        {
+          "id": "q6-verb-agreement",
+          "textEl": "Ποια πρόταση είναι σωστή;",
+          "textEn": "Which sentence is correct?",
+          "options": [
+            {
+              "textEl": "«Τα παιδιά παίζουν στην αυλή.»",
+              "textEn": "'The children play in the yard.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Τα παιδιά παίζει στην αυλή.»",
+              "textEn": "'The children plays in the yard.' (wrong agreement)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.singular-plural-verb"
+            },
+            {
+              "textEl": "«Το παιδί παίζουν στην αυλή.»",
+              "textEn": "'The child play in the yard.' (wrong agreement)",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.singular-plural-verb"
+            }
+          ]
+        },
+        {
+          "id": "q7-question-mark",
+          "textEl": "Ποια πρόταση χρειάζεται ερωτηματικό στο τέλος;",
+          "textEn": "Which sentence needs a question mark at the end?",
+          "options": [
+            {
+              "textEl": "«Πού πήγες χθες»",
+              "textEn": "'Where did you go yesterday'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Πήγα στο σχολείο»",
+              "textEn": "'I went to school'",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.question-mark-usage"
+            },
+            {
+              "textEl": "«Μου αρέσει το παγωτό»",
+              "textEn": "'I like ice cream'",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.question-mark-usage"
+            }
+          ]
+        },
+        {
+          "id": "q8-opposites",
+          "textEl": "Ποιο είναι το αντίθετο του «ζεστός»;",
+          "textEn": "What is the opposite of 'hot'?",
+          "options": [
+            {
+              "textEl": "κρύος",
+              "textEn": "cold",
+              "isCorrect": true
+            },
+            {
+              "textEl": "μεγάλος",
+              "textEn": "big",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.opposite-words-basic"
+            },
+            {
+              "textEl": "γρήγορος",
+              "textEn": "fast",
+              "isCorrect": false,
+              "gapTag": "glossa-a-dim.opposite-words-basic"
+            }
+          ]
+        }
+      ]
     },
-
     "math-b-dimotikou": {
-      id: "math-b-dimotikou",
-      grades: ["b"],
-      subjectLabelEl: "Μαθηματικά, Β' Δημοτικού",
-      subjectLabelEn: "Math, 2nd Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-place-value",
-          textEl: "Ποιος αριθμός είναι μεγαλύτερος;",
-          textEn: "Which number is bigger?",
-          options: [
-            { textEl: "40", textEn: "40", isCorrect: true },
-            { textEl: "14", textEn: "14", isCorrect: false, gapTag: "math-b-dim.place-value-tens-ones" },
-            { textEl: "Είναι ίδιοι", textEn: "They're the same", isCorrect: false, gapTag: "math-b-dim.place-value-tens-ones" },
-          ],
-        },
-        {
-          id: "q2-multiplication",
-          textEl: "Πόσο κάνει 3 × 4;",
-          textEn: "What is 3 × 4?",
-          options: [
-            { textEl: "12 (γιατί 4+4+4=12)", textEn: "12 (because 4+4+4=12)", isCorrect: true },
-            { textEl: "7 (γιατί 3+4=7)", textEn: "7 (because 3+4=7)", isCorrect: false, gapTag: "math-b-dim.multiplication-as-repeated-addition" },
-            { textEl: "34", textEn: "34", isCorrect: false, gapTag: "math-b-dim.multiplication-as-repeated-addition" },
-          ],
-        },
-        {
-          id: "q3-half-hour",
-          textEl: "Ο μεγάλος δείκτης δείχνει το 6 και ο μικρός είναι ανάμεσα στο 6 και το 7. Τι ώρα είναι;",
-          textEn: "The minute hand points at 6 and the hour hand is between 6 and 7. What time is it?",
-          options: [
-            { textEl: "6:30", textEn: "6:30", isCorrect: true },
-            { textEl: "7:06", textEn: "7:06", isCorrect: false, gapTag: "math-b-dim.telling-time-half-hour" },
-            { textEl: "6:06", textEn: "6:06", isCorrect: false, gapTag: "math-b-dim.telling-time-half-hour" },
-          ],
-        },
-        {
-          id: "q4-money",
-          textEl: "Έχεις ένα κέρμα του 1€ και ένα κέρμα του 2€. Πόσα χρήματα έχεις;",
-          textEn: "You have a €1 coin and a €2 coin. How much money do you have?",
-          options: [
-            { textEl: "3€", textEn: "€3", isCorrect: true },
-            { textEl: "2€", textEn: "€2", isCorrect: false, gapTag: "math-b-dim.money-counting" },
-            { textEl: "1€", textEn: "€1", isCorrect: false, gapTag: "math-b-dim.money-counting" },
-          ],
-        },
-        {
-          id: "q5-addition-two-digit",
-          textEl: "Πόσο κάνει 23 + 45;",
-          textEn: "What is 23 + 45?",
-          options: [
-            { textEl: "68", textEn: "68", isCorrect: true },
-            { textEl: "78", textEn: "78", isCorrect: false, gapTag: "math-b-dim.addition-two-digit-no-carry" },
-            { textEl: "58", textEn: "58", isCorrect: false, gapTag: "math-b-dim.addition-two-digit-no-carry" },
-          ],
-        },
-        {
-          id: "q6-subtraction-borrow",
-          textEl: "Πόσο κάνει 42 - 17;",
-          textEn: "What is 42 - 17?",
-          options: [
-            { textEl: "25", textEn: "25", isCorrect: true },
-            { textEl: "35", textEn: "35", isCorrect: false, gapTag: "math-b-dim.subtraction-two-digit-borrow" },
-            { textEl: "31", textEn: "31", isCorrect: false, gapTag: "math-b-dim.subtraction-two-digit-borrow" },
-          ],
-        },
-        {
-          id: "q7-even-odd",
-          textEl: "Ποιος από τους παρακάτω αριθμούς είναι ζυγός;",
-          textEn: "Which of the following numbers is even?",
-          options: [
-            { textEl: "24", textEn: "24", isCorrect: true },
-            { textEl: "23", textEn: "23", isCorrect: false, gapTag: "math-b-dim.even-odd-numbers" },
-            { textEl: "31", textEn: "31", isCorrect: false, gapTag: "math-b-dim.even-odd-numbers" },
-          ],
-        },
-        {
-          id: "q8-graph",
-          textEl: "Σε ένα ραβδόγραμμα, η ράβδος για τις «μπάλες» φτάνει μέχρι το 5. Πόσες μπάλες υπάρχουν;",
-          textEn: "In a bar graph, the bar for 'balls' reaches up to 5. How many balls are there?",
-          options: [
-            { textEl: "5", textEn: "5", isCorrect: true },
-            { textEl: "Δεν μπορώ να ξέρω από το ύψος της ράβδου.", textEn: "I can't tell from the bar's height.", isCorrect: false, gapTag: "math-b-dim.simple-graph-reading" },
-            { textEl: "Όσο ψηλή είναι η ράβδος σε εκατοστά στην οθόνη.", textEn: "However tall the bar is in centimeters on screen.", isCorrect: false, gapTag: "math-b-dim.simple-graph-reading" },
-          ],
-        },
+      "id": "math-b-dimotikou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Μαθηματικά, Β' Δημοτικού",
+      "subjectLabelEn": "Math, 2nd Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-place-value",
+          "textEl": "Ποιος αριθμός είναι μεγαλύτερος;",
+          "textEn": "Which number is bigger?",
+          "options": [
+            {
+              "textEl": "40",
+              "textEn": "40",
+              "isCorrect": true
+            },
+            {
+              "textEl": "14",
+              "textEn": "14",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.place-value-tens-ones"
+            },
+            {
+              "textEl": "Είναι ίδιοι",
+              "textEn": "They're the same",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.place-value-tens-ones"
+            }
+          ]
+        },
+        {
+          "id": "q2-multiplication",
+          "textEl": "Πόσο κάνει 3 × 4;",
+          "textEn": "What is 3 × 4?",
+          "options": [
+            {
+              "textEl": "12 (γιατί 4+4+4=12)",
+              "textEn": "12 (because 4+4+4=12)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "7 (γιατί 3+4=7)",
+              "textEn": "7 (because 3+4=7)",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.multiplication-as-repeated-addition"
+            },
+            {
+              "textEl": "34",
+              "textEn": "34",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.multiplication-as-repeated-addition"
+            }
+          ]
+        },
+        {
+          "id": "q3-half-hour",
+          "textEl": "Ο μεγάλος δείκτης δείχνει το 6 και ο μικρός είναι ανάμεσα στο 6 και το 7. Τι ώρα είναι;",
+          "textEn": "The minute hand points at 6 and the hour hand is between 6 and 7. What time is it?",
+          "options": [
+            {
+              "textEl": "6:30",
+              "textEn": "6:30",
+              "isCorrect": true
+            },
+            {
+              "textEl": "7:06",
+              "textEn": "7:06",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.telling-time-half-hour"
+            },
+            {
+              "textEl": "6:06",
+              "textEn": "6:06",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.telling-time-half-hour"
+            }
+          ]
+        },
+        {
+          "id": "q4-money",
+          "textEl": "Έχεις ένα κέρμα του 1€ και ένα κέρμα του 2€. Πόσα χρήματα έχεις;",
+          "textEn": "You have a €1 coin and a €2 coin. How much money do you have?",
+          "options": [
+            {
+              "textEl": "3€",
+              "textEn": "€3",
+              "isCorrect": true
+            },
+            {
+              "textEl": "2€",
+              "textEn": "€2",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.money-counting"
+            },
+            {
+              "textEl": "1€",
+              "textEn": "€1",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.money-counting"
+            }
+          ]
+        },
+        {
+          "id": "q5-addition-two-digit",
+          "textEl": "Πόσο κάνει 23 + 45;",
+          "textEn": "What is 23 + 45?",
+          "options": [
+            {
+              "textEl": "68",
+              "textEn": "68",
+              "isCorrect": true
+            },
+            {
+              "textEl": "78",
+              "textEn": "78",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.addition-two-digit-no-carry"
+            },
+            {
+              "textEl": "58",
+              "textEn": "58",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.addition-two-digit-no-carry"
+            }
+          ]
+        },
+        {
+          "id": "q6-subtraction-borrow",
+          "textEl": "Πόσο κάνει 42 - 17;",
+          "textEn": "What is 42 - 17?",
+          "options": [
+            {
+              "textEl": "25",
+              "textEn": "25",
+              "isCorrect": true
+            },
+            {
+              "textEl": "35",
+              "textEn": "35",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.subtraction-two-digit-borrow"
+            },
+            {
+              "textEl": "31",
+              "textEn": "31",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.subtraction-two-digit-borrow"
+            }
+          ]
+        },
+        {
+          "id": "q7-even-odd",
+          "textEl": "Ποιος από τους παρακάτω αριθμούς είναι ζυγός;",
+          "textEn": "Which of the following numbers is even?",
+          "options": [
+            {
+              "textEl": "24",
+              "textEn": "24",
+              "isCorrect": true
+            },
+            {
+              "textEl": "23",
+              "textEn": "23",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.even-odd-numbers"
+            },
+            {
+              "textEl": "31",
+              "textEn": "31",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.even-odd-numbers"
+            }
+          ]
+        },
+        {
+          "id": "q8-graph",
+          "textEl": "Σε ένα ραβδόγραμμα, η ράβδος για τις «μπάλες» φτάνει μέχρι το 5. Πόσες μπάλες υπάρχουν;",
+          "textEn": "In a bar graph, the bar for 'balls' reaches up to 5. How many balls are there?",
+          "options": [
+            {
+              "textEl": "5",
+              "textEn": "5",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Δεν μπορώ να ξέρω από το ύψος της ράβδου.",
+              "textEn": "I can't tell from the bar's height.",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.simple-graph-reading"
+            },
+            {
+              "textEl": "Όσο ψηλή είναι η ράβδος σε εκατοστά στην οθόνη.",
+              "textEn": "However tall the bar is in centimeters on screen.",
+              "isCorrect": false,
+              "gapTag": "math-b-dim.simple-graph-reading"
+            }
+          ]
+        }
+      ]
     },
-
     "glossa-b-dimotikou": {
-      id: "glossa-b-dimotikou",
-      grades: ["b"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Β' Δημοτικού",
-      subjectLabelEn: "Modern Greek Language, 2nd Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-punctuation",
-          textEl: "Ποιο σημείο στίξης ταιριάζει στο τέλος: «Πόσο κάνει αυτό»",
-          textEn: "Which punctuation mark fits at the end: 'How much is this'",
-          options: [
-            { textEl: "; (ερωτηματικό)", textEn: "? (question mark)", isCorrect: true },
-            { textEl: "! (θαυμαστικό)", textEn: "! (exclamation mark)", isCorrect: false, gapTag: "glossa-b-dim.punctuation-question-exclamation" },
-            { textEl: ". (τελεία)", textEn: ". (full stop)", isCorrect: false, gapTag: "glossa-b-dim.punctuation-question-exclamation" },
-          ],
-        },
-        {
-          id: "q2-sequence",
-          textEl: "«Ο Γιώργος ξύπνησε, έπλυνε τα δόντια του και μετά έφαγε πρωινό.» Τι έγινε πρώτο;",
-          textEn: "'George woke up, brushed his teeth, then had breakfast.' What happened first?",
-          options: [
-            { textEl: "Ξύπνησε.", textEn: "He woke up.", isCorrect: true },
-            { textEl: "Έφαγε πρωινό.", textEn: "He had breakfast.", isCorrect: false, gapTag: "glossa-b-dim.story-sequence" },
-            { textEl: "Έπλυνε τα δόντια του.", textEn: "He brushed his teeth.", isCorrect: false, gapTag: "glossa-b-dim.story-sequence" },
-          ],
-        },
-        {
-          id: "q3-past-tense",
-          textEl: "«Σήμερα παίζω μπάλα.» Πώς το λέμε για χθες;",
-          textEn: "'Today I play ball.' How do we say it for yesterday?",
-          options: [
-            { textEl: "«Χθες έπαιξα μπάλα.»", textEn: "'Yesterday I played ball.'", isCorrect: true },
-            { textEl: "«Χθες παίζω μπάλα.»", textEn: "'Yesterday I play ball.' (wrong tense)", isCorrect: false, gapTag: "glossa-b-dim.simple-past-tense" },
-            { textEl: "«Χθες θα παίξω μπάλα.»", textEn: "'Yesterday I will play ball.' (wrong tense)", isCorrect: false, gapTag: "glossa-b-dim.simple-past-tense" },
-          ],
-        },
-        {
-          id: "q4-synonym",
-          textEl: "Ποια λέξη σημαίνει σχεδόν το ίδιο με «χαρούμενος»;",
-          textEn: "Which word means almost the same as 'happy'?",
-          options: [
-            { textEl: "ευτυχισμένος", textEn: "glad", isCorrect: true },
-            { textEl: "λυπημένος", textEn: "sad", isCorrect: false, gapTag: "glossa-b-dim.synonym-basic" },
-            { textEl: "κουρασμένος", textEn: "tired", isCorrect: false, gapTag: "glossa-b-dim.synonym-basic" },
-          ],
-        },
-        {
-          id: "q5-capital-proper",
-          textEl: "Ποια πρόταση είναι σωστά γραμμένη;",
-          textEn: "Which sentence is correctly written?",
-          options: [
-            { textEl: "«Ο Γιώργος πήγε στην Αθήνα.»", textEn: "'George went to Athens.'", isCorrect: true },
-            { textEl: "«Ο γιώργος πήγε στην αθήνα.»", textEn: "'george went to athens.' (missing capitals)", isCorrect: false, gapTag: "glossa-b-dim.capital-letter-proper-nouns" },
-            { textEl: "«ο Γιώργος πήγε στην Αθήνα.»", textEn: "'george (lowercase) went to Athens.'", isCorrect: false, gapTag: "glossa-b-dim.capital-letter-proper-nouns" },
-          ],
-        },
-        {
-          id: "q6-compound-word",
-          textEl: "Η λέξη «ανοιχτήρι» φτιάχτηκε κυρίως από ποια λέξη;",
-          textEn: "The word 'ανοιχτήρι' (opener) was mainly built from which word?",
-          options: [
-            { textEl: "«ανοίγω»", textEn: "'ανοίγω' (to open)", isCorrect: true },
-            { textEl: "Είναι εντελώς μία λέξη, δεν φτιάχτηκε από άλλη.", textEn: "It's a single word, not built from another.", isCorrect: false, gapTag: "glossa-b-dim.compound-word-basic" },
-            { textEl: "«άνοιξη»", textEn: "'άνοιξη' (spring)", isCorrect: false, gapTag: "glossa-b-dim.compound-word-basic" },
-          ],
-        },
-        {
-          id: "q7-fragment",
-          textEl: "Ποιο από τα παρακάτω είναι πλήρης πρόταση;",
-          textEn: "Which of the following is a complete sentence?",
-          options: [
-            { textEl: "«Ο σκύλος τρέχει στο πάρκο.»", textEn: "'The dog runs in the park.'", isCorrect: true },
-            { textEl: "«Στο πάρκο το πρωί.»", textEn: "'In the park in the morning.' (fragment)", isCorrect: false, gapTag: "glossa-b-dim.sentence-vs-fragment" },
-            { textEl: "«Ο μεγάλος καφέ σκύλος.»", textEn: "'The big brown dog.' (fragment)", isCorrect: false, gapTag: "glossa-b-dim.sentence-vs-fragment" },
-          ],
-        },
-        {
-          id: "q8-dialogue",
-          textEl: "Πώς γράφουμε σωστά τι είπε ο Νίκος;",
-          textEn: "How do we correctly write what Nick said?",
-          options: [
-            { textEl: "Ο Νίκος είπε: «Θα έρθω αύριο.»", textEn: "Nick said: 'I will come tomorrow.'", isCorrect: true },
-            { textEl: "Ο Νίκος είπε θα έρθω αύριο.", textEn: "Nick said I will come tomorrow. (no marking)", isCorrect: false, gapTag: "glossa-b-dim.dialogue-punctuation" },
-            { textEl: "Ο, Νίκος, είπε, θα, έρθω, αύριο.", textEn: "Nick, said, I will, come, tomorrow. (random commas)", isCorrect: false, gapTag: "glossa-b-dim.dialogue-punctuation" },
-          ],
-        },
+      "id": "glossa-b-dimotikou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Β' Δημοτικού",
+      "subjectLabelEn": "Modern Greek Language, 2nd Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-punctuation",
+          "textEl": "Ποιο σημείο στίξης ταιριάζει στο τέλος: «Πόσο κάνει αυτό»",
+          "textEn": "Which punctuation mark fits at the end: 'How much is this'",
+          "options": [
+            {
+              "textEl": "; (ερωτηματικό)",
+              "textEn": "? (question mark)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "! (θαυμαστικό)",
+              "textEn": "! (exclamation mark)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.punctuation-question-exclamation"
+            },
+            {
+              "textEl": ". (τελεία)",
+              "textEn": ". (full stop)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.punctuation-question-exclamation"
+            }
+          ]
+        },
+        {
+          "id": "q2-sequence",
+          "textEl": "«Ο Γιώργος ξύπνησε, έπλυνε τα δόντια του και μετά έφαγε πρωινό.» Τι έγινε πρώτο;",
+          "textEn": "'George woke up, brushed his teeth, then had breakfast.' What happened first?",
+          "options": [
+            {
+              "textEl": "Ξύπνησε.",
+              "textEn": "He woke up.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Έφαγε πρωινό.",
+              "textEn": "He had breakfast.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.story-sequence"
+            },
+            {
+              "textEl": "Έπλυνε τα δόντια του.",
+              "textEn": "He brushed his teeth.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.story-sequence"
+            }
+          ]
+        },
+        {
+          "id": "q3-past-tense",
+          "textEl": "«Σήμερα παίζω μπάλα.» Πώς το λέμε για χθες;",
+          "textEn": "'Today I play ball.' How do we say it for yesterday?",
+          "options": [
+            {
+              "textEl": "«Χθες έπαιξα μπάλα.»",
+              "textEn": "'Yesterday I played ball.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Χθες παίζω μπάλα.»",
+              "textEn": "'Yesterday I play ball.' (wrong tense)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.simple-past-tense"
+            },
+            {
+              "textEl": "«Χθες θα παίξω μπάλα.»",
+              "textEn": "'Yesterday I will play ball.' (wrong tense)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.simple-past-tense"
+            }
+          ]
+        },
+        {
+          "id": "q4-synonym",
+          "textEl": "Ποια λέξη σημαίνει σχεδόν το ίδιο με «χαρούμενος»;",
+          "textEn": "Which word means almost the same as 'happy'?",
+          "options": [
+            {
+              "textEl": "ευτυχισμένος",
+              "textEn": "glad",
+              "isCorrect": true
+            },
+            {
+              "textEl": "λυπημένος",
+              "textEn": "sad",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.synonym-basic"
+            },
+            {
+              "textEl": "κουρασμένος",
+              "textEn": "tired",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.synonym-basic"
+            }
+          ]
+        },
+        {
+          "id": "q5-capital-proper",
+          "textEl": "Ποια πρόταση είναι σωστά γραμμένη;",
+          "textEn": "Which sentence is correctly written?",
+          "options": [
+            {
+              "textEl": "«Ο Γιώργος πήγε στην Αθήνα.»",
+              "textEn": "'George went to Athens.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Ο γιώργος πήγε στην αθήνα.»",
+              "textEn": "'george went to athens.' (missing capitals)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.capital-letter-proper-nouns"
+            },
+            {
+              "textEl": "«ο Γιώργος πήγε στην Αθήνα.»",
+              "textEn": "'george (lowercase) went to Athens.'",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.capital-letter-proper-nouns"
+            }
+          ]
+        },
+        {
+          "id": "q6-compound-word",
+          "textEl": "Η λέξη «ανοιχτήρι» φτιάχτηκε κυρίως από ποια λέξη;",
+          "textEn": "The word 'ανοιχτήρι' (opener) was mainly built from which word?",
+          "options": [
+            {
+              "textEl": "«ανοίγω»",
+              "textEn": "'ανοίγω' (to open)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Είναι εντελώς μία λέξη, δεν φτιάχτηκε από άλλη.",
+              "textEn": "It's a single word, not built from another.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.compound-word-basic"
+            },
+            {
+              "textEl": "«άνοιξη»",
+              "textEn": "'άνοιξη' (spring)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.compound-word-basic"
+            }
+          ]
+        },
+        {
+          "id": "q7-fragment",
+          "textEl": "Ποιο από τα παρακάτω είναι πλήρης πρόταση;",
+          "textEn": "Which of the following is a complete sentence?",
+          "options": [
+            {
+              "textEl": "«Ο σκύλος τρέχει στο πάρκο.»",
+              "textEn": "'The dog runs in the park.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Στο πάρκο το πρωί.»",
+              "textEn": "'In the park in the morning.' (fragment)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.sentence-vs-fragment"
+            },
+            {
+              "textEl": "«Ο μεγάλος καφέ σκύλος.»",
+              "textEn": "'The big brown dog.' (fragment)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.sentence-vs-fragment"
+            }
+          ]
+        },
+        {
+          "id": "q8-dialogue",
+          "textEl": "Πώς γράφουμε σωστά τι είπε ο Νίκος;",
+          "textEn": "How do we correctly write what Nick said?",
+          "options": [
+            {
+              "textEl": "Ο Νίκος είπε: «Θα έρθω αύριο.»",
+              "textEn": "Nick said: 'I will come tomorrow.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο Νίκος είπε θα έρθω αύριο.",
+              "textEn": "Nick said I will come tomorrow. (no marking)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.dialogue-punctuation"
+            },
+            {
+              "textEl": "Ο, Νίκος, είπε, θα, έρθω, αύριο.",
+              "textEn": "Nick, said, I will, come, tomorrow. (random commas)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-dim.dialogue-punctuation"
+            }
+          ]
+        }
+      ]
     },
-
     "math-c-dimotikou": {
-      id: "math-c-dimotikou",
-      grades: ["c"],
-      subjectLabelEl: "Μαθηματικά, Γ' Δημοτικού",
-      subjectLabelEn: "Math, 3rd Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-times-table",
-          textEl: "Πόσο κάνει 6 × 7;",
-          textEn: "What is 6 × 7?",
-          options: [
-            { textEl: "42", textEn: "42", isCorrect: true },
-            { textEl: "36", textEn: "36", isCorrect: false, gapTag: "math-c-dim.times-table-recall" },
-            { textEl: "48", textEn: "48", isCorrect: false, gapTag: "math-c-dim.times-table-recall" },
-          ],
-        },
-        {
-          id: "q2-division-sharing",
-          textEl: "Έχεις 15 καραμέλες και τις μοιράζεις δίκαια σε 3 φίλους. Πόσες παίρνει ο καθένας;",
-          textEn: "You have 15 candies and share them fairly among 3 friends. How many does each get?",
-          options: [
-            { textEl: "5", textEn: "5", isCorrect: true },
-            { textEl: "12", textEn: "12", isCorrect: false, gapTag: "math-c-dim.division-as-sharing" },
-            { textEl: "18", textEn: "18", isCorrect: false, gapTag: "math-c-dim.division-as-sharing" },
-          ],
-        },
-        {
-          id: "q3-units",
-          textEl: "Πόσα εκατοστά είναι 1 μέτρο;",
-          textEn: "How many centimeters are in 1 meter?",
-          options: [
-            { textEl: "100", textEn: "100", isCorrect: true },
-            { textEl: "10", textEn: "10", isCorrect: false, gapTag: "math-c-dim.measurement-units" },
-            { textEl: "1000", textEn: "1000", isCorrect: false, gapTag: "math-c-dim.measurement-units" },
-          ],
-        },
-        {
-          id: "q4-quarter-hour",
-          textEl: "Ο μικρός δείκτης είναι στο 4 και ο μεγάλος στο 3. Τι ώρα είναι;",
-          textEn: "The hour hand is at 4 and the minute hand is at 3. What time is it?",
-          options: [
-            { textEl: "4:15", textEn: "4:15", isCorrect: true },
-            { textEl: "3:04", textEn: "3:04", isCorrect: false, gapTag: "math-c-dim.quarter-hour" },
-            { textEl: "4:03", textEn: "4:03", isCorrect: false, gapTag: "math-c-dim.quarter-hour" },
-          ],
-        },
-        {
-          id: "q5-mult-two-digit",
-          textEl: "Πόσο κάνει 23 × 3;",
-          textEn: "What is 23 × 3?",
-          options: [
-            { textEl: "69", textEn: "69", isCorrect: true },
-            { textEl: "66", textEn: "66", isCorrect: false, gapTag: "math-c-dim.multiplication-two-digit-by-one" },
-            { textEl: "26", textEn: "26", isCorrect: false, gapTag: "math-c-dim.multiplication-two-digit-by-one" },
-          ],
-        },
-        {
-          id: "q6-weight",
-          textEl: "Πόσα γραμμάρια είναι 1 κιλό;",
-          textEn: "How many grams are in 1 kilogram?",
-          options: [
-            { textEl: "1000", textEn: "1000", isCorrect: true },
-            { textEl: "100", textEn: "100", isCorrect: false, gapTag: "math-c-dim.weight-units" },
-            { textEl: "10", textEn: "10", isCorrect: false, gapTag: "math-c-dim.weight-units" },
-          ],
-        },
-        {
-          id: "q7-remainder",
-          textEl: "Μοιράζεις 17 καραμέλες σε 5 φίλους, από 3 ο καθένας. Τι σημαίνουν οι 2 που περισσεύουν;",
-          textEn: "You share 17 candies among 5 friends, 3 each. What do the 2 leftover mean?",
-          options: [
-            { textEl: "Είναι το υπόλοιπο — δεν χωράνε σε ίσα μερίδια.", textEn: "They're the remainder — they don't fit into equal shares.", isCorrect: true },
-            { textEl: "Είναι λάθος, πρέπει να μοιραστούν όλες οπωσδήποτε.", textEn: "It's a mistake, all of them must be shared no matter what.", isCorrect: false, gapTag: "math-c-dim.remainder-meaning" },
-            { textEl: "Σημαίνει ότι η διαίρεση είναι λάθος.", textEn: "It means the division is wrong.", isCorrect: false, gapTag: "math-c-dim.remainder-meaning" },
-          ],
-        },
-        {
-          id: "q8-simple-fraction",
-          textEl: "Ένα σχήμα χωρίζεται σε 4 ίσα κομμάτια. Πόσα κομμάτια είναι το μισό του;",
-          textEn: "A shape is divided into 4 equal pieces. How many pieces make up half of it?",
-          options: [
-            { textEl: "2", textEn: "2", isCorrect: true },
-            { textEl: "1", textEn: "1", isCorrect: false, gapTag: "math-c-dim.simple-fraction-recognition" },
-            { textEl: "4", textEn: "4", isCorrect: false, gapTag: "math-c-dim.simple-fraction-recognition" },
-          ],
-        },
+      "id": "math-c-dimotikou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Μαθηματικά, Γ' Δημοτικού",
+      "subjectLabelEn": "Math, 3rd Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-times-table",
+          "textEl": "Πόσο κάνει 6 × 7;",
+          "textEn": "What is 6 × 7?",
+          "options": [
+            {
+              "textEl": "42",
+              "textEn": "42",
+              "isCorrect": true
+            },
+            {
+              "textEl": "36",
+              "textEn": "36",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.times-table-recall"
+            },
+            {
+              "textEl": "48",
+              "textEn": "48",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.times-table-recall"
+            }
+          ]
+        },
+        {
+          "id": "q2-division-sharing",
+          "textEl": "Έχεις 15 καραμέλες και τις μοιράζεις δίκαια σε 3 φίλους. Πόσες παίρνει ο καθένας;",
+          "textEn": "You have 15 candies and share them fairly among 3 friends. How many does each get?",
+          "options": [
+            {
+              "textEl": "5",
+              "textEn": "5",
+              "isCorrect": true
+            },
+            {
+              "textEl": "12",
+              "textEn": "12",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.division-as-sharing"
+            },
+            {
+              "textEl": "18",
+              "textEn": "18",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.division-as-sharing"
+            }
+          ]
+        },
+        {
+          "id": "q3-units",
+          "textEl": "Πόσα εκατοστά είναι 1 μέτρο;",
+          "textEn": "How many centimeters are in 1 meter?",
+          "options": [
+            {
+              "textEl": "100",
+              "textEn": "100",
+              "isCorrect": true
+            },
+            {
+              "textEl": "10",
+              "textEn": "10",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.measurement-units"
+            },
+            {
+              "textEl": "1000",
+              "textEn": "1000",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.measurement-units"
+            }
+          ]
+        },
+        {
+          "id": "q4-quarter-hour",
+          "textEl": "Ο μικρός δείκτης είναι στο 4 και ο μεγάλος στο 3. Τι ώρα είναι;",
+          "textEn": "The hour hand is at 4 and the minute hand is at 3. What time is it?",
+          "options": [
+            {
+              "textEl": "4:15",
+              "textEn": "4:15",
+              "isCorrect": true
+            },
+            {
+              "textEl": "3:04",
+              "textEn": "3:04",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.quarter-hour"
+            },
+            {
+              "textEl": "4:03",
+              "textEn": "4:03",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.quarter-hour"
+            }
+          ]
+        },
+        {
+          "id": "q5-mult-two-digit",
+          "textEl": "Πόσο κάνει 23 × 3;",
+          "textEn": "What is 23 × 3?",
+          "options": [
+            {
+              "textEl": "69",
+              "textEn": "69",
+              "isCorrect": true
+            },
+            {
+              "textEl": "66",
+              "textEn": "66",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.multiplication-two-digit-by-one"
+            },
+            {
+              "textEl": "26",
+              "textEn": "26",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.multiplication-two-digit-by-one"
+            }
+          ]
+        },
+        {
+          "id": "q6-weight",
+          "textEl": "Πόσα γραμμάρια είναι 1 κιλό;",
+          "textEn": "How many grams are in 1 kilogram?",
+          "options": [
+            {
+              "textEl": "1000",
+              "textEn": "1000",
+              "isCorrect": true
+            },
+            {
+              "textEl": "100",
+              "textEn": "100",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.weight-units"
+            },
+            {
+              "textEl": "10",
+              "textEn": "10",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.weight-units"
+            }
+          ]
+        },
+        {
+          "id": "q7-remainder",
+          "textEl": "Μοιράζεις 17 καραμέλες σε 5 φίλους, από 3 ο καθένας. Τι σημαίνουν οι 2 που περισσεύουν;",
+          "textEn": "You share 17 candies among 5 friends, 3 each. What do the 2 leftover mean?",
+          "options": [
+            {
+              "textEl": "Είναι το υπόλοιπο — δεν χωράνε σε ίσα μερίδια.",
+              "textEn": "They're the remainder — they don't fit into equal shares.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Είναι λάθος, πρέπει να μοιραστούν όλες οπωσδήποτε.",
+              "textEn": "It's a mistake, all of them must be shared no matter what.",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.remainder-meaning"
+            },
+            {
+              "textEl": "Σημαίνει ότι η διαίρεση είναι λάθος.",
+              "textEn": "It means the division is wrong.",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.remainder-meaning"
+            }
+          ]
+        },
+        {
+          "id": "q8-simple-fraction",
+          "textEl": "Ένα σχήμα χωρίζεται σε 4 ίσα κομμάτια. Πόσα κομμάτια είναι το μισό του;",
+          "textEn": "A shape is divided into 4 equal pieces. How many pieces make up half of it?",
+          "options": [
+            {
+              "textEl": "2",
+              "textEn": "2",
+              "isCorrect": true
+            },
+            {
+              "textEl": "1",
+              "textEn": "1",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.simple-fraction-recognition"
+            },
+            {
+              "textEl": "4",
+              "textEn": "4",
+              "isCorrect": false,
+              "gapTag": "math-c-dim.simple-fraction-recognition"
+            }
+          ]
+        }
+      ]
     },
-
     "glossa-c-dimotikou": {
-      id: "glossa-c-dimotikou",
-      grades: ["c"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Γ' Δημοτικού",
-      subjectLabelEn: "Modern Greek Language, 3rd Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-description",
-          textEl: "Περιγράφεις έναν φίλο σου. Ποια σειρά είναι πιο οργανωμένη;",
-          textEn: "You're describing a friend. Which order is better organized?",
-          options: [
-            { textEl: "Πρώτα πώς είναι στην εμφάνιση, μετά τι χαρακτήρα έχει.", textEn: "First what he looks like, then what his personality is like.", isCorrect: true },
-            { textEl: "Τυχαία, ό,τι μου έρχεται στο μυαλό.", textEn: "Randomly, whatever comes to mind.", isCorrect: false, gapTag: "glossa-c-dim.description-paragraph" },
-            { textEl: "Πρώτα τι έφαγε σήμερα το πρωί.", textEn: "First what he ate for breakfast today.", isCorrect: false, gapTag: "glossa-c-dim.description-paragraph" },
-          ],
-        },
-        {
-          id: "q2-vowel-spelling",
-          textEl: "Ποια είναι η σωστή γραφή;",
-          textEn: "Which is the correct spelling?",
-          options: [
-            { textEl: "«παιδί»", textEn: "'παιδί' (child)", isCorrect: true },
-            { textEl: "«πεδί»", textEn: "'πεδί' (misspelled)", isCorrect: false, gapTag: "glossa-c-dim.iota-vowel-spelling" },
-            { textEl: "«πηδί»", textEn: "'πηδί' (misspelled)", isCorrect: false, gapTag: "glossa-c-dim.iota-vowel-spelling" },
-          ],
-        },
-        {
-          id: "q3-pronoun",
-          textEl: "«Ο Νίκος είδε τον Γιώργο και του έδωσε ένα βιβλίο.» Σε ποιον αναφέρεται το «του»;",
-          textEn: "'Nick saw George and gave him a book.' Who does 'him' refer to?",
-          options: [
-            { textEl: "Στον Γιώργο.", textEn: "George.", isCorrect: true },
-            { textEl: "Δεν είναι ξεκάθαρο.", textEn: "It's not clear.", isCorrect: false, gapTag: "glossa-c-dim.pronoun-reference" },
-            { textEl: "Σε κάποιον τρίτο.", textEn: "Someone else entirely.", isCorrect: false, gapTag: "glossa-c-dim.pronoun-reference" },
-          ],
-        },
-        {
-          id: "q4-adjective-agreement",
-          textEl: "Ποια πρόταση είναι σωστή;",
-          textEn: "Which sentence is grammatically correct?",
-          options: [
-            { textEl: "«Η όμορφη κοπέλα χαμογελάει.»", textEn: "'The beautiful girl is smiling.' (correct agreement)", isCorrect: true },
-            { textEl: "«Η όμορφος κοπέλα χαμογελάει.»", textEn: "'The beautiful[masc] girl is smiling.' (wrong agreement)", isCorrect: false, gapTag: "glossa-c-dim.adjective-agreement" },
-            { textEl: "«Ο όμορφη κοπέλα χαμογελάει.»", textEn: "'The[masc] beautiful girl is smiling.' (wrong agreement)", isCorrect: false, gapTag: "glossa-c-dim.adjective-agreement" },
-          ],
-        },
-        {
-          id: "q5-tense-consistency",
-          textEl: "Ποια αφήγηση έχει σωστή συνέπεια χρόνου;",
-          textEn: "Which narration has correct tense consistency?",
-          options: [
-            { textEl: "«Ο Νίκος έτρεξε, έφτασε στο σχολείο και χαιρέτησε τους φίλους του.»", textEn: "'Nick ran, arrived at school, and greeted his friends.' (all past)", isCorrect: true },
-            { textEl: "«Ο Νίκος έτρεξε, φτάνει στο σχολείο και χαιρέτησε τους φίλους του.»", textEn: "'Nick ran, arrives at school, and greeted his friends.' (mixed tense)", isCorrect: false, gapTag: "glossa-c-dim.verb-tense-consistency" },
-            { textEl: "«Ο Νίκος τρέχει, έφτασε στο σχολείο και θα χαιρετήσει τους φίλους του.»", textEn: "'Nick runs, arrived at school, and will greet his friends.' (mixed tense)", isCorrect: false, gapTag: "glossa-c-dim.verb-tense-consistency" },
-          ],
-        },
-        {
-          id: "q6-comma-list",
-          textEl: "Ποια πρόταση έχει σωστά κόμματα;",
-          textEn: "Which sentence has correct commas?",
-          options: [
-            { textEl: "«Αγόρασα μήλα, πορτοκάλια και μπανάνες.»", textEn: "'I bought apples, oranges, and bananas.'", isCorrect: true },
-            { textEl: "«Αγόρασα μήλα πορτοκάλια και μπανάνες.»", textEn: "'I bought apples oranges and bananas.' (missing commas)", isCorrect: false, gapTag: "glossa-c-dim.comma-in-list" },
-            { textEl: "«Αγόρασα, μήλα πορτοκάλια, και, μπανάνες.»", textEn: "'I bought, apples oranges, and, bananas.' (random commas)", isCorrect: false, gapTag: "glossa-c-dim.comma-in-list" },
-          ],
-        },
-        {
-          id: "q7-homophone",
-          textEl: "Ποια πρόταση είναι σωστή;",
-          textEn: "Which sentence is correct?",
-          options: [
-            { textEl: "«Θέλεις τσάι ή καφέ;»", textEn: "'Do you want tea or coffee?'", isCorrect: true },
-            { textEl: "«Θέλεις τσάι η καφέ;»", textEn: "Same sentence with 'η' (the, wrong homophone) instead of 'ή' (or).", isCorrect: false, gapTag: "glossa-c-dim.homophone-basic" },
-            { textEl: "«Θέλεις τσάι εί καφέ;»", textEn: "Same sentence with a made-up misspelling.", isCorrect: false, gapTag: "glossa-c-dim.homophone-basic" },
-          ],
-        },
-        {
-          id: "q8-title",
-          textEl: "Ένα κείμενο μιλάει για το πώς φροντίζουμε έναν σκύλο. Ποιος τίτλος ταιριάζει καλύτερα;",
-          textEn: "A text is about how to take care of a dog. Which title fits best?",
-          options: [
-            { textEl: "«Πώς φροντίζουμε τον σκύλο μας»", textEn: "'How We Take Care of Our Dog'", isCorrect: true },
-            { textEl: "«Τα ζώα»", textEn: "'Animals' (too generic)", isCorrect: false, gapTag: "glossa-c-dim.title-choice" },
-            { textEl: "«Η αγαπημένη μου γειτονιά»", textEn: "'My Favorite Neighborhood' (unrelated)", isCorrect: false, gapTag: "glossa-c-dim.title-choice" },
-          ],
-        },
+      "id": "glossa-c-dimotikou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Γ' Δημοτικού",
+      "subjectLabelEn": "Modern Greek Language, 3rd Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-description",
+          "textEl": "Περιγράφεις έναν φίλο σου. Ποια σειρά είναι πιο οργανωμένη;",
+          "textEn": "You're describing a friend. Which order is better organized?",
+          "options": [
+            {
+              "textEl": "Πρώτα πώς είναι στην εμφάνιση, μετά τι χαρακτήρα έχει.",
+              "textEn": "First what he looks like, then what his personality is like.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Τυχαία, ό,τι μου έρχεται στο μυαλό.",
+              "textEn": "Randomly, whatever comes to mind.",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.description-paragraph"
+            },
+            {
+              "textEl": "Πρώτα τι έφαγε σήμερα το πρωί.",
+              "textEn": "First what he ate for breakfast today.",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.description-paragraph"
+            }
+          ]
+        },
+        {
+          "id": "q2-vowel-spelling",
+          "textEl": "Ποια είναι η σωστή γραφή;",
+          "textEn": "Which is the correct spelling?",
+          "options": [
+            {
+              "textEl": "«παιδί»",
+              "textEn": "'παιδί' (child)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«πεδί»",
+              "textEn": "'πεδί' (misspelled)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.iota-vowel-spelling"
+            },
+            {
+              "textEl": "«πηδί»",
+              "textEn": "'πηδί' (misspelled)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.iota-vowel-spelling"
+            }
+          ]
+        },
+        {
+          "id": "q3-pronoun",
+          "textEl": "«Ο Νίκος είδε τον Γιώργο και του έδωσε ένα βιβλίο.» Σε ποιον αναφέρεται το «του»;",
+          "textEn": "'Nick saw George and gave him a book.' Who does 'him' refer to?",
+          "options": [
+            {
+              "textEl": "Στον Γιώργο.",
+              "textEn": "George.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Δεν είναι ξεκάθαρο.",
+              "textEn": "It's not clear.",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.pronoun-reference"
+            },
+            {
+              "textEl": "Σε κάποιον τρίτο.",
+              "textEn": "Someone else entirely.",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.pronoun-reference"
+            }
+          ]
+        },
+        {
+          "id": "q4-adjective-agreement",
+          "textEl": "Ποια πρόταση είναι σωστή;",
+          "textEn": "Which sentence is grammatically correct?",
+          "options": [
+            {
+              "textEl": "«Η όμορφη κοπέλα χαμογελάει.»",
+              "textEn": "'The beautiful girl is smiling.' (correct agreement)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Η όμορφος κοπέλα χαμογελάει.»",
+              "textEn": "'The beautiful[masc] girl is smiling.' (wrong agreement)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.adjective-agreement"
+            },
+            {
+              "textEl": "«Ο όμορφη κοπέλα χαμογελάει.»",
+              "textEn": "'The[masc] beautiful girl is smiling.' (wrong agreement)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.adjective-agreement"
+            }
+          ]
+        },
+        {
+          "id": "q5-tense-consistency",
+          "textEl": "Ποια αφήγηση έχει σωστή συνέπεια χρόνου;",
+          "textEn": "Which narration has correct tense consistency?",
+          "options": [
+            {
+              "textEl": "«Ο Νίκος έτρεξε, έφτασε στο σχολείο και χαιρέτησε τους φίλους του.»",
+              "textEn": "'Nick ran, arrived at school, and greeted his friends.' (all past)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Ο Νίκος έτρεξε, φτάνει στο σχολείο και χαιρέτησε τους φίλους του.»",
+              "textEn": "'Nick ran, arrives at school, and greeted his friends.' (mixed tense)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.verb-tense-consistency"
+            },
+            {
+              "textEl": "«Ο Νίκος τρέχει, έφτασε στο σχολείο και θα χαιρετήσει τους φίλους του.»",
+              "textEn": "'Nick runs, arrived at school, and will greet his friends.' (mixed tense)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.verb-tense-consistency"
+            }
+          ]
+        },
+        {
+          "id": "q6-comma-list",
+          "textEl": "Ποια πρόταση έχει σωστά κόμματα;",
+          "textEn": "Which sentence has correct commas?",
+          "options": [
+            {
+              "textEl": "«Αγόρασα μήλα, πορτοκάλια και μπανάνες.»",
+              "textEn": "'I bought apples, oranges, and bananas.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Αγόρασα μήλα πορτοκάλια και μπανάνες.»",
+              "textEn": "'I bought apples oranges and bananas.' (missing commas)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.comma-in-list"
+            },
+            {
+              "textEl": "«Αγόρασα, μήλα πορτοκάλια, και, μπανάνες.»",
+              "textEn": "'I bought, apples oranges, and, bananas.' (random commas)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.comma-in-list"
+            }
+          ]
+        },
+        {
+          "id": "q7-homophone",
+          "textEl": "Ποια πρόταση είναι σωστή;",
+          "textEn": "Which sentence is correct?",
+          "options": [
+            {
+              "textEl": "«Θέλεις τσάι ή καφέ;»",
+              "textEn": "'Do you want tea or coffee?'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Θέλεις τσάι η καφέ;»",
+              "textEn": "Same sentence with 'η' (the, wrong homophone) instead of 'ή' (or).",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.homophone-basic"
+            },
+            {
+              "textEl": "«Θέλεις τσάι εί καφέ;»",
+              "textEn": "Same sentence with a made-up misspelling.",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.homophone-basic"
+            }
+          ]
+        },
+        {
+          "id": "q8-title",
+          "textEl": "Ένα κείμενο μιλάει για το πώς φροντίζουμε έναν σκύλο. Ποιος τίτλος ταιριάζει καλύτερα;",
+          "textEn": "A text is about how to take care of a dog. Which title fits best?",
+          "options": [
+            {
+              "textEl": "«Πώς φροντίζουμε τον σκύλο μας»",
+              "textEn": "'How We Take Care of Our Dog'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Τα ζώα»",
+              "textEn": "'Animals' (too generic)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.title-choice"
+            },
+            {
+              "textEl": "«Η αγαπημένη μου γειτονιά»",
+              "textEn": "'My Favorite Neighborhood' (unrelated)",
+              "isCorrect": false,
+              "gapTag": "glossa-c-dim.title-choice"
+            }
+          ]
+        }
+      ]
     },
-
     "english-c-dimotikou": {
-      id: "english-c-dimotikou",
-      grades: ["c"],
-      subjectLabelEl: "Αγγλικά, Γ' Δημοτικού",
-      subjectLabelEn: "English, 3rd Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών",
-      titleEn: "The English Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις εισαγωγικού επιπέδου. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short beginner-level questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-colors",
-          textEl: "Ποιο χρώμα είναι πιο κοντά στο σκούρο μοβ;",
-          textEn: "Which color is closer to dark violet?",
-          options: [
-            { textEl: "purple", textEn: "purple", isCorrect: true },
-            { textEl: "pink", textEn: "pink", isCorrect: false, gapTag: "efl-c-dim.colors-vocab" },
-            { textEl: "orange", textEn: "orange", isCorrect: false, gapTag: "efl-c-dim.colors-vocab" },
-          ],
-        },
-        {
-          id: "q2-this-that",
-          textEl: "Κρατάς ένα μολύβι στο χέρι σου και λες: '___ is my pencil.'",
-          textEn: "You're holding a pencil in your hand and say: '___ is my pencil.'",
-          options: [
-            { textEl: "This", textEn: "This", isCorrect: true },
-            { textEl: "That", textEn: "That", isCorrect: false, gapTag: "efl-c-dim.this-that" },
-            { textEl: "These", textEn: "These", isCorrect: false, gapTag: "efl-c-dim.this-that" },
-          ],
-        },
-        {
-          id: "q3-numbers",
-          textEl: "Ποιος αριθμός είναι το «thirteen»;",
-          textEn: "Which number is 'thirteen'?",
-          options: [
-            { textEl: "13", textEn: "13", isCorrect: true },
-            { textEl: "30", textEn: "30", isCorrect: false, gapTag: "efl-c-dim.numbers-1-20" },
-            { textEl: "3", textEn: "3", isCorrect: false, gapTag: "efl-c-dim.numbers-1-20" },
-          ],
-        },
-        {
-          id: "q4-family",
-          textEl: "Ο αδερφός της μητέρας σου στα αγγλικά λέγεται...",
-          textEn: "Your mother's brother is called in English...",
-          options: [
-            { textEl: "uncle", textEn: "uncle", isCorrect: true },
-            { textEl: "brother", textEn: "brother", isCorrect: false, gapTag: "efl-c-dim.family-vocab" },
-            { textEl: "cousin", textEn: "cousin", isCorrect: false, gapTag: "efl-c-dim.family-vocab" },
-          ],
-        },
+      "id": "english-c-dimotikou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Αγγλικά, Γ' Δημοτικού",
+      "subjectLabelEn": "English, 3rd Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών",
+      "titleEn": "The English Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις εισαγωγικού επιπέδου. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short beginner-level questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-colors",
+          "textEl": "Ποιο χρώμα είναι πιο κοντά στο σκούρο μοβ;",
+          "textEn": "Which color is closer to dark violet?",
+          "options": [
+            {
+              "textEl": "purple",
+              "textEn": "purple",
+              "isCorrect": true
+            },
+            {
+              "textEl": "pink",
+              "textEn": "pink",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.colors-vocab"
+            },
+            {
+              "textEl": "orange",
+              "textEn": "orange",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.colors-vocab"
+            }
+          ]
+        },
+        {
+          "id": "q2-this-that",
+          "textEl": "Κρατάς ένα μολύβι στο χέρι σου και λες: '___ is my pencil.'",
+          "textEn": "You're holding a pencil in your hand and say: '___ is my pencil.'",
+          "options": [
+            {
+              "textEl": "This",
+              "textEn": "This",
+              "isCorrect": true
+            },
+            {
+              "textEl": "That",
+              "textEn": "That",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.this-that"
+            },
+            {
+              "textEl": "These",
+              "textEn": "These",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.this-that"
+            }
+          ]
+        },
+        {
+          "id": "q3-numbers",
+          "textEl": "Ποιος αριθμός είναι το «thirteen»;",
+          "textEn": "Which number is 'thirteen'?",
+          "options": [
+            {
+              "textEl": "13",
+              "textEn": "13",
+              "isCorrect": true
+            },
+            {
+              "textEl": "30",
+              "textEn": "30",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.numbers-1-20"
+            },
+            {
+              "textEl": "3",
+              "textEn": "3",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.numbers-1-20"
+            }
+          ]
+        },
+        {
+          "id": "q4-family",
+          "textEl": "Ο αδερφός της μητέρας σου στα αγγλικά λέγεται...",
+          "textEn": "Your mother's brother is called in English...",
+          "options": [
+            {
+              "textEl": "uncle",
+              "textEn": "uncle",
+              "isCorrect": true
+            },
+            {
+              "textEl": "brother",
+              "textEn": "brother",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.family-vocab"
+            },
+            {
+              "textEl": "cousin",
+              "textEn": "cousin",
+              "isCorrect": false,
+              "gapTag": "efl-c-dim.family-vocab"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-c-dimotikou": {
-      id: "istoria-c-dimotikou",
-      grades: ["c"],
-      subjectLabelEl: "Ιστορία, Γ' Δημοτικού (Ελληνική Μυθολογία)",
-      subjectLabelEn: "History, 3rd Grade (Greek Mythology)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Ελληνικής Μυθολογίας",
-      titleEn: "The Greek Mythology Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για τη μυθολογία. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about mythology. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-myth-history",
-          textEl: "Ο μύθος του Ηρακλή είναι...",
-          textEn: "The myth of Heracles is...",
-          options: [
-            { textEl: "Μια φανταστική αφήγηση με ήρωες, θεούς και τέρατα.", textEn: "A fictional story with heroes, gods, and monsters.", isCorrect: true },
-            { textEl: "Ένα γεγονός που ξέρουμε σίγουρα ότι συνέβη ακριβώς έτσι.", textEn: "An event we know for certain happened exactly this way.", isCorrect: false, gapTag: "istoria-c-dim.myth-vs-history" },
-            { textEl: "Μια σύγχρονη ειδησεογραφική αναφορά.", textEn: "A modern news report.", isCorrect: false, gapTag: "istoria-c-dim.myth-vs-history" },
-          ],
-        },
-        {
-          id: "q2-heracles",
-          textEl: "Ποιο τέρας σκότωσε ο Ηρακλής στον πρώτο του άθλο;",
-          textEn: "Which monster did Heracles kill in his first labor?",
-          options: [
-            { textEl: "Το λιοντάρι της Νεμέας.", textEn: "The Nemean Lion.", isCorrect: true },
-            { textEl: "Τον Κέρβερο.", textEn: "Cerberus.", isCorrect: false, gapTag: "istoria-c-dim.heracles-labors-order" },
-            { textEl: "Τη Λερναία Ύδρα.", textEn: "The Lernaean Hydra.", isCorrect: false, gapTag: "istoria-c-dim.heracles-labors-order" },
-          ],
-        },
-        {
-          id: "q3-trojan-cause",
-          textEl: "Τι πυροδότησε τον Τρωικό Πόλεμο σύμφωνα με τον μύθο;",
-          textEn: "What triggered the Trojan War, according to the myth?",
-          options: [
-            { textEl: "Η αρπαγή της Ελένης από τον Πάρη.", textEn: "Paris's abduction of Helen.", isCorrect: true },
-            { textEl: "Μια διαμάχη για χρυσό ανάμεσα σε δύο βασιλιάδες.", textEn: "A dispute over gold between two kings.", isCorrect: false, gapTag: "istoria-c-dim.trojan-war-cause" },
-            { textEl: "Μια φυσική καταστροφή στην Τροία.", textEn: "A natural disaster in Troy.", isCorrect: false, gapTag: "istoria-c-dim.trojan-war-cause" },
-          ],
-        },
-        {
-          id: "q4-odysseus",
-          textEl: "Ποιος προσπάθησε να εμποδίσει τον Οδυσσέα να επιστρέψει στην Ιθάκη;",
-          textEn: "Who tried to stop Odysseus from returning to Ithaca?",
-          options: [
-            { textEl: "Ο Κύκλωπας Πολύφημος.", textEn: "The Cyclops Polyphemus.", isCorrect: true },
-            { textEl: "Ο πατέρας του, ο Λαέρτης.", textEn: "His father, Laertes.", isCorrect: false, gapTag: "istoria-c-dim.odysseus-journey" },
-            { textEl: "Ο γιος του, ο Τηλέμαχος.", textEn: "His son, Telemachus.", isCorrect: false, gapTag: "istoria-c-dim.odysseus-journey" },
-          ],
-        },
+      "id": "istoria-c-dimotikou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Ιστορία, Γ' Δημοτικού (Ελληνική Μυθολογία)",
+      "subjectLabelEn": "History, 3rd Grade (Greek Mythology)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Ελληνικής Μυθολογίας",
+      "titleEn": "The Greek Mythology Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για τη μυθολογία. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about mythology. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-myth-history",
+          "textEl": "Ο μύθος του Ηρακλή είναι...",
+          "textEn": "The myth of Heracles is...",
+          "options": [
+            {
+              "textEl": "Μια φανταστική αφήγηση με ήρωες, θεούς και τέρατα.",
+              "textEn": "A fictional story with heroes, gods, and monsters.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ένα γεγονός που ξέρουμε σίγουρα ότι συνέβη ακριβώς έτσι.",
+              "textEn": "An event we know for certain happened exactly this way.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.myth-vs-history"
+            },
+            {
+              "textEl": "Μια σύγχρονη ειδησεογραφική αναφορά.",
+              "textEn": "A modern news report.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.myth-vs-history"
+            }
+          ]
+        },
+        {
+          "id": "q2-heracles",
+          "textEl": "Ποιο τέρας σκότωσε ο Ηρακλής στον πρώτο του άθλο;",
+          "textEn": "Which monster did Heracles kill in his first labor?",
+          "options": [
+            {
+              "textEl": "Το λιοντάρι της Νεμέας.",
+              "textEn": "The Nemean Lion.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Τον Κέρβερο.",
+              "textEn": "Cerberus.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.heracles-labors-order"
+            },
+            {
+              "textEl": "Τη Λερναία Ύδρα.",
+              "textEn": "The Lernaean Hydra.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.heracles-labors-order"
+            }
+          ]
+        },
+        {
+          "id": "q3-trojan-cause",
+          "textEl": "Τι πυροδότησε τον Τρωικό Πόλεμο σύμφωνα με τον μύθο;",
+          "textEn": "What triggered the Trojan War, according to the myth?",
+          "options": [
+            {
+              "textEl": "Η αρπαγή της Ελένης από τον Πάρη.",
+              "textEn": "Paris's abduction of Helen.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μια διαμάχη για χρυσό ανάμεσα σε δύο βασιλιάδες.",
+              "textEn": "A dispute over gold between two kings.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.trojan-war-cause"
+            },
+            {
+              "textEl": "Μια φυσική καταστροφή στην Τροία.",
+              "textEn": "A natural disaster in Troy.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.trojan-war-cause"
+            }
+          ]
+        },
+        {
+          "id": "q4-odysseus",
+          "textEl": "Ποιος προσπάθησε να εμποδίσει τον Οδυσσέα να επιστρέψει στην Ιθάκη;",
+          "textEn": "Who tried to stop Odysseus from returning to Ithaca?",
+          "options": [
+            {
+              "textEl": "Ο Κύκλωπας Πολύφημος.",
+              "textEn": "The Cyclops Polyphemus.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο πατέρας του, ο Λαέρτης.",
+              "textEn": "His father, Laertes.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.odysseus-journey"
+            },
+            {
+              "textEl": "Ο γιος του, ο Τηλέμαχος.",
+              "textEn": "His son, Telemachus.",
+              "isCorrect": false,
+              "gapTag": "istoria-c-dim.odysseus-journey"
+            }
+          ]
+        }
+      ]
     },
-
     "math-d-dimotikou": {
-      id: "math-d-dimotikou",
-      grades: ["d"],
-      subjectLabelEl: "Μαθηματικά, Δ' Δημοτικού",
-      subjectLabelEn: "Math, 4th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-same-denominator",
-          textEl: "Πόσο κάνει 2/5 + 1/5;",
-          textEn: "What is 2/5 + 1/5?",
-          options: [
-            { textEl: "3/5", textEn: "3/5", isCorrect: true },
-            { textEl: "3/10", textEn: "3/10", isCorrect: false, gapTag: "math-d-dim.fraction-same-denominator" },
-            { textEl: "3/25", textEn: "3/25", isCorrect: false, gapTag: "math-d-dim.fraction-same-denominator" },
-          ],
-        },
-        {
-          id: "q2-decimal-meaning",
-          textEl: "Τι σημαίνει το 0,5 μιας πίτσας;",
-          textEn: "What does 0.5 of a pizza mean?",
-          options: [
-            { textEl: "Τη μισή πίτσα.", textEn: "Half the pizza.", isCorrect: true },
-            { textEl: "Το ένα πέμπτο της πίτσας.", textEn: "One-fifth of the pizza.", isCorrect: false, gapTag: "math-d-dim.decimal-intro-place-value" },
-            { textEl: "Πέντε ολόκληρες πίτσες.", textEn: "Five whole pizzas.", isCorrect: false, gapTag: "math-d-dim.decimal-intro-place-value" },
-          ],
-        },
-        {
-          id: "q3-perimeter",
-          textEl: "Ένα τετράγωνο έχει πλευρά 5 εκ. Ποια είναι η περίμετρός του;",
-          textEn: "A square has a side of 5 cm. What is its perimeter?",
-          options: [
-            { textEl: "20 εκ.", textEn: "20 cm", isCorrect: true },
-            { textEl: "25 εκ.", textEn: "25 cm", isCorrect: false, gapTag: "math-d-dim.perimeter-concept" },
-            { textEl: "10 εκ.", textEn: "10 cm", isCorrect: false, gapTag: "math-d-dim.perimeter-concept" },
-          ],
-        },
-        {
-          id: "q4-roman",
-          textEl: "Ο ρωμαϊκός αριθμός IV αντιστοιχεί στο...",
-          textEn: "The Roman numeral IV corresponds to...",
-          options: [
-            { textEl: "4", textEn: "4", isCorrect: true },
-            { textEl: "6", textEn: "6", isCorrect: false, gapTag: "math-d-dim.roman-numerals" },
-            { textEl: "9", textEn: "9", isCorrect: false, gapTag: "math-d-dim.roman-numerals" },
-          ],
-        },
-        {
-          id: "q5-simplify",
-          textEl: "Ποιο κλάσμα είναι η απλοποιημένη μορφή του 4/8;",
-          textEn: "Which fraction is the simplified form of 4/8?",
-          options: [
-            { textEl: "1/2", textEn: "1/2", isCorrect: true },
-            { textEl: "2/4", textEn: "2/4 (not fully simplified)", isCorrect: false, gapTag: "math-d-dim.fraction-simplify-basic" },
-            { textEl: "8/4", textEn: "8/4 (flipped)", isCorrect: false, gapTag: "math-d-dim.fraction-simplify-basic" },
-          ],
-        },
-        {
-          id: "q6-decimal-compare",
-          textEl: "Ποιος αριθμός είναι μεγαλύτερος;",
-          textEn: "Which number is bigger?",
-          options: [
-            { textEl: "0,3", textEn: "0.3", isCorrect: true },
-            { textEl: "0,25", textEn: "0.25", isCorrect: false, gapTag: "math-d-dim.decimal-compare" },
-            { textEl: "Είναι ίσοι", textEn: "They're equal", isCorrect: false, gapTag: "math-d-dim.decimal-compare" },
-          ],
-        },
-        {
-          id: "q7-area-basic",
-          textEl: "Ένα ορθογώνιο καλύπτεται ακριβώς από 12 τετραγωνάκια μονάδας. Ποιο είναι το εμβαδόν του;",
-          textEn: "A rectangle is exactly covered by 12 unit squares. What is its area?",
-          options: [
-            { textEl: "12 τετραγωνικές μονάδες", textEn: "12 square units", isCorrect: true },
-            { textEl: "Το άθροισμα των πλευρών του.", textEn: "The sum of its sides (that's perimeter).", isCorrect: false, gapTag: "math-d-dim.area-basic-concept" },
-            { textEl: "Δεν μπορεί να υπολογιστεί χωρίς χάρακα.", textEn: "It can't be calculated without a ruler.", isCorrect: false, gapTag: "math-d-dim.area-basic-concept" },
-          ],
-        },
-        {
-          id: "q8-mult-10-100",
-          textEl: "Πόσο κάνει 7 × 100;",
-          textEn: "What is 7 × 100?",
-          options: [
-            { textEl: "700", textEn: "700", isCorrect: true },
-            { textEl: "70", textEn: "70", isCorrect: false, gapTag: "math-d-dim.multiplication-by-10-100" },
-            { textEl: "7100", textEn: "7100", isCorrect: false, gapTag: "math-d-dim.multiplication-by-10-100" },
-          ],
-        },
+      "id": "math-d-dimotikou",
+      "grades": [
+        "d"
       ],
+      "subjectLabelEl": "Μαθηματικά, Δ' Δημοτικού",
+      "subjectLabelEn": "Math, 4th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-same-denominator",
+          "textEl": "Πόσο κάνει 2/5 + 1/5;",
+          "textEn": "What is 2/5 + 1/5?",
+          "options": [
+            {
+              "textEl": "3/5",
+              "textEn": "3/5",
+              "isCorrect": true
+            },
+            {
+              "textEl": "3/10",
+              "textEn": "3/10",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.fraction-same-denominator"
+            },
+            {
+              "textEl": "3/25",
+              "textEn": "3/25",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.fraction-same-denominator"
+            }
+          ]
+        },
+        {
+          "id": "q2-decimal-meaning",
+          "textEl": "Τι σημαίνει το 0,5 μιας πίτσας;",
+          "textEn": "What does 0.5 of a pizza mean?",
+          "options": [
+            {
+              "textEl": "Τη μισή πίτσα.",
+              "textEn": "Half the pizza.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το ένα πέμπτο της πίτσας.",
+              "textEn": "One-fifth of the pizza.",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.decimal-intro-place-value"
+            },
+            {
+              "textEl": "Πέντε ολόκληρες πίτσες.",
+              "textEn": "Five whole pizzas.",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.decimal-intro-place-value"
+            }
+          ]
+        },
+        {
+          "id": "q3-perimeter",
+          "textEl": "Ένα τετράγωνο έχει πλευρά 5 εκ. Ποια είναι η περίμετρός του;",
+          "textEn": "A square has a side of 5 cm. What is its perimeter?",
+          "options": [
+            {
+              "textEl": "20 εκ.",
+              "textEn": "20 cm",
+              "isCorrect": true
+            },
+            {
+              "textEl": "25 εκ.",
+              "textEn": "25 cm",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.perimeter-concept"
+            },
+            {
+              "textEl": "10 εκ.",
+              "textEn": "10 cm",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.perimeter-concept"
+            }
+          ]
+        },
+        {
+          "id": "q4-roman",
+          "textEl": "Ο ρωμαϊκός αριθμός IV αντιστοιχεί στο...",
+          "textEn": "The Roman numeral IV corresponds to...",
+          "options": [
+            {
+              "textEl": "4",
+              "textEn": "4",
+              "isCorrect": true
+            },
+            {
+              "textEl": "6",
+              "textEn": "6",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.roman-numerals"
+            },
+            {
+              "textEl": "9",
+              "textEn": "9",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.roman-numerals"
+            }
+          ]
+        },
+        {
+          "id": "q5-simplify",
+          "textEl": "Ποιο κλάσμα είναι η απλοποιημένη μορφή του 4/8;",
+          "textEn": "Which fraction is the simplified form of 4/8?",
+          "options": [
+            {
+              "textEl": "1/2",
+              "textEn": "1/2",
+              "isCorrect": true
+            },
+            {
+              "textEl": "2/4",
+              "textEn": "2/4 (not fully simplified)",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.fraction-simplify-basic"
+            },
+            {
+              "textEl": "8/4",
+              "textEn": "8/4 (flipped)",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.fraction-simplify-basic"
+            }
+          ]
+        },
+        {
+          "id": "q6-decimal-compare",
+          "textEl": "Ποιος αριθμός είναι μεγαλύτερος;",
+          "textEn": "Which number is bigger?",
+          "options": [
+            {
+              "textEl": "0,3",
+              "textEn": "0.3",
+              "isCorrect": true
+            },
+            {
+              "textEl": "0,25",
+              "textEn": "0.25",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.decimal-compare"
+            },
+            {
+              "textEl": "Είναι ίσοι",
+              "textEn": "They're equal",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.decimal-compare"
+            }
+          ]
+        },
+        {
+          "id": "q7-area-basic",
+          "textEl": "Ένα ορθογώνιο καλύπτεται ακριβώς από 12 τετραγωνάκια μονάδας. Ποιο είναι το εμβαδόν του;",
+          "textEn": "A rectangle is exactly covered by 12 unit squares. What is its area?",
+          "options": [
+            {
+              "textEl": "12 τετραγωνικές μονάδες",
+              "textEn": "12 square units",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το άθροισμα των πλευρών του.",
+              "textEn": "The sum of its sides (that's perimeter).",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.area-basic-concept"
+            },
+            {
+              "textEl": "Δεν μπορεί να υπολογιστεί χωρίς χάρακα.",
+              "textEn": "It can't be calculated without a ruler.",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.area-basic-concept"
+            }
+          ]
+        },
+        {
+          "id": "q8-mult-10-100",
+          "textEl": "Πόσο κάνει 7 × 100;",
+          "textEn": "What is 7 × 100?",
+          "options": [
+            {
+              "textEl": "700",
+              "textEn": "700",
+              "isCorrect": true
+            },
+            {
+              "textEl": "70",
+              "textEn": "70",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.multiplication-by-10-100"
+            },
+            {
+              "textEl": "7100",
+              "textEn": "7100",
+              "isCorrect": false,
+              "gapTag": "math-d-dim.multiplication-by-10-100"
+            }
+          ]
+        }
+      ]
     },
-
     "glossa-d-dimotikou": {
-      id: "glossa-d-dimotikou",
-      grades: ["d"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Δ' Δημοτικού",
-      subjectLabelEn: "Modern Greek Language, 4th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-structure",
-          textEl: "Γράφεις μια ιστορία. Τι πρέπει να έχει στην αρχή;",
-          textEn: "You're writing a story. What should it have at the start?",
-          options: [
-            { textEl: "Μια εισαγωγή που παρουσιάζει τους ήρωες και το σκηνικό.", textEn: "An introduction presenting the characters and setting.", isCorrect: true },
-            { textEl: "Κατευθείαν το τέλος της ιστορίας.", textEn: "The story's ending right away.", isCorrect: false, gapTag: "glossa-d-dim.paragraph-structure" },
-            { textEl: "Τίποτα, ξεκινάω όπου θέλω.", textEn: "Nothing, I can start wherever I like.", isCorrect: false, gapTag: "glossa-d-dim.paragraph-structure" },
-          ],
-        },
-        {
-          id: "q2-future",
-          textEl: "«Σήμερα παίζω.» Πώς το λέμε για αύριο;",
-          textEn: "'Today I play.' How do we say it for tomorrow?",
-          options: [
-            { textEl: "«Αύριο θα παίξω.»", textEn: "'Tomorrow I will play.'", isCorrect: true },
-            { textEl: "«Αύριο έπαιξα.»", textEn: "'Tomorrow I played.' (wrong tense)", isCorrect: false, gapTag: "glossa-d-dim.future-tense" },
-            { textEl: "«Αύριο παίζω.»", textEn: "'Tomorrow I play.' (missing future marker)", isCorrect: false, gapTag: "glossa-d-dim.future-tense" },
-          ],
-        },
-        {
-          id: "q3-adj-adverb",
-          textEl: "«Έτρεξε γρήγορα.» Τι είδους λέξη είναι το «γρήγορα»;",
-          textEn: "'He ran quickly.' What kind of word is 'quickly'?",
-          options: [
-            { textEl: "Επίρρημα, περιγράφει το ρήμα «έτρεξε».", textEn: "Adverb, describing the verb 'ran'.", isCorrect: true },
-            { textEl: "Επίθετο, περιγράφει ουσιαστικό.", textEn: "Adjective, describing a noun.", isCorrect: false, gapTag: "glossa-d-dim.adjective-vs-adverb" },
-            { textEl: "Ουσιαστικό.", textEn: "Noun.", isCorrect: false, gapTag: "glossa-d-dim.adjective-vs-adverb" },
-          ],
-        },
-        {
-          id: "q4-direct-indirect",
-          textEl: "Ποια πρόταση είναι σε ευθύ λόγο;",
-          textEn: "Which sentence is in direct speech?",
-          options: [
-            { textEl: "Ο Νίκος είπε: «Θα έρθω αύριο.»", textEn: "Nick said: 'I will come tomorrow.'", isCorrect: true },
-            { textEl: "Ο Νίκος είπε ότι θα έρθει αύριο.", textEn: "Nick said that he would come tomorrow.", isCorrect: false, gapTag: "glossa-d-dim.direct-indirect-speech" },
-            { textEl: "Ο Νίκος θα έρθει αύριο.", textEn: "Nick will come tomorrow.", isCorrect: false, gapTag: "glossa-d-dim.direct-indirect-speech" },
-          ],
-        },
-        {
-          id: "q5-subject-predicate",
-          textEl: "Στην πρόταση «Ο σκύλος γαβγίζει δυνατά», ποιο είναι το υποκείμενο;",
-          textEn: "In 'The dog barks loudly', what is the subject?",
-          options: [
-            { textEl: "«Ο σκύλος»", textEn: "'The dog'", isCorrect: true },
-            { textEl: "«γαβγίζει»", textEn: "'barks'", isCorrect: false, gapTag: "glossa-d-dim.subject-predicate" },
-            { textEl: "«δυνατά»", textEn: "'loudly'", isCorrect: false, gapTag: "glossa-d-dim.subject-predicate" },
-          ],
-        },
-        {
-          id: "q6-main-idea",
-          textEl: "Μια παράγραφος μιλάει κυρίως για τα οφέλη της άσκησης, αλλά αναφέρει και μια φορά τι έφαγε ο συγγραφέας το πρωί. Ποια είναι η κύρια ιδέα;",
-          textEn: "A paragraph mainly discusses the benefits of exercise but mentions once what the author ate for breakfast. What is the main idea?",
-          options: [
-            { textEl: "Τα οφέλη της άσκησης.", textEn: "The benefits of exercise.", isCorrect: true },
-            { textEl: "Το πρωινό του συγγραφέα.", textEn: "The author's breakfast.", isCorrect: false, gapTag: "glossa-d-dim.paragraph-main-idea" },
-            { textEl: "Δεν έχει καμία κύρια ιδέα.", textEn: "It has no main idea at all.", isCorrect: false, gapTag: "glossa-d-dim.paragraph-main-idea" },
-          ],
-        },
-        {
-          id: "q7-conjunction",
-          textEl: "«Ήθελα να παίξω έξω, ___ έβρεχε.» Ποιος σύνδεσμος ταιριάζει;",
-          textEn: "'I wanted to play outside, ___ it was raining.' Which connector fits?",
-          options: [
-            { textEl: "αλλά", textEn: "but", isCorrect: true },
-            { textEl: "και", textEn: "and", isCorrect: false, gapTag: "glossa-d-dim.conjunction-choice" },
-            { textEl: "γιατί", textEn: "because", isCorrect: false, gapTag: "glossa-d-dim.conjunction-choice" },
-          ],
-        },
-        {
-          id: "q8-formal-greeting",
-          textEl: "Γράφεις επιστολή στον διευθυντή του σχολείου σου. Ποιος χαιρετισμός ταιριάζει;",
-          textEn: "You're writing a letter to your school principal. Which greeting fits?",
-          options: [
-            { textEl: "«Αγαπητέ κύριε Διευθυντή,»", textEn: "'Dear Mr. Principal,'", isCorrect: true },
-            { textEl: "«Γεια σου φίλε,»", textEn: "'Hey buddy,'", isCorrect: false, gapTag: "glossa-d-dim.formal-informal-greeting" },
-            { textEl: "«Έλα ρε συ,»", textEn: "'Yo dude,'", isCorrect: false, gapTag: "glossa-d-dim.formal-informal-greeting" },
-          ],
-        },
+      "id": "glossa-d-dimotikou",
+      "grades": [
+        "d"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Δ' Δημοτικού",
+      "subjectLabelEn": "Modern Greek Language, 4th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-structure",
+          "textEl": "Γράφεις μια ιστορία. Τι πρέπει να έχει στην αρχή;",
+          "textEn": "You're writing a story. What should it have at the start?",
+          "options": [
+            {
+              "textEl": "Μια εισαγωγή που παρουσιάζει τους ήρωες και το σκηνικό.",
+              "textEn": "An introduction presenting the characters and setting.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Κατευθείαν το τέλος της ιστορίας.",
+              "textEn": "The story's ending right away.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.paragraph-structure"
+            },
+            {
+              "textEl": "Τίποτα, ξεκινάω όπου θέλω.",
+              "textEn": "Nothing, I can start wherever I like.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.paragraph-structure"
+            }
+          ]
+        },
+        {
+          "id": "q2-future",
+          "textEl": "«Σήμερα παίζω.» Πώς το λέμε για αύριο;",
+          "textEn": "'Today I play.' How do we say it for tomorrow?",
+          "options": [
+            {
+              "textEl": "«Αύριο θα παίξω.»",
+              "textEn": "'Tomorrow I will play.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Αύριο έπαιξα.»",
+              "textEn": "'Tomorrow I played.' (wrong tense)",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.future-tense"
+            },
+            {
+              "textEl": "«Αύριο παίζω.»",
+              "textEn": "'Tomorrow I play.' (missing future marker)",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.future-tense"
+            }
+          ]
+        },
+        {
+          "id": "q3-adj-adverb",
+          "textEl": "«Έτρεξε γρήγορα.» Τι είδους λέξη είναι το «γρήγορα»;",
+          "textEn": "'He ran quickly.' What kind of word is 'quickly'?",
+          "options": [
+            {
+              "textEl": "Επίρρημα, περιγράφει το ρήμα «έτρεξε».",
+              "textEn": "Adverb, describing the verb 'ran'.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Επίθετο, περιγράφει ουσιαστικό.",
+              "textEn": "Adjective, describing a noun.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.adjective-vs-adverb"
+            },
+            {
+              "textEl": "Ουσιαστικό.",
+              "textEn": "Noun.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.adjective-vs-adverb"
+            }
+          ]
+        },
+        {
+          "id": "q4-direct-indirect",
+          "textEl": "Ποια πρόταση είναι σε ευθύ λόγο;",
+          "textEn": "Which sentence is in direct speech?",
+          "options": [
+            {
+              "textEl": "Ο Νίκος είπε: «Θα έρθω αύριο.»",
+              "textEn": "Nick said: 'I will come tomorrow.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο Νίκος είπε ότι θα έρθει αύριο.",
+              "textEn": "Nick said that he would come tomorrow.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.direct-indirect-speech"
+            },
+            {
+              "textEl": "Ο Νίκος θα έρθει αύριο.",
+              "textEn": "Nick will come tomorrow.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.direct-indirect-speech"
+            }
+          ]
+        },
+        {
+          "id": "q5-subject-predicate",
+          "textEl": "Στην πρόταση «Ο σκύλος γαβγίζει δυνατά», ποιο είναι το υποκείμενο;",
+          "textEn": "In 'The dog barks loudly', what is the subject?",
+          "options": [
+            {
+              "textEl": "«Ο σκύλος»",
+              "textEn": "'The dog'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«γαβγίζει»",
+              "textEn": "'barks'",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.subject-predicate"
+            },
+            {
+              "textEl": "«δυνατά»",
+              "textEn": "'loudly'",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.subject-predicate"
+            }
+          ]
+        },
+        {
+          "id": "q6-main-idea",
+          "textEl": "Μια παράγραφος μιλάει κυρίως για τα οφέλη της άσκησης, αλλά αναφέρει και μια φορά τι έφαγε ο συγγραφέας το πρωί. Ποια είναι η κύρια ιδέα;",
+          "textEn": "A paragraph mainly discusses the benefits of exercise but mentions once what the author ate for breakfast. What is the main idea?",
+          "options": [
+            {
+              "textEl": "Τα οφέλη της άσκησης.",
+              "textEn": "The benefits of exercise.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το πρωινό του συγγραφέα.",
+              "textEn": "The author's breakfast.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.paragraph-main-idea"
+            },
+            {
+              "textEl": "Δεν έχει καμία κύρια ιδέα.",
+              "textEn": "It has no main idea at all.",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.paragraph-main-idea"
+            }
+          ]
+        },
+        {
+          "id": "q7-conjunction",
+          "textEl": "«Ήθελα να παίξω έξω, ___ έβρεχε.» Ποιος σύνδεσμος ταιριάζει;",
+          "textEn": "'I wanted to play outside, ___ it was raining.' Which connector fits?",
+          "options": [
+            {
+              "textEl": "αλλά",
+              "textEn": "but",
+              "isCorrect": true
+            },
+            {
+              "textEl": "και",
+              "textEn": "and",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.conjunction-choice"
+            },
+            {
+              "textEl": "γιατί",
+              "textEn": "because",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.conjunction-choice"
+            }
+          ]
+        },
+        {
+          "id": "q8-formal-greeting",
+          "textEl": "Γράφεις επιστολή στον διευθυντή του σχολείου σου. Ποιος χαιρετισμός ταιριάζει;",
+          "textEn": "You're writing a letter to your school principal. Which greeting fits?",
+          "options": [
+            {
+              "textEl": "«Αγαπητέ κύριε Διευθυντή,»",
+              "textEn": "'Dear Mr. Principal,'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Γεια σου φίλε,»",
+              "textEn": "'Hey buddy,'",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.formal-informal-greeting"
+            },
+            {
+              "textEl": "«Έλα ρε συ,»",
+              "textEn": "'Yo dude,'",
+              "isCorrect": false,
+              "gapTag": "glossa-d-dim.formal-informal-greeting"
+            }
+          ]
+        }
+      ]
     },
-
     "english-d-dimotikou": {
-      id: "english-d-dimotikou",
-      grades: ["d"],
-      subjectLabelEl: "Αγγλικά, Δ' Δημοτικού",
-      subjectLabelEn: "English, 4th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών",
-      titleEn: "The English Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις, λίγο πιο προχωρημένες από την Γ' τάξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions, a bit more advanced than 3rd grade. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-routine",
-          textEl: "'I ___ up at 7 every morning.' Ποιο ταιριάζει;",
-          textEn: "'I ___ up at 7 every morning.' Which fits?",
-          options: [
-            { textEl: "wake", textEn: "wake", isCorrect: true },
-            { textEl: "waking", textEn: "waking", isCorrect: false, gapTag: "efl-d-dim.present-simple-routines" },
-            { textEl: "woke", textEn: "woke", isCorrect: false, gapTag: "efl-d-dim.present-simple-routines" },
-          ],
-        },
-        {
-          id: "q2-house",
-          textEl: "Πού μαγειρεύουμε στο σπίτι στα αγγλικά;",
-          textEn: "Where do we cook in the house, in English?",
-          options: [
-            { textEl: "the kitchen", textEn: "the kitchen", isCorrect: true },
-            { textEl: "the bathroom", textEn: "the bathroom", isCorrect: false, gapTag: "efl-d-dim.house-rooms-vocab" },
-            { textEl: "the bedroom", textEn: "the bedroom", isCorrect: false, gapTag: "efl-d-dim.house-rooms-vocab" },
-          ],
-        },
-        {
-          id: "q3-can",
-          textEl: "Ποια πρόταση είναι σωστή;",
-          textEn: "Which sentence is correct?",
-          options: [
-            { textEl: "'I can swim.'", textEn: "'I can swim.'", isCorrect: true },
-            { textEl: "'I can to swim.'", textEn: "'I can to swim.'", isCorrect: false, gapTag: "efl-d-dim.can-ability" },
-            { textEl: "'I can swimming.'", textEn: "'I can swimming.'", isCorrect: false, gapTag: "efl-d-dim.can-ability" },
-          ],
-        },
-        {
-          id: "q4-days",
-          textEl: "Ποια μέρα έρχεται αμέσως μετά το 'Monday';",
-          textEn: "Which day comes right after 'Monday'?",
-          options: [
-            { textEl: "Tuesday", textEn: "Tuesday", isCorrect: true },
-            { textEl: "Wednesday", textEn: "Wednesday", isCorrect: false, gapTag: "efl-d-dim.days-months" },
-            { textEl: "Sunday", textEn: "Sunday", isCorrect: false, gapTag: "efl-d-dim.days-months" },
-          ],
-        },
+      "id": "english-d-dimotikou",
+      "grades": [
+        "d"
       ],
+      "subjectLabelEl": "Αγγλικά, Δ' Δημοτικού",
+      "subjectLabelEn": "English, 4th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών",
+      "titleEn": "The English Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις, λίγο πιο προχωρημένες από την Γ' τάξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions, a bit more advanced than 3rd grade. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-routine",
+          "textEl": "'I ___ up at 7 every morning.' Ποιο ταιριάζει;",
+          "textEn": "'I ___ up at 7 every morning.' Which fits?",
+          "options": [
+            {
+              "textEl": "wake",
+              "textEn": "wake",
+              "isCorrect": true
+            },
+            {
+              "textEl": "waking",
+              "textEn": "waking",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.present-simple-routines"
+            },
+            {
+              "textEl": "woke",
+              "textEn": "woke",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.present-simple-routines"
+            }
+          ]
+        },
+        {
+          "id": "q2-house",
+          "textEl": "Πού μαγειρεύουμε στο σπίτι στα αγγλικά;",
+          "textEn": "Where do we cook in the house, in English?",
+          "options": [
+            {
+              "textEl": "the kitchen",
+              "textEn": "the kitchen",
+              "isCorrect": true
+            },
+            {
+              "textEl": "the bathroom",
+              "textEn": "the bathroom",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.house-rooms-vocab"
+            },
+            {
+              "textEl": "the bedroom",
+              "textEn": "the bedroom",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.house-rooms-vocab"
+            }
+          ]
+        },
+        {
+          "id": "q3-can",
+          "textEl": "Ποια πρόταση είναι σωστή;",
+          "textEn": "Which sentence is correct?",
+          "options": [
+            {
+              "textEl": "'I can swim.'",
+              "textEn": "'I can swim.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "'I can to swim.'",
+              "textEn": "'I can to swim.'",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.can-ability"
+            },
+            {
+              "textEl": "'I can swimming.'",
+              "textEn": "'I can swimming.'",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.can-ability"
+            }
+          ]
+        },
+        {
+          "id": "q4-days",
+          "textEl": "Ποια μέρα έρχεται αμέσως μετά το 'Monday';",
+          "textEn": "Which day comes right after 'Monday'?",
+          "options": [
+            {
+              "textEl": "Tuesday",
+              "textEn": "Tuesday",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Wednesday",
+              "textEn": "Wednesday",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.days-months"
+            },
+            {
+              "textEl": "Sunday",
+              "textEn": "Sunday",
+              "isCorrect": false,
+              "gapTag": "efl-d-dim.days-months"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-d-dimotikou": {
-      id: "istoria-d-dimotikou",
-      grades: ["d"],
-      subjectLabelEl: "Ιστορία, Δ' Δημοτικού (Αρχαία Ελληνική Ιστορία)",
-      subjectLabelEn: "History, 4th Grade (Ancient Greek History)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αρχαίας Ιστορίας",
-      titleEn: "The Ancient History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για Μινωίτες, Μυκηναίους και πόλεις-κράτη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about the Minoans, Mycenaeans, and city-states. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-minoan",
-          textEl: "Το ανάκτορο της Κνωσού βρίσκεται...",
-          textEn: "The Palace of Knossos is located...",
-          options: [
-            { textEl: "Στην Κρήτη, κέντρο του Μινωικού πολιτισμού.", textEn: "In Crete, the center of Minoan civilization.", isCorrect: true },
-            { textEl: "Στην Πελοπόννησο, κέντρο του Μυκηναϊκού πολιτισμού.", textEn: "In the Peloponnese, the center of Mycenaean civilization.", isCorrect: false, gapTag: "istoria-d-dim.minoan-crete" },
-            { textEl: "Στην Αθήνα.", textEn: "In Athens.", isCorrect: false, gapTag: "istoria-d-dim.minoan-crete" },
-          ],
-        },
-        {
-          id: "q2-mycenaean",
-          textEl: "Ποιοι θεωρούνται οι πρώτοι Έλληνες;",
-          textEn: "Who are considered the first Greeks?",
-          options: [
-            { textEl: "Οι Μυκηναίοι (Αχαιοί).", textEn: "The Mycenaeans (Achaeans).", isCorrect: true },
-            { textEl: "Οι Ρωμαίοι.", textEn: "The Romans.", isCorrect: false, gapTag: "istoria-d-dim.mycenaean-achaeans" },
-            { textEl: "Οι Αιγύπτιοι.", textEn: "The Egyptians.", isCorrect: false, gapTag: "istoria-d-dim.mycenaean-achaeans" },
-          ],
-        },
-        {
-          id: "q3-polis",
-          textEl: "Η αρχαία Ελλάδα ήταν οργανωμένη σε...",
-          textEn: "Ancient Greece was organized into...",
-          options: [
-            { textEl: "Πολλές ανεξάρτητες πόλεις-κράτη, η καθεμία με δικούς της νόμους.", textEn: "Many independent city-states, each with its own laws.", isCorrect: true },
-            { textEl: "Ένα ενιαίο κράτος με έναν βασιλιά για όλους.", textEn: "One unified state with a single king for everyone.", isCorrect: false, gapTag: "istoria-d-dim.polis-emergence" },
-            { textEl: "Επαρχίες μιας μεγάλης αυτοκρατορίας.", textEn: "Provinces of one large empire.", isCorrect: false, gapTag: "istoria-d-dim.polis-emergence" },
-          ],
-        },
-        {
-          id: "q4-olympics",
-          textEl: "Οι αρχαίοι Ολυμπιακοί Αγώνες γίνονταν προς τιμήν...",
-          textEn: "The ancient Olympic Games were held in honor of...",
-          options: [
-            { textEl: "Του Δία, στην Ολυμπία, κάθε τέσσερα χρόνια.", textEn: "Zeus, at Olympia, every four years.", isCorrect: true },
-            { textEl: "Του Ποσειδώνα, στην Αθήνα, κάθε χρόνο.", textEn: "Poseidon, in Athens, every year.", isCorrect: false, gapTag: "istoria-d-dim.olympic-games-origin" },
-            { textEl: "Κανενός θεού συγκεκριμένα.", textEn: "No god in particular.", isCorrect: false, gapTag: "istoria-d-dim.olympic-games-origin" },
-          ],
-        },
+      "id": "istoria-d-dimotikou",
+      "grades": [
+        "d"
       ],
+      "subjectLabelEl": "Ιστορία, Δ' Δημοτικού (Αρχαία Ελληνική Ιστορία)",
+      "subjectLabelEn": "History, 4th Grade (Ancient Greek History)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αρχαίας Ιστορίας",
+      "titleEn": "The Ancient History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για Μινωίτες, Μυκηναίους και πόλεις-κράτη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about the Minoans, Mycenaeans, and city-states. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-minoan",
+          "textEl": "Το ανάκτορο της Κνωσού βρίσκεται...",
+          "textEn": "The Palace of Knossos is located...",
+          "options": [
+            {
+              "textEl": "Στην Κρήτη, κέντρο του Μινωικού πολιτισμού.",
+              "textEn": "In Crete, the center of Minoan civilization.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Στην Πελοπόννησο, κέντρο του Μυκηναϊκού πολιτισμού.",
+              "textEn": "In the Peloponnese, the center of Mycenaean civilization.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.minoan-crete"
+            },
+            {
+              "textEl": "Στην Αθήνα.",
+              "textEn": "In Athens.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.minoan-crete"
+            }
+          ]
+        },
+        {
+          "id": "q2-mycenaean",
+          "textEl": "Ποιοι θεωρούνται οι πρώτοι Έλληνες;",
+          "textEn": "Who are considered the first Greeks?",
+          "options": [
+            {
+              "textEl": "Οι Μυκηναίοι (Αχαιοί).",
+              "textEn": "The Mycenaeans (Achaeans).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Οι Ρωμαίοι.",
+              "textEn": "The Romans.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.mycenaean-achaeans"
+            },
+            {
+              "textEl": "Οι Αιγύπτιοι.",
+              "textEn": "The Egyptians.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.mycenaean-achaeans"
+            }
+          ]
+        },
+        {
+          "id": "q3-polis",
+          "textEl": "Η αρχαία Ελλάδα ήταν οργανωμένη σε...",
+          "textEn": "Ancient Greece was organized into...",
+          "options": [
+            {
+              "textEl": "Πολλές ανεξάρτητες πόλεις-κράτη, η καθεμία με δικούς της νόμους.",
+              "textEn": "Many independent city-states, each with its own laws.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ένα ενιαίο κράτος με έναν βασιλιά για όλους.",
+              "textEn": "One unified state with a single king for everyone.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.polis-emergence"
+            },
+            {
+              "textEl": "Επαρχίες μιας μεγάλης αυτοκρατορίας.",
+              "textEn": "Provinces of one large empire.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.polis-emergence"
+            }
+          ]
+        },
+        {
+          "id": "q4-olympics",
+          "textEl": "Οι αρχαίοι Ολυμπιακοί Αγώνες γίνονταν προς τιμήν...",
+          "textEn": "The ancient Olympic Games were held in honor of...",
+          "options": [
+            {
+              "textEl": "Του Δία, στην Ολυμπία, κάθε τέσσερα χρόνια.",
+              "textEn": "Zeus, at Olympia, every four years.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Του Ποσειδώνα, στην Αθήνα, κάθε χρόνο.",
+              "textEn": "Poseidon, in Athens, every year.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.olympic-games-origin"
+            },
+            {
+              "textEl": "Κανενός θεού συγκεκριμένα.",
+              "textEn": "No god in particular.",
+              "isCorrect": false,
+              "gapTag": "istoria-d-dim.olympic-games-origin"
+            }
+          ]
+        }
+      ]
     },
-
     "math-e-dimotikou": {
-      id: "math-e-dimotikou",
-      grades: ["e"],
-      subjectLabelEl: "Μαθηματικά, Ε' Δημοτικού",
-      subjectLabelEn: "Math, 5th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "6 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό. Στο τέλος θα δούμε ακριβώς πού χρειάζεται λίγη παραπάνω εξάσκηση, και ποιο εργαλείο ταιριάζει σε αυτό το σημείο.",
-      introEn: "6 short questions. It's not a test, there's no grade. At the end we'll see exactly where a bit more practice would help, and which tool fits that specific spot.",
-      questions: [
-        {
-          id: "q1-fractions-compare",
-          textEl: "Ποιο κλάσμα είναι μεγαλύτερο;",
-          textEn: "Which fraction is bigger?",
-          options: [
-            { textEl: "1/4", textEn: "1/4", isCorrect: true },
-            { textEl: "1/8", textEn: "1/8", isCorrect: false, gapTag: "fractions.whole_number_bias" },
-            { textEl: "Είναι ίσα", textEn: "They're equal", isCorrect: false, gapTag: "fractions.whole_number_bias" },
-          ],
-        },
-        {
-          id: "q2-fractions-add",
-          textEl: "Πόσο κάνει 1/3 + 1/4;",
-          textEn: "What is 1/3 + 1/4?",
-          options: [
-            { textEl: "7/12", textEn: "7/12", isCorrect: true },
-            { textEl: "2/7", textEn: "2/7", isCorrect: false, gapTag: "fractions.add_across" },
-            { textEl: "2/12", textEn: "2/12", isCorrect: false, gapTag: "fractions.add_across" },
-          ],
-        },
-        {
-          id: "q3-decimals-compare",
-          textEl: "Ποιος αριθμός είναι μεγαλύτερος;",
-          textEn: "Which number is bigger?",
-          options: [
-            { textEl: "0,8", textEn: "0.8", isCorrect: true },
-            { textEl: "0,45", textEn: "0.45", isCorrect: false, gapTag: "decimals.longer_is_larger" },
-            { textEl: "Είναι ίσοι", textEn: "They're equal", isCorrect: false, gapTag: "decimals.longer_is_larger" },
-          ],
-        },
-        {
-          id: "q4-division-remainder",
-          textEl: "Ένας αριθμός διαιρούμενος με το 9 δίνει πηλίκο 5 και υπόλοιπο 6. Ποιος είναι ο αριθμός;",
-          textEn: "A number divided by 9 gives quotient 5 and remainder 6. What is the number?",
-          options: [
-            { textEl: "51", textEn: "51", isCorrect: true },
-            { textEl: "45", textEn: "45", isCorrect: false, gapTag: "division.remainder" },
-            { textEl: "56", textEn: "56", isCorrect: false, gapTag: "division.remainder" },
-          ],
-        },
-        {
-          id: "q5-percent-fraction",
-          textEl: "Πώς γράφεται το 24% ως κλάσμα;",
-          textEn: "How do you write 24% as a fraction?",
-          options: [
-            { textEl: "24/100", textEn: "24/100", isCorrect: true },
-            { textEl: "1/24", textEn: "1/24", isCorrect: false, gapTag: "percent.as_fraction" },
-            { textEl: "24/10", textEn: "24/10", isCorrect: false, gapTag: "percent.as_fraction" },
-          ],
-        },
-        {
-          id: "q6-area-perimeter",
-          textEl: "Ένα ορθογώνιο έχει πλευρές 4 εκ. και 6 εκ. Ποιο είναι το εμβαδόν του;",
-          textEn: "A rectangle has sides 4 cm and 6 cm. What is its area?",
-          options: [
-            { textEl: "24 τετρ. εκ.", textEn: "24 sq. cm", isCorrect: true },
-            { textEl: "20 εκ.", textEn: "20 cm", isCorrect: false, gapTag: "measurement.area_perimeter_confusion" },
-            { textEl: "10 τετρ. εκ.", textEn: "10 sq. cm", isCorrect: false, gapTag: "measurement.area_perimeter_confusion" },
-          ],
-        },
-        {
-          id: "q7-multiply-fraction-whole",
-          textEl: "Πόσο κάνει 3 × 2/5;",
-          textEn: "What is 3 × 2/5?",
-          options: [
-            { textEl: "6/5", textEn: "6/5", isCorrect: true },
-            { textEl: "6/15", textEn: "6/15", isCorrect: false, gapTag: "math-e-dim.multiply-fraction-whole" },
-            { textEl: "2/15", textEn: "2/15", isCorrect: false, gapTag: "math-e-dim.multiply-fraction-whole" },
-          ],
-        },
-        {
-          id: "q8-average",
-          textEl: "Ο Νίκος πήρε 8, 10 και 9 σε τρία διαγωνίσματα. Ποιος είναι ο μέσος όρος του;",
-          textEn: "Nick scored 8, 10, and 9 on three tests. What is his average?",
-          options: [
-            { textEl: "9", textEn: "9", isCorrect: true },
-            { textEl: "27", textEn: "27", isCorrect: false, gapTag: "math-e-dim.average-concept" },
-            { textEl: "10", textEn: "10", isCorrect: false, gapTag: "math-e-dim.average-concept" },
-          ],
-        },
-        {
-          id: "q9-volume-cube",
-          textEl: "Ένα κουτί γεμίζει ακριβώς με 24 κύβους μονάδας. Ποιος είναι ο όγκος του;",
-          textEn: "A box is exactly filled by 24 unit cubes. What is its volume?",
-          options: [
-            { textEl: "24 κυβικές μονάδες", textEn: "24 cubic units", isCorrect: true },
-            { textEl: "24 τετραγωνικές μονάδες", textEn: "24 square units", isCorrect: false, gapTag: "math-e-dim.volume-cube-basic" },
-            { textEl: "Δεν μπορεί να υπολογιστεί.", textEn: "It can't be calculated.", isCorrect: false, gapTag: "math-e-dim.volume-cube-basic" },
-          ],
-        },
-        {
-          id: "q10-negative-intro",
-          textEl: "Η θερμοκρασία είναι -3°C. Είναι πιο ζεστά ή πιο κρύα από το 0°C;",
-          textEn: "The temperature is -3°C. Is that warmer or colder than 0°C?",
-          options: [
-            { textEl: "Πιο κρύα.", textEn: "Colder.", isCorrect: true },
-            { textEl: "Πιο ζεστά.", textEn: "Warmer.", isCorrect: false, gapTag: "math-e-dim.negative-number-intro" },
-            { textEl: "Ακριβώς το ίδιο.", textEn: "Exactly the same.", isCorrect: false, gapTag: "math-e-dim.negative-number-intro" },
-          ],
-        },
+      "id": "math-e-dimotikou",
+      "grades": [
+        "e"
       ],
+      "subjectLabelEl": "Μαθηματικά, Ε' Δημοτικού",
+      "subjectLabelEn": "Math, 5th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "6 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό. Στο τέλος θα δούμε ακριβώς πού χρειάζεται λίγη παραπάνω εξάσκηση, και ποιο εργαλείο ταιριάζει σε αυτό το σημείο.",
+      "introEn": "6 short questions. It's not a test, there's no grade. At the end we'll see exactly where a bit more practice would help, and which tool fits that specific spot.",
+      "questions": [
+        {
+          "id": "q1-fractions-compare",
+          "textEl": "Ποιο κλάσμα είναι μεγαλύτερο;",
+          "textEn": "Which fraction is bigger?",
+          "options": [
+            {
+              "textEl": "1/4",
+              "textEn": "1/4",
+              "isCorrect": true
+            },
+            {
+              "textEl": "1/8",
+              "textEn": "1/8",
+              "isCorrect": false,
+              "gapTag": "fractions.whole_number_bias"
+            },
+            {
+              "textEl": "Είναι ίσα",
+              "textEn": "They're equal",
+              "isCorrect": false,
+              "gapTag": "fractions.whole_number_bias"
+            }
+          ]
+        },
+        {
+          "id": "q2-fractions-add",
+          "textEl": "Πόσο κάνει 1/3 + 1/4;",
+          "textEn": "What is 1/3 + 1/4?",
+          "options": [
+            {
+              "textEl": "7/12",
+              "textEn": "7/12",
+              "isCorrect": true
+            },
+            {
+              "textEl": "2/7",
+              "textEn": "2/7",
+              "isCorrect": false,
+              "gapTag": "fractions.add_across"
+            },
+            {
+              "textEl": "2/12",
+              "textEn": "2/12",
+              "isCorrect": false,
+              "gapTag": "fractions.add_across"
+            }
+          ]
+        },
+        {
+          "id": "q3-decimals-compare",
+          "textEl": "Ποιος αριθμός είναι μεγαλύτερος;",
+          "textEn": "Which number is bigger?",
+          "options": [
+            {
+              "textEl": "0,8",
+              "textEn": "0.8",
+              "isCorrect": true
+            },
+            {
+              "textEl": "0,45",
+              "textEn": "0.45",
+              "isCorrect": false,
+              "gapTag": "decimals.longer_is_larger"
+            },
+            {
+              "textEl": "Είναι ίσοι",
+              "textEn": "They're equal",
+              "isCorrect": false,
+              "gapTag": "decimals.longer_is_larger"
+            }
+          ]
+        },
+        {
+          "id": "q4-division-remainder",
+          "textEl": "Ένας αριθμός διαιρούμενος με το 9 δίνει πηλίκο 5 και υπόλοιπο 6. Ποιος είναι ο αριθμός;",
+          "textEn": "A number divided by 9 gives quotient 5 and remainder 6. What is the number?",
+          "options": [
+            {
+              "textEl": "51",
+              "textEn": "51",
+              "isCorrect": true
+            },
+            {
+              "textEl": "45",
+              "textEn": "45",
+              "isCorrect": false,
+              "gapTag": "division.remainder"
+            },
+            {
+              "textEl": "56",
+              "textEn": "56",
+              "isCorrect": false,
+              "gapTag": "division.remainder"
+            }
+          ]
+        },
+        {
+          "id": "q5-percent-fraction",
+          "textEl": "Πώς γράφεται το 24% ως κλάσμα;",
+          "textEn": "How do you write 24% as a fraction?",
+          "options": [
+            {
+              "textEl": "24/100",
+              "textEn": "24/100",
+              "isCorrect": true
+            },
+            {
+              "textEl": "1/24",
+              "textEn": "1/24",
+              "isCorrect": false,
+              "gapTag": "percent.as_fraction"
+            },
+            {
+              "textEl": "24/10",
+              "textEn": "24/10",
+              "isCorrect": false,
+              "gapTag": "percent.as_fraction"
+            }
+          ]
+        },
+        {
+          "id": "q6-area-perimeter",
+          "textEl": "Ένα ορθογώνιο έχει πλευρές 4 εκ. και 6 εκ. Ποιο είναι το εμβαδόν του;",
+          "textEn": "A rectangle has sides 4 cm and 6 cm. What is its area?",
+          "options": [
+            {
+              "textEl": "24 τετρ. εκ.",
+              "textEn": "24 sq. cm",
+              "isCorrect": true
+            },
+            {
+              "textEl": "20 εκ.",
+              "textEn": "20 cm",
+              "isCorrect": false,
+              "gapTag": "measurement.area_perimeter_confusion"
+            },
+            {
+              "textEl": "10 τετρ. εκ.",
+              "textEn": "10 sq. cm",
+              "isCorrect": false,
+              "gapTag": "measurement.area_perimeter_confusion"
+            }
+          ]
+        },
+        {
+          "id": "q7-multiply-fraction-whole",
+          "textEl": "Πόσο κάνει 3 × 2/5;",
+          "textEn": "What is 3 × 2/5?",
+          "options": [
+            {
+              "textEl": "6/5",
+              "textEn": "6/5",
+              "isCorrect": true
+            },
+            {
+              "textEl": "6/15",
+              "textEn": "6/15",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.multiply-fraction-whole"
+            },
+            {
+              "textEl": "2/15",
+              "textEn": "2/15",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.multiply-fraction-whole"
+            }
+          ]
+        },
+        {
+          "id": "q8-average",
+          "textEl": "Ο Νίκος πήρε 8, 10 και 9 σε τρία διαγωνίσματα. Ποιος είναι ο μέσος όρος του;",
+          "textEn": "Nick scored 8, 10, and 9 on three tests. What is his average?",
+          "options": [
+            {
+              "textEl": "9",
+              "textEn": "9",
+              "isCorrect": true
+            },
+            {
+              "textEl": "27",
+              "textEn": "27",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.average-concept"
+            },
+            {
+              "textEl": "10",
+              "textEn": "10",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.average-concept"
+            }
+          ]
+        },
+        {
+          "id": "q9-volume-cube",
+          "textEl": "Ένα κουτί γεμίζει ακριβώς με 24 κύβους μονάδας. Ποιος είναι ο όγκος του;",
+          "textEn": "A box is exactly filled by 24 unit cubes. What is its volume?",
+          "options": [
+            {
+              "textEl": "24 κυβικές μονάδες",
+              "textEn": "24 cubic units",
+              "isCorrect": true
+            },
+            {
+              "textEl": "24 τετραγωνικές μονάδες",
+              "textEn": "24 square units",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.volume-cube-basic"
+            },
+            {
+              "textEl": "Δεν μπορεί να υπολογιστεί.",
+              "textEn": "It can't be calculated.",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.volume-cube-basic"
+            }
+          ]
+        },
+        {
+          "id": "q10-negative-intro",
+          "textEl": "Η θερμοκρασία είναι -3°C. Είναι πιο ζεστά ή πιο κρύα από το 0°C;",
+          "textEn": "The temperature is -3°C. Is that warmer or colder than 0°C?",
+          "options": [
+            {
+              "textEl": "Πιο κρύα.",
+              "textEn": "Colder.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Πιο ζεστά.",
+              "textEn": "Warmer.",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.negative-number-intro"
+            },
+            {
+              "textEl": "Ακριβώς το ίδιο.",
+              "textEn": "Exactly the same.",
+              "isCorrect": false,
+              "gapTag": "math-e-dim.negative-number-intro"
+            }
+          ]
+        }
+      ]
     },
-    // ---------- ΝΕΟ QUIZ: ΙΣΤΟΡΙΑ ΔΗΜΟΤΙΚΟΥ ----------
     "istoria-e-dimotikou": {
-      id: "istoria-e-dimotikou",
-      grades: ["e"],
-      subjectLabelEl: "Ιστορία, Ε' Δημοτικού",
-      subjectLabelEn: "History, 5th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Ιστορίας",
-      titleEn: "The History Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για την Αρχαία Ελλάδα. Δεν είναι διαγώνισμα, δεν έχει βαθμό. Στο τέλος θα δούμε πού χρειάζεται λίγη παραπάνω μελέτη.",
-      introEn: "5 short questions about Ancient Greece. It's not a test, there's no grade. At the end we'll see where a bit more study would help.",
-      questions: [
-        {
-          id: "q1-athens-sparta",
-          textEl: "Ποια ήταν η κύρια διαφορά μεταξύ Αθήνας και Σπάρτης;",
-          textEn: "What was the main difference between Athens and Sparta?",
-          options: [
-            { textEl: "Η Αθήνα ήταν δημοκρατία, η Σπάρτη ολιγαρχία", textEn: "Athens was a democracy, Sparta an oligarchy", isCorrect: true },
-            { textEl: "Η Αθήνα είχε πιο ισχυρό στρατό", textEn: "Athens had a stronger army", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
-            { textEl: "Δεν υπήρχε διαφορά", textEn: "There was no difference", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
-          ],
-        },
-        {
-          id: "q2-democracy",
-          textEl: "Τι σημαίνει η λέξη 'δημοκρατία';",
-          textEn: "What does the word 'democracy' mean?",
-          options: [
-            { textEl: "Δύναμη του λαού", textEn: "Power of the people", isCorrect: true },
-            { textEl: "Δύναμη των στρατιωτών", textEn: "Power of the soldiers", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
-            { textEl: "Δύναμη των θεών", textEn: "Power of the gods", isCorrect: false, gapTag: "history.athens-sparta-confusion" },
-          ],
-        },
-        {
-          id: "q3-byzantine",
-          textEl: "Ποια ήταν η πρωτεύουσα της Βυζαντινής Αυτοκρατορίας;",
-          textEn: "What was the capital of the Byzantine Empire?",
-          options: [
-            { textEl: "Κωνσταντινούπολη", textEn: "Constantinople", isCorrect: true },
-            { textEl: "Αθήνα", textEn: "Athens", isCorrect: false, gapTag: "history.byzantine-confusion" },
-            { textEl: "Ρώμη", textEn: "Rome", isCorrect: false, gapTag: "history.byzantine-confusion" },
-          ],
-        },
-        {
-          id: "q4-olympics",
-          textEl: "Πού διεξάγονταν οι Αρχαίοι Ολυμπιακοί Αγώνες;",
-          textEn: "Where were the Ancient Olympic Games held?",
-          options: [
-            { textEl: "Ολυμπία", textEn: "Olympia", isCorrect: true },
-            { textEl: "Αθήνα", textEn: "Athens", isCorrect: false, gapTag: "history.olympics-location" },
-            { textEl: "Δελφοί", textEn: "Delphi", isCorrect: false, gapTag: "history.olympics-location" },
-          ],
-        },
-        {
-          id: "q5-philosophers",
-          textEl: "Ποιος ήταν ο δάσκαλος του Αριστοτέλη;",
-          textEn: "Who was Aristotle's teacher?",
-          options: [
-            { textEl: "Πλάτων", textEn: "Plato", isCorrect: true },
-            { textEl: "Σωκράτης", textEn: "Socrates", isCorrect: false, gapTag: "history.philosophers-confusion" },
-            { textEl: "Πυθαγόρας", textEn: "Pythagoras", isCorrect: false, gapTag: "history.philosophers-confusion" },
-          ],
-        },
+      "id": "istoria-e-dimotikou",
+      "grades": [
+        "e"
       ],
+      "subjectLabelEl": "Ιστορία, Ε' Δημοτικού",
+      "subjectLabelEn": "History, 5th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Ιστορίας",
+      "titleEn": "The History Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για την Αρχαία Ελλάδα. Δεν είναι διαγώνισμα, δεν έχει βαθμό. Στο τέλος θα δούμε πού χρειάζεται λίγη παραπάνω μελέτη.",
+      "introEn": "5 short questions about Ancient Greece. It's not a test, there's no grade. At the end we'll see where a bit more study would help.",
+      "questions": [
+        {
+          "id": "q1-athens-sparta",
+          "textEl": "Ποια ήταν η κύρια διαφορά μεταξύ Αθήνας και Σπάρτης;",
+          "textEn": "What was the main difference between Athens and Sparta?",
+          "options": [
+            {
+              "textEl": "Η Αθήνα ήταν δημοκρατία, η Σπάρτη ολιγαρχία",
+              "textEn": "Athens was a democracy, Sparta an oligarchy",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η Αθήνα είχε πιο ισχυρό στρατό",
+              "textEn": "Athens had a stronger army",
+              "isCorrect": false,
+              "gapTag": "history.athens-sparta-confusion"
+            },
+            {
+              "textEl": "Δεν υπήρχε διαφορά",
+              "textEn": "There was no difference",
+              "isCorrect": false,
+              "gapTag": "history.athens-sparta-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q2-democracy",
+          "textEl": "Τι σημαίνει η λέξη 'δημοκρατία';",
+          "textEn": "What does the word 'democracy' mean?",
+          "options": [
+            {
+              "textEl": "Δύναμη του λαού",
+              "textEn": "Power of the people",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Δύναμη των στρατιωτών",
+              "textEn": "Power of the soldiers",
+              "isCorrect": false,
+              "gapTag": "history.athens-sparta-confusion"
+            },
+            {
+              "textEl": "Δύναμη των θεών",
+              "textEn": "Power of the gods",
+              "isCorrect": false,
+              "gapTag": "history.athens-sparta-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q3-byzantine",
+          "textEl": "Ποια ήταν η πρωτεύουσα της Βυζαντινής Αυτοκρατορίας;",
+          "textEn": "What was the capital of the Byzantine Empire?",
+          "options": [
+            {
+              "textEl": "Κωνσταντινούπολη",
+              "textEn": "Constantinople",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Αθήνα",
+              "textEn": "Athens",
+              "isCorrect": false,
+              "gapTag": "history.byzantine-confusion"
+            },
+            {
+              "textEl": "Ρώμη",
+              "textEn": "Rome",
+              "isCorrect": false,
+              "gapTag": "history.byzantine-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q4-olympics",
+          "textEl": "Πού διεξάγονταν οι Αρχαίοι Ολυμπιακοί Αγώνες;",
+          "textEn": "Where were the Ancient Olympic Games held?",
+          "options": [
+            {
+              "textEl": "Ολυμπία",
+              "textEn": "Olympia",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Αθήνα",
+              "textEn": "Athens",
+              "isCorrect": false,
+              "gapTag": "history.olympics-location"
+            },
+            {
+              "textEl": "Δελφοί",
+              "textEn": "Delphi",
+              "isCorrect": false,
+              "gapTag": "history.olympics-location"
+            }
+          ]
+        },
+        {
+          "id": "q5-philosophers",
+          "textEl": "Ποιος ήταν ο δάσκαλος του Αριστοτέλη;",
+          "textEn": "Who was Aristotle's teacher?",
+          "options": [
+            {
+              "textEl": "Πλάτων",
+              "textEn": "Plato",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Σωκράτης",
+              "textEn": "Socrates",
+              "isCorrect": false,
+              "gapTag": "history.philosophers-confusion"
+            },
+            {
+              "textEl": "Πυθαγόρας",
+              "textEn": "Pythagoras",
+              "isCorrect": false,
+              "gapTag": "history.philosophers-confusion"
+            }
+          ]
+        }
+      ]
     },
     "glossa-e-dimotikou": {
-      id: "glossa-e-dimotikou",
-      grades: ["e"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Ε' Δημοτικού",
-      subjectLabelEn: "Modern Greek Language, 5th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Ορθογραφίας",
-      titleEn: "The Spelling Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις ορθογραφίας. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short spelling questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-omophona",
-          textEl: "Ποια πρόταση είναι σωστά γραμμένη;",
-          textEn: "Which sentence is spelled correctly?",
-          options: [
-            { textEl: "Δεν θέλω να μου λείπει ο φίλος μου.", textEn: "'I don't want to miss my friend' (correct spelling).", isCorrect: true },
-            { textEl: "Δεν θέλω να μου λύπη ο φίλος μου.", textEn: "Same sentence with 'λύπη' (wrong homophone).", isCorrect: false, gapTag: "spelling.homophones" },
-            { textEl: "Δεν θέλω να μου λείπη ο φίλος μου.", textEn: "Same sentence with 'λείπη' (wrong ending).", isCorrect: false, gapTag: "spelling.homophones" },
-          ],
-        },
-        {
-          id: "q2-oti",
-          textEl: "«Πάρε ό,τι θέλεις» ή «Πάρε ότι θέλεις»; Ποιο είναι σωστό;",
-          textEn: "'Take whatever you want' — which spelling is correct?",
-          options: [
-            { textEl: "Πάρε ό,τι θέλεις.", textEn: "Take 'ó,ti' (whatever) you want.", isCorrect: true },
-            { textEl: "Πάρε ότι θέλεις.", textEn: "Take 'óti' (that) you want.", isCorrect: false, gapTag: "spelling.oti-otidipote" },
-            { textEl: "Πάρε ό, τι θέλεις.", textEn: "Take 'ó, ti' you want (wrong spacing).", isCorrect: false, gapTag: "spelling.oti-otidipote" },
-          ],
-        },
-        {
-          id: "q3-final-n",
-          textEl: "Είδα ___ πατέρα μου στο πάρκο. Ποιο ταιριάζει;",
-          textEn: "'I saw ___ father at the park.' Which fits?",
-          options: [
-            { textEl: "τον", textEn: "ton (with final -n)", isCorrect: true },
-            { textEl: "το", textEn: "to (without -n)", isCorrect: false, gapTag: "spelling.final-n" },
-            { textEl: "τη", textEn: "ti (wrong gender)", isCorrect: false, gapTag: "spelling.final-n" },
-          ],
-        },
-        {
-          id: "q4-verb-ending",
-          textEl: "Το παιδί ___ στην αυλή. Ποιο είναι σωστό;",
-          textEn: "'The child ___ in the yard.' Which is correct?",
-          options: [
-            { textEl: "παίζει", textEn: "paízei (correct ending)", isCorrect: true },
-            { textEl: "παίζη", textEn: "paízi (wrong ending)", isCorrect: false, gapTag: "spelling.verb-ending" },
-            { textEl: "παίζυ", textEn: "paízy (wrong ending)", isCorrect: false, gapTag: "spelling.verb-ending" },
-          ],
-        },
-        {
-          id: "q5-stem",
-          textEl: "Τα ___ παίζουν στην αυλή. Ποιο είναι σωστό;",
-          textEn: "'The ___ are playing in the yard.' Which is correct?",
-          options: [
-            { textEl: "παιδιά", textEn: "paidiá (correct)", isCorrect: true },
-            { textEl: "πεδιά", textEn: "pediá (misspelled)", isCorrect: false, gapTag: "spelling.stem-confusion" },
-            { textEl: "παιδία", textEn: "paidía (misspelled)", isCorrect: false, gapTag: "spelling.stem-confusion" },
-          ],
-        },
-        {
-          id: "q6-simile",
-          textEl: "«Τα μάτια της έλαμπαν σαν αστέρια.» Τι λογοτεχνικό μέσο είναι αυτό;",
-          textEn: "'Her eyes shone like stars.' What literary device is this?",
-          options: [
-            { textEl: "Παρομοίωση — συγκρίνει με «σαν».", textEn: "A simile — comparing using 'like'.", isCorrect: true },
-            { textEl: "Απλή περιγραφή χωρίς κανένα μέσο.", textEn: "Plain description, no literary device.", isCorrect: false, gapTag: "glossa-e-dim.simile-metaphor-basic" },
-            { textEl: "Διάλογος.", textEn: "Dialogue.", isCorrect: false, gapTag: "glossa-e-dim.simile-metaphor-basic" },
-          ],
-        },
-        {
-          id: "q7-cause-effect",
-          textEl: "«Έβρεχε πολύ, ___ ακυρώθηκε η εκδρομή.» Ποιος σύνδεσμος ταιριάζει;",
-          textEn: "'It rained a lot, ___ the trip was cancelled.' Which connector fits?",
-          options: [
-            { textEl: "επομένως", textEn: "therefore", isCorrect: true },
-            { textEl: "αν και", textEn: "although", isCorrect: false, gapTag: "glossa-e-dim.cause-effect-connector" },
-            { textEl: "π.χ.", textEn: "for example", isCorrect: false, gapTag: "glossa-e-dim.cause-effect-connector" },
-          ],
-        },
-        {
-          id: "q8-formal-letter",
-          textEl: "Ποιο στοιχείο ΔΕΝ λείπει από μια σωστά δομημένη επίσημη επιστολή;",
-          textEn: "Which element should always be present in a well-structured formal letter?",
-          options: [
-            { textEl: "Τόπος και ημερομηνία στην αρχή.", textEn: "Place and date at the top.", isCorrect: true },
-            { textEl: "Emoji για να δείξεις πώς νιώθεις.", textEn: "Emoji to show how you feel.", isCorrect: false, gapTag: "glossa-e-dim.formal-letter-structure" },
-            { textEl: "Ανέκδοτο στην αρχή για χιούμορ.", textEn: "A joke at the start for humor.", isCorrect: false, gapTag: "glossa-e-dim.formal-letter-structure" },
-          ],
-        },
-        {
-          id: "q9-adjective-degree",
-          textEl: "«Η Μαρία είναι η πιο ψηλή απ' όλη την τάξη.» Σε ποιον βαθμό είναι το επίθετο;",
-          textEn: "'Maria is the tallest in the whole class.' What degree is the adjective in?",
-          options: [
-            { textEl: "Υπερθετικό — συγκρίνει με όλους.", textEn: "Superlative — compares against everyone.", isCorrect: true },
-            { textEl: "Συγκριτικό — συγκρίνει με έναν μόνο.", textEn: "Comparative — compares against just one.", isCorrect: false, gapTag: "glossa-e-dim.adjective-degree" },
-            { textEl: "Θετικό — απλή περιγραφή.", textEn: "Positive — a plain description.", isCorrect: false, gapTag: "glossa-e-dim.adjective-degree" },
-          ],
-        },
+      "id": "glossa-e-dimotikou",
+      "grades": [
+        "e"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Ε' Δημοτικού",
+      "subjectLabelEn": "Modern Greek Language, 5th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Ορθογραφίας",
+      "titleEn": "The Spelling Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις ορθογραφίας. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short spelling questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-omophona",
+          "textEl": "Ποια πρόταση είναι σωστά γραμμένη;",
+          "textEn": "Which sentence is spelled correctly?",
+          "options": [
+            {
+              "textEl": "Δεν θέλω να μου λείπει ο φίλος μου.",
+              "textEn": "'I don't want to miss my friend' (correct spelling).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Δεν θέλω να μου λύπη ο φίλος μου.",
+              "textEn": "Same sentence with 'λύπη' (wrong homophone).",
+              "isCorrect": false,
+              "gapTag": "spelling.homophones"
+            },
+            {
+              "textEl": "Δεν θέλω να μου λείπη ο φίλος μου.",
+              "textEn": "Same sentence with 'λείπη' (wrong ending).",
+              "isCorrect": false,
+              "gapTag": "spelling.homophones"
+            }
+          ]
+        },
+        {
+          "id": "q2-oti",
+          "textEl": "«Πάρε ό,τι θέλεις» ή «Πάρε ότι θέλεις»; Ποιο είναι σωστό;",
+          "textEn": "'Take whatever you want' — which spelling is correct?",
+          "options": [
+            {
+              "textEl": "Πάρε ό,τι θέλεις.",
+              "textEn": "Take 'ó,ti' (whatever) you want.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Πάρε ότι θέλεις.",
+              "textEn": "Take 'óti' (that) you want.",
+              "isCorrect": false,
+              "gapTag": "spelling.oti-otidipote"
+            },
+            {
+              "textEl": "Πάρε ό, τι θέλεις.",
+              "textEn": "Take 'ó, ti' you want (wrong spacing).",
+              "isCorrect": false,
+              "gapTag": "spelling.oti-otidipote"
+            }
+          ]
+        },
+        {
+          "id": "q3-final-n",
+          "textEl": "Είδα ___ πατέρα μου στο πάρκο. Ποιο ταιριάζει;",
+          "textEn": "'I saw ___ father at the park.' Which fits?",
+          "options": [
+            {
+              "textEl": "τον",
+              "textEn": "ton (with final -n)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "το",
+              "textEn": "to (without -n)",
+              "isCorrect": false,
+              "gapTag": "spelling.final-n"
+            },
+            {
+              "textEl": "τη",
+              "textEn": "ti (wrong gender)",
+              "isCorrect": false,
+              "gapTag": "spelling.final-n"
+            }
+          ]
+        },
+        {
+          "id": "q4-verb-ending",
+          "textEl": "Το παιδί ___ στην αυλή. Ποιο είναι σωστό;",
+          "textEn": "'The child ___ in the yard.' Which is correct?",
+          "options": [
+            {
+              "textEl": "παίζει",
+              "textEn": "paízei (correct ending)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "παίζη",
+              "textEn": "paízi (wrong ending)",
+              "isCorrect": false,
+              "gapTag": "spelling.verb-ending"
+            },
+            {
+              "textEl": "παίζυ",
+              "textEn": "paízy (wrong ending)",
+              "isCorrect": false,
+              "gapTag": "spelling.verb-ending"
+            }
+          ]
+        },
+        {
+          "id": "q5-stem",
+          "textEl": "Τα ___ παίζουν στην αυλή. Ποιο είναι σωστό;",
+          "textEn": "'The ___ are playing in the yard.' Which is correct?",
+          "options": [
+            {
+              "textEl": "παιδιά",
+              "textEn": "paidiá (correct)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "πεδιά",
+              "textEn": "pediá (misspelled)",
+              "isCorrect": false,
+              "gapTag": "spelling.stem-confusion"
+            },
+            {
+              "textEl": "παιδία",
+              "textEn": "paidía (misspelled)",
+              "isCorrect": false,
+              "gapTag": "spelling.stem-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q6-simile",
+          "textEl": "«Τα μάτια της έλαμπαν σαν αστέρια.» Τι λογοτεχνικό μέσο είναι αυτό;",
+          "textEn": "'Her eyes shone like stars.' What literary device is this?",
+          "options": [
+            {
+              "textEl": "Παρομοίωση — συγκρίνει με «σαν».",
+              "textEn": "A simile — comparing using 'like'.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Απλή περιγραφή χωρίς κανένα μέσο.",
+              "textEn": "Plain description, no literary device.",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.simile-metaphor-basic"
+            },
+            {
+              "textEl": "Διάλογος.",
+              "textEn": "Dialogue.",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.simile-metaphor-basic"
+            }
+          ]
+        },
+        {
+          "id": "q7-cause-effect",
+          "textEl": "«Έβρεχε πολύ, ___ ακυρώθηκε η εκδρομή.» Ποιος σύνδεσμος ταιριάζει;",
+          "textEn": "'It rained a lot, ___ the trip was cancelled.' Which connector fits?",
+          "options": [
+            {
+              "textEl": "επομένως",
+              "textEn": "therefore",
+              "isCorrect": true
+            },
+            {
+              "textEl": "αν και",
+              "textEn": "although",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.cause-effect-connector"
+            },
+            {
+              "textEl": "π.χ.",
+              "textEn": "for example",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.cause-effect-connector"
+            }
+          ]
+        },
+        {
+          "id": "q8-formal-letter",
+          "textEl": "Ποιο στοιχείο ΔΕΝ λείπει από μια σωστά δομημένη επίσημη επιστολή;",
+          "textEn": "Which element should always be present in a well-structured formal letter?",
+          "options": [
+            {
+              "textEl": "Τόπος και ημερομηνία στην αρχή.",
+              "textEn": "Place and date at the top.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Emoji για να δείξεις πώς νιώθεις.",
+              "textEn": "Emoji to show how you feel.",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.formal-letter-structure"
+            },
+            {
+              "textEl": "Ανέκδοτο στην αρχή για χιούμορ.",
+              "textEn": "A joke at the start for humor.",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.formal-letter-structure"
+            }
+          ]
+        },
+        {
+          "id": "q9-adjective-degree",
+          "textEl": "«Η Μαρία είναι η πιο ψηλή απ' όλη την τάξη.» Σε ποιον βαθμό είναι το επίθετο;",
+          "textEn": "'Maria is the tallest in the whole class.' What degree is the adjective in?",
+          "options": [
+            {
+              "textEl": "Υπερθετικό — συγκρίνει με όλους.",
+              "textEn": "Superlative — compares against everyone.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Συγκριτικό — συγκρίνει με έναν μόνο.",
+              "textEn": "Comparative — compares against just one.",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.adjective-degree"
+            },
+            {
+              "textEl": "Θετικό — απλή περιγραφή.",
+              "textEn": "Positive — a plain description.",
+              "isCorrect": false,
+              "gapTag": "glossa-e-dim.adjective-degree"
+            }
+          ]
+        }
+      ]
     },
-
     "science-e-dimotikou": {
-      id: "science-e-dimotikou",
-      grades: ["e"],
-      subjectLabelEl: "Φυσικές Επιστήμες, Ε' Δημοτικού",
-      subjectLabelEn: "Natural Science, 5th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Φυσικών Επιστημών",
-      titleEn: "The Science Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-seasons",
-          textEl: "Γιατί κάνει ζέστη το καλοκαίρι στην Ελλάδα;",
-          textEn: "Why is it hot in Greece in summer?",
-          options: [
-            { textEl: "Επειδή το Βόρειο Ημισφαίριο γέρνει προς τον Ήλιο.", textEn: "Because the Northern Hemisphere tilts toward the Sun.", isCorrect: true },
-            { textEl: "Επειδή η Γη είναι πιο κοντά στον Ήλιο το καλοκαίρι.", textEn: "Because the Earth is closer to the Sun in summer.", isCorrect: false, gapTag: "science-primary.seasons-distance" },
-            { textEl: "Επειδή ο Ήλιος είναι πιο μεγάλος το καλοκαίρι.", textEn: "Because the Sun is bigger in summer.", isCorrect: false, gapTag: "science-primary.seasons-distance" },
-          ],
-        },
-        {
-          id: "q2-day-night",
-          textEl: "Τι προκαλεί τη μέρα και τη νύχτα;",
-          textEn: "What causes day and night?",
-          options: [
-            { textEl: "Η περιστροφή της Γης γύρω από τον άξονά της.", textEn: "The Earth's rotation on its axis.", isCorrect: true },
-            { textEl: "Ο Ήλιος γυρίζει γύρω από τη Γη.", textEn: "The Sun travels around the Earth.", isCorrect: false, gapTag: "science-primary.day-night-sun-moves" },
-            { textEl: "Ο Ήλιος σβήνει το βράδυ.", textEn: "The Sun switches off at night.", isCorrect: false, gapTag: "science-primary.day-night-sun-moves" },
-          ],
-        },
-        {
-          id: "q3-dissolve",
-          textEl: "Διαλύεις ζάχαρη σε νερό. Τι συμβαίνει στη μάζα της;",
-          textEn: "You dissolve sugar in water. What happens to its mass?",
-          options: [
-            { textEl: "Παραμένει η ίδια, απλώς δεν τη βλέπουμε.", textEn: "It stays the same, we just can't see it.", isCorrect: true },
-            { textEl: "Εξαφανίζεται εντελώς.", textEn: "It disappears completely.", isCorrect: false, gapTag: "science-primary.matter-disappears" },
-            { textEl: "Μειώνεται στο μισό.", textEn: "It's reduced by half.", isCorrect: false, gapTag: "science-primary.matter-disappears" },
-          ],
-        },
-        {
-          id: "q4-free-fall",
-          textEl: "Αν αφήσεις ταυτόχρονα μια μπάλα μπάσκετ και μια μπάλα του πινγκ πονγκ (χωρίς αέρα), ποια φτάνει πρώτη στο έδαφος;",
-          textEn: "If you drop a basketball and a ping pong ball together (no air resistance), which lands first?",
-          options: [
-            { textEl: "Φτάνουν ταυτόχρονα.", textEn: "They land at the same time.", isCorrect: true },
-            { textEl: "Η μπάλα μπάσκετ, γιατί είναι βαρύτερη.", textEn: "The basketball, because it's heavier.", isCorrect: false, gapTag: "science-primary.heavier-falls-faster" },
-            { textEl: "Η μπάλα του πινγκ πονγκ, γιατί είναι πιο μικρή.", textEn: "The ping pong ball, because it's smaller.", isCorrect: false, gapTag: "science-primary.heavier-falls-faster" },
-          ],
-        },
-        {
-          id: "q5-moonlight",
-          textEl: "Από πού έρχεται το φως του φεγγαριού;",
-          textEn: "Where does moonlight come from?",
-          options: [
-            { textEl: "Είναι φως του Ήλιου που αντανακλάται.", textEn: "It's sunlight being reflected.", isCorrect: true },
-            { textEl: "Το φεγγάρι παράγει το δικό του φως.", textEn: "The Moon produces its own light.", isCorrect: false, gapTag: "science-primary.moon-own-light" },
-            { textEl: "Το φως έρχεται από τα αστέρια.", textEn: "The light comes from the stars.", isCorrect: false, gapTag: "science-primary.moon-own-light" },
-          ],
-        },
+      "id": "science-e-dimotikou",
+      "grades": [
+        "e"
       ],
+      "subjectLabelEl": "Φυσικές Επιστήμες, Ε' Δημοτικού",
+      "subjectLabelEn": "Natural Science, 5th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Φυσικών Επιστημών",
+      "titleEn": "The Science Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-seasons",
+          "textEl": "Γιατί κάνει ζέστη το καλοκαίρι στην Ελλάδα;",
+          "textEn": "Why is it hot in Greece in summer?",
+          "options": [
+            {
+              "textEl": "Επειδή το Βόρειο Ημισφαίριο γέρνει προς τον Ήλιο.",
+              "textEn": "Because the Northern Hemisphere tilts toward the Sun.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Επειδή η Γη είναι πιο κοντά στον Ήλιο το καλοκαίρι.",
+              "textEn": "Because the Earth is closer to the Sun in summer.",
+              "isCorrect": false,
+              "gapTag": "science-primary.seasons-distance"
+            },
+            {
+              "textEl": "Επειδή ο Ήλιος είναι πιο μεγάλος το καλοκαίρι.",
+              "textEn": "Because the Sun is bigger in summer.",
+              "isCorrect": false,
+              "gapTag": "science-primary.seasons-distance"
+            }
+          ]
+        },
+        {
+          "id": "q2-day-night",
+          "textEl": "Τι προκαλεί τη μέρα και τη νύχτα;",
+          "textEn": "What causes day and night?",
+          "options": [
+            {
+              "textEl": "Η περιστροφή της Γης γύρω από τον άξονά της.",
+              "textEn": "The Earth's rotation on its axis.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο Ήλιος γυρίζει γύρω από τη Γη.",
+              "textEn": "The Sun travels around the Earth.",
+              "isCorrect": false,
+              "gapTag": "science-primary.day-night-sun-moves"
+            },
+            {
+              "textEl": "Ο Ήλιος σβήνει το βράδυ.",
+              "textEn": "The Sun switches off at night.",
+              "isCorrect": false,
+              "gapTag": "science-primary.day-night-sun-moves"
+            }
+          ]
+        },
+        {
+          "id": "q3-dissolve",
+          "textEl": "Διαλύεις ζάχαρη σε νερό. Τι συμβαίνει στη μάζα της;",
+          "textEn": "You dissolve sugar in water. What happens to its mass?",
+          "options": [
+            {
+              "textEl": "Παραμένει η ίδια, απλώς δεν τη βλέπουμε.",
+              "textEn": "It stays the same, we just can't see it.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Εξαφανίζεται εντελώς.",
+              "textEn": "It disappears completely.",
+              "isCorrect": false,
+              "gapTag": "science-primary.matter-disappears"
+            },
+            {
+              "textEl": "Μειώνεται στο μισό.",
+              "textEn": "It's reduced by half.",
+              "isCorrect": false,
+              "gapTag": "science-primary.matter-disappears"
+            }
+          ]
+        },
+        {
+          "id": "q4-free-fall",
+          "textEl": "Αν αφήσεις ταυτόχρονα μια μπάλα μπάσκετ και μια μπάλα του πινγκ πονγκ (χωρίς αέρα), ποια φτάνει πρώτη στο έδαφος;",
+          "textEn": "If you drop a basketball and a ping pong ball together (no air resistance), which lands first?",
+          "options": [
+            {
+              "textEl": "Φτάνουν ταυτόχρονα.",
+              "textEn": "They land at the same time.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η μπάλα μπάσκετ, γιατί είναι βαρύτερη.",
+              "textEn": "The basketball, because it's heavier.",
+              "isCorrect": false,
+              "gapTag": "science-primary.heavier-falls-faster"
+            },
+            {
+              "textEl": "Η μπάλα του πινγκ πονγκ, γιατί είναι πιο μικρή.",
+              "textEn": "The ping pong ball, because it's smaller.",
+              "isCorrect": false,
+              "gapTag": "science-primary.heavier-falls-faster"
+            }
+          ]
+        },
+        {
+          "id": "q5-moonlight",
+          "textEl": "Από πού έρχεται το φως του φεγγαριού;",
+          "textEn": "Where does moonlight come from?",
+          "options": [
+            {
+              "textEl": "Είναι φως του Ήλιου που αντανακλάται.",
+              "textEn": "It's sunlight being reflected.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το φεγγάρι παράγει το δικό του φως.",
+              "textEn": "The Moon produces its own light.",
+              "isCorrect": false,
+              "gapTag": "science-primary.moon-own-light"
+            },
+            {
+              "textEl": "Το φως έρχεται από τα αστέρια.",
+              "textEn": "The light comes from the stars.",
+              "isCorrect": false,
+              "gapTag": "science-primary.moon-own-light"
+            }
+          ]
+        }
+      ]
     },
-
     "english-e-dimotikou": {
-      id: "english-e-dimotikou",
-      grades: ["e"],
-      subjectLabelEl: "Αγγλικά, Ε' Δημοτικού",
-      subjectLabelEn: "English, 5th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών",
-      titleEn: "The English Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-third-person",
-          textEl: "Ποια πρόταση είναι σωστή; 'She ___ to school every day.'",
-          textEn: "Which sentence is correct? 'She ___ to school every day.'",
-          options: [
-            { textEl: "goes", textEn: "goes", isCorrect: true },
-            { textEl: "go", textEn: "go", isCorrect: false, gapTag: "efl-primary.third-person-s" },
-            { textEl: "going", textEn: "going", isCorrect: false, gapTag: "efl-primary.third-person-s" },
-          ],
-        },
-        {
-          id: "q2-age",
-          textEl: "'How old are you?' Ποια απάντηση είναι σωστή;",
-          textEn: "'How old are you?' Which answer is correct?",
-          options: [
-            { textEl: "I am ten years old.", textEn: "I am ten years old.", isCorrect: true },
-            { textEl: "I have ten years.", textEn: "I have ten years.", isCorrect: false, gapTag: "efl-primary.age-construction" },
-            { textEl: "I am having ten years.", textEn: "I am having ten years.", isCorrect: false, gapTag: "efl-primary.age-construction" },
-          ],
-        },
-        {
-          id: "q3-article",
-          textEl: "'___ are my favourite animals.' Ποιο ταιριάζει;",
-          textEn: "'___ are my favourite animals.' Which fits?",
-          options: [
-            { textEl: "Dogs", textEn: "Dogs", isCorrect: true },
-            { textEl: "The dogs", textEn: "The dogs", isCorrect: false, gapTag: "efl-primary.definite-article-generic" },
-            { textEl: "A dogs", textEn: "A dogs", isCorrect: false, gapTag: "efl-primary.definite-article-generic" },
-          ],
-        },
-        {
-          id: "q4-spelling",
-          textEl: "Choose the correct spelling.",
-          textEn: "Choose the correct spelling.",
-          options: [
-            { textEl: "because", textEn: "because", isCorrect: true },
-            { textEl: "becos", textEn: "becos", isCorrect: false, gapTag: "efl-primary.phonetic-spelling" },
-            { textEl: "bicause", textEn: "bicause", isCorrect: false, gapTag: "efl-primary.phonetic-spelling" },
-          ],
-        },
-        {
-          id: "q5-false-friend",
-          textEl: "'My new classmate is friendly and nice. He is ___.'",
-          textEn: "'My new classmate is friendly and nice. He is ___.'",
-          options: [
-            { textEl: "likeable", textEn: "likeable", isCorrect: true },
-            { textEl: "sympathetic", textEn: "sympathetic", isCorrect: false, gapTag: "efl-primary.false-friend-sympathetic" },
-            { textEl: "pathetic", textEn: "pathetic", isCorrect: false, gapTag: "efl-primary.false-friend-sympathetic" },
-          ],
-        },
+      "id": "english-e-dimotikou",
+      "grades": [
+        "e"
       ],
+      "subjectLabelEl": "Αγγλικά, Ε' Δημοτικού",
+      "subjectLabelEn": "English, 5th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών",
+      "titleEn": "The English Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-third-person",
+          "textEl": "Ποια πρόταση είναι σωστή; 'She ___ to school every day.'",
+          "textEn": "Which sentence is correct? 'She ___ to school every day.'",
+          "options": [
+            {
+              "textEl": "goes",
+              "textEn": "goes",
+              "isCorrect": true
+            },
+            {
+              "textEl": "go",
+              "textEn": "go",
+              "isCorrect": false,
+              "gapTag": "efl-primary.third-person-s"
+            },
+            {
+              "textEl": "going",
+              "textEn": "going",
+              "isCorrect": false,
+              "gapTag": "efl-primary.third-person-s"
+            }
+          ]
+        },
+        {
+          "id": "q2-age",
+          "textEl": "'How old are you?' Ποια απάντηση είναι σωστή;",
+          "textEn": "'How old are you?' Which answer is correct?",
+          "options": [
+            {
+              "textEl": "I am ten years old.",
+              "textEn": "I am ten years old.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "I have ten years.",
+              "textEn": "I have ten years.",
+              "isCorrect": false,
+              "gapTag": "efl-primary.age-construction"
+            },
+            {
+              "textEl": "I am having ten years.",
+              "textEn": "I am having ten years.",
+              "isCorrect": false,
+              "gapTag": "efl-primary.age-construction"
+            }
+          ]
+        },
+        {
+          "id": "q3-article",
+          "textEl": "'___ are my favourite animals.' Ποιο ταιριάζει;",
+          "textEn": "'___ are my favourite animals.' Which fits?",
+          "options": [
+            {
+              "textEl": "Dogs",
+              "textEn": "Dogs",
+              "isCorrect": true
+            },
+            {
+              "textEl": "The dogs",
+              "textEn": "The dogs",
+              "isCorrect": false,
+              "gapTag": "efl-primary.definite-article-generic"
+            },
+            {
+              "textEl": "A dogs",
+              "textEn": "A dogs",
+              "isCorrect": false,
+              "gapTag": "efl-primary.definite-article-generic"
+            }
+          ]
+        },
+        {
+          "id": "q4-spelling",
+          "textEl": "Choose the correct spelling.",
+          "textEn": "Choose the correct spelling.",
+          "options": [
+            {
+              "textEl": "because",
+              "textEn": "because",
+              "isCorrect": true
+            },
+            {
+              "textEl": "becos",
+              "textEn": "becos",
+              "isCorrect": false,
+              "gapTag": "efl-primary.phonetic-spelling"
+            },
+            {
+              "textEl": "bicause",
+              "textEn": "bicause",
+              "isCorrect": false,
+              "gapTag": "efl-primary.phonetic-spelling"
+            }
+          ]
+        },
+        {
+          "id": "q5-false-friend",
+          "textEl": "'My new classmate is friendly and nice. He is ___.'",
+          "textEn": "'My new classmate is friendly and nice. He is ___.'",
+          "options": [
+            {
+              "textEl": "likeable",
+              "textEn": "likeable",
+              "isCorrect": true
+            },
+            {
+              "textEl": "sympathetic",
+              "textEn": "sympathetic",
+              "isCorrect": false,
+              "gapTag": "efl-primary.false-friend-sympathetic"
+            },
+            {
+              "textEl": "pathetic",
+              "textEn": "pathetic",
+              "isCorrect": false,
+              "gapTag": "efl-primary.false-friend-sympathetic"
+            }
+          ]
+        }
+      ]
     },
     "english-st-dimotikou": {
-      id: "english-st-dimotikou",
-      grades: ["st"],
-      subjectLabelEl: "Αγγλικά, ΣΤ' Δημοτικού",
-      subjectLabelEn: "English, 6th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών",
-      titleEn: "The English Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις, λίγο πιο προχωρημένες από την Ε' τάξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions, a bit more advanced than 5th grade. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-past-irregular",
-          textEl: "'Yesterday I ___ to the park.' Ποιο ταιριάζει;",
-          textEn: "'Yesterday I ___ to the park.' Which fits?",
-          options: [
-            { textEl: "went", textEn: "went", isCorrect: true },
-            { textEl: "goed", textEn: "goed", isCorrect: false, gapTag: "efl-st.past-simple-irregular" },
-            { textEl: "gone", textEn: "gone", isCorrect: false, gapTag: "efl-st.past-simple-irregular" },
-          ],
-        },
-        {
-          id: "q2-superlative",
-          textEl: "'Everest is ___ mountain in the world.' Ποιο ταιριάζει;",
-          textEn: "'Everest is ___ mountain in the world.' Which fits?",
-          options: [
-            { textEl: "the highest", textEn: "the highest", isCorrect: true },
-            { textEl: "higher", textEn: "higher", isCorrect: false, gapTag: "efl-st.comparative-superlative" },
-            { textEl: "the more high", textEn: "the more high", isCorrect: false, gapTag: "efl-st.comparative-superlative" },
-          ],
-        },
-        {
-          id: "q3-going-to",
-          textEl: "Κοιτάς σκούρα σύννεφα και λες: 'Look at those clouds! It ___ rain.'",
-          textEn: "You look at dark clouds and say: 'Look at those clouds! It ___ rain.'",
-          options: [
-            { textEl: "is going to", textEn: "is going to", isCorrect: true },
-            { textEl: "will", textEn: "will", isCorrect: false, gapTag: "efl-st.going-to-will" },
-            { textEl: "is will", textEn: "is will", isCorrect: false, gapTag: "efl-st.going-to-will" },
-          ],
-        },
-        {
-          id: "q4-much-many",
-          textEl: "'How ___ apples do you want?' Ποιο ταιριάζει;",
-          textEn: "'How ___ apples do you want?' Which fits?",
-          options: [
-            { textEl: "many", textEn: "many", isCorrect: true },
-            { textEl: "much", textEn: "much", isCorrect: false, gapTag: "efl-st.countable-uncountable" },
-            { textEl: "a lot", textEn: "a lot", isCorrect: false, gapTag: "efl-st.countable-uncountable" },
-          ],
-        },
-        {
-          id: "q5-preposition-time",
-          textEl: "'My birthday is ___ Monday.' Ποιο ταιριάζει;",
-          textEn: "'My birthday is ___ Monday.' Which fits?",
-          options: [
-            { textEl: "on", textEn: "on", isCorrect: true },
-            { textEl: "at", textEn: "at", isCorrect: false, gapTag: "efl-st.preposition-time" },
-            { textEl: "in", textEn: "in", isCorrect: false, gapTag: "efl-st.preposition-time" },
-          ],
-        },
+      "id": "english-st-dimotikou",
+      "grades": [
+        "st"
       ],
+      "subjectLabelEl": "Αγγλικά, ΣΤ' Δημοτικού",
+      "subjectLabelEn": "English, 6th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών",
+      "titleEn": "The English Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις, λίγο πιο προχωρημένες από την Ε' τάξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions, a bit more advanced than 5th grade. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-past-irregular",
+          "textEl": "'Yesterday I ___ to the park.' Ποιο ταιριάζει;",
+          "textEn": "'Yesterday I ___ to the park.' Which fits?",
+          "options": [
+            {
+              "textEl": "went",
+              "textEn": "went",
+              "isCorrect": true
+            },
+            {
+              "textEl": "goed",
+              "textEn": "goed",
+              "isCorrect": false,
+              "gapTag": "efl-st.past-simple-irregular"
+            },
+            {
+              "textEl": "gone",
+              "textEn": "gone",
+              "isCorrect": false,
+              "gapTag": "efl-st.past-simple-irregular"
+            }
+          ]
+        },
+        {
+          "id": "q2-superlative",
+          "textEl": "'Everest is ___ mountain in the world.' Ποιο ταιριάζει;",
+          "textEn": "'Everest is ___ mountain in the world.' Which fits?",
+          "options": [
+            {
+              "textEl": "the highest",
+              "textEn": "the highest",
+              "isCorrect": true
+            },
+            {
+              "textEl": "higher",
+              "textEn": "higher",
+              "isCorrect": false,
+              "gapTag": "efl-st.comparative-superlative"
+            },
+            {
+              "textEl": "the more high",
+              "textEn": "the more high",
+              "isCorrect": false,
+              "gapTag": "efl-st.comparative-superlative"
+            }
+          ]
+        },
+        {
+          "id": "q3-going-to",
+          "textEl": "Κοιτάς σκούρα σύννεφα και λες: 'Look at those clouds! It ___ rain.'",
+          "textEn": "You look at dark clouds and say: 'Look at those clouds! It ___ rain.'",
+          "options": [
+            {
+              "textEl": "is going to",
+              "textEn": "is going to",
+              "isCorrect": true
+            },
+            {
+              "textEl": "will",
+              "textEn": "will",
+              "isCorrect": false,
+              "gapTag": "efl-st.going-to-will"
+            },
+            {
+              "textEl": "is will",
+              "textEn": "is will",
+              "isCorrect": false,
+              "gapTag": "efl-st.going-to-will"
+            }
+          ]
+        },
+        {
+          "id": "q4-much-many",
+          "textEl": "'How ___ apples do you want?' Ποιο ταιριάζει;",
+          "textEn": "'How ___ apples do you want?' Which fits?",
+          "options": [
+            {
+              "textEl": "many",
+              "textEn": "many",
+              "isCorrect": true
+            },
+            {
+              "textEl": "much",
+              "textEn": "much",
+              "isCorrect": false,
+              "gapTag": "efl-st.countable-uncountable"
+            },
+            {
+              "textEl": "a lot",
+              "textEn": "a lot",
+              "isCorrect": false,
+              "gapTag": "efl-st.countable-uncountable"
+            }
+          ]
+        },
+        {
+          "id": "q5-preposition-time",
+          "textEl": "'My birthday is ___ Monday.' Ποιο ταιριάζει;",
+          "textEn": "'My birthday is ___ Monday.' Which fits?",
+          "options": [
+            {
+              "textEl": "on",
+              "textEn": "on",
+              "isCorrect": true
+            },
+            {
+              "textEl": "at",
+              "textEn": "at",
+              "isCorrect": false,
+              "gapTag": "efl-st.preposition-time"
+            },
+            {
+              "textEl": "in",
+              "textEn": "in",
+              "isCorrect": false,
+              "gapTag": "efl-st.preposition-time"
+            }
+          ]
+        }
+      ]
     },
-
     "math-st-dimotikou": {
-      id: "math-st-dimotikou",
-      grades: ["st"],
-      subjectLabelEl: "Μαθηματικά, ΣΤ' Δημοτικού",
-      subjectLabelEn: "Math, 6th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-decimal-mult",
-          textEl: "Πόσο κάνει 2,5 × 3;",
-          textEn: "What is 2.5 × 3?",
-          options: [
-            { textEl: "7,5", textEn: "7.5", isCorrect: true },
-            { textEl: "75", textEn: "75", isCorrect: false, gapTag: "math-st-dim.decimal-multiplication" },
-            { textEl: "0,75", textEn: "0.75", isCorrect: false, gapTag: "math-st-dim.decimal-multiplication" },
-          ],
-        },
-        {
-          id: "q2-discount",
-          textEl: "Ένα παιχνίδι κοστίζει 40€ και έχει έκπτωση 25%. Πόσο θα πληρώσεις;",
-          textEn: "A toy costs €40 with a 25% discount. How much will you pay?",
-          options: [
-            { textEl: "30€", textEn: "€30", isCorrect: true },
-            { textEl: "15€", textEn: "€15", isCorrect: false, gapTag: "math-st-dim.discount-percent" },
-            { textEl: "35€", textEn: "€35", isCorrect: false, gapTag: "math-st-dim.discount-percent" },
-          ],
-        },
-        {
-          id: "q3-ratio",
-          textEl: "Σε μια συνταγή, 2 φλιτζάνια αλεύρι πάνε με 1 φλιτζάνι ζάχαρη. Αν βάλεις 6 φλιτζάνια αλεύρι, πόση ζάχαρη χρειάζεσαι;",
-          textEn: "In a recipe, 2 cups of flour go with 1 cup of sugar. If you use 6 cups of flour, how much sugar do you need?",
-          options: [
-            { textEl: "3 φλιτζάνια", textEn: "3 cups", isCorrect: true },
-            { textEl: "5 φλιτζάνια", textEn: "5 cups", isCorrect: false, gapTag: "math-st-dim.ratio-proportion" },
-            { textEl: "6 φλιτζάνια", textEn: "6 cups", isCorrect: false, gapTag: "math-st-dim.ratio-proportion" },
-          ],
-        },
-        {
-          id: "q4-volume",
-          textEl: "Πόσα κυβικά εκατοστά είναι 2 λίτρα νερού;",
-          textEn: "How many cubic centimeters are in 2 liters of water?",
-          options: [
-            { textEl: "2000", textEn: "2000", isCorrect: true },
-            { textEl: "200", textEn: "200", isCorrect: false, gapTag: "math-st-dim.volume-units" },
-            { textEl: "20", textEn: "20", isCorrect: false, gapTag: "math-st-dim.volume-units" },
-          ],
-        },
-        {
-          id: "q5-percent-increase",
-          textEl: "Ένα προϊόν κοστίζει 50€ και η τιμή του αυξάνεται κατά 10%. Πόσο κοστίζει τώρα;",
-          textEn: "A product costs €50 and its price increases by 10%. How much does it cost now?",
-          options: [
-            { textEl: "55€", textEn: "€55", isCorrect: true },
-            { textEl: "60€", textEn: "€60", isCorrect: false, gapTag: "math-st-dim.percent-increase" },
-            { textEl: "51€", textEn: "€51", isCorrect: false, gapTag: "math-st-dim.percent-increase" },
-          ],
-        },
-        {
-          id: "q6-speed",
-          textEl: "Ένα αυτοκίνητο διανύει 100 χλμ σε 2 ώρες. Ποια είναι η ταχύτητά του;",
-          textEn: "A car travels 100 km in 2 hours. What is its speed?",
-          options: [
-            { textEl: "50 χλμ/ώρα", textEn: "50 km/h", isCorrect: true },
-            { textEl: "200 χλμ/ώρα", textEn: "200 km/h", isCorrect: false, gapTag: "math-st-dim.speed-distance-time-basic" },
-            { textEl: "2 χλμ/ώρα", textEn: "2 km/h", isCorrect: false, gapTag: "math-st-dim.speed-distance-time-basic" },
-          ],
-        },
-        {
-          id: "q7-negative-ops",
-          textEl: "Πόσο κάνει 5 + (-3);",
-          textEn: "What is 5 + (-3)?",
-          options: [
-            { textEl: "2", textEn: "2", isCorrect: true },
-            { textEl: "8", textEn: "8", isCorrect: false, gapTag: "math-st-dim.negative-number-operations" },
-            { textEl: "-8", textEn: "-8", isCorrect: false, gapTag: "math-st-dim.negative-number-operations" },
-          ],
-        },
-        {
-          id: "q8-probability",
-          textEl: "Ρίχνεις ένα ζάρι. Ποια είναι η πιθανότητα να φέρεις 6;",
-          textEn: "You roll a die. What is the probability of rolling a 6?",
-          options: [
-            { textEl: "1/6", textEn: "1/6", isCorrect: true },
-            { textEl: "1/2", textEn: "1/2", isCorrect: false, gapTag: "math-st-dim.probability-basic" },
-            { textEl: "6/1", textEn: "6/1", isCorrect: false, gapTag: "math-st-dim.probability-basic" },
-          ],
-        },
+      "id": "math-st-dimotikou",
+      "grades": [
+        "st"
       ],
+      "subjectLabelEl": "Μαθηματικά, ΣΤ' Δημοτικού",
+      "subjectLabelEn": "Math, 6th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-decimal-mult",
+          "textEl": "Πόσο κάνει 2,5 × 3;",
+          "textEn": "What is 2.5 × 3?",
+          "options": [
+            {
+              "textEl": "7,5",
+              "textEn": "7.5",
+              "isCorrect": true
+            },
+            {
+              "textEl": "75",
+              "textEn": "75",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.decimal-multiplication"
+            },
+            {
+              "textEl": "0,75",
+              "textEn": "0.75",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.decimal-multiplication"
+            }
+          ]
+        },
+        {
+          "id": "q2-discount",
+          "textEl": "Ένα παιχνίδι κοστίζει 40€ και έχει έκπτωση 25%. Πόσο θα πληρώσεις;",
+          "textEn": "A toy costs €40 with a 25% discount. How much will you pay?",
+          "options": [
+            {
+              "textEl": "30€",
+              "textEn": "€30",
+              "isCorrect": true
+            },
+            {
+              "textEl": "15€",
+              "textEn": "€15",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.discount-percent"
+            },
+            {
+              "textEl": "35€",
+              "textEn": "€35",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.discount-percent"
+            }
+          ]
+        },
+        {
+          "id": "q3-ratio",
+          "textEl": "Σε μια συνταγή, 2 φλιτζάνια αλεύρι πάνε με 1 φλιτζάνι ζάχαρη. Αν βάλεις 6 φλιτζάνια αλεύρι, πόση ζάχαρη χρειάζεσαι;",
+          "textEn": "In a recipe, 2 cups of flour go with 1 cup of sugar. If you use 6 cups of flour, how much sugar do you need?",
+          "options": [
+            {
+              "textEl": "3 φλιτζάνια",
+              "textEn": "3 cups",
+              "isCorrect": true
+            },
+            {
+              "textEl": "5 φλιτζάνια",
+              "textEn": "5 cups",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.ratio-proportion"
+            },
+            {
+              "textEl": "6 φλιτζάνια",
+              "textEn": "6 cups",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.ratio-proportion"
+            }
+          ]
+        },
+        {
+          "id": "q4-volume",
+          "textEl": "Πόσα κυβικά εκατοστά είναι 2 λίτρα νερού;",
+          "textEn": "How many cubic centimeters are in 2 liters of water?",
+          "options": [
+            {
+              "textEl": "2000",
+              "textEn": "2000",
+              "isCorrect": true
+            },
+            {
+              "textEl": "200",
+              "textEn": "200",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.volume-units"
+            },
+            {
+              "textEl": "20",
+              "textEn": "20",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.volume-units"
+            }
+          ]
+        },
+        {
+          "id": "q5-percent-increase",
+          "textEl": "Ένα προϊόν κοστίζει 50€ και η τιμή του αυξάνεται κατά 10%. Πόσο κοστίζει τώρα;",
+          "textEn": "A product costs €50 and its price increases by 10%. How much does it cost now?",
+          "options": [
+            {
+              "textEl": "55€",
+              "textEn": "€55",
+              "isCorrect": true
+            },
+            {
+              "textEl": "60€",
+              "textEn": "€60",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.percent-increase"
+            },
+            {
+              "textEl": "51€",
+              "textEn": "€51",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.percent-increase"
+            }
+          ]
+        },
+        {
+          "id": "q6-speed",
+          "textEl": "Ένα αυτοκίνητο διανύει 100 χλμ σε 2 ώρες. Ποια είναι η ταχύτητά του;",
+          "textEn": "A car travels 100 km in 2 hours. What is its speed?",
+          "options": [
+            {
+              "textEl": "50 χλμ/ώρα",
+              "textEn": "50 km/h",
+              "isCorrect": true
+            },
+            {
+              "textEl": "200 χλμ/ώρα",
+              "textEn": "200 km/h",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.speed-distance-time-basic"
+            },
+            {
+              "textEl": "2 χλμ/ώρα",
+              "textEn": "2 km/h",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.speed-distance-time-basic"
+            }
+          ]
+        },
+        {
+          "id": "q7-negative-ops",
+          "textEl": "Πόσο κάνει 5 + (-3);",
+          "textEn": "What is 5 + (-3)?",
+          "options": [
+            {
+              "textEl": "2",
+              "textEn": "2",
+              "isCorrect": true
+            },
+            {
+              "textEl": "8",
+              "textEn": "8",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.negative-number-operations"
+            },
+            {
+              "textEl": "-8",
+              "textEn": "-8",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.negative-number-operations"
+            }
+          ]
+        },
+        {
+          "id": "q8-probability",
+          "textEl": "Ρίχνεις ένα ζάρι. Ποια είναι η πιθανότητα να φέρεις 6;",
+          "textEn": "You roll a die. What is the probability of rolling a 6?",
+          "options": [
+            {
+              "textEl": "1/6",
+              "textEn": "1/6",
+              "isCorrect": true
+            },
+            {
+              "textEl": "1/2",
+              "textEn": "1/2",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.probability-basic"
+            },
+            {
+              "textEl": "6/1",
+              "textEn": "6/1",
+              "isCorrect": false,
+              "gapTag": "math-st-dim.probability-basic"
+            }
+          ]
+        }
+      ]
     },
-
     "glossa-st-dimotikou": {
-      id: "glossa-st-dimotikou",
-      grades: ["st"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, ΣΤ' Δημοτικού",
-      subjectLabelEn: "Modern Greek Language, 6th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-participle",
-          textEl: "«Τρέχοντας στο πάρκο, είδε τον φίλο του.» Ποια λέξη είναι μετοχή;",
-          textEn: "'Running in the park, he saw his friend.' Which word is the participle?",
-          options: [
-            { textEl: "«Τρέχοντας»", textEn: "'Running'", isCorrect: true },
-            { textEl: "«είδε»", textEn: "'saw'", isCorrect: false, gapTag: "glossa-st-dim.participle-recognition" },
-            { textEl: "«φίλο»", textEn: "'friend'", isCorrect: false, gapTag: "glossa-st-dim.participle-recognition" },
-          ],
-        },
-        {
-          id: "q2-connector",
-          textEl: "«___ έβρεχε, βγήκαμε βόλτα.» Ποιος σύνδεσμος δηλώνει αντίθεση;",
-          textEn: "'___ it was raining, we went for a walk.' Which connector shows contrast?",
-          options: [
-            { textEl: "Αν και", textEn: "Although", isCorrect: true },
-            { textEl: "Επειδή", textEn: "Because", isCorrect: false, gapTag: "glossa-st-dim.compound-sentence-connectors" },
-            { textEl: "Όταν", textEn: "When", isCorrect: false, gapTag: "glossa-st-dim.compound-sentence-connectors" },
-          ],
-        },
-        {
-          id: "q3-interpretation",
-          textEl: "Ένας ποιητής γράφει «η καρδιά μου είναι πέτρα». Τι εννοεί;",
-          textEn: "A poet writes 'my heart is a stone.' What does he mean?",
-          options: [
-            { textEl: "Νιώθει σκληρός/μουδιασμένος συναισθηματικά, όχι ότι έχει πραγματικά πέτρα μέσα του.", textEn: "He feels emotionally hardened/numb, not that he literally has a stone inside him.", isCorrect: true },
-            { textEl: "Η καρδιά του έγινε κυριολεκτικά πέτρα.", textEn: "His heart literally turned to stone.", isCorrect: false, gapTag: "glossa-st-dim.literary-text-interpretation" },
-            { textEl: "Του αρέσουν οι πέτρες.", textEn: "He likes stones.", isCorrect: false, gapTag: "glossa-st-dim.literary-text-interpretation" },
-          ],
-        },
-        {
-          id: "q4-flow",
-          textEl: "Δύο διαδοχικές παράγραφοι μιλάνε για διαφορετικές πλευρές ενός θέματος. Τι βοηθάει να συνδεθούν ομαλά;",
-          textEn: "Two consecutive paragraphs discuss different sides of a topic. What helps connect them smoothly?",
-          options: [
-            { textEl: "Μια λέξη-γέφυρα στην αρχή της δεύτερης (π.χ. «Ωστόσο», «Επιπλέον»).", textEn: "A bridging word at the start of the second (e.g. 'However', 'Furthermore').", isCorrect: true },
-            { textEl: "Τίποτα, οι παράγραφοι δεν χρειάζεται να συνδέονται.", textEn: "Nothing, paragraphs don't need to connect.", isCorrect: false, gapTag: "glossa-st-dim.paragraph-connectors-flow" },
-            { textEl: "Να επαναλάβω την πρώτη πρόταση της προηγούμενης παραγράφου.", textEn: "Repeating the first sentence of the previous paragraph.", isCorrect: false, gapTag: "glossa-st-dim.paragraph-connectors-flow" },
-          ],
-        },
-        {
-          id: "q5-passive-voice",
-          textEl: "Ποια πρόταση είναι σε παθητική φωνή;",
-          textEn: "Which sentence is in passive voice?",
-          options: [
-            { textEl: "«Το γράμμα γράφτηκε από τον Νίκο.»", textEn: "'The letter was written by Nick.'", isCorrect: true },
-            { textEl: "«Ο Νίκος έγραψε το γράμμα.»", textEn: "'Nick wrote the letter.' (active)", isCorrect: false, gapTag: "glossa-st-dim.passive-voice-basic" },
-            { textEl: "«Ο Νίκος γράφει γράμματα.»", textEn: "'Nick writes letters.' (active)", isCorrect: false, gapTag: "glossa-st-dim.passive-voice-basic" },
-          ],
-        },
-        {
-          id: "q6-text-purpose",
-          textEl: "Ένα κείμενο λέει: «Αγόρασε τώρα το νέο παιχνίδι, θα το λατρέψεις!» Ποιος είναι ο σκοπός του;",
-          textEn: "A text says: 'Buy the new toy now, you'll love it!' What is its purpose?",
-          options: [
-            { textEl: "Να πείσει τον αναγνώστη να αγοράσει κάτι.", textEn: "To persuade the reader to buy something.", isCorrect: true },
-            { textEl: "Να τον πληροφορήσει αντικειμενικά για ένα γεγονός.", textEn: "To objectively inform them about an event.", isCorrect: false, gapTag: "glossa-st-dim.text-purpose-identification" },
-            { textEl: "Απλώς να τον διασκεδάσει με μια ιστορία.", textEn: "Simply to entertain them with a story.", isCorrect: false, gapTag: "glossa-st-dim.text-purpose-identification" },
-          ],
-        },
-        {
-          id: "q7-register",
-          textEl: "Ποια πρόταση είναι γραμμένη σε επίσημο ύφος;",
-          textEn: "Which sentence is written in formal register?",
-          options: [
-            { textEl: "«Σας ενημερώνουμε ότι η συνάντηση θα πραγματοποιηθεί αύριο.»", textEn: "'We inform you that the meeting will take place tomorrow.'", isCorrect: true },
-            { textEl: "«Θα τα πούμε αύριο, έγινε;»", textEn: "'See you tomorrow, deal?'", isCorrect: false, gapTag: "glossa-st-dim.register-formal-informal" },
-            { textEl: "«Άσε τα αύριο, θα δούμε.»", textEn: "'Forget tomorrow, we'll see.'", isCorrect: false, gapTag: "glossa-st-dim.register-formal-informal" },
-          ],
-        },
-        {
-          id: "q8-conclusion",
-          textEl: "Ποιος επίλογος είναι πιο δυνατός για ένα κείμενο για την ανακύκλωση;",
-          textEn: "Which conclusion is stronger for a text about recycling?",
-          options: [
-            { textEl: "«Η ανακύκλωση, λοιπόν, είναι μικρή προσπάθεια με μεγάλο αποτέλεσμα για το περιβάλλον μας.»", textEn: "'Recycling, then, is a small effort with a big impact on our environment.'", isCorrect: true },
-            { textEl: "«Η ανακύκλωση είναι μικρή προσπάθεια με μεγάλο αποτέλεσμα.» (ίδιο ακριβώς με την εισαγωγή, λέξη προς λέξη)", textEn: "'Recycling is a small effort with a big impact.' (identical to the introduction, word for word)", isCorrect: false, gapTag: "glossa-st-dim.conclusion-quality" },
-            { textEl: "«Επίσης, τα ζώα χρειάζονται προστασία.»", textEn: "'Also, animals need protection.' (unrelated new topic)", isCorrect: false, gapTag: "glossa-st-dim.conclusion-quality" },
-          ],
-        },
+      "id": "glossa-st-dimotikou",
+      "grades": [
+        "st"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, ΣΤ' Δημοτικού",
+      "subjectLabelEn": "Modern Greek Language, 6th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-participle",
+          "textEl": "«Τρέχοντας στο πάρκο, είδε τον φίλο του.» Ποια λέξη είναι μετοχή;",
+          "textEn": "'Running in the park, he saw his friend.' Which word is the participle?",
+          "options": [
+            {
+              "textEl": "«Τρέχοντας»",
+              "textEn": "'Running'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«είδε»",
+              "textEn": "'saw'",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.participle-recognition"
+            },
+            {
+              "textEl": "«φίλο»",
+              "textEn": "'friend'",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.participle-recognition"
+            }
+          ]
+        },
+        {
+          "id": "q2-connector",
+          "textEl": "«___ έβρεχε, βγήκαμε βόλτα.» Ποιος σύνδεσμος δηλώνει αντίθεση;",
+          "textEn": "'___ it was raining, we went for a walk.' Which connector shows contrast?",
+          "options": [
+            {
+              "textEl": "Αν και",
+              "textEn": "Although",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Επειδή",
+              "textEn": "Because",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.compound-sentence-connectors"
+            },
+            {
+              "textEl": "Όταν",
+              "textEn": "When",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.compound-sentence-connectors"
+            }
+          ]
+        },
+        {
+          "id": "q3-interpretation",
+          "textEl": "Ένας ποιητής γράφει «η καρδιά μου είναι πέτρα». Τι εννοεί;",
+          "textEn": "A poet writes 'my heart is a stone.' What does he mean?",
+          "options": [
+            {
+              "textEl": "Νιώθει σκληρός/μουδιασμένος συναισθηματικά, όχι ότι έχει πραγματικά πέτρα μέσα του.",
+              "textEn": "He feels emotionally hardened/numb, not that he literally has a stone inside him.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η καρδιά του έγινε κυριολεκτικά πέτρα.",
+              "textEn": "His heart literally turned to stone.",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.literary-text-interpretation"
+            },
+            {
+              "textEl": "Του αρέσουν οι πέτρες.",
+              "textEn": "He likes stones.",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.literary-text-interpretation"
+            }
+          ]
+        },
+        {
+          "id": "q4-flow",
+          "textEl": "Δύο διαδοχικές παράγραφοι μιλάνε για διαφορετικές πλευρές ενός θέματος. Τι βοηθάει να συνδεθούν ομαλά;",
+          "textEn": "Two consecutive paragraphs discuss different sides of a topic. What helps connect them smoothly?",
+          "options": [
+            {
+              "textEl": "Μια λέξη-γέφυρα στην αρχή της δεύτερης (π.χ. «Ωστόσο», «Επιπλέον»).",
+              "textEn": "A bridging word at the start of the second (e.g. 'However', 'Furthermore').",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Τίποτα, οι παράγραφοι δεν χρειάζεται να συνδέονται.",
+              "textEn": "Nothing, paragraphs don't need to connect.",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.paragraph-connectors-flow"
+            },
+            {
+              "textEl": "Να επαναλάβω την πρώτη πρόταση της προηγούμενης παραγράφου.",
+              "textEn": "Repeating the first sentence of the previous paragraph.",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.paragraph-connectors-flow"
+            }
+          ]
+        },
+        {
+          "id": "q5-passive-voice",
+          "textEl": "Ποια πρόταση είναι σε παθητική φωνή;",
+          "textEn": "Which sentence is in passive voice?",
+          "options": [
+            {
+              "textEl": "«Το γράμμα γράφτηκε από τον Νίκο.»",
+              "textEn": "'The letter was written by Nick.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Ο Νίκος έγραψε το γράμμα.»",
+              "textEn": "'Nick wrote the letter.' (active)",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.passive-voice-basic"
+            },
+            {
+              "textEl": "«Ο Νίκος γράφει γράμματα.»",
+              "textEn": "'Nick writes letters.' (active)",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.passive-voice-basic"
+            }
+          ]
+        },
+        {
+          "id": "q6-text-purpose",
+          "textEl": "Ένα κείμενο λέει: «Αγόρασε τώρα το νέο παιχνίδι, θα το λατρέψεις!» Ποιος είναι ο σκοπός του;",
+          "textEn": "A text says: 'Buy the new toy now, you'll love it!' What is its purpose?",
+          "options": [
+            {
+              "textEl": "Να πείσει τον αναγνώστη να αγοράσει κάτι.",
+              "textEn": "To persuade the reader to buy something.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Να τον πληροφορήσει αντικειμενικά για ένα γεγονός.",
+              "textEn": "To objectively inform them about an event.",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.text-purpose-identification"
+            },
+            {
+              "textEl": "Απλώς να τον διασκεδάσει με μια ιστορία.",
+              "textEn": "Simply to entertain them with a story.",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.text-purpose-identification"
+            }
+          ]
+        },
+        {
+          "id": "q7-register",
+          "textEl": "Ποια πρόταση είναι γραμμένη σε επίσημο ύφος;",
+          "textEn": "Which sentence is written in formal register?",
+          "options": [
+            {
+              "textEl": "«Σας ενημερώνουμε ότι η συνάντηση θα πραγματοποιηθεί αύριο.»",
+              "textEn": "'We inform you that the meeting will take place tomorrow.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Θα τα πούμε αύριο, έγινε;»",
+              "textEn": "'See you tomorrow, deal?'",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.register-formal-informal"
+            },
+            {
+              "textEl": "«Άσε τα αύριο, θα δούμε.»",
+              "textEn": "'Forget tomorrow, we'll see.'",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.register-formal-informal"
+            }
+          ]
+        },
+        {
+          "id": "q8-conclusion",
+          "textEl": "Ποιος επίλογος είναι πιο δυνατός για ένα κείμενο για την ανακύκλωση;",
+          "textEn": "Which conclusion is stronger for a text about recycling?",
+          "options": [
+            {
+              "textEl": "«Η ανακύκλωση, λοιπόν, είναι μικρή προσπάθεια με μεγάλο αποτέλεσμα για το περιβάλλον μας.»",
+              "textEn": "'Recycling, then, is a small effort with a big impact on our environment.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Η ανακύκλωση είναι μικρή προσπάθεια με μεγάλο αποτέλεσμα.» (ίδιο ακριβώς με την εισαγωγή, λέξη προς λέξη)",
+              "textEn": "'Recycling is a small effort with a big impact.' (identical to the introduction, word for word)",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.conclusion-quality"
+            },
+            {
+              "textEl": "«Επίσης, τα ζώα χρειάζονται προστασία.»",
+              "textEn": "'Also, animals need protection.' (unrelated new topic)",
+              "isCorrect": false,
+              "gapTag": "glossa-st-dim.conclusion-quality"
+            }
+          ]
+        }
+      ]
     },
-
     "science-st-dimotikou": {
-      id: "science-st-dimotikou",
-      grades: ["st"],
-      subjectLabelEl: "Φυσικές Επιστήμες, ΣΤ' Δημοτικού",
-      subjectLabelEn: "Science, 6th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-circuit",
-          textEl: "Ένα καλώδιο σε ένα κύκλωμα είναι κομμένο. Τι θα συμβεί στη λάμπα;",
-          textEn: "A wire in a circuit is cut. What happens to the bulb?",
-          options: [
-            { textEl: "Δεν θα ανάψει, το κύκλωμα είναι ανοιχτό.", textEn: "It won't light up, the circuit is open.", isCorrect: true },
-            { textEl: "Θα ανάψει κανονικά.", textEn: "It will light up normally.", isCorrect: false, gapTag: "science-st-dim.circuit-open-closed" },
-            { textEl: "Θα ανάψει πιο δυνατά.", textEn: "It will light up brighter.", isCorrect: false, gapTag: "science-st-dim.circuit-open-closed" },
-          ],
-        },
-        {
-          id: "q2-digestion",
-          textEl: "Ποια είναι η σωστή σειρά που ακολουθεί η τροφή;",
-          textEn: "Which is the correct order food follows?",
-          options: [
-            { textEl: "Στόμα → οισοφάγος → στομάχι → έντερα.", textEn: "Mouth → esophagus → stomach → intestines.", isCorrect: true },
-            { textEl: "Στόμα → στομάχι → οισοφάγος → έντερα.", textEn: "Mouth → stomach → esophagus → intestines.", isCorrect: false, gapTag: "science-st-dim.digestive-system-order" },
-            { textEl: "Οισοφάγος → στόμα → έντερα → στομάχι.", textEn: "Esophagus → mouth → intestines → stomach.", isCorrect: false, gapTag: "science-st-dim.digestive-system-order" },
-          ],
-        },
-        {
-          id: "q3-renewable",
-          textEl: "Ποια πηγή ενέργειας είναι ανανεώσιμη;",
-          textEn: "Which energy source is renewable?",
-          options: [
-            { textEl: "Ο ήλιος.", textEn: "The sun.", isCorrect: true },
-            { textEl: "Το πετρέλαιο.", textEn: "Oil.", isCorrect: false, gapTag: "science-st-dim.renewable-vs-nonrenewable" },
-            { textEl: "Το κάρβουνο.", textEn: "Coal.", isCorrect: false, gapTag: "science-st-dim.renewable-vs-nonrenewable" },
-          ],
-        },
-        {
-          id: "q4-states",
-          textEl: "Πώς λέγεται όταν το νερό γίνεται ατμός;",
-          textEn: "What is it called when water turns into vapor?",
-          options: [
-            { textEl: "Εξάτμιση.", textEn: "Evaporation.", isCorrect: true },
-            { textEl: "Τήξη.", textEn: "Melting.", isCorrect: false, gapTag: "science-st-dim.states-of-matter-change" },
-            { textEl: "Πήξη.", textEn: "Freezing.", isCorrect: false, gapTag: "science-st-dim.states-of-matter-change" },
-          ],
-        },
+      "id": "science-st-dimotikou",
+      "grades": [
+        "st"
       ],
+      "subjectLabelEl": "Φυσικές Επιστήμες, ΣΤ' Δημοτικού",
+      "subjectLabelEn": "Science, 6th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-circuit",
+          "textEl": "Ένα καλώδιο σε ένα κύκλωμα είναι κομμένο. Τι θα συμβεί στη λάμπα;",
+          "textEn": "A wire in a circuit is cut. What happens to the bulb?",
+          "options": [
+            {
+              "textEl": "Δεν θα ανάψει, το κύκλωμα είναι ανοιχτό.",
+              "textEn": "It won't light up, the circuit is open.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Θα ανάψει κανονικά.",
+              "textEn": "It will light up normally.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.circuit-open-closed"
+            },
+            {
+              "textEl": "Θα ανάψει πιο δυνατά.",
+              "textEn": "It will light up brighter.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.circuit-open-closed"
+            }
+          ]
+        },
+        {
+          "id": "q2-digestion",
+          "textEl": "Ποια είναι η σωστή σειρά που ακολουθεί η τροφή;",
+          "textEn": "Which is the correct order food follows?",
+          "options": [
+            {
+              "textEl": "Στόμα → οισοφάγος → στομάχι → έντερα.",
+              "textEn": "Mouth → esophagus → stomach → intestines.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Στόμα → στομάχι → οισοφάγος → έντερα.",
+              "textEn": "Mouth → stomach → esophagus → intestines.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.digestive-system-order"
+            },
+            {
+              "textEl": "Οισοφάγος → στόμα → έντερα → στομάχι.",
+              "textEn": "Esophagus → mouth → intestines → stomach.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.digestive-system-order"
+            }
+          ]
+        },
+        {
+          "id": "q3-renewable",
+          "textEl": "Ποια πηγή ενέργειας είναι ανανεώσιμη;",
+          "textEn": "Which energy source is renewable?",
+          "options": [
+            {
+              "textEl": "Ο ήλιος.",
+              "textEn": "The sun.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το πετρέλαιο.",
+              "textEn": "Oil.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.renewable-vs-nonrenewable"
+            },
+            {
+              "textEl": "Το κάρβουνο.",
+              "textEn": "Coal.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.renewable-vs-nonrenewable"
+            }
+          ]
+        },
+        {
+          "id": "q4-states",
+          "textEl": "Πώς λέγεται όταν το νερό γίνεται ατμός;",
+          "textEn": "What is it called when water turns into vapor?",
+          "options": [
+            {
+              "textEl": "Εξάτμιση.",
+              "textEn": "Evaporation.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Τήξη.",
+              "textEn": "Melting.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.states-of-matter-change"
+            },
+            {
+              "textEl": "Πήξη.",
+              "textEn": "Freezing.",
+              "isCorrect": false,
+              "gapTag": "science-st-dim.states-of-matter-change"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-st-dimotikou": {
-      id: "istoria-st-dimotikou",
-      grades: ["st"],
-      subjectLabelEl: "Ιστορία, ΣΤ' Δημοτικού (Νεότερη & Σύγχρονη Ελληνική Ιστορία)",
-      subjectLabelEn: "History, 6th Grade (Modern & Contemporary Greek History)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Νεότερης Ιστορίας",
-      titleEn: "The Modern History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για την Επανάσταση του 1821. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about the 1821 Revolution. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-revolution-year",
-          textEl: "Ποιο έτος ξεκίνησε η Ελληνική Επανάσταση;",
-          textEn: "In which year did the Greek Revolution begin?",
-          options: [
-            { textEl: "1821", textEn: "1821", isCorrect: true },
-            { textEl: "1789", textEn: "1789", isCorrect: false, gapTag: "istoria-st-dim.revolution-year" },
-            { textEl: "1912", textEn: "1912", isCorrect: false, gapTag: "istoria-st-dim.revolution-year" },
-          ],
-        },
-        {
-          id: "q2-kapodistrias",
-          textEl: "Ποιος ήταν ο πρώτος κυβερνήτης του ανεξάρτητου ελληνικού κράτους;",
-          textEn: "Who was the first governor of the independent Greek state?",
-          options: [
-            { textEl: "Ο Ιωάννης Καποδίστριας.", textEn: "Ioannis Kapodistrias.", isCorrect: true },
-            { textEl: "Ο Θεόδωρος Κολοκοτρώνης.", textEn: "Theodoros Kolokotronis.", isCorrect: false, gapTag: "istoria-st-dim.kapodistrias-role" },
-            { textEl: "Ο Ρήγας Φεραίος.", textEn: "Rigas Feraios.", isCorrect: false, gapTag: "istoria-st-dim.kapodistrias-role" },
-          ],
-        },
-        {
-          id: "q3-navarino",
-          textEl: "Τι ήταν η Ναυμαχία του Ναβαρίνου (1827);",
-          textEn: "What was the Battle of Navarino (1827)?",
-          options: [
-            { textEl: "Οι Μεγάλες Δυνάμεις βοήθησαν την Ελλάδα καταστρέφοντας τον οθωμανικό στόλο.", textEn: "The Great Powers helped Greece by destroying the Ottoman fleet.", isCorrect: true },
-            { textEl: "Μια ήττα των Ελλήνων που καθυστέρησε την ανεξαρτησία.", textEn: "A Greek defeat that delayed independence.", isCorrect: false, gapTag: "istoria-st-dim.navarino-battle" },
-            { textEl: "Μια μάχη ανάμεσα σε δύο ελληνικές παρατάξεις.", textEn: "A battle between two Greek factions.", isCorrect: false, gapTag: "istoria-st-dim.navarino-battle" },
-          ],
-        },
-        {
-          id: "q4-state-size",
-          textEl: "Το πρώτο ελεύθερο ελληνικό κράτος (1830) κάλυπτε...",
-          textEn: "The first free Greek state (1830) covered...",
-          options: [
-            { textEl: "Μόνο ένα μικρό τμήμα της σημερινής Ελλάδας.", textEn: "Only a small part of present-day Greece.", isCorrect: true },
-            { textEl: "Όλη τη σημερινή ελληνική επικράτεια.", textEn: "The entire present-day Greek territory.", isCorrect: false, gapTag: "istoria-st-dim.modern-state-formation" },
-            { textEl: "Και την Κύπρο και τη Μικρά Ασία.", textEn: "Both Cyprus and Asia Minor too.", isCorrect: false, gapTag: "istoria-st-dim.modern-state-formation" },
-          ],
-        },
+      "id": "istoria-st-dimotikou",
+      "grades": [
+        "st"
       ],
-    },
+      "subjectLabelEl": "Ιστορία, ΣΤ' Δημοτικού (Νεότερη & Σύγχρονη Ελληνική Ιστορία)",
+      "subjectLabelEn": "History, 6th Grade (Modern & Contemporary Greek History)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Νεότερης Ιστορίας",
+      "titleEn": "The Modern History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για την Επανάσταση του 1821. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about the 1821 Revolution. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-revolution-year",
+          "textEl": "Ποιο έτος ξεκίνησε η Ελληνική Επανάσταση;",
+          "textEn": "In which year did the Greek Revolution begin?",
+          "options": [
+            {
+              "textEl": "1821",
+              "textEn": "1821",
+              "isCorrect": true
+            },
+            {
+              "textEl": "1789",
+              "textEn": "1789",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.revolution-year"
+            },
+            {
+              "textEl": "1912",
+              "textEn": "1912",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.revolution-year"
+            }
+          ]
+        },
+        {
+          "id": "q2-kapodistrias",
+          "textEl": "Ποιος ήταν ο πρώτος κυβερνήτης του ανεξάρτητου ελληνικού κράτους;",
+          "textEn": "Who was the first governor of the independent Greek state?",
+          "options": [
+            {
+              "textEl": "Ο Ιωάννης Καποδίστριας.",
+              "textEn": "Ioannis Kapodistrias.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο Θεόδωρος Κολοκοτρώνης.",
+              "textEn": "Theodoros Kolokotronis.",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.kapodistrias-role"
+            },
+            {
+              "textEl": "Ο Ρήγας Φεραίος.",
+              "textEn": "Rigas Feraios.",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.kapodistrias-role"
+            }
+          ]
+        },
+        {
+          "id": "q3-navarino",
+          "textEl": "Τι ήταν η Ναυμαχία του Ναβαρίνου (1827);",
+          "textEn": "What was the Battle of Navarino (1827)?",
+          "options": [
+            {
+              "textEl": "Οι Μεγάλες Δυνάμεις βοήθησαν την Ελλάδα καταστρέφοντας τον οθωμανικό στόλο.",
+              "textEn": "The Great Powers helped Greece by destroying the Ottoman fleet.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μια ήττα των Ελλήνων που καθυστέρησε την ανεξαρτησία.",
+              "textEn": "A Greek defeat that delayed independence.",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.navarino-battle"
+            },
+            {
+              "textEl": "Μια μάχη ανάμεσα σε δύο ελληνικές παρατάξεις.",
+              "textEn": "A battle between two Greek factions.",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.navarino-battle"
+            }
+          ]
+        },
+        {
+          "id": "q4-state-size",
+          "textEl": "Το πρώτο ελεύθερο ελληνικό κράτος (1830) κάλυπτε...",
+          "textEn": "The first free Greek state (1830) covered...",
+          "options": [
+            {
+              "textEl": "Μόνο ένα μικρό τμήμα της σημερινής Ελλάδας.",
+              "textEn": "Only a small part of present-day Greece.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Όλη τη σημερινή ελληνική επικράτεια.",
+              "textEn": "The entire present-day Greek territory.",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.modern-state-formation"
+            },
+            {
+              "textEl": "Και την Κύπρο και τη Μικρά Ασία.",
+              "textEn": "Both Cyprus and Asia Minor too.",
+              "isCorrect": false,
+              "gapTag": "istoria-st-dim.modern-state-formation"
+            }
+          ]
+        }
+      ]
+    }
   },
-  middle: {
-    // ---------- ΝΕΟ QUIZ: ΝΕΟΕΛΛΗΝΙΚΗ ΓΛΩΣΣΑ ΓΥΜΝΑΣΙΟΥ ----------
+  "middle": {
     "glossa-gymnasiou": {
-      id: "glossa-gymnasiou",
-      grades: ["c"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Γ' Γυμνασίου",
-      subjectLabelEn: "Modern Greek Language, 3rd Grade Middle School",
-      titleEl: "Ο Διαγνωστικός Χάρτης Γραμματικής",
-      titleEn: "The Grammar Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για γραμματική και στίξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about grammar and punctuation. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-subject-verb",
-          textEl: "Ποια πρόταση είναι σωστή;",
-          textEn: "Which sentence is correct?",
-          options: [
-            { textEl: "Οι μαθητές διαβάζουν τα βιβλία τους.", textEn: "The students read their books.", isCorrect: true },
-            { textEl: "Οι μαθητές διαβάζει τα βιβλία τους.", textEn: "The students reads their books.", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
-            { textEl: "Οι μαθητές διαβάζουν το βιβλίο τους.", textEn: "The students read their book.", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
-          ],
-        },
-        {
-          id: "q2-comma-list",
-          textEl: "Πού χρειάζεται κόμμα; 'Αγόρασα μήλα πορτοκάλια μπανάνες και αχλάδια.'",
-          textEn: "Where are commas needed? 'I bought apples oranges bananas and pears.'",
-          options: [
-            { textEl: "Αγόρασα μήλα, πορτοκάλια, μπανάνες και αχλάδια.", textEn: "I bought apples, oranges, bananas, and pears.", isCorrect: true },
-            { textEl: "Αγόρασα μήλα πορτοκάλια, μπανάνες και αχλάδια.", textEn: "I bought apples oranges, bananas and pears.", isCorrect: false, gapTag: "grammar.comma-usage" },
-            { textEl: "Δεν χρειάζεται κόμμα.", textEn: "No commas needed.", isCorrect: false, gapTag: "grammar.comma-usage" },
-          ],
-        },
-        {
-          id: "q3-comma-clause",
-          textEl: "Ποια πρόταση είναι σωστά γραμμένη;",
-          textEn: "Which sentence is correctly written?",
-          options: [
-            { textEl: "Όταν βρέχει, μένουμε σπίτι.", textEn: "When it rains, we stay home.", isCorrect: true },
-            { textEl: "Όταν βρέχει μένουμε σπίτι.", textEn: "When it rains we stay home.", isCorrect: false, gapTag: "grammar.comma-usage" },
-            { textEl: "Όταν, βρέχει μένουμε σπίτι.", textEn: "When, it rains we stay home.", isCorrect: false, gapTag: "grammar.comma-usage" },
-          ],
-        },
-        {
-          id: "q4-subject-complex",
-          textEl: "Ποιο είναι το υποκείμενο; 'Ο δάσκαλος με τους μαθητές πήγαν εκδρομή.'",
-          textEn: "What is the subject? 'The teacher with the students went on a trip.'",
-          options: [
-            { textEl: "Ο δάσκαλος με τους μαθητές", textEn: "The teacher with the students", isCorrect: true },
-            { textEl: "Ο δάσκαλος", textEn: "The teacher", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
-            { textEl: "Οι μαθητές", textEn: "The students", isCorrect: false, gapTag: "grammar.subject-verb-agreement" },
-          ],
-        },
+      "id": "glossa-gymnasiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Γ' Γυμνασίου",
+      "subjectLabelEn": "Modern Greek Language, 3rd Grade Middle School",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Γραμματικής",
+      "titleEn": "The Grammar Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για γραμματική και στίξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about grammar and punctuation. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-subject-verb",
+          "textEl": "Ποια πρόταση είναι σωστή;",
+          "textEn": "Which sentence is correct?",
+          "options": [
+            {
+              "textEl": "Οι μαθητές διαβάζουν τα βιβλία τους.",
+              "textEn": "The students read their books.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Οι μαθητές διαβάζει τα βιβλία τους.",
+              "textEn": "The students reads their books.",
+              "isCorrect": false,
+              "gapTag": "grammar.subject-verb-agreement"
+            },
+            {
+              "textEl": "Οι μαθητές διαβάζουν το βιβλίο τους.",
+              "textEn": "The students read their book.",
+              "isCorrect": false,
+              "gapTag": "grammar.subject-verb-agreement"
+            }
+          ]
+        },
+        {
+          "id": "q2-comma-list",
+          "textEl": "Πού χρειάζεται κόμμα; 'Αγόρασα μήλα πορτοκάλια μπανάνες και αχλάδια.'",
+          "textEn": "Where are commas needed? 'I bought apples oranges bananas and pears.'",
+          "options": [
+            {
+              "textEl": "Αγόρασα μήλα, πορτοκάλια, μπανάνες και αχλάδια.",
+              "textEn": "I bought apples, oranges, bananas, and pears.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Αγόρασα μήλα πορτοκάλια, μπανάνες και αχλάδια.",
+              "textEn": "I bought apples oranges, bananas and pears.",
+              "isCorrect": false,
+              "gapTag": "grammar.comma-usage"
+            },
+            {
+              "textEl": "Δεν χρειάζεται κόμμα.",
+              "textEn": "No commas needed.",
+              "isCorrect": false,
+              "gapTag": "grammar.comma-usage"
+            }
+          ]
+        },
+        {
+          "id": "q3-comma-clause",
+          "textEl": "Ποια πρόταση είναι σωστά γραμμένη;",
+          "textEn": "Which sentence is correctly written?",
+          "options": [
+            {
+              "textEl": "Όταν βρέχει, μένουμε σπίτι.",
+              "textEn": "When it rains, we stay home.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Όταν βρέχει μένουμε σπίτι.",
+              "textEn": "When it rains we stay home.",
+              "isCorrect": false,
+              "gapTag": "grammar.comma-usage"
+            },
+            {
+              "textEl": "Όταν, βρέχει μένουμε σπίτι.",
+              "textEn": "When, it rains we stay home.",
+              "isCorrect": false,
+              "gapTag": "grammar.comma-usage"
+            }
+          ]
+        },
+        {
+          "id": "q4-subject-complex",
+          "textEl": "Ποιο είναι το υποκείμενο; 'Ο δάσκαλος με τους μαθητές πήγαν εκδρομή.'",
+          "textEn": "What is the subject? 'The teacher with the students went on a trip.'",
+          "options": [
+            {
+              "textEl": "Ο δάσκαλος με τους μαθητές",
+              "textEn": "The teacher with the students",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο δάσκαλος",
+              "textEn": "The teacher",
+              "isCorrect": false,
+              "gapTag": "grammar.subject-verb-agreement"
+            },
+            {
+              "textEl": "Οι μαθητές",
+              "textEn": "The students",
+              "isCorrect": false,
+              "gapTag": "grammar.subject-verb-agreement"
+            }
+          ]
+        }
+      ]
     },
-    // ---------- ΝΕΟ QUIZ: ΦΥΣΙΚΗ ΓΥΜΝΑΣΙΟΥ ----------
     "physics-gymnasiou": {
-      id: "physics-gymnasiou",
-      grades: ["b"],
-      subjectLabelEl: "Φυσική, Β' Γυμνασίου",
-      subjectLabelEn: "Physics, 2nd Grade Middle School",
-      titleEl: "Ο Διαγνωστικός Χάρτης Φυσικής",
-      titleEn: "The Physics Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για δυνάμεις και κίνηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about forces and motion. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-newton-first",
-          textEl: "Τι συμβαίνει σε ένα αντικείμενο που κινείται αν δεν ασκηθεί δύναμη πάνω του;",
-          textEn: "What happens to a moving object if no force is applied to it?",
-          options: [
-            { textEl: "Συνεχίζει να κινείται με την ίδια ταχύτητα", textEn: "It continues moving at the same speed", isCorrect: true },
-            { textEl: "Σταματάει αμέσως", textEn: "It stops immediately", isCorrect: false, gapTag: "physics.force-motion-confusion" },
-            { textEl: "Επιβραδύνεται σταδιακά", textEn: "It gradually slows down", isCorrect: false, gapTag: "physics.force-motion-confusion" },
-          ],
-        },
-        {
-          id: "q2-density",
-          textEl: "Ποιο αντικείμενο έχει μεγαλύτερη πυκνότητα;",
-          textEn: "Which object has higher density?",
-          options: [
-            { textEl: "Ένα μικρό σιδερένιο καρφί", textEn: "A small iron nail", isCorrect: true },
-            { textEl: "Ένα μεγάλο ξύλινο κουτί", textEn: "A large wooden box", isCorrect: false, gapTag: "physics.density-mass-confusion" },
-            { textEl: "Έχουν την ίδια πυκνότητα", textEn: "They have the same density", isCorrect: false, gapTag: "physics.density-mass-confusion" },
-          ],
-        },
-        {
-          id: "q3-force-unit",
-          textEl: "Ποια είναι η μονάδα μέτρησης της δύναμης;",
-          textEn: "What is the unit of measurement for force?",
-          options: [
-            { textEl: "Newton (N)", textEn: "Newton (N)", isCorrect: true },
-            { textEl: "Kilogram (kg)", textEn: "Kilogram (kg)", isCorrect: false, gapTag: "physics.force-motion-confusion" },
-            { textEl: "Meter (m)", textEn: "Meter (m)", isCorrect: false, gapTag: "physics.force-motion-confusion" },
-          ],
-        },
-        {
-          id: "q4-density-formula",
-          textEl: "Πώς υπολογίζεται η πυκνότητα;",
-          textEn: "How is density calculated?",
-          options: [
-            { textEl: "Μάζα ÷ Όγκος", textEn: "Mass ÷ Volume", isCorrect: true },
-            { textEl: "Όγκος ÷ Μάζα", textEn: "Volume ÷ Mass", isCorrect: false, gapTag: "physics.density-mass-confusion" },
-            { textEl: "Μάζα × Όγκος", textEn: "Mass × Volume", isCorrect: false, gapTag: "physics.density-mass-confusion" },
-          ],
-        },
+      "id": "physics-gymnasiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Φυσική, Β' Γυμνασίου",
+      "subjectLabelEn": "Physics, 2nd Grade Middle School",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Φυσικής",
+      "titleEn": "The Physics Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για δυνάμεις και κίνηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about forces and motion. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-newton-first",
+          "textEl": "Τι συμβαίνει σε ένα αντικείμενο που κινείται αν δεν ασκηθεί δύναμη πάνω του;",
+          "textEn": "What happens to a moving object if no force is applied to it?",
+          "options": [
+            {
+              "textEl": "Συνεχίζει να κινείται με την ίδια ταχύτητα",
+              "textEn": "It continues moving at the same speed",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Σταματάει αμέσως",
+              "textEn": "It stops immediately",
+              "isCorrect": false,
+              "gapTag": "physics.force-motion-confusion"
+            },
+            {
+              "textEl": "Επιβραδύνεται σταδιακά",
+              "textEn": "It gradually slows down",
+              "isCorrect": false,
+              "gapTag": "physics.force-motion-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q2-density",
+          "textEl": "Ποιο αντικείμενο έχει μεγαλύτερη πυκνότητα;",
+          "textEn": "Which object has higher density?",
+          "options": [
+            {
+              "textEl": "Ένα μικρό σιδερένιο καρφί",
+              "textEn": "A small iron nail",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ένα μεγάλο ξύλινο κουτί",
+              "textEn": "A large wooden box",
+              "isCorrect": false,
+              "gapTag": "physics.density-mass-confusion"
+            },
+            {
+              "textEl": "Έχουν την ίδια πυκνότητα",
+              "textEn": "They have the same density",
+              "isCorrect": false,
+              "gapTag": "physics.density-mass-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q3-force-unit",
+          "textEl": "Ποια είναι η μονάδα μέτρησης της δύναμης;",
+          "textEn": "What is the unit of measurement for force?",
+          "options": [
+            {
+              "textEl": "Newton (N)",
+              "textEn": "Newton (N)",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Kilogram (kg)",
+              "textEn": "Kilogram (kg)",
+              "isCorrect": false,
+              "gapTag": "physics.force-motion-confusion"
+            },
+            {
+              "textEl": "Meter (m)",
+              "textEn": "Meter (m)",
+              "isCorrect": false,
+              "gapTag": "physics.force-motion-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q4-density-formula",
+          "textEl": "Πώς υπολογίζεται η πυκνότητα;",
+          "textEn": "How is density calculated?",
+          "options": [
+            {
+              "textEl": "Μάζα ÷ Όγκος",
+              "textEn": "Mass ÷ Volume",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Όγκος ÷ Μάζα",
+              "textEn": "Volume ÷ Mass",
+              "isCorrect": false,
+              "gapTag": "physics.density-mass-confusion"
+            },
+            {
+              "textEl": "Μάζα × Όγκος",
+              "textEn": "Mass × Volume",
+              "isCorrect": false,
+              "gapTag": "physics.density-mass-confusion"
+            }
+          ]
+        }
+      ]
     },
     "mathimatika-g-gymnasiou": {
-      id: "mathimatika-g-gymnasiou",
-      grades: ["c"],
-      subjectLabelEl: "Μαθηματικά, Γ' Γυμνασίου",
-      subjectLabelEn: "Mathematics, 3rd Grade Middle School",
-      titleEl: "Ο Διαγνωστικός Χάρτης Άλγεβρας",
-      titleEn: "The Algebra Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις άλγεβρας και γεωμετρίας. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short algebra and geometry questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-minus-sign",
-          textEl: "Λύσε: 5 − 2x = 9. Ποιο x είναι σωστό;",
-          textEn: "Solve: 5 − 2x = 9. Which x is correct?",
-          options: [
-            { textEl: "x = −2", textEn: "x = −2", isCorrect: true },
-            { textEl: "x = 2", textEn: "x = 2", isCorrect: false, gapTag: "algebra.minus-sign" },
-            { textEl: "x = 7", textEn: "x = 7", isCorrect: false, gapTag: "algebra.minus-sign" },
-          ],
-        },
-        {
-          id: "q2-equals-balance",
-          textEl: "Λύσε: 2x + 3 = 11.",
-          textEn: "Solve: 2x + 3 = 11.",
-          options: [
-            { textEl: "x = 4", textEn: "x = 4", isCorrect: true },
-            { textEl: "x = 7", textEn: "x = 7", isCorrect: false, gapTag: "algebra.equals-balance" },
-            { textEl: "x = 8", textEn: "x = 8", isCorrect: false, gapTag: "algebra.equals-balance" },
-          ],
-        },
-        {
-          id: "q3-distribute",
-          textEl: "Ανάπτυξε: −(3x − 4).",
-          textEn: "Expand: −(3x − 4).",
-          options: [
-            { textEl: "−3x + 4", textEn: "−3x + 4", isCorrect: true },
-            { textEl: "−3x − 4", textEn: "−3x − 4", isCorrect: false, gapTag: "algebra.distribute-negative" },
-            { textEl: "3x − 4", textEn: "3x − 4", isCorrect: false, gapTag: "algebra.distribute-negative" },
-          ],
-        },
-        {
-          id: "q4-pythagorean",
-          textEl: "Ορθογώνιο τρίγωνο έχει υποτείνουσα 13 και μία κάθετη πλευρά 5. Ποια είναι η άλλη κάθετη πλευρά;",
-          textEn: "A right triangle has hypotenuse 13 and one leg 5. What is the other leg?",
-          options: [
-            { textEl: "12", textEn: "12", isCorrect: true },
-            { textEl: "√194 ≈ 13,9", textEn: "√194 ≈ 13.9", isCorrect: false, gapTag: "algebra.pythagorean-add" },
-            { textEl: "8", textEn: "8", isCorrect: false, gapTag: "algebra.pythagorean-add" },
-          ],
-        },
+      "id": "mathimatika-g-gymnasiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Μαθηματικά, Γ' Γυμνασίου",
+      "subjectLabelEn": "Mathematics, 3rd Grade Middle School",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Άλγεβρας",
+      "titleEn": "The Algebra Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις άλγεβρας και γεωμετρίας. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short algebra and geometry questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-minus-sign",
+          "textEl": "Λύσε: 5 − 2x = 9. Ποιο x είναι σωστό;",
+          "textEn": "Solve: 5 − 2x = 9. Which x is correct?",
+          "options": [
+            {
+              "textEl": "x = −2",
+              "textEn": "x = −2",
+              "isCorrect": true
+            },
+            {
+              "textEl": "x = 2",
+              "textEn": "x = 2",
+              "isCorrect": false,
+              "gapTag": "algebra.minus-sign"
+            },
+            {
+              "textEl": "x = 7",
+              "textEn": "x = 7",
+              "isCorrect": false,
+              "gapTag": "algebra.minus-sign"
+            }
+          ]
+        },
+        {
+          "id": "q2-equals-balance",
+          "textEl": "Λύσε: 2x + 3 = 11.",
+          "textEn": "Solve: 2x + 3 = 11.",
+          "options": [
+            {
+              "textEl": "x = 4",
+              "textEn": "x = 4",
+              "isCorrect": true
+            },
+            {
+              "textEl": "x = 7",
+              "textEn": "x = 7",
+              "isCorrect": false,
+              "gapTag": "algebra.equals-balance"
+            },
+            {
+              "textEl": "x = 8",
+              "textEn": "x = 8",
+              "isCorrect": false,
+              "gapTag": "algebra.equals-balance"
+            }
+          ]
+        },
+        {
+          "id": "q3-distribute",
+          "textEl": "Ανάπτυξε: −(3x − 4).",
+          "textEn": "Expand: −(3x − 4).",
+          "options": [
+            {
+              "textEl": "−3x + 4",
+              "textEn": "−3x + 4",
+              "isCorrect": true
+            },
+            {
+              "textEl": "−3x − 4",
+              "textEn": "−3x − 4",
+              "isCorrect": false,
+              "gapTag": "algebra.distribute-negative"
+            },
+            {
+              "textEl": "3x − 4",
+              "textEn": "3x − 4",
+              "isCorrect": false,
+              "gapTag": "algebra.distribute-negative"
+            }
+          ]
+        },
+        {
+          "id": "q4-pythagorean",
+          "textEl": "Ορθογώνιο τρίγωνο έχει υποτείνουσα 13 και μία κάθετη πλευρά 5. Ποια είναι η άλλη κάθετη πλευρά;",
+          "textEn": "A right triangle has hypotenuse 13 and one leg 5. What is the other leg?",
+          "options": [
+            {
+              "textEl": "12",
+              "textEn": "12",
+              "isCorrect": true
+            },
+            {
+              "textEl": "√194 ≈ 13,9",
+              "textEn": "√194 ≈ 13.9",
+              "isCorrect": false,
+              "gapTag": "algebra.pythagorean-add"
+            },
+            {
+              "textEl": "8",
+              "textEn": "8",
+              "isCorrect": false,
+              "gapTag": "algebra.pythagorean-add"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-g-gymnasiou": {
-      id: "istoria-g-gymnasiou",
-      grades: ["c"],
-      subjectLabelEl: "Ιστορία, Γ' Γυμνασίου",
-      subjectLabelEn: "History, 3rd Grade Middle School",
-      titleEl: "Ο Διαγνωστικός Χάρτης Νεότερης Ιστορίας",
-      titleEn: "The Modern History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για την Επανάσταση του 1821. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about the 1821 Greek Revolution. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-agia-lavra",
-          textEl: "Πώς ξεκίνησε επίσημα η Επανάσταση του 1821 σύμφωνα με τα ιστορικά τεκμήρια;",
-          textEn: "According to historical evidence, how did the 1821 Revolution officially begin?",
-          options: [
-            { textEl: "Δεν υπάρχει τεκμηριωμένη «επίσημη έναρξη»· η ευλογία στην Αγία Λαύρα είναι μεταγενέστερος θρύλος.", textEn: "There is no documented 'official start' — the Agia Lavra blessing is a later legend.", isCorrect: true },
-            { textEl: "Με την ευλογία των όπλων από τον Παλαιών Πατρών Γερμανό στην Αγία Λαύρα.", textEn: "With the blessing of the weapons by Germanos of Old Patras at Agia Lavra.", isCorrect: false, gapTag: "history-gym.agia-lavra" },
-            { textEl: "Με επίσημη διακήρυξη στην Αθήνα στις 25 Μαρτίου.", textEn: "With an official declaration in Athens on March 25th.", isCorrect: false, gapTag: "history-gym.agia-lavra" },
-          ],
-        },
-        {
-          id: "q2-civil-wars",
-          textEl: "Κατά τη διάρκεια της Επανάστασης του 1821, οι Έλληνες...",
-          textEn: "During the 1821 Revolution, the Greeks...",
-          options: [
-            { textEl: "Είχαν και εσωτερικές συγκρούσεις, ακόμη και εμφύλιους πολέμους.", textEn: "Also had internal conflicts, including civil wars.", isCorrect: true },
-            { textEl: "Ήταν πάντα απόλυτα ενωμένοι.", textEn: "Were always completely united.", isCorrect: false, gapTag: "history-gym.greeks-united" },
-            { textEl: "Δεν είχαν καμία εσωτερική διαφωνία.", textEn: "Had no internal disagreements at all.", isCorrect: false, gapTag: "history-gym.greeks-united" },
-          ],
-        },
-        {
-          id: "q3-filiki-etaireia",
-          textEl: "Ποιοι ίδρυσαν τη Φιλική Εταιρεία και πού;",
-          textEn: "Who founded the Filiki Etaireia and where?",
-          options: [
-            { textEl: "Τρεις άνδρες μέτριας κοινωνικής θέσης (Ξάνθος, Σκουφάς, Τσακάλωφ) στην Οδησσό, το 1814.", textEn: "Three men of modest social standing (Xanthos, Skoufas, Tsakalov) in Odessa, in 1814.", isCorrect: true },
-            { textEl: "Μεγάλοι στρατιωτικοί αρχηγοί στην Πελοπόννησο.", textEn: "Major military chieftains in the Peloponnese.", isCorrect: false, gapTag: "history-gym.filiki-etaireia-leaders" },
-            { textEl: "Ο Ρήγας Φεραίος στη Βιέννη.", textEn: "Rigas Feraios in Vienna.", isCorrect: false, gapTag: "history-gym.filiki-etaireia-leaders" },
-          ],
-        },
-        {
-          id: "q4-education",
-          textEl: "Η ελληνική εκπαίδευση κατά την Οθωμανική κυριαρχία ήταν...",
-          textEn: "Greek-language education under Ottoman rule was...",
-          options: [
-            { textEl: "Νόμιμη, με χιλιάδες σχολεία να λειτουργούν επίσημα.", textEn: "Legal, with thousands of schools operating officially.", isCorrect: true },
-            { textEl: "Εντελώς απαγορευμένη, γι' αυτό γινόταν μόνο κρυφά.", textEn: "Completely banned, which is why it only happened in secret.", isCorrect: false, gapTag: "history-gym.kryfo-sxoleio" },
-            { textEl: "Επιτρεπτή μόνο για αγόρια.", textEn: "Permitted only for boys.", isCorrect: false, gapTag: "history-gym.kryfo-sxoleio" },
-          ],
-        },
+      "id": "istoria-g-gymnasiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Ιστορία, Γ' Γυμνασίου",
+      "subjectLabelEn": "History, 3rd Grade Middle School",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Νεότερης Ιστορίας",
+      "titleEn": "The Modern History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για την Επανάσταση του 1821. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about the 1821 Greek Revolution. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-agia-lavra",
+          "textEl": "Πώς ξεκίνησε επίσημα η Επανάσταση του 1821 σύμφωνα με τα ιστορικά τεκμήρια;",
+          "textEn": "According to historical evidence, how did the 1821 Revolution officially begin?",
+          "options": [
+            {
+              "textEl": "Δεν υπάρχει τεκμηριωμένη «επίσημη έναρξη»· η ευλογία στην Αγία Λαύρα είναι μεταγενέστερος θρύλος.",
+              "textEn": "There is no documented 'official start' — the Agia Lavra blessing is a later legend.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Με την ευλογία των όπλων από τον Παλαιών Πατρών Γερμανό στην Αγία Λαύρα.",
+              "textEn": "With the blessing of the weapons by Germanos of Old Patras at Agia Lavra.",
+              "isCorrect": false,
+              "gapTag": "history-gym.agia-lavra"
+            },
+            {
+              "textEl": "Με επίσημη διακήρυξη στην Αθήνα στις 25 Μαρτίου.",
+              "textEn": "With an official declaration in Athens on March 25th.",
+              "isCorrect": false,
+              "gapTag": "history-gym.agia-lavra"
+            }
+          ]
+        },
+        {
+          "id": "q2-civil-wars",
+          "textEl": "Κατά τη διάρκεια της Επανάστασης του 1821, οι Έλληνες...",
+          "textEn": "During the 1821 Revolution, the Greeks...",
+          "options": [
+            {
+              "textEl": "Είχαν και εσωτερικές συγκρούσεις, ακόμη και εμφύλιους πολέμους.",
+              "textEn": "Also had internal conflicts, including civil wars.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ήταν πάντα απόλυτα ενωμένοι.",
+              "textEn": "Were always completely united.",
+              "isCorrect": false,
+              "gapTag": "history-gym.greeks-united"
+            },
+            {
+              "textEl": "Δεν είχαν καμία εσωτερική διαφωνία.",
+              "textEn": "Had no internal disagreements at all.",
+              "isCorrect": false,
+              "gapTag": "history-gym.greeks-united"
+            }
+          ]
+        },
+        {
+          "id": "q3-filiki-etaireia",
+          "textEl": "Ποιοι ίδρυσαν τη Φιλική Εταιρεία και πού;",
+          "textEn": "Who founded the Filiki Etaireia and where?",
+          "options": [
+            {
+              "textEl": "Τρεις άνδρες μέτριας κοινωνικής θέσης (Ξάνθος, Σκουφάς, Τσακάλωφ) στην Οδησσό, το 1814.",
+              "textEn": "Three men of modest social standing (Xanthos, Skoufas, Tsakalov) in Odessa, in 1814.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μεγάλοι στρατιωτικοί αρχηγοί στην Πελοπόννησο.",
+              "textEn": "Major military chieftains in the Peloponnese.",
+              "isCorrect": false,
+              "gapTag": "history-gym.filiki-etaireia-leaders"
+            },
+            {
+              "textEl": "Ο Ρήγας Φεραίος στη Βιέννη.",
+              "textEn": "Rigas Feraios in Vienna.",
+              "isCorrect": false,
+              "gapTag": "history-gym.filiki-etaireia-leaders"
+            }
+          ]
+        },
+        {
+          "id": "q4-education",
+          "textEl": "Η ελληνική εκπαίδευση κατά την Οθωμανική κυριαρχία ήταν...",
+          "textEn": "Greek-language education under Ottoman rule was...",
+          "options": [
+            {
+              "textEl": "Νόμιμη, με χιλιάδες σχολεία να λειτουργούν επίσημα.",
+              "textEn": "Legal, with thousands of schools operating officially.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Εντελώς απαγορευμένη, γι' αυτό γινόταν μόνο κρυφά.",
+              "textEn": "Completely banned, which is why it only happened in secret.",
+              "isCorrect": false,
+              "gapTag": "history-gym.kryfo-sxoleio"
+            },
+            {
+              "textEl": "Επιτρεπτή μόνο για αγόρια.",
+              "textEn": "Permitted only for boys.",
+              "isCorrect": false,
+              "gapTag": "history-gym.kryfo-sxoleio"
+            }
+          ]
+        }
+      ]
     },
-
     "english-g-gymnasiou": {
-      id: "english-g-gymnasiou",
-      grades: ["c"],
-      subjectLabelEl: "Αγγλικά, Γ' Γυμνασίου",
-      subjectLabelEn: "English, 3rd Grade Middle School",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών (B1-B2)",
-      titleEn: "The English Learning Compass (B1-B2)",
-      introEl: "4 σύντομες ερωτήσεις γραμματικής. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short grammar questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-present-perfect",
-          textEl: "'I ___ him yesterday.' Ποιο είναι σωστό;",
-          textEn: "'I ___ him yesterday.' Which is correct?",
-          options: [
-            { textEl: "saw", textEn: "saw", isCorrect: true },
-            { textEl: "have seen", textEn: "have seen", isCorrect: false, gapTag: "efl-gym.present-perfect-past-simple" },
-            { textEl: "have saw", textEn: "have saw", isCorrect: false, gapTag: "efl-gym.present-perfect-past-simple" },
-          ],
-        },
-        {
-          id: "q2-conditional",
-          textEl: "'If I ___ rich, I would travel.' Ποιο ταιριάζει;",
-          textEn: "'If I ___ rich, I would travel.' Which fits?",
-          options: [
-            { textEl: "were", textEn: "were", isCorrect: true },
-            { textEl: "would be", textEn: "would be", isCorrect: false, gapTag: "efl-gym.second-conditional-would" },
-            { textEl: "will be", textEn: "will be", isCorrect: false, gapTag: "efl-gym.second-conditional-would" },
-          ],
-        },
-        {
-          id: "q3-preposition",
-          textEl: "'They ___ the problem for an hour.' Ποιο είναι σωστό;",
-          textEn: "'They ___ the problem for an hour.' Which is correct?",
-          options: [
-            { textEl: "discussed", textEn: "discussed", isCorrect: true },
-            { textEl: "discussed about", textEn: "discussed about", isCorrect: false, gapTag: "efl-gym.preposition-interference" },
-            { textEl: "discussed for", textEn: "discussed for", isCorrect: false, gapTag: "efl-gym.preposition-interference" },
-          ],
-        },
-        {
-          id: "q4-uncountable",
-          textEl: "'He gave me some useful ___.' Ποιο είναι σωστό;",
-          textEn: "'He gave me some useful ___.' Which is correct?",
-          options: [
-            { textEl: "advice", textEn: "advice", isCorrect: true },
-            { textEl: "advices", textEn: "advices", isCorrect: false, gapTag: "efl-gym.uncountable-nouns" },
-            { textEl: "an advice", textEn: "an advice", isCorrect: false, gapTag: "efl-gym.uncountable-nouns" },
-          ],
-        },
+      "id": "english-g-gymnasiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Αγγλικά, Γ' Γυμνασίου",
+      "subjectLabelEn": "English, 3rd Grade Middle School",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών (B1-B2)",
+      "titleEn": "The English Learning Compass (B1-B2)",
+      "introEl": "4 σύντομες ερωτήσεις γραμματικής. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short grammar questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-present-perfect",
+          "textEl": "'I ___ him yesterday.' Ποιο είναι σωστό;",
+          "textEn": "'I ___ him yesterday.' Which is correct?",
+          "options": [
+            {
+              "textEl": "saw",
+              "textEn": "saw",
+              "isCorrect": true
+            },
+            {
+              "textEl": "have seen",
+              "textEn": "have seen",
+              "isCorrect": false,
+              "gapTag": "efl-gym.present-perfect-past-simple"
+            },
+            {
+              "textEl": "have saw",
+              "textEn": "have saw",
+              "isCorrect": false,
+              "gapTag": "efl-gym.present-perfect-past-simple"
+            }
+          ]
+        },
+        {
+          "id": "q2-conditional",
+          "textEl": "'If I ___ rich, I would travel.' Ποιο ταιριάζει;",
+          "textEn": "'If I ___ rich, I would travel.' Which fits?",
+          "options": [
+            {
+              "textEl": "were",
+              "textEn": "were",
+              "isCorrect": true
+            },
+            {
+              "textEl": "would be",
+              "textEn": "would be",
+              "isCorrect": false,
+              "gapTag": "efl-gym.second-conditional-would"
+            },
+            {
+              "textEl": "will be",
+              "textEn": "will be",
+              "isCorrect": false,
+              "gapTag": "efl-gym.second-conditional-would"
+            }
+          ]
+        },
+        {
+          "id": "q3-preposition",
+          "textEl": "'They ___ the problem for an hour.' Ποιο είναι σωστό;",
+          "textEn": "'They ___ the problem for an hour.' Which is correct?",
+          "options": [
+            {
+              "textEl": "discussed",
+              "textEn": "discussed",
+              "isCorrect": true
+            },
+            {
+              "textEl": "discussed about",
+              "textEn": "discussed about",
+              "isCorrect": false,
+              "gapTag": "efl-gym.preposition-interference"
+            },
+            {
+              "textEl": "discussed for",
+              "textEn": "discussed for",
+              "isCorrect": false,
+              "gapTag": "efl-gym.preposition-interference"
+            }
+          ]
+        },
+        {
+          "id": "q4-uncountable",
+          "textEl": "'He gave me some useful ___.' Ποιο είναι σωστό;",
+          "textEn": "'He gave me some useful ___.' Which is correct?",
+          "options": [
+            {
+              "textEl": "advice",
+              "textEn": "advice",
+              "isCorrect": true
+            },
+            {
+              "textEl": "advices",
+              "textEn": "advices",
+              "isCorrect": false,
+              "gapTag": "efl-gym.uncountable-nouns"
+            },
+            {
+              "textEl": "an advice",
+              "textEn": "an advice",
+              "isCorrect": false,
+              "gapTag": "efl-gym.uncountable-nouns"
+            }
+          ]
+        }
+      ]
     },
-
     "mathimatika-a-gymnasiou": {
-      id: "mathimatika-a-gymnasiou",
-      grades: ["a"],
-      subjectLabelEl: "Μαθηματικά, Α' Γυμνασίου",
-      subjectLabelEn: "Math, 7th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-rational-order",
-          textEl: "Ποιος αριθμός είναι μεγαλύτερος;",
-          textEn: "Which number is bigger?",
-          options: [
-            { textEl: "-3", textEn: "-3", isCorrect: true },
-            { textEl: "-8", textEn: "-8", isCorrect: false, gapTag: "math-a-gym.rational-number-order" },
-            { textEl: "Είναι ίσοι", textEn: "They're equal", isCorrect: false, gapTag: "math-a-gym.rational-number-order" },
-          ],
-        },
-        {
-          id: "q2-absolute-value",
-          textEl: "Πόσο κάνει |-7|;",
-          textEn: "What is |-7|?",
-          options: [
-            { textEl: "7", textEn: "7", isCorrect: true },
-            { textEl: "-7", textEn: "-7", isCorrect: false, gapTag: "math-a-gym.absolute-value" },
-            { textEl: "0", textEn: "0", isCorrect: false, gapTag: "math-a-gym.absolute-value" },
-          ],
-        },
-        {
-          id: "q3-gcd-lcm",
-          textEl: "Ποιος είναι πάντα μεγαλύτερος ή ίσος: ο ΜΚΔ ή το ΕΚΠ δύο αριθμών;",
-          textEn: "Which is always bigger or equal: the GCD or the LCM of two numbers?",
-          options: [
-            { textEl: "Το ΕΚΠ.", textEn: "The LCM.", isCorrect: true },
-            { textEl: "Ο ΜΚΔ.", textEn: "The GCD.", isCorrect: false, gapTag: "math-a-gym.gcd-lcm-confusion" },
-            { textEl: "Είναι πάντα ίσοι.", textEn: "They're always equal.", isCorrect: false, gapTag: "math-a-gym.gcd-lcm-confusion" },
-          ],
-        },
-        {
-          id: "q4-proportion",
-          textEl: "Αν 3/4 = x/12, πόσο είναι το x;",
-          textEn: "If 3/4 = x/12, what is x?",
-          options: [
-            { textEl: "9", textEn: "9", isCorrect: true },
-            { textEl: "16", textEn: "16", isCorrect: false, gapTag: "math-a-gym.proportion-intro" },
-            { textEl: "4", textEn: "4", isCorrect: false, gapTag: "math-a-gym.proportion-intro" },
-          ],
-        },
+      "id": "mathimatika-a-gymnasiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Μαθηματικά, Α' Γυμνασίου",
+      "subjectLabelEn": "Math, 7th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-rational-order",
+          "textEl": "Ποιος αριθμός είναι μεγαλύτερος;",
+          "textEn": "Which number is bigger?",
+          "options": [
+            {
+              "textEl": "-3",
+              "textEn": "-3",
+              "isCorrect": true
+            },
+            {
+              "textEl": "-8",
+              "textEn": "-8",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.rational-number-order"
+            },
+            {
+              "textEl": "Είναι ίσοι",
+              "textEn": "They're equal",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.rational-number-order"
+            }
+          ]
+        },
+        {
+          "id": "q2-absolute-value",
+          "textEl": "Πόσο κάνει |-7|;",
+          "textEn": "What is |-7|?",
+          "options": [
+            {
+              "textEl": "7",
+              "textEn": "7",
+              "isCorrect": true
+            },
+            {
+              "textEl": "-7",
+              "textEn": "-7",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.absolute-value"
+            },
+            {
+              "textEl": "0",
+              "textEn": "0",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.absolute-value"
+            }
+          ]
+        },
+        {
+          "id": "q3-gcd-lcm",
+          "textEl": "Ποιος είναι πάντα μεγαλύτερος ή ίσος: ο ΜΚΔ ή το ΕΚΠ δύο αριθμών;",
+          "textEn": "Which is always bigger or equal: the GCD or the LCM of two numbers?",
+          "options": [
+            {
+              "textEl": "Το ΕΚΠ.",
+              "textEn": "The LCM.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο ΜΚΔ.",
+              "textEn": "The GCD.",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.gcd-lcm-confusion"
+            },
+            {
+              "textEl": "Είναι πάντα ίσοι.",
+              "textEn": "They're always equal.",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.gcd-lcm-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q4-proportion",
+          "textEl": "Αν 3/4 = x/12, πόσο είναι το x;",
+          "textEn": "If 3/4 = x/12, what is x?",
+          "options": [
+            {
+              "textEl": "9",
+              "textEn": "9",
+              "isCorrect": true
+            },
+            {
+              "textEl": "16",
+              "textEn": "16",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.proportion-intro"
+            },
+            {
+              "textEl": "4",
+              "textEn": "4",
+              "isCorrect": false,
+              "gapTag": "math-a-gym.proportion-intro"
+            }
+          ]
+        }
+      ]
     },
-
     "glossa-a-gymnasiou": {
-      id: "glossa-a-gymnasiou",
-      grades: ["a"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Α' Γυμνασίου",
-      subjectLabelEn: "Modern Greek Language, 7th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-parts-of-speech",
-          textEl: "Στην πρόταση «Το γρήγορο αυτοκίνητο έτρεξε», τι μέρος του λόγου είναι το «γρήγορο»;",
-          textEn: "In 'The fast car ran', what part of speech is 'fast'?",
-          options: [
-            { textEl: "Επίθετο.", textEn: "Adjective.", isCorrect: true },
-            { textEl: "Επίρρημα.", textEn: "Adverb.", isCorrect: false, gapTag: "glossa-a-gym.parts-of-speech" },
-            { textEl: "Ρήμα.", textEn: "Verb.", isCorrect: false, gapTag: "glossa-a-gym.parts-of-speech" },
-          ],
-        },
-        {
-          id: "q2-fact-opinion",
-          textEl: "«Η Αθήνα είναι η πρωτεύουσα της Ελλάδας.» Είναι γεγονός ή άποψη;",
-          textEn: "'Athens is the capital of Greece.' Is this a fact or an opinion?",
-          options: [
-            { textEl: "Γεγονός, μπορεί να επαληθευτεί.", textEn: "A fact, it can be verified.", isCorrect: true },
-            { textEl: "Άποψη, εξαρτάται ποιος το λέει.", textEn: "An opinion, it depends who says it.", isCorrect: false, gapTag: "glossa-a-gym.opinion-vs-fact" },
-            { textEl: "Ούτε γεγονός ούτε άποψη.", textEn: "Neither fact nor opinion.", isCorrect: false, gapTag: "glossa-a-gym.opinion-vs-fact" },
-          ],
-        },
-        {
-          id: "q3-argument",
-          textEl: "«Το σχολείο μας χρειάζεται βιβλιοθήκη γιατί πολλοί μαθητές δεν έχουν βιβλία στο σπίτι.» Τι κάνει δυνατή αυτή την πρόταση;",
-          textEn: "'Our school needs a library because many students don't have books at home.' What makes this sentence strong?",
-          options: [
-            { textEl: "Δίνει έναν συγκεκριμένο λόγο που στηρίζει τη θέση.", textEn: "It gives a specific reason that supports the claim.", isCorrect: true },
-            { textEl: "Απλώς επαναλαμβάνει τη θέση με άλλα λόγια.", textEn: "It just restates the claim in other words.", isCorrect: false, gapTag: "glossa-a-gym.paragraph-argument-basic" },
-            { textEl: "Δεν έχει καμία σχέση με βιβλιοθήκες.", textEn: "It has nothing to do with libraries.", isCorrect: false, gapTag: "glossa-a-gym.paragraph-argument-basic" },
-          ],
-        },
-        {
-          id: "q4-mood",
-          textEl: "«Κλείσε την πόρτα!» Ποια έγκλιση είναι αυτό το ρήμα;",
-          textEn: "'Close the door!' What mood is this verb in?",
-          options: [
-            { textEl: "Προστακτική.", textEn: "Imperative.", isCorrect: true },
-            { textEl: "Οριστική.", textEn: "Indicative.", isCorrect: false, gapTag: "glossa-a-gym.verb-mood-basic" },
-            { textEl: "Υποτακτική.", textEn: "Subjunctive.", isCorrect: false, gapTag: "glossa-a-gym.verb-mood-basic" },
-          ],
-        },
+      "id": "glossa-a-gymnasiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Α' Γυμνασίου",
+      "subjectLabelEn": "Modern Greek Language, 7th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-parts-of-speech",
+          "textEl": "Στην πρόταση «Το γρήγορο αυτοκίνητο έτρεξε», τι μέρος του λόγου είναι το «γρήγορο»;",
+          "textEn": "In 'The fast car ran', what part of speech is 'fast'?",
+          "options": [
+            {
+              "textEl": "Επίθετο.",
+              "textEn": "Adjective.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Επίρρημα.",
+              "textEn": "Adverb.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.parts-of-speech"
+            },
+            {
+              "textEl": "Ρήμα.",
+              "textEn": "Verb.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.parts-of-speech"
+            }
+          ]
+        },
+        {
+          "id": "q2-fact-opinion",
+          "textEl": "«Η Αθήνα είναι η πρωτεύουσα της Ελλάδας.» Είναι γεγονός ή άποψη;",
+          "textEn": "'Athens is the capital of Greece.' Is this a fact or an opinion?",
+          "options": [
+            {
+              "textEl": "Γεγονός, μπορεί να επαληθευτεί.",
+              "textEn": "A fact, it can be verified.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Άποψη, εξαρτάται ποιος το λέει.",
+              "textEn": "An opinion, it depends who says it.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.opinion-vs-fact"
+            },
+            {
+              "textEl": "Ούτε γεγονός ούτε άποψη.",
+              "textEn": "Neither fact nor opinion.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.opinion-vs-fact"
+            }
+          ]
+        },
+        {
+          "id": "q3-argument",
+          "textEl": "«Το σχολείο μας χρειάζεται βιβλιοθήκη γιατί πολλοί μαθητές δεν έχουν βιβλία στο σπίτι.» Τι κάνει δυνατή αυτή την πρόταση;",
+          "textEn": "'Our school needs a library because many students don't have books at home.' What makes this sentence strong?",
+          "options": [
+            {
+              "textEl": "Δίνει έναν συγκεκριμένο λόγο που στηρίζει τη θέση.",
+              "textEn": "It gives a specific reason that supports the claim.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Απλώς επαναλαμβάνει τη θέση με άλλα λόγια.",
+              "textEn": "It just restates the claim in other words.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.paragraph-argument-basic"
+            },
+            {
+              "textEl": "Δεν έχει καμία σχέση με βιβλιοθήκες.",
+              "textEn": "It has nothing to do with libraries.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.paragraph-argument-basic"
+            }
+          ]
+        },
+        {
+          "id": "q4-mood",
+          "textEl": "«Κλείσε την πόρτα!» Ποια έγκλιση είναι αυτό το ρήμα;",
+          "textEn": "'Close the door!' What mood is this verb in?",
+          "options": [
+            {
+              "textEl": "Προστακτική.",
+              "textEn": "Imperative.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Οριστική.",
+              "textEn": "Indicative.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.verb-mood-basic"
+            },
+            {
+              "textEl": "Υποτακτική.",
+              "textEn": "Subjunctive.",
+              "isCorrect": false,
+              "gapTag": "glossa-a-gym.verb-mood-basic"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-a-gymnasiou": {
-      id: "istoria-a-gymnasiou",
-      grades: ["a"],
-      subjectLabelEl: "Ιστορία, Α' Γυμνασίου (Προϊστορία - Κλασικά Χρόνια)",
-      subjectLabelEn: "History, 7th Grade (Prehistory - Classical Period)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Ιστορίας",
-      titleEn: "The History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-bronze-age",
-          textEl: "Το ανάκτορο της Κνωσού ανήκει σε ποιον πολιτισμό;",
-          textEn: "The Palace of Knossos belongs to which civilization?",
-          options: [
-            { textEl: "Στον Μινωικό.", textEn: "The Minoan.", isCorrect: true },
-            { textEl: "Στον Μυκηναϊκό.", textEn: "The Mycenaean.", isCorrect: false, gapTag: "istoria-a-gym.bronze-age-civilizations" },
-            { textEl: "Στον Κυκλαδικό.", textEn: "The Cycladic.", isCorrect: false, gapTag: "istoria-a-gym.bronze-age-civilizations" },
-          ],
-        },
-        {
-          id: "q2-democracy-path",
-          textEl: "Η αθηναϊκή δημοκρατία...",
-          textEn: "Athenian democracy...",
-          options: [
-            { textEl: "Εξελίχθηκε σταδιακά μέσα από μεταρρυθμιστές όπως ο Σόλωνας και ο Κλεισθένης.", textEn: "Evolved gradually through reformers like Solon and Cleisthenes.", isCorrect: true },
-            { textEl: "Υπήρχε από την πρώτη μέρα ίδρυσης της Αθήνας.", textEn: "Existed from Athens' very first day.", isCorrect: false, gapTag: "istoria-a-gym.archaic-democracy-path" },
-            { textEl: "Επιβλήθηκε από τη Σπάρτη.", textEn: "Was imposed by Sparta.", isCorrect: false, gapTag: "istoria-a-gym.archaic-democracy-path" },
-          ],
-        },
-        {
-          id: "q3-peloponnesian",
-          textEl: "Ποιες δύο πλευρές αντιπαρατέθηκαν κυρίως στον Πελοποννησιακό Πόλεμο;",
-          textEn: "Which two sides mainly fought in the Peloponnesian War?",
-          options: [
-            { textEl: "Αθήνα και Σπάρτη (με τους αντίστοιχους συμμάχους τους).", textEn: "Athens and Sparta (with their respective allies).", isCorrect: true },
-            { textEl: "Αθήνα και Πέρσες.", textEn: "Athens and the Persians.", isCorrect: false, gapTag: "istoria-a-gym.peloponnesian-war-sides" },
-            { textEl: "Σπάρτη και Μακεδονία.", textEn: "Sparta and Macedon.", isCorrect: false, gapTag: "istoria-a-gym.peloponnesian-war-sides" },
-          ],
-        },
-        {
-          id: "q4-alexander",
-          textEl: "Ποιο ήταν το κύριο αποτέλεσμα των κατακτήσεων του Μεγάλου Αλεξάνδρου;",
-          textEn: "What was the main result of Alexander the Great's conquests?",
-          options: [
-            { textEl: "Η διάδοση του ελληνικού πολιτισμού σε μια τεράστια έκταση (ελληνιστικός κόσμος).", textEn: "The spread of Greek culture across a vast territory (the Hellenistic world).", isCorrect: true },
-            { textEl: "Η μόνιμη ένωση όλων των ελληνικών πόλεων-κρατών.", textEn: "The permanent union of all Greek city-states.", isCorrect: false, gapTag: "istoria-a-gym.alexander-legacy" },
-            { textEl: "Το τέλος κάθε επαφής της Ελλάδας με την Ανατολή.", textEn: "The end of all contact between Greece and the East.", isCorrect: false, gapTag: "istoria-a-gym.alexander-legacy" },
-          ],
-        },
+      "id": "istoria-a-gymnasiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Ιστορία, Α' Γυμνασίου (Προϊστορία - Κλασικά Χρόνια)",
+      "subjectLabelEn": "History, 7th Grade (Prehistory - Classical Period)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Ιστορίας",
+      "titleEn": "The History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-bronze-age",
+          "textEl": "Το ανάκτορο της Κνωσού ανήκει σε ποιον πολιτισμό;",
+          "textEn": "The Palace of Knossos belongs to which civilization?",
+          "options": [
+            {
+              "textEl": "Στον Μινωικό.",
+              "textEn": "The Minoan.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Στον Μυκηναϊκό.",
+              "textEn": "The Mycenaean.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.bronze-age-civilizations"
+            },
+            {
+              "textEl": "Στον Κυκλαδικό.",
+              "textEn": "The Cycladic.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.bronze-age-civilizations"
+            }
+          ]
+        },
+        {
+          "id": "q2-democracy-path",
+          "textEl": "Η αθηναϊκή δημοκρατία...",
+          "textEn": "Athenian democracy...",
+          "options": [
+            {
+              "textEl": "Εξελίχθηκε σταδιακά μέσα από μεταρρυθμιστές όπως ο Σόλωνας και ο Κλεισθένης.",
+              "textEn": "Evolved gradually through reformers like Solon and Cleisthenes.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Υπήρχε από την πρώτη μέρα ίδρυσης της Αθήνας.",
+              "textEn": "Existed from Athens' very first day.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.archaic-democracy-path"
+            },
+            {
+              "textEl": "Επιβλήθηκε από τη Σπάρτη.",
+              "textEn": "Was imposed by Sparta.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.archaic-democracy-path"
+            }
+          ]
+        },
+        {
+          "id": "q3-peloponnesian",
+          "textEl": "Ποιες δύο πλευρές αντιπαρατέθηκαν κυρίως στον Πελοποννησιακό Πόλεμο;",
+          "textEn": "Which two sides mainly fought in the Peloponnesian War?",
+          "options": [
+            {
+              "textEl": "Αθήνα και Σπάρτη (με τους αντίστοιχους συμμάχους τους).",
+              "textEn": "Athens and Sparta (with their respective allies).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Αθήνα και Πέρσες.",
+              "textEn": "Athens and the Persians.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.peloponnesian-war-sides"
+            },
+            {
+              "textEl": "Σπάρτη και Μακεδονία.",
+              "textEn": "Sparta and Macedon.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.peloponnesian-war-sides"
+            }
+          ]
+        },
+        {
+          "id": "q4-alexander",
+          "textEl": "Ποιο ήταν το κύριο αποτέλεσμα των κατακτήσεων του Μεγάλου Αλεξάνδρου;",
+          "textEn": "What was the main result of Alexander the Great's conquests?",
+          "options": [
+            {
+              "textEl": "Η διάδοση του ελληνικού πολιτισμού σε μια τεράστια έκταση (ελληνιστικός κόσμος).",
+              "textEn": "The spread of Greek culture across a vast territory (the Hellenistic world).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η μόνιμη ένωση όλων των ελληνικών πόλεων-κρατών.",
+              "textEn": "The permanent union of all Greek city-states.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.alexander-legacy"
+            },
+            {
+              "textEl": "Το τέλος κάθε επαφής της Ελλάδας με την Ανατολή.",
+              "textEn": "The end of all contact between Greece and the East.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-gym.alexander-legacy"
+            }
+          ]
+        }
+      ]
     },
-
     "english-a-gymnasiou": {
-      id: "english-a-gymnasiou",
-      grades: ["a"],
-      subjectLabelEl: "Αγγλικά, Α' Γυμνασίου (A2)",
-      subjectLabelEn: "English, 7th Grade (A2)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών",
-      titleEn: "The English Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-cont-vs-simple",
-          textEl: "'Look! It ___ outside right now.' Ποιο ταιριάζει;",
-          textEn: "'Look! It ___ outside right now.' Which fits?",
-          options: [
-            { textEl: "is raining", textEn: "is raining", isCorrect: true },
-            { textEl: "rains", textEn: "rains", isCorrect: false, gapTag: "efl-a-gym.present-cont-vs-simple" },
-            { textEl: "rained", textEn: "rained", isCorrect: false, gapTag: "efl-a-gym.present-cont-vs-simple" },
-          ],
-        },
-        {
-          id: "q2-past-cont",
-          textEl: "'I ___ TV when the phone rang.' Ποιο ταιριάζει;",
-          textEn: "'I ___ TV when the phone rang.' Which fits?",
-          options: [
-            { textEl: "was watching", textEn: "was watching", isCorrect: true },
-            { textEl: "watched", textEn: "watched", isCorrect: false, gapTag: "efl-a-gym.past-cont-vs-simple" },
-            { textEl: "watch", textEn: "watch", isCorrect: false, gapTag: "efl-a-gym.past-cont-vs-simple" },
-          ],
-        },
-        {
-          id: "q3-comparative",
-          textEl: "'This book is ___ than that one.' Ποιο ταιριάζει;",
-          textEn: "'This book is ___ than that one.' Which fits?",
-          options: [
-            { textEl: "more interesting", textEn: "more interesting", isCorrect: true },
-            { textEl: "interestinger", textEn: "interestinger", isCorrect: false, gapTag: "efl-a-gym.comparative-forms" },
-            { textEl: "the more interesting", textEn: "the more interesting", isCorrect: false, gapTag: "efl-a-gym.comparative-forms" },
-          ],
-        },
-        {
-          id: "q4-question-order",
-          textEl: "Ποια πρόταση είναι σωστά διατυπωμένη ερώτηση;",
-          textEn: "Which sentence is a correctly formed question?",
-          options: [
-            { textEl: "'Where do you go on Sundays?'", textEn: "'Where do you go on Sundays?'", isCorrect: true },
-            { textEl: "'Where you go on Sundays?'", textEn: "'Where you go on Sundays?'", isCorrect: false, gapTag: "efl-a-gym.question-word-order" },
-            { textEl: "'You where go on Sundays?'", textEn: "'You where go on Sundays?'", isCorrect: false, gapTag: "efl-a-gym.question-word-order" },
-          ],
-        },
+      "id": "english-a-gymnasiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Αγγλικά, Α' Γυμνασίου (A2)",
+      "subjectLabelEn": "English, 7th Grade (A2)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών",
+      "titleEn": "The English Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-cont-vs-simple",
+          "textEl": "'Look! It ___ outside right now.' Ποιο ταιριάζει;",
+          "textEn": "'Look! It ___ outside right now.' Which fits?",
+          "options": [
+            {
+              "textEl": "is raining",
+              "textEn": "is raining",
+              "isCorrect": true
+            },
+            {
+              "textEl": "rains",
+              "textEn": "rains",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.present-cont-vs-simple"
+            },
+            {
+              "textEl": "rained",
+              "textEn": "rained",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.present-cont-vs-simple"
+            }
+          ]
+        },
+        {
+          "id": "q2-past-cont",
+          "textEl": "'I ___ TV when the phone rang.' Ποιο ταιριάζει;",
+          "textEn": "'I ___ TV when the phone rang.' Which fits?",
+          "options": [
+            {
+              "textEl": "was watching",
+              "textEn": "was watching",
+              "isCorrect": true
+            },
+            {
+              "textEl": "watched",
+              "textEn": "watched",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.past-cont-vs-simple"
+            },
+            {
+              "textEl": "watch",
+              "textEn": "watch",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.past-cont-vs-simple"
+            }
+          ]
+        },
+        {
+          "id": "q3-comparative",
+          "textEl": "'This book is ___ than that one.' Ποιο ταιριάζει;",
+          "textEn": "'This book is ___ than that one.' Which fits?",
+          "options": [
+            {
+              "textEl": "more interesting",
+              "textEn": "more interesting",
+              "isCorrect": true
+            },
+            {
+              "textEl": "interestinger",
+              "textEn": "interestinger",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.comparative-forms"
+            },
+            {
+              "textEl": "the more interesting",
+              "textEn": "the more interesting",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.comparative-forms"
+            }
+          ]
+        },
+        {
+          "id": "q4-question-order",
+          "textEl": "Ποια πρόταση είναι σωστά διατυπωμένη ερώτηση;",
+          "textEn": "Which sentence is a correctly formed question?",
+          "options": [
+            {
+              "textEl": "'Where do you go on Sundays?'",
+              "textEn": "'Where do you go on Sundays?'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "'Where you go on Sundays?'",
+              "textEn": "'Where you go on Sundays?'",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.question-word-order"
+            },
+            {
+              "textEl": "'You where go on Sundays?'",
+              "textEn": "'You where go on Sundays?'",
+              "isCorrect": false,
+              "gapTag": "efl-a-gym.question-word-order"
+            }
+          ]
+        }
+      ]
     },
-
     "mathimatika-b-gymnasiou": {
-      id: "mathimatika-b-gymnasiou",
-      grades: ["b"],
-      subjectLabelEl: "Μαθηματικά, Β' Γυμνασίου",
-      subjectLabelEn: "Math, 8th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-like-terms",
-          textEl: "Ποια από τα παρακάτω είναι όμοιοι όροι με το 3x;",
-          textEn: "Which of the following is a like term to 3x?",
-          options: [
-            { textEl: "5x", textEn: "5x", isCorrect: true },
-            { textEl: "3x²", textEn: "3x²", isCorrect: false, gapTag: "math-b-gym.monomial-like-terms" },
-            { textEl: "3", textEn: "3", isCorrect: false, gapTag: "math-b-gym.monomial-like-terms" },
-          ],
-        },
-        {
-          id: "q2-identity",
-          textEl: "Πόσο κάνει (x+3)²;",
-          textEn: "What is (x+3)²?",
-          options: [
-            { textEl: "x² + 6x + 9", textEn: "x² + 6x + 9", isCorrect: true },
-            { textEl: "x² + 9", textEn: "x² + 9", isCorrect: false, gapTag: "math-b-gym.identity-square-sum" },
-            { textEl: "x² + 3x + 9", textEn: "x² + 3x + 9", isCorrect: false, gapTag: "math-b-gym.identity-square-sum" },
-          ],
-        },
-        {
-          id: "q3-pythagorean",
-          textEl: "Ορθογώνιο τρίγωνο έχει κάθετες πλευρές 3 και 4. Ποια είναι η υποτείνουσα;",
-          textEn: "A right triangle has legs 3 and 4. What is the hypotenuse?",
-          options: [
-            { textEl: "5", textEn: "5", isCorrect: true },
-            { textEl: "7", textEn: "7", isCorrect: false, gapTag: "math-b-gym.pythagorean-application" },
-            { textEl: "12", textEn: "12", isCorrect: false, gapTag: "math-b-gym.pythagorean-application" },
-          ],
-        },
-        {
-          id: "q4-equation",
-          textEl: "Λύσε: x + 5 = 12. Ποιο είναι το x;",
-          textEn: "Solve: x + 5 = 12. What is x?",
-          options: [
-            { textEl: "7", textEn: "7", isCorrect: true },
-            { textEl: "17", textEn: "17", isCorrect: false, gapTag: "math-b-gym.linear-equation-basic" },
-            { textEl: "60", textEn: "60", isCorrect: false, gapTag: "math-b-gym.linear-equation-basic" },
-          ],
-        },
+      "id": "mathimatika-b-gymnasiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Μαθηματικά, Β' Γυμνασίου",
+      "subjectLabelEn": "Math, 8th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-like-terms",
+          "textEl": "Ποια από τα παρακάτω είναι όμοιοι όροι με το 3x;",
+          "textEn": "Which of the following is a like term to 3x?",
+          "options": [
+            {
+              "textEl": "5x",
+              "textEn": "5x",
+              "isCorrect": true
+            },
+            {
+              "textEl": "3x²",
+              "textEn": "3x²",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.monomial-like-terms"
+            },
+            {
+              "textEl": "3",
+              "textEn": "3",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.monomial-like-terms"
+            }
+          ]
+        },
+        {
+          "id": "q2-identity",
+          "textEl": "Πόσο κάνει (x+3)²;",
+          "textEn": "What is (x+3)²?",
+          "options": [
+            {
+              "textEl": "x² + 6x + 9",
+              "textEn": "x² + 6x + 9",
+              "isCorrect": true
+            },
+            {
+              "textEl": "x² + 9",
+              "textEn": "x² + 9",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.identity-square-sum"
+            },
+            {
+              "textEl": "x² + 3x + 9",
+              "textEn": "x² + 3x + 9",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.identity-square-sum"
+            }
+          ]
+        },
+        {
+          "id": "q3-pythagorean",
+          "textEl": "Ορθογώνιο τρίγωνο έχει κάθετες πλευρές 3 και 4. Ποια είναι η υποτείνουσα;",
+          "textEn": "A right triangle has legs 3 and 4. What is the hypotenuse?",
+          "options": [
+            {
+              "textEl": "5",
+              "textEn": "5",
+              "isCorrect": true
+            },
+            {
+              "textEl": "7",
+              "textEn": "7",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.pythagorean-application"
+            },
+            {
+              "textEl": "12",
+              "textEn": "12",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.pythagorean-application"
+            }
+          ]
+        },
+        {
+          "id": "q4-equation",
+          "textEl": "Λύσε: x + 5 = 12. Ποιο είναι το x;",
+          "textEn": "Solve: x + 5 = 12. What is x?",
+          "options": [
+            {
+              "textEl": "7",
+              "textEn": "7",
+              "isCorrect": true
+            },
+            {
+              "textEl": "17",
+              "textEn": "17",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.linear-equation-basic"
+            },
+            {
+              "textEl": "60",
+              "textEn": "60",
+              "isCorrect": false,
+              "gapTag": "math-b-gym.linear-equation-basic"
+            }
+          ]
+        }
+      ]
     },
-
     "glossa-b-gymnasiou": {
-      id: "glossa-b-gymnasiou",
-      grades: ["b"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα, Β' Γυμνασίου",
-      subjectLabelEn: "Modern Greek Language, 8th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Μάθησης",
-      titleEn: "The Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-intro-function",
-          textEl: "Τι πρέπει να κάνει ο πρόλογος ενός δοκιμίου;",
-          textEn: "What should an essay's introduction do?",
-          options: [
-            { textEl: "Να εισάγει το θέμα και να δηλώνει τη θέση, χωρίς πλήρη ανάλυση.", textEn: "Introduce the topic and state the position, without a full analysis.", isCorrect: true },
-            { textEl: "Να αναλύει όλα τα επιχειρήματα με λεπτομέρειες.", textEn: "Analyze all the arguments in detail.", isCorrect: false, gapTag: "glossa-b-gym.essay-intro-function" },
-            { textEl: "Να είναι το μεγαλύτερο μέρος του κειμένου.", textEn: "Be the longest part of the text.", isCorrect: false, gapTag: "glossa-b-gym.essay-intro-function" },
-          ],
-        },
-        {
-          id: "q2-text-purpose",
-          textEl: "Γράφεις επιστολή διαμαρτυρίας προς τον δήμο. Τι ύφος ταιριάζει;",
-          textEn: "You're writing a complaint letter to the municipality. What register fits?",
-          options: [
-            { textEl: "Επίσημο, με σαφή αίτημα.", textEn: "Formal, with a clear request.", isCorrect: true },
-            { textEl: "Καθημερινό, σαν να μιλάς σε φίλο.", textEn: "Casual, as if talking to a friend.", isCorrect: false, gapTag: "glossa-b-gym.text-types-purpose" },
-            { textEl: "Δεν έχει σημασία το ύφος.", textEn: "Register doesn't matter.", isCorrect: false, gapTag: "glossa-b-gym.text-types-purpose" },
-          ],
-        },
-        {
-          id: "q3-argument-evidence",
-          textEl: "«Το σχολείο μας χρειάζεται περισσότερο πράσινο» είναι επιχείρημα. Ποιο από τα παρακάτω είναι το τεκμήριο που το στηρίζει;",
-          textEn: "'Our school needs more greenery' is the argument. Which is the evidence that supports it?",
-          options: [
-            { textEl: "«Έρευνα δείχνει ότι ο πράσινος χώρος μειώνει το άγχος των μαθητών κατά 20%.»", textEn: "'Research shows green space reduces student stress by 20%.'", isCorrect: true },
-            { textEl: "«Το σχολείο μας χρειάζεται περισσότερο πράσινο.»", textEn: "'Our school needs more greenery.' (the claim itself)", isCorrect: false, gapTag: "glossa-b-gym.argument-vs-evidence" },
-            { textEl: "«Μου αρέσει το πράσινο χρώμα.»", textEn: "'I like the color green.'", isCorrect: false, gapTag: "glossa-b-gym.argument-vs-evidence" },
-          ],
-        },
-        {
-          id: "q4-summary-opinion",
-          textEl: "Σου ζητούν περίληψη ενός άρθρου. Τι πρέπει να αποφύγεις;",
-          textEn: "You're asked to summarize an article. What should you avoid?",
-          options: [
-            { textEl: "Να προσθέσεις τη δική σου προσωπική άποψη πάνω στο θέμα.", textEn: "Adding your own personal opinion on the topic.", isCorrect: true },
-            { textEl: "Να αναδιατυπώσεις τις κύριες ιδέες με δικά σου λόγια.", textEn: "Reformulating the main ideas in your own words.", isCorrect: false, gapTag: "glossa-b-gym.summary-vs-opinion" },
-            { textEl: "Να κρατήσεις μόνο τα σημαντικά σημεία.", textEn: "Keeping only the important points.", isCorrect: false, gapTag: "glossa-b-gym.summary-vs-opinion" },
-          ],
-        },
+      "id": "glossa-b-gymnasiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα, Β' Γυμνασίου",
+      "subjectLabelEn": "Modern Greek Language, 8th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Μάθησης",
+      "titleEn": "The Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-intro-function",
+          "textEl": "Τι πρέπει να κάνει ο πρόλογος ενός δοκιμίου;",
+          "textEn": "What should an essay's introduction do?",
+          "options": [
+            {
+              "textEl": "Να εισάγει το θέμα και να δηλώνει τη θέση, χωρίς πλήρη ανάλυση.",
+              "textEn": "Introduce the topic and state the position, without a full analysis.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Να αναλύει όλα τα επιχειρήματα με λεπτομέρειες.",
+              "textEn": "Analyze all the arguments in detail.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.essay-intro-function"
+            },
+            {
+              "textEl": "Να είναι το μεγαλύτερο μέρος του κειμένου.",
+              "textEn": "Be the longest part of the text.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.essay-intro-function"
+            }
+          ]
+        },
+        {
+          "id": "q2-text-purpose",
+          "textEl": "Γράφεις επιστολή διαμαρτυρίας προς τον δήμο. Τι ύφος ταιριάζει;",
+          "textEn": "You're writing a complaint letter to the municipality. What register fits?",
+          "options": [
+            {
+              "textEl": "Επίσημο, με σαφή αίτημα.",
+              "textEn": "Formal, with a clear request.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Καθημερινό, σαν να μιλάς σε φίλο.",
+              "textEn": "Casual, as if talking to a friend.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.text-types-purpose"
+            },
+            {
+              "textEl": "Δεν έχει σημασία το ύφος.",
+              "textEn": "Register doesn't matter.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.text-types-purpose"
+            }
+          ]
+        },
+        {
+          "id": "q3-argument-evidence",
+          "textEl": "«Το σχολείο μας χρειάζεται περισσότερο πράσινο» είναι επιχείρημα. Ποιο από τα παρακάτω είναι το τεκμήριο που το στηρίζει;",
+          "textEn": "'Our school needs more greenery' is the argument. Which is the evidence that supports it?",
+          "options": [
+            {
+              "textEl": "«Έρευνα δείχνει ότι ο πράσινος χώρος μειώνει το άγχος των μαθητών κατά 20%.»",
+              "textEn": "'Research shows green space reduces student stress by 20%.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Το σχολείο μας χρειάζεται περισσότερο πράσινο.»",
+              "textEn": "'Our school needs more greenery.' (the claim itself)",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.argument-vs-evidence"
+            },
+            {
+              "textEl": "«Μου αρέσει το πράσινο χρώμα.»",
+              "textEn": "'I like the color green.'",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.argument-vs-evidence"
+            }
+          ]
+        },
+        {
+          "id": "q4-summary-opinion",
+          "textEl": "Σου ζητούν περίληψη ενός άρθρου. Τι πρέπει να αποφύγεις;",
+          "textEn": "You're asked to summarize an article. What should you avoid?",
+          "options": [
+            {
+              "textEl": "Να προσθέσεις τη δική σου προσωπική άποψη πάνω στο θέμα.",
+              "textEn": "Adding your own personal opinion on the topic.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Να αναδιατυπώσεις τις κύριες ιδέες με δικά σου λόγια.",
+              "textEn": "Reformulating the main ideas in your own words.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.summary-vs-opinion"
+            },
+            {
+              "textEl": "Να κρατήσεις μόνο τα σημαντικά σημεία.",
+              "textEn": "Keeping only the important points.",
+              "isCorrect": false,
+              "gapTag": "glossa-b-gym.summary-vs-opinion"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-b-gymnasiou": {
-      id: "istoria-b-gymnasiou",
-      grades: ["b"],
-      subjectLabelEl: "Ιστορία, Β' Γυμνασίου (Ελληνιστική - Μεσαιωνική Περίοδος)",
-      subjectLabelEn: "History, 8th Grade (Hellenistic - Medieval Period)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Ιστορίας",
-      titleEn: "The History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-hellenistic",
-          textEl: "Ο ελληνιστικός πολιτισμός προέκυψε από...",
-          textEn: "Hellenistic culture arose from...",
-          options: [
-            { textEl: "Τη μείξη ελληνικών και ανατολικών στοιχείων μετά τις κατακτήσεις του Αλεξάνδρου.", textEn: "The blending of Greek and Eastern elements after Alexander's conquests.", isCorrect: true },
-            { textEl: "Την πλήρη απομόνωση της Ελλάδας από την Ανατολή.", textEn: "Greece's complete isolation from the East.", isCorrect: false, gapTag: "istoria-b-gym.hellenistic-fusion" },
-            { textEl: "Τη ρωμαϊκή κατάκτηση της Αιγύπτου.", textEn: "The Roman conquest of Egypt.", isCorrect: false, gapTag: "istoria-b-gym.hellenistic-fusion" },
-          ],
-        },
-        {
-          id: "q2-rome-greece",
-          textEl: "Όταν η Ελλάδα έγινε ρωμαϊκή επαρχία...",
-          textEn: "When Greece became a Roman province...",
-          options: [
-            { textEl: "Ο ελληνικός πολιτισμός συνέχισε να επηρεάζει έντονα τη Ρώμη.", textEn: "Greek culture continued to strongly influence Rome.", isCorrect: true },
-            { textEl: "Κάθε ίχνος ελληνικού πολιτισμού εξαφανίστηκε αμέσως.", textEn: "Every trace of Greek culture disappeared immediately.", isCorrect: false, gapTag: "istoria-b-gym.rome-greece-conquest" },
-            { textEl: "Η Ρώμη έγινε ελληνική επαρχία.", textEn: "Rome became a Greek province.", isCorrect: false, gapTag: "istoria-b-gym.rome-greece-conquest" },
-          ],
-        },
-        {
-          id: "q3-byzantium-shift",
-          textEl: "Η ίδρυση της Κωνσταντινούπολης συνδέεται με...",
-          textEn: "The founding of Constantinople is connected to...",
-          options: [
-            { textEl: "Τη μετατόπιση του κέντρου βάρους της Ρωμαϊκής Αυτοκρατορίας προς την Ανατολή.", textEn: "The shift of the Roman Empire's center of gravity to the East.", isCorrect: true },
-            { textEl: "Το τέλος της Ρωμαϊκής Αυτοκρατορίας.", textEn: "The end of the Roman Empire.", isCorrect: false, gapTag: "istoria-b-gym.byzantium-transition" },
-            { textEl: "Την ίδρυση της αρχαίας Αθήνας.", textEn: "The founding of ancient Athens.", isCorrect: false, gapTag: "istoria-b-gym.byzantium-transition" },
-          ],
-        },
-        {
-          id: "q4-feudalism",
-          textEl: "Στο φεουδαρχικό σύστημα της μεσαιωνικής Δυτικής Ευρώπης...",
-          textEn: "In the feudal system of medieval Western Europe...",
-          options: [
-            { textEl: "Ο υποτελής έπαιρνε γη από τον άρχοντα σε αντάλλαγμα υπηρεσιών/υποταγής.", textEn: "The vassal received land from the lord in exchange for service/loyalty.", isCorrect: true },
-            { textEl: "Όλοι οι άνθρωποι είχαν ίση πρόσβαση στη γη.", textEn: "All people had equal access to land.", isCorrect: false, gapTag: "istoria-b-gym.medieval-feudalism" },
-            { textEl: "Δεν υπήρχε καμία σχέση ανάμεσα σε άρχοντα και υποτελή.", textEn: "There was no relationship between lord and vassal.", isCorrect: false, gapTag: "istoria-b-gym.medieval-feudalism" },
-          ],
-        },
+      "id": "istoria-b-gymnasiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Ιστορία, Β' Γυμνασίου (Ελληνιστική - Μεσαιωνική Περίοδος)",
+      "subjectLabelEn": "History, 8th Grade (Hellenistic - Medieval Period)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Ιστορίας",
+      "titleEn": "The History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-hellenistic",
+          "textEl": "Ο ελληνιστικός πολιτισμός προέκυψε από...",
+          "textEn": "Hellenistic culture arose from...",
+          "options": [
+            {
+              "textEl": "Τη μείξη ελληνικών και ανατολικών στοιχείων μετά τις κατακτήσεις του Αλεξάνδρου.",
+              "textEn": "The blending of Greek and Eastern elements after Alexander's conquests.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Την πλήρη απομόνωση της Ελλάδας από την Ανατολή.",
+              "textEn": "Greece's complete isolation from the East.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.hellenistic-fusion"
+            },
+            {
+              "textEl": "Τη ρωμαϊκή κατάκτηση της Αιγύπτου.",
+              "textEn": "The Roman conquest of Egypt.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.hellenistic-fusion"
+            }
+          ]
+        },
+        {
+          "id": "q2-rome-greece",
+          "textEl": "Όταν η Ελλάδα έγινε ρωμαϊκή επαρχία...",
+          "textEn": "When Greece became a Roman province...",
+          "options": [
+            {
+              "textEl": "Ο ελληνικός πολιτισμός συνέχισε να επηρεάζει έντονα τη Ρώμη.",
+              "textEn": "Greek culture continued to strongly influence Rome.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Κάθε ίχνος ελληνικού πολιτισμού εξαφανίστηκε αμέσως.",
+              "textEn": "Every trace of Greek culture disappeared immediately.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.rome-greece-conquest"
+            },
+            {
+              "textEl": "Η Ρώμη έγινε ελληνική επαρχία.",
+              "textEn": "Rome became a Greek province.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.rome-greece-conquest"
+            }
+          ]
+        },
+        {
+          "id": "q3-byzantium-shift",
+          "textEl": "Η ίδρυση της Κωνσταντινούπολης συνδέεται με...",
+          "textEn": "The founding of Constantinople is connected to...",
+          "options": [
+            {
+              "textEl": "Τη μετατόπιση του κέντρου βάρους της Ρωμαϊκής Αυτοκρατορίας προς την Ανατολή.",
+              "textEn": "The shift of the Roman Empire's center of gravity to the East.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το τέλος της Ρωμαϊκής Αυτοκρατορίας.",
+              "textEn": "The end of the Roman Empire.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.byzantium-transition"
+            },
+            {
+              "textEl": "Την ίδρυση της αρχαίας Αθήνας.",
+              "textEn": "The founding of ancient Athens.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.byzantium-transition"
+            }
+          ]
+        },
+        {
+          "id": "q4-feudalism",
+          "textEl": "Στο φεουδαρχικό σύστημα της μεσαιωνικής Δυτικής Ευρώπης...",
+          "textEn": "In the feudal system of medieval Western Europe...",
+          "options": [
+            {
+              "textEl": "Ο υποτελής έπαιρνε γη από τον άρχοντα σε αντάλλαγμα υπηρεσιών/υποταγής.",
+              "textEn": "The vassal received land from the lord in exchange for service/loyalty.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Όλοι οι άνθρωποι είχαν ίση πρόσβαση στη γη.",
+              "textEn": "All people had equal access to land.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.medieval-feudalism"
+            },
+            {
+              "textEl": "Δεν υπήρχε καμία σχέση ανάμεσα σε άρχοντα και υποτελή.",
+              "textEn": "There was no relationship between lord and vassal.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-gym.medieval-feudalism"
+            }
+          ]
+        }
+      ]
     },
-
     "english-b-gymnasiou": {
-      id: "english-b-gymnasiou",
-      grades: ["b"],
-      subjectLabelEl: "Αγγλικά, Β' Γυμνασίου (B1)",
-      subjectLabelEn: "English, 8th Grade (B1)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών",
-      titleEn: "The English Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-present-perfect",
-          textEl: "'I ___ Paris. It was amazing!' (χωρίς συγκεκριμένο χρόνο). Ποιο ταιριάζει;",
-          textEn: "'I ___ Paris. It was amazing!' (no specific time). Which fits?",
-          options: [
-            { textEl: "have visited", textEn: "have visited", isCorrect: true },
-            { textEl: "visited", textEn: "visited", isCorrect: false, gapTag: "efl-b-gym.present-perfect-intro" },
-            { textEl: "visit", textEn: "visit", isCorrect: false, gapTag: "efl-b-gym.present-perfect-intro" },
-          ],
-        },
-        {
-          id: "q2-must-should",
-          textEl: "'You ___ wear a seatbelt, it's the law.' Ποιο ταιριάζει;",
-          textEn: "'You ___ wear a seatbelt, it's the law.' Which fits?",
-          options: [
-            { textEl: "must", textEn: "must", isCorrect: true },
-            { textEl: "should", textEn: "should", isCorrect: false, gapTag: "efl-b-gym.modals-obligation" },
-            { textEl: "could", textEn: "could", isCorrect: false, gapTag: "efl-b-gym.modals-obligation" },
-          ],
-        },
-        {
-          id: "q3-passive",
-          textEl: "Δεν ξέρουμε ποιος έκτισε το κάστρο. Ποια πρόταση ταιριάζει;",
-          textEn: "We don't know who built the castle. Which sentence fits?",
-          options: [
-            { textEl: "'The castle was built in 1200.'", textEn: "'The castle was built in 1200.'", isCorrect: true },
-            { textEl: "'Someone unknown built the castle in 1200 and we don't know who.'", textEn: "'Someone unknown built the castle in 1200 and we don't know who.'", isCorrect: false, gapTag: "efl-b-gym.passive-voice-intro" },
-            { textEl: "'The castle builds in 1200.'", textEn: "'The castle builds in 1200.'", isCorrect: false, gapTag: "efl-b-gym.passive-voice-intro" },
-          ],
-        },
-        {
-          id: "q4-relative",
-          textEl: "'The woman ___ lives next door is a doctor.' Ποιο ταιριάζει;",
-          textEn: "'The woman ___ lives next door is a doctor.' Which fits?",
-          options: [
-            { textEl: "who", textEn: "who", isCorrect: true },
-            { textEl: "which", textEn: "which", isCorrect: false, gapTag: "efl-b-gym.relative-clauses" },
-            { textEl: "what", textEn: "what", isCorrect: false, gapTag: "efl-b-gym.relative-clauses" },
-          ],
-        },
+      "id": "english-b-gymnasiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Αγγλικά, Β' Γυμνασίου (B1)",
+      "subjectLabelEn": "English, 8th Grade (B1)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών",
+      "titleEn": "The English Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-present-perfect",
+          "textEl": "'I ___ Paris. It was amazing!' (χωρίς συγκεκριμένο χρόνο). Ποιο ταιριάζει;",
+          "textEn": "'I ___ Paris. It was amazing!' (no specific time). Which fits?",
+          "options": [
+            {
+              "textEl": "have visited",
+              "textEn": "have visited",
+              "isCorrect": true
+            },
+            {
+              "textEl": "visited",
+              "textEn": "visited",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.present-perfect-intro"
+            },
+            {
+              "textEl": "visit",
+              "textEn": "visit",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.present-perfect-intro"
+            }
+          ]
+        },
+        {
+          "id": "q2-must-should",
+          "textEl": "'You ___ wear a seatbelt, it's the law.' Ποιο ταιριάζει;",
+          "textEn": "'You ___ wear a seatbelt, it's the law.' Which fits?",
+          "options": [
+            {
+              "textEl": "must",
+              "textEn": "must",
+              "isCorrect": true
+            },
+            {
+              "textEl": "should",
+              "textEn": "should",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.modals-obligation"
+            },
+            {
+              "textEl": "could",
+              "textEn": "could",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.modals-obligation"
+            }
+          ]
+        },
+        {
+          "id": "q3-passive",
+          "textEl": "Δεν ξέρουμε ποιος έκτισε το κάστρο. Ποια πρόταση ταιριάζει;",
+          "textEn": "We don't know who built the castle. Which sentence fits?",
+          "options": [
+            {
+              "textEl": "'The castle was built in 1200.'",
+              "textEn": "'The castle was built in 1200.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "'Someone unknown built the castle in 1200 and we don't know who.'",
+              "textEn": "'Someone unknown built the castle in 1200 and we don't know who.'",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.passive-voice-intro"
+            },
+            {
+              "textEl": "'The castle builds in 1200.'",
+              "textEn": "'The castle builds in 1200.'",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.passive-voice-intro"
+            }
+          ]
+        },
+        {
+          "id": "q4-relative",
+          "textEl": "'The woman ___ lives next door is a doctor.' Ποιο ταιριάζει;",
+          "textEn": "'The woman ___ lives next door is a doctor.' Which fits?",
+          "options": [
+            {
+              "textEl": "who",
+              "textEn": "who",
+              "isCorrect": true
+            },
+            {
+              "textEl": "which",
+              "textEn": "which",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.relative-clauses"
+            },
+            {
+              "textEl": "what",
+              "textEn": "what",
+              "isCorrect": false,
+              "gapTag": "efl-b-gym.relative-clauses"
+            }
+          ]
+        }
+      ]
     },
-
     "fysiki-g-gymnasiou": {
-      id: "fysiki-g-gymnasiou",
-      grades: ["c"],
-      subjectLabelEl: "Φυσική, Γ' Γυμνασίου",
-      subjectLabelEn: "Physics, 9th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Φυσικής",
-      titleEn: "The Physics Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για ηλεκτρισμό και κίνηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about electricity and motion. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-ohms-law",
-          textEl: "Αν αυξηθεί η αντίσταση σε ένα κύκλωμα με σταθερή τάση, τι γίνεται η ένταση;",
-          textEn: "If resistance increases in a circuit with constant voltage, what happens to the current?",
-          options: [
-            { textEl: "Μειώνεται.", textEn: "It decreases.", isCorrect: true },
-            { textEl: "Αυξάνεται.", textEn: "It increases.", isCorrect: false, gapTag: "physics-g-gym.ohms-law" },
-            { textEl: "Παραμένει ίδια.", textEn: "It stays the same.", isCorrect: false, gapTag: "physics-g-gym.ohms-law" },
-          ],
-        },
-        {
-          id: "q2-speed",
-          textEl: "Ένα αυτοκίνητο διανύει 150 χλμ σε 3 ώρες. Ποια είναι η μέση ταχύτητά του;",
-          textEn: "A car travels 150 km in 3 hours. What is its average speed?",
-          options: [
-            { textEl: "50 χλμ/ώρα", textEn: "50 km/h", isCorrect: true },
-            { textEl: "450 χλμ/ώρα", textEn: "450 km/h", isCorrect: false, gapTag: "physics-g-gym.speed-velocity-formula" },
-            { textEl: "3 χλμ/ώρα", textEn: "3 km/h", isCorrect: false, gapTag: "physics-g-gym.speed-velocity-formula" },
-          ],
-        },
-        {
-          id: "q3-energy",
-          textEl: "Σε μια ηλεκτρική κουζίνα, η ηλεκτρική ενέργεια μετατρέπεται κυρίως σε...",
-          textEn: "In an electric stove, electrical energy is mainly converted into...",
-          options: [
-            { textEl: "Θερμική ενέργεια.", textEn: "Thermal (heat) energy.", isCorrect: true },
-            { textEl: "Χημική ενέργεια.", textEn: "Chemical energy.", isCorrect: false, gapTag: "physics-g-gym.energy-transformation" },
-            { textEl: "Πυρηνική ενέργεια.", textEn: "Nuclear energy.", isCorrect: false, gapTag: "physics-g-gym.energy-transformation" },
-          ],
-        },
+      "id": "fysiki-g-gymnasiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Φυσική, Γ' Γυμνασίου",
+      "subjectLabelEn": "Physics, 9th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Φυσικής",
+      "titleEn": "The Physics Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για ηλεκτρισμό και κίνηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about electricity and motion. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-ohms-law",
+          "textEl": "Αν αυξηθεί η αντίσταση σε ένα κύκλωμα με σταθερή τάση, τι γίνεται η ένταση;",
+          "textEn": "If resistance increases in a circuit with constant voltage, what happens to the current?",
+          "options": [
+            {
+              "textEl": "Μειώνεται.",
+              "textEn": "It decreases.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Αυξάνεται.",
+              "textEn": "It increases.",
+              "isCorrect": false,
+              "gapTag": "physics-g-gym.ohms-law"
+            },
+            {
+              "textEl": "Παραμένει ίδια.",
+              "textEn": "It stays the same.",
+              "isCorrect": false,
+              "gapTag": "physics-g-gym.ohms-law"
+            }
+          ]
+        },
+        {
+          "id": "q2-speed",
+          "textEl": "Ένα αυτοκίνητο διανύει 150 χλμ σε 3 ώρες. Ποια είναι η μέση ταχύτητά του;",
+          "textEn": "A car travels 150 km in 3 hours. What is its average speed?",
+          "options": [
+            {
+              "textEl": "50 χλμ/ώρα",
+              "textEn": "50 km/h",
+              "isCorrect": true
+            },
+            {
+              "textEl": "450 χλμ/ώρα",
+              "textEn": "450 km/h",
+              "isCorrect": false,
+              "gapTag": "physics-g-gym.speed-velocity-formula"
+            },
+            {
+              "textEl": "3 χλμ/ώρα",
+              "textEn": "3 km/h",
+              "isCorrect": false,
+              "gapTag": "physics-g-gym.speed-velocity-formula"
+            }
+          ]
+        },
+        {
+          "id": "q3-energy",
+          "textEl": "Σε μια ηλεκτρική κουζίνα, η ηλεκτρική ενέργεια μετατρέπεται κυρίως σε...",
+          "textEn": "In an electric stove, electrical energy is mainly converted into...",
+          "options": [
+            {
+              "textEl": "Θερμική ενέργεια.",
+              "textEn": "Thermal (heat) energy.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Χημική ενέργεια.",
+              "textEn": "Chemical energy.",
+              "isCorrect": false,
+              "gapTag": "physics-g-gym.energy-transformation"
+            },
+            {
+              "textEl": "Πυρηνική ενέργεια.",
+              "textEn": "Nuclear energy.",
+              "isCorrect": false,
+              "gapTag": "physics-g-gym.energy-transformation"
+            }
+          ]
+        }
+      ]
     },
-
     "chimeia-g-gymnasiou": {
-      id: "chimeia-g-gymnasiou",
-      grades: ["c"],
-      subjectLabelEl: "Χημεία, Γ' Γυμνασίου",
-      subjectLabelEn: "Chemistry, 9th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Χημείας",
-      titleEn: "The Chemistry Learning Compass",
-      introEl: "3 σύντομες ερωτήσεις εισαγωγής στη Χημεία. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "3 short introductory Chemistry questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-element-compound",
-          textEl: "Το νερό (H₂O) είναι...",
-          textEn: "Water (H₂O) is...",
-          options: [
-            { textEl: "Μια χημική ένωση, από δύο διαφορετικά στοιχεία.", textEn: "A chemical compound, made of two different elements.", isCorrect: true },
-            { textEl: "Ένα χημικό στοιχείο.", textEn: "A chemical element.", isCorrect: false, gapTag: "chimeia-g-gym.element-vs-compound" },
-            { textEl: "Ένα μείγμα χωρίς σταθερή σύσταση.", textEn: "A mixture with no fixed composition.", isCorrect: false, gapTag: "chimeia-g-gym.element-vs-compound" },
-          ],
-        },
-        {
-          id: "q2-mixture-compound",
-          textEl: "Η σαλάτα (μαρούλι + ντομάτα + λάδι) είναι...",
-          textEn: "A salad (lettuce + tomato + oil) is...",
-          options: [
-            { textEl: "Ένα μείγμα, κάθε συστατικό κρατά τις ιδιότητές του.", textEn: "A mixture, each ingredient keeps its own properties.", isCorrect: true },
-            { textEl: "Μια χημική ένωση με νέες ιδιότητες.", textEn: "A chemical compound with new properties.", isCorrect: false, gapTag: "chimeia-g-gym.mixture-vs-compound" },
-            { textEl: "Ένα χημικό στοιχείο.", textEn: "A chemical element.", isCorrect: false, gapTag: "chimeia-g-gym.mixture-vs-compound" },
-          ],
-        },
-        {
-          id: "q3-atom-structure",
-          textEl: "Πού βρίσκονται τα ηλεκτρόνια σε ένα άτομο;",
-          textEn: "Where are the electrons located in an atom?",
-          options: [
-            { textEl: "Γύρω από τον πυρήνα.", textEn: "Around the nucleus.", isCorrect: true },
-            { textEl: "Μέσα στον πυρήνα, μαζί με τα πρωτόνια.", textEn: "Inside the nucleus, along with the protons.", isCorrect: false, gapTag: "chimeia-g-gym.atom-structure" },
-            { textEl: "Δεν έχουν συγκεκριμένη θέση.", textEn: "They have no specific location.", isCorrect: false, gapTag: "chimeia-g-gym.atom-structure" },
-          ],
-        },
+      "id": "chimeia-g-gymnasiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Χημεία, Γ' Γυμνασίου",
+      "subjectLabelEn": "Chemistry, 9th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Χημείας",
+      "titleEn": "The Chemistry Learning Compass",
+      "introEl": "3 σύντομες ερωτήσεις εισαγωγής στη Χημεία. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "3 short introductory Chemistry questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-element-compound",
+          "textEl": "Το νερό (H₂O) είναι...",
+          "textEn": "Water (H₂O) is...",
+          "options": [
+            {
+              "textEl": "Μια χημική ένωση, από δύο διαφορετικά στοιχεία.",
+              "textEn": "A chemical compound, made of two different elements.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ένα χημικό στοιχείο.",
+              "textEn": "A chemical element.",
+              "isCorrect": false,
+              "gapTag": "chimeia-g-gym.element-vs-compound"
+            },
+            {
+              "textEl": "Ένα μείγμα χωρίς σταθερή σύσταση.",
+              "textEn": "A mixture with no fixed composition.",
+              "isCorrect": false,
+              "gapTag": "chimeia-g-gym.element-vs-compound"
+            }
+          ]
+        },
+        {
+          "id": "q2-mixture-compound",
+          "textEl": "Η σαλάτα (μαρούλι + ντομάτα + λάδι) είναι...",
+          "textEn": "A salad (lettuce + tomato + oil) is...",
+          "options": [
+            {
+              "textEl": "Ένα μείγμα, κάθε συστατικό κρατά τις ιδιότητές του.",
+              "textEn": "A mixture, each ingredient keeps its own properties.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μια χημική ένωση με νέες ιδιότητες.",
+              "textEn": "A chemical compound with new properties.",
+              "isCorrect": false,
+              "gapTag": "chimeia-g-gym.mixture-vs-compound"
+            },
+            {
+              "textEl": "Ένα χημικό στοιχείο.",
+              "textEn": "A chemical element.",
+              "isCorrect": false,
+              "gapTag": "chimeia-g-gym.mixture-vs-compound"
+            }
+          ]
+        },
+        {
+          "id": "q3-atom-structure",
+          "textEl": "Πού βρίσκονται τα ηλεκτρόνια σε ένα άτομο;",
+          "textEn": "Where are the electrons located in an atom?",
+          "options": [
+            {
+              "textEl": "Γύρω από τον πυρήνα.",
+              "textEn": "Around the nucleus.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μέσα στον πυρήνα, μαζί με τα πρωτόνια.",
+              "textEn": "Inside the nucleus, along with the protons.",
+              "isCorrect": false,
+              "gapTag": "chimeia-g-gym.atom-structure"
+            },
+            {
+              "textEl": "Δεν έχουν συγκεκριμένη θέση.",
+              "textEn": "They have no specific location.",
+              "isCorrect": false,
+              "gapTag": "chimeia-g-gym.atom-structure"
+            }
+          ]
+        }
+      ]
     },
-
     "biologia-a-gymnasiou": {
-      id: "biologia-a-gymnasiou",
-      grades: ["a"],
-      subjectLabelEl: "Βιολογία, Α' Γυμνασίου",
-      subjectLabelEn: "Biology, 7th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Βιολογίας",
-      titleEn: "The Biology Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για το κύτταρο και τους οργανισμούς. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about cells and organisms. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-plant-animal-cell",
-          textEl: "Ποιο οργανίδιο υπάρχει στο φυτικό κύτταρο αλλά ΟΧΙ στο ζωικό;",
-          textEn: "Which organelle exists in a plant cell but NOT in an animal cell?",
-          options: [
-            { textEl: "Ο χλωροπλάστης.", textEn: "The chloroplast.", isCorrect: true },
-            { textEl: "Ο πυρήνας.", textEn: "The nucleus.", isCorrect: false, gapTag: "biologia-a-gym.plant-animal-cell" },
-            { textEl: "Το μιτοχόνδριο.", textEn: "The mitochondrion.", isCorrect: false, gapTag: "biologia-a-gym.plant-animal-cell" },
-          ],
-        },
-        {
-          id: "q2-unicellular-nutrition",
-          textEl: "Πώς τρέφεται η αμοιβάδα, ένας μονοκύτταρος οργανισμός;",
-          textEn: "How does an amoeba, a unicellular organism, feed itself?",
-          options: [
-            { textEl: "Περιβάλλει την τροφή με ψευδοπόδια και την «καταπίνει».", textEn: "It surrounds food with pseudopods and 'engulfs' it.", isCorrect: true },
-            { textEl: "Έχει στόμα σαν τον άνθρωπο.", textEn: "It has a mouth like a human.", isCorrect: false, gapTag: "biologia-a-gym.unicellular-nutrition" },
-            { textEl: "Δεν τρέφεται καθόλου.", textEn: "It doesn't feed at all.", isCorrect: false, gapTag: "biologia-a-gym.unicellular-nutrition" },
-          ],
-        },
-        {
-          id: "q3-adaptation",
-          textEl: "Γιατί οι καμήλες έχουν καμπούρα;",
-          textEn: "Why do camels have a hump?",
-          options: [
-            { textEl: "Είναι προσαρμογή για αποθήκευση λίπους, βοηθάει την επιβίωση σε άνυδρα περιβάλλοντα.", textEn: "It's an adaptation for storing fat, helping survival in arid environments.", isCorrect: true },
-            { textEl: "Είναι τυχαίο χαρακτηριστικό χωρίς κανέναν λόγο.", textEn: "It's a random trait with no purpose.", isCorrect: false, gapTag: "biologia-a-gym.adaptation-misconception" },
-            { textEl: "Βοηθάει μόνο στην εμφάνιση.", textEn: "It's just for appearance.", isCorrect: false, gapTag: "biologia-a-gym.adaptation-misconception" },
-          ],
-        },
-        {
-          id: "q4-plant-digestion",
-          textEl: "Γιατί τα φυτά δεν έχουν πεπτικό σύστημα σαν τα ζώα;",
-          textEn: "Why don't plants have a digestive system like animals?",
-          options: [
-            { textEl: "Παράγουν τη δική τους τροφή μέσω φωτοσύνθεσης.", textEn: "They produce their own food through photosynthesis.", isCorrect: true },
-            { textEl: "Δεν χρειάζονται καθόλου τροφή.", textEn: "They don't need food at all.", isCorrect: false, gapTag: "biologia-a-gym.plant-vs-animal-digestion" },
-            { textEl: "Τρέφονται από το χώμα σαν πεπτικό σύστημα.", textEn: "They're fed by the soil like a digestive system.", isCorrect: false, gapTag: "biologia-a-gym.plant-vs-animal-digestion" },
-          ],
-        },
-        {
-          id: "q5-cell-membrane",
-          textEl: "Ποιος είναι ο ρόλος της κυτταρικής μεμβράνης;",
-          textEn: "What is the role of the cell membrane?",
-          options: [
-            { textEl: "Ελέγχει τι μπαίνει και τι βγαίνει από το κύτταρο.", textEn: "It controls what enters and exits the cell.", isCorrect: true },
-            { textEl: "Είναι απλώς ένα περίβλημα χωρίς λειτουργία.", textEn: "It's just a passive wrapper with no function.", isCorrect: false, gapTag: "biologia-a-gym.cell-membrane-function" },
-            { textEl: "Παράγει ενέργεια για το κύτταρο.", textEn: "It produces energy for the cell.", isCorrect: false, gapTag: "biologia-a-gym.cell-membrane-function" },
-          ],
-        },
+      "id": "biologia-a-gymnasiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Βιολογία, Α' Γυμνασίου",
+      "subjectLabelEn": "Biology, 7th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Βιολογίας",
+      "titleEn": "The Biology Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για το κύτταρο και τους οργανισμούς. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about cells and organisms. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-plant-animal-cell",
+          "textEl": "Ποιο οργανίδιο υπάρχει στο φυτικό κύτταρο αλλά ΟΧΙ στο ζωικό;",
+          "textEn": "Which organelle exists in a plant cell but NOT in an animal cell?",
+          "options": [
+            {
+              "textEl": "Ο χλωροπλάστης.",
+              "textEn": "The chloroplast.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο πυρήνας.",
+              "textEn": "The nucleus.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.plant-animal-cell"
+            },
+            {
+              "textEl": "Το μιτοχόνδριο.",
+              "textEn": "The mitochondrion.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.plant-animal-cell"
+            }
+          ]
+        },
+        {
+          "id": "q2-unicellular-nutrition",
+          "textEl": "Πώς τρέφεται η αμοιβάδα, ένας μονοκύτταρος οργανισμός;",
+          "textEn": "How does an amoeba, a unicellular organism, feed itself?",
+          "options": [
+            {
+              "textEl": "Περιβάλλει την τροφή με ψευδοπόδια και την «καταπίνει».",
+              "textEn": "It surrounds food with pseudopods and 'engulfs' it.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Έχει στόμα σαν τον άνθρωπο.",
+              "textEn": "It has a mouth like a human.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.unicellular-nutrition"
+            },
+            {
+              "textEl": "Δεν τρέφεται καθόλου.",
+              "textEn": "It doesn't feed at all.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.unicellular-nutrition"
+            }
+          ]
+        },
+        {
+          "id": "q3-adaptation",
+          "textEl": "Γιατί οι καμήλες έχουν καμπούρα;",
+          "textEn": "Why do camels have a hump?",
+          "options": [
+            {
+              "textEl": "Είναι προσαρμογή για αποθήκευση λίπους, βοηθάει την επιβίωση σε άνυδρα περιβάλλοντα.",
+              "textEn": "It's an adaptation for storing fat, helping survival in arid environments.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Είναι τυχαίο χαρακτηριστικό χωρίς κανέναν λόγο.",
+              "textEn": "It's a random trait with no purpose.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.adaptation-misconception"
+            },
+            {
+              "textEl": "Βοηθάει μόνο στην εμφάνιση.",
+              "textEn": "It's just for appearance.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.adaptation-misconception"
+            }
+          ]
+        },
+        {
+          "id": "q4-plant-digestion",
+          "textEl": "Γιατί τα φυτά δεν έχουν πεπτικό σύστημα σαν τα ζώα;",
+          "textEn": "Why don't plants have a digestive system like animals?",
+          "options": [
+            {
+              "textEl": "Παράγουν τη δική τους τροφή μέσω φωτοσύνθεσης.",
+              "textEn": "They produce their own food through photosynthesis.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Δεν χρειάζονται καθόλου τροφή.",
+              "textEn": "They don't need food at all.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.plant-vs-animal-digestion"
+            },
+            {
+              "textEl": "Τρέφονται από το χώμα σαν πεπτικό σύστημα.",
+              "textEn": "They're fed by the soil like a digestive system.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.plant-vs-animal-digestion"
+            }
+          ]
+        },
+        {
+          "id": "q5-cell-membrane",
+          "textEl": "Ποιος είναι ο ρόλος της κυτταρικής μεμβράνης;",
+          "textEn": "What is the role of the cell membrane?",
+          "options": [
+            {
+              "textEl": "Ελέγχει τι μπαίνει και τι βγαίνει από το κύτταρο.",
+              "textEn": "It controls what enters and exits the cell.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Είναι απλώς ένα περίβλημα χωρίς λειτουργία.",
+              "textEn": "It's just a passive wrapper with no function.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.cell-membrane-function"
+            },
+            {
+              "textEl": "Παράγει ενέργεια για το κύτταρο.",
+              "textEn": "It produces energy for the cell.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-gym.cell-membrane-function"
+            }
+          ]
+        }
+      ]
     },
-
     "biologia-b-gymnasiou": {
-      id: "biologia-b-gymnasiou",
-      grades: ["b"],
-      subjectLabelEl: "Βιολογία, Β' Γυμνασίου",
-      subjectLabelEn: "Biology, 8th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Βιολογίας",
-      titleEn: "The Biology Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για τα συστήματα του σώματος. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about body systems. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-gas-exchange",
-          textEl: "Ποιο όργανο είναι υπεύθυνο για την ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα;",
-          textEn: "Which organ is responsible for oxygen-carbon dioxide exchange?",
-          options: [
-            { textEl: "Οι πνεύμονες.", textEn: "The lungs.", isCorrect: true },
-            { textEl: "Η καρδιά.", textEn: "The heart.", isCorrect: false, gapTag: "biologia-b-gym.gas-exchange-organ" },
-            { textEl: "Το συκώτι.", textEn: "The liver.", isCorrect: false, gapTag: "biologia-b-gym.gas-exchange-organ" },
-          ],
-        },
-        {
-          id: "q2-heart-role",
-          textEl: "Ο κύριος ρόλος της καρδιάς είναι να...",
-          textEn: "The heart's main role is to...",
-          options: [
-            { textEl: "Αντλεί το αίμα σε όλο το σώμα.", textEn: "Pump blood throughout the body.", isCorrect: true },
-            { textEl: "Καθαρίζει το αίμα από τοξίνες.", textEn: "Clean toxins from the blood.", isCorrect: false, gapTag: "biologia-b-gym.heart-role" },
-            { textEl: "Παράγει οξυγόνο.", textEn: "Produce oxygen.", isCorrect: false, gapTag: "biologia-b-gym.heart-role" },
-          ],
-        },
-        {
-          id: "q3-blood-function",
-          textEl: "Τι μεταφέρει κυρίως το αίμα στο σώμα;",
-          textEn: "What does blood mainly transport in the body?",
-          options: [
-            { textEl: "Οξυγόνο, θρεπτικά συστατικά και απόβλητα.", textEn: "Oxygen, nutrients, and waste.", isCorrect: true },
-            { textEl: "Μόνο νερό.", textEn: "Only water.", isCorrect: false, gapTag: "biologia-b-gym.blood-function" },
-            { textEl: "Μόνο οξυγόνο.", textEn: "Only oxygen.", isCorrect: false, gapTag: "biologia-b-gym.blood-function" },
-          ],
-        },
-        {
-          id: "q4-producers",
-          textEl: "Σε ένα οικοσύστημα, τι είναι οι «παραγωγοί»;",
-          textEn: "In an ecosystem, what are 'producers'?",
-          options: [
-            { textEl: "Οργανισμοί (κυρίως φυτά) που παράγουν τροφή μέσω φωτοσύνθεσης.", textEn: "Organisms (mainly plants) that make food through photosynthesis.", isCorrect: true },
-            { textEl: "Οργανισμοί που τρώνε άλλα ζώα.", textEn: "Organisms that eat other animals.", isCorrect: false, gapTag: "biologia-b-gym.producer-definition" },
-            { textEl: "Οργανισμοί που αποσυνθέτουν νεκρή ύλη.", textEn: "Organisms that decompose dead matter.", isCorrect: false, gapTag: "biologia-b-gym.producer-definition" },
-          ],
-        },
-        {
-          id: "q5-nervous-system",
-          textEl: "Το νευρικό σύστημα βοηθάει τον οργανισμό κυρίως να...",
-          textEn: "The nervous system mainly helps the organism to...",
-          options: [
-            { textEl: "Αντιλαμβάνεται ερεθίσματα και ανταποκρίνεται γρήγορα.", textEn: "Perceive stimuli and respond quickly.", isCorrect: true },
-            { textEl: "Παράγει ενέργεια από την τροφή.", textEn: "Produce energy from food.", isCorrect: false, gapTag: "biologia-b-gym.nervous-system-role" },
-            { textEl: "Μεταφέρει οξυγόνο.", textEn: "Transport oxygen.", isCorrect: false, gapTag: "biologia-b-gym.nervous-system-role" },
-          ],
-        },
+      "id": "biologia-b-gymnasiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Βιολογία, Β' Γυμνασίου",
+      "subjectLabelEn": "Biology, 8th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Βιολογίας",
+      "titleEn": "The Biology Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για τα συστήματα του σώματος. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about body systems. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-gas-exchange",
+          "textEl": "Ποιο όργανο είναι υπεύθυνο για την ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα;",
+          "textEn": "Which organ is responsible for oxygen-carbon dioxide exchange?",
+          "options": [
+            {
+              "textEl": "Οι πνεύμονες.",
+              "textEn": "The lungs.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η καρδιά.",
+              "textEn": "The heart.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.gas-exchange-organ"
+            },
+            {
+              "textEl": "Το συκώτι.",
+              "textEn": "The liver.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.gas-exchange-organ"
+            }
+          ]
+        },
+        {
+          "id": "q2-heart-role",
+          "textEl": "Ο κύριος ρόλος της καρδιάς είναι να...",
+          "textEn": "The heart's main role is to...",
+          "options": [
+            {
+              "textEl": "Αντλεί το αίμα σε όλο το σώμα.",
+              "textEn": "Pump blood throughout the body.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Καθαρίζει το αίμα από τοξίνες.",
+              "textEn": "Clean toxins from the blood.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.heart-role"
+            },
+            {
+              "textEl": "Παράγει οξυγόνο.",
+              "textEn": "Produce oxygen.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.heart-role"
+            }
+          ]
+        },
+        {
+          "id": "q3-blood-function",
+          "textEl": "Τι μεταφέρει κυρίως το αίμα στο σώμα;",
+          "textEn": "What does blood mainly transport in the body?",
+          "options": [
+            {
+              "textEl": "Οξυγόνο, θρεπτικά συστατικά και απόβλητα.",
+              "textEn": "Oxygen, nutrients, and waste.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μόνο νερό.",
+              "textEn": "Only water.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.blood-function"
+            },
+            {
+              "textEl": "Μόνο οξυγόνο.",
+              "textEn": "Only oxygen.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.blood-function"
+            }
+          ]
+        },
+        {
+          "id": "q4-producers",
+          "textEl": "Σε ένα οικοσύστημα, τι είναι οι «παραγωγοί»;",
+          "textEn": "In an ecosystem, what are 'producers'?",
+          "options": [
+            {
+              "textEl": "Οργανισμοί (κυρίως φυτά) που παράγουν τροφή μέσω φωτοσύνθεσης.",
+              "textEn": "Organisms (mainly plants) that make food through photosynthesis.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Οργανισμοί που τρώνε άλλα ζώα.",
+              "textEn": "Organisms that eat other animals.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.producer-definition"
+            },
+            {
+              "textEl": "Οργανισμοί που αποσυνθέτουν νεκρή ύλη.",
+              "textEn": "Organisms that decompose dead matter.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.producer-definition"
+            }
+          ]
+        },
+        {
+          "id": "q5-nervous-system",
+          "textEl": "Το νευρικό σύστημα βοηθάει τον οργανισμό κυρίως να...",
+          "textEn": "The nervous system mainly helps the organism to...",
+          "options": [
+            {
+              "textEl": "Αντιλαμβάνεται ερεθίσματα και ανταποκρίνεται γρήγορα.",
+              "textEn": "Perceive stimuli and respond quickly.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Παράγει ενέργεια από την τροφή.",
+              "textEn": "Produce energy from food.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.nervous-system-role"
+            },
+            {
+              "textEl": "Μεταφέρει οξυγόνο.",
+              "textEn": "Transport oxygen.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-gym.nervous-system-role"
+            }
+          ]
+        }
+      ]
     },
-
     "biologia-g-gymnasiou": {
-      id: "biologia-g-gymnasiou",
-      grades: ["c"],
-      subjectLabelEl: "Βιολογία, Γ' Γυμνασίου",
-      subjectLabelEn: "Biology, 9th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Βιολογίας",
-      titleEn: "The Biology Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για κληρονομικότητα και οικοσυστήματα. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about heredity and ecosystems. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-dna-location",
-          textEl: "Το DNA βρίσκεται κυρίως...",
-          textEn: "DNA is mainly located...",
-          options: [
-            { textEl: "Μέσα στον πυρήνα του κυττάρου.", textEn: "Inside the cell nucleus.", isCorrect: true },
-            { textEl: "Έξω από το κύτταρο.", textEn: "Outside the cell.", isCorrect: false, gapTag: "biologia-g-gym.dna-location" },
-            { textEl: "Μόνο στα μυϊκά κύτταρα.", textEn: "Only in muscle cells.", isCorrect: false, gapTag: "biologia-g-gym.dna-location" },
-          ],
-        },
-        {
-          id: "q2-inheritance",
-          textEl: "Τα χαρακτηριστικά ενός παιδιού προέρχονται...",
-          textEn: "A child's traits come from...",
-          options: [
-            { textEl: "Και από τους δύο γονείς, μέσω των γονιδίων τους.", textEn: "Both parents, through their genes.", isCorrect: true },
-            { textEl: "Μόνο από τη μητέρα.", textEn: "Only from the mother.", isCorrect: false, gapTag: "biologia-g-gym.inheritance-both-parents" },
-            { textEl: "Τυχαία, χωρίς σχέση με τους γονείς.", textEn: "Randomly, unrelated to the parents.", isCorrect: false, gapTag: "biologia-g-gym.inheritance-both-parents" },
-          ],
-        },
-        {
-          id: "q3-biodiversity",
-          textEl: "Τι σημαίνει «βιοποικιλότητα»;",
-          textEn: "What does 'biodiversity' mean?",
-          options: [
-            { textEl: "Η ποικιλία των ειδών ζωής σε ένα οικοσύστημα.", textEn: "The variety of life forms in an ecosystem.", isCorrect: true },
-            { textEl: "Ο αριθμός των φυτών μόνο.", textEn: "The number of plants only.", isCorrect: false, gapTag: "biologia-g-gym.biodiversity-definition" },
-            { textEl: "Το μέγεθος ενός οικοσυστήματος.", textEn: "The size of an ecosystem.", isCorrect: false, gapTag: "biologia-g-gym.biodiversity-definition" },
-          ],
-        },
-        {
-          id: "q4-extinction",
-          textEl: "Ένα είδος εξαφανίζεται όταν...",
-          textEn: "A species goes extinct when...",
-          options: [
-            { textEl: "Δεν μπορεί πλέον να αναπαραχθεί ή να επιβιώσει επαρκώς στο περιβάλλον του.", textEn: "It can no longer reproduce or survive sufficiently in its environment.", isCorrect: true },
-            { textEl: "Απλά «γερνάει» σαν σύνολο.", textEn: "It just 'grows old' as a whole.", isCorrect: false, gapTag: "biologia-g-gym.extinction-cause" },
-            { textEl: "Μετακομίζει σε άλλη ήπειρο.", textEn: "It moves to another continent.", isCorrect: false, gapTag: "biologia-g-gym.extinction-cause" },
-          ],
-        },
-        {
-          id: "q5-reproduction",
-          textEl: "Η αναπαραγωγή εξασφαλίζει κυρίως...",
-          textEn: "Reproduction mainly ensures...",
-          options: [
-            { textEl: "Τη συνέχεια του είδους.", textEn: "The continuation of the species.", isCorrect: true },
-            { textEl: "Την αύξηση βάρους του οργανισμού.", textEn: "The organism's weight gain.", isCorrect: false, gapTag: "biologia-g-gym.reproduction-purpose" },
-            { textEl: "Την παραγωγή ενέργειας.", textEn: "Energy production.", isCorrect: false, gapTag: "biologia-g-gym.reproduction-purpose" },
-          ],
-        },
+      "id": "biologia-g-gymnasiou",
+      "grades": [
+        "c"
       ],
-    },
+      "subjectLabelEl": "Βιολογία, Γ' Γυμνασίου",
+      "subjectLabelEn": "Biology, 9th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Βιολογίας",
+      "titleEn": "The Biology Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για κληρονομικότητα και οικοσυστήματα. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about heredity and ecosystems. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-dna-location",
+          "textEl": "Το DNA βρίσκεται κυρίως...",
+          "textEn": "DNA is mainly located...",
+          "options": [
+            {
+              "textEl": "Μέσα στον πυρήνα του κυττάρου.",
+              "textEn": "Inside the cell nucleus.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Έξω από το κύτταρο.",
+              "textEn": "Outside the cell.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.dna-location"
+            },
+            {
+              "textEl": "Μόνο στα μυϊκά κύτταρα.",
+              "textEn": "Only in muscle cells.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.dna-location"
+            }
+          ]
+        },
+        {
+          "id": "q2-inheritance",
+          "textEl": "Τα χαρακτηριστικά ενός παιδιού προέρχονται...",
+          "textEn": "A child's traits come from...",
+          "options": [
+            {
+              "textEl": "Και από τους δύο γονείς, μέσω των γονιδίων τους.",
+              "textEn": "Both parents, through their genes.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μόνο από τη μητέρα.",
+              "textEn": "Only from the mother.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.inheritance-both-parents"
+            },
+            {
+              "textEl": "Τυχαία, χωρίς σχέση με τους γονείς.",
+              "textEn": "Randomly, unrelated to the parents.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.inheritance-both-parents"
+            }
+          ]
+        },
+        {
+          "id": "q3-biodiversity",
+          "textEl": "Τι σημαίνει «βιοποικιλότητα»;",
+          "textEn": "What does 'biodiversity' mean?",
+          "options": [
+            {
+              "textEl": "Η ποικιλία των ειδών ζωής σε ένα οικοσύστημα.",
+              "textEn": "The variety of life forms in an ecosystem.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ο αριθμός των φυτών μόνο.",
+              "textEn": "The number of plants only.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.biodiversity-definition"
+            },
+            {
+              "textEl": "Το μέγεθος ενός οικοσυστήματος.",
+              "textEn": "The size of an ecosystem.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.biodiversity-definition"
+            }
+          ]
+        },
+        {
+          "id": "q4-extinction",
+          "textEl": "Ένα είδος εξαφανίζεται όταν...",
+          "textEn": "A species goes extinct when...",
+          "options": [
+            {
+              "textEl": "Δεν μπορεί πλέον να αναπαραχθεί ή να επιβιώσει επαρκώς στο περιβάλλον του.",
+              "textEn": "It can no longer reproduce or survive sufficiently in its environment.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Απλά «γερνάει» σαν σύνολο.",
+              "textEn": "It just 'grows old' as a whole.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.extinction-cause"
+            },
+            {
+              "textEl": "Μετακομίζει σε άλλη ήπειρο.",
+              "textEn": "It moves to another continent.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.extinction-cause"
+            }
+          ]
+        },
+        {
+          "id": "q5-reproduction",
+          "textEl": "Η αναπαραγωγή εξασφαλίζει κυρίως...",
+          "textEn": "Reproduction mainly ensures...",
+          "options": [
+            {
+              "textEl": "Τη συνέχεια του είδους.",
+              "textEn": "The continuation of the species.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Την αύξηση βάρους του οργανισμού.",
+              "textEn": "The organism's weight gain.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.reproduction-purpose"
+            },
+            {
+              "textEl": "Την παραγωγή ενέργειας.",
+              "textEn": "Energy production.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-gym.reproduction-purpose"
+            }
+          ]
+        }
+      ]
+    }
   },
-  high: {
+  "high": {
     "ekthesi-a-lykeiou": {
-      id: "ekthesi-a-lykeiou",
-      grades: ["a"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα & Έκθεση, Α' Λυκείου",
-      subjectLabelEn: "Modern Greek Language & Essay, 10th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Έκθεσης",
-      titleEn: "The Essay Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για την παράγραφο και την περίληψη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about paragraphs and summarizing. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-topic-sentence",
-          textEl: "Ποια είναι η θεματική πρόταση μιας παραγράφου;",
-          textEn: "What is a paragraph's topic sentence?",
-          options: [
-            { textEl: "Η πρόταση (συνήθως πρώτη) που δηλώνει το κεντρικό νόημα της παραγράφου.", textEn: "The sentence (usually first) stating the paragraph's central idea.", isCorrect: true },
-            { textEl: "Οποιαδήποτε πρόταση με ενδιαφέρον περιεχόμενο.", textEn: "Any sentence with interesting content.", isCorrect: false, gapTag: "ekthesi-a.topic-sentence-missing" },
-            { textEl: "Η τελευταία πρόταση της παραγράφου.", textEn: "The paragraph's last sentence.", isCorrect: false, gapTag: "ekthesi-a.topic-sentence-missing" },
-          ],
-        },
-        {
-          id: "q2-development-method",
-          textEl: "Θεματική πρόταση: «Η άσκηση ωφελεί το σώμα και το μυαλό.» Ποιος τρόπος ανάπτυξης ταιριάζει καλύτερα;",
-          textEn: "Topic sentence: 'Exercise benefits both body and mind.' Which development method fits best?",
-          options: [
-            { textEl: "Αιτιολόγηση: εξηγώ γιατί η άσκηση βοηθάει (λόγοι).", textEn: "Cause-effect: explain why exercise helps (reasons).", isCorrect: true },
-            { textEl: "Ορισμός: εξηγώ τι σημαίνει η λέξη «άσκηση».", textEn: "Definition: explain what the word 'exercise' means.", isCorrect: false, gapTag: "ekthesi-a.development-method-confusion" },
-            { textEl: "Διαίρεση: χωρίζω την άσκηση σε είδη χωρίς να εξηγώ γιατί ωφελεί.", textEn: "Division: split exercise into types without explaining why it helps.", isCorrect: false, gapTag: "ekthesi-a.development-method-confusion" },
-          ],
-        },
-        {
-          id: "q3-unity",
-          textEl: "Ποια πρόταση ΔΕΝ ταιριάζει σε παράγραφο με θεματική πρόταση «Το διάβασμα διευρύνει τη σκέψη»;",
-          textEn: "Which sentence does NOT belong in a paragraph with topic sentence 'Reading broadens the mind'?",
-          options: [
-            { textEl: "«Χθες αγόρασα ένα καινούριο κινητό.»", textEn: "'Yesterday I bought a new phone.'", isCorrect: true },
-            { textEl: "«Μέσα από τα βιβλία γνωρίζουμε νέες ιδέες.»", textEn: "'Through books we discover new ideas.'", isCorrect: false, gapTag: "ekthesi-a.unity-coherence" },
-            { textEl: "«Η ανάγνωση καλλιεργεί την κριτική σκέψη.»", textEn: "'Reading cultivates critical thinking.'", isCorrect: false, gapTag: "ekthesi-a.unity-coherence" },
-          ],
-        },
-        {
-          id: "q4-summary-limit",
-          textEl: "Το κείμενο έχει 400 λέξεις και ζητείται περίληψη σε 100. Τι πρέπει να κάνεις;",
-          textEn: "The text is 400 words and a 100-word summary is requested. What should you do?",
-          options: [
-            { textEl: "Να κρατήσω μόνο τις κύριες ιδέες, μέσα στο όριο των 100 λέξεων.", textEn: "Keep only the main ideas, within the 100-word limit.", isCorrect: true },
-            { textEl: "Να γράψω περίπου 250 λέξεις για να μην χάσω κάτι σημαντικό.", textEn: "Write around 250 words so nothing important is lost.", isCorrect: false, gapTag: "ekthesi-a.summary-length" },
-            { textEl: "Να κόψω το κείμενο στη μέση, όποιες προτάσεις κι αν μείνουν.", textEn: "Cut the text in half, whatever sentences remain.", isCorrect: false, gapTag: "ekthesi-a.summary-length" },
-          ],
-        },
+      "id": "ekthesi-a-lykeiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα & Έκθεση, Α' Λυκείου",
+      "subjectLabelEn": "Modern Greek Language & Essay, 10th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Έκθεσης",
+      "titleEn": "The Essay Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για την παράγραφο και την περίληψη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about paragraphs and summarizing. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-topic-sentence",
+          "textEl": "Ποια είναι η θεματική πρόταση μιας παραγράφου;",
+          "textEn": "What is a paragraph's topic sentence?",
+          "options": [
+            {
+              "textEl": "Η πρόταση (συνήθως πρώτη) που δηλώνει το κεντρικό νόημα της παραγράφου.",
+              "textEn": "The sentence (usually first) stating the paragraph's central idea.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Οποιαδήποτε πρόταση με ενδιαφέρον περιεχόμενο.",
+              "textEn": "Any sentence with interesting content.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.topic-sentence-missing"
+            },
+            {
+              "textEl": "Η τελευταία πρόταση της παραγράφου.",
+              "textEn": "The paragraph's last sentence.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.topic-sentence-missing"
+            }
+          ]
+        },
+        {
+          "id": "q2-development-method",
+          "textEl": "Θεματική πρόταση: «Η άσκηση ωφελεί το σώμα και το μυαλό.» Ποιος τρόπος ανάπτυξης ταιριάζει καλύτερα;",
+          "textEn": "Topic sentence: 'Exercise benefits both body and mind.' Which development method fits best?",
+          "options": [
+            {
+              "textEl": "Αιτιολόγηση: εξηγώ γιατί η άσκηση βοηθάει (λόγοι).",
+              "textEn": "Cause-effect: explain why exercise helps (reasons).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ορισμός: εξηγώ τι σημαίνει η λέξη «άσκηση».",
+              "textEn": "Definition: explain what the word 'exercise' means.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.development-method-confusion"
+            },
+            {
+              "textEl": "Διαίρεση: χωρίζω την άσκηση σε είδη χωρίς να εξηγώ γιατί ωφελεί.",
+              "textEn": "Division: split exercise into types without explaining why it helps.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.development-method-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q3-unity",
+          "textEl": "Ποια πρόταση ΔΕΝ ταιριάζει σε παράγραφο με θεματική πρόταση «Το διάβασμα διευρύνει τη σκέψη»;",
+          "textEn": "Which sentence does NOT belong in a paragraph with topic sentence 'Reading broadens the mind'?",
+          "options": [
+            {
+              "textEl": "«Χθες αγόρασα ένα καινούριο κινητό.»",
+              "textEn": "'Yesterday I bought a new phone.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Μέσα από τα βιβλία γνωρίζουμε νέες ιδέες.»",
+              "textEn": "'Through books we discover new ideas.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.unity-coherence"
+            },
+            {
+              "textEl": "«Η ανάγνωση καλλιεργεί την κριτική σκέψη.»",
+              "textEn": "'Reading cultivates critical thinking.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.unity-coherence"
+            }
+          ]
+        },
+        {
+          "id": "q4-summary-limit",
+          "textEl": "Το κείμενο έχει 400 λέξεις και ζητείται περίληψη σε 100. Τι πρέπει να κάνεις;",
+          "textEn": "The text is 400 words and a 100-word summary is requested. What should you do?",
+          "options": [
+            {
+              "textEl": "Να κρατήσω μόνο τις κύριες ιδέες, μέσα στο όριο των 100 λέξεων.",
+              "textEn": "Keep only the main ideas, within the 100-word limit.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Να γράψω περίπου 250 λέξεις για να μην χάσω κάτι σημαντικό.",
+              "textEn": "Write around 250 words so nothing important is lost.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.summary-length"
+            },
+            {
+              "textEl": "Να κόψω το κείμενο στη μέση, όποιες προτάσεις κι αν μείνουν.",
+              "textEn": "Cut the text in half, whatever sentences remain.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-a.summary-length"
+            }
+          ]
+        }
+      ]
     },
-
     "ekthesi-b-lykeiou": {
-      id: "ekthesi-b-lykeiou",
-      grades: ["b"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα & Έκθεση, Β' Λυκείου",
-      subjectLabelEn: "Modern Greek Language & Essay, 11th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Έκθεσης",
-      titleEn: "The Essay Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για το πλήρες δοκίμιο και τους τρόπους πειθούς. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about the full essay and modes of persuasion. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-argument",
-          textEl: "Ποιο από τα παρακάτω αποτελεί πλήρες επιχείρημα;",
-          textEn: "Which of the following is a complete argument?",
-          options: [
-            { textEl: "Θέση + λόγος/τεκμήριο + σύνδεση με το συμπέρασμα.", textEn: "A claim + a reason/evidence + a link to the conclusion.", isCorrect: true },
-            { textEl: "Μια έντονα διατυπωμένη προσωπική άποψη, χωρίς τεκμηρίωση.", textEn: "A strongly worded personal opinion, without evidence.", isCorrect: false, gapTag: "ekthesi.unsupported-argument" },
-            { textEl: "Μια ρητορική ερώτηση προς τον αναγνώστη.", textEn: "A rhetorical question addressed to the reader.", isCorrect: false, gapTag: "ekthesi.unsupported-argument" },
-          ],
-        },
-        {
-          id: "q2-persuasion-mode",
-          textEl: "«Φανταστείτε ένα παιδί που κοιμάται νηστικό απόψε.» Σε ποιον τρόπο πειθούς στηρίζεται αυτή η πρόταση;",
-          textEn: "'Imagine a child going to bed hungry tonight.' Which mode of persuasion does this rely on?",
-          options: [
-            { textEl: "Επίκληση στο συναίσθημα (πάθος).", textEn: "Appeal to emotion (pathos).", isCorrect: true },
-            { textEl: "Επίκληση στη λογική με στατιστικά στοιχεία.", textEn: "Appeal to logic with statistics.", isCorrect: false, gapTag: "ekthesi-b.persuasion-modes-confusion" },
-            { textEl: "Επίκληση στο ήθος του συγγραφέα.", textEn: "Appeal to the writer's credibility (ethos).", isCorrect: false, gapTag: "ekthesi-b.persuasion-modes-confusion" },
-          ],
-        },
-        {
-          id: "q3-counterview",
-          textEl: "Γράφεις δοκίμιο υπέρ της τηλεργασίας. Τι πρέπει να κάνεις με το επιχείρημα «η τηλεργασία απομονώνει»;",
-          textEn: "You're writing an essay favoring remote work. What should you do with the argument 'remote work isolates people'?",
-          options: [
-            { textEl: "Να το αναφέρω και να εξηγήσω γιατί η δική μου θέση παραμένει ισχυρότερη.", textEn: "Acknowledge it and explain why my position still holds.", isCorrect: true },
-            { textEl: "Να το αγνοήσω εντελώς, αφού είμαι υπέρ.", textEn: "Ignore it completely, since I'm in favor.", isCorrect: false, gapTag: "ekthesi-b.thesis-antithesis-missing" },
-            { textEl: "Να αλλάξω θέμα για να μην το αναφέρω.", textEn: "Change the topic to avoid mentioning it.", isCorrect: false, gapTag: "ekthesi-b.thesis-antithesis-missing" },
-          ],
-        },
-        {
-          id: "q4-balance",
-          textEl: "Ένα δοκίμιο 500 λέξεων με 3 επιχειρήματα πρέπει να τα αναπτύσσει...",
-          textEn: "A 500-word essay with 3 arguments should develop them...",
-          options: [
-            { textEl: "Με περίπου ισόποση έκταση το καθένα.", textEn: "With roughly equal space for each.", isCorrect: true },
-            { textEl: "Με ένα επιχείρημα να παίρνει το 80% του κειμένου.", textEn: "With one argument taking up 80% of the text.", isCorrect: false, gapTag: "ekthesi-b.essay-structure-imbalance" },
-            { textEl: "Δεν έχει σημασία η έκταση, μόνο ο αριθμός τους.", textEn: "The length doesn't matter, only the number of arguments.", isCorrect: false, gapTag: "ekthesi-b.essay-structure-imbalance" },
-          ],
-        },
-        {
-          id: "q5-evidence",
-          textEl: "Ποιο τεκμήριο ενισχύει καλύτερα το επιχείρημα «τα social media επηρεάζουν τον ύπνο των εφήβων»;",
-          textEn: "Which piece of evidence best supports 'social media affects teenagers' sleep'?",
-          options: [
-            { textEl: "Έρευνα που δείχνει ότι οι έφηβοι με πάνω από 3 ώρες χρήσης κοιμούνται 1 ώρα λιγότερο.", textEn: "A study showing teens with over 3 hours of use sleep 1 hour less.", isCorrect: true },
-            { textEl: "«Όλοι ξέρουν ότι το κινητό κάνει κακό.»", textEn: "'Everyone knows phones are bad for you.'", isCorrect: false, gapTag: "ekthesi-b.evidence-generic" },
-            { textEl: "«Είναι προφανές σε όλους μας.»", textEn: "'It's obvious to all of us.'", isCorrect: false, gapTag: "ekthesi-b.evidence-generic" },
-          ],
-        },
+      "id": "ekthesi-b-lykeiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα & Έκθεση, Β' Λυκείου",
+      "subjectLabelEn": "Modern Greek Language & Essay, 11th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Έκθεσης",
+      "titleEn": "The Essay Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για το πλήρες δοκίμιο και τους τρόπους πειθούς. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about the full essay and modes of persuasion. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-argument",
+          "textEl": "Ποιο από τα παρακάτω αποτελεί πλήρες επιχείρημα;",
+          "textEn": "Which of the following is a complete argument?",
+          "options": [
+            {
+              "textEl": "Θέση + λόγος/τεκμήριο + σύνδεση με το συμπέρασμα.",
+              "textEn": "A claim + a reason/evidence + a link to the conclusion.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μια έντονα διατυπωμένη προσωπική άποψη, χωρίς τεκμηρίωση.",
+              "textEn": "A strongly worded personal opinion, without evidence.",
+              "isCorrect": false,
+              "gapTag": "ekthesi.unsupported-argument"
+            },
+            {
+              "textEl": "Μια ρητορική ερώτηση προς τον αναγνώστη.",
+              "textEn": "A rhetorical question addressed to the reader.",
+              "isCorrect": false,
+              "gapTag": "ekthesi.unsupported-argument"
+            }
+          ]
+        },
+        {
+          "id": "q2-persuasion-mode",
+          "textEl": "«Φανταστείτε ένα παιδί που κοιμάται νηστικό απόψε.» Σε ποιον τρόπο πειθούς στηρίζεται αυτή η πρόταση;",
+          "textEn": "'Imagine a child going to bed hungry tonight.' Which mode of persuasion does this rely on?",
+          "options": [
+            {
+              "textEl": "Επίκληση στο συναίσθημα (πάθος).",
+              "textEn": "Appeal to emotion (pathos).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Επίκληση στη λογική με στατιστικά στοιχεία.",
+              "textEn": "Appeal to logic with statistics.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.persuasion-modes-confusion"
+            },
+            {
+              "textEl": "Επίκληση στο ήθος του συγγραφέα.",
+              "textEn": "Appeal to the writer's credibility (ethos).",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.persuasion-modes-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q3-counterview",
+          "textEl": "Γράφεις δοκίμιο υπέρ της τηλεργασίας. Τι πρέπει να κάνεις με το επιχείρημα «η τηλεργασία απομονώνει»;",
+          "textEn": "You're writing an essay favoring remote work. What should you do with the argument 'remote work isolates people'?",
+          "options": [
+            {
+              "textEl": "Να το αναφέρω και να εξηγήσω γιατί η δική μου θέση παραμένει ισχυρότερη.",
+              "textEn": "Acknowledge it and explain why my position still holds.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Να το αγνοήσω εντελώς, αφού είμαι υπέρ.",
+              "textEn": "Ignore it completely, since I'm in favor.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.thesis-antithesis-missing"
+            },
+            {
+              "textEl": "Να αλλάξω θέμα για να μην το αναφέρω.",
+              "textEn": "Change the topic to avoid mentioning it.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.thesis-antithesis-missing"
+            }
+          ]
+        },
+        {
+          "id": "q4-balance",
+          "textEl": "Ένα δοκίμιο 500 λέξεων με 3 επιχειρήματα πρέπει να τα αναπτύσσει...",
+          "textEn": "A 500-word essay with 3 arguments should develop them...",
+          "options": [
+            {
+              "textEl": "Με περίπου ισόποση έκταση το καθένα.",
+              "textEn": "With roughly equal space for each.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Με ένα επιχείρημα να παίρνει το 80% του κειμένου.",
+              "textEn": "With one argument taking up 80% of the text.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.essay-structure-imbalance"
+            },
+            {
+              "textEl": "Δεν έχει σημασία η έκταση, μόνο ο αριθμός τους.",
+              "textEn": "The length doesn't matter, only the number of arguments.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.essay-structure-imbalance"
+            }
+          ]
+        },
+        {
+          "id": "q5-evidence",
+          "textEl": "Ποιο τεκμήριο ενισχύει καλύτερα το επιχείρημα «τα social media επηρεάζουν τον ύπνο των εφήβων»;",
+          "textEn": "Which piece of evidence best supports 'social media affects teenagers' sleep'?",
+          "options": [
+            {
+              "textEl": "Έρευνα που δείχνει ότι οι έφηβοι με πάνω από 3 ώρες χρήσης κοιμούνται 1 ώρα λιγότερο.",
+              "textEn": "A study showing teens with over 3 hours of use sleep 1 hour less.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Όλοι ξέρουν ότι το κινητό κάνει κακό.»",
+              "textEn": "'Everyone knows phones are bad for you.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.evidence-generic"
+            },
+            {
+              "textEl": "«Είναι προφανές σε όλους μας.»",
+              "textEn": "'It's obvious to all of us.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-b.evidence-generic"
+            }
+          ]
+        }
+      ]
     },
-
     "ekthesi-g-lykeiou": {
-      id: "ekthesi-g-lykeiou",
-      grades: ["c"],
-      subjectLabelEl: "Νεοελληνική Γλώσσα & Έκθεση, Γ' Λυκείου",
-      subjectLabelEn: "Modern Greek Language & Essay, 12th Grade",
-      titleEl: "Ο Διαγνωστικός Χάρτης Έκθεσης",
-      titleEn: "The Essay Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για το κριτικό δοκίμιο και τη σύνθεση πηγών. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about the critical essay and synthesizing sources. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-synthesis",
-          textEl: "Η εκφώνηση δίνει δύο κείμενα με αντίθετες απόψεις για την τεχνητή νοημοσύνη. Τι πρέπει να κάνεις;",
-          textEn: "The prompt gives two texts with opposing views on AI. What should you do?",
-          options: [
-            { textEl: "Να τα συνδυάσω σε μία ενιαία επιχειρηματολογία, δείχνοντας πού συμφωνούν/διαφωνούν.", textEn: "Combine them into one unified argument, showing where they agree/disagree.", isCorrect: true },
-            { textEl: "Να σχολιάσω το πρώτο κείμενο, μετά το δεύτερο, χωρίς σύνδεση μεταξύ τους.", textEn: "Comment on the first text, then the second, with no connection between them.", isCorrect: false, gapTag: "ekthesi-g.synthesis-sources-missing" },
-            { textEl: "Να αγνοήσω το ένα από τα δύο κείμενα.", textEn: "Ignore one of the two texts.", isCorrect: false, gapTag: "ekthesi-g.synthesis-sources-missing" },
-          ],
-        },
-        {
-          id: "q2-proposal",
-          textEl: "Ποια πρόταση αντιμετώπισης είναι πιο αποτελεσματική σε δοκίμιο για τον σχολικό εκφοβισμό;",
-          textEn: "Which proposed solution is more effective in an essay about school bullying?",
-          options: [
-            { textEl: "Θεσμοθέτηση προγράμματος συνομήλικων-συμβούλων (peer mentoring) με εκπαίδευση εκπαιδευτικών.", textEn: "Establishing a peer-mentoring program with teacher training.", isCorrect: true },
-            { textEl: "«Πρέπει όλοι να γίνουμε καλύτεροι άνθρωποι.»", textEn: "'We must all become better people.'", isCorrect: false, gapTag: "ekthesi-g.proposal-vague" },
-            { textEl: "«Χρειάζεται αλλαγή νοοτροπίας στην κοινωνία.»", textEn: "'Society needs a change of mindset.'", isCorrect: false, gapTag: "ekthesi-g.proposal-vague" },
-          ],
-        },
-        {
-          id: "q3-critical-stance",
-          textEl: "Σε δοκίμιο για τη χρήση AI στα σχολεία, ποια πρόταση δείχνει κριτική αποτίμηση (όχι απλή περιγραφή);",
-          textEn: "In an essay on AI use in schools, which sentence shows critical evaluation (not mere description)?",
-          options: [
-            { textEl: "«Η χρήση AI ωφελεί όταν συνοδεύεται από κριτικό έλεγχο, αλλιώς υπονομεύει τη μάθηση.»", textEn: "'AI use helps only when paired with critical scrutiny; otherwise it undermines learning.'", isCorrect: true },
-            { textEl: "«Η τεχνητή νοημοσύνη χρησιμοποιείται σήμερα σε πολλά σχολεία.»", textEn: "'AI is used today in many schools.'", isCorrect: false, gapTag: "ekthesi-g.critical-stance-missing" },
-            { textEl: "«Υπάρχουν διάφορα εργαλεία τεχνητής νοημοσύνης.»", textEn: "'There are various AI tools available.'", isCorrect: false, gapTag: "ekthesi-g.critical-stance-missing" },
-          ],
-        },
-        {
-          id: "q4-rebuttal-depth",
-          textEl: "Ποια αντίκρουση έχει πραγματικό βάθος;",
-          textEn: "Which rebuttal has real depth?",
-          options: [
-            { textEl: "«Κάποιοι λένε ότι η τεχνολογία απομονώνει· όμως τα δεδομένα δείχνουν ότι οι νέοι με μετρημένη χρήση διατηρούν σταθερούς κοινωνικούς δεσμούς.»", textEn: "'Some argue technology isolates; however the data show that young people with measured use maintain stable social ties.'", isCorrect: true },
-            { textEl: "«Κάποιοι διαφωνούν, αλλά κάνουν λάθος.»", textEn: "'Some disagree, but they're wrong.'", isCorrect: false, gapTag: "ekthesi-g.counterargument-superficial" },
-            { textEl: "«Υπάρχει και η αντίθετη άποψη, όμως δεν ισχύει.»", textEn: "'There's also the opposite view, but it doesn't hold.'", isCorrect: false, gapTag: "ekthesi-g.counterargument-superficial" },
-          ],
-        },
-        {
-          id: "q5-summary",
-          textEl: "Σε μια περίληψη πρέπει να...",
-          textEn: "In a summary you should...",
-          options: [
-            { textEl: "Αναδιατυπώνεις τις ιδέες του συγγραφέα αντικειμενικά, με δικά σου λόγια.", textEn: "Objectively reformulate the author's ideas in your own words.", isCorrect: true },
-            { textEl: "Αντιγράφεις τις βασικές προτάσεις του κειμένου.", textEn: "Copy the key sentences from the text.", isCorrect: false, gapTag: "ekthesi.summary-copying" },
-            { textEl: "Προσθέτεις τη δική σου άποψη για το θέμα.", textEn: "Add your own opinion on the topic.", isCorrect: false, gapTag: "ekthesi.summary-copying" },
-          ],
-        },
+      "id": "ekthesi-g-lykeiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Νεοελληνική Γλώσσα & Έκθεση, Γ' Λυκείου",
+      "subjectLabelEn": "Modern Greek Language & Essay, 12th Grade",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Έκθεσης",
+      "titleEn": "The Essay Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για το κριτικό δοκίμιο και τη σύνθεση πηγών. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about the critical essay and synthesizing sources. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-synthesis",
+          "textEl": "Η εκφώνηση δίνει δύο κείμενα με αντίθετες απόψεις για την τεχνητή νοημοσύνη. Τι πρέπει να κάνεις;",
+          "textEn": "The prompt gives two texts with opposing views on AI. What should you do?",
+          "options": [
+            {
+              "textEl": "Να τα συνδυάσω σε μία ενιαία επιχειρηματολογία, δείχνοντας πού συμφωνούν/διαφωνούν.",
+              "textEn": "Combine them into one unified argument, showing where they agree/disagree.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Να σχολιάσω το πρώτο κείμενο, μετά το δεύτερο, χωρίς σύνδεση μεταξύ τους.",
+              "textEn": "Comment on the first text, then the second, with no connection between them.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.synthesis-sources-missing"
+            },
+            {
+              "textEl": "Να αγνοήσω το ένα από τα δύο κείμενα.",
+              "textEn": "Ignore one of the two texts.",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.synthesis-sources-missing"
+            }
+          ]
+        },
+        {
+          "id": "q2-proposal",
+          "textEl": "Ποια πρόταση αντιμετώπισης είναι πιο αποτελεσματική σε δοκίμιο για τον σχολικό εκφοβισμό;",
+          "textEn": "Which proposed solution is more effective in an essay about school bullying?",
+          "options": [
+            {
+              "textEl": "Θεσμοθέτηση προγράμματος συνομήλικων-συμβούλων (peer mentoring) με εκπαίδευση εκπαιδευτικών.",
+              "textEn": "Establishing a peer-mentoring program with teacher training.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Πρέπει όλοι να γίνουμε καλύτεροι άνθρωποι.»",
+              "textEn": "'We must all become better people.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.proposal-vague"
+            },
+            {
+              "textEl": "«Χρειάζεται αλλαγή νοοτροπίας στην κοινωνία.»",
+              "textEn": "'Society needs a change of mindset.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.proposal-vague"
+            }
+          ]
+        },
+        {
+          "id": "q3-critical-stance",
+          "textEl": "Σε δοκίμιο για τη χρήση AI στα σχολεία, ποια πρόταση δείχνει κριτική αποτίμηση (όχι απλή περιγραφή);",
+          "textEn": "In an essay on AI use in schools, which sentence shows critical evaluation (not mere description)?",
+          "options": [
+            {
+              "textEl": "«Η χρήση AI ωφελεί όταν συνοδεύεται από κριτικό έλεγχο, αλλιώς υπονομεύει τη μάθηση.»",
+              "textEn": "'AI use helps only when paired with critical scrutiny; otherwise it undermines learning.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Η τεχνητή νοημοσύνη χρησιμοποιείται σήμερα σε πολλά σχολεία.»",
+              "textEn": "'AI is used today in many schools.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.critical-stance-missing"
+            },
+            {
+              "textEl": "«Υπάρχουν διάφορα εργαλεία τεχνητής νοημοσύνης.»",
+              "textEn": "'There are various AI tools available.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.critical-stance-missing"
+            }
+          ]
+        },
+        {
+          "id": "q4-rebuttal-depth",
+          "textEl": "Ποια αντίκρουση έχει πραγματικό βάθος;",
+          "textEn": "Which rebuttal has real depth?",
+          "options": [
+            {
+              "textEl": "«Κάποιοι λένε ότι η τεχνολογία απομονώνει· όμως τα δεδομένα δείχνουν ότι οι νέοι με μετρημένη χρήση διατηρούν σταθερούς κοινωνικούς δεσμούς.»",
+              "textEn": "'Some argue technology isolates; however the data show that young people with measured use maintain stable social ties.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "«Κάποιοι διαφωνούν, αλλά κάνουν λάθος.»",
+              "textEn": "'Some disagree, but they're wrong.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.counterargument-superficial"
+            },
+            {
+              "textEl": "«Υπάρχει και η αντίθετη άποψη, όμως δεν ισχύει.»",
+              "textEn": "'There's also the opposite view, but it doesn't hold.'",
+              "isCorrect": false,
+              "gapTag": "ekthesi-g.counterargument-superficial"
+            }
+          ]
+        },
+        {
+          "id": "q5-summary",
+          "textEl": "Σε μια περίληψη πρέπει να...",
+          "textEn": "In a summary you should...",
+          "options": [
+            {
+              "textEl": "Αναδιατυπώνεις τις ιδέες του συγγραφέα αντικειμενικά, με δικά σου λόγια.",
+              "textEn": "Objectively reformulate the author's ideas in your own words.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Αντιγράφεις τις βασικές προτάσεις του κειμένου.",
+              "textEn": "Copy the key sentences from the text.",
+              "isCorrect": false,
+              "gapTag": "ekthesi.summary-copying"
+            },
+            {
+              "textEl": "Προσθέτεις τη δική σου άποψη για το θέμα.",
+              "textEn": "Add your own opinion on the topic.",
+              "isCorrect": false,
+              "gapTag": "ekthesi.summary-copying"
+            }
+          ]
+        }
+      ]
     },
-
     "mathimatika-a-lykeiou": {
-      id: "mathimatika-a-lykeiou",
-      grades: ["a"],
-      subjectLabelEl: "Μαθηματικά, Α' Λυκείου (Γενικής Παιδείας)",
-      subjectLabelEn: "Mathematics, 1st Grade Lyceum (General Education)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Συναρτήσεων",
-      titleEn: "The Functions Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για συναρτήσεις και εξισώσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about functions and equations. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-piecewise",
-          textEl: "Ένας κανόνας δίνεται με κλάδους (διαφορετικός τύπος ανά διάστημα τιμών του x). Είναι συνάρτηση;",
-          textEn: "A rule is given piecewise (different formula per interval of x). Is it a function?",
-          options: [
-            { textEl: "Ναι, αν κάθε x αντιστοιχεί σε ακριβώς ένα y.", textEn: "Yes, if every x maps to exactly one y.", isCorrect: true },
-            { textEl: "Όχι, γιατί δεν έχει έναν ενιαίο τύπο.", textEn: "No, because it doesn't have a single formula.", isCorrect: false, gapTag: "functions.one-formula-only" },
-            { textEl: "Μόνο αν έχει το πολύ δύο κλάδους.", textEn: "Only if it has at most two pieces.", isCorrect: false, gapTag: "functions.one-formula-only" },
-          ],
-        },
-        {
-          id: "q2-quadratic-roots",
-          textEl: "Πόσες πραγματικές λύσεις έχει η εξίσωση x² + 1 = 0;",
-          textEn: "How many real solutions does x² + 1 = 0 have?",
-          options: [
-            { textEl: "Καμία πραγματική λύση.", textEn: "None.", isCorrect: true },
-            { textEl: "Δύο.", textEn: "Two.", isCorrect: false, gapTag: "functions.quadratic-always-two-roots" },
-            { textEl: "Μία.", textEn: "One.", isCorrect: false, gapTag: "functions.quadratic-always-two-roots" },
-          ],
-        },
-        {
-          id: "q3-sqrt",
-          textEl: "Λύσε: x² = 9.",
-          textEn: "Solve: x² = 9.",
-          options: [
-            { textEl: "x = 3 ή x = −3", textEn: "x = 3 or x = −3", isCorrect: true },
-            { textEl: "x = 3 μόνο", textEn: "x = 3 only", isCorrect: false, gapTag: "functions.sqrt-drops-absolute-value" },
-            { textEl: "x = 9", textEn: "x = 9", isCorrect: false, gapTag: "functions.sqrt-drops-absolute-value" },
-          ],
-        },
-        {
-          id: "q4-vertex",
-          textEl: "Ποια είναι η μέγιστη τιμή της f(x) = −(x−2)² + 5;",
-          textEn: "What is the maximum value of f(x) = −(x−2)² + 5?",
-          options: [
-            { textEl: "5", textEn: "5", isCorrect: true },
-            { textEl: "2", textEn: "2", isCorrect: false, gapTag: "functions.vertex-value-confusion" },
-            { textEl: "−2", textEn: "−2", isCorrect: false, gapTag: "functions.vertex-value-confusion" },
-          ],
-        },
-        {
-          id: "q5-inequality",
-          textEl: "Λύσε: −3x ≥ 9.",
-          textEn: "Solve: −3x ≥ 9.",
-          options: [
-            { textEl: "x ≤ −3", textEn: "x ≤ −3", isCorrect: true },
-            { textEl: "x ≥ −3", textEn: "x ≥ −3", isCorrect: false, gapTag: "functions.inequality-no-sign-flip" },
-            { textEl: "x ≥ 3", textEn: "x ≥ 3", isCorrect: false, gapTag: "functions.inequality-no-sign-flip" },
-          ],
-        },
+      "id": "mathimatika-a-lykeiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Μαθηματικά, Α' Λυκείου (Γενικής Παιδείας)",
+      "subjectLabelEn": "Mathematics, 1st Grade Lyceum (General Education)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Συναρτήσεων",
+      "titleEn": "The Functions Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για συναρτήσεις και εξισώσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about functions and equations. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-piecewise",
+          "textEl": "Ένας κανόνας δίνεται με κλάδους (διαφορετικός τύπος ανά διάστημα τιμών του x). Είναι συνάρτηση;",
+          "textEn": "A rule is given piecewise (different formula per interval of x). Is it a function?",
+          "options": [
+            {
+              "textEl": "Ναι, αν κάθε x αντιστοιχεί σε ακριβώς ένα y.",
+              "textEn": "Yes, if every x maps to exactly one y.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Όχι, γιατί δεν έχει έναν ενιαίο τύπο.",
+              "textEn": "No, because it doesn't have a single formula.",
+              "isCorrect": false,
+              "gapTag": "functions.one-formula-only"
+            },
+            {
+              "textEl": "Μόνο αν έχει το πολύ δύο κλάδους.",
+              "textEn": "Only if it has at most two pieces.",
+              "isCorrect": false,
+              "gapTag": "functions.one-formula-only"
+            }
+          ]
+        },
+        {
+          "id": "q2-quadratic-roots",
+          "textEl": "Πόσες πραγματικές λύσεις έχει η εξίσωση x² + 1 = 0;",
+          "textEn": "How many real solutions does x² + 1 = 0 have?",
+          "options": [
+            {
+              "textEl": "Καμία πραγματική λύση.",
+              "textEn": "None.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Δύο.",
+              "textEn": "Two.",
+              "isCorrect": false,
+              "gapTag": "functions.quadratic-always-two-roots"
+            },
+            {
+              "textEl": "Μία.",
+              "textEn": "One.",
+              "isCorrect": false,
+              "gapTag": "functions.quadratic-always-two-roots"
+            }
+          ]
+        },
+        {
+          "id": "q3-sqrt",
+          "textEl": "Λύσε: x² = 9.",
+          "textEn": "Solve: x² = 9.",
+          "options": [
+            {
+              "textEl": "x = 3 ή x = −3",
+              "textEn": "x = 3 or x = −3",
+              "isCorrect": true
+            },
+            {
+              "textEl": "x = 3 μόνο",
+              "textEn": "x = 3 only",
+              "isCorrect": false,
+              "gapTag": "functions.sqrt-drops-absolute-value"
+            },
+            {
+              "textEl": "x = 9",
+              "textEn": "x = 9",
+              "isCorrect": false,
+              "gapTag": "functions.sqrt-drops-absolute-value"
+            }
+          ]
+        },
+        {
+          "id": "q4-vertex",
+          "textEl": "Ποια είναι η μέγιστη τιμή της f(x) = −(x−2)² + 5;",
+          "textEn": "What is the maximum value of f(x) = −(x−2)² + 5?",
+          "options": [
+            {
+              "textEl": "5",
+              "textEn": "5",
+              "isCorrect": true
+            },
+            {
+              "textEl": "2",
+              "textEn": "2",
+              "isCorrect": false,
+              "gapTag": "functions.vertex-value-confusion"
+            },
+            {
+              "textEl": "−2",
+              "textEn": "−2",
+              "isCorrect": false,
+              "gapTag": "functions.vertex-value-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q5-inequality",
+          "textEl": "Λύσε: −3x ≥ 9.",
+          "textEn": "Solve: −3x ≥ 9.",
+          "options": [
+            {
+              "textEl": "x ≤ −3",
+              "textEn": "x ≤ −3",
+              "isCorrect": true
+            },
+            {
+              "textEl": "x ≥ −3",
+              "textEn": "x ≥ −3",
+              "isCorrect": false,
+              "gapTag": "functions.inequality-no-sign-flip"
+            },
+            {
+              "textEl": "x ≥ 3",
+              "textEn": "x ≥ 3",
+              "isCorrect": false,
+              "gapTag": "functions.inequality-no-sign-flip"
+            }
+          ]
+        }
+      ]
     },
-
     "fysiki-a-lykeiou": {
-      id: "fysiki-a-lykeiou",
-      grades: ["a"],
-      subjectLabelEl: "Φυσική, Α' Λυκείου (Γενικής Παιδείας)",
-      subjectLabelEn: "Physics, 10th Grade Lyceum (General Education)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Φυσικής",
-      titleEn: "The Physics Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για δυνάμεις και ενέργεια. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about forces and energy. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-net-force-zero",
-          textEl: "Ένα δισκάκι γλιστράει με σταθερή ταχύτητα σε λείο πάγο, χωρίς τριβή. Η συνισταμένη δύναμη πάνω του είναι...",
-          textEn: "A puck slides at constant velocity on frictionless ice. The net force on it is...",
-          options: [
-            { textEl: "Μηδέν.", textEn: "Zero.", isCorrect: true },
-            { textEl: "Μια δύναμη προς την κατεύθυνση κίνησης.", textEn: "A force in the direction of motion.", isCorrect: false, gapTag: "physics-lyk.motion-implies-force" },
-            { textEl: "Μια δύναμη αντίθετη στην κίνηση.", textEn: "A force opposite to the motion.", isCorrect: false, gapTag: "physics-lyk.motion-implies-force" },
-          ],
-        },
-        {
-          id: "q2-newton-third",
-          textEl: "Ένα φορτηγό συγκρούεται με ένα μικρό αυτοκίνητο. Πώς συγκρίνονται οι δυνάμεις που ασκούνται μεταξύ τους;",
-          textEn: "A truck collides with a small car. How do the forces they exert on each other compare?",
-          options: [
-            { textEl: "Είναι ίσες και αντίθετες.", textEn: "They are equal and opposite.", isCorrect: true },
-            { textEl: "Το φορτηγό ασκεί μεγαλύτερη δύναμη.", textEn: "The truck exerts a greater force.", isCorrect: false, gapTag: "physics-lyk.newton-third-law-bigger-force" },
-            { textEl: "Το αυτοκίνητο ασκεί μεγαλύτερη δύναμη, γιατί επιταχύνεται περισσότερο.", textEn: "The car exerts a greater force, because it accelerates more.", isCorrect: false, gapTag: "physics-lyk.newton-third-law-bigger-force" },
-          ],
-        },
-        {
-          id: "q3-force-energy",
-          textEl: "Μια μπάλα που κυλάει επιβραδύνεται σταδιακά. Γιατί;",
-          textEn: "A rolling ball gradually slows down. Why?",
-          options: [
-            { textEl: "Η τριβή μεταφέρει την κινητική ενέργεια σε άλλη μορφή (θερμότητα).", textEn: "Friction transfers the kinetic energy into another form (heat).", isCorrect: true },
-            { textEl: "Επειδή «τελειώνει» η δύναμη που της δόθηκε.", textEn: "Because the force given to it 'runs out.'", isCorrect: false, gapTag: "physics-lyk.force-energy-same" },
-            { textEl: "Επειδή χάνει σταδιακά τη μάζα της.", textEn: "Because it gradually loses mass.", isCorrect: false, gapTag: "physics-lyk.force-energy-same" },
-          ],
-        },
-        {
-          id: "q4-energy-conservation",
-          textEl: "Όταν μια μπάλα σταματήσει τελείως, η κινητική της ενέργεια...",
-          textEn: "When a ball finally stops, its kinetic energy...",
-          options: [
-            { textEl: "Μεταφέρθηκε σε άλλες μορφές (κυρίως θερμότητα), δεν χάθηκε.", textEn: "Was transferred to other forms (mostly heat), not destroyed.", isCorrect: true },
-            { textEl: "Καταστράφηκε εντελώς.", textEn: "Was completely destroyed.", isCorrect: false, gapTag: "physics-lyk.energy-used-up" },
-            { textEl: "Επέστρεψε στο σώμα που την κίνησε αρχικά.", textEn: "Returned to whatever originally set it in motion.", isCorrect: false, gapTag: "physics-lyk.energy-used-up" },
-          ],
-        },
-        {
-          id: "q5-constant-velocity",
-          textEl: "Ένα αυτοκίνητο κινείται σε ίσιο δρόμο με σταθερή ταχύτητα 50 km/h. Η συνισταμένη δύναμη πάνω του είναι...",
-          textEn: "A car moves on a flat road at a steady 50 km/h. The net force on it is...",
-          options: [
-            { textEl: "Μηδέν (η δύναμη της μηχανής εξισορροπεί την τριβή/αντίσταση).", textEn: "Zero (the engine's force balances friction/drag).", isCorrect: true },
-            { textEl: "Σταθερή και ανάλογη της ταχύτητας.", textEn: "Constant and proportional to the speed.", isCorrect: false, gapTag: "physics-lyk.constant-velocity-needs-force" },
-            { textEl: "Όλο και μεγαλύτερη όσο προχωράει.", textEn: "Increasing the longer it travels.", isCorrect: false, gapTag: "physics-lyk.constant-velocity-needs-force" },
-          ],
-        },
+      "id": "fysiki-a-lykeiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Φυσική, Α' Λυκείου (Γενικής Παιδείας)",
+      "subjectLabelEn": "Physics, 10th Grade Lyceum (General Education)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Φυσικής",
+      "titleEn": "The Physics Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για δυνάμεις και ενέργεια. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about forces and energy. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-net-force-zero",
+          "textEl": "Ένα δισκάκι γλιστράει με σταθερή ταχύτητα σε λείο πάγο, χωρίς τριβή. Η συνισταμένη δύναμη πάνω του είναι...",
+          "textEn": "A puck slides at constant velocity on frictionless ice. The net force on it is...",
+          "options": [
+            {
+              "textEl": "Μηδέν.",
+              "textEn": "Zero.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μια δύναμη προς την κατεύθυνση κίνησης.",
+              "textEn": "A force in the direction of motion.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.motion-implies-force"
+            },
+            {
+              "textEl": "Μια δύναμη αντίθετη στην κίνηση.",
+              "textEn": "A force opposite to the motion.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.motion-implies-force"
+            }
+          ]
+        },
+        {
+          "id": "q2-newton-third",
+          "textEl": "Ένα φορτηγό συγκρούεται με ένα μικρό αυτοκίνητο. Πώς συγκρίνονται οι δυνάμεις που ασκούνται μεταξύ τους;",
+          "textEn": "A truck collides with a small car. How do the forces they exert on each other compare?",
+          "options": [
+            {
+              "textEl": "Είναι ίσες και αντίθετες.",
+              "textEn": "They are equal and opposite.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το φορτηγό ασκεί μεγαλύτερη δύναμη.",
+              "textEn": "The truck exerts a greater force.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.newton-third-law-bigger-force"
+            },
+            {
+              "textEl": "Το αυτοκίνητο ασκεί μεγαλύτερη δύναμη, γιατί επιταχύνεται περισσότερο.",
+              "textEn": "The car exerts a greater force, because it accelerates more.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.newton-third-law-bigger-force"
+            }
+          ]
+        },
+        {
+          "id": "q3-force-energy",
+          "textEl": "Μια μπάλα που κυλάει επιβραδύνεται σταδιακά. Γιατί;",
+          "textEn": "A rolling ball gradually slows down. Why?",
+          "options": [
+            {
+              "textEl": "Η τριβή μεταφέρει την κινητική ενέργεια σε άλλη μορφή (θερμότητα).",
+              "textEn": "Friction transfers the kinetic energy into another form (heat).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Επειδή «τελειώνει» η δύναμη που της δόθηκε.",
+              "textEn": "Because the force given to it 'runs out.'",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.force-energy-same"
+            },
+            {
+              "textEl": "Επειδή χάνει σταδιακά τη μάζα της.",
+              "textEn": "Because it gradually loses mass.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.force-energy-same"
+            }
+          ]
+        },
+        {
+          "id": "q4-energy-conservation",
+          "textEl": "Όταν μια μπάλα σταματήσει τελείως, η κινητική της ενέργεια...",
+          "textEn": "When a ball finally stops, its kinetic energy...",
+          "options": [
+            {
+              "textEl": "Μεταφέρθηκε σε άλλες μορφές (κυρίως θερμότητα), δεν χάθηκε.",
+              "textEn": "Was transferred to other forms (mostly heat), not destroyed.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Καταστράφηκε εντελώς.",
+              "textEn": "Was completely destroyed.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.energy-used-up"
+            },
+            {
+              "textEl": "Επέστρεψε στο σώμα που την κίνησε αρχικά.",
+              "textEn": "Returned to whatever originally set it in motion.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.energy-used-up"
+            }
+          ]
+        },
+        {
+          "id": "q5-constant-velocity",
+          "textEl": "Ένα αυτοκίνητο κινείται σε ίσιο δρόμο με σταθερή ταχύτητα 50 km/h. Η συνισταμένη δύναμη πάνω του είναι...",
+          "textEn": "A car moves on a flat road at a steady 50 km/h. The net force on it is...",
+          "options": [
+            {
+              "textEl": "Μηδέν (η δύναμη της μηχανής εξισορροπεί την τριβή/αντίσταση).",
+              "textEn": "Zero (the engine's force balances friction/drag).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Σταθερή και ανάλογη της ταχύτητας.",
+              "textEn": "Constant and proportional to the speed.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.constant-velocity-needs-force"
+            },
+            {
+              "textEl": "Όλο και μεγαλύτερη όσο προχωράει.",
+              "textEn": "Increasing the longer it travels.",
+              "isCorrect": false,
+              "gapTag": "physics-lyk.constant-velocity-needs-force"
+            }
+          ]
+        }
+      ]
     },
-
     "fysiki-b-lykeiou": {
-      id: "fysiki-b-lykeiou",
-      grades: ["b"],
-      subjectLabelEl: "Φυσική, Β' Λυκείου (Γενικής Παιδείας)",
-      subjectLabelEn: "Physics, 11th Grade Lyceum (General Education)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Φυσικής",
-      titleEn: "The Physics Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για θερμότητα και ηλεκτρισμό. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about heat and electricity. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-heat-temp",
-          textEl: "Ένα μικρό φλιτζάνι καφέ στους 90°C και μια πισίνα στους 25°C. Ποιο έχει περισσότερη θερμότητα;",
-          textEn: "A small cup of coffee at 90°C and a swimming pool at 25°C. Which has more heat energy?",
-          options: [
-            { textEl: "Η πισίνα, γιατί έχει πολύ περισσότερη μάζα νερού, παρόλο που είναι πιο κρύα.", textEn: "The pool, because it has far more water mass, even though it's cooler.", isCorrect: true },
-            { textEl: "Το φλιτζάνι, γιατί έχει υψηλότερη θερμοκρασία.", textEn: "The cup, because it has a higher temperature.", isCorrect: false, gapTag: "physics-b-lyk.heat-temperature-confusion" },
-            { textEl: "Είναι ίδιο, αφού η θερμότητα εξαρτάται μόνο από τη θερμοκρασία.", textEn: "It's the same, since heat depends only on temperature.", isCorrect: false, gapTag: "physics-b-lyk.heat-temperature-confusion" },
-          ],
-        },
-        {
-          id: "q2-current-not-used",
-          textEl: "Σε ένα απλό κύκλωμα με μία λάμπα, η ένταση του ρεύματος πριν και μετά τη λάμπα είναι...",
-          textEn: "In a simple one-bulb circuit, the current before and after the bulb is...",
-          options: [
-            { textEl: "Η ίδια — η ένταση δεν «καταναλώνεται».", textEn: "The same — current isn't 'used up.'", isCorrect: true },
-            { textEl: "Μικρότερη μετά τη λάμπα, αφού η λάμπα «καταναλώνει» ρεύμα.", textEn: "Smaller after the bulb, since the bulb 'consumes' current.", isCorrect: false, gapTag: "physics-b-lyk.current-consumed" },
-            { textEl: "Μηδενική μετά τη λάμπα.", textEn: "Zero after the bulb.", isCorrect: false, gapTag: "physics-b-lyk.current-consumed" },
-          ],
-        },
-        {
-          id: "q3-voltage-current",
-          textEl: "Το βολτόμετρο δείχνει 12V στα άκρα μιας μπαταρίας. Τι μετράει αυτό;",
-          textEn: "A voltmeter reads 12V across a battery. What is it measuring?",
-          options: [
-            { textEl: "Την ηλεκτρική τάση (διαφορά δυναμικού).", textEn: "The voltage (potential difference).", isCorrect: true },
-            { textEl: "Την ένταση του ρεύματος που περνάει.", textEn: "The current flowing through it.", isCorrect: false, gapTag: "physics-b-lyk.voltage-current-confusion" },
-            { textEl: "Την ισχύ της μπαταρίας σε βατ.", textEn: "The battery's power in watts.", isCorrect: false, gapTag: "physics-b-lyk.voltage-current-confusion" },
-          ],
-        },
-        {
-          id: "q4-heat-direction",
-          textEl: "Βάζεις ένα ζεστό ρόφημα σε κρύο δωμάτιο. Προς τα πού ρέει η θερμότητα;",
-          textEn: "You place a hot drink in a cold room. Which way does heat flow?",
-          options: [
-            { textEl: "Από το ρόφημα προς το δωμάτιο, μέχρι να εξισωθούν οι θερμοκρασίες.", textEn: "From the drink to the room, until temperatures equalize.", isCorrect: true },
-            { textEl: "Από το δωμάτιο προς το ρόφημα, για να το κρυώσει.", textEn: "From the room to the drink, to cool it down.", isCorrect: false, gapTag: "physics-b-lyk.heat-flow-direction" },
-            { textEl: "Δεν υπάρχει ροή θερμότητας αν δεν αγγίζονται.", textEn: "There's no heat flow unless they touch.", isCorrect: false, gapTag: "physics-b-lyk.heat-flow-direction" },
-          ],
-        },
-        {
-          id: "q5-series-parallel",
-          textEl: "Δύο λάμπες συνδέονται παράλληλα σε μια μπαταρία. Αν καεί η μία, τι γίνεται η άλλη;",
-          textEn: "Two bulbs are connected in parallel to a battery. If one burns out, what happens to the other?",
-          options: [
-            { textEl: "Συνεχίζει να λειτουργεί κανονικά.", textEn: "It keeps working normally.", isCorrect: true },
-            { textEl: "Σβήνει κι αυτή, όπως θα γινόταν σε σύνδεση σε σειρά.", textEn: "It also goes out, as would happen in a series connection.", isCorrect: false, gapTag: "physics-b-lyk.series-parallel-confusion" },
-            { textEl: "Γίνεται πιο φωτεινή.", textEn: "It becomes brighter.", isCorrect: false, gapTag: "physics-b-lyk.series-parallel-confusion" },
-          ],
-        },
+      "id": "fysiki-b-lykeiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Φυσική, Β' Λυκείου (Προσανατολισμού)",
+      "subjectLabelEn": "Physics, 11th Grade (Science Track)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Φυσικής",
+      "titleEn": "The Physics Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις από τον επαληθευμένο πυρήνα της Φυσικής Προσανατολισμού Β΄ ΓΕΛ 2026–27: κυκλική κίνηση, ορμή, κρούσεις και θερμοδυναμική. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions from the verified 2026–27 Grade 11 science-track Physics scope: circular motion, momentum, collisions, and thermodynamics. It is not a graded test.",
+      "questions": [
+        {
+          "id": "q1-circular-velocity",
+          "textEl": "Σε ομαλή κυκλική κίνηση, προς ποια κατεύθυνση δείχνει η στιγμιαία ταχύτητα ενός σώματος;",
+          "textEn": "In uniform circular motion, which way does the instantaneous velocity point?",
+          "options": [
+            {
+              "textEl": "Εφαπτομενικά στην κυκλική τροχιά, στο σημείο όπου βρίσκεται το σώμα.",
+              "textEn": "Tangent to the circular path at the body’s current point.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Πάντα προς το κέντρο του κύκλου.",
+              "textEn": "Always toward the centre of the circle.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.circular-motion-tangent-velocity"
+            },
+            {
+              "textEl": "Πάντα προς τα έξω, μακριά από το κέντρο.",
+              "textEn": "Always outward, away from the centre.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.circular-motion-tangent-velocity"
+            }
+          ]
+        },
+        {
+          "id": "q2-centripetal-force",
+          "textEl": "Στην ομαλή κυκλική κίνηση, η συνισταμένη δύναμη που προκαλεί την κεντρομόλο επιτάχυνση έχει κατεύθυνση...",
+          "textEn": "In uniform circular motion, the resultant force producing centripetal acceleration points...",
+          "options": [
+            {
+              "textEl": "Προς το κέντρο της κυκλικής τροχιάς.",
+              "textEn": "Toward the centre of the circular path.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Εφαπτομενικά, ίδια με την ταχύτητα.",
+              "textEn": "Tangentially, in the same direction as velocity.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.centripetal-force-direction"
+            },
+            {
+              "textEl": "Προς τα έξω από τον κύκλο.",
+              "textEn": "Outward from the circle.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.centripetal-force-direction"
+            }
+          ]
+        },
+        {
+          "id": "q3-momentum",
+          "textEl": "Δύο σώματα κινούνται με την ίδια ταχύτητα προς την ίδια κατεύθυνση. Ποιο έχει μεγαλύτερη ορμή;",
+          "textEn": "Two bodies move with the same velocity in the same direction. Which has greater momentum?",
+          "options": [
+            {
+              "textEl": "Το σώμα με τη μεγαλύτερη μάζα.",
+              "textEn": "The body with the greater mass.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Έχουν πάντα την ίδια ορμή επειδή έχουν ίδια ταχύτητα.",
+              "textEn": "They always have the same momentum because their velocity is the same.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.momentum-definition"
+            },
+            {
+              "textEl": "Το σώμα με τη μικρότερη μάζα.",
+              "textEn": "The body with the smaller mass.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.momentum-definition"
+            }
+          ]
+        },
+        {
+          "id": "q4-collision",
+          "textEl": "Σε μια κρούση μέσα σε μονωμένο σύστημα, ποια πρόταση είναι σωστή;",
+          "textEn": "In a collision within an isolated system, which statement is correct?",
+          "options": [
+            {
+              "textEl": "Η συνολική ορμή του συστήματος πριν και μετά την κρούση διατηρείται.",
+              "textEn": "The system’s total momentum is conserved before and after the collision.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η ορμή χάνεται αν η κρούση είναι ανελαστική.",
+              "textEn": "Momentum is lost if the collision is inelastic.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.momentum-conservation"
+            },
+            {
+              "textEl": "Η συνολική ορμή διατηρείται μόνο όταν τα σώματα έχουν ίσες μάζες.",
+              "textEn": "Total momentum is conserved only when the bodies have equal masses.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.momentum-conservation"
+            }
+          ]
+        },
+        {
+          "id": "q5-first-law",
+          "textEl": "Ένα αέριο δέχεται θερμότητα και ταυτόχρονα εκτονώνεται παράγοντας έργο. Ποια ιδέα αποδίδει σωστά τον 1ο θερμοδυναμικό νόμο;",
+          "textEn": "A gas receives heat while expanding and doing work. Which idea correctly expresses the first law of thermodynamics?",
+          "options": [
+            {
+              "textEl": "Η ενέργεια που δέχεται ως θερμότητα συνδέεται με τη μεταβολή της εσωτερικής ενέργειας και με το έργο που παράγει.",
+              "textEn": "Energy received as heat is accounted for through the change in internal energy and the work done.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Όλη η θερμότητα μετατρέπεται υποχρεωτικά μόνο σε έργο.",
+              "textEn": "All heat must be converted only into work.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.first-law-energy-balance"
+            },
+            {
+              "textEl": "Η εσωτερική ενέργεια δεν μπορεί να αλλάξει όταν το αέριο παράγει έργο.",
+              "textEn": "Internal energy cannot change when the gas does work.",
+              "isCorrect": false,
+              "gapTag": "physics-b-lyk.first-law-energy-balance"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-a-lykeiou": {
-      id: "istoria-a-lykeiou",
-      grades: ["a"],
-      subjectLabelEl: "Ιστορία, Α' Λυκείου (Αρχαία Ιστορία)",
-      subjectLabelEn: "History, 10th Grade (Ancient History)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αρχαίας Ιστορίας",
-      titleEn: "The Ancient History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για την πόλη-κράτος και τους Ελληνιστικούς χρόνους. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about the city-state and the Hellenistic era. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-polis",
-          textEl: "Τι κάνει μια αρχαία ελληνική πόλη «πόλη-κράτος» (π.χ. Αθήνα, Σπάρτη);",
-          textEn: "What makes an ancient Greek city a 'city-state' (e.g. Athens, Sparta)?",
-          options: [
-            { textEl: "Είναι αυτόνομη πολιτική/στρατιωτική/θρησκευτική οντότητα με δικούς της νόμους.", textEn: "It's an autonomous political/military/religious unit with its own laws.", isCorrect: true },
-            { textEl: "Είναι απλώς μια μεγάλη πόλη με πολύ πληθυσμό.", textEn: "It's simply a large city with a big population.", isCorrect: false, gapTag: "istoria-a-lyk.polis-definition" },
-            { textEl: "Είναι μια περιοχή που ελέγχει ο βασιλιάς όλης της Ελλάδας.", textEn: "It's a region controlled by the king of all Greece.", isCorrect: false, gapTag: "istoria-a-lyk.polis-definition" },
-          ],
-        },
-        {
-          id: "q2-persian-wars",
-          textEl: "Τι πυροδότησε την έναρξη των Περσικών Πολέμων;",
-          textEn: "What triggered the start of the Persian Wars?",
-          options: [
-            { textEl: "Η Ιωνική Επανάσταση, με τη βοήθεια Αθήνας και Ερέτριας προς τις ιωνικές πόλεις.", textEn: "The Ionian Revolt, aided by Athens and Eretria supporting the Ionian cities.", isCorrect: true },
-            { textEl: "Μια ξαφνική περσική εισβολή χωρίς καμία προηγούμενη αιτία.", textEn: "A sudden Persian invasion with no prior cause.", isCorrect: false, gapTag: "istoria-a-lyk.persian-wars-cause" },
-            { textEl: "Μια διαμάχη ανάμεσα σε Αθήνα και Σπάρτη.", textEn: "A dispute between Athens and Sparta.", isCorrect: false, gapTag: "istoria-a-lyk.persian-wars-cause" },
-          ],
-        },
-        {
-          id: "q3-alexander",
-          textEl: "Τι έγινε με την αυτοκρατορία του Μεγάλου Αλεξάνδρου μετά τον θάνατό του (323 π.Χ.);",
-          textEn: "What happened to Alexander the Great's empire after his death (323 BC)?",
-          options: [
-            { textEl: "Διαλύθηκε στα ελληνιστικά βασίλεια των Διαδόχων του.", textEn: "It broke up into the Hellenistic kingdoms of his Successors.", isCorrect: true },
-            { textEl: "Παρέμεινε ενωμένη υπό έναν νέο αυτοκράτορα.", textEn: "It remained unified under a new emperor.", isCorrect: false, gapTag: "istoria-a-lyk.alexander-empire-unity" },
-            { textEl: "Επέστρεψε στα όρια πριν τις κατακτήσεις του.", textEn: "It reverted to its borders before his conquests.", isCorrect: false, gapTag: "istoria-a-lyk.alexander-empire-unity" },
-          ],
-        },
-        {
-          id: "q4-direct-democracy",
-          textEl: "Στην αθηναϊκή άμεση δημοκρατία, ποιος αποφάσιζε για τους νόμους;",
-          textEn: "In Athenian direct democracy, who decided on the laws?",
-          options: [
-            { textEl: "Οι ίδιοι οι πολίτες, ψηφίζοντας απευθείας στην Εκκλησία του Δήμου.", textEn: "The citizens themselves, voting directly in the Assembly.", isCorrect: true },
-            { textEl: "Εκλεγμένοι αντιπρόσωποι, όπως σε σημερινό κοινοβούλιο.", textEn: "Elected representatives, as in a modern parliament.", isCorrect: false, gapTag: "istoria-a-lyk.direct-democracy-athens" },
-            { textEl: "Μόνο ο άρχοντας της πόλης.", textEn: "Only the city's chief magistrate.", isCorrect: false, gapTag: "istoria-a-lyk.direct-democracy-athens" },
-          ],
-        },
+      "id": "istoria-a-lykeiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Ιστορία, Α' Λυκείου (Αρχαία Ιστορία)",
+      "subjectLabelEn": "History, 10th Grade (Ancient History)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αρχαίας Ιστορίας",
+      "titleEn": "The Ancient History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για την πόλη-κράτος και τους Ελληνιστικούς χρόνους. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about the city-state and the Hellenistic era. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-polis",
+          "textEl": "Τι κάνει μια αρχαία ελληνική πόλη «πόλη-κράτος» (π.χ. Αθήνα, Σπάρτη);",
+          "textEn": "What makes an ancient Greek city a 'city-state' (e.g. Athens, Sparta)?",
+          "options": [
+            {
+              "textEl": "Είναι αυτόνομη πολιτική/στρατιωτική/θρησκευτική οντότητα με δικούς της νόμους.",
+              "textEn": "It's an autonomous political/military/religious unit with its own laws.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Είναι απλώς μια μεγάλη πόλη με πολύ πληθυσμό.",
+              "textEn": "It's simply a large city with a big population.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.polis-definition"
+            },
+            {
+              "textEl": "Είναι μια περιοχή που ελέγχει ο βασιλιάς όλης της Ελλάδας.",
+              "textEn": "It's a region controlled by the king of all Greece.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.polis-definition"
+            }
+          ]
+        },
+        {
+          "id": "q2-persian-wars",
+          "textEl": "Τι πυροδότησε την έναρξη των Περσικών Πολέμων;",
+          "textEn": "What triggered the start of the Persian Wars?",
+          "options": [
+            {
+              "textEl": "Η Ιωνική Επανάσταση, με τη βοήθεια Αθήνας και Ερέτριας προς τις ιωνικές πόλεις.",
+              "textEn": "The Ionian Revolt, aided by Athens and Eretria supporting the Ionian cities.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μια ξαφνική περσική εισβολή χωρίς καμία προηγούμενη αιτία.",
+              "textEn": "A sudden Persian invasion with no prior cause.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.persian-wars-cause"
+            },
+            {
+              "textEl": "Μια διαμάχη ανάμεσα σε Αθήνα και Σπάρτη.",
+              "textEn": "A dispute between Athens and Sparta.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.persian-wars-cause"
+            }
+          ]
+        },
+        {
+          "id": "q3-alexander",
+          "textEl": "Τι έγινε με την αυτοκρατορία του Μεγάλου Αλεξάνδρου μετά τον θάνατό του (323 π.Χ.);",
+          "textEn": "What happened to Alexander the Great's empire after his death (323 BC)?",
+          "options": [
+            {
+              "textEl": "Διαλύθηκε στα ελληνιστικά βασίλεια των Διαδόχων του.",
+              "textEn": "It broke up into the Hellenistic kingdoms of his Successors.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Παρέμεινε ενωμένη υπό έναν νέο αυτοκράτορα.",
+              "textEn": "It remained unified under a new emperor.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.alexander-empire-unity"
+            },
+            {
+              "textEl": "Επέστρεψε στα όρια πριν τις κατακτήσεις του.",
+              "textEn": "It reverted to its borders before his conquests.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.alexander-empire-unity"
+            }
+          ]
+        },
+        {
+          "id": "q4-direct-democracy",
+          "textEl": "Στην αθηναϊκή άμεση δημοκρατία, ποιος αποφάσιζε για τους νόμους;",
+          "textEn": "In Athenian direct democracy, who decided on the laws?",
+          "options": [
+            {
+              "textEl": "Οι ίδιοι οι πολίτες, ψηφίζοντας απευθείας στην Εκκλησία του Δήμου.",
+              "textEn": "The citizens themselves, voting directly in the Assembly.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Εκλεγμένοι αντιπρόσωποι, όπως σε σημερινό κοινοβούλιο.",
+              "textEn": "Elected representatives, as in a modern parliament.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.direct-democracy-athens"
+            },
+            {
+              "textEl": "Μόνο ο άρχοντας της πόλης.",
+              "textEn": "Only the city's chief magistrate.",
+              "isCorrect": false,
+              "gapTag": "istoria-a-lyk.direct-democracy-athens"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-b-lykeiou": {
-      id: "istoria-b-lykeiou",
-      grades: ["b"],
-      subjectLabelEl: "Ιστορία, Β' Λυκείου (Βυζάντιο & Απαρχές Νεότερης Ιστορίας)",
-      subjectLabelEn: "History, 11th Grade (Byzantium & Early Modern History)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Βυζαντινής Ιστορίας",
-      titleEn: "The Byzantine History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για το Βυζάντιο και την Αναγέννηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about Byzantium and the Renaissance. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-byzantium",
-          textEl: "Η Βυζαντινή Αυτοκρατορία ήταν...",
-          textEn: "The Byzantine Empire was...",
-          options: [
-            { textEl: "Η άμεση συνέχεια της Ρωμαϊκής Αυτοκρατορίας στην Ανατολή.", textEn: "The direct continuation of the Roman Empire in the East.", isCorrect: true },
-            { textEl: "Ένα εντελώς νέο κράτος, χωρίς σχέση με τη Ρώμη.", textEn: "An entirely new state, unrelated to Rome.", isCorrect: false, gapTag: "istoria-b-lyk.byzantium-continuation" },
-            { textEl: "Μια ελληνική αποικία της Ρώμης.", textEn: "A Greek colony of Rome.", isCorrect: false, gapTag: "istoria-b-lyk.byzantium-continuation" },
-          ],
-        },
-        {
-          id: "q2-1453",
-          textEl: "Η Άλωση της Κωνσταντινούπολης το 1453 σηματοδότησε...",
-          textEn: "The 1453 Fall of Constantinople marked...",
-          options: [
-            { textEl: "Το τέλος της Βυζαντινής Αυτοκρατορίας, ορόσημο για την ευρωπαϊκή ιστορία.", textEn: "The end of the Byzantine Empire, a landmark in European history.", isCorrect: true },
-            { textEl: "Απλώς μια ακόμα τοπική μάχη χωρίς ιδιαίτερη σημασία.", textEn: "Just another local battle with no particular significance.", isCorrect: false, gapTag: "istoria-b-lyk.fall-constantinople-1453" },
-            { textEl: "Την αρχή της Βυζαντινής Αυτοκρατορίας.", textEn: "The beginning of the Byzantine Empire.", isCorrect: false, gapTag: "istoria-b-lyk.fall-constantinople-1453" },
-          ],
-        },
-        {
-          id: "q3-renaissance",
-          textEl: "Ένας παράγοντας που βοήθησε στη διάδοση της Αναγέννησης στη Δύση ήταν...",
-          textEn: "One factor that helped spread the Renaissance to the West was...",
-          options: [
-            { textEl: "Η μετακίνηση Βυζαντινών λογίων και χειρογράφων προς την Ιταλία.", textEn: "The movement of Byzantine scholars and manuscripts to Italy.", isCorrect: true },
-            { textEl: "Ένα τυχαίο γεγονός χωρίς καμία προηγούμενη αιτία.", textEn: "A random event with no prior cause.", isCorrect: false, gapTag: "istoria-b-lyk.renaissance-cause" },
-            { textEl: "Η στρατιωτική κατάκτηση της Ιταλίας από τους Βυζαντινούς.", textEn: "The Byzantine military conquest of Italy.", isCorrect: false, gapTag: "istoria-b-lyk.renaissance-cause" },
-          ],
-        },
-        {
-          id: "q4-ottoman-rule",
-          textEl: "Η ζωή των Ελλήνων υπό οθωμανική κυριαρχία...",
-          textEn: "The life of Greeks under Ottoman rule...",
-          options: [
-            { textEl: "Διέφερε σημαντικά ανάλογα με περιοχή, προνόμια Εκκλησίας και τοπικές συνθήκες.", textEn: "Varied significantly by region, Church privileges, and local conditions.", isCorrect: true },
-            { textEl: "Ήταν ίδια παντού, χωρίς καμία διαφοροποίηση.", textEn: "Was identical everywhere, with no variation.", isCorrect: false, gapTag: "istoria-b-lyk.ottoman-administration" },
-            { textEl: "Ήταν απαγορευμένη κάθε μορφή ελληνικής θρησκευτικής ζωής.", textEn: "All forms of Greek religious life were banned.", isCorrect: false, gapTag: "istoria-b-lyk.ottoman-administration" },
-          ],
-        },
+      "id": "istoria-b-lykeiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Ιστορία, Β' Λυκείου (Βυζάντιο & Απαρχές Νεότερης Ιστορίας)",
+      "subjectLabelEn": "History, 11th Grade (Byzantium & Early Modern History)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Βυζαντινής Ιστορίας",
+      "titleEn": "The Byzantine History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για το Βυζάντιο και την Αναγέννηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about Byzantium and the Renaissance. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-byzantium",
+          "textEl": "Η Βυζαντινή Αυτοκρατορία ήταν...",
+          "textEn": "The Byzantine Empire was...",
+          "options": [
+            {
+              "textEl": "Η άμεση συνέχεια της Ρωμαϊκής Αυτοκρατορίας στην Ανατολή.",
+              "textEn": "The direct continuation of the Roman Empire in the East.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ένα εντελώς νέο κράτος, χωρίς σχέση με τη Ρώμη.",
+              "textEn": "An entirely new state, unrelated to Rome.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.byzantium-continuation"
+            },
+            {
+              "textEl": "Μια ελληνική αποικία της Ρώμης.",
+              "textEn": "A Greek colony of Rome.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.byzantium-continuation"
+            }
+          ]
+        },
+        {
+          "id": "q2-1453",
+          "textEl": "Η Άλωση της Κωνσταντινούπολης το 1453 σηματοδότησε...",
+          "textEn": "The 1453 Fall of Constantinople marked...",
+          "options": [
+            {
+              "textEl": "Το τέλος της Βυζαντινής Αυτοκρατορίας, ορόσημο για την ευρωπαϊκή ιστορία.",
+              "textEn": "The end of the Byzantine Empire, a landmark in European history.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Απλώς μια ακόμα τοπική μάχη χωρίς ιδιαίτερη σημασία.",
+              "textEn": "Just another local battle with no particular significance.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.fall-constantinople-1453"
+            },
+            {
+              "textEl": "Την αρχή της Βυζαντινής Αυτοκρατορίας.",
+              "textEn": "The beginning of the Byzantine Empire.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.fall-constantinople-1453"
+            }
+          ]
+        },
+        {
+          "id": "q3-renaissance",
+          "textEl": "Ένας παράγοντας που βοήθησε στη διάδοση της Αναγέννησης στη Δύση ήταν...",
+          "textEn": "One factor that helped spread the Renaissance to the West was...",
+          "options": [
+            {
+              "textEl": "Η μετακίνηση Βυζαντινών λογίων και χειρογράφων προς την Ιταλία.",
+              "textEn": "The movement of Byzantine scholars and manuscripts to Italy.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ένα τυχαίο γεγονός χωρίς καμία προηγούμενη αιτία.",
+              "textEn": "A random event with no prior cause.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.renaissance-cause"
+            },
+            {
+              "textEl": "Η στρατιωτική κατάκτηση της Ιταλίας από τους Βυζαντινούς.",
+              "textEn": "The Byzantine military conquest of Italy.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.renaissance-cause"
+            }
+          ]
+        },
+        {
+          "id": "q4-ottoman-rule",
+          "textEl": "Η ζωή των Ελλήνων υπό οθωμανική κυριαρχία...",
+          "textEn": "The life of Greeks under Ottoman rule...",
+          "options": [
+            {
+              "textEl": "Διέφερε σημαντικά ανάλογα με περιοχή, προνόμια Εκκλησίας και τοπικές συνθήκες.",
+              "textEn": "Varied significantly by region, Church privileges, and local conditions.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ήταν ίδια παντού, χωρίς καμία διαφοροποίηση.",
+              "textEn": "Was identical everywhere, with no variation.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.ottoman-administration"
+            },
+            {
+              "textEl": "Ήταν απαγορευμένη κάθε μορφή ελληνικής θρησκευτικής ζωής.",
+              "textEn": "All forms of Greek religious life were banned.",
+              "isCorrect": false,
+              "gapTag": "istoria-b-lyk.ottoman-administration"
+            }
+          ]
+        }
+      ]
     },
-
     "istoria-g-lykeiou": {
-      id: "istoria-g-lykeiou",
-      grades: ["c"],
-      subjectLabelEl: "Ιστορία, Γ' Λυκείου (Νεότερη & Σύγχρονη Ιστορία)",
-      subjectLabelEn: "History, 12th Grade (Modern & Contemporary History)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Σύγχρονης Ιστορίας",
-      titleEn: "The Modern History Learning Compass",
-      introEl: "4 σύντομες ερωτήσεις για τον 19ο-20ό αιώνα. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "4 short questions about the 19th-20th century. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-education-ottoman",
-          textEl: "Η ελληνική εκπαίδευση επί Οθωμανικής Αυτοκρατορίας ήταν...",
-          textEn: "Greek-language education under the Ottoman Empire was...",
-          options: [
-            { textEl: "Νόμιμη· λειτουργούσαν χιλιάδες σχολεία επίσημα.", textEn: "Legal — thousands of schools operated officially.", isCorrect: true },
-            { textEl: "Επίσημα απαγορευμένη σε όλη την Αυτοκρατορία.", textEn: "Officially banned throughout the Empire.", isCorrect: false, gapTag: "history-lyk.kryfo-sxoleio-ban" },
-            { textEl: "Επιτρεπτή μόνο στην Κωνσταντινούπολη.", textEn: "Permitted only in Constantinople.", isCorrect: false, gapTag: "history-lyk.kryfo-sxoleio-ban" },
-          ],
-        },
-        {
-          id: "q2-1922",
-          textEl: "Ποια ήταν η καθοριστική αιτία της Μικρασιατικής Καταστροφής του 1922;",
-          textEn: "What was the decisive cause of the 1922 Asia Minor Catastrophe?",
-          options: [
-            { textEl: "Η κατάρρευση της διεθνούς/διπλωματικής θέσης της Ελλάδας.", textEn: "The collapse of Greece's international/diplomatic position.", isCorrect: true },
-            { textEl: "Αποκλειστικά η στρατιωτική ήττα στο μέτωπο.", textEn: "Purely the military defeat at the front.", isCorrect: false, gapTag: "history-lyk.1922-military-defeat-only" },
-            { textEl: "Η έλλειψη στρατιωτικού εξοπλισμού.", textEn: "The lack of military equipment.", isCorrect: false, gapTag: "history-lyk.1922-military-defeat-only" },
-          ],
-        },
-        {
-          id: "q3-lausanne",
-          textEl: "Η μετακίνηση πληθυσμών το 1923 ήταν...",
-          textEn: "The 1923 movement of populations was...",
-          options: [
-            { textEl: "Υποχρεωτική ανταλλαγή πληθυσμών βάσει της Συνθήκης της Λωζάνης.", textEn: "A compulsory population exchange under the Treaty of Lausanne.", isCorrect: true },
-            { textEl: "Εντελώς αυθόρμητη φυγή, χωρίς κανένα νομικό πλαίσιο.", textEn: "Entirely spontaneous flight, with no legal framework.", isCorrect: false, gapTag: "history-lyk.refugee-spontaneous" },
-            { textEl: "Εθελοντική μετανάστευση για οικονομικούς λόγους.", textEn: "Voluntary migration for economic reasons.", isCorrect: false, gapTag: "history-lyk.refugee-spontaneous" },
-          ],
-        },
-        {
-          id: "q4-population",
-          textEl: "Πριν το 1922, οι Έλληνες στην περιοχή της Σμύρνης ήταν...",
-          textEn: "Before 1922, the Greeks in the Smyrna region were...",
-          options: [
-            { textEl: "Μια πολύ μεγάλη μειονότητα (περίπου οι μισοί τοπικά), όχι πλειοψηφία σε όλη τη Μικρά Ασία.", textEn: "A very large minority (roughly half locally), not a majority across all of Asia Minor.", isCorrect: true },
-            { textEl: "Η σαφής πλειοψηφία σε όλη τη Μικρά Ασία.", textEn: "The clear majority across all of Asia Minor.", isCorrect: false, gapTag: "history-lyk.greeks-majority-asia-minor" },
-            { textEl: "Λιγότεροι από το 5% του πληθυσμού.", textEn: "Less than 5% of the population.", isCorrect: false, gapTag: "history-lyk.greeks-majority-asia-minor" },
-          ],
-        },
+      "id": "istoria-g-lykeiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Ιστορία, Γ' Λυκείου (Νεότερη & Σύγχρονη Ιστορία)",
+      "subjectLabelEn": "History, 12th Grade (Modern & Contemporary History)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Σύγχρονης Ιστορίας",
+      "titleEn": "The Modern History Learning Compass",
+      "introEl": "4 σύντομες ερωτήσεις για τον 19ο-20ό αιώνα. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "4 short questions about the 19th-20th century. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-education-ottoman",
+          "textEl": "Η ελληνική εκπαίδευση επί Οθωμανικής Αυτοκρατορίας ήταν...",
+          "textEn": "Greek-language education under the Ottoman Empire was...",
+          "options": [
+            {
+              "textEl": "Νόμιμη· λειτουργούσαν χιλιάδες σχολεία επίσημα.",
+              "textEn": "Legal — thousands of schools operated officially.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Επίσημα απαγορευμένη σε όλη την Αυτοκρατορία.",
+              "textEn": "Officially banned throughout the Empire.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.kryfo-sxoleio-ban"
+            },
+            {
+              "textEl": "Επιτρεπτή μόνο στην Κωνσταντινούπολη.",
+              "textEn": "Permitted only in Constantinople.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.kryfo-sxoleio-ban"
+            }
+          ]
+        },
+        {
+          "id": "q2-1922",
+          "textEl": "Ποια ήταν η καθοριστική αιτία της Μικρασιατικής Καταστροφής του 1922;",
+          "textEn": "What was the decisive cause of the 1922 Asia Minor Catastrophe?",
+          "options": [
+            {
+              "textEl": "Η κατάρρευση της διεθνούς/διπλωματικής θέσης της Ελλάδας.",
+              "textEn": "The collapse of Greece's international/diplomatic position.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Αποκλειστικά η στρατιωτική ήττα στο μέτωπο.",
+              "textEn": "Purely the military defeat at the front.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.1922-military-defeat-only"
+            },
+            {
+              "textEl": "Η έλλειψη στρατιωτικού εξοπλισμού.",
+              "textEn": "The lack of military equipment.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.1922-military-defeat-only"
+            }
+          ]
+        },
+        {
+          "id": "q3-lausanne",
+          "textEl": "Η μετακίνηση πληθυσμών το 1923 ήταν...",
+          "textEn": "The 1923 movement of populations was...",
+          "options": [
+            {
+              "textEl": "Υποχρεωτική ανταλλαγή πληθυσμών βάσει της Συνθήκης της Λωζάνης.",
+              "textEn": "A compulsory population exchange under the Treaty of Lausanne.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Εντελώς αυθόρμητη φυγή, χωρίς κανένα νομικό πλαίσιο.",
+              "textEn": "Entirely spontaneous flight, with no legal framework.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.refugee-spontaneous"
+            },
+            {
+              "textEl": "Εθελοντική μετανάστευση για οικονομικούς λόγους.",
+              "textEn": "Voluntary migration for economic reasons.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.refugee-spontaneous"
+            }
+          ]
+        },
+        {
+          "id": "q4-population",
+          "textEl": "Πριν το 1922, οι Έλληνες στην περιοχή της Σμύρνης ήταν...",
+          "textEn": "Before 1922, the Greeks in the Smyrna region were...",
+          "options": [
+            {
+              "textEl": "Μια πολύ μεγάλη μειονότητα (περίπου οι μισοί τοπικά), όχι πλειοψηφία σε όλη τη Μικρά Ασία.",
+              "textEn": "A very large minority (roughly half locally), not a majority across all of Asia Minor.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η σαφής πλειοψηφία σε όλη τη Μικρά Ασία.",
+              "textEn": "The clear majority across all of Asia Minor.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.greeks-majority-asia-minor"
+            },
+            {
+              "textEl": "Λιγότεροι από το 5% του πληθυσμού.",
+              "textEn": "Less than 5% of the population.",
+              "isCorrect": false,
+              "gapTag": "history-lyk.greeks-majority-asia-minor"
+            }
+          ]
+        }
+      ]
     },
-
     "english-b-lykeiou": {
-      id: "english-b-lykeiou",
-      grades: ["b"],
-      subjectLabelEl: "Αγγλικά, Β' Λυκείου (B2)",
-      subjectLabelEn: "English, 11th Grade (B2)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών (B2)",
-      titleEn: "The English Learning Compass (B2)",
-      introEl: "5 σύντομες ερωτήσεις γραμματικής προχωρημένου επιπέδου. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short advanced-level grammar questions. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-present-perfect-discourse",
-          textEl: "'I've been to Crete. I ___ it two years ago.' Ποιο ταιριάζει;",
-          textEn: "'I've been to Crete. I ___ it two years ago.' Which fits?",
-          options: [
-            { textEl: "visited", textEn: "visited", isCorrect: true },
-            { textEl: "have visited", textEn: "have visited", isCorrect: false, gapTag: "efl-lyk.present-perfect-discourse" },
-            { textEl: "was visiting", textEn: "was visiting", isCorrect: false, gapTag: "efl-lyk.present-perfect-discourse" },
-          ],
-        },
-        {
-          id: "q2-reported-speech",
-          textEl: "Direct: 'I am tired.' Reported: He said (that) he ___ tired.",
-          textEn: "Direct: 'I am tired.' Reported: He said (that) he ___ tired.",
-          options: [
-            { textEl: "was", textEn: "was", isCorrect: true },
-            { textEl: "is", textEn: "is", isCorrect: false, gapTag: "efl-lyk.reported-speech-backshift" },
-            { textEl: "has been", textEn: "has been", isCorrect: false, gapTag: "efl-lyk.reported-speech-backshift" },
-          ],
-        },
-        {
-          id: "q3-actually",
-          textEl: "'Actually' most nearly means...",
-          textEn: "'Actually' most nearly means...",
-          options: [
-            { textEl: "in fact / really", textEn: "in fact / really", isCorrect: true },
-            { textEl: "currently / at present", textEn: "currently / at present", isCorrect: false, gapTag: "efl-lyk.false-friends-advanced" },
-            { textEl: "obviously", textEn: "obviously", isCorrect: false, gapTag: "efl-lyk.false-friends-advanced" },
-          ],
-        },
-        {
-          id: "q4-since-for",
-          textEl: "'I have lived here ___ five years.' Ποιο είναι σωστό;",
-          textEn: "'I have lived here ___ five years.' Which is correct?",
-          options: [
-            { textEl: "for", textEn: "for", isCorrect: true },
-            { textEl: "since", textEn: "since", isCorrect: false, gapTag: "efl-lyk.since-for-confusion" },
-            { textEl: "from", textEn: "from", isCorrect: false, gapTag: "efl-lyk.since-for-confusion" },
-          ],
-        },
-        {
-          id: "q5-collocation",
-          textEl: "'I'm really interested ___ history.' Ποιο είναι σωστό;",
-          textEn: "'I'm really interested ___ history.' Which is correct?",
-          options: [
-            { textEl: "in", textEn: "in", isCorrect: true },
-            { textEl: "for", textEn: "for", isCorrect: false, gapTag: "efl-lyk.preposition-collocation" },
-            { textEl: "about", textEn: "about", isCorrect: false, gapTag: "efl-lyk.preposition-collocation" },
-          ],
-        },
+      "id": "english-b-lykeiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Αγγλικά, Β' Λυκείου (B2)",
+      "subjectLabelEn": "English, 11th Grade (B2)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών (B2)",
+      "titleEn": "The English Learning Compass (B2)",
+      "introEl": "5 σύντομες ερωτήσεις γραμματικής προχωρημένου επιπέδου. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short advanced-level grammar questions. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-present-perfect-discourse",
+          "textEl": "'I've been to Crete. I ___ it two years ago.' Ποιο ταιριάζει;",
+          "textEn": "'I've been to Crete. I ___ it two years ago.' Which fits?",
+          "options": [
+            {
+              "textEl": "visited",
+              "textEn": "visited",
+              "isCorrect": true
+            },
+            {
+              "textEl": "have visited",
+              "textEn": "have visited",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.present-perfect-discourse"
+            },
+            {
+              "textEl": "was visiting",
+              "textEn": "was visiting",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.present-perfect-discourse"
+            }
+          ]
+        },
+        {
+          "id": "q2-reported-speech",
+          "textEl": "Direct: 'I am tired.' Reported: He said (that) he ___ tired.",
+          "textEn": "Direct: 'I am tired.' Reported: He said (that) he ___ tired.",
+          "options": [
+            {
+              "textEl": "was",
+              "textEn": "was",
+              "isCorrect": true
+            },
+            {
+              "textEl": "is",
+              "textEn": "is",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.reported-speech-backshift"
+            },
+            {
+              "textEl": "has been",
+              "textEn": "has been",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.reported-speech-backshift"
+            }
+          ]
+        },
+        {
+          "id": "q3-actually",
+          "textEl": "'Actually' most nearly means...",
+          "textEn": "'Actually' most nearly means...",
+          "options": [
+            {
+              "textEl": "in fact / really",
+              "textEn": "in fact / really",
+              "isCorrect": true
+            },
+            {
+              "textEl": "currently / at present",
+              "textEn": "currently / at present",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.false-friends-advanced"
+            },
+            {
+              "textEl": "obviously",
+              "textEn": "obviously",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.false-friends-advanced"
+            }
+          ]
+        },
+        {
+          "id": "q4-since-for",
+          "textEl": "'I have lived here ___ five years.' Ποιο είναι σωστό;",
+          "textEn": "'I have lived here ___ five years.' Which is correct?",
+          "options": [
+            {
+              "textEl": "for",
+              "textEn": "for",
+              "isCorrect": true
+            },
+            {
+              "textEl": "since",
+              "textEn": "since",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.since-for-confusion"
+            },
+            {
+              "textEl": "from",
+              "textEn": "from",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.since-for-confusion"
+            }
+          ]
+        },
+        {
+          "id": "q5-collocation",
+          "textEl": "'I'm really interested ___ history.' Ποιο είναι σωστό;",
+          "textEn": "'I'm really interested ___ history.' Which is correct?",
+          "options": [
+            {
+              "textEl": "in",
+              "textEn": "in",
+              "isCorrect": true
+            },
+            {
+              "textEl": "for",
+              "textEn": "for",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.preposition-collocation"
+            },
+            {
+              "textEl": "about",
+              "textEn": "about",
+              "isCorrect": false,
+              "gapTag": "efl-lyk.preposition-collocation"
+            }
+          ]
+        }
+      ]
     },
-
     "english-g-lykeiou": {
-      id: "english-g-lykeiou",
-      grades: ["c"],
-      subjectLabelEl: "Αγγλικά, Γ' Λυκείου (C1)",
-      subjectLabelEn: "English, 12th Grade (C1)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Αγγλικών (C1)",
-      titleEn: "The English Learning Compass (C1)",
-      introEl: "5 σύντομες ερωτήσεις για ακαδημαϊκό/επίσημο αγγλικό λόγο. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about academic/formal English. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-mixed-conditional",
-          textEl: "'If I had studied medicine, I ___ a doctor now.' Ποιο ταιριάζει;",
-          textEn: "'If I had studied medicine, I ___ a doctor now.' Which fits?",
-          options: [
-            { textEl: "would be", textEn: "would be", isCorrect: true },
-            { textEl: "would have been", textEn: "would have been", isCorrect: false, gapTag: "efl-c-lyk.mixed-conditionals" },
-            { textEl: "will be", textEn: "will be", isCorrect: false, gapTag: "efl-c-lyk.mixed-conditionals" },
-          ],
-        },
-        {
-          id: "q2-inversion",
-          textEl: "Ποια πρόταση χρησιμοποιεί σωστά αντεστραμμένη σύνταξη για έμφαση;",
-          textEn: "Which sentence correctly uses inversion for emphasis?",
-          options: [
-            { textEl: "'Never have I seen such dedication.'", textEn: "'Never have I seen such dedication.'", isCorrect: true },
-            { textEl: "'Never I have seen such dedication.'", textEn: "'Never I have seen such dedication.'", isCorrect: false, gapTag: "efl-c-lyk.inversion-emphasis" },
-            { textEl: "'I never have seen such dedication.'", textEn: "'I never have seen such dedication.'", isCorrect: false, gapTag: "efl-c-lyk.inversion-emphasis" },
-          ],
-        },
-        {
-          id: "q3-academic-collocation",
-          textEl: "Σε ακαδημαϊκό κείμενο: 'The team decided to ___ extensive research.' Ποιο ταιριάζει;",
-          textEn: "In academic writing: 'The team decided to ___ extensive research.' Which fits?",
-          options: [
-            { textEl: "conduct", textEn: "conduct", isCorrect: true },
-            { textEl: "make", textEn: "make", isCorrect: false, gapTag: "efl-c-lyk.academic-collocations" },
-            { textEl: "do a", textEn: "do a", isCorrect: false, gapTag: "efl-c-lyk.academic-collocations" },
-          ],
-        },
-        {
-          id: "q4-passive-formal",
-          textEl: "Ποια διατύπωση ταιριάζει σε επίσημη/ακαδημαϊκή αναφορά;",
-          textEn: "Which phrasing fits a formal/academic report?",
-          options: [
-            { textEl: "'The data were analyzed using statistical software.'", textEn: "'The data were analyzed using statistical software.'", isCorrect: true },
-            { textEl: "'We analyzed the data with some software.'", textEn: "'We analyzed the data with some software.'", isCorrect: false, gapTag: "efl-c-lyk.passive-voice-formal" },
-            { textEl: "'I did the data analysis myself.'", textEn: "'I did the data analysis myself.'", isCorrect: false, gapTag: "efl-c-lyk.passive-voice-formal" },
-          ],
-        },
-        {
-          id: "q5-phrasal-formal",
-          textEl: "Σε επίσημο δοκίμιο, ποιο ρήμα ταιριάζει καλύτερα αντί για το 'find out'?",
-          textEn: "In a formal essay, which verb better replaces 'find out'?",
-          options: [
-            { textEl: "discover", textEn: "discover", isCorrect: true },
-            { textEl: "get to know", textEn: "get to know", isCorrect: false, gapTag: "efl-c-lyk.phrasal-vs-formal-verb" },
-            { textEl: "figure out", textEn: "figure out", isCorrect: false, gapTag: "efl-c-lyk.phrasal-vs-formal-verb" },
-          ],
-        },
+      "id": "english-g-lykeiou",
+      "grades": [
+        "c"
       ],
+      "subjectLabelEl": "Αγγλικά, Γ' Λυκείου (C1)",
+      "subjectLabelEn": "English, 12th Grade (C1)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Αγγλικών (C1)",
+      "titleEn": "The English Learning Compass (C1)",
+      "introEl": "5 σύντομες ερωτήσεις για ακαδημαϊκό/επίσημο αγγλικό λόγο. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about academic/formal English. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-mixed-conditional",
+          "textEl": "'If I had studied medicine, I ___ a doctor now.' Ποιο ταιριάζει;",
+          "textEn": "'If I had studied medicine, I ___ a doctor now.' Which fits?",
+          "options": [
+            {
+              "textEl": "would be",
+              "textEn": "would be",
+              "isCorrect": true
+            },
+            {
+              "textEl": "would have been",
+              "textEn": "would have been",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.mixed-conditionals"
+            },
+            {
+              "textEl": "will be",
+              "textEn": "will be",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.mixed-conditionals"
+            }
+          ]
+        },
+        {
+          "id": "q2-inversion",
+          "textEl": "Ποια πρόταση χρησιμοποιεί σωστά αντεστραμμένη σύνταξη για έμφαση;",
+          "textEn": "Which sentence correctly uses inversion for emphasis?",
+          "options": [
+            {
+              "textEl": "'Never have I seen such dedication.'",
+              "textEn": "'Never have I seen such dedication.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "'Never I have seen such dedication.'",
+              "textEn": "'Never I have seen such dedication.'",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.inversion-emphasis"
+            },
+            {
+              "textEl": "'I never have seen such dedication.'",
+              "textEn": "'I never have seen such dedication.'",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.inversion-emphasis"
+            }
+          ]
+        },
+        {
+          "id": "q3-academic-collocation",
+          "textEl": "Σε ακαδημαϊκό κείμενο: 'The team decided to ___ extensive research.' Ποιο ταιριάζει;",
+          "textEn": "In academic writing: 'The team decided to ___ extensive research.' Which fits?",
+          "options": [
+            {
+              "textEl": "conduct",
+              "textEn": "conduct",
+              "isCorrect": true
+            },
+            {
+              "textEl": "make",
+              "textEn": "make",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.academic-collocations"
+            },
+            {
+              "textEl": "do a",
+              "textEn": "do a",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.academic-collocations"
+            }
+          ]
+        },
+        {
+          "id": "q4-passive-formal",
+          "textEl": "Ποια διατύπωση ταιριάζει σε επίσημη/ακαδημαϊκή αναφορά;",
+          "textEn": "Which phrasing fits a formal/academic report?",
+          "options": [
+            {
+              "textEl": "'The data were analyzed using statistical software.'",
+              "textEn": "'The data were analyzed using statistical software.'",
+              "isCorrect": true
+            },
+            {
+              "textEl": "'We analyzed the data with some software.'",
+              "textEn": "'We analyzed the data with some software.'",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.passive-voice-formal"
+            },
+            {
+              "textEl": "'I did the data analysis myself.'",
+              "textEn": "'I did the data analysis myself.'",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.passive-voice-formal"
+            }
+          ]
+        },
+        {
+          "id": "q5-phrasal-formal",
+          "textEl": "Σε επίσημο δοκίμιο, ποιο ρήμα ταιριάζει καλύτερα αντί για το 'find out'?",
+          "textEn": "In a formal essay, which verb better replaces 'find out'?",
+          "options": [
+            {
+              "textEl": "discover",
+              "textEn": "discover",
+              "isCorrect": true
+            },
+            {
+              "textEl": "get to know",
+              "textEn": "get to know",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.phrasal-vs-formal-verb"
+            },
+            {
+              "textEl": "figure out",
+              "textEn": "figure out",
+              "isCorrect": false,
+              "gapTag": "efl-c-lyk.phrasal-vs-formal-verb"
+            }
+          ]
+        }
+      ]
     },
-
     "biologia-a-lykeiou": {
-      id: "biologia-a-lykeiou",
-      grades: ["a"],
-      subjectLabelEl: "Βιολογία, Α' Λυκείου (Γενικής Παιδείας)",
-      subjectLabelEn: "Biology, 10th Grade (General Education)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Βιολογίας",
-      titleEn: "The Biology Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για το κύτταρο και τα ανθρώπινα συστήματα. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about the cell and human systems. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-homeostasis",
-          textEl: "Τι είναι η ομοιόσταση;",
-          textEn: "What is homeostasis?",
-          options: [
-            { textEl: "Η ικανότητα του οργανισμού να διατηρεί σταθερό το εσωτερικό του περιβάλλον.", textEn: "The organism's ability to keep its internal environment stable.", isCorrect: true },
-            { textEl: "Η διαδικασία αναπαραγωγής των κυττάρων.", textEn: "The process of cell reproduction.", isCorrect: false, gapTag: "biologia-a-lyk.homeostasis" },
-            { textEl: "Η πέψη της τροφής.", textEn: "The digestion of food.", isCorrect: false, gapTag: "biologia-a-lyk.homeostasis" },
-          ],
-        },
-        {
-          id: "q2-red-blood-cells",
-          textEl: "Ο ρόλος των ερυθρών αιμοσφαιρίων είναι κυρίως...",
-          textEn: "The role of red blood cells is mainly...",
-          options: [
-            { textEl: "Η μεταφορά οξυγόνου.", textEn: "Transporting oxygen.", isCorrect: true },
-            { textEl: "Η καταπολέμηση μικροβίων.", textEn: "Fighting off germs.", isCorrect: false, gapTag: "biologia-a-lyk.red-blood-cell-role" },
-            { textEl: "Η πήξη του αίματος.", textEn: "Clotting blood.", isCorrect: false, gapTag: "biologia-a-lyk.red-blood-cell-role" },
-          ],
-        },
-        {
-          id: "q3-immune-system",
-          textEl: "Ποιο σύστημα είναι υπεύθυνο για την άμυνα του οργανισμού απέναντι σε μικρόβια;",
-          textEn: "Which system defends the body against pathogens?",
-          options: [
-            { textEl: "Το ανοσοποιητικό σύστημα.", textEn: "The immune system.", isCorrect: true },
-            { textEl: "Το πεπτικό σύστημα.", textEn: "The digestive system.", isCorrect: false, gapTag: "biologia-a-lyk.immune-system" },
-            { textEl: "Το μυϊκό σύστημα.", textEn: "The muscular system.", isCorrect: false, gapTag: "biologia-a-lyk.immune-system" },
-          ],
-        },
-        {
-          id: "q4-mitochondria",
-          textEl: "Το κυτταρικό οργανίδιο που παράγει ενέργεια (ATP) λέγεται...",
-          textEn: "The cell organelle that produces energy (ATP) is called...",
-          options: [
-            { textEl: "Μιτοχόνδριο.", textEn: "Mitochondrion.", isCorrect: true },
-            { textEl: "Πυρήνας.", textEn: "Nucleus.", isCorrect: false, gapTag: "biologia-a-lyk.mitochondria-function" },
-            { textEl: "Ριβόσωμα.", textEn: "Ribosome.", isCorrect: false, gapTag: "biologia-a-lyk.mitochondria-function" },
-          ],
-        },
-        {
-          id: "q5-digestion-purpose",
-          textEl: "Το πεπτικό σύστημα διασπά την τροφή κυρίως για να...",
-          textEn: "The digestive system breaks down food mainly so that...",
-          options: [
-            { textEl: "Απορροφηθούν τα θρεπτικά συστατικά από τον οργανισμό.", textEn: "The body can absorb its nutrients.", isCorrect: true },
-            { textEl: "Παραχθεί άμεσα ενέργεια χωρίς άλλη διαδικασία.", textEn: "Energy is produced instantly with no other process.", isCorrect: false, gapTag: "biologia-a-lyk.digestion-purpose" },
-            { textEl: "Αποβληθεί γρηγορότερα η τροφή.", textEn: "Food is expelled faster.", isCorrect: false, gapTag: "biologia-a-lyk.digestion-purpose" },
-          ],
-        },
+      "id": "biologia-a-lykeiou",
+      "grades": [
+        "a"
       ],
+      "subjectLabelEl": "Βιολογία, Α' Λυκείου (Γενικής Παιδείας)",
+      "subjectLabelEn": "Biology, 10th Grade (General Education)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Βιολογίας",
+      "titleEn": "The Biology Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις για το κύτταρο και τα ανθρώπινα συστήματα. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions about the cell and human systems. It's not a test, there's no grade.",
+      "questions": [
+        {
+          "id": "q1-homeostasis",
+          "textEl": "Τι είναι η ομοιόσταση;",
+          "textEn": "What is homeostasis?",
+          "options": [
+            {
+              "textEl": "Η ικανότητα του οργανισμού να διατηρεί σταθερό το εσωτερικό του περιβάλλον.",
+              "textEn": "The organism's ability to keep its internal environment stable.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η διαδικασία αναπαραγωγής των κυττάρων.",
+              "textEn": "The process of cell reproduction.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.homeostasis"
+            },
+            {
+              "textEl": "Η πέψη της τροφής.",
+              "textEn": "The digestion of food.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.homeostasis"
+            }
+          ]
+        },
+        {
+          "id": "q2-red-blood-cells",
+          "textEl": "Ο ρόλος των ερυθρών αιμοσφαιρίων είναι κυρίως...",
+          "textEn": "The role of red blood cells is mainly...",
+          "options": [
+            {
+              "textEl": "Η μεταφορά οξυγόνου.",
+              "textEn": "Transporting oxygen.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η καταπολέμηση μικροβίων.",
+              "textEn": "Fighting off germs.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.red-blood-cell-role"
+            },
+            {
+              "textEl": "Η πήξη του αίματος.",
+              "textEn": "Clotting blood.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.red-blood-cell-role"
+            }
+          ]
+        },
+        {
+          "id": "q3-immune-system",
+          "textEl": "Ποιο σύστημα είναι υπεύθυνο για την άμυνα του οργανισμού απέναντι σε μικρόβια;",
+          "textEn": "Which system defends the body against pathogens?",
+          "options": [
+            {
+              "textEl": "Το ανοσοποιητικό σύστημα.",
+              "textEn": "The immune system.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το πεπτικό σύστημα.",
+              "textEn": "The digestive system.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.immune-system"
+            },
+            {
+              "textEl": "Το μυϊκό σύστημα.",
+              "textEn": "The muscular system.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.immune-system"
+            }
+          ]
+        },
+        {
+          "id": "q4-mitochondria",
+          "textEl": "Το κυτταρικό οργανίδιο που παράγει ενέργεια (ATP) λέγεται...",
+          "textEn": "The cell organelle that produces energy (ATP) is called...",
+          "options": [
+            {
+              "textEl": "Μιτοχόνδριο.",
+              "textEn": "Mitochondrion.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Πυρήνας.",
+              "textEn": "Nucleus.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.mitochondria-function"
+            },
+            {
+              "textEl": "Ριβόσωμα.",
+              "textEn": "Ribosome.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.mitochondria-function"
+            }
+          ]
+        },
+        {
+          "id": "q5-digestion-purpose",
+          "textEl": "Το πεπτικό σύστημα διασπά την τροφή κυρίως για να...",
+          "textEn": "The digestive system breaks down food mainly so that...",
+          "options": [
+            {
+              "textEl": "Απορροφηθούν τα θρεπτικά συστατικά από τον οργανισμό.",
+              "textEn": "The body can absorb its nutrients.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Παραχθεί άμεσα ενέργεια χωρίς άλλη διαδικασία.",
+              "textEn": "Energy is produced instantly with no other process.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.digestion-purpose"
+            },
+            {
+              "textEl": "Αποβληθεί γρηγορότερα η τροφή.",
+              "textEn": "Food is expelled faster.",
+              "isCorrect": false,
+              "gapTag": "biologia-a-lyk.digestion-purpose"
+            }
+          ]
+        }
+      ]
     },
-
     "biologia-b-lykeiou": {
-      id: "biologia-b-lykeiou",
-      grades: ["b"],
-      subjectLabelEl: "Βιολογία, Β' Λυκείου (Προσανατολισμού)",
-      subjectLabelEn: "Biology, 11th Grade (Science Track)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Βιολογίας",
-      titleEn: "The Biology Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για κληρονομικότητα και βιοτεχνολογία. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about heredity and biotechnology. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-mendel",
-          textEl: "Σύμφωνα με τον πρώτο νόμο του Mendel, τα γονίδια...",
-          textEn: "According to Mendel's first law, genes...",
-          options: [
-            { textEl: "Διαχωρίζονται κατά τη δημιουργία γαμετών.", textEn: "Separate during gamete formation.", isCorrect: true },
-            { textEl: "Συγχωνεύονται σε ένα.", textEn: "Merge into one.", isCorrect: false, gapTag: "biologia-b-lyk.mendel-first-law" },
-            { textEl: "Παραμένουν πάντα ίδια σε κάθε γενιά.", textEn: "Always stay the same across generations.", isCorrect: false, gapTag: "biologia-b-lyk.mendel-first-law" },
-          ],
-        },
-        {
-          id: "q2-transcription",
-          textEl: "Το DNA μεταφράζεται σε πρωτεΐνη μέσω...",
-          textEn: "DNA is translated into protein through...",
-          options: [
-            { textEl: "Της μεταγραφής σε RNA και μετά της μετάφρασης.", textEn: "Transcription into RNA, then translation.", isCorrect: true },
-            { textEl: "Απευθείας μετατροπής χωρίς ενδιάμεσο βήμα.", textEn: "Direct conversion with no intermediate step.", isCorrect: false, gapTag: "biologia-b-lyk.transcription-translation" },
-            { textEl: "Της πέψης.", textEn: "Digestion.", isCorrect: false, gapTag: "biologia-b-lyk.transcription-translation" },
-          ],
-        },
-        {
-          id: "q3-dominant-allele",
-          textEl: "Ένα κυρίαρχο (επικρατές) γονίδιο...",
-          textEn: "A dominant allele...",
-          options: [
-            { textEl: "Εκφράζεται ακόμα κι όταν υπάρχει μαζί με ένα υπολειπόμενο.", textEn: "Is expressed even when paired with a recessive one.", isCorrect: true },
-            { textEl: "Εκφράζεται μόνο αν είναι διπλό.", textEn: "Is only expressed if doubled.", isCorrect: false, gapTag: "biologia-b-lyk.dominant-allele" },
-            { textEl: "Ποτέ δεν κληρονομείται.", textEn: "Is never inherited.", isCorrect: false, gapTag: "biologia-b-lyk.dominant-allele" },
-          ],
-        },
-        {
-          id: "q4-biotechnology",
-          textEl: "Η βιοτεχνολογία χρησιμοποιεί κυρίως...",
-          textEn: "Biotechnology mainly uses...",
-          options: [
-            { textEl: "Βιολογικές διεργασίες/οργανισμούς για την παραγωγή προϊόντων ή λύσεων.", textEn: "Biological processes/organisms to produce products or solutions.", isCorrect: true },
-            { textEl: "Μόνο χημικά συνθετικά υλικά.", textEn: "Only synthetic chemical materials.", isCorrect: false, gapTag: "biologia-b-lyk.biotechnology-definition" },
-            { textEl: "Δεν έχει καμία πρακτική εφαρμογή.", textEn: "It has no practical application.", isCorrect: false, gapTag: "biologia-b-lyk.biotechnology-definition" },
-          ],
-        },
-        {
-          id: "q5-heterozygous",
-          textEl: "Ένας γονότυπος Aa (ετερόζυγος) σημαίνει ότι το άτομο έχει...",
-          textEn: "A genotype Aa (heterozygous) means the individual has...",
-          options: [
-            { textEl: "Ένα κυρίαρχο και ένα υπολειπόμενο αλληλόμορφο.", textEn: "One dominant and one recessive allele.", isCorrect: true },
-            { textEl: "Δύο ίδια αλληλόμορφα.", textEn: "Two identical alleles.", isCorrect: false, gapTag: "biologia-b-lyk.heterozygous-genotype" },
-            { textEl: "Κανένα αλληλόμορφο.", textEn: "No alleles at all.", isCorrect: false, gapTag: "biologia-b-lyk.heterozygous-genotype" },
-          ],
-        },
+      "id": "biologia-b-lykeiou",
+      "grades": [
+        "b"
       ],
+      "subjectLabelEl": "Βιολογία, Β' Λυκείου (Γενικής Παιδείας)",
+      "subjectLabelEn": "Biology, 11th Grade (General Education)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Βιολογίας",
+      "titleEn": "The Biology Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις από την επαληθευμένη ύλη Βιολογίας Β΄ ΓΕΛ 2026–27: άνθρωπος και υγεία, οικοσύστημα και εξέλιξη. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions from the verified 2026–27 Grade 11 Biology scope: human health, ecosystems, and evolution. It is not a graded test.",
+      "questions": [
+        {
+          "id": "q1-immunity",
+          "textEl": "Ποιο από τα παρακάτω ανήκει στην ειδική (προσαρμοστική) ανοσολογική άμυνα;",
+          "textEn": "Which of the following belongs to specific (adaptive) immune defence?",
+          "options": [
+            {
+              "textEl": "Η παραγωγή ειδικών αντισωμάτων από Β-λεμφοκύτταρα.",
+              "textEn": "Production of specific antibodies by B lymphocytes.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Το δέρμα ως φυσικός φραγμός.",
+              "textEn": "Skin as a physical barrier.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.specific-nonspecific-immunity"
+            },
+            {
+              "textEl": "Η γενική φλεγμονώδης αντίδραση.",
+              "textEn": "The general inflammatory response.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.specific-nonspecific-immunity"
+            }
+          ]
+        },
+        {
+          "id": "q2-vaccine",
+          "textEl": "Ο εμβολιασμός προστατεύει κυρίως επειδή...",
+          "textEn": "Vaccination mainly protects because it...",
+          "options": [
+            {
+              "textEl": "Ενεργοποιεί ειδική ανοσολογική απόκριση και δημιουργεί κύτταρα μνήμης.",
+              "textEn": "Activates a specific immune response and creates memory cells.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Λειτουργεί σαν αντιβιοτικό που σκοτώνει αμέσως όλα τα μικρόβια.",
+              "textEn": "Works like an antibiotic that immediately kills all microbes.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.vaccine-immune-memory"
+            },
+            {
+              "textEl": "Αντικαθιστά μόνιμα το ανοσοποιητικό σύστημα.",
+              "textEn": "Permanently replaces the immune system.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.vaccine-immune-memory"
+            }
+          ]
+        },
+        {
+          "id": "q3-producers",
+          "textEl": "Ποιος είναι ο βασικός ρόλος των παραγωγών σε ένα οικοσύστημα;",
+          "textEn": "What is the basic role of producers in an ecosystem?",
+          "options": [
+            {
+              "textEl": "Μετατρέπουν εξωτερική ενέργεια σε χημική ενέργεια οργανικής ύλης και αποτελούν βάση των τροφικών σχέσεων.",
+              "textEn": "They convert external energy into chemical energy in organic matter and form the base of food relationships.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Τρέφονται αποκλειστικά με καταναλωτές.",
+              "textEn": "They feed exclusively on consumers.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.producers-ecosystem"
+            },
+            {
+              "textEl": "Ανακυκλώνουν όλη την ενέργεια χωρίς απώλειες.",
+              "textEn": "They recycle all energy without losses.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.producers-ecosystem"
+            }
+          ]
+        },
+        {
+          "id": "q4-energy-flow",
+          "textEl": "Καθώς η ενέργεια περνά από ένα τροφικό επίπεδο στο επόμενο...",
+          "textEn": "As energy passes from one trophic level to the next...",
+          "options": [
+            {
+              "textEl": "Η διαθέσιμη ποσότητά της μειώνεται.",
+              "textEn": "The amount available decreases.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Παραμένει όλη διαθέσιμη χωρίς απώλειες.",
+              "textEn": "All of it remains available without losses.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.energy-trophic-levels"
+            },
+            {
+              "textEl": "Ανακυκλώνεται ακριβώς όπως η ύλη.",
+              "textEn": "It cycles exactly like matter.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.energy-trophic-levels"
+            }
+          ]
+        },
+        {
+          "id": "q5-selection",
+          "textEl": "Ποια διατύπωση περιγράφει καλύτερα τη φυσική επιλογή;",
+          "textEn": "Which statement best describes natural selection?",
+          "options": [
+            {
+              "textEl": "Κληρονομήσιμες παραλλαγές που δίνουν αναπαραγωγικό πλεονέκτημα μπορούν να γίνονται συχνότερες σε έναν πληθυσμό μέσα σε γενιές.",
+              "textEn": "Heritable variants that give a reproductive advantage can become more common in a population over generations.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ένα άτομο αποκτά όποιο χαρακτηριστικό χρειάζεται και το κληροδοτεί αμέσως.",
+              "textEn": "An individual acquires whatever trait it needs and immediately passes it on.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.natural-selection-population"
+            },
+            {
+              "textEl": "Η φυσική επιλογή δρα μόνο σε οργανισμούς που είναι μεγαλύτεροι σε μέγεθος.",
+              "textEn": "Natural selection acts only on organisms that are larger in size.",
+              "isCorrect": false,
+              "gapTag": "biologia-b-lyk.natural-selection-population"
+            }
+          ]
+        }
+      ]
     },
-
     "biologia-g-lykeiou": {
-      id: "biologia-g-lykeiou",
-      grades: ["c"],
-      subjectLabelEl: "Βιολογία, Γ' Λυκείου (Προσανατολισμού)",
-      subjectLabelEn: "Biology, 12th Grade (Science Track)",
-      titleEl: "Ο Διαγνωστικός Χάρτης Βιολογίας",
-      titleEn: "The Biology Learning Compass",
-      introEl: "5 σύντομες ερωτήσεις για ανοσία, εξέλιξη και οικολογία. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      introEn: "5 short questions about immunity, evolution, and ecology. It's not a test, there's no grade.",
-      questions: [
-        {
-          id: "q1-antibodies",
-          textEl: "Τα αντισώματα παράγονται από...",
-          textEn: "Antibodies are produced by...",
-          options: [
-            { textEl: "Τα λεμφοκύτταρα (Β-λεμφοκύτταρα) του ανοσοποιητικού συστήματος.", textEn: "The lymphocytes (B-lymphocytes) of the immune system.", isCorrect: true },
-            { textEl: "Τα ερυθρά αιμοσφαίρια.", textEn: "The red blood cells.", isCorrect: false, gapTag: "biologia-g-lyk.antibody-source" },
-            { textEl: "Το συκώτι.", textEn: "The liver.", isCorrect: false, gapTag: "biologia-g-lyk.antibody-source" },
-          ],
-        },
-        {
-          id: "q2-natural-selection",
-          textEl: "Η φυσική επιλογή ευνοεί οργανισμούς που...",
-          textEn: "Natural selection favors organisms that...",
-          options: [
-            { textEl: "Είναι καλύτερα προσαρμοσμένοι στο περιβάλλον τους και αναπαράγονται περισσότερο.", textEn: "Are better adapted to their environment and reproduce more.", isCorrect: true },
-            { textEl: "Είναι μεγαλύτεροι σε μέγεθος πάντα.", textEn: "Are always bigger in size.", isCorrect: false, gapTag: "biologia-g-lyk.natural-selection" },
-            { textEl: "Γεννιούνται πρώτοι σε μια γενιά.", textEn: "Are born first in a generation.", isCorrect: false, gapTag: "biologia-g-lyk.natural-selection" },
-          ],
-        },
-        {
-          id: "q3-vaccine",
-          textEl: "Ένας εμβολιασμός λειτουργεί κυρίως...",
-          textEn: "A vaccine mainly works by...",
-          options: [
-            { textEl: "Εκπαιδεύοντας το ανοσοποιητικό σύστημα να αναγνωρίζει έναν παθογόνο, χωρίς πραγματική νόσο.", textEn: "Training the immune system to recognize a pathogen, without real disease.", isCorrect: true },
-            { textEl: "Σκοτώνοντας απευθείας τα μικρόβια μέσα στο σώμα.", textEn: "Directly killing germs in the body.", isCorrect: false, gapTag: "biologia-g-lyk.vaccine-mechanism" },
-            { textEl: "Αντικαθιστώντας το ανοσοποιητικό σύστημα.", textEn: "Replacing the immune system.", isCorrect: false, gapTag: "biologia-g-lyk.vaccine-mechanism" },
-          ],
-        },
-        {
-          id: "q4-food-chain-energy",
-          textEl: "Σε μια τροφική αλυσίδα, η ενέργεια...",
-          textEn: "In a food chain, energy...",
-          options: [
-            { textEl: "Μειώνεται καθώς περνάει από το ένα τροφικό επίπεδο στο επόμενο.", textEn: "Decreases as it passes from one trophic level to the next.", isCorrect: true },
-            { textEl: "Παραμένει ακριβώς η ίδια σε κάθε επίπεδο.", textEn: "Stays exactly the same at every level.", isCorrect: false, gapTag: "biologia-g-lyk.energy-food-chain" },
-            { textEl: "Αυξάνεται σε κάθε επίπεδο.", textEn: "Increases at every level.", isCorrect: false, gapTag: "biologia-g-lyk.energy-food-chain" },
-          ],
-        },
-        {
-          id: "q5-evolution-timescale",
-          textEl: "Η εξέλιξη ενός είδους συμβαίνει κυρίως...",
-          textEn: "A species evolves mainly...",
-          options: [
-            { textEl: "Σε πολλές γενιές, μέσω σταδιακών αλλαγών στη συχνότητα γονιδίων.", textEn: "Over many generations, through gradual gene-frequency changes.", isCorrect: true },
-            { textEl: "Μέσα σε μία γενιά, σε ένα άτομο.", textEn: "Within one generation, in a single individual.", isCorrect: false, gapTag: "biologia-g-lyk.evolution-timescale" },
-            { textEl: "Τυχαία, χωρίς σχέση με το περιβάλλον.", textEn: "Randomly, unrelated to the environment.", isCorrect: false, gapTag: "biologia-g-lyk.evolution-timescale" },
-          ],
-        },
+      "id": "biologia-g-lykeiou",
+      "grades": [
+        "c"
       ],
-    },
-  },
+      "subjectLabelEl": "Βιολογία, Γ' Λυκείου (Προσανατολισμού)",
+      "subjectLabelEn": "Biology, 12th Grade (Science Track)",
+      "titleEl": "Ο Διαγνωστικός Χάρτης Βιολογίας",
+      "titleEn": "The Biology Learning Compass",
+      "introEl": "5 σύντομες ερωτήσεις από τον επαληθευμένο πυρήνα της Βιολογίας Προσανατολισμού για τις Πανελλαδικές 2027: γενετικό υλικό, γονιδιακή έκφραση, κληρονομικότητα, μεταλλάξεις και βιοτεχνολογία. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+      "introEn": "5 short questions from the verified 2027 Panhellenic Biology science-track scope: genetic material, gene expression, inheritance, mutations, and biotechnology. It is not a graded test.",
+      "questions": [
+        {
+          "id": "q1-dna",
+          "textEl": "Στα ανθρώπινα κύτταρα, ποιο μόριο αποθηκεύει τη γενετική πληροφορία;",
+          "textEn": "In human cells, which molecule stores genetic information?",
+          "options": [
+            {
+              "textEl": "Το DNA.",
+              "textEn": "DNA.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Η γλυκόζη.",
+              "textEn": "Glucose.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.genetic-material-dna"
+            },
+            {
+              "textEl": "Τα λιπίδια της κυτταρικής μεμβράνης.",
+              "textEn": "Cell-membrane lipids.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.genetic-material-dna"
+            }
+          ]
+        },
+        {
+          "id": "q2-expression",
+          "textEl": "Ποια σειρά αποδίδει σωστά τη βασική ροή της γενετικής πληροφορίας κατά την έκφραση ενός γονιδίου;",
+          "textEn": "Which sequence correctly represents the basic flow of genetic information during gene expression?",
+          "options": [
+            {
+              "textEl": "DNA → RNA (μεταγραφή) → πρωτεΐνη (μετάφραση).",
+              "textEn": "DNA → RNA (transcription) → protein (translation).",
+              "isCorrect": true
+            },
+            {
+              "textEl": "DNA → πρωτεΐνη απευθείας, χωρίς RNA.",
+              "textEn": "DNA → protein directly, without RNA.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.transcription-translation"
+            },
+            {
+              "textEl": "Πρωτεΐνη → RNA → DNA σε κάθε φυσιολογική έκφραση γονιδίου.",
+              "textEn": "Protein → RNA → DNA in every normal gene-expression event.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.transcription-translation"
+            }
+          ]
+        },
+        {
+          "id": "q3-genotype",
+          "textEl": "Ένας γονότυπος Aa για ένα γονίδιο είναι...",
+          "textEn": "A genotype Aa for a gene is...",
+          "options": [
+            {
+              "textEl": "Ετερόζυγος, επειδή περιέχει δύο διαφορετικά αλληλόμορφα.",
+              "textEn": "Heterozygous because it contains two different alleles.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Ομόζυγος επικρατής.",
+              "textEn": "Homozygous dominant.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.heterozygous-genotype"
+            },
+            {
+              "textEl": "Ομόζυγος υπολειπόμενος.",
+              "textEn": "Homozygous recessive.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.heterozygous-genotype"
+            }
+          ]
+        },
+        {
+          "id": "q4-mutation",
+          "textEl": "Ποια πρόταση για τις μεταλλάξεις είναι σωστή;",
+          "textEn": "Which statement about mutations is correct?",
+          "options": [
+            {
+              "textEl": "Είναι μεταβολές του γενετικού υλικού και οι συνέπειές τους μπορεί να είναι διαφορετικές ανά περίπτωση.",
+              "textEn": "They are changes in genetic material and their effects can differ from case to case.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Είναι πάντα βλαβερές και ποτέ ουδέτερες.",
+              "textEn": "They are always harmful and never neutral.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.mutation-definition"
+            },
+            {
+              "textEl": "Κάθε αλλαγή στη συμπεριφορά ενός ατόμου είναι γενετική μετάλλαξη.",
+              "textEn": "Every change in an individual’s behaviour is a genetic mutation.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.mutation-definition"
+            }
+          ]
+        },
+        {
+          "id": "q5-recombinant",
+          "textEl": "Η τεχνολογία ανασυνδυασμένου DNA βασίζεται κυρίως...",
+          "textEn": "Recombinant-DNA technology is mainly based on...",
+          "options": [
+            {
+              "textEl": "Στην απομόνωση και σύνδεση επιλεγμένων τμημάτων DNA με μοριακά εργαλεία ώστε να δημιουργείται νέο μόριο DNA.",
+              "textEn": "Isolating and joining selected DNA fragments with molecular tools to create a new DNA molecule.",
+              "isCorrect": true
+            },
+            {
+              "textEl": "Μόνο στη φυσική διασταύρωση δύο οργανισμών χωρίς χειρισμό DNA.",
+              "textEn": "Only on naturally crossing two organisms without manipulating DNA.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.recombinant-dna"
+            },
+            {
+              "textEl": "Στην αντικατάσταση του DNA από πρωτεΐνες.",
+              "textEn": "Replacing DNA with proteins.",
+              "isCorrect": false,
+              "gapTag": "biologia-g-lyk.recombinant-dna"
+            }
+          ]
+        }
+      ]
+    }
+  }
 };

@@ -1463,3 +1463,118 @@ main {
   line-height: 1.5;
   color: #334155;
 }
+
+/* ---------- Προσθήκη: "Η διαδρομή μου" continue banner ---------- */
+.continue-progress-banner {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.continue-progress-banner__title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.continue-progress-banner__sub {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.continue-progress-banner__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.continue-progress-banner__clear {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.continue-progress-banner__clear:hover {
+  color: var(--color-text);
+}
+
+/* ---------- Προσθήκη: "Δες τα θέματα" / Topic Browser (χωρίς τεστ) ---------- */
+/* .quiz-browse-btn μοιράζεται το στυλ του ήδη υπάρχοντος .quiz-back-btn
+   (διαφανές, contour με το accent χρώμα) — ίδια οικογένεια κουμπιών. */
+.quiz-browse-btn {
+  border: 1px solid var(--color-accent);
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.quiz-browse-btn:hover {
+  background: var(--color-bg);
+}
+
+.quiz-browse-intro {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.quiz-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+/* Ίδια βάση με .quiz-subject-card / .quiz-grade-card για οπτική συνέπεια */
+.quiz-topic-card {
+  text-align: left;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 16px 18px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: inherit;
+}
+
+.quiz-topic-card:hover {
+  border-color: var(--color-accent);
+}
+
+.quiz-topic-card:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.quiz-topic-card__label {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.quiz-topic-card__explain {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}

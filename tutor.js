@@ -8,6 +8,8 @@
  * - Middle-school student mode asks age: 12 is blocked, 13-14 requires parental consent, 15 is allowed.
  * - High-school student mode is 15+.
  * - Uses existing QUIZZES -> GAP_TAGS -> LEARNING_PATHS as tutoring context.
+ * - Optional push-to-talk speech input works through Puter speech-to-text.
+ * - Optional spoken replies use the device/browser speech engine when available.
  * ------------------------------------------------------------
  */
 (function () {
@@ -78,12 +80,25 @@
       placeholderBlocked: "Η λειτουργία δεν είναι διαθέσιμη με αυτή την ηλικιακή ρύθμιση.",
       sample: "Βάλε παράδειγμα",
       send: "Στείλε",
+      micStart: "🎤 Μίλα",
+      micStop: "■ Σταμάτα",
+      micListening: "Ηχογράφηση",
+      micTranscribing: "Μεταγραφή φωνής…",
+      micPermission: "Χρειάζεται άδεια μικροφώνου από τον browser.",
+      micUnsupported: "Η φωνητική εισαγωγή δεν υποστηρίζεται από αυτόν τον browser.",
+      micFailed: "Δεν μπόρεσα να μεταγράψω τη φωνή. Δοκίμασε ξανά ή γράψε την ερώτηση.",
+      micEmpty: "Δεν αναγνωρίστηκε ομιλία. Δοκίμασε ξανά λίγο πιο κοντά στο μικρόφωνο.",
+      voiceHint: "Μπορείς να γράψεις ή να μιλήσεις. Η μεταγραφή εμφανίζεται πρώτα εδώ πριν σταλεί.",
+      autoSpeak: "🔊 Να διαβάζει αυτόματα τις απαντήσεις",
+      listen: "🔊 Άκουσε",
+      stopListening: "■ Διακοπή",
+      speechUnsupported: "Η προφορική ανάγνωση δεν υποστηρίζεται από αυτή τη συσκευή.",
       thinking: "Σκέφτεται…",
       you: "Εσύ",
       tutor: "AI Βοήθεια",
       parentHelper: "Βοηθός Γονέα",
       prototypeNote: "Σημαντικό: το AI μπορεί να κάνει λάθος. Για πραγματολογικές πληροφορίες ή σχολική ύλη έλεγξε την απάντηση σε αξιόπιστη πηγή ή στο σχολικό βιβλίο.",
-      privacyNote: "Τα μηνύματα της AI Βοήθειας αποστέλλονται στην υπηρεσία Puter και στον πάροχο AI για να παραχθεί απάντηση. Το aitools4kids.gr δεν τα αποθηκεύει σε δική του βάση δεδομένων. Μην γράφεις προσωπικά ή ευαίσθητα δεδομένα.",
+      privacyNote: "Τα μηνύματα της AI Βοήθειας αποστέλλονται στην υπηρεσία Puter και στον πάροχο AI για να παραχθεί απάντηση. Αν χρησιμοποιήσεις το μικρόφωνο, το ηχητικό απόσπασμα αποστέλλεται μέσω Puter για μεταγραφή σε κείμενο. Το aitools4kids.gr δεν αποθηκεύει μηνύματα ή ηχογραφήσεις σε δική του βάση δεδομένων. Μην δίνεις προσωπικά ή ευαίσθητα δεδομένα.",
       authCancelled: "Η σύνδεση ακυρώθηκε",
       authFailed: "Η σύνδεση δεν ολοκληρώθηκε",
       consentFirst: "Πρώτα δήλωσε τη γονική συναίνεση",
@@ -156,12 +171,25 @@
       placeholderBlocked: "This feature is not available with the current age setting.",
       sample: "Insert example",
       send: "Send",
+      micStart: "🎤 Speak",
+      micStop: "■ Stop",
+      micListening: "Recording",
+      micTranscribing: "Transcribing voice…",
+      micPermission: "Microphone permission is required in your browser.",
+      micUnsupported: "Voice input is not supported by this browser.",
+      micFailed: "I couldn't transcribe the voice. Try again or type your question.",
+      micEmpty: "No speech was recognized. Try again a little closer to the microphone.",
+      voiceHint: "You can type or speak. The transcript appears here before it is sent.",
+      autoSpeak: "🔊 Read replies aloud automatically",
+      listen: "🔊 Listen",
+      stopListening: "■ Stop",
+      speechUnsupported: "Spoken playback is not supported by this device.",
       thinking: "Thinking…",
       you: "You",
       tutor: "AI Βοήθεια",
       parentHelper: "Parent Helper",
       prototypeNote: "Important: AI can make mistakes. Check factual information and school content against a reliable source or textbook.",
-      privacyNote: "AI Help messages are sent to Puter and the AI provider to generate a response. aitools4kids.gr does not store them in its own database. Do not enter personal or sensitive information.",
+      privacyNote: "AI Help messages are sent to Puter and the AI provider to generate a response. If you use the microphone, the audio clip is sent through Puter for speech-to-text transcription. aitools4kids.gr does not store messages or recordings in its own database. Do not enter personal or sensitive information.",
       authCancelled: "Sign-in cancelled",
       authFailed: "Sign-in did not complete",
       consentFirst: "Declare parent/guardian consent first",
@@ -185,6 +213,14 @@
   let signedInUser = null;
   let puterLoadPromise = null;
   let renderKey = "";
+  let mediaRecorder = null;
+  let micStream = null;
+  let audioChunks = [];
+  let recording = false;
+  let transcribing = false;
+  let recordingTimer = null;
+  let recordingStartedAt = 0;
+  let speakingButton = null;
 
   function tr(key) {
     const lang = ctx?.lang === "en" ? "en" : "el";
@@ -447,6 +483,7 @@
     if (!allowed) refs.input.placeholder = tr("placeholderBlocked");
     else if (!authReady) refs.input.placeholder = tr("placeholderConnect");
     else refs.input.placeholder = tr("placeholder");
+    setMicUi();
   }
 
   async function explicitSignIn(requestAuth) {
@@ -550,15 +587,223 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     return "";
   }
 
+  function micSupported() {
+    return !!(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+  }
+
+  function speechSupported() {
+    return !!(window.speechSynthesis && window.SpeechSynthesisUtterance);
+  }
+
+  function cleanSpeechText(text) {
+    return String(text || "")
+      .replace(/https?:\/\/\S+/g, "")
+      .replace(/[*_#`>|]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function getSpeechLang() {
+    return ctx?.lang === "en" ? "en-GB" : "el-GR";
+  }
+
+  function stopSpeaking() {
+    if (speechSupported()) window.speechSynthesis.cancel();
+    if (speakingButton) {
+      speakingButton.textContent = tr("listen");
+      speakingButton.setAttribute("aria-pressed", "false");
+      speakingButton = null;
+    }
+  }
+
+  function speakText(text, button = null) {
+    if (!speechSupported()) {
+      if (refs.voiceStatus) refs.voiceStatus.textContent = tr("speechUnsupported");
+      return;
+    }
+    if (button && speakingButton === button && window.speechSynthesis.speaking) {
+      stopSpeaking();
+      return;
+    }
+    stopSpeaking();
+    const spoken = cleanSpeechText(text);
+    if (!spoken) return;
+    const utterance = new SpeechSynthesisUtterance(spoken);
+    utterance.lang = getSpeechLang();
+    utterance.rate = 0.96;
+    utterance.pitch = 1;
+    const voices = window.speechSynthesis.getVoices?.() || [];
+    const target = getSpeechLang().toLowerCase();
+    const voice = voices.find((v) => String(v.lang).toLowerCase() === target)
+      || voices.find((v) => String(v.lang).toLowerCase().startsWith(target.slice(0, 2)));
+    if (voice) utterance.voice = voice;
+    if (button) {
+      speakingButton = button;
+      button.textContent = tr("stopListening");
+      button.setAttribute("aria-pressed", "true");
+    }
+    utterance.onend = () => stopSpeaking();
+    utterance.onerror = () => stopSpeaking();
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function preferredRecordingMime() {
+    if (!window.MediaRecorder?.isTypeSupported) return "";
+    const candidates = [
+      "audio/webm;codecs=opus",
+      "audio/webm",
+      "audio/mp4",
+      "audio/ogg;codecs=opus",
+    ];
+    return candidates.find((type) => MediaRecorder.isTypeSupported(type)) || "";
+  }
+
+  function setMicUi() {
+    if (!refs.mic) return;
+    refs.mic.hidden = !micSupported();
+    refs.mic.classList.toggle("tutor-mic--recording", recording);
+    refs.mic.textContent = recording ? tr("micStop") : tr("micStart");
+    refs.mic.setAttribute("aria-pressed", recording ? "true" : "false");
+    refs.mic.disabled = !recording && (!accessState().allowed || !authReady || busy || transcribing);
+  }
+
+  function updateRecordingStatus() {
+    if (!recording || !refs.voiceStatus) return;
+    const seconds = Math.max(0, Math.floor((Date.now() - recordingStartedAt) / 1000));
+    const mm = Math.floor(seconds / 60);
+    const ss = String(seconds % 60).padStart(2, "0");
+    refs.voiceStatus.textContent = `${tr("micListening")} ${mm}:${ss}`;
+  }
+
+  function stopMicTracks() {
+    if (micStream) {
+      micStream.getTracks().forEach((track) => track.stop());
+      micStream = null;
+    }
+  }
+
+  function cancelRecording() {
+    if (recordingTimer) clearInterval(recordingTimer);
+    recordingTimer = null;
+    if (mediaRecorder && mediaRecorder.state !== "inactive") {
+      try { mediaRecorder.stop(); } catch (_) {}
+    }
+    recording = false;
+    stopMicTracks();
+    setMicUi();
+  }
+
+  async function transcribeAudio(blob) {
+    if (!blob?.size) return;
+    transcribing = true;
+    if (refs.voiceStatus) {
+      refs.voiceStatus.textContent = tr("micTranscribing");
+    }
+    updateComposerState();
+    try {
+      const puterObj = await ensurePuterLoaded();
+      const transcript = await puterObj.ai.speech2txt(blob, {
+        provider: "openai",
+        model: "gpt-4o-mini-transcribe",
+        response_format: "text",
+        language: ctx?.lang === "en" ? "en" : "el",
+        prompt: ctx?.lang === "en"
+          ? "School question. Preserve mathematical symbols and school subject terminology."
+          : "Σχολική ερώτηση στα ελληνικά. Διατήρησε σωστά μαθηματικά σύμβολα, αριθμούς και σχολική ορολογία.",
+      });
+      const text = typeof transcript === "string" ? transcript.trim() : String(transcript?.text || "").trim();
+      if (!text) {
+        if (refs.voiceStatus) refs.voiceStatus.textContent = tr("micEmpty");
+        return;
+      }
+      const before = refs.input.value.trim();
+      refs.input.value = before ? `${before} ${text}` : text;
+      refs.input.focus();
+      if (refs.voiceStatus) refs.voiceStatus.textContent = tr("voiceHint");
+      refreshAuthStatus().catch(() => {});
+    } catch (err) {
+      const permissionish = /permission|denied|notallowed/i.test(String(err?.message || err || ""));
+      if (refs.voiceStatus) refs.voiceStatus.textContent = permissionish ? tr("micPermission") : tr("micFailed");
+    } finally {
+      transcribing = false;
+      updateComposerState();
+    }
+  }
+
+  async function toggleRecording() {
+    if (recording) {
+      if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+      return;
+    }
+    if (!micSupported()) {
+      if (refs.voiceStatus) refs.voiceStatus.textContent = tr("micUnsupported");
+      return;
+    }
+    if (!accessState().allowed) {
+      renderAccessGate();
+      return;
+    }
+    if (!authReady) {
+      await explicitSignIn(false);
+      if (!authReady) return;
+    }
+    try {
+      micStream = await navigator.mediaDevices.getUserMedia({
+        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+      });
+      audioChunks = [];
+      const mimeType = preferredRecordingMime();
+      mediaRecorder = mimeType ? new MediaRecorder(micStream, { mimeType }) : new MediaRecorder(micStream);
+      mediaRecorder.addEventListener("dataavailable", (event) => {
+        if (event.data?.size) audioChunks.push(event.data);
+      });
+      mediaRecorder.addEventListener("stop", async () => {
+        if (recordingTimer) clearInterval(recordingTimer);
+        recordingTimer = null;
+        recording = false;
+        const type = mediaRecorder?.mimeType || mimeType || "audio/webm";
+        const blob = new Blob(audioChunks, { type });
+        audioChunks = [];
+        stopMicTracks();
+        setMicUi();
+        await transcribeAudio(blob);
+      }, { once: true });
+      mediaRecorder.start(250);
+      recording = true;
+      recordingStartedAt = Date.now();
+      updateRecordingStatus();
+      recordingTimer = setInterval(() => {
+        updateRecordingStatus();
+        if (Date.now() - recordingStartedAt >= 60000 && mediaRecorder?.state !== "inactive") mediaRecorder.stop();
+      }, 500);
+      setMicUi();
+    } catch (err) {
+      recording = false;
+      stopMicTracks();
+      if (refs.voiceStatus) refs.voiceStatus.textContent = /permission|denied|notallowed/i.test(String(err?.message || err || "")) ? tr("micPermission") : tr("micFailed");
+      setMicUi();
+    }
+  }
+
   function addBubble(role, text) {
     refs.empty?.remove();
     refs.empty = null;
     const div = document.createElement("div");
     div.className = `tutor-bubble tutor-bubble--${role}`;
     const label = role === "user" ? tr("you") : (isParentMode() ? tr("parentHelper") : tr("tutor"));
-    div.innerHTML = `<div class="tutor-bubble__meta">${escapeHtml(label)}</div><div>${escapeHtml(text).replaceAll("\n", "<br>")}</div>`;
+    div.innerHTML = `<div class="tutor-bubble__meta">${escapeHtml(label)}</div><div class="tutor-bubble__text">${escapeHtml(text).replaceAll("\n", "<br>")}</div>`;
+    if (role === "assistant" && speechSupported()) {
+      const speak = document.createElement("button");
+      speak.type = "button";
+      speak.className = "tutor-speak-btn";
+      speak.textContent = tr("listen");
+      speak.setAttribute("aria-pressed", "false");
+      speak.addEventListener("click", () => speakText(text, speak));
+      div.appendChild(speak);
+    }
     refs.messages.appendChild(div);
     refs.messages.scrollTop = refs.messages.scrollHeight;
+    return div;
   }
 
   function setBusy(value) {
@@ -568,6 +813,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
   }
 
   function resetConversation(clearMessages = true) {
+    stopSpeaking();
     conversation = [];
     if (clearMessages && refs.messages) {
       refs.messages.innerHTML = `
@@ -633,7 +879,11 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       }
 
       conversation.push({ role: "assistant", content: answer });
-      addBubble("assistant", answer);
+      const answerBubble = addBubble("assistant", answer);
+      if (refs.autoSpeak?.checked) {
+        const speakButton = answerBubble?.querySelector(".tutor-speak-btn");
+        speakText(answer, speakButton || null);
+      }
       refreshAuthStatus().catch(() => {});
     } catch (err) {
       const msg = err?.message || String(err);
@@ -680,6 +930,8 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     refs.signIn.addEventListener("click", () => explicitSignIn(false));
     refs.switchAccount.addEventListener("click", () => explicitSignIn(true));
     refs.newChat.addEventListener("click", () => resetConversation());
+    refs.mic?.addEventListener("click", () => toggleRecording());
+    refs.autoSpeak?.addEventListener("change", () => { if (!refs.autoSpeak.checked) stopSpeaking(); });
     refs.sample.addEventListener("click", () => {
       refs.input.value = sampleText();
       refs.input.focus();
@@ -776,11 +1028,15 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             </div>
             <form class="tutor-composer" id="tutorForm">
               <textarea id="tutorInput" rows="4" disabled></textarea>
+              <div class="tutor-voice-hint">${escapeHtml(tr("voiceHint"))}</div>
               <div class="tutor-composer__bottom">
                 <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorSample">${escapeHtml(tr("sample"))}</button>
+                <button type="button" class="tutor-btn tutor-btn--secondary tutor-mic" id="tutorMic" aria-pressed="false">${escapeHtml(tr("micStart"))}</button>
+                <span class="tutor-voice-status" id="tutorVoiceStatus" aria-live="polite"></span>
                 <span class="tutor-busy" id="tutorBusy" aria-live="polite"></span>
                 <button type="submit" class="tutor-btn tutor-btn--primary" id="tutorSend" disabled>${escapeHtml(tr("send"))}</button>
               </div>
+              <label class="tutor-auto-speak"><input type="checkbox" id="tutorAutoSpeak"> <span>${escapeHtml(tr("autoSpeak"))}</span></label>
             </form>
           </div>
         </div>
@@ -813,6 +1069,9 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       form: byId("tutorForm"),
       input: byId("tutorInput"),
       sample: byId("tutorSample"),
+      mic: byId("tutorMic"),
+      voiceStatus: byId("tutorVoiceStatus"),
+      autoSpeak: byId("tutorAutoSpeak"),
       send: byId("tutorSend"),
       busy: byId("tutorBusy"),
       newChat: byId("tutorNewChat"),
@@ -833,6 +1092,8 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       return;
     }
 
+    stopSpeaking();
+    if (recording || micStream) cancelRecording();
     ctx = nextCtx;
     renderKey = nextKey;
     conversation = [];

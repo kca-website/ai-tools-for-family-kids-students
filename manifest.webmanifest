@@ -37,14 +37,20 @@
     {
       "name": "Διαγνωστικός Χάρτης",
       "short_name": "Τεστ",
-      "description": "Κάνε ένα σύντομο διαγνωστικό τεστ.",
-      "url": "/middle/student/quiz?source=pwa-shortcut"
+      "description": "Κάνε ένα σύντομο διαγνωστικό τεστ και διάλεξε την ηλικιακή σου ζώνη.",
+      "url": "/?action=quiz&source=pwa-shortcut"
+    },
+    {
+      "name": "Βρες εργαλείο",
+      "short_name": "Εργαλεία",
+      "description": "Βρες κατάλληλο εργαλείο ανά ηλικία και μάθημα.",
+      "url": "/?action=tools&source=pwa-shortcut"
     },
     {
       "name": "AI Βοήθεια",
       "short_name": "AI Βοήθεια",
-      "description": "Καθοδήγηση με ερωτήσεις και υποδείξεις.",
-      "url": "/high/student/tutor?source=pwa-shortcut"
+      "description": "Διάλεξε ηλικία και άνοιξε την κατάλληλη AI Βοήθεια.",
+      "url": "/?action=help&source=pwa-shortcut"
     }
   ]
 }

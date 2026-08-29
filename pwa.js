@@ -1,8 +1,9 @@
-/* AI Tools 4 Kids — lightweight PWA/mobile layer v1.0.1 */
+/* AI Tools 4 Kids — lightweight PWA/mobile layer v1.0.2 */
 (function(){
   "use strict";
 
   let deferredInstallPrompt = null;
+  let launchActionHandled = false;
   const INSTALL_DISMISS_KEY = "aitools4kids_pwa_install_dismissed_v1";
 
   function isEnglish(){
@@ -145,17 +146,36 @@
     const launcher=document.getElementById("pwaMobileLauncher");
     if(!launcher) return;
 
-    launcher.querySelector('[data-pwa-action="quiz"]')?.addEventListener("click",()=>{
-      const btn=document.getElementById("heroQuizCtaBtn");
-      if(btn){ btn.click(); setTimeout(()=>document.getElementById("heroQuizPicker")?.scrollIntoView({behavior:"smooth",block:"center"}),80); }
-    });
-    launcher.querySelector('[data-pwa-action="tools"]')?.addEventListener("click",()=>{
-      document.getElementById("zoneGrid")?.scrollIntoView({behavior:"smooth",block:"start"});
-    });
-    launcher.querySelector('[data-pwa-action="help"]')?.addEventListener("click",()=>{
-      document.querySelector(".hero__ai-help")?.scrollIntoView({behavior:"smooth",block:"center"});
-    });
+    launcher.querySelector('[data-pwa-action="quiz"]')?.addEventListener("click",()=>openQuickAction("quiz"));
+    launcher.querySelector('[data-pwa-action="tools"]')?.addEventListener("click",()=>openQuickAction("tools"));
+    launcher.querySelector('[data-pwa-action="help"]')?.addEventListener("click",()=>openQuickAction("help"));
     launcher.querySelector("#pwaInstallBtn")?.addEventListener("click",installApp);
+  }
+
+  function openQuickAction(action){
+    if(action==="quiz"){
+      const btn=document.getElementById("heroQuizCtaBtn");
+      if(btn){
+        btn.click();
+        setTimeout(()=>document.getElementById("heroQuizPicker")?.scrollIntoView({behavior:"smooth",block:"center"}),80);
+      }
+      return;
+    }
+    if(action==="tools"){
+      document.getElementById("zoneGrid")?.scrollIntoView({behavior:"smooth",block:"start"});
+      return;
+    }
+    if(action==="help"){
+      document.querySelector(".hero__ai-help")?.scrollIntoView({behavior:"smooth",block:"center"});
+    }
+  }
+
+  function handleLaunchAction(){
+    if(launchActionHandled) return;
+    const action=new URLSearchParams(location.search).get("action");
+    if(!["quiz","tools","help"].includes(action)) return;
+    launchActionHandled=true;
+    setTimeout(()=>openQuickAction(action),100);
   }
 
   function wasDismissed(){
@@ -223,6 +243,7 @@
     ensureHeadMetadata();
     injectStyles();
     ensureLauncher();
+    handleLaunchAction();
   }
 
   ensureHeadMetadata();

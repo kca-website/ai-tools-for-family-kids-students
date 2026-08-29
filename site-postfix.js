@@ -1,4 +1,4 @@
-/** DOM/data refinements loaded after app.js — v3.1.5. */
+/** DOM/data refinements loaded after app.js — v3.1.6. */
 (function(){
   "use strict";
 
@@ -276,6 +276,42 @@
     if(note.textContent !== desired) note.textContent=desired;
   }
 
+  function ensureSignLanguageEntry(){
+    const host=document.getElementById("zoneSelectView");
+    const hero=host?.querySelector(".hero");
+    if(!host || !hero) return;
+
+    let panel=document.getElementById("signLanguageFeature");
+    if(!panel){
+      panel=document.createElement("section");
+      panel.id="signLanguageFeature";
+      panel.setAttribute("aria-label","Greek Sign Language learning concepts");
+      panel.style.cssText="margin:0 0 30px;padding:18px 20px;border:1px solid #bfdbfe;border-radius:16px;background:linear-gradient(135deg,#eff6ff,#f0fdf4);display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;box-shadow:0 1px 2px rgba(15,23,42,.03);";
+      hero.insertAdjacentElement("afterend",panel);
+    }
+
+    const en=isEnglish();
+    const signature=String(en);
+    if(panel.dataset.signature===signature) return;
+    panel.dataset.signature=signature;
+
+    const badge=en ? "New · Accessibility" : "Νέο · Προσβασιμότητα";
+    const title=en ? "🤟 Concepts in Greek Sign Language" : "🤟 Έννοιες στην Ελληνική Νοηματική";
+    const text=en
+      ? "53 school concepts with a simple Greek explanation, scientific visuals, and direct official Greek Sign Language videos from IEP."
+      : "53 σχολικές έννοιες με απλή εξήγηση, επιστημονική εικόνα και απευθείας επίσημο βίντεο ΕΝΓ από το ΙΕΠ.";
+    const cta=en ? "Explore the 53 concepts →" : "Δες τις 53 έννοιες →";
+
+    panel.innerHTML=`
+      <div style="min-width:min(100%,520px);flex:1;">
+        <div style="display:inline-block;margin-bottom:7px;padding:4px 9px;border-radius:999px;background:#dbeafe;color:#1e40af;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;">${badge}</div>
+        <div style="font-family:var(--font-heading);font-weight:800;font-size:1.08rem;color:#1f2937;margin-bottom:5px;">${title}</div>
+        <div style="font-size:.9rem;line-height:1.5;color:#475569;max-width:720px;">${text}</div>
+      </div>
+      <a href="/sign-language.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:10px;background:#2e6ba3;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap;">${cta}</a>
+    `;
+  }
+
   function loadPwaLayer(){
     if(document.querySelector('script[data-aitools4kids-pwa="1"]')) return;
     const script=document.createElement("script");
@@ -291,6 +327,7 @@
     ensureRoleGuidance();
     ensureQuizDisclaimer();
     ensurePerfectScoreEnrichment();
+    ensureSignLanguageEntry();
   }
 
   // Data is already loaded when this script runs; repeat after app init for safety.

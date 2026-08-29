@@ -1255,15 +1255,36 @@ function renderToolGrid(pathTools, targetElement) {
     if (!steps || !gap) return;
 
     const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
+    const zoneMax = ZONE_MAX_AGE[state.currentZone];
+
+    // Ίδια λογική με το renderQuizResults: ένα εργαλείο δεν εμφανίζεται καθόλου αν δεν
+    // περνάει το isToolAgeAppropriate (π.χ. μαθητής Δημοτικού βλέπει το μονοπάτι). Αν
+    // περνάει ΜΟΝΟ επειδή ο ρόλος είναι "guardian" (αυτο-δηλωμένος, ανεπαλήθευτος), το
+    // εργαλείο πάει σε κλειστό-από-προεπιλογή <details> στο τέλος, όχι απευθείας στο βήμα.
+    function classifyTool(toolId) {
+      const tool = toolId ? TOOLS[toolId] : null;
+      if (!tool || !isToolAgeAppropriate(tool)) return { tool: null, adultOnly: false };
+      const adultOnly =
+        state.currentRole === "guardian" &&
+        zoneMax !== undefined &&
+        tool.minAge !== undefined &&
+        tool.minAge > zoneMax;
+      return { tool, adultOnly };
+    }
+
+    const adultOnlyEntries = [];
 
     const stepsHtml = steps.map((step, idx) => {
       const stepNum = idx + 1;
       const title = state.lang === "el" ? step.titleEl : step.titleEn;
       const desc = state.lang === "el" ? step.descriptionEl : step.descriptionEn;
-      const tool = step.toolId ? TOOLS[step.toolId] : null;
-      const toolLinkHtml = tool
-        ? `<a class="path-step__tool-link" href="${escapeAttr("/tools/" + step.toolId + ".html")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)} · ${t("detailsLink")}</a>`
-        : "";
+      const { tool, adultOnly } = classifyTool(step.toolId);
+      let toolLinkHtml = "";
+      if (tool && !adultOnly) {
+        toolLinkHtml = `<a class="path-step__tool-link" href="${escapeAttr("/tools/" + step.toolId + ".html")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)} · ${t("detailsLink")}</a>`;
+      } else if (tool && adultOnly) {
+        adultOnlyEntries.push({ tool, toolId: step.toolId, stepNum });
+      }
       return `
         <div class="path-step">
           <div class="path-step__number">${stepNum}</div>
@@ -1278,7 +1299,7 @@ function renderToolGrid(pathTools, targetElement) {
     }).join("");
 
     // Επιπλέον προτεινόμενα εργαλεία: ό,τι υπάρχει στο GAP_TAGS.recommendedToolIds
-    // αλλά ΔΕΝ εμφανίζεται ήδη στα 3 βήματα παραπάνω. Προτεραιότητα σε πιο ειδικά/
+    // αλλά ΔΕΝ εμφανίζεται ήδη στα βήματα παραπάνω. Προτεραιότητα σε πιο ειδικά/
     // advanced εργαλεία (isExpert ή συγκεκριμένα για το θέμα) πριν τα γενικά chatbots.
     const usedToolIds = new Set(steps.map((s) => s.toolId).filter(Boolean));
     const GENERIC_CHATBOTS = ["chatgpt", "claude", "gemini", "copilot"];
@@ -1292,17 +1313,44 @@ function renderToolGrid(pathTools, targetElement) {
       return aExpert - bExpert;
     });
 
-    const extraToolsHtml = extraToolIds.length
+    const regularExtraIds = [];
+    extraToolIds.forEach((id) => {
+      const { tool, adultOnly } = classifyTool(id);
+      if (!tool) return;
+      if (adultOnly) adultOnlyEntries.push({ tool, toolId: id, stepNum: null });
+      else regularExtraIds.push(id);
+    });
+
+    const extraToolsHtml = regularExtraIds.length
       ? `
         <div class="path-extra-tools">
           <p class="path-extra-tools__label">${t("pathExtraToolsLabel")}</p>
           <div class="path-extra-tools__list">
-            ${extraToolIds.map((id) => {
+            ${regularExtraIds.map((id) => {
               const t2 = TOOLS[id];
               return `<a class="path-extra-tools__link" href="${escapeAttr("/tools/" + id + ".html")}" target="_blank" rel="noopener noreferrer">${escapeHtml(t2.name)}${t2.isExpert ? " ⭐" : ""}</a>`;
             }).join("")}
           </div>
         </div>
+      `
+      : "";
+
+    const adultSummaryText = state.lang === "el"
+      ? `Δες προτάσεις και για εσένα (${adultOnlyEntries.length}) — όχι για το παιδί`
+      : `Show suggestions for you too (${adultOnlyEntries.length}) — not for the child`;
+    const adultToolsHtml = adultOnlyEntries.length
+      ? `
+        <details class="path-tool-adult-details" style="margin-top: 10px;">
+          <summary style="cursor: pointer; font-size: 0.85rem; color: var(--color-accent); font-weight: 600;">${escapeHtml(adultSummaryText)}</summary>
+          <div style="margin-top: 10px;">
+            ${adultOnlyEntries.map(({ tool, toolId, stepNum }) => `
+              <div class="path-extra-tools__item" style="margin-bottom: 6px;">
+                ${stepNum ? `<span style="font-size:0.8rem;color:var(--color-text-muted);">${t("pathStepLabel", { step: stepNum })} · </span>` : ""}
+                <a class="path-extra-tools__link" href="${escapeAttr("/tools/" + toolId + ".html")}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}</a>
+              </div>
+            `).join("")}
+          </div>
+        </details>
       `
       : "";
 
@@ -1313,6 +1361,7 @@ function renderToolGrid(pathTools, targetElement) {
       <p class="path-modal__intro">${t("pathModalIntro")}</p>
       <div class="path-steps">${stepsHtml}</div>
       ${extraToolsHtml}
+      ${adultToolsHtml}
     `;
     els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
     els.pathModalOverlay.hidden = false;

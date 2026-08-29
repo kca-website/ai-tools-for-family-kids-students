@@ -1,11 +1,6 @@
 /**
- * learning-paths-data.js
- * Μονοπάτια μάθησης (Learning Paths) ανά gap tag.
- * Κάθε gap tag (βλ. GAP_TAGS στο quiz-data.js) αντιστοιχεί σε 3 βήματα:
- *   1) Ατομική προσπάθεια χωρίς εργαλείο (learning-first)
- *   2) Καθοδηγούμενη χρήση ενός προτεινόμενου εργαλείου (ερωτήσεις, όχι έτοιμη λύση)
- *   3) Εμπέδωση / απόδειξη κατανόησης
- * Φιλοσοφία ίδια με το υπόλοιπο project: το AI ρωτάει, δεν λύνει.
+ * learning-paths-data.js — curriculum-aligned update v2.1 (2026-08-29)
+ * One 3-step learning path per gap tag. AI guides; it does not hand over finished schoolwork.
  */
 
 const LEARNING_PATHS = {
@@ -1504,7 +1499,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "math-a-gym.rational-number-order": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1528,7 +1522,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "math-a-gym.absolute-value": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1552,7 +1545,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "math-a-gym.gcd-lcm-confusion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1576,7 +1568,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "math-a-gym.proportion-intro": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1600,7 +1591,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "math-b-gym.monomial-like-terms": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1624,7 +1614,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "math-b-gym.identity-square-sum": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1648,7 +1637,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "math-b-gym.pythagorean-application": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1672,7 +1660,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "math-b-gym.linear-equation-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1696,7 +1683,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "glossa-a-gym.parts-of-speech": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1720,7 +1706,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "glossa-a-gym.opinion-vs-fact": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1744,7 +1729,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "glossa-a-gym.paragraph-argument-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1768,7 +1752,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "glossa-a-gym.verb-mood-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1792,7 +1775,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "glossa-b-gym.essay-intro-function": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1816,7 +1798,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-gym.text-types-purpose": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1840,7 +1821,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-gym.argument-vs-evidence": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1864,7 +1844,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-gym.summary-vs-opinion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1888,7 +1867,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "physics-g-gym.ohms-law": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1912,7 +1890,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "physics-g-gym.speed-velocity-formula": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1936,7 +1913,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "physics-g-gym.energy-transformation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1960,7 +1936,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "chimeia-g-gym.element-vs-compound": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1984,7 +1959,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "chimeia-g-gym.mixture-vs-compound": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2008,7 +1982,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "chimeia-g-gym.atom-structure": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2032,7 +2005,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "istoria-a-gym.bronze-age-civilizations": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2056,7 +2028,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-a-gym.archaic-democracy-path": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2080,7 +2051,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-a-gym.peloponnesian-war-sides": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2104,7 +2074,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-a-gym.alexander-legacy": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2128,7 +2097,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-b-gym.hellenistic-fusion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2152,7 +2120,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "istoria-b-gym.rome-greece-conquest": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2176,7 +2143,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "istoria-b-gym.byzantium-transition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2200,7 +2166,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "istoria-b-gym.medieval-feudalism": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2224,7 +2189,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "efl-a-gym.present-cont-vs-simple": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2248,7 +2212,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-a-gym.past-cont-vs-simple": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2272,7 +2235,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-a-gym.comparative-forms": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2296,7 +2258,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-a-gym.question-word-order": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2320,7 +2281,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-b-gym.present-perfect-intro": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2344,7 +2304,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "efl-b-gym.modals-obligation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2368,7 +2327,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "efl-b-gym.passive-voice-intro": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2392,7 +2350,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "efl-b-gym.relative-clauses": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2416,7 +2373,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "biologia-a-gym.plant-animal-cell": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2440,7 +2396,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-gym.unicellular-nutrition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2464,7 +2419,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-gym.adaptation-misconception": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2488,7 +2442,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-gym.plant-vs-animal-digestion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2512,7 +2465,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-gym.cell-membrane-function": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2536,7 +2488,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-b-gym.gas-exchange-organ": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2560,7 +2511,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "biologia-b-gym.heart-role": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2584,7 +2534,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "biologia-b-gym.blood-function": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2608,7 +2557,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "biologia-b-gym.producer-definition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2632,7 +2580,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "biologia-b-gym.nervous-system-role": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2656,7 +2603,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "biologia-g-gym.dna-location": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2680,7 +2626,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-g-gym.inheritance-both-parents": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2704,7 +2649,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-g-gym.biodiversity-definition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2728,7 +2672,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-g-gym.extinction-cause": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2752,7 +2695,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-g-gym.reproduction-purpose": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2776,7 +2718,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-a.topic-sentence-missing": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2800,7 +2741,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-a.development-method-confusion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2824,7 +2764,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-a.unity-coherence": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2848,7 +2787,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-a.summary-length": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2872,7 +2810,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-b.persuasion-modes-confusion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2896,7 +2833,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-b.thesis-antithesis-missing": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2920,7 +2856,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-b.essay-structure-imbalance": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2944,7 +2879,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-b.evidence-generic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2968,7 +2902,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-g.synthesis-sources-missing": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -2992,7 +2925,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-g.proposal-vague": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3016,7 +2948,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-g.critical-stance-missing": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3040,7 +2971,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "ekthesi-g.counterargument-superficial": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3064,127 +2994,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
-  "physics-b-lyk.heat-temperature-confusion": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια τη διαφορά ανάμεσα σε θερμότητα και θερμοκρασία, με ένα καθημερινό παράδειγμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Χρησιμοποιεί τη θερμότητα και τη θερμοκρασία σαν να είναι το ίδιο μέγεθος, ενώ η θερμότητα είναι μεταφερόμενη ενέργεια και η θερμοκρασία μέτρο κινητικής ενέργειας σωματιδίων.",
-      "descriptionEn": "Write in your own words the difference between heat and temperature, with an everyday example. The most common trap on this topic: Treats heat and temperature as the same quantity, when heat is transferred energy and temperature measures particles' kinetic energy.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Θερμότητα vs Θερμοκρασία\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Heat vs Temperature'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha 'difference between heat and temperature' και σύγκρινε με τη δική σου εξήγηση.",
-      "descriptionEn": "Ask Wolfram Alpha 'difference between heat and temperature' and compare with your own explanation.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "physics-b-lyk.current-consumed": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Σχεδίασε ένα απλό κύκλωμα με μια μπαταρία και μια λάμπα, και γράψε τι πιστεύεις ότι συμβαίνει στην ένταση πριν και μετά τη λάμπα. Η πιο συχνή παγίδα σε αυτό το θέμα: Πιστεύει ότι το ηλεκτρικό ρεύμα «καταναλώνεται» καθώς περνά από τη λάμπα, ενώ η ένταση του ρεύματος παραμένει ίδια σε όλο το απλό κύκλωμα.",
-      "descriptionEn": "Draw a simple circuit with a battery and a bulb, and write what you think happens to the current before and after the bulb. The most common trap on this topic: Believes electric current gets 'used up' as it passes through the bulb, when current is actually the same throughout a simple circuit.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"«Κατανάλωση» ρεύματος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Current 'used up''. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha για την ένταση ρεύματος σε ένα απλό κύκλωμα σειράς και έλεγξε αν άλλαξε από σημείο σε σημείο.",
-      "descriptionEn": "Ask Wolfram Alpha about current in a simple series circuit and check whether it changed from point to point.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "physics-b-lyk.voltage-current-confusion": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε τον ορισμό της τάσης και τον ορισμό της έντασης ρεύματος με δικά σου λόγια, χωρίς να κοιτάξεις το βιβλίο. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει την ηλεκτρική τάση (V) με την ένταση ρεύματος (Α), χρησιμοποιώντας τους όρους σαν να είναι το ίδιο πράγμα.",
-      "descriptionEn": "Write the definition of voltage and the definition of current in your own words, without looking at the book. The most common trap on this topic: Confuses voltage (V) with current (A), using the terms as if they were the same thing.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Τάση vs Ένταση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Voltage vs Current'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha τη μονάδα μέτρησης της τάσης και της έντασης, και έλεγξε αν τις είχες σωστά.",
-      "descriptionEn": "Ask Wolfram Alpha for the units of voltage and current, and check whether you had them right.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "physics-b-lyk.heat-flow-direction": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε 2 καθημερινά παραδείγματα όπου η θερμότητα ρέει από θερμότερο προς ψυχρότερο σώμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν έχει παγιώσει ότι η θερμότητα ρέει πάντα αυθόρμητα από το θερμότερο προς το ψυχρότερο σώμα, ποτέ αντίστροφα.",
-      "descriptionEn": "Write 2 everyday examples where heat flows from a hotter to a colder object. The most common trap on this topic: Hasn't fixed the rule that heat always flows spontaneously from hotter to colder, never the reverse.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Κατεύθυνση ροής θερμότητας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Direction of heat flow'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha 'direction of heat flow' και επιβεβαίωσε τα παραδείγματά σου.",
-      "descriptionEn": "Ask Wolfram Alpha 'direction of heat flow' and confirm your examples.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "physics-b-lyk.series-parallel-confusion": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Σχεδίασε ένα κύκλωμα με 2 αντιστάσεις σε σειρά και ένα με 2 αντιστάσεις παράλληλα, και γράψε τι διαφορά περιμένεις στην ολική αντίσταση. Η πιο συχνή παγίδα σε αυτό το θέμα: Μπερδεύει τη συνδεσμολογία σε σειρά με την παράλληλη σύνδεση αντιστάσεων και τις διαφορετικές τους ιδιότητες.",
-      "descriptionEn": "Draw a circuit with 2 series resistors and one with 2 parallel resistors, and write what difference you expect in total resistance. The most common trap on this topic: Confuses series and parallel resistor connections and their different properties.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT Edu",
-      "titleEn": "Ask ChatGPT Edu",
-      "descriptionEl": "Αν το σχολείο σου συμμετέχει στο πιλοτικό πρόγραμμα, άνοιξε το ChatGPT Edu και πες: «Δυσκολεύομαι στο \"Σειρά vs Παράλληλη σύνδεση\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Αν δεν έχεις πρόσβαση, χρησιμοποίησε το κανονικό ChatGPT με την ίδια προσέγγιση.",
-      "descriptionEn": "If your school participates in the pilot program, open ChatGPT Edu and say: \"I'm struggling with 'Series vs Parallel circuits'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" If you don't have access, use regular ChatGPT the same way.",
-      "toolId": "chatgpt-edu"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha να υπολογίσει την ολική αντίσταση και για τα δύο κυκλώματά σου, με τις δικές σου τιμές.",
-      "descriptionEn": "Ask Wolfram Alpha to calculate the total resistance for both your circuits, using your own values.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
   "istoria-a-lyk.polis-definition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3208,7 +3017,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-a-lyk.persian-wars-cause": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3232,7 +3040,6 @@ const LEARNING_PATHS = {
       "toolId": "perplexity"
     }
   ],
-
   "istoria-a-lyk.alexander-empire-unity": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3256,7 +3063,6 @@ const LEARNING_PATHS = {
       "toolId": "perplexity"
     }
   ],
-
   "istoria-a-lyk.direct-democracy-athens": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3280,7 +3086,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-b-lyk.byzantium-continuation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3304,7 +3109,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-b-lyk.fall-constantinople-1453": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3328,7 +3132,6 @@ const LEARNING_PATHS = {
       "toolId": "perplexity"
     }
   ],
-
   "istoria-b-lyk.renaissance-cause": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3352,7 +3155,6 @@ const LEARNING_PATHS = {
       "toolId": "perplexity"
     }
   ],
-
   "istoria-b-lyk.ottoman-administration": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3376,7 +3178,6 @@ const LEARNING_PATHS = {
       "toolId": "perplexity"
     }
   ],
-
   "efl-c-lyk.mixed-conditionals": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3400,7 +3201,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "efl-c-lyk.inversion-emphasis": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3424,7 +3224,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "efl-c-lyk.academic-collocations": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3448,7 +3247,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "efl-c-lyk.passive-voice-formal": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3472,7 +3270,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "efl-c-lyk.phrasal-vs-formal-verb": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3496,7 +3293,6 @@ const LEARNING_PATHS = {
       "toolId": "gemini"
     }
   ],
-
   "biologia-a-lyk.homeostasis": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3520,7 +3316,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-lyk.red-blood-cell-role": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3544,7 +3339,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-lyk.immune-system": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3568,7 +3362,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-lyk.mitochondria-function": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3592,7 +3385,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "biologia-a-lyk.digestion-purpose": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3616,247 +3408,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
-  "biologia-b-lyk.mendel-first-law": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια τι λέει ο πρώτος νόμος του Mendel για τον διαχωρισμό των γονιδίων. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι σύμφωνα με τον πρώτο νόμο του Mendel, τα γονίδια διαχωρίζονται κατά τη δημιουργία γαμετών.",
-      "descriptionEn": "Write in your own words what Mendel's first law says about gene separation. The most common trap on this topic: Doesn't know that according to Mendel's first law, genes separate during gamete formation.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Πρώτος νόμος του Mendel\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Mendel's first law'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha 'Punnett square Aa x Aa' και δες αν το αποτέλεσμα ταιριάζει με αυτό που περίμενες.",
-      "descriptionEn": "Ask Wolfram Alpha 'Punnett square Aa x Aa' and see whether the result matches what you expected.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "biologia-b-lyk.transcription-translation": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με τη σειρά τα δύο βήματα από το DNA μέχρι την πρωτεΐνη, με δικά σου λόγια. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι το DNA μεταφράζεται σε πρωτεΐνη μέσω δύο βημάτων: πρώτα μεταγραφή σε RNA, μετά μετάφραση.",
-      "descriptionEn": "Write in order the two steps from DNA to protein, in your own words. The most common trap on this topic: Doesn't know DNA is translated into protein through two steps: first transcription to RNA, then translation.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Μεταγραφή & μετάφραση DNA\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Transcription & translation of DNA'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha 'DNA transcription translation steps' και σύγκρινε με αυτό που έγραψες.",
-      "descriptionEn": "Ask Wolfram Alpha 'DNA transcription translation steps' and compare with what you wrote.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "biologia-b-lyk.dominant-allele": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε ένα παράδειγμα με ένα κυρίαρχο και ένα υπολειπόμενο αλληλόμορφο, και πες ποιο χαρακτηριστικό θα εκφραστεί. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ένα επικρατές (κυρίαρχο) γονίδιο εκφράζεται ακόμα κι όταν συνυπάρχει με ένα υπολειπόμενο.",
-      "descriptionEn": "Write an example with one dominant and one recessive allele, and say which trait will be expressed. The most common trap on this topic: Doesn't know a dominant allele is expressed even when paired with a recessive one.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Επικρατές γονίδιο\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Dominant allele'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha να λύσει το παράδειγμά σου με Punnett square και έλεγξε τη λύση σου.",
-      "descriptionEn": "Ask Wolfram Alpha to solve your example with a Punnett square and check your solution.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "biologia-b-lyk.biotechnology-definition": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια τι είναι η βιοτεχνολογία και δώσε ένα παράδειγμα εφαρμογής της. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η βιοτεχνολογία χρησιμοποιεί βιολογικές διεργασίες ή οργανισμούς για την παραγωγή προϊόντων ή λύσεων.",
-      "descriptionEn": "Write in your own words what biotechnology is and give an example application. The most common trap on this topic: Doesn't know biotechnology uses biological processes or organisms to produce products or solutions.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Έννοια βιοτεχνολογίας\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Concept of biotechnology'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha για ένα παράδειγμα βιοτεχνολογικής εφαρμογής και σύγκρινε με το δικό σου.",
-      "descriptionEn": "Ask Wolfram Alpha for an example biotechnology application and compare with your own.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "biologia-b-lyk.heterozygous-genotype": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε τι σημαίνει ο γονότυπος Aa, και τι διαφορά έχει από τον AA και τον aa. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ένας ετερόζυγος γονότυπος (π.χ. Aa) σημαίνει ότι το άτομο έχει ένα κυρίαρχο και ένα υπολειπόμενο αλληλόμορφο.",
-      "descriptionEn": "Write what genotype Aa means, and how it differs from AA and aa. The most common trap on this topic: Doesn't know a heterozygous genotype (e.g. Aa) means the individual has one dominant and one recessive allele.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ετερόζυγος γονότυπος\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Heterozygous genotype'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ρώτα το Wolfram Alpha τη διαφορά ομόζυγου και ετερόζυγου γονότυπου και έλεγξε τη δική σου εξήγηση.",
-      "descriptionEn": "Ask Wolfram Alpha the difference between homozygous and heterozygous genotypes and check your own explanation.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-
-  "biologia-g-lyk.antibody-source": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε ποια κύτταρα θυμάσαι ότι παράγουν τα αντισώματα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι τα αντισώματα παράγονται από τα Β-λεμφοκύτταρα του ανοσοποιητικού συστήματος.",
-      "descriptionEn": "Write which cells you remember producing antibodies. The most common trap on this topic: Doesn't know antibodies are produced by B-lymphocytes of the immune system.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Παραγωγή αντισωμάτων\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Antibody production'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Παραγωγή αντισωμάτων\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Antibody production\" to a classmate in 2-3 sentences, without notes.",
-      "toolId": null
-    }
-  ],
-
-  "biologia-g-lyk.natural-selection": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια πώς λειτουργεί η φυσική επιλογή, με ένα παράδειγμα ζώου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η φυσική επιλογή ευνοεί οργανισμούς που είναι καλύτερα προσαρμοσμένοι στο περιβάλλον τους και αναπαράγονται περισσότερο.",
-      "descriptionEn": "Write in your own words how natural selection works, with an animal example. The most common trap on this topic: Doesn't know natural selection favors organisms better adapted to their environment that reproduce more.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Φυσική επιλογή\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Natural selection'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Φυσική επιλογή\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Natural selection\" to a classmate in 2-3 sentences, without notes.",
-      "toolId": null
-    }
-  ],
-
-  "biologia-g-lyk.vaccine-mechanism": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια πώς νομίζεις ότι λειτουργεί ένα εμβόλιο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ένα εμβόλιο λειτουργεί εκπαιδεύοντας το ανοσοποιητικό σύστημα να αναγνωρίζει έναν παθογόνο, χωρίς να προκαλεί πραγματική νόσο.",
-      "descriptionEn": "Write in your own words how you think a vaccine works. The most common trap on this topic: Doesn't know a vaccine works by training the immune system to recognize a pathogen, without causing actual disease.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Μηχανισμός εμβολιασμού\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Vaccine mechanism'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Μηχανισμός εμβολιασμού\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Vaccine mechanism\" to a classmate in 2-3 sentences, without notes.",
-      "toolId": null
-    }
-  ],
-
-  "biologia-g-lyk.energy-food-chain": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Σχεδίασε μια απλή τροφική αλυσίδα (4 επίπεδα) και σημείωσε τι νομίζεις ότι συμβαίνει στην ενέργεια σε κάθε βήμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η ενέργεια μειώνεται καθώς περνάει από το ένα τροφικό επίπεδο στο επόμενο σε μια τροφική αλυσίδα.",
-      "descriptionEn": "Draw a simple food chain (4 levels) and note what you think happens to energy at each step. The most common trap on this topic: Doesn't know energy decreases as it passes from one trophic level to the next in a food chain.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Ενέργεια σε τροφική αλυσίδα\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Energy in a food chain'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Ενέργεια σε τροφική αλυσίδα\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Energy in a food chain\" to a classmate in 2-3 sentences, without notes.",
-      "toolId": null
-    }
-  ],
-
-  "biologia-g-lyk.evolution-timescale": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια πόσο χρόνο παίρνει η εξέλιξη ενός είδους, και γιατί δεν συμβαίνει σε ένα άτομο. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι η εξέλιξη ενός είδους συμβαίνει σε πολλές γενιές, μέσω σταδιακών αλλαγών στη συχνότητα γονιδίων, όχι σε ένα άτομο.",
-      "descriptionEn": "Write in your own words how long a species takes to evolve, and why it doesn't happen within one individual. The most common trap on this topic: Doesn't know a species evolves over many generations through gradual gene-frequency changes, not within one individual.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το ChatGPT",
-      "titleEn": "Ask ChatGPT",
-      "descriptionEl": "Άνοιξε το ChatGPT και πες: «Δυσκολεύομαι στο \"Χρονική κλίμακα εξέλιξης\". Κάνε μου ερωτήσεις για να καταλάβω μόνος/η, μη μου δώσεις έτοιμη απάντηση.» Δούλεψε μαζί του πάνω σε αυτό.",
-      "descriptionEn": "Open ChatGPT and say: \"I'm struggling with 'Timescale of evolution'. Ask me questions so I can figure it out myself, don't just hand me the answer.\" Work on this together.",
-      "toolId": "chatgpt"
-    },
-    {
-      "titleEl": "Δείξε ότι το κατάλαβες",
-      "titleEn": "Prove you've got it",
-      "descriptionEl": "Εξήγησε το θέμα \"Χρονική κλίμακα εξέλιξης\" σε έναν συμμαθητή σου με 2-3 προτάσεις, χωρίς σημειώσεις.",
-      "descriptionEn": "Explain the topic \"Timescale of evolution\" to a classmate in 2-3 sentences, without notes.",
-      "toolId": null
-    }
-  ],
-
   "math-a-dim.number-order": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3880,7 +3431,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-a-dim.addition-crossing-ten": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3904,7 +3454,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-a-dim.subtraction-borrowing-concept": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3928,7 +3477,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-a-dim.shape-recognition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3952,7 +3500,6 @@ const LEARNING_PATHS = {
       "toolId": "geogebra"
     }
   ],
-
   "math-a-dim.ordinal-numbers": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -3976,7 +3523,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "math-a-dim.length-comparison": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4000,7 +3546,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "math-a-dim.subtraction-crossing-ten": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4024,7 +3569,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-a-dim.coin-recognition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4048,7 +3592,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "math-b-dim.place-value-tens-ones": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4072,7 +3615,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-b-dim.multiplication-as-repeated-addition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4096,7 +3638,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-b-dim.telling-time-half-hour": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4120,7 +3661,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-b-dim.money-counting": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4144,7 +3684,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-b-dim.addition-two-digit-no-carry": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4168,7 +3707,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-b-dim.subtraction-two-digit-borrow": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4192,7 +3730,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-b-dim.even-odd-numbers": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4216,7 +3753,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "math-b-dim.simple-graph-reading": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4240,7 +3776,6 @@ const LEARNING_PATHS = {
       "toolId": "geogebra"
     }
   ],
-
   "math-c-dim.times-table-recall": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4264,7 +3799,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-c-dim.division-as-sharing": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4288,7 +3822,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-c-dim.measurement-units": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4312,7 +3845,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-c-dim.quarter-hour": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4336,7 +3868,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-c-dim.multiplication-two-digit-by-one": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4360,7 +3891,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-c-dim.weight-units": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4384,7 +3914,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "math-c-dim.remainder-meaning": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4408,7 +3937,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-c-dim.simple-fraction-recognition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4432,7 +3960,6 @@ const LEARNING_PATHS = {
       "toolId": "geogebra"
     }
   ],
-
   "math-d-dim.fraction-same-denominator": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4456,7 +3983,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-d-dim.decimal-intro-place-value": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4480,7 +4006,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-d-dim.perimeter-concept": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4504,7 +4029,6 @@ const LEARNING_PATHS = {
       "toolId": "geogebra"
     }
   ],
-
   "math-d-dim.roman-numerals": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4528,7 +4052,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-d-dim.fraction-simplify-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4552,7 +4075,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-d-dim.decimal-compare": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4576,7 +4098,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-d-dim.area-basic-concept": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4600,7 +4121,6 @@ const LEARNING_PATHS = {
       "toolId": "geogebra"
     }
   ],
-
   "math-d-dim.multiplication-by-10-100": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4624,7 +4144,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-e-dim.multiply-fraction-whole": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4648,7 +4167,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-e-dim.average-concept": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4672,7 +4190,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-e-dim.volume-cube-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4696,7 +4213,6 @@ const LEARNING_PATHS = {
       "toolId": "geogebra"
     }
   ],
-
   "math-e-dim.negative-number-intro": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4720,7 +4236,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "math-st-dim.decimal-multiplication": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4744,7 +4259,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-st-dim.discount-percent": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4768,7 +4282,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-st-dim.ratio-proportion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4792,7 +4305,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-st-dim.volume-units": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4816,7 +4328,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-st-dim.percent-increase": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4840,7 +4351,6 @@ const LEARNING_PATHS = {
       "toolId": "photomath"
     }
   ],
-
   "math-st-dim.speed-distance-time-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4864,7 +4374,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "math-st-dim.negative-number-operations": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4888,7 +4397,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "math-st-dim.probability-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4912,7 +4420,6 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
-
   "glossa-a-dim.letter-sound-confusion": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4936,7 +4443,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-a-dim.sentence-boundary": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4960,7 +4466,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-a-dim.plural-formation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -4984,7 +4489,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-a-dim.word-order-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5008,7 +4512,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-a-dim.rhyming-words": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5032,7 +4535,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-a-dim.singular-plural-verb": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5056,7 +4558,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-a-dim.question-mark-usage": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5080,7 +4581,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-a-dim.opposite-words-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5104,7 +4604,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.punctuation-question-exclamation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5128,7 +4627,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.story-sequence": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5152,7 +4650,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.simple-past-tense": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5176,7 +4673,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.synonym-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5200,7 +4696,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.capital-letter-proper-nouns": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5224,7 +4719,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.compound-word-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5248,7 +4742,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.sentence-vs-fragment": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5272,7 +4765,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-b-dim.dialogue-punctuation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5296,7 +4788,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.description-paragraph": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5320,7 +4811,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.iota-vowel-spelling": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5344,7 +4834,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.pronoun-reference": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5368,7 +4857,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.adjective-agreement": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5392,7 +4880,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.verb-tense-consistency": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5416,7 +4903,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.comma-in-list": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5440,7 +4926,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.homophone-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5464,7 +4949,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-c-dim.title-choice": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5488,7 +4972,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.paragraph-structure": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5512,7 +4995,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.future-tense": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5536,7 +5018,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.adjective-vs-adverb": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5560,7 +5041,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.direct-indirect-speech": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5584,7 +5064,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.subject-predicate": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5608,7 +5087,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.paragraph-main-idea": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5632,7 +5110,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.conjunction-choice": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5656,7 +5133,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-d-dim.formal-informal-greeting": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5680,7 +5156,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-e-dim.simile-metaphor-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5704,7 +5179,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-e-dim.cause-effect-connector": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5728,7 +5202,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-e-dim.formal-letter-structure": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5752,7 +5225,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-e-dim.adjective-degree": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5776,7 +5248,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.participle-recognition": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5800,7 +5271,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.compound-sentence-connectors": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5824,7 +5294,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.literary-text-interpretation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5848,7 +5317,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.paragraph-connectors-flow": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5872,7 +5340,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.passive-voice-basic": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5896,7 +5363,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.text-purpose-identification": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5920,7 +5386,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.register-formal-informal": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5944,7 +5409,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "glossa-st-dim.conclusion-quality": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5968,7 +5432,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "efl-c-dim.colors-vocab": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -5992,7 +5455,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-c-dim.this-that": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6016,7 +5478,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-c-dim.numbers-1-20": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6040,7 +5501,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-c-dim.family-vocab": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6064,7 +5524,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-d-dim.present-simple-routines": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6088,7 +5547,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-d-dim.house-rooms-vocab": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6112,7 +5570,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-d-dim.can-ability": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6136,7 +5593,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-d-dim.days-months": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6160,7 +5616,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-st.past-simple-irregular": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6184,7 +5639,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-st.comparative-superlative": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6208,7 +5662,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-st.going-to-will": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6232,7 +5685,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-st.countable-uncountable": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6256,7 +5708,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "efl-st.preposition-time": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6280,7 +5731,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-c-dim.myth-vs-history": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6304,7 +5754,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-c-dim.heracles-labors-order": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6328,7 +5777,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-c-dim.trojan-war-cause": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6352,7 +5800,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-c-dim.odysseus-journey": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6376,7 +5823,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-d-dim.minoan-crete": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6400,7 +5846,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-d-dim.mycenaean-achaeans": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6424,7 +5869,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-d-dim.polis-emergence": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6448,7 +5892,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-d-dim.olympic-games-origin": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6472,7 +5915,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-st-dim.revolution-year": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6496,7 +5938,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-st-dim.kapodistrias-role": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6520,7 +5961,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-st-dim.navarino-battle": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6544,7 +5984,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "istoria-st-dim.modern-state-formation": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6568,7 +6007,6 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-
   "science-st-dim.circuit-open-closed": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6592,7 +6030,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "science-st-dim.digestive-system-order": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6616,7 +6053,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "science-st-dim.renewable-vs-nonrenewable": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6640,7 +6076,6 @@ const LEARNING_PATHS = {
       "toolId": "chatgpt"
     }
   ],
-
   "science-st-dim.states-of-matter-change": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -6662,6 +6097,351 @@ const LEARNING_PATHS = {
       "descriptionEl": "Εξήγησε στο ChatGPT (μέσω γονιού) τι κατάλαβες για «Αλλαγές κατάστασης ύλης» και ρώτα: «Είναι σωστό αυτό που κατάλαβα; Τι μου λείπει;»",
       "descriptionEn": "Explain to ChatGPT (with a parent) what you understood about \"Changes of state\" and ask: \"Is what I understood correct? What am I missing?\"",
       "toolId": "chatgpt"
+    }
+  ],
+  "physics-b-lyk.circular-motion-tangent-velocity": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε έναν κύκλο, σημείωσε ένα σημείο και σχεδίασε τη στιγμιαία ταχύτητα εκεί. Η βασική παγίδα: Η ταχύτητα είναι εφαπτομενική στην κυκλική τροχιά.",
+      "descriptionEn": "Draw a circle, mark one point, and draw the instantaneous velocity there. The key trap: Velocity is tangent to the circular path.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Διεύθυνση ταχύτητας στην κυκλική κίνηση. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Velocity direction in circular motion. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "wolfram-alpha"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Σχεδίασε τη διεύθυνση της ταχύτητας σε τρία διαφορετικά σημεία της ίδιας τροχιάς.",
+      "descriptionEn": "Draw the velocity direction at three different points on the same path.",
+      "toolId": null
+    }
+  ],
+  "physics-b-lyk.centripetal-force-direction": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε σώμα σε κυκλική τροχιά και σημείωσε πού βρίσκεται το κέντρο και προς τα πού δείχνει η συνισταμένη δύναμη. Η βασική παγίδα: Η συνισταμένη δύναμη που διατηρεί την κυκλική κίνηση έχει κατεύθυνση προς το κέντρο.",
+      "descriptionEn": "Draw a body on a circular path, mark the centre, and show the direction of the resultant force. The key trap: The resultant force maintaining circular motion points toward the centre.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Κατεύθυνση κεντρομόλου δύναμης. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Direction of centripetal force. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "wolfram-alpha"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε γιατί η ταχύτητα είναι εφαπτομενική ενώ η επιτάχυνση/συνισταμένη δύναμη είναι προς το κέντρο.",
+      "descriptionEn": "Explain why velocity is tangent while acceleration/resultant force points toward the centre.",
+      "toolId": null
+    }
+  ],
+  "physics-b-lyk.momentum-definition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σύγκρινε την ορμή δύο σωμάτων που κινούνται με ίδια ταχύτητα αλλά έχουν διαφορετική μάζα. Η βασική παγίδα: Η ορμή εξαρτάται από μάζα και ταχύτητα και έχει την κατεύθυνση της ταχύτητας.",
+      "descriptionEn": "Compare the momentum of two bodies moving at the same speed but with different masses. The key trap: Momentum depends on mass and velocity and has the direction of velocity.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Ορμή: μάζα, ταχύτητα και κατεύθυνση. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Momentum: mass, velocity and direction. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "wolfram-alpha"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε δύο διαφορετικά ζεύγη m και v που δίνουν την ίδια κατά μέτρο ορμή.",
+      "descriptionEn": "Create two different m and v pairs that give the same momentum magnitude.",
+      "toolId": null
+    }
+  ],
+  "physics-b-lyk.momentum-conservation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι πρέπει να συγκρίνεις πριν και μετά από μια κρούση για να ελέγξεις τη διατήρηση ορμής. Η βασική παγίδα: Σε μονωμένο σύστημα η συνολική ορμή διατηρείται, ακόμη κι όταν η κινητική ενέργεια δεν διατηρείται.",
+      "descriptionEn": "Write what you must compare before and after a collision to test momentum conservation. The key trap: In an isolated system total momentum is conserved even when kinetic energy is not.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Διατήρηση ορμής στις κρούσεις. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Conservation of momentum in collisions. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "wolfram-alpha"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε με μία πρόταση γιατί μια ανελαστική κρούση μπορεί να διατηρεί ορμή αλλά όχι κινητική ενέργεια.",
+      "descriptionEn": "Explain in one sentence why an inelastic collision can conserve momentum but not kinetic energy.",
+      "toolId": null
+    }
+  ],
+  "physics-b-lyk.first-law-energy-balance": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Περιέγραψε με λόγια τι μπορεί να συμβεί στην ενέργεια ενός αερίου όταν θερμαίνεται και ταυτόχρονα εκτονώνεται. Η βασική παγίδα: Η ενέργεια που μεταφέρεται ως θερμότητα συνδέεται με μεταβολή εσωτερικής ενέργειας και έργο.",
+      "descriptionEn": "Describe in words what can happen to a gas’s energy when it is heated while expanding. The key trap: Energy transferred as heat is related to changes in internal energy and work.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο 1ος θερμοδυναμικός νόμος: ενεργειακό ισοζύγιο. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with First law of thermodynamics: energy balance. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "wolfram-alpha"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Δώσε ένα παράδειγμα όπου μέρος της θερμότητας αυξάνει την εσωτερική ενέργεια και μέρος αντιστοιχεί σε έργο.",
+      "descriptionEn": "Give an example where part of the heat raises internal energy and part corresponds to work.",
+      "toolId": null
+    }
+  ],
+  "biologia-b-lyk.specific-nonspecific-immunity": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Χώρισε σε δύο στήλες παραδείγματα μη ειδικής και ειδικής άμυνας που θυμάσαι. Η βασική παγίδα: Οι μη ειδικοί μηχανισμοί δρουν γενικά, ενώ η ειδική ανοσία στοχεύει συγκεκριμένα αντιγόνα.",
+      "descriptionEn": "Sort examples you remember into non-specific and specific defence. The key trap: Non-specific mechanisms act broadly, while specific immunity targets particular antigens.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Ειδική και μη ειδική άμυνα. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Specific and non-specific immunity. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε γιατί το δέρμα και ένα αντίσωμα δεν ανήκουν στον ίδιο τύπο άμυνας.",
+      "descriptionEn": "Explain why skin and an antibody are not the same type of defence.",
+      "toolId": null
+    }
+  ],
+  "biologia-b-lyk.vaccine-immune-memory": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι νομίζεις ότι αλλάζει στο ανοσοποιητικό μετά από έναν εμβολιασμό. Η βασική παγίδα: Ο εμβολιασμός προετοιμάζει την ειδική ανοσία και δημιουργεί ανοσολογική μνήμη.",
+      "descriptionEn": "Write what you think changes in the immune system after vaccination. The key trap: Vaccination primes specific immunity and creates immune memory.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Εμβολιασμός και ανοσολογική μνήμη. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Vaccination and immune memory. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε γιατί ένα εμβόλιο δεν είναι το ίδιο πράγμα με ένα αντιβιοτικό.",
+      "descriptionEn": "Explain why a vaccine is not the same thing as an antibiotic.",
+      "toolId": null
+    }
+  ],
+  "biologia-b-lyk.producers-ecosystem": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Φτιάξε μια απλή τροφική αλυσίδα και κύκλωσε τον παραγωγό. Η βασική παγίδα: Οι παραγωγοί εισάγουν χημική ενέργεια στην τροφική δομή του οικοσυστήματος.",
+      "descriptionEn": "Make a simple food chain and circle the producer. The key trap: Producers introduce chemical energy into the ecosystem’s food structure.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Παραγωγοί σε ένα οικοσύστημα. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Producers in an ecosystem. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε τι θα συνέβαινε στη ροή ενέργειας αν έλειπαν οι παραγωγοί.",
+      "descriptionEn": "Explain what would happen to energy flow if producers were absent.",
+      "toolId": null
+    }
+  ],
+  "biologia-b-lyk.energy-trophic-levels": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε 4 τροφικά επίπεδα και βάλε βέλη για τη ροή της ενέργειας. Η βασική παγίδα: Η διαθέσιμη ενέργεια μειώνεται από επίπεδο σε επίπεδο, ενώ η ύλη ακολουθεί βιογεωχημικούς κύκλους.",
+      "descriptionEn": "Draw four trophic levels and add arrows for energy flow. The key trap: Available energy decreases from level to level, while matter follows biogeochemical cycles.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Ροή ενέργειας στα τροφικά επίπεδα. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Energy flow across trophic levels. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε τη διαφορά ανάμεσα στη ροή ενέργειας και στην ανακύκλωση της ύλης.",
+      "descriptionEn": "Explain the difference between energy flow and matter cycling.",
+      "toolId": null
+    }
+  ],
+  "biologia-b-lyk.natural-selection-population": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε ένα παράδειγμα χαρακτηριστικού που μπορεί να δώσει αναπαραγωγικό πλεονέκτημα σε συγκεκριμένο περιβάλλον. Η βασική παγίδα: Η φυσική επιλογή δρα πάνω σε κληρονομήσιμη ποικιλότητα και τα αποτελέσματά της φαίνονται σε πληθυσμούς διαμέσου γενεών.",
+      "descriptionEn": "Write an example of a trait that could give a reproductive advantage in a particular environment. The key trap: Natural selection acts on heritable variation and its effects appear in populations across generations.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Φυσική επιλογή σε πληθυσμούς. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Natural selection in populations. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε γιατί δεν λέμε ότι ένα μεμονωμένο άτομο «εξελίχθηκε» επειδή άλλαξε μέσα στη ζωή του.",
+      "descriptionEn": "Explain why we do not say an individual “evolved” because it changed during its lifetime.",
+      "toolId": null
+    }
+  ],
+  "biologia-g-lyk.genetic-material-dna": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Σχεδίασε τη σχέση κύτταρο → πυρήνας → χρωμόσωμα → DNA → γονίδιο. Η βασική παγίδα: Το DNA είναι το γενετικό υλικό των ανθρώπινων κυττάρων και φέρει τις πληροφορίες που οργανώνονται στα χρωμοσώματα.",
+      "descriptionEn": "Draw the relationship cell → nucleus → chromosome → DNA → gene. The key trap: DNA is the genetic material of human cells and carries information organized in chromosomes.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο DNA ως γενετικό υλικό. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with DNA as genetic material. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε σε 2 προτάσεις τη διαφορά ανάμεσα σε DNA, χρωμόσωμα και γονίδιο.",
+      "descriptionEn": "Explain in two sentences the difference between DNA, chromosome, and gene.",
+      "toolId": null
+    }
+  ],
+  "biologia-g-lyk.transcription-translation": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε σε σειρά τα βασικά μόρια/δομές από το DNA μέχρι την πρωτεΐνη. Η βασική παγίδα: Στη μεταγραφή παράγεται RNA από DNA· στη μετάφραση η πληροφορία του mRNA χρησιμοποιείται για σύνθεση πολυπεπτιδίου.",
+      "descriptionEn": "Put the key molecules/structures in order from DNA to protein. The key trap: Transcription produces RNA from DNA; translation uses mRNA information to synthesize a polypeptide.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Μεταγραφή και μετάφραση. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Transcription and translation. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε ποιο στάδιο γίνεται με καλούπι DNA και ποιο χρησιμοποιεί mRNA στο ριβόσωμα.",
+      "descriptionEn": "Explain which stage uses DNA as a template and which uses mRNA at the ribosome.",
+      "toolId": null
+    }
+  ],
+  "biologia-g-lyk.heterozygous-genotype": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τρία παραδείγματα γονοτύπων και χαρακτήρισέ τα ως ομόζυγα ή ετερόζυγα. Η βασική παγίδα: Ετερόζυγος σημαίνει δύο διαφορετικά αλληλόμορφα για το ίδιο γονίδιο, π.χ. Aa.",
+      "descriptionEn": "Write three genotype examples and classify them as homozygous or heterozygous. The key trap: Heterozygous means two different alleles for the same gene, e.g. Aa.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Ομόζυγος και ετερόζυγος γονότυπος. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Homozygous and heterozygous genotype. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε τη διαφορά AA, Aa και aa χωρίς να χρησιμοποιήσεις τις λέξεις «ίδιο» ή «διαφορετικό» πάνω από μία φορά.",
+      "descriptionEn": "Explain the difference among AA, Aa, and aa without using the words “same” or “different” more than once.",
+      "toolId": null
+    }
+  ],
+  "biologia-g-lyk.mutation-definition": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Γράψε τι πρέπει να αλλάξει για να μιλάμε για γενετική μετάλλαξη. Η βασική παγίδα: Μετάλλαξη είναι μεταβολή του γενετικού υλικού· το αποτέλεσμα μπορεί να είναι επιβλαβές, ουδέτερο ή σε ορισμένες συνθήκες ωφέλιμο.",
+      "descriptionEn": "Write what must change for us to call something a genetic mutation. The key trap: A mutation is a change in genetic material; its effect can be harmful, neutral, or in some conditions beneficial.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Μεταλλάξεις και γενετικό υλικό. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Mutations and genetic material. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Δώσε τρεις κατηγορίες πιθανών αποτελεσμάτων μιας μετάλλαξης και εξήγησε γιατί το «πάντα βλαβερή» είναι λάθος.",
+      "descriptionEn": "Give three categories of possible mutation effects and explain why “always harmful” is wrong.",
+      "toolId": null
+    }
+  ],
+  "biologia-g-lyk.recombinant-dna": [
+    {
+      "titleEl": "Δοκίμασε πρώτα μόνος/η",
+      "titleEn": "Try it yourself first",
+      "descriptionEl": "Βάλε σε λογική σειρά: απομόνωση DNA, κοπή, σύνδεση σε φορέα, εισαγωγή σε κύτταρο-ξενιστή. Η βασική παγίδα: Η τεχνολογία ανασυνδυασμένου DNA συνδυάζει επιλεγμένα τμήματα DNA με μοριακά εργαλεία ώστε να δημιουργηθεί νέο μόριο DNA.",
+      "descriptionEn": "Put in logical order: DNA isolation, cutting, joining to a vector, introduction into a host cell. The key trap: Recombinant-DNA technology combines selected DNA fragments with molecular tools to create a new DNA molecule.",
+      "toolId": null
+    },
+    {
+      "titleEl": "Δούλεψέ το με καθοδήγηση",
+      "titleEn": "Work through it with guidance",
+      "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και πες: «Δυσκολεύομαι στο Ανασυνδυασμένο DNA. Κάνε μου μία ερώτηση τη φορά και μη μου δώσεις έτοιμη λύση.»",
+      "descriptionEn": "Use AI Help or ChatGPT and say: “I’m struggling with Recombinant DNA. Ask me one question at a time and do not give me the finished answer.”",
+      "toolId": "chatgpt"
+    },
+    {
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Εξήγησε γιατί η τεχνολογία ανασυνδυασμένου DNA δεν είναι απλώς «διασταύρωση δύο οργανισμών».",
+      "descriptionEn": "Explain why recombinant-DNA technology is not simply “crossing two organisms”.",
+      "toolId": null
     }
   ]
 };

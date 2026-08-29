@@ -456,7 +456,37 @@
 
   function populateGrades() {
     refs.grade.innerHTML = "";
-    for (const grade of GRADES[ctx.zoneId] || []) {
+
+    // Defensive fallback: the Tutor must never stop initializing just because
+    // navigation metadata is missing. Prefer the shared GRADES map; if it is
+    // unavailable, infer grade ids from the quizzes themselves.
+    const sharedGrades = (typeof GRADES !== "undefined" && GRADES?.[ctx.zoneId]) || [];
+    const fallbackLabels = {
+      primary: {
+        a: ["Α' Δημοτικού", "1st Grade"], b: ["Β' Δημοτικού", "2nd Grade"],
+        c: ["Γ' Δημοτικού", "3rd Grade"], d: ["Δ' Δημοτικού", "4th Grade"],
+        e: ["Ε' Δημοτικού", "5th Grade"], st: ["ΣΤ' Δημοτικού", "6th Grade"],
+      },
+      middle: {
+        a: ["Α' Γυμνασίου", "7th Grade"], b: ["Β' Γυμνασίου", "8th Grade"],
+        c: ["Γ' Γυμνασίου", "9th Grade"],
+      },
+      high: {
+        a: ["Α' Λυκείου", "10th Grade"], b: ["Β' Λυκείου", "11th Grade"],
+        c: ["Γ' Λυκείου", "12th Grade"],
+      },
+    };
+
+    let gradeList = sharedGrades;
+    if (!gradeList.length && typeof QUIZZES !== "undefined") {
+      const ids = [...new Set(Object.values(QUIZZES[ctx.zoneId] || {}).flatMap((q) => q.grades || []))];
+      gradeList = ids.map((id) => {
+        const labels = fallbackLabels[ctx.zoneId]?.[id] || [id, id];
+        return { id, labelEl: labels[0], labelEn: labels[1] };
+      });
+    }
+
+    for (const grade of gradeList) {
       const option = document.createElement("option");
       option.value = grade.id;
       option.textContent = langValue(grade, "labelEl", "labelEn", grade.id);

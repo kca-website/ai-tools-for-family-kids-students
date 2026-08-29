@@ -1,4 +1,4 @@
-/** DOM/data refinements loaded after app.js — v3.1.4. */
+/** DOM/data refinements loaded after app.js — v3.1.5. */
 (function(){
   "use strict";
 
@@ -276,6 +276,15 @@
     if(note.textContent !== desired) note.textContent=desired;
   }
 
+  function loadPwaLayer(){
+    if(document.querySelector('script[data-aitools4kids-pwa="1"]')) return;
+    const script=document.createElement("script");
+    script.src="/pwa.js";
+    script.async=false;
+    script.dataset.aitools4kidsPwa="1";
+    document.head.appendChild(script);
+  }
+
   function refresh(){
     reorderQuizRecommendations();
     fixFooter();
@@ -286,6 +295,7 @@
 
   // Data is already loaded when this script runs; repeat after app init for safety.
   reorderQuizRecommendations();
+  loadPwaLayer();
   queueMicrotask(refresh);
   document.addEventListener("DOMContentLoaded", refresh);
   window.addEventListener("popstate",()=>setTimeout(refresh,0));

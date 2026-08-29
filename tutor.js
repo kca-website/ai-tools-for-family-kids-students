@@ -70,6 +70,9 @@
       contextSubject: "Μάθημα",
       contextGoal: "Στόχος",
       contextPath: "Υπάρχον learning path",
+      officialBasis: "Επίσημη βάση 2026–27",
+      officialSource: "Επίσημη πηγή",
+      officialCatalog: "Κατάλογος σχολικών βιβλίων 2026–27",
       noPath: "Δεν υπάρχει ειδικό learning path.",
       newChat: "Νέα συζήτηση",
       emptyTitle: "Δοκίμασέ το με πραγματική σχολική απορία.",
@@ -163,6 +166,9 @@
       contextSubject: "Subject",
       contextGoal: "Goal",
       contextPath: "Existing learning path",
+      officialBasis: "Official 2026–27 basis",
+      officialSource: "Official source",
+      officialCatalog: "Official 2026–27 textbook catalog",
       noPath: "No specific learning path is available.",
       newChat: "New chat",
       emptyTitle: "Try it with a real school question.",
@@ -270,6 +276,71 @@
 
   function getCurrentGap() {
     return GAP_TAGS[refs.topic?.value] || null;
+  }
+
+  function getOfficialCurriculumEntry() {
+    const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
+    const quiz = getCurrentQuiz();
+    if (!layer || !quiz?.id) return null;
+    return layer.getByQuizId?.(quiz.id) || layer.byQuiz?.[quiz.id] || null;
+  }
+
+  function getOfficialGapAlignment() {
+    const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
+    const gap = getCurrentGap();
+    if (!layer || !gap?.id) return null;
+    return layer.getGapAlignment?.(gap.id) || layer.gapAlignment?.[gap.id] || null;
+  }
+
+  function officialValue(entry, elKey, enKey, fallback = "") {
+    if (!entry) return fallback;
+    return ctx?.lang === "en" ? (entry[enKey] || entry[elKey] || fallback) : (entry[elKey] || entry[enKey] || fallback);
+  }
+
+  function buildOfficialCurriculumPrompt() {
+    const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
+    const entry = getOfficialCurriculumEntry();
+    if (!layer || !entry) {
+      return `OFFICIAL CURRICULUM STATUS\n- No verified curriculum-layer entry is available for this selection. Do NOT claim Ministry/IEP alignment for this topic.`;
+    }
+    const gapAlignment = getOfficialGapAlignment();
+    const book = entry.officialBook;
+    const sections = ctx?.lang === "en"
+      ? (entry.officialSectionsEn?.length ? entry.officialSectionsEn : entry.officialSectionsEl || [])
+      : (entry.officialSectionsEl || []);
+    const lines = [
+      `OFFICIAL GREEK CURRICULUM LAYER`,
+      `- School year: ${entry.schoolYear || layer.meta?.schoolYear || "2026-2027"}`,
+      `- Verification status: ${entry.coverageStatus || "unknown"}`,
+      `- Verified on: ${entry.verificationDate || layer.meta?.lastVerified || "unknown"}`,
+    ];
+    if (book?.titleEl) lines.push(`- Official textbook: ${ctx?.lang === "en" ? (book.titleEn || book.titleEl) : book.titleEl}`);
+    if (book?.url) lines.push(`- Official textbook URL: ${book.url}`);
+    else if (entry.catalogUrl) lines.push(`- Official textbook catalog: ${entry.catalogUrl}`);
+    if (gapAlignment?.sectionEl) {
+      lines.push(`- Verified section related to the selected learning gap: ${gapAlignment.sectionEl}`);
+      lines.push(`- Gap-to-section status: ${gapAlignment.status}`);
+    }
+    if (sections.length) {
+      lines.push(`- Verified textbook scope/index:`);
+      for (const section of sections.slice(0, 12)) lines.push(`  • ${section}`);
+    }
+    const scopeNote = officialValue(entry, "scopeNoteEl", "scopeNoteEn");
+    if (scopeNote) lines.push(`- Scope note: ${scopeNote}`);
+    lines.push(`- Annual 2026-27 teaching-instructions status: ${entry.annualInstructionsStatus || "unknown"}`);
+    const annualNote = officialValue(entry, "annualInstructionsNoteEl", "annualInstructionsNoteEn");
+    if (annualNote) lines.push(`- Annual-instructions note: ${annualNote}`);
+    lines.push(``, `SOURCE-DISCIPLINE RULES`,
+      `A. Treat "catalog-verified" only as proof that the grade/subject appears in the official 2026-27 textbook package. It is NOT chapter-level or annual-syllabus verification.`,
+      `B. Treat "official-book-verified" as verification of the official textbook only. Do not infer that every chapter is taught/examined this year.`,
+      `C. Treat "book-index-verified" as verified textbook contents/scope, but still keep annual teaching/exam instructions separate.`,
+      `D. When an exact or related gap-to-section mapping is supplied, prefer that section's terminology, sequence and expected level.`,
+      `E. Never say "this is in the 2026-27 taught/examined syllabus" unless annual instructions are explicitly marked verified.`,
+      `F. If the learner asks something outside verified scope, you may explain it as general knowledge only if useful, but clearly avoid presenting it as required Greek-school curriculum.`,
+      `G. Prefer methods and terminology compatible with the official textbook; do not introduce a more advanced method as if it were the expected classroom method.`,
+      `H. If verified source context conflicts with your general memory, follow the verified source context and acknowledge uncertainty rather than silently overriding it.`
+    );
+    return lines.join("\n");
   }
 
   function getPathForGap(gapId) {
@@ -425,11 +496,22 @@
       ? path.map((step, i) => `${i + 1}. ${escapeHtml(langValue(step, "titleEl", "titleEn", ""))}`).join("<br>")
       : escapeHtml(tr("noPath"));
 
+    const official = getOfficialCurriculumEntry();
+    const officialBook = official?.officialBook;
+    const officialLabel = official ? officialValue(official, "coverageLabelEl", "coverageLabelEn", official.coverageStatus || "") : "";
+    const sourceUrl = officialBook?.url || official?.catalogUrl || "";
+    const sourceName = officialBook
+      ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
+      : tr("officialCatalog");
+    const officialHtml = official ? `<br><br>
+      <b>${escapeHtml(tr("officialBasis"))}:</b> ${escapeHtml(officialLabel)}<br>
+      ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceName)} ↗</a>` : ""}` : "";
+
     refs.contextBox.innerHTML = `
       <b>${escapeHtml(tr("contextClass"))}:</b> ${escapeHtml(getSelectedGradeLabel())}<br>
       <b>${escapeHtml(tr("contextSubject"))}:</b> ${escapeHtml(langValue(quiz, "subjectLabelEl", "subjectLabelEn", "—"))}<br>
       <b>${escapeHtml(tr("contextGoal"))}:</b> ${escapeHtml(langValue(gap, "labelEl", "labelEn", tr("generalHelp")))}<br><br>
-      <b>${escapeHtml(tr("contextPath"))}:</b><br>${pathSummary}
+      <b>${escapeHtml(tr("contextPath"))}:</b><br>${pathSummary}${officialHtml}
     `;
   }
 
@@ -554,6 +636,7 @@
       return `Step ${i + 1}: ${title}. ${desc}`;
     }).join("\n");
     const ageText = ctx.zoneId === "high" ? "15-18" : (refs.age?.value || "13+");
+    const officialCurriculumText = buildOfficialCurriculumPrompt();
 
     return `You are the AI Tutor for AI Tools for Kids. Your goal is UNDERSTANDING, not producing finished schoolwork.
 
@@ -565,6 +648,8 @@ CONTEXT
 ${pathText ? `- Existing learning path:\n${pathText}` : ""}
 - Mode: ${parentMode ? "PARENT/GUARDIAN" : `STUDENT ${ageText}`}
 - Reply primarily in ${languageName}, unless the school subject or the user's question clearly calls for another language.
+
+${officialCurriculumText}
 
 TUTORING RULES
 1. Do not immediately give the final answer or a fully solved exercise. Ask for the learner's attempt or thinking first.

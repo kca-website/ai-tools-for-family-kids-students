@@ -1,23 +1,175 @@
-(function(){
-  const concepts=(Array.isArray(window.SIGN_LANGUAGE_CONCEPTS)?window.SIGN_LANGUAGE_CONCEPTS:[]).slice();
-  const gradeDefs=window.SIGN_LANGUAGE_GRADE_DEFS||{};
-  const gradeMap=window.SIGN_LANGUAGE_GRADE_MAP||{};
-  const grid=document.getElementById('grid'),search=document.getElementById('search'),count=document.getElementById('count'),empty=document.getElementById('empty'),emptyEn=document.getElementById('emptyEn'),levelFilter=document.getElementById('levelFilter'),gradeFilter=document.getElementById('gradeFilter');
-  let subject='all',lang='el';
-  const subjectEl={biology:'🧬 Βιολογία / Σώμα',science:'🔬 Φυσικές Επιστήμες',geography:'🌍 Γεωγραφία / Περιβάλλον',math:'📐 Μαθηματικά',history:'🏛️ Ιστορία'};
-  const subjectEn={biology:'🧬 Biology / Body',science:'🔬 Science',geography:'🌍 Geography / Environment',math:'📐 Mathematics',history:'🏛️ History'};
-  const escapeHtml=(s)=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const levels={all:{el:'Όλες οι βαθμίδες',en:'All levels'},primary:{el:'Δημοτικό',en:'Primary School'},middle:{el:'Γυμνάσιο',en:'Middle School'}};
-  function gradeIds(c){return (gradeMap[c.name]||[]).filter(id=>gradeDefs[id]);}
-  function earliest(c){const ids=gradeIds(c);return ids.length?Math.min(...ids.map(id=>gradeDefs[id].order||99)):99}
-  const subjectOrder={math:1,geography:2,science:3,biology:4,history:5};
-  concepts.sort((a,b)=>earliest(a)-earliest(b)||(subjectOrder[a.subject]||9)-(subjectOrder[b.subject]||9)||a.name.localeCompare(b.name,'el'));
-  function renderLevelOptions(){const current=levelFilter.value||'all';levelFilter.innerHTML=Object.entries(levels).map(([id,v])=>`<option value="${id}">${escapeHtml(v[lang])}</option>`).join('');levelFilter.value=levels[current]?current:'all';}
-  function renderGradeOptions(){const current=gradeFilter.value||'all',level=levelFilter.value||'all';const defs=Object.entries(gradeDefs).filter(([,d])=>['primary','middle'].includes(d.level)&&(level==='all'||d.level===level)).sort((a,b)=>(a[1].order||99)-(b[1].order||99));const allLabel=lang==='en'?'All grades':'Όλες οι τάξεις';gradeFilter.innerHTML=`<option value="all">${allLabel}</option>`+defs.map(([id,d])=>`<option value="${id}">${escapeHtml(lang==='en'?d.labelEn:d.labelEl)}</option>`).join('');gradeFilter.value=defs.some(([id])=>id===current)?current:'all';}
-  function gradeTags(c){return gradeIds(c).map(id=>`<span class="grade-tag">${escapeHtml(lang==='en'?gradeDefs[id].labelEn:gradeDefs[id].labelEl)}</span>`).join('');}
-  function card(c){const grades=gradeIds(c);const levelsFor=[...new Set(grades.map(id=>gradeDefs[id].level))];const q=[c.name,c.desc,subjectEl[c.subject],subjectEn[c.subject],...grades.map(id=>gradeDefs[id].labelEl),...grades.map(id=>gradeDefs[id].labelEn)].join(' ').toLocaleLowerCase('el');const subjectLabel=lang==='en'?subjectEn[c.subject]:subjectEl[c.subject];const videoLabel=lang==='en'?'🤟 Open official GSL video ↗':'🤟 Δες το επίσημο βίντεο ΕΝΓ ↗';const sourceLabel=lang==='en'?'IEP source page ↗':'σελίδα πηγής στο ΙΕΠ ↗';const verifiedLabel=lang==='en'?'✓ Verified direct WebM':'✓ Direct WebM επιβεβαιωμένο';const videoSource=lang==='en'?'Video source: IEP':'Πηγή βίντεο: ΙΕΠ';return `<article class="card" data-subject="${escapeHtml(c.subject)}" data-grades="${escapeHtml(grades.join(' '))}" data-levels="${escapeHtml(levelsFor.join(' '))}" data-search="${escapeHtml(q)}"><div class="art"><img loading="lazy" referrerpolicy="no-referrer" src="${escapeHtml(c.image)}" alt="${escapeHtml(c.imageAlt||c.name)}"><a class="image-credit" href="${escapeHtml(c.imageSource)}" target="_blank" rel="noopener noreferrer">${escapeHtml(c.imageCredit||'Πηγή εικόνας')}</a></div><div class="card-body"><div class="subject">${escapeHtml(subjectLabel)}</div><h2>${escapeHtml(c.name)}</h2><div class="grade-tags">${gradeTags(c)}</div><p class="desc">${escapeHtml(c.desc)}</p><div class="iep-box"><p class="iep-label">${videoSource}</p><p class="iep-source">${escapeHtml(c.sourceLabel)}</p><a class="btn" href="${escapeHtml(c.video)}" target="_blank" rel="noopener noreferrer">${videoLabel}</a><a class="source-page" href="${escapeHtml(c.sourcePage)}" target="_blank" rel="noopener noreferrer">${sourceLabel}</a><div class="verified">${verifiedLabel}</div></div></div></article>`;}
-  function renderCards(){grid.innerHTML=concepts.map(card).join('');apply();}
-  function apply(){const term=(search.value||'').trim().toLocaleLowerCase('el'),level=levelFilter.value||'all',grade=gradeFilter.value||'all';let n=0;[...grid.querySelectorAll('.card')].forEach(c=>{const grades=' '+(c.dataset.grades||'')+' ',levelsFor=' '+(c.dataset.levels||'')+' ';const okSubject=subject==='all'||c.dataset.subject===subject;const okLevel=level==='all'||levelsFor.includes(' '+level+' ');const okGrade=grade==='all'||grades.includes(' '+grade+' ');const okSearch=!term||(c.dataset.search||'').includes(term);const ok=okSubject&&okLevel&&okGrade&&okSearch;c.hidden=!ok;if(ok)n++;});count.textContent=n+(lang==='en'?' concepts':' έννοιες');empty.style.display=(n||lang==='en')?'none':'block';emptyEn.style.display=(n||lang!=='en')?'none':'block';}
-  function setLang(next){lang=next==='en'?'en':'el';const en=lang==='en';document.body.classList.toggle('lang-en',en);document.documentElement.lang=en?'en':'el';document.getElementById('btnEl').classList.toggle('active',!en);document.getElementById('btnEn').classList.toggle('active',en);search.placeholder=en?'Search concepts…':'Αναζήτηση έννοιας…';search.setAttribute('aria-label',search.placeholder);document.querySelectorAll('.filter').forEach(b=>b.textContent=b.dataset[en?'en':'el']);renderLevelOptions();renderGradeOptions();renderCards();try{localStorage.setItem('aitools4kids_lang',lang)}catch(_e){}}
-  document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{subject=btn.dataset.subject;document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b===btn));apply()}));search.addEventListener('input',apply);levelFilter.addEventListener('change',()=>{renderGradeOptions();apply()});gradeFilter.addEventListener('change',apply);document.getElementById('btnEl').addEventListener('click',()=>setLang('el'));document.getElementById('btnEn').addEventListener('click',()=>setLang('en'));renderLevelOptions();renderGradeOptions();renderCards();try{if(localStorage.getItem('aitools4kids_lang')==='en')setLang('en')}catch(_e){}
+(function () {
+  const concepts = (Array.isArray(window.SIGN_LANGUAGE_CONCEPTS)
+    ? window.SIGN_LANGUAGE_CONCEPTS
+    : []).slice();
+  const gradeDefs = window.SIGN_LANGUAGE_GRADE_DEFS || {};
+  const gradeMap = window.SIGN_LANGUAGE_GRADE_MAP || {};
+
+  const grid = document.getElementById("grid");
+  const search = document.getElementById("search");
+  const count = document.getElementById("count");
+  const empty = document.getElementById("empty");
+  const emptyEn = document.getElementById("emptyEn");
+
+  let subject = "all";
+  let lang = "el";
+
+  const subjectEl = {
+    biology: "🧬 Βιολογία / Σώμα",
+    science: "🔬 Φυσικές Επιστήμες",
+    geography: "🌍 Γεωγραφία / Περιβάλλον",
+    math: "📐 Μαθηματικά",
+    history: "🏛️ Ιστορία",
+  };
+  const subjectEn = {
+    biology: "🧬 Biology / Body",
+    science: "🔬 Science",
+    geography: "🌍 Geography / Environment",
+    math: "📐 Mathematics",
+    history: "🏛️ History",
+  };
+  const subjectOrder = { math: 1, geography: 2, science: 3, biology: 4, history: 5 };
+
+  const escapeHtml = (value) =>
+    String(value ?? "").replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    })[char]);
+
+  // Κάνει την αναζήτηση ανεκτική σε τόνους και τελικό σίγμα:
+  // «φωτοσυνθεση» βρίσκει «Φωτοσύνθεση» και «ισος» βρίσκει «ίσος».
+  const normalizeSearch = (value) =>
+    String(value ?? "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLocaleLowerCase("el")
+      .replace(/ς/g, "σ");
+
+  function gradeIds(concept) {
+    return (gradeMap[concept.name] || []).filter((id) => gradeDefs[id]);
+  }
+
+  function earliest(concept) {
+    const ids = gradeIds(concept);
+    return ids.length
+      ? Math.min(...ids.map((id) => gradeDefs[id].order || 99))
+      : 99;
+  }
+
+  concepts.sort((a, b) =>
+    earliest(a) - earliest(b)
+    || (subjectOrder[a.subject] || 9) - (subjectOrder[b.subject] || 9)
+    || a.name.localeCompare(b.name, "el")
+  );
+
+  function gradeTags(concept) {
+    return gradeIds(concept)
+      .map((id) => `<span class="grade-tag">${escapeHtml(
+        lang === "en" ? gradeDefs[id].labelEn : gradeDefs[id].labelEl
+      )}</span>`)
+      .join("");
+  }
+
+  function card(concept) {
+    const grades = gradeIds(concept);
+    const searchableText = normalizeSearch([
+      concept.name,
+      concept.desc,
+      subjectEl[concept.subject],
+      subjectEn[concept.subject],
+      ...grades.map((id) => gradeDefs[id].labelEl),
+      ...grades.map((id) => gradeDefs[id].labelEn),
+    ].join(" "));
+    const subjectLabel = lang === "en"
+      ? subjectEn[concept.subject]
+      : subjectEl[concept.subject];
+    const videoLabel = lang === "en"
+      ? "🤟 Open official GSL video ↗"
+      : "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗";
+    const sourceLabel = lang === "en" ? "IEP source page ↗" : "σελίδα πηγής στο ΙΕΠ ↗";
+    const verifiedLabel = lang === "en" ? "✓ Verified direct WebM" : "✓ Direct WebM επιβεβαιωμένο";
+    const videoSource = lang === "en" ? "Video source: IEP" : "Πηγή βίντεο: ΙΕΠ";
+
+    return `<article class="card" data-subject="${escapeHtml(concept.subject)}" data-search="${escapeHtml(searchableText)}"><div class="art"><img loading="lazy" referrerpolicy="no-referrer" src="${escapeHtml(concept.image)}" alt="${escapeHtml(concept.imageAlt || concept.name)}"><a class="image-credit" href="${escapeHtml(concept.imageSource)}" target="_blank" rel="noopener noreferrer">${escapeHtml(concept.imageCredit || "Πηγή εικόνας")}</a></div><div class="card-body"><div class="subject">${escapeHtml(subjectLabel)}</div><h2>${escapeHtml(concept.name)}</h2><div class="grade-tags">${gradeTags(concept)}</div><p class="desc">${escapeHtml(concept.desc)}</p><div class="iep-box"><p class="iep-label">${videoSource}</p><p class="iep-source">${escapeHtml(concept.sourceLabel)}</p><a class="btn" href="${escapeHtml(concept.video)}" target="_blank" rel="noopener noreferrer">${videoLabel}</a><a class="source-page" href="${escapeHtml(concept.sourcePage)}" target="_blank" rel="noopener noreferrer">${sourceLabel}</a><div class="verified">${verifiedLabel}</div></div></div></article>`;
+  }
+
+  function renderCards() {
+    grid.innerHTML = concepts.map(card).join("");
+    applyFilters();
+  }
+
+  function setEmptyMessage(rawTerm) {
+    if (rawTerm) {
+      empty.textContent = `Η λέξη «${rawTerm}» δεν υπάρχει ακόμη στις ${concepts.length} διαθέσιμες έννοιες. Η αναζήτηση δεν καλύπτει όλο το λεξιλόγιο της ΕΝΓ.`;
+      emptyEn.textContent = `“${rawTerm}” is not yet included in the ${concepts.length} available concepts. Search does not cover the full GSL vocabulary.`;
+      return;
+    }
+    empty.textContent = "Δεν υπάρχουν ακόμη διαθέσιμες έννοιες σε αυτή τη θεματική.";
+    emptyEn.textContent = "There are no available concepts in this subject area yet.";
+  }
+
+  function applyFilters() {
+    const rawTerm = (search.value || "").trim();
+    const term = normalizeSearch(rawTerm);
+    let visibleCount = 0;
+
+    [...grid.querySelectorAll(".card")].forEach((item) => {
+      const matchesSubject = subject === "all" || item.dataset.subject === subject;
+      const matchesSearch = !term || (item.dataset.search || "").includes(term);
+      const isVisible = matchesSubject && matchesSearch;
+      item.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+
+    count.textContent = `${visibleCount}${lang === "en" ? " concepts" : " έννοιες"}`;
+    setEmptyMessage(rawTerm);
+    empty.style.display = visibleCount || lang === "en" ? "none" : "block";
+    emptyEn.style.display = visibleCount || lang !== "en" ? "none" : "block";
+  }
+
+  function setLang(next) {
+    lang = next === "en" ? "en" : "el";
+    const isEnglish = lang === "en";
+    document.body.classList.toggle("lang-en", isEnglish);
+    document.documentElement.lang = isEnglish ? "en" : "el";
+    document.getElementById("btnEl").classList.toggle("active", !isEnglish);
+    document.getElementById("btnEn").classList.toggle("active", isEnglish);
+    search.placeholder = isEnglish
+      ? "e.g. DNA, photosynthesis, fraction"
+      : "π.χ. DNA, φωτοσύνθεση, κλάσμα";
+    search.setAttribute(
+      "aria-label",
+      isEnglish
+        ? `Search the ${concepts.length} available concepts`
+        : `Αναζήτηση στις ${concepts.length} διαθέσιμες έννοιες`
+    );
+    document.querySelectorAll(".filter").forEach((button) => {
+      button.textContent = button.dataset[isEnglish ? "en" : "el"];
+    });
+    renderCards();
+    try {
+      localStorage.setItem("aitools4kids_lang", lang);
+    } catch (_error) {}
+  }
+
+  document.querySelectorAll(".filter").forEach((button) => {
+    button.addEventListener("click", () => {
+      subject = button.dataset.subject;
+      document.querySelectorAll(".filter").forEach((item) => {
+        item.classList.toggle("active", item === button);
+      });
+      applyFilters();
+    });
+  });
+  search.addEventListener("input", applyFilters);
+  document.getElementById("btnEl").addEventListener("click", () => setLang("el"));
+  document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
+
+  renderCards();
+  try {
+    if (localStorage.getItem("aitools4kids_lang") === "en") setLang("en");
+  } catch (_error) {}
 })();

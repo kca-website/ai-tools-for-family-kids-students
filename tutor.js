@@ -70,7 +70,7 @@
       contextSubject: "Μάθημα",
       contextGoal: "Στόχος",
       contextPath: "Υπάρχον learning path",
-      officialBasis: "Επίσημη βάση 2026–27",
+      officialBasis: "Επίσημη βάση",
       officialSource: "Επίσημη πηγή",
       officialCatalog: "Κατάλογος σχολικών βιβλίων 2026–27",
       noPath: "Δεν υπάρχει ειδικό learning path.",
@@ -166,7 +166,7 @@
       contextSubject: "Subject",
       contextGoal: "Goal",
       contextPath: "Existing learning path",
-      officialBasis: "Official 2026–27 basis",
+      officialBasis: "Official basis",
       officialSource: "Official source",
       officialCatalog: "Official 2026–27 textbook catalog",
       noPath: "No specific learning path is available.",
@@ -270,16 +270,32 @@
     return ctx?.roleId === "guardian" || ctx?.zoneId === "primary";
   }
 
+  function getCatalogSubject() {
+    const catalog = window.AITOOLSKIDS_TUTOR_CATALOG;
+    if (!catalog || !refs.subject?.value || !refs.grade?.value) return null;
+    return catalog.getSubject?.(ctx.zoneId, refs.grade.value, refs.subject.value) || null;
+  }
+
   function getCurrentQuiz() {
-    return (QUIZZES[ctx.zoneId] || {})[refs.subject?.value] || null;
+    const subject = getCatalogSubject();
+    const quizId = subject?.quizId || subject?.id || refs.subject?.value;
+    return (QUIZZES[ctx.zoneId] || {})[quizId] || null;
+  }
+
+  function getCurrentSubject() {
+    return getCatalogSubject() || getCurrentQuiz();
   }
 
   function getCurrentGap() {
-    return GAP_TAGS[refs.topic?.value] || null;
+    const id = refs.topic?.value;
+    if (!id) return null;
+    return GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || null;
   }
 
   function getOfficialCurriculumEntry() {
     const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
+    const subject = getCatalogSubject();
+    if (subject?.curriculum) return subject.curriculum;
     const quiz = getCurrentQuiz();
     if (!layer || !quiz?.id) return null;
     return layer.getByQuizId?.(quiz.id) || layer.byQuiz?.[quiz.id] || null;
@@ -288,6 +304,25 @@
   function getOfficialGapAlignment() {
     const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
     const gap = getCurrentGap();
+    const catalogSubject = getCatalogSubject();
+    if (catalogSubject && gap?.id) {
+      const annuallyVerified = catalogSubject.curriculum?.annualInstructionsStatus === "2026-27-verified";
+      return {
+        status: annuallyVerified ? "exact-section-verified" : "official-course-topic-anchor",
+        statusLabelEl: annuallyVerified
+          ? (gap.optional ? "Προαιρετική ενότητα της οδηγίας" : "Ενότητα της επίσημης οδηγίας")
+          : "Θέμα πλοήγησης — δεν έχει ακόμη επαληθευτεί ως ύλη 2026–27",
+        statusLabelEn: annuallyVerified
+          ? (gap.optional ? "Optional topic in the guidance" : "Topic in the official guidance")
+          : "Navigation topic — not yet verified as 2026–27 scope",
+        sectionEl: annuallyVerified ? gap.labelEl : "",
+        sectionEn: annuallyVerified ? gap.labelEn : "",
+        topicAnchorEl: gap.labelEl,
+        topicAnchorEn: gap.labelEn,
+        annualScopeVerified: annuallyVerified,
+        sourceUrl: catalogSubject.curriculum?.annualInstructionsUrl || "",
+      };
+    }
     if (!layer || !gap?.id) return null;
     return layer.getGapAlignment?.(gap.id) || layer.gapAlignment?.[gap.id] || null;
   }
@@ -341,7 +376,7 @@
     }
     const scopeNote = officialValue(entry, "scopeNoteEl", "scopeNoteEn");
     if (scopeNote) lines.push(`- Scope note: ${scopeNote}`);
-    lines.push(`- Annual 2026-27 teaching-instructions status: ${entry.annualInstructionsStatus || "unknown"}`);
+    lines.push(`- Annual ${entry.schoolYear || "2026-2027"} teaching-instructions status: ${entry.annualInstructionsStatus || "unknown"}`);
     if (entry.annualInstructionsUrl) lines.push(`- Official annual-syllabus/instructions source: ${entry.annualInstructionsUrl}`);
     const annualNote = officialValue(entry, "annualInstructionsNoteEl", "annualInstructionsNoteEn");
     if (annualNote) lines.push(`- Annual-instructions note: ${annualNote}`);
@@ -498,14 +533,17 @@
   function populateSubjects() {
     const gradeId = refs.grade.value;
     const quizzes = Object.values(QUIZZES[ctx.zoneId] || {}).filter((q) => (q.grades || []).includes(gradeId));
+    const catalogSubjects = window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(ctx.zoneId, gradeId) || [];
+    const represented = new Set(catalogSubjects.map((subject) => subject.quizId || subject.id));
+    const subjects = catalogSubjects.concat(quizzes.filter((quiz) => !represented.has(quiz.id)));
     refs.subject.innerHTML = "";
-    for (const quiz of quizzes) {
+    for (const subject of subjects) {
       const option = document.createElement("option");
-      option.value = quiz.id;
-      option.textContent = langValue(quiz, "subjectLabelEl", "subjectLabelEn", quiz.id);
+      option.value = subject.id;
+      option.textContent = langValue(subject, "subjectLabelEl", "subjectLabelEn", subject.id);
       refs.subject.appendChild(option);
     }
-    if (!quizzes.length) {
+    if (!subjects.length) {
       const option = document.createElement("option");
       option.value = "";
       option.textContent = tr("noContent");
@@ -516,10 +554,11 @@
 
   function populateTopics() {
     const quiz = getCurrentQuiz();
-    const tags = getGapTagsForQuiz(quiz);
+    const catalogTopics = getCatalogSubject()?.topics || [];
+    const tags = catalogTopics.length ? catalogTopics.map((topic) => topic.id) : getGapTagsForQuiz(quiz);
     refs.topic.innerHTML = "";
     for (const id of tags) {
-      const gap = GAP_TAGS[id];
+      const gap = GAP_TAGS[id] || catalogTopics.find((topic) => topic.id === id);
       const option = document.createElement("option");
       option.value = id;
       option.textContent = langValue(gap, "labelEl", "labelEn", id);
@@ -536,7 +575,7 @@
   }
 
   function renderContext() {
-    const quiz = getCurrentQuiz();
+    const subject = getCurrentSubject();
     const gap = getCurrentGap();
     const path = gap ? getPathForGap(gap.id) : [];
     const pathSummary = path.length
@@ -549,7 +588,7 @@
     const sourceUrl = officialBook?.url || official?.catalogUrl || "";
     const sourceName = officialBook
       ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
-      : tr("officialCatalog");
+      : officialValue(official, "sourceLabelEl", "sourceLabelEn", tr("officialCatalog"));
     const gapOfficial = getOfficialGapAlignment();
     const gapStatusLabel = gapOfficial ? officialValue(gapOfficial, "statusLabelEl", "statusLabelEn", gapOfficial.status || "") : "";
     const mismatch = gapOfficial?.status === "curriculum-mismatch-review-needed";
@@ -560,7 +599,7 @@
 
     refs.contextBox.innerHTML = `
       <b>${escapeHtml(tr("contextClass"))}:</b> ${escapeHtml(getSelectedGradeLabel())}<br>
-      <b>${escapeHtml(tr("contextSubject"))}:</b> ${escapeHtml(langValue(quiz, "subjectLabelEl", "subjectLabelEn", "—"))}<br>
+      <b>${escapeHtml(tr("contextSubject"))}:</b> ${escapeHtml(langValue(subject, "subjectLabelEl", "subjectLabelEn", "—"))}<br>
       <b>${escapeHtml(tr("contextGoal"))}:</b> ${escapeHtml(langValue(gap, "labelEl", "labelEn", tr("generalHelp")))}<br><br>
       <b>${escapeHtml(tr("contextPath"))}:</b><br>${pathSummary}${officialHtml}
     `;
@@ -676,7 +715,7 @@
   }
 
   function buildSystemPrompt() {
-    const quiz = getCurrentQuiz();
+    const subject = getCurrentSubject();
     const gap = getCurrentGap();
     const path = gap ? getPathForGap(gap.id) : [];
     const parentMode = isParentMode();
@@ -693,7 +732,7 @@
 
 CONTEXT
 - Grade: ${getSelectedGradeLabel()}
-- Subject: ${langValue(quiz, "subjectLabelEl", "subjectLabelEn", "general school subject")}
+- Subject: ${langValue(subject, "subjectLabelEl", "subjectLabelEn", "general school subject")}
 - Focus: ${langValue(gap, "labelEl", "labelEn", "general question")}
 - Likely learning difficulty: ${langValue(gap, "explainEl", "explainEn", "no specific difficulty defined")}
 ${pathText ? `- Existing learning path:\n${pathText}` : ""}

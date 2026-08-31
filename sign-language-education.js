@@ -2,7 +2,68 @@
   "use strict";
   const BASE="https://streamer.uth.gr:8888/vidstore/vod/public/courses/gsl/";
   const SOURCE_PAGE="https://vod.uth.gr/gsl/Lexiko/";
-  const IMAGE="/assets/sign-language-education.svg";
+
+  function svgData(icon,label){
+    const safe=String(label||"").replace(/[&<>]/g,(c)=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700"><rect width="1200" height="700" rx="42" fill="#eef6ff"/><circle cx="600" cy="285" r="170" fill="#dbeafe"/><text x="600" y="350" text-anchor="middle" font-size="180" font-family="Arial,Segoe UI Emoji,sans-serif">${icon}</text><text x="600" y="560" text-anchor="middle" font-size="54" font-weight="700" fill="#1f2937" font-family="Arial,sans-serif">${safe}</text><text x="600" y="625" text-anchor="middle" font-size="30" fill="#475569" font-family="Arial,sans-serif">Ελληνική Νοηματική Γλώσσα · σχολικό λεξιλόγιο</text></svg>`;
+    return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+  }
+
+  const GROUPS={
+    understanding:["🧠","Κατανόηση & μνήμη"],
+    course:["📚","Μάθημα & ύλη"],
+    work:["📝","Εργασία & εξάσκηση"],
+    assessment:["✅","Αξιολόγηση & πρόοδος"],
+    support:["🤝","Σχολική υποστήριξη"],
+    school:["🏫","Σχολείο"],
+    classroom:["🧑‍🏫","Τάξη & μάθημα"],
+    devices:["💻","Ψηφιακά εργαλεία"]
+  };
+
+  const SPECIAL={
+    "Σχολείο":["🏫","Σχολείο"],
+    "Νηπιαγωγείο / νηπιαγωγός":["🧸","Νηπιαγωγείο"],
+    "Δημοτικό":["🎒","Δημοτικό"],
+    "Γυμνάσιο":["🏫","Γυμνάσιο"],
+    "Λύκειο":["🎓","Λύκειο"],
+    "Αίθουσα / τάξη":["🧑‍🏫","Αίθουσα / τάξη"],
+    "Διάλειμμα":["⏰","Διάλειμμα"],
+    "Εκπαιδευτική εκδρομή":["🚌","Εκπαιδευτική εκδρομή"],
+    "Διαδραστικός πίνακας":["🖥️","Διαδραστικός πίνακας"],
+    "Βιβλίο ασκήσεων":["📘","Βιβλίο ασκήσεων"],
+    "Χάρακας":["📏","Χάρακας"],
+    "Χαρτί":["📄","Χαρτί"],
+    "Στυλό / μολύβι / γραφίδα":["✏️","Γραφή"],
+    "Ηλεκτρονικός υπολογιστής":["🖥️","Υπολογιστής"],
+    "Λάπτοπ / φορητός υπολογιστής":["💻","Λάπτοπ"],
+    "Τάμπλετ / tablet":["📱","Τάμπλετ"],
+    "Φυσική":["⚡","Φυσική"],
+    "Γεωγραφία":["🌍","Γεωγραφία"],
+    "Γεωμετρία":["📐","Γεωμετρία"],
+    "Γλώσσα":["🗣️","Γλώσσα"],
+    "Γραμματική":["🔤","Γραμματική"],
+    "Γυμναστική":["🏃","Γυμναστική"],
+    "Ιστορία":["🏛️","Ιστορία"],
+    "Μαθηματικά":["➗","Μαθηματικά"],
+    "Ορθογραφία":["✍️","Ορθογραφία"],
+    "Θρησκευτικά":["📖","Θρησκευτικά"],
+    "Χημεία":["⚗️","Χημεία"],
+    "Μάθημα Αγγλικών":["🇬🇧","Αγγλικά"]
+  };
+
+  const GROUP_BY_NAME={
+    "Επαναλαμβάνω / πάλι / ξανά":"understanding","Κατάλαβα":"understanding","Δεν κατάλαβα":"understanding","Καταλαβαίνω / κατανοώ / νόημα":"understanding","Θυμάμαι / ανάμνηση / μνήμη":"understanding","Δεν θυμάμαι":"understanding","Θυμήθηκα":"understanding","Ξεχνώ":"understanding","Μαθαίνω":"understanding","Αρχή / αρχίζω / αρχάριος":"understanding","Μπράβο":"understanding","Μάθηση / μαθαίνω":"understanding","Μάθηση / εκπαίδευση":"understanding",
+    "Μάθημα":"course","Διδακτέα ύλη":"course","Γραπτός λόγος / γραπτή γλώσσα":"course","Πρόγραμμα μαθημάτων":"course","Ενότητα":"course","Κεφάλαιο":"course",
+    "Απαντάω / απάντηση":"assessment","Λάθος":"assessment","Σωστό":"assessment","Αξιολόγηση":"assessment","Πρόοδος":"assessment","Σχολική επίδοση":"assessment","Βαθμός":"assessment",
+    "Άσκηση / εξάσκηση":"work","Ατομική εργασία":"work","Ομαδική εργασία":"work","Έκθεση":"work","Επανάληψη":"work","Έρευνα":"work","Πρότζεκτ / project":"work",
+    "Αγωγή / κατάρτιση":"support","Δευτεροβάθμια εκπαίδευση":"support","Πρωτοβάθμια εκπαίδευση":"support","Τμήμα ένταξης":"support","Απουσιολόγιο":"support","Καθηγητής":"support","Κηδεμόνας":"support"
+  };
+
+  function imageFor(name){
+    const pair=SPECIAL[name]||GROUPS[GROUP_BY_NAME[name]]||GROUPS.school;
+    return svgData(pair[0],pair[1]);
+  }
+
   const rows=[
     ["Επαναλαμβάνω / πάλι / ξανά","pali_ksana.mp4","Ζητάμε να γίνει κάτι ξανά, χρήσιμο όταν μια εξήγηση ή άσκηση χρειάζεται επανάληψη."],
     ["Κατάλαβα","katalava.mp4","Δηλώνω ότι κατάλαβα αυτό που εξηγήθηκε ή ζητήθηκε."],
@@ -73,6 +134,7 @@
     ["Λάπτοπ / φορητός υπολογιστής","laptop.mp4","Φορητός υπολογιστής που μπορεί να χρησιμοποιηθεί για σχολική εργασία και ψηφιακή μάθηση."],
     ["Τάμπλετ / tablet","tablet.mp4","Φορητή συσκευή αφής που μπορεί να χρησιμοποιηθεί για ανάγνωση, ασκήσεις και ψηφιακό εκπαιδευτικό υλικό."]
   ];
+
   const out=rows.map(([name,file,desc])=>({
     name,
     subject:"education",
@@ -80,11 +142,11 @@
     desc,
     video:BASE+file,
     sourcePage:SOURCE_PAGE,
-    sourceLabel:"Πανεπιστήμιο Θεσσαλίας · vod.uth.gr",
+    sourceLabel:"Πανεπιστήμιο Θεσσαλίας · Λεξικό ΕΝΓ",
     sourceOrg:"uth",
     videoFormat:"MP4",
-    image:IMAGE,
-    imageAlt:name+" — σχολικό λεξιλόγιο στην ΕΝΓ",
+    image:imageFor(name),
+    imageAlt:name+" — εκπαιδευτική απεικόνιση",
     imageCredit:"Εικονογράφηση: AI Tools for Kids",
     imageSource:"https://www.aitools4kids.gr/sign-language.html"
   }));

@@ -96,7 +96,7 @@
       const total = concepts.length;
       const subjectCount = Object.keys(subjectEl).length;
 
-      const metaDescription = `Δωρεάν συλλογή ${total} σχολικών εννοιών και σχολικού λεξιλογίου στην Ελληνική Νοηματική Γλώσσα (ΕΝΓ), με direct βίντεο από ΙΕΠ και Πανεπιστήμιο Θεσσαλίας.`;
+      const metaDescription = `Δωρεάν συλλογή ${total} σχολικών εννοιών και σχολικού λεξιλογίου στην Ελληνική Νοηματική Γλώσσα (ΕΝΓ), με direct βίντεο από το ΙΕΠ και σύνδεση προς το επίσημο Λεξικό ΕΝΓ του Πανεπιστημίου Θεσσαλίας.`;
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.content = metaDescription;
       const og = document.querySelector('meta[property="og:description"]');
@@ -106,8 +106,8 @@
 
       const heroEl = document.querySelector('.hero p[data-lang="el"]');
       const heroEn = document.querySelector('.hero p[data-lang="en"]');
-      if (heroEl) heroEl.textContent = `Περιηγήσου στις ${total} διαθέσιμες σχολικές έννοιες και όρους, διάβασέ τες με απλά λόγια και άνοιξε απευθείας το αντίστοιχο βίντεο Ελληνικής Νοηματικής Γλώσσας από ΙΕΠ ή Πανεπιστήμιο Θεσσαλίας.`;
-      if (heroEn) heroEn.textContent = `Browse ${total} available school concepts and terms, read the simple explanation, and open the matching Greek Sign Language video from IEP or the University of Thessaly.`;
+      if (heroEl) heroEl.textContent = `Περιηγήσου στις ${total} διαθέσιμες σχολικές έννοιες και όρους, διάβασέ τες με απλά λόγια και άνοιξε direct τα αντίστοιχα βίντεο του ΙΕΠ. Για επιπλέον λεξιλόγιο υπάρχει σύνδεση προς το επίσημο Λεξικό ΕΝΓ του Πανεπιστημίου Θεσσαλίας.`;
+      if (heroEn) heroEn.textContent = `Browse ${total} available school concepts and terms, read the simple explanations and open the matching IEP videos directly. For additional vocabulary, use the link to the University of Thessaly's official GSL Dictionary.`;
 
       const notices = document.querySelectorAll('.hero .notice');
       notices.forEach((node) => {
@@ -116,7 +116,7 @@
       });
 
       const stats = document.querySelectorAll('.stats .stat');
-      if (stats[0]) stats[0].textContent = `${total} direct GSL videos`;
+      if (stats[0]) stats[0].textContent = `${total} σχολικές έννοιες / όροι`;
       stats.forEach((node) => {
         if (node.dataset.lang === "el" && /διαθέσιμες έννοιες/.test(node.textContent)) node.textContent = `${total} διαθέσιμες έννοιες / όροι`;
         if (node.dataset.lang === "en" && /available concepts/.test(node.textContent)) node.textContent = `${total} available concepts / terms`;
@@ -132,21 +132,21 @@
         const spans = metaRow.querySelectorAll('span');
         spans.forEach((node) => {
           if (node.id === "count") return;
-          if (node.dataset.lang === "el") node.textContent = "Direct βίντεο από ΙΕΠ & Πανεπιστήμιο Θεσσαλίας";
-          if (node.dataset.lang === "en") node.textContent = "Direct videos from IEP & University of Thessaly";
+          if (node.dataset.lang === "el") node.textContent = "Direct βίντεο ΙΕΠ · σύνδεση προς Λεξικό ΕΝΓ Παν. Θεσσαλίας";
+          if (node.dataset.lang === "en") node.textContent = "Direct IEP videos · link to University of Thessaly GSL Dictionary";
         });
       }
 
       const rightsEl = document.querySelector('.rights p[data-lang="el"]');
       const rightsEn = document.querySelector('.rights p[data-lang="en"]');
-      if (rightsEl) rightsEl.innerHTML = '<strong>Πηγές &amp; δικαιώματα:</strong> Τα βίντεο ΕΝΓ ανοίγουν απευθείας από τις πρωτότυπες πηγές τους: <strong>prosvasimo.iep.edu.gr</strong> (ΙΕΠ) και <strong>vod.uth.gr / streamer.uth.gr</strong> (Πανεπιστήμιο Θεσσαλίας). Δεν κατεβάζονται ούτε επαναφιλοξενούνται από το AI Tools for Kids. Οι εικόνες των επιστημονικών εννοιών προέρχονται από ανοικτές πηγές, ενώ η εικονογράφηση της θεματικής «Σχολείο / Μάθηση» είναι δική μας.';
-      if (rightsEn) rightsEn.innerHTML = '<strong>Sources &amp; rights:</strong> GSL videos open directly from their original sources: <strong>prosvasimo.iep.edu.gr</strong> (IEP) and <strong>vod.uth.gr / streamer.uth.gr</strong> (University of Thessaly). AI Tools for Kids does not download or re-host them. Scientific visuals come from open sources; the “School / Learning” illustration is our own.';
+      if (rightsEl) rightsEl.innerHTML = '<strong>Πηγές &amp; δικαιώματα:</strong> Τα βίντεο του ΙΕΠ ανοίγουν απευθείας από το <strong>prosvasimo.iep.edu.gr</strong> και δεν κατεβάζονται ούτε επαναφιλοξενούνται από το AI Tools for Kids. Για το υλικό του Πανεπιστημίου Θεσσαλίας παρέχουμε μόνο γενικό σύνδεσμο προς το επίσημο <strong>Λεξικό ΕΝΓ</strong> του Πανεπιστημίου, σύμφωνα με τους όρους χρήσης της πλατφόρμας του.';
+      if (rightsEn) rightsEn.innerHTML = '<strong>Sources &amp; rights:</strong> IEP videos open directly from <strong>prosvasimo.iep.edu.gr</strong> and are not downloaded or re-hosted by AI Tools for Kids. For University of Thessaly material, we provide only a general link to the University\'s official <strong>GSL Dictionary</strong>, in line with its platform terms.';
 
       const ld = document.querySelector('script[type="application/ld+json"]');
       if (ld) {
         try {
           const data = JSON.parse(ld.textContent);
-          data.description = `${total} σχολικές έννοιες και όροι στην Ελληνική Νοηματική Γλώσσα, με απλές εξηγήσεις και direct συνδέσμους προς ΙΕΠ και Πανεπιστήμιο Θεσσαλίας.`;
+          data.description = `${total} σχολικές έννοιες και όροι στην Ελληνική Νοηματική Γλώσσα, με απλές εξηγήσεις, direct βίντεο από το ΙΕΠ και σύνδεση προς το επίσημο Λεξικό ΕΝΓ του Πανεπιστημίου Θεσσαλίας.`;
           ld.textContent = JSON.stringify(data);
         } catch (_error) {}
       }
@@ -183,20 +183,32 @@
         ? subjectEn[concept.subject]
         : subjectEl[concept.subject];
       const isUth = concept.sourceOrg === "uth";
-      const videoLabel = lang === "en"
-        ? (isUth ? "🤟 Open GSL video ↗" : "🤟 Open official GSL video ↗")
-        : (isUth ? "🤟 Δες το βίντεο ΕΝΓ ↗" : "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗");
-      const sourcePageLabel = lang === "en"
-        ? (isUth ? "University of Thessaly source ↗" : "IEP source page ↗")
-        : (isUth ? "πηγή Πανεπιστημίου Θεσσαλίας ↗" : "σελίδα πηγής στο ΙΕΠ ↗");
-      const verifiedLabel = lang === "en"
-        ? `✓ Direct ${escapeHtml(concept.videoFormat || "WebM")}`
-        : `✓ Direct ${escapeHtml(concept.videoFormat || "WebM")}`;
-      const videoSource = lang === "en"
-        ? (isUth ? "Video source: University of Thessaly" : "Video source: IEP")
-        : (isUth ? "Πηγή βίντεο: Πανεπιστήμιο Θεσσαλίας" : "Πηγή βίντεο: ΙΕΠ");
 
-      return `<article class="card" data-subject="${escapeHtml(concept.subject)}" data-search="${escapeHtml(searchableText)}"><div class="art"><img loading="lazy" referrerpolicy="no-referrer" src="${escapeHtml(concept.image)}" alt="${escapeHtml(concept.imageAlt || concept.name)}"><a class="image-credit" href="${escapeHtml(concept.imageSource)}" target="_blank" rel="noopener noreferrer">${escapeHtml(concept.imageCredit || "Πηγή εικόνας")}</a></div><div class="card-body"><div class="subject">${escapeHtml(subjectLabel)}</div><h2>${escapeHtml(concept.name)}</h2><div class="grade-tags">${gradeTags(concept)}</div><p class="desc">${escapeHtml(concept.desc)}</p><div class="iep-box"><p class="iep-label">${videoSource}</p><p class="iep-source">${escapeHtml(concept.sourceLabel)}</p><a class="btn" href="${escapeHtml(concept.video)}" target="_blank" rel="noopener noreferrer">${videoLabel}</a><a class="source-page" href="${escapeHtml(concept.sourcePage)}" target="_blank" rel="noopener noreferrer">${sourcePageLabel}</a><div class="verified">${verifiedLabel}</div></div></div></article>`;
+      let sourceBox;
+      if (isUth) {
+        const uthLabel = lang === "en"
+          ? "University of Thessaly GSL Dictionary"
+          : "Λεξικό ΕΝΓ Πανεπιστημίου Θεσσαλίας";
+        const uthNote = lang === "en"
+          ? "This concept is also available in the University's official dictionary. Open the dictionary and search for the term there."
+          : "Η έννοια υπάρχει και στο επίσημο λεξικό του Πανεπιστημίου. Άνοιξε το λεξικό και αναζήτησε εκεί τον όρο.";
+        const uthButton = lang === "en"
+          ? "🤟 Open the University of Thessaly GSL Dictionary ↗"
+          : "🤟 Άνοιξε το Λεξικό ΕΝΓ του Πανεπιστημίου Θεσσαλίας ↗";
+        sourceBox = `<div class="iep-box"><p class="iep-label">${escapeHtml(uthLabel)}</p><p class="iep-source">${escapeHtml(uthNote)}</p><a class="btn" href="https://vod.uth.gr/gsl/Lexiko/" target="_blank" rel="noopener noreferrer">${uthButton}</a></div>`;
+      } else {
+        const videoLabel = lang === "en"
+          ? "🤟 Open official GSL video ↗"
+          : "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗";
+        const sourcePageLabel = lang === "en"
+          ? "IEP source page ↗"
+          : "σελίδα πηγής στο ΙΕΠ ↗";
+        const verifiedLabel = `✓ Direct ${escapeHtml(concept.videoFormat || "WebM")}`;
+        const videoSource = lang === "en" ? "Video source: IEP" : "Πηγή βίντεο: ΙΕΠ";
+        sourceBox = `<div class="iep-box"><p class="iep-label">${videoSource}</p><p class="iep-source">${escapeHtml(concept.sourceLabel)}</p><a class="btn" href="${escapeHtml(concept.video)}" target="_blank" rel="noopener noreferrer">${videoLabel}</a><a class="source-page" href="${escapeHtml(concept.sourcePage)}" target="_blank" rel="noopener noreferrer">${sourcePageLabel}</a><div class="verified">${verifiedLabel}</div></div>`;
+      }
+
+      return `<article class="card" data-subject="${escapeHtml(concept.subject)}" data-search="${escapeHtml(searchableText)}"><div class="art"><img loading="lazy" referrerpolicy="no-referrer" src="${escapeHtml(concept.image)}" alt="${escapeHtml(concept.imageAlt || concept.name)}"><a class="image-credit" href="${escapeHtml(concept.imageSource)}" target="_blank" rel="noopener noreferrer">${escapeHtml(concept.imageCredit || "Πηγή εικόνας")}</a></div><div class="card-body"><div class="subject">${escapeHtml(subjectLabel)}</div><h2>${escapeHtml(concept.name)}</h2><div class="grade-tags">${gradeTags(concept)}</div><p class="desc">${escapeHtml(concept.desc)}</p>${sourceBox}</div></article>`;
     }
 
     function renderCards() {

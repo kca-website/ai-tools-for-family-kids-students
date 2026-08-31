@@ -32,13 +32,11 @@
     const panel = document.getElementById("signLanguageFeature");
     if (panel) {
       const badge = en ? "New · Accessibility" : "Νέο · Προσβασιμότητα";
-      const title = en
-        ? "🤟 School concepts in Greek Sign Language (GSL)"
-        : "🤟 Έννοιες στην Ελληνική Νοηματική Γλώσσα";
+      const title = en ? "🤟 School concepts in Greek Sign Language (GSL)" : "🤟 Έννοιες στην Ελληνική Νοηματική Γλώσσα";
       const text = en
-        ? "More than 200 school concepts and learning terms, with simple explanations, educational visuals, direct official videos from IEP and a link to the University of Thessaly's official GSL Dictionary."
-        : "Πάνω από 200 σχολικές έννοιες και όροι μάθησης, με απλή εξήγηση, εκπαιδευτική εικόνα, direct επίσημα βίντεο από το ΙΕΠ και σύνδεση προς το επίσημο Λεξικό ΕΝΓ του Πανεπιστημίου Θεσσαλίας.";
-      const cta = en ? "Explore 200+ concepts →" : "Δες 200+ έννοιες →";
+        ? "153 school concepts organized by subject and grade, with simple explanations, educational visuals and direct official GSL videos from IEP."
+        : "153 σχολικές έννοιες οργανωμένες ανά μάθημα και τάξη, με απλή εξήγηση, εκπαιδευτική εικόνα και απευθείας επίσημο βίντεο ΕΝΓ από το ΙΕΠ.";
+      const cta = en ? "Explore the 153 concepts →" : "Δες τις 153 έννοιες →";
       const signature = [en, title, text, cta].join("|");
 
       if (panel.dataset.gslSignature !== signature) {
@@ -48,8 +46,8 @@
     }
 
     const description = en
-      ? "Free bilingual learning guide for students 6–18, parents and educators: diagnostic practice map, learning paths, AI tool recommendations, guided AI Help and accessible educational resources, including 200+ Greek Sign Language concepts."
-      : "Δωρεάν δίγλωσσος οδηγός μάθησης για μαθητές 6–18, γονείς και εκπαιδευτικούς: διαγνωστικός χάρτης, learning paths, προτάσεις AI εργαλείων, καθοδηγούμενη AI Βοήθεια και προσβάσιμο εκπαιδευτικό υλικό, μαζί με πάνω από 200 έννοιες στην Ελληνική Νοηματική Γλώσσα.";
+      ? "Free bilingual learning guide for students 6–18, parents and educators: diagnostic practice map, learning paths, AI tool recommendations, guided AI Help and accessible educational resources, including Greek Sign Language concepts."
+      : "Δωρεάν δίγλωσσος οδηγός μάθησης για μαθητές 6–18, γονείς και εκπαιδευτικούς: διαγνωστικός χάρτης, learning paths, προτάσεις AI εργαλείων, καθοδηγούμενη AI Βοήθεια και προσβάσιμο εκπαιδευτικό υλικό, μαζί με έννοιες στην Ελληνική Νοηματική Γλώσσα.";
 
     const meta = document.querySelector('meta[name="description"]');
     const og = document.querySelector('meta[property="og:description"]');

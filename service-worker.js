@@ -1,11 +1,27 @@
-/* AI Tools 4 Kids PWA service worker — v1.0.0 */
-const CACHE_NAME = "aitools4kids-pwa-v1";
+/* AI Tools 4 Kids PWA service worker — v1.1.0 */
+const CACHE_NAME = "aitools4kids-pwa-v2";
 const CORE = [
   "/",
   "/styles.css",
   "/manifest.webmanifest",
   "/assets/icons/app-icon.svg"
 ];
+
+/*
+ * These files are large, mostly-static datasets. Serving a cached copy first on
+ * repeat visits removes a large amount of avoidable network wait, while a
+ * background request refreshes the cache for the next navigation.
+ *
+ * App/runtime files intentionally remain network-first so behavioural fixes are
+ * picked up immediately after a deployment.
+ */
+const HEAVY_DATA_PATHS = new Set([
+  "/quiz-data.js",
+  "/learning-paths-data.js",
+  "/official-curriculum-data.js",
+  "/curriculum-2026-2027-expansion.js",
+  "/gel-2026-2027-update.js"
+]);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -62,7 +78,14 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // JS/CSS/data should prefer the newest deployment, with offline fallback.
+  // Large, mostly-static curriculum/quiz datasets: instant cached response on
+  // repeat visits, refreshed silently in the background.
+  if (HEAVY_DATA_PATHS.has(url.pathname)) {
+    event.respondWith(staleWhileRevalidate(request));
+    return;
+  }
+
+  // Runtime JS/CSS/data: prefer the newest deployment, with offline fallback.
   if (/\.(?:js|css|json|webmanifest)$/i.test(url.pathname)) {
     event.respondWith(networkFirst(request));
     return;

@@ -1,7 +1,7 @@
 (function(){
   "use strict";
   const BASE="https://streamer.uth.gr:8888/vidstore/vod/public/courses/gsl/";
-  const SOURCE_PAGE="https://vod.uth.gr/";
+  const SOURCE_PAGE="https://vod.uth.gr/gsl/Lexiko/";
   const IMAGE="/assets/sign-language-education.svg";
   const rows=[
     ["Επαναλαμβάνω / πάλι / ξανά","pali_ksana.mp4","Ζητάμε να γίνει κάτι ξανά, χρήσιμο όταν μια εξήγηση ή άσκηση χρειάζεται επανάληψη."],

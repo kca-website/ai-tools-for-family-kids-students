@@ -36,8 +36,8 @@
         ? "🤟 School concepts in Greek Sign Language (GSL)"
         : "🤟 Έννοιες στην Ελληνική Νοηματική Γλώσσα";
       const text = en
-        ? "More than 200 school concepts and learning terms, with simple explanations, educational visuals and direct GSL videos from IEP and the University of Thessaly."
-        : "Πάνω από 200 σχολικές έννοιες και όροι μάθησης, με απλή εξήγηση, εκπαιδευτική εικόνα και απευθείας βίντεο ΕΝΓ από το ΙΕΠ και το Πανεπιστήμιο Θεσσαλίας.";
+        ? "More than 200 school concepts and learning terms, with simple explanations, educational visuals, direct official videos from IEP and a link to the University of Thessaly's official GSL Dictionary."
+        : "Πάνω από 200 σχολικές έννοιες και όροι μάθησης, με απλή εξήγηση, εκπαιδευτική εικόνα, direct επίσημα βίντεο από το ΙΕΠ και σύνδεση προς το επίσημο Λεξικό ΕΝΓ του Πανεπιστημίου Θεσσαλίας.";
       const cta = en ? "Explore 200+ concepts →" : "Δες 200+ έννοιες →";
       const signature = [en, title, text, cta].join("|");
 

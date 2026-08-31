@@ -5,7 +5,7 @@
   function refine(){
     const en=isEnglish();
     const subtitle=document.querySelector('[data-i18n="heroSubtitle"]');
-    if(subtitle){subtitle.textContent=en?"See where practice is needed, find the right AI tool, and use accessible school resources, including school concepts in Greek Sign Language (GSL). For students 6–18, parents and educators.":"Δες πού χρειάζεται εξάσκηση, βρες το κατάλληλο AI εργαλείο και αξιοποίησε προσβάσιμο σχολικό υλικό, όπως σχολικές έννοιες στην Ελληνική Νοηματική Γλώσσα (ΕΝΓ). Για μαθητές 6–18, γονείς και εκπαιδευτικούς.";}
+    if(subtitle){subtitle.textContent=en?"See where practice is needed, find the right AI tool, and learn how to use it effectively. Diagnostic tests, personalized learning paths, guided AI Help and accessible educational resources for students aged 6–18, parents and educators.":"Δες πού χρειάζεται εξάσκηση, βρες το κατάλληλο AI εργαλείο και μάθε πώς να το χρησιμοποιείς σωστά. Διαγνωστικά τεστ, εξατομικευμένα learning paths, AI Βοήθεια και προσβάσιμο εκπαιδευτικό υλικό για μαθητές 6–18, γονείς και εκπαιδευτικούς.;}
     const badges=document.querySelector(".hero__badges");
     if(badges&&!document.getElementById("heroGslBadge")){const badge=document.createElement("span");badge.id="heroGslBadge";badge.className="badge badge--accent";const privacy=badges.querySelector(".privacy-badge-details");if(privacy)badges.insertBefore(badge,privacy);else badges.appendChild(badge);}
     const gslBadge=document.getElementById("heroGslBadge");if(gslBadge)gslBadge.textContent=en?"Accessible GSL resources":"Προσβάσιμο υλικό ΕΝΓ";

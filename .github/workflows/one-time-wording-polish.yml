@@ -49,6 +49,8 @@ jobs:
                   changed.append(str(path))
 
           # Audit: no em dash anywhere; en dash allowed only digit-to-digit ranges.
+          # report-link.js intentionally contains the legacy GitHub URL only as a matcher
+          # so older dynamically generated links can be redirected to the private form.
           em=[]; bad_en=[]; old_issue=[]
           issue='github.com/kca-website/ai-tools-for-family-kids-students/issues/new'
           for path in Path('.').rglob('*'):
@@ -58,11 +60,11 @@ jobs:
               except UnicodeDecodeError: continue
               if '—' in t: em.append(str(path))
               if re.search(r'(?<!\d)–|–(?!\d)',t): bad_en.append(str(path))
-              if issue in t: old_issue.append(str(path))
+              if issue in t and str(path)!='report-link.js': old_issue.append(str(path))
           print('Changed:',len(changed))
           print('Remaining em dash files:',em)
           print('Remaining stylistic en dash files:',bad_en)
-          print('Remaining old GitHub report links:',old_issue)
+          print('Remaining public old GitHub report links:',old_issue)
           if em or bad_en or old_issue:
               raise SystemExit(1)
           PY

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Αναφορά λάθους ή παλιωμένης πληροφορίας | AI Tools for Kids</title>
+  <meta name="description" content="Αναφέρετε εύκολα μια λάθος ή παλιωμένη πληροφορία στο aitools4kids.gr.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://www.aitools4kids.gr/report-error.html">
+  <style>
+    :root{--blue:#3B82C4;--green:#2E6F5E;--ink:#1F2430;--muted:#5A6270;--bg:#FAFAF8;--surface:#fff;--border:#E4E6EA;--danger:#B42318}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+    .wrap{max-width:720px;margin:0 auto;padding:28px 20px 60px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+    .back{color:var(--green);text-decoration:none;font-weight:700}
+    .lang{display:flex;gap:4px;border:1px solid var(--border);border-radius:8px;padding:3px;background:#fff}
+    .lang button{border:0;background:transparent;padding:6px 10px;border-radius:6px;font-weight:700;cursor:pointer;color:var(--muted)}
+    .lang button.active{background:#eef6ff;color:#1d5d8c}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+    h1{font-size:1.65rem;line-height:1.25;margin:0 0 10px}
+    .intro{margin:0 0 24px;color:var(--muted)}
+    label{display:block;font-weight:700;margin:18px 0 7px}
+    .optional{font-weight:500;color:var(--muted);font-size:.86rem}
+    input,textarea{width:100%;border:1px solid #cfd5df;border-radius:10px;padding:11px 12px;font:inherit;background:#fff;color:var(--ink)}
+    textarea{min-height:125px;resize:vertical}
+    input:focus,textarea:focus{outline:3px solid rgba(59,130,196,.16);border-color:var(--blue)}
+    .source-note{font-size:.8rem;color:var(--muted);margin-top:5px}
+    .submit{margin-top:22px;width:100%;border:0;border-radius:11px;padding:13px 18px;background:linear-gradient(120deg,#2E6F5E,#3B82C4);color:#fff;font:inherit;font-weight:800;cursor:pointer}
+    .submit:hover{filter:brightness(.96)}
+    .privacy{margin:14px 0 0;font-size:.78rem;color:var(--muted)}
+    .success{display:none;padding:18px;border:1px solid #b7e4c7;background:#effaf3;border-radius:12px;color:#176b45;margin-bottom:18px}
+    .success.show{display:block}
+    .honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+    [data-lang="en"]{display:none}
+    body.lang-en [data-lang="el"]{display:none}
+    body.lang-en [data-lang="en"]{display:block}
+    @media(max-width:560px){.card{padding:19px}.wrap{padding:20px 14px 44px}h1{font-size:1.4rem}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top">
+      <a class="back" href="/" data-lang="el">← Πίσω στο AI Tools 4 Kids</a>
+      <a class="back" href="/" data-lang="en">← Back to AI Tools 4 Kids</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="elBtn" class="active">ΕΛ</button>
+        <button type="button" id="enBtn">EN</button>
+      </div>
+    </div>
+
+    <div id="success" class="success" role="status">
+      <span data-lang="el"><strong>Ευχαριστώ!</strong> Η αναφορά σου στάλθηκε.</span>
+      <span data-lang="en"><strong>Thank you!</strong> Your report was sent.</span>
+    </div>
+
+    <section class="card">
+      <h1 data-lang="el">Βρήκες λάθος ή παλιωμένη πληροφορία;</h1>
+      <h1 data-lang="en">Found incorrect or outdated information?</h1>
+      <p class="intro" data-lang="el">Στείλε μου μια σύντομη αναφορά. Δεν χρειάζεται λογαριασμός και δεν δημοσιεύεται τίποτα στο GitHub.</p>
+      <p class="intro" data-lang="en">Send a short report. No account is required and nothing is posted publicly on GitHub.</p>
+
+      <form id="reportForm" method="POST">
+        <input type="hidden" name="_subject" value="Αναφορά πληροφορίας — aitools4kids.gr">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="nextUrl" value="https://www.aitools4kids.gr/report-error.html?sent=1">
+        <input type="hidden" name="_url" value="https://www.aitools4kids.gr/report-error.html">
+
+        <div class="honeypot" aria-hidden="true">
+          <label for="company">Company</label>
+          <input id="company" type="text" name="_honey" tabindex="-1" autocomplete="off">
+        </div>
+
+        <label for="sourceUrl" data-lang="el">Σε ποια σελίδα βρήκες το λάθος;</label>
+        <label for="sourceUrl" data-lang="en">Which page contains the issue?</label>
+        <input id="sourceUrl" name="Σελίδα / Page" type="url" required placeholder="https://www.aitools4kids.gr/...">
+        <p class="source-note" data-lang="el">Αν ήρθες εδώ από το «Βρήκες λάθος…», το πεδίο συμπληρώνεται αυτόματα.</p>
+        <p class="source-note" data-lang="en">If you came from the “Report outdated information” link, this is filled automatically.</p>
+
+        <label for="problem" data-lang="el">Τι πληροφορία είναι λάθος ή παλιωμένη;</label>
+        <label for="problem" data-lang="en">What information is incorrect or outdated?</label>
+        <textarea id="problem" name="Λάθος ή παλιωμένη πληροφορία / Issue" required maxlength="2500"></textarea>
+
+        <label for="correction" data-lang="el">Ποια θεωρείς σωστή πληροφορία; <span class="optional">(προαιρετικό)</span></label>
+        <label for="correction" data-lang="en">What do you believe is correct? <span class="optional">(optional)</span></label>
+        <textarea id="correction" name="Προτεινόμενη διόρθωση / Suggested correction" maxlength="2500"></textarea>
+
+        <label for="contactEmail" data-lang="el">Email επικοινωνίας <span class="optional">(προαιρετικό)</span></label>
+        <label for="contactEmail" data-lang="en">Your email <span class="optional">(optional)</span></label>
+        <input id="contactEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com">
+
+        <button class="submit" type="submit" data-lang="el">Αποστολή αναφοράς</button>
+        <button class="submit" type="submit" data-lang="en">Send report</button>
+        <p class="privacy" data-lang="el">Η φόρμα χρησιμοποιεί την υπηρεσία FormSubmit για την αποστολή email και την προστασία reCAPTCHA από spam. Μην γράψεις προσωπικά δεδομένα παιδιού.</p>
+        <p class="privacy" data-lang="en">This form uses FormSubmit for email delivery and reCAPTCHA spam protection. Do not include a child's personal data.</p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    (function(){
+      "use strict";
+      const form=document.getElementById("reportForm");
+      // The destination is assembled only at runtime so it is not present as a naked email in the HTML.
+      const codes=[107,107,111,117,115,116,97,115,64,103,109,97,105,108,46,99,111,109];
+      const recipient=codes.map(c=>String.fromCharCode(c)).join("");
+      form.action="https://formsubmit.co/"+encodeURIComponent(recipient);
+
+      const params=new URLSearchParams(location.search);
+      const source=params.get("source");
+      if(source) document.getElementById("sourceUrl").value=source;
+      if(params.get("sent")==="1") document.getElementById("success").classList.add("show");
+
+      function setLang(lang){
+        document.body.classList.toggle("lang-en",lang==="en");
+        document.getElementById("elBtn").classList.toggle("active",lang!=="en");
+        document.getElementById("enBtn").classList.toggle("active",lang==="en");
+        try{ localStorage.setItem("aitools4kids_lang",lang); }catch(_e){}
+      }
+      document.getElementById("elBtn").addEventListener("click",()=>setLang("el"));
+      document.getElementById("enBtn").addEventListener("click",()=>setLang("en"));
+      try{ if(localStorage.getItem("aitools4kids_lang")==="en") setLang("en"); }catch(_e){}
+    })();
+  </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /**
- * gel-2026-2027-update.js — FINAL v2.0.0 (2026-08-31)
+ * gel-2026-2027-update.js: FINAL v2.0.0 (2026-08-31)
  * ------------------------------------------------------------
  * Curriculum and diagnostic refresh for Greek General Lyceum (ΓΕΛ).
  *
@@ -300,8 +300,8 @@
           "Thucydides Histories III: Corcyra, ch. 70–83 with official translation distinctions"
         ],
         [
-          "Θεματικός άξονας: δύναμη και δίκαιο – ηθική του πολέμου",
-          "Theme: power and justice – ethics of war"
+          "Θεματικός άξονας: δύναμη και δίκαιο: ηθική του πολέμου",
+          "Theme: power and justice: ethics of war"
         ],
         [
           "Ξενοφώντος Ελληνικά Β΄: Αιγός Ποταμοί και κατάλυση δημοκρατίας, επιλεγμένα χωρία",
@@ -356,7 +356,7 @@
           "Predicate and predicative genitive"
         ],
         [
-          "Αντικείμενο άμεσο και έμμεσο – κατηγορούμενο του αντικειμένου",
+          "Αντικείμενο άμεσο και έμμεσο: κατηγορούμενο του αντικειμένου",
           "Direct/indirect object and object complement"
         ],
         [
@@ -564,8 +564,8 @@
           "Mass, volume, density and measurements"
         ],
         [
-          "1.3 Δομή ατόμου – ατομικός και μαζικός αριθμός – ισότοπα",
-          "Atomic structure – atomic and mass number – isotopes"
+          "1.3 Δομή ατόμου: ατομικός και μαζικός αριθμός: ισότοπα",
+          "Atomic structure: atomic and mass number: isotopes"
         ],
         [
           "1.5 Διαλύματα, συγκέντρωση και διαλυτότητα",
@@ -600,16 +600,16 @@
           "Acids, bases, oxides, salts and neutralisation"
         ],
         [
-          "4.1 Σχετική ατομική/μοριακή μάζα – mol – αριθμός Avogadro – γραμμομοριακός όγκος",
-          "Relative atomic/molecular mass – mole – Avogadro number – molar gas volume"
+          "4.1 Σχετική ατομική/μοριακή μάζα: mol: αριθμός Avogadro: γραμμομοριακός όγκος",
+          "Relative atomic/molecular mass: mole: Avogadro number: molar gas volume"
         ],
         [
           "4.2 Καταστατική εξίσωση ιδανικών αερίων",
           "Ideal gas equation"
         ],
         [
-          "4.3 Συγκέντρωση διαλύματος – αραίωση και ανάμιξη",
-          "Solution concentration – dilution and mixing"
+          "4.3 Συγκέντρωση διαλύματος: αραίωση και ανάμιξη",
+          "Solution concentration: dilution and mixing"
         ]
       ],
       "source": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",
@@ -785,8 +785,8 @@
           "Congruence of right triangles"
         ],
         [
-          "3.7 Κύκλος – μεσοκάθετος – διχοτόμος",
-          "Circle – perpendicular bisector – angle bisector"
+          "3.7 Κύκλος: μεσοκάθετος: διχοτόμος",
+          "Circle: perpendicular bisector: angle bisector"
         ],
         [
           "3.10 Εξωτερική γωνία τριγώνου",
@@ -951,32 +951,32 @@
       "status": "exam-verified",
       "topics": [
         [
-          "Unit 2 — A refugee’s dreamland",
-          "Unit 2 — A refugee’s dreamland"
+          "Unit 2: A refugee’s dreamland",
+          "Unit 2: A refugee’s dreamland"
         ],
         [
-          "Unit 3 — On duty",
-          "Unit 3 — On duty"
+          "Unit 3: On duty",
+          "Unit 3: On duty"
         ],
         [
-          "Unit 4 — Vincent Van Gogh",
-          "Unit 4 — Vincent Van Gogh"
+          "Unit 4: Vincent Van Gogh",
+          "Unit 4: Vincent Van Gogh"
         ],
         [
-          "Unit 5 — Animal rights",
-          "Unit 5 — Animal rights"
+          "Unit 5: Animal rights",
+          "Unit 5: Animal rights"
         ],
         [
-          "Unit 6 — Fast fashion",
-          "Unit 6 — Fast fashion"
+          "Unit 6: Fast fashion",
+          "Unit 6: Fast fashion"
         ],
         [
-          "Unit 7 — Pride and Prejudice",
-          "Unit 7 — Pride and Prejudice"
+          "Unit 7: Pride and Prejudice",
+          "Unit 7: Pride and Prejudice"
         ],
         [
-          "Unit 8 — Social media",
-          "Unit 8 — Social media"
+          "Unit 8: Social media",
+          "Unit 8: Social media"
         ]
       ],
       "source": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",
@@ -1340,8 +1340,8 @@
       "status": "annual-guidance-map",
       "topics": [
         [
-          "Τι είναι φιλοσοφία – φιλοσοφικά ερωτήματα",
-          "What philosophy is – philosophical questions"
+          "Τι είναι φιλοσοφία: φιλοσοφικά ερωτήματα",
+          "What philosophy is: philosophical questions"
         ],
         [
           "Επιχείρημα, προκείμενες και συμπέρασμα",
@@ -1461,8 +1461,8 @@
           "Centripetal force"
         ],
         [
-          "Σύστημα σωμάτων – εσωτερικές και εξωτερικές δυνάμεις",
-          "System of bodies – internal and external forces"
+          "Σύστημα σωμάτων: εσωτερικές και εξωτερικές δυνάμεις",
+          "System of bodies: internal and external forces"
         ],
         [
           "Κρούση",
@@ -1533,8 +1533,8 @@
           "Thermodynamic system and equilibrium"
         ],
         [
-          "Αντιστρεπτές μεταβολές – έργο – θερμότητα – εσωτερική ενέργεια",
-          "Reversible processes – work – heat – internal energy"
+          "Αντιστρεπτές μεταβολές: έργο: θερμότητα: εσωτερική ενέργεια",
+          "Reversible processes: work: heat: internal energy"
         ],
         [
           "Πρώτος θερμοδυναμικός νόμος",
@@ -1576,8 +1576,8 @@
           "1.1 Introduction to organic chemistry"
         ],
         [
-          "1.2 Ταξινόμηση οργανικών ενώσεων – ομόλογες σειρές",
-          "1.2 Classification of organic compounds – homologous series"
+          "1.2 Ταξινόμηση οργανικών ενώσεων: ομόλογες σειρές",
+          "1.2 Classification of organic compounds: homologous series"
         ],
         [
           "1.3 Ονοματολογία άκυκλων οργανικών ενώσεων",
@@ -1588,44 +1588,44 @@
           "1.4 Isomerism"
         ],
         [
-          "2.1 Πετρέλαιο – προϊόντα πετρελαίου – βενζίνη – καύση και καύσιμα",
-          "2.1 Petroleum – products – gasoline – combustion and fuels"
+          "2.1 Πετρέλαιο: προϊόντα πετρελαίου: βενζίνη: καύση και καύσιμα",
+          "2.1 Petroleum: products: gasoline: combustion and fuels"
         ],
         [
-          "2.2 Νάφθα – πετροχημικά",
-          "2.2 Naphtha – petrochemicals"
+          "2.2 Νάφθα: πετροχημικά",
+          "2.2 Naphtha: petrochemicals"
         ],
         [
-          "2.3 Αλκάνια – μεθάνιο, φυσικό αέριο, βιοαέριο (με εξαιρέσεις)",
-          "2.3 Alkanes – methane, natural gas, biogas (with exclusions)"
+          "2.3 Αλκάνια: μεθάνιο, φυσικό αέριο, βιοαέριο (με εξαιρέσεις)",
+          "2.3 Alkanes: methane, natural gas, biogas (with exclusions)"
         ],
         [
-          "2.4 Καυσαέρια – καταλύτες αυτοκινήτων",
-          "2.4 Exhaust gases – catalytic converters"
+          "2.4 Καυσαέρια: καταλύτες αυτοκινήτων",
+          "2.4 Exhaust gases: catalytic converters"
         ],
         [
-          "2.5 Αλκένια – αιθένιο/αιθυλένιο",
-          "2.5 Alkenes – ethene/ethylene"
+          "2.5 Αλκένια: αιθένιο/αιθυλένιο",
+          "2.5 Alkenes: ethene/ethylene"
         ],
         [
-          "2.6 Αλκίνια – αιθίνιο/ακετυλένιο (με εξαιρέσεις)",
-          "2.6 Alkynes – ethyne/acetylene (with exclusions)"
+          "2.6 Αλκίνια: αιθίνιο/ακετυλένιο (με εξαιρέσεις)",
+          "2.6 Alkynes: ethyne/acetylene (with exclusions)"
         ],
         [
-          "2.8 Ατμοσφαιρική ρύπανση – φαινόμενο θερμοκηπίου – τρύπα όζοντος",
-          "2.8 Air pollution – greenhouse effect – ozone hole"
+          "2.8 Ατμοσφαιρική ρύπανση: φαινόμενο θερμοκηπίου: τρύπα όζοντος",
+          "2.8 Air pollution: greenhouse effect: ozone hole"
         ],
         [
           "3.1 Αλκοόλες",
           "3.1 Alcohols"
         ],
         [
-          "3.2 Κορεσμένες μονοσθενείς αλκοόλες – αιθανόλη (με εξαιρέσεις)",
-          "3.2 Saturated monohydric alcohols – ethanol (with exclusions)"
+          "3.2 Κορεσμένες μονοσθενείς αλκοόλες: αιθανόλη (με εξαιρέσεις)",
+          "3.2 Saturated monohydric alcohols: ethanol (with exclusions)"
         ],
         [
-          "4.1 Κορεσμένα μονοκαρβοξυλικά οξέα – αιθανικό οξύ",
-          "4.1 Saturated monocarboxylic acids – ethanoic acid"
+          "4.1 Κορεσμένα μονοκαρβοξυλικά οξέα: αιθανικό οξύ",
+          "4.1 Saturated monocarboxylic acids: ethanoic acid"
         ],
         [
           "5.2 Λίπη και έλαια (με την επίσημη εξαίρεση)",
@@ -1750,8 +1750,8 @@
           "Linear systems (with official exclusions)"
         ],
         [
-          "2.1 Μονοτονία – ακρότατα – συμμετρίες συνάρτησης",
-          "Monotonicity – extrema – symmetries of a function"
+          "2.1 Μονοτονία: ακρότατα: συμμετρίες συνάρτησης",
+          "Monotonicity: extrema: symmetries of a function"
         ],
         [
           "2.2 Κατακόρυφες και οριζόντιες μετατοπίσεις καμπύλης",
@@ -2019,20 +2019,20 @@
       "status": "exam-verified",
       "topics": [
         [
-          "Unit 2 — Do we all live in the same world?",
-          "Unit 2 — Do we all live in the same world?"
+          "Unit 2: Do we all live in the same world?",
+          "Unit 2: Do we all live in the same world?"
         ],
         [
-          "Unit 3 — Renaissance arts and artists",
-          "Unit 3 — Renaissance arts and artists"
+          "Unit 3: Renaissance arts and artists",
+          "Unit 3: Renaissance arts and artists"
         ],
         [
-          "Unit 4 — Learning to fly",
-          "Unit 4 — Learning to fly"
+          "Unit 4: Learning to fly",
+          "Unit 4: Learning to fly"
         ],
         [
-          "Unit 5 — Addictions",
-          "Unit 5 — Addictions"
+          "Unit 5: Addictions",
+          "Unit 5: Addictions"
         ]
       ],
       "source": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",
@@ -2971,8 +2971,8 @@
           "Monotonicity and extrema via derivatives"
         ],
         [
-          "Κυρτότητα – κοίλανση – σημεία καμπής",
-          "Convexity – concavity – inflection points"
+          "Κυρτότητα: κοίλανση: σημεία καμπής",
+          "Convexity: concavity: inflection points"
         ],
         [
           "Ασύμπτωτες και πλήρης μελέτη συνάρτησης",
@@ -3847,8 +3847,8 @@
     "items": [
       {
         "slug": "refugee",
-        "labelEl": "Unit 2 — Refugees",
-        "labelEn": "Unit 2 — Refugees",
+        "labelEl": "Unit 2: Refugees",
+        "labelEn": "Unit 2: Refugees",
         "explainEl": "Needs to understand key vocabulary and ideas from the unit.",
         "explainEn": "Needs to understand key vocabulary and ideas from the unit.",
         "qEl": "Which word best describes a person forced to leave their country because of danger?",
@@ -3862,8 +3862,8 @@
       },
       {
         "slug": "animal-rights",
-        "labelEl": "Unit 5 — Animal rights",
-        "labelEn": "Unit 5 — Animal rights",
+        "labelEl": "Unit 5: Animal rights",
+        "labelEn": "Unit 5: Animal rights",
         "explainEl": "Needs to distinguish arguments about animal welfare.",
         "explainEn": "Needs to distinguish arguments about animal welfare.",
         "qEl": "An argument for animal welfare would most likely support...",
@@ -3877,8 +3877,8 @@
       },
       {
         "slug": "fast-fashion",
-        "labelEl": "Unit 6 — Fast fashion",
-        "labelEn": "Unit 6 — Fast fashion",
+        "labelEl": "Unit 6: Fast fashion",
+        "labelEn": "Unit 6: Fast fashion",
         "explainEl": "Needs to connect fast fashion with environmental and labour issues.",
         "explainEn": "Needs to connect fast fashion with environmental and labour issues.",
         "qEl": "Fast fashion is often criticised because it can involve...",
@@ -3892,8 +3892,8 @@
       },
       {
         "slug": "social-media",
-        "labelEl": "Unit 8 — Social media",
-        "labelEn": "Unit 8 — Social media",
+        "labelEl": "Unit 8: Social media",
+        "labelEn": "Unit 8: Social media",
         "explainEl": "Needs to recognise safe and critical social-media use.",
         "explainEn": "Needs to recognise safe and critical social-media use.",
         "qEl": "Before sharing a surprising claim on social media, the best first step is to...",
@@ -4757,8 +4757,8 @@
     "items": [
       {
         "slug": "railways",
-        "labelEl": "Ελληνική οικονομία – σιδηρόδρομοι",
-        "labelEn": "Greek economy – railways",
+        "labelEl": "Ελληνική οικονομία: σιδηρόδρομοι",
+        "labelEn": "Greek economy: railways",
         "explainEl": "Χρειάζεται να συνδέει τα δημόσια έργα με τον οικονομικό εκσυγχρονισμό.",
         "explainEn": "Χρειάζεται να συνδέει τα δημόσια έργα με τον οικονομικό εκσυγχρονισμό.",
         "qEl": "Η ανάπτυξη σιδηροδρομικού δικτύου στον 19ο αιώνα συνδέθηκε κυρίως με...",
@@ -4842,8 +4842,8 @@
       },
       {
         "slug": "virtue",
-        "labelEl": "Αριστοτέλης – αρετή",
-        "labelEn": "Aristotle – virtue",
+        "labelEl": "Αριστοτέλης: αρετή",
+        "labelEn": "Aristotle: virtue",
         "explainEl": "Χρειάζεται να κατανοεί τη μεσότητα.",
         "explainEn": "Χρειάζεται να κατανοεί τη μεσότητα.",
         "qEl": "Στον Αριστοτέλη, η ηθική αρετή συνδέεται με...",
@@ -4872,8 +4872,8 @@
       },
       {
         "slug": "unseen-syntax",
-        "labelEl": "Αδίδακτο – σύνταξη",
-        "labelEn": "Unseen text – syntax",
+        "labelEl": "Αδίδακτο: σύνταξη",
+        "labelEn": "Unseen text: syntax",
         "explainEl": "Χρειάζεται να εντοπίζει βασικές συντακτικές σχέσεις πριν μεταφράσει.",
         "explainEn": "Χρειάζεται να εντοπίζει βασικές συντακτικές σχέσεις πριν μεταφράσει.",
         "qEl": "Σε αδίδακτο κείμενο, η αναγνώριση ρήματος και υποκειμένου βοηθά κυρίως...",
@@ -5410,8 +5410,8 @@
     if (spec.status === "panhellenic-map") {
       return {
         coverageStatus: "panhellenic-2027-detailed-map",
-        coverageLabelEl: "Ύλη Πανελλαδικών 2027 — αναλυτικός χάρτης",
-        coverageLabelEn: "Panhellenic 2027 syllabus — detailed map",
+        coverageLabelEl: "Ύλη Πανελλαδικών 2027: αναλυτικός χάρτης",
+        coverageLabelEn: "Panhellenic 2027 syllabus: detailed map",
         annualInstructionsStatus: "2026-27-published",
         scopeNoteEl: "Η επίσημη ύλη Πανελλαδικών 2027 έχει δημοσιευτεί. Τα θέματα εδώ λειτουργούν ως αναλυτικός χάρτης μελέτης και όχι ως αυτούσια αντιγραφή των επίσημων τίτλων/παραγράφων.",
         scopeNoteEn: "The official 2027 Panhellenic syllabus is published. Topics here are a detailed study map, not verbatim official section/paragraph titles.",
@@ -5419,8 +5419,8 @@
     }
     return {
       coverageStatus: "annual-guidance-detailed-map",
-      coverageLabelEl: "Οδηγίες 2026–27 δημοσιευμένες — αναλυτικός χάρτης",
-      coverageLabelEn: "2026–27 guidance published — detailed map",
+      coverageLabelEl: "Οδηγίες 2026–27 δημοσιευμένες: αναλυτικός χάρτης",
+      coverageLabelEn: "2026–27 guidance published: detailed map",
       annualInstructionsStatus: "2026-27-published",
       scopeNoteEl: "Οι φετινές οδηγίες 2026–27 για το μάθημα έχουν δημοσιευτεί. Τα θέματα εδώ είναι αναλυτικός χάρτης πλοήγησης και δεν παρουσιάζονται ως αυτούσιοι επίσημοι τίτλοι, εκτός αν αυτό δηλώνεται ρητά.",
       scopeNoteEn: "The 2026–27 guidance for this subject is published. Topics here are a detailed navigation map and are not presented as verbatim official titles unless explicitly stated.",
@@ -5455,15 +5455,15 @@
         examSyllabusUrl: spec.status === "exam-verified" ? GEL_EXAM :
                          spec.status.startsWith("panhellenic") ? PANHELLENIC_2027 : "",
         sourceLabelEl: spec.status === "exam-verified"
-          ? "ΥΠΑΙΘΑ — Εξεταστέα ύλη ΓΕΛ 2026–27"
+          ? "ΥΠΑΙΘΑ: Εξεταστέα ύλη ΓΕΛ 2026–27"
           : spec.status.startsWith("panhellenic")
-            ? "ΥΠΑΙΘΑ — Εξεταστέα ύλη Πανελλαδικών 2027"
-            : "ΥΠΑΙΘΑ/ΙΕΠ — Οδηγίες διδασκαλίας ΓΕΛ 2026–27",
+            ? "ΥΠΑΙΘΑ: Εξεταστέα ύλη Πανελλαδικών 2027"
+            : "ΥΠΑΙΘΑ/ΙΕΠ: Οδηγίες διδασκαλίας ΓΕΛ 2026–27",
         sourceLabelEn: spec.status === "exam-verified"
-          ? "Ministry — GEL written-exam syllabus 2026–27"
+          ? "Ministry: GEL written-exam syllabus 2026–27"
           : spec.status.startsWith("panhellenic")
-            ? "Ministry — Panhellenic examinations syllabus 2027"
-            : "Ministry/IEP — GEL teaching guidance 2026–27",
+            ? "Ministry: Panhellenic examinations syllabus 2027"
+            : "Ministry/IEP: GEL teaching guidance 2026–27",
         annualInstructionsNoteEl: spec.noteEl || "",
         annualInstructionsNoteEn: "",
       },
@@ -5579,8 +5579,8 @@
       grades: [spec.grade],
       subjectLabelEl: spec.labelEl,
       subjectLabelEn: spec.labelEn,
-      titleEl: `Διαγνωστικός Χάρτης — ${spec.labelEl}`,
-      titleEn: `Learning Compass — ${spec.labelEn}`,
+      titleEl: `Διαγνωστικός Χάρτης: ${spec.labelEl}`,
+      titleEn: `Learning Compass: ${spec.labelEn}`,
       introEl: spec.introEl,
       introEn: spec.introEn,
       questions,

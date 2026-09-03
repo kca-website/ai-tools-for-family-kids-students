@@ -1,11 +1,11 @@
 /**
  * guide-data.js
- * Περιεχόμενο του Οδηγού (Guide) – δομημένο για απόδοση σε HTML και PDF.
+ * Περιεχόμενο του Οδηγού (Guide): δομημένο για απόδοση σε HTML και PDF.
  */
 
 const GUIDE_DATA = {
   el: {
-    title: "Ο Οδηγός AI για Σχολικές Εργασίες – Έκδοση 2026",
+    title: "Ο Οδηγός AI για Σχολικές Εργασίες: Έκδοση 2026",
     sections: [
       {
         id: "part1",
@@ -37,7 +37,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part2",
-        title: "Μέρος 2️⃣: Το Pipeline – Από την ιδέα στην παράδοση",
+        title: "Μέρος 2️⃣: Το Pipeline: Από την ιδέα στην παράδοση",
         content: `
           <p>Μια 6-βηματική διαδικασία για κάθε σχολική εργασία, με ποιο εργαλείο σε κάθε βήμα:</p>
           <div class="guide-table-wrapper">
@@ -57,7 +57,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part3",
-        title: "Μέρος 3️⃣: Πώς να αξιολογείς τις απαντήσεις του AI – Το 'Slop' της εκπαίδευσης",
+        title: "Μέρος 3️⃣: Πώς να αξιολογείς τις απαντήσεις του AI: Το 'Slop' της εκπαίδευσης",
         content: `
           <p>Όπως το Magnific δείχνει το "slop" στις εικόνες, εμείς δείχνουμε το <strong>"slop" στην εκπαίδευση</strong>.</p>
           <div class="guide-table-wrapper">
@@ -107,7 +107,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part5",
-        title: "Μέρος 5️⃣: Καλή vs Κακή Χρήση – Πραγματικές Καταστάσεις",
+        title: "Μέρος 5️⃣: Καλή vs Κακή Χρήση: Πραγματικές Καταστάσεις",
         content: `
           <p>Το AI δεν είναι κακό ή καλό από μόνο του. Η διαφορά είναι στο πώς το χρησιμοποιείς. Δες πραγματικές καταστάσεις που συναντάς στο σχολείο:</p>
           <div class="guide-table-wrapper">
@@ -119,7 +119,7 @@ const GUIDE_DATA = {
                 <tr><td>Πρέπει να παραδώσεις μια έκθεση</td><td>Αντιγράφεις το κείμενο του AI αυτούσιο</td><td>Το χρησιμοποιείς για ιδέες και δομή, γράφεις μόνος/η σου το τελικό κείμενο</td></tr>
                 <tr><td>Ένας φίλος σου λέει ότι το κείμενό του "το έγραψε το AI"</td><td>Δεν το σχολιάζεις, "όλοι το κάνουν"</td><td>Του προτείνεις να το ξαναγράψει με δικά του λόγια, έτσι μαθαίνει περισσότερα</td></tr>
                 <tr><td>Θες να ελέγξεις αν ένα κείμενο είναι γραμμένο από AI</td><td>Εμπιστεύεσαι 100% κάποιο "AI detector" εργαλείο</td><td>Δεν υπάρχει αξιόπιστος τρόπος να το ξέρεις σίγουρα· τα εργαλεία ανίχνευσης κάνουν συχνά λάθος. Καλύτερη ένδειξη: αν το άτομο μπορεί να εξηγήσει προφορικά τι έγραψε</td></tr>
-                <tr><td>Το ChatGPT σου προτείνει "Study Mode" αντί να σου δώσει κατευθείαν την απάντηση</td><td>Το κλείνεις αμέσως γιατί "χάνεις χρόνο"</td><td>Το αφήνεις ενεργό — σε καθοδηγεί με ερωτήσεις και βήματα αντί να σου δίνει έτοιμο αποτέλεσμα, ακριβώς όπως προτείνει κι αυτός ο οδηγός</td></tr>
+                <tr><td>Το ChatGPT σου προτείνει "Study Mode" αντί να σου δώσει κατευθείαν την απάντηση</td><td>Το κλείνεις αμέσως γιατί "χάνεις χρόνο"</td><td>Το αφήνεις ενεργό: σε καθοδηγεί με ερωτήσεις και βήματα αντί να σου δίνει έτοιμο αποτέλεσμα, ακριβώς όπως προτείνει κι αυτός ο οδηγός</td></tr>
               </tbody>
             </table>
           </div>
@@ -130,7 +130,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part6",
-        title: "Μέρος 6️⃣: Cheat Sheet – Όλα σε μία σελίδα",
+        title: "Μέρος 6️⃣: Cheat Sheet: Όλα σε μία σελίδα",
         content: `
           <div class="guide-table-wrapper">
             <table class="guide-table">
@@ -176,7 +176,7 @@ const GUIDE_DATA = {
     ]
   },
   en: {
-    title: "The AI Guide for School Assignments – 2026 Edition",
+    title: "The AI Guide for School Assignments: 2026 Edition",
     sections: [
       {
         id: "part1",
@@ -208,7 +208,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part2",
-        title: "Part 2️⃣: The Pipeline – From idea to submission",
+        title: "Part 2️⃣: The Pipeline: From idea to submission",
         content: `
           <p>A 6-step process for any school assignment, with the right tool for each step:</p>
           <div class="guide-table-wrapper">
@@ -228,7 +228,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part3",
-        title: "Part 3️⃣: How to evaluate AI answers – The 'slop' of education",
+        title: "Part 3️⃣: How to evaluate AI answers: The 'slop' of education",
         content: `
           <p>Just like Magnific reveals "slop" in images, here we reveal <strong>"slop" in education</strong>.</p>
           <div class="guide-table-wrapper">
@@ -278,7 +278,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part5",
-        title: "Part 5️⃣: Good vs Bad Use – Real Situations",
+        title: "Part 5️⃣: Good vs Bad Use: Real Situations",
         content: `
           <p>AI isn't good or bad on its own. The difference is in how you use it. Here are real situations you'll run into at school:</p>
           <div class="guide-table-wrapper">
@@ -300,7 +300,7 @@ const GUIDE_DATA = {
       },
       {
         id: "part6",
-        title: "Part 6️⃣: Cheat Sheet – Everything on one page",
+        title: "Part 6️⃣: Cheat Sheet: Everything on one page",
         content: `
           <div class="guide-table-wrapper">
             <table class="guide-table">

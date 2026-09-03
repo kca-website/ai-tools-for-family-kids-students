@@ -8,7 +8,7 @@
 - πώς να το χρησιμοποιήσει με καθοδήγηση αντί για έτοιμη λύση,
 - ποιοι ηλικιακοί/λογαριασμιακοί περιορισμοί ισχύουν.
 
-> Βασική αρχή: η AI πρέπει να βοηθά τον μαθητή να καταλάβει, να εξασκηθεί και να σκεφτεί — όχι απλώς να του παραδίδει έτοιμη εργασία.
+> Βασική αρχή: η AI πρέπει να βοηθά τον μαθητή να καταλάβει, να εξασκηθεί και να σκεφτεί: όχι απλώς να του παραδίδει έτοιμη εργασία.
 
 Ανεξάρτητο project. Δεν αποτελεί επίσημο προϊόν ή συνεργασία των παρόχων που αναφέρει.
 
@@ -43,19 +43,19 @@
 
 ## Αρχιτεκτονική
 
-- **Vanilla JS** — χωρίς framework και χωρίς υποχρεωτικό build step
-- `index.html` — βασική δομή της εφαρμογής
-- `data.js` — εργαλεία και path-specific περιεχόμενο
-- `curriculum-data.js`, `official-curriculum-data.js`, `curriculum-2026-2027-expansion.js`, `gel-2026-2027-update.js` — σχολικό/curriculum layer
-- `quiz-data.js` — Διαγνωστικός Χάρτης
-- `learning-paths-data.js` — Μονοπάτια Μάθησης
-- `tutor.js` — AI Βοήθεια / Βοηθός Γονέα
-- `app.js` — βασικό rendering και navigation
-- `site-integrity-overrides.js`, `site-postfix.js` — συμβατότητα/μεταγενέστερες διορθώσεις που σταδιακά ενοποιούνται στη βασική λογική
-- `styles.css` — κύρια εμφάνιση
-- `/tools/` — στατικές landing pages εργαλείων
-- `sign-language.html` + σχετικά JS — προσβάσιμο υλικό ΕΝΓ
-- `methodology.html` — μεθοδολογία επιλογής και επαλήθευσης περιεχομένου
+- **Vanilla JS**: χωρίς framework και χωρίς υποχρεωτικό build step
+- `index.html`: βασική δομή της εφαρμογής
+- `data.js`: εργαλεία και path-specific περιεχόμενο
+- `curriculum-data.js`, `official-curriculum-data.js`, `curriculum-2026-2027-expansion.js`, `gel-2026-2027-update.js`: σχολικό/curriculum layer
+- `quiz-data.js`: Διαγνωστικός Χάρτης
+- `learning-paths-data.js`: Μονοπάτια Μάθησης
+- `tutor.js`: AI Βοήθεια / Βοηθός Γονέα
+- `app.js`: βασικό rendering και navigation
+- `site-integrity-overrides.js`, `site-postfix.js`: συμβατότητα/μεταγενέστερες διορθώσεις που σταδιακά ενοποιούνται στη βασική λογική
+- `styles.css`: κύρια εμφάνιση
+- `/tools/`: στατικές landing pages εργαλείων
+- `sign-language.html` + σχετικά JS: προσβάσιμο υλικό ΕΝΓ
+- `methodology.html`: μεθοδολογία επιλογής και επαλήθευσης περιεχομένου
 
 ## Τοπική ανάπτυξη
 

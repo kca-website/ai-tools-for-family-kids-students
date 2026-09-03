@@ -1,4 +1,4 @@
-/* AI Tools 4 Kids PWA service worker — v1.1.0 */
+/* AI Tools 4 Kids PWA service worker: v1.1.0 */
 const CACHE_NAME = "aitools4kids-pwa-v2";
 const CORE = [
   "/",

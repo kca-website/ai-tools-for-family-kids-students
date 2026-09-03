@@ -57,11 +57,11 @@
     <section class="card">
       <h1 data-lang="el">Βρήκες λάθος ή παλιωμένη πληροφορία;</h1>
       <h1 data-lang="en">Found incorrect or outdated information?</h1>
-      <p class="intro" data-lang="el">Στείλε μου μια σύντομη αναφορά. Δεν χρειάζεται λογαριασμός και δεν δημοσιεύεται τίποτα στο GitHub.</p>
-      <p class="intro" data-lang="en">Send a short report. No account is required and nothing is posted publicly on GitHub.</p>
+      <p class="intro" data-lang="el">Στείλε μου μια σύντομη αναφορά. Δεν χρειάζεται λογαριασμός και η αναφορά στέλνεται ιδιωτικά.</p>
+      <p class="intro" data-lang="en">Send a short report. No account is required and your report is sent privately.</p>
 
       <form id="reportForm" method="POST">
-        <input type="hidden" name="_subject" value="Αναφορά πληροφορίας — aitools4kids.gr">
+        <input type="hidden" name="_subject" value="Αναφορά πληροφορίας: aitools4kids.gr">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" id="nextUrl" value="https://www.aitools4kids.gr/report-error.html?sent=1">
         <input type="hidden" name="_url" value="https://www.aitools4kids.gr/report-error.html">
@@ -109,6 +109,9 @@
       const params=new URLSearchParams(location.search);
       const source=params.get("source");
       if(source) document.getElementById("sourceUrl").value=source;
+      else if(document.referrer && document.referrer.startsWith(location.origin)){
+        document.getElementById("sourceUrl").value=document.referrer;
+      }
       if(params.get("sent")==="1") document.getElementById("success").classList.add("show");
 
       function setLang(lang){

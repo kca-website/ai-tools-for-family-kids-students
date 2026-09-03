@@ -1,5 +1,5 @@
 /**
- * official-curriculum-data.js — Official Greek Curriculum Layer v2.1
+ * official-curriculum-data.js: Official Greek Curriculum Layer v2.1
  * School year 2026-2027; Panhellenic 2027 where explicitly noted.
  * Topic anchor != official chapter title unless status is exact/related-section-verified.
  */
@@ -44,7 +44,7 @@
     "quizTitleEl": "Μαθηματικά, Α' Δημοτικού",
     "quizTitleEn": "Math, 1st Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Μαθηματικά, Α' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Μαθηματικά, Α' Δημοτικού",
       "titleEn": "Math, 1st Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-A102"
     },
@@ -70,7 +70,7 @@
     "quizTitleEl": "Νεοελληνική Γλώσσα, Α' Δημοτικού",
     "quizTitleEn": "Modern Greek Language, 1st Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Νεοελληνική Γλώσσα, Α' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Νεοελληνική Γλώσσα, Α' Δημοτικού",
       "titleEn": "Modern Greek Language, 1st Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-A110"
     },
@@ -96,7 +96,7 @@
     "quizTitleEl": "Μαθηματικά, Β' Δημοτικού",
     "quizTitleEn": "Math, 2nd Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Μαθηματικά, Β' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Μαθηματικά, Β' Δημοτικού",
       "titleEn": "Math, 2nd Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-B101"
     },
@@ -122,7 +122,7 @@
     "quizTitleEl": "Νεοελληνική Γλώσσα, Β' Δημοτικού",
     "quizTitleEn": "Modern Greek Language, 2nd Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Νεοελληνική Γλώσσα, Β' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Νεοελληνική Γλώσσα, Β' Δημοτικού",
       "titleEn": "Modern Greek Language, 2nd Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-B105"
     },
@@ -148,7 +148,7 @@
     "quizTitleEl": "Μαθηματικά, Γ' Δημοτικού",
     "quizTitleEn": "Math, 3rd Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Μαθηματικά, Γ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Μαθηματικά, Γ' Δημοτικού",
       "titleEn": "Math, 3rd Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C102"
     },
@@ -174,7 +174,7 @@
     "quizTitleEl": "Νεοελληνική Γλώσσα, Γ' Δημοτικού",
     "quizTitleEn": "Modern Greek Language, 3rd Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Νεοελληνική Γλώσσα, Γ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Νεοελληνική Γλώσσα, Γ' Δημοτικού",
       "titleEn": "Modern Greek Language, 3rd Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C105"
     },
@@ -200,7 +200,7 @@
     "quizTitleEl": "Αγγλικά, Γ' Δημοτικού",
     "quizTitleEn": "English, 3rd Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Αγγλικά, Γ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Αγγλικά, Γ' Δημοτικού",
       "titleEn": "English, 3rd Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C107"
     },
@@ -226,7 +226,7 @@
     "quizTitleEl": "Ιστορία, Γ' Δημοτικού (Ελληνική Μυθολογία)",
     "quizTitleEn": "History, 3rd Grade (Greek Mythology)",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Ιστορία, Γ' Δημοτικού (Ελληνική Μυθολογία)",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Ιστορία, Γ' Δημοτικού (Ελληνική Μυθολογία)",
       "titleEn": "History, 3rd Grade (Greek Mythology)",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C103"
     },
@@ -252,7 +252,7 @@
     "quizTitleEl": "Μαθηματικά, Δ' Δημοτικού",
     "quizTitleEn": "Math, 4th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Μαθηματικά, Δ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Μαθηματικά, Δ' Δημοτικού",
       "titleEn": "Math, 4th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D102"
     },
@@ -278,7 +278,7 @@
     "quizTitleEl": "Νεοελληνική Γλώσσα, Δ' Δημοτικού",
     "quizTitleEn": "Modern Greek Language, 4th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Νεοελληνική Γλώσσα, Δ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Νεοελληνική Γλώσσα, Δ' Δημοτικού",
       "titleEn": "Modern Greek Language, 4th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D109"
     },
@@ -304,7 +304,7 @@
     "quizTitleEl": "Αγγλικά, Δ' Δημοτικού",
     "quizTitleEn": "English, 4th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Αγγλικά, Δ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Αγγλικά, Δ' Δημοτικού",
       "titleEn": "English, 4th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D101"
     },
@@ -330,7 +330,7 @@
     "quizTitleEl": "Ιστορία, Δ' Δημοτικού (Αρχαία Ελληνική Ιστορία)",
     "quizTitleEn": "History, 4th Grade (Ancient Greek History)",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Ιστορία, Δ' Δημοτικού (Αρχαία Ελληνική Ιστορία)",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Ιστορία, Δ' Δημοτικού (Αρχαία Ελληνική Ιστορία)",
       "titleEn": "History, 4th Grade (Ancient Greek History)",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D103"
     },
@@ -356,7 +356,7 @@
     "quizTitleEl": "Μαθηματικά, Ε' Δημοτικού",
     "quizTitleEn": "Math, 5th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Μαθηματικά, Ε' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Μαθηματικά, Ε' Δημοτικού",
       "titleEn": "Math, 5th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E113"
     },
@@ -382,7 +382,7 @@
     "quizTitleEl": "Ιστορία, Ε' Δημοτικού",
     "quizTitleEn": "History, 5th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Ιστορία, Ε' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Ιστορία, Ε' Δημοτικού",
       "titleEn": "History, 5th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E105"
     },
@@ -408,7 +408,7 @@
     "quizTitleEl": "Νεοελληνική Γλώσσα, Ε' Δημοτικού",
     "quizTitleEn": "Modern Greek Language, 5th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Νεοελληνική Γλώσσα, Ε' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Νεοελληνική Γλώσσα, Ε' Δημοτικού",
       "titleEn": "Modern Greek Language, 5th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E104"
     },
@@ -434,7 +434,7 @@
     "quizTitleEl": "Φυσικές Επιστήμες, Ε' Δημοτικού",
     "quizTitleEn": "Natural Science, 5th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Φυσικές Επιστήμες, Ε' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Φυσικές Επιστήμες, Ε' Δημοτικού",
       "titleEn": "Natural Science, 5th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E107"
     },
@@ -460,7 +460,7 @@
     "quizTitleEl": "Αγγλικά, Ε' Δημοτικού",
     "quizTitleEn": "English, 5th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Αγγλικά, Ε' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Αγγλικά, Ε' Δημοτικού",
       "titleEn": "English, 5th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E103"
     },
@@ -486,7 +486,7 @@
     "quizTitleEl": "Αγγλικά, ΣΤ' Δημοτικού",
     "quizTitleEn": "English, 6th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Αγγλικά, ΣΤ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Αγγλικά, ΣΤ' Δημοτικού",
       "titleEn": "English, 6th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-F101"
     },
@@ -512,7 +512,7 @@
     "quizTitleEl": "Μαθηματικά, ΣΤ' Δημοτικού",
     "quizTitleEn": "Math, 6th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Μαθηματικά, ΣΤ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Μαθηματικά, ΣΤ' Δημοτικού",
       "titleEn": "Math, 6th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM101"
     },
@@ -538,7 +538,7 @@
     "quizTitleEl": "Νεοελληνική Γλώσσα, ΣΤ' Δημοτικού",
     "quizTitleEn": "Modern Greek Language, 6th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Νεοελληνική Γλώσσα, ΣΤ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Νεοελληνική Γλώσσα, ΣΤ' Δημοτικού",
       "titleEn": "Modern Greek Language, 6th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-F102"
     },
@@ -564,7 +564,7 @@
     "quizTitleEl": "Φυσικές Επιστήμες, ΣΤ' Δημοτικού",
     "quizTitleEn": "Science, 6th Grade",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Φυσικές Επιστήμες, ΣΤ' Δημοτικού",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Φυσικές Επιστήμες, ΣΤ' Δημοτικού",
       "titleEn": "Science, 6th Grade",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL101"
     },
@@ -590,7 +590,7 @@
     "quizTitleEl": "Ιστορία, ΣΤ' Δημοτικού (Νεότερη & Σύγχρονη Ελληνική Ιστορία)",
     "quizTitleEn": "History, 6th Grade (Modern & Contemporary Greek History)",
     "officialBook": {
-      "titleEl": "Επίσημο διδακτικό πακέτο — Ιστορία, ΣΤ' Δημοτικού (Νεότερη & Σύγχρονη Ελληνική Ιστορία)",
+      "titleEl": "Επίσημο διδακτικό πακέτο: Ιστορία, ΣΤ' Δημοτικού (Νεότερη & Σύγχρονη Ελληνική Ιστορία)",
       "titleEn": "History, 6th Grade (Modern & Contemporary Greek History)",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-F114"
     },
@@ -720,8 +720,8 @@
     "quizTitleEl": "Αγγλικά, Γ' Γυμνασίου",
     "quizTitleEn": "English, 3rd Grade Middle School",
     "officialBook": {
-      "titleEl": "Think Teen — 3rd Grade / Αγγλικά Γ΄ Γυμνασίου",
-      "titleEn": "Think Teen — 3rd Grade / Αγγλικά Γ΄ Γυμνασίου",
+      "titleEl": "Think Teen: 3rd Grade / Αγγλικά Γ΄ Γυμνασίου",
+      "titleEn": "Think Teen: 3rd Grade / Αγγλικά Γ΄ Γυμνασίου",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-C109"
     },
     "officialSectionsEl": [],
@@ -751,13 +751,13 @@
       "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A200/293/"
     },
     "officialSectionsEl": [
-      "Κεφ. 1: Φυσικοί αριθμοί — διάταξη, πράξεις, δυνάμεις, διαιρετότητα, ΜΚΔ/ΕΚΠ",
-      "Κεφ. 2: Κλάσματα — έννοια, ισοδύναμα, σύγκριση, πράξεις",
-      "Κεφ. 3: Δεκαδικοί αριθμοί — διάταξη, πράξεις, στρογγυλοποίηση, μονάδες μέτρησης",
+      "Κεφ. 1: Φυσικοί αριθμοί: διάταξη, πράξεις, δυνάμεις, διαιρετότητα, ΜΚΔ/ΕΚΠ",
+      "Κεφ. 2: Κλάσματα: έννοια, ισοδύναμα, σύγκριση, πράξεις",
+      "Κεφ. 3: Δεκαδικοί αριθμοί: διάταξη, πράξεις, στρογγυλοποίηση, μονάδες μέτρησης",
       "Κεφ. 4: Εξισώσεις και προβλήματα",
       "Κεφ. 5: Ποσοστά",
       "Κεφ. 6: Λόγος, αναλογία, ανάλογα και αντιστρόφως ανάλογα ποσά",
-      "Κεφ. 7: Θετικοί/αρνητικοί (ρητοί) — ευθεία ρητών, απόλυτη τιμή, αντίθετοι, σύγκριση και πράξεις",
+      "Κεφ. 7: Θετικοί/αρνητικοί (ρητοί): ευθεία ρητών, απόλυτη τιμή, αντίθετοι, σύγκριση και πράξεις",
       "Γεωμετρία: βασικές έννοιες, γωνίες, κύκλος, συμμετρία, παράλληλες, τρίγωνα/τετράπλευρα (σύμφωνα με το βιβλίο)"
     ],
     "officialSectionsEn": [],
@@ -823,13 +823,13 @@
       "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A105/29/"
     },
     "officialSectionsEl": [
-      "Η Προϊστορία — Εποχή του Λίθου",
-      "Εποχή του Χαλκού — Εγγύς Ανατολή, Κυκλαδικός, Μινωικός και Μυκηναϊκός πολιτισμός",
+      "Η Προϊστορία: Εποχή του Λίθου",
+      "Εποχή του Χαλκού: Εγγύς Ανατολή, Κυκλαδικός, Μινωικός και Μυκηναϊκός πολιτισμός",
       "Ελληνικός κόσμος 1100–800 π.Χ.",
-      "Αρχαϊκή εποχή — αποικισμός, πόλη-κράτος, Σπάρτη, Αθήνα και πορεία προς τη δημοκρατία, Περσικοί πόλεμοι",
+      "Αρχαϊκή εποχή: αποικισμός, πόλη-κράτος, Σπάρτη, Αθήνα και πορεία προς τη δημοκρατία, Περσικοί πόλεμοι",
       "Ηγεμονία της Αθήνας",
       "Πελοποννησιακός πόλεμος και ηγεμονικοί ανταγωνισμοί",
-      "Ανάπτυξη της Μακεδονίας — Φίλιππος και Αλέξανδρος",
+      "Ανάπτυξη της Μακεδονίας: Φίλιππος και Αλέξανδρος",
       "Τέχνες και γράμματα της κλασικής εποχής",
       "Ελληνιστικοί και ρωμαϊκοί χρόνοι",
       "Από τη Ρώμη στο Βυζάντιο"
@@ -865,11 +865,11 @@
     "annualInstructionsNoteEn": "Detailed 2026–27 annual taught/examinable scope has not been encoded for this subject. An official textbook does not automatically mean its entire contents are taught this year.",
     "officialCourseOptions": [
       {
-        "titleEl": "Αγγλικά Α΄ Γυμνασίου — Beginners",
+        "titleEl": "Αγγλικά Α΄ Γυμνασίου: Beginners",
         "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-A111"
       },
       {
-        "titleEl": "Αγγλικά Α΄ Γυμνασίου — Advanced",
+        "titleEl": "Αγγλικά Α΄ Γυμνασίου: Advanced",
         "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-A114"
       }
     ],
@@ -983,7 +983,7 @@
     "annualInstructionsNoteEn": "Detailed 2026–27 annual taught/examinable scope has not been encoded for this subject. An official textbook does not automatically mean its entire contents are taught this year.",
     "officialCourseOptions": [
       {
-        "titleEl": "Αγγλικά Β΄ Γυμνασίου — επίσημο πακέτο (μία από τις διαθέσιμες σειρές)",
+        "titleEl": "Αγγλικά Β΄ Γυμνασίου: επίσημο πακέτο (μία από τις διαθέσιμες σειρές)",
         "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-B114"
       }
     ],
@@ -1058,13 +1058,13 @@
     },
     "officialSectionsEl": [
       "Επιστήμη της Βιολογίας και εισαγωγή στην επιστημονική μέθοδο",
-      "Κεφ. 1: Οργάνωση της ζωής — χαρακτηριστικά οργανισμών, κύτταρο, πολυκύτταρη οργάνωση, ταξινόμηση, προσαρμογές",
-      "Κεφ. 2: Πρόσληψη ουσιών και πέψη — φωτοσύνθεση, μονοκύτταροι, ζωικοί οργανισμοί, άνθρωπος",
+      "Κεφ. 1: Οργάνωση της ζωής: χαρακτηριστικά οργανισμών, κύτταρο, πολυκύτταρη οργάνωση, ταξινόμηση, προσαρμογές",
+      "Κεφ. 2: Πρόσληψη ουσιών και πέψη: φωτοσύνθεση, μονοκύτταροι, ζωικοί οργανισμοί, άνθρωπος",
       "Κεφ. 3: Μεταφορά και αποβολή ουσιών",
       "Κεφ. 4: Αναπνοή",
       "Κεφ. 5: Στήριξη και κίνηση",
       "Κεφ. 6: Αναπαραγωγή",
-      "Κεφ. 7: Ερεθιστικότητα — νευρικό σύστημα, αισθητήρια όργανα, ενδοκρινικό σύστημα"
+      "Κεφ. 7: Ερεθιστικότητα: νευρικό σύστημα, αισθητήρια όργανα, ενδοκρινικό σύστημα"
     ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
@@ -1118,8 +1118,8 @@
       "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C103/478/"
     },
     "officialSectionsEl": [
-      "Κεφ. 1: Οργάνωση της ζωής — μόρια, κύτταρο, επίπεδα οργάνωσης",
-      "Κεφ. 2: Οργανισμοί στο περιβάλλον — οικοσύστημα, ενέργεια, ανακύκλωση ύλης, ανθρώπινες παρεμβάσεις",
+      "Κεφ. 1: Οργάνωση της ζωής: μόρια, κύτταρο, επίπεδα οργάνωσης",
+      "Κεφ. 2: Οργανισμοί στο περιβάλλον: οικοσύστημα, ενέργεια, ανακύκλωση ύλης, ανθρώπινες παρεμβάσεις",
       "Κεφ. 3: Μεταβολισμός και ένζυμα",
       "Κεφ. 4: Ομοιόσταση, ασθένειες, άμυνα οργανισμού, τρόπος ζωής",
       "Κεφ. 5: Γενετικό υλικό, ροή πληροφορίας, αλληλόμορφα, κυτταρική διαίρεση, κληρονομικότητα, μεταλλάξεις",
@@ -1274,8 +1274,8 @@
     },
     "officialSectionsEl": [
       "1.1 Ευθύγραμμη κίνηση",
-      "1.2 Δυναμική σε μία διάσταση — 1ος/2ος νόμος Νεύτωνα",
-      "1.3 Δυναμική στο επίπεδο — 3ος νόμος Νεύτωνα",
+      "1.2 Δυναμική σε μία διάσταση: 1ος/2ος νόμος Νεύτωνα",
+      "1.3 Δυναμική στο επίπεδο: 3ος νόμος Νεύτωνα",
       "2.1 Διατήρηση μηχανικής ενέργειας"
     ],
     "officialSectionsEn": [],
@@ -1303,11 +1303,11 @@
     "quizTitleEn": "Physics, 11th Grade (Science Track)",
     "officialBook": {
       "titleEl": "Φυσική Ομάδας Προσανατολισμού Θετικών Σπουδών Β΄ Γενικού Λυκείου",
-      "titleEn": "Physics, Grade 11 Science Track — official textbook",
+      "titleEn": "Physics, Grade 11 Science Track: official textbook",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-B134"
     },
     "officialSectionsEl": [
-      "Κεφάλαιο 1: Καμπυλόγραμμες κινήσεις — οριζόντια βολή, ομαλή κυκλική κίνηση, κεντρομόλος δύναμη",
+      "Κεφάλαιο 1: Καμπυλόγραμμες κινήσεις: οριζόντια βολή, ομαλή κυκλική κίνηση, κεντρομόλος δύναμη",
       "Κεφάλαιο 2: Ορμή και κρούσεις",
       "Κεφάλαιο 5: Ηλεκτρικό πεδίο (επιλεγμένες ενότητες)",
       "Κεφάλαιο 3: Κινητική θεωρία αερίων",
@@ -1331,13 +1331,13 @@
     "quizTitleEl": "Ιστορία, Α' Λυκείου (Αρχαία Ιστορία)",
     "quizTitleEn": "History, 10th Grade (Ancient History)",
     "officialBook": {
-      "titleEl": "Ιστορία του Αρχαίου Κόσμου — Α΄ Γενικού Λυκείου",
-      "titleEn": "Ιστορία του Αρχαίου Κόσμου — Α΄ Γενικού Λυκείου",
+      "titleEl": "Ιστορία του Αρχαίου Κόσμου: Α΄ Γενικού Λυκείου",
+      "titleEn": "Ιστορία του Αρχαίου Κόσμου: Α΄ Γενικού Λυκείου",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-A102"
     },
     "officialSectionsEl": [
       "Ι. Πολιτισμοί Εγγύς Ανατολής (επιλεγμένες ενότητες)",
-      "ΙΙ. Αρχαίοι Έλληνες — 1.2 Μυκηναϊκός, 2.1 Ομηρική, 2.2 Αρχαϊκή, 2.3 Κλασική εποχή",
+      "ΙΙ. Αρχαίοι Έλληνες: 1.2 Μυκηναϊκός, 2.1 Ομηρική, 2.2 Αρχαϊκή, 2.3 Κλασική εποχή",
       "ΙΙΙ. Ελληνιστικοί χρόνοι (επιλεγμένες ενότητες)",
       "IV–VII επιλεγμένες ενότητες Ρώμης/Ύστερης Αρχαιότητας"
     ],
@@ -1362,8 +1362,8 @@
     "quizTitleEl": "Ιστορία, Β' Λυκείου (Βυζάντιο & Απαρχές Νεότερης Ιστορίας)",
     "quizTitleEn": "History, 11th Grade (Byzantium & Early Modern History)",
     "officialBook": {
-      "titleEl": "Ιστορία του Μεσαιωνικού και του Νεότερου Κόσμου 565–1815 — Β΄ ΓΕΛ",
-      "titleEn": "Ιστορία του Μεσαιωνικού και του Νεότερου Κόσμου 565–1815 — Β΄ ΓΕΛ",
+      "titleEl": "Ιστορία του Μεσαιωνικού και του Νεότερου Κόσμου 565–1815: Β΄ ΓΕΛ",
+      "titleEn": "Ιστορία του Μεσαιωνικού και του Νεότερου Κόσμου 565–1815: Β΄ ΓΕΛ",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-B131"
     },
     "officialSectionsEl": [
@@ -1392,13 +1392,13 @@
     "quizTitleEl": "Ιστορία, Γ' Λυκείου (Νεότερη & Σύγχρονη Ιστορία)",
     "quizTitleEn": "History, 12th Grade (Modern & Contemporary History)",
     "officialBook": {
-      "titleEl": "Ιστορία του Νεότερου και του Σύγχρονου Κόσμου (1815 έως σήμερα) — Γ΄ ΓΕΛ",
-      "titleEn": "Ιστορία του Νεότερου και του Σύγχρονου Κόσμου (1815 έως σήμερα) — Γ΄ ΓΕΛ",
+      "titleEl": "Ιστορία του Νεότερου και του Σύγχρονου Κόσμου (1815 έως σήμερα): Γ΄ ΓΕΛ",
+      "titleEn": "Ιστορία του Νεότερου και του Σύγχρονου Κόσμου (1815 έως σήμερα): Γ΄ ΓΕΛ",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL106"
     },
     "officialSectionsEl": [
       "2026–27 γραπτή ύλη γενικής Ιστορίας Γ΄: επιλεγμένες ενότητες 19ου–20ού αιώνα",
-      "Κεφ. Γ΄: Α΄ Παγκόσμιος Πόλεμος και άμεσες επιπτώσεις — περιλαμβάνεται ο Μικρασιατικός Πόλεμος 1919–1922"
+      "Κεφ. Γ΄: Α΄ Παγκόσμιος Πόλεμος και άμεσες επιπτώσεις: περιλαμβάνεται ο Μικρασιατικός Πόλεμος 1919–1922"
     ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
@@ -1452,8 +1452,8 @@
     "quizTitleEl": "Αγγλικά, Γ' Λυκείου (C1)",
     "quizTitleEn": "English, 12th Grade (C1)",
     "officialBook": {
-      "titleEl": "Αγγλικά Γ΄ Γενικού Λυκείου — επίσημο διδακτικό πακέτο",
-      "titleEn": "English, Grade C Lyceum — official course package",
+      "titleEl": "Αγγλικά Γ΄ Γενικού Λυκείου: επίσημο διδακτικό πακέτο",
+      "titleEn": "English, Grade C Lyceum: official course package",
       "url": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp"
     },
     "officialSectionsEl": [],
@@ -1507,7 +1507,7 @@
     "quizTitleEn": "Biology, 11th Grade (General Education)",
     "officialBook": {
       "titleEl": "Βιολογία Γενικής Παιδείας Β΄ ΓΕΛ",
-      "titleEn": "Biology, Grade 11 General Education — official textbook",
+      "titleEn": "Biology, Grade 11 General Education: official textbook",
       "url": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
     },
     "officialSectionsEl": [
@@ -1537,7 +1537,7 @@
     "quizTitleEn": "Biology, 12th Grade (Science Track)",
     "officialBook": {
       "titleEl": "Βιολογία Ομάδας Προσανατολισμού Γ΄ ΓΕΛ",
-      "titleEn": "Biology, Grade 12 Science Track — official textbook",
+      "titleEn": "Biology, Grade 12 Science Track: official textbook",
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-C112"
     },
     "officialSectionsEl": [
@@ -1561,7 +1561,7 @@
 };
   const GAP_ALIGNMENT = {
   "math-a-gym.rational-number-order": {
-    "sectionEl": "Κεφ. 7.2 — Απόλυτη τιμή ρητού, αντίθετοι ρητοί, σύγκριση ρητών",
+    "sectionEl": "Κεφ. 7.2: Απόλυτη τιμή ρητού, αντίθετοι ρητοί, σύγκριση ρητών",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1569,7 +1569,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A200/293/"
   },
   "math-a-gym.absolute-value": {
-    "sectionEl": "Κεφ. 7.2 — Απόλυτη τιμή ρητού, αντίθετοι ρητοί, σύγκριση ρητών",
+    "sectionEl": "Κεφ. 7.2: Απόλυτη τιμή ρητού, αντίθετοι ρητοί, σύγκριση ρητών",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1577,7 +1577,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A200/293/"
   },
   "math-a-gym.gcd-lcm-confusion": {
-    "sectionEl": "Κεφ. 1.5 — Χαρακτήρες διαιρετότητας, ΜΚΔ, ΕΚΠ, πρώτοι παράγοντες",
+    "sectionEl": "Κεφ. 1.5: Χαρακτήρες διαιρετότητας, ΜΚΔ, ΕΚΠ, πρώτοι παράγοντες",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1585,7 +1585,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A200/293/"
   },
   "math-a-gym.proportion-intro": {
-    "sectionEl": "Κεφ. 6.2–6.3 — Λόγος/αναλογία και ανάλογα ποσά",
+    "sectionEl": "Κεφ. 6.2–6.3: Λόγος/αναλογία και ανάλογα ποσά",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1593,7 +1593,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A200/293/"
   },
   "istoria-a-gym.bronze-age-civilizations": {
-    "sectionEl": "Κεφ. Β΄ — Εποχή του Χαλκού, §§1–6",
+    "sectionEl": "Κεφ. Β΄: Εποχή του Χαλκού, §§1–6",
     "status": "exact-section-verified",
     "sourceQuizId": "istoria-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1601,7 +1601,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A105/29/"
   },
   "istoria-a-gym.archaic-democracy-path": {
-    "sectionEl": "Κεφ. Δ΄ — Αθήνα: από τη βασιλεία στην αριστοκρατία και πορεία προς τη δημοκρατία",
+    "sectionEl": "Κεφ. Δ΄: Αθήνα: από τη βασιλεία στην αριστοκρατία και πορεία προς τη δημοκρατία",
     "status": "exact-section-verified",
     "sourceQuizId": "istoria-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1609,7 +1609,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A105/29/"
   },
   "istoria-a-gym.peloponnesian-war-sides": {
-    "sectionEl": "Κεφ. ΣΤ΄ §§1–2 — Αίτια/Αρχιδάμειος πόλεμος, Σικελική εκστρατεία/Δεκελεικός πόλεμος",
+    "sectionEl": "Κεφ. ΣΤ΄ §§1–2: Αίτια/Αρχιδάμειος πόλεμος, Σικελική εκστρατεία/Δεκελεικός πόλεμος",
     "status": "exact-section-verified",
     "sourceQuizId": "istoria-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1617,7 +1617,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A105/29/"
   },
   "istoria-a-gym.alexander-legacy": {
-    "sectionEl": "Κεφ. Ζ΄ §§3–4 — Αλέξανδρος: κατάκτηση της Ανατολής και έργο",
+    "sectionEl": "Κεφ. Ζ΄ §§3–4: Αλέξανδρος: κατάκτηση της Ανατολής και έργο",
     "status": "exact-section-verified",
     "sourceQuizId": "istoria-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1625,7 +1625,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A105/29/"
   },
   "biologia-a-gym.plant-animal-cell": {
-    "sectionEl": "Κεφ. 1.2 — Κύτταρο: η μονάδα της ζωής",
+    "sectionEl": "Κεφ. 1.2: Κύτταρο: η μονάδα της ζωής",
     "status": "related-section-verified",
     "sourceQuizId": "biologia-a-gymnasiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη ενότητα",
@@ -1633,7 +1633,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A103/477/"
   },
   "biologia-a-gym.unicellular-nutrition": {
-    "sectionEl": "Κεφ. 2.2 — Πρόσληψη ουσιών και πέψη στους μονοκύτταρους οργανισμούς",
+    "sectionEl": "Κεφ. 2.2: Πρόσληψη ουσιών και πέψη στους μονοκύτταρους οργανισμούς",
     "status": "exact-section-verified",
     "sourceQuizId": "biologia-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1641,7 +1641,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A103/477/"
   },
   "biologia-a-gym.adaptation-misconception": {
-    "sectionEl": "Κεφ. 1.4 — Αλληλεπιδράσεις και προσαρμογές",
+    "sectionEl": "Κεφ. 1.4: Αλληλεπιδράσεις και προσαρμογές",
     "status": "exact-section-verified",
     "sourceQuizId": "biologia-a-gymnasiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη ενότητα",
@@ -1649,7 +1649,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A103/477/"
   },
   "biologia-a-gym.plant-vs-animal-digestion": {
-    "sectionEl": "Κεφ. 2.1–2.3 — Παραγωγή θρεπτικών ουσιών στα φυτά και πρόσληψη/πέψη στους οργανισμούς",
+    "sectionEl": "Κεφ. 2.1–2.3: Παραγωγή θρεπτικών ουσιών στα φυτά και πρόσληψη/πέψη στους οργανισμούς",
     "status": "related-section-verified",
     "sourceQuizId": "biologia-a-gymnasiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη ενότητα",
@@ -1657,7 +1657,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A103/477/"
   },
   "biologia-a-gym.cell-membrane-function": {
-    "sectionEl": "Κεφ. 1.2 — Κύτταρο: η μονάδα της ζωής",
+    "sectionEl": "Κεφ. 1.2: Κύτταρο: η μονάδα της ζωής",
     "status": "related-section-verified",
     "sourceQuizId": "biologia-a-gymnasiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη ενότητα",
@@ -1681,7 +1681,7 @@
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A112/337/"
   },
   "functions.one-formula-only": {
-    "sectionEl": "Κεφ. 6.1 — Η Έννοια της Συνάρτησης",
+    "sectionEl": "Κεφ. 6.1: Η Έννοια της Συνάρτησης",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1690,7 +1690,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "functions.quadratic-always-two-roots": {
-    "sectionEl": "Κεφ. 3.3 — Εξισώσεις 2ου βαθμού",
+    "sectionEl": "Κεφ. 3.3: Εξισώσεις 2ου βαθμού",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1699,7 +1699,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "functions.sqrt-drops-absolute-value": {
-    "sectionEl": "Κεφ. 2.3–2.4 — Απόλυτη τιμή και Ρίζες Πραγματικών Αριθμών",
+    "sectionEl": "Κεφ. 2.3–2.4: Απόλυτη τιμή και Ρίζες Πραγματικών Αριθμών",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1708,7 +1708,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "functions.inequality-no-sign-flip": {
-    "sectionEl": "Κεφ. 4.1–4.2 — Ανισώσεις 1ου και 2ου βαθμού",
+    "sectionEl": "Κεφ. 4.1–4.2: Ανισώσεις 1ου και 2ου βαθμού",
     "status": "exact-section-verified",
     "sourceQuizId": "mathimatika-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1721,13 +1721,13 @@
     "topicAnchorEn": "Function max/min",
     "status": "official-course-topic-anchor",
     "sourceQuizId": "mathimatika-a-lykeiou",
-    "statusLabelEl": "Επίσημο μάθημα/βιβλίο — όχι ακριβής ενότητα 2026–27",
-    "statusLabelEn": "Official course/book — not an exact 2026–27 section mapping",
+    "statusLabelEl": "Επίσημο μάθημα/βιβλίο: όχι ακριβής ενότητα 2026–27",
+    "statusLabelEn": "Official course/book: not an exact 2026–27 section mapping",
     "noteEl": "Το v2 δεν έχει επαληθεύσει section-level ότι το συγκεκριμένο max/min/vertex skill βρίσκεται στην καταχωρισμένη ετήσια εξεταστέα ενότητα. Μην το παρουσιάζεις ως επίσημη § χωρίς νέα πηγή.",
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGL-A100/490/3186,12916/"
   },
   "physics-lyk.motion-implies-force": {
-    "sectionEl": "1.2.3 — Ο πρώτος νόμος του Νεύτωνα",
+    "sectionEl": "1.2.3: Ο πρώτος νόμος του Νεύτωνα",
     "status": "exact-section-verified",
     "sourceQuizId": "fysiki-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1736,7 +1736,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "physics-lyk.constant-velocity-needs-force": {
-    "sectionEl": "1.2.3 — Ο πρώτος νόμος του Νεύτωνα",
+    "sectionEl": "1.2.3: Ο πρώτος νόμος του Νεύτωνα",
     "status": "exact-section-verified",
     "sourceQuizId": "fysiki-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1745,7 +1745,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "physics-lyk.newton-third-law-bigger-force": {
-    "sectionEl": "1.3.1 — Τρίτος νόμος του Νεύτωνα, Δράση–Αντίδραση",
+    "sectionEl": "1.3.1: Τρίτος νόμος του Νεύτωνα, Δράση–Αντίδραση",
     "status": "exact-section-verified",
     "sourceQuizId": "fysiki-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1764,7 +1764,7 @@
     "noteEl": "Η διάκριση δύναμης/ενέργειας είναι εννοιολογική γέφυρα ανάμεσα στις επαληθευμένες ενότητες, όχι τίτλος μίας μοναδικής παραγράφου."
   },
   "physics-lyk.energy-used-up": {
-    "sectionEl": "2.1.4 — Η μηχανική ενέργεια / διατήρηση μηχανικής ενέργειας",
+    "sectionEl": "2.1.4: Η μηχανική ενέργεια / διατήρηση μηχανικής ενέργειας",
     "status": "exact-section-verified",
     "sourceQuizId": "fysiki-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1773,7 +1773,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "istoria-a-lyk.polis-definition": {
-    "sectionEl": "ΙΙ.2.2 — Αρχαϊκή εποχή (πόλη-κράτος, με τις ρητές εξαιρέσεις της απόφασης)",
+    "sectionEl": "ΙΙ.2.2: Αρχαϊκή εποχή (πόλη-κράτος, με τις ρητές εξαιρέσεις της απόφασης)",
     "status": "related-section-verified",
     "sourceQuizId": "istoria-a-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1783,7 +1783,7 @@
     "noteEl": "Η απόφαση εξαιρεί συγκεκριμένες υποενότητες της §2.2. Ο Tutor δεν πρέπει να χρησιμοποιεί εξαιρούμενο κείμενο ως εξεταστέο."
   },
   "istoria-a-lyk.persian-wars-cause": {
-    "sectionEl": "ΙΙ.2.2 — Αρχαϊκή εποχή / μετάβαση προς τους Περσικούς Πολέμους",
+    "sectionEl": "ΙΙ.2.2: Αρχαϊκή εποχή / μετάβαση προς τους Περσικούς Πολέμους",
     "status": "related-section-verified",
     "sourceQuizId": "istoria-a-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1792,7 +1792,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "istoria-a-lyk.direct-democracy-athens": {
-    "sectionEl": "ΙΙ.2.3 — Κλασική εποχή, Η εποχή του Περικλή",
+    "sectionEl": "ΙΙ.2.3: Κλασική εποχή, Η εποχή του Περικλή",
     "status": "related-section-verified",
     "sourceQuizId": "istoria-a-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1801,17 +1801,17 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "istoria-a-lyk.alexander-empire-unity": {
-    "topicAnchorEl": "Ελληνιστικοί χρόνοι — διάλυση της αυτοκρατορίας και Διάδοχοι",
-    "topicAnchorEn": "Hellenistic period — breakup of the empire and Successors",
+    "topicAnchorEl": "Ελληνιστικοί χρόνοι: διάλυση της αυτοκρατορίας και Διάδοχοι",
+    "topicAnchorEn": "Hellenistic period: breakup of the empire and Successors",
     "status": "official-course-topic-anchor",
     "sourceQuizId": "istoria-a-lykeiou",
-    "statusLabelEl": "Επίσημο βιβλίο/θεματική — όχι ακριβής εξεταστέα §",
-    "statusLabelEn": "Official book/topic — not exact examinable section",
+    "statusLabelEl": "Επίσημο βιβλίο/θεματική: όχι ακριβής εξεταστέα §",
+    "statusLabelEn": "Official book/topic: not exact examinable section",
     "noteEl": "Η απόφαση 2026–27 περιλαμβάνει Ελληνιστικούς χρόνους αλλά εξαιρεί ορισμένες υποενότητες για τα βασίλεια. Το συγκεκριμένο gap δεν χαρακτηρίζεται exact-section-verified.",
     "sourceUrl": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-A102"
   },
   "istoria-b-lyk.fall-constantinople-1453": {
-    "sectionEl": "Κεφ. 4 §7 — Η άλωση της Κωνσταντινούπολης",
+    "sectionEl": "Κεφ. 4 §7: Η άλωση της Κωνσταντινούπολης",
     "status": "exact-section-verified",
     "sourceQuizId": "istoria-b-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1820,7 +1820,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "istoria-b-lyk.renaissance-cause": {
-    "sectionEl": "Κεφ. 6 §2 — Αναγέννηση και Ανθρωπισμός",
+    "sectionEl": "Κεφ. 6 §2: Αναγέννηση και Ανθρωπισμός",
     "status": "exact-section-verified",
     "sourceQuizId": "istoria-b-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1829,7 +1829,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "history-lyk.1922-military-defeat-only": {
-    "sectionEl": "Κεφ. Γ΄ §5 — Ο Μικρασιατικός Πόλεμος (1919–1922)",
+    "sectionEl": "Κεφ. Γ΄ §5: Ο Μικρασιατικός Πόλεμος (1919–1922)",
     "status": "exact-section-verified",
     "sourceQuizId": "istoria-g-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1838,7 +1838,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-a.topic-sentence-missing": {
-    "sectionEl": "Νεοελληνική Γλώσσα Α΄ — επίσημο πλαίσιο οργάνωσης/δομής κειμένου και Γλωσσικές Ασκήσεις: παράγραφος",
+    "sectionEl": "Νεοελληνική Γλώσσα Α΄: επίσημο πλαίσιο οργάνωσης/δομής κειμένου και Γλωσσικές Ασκήσεις: παράγραφος",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-a-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1847,7 +1847,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-a.development-method-confusion": {
-    "sectionEl": "Νεοελληνική Γλώσσα Α΄ — Γλωσσικές Ασκήσεις: ανάπτυξη παραγράφου",
+    "sectionEl": "Νεοελληνική Γλώσσα Α΄: Γλωσσικές Ασκήσεις: ανάπτυξη παραγράφου",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-a-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1856,7 +1856,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-a.unity-coherence": {
-    "sectionEl": "Νεοελληνική Γλώσσα Α΄ — επίσημο πλαίσιο δομής/συνοχής κειμένου",
+    "sectionEl": "Νεοελληνική Γλώσσα Α΄: επίσημο πλαίσιο δομής/συνοχής κειμένου",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-a-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1865,7 +1865,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-a.summary-length": {
-    "sectionEl": "Νεοελληνική Γλώσσα Α΄ — δεξιότητα περίληψης στο επίσημο πλαίσιο εξέτασης",
+    "sectionEl": "Νεοελληνική Γλώσσα Α΄: δεξιότητα περίληψης στο επίσημο πλαίσιο εξέτασης",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-a-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1875,7 +1875,7 @@
     "noteEl": "Το ακριβές όριο λέξεων εξαρτάται από την εκφώνηση· ο Tutor δεν πρέπει να επινοεί σταθερό γενικό όριο."
   },
   "ekthesi.unsupported-argument": {
-    "sectionEl": "Νεοελληνική Γλώσσα Β΄ — επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
+    "sectionEl": "Νεοελληνική Γλώσσα Β΄: επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-b-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1884,7 +1884,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-b.persuasion-modes-confusion": {
-    "sectionEl": "Νεοελληνική Γλώσσα Β΄ — επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
+    "sectionEl": "Νεοελληνική Γλώσσα Β΄: επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-b-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1893,7 +1893,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-b.thesis-antithesis-missing": {
-    "sectionEl": "Νεοελληνική Γλώσσα Β΄ — επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
+    "sectionEl": "Νεοελληνική Γλώσσα Β΄: επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-b-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1902,7 +1902,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-b.essay-structure-imbalance": {
-    "sectionEl": "Νεοελληνική Γλώσσα Β΄ — επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
+    "sectionEl": "Νεοελληνική Γλώσσα Β΄: επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-b-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1911,7 +1911,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "ekthesi-b.evidence-generic": {
-    "sectionEl": "Νεοελληνική Γλώσσα Β΄ — επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
+    "sectionEl": "Νεοελληνική Γλώσσα Β΄: επίσημο πλαίσιο κριτικής κατανόησης, οργάνωσης και τεκμηρίωσης λόγου / Έκφραση-Έκθεση Β΄",
     "status": "related-section-verified",
     "sourceQuizId": "ekthesi-b-lykeiou",
     "statusLabelEl": "Σχετική αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -4166,8 +4166,8 @@
     "sourceQuizId": "fysiki-b-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Ομαλή κυκλική κίνηση — στιγμιαία ταχύτητα",
-    "officialSectionEn": "Uniform circular motion — instantaneous velocity",
+    "officialSectionEl": "Ομαλή κυκλική κίνηση: στιγμιαία ταχύτητα",
+    "officialSectionEn": "Uniform circular motion: instantaneous velocity",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4192,8 +4192,8 @@
     "sourceQuizId": "fysiki-b-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Κεφάλαιο 2 — Ορμή",
-    "officialSectionEn": "Chapter 2 — Momentum",
+    "officialSectionEl": "Κεφάλαιο 2: Ορμή",
+    "officialSectionEn": "Chapter 2: Momentum",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4205,8 +4205,8 @@
     "sourceQuizId": "fysiki-b-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Κεφάλαιο 2 — Διατήρηση ορμής και κρούσεις",
-    "officialSectionEn": "Chapter 2 — Momentum conservation and collisions",
+    "officialSectionEl": "Κεφάλαιο 2: Διατήρηση ορμής και κρούσεις",
+    "officialSectionEn": "Chapter 2: Momentum conservation and collisions",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4218,8 +4218,8 @@
     "sourceQuizId": "fysiki-b-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Κεφάλαιο 4 — Θερμοδυναμική / 1ος θερμοδυναμικός νόμος",
-    "officialSectionEn": "Chapter 4 — Thermodynamics / first law",
+    "officialSectionEl": "Κεφάλαιο 4: Θερμοδυναμική / 1ος θερμοδυναμικός νόμος",
+    "officialSectionEn": "Chapter 4: Thermodynamics / first law",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4231,8 +4231,8 @@
     "sourceQuizId": "biologia-b-lykeiou",
     "statusLabelEl": "Σχετική επίσημη ενότητα επαληθευμένη",
     "statusLabelEn": "Related official section verified",
-    "officialSectionEl": "Κεφάλαιο 1 — Άνθρωπος και Υγεία",
-    "officialSectionEn": "Chapter 1 — Human and Health",
+    "officialSectionEl": "Κεφάλαιο 1: Άνθρωπος και Υγεία",
+    "officialSectionEn": "Chapter 1: Human and Health",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4244,8 +4244,8 @@
     "sourceQuizId": "biologia-b-lykeiou",
     "statusLabelEl": "Σχετική επίσημη ενότητα επαληθευμένη",
     "statusLabelEn": "Related official section verified",
-    "officialSectionEl": "Κεφάλαιο 1 — Άνθρωπος και Υγεία",
-    "officialSectionEn": "Chapter 1 — Human and Health",
+    "officialSectionEl": "Κεφάλαιο 1: Άνθρωπος και Υγεία",
+    "officialSectionEn": "Chapter 1: Human and Health",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4257,8 +4257,8 @@
     "sourceQuizId": "biologia-b-lykeiou",
     "statusLabelEl": "Σχετική επίσημη ενότητα επαληθευμένη",
     "statusLabelEn": "Related official section verified",
-    "officialSectionEl": "Κεφάλαιο 2 — Άνθρωπος και Περιβάλλον",
-    "officialSectionEn": "Chapter 2 — Humans and Environment",
+    "officialSectionEl": "Κεφάλαιο 2: Άνθρωπος και Περιβάλλον",
+    "officialSectionEn": "Chapter 2: Humans and Environment",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4270,8 +4270,8 @@
     "sourceQuizId": "biologia-b-lykeiou",
     "statusLabelEl": "Σχετική επίσημη ενότητα επαληθευμένη",
     "statusLabelEn": "Related official section verified",
-    "officialSectionEl": "Κεφάλαιο 2 — Άνθρωπος και Περιβάλλον",
-    "officialSectionEn": "Chapter 2 — Humans and Environment",
+    "officialSectionEl": "Κεφάλαιο 2: Άνθρωπος και Περιβάλλον",
+    "officialSectionEn": "Chapter 2: Humans and Environment",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4283,8 +4283,8 @@
     "sourceQuizId": "biologia-b-lykeiou",
     "statusLabelEl": "Σχετική επίσημη ενότητα επαληθευμένη",
     "statusLabelEn": "Related official section verified",
-    "officialSectionEl": "Κεφάλαιο 3 — Εξέλιξη (επιλεγμένες ενότητες)",
-    "officialSectionEn": "Chapter 3 — Evolution (selected sections)",
+    "officialSectionEl": "Κεφάλαιο 3: Εξέλιξη (επιλεγμένες ενότητες)",
+    "officialSectionEn": "Chapter 3: Evolution (selected sections)",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
@@ -4296,8 +4296,8 @@
     "sourceQuizId": "biologia-g-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 1 — Το γενετικό υλικό",
-    "officialSectionEn": "Book B, Chapter 1 — Genetic material",
+    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 1: Το γενετικό υλικό",
+    "officialSectionEn": "Book B, Chapter 1: Genetic material",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2"
@@ -4309,8 +4309,8 @@
     "sourceQuizId": "biologia-g-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 2 — Έκφραση της γενετικής πληροφορίας",
-    "officialSectionEn": "Book B, Chapter 2 — Expression of genetic information",
+    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 2: Έκφραση της γενετικής πληροφορίας",
+    "officialSectionEn": "Book B, Chapter 2: Expression of genetic information",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2"
@@ -4322,8 +4322,8 @@
     "sourceQuizId": "biologia-g-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 5 — Μενδελική κληρονομικότητα",
-    "officialSectionEn": "Book B, Chapter 5 — Mendelian inheritance",
+    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 5: Μενδελική κληρονομικότητα",
+    "officialSectionEn": "Book B, Chapter 5: Mendelian inheritance",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2"
@@ -4335,8 +4335,8 @@
     "sourceQuizId": "biologia-g-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 6 — Μεταλλάξεις",
-    "officialSectionEn": "Book B, Chapter 6 — Mutations",
+    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 6: Μεταλλάξεις",
+    "officialSectionEn": "Book B, Chapter 6: Mutations",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2"
@@ -4348,8 +4348,8 @@
     "sourceQuizId": "biologia-g-lykeiou",
     "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας",
     "statusLabelEn": "Exact official section mapping",
-    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 4 — Τεχνολογία ανασυνδυασμένου DNA",
-    "officialSectionEn": "Book B, Chapter 4 — Recombinant-DNA technology",
+    "officialSectionEl": "Τεύχος Β, Κεφάλαιο 4: Τεχνολογία ανασυνδυασμένου DNA",
+    "officialSectionEn": "Book B, Chapter 4: Recombinant-DNA technology",
     "noteEl": "Η αντιστοίχιση βασίζεται στην επίσημη ετήσια/εξεταστέα ύλη. Ο Tutor πρέπει να μένει στο επίπεδο και στην ορολογία της τάξης.",
     "noteEn": "Mapping is based on the official annual/examinable syllabus. The Tutor should stay at the grade’s level and terminology.",
     "sourceUrl": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2"

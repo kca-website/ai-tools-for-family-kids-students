@@ -1,5 +1,5 @@
 /**
- * learning-paths-data.js — curriculum-aligned update v2.1 (2026-08-29)
+ * learning-paths-data.js: curriculum-aligned update v2.1 (2026-08-29)
  * One 3-step learning path per gap tag. AI guides; it does not hand over finished schoolwork.
  */
 
@@ -3918,8 +3918,8 @@ const LEARNING_PATHS = {
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
       "titleEn": "Try it yourself first",
-      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Έννοια του υπολοίπου» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει τι σημαίνει το υπόλοιπο σε μια διαίρεση — ότι είναι όσα «περισσεύουν» και δεν χωράνε σε ίσα μερίδια.",
-      "descriptionEn": "Solve 2-3 exercises on \"Meaning of the remainder\" by hand, writing out every step. The most common trap on this topic: Doesn't understand what the remainder in a division means — the amount 'left over' that doesn't fit into equal groups.",
+      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Έννοια του υπολοίπου» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν καταλαβαίνει τι σημαίνει το υπόλοιπο σε μια διαίρεση: ότι είναι όσα «περισσεύουν» και δεν χωράνε σε ίσα μερίδια.",
+      "descriptionEn": "Solve 2-3 exercises on \"Meaning of the remainder\" by hand, writing out every step. The most common trap on this topic: Doesn't understand what the remainder in a division means: the amount 'left over' that doesn't fit into equal groups.",
       "toolId": null
     },
     {

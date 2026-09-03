@@ -1,4 +1,4 @@
-/* AI Tools 4 Kids — PWA wrapper + report-link patch */
+/* AI Tools 4 Kids: PWA wrapper + report-link patch */
 (function(){
   "use strict";
   const core=document.createElement("script");

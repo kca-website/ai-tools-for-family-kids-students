@@ -4,7 +4,7 @@
  * Ευρήματα έρευνας προσβασιμότητας ανά εργαλείο (27 Αυγούστου 2026).
  * Μέθοδος: επίσημες δηλώσεις/VPAT όπου υπάρχουν, αλλιώς αξιόπιστες
  * ανεξάρτητες αξιολογήσεις (πανεπιστήμια, Perkins School for the Blind).
- * Καμία πληροφορία εδώ δεν είναι επινοημένη — status "none" σημαίνει
+ * Καμία πληροφορία εδώ δεν είναι επινοημένη: status "none" σημαίνει
  * ρητά "δεν βρέθηκε καμία πηγή", όχι "δεν είναι προσβάσιμο".
  *
  * status: "good" | "partial" | "caution" | "none"
@@ -105,8 +105,8 @@ const ACCESSIBILITY_INFO = {
   },
   "claude-academy": {
     status: "partial",
-    noteEl: "Ίδιος οργανισμός με το Claude — δείτε τα ευρήματα του Claude παραπάνω.",
-    noteEn: "Same organization as Claude — see Claude's findings above.",
+    noteEl: "Ίδιος οργανισμός με το Claude: δείτε τα ευρήματα του Claude παραπάνω.",
+    noteEn: "Same organization as Claude: see Claude's findings above.",
     sourceUrl: "https://trust.anthropic.com/",
   },
   "chatgpt": {
@@ -117,14 +117,14 @@ const ACCESSIBILITY_INFO = {
   },
   "chatgpt-edu": {
     status: "partial",
-    noteEl: "Ίδιος οργανισμός με το ChatGPT — δείτε τα ευρήματα του ChatGPT παραπάνω.",
-    noteEn: "Same organization as ChatGPT — see ChatGPT's findings above.",
+    noteEl: "Ίδιος οργανισμός με το ChatGPT: δείτε τα ευρήματα του ChatGPT παραπάνω.",
+    noteEn: "Same organization as ChatGPT: see ChatGPT's findings above.",
     sourceUrl: "https://www.captechconsulting.com/technical/artificial-intelligence-accessibility-a-look-into-chatgpt",
   },
   "gemini": {
     status: "partial",
-    noteEl: "Ισχυρή ενσωμάτωση σε επίπεδο Android/Chrome (TalkBack, Expressive Captions) — αλλά αυτό αφορά το λειτουργικό σύστημα, όχι ειδικά το gemini.google.com.",
-    noteEn: "Strong integration at the Android/Chrome OS level (TalkBack, Expressive Captions) — but this is OS-wide, not specific to gemini.google.com.",
+    noteEl: "Ισχυρή ενσωμάτωση σε επίπεδο Android/Chrome (TalkBack, Expressive Captions): αλλά αυτό αφορά το λειτουργικό σύστημα, όχι ειδικά το gemini.google.com.",
+    noteEn: "Strong integration at the Android/Chrome OS level (TalkBack, Expressive Captions): but this is OS-wide, not specific to gemini.google.com.",
     sourceUrl: "https://blog.google/company-news/outreach-and-initiatives/accessibility/android-gemini-ai-gaad-2025/",
   },
   "notebooklm": {

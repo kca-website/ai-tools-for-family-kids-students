@@ -1,4 +1,4 @@
-/** DOM/data refinements loaded after app.js — v3.1.6. */
+/** DOM/data refinements loaded after app.js: v3.1.6. */
 (function(){
   "use strict";
 
@@ -199,8 +199,8 @@
     const en=isEnglish();
     const subject=quiz ? (en ? quiz.subjectLabelEn : quiz.subjectLabelEl) : "";
     const aiLabel=en
-      ? (zone==="primary" && role==="student" ? "Parent Helper — with an adult" : (role==="guardian" ? "Parent Helper" : "AI Help"))
-      : (zone==="primary" && role==="student" ? "Βοηθός Γονέα — μαζί με γονέα" : (role==="guardian" ? "Βοηθός Γονέα" : "AI Βοήθεια"));
+      ? (zone==="primary" && role==="student" ? "Parent Helper: with an adult" : (role==="guardian" ? "Parent Helper" : "AI Help"))
+      : (zone==="primary" && role==="student" ? "Βοηθός Γονέα: μαζί με γονέα" : (role==="guardian" ? "Βοηθός Γονέα" : "AI Βοήθεια"));
     const aiHref=zone==="primary" && role==="student"
       ? "/primary/guardian/tutor"
       : `/${zone}/${role}/tutor`;
@@ -218,8 +218,8 @@
     panel.dataset.signature=signature;
 
     const title=en
-      ? "🎯 Excellent — now go one step further"
-      : "🎯 Μπράβο — τώρα πήγαινε ένα βήμα παραπέρα";
+      ? "🎯 Excellent: now go one step further"
+      : "🎯 Μπράβο: τώρα πήγαινε ένα βήμα παραπέρα";
     const intro=en
       ? `No practice gap was detected in this attempt${subject ? ` for ${subject}` : ""}. Instead of stopping here, use the result for enrichment and a harder challenge.`
       : `Δεν εντοπίστηκε κενό σε αυτή την προσπάθεια${subject ? ` στο ${subject}` : ""}. Αντί να σταματήσεις εδώ, χρησιμοποίησε το αποτέλεσμα για εμπλουτισμό και μια πιο δύσκολη πρόκληση.`;
@@ -298,8 +298,8 @@
     const badge=en ? "New · Accessibility" : "Νέο · Προσβασιμότητα";
     const title=en ? "🤟 Concepts in Greek Sign Language" : "🤟 Έννοιες στην Ελληνική Νοηματική";
     const text=en
-      ? "153 selected school concepts — not a complete GSL dictionary — with simple explanations, scientific visuals, and direct official videos from IEP."
-      : "153 επιλεγμένες σχολικές έννοιες — όχι πλήρες λεξικό ΕΝΓ — με απλή εξήγηση, επιστημονική εικόνα και απευθείας επίσημο βίντεο από το ΙΕΠ.";
+      ? "153 selected school concepts: not a complete GSL dictionary: with simple explanations, scientific visuals, and direct official videos from IEP."
+      : "153 επιλεγμένες σχολικές έννοιες: όχι πλήρες λεξικό ΕΝΓ: με απλή εξήγηση, επιστημονική εικόνα και απευθείας επίσημο βίντεο από το ΙΕΠ.";
     const cta=en ? "Explore the 153 concepts →" : "Δες τις 153 έννοιες →";
 
     panel.innerHTML=`
@@ -352,8 +352,8 @@
     }
     const en=isEnglish();
     const desired=en
-      ? "What happens next: the Diagnostic Map identifies an area that may need practice. Open its Learning Path for the practical 3-step route — activity, guided tool use and an understanding check."
-      : "Τι γίνεται μετά: ο Διαγνωστικός Χάρτης εντοπίζει ένα σημείο που μπορεί να θέλει εξάσκηση. Άνοιξε το Μονοπάτι Μάθησης αυτού του θέματος για την πρακτική διαδρομή 3 βημάτων — δραστηριότητα, καθοδηγούμενη χρήση εργαλείου και έλεγχο κατανόησης.";
+      ? "What happens next: the Diagnostic Map identifies an area that may need practice. Open its Learning Path for the practical 3-step route: activity, guided tool use and an understanding check."
+      : "Τι γίνεται μετά: ο Διαγνωστικός Χάρτης εντοπίζει ένα σημείο που μπορεί να θέλει εξάσκηση. Άνοιξε το Μονοπάτι Μάθησης αυτού του θέματος για την πρακτική διαδρομή 3 βημάτων: δραστηριότητα, καθοδηγούμενη χρήση εργαλείου και έλεγχο κατανόησης.";
     if(note.textContent!==desired) note.textContent=desired;
   }
 
@@ -372,8 +372,8 @@
     if(row.dataset.signature===signature) return;
     row.dataset.signature=signature;
     row.innerHTML=en
-      ? '<a href="/methodology.html">How we select & verify tools</a> · <a href="https://github.com/kca-website/ai-tools-for-family-kids-students/issues/new" target="_blank" rel="noopener noreferrer">Report outdated information ↗</a>'
-      : '<a href="/methodology.html">Πώς επιλέγουμε & ελέγχουμε τα εργαλεία</a> · <a href="https://github.com/kca-website/ai-tools-for-family-kids-students/issues/new" target="_blank" rel="noopener noreferrer">Βρήκες λάθος ή παλιωμένη πληροφορία; ↗</a>';
+      ? '<a href="/methodology.html">How we select & verify tools</a> · <a href="/report-error.html" target="_blank" rel="noopener noreferrer">Report outdated information ↗</a>'
+      : '<a href="/methodology.html">Πώς επιλέγουμε & ελέγχουμε τα εργαλεία</a> · <a href="/report-error.html" target="_blank" rel="noopener noreferrer">Βρήκες λάθος ή παλιωμένη πληροφορία; ↗</a>';
   }
 
   function loadPwaLayer(){

@@ -1,4 +1,4 @@
-/* AI Tools 4 Kids — PWA/mobile layer v1.1.0 */
+/* AI Tools 4 Kids: PWA/mobile layer v1.1.0 */
 (function(){
   "use strict";
 

@@ -63,8 +63,8 @@
       curriculum: {
         schoolYear: "2025-2026",
         coverageStatus: "official-prior-year-reference",
-        coverageLabelEl: "Επίσημη βάση 2025–26 — αναμονή οδηγιών 2026–27",
-        coverageLabelEn: "Official 2025–26 reference — awaiting 2026–27 guidance",
+        coverageLabelEl: "Επίσημη βάση 2025–26: αναμονή οδηγιών 2026–27",
+        coverageLabelEn: "Official 2025–26 reference: awaiting 2026–27 guidance",
         officialSectionsEl: [],
         officialSectionsEn: [],
         scopeNoteEl: "Τα θέματα λειτουργούν ως ασφαλείς άγκυρες πλοήγησης του μαθήματος. Δεν παρουσιάζονται ως φετινή διδακτέα ή εξεταστέα ύλη μέχρι να δημοσιευτούν και να ελεγχθούν οι οδηγίες 2026–27.",
@@ -123,7 +123,7 @@
           ["Ατμόσφαιρα, καιρός και κλίμα", "Atmosphere, weather and climate"],
           ["Βιόσφαιρα και φυσικά οικοσυστήματα", "Biosphere and natural ecosystems"],
           ["Ανθρωπογενές περιβάλλον: πληθυσμός και οικισμοί", "Human environment: population and settlements"],
-          ["Ήπειροι — συνθετική εργασία (προαιρετική εμβάθυνση)", "Continents — project work (optional extension)", null, null, true],
+          ["Ήπειροι: συνθετική εργασία (προαιρετική εμβάθυνση)", "Continents: project work (optional extension)", null, null, true],
         ],
       }),
       verifiedSubject({
@@ -182,7 +182,7 @@
         sourceLabelEl: "Οδηγίες Βιολογίας Β' Γυμνασίου 2026–27",
         rows: [
           ["Στήριξη και κίνηση σε μονοκύτταρους οργανισμούς και φυτά", "Support and movement in unicellular organisms and plants"],
-          ["Στήριξη και κίνηση σε ζώα — μυοσκελετικό σύστημα", "Support and movement in animals — musculoskeletal system"],
+          ["Στήριξη και κίνηση σε ζώα: μυοσκελετικό σύστημα", "Support and movement in animals: musculoskeletal system"],
           ["Αναπαραγωγή σε μονοκύτταρους οργανισμούς και φυτά", "Reproduction in unicellular organisms and plants"],
           ["Αναπαραγωγή στα ζώα και στον άνθρωπο", "Reproduction in animals and humans"],
           ["Κύτταρο και επίπεδα οργάνωσης (προαιρετικό)", "Cell and levels of organisation (optional)", null, null, true],
@@ -251,7 +251,7 @@
           ["Οξέα, βάσεις και κλίμακα pH", "Acids, bases and the pH scale"],
           ["Εξουδετέρωση και άλατα", "Neutralisation and salts"],
           ["Οξέα, βάσεις και άλατα στην καθημερινή ζωή", "Acids, bases and salts in everyday life"],
-          ["Περιοδικός πίνακας — μέταλλα και αμέταλλα", "Periodic table — metals and non-metals"],
+          ["Περιοδικός πίνακας: μέταλλα και αμέταλλα", "Periodic table: metals and non-metals"],
           ["Αλκάλια, μέταλλα, κράματα και άνθρακας", "Alkalis, metals, alloys and carbon"],
           ["Υδρογονάνθρακες, καύση και καύσιμα", "Hydrocarbons, combustion and fuels"],
           ["Πετρέλαιο, φυσικό αέριο και πετροχημικά", "Petroleum, natural gas and petrochemicals"],
@@ -418,7 +418,7 @@
     const zoneId = spec.zone || "middle";
     QUIZZES[zoneId][spec.id] = {
       id:spec.id, grades:[spec.grade], subjectLabelEl:spec.subjectLabelEl, subjectLabelEn:spec.subjectLabelEn,
-      titleEl:`Διαγνωστικός Χάρτης — ${spec.shortEl}`, titleEn:`Learning Compass — ${spec.shortEn}`,
+      titleEl:`Διαγνωστικός Χάρτης: ${spec.shortEl}`, titleEn:`Learning Compass: ${spec.shortEn}`,
       introEl:spec.introEl || `${questions.length} σύντομες ερωτήσεις από βασικές έννοιες της ύλης 2026–27. Δεν είναι διαγώνισμα και δεν έχει βαθμό.`,
       introEn:spec.introEn || `${questions.length} short questions on key 2026–27 topics. This is not an exam and has no grade.`,
       questions,

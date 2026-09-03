@@ -1,5 +1,5 @@
 /**
- * quiz-data.js — curriculum-aligned update v2.1 (2026-08-29)
+ * quiz-data.js: curriculum-aligned update v2.1 (2026-08-29)
  * Diagnostic data; preserves 280 gap tags while correcting three high-school quiz scopes against official 2026-27 / 2027 sources.
  */
 
@@ -3820,8 +3820,8 @@ const GAP_TAGS = {
     "id": "math-c-dim.remainder-meaning",
     "labelEl": "Έννοια του υπολοίπου",
     "labelEn": "Meaning of the remainder",
-    "explainEl": "Δεν καταλαβαίνει τι σημαίνει το υπόλοιπο σε μια διαίρεση — ότι είναι όσα «περισσεύουν» και δεν χωράνε σε ίσα μερίδια.",
-    "explainEn": "Doesn't understand what the remainder in a division means — the amount 'left over' that doesn't fit into equal groups.",
+    "explainEl": "Δεν καταλαβαίνει τι σημαίνει το υπόλοιπο σε μια διαίρεση: ότι είναι όσα «περισσεύουν» και δεν χωράνε σε ίσα μερίδια.",
+    "explainEn": "Doesn't understand what the remainder in a division means: the amount 'left over' that doesn't fit into equal groups.",
     "recommendedToolIds": [
       "photomath",
       "chatgpt",
@@ -5236,8 +5236,8 @@ const QUIZZES = {
         },
         {
           "id": "q2-sentence-boundary",
-          "textEl": "«ο σκυλος τρεχει στο παρκο» — Τι λείπει από αυτή την πρόταση;",
-          "textEn": "'the dog runs in the park' (no capital, no full stop) — What is this sentence missing?",
+          "textEl": "«ο σκυλος τρεχει στο παρκο»: Τι λείπει από αυτή την πρόταση;",
+          "textEn": "'the dog runs in the park' (no capital, no full stop): What is this sentence missing?",
           "options": [
             {
               "textEl": "Κεφαλαίο γράμμα στην αρχή και τελεία στο τέλος.",
@@ -5978,8 +5978,8 @@ const QUIZZES = {
           "textEn": "You share 17 candies among 5 friends, 3 each. What do the 2 leftover mean?",
           "options": [
             {
-              "textEl": "Είναι το υπόλοιπο — δεν χωράνε σε ίσα μερίδια.",
-              "textEn": "They're the remainder — they don't fit into equal shares.",
+              "textEl": "Είναι το υπόλοιπο: δεν χωράνε σε ίσα μερίδια.",
+              "textEn": "They're the remainder: they don't fit into equal shares.",
               "isCorrect": true
             },
             {
@@ -7507,7 +7507,7 @@ const QUIZZES = {
         {
           "id": "q2-oti",
           "textEl": "«Πάρε ό,τι θέλεις» ή «Πάρε ότι θέλεις»; Ποιο είναι σωστό;",
-          "textEn": "'Take whatever you want' — which spelling is correct?",
+          "textEn": "'Take whatever you want': which spelling is correct?",
           "options": [
             {
               "textEl": "Πάρε ό,τι θέλεις.",
@@ -7606,8 +7606,8 @@ const QUIZZES = {
           "textEn": "'Her eyes shone like stars.' What literary device is this?",
           "options": [
             {
-              "textEl": "Παρομοίωση — συγκρίνει με «σαν».",
-              "textEn": "A simile — comparing using 'like'.",
+              "textEl": "Παρομοίωση: συγκρίνει με «σαν».",
+              "textEn": "A simile: comparing using 'like'.",
               "isCorrect": true
             },
             {
@@ -7678,19 +7678,19 @@ const QUIZZES = {
           "textEn": "'Maria is the tallest in the whole class.' What degree is the adjective in?",
           "options": [
             {
-              "textEl": "Υπερθετικό — συγκρίνει με όλους.",
-              "textEn": "Superlative — compares against everyone.",
+              "textEl": "Υπερθετικό: συγκρίνει με όλους.",
+              "textEn": "Superlative: compares against everyone.",
               "isCorrect": true
             },
             {
-              "textEl": "Συγκριτικό — συγκρίνει με έναν μόνο.",
-              "textEn": "Comparative — compares against just one.",
+              "textEl": "Συγκριτικό: συγκρίνει με έναν μόνο.",
+              "textEn": "Comparative: compares against just one.",
               "isCorrect": false,
               "gapTag": "glossa-e-dim.adjective-degree"
             },
             {
-              "textEl": "Θετικό — απλή περιγραφή.",
-              "textEn": "Positive — a plain description.",
+              "textEl": "Θετικό: απλή περιγραφή.",
+              "textEn": "Positive: a plain description.",
               "isCorrect": false,
               "gapTag": "glossa-e-dim.adjective-degree"
             }
@@ -9083,7 +9083,7 @@ const QUIZZES = {
           "options": [
             {
               "textEl": "Δεν υπάρχει τεκμηριωμένη «επίσημη έναρξη»· η ευλογία στην Αγία Λαύρα είναι μεταγενέστερος θρύλος.",
-              "textEn": "There is no documented 'official start' — the Agia Lavra blessing is a later legend.",
+              "textEn": "There is no documented 'official start': the Agia Lavra blessing is a later legend.",
               "isCorrect": true
             },
             {
@@ -11759,7 +11759,7 @@ const QUIZZES = {
           "options": [
             {
               "textEl": "Νόμιμη· λειτουργούσαν χιλιάδες σχολεία επίσημα.",
-              "textEn": "Legal — thousands of schools operated officially.",
+              "textEn": "Legal: thousands of schools operated officially.",
               "isCorrect": true
             },
             {

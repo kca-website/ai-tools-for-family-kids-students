@@ -1,5 +1,5 @@
 /**
- * site-integrity-overrides.js — refinement v3.1 (2026-08-29)
+ * site-integrity-overrides.js: refinement v3.1 (2026-08-29)
  * Loaded after all static data files and before tutor.js/app.js.
  * Purpose: keep access rules explicit, add safe browser-based learning alternatives,
  * make AI Help a universal recommendation, and add Environment Studies diagnostics.
@@ -38,7 +38,7 @@
 
   // Internal AI Help: 6-12 is parent-operated; 13+ direct use follows the Tutor gate.
   setTool("ai-help", {
-    name: "AI Βοήθεια — aitools4kids.gr",
+    name: "AI Βοήθεια: aitools4kids.gr",
     url: "/middle/student/tutor",
     category: "greek-program",
     logo: null,
@@ -54,15 +54,15 @@
     url: "https://phet.colorado.edu/el/",
     category: "learning-tool",
     logo: null,
-    shortDescEl: "Δωρεάν προσομοιώσεις Φυσικής, Χημείας, Βιολογίας, Γης και Μαθηματικών. Δεν είναι chatbot AI — είναι συμπληρωματικό εργαλείο κατανόησης μέσω πειραματισμού.",
-    shortDescEn: "Free Physics, Chemistry, Biology, Earth Science and Math simulations. Not an AI chatbot — a complementary learning tool based on exploration.",
+    shortDescEl: "Δωρεάν προσομοιώσεις Φυσικής, Χημείας, Βιολογίας, Γης και Μαθηματικών. Δεν είναι chatbot AI: είναι συμπληρωματικό εργαλείο κατανόησης μέσω πειραματισμού.",
+    shortDescEn: "Free Physics, Chemistry, Biology, Earth Science and Math simulations. Not an AI chatbot: a complementary learning tool based on exploration.",
     greekTips: "Η ιστοσελίδα έχει ελληνική έκδοση και οι προσομοιώσεις τρέχουν online σε σύγχρονο browser.",
     isGreek: false,
     isAi: false,
   });
 
   setTool("google-arts-culture", {
-    name: "Google Arts & Culture — Learn",
+    name: "Google Arts & Culture: Learn",
     url: "https://artsandculture.google.com/project/education",
     category: "learning-tool",
     logo: null,
@@ -101,7 +101,7 @@
     TOOLS.gemini.minAgeNote = "Για προσωπικό λογαριασμό στην Ελλάδα: 15+ (το ισχύον εθνικό όριο διαχείρισης Google Account). Οι εποπτευόμενοι Family Link λογαριασμοί για μικρότερες ηλικίες δεν έχουν πρόσβαση στο Gemini στον ΕΟΧ. Ξεχωριστή σχολική διαδρομή υπάρχει μέσω Google Workspace for Education όταν το σχολείο την ενεργοποιεί.";
   }
 
-  // v3.1 — make the recommended learning mode explicit on mainstream tools.
+  // v3.1: make the recommended learning mode explicit on mainstream tools.
   // These are additions, never replacements for AI Help or browser-based alternatives.
   if (typeof TOOLS !== "undefined" && TOOLS.chatgpt) {
     Object.assign(TOOLS.chatgpt, {
@@ -124,8 +124,8 @@
     patchPathTool(zone, "student", "chatgpt", {
       useCaseEl: "Για καθοδηγούμενη μελέτη, εξήγηση δύσκολης έννοιας και εξάσκηση. Για σχολικές ερωτήσεις προτίμησε το Study Mode.",
       useCaseEn: "For guided study, explaining a difficult concept and practice. Prefer Study Mode for school questions.",
-      howToEl: "Άνοιξε Study Mode, γράψε την τάξη/μάθημα/θέμα και τι έχεις ήδη δοκιμάσει. Ζήτησε μία υπόδειξη ή ερώτηση τη φορά — όχι την τελική λύση.",
-      howToEn: "Open Study Mode, provide your grade/subject/topic and what you have already tried. Ask for one hint or question at a time — not the final answer.",
+      howToEl: "Άνοιξε Study Mode, γράψε την τάξη/μάθημα/θέμα και τι έχεις ήδη δοκιμάσει. Ζήτησε μία υπόδειξη ή ερώτηση τη φορά: όχι την τελική λύση.",
+      howToEn: "Open Study Mode, provide your grade/subject/topic and what you have already tried. Ask for one hint or question at a time: not the final answer.",
       cautionEl: "Ισχύουν οι όροι και οι ηλικιακοί κανόνες του ChatGPT. Μπορεί να κάνει λάθος· έλεγχε πραγματολογικά στοιχεία με βιβλίο ή αξιόπιστη πηγή.",
       cautionEn: "ChatGPT's terms and age rules apply. It can be wrong; verify factual claims against the textbook or a reliable source."
     });
@@ -180,8 +180,8 @@
         useCaseEn: "If you get stuck, ask a parent/guardian to open the aitools4kids Parent Helper with you.",
         howToEl: "Στο Δημοτικό δεν ανοίγεις μόνος/η λογαριασμό Puter. Ο γονιός χειρίζεται τη συνομιλία και εσύ κάνεις την προσπάθεια.",
         howToEn: "In Primary School you do not create/use a Puter account on your own. The parent operates the chat while you do the thinking.",
-        cautionEl: "Η AI Βοήθεια δεν δίνει έτοιμη εργασία και μπορεί να κάνει λάθος — έλεγχε με το βιβλίο.",
-        cautionEn: "AI Help does not hand over finished schoolwork and can be wrong — check against the textbook.",
+        cautionEl: "Η AI Βοήθεια δεν δίνει έτοιμη εργασία και μπορεί να κάνει λάθος: έλεγχε με το βιβλίο.",
+        cautionEn: "AI Help does not hand over finished schoolwork and can be wrong: check against the textbook.",
       },
     },
     middle: {
@@ -198,7 +198,7 @@
 
   // Direct browser-based alternatives for Primary Science/History; also useful in older zones.
   const phetGuardian = { toolId:"phet", useCaseEl:"Οπτικοποίηση εννοιών Φυσικής και άλλων Φυσικών Επιστημών μέσα από ασφαλή διαδραστικό πειραματισμό στον browser.", useCaseEn:"Visualize Physics and other science concepts through interactive browser-based experimentation.", howToEl:"Διάλεξε μια σχετική ελληνική προσομοίωση και ζήτησε από το παιδί να προβλέψει τι θα συμβεί πριν αλλάξει μια παράμετρο.", howToEn:"Choose a relevant simulation and ask the child to predict what will happen before changing a parameter.", cautionEl:"Δεν είναι AI tutor και δεν ακολουθεί μόνο του την ελληνική ύλη· σύνδεσέ το με το συγκεκριμένο κεφάλαιο του βιβλίου.", cautionEn:"It is not an AI tutor and does not automatically follow the Greek curriculum; tie it to the textbook chapter." };
-  const phetStudent = { toolId:"phet", useCaseEl:"Για να δεις μια έννοια Φυσικής/Επιστημών να «κινείται» και να πειραματιστείς αντί να τη μαθαίνεις μόνο απ' έξω.", useCaseEn:"To see a science concept in action and experiment instead of only memorizing it.", howToEl:"Πριν αλλάξεις κάτι στην προσομοίωση, μάντεψε τι θα γίνει. Μετά σύγκρινε την πρόβλεψή σου με αυτό που βλέπεις.", howToEn:"Before changing anything, predict what will happen. Then compare your prediction with what you observe.", cautionEl:"Χρησιμοποίησέ το μαζί με το σχολικό κεφάλαιο — όχι σαν ξεχωριστή ύλη.", cautionEn:"Use it alongside your textbook chapter — not as a separate syllabus." };
+  const phetStudent = { toolId:"phet", useCaseEl:"Για να δεις μια έννοια Φυσικής/Επιστημών να «κινείται» και να πειραματιστείς αντί να τη μαθαίνεις μόνο απ' έξω.", useCaseEn:"To see a science concept in action and experiment instead of only memorizing it.", howToEl:"Πριν αλλάξεις κάτι στην προσομοίωση, μάντεψε τι θα γίνει. Μετά σύγκρινε την πρόβλεψή σου με αυτό που βλέπεις.", howToEn:"Before changing anything, predict what will happen. Then compare your prediction with what you observe.", cautionEl:"Χρησιμοποίησέ το μαζί με το σχολικό κεφάλαιο: όχι σαν ξεχωριστή ύλη.", cautionEn:"Use it alongside your textbook chapter: not as a separate syllabus." };
   const gacGuardian = { toolId:"google-arts-culture", useCaseEl:"Οπτική εξερεύνηση Ιστορίας, πολιτισμού και επιστημών με ψηφιακές συλλογές, 3D αντικείμενα και virtual field trips.", useCaseEn:"Visual exploration of history, culture and science through digital collections, 3D objects and virtual field trips.", howToEl:"Βρες πρώτα το θέμα του σχολικού βιβλίου και μετά χρησιμοποίησε την πλατφόρμα για εικόνες/αντικείμενα/τόπους που το κάνουν πιο συγκεκριμένο.", howToEn:"Start from the textbook topic, then use the platform for images, objects and places that make it concrete.", cautionEl:"Δεν είναι ευθυγραμμισμένο από μόνο του με την ελληνική διδακτέα ύλη.", cautionEn:"It is not automatically aligned to the Greek syllabus." };
   const gacStudent = { toolId:"google-arts-culture", useCaseEl:"Για να δεις ιστορικά αντικείμενα, τόπους και επιστημονικά θέματα αντί να τα φαντάζεσαι μόνο από το κείμενο.", useCaseEn:"To see historical objects, places and science topics instead of only imagining them from text.", howToEl:"Ψάξε το θέμα που κάνεις στο σχολείο και διάλεξε μία εικόνα/αντικείμενο/εικονική επίσκεψη. Μετά εξήγησε τι έμαθες με δικά σου λόγια.", howToEn:"Search the topic you are studying, choose one image/object/virtual visit, then explain what you learned in your own words.", cautionEl:"Μην θεωρείς κάθε σελίδα μέρος της εξεταστέας ύλης· το σχολικό βιβλίο είναι η βάση.", cautionEn:"Do not assume every page is part of your syllabus; the textbook remains the base." };
   const gemEduGuardian = { toolId:"gemini-education", useCaseEl:"Πρόσθετη επιλογή αν το σχολείο έχει ενεργοποιήσει Gemini μέσω Google Workspace for Education.", useCaseEn:"Additional option if the school has enabled Gemini through Google Workspace for Education.", howToEl:"Χρησιμοποίησε μόνο τον σχολικό λογαριασμό και τις ρυθμίσεις που έχει επιλέξει το σχολείο. Αν δεν υπάρχει, αγνόησε αυτή την επιλογή.", howToEn:"Use only the school account and settings chosen by the school. If unavailable, ignore this option.", cautionEl:"Δεν είναι διαθέσιμο σε όλους τους μαθητές και δεν το παρουσιάζουμε ως βασική/μοναδική λύση.", cautionEn:"Not available to every student and not presented as the primary/only solution." };
@@ -308,7 +308,7 @@
     ]},
     "environment-c-dimotikou": { id:"environment-c-dimotikou", grades:["c"], subjectLabelEl:"Μελέτη Περιβάλλοντος, Γ' Δημοτικού", subjectLabelEn:"Environment Studies, 3rd Grade", titleEl:"Ο Διαγνωστικός Χάρτης Μάθησης", titleEn:"The Learning Compass", introEl:"5 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.", introEn:"5 short questions. It's not a graded test.", questions:[
       q("env-c-1","Μια ομάδα θέλει να αποφασίσει πού θα πάει εκδρομή. Ποια διαδικασία βοηθά περισσότερο;","A group wants to decide where to go on a trip. What helps most?","Να ακούσουν προτάσεις και να συμφωνήσουν σε έναν κοινό τρόπο απόφασης.","Hear proposals and agree on a shared way to decide.","Να αποφασίσει κρυφά ένα άτομο για όλους.","One person secretly decides for everyone.","Να μην υπάρχει κανένας κανόνας.","Have no rules at all.","env-c.cooperation"),
-      q("env-c-2","Ποιο ζευγάρι έχει πρώτα φυσικό χαρακτηριστικό και μετά ανθρώπινο έργο;","Which pair has a natural feature first and a human-made work second?","Ποτάμι — γέφυρα","River — bridge","Γέφυρα — ποτάμι","Bridge — river","Δρόμος — κτίριο","Road — building","env-c.place"),
+      q("env-c-2","Ποιο ζευγάρι έχει πρώτα φυσικό χαρακτηριστικό και μετά ανθρώπινο έργο;","Which pair has a natural feature first and a human-made work second?","Ποτάμι: γέφυρα","River: bridge","Γέφυρα: ποτάμι","Bridge: river","Δρόμος: κτίριο","Road: building","env-c.place"),
       q("env-c-3","Γιατί χρειαζόμαστε τροφή;","Why do we need food?","Μας δίνει υλικά και ενέργεια για να λειτουργεί και να αναπτύσσεται το σώμα.","It provides materials and energy for the body to function and grow.","Μόνο για να περνά η ώρα.","Only to pass the time.","Δεν σχετίζεται καθόλου με το σώμα.","It has nothing to do with the body.","env-c.energy"),
       q("env-c-4","Ποια πράξη βοηθά περισσότερο το περιβάλλον;","Which action helps the environment most?","Χρησιμοποιώ ξανά μια τσάντα αντί να παίρνω καινούρια κάθε φορά.","Reuse a bag instead of taking a new one each time.","Αφήνω τη βρύση να τρέχει χωρίς λόγο.","Leave the tap running for no reason.","Πετάω σκουπίδια στο πάρκο.","Drop litter in the park.","env-c.environment-care"),
       q("env-c-5","Σε έναν απλό χάρτη, τι μας βοηθούν να καταλάβουμε τα σύμβολα και το υπόμνημα;","On a simple map, what do symbols and the legend help us understand?","Τι παριστάνουν τα σημάδια του χάρτη.","What the map symbols represent.","Τι ώρα είναι.","What time it is.","Πόσο ζυγίζει ένα αντικείμενο.","How much an object weighs.","env-c.orientation"),
@@ -352,7 +352,7 @@
     if (subject === "history") return { titleEl:"Εξερεύνησε την Ιστορία και μετά ρώτα", titleEn:"Explore history, then ask", descriptionEl:`Δες ένα σχετικό αντικείμενο, τόπο ή ιστορικό θέμα στο Google Arts & Culture και σύγκρινέ το με το σχολικό βιβλίο. Αν κάτι δεν καταλαβαίνεις, ζήτησε από γονέα/εκπαιδευτικό να ανοίξει μαζί σου την AI Βοήθεια για «${labelEl}».`, descriptionEn:`Explore a related object, place or history topic in Google Arts & Culture and compare it with the textbook. If something is unclear, ask a parent/teacher to open AI Help with you for “${labelEn}”.`, toolId:"google-arts-culture" };
     if (subject === "science") return { titleEl:"Πειραματίσου και μετά εξήγησε", titleEn:"Experiment, then explain", descriptionEl:`Βρες σχετική προσομοίωση στο PhET (όπου υπάρχει), κάνε πρώτα μια πρόβλεψη και μετά δοκίμασέ την. Για το «${labelEl}», αν χρειάζεσαι καθοδήγηση, άνοιξε την AI Βοήθεια μαζί με γονέα/εκπαιδευτικό.`, descriptionEn:`Find a relevant PhET simulation where available, make a prediction first, then test it. For “${labelEn}”, use AI Help with a parent/teacher if you need guidance.`, toolId:"phet" };
     if (subject === "foreign-language") return { titleEl:"Κάνε μικρή εξάσκηση", titleEn:"Do a short practice", descriptionEl:`Κάνε 5 λεπτά εξάσκηση πάνω στο «${labelEl}» και προσπάθησε να εξηγήσεις μόνος/η ποιο λάθος διορθώνεις. Αν κολλήσεις, χρησιμοποίησε την AI Βοήθεια με γονέα/εκπαιδευτικό.`, descriptionEn:`Do five minutes of practice on “${labelEn}” and explain which mistake you are correcting. If stuck, use AI Help with a parent/teacher.`, toolId:"duolingo" };
-    return { titleEl:"Ζήτησε καθοδήγηση — όχι λύση", titleEn:"Ask for guidance — not the answer", descriptionEl:`Άνοιξε την AI Βοήθεια μαζί με γονέα/εκπαιδευτικό για «${labelEl}». Πες πρώτα τι προσπάθησες και ζήτησε μία μόνο υπόδειξη ή ερώτηση κάθε φορά.`, descriptionEn:`Open AI Help with a parent/teacher for “${labelEn}”. First say what you tried and ask for one hint or question at a time.`, toolId:"ai-help" };
+    return { titleEl:"Ζήτησε καθοδήγηση: όχι λύση", titleEn:"Ask for guidance: not the answer", descriptionEl:`Άνοιξε την AI Βοήθεια μαζί με γονέα/εκπαιδευτικό για «${labelEl}». Πες πρώτα τι προσπάθησες και ζήτησε μία μόνο υπόδειξη ή ερώτηση κάθε φορά.`, descriptionEn:`Open AI Help with a parent/teacher for “${labelEn}”. First say what you tried and ask for one hint or question at a time.`, toolId:"ai-help" };
   }
   Object.keys(primaryGapSubject).forEach((id) => {
     const g = GAP_TAGS[id];
@@ -368,8 +368,8 @@
     // Any adult-only tool that survives in another step is replaced with a proof-of-learning step.
     path.forEach((step, idx) => {
       if (!step || !adultOnlyIds.has(step.toolId)) return;
-      step.titleEl = idx === 2 ? "Δείξε ότι το κατάλαβες" : "Ζήτησε καθοδήγηση — όχι λύση";
-      step.titleEn = idx === 2 ? "Show that you understood" : "Ask for guidance — not the answer";
+      step.titleEl = idx === 2 ? "Δείξε ότι το κατάλαβες" : "Ζήτησε καθοδήγηση: όχι λύση";
+      step.titleEn = idx === 2 ? "Show that you understood" : "Ask for guidance: not the answer";
       step.descriptionEl = idx === 2
         ? `Εξήγησε το «${g.labelEl}» με δικά σου λόγια ή λύσε ένα νέο παράδειγμα χωρίς βοήθεια. Αν θέλεις έλεγχο, χρησιμοποίησε την AI Βοήθεια μαζί με γονέα/εκπαιδευτικό.`
         : `Χρησιμοποίησε την AI Βοήθεια μαζί με γονέα/εκπαιδευτικό. Πες πρώτα τη δική σου προσπάθεια και ζήτησε μία υπόδειξη τη φορά.`;
@@ -399,10 +399,10 @@
       const grade=quiz.grades[0];
       byQuiz[qid] = {
         schoolYear:"2026-2027", verificationDate:TODAY, coverageStatus:"official-book-verified",
-        coverageLabelEl:"Επίσημο σχολικό βιβλίο επιβεβαιωμένο — τα διαγνωστικά θέματα είναι ασφαλή topic anchors, όχι δήλωση πλήρους ετήσιας ύλης",
-        coverageLabelEn:"Official textbook verified — diagnostic topics are safe topic anchors, not a claim of full annual syllabus",
+        coverageLabelEl:"Επίσημο σχολικό βιβλίο επιβεβαιωμένο: τα διαγνωστικά θέματα είναι ασφαλή topic anchors, όχι δήλωση πλήρους ετήσιας ύλης",
+        coverageLabelEn:"Official textbook verified: diagnostic topics are safe topic anchors, not a claim of full annual syllabus",
         quizTitleEl:quiz.subjectLabelEl, quizTitleEn:quiz.subjectLabelEn,
-        officialBook:{ titleEl:titles[grade]+" — Βιβλίο Μαθητή", titleEn:quiz.subjectLabelEn+" — Student Book", url:sources[grade] },
+        officialBook:{ titleEl:titles[grade]+": Βιβλίο Μαθητή", titleEn:quiz.subjectLabelEn+": Student Book", url:sources[grade] },
         officialSectionsEl:[], officialSectionsEn:[], catalogUrl:"https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
         ministryUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko",
         scopeNoteEl:"Η Μελέτη Περιβάλλοντος διδάσκεται στις τέσσερις πρώτες τάξεις του Δημοτικού και συνδυάζει φυσικό, κοινωνικό και ανθρωπογενές περιβάλλον. Το layer δεν ισχυρίζεται ότι κάθε topic anchor είναι επίσημος τίτλος κεφαλαίου ή όλη η ετήσια εξεταστέα ύλη.",
@@ -411,7 +411,7 @@
         sourceDiscipline:"official-source-only; topic anchors are not official section titles unless explicitly verified"
       };
       (quiz.questions||[]).forEach((qq) => (qq.options||[]).forEach((oo) => { if (oo.gapTag) gapAlignment[oo.gapTag] = {
-        gapId:oo.gapTag, quizId:qid, status:"official-course-topic-anchor", statusLabelEl:"Θέμα συνδεδεμένο με επιβεβαιωμένο επίσημο μάθημα/βιβλίο — όχι ακριβής τίτλος ενότητας", statusLabelEn:"Topic anchored to a verified official course/textbook — not an exact section title", sourceUrl:sources[grade]
+        gapId:oo.gapTag, quizId:qid, status:"official-course-topic-anchor", statusLabelEl:"Θέμα συνδεδεμένο με επιβεβαιωμένο επίσημο μάθημα/βιβλίο: όχι ακριβής τίτλος ενότητας", statusLabelEn:"Topic anchored to a verified official course/textbook: not an exact section title", sourceUrl:sources[grade]
       }; }));
     });
     const meta = Object.assign({}, old.meta || {});
@@ -425,7 +425,7 @@
 
 
 
-  // v4 — verified access-policy sync for dynamic cards (2026-08-29).
+  // v4: verified access-policy sync for dynamic cards (2026-08-29).
   if (typeof TOOLS !== "undefined" && TOOLS.chatgpt) {
     TOOLS.chatgpt.minAge = 13;
     TOOLS.chatgpt.minAgeNote = "13+ ή το υψηλότερο ελάχιστο όριο που απαιτείται στη χώρα. Κάτω των 18 απαιτείται άδεια γονέα/νόμιμου κηδεμόνα. Σε επιλέξιμους εφηβικούς λογαριασμούς ενεργοποιείται σταδιακά το ChatGPT for Teens· για σχολική μελέτη προτίμησε Study Mode.";

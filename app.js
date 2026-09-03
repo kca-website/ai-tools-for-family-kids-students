@@ -101,7 +101,7 @@
       quizStartBtn: "Ξεκίνα το κουίζ",
       quizBrowseBtn: "Δες τα θέματα",
       quizBrowseHeading: "Θέματα σε αυτό το μάθημα",
-      quizBrowseIntro: "Διάλεξε ένα θέμα για να δεις κατευθείαν το μονοπάτι μάθησης — χωρίς τεστ.",
+      quizBrowseIntro: "Διάλεξε ένα θέμα για να δεις κατευθείαν το μονοπάτι μάθησης: χωρίς τεστ.",
       quizBrowseBack: "← Άλλο μάθημα",
       quizBrowseTakeTest: "Κάνε αντ' αυτού το τεστ (2 λεπτά)",
       quizQuestionOf: "Ερώτηση {current} από {total}",
@@ -194,7 +194,7 @@
       quizStartBtn: "Start the quiz",
       quizBrowseBtn: "See the topics",
       quizBrowseHeading: "Topics in this subject",
-      quizBrowseIntro: "Pick a topic to see the learning path directly — no quiz needed.",
+      quizBrowseIntro: "Pick a topic to see the learning path directly: no quiz needed.",
       quizBrowseBack: "← Change subject",
       quizBrowseTakeTest: "Take the quiz instead (2 min)",
       quizQuestionOf: "Question {current} of {total}",
@@ -621,7 +621,7 @@ function renderToolGrid(pathTools, targetElement) {
       greekBadge = `<span class="tool-card__greek-badge">🇬🇷 Ελληνικό</span>`;
     }
 
-    // Εφαρμογή κινητού (όχι web) — π.χ. Erla
+    // Εφαρμογή κινητού (όχι web): π.χ. Erla
     let mobileBadge = '';
     if (tool.isMobileApp) {
       mobileBadge = state.lang === "el"
@@ -629,7 +629,7 @@ function renderToolGrid(pathTools, targetElement) {
         : `<span class="tool-card__mobile-badge">📱 Mobile app only</span>`;
     }
 
-    // Υπό επανεξέταση — π.χ. προγράμματα που άλλαξαν πρόσφατα
+    // Υπό επανεξέταση: π.χ. προγράμματα που άλλαξαν πρόσφατα
     let pendingBadge = '';
     if (tool.pending) {
       pendingBadge = state.lang === "el"
@@ -637,7 +637,7 @@ function renderToolGrid(pathTools, targetElement) {
         : `<span class="tool-card__pending-badge">⏳ Under review</span>`;
     }
 
-    // Προσβασιμότητα — μόνο για επιβεβαιωμένα θετικά ή τεκμηριωμένες ανησυχίες
+    // Προσβασιμότητα: μόνο για επιβεβαιωμένα θετικά ή τεκμηριωμένες ανησυχίες
     let accessibilityBadge = '';
     const a11y = typeof ACCESSIBILITY_INFO !== "undefined" ? ACCESSIBILITY_INFO[tool.id] : null;
     if (a11y && a11y.status === "good") {
@@ -937,7 +937,7 @@ function renderToolGrid(pathTools, targetElement) {
   // quiz είναι μεγαλύτερη. Αν η δεξαμενή έχει λιγότερες, δείχνουμε όλες.
   const QUIZ_QUESTIONS_PER_ATTEMPT = 6;
 
-  // Fisher-Yates shuffle — δεν πειράζει τον αρχικό πίνακα, επιστρέφει νέο.
+  // Fisher-Yates shuffle: δεν πειράζει τον αρχικό πίνακα, επιστρέφει νέο.
   function shuffleArray(arr) {
     const copy = arr.slice();
     for (let i = copy.length - 1; i > 0; i--) {
@@ -996,7 +996,7 @@ function renderToolGrid(pathTools, targetElement) {
     return (typeof GRADES !== "undefined" && GRADES[state.currentZone]) || [];
   }
 
-  // Μέγιστη ηλικία ανά ζώνη — χρησιμοποιείται σαν ασφαλιστική δικλείδα ώστε
+  // Μέγιστη ηλικία ανά ζώνη: χρησιμοποιείται σαν ασφαλιστική δικλείδα ώστε
   // καμία πρόταση εργαλείου σε αποτέλεσμα κουίζ να μην ξεπερνά την ηλικία της ζώνης,
   // ΟΤΑΝ ο τρέχων ρόλος είναι "μαθητής" (το εργαλείο θα το χρησιμοποιήσει το ίδιο το παιδί).
   // Όταν ο ρόλος είναι "guardian" (γονιός/εκπαιδευτικός), το φίλτρο δεν ισχύει: ο ενήλικας
@@ -1133,7 +1133,7 @@ function renderToolGrid(pathTools, targetElement) {
 
   // Λίστα όλων των θεμάτων (gap tags) ενός μαθήματος, ΧΩΡΙΣ να χρειάζεται να κάνει
   // κανείς το τεστ πρώτα. Κάθε θέμα ανοίγει κατευθείαν το ίδιο Μονοπάτι Μάθησης
-  // που θα έβλεπε αν το τεστ εντόπιζε εκεί κενό — καμία νέα βάση περιεχομένου.
+  // που θα έβλεπε αν το τεστ εντόπιζε εκεί κενό: καμία νέα βάση περιεχομένου.
   function renderTopicBrowser(quiz, zoneQuizzes) {
     const subjectLabel = state.lang === "el" ? quiz.subjectLabelEl : quiz.subjectLabelEn;
     const tagIds = [];
@@ -1258,8 +1258,8 @@ function renderToolGrid(pathTools, targetElement) {
 
         // Χωρίζουμε σε: (α) εργαλεία κατάλληλα για την ίδια τη ζώνη ηλικίας (φαίνονται πάντα),
         // (β) εργαλεία που φαίνονται ΜΟΝΟ επειδή ο ρόλος είναι "guardian" (π.χ. ChatGPT σε ζώνη
-        // Δημοτικού). Ο ρόλος είναι αυτο-δηλωμένος και ανεπαλήθευτος — ένα παιδί θα μπορούσε να
-        // πατήσει το tab "Γονιός" με ένα κλικ — οπότε τα (β) ΔΕΝ εμφανίζονται αυτόματα μαζί με τα
+        // Δημοτικού). Ο ρόλος είναι αυτο-δηλωμένος και ανεπαλήθευτος: ένα παιδί θα μπορούσε να
+        // πατήσει το tab "Γονιός" με ένα κλικ: οπότε τα (β) ΔΕΝ εμφανίζονται αυτόματα μαζί με τα
         // υπόλοιπα, αλλά μέσα σε ένα κλειστό-από-προεπιλογή <details>, ώστε να χρειάζεται ένα
         // ξεχωριστό, ξεκάθαρα διατυπωμένο κλικ για να φανούν.
         const regularTools = [];
@@ -1278,8 +1278,8 @@ function renderToolGrid(pathTools, targetElement) {
 
         const regularToolsHtml = regularTools.map(renderToolBlock).join("");
         const adultSummaryText = state.lang === "el"
-          ? `Δες προτάσεις και για εσένα (${adultOnlyTools.length}) — όχι για το παιδί`
-          : `Show suggestions for you too (${adultOnlyTools.length}) — not for the child`;
+          ? `Δες προτάσεις και για εσένα (${adultOnlyTools.length}): όχι για το παιδί`
+          : `Show suggestions for you too (${adultOnlyTools.length}): not for the child`;
         const adultToolsHtml = adultOnlyTools.length
           ? `
             <details class="quiz-tool-adult-details" style="margin-top: 10px;">
@@ -1470,8 +1470,8 @@ function renderToolGrid(pathTools, targetElement) {
       : "";
 
     const adultSummaryText = state.lang === "el"
-      ? `Δες προτάσεις και για εσένα (${adultOnlyEntries.length}) — όχι για το παιδί`
-      : `Show suggestions for you too (${adultOnlyEntries.length}) — not for the child`;
+      ? `Δες προτάσεις και για εσένα (${adultOnlyEntries.length}): όχι για το παιδί`
+      : `Show suggestions for you too (${adultOnlyEntries.length}): not for the child`;
     const adultToolsHtml = adultOnlyEntries.length
       ? `
         <details class="path-tool-adult-details" style="margin-top: 10px;">
@@ -1668,7 +1668,7 @@ function renderToolGrid(pathTools, targetElement) {
     `;
   }
 
-  // ---------- Comparison Card (SVG) — Γονιός vs Παιδί ----------
+  // ---------- Comparison Card (SVG): Γονιός vs Παιδί ----------
   function renderComparisonCard(childPercent, parentPercent) {
     const isGreek = state.lang === "el";
     const childLabel = t('parentQuizChildLabel');
@@ -1943,7 +1943,7 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   // Ζωγραφίζει ό,τι χρειάζεται με βάση το ΤΡΕΧΟΝ state.
-  // Δεν αγγίζει το URL — αυτό το κάνει ξεχωριστά το pushRoute().
+  // Δεν αγγίζει το URL: αυτό το κάνει ξεχωριστά το pushRoute().
   function renderCurrentRoute() {
     if (!state.currentZone) {
       els.pathView.hidden = true;
@@ -1988,7 +1988,7 @@ function renderToolGrid(pathTools, targetElement) {
 
   // ---------- Η διαδρομή μου (τοπική πρόοδος, μόνο σε αυτή τη συσκευή) ----------
   // Αποθηκεύει ΜΟΝΟ το τελευταίο αποτέλεσμα διαγνωστικού (ζώνη, quiz, gap tags).
-  // Καμία μεταφορά σε server, κανένα cookie — απλό localStorage, σβήνεται με ένα κλικ.
+  // Καμία μεταφορά σε server, κανένα cookie: απλό localStorage, σβήνεται με ένα κλικ.
   const PROGRESS_KEY = "aitools4kids_progress_v1";
 
   function saveProgress(zoneId, quizId, gapTagIds) {
@@ -1999,7 +1999,7 @@ function renderToolGrid(pathTools, targetElement) {
         JSON.stringify({ zoneId, quizId, gapTagIds, savedAt: Date.now() })
       );
     } catch (e) {
-      // Private browsing ή απενεργοποιημένο localStorage — αγνόησε ήσυχα, δεν είναι κρίσιμο.
+      // Private browsing ή απενεργοποιημένο localStorage: αγνόησε ήσυχα, δεν είναι κρίσιμο.
     }
   }
 

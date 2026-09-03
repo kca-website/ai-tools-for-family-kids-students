@@ -179,6 +179,8 @@
 
         body.pwa-standalone #zoneSelectView .hero__quiz-cta-wrap,
         body.pwa-standalone #zoneSelectView .hero__ai-help{display:none!important;}
+        body.pwa-standalone.pwa-show-quiz-picker #zoneSelectView .hero__quiz-cta-wrap{display:block!important;}
+        body.pwa-standalone.pwa-show-quiz-picker #heroQuizCtaBtn{display:none!important;}
         body.pwa-standalone #viewTabs{display:none!important;}
         body.pwa-has-bottom-nav{padding-bottom:calc(78px + env(safe-area-inset-bottom,0px));}
         body.pwa-standalone.pwa-in-path .pwa-bottom-nav{
@@ -353,9 +355,11 @@
   function openQuickAction(action){
     if(action==="quiz"){
       const btn=document.getElementById("heroQuizCtaBtn");
-      if(btn){
-        btn.click();
-        setTimeout(()=>document.getElementById("heroQuizPicker")?.scrollIntoView({behavior:"smooth",block:"center"}),80);
+      const picker=document.getElementById("heroQuizPicker");
+      if(btn && picker){
+        if(isStandalone()) document.body.classList.add("pwa-show-quiz-picker");
+        if(picker.hidden) btn.click();
+        setTimeout(()=>picker.scrollIntoView({behavior:"smooth",block:"center"}),80);
       }
       return;
     }

@@ -1278,8 +1278,8 @@ function renderToolGrid(pathTools, targetElement) {
 
         const regularToolsHtml = regularTools.map(renderToolBlock).join("");
         const adultSummaryText = state.lang === "el"
-          ? `Δες προτάσεις και για εσένα (${adultOnlyTools.length}): όχι για το παιδί`
-          : `Show suggestions for you too (${adultOnlyTools.length}): not for the child`;
+          ? `Δες προτάσεις και για εσένα (${adultOnlyTools.length}), όχι για το παιδί`
+          : `Show suggestions for you too (${adultOnlyTools.length}), not for the child`;
         const adultToolsHtml = adultOnlyTools.length
           ? `
             <details class="quiz-tool-adult-details" style="margin-top: 10px;">
@@ -1470,8 +1470,8 @@ function renderToolGrid(pathTools, targetElement) {
       : "";
 
     const adultSummaryText = state.lang === "el"
-      ? `Δες προτάσεις και για εσένα (${adultOnlyEntries.length}): όχι για το παιδί`
-      : `Show suggestions for you too (${adultOnlyEntries.length}): not for the child`;
+      ? `Δες προτάσεις και για εσένα (${adultOnlyEntries.length}), όχι για το παιδί`
+      : `Show suggestions for you too (${adultOnlyEntries.length}), not for the child`;
     const adultToolsHtml = adultOnlyEntries.length
       ? `
         <details class="path-tool-adult-details" style="margin-top: 10px;">

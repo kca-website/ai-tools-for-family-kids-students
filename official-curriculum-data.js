@@ -1339,7 +1339,7 @@
       "Ι. Πολιτισμοί Εγγύς Ανατολής (επιλεγμένες ενότητες)",
       "ΙΙ. Αρχαίοι Έλληνες: 1.2 Μυκηναϊκός, 2.1 Ομηρική, 2.2 Αρχαϊκή, 2.3 Κλασική εποχή",
       "ΙΙΙ. Ελληνιστικοί χρόνοι (επιλεγμένες ενότητες)",
-      "IV–VII επιλεγμένες ενότητες Ρώμης/Ύστερης Αρχαιότητας"
+      "IV:VII επιλεγμένες ενότητες Ρώμης/Ύστερης Αρχαιότητας"
     ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
@@ -1397,7 +1397,7 @@
       "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL106"
     },
     "officialSectionsEl": [
-      "2026–27 γραπτή ύλη γενικής Ιστορίας Γ΄: επιλεγμένες ενότητες 19ου–20ού αιώνα",
+      "2026–27 γραπτή ύλη γενικής Ιστορίας Γ΄: επιλεγμένες ενότητες 19ου:20ού αιώνα",
       "Κεφ. Γ΄: Α΄ Παγκόσμιος Πόλεμος και άμεσες επιπτώσεις: περιλαμβάνεται ο Μικρασιατικός Πόλεμος 1919–1922"
     ],
     "officialSectionsEn": [],
@@ -1721,8 +1721,8 @@
     "topicAnchorEn": "Function max/min",
     "status": "official-course-topic-anchor",
     "sourceQuizId": "mathimatika-a-lykeiou",
-    "statusLabelEl": "Επίσημο μάθημα/βιβλίο: όχι ακριβής ενότητα 2026–27",
-    "statusLabelEn": "Official course/book: not an exact 2026–27 section mapping",
+    "statusLabelEl": "Επίσημο μάθημα/βιβλίο, όχι ακριβής ενότητα 2026–27",
+    "statusLabelEn": "Official course/book, not an exact 2026–27 section mapping",
     "noteEl": "Το v2 δεν έχει επαληθεύσει section-level ότι το συγκεκριμένο max/min/vertex skill βρίσκεται στην καταχωρισμένη ετήσια εξεταστέα ενότητα. Μην το παρουσιάζεις ως επίσημη § χωρίς νέα πηγή.",
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGL-A100/490/3186,12916/"
   },
@@ -1745,7 +1745,7 @@
     "sourceUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
   "physics-lyk.newton-third-law-bigger-force": {
-    "sectionEl": "1.3.1: Τρίτος νόμος του Νεύτωνα, Δράση–Αντίδραση",
+    "sectionEl": "1.3.1: Τρίτος νόμος του Νεύτωνα, Δράση:Αντίδραση",
     "status": "exact-section-verified",
     "sourceQuizId": "fysiki-a-lykeiou",
     "statusLabelEl": "Ακριβής αντιστοίχιση σε επίσημη εξεταστέα ενότητα 2026–27",
@@ -1805,8 +1805,8 @@
     "topicAnchorEn": "Hellenistic period: breakup of the empire and Successors",
     "status": "official-course-topic-anchor",
     "sourceQuizId": "istoria-a-lykeiou",
-    "statusLabelEl": "Επίσημο βιβλίο/θεματική: όχι ακριβής εξεταστέα §",
-    "statusLabelEn": "Official book/topic: not exact examinable section",
+    "statusLabelEl": "Επίσημο βιβλίο/θεματική, όχι ακριβής εξεταστέα §",
+    "statusLabelEn": "Official book/topic, not exact examinable section",
     "noteEl": "Η απόφαση 2026–27 περιλαμβάνει Ελληνιστικούς χρόνους αλλά εξαιρεί ορισμένες υποενότητες για τα βασίλεια. Το συγκεκριμένο gap δεν χαρακτηρίζεται exact-section-verified.",
     "sourceUrl": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-A102"
   },

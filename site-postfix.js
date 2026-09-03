@@ -298,8 +298,8 @@
     const badge=en ? "New · Accessibility" : "Νέο · Προσβασιμότητα";
     const title=en ? "🤟 Concepts in Greek Sign Language" : "🤟 Έννοιες στην Ελληνική Νοηματική";
     const text=en
-      ? "153 selected school concepts: not a complete GSL dictionary: with simple explanations, scientific visuals, and direct official videos from IEP."
-      : "153 επιλεγμένες σχολικές έννοιες: όχι πλήρες λεξικό ΕΝΓ: με απλή εξήγηση, επιστημονική εικόνα και απευθείας επίσημο βίντεο από το ΙΕΠ.";
+      ? "153 selected school concepts, not a complete GSL dictionary: with simple explanations, scientific visuals, and direct official videos from IEP."
+      : "153 επιλεγμένες σχολικές έννοιες, όχι πλήρες λεξικό ΕΝΓ: με απλή εξήγηση, επιστημονική εικόνα και απευθείας επίσημο βίντεο από το ΙΕΠ.";
     const cta=en ? "Explore the 153 concepts →" : "Δες τις 153 έννοιες →";
 
     panel.innerHTML=`

@@ -314,7 +314,7 @@
           : "Θέμα πλοήγησης: δεν έχει ακόμη επαληθευτεί ως ύλη 2026–27",
         statusLabelEn: annuallyVerified
           ? (gap.optional ? "Optional topic in the guidance" : "Topic in the official guidance")
-          : "Navigation topic: not yet verified as 2026–27 scope",
+          : "Navigation topic, not yet verified as 2026–27 scope",
         sectionEl: annuallyVerified ? gap.labelEl : "",
         sectionEn: annuallyVerified ? gap.labelEn : "",
         topicAnchorEl: gap.labelEl,
@@ -599,7 +599,7 @@
 
     refs.contextBox.innerHTML = `
       <b>${escapeHtml(tr("contextClass"))}:</b> ${escapeHtml(getSelectedGradeLabel())}<br>
-      <b>${escapeHtml(tr("contextSubject"))}:</b> ${escapeHtml(langValue(subject, "subjectLabelEl", "subjectLabelEn", "—"))}<br>
+      <b>${escapeHtml(tr("contextSubject"))}:</b> ${escapeHtml(langValue(subject, "subjectLabelEl", "subjectLabelEn", ":"))}<br>
       <b>${escapeHtml(tr("contextGoal"))}:</b> ${escapeHtml(langValue(gap, "labelEl", "labelEn", tr("generalHelp")))}<br><br>
       <b>${escapeHtml(tr("contextPath"))}:</b><br>${pathSummary}${officialHtml}
     `;
@@ -1516,7 +1516,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             <span class="tutor-auth-user" id="tutorAuthUser"></span>
             <button type="button" class="tutor-btn tutor-btn--primary tutor-auth-connect" id="tutorSignIn">${escapeHtml(tr("connect"))}</button>
             <div class="tutor-usage" id="tutorUsageWrap" hidden>
-              <div class="tutor-usage__row"><span>${escapeHtml(tr("usage"))}</span><strong id="tutorUsageText">—</strong></div>
+              <div class="tutor-usage__row"><span>${escapeHtml(tr("usage"))}</span><strong id="tutorUsageText">:</strong></div>
               <div class="tutor-usage__bar" aria-hidden="true"><span id="tutorUsageBar"></span></div>
             </div>
           </div>

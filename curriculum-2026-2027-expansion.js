@@ -112,8 +112,8 @@
         ],
       }),
       verifiedSubject({
-        id: "geografia-a-gymnasiou", grade: "a", labelEl: "Γεωλογία–Γεωγραφία, Α' Γυμνασίου", labelEn: "Geology–Geography, 7th Grade",
-        sourceLabelEl: "Οδηγίες Γεωλογίας–Γεωγραφίας Α'–Β' Γυμνασίου 2026–27",
+        id: "geografia-a-gymnasiou", grade: "a", labelEl: "Γεωλογία:Γεωγραφία, Α' Γυμνασίου", labelEn: "Geology:Geography, 7th Grade",
+        sourceLabelEl: "Οδηγίες Γεωλογίας:Γεωγραφίας Α':Β' Γυμνασίου 2026–27",
         rows: [
           ["Χάρτες: είδη, υπόμνημα και κλίμακα", "Maps: types, legend and scale"],
           ["Γεωγραφικές συντεταγμένες και προσανατολισμός", "Coordinates and orientation"],
@@ -128,7 +128,7 @@
       }),
       verifiedSubject({
         id: "technologia-a-gymnasiou", grade: "a", labelEl: "Τεχνολογία, Α' Γυμνασίου", labelEn: "Technology, 7th Grade",
-        sourceLabelEl: "Οδηγίες Τεχνολογίας Α'–Β'–Γ' Γυμνασίου 2026–27",
+        sourceLabelEl: "Οδηγίες Τεχνολογίας Α':Β':Γ' Γυμνασίου 2026–27",
         rows: [
           ["Τεχνολογικό περιβάλλον και τεχνολογικοί άξονες", "Technological environment and technology domains"],
           ["Επιλογή και μελέτη τεχνολογικού αντικειμένου", "Selecting and studying a technological object"],
@@ -192,8 +192,8 @@
         ],
       }),
       verifiedSubject({
-        id: "geografia-b-gymnasiou", grade: "b", labelEl: "Γεωλογία–Γεωγραφία, Β' Γυμνασίου", labelEn: "Geology–Geography, 8th Grade",
-        sourceLabelEl: "Οδηγίες Γεωλογίας–Γεωγραφίας Α'–Β' Γυμνασίου 2026–27",
+        id: "geografia-b-gymnasiou", grade: "b", labelEl: "Γεωλογία:Γεωγραφία, Β' Γυμνασίου", labelEn: "Geology:Geography, 8th Grade",
+        sourceLabelEl: "Οδηγίες Γεωλογίας:Γεωγραφίας Α':Β' Γυμνασίου 2026–27",
         rows: [
           ["Γεωγραφική και σχετική θέση", "Geographic and relative position"],
           ["Η θέση της Ευρώπης στον κόσμο", "Europe's position in the world"],
@@ -208,7 +208,7 @@
       }),
       verifiedSubject({
         id: "technologia-b-gymnasiou", grade: "b", labelEl: "Τεχνολογία, Β' Γυμνασίου", labelEn: "Technology, 8th Grade",
-        sourceLabelEl: "Οδηγίες Τεχνολογίας Α'–Β'–Γ' Γυμνασίου 2026–27",
+        sourceLabelEl: "Οδηγίες Τεχνολογίας Α':Β':Γ' Γυμνασίου 2026–27",
         rows: [
           ["Βιομηχανική παραγωγή και οργάνωση", "Industrial production and organisation"],
           ["Ομαδική επιλογή και μελέτη βιομηχανίας", "Team selection and study of an industry"],
@@ -275,7 +275,7 @@
       }),
       verifiedSubject({
         id: "technologia-g-gymnasiou", grade: "c", labelEl: "Τεχνολογία, Γ' Γυμνασίου", labelEn: "Technology, 9th Grade",
-        sourceLabelEl: "Οδηγίες Τεχνολογίας Α'–Β'–Γ' Γυμνασίου 2026–27",
+        sourceLabelEl: "Οδηγίες Τεχνολογίας Α':Β':Γ' Γυμνασίου 2026–27",
         rows: [
           ["Ερευνητικό ερώτημα και υπόθεση", "Research question and hypothesis"],
           ["Μεταβλητές και σχεδιασμός πειράματος", "Variables and experimental design"],
@@ -443,7 +443,7 @@
     Q("reaction","Χημική αντίδραση","Chemical reaction","Δεν αναγνωρίζει ότι σε χημική αντίδραση σχηματίζονται νέες ουσίες.","Does not recognise that new substances form in a chemical reaction.","Ποιο δείχνει ότι έγινε χημική αντίδραση;","Which indicates a chemical reaction occurred?","Σχηματίστηκαν ουσίες με νέες ιδιότητες.","Substances with new properties formed.","Άλλαξε μόνο το σχήμα ενός στερεού.","Only a solid's shape changed.","Λιώσαμε πάγο και έγινε νερό.","Ice melted into water."),
   ] });
 
-  registerDiagnostic({ id:"geografia-a-gymnasiou", grade:"a", subjectLabelEl:"Γεωλογία–Γεωγραφία, Α' Γυμνασίου", subjectLabelEn:"Geology–Geography, 7th Grade", shortEl:"Γεωγραφία Α' Γυμνασίου", shortEn:"7th Grade Geography", items:[
+  registerDiagnostic({ id:"geografia-a-gymnasiou", grade:"a", subjectLabelEl:"Γεωλογία:Γεωγραφία, Α' Γυμνασίου", subjectLabelEn:"Geology:Geography, 7th Grade", shortEl:"Γεωγραφία Α' Γυμνασίου", shortEn:"7th Grade Geography", items:[
     Q("coordinates","Γεωγραφικές συντεταγμένες","Geographic coordinates","Συγχέει γεωγραφικό πλάτος και μήκος.","Confuses latitude and longitude.","Το γεωγραφικό πλάτος μετριέται σε σχέση με...","Latitude is measured relative to...","Τον Ισημερινό.","The Equator.","Τον πρώτο μεσημβρινό.","The prime meridian.","Τον Βόρειο Πόλο μόνο.","The North Pole only."),
     Q("scale","Κλίμακα χάρτη","Map scale","Χρειάζεται να συνδέσει απόσταση χάρτη και πραγματική απόσταση.","Needs to connect map distance to real distance.","Σε κλίμακα 1:100.000, 1 cm στον χάρτη αντιστοιχεί σε...","At a 1:100,000 scale, 1 cm on the map represents...","1 km στην πραγματικότητα.","1 km in reality.","100 km στην πραγματικότητα.","100 km in reality.","100 m στην πραγματικότητα.","100 m in reality."),
     Q("plates","Τεκτονικές πλάκες","Tectonic plates","Δεν συνδέει τις κινήσεις πλακών με σεισμούς και ηφαίστεια.","Does not link plate movement with earthquakes and volcanoes.","Οι περισσότεροι σεισμοί συμβαίνουν...","Most earthquakes occur...","Κοντά στα όρια τεκτονικών πλακών.","Near tectonic plate boundaries.","Μόνο στο κέντρο των ηπείρων.","Only at the centres of continents.","Μόνο κάτω από ποτάμια.","Only beneath rivers."),
@@ -451,7 +451,7 @@
     Q("population-density","Πυκνότητα πληθυσμού","Population density","Συγχέει συνολικό πληθυσμό και πυκνότητα πληθυσμού.","Confuses total population and population density.","Η πυκνότητα πληθυσμού υπολογίζεται ως...","Population density is calculated as...","Πληθυσμός διά έκταση.","Population divided by area.","Έκταση διά πληθυσμό.","Area divided by population.","Πληθυσμός επί έκταση.","Population times area."),
   ] });
 
-  registerDiagnostic({ id:"geografia-b-gymnasiou", grade:"b", subjectLabelEl:"Γεωλογία–Γεωγραφία, Β' Γυμνασίου", subjectLabelEn:"Geology–Geography, 8th Grade", shortEl:"Γεωγραφία Β' Γυμνασίου", shortEn:"8th Grade Geography", items:[
+  registerDiagnostic({ id:"geografia-b-gymnasiou", grade:"b", subjectLabelEl:"Γεωλογία:Γεωγραφία, Β' Γυμνασίου", subjectLabelEn:"Geology:Geography, 8th Grade", shortEl:"Γεωγραφία Β' Γυμνασίου", shortEn:"8th Grade Geography", items:[
     Q("relative-position","Σχετική θέση","Relative position","Δεν διακρίνει απόλυτη από σχετική θέση.","Cannot distinguish absolute from relative position.","Ποια περιγραφή δείχνει σχετική θέση;","Which description gives a relative position?","Η Ελλάδα βρίσκεται νότια της Βουλγαρίας.","Greece is south of Bulgaria.","Η Αθήνα βρίσκεται περίπου στις 38° Β.","Athens is near 38° N.","Ένα σημείο έχει συντεταγμένες 40° Β, 22° Α.","A point has coordinates 40° N, 22° E."),
     Q("relief","Ανάγλυφο της Ευρώπης","Relief of Europe","Χρειάζεται να συνδέσει γεωλογικές διεργασίες με το ευρωπαϊκό ανάγλυφο.","Needs to connect geological processes with European relief.","Οι Άλπεις σχηματίστηκαν κυρίως από...","The Alps formed mainly through...","Σύγκλιση τεκτονικών πλακών.","Convergence of tectonic plates.","Απόθεση άμμου από ποτάμια μόνο.","Sand deposition by rivers only.","Τήξη παγετώνων μόνο.","Melting glaciers only."),
     Q("climate","Κλίμα της Ευρώπης","Climate of Europe","Δεν συνδέει γεωγραφική θέση και θαλάσσια επίδραση με το κλίμα.","Does not link location and maritime influence with climate.","Τι επηρεάζει έντονα το κλίμα της δυτικής Ευρώπης;","What strongly influences Western Europe's climate?","Ο Ατλαντικός Ωκεανός και τα θαλάσσια ρεύματα.","The Atlantic Ocean and ocean currents.","Μόνο η απόσταση από τον Ισημερινό.","Only distance from the Equator.","Η έλλειψη θαλασσών.","The absence of seas."),

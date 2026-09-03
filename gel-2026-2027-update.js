@@ -1289,8 +1289,8 @@
           "Third noun declension"
         ],
         [
-          "Επίθετα και συμφωνία ουσιαστικού–επιθέτου",
-          "Adjectives and noun–adjective agreement"
+          "Επίθετα και συμφωνία ουσιαστικού:επιθέτου",
+          "Adjectives and noun:adjective agreement"
         ],
         [
           "Αντωνυμίες",
@@ -2694,8 +2694,8 @@
           "Equilibrium constant"
         ],
         [
-          "Οξέα και βάσεις Brønsted–Lowry",
-          "Brønsted–Lowry acids and bases"
+          "Οξέα και βάσεις Brønsted:Lowry",
+          "Brønsted:Lowry acids and bases"
         ],
         [
           "Ιοντισμός οξέων και βάσεων",
@@ -4301,8 +4301,8 @@
         "labelEn": "Nomenclature",
         "explainEl": "Χρειάζεται εξάσκηση στην ονοματολογία άκυκλων οργανικών ενώσεων.",
         "explainEn": "Χρειάζεται εξάσκηση στην ονοματολογία άκυκλων οργανικών ενώσεων.",
-        "qEl": "Η ένωση CH₃–CH₂–CH₃ ονομάζεται...",
-        "qEn": "Η ένωση CH₃–CH₂–CH₃ ονομάζεται...",
+        "qEl": "Η ένωση CH₃:CH₂:CH₃ ονομάζεται...",
+        "qEn": "Η ένωση CH₃:CH₂:CH₃ ονομάζεται...",
         "correctEl": "προπάνιο.",
         "correctEn": "προπάνιο.",
         "wrong1El": "προπένιο.",

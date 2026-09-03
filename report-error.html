@@ -65,17 +65,18 @@
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" id="nextUrl" value="https://www.aitools4kids.gr/report-error.html?sent=1">
         <input type="hidden" name="_url" value="https://www.aitools4kids.gr/report-error.html">
+        <input type="hidden" id="sourcePage" name="Σελίδα προέλευσης / Source page" value="">
 
         <div class="honeypot" aria-hidden="true">
           <label for="company">Company</label>
           <input id="company" type="text" name="_honey" tabindex="-1" autocomplete="off">
         </div>
 
-        <label for="sourceUrl" data-lang="el">Σε ποια σελίδα βρήκες το λάθος;</label>
-        <label for="sourceUrl" data-lang="en">Which page contains the issue?</label>
-        <input id="sourceUrl" name="Σελίδα / Page" type="url" required placeholder="https://www.aitools4kids.gr/...">
-        <p class="source-note" data-lang="el">Αν ήρθες εδώ από το «Βρήκες λάθος…», το πεδίο συμπληρώνεται αυτόματα.</p>
-        <p class="source-note" data-lang="en">If you came from the “Report outdated information” link, this is filled automatically.</p>
+        <label for="section" data-lang="el">Σε ποιο σημείο το βρήκες;</label>
+        <label for="section" data-lang="en">Where did you find it?</label>
+        <input id="section" name="Σημείο / Section" type="text" required maxlength="120" placeholder="π.χ. ChatGPT, AI Βοήθεια, Γυμνάσιο > Μαθηματικά">
+        <p class="source-note" data-lang="el">Γράψε απλά το εργαλείο ή την ενότητα. Δεν χρειάζεται διεύθυνση σελίδας.</p>
+        <p class="source-note" data-lang="en">Just enter the tool or section. You do not need to paste a page address.</p>
 
         <label for="problem" data-lang="el">Τι πληροφορία είναι λάθος ή παλιωμένη;</label>
         <label for="problem" data-lang="en">What information is incorrect or outdated?</label>
@@ -101,17 +102,42 @@
     (function(){
       "use strict";
       const form=document.getElementById("reportForm");
-      // The destination is assembled only at runtime so it is not present as a naked email in the HTML.
       const codes=[107,107,111,117,115,116,97,115,64,103,109,97,105,108,46,99,111,109];
       const recipient=codes.map(c=>String.fromCharCode(c)).join("");
       form.action="https://formsubmit.co/"+encodeURIComponent(recipient);
 
       const params=new URLSearchParams(location.search);
-      const source=params.get("source");
-      if(source) document.getElementById("sourceUrl").value=source;
-      else if(document.referrer && document.referrer.startsWith(location.origin)){
-        document.getElementById("sourceUrl").value=document.referrer;
+      const source=params.get("source") || (document.referrer && document.referrer.startsWith(location.origin) ? document.referrer : "");
+      document.getElementById("sourcePage").value=source;
+
+      function guessSection(url){
+        if(!url) return "";
+        try{
+          const u=new URL(url,location.origin);
+          const path=u.pathname.replace(/^\/+|\/+$/g,"");
+          const toolMatch=path.match(/^tools\/([^/]+)\.html$/);
+          if(toolMatch){
+            const names={
+              "chatgpt":"ChatGPT","gemini":"Google Gemini","copilot":"Microsoft Copilot","claude":"Claude","perplexity":"Perplexity","notebooklm":"Gemini Notebook","photomath":"Photomath","symbolab":"Symbolab","desmos":"Desmos","geogebra":"GeoGebra","quizlet":"Quizlet","duolingo":"Duolingo","canva-magic":"Canva Magic Studio","ai-help":"AI Βοήθεια"
+            };
+            return names[toolMatch[1]] || toolMatch[1].replace(/-/g," ");
+          }
+          if(path==="privacy-policy.html") return "Πολιτική Απορρήτου";
+          if(path==="methodology.html") return "Μεθοδολογία";
+          if(path==="accessibility.html") return "Προσβασιμότητα";
+          const parts=path.split("/");
+          if(parts.length>=3 && ["primary","middle","high"].includes(parts[0])){
+            const zone={primary:"Δημοτικό",middle:"Γυμνάσιο",high:"Λύκειο"}[parts[0]];
+            const view={tools:"Εργαλεία",advanced:"Προχωρημένα",prompts:"Prompt Generator",quiz:"Διαγνωστικός Χάρτης",tutor:"AI Βοήθεια",guide:"Οδηγός"}[parts[2]] || parts[2];
+            return zone+" > "+view;
+          }
+          if(!path) return "Αρχική σελίδα";
+        }catch(_e){}
+        return "";
       }
+
+      const guessed=guessSection(source);
+      if(guessed) document.getElementById("section").value=guessed;
       if(params.get("sent")==="1") document.getElementById("success").classList.add("show");
 
       function setLang(lang){

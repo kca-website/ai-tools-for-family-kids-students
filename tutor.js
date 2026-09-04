@@ -111,7 +111,7 @@
       blockedAuth: "Η σύνδεση μαθητή δεν επιτρέπεται με αυτή την ηλικία",
       blockedAuthHint: "· Χρησιμοποίησε τον ρόλο γονέα για τον Βοηθό Γονέα.",
       loadFailed: "Δεν φορτώθηκε το Puter.js. Έλεγξε τη σύνδεση στο Internet και δοκίμασε ξανά.",
-      callFailed: "Η κλήση απέτυχε. Έλεγξε τη σύνδεση Puter και δοκίμασε ξανά.",
+      callFailed: "Ο βοηθός δεν μπόρεσε να απαντήσει αυτή τη στιγμή. Δοκίμασε ξανά σε λίγο.",
       noResponse: "Δεν πήρα κείμενο απάντησης από το μοντέλο.",
       sampleParentGeneric: "Το παιδί μου έχει κολλήσει σε μια άσκηση. Πώς να το καθοδηγήσω χωρίς να του δώσω τη λύση;",
       sampleStudentGeneric: "Έχω κολλήσει σε μια άσκηση. Βοήθησέ με να τη σκεφτώ χωρίς να μου δώσεις κατευθείαν τη λύση.",
@@ -207,7 +207,7 @@
       blockedAuth: "Student sign-in is not allowed at this age",
       blockedAuthHint: "· Use the parent role for Parent Helper.",
       loadFailed: "Puter.js could not load. Check your Internet connection and try again.",
-      callFailed: "The call failed. Check your Puter connection and try again.",
+      callFailed: "The helper could not answer right now. Please try again in a moment.",
       noResponse: "The model returned no text response.",
       sampleParentGeneric: "My child is stuck on an exercise. How can I guide them without giving away the solution?",
       sampleStudentGeneric: "I'm stuck on an exercise. Help me think it through without giving me the answer straight away.",
@@ -1397,7 +1397,6 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       const options = {
         model: MODEL_ID,
         provider: MODEL_PROVIDER,
-        temperature: 0.15,
         max_tokens: 700,
       };
 

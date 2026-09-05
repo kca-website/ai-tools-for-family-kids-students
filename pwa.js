@@ -26,6 +26,12 @@
   languageDiagnostics.async=false;
   document.head.appendChild(languageDiagnostics);
 
+  // Middle/High Greek Language Tutor topics only. Data-only; no DOM observers.
+  const languageTutor=document.createElement("script");
+  languageTutor.src="/september-2026-language-tutor.js";
+  languageTutor.async=false;
+  document.head.appendChild(languageTutor);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

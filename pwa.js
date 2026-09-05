@@ -38,6 +38,12 @@
   flashcards.async=false;
   document.head.appendChild(flashcards);
 
+  // Quiz + presentation extension. One AI call per new generation; use afterwards is local-only.
+  const studyTools=document.createElement("script");
+  studyTools.src="/tutor-study-tools.js";
+  studyTools.async=false;
+  document.head.appendChild(studyTools);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

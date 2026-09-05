@@ -34,6 +34,31 @@
     {id:"report-link",src:"/report-link.js"},
   ];
 
+  function ensureTutorExtensionStyles(){
+    if(!document.getElementById("aitools4kidsTutorExtensionStylesheet")){
+      const link=document.createElement("link");
+      link.id="aitools4kidsTutorExtensionStylesheet";
+      link.rel="stylesheet";
+      link.href="/tutor-extensions.css";
+      document.head.appendChild(link);
+    }
+
+    // Transitional compatibility markers: the existing extension files check
+    // these ids before injecting their legacy inline <style> blocks. The real
+    // CSS now lives in tutor-extensions.css.
+    [
+      "aitools4kidsFlashcardsStyles",
+      "aitools4kidsStudyToolsStyles",
+      "aitools4kidsTutorMobileCompactStyles",
+    ].forEach((id)=>{
+      if(document.getElementById(id)) return;
+      const marker=document.createElement("meta");
+      marker.id=id;
+      marker.dataset.stylesOwnedBy="tutor-extensions.css";
+      document.head.appendChild(marker);
+    });
+  }
+
   function loadRuntimeScripts(){
     RUNTIME_SCRIPTS.forEach(({id,src})=>{
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
@@ -45,6 +70,7 @@
     });
   }
 
+  ensureTutorExtensionStyles();
   loadRuntimeScripts();
 
   function isEnglish(){

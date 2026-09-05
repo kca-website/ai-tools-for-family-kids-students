@@ -53,6 +53,7 @@
             schoolYear:"2026-2027",
             verificationDate:DATE,
             coverageStatus:"annual-instructions-verified",
+            annualInstructionsStatus:"2026-27-verified",
             coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",
             coverageLabelEn:"Verified 2026–27 teaching guidance",
             scopeNoteEl:"Θεματικές δεξιότητες για διάλογο και εξάσκηση βάσει της επίσημης κατεύθυνσης 2026–27 — όχι τεστ αποστήθισης γραμματικών όρων.",
@@ -69,7 +70,7 @@
           subjectLabelEl:`Νεοελληνική Γλώσσα, ${grade.toUpperCase()}' ${zone === "middle" ? "Γυμνασίου" : "Λυκείου"}`,
           subjectLabelEn:`Modern Greek Language, ${zone === "middle" ? "Middle" : "High"} ${grade.toUpperCase()}`,
           topics:rows.map((row,i)=>topic(id,row,i)),
-          curriculum:{schoolYear:"2026-2027",verificationDate:DATE,coverageStatus:"annual-instructions-verified",coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",coverageLabelEn:"Verified 2026–27 teaching guidance"}
+          curriculum:{schoolYear:"2026-2027",verificationDate:DATE,coverageStatus:"annual-instructions-verified",annualInstructionsStatus:"2026-27-verified",coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",coverageLabelEn:"Verified 2026–27 teaching guidance"}
         });
       }
       zoneGrades[grade] = next;

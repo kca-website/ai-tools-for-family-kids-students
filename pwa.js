@@ -41,4 +41,23 @@
   report.src="/report-link.js";
   report.async=false;
   document.head.appendChild(report);
+
+  // Final authoritative footer date. This runs after app.js/site-postfix.js,
+  // so an older cached runtime cannot leave the previous August date visible.
+  // Intentionally no MutationObserver: only initial/load and language changes.
+  function enforceAuditDate(){
+    const el=document.querySelector(".site-footer__last-checked");
+    if(!el) return;
+    const en=!!document.getElementById("langEn")?.classList.contains("active");
+    const desired=en
+      ? "Tools last checked: September 5, 2026"
+      : "Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026";
+    if(el.textContent.trim()!==desired) el.textContent=desired;
+  }
+
+  queueMicrotask(enforceAuditDate);
+  document.addEventListener("DOMContentLoaded",enforceAuditDate,{once:true});
+  window.addEventListener("load",enforceAuditDate,{once:true});
+  document.getElementById("langEl")?.addEventListener("click",()=>setTimeout(enforceAuditDate,0));
+  document.getElementById("langEn")?.addEventListener("click",()=>setTimeout(enforceAuditDate,0));
 })();

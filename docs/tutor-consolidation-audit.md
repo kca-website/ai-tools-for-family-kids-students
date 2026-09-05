@@ -46,6 +46,13 @@ The actual Mobile Compact layout rules, selectors, breakpoints and DOM-building 
 
 The final mobile wording helper also remains separate for now so `Αλλαγή επιλογών / Change selections` keeps the same post-render timing as production.
 
+### Mobile guardrails for this sprint
+- do not change the `700px` Mobile Compact breakpoint
+- do not change the existing mobile selectors or DOM structure while lifecycle cleanup is in progress
+- do not activate `tutor-extensions.css` as the only style source until it is loaded from the canonical page stylesheet path
+- keep mobile label timing/copy unchanged until preview parity is confirmed
+- no mobile redesign is part of this refactor
+
 ## Side effects retained
 ### tutor-flashcards.js
 - injects its existing style block

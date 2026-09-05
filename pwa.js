@@ -44,6 +44,12 @@
   studyTools.async=false;
   document.head.appendChild(studyTools);
 
+  // Layout-only extension: keep the chat primary and place study tools beneath it.
+  const toolsLayout=document.createElement("script");
+  toolsLayout.src="/tutor-tools-layout.js";
+  toolsLayout.async=false;
+  document.head.appendChild(toolsLayout);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

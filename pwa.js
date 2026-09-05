@@ -32,6 +32,12 @@
   languageTutor.async=false;
   document.head.appendChild(languageTutor);
 
+  // Flashcards extension. One AI call generates a full set; review is local-only.
+  const flashcards=document.createElement("script");
+  flashcards.src="/tutor-flashcards.js";
+  flashcards.async=false;
+  document.head.appendChild(flashcards);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

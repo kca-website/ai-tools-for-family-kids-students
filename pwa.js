@@ -2,7 +2,7 @@
  *
  * This file still exists during the consolidation sprint because production
  * currently depends on the September data patches and tutor extensions below.
- * Keep the order explicit: some tutor extensions wrap window.AITutor.render.
+ * Keep the order explicit: some tutor extensions still wrap window.AITutor.render.
  * The long-term target is to move these responsibilities into canonical modules
  * and leave pwa.js responsible only for PWA behavior.
  */
@@ -17,12 +17,15 @@
     {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
-    // Tutor render extensions. ORDER IS BEHAVIORALLY SIGNIFICANT today:
-    // flashcards -> study tools -> layout -> mobile compact -> mobile label.
+    // Legacy tutor wrappers that are still being consolidated.
+    // Keep this relative order until they are migrated to the host lifecycle.
     {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
     {id:"tutor-study-tools",src:"/tutor-study-tools.js"},
-    {id:"tutor-tools-layout",src:"/tutor-tools-layout.js"},
     {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
+
+    // Single outer after-render host for migrated UI-only helpers.
+    {id:"tutor-render-host",src:"/tutor-render-host.js"},
+    {id:"tutor-tools-layout",src:"/tutor-tools-layout.js"},
     {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
     // PWA/report runtime.

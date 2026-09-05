@@ -129,7 +129,12 @@ The final mobile wording helper also remains separate for now so `Αλλαγή �
 - mobile layout/copy beyond parity-preserving lifecycle wiring
 - desktop UX except where required for parity
 
-## Preview smoke test
+## Preview verification so far
+- branch preview deployment for commit `f7b2e890271502ed66a5d45d24c66692ad516b8d` reached `READY`
+- Vercel build completed without build errors
+- no production deployment or merge has been made
+
+## Preview smoke test still required before merge
 - 3 zones × 2 roles on desktop and mobile
 - EL -> EN -> EL
 - tutor route/open/close/navigation

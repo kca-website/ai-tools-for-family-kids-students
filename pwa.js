@@ -20,6 +20,12 @@
   primaryQuiz.async=false;
   document.head.appendChild(primaryQuiz);
 
+  // Middle/High Greek Language diagnostics only. Data-only; no DOM observers.
+  const languageDiagnostics=document.createElement("script");
+  languageDiagnostics.src="/september-2026-language-diagnostics.js";
+  languageDiagnostics.async=false;
+  document.head.appendChild(languageDiagnostics);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

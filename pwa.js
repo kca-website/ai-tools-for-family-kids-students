@@ -42,36 +42,63 @@
   report.async=false;
   document.head.appendChild(report);
 
-  // Authoritative footer date. Older cached app/postfix scripts used to rewrite
-  // this value after navigation, so we re-check briefly after load/click events.
-  // This is finite and cheap: no MutationObserver, no interval, no infinite loop.
-  function enforceAuditDate(){
-    const el=document.querySelector(".site-footer__last-checked");
-    if(!el) return;
-    const en=!!document.getElementById("langEn")?.classList.contains("active");
-    const desired=en
+  function isEnglish(){
+    return !!document.getElementById("langEn")?.classList.contains("active") ||
+      (document.documentElement.lang || "").toLowerCase().startsWith("en");
+  }
+
+  function auditDateText(){
+    return isEnglish()
       ? "Tools last checked: September 5, 2026"
       : "Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026";
-    if(el.textContent.trim()!==desired) el.textContent=desired;
   }
 
-  function scheduleAuditDateChecks(){
-    enforceAuditDate();
-    setTimeout(enforceAuditDate,100);
-    setTimeout(enforceAuditDate,500);
-    setTimeout(enforceAuditDate,1500);
+  /*
+   * gel-2026-2027-update.js contains a legacy MutationObserver attached directly
+   * to [data-i18n="footerLastChecked"] which enforces the old 30 Aug 2026 date.
+   * Replacing that single DOM node detaches the legacy observer from the live
+   * document. The replacement deliberately has no data-i18n attribute, so the
+   * old guard cannot attach to it again. No observer or polling is added here.
+   */
+  function detachLegacyFooterDateGuard(){
+    const legacy=document.querySelector('[data-i18n="footerLastChecked"]');
+    if(legacy){
+      const clean=legacy.cloneNode(true);
+      clean.removeAttribute("data-i18n");
+      clean.setAttribute("data-footer-audit-date","2026-09-05");
+      clean.textContent=auditDateText();
+      legacy.replaceWith(clean);
+      return clean;
+    }
+
+    const current=document.querySelector(".site-footer__last-checked");
+    if(current){
+      current.removeAttribute("data-i18n");
+      current.setAttribute("data-footer-audit-date","2026-09-05");
+      current.textContent=auditDateText();
+    }
+    return current;
   }
 
-  queueMicrotask(scheduleAuditDateChecks);
-  document.addEventListener("DOMContentLoaded",scheduleAuditDateChecks,{once:true});
-  window.addEventListener("load",scheduleAuditDateChecks,{once:true});
-  window.addEventListener("popstate",scheduleAuditDateChecks);
+  function refreshAuditDate(){
+    const el=document.querySelector('[data-footer-audit-date="2026-09-05"], .site-footer__last-checked');
+    if(el && el.textContent.trim()!==auditDateText()) el.textContent=auditDateText();
+  }
+
+  function initAuditDate(){
+    detachLegacyFooterDateGuard();
+    refreshAuditDate();
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",initAuditDate,{once:true});
+  }else{
+    initAuditDate();
+  }
+  window.addEventListener("load",refreshAuditDate,{once:true});
 
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;
-    if(!target) return;
-    if(target.closest("#langEl, #langEn, #roleTabs .role-tab, .zone-card, #backToZones, #viewTabs .view-tab")){
-      scheduleAuditDateChecks();
-    }
+    if(target?.closest("#langEl, #langEn")) setTimeout(refreshAuditDate,0);
   });
 })();

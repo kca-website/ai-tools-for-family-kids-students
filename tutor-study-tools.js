@@ -14,6 +14,7 @@
   const QUIZ_COUNT = 6;
   const SLIDE_COUNT = 6;
   const STYLE_ID = "aitools4kidsStudyToolsStyles";
+  const RENDER_EVENT = "aitools4kids:tutor-rendered";
 
   const T = {
     el: {
@@ -402,17 +403,6 @@
     });
   }
 
-  function wrapTutorRender() {
-    if (!window.AITutor?.render || window.AITutor.__studyToolsWrapped) return;
-    const original = window.AITutor.render.bind(window.AITutor);
-    window.AITutor.render = function (context) {
-      const result = original(context);
-      installPanel();
-      return result;
-    };
-    window.AITutor.__studyToolsWrapped = true;
-  }
-
-  wrapTutorRender();
+  document.addEventListener(RENDER_EVENT, installPanel);
   installPanel();
 })();

@@ -1,0 +1,54 @@
+name: Tutor consolidation smoke
+
+on:
+  push:
+    branches:
+      - refactor/tutor-consolidation
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntax-check JavaScript
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find . -maxdepth 2 -type f -name '*.js' -print0)
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local static server
+        shell: bash
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/aitools4kids-http.log 2>&1 &
+          echo $! > /tmp/aitools4kids-http.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/aitools4kids-http.log
+          exit 1
+
+      - name: Run desktop/mobile production parity checks
+        run: node tests/tutor-consolidation-smoke.mjs
+
+      - name: Show local server log on failure
+        if: failure()
+        run: cat /tmp/aitools4kids-http.log || true

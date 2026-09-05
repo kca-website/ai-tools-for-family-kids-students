@@ -1,76 +1,56 @@
-/* AI Tools 4 Kids: PWA wrapper + lightweight data patches */
+/* AI Tools 4 Kids: compatibility/runtime loader.
+ *
+ * This file still exists during the consolidation sprint because production
+ * currently depends on the September data patches and tutor extensions below.
+ * Tutor extensions now subscribe to one render event instead of independently
+ * reassigning window.AITutor.render. The host below is the only transitional
+ * wrapper and will ultimately move into tutor.js itself.
+ */
 (function(){
   "use strict";
 
-  // Data-only audit. No DOM scanning or MutationObserver.
-  const audit=document.createElement("script");
-  audit.src="/september-2026-tool-audit.js";
-  audit.async=false;
-  document.head.appendChild(audit);
+  const RUNTIME_SCRIPTS=[
+    // Data-only compatibility patches.
+    {id:"tool-audit",src:"/september-2026-tool-audit.js"},
+    {id:"primary-tutor",src:"/september-2026-primary-tutor.js"},
+    {id:"primary-quiz",src:"/september-2026-primary-quiz.js"},
+    {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
+    {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
-  // Primary 2026-27 Tutor catalog only. Data-only; no quiz/UI mutations.
-  const primaryTutor=document.createElement("script");
-  primaryTutor.src="/september-2026-primary-tutor.js";
-  primaryTutor.async=false;
-  document.head.appendChild(primaryTutor);
+    // Register feature listeners in the same effective order as production.
+    {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
+    {id:"tutor-study-tools",src:"/tutor-study-tools.js"},
 
-  // Primary diagnostic enrichment only. Data-only; no DOM observers.
-  const primaryQuiz=document.createElement("script");
-  primaryQuiz.src="/september-2026-primary-quiz.js";
-  primaryQuiz.async=false;
-  document.head.appendChild(primaryQuiz);
+    // One transitional render hook also owns the established tool ordering.
+    {id:"tutor-render-host",src:"/tutor-render-host.js"},
 
-  // Middle/High Greek Language diagnostics only. Data-only; no DOM observers.
-  const languageDiagnostics=document.createElement("script");
-  languageDiagnostics.src="/september-2026-language-diagnostics.js";
-  languageDiagnostics.async=false;
-  document.head.appendChild(languageDiagnostics);
+    // Mobile Compact remains behaviorally unchanged and subscribes after layout.
+    {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
 
-  // Middle/High Greek Language Tutor topics only. Data-only; no DOM observers.
-  const languageTutor=document.createElement("script");
-  languageTutor.src="/september-2026-language-tutor.js";
-  languageTutor.async=false;
-  document.head.appendChild(languageTutor);
+    // Loaded last so the final mobile wording remains identical to production.
+    {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
-  // Flashcards extension. One AI call generates a full set; review is local-only.
-  const flashcards=document.createElement("script");
-  flashcards.src="/tutor-flashcards.js";
-  flashcards.async=false;
-  document.head.appendChild(flashcards);
+    // PWA/report runtime.
+    {id:"pwa-core",src:"/pwa-core.js"},
+    {id:"report-link",src:"/report-link.js"},
+  ];
 
-  // Quiz + presentation extension. One AI call per new generation; use afterwards is local-only.
-  const studyTools=document.createElement("script");
-  studyTools.src="/tutor-study-tools.js";
-  studyTools.async=false;
-  document.head.appendChild(studyTools);
+  function loadRuntimeScripts(){
+    RUNTIME_SCRIPTS.forEach(({id,src})=>{
+      if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
+      const script=document.createElement("script");
+      script.src=src;
+      script.async=false;
+      script.dataset.aitools4kidsRuntime=id;
+      document.head.appendChild(script);
+    });
+  }
 
-  // Layout-only extension: keep the chat primary and place study tools beneath it.
-  const toolsLayout=document.createElement("script");
-  toolsLayout.src="/tutor-tools-layout.js";
-  toolsLayout.async=false;
-  document.head.appendChild(toolsLayout);
-
-  // Mobile-only compact AI Help information layout. Desktop is unchanged.
-  const mobileCompact=document.createElement("script");
-  mobileCompact.src="/tutor-mobile-compact.js";
-  mobileCompact.async=false;
-  document.head.appendChild(mobileCompact);
-
-  // Mobile-only wording: this control changes grade/subject/topic selections; it does not edit content.
-  const mobileLabelFix=document.createElement("script");
-  mobileLabelFix.src="/tutor-mobile-label-fix.js";
-  mobileLabelFix.async=false;
-  document.head.appendChild(mobileLabelFix);
-
-  const core=document.createElement("script");
-  core.src="/pwa-core.js";
-  core.async=false;
-  document.head.appendChild(core);
-
-  const report=document.createElement("script");
-  report.src="/report-link.js";
-  report.async=false;
-  document.head.appendChild(report);
+  // During the mobile parity pass the extension files keep injecting the same
+  // CSS blocks as production. tutor-extensions.css is prepared in this branch,
+  // but is intentionally not authoritative yet, avoiding any async stylesheet
+  // timing/FOUC change on phones before visual parity is confirmed.
+  loadRuntimeScripts();
 
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active") ||

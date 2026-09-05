@@ -14,6 +14,7 @@
   const MAX_CACHE_ENTRIES = 12;
   const CARD_COUNT = 8;
   const STYLE_ID = "aitools4kidsFlashcardsStyles";
+  const RENDER_EVENT = "aitools4kids:tutor-rendered";
 
   const T = {
     el: {
@@ -321,17 +322,6 @@
     });
   }
 
-  function wrapTutorRender() {
-    if (!window.AITutor?.render || window.AITutor.__flashcardsWrapped) return;
-    const original = window.AITutor.render.bind(window.AITutor);
-    window.AITutor.render = function (context) {
-      const result = original(context);
-      installPanel();
-      return result;
-    };
-    window.AITutor.__flashcardsWrapped = true;
-  }
-
-  wrapTutorRender();
+  document.addEventListener(RENDER_EVENT, installPanel);
   installPanel();
 })();

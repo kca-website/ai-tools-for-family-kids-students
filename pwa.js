@@ -1,76 +1,47 @@
-/* AI Tools 4 Kids: PWA wrapper + lightweight data patches */
+/* AI Tools 4 Kids: compatibility/runtime loader.
+ *
+ * This file still exists during the consolidation sprint because production
+ * currently depends on the September data patches and tutor extensions below.
+ * Keep the order explicit: some tutor extensions wrap window.AITutor.render.
+ * The long-term target is to move these responsibilities into canonical modules
+ * and leave pwa.js responsible only for PWA behavior.
+ */
 (function(){
   "use strict";
 
-  // Data-only audit. No DOM scanning or MutationObserver.
-  const audit=document.createElement("script");
-  audit.src="/september-2026-tool-audit.js";
-  audit.async=false;
-  document.head.appendChild(audit);
+  const RUNTIME_SCRIPTS=[
+    // Data-only compatibility patches.
+    {id:"tool-audit",src:"/september-2026-tool-audit.js"},
+    {id:"primary-tutor",src:"/september-2026-primary-tutor.js"},
+    {id:"primary-quiz",src:"/september-2026-primary-quiz.js"},
+    {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
+    {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
-  // Primary 2026-27 Tutor catalog only. Data-only; no quiz/UI mutations.
-  const primaryTutor=document.createElement("script");
-  primaryTutor.src="/september-2026-primary-tutor.js";
-  primaryTutor.async=false;
-  document.head.appendChild(primaryTutor);
+    // Tutor render extensions. ORDER IS BEHAVIORALLY SIGNIFICANT today:
+    // flashcards -> study tools -> layout -> mobile compact -> mobile label.
+    {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
+    {id:"tutor-study-tools",src:"/tutor-study-tools.js"},
+    {id:"tutor-tools-layout",src:"/tutor-tools-layout.js"},
+    {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
+    {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
-  // Primary diagnostic enrichment only. Data-only; no DOM observers.
-  const primaryQuiz=document.createElement("script");
-  primaryQuiz.src="/september-2026-primary-quiz.js";
-  primaryQuiz.async=false;
-  document.head.appendChild(primaryQuiz);
+    // PWA/report runtime.
+    {id:"pwa-core",src:"/pwa-core.js"},
+    {id:"report-link",src:"/report-link.js"},
+  ];
 
-  // Middle/High Greek Language diagnostics only. Data-only; no DOM observers.
-  const languageDiagnostics=document.createElement("script");
-  languageDiagnostics.src="/september-2026-language-diagnostics.js";
-  languageDiagnostics.async=false;
-  document.head.appendChild(languageDiagnostics);
+  function loadRuntimeScripts(){
+    RUNTIME_SCRIPTS.forEach(({id,src})=>{
+      if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
+      const script=document.createElement("script");
+      script.src=src;
+      script.async=false;
+      script.dataset.aitools4kidsRuntime=id;
+      document.head.appendChild(script);
+    });
+  }
 
-  // Middle/High Greek Language Tutor topics only. Data-only; no DOM observers.
-  const languageTutor=document.createElement("script");
-  languageTutor.src="/september-2026-language-tutor.js";
-  languageTutor.async=false;
-  document.head.appendChild(languageTutor);
-
-  // Flashcards extension. One AI call generates a full set; review is local-only.
-  const flashcards=document.createElement("script");
-  flashcards.src="/tutor-flashcards.js";
-  flashcards.async=false;
-  document.head.appendChild(flashcards);
-
-  // Quiz + presentation extension. One AI call per new generation; use afterwards is local-only.
-  const studyTools=document.createElement("script");
-  studyTools.src="/tutor-study-tools.js";
-  studyTools.async=false;
-  document.head.appendChild(studyTools);
-
-  // Layout-only extension: keep the chat primary and place study tools beneath it.
-  const toolsLayout=document.createElement("script");
-  toolsLayout.src="/tutor-tools-layout.js";
-  toolsLayout.async=false;
-  document.head.appendChild(toolsLayout);
-
-  // Mobile-only compact AI Help information layout. Desktop is unchanged.
-  const mobileCompact=document.createElement("script");
-  mobileCompact.src="/tutor-mobile-compact.js";
-  mobileCompact.async=false;
-  document.head.appendChild(mobileCompact);
-
-  // Mobile-only wording: this control changes grade/subject/topic selections; it does not edit content.
-  const mobileLabelFix=document.createElement("script");
-  mobileLabelFix.src="/tutor-mobile-label-fix.js";
-  mobileLabelFix.async=false;
-  document.head.appendChild(mobileLabelFix);
-
-  const core=document.createElement("script");
-  core.src="/pwa-core.js";
-  core.async=false;
-  document.head.appendChild(core);
-
-  const report=document.createElement("script");
-  report.src="/report-link.js";
-  report.async=false;
-  document.head.appendChild(report);
+  loadRuntimeScripts();
 
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active") ||

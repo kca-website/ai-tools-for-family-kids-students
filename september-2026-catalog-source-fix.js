@@ -27,6 +27,32 @@
     });
   });
 
+  // The app's real sixth-grade id is "st", while the September content layer used
+  // the temporary key "f". Normalize it here so ΣΤ' Δημοτικού gets the new topics.
+  if (zones.primary?.f) {
+    const quizByType = {
+      glossa: "glossa-st-dimotikou",
+      math: "math-st-dimotikou",
+      science: "science-st-dimotikou",
+      history: "istoria-st-dimotikou"
+    };
+    zones.primary.st = zones.primary.f.map((subject) => {
+      const type = subject.id.startsWith("glossa-") ? "glossa"
+        : subject.id.startsWith("math-") ? "math"
+        : subject.id.startsWith("science-") ? "science"
+        : subject.id.startsWith("history-") ? "history"
+        : null;
+      return Object.assign({}, subject, {
+        id: subject.id.replace("-f-", "-st-"),
+        quizId: type ? quizByType[type] : subject.quizId,
+        grade: "st",
+        subjectLabelEl: (subject.subjectLabelEl || "").replace("F' Δημοτικού", "ΣΤ' Δημοτικού"),
+        subjectLabelEn: (subject.subjectLabelEn || "").replace("Primary F", "Primary 6th Grade")
+      });
+    });
+    delete zones.primary.f;
+  }
+
   window.AITOOLSKIDS_TUTOR_CATALOG = Object.freeze({
     meta: Object.freeze(Object.assign({}, current.meta || {}, {
       lastVerified: "2026-09-05",

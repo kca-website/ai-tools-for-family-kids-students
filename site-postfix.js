@@ -54,8 +54,8 @@
     const el=document.querySelector(".site-footer__last-checked");
     if(!el) return;
     const desired=isEnglish()
-      ? "Tools last checked: 30 August 2026"
-      : "Τελευταίος έλεγχος εργαλείων: 30 Αυγούστου 2026";
+      ? "Tools last checked: 5 September 2026"
+      : "Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026";
     if(el.textContent.trim() !== desired) el.textContent=desired;
   }
 

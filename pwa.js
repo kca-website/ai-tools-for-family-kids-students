@@ -2,9 +2,9 @@
  *
  * This file still exists during the consolidation sprint because production
  * currently depends on the September data patches and tutor extensions below.
- * Keep the order explicit: some tutor extensions still wrap window.AITutor.render.
- * The long-term target is to move these responsibilities into canonical modules
- * and leave pwa.js responsible only for PWA behavior.
+ * Tutor extensions now subscribe to one render event instead of independently
+ * reassigning window.AITutor.render. The host below is the only transitional
+ * wrapper and will ultimately move into tutor.js itself.
  */
 (function(){
   "use strict";
@@ -17,15 +17,16 @@
     {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
-    // Legacy tutor wrappers that are still being consolidated.
-    // Keep this relative order until they are migrated to the host lifecycle.
+    // Register tutor feature listeners in the intended after-render order.
     {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
     {id:"tutor-study-tools",src:"/tutor-study-tools.js"},
+    {id:"tutor-tools-layout",src:"/tutor-tools-layout.js"},
     {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
 
-    // Single outer after-render host for migrated UI-only helpers.
+    // One transitional render hook emits the shared lifecycle event.
     {id:"tutor-render-host",src:"/tutor-render-host.js"},
-    {id:"tutor-tools-layout",src:"/tutor-tools-layout.js"},
+
+    // Loaded after the host; applies immediately once and subscribes for future renders.
     {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
     // PWA/report runtime.

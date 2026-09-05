@@ -9,6 +9,7 @@
 
   const STYLE_ID = "aitools4kidsTutorMobileCompactStyles";
   const MQ = "(max-width: 700px)";
+  const RENDER_EVENT = "aitools4kids:tutor-rendered";
 
   const LABELS = {
     el: {
@@ -518,17 +519,6 @@
     });
   }
 
-  function wrapTutorRender() {
-    if (!window.AITutor?.render || window.AITutor.__mobileCompactWrapped) return;
-    const original = window.AITutor.render.bind(window.AITutor);
-    window.AITutor.render = function (context) {
-      const result = original(context);
-      installMobileCompact();
-      return result;
-    };
-    window.AITutor.__mobileCompactWrapped = true;
-  }
-
   function scheduleSync() {
     setTimeout(() => {
       syncRouteClass();
@@ -546,6 +536,6 @@
     window.matchMedia?.(MQ).addEventListener?.("change", scheduleSync);
   }
 
-  wrapTutorRender();
+  document.addEventListener(RENDER_EVENT, installMobileCompact);
   installMobileCompact();
 })();

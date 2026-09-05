@@ -17,16 +17,17 @@
     {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
-    // Register tutor feature listeners in the intended after-render order.
+    // Register feature listeners in the same effective order as production.
     {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
     {id:"tutor-study-tools",src:"/tutor-study-tools.js"},
-    {id:"tutor-tools-layout",src:"/tutor-tools-layout.js"},
-    {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
 
-    // One transitional render hook emits the shared lifecycle event.
+    // One transitional render hook also owns the established tool ordering.
     {id:"tutor-render-host",src:"/tutor-render-host.js"},
 
-    // Loaded after the host; applies immediately once and subscribes for future renders.
+    // Mobile Compact remains behaviorally unchanged and subscribes after layout.
+    {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
+
+    // Loaded last so the final mobile wording remains identical to production.
     {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
     // PWA/report runtime.

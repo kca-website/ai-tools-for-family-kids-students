@@ -39,7 +39,6 @@
       correct: "✓ Σωστό",
       wrong: "✗ Όχι ακριβώς",
       explanation: "Γιατί",
-      choose: "Διάλεξε μία απάντηση.",
       finished: "Ολοκλήρωσες το quiz.",
       slide: "Διαφάνεια",
       yourPart: "Δική σου προσθήκη",
@@ -72,7 +71,6 @@
       correct: "✓ Correct",
       wrong: "✗ Not quite",
       explanation: "Why",
-      choose: "Choose one answer.",
       finished: "You completed the quiz.",
       slide: "Slide",
       yourPart: "Your contribution",
@@ -237,6 +235,7 @@
     clearResult(panel);
     const result = document.createElement("div");
     result.className = "tutor-study-tools__result";
+    result.dataset.type = "quiz";
     panel.appendChild(result);
     const state = { questions, index: 0, answers: {} };
 
@@ -283,7 +282,7 @@
       if (Object.keys(state.answers).length === questions.length) setStatus(panel, `${tr("finished")} ${tr("score")}: ${score}/${questions.length}`, false);
     }
     draw();
-    if (cached) setStatus(panel, tr("cached"), false); else setStatus(panel, tr("saved"), false);
+    setStatus(panel, cached ? tr("cached") : tr("saved"), false);
     updateButtons(panel);
   }
 
@@ -293,7 +292,10 @@
 
   function renderSlides(panel, slides, cached) {
     clearResult(panel);
-    const result = document.createElement("div"); result.className = "tutor-study-tools__result"; panel.appendChild(result);
+    const result = document.createElement("div");
+    result.className = "tutor-study-tools__result";
+    result.dataset.type = "slides";
+    panel.appendChild(result);
     const state = { index: 0 };
     function draw() {
       result.replaceChildren();
@@ -318,7 +320,7 @@
       result.append(meta, box, nav, copy);
     }
     draw();
-    if (cached) setStatus(panel, tr("cached"), false); else setStatus(panel, tr("saved"), false);
+    setStatus(panel, cached ? tr("cached") : tr("saved"), false);
     updateButtons(panel);
   }
 
@@ -355,10 +357,9 @@
 
   function openOrGenerate(panel, type) {
     const cached = getCached(type, currentContext());
-    const currentType = panel.querySelector(".tutor-study-tools__result")?.dataset?.type;
-    if (cached && !currentType) {
+    const currentType = panel.querySelector(".tutor-study-tools__result")?.dataset?.type || "";
+    if (cached && currentType !== type) {
       if (type === "quiz") renderQuiz(panel, cached.data, true); else renderSlides(panel, cached.data, true);
-      const result = panel.querySelector(".tutor-study-tools__result"); if (result) result.dataset.type = type;
       return;
     }
     generate(panel, type);

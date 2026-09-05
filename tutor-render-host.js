@@ -2,12 +2,12 @@
  * tutor-render-host.js
  * Transitional single after-render signal for tutor extensions.
  *
- * During consolidation, the larger Flashcards / Study Tools / Mobile Compact
- * files still wrap AITutor.render themselves. This host is loaded after those
- * legacy wrappers and becomes the single outer lifecycle hook. Smaller UI-only
- * extensions subscribe to the event below instead of wrapping render again.
+ * Flashcards, Study Tools, layout, mobile compact UI and the mobile label fix
+ * now subscribe to one shared `aitools4kids:tutor-rendered` event instead of
+ * independently reassigning AITutor.render.
  *
- * Long-term target: move this lifecycle into tutor.js and remove all wrappers.
+ * This host is the only remaining render wrapper during the consolidation pass.
+ * Long-term target: emit the lifecycle from tutor.js itself and delete this file.
  */
 (function () {
   "use strict";

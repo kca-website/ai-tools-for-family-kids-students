@@ -22,10 +22,13 @@
       intro: "Δημιούργησε υλικό πάνω στην τάξη, το μάθημα και το θέμα που έχεις ήδη επιλέξει.",
       usage: "ℹ️ Κάθε νέα δημιουργία χρησιμοποιεί ένα μικρό μέρος από τη δωρεάν μηνιαία χρήση AI του Puter. Μετά τη δημιουργία, η χρήση του quiz ή της παρουσίασης δεν καταναλώνει επιπλέον AI.",
       quiz: "📝 Φτιάξε quiz εξάσκησης",
+      quizExam: "📝 Φτιάξε quiz επιπέδου εξετάσεων",
       slides: "🎞️ Φτιάξε παρουσίαση 6 διαφανειών",
       quizSaved: "Άνοιξε αποθηκευμένο quiz · χωρίς νέα χρήση AI",
+      quizExamSaved: "Άνοιξε αποθηκευμένο quiz εξετάσεων · χωρίς νέα χρήση AI",
       slidesSaved: "Άνοιξε αποθηκευμένη παρουσίαση · χωρίς νέα χρήση AI",
       quizNew: "Νέο quiz",
+      quizExamNew: "Νέο quiz εξετάσεων",
       slidesNew: "Νέα παρουσίαση",
       needConnect: "Συνδέσου πρώτα με Puter από το πλαίσιο επάνω.",
       unavailable: "Η λειτουργία δεν είναι διαθέσιμη με την τωρινή ηλικιακή ρύθμιση.",
@@ -54,10 +57,13 @@
       intro: "Create material for the grade, subject and topic you have already selected.",
       usage: "ℹ️ Each new generation uses a small part of your free monthly Puter AI allowance. After generation, using the quiz or presentation does not consume more AI.",
       quiz: "📝 Create a practice quiz",
+      quizExam: "📝 Create an exam-level quiz",
       slides: "🎞️ Create a 6-slide presentation",
       quizSaved: "Open saved quiz · no new AI usage",
+      quizExamSaved: "Open saved exam-level quiz · no new AI usage",
       slidesSaved: "Open saved presentation · no new AI usage",
       quizNew: "New quiz",
+      quizExamNew: "New exam-level quiz",
       slidesNew: "New presentation",
       needConnect: "Connect to Puter first using the box above.",
       unavailable: "This feature is not available with the current age setting.",
@@ -142,7 +148,14 @@
     };
   }
 
-  function contextKey(type, c) { return [type, c.lang, c.path, c.gradeId, c.subjectId, c.topicId].join("|"); }
+  function isHighSchool(c) {
+    return /(^|\/)high(\/|$)/.test(String(c?.path || ""));
+  }
+
+  function contextKey(type, c) {
+    const cacheType = type === "quiz" && isHighSchool(c) ? "quiz-exam-v2" : type;
+    return [cacheType, c.lang, c.path, c.gradeId, c.subjectId, c.topicId].join("|");
+  }
   function readStore() {
     try {
       const data = JSON.parse(localStorage.getItem(STORE_KEY) || "null");
@@ -209,8 +222,20 @@
     return `Grade: ${c.grade || "school grade"}\nSubject: ${c.subject || "school subject"}\nTopic/focus: ${c.topic || "selected topic"}\nSite curriculum context:\n${c.contextText || "No additional context."}`;
   }
 
+  function highSchoolExamLevel(c) {
+    if (c.gradeId === "a") return "A' Lyceum / 10th grade: demanding written school-exam level. Require real application and reasoning, not Panhellenic-specific framing.";
+    if (c.gradeId === "b") return "B' Lyceum / 11th grade: advanced written school-exam and exam-preparation level. Questions should require synthesis, interpretation and multi-step reasoning where the subject allows it.";
+    if (c.gradeId === "c") return "C' Lyceum / 12th grade: final-exam level. If the selected subject is nationally examined, use reasoning depth comparable to serious Panhellenic-exam preparation; otherwise use a demanding final school-exam level. Do not imitate or claim to reproduce the official exam-paper format.";
+    return "Greek Lyceum: demanding written-exam level appropriate to the selected grade.";
+  }
+
+  function highSchoolQuizPrompt(c, language) {
+    return `Create exactly ${QUIZ_COUNT} EXAM-LEVEL multiple-choice practice questions for a Greek Lyceum learner. This is a demanding revision quiz, not a basic recall quiz and not a reproduction of an official exam paper.\n\nCONTEXT\n${baseContextPrompt(c)}\n\nDIFFICULTY TARGET\n${highSchoolExamLevel(c)}\n\nRULES\n- Write in ${language}.\n- Stay strictly within the selected grade, subject, topic and the site curriculum context above. Do not invent out-of-scope curriculum content, quotations, sources or statistics.\n- At least 4 of the ${QUIZ_COUNT} questions must require application, inference, comparison, synthesis, interpretation or multi-step reasoning. No more than 1 question may be pure definition/recall.\n- At least 2 questions must be built around a short problem, data set, source, scenario, claim, graph description, experimental situation or worked context appropriate to the selected subject.\n- For Mathematics, Physics, Chemistry, Economics or Informatics, prefer calculations, data/graph interpretation, method choice and multi-step problem solving where appropriate.\n- For Language, Literature, History and other humanities/social subjects, prefer short source/claim/evidence interpretation, comparison, argument evaluation, cause/effect and inference.\n- Make distractors genuinely plausible and based on common misconceptions, partial reasoning, sign/method errors or tempting but incomplete interpretations. Avoid obviously silly answers.\n- Do not use trick wording, obscure trivia, 'all of the above'/'none of the above', or giveaway answer-length patterns.\n- Each question has exactly 4 options of reasonably comparable plausibility and length.\n- correct is the zero-based index 0,1,2,3 of the correct option.\n- explanation must be 1-3 concise sentences that show the reasoning or decisive evidence, not merely restate the correct option.\n- Do not mention AI, Puter, prompts or internal ids.\n- Return STRICT JSON only, no markdown.\n\nRequired shape:\n{"questions":[{"q":"question","options":["A","B","C","D"],"correct":0,"explanation":"reasoned explanation"}]}\n\nReturn exactly ${QUIZ_COUNT} questions.`;
+  }
+
   function quizPrompt(c) {
     const language = c.lang === "en" ? "English" : "Greek";
+    if (isHighSchool(c)) return highSchoolQuizPrompt(c, language);
     return `Create exactly ${QUIZ_COUNT} multiple-choice practice questions for a school learner.\n\nCONTEXT\n${baseContextPrompt(c)}\n\nRULES\n- Write in ${language}.\n- Match the selected grade.\n- Focus on understanding, cause/effect, concepts, evidence and useful application; avoid trivial grammar or obscure trivia unless central to the topic.\n- Each question has exactly 4 plausible options.\n- correct is the zero-based index 0,1,2,3 of the correct option.\n- explanation is a short explanation of why the answer is correct.\n- Do not mention AI, Puter, prompts or internal ids.\n- Return STRICT JSON only, no markdown.\n\nRequired shape:\n{"questions":[{"q":"question","options":["A","B","C","D"],"correct":0,"explanation":"short explanation"}]}\n\nReturn exactly ${QUIZ_COUNT} questions.`;
   }
 
@@ -340,7 +365,13 @@
     setStatus(panel, type === "quiz" ? tr("generatingQuiz") : tr("generatingSlides"), false);
     try {
       const prompt = type === "quiz" ? quizPrompt(c) : slidesPrompt(c);
-      const response = await window.puter.ai.chat(prompt, { model: MODEL, normalize: true, max_tokens: type === "quiz" ? 1500 : 1400, temperature: 0.25 });
+      const examQuiz = type === "quiz" && isHighSchool(c);
+      const response = await window.puter.ai.chat(prompt, {
+        model: MODEL,
+        normalize: true,
+        max_tokens: type === "quiz" ? (examQuiz ? 2200 : 1500) : 1400,
+        temperature: examQuiz ? 0.18 : 0.25,
+      });
       if (type === "quiz") {
         const questions = parseQuiz(extractText(response)); saveCached(type, c, questions); renderQuiz(panel, questions, false);
       } else {
@@ -371,7 +402,13 @@
     const resultType = panel.querySelector(".tutor-study-tools__result")?.dataset?.type || "";
     const q = panel.querySelector('[data-study-tool="quiz"]');
     const s = panel.querySelector('[data-study-tool="slides"]');
-    if (q) q.textContent = resultType === "quiz" ? tr("quizNew") : getCached("quiz", c) ? tr("quizSaved") : tr("quiz");
+    const examQuiz = isHighSchool(c);
+    if (q) {
+      const newLabel = examQuiz ? tr("quizExamNew") : tr("quizNew");
+      const savedLabel = examQuiz ? tr("quizExamSaved") : tr("quizSaved");
+      const createLabel = examQuiz ? tr("quizExam") : tr("quiz");
+      q.textContent = resultType === "quiz" ? newLabel : getCached("quiz", c) ? savedLabel : createLabel;
+    }
     if (s) s.textContent = resultType === "slides" ? tr("slidesNew") : getCached("slides", c) ? tr("slidesSaved") : tr("slides");
   }
 

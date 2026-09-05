@@ -2,9 +2,13 @@
  * Mobile copy refinement for AI Help lesson selectors.
  * Makes it clear that the control changes the selected grade/subject/topic;
  * it does not edit content. Desktop is untouched.
+ *
+ * Consolidation note: this file no longer reassigns window.AITutor.render.
  */
 (function () {
   "use strict";
+
+  const RENDER_EVENT = "aitools4kids:tutor-rendered";
 
   function isEnglish() {
     return !!document.getElementById("langEn")?.classList.contains("active") ||
@@ -27,16 +31,7 @@
     setTimeout(applyLabel, 0);
   }
 
-  function wrapTutorRender() {
-    if (!window.AITutor?.render || window.AITutor.__mobileLabelFixWrapped) return;
-    const original = window.AITutor.render.bind(window.AITutor);
-    window.AITutor.render = function (context) {
-      const result = original(context);
-      schedule();
-      return result;
-    };
-    window.AITutor.__mobileLabelFixWrapped = true;
-  }
+  document.addEventListener(RENDER_EVENT, schedule);
 
   document.addEventListener("click", (event) => {
     const target = event.target instanceof Element ? event.target : null;
@@ -48,6 +43,5 @@
     if (target?.matches("#tutorGrade, #tutorSubject, #tutorTopic, #tutorAge, #tutorConsent")) schedule();
   });
 
-  wrapTutorRender();
   applyLabel();
 })();

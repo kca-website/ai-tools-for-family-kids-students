@@ -14,6 +14,12 @@
   primaryTutor.async=false;
   document.head.appendChild(primaryTutor);
 
+  // Primary diagnostic enrichment only. Data-only; no DOM observers.
+  const primaryQuiz=document.createElement("script");
+  primaryQuiz.src="/september-2026-primary-quiz.js";
+  primaryQuiz.async=false;
+  document.head.appendChild(primaryQuiz);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

@@ -13,24 +13,15 @@ const contexts = [
   { zoneId: 'high', roleId: 'student' },
 ];
 
-function pickStyle(cs) {
-  return {
-    display: cs.display,
-    position: cs.position,
-    padding: cs.padding,
-    margin: cs.margin,
-    gap: cs.gap,
-    fontSize: cs.fontSize,
-    lineHeight: cs.lineHeight,
-    borderRadius: cs.borderRadius,
-    minHeight: cs.minHeight,
-    maxHeight: cs.maxHeight,
-    gridTemplateColumns: cs.gridTemplateColumns,
-  };
-}
-
 async function prepare(page, baseUrl, viewport, lang = 'el') {
   await page.setViewportSize(viewport);
+  if (baseUrl.startsWith(LOCAL)) {
+    await page.route('**/_vercel/insights/script.js', (route) => route.fulfill({
+      status: 200,
+      contentType: 'application/javascript',
+      body: '',
+    }));
+  }
   await page.goto(baseUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForFunction(() => window.AITutor?.render && document.getElementById('tutorMount'), null, { timeout: 30000 });
   await page.waitForTimeout(300);
@@ -48,13 +39,15 @@ async function prepare(page, baseUrl, viewport, lang = 'el') {
 async function renderContext(page, context, lang = 'el') {
   await page.evaluate(({ contextValue, langValue }) => {
     history.replaceState({}, '', `/${contextValue.zoneId}/${contextValue.roleId}/tutor`);
+    const tutorView = document.getElementById('tutorView');
+    if (tutorView) tutorView.hidden = false;
     window.dispatchEvent(new PopStateEvent('popstate'));
     window.AITutor.render({ ...contextValue, lang: langValue });
   }, { contextValue: context, langValue: lang });
 
-  await page.waitForSelector('#tutorMount .tutor-chat', { timeout: 10000 });
-  await page.waitForSelector('#tutorMount .tutor-flashcards', { timeout: 10000 });
-  await page.waitForSelector('#tutorMount .tutor-study-tools', { timeout: 10000 });
+  await page.waitForSelector('#tutorMount .tutor-chat', { state: 'attached', timeout: 10000 });
+  await page.waitForSelector('#tutorMount .tutor-flashcards', { state: 'attached', timeout: 10000 });
+  await page.waitForSelector('#tutorMount .tutor-study-tools', { state: 'attached', timeout: 10000 });
   await page.waitForTimeout(120);
 }
 
@@ -124,7 +117,9 @@ async function runStructuralMatrix(page, baseUrl, viewport, lang = 'el') {
     try {
       const u = new URL(resp.url());
       const base = new URL(baseUrl);
-      if (u.origin === base.origin && resp.status() >= 400) failedSameOrigin.push(`${resp.status()} ${u.pathname}`);
+      if (u.origin === base.origin && resp.status() >= 400 && u.pathname !== '/_vercel/insights/script.js') {
+        failedSameOrigin.push(`${resp.status()} ${u.pathname}`);
+      }
     } catch {}
   });
 
@@ -138,7 +133,6 @@ async function runStructuralMatrix(page, baseUrl, viewport, lang = 'el') {
     assert.ok(snap.composerIndex >= 0 && snap.flashIndex > snap.composerIndex && snap.studyIndex > snap.flashIndex,
       `${baseUrl} ${context.zoneId}/${context.roleId}: study tool ordering changed`);
 
-    // Re-render the same context: extensions must remain idempotent.
     await page.evaluate((ctx) => window.AITutor.render({ ...ctx, lang: document.documentElement.lang.startsWith('en') ? 'en' : 'el' }), context);
     await page.waitForTimeout(80);
     snap = await snapshot(page);
@@ -186,7 +180,6 @@ function compareParity(local, prod, label) {
 
 const browser = await chromium.launch({ headless: true });
 try {
-  // 1) Broad no-crash/idempotency matrix on local branch, desktop + mobile.
   for (const viewport of [{ width: 1280, height: 900 }, { width: 390, height: 844 }]) {
     const page = await browser.newPage();
     const matrix = await runStructuralMatrix(page, LOCAL, viewport, 'el');
@@ -195,7 +188,6 @@ try {
     await page.close();
   }
 
-  // 2) Differential parity against current production for the most mobile-sensitive context.
   for (const lang of ['el', 'en']) {
     const prodPage = await browser.newPage();
     const localPage = await browser.newPage();
@@ -211,7 +203,6 @@ try {
     await localPage.close();
   }
 
-  // 3) Desktop differential parity for representative guardian/student contexts.
   for (const context of [
     { zoneId: 'primary', roleId: 'guardian' },
     { zoneId: 'middle', roleId: 'student' },

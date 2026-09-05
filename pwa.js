@@ -2,7 +2,7 @@
 (function(){
   "use strict";
 
-  // Data-only audit. No DOM scanning, timers or MutationObserver.
+  // Data-only audit. No DOM scanning or MutationObserver.
   const audit=document.createElement("script");
   audit.src="/september-2026-tool-audit.js";
   audit.async=false;
@@ -42,9 +42,9 @@
   report.async=false;
   document.head.appendChild(report);
 
-  // Final authoritative footer date. This runs after app.js/site-postfix.js,
-  // so an older cached runtime cannot leave the previous August date visible.
-  // Intentionally no MutationObserver: only initial/load and language changes.
+  // Authoritative footer date. Older cached app/postfix scripts used to rewrite
+  // this value after navigation, so we re-check briefly after load/click events.
+  // This is finite and cheap: no MutationObserver, no interval, no infinite loop.
   function enforceAuditDate(){
     const el=document.querySelector(".site-footer__last-checked");
     if(!el) return;
@@ -55,9 +55,23 @@
     if(el.textContent.trim()!==desired) el.textContent=desired;
   }
 
-  queueMicrotask(enforceAuditDate);
-  document.addEventListener("DOMContentLoaded",enforceAuditDate,{once:true});
-  window.addEventListener("load",enforceAuditDate,{once:true});
-  document.getElementById("langEl")?.addEventListener("click",()=>setTimeout(enforceAuditDate,0));
-  document.getElementById("langEn")?.addEventListener("click",()=>setTimeout(enforceAuditDate,0));
+  function scheduleAuditDateChecks(){
+    enforceAuditDate();
+    setTimeout(enforceAuditDate,100);
+    setTimeout(enforceAuditDate,500);
+    setTimeout(enforceAuditDate,1500);
+  }
+
+  queueMicrotask(scheduleAuditDateChecks);
+  document.addEventListener("DOMContentLoaded",scheduleAuditDateChecks,{once:true});
+  window.addEventListener("load",scheduleAuditDateChecks,{once:true});
+  window.addEventListener("popstate",scheduleAuditDateChecks);
+
+  document.addEventListener("click",(event)=>{
+    const target=event.target instanceof Element ? event.target : null;
+    if(!target) return;
+    if(target.closest("#langEl, #langEn, #roleTabs .role-tab, .zone-card, #backToZones, #viewTabs .view-tab")){
+      scheduleAuditDateChecks();
+    }
+  });
 })();

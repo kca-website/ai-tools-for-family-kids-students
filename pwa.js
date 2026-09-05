@@ -50,6 +50,12 @@
   toolsLayout.async=false;
   document.head.appendChild(toolsLayout);
 
+  // Mobile-only compact AI Help information layout. Desktop is unchanged.
+  const mobileCompact=document.createElement("script");
+  mobileCompact.src="/tutor-mobile-compact.js";
+  mobileCompact.async=false;
+  document.head.appendChild(mobileCompact);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

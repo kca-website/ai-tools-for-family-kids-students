@@ -13,7 +13,7 @@
 ## Verified tutor public API
 `tutor.js` exposes `window.AITutor = { render }`.
 
-## Verified render wrapper chain
+## Production wrapper chain before this branch
 ```text
 window.AITutor.render (tutor.js)
   -> tutor-flashcards.js       : installPanel()
@@ -23,52 +23,71 @@ window.AITutor.render (tutor.js)
   -> tutor-mobile-label-fix.js : schedule() -> applyLabel()
 ```
 
-The order is behaviorally significant because every extension captures the previously exposed `window.AITutor.render` as `original` and reassigns the public method.
+The order was behaviorally significant because every extension captured the previously exposed `window.AITutor.render` as `original` and reassigned the public method.
 
 ## Scope correction
-Duplicate helper names such as `installPanel`, `tr`, `extractText` and `injectStyles` are not global today: the extension files use IIFEs. They would collide only if naively merged into one scope, so the consolidated code must use semantic names such as `installFlashcardsPanel`, `installStudyToolsPanel`, `installMobileTutorUi`, `applyMobileSelectionLabel` and `extractPuterText`.
+Duplicate helper names such as `installPanel`, `tr`, `extractText` and `injectStyles` are not global today: the extension files use IIFEs. They would collide only if naively merged into one scope, so consolidated code must use semantic names.
 
-## Side effects
+## Current branch state
+- `tutor-flashcards.js`, `tutor-study-tools.js`, `tutor-mobile-compact.js` and `tutor-mobile-label-fix.js` no longer reassign `window.AITutor.render`.
+- They subscribe to the shared `aitools4kids:tutor-rendered` lifecycle event.
+- `tutor-render-host.js` is the only remaining transitional render wrapper.
+- The old standalone `tutor-tools-layout.js` has been removed.
+- Its exact ordering behavior now lives in `tutor-render-host.js` and is registered before Mobile Compact, preserving the effective production order:
+  `Flashcards -> Study Tools -> layout -> Mobile Compact -> mobile label`.
+- `pwa.js` now lists runtime dependencies explicitly and deduplicates them.
+
+## Mobile parity protection
+The current branch intentionally keeps the original runtime `injectStyles()` behavior active for Flashcards, Study Tools and Mobile Compact.
+
+`tutor-extensions.css` contains the extracted CSS as preparation for the later cleanup, but it is **not loaded as the authoritative stylesheet yet**. This avoids introducing an asynchronous stylesheet timing/FOUC change on phones during the behavior-preserving phase.
+
+The actual Mobile Compact layout rules, selectors, breakpoints and DOM-building logic are otherwise unchanged. The only functional change in `tutor-mobile-compact.js` is replacing its `AITutor.render` wrapper with a listener for the shared render lifecycle event.
+
+The final mobile wording helper also remains separate for now so `Αλλαγή επιλογών / Change selections` keeps the same post-render timing as production.
+
+## Side effects retained
 ### tutor-flashcards.js
-- injects its own style block
+- injects its existing style block
 - inserts `.tutor-flashcards`
 - binds flashcard UI events
 - binds changes on grade/subject/topic/age/consent
 - reads/writes localStorage cache
 - calls Puter AI only for new generation
-- wraps `window.AITutor.render`
+- subscribes to shared tutor-render event
 
 ### tutor-study-tools.js
-- injects its own style block
+- injects its existing style block
 - inserts `.tutor-study-tools`
 - binds quiz/presentation UI events
 - binds changes on grade/subject/topic/age/consent
 - reads/writes localStorage cache
 - calls Puter AI only for new generation
-- wraps `window.AITutor.render`
+- subscribes to shared tutor-render event
 
-### tutor-tools-layout.js
-- no AI calls, observer or polling
-- moves Flashcards then Study Tools to the end of `.tutor-chat`
-- wraps `window.AITutor.render`
+### tutor-render-host.js
+- only remaining reassignment of `window.AITutor.render`
+- emits the shared render lifecycle event
+- owns the established Flashcards -> Study Tools ordering below the chat composer
+- no AI calls, polling or MutationObserver
 
 ### tutor-mobile-compact.js
-- injects a large mobile-only style block
+- retains the existing mobile-only CSS injection and DOM behavior
 - builds/updates mobile tutor helpers
 - binds tutor fields, navigation, route and media-query events
-- wraps `window.AITutor.render`
+- subscribes to the shared render lifecycle event
 
 ### tutor-mobile-label-fix.js
 - only adjusts the mobile lesson-selection label
 - listens to relevant clicks/changes
 - schedules label refresh with `setTimeout(..., 0)`
-- wraps `window.AITutor.render`
+- subscribes to the shared render lifecycle event
 
 ## Target architecture
 ### tutor.js
 - sole owner of tutor render lifecycle
 - sole writer of `window.AITutor.render`
-- explicit feature call order
+- explicit feature call order or one documented lifecycle mechanism
 
 ### tutor-features.js
 - flashcards behavior
@@ -82,25 +101,16 @@ Duplicate helper names such as `installPanel`, `tr`, `extractText` and `injectSt
 - mobile tutor layout
 - no JS style injection for purely presentational CSS
 
-### Explicit render order
-```js
-renderTutorCore(context);
-installFlashcardsPanel(context);
-installStudyToolsPanel(context);
-applyStudyToolsLayout(context);
-installMobileTutorUi(context);
-applyMobileSelectionLabel(context);
-```
-
 ## Migration sequence
-1. Work only on a dedicated branch/preview.
-2. Move pure CSS from JS to `styles.css`.
-3. Replace the wrapper chain with explicit tutor lifecycle hooks.
-4. Preserve Flashcards and Study Tools behavior exactly in the first pass.
-5. Remove `tutor-tools-layout.js` by rendering tools in the intended order from the start.
-6. Fold `tutor-mobile-label-fix.js` into canonical mobile tutor logic.
-7. After parity is verified, simplify `pwa.js` and merge feature files further.
-8. Later, code-split the heavy data files by zone and load on demand.
+1. Work only on dedicated branch/preview.
+2. Remove the independent render-wrapper chain while preserving output and timing. **In progress; independent wrappers removed.**
+3. Remove standalone layout patch. **Done.**
+4. Keep production mobile CSS behavior until parity is confirmed. **Done intentionally.**
+5. Fold lifecycle emission into canonical `tutor.js` and remove `tutor-render-host.js`.
+6. Fold mobile label logic into canonical mobile tutor logic only after mobile parity is confirmed.
+7. Move extracted presentation CSS into the canonical stylesheet with early page loading, then remove legacy `injectStyles()` bodies.
+8. Simplify `pwa.js` so it stops acting as an application patch loader.
+9. Later, code-split the heavy data files by zone and load on demand.
 
 ## Do not change in this pass
 - age/parental-consent rules
@@ -109,6 +119,7 @@ applyMobileSelectionLabel(context);
 - generation prompts
 - localStorage keys/cache formats
 - diagnostic scoring/GAP_TAGS/learning-path semantics
+- mobile layout/copy beyond parity-preserving lifecycle wiring
 - desktop UX except where required for parity
 
 ## Preview smoke test
@@ -127,4 +138,4 @@ applyMobileSelectionLabel(context);
 - no 404s
 
 ## Rule after consolidation
-No new file may reassign `window.AITutor.render`. Any future tutor feature must be invoked explicitly by tutor core or through one documented plugin mechanism owned by tutor core.
+No new file may independently reassign `window.AITutor.render`. Any future tutor feature must be invoked explicitly by tutor core or through one documented lifecycle mechanism owned by tutor core.

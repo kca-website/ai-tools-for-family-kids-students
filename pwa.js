@@ -8,6 +8,12 @@
   audit.async=false;
   document.head.appendChild(audit);
 
+  // Primary 2026-27 Tutor catalog only. Data-only; no quiz/UI mutations.
+  const primaryTutor=document.createElement("script");
+  primaryTutor.src="/september-2026-primary-tutor.js";
+  primaryTutor.async=false;
+  document.head.appendChild(primaryTutor);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

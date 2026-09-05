@@ -42,16 +42,35 @@
   });
 
   // site-postfix.js still contains the previous 30 Aug audit label and runs later.
-  // Re-assert the verified 5 Sep date after all synchronous load/click handlers finish.
-  function fixAuditFooter() {
-    const el = document.querySelector(".site-footer__last-checked");
-    if (!el) return;
+  // Keep the verified 5 Sep date authoritative even if a later handler rewrites it.
+  function desiredAuditFooter() {
     const en = !!document.getElementById("langEn")?.classList.contains("active");
-    el.textContent = en
+    return en
       ? "Tools last checked: 5 September 2026"
       : "Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026";
   }
 
+  function fixAuditFooter() {
+    const el = document.querySelector(".site-footer__last-checked");
+    if (!el) return;
+    const desired = desiredAuditFooter();
+    if (el.textContent.trim() !== desired) el.textContent = desired;
+  }
+
+  function watchAuditFooter() {
+    const el = document.querySelector(".site-footer__last-checked");
+    if (!el || typeof MutationObserver === "undefined") return;
+    const observer = new MutationObserver(() => {
+      const desired = desiredAuditFooter();
+      if (el.textContent.trim() !== desired) el.textContent = desired;
+    });
+    observer.observe(el, { childList: true, characterData: true, subtree: true });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    fixAuditFooter();
+    watchAuditFooter();
+  });
   window.addEventListener("load", () => setTimeout(fixAuditFooter, 0));
   ["langEl", "langEn"].forEach((id) => {
     document.getElementById(id)?.addEventListener("click", () => setTimeout(fixAuditFooter, 0));

@@ -40,4 +40,20 @@
       return (zones?.[zoneId]?.[gradeId] || []).find((x) => x.id === subjectId || x.quizId === subjectId) || null;
     }
   });
+
+  // site-postfix.js still contains the previous 30 Aug audit label and runs later.
+  // Re-assert the verified 5 Sep date after all synchronous load/click handlers finish.
+  function fixAuditFooter() {
+    const el = document.querySelector(".site-footer__last-checked");
+    if (!el) return;
+    const en = !!document.getElementById("langEn")?.classList.contains("active");
+    el.textContent = en
+      ? "Tools last checked: 5 September 2026"
+      : "Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026";
+  }
+
+  window.addEventListener("load", () => setTimeout(fixAuditFooter, 0));
+  ["langEl", "langEn"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("click", () => setTimeout(fixAuditFooter, 0));
+  });
 })();

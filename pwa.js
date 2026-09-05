@@ -56,6 +56,12 @@
   mobileCompact.async=false;
   document.head.appendChild(mobileCompact);
 
+  // Mobile-only wording: this control changes grade/subject/topic selections; it does not edit content.
+  const mobileLabelFix=document.createElement("script");
+  mobileLabelFix.src="/tutor-mobile-label-fix.js";
+  mobileLabelFix.async=false;
+  document.head.appendChild(mobileLabelFix);
+
   const core=document.createElement("script");
   core.src="/pwa-core.js";
   core.async=false;

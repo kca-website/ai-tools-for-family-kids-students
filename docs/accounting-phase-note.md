@@ -1,0 +1,1 @@
+Accounting Special Education unit: source-bounded B' EN.E.E.GY.-L. 2026-2027 partial coverage. Loaded as a modular sector dataset and covered by data + desktop/mobile smoke tests.

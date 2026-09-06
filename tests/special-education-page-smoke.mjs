@@ -16,7 +16,7 @@ async function check(viewport, label) {
   await page.locator('#spEneegyl').waitFor({ state: 'visible' });
 
   assert(await page.locator('.sp-source-card').count() === 9, `${label}: expected 9 EN.E.E.GY.-L. source groups`);
-  assert(await page.locator('[data-open-unit]').count() === 5, `${label}: expected 5 available verified learning units`);
+  assert(await page.locator('[data-open-unit]').count() === 6, `${label}: expected 6 available verified learning units`);
 
   const noOverflowBefore = await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1);
   assert(noOverflowBefore, `${label}: horizontal overflow in sector index`);
@@ -39,6 +39,14 @@ async function check(viewport, label) {
   await page.locator('[data-open-unit="eneegyl-b-agriculture-plant-basics"]').click();
   assert((await page.locator('#spUnitMount h3').innerText()).includes('Φυτική Παραγωγή'), `${label}: plant production unit did not open`);
 
+  await page.locator('[data-open-unit="eneegyl-b-economy-accounting-basics"]').click();
+  assert((await page.locator('#spUnitMount h3').innerText()).includes('Αρχές Λογιστικής'), `${label}: accounting unit did not open`);
+  assert((await page.locator('#spUnitMount').innerText()).includes('Ενεργητικό'), `${label}: accounting learning content missing`);
+
+  await page.locator('#spUnitMount summary', { hasText: 'Διαγνωστικό' }).click();
+  await page.locator('#spQuizStart').click();
+  assert(await page.locator('#spQuiz .sp-option').count() === 2, `${label}: accounting diagnostic did not render options`);
+
   if (viewport.width <= 600) {
     const sourceButtons = await page.locator('.sp-source-actions .sp-btn').evaluateAll((els) => els.map((el) => {
       const r = el.getBoundingClientRect();
@@ -48,7 +56,7 @@ async function check(viewport, label) {
   }
 
   const noOverflowAfter = await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1);
-  assert(noOverflowAfter, `${label}: horizontal overflow after opening new units`);
+  assert(noOverflowAfter, `${label}: horizontal overflow after opening verified units`);
   await page.close();
 }
 

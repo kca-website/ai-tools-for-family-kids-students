@@ -2,11 +2,16 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const context = vm.createContext({ window: {} });
+const rootUrl = new URL('../', import.meta.url);
+const sectorModules = fs.readdirSync(rootUrl)
+  .filter((name) => name.startsWith('special-education-sector-') && name.endsWith('-data.js'))
+  .sort();
 const files = [
   'special-education-curriculum-data.js',
   'special-education-learning-data.js',
   'special-education-quiz-data.js',
   'special-education-status.js',
+  ...sectorModules,
   'special-education-tutor-context.js'
 ];
 
@@ -81,11 +86,18 @@ for (const source of C.sourceIndex) {
   const ids = Array.isArray(source.curriculumIds) ? source.curriculumIds : (source.curriculumId ? [source.curriculumId] : []);
   for (const id of ids) {
     assert(C.entries[id], `${source.id}: source index points to missing curriculum ${id}`);
+    assert(C.entries[id].status === 'verified', `${source.id}: source index exposes non-verified learning unit ${id}`);
   }
+}
+
+if (sectorModules.includes('special-education-sector-economy-data.js')) {
+  const id = 'eneegyl-b-economy-accounting-basics';
+  assert(C.entries[id]?.status === 'verified', 'Accounting sector module did not register verified curriculum');
+  assert(L[id] && Q[id], 'Accounting sector module is missing learning or quiz data');
 }
 
 const indexed = C.sourceIndex.filter(x => x.status === 'source-indexed');
 assert(indexed.length === 8, `Expected 8 indexed EN.E.E.GY.-L. source groups, got ${indexed.length}`);
 assert(C.sourceIndex.filter(x => x.status === 'verified').length === 1, 'Only ZDD source group should be fully reviewed at annual-instructions level at this stage');
 
-console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} curriculum entries, ${Object.keys(L).length} learning units, ${indexed.length} indexed source groups.`);
+console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} curriculum entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), ${indexed.length} indexed source groups.`);

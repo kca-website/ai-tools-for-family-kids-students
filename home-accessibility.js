@@ -29,9 +29,21 @@
     const gslBadge = document.getElementById("heroGslBadge");
     if (gslBadge) gslBadge.textContent = en ? "Accessible GSL resources" : "Προσβάσιμο υλικό ΕΝΓ";
 
+    const helpActions = document.querySelector(".hero__ai-help-actions");
+    if (helpActions) {
+      let special = document.getElementById("heroHelpSpecialEducation");
+      if (!special) {
+        special = document.createElement("a");
+        special.id = "heroHelpSpecialEducation";
+        special.href = "/special-education.html";
+        helpActions.appendChild(special);
+      }
+      special.innerHTML = `<span aria-hidden="true">🏫</span><span>${en ? "Special Education" : "Ειδική Εκπαίδευση"}</span>`;
+      special.setAttribute("aria-label", en ? "Special Education: choose school type and AI Help" : "Ειδική Εκπαίδευση: επιλογή σχολείου και AI Βοήθειας");
+    }
+
     const panel = document.getElementById("signLanguageFeature");
     if (panel) {
-      const badge = en ? "New · Accessibility" : "Νέο · Προσβασιμότητα";
       const title = en ? "🤟 School concepts in Greek Sign Language (GSL)" : "🤟 Έννοιες στην Ελληνική Νοηματική Γλώσσα";
       const text = en
         ? "153 school concepts organized by subject and grade, with simple explanations, educational visuals and direct official GSL videos from IEP."
@@ -41,7 +53,7 @@
 
       if (panel.dataset.gslSignature !== signature) {
         panel.dataset.gslSignature = signature;
-        panel.innerHTML = `<div style="min-width:min(100%,520px);flex:1;"><div style="display:inline-block;margin-bottom:7px;padding:4px 9px;border-radius:999px;background:#dbeafe;color:#1e40af;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;">${badge}</div><div style="font-family:var(--font-heading);font-weight:800;font-size:1.08rem;color:#1f2937;margin-bottom:5px;">${title}</div><div style="font-size:.9rem;line-height:1.5;color:#475569;max-width:720px;">${text}</div></div><a href="/sign-language.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:10px;background:#2e6ba3;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap;">${cta}</a>`;
+        panel.innerHTML = `<div style="min-width:min(100%,520px);flex:1;"><div style="font-family:var(--font-heading);font-weight:800;font-size:1.08rem;color:#1f2937;margin-bottom:5px;">${title}</div><div style="font-size:.9rem;line-height:1.5;color:#475569;max-width:720px;">${text}</div></div><a href="/sign-language.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 15px;border-radius:10px;background:#2e6ba3;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap;">${cta}</a>`;
       }
     }
 

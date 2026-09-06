@@ -4,110 +4,44 @@ window.SPECIAL_EDUCATION_CURRICULUM = {
   disclaimer: "Η ύπαρξη θεματικού τίτλου ή topic anchor δεν αποδεικνύει από μόνη της ότι αποτελεί εξεταστέα ύλη. Η επίσημη εγκύκλιος και οι ισχύουσες οδηγίες παραμένουν η πηγή αναφοράς.",
   officialHubUrl: "https://www.minedu.gov.gr/eidiki-entaksiaki-ekpaidefsi",
   schools: {
-    specialGymnasium: {
-      id: "special-gymnasium",
-      label: "Ειδικό Γυμνάσιο",
-      type: "general-education",
-      status: "pending-2026-27-subject-verification",
-      note: "Ξεχωριστό dataset από το ΕΝ.Ε.Ε.ΓΥ.-Λ. Δεν χρησιμοποιούμε παλαιότερες οδηγίες ως τρέχουσα ύλη χωρίς νέα επαλήθευση."
-    },
-    eneegyl: {
-      id: "eneegyl",
-      label: "ΕΝ.Ε.Ε.ΓΥ.-Λ.",
-      type: "vocational-technological",
-      status: "active"
-    }
+    specialGymnasium: {id:"special-gymnasium",label:"Ειδικό Γυμνάσιο",type:"general-education",status:"pending-2026-27-subject-verification",note:"Ξεχωριστό dataset από το ΕΝ.Ε.Ε.ΓΥ.-Λ. Δεν χρησιμοποιούμε παλαιότερες οδηγίες ως τρέχουσα ύλη χωρίς νέα επαλήθευση."},
+    eneegyl: {id:"eneegyl",label:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",type:"vocational-technological",status:"active"}
   },
   entries: {
     "eneegyl-a-zdd": {
-      id: "eneegyl-a-zdd",
-      schoolType: "eneegyl",
-      grade: "A",
-      gradeLabel: "Α΄ Λυκείου",
-      subject: "Ζώνη Δημιουργικών Δραστηριοτήτων",
-      subjectType: "Μάθημα Προσανατολισμού",
-      status: "verified",
-      coverageStatus: "pilot",
-      verificationBasis: "annual-instructions",
-      annualInstructionsStatus: "verified",
-      verificationDate: "2026-09-06",
-      protocol: "113779/Δ3 · 02/09/2026",
-      sourceTitle: "Οδηγίες για τη διδασκαλία του μαθήματος «Ζώνη Δημιουργικών Δραστηριοτήτων» στο Λύκειο των ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",
-      sourceUrl: "https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
-      sourcePdfUrl: "https://www.minedu.gov.gr/publications/docs2026/%CE%A8%CE%96%CE%9D%CE%9A46%CE%9D%CE%9A%CE%A0%CE%94-4%CE%A96_%CE%96%CE%94%CE%94.pdf",
-      officialAnchors: [
-        "Δραστηριότητες με βάση ενδιαφέροντα και δυνατότητες μαθητών/τριών",
-        "Βιωματική, συνεργατική και δημιουργική μάθηση",
-        "Ομαδικό θέμα με στόχους, πορεία εργασίας και παραδοτέα",
-        "Θεματικά πεδία όπως υγεία, σταδιοδρομία, τέχνες, περιβάλλον και αθλητισμός",
-        "Αξιολόγηση με έμφαση στη συμμετοχή, τη συνέπεια και τη συνεργασία"
-      ]
+      id:"eneegyl-a-zdd",schoolType:"eneegyl",grade:"A",gradeLabel:"Α΄ Λυκείου",subject:"Ζώνη Δημιουργικών Δραστηριοτήτων",subjectType:"Μάθημα Προσανατολισμού",status:"verified",coverageStatus:"pilot",verificationBasis:"annual-instructions",annualInstructionsStatus:"verified",verificationDate:"2026-09-06",protocol:"113779/Δ3 · 02/09/2026",sourceTitle:"Οδηγίες για τη διδασκαλία του μαθήματος «Ζώνη Δημιουργικών Δραστηριοτήτων» στο Λύκειο των ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",sourceUrl:"https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",sourcePdfUrl:"https://www.minedu.gov.gr/publications/docs2026/%CE%A8%CE%96%CE%9D%CE%9A46%CE%9D%CE%9A%CE%A0%CE%94-4%CE%A96_%CE%96%CE%94%CE%94.pdf",
+      officialAnchors:["Δραστηριότητες με βάση ενδιαφέροντα και δυνατότητες μαθητών/τριών","Βιωματική, συνεργατική και δημιουργική μάθηση","Ομαδικό θέμα με στόχους, πορεία εργασίας και παραδοτέα","Θεματικά πεδία όπως υγεία, σταδιοδρομία, τέχνες, περιβάλλον και αθλητισμός","Αξιολόγηση με έμφαση στη συμμετοχή, τη συνέπεια και τη συνεργασία"]
     },
     "eneegyl-b-health-nutrition": {
-      id: "eneegyl-b-health-nutrition",
-      schoolType: "eneegyl",
-      grade: "B",
-      gradeLabel: "Β΄ Λυκείου",
-      sector: "Υγεία - Πρόνοια - Ευεξία",
-      subject: "Υγεία και Διατροφή — βασικές έννοιες",
-      subjectType: "Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",
-      status: "verified",
-      coverageStatus: "partial",
-      verificationBasis: "current-exam-syllabus",
-      currentExamSyllabusStatus: "verified",
-      annualInstructionsStatus: "source-indexed",
-      verificationDate: "2026-09-06",
-      protocol: "99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",
-      sourceTitle: "Εξεταστέα ύλη και τρόπος αξιολόγησης Β΄ τάξης Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",
-      sourceUrl: "https://www.minedu.gov.gr/site/70556-27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias",
-      instructionSourceUrl: "https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
-      officialAnchors: [
-        "Βιβλίο αναφοράς: «Στοιχεία Ειδικής Διατροφής»",
-        "Κεφάλαιο 1: Διατροφή και Υγεία — σελίδες 15-20",
-        "Κεφάλαιο 2: Βασικές αρχές διατροφής — ενότητα 2.3, από σελ. 35 έως περίπου τη μέση της σελ. 42, με τις ρητές εξαιρέσεις των πινάκων 2.3 και 2.5",
-        "Από την υποενότητα «όρεξη-πείνα-κορεσμός» περιλαμβάνονται οι αντίστοιχοι ορισμοί",
-        "Περιλαμβάνονται επίσης οι σελίδες 45-48 σύμφωνα με την απόφαση"
-      ],
-      verificationNote: "Η παρούσα μαθησιακή ενότητα καλύπτει μόνο τις βασικές έννοιες που αντιστοιχούν στα παραπάνω επαληθευμένα anchors. Η εγκύκλιος διδασκαλίας της 03/09/2026 έχει εντοπιστεί, αλλά δεν χρησιμοποιείται εδώ ως πηγή των συγκεκριμένων anchors."
+      id:"eneegyl-b-health-nutrition",schoolType:"eneegyl",grade:"B",gradeLabel:"Β΄ Λυκείου",sector:"Υγεία - Πρόνοια - Ευεξία",subject:"Υγεία και Διατροφή — βασικές έννοιες",subjectType:"Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",status:"verified",coverageStatus:"partial",verificationBasis:"current-exam-syllabus",currentExamSyllabusStatus:"verified",annualInstructionsStatus:"source-indexed",verificationDate:"2026-09-06",protocol:"99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",sourceTitle:"Εξεταστέα ύλη και τρόπος αξιολόγησης Β΄ τάξης Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",sourceUrl:"https://www.minedu.gov.gr/site/70556-27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias",instructionSourceUrl:"https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
+      officialAnchors:["Βιβλίο αναφοράς: «Στοιχεία Ειδικής Διατροφής»","Κεφάλαιο 1: Διατροφή και Υγεία — σελίδες 15-20","Κεφάλαιο 2: Βασικές αρχές διατροφής — ενότητα 2.3, από σελ. 35 έως περίπου τη μέση της σελ. 42, με τις ρητές εξαιρέσεις των πινάκων 2.3 και 2.5","Από την υποενότητα «όρεξη-πείνα-κορεσμός» περιλαμβάνονται οι αντίστοιχοι ορισμοί","Περιλαμβάνονται επίσης οι σελίδες 45-48 σύμφωνα με την απόφαση"],
+      verificationNote:"Η παρούσα μαθησιακή ενότητα καλύπτει μόνο τις βασικές έννοιες που αντιστοιχούν στα παραπάνω επαληθευμένα anchors. Η εγκύκλιος διδασκαλίας της 03/09/2026 έχει εντοπιστεί, αλλά δεν χρησιμοποιείται εδώ ως πηγή των συγκεκριμένων anchors."
     },
     "eneegyl-b-mechanics-thermo-basics": {
-      id: "eneegyl-b-mechanics-thermo-basics",
-      schoolType: "eneegyl",
-      grade: "B",
-      gradeLabel: "Β΄ Λυκείου",
-      sector: "Μηχανολογία",
-      subject: "Στοιχεία Τεχνικής Θερμοδυναμικής – Εφαρμογές — βασικές έννοιες",
-      subjectType: "Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",
-      status: "verified",
-      coverageStatus: "partial",
-      verificationBasis: "current-exam-syllabus",
-      currentExamSyllabusStatus: "verified",
-      annualInstructionsStatus: "source-indexed",
-      verificationDate: "2026-09-06",
-      protocol: "99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",
-      sourceTitle: "Εξεταστέα ύλη και τρόπος αξιολόγησης Β΄ τάξης Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",
-      sourceUrl: "https://www.minedu.gov.gr/site/70556-27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias",
-      instructionSourceUrl: "https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
-      officialAnchors: [
-        "Βιβλία αναφοράς: «Εισαγωγή στη Μηχανολογία» και «Τεχνική Μηχανική – Αντοχή Υλικών»",
-        "Κεφάλαιο 1 — Βασικές έννοιες: 1.1 Γενικά, 1.2 Εφαρμογές της Θερμοδυναμικής, 1.3 Διεθνές σύστημα μονάδων",
-        "1.4 Σύστημα – Όριο συστήματος – Περιβάλλον",
-        "1.5 Θερμοδυναμική ισορροπία",
-        "1.6 Επιλογή συστήματος",
-        "Η επίσημη εξεταστέα ύλη συνεχίζεται και σε μεταγενέστερα κεφάλαια· εδώ ανοίγουμε μόνο το πρώτο, βασικό τμήμα ως ελεγχόμενο learning unit"
-      ],
-      verificationNote: "Η παρούσα μαθησιακή ενότητα είναι σκόπιμα περιορισμένη στις βασικές έννοιες του Κεφαλαίου 1. Η εγκύκλιος διδασκαλίας της 03/09/2026 έχει εντοπιστεί, αλλά δεν χρησιμοποιείται εδώ ως πηγή των συγκεκριμένων anchors."
+      id:"eneegyl-b-mechanics-thermo-basics",schoolType:"eneegyl",grade:"B",gradeLabel:"Β΄ Λυκείου",sector:"Μηχανολογία",subject:"Στοιχεία Τεχνικής Θερμοδυναμικής – Εφαρμογές — βασικές έννοιες",subjectType:"Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",status:"verified",coverageStatus:"partial",verificationBasis:"current-exam-syllabus",currentExamSyllabusStatus:"verified",annualInstructionsStatus:"source-indexed",verificationDate:"2026-09-06",protocol:"99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",sourceTitle:"Εξεταστέα ύλη και τρόπος αξιολόγησης Β΄ τάξης Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",sourceUrl:"https://www.minedu.gov.gr/site/70556-27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias",instructionSourceUrl:"https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
+      officialAnchors:["Βιβλία αναφοράς: «Εισαγωγή στη Μηχανολογία» και «Τεχνική Μηχανική – Αντοχή Υλικών»","Κεφάλαιο 1 — Βασικές έννοιες: 1.1 Γενικά, 1.2 Εφαρμογές της Θερμοδυναμικής, 1.3 Διεθνές σύστημα μονάδων","1.4 Σύστημα – Όριο συστήματος – Περιβάλλον","1.5 Θερμοδυναμική ισορροπία","1.6 Επιλογή συστήματος","Η επίσημη εξεταστέα ύλη συνεχίζεται και σε μεταγενέστερα κεφάλαια· εδώ ανοίγουμε μόνο το πρώτο, βασικό τμήμα ως ελεγχόμενο learning unit"],
+      verificationNote:"Η παρούσα μαθησιακή ενότητα είναι σκόπιμα περιορισμένη στις βασικές έννοιες του Κεφαλαίου 1. Η εγκύκλιος διδασκαλίας της 03/09/2026 έχει εντοπιστεί, αλλά δεν χρησιμοποιείται εδώ ως πηγή των συγκεκριμένων anchors."
+    },
+    "eneegyl-b-structures-topography-basics": {
+      id:"eneegyl-b-structures-topography-basics",schoolType:"eneegyl",grade:"B",gradeLabel:"Β΄ Λυκείου",sector:"Δομικά Έργα, Δομημένο Περιβάλλον και Αρχιτεκτονικός Σχεδιασμός",subject:"Τοπογραφία — βασικές έννοιες και μετρήσεις",subjectType:"Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",status:"verified",coverageStatus:"partial",verificationBasis:"current-exam-syllabus",currentExamSyllabusStatus:"verified",annualInstructionsStatus:"source-indexed",verificationDate:"2026-09-06",protocol:"99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",sourceTitle:"Εξεταστέα ύλη και τρόπος αξιολόγησης Β΄ τάξης Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",sourceUrl:"https://www.minedu.gov.gr/site/70556-27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias",instructionSourceUrl:"https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
+      officialAnchors:["Βιβλίο αναφοράς: «Τοπογραφία»","Εισαγωγή","Κεφάλαιο 1: Βασικές έννοιες και ορισμοί","Κεφάλαιο 2: Μονάδες μέτρησης γωνιών, μηκών και εμβαδών","Κεφάλαιο 3: Μετρούμενα μεγέθη και βασικά τοπογραφικά όργανα","Η επίσημη εξεταστέα ύλη συνεχίζεται και στα Κεφάλαια 4-6· εδώ ανοίγουμε μόνο το αρχικό θεμέλιο"],
+      verificationNote:"Η μαθησιακή ενότητα περιορίζεται στην Εισαγωγή και στα Κεφάλαια 1-3. Δεν παρουσιάζει ως καλυμμένες τις εφαρμογές, τις μεθόδους αποτύπωσης ή τους υπολογισμούς των επόμενων κεφαλαίων."
+    },
+    "eneegyl-b-agriculture-plant-basics": {
+      id:"eneegyl-b-agriculture-plant-basics",schoolType:"eneegyl",grade:"B",gradeLabel:"Β΄ Λυκείου",sector:"Γεωπονία, Τρόφιμα και Περιβάλλον",subject:"Φυτική Παραγωγή — φυτό, ανάπτυξη και σπόρος",subjectType:"Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",status:"verified",coverageStatus:"partial",verificationBasis:"current-exam-syllabus",currentExamSyllabusStatus:"verified",annualInstructionsStatus:"source-indexed",verificationDate:"2026-09-06",protocol:"99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",sourceTitle:"Εξεταστέα ύλη και τρόπος αξιολόγησης Β΄ τάξης Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. για το σχολικό έτος 2026-2027",sourceUrl:"https://www.minedu.gov.gr/site/70556-27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias",instructionSourceUrl:"https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
+      officialAnchors:["Βιβλίο αναφοράς: «Φυτική Παραγωγή»","Κεφάλαιο 2: Περιγραφή του καλλιεργούμενου φυτού","Κεφάλαιο 3: Χαρακτηρισμός σταδίων ανάπτυξης των καλλιεργούμενων φυτών","Κεφάλαιο 4: Ο σπόρος","Η επίσημη εξεταστέα ύλη συνεχίζεται στα Κεφάλαια 5-8: κατεργασία εδάφους, σπορά, λίπανση και άρδευση"],
+      verificationNote:"Η μαθησιακή ενότητα περιορίζεται σκόπιμα στα Κεφάλαια 2-4 και δεν παρουσιάζει ως καλυμμένη την υπόλοιπη εξεταστέα ύλη της Φυτικής Παραγωγής."
     }
   },
   sourceIndex: [
-    {id:"eneegyl-2026-economy", order:1, title:"Διοίκηση και Οικονομία", firstGradeSubject:"Αρχές Οικονομίας", status:"source-indexed", coverageStatus:"pending-mapping"},
-    {id:"eneegyl-2026-structures", order:2, title:"Δομικά Έργα, Δομημένο Περιβάλλον και Αρχιτεκτονικός Σχεδιασμός", firstGradeSubject:"Αρχές Γραμμικού και Αρχιτεκτονικού Σχεδίου", status:"source-indexed", coverageStatus:"pending-mapping"},
-    {id:"eneegyl-2026-health", order:3, title:"Υγεία - Πρόνοια - Ευεξία", firstGradeSubject:"Αγωγή Υγείας", status:"source-indexed", coverageStatus:"partial", curriculumIds:["eneegyl-b-health-nutrition"]},
-    {id:"eneegyl-2026-arts", order:4, title:"Εφαρμοσμένες Τέχνες", firstGradeSubject:"Βασικές Αρχές Σύνθεσης", status:"source-indexed", coverageStatus:"pending-mapping"},
-    {id:"eneegyl-2026-research-tech", order:5, title:"Κοινό μάθημα Προσανατολισμού", firstGradeSubject:"Ερευνητική Εργασία στην Τεχνολογία", status:"source-indexed", coverageStatus:"pending-mapping"},
-    {id:"eneegyl-2026-mechanics", order:6, title:"Μηχανολογία", firstGradeSubject:"Αρχές Μηχανολογίας", status:"source-indexed", coverageStatus:"partial", curriculumIds:["eneegyl-b-mechanics-thermo-basics"]},
-    {id:"eneegyl-2026-informatics", order:7, title:"Πληροφορική", firstGradeSubject:null, status:"source-indexed", coverageStatus:"pending-mapping"},
-    {id:"eneegyl-2026-zdd", order:8, title:"Κοινό μάθημα Προσανατολισμού / Γενικής Παιδείας", firstGradeSubject:"Ζώνη Δημιουργικών Δραστηριοτήτων", status:"verified", coverageStatus:"pilot", curriculumIds:["eneegyl-a-zdd"]},
-    {id:"eneegyl-2026-agriculture", order:9, title:"Γεωπονία, Τρόφιμα και Περιβάλλον", firstGradeSubject:"Γεωπονία και Αειφόρος Ανάπτυξη", status:"source-indexed", coverageStatus:"pending-mapping"}
+    {id:"eneegyl-2026-economy",order:1,title:"Διοίκηση και Οικονομία",firstGradeSubject:"Αρχές Οικονομίας",status:"source-indexed",coverageStatus:"pending-mapping"},
+    {id:"eneegyl-2026-structures",order:2,title:"Δομικά Έργα, Δομημένο Περιβάλλον και Αρχιτεκτονικός Σχεδιασμός",firstGradeSubject:"Αρχές Γραμμικού και Αρχιτεκτονικού Σχεδίου",status:"source-indexed",coverageStatus:"partial",curriculumIds:["eneegyl-b-structures-topography-basics"]},
+    {id:"eneegyl-2026-health",order:3,title:"Υγεία - Πρόνοια - Ευεξία",firstGradeSubject:"Αγωγή Υγείας",status:"source-indexed",coverageStatus:"partial",curriculumIds:["eneegyl-b-health-nutrition"]},
+    {id:"eneegyl-2026-arts",order:4,title:"Εφαρμοσμένες Τέχνες",firstGradeSubject:"Βασικές Αρχές Σύνθεσης",status:"source-indexed",coverageStatus:"pending-mapping"},
+    {id:"eneegyl-2026-research-tech",order:5,title:"Κοινό μάθημα Προσανατολισμού",firstGradeSubject:"Ερευνητική Εργασία στην Τεχνολογία",status:"source-indexed",coverageStatus:"pending-mapping"},
+    {id:"eneegyl-2026-mechanics",order:6,title:"Μηχανολογία",firstGradeSubject:"Αρχές Μηχανολογίας",status:"source-indexed",coverageStatus:"partial",curriculumIds:["eneegyl-b-mechanics-thermo-basics"]},
+    {id:"eneegyl-2026-informatics",order:7,title:"Πληροφορική",firstGradeSubject:null,status:"source-indexed",coverageStatus:"pending-mapping"},
+    {id:"eneegyl-2026-zdd",order:8,title:"Κοινό μάθημα Προσανατολισμού / Γενικής Παιδείας",firstGradeSubject:"Ζώνη Δημιουργικών Δραστηριοτήτων",status:"verified",coverageStatus:"pilot",curriculumIds:["eneegyl-a-zdd"]},
+    {id:"eneegyl-2026-agriculture",order:9,title:"Γεωπονία, Τρόφιμα και Περιβάλλον",firstGradeSubject:"Γεωπονία και Αειφόρος Ανάπτυξη",status:"source-indexed",coverageStatus:"partial",curriculumIds:["eneegyl-b-agriculture-plant-basics"]}
   ]
 };

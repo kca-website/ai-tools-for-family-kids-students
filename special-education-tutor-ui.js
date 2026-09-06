@@ -138,7 +138,7 @@
     if(!saved?.keepMobileSettingsOpen) return;
     saved.keepMobileSettingsOpen=false;
     stateByContext.set(key,saved);
-    queueMicrotask(()=>{
+    requestAnimationFrame(()=>{
       if(!window.matchMedia?.("(max-width:700px)").matches) return;
       const settings=document.querySelector("#tutorMount .tutor-settings");
       const toggle=settings?.querySelector(".tutor-mobile-settings-toggle");
@@ -231,5 +231,5 @@
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>enhance(null),{once:true});
   else enhance(null);
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:2,enhance});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:3,enhance});
 })();

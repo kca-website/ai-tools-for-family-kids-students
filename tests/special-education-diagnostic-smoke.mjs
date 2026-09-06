@@ -21,6 +21,7 @@ try{
   for(const viewport of [{width:1280,height:900},{width:390,height:844}]){
     const label=viewport.width<600?'mobile':'desktop';
     const page=await browser.newPage({viewport});
+    await page.route('**/_vercel/insights/script.js',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
     const errors=[];
     page.on('pageerror',(err)=>errors.push(err.message));
     page.on('console',(msg)=>{if(msg.type()==='error') errors.push(msg.text());});

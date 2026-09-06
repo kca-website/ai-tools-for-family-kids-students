@@ -11,6 +11,20 @@ async function prepare(page,viewport){
   await page.waitForFunction(()=>window.AITutor?.render && window.AITutorRenderHost?.eventName && window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedEneegyl,{timeout:30000});
 }
 
+async function openSettingsIfNeeded(page,selector){
+  const field=page.locator(selector);
+  if(await field.isVisible()) return;
+  const toggle=page.locator('#tutorMount .tutor-mobile-settings-toggle');
+  if(await toggle.count()) await toggle.click();
+  await page.waitForSelector(selector,{state:'visible',timeout:10000});
+}
+
+async function selectTutorOption(page,selector,value){
+  await openSettingsIfNeeded(page,selector);
+  await page.selectOption(selector,value);
+  await page.waitForTimeout(180);
+}
+
 async function renderTutor(page,zoneId,roleId){
   await page.evaluate(({zoneId,roleId})=>{
     history.replaceState({},'',`/${zoneId}/${roleId}/tutor`);
@@ -20,11 +34,7 @@ async function renderTutor(page,zoneId,roleId){
     window.AITutor.render({zoneId,roleId,lang:'el'});
   },{zoneId,roleId});
   await page.waitForSelector('#tutorSchoolTrack',{state:'attached',timeout:10000});
-  const viewport=page.viewportSize();
-  if(viewport?.width<=700 && !(await page.locator('#tutorSchoolTrack').isVisible())){
-    await page.locator('.tutor-mobile-settings-toggle').click();
-  }
-  await page.waitForSelector('#tutorSchoolTrack',{state:'visible',timeout:10000});
+  await openSettingsIfNeeded(page,'#tutorSchoolTrack');
   await page.waitForTimeout(150);
 }
 
@@ -40,13 +50,11 @@ async function checkHigh(page,label){
   assert.ok(initialSubjects.length>0,`${label}: generic subjects disappeared`);
   assert.ok(initialSubjects.every((id)=>!id.startsWith('eneegyl-')),`${label}: ENEEGYL subjects leaked into general-school mode`);
 
-  await page.selectOption('#tutorSchoolTrack','eneegyl');
-  await page.waitForTimeout(180);
+  await selectTutorOption(page,'#tutorSchoolTrack','eneegyl');
   const specialGrades=await page.locator('#tutorGrade option').evaluateAll((els)=>els.map((el)=>el.value));
   assert.deepEqual(specialGrades.sort(),['a','b'],`${label}: ENEEGYL should currently expose only verified A/B Lyceum grades`);
 
-  await page.selectOption('#tutorGrade','b');
-  await page.waitForTimeout(180);
+  await selectTutorOption(page,'#tutorGrade','b');
   const bSubjects=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((el)=>el.value));
   assert.equal(bSubjects.length,5,`${label}: expected five verified B ENEEGYL units`);
   for(const id of [
@@ -57,8 +65,7 @@ async function checkHigh(page,label){
     'eneegyl-b-economy-accounting-basics'
   ]) assert.ok(bSubjects.includes(id),`${label}: missing ${id}`);
 
-  await page.selectOption('#tutorSubject','eneegyl-b-economy-accounting-basics');
-  await page.waitForTimeout(160);
+  await selectTutorOption(page,'#tutorSubject','eneegyl-b-economy-accounting-basics');
   const topicCount=await page.locator('#tutorTopic option').count();
   assert.ok(topicCount>=3,`${label}: accounting tutor topics missing`);
   const context=await page.locator('#tutorContextBox').innerText();
@@ -87,8 +94,7 @@ async function checkHigh(page,label){
   assert.equal(await page.locator('#tutorMount .tutor-flashcards').count(),1,`${label}: flashcards missing/duplicated after special track selection`);
   assert.equal(await page.locator('#tutorMount .tutor-study-tools').count(),1,`${label}: study tools missing/duplicated after special track selection`);
 
-  await page.selectOption('#tutorSchoolTrack','general');
-  await page.waitForTimeout(180);
+  await selectTutorOption(page,'#tutorSchoolTrack','general');
   const restoredSubjects=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((el)=>el.value));
   assert.ok(restoredSubjects.length>0 && restoredSubjects.every((id)=>!id.startsWith('eneegyl-')),`${label}: switching back to general school did not restore generic-only subjects`);
 

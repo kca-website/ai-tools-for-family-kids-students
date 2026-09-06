@@ -32,8 +32,13 @@ for (const [id, entry] of Object.entries(C.entries)) {
   if (entry.status === 'verified') {
     assert(entry.sourceUrl, `${id}: verified curriculum has no sourceUrl`);
     assert(entry.verificationDate, `${id}: verified curriculum has no verificationDate`);
-    assert(entry.annualInstructionsStatus === 'verified', `${id}: verified curriculum has no verified annual instructions`);
+    assert(entry.verificationBasis, `${id}: verified curriculum has no verificationBasis`);
+    const sourceBasisVerified = entry.annualInstructionsStatus === 'verified' || entry.currentExamSyllabusStatus === 'verified';
+    assert(sourceBasisVerified, `${id}: verified curriculum has neither verified annual instructions nor verified current exam syllabus`);
     assert(Array.isArray(entry.officialAnchors) && entry.officialAnchors.length > 0, `${id}: verified curriculum has no official anchors`);
+    if (entry.coverageStatus === 'partial') {
+      assert(entry.verificationNote, `${id}: partial coverage must explain its verification boundary`);
+    }
   }
 }
 
@@ -72,8 +77,15 @@ for (const id of Object.keys(L)) {
   assert(parentContext.systemGuidance.some(x => x.includes('γονιό') || x.includes('φροντιστή')), `${id}: parent tutor context lacks parent-specific guidance`);
 }
 
-const indexed = C.sourceIndex.filter(x => x.status === 'source-indexed');
-assert(indexed.length === 8, `Expected 8 indexed/pending EN.E.E.GY.-L. source groups, got ${indexed.length}`);
-assert(C.sourceIndex.filter(x => x.status === 'verified').length === 1, 'Only the reviewed pilot should be verified at this stage');
+for (const source of C.sourceIndex) {
+  const ids = Array.isArray(source.curriculumIds) ? source.curriculumIds : (source.curriculumId ? [source.curriculumId] : []);
+  for (const id of ids) {
+    assert(C.entries[id], `${source.id}: source index points to missing curriculum ${id}`);
+  }
+}
 
-console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} verified curriculum entry, ${indexed.length} indexed source groups.`);
+const indexed = C.sourceIndex.filter(x => x.status === 'source-indexed');
+assert(indexed.length === 8, `Expected 8 indexed EN.E.E.GY.-L. source groups, got ${indexed.length}`);
+assert(C.sourceIndex.filter(x => x.status === 'verified').length === 1, 'Only ZDD source group should be fully reviewed at annual-instructions level at this stage');
+
+console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} curriculum entries, ${Object.keys(L).length} learning units, ${indexed.length} indexed source groups.`);

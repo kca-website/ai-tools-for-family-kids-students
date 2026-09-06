@@ -1,4 +1,10 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "work/*": false,
+      "hardening/*": false
+    }
+  },
   "routes": [
     { "handle": "filesystem" },
     {

@@ -91,7 +91,12 @@
   async function openModal(e){
     lastFocus=e?.currentTarget||document.activeElement;
     const picker=document.getElementById("heroQuizPicker");if(picker) picker.hidden=true;
-    const m=createModal();m.hidden=false;document.body.style.overflow="hidden";resetState();renderLoadingSchools();
+    const m=createModal();
+    m.hidden=false;document.body.style.overflow="hidden";resetState();
+    m.querySelector("#spdiagSetup").hidden=false;
+    const quizBox=m.querySelector("#spdiagQuiz");quizBox.hidden=true;quizBox.innerHTML="";
+    const gradeSel=m.querySelector("#spdiagGrade");gradeSel.disabled=true;gradeSel.innerHTML=`<option>${t("Διάλεξε πρώτα σχολείο","Choose school first")}</option>`;
+    hideGroup();resetSubject();updateStart();renderLoadingSchools();
     try{await ensureData();renderSchools();m.querySelector(".spdiag__close").focus();}
     catch(err){m.querySelector("#spdiagSchools").innerHTML=`<p>${t("Δεν φορτώθηκε το διαγνωστικό. Δοκίμασε ξανά.","Diagnostic could not load. Try again.")}</p>`;console.error(err);}
   }
@@ -171,5 +176,5 @@
   window.addEventListener("load",ensureEntry,{once:true});
   document.getElementById("heroQuizCtaBtn")?.addEventListener("click",()=>setTimeout(ensureEntry,0));
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:1,ensureEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:2,ensureEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
 })();

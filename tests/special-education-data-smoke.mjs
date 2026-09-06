@@ -12,6 +12,7 @@ const files = [
   'special-education-quiz-data.js',
   'special-education-status.js',
   ...sectorModules,
+  'special-education-special-gymnasium-data.js',
   'special-education-tutor-context.js'
 ];
 
@@ -25,24 +26,27 @@ const L = context.window.SPECIAL_EDUCATION_LEARNING;
 const Q = context.window.SPECIAL_EDUCATION_QUIZZES;
 const S = context.window.SPECIAL_EDUCATION_STATUS;
 const T = context.window.SPECIAL_EDUCATION_TUTOR_CONTEXT;
+const SG = context.window.SPECIAL_GYMNASIUM_2026_2027;
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
 assert(C?.schoolYear === '2026-2027', 'Missing/incorrect Special Education school year');
-assert(C?.entries && L && Q && S?.rows && T?.build, 'Missing Special Education dataset');
+assert(C?.entries && L && Q && S?.rows && T?.build && SG, 'Missing Special Education dataset');
 
 for (const [id, entry] of Object.entries(C.entries)) {
   if (entry.status === 'verified') {
     assert(entry.sourceUrl, `${id}: verified curriculum has no sourceUrl`);
     assert(entry.verificationDate, `${id}: verified curriculum has no verificationDate`);
     assert(entry.verificationBasis, `${id}: verified curriculum has no verificationBasis`);
-    const sourceBasisVerified = entry.annualInstructionsStatus === 'verified' || entry.currentExamSyllabusStatus === 'verified';
-    assert(sourceBasisVerified, `${id}: verified curriculum has neither verified annual instructions nor verified current exam syllabus`);
+    const sourceBasisVerified = entry.annualInstructionsStatus === 'verified'
+      || entry.currentExamSyllabusStatus === 'verified'
+      || (entry.officialTimetableStatus === 'verified' && entry.adaptationResourceStatus === 'verified');
+    assert(sourceBasisVerified, `${id}: verified item has no verified official source basis`);
     assert(Array.isArray(entry.officialAnchors) && entry.officialAnchors.length > 0, `${id}: verified curriculum has no official anchors`);
-    if (entry.coverageStatus === 'partial') {
-      assert(entry.verificationNote, `${id}: partial coverage must explain its verification boundary`);
+    if (entry.coverageStatus === 'partial' || entry.coverageStatus === 'support-skill') {
+      assert(entry.verificationNote, `${id}: bounded coverage must explain its verification boundary`);
     }
   }
 }
@@ -96,8 +100,24 @@ if (sectorModules.includes('special-education-sector-economy-data.js')) {
   assert(L[id] && Q[id], 'Accounting sector module is missing learning or quiz data');
 }
 
+assert(SG.status === 'verified-structure', 'Special Gymnasium 2026-27 structure is not verified');
+assert(SG.preliminary?.totalHours === 34, 'Special Gymnasium preliminary timetable total must be 34 hours');
+for (const gradeId of ['a','b','c']) {
+  const grade=SG.grades?.[gradeId];
+  assert(grade?.totalHours === 34, `Special Gymnasium ${gradeId}: timetable total must be 34 hours`);
+  const sum=(grade.subjects || []).reduce((total,row)=>total+Number(row.hours || 0),0);
+  assert(sum === 34, `Special Gymnasium ${gradeId}: subject hours sum to ${sum}, expected 34`);
+}
+for (const id of ['special-gym-a-language-comprehension','special-gym-a-math-problem-reading']) {
+  assert(C.entries[id]?.schoolType === 'special-gymnasium', `${id}: missing Special Gymnasium curriculum identity`);
+  assert(C.entries[id]?.coverageStatus === 'support-skill', `${id}: must be marked as support-skill, not syllabus coverage`);
+  assert(C.entries[id]?.officialTimetableStatus === 'verified', `${id}: timetable source not verified`);
+  assert(C.entries[id]?.adaptationResourceStatus === 'verified', `${id}: adaptation source not verified`);
+  assert(L[id] && Q[id], `${id}: missing learning or diagnostic`);
+}
+
 const indexed = C.sourceIndex.filter(x => x.status === 'source-indexed');
 assert(indexed.length === 8, `Expected 8 indexed EN.E.E.GY.-L. source groups, got ${indexed.length}`);
 assert(C.sourceIndex.filter(x => x.status === 'verified').length === 1, 'Only ZDD source group should be fully reviewed at annual-instructions level at this stage');
 
-console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} curriculum entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), ${indexed.length} indexed source groups.`);
+console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} detailed entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), Special Gymnasium timetable verified.`);

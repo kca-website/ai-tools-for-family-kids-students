@@ -8,7 +8,9 @@ async function prepare(page,viewport){
   await page.setViewportSize(viewport);
   await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForFunction(()=>window.AITutor?.render && window.AITutorRenderHost?.eventName && window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedEneegyl,{timeout:30000});
+  await page.waitForFunction(()=>window.AITutor?.render && window.AITutorRenderHost?.eventName
+    && window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedEneegyl
+    && window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedSpecialGymnasium,{timeout:30000});
 }
 
 async function openSettingsIfNeeded(page,selector){
@@ -47,7 +49,7 @@ async function checkHigh(page,label){
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'general',`${label}: general school should remain the safe default`);
 
   const initialSubjects=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((el)=>el.value));
-  assert.ok(initialSubjects.length>0,`${label}: generic subjects disappeared`);
+  assert.ok(initialSubjects.length>0,`${label}: generic high-school subjects disappeared`);
   assert.ok(initialSubjects.every((id)=>!id.startsWith('eneegyl-')),`${label}: ENEEGYL subjects leaked into general-school mode`);
 
   await selectTutorOption(page,'#tutorSchoolTrack','eneegyl');
@@ -75,13 +77,14 @@ async function checkHigh(page,label){
 
   const catalogState=await page.evaluate(()=>{
     const s=window.AITOOLSKIDS_TUTOR_CATALOG.getSubject('high','b','eneegyl-b-economy-accounting-basics');
+    const exposed=window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.exposed || [];
     return {
       schoolType:s?.schoolType,
       coverage:s?.curriculum?.coverageStatus,
       examStatus:s?.curriculum?.currentExamSyllabusStatus,
       teachingStatus:s?.curriculum?.teachingInstructionsStatus,
       source:s?.curriculum?.annualInstructionsUrl,
-      specialCount:window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.exposed?.length || 0
+      eneegylCount:exposed.filter(x=>x.schoolType==='eneegyl').length
     };
   });
   assert.equal(catalogState.schoolType,'eneegyl',`${label}: accounting subject lost ENEEGYL identity`);
@@ -89,26 +92,78 @@ async function checkHigh(page,label){
   assert.equal(catalogState.examStatus,'2026-27-verified',`${label}: current exam syllabus is not marked verified`);
   assert.notEqual(catalogState.teachingStatus,'verified',`${label}: teaching instructions were incorrectly promoted to verified`);
   assert.match(catalogState.source,/minedu\.gov\.gr/,`${label}: official current source missing`);
-  assert.equal(catalogState.specialCount,6,`${label}: expected six verified Special Education tutor units`);
+  assert.equal(catalogState.eneegylCount,6,`${label}: ENEEGYL exposed-unit count changed unexpectedly`);
 
-  assert.equal(await page.locator('#tutorMount .tutor-flashcards').count(),1,`${label}: flashcards missing/duplicated after special track selection`);
-  assert.equal(await page.locator('#tutorMount .tutor-study-tools').count(),1,`${label}: study tools missing/duplicated after special track selection`);
+  assert.equal(await page.locator('#tutorMount .tutor-flashcards').count(),1,`${label}: flashcards missing/duplicated after ENEEGYL selection`);
+  assert.equal(await page.locator('#tutorMount .tutor-study-tools').count(),1,`${label}: study tools missing/duplicated after ENEEGYL selection`);
 
   await selectTutorOption(page,'#tutorSchoolTrack','general');
   const restoredSubjects=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((el)=>el.value));
-  assert.ok(restoredSubjects.length>0 && restoredSubjects.every((id)=>!id.startsWith('eneegyl-')),`${label}: switching back to general school did not restore generic-only subjects`);
-
-  const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
-  assert.ok(noOverflow,`${label}: horizontal overflow in AI Tutor`);
+  assert.ok(restoredSubjects.length>0 && restoredSubjects.every((id)=>!id.startsWith('eneegyl-')),`${label}: switching back to general high school did not restore generic-only subjects`);
 }
 
-async function checkSpecialGymPending(page,label){
+async function checkSpecialGym(page,label){
   await renderTutor(page,'middle','guardian');
   const options=await page.locator('#tutorSchoolTrack option').evaluateAll((els)=>els.map((el)=>({value:el.value,text:el.textContent.trim(),disabled:el.disabled})));
-  const pending=options.find((x)=>x.value==='special-gymnasium');
-  assert.ok(pending,`${label}: Special Gymnasium track placeholder missing`);
-  assert.equal(pending.disabled,true,`${label}: Special Gymnasium became selectable before verified content exists`);
-  assert.match(pending.text,/επαλήθευση/i,`${label}: Special Gymnasium pending state is not explained`);
+  const special=options.find((x)=>x.value==='special-gymnasium');
+  assert.ok(special,`${label}: Special Gymnasium track missing`);
+  assert.equal(special.disabled,false,`${label}: Special Gymnasium should be selectable after verified structure was added`);
+  assert.equal(await page.inputValue('#tutorSchoolTrack'),'general',`${label}: general middle school must remain default`);
+
+  const generalSubjects=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((el)=>el.value));
+  assert.ok(generalSubjects.every((id)=>!id.startsWith('special-gym-')),`${label}: Special Gymnasium subjects leaked into general mode`);
+
+  await selectTutorOption(page,'#tutorSchoolTrack','special-gymnasium');
+  const grades=await page.locator('#tutorGrade option').evaluateAll((els)=>els.map((el)=>({value:el.value,text:el.textContent.trim()})));
+  assert.deepEqual(grades.map(x=>x.value).sort(),['a','b','c'],`${label}: Special Gymnasium must expose A/B/C grades`);
+  assert.ok(grades.some(x=>x.value==='a' && /Α΄ Γυμνασίου/.test(x.text)),`${label}: Special Gymnasium grade labels are not explicit`);
+
+  await selectTutorOption(page,'#tutorGrade','a');
+  const aSubjects=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((el)=>el.value));
+  assert.equal(aSubjects.length,18,`${label}: expected 18 official A Special Gymnasium subjects`);
+  for(const id of ['special-gym-a-language-comprehension','special-gym-a-math-problem-reading','special-gym-a-physics','special-gym-a-history']) {
+    assert.ok(aSubjects.includes(id),`${label}: Special Gymnasium A missing ${id}`);
+  }
+
+  await selectTutorOption(page,'#tutorSubject','special-gym-a-language-comprehension');
+  assert.ok(await page.locator('#tutorTopic option').count()>=4,`${label}: detailed Special Gymnasium language topics missing`);
+  let context=await page.locator('#tutorContextBox').innerText();
+  assert.match(context,/Ειδικό Γυμνάσιο/i,`${label}: Special Gymnasium identity missing from detailed context`);
+  assert.match(context,/2026.?27/,`${label}: Special Gymnasium school year missing`);
+  assert.match(context,/προσαρμογ/i,`${label}: adaptation basis missing from detailed context`);
+
+  await selectTutorOption(page,'#tutorSubject','special-gym-a-physics');
+  assert.equal(await page.locator('#tutorTopic option').count(),1,`${label}: structure-only subject should expose one safe generic topic`);
+  context=await page.locator('#tutorContextBox').innerText();
+  assert.match(context,/Ειδικό Γυμνάσιο/i,`${label}: Special Gymnasium identity missing from structure-only context`);
+  assert.match(context,/δεν έχει δηλωθεί|χωρίς δήλωση|συγκεκριμένο.*άσκηση/i,`${label}: structure-only scope warning missing`);
+
+  await selectTutorOption(page,'#tutorGrade','b');
+  assert.equal(await page.locator('#tutorSubject option').count(),19,`${label}: expected 19 official B Special Gymnasium subjects`);
+  await selectTutorOption(page,'#tutorGrade','c');
+  assert.equal(await page.locator('#tutorSubject option').count(),19,`${label}: expected 19 official C Special Gymnasium subjects`);
+
+  const catalogState=await page.evaluate(()=>{
+    const exposed=window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.exposed || [];
+    const shell=window.AITOOLSKIDS_TUTOR_CATALOG.getSubject('middle','a','special-gym-a-physics');
+    return {
+      specialGymCount:exposed.filter(x=>x.schoolType==='special-gymnasium').length,
+      shellCoverage:shell?.curriculum?.coverageStatus,
+      shellTimetable:shell?.curriculum?.officialTimetableStatus,
+      shellStructureOnly:!!shell?.structureOnly
+    };
+  });
+  assert.equal(catalogState.specialGymCount,56,`${label}: expected 56 Special Gymnasium tutor subjects across A/B/C`);
+  assert.equal(catalogState.shellCoverage,'official-timetable-verified-structure',`${label}: structure-only coverage marker wrong`);
+  assert.equal(catalogState.shellTimetable,'2026-27-verified',`${label}: timetable verification missing`);
+  assert.equal(catalogState.shellStructureOnly,true,`${label}: generic subject is not marked structure-only`);
+
+  assert.equal(await page.locator('#tutorMount .tutor-flashcards').count(),1,`${label}: flashcards missing/duplicated after Special Gymnasium selection`);
+  assert.equal(await page.locator('#tutorMount .tutor-study-tools').count(),1,`${label}: study tools missing/duplicated after Special Gymnasium selection`);
+
+  await selectTutorOption(page,'#tutorSchoolTrack','general');
+  const restored=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((el)=>el.value));
+  assert.ok(restored.length>0 && restored.every((id)=>!id.startsWith('special-gym-')),`${label}: switching back to general middle school did not restore generic-only subjects`);
 }
 
 try{
@@ -119,11 +174,13 @@ try{
     page.on('console',(msg)=>{if(msg.type()==='error') errors.push(msg.text());});
     await prepare(page,viewport);
     await checkHigh(page,label);
-    await checkSpecialGymPending(page,label);
+    await checkSpecialGym(page,label);
+    const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
+    assert.ok(noOverflow,`${label}: horizontal overflow in AI Tutor`);
     assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
     await page.close();
   }
-  console.log('Special Education AI Tutor smoke passed on desktop and mobile.');
+  console.log('Special Education AI Tutor smoke passed for ENEEGYL and Special Gymnasium on desktop/mobile.');
 }finally{
   await browser.close();
 }

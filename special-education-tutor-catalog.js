@@ -1,7 +1,9 @@
 /**
  * Special Education -> AI Tutor catalog adapter.
  * Data-only: no DOM changes, no render wrapping.
- * Only verified curriculum entries with learning content are exposed.
+ * Detailed learning units are source-bounded. Special Gymnasium also exposes
+ * verified grade/subject shells from the 2026-27 timetable without inventing
+ * a separate E.A.E. chapter syllabus.
  */
 (function(){
   "use strict";
@@ -9,6 +11,7 @@
   const current=window.AITOOLSKIDS_TUTOR_CATALOG;
   const C=window.SPECIAL_EDUCATION_CURRICULUM;
   const L=window.SPECIAL_EDUCATION_LEARNING;
+  const SG=window.SPECIAL_GYMNASIUM_2026_2027;
   if(!current || !C?.entries || !L) return;
 
   const GRADE_KEY={A:"a",B:"b",C:"c",D:"d"};
@@ -29,6 +32,12 @@
   }
 
   function coverageLabel(entry){
+    if(entry.schoolType==="special-gymnasium"){
+      return {
+        el:"Ειδικό Γυμνάσιο · επίσημη δομή 2026–27 + επίσημο υλικό προσαρμογών Ε.Α.Ε.",
+        en:"Special Gymnasium · official 2026–27 structure + official E.A.E. adaptation material"
+      };
+    }
     if(entry.verificationBasis==="current-exam-syllabus"){
       return {
         el:"ΕΝ.Ε.Ε.ΓΥ.-Λ. · επαληθευμένη μερική κάλυψη από την εξεταστέα ύλη 2026–27",
@@ -68,23 +77,27 @@
     const scopeBoundary=entry.verificationNote || "Η ενότητα χρησιμοποιεί μόνο τα επαληθευμένα σημεία αναφοράς που εμφανίζονται στη σελίδα Ειδικής Εκπαίδευσης.";
     const schoolName=entry.schoolType==="eneegyl"?"ΕΝ.Ε.Ε.ΓΥ.-Λ.":"Ειδικό Γυμνάσιο";
     const examVerified=entry.currentExamSyllabusStatus==="verified";
+    const supportSkill=entry.coverageStatus==="support-skill";
     const curriculum={
       schoolYear:C.schoolYear || "2026-2027",
       verificationDate:entry.verificationDate || C.verificationDate || "",
       verificationBasis:entry.verificationBasis || "",
-      coverageStatus:entry.verificationBasis==="current-exam-syllabus"?"current-exam-syllabus-verified-partial":"annual-instructions-verified",
+      coverageStatus:examVerified?"current-exam-syllabus-verified-partial":supportSkill?"official-structure-plus-adaptation-support":"annual-instructions-verified",
       coverageLabelEl:label.el,
       coverageLabelEn:label.en,
       officialSectionsEl:[...(entry.officialAnchors || [])],
       officialSectionsEn:[],
-      scopeNoteEl:`${schoolName}: ξεχωριστό σχολικό πλαίσιο. ${scopeBoundary} Η παρουσίαση είναι βήμα-βήμα και δεν μετατρέπει την ενότητα σε ύλη ΓΕΛ/γενικού σχολείου.`,
-      scopeNoteEn:`${schoolName}: separate school context. This unit is deliberately limited to its verified source boundary and must not be treated as General Lyceum curriculum.`,
+      scopeNoteEl:`${schoolName}: ξεχωριστό σχολικό πλαίσιο. ${scopeBoundary}`,
+      scopeNoteEn:`${schoolName}: separate school context. Stay inside the verified source boundary and do not invent an E.A.E. chapter syllabus.`,
       annualInstructionsStatus:examVerified?"current-exam-syllabus-verified":(entry.annualInstructionsStatus==="verified"?"2026-27-verified":(entry.annualInstructionsStatus || "unknown")),
       annualInstructionsUrl:examVerified?(entry.sourceUrl || ""):(entry.instructionSourceUrl || entry.sourceUrl || ""),
       teachingInstructionsStatus:entry.annualInstructionsStatus || "unknown",
       teachingInstructionsUrl:entry.instructionSourceUrl || "",
       currentExamSyllabusStatus:examVerified?"2026-27-verified":(entry.currentExamSyllabusStatus || "unknown"),
       currentExamSyllabusUrl:examVerified?(entry.sourceUrl || ""):"",
+      officialTimetableStatus:entry.officialTimetableStatus || "unknown",
+      adaptationResourceStatus:entry.adaptationResourceStatus || "unknown",
+      adaptationSourceUrl:entry.adaptationSourceUrl || "",
       catalogUrl:entry.sourceUrl || "",
       sourceLabelEl:entry.sourceTitle || "Επίσημη πηγή 2026–27",
       sourceLabelEn:"Official 2026–27 source",
@@ -114,6 +127,14 @@
   }
 
   const exposed=[];
+  function registerSubject(zoneId,gradeId,subject,meta={}){
+    if(!zoneId || !gradeId || !subject?.id) return;
+    const list=[...(zones[zoneId][gradeId] || [])].filter((x)=>x?.id!==subject.id);
+    list.push(subject);
+    zones[zoneId][gradeId]=list;
+    exposed.push(Object.assign({id:subject.id,zoneId,gradeId,schoolType:subject.schoolType},meta));
+  }
+
   Object.values(C.entries).forEach((entry)=>{
     const learning=L[entry.id];
     if(entry?.status!=="verified" || !learning || learning.status!=="ready") return;
@@ -121,11 +142,68 @@
     const gradeId=GRADE_KEY[entry.grade] || String(entry.grade || "").toLowerCase();
     if(!zoneId || !gradeId) return;
     const subject=makeSubject(entry,learning);
-    const list=[...(zones[zoneId][gradeId] || [])].filter((x)=>x?.id!==subject.id);
-    list.push(subject);
-    zones[zoneId][gradeId]=list;
-    exposed.push({id:entry.id,zoneId,gradeId,schoolType:entry.schoolType});
+    registerSubject(zoneId,gradeId,subject,{gradeLabel:entry.gradeLabel || gradeId.toUpperCase(),detailedLearning:true});
   });
+
+  if(SG?.status==="verified-structure" && SG.grades){
+    const pilotByKey={
+      "a|language":"special-gym-a-language-comprehension",
+      "a|math":"special-gym-a-math-problem-reading"
+    };
+    Object.entries(SG.grades).forEach(([gradeId,grade])=>{
+      (grade.subjects || []).forEach((row)=>{
+        const pilotId=pilotByKey[`${gradeId}|${row.id}`];
+        if(pilotId && exposed.some((x)=>x.id===pilotId)) return;
+        const id=`special-gym-${gradeId}-${row.id}`;
+        const topicEl=SG.tutorPolicy?.genericTopicEl || "Δούλεψε πάνω στο συγκεκριμένο θέμα ή την άσκηση που έχεις μπροστά σου";
+        const topicEn=SG.tutorPolicy?.genericTopicEn || "Work on the exact topic or exercise you have";
+        registerSubject("middle",gradeId,{
+          id,
+          quizId:null,
+          grade:gradeId,
+          subjectLabelEl:`Ειδικό Γυμνάσιο · ${row.label}`,
+          subjectLabelEn:`Special Gymnasium · ${row.label}`,
+          topics:[{
+            id:`${id}.topic-current-work`,
+            labelEl:topicEl,
+            labelEn:topicEn,
+            explainEl:SG.tutorPolicy?.warningEl || topicEl,
+            explainEn:SG.tutorPolicy?.warningEn || topicEn,
+            specialEducation:true,
+            schoolType:"special-gymnasium"
+          }],
+          curriculum:{
+            schoolYear:SG.schoolYear,
+            verificationDate:SG.verificationDate,
+            verificationBasis:"official-timetable-structure",
+            coverageStatus:"official-timetable-verified-structure",
+            coverageLabelEl:"Επαληθευμένο μάθημα/τάξη 2026–27 · χωρίς δήλωση συγκεκριμένων κεφαλαίων",
+            coverageLabelEn:"Verified 2026–27 grade/subject · no chapter-scope claim",
+            officialSectionsEl:[`${grade.label}: ${row.label} · ${row.hours} ${row.hours===1?"ώρα":"ώρες"} την εβδομάδα`],
+            officialSectionsEn:[],
+            scopeNoteEl:SG.tutorPolicy?.warningEl || "Δεν έχει χαρτογραφηθεί ξεχωριστή φετινή ύλη Ε.Α.Ε. για αυτό το μάθημα.",
+            scopeNoteEn:SG.tutorPolicy?.warningEn || "No separate current E.A.E. chapter scope is claimed.",
+            annualInstructionsStatus:"not-claimed",
+            annualInstructionsUrl:SG.timetableSourceUrl,
+            teachingInstructionsStatus:"not-claimed",
+            officialTimetableStatus:"2026-27-verified",
+            adaptationResourceStatus:"available",
+            adaptationSourceUrl:SG.adaptationResources?.hub || "",
+            catalogUrl:SG.timetableSourceUrl,
+            sourceLabelEl:"Ωρολόγιο πρόγραμμα Γυμνασίου Ε.Α.Ε. 2026–27",
+            sourceLabelEn:"Special Gymnasium 2026–27 timetable",
+            specialEducation:true,
+            schoolType:"special-gymnasium",
+            structureOnly:true
+          },
+          specialEducation:true,
+          schoolType:"special-gymnasium",
+          schoolTrack:"special-gymnasium",
+          structureOnly:true
+        },{gradeLabel:grade.label,detailedLearning:false,structureOnly:true,subjectKey:row.id});
+      });
+    });
+  }
 
   function getSubjects(zoneId,gradeId){ return zones?.[zoneId]?.[gradeId] || []; }
   function getSubject(zoneId,gradeId,subjectId){
@@ -144,7 +222,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG=Object.freeze({
-    version:1,
+    version:2,
     schoolYear:C.schoolYear || "2026-2027",
     exposed:Object.freeze(exposed),
     hasVerifiedSpecialGymnasium:exposed.some((x)=>x.schoolType==="special-gymnasium"),

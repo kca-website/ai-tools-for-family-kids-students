@@ -22,7 +22,7 @@
       eneegyl:["ΕΝ.Ε.Ε.ΓΥ.-Λ.","EN.E.E.GY.-L."],
       specialGym:["Ειδικό Γυμνάσιο","Special Gymnasium"],
       pending:["σε επαλήθευση","verification pending"],
-      verifiedOnly:["Εμφανίζονται μόνο ενότητες με επαληθευμένη επίσημη βάση 2026–27.","Only units with a verified official 2026–27 basis are shown."],
+      verifiedOnly:["Εμφανίζονται μόνο στοιχεία με επαληθευμένη επίσημη βάση 2026–27. Όπου δεν έχει χαρτογραφηθεί ξεχωριστή ύλη, δίνεις εσύ το συγκεκριμένο θέμα/άσκηση.","Only items with a verified official 2026–27 basis are shown. Where no separate syllabus scope is mapped, provide the exact topic/exercise yourself."],
       noContent:["Δεν υπάρχει ακόμη επαληθευμένο περιεχόμενο","No verified content yet"]
     };
     return (T[key] || [key,key])[en?1:0];
@@ -59,7 +59,9 @@
   function gradeLabel(gradeId,schoolType){
     const entries=window.SPECIAL_EDUCATION_CURRICULUM?.entries || {};
     const item=exposedFor(schoolType==="eneegyl"?"high":"middle",schoolType,gradeId)[0];
-    return item && entries[item.id]?.gradeLabel ? entries[item.id].gradeLabel : gradeId.toUpperCase();
+    if(item?.gradeLabel) return item.gradeLabel;
+    if(item && entries[item.id]?.gradeLabel) return entries[item.id].gradeLabel;
+    return gradeId.toUpperCase();
   }
 
   function contextKey(ctx){ return `${ctx.zoneId || ""}|${ctx.roleId || ""}`; }
@@ -201,5 +203,5 @@
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>enhance(null),{once:true});
   else enhance(null);
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:1,enhance});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:2,enhance});
 })();

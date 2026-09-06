@@ -18,12 +18,13 @@
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
     // Special Education data stays isolated from the generic quiz/path datasets.
-    // Only verified units are adapted into the AI Tutor catalog.
+    // Only source-bounded units/structures are adapted into the AI Tutor catalog.
     {id:"special-education-curriculum",src:"/special-education-curriculum-data.js"},
     {id:"special-education-learning",src:"/special-education-learning-data.js"},
     {id:"special-education-quiz",src:"/special-education-quiz-data.js"},
     {id:"special-education-status",src:"/special-education-status.js"},
     {id:"special-education-economy",src:"/special-education-sector-economy-data.js"},
+    {id:"special-education-special-gymnasium",src:"/special-education-special-gymnasium-data.js"},
     {id:"special-education-tutor-context",src:"/special-education-tutor-context.js"},
     {id:"special-education-tutor-catalog",src:"/special-education-tutor-catalog.js"},
     {id:"special-education-tutor-ui",src:"/special-education-tutor-ui.js"},

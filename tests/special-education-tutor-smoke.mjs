@@ -34,6 +34,7 @@ async function renderTutor(page,zoneId,roleId){
     window.AITutor.render({zoneId,roleId,lang:'el'});
   },{zoneId,roleId});
   await page.waitForSelector('#tutorSchoolTrack',{state:'attached',timeout:15000});
+  await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ,{timeout:15000});
   await openSettingsIfNeeded(page,'#tutorSchoolTrack');
 }
 
@@ -45,6 +46,7 @@ async function selectTrack(page,value){
     return location.pathname.startsWith(`/${targetZone}/`)
       && document.getElementById('tutorSchoolTrack')?.value===value;
   },{value,targetZone},{timeout:20000});
+  await page.waitForTimeout(120);
 }
 
 async function selectOption(page,selector,value){
@@ -53,17 +55,32 @@ async function selectOption(page,selector,value){
   await page.waitForTimeout(220);
 }
 
+async function assertSimpleQuizButton(page,label){
+  const button=page.locator('#tutorMount [data-study-tool="quiz"]');
+  await button.waitFor({state:'attached',timeout:10000});
+  assert.equal(await button.getAttribute('data-special-simple-quiz'),'1',`${label}: Special Education did not switch to simplified quiz adapter`);
+  assert.match(await button.innerText(),/απλό quiz 3 ερωτήσεων|simple 3-question quiz/i,`${label}: simplified quiz button label missing`);
+}
+
+async function assertGeneralQuizButton(page,label){
+  const button=page.locator('#tutorMount [data-study-tool="quiz"]');
+  await button.waitFor({state:'attached',timeout:10000});
+  assert.notEqual(await button.getAttribute('data-special-simple-quiz'),'1',`${label}: Special Education quiz adapter leaked into general school`);
+}
+
 async function checkUnified(page,label){
   await renderTutor(page,'middle','guardian');
   const options=await page.locator('#tutorSchoolTrack option').evaluateAll((els)=>els.map((e)=>({value:e.value,text:e.textContent.trim(),disabled:e.disabled})));
   assert.deepEqual(options.map(x=>x.value),['general-middle','general-high','special-gymnasium','special-lyceum','eneegyl'],`${label}: unified school selector options are wrong`);
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'general-middle',`${label}: middle school should remain the initial default`);
   assert.ok(options.every(x=>!x.disabled),`${label}: every school type should be selectable from one AI Help`);
+  await assertGeneralQuizButton(page,`${label} General Gymnasium`);
 
   assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG),false,`${label}: special catalog loaded before selection`);
   await selectTrack(page,'special-gymnasium');
   await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedSpecialGymnasium,{timeout:20000});
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: Special Gymnasium selection failed`);
+  await assertSimpleQuizButton(page,`${label} Special Gymnasium`);
   assert.deepEqual((await page.locator('#tutorGrade option').evaluateAll(els=>els.map(e=>e.value))).sort(),['a','b','c'],`${label}: Special Gymnasium grades wrong`);
   await selectOption(page,'#tutorGrade','a');
   const sgSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
@@ -71,6 +88,7 @@ async function checkUnified(page,label){
 
   await selectTrack(page,'special-lyceum');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-lyceum',`${label}: Special Lyceum selection failed`);
+  await assertSimpleQuizButton(page,`${label} Special Lyceum`);
   assert.deepEqual((await page.locator('#tutorGrade option').evaluateAll(els=>els.map(e=>e.value))).sort(),['a','b','c'],`${label}: Special Lyceum grades wrong`);
   await selectOption(page,'#tutorGrade','a');
   const slSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
@@ -81,8 +99,9 @@ async function checkUnified(page,label){
 
   await selectTrack(page,'eneegyl');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL selection failed`);
+  await assertSimpleQuizButton(page,`${label} ENEEGYL`);
   const enGrades=await page.locator('#tutorGrade option').evaluateAll(els=>els.map(e=>e.value));
-  assert.deepEqual(enGrades.sort(),['a','b'],`${label}: ENEEGYL should expose verified A/B grades`);
+  assert.deepEqual(enGrades.sort(),['a','b'],`${label}: ENEEGYL should expose verified A/B grades only`);
   await selectOption(page,'#tutorGrade','b');
   const enSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
   assert.equal(enSubjects.length,5,`${label}: expected five verified B ENEEGYL units`);
@@ -90,8 +109,10 @@ async function checkUnified(page,label){
 
   await selectTrack(page,'special-gymnasium');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: cross-zone return to Special Gymnasium failed`);
+  await assertSimpleQuizButton(page,`${label} Special Gymnasium return`);
   await selectTrack(page,'general-high');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'general-high',`${label}: unified selector could not switch to General Lyceum`);
+  await assertGeneralQuizButton(page,`${label} General Lyceum`);
   const generalHigh=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
   assert.ok(generalHigh.length>0&&generalHigh.every(id=>!id.startsWith('special-')&&!id.startsWith('eneegyl-')),`${label}: special subjects leaked into General Lyceum`);
 
@@ -102,10 +123,12 @@ async function checkUnified(page,label){
   const lazyState=await page.evaluate(()=>({
     catalog:!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG,
     lyceum:!!window.SPECIAL_LYCEUM_2026_2027,
+    simpleQuiz:!!window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ,
     runtimeScripts:[...document.scripts].filter(s=>s.dataset.specialEducationRuntime).length
   }));
   assert.equal(lazyState.catalog,true,`${label}: special catalog missing after selection`);
   assert.equal(lazyState.lyceum,true,`${label}: Special Lyceum metadata was not lazy-loaded`);
+  assert.equal(lazyState.simpleQuiz,true,`${label}: simplified Special Education quiz adapter missing`);
   assert.ok(lazyState.runtimeScripts>=8,`${label}: expected lazy Special Education runtime scripts`);
 }
 
@@ -122,7 +145,7 @@ try{
     assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
     await page.close();
   }
-  console.log('Unified lazy-loaded Special Education AI Help passed on desktop/mobile.');
+  console.log('Unified lazy-loaded Special Education AI Help with simplified quiz switching passed on desktop/mobile.');
 }finally{
   await browser.close();
 }

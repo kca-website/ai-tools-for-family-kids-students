@@ -22,6 +22,7 @@ async function check(viewport,label){
   assert((await page.title()).includes('Ειδική Εκπαίδευση'),`${label}: wrong page title`);
   const homeText=await page.locator('#spHome').innerText();
   assert(homeText.includes('Ειδικό Γυμνάσιο')&&homeText.includes('Ειδικό Λύκειο')&&homeText.includes('ΕΝ.Ε.Ε.ΓΥ.-Λ.'),`${label}: all three school types must be visible`);
+  assert(homeText.includes('Δεν είναι πλήρης κατάλογος μαθημάτων του ΕΝ.Ε.Ε.ΓΥ.-Λ.'),`${label}: ENEEGYL limited-content boundary missing`);
   assert(!homeText.includes('♿'),`${label}: wheelchair icon must not represent Special Education`);
   assert(await page.locator('#spHome [data-branch]').count()===3,`${label}: expected three Special Education school choices`);
   assert(await page.locator('#spHome .sp-unified-ai').isVisible(),`${label}: unified AI Help entry missing`);
@@ -30,6 +31,7 @@ async function check(viewport,label){
   await page.locator('#spSpecialGymnasium').waitFor({state:'visible'});
   const sgText=await page.locator('#spSpecialGymnasium').innerText();
   assert(!sgText.includes('34 ώρες/εβδομάδα'),`${label}: timetable-hour wall should not be visible`);
+  assert(sgText.includes('3 σύντομες ερωτήσεις')&&sgText.includes('2 καθαρές επιλογές'),`${label}: Special Gymnasium simplified-test note missing`);
   assert(await page.locator('#spSpecialGymProfile [data-sg-grade]').count()===3,`${label}: Special Gymnasium needs A/B/C grade choices`);
   assert(await page.locator('#spSpecialGymProfile .sp-subject-card').count()===18,`${label}: Special Gymnasium A should show 18 subjects`);
   const firstAiHref=await page.locator('#spSpecialGymProfile .sp-action--ai').first().getAttribute('href');
@@ -38,13 +40,14 @@ async function check(viewport,label){
   await page.locator('[data-open-sg-unit="special-gym-a-language-comprehension"][data-focus="quiz"]').click();
   await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({state:'visible'});
   assert((await page.locator('#spSpecialGymUnitMount').innerText()).includes('Μαθαίνω απλά'),`${label}: Special Gymnasium study flow missing`);
-  await runDiagnostic(page,'#spSpecialGymUnitMount',3,`${label} Special Gym language`);
+  await runDiagnostic(page,'#spSpecialGymUnitMount',2,`${label} Special Gym language`);
 
   await page.locator('#spSpecialGymnasium .sp-back').click();
   await page.locator('[data-branch="special-lyceum"]').click();
   await page.locator('#spSpecialLyceum').waitFor({state:'visible'});
   const slText=await page.locator('#spSpecialLyceum').innerText();
   assert(slText.includes('Ειδικό Λύκειο'),`${label}: Special Lyceum route missing`);
+  assert(slText.includes('δεν χρησιμοποιούμε το απαιτητικό exam-level quiz'),`${label}: Special Lyceum simplified quiz boundary missing`);
   assert(await page.locator('#spSpecialLyceumProfile [data-sl-grade]').count()===3,`${label}: Special Lyceum must expose A/B/C grades`);
   const slHref=await page.locator('#spSpecialLyceumProfile .sp-action--ai').first().getAttribute('href');
   assert(slHref?.includes('schoolTrack=special-lyceum')&&slHref.includes('grade=a'),`${label}: Special Lyceum AI deep link missing`);
@@ -54,6 +57,9 @@ async function check(viewport,label){
   await page.locator('#spSpecialLyceum .sp-back').click();
   await page.locator('[data-branch="eneegyl"]').click();
   await page.locator('#spEneegyl').waitFor({state:'visible'});
+  const enText=await page.locator('#spEneegyl').innerText();
+  assert(enText.includes('δεν αντιπροσωπεύει όλα τα μαθήματα του ΕΝ.Ε.Ε.ΓΥ.-Λ.'),`${label}: ENEEGYL limited-content note missing`);
+  assert(enText.includes('3 σύντομες ερωτήσεις')&&enText.includes('2 επιλογές'),`${label}: ENEEGYL simplified-test note missing`);
   assert(await page.locator('#spEneegylProfile [data-en-grade]').count()===2,`${label}: ENEEGYL should expose ready A/B choices`);
   assert(await page.locator('#spEneegylProfile .sp-subject-card').count()===1,`${label}: ENEEGYL A should show one ready route`);
 
@@ -79,7 +85,7 @@ async function check(viewport,label){
 try{
   await check({width:1280,height:900},'desktop');
   await check({width:390,height:844},'mobile');
-  console.log('Special Education three-school action-first page smoke passed on desktop/mobile.');
+  console.log('Special Education simplified-assessment page smoke passed on desktop/mobile.');
 }finally{
   await browser.close();
 }

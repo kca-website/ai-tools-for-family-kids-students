@@ -1,0 +1,28 @@
+name: Special Education data smoke
+
+on:
+  pull_request:
+    paths:
+      - 'special-education*.js'
+      - 'special-education*.html'
+      - 'special-education*.css'
+      - 'tests/special-education-data-smoke.mjs'
+      - '.github/workflows/special-education-data-smoke.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'special-education*.js'
+      - 'special-education*.html'
+      - 'special-education*.css'
+      - 'tests/special-education-data-smoke.mjs'
+
+jobs:
+  data-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate Special Education datasets
+        run: node tests/special-education-data-smoke.mjs

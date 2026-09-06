@@ -14,6 +14,7 @@ const files = [
   ...sectorModules,
   'special-education-special-gymnasium-data.js',
   'special-education-special-lyceum-data.js',
+  'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
 ];
 
@@ -27,6 +28,7 @@ const L = context.window.SPECIAL_EDUCATION_LEARNING;
 const Q = context.window.SPECIAL_EDUCATION_QUIZZES;
 const S = context.window.SPECIAL_EDUCATION_STATUS;
 const T = context.window.SPECIAL_EDUCATION_TUTOR_CONTEXT;
+const A = context.window.SPECIAL_EDUCATION_ASSESSMENT_POLICY;
 const SG = context.window.SPECIAL_GYMNASIUM_2026_2027;
 const SL = context.window.SPECIAL_LYCEUM_2026_2027;
 
@@ -35,13 +37,15 @@ function assert(condition, message) {
 }
 
 assert(C?.schoolYear === '2026-2027', 'Missing/incorrect Special Education school year');
-assert(C?.entries && L && Q && S?.rows && T?.build && SG && SL, 'Missing Special Education dataset');
+assert(C?.entries && L && Q && S?.rows && T?.build && A && SG && SL, 'Missing Special Education dataset or assessment policy');
+assert(A.id === 'special-education-simple-v1', 'Unexpected Special Education assessment policy');
+assert(A.maxQuestions === 3 && A.optionsPerQuestion === 2, 'Special Education assessment limits must be 3 questions / 2 options');
 
 for (const [id, entry] of Object.entries(C.entries)) {
   if (entry.status === 'verified') {
     assert(entry.sourceUrl, `${id}: verified curriculum has no sourceUrl`);
     assert(entry.verificationDate, `${id}: verified curriculum has no verificationDate`);
-    assert(entry.verificationBasis, `${id}: verified curriculum has no verificationBasis`);
+    assert(entry.verificationBasis, `${id}: verified item has no verificationBasis`);
     const sourceBasisVerified = entry.annualInstructionsStatus === 'verified'
       || entry.currentExamSyllabusStatus === 'verified'
       || (entry.officialTimetableStatus === 'verified' && entry.adaptationResourceStatus === 'verified');
@@ -67,8 +71,16 @@ for (const [id, quiz] of Object.entries(Q)) {
   assert(L[id], `${id}: quiz exists without learning content`);
   assert(quiz.curriculumId === id, `${id}: quiz curriculumId mismatch`);
   assert(Array.isArray(quiz.questions) && quiz.questions.length > 0, `${id}: quiz has no questions`);
+  if (A.isSpecialTrack(entry.schoolType)) {
+    assert(quiz.assessmentProfile === A.id, `${id}: Special Education quiz missing simplified assessment profile`);
+    assert(quiz.questions.length <= A.maxQuestions, `${id}: Special Education quiz exceeds ${A.maxQuestions} questions`);
+  }
   for (const [index, question] of quiz.questions.entries()) {
-    assert(Array.isArray(question.options) && question.options.length >= 2, `${id}: question ${index + 1} has too few options`);
+    const expectedOptions = A.isSpecialTrack(entry.schoolType) ? A.optionsPerQuestion : 2;
+    assert(Array.isArray(question.options) && question.options.length >= expectedOptions, `${id}: question ${index + 1} has too few options`);
+    if (A.isSpecialTrack(entry.schoolType)) {
+      assert(question.options.length === A.optionsPerQuestion, `${id}: Special Education question ${index + 1} must have exactly ${A.optionsPerQuestion} options`);
+    }
     assert(Number.isInteger(question.correctIndex) && question.correctIndex >= 0 && question.correctIndex < question.options.length, `${id}: question ${index + 1} has invalid correctIndex`);
   }
 }
@@ -86,6 +98,10 @@ for (const id of Object.keys(L)) {
   assert(studentContext?.curriculumId === id, `${id}: student tutor context could not be built`);
   assert(parentContext?.curriculumId === id, `${id}: parent tutor context could not be built`);
   assert(parentContext.systemGuidance.some(x => x.includes('γονιό') || x.includes('φροντιστή')), `${id}: parent tutor context lacks parent-specific guidance`);
+  assert(studentContext.systemGuidance.some(x => x.includes('3 σύντομες ερωτήσεις') && x.includes('2 καθαρές επιλογές')), `${id}: tutor context lacks simplified quiz guidance`);
+  if (C.entries[id]?.schoolType === 'eneegyl') {
+    assert(studentContext.systemGuidance.some(x => x.includes('μη χαρτογραφημένα μαθήματα')), `${id}: EN.E.E.GY.-L. context lacks limited-catalog boundary`);
+  }
 }
 
 for (const source of C.sourceIndex) {
@@ -116,6 +132,8 @@ for (const id of ['special-gym-a-language-comprehension','special-gym-a-math-pro
   assert(C.entries[id]?.officialTimetableStatus === 'verified', `${id}: timetable source not verified`);
   assert(C.entries[id]?.adaptationResourceStatus === 'verified', `${id}: adaptation source not verified`);
   assert(L[id] && Q[id], `${id}: missing learning or diagnostic`);
+  assert(Q[id].questions.length === 3, `${id}: simplified Special Gymnasium quiz must have exactly 3 questions`);
+  assert(Q[id].questions.every(q => q.options.length === 2), `${id}: simplified Special Gymnasium quiz must use 2 options per question`);
 }
 
 assert(SL.status === 'verified-structure', 'Special Lyceum must be present as a verified current school structure');
@@ -128,4 +146,4 @@ const indexed = C.sourceIndex.filter(x => x.status === 'source-indexed');
 assert(indexed.length === 8, `Expected 8 indexed EN.E.E.GY.-L. source groups, got ${indexed.length}`);
 assert(C.sourceIndex.filter(x => x.status === 'verified').length === 1, 'Only ZDD source group should be fully reviewed at annual-instructions level at this stage');
 
-console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} detailed entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), Special Gymnasium and Special Lyceum structures verified.`);
+console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} detailed entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), simplified assessment policy enforced.`);

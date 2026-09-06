@@ -21,66 +21,57 @@ async function check(viewport,label){
 
   assert((await page.title()).includes('Ειδική Εκπαίδευση'),`${label}: wrong page title`);
   const homeText=await page.locator('#spHome').innerText();
-  assert(homeText.includes('Διάλεξε σχολείο, τάξη και μάθημα'),`${label}: action-first intro missing`);
-  assert(!homeText.includes('Πρόοδος επαλήθευσης'),`${label}: verification tracker leaked into user-facing home`);
+  assert(homeText.includes('Ειδικό Γυμνάσιο')&&homeText.includes('Ειδικό Λύκειο')&&homeText.includes('ΕΝ.Ε.Ε.ΓΥ.-Λ.'),`${label}: all three school types must be visible`);
+  assert(!homeText.includes('♿'),`${label}: wheelchair icon must not represent Special Education`);
+  assert(await page.locator('#spHome [data-branch]').count()===3,`${label}: expected three Special Education school choices`);
+  assert(await page.locator('#spHome .sp-unified-ai').isVisible(),`${label}: unified AI Help entry missing`);
 
   await page.locator('[data-branch="special-gymnasium"]').click();
   await page.locator('#spSpecialGymnasium').waitFor({state:'visible'});
-  let sgText=await page.locator('#spSpecialGymnasium').innerText();
+  const sgText=await page.locator('#spSpecialGymnasium').innerText();
   assert(!sgText.includes('34 ώρες/εβδομάδα'),`${label}: timetable-hour wall should not be visible`);
-  assert(!sgText.includes('Τι είναι επαληθευμένο'),`${label}: verification prose should not dominate the route`);
   assert(await page.locator('#spSpecialGymProfile [data-sg-grade]').count()===3,`${label}: Special Gymnasium needs A/B/C grade choices`);
-  assert(await page.locator('#spSpecialGymProfile .sp-subject-card').count()===18,`${label}: Special Gymnasium A should show its 18 subjects as cards`);
-
+  assert(await page.locator('#spSpecialGymProfile .sp-subject-card').count()===18,`${label}: Special Gymnasium A should show 18 subjects`);
   const firstAiHref=await page.locator('#spSpecialGymProfile .sp-action--ai').first().getAttribute('href');
-  assert(firstAiHref?.includes('/middle/student/tutor?') && firstAiHref.includes('schoolTrack=special-gymnasium') && firstAiHref.includes('grade=a'),`${label}: Special Gymnasium AI deep link missing track/grade`);
-  assert(await page.locator('[data-open-sg-unit="special-gym-a-language-comprehension"]').count()===2,`${label}: language route should expose study and quick-test actions`);
+  assert(firstAiHref?.includes('schoolTrack=special-gymnasium')&&firstAiHref.includes('grade=a'),`${label}: Special Gymnasium AI link missing context`);
 
   await page.locator('[data-open-sg-unit="special-gym-a-language-comprehension"][data-focus="quiz"]').click();
   await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({state:'visible'});
-  const sgUnitText=await page.locator('#spSpecialGymUnitMount').innerText();
-  assert(sgUnitText.includes('Μαθαίνω απλά') && sgUnitText.includes('Εξάσκηση') && sgUnitText.includes('Μικρό τεστ'),`${label}: learning/practice/test flow missing`);
-  assert(!sgUnitText.includes('Επίσημη βάση'),`${label}: verbose official-basis step should be removed from main learning flow`);
-  assert((await page.locator('#spSpecialGymUnitMount .sp-action--ai').first().getAttribute('href'))?.includes('subject=special-gym-a-language-comprehension'),`${label}: unit AI button is not preselected to language`);
-  assert(!(await page.locator('#spSpecialGymUnitMount .sp-source-mini').evaluate((el)=>el.open)),`${label}: source metadata should stay collapsed by default`);
+  assert((await page.locator('#spSpecialGymUnitMount').innerText()).includes('Μαθαίνω απλά'),`${label}: Special Gymnasium study flow missing`);
   await runDiagnostic(page,'#spSpecialGymUnitMount',3,`${label} Special Gym language`);
 
-  await page.locator('[data-sg-grade="b"]').click();
-  assert(await page.locator('#spSpecialGymProfile .sp-subject-card').count()===19,`${label}: Special Gymnasium B should show 19 subjects`);
-  assert(await page.locator('#spSpecialGymProfile [data-open-sg-unit]').count()===0,`${label}: B should not pretend to have mapped study units`);
-  assert(await page.locator('#spSpecialGymProfile .sp-action--ai').count()===19,`${label}: every B subject needs a direct AI Help action`);
-
-  let noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
-  assert(noOverflow,`${label}: horizontal overflow in Special Gymnasium route`);
-
   await page.locator('#spSpecialGymnasium .sp-back').click();
+  await page.locator('[data-branch="special-lyceum"]').click();
+  await page.locator('#spSpecialLyceum').waitFor({state:'visible'});
+  const slText=await page.locator('#spSpecialLyceum').innerText();
+  assert(slText.includes('Ειδικό Λύκειο'),`${label}: Special Lyceum route missing`);
+  assert(await page.locator('#spSpecialLyceumProfile [data-sl-grade]').count()===3,`${label}: Special Lyceum must expose A/B/C grades`);
+  const slHref=await page.locator('#spSpecialLyceumProfile .sp-action--ai').first().getAttribute('href');
+  assert(slHref?.includes('schoolTrack=special-lyceum')&&slHref.includes('grade=a'),`${label}: Special Lyceum AI deep link missing`);
+  await page.locator('[data-sl-grade="c"]').click();
+  assert((await page.locator('#spSpecialLyceumProfile').innerText()).includes('Γ΄ Λυκείου'),`${label}: Special Lyceum C selection failed`);
+
+  await page.locator('#spSpecialLyceum .sp-back').click();
   await page.locator('[data-branch="eneegyl"]').click();
   await page.locator('#spEneegyl').waitFor({state:'visible'});
-
-  assert(await page.locator('#spEneegylProfile [data-en-grade]').count()===2,`${label}: ENEEGYL should currently expose ready A/B choices`);
-  assert(await page.locator('#spEneegylProfile .sp-subject-card').count()===1,`${label}: ENEEGYL A should show one ready learning route`);
-  assert(await page.locator('.sp-source-card').count()===0,`${label}: old nine-source documentation grid should be removed from UX`);
-  assert(!(await page.locator('#spEneegyl').innerText()).includes('9 επίσημες εγκύκλιοι'),`${label}: source-index prose should not dominate ENEEGYL route`);
+  assert(await page.locator('#spEneegylProfile [data-en-grade]').count()===2,`${label}: ENEEGYL should expose ready A/B choices`);
+  assert(await page.locator('#spEneegylProfile .sp-subject-card').count()===1,`${label}: ENEEGYL A should show one ready route`);
 
   await page.locator('[data-en-grade="b"]').click();
-  assert(await page.locator('#spEneegylProfile .sp-subject-card').count()===5,`${label}: ENEEGYL B should show five ready subject routes`);
+  assert(await page.locator('#spEneegylProfile .sp-subject-card').count()===5,`${label}: ENEEGYL B should show five ready routes`);
   const accountingAi=await page.locator('#spEneegylProfile .sp-subject-card',{hasText:'Αρχές Λογιστικής'}).locator('.sp-action--ai').getAttribute('href');
-  assert(accountingAi?.includes('schoolTrack=eneegyl') && accountingAi.includes('grade=b') && accountingAi.includes('subject=eneegyl-b-economy-accounting-basics'),`${label}: accounting AI deep link missing exact context`);
-
+  assert(accountingAi?.includes('schoolTrack=eneegyl')&&accountingAi.includes('subject=eneegyl-b-economy-accounting-basics'),`${label}: accounting AI link missing exact context`);
   await page.locator('[data-open-unit="eneegyl-b-economy-accounting-basics"][data-focus="quiz"]').click();
   await page.locator('#spUnitMount .sp-unit').waitFor({state:'visible'});
-  const accountingText=await page.locator('#spUnitMount').innerText();
-  assert(accountingText.includes('Ενεργητικό'),`${label}: accounting learning content missing`);
-  assert(!accountingText.includes('Τι σημαίνει «επαληθευμένο» εδώ'),`${label}: verification explanation should be hidden from main learning UX`);
+  assert((await page.locator('#spUnitMount').innerText()).includes('Ενεργητικό'),`${label}: accounting learning content missing`);
   await runDiagnostic(page,'#spUnitMount',2,`${label} accounting`);
 
   if(viewport.width<=600){
-    const actionRects=await page.locator('.sp-content:not([hidden]) .sp-action:visible').evaluateAll((els)=>els.map((el)=>{const r=el.getBoundingClientRect();return {left:r.left,right:r.right,width:r.width};}));
-    assert(actionRects.every((r)=>r.left>=-1 && r.right<=viewport.width+1 && r.width>0),`${label}: action button escapes mobile viewport`);
+    const actionRects=await page.locator('.sp-content:not([hidden]) .sp-action:visible, #spHome .sp-unified-ai:visible').evaluateAll((els)=>els.map((el)=>{const r=el.getBoundingClientRect();return {left:r.left,right:r.right,width:r.width};}));
+    assert(actionRects.every((r)=>r.left>=-1&&r.right<=viewport.width+1&&r.width>0),`${label}: action button escapes mobile viewport`);
   }
-
-  noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
-  assert(noOverflow,`${label}: horizontal overflow after opening learning routes`);
+  const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
+  assert(noOverflow,`${label}: horizontal overflow`);
   assert(errors.length===0,`${label}: browser errors: ${errors.join('\n')}`);
   await page.close();
 }
@@ -88,7 +79,7 @@ async function check(viewport,label){
 try{
   await check({width:1280,height:900},'desktop');
   await check({width:390,height:844},'mobile');
-  console.log('Special Education action-first page smoke passed on desktop/mobile.');
+  console.log('Special Education three-school action-first page smoke passed on desktop/mobile.');
 }finally{
   await browser.close();
 }

@@ -7,7 +7,7 @@ function assert(condition,message){if(!condition) throw new Error(message);}
 
 async function runDiagnostic(page,root,expectedOptions,label){
   const details=page.locator(`${root} [data-section="quiz"]`);
-  if(!(await details.getAttribute('open'))) await details.locator('summary').click();
+  if(!(await details.evaluate((el)=>el.open))) await details.locator('summary').click();
   await page.locator(`${root} [data-sp-quiz-start]`).click();
   assert(await page.locator(`${root} .sp-option`).count()===expectedOptions,`${label}: diagnostic did not render expected options`);
 }
@@ -42,7 +42,7 @@ async function check(viewport,label){
   assert(sgUnitText.includes('Μαθαίνω απλά') && sgUnitText.includes('Εξάσκηση') && sgUnitText.includes('Μικρό τεστ'),`${label}: learning/practice/test flow missing`);
   assert(!sgUnitText.includes('Επίσημη βάση'),`${label}: verbose official-basis step should be removed from main learning flow`);
   assert((await page.locator('#spSpecialGymUnitMount .sp-action--ai').first().getAttribute('href'))?.includes('subject=special-gym-a-language-comprehension'),`${label}: unit AI button is not preselected to language`);
-  assert(!(await page.locator('#spSpecialGymUnitMount .sp-source-mini').getAttribute('open')),`${label}: source metadata should stay collapsed by default`);
+  assert(!(await page.locator('#spSpecialGymUnitMount .sp-source-mini').evaluate((el)=>el.open)),`${label}: source metadata should stay collapsed by default`);
   await runDiagnostic(page,'#spSpecialGymUnitMount',3,`${label} Special Gym language`);
 
   await page.locator('[data-sg-grade="b"]').click();

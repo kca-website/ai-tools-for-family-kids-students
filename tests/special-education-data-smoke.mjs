@@ -14,6 +14,8 @@ const files = [
   ...sectorModules,
   'special-education-special-gymnasium-data.js',
   'special-education-special-lyceum-data.js',
+  'special-education-eneegyl-structure-data.js',
+  'special-education-support-tools-data.js',
   'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
 ];
@@ -31,13 +33,15 @@ const T = context.window.SPECIAL_EDUCATION_TUTOR_CONTEXT;
 const A = context.window.SPECIAL_EDUCATION_ASSESSMENT_POLICY;
 const SG = context.window.SPECIAL_GYMNASIUM_2026_2027;
 const SL = context.window.SPECIAL_LYCEUM_2026_2027;
+const EN = context.window.ENEEGYL_2026_2027_STRUCTURE;
+const SUPPORT = context.window.SPECIAL_EDUCATION_SUPPORT_TOOLS;
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
 assert(C?.schoolYear === '2026-2027', 'Missing/incorrect Special Education school year');
-assert(C?.entries && L && Q && S?.rows && T?.build && A && SG && SL, 'Missing Special Education dataset or assessment policy');
+assert(C?.entries && L && Q && S?.rows && T?.build && A && SG && SL && EN && SUPPORT, 'Missing Special Education dataset, structure, tools or assessment policy');
 assert(A.id === 'special-education-simple-v1', 'Unexpected Special Education assessment policy');
 assert(A.maxQuestions === 3 && A.optionsPerQuestion === 2, 'Special Education assessment limits must be 3 questions / 2 options');
 
@@ -142,8 +146,34 @@ assert(SL.sourceUrl?.includes('minedu.gov.gr'), 'Special Lyceum official Ministr
 assert(Object.keys(SL.grades || {}).sort().join(',') === 'a,b,c', 'Special Lyceum must expose A/B/C Lyceum grades');
 assert(/δεν|not/i.test(SL.scopeNoteEl + ' ' + SL.scopeNoteEn), 'Special Lyceum must state the no-invented-syllabus boundary');
 
+assert(EN.schoolType === 'eneegyl', 'ENEEGYL structure identity is wrong');
+assert(EN.totalGrades === 8, `ENEEGYL must have 8 grades, got ${EN.totalGrades}`);
+assert(EN.gradeOrder?.join(',') === 'gym-a,gym-b,gym-c,gym-d,lyc-a,lyc-b,lyc-c,lyc-d', 'ENEEGYL grade order must be 4 Gymnasium + 4 Lyceum');
+assert(Object.keys(EN.grades || {}).length === 8, 'ENEEGYL grade registry must contain exactly 8 grades');
+for (const id of ['gym-a','gym-b','gym-c','gym-d']) {
+  assert(EN.grades[id]?.level === 'gymnasium', `${id}: must be an ENEEGYL Gymnasium grade`);
+  assert((EN.grades[id]?.subjects || []).length >= 18, `${id}: ENEEGYL Gymnasium subject structure looks incomplete`);
+}
+for (const id of ['lyc-a','lyc-b','lyc-c','lyc-d']) {
+  assert(EN.grades[id]?.level === 'lyceum', `${id}: must be an ENEEGYL Lyceum grade`);
+}
+assert(EN.grades['gym-d'].subjects.some(x => x.id === 'economics'), 'ENEEGYL D Gymnasium must include Economics');
+assert(EN.grades['lyc-a'].subjects.length === 18, `ENEEGYL A Lyceum must expose 18 timetable choices/groups, got ${EN.grades['lyc-a'].subjects.length}`);
+assert(EN.grades['lyc-a'].subjects.filter(x => x.type === 'elective').length === 7, 'ENEEGYL A Lyceum must expose seven offered electives');
+assert(EN.grades['lyc-a'].subjects.some(x => x.id === 'creative-zone'), 'ENEEGYL A Lyceum must include Creative Activities Zone');
+assert(EN.grades['lyc-b'].subjects.filter(x => x.type === 'sector-gateway').length === 8, 'ENEEGYL B Lyceum must expose eight sector gateways');
+assert(EN.sourceUrls?.gymnasium?.includes('diavgeia.gov.gr') && EN.sourceUrls?.lyceum?.includes('diavgeia.gov.gr'), 'ENEEGYL current timetable sources missing');
+
+assert(Array.isArray(SUPPORT.items) && SUPPORT.items.length >= 6, 'Special Education support tools need at least six curated options');
+const supportIds=SUPPORT.items.map(x => x.id);
+assert(new Set(supportIds).size === supportIds.length, 'Support tool ids must be unique');
+for (const id of ['immersive-reader','google-docs-voice','desmos','geogebra','canva-education','autodraw']) {
+  const tool=SUPPORT.items.find(x => x.id === id);
+  assert(tool?.url && tool?.sourceUrl && tool?.task && tool?.bestFor, `${id}: incomplete support-tool metadata`);
+}
+
 const indexed = C.sourceIndex.filter(x => x.status === 'source-indexed');
 assert(indexed.length === 8, `Expected 8 indexed EN.E.E.GY.-L. source groups, got ${indexed.length}`);
 assert(C.sourceIndex.filter(x => x.status === 'verified').length === 1, 'Only ZDD source group should be fully reviewed at annual-instructions level at this stage');
 
-console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} detailed entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), simplified assessment policy enforced.`);
+console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} detailed entries, ENEEGYL 8-grade structure, ${SUPPORT.items.length} support tools, simplified assessment policy enforced.`);

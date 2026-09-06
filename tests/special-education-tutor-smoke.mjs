@@ -14,11 +14,12 @@ async function prepare(page,viewport){
 async function renderTutor(page,zoneId,roleId){
   await page.evaluate(({zoneId,roleId})=>{
     history.replaceState({},'',`/${zoneId}/${roleId}/tutor`);
+    window.dispatchEvent(new PopStateEvent('popstate'));
     const view=document.getElementById('tutorView');
     if(view) view.hidden=false;
     window.AITutor.render({zoneId,roleId,lang:'el'});
   },{zoneId,roleId});
-  await page.waitForSelector('#tutorSchoolTrack',{state:'attached',timeout:10000});
+  await page.waitForSelector('#tutorSchoolTrack',{state:'visible',timeout:10000});
   await page.waitForTimeout(150);
 }
 

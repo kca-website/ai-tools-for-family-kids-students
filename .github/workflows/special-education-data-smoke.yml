@@ -6,6 +6,7 @@ on:
       - 'special-education*.js'
       - 'special-education*.html'
       - 'special-education*.css'
+      - 'pwa.js'
       - 'tests/special-education-*.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
   push:
@@ -14,6 +15,7 @@ on:
       - 'special-education*.js'
       - 'special-education*.html'
       - 'special-education*.css'
+      - 'pwa.js'
       - 'tests/special-education-*.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
 
@@ -43,8 +45,10 @@ jobs:
           done
           cat /tmp/aitools4kids-special-http.log
           exit 1
-      - name: Run Special Education desktop/mobile smoke
+      - name: Run Special Education page desktop/mobile smoke
         run: node tests/special-education-page-smoke.mjs
+      - name: Run Special Education AI Tutor desktop/mobile smoke
+        run: node tests/special-education-tutor-smoke.mjs
       - name: Show local server log on failure
         if: failure()
         run: cat /tmp/aitools4kids-special-http.log || true

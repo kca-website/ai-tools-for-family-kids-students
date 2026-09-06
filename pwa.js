@@ -1,54 +1,51 @@
 /* AI Tools 4 Kids: compatibility/runtime loader.
  *
- * This file still exists during the consolidation sprint because production
- * currently depends on the September data patches and tutor extensions below.
- * Tutor extensions now subscribe to one render event instead of independently
- * reassigning window.AITutor.render. The host below is the only transitional
- * wrapper and will ultimately move into tutor.js itself.
+ * The generic site runtime stays small. Special Education datasets are loaded
+ * only on the dedicated Special Education page or when the user actually opens
+ * AI Help and selects a Special Education school track.
  */
 (function(){
   "use strict";
 
   const RUNTIME_SCRIPTS=[
-    // Mobile/PWA shell must load first. The homepage should not wait for tutor
+    // Mobile/PWA shell must load first. The homepage should never wait for tutor
     // datasets/extensions before it gets the compact mobile title and quick actions.
     {id:"pwa-core",src:"/pwa-core.js"},
 
-    // Data-only compatibility patches.
+    // Data-only compatibility patches used by the normal school experience.
     {id:"tool-audit",src:"/september-2026-tool-audit.js"},
     {id:"primary-tutor",src:"/september-2026-primary-tutor.js"},
     {id:"primary-quiz",src:"/september-2026-primary-quiz.js"},
     {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
-    // Special Education data stays isolated from the generic quiz/path datasets.
-    // Only source-bounded units/structures are adapted into the AI Tutor catalog.
-    {id:"special-education-curriculum",src:"/special-education-curriculum-data.js"},
-    {id:"special-education-learning",src:"/special-education-learning-data.js"},
-    {id:"special-education-quiz",src:"/special-education-quiz-data.js"},
-    {id:"special-education-status",src:"/special-education-status.js"},
-    {id:"special-education-economy",src:"/special-education-sector-economy-data.js"},
-    {id:"special-education-special-gymnasium",src:"/special-education-special-gymnasium-data.js"},
-    {id:"special-education-tutor-context",src:"/special-education-tutor-context.js"},
-    {id:"special-education-tutor-catalog",src:"/special-education-tutor-catalog.js"},
-    {id:"special-education-tutor-ui",src:"/special-education-tutor-ui.js"},
-
-    // Register feature listeners in the same effective order as production.
+    // Generic tutor tools. Special Education data is deliberately NOT loaded here.
     {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
     {id:"tutor-study-tools",src:"/tutor-study-tools.js"},
 
-    // One transitional render hook also owns the established tool ordering.
+    // One transitional render hook owns established tool ordering.
     {id:"tutor-render-host",src:"/tutor-render-host.js"},
 
     // Mobile Compact remains behaviorally unchanged and subscribes after layout.
     {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
-
-    // Loaded last so the final mobile wording remains identical to production.
     {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
     // Reporting runtime.
     {id:"report-link",src:"/report-link.js"},
   ];
+
+  function appendScript(id,src,marker="data-aitools4kids-runtime"){
+    if(document.querySelector(`script[${marker}="${id}"]`)) return Promise.resolve();
+    return new Promise((resolve,reject)=>{
+      const script=document.createElement("script");
+      script.src=src;
+      script.async=false;
+      script.setAttribute(marker,id);
+      script.onload=()=>resolve();
+      script.onerror=()=>reject(new Error(`Failed to load ${src}`));
+      document.head.appendChild(script);
+    });
+  }
 
   function loadRuntimeScripts(){
     RUNTIME_SCRIPTS.forEach(({id,src})=>{
@@ -61,11 +58,27 @@
     });
   }
 
-  // During the mobile parity pass the extension files keep injecting the same
-  // CSS blocks as production. tutor-extensions.css is prepared in this branch,
-  // but is intentionally not authoritative yet, avoiding any async stylesheet
-  // timing/FOUC change on phones before visual parity is confirmed.
+  let specialTutorUiPromise=null;
+  function isTutorPath(){
+    const parts=location.pathname.split("/").filter(Boolean);
+    return ["middle","high"].includes(parts[0]) && ["guardian","student"].includes(parts[1]) && parts[2]==="tutor";
+  }
+  function loadSpecialTutorUi(){
+    if(window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI) return Promise.resolve();
+    if(specialTutorUiPromise) return specialTutorUiPromise;
+    specialTutorUiPromise=appendScript("special-education-tutor-ui","/special-education-tutor-ui.js","data-aitools4kids-feature")
+      .catch((err)=>{ specialTutorUiPromise=null; console.error("Special Education tutor UI failed to load.",err); });
+    return specialTutorUiPromise;
+  }
+
   loadRuntimeScripts();
+
+  // The small selector integration is loaded only on AI Help routes. Its heavier
+  // curriculum/learning datasets are loaded by that integration only after a
+  // Special Education school is actually selected.
+  if(isTutorPath()) loadSpecialTutorUi();
+  window.addEventListener("popstate",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
+  document.addEventListener("aitools4kids:tutor-rendered",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
 
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active") ||
@@ -125,5 +138,11 @@
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;
     if(target?.closest("#langEl, #langEn")) setTimeout(refreshAuditDate,0);
+  });
+
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
+    version:1,
+    loadTutorUi:loadSpecialTutorUi,
+    globallyLoadsSpecialData:false
   });
 })();

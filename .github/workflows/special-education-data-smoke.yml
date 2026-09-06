@@ -51,6 +51,8 @@ jobs:
         run: node tests/special-education-diagnostic-smoke.mjs
       - name: Run Special Education AI Tutor desktop/mobile smoke
         run: node tests/special-education-tutor-smoke.mjs
+      - name: Run Special Education AI Tutor action-menu smoke
+        run: node tests/special-education-tutor-actions-smoke.mjs
       - name: Run Special Education AI deep-link smoke
         run: node tests/special-education-deeplink-smoke.mjs
       - name: Show local server log on failure

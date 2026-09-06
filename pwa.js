@@ -88,31 +88,6 @@
       (document.documentElement.lang || "").toLowerCase().startsWith("en");
   }
 
-  // Keep the homepage card current without loading any Special Education data.
-  // This also replaces the old wheelchair shorthand with a neutral education icon.
-  function normalizeSpecialEducationHomeEntry(){
-    const panel=document.getElementById("specialEducationHomeFeature");
-    if(!panel) return;
-    const en=isEnglish();
-    const kicker=panel.querySelector(".se-home-kicker");
-    const title=panel.querySelector(".se-home-title");
-    const copy=panel.querySelector(".se-home-text");
-    const cta=panel.querySelector(".se-home-cta");
-    if(kicker) kicker.textContent=en
-      ? "Special Gymnasium · Special Lyceum · EN.E.E.GY.-L."
-      : "Ειδικό Γυμνάσιο · Ειδικό Λύκειο · ΕΝ.Ε.Ε.ΓΥ.-Λ.";
-    if(title) title.textContent=en
-      ? "🎓 Special Education — Learn step by step"
-      : "🎓 Ειδική Εκπαίδευση — Μαθαίνω βήμα βήμα";
-    if(copy) copy.textContent=en
-      ? "One clear route for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L., with the same AI Help, study and practice flow."
-      : "Μία καθαρή διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ., με την ίδια AI Βοήθεια, μελέτη και εξάσκηση.";
-    if(cta){
-      cta.href="/special-education.html";
-      cta.textContent=en ? "Open Special Education →" : "Μπες στην Ειδική Εκπαίδευση →";
-    }
-  }
-
   function auditDateText(){
     return isEnglish()
       ? "Tools last checked: September 5, 2026"
@@ -151,15 +126,9 @@
     if(el && el.textContent.trim()!==auditDateText()) el.textContent=auditDateText();
   }
 
-  function refreshSmallGlobalUi(){
-    normalizeSpecialEducationHomeEntry();
-    refreshAuditDate();
-  }
-
   function initAuditDate(){
     detachLegacyFooterDateGuard();
-    refreshSmallGlobalUi();
-    setTimeout(normalizeSpecialEducationHomeEntry,0);
+    refreshAuditDate();
   }
 
   if(document.readyState==="loading"){
@@ -167,13 +136,12 @@
   }else{
     initAuditDate();
   }
-  window.addEventListener("load",refreshSmallGlobalUi,{once:true});
+  window.addEventListener("load",refreshAuditDate,{once:true});
 
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;
-    if(target?.closest("#langEl, #langEn")) setTimeout(refreshSmallGlobalUi,0);
+    if(target?.closest("#langEl, #langEn")) setTimeout(refreshAuditDate,0);
   });
-  window.addEventListener("popstate",()=>setTimeout(normalizeSpecialEducationHomeEntry,0));
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
     version:2,

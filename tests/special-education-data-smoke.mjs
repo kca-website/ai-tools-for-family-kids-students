@@ -13,6 +13,7 @@ const files = [
   'special-education-status.js',
   ...sectorModules,
   'special-education-special-gymnasium-data.js',
+  'special-education-special-lyceum-data.js',
   'special-education-tutor-context.js'
 ];
 
@@ -27,13 +28,14 @@ const Q = context.window.SPECIAL_EDUCATION_QUIZZES;
 const S = context.window.SPECIAL_EDUCATION_STATUS;
 const T = context.window.SPECIAL_EDUCATION_TUTOR_CONTEXT;
 const SG = context.window.SPECIAL_GYMNASIUM_2026_2027;
+const SL = context.window.SPECIAL_LYCEUM_2026_2027;
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
 assert(C?.schoolYear === '2026-2027', 'Missing/incorrect Special Education school year');
-assert(C?.entries && L && Q && S?.rows && T?.build && SG, 'Missing Special Education dataset');
+assert(C?.entries && L && Q && S?.rows && T?.build && SG && SL, 'Missing Special Education dataset');
 
 for (const [id, entry] of Object.entries(C.entries)) {
   if (entry.status === 'verified') {
@@ -116,8 +118,14 @@ for (const id of ['special-gym-a-language-comprehension','special-gym-a-math-pro
   assert(L[id] && Q[id], `${id}: missing learning or diagnostic`);
 }
 
+assert(SL.status === 'verified-structure', 'Special Lyceum must be present as a verified current school structure');
+assert(SL.schoolType === 'special-lyceum', 'Special Lyceum school identity is wrong');
+assert(SL.sourceUrl?.includes('minedu.gov.gr'), 'Special Lyceum official Ministry source missing');
+assert(Object.keys(SL.grades || {}).sort().join(',') === 'a,b,c', 'Special Lyceum must expose A/B/C Lyceum grades');
+assert(/δεν|not/i.test(SL.scopeNoteEl + ' ' + SL.scopeNoteEn), 'Special Lyceum must state the no-invented-syllabus boundary');
+
 const indexed = C.sourceIndex.filter(x => x.status === 'source-indexed');
 assert(indexed.length === 8, `Expected 8 indexed EN.E.E.GY.-L. source groups, got ${indexed.length}`);
 assert(C.sourceIndex.filter(x => x.status === 'verified').length === 1, 'Only ZDD source group should be fully reviewed at annual-instructions level at this stage');
 
-console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} detailed entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), Special Gymnasium timetable verified.`);
+console.log(`Special Education data smoke test passed: ${Object.keys(C.entries).length} detailed entries, ${Object.keys(L).length} learning units, ${sectorModules.length} sector module(s), Special Gymnasium and Special Lyceum structures verified.`);

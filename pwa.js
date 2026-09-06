@@ -2,7 +2,7 @@
  *
  * The generic site runtime stays small. Special Education datasets are loaded
  * only on the dedicated Special Education page or when the user actually opens
- * AI Help and selects a Special Education school track.
+ * a Special Education flow.
  */
 (function(){
   "use strict";
@@ -18,6 +18,10 @@
     {id:"primary-quiz",src:"/september-2026-primary-quiz.js"},
     {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
+
+    // Lightweight homepage integration only. Its full Special Education
+    // diagnostic catalog is fetched only after the user chooses that option.
+    {id:"special-education-diagnostic",src:"/special-education-diagnostic.js"},
 
     // Generic tutor tools. Special Education data is deliberately NOT loaded here.
     {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
@@ -146,9 +150,10 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:4,
+    version:5,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
+    diagnosticCatalogLoadsOnDemand:true,
     eneegylEightGradeStructure:true,
     simplifiedSpecialAssessment:true
   });

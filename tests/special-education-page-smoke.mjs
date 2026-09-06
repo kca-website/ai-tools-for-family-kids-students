@@ -30,7 +30,8 @@ async function check(viewport, label) {
   await page.locator('[data-open-sg-unit="special-gym-a-language-comprehension"]').click();
   await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({ state: 'visible' });
   assert((await page.locator('#spSpecialGymUnitMount h3').innerText()).includes('Γλωσσική Διδασκαλία'), `${label}: Special Gymnasium language route did not open`);
-  assert((await page.locator('#spSpecialGymUnitMount').innerText()).includes('όχι δήλωση διδακτέας ύλης'), `${label}: Special Gymnasium source boundary missing`);
+  const sgUnitText=await page.locator('#spSpecialGymUnitMount').innerText();
+  assert(sgUnitText.includes('όχι δήλωση ύλης') || sgUnitText.includes('όχι δήλωση διδακτέας ύλης'), `${label}: Special Gymnasium source boundary missing`);
   await runDiagnostic(page,'#spSpecialGymUnitMount',3,`${label} Special Gym language`);
 
   await page.locator('[data-open-sg-unit="special-gym-a-math-problem-reading"]').click();

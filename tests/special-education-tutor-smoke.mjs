@@ -19,6 +19,11 @@ async function renderTutor(page,zoneId,roleId){
     if(view) view.hidden=false;
     window.AITutor.render({zoneId,roleId,lang:'el'});
   },{zoneId,roleId});
+  await page.waitForSelector('#tutorSchoolTrack',{state:'attached',timeout:10000});
+  const viewport=page.viewportSize();
+  if(viewport?.width<=700 && !(await page.locator('#tutorSchoolTrack').isVisible())){
+    await page.locator('.tutor-mobile-settings-toggle').click();
+  }
   await page.waitForSelector('#tutorSchoolTrack',{state:'visible',timeout:10000});
   await page.waitForTimeout(150);
 }

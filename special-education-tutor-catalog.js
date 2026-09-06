@@ -10,6 +10,7 @@
   const L=window.SPECIAL_EDUCATION_LEARNING;
   const SG=window.SPECIAL_GYMNASIUM_2026_2027;
   const SL=window.SPECIAL_LYCEUM_2026_2027;
+  const EN=window.ENEEGYL_2026_2027_STRUCTURE;
   if(!current || !C?.entries || !L) return;
 
   const GRADE_KEY={A:"a",B:"b",C:"c",D:"d"};
@@ -33,6 +34,11 @@
   function shortTopic(text,max=92){
     const clean=String(text||"").trim();
     return clean.length<=max?clean:`${clean.slice(0,max-1).trimEnd()}…`;
+  }
+
+  function eneegylGradeId(entry){
+    const base=GRADE_KEY[entry?.grade]||String(entry?.grade||"").toLowerCase();
+    return entry?.schoolType==="eneegyl"?`lyc-${base}`:base;
   }
 
   function coverageLabel(entry){
@@ -99,7 +105,7 @@
     const prefix=entry.schoolType==="eneegyl"?"ΕΝ.Ε.Ε.ΓΥ.-Λ.":"Ειδικό Γυμνάσιο";
     return {
       id:entry.id,quizId:null,
-      grade:GRADE_KEY[entry.grade]||String(entry.grade||"").toLowerCase(),
+      grade:eneegylGradeId(entry),
       subjectLabelEl:`${prefix} · ${entry.subject}`,
       subjectLabelEn:`${prefix} · ${entry.subject}`,
       topics,curriculum,
@@ -121,10 +127,11 @@
     const learning=L[entry.id];
     if(entry?.status!=="verified"||!learning||learning.status!=="ready") return;
     const zoneId=entry.schoolType==="eneegyl"?"high":entry.schoolType==="special-gymnasium"?"middle":null;
-    const gradeId=GRADE_KEY[entry.grade]||String(entry.grade||"").toLowerCase();
+    const gradeId=eneegylGradeId(entry);
     if(!zoneId||!gradeId) return;
     registerSubject(zoneId,gradeId,makeDetailedSubject(entry,learning),{
-      gradeLabel:entry.gradeLabel||gradeId.toUpperCase(),detailedLearning:true
+      gradeLabel:entry.schoolType==="eneegyl"?(EN?.grades?.[gradeId]?.label||entry.gradeLabel||gradeId.toUpperCase()):(entry.gradeLabel||gradeId.toUpperCase()),
+      detailedLearning:true
     });
   });
 
@@ -208,6 +215,58 @@
     });
   }
 
+  // EN.E.E.GY.-L. has eight grades. Expose the official school structure even
+  // when a grade/subject does not yet have a detailed mapped learning unit.
+  // All eight grade IDs live under the single ENEEGYL track in the unified tutor.
+  if(EN?.totalGrades===8&&EN.grades){
+    const detailedA={"lyc-a|creative-zone":"eneegyl-a-zdd"};
+    (EN.gradeOrder||Object.keys(EN.grades)).forEach((gradeId)=>{
+      const grade=EN.grades[gradeId];
+      (grade?.subjects||[]).forEach((row,index)=>{
+        const mapped=detailedA[`${gradeId}|${row.id}`];
+        if(mapped&&exposed.some((x)=>x.id===mapped)) return;
+        const id=`eneegyl-${gradeId}-${row.id}`;
+        const exact=row.requiresExactLesson;
+        const topicEl=exact
+          ? "Γράψε τον ακριβή τομέα/ειδικότητα, μάθημα και κεφάλαιο ή βάλε την άσκηση που έχεις μπροστά σου"
+          : "Γράψε το ακριβές κεφάλαιο, κείμενο ή άσκηση που δουλεύεις τώρα";
+        registerSubject("high",gradeId,{
+          id,quizId:null,grade:gradeId,
+          subjectLabelEl:`ΕΝ.Ε.Ε.ΓΥ.-Λ. · ${row.label}`,
+          subjectLabelEn:`EN.E.E.GY.-L. · ${row.label}`,
+          topics:[{
+            id:`${id}.topic-current-work`,
+            labelEl:topicEl,labelEn:topicEl,
+            explainEl:"Η AI Βοήθεια προσαρμόζει τη γλώσσα και τα βήματα, αλλά δεν εφευρίσκει ύλη που δεν έχει δοθεί από το σχολείο.",
+            explainEn:"AI Help adapts language and steps, but does not invent curriculum that has not been provided.",
+            specialEducation:true,schoolType:"eneegyl"
+          }],
+          curriculum:{
+            schoolYear:EN.schoolYear,verificationDate:EN.verificationDate,
+            verificationBasis:"official-2026-timetable-structure",coverageStatus:"official-structure-only",
+            coverageLabelEl:"ΕΝ.Ε.Ε.ΓΥ.-Λ. · επίσημη δομή 8 τάξεων 2026–27",coverageLabelEn:"EN.E.E.GY.-L. · official 8-grade 2026–27 structure",
+            officialSectionsEl:[`${grade.label}: ${row.label}`],officialSectionsEn:[],
+            scopeNoteEl:"Το μάθημα υπάρχει στο επίσημο σχολικό πλαίσιο, αλλά η αναλυτική ύλη του δεν δηλώνεται ως πλήρως χαρτογραφημένη εδώ. Δώσε το πραγματικό κεφάλαιο/άσκηση.",
+            scopeNoteEn:"The subject is part of the official school structure, but detailed syllabus coverage is not claimed here. Provide the real chapter/exercise.",
+            annualInstructionsStatus:grade.level==="lyceum"?"2026-27-hub-available":"not-claimed",
+            annualInstructionsUrl:grade.level==="lyceum"?(EN.sourceUrls?.annualInstructions||""):"",
+            officialTimetableStatus:"2026-27-verified",
+            catalogUrl:grade.sourceUrl||"",
+            sourceLabelEl:grade.level==="gymnasium"?"Ωρολόγιο πρόγραμμα Γυμνασίου ΕΝ.Ε.Ε.ΓΥ.-Λ. 2026–27":"Ωρολόγιο πρόγραμμα Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. 2026–27",
+            sourceLabelEn:"EN.E.E.GY.-L. official 2026–27 timetable",
+            specialEducation:true,schoolType:"eneegyl",structureOnly:true,
+            eneegylLevel:grade.level
+          },
+          specialEducation:true,schoolType:"eneegyl",schoolTrack:"eneegyl",structureOnly:true,
+          eneegylLevel:grade.level,subjectType:row.type||"general",sector:row.sector||""
+        },{
+          gradeLabel:grade.label,detailedLearning:false,structureOnly:true,
+          eneegylLevel:grade.level,subjectType:row.type||"general",order:index
+        });
+      });
+    });
+  }
+
   function getSubjects(zoneId,gradeId){ return zones?.[zoneId]?.[gradeId]||[]; }
   function getSubject(zoneId,gradeId,subjectId){ return getSubjects(zoneId,gradeId).find((x)=>x.id===subjectId||x.quizId===subjectId)||null; }
 
@@ -219,7 +278,8 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG=Object.freeze({
-    version:3,schoolYear:C.schoolYear||"2026-2027",exposed:Object.freeze(exposed),
+    version:4,schoolYear:C.schoolYear||"2026-2027",exposed:Object.freeze(exposed),
+    eneegylGradeCount:EN?.totalGrades||0,
     hasVerifiedSpecialGymnasium:exposed.some((x)=>x.schoolType==="special-gymnasium"),
     hasSpecialLyceum:exposed.some((x)=>x.schoolType==="special-lyceum"),
     hasVerifiedEneegyl:exposed.some((x)=>x.schoolType==="eneegyl")

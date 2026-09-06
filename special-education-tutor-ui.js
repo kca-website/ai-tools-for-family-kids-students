@@ -145,8 +145,15 @@
     if(preferred&&[...grade.options].some((o)=>o.value===preferred)) grade.value=preferred;
   }
 
-  function buildSpecialGrades(grade,track,preferred){
+  function orderedSpecialGradeIds(track){
     const ids=[...new Set(exposedFor(track).map((x)=>x.gradeId))];
+    if(track!=="eneegyl") return ids;
+    const official=window.ENEEGYL_2026_2027_STRUCTURE?.gradeOrder||[];
+    return [...official.filter((id)=>ids.includes(id)),...ids.filter((id)=>!official.includes(id))];
+  }
+
+  function buildSpecialGrades(grade,track,preferred){
+    const ids=orderedSpecialGradeIds(track);
     grade.replaceChildren();
     ids.forEach((id)=>{
       const option=document.createElement("option");
@@ -316,7 +323,7 @@
   else enhance(null);
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({
-    version:4,enhance,ensureSpecialRuntime,
+    version:5,enhance,ensureSpecialRuntime,
     tracks:Object.freeze(Object.keys(TRACKS))
   });
 })();

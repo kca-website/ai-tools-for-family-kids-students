@@ -11,9 +11,11 @@ async function prepare(page,viewport){
   await page.waitForFunction(()=>window.AITutor?.render && window.AITutorRenderHost?.eventName,{timeout:30000});
   const globalSpecial=await page.evaluate(()=>({
     catalog:!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG,
+    eneegylStructure:!!window.ENEEGYL_2026_2027_STRUCTURE,
     heavyScripts:[...document.scripts].filter(s=>/special-education-(curriculum|learning|quiz|special-gymnasium|special-lyceum|tutor-catalog)/.test(s.src)).length
   }));
   assert.equal(globalSpecial.catalog,false,'Special Education catalog should not load on the homepage');
+  assert.equal(globalSpecial.eneegylStructure,false,'ENEEGYL structure should not load on the homepage');
   assert.equal(globalSpecial.heavyScripts,0,'Heavy Special Education scripts should not load globally');
 }
 
@@ -52,7 +54,7 @@ async function selectTrack(page,value){
 async function selectOption(page,selector,value){
   await openSettingsIfNeeded(page,selector);
   await page.selectOption(selector,value);
-  await page.waitForTimeout(220);
+  await page.waitForTimeout(260);
 }
 
 async function assertSimpleQuizButton(page,label){
@@ -100,12 +102,38 @@ async function checkUnified(page,label){
   await selectTrack(page,'eneegyl');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL selection failed`);
   await assertSimpleQuizButton(page,`${label} ENEEGYL`);
+  const enRuntime=await page.evaluate(()=>({
+    totalGrades:window.ENEEGYL_2026_2027_STRUCTURE?.totalGrades,
+    catalogGrades:window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.eneegylGradeCount
+  }));
+  assert.equal(enRuntime.totalGrades,8,`${label}: ENEEGYL official structure did not load as eight grades`);
+  assert.equal(enRuntime.catalogGrades,8,`${label}: ENEEGYL tutor catalog did not register eight grades`);
+
   const enGrades=await page.locator('#tutorGrade option').evaluateAll(els=>els.map(e=>e.value));
-  assert.deepEqual(enGrades.sort(),['a','b'],`${label}: ENEEGYL should expose verified A/B grades only`);
-  await selectOption(page,'#tutorGrade','b');
-  const enSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
-  assert.equal(enSubjects.length,5,`${label}: expected five verified B ENEEGYL units`);
-  assert.ok(enSubjects.includes('eneegyl-b-economy-accounting-basics'),`${label}: accounting missing from ENEEGYL`);
+  assert.deepEqual(enGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL grades must be ordered 4 Gymnasium + 4 Lyceum`);
+
+  await selectOption(page,'#tutorGrade','gym-d');
+  const gymDSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(gymDSubjects.includes('eneegyl-gym-d-economics'),`${label}: ENEEGYL D Gymnasium Economics missing from AI Help`);
+  await selectOption(page,'#tutorSubject','eneegyl-gym-d-economics');
+  const gymDContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(gymDContext,/Δ΄ Γυμνασίου/i,`${label}: ENEEGYL Gymnasium grade identity was lost inside high-route tutor`);
+  assert.match(gymDContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\.|EN\.E\.E\.GY/i,`${label}: ENEEGYL school identity missing from Gymnasium tutor context`);
+  assert.doesNotMatch(gymDContext,/Γενικό Λύκειο/i,`${label}: General Lyceum framing leaked into ENEEGYL Gymnasium context`);
+
+  await selectOption(page,'#tutorGrade','lyc-a');
+  const aSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(aSubjects.length>=18,`${label}: ENEEGYL A Lyceum should be substantially enriched`);
+  assert.ok(aSubjects.includes('eneegyl-a-zdd'),`${label}: mapped A Lyceum ZDD route missing`);
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-economics'),`${label}: A Lyceum Principles of Economy missing`);
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-health'),`${label}: A Lyceum Health elective missing`);
+
+  await selectOption(page,'#tutorGrade','lyc-b');
+  const bSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(bSubjects.length>5,`${label}: ENEEGYL B Lyceum must expose structure plus mapped routes, not only five units`);
+  assert.ok(bSubjects.includes('eneegyl-b-economy-accounting-basics'),`${label}: accounting mapped route missing from B Lyceum`);
+  assert.ok(bSubjects.some(id=>id.startsWith('eneegyl-lyc-b-b-sector-')),`${label}: B Lyceum sector gateways missing`);
+  await assertSimpleQuizButton(page,`${label} ENEEGYL B Lyceum`);
 
   await selectTrack(page,'special-gymnasium');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: cross-zone return to Special Gymnasium failed`);
@@ -123,11 +151,13 @@ async function checkUnified(page,label){
   const lazyState=await page.evaluate(()=>({
     catalog:!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG,
     lyceum:!!window.SPECIAL_LYCEUM_2026_2027,
+    eneegylStructure:!!window.ENEEGYL_2026_2027_STRUCTURE,
     simpleQuiz:!!window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ,
     runtimeScripts:[...document.scripts].filter(s=>s.dataset.specialEducationRuntime).length
   }));
   assert.equal(lazyState.catalog,true,`${label}: special catalog missing after selection`);
   assert.equal(lazyState.lyceum,true,`${label}: Special Lyceum metadata was not lazy-loaded`);
+  assert.equal(lazyState.eneegylStructure,true,`${label}: ENEEGYL structure missing after Special Education selection`);
   assert.equal(lazyState.simpleQuiz,true,`${label}: simplified Special Education quiz adapter missing`);
   assert.ok(lazyState.runtimeScripts>=8,`${label}: expected lazy Special Education runtime scripts`);
 }
@@ -145,7 +175,7 @@ try{
     assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
     await page.close();
   }
-  console.log('Unified lazy-loaded Special Education AI Help with simplified quiz switching passed on desktop/mobile.');
+  console.log('Unified lazy-loaded Special Education AI Help passed with ENEEGYL 8-grade structure and simplified quiz switching on desktop/mobile.');
 }finally{
   await browser.close();
 }

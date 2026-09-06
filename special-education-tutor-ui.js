@@ -1,6 +1,7 @@
 /**
  * School-track selector for AI Help.
  * Subscribes to the shared tutor-render event; never wraps AITutor.render.
+ * Supports safe deep links from the Special Education page.
  */
 (function(){
   "use strict";
@@ -8,6 +9,7 @@
   const RENDER_EVENT="aitools4kids:tutor-rendered";
   const STYLE_ID="aitools4kidsSpecialEducationTutorUi";
   const stateByContext=new Map();
+  const appliedUrlRequests=new Set();
 
   function isEnglish(){
     return document.getElementById("langEn")?.classList.contains("active") ||
@@ -99,7 +101,7 @@
     return (specialMeta()?.exposed || []).some((x)=>x.id===id);
   }
 
-  function filterSubjects(ctx,track){
+  function filterSubjects(ctx,track,preferredSubject=null){
     const subject=document.getElementById("tutorSubject");
     const grade=document.getElementById("tutorGrade");
     if(!subject || !grade) return;
@@ -120,24 +122,44 @@
       subject.disabled=true;
     }else{
       subject.disabled=false;
-      subject.selectedIndex=0;
+      if(preferredSubject && [...subject.options].some((o)=>o.value===preferredSubject)) subject.value=preferredSubject;
+      else subject.selectedIndex=0;
     }
     subject.dispatchEvent(new Event("change",{bubbles:true}));
     const mount=document.getElementById("tutorMount");
     if(mount) mount.dataset.schoolTrack=track;
   }
 
-  function switchTrack(ctx,select,grade,baseGrades,track){
+  function readUrlRequest(ctx,select){
+    const key=contextKey(ctx);
+    if(appliedUrlRequests.has(key)) return null;
+    const params=new URLSearchParams(location.search);
+    const track=params.get("schoolTrack") || "";
+    const grade=params.get("grade") || "";
+    const subject=params.get("subject") || "";
+    if(!track || ![...select.options].some((o)=>o.value===track && !o.disabled)) return null;
+    if(track==="eneegyl" && ctx.zoneId!=="high") return null;
+    if(track==="special-gymnasium" && ctx.zoneId!=="middle") return null;
+    appliedUrlRequests.add(key);
+    return {track,grade,subject};
+  }
+
+  function switchTrack(ctx,select,grade,baseGrades,track,preferredGrade=null,preferredSubject=null){
     const key=contextKey(ctx);
     const previous=stateByContext.get(key) || {track:"general",generalGrade:grade.value};
     if(previous.track==="general" && grade.value) previous.generalGrade=grade.value;
     previous.track=track;
+    if(track!=="general"){
+      previous.specialGrade=preferredGrade || previous.specialGrade || grade.value;
+      previous.pendingSubject=preferredSubject || null;
+    }
     stateByContext.set(key,previous);
 
     if(track==="general"){
       restoreBaseGrades(grade,baseGrades,previous.generalGrade);
     }else{
-      buildSpecialGrades(grade,ctx,track,grade.value);
+      buildSpecialGrades(grade,ctx,track,preferredGrade || previous.specialGrade || grade.value);
+      previous.specialGrade=grade.value;
     }
     select.value=track;
     grade.dispatchEvent(new Event("change",{bubbles:true}));
@@ -182,20 +204,29 @@
     }
 
     const key=contextKey(ctx);
+    const urlRequest=readUrlRequest(ctx,select);
     const saved=stateByContext.get(key);
-    const requested=saved?.track && [...select.options].some((o)=>o.value===saved.track && !o.disabled)?saved.track:"general";
+    const requestedTrack=urlRequest?.track || (saved?.track && [...select.options].some((o)=>o.value===saved.track && !o.disabled)?saved.track:"general");
 
     grade.addEventListener("change",()=>{
       const active=select.value || "general";
-      queueMicrotask(()=>filterSubjects(ctx,active));
+      const state=stateByContext.get(key) || {track:active};
+      if(active!=="general") state.specialGrade=grade.value;
+      const preferred=state.pendingSubject || null;
+      stateByContext.set(key,state);
+      queueMicrotask(()=>{
+        filterSubjects(ctx,active,preferred);
+        if(state.pendingSubject===preferred) state.pendingSubject=null;
+      });
     });
+
     select.addEventListener("change",()=>switchTrack(ctx,select,grade,baseGrades,select.value || "general"));
 
-    if(requested==="general"){
+    if(requestedTrack==="general"){
       select.value="general";
       filterSubjects(ctx,"general");
     }else{
-      switchTrack(ctx,select,grade,baseGrades,requested);
+      switchTrack(ctx,select,grade,baseGrades,requestedTrack,urlRequest?.grade || saved?.specialGrade || null,urlRequest?.subject || null);
     }
   }
 
@@ -203,5 +234,5 @@
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>enhance(null),{once:true});
   else enhance(null);
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:2,enhance});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:3,enhance});
 })();

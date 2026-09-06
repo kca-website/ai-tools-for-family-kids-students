@@ -49,6 +49,8 @@ jobs:
         run: node tests/special-education-page-smoke.mjs
       - name: Run Special Education AI Tutor desktop/mobile smoke
         run: node tests/special-education-tutor-smoke.mjs
+      - name: Run Special Education AI deep-link smoke
+        run: node tests/special-education-deeplink-smoke.mjs
       - name: Show local server log on failure
         if: failure()
         run: cat /tmp/aitools4kids-special-http.log || true

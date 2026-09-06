@@ -312,6 +312,63 @@
     `;
   }
 
+  function ensureSpecialEducationEntry(){
+    const host=document.getElementById("zoneSelectView");
+    const zoneGrid=document.getElementById("zoneGrid");
+    if(!host || !zoneGrid) return;
+
+    let style=document.getElementById("specialEducationHomeStyle");
+    if(!style){
+      style=document.createElement("style");
+      style.id="specialEducationHomeStyle";
+      style.textContent=`
+        #specialEducationHomeFeature{margin:-18px 0 36px;padding:20px 22px;border:1px solid #cbd5e1;border-left:5px solid #7c5cbf;border-radius:16px;background:linear-gradient(135deg,#fff,#f8f7fc);display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+        #specialEducationHomeFeature .se-home-copy{min-width:0;flex:1}
+        #specialEducationHomeFeature .se-home-kicker{font-size:.76rem;font-weight:800;color:#6d55a8;letter-spacing:.02em;margin-bottom:5px}
+        #specialEducationHomeFeature .se-home-title{font-family:var(--font-heading);font-size:1.16rem;line-height:1.3;font-weight:800;color:#1f2937;margin-bottom:6px}
+        #specialEducationHomeFeature .se-home-text{max-width:760px;font-size:.9rem;line-height:1.55;color:#52606d}
+        #specialEducationHomeFeature .se-home-cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 16px;border-radius:10px;background:#6750a4;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap;box-shadow:0 2px 5px rgba(103,80,164,.16)}
+        #specialEducationHomeFeature .se-home-cta:hover{background:#58428f;transform:translateY(-1px)}
+        @media(max-width:700px){
+          #specialEducationHomeFeature{margin:-20px 0 30px;padding:17px 16px;display:block;border-left-width:4px}
+          #specialEducationHomeFeature .se-home-title{font-size:1.05rem}
+          #specialEducationHomeFeature .se-home-text{font-size:.87rem}
+          #specialEducationHomeFeature .se-home-cta{display:flex;width:100%;margin-top:14px;white-space:normal;text-align:center}
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    let panel=document.getElementById("specialEducationHomeFeature");
+    if(!panel){
+      panel=document.createElement("section");
+      panel.id="specialEducationHomeFeature";
+      panel.setAttribute("aria-label","Special Education learning path");
+      zoneGrid.insertAdjacentElement("afterend",panel);
+    }
+
+    const en=isEnglish();
+    const signature=String(en);
+    if(panel.dataset.signature===signature) return;
+    panel.dataset.signature=signature;
+
+    const kicker=en ? "Special Middle School · EN.E.E.GY.-L." : "Ειδικό Γυμνάσιο · ΕΝ.Ε.Ε.ΓΥ.-Λ.";
+    const title=en ? "♿ Special Education — Learn step by step" : "♿ Ειδική Εκπαίδευση — Μαθαίνω βήμα βήμα";
+    const text=en
+      ? "A separate learning path with step-by-step study, practice and parent support. Content is added only when its official educational basis has been verified."
+      : "Ξεχωριστή διαδρομή με βήμα-βήμα μελέτη, εξάσκηση και βοήθεια γονιού. Το περιεχόμενο προστίθεται μόνο όταν έχει επαληθευτεί η επίσημη εκπαιδευτική βάση του.";
+    const cta=en ? "Open Special Education →" : "Μπες στην Ειδική Εκπαίδευση →";
+
+    panel.innerHTML=`
+      <div class="se-home-copy">
+        <div class="se-home-kicker">${kicker}</div>
+        <div class="se-home-title">${title}</div>
+        <div class="se-home-text">${text}</div>
+      </div>
+      <a class="se-home-cta" href="/special-education-preview.html">${cta}</a>
+    `;
+  }
+
   function ensureStartHere(){
     const roleTabs=document.getElementById("roleTabs");
     if(!roleTabs) return;
@@ -394,6 +451,7 @@
     ensureQuizPathFlow();
     ensurePerfectScoreEnrichment();
     ensureSignLanguageEntry();
+    ensureSpecialEducationEntry();
     ensureMethodologyFooter();
   }
 

@@ -67,6 +67,7 @@
 
     const scopeBoundary=entry.verificationNote || "Η ενότητα χρησιμοποιεί μόνο τα επαληθευμένα σημεία αναφοράς που εμφανίζονται στη σελίδα Ειδικής Εκπαίδευσης.";
     const schoolName=entry.schoolType==="eneegyl"?"ΕΝ.Ε.Ε.ΓΥ.-Λ.":"Ειδικό Γυμνάσιο";
+    const examVerified=entry.currentExamSyllabusStatus==="verified";
     const curriculum={
       schoolYear:C.schoolYear || "2026-2027",
       verificationDate:entry.verificationDate || C.verificationDate || "",
@@ -78,10 +79,12 @@
       officialSectionsEn:[],
       scopeNoteEl:`${schoolName}: ξεχωριστό σχολικό πλαίσιο. ${scopeBoundary} Η παρουσίαση είναι βήμα-βήμα και δεν μετατρέπει την ενότητα σε ύλη ΓΕΛ/γενικού σχολείου.`,
       scopeNoteEn:`${schoolName}: separate school context. This unit is deliberately limited to its verified source boundary and must not be treated as General Lyceum curriculum.`,
-      annualInstructionsStatus:entry.annualInstructionsStatus==="verified"?"2026-27-verified":(entry.annualInstructionsStatus || "unknown"),
-      annualInstructionsUrl:entry.instructionSourceUrl || entry.sourceUrl || "",
-      currentExamSyllabusStatus:entry.currentExamSyllabusStatus==="verified"?"2026-27-verified":(entry.currentExamSyllabusStatus || "unknown"),
-      currentExamSyllabusUrl:entry.currentExamSyllabusStatus==="verified"?(entry.sourceUrl || ""):"",
+      annualInstructionsStatus:examVerified?"current-exam-syllabus-verified":(entry.annualInstructionsStatus==="verified"?"2026-27-verified":(entry.annualInstructionsStatus || "unknown")),
+      annualInstructionsUrl:examVerified?(entry.sourceUrl || ""):(entry.instructionSourceUrl || entry.sourceUrl || ""),
+      teachingInstructionsStatus:entry.annualInstructionsStatus || "unknown",
+      teachingInstructionsUrl:entry.instructionSourceUrl || "",
+      currentExamSyllabusStatus:examVerified?"2026-27-verified":(entry.currentExamSyllabusStatus || "unknown"),
+      currentExamSyllabusUrl:examVerified?(entry.sourceUrl || ""):"",
       catalogUrl:entry.sourceUrl || "",
       sourceLabelEl:entry.sourceTitle || "Επίσημη πηγή 2026–27",
       sourceLabelEn:"Official 2026–27 source",

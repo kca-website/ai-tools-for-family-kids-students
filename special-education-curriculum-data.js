@@ -28,6 +28,7 @@ window.SPECIAL_EDUCATION_CURRICULUM = {
       subjectType: "Μάθημα Προσανατολισμού",
       status: "verified",
       coverageStatus: "pilot",
+      verificationBasis: "annual-instructions",
       annualInstructionsStatus: "verified",
       verificationDate: "2026-09-06",
       protocol: "113779/Δ3 · 02/09/2026",
@@ -52,6 +53,8 @@ window.SPECIAL_EDUCATION_CURRICULUM = {
       subjectType: "Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",
       status: "verified",
       coverageStatus: "partial",
+      verificationBasis: "current-exam-syllabus",
+      currentExamSyllabusStatus: "verified",
       annualInstructionsStatus: "source-indexed",
       verificationDate: "2026-09-06",
       protocol: "99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",
@@ -65,7 +68,7 @@ window.SPECIAL_EDUCATION_CURRICULUM = {
         "Από την υποενότητα «όρεξη-πείνα-κορεσμός» περιλαμβάνονται οι αντίστοιχοι ορισμοί",
         "Περιλαμβάνονται επίσης οι σελίδες 45-48 σύμφωνα με την απόφαση"
       ],
-      verificationNote: "Η παρούσα μαθησιακή ενότητα καλύπτει μόνο τις βασικές έννοιες που αντιστοιχούν στα παραπάνω επαληθευμένα anchors· δεν παρουσιάζεται ως πλήρης κάλυψη όλου του μαθήματος."
+      verificationNote: "Η παρούσα μαθησιακή ενότητα καλύπτει μόνο τις βασικές έννοιες που αντιστοιχούν στα παραπάνω επαληθευμένα anchors. Η εγκύκλιος διδασκαλίας της 03/09/2026 έχει εντοπιστεί, αλλά δεν χρησιμοποιείται εδώ ως πηγή των συγκεκριμένων anchors."
     },
     "eneegyl-b-mechanics-thermo-basics": {
       id: "eneegyl-b-mechanics-thermo-basics",
@@ -77,6 +80,8 @@ window.SPECIAL_EDUCATION_CURRICULUM = {
       subjectType: "Μάθημα Τομέα · επαληθευμένη μερική κάλυψη",
       status: "verified",
       coverageStatus: "partial",
+      verificationBasis: "current-exam-syllabus",
+      currentExamSyllabusStatus: "verified",
       annualInstructionsStatus: "source-indexed",
       verificationDate: "2026-09-06",
       protocol: "99340/Δ3 · 23/07/2026 · ΦΕΚ 4610/Β/24-07-2026",
@@ -91,7 +96,7 @@ window.SPECIAL_EDUCATION_CURRICULUM = {
         "1.6 Επιλογή συστήματος",
         "Η επίσημη εξεταστέα ύλη συνεχίζεται και σε μεταγενέστερα κεφάλαια· εδώ ανοίγουμε μόνο το πρώτο, βασικό τμήμα ως ελεγχόμενο learning unit"
       ],
-      verificationNote: "Η παρούσα μαθησιακή ενότητα είναι σκόπιμα περιορισμένη στις βασικές έννοιες του Κεφαλαίου 1 και δεν παρουσιάζεται ως πλήρης κάλυψη της εξεταστέας ύλης του μαθήματος."
+      verificationNote: "Η παρούσα μαθησιακή ενότητα είναι σκόπιμα περιορισμένη στις βασικές έννοιες του Κεφαλαίου 1. Η εγκύκλιος διδασκαλίας της 03/09/2026 έχει εντοπιστεί, αλλά δεν χρησιμοποιείται εδώ ως πηγή των συγκεκριμένων anchors."
     }
   },
   sourceIndex: [

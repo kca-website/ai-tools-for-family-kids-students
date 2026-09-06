@@ -47,6 +47,8 @@ jobs:
           exit 1
       - name: Run Special Education page desktop/mobile smoke
         run: node tests/special-education-page-smoke.mjs
+      - name: Run Special Education homepage diagnostic smoke
+        run: node tests/special-education-diagnostic-smoke.mjs
       - name: Run Special Education AI Tutor desktop/mobile smoke
         run: node tests/special-education-tutor-smoke.mjs
       - name: Run Special Education AI deep-link smoke

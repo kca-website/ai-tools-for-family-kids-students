@@ -1,4 +1,4 @@
-/** DOM/data refinements loaded after app.js: v3.1.6. */
+/** DOM/data refinements loaded after app.js: v3.1.7. */
 (function(){
   "use strict";
 
@@ -352,11 +352,15 @@
     if(panel.dataset.signature===signature) return;
     panel.dataset.signature=signature;
 
-    const kicker=en ? "Special Middle School · EN.E.E.GY.-L." : "Ειδικό Γυμνάσιο · ΕΝ.Ε.Ε.ΓΥ.-Λ.";
-    const title=en ? "♿ Special Education — Learn step by step" : "♿ Ειδική Εκπαίδευση — Μαθαίνω βήμα βήμα";
+    const kicker=en
+      ? "Special Gymnasium · Special Lyceum · EN.E.E.GY.-L."
+      : "Ειδικό Γυμνάσιο · Ειδικό Λύκειο · ΕΝ.Ε.Ε.ΓΥ.-Λ.";
+    const title=en
+      ? "🎓 Special Education — Learn step by step"
+      : "🎓 Ειδική Εκπαίδευση — Μαθαίνω βήμα βήμα";
     const text=en
-      ? "A separate learning path with step-by-step study, practice and parent support. Content is added only when its official educational basis has been verified."
-      : "Ξεχωριστή διαδρομή με βήμα-βήμα μελέτη, εξάσκηση και βοήθεια γονιού. Το περιεχόμενο προστίθεται μόνο όταν έχει επαληθευτεί η επίσημη εκπαιδευτική βάση του.";
+      ? "One clear route for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L., with the same AI Help, study and practice flow."
+      : "Μία καθαρή διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ., με την ίδια AI Βοήθεια, μελέτη και εξάσκηση.";
     const cta=en ? "Open Special Education →" : "Μπες στην Ειδική Εκπαίδευση →";
 
     panel.innerHTML=`
@@ -365,7 +369,7 @@
         <div class="se-home-title">${title}</div>
         <div class="se-home-text">${text}</div>
       </div>
-      <a class="se-home-cta" href="/special-education-preview.html">${cta}</a>
+      <a class="se-home-cta" href="/special-education.html">${cta}</a>
     `;
   }
 

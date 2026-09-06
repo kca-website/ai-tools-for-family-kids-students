@@ -64,12 +64,13 @@
     return ["middle","high"].includes(parts[0]) && ["guardian","student"].includes(parts[1]) && parts[2]==="tutor";
   }
   function loadSpecialTutorUi(){
-    if(window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI) return Promise.resolve();
+    if(window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI && window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ) return Promise.resolve();
     if(specialTutorUiPromise) return specialTutorUiPromise;
     // The tiny status registry is needed by one Special Gymnasium data module,
     // but it is loaded only on AI Help routes — never on the homepage/tools/quiz.
     specialTutorUiPromise=appendScript("special-education-status","/special-education-status.js","data-aitools4kids-feature")
       .then(()=>appendScript("special-education-tutor-ui","/special-education-tutor-ui.js","data-aitools4kids-feature"))
+      .then(()=>appendScript("special-simple-quiz","/tutor-special-simple-quiz.js","data-aitools4kids-feature"))
       .catch((err)=>{ specialTutorUiPromise=null; console.error("Special Education tutor UI failed to load.",err); });
     return specialTutorUiPromise;
   }
@@ -144,8 +145,9 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:2,
+    version:3,
     loadTutorUi:loadSpecialTutorUi,
-    globallyLoadsSpecialData:false
+    globallyLoadsSpecialData:false,
+    simplifiedSpecialAssessment:true
   });
 })();

@@ -12,7 +12,15 @@
   const progressMount=document.getElementById("spProgressMount");
   const branchButtons=[...document.querySelectorAll(".sp-branch")];
   const backButtons=[...document.querySelectorAll(".sp-back")];
-  const esc=(v)=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+  function esc(v){
+    return String(v??"").replace(/[&<>"']/g,function(ch){
+      if(ch==="&") return "&amp;";
+      if(ch==="<") return "&lt;";
+      if(ch===">") return "&gt;";
+      if(ch==='"') return "&quot;";
+      return "&#39;";
+    });
+  }
 
   function showBranch(id){
     home.hidden=true; sg.hidden=id!=="special-gymnasium"; en.hidden=id!=="eneegyl";

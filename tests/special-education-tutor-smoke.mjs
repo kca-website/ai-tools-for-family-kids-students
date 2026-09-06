@@ -60,7 +60,6 @@ async function checkUnified(page,label){
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'general-middle',`${label}: middle school should remain the initial default`);
   assert.ok(options.every(x=>!x.disabled),`${label}: every school type should be selectable from one AI Help`);
 
-  // Lazy loading happens only after the first special-school choice.
   assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG),false,`${label}: special catalog loaded before selection`);
   await selectTrack(page,'special-gymnasium');
   await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedSpecialGymnasium,{timeout:20000});
@@ -70,9 +69,7 @@ async function checkUnified(page,label){
   const sgSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
   assert.ok(sgSubjects.includes('special-gym-a-language-comprehension')&&sgSubjects.includes('special-gym-a-math-problem-reading'),`${label}: Special Gymnasium detailed subjects missing`);
 
-  // The same selector switches to Special Lyceum; no second Puter/tutor instance.
   await selectTrack(page,'special-lyceum');
-  assert.ok(location, 'noop');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-lyceum',`${label}: Special Lyceum selection failed`);
   assert.deepEqual((await page.locator('#tutorGrade option').evaluateAll(els=>els.map(e=>e.value))).sort(),['a','b','c'],`${label}: Special Lyceum grades wrong`);
   await selectOption(page,'#tutorGrade','a');
@@ -82,7 +79,6 @@ async function checkUnified(page,label){
   const slContext=await page.locator('#tutorContextBox').innerText();
   assert.match(slContext,/Ειδικό Λύκειο|Special Lyceum/i,`${label}: Special Lyceum context identity missing`);
 
-  // Switch to ENEEGYL from the same selector.
   await selectTrack(page,'eneegyl');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL selection failed`);
   const enGrades=await page.locator('#tutorGrade option').evaluateAll(els=>els.map(e=>e.value));
@@ -92,7 +88,6 @@ async function checkUnified(page,label){
   assert.equal(enSubjects.length,5,`${label}: expected five verified B ENEEGYL units`);
   assert.ok(enSubjects.includes('eneegyl-b-economy-accounting-basics'),`${label}: accounting missing from ENEEGYL`);
 
-  // And back across level boundaries without a second UI/Puter surface.
   await selectTrack(page,'special-gymnasium');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: cross-zone return to Special Gymnasium failed`);
   await selectTrack(page,'general-high');

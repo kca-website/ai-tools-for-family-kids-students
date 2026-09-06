@@ -125,32 +125,8 @@
     if(mount) mount.dataset.schoolTrack=track;
   }
 
-  function preserveMobileSettingsOpen(key){
-    const settings=document.querySelector("#tutorMount .tutor-settings");
-    if(!settings?.classList.contains("mobile-settings-open")) return;
-    const saved=stateByContext.get(key) || {};
-    saved.keepMobileSettingsOpen=true;
-    stateByContext.set(key,saved);
-  }
-
-  function restoreMobileSettingsOpen(key){
-    const saved=stateByContext.get(key);
-    if(!saved?.keepMobileSettingsOpen) return;
-    saved.keepMobileSettingsOpen=false;
-    stateByContext.set(key,saved);
-    requestAnimationFrame(()=>{
-      if(!window.matchMedia?.("(max-width:700px)").matches) return;
-      const settings=document.querySelector("#tutorMount .tutor-settings");
-      const toggle=settings?.querySelector(".tutor-mobile-settings-toggle");
-      if(settings && !settings.classList.contains("mobile-settings-open") && toggle){
-        toggle.click();
-      }
-    });
-  }
-
   function switchTrack(ctx,select,grade,baseGrades,track){
     const key=contextKey(ctx);
-    preserveMobileSettingsOpen(key);
     const previous=stateByContext.get(key) || {track:"general",generalGrade:grade.value};
     if(previous.track==="general" && grade.value) previous.generalGrade=grade.value;
     previous.track=track;
@@ -163,7 +139,6 @@
     }
     select.value=track;
     grade.dispatchEvent(new Event("change",{bubbles:true}));
-    restoreMobileSettingsOpen(key);
   }
 
   function enhance(context){
@@ -209,12 +184,8 @@
     const requested=saved?.track && [...select.options].some((o)=>o.value===saved.track && !o.disabled)?saved.track:"general";
 
     grade.addEventListener("change",()=>{
-      preserveMobileSettingsOpen(key);
       const active=select.value || "general";
-      queueMicrotask(()=>{
-        filterSubjects(ctx,active);
-        restoreMobileSettingsOpen(key);
-      });
+      queueMicrotask(()=>filterSubjects(ctx,active));
     });
     select.addEventListener("change",()=>switchTrack(ctx,select,grade,baseGrades,select.value || "general"));
 
@@ -224,12 +195,11 @@
     }else{
       switchTrack(ctx,select,grade,baseGrades,requested);
     }
-    restoreMobileSettingsOpen(key);
   }
 
   document.addEventListener(RENDER_EVENT,(event)=>enhance(event.detail?.context || null));
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>enhance(null),{once:true});
   else enhance(null);
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:3,enhance});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({version:1,enhance});
 })();

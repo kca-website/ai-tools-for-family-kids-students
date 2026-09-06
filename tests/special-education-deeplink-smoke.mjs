@@ -56,19 +56,34 @@ try{
     assert.deepEqual(slErrors,[],`${label}: Special Lyceum deep-link errors: ${slErrors.join('\n')}`);
     await sl.close();
 
+    const enGym=await browser.newPage({viewport});
+    const enGymErrors=[];
+    enGym.on('pageerror',(err)=>enGymErrors.push(err.message));
+    enGym.on('console',(msg)=>{if(msg.type()==='error') enGymErrors.push(msg.text());});
+    await openDeepLink(enGym,{startZone:'middle',expectedZone:'high',role:'student',track:'eneegyl',grade:'gym-d',subject:'eneegyl-gym-d-economics'});
+    assert.equal(await enGym.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL Gymnasium track deep link failed`);
+    assert.equal(await enGym.inputValue('#tutorGrade'),'gym-d',`${label}: ENEEGYL D Gymnasium grade deep link failed`);
+    assert.equal(await enGym.inputValue('#tutorSubject'),'eneegyl-gym-d-economics',`${label}: ENEEGYL D Gymnasium subject deep link failed`);
+    const enGymContext=await enGym.locator('#tutorContextBox').innerText();
+    assert.match(enGymContext,/Δ΄ Γυμνασίου/i,`${label}: ENEEGYL Gymnasium context lost grade identity`);
+    assert.match(enGymContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./i,`${label}: ENEEGYL Gymnasium context lost school identity`);
+    assert.deepEqual(enGymErrors,[],`${label}: ENEEGYL Gymnasium deep-link errors: ${enGymErrors.join('\n')}`);
+    await enGym.close();
+
     const en=await browser.newPage({viewport});
     const enErrors=[];
     en.on('pageerror',(err)=>enErrors.push(err.message));
     en.on('console',(msg)=>{if(msg.type()==='error') enErrors.push(msg.text());});
-    await openDeepLink(en,{startZone:'middle',expectedZone:'high',role:'guardian',track:'eneegyl',grade:'b',subject:'eneegyl-b-economy-accounting-basics'});
-    assert.equal(await en.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL track deep link failed`);
+    await openDeepLink(en,{startZone:'middle',expectedZone:'high',role:'guardian',track:'eneegyl',grade:'lyc-b',subject:'eneegyl-b-economy-accounting-basics'});
+    assert.equal(await en.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL Lyceum track deep link failed`);
+    assert.equal(await en.inputValue('#tutorGrade'),'lyc-b',`${label}: ENEEGYL B Lyceum grade deep link failed`);
     assert.equal(await en.inputValue('#tutorSubject'),'eneegyl-b-economy-accounting-basics',`${label}: ENEEGYL subject deep link failed`);
     assert.match(await en.locator('#tutorContextBox').innerText(),/Λογιστικ|ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./i,`${label}: ENEEGYL context failed`);
-    assert.deepEqual(enErrors,[],`${label}: ENEEGYL deep-link errors: ${enErrors.join('\n')}`);
+    assert.deepEqual(enErrors,[],`${label}: ENEEGYL Lyceum deep-link errors: ${enErrors.join('\n')}`);
     await en.close();
   }
 
-  console.log('Unified Special Education AI Help deep links passed on desktop/mobile.');
+  console.log('Unified Special Education AI Help deep links passed for Special Gymnasium, Special Lyceum and ENEEGYL Gymnasium/Lyceum on desktop/mobile.');
 }finally{
   await browser.close();
 }

@@ -10,6 +10,10 @@
   "use strict";
 
   const RUNTIME_SCRIPTS=[
+    // Mobile/PWA shell must load first. The homepage should not wait for tutor
+    // datasets/extensions before it gets the compact mobile title and quick actions.
+    {id:"pwa-core",src:"/pwa-core.js"},
+
     // Data-only compatibility patches.
     {id:"tool-audit",src:"/september-2026-tool-audit.js"},
     {id:"primary-tutor",src:"/september-2026-primary-tutor.js"},
@@ -42,8 +46,7 @@
     // Loaded last so the final mobile wording remains identical to production.
     {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
-    // PWA/report runtime.
-    {id:"pwa-core",src:"/pwa-core.js"},
+    // Reporting runtime.
     {id:"report-link",src:"/report-link.js"},
   ];
 

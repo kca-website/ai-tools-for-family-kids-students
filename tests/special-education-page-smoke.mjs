@@ -73,7 +73,7 @@ async function check(viewport, label) {
   await runDiagnostic(page,'#spUnitMount',2,`${label} accounting`);
 
   if (viewport.width <= 600) {
-    const sourceButtons = await page.locator('.sp-source-actions .sp-btn').evaluateAll((els) => els.map((el) => {
+    const sourceButtons = await page.locator('#spEneegyl .sp-source-actions .sp-btn').evaluateAll((els) => els.map((el) => {
       const r = el.getBoundingClientRect();
       return { left: r.left, right: r.right, width: r.width };
     }));

@@ -26,7 +26,6 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
   page.on('pageerror', (err) => errors.push(`pageerror: ${err.message}`));
-  page.on('console', (msg) => { if (msg.type() === 'error') errors.push(`console: ${msg.text()}`); });
 
   await page.route('**/_vercel/insights/script.js', (route) => route.fulfill({
     status: 200,

@@ -249,7 +249,7 @@
           <a href="${aiHref}" style="font-weight:700;color:var(--color-accent);">${en ? `Open ${aiLabel} →` : `Άνοιξε ${aiLabel} →`}</a>
         </div>
       </div>
-      <div style="margin-top:10px;font-size:.82rem;color:#64748b;">${en ? "You can also retake the Practice Map later; questions are shuffled between attempts." : "Μπορείς επίσης να ξανακάνεις τον Διαγνωστικό αργότερα· οι ερωτήσεις ανακατεύονται μεταξύ προσπαθειών."}</div>
+      <div style="margin-top:10px;font-size:.82rem;color:#64748b;">${en ? "You can also retake the Practice Map later; questions are shuffled between attempts." : "Μπορείς επίσης να ξανακάνεις τον Χάρτη Εξάσκησης αργότερα· οι ερωτήσεις ανακατεύονται μεταξύ προσπαθειών."}</div>
     `;
   }
 
@@ -388,8 +388,8 @@
     }
     const en=isEnglish();
     const title=en ? "Not sure where to start?" : "Δεν ξέρεις από πού να ξεκινήσεις;";
-    const text=en ? "Take the 2-minute Practice Map first. It shows what may need practice and then leads you to the relevant Learning Path." : "Κάνε πρώτα τον Διαγνωστικό Χάρτη των 2 λεπτών. Θα σου δείξει τι μπορεί να θέλει εξάσκηση και μετά θα σε οδηγήσει στο αντίστοιχο Μονοπάτι Μάθησης.";
-    const cta=en ? "Start the 2-minute check →" : "Κάνε το διαγνωστικό (2') →";
+    const text=en ? "Take the 2-minute Practice Map first. It shows what may need practice and then leads you to the relevant Learning Path." : "Ξεκίνα με τον Χάρτη Εξάσκησης των 2 λεπτών. Θα σου δείξει τι μπορεί να θέλει εξάσκηση και μετά θα σε οδηγήσει στο αντίστοιχο Μονοπάτι Μάθησης.";
+    const cta=en ? "Start the 2-minute check →" : "Άνοιξε τον Χάρτη Εξάσκησης →";
     const href=`/${zone}/${role}/quiz`;
     const signature=[en,zone,role].join("|");
     if(box.dataset.signature===signature) return;

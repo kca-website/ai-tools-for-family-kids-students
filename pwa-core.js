@@ -418,7 +418,7 @@
           : "Η AI Βοήθεια καθοδηγεί με ερωτήσεις και υποδείξεις αντί να δίνει έτοιμη απάντηση.");
     const quick=en
       ? "<strong>Quick guide:</strong> Tools = recommendations · Practice Map = what needs practice · AI Help = guided support."
-      : "<strong>Γρήγορα:</strong> Εργαλεία = προτάσεις · Διαγνωστικός = τι θέλει εξάσκηση · AI Βοήθεια = καθοδήγηση.";
+      : "<strong>Γρήγορα:</strong> Εργαλεία = προτάσεις · Χάρτης Εξάσκησης = τι θέλει εξάσκηση · AI Βοήθεια = καθοδήγηση.";
 
     box.innerHTML=`
       <details class="pwa-role-details">

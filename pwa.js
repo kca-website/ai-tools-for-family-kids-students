@@ -80,6 +80,19 @@
     });
   }
 
+  function restoreStandaloneHomepageCoreEntries(){
+    if(!isHomepage() || document.getElementById("pwaHomepageParityStyles")) return;
+    const style=document.createElement("style");
+    style.id="pwaHomepageParityStyles";
+    style.textContent=`
+      @media (max-width:820px){
+        html body.pwa-standalone #zoneSelectView .hero__quiz-cta-wrap,
+        html body.pwa-standalone #zoneSelectView .hero__ai-help{display:block!important;}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   let specialTutorUiPromise=null;
   function isTutorPath(){
     const parts=routeParts();
@@ -99,6 +112,7 @@
     return specialTutorUiPromise;
   }
 
+  restoreStandaloneHomepageCoreEntries();
   loadRuntimeScripts();
 
   // The small selector integration is loaded only on AI Help routes. Its heavier

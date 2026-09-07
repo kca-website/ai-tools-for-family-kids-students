@@ -11,8 +11,8 @@
       --blue: #2E6BA3; --green: #1E7A4C; --ink: #1F2430; --muted: #5A6270;
       --bg-soft: #F0F7FF; --border: #E3E8F0;
       --good-bg: #EAF7EF; --good-fg: #1E7A4C;
-      --caution-bg: #FFF3E0; --caution-fg: #B25E00;
-      --none-bg: #F3F4F6; --none-fg: #6B7280;
+      --caution-bg: #FFF3E0; --caution-fg: #9A4F00;
+      --none-bg: #F3F4F6; --none-fg: #5F6672;
     }
     * { box-sizing: border-box; }
     body {
@@ -42,6 +42,9 @@
     .back-link { display: inline-block; margin-top: 24px; color: var(--blue); text-decoration: none; font-weight: 600; }
     .back-link:hover { text-decoration: underline; }
     .summary-box { background: var(--bg-soft); padding: 16px; border-radius: 8px; margin: 24px 0; font-size: 14px; }
+    .table-fallback { color: var(--muted); font-size: 13px; }
+    .statement-list { padding-left: 22px; }
+    .statement-list li + li { margin-top: 8px; }
   </style>
 </head>
 <body>
@@ -65,13 +68,29 @@
       <tr><th>Εργαλείο</th><th>Status</th><th>Σημείωση</th></tr>
     </thead>
     <tbody id="a11yTableBody">
-      <!-- Γεμίζει δυναμικά μέσω JS από το ACCESSIBILITY_INFO + TOOLS -->
+      <tr id="a11yTableFallback">
+        <td colspan="3" class="table-fallback">Ο αναλυτικός πίνακας φορτώνεται από τα δεδομένα της σελίδας. Αν δεν εμφανιστούν οι γραμμές, η συνοπτική εικόνα παραμένει διαθέσιμη ακριβώς από κάτω.</td>
+      </tr>
     </tbody>
   </table>
+
+  <noscript>
+    <div class="summary-box"><strong>Σημείωση:</strong> Η JavaScript είναι απενεργοποιημένη, επομένως οι αναλυτικές γραμμές ανά εργαλείο δεν μπορούν να δημιουργηθούν. Η σύνοψη παρακάτω παραμένει διαθέσιμη.</div>
+  </noscript>
 
   <div class="summary-box">
     <strong>Σύνοψη:</strong> 12 εργαλεία με επίσημη τεκμηρίωση (✅), 11 με μερικά ή μεικτά στοιχεία (❓), 1 με τεκμηριωμένη ανησυχία (⚠️, Wolfram Alpha, το οποίο αξιολογήθηκε από το Perkins School for the Blind ως μη προσβάσιμο για τυφλούς χρήστες χωρίς βοήθεια) και 8 χωρίς εντοπίσιμη πηγή.
   </div>
+
+  <h2>Δήλωση προσβασιμότητας του aitools4kids.gr</h2>
+  <p>Στόχος μας είναι η βασική εμπειρία του aitools4kids.gr να μπορεί να χρησιμοποιείται από όσο το δυνατόν περισσότερους μαθητές, γονείς και εκπαιδευτικούς, συμπεριλαμβανομένων χρηστών με αναπηρία.</p>
+  <ul class="statement-list">
+    <li>Στις 7 Σεπτεμβρίου 2026 πραγματοποιήθηκε τεχνικός έλεγχος σε αντιπροσωπευτικές καταστάσεις της αρχικής σελίδας, της ζώνης Δημοτικού, της AI Βοήθειας και της παρούσας σελίδας, με δωρεάν εργαλεία ανοιχτού κώδικα (axe-core και Playwright) και κανόνες WCAG 2.0/2.1 A–AA και WCAG 2.2 AA που υποστηρίζονται από το axe-core.</li>
+    <li>Μετά τις διορθώσεις, ο αυτοματοποιημένος επανέλεγχος δεν εντόπισε παραβιάσεις στις συγκεκριμένες καταστάσεις που ελέγχθηκαν. Ελέγχθηκαν επίσης η πλοήγηση με πληκτρολόγιο στο παράθυρο ενημέρωσης της AI Βοήθειας, το κλείσιμο με Escape, η επιστροφή της εστίασης και η βασική ανθεκτικότητα της σελίδας χωρίς JavaScript.</li>
+    <li>Ο έλεγχος αυτός δεν καλύπτει κάθε σελίδα, κάθε πιθανή κατάσταση χρήσης ή πλήρη δοκιμή με όλους τους αναγνώστες οθόνης και τις υποστηρικτικές τεχνολογίες. Για αυτό δεν παρουσιάζουμε το site ως πλήρως πιστοποιημένο ή ως αποδεδειγμένα συμμορφούμενο με WCAG 2.2 AA.</li>
+    <li>Η προσβασιμότητα αντιμετωπίζεται ως συνεχής διαδικασία. Νέες λειτουργίες και αλλαγές θα συνεχίσουν να ελέγχονται πριν από την παραγωγική δημοσίευση όπου αυτό είναι πρακτικά εφικτό.</li>
+  </ul>
+  <p class="subtitle">Τελευταία ενημέρωση δήλωσης: 7 Σεπτεμβρίου 2026.</p>
 
   <a class="back-link" href="/">← Πίσω στην αρχική</a>
 
@@ -100,7 +119,8 @@
           <td class="note">${info.noteEl}${sourceLink}</td>
         </tr>`;
       });
-      tbody.innerHTML = rows.join('');
+      const rendered = rows.join('');
+      if (rendered) tbody.innerHTML = rendered;
     })();
   </script>
 </body>

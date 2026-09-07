@@ -93,6 +93,31 @@
     document.head.appendChild(style);
   }
 
+  // Minimal WCAG 2.2 remediations confirmed by the scoped audit. These rules
+  // intentionally override only the selectors that failed contrast checks.
+  function ensureWcag22Styles(){
+    if(document.getElementById("wcag22RemediationStyles")) return;
+    const style=document.createElement("style");
+    style.id="wcag22RemediationStyles";
+    style.textContent=`
+      .site-footer__last-checked{opacity:1!important;}
+      .tutor-btn--primary{background:#2E6BA3;}
+      .tutor-heading__eyebrow{color:#2E6BA3;}
+      .hero__quiz-cta{background:linear-gradient(120deg,#2E6F5E 0%,#2E6BA3 100%);}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function normalizeAuditedSemantics(){
+    // The view switcher behaves as a button group, not as a complete ARIA tab
+    // widget (no tabpanel/arrow-key model), so remove the misleading tablist role.
+    document.getElementById("viewTabs")?.removeAttribute("role");
+
+    // aria-label on a role-less div is not consistently exposed. The links retain
+    // their own descriptive names, so removing the unsupported attribute is safer.
+    document.querySelector(".hero__ai-help-actions")?.removeAttribute("aria-label");
+  }
+
   let specialTutorUiPromise=null;
   function isTutorPath(){
     const parts=routeParts();
@@ -113,6 +138,7 @@
   }
 
   restoreStandaloneHomepageCoreEntries();
+  ensureWcag22Styles();
   loadRuntimeScripts();
 
   // The small selector integration is loaded only on AI Help routes. Its heavier
@@ -200,6 +226,7 @@
     detachLegacyFooterDateGuard();
     refreshAuditDate();
     refreshHeroMiddleLabel();
+    normalizeAuditedSemantics();
   }
 
   if(document.readyState==="loading"){
@@ -210,6 +237,7 @@
   window.addEventListener("load",()=>{
     refreshAuditDate();
     refreshHeroMiddleLabel();
+    normalizeAuditedSemantics();
   },{once:true});
 
   document.addEventListener("click",(event)=>{
@@ -217,11 +245,12 @@
     if(target?.closest("#langEl, #langEn")) setTimeout(()=>{
       refreshAuditDate();
       refreshHeroMiddleLabel();
+      normalizeAuditedSemantics();
     },0);
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:10,
+    version:11,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
@@ -231,6 +260,7 @@
     primarySimpleQuizScoped:true,
     specialEducationEntryAnalytics:true,
     specialTutorActionMenu:true,
-    aiHelpTrustBoundary:true
+    aiHelpTrustBoundary:true,
+    wcag22Remediation:true
   });
 })();

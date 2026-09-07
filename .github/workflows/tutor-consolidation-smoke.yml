@@ -29,9 +29,9 @@ jobs:
             node --check "$file"
           done < <(find . -maxdepth 2 -type f -name '*.js' -print0)
 
-      - name: Install Playwright
+      - name: Install Playwright and axe-core
         run: |
-          npm install --no-save playwright@1.55.0
+          npm install --no-save playwright@1.55.0 axe-core@4.10.3
           npx playwright install --with-deps chromium
 
       - name: Start local static server
@@ -45,6 +45,9 @@ jobs:
           done
           cat /tmp/aitools4kids-http.log
           exit 1
+
+      - name: Run WCAG 2.2 report-only audit
+        run: node tests/wcag-22-audit.mjs
 
       - name: Run installed-mobile homepage smoke
         run: node tests/mobile-home-pwa-smoke.mjs

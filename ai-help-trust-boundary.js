@@ -178,13 +178,6 @@
     openDialog(target);
   }
 
-  function refreshHeroMiddleLabel() {
-    const label = document.querySelector('[data-i18n="heroHelpMiddle"]');
-    if (!label) return;
-    const desired = isEnglish() ? "Middle School" : "Γυμνάσιο";
-    if (label.textContent.trim() !== desired) label.textContent = desired;
-  }
-
   document.addEventListener("click", interceptSignIn, true);
   document.addEventListener("keydown", (event) => {
     const root = document.getElementById("aiHelpTrustBoundary");
@@ -193,23 +186,6 @@
       closeDialog(false);
     }
   });
-
-  document.addEventListener("click", (event) => {
-    const target = event.target instanceof Element ? event.target : null;
-    if (target?.closest("#langEl, #langEn")) setTimeout(refreshHeroMiddleLabel, 0);
-  });
-  window.addEventListener("popstate", () => setTimeout(refreshHeroMiddleLabel, 0));
-  document.addEventListener("aitools4kids:tutor-rendered", () => {
-    // A new tutor render starts a fresh access flow but keeps the disclosure
-    // acknowledgement for the current page session, avoiding repetitive prompts.
-    setTimeout(refreshHeroMiddleLabel, 0);
-  });
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", refreshHeroMiddleLabel, { once: true });
-  } else {
-    refreshHeroMiddleLabel();
-  }
 
   window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY = Object.freeze({
     version: 1,

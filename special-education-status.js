@@ -12,7 +12,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Αγωγή Υγείας / Τομέας Υγείας-Πρόνοιας-Ευεξίας",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Βασικές Αρχές Σύνθεσης / Εφαρμοσμένες Τέχνες",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Ερευνητική Εργασία στην Τεχνολογία",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
-    {school:"ΕΝ.Ε.ΓΥ.-Λ.",scope:"Α΄ · Αρχές Μηχανολογίας / Τομέας Μηχανολογίας",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
+    {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Αρχές Μηχανολογίας / Τομέας Μηχανολογίας",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Πληροφορικής",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Γεωπονία και Αειφόρος Ανάπτυξη / Τομέας Γεωπονίας",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Μαθηματικά",curriculum:"pending",learning:"pending",quiz:"pending",tutorContext:"pending"},

@@ -1,0 +1,34 @@
+name: TEMP homepage positioning spine
+
+on:
+  push:
+    branches:
+      - position/practice-map-home-spine
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: position/practice-map-home-spine
+
+      - name: Apply deterministic homepage patch
+        run: python3 scripts/apply-home-positioning-spine.py
+
+      - name: Commit patched files
+        run: |
+          if git diff --quiet; then
+            echo "No patch changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html app.js styles.css home-accessibility.js .github/workflows/tutor-consolidation-smoke.yml
+          git commit -m "Put the Practice Map at the homepage center"
+          git push

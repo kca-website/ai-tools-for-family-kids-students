@@ -1,1 +1,0 @@
-Regression covered in tests/primary-simple-quiz-smoke.mjs: the dynamically inserted A-B Primary Simple mode button must have its CSS before the first user click.

@@ -64,6 +64,9 @@ jobs:
       - name: Run AI Help trust-boundary smoke
         run: node tests/ai-help-trust-boundary-smoke.mjs
 
+      - name: Run Classroom View smoke
+        run: node tests/classroom-view-smoke.mjs
+
       - name: Run desktop/mobile production parity checks
         run: node tests/tutor-consolidation-smoke.mjs
 

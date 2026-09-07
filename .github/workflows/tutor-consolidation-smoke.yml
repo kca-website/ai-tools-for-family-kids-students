@@ -67,6 +67,9 @@ jobs:
       - name: Run Classroom View smoke
         run: node tests/classroom-view-smoke.mjs
 
+      - name: Run annual guidance smoke
+        run: node tests/annual-guidance-smoke.mjs
+
       - name: Run desktop/mobile production parity checks
         run: node tests/tutor-consolidation-smoke.mjs
 

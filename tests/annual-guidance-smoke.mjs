@@ -17,7 +17,7 @@ try {
 
   await selectLabel(map, '#subject', 'Μαθηματικά');
   assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Επίσημες οδηγίες 2026–27 δημοσιευμένες');
-  assert.match(await map.locator('#scopeNote').innerText(), /δεν.*κάθε topic anchor/i);
+  assert.match(await map.locator('#scopeNote').innerText(), /όχι ότι κάθε topic anchor/i);
   const primaryAnnualHref = await map.locator('#sources a').filter({ hasText: 'ΙΕΠ · Οδηγίες Δημοτικού 2026–27' }).getAttribute('href');
   assert.equal(primaryAnnualHref, 'https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/');
 

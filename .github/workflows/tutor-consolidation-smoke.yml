@@ -58,6 +58,9 @@ jobs:
       - name: Run installed-mobile homepage smoke
         run: node tests/mobile-home-pwa-smoke.mjs
 
+      - name: Run homepage positioning smoke
+        run: node tests/home-positioning-smoke.mjs
+
       - name: Run early Primary simple quiz smoke
         run: node tests/primary-simple-quiz-smoke.mjs
 

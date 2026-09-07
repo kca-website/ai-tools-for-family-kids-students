@@ -158,7 +158,50 @@ main {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 22px;
+  margin-bottom: 18px;
+}
+
+.hero__learning-loop {
+  max-width: 760px;
+  margin: 0 0 20px;
+  padding: 11px 13px;
+  border: 1px solid rgba(46, 111, 94, 0.16);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.hero__learning-loop-label {
+  margin: 0 0 7px;
+  font-size: .75rem;
+  font-weight: 800;
+  color: #31564a;
+  text-transform: uppercase;
+  letter-spacing: .035em;
+}
+
+.hero__learning-loop-steps {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: #32443b;
+  font-size: .83rem;
+  font-weight: 700;
+}
+
+.hero__learning-loop-steps li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero__learning-loop-steps li:not(:last-child)::after {
+  content: "→";
+  margin: 0 8px;
+  color: #70857a;
+  font-weight: 700;
 }
 
 /* ---------- Hero quiz CTA (viral hook) ---------- */
@@ -352,6 +395,9 @@ main {
 }
 
 @media (max-width: 700px) {
+  .hero__learning-loop { padding: 10px 12px; }
+  .hero__learning-loop-steps { font-size: .78rem; }
+  .hero__learning-loop-steps li:not(:last-child)::after { margin: 0 6px; }
   .hero__ai-help { grid-template-columns: 1fr; }
   .hero__ai-help-actions { grid-template-columns: 1fr; }
 }

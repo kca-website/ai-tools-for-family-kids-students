@@ -32,14 +32,7 @@
 
   function refine(){
     const en = isEnglish();
-    const subtitle = document.querySelector('[data-i18n="heroSubtitle"]');
-
-    if (subtitle) {
-      subtitle.textContent = en
-        ? "See where practice is needed, find the right AI tool, and learn how to use it effectively. Practice Map, personalized learning paths, guided AI Help and accessible educational resources for students aged 6–18, parents and educators."
-        : "Δες πού χρειάζεται εξάσκηση, βρες το κατάλληλο AI εργαλείο και μάθε πώς να το χρησιμοποιείς σωστά. Χάρτης Εξάσκησης, εξατομικευμένα learning paths, AI Βοήθεια και προσβάσιμο εκπαιδευτικό υλικό για μαθητές 6–18, γονείς και εκπαιδευτικούς.";
-    }
-
+    // Hero positioning copy lives in app.js / index.html so language changes do not race a second runtime source.
     ensureCurriculumMapEntry(en);
 
     const badges = document.querySelector(".hero__badges");
@@ -84,8 +77,8 @@
     }
 
     const description = en
-      ? "Free bilingual learning guide for students 6–18, parents and educators: Practice Map, learning paths, AI tool recommendations, guided AI Help, Greek curriculum mapping and accessible educational resources."
-      : "Δωρεάν δίγλωσσος οδηγός μάθησης για μαθητές 6–18, γονείς και εκπαιδευτικούς: Χάρτης Εξάσκησης, learning paths, προτάσεις AI εργαλείων, καθοδηγούμενη AI Βοήθεια, Ελληνικός Χάρτης Ύλης και προσβάσιμο εκπαιδευτικό υλικό.";
+      ? "Free bilingual AI learning map for students 6–18, parents and educators: Practice Map, learning paths, curated AI tools, guided AI Help, Greek curriculum mapping and accessible educational resources."
+      : "Δωρεάν ελληνικός χάρτης μάθησης με AI για μαθητές 6–18, γονείς και εκπαιδευτικούς: Χάρτης Εξάσκησης, learning paths, επιλεγμένα AI εργαλεία, καθοδηγούμενη AI Βοήθεια, Ελληνικός Χάρτης Ύλης και προσβάσιμο εκπαιδευτικό υλικό.";
 
     const meta = document.querySelector('meta[name="description"]');
     const og = document.querySelector('meta[property="og:description"]');

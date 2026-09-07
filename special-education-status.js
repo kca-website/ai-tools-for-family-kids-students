@@ -22,6 +22,7 @@ window.SPECIAL_EDUCATION_STATUS = {
 
 (function(){
   "use strict";
+  if(typeof document==="undefined") return;
 
   function enhanceSpecialEducationPage(){
     const hero=document.querySelector(".sp-hero");

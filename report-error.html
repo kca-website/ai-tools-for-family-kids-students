@@ -128,7 +128,7 @@
           const parts=path.split("/");
           if(parts.length>=3 && ["primary","middle","high"].includes(parts[0])){
             const zone={primary:"Δημοτικό",middle:"Γυμνάσιο",high:"Λύκειο"}[parts[0]];
-            const view={tools:"Εργαλεία",advanced:"Προχωρημένα",prompts:"Prompt Generator",quiz:"Διαγνωστικός Χάρτης",tutor:"AI Βοήθεια",guide:"Οδηγός"}[parts[2]] || parts[2];
+            const view={tools:"Εργαλεία",advanced:"Προχωρημένα",prompts:"Prompt Generator",quiz:"Χάρτης Εξάσκησης",tutor:"AI Βοήθεια",guide:"Οδηγός"}[parts[2]] || parts[2];
             return zone+" > "+view;
           }
           if(!path) return "Αρχική σελίδα";

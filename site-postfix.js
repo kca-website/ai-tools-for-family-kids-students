@@ -103,8 +103,8 @@
           : "Η AI Βοήθεια καθοδηγεί με ερωτήσεις και υποδείξεις αντί να δίνει έτοιμη απάντηση.");
 
     const quick=en
-      ? "<strong>How to start:</strong> Tools = immediate recommendations · Diagnostic Map = a short check of what needs practice · AI Help = guided help when you get stuck."
-      : "<strong>Πώς ξεκινάς:</strong> Εργαλεία = άμεσες προτάσεις · Διαγνωστικός Χάρτης = σύντομος έλεγχος για το τι θέλει εξάσκηση · AI Βοήθεια = καθοδήγηση όταν κολλήσεις.";
+      ? "<strong>How to start:</strong> Tools = immediate recommendations · Practice Map = a short check of what needs practice · AI Help = guided help when you get stuck."
+      : "<strong>Πώς ξεκινάς:</strong> Εργαλεία = άμεσες προτάσεις · Χάρτης Εξάσκησης = σύντομος έλεγχος για το τι θέλει εξάσκηση · AI Βοήθεια = καθοδήγηση όταν κολλήσεις.";
 
     const signature=[en,zone,role].join("|");
     if(box.dataset.signature===signature) return;
@@ -249,7 +249,7 @@
           <a href="${aiHref}" style="font-weight:700;color:var(--color-accent);">${en ? `Open ${aiLabel} →` : `Άνοιξε ${aiLabel} →`}</a>
         </div>
       </div>
-      <div style="margin-top:10px;font-size:.82rem;color:#64748b;">${en ? "You can also retake the Diagnostic Map later; questions are shuffled between attempts." : "Μπορείς επίσης να ξανακάνεις τον Διαγνωστικό αργότερα· οι ερωτήσεις ανακατεύονται μεταξύ προσπαθειών."}</div>
+      <div style="margin-top:10px;font-size:.82rem;color:#64748b;">${en ? "You can also retake the Practice Map later; questions are shuffled between attempts." : "Μπορείς επίσης να ξανακάνεις τον Διαγνωστικό αργότερα· οι ερωτήσεις ανακατεύονται μεταξύ προσπαθειών."}</div>
     `;
   }
 
@@ -269,8 +269,8 @@
     }
 
     const desired=isEnglish()
-      ? "The Diagnostic Map is a practice and self-assessment tool. It is not an official school grade, a diagnosis of a learning difficulty, an assessment of the learner’s ability, or a decision about their educational path."
-      : "Ο Διαγνωστικός Χάρτης είναι εργαλείο εξάσκησης και αυτοαξιολόγησης. Δεν αποτελεί σχολική βαθμολόγηση, διάγνωση μαθησιακής δυσκολίας, αξιολόγηση της ικανότητας του μαθητή ή απόφαση για την εκπαιδευτική του πορεία.";
+      ? "The Practice Map is a practice and self-assessment tool. It is not an official school grade, a diagnosis of a learning difficulty, an assessment of the learner’s ability, or a decision about their educational path."
+      : "Ο Χάρτης Εξάσκησης είναι εργαλείο εξάσκησης και αυτοαξιολόγησης. Δεν αποτελεί σχολική βαθμολόγηση, διάγνωση μαθησιακής δυσκολίας, αξιολόγηση της ικανότητας του μαθητή ή απόφαση για την εκπαιδευτική του πορεία.";
 
     // Do not rewrite identical text: that would retrigger the observer forever.
     if(note.textContent !== desired) note.textContent=desired;
@@ -388,7 +388,7 @@
     }
     const en=isEnglish();
     const title=en ? "Not sure where to start?" : "Δεν ξέρεις από πού να ξεκινήσεις;";
-    const text=en ? "Take the 2-minute Diagnostic Map first. It shows what may need practice and then leads you to the relevant Learning Path." : "Κάνε πρώτα τον Διαγνωστικό Χάρτη των 2 λεπτών. Θα σου δείξει τι μπορεί να θέλει εξάσκηση και μετά θα σε οδηγήσει στο αντίστοιχο Μονοπάτι Μάθησης.";
+    const text=en ? "Take the 2-minute Practice Map first. It shows what may need practice and then leads you to the relevant Learning Path." : "Κάνε πρώτα τον Διαγνωστικό Χάρτη των 2 λεπτών. Θα σου δείξει τι μπορεί να θέλει εξάσκηση και μετά θα σε οδηγήσει στο αντίστοιχο Μονοπάτι Μάθησης.";
     const cta=en ? "Start the 2-minute check →" : "Κάνε το διαγνωστικό (2') →";
     const href=`/${zone}/${role}/quiz`;
     const signature=[en,zone,role].join("|");
@@ -413,8 +413,8 @@
     }
     const en=isEnglish();
     const desired=en
-      ? "What happens next: the Diagnostic Map identifies an area that may need practice. Open its Learning Path for the practical 3-step route: activity, guided tool use and an understanding check."
-      : "Τι γίνεται μετά: ο Διαγνωστικός Χάρτης εντοπίζει ένα σημείο που μπορεί να θέλει εξάσκηση. Άνοιξε το Μονοπάτι Μάθησης αυτού του θέματος για την πρακτική διαδρομή 3 βημάτων: δραστηριότητα, καθοδηγούμενη χρήση εργαλείου και έλεγχο κατανόησης.";
+      ? "What happens next: the Practice Map identifies an area that may need practice. Open its Learning Path for the practical 3-step route: activity, guided tool use and an understanding check."
+      : "Τι γίνεται μετά: ο Χάρτης Εξάσκησης εντοπίζει ένα σημείο που μπορεί να θέλει εξάσκηση. Άνοιξε το Μονοπάτι Μάθησης αυτού του θέματος για την πρακτική διαδρομή 3 βημάτων: δραστηριότητα, καθοδηγούμενη χρήση εργαλείου και έλεγχο κατανόησης.";
     if(note.textContent!==desired) note.textContent=desired;
   }
 

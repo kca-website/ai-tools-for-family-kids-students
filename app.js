@@ -7,7 +7,7 @@
  *   - Επιλογή ζώνης & ρόλου
  *   - Εμφάνιση εργαλείων (βασικά + προχωρημένα)
  *   - Prompt Generator
- *   - Διαγνωστικός Χάρτης (Learning Compass)
+ *   - Χάρτης Εξάσκησης (Practice Map)
  *   - Οδηγός (Guide) με δυνατότητα PDF
  * ------------------------------------------------------------
  */
@@ -48,11 +48,11 @@
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
       badgeZeroTracking: "Χωρίς Cookies στον οδηγό",
-      badgeZeroTrackingExplainer: "Ο οδηγός, τα εργαλεία και το διαγνωστικό δεν χρησιμοποιούν cookies ούτε απαιτούν λογαριασμό. Το αποτέλεσμα του διαγνωστικού μπορεί να αποθηκευτεί μόνο τοπικά στη συσκευή σου. Μόνο η προαιρετική AI Βοήθεια χρησιμοποιεί Puter: όταν επιλέξεις να συνδεθείς, ισχύουν οι όροι και η πολιτική απορρήτου του Puter.",
+      badgeZeroTrackingExplainer: "Ο οδηγός, τα εργαλεία και ο Χάρτης Εξάσκησης δεν χρησιμοποιούν cookies ούτε απαιτούν λογαριασμό. Η πρόοδος του Χάρτη μπορεί να αποθηκευτεί μόνο τοπικά στη συσκευή σου. Μόνο η προαιρετική AI Βοήθεια χρησιμοποιεί Puter: όταν επιλέξεις να συνδεθείς, ισχύουν οι όροι και η πολιτική απορρήτου του Puter.",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.",
-      heroQuizCta: "Κάνε το Διαγνωστικό σε 2 λεπτά",
-      heroQuizCtaSub: "Οποιαδήποτε στιγμή, χωρίς διάβασμα πριν. Δείχνει τι ξέρεις ήδη, και μπορείς να το ξανακάνεις σε λίγες εβδομάδες για να δεις την πρόοδο.",
+      heroQuizCta: "Χάρτης Εξάσκησης σε 2 λεπτά",
+      heroQuizCtaSub: "Λίγες σύντομες ερωτήσεις για να δεις ποια σημεία αξίζει να εξασκήσεις περισσότερο. Χωρίς βαθμό και χωρίς διάγνωση — μόνο ένα σημείο εκκίνησης για το επόμενο Μονοπάτι Μάθησης.",
       heroQuizPickPrompt: "Για ποια ζώνη;",
       heroHelpBadge: "Νέο",
       heroHelpTitle: "Κόλλησες σε άσκηση;",
@@ -73,7 +73,7 @@
       viewTabTools: "Εργαλεία",
       viewTabAdvanced: "Προχωρημένα",
       viewTabPrompts: "Prompt Generator",
-      viewTabQuiz: "Διαγνωστικός Χάρτης",
+      viewTabQuiz: "Χάρτης Εξάσκησης",
       viewTabTutor: "AI Βοήθεια",
       viewTabTutorParent: "Βοηθός Γονέα",
       viewTabGuide: "Οδηγός",
@@ -92,12 +92,12 @@
       copyPrompt: "Αντιγραφή prompt",
       copiedPrompt: "Αντιγράφηκε",
       tipLabel: "Συμβουλή",
-      quizEmptyState: "Δεν υπάρχει ακόμα διαγνωστικό κουίζ για αυτή τη ζώνη. Έρχεται σύντομα.",
+      quizEmptyState: "Δεν υπάρχει ακόμα Χάρτης Εξάσκησης για αυτή τη ζώνη. Έρχεται σύντομα.",
       quizPickGrade: "Διάλεξε τάξη",
       quizPickSubject: "Διάλεξε μάθημα",
       quizBackToGrades: "← Άλλη τάξη",
       quizGradeComingSoon: "Έρχεται σύντομα",
-      quizGradeEmptyState: "Δεν υπάρχει ακόμα διαγνωστικό κουίζ για αυτή την τάξη. Έρχεται σύντομα.",
+      quizGradeEmptyState: "Δεν υπάρχει ακόμα Χάρτης Εξάσκησης για αυτή την τάξη. Έρχεται σύντομα.",
       quizStartBtn: "Ξεκίνα το κουίζ",
       quizBrowseBtn: "Δες τα θέματα",
       quizBrowseHeading: "Θέματα σε αυτό το μάθημα",
@@ -151,11 +151,11 @@
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
       badgeZeroTracking: "No Cookies in the guide",
-      badgeZeroTrackingExplainer: "The guide, tool directory and diagnostic use no cookies and require no account. Diagnostic progress may be stored only on your device. Only the optional AI Help feature uses Puter; if you choose to sign in, Puter’s own terms and privacy policy apply.",
+      badgeZeroTrackingExplainer: "The guide, tool directory and Practice Map use no cookies and require no account. Practice Map progress may be stored only on your device. Only the optional AI Help feature uses Puter; if you choose to sign in, Puter’s own terms and privacy policy apply.",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "Each zone has different suitable tools and a different level of independence.",
-      heroQuizCta: "Take the 2-minute Diagnostic",
-      heroQuizCtaSub: "Anytime, no studying required. It shows what you already know, and you can retake it in a few weeks to see your progress.",
+      heroQuizCta: "Practice Map in 2 minutes",
+      heroQuizCtaSub: "A few short questions to spot what may be worth practising more. No grade and no diagnosis — just a starting point for the next Learning Path.",
       heroQuizPickPrompt: "For which zone?",
       heroHelpBadge: "New",
       heroHelpTitle: "Stuck on an exercise?",
@@ -176,7 +176,7 @@
       viewTabTools: "Tools",
       viewTabAdvanced: "Advanced",
       viewTabPrompts: "Prompt Generator",
-      viewTabQuiz: "Learning Compass",
+      viewTabQuiz: "Practice Map",
       viewTabTutor: "AI Help",
       viewTabTutorParent: "Parent Helper",
       viewTabGuide: "Guide",
@@ -185,12 +185,12 @@
       copyPrompt: "Copy prompt",
       copiedPrompt: "Copied",
       tipLabel: "Tip",
-      quizEmptyState: "No diagnostic quiz yet for this zone. Coming soon.",
+      quizEmptyState: "No Practice Map yet for this zone. Coming soon.",
       quizPickGrade: "Choose a grade",
       quizPickSubject: "Choose a subject",
       quizBackToGrades: "← Change grade",
       quizGradeComingSoon: "Coming soon",
-      quizGradeEmptyState: "No diagnostic quiz yet for this grade. Coming soon.",
+      quizGradeEmptyState: "No Practice Map yet for this grade. Coming soon.",
       quizStartBtn: "Start the quiz",
       quizBrowseBtn: "See the topics",
       quizBrowseHeading: "Topics in this subject",
@@ -429,7 +429,7 @@
     });
   }
 
-  // ---------- Rendering: Hero quiz picker (viral shortcut στο Learning Compass) ----------
+  // ---------- Rendering: Hero quiz picker (viral shortcut στο Practice Map) ----------
   function renderHeroQuizPicker() {
     if (!els.heroQuizPickerGrid) return;
     els.heroQuizPickerGrid.innerHTML = "";
@@ -1699,7 +1699,7 @@ function renderToolGrid(pathTools, targetElement) {
         <text x="340" y="291" font-size="14" font-weight="700" fill="#3B82C4" text-anchor="end" font-family="system-ui, -apple-system, sans-serif">${parentVal}%</text>
 
         <line x1="60" y1="330" x2="340" y2="330" stroke="#E4E6EA" stroke-width="1"/>
-        <text x="200" y="365" font-size="12" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? 'Learning Compass' : 'Learning Compass'}</text>
+        <text x="200" y="365" font-size="12" fill="#5A6270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">${isGreek ? 'Χάρτης Εξάσκησης' : 'Practice Map'}</text>
         <text x="200" y="345" font-size="12" fill="#9AA1B0" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif">aitools4kids.gr  🤖</text>
       </svg>
     `;

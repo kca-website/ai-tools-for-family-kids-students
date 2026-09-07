@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
-const LOCAL='http://127.0.0.1:4173/primary/student/quiz';
+const LOCAL='http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
 
 try{
@@ -12,13 +12,18 @@ try{
   await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
 
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForSelector('.quiz-grade-card[data-grade-id="a"]',{state:'visible',timeout:10000});
   await page.waitForFunction(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ?.version>=3,null,{timeout:10000});
 
   const runtime=await page.evaluate(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ);
   assert.deepEqual(runtime.grades,['a','b']);
   assert.equal(runtime.questionsPerSession,3);
   assert.equal(runtime.choicesPerQuestion,2);
+
+  await page.locator('.zone-card[data-zone="primary"]').click();
+  await page.waitForSelector('#roleTabs .role-tab',{state:'visible',timeout:10000});
+  await page.locator('#roleTabs .role-tab').nth(1).click();
+  await page.locator('#viewTabQuiz').click();
+  await page.waitForSelector('.quiz-grade-card[data-grade-id="a"]',{state:'visible',timeout:10000});
 
   await page.locator('.quiz-grade-card[data-grade-id="a"]').click();
   await page.waitForSelector('.primary-simple-start',{state:'visible',timeout:10000});

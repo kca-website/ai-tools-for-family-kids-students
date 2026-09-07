@@ -192,6 +192,10 @@
     if(!routeIsPrimary()||!EARLY_GRADES.has(selectedGrade)) return;
     const root=document.getElementById("quizContent");
     if(!root) return;
+    // The buttons are inserted dynamically, so their styles must exist before
+    // the first paint. Waiting until the modal opens causes the unstyled flash
+    // seen on first load.
+    injectStyles();
     root.querySelectorAll(".quiz-start-btn[data-subject-id]").forEach((start)=>{
       const subjectId=start.dataset.subjectId;
       if(start.parentElement?.querySelector(`.primary-simple-start[data-subject-id="${CSS.escape(subjectId)}"]`)) return;
@@ -247,5 +251,5 @@
   else{scheduleEnhance();normalizeSpecialEducationEntries();}
   window.addEventListener("load",()=>setTimeout(normalizeSpecialEducationEntries,0),{once:true});
 
-  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:3,grades:["a","b"],questionsPerSession:3,choicesPerQuestion:2});
+  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:4,grades:["a","b"],questionsPerSession:3,choicesPerQuestion:2});
 })();

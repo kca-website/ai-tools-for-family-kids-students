@@ -28,7 +28,11 @@
 
   const SG_DETAILED={
     "a|language":"special-gym-a-language-comprehension",
-    "a|math":"special-gym-a-math-problem-reading"
+    "a|math":"special-gym-a-math-problem-reading",
+    "b|language":"special-gym-b-language-comprehension",
+    "b|math":"special-gym-b-math-problem-reading",
+    "c|language":"special-gym-c-language-comprehension",
+    "c|math":"special-gym-c-math-problem-reading"
   };
   const EN_STRUCTURE_DETAILED={
     "lyc-a|creative-zone":"eneegyl-a-zdd"

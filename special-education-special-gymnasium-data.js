@@ -29,7 +29,7 @@
   };
 
   window.SPECIAL_GYMNASIUM_2026_2027={
-    version:1,
+    version:2,
     schoolYear:"2026-2027",
     verificationDate:VERIFIED,
     status:"verified-structure",
@@ -84,13 +84,13 @@
     }
   };
 
-  function addLearningUnit({id,subjectLabel,adaptationLabel,keyPoints,qa,parentSteps,practice,quiz}){
+  function addLearningUnit({id,grade="A",gradeLabel="Α΄ Γυμνασίου",subjectLabel,adaptationLabel,keyPoints,qa,parentSteps,practice,quiz}){
     if(C.entries[id]) return;
     C.entries[id]={
       id,
       schoolType:"special-gymnasium",
-      grade:"A",
-      gradeLabel:"Α΄ Γυμνασίου",
+      grade,
+      gradeLabel,
       subject:subjectLabel,
       subjectType:"Μαθησιακή υποστήριξη · όχι δήλωση διδακτέας ύλης",
       status:"verified",
@@ -107,7 +107,7 @@
       adaptationSourceUrl:ADAPTATIONS,
       adaptationSourceTitle:adaptationLabel,
       officialAnchors:[
-        `Το μάθημα «${subjectLabel.split(" — ")[0]}» περιλαμβάνεται στην Α΄ Γυμνασίου Ε.Α.Ε. στο ισχύον ωρολόγιο πρόγραμμα 2026-2027.`,
+        `Το μάθημα «${subjectLabel.split(" — ")[0]}» περιλαμβάνεται στην ${gradeLabel} Ε.Α.Ε. στο ισχύον ωρολόγιο πρόγραμμα 2026-2027.`,
         `Επίσημο υποστηρικτικό υλικό ΙΕΠ/Prosvasimo: ${adaptationLabel}.`,
         "Η ενότητα του site είναι δεξιότητα υποστήριξης της μελέτης και δεν παρουσιάζεται ως κατάλογος της φετινής διδακτέας ή εξεταστέας ύλης."
       ],
@@ -202,15 +202,105 @@
     }
   });
 
+  function cloneSupportUnitForGrade(sourceId,{id,grade,gradeLabel,quiz}){
+    if(C.entries[id]) return;
+    const sourceEntry=C.entries[sourceId];
+    const sourceLearning=L[sourceId];
+    const sourceQuiz=Q[sourceId];
+    if(!sourceEntry||!sourceLearning||!sourceQuiz) throw new Error(`${sourceId}: source support unit missing`);
+    const copy=(value)=>JSON.parse(JSON.stringify(value));
+    const subjectLabel=sourceEntry.subject;
+
+    C.entries[id]={
+      ...copy(sourceEntry),
+      id,
+      grade,
+      gradeLabel,
+      officialAnchors:[
+        `Το μάθημα «${subjectLabel.split(" — ")[0]}» περιλαμβάνεται στην ${gradeLabel} Ε.Α.Ε. στο ισχύον ωρολόγιο πρόγραμμα 2026-2027.`,
+        `Επίσημο υποστηρικτικό υλικό ΙΕΠ/Prosvasimo: ${sourceEntry.adaptationSourceTitle}.`,
+        "Η ενότητα του site είναι δεξιότητα υποστήριξης της μελέτης και δεν παρουσιάζεται ως κατάλογος της φετινής διδακτέας ή εξεταστέας ύλης."
+      ]
+    };
+    L[id]=copy(sourceLearning);
+    L[id].curriculumId=id;
+    Q[id]={...copy(sourceQuiz),...copy(quiz),curriculumId:id,status:"ready"};
+  }
+
+  cloneSupportUnitForGrade("special-gym-a-language-comprehension",{
+    id:"special-gym-b-language-comprehension",grade:"B",gradeLabel:"Β΄ Γυμνασίου",
+    quiz:{
+      title:"Πολύ σύντομος έλεγχος κατανόησης",
+      intro:"3 πολύ απλές ερωτήσεις, μία ιδέα τη φορά. Δεν είναι σχολικός βαθμός.",
+      successMessage:"Ξεχωρίζεις τι ζητά η ερώτηση και ποια πληροφορία χρειάζεται.",
+      retryMessage:"Ξαναδές το ζητούμενο και τη βασική πληροφορία και ξαναδοκίμασε.",
+      questions:[
+        {q:"Η ερώτηση λέει «Βρες την κύρια ιδέα». Τι ψάχνω;",options:["Τι λέει κυρίως το κείμενο.","Μια τυχαία λέξη."],correctIndex:0},
+        {q:"Αν ζητά «δύο λόγους», πόσους γράφω;",options:["Δύο.","Όσους θυμάμαι."],correctIndex:0},
+        {q:"Πριν τελειώσω, τι ελέγχω;",options:["Αν απάντησα ακριβώς στο ζητούμενο.","Αν η απάντηση είναι η πιο μεγάλη."],correctIndex:0}
+      ]
+    }
+  });
+
+  cloneSupportUnitForGrade("special-gym-a-math-problem-reading",{
+    id:"special-gym-b-math-problem-reading",grade:"B",gradeLabel:"Β΄ Γυμνασίου",
+    quiz:{
+      title:"Πολύ σύντομος έλεγχος προβλήματος",
+      intro:"3 πολύ απλές ερωτήσεις, μία ιδέα τη φορά. Δεν είναι σχολικός βαθμός.",
+      successMessage:"Οργανώνεις σωστά τα βασικά στοιχεία ενός προβλήματος.",
+      retryMessage:"Ξαναδές: ζητούμενο, χρήσιμα δεδομένα και μονάδα.",
+      questions:[
+        {q:"Πριν κάνω πράξη, τι βρίσκω;",options:["Τι ζητά το πρόβλημα.","Τον πιο μεγάλο αριθμό."],correctIndex:0},
+        {q:"Αν υπάρχει άσχετος αριθμός, τι κάνω;",options:["Δεν τον χρησιμοποιώ αν δεν χρειάζεται.","Τον βάζω πάντα στην πράξη."],correctIndex:0},
+        {q:"Στο τέλος τι ελέγχω;",options:["Αν η απάντηση έχει σωστή μονάδα και νόημα.","Αν χρησιμοποίησα όλους τους αριθμούς."],correctIndex:0}
+      ]
+    }
+  });
+
+  cloneSupportUnitForGrade("special-gym-a-language-comprehension",{
+    id:"special-gym-c-language-comprehension",grade:"C",gradeLabel:"Γ΄ Γυμνασίου",
+    quiz:{
+      title:"Πολύ σύντομος έλεγχος κατανόησης",
+      intro:"3 πολύ απλές ερωτήσεις, μία ιδέα τη φορά. Δεν είναι σχολικός βαθμός.",
+      successMessage:"Ξεχωρίζεις βασική πληροφορία, λόγο και τεκμήριο.",
+      retryMessage:"Ξαναδές τι ζητά η ερώτηση και ποια πληροφορία το στηρίζει.",
+      questions:[
+        {q:"Τι είναι τεκμήριο σε ένα κείμενο;",options:["Μια πληροφορία που στηρίζει αυτό που λέγεται.","Μια άσχετη λεπτομέρεια."],correctIndex:0},
+        {q:"Η ερώτηση λέει «εξήγησε γιατί». Τι χρειάζεται;",options:["Έναν λόγο που στηρίζει την απάντηση.","Μόνο μία λέξη."],correctIndex:0},
+        {q:"Αν δύο παράγραφοι δίνουν σχετικές πληροφορίες, τι κάνω;",options:["Συνδέω ό,τι χρειάζεται για την απάντηση.","Διαλέγω τυχαία μία λέξη."],correctIndex:0}
+      ]
+    }
+  });
+
+  cloneSupportUnitForGrade("special-gym-a-math-problem-reading",{
+    id:"special-gym-c-math-problem-reading",grade:"C",gradeLabel:"Γ΄ Γυμνασίου",
+    quiz:{
+      title:"Πολύ σύντομος έλεγχος προβλήματος",
+      intro:"3 πολύ απλές ερωτήσεις, μία ιδέα τη φορά. Δεν είναι σχολικός βαθμός.",
+      successMessage:"Χωρίζεις ένα πρόβλημα σε καθαρά βήματα και ελέγχεις το αποτέλεσμα.",
+      retryMessage:"Ξαναδές: ένα βήμα τη φορά, σχέση δεδομένων και τελικός έλεγχος.",
+      questions:[
+        {q:"Αν ένα πρόβλημα έχει δύο βήματα, τι κάνω;",options:["Λύνω ένα βήμα τη φορά.","Κάνω όλες τις πράξεις μαζί."],correctIndex:0},
+        {q:"Πριν διαλέξω πράξη, τι σκέφτομαι;",options:["Τι σχέση έχουν τα δεδομένα με το ζητούμενο.","Ποιος αριθμός είναι πιο μεγάλος."],correctIndex:0},
+        {q:"Στο τέλος τι ελέγχω;",options:["Αν το αποτέλεσμα είναι λογικό και έχει σωστή μονάδα.","Αν έγραψα πολλές πράξεις."],correctIndex:0}
+      ]
+    }
+  });
+
   C.schools.specialGymnasium=Object.assign({},C.schools.specialGymnasium,{
     status:"active-verified-structure",
     note:"Το ωρολόγιο 2026-2027 έχει επαληθευτεί. Η πλήρης λίστα τάξεων/μαθημάτων εμφανίζεται χωριστά από τη λεπτομερή διδακτέα ύλη."
   });
 
+  const statusScope=(grade,id)=>`${grade} · ${C.entries[id].subject}`;
   S.rows=S.rows.filter((row)=>row.school!=="Ειδικό Γυμνάσιο");
   S.rows.push(
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄-Γ΄ · επίσημη δομή μαθημάτων 2026-2027",curriculum:"verified",learning:"indexed",quiz:"indexed",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Γλωσσική Διδασκαλία — καταλαβαίνω την εκφώνηση και βρίσκω τις βασικές πληροφορίες",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Μαθηματικά — καταλαβαίνω τι ζητά ένα πρόβλημα πριν κάνω πράξεις",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"}
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Α΄","special-gym-a-language-comprehension"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Α΄","special-gym-a-math-problem-reading"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Β΄","special-gym-b-language-comprehension"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Β΄","special-gym-b-math-problem-reading"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Γ΄","special-gym-c-language-comprehension"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Γ΄","special-gym-c-math-problem-reading"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"}
   );
 })();

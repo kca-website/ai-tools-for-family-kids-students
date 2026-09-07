@@ -44,7 +44,19 @@ async function check(viewport,label){
   await page.locator('[data-open-sg-unit="special-gym-a-language-comprehension"][data-focus="quiz"]').click();
   await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({state:'visible'});
   assert((await page.locator('#spSpecialGymUnitMount').innerText()).includes('Μαθαίνω απλά'),`${label}: Special Gymnasium study flow missing`);
-  await runDiagnostic(page,'#spSpecialGymUnitMount',2,`${label} Special Gym language`);
+  await runDiagnostic(page,'#spSpecialGymUnitMount',2,`${label} Special Gym A language`);
+
+  for(const grade of [
+    {id:'b',labelEl:'Β΄ Γυμνασίου',language:'special-gym-b-language-comprehension'},
+    {id:'c',labelEl:'Γ΄ Γυμνασίου',language:'special-gym-c-language-comprehension'}
+  ]){
+    await page.locator(`[data-sg-grade="${grade.id}"]`).click();
+    assert((await page.locator('#spSpecialGymProfile').innerText()).includes(grade.labelEl),`${label}: Special Gymnasium ${grade.id.toUpperCase()} selection failed`);
+    assert(await page.locator(`#spSpecialGymProfile [data-open-sg-unit^="special-gym-${grade.id}-"][data-focus="quiz"]`).count()===2,`${label}: Special Gymnasium ${grade.id.toUpperCase()} must expose Language + Math micro quizzes`);
+    await page.locator(`[data-open-sg-unit="${grade.language}"][data-focus="quiz"]`).click();
+    await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({state:'visible'});
+    await runDiagnostic(page,'#spSpecialGymUnitMount',2,`${label} Special Gym ${grade.id.toUpperCase()} language`);
+  }
 
   await page.locator('#spSpecialGymnasium .sp-back').click();
   await page.locator('[data-branch="special-lyceum"]').click();

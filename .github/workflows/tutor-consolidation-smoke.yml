@@ -49,6 +49,9 @@ jobs:
       - name: Run installed-mobile homepage smoke
         run: node tests/mobile-home-pwa-smoke.mjs
 
+      - name: Run early Primary simple quiz smoke
+        run: node tests/primary-simple-quiz-smoke.mjs
+
       - name: Run desktop/mobile production parity checks
         run: node tests/tutor-consolidation-smoke.mjs
 

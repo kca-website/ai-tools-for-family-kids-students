@@ -43,7 +43,7 @@
   const STRINGS = {
     el: {
       heroTitle: "Μαθαίνω Έξυπνα με AI",
-      heroSubtitle: "Όταν ένα παιδί δεν έχει καταλάβει κάτι, ξεκίνα εδώ: δες τι χρειάζεται εξάσκηση και ποιο είναι το επόμενο σωστό βήμα — με ή χωρίς AI. Για μαθητές 6 έως 18, γονείς και εκπαιδευτικούς.",
+      heroSubtitle: "Όταν ένα παιδί δεν έχει καταλάβει κάτι, ξεκίνα εδώ: δες τι χρειάζεται εξάσκηση και ποιο είναι το επόμενο σωστό βήμα, με ή χωρίς AI. Για μαθητές 6 έως 18, γονείς και εκπαιδευτικούς.",
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
@@ -61,7 +61,7 @@
       heroQuizCtaSub: "Λίγες σύντομες ερωτήσεις για να δεις ποια σημεία αξίζει να δουλέψεις περισσότερο και να πας στο επόμενο Μονοπάτι Μάθησης. Χωρίς βαθμό και χωρίς διάγνωση.",
       heroQuizPickPrompt: "Για ποια ζώνη;",
       heroHelpBadge: "Κόλλησα εδώ",
-      heroHelpTitle: "Δείξε μου πώς να το μάθω — όχι τη λύση",
+      heroHelpTitle: "Δείξε μου πώς να το μάθω, όχι τη λύση",
       heroHelpSub: "Η AI Βοήθεια ξεκινά από τη δική σου προσπάθεια και σε καθοδηγεί με μία ερώτηση ή μικρή υπόδειξη τη φορά, χωρίς έτοιμη τελική απάντηση.",
       heroHelpNote: "Η βασική πλατφόρμα παραμένει χωρίς λογαριασμό. Η AI Βοήθεια είναι προαιρετική, χρησιμοποιεί Puter και υπόκειται στα δικά του όρια χρήσης.",
       heroHelpPrimary: "Γονιός Δημοτικού",
@@ -152,7 +152,7 @@
     },
     en: {
       heroTitle: "Learn Smarter with AI",
-      heroSubtitle: "When a child has not understood something, start here: see what needs practice and what the next right step is — with or without AI. For students aged 6–18, parents and educators.",
+      heroSubtitle: "When a child has not understood something, start here: see what needs practice and what the next right step is, with or without AI. For students aged 6–18, parents and educators.",
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
@@ -170,7 +170,7 @@
       heroQuizCtaSub: "A few short questions to spot what is worth practising more and move to the next Learning Path. No grade and no diagnosis.",
       heroQuizPickPrompt: "For which zone?",
       heroHelpBadge: "I’m stuck here",
-      heroHelpTitle: "Show me how to learn it — not the answer",
+      heroHelpTitle: "Show me how to learn it, not the answer",
       heroHelpSub: "AI Help starts from your own attempt and guides you with one question or small hint at a time, without handing over a finished answer.",
       heroHelpNote: "The core site remains account-free. AI Help is optional, uses Puter, and is subject to Puter’s own usage limits.",
       heroHelpPrimary: "Primary parent",

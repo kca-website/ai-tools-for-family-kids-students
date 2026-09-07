@@ -292,14 +292,15 @@
     note:"Το ωρολόγιο 2026-2027 έχει επαληθευτεί. Η πλήρης λίστα τάξεων/μαθημάτων εμφανίζεται χωριστά από τη λεπτομερή διδακτέα ύλη."
   });
 
+  const statusScope=(grade,id)=>`${grade} · ${C.entries[id].subject}`;
   S.rows=S.rows.filter((row)=>row.school!=="Ειδικό Γυμνάσιο");
   S.rows.push(
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄-Γ΄ · επίσημη δομή μαθημάτων 2026-2027",curriculum:"verified",learning:"indexed",quiz:"indexed",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Γλωσσική Διδασκαλία — καταλαβαίνω την εκφώνηση και βρίσκω τις βασικές πληροφορίες",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Μαθηματικά — καταλαβαίνω τι ζητά ένα πρόβλημα πριν κάνω πράξεις",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Β΄ · Γλωσσική Διδασκαλία — βασική κατανόηση εκφώνησης",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Β΄ · Μαθηματικά — βασική οργάνωση προβλήματος",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Γ΄ · Γλωσσική Διδασκαλία — βασική κατανόηση και τεκμήριο",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Γ΄ · Μαθηματικά — βασική οργάνωση πολυβηματικού προβλήματος",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"}
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Α΄","special-gym-a-language-comprehension"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Α΄","special-gym-a-math-problem-reading"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Β΄","special-gym-b-language-comprehension"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Β΄","special-gym-b-math-problem-reading"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Γ΄","special-gym-c-language-comprehension"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:statusScope("Γ΄","special-gym-c-math-problem-reading"),curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"}
   );
 })();

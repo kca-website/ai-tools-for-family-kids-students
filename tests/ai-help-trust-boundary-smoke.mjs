@@ -34,11 +34,14 @@ try {
   }));
 
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForFunction(() => window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY?.disclosureBeforePuter === true, null, { timeout: 10000 });
+  await page.waitForFunction(() => window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME?.aiHelpTrustBoundary === true, null, { timeout: 10000 });
 
   // Homepage keeps the school-zone mental model; age gating happens inside AI Help.
   await page.waitForFunction(() => document.querySelector('[data-i18n="heroHelpMiddle"]')?.textContent?.trim() === 'Γυμνάσιο');
   assert.equal((await page.textContent('[data-i18n="heroHelpMiddle"]'))?.trim(), 'Γυμνάσιο');
+
+  // The disclosure script is not part of normal page/tutor startup.
+  assert.equal(await page.locator('script[src="/ai-help-trust-boundary.js"]').count(), 0, 'Trust disclosure should be lazy before sign-in');
 
   // Render middle-school student AI Help and choose an allowed age.
   await page.waitForFunction(() => window.AITutor?.render && document.getElementById('tutorMount'), null, { timeout: 30000 });
@@ -54,8 +57,9 @@ try {
   // so this test verifies trust behavior without depending on mobile layout state.
   await setTutorAge(page, '15');
 
-  // First click must show disclosure and must NOT load Puter yet.
+  // First sign-in click lazy-loads the disclosure, which must appear before Puter.
   await page.click('#tutorSignIn');
+  await page.waitForFunction(() => window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY?.disclosureBeforePuter === true, null, { timeout: 10000 });
   await page.waitForSelector('#aiHelpTrustBoundary:not([hidden])');
   assert.equal(await page.locator('script[src="https://js.puter.com/v2/"]').count(), 0, 'Puter loaded before disclosure acceptance');
   const disclosureText = await page.textContent('#aiHelpTrustBoundary');
@@ -76,12 +80,13 @@ try {
   assert.match(minorNote || '', /δεν αποτελεί τεχνική επαλήθευση ταυτότητας ή ηλικίας/);
   await page.click('[data-ai-help-boundary-cancel]');
 
-  // Language switching keeps the neutral school-zone label.
+  // Language switching keeps the neutral school-zone label without loading disclosure code.
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForFunction(() => window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY?.disclosureBeforePuter === true, null, { timeout: 10000 });
+  await page.waitForFunction(() => window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME?.aiHelpTrustBoundary === true, null, { timeout: 10000 });
   await page.click('#langEn');
   await page.waitForFunction(() => document.querySelector('[data-i18n="heroHelpMiddle"]')?.textContent?.trim() === 'Middle School');
   assert.equal((await page.textContent('[data-i18n="heroHelpMiddle"]'))?.trim(), 'Middle School');
+  assert.equal(await page.locator('script[src="/ai-help-trust-boundary.js"]').count(), 0, 'Language switch should not load disclosure code');
 
   assert.deepEqual(errors, [], errors.join('\n'));
   console.log('AI Help trust-boundary smoke checks passed.');

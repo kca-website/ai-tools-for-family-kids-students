@@ -122,6 +122,33 @@
   window.addEventListener("popstate",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
   document.addEventListener("aitools4kids:tutor-rendered",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
 
+  // AI Help trust boundary is deliberately kept OUT of the normal tutor startup
+  // chain so established tutor timing/ordering stays unchanged. The homepage loads
+  // it for the neutral Middle School label; tutor routes load it only on the first
+  // sign-in attempt, before Puter itself is allowed to load.
+  let aiHelpTrustBoundaryPromise=null;
+  function loadAiHelpTrustBoundary(){
+    if(window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY) return Promise.resolve(window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY);
+    if(aiHelpTrustBoundaryPromise) return aiHelpTrustBoundaryPromise;
+    aiHelpTrustBoundaryPromise=appendScript("ai-help-trust-boundary","/ai-help-trust-boundary.js","data-aitools4kids-feature")
+      .then(()=>window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY)
+      .catch((err)=>{ aiHelpTrustBoundaryPromise=null; console.error("AI Help trust boundary failed to load.",err); throw err; });
+    return aiHelpTrustBoundaryPromise;
+  }
+
+  if(isHomepage()) loadAiHelpTrustBoundary().catch(()=>{});
+
+  document.addEventListener("click",(event)=>{
+    const target=event.target instanceof Element ? event.target.closest("#tutorSignIn, #tutorSwitchAccount") : null;
+    if(!target || window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    loadAiHelpTrustBoundary().then(()=>{
+      if(target.isConnected) target.click();
+    }).catch(()=>{});
+  },true);
+
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active") ||
       (document.documentElement.lang || "").toLowerCase().startsWith("en");
@@ -183,7 +210,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:9,
+    version:10,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
@@ -192,6 +219,7 @@
     primarySimpleQuiz:true,
     primarySimpleQuizScoped:true,
     specialEducationEntryAnalytics:true,
-    specialTutorActionMenu:true
+    specialTutorActionMenu:true,
+    aiHelpTrustBoundary:true
   });
 })();

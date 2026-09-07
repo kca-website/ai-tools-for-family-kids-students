@@ -16,12 +16,14 @@
     {id:"tool-audit",src:"/september-2026-tool-audit.js"},
     {id:"primary-tutor",src:"/september-2026-primary-tutor.js"},
     {id:"primary-quiz",src:"/september-2026-primary-quiz.js"},
+    {id:"primary-simple-quiz",src:"/primary-simple-quiz.js"},
     {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
-    // Lightweight homepage integration only. Its full Special Education
-    // diagnostic catalog is fetched only after the user chooses that option.
+    // Lightweight homepage integrations. The diagnostic catalog is still fetched
+    // only after the user chooses that option; analytics records only entry source.
     {id:"special-education-diagnostic",src:"/special-education-diagnostic.js"},
+    {id:"special-education-entry-analytics",src:"/special-education-entry-analytics.js"},
 
     // Generic tutor tools. Special Education data is deliberately NOT loaded here.
     {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
@@ -51,8 +53,24 @@
     });
   }
 
+  function routeParts(){
+    return location.pathname.split("/").filter(Boolean);
+  }
+  function isHomepage(){
+    return routeParts().length===0;
+  }
+  function isPrimaryOrHomepage(){
+    const parts=routeParts();
+    return parts.length===0 || parts[0]==="primary";
+  }
+
   function loadRuntimeScripts(){
     RUNTIME_SCRIPTS.forEach(({id,src})=>{
+      // The optional A-B Primary mode also carries the homepage icon consistency
+      // pass, so it is needed on / and /primary only. Never load it on middle/high
+      // tutor routes where it has no function and could perturb established timing.
+      if(id==="primary-simple-quiz" && !isPrimaryOrHomepage()) return;
+      if(id==="special-education-entry-analytics" && !isHomepage()) return;
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
       const script=document.createElement("script");
       script.src=src;
@@ -64,7 +82,7 @@
 
   let specialTutorUiPromise=null;
   function isTutorPath(){
-    const parts=location.pathname.split("/").filter(Boolean);
+    const parts=routeParts();
     return ["middle","high"].includes(parts[0]) && ["guardian","student"].includes(parts[1]) && parts[2]==="tutor";
   }
   function loadSpecialTutorUi(){
@@ -151,12 +169,15 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:6,
+    version:9,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
     eneegylEightGradeStructure:true,
     simplifiedSpecialAssessment:true,
+    primarySimpleQuiz:true,
+    primarySimpleQuizScoped:true,
+    specialEducationEntryAnalytics:true,
     specialTutorActionMenu:true
   });
 })();

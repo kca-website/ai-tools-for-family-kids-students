@@ -1,5 +1,5 @@
 window.SPECIAL_EDUCATION_STATUS = {
-  lastUpdated: "2026-09-06",
+  lastUpdated: "2026-09-07",
   legend: {verified:"Επαληθευμένο",indexed:"Επίσημη πηγή εντοπίστηκε",pending:"Σε αναμονή χαρτογράφησης"},
   rows: [
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Ζώνη Δημιουργικών Δραστηριοτήτων",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
@@ -19,3 +19,33 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Νεοελληνική Γλώσσα",curriculum:"pending",learning:"pending",quiz:"pending",tutorContext:"pending"}
   ]
 };
+
+(function(){
+  "use strict";
+  if(typeof document==="undefined") return;
+
+  function enhanceSpecialEducationPage(){
+    const hero=document.querySelector(".sp-hero");
+    if(!hero) return;
+
+    const icon=hero.querySelector(".sp-hero__icon");
+    if(icon) icon.textContent="🏫";
+
+    const aiLink=hero.querySelector(".sp-unified-ai");
+    if(!aiLink || document.getElementById("spParentGuideLink")) return;
+
+    const guide=document.createElement("a");
+    guide.id="spParentGuideLink";
+    guide.href="/special-education-parent-guide.html";
+    guide.textContent="👪 Οδηγός γονέα";
+    guide.style.cssText="display:inline-flex;align-items:center;justify-content:center;margin:14px 0 0 8px;min-height:44px;padding:10px 15px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#334155;text-decoration:none;font-weight:800;box-sizing:border-box;";
+    aiLink.insertAdjacentElement("afterend",guide);
+
+    const style=document.createElement("style");
+    style.textContent="@media(max-width:840px){#spParentGuideLink{width:100%;margin-left:0!important;text-align:center}}";
+    document.head.appendChild(style);
+  }
+
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",enhanceSpecialEducationPage,{once:true});
+  else enhanceSpecialEducationPage();
+})();

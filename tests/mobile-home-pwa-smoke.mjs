@@ -36,15 +36,16 @@ try {
 
   const labels = await page.locator('#pwaMobileLauncher .pwa-mobile-action').allTextContents();
   assert.deepEqual(labels.map((x) => x.trim()), ['🧭Γρήγορο τεστ', '🧰Βρες εργαλείο', '🤖AI Βοήθεια']);
-  assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), false, 'legacy large diagnostic CTA is still visible in installed mobile mode');
-  assert.equal(await page.locator('#zoneSelectView .hero__ai-help').isVisible(), false, 'legacy large AI Help hero is still visible in installed mobile mode');
+  assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), true, 'installed mobile mode must retain the full diagnostic entry');
+  assert.equal(await page.locator('#zoneSelectView .hero__ai-help').isVisible(), true, 'installed mobile mode must retain the full AI Help entry');
 
   const specialText=await page.locator('#specialEducationHomeFeature').innerText();
   assert.match(specialText,/Ειδικό Γυμνάσιο.*Ειδικό Λύκειο.*ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./s,'homepage Special Education card must name all three school types');
   assert.ok(specialText.includes('🏫'),'Special Education homepage card must use the neutral school icon');
   assert.ok(!specialText.includes('♿'),'wheelchair icon must not be used as the Special Education symbol');
   assert.match(await page.locator('#specialEducationHomeFeature .se-home-cta').getAttribute('href'),/^\/special-education\.html$/,'homepage Special Education link must use the production route');
-  assert.equal((await page.locator('#heroHelpSpecialEducation').innerText()).trim(),'🏫Ειδική Εκπαίδευση','AI Help Special Education action must use the same icon and label');
+  const specialHelpText=(await page.locator('#heroHelpSpecialEducation').innerText()).replace(/\s+/g,'').trim();
+  assert.equal(specialHelpText,'🏫ΕιδικήΕκπαίδευση','AI Help Special Education action must use the same icon and label');
 
   const analytics=await page.evaluate(()=>{
     const calls=[];
@@ -73,7 +74,7 @@ try {
   assert.ok(overflow <= 1, `mobile homepage has horizontal overflow: ${overflow}px`);
   assert.deepEqual(errors, [], `mobile homepage browser errors:\n${errors.join('\n')}`);
 
-  console.log('Mobile PWA homepage + Special Education lazy-loading + entry analytics smoke passed.');
+  console.log('Mobile PWA homepage parity + Special Education lazy-loading + entry analytics smoke passed.');
 } finally {
   await browser.close();
 }

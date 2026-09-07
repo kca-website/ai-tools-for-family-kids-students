@@ -15,6 +15,14 @@ async function injectAxe(page) {
   await page.addScriptTag({ content: axe.source });
 }
 
+function compactNode(node) {
+  return {
+    target: node.target,
+    html: node.html,
+    failureSummary: node.failureSummary,
+  };
+}
+
 async function scan(page, label) {
   await injectAxe(page);
   const result = await page.evaluate(async (tags) => {
@@ -22,24 +30,25 @@ async function scan(page, label) {
       runOnly: { type: 'tag', values: tags },
       resultTypes: ['violations', 'incomplete'],
     });
+    const compact = (node) => ({
+      target: node.target,
+      html: node.html,
+      failureSummary: node.failureSummary,
+    });
     return {
       violations: output.violations.map((item) => ({
         id: item.id,
         impact: item.impact,
         help: item.help,
         helpUrl: item.helpUrl,
-        nodes: item.nodes.map((node) => ({
-          target: node.target,
-          html: node.html,
-          failureSummary: node.failureSummary,
-        })),
+        nodes: item.nodes.map(compact),
       })),
       incomplete: output.incomplete.map((item) => ({
         id: item.id,
         impact: item.impact,
         help: item.help,
         helpUrl: item.helpUrl,
-        nodeCount: item.nodes.length,
+        nodes: item.nodes.map(compact),
       })),
     };
   }, WCAG_TAGS);
@@ -56,7 +65,12 @@ async function scan(page, label) {
     }
   }
   for (const item of result.incomplete) {
-    console.log(`REVIEW ${item.id} impact=${item.impact || 'unknown'} nodes=${item.nodeCount} — ${item.help}`);
+    console.log(`REVIEW ${item.id} impact=${item.impact || 'unknown'} nodes=${item.nodes.length} — ${item.help}`);
+    for (const node of item.nodes.slice(0, 8)) {
+      console.log(`  target: ${JSON.stringify(node.target)}`);
+      console.log(`  html: ${node.html.replace(/\s+/g, ' ').slice(0, 260)}`);
+      console.log(`  why: ${(node.failureSummary || '').replace(/\s+/g, ' ').slice(0, 420)}`);
+    }
   }
   return result;
 }

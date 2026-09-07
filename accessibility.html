@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Προσβασιμότητα εργαλείων | AI Tools for Kids</title>
-  <meta name="description" content="Έρευνα προσβασιμότητας για τα 32 AI εργαλεία του aitools4kids.gr: επίσημες δηλώσεις, VPAT και ανεξάρτητες αξιολογήσεις screen reader.">
+  <meta name="description" content="Έρευνα προσβασιμότητας για 32 εργαλεία του aitools4kids.gr: επίσημες δηλώσεις, VPAT/ACR, ανεξάρτητες αξιολογήσεις και το εύρημα για Ελληνική Νοηματική Γλώσσα (ΕΝΓ).">
   <link rel="canonical" href="https://www.aitools4kids.gr/accessibility.html">
   <style>
     :root {
@@ -27,6 +27,8 @@
     h2 { color: var(--green); margin-top: 40px; font-size: 20px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
     .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
     .highlight { background: var(--bg-soft); padding: 16px; border-left: 4px solid var(--blue); margin: 16px 0; border-radius: 6px; }
+    .finding { background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 10px; padding: 16px 18px; margin: 18px 0 28px; }
+    .finding p:last-child { margin-bottom: 0; }
     .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 24px; }
     .legend span { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; padding: 4px 10px; border-radius: 999px; }
     .badge-good { background: var(--good-bg); color: var(--good-fg); }
@@ -45,14 +47,28 @@
     .table-fallback { color: var(--muted); font-size: 13px; }
     .statement-list { padding-left: 22px; }
     .statement-list li + li { margin-top: 8px; }
+    @media (max-width: 640px) {
+      body { margin: 24px auto; padding: 0 14px 48px; }
+      table { font-size: 13px; }
+      th, td { padding: 8px 7px; }
+      td.status { white-space: normal; }
+    }
   </style>
 </head>
 <body>
   <h1>♿ Προσβασιμότητα εργαλείων</h1>
-  <p class="subtitle">Έρευνα: 27 Αυγούστου 2026. Χρησιμοποιήθηκαν μόνο επίσημες πηγές και αξιόπιστες ανεξάρτητες αξιολογήσεις.</p>
+  <p class="subtitle">Έρευνα: 27 Αυγούστου 2026. Χρησιμοποιήθηκαν επίσημες πηγές και αξιόπιστες ανεξάρτητες αξιολογήσεις.</p>
 
   <div class="highlight">
-    <p><strong>Σημαντικό:</strong> Καμία πληροφορία σε αυτή τη σελίδα δεν είναι επινοημένη. Όπου δεν βρέθηκε επίσημη πηγή, το σημειώνουμε ρητά ως «Δεν βρέθηκε». Αυτό δεν σημαίνει ότι το εργαλείο δεν είναι προσβάσιμο, αλλά ότι ο κατασκευαστής δεν δημοσιεύει σχετική τεκμηρίωση. Δεν εντοπίστηκε υποστήριξη Ελληνικής Νοηματικής Γλώσσας (ΕΝΓ) σε κανένα από τα 32 εργαλεία.</p>
+    <p><strong>Σημαντικό:</strong> Όπου δεν βρέθηκε επαρκής πηγή, το σημειώνουμε ρητά ως «Δεν βρέθηκε». Αυτό δεν σημαίνει ότι το εργαλείο δεν είναι προσβάσιμο· σημαίνει ότι στην έρευνα δεν εντοπίσαμε επαρκή δημοσιευμένη τεκμηρίωση για να το χαρακτηρίσουμε.</p>
+  </div>
+
+  <h2 id="eng-finding">Κύριο εύρημα: Ελληνική Νοηματική Γλώσσα (ΕΝΓ)</h2>
+  <div class="finding" data-eng-finding="32-tools">
+    <p><strong>Στις πηγές που ελέγχθηκαν για τα 32 εργαλεία δεν εντοπίστηκε τεκμηριωμένη υποστήριξη Ελληνικής Νοηματικής Γλώσσας (ΕΝΓ).</strong></p>
+    <p>Η διατύπωση είναι σκόπιμα προσεκτική: πρόκειται για <strong>απουσία τεκμηρίωσης που εντοπίσαμε</strong>, όχι για απόδειξη ότι κανένα εργαλείο δεν έχει ή δεν μπορεί να αποκτήσει σχετική δυνατότητα. Επίσης δεν σημαίνει ότι ένα εργαλείο χωρίς ΕΝΓ είναι συνολικά μη προσβάσιμο για κωφούς ή βαρήκοους μαθητές· μπορεί να διαθέτει υπότιτλους, μεταγραφή, οπτικές εναλλακτικές ή άλλες λειτουργίες προσβασιμότητας.</p>
+    <p>Η έρευνα αυτή είναι στιγμιότυπο έως τις 27 Αυγούστου 2026. Αν βρεθεί νεότερη επίσημη τεκμηρίωση, η καταγραφή πρέπει να ενημερωθεί.</p>
+    <p><a href="/methodology.html"><strong>Δες πώς έγινε ο έλεγχος και τι σημαίνουν οι κατηγορίες →</strong></a></p>
   </div>
 
   <div class="legend">

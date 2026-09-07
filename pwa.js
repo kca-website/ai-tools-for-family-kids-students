@@ -122,9 +122,40 @@
   window.addEventListener("popstate",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
   document.addEventListener("aitools4kids:tutor-rendered",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
 
+  // Keep the trust disclosure completely out of the normal tutor startup chain.
+  // It is fetched only when the user actually attempts Puter sign-in. This avoids
+  // changing the timing/order of established tutor extensions.
+  let aiHelpTrustBoundaryPromise=null;
+  function loadAiHelpTrustBoundary(){
+    if(window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY) return Promise.resolve(window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY);
+    if(aiHelpTrustBoundaryPromise) return aiHelpTrustBoundaryPromise;
+    aiHelpTrustBoundaryPromise=appendScript("ai-help-trust-boundary","/ai-help-trust-boundary.js","data-aitools4kids-feature")
+      .then(()=>window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY)
+      .catch((err)=>{ aiHelpTrustBoundaryPromise=null; console.error("AI Help trust boundary failed to load.",err); throw err; });
+    return aiHelpTrustBoundaryPromise;
+  }
+
+  document.addEventListener("click",(event)=>{
+    const target=event.target instanceof Element ? event.target.closest("#tutorSignIn, #tutorSwitchAccount") : null;
+    if(!target || window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    loadAiHelpTrustBoundary().then(()=>{
+      if(target.isConnected) target.click();
+    }).catch(()=>{});
+  },true);
+
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active") ||
       (document.documentElement.lang || "").toLowerCase().startsWith("en");
+  }
+
+  function refreshHeroMiddleLabel(){
+    const label=document.querySelector('[data-i18n="heroHelpMiddle"]');
+    if(!label) return;
+    const desired=isEnglish()?"Middle School":"Γυμνάσιο";
+    if(label.textContent.trim()!==desired) label.textContent=desired;
   }
 
   function auditDateText(){
@@ -165,25 +196,32 @@
     if(el && el.textContent.trim()!==auditDateText()) el.textContent=auditDateText();
   }
 
-  function initAuditDate(){
+  function initPagePolish(){
     detachLegacyFooterDateGuard();
     refreshAuditDate();
+    refreshHeroMiddleLabel();
   }
 
   if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",initAuditDate,{once:true});
+    document.addEventListener("DOMContentLoaded",initPagePolish,{once:true});
   }else{
-    initAuditDate();
+    initPagePolish();
   }
-  window.addEventListener("load",refreshAuditDate,{once:true});
+  window.addEventListener("load",()=>{
+    refreshAuditDate();
+    refreshHeroMiddleLabel();
+  },{once:true});
 
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;
-    if(target?.closest("#langEl, #langEn")) setTimeout(refreshAuditDate,0);
+    if(target?.closest("#langEl, #langEn")) setTimeout(()=>{
+      refreshAuditDate();
+      refreshHeroMiddleLabel();
+    },0);
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:9,
+    version:10,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
@@ -192,6 +230,7 @@
     primarySimpleQuiz:true,
     primarySimpleQuizScoped:true,
     specialEducationEntryAnalytics:true,
-    specialTutorActionMenu:true
+    specialTutorActionMenu:true,
+    aiHelpTrustBoundary:true
   });
 })();

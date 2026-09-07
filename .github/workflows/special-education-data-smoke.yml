@@ -30,6 +30,8 @@ jobs:
           node-version: '22'
       - name: Validate Special Education datasets
         run: node tests/special-education-data-smoke.mjs
+      - name: Validate Special Gymnasium B/C support quizzes
+        run: node tests/special-gymnasium-bc-data-smoke.mjs
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.55.0

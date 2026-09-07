@@ -225,6 +225,8 @@
 
   function normalizeSpecialEducationEntries(){
     ensureHomepageSpecialEducationLink();
+    const homeTitle=document.querySelector("#specialEducationHomeFeature .se-home-title");
+    if(homeTitle) homeTitle.textContent=homeTitle.textContent.replace(/^\s*🎓\s*/,"🏫 ");
     ["heroHelpSpecialEducation","specialEducationDiagnosticEntry"].forEach((id)=>{
       const icon=document.getElementById(id)?.querySelector("span[aria-hidden='true']");
       if(icon) icon.textContent="🏫";
@@ -245,5 +247,5 @@
   else{scheduleEnhance();normalizeSpecialEducationEntries();}
   window.addEventListener("load",()=>setTimeout(normalizeSpecialEducationEntries,0),{once:true});
 
-  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:2,grades:["a","b"],questionsPerSession:3,choicesPerQuestion:2});
+  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:3,grades:["a","b"],questionsPerSession:3,choicesPerQuestion:2});
 })();

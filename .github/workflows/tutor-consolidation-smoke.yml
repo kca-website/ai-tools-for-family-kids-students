@@ -49,6 +49,9 @@ jobs:
       - name: Run WCAG 2.2 report-only audit
         run: node tests/wcag-22-audit.mjs
 
+      - name: Run Tool Nutrition Labels smoke
+        run: node tests/tool-nutrition-labels-smoke.mjs
+
       - name: Run installed-mobile homepage smoke
         run: node tests/mobile-home-pwa-smoke.mjs
 

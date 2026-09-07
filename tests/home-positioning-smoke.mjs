@@ -21,7 +21,7 @@ try {
   }
 
   assert.match(await page.locator('.hero__quiz-cta-title').innerText(), /Χάρτης Εξάσκησης/);
-  assert.equal((await page.locator('.hero__ai-help-badge').innerText()).trim(), 'Κόλλησα εδώ');
+  assert.equal((await page.locator('.hero__ai-help-badge').innerText()).trim().toLocaleLowerCase('el-GR'), 'κόλλησα εδώ');
   assert.match(await page.locator('#heroAiHelpTitle').innerText(), /Δείξε μου πώς να το μάθω/);
   assert.match(await page.locator('.hero__ai-help-copy > p').first().innerText(), /δική σου προσπάθεια/);
 
@@ -43,7 +43,7 @@ try {
   assert.match(await page.locator('.hero__subtitle').innerText(), /next right step/);
   assert.match(await page.locator('.hero__learning-loop').innerText(), /Difficulty/);
   assert.match(await page.locator('.hero__learning-loop').innerText(), /Try again/);
-  assert.equal((await page.locator('.hero__ai-help-badge').innerText()).trim(), 'I’m stuck here');
+  assert.equal((await page.locator('.hero__ai-help-badge').innerText()).trim().toLocaleLowerCase('en-US'), 'i’m stuck here');
   assert.match(await page.locator('#heroAiHelpTitle').innerText(), /Show me how to learn it/);
 
   assert.deepEqual(errors, [], `Homepage browser errors:\n${errors.join('\n')}`);

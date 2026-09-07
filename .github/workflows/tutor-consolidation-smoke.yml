@@ -52,6 +52,9 @@ jobs:
       - name: Run Tool Nutrition Labels smoke
         run: node tests/tool-nutrition-labels-smoke.mjs
 
+      - name: Run methodology and ENG finding smoke
+        run: node tests/methodology-eng-finding-smoke.mjs
+
       - name: Run installed-mobile homepage smoke
         run: node tests/mobile-home-pwa-smoke.mjs
 

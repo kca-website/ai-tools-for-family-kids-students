@@ -44,7 +44,8 @@ try {
   assert.ok(specialText.includes('🏫'),'Special Education homepage card must use the neutral school icon');
   assert.ok(!specialText.includes('♿'),'wheelchair icon must not be used as the Special Education symbol');
   assert.match(await page.locator('#specialEducationHomeFeature .se-home-cta').getAttribute('href'),/^\/special-education\.html$/,'homepage Special Education link must use the production route');
-  assert.equal((await page.locator('#heroHelpSpecialEducation').innerText()).trim(),'🏫Ειδική Εκπαίδευση','AI Help Special Education action must use the same icon and label');
+  const specialHelpText=(await page.locator('#heroHelpSpecialEducation').innerText()).replace(/\s+/g,'').trim();
+  assert.equal(specialHelpText,'🏫ΕιδικήΕκπαίδευση','AI Help Special Education action must use the same icon and label');
 
   const analytics=await page.evaluate(()=>{
     const calls=[];

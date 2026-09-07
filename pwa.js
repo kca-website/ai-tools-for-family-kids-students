@@ -36,10 +36,6 @@
     {id:"tutor-mobile-compact",src:"/tutor-mobile-compact.js"},
     {id:"tutor-mobile-label-fix",src:"/tutor-mobile-label-fix.js"},
 
-    // Trust boundary: loaded only where the homepage AI Help entry or tutor sign-in
-    // can be reached. It does not load Puter itself.
-    {id:"ai-help-trust-boundary",src:"/ai-help-trust-boundary.js"},
-
     // Reporting runtime.
     {id:"report-link",src:"/report-link.js"},
   ];
@@ -67,10 +63,6 @@
     const parts=routeParts();
     return parts.length===0 || parts[0]==="primary";
   }
-  function isTutorPath(){
-    const parts=routeParts();
-    return ["middle","high"].includes(parts[0]) && ["guardian","student"].includes(parts[1]) && parts[2]==="tutor";
-  }
 
   function loadRuntimeScripts(){
     RUNTIME_SCRIPTS.forEach(({id,src})=>{
@@ -79,7 +71,6 @@
       // tutor routes where it has no function and could perturb established timing.
       if(id==="primary-simple-quiz" && !isPrimaryOrHomepage()) return;
       if(id==="special-education-entry-analytics" && !isHomepage()) return;
-      if(id==="ai-help-trust-boundary" && !(isHomepage() || isTutorPath())) return;
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
       const script=document.createElement("script");
       script.src=src;
@@ -103,6 +94,10 @@
   }
 
   let specialTutorUiPromise=null;
+  function isTutorPath(){
+    const parts=routeParts();
+    return ["middle","high"].includes(parts[0]) && ["guardian","student"].includes(parts[1]) && parts[2]==="tutor";
+  }
   function loadSpecialTutorUi(){
     if(window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI && window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ && window.AITOOLSKIDS_SPECIAL_TUTOR_ACTIONS && window.ENEEGYL_2026_2027_STRUCTURE) return Promise.resolve();
     if(specialTutorUiPromise) return specialTutorUiPromise;
@@ -188,7 +183,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:10,
+    version:9,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
@@ -197,7 +192,6 @@
     primarySimpleQuiz:true,
     primarySimpleQuizScoped:true,
     specialEducationEntryAnalytics:true,
-    specialTutorActionMenu:true,
-    aiHelpTrustBoundary:true
+    specialTutorActionMenu:true
   });
 })();

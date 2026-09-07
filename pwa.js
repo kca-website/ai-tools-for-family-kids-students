@@ -16,6 +16,7 @@
     {id:"tool-audit",src:"/september-2026-tool-audit.js"},
     {id:"primary-tutor",src:"/september-2026-primary-tutor.js"},
     {id:"primary-quiz",src:"/september-2026-primary-quiz.js"},
+    {id:"primary-simple-quiz",src:"/primary-simple-quiz.js"},
     {id:"language-diagnostics",src:"/september-2026-language-diagnostics.js"},
     {id:"language-tutor",src:"/september-2026-language-tutor.js"},
 
@@ -151,12 +152,13 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:6,
+    version:7,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
     eneegylEightGradeStructure:true,
     simplifiedSpecialAssessment:true,
+    primarySimpleQuiz:true,
     specialTutorActionMenu:true
   });
 })();

@@ -275,7 +275,7 @@
     var annual=(annualInfo && annualInfo.status) || (e.annualInstructionsStatus||'');
     var annualText;
     if(annual==='official-annual-guidance-published'){ annualText=lang==='el'?'Επίσημες οδηγίες 2026–27 δημοσιευμένες':'Official 2026–27 guidance published'; }
-    else if(annual.indexOf('direct-official-url-pending')>=0){ annualText=lang==='el'?'Εγκύκλιος εντοπισμένη · άμεσο επίσημο αρχείο εκκρεμεί':'Circular identified · direct official file pending'; }
+    else if(annual.indexOf('direct-official-url-pending')>=0){ annualText=role==='teacher' ? (lang==='el'?'Εγκύκλιος εντοπισμένη · άμεσο επίσημο αρχείο εκκρεμεί':'Circular identified · direct official file pending') : (lang==='el'?'Σχετική εγκύκλιος εντοπισμένη · επίσημη τεκμηρίωση εκκρεμεί':'Relevant circular identified · official documentation pending'); }
     else if(annual.indexOf('not-indexed')>=0){ annualText=lang==='el'?'Δεν έχει κωδικοποιηθεί ακόμη πλήρως':'Not fully encoded yet'; }
     else if(annual){ annualText=lang==='el'?'Καταχωρισμένο / επαληθευμένο':'Encoded / verified'; }
     else { annualText=lang==='el'?'Δεν αναφέρεται ξεχωριστό status':'No separate status recorded'; }
@@ -297,7 +297,8 @@
     else { sec.innerHTML='<h3>'+(lang==='el'?'Επίσημες ενότητες':'Official sections')+'</h3><p>'+(lang==='el'?'Δεν έχει καταχωριστεί section-level λίστα για αυτό το entry. Το βιβλίο/μάθημα μπορεί να είναι επιβεβαιωμένο χωρίς να ισχυριζόμαστε ακριβή αντιστοίχιση κεφαλαίου.':'No section-level list is recorded for this entry. The book/course may be verified without claiming an exact chapter mapping.')+'</p>'; }
 
     var note=lang==='el' ? (e.scopeNoteEl||'') : (e.scopeNoteEn||'');
-    var annualNote=annualInfo ? (lang==='el' ? (annualInfo.noteEl||'') : (annualInfo.noteEn||annualInfo.noteEl||'')) : (lang==='el' ? (e.annualInstructionsNoteEl||'') : (e.annualInstructionsNoteEn||''));
+    var pendingAnnual=annual.indexOf('direct-official-url-pending')>=0;
+    var annualNote=annualInfo ? (role!=='teacher' && pendingAnnual ? (lang==='el' ? (annualInfo.publicNoteEl||annualInfo.noteEl||'') : (annualInfo.publicNoteEn||annualInfo.noteEn||annualInfo.noteEl||'')) : (lang==='el' ? (annualInfo.noteEl||'') : (annualInfo.noteEn||annualInfo.noteEl||''))) : (lang==='el' ? (e.annualInstructionsNoteEl||'') : (e.annualInstructionsNoteEn||''));
     document.getElementById('scopeNote').innerHTML=(note?'<p>'+note+'</p>':'')+(annualNote?'<div class="notice"><strong>'+(lang==='el'?'Ετήσια ύλη':'Annual scope')+'</strong>'+annualNote+'</div>':'');
 
     var gapsEl=document.getElementById('gaps');
@@ -317,6 +318,7 @@
     if(e.catalogUrl) s.push(sourceLink(e.catalogUrl,lang==='el'?'Κατάλογος σχολικών βιβλίων':'Textbook catalog'));
     if(e.ministryUrl) s.push(sourceLink(e.ministryUrl,lang==='el'?'Υπουργείο Παιδείας':'Ministry of Education'));
     if(annualInfo && annualInfo.sourceUrl) s.push(sourceLink(annualInfo.sourceUrl,lang==='el'?(annualInfo.sourceLabelEl||'Ετήσιες οδηγίες 2026–27'):(annualInfo.sourceLabelEn||annualInfo.sourceLabelEl||'2026–27 annual guidance')));
+    if(role==='teacher' && annualInfo && annualInfo.discoverySourceUrl) s.push(sourceLink(annualInfo.discoverySourceUrl,lang==='el'?'Πηγή εντοπισμού εγκυκλίου (μη επίσημη)':'Circular discovery source (non-official)'));
     document.getElementById('sources').innerHTML=s.join('');
 
     var quizRoute=routeByZone[zone]||'/';

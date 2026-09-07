@@ -249,6 +249,7 @@
     if(a.sourceUrl)sources.push('<a class="source-link" target="_blank" rel="noopener" href="'+esc(a.sourceUrl)+'">'+(lang==='el'?'Πηγή θέματος':'Topic source')+' ↗</a>');
     if(e.officialBook&&e.officialBook.url)sources.push('<a class="source-link" target="_blank" rel="noopener" href="'+esc(e.officialBook.url)+'">'+(lang==='el'?'Επίσημο βιβλίο':'Official book')+' ↗</a>');
     if(annualInfo&&annualInfo.sourceUrl)sources.push('<a class="source-link annual-source" target="_blank" rel="noopener" href="'+esc(annualInfo.sourceUrl)+'">'+esc(lang==='el'?(annualInfo.sourceLabelEl||'Ετήσιες οδηγίες 2026–27'):(annualInfo.sourceLabelEn||annualInfo.sourceLabelEl||'2026–27 annual guidance'))+' ↗</a>');
+    if(annualInfo&&annualInfo.discoverySourceUrl)sources.push('<a class="source-link discovery-source" target="_blank" rel="noopener" href="'+esc(annualInfo.discoverySourceUrl)+'">'+esc(lang==='el'?'Πηγή εντοπισμού εγκυκλίου (μη επίσημη)':'Circular discovery source (non-official)')+' ↗</a>');
     document.getElementById('sourceRow').innerHTML=sources.join('');
 
     document.getElementById('noAiHeading').textContent=(lang==='el'?'Διερεύνηση: ':'Explore: ')+topic;

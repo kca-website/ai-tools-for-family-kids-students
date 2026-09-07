@@ -25,6 +25,21 @@ try {
   assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Επίσημες οδηγίες 2026–27 δημοσιευμένες');
   assert.ok(await map.locator('#sources a').filter({ hasText: 'Ξένες Γλώσσες Δημοτικού' }).count(), 'Primary English annual source is missing');
 
+  await map.getByRole('button', { name: 'Γυμνάσιο' }).click();
+  await selectLabel(map, '#subject', 'Μαθηματικά');
+  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Σχετική εγκύκλιος εντοπισμένη · επίσημη τεκμηρίωση εκκρεμεί');
+  const studentAnnualNote = await map.locator('#scopeNote').innerText();
+  assert.doesNotMatch(studentAnnualNote, /111798\/Δ2\/28-08-2026|63\/30-07-2026/, 'Student/Parent view should not show protocol or IEP act numbers');
+  assert.equal(await map.locator('#sources a').filter({ hasText: 'Πηγή εντοπισμού εγκυκλίου' }).count(), 0, 'Student/Parent view should not expose the non-official discovery source');
+
+  await map.getByRole('button', { name: 'Εκπαιδευτικός' }).click();
+  const teacherAnnualNote = await map.locator('#scopeNote').innerText();
+  assert.match(teacherAnnualNote, /111798\/Δ2\/28-08-2026/);
+  assert.match(teacherAnnualNote, /63\/30-07-2026/);
+  const teacherDiscovery = map.locator('#sources a').filter({ hasText: 'Πηγή εντοπισμού εγκυκλίου (μη επίσημη)' });
+  assert.equal(await teacherDiscovery.count(), 1, 'Educator view should expose the discovery source');
+  assert.equal(await teacherDiscovery.getAttribute('href'), 'https://edu.klimaka.gr/mathimata/gymnasiou/3032-odhgies-mathimatika-a-gymnasiou');
+
   const classroom = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await classroom.goto(`${BASE}/classroom.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await classroom.waitForSelector('#workspace.visible', { timeout: 10000 });
@@ -44,6 +59,9 @@ try {
   assert.match(middleText, /111798\/Δ2\/28-08-2026/);
   assert.match(middleText, /άμεσο URL του επίσημου συνημμένου/i);
   assert.doesNotMatch(middleText, /ακριβής.*αντιστοίχιση|exact annual alignment verified/i);
+  const classroomDiscovery = classroom.locator('.discovery-source');
+  assert.equal(await classroomDiscovery.count(), 1, 'Classroom should expose the non-official discovery source for pending Middle guidance');
+  assert.equal(await classroomDiscovery.getAttribute('href'), 'https://edu.klimaka.gr/mathimata/gymnasiou/3032-odhgies-mathimatika-a-gymnasiou');
 
   const resolverState = await classroom.evaluate(() => {
     const base = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;

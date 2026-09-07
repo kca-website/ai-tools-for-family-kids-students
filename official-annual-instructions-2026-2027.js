@@ -91,6 +91,8 @@
       labelEn: '2026–27 circular identified · direct official file pending',
       noteEl: 'Έχει εντοπιστεί η αναφορά της εγκυκλίου για '+ref.subjectEl+' ('+ref.protocol+', πράξη ΙΕΠ '+ref.iepAct+'). Στο layer δεν έχει ακόμη καταχωριστεί άμεσο URL του επίσημου συνημμένου, επομένως δεν χρησιμοποιούμε αυτή την αναφορά ως απόδειξη exact annual αντιστοίχισης ενός topic.',
       noteEn: 'The annual circular reference for '+ref.subjectEn+' has been identified ('+ref.protocol+', IEP act '+ref.iepAct+'). A direct URL to the official attachment has not yet been recorded in the layer, so this reference is not used as proof of exact annual alignment for a topic.',
+      publicNoteEl: 'Έχει εντοπιστεί σχετική εγκύκλιος 2026–27 για το μάθημα. Μέχρι να καταχωριστεί άμεσο επίσημο αρχείο, δεν τη χρησιμοποιούμε ως απόδειξη ότι ένα συγκεκριμένο θέμα ανήκει ακριβώς στη φετινή ύλη.',
+      publicNoteEn: 'A relevant 2026–27 circular has been identified for this subject. Until a direct official file is recorded, we do not use it as proof that a specific topic is exactly part of this year’s syllabus.',
       sourceUrl: META.middleMinistryHubUrl,
       sourceLabelEl: 'ΥΠΑΙΘΑ · Κόμβος Γυμνασίου',
       sourceLabelEn: 'Ministry · Middle-school hub',

@@ -49,9 +49,9 @@
 
   function questionScore(q){
     const options=Array.isArray(q?.options)?q.options:[];
-    const hasPlainWrong=options.some((o)=>!o?.isCorrect && !o?.gapTag);
+    const hasDiagnosticWrong=options.some((o)=>!o?.isCorrect && o?.gapTag);
     const wording=(isEnglish()?q?.textEn:q?.textEl)||q?.textEl||q?.textEn||"";
-    return (hasPlainWrong?0:10000)+wording.length;
+    return (hasDiagnosticWrong?0:10000)+wording.length;
   }
 
   function getSimpleQuestions(quiz){
@@ -68,9 +68,9 @@
     const correct=options.find((o)=>o?.isCorrect);
     const wrongs=options.filter((o)=>!o?.isCorrect);
     wrongs.sort((a,b)=>{
-      const ap=a?.gapTag?1:0,bp=b?.gapTag?1:0;
-      const at=((isEnglish()?a?.textEn:a?.textEl)||"").length;
-      const bt=((isEnglish()?b?.textEn:b?.textEl)||"").length;
+      const ap=a?.gapTag?0:1,bp=b?.gapTag?0:1;
+      const at=((isEnglish()?a?.textEn:a?.textEl)||a?.textEl||a?.textEn||"").length;
+      const bt=((isEnglish()?b?.textEn:b?.textEl)||b?.textEl||b?.textEn||"").length;
       return ap-bp || at-bt;
     });
     const wrong=wrongs[0];
@@ -177,7 +177,7 @@
       const explain=(isEnglish()?gap.explainEn:gap.explainEl)||gap.explainEl||"";
       return `<div class="psq__gap"><strong>${escapeHtml(label)}</strong><p>${escapeHtml(explain)}</p></div>`;
     }).join("");
-    const allGood=!uniqueGaps.length;
+    const allGood=!uniqueGaps.length && session.score===session.questions.length;
     body.innerHTML=`<div class="psq__result"><div class="psq__score">${session.score}/${session.questions.length}</div><h3>${allGood?text("Δεν φάνηκε συγκεκριμένο σημείο δυσκολίας","No specific difficulty showed up"):text("Σημεία για λίγη εξάσκηση","A few points to practise")}</h3><p>${allGood?text("Αυτό είναι ένα πολύ μικρό check, όχι βαθμός και όχι διάγνωση.","This is a very small check, not a grade and not a diagnosis."):text("Το αποτέλεσμα δείχνει μόνο πού αξίζει να γίνει λίγη ακόμη εξάσκηση. Δεν είναι βαθμός ούτε διάγνωση.","The result only shows where a little more practice may help. It is not a grade or diagnosis.")}</p>${gapHtml}<div class="psq__actions"><button type="button" class="psq__regular">${text("Κάνε το κανονικό τεστ","Take the regular test")}</button><button type="button" class="psq__again">${text("Ξανά την απλή εκδοχή","Retake simple mode")}</button><button type="button" class="psq__done">${text("Κλείσιμο","Close")}</button></div></div>`;
     body.querySelector(".psq__done").addEventListener("click",closeModal);
     body.querySelector(".psq__again").addEventListener("click",()=>openSimpleQuiz(session.subjectId,lastFocus));
@@ -209,26 +209,41 @@
 
   function scheduleEnhance(){ setTimeout(enhanceSubjectPicker,0); }
 
+  function ensureHomepageSpecialEducationLink(){
+    const actions=document.querySelector(".hero__ai-help-actions");
+    if(!actions) return;
+    let link=document.getElementById("heroHelpSpecialEducation");
+    if(!link){
+      link=document.createElement("a");
+      link.id="heroHelpSpecialEducation";
+      link.href="/special-education.html";
+      actions.appendChild(link);
+    }
+    link.innerHTML=`<span aria-hidden="true">🏫</span><span>${text("Ειδική Εκπαίδευση","Special Education")}</span>`;
+    link.setAttribute("aria-label",text("Ειδική Εκπαίδευση: επιλογή σχολείου και AI Βοήθειας","Special Education: choose school type and AI Help"));
+  }
+
+  function normalizeSpecialEducationEntries(){
+    ensureHomepageSpecialEducationLink();
+    ["heroHelpSpecialEducation","specialEducationDiagnosticEntry"].forEach((id)=>{
+      const icon=document.getElementById(id)?.querySelector("span[aria-hidden='true']");
+      if(icon) icon.textContent="🏫";
+    });
+  }
+
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element?event.target:null;
     const grade=target?.closest?.(".quiz-grade-card[data-grade-id]");
     if(grade){selectedGrade=grade.dataset.gradeId||"";scheduleEnhance();return;}
     if(target?.closest?.("#quizBackToGradesBtn")){selectedGrade="";return;}
-    if(target?.closest?.("#langEl,#langEn")) scheduleEnhance();
+    if(target?.closest?.("#langEl,#langEn")){scheduleEnhance();setTimeout(normalizeSpecialEducationEntries,0);}
+    if(target?.closest?.("#heroQuizCtaBtn")) setTimeout(normalizeSpecialEducationEntries,0);
     if(target?.closest?.("#viewTabQuiz,.quiz-grade-back-btn,.quiz-back-btn")) scheduleEnhance();
   },true);
   window.addEventListener("popstate",()=>{selectedGrade="";scheduleEnhance();});
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",scheduleEnhance,{once:true});
-  else scheduleEnhance();
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>{scheduleEnhance();normalizeSpecialEducationEntries();},{once:true});
+  else{scheduleEnhance();normalizeSpecialEducationEntries();}
+  window.addEventListener("load",()=>setTimeout(normalizeSpecialEducationEntries,0),{once:true});
 
-  // Homepage consistency: Special Education uses one icon everywhere.
-  function normalizeSpecialEducationEntry(){
-    const link=document.getElementById("heroHelpSpecialEducation");
-    const icon=link?.querySelector("span[aria-hidden='true']");
-    if(icon) icon.textContent="🏫";
-  }
-  window.addEventListener("load",()=>setTimeout(normalizeSpecialEducationEntry,0),{once:true});
-  document.addEventListener("click",(event)=>{if(event.target instanceof Element && event.target.closest("#langEl,#langEn")) setTimeout(normalizeSpecialEducationEntry,0);});
-
-  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:1,grades:["a","b"],questionsPerSession:3,choicesPerQuestion:2});
+  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:2,grades:["a","b"],questionsPerSession:3,choicesPerQuestion:2});
 })();

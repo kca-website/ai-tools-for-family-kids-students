@@ -417,8 +417,8 @@
           ? "Στο Δημοτικό η AI Βοήθεια χρησιμοποιείται μέσω του Βοηθού Γονέα, μαζί με ενήλικα."
           : "Η AI Βοήθεια καθοδηγεί με ερωτήσεις και υποδείξεις αντί να δίνει έτοιμη απάντηση.");
     const quick=en
-      ? "<strong>Quick guide:</strong> Tools = recommendations · Diagnostic Map = what needs practice · AI Help = guided support."
-      : "<strong>Γρήγορα:</strong> Εργαλεία = προτάσεις · Διαγνωστικός = τι θέλει εξάσκηση · AI Βοήθεια = καθοδήγηση.";
+      ? "<strong>Quick guide:</strong> Tools = recommendations · Practice Map = what needs practice · AI Help = guided support."
+      : "<strong>Γρήγορα:</strong> Εργαλεία = προτάσεις · Χάρτης Εξάσκησης = τι θέλει εξάσκηση · AI Βοήθεια = καθοδήγηση.";
 
     box.innerHTML=`
       <details class="pwa-role-details">

@@ -418,7 +418,7 @@
     const zoneId = spec.zone || "middle";
     QUIZZES[zoneId][spec.id] = {
       id:spec.id, grades:[spec.grade], subjectLabelEl:spec.subjectLabelEl, subjectLabelEn:spec.subjectLabelEn,
-      titleEl:`Διαγνωστικός Χάρτης: ${spec.shortEl}`, titleEn:`Learning Compass: ${spec.shortEn}`,
+      titleEl:`Χάρτης Εξάσκησης: ${spec.shortEl}`, titleEn:`Practice Map: ${spec.shortEn}`,
       introEl:spec.introEl || `${questions.length} σύντομες ερωτήσεις από βασικές έννοιες της ύλης 2026–27. Δεν είναι διαγώνισμα και δεν έχει βαθμό.`,
       introEn:spec.introEn || `${questions.length} short questions on key 2026–27 topics. This is not an exam and has no grade.`,
       questions,

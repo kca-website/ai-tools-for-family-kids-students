@@ -12,7 +12,7 @@ try{
   await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
 
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForFunction(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ?.version>=3,null,{timeout:10000});
+  await page.waitForFunction(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ?.version>=4,null,{timeout:10000});
 
   const runtime=await page.evaluate(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ);
   assert.deepEqual(runtime.grades,['a','b']);
@@ -28,6 +28,14 @@ try{
   await page.locator('.quiz-grade-card[data-grade-id="a"]').click();
   await page.waitForSelector('.primary-simple-start',{state:'visible',timeout:10000});
   assert.ok(await page.locator('.primary-simple-start').count()>0,'A Primary must expose Simple mode');
+  assert.equal(await page.locator('#primarySimpleQuizStyles').count(),1,'Simple-mode styles must exist before first click');
+  const preClickStyle=await page.locator('.primary-simple-start').first().evaluate((el)=>{
+    const s=getComputedStyle(el);
+    return {borderStyle:s.borderTopStyle,minHeight:parseFloat(s.minHeight),background:s.backgroundColor};
+  });
+  assert.equal(preClickStyle.borderStyle,'solid','Simple-mode button must be styled before first click');
+  assert.ok(preClickStyle.minHeight>=40,'Simple-mode button must have its intended touch target before first click');
+  assert.notEqual(preClickStyle.background,'rgba(0, 0, 0, 0)','Simple-mode button background must be applied before first click');
 
   await page.locator('.primary-simple-start').first().click();
   await page.waitForSelector('#primarySimpleQuizModal',{state:'visible',timeout:10000});

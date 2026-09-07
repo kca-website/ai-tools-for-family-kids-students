@@ -12,7 +12,7 @@
   'use strict';
 
   var META = Object.freeze({
-    version: '1.0.0',
+    version: '1.1.0',
     schoolYear: '2026-2027',
     lastVerified: '2026-09-08',
     primaryIepUrl: 'https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/',
@@ -53,14 +53,32 @@
       protocol: '111798/Δ2/28-08-2026',
       iepAct: '63/30-07-2026',
       subjectEl: 'Μαθηματικά Γυμνασίου',
-      subjectEn: 'Middle-school Mathematics'
+      subjectEn: 'Middle-school Mathematics',
+      discoverySourceUrl: 'https://edu.klimaka.gr/mathimata/gymnasiou/3032-odhgies-mathimatika-a-gymnasiou'
     }),
     Object.freeze({
-      test: function(entry){ return /^physics-/.test(String(entry && entry.quizId || '')); },
+      test: function(entry){ return /^(physics|fysiki)-/.test(String(entry && entry.quizId || '')); },
       protocol: '111919/Δ2/28-08-2026',
       iepAct: '63/30-07-2026',
       subjectEl: 'Φυσική Γυμνασίου',
-      subjectEn: 'Middle-school Physics'
+      subjectEn: 'Middle-school Physics',
+      discoverySourceUrl: 'https://edu.klimaka.gr/mathimata/gymnasiou/3042-odhgies-fysikh-b-gymnasiou'
+    }),
+    Object.freeze({
+      test: function(entry){ return /^chimeia-/.test(String(entry && entry.quizId || '')); },
+      protocol: '111948/Δ2/28-08-2026',
+      iepAct: '63/30-07-2026',
+      subjectEl: 'Χημεία Γυμνασίου',
+      subjectEn: 'Middle-school Chemistry',
+      discoverySourceUrl: 'https://edu.klimaka.gr/mathimata/gymnasiou/3044-odhgies-xhmeia-g-gymnasiou'
+    }),
+    Object.freeze({
+      test: function(entry){ return /^biologia-/.test(String(entry && entry.quizId || '')); },
+      protocol: '111939/Δ2/28-08-2026',
+      iepAct: '63/30-07-2026',
+      subjectEl: 'Βιολογία Γυμνασίου',
+      subjectEn: 'Middle-school Biology',
+      discoverySourceUrl: 'https://edu.klimaka.gr/mathimata/gymnasiou/3039-odhgies-biologia-b-gymnasioy'
     })
   ]);
 
@@ -77,6 +95,7 @@
       sourceLabelEl: 'ΥΠΑΙΘΑ · Κόμβος Γυμνασίου',
       sourceLabelEn: 'Ministry · Middle-school hub',
       ministryUrl: META.middleMinistryHubUrl,
+      discoverySourceUrl: ref.discoverySourceUrl,
       protocol: ref.protocol,
       iepAct: ref.iepAct,
       directOfficialDocumentRecorded: false,

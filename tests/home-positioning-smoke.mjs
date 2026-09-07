@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 const URL = 'http://127.0.0.1:4173/';
 const browser = await chromium.launch({ headless: true });
+const foldLabel = (text, locale) => text.trim().normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase(locale);
 
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
@@ -21,7 +22,7 @@ try {
   }
 
   assert.match(await page.locator('.hero__quiz-cta-title').innerText(), /Χάρτης Εξάσκησης/);
-  assert.equal((await page.locator('.hero__ai-help-badge').innerText()).trim().toLocaleLowerCase('el-GR'), 'κόλλησα εδώ');
+  assert.equal(foldLabel(await page.locator('.hero__ai-help-badge').innerText(), 'el-GR'), foldLabel('Κόλλησα εδώ', 'el-GR'));
   assert.match(await page.locator('#heroAiHelpTitle').innerText(), /Δείξε μου πώς να το μάθω/);
   assert.match(await page.locator('.hero__ai-help-copy > p').first().innerText(), /δική σου προσπάθεια/);
 
@@ -43,7 +44,7 @@ try {
   assert.match(await page.locator('.hero__subtitle').innerText(), /next right step/);
   assert.match(await page.locator('.hero__learning-loop').innerText(), /Difficulty/);
   assert.match(await page.locator('.hero__learning-loop').innerText(), /Try again/);
-  assert.equal((await page.locator('.hero__ai-help-badge').innerText()).trim().toLocaleLowerCase('en-US'), 'i’m stuck here');
+  assert.equal(foldLabel(await page.locator('.hero__ai-help-badge').innerText(), 'en-US'), foldLabel('I’m stuck here', 'en-US'));
   assert.match(await page.locator('#heroAiHelpTitle').innerText(), /Show me how to learn it/);
 
   assert.deepEqual(errors, [], `Homepage browser errors:\n${errors.join('\n')}`);

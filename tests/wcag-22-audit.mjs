@@ -109,7 +109,7 @@ async function disclosureKeyboardCheck(page) {
   }
 
   await page.keyboard.press('Escape');
-  await page.waitForSelector('#aiHelpTrustBoundary[hidden]');
+  await page.waitForFunction(() => document.getElementById('aiHelpTrustBoundary')?.hidden === true);
   const returnedTo = await page.evaluate(() => {
     const el = document.activeElement;
     return { tagName: el?.tagName, id: el?.id, className: el?.className || '' };

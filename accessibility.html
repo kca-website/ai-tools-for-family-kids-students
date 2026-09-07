@@ -11,8 +11,8 @@
       --blue: #2E6BA3; --green: #1E7A4C; --ink: #1F2430; --muted: #5A6270;
       --bg-soft: #F0F7FF; --border: #E3E8F0;
       --good-bg: #EAF7EF; --good-fg: #1E7A4C;
-      --caution-bg: #FFF3E0; --caution-fg: #B25E00;
-      --none-bg: #F3F4F6; --none-fg: #6B7280;
+      --caution-bg: #FFF3E0; --caution-fg: #9A4F00;
+      --none-bg: #F3F4F6; --none-fg: #5F6672;
     }
     * { box-sizing: border-box; }
     body {
@@ -42,6 +42,7 @@
     .back-link { display: inline-block; margin-top: 24px; color: var(--blue); text-decoration: none; font-weight: 600; }
     .back-link:hover { text-decoration: underline; }
     .summary-box { background: var(--bg-soft); padding: 16px; border-radius: 8px; margin: 24px 0; font-size: 14px; }
+    .table-fallback { color: var(--muted); font-size: 13px; }
   </style>
 </head>
 <body>
@@ -65,9 +66,15 @@
       <tr><th>Εργαλείο</th><th>Status</th><th>Σημείωση</th></tr>
     </thead>
     <tbody id="a11yTableBody">
-      <!-- Γεμίζει δυναμικά μέσω JS από το ACCESSIBILITY_INFO + TOOLS -->
+      <tr id="a11yTableFallback">
+        <td colspan="3" class="table-fallback">Ο αναλυτικός πίνακας φορτώνεται από τα δεδομένα της σελίδας. Αν δεν εμφανιστούν οι γραμμές, η συνοπτική εικόνα παραμένει διαθέσιμη ακριβώς από κάτω.</td>
+      </tr>
     </tbody>
   </table>
+
+  <noscript>
+    <div class="summary-box"><strong>Σημείωση:</strong> Η JavaScript είναι απενεργοποιημένη, επομένως οι αναλυτικές γραμμές ανά εργαλείο δεν μπορούν να δημιουργηθούν. Η σύνοψη παρακάτω παραμένει διαθέσιμη.</div>
+  </noscript>
 
   <div class="summary-box">
     <strong>Σύνοψη:</strong> 12 εργαλεία με επίσημη τεκμηρίωση (✅), 11 με μερικά ή μεικτά στοιχεία (❓), 1 με τεκμηριωμένη ανησυχία (⚠️, Wolfram Alpha, το οποίο αξιολογήθηκε από το Perkins School for the Blind ως μη προσβάσιμο για τυφλούς χρήστες χωρίς βοήθεια) και 8 χωρίς εντοπίσιμη πηγή.
@@ -100,7 +107,8 @@
           <td class="note">${info.noteEl}${sourceLink}</td>
         </tr>`;
       });
-      tbody.innerHTML = rows.join('');
+      const rendered = rows.join('');
+      if (rendered) tbody.innerHTML = rendered;
     })();
   </script>
 </body>

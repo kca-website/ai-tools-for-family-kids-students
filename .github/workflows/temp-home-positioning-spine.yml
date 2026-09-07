@@ -19,7 +19,9 @@ jobs:
           ref: position/practice-map-home-spine
 
       - name: Apply deterministic homepage patch
-        run: python3 scripts/apply-home-positioning-spine.py
+        run: |
+          python3 scripts/apply-home-positioning-spine.py
+          git restore .github/workflows/tutor-consolidation-smoke.yml
 
       - name: Commit patched files
         run: |
@@ -29,6 +31,6 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html app.js styles.css home-accessibility.js .github/workflows/tutor-consolidation-smoke.yml
+          git add index.html app.js styles.css home-accessibility.js
           git commit -m "Put the Practice Map at the homepage center"
           git push

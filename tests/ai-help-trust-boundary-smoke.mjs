@@ -3,6 +3,24 @@ import assert from 'node:assert/strict';
 
 const LOCAL = 'http://127.0.0.1:4173/';
 
+async function setTutorAge(page, value) {
+  await page.evaluate((nextValue) => {
+    const age = document.getElementById('tutorAge');
+    if (!age) throw new Error('Missing #tutorAge');
+    age.value = nextValue;
+    age.dispatchEvent(new Event('change', { bubbles: true }));
+  }, value);
+}
+
+async function setTutorConsent(page, checked) {
+  await page.evaluate((nextChecked) => {
+    const consent = document.getElementById('tutorConsent');
+    if (!consent) throw new Error('Missing #tutorConsent');
+    consent.checked = nextChecked;
+    consent.dispatchEvent(new Event('change', { bubbles: true }));
+  }, checked);
+}
+
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
@@ -33,7 +51,9 @@ try {
     window.AITutor.render({ zoneId: 'middle', roleId: 'student', lang: 'el' });
   });
   await page.waitForSelector('#tutorAge');
-  await page.selectOption('#tutorAge', '15');
+  // Mobile Compact keeps settings collapsed; change the underlying control directly
+  // so this test verifies trust behavior without depending on mobile layout state.
+  await setTutorAge(page, '15');
 
   // First click must show disclosure and must NOT load Puter yet.
   await page.click('#tutorSignIn');
@@ -49,8 +69,8 @@ try {
   assert.equal(await page.locator('script[src="https://js.puter.com/v2/"]').count(), 0, 'Puter loaded after disclosure cancel');
 
   // Ages 13–14 get the extra transparency note after the existing consent gate.
-  await page.selectOption('#tutorAge', '13-14');
-  await page.check('#tutorConsent');
+  await setTutorAge(page, '13-14');
+  await setTutorConsent(page, true);
   await page.click('#tutorSignIn');
   await page.waitForSelector('#aiHelpTrustBoundary:not([hidden])');
   const minorNote = await page.textContent('.ai-help-boundary__minor');

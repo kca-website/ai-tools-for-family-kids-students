@@ -52,8 +52,17 @@
     });
   }
 
+  function isPrimaryOrHomepage(){
+    const parts=location.pathname.split("/").filter(Boolean);
+    return parts.length===0 || parts[0]==="primary";
+  }
+
   function loadRuntimeScripts(){
     RUNTIME_SCRIPTS.forEach(({id,src})=>{
+      // The optional A-B Primary mode also carries the homepage icon consistency
+      // pass, so it is needed on / and /primary only. Never load it on middle/high
+      // tutor routes where it has no function and could perturb established timing.
+      if(id==="primary-simple-quiz" && !isPrimaryOrHomepage()) return;
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
       const script=document.createElement("script");
       script.src=src;
@@ -152,13 +161,14 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:7,
+    version:8,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
     eneegylEightGradeStructure:true,
     simplifiedSpecialAssessment:true,
     primarySimpleQuiz:true,
+    primarySimpleQuizScoped:true,
     specialTutorActionMenu:true
   });
 })();

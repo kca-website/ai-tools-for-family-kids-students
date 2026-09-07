@@ -122,10 +122,9 @@
   window.addEventListener("popstate",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
   document.addEventListener("aitools4kids:tutor-rendered",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
 
-  // AI Help trust boundary is deliberately kept OUT of the normal tutor startup
-  // chain so established tutor timing/ordering stays unchanged. The homepage loads
-  // it for the neutral Middle School label; tutor routes load it only on the first
-  // sign-in attempt, before Puter itself is allowed to load.
+  // Keep the trust disclosure completely out of the normal tutor startup chain.
+  // It is fetched only when the user actually attempts Puter sign-in. This avoids
+  // changing the timing/order of established tutor extensions.
   let aiHelpTrustBoundaryPromise=null;
   function loadAiHelpTrustBoundary(){
     if(window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY) return Promise.resolve(window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY);
@@ -135,8 +134,6 @@
       .catch((err)=>{ aiHelpTrustBoundaryPromise=null; console.error("AI Help trust boundary failed to load.",err); throw err; });
     return aiHelpTrustBoundaryPromise;
   }
-
-  if(isHomepage()) loadAiHelpTrustBoundary().catch(()=>{});
 
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target.closest("#tutorSignIn, #tutorSwitchAccount") : null;
@@ -152,6 +149,13 @@
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active") ||
       (document.documentElement.lang || "").toLowerCase().startsWith("en");
+  }
+
+  function refreshHeroMiddleLabel(){
+    const label=document.querySelector('[data-i18n="heroHelpMiddle"]');
+    if(!label) return;
+    const desired=isEnglish()?"Middle School":"Γυμνάσιο";
+    if(label.textContent.trim()!==desired) label.textContent=desired;
   }
 
   function auditDateText(){
@@ -192,21 +196,28 @@
     if(el && el.textContent.trim()!==auditDateText()) el.textContent=auditDateText();
   }
 
-  function initAuditDate(){
+  function initPagePolish(){
     detachLegacyFooterDateGuard();
     refreshAuditDate();
+    refreshHeroMiddleLabel();
   }
 
   if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",initAuditDate,{once:true});
+    document.addEventListener("DOMContentLoaded",initPagePolish,{once:true});
   }else{
-    initAuditDate();
+    initPagePolish();
   }
-  window.addEventListener("load",refreshAuditDate,{once:true});
+  window.addEventListener("load",()=>{
+    refreshAuditDate();
+    refreshHeroMiddleLabel();
+  },{once:true});
 
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;
-    if(target?.closest("#langEl, #langEn")) setTimeout(refreshAuditDate,0);
+    if(target?.closest("#langEl, #langEn")) setTimeout(()=>{
+      refreshAuditDate();
+      refreshHeroMiddleLabel();
+    },0);
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({

@@ -121,16 +121,16 @@
         none: '<span class="badge-none">Δεν βρέθηκε</span>',
       };
       const tbody = document.getElementById('a11yTableBody');
-      if (!tbody || typeof TOOLS === 'undefined' || typeof ACCESSIBILITY_INFO === 'undefined') return;
-      const rows = Object.keys(TOOLS).map((id) => {
-        const tool = TOOLS[id];
+      if (!tbody || typeof ACCESSIBILITY_INFO === 'undefined') return;
+      const rows = Object.keys(ACCESSIBILITY_INFO).map((id) => {
+        const tool = typeof TOOLS !== 'undefined' ? TOOLS[id] : null;
         const info = ACCESSIBILITY_INFO[id];
-        if (!info) return '';
+        const toolName = tool && tool.name ? tool.name : id;
         const sourceLink = info.sourceUrl
           ? ` <a class="source" href="${info.sourceUrl}" target="_blank" rel="noopener noreferrer">πηγή ↗</a>`
           : '';
         return `<tr>
-          <td>${tool.name}</td>
+          <td>${toolName}</td>
           <td class="status">${STATUS_LABEL[info.status] || ''}</td>
           <td class="note">${info.noteEl}${sourceLink}</td>
         </tr>`;

@@ -73,7 +73,7 @@
       .ai-help-boundary__actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;}
       .ai-help-boundary__btn{min-height:44px;border-radius:10px;padding:10px 15px;border:1px solid #cbd5e1;background:#fff;color:#1f2430;font:inherit;font-weight:700;cursor:pointer;}
       .ai-help-boundary__btn--primary{background:#2e6ba3;border-color:#2e6ba3;color:#fff;}
-      .ai-help-boundary__btn:focus-visible,.ai-help-boundary__panel a:focus-visible{outline:3px solid #f59e0b;outline-offset:3px;}
+      .ai-help-boundary__btn:focus-visible,.ai-help-boundary__panel a:focus-visible{outline:3px solid #0f5c8f;outline-offset:3px;}
       @media (max-width:520px){
         .ai-help-boundary{padding:12px;align-items:end;}
         .ai-help-boundary__panel{max-height:90vh;border-radius:16px 16px 10px 10px;padding:18px 16px;}
@@ -140,6 +140,35 @@
       .replaceAll("'", "&#039;");
   }
 
+  function getFocusable(root) {
+    if (!root) return [];
+    return Array.from(root.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+      .filter((element) => !element.hasAttribute("hidden") && element.getClientRects().length > 0);
+  }
+
+  function trapDialogFocus(event, root) {
+    if (event.key !== "Tab" || !root || root.hidden) return;
+    const focusable = getFocusable(root);
+    if (!focusable.length) {
+      event.preventDefault();
+      root.querySelector(".ai-help-boundary__panel")?.focus();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+    const activeInside = active instanceof Element && root.contains(active);
+
+    if (event.shiftKey && (!activeInside || active === first)) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && (!activeInside || active === last)) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
   function openDialog(button) {
     pendingButton = button;
     lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : button;
@@ -181,15 +210,19 @@
   document.addEventListener("click", interceptSignIn, true);
   document.addEventListener("keydown", (event) => {
     const root = document.getElementById("aiHelpTrustBoundary");
-    if (event.key === "Escape" && root && !root.hidden) {
+    if (!root || root.hidden) return;
+    if (event.key === "Escape") {
       event.preventDefault();
       closeDialog(false);
+      return;
     }
+    trapDialogFocus(event, root);
   });
 
   window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY = Object.freeze({
-    version: 1,
+    version: 2,
     disclosureBeforePuter: true,
     legalComplianceClaim: false,
+    focusTrap: true,
   });
 })();

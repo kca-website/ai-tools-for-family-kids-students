@@ -32,19 +32,27 @@ The page-dimension report surfaced these URLs with at least one impression:
 
 Page rows can differ from aggregate totals because of Search Console privacy/aggregation behavior. Treat them as directional signals, not additive totals.
 
-## Sitemap snapshot
+## Sitemap and indexing snapshot
 
-The current sitemap contains **61 URLs**. Only a small number have Search Console impression data so far; absence of impressions is **not** the same as “not indexed”.
+The current sitemap contains **61 URLs**. The sitemap report currently shows 61 submitted and 0 indexed, but URL Inspection gives a more useful current sample and confirms that this sitemap-level count is not a reliable picture of actual indexing yet.
 
-URL Inspection on 7 September 2026 confirmed:
+A 15-URL inspection sample on 7 September 2026 found:
 
-- `/` — Submitted and indexed
-- `/methodology.html` — Submitted and indexed
-- `/tools/gemini.html` — Submitted and indexed
-- `/high/guardian/guide` — Submitted and indexed
-- `/accessibility.html` — URL unknown to Google at the time of inspection
+- **13 URLs: Submitted and indexed**
+- **2 URLs: URL unknown to Google**
 
-All indexed URLs above were crawlable and indexing was allowed.
+Indexed examples include the homepage, methodology, primary tools, high-school guide/tutor and multiple tool pages (Gemini, ChatGPT, Copilot, NotebookLM, PhET, Canva, Desmos). All indexed sample URLs were crawlable, fetched successfully and indexing was allowed.
+
+The two URLs currently unknown to Google are:
+
+- `/accessibility.html`
+- `/middle/student/tools`
+
+Both were added to the GSC Wizard indexing tracker for follow-up. Their current absence from the index does not justify a structural site change by itself because the site is new and the broader inspection sample is healthy.
+
+## Privacy-policy review
+
+The current privacy policy already describes the optional Puter boundary, text/audio transfer, local-vs-third-party storage distinction, Vercel Analytics, age rules and the fact that age/parental-consent declarations are not technically verified. No corrective content change was justified by this review, so the policy was not rewritten merely for the sake of changing it.
 
 ## Decision for roadmap item #6
 

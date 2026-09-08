@@ -10,6 +10,10 @@ try {
   const errors = [];
   page.on('pageerror', (error) => errors.push(String(error)));
 
+  const sourceResponse = await page.request.get(URL);
+  const sourceHtml = await sourceResponse.text();
+  assert.match(sourceHtml, /<title>Μαθαίνω Έξυπνα με AI \| AI Εργαλεία για Μαθητές: Δημοτικό, Γυμνάσιο, Λύκειο<\/title>/);
+
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#zoneGrid .zone-card', { timeout: 10000 });
 
@@ -46,7 +50,6 @@ try {
     assert.match(badgeText, new RegExp(badge), `Homepage identity badge missing: ${badge}`);
   }
 
-  assert.match(await page.title(), /AI Εργαλεία για Μαθητές/);
   const visibleHomepage = await page.locator('#zoneSelectView').innerText();
   assert.ok(!visibleHomepage.includes('—'), 'AI-style em dash must not return to visible homepage copy');
 

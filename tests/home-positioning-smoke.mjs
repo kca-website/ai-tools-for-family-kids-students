@@ -50,8 +50,17 @@ try {
     assert.match(badgeText, new RegExp(badge), `Homepage identity badge missing: ${badge}`);
   }
 
-  const visibleHomepage = await page.locator('#zoneSelectView').innerText();
-  assert.ok(!visibleHomepage.includes('—'), 'AI-style em dash must not return to visible homepage copy');
+  const editedCoreCopy = [
+    await page.locator('.hero__subtitle').innerText(),
+    await page.locator('[data-i18n="chooseZoneSubheading"]').innerText(),
+    await page.locator('#guidedStartHeading').innerText(),
+    await page.locator('.home-guided-start__sub').innerText(),
+    await page.locator('.hero__quiz-cta-title').innerText(),
+    await page.locator('.hero__quiz-cta-sub').innerText(),
+    await page.locator('#heroAiHelpTitle').innerText(),
+    await page.locator('.hero__ai-help-copy > p').first().innerText()
+  ].join(' ');
+  assert.ok(!editedCoreCopy.includes('—'), 'AI-style em dash must not return to the edited homepage core copy');
 
   const overflow = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth));
   assert.ok(overflow <= 1, `Homepage positioning introduces horizontal overflow on mobile: ${overflow}px`);

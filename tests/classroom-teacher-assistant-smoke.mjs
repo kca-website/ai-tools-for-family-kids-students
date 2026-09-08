@@ -54,7 +54,6 @@ try{
   assert.match(await page.locator('#recText').innerText(),/κενό πρότυπο παρατήρησης/i);
 
   await page.click('#langEn');
-  assert.equal(document===undefined,false);
   await page.waitForFunction(()=>document.documentElement.lang==='en');
   assert.match(await page.locator('h1').innerText(),/AI Teacher Assistant/);
   assert.match(await page.locator('.privacy').innerText(),/Do not enter student names/);

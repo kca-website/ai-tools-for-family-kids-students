@@ -77,8 +77,8 @@
     }
 
     const description = en
-      ? "Free bilingual AI learning map for students 6–18, parents and educators: Practice Map, learning paths, curated AI tools, guided AI Help, Greek curriculum mapping and accessible educational resources."
-      : "Δωρεάν ελληνικός χάρτης μάθησης με AI για μαθητές 6–18, γονείς και εκπαιδευτικούς: Χάρτης Εξάσκησης, learning paths, επιλεγμένα AI εργαλεία, καθοδηγούμενη AI Βοήθεια, Ελληνικός Χάρτης Ύλης και προσβάσιμο εκπαιδευτικό υλικό.";
+      ? "Free bilingual learning guide for students 6–18, parents and educators: Practice Map, learning paths, AI tool recommendations, guided AI Help, Greek curriculum mapping and accessible educational resources."
+      : "Δωρεάν δίγλωσσος οδηγός μάθησης για μαθητές 6–18, γονείς και εκπαιδευτικούς: Χάρτης Εξάσκησης, learning paths, προτάσεις AI εργαλείων, καθοδηγούμενη AI Βοήθεια, Ελληνικός Χάρτης Ύλης και προσβάσιμο εκπαιδευτικό υλικό.";
 
     const meta = document.querySelector('meta[name="description"]');
     const og = document.querySelector('meta[property="og:description"]');

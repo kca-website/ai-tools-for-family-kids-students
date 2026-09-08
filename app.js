@@ -43,7 +43,7 @@
   const STRINGS = {
     el: {
       heroTitle: "Μαθαίνω Έξυπνα με AI",
-      heroSubtitle: "Όταν ένα παιδί δεν έχει καταλάβει κάτι, ξεκίνα εδώ: δες τι χρειάζεται εξάσκηση και ποιο είναι το επόμενο σωστό βήμα, με ή χωρίς AI. Για μαθητές 6 έως 18, γονείς και εκπαιδευτικούς.",
+      heroSubtitle: "Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί. Για γονείς, μαθητές 6 έως 18 αλλά και εκπαιδευτικούς.",
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
@@ -152,7 +152,7 @@
     },
     en: {
       heroTitle: "Learn Smarter with AI",
-      heroSubtitle: "When a child has not understood something, start here: see what needs practice and what the next right step is, with or without AI. For students aged 6–18, parents and educators.",
+      heroSubtitle: "See in 2 minutes where the student or the parent could use a bit more practice, and which free AI tool fits exactly there. For parents, students 6 to 18, and educators.",
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",

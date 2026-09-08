@@ -1,4 +1,4 @@
-/* Privacy-friendly usage signal for the three Special Education homepage entries.
+/* Privacy-friendly usage signal for the Special Education homepage entries.
  * Uses the Vercel Web Analytics instance already injected by index.html.
  * No user identifiers or free-text values are collected: only the entry source.
  */
@@ -8,7 +8,7 @@
   if(location.pathname!=="/" && location.pathname!=="") return;
 
   const EVENT_NAME="Special Education Entry";
-  const ALLOWED_SOURCES=new Set(["banner","ai_help","diagnostic"]);
+  const ALLOWED_SOURCES=new Set(["school_grid","ai_help","diagnostic"]);
 
   function ensureVercelQueue(){
     if(typeof window.va==="function") return window.va;
@@ -33,7 +33,7 @@
 
   function sourceForTarget(target){
     if(!(target instanceof Element)) return null;
-    if(target.closest("#specialEducationHomeFeature .se-home-cta")) return "banner";
+    if(target.closest("#specialSchoolZoneCard")) return "school_grid";
     if(target.closest("#heroHelpSpecialEducation")) return "ai_help";
     if(target.closest("#specialEducationDiagnosticEntry")) return "diagnostic";
     return null;
@@ -45,9 +45,9 @@
   },true);
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_ENTRY_ANALYTICS=Object.freeze({
-    version:1,
+    version:2,
     eventName:EVENT_NAME,
-    sources:["banner","ai_help","diagnostic"],
+    sources:["school_grid","ai_help","diagnostic"],
     track
   });
 })();

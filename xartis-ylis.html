@@ -106,7 +106,7 @@
   <section class="hero">
     <div class="kicker" data-el="Ελληνικό σχολικό πλαίσιο" data-en="Greek school context">Ελληνικό σχολικό πλαίσιο</div>
     <h1 data-el="Ελληνικός Χάρτης Ύλης 2026–27" data-en="Greek Curriculum Map 2026–27">Ελληνικός Χάρτης Ύλης 2026–27</h1>
-    <p class="lead" data-el="Δες τι έχει αντιστοιχιστεί με επίσημα σχολικά βιβλία και πηγές, ανά βαθμίδα, μάθημα και θέμα. Κάθε badge δείχνει πόσο ισχυρή είναι η επαλήθευση — χωρίς να παρουσιάζουμε ένα topic anchor ως επίσημο κεφάλαιο όταν δεν είναι." data-en="See what has been mapped to official Greek school books and sources by level, subject and topic. Each badge shows the strength of the verification — without presenting a topic anchor as an official chapter when it is not.">Δες τι έχει αντιστοιχιστεί με επίσημα σχολικά βιβλία και πηγές, ανά βαθμίδα, μάθημα και θέμα. Κάθε badge δείχνει πόσο ισχυρή είναι η επαλήθευση — χωρίς να παρουσιάζουμε ένα topic anchor ως επίσημο κεφάλαιο όταν δεν είναι.</p>
+    <p class="lead" data-el="Δες τι έχει αντιστοιχιστεί με επίσημα σχολικά βιβλία και πηγές, ανά βαθμίδα, μάθημα και θέμα. Κάθε badge δείχνει πόσο ισχυρή είναι η επαλήθευση: χωρίς να παρουσιάζουμε ένα topic anchor ως επίσημο κεφάλαιο όταν δεν είναι." data-en="See what has been mapped to official Greek school books and sources by level, subject and topic. Each badge shows the strength of the verification: without presenting a topic anchor as an official chapter when it is not.">Δες τι έχει αντιστοιχιστεί με επίσημα σχολικά βιβλία και πηγές, ανά βαθμίδα, μάθημα και θέμα. Κάθε badge δείχνει πόσο ισχυρή είναι η επαλήθευση: χωρίς να παρουσιάζουμε ένα topic anchor ως επίσημο κεφάλαιο όταν δεν είναι.</p>
     <div class="stats" id="stats"></div>
   </section>
 
@@ -267,10 +267,10 @@
     document.getElementById('resultTitle').textContent=courseTitle(e);
     var b=document.getElementById('coverageBadge');
     b.className='badge '+badgeClass(e.coverageStatus);
-    b.textContent=(lang==='el' ? e.coverageLabelEl : e.coverageLabelEn) || e.coverageStatus || '—';
+    b.textContent=(lang==='el' ? e.coverageLabelEl : e.coverageLabelEn) || e.coverageStatus || '–';
 
     document.getElementById('schoolYear').textContent=e.schoolYear||layer.meta.schoolYear||'2026–27';
-    document.getElementById('verifiedDate').textContent=e.verificationDate||layer.meta.lastVerified||'—';
+    document.getElementById('verifiedDate').textContent=e.verificationDate||layer.meta.lastVerified||'–';
     var annualInfo=annualLayer && annualLayer.resolve ? annualLayer.resolve(e) : null;
     var annual=(annualInfo && annualInfo.status) || (e.annualInstructionsStatus||'');
     var annualText;

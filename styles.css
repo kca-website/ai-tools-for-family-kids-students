@@ -2187,3 +2187,44 @@ main {
     padding: 7px 10px;
   }
 }
+
+
+/* ---------- Header utility link: Classroom ---------- */
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.classroom-menu-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.classroom-menu-link:hover {
+  border-color: var(--color-accent);
+  background: rgba(46, 111, 94, 0.06);
+}
+
+.classroom-menu-link:focus-visible {
+  outline: 3px solid rgba(59, 130, 196, 0.32);
+  outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+  .site-header__inner { gap: 8px; }
+  .site-title { font-size: .92rem; }
+  .classroom-menu-link { width: 36px; padding: 6px; justify-content: center; }
+  .classroom-menu-link__text { display: none; }
+}

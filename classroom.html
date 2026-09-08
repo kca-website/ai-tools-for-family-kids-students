@@ -79,7 +79,7 @@
       <span class="hero-badge" data-el="Χωρίς αποθήκευση αποτελεσμάτων" data-en="No result storage">Χωρίς αποθήκευση αποτελεσμάτων</span>
       <span class="hero-badge" data-el="Εκτύπωση / PDF από τον browser" data-en="Print / browser PDF">Εκτύπωση / PDF από τον browser</span>
     </div>
-    <div class="privacy-note" data-el="Η σελίδα δεν δημιουργεί τάξη, κωδικό μαθητή ή dashboard. Οι επιλογές βαθμίδας/μαθήματος/θέματος μπορούν να μπουν μόνο στο URL ώστε να μοιραστεί η ίδια δραστηριότητα — χωρίς ονόματα ή αποτελέσματα μαθητών." data-en="This page does not create a class, student code or dashboard. Level/subject/topic choices may appear only in the URL so the same activity can be shared — without student names or results.">Η σελίδα δεν δημιουργεί τάξη, κωδικό μαθητή ή dashboard. Οι επιλογές βαθμίδας/μαθήματος/θέματος μπορούν να μπουν μόνο στο URL ώστε να μοιραστεί η ίδια δραστηριότητα — χωρίς ονόματα ή αποτελέσματα μαθητών.</div>
+    <div class="privacy-note" data-el="Η σελίδα δεν δημιουργεί τάξη, κωδικό μαθητή ή dashboard. Οι επιλογές βαθμίδας/μαθήματος/θέματος μπορούν να μπουν μόνο στο URL ώστε να μοιραστεί η ίδια δραστηριότητα: χωρίς ονόματα ή αποτελέσματα μαθητών." data-en="This page does not create a class, student code or dashboard. Level/subject/topic choices may appear only in the URL so the same activity can be shared: without student names or results.">Η σελίδα δεν δημιουργεί τάξη, κωδικό μαθητή ή dashboard. Οι επιλογές βαθμίδας/μαθήματος/θέματος μπορούν να μπουν μόνο στο URL ώστε να μοιραστεί η ίδια δραστηριότητα: χωρίς ονόματα ή αποτελέσματα μαθητών.</div>
   </section>
 
   <section class="panel picker-panel" aria-labelledby="pickerTitle">
@@ -110,7 +110,7 @@
     <div class="source-row" id="sourceRow"></div>
 
     <div class="pack">
-      <div class="pack-title"><span>1</span><strong data-el="Πρώτη σκέψη — χωρίς AI" data-en="First thinking — no AI">Πρώτη σκέψη — χωρίς AI</strong></div>
+      <div class="pack-title"><span>1</span><strong data-el="Πρώτη σκέψη: χωρίς AI" data-en="First thinking: no AI">Πρώτη σκέψη: χωρίς AI</strong></div>
       <div class="step">
         <h3 id="noAiHeading"></h3>
         <p id="noAiText"></p>
@@ -229,7 +229,7 @@
     document.getElementById('zoneLabel').textContent=zoneLabels[zone][lang];
     document.getElementById('courseTitle').textContent=course;
     document.getElementById('topicTitle').textContent=(lang==='el'?'Εστίαση: ':'Focus: ')+topic;
-    var badge=document.getElementById('coverageBadge');badge.className='badge '+badgeClass(a.status||e.coverageStatus);badge.textContent=local(a.statusLabelEl,a.statusLabelEn)||local(e.coverageLabelEl,e.coverageLabelEn)||a.status||e.coverageStatus||'—';
+    var badge=document.getElementById('coverageBadge');badge.className='badge '+badgeClass(a.status||e.coverageStatus);badge.textContent=local(a.statusLabelEl,a.statusLabelEn)||local(e.coverageLabelEl,e.coverageLabelEn)||a.status||e.coverageStatus||'–';
 
     var annual=document.getElementById('annualWarning');
     var annualInfo=annualLayer && annualLayer.resolve ? annualLayer.resolve(e) : null;
@@ -240,7 +240,7 @@
       annual.innerHTML='<strong>'+(lang==='el'?'Ετήσιες οδηγίες 2026–27 δημοσιευμένες':'Official 2026–27 guidance published')+'</strong>'+esc(local(annualInfo.noteEl,annualInfo.noteEn));
     }else if(annualStatus.indexOf('direct-official-url-pending')>=0){
       annual.hidden=false;
-      annual.innerHTML='<strong>'+(lang==='el'?'Ετήσια εγκύκλιος εντοπισμένη — τεκμηρίωση σε εξέλιξη':'Annual circular identified — documentation in progress')+'</strong>'+esc(local(annualInfo.noteEl,annualInfo.noteEn));
+      annual.innerHTML='<strong>'+(lang==='el'?'Ετήσια εγκύκλιος εντοπισμένη: τεκμηρίωση σε εξέλιξη':'Annual circular identified: documentation in progress')+'</strong>'+esc(local(annualInfo.noteEl,annualInfo.noteEn));
     }else if(annualStatus.indexOf('not-indexed')>=0){
       annual.hidden=false;annual.innerHTML='<strong>'+(lang==='el'?'Προσοχή στην ετήσια ύλη':'Annual-scope caution')+'</strong>'+esc(local(e.annualInstructionsNoteEl,e.annualInstructionsNoteEn)||(lang==='el'?'Η ετήσια οδηγία 2026–27 δεν έχει ακόμη κωδικοποιηθεί πλήρως για αυτό το μάθημα.':'The 2026–27 annual guidance has not yet been fully encoded for this subject.'));
     }else annual.hidden=true;

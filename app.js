@@ -42,6 +42,7 @@
   // ---------- Στατικά strings ----------
   const STRINGS = {
     el: {
+      menuClassroom: "Για την τάξη",
       heroTitle: "Μαθαίνω Έξυπνα με AI",
       heroSubtitle: "Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί. Για γονείς, μαθητές 6 έως 18 αλλά και εκπαιδευτικούς.",
       badgeFree: "Δωρεάν",
@@ -87,7 +88,7 @@
       notGuideTitle: "Τι ΔΕΝ είναι αυτός ο οδηγός",
       notGuideItem1: "Δεν αντικαθιστά τον δάσκαλο ή τον γονιό.",
       notGuideItem2: "Δεν είναι τρόπος να αντιγράψεις μια εργασία έτοιμη.",
-      footerLastChecked: "Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026",
+      footerLastChecked: "Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026",
       footerPrivacyLink: "Πολιτική Απορρήτου",
       footerAccessibilityLink: "Προσβασιμότητα εργαλείων",
       toolAgeLabel: "Όροι Χρήσης",
@@ -151,6 +152,7 @@
       parentQuizShareCta: "Μοιράσου τη σύγκριση με άλλους γονείς",
     },
     en: {
+      menuClassroom: "Classroom",
       heroTitle: "Learn Smarter with AI",
       heroSubtitle: "See in 2 minutes where the student or the parent could use a bit more practice, and which free AI tool fits exactly there. For parents, students 6 to 18, and educators.",
       badgeFree: "Free",

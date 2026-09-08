@@ -86,9 +86,16 @@ try {
   assert.equal(foldLabel(await page.locator('.hero__ai-help-badge').innerText(), 'en-US'), foldLabel('Free AI Help · optional', 'en-US'));
   assert.match(await page.locator('#heroAiHelpTitle').innerText(), /Stuck on an exercise/);
   assert.equal(await page.locator('#navigatorNeeds .navigator-needs-card').count(), 6);
+  assert.ok(await page.locator('#navigatorNeeds a[href="/en/study-pdf-with-ai.html"]').count(), 'English PDF route must stay in English');
+  assert.ok(await page.locator('#navigatorNeeds a[href="/en/research-with-sources-ai.html"]').count(), 'English research route must stay in English');
+  assert.ok(await page.locator('#navigatorNeeds a[href="/en/flashcards-revision-ai.html"]').count(), 'English flashcards route must stay in English');
+  assert.ok(await page.locator('#navigatorNeeds a[href="/en/presentation-poster-ai.html"]').count(), 'English presentation route must stay in English');
+  assert.ok(await page.locator('#navigatorNeeds a[href="/en/reading-english-ai.html"]').count(), 'English reading route must stay in English');
+  assert.ok(await page.locator('#navigatorNeeds a[href="/en/creative-ai-for-students.html"]').count(), 'English creative route must stay in English');
+  assert.ok(await page.locator('#navigatorNeeds a[href="/en/what-do-you-want-to-do-with-ai.html"]').count(), 'English all-routes link must stay in English');
 
   assert.deepEqual(errors, [], `Homepage browser errors:\n${errors.join('\n')}`);
-  console.log('Navigator-first homepage hierarchy, optional AI Help, task routes and mobile smoke passed.');
+  console.log('Navigator-first homepage hierarchy, bilingual task routes, optional AI Help and mobile smoke passed.');
 } finally {
   await browser.close();
 }

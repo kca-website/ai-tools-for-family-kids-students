@@ -58,6 +58,15 @@
       (document.documentElement.lang||"").toLowerCase().startsWith("en");
   }
 
+  function ensureStyles(){
+    if(document.querySelector('link[data-navigator-home="1"]')) return;
+    const link=document.createElement("link");
+    link.rel="stylesheet";
+    link.href="/navigator-home.css";
+    link.dataset.navigatorHome="1";
+    document.head.appendChild(link);
+  }
+
   function removeSeparatedSpecialEducation(){
     const old=document.getElementById("specialEducationHomeFeature");
     if(old && !document.getElementById("zoneGrid")?.contains(old)) old.remove();
@@ -101,6 +110,7 @@
   }
 
   function apply(){
+    ensureStyles();
     removeSeparatedSpecialEducation();
     const c=isEnglish()?COPY.en:COPY.el;
 

@@ -345,28 +345,23 @@
           </details>
         </div>
 
-      </div>
-
-      <h2 class="section-heading" data-i18n="chooseZoneHeading">Διάλεξε ηλικιακή ζώνη</h2>
-      <p class="section-subheading" data-i18n="chooseZoneSubheading">
-        Κάθε ζώνη έχει διαφορετικά κατάλληλα εργαλεία και διαφορετικό βαθμό αυτονομίας.
-      </p>
-      <div class="zone-grid" id="zoneGrid">
-        <!-- Γεμίζει δυναμικά από το app.js με βάση το ZONES -->
-      </div>
-
-      <section class="home-guided-start" aria-labelledby="guidedStartHeading">
-        <div class="home-guided-start__intro">
-          <h2 id="guidedStartHeading" class="home-guided-start__title" data-i18n="guidedStartTitle">Δεν ξέρεις από πού να ξεκινήσεις;</h2>
-          <p class="home-guided-start__sub" data-i18n="guidedStartSub">Χρησιμοποίησε τον Χάρτη Εξάσκησης για να εντοπίσεις τι θέλει δουλειά. Αν έχεις ήδη κολλήσει σε άσκηση, η AI Βοήθεια μπορεί να σε καθοδηγήσει χωρίς να σου δώσει έτοιμη λύση.</p>
+        <div class="hero__learning-loop" role="group" aria-labelledby="heroFlowLabel">
+          <p id="heroFlowLabel" class="hero__learning-loop-label" data-i18n="heroFlowLabel">Η διαδρομή μάθησης</p>
+          <ol class="hero__learning-loop-steps">
+            <li data-i18n="heroFlowDifficulty">Δυσκολία</li>
+            <li data-i18n="heroFlowSpot">Εντοπισμός</li>
+            <li data-i18n="heroFlowPractice">Εξάσκηση</li>
+            <li data-i18n="heroFlowGuidance">Καθοδήγηση</li>
+            <li data-i18n="heroFlowRetry">Ξαναδοκιμή</li>
+          </ol>
         </div>
 
         <div class="hero__quiz-cta-wrap">
           <button type="button" id="heroQuizCtaBtn" class="hero__quiz-cta">
             <span class="hero__quiz-cta-icon" aria-hidden="true">🧭</span>
             <span class="hero__quiz-cta-text">
-              <span class="hero__quiz-cta-title" data-i18n="heroQuizCta">Χάρτης Εξάσκησης σε 2 λεπτά</span>
-              <span class="hero__quiz-cta-sub" data-i18n="heroQuizCtaSub">Λίγες σύντομες ερωτήσεις για να δεις ποια σημεία αξίζει να εξασκήσεις περισσότερο. Χωρίς βαθμό και χωρίς διάγνωση. Μόνο ένα σημείο εκκίνησης για το επόμενο Μονοπάτι Μάθησης.</span>
+              <span class="hero__quiz-cta-title" data-i18n="heroQuizCta">Χάρτης Εξάσκησης · ξεκίνα εδώ</span>
+              <span class="hero__quiz-cta-sub" data-i18n="heroQuizCtaSub">Λίγες σύντομες ερωτήσεις για να δεις ποια σημεία αξίζει να δουλέψεις περισσότερο και να πας στο επόμενο Μονοπάτι Μάθησης. Χωρίς βαθμό και χωρίς διάγνωση.</span>
             </span>
           </button>
           <div class="hero__quiz-picker" id="heroQuizPicker" hidden>
@@ -388,7 +383,15 @@
             <a href="/high/student/tutor"><span aria-hidden="true">🎓</span><span data-i18n="heroHelpHigh">Λύκειο</span></a>
           </div>
         </section>
-      </section>
+      </div>
+
+      <h2 class="section-heading" data-i18n="chooseZoneHeading">Διάλεξε ηλικιακή ζώνη</h2>
+      <p class="section-subheading" data-i18n="chooseZoneSubheading">
+        Αν ξέρεις ήδη τη σχολική βαθμίδα, μπες από εδώ. Σε κάθε ζώνη θα βρεις Χάρτη Εξάσκησης, Μονοπάτια Μάθησης, καθοδήγηση και επιλεγμένα εργαλεία.
+      </p>
+      <div class="zone-grid" id="zoneGrid">
+        <!-- Γεμίζει δυναμικά από το app.js με βάση το ZONES -->
+      </div>
 
       <div class="not-guide-box">
         <p class="not-guide-box__title" data-i18n="notGuideTitle">Τι ΔΕΝ είναι αυτός ο οδηγός</p>

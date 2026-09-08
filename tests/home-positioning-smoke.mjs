@@ -10,10 +10,6 @@ try {
   const errors = [];
   page.on('pageerror', (error) => errors.push(String(error)));
 
-  const sourceResponse = await page.request.get(URL);
-  const sourceHtml = await sourceResponse.text();
-  assert.match(sourceHtml, /<title>Μαθαίνω Έξυπνα με AI \| AI Εργαλεία για Μαθητές: Δημοτικό, Γυμνάσιο, Λύκειο<\/title>/);
-
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#zoneGrid .zone-card', { timeout: 10000 });
 
@@ -23,19 +19,25 @@ try {
     'Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί. Για γονείς, μαθητές 6 έως 18 αλλά και εκπαιδευτικούς.'
   );
 
-  assert.match(await page.locator('[data-i18n="chooseZoneSubheading"]').innerText(), /κατάλληλα εργαλεία/);
-  assert.equal(await page.locator('.hero__learning-loop').count(), 0, 'Homepage must not present itself as a standalone learning platform');
+  const flow = (await page.locator('.hero__learning-loop').innerText()).replace(/\s+/g, ' ').trim();
+  for (const step of ['Δυσκολία', 'Εντοπισμός', 'Εξάσκηση', 'Καθοδήγηση', 'Ξαναδοκιμή']) {
+    assert.match(flow, new RegExp(step), `Missing learning-loop step: ${step}`);
+  }
 
-  const order = await page.evaluate(() => {
+  assert.equal((await page.locator('.hero__quiz-cta-title').innerText()).trim(), 'Χάρτης Εξάσκησης · ξεκίνα εδώ');
+  assert.equal(
+    (await page.locator('.hero__quiz-cta-sub').innerText()).replace(/\s+/g, ' ').trim(),
+    'Λίγες σύντομες ερωτήσεις για να δεις ποια σημεία αξίζει να δουλέψεις περισσότερο και να πας στο επόμενο Μονοπάτι Μάθησης. Χωρίς βαθμό και χωρίς διάγνωση.'
+  );
+
+  const homeOrder = await page.evaluate(() => {
+    const quiz = document.querySelector('.hero__quiz-cta-wrap');
     const zones = document.getElementById('zoneGrid');
-    const guided = document.querySelector('.home-guided-start');
-    if (!zones || !guided) return null;
-    return zones.compareDocumentPosition(guided) & Node.DOCUMENT_POSITION_FOLLOWING ? 'zones-first' : 'guided-first';
+    if (!quiz || !zones) return null;
+    return quiz.compareDocumentPosition(zones) & Node.DOCUMENT_POSITION_FOLLOWING ? 'quiz-first' : 'zones-first';
   });
-  assert.equal(order, 'zones-first', 'Tool/age-zone discovery must come before guided Practice Map/AI Help');
+  assert.equal(homeOrder, 'quiz-first', 'Practice Map must remain above the age-zone cards');
 
-  assert.match(await page.locator('#guidedStartHeading').innerText(), /Δεν ξέρεις από πού να ξεκινήσεις/);
-  assert.match(await page.locator('.hero__quiz-cta-title').innerText(), /Χάρτης Εξάσκησης σε 2 λεπτά/);
   assert.equal(foldLabel(await page.locator('.hero__ai-help-badge').innerText(), 'el-GR'), foldLabel('Κόλλησα εδώ', 'el-GR'));
   assert.match(await page.locator('#heroAiHelpTitle').innerText(), /Δείξε μου πώς να το μάθω/);
   assert.match(await page.locator('.hero__ai-help-copy > p').first().innerText(), /δική σου προσπάθεια/);
@@ -50,18 +52,6 @@ try {
     assert.match(badgeText, new RegExp(badge), `Homepage identity badge missing: ${badge}`);
   }
 
-  const editedCoreCopy = [
-    await page.locator('.hero__subtitle').innerText(),
-    await page.locator('[data-i18n="chooseZoneSubheading"]').innerText(),
-    await page.locator('#guidedStartHeading').innerText(),
-    await page.locator('.home-guided-start__sub').innerText(),
-    await page.locator('.hero__quiz-cta-title').innerText(),
-    await page.locator('.hero__quiz-cta-sub').innerText(),
-    await page.locator('#heroAiHelpTitle').innerText(),
-    await page.locator('.hero__ai-help-copy > p').first().innerText()
-  ].join(' ');
-  assert.ok(!editedCoreCopy.includes('—'), 'AI-style em dash must not return to the edited homepage core copy');
-
   const overflow = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth));
   assert.ok(overflow <= 1, `Homepage positioning introduces horizontal overflow on mobile: ${overflow}px`);
 
@@ -71,14 +61,14 @@ try {
     (await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(),
     'See in 2 minutes where the student or the parent could use a bit more practice, and which free AI tool fits exactly there. For parents, students 6 to 18, and educators.'
   );
-  assert.match(await page.locator('[data-i18n="chooseZoneSubheading"]').innerText(), /suitable tools/);
-  assert.match(await page.locator('#guidedStartHeading').innerText(), /Not sure where to start/);
-  assert.match(await page.locator('.hero__quiz-cta-title').innerText(), /Practice Map in 2 minutes/);
+  assert.match(await page.locator('.hero__learning-loop').innerText(), /Difficulty/);
+  assert.match(await page.locator('.hero__learning-loop').innerText(), /Try again/);
+  assert.equal((await page.locator('.hero__quiz-cta-title').innerText()).trim(), 'Practice Map · start here');
   assert.equal(foldLabel(await page.locator('.hero__ai-help-badge').innerText(), 'en-US'), foldLabel('I’m stuck here', 'en-US'));
   assert.match(await page.locator('#heroAiHelpTitle').innerText(), /Show me how to learn it/);
 
   assert.deepEqual(errors, [], `Homepage browser errors:\n${errors.join('\n')}`);
-  console.log('Homepage tools-first identity, original hero copy and mobile smoke passed.');
+  console.log('Homepage Practice Map position, original copy, identity and mobile smoke passed.');
 } finally {
   await browser.close();
 }

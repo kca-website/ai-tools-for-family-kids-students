@@ -1,0 +1,31 @@
+name: TEMP restore Practice Map home
+on:
+  push:
+    branches:
+      - fix/restore-practice-map-home
+    paths:
+      - scripts/restore-practice-map-home.py
+      - .github/workflows/temp-restore-practice-map-home.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore original visible homepage layout and copy
+        run: python3 scripts/restore-practice-map-home.py
+      - name: Commit restored homepage files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app.js styles.css index.html tests/home-positioning-smoke.mjs
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Restore Practice Map position and wording"
+          git push

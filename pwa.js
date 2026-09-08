@@ -11,6 +11,7 @@
     // Mobile/PWA shell must load first. The homepage should never wait for tutor
     // datasets/extensions before it gets the compact mobile title and quick actions.
     {id:"pwa-core",src:"/pwa-core.js"},
+    {id:"navigator-home",src:"/navigator-home.js"},
 
     // Data-only compatibility patches used by the normal school experience.
     {id:"tool-audit",src:"/september-2026-tool-audit.js"},
@@ -70,6 +71,7 @@
       // pass, so it is needed on / and /primary only. Never load it on middle/high
       // tutor routes where it has no function and could perturb established timing.
       if(id==="primary-simple-quiz" && !isPrimaryOrHomepage()) return;
+      if(id==="navigator-home" && !isHomepage()) return;
       if(id==="special-education-entry-analytics" && !isHomepage()) return;
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
       const script=document.createElement("script");
@@ -250,7 +252,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:11,
+    version:12,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
@@ -261,6 +263,7 @@
     specialEducationEntryAnalytics:true,
     specialTutorActionMenu:true,
     aiHelpTrustBoundary:true,
-    wcag22Remediation:true
+    wcag22Remediation:true,
+    navigatorHomepageV1:true
   });
 })();

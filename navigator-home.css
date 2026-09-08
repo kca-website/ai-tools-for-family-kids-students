@@ -1,0 +1,43 @@
+/* Navigator-first homepage layer — keeps the site a guide, not an AI tutor. */
+.navigator-primary-action{margin:24px 0 10px;display:flex;justify-content:center;}
+.navigator-primary-action__button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:14px 22px;border-radius:14px;background:#2E6BA3;color:#fff;text-decoration:none;font-weight:800;font-size:1rem;box-shadow:0 10px 26px rgba(46,107,163,.18);transition:transform .15s ease,box-shadow .15s ease;}
+.navigator-primary-action__button:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(46,107,163,.24);}
+.navigator-primary-action__button:focus-visible,.navigator-needs-card:focus-visible,.navigator-secondary-link:focus-visible{outline:3px solid #f59e0b;outline-offset:3px;}
+.navigator-primary-action__note{margin:8px auto 0;max-width:620px;text-align:center;color:#475569;font-size:.86rem;line-height:1.5;}
+
+/* The Practice Map remains prominent, but visually secondary to “find a tool”. */
+.hero.navigator-home-ready .hero__quiz-cta-wrap{max-width:700px;margin:12px auto 0;}
+.hero.navigator-home-ready .hero__quiz-cta{background:#fff!important;color:#1e3a5f;border:1px solid #bfdbfe;box-shadow:none;}
+.hero.navigator-home-ready .hero__quiz-cta:hover{background:#eff6ff!important;}
+.hero.navigator-home-ready .hero__quiz-cta-sub{color:#475569;}
+.hero.navigator-home-ready .hero__learning-loop{margin-top:20px;}
+.hero.navigator-home-ready .hero__learning-loop-steps{grid-template-columns:repeat(4,minmax(0,1fr));}
+.hero.navigator-home-ready .hero__learning-loop-steps li{font-size:.82rem;}
+.hero.navigator-home-ready .hero__ai-help{margin-top:24px;background:#f8fafc;border-color:#e2e8f0;box-shadow:none;}
+.hero.navigator-home-ready .hero__ai-help-badge{background:#e2e8f0;color:#334155;}
+
+.navigator-needs{margin:34px 0 28px;padding:24px;border:1px solid #e2e8f0;border-radius:18px;background:#fff;}
+.navigator-needs__head{max-width:760px;margin:0 auto 18px;text-align:center;}
+.navigator-needs__eyebrow{margin:0 0 6px;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#2E6BA3;}
+.navigator-needs__head h2{margin:0;font-size:clamp(1.25rem,2vw,1.7rem);color:#172554;}
+.navigator-needs__head p{margin:8px 0 0;color:#475569;line-height:1.55;}
+.navigator-needs__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.navigator-needs-card{display:flex;gap:12px;align-items:flex-start;padding:15px;border:1px solid #e2e8f0;border-radius:14px;text-decoration:none;background:#f8fafc;color:#0f172a;transition:transform .15s ease,border-color .15s ease,background .15s ease;}
+.navigator-needs-card:hover{transform:translateY(-1px);border-color:#93c5fd;background:#f0f7ff;}
+.navigator-needs-card__icon{font-size:1.35rem;line-height:1.2;}
+.navigator-needs-card strong{display:block;margin-bottom:3px;font-size:.93rem;}
+.navigator-needs-card span:last-child{display:block;color:#64748b;font-size:.78rem;line-height:1.4;}
+.navigator-secondary{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px;}
+.navigator-secondary-link{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:999px;background:#f1f5f9;color:#334155;text-decoration:none;font-size:.79rem;font-weight:700;}
+.navigator-secondary-link:hover{background:#e2e8f0;}
+
+@media (max-width:820px){
+  .navigator-needs{padding:18px 14px;margin-top:26px;}
+  .navigator-needs__grid{grid-template-columns:1fr 1fr;}
+  .hero.navigator-home-ready .hero__learning-loop-steps{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){
+  .navigator-primary-action__button{width:100%;}
+  .navigator-needs__grid{grid-template-columns:1fr;}
+  .navigator-secondary{justify-content:flex-start;}
+}

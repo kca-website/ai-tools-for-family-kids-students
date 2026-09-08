@@ -1,0 +1,1 @@
+Homepage correction work branch: preserve agreed hero copy, integrate Special Education with school routes, and remove visible refresh rewrite.

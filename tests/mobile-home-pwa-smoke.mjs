@@ -25,9 +25,9 @@ try {
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#pwaMobileLauncher', { state: 'visible', timeout: 10000 });
   await page.waitForFunction(() => document.body.classList.contains('pwa-standalone'), null, { timeout: 10000 });
-  await page.waitForFunction(()=>document.querySelector('#specialEducationHomeFeature .se-home-title')?.textContent.includes('🏫'),null,{timeout:10000});
+  await page.waitForSelector('#zoneGrid #specialSchoolZoneCard', {state:'visible',timeout:10000});
   await page.waitForFunction(()=>document.querySelector('#heroHelpSpecialEducation span[aria-hidden="true"]')?.textContent==='🏫',null,{timeout:10000});
-  await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_ENTRY_ANALYTICS?.version===1,null,{timeout:10000});
+  await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_ENTRY_ANALYTICS?.version===2,null,{timeout:10000});
 
   assert.equal((await page.textContent('#siteTitleText'))?.trim(), 'AI Tools 4 Kids', 'compact mobile site title was not restored');
   assert.equal(await page.locator('#pwaMobileLauncher [data-pwa-action="quiz"]').isVisible(), true, 'Quick test action is missing');
@@ -39,11 +39,14 @@ try {
   assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), true, 'installed mobile mode must retain the full diagnostic entry');
   assert.equal(await page.locator('#zoneSelectView .hero__ai-help').isVisible(), true, 'installed mobile mode must retain the full AI Help entry');
 
-  const specialText=await page.locator('#specialEducationHomeFeature').innerText();
-  assert.match(specialText,/Ειδικό Γυμνάσιο.*Ειδικό Λύκειο.*ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./s,'homepage Special Education card must name all three school types');
-  assert.ok(specialText.includes('🏫'),'Special Education homepage card must use the neutral school icon');
+  const specialText=await page.locator('#specialSchoolZoneCard').innerText();
+  assert.match(specialText,/Ειδικά σχολεία/,'integrated Special Education school card needs a clear label');
+  assert.match(specialText,/Ειδικό Γυμνάσιο.*Ειδικό Λύκειο.*ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./s,'integrated Special Education card must name all three school types');
+  assert.ok(specialText.includes('🏫'),'Special Education school card must use the neutral school icon');
   assert.ok(!specialText.includes('♿'),'wheelchair icon must not be used as the Special Education symbol');
-  assert.match(await page.locator('#specialEducationHomeFeature .se-home-cta').getAttribute('href'),/^\/special-education\.html$/,'homepage Special Education link must use the production route');
+  assert.match(await page.locator('#specialSchoolZoneCard').getAttribute('href'),/^\/special-education\.html$/,'Special Education school-grid link must use the production route');
+  assert.equal(await page.locator('#specialEducationHomeFeature:visible').count(),0,'standalone Special Education bottom banner must not be visible');
+
   const specialHelpText=(await page.locator('#heroHelpSpecialEducation').innerText()).replace(/\s+/g,'').trim();
   assert.equal(specialHelpText,'🏫ΕιδικήΕκπαίδευση','AI Help Special Education action must use the same icon and label');
 
@@ -56,11 +59,11 @@ try {
     return {eventName:api.eventName,sources:api.sources,accepted,rejected,calls};
   });
   assert.equal(analytics.eventName,'Special Education Entry');
-  assert.deepEqual(analytics.sources,['banner','ai_help','diagnostic']);
+  assert.deepEqual(analytics.sources,['school_grid','ai_help','diagnostic']);
   assert.deepEqual(analytics.accepted,[true,true,true]);
   assert.equal(analytics.rejected,false,'analytics must reject arbitrary source values');
   assert.deepEqual(analytics.calls.map((call)=>call[0]),['event','event','event']);
-  assert.deepEqual(analytics.calls.map((call)=>call[1]?.data?.source),['banner','ai_help','diagnostic']);
+  assert.deepEqual(analytics.calls.map((call)=>call[1]?.data?.source),['school_grid','ai_help','diagnostic']);
   assert.ok(analytics.calls.every((call)=>Object.keys(call[1]?.data||{}).length===1),'analytics payload must contain only the source property');
 
   const globalSpecial=await page.evaluate(()=>({
@@ -74,7 +77,7 @@ try {
   assert.ok(overflow <= 1, `mobile homepage has horizontal overflow: ${overflow}px`);
   assert.deepEqual(errors, [], `mobile homepage browser errors:\n${errors.join('\n')}`);
 
-  console.log('Mobile PWA homepage parity + Special Education lazy-loading + entry analytics smoke passed.');
+  console.log('Mobile PWA homepage + integrated Special-school route + lazy-loading + analytics smoke passed.');
 } finally {
   await browser.close();
 }

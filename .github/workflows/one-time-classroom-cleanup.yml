@@ -30,61 +30,111 @@ jobs:
           def write(path, text):
               Path(path).write_text(text, encoding='utf-8')
 
-          # 1) Add a discreet Classroom link to the main header.
           index = read('index.html')
           if 'classroom-menu-link' not in index:
-              old = '''      <div class="lang-toggle" role="group" aria-label="Language switch">
-        <button type="button" id="langEl" class="active" data-lang="el">ΕΛ</button>
-        <button type="button" id="langEn" data-lang="en">EN</button>
-      </div>'''
-              new = '''      <div class="site-header__actions">
-        <a class="classroom-menu-link" href="/classroom.html" aria-label="Για την τάξη / Classroom">
-          <span aria-hidden="true">🏫</span>
-          <span class="classroom-menu-link__text" data-i18n="menuClassroom">Για την τάξη</span>
-        </a>
-        <div class="lang-toggle" role="group" aria-label="Language switch">
-          <button type="button" id="langEl" class="active" data-lang="el">ΕΛ</button>
-          <button type="button" id="langEn" data-lang="en">EN</button>
-        </div>
-      </div>'''
+              old = "\n".join([
+                  '      <div class="lang-toggle" role="group" aria-label="Language switch">',
+                  '        <button type="button" id="langEl" class="active" data-lang="el">ΕΛ</button>',
+                  '        <button type="button" id="langEn" data-lang="en">EN</button>',
+                  '      </div>',
+              ])
+              new = "\n".join([
+                  '      <div class="site-header__actions">',
+                  '        <a class="classroom-menu-link" href="/classroom.html" aria-label="Για την τάξη / Classroom">',
+                  '          <span aria-hidden="true">🏫</span>',
+                  '          <span class="classroom-menu-link__text" data-i18n="menuClassroom">Για την τάξη</span>',
+                  '        </a>',
+                  '        <div class="lang-toggle" role="group" aria-label="Language switch">',
+                  '          <button type="button" id="langEl" class="active" data-lang="el">ΕΛ</button>',
+                  '          <button type="button" id="langEn" data-lang="en">EN</button>',
+                  '        </div>',
+                  '      </div>',
+              ])
               if old not in index:
                   raise SystemExit('Expected language-toggle block not found in index.html')
               index = index.replace(old, new, 1)
 
-          # Clarify that the footer date refers to tool information, not the whole site.
-          index = index.replace('Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026',
-                                'Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026')
+          index = index.replace(
+              'Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026',
+              'Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026'
+          )
           write('index.html', index)
 
-          # 2) Header styles, including a compact mobile state.
           styles = read('styles.css')
           marker = '/* ---------- Header utility link: Classroom ---------- */'
           if marker not in styles:
-              styles += '''\n\n/* ---------- Header utility link: Classroom ---------- */\n.site-header__actions {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n\n.classroom-menu-link {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  min-height: 36px;\n  padding: 6px 10px;\n  border: 1px solid var(--color-border);\n  border-radius: var(--radius-sm);\n  background: var(--color-surface);\n  color: var(--color-text);\n  text-decoration: none;\n  font-size: .82rem;\n  font-weight: 700;\n  white-space: nowrap;\n}\n\n.classroom-menu-link:hover {\n  border-color: var(--color-accent);\n  background: rgba(46, 111, 94, 0.06);\n}\n\n.classroom-menu-link:focus-visible {\n  outline: 3px solid rgba(59, 130, 196, 0.32);\n  outline-offset: 2px;\n}\n\n@media (max-width: 620px) {\n  .site-header__inner { gap: 8px; }\n  .site-title { font-size: .92rem; }\n  .classroom-menu-link { width: 36px; padding: 6px; justify-content: center; }\n  .classroom-menu-link__text { display: none; }\n}\n'''
+              css = "\n".join([
+                  '', '', marker,
+                  '.site-header__actions {',
+                  '  display: flex;',
+                  '  align-items: center;',
+                  '  gap: 8px;',
+                  '}',
+                  '',
+                  '.classroom-menu-link {',
+                  '  display: inline-flex;',
+                  '  align-items: center;',
+                  '  gap: 6px;',
+                  '  min-height: 36px;',
+                  '  padding: 6px 10px;',
+                  '  border: 1px solid var(--color-border);',
+                  '  border-radius: var(--radius-sm);',
+                  '  background: var(--color-surface);',
+                  '  color: var(--color-text);',
+                  '  text-decoration: none;',
+                  '  font-size: .82rem;',
+                  '  font-weight: 700;',
+                  '  white-space: nowrap;',
+                  '}',
+                  '',
+                  '.classroom-menu-link:hover {',
+                  '  border-color: var(--color-accent);',
+                  '  background: rgba(46, 111, 94, 0.06);',
+                  '}',
+                  '',
+                  '.classroom-menu-link:focus-visible {',
+                  '  outline: 3px solid rgba(59, 130, 196, 0.32);',
+                  '  outline-offset: 2px;',
+                  '}',
+                  '',
+                  '@media (max-width: 620px) {',
+                  '  .site-header__inner { gap: 8px; }',
+                  '  .site-title { font-size: .92rem; }',
+                  '  .classroom-menu-link { width: 36px; padding: 6px; justify-content: center; }',
+                  '  .classroom-menu-link__text { display: none; }',
+                  '}',
+                  '',
+              ])
+              styles += css
           write('styles.css', styles)
 
-          # 3) Bilingual label and clearer footer wording.
           app = read('app.js')
           if 'menuClassroom:' not in app:
               if '    el: {\n' not in app or '    en: {\n' not in app:
                   raise SystemExit('Expected STRINGS language blocks not found in app.js')
               app = app.replace('    el: {\n', '    el: {\n      menuClassroom: "Για την τάξη",\n', 1)
               app = app.replace('    en: {\n', '    en: {\n      menuClassroom: "Classroom",\n', 1)
-          app = app.replace('Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026',
-                            'Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026')
-          app = app.replace('Tools last checked: 5 September 2026',
-                            'Tool information last checked: 5 September 2026')
+          app = app.replace(
+              'Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026',
+              'Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026'
+          )
+          app = app.replace(
+              'Tools last checked: 5 September 2026',
+              'Tool information last checked: 5 September 2026'
+          )
           write('app.js', app)
 
           postfix = read('site-postfix.js')
-          postfix = postfix.replace('Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026',
-                                    'Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026')
-          postfix = postfix.replace('Tools last checked: 5 September 2026',
-                                    'Tool information last checked: 5 September 2026')
+          postfix = postfix.replace(
+              'Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026',
+              'Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026'
+          )
+          postfix = postfix.replace(
+              'Tools last checked: 5 September 2026',
+              'Tool information last checked: 5 September 2026'
+          )
           write('site-postfix.js', postfix)
 
-          # 4) Remove em-dashes from the user-visible standalone pages.
-          # Preserve the correct en-dash used in school-year ranges such as 2026–27.
           targets = [
               'classroom.html',
               'methodology.html',
@@ -97,10 +147,8 @@ jobs:
               text = text.replace('—', '–')
               write(path, text)
 
-          # Guardrails.
           for path in targets:
-              text = read(path)
-              if '—' in text:
+              if '—' in read(path):
                   raise SystemExit(f'Em-dash still present in {path}')
           if '/classroom.html' not in read('index.html'):
               raise SystemExit('Classroom link missing after edit')

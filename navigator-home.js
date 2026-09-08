@@ -52,18 +52,18 @@
       needsTitle:"What do you want to do?",
       needsSub:"These pages do not teach the lesson for you. They help you choose the right tool and use it well.",
       needs:[
-        ["📄","Study a PDF or notes","Tools for sources, summaries and revision questions","/meleti-pdf-me-ai.html"],
-        ["🔎","Research with sources","How to find information and check where it comes from","/erevna-me-piges-ai.html"],
-        ["🧠","Make flashcards and revise","Tools for cards, quizzes and spaced repetition","/flashcards-epanalipsi-ai.html"],
-        ["🎨","Make a presentation or poster","Canva, Adobe Express and creative tools with clear limits","/parousiasi-afisa-ai.html"],
-        ["📚","Practice reading or English","Reading, pronunciation and language-practice tools","/anagnosi-agglika-ai.html"],
-        ["✨","Create something with AI","Images, ideas, organisation and creative projects without ready-made schoolwork","/dimiourgiko-ai-gia-mathites.html"]
+        ["📄","Study a PDF or notes","Tools for sources, summaries and revision questions","/en/study-pdf-with-ai.html"],
+        ["🔎","Research with sources","How to find information and check where it comes from","/en/research-with-sources-ai.html"],
+        ["🧠","Make flashcards and revise","Tools for cards, quizzes and spaced repetition","/en/flashcards-revision-ai.html"],
+        ["🎨","Make a presentation or poster","Canva, Adobe Express and creative tools with clear limits","/en/presentation-poster-ai.html"],
+        ["📚","Practice reading or English","Reading, pronunciation and language-practice tools","/en/reading-english-ai.html"],
+        ["✨","Create something with AI","Images, ideas, organisation and creative projects without ready-made schoolwork","/en/creative-ai-for-students.html"]
       ],
       secondary:[
         ["🤖","AI Help","/middle/student/tutor"],
         ["👪","For parents","/primary/guardian/tools"],
         ["🤟","Greek Sign Language","/sign-language.html"],
-        ["🧭","All routes","/ti-thelo-na-kano-me-ai.html"]
+        ["🧭","All routes","/en/what-do-you-want-to-do-with-ai.html"]
       ]
     }
   };
@@ -136,9 +136,7 @@
     const flowLabel=hero.querySelector(".hero__learning-loop-label");
     const flow=hero.querySelector(".hero__learning-loop-steps");
     if(flowLabel){ flowLabel.removeAttribute("data-i18n"); flowLabel.textContent=c.flowLabel; }
-    if(flow){
-      flow.innerHTML=c.flow.map((x)=>`<li>${x}</li>`).join("");
-    }
+    if(flow){ flow.innerHTML=c.flow.map((x)=>`<li>${x}</li>`).join(""); }
 
     const main=ensureMainAction(hero);
     main.querySelector(".navigator-primary-action__button span").textContent=c.main;

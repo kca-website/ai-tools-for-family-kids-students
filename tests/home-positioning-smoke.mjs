@@ -14,7 +14,7 @@ try {
   await page.waitForSelector('#zoneGrid .zone-card', { timeout: 10000 });
 
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
-  assert.match(await page.locator('.hero__subtitle').innerText(), /επόμενο σωστό βήμα/);
+  assert.match(await page.locator('.hero__subtitle').innerText(), /λίγη παραπάνω εξάσκηση/);
 
   const flow = (await page.locator('.hero__learning-loop').innerText()).replace(/\s+/g, ' ').trim();
   for (const step of ['Δυσκολία', 'Εντοπισμός', 'Εξάσκηση', 'Καθοδήγηση', 'Ξαναδοκιμή']) {
@@ -41,7 +41,7 @@ try {
 
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
-  assert.match(await page.locator('.hero__subtitle').innerText(), /next right step/);
+  assert.match(await page.locator('.hero__subtitle').innerText(), /free AI tool fits exactly there/);
   assert.match(await page.locator('.hero__learning-loop').innerText(), /Difficulty/);
   assert.match(await page.locator('.hero__learning-loop').innerText(), /Try again/);
   assert.equal(foldLabel(await page.locator('.hero__ai-help-badge').innerText(), 'en-US'), foldLabel('I’m stuck here', 'en-US'));

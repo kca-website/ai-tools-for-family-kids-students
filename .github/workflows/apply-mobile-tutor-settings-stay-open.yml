@@ -1,0 +1,99 @@
+name: Apply mobile tutor settings stay-open fix
+
+on:
+  push:
+    branches:
+      - fix/mobile-tutor-settings-stay-open-20260909
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-tutor-settings-stay-open-20260909
+          fetch-depth: 0
+
+      - name: Keep mobile lesson settings open until the user closes them
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('tutor-mobile-compact.js')
+          s = p.read_text()
+
+          anchor = '  const RENDER_EVENT = "aitools4kids:tutor-rendered";\n'
+          addition = '''  let mobileSettingsOpenPreference = null;\n  let mobileSettingsRoute = location.pathname;\n'''
+          if addition not in s:
+              if anchor not in s:
+                  raise SystemExit('state anchor not found')
+              s = s.replace(anchor, anchor + addition, 1)
+
+          old = '''    btn.addEventListener("click", () => {\n      settings.classList.toggle("mobile-settings-open");\n      syncSettingsToggle(settings);\n    });\n'''
+          new = '''    btn.addEventListener("click", () => {\n      const open = !settings.classList.contains("mobile-settings-open");\n      mobileSettingsOpenPreference = open;\n      settings.classList.toggle("mobile-settings-open", open);\n      syncSettingsToggle(settings);\n    });\n'''
+          if old not in s and new not in s:
+              raise SystemExit('settings toggle handler anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = '''    el.addEventListener("change", () => {\n      setTimeout(() => {\n        syncDetails(details);\n        syncSettingsToggle(settings);\n        if (settingsAreReady(settings)) {\n          settings.classList.remove("mobile-settings-open");\n          syncSettingsToggle(settings);\n        } else {\n          settings.classList.add("mobile-settings-open");\n          syncSettingsToggle(settings);\n        }\n      }, 0);\n    });\n'''
+          new = '''    el.addEventListener("change", () => {\n      // A field change is part of the same editing session. Keep the panel open\n      // across dependent-field updates and tutor rerenders until the user closes it.\n      mobileSettingsOpenPreference = true;\n      setTimeout(() => {\n        const currentSettings = document.querySelector("#tutorMount .tutor-settings") || settings;\n        const currentDetails = currentSettings.querySelector(".tutor-mobile-details") || details;\n        currentSettings.classList.add("mobile-settings-open");\n        syncDetails(currentDetails);\n        syncSettingsToggle(currentSettings);\n      }, 0);\n    });\n'''
+          if old not in s and new not in s:
+              raise SystemExit('field change handler anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = '''  function installMobileCompact() {\n    injectStyles();\n    syncRouteClass();\n    if (!isMobile()) return;\n'''
+          new = '''  function installMobileCompact() {\n    injectStyles();\n    syncRouteClass();\n    if (mobileSettingsRoute !== location.pathname) {\n      mobileSettingsRoute = location.pathname;\n      mobileSettingsOpenPreference = null;\n    }\n    if (!isMobile()) return;\n'''
+          if old not in s and new not in s:
+              raise SystemExit('install handler anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = '''    if (!settings.dataset.mobileCompactInitialised) {\n      settings.dataset.mobileCompactInitialised = "1";\n      settings.classList.toggle("mobile-settings-open", !settingsAreReady(settings));\n    }\n'''
+          new = '''    if (!settings.dataset.mobileCompactInitialised) {\n      settings.dataset.mobileCompactInitialised = "1";\n      const shouldOpen = mobileSettingsOpenPreference ?? !settingsAreReady(settings);\n      settings.classList.toggle("mobile-settings-open", shouldOpen);\n    }\n'''
+          if old not in s and new not in s:
+              raise SystemExit('initial state anchor not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          p = Path('tests/tutor-consolidation-smoke.mjs')
+          s = p.read_text()
+
+          old = '''  const before = await snapshot(page);\n  assert.equal(before.mobileToggle, true, `${baseUrl}: mobile settings toggle missing`);\n  assert.equal(before.bodyTutorMobileActive, true, `${baseUrl}: mobile tutor route class missing`);\n\n  await page.selectOption('#tutorAge', '15');\n  await page.waitForTimeout(120);\n  const afterAge = await snapshot(page);\n'''
+          new = '''  const before = await snapshot(page);\n  assert.equal(before.mobileToggle, true, `${baseUrl}: mobile settings toggle missing`);\n  assert.equal(before.bodyTutorMobileActive, true, `${baseUrl}: mobile tutor route class missing`);\n\n  if (!before.settingsOpen) {\n    await page.click('#tutorMount .tutor-mobile-settings-toggle');\n    await page.waitForTimeout(50);\n  }\n  const opened = await snapshot(page);\n\n  await page.selectOption('#tutorAge', '15');\n  await page.waitForTimeout(120);\n  const afterAge = await snapshot(page);\n\n  if (afterAge.settingsOpen) {\n    await page.click('#tutorMount .tutor-mobile-settings-toggle');\n    await page.waitForTimeout(50);\n  }\n  const afterManualClose = await snapshot(page);\n'''
+          if old not in s and new not in s:
+              raise SystemExit('mobile interaction anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = '''  return { before, afterAge, flashStatus, studyStatus };\n'''
+          new = '''  return { before, opened, afterAge, afterManualClose, flashStatus, studyStatus };\n'''
+          if old not in s and new not in s:
+              raise SystemExit('mobile return anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = '''    compareParity(local.before, prod.before, `mobile ${lang} initial`);\n    compareParity(local.afterAge, prod.afterAge, `mobile ${lang} after age selection`);\n\n    // Disconnected-state copy is a source-owned contract, not a live-production parity signal.\n'''
+          new = '''    compareParity(local.before, prod.before, `mobile ${lang} initial`);\n    assert.equal(local.opened.settingsOpen, true, `mobile ${lang}: settings should be open while editing`);\n    assert.equal(local.afterAge.settingsOpen, true, `mobile ${lang}: selecting a field must not auto-close settings`);\n    assert.equal(local.afterManualClose.settingsOpen, false, `mobile ${lang}: settings should close only after the user closes them`);\n\n    // Disconnected-state copy is a source-owned contract, not a live-production parity signal.\n'''
+          if old not in s and new not in s:
+              raise SystemExit('mobile parity anchor not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+
+      - name: Validate syntax
+        run: |
+          node --check tutor-mobile-compact.js
+          node --check tests/tutor-consolidation-smoke.mjs
+
+      - name: Commit source fix
+        run: |
+          if git diff --quiet; then
+            echo "No source changes needed"
+            exit 0
+          fi
+          git config user.name "aitools4kids-maintenance"
+          git config user.email "actions@users.noreply.github.com"
+          git add tutor-mobile-compact.js tests/tutor-consolidation-smoke.mjs
+          git commit -m "Keep mobile tutor settings open while editing"
+          git push origin HEAD:fix/mobile-tutor-settings-stay-open-20260909

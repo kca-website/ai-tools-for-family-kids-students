@@ -7,6 +7,34 @@
 (function(){
   "use strict";
 
+  const HOMEPAGE_AT_BOOT=location.pathname==="/" || location.pathname==="";
+
+  function prepareHomepageNavigatorBoot(){
+    if(!HOMEPAGE_AT_BOOT) return;
+
+    document.documentElement.classList.add("navigator-home-booting");
+
+    if(!document.getElementById("navigatorHomeBootGuardStyles")){
+      const style=document.createElement("style");
+      style.id="navigatorHomeBootGuardStyles";
+      style.textContent=`html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}`;
+      document.head.appendChild(style);
+    }
+
+    if(!document.querySelector('link[data-navigator-home="1"]')){
+      const link=document.createElement("link");
+      link.rel="stylesheet";
+      link.href="/navigator-home.css";
+      link.dataset.navigatorHome="1";
+      document.head.appendChild(link);
+    }
+
+    // Fail open if the navigator runtime is unavailable for any reason.
+    setTimeout(()=>document.documentElement.classList.remove("navigator-home-booting"),1800);
+  }
+
+  prepareHomepageNavigatorBoot();
+
   const RUNTIME_SCRIPTS=[
     // Mobile/PWA shell must load first. The homepage should never wait for tutor
     // datasets/extensions before it gets the compact mobile title and quick actions.
@@ -187,8 +215,6 @@
   }
 
   function initPagePolish(){
-
-
     refreshHeroMiddleLabel();
     normalizeAuditedSemantics();
   }
@@ -199,7 +225,6 @@
     initPagePolish();
   }
   window.addEventListener("load",()=>{
-
     refreshHeroMiddleLabel();
     normalizeAuditedSemantics();
   },{once:true});
@@ -207,14 +232,13 @@
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;
     if(target?.closest("#langEl, #langEn")) setTimeout(()=>{
-
       refreshHeroMiddleLabel();
       normalizeAuditedSemantics();
     },0);
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:12,
+    version:13,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,
@@ -226,6 +250,7 @@
     specialTutorActionMenu:true,
     aiHelpTrustBoundary:true,
     wcag22Remediation:true,
-    navigatorHomepageV1:true
+    navigatorHomepageV1:true,
+    navigatorBootGuard:true
   });
 })();

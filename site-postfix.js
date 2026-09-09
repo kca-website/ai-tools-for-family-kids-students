@@ -52,11 +52,10 @@
 
   function fixFooter(){
     const el=document.querySelector(".site-footer__last-checked");
-    if(!el) return;
-    const desired=isEnglish()
-      ? "Tool information last checked: 5 September 2026"
-      : "Τελευταίος έλεγχος στοιχείων εργαλείων: 5 Σεπτεμβρίου 2026";
-    if(el.textContent.trim() !== desired) el.textContent=desired;
+    const meta=window.AITOOLSKIDS_SITE_META;
+    if(!el || !meta) return;
+    const desired=isEnglish() ? meta.toolCatalogAuditLabelEn : meta.toolCatalogAuditLabelEl;
+    if(desired && el.textContent.trim() !== desired) el.textContent=desired;
   }
 
   function ensureRoleGuidance(){

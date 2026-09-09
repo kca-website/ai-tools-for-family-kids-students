@@ -16,8 +16,6 @@
     });
   }
 
-  Object.keys(TOOLS).forEach((id) => patch(id, {}));
-
   patch("photomath", {minAge:13, minAgeNote:"13+. Κάτω των 13 η χρήση απαγορεύεται. Για ανήλικο χρήστη απαιτείται άδεια γονέα ή νόμιμου κηδεμόνα όπου προβλέπεται.", auditSource:"https://photomath.com/terms/"});
   patch("miro-ai", {minAge:16, minAgeNote:"16+. Οι τρέχοντες Όροι Χρήσης της Miro δεν επιτρέπουν χρήση από άτομα κάτω των 16 ετών.", auditSource:"https://miro.com/legal/terms-of-service/"});
   patch("symbolab", {minAge:16, minAgeNote:"Στον ΕΟΧ/ΕΕ και στο Ηνωμένο Βασίλειο: 16+. Για την Ελλάδα χρησιμοποιούμε το όριο του ΕΟΧ.", auditSource:"https://www.symbolab.com/terms-of-use"});

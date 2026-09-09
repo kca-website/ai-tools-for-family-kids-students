@@ -1,6 +1,5 @@
-/* Homepage task routes + Special Education placement.
- * Important: this file must NOT rewrite the agreed hero, Practice Map or AI Help copy.
- * The visible top-of-homepage source of truth remains index.html/app.js.
+/* Homepage navigator positioning + task routes + Special Education placement.
+ * Product contract: primary = find the right tool; Practice Map = secondary; AI Help = lower/supporting.
  */
 (function(){
   "use strict";
@@ -72,6 +71,43 @@
     if(old && !document.getElementById("zoneGrid")?.contains(old)) old.remove();
   }
 
+  function ensurePrimaryCta(){
+    const hero=document.querySelector("#zoneSelectView .hero");
+    if(!hero) return null;
+    let cta=document.getElementById("navigatorPrimaryCta");
+    if(!cta){
+      cta=document.createElement("a");
+      cta.id="navigatorPrimaryCta";
+      cta.className="navigator-primary-cta";
+      cta.href="#navigatorNeeds";
+    }
+    const badges=hero.querySelector(".hero__badges");
+    if(cta.parentElement!==hero){
+      if(badges) badges.insertAdjacentElement("afterend",cta);
+      else hero.prepend(cta);
+    }
+    const en=isEnglish();
+    cta.innerHTML=en
+      ? '<span class="navigator-primary-cta__icon" aria-hidden="true">🧭</span><span><strong>Find the right AI tool</strong><small>Choose what you want to do and go straight to the most suitable route.</small></span><span aria-hidden="true">→</span>'
+      : '<span class="navigator-primary-cta__icon" aria-hidden="true">🧭</span><span><strong>Βρες το σωστό AI εργαλείο</strong><small>Διάλεξε τι θέλεις να κάνεις και πήγαινε κατευθείαν στην κατάλληλη διαδρομή.</small></span><span aria-hidden="true">→</span>';
+    cta.setAttribute("aria-label",en ? "Find the right AI tool" : "Βρες το σωστό AI εργαλείο");
+    return cta;
+  }
+
+  function repositionSecondaryFlows(section){
+    if(!section) return;
+    const ai=document.querySelector(".hero__ai-help, .navigator-secondary-ai");
+    const loop=document.querySelector(".hero__learning-loop, .navigator-secondary-loop");
+    if(ai){
+      ai.classList.add("navigator-secondary-ai");
+      section.insertAdjacentElement("afterend",ai);
+    }
+    if(loop){
+      loop.classList.add("navigator-secondary-loop");
+      (ai || section).insertAdjacentElement("afterend",loop);
+    }
+  }
+
   function ensureSpecialSchoolCard(){
     const grid=document.getElementById("zoneGrid");
     if(!grid) return null;
@@ -113,6 +149,7 @@
     ensureStyles();
     removeSeparatedSpecialEducation();
     const c=isEnglish()?COPY.en:COPY.el;
+    ensurePrimaryCta();
 
     const card=ensureSpecialSchoolCard();
     if(card){
@@ -134,6 +171,7 @@
         `<a class="navigator-secondary-link" href="${href}"><span aria-hidden="true">${icon}</span>${label}</a>`
       ).join("");
     }
+    repositionSecondaryFlows(section);
   }
 
   function scheduleApply(){

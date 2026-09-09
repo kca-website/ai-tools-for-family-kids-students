@@ -5601,30 +5601,10 @@
   // Correct the visible "last checked" date on the central page in both
   // languages. app.js still contains an older translation string, so a tiny
   // observer keeps this correct after language switches without replacing app.js.
-  function syncLastCheckedDate() {
-    const node = document.querySelector?.('[data-i18n="footerLastChecked"]');
-    if (!node) return;
-    const lang = (document.documentElement?.lang || "el").toLowerCase();
-    const wanted = lang.startsWith("en")
-      ? "Tools last checked: August 30, 2026"
-      : "Τελευταίος έλεγχος εργαλείων: 30 Αυγούστου 2026";
-    if (node.textContent.trim() !== wanted) node.textContent = wanted;
-  }
-
-  function installDateGuard() {
-    syncLastCheckedDate();
-    const node = document.querySelector?.('[data-i18n="footerLastChecked"]');
-    if (!node || typeof MutationObserver === "undefined") return;
-    const observer = new MutationObserver(() => syncLastCheckedDate());
-    observer.observe(node, { childList: true, characterData: true, subtree: true });
-    document.addEventListener?.("click", (event) => {
-      if (event.target?.closest?.("[data-lang], .lang-btn")) setTimeout(syncLastCheckedDate, 0);
-    });
-  }
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", installDateGuard, { once: true });
+
   } else {
-    installDateGuard();
+
   }
 
   const totalSubjects = high2026.a.length + high2026.b.length + high2026.c.length;

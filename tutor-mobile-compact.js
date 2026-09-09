@@ -10,6 +10,8 @@
   const STYLE_ID = "aitools4kidsTutorMobileCompactStyles";
   const MQ = "(max-width: 700px)";
   const RENDER_EVENT = "aitools4kids:tutor-rendered";
+  let mobileSettingsOpenPreference = null;
+  let mobileSettingsRoute = location.pathname;
 
   const LABELS = {
     el: {
@@ -403,7 +405,9 @@
       <span class="tutor-mobile-settings-action"></span>`;
     btn.querySelector(".tutor-mobile-settings-title").textContent = tr("settings");
     btn.addEventListener("click", () => {
-      settings.classList.toggle("mobile-settings-open");
+      const open = !settings.classList.contains("mobile-settings-open");
+      mobileSettingsOpenPreference = open;
+      settings.classList.toggle("mobile-settings-open", open);
       syncSettingsToggle(settings);
     });
     settings.prepend(btn);
@@ -473,16 +477,15 @@
     if (!el || el.dataset.mobileCompactBound === "1") return;
     el.dataset.mobileCompactBound = "1";
     el.addEventListener("change", () => {
+      // A field change is part of the same editing session. Keep the panel open
+      // across dependent-field updates and tutor rerenders until the user closes it.
+      mobileSettingsOpenPreference = true;
       setTimeout(() => {
-        syncDetails(details);
-        syncSettingsToggle(settings);
-        if (settingsAreReady(settings)) {
-          settings.classList.remove("mobile-settings-open");
-          syncSettingsToggle(settings);
-        } else {
-          settings.classList.add("mobile-settings-open");
-          syncSettingsToggle(settings);
-        }
+        const currentSettings = document.querySelector("#tutorMount .tutor-settings") || settings;
+        const currentDetails = currentSettings.querySelector(".tutor-mobile-details") || details;
+        currentSettings.classList.add("mobile-settings-open");
+        syncDetails(currentDetails);
+        syncSettingsToggle(currentSettings);
       }, 0);
     });
   }
@@ -490,6 +493,10 @@
   function installMobileCompact() {
     injectStyles();
     syncRouteClass();
+    if (mobileSettingsRoute !== location.pathname) {
+      mobileSettingsRoute = location.pathname;
+      mobileSettingsOpenPreference = null;
+    }
     if (!isMobile()) return;
 
     const root = document.getElementById("tutorMount");
@@ -510,7 +517,8 @@
 
     if (!settings.dataset.mobileCompactInitialised) {
       settings.dataset.mobileCompactInitialised = "1";
-      settings.classList.toggle("mobile-settings-open", !settingsAreReady(settings));
+      const shouldOpen = mobileSettingsOpenPreference ?? !settingsAreReady(settings);
+      settings.classList.toggle("mobile-settings-open", shouldOpen);
     }
     syncSettingsToggle(settings);
 

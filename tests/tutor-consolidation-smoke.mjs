@@ -152,9 +152,21 @@ async function mobileInteractionSnapshot(page, baseUrl, lang) {
   assert.equal(before.mobileToggle, true, `${baseUrl}: mobile settings toggle missing`);
   assert.equal(before.bodyTutorMobileActive, true, `${baseUrl}: mobile tutor route class missing`);
 
+  if (!before.settingsOpen) {
+    await page.click('#tutorMount .tutor-mobile-settings-toggle');
+    await page.waitForTimeout(50);
+  }
+  const opened = await snapshot(page);
+
   await page.selectOption('#tutorAge', '15');
   await page.waitForTimeout(120);
   const afterAge = await snapshot(page);
+
+  if (afterAge.settingsOpen) {
+    await page.click('#tutorMount .tutor-mobile-settings-toggle');
+    await page.waitForTimeout(50);
+  }
+  const afterManualClose = await snapshot(page);
 
   await page.click('[data-flashcards-generate]');
   await page.waitForTimeout(80);
@@ -164,7 +176,7 @@ async function mobileInteractionSnapshot(page, baseUrl, lang) {
   await page.waitForTimeout(80);
   const studyStatus = (await page.textContent('.tutor-study-tools__status'))?.trim() || '';
 
-  return { before, afterAge, flashStatus, studyStatus };
+  return { before, opened, afterAge, afterManualClose, flashStatus, studyStatus };
 }
 
 function compareParity(local, prod, label) {
@@ -195,7 +207,9 @@ try {
     const local = await mobileInteractionSnapshot(localPage, LOCAL, lang);
 
     compareParity(local.before, prod.before, `mobile ${lang} initial`);
-    compareParity(local.afterAge, prod.afterAge, `mobile ${lang} after age selection`);
+    assert.equal(local.opened.settingsOpen, true, `mobile ${lang}: settings should be open while editing`);
+    assert.equal(local.afterAge.settingsOpen, true, `mobile ${lang}: selecting a field must not auto-close settings`);
+    assert.equal(local.afterManualClose.settingsOpen, false, `mobile ${lang}: settings should close only after the user closes them`);
 
     // Disconnected-state copy is a source-owned contract, not a live-production parity signal.
     // Production may be on a different deployment/timing while this PR is evaluated.

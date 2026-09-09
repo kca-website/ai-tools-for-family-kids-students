@@ -52,10 +52,10 @@ jobs:
           # 2) Homepage source copy + metadata loader + truthful footer fallback.
           index = read('index.html')
           if '/site-meta.js' not in index:
-              m = re.search(r'(?m)^\s*<script\s+src="/data\.js"[^>]*></script>\s*$', index)
+              m = re.search(r'(?m)^\s*<script\b[^>]*\bsrc="/data\.js"[^>]*></script>\s*$', index)
               if not m:
                   raise SystemExit('index.html: could not find /data.js script tag')
-              index = index[:m.start()] + '  <script src="/site-meta.js"></script>\n' + index[m.start():]
+              index = index[:m.start()] + '  <script defer src="/site-meta.js"></script>\n' + index[m.start():]
 
           index, n = re.subn(
               r'Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός\s+και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί\. Για γονείς, μαθητές 6 έως 18\s+αλλά και εκπαιδευτικούς\.',

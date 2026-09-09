@@ -45,6 +45,8 @@
 .navigator-primary-cta:focus-visible{outline:3px solid #111827;outline-offset:3px}
 .hero__quiz-cta-wrap{margin-top:10px}
 .hero__quiz-cta{background:#fff!important;color:#174A72!important;border:2px solid #B8CCE0!important;box-shadow:none!important}
+.hero__quiz-cta-title{color:#174A72!important}
+.hero__quiz-cta-sub{color:#52697D!important}
 .navigator-secondary-ai{max-width:980px;margin:22px auto 0}
 .navigator-secondary-loop{max-width:860px;margin:18px auto 0}
 @media(max-width:600px){

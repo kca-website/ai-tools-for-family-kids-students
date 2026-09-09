@@ -1,0 +1,37 @@
+name: Fix trust patcher assertion
+
+on:
+  push:
+    branches:
+      - fix/trust-date-positioning-20260909
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/trust-date-positioning-20260909
+          fetch-depth: 0
+      - name: Correct assertion and remove this fixer
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('.github/workflows/apply-trust-positioning-fix.yml')
+          s=p.read_text(encoding='utf-8')
+          old="if 'syncLastCheckedDate' in gel or 'installDateGuard' in gel or 'footerLastChecked' in gel:"
+          new="if 'syncLastCheckedDate' in gel or 'installDateGuard' in gel:"
+          if old not in s:
+              raise SystemExit('target assertion not found')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
+          Path('.github/workflows/fix-trust-patcher-assertion.yml').unlink()
+          PY
+          git config user.name "aitools4kids-maintenance"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Fix trust patcher legacy-date assertion"
+          git push origin HEAD:fix/trust-date-positioning-20260909

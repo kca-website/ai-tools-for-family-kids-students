@@ -1,9 +1,15 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 const URL = 'http://127.0.0.1:4173/';
 const browser = await chromium.launch({ headless: true });
 const foldLabel = (text, locale) => text.trim().normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase(locale);
+
+const homepageSource = readFileSync('index.html', 'utf8');
+assert.match(homepageSource, /<html lang="el" class="navigator-home-booting">/, 'homepage boot class must exist before first paint');
+assert.match(homepageSource, /navigatorHomeFirstPaintGuard/, 'homepage must ship an inline first-paint guard');
+assert.match(homepageSource, /navigator-home\.css[^>]*data-navigator-home="1"/, 'navigator CSS must load from the original head');
 
 async function assertNeedsCollapse(page, label) {
   const toggle = page.locator('#navigatorNeedsToggle');
@@ -81,7 +87,10 @@ try {
   await desktop.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await desktop.waitForSelector('#navigatorNeeds', { timeout: 10000 });
   await desktop.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
-  await assertNeedsCollapse(desktop, 'desktop');
+  const desktopToggle = desktop.locator('#navigatorNeedsToggle');
+  const desktopBody = desktop.locator('#navigatorNeedsBody');
+  assert.equal(await desktopToggle.getAttribute('aria-expanded'), 'true', 'desktop: task routes should start open');
+  assert.equal(await desktopBody.isVisible(), true, 'desktop: task routes body should be visible');
   await desktop.close();
 
   assert.deepEqual(errors, [], `Homepage browser errors:\n${errors.join('\n')}`);

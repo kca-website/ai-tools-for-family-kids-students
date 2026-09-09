@@ -216,7 +216,13 @@
       section.querySelector(".navigator-secondary").innerHTML=c.secondary.map(([icon,label,href])=>
         `<a class="navigator-secondary-link" href="${href}"><span aria-hidden="true">${icon}</span>${label}</a>`
       ).join("");
-      if(location.hash==="#navigatorNeeds") setNeedsOpen(section,true);
+      if(location.hash==="#navigatorNeeds") {
+        setNeedsOpen(section,true);
+      } else if(section.dataset.initialStateApplied!=="1") {
+        const mobile=window.matchMedia("(max-width:820px)").matches;
+        setNeedsOpen(section,!mobile);
+        section.dataset.initialStateApplied="1";
+      }
     }
     repositionSecondaryFlows(section);
     revealHomepage(styleLink);

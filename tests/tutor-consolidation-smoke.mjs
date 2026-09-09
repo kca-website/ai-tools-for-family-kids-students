@@ -196,8 +196,14 @@ try {
 
     compareParity(local.before, prod.before, `mobile ${lang} initial`);
     compareParity(local.afterAge, prod.afterAge, `mobile ${lang} after age selection`);
-    assert.equal(local.flashStatus, prod.flashStatus, `mobile ${lang}: flashcards disconnected-state behavior differs`);
-    assert.equal(local.studyStatus, prod.studyStatus, `mobile ${lang}: study-tools disconnected-state behavior differs`);
+
+    // Disconnected-state copy is a source-owned contract, not a live-production parity signal.
+    // Production may be on a different deployment/timing while this PR is evaluated.
+    const expectedConnect = lang === 'en'
+      ? 'Connect to Puter first using the box above.'
+      : 'Συνδέσου πρώτα με Puter από το πλαίσιο επάνω.';
+    assert.equal(local.flashStatus, expectedConnect, `mobile ${lang}: flashcards disconnected-state copy changed`);
+    assert.equal(local.studyStatus, expectedConnect, `mobile ${lang}: study-tools disconnected-state copy changed`);
 
     await prodPage.close();
     await localPage.close();

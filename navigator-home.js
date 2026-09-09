@@ -58,12 +58,32 @@
   }
 
   function ensureStyles(){
-    if(document.querySelector('link[data-navigator-home="1"]')) return;
-    const link=document.createElement("link");
+    let link=document.querySelector('link[data-navigator-home="1"]');
+    if(link) return link;
+    link=document.createElement("link");
     link.rel="stylesheet";
     link.href="/navigator-home.css";
     link.dataset.navigatorHome="1";
     document.head.appendChild(link);
+    return link;
+  }
+
+  function revealHomepage(link){
+    let done=false;
+    const reveal=()=>{
+      if(done) return;
+      done=true;
+      requestAnimationFrame(()=>{
+        document.documentElement.classList.remove("navigator-home-booting");
+        document.documentElement.classList.add("navigator-home-ready");
+      });
+    };
+    if(link?.sheet) reveal();
+    else if(link){
+      link.addEventListener("load",reveal,{once:true});
+      link.addEventListener("error",reveal,{once:true});
+      setTimeout(reveal,700);
+    }else reveal();
   }
 
   function removeSeparatedSpecialEducation(){
@@ -124,29 +144,55 @@
     return card;
   }
 
+  function needsMarkup(){
+    return `
+      <button type="button" class="navigator-needs__toggle" id="navigatorNeedsToggle" aria-expanded="false" aria-controls="navigatorNeedsBody">
+        <span class="navigator-needs__head">
+          <span class="navigator-needs__eyebrow"></span>
+          <span id="navigatorNeedsTitle" role="heading" aria-level="2"></span>
+        </span>
+        <span class="navigator-needs__chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="navigator-needs__body" id="navigatorNeedsBody" hidden>
+        <p class="navigator-needs__sub"></p>
+        <div class="navigator-needs__grid"></div>
+        <div class="navigator-secondary"></div>
+      </div>`;
+  }
+
   function ensureNeeds(){
     let section=document.getElementById("navigatorNeeds");
-    if(section) return section;
     const zoneGrid=document.getElementById("zoneGrid");
     if(!zoneGrid) return null;
-    section=document.createElement("section");
-    section.id="navigatorNeeds";
-    section.className="navigator-needs";
-    section.setAttribute("aria-labelledby","navigatorNeedsTitle");
-    section.innerHTML=`
-      <div class="navigator-needs__head">
-        <p class="navigator-needs__eyebrow"></p>
-        <h2 id="navigatorNeedsTitle"></h2>
-        <p class="navigator-needs__sub"></p>
-      </div>
-      <div class="navigator-needs__grid"></div>
-      <div class="navigator-secondary"></div>`;
-    zoneGrid.insertAdjacentElement("afterend",section);
+    if(!section){
+      section=document.createElement("section");
+      section.id="navigatorNeeds";
+      section.className="navigator-needs";
+      section.setAttribute("aria-labelledby","navigatorNeedsTitle");
+      section.innerHTML=needsMarkup();
+      zoneGrid.insertAdjacentElement("afterend",section);
+    }else if(!section.querySelector("#navigatorNeedsToggle")){
+      section.className="navigator-needs";
+      section.innerHTML=needsMarkup();
+    }
     return section;
   }
 
+  function setNeedsOpen(section,open,{scroll=false}={}){
+    if(!section) return;
+    const toggle=section.querySelector("#navigatorNeedsToggle");
+    const body=section.querySelector("#navigatorNeedsBody");
+    if(!toggle || !body) return;
+    section.classList.toggle("is-open",open);
+    toggle.setAttribute("aria-expanded",String(open));
+    body.hidden=!open;
+    if(scroll){
+      requestAnimationFrame(()=>section.scrollIntoView({behavior:"smooth",block:"start"}));
+    }
+  }
+
   function apply(){
-    ensureStyles();
+    const styleLink=ensureStyles();
     removeSeparatedSpecialEducation();
     const c=isEnglish()?COPY.en:COPY.el;
     ensurePrimaryCta();
@@ -170,23 +216,35 @@
       section.querySelector(".navigator-secondary").innerHTML=c.secondary.map(([icon,label,href])=>
         `<a class="navigator-secondary-link" href="${href}"><span aria-hidden="true">${icon}</span>${label}</a>`
       ).join("");
+      if(location.hash==="#navigatorNeeds") setNeedsOpen(section,true);
     }
     repositionSecondaryFlows(section);
-  }
-
-  function scheduleApply(){
-    apply();
-    setTimeout(apply,40);
-    setTimeout(apply,180);
+    revealHomepage(styleLink);
   }
 
   function init(){
-    scheduleApply();
+    apply();
     document.addEventListener("click",(event)=>{
       const target=event.target instanceof Element ? event.target : null;
-      if(target?.closest("#langEl,#langEn,#backToZones")) setTimeout(scheduleApply,20);
+      if(!target) return;
+
+      if(target.closest("#navigatorPrimaryCta")){
+        event.preventDefault();
+        const section=document.getElementById("navigatorNeeds");
+        setNeedsOpen(section,true,{scroll:true});
+        return;
+      }
+
+      if(target.closest("#navigatorNeedsToggle")){
+        const section=document.getElementById("navigatorNeeds");
+        const expanded=section?.querySelector("#navigatorNeedsToggle")?.getAttribute("aria-expanded")==="true";
+        setNeedsOpen(section,!expanded);
+        return;
+      }
+
+      if(target.closest("#langEl,#langEn,#backToZones")) setTimeout(apply,0);
     });
-    window.addEventListener("popstate",scheduleApply);
+    window.addEventListener("popstate",apply);
   }
 
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init,{once:true});

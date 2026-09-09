@@ -36,7 +36,7 @@ try {
   await page.waitForSelector('#navigatorNeeds', { timeout: 10000 });
   await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
 
-  assert.equal(document?.documentElement?.classList?.contains?.('navigator-home-booting') ?? false, false);
+  assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, μαθητές 6 έως 18 και εκπαιδευτικούς.');
   assert.equal((await page.locator('#navigatorPrimaryCta strong').innerText()).trim(), 'Βρες το σωστό AI εργαλείο');

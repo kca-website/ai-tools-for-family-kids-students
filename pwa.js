@@ -186,47 +186,9 @@
     if(label.textContent.trim()!==desired) label.textContent=desired;
   }
 
-  function auditDateText(){
-    return isEnglish()
-      ? "Tools last checked: September 5, 2026"
-      : "Τελευταίος έλεγχος εργαλείων: 5 Σεπτεμβρίου 2026";
-  }
-
-  /*
-   * gel-2026-2027-update.js contains a legacy MutationObserver attached directly
-   * to [data-i18n="footerLastChecked"] which enforces the old 30 Aug 2026 date.
-   * Replacing that single DOM node detaches the legacy observer from the live
-   * document. The replacement deliberately has no data-i18n attribute, so the
-   * old guard cannot attach to it again. No observer or polling is added here.
-   */
-  function detachLegacyFooterDateGuard(){
-    const legacy=document.querySelector('[data-i18n="footerLastChecked"]');
-    if(legacy){
-      const clean=legacy.cloneNode(true);
-      clean.removeAttribute("data-i18n");
-      clean.setAttribute("data-footer-audit-date","2026-09-05");
-      clean.textContent=auditDateText();
-      legacy.replaceWith(clean);
-      return clean;
-    }
-
-    const current=document.querySelector(".site-footer__last-checked");
-    if(current){
-      current.removeAttribute("data-i18n");
-      current.setAttribute("data-footer-audit-date","2026-09-05");
-      current.textContent=auditDateText();
-    }
-    return current;
-  }
-
-  function refreshAuditDate(){
-    const el=document.querySelector('[data-footer-audit-date="2026-09-05"], .site-footer__last-checked');
-    if(el && el.textContent.trim()!==auditDateText()) el.textContent=auditDateText();
-  }
-
   function initPagePolish(){
-    detachLegacyFooterDateGuard();
-    refreshAuditDate();
+
+
     refreshHeroMiddleLabel();
     normalizeAuditedSemantics();
   }
@@ -237,7 +199,7 @@
     initPagePolish();
   }
   window.addEventListener("load",()=>{
-    refreshAuditDate();
+
     refreshHeroMiddleLabel();
     normalizeAuditedSemantics();
   },{once:true});
@@ -245,7 +207,7 @@
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;
     if(target?.closest("#langEl, #langEn")) setTimeout(()=>{
-      refreshAuditDate();
+
       refreshHeroMiddleLabel();
       normalizeAuditedSemantics();
     },0);

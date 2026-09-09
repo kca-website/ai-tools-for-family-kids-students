@@ -18,7 +18,11 @@
 
   function patchTool(id,data){
     if(typeof TOOLS==="undefined" || !TOOLS[id]) return;
-    Object.assign(TOOLS[id],data);
+    Object.assign(TOOLS[id],data,{
+      lastReviewed:"2026-09-09",
+      lastReviewedEl:"9 Σεπτεμβρίου 2026",
+      lastReviewedEn:"9 September 2026"
+    });
   }
 
   function applyDeepResearchCorrections(){

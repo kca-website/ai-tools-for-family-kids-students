@@ -151,3 +151,6 @@ The final mobile wording helper also remains separate for now so `Αλλαγή �
 
 ## Rule after consolidation
 No new file may independently reassign `window.AITutor.render`. Any future tutor feature must be invoked explicitly by tutor core or through one documented lifecycle mechanism owned by tutor core.
+
+## Status update — 2026-09-09
+The original branch-status section above is now historical. The transitional lifecycle architecture (`tutor-render-host.js` plus event-based extensions) is already present on `main`. Do **not** merge the old consolidation branch wholesale. Any remaining consolidation must start from current `main`, preserve the existing smoke coverage, and move lifecycle ownership into canonical `tutor.js` in a separate behavior-preserving refactor.

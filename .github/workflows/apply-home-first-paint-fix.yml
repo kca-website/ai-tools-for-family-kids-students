@@ -1,0 +1,92 @@
+name: Apply homepage first-paint fix
+
+on:
+  push:
+    branches:
+      - fix/mobile-needs-first-paint-20260909
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/mobile-needs-first-paint-20260909
+          fetch-depth: 0
+
+      - name: Patch homepage boot and responsive task routes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # 1) The boot guard must exist in the original HTML before first paint.
+          p = Path('index.html')
+          s = p.read_text()
+          s = s.replace('<html lang="el">', '<html lang="el" class="navigator-home-booting">', 1)
+          anchor = '  <link rel="stylesheet" href="/styles.css" />\n'
+          addition = '''  <link rel="stylesheet" href="/navigator-home.css" data-navigator-home="1" />\n  <style id="navigatorHomeFirstPaintGuard">\n    html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}\n  </style>\n'''
+          if addition not in s:
+              if anchor not in s:
+                  raise SystemExit('styles.css anchor not found in index.html')
+              s = s.replace(anchor, anchor + addition, 1)
+          p.write_text(s)
+
+          # 2) Mobile starts collapsed; desktop starts open. Preserve explicit hash-open.
+          p = Path('navigator-home.js')
+          s = p.read_text()
+          old = '      if(location.hash==="#navigatorNeeds") setNeedsOpen(section,true);\n'
+          new = '''      if(location.hash==="#navigatorNeeds") {\n        setNeedsOpen(section,true);\n      } else if(section.dataset.initialStateApplied!=="1") {\n        const mobile=window.matchMedia("(max-width:820px)").matches;\n        setNeedsOpen(section,!mobile);\n        section.dataset.initialStateApplied="1";\n      }\n'''
+          if old not in s and new not in s:
+              raise SystemExit('navigator initial-state anchor not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          # 3) Make the mobile affordance subtle but unmistakably visible.
+          p = Path('navigator-home.css')
+          s = p.read_text()
+          old = '''@media (max-width:820px){\n  .navigator-needs{margin-top:26px;}\n  .navigator-needs__toggle{padding:16px 14px;}\n  .navigator-needs__body{padding:0 14px 16px;}\n  .navigator-needs__grid{grid-template-columns:1fr 1fr;}\n}\n'''
+          new = '''@media (max-width:820px){\n  .navigator-needs{margin-top:26px;}\n  .navigator-needs__toggle{padding:16px 14px;}\n  .navigator-needs__body{padding:0 14px 16px;}\n  .navigator-needs__grid{grid-template-columns:1fr 1fr;}\n  .navigator-needs__chevron{\n    display:inline-grid;place-items:center;width:34px;height:34px;\n    border:1px solid #cbd5e1;border-radius:999px;background:#f8fafc;\n    color:#334155;font-size:1.3rem;font-weight:800;opacity:1;\n  }\n}\n'''
+          if old not in s and new not in s:
+              raise SystemExit('mobile CSS anchor not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+
+          # 4) Update browser contract: mobile collapsed, desktop open + first-paint guard present.
+          p = Path('tests/home-positioning-smoke.mjs')
+          s = p.read_text()
+          s = s.replace("import assert from 'node:assert/strict';\n", "import assert from 'node:assert/strict';\nimport { readFileSync } from 'node:fs';\n", 1)
+          marker = "const foldLabel = (text, locale) => text.trim().normalize('NFD').replace(/\\p{M}/gu, '').toLocaleLowerCase(locale);\n"
+          guard = '''\nconst homepageSource = readFileSync('index.html', 'utf8');\nassert.match(homepageSource, /<html lang="el" class="navigator-home-booting">/, 'homepage boot class must exist before first paint');\nassert.match(homepageSource, /navigatorHomeFirstPaintGuard/, 'homepage must ship an inline first-paint guard');\nassert.match(homepageSource, /navigator-home\\.css[^>]*data-navigator-home="1"/, 'navigator CSS must load from the original head');\n'''
+          if guard not in s:
+              if marker not in s:
+                  raise SystemExit('test marker not found')
+              s = s.replace(marker, marker + guard, 1)
+
+          old = "  await assertNeedsCollapse(desktop, 'desktop');\n"
+          new = '''  const desktopToggle = desktop.locator('#navigatorNeedsToggle');\n  const desktopBody = desktop.locator('#navigatorNeedsBody');\n  assert.equal(await desktopToggle.getAttribute('aria-expanded'), 'true', 'desktop: task routes should start open');\n  assert.equal(await desktopBody.isVisible(), true, 'desktop: task routes body should be visible');\n'''
+          if old not in s and new not in s:
+              raise SystemExit('desktop test anchor not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check navigator-home.js
+          node --check tests/home-positioning-smoke.mjs
+
+      - name: Commit source fix
+        run: |
+          if git diff --quiet; then
+            echo "No source changes needed"
+            exit 0
+          fi
+          git config user.name "aitools4kids-maintenance"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html navigator-home.js navigator-home.css tests/home-positioning-smoke.mjs
+          git commit -m "Fix homepage first paint and mobile task toggle"
+          git push origin HEAD:fix/mobile-needs-first-paint-20260909

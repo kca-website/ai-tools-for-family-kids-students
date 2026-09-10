@@ -1,4 +1,4 @@
-/* Homepage navigator v8.2.
+/* Homepage navigator v8.3.
  * Scope: homepage only.
  * Keeps the core app, routing, language system and school views untouched.
  * Legacy homepage injectors remain available to the rest of the app but are suppressed here.
@@ -333,20 +333,6 @@
     curriculum.innerHTML = `${c.curriculumPrefix} <a href="/xartis-ylis.html">${c.curriculumLabel}</a>`;
   }
 
-  function ensureFooterLinks(){
-    const footer = document.querySelector("footer.site-footer");
-    if(!footer) return;
-    let extra = document.getElementById("homeV8FooterExtra");
-    if(!extra){
-      extra = document.createElement("p");
-      extra.id = "homeV8FooterExtra";
-      extra.className = "site-footer__legal home-v8-footer-extra";
-      footer.appendChild(extra);
-    }
-    const c = currentCopy();
-    extra.innerHTML = `<a href="/methodology.html">${c.methodology}</a> · <a href="/report-error.html">${c.report}</a>`;
-  }
-
   function isSpaRoute(pathname){
     return /^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)\/?$/.test(pathname);
   }
@@ -368,7 +354,7 @@
     ensureSpecialSchoolCard();
     ensureMainShell();
     ensureEngSection();
-    ensureFooterLinks();
+    document.getElementById("homeV8FooterExtra")?.remove();
     suppressLegacyInjectedBlocks();
     revealHomepage(styleLink);
   }

@@ -22,7 +22,7 @@ html body.pwa-mobile-ui #zoneSelectView .hero #pwaMobileLauncher{
 }
 
 #zoneSelectView .hero{
-  max-width:760px;
+  max-width:1040px;
   margin:0 auto 22px;
   padding:36px 32px;
   border:1px solid var(--color-border);
@@ -313,7 +313,7 @@ html body.pwa-mobile-ui #zoneSelectView .hero #pwaMobileLauncher{
   align-items:center;
   justify-content:space-between;
   gap:16px;
-  max-width:760px;
+  max-width:1040px;
   margin:22px auto 0;
   padding:18px 20px;
   border:1px solid #9FE1CB;
@@ -352,11 +352,11 @@ html body.pwa-mobile-ui #zoneSelectView .hero #pwaMobileLauncher{
   white-space:nowrap;
 }
 #zoneSelectView>.not-guide-box{
-  max-width:760px;
+  max-width:1040px;
   margin:26px auto 0;
 }
 .home-v8-curriculum{
-  max-width:760px;
+  max-width:1040px;
   margin:24px auto 0;
   color:var(--color-text-muted);
   font-size:12px;

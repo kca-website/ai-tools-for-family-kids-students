@@ -389,6 +389,28 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   }
 }
 
+@media(max-width:620px){
+  .site-header__inner{align-items:center;}
+  .site-header__actions{gap:6px;}
+  .classroom-menu-link{
+    width:auto!important;
+    min-height:36px;
+    padding:6px 9px!important;
+    border-radius:8px;
+    justify-content:center;
+  }
+  .classroom-menu-link__text{
+    display:inline!important;
+    font-size:0!important;
+  }
+  .classroom-menu-link__text::after{
+    content:"Εκπαιδευτικοί";
+    font-size:.72rem;
+    line-height:1;
+  }
+  html[lang="en"] .classroom-menu-link__text::after{content:"Educators";}
+}
+
 @media(max-width:480px){
   #zoneSelectView .hero{
     margin-left:-20px;

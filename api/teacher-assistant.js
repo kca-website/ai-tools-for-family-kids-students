@@ -56,7 +56,7 @@ module.exports = async function handler(req, res) {
       return res.status(response.status).json({ error: 'groq_error', message: providerMessage });
     }
 
-    const text = data?.choices?.[0]?.message?.content || '';
+    const text = sanitizeTeacherAssistantOutput(data?.choices?.[0]?.message?.content || '');
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'No result returned.' });
 
     res.setHeader('Cache-Control', 'no-store');
@@ -69,3 +69,12 @@ module.exports = async function handler(req, res) {
     });
   }
 };
+
+function sanitizeTeacherAssistantOutput(text) {
+  return String(text || '')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(?:p|div|section|article|ul|ol|li|table|thead|tbody|tr|td|th)>/gi, '\n')
+    .replace(/<\/?(?:p|div|span|strong|b|em|i|section|article|ul|ol|li|table|thead|tbody|tr|td|th)[^>]*>/gi, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}

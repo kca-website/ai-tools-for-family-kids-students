@@ -6,13 +6,12 @@ on:
       - 'special-education*.js'
       - 'special-education*.html'
       - 'special-education*.css'
-      - 'teacher-curriculum-extensions-2026-2027.js'
-      - 'teacher-curriculum-epal-2026-2027.js'
-      - 'teacher-curriculum-special-extra-2026-2027.js'
+      - 'teacher-curriculum-*.js'
       - 'pwa.js'
       - 'teacher-assistant.html'
       - 'tests/special-education-*.mjs'
       - 'tests/teacher-curriculum-coverage-audit.mjs'
+      - 'tests/teacher-epal-specialties-smoke.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
   push:
     branches: [main]
@@ -20,13 +19,12 @@ on:
       - 'special-education*.js'
       - 'special-education*.html'
       - 'special-education*.css'
-      - 'teacher-curriculum-extensions-2026-2027.js'
-      - 'teacher-curriculum-epal-2026-2027.js'
-      - 'teacher-curriculum-special-extra-2026-2027.js'
+      - 'teacher-curriculum-*.js'
       - 'pwa.js'
       - 'teacher-assistant.html'
       - 'tests/special-education-*.mjs'
       - 'tests/teacher-curriculum-coverage-audit.mjs'
+      - 'tests/teacher-epal-specialties-smoke.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
 
 jobs:
@@ -59,6 +57,8 @@ jobs:
           exit 1
       - name: Run strict teacher curriculum mapping smoke
         run: node tests/special-education-teacher-curriculum-smoke.mjs
+      - name: Run Grade C EPAL specialty UI smoke
+        run: node tests/teacher-epal-specialties-smoke.mjs
       - name: Audit teacher curriculum coverage across every school context
         run: node tests/teacher-curriculum-coverage-audit.mjs
       - name: Run Special Education page desktop/mobile smoke

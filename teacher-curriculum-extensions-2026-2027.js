@@ -2,7 +2,7 @@
   "use strict";
 
   const META={
-    version:"1.0.0",
+    version:"1.0.1",
     schoolYear:"2026-2027",
     verified:"2026-09-12",
     note:"Official school-book/topic references and current IEP frameworks used only as the type of evidence stated per entry; they are not silently promoted to a separate E.A.E. examinable syllabus."
@@ -126,7 +126,7 @@
     "Αξιολόγηση με έμφαση στη συμμετοχή, τη συνέπεια και τη συνεργασία"
   ];
 
-  function addEntry(C,{id,schoolType,grade,gradeLabel,subject,subjectId,topics,sourceUrl,sourceTitle,basis="official-digital-textbook",coverageStatus="reference",note=""}){
+  function addEntry(C,{id,schoolType,grade,gradeLabel,subject,subjectId,topics,sourceUrl,sourceTitle,basis="official-digital-textbook-extension",coverageStatus="reference",note=""}){
     if(!C?.entries||!topics?.length) return false;
     if(C.entries[id] && (C.entries[id].officialAnchors||[]).length) return false;
     C.entries[id]={
@@ -149,7 +149,6 @@
     const musicSources={a:SOURCES.musicA,b:SOURCES.musicB,c:SOURCES.musicC};
     const artSources={a:SOURCES.artA,b:SOURCES.artB,c:SOURCES.artC};
 
-    // Special Gymnasium: subjects are verified separately by the current 2026-27 timetable.
     addEntry(C,{id:"teacher-ext-special-gym-a-home",schoolType:"special-gymnasium",grade:"A",gradeLabel:grades.a,subject:"Οικιακή Οικονομία",subjectId:"home-economics",topics:HOME_A,sourceUrl:SOURCES.homeA,sourceTitle:"Διαδραστικά Σχολικά Βιβλία — Οικιακή Οικονομία Α΄ Γυμνασίου"});
     ["a","b","c"].forEach(g=>{
       addEntry(C,{id:`teacher-ext-special-gym-${g}-informatics`,schoolType:"special-gymnasium",grade:g.toUpperCase(),gradeLabel:grades[g],subject:"Πληροφορική",subjectId:"informatics",topics:INFO[g],sourceUrl:infoSources[g],sourceTitle:`Διαδραστικά Σχολικά Βιβλία — Πληροφορική ${grades[g]}`});
@@ -158,7 +157,6 @@
       addEntry(C,{id:`teacher-ext-special-gym-${g}-skills`,schoolType:"special-gymnasium",grade:g.toUpperCase(),gradeLabel:grades[g],subject:"Εργαστήρια Δεξιοτήτων",subjectId:"skills-labs",topics:SKILLS,sourceUrl:SOURCES.skills,sourceTitle:"ΙΕΠ — Εργαστήρια Δεξιοτήτων 2026-2027",basis:"iep-skills-labs-2026-27",coverageStatus:"framework",note:"Οι τέσσερις θεματικές προέρχονται από το τρέχον πλαίσιο Εργαστηρίων Δεξιοτήτων του ΙΕΠ. Χρησιμοποιούνται ως θεματικοί άξονες και όχι ως ισχυρισμός συγκεκριμένης εξεταστέας ύλης."});
     });
 
-    // EN.E.E.GY.-L. Gymnasium: same official textbook references are used as support references where the verified structure contains the corresponding subject.
     addEntry(C,{id:"teacher-ext-eneegyl-gym-a-home",schoolType:"eneegyl",grade:"A",gradeLabel:grades.a,subject:"Οικιακή Οικονομία",subjectId:"homeEconomics",topics:HOME_A,sourceUrl:SOURCES.homeA,sourceTitle:"Διαδραστικά Σχολικά Βιβλία — Οικιακή Οικονομία Α΄ Γυμνασίου"});
     ["a","b","c"].forEach(g=>{
       addEntry(C,{id:`teacher-ext-eneegyl-gym-${g}-music`,schoolType:"eneegyl",grade:g.toUpperCase(),gradeLabel:grades[g],subject:"Μουσική / Θεατρική Αγωγή",subjectId:"musicTheatre",topics:MUSIC[g],sourceUrl:musicSources[g],sourceTitle:`Διαδραστικά Σχολικά Βιβλία — Μουσική ${grades[g]}`,coverageStatus:"partial-reference",note:"Η επίσημη αναφορά καλύπτει το σκέλος Μουσικής του συνδυαστικού μαθήματος «Μουσική / Θεατρική Αγωγή». Δεν παρουσιάζεται ως πλήρης χαρτογράφηση του σκέλους Θεατρικής Αγωγής."});

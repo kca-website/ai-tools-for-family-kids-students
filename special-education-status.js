@@ -53,7 +53,11 @@ window.SPECIAL_EDUCATION_STATUS = {
 (function(){
   "use strict";
   if(typeof document==="undefined") return;
-  const files=["/teacher-curriculum-extensions-2026-2027.js","/teacher-curriculum-epal-2026-2027.js"];
+  const files=[
+    "/teacher-curriculum-extensions-2026-2027.js",
+    "/teacher-curriculum-epal-2026-2027.js",
+    "/teacher-curriculum-special-extra-2026-2027.js"
+  ];
   if(document.readyState==="loading"){
     files.forEach(src=>document.write(`<script src="${src}"><\/script>`));
   }else{

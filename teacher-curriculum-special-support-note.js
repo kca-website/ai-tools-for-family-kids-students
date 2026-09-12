@@ -22,6 +22,7 @@
     const c=norm(e?.coverageStatus),b=norm(e?.verificationBasis);
     return c.includes("official course guidance")||c.includes("exam verified")||c.includes("panhellenic")||b.includes("annual instructions 2026 27")||b.includes("panhellenic");
   }
+  function safeUrl(url){return /^https:\/\//i.test(String(url||""))?String(url):"";}
   function apply(){
     const c=contextId();
     if(!schoolType[c]) return;
@@ -29,10 +30,17 @@
     if(!note||!unit||unit.value==="custom") return;
     const gid=document.getElementById("grade")?.value||"",glabel=selectedLabel("grade"),sid=document.getElementById("subject")?.value||"",slabel=selectedLabel("subject");
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).filter(e=>entryMatches(e,c,gid,glabel,sid,slabel));
-    if(entries.some(isExactAnnual)) return;
+    const exact=entries.find(isExactAnnual);
+    const count=[...unit.options].filter(o=>o.value!=="custom").length;
+    if(exact){
+      const source=safeUrl(exact.sourceUrl);
+      const sourceLink=source?` <a href="${source}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a>`:"";
+      const scope=norm(exact.coverageStatus).includes("panhellenic")?"επίσημη διδακτέα-εξεταστέα ύλη":"τρέχουσα επίσημη ύλη / οδηγίες διδασκαλίας";
+      note.innerHTML=`<strong>✓ Επαληθευμένη χαρτογράφηση 2026–27${count?` · ${count} επιλογές`:""}.</strong> Οι ενότητες προέρχονται από ${scope} για το συγκεκριμένο μάθημα.${sourceLink}`;
+      return;
+    }
     const support=c==="specialLyc"||entries.some(isSupport)||((typeof window.selectedSubject==="function")&&window.selectedSubject()?.supportOnly);
     if(!support) return;
-    const count=[...document.getElementById("unit").options].filter(o=>o.value!=="custom").length;
     note.innerHTML=`<strong>ℹ Υποστηρικτική χαρτογράφηση${count?` · ${count} επιλογές`:""}.</strong> Οι ενότητες είναι πραγματικές επιλογές από επαληθευμένη σχολική/εκπαιδευτική πηγή, αλλά δεν παρουσιάζονται ως ξεχωριστή επίσημη ετήσια διδακτέα ή εξεταστέα ύλη της συγκεκριμένης δομής Ε.Α.Ε. Ο εκπαιδευτικός επιβεβαιώνει ότι η επιλεγμένη ενότητα αντιστοιχεί σε αυτό που διδάσκει.`;
   }
   function install(){
@@ -41,7 +49,7 @@
     if(note&&typeof MutationObserver!=="undefined"){
       let busy=false;
       new MutationObserver(()=>{
-        if(busy||!schoolType[contextId()]||note.textContent.includes("Υποστηρικτική χαρτογράφηση")) return;
+        if(busy||!schoolType[contextId()]||note.textContent.includes("Επαληθευμένη χαρτογράφηση")||note.textContent.includes("Υποστηρικτική χαρτογράφηση")) return;
         busy=true;setTimeout(()=>{busy=false;apply();},0);
       }).observe(note,{childList:true,subtree:true,characterData:true});
     }

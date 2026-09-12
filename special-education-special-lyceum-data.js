@@ -97,24 +97,25 @@
   }
 
   const LITERATURE_TEXTBOOK={
-    a:{
-      sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2228/Keimena-Neoellinikis-Logotechnias_AGymnasiou_html-empl/index.html',
-      topics:[
-        'Ο άνθρωπος και η φύση — Πόλη — Ύπαιθρος','Λαογραφικά','Οικογενειακές σχέσεις','Θρησκευτική ζωή','Εθνική ζωή','Παλαιότερες μορφές ζωής','Ταξιδιωτικά κείμενα','Η αποδημία — Ο καημός της ξενιτιάς — Ο ελληνισμός έξω από τα σύνορα — Τα Μικρασιατικά — Οι πρόσφυγες','Αθλητισμός','Η αγάπη για τους συνανθρώπους μας — Οι φιλικοί δεσμοί — Η αγάπη','Η βιοπάλη — Το αγωνιστικό πνεύμα του ανθρώπου','Προβλήματα της σύγχρονης ζωής','Οι φίλοι μας τα ζώα'
-      ]
-    },
-    b:{
-      sourceUrl:'https://www.ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/',
-      topics:[
-        'Ο άνθρωπος και η φύση — Πόλη — Ύπαιθρος','Λαογραφικά','Οικογενειακές σχέσεις','Θρησκευτική ζωή','Εθνική ζωή','Παλαιότερες μορφές ζωής','Ταξιδιωτικά κείμενα','Η αποδημία — Ο καημός της ξενιτιάς — Ο ελληνισμός έξω από τα σύνορα — Τα Μικρασιατικά — Οι πρόσφυγες','Αθλητισμός','Η αγάπη για τους συνανθρώπους μας — Οι φιλικοί δεσμοί — Η αγάπη','Η βιοπάλη — Το αγωνιστικό πνεύμα του ανθρώπου','Προβλήματα της σύγχρονης ζωής','Οι φίλοι μας τα ζώα'
-      ]
-    },
-    c:{
-      sourceUrl:'https://www.ebooks.edu.gr/ebooks/v/html/8547/2218/Keimena-Neoellinikis-Logotechnias_GGymnasiou_html/index.html',
-      topics:[
-        'Δημοτικά τραγούδια','Κρητική λογοτεχνία','Νεοελληνικός Διαφωτισμός','Απομνημονεύματα','Η λογοτεχνία στα Επτάνησα','Οι Φαναριώτες και οι Ρομαντικοί των Αθηνών','Η Νέα Αθηναϊκή Σχολή (1880–1922)','Η νεότερη λογοτεχνία — Η λογοτεχνία από το 1922 ως το 1945','Η νεότερη λογοτεχνία — Μεταπολεμική και σύγχρονη λογοτεχνία'
-      ]
-    }
+    a:{sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2228/Keimena-Neoellinikis-Logotechnias_AGymnasiou_html-empl/index.html',topics:['Ο άνθρωπος και η φύση — Πόλη — Ύπαιθρος','Λαογραφικά','Οικογενειακές σχέσεις','Θρησκευτική ζωή','Εθνική ζωή','Παλαιότερες μορφές ζωής','Ταξιδιωτικά κείμενα','Η αποδημία — Ο καημός της ξενιτιάς — Ο ελληνισμός έξω από τα σύνορα — Τα Μικρασιατικά — Οι πρόσφυγες','Αθλητισμός','Η αγάπη για τους συνανθρώπους μας — Οι φιλικοί δεσμοί — Η αγάπη','Η βιοπάλη — Το αγωνιστικό πνεύμα του ανθρώπου','Προβλήματα της σύγχρονης ζωής','Οι φίλοι μας τα ζώα']},
+    b:{sourceUrl:'https://www.ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/',topics:['Ο άνθρωπος και η φύση — Πόλη — Ύπαιθρος','Λαογραφικά','Οικογενειακές σχέσεις','Θρησκευτική ζωή','Εθνική ζωή','Παλαιότερες μορφές ζωής','Ταξιδιωτικά κείμενα','Η αποδημία — Ο καημός της ξενιτιάς — Ο ελληνισμός έξω από τα σύνορα — Τα Μικρασιατικά — Οι πρόσφυγες','Αθλητισμός','Η αγάπη για τους συνανθρώπους μας — Οι φιλικοί δεσμοί — Η αγάπη','Η βιοπάλη — Το αγωνιστικό πνεύμα του ανθρώπου','Προβλήματα της σύγχρονης ζωής','Οι φίλοι μας τα ζώα']},
+    c:{sourceUrl:'https://www.ebooks.edu.gr/ebooks/v/html/8547/2218/Keimena-Neoellinikis-Logotechnias_GGymnasiou_html/index.html',topics:['Δημοτικά τραγούδια','Κρητική λογοτεχνία','Νεοελληνικός Διαφωτισμός','Απομνημονεύματα','Η λογοτεχνία στα Επτάνησα','Οι Φαναριώτες και οι Ρομαντικοί των Αθηνών','Η Νέα Αθηναϊκή Σχολή (1880–1922)','Η νεότερη λογοτεχνία — Η λογοτεχνία από το 1922 ως το 1945','Η νεότερη λογοτεχνία — Μεταπολεμική και σύγχρονη λογοτεχνία']}
+  };
+
+  const ANCIENT_LANGUAGE_TEXTBOOK={
+    a:{sourceUrl:'https://lb2.ebooks.edu.gr/ebooks/v/html/8547/2244/Archaia-Elliniki-Glossa_A-Gymnasiou_html-empl/index.html',topics:['Ενότητα 1 — Το ταξίδι των λέξεων στον χρόνο','Ενότητα 2 — Η εκπαίδευση των παιδιών στην αρχαία Αθήνα','Ενότητα 3 — Επαγγέλματα των αρχαίων Αθηναίων','Ενότητα 4 — Ένα ταξίδι επιστημονικής φαντασίας','Ενότητα 5 — Ο πλούτος της αττικής γης','Ενότητα 6 — Η ομορφιά δεν είναι το παν','Ενότητα 7 — Η λύση του γόρδιου δεσμού','Ενότητα 8 — Ένα μοιραίο λάθος','Ενότητα 9 — Ανυπέρβλητα πρότυπα','Ενότητα 10 — Ο Σωκράτης για τη φιλία','Ενότητα 11 — Η αγάπη του Αλεξάνδρου για τον Βουκεφάλα','Ενότητα 12 — Αθήνα και Ατλαντίδα','Ενότητα 13 — Δάμων και Φιντίας','Ενότητα 14 — Ένα άδικο παράπονο','Ενότητα 15 — Η μεταμόρφωση του Λευκίππου','Ενότητα 16 — Το θλιβερό τέλος ενός τυράννου','Ενότητα 17 — Ένα διδακτικό παράδειγμα από τη φύση','Ενότητα 18 — Η ειλικρίνεια ανταμείβεται']},
+    b:{sourceUrl:'https://www.ebooks.edu.gr/ebooks/v/html/8547/2234/Archaia-Elliniki-Glossa_B-Gymnasiou_html-empl/',topics:['Ενότητα 1 — Πατρική δικαιοσύνη','Ενότητα 2 — Το τέχνασμα του Θεμιστοκλή','Ενότητα 3 — Το χρέος του ιστορικού','Ενότητα 4 — Οι Σεληνίτες','Ενότητα 5 — Η ελεημοσύνη βασίλισσα των αρετών','Ενότητα 6 — Η ευθύνη για την παιδεία των νέων','Ενότητα 7 — Ένας στοργικός ηγέτης','Ενότητα 8 — Η γένεση της θρησκείας και της δικαιοσύνης','Ενότητα 9 — Η Καλλιπάτειρα','Ενότητα 10 — Ένας δύσκολος αντίπαλος','Ενότητα 11 — Ο σεβασμός προς τους γονείς μέλημα του νόμου','Ενότητα 12 — Τα φαινόμενα απατούν','Ενότητα 13 — Η σωστή στάση στο θέμα της τροφής','Ενότητα 14 — Απρόσκλητοι βοηθοί','Ενότητα 15 — Η Αθήνα προπύργιο της Ευρώπης','Ενότητα 16 — Μεγαλόψυχη στάση','Ενότητα 17 — Το πάθημα των ερωδιών','Ενότητα 18 — Τα μειονεκτήματα του γραπτού λόγου σε σχέση με τον προφορικό']},
+    c:{sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2238/Archaia-Elliniki-Glossa_G-Gymnasiou_html-empl/',topics:['Ενότητα 1 — Η Ελένη και η καταστροφή της Τροίας','Ενότητα 2 — Θυσία για την πατρίδα','Ενότητα 3 — Η κατοχή της εξουσίας δεν εγγυάται την ευτυχία','Ενότητα 4 — Τα πλεονεκτήματα της ειρήνης','Ενότητα 5 — Η ισονομία των πολιτών εγγύηση της δημοκρατίας','Ενότητα 6 — Η μουσική εξημερώνει','Ενότητα 7 — Η επιστήμη στην υπηρεσία της άμυνας του κράτους','Ενότητα 8 — Ένα παράδειγμα σεβασμού προς τους γονείς','Ενότητα 9 — Οι νόμοι επισκέπτονται τον Σωκράτη στη φυλακή','Ενότητα 10 — Μια τιμητική εξορία','Ενότητα 11 — Επικίνδυνες συμμαχίες','Ενότητα 12 — Θεϊκές αδυναμίες']}
+  };
+
+  const ANCIENT_TRANSLATED_TEXTBOOK={
+    a:{sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2232/Omirika-Epi-Odysseia_A-Gymnasiou_html-empl/',topics:['1η Ενότητα — α: περίληψη, α 1-25','2η Ενότητα — α 26-108','3η Ενότητα — α 109-173','4η Ενότητα — α 174-360','5η Ενότητα — α 361-497','6η Ενότητα — β, γ, δ: περίληψη και μικρά αποσπάσματα','7η Ενότητα — ε: περίληψη, ε 1-165','8η Ενότητα — ε 165-310','9η Ενότητα — ε 311-420','10η Ενότητα — ε 421-552','11η Ενότητα — ζ: περίληψη, ζ 139-259','12η Ενότητα — η, θ, ι 1-41: περίληψη και αποσπάσματα','13η Ενότητα — θ 550-688, ι 1-41','14η Ενότητα — ι 42 κ.ε., ι 240-512','15η Ενότητα — ι 513-630','16η Ενότητα — κ, λ: περίληψη, λ 99-249','17η Ενότητα — λ 376-433, 522-604','18η Ενότητα — μ, ν 1-209','19η Ενότητα — ν 210-494','20ή Ενότητα — ξ, ο, π: περίληψη','21η Ενότητα — π 1-172','22η Ενότητα — π 185-336','23η Ενότητα — ρ, σ: περίληψη, ρ 331-376','24η Ενότητα — τ, υ: περίληψη και αποσπάσματα','25η Ενότητα — φ: περίληψη, φ 303-473','26η Ενότητα — χ: περίληψη και αποσπάσματα','27η Ενότητα — ψ: περίληψη και αποσπάσματα','28η Ενότητα — ω: περίληψη και αποσπάσματα']},
+    b:{sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/',topics:['Εισαγωγή και γεγονότα — ημερολόγιο της Ιλιάδας','Ραψωδία Α','Ραψωδία Β','Ραψωδία Γ','Ραψωδία Δ','Ραψωδία Ε','Ραψωδία Ζ','Ραψωδία Η','Ραψωδία Θ','Ραψωδία Ι','Ραψωδία Κ','Ραψωδία Λ','Ραψωδία Μ','Ραψωδία Ν','Ραψωδία Ξ','Ραψωδία Ο','Ραψωδία Π','Ραψωδία Ρ','Ραψωδία Σ','Ραψωδία Τ','Ραψωδία Υ','Ραψωδία Φ','Ραψωδία Χ','Ραψωδία Ψ','Ραψωδία Ω']},
+    c:{sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2342/Dramatiki-Poiisi-Evripidi-Eleni_G-Gymnasiou_empl/',topics:['Εισαγωγή','Πρόλογος — στ. 1-191','Πάροδος — στ. 192-436','Α΄ Επεισόδιο — στ. 437-575','Επιπάροδος – Β΄ Επεισόδιο — στ. 576-1219','Α΄ Στάσιμο — στ. 1220-1285','Γ΄ Επεισόδιο — στ. 1286-1424','Β΄ Στάσιμο — στ. 1425-1499','Δ΄ Επεισόδιο — στ. 1500-1592','Γ΄ Στάσιμο — στ. 1593-1652','Έξοδος — στ. 1653-1870']}
+  };
+
+  const CIVICS_TEXTBOOK={
+    c:{sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/4720/Koinoniki-kai-Politiki-Agogi_G-Gymnasiou_html-apli/',topics:['Κεφάλαιο 1 — Εισαγωγικές έννοιες','Κεφάλαιο 2 — Κοινωνικές ομάδες','Κεφάλαιο 3 — Κοινωνική οργάνωση και μεταβολή','Κεφάλαιο 4 — Κοινωνικοί θεσμοί','Κεφάλαιο 5 — Κοινωνικοποίηση και κοινωνικός έλεγχος','Κεφάλαιο 6 — Κοινωνικά προβλήματα','Κεφάλαιο 7 — Το άτομο και η Πολιτεία','Κεφάλαιο 8 — Τα πολιτεύματα και το Σύνταγμα','Κεφάλαιο 9 — Εκλογές, κόμματα, ΜΜΕ','Κεφάλαιο 10 — Οι λειτουργίες του κράτους','Κεφάλαιο 11 — Η Διοίκηση','Κεφάλαιο 12 — Δικαιώματα και υποχρεώσεις','Κεφάλαιο 13 — Ευρωπαϊκή Ένωση','Κεφάλαιο 14 — Η Διεθνής Κοινότητα']}
   };
 
   const PE_TEXTBOOK={
@@ -123,6 +124,18 @@
     b:['Κεφάλαιο 3 — Η αξία της δια βίου άσκησης','Κεφάλαιο 4 — Μέθοδοι βελτίωσης των φυσικών ικανοτήτων των μαθητών'],
     c:['Κεφάλαιο 5 — Ειδικά θέματα','Κεφάλαιο 6 — Συμμετοχή των μαθητών στην οργάνωση σχολικών δραστηριοτήτων']
   };
+
+  function officialTextbookReference(gradeId,localSubject){
+    const gid=String(gradeId||'').toLowerCase();
+    const key=subjectKey(localSubject?.label||localSubject,localSubject?.id);
+    let ref=null,label='';
+    if(key==='literature'){ref=LITERATURE_TEXTBOOK[gid];label='το επίσημο Διαδραστικό Σχολικό Βιβλίο Νεοελληνικής Λογοτεχνίας';}
+    else if(key==='ancient-language'){ref=ANCIENT_LANGUAGE_TEXTBOOK[gid];label='το επίσημο Διαδραστικό Σχολικό Βιβλίο Αρχαίας Ελληνικής Γλώσσας';}
+    else if(key==='ancient-translation'){ref=ANCIENT_TRANSLATED_TEXTBOOK[gid];label='το επίσημο Διαδραστικό Σχολικό Βιβλίο Αρχαίων Ελληνικών από Μετάφραση';}
+    else if(key==='civics'){ref=CIVICS_TEXTBOOK[gid];label='το επίσημο Διαδραστικό Σχολικό Βιβλίο Κοινωνικής και Πολιτικής Αγωγής';}
+    else if(key==='physical-education'&&PE_TEXTBOOK[gid]){ref={sourceUrl:PE_TEXTBOOK.sourceUrl,topics:PE_TEXTBOOK[gid]};label='το επίσημο Διαδραστικό Σχολικό Βιβλίο Φυσικής Αγωγής';}
+    return ref?{topics:ref.topics,basis:'official-digital-textbook',label,sourceUrl:ref.sourceUrl}:null;
+  }
 
   function topicReference(zone,gradeId,localSubject){
     const merged=typeof window.mergeSubjects==='function'?(window.mergeSubjects(zone,gradeId)||[]):[];
@@ -138,130 +151,45 @@
     if(mapped.length){
       return {topics:mapped,basis:zone==='high'?'general-lyceum-2026-27':'general-gymnasium-2026-27',label:zone==='high'?'την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27':'την επαληθευμένη χαρτογράφηση Γυμνασίου 2026–27',sourceUrl:''};
     }
-    if(zone==='middle'&&subjectKey(localSubject?.label||localSubject,localSubject?.id)==='literature'){
-      const ref=LITERATURE_TEXTBOOK[String(gradeId||'').toLowerCase()];
-      if(ref) return {topics:ref.topics,basis:'official-digital-textbook',label:'το επίσημο Διαδραστικό Σχολικό Βιβλίο Νεοελληνικής Λογοτεχνίας',sourceUrl:ref.sourceUrl};
-    }
-    if(zone==='middle'&&subjectKey(localSubject?.label||localSubject,localSubject?.id)==='physical-education'){
-      const gid=String(gradeId||'').toLowerCase();
-      const topics=PE_TEXTBOOK[gid]||[];
-      if(topics.length) return {topics,basis:'official-digital-textbook',label:'το επίσημο Διαδραστικό Σχολικό Βιβλίο Φυσικής Αγωγής',sourceUrl:PE_TEXTBOOK.sourceUrl};
+    if(zone==='middle'){
+      const textbook=officialTextbookReference(gradeId,localSubject);
+      if(textbook) return textbook;
     }
     return {topics:[],basis:zone==='high'?'general-lyceum-2026-27':'general-gymnasium-2026-27',label:zone==='high'?'την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27':'την επαληθευμένη χαρτογράφηση Γυμνασίου 2026–27',sourceUrl:''};
   }
 
-  function topicsFor(zone,gradeId,localSubject){
-    return topicReference(zone,gradeId,localSubject).topics;
-  }
-
-  function bridgeId(schoolType,suffix,subject){
-    return `bridge-${schoolType}-${suffix}-${subject.id||norm(subject.label)}`.replace(/[^a-z0-9-]/gi,'-').toLowerCase();
-  }
+  function topicsFor(zone,gradeId,localSubject){return topicReference(zone,gradeId,localSubject).topics;}
+  function bridgeId(schoolType,suffix,subject){return `bridge-${schoolType}-${suffix}-${subject.id||norm(subject.label)}`.replace(/[^a-z0-9-]/gi,'-').toLowerCase();}
 
   function addBridge(schoolType,grade,gradeLabel,subject,topics,suffix,basis,label,sourceUrl){
     if(!C?.entries||!topics.length) return;
     const id=bridgeId(schoolType,suffix,subject);
-    C.entries[id]={
-      id,schoolType,grade,gradeLabel,subject:subject.label||String(subject),subjectId:subject.id||'',
-      subjectType:`Υποστηρικτική χαρτογράφηση από ${label}`,
-      status:'verified-reference',coverageStatus:'reference',verificationBasis:basis,
-      verificationDate:'2026-09-12',officialAnchors:[...new Set(topics)],
-      referenceSourceUrl:sourceUrl||'',
-      verificationNote:basis==='official-digital-textbook'
-        ?`Οι επιλογές είναι πραγματικές ενότητες του επίσημου σχολικού βιβλίου και χρησιμοποιούνται ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ετήσια εξεταστέα ύλη Ε.Α.Ε. 2026–27.`
-        :`Οι ενότητες προέρχονται από ${label} του site και χρησιμοποιούνται μόνο ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ειδική εξεταστέα ύλη.`
-    };
+    C.entries[id]={id,schoolType,grade,gradeLabel,subject:subject.label||String(subject),subjectId:subject.id||'',subjectType:`Υποστηρικτική χαρτογράφηση από ${label}`,status:'verified-reference',coverageStatus:'reference',verificationBasis:basis,verificationDate:'2026-09-12',officialAnchors:[...new Set(topics)],referenceSourceUrl:sourceUrl||'',verificationNote:basis==='official-digital-textbook'?`Οι επιλογές είναι πραγματικές ενότητες του επίσημου σχολικού βιβλίου και χρησιμοποιούνται ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ετήσια εξεταστέα ύλη Ε.Α.Ε. 2026–27.`:`Οι ενότητες προέρχονται από ${label} του site και χρησιμοποιούνται μόνο ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ειδική εξεταστέα ύλη.`};
   }
 
   if(C?.entries&&CAT){
-    ['a','b','c'].forEach(gid=>{
-      const gradeLabel=window.SPECIAL_LYCEUM_2026_2027.grades[gid].labelEl;
-      (CAT.getSubjects?.('high',gid)||[]).forEach(s=>{
-        addBridge('special-lyceum',gid.toUpperCase(),gradeLabel,{id:s.id,label:s.subjectLabelEl},(s.topics||[]).map(t=>t.labelEl).filter(Boolean),`lyc-${gid}`,'general-lyceum-2026-27','την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27');
-      });
-    });
-    if(EG){
-      ['lyc-a','lyc-b','lyc-c','lyc-d'].forEach(gid=>{
-        const g=EG.grades?.[gid]; if(!g) return;
-        const highGrade=gid==='lyc-d'?'c':gid.slice(-1);
-        (g.subjects||[]).forEach(subject=>{
-          if(subject.type==='sector-gateway') return;
-          const topics=topicsFor('high',highGrade,subject);
-          addBridge('eneegyl',gid.slice(-1).toUpperCase(),g.label,subject,topics,gid,'general-lyceum-2026-27','την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27');
-        });
-      });
-    }
+    ['a','b','c'].forEach(gid=>{const gradeLabel=window.SPECIAL_LYCEUM_2026_2027.grades[gid].labelEl;(CAT.getSubjects?.('high',gid)||[]).forEach(s=>{addBridge('special-lyceum',gid.toUpperCase(),gradeLabel,{id:s.id,label:s.subjectLabelEl},(s.topics||[]).map(t=>t.labelEl).filter(Boolean),`lyc-${gid}`,'general-lyceum-2026-27','την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27');});});
+    if(EG){['lyc-a','lyc-b','lyc-c','lyc-d'].forEach(gid=>{const g=EG.grades?.[gid];if(!g)return;const highGrade=gid==='lyc-d'?'c':gid.slice(-1);(g.subjects||[]).forEach(subject=>{if(subject.type==='sector-gateway')return;const topics=topicsFor('high',highGrade,subject);addBridge('eneegyl',gid.slice(-1).toUpperCase(),g.label,subject,topics,gid,'general-lyceum-2026-27','την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27');});});}
   }
 
   function reconcileTeacherCurriculum(){
     if(!C?.entries||!CAT) return;
-
-    Object.keys(C.entries).forEach(id=>{
-      const e=C.entries[id];
-      if(['general-gymnasium-2026-27','general-lyceum-2026-27','official-digital-textbook'].includes(e?.verificationBasis)) delete C.entries[id];
-    });
+    Object.keys(C.entries).forEach(id=>{const e=C.entries[id];if(['general-gymnasium-2026-27','general-lyceum-2026-27','official-digital-textbook'].includes(e?.verificationBasis))delete C.entries[id];});
 
     const SG=window.SPECIAL_GYMNASIUM_2026_2027;
-    if(SG){
-      Object.entries(SG.grades||{}).forEach(([gid,g])=>{
-        (g.subjects||[]).forEach(subject=>{
-          const ref=topicReference('middle',gid,subject);
-          addBridge('special-gymnasium',gid.toUpperCase(),g.label,subject,ref.topics,`gym-${gid}`,ref.basis,ref.label,ref.sourceUrl);
-        });
-      });
-    }
+    if(SG){Object.entries(SG.grades||{}).forEach(([gid,g])=>{(g.subjects||[]).forEach(subject=>{const ref=topicReference('middle',gid,subject);addBridge('special-gymnasium',gid.toUpperCase(),g.label,subject,ref.topics,`gym-${gid}`,ref.basis,ref.label,ref.sourceUrl);});});}
 
     if(EG){
-      ['gym-a','gym-b','gym-c'].forEach(gid=>{
-        const g=EG.grades?.[gid]; if(!g) return;
-        const middleGrade=gid.slice(-1);
-        (g.subjects||[]).forEach(subject=>{
-          if(subject.type==='sector-gateway') return;
-          const ref=topicReference('middle',middleGrade,subject);
-          addBridge('eneegyl',middleGrade.toUpperCase(),g.label,subject,ref.topics,gid,ref.basis,ref.label,ref.sourceUrl);
-        });
-      });
-
-      ['lyc-a','lyc-b','lyc-c','lyc-d'].forEach(gid=>{
-        const g=EG.grades?.[gid]; if(!g) return;
-        const highGrade=gid==='lyc-d'?'c':gid.slice(-1);
-        (g.subjects||[]).forEach(subject=>{
-          if(subject.type==='sector-gateway') return;
-          const ref=topicReference('high',highGrade,subject);
-          addBridge('eneegyl',gid.slice(-1).toUpperCase(),g.label,subject,ref.topics,gid,ref.basis,ref.label,ref.sourceUrl);
-        });
-      });
+      ['gym-a','gym-b','gym-c'].forEach(gid=>{const g=EG.grades?.[gid];if(!g)return;const middleGrade=gid.slice(-1);(g.subjects||[]).forEach(subject=>{if(subject.type==='sector-gateway')return;const ref=topicReference('middle',middleGrade,subject);addBridge('eneegyl',middleGrade.toUpperCase(),g.label,subject,ref.topics,gid,ref.basis,ref.label,ref.sourceUrl);});});
+      ['lyc-a','lyc-b','lyc-c','lyc-d'].forEach(gid=>{const g=EG.grades?.[gid];if(!g)return;const highGrade=gid==='lyc-d'?'c':gid.slice(-1);(g.subjects||[]).forEach(subject=>{if(subject.type==='sector-gateway')return;const ref=topicReference('high',highGrade,subject);addBridge('eneegyl',gid.slice(-1).toUpperCase(),g.label,subject,ref.topics,gid,ref.basis,ref.label,ref.sourceUrl);});});
     }
 
-    ['a','b','c'].forEach(gid=>{
-      const gradeLabel=window.SPECIAL_LYCEUM_2026_2027.grades[gid].labelEl;
-      const source=typeof window.mergeSubjects==='function'?(window.mergeSubjects('high',gid)||[]):(CAT.getSubjects?.('high',gid)||[]).map(s=>({id:s.id,label:s.subjectLabelEl,topics:(s.topics||[]).map(t=>t.labelEl)}));
-      source.forEach(s=>{
-        const topics=(s.topics||[]).map(t=>typeof t==='string'?t:t?.labelEl).filter(Boolean);
-        addBridge('special-lyceum',gid.toUpperCase(),gradeLabel,{id:s.id,label:s.label||s.subjectLabelEl},topics,`lyc-${gid}`,'general-lyceum-2026-27','την πλήρη χαρτογράφηση ΓΕΛ 2026–27 του site');
-      });
-    });
+    ['a','b','c'].forEach(gid=>{const gradeLabel=window.SPECIAL_LYCEUM_2026_2027.grades[gid].labelEl;const source=typeof window.mergeSubjects==='function'?(window.mergeSubjects('high',gid)||[]):(CAT.getSubjects?.('high',gid)||[]).map(s=>({id:s.id,label:s.subjectLabelEl,topics:(s.topics||[]).map(t=>t.labelEl)}));source.forEach(s=>{const topics=(s.topics||[]).map(t=>typeof t==='string'?t:t?.labelEl).filter(Boolean);addBridge('special-lyceum',gid.toUpperCase(),gradeLabel,{id:s.id,label:s.label||s.subjectLabelEl},topics,`lyc-${gid}`,'general-lyceum-2026-27','την πλήρη χαρτογράφηση ΓΕΛ 2026–27 του site');});});
 
-    window.subjectMatches=function(entry,subject){
-      const entryKey=subjectKey(entry?.subject,entry?.subjectId||entry?.sourceSubjectId||'');
-      const subjectLabel=subject?.label||subject||'';
-      const subjectId=subject?.id||'';
-      const selectedKey=subjectKey(subjectLabel,subjectId);
-      if(entryKey&&selectedKey) return entryKey===selectedKey;
-      return norm(entry?.subject)===norm(subjectLabel);
-    };
-
-    const collisions=[];
-    Object.values(C.entries).forEach(e=>{
-      if(!String(e?.id||'').startsWith('bridge-')||!e.subjectId) return;
-      const expected=subjectKey(e.subject,e.subjectId);
-      if(!expected) collisions.push({id:e.id,subject:e.subject,reason:'unknown-subject-key'});
-    });
-    window.AITOOLSKIDS_TEACHER_CURRICULUM_AUDIT={checkedAt:new Date().toISOString(),collisions};
-
-    if(typeof window.refreshSubjects==='function') window.refreshSubjects();
+    window.subjectMatches=function(entry,subject){const entryKey=subjectKey(entry?.subject,entry?.subjectId||entry?.sourceSubjectId||'');const subjectLabel=subject?.label||subject||'';const subjectId=subject?.id||'';const selectedKey=subjectKey(subjectLabel,subjectId);if(entryKey&&selectedKey)return entryKey===selectedKey;return norm(entry?.subject)===norm(subjectLabel);};
+    const collisions=[];Object.values(C.entries).forEach(e=>{if(!String(e?.id||'').startsWith('bridge-')||!e.subjectId)return;const expected=subjectKey(e.subject,e.subjectId);if(!expected)collisions.push({id:e.id,subject:e.subject,reason:'unknown-subject-key'});});window.AITOOLSKIDS_TEACHER_CURRICULUM_AUDIT={checkedAt:new Date().toISOString(),collisions};
+    if(typeof window.refreshSubjects==='function')window.refreshSubjects();
   }
 
-  if(typeof document!=='undefined'&&document.readyState==='loading') document.addEventListener('DOMContentLoaded',reconcileTeacherCurriculum,{once:true});
-  else reconcileTeacherCurriculum();
+  if(typeof document!=='undefined'&&document.readyState==='loading')document.addEventListener('DOMContentLoaded',reconcileTeacherCurriculum,{once:true});else reconcileTeacherCurriculum();
 })();

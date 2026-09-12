@@ -1,341 +1,40 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Για την τάξη | Classroom View | AI Tools for Kids</title>
-  <meta name="description" content="Δωρεάν classroom view για εκπαιδευτικούς: επίλεξε βαθμίδα, μάθημα και χαρτογραφημένο θέμα και πάρε μια απλή δραστηριότητα τάξης χωρίς λογαριασμούς ή αποθήκευση μαθητικών αποτελεσμάτων." />
-  <link rel="canonical" href="https://www.aitools4kids.gr/classroom.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="AI Tools for Family, Kids & Students" />
-  <meta property="og:title" content="Για την τάξη | Classroom View" />
-  <meta property="og:description" content="Επίσημος σχολικός χάρτης + έτοιμη, privacy-first δραστηριότητα τάξης, χωρίς λογαριασμούς μαθητών." />
-  <meta property="og:url" content="https://www.aitools4kids.gr/classroom.html" />
-  <meta name="theme-color" content="#2E6F5E" />
-  <link rel="stylesheet" href="/classroom-teacher-tools.css" />
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"LearningResource",
-    "name":"Για την τάξη | Classroom View",
-    "inLanguage":["el","en"],
-    "isAccessibleForFree":true,
-    "educationalUse":"classroom activity planning",
-    "audience":{"@type":"EducationalAudience","educationalRole":"teacher"},
-    "url":"https://www.aitools4kids.gr/classroom.html"
-  }
-  </script>
-  <style>
-    :root{--ink:#1f2430;--muted:#5a6270;--bg:#fafaf8;--surface:#fff;--border:#e4e6ea;--green:#2e6f5e;--green2:#24594c;--blue:#3b82c4;--purple:#7c5cbf;--amber:#8a5b00;--soft:#eef7f3;--soft-blue:#eef5fb;--warn:#fff8e8;--shadow:0 8px 26px rgba(31,36,48,.08)}
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
-    a{color:#1f638e} button,select{font:inherit}
-    .top{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
-    .top__in{max-width:1080px;margin:auto;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{font-weight:800;text-decoration:none;color:var(--ink)}
-    .top-actions{display:flex;gap:8px;align-items:center}.small-btn{border:1px solid var(--border);background:#fff;border-radius:9px;padding:7px 10px;cursor:pointer;font-weight:750;color:var(--ink);text-decoration:none}.small-btn.active{background:var(--green);border-color:var(--green);color:#fff}
-    .wrap{max-width:1080px;margin:auto;padding:30px 18px 64px}
-    .hero{background:linear-gradient(135deg,#eaf6f0,#edf4fb 58%,#f4effc);border:1px solid #dfe9e4;border-radius:22px;padding:28px;margin-bottom:20px}
-    .kicker{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;font-weight:800;color:var(--green)}
-    h1{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.12;margin:7px 0 12px}.lead{max-width:850px;color:var(--muted);font-size:1.04rem;margin:0}
-    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.hero-badge{background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.95);border-radius:999px;padding:7px 11px;font-size:.84rem;font-weight:750}
-    .privacy-note{margin:17px 0 0;background:#fff;border:1px solid #cfe4da;border-radius:13px;padding:13px 15px;color:#31564a}
-    .panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:20px;margin-top:18px}.panel h2{font-size:1.25rem;margin:0 0 13px}
-    .zone-tabs{display:flex;gap:8px;flex-wrap:wrap}.tab{border:1px solid var(--border);background:#fff;border-radius:999px;padding:9px 14px;cursor:pointer;font-weight:750;color:var(--ink)}.tab.active{background:var(--green);border-color:var(--green);color:#fff}.tab[data-zone="middle"].active{background:var(--blue);border-color:var(--blue)}.tab[data-zone="high"].active{background:var(--purple);border-color:var(--purple)}
-    .filters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px}label{font-size:.85rem;font-weight:800;color:var(--muted);display:block;margin-bottom:5px}select{width:100%;border:1px solid var(--border);border-radius:11px;background:#fff;padding:11px 12px;color:var(--ink)}
-    .hint{font-size:.88rem;color:var(--muted);margin:12px 0 0}.warning{background:var(--warn);border:1px solid #ead7a3;border-radius:13px;padding:13px 15px;color:#5b4719;margin-top:14px}.warning.verified{background:var(--soft);border-color:#cfe4da;color:#31564a}.warning strong{display:block;margin-bottom:3px}
-    .workspace{display:none}.workspace.visible{display:block}.workspace-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}.workspace h2{font-size:1.45rem;margin:0}.subline{color:var(--muted);margin-top:4px}
-    .badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:800;border:1px solid}.badge.strong{background:#eaf7ef;color:#256342;border-color:#b8dec8}.badge.related{background:#eef5fb;color:#245f8e;border-color:#c3dced}.badge.anchor{background:#f4f1fb;color:#5d4891;border-color:#d7ccef}.badge.pending{background:#fff7e6;color:#7a5600;border-color:#ead19a}
-    .source-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.source-link{display:inline-block;border:1px solid #cfdce5;background:#fff;border-radius:9px;padding:8px 10px;text-decoration:none;font-size:.88rem;font-weight:700}
-    .pack{margin-top:18px}.pack-title{display:flex;align-items:center;gap:10px;margin-bottom:11px}.pack-title span{display:inline-grid;place-items:center;width:29px;height:29px;border-radius:9px;background:var(--soft);font-weight:850;color:var(--green2)}
-    .step{border:1px solid var(--border);border-radius:15px;padding:16px;margin:10px 0;background:#fff}.step h3{margin:0 0 7px;font-size:1.02rem}.step p{margin:6px 0}.step ul{margin:8px 0 0;padding-left:20px}.step li{margin:5px 0}
-    .prompt-box{margin-top:10px;background:#f7f8fa;border:1px solid var(--border);border-radius:12px;padding:13px;white-space:pre-wrap;font-size:.94rem}.prompt-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
-    .action-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.btn{border:0;background:var(--green);color:#fff;border-radius:11px;padding:11px 14px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.btn:hover{background:var(--green2)}.btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--border)}.btn.secondary:hover{background:#f7f8fa}.btn:focus-visible,.small-btn:focus-visible,.tab:focus-visible,select:focus-visible{outline:3px solid rgba(59,130,196,.35);outline-offset:2px}
-    .status{min-height:1.4em;margin-top:8px;font-size:.86rem;color:var(--green2)}
-    .principles{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.principle{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px}.principle strong{display:block;margin-bottom:4px}
-    footer{margin-top:30px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:.9rem}
-    @media(max-width:820px){.filters,.principles{grid-template-columns:1fr}.wrap{padding:20px 14px 52px}.hero{padding:21px 18px}.panel{padding:16px}.top__in{padding:11px 14px}.brand{font-size:.92rem}.top-actions .home-link{display:none}.tab{padding:8px 11px}}
-    @media print{.top,.hero,.picker-panel,.action-row,.prompt-actions,.principles,footer{display:none!important}body{background:#fff}.wrap{max-width:none;padding:0}.panel.workspace{display:block!important;border:0;box-shadow:none;padding:0}.step{break-inside:avoid}.source-link{color:#000;text-decoration:none}.warning{break-inside:avoid}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Γρήγορη δραστηριότητα τάξης | AI Tools for Kids</title>
+<meta name="description" content="Απλή δραστηριότητα τάξης τριών βημάτων: πρώτα σκέψη, μετά μία καθοδηγούμενη χρήση AI και τέλος έλεγχος κατανόησης.">
+<link rel="canonical" href="https://www.aitools4kids.gr/classroom.html">
+<style>
+:root{--ink:#18202b;--muted:#667085;--green:#2e6f5e;--green2:#24594c;--soft:#eef7f3;--blue:#eef6fc;--border:#dfe4ea;--bg:#fbfbf8;--shadow:0 8px 24px rgba(31,36,48,.06)}*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}a{color:#17618d}button,select{font:inherit}.top{background:#fff;border-bottom:1px solid var(--border)}.topin{max-width:1040px;margin:auto;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:850;text-decoration:none;color:var(--ink)}.toplinks{display:flex;gap:8px;flex-wrap:wrap}.toplinks a{border:1px solid var(--border);border-radius:9px;padding:7px 10px;text-decoration:none;font-weight:750;color:var(--ink);background:#fff}.wrap{max-width:1040px;margin:auto;padding:28px 18px 60px}.hero{background:linear-gradient(135deg,#eaf6f0,#edf4fb 62%,#f5f0fc);border:1px solid #dfe9e4;border-radius:22px;padding:25px}.eyebrow{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;font-weight:850;color:var(--green)}h1{font-size:clamp(1.8rem,4vw,2.5rem);margin:6px 0 8px}.lead{margin:0;color:var(--muted);max-width:800px}.choice{display:grid;grid-template-columns:1.25fr .75fr;gap:12px;margin-top:17px}.choice-card{border:1px solid var(--border);border-radius:15px;background:#fff;padding:16px}.choice-card.primary{background:var(--soft);border-color:#c9e2d8}.choice-card strong{display:block;font-size:1.05rem;margin-bottom:4px}.choice-card p{margin:0 0 11px;color:var(--muted);font-size:.9rem}.cta{display:inline-block;text-decoration:none;border-radius:10px;padding:10px 13px;font-weight:850;background:var(--green);color:#fff}.cta.secondary{background:#fff;color:var(--ink);border:1px solid var(--border)}.panel{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:19px;margin-top:18px}.panel h2{margin:0 0 5px;font-size:1.3rem}.sub{margin:0;color:var(--muted)}.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:15px}.field label{display:block;font-size:.83rem;font-weight:850;margin-bottom:5px}.field select{width:100%;border:1px solid var(--border);border-radius:10px;background:#fff;padding:11px}.note{margin-top:12px;border-radius:11px;background:#f5f8fb;border:1px solid #d8e2ec;padding:11px 13px;font-size:.85rem;color:#475467}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.step{border:1px solid var(--border);border-radius:15px;padding:16px;background:#fff}.step-no{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:var(--soft);color:var(--green2);font-weight:900}.step h3{font-size:1rem;margin:9px 0 6px}.step p{margin:0;color:#384250}.prompt{margin-top:9px;padding:11px;border-radius:10px;background:#f7f8fa;border:1px solid var(--border);white-space:pre-wrap;font-size:.9rem}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:850;cursor:pointer;background:var(--green);color:#fff}.btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--border)}.status{min-height:1.3em;margin-top:7px;font-size:.85rem;color:var(--green2)}footer{margin-top:25px;color:var(--muted);font-size:.85rem}@media(max-width:800px){.choice{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}}@media(max-width:520px){.filters{grid-template-columns:1fr}.wrap{padding:18px 12px 45px}.hero,.panel{padding:16px}}@media print{.top,.hero,.filters,.note,.actions,footer{display:none!important}.panel{border:0;box-shadow:none;padding:0}.steps{grid-template-columns:1fr}.step{break-inside:avoid}}
+</style>
+<script src="/quiz-data.js"></script>
+<script src="/learning-paths-data.js"></script>
+<script src="/curriculum-2026-2027-expansion.js"></script>
+<script src="/official-curriculum-data.js"></script>
+<script src="/gel-2026-2027-update.js"></script>
 </head>
 <body>
-<header class="top">
-  <div class="top__in">
-    <a class="brand" href="/">🤖 AI Tools for Kids</a>
-    <div class="top-actions">
-      <a class="small-btn home-link" href="/xartis-ylis.html" data-el="Χάρτης Ύλης" data-en="Curriculum Map">Χάρτης Ύλης</a>
-      <button class="small-btn active" id="langEl" type="button" aria-pressed="true">ΕΛ</button>
-      <button class="small-btn" id="langEn" type="button" aria-pressed="false">EN</button>
-    </div>
-  </div>
-</header>
+<header class="top"><div class="topin"><a class="brand" href="/">🤖 AI Tools for Kids</a><div class="toplinks"><a href="/teacher-assistant.html">AI Βοηθός Εκπαιδευτικού</a><a href="/xartis-ylis.html">Χάρτης Ύλης</a></div></div></header>
 <main class="wrap">
-  <section class="hero">
-    <div class="kicker" data-el="Για εκπαιδευτικούς" data-en="For educators">Για εκπαιδευτικούς</div>
-    <h1 data-el="Για την τάξη" data-en="Classroom View">Για την τάξη</h1>
-    <p class="lead" data-el="Διάλεξε βαθμίδα, μάθημα και ένα ήδη χαρτογραφημένο θέμα. Θα πάρεις μια μικρή δραστηριότητα τριών βημάτων: πρώτα σκέψη χωρίς AI, μετά καθοδηγούμενη χρήση και στο τέλος έλεγχο κατανόησης." data-en="Choose a school level, subject and an already mapped topic. You will get a short three-step activity: thinking without AI first, then guided AI use, then an understanding check.">Διάλεξε βαθμίδα, μάθημα και ένα ήδη χαρτογραφημένο θέμα. Θα πάρεις μια μικρή δραστηριότητα τριών βημάτων: πρώτα σκέψη χωρίς AI, μετά καθοδηγούμενη χρήση και στο τέλος έλεγχο κατανόησης.</p>
-    <div class="hero-badges">
-      <span class="hero-badge" data-el="Χωρίς λογαριασμό" data-en="No account">Χωρίς λογαριασμό</span>
-      <span class="hero-badge" data-el="Χωρίς μαθητικά προφίλ" data-en="No student profiles">Χωρίς μαθητικά προφίλ</span>
-      <span class="hero-badge" data-el="Χωρίς αποθήκευση αποτελεσμάτων" data-en="No result storage">Χωρίς αποθήκευση αποτελεσμάτων</span>
-      <span class="hero-badge" data-el="Εκτύπωση / PDF από τον browser" data-en="Print / browser PDF">Εκτύπωση / PDF από τον browser</span>
-    </div>
-    <div class="privacy-note" data-el="Η σελίδα δεν δημιουργεί τάξη, κωδικό μαθητή ή dashboard. Οι επιλογές βαθμίδας/μαθήματος/θέματος μπορούν να μπουν μόνο στο URL ώστε να μοιραστεί η ίδια δραστηριότητα: χωρίς ονόματα ή αποτελέσματα μαθητών." data-en="This page does not create a class, student code or dashboard. Level/subject/topic choices may appear only in the URL so the same activity can be shared: without student names or results.">Η σελίδα δεν δημιουργεί τάξη, κωδικό μαθητή ή dashboard. Οι επιλογές βαθμίδας/μαθήματος/θέματος μπορούν να μπουν μόνο στο URL ώστε να μοιραστεί η ίδια δραστηριότητα: χωρίς ονόματα ή αποτελέσματα μαθητών.</div>
-  </section>
-
-
-  <section class="teacher-tools" id="teacherTools" aria-labelledby="teacherToolsTitle">
-    <div class="teacher-tools__head">
-      <p class="teacher-tools__eyebrow" data-el="AI navigator για εκπαιδευτικούς" data-en="AI navigator for educators">AI navigator για εκπαιδευτικούς</p>
-      <h2 id="teacherToolsTitle" data-el="Τι θέλεις να κάνεις σήμερα;" data-en="What do you need to do today?">Τι θέλεις να κάνεις σήμερα;</h2>
-      <p data-el="Για κάθε δουλειά προτείνουμε το πιο κατάλληλο σημείο εκκίνησης. Όπου ο δικός μας AI Βοηθός αρκεί, ανοίγει ήδη ρυθμισμένος για τη συγκεκριμένη εργασία. Όπου ένα εξειδικευμένο εργαλείο είναι καλύτερο, το δείχνουμε καθαρά." data-en="For each job we suggest the best starting point. When our AI Teacher Assistant is enough, it opens already configured for that task. When a specialist tool is a better fit, we say so clearly.">Για κάθε δουλειά προτείνουμε το πιο κατάλληλο σημείο εκκίνησης. Όπου ο δικός μας AI Βοηθός αρκεί, ανοίγει ήδη ρυθμισμένος για τη συγκεκριμένη εργασία. Όπου ένα εξειδικευμένο εργαλείο είναι καλύτερο, το δείχνουμε καθαρά.</p>
-    </div>
-    <div class="teacher-tools__grid">
-      <article class="teacher-tool-card">
-        <div class="teacher-tool-card__icon" aria-hidden="true">🧩</div>
-        <h3 data-el="Δραστηριότητα μαθήματος" data-en="Classroom activity">Δραστηριότητα μαθήματος</h3>
-        <span class="teacher-tool-card__pick" data-el="Καλύτερη αρχή: Για την τάξη" data-en="Best start: Classroom View">Καλύτερη αρχή: Για την τάξη</span>
-        <p data-el="Βαθμίδα, μάθημα και θέμα → learning-first δραστηριότητα 3 βημάτων με έλεγχο κατανόησης." data-en="Level, subject and topic → a learning-first 3-step activity with an understanding check.">Βαθμίδα, μάθημα και θέμα → learning-first δραστηριότητα 3 βημάτων με έλεγχο κατανόησης.</p>
-        <div class="teacher-tool-card__actions"><a class="primary" href="#pickerTitle" data-el="Φτιάξε δραστηριότητα" data-en="Build activity">Φτιάξε δραστηριότητα</a><a href="/teacher-assistant.html?task=activity" data-el="Με AI Βοηθό" data-en="With AI Assistant">Με AI Βοηθό</a></div>
-      </article>
-
-      <article class="teacher-tool-card">
-        <div class="teacher-tool-card__icon" aria-hidden="true">❓</div>
-        <h3 data-el="Ερωτήσεις / mini quiz" data-en="Questions / mini quiz">Ερωτήσεις / mini quiz</h3>
-        <span class="teacher-tool-card__pick" data-el="Πρόταση: AI Βοηθός μας" data-en="Recommended: our AI Assistant">Πρόταση: AI Βοηθός μας</span>
-        <p data-el="Φτιάξε σύντομες ερωτήσεις και ξεχωριστό κλειδί απαντήσεων, προσαρμοσμένα στην τάξη και στο θέμα." data-en="Create short questions plus a separate answer key adapted to the grade and topic.">Φτιάξε σύντομες ερωτήσεις και ξεχωριστό κλειδί απαντήσεων, προσαρμοσμένα στην τάξη και στο θέμα.</p>
-        <div class="teacher-tool-card__actions"><a class="primary" href="/teacher-assistant.html?task=questions" data-el="Φτιάξε ερωτήσεις" data-en="Create questions">Φτιάξε ερωτήσεις</a><a target="_blank" rel="noopener noreferrer" href="https://www.magicschool.ai/magic-tools" data-el="MagicSchool ↗" data-en="MagicSchool ↗">MagicSchool ↗</a></div>
-      </article>
-
-      <article class="teacher-tool-card">
-        <div class="teacher-tool-card__icon" aria-hidden="true">📊</div>
-        <h3 data-el="Rubric αξιολόγησης" data-en="Assessment rubric">Rubric αξιολόγησης</h3>
-        <span class="teacher-tool-card__pick" data-el="Δύο καλές επιλογές" data-en="Two good options">Δύο καλές επιλογές</span>
-        <p data-el="Ο δικός μας βοηθός δίνει γρήγορο πρώτο σχέδιο. Το MagicSchool έχει εξειδικευμένο Rubric Generator." data-en="Our assistant gives a quick first draft. MagicSchool has a dedicated Rubric Generator.">Ο δικός μας βοηθός δίνει γρήγορο πρώτο σχέδιο. Το MagicSchool έχει εξειδικευμένο Rubric Generator.</p>
-        <div class="teacher-tool-card__actions"><a class="primary" href="/teacher-assistant.html?task=rubric" data-el="Φτιάξε rubric" data-en="Create rubric">Φτιάξε rubric</a><a target="_blank" rel="noopener noreferrer" href="https://www.magicschool.ai/tools/rubric-generator" data-el="Rubric Generator ↗" data-en="Rubric Generator ↗">Rubric Generator ↗</a></div>
-      </article>
-
-      <article class="teacher-tool-card">
-        <div class="teacher-tool-card__icon" aria-hidden="true">📋</div>
-        <h3 data-el="Καρτέλα παρατήρησης" data-en="Observation template">Καρτέλα παρατήρησης</h3>
-        <span class="teacher-tool-card__pick" data-el="Πρόταση: κενό πρότυπο" data-en="Recommended: blank template">Πρόταση: κενό πρότυπο</span>
-        <p data-el="Ο AI Βοηθός φτιάχνει μόνο τη δομή της καρτέλας. Τα στοιχεία του μαθητή συμπληρώνονται από εσένα εκτός AI." data-en="The AI Assistant creates only the structure. Student details are completed by you outside the AI.">Ο AI Βοηθός φτιάχνει μόνο τη δομή της καρτέλας. Τα στοιχεία του μαθητή συμπληρώνονται από εσένα εκτός AI.</p>
-        <div class="teacher-tool-card__actions"><a class="primary" href="/teacher-assistant.html?task=observation" data-el="Φτιάξε κενή καρτέλα" data-en="Create blank template">Φτιάξε κενή καρτέλα</a><a target="_blank" rel="noopener noreferrer" href="https://www.magicschool.ai/tools/report-card-comments" data-el="Σχόλια αναφοράς ↗" data-en="Report comments ↗">Σχόλια αναφοράς ↗</a></div>
-      </article>
-
-      <article class="teacher-tool-card">
-        <div class="teacher-tool-card__icon" aria-hidden="true">🪜</div>
-        <h3 data-el="Διαφοροποίηση υλικού" data-en="Differentiate material">Διαφοροποίηση υλικού</h3>
-        <span class="teacher-tool-card__pick" data-el="AI Βοηθός ή Brisk" data-en="AI Assistant or Brisk">AI Βοηθός ή Brisk</span>
-        <p data-el="Φτιάξε έκδοση υποστήριξης, βασική και επέκτασης. Για αλλαγή επιπέδου/γλώσσας σε υπάρχον υλικό, το Brisk είναι πιο εξειδικευμένο." data-en="Create support, core and extension versions. For changing level/language in existing material, Brisk is more specialised.">Φτιάξε έκδοση υποστήριξης, βασική και επέκτασης. Για αλλαγή επιπέδου/γλώσσας σε υπάρχον υλικό, το Brisk είναι πιο εξειδικευμένο.</p>
-        <div class="teacher-tool-card__actions"><a class="primary" href="/teacher-assistant.html?task=differentiate" data-el="Διαφοροποίησέ το" data-en="Differentiate it">Διαφοροποίησέ το</a><a target="_blank" rel="noopener noreferrer" href="https://www.briskteaching.com/solutions/teachers" data-el="Brisk ↗" data-en="Brisk ↗">Brisk ↗</a></div>
-      </article>
-
-      <article class="teacher-tool-card teacher-tool-card--external">
-        <div class="teacher-tool-card__icon" aria-hidden="true">💬</div>
-        <h3 data-el="Feedback σε πραγματική εργασία" data-en="Feedback on real student work">Feedback σε πραγματική εργασία</h3>
-        <span class="teacher-tool-card__pick" data-el="Καλύτερη επιλογή: Brisk" data-en="Best fit: Brisk">Καλύτερη επιλογή: Brisk</span>
-        <p data-el="Για feedback μέσα σε έγγραφα και teacher review πριν δημοσιευτεί, προτείνουμε το εξειδικευμένο Brisk. Στον δικό μας βοηθό χρησιμοποίησε μόνο ανώνυμο απόσπασμα." data-en="For document-based feedback with teacher review before posting, we recommend Brisk. In our assistant, use anonymised excerpts only.">Για feedback μέσα σε έγγραφα και teacher review πριν δημοσιευτεί, προτείνουμε το εξειδικευμένο Brisk. Στον δικό μας βοηθό χρησιμοποίησε μόνο ανώνυμο απόσπασμα.</p>
-        <div class="teacher-tool-card__actions"><a class="primary" target="_blank" rel="noopener noreferrer" href="https://www.briskteaching.com/give-feedback" data-el="Άνοιξε Brisk ↗" data-en="Open Brisk ↗">Άνοιξε Brisk ↗</a><a href="/teacher-assistant.html?task=feedback" data-el="Ανώνυμο απόσπασμα" data-en="Anonymised excerpt">Ανώνυμο απόσπασμα</a></div>
-      </article>
-    </div>
-    <div class="teacher-tools__privacy"><strong data-el="Κανόνας ιδιωτικότητας:" data-en="Privacy rule:">Κανόνας ιδιωτικότητας:</strong> <span data-el="μην εισάγεις ονοματεπώνυμα, στοιχεία επικοινωνίας, διαγνώσεις ή άλλα προσωπικά/ευαίσθητα δεδομένα μαθητών σε AI εργαλείο. Για καρτέλες δημιουργούμε κενό πρότυπο. Για feedback χρησιμοποιούμε ανώνυμο απόσπασμα." data-en="do not enter student names, contact details, diagnoses or other personal/sensitive data into an AI tool. For observation records we create a blank template. For feedback use an anonymised excerpt.">μην εισάγεις ονοματεπώνυμα, στοιχεία επικοινωνίας, διαγνώσεις ή άλλα προσωπικά/ευαίσθητα δεδομένα μαθητών σε AI εργαλείο. Για καρτέλες δημιουργούμε κενό πρότυπο. Για feedback χρησιμοποιούμε ανώνυμο απόσπασμα.</span></div>
-  </section>
-
-  <section class="panel picker-panel" aria-labelledby="pickerTitle">
-    <h2 id="pickerTitle" data-el="Φτιάξε μια δραστηριότητα" data-en="Build an activity">Φτιάξε μια δραστηριότητα</h2>
-    <div class="zone-tabs" role="group" aria-label="School level">
-      <button class="tab active" type="button" data-zone="primary" aria-pressed="true" data-el="Δημοτικό" data-en="Primary">Δημοτικό</button>
-      <button class="tab" type="button" data-zone="middle" aria-pressed="false" data-el="Γυμνάσιο" data-en="Middle School">Γυμνάσιο</button>
-      <button class="tab" type="button" data-zone="high" aria-pressed="false" data-el="Λύκειο" data-en="High School">Λύκειο</button>
-    </div>
-    <div class="filters">
-      <div><label for="subject" data-el="Μάθημα" data-en="Subject">Μάθημα</label><select id="subject"></select></div>
-      <div><label for="course" data-el="Τάξη / διαθέσιμο quiz" data-en="Grade / available quiz">Τάξη / διαθέσιμο quiz</label><select id="course"></select></div>
-      <div><label for="topic" data-el="Θέμα εξάσκησης" data-en="Practice topic">Θέμα εξάσκησης</label><select id="topic"></select></div>
-    </div>
-    <p class="hint" data-el="Τα θέματα προέρχονται από τα υπάρχοντα gap tags του site. Το status δίπλα στη δραστηριότητα ξεχωρίζει ρητά την ακριβή επίσημη αντιστοίχιση από ένα topic anchor." data-en="Topics come from the site's existing gap tags. The status shown with the activity explicitly distinguishes exact official mapping from a topic anchor.">Τα θέματα προέρχονται από τα υπάρχοντα gap tags του site. Το status δίπλα στη δραστηριότητα ξεχωρίζει ρητά την ακριβή επίσημη αντιστοίχιση από ένα topic anchor.</p>
-  </section>
-
-  <section class="panel workspace" id="workspace" aria-live="polite">
-    <div class="workspace-head">
-      <div>
-        <div class="kicker" id="zoneLabel"></div>
-        <h2 id="courseTitle"></h2>
-        <div class="subline" id="topicTitle"></div>
-      </div>
-      <span class="badge" id="coverageBadge"></span>
-    </div>
-    <div class="warning" id="annualWarning" hidden></div>
-    <div class="source-row" id="sourceRow"></div>
-
-    <div class="pack">
-      <div class="pack-title"><span>1</span><strong data-el="Πρώτη σκέψη: χωρίς AI" data-en="First thinking: no AI">Πρώτη σκέψη: χωρίς AI</strong></div>
-      <div class="step">
-        <h3 id="noAiHeading"></h3>
-        <p id="noAiText"></p>
-        <ul id="noAiList"></ul>
-      </div>
-
-      <div class="pack-title"><span>2</span><strong data-el="Καθοδηγούμενη χρήση AI" data-en="Guided AI use">Καθοδηγούμενη χρήση AI</strong></div>
-      <div class="step">
-        <h3 data-el="Το AI δουλεύει πάνω στην προσπάθεια του μαθητή" data-en="AI works from the student's own attempt">Το AI δουλεύει πάνω στην προσπάθεια του μαθητή</h3>
-        <p data-el="Ζήτησε πρώτα από τον μαθητή να γράψει ή να πει τη δική του προσπάθεια. Μετά μπορεί να χρησιμοποιήσει το παρακάτω prompt σε κατάλληλο εργαλείο, σύμφωνα με τους όρους ηλικίας του παρόχου." data-en="Ask the student to write or say their own attempt first. Then they may use the prompt below in an age-appropriate tool, subject to the provider's age terms.">Ζήτησε πρώτα από τον μαθητή να γράψει ή να πει τη δική του προσπάθεια. Μετά μπορεί να χρησιμοποιήσει το παρακάτω prompt σε κατάλληλο εργαλείο, σύμφωνα με τους όρους ηλικίας του παρόχου.</p>
-        <div class="prompt-box" id="promptBox"></div>
-        <div class="prompt-actions"><button class="btn secondary" id="copyPrompt" type="button" data-el="Αντιγραφή prompt" data-en="Copy prompt">Αντιγραφή prompt</button></div>
-      </div>
-
-      <div class="pack-title"><span>3</span><strong data-el="Έλεγχος κατανόησης" data-en="Understanding check">Έλεγχος κατανόησης</strong></div>
-      <div class="step">
-        <h3 data-el="Πριν θεωρηθεί ολοκληρωμένη η δραστηριότητα" data-en="Before the activity is considered complete">Πριν θεωρηθεί ολοκληρωμένη η δραστηριότητα</h3>
-        <ul id="checkList"></ul>
-      </div>
-    </div>
-
-    <div class="action-row">
-      <button class="btn" id="copyLink" type="button" data-el="Αντιγραφή συνδέσμου δραστηριότητας" data-en="Copy activity link">Αντιγραφή συνδέσμου δραστηριότητας</button>
-      <button class="btn secondary" id="printPack" type="button" data-el="Εκτύπωση / PDF" data-en="Print / PDF">Εκτύπωση / PDF</button>
-      <a class="btn secondary" id="practiceLink" href="/primary/guardian/quiz" data-el="Άνοιξε τον Χάρτη Εξάσκησης" data-en="Open Practice Map">Άνοιξε τον Χάρτη Εξάσκησης</a>
-      <a class="btn secondary" href="/xartis-ylis.html" data-el="Δες τον Χάρτη Ύλης" data-en="Open Curriculum Map">Δες τον Χάρτη Ύλης</a>
-    </div>
-    <div class="status" id="status" role="status" aria-live="polite"></div>
-  </section>
-
-  <section class="principles" aria-label="Classroom principles">
-    <div class="principle"><strong data-el="Δεν είναι Class Mode" data-en="Not a Class Mode">Δεν είναι Class Mode</strong><span data-el="Δεν υπάρχουν rooms, student IDs, submissions ή aggregate progress." data-en="There are no rooms, student IDs, submissions or aggregate progress.">Δεν υπάρχουν rooms, student IDs, submissions ή aggregate progress.</span></div>
-    <div class="principle"><strong data-el="Δεν βαφτίζει topic anchor ως ύλη" data-en="Does not relabel topic anchors as syllabus">Δεν βαφτίζει topic anchor ως ύλη</strong><span data-el="Η ισχύς της πηγής εμφανίζεται όπως είναι καταχωρισμένη στο official curriculum layer." data-en="Source strength is shown exactly as recorded in the official curriculum layer.">Η ισχύς της πηγής εμφανίζεται όπως είναι καταχωρισμένη στο official curriculum layer.</span></div>
-    <div class="principle"><strong data-el="Πρώτα προσπάθεια, μετά AI" data-en="Attempt first, AI second">Πρώτα προσπάθεια, μετά AI</strong><span data-el="Η δραστηριότητα κρατά τη learning-first λογική του site και τελειώνει με έλεγχο πραγματικής κατανόησης." data-en="The activity keeps the site's learning-first logic and ends with an actual understanding check.">Η δραστηριότητα κρατά τη learning-first λογική του site και τελειώνει με έλεγχο πραγματικής κατανόησης.</span></div>
-  </section>
-
-  <footer><span data-el="Ανεξάρτητο εκπαιδευτικό έργο. Δεν αποτελεί επίσημο προϊόν του Υπουργείου Παιδείας ή του ΙΕΠ." data-en="Independent educational project. Not an official product of the Greek Ministry of Education or IEP.">Ανεξάρτητο εκπαιδευτικό έργο. Δεν αποτελεί επίσημο προϊόν του Υπουργείου Παιδείας ή του ΙΕΠ.</span></footer>
+<section class="hero"><div class="eyebrow">Για εκπαιδευτικούς</div><h1>Για την τάξη</h1><p class="lead">Δύο απλές επιλογές. Για ολοκληρωμένο υλικό χρησιμοποίησε τον AI Βοηθό. Εδώ μένει μόνο η γρήγορη δραστηριότητα τριών βημάτων για άμεση χρήση μέσα στην τάξη.</p><div class="choice"><div class="choice-card primary"><strong>✨ Θέλω να ετοιμάσω εκπαιδευτικό υλικό</strong><p>Σχέδιο μαθήματος, φύλλο εργασίας, quiz, διαφοροποίηση ή δραστηριότητα με τάξη, μάθημα και χαρτογραφημένη ύλη.</p><a class="cta" href="/teacher-assistant.html">Άνοιξε τον AI Βοηθό</a></div><div class="choice-card"><strong>⚡ Θέλω κάτι γρήγορο για τώρα</strong><p>Διάλεξε θέμα και πάρε μια δραστηριότητα: προσπάθεια → μία υπόδειξη AI → έλεγχος κατανόησης.</p><a class="cta secondary" href="#quick">Φτιάξε δραστηριότητα</a></div></div></section>
+<section class="panel" id="quick"><h2>Γρήγορη δραστηριότητα 3 βημάτων</h2><p class="sub">Χωρίς λογαριασμούς μαθητών και χωρίς αποθήκευση αποτελεσμάτων.</p><div class="filters"><div class="field"><label>Βαθμίδα</label><select id="zone"></select></div><div class="field"><label>Τάξη</label><select id="grade"></select></div><div class="field"><label>Μάθημα</label><select id="subject"></select></div><div class="field"><label>Θέμα / ενότητα</label><select id="topic"></select></div></div><div class="note" id="note">Οι επιλογές προέρχονται από τη διαθέσιμη χαρτογράφηση του site. Όπου ένα θέμα είναι topic anchor και όχι επίσημος τίτλος κεφαλαίου, δεν το παρουσιάζουμε ως επίσημη ύλη.</div><div class="steps"><article class="step"><div class="step-no">1</div><h3>Πρώτα χωρίς AI</h3><p id="step1"></p></article><article class="step"><div class="step-no">2</div><h3>Μία καθοδηγούμενη υπόδειξη</h3><p>Χρησιμοποίησε το AI μόνο πάνω στην πρώτη προσπάθεια.</p><div class="prompt" id="prompt"></div></article><article class="step"><div class="step-no">3</div><h3>Έλεγχος κατανόησης</h3><p id="step3"></p></article></div><div class="actions"><button class="btn" id="copyPrompt">Αντιγραφή prompt</button><button class="btn secondary" id="printBtn">Εκτύπωση / PDF</button><a class="cta secondary" href="/teacher-assistant.html">Χρειάζεσαι πλήρες υλικό;</a></div><div class="status" id="status"></div></section>
+<footer>Ανεξάρτητο εκπαιδευτικό έργο. Δεν αποτελεί επίσημο προϊόν του Υπουργείου Παιδείας ή του ΙΕΠ.</footer>
 </main>
-<script src="/official-curriculum-data.js"></script>
-<script src="/official-annual-instructions-2026-2027.js"></script>
 <script>
 (function(){
-  'use strict';
-  var layer=window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
-  var annualLayer=window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027;
-  var workspace=document.getElementById('workspace');
-  if(!layer){ workspace.classList.add('visible'); workspace.textContent='Το curriculum layer δεν μπόρεσε να φορτωθεί.'; return; }
-
-  var params=new URLSearchParams(location.search);
-  var lang=params.get('lang')==='en'?'en':'el';
-  var zone=['primary','middle','high'].includes(params.get('zone'))?params.get('zone'):'primary';
-  var entries=Object.values(layer.byQuiz||{});
-  var gapPairs=Object.entries(layer.gapAlignment||{});
-  var subjectSelect=document.getElementById('subject');
-  var courseSelect=document.getElementById('course');
-  var topicSelect=document.getElementById('topic');
-  var routeByZone={primary:'/primary/guardian/quiz',middle:'/middle/guardian/quiz',high:'/high/guardian/quiz'};
-  var zoneLabels={primary:{el:'Δημοτικό',en:'Primary'},middle:{el:'Γυμνάσιο',en:'Middle School'},high:{el:'Λύκειο',en:'High School'}};
-
-  function esc(s){return String(s==null?'':s).replace(/[&<>\"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c];});}
-  function local(el,en){return lang==='el'?(el||''):(en||el||'');}
-  function courseTitle(e){return local(e.quizTitleEl,e.quizTitleEn)||e.quizId;}
-  function subjectOf(e){return (courseTitle(e).split(',')[0]||courseTitle(e)).trim();}
-  function zoneEntries(){return entries.filter(function(e){return e.zone===zone;});}
-  function gapsFor(id){return gapPairs.filter(function(p){return p[1]&&p[1].sourceQuizId===id;});}
-  function topicTitle(pair){var a=pair&&pair[1]||{};return local(a.topicAnchorEl,a.topicAnchorEn)||pair[0];}
-  function badgeClass(status){status=status||'';if(status.indexOf('annual')>=0||status.indexOf('exact')>=0)return'strong';if(status.indexOf('related')>=0||status.indexOf('book-index')>=0)return'related';if(status.indexOf('anchor')>=0||status.indexOf('official-book')>=0||status.indexOf('catalog')>=0)return'anchor';return'pending';}
-  function currentEntry(){return layer.getByQuizId?layer.getByQuizId(courseSelect.value):layer.byQuiz[courseSelect.value];}
-  function currentGapPair(){return gapPairs.find(function(p){return p[0]===topicSelect.value;})||gapsFor(courseSelect.value)[0];}
-
-  function translateStatic(){
-    document.documentElement.lang=lang;
-    document.querySelectorAll('[data-el][data-en]').forEach(function(el){el.textContent=lang==='el'?el.getAttribute('data-el'):el.getAttribute('data-en');});
-    document.getElementById('langEl').classList.toggle('active',lang==='el');document.getElementById('langEn').classList.toggle('active',lang==='en');
-    document.getElementById('langEl').setAttribute('aria-pressed',String(lang==='el'));document.getElementById('langEn').setAttribute('aria-pressed',String(lang==='en'));
-    document.querySelectorAll('[data-zone]').forEach(function(b){b.textContent=lang==='el'?b.getAttribute('data-el'):b.getAttribute('data-en');});
-    populateSubjects(true);
-  }
-
-  function populateSubjects(keep){
-    var wanted=keep?subjectSelect.value:'';
-    var subjects=Array.from(new Set(zoneEntries().map(subjectOf))).filter(Boolean).sort(function(a,b){return a.localeCompare(b,lang==='el'?'el':'en');});
-    subjectSelect.innerHTML='';subjects.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;subjectSelect.appendChild(o);});
-    if(subjects.includes(wanted))subjectSelect.value=wanted;
-    populateCourses(keep);
-  }
-
-  function populateCourses(keep){
-    var wanted=keep?courseSelect.value:params.get('quiz');
-    var list=zoneEntries().filter(function(e){return subjectOf(e)===subjectSelect.value;});
-    courseSelect.innerHTML='';list.forEach(function(e){var o=document.createElement('option');o.value=e.quizId;o.textContent=courseTitle(e);courseSelect.appendChild(o);});
-    if(list.some(function(e){return e.quizId===wanted;}))courseSelect.value=wanted;
-    populateTopics(keep);
-  }
-
-  function populateTopics(keep){
-    var wanted=keep?topicSelect.value:params.get('topic');
-    var list=gapsFor(courseSelect.value);
-    topicSelect.innerHTML='';list.forEach(function(pair){var o=document.createElement('option');o.value=pair[0];o.textContent=topicTitle(pair);topicSelect.appendChild(o);});
-    if(list.some(function(p){return p[0]===wanted;}))topicSelect.value=wanted;
-    render();
-  }
-
-  function setZone(next){zone=next;document.querySelectorAll('[data-zone]').forEach(function(b){var active=b.getAttribute('data-zone')===zone;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});populateSubjects(false);}
-
-  function promptFor(topic,course){
-    if(lang==='el')return 'Είμαι μαθητής/μαθήτρια στο μάθημα «'+course+'» και δουλεύω το θέμα «'+topic+'».\n\nΗ δική μου πρώτη προσπάθεια είναι: [γράψε εδώ τι σκέφτηκες ή τι έκανες].\n\nΜην μου δώσεις έτοιμη τελική απάντηση. Κάνε μου μία ερώτηση τη φορά, εντόπισε το σημείο όπου μπερδεύομαι και δώσε μόνο μια μικρή υπόδειξη όταν τη χρειάζομαι. Στο τέλος ζήτησέ μου να εξηγήσω με δικά μου λόγια τι κατάλαβα.';
-    return 'I am a student working on “'+course+'” and the topic “'+topic+'”.\n\nMy own first attempt is: [write what you thought or tried here].\n\nDo not give me a finished answer. Ask one question at a time, identify where my reasoning gets stuck, and give only a small hint when needed. At the end, ask me to explain in my own words what I understood.';
-  }
-
-  function render(){
-    var e=currentEntry(), pair=currentGapPair();
-    if(!e||!pair){workspace.classList.remove('visible');return;}
-    workspace.classList.add('visible');
-    var a=pair[1]||{}, topic=topicTitle(pair), course=courseTitle(e);
-    document.getElementById('zoneLabel').textContent=zoneLabels[zone][lang];
-    document.getElementById('courseTitle').textContent=course;
-    document.getElementById('topicTitle').textContent=(lang==='el'?'Εστίαση: ':'Focus: ')+topic;
-    var badge=document.getElementById('coverageBadge');badge.className='badge '+badgeClass(a.status||e.coverageStatus);badge.textContent=local(a.statusLabelEl,a.statusLabelEn)||local(e.coverageLabelEl,e.coverageLabelEn)||a.status||e.coverageStatus||'–';
-
-    var annual=document.getElementById('annualWarning');
-    var annualInfo=annualLayer && annualLayer.resolve ? annualLayer.resolve(e) : null;
-    var annualStatus=(annualInfo && annualInfo.status) || e.annualInstructionsStatus || '';
-    annual.classList.remove('verified');
-    if(annualStatus==='official-annual-guidance-published'){
-      annual.hidden=false;annual.classList.add('verified');
-      annual.innerHTML='<strong>'+(lang==='el'?'Ετήσιες οδηγίες 2026–27 δημοσιευμένες':'Official 2026–27 guidance published')+'</strong>'+esc(local(annualInfo.noteEl,annualInfo.noteEn));
-    }else if(annualStatus.indexOf('direct-official-url-pending')>=0){
-      annual.hidden=false;
-      annual.innerHTML='<strong>'+(lang==='el'?'Ετήσια εγκύκλιος εντοπισμένη: τεκμηρίωση σε εξέλιξη':'Annual circular identified: documentation in progress')+'</strong>'+esc(local(annualInfo.noteEl,annualInfo.noteEn));
-    }else if(annualStatus.indexOf('not-indexed')>=0){
-      annual.hidden=false;annual.innerHTML='<strong>'+(lang==='el'?'Προσοχή στην ετήσια ύλη':'Annual-scope caution')+'</strong>'+esc(local(e.annualInstructionsNoteEl,e.annualInstructionsNoteEn)||(lang==='el'?'Η ετήσια οδηγία 2026–27 δεν έχει ακόμη κωδικοποιηθεί πλήρως για αυτό το μάθημα.':'The 2026–27 annual guidance has not yet been fully encoded for this subject.'));
-    }else annual.hidden=true;
-
-    var sources=[];
-    if(a.sourceUrl)sources.push('<a class="source-link" target="_blank" rel="noopener" href="'+esc(a.sourceUrl)+'">'+(lang==='el'?'Πηγή θέματος':'Topic source')+' ↗</a>');
-    if(e.officialBook&&e.officialBook.url)sources.push('<a class="source-link" target="_blank" rel="noopener" href="'+esc(e.officialBook.url)+'">'+(lang==='el'?'Επίσημο βιβλίο':'Official book')+' ↗</a>');
-    if(annualInfo&&annualInfo.sourceUrl)sources.push('<a class="source-link annual-source" target="_blank" rel="noopener" href="'+esc(annualInfo.sourceUrl)+'">'+esc(lang==='el'?(annualInfo.sourceLabelEl||'Ετήσιες οδηγίες 2026–27'):(annualInfo.sourceLabelEn||annualInfo.sourceLabelEl||'2026–27 annual guidance'))+' ↗</a>');
-    if(annualInfo&&annualInfo.discoverySourceUrl)sources.push('<a class="source-link discovery-source" target="_blank" rel="noopener" href="'+esc(annualInfo.discoverySourceUrl)+'">'+esc(lang==='el'?'Πηγή εντοπισμού εγκυκλίου (μη επίσημη)':'Circular discovery source (non-official)')+' ↗</a>');
-    document.getElementById('sourceRow').innerHTML=sources.join('');
-
-    document.getElementById('noAiHeading').textContent=(lang==='el'?'Διερεύνηση: ':'Explore: ')+topic;
-    document.getElementById('noAiText').textContent=lang==='el'?'Δώσε 3–5 λεπτά ατομικής προσπάθειας πριν ανοίξει οποιοδήποτε AI εργαλείο.':'Give students 3–5 minutes of individual thinking before any AI tool is opened.';
-    var noAi=lang==='el'?["Γράψε τι ήδη γνωρίζεις για το θέμα με 2–3 προτάσεις ή ένα μικρό παράδειγμα.","Σημείωσε ένα σημείο στο οποίο δεν είσαι βέβαιος/η.","Σύγκρινε την πρώτη σου σκέψη με έναν συμμαθητή χωρίς να ψάξετε ακόμη απάντηση online."]:["Write what you already know in 2–3 sentences or with a small example.","Mark one point you are not sure about.","Compare your first idea with a classmate before searching for an answer online."];
-    document.getElementById('noAiList').innerHTML=noAi.map(function(x){return'<li>'+esc(x)+'</li>';}).join('');
-    document.getElementById('promptBox').textContent=promptFor(topic,course);
-    var checks=lang==='el'?["Εξήγησε το θέμα με δικά σου λόγια χωρίς να κοιτάς την απάντηση του AI.","Δώσε ένα νέο παράδειγμα ή απάντησε σε μία παραλλαγή που δεν εμφανίστηκε στο AI.","Πες τι άλλαξε από την πρώτη σου προσπάθεια και ποια υπόδειξη σε βοήθησε."]:["Explain the topic in your own words without looking at the AI response.","Give a new example or answer a variation that did not appear in the AI exchange.","Say what changed from your first attempt and which hint helped you."];
-    document.getElementById('checkList').innerHTML=checks.map(function(x){return'<li>'+esc(x)+'</li>';}).join('');
-    document.getElementById('practiceLink').href=routeByZone[zone];
-    syncUrl();
-  }
-
-  function syncUrl(){var p=new URLSearchParams();p.set('zone',zone);if(courseSelect.value)p.set('quiz',courseSelect.value);if(topicSelect.value)p.set('topic',topicSelect.value);if(lang==='en')p.set('lang','en');history.replaceState(null,'',location.pathname+'?'+p.toString());}
-  async function copyText(text,ok){try{await navigator.clipboard.writeText(text);document.getElementById('status').textContent=ok;}catch(e){document.getElementById('status').textContent=lang==='el'?'Δεν ήταν δυνατή η αυτόματη αντιγραφή.':'Automatic copy was not available.';}}
-
-  document.getElementById('langEl').addEventListener('click',function(){lang='el';translateStatic();});
-  document.getElementById('langEn').addEventListener('click',function(){lang='en';translateStatic();});
-  document.querySelectorAll('[data-zone]').forEach(function(btn){btn.addEventListener('click',function(){setZone(btn.getAttribute('data-zone'));});});
-  subjectSelect.addEventListener('change',function(){populateCourses(false);});courseSelect.addEventListener('change',function(){populateTopics(false);});topicSelect.addEventListener('change',render);
-  document.getElementById('copyPrompt').addEventListener('click',function(){copyText(document.getElementById('promptBox').textContent,lang==='el'?'Το prompt αντιγράφηκε.':'Prompt copied.');});
-  document.getElementById('copyLink').addEventListener('click',function(){copyText(location.href,lang==='el'?'Ο σύνδεσμος της δραστηριότητας αντιγράφηκε.':'Activity link copied.');});
-  document.getElementById('printPack').addEventListener('click',function(){window.print();});
-
-  setZone(zone);translateStatic();
+const Z=[{id:'primary',label:'Δημοτικό',grades:[['a','Α΄ Δημοτικού'],['b','Β΄ Δημοτικού'],['c','Γ΄ Δημοτικού'],['d','Δ΄ Δημοτικού'],['e','Ε΄ Δημοτικού'],['st','ΣΤ΄ Δημοτικού']]},{id:'middle',label:'Γυμνάσιο',grades:[['a','Α΄ Γυμνασίου'],['b','Β΄ Γυμνασίου'],['c','Γ΄ Γυμνασίου']]},{id:'high',label:'Λύκειο',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']]}];const $=id=>document.getElementById(id),zone=$('zone'),grade=$('grade'),subject=$('subject'),topic=$('topic');
+function opts(el,arr){el.innerHTML='';arr.forEach(x=>{const o=document.createElement('option');if(Array.isArray(x)){o.value=x[0];o.textContent=x[1]}else{o.value=x.id||x.label;o.textContent=x.label}el.appendChild(o)});}
+function clean(s){return String(s||'').split(',')[0].trim()}
+function uniq(a){return [...new Set(a.filter(Boolean))]}
+function quizRows(z,g){if(typeof QUIZZES==='undefined'||!QUIZZES[z])return[];return Object.values(QUIZZES[z]).filter(q=>(q.grades||[]).includes(g)).map(q=>{const ids=[];(q.questions||[]).forEach(qu=>(qu.options||[]).forEach(o=>{if(o.gapTag&&!ids.includes(o.gapTag))ids.push(o.gapTag)}));const topics=ids.map(id=>{const a=window.AITOOLSKIDS_OFFICIAL_CURRICULUM?.getGapAlignment?.(id);return a?.officialSectionEl||a?.topicAnchorEl||(typeof GAP_TAGS!=='undefined'?GAP_TAGS[id]?.labelEl:null)||id});return{id:q.id,label:clean(q.subjectLabelEl),topics}})}
+function catalogRows(z,g){const c=window.AITOOLSKIDS_TUTOR_CATALOG;return(c?.getSubjects?.(z,g)||[]).map(s=>({id:s.id,label:clean(s.subjectLabelEl),topics:(s.topics||[]).map(t=>t.labelEl)}))}
+function rows(){const m=new Map();[...quizRows(zone.value,grade.value),...catalogRows(zone.value,grade.value)].forEach(s=>{const k=s.label.toLowerCase();if(!m.has(k))m.set(k,{id:s.id,label:s.label,topics:[]});m.get(k).topics=uniq([...m.get(k).topics,...s.topics])});return[...m.values()].sort((a,b)=>a.label.localeCompare(b.label,'el'))}
+function refreshZone(){opts(grade,Z.find(x=>x.id===zone.value).grades);refreshSubject()}
+function refreshSubject(){const r=rows();opts(subject,r.length?r:[{id:'general',label:'Γενικό μάθημα'}]);refreshTopic()}
+function refreshTopic(){const s=rows().find(x=>x.id===subject.value)||rows().find(x=>x.label===subject.options[subject.selectedIndex]?.textContent);const t=uniq(s?.topics||[]);opts(topic,(t.length?t:['Συγκεκριμένο θέμα που δουλεύετε τώρα']).map(x=>({id:x,label:x})));render()}
+function render(){const z=zone.options[zone.selectedIndex]?.textContent||'',g=grade.options[grade.selectedIndex]?.textContent||'',s=subject.options[subject.selectedIndex]?.textContent||'',t=topic.options[topic.selectedIndex]?.textContent||'';$('step1').textContent=`Ζήτησε από τους μαθητές να γράψουν ή να πουν τι ήδη γνωρίζουν για «${t}» και να δώσουν ένα μικρό παράδειγμα χωρίς βοήθεια.`;$('prompt').textContent=`Δουλεύουμε ${s}, ${g}: «${t}». Μην δώσεις έτοιμη απάντηση. Κάνε μία σύντομη ερώτηση ή δώσε μία μικρή υπόδειξη πάνω στην προσπάθεια του μαθητή και περίμενε να απαντήσει.`;$('step3').textContent=`Κλείσε την πρώτη απάντηση του AI. Ζήτησε από τον μαθητή να εξηγήσει το «${t}» με δικά του λόγια και να εφαρμόσει την ιδέα σε ένα νέο παράδειγμα.`;}
+opts(zone,Z.map(x=>({id:x.id,label:x.label})));zone.value='middle';refreshZone();zone.onchange=refreshZone;grade.onchange=refreshSubject;subject.onchange=refreshTopic;topic.onchange=render;$('copyPrompt').onclick=async()=>{try{await navigator.clipboard.writeText($('prompt').textContent);$('status').textContent='Το prompt αντιγράφηκε.'}catch(e){$('status').textContent='Δεν ήταν δυνατή η αυτόματη αντιγραφή.'}};$('printBtn').onclick=()=>window.print();
 })();
 </script>
-</body>
-</html>
+</body></html>

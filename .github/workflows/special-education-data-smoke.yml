@@ -12,6 +12,7 @@ on:
       - 'tests/special-education-*.mjs'
       - 'tests/teacher-curriculum-coverage-audit.mjs'
       - 'tests/teacher-epal-specialties-smoke.mjs'
+      - 'tests/teacher-eneegyl-informatics-smoke.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
   push:
     branches: [main]
@@ -25,6 +26,7 @@ on:
       - 'tests/special-education-*.mjs'
       - 'tests/teacher-curriculum-coverage-audit.mjs'
       - 'tests/teacher-epal-specialties-smoke.mjs'
+      - 'tests/teacher-eneegyl-informatics-smoke.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
 
 jobs:
@@ -59,6 +61,8 @@ jobs:
         run: node tests/special-education-teacher-curriculum-smoke.mjs
       - name: Run Grade C EPAL specialty UI smoke
         run: node tests/teacher-epal-specialties-smoke.mjs
+      - name: Run ENEEGYL Informatics curriculum smoke
+        run: node tests/teacher-eneegyl-informatics-smoke.mjs
       - name: Audit teacher curriculum coverage across every school context
         run: node tests/teacher-curriculum-coverage-audit.mjs
       - name: Run Special Education page desktop/mobile smoke

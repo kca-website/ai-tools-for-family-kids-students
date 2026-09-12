@@ -41,23 +41,23 @@
   function subjectKey(label,id){
     const sid=norm(id).replace(/\s+/g,'-');
     const byId={
-      'language':'language','greek':'language','literature':'literature',
-      'ancient-language':'ancient-language','ancient-translation':'ancient-translation','ancient':'ancient','archaia-b-lykeiou':'ancient',
+      'language':'language','greek':'language','new-greek':'language','literature':'literature',
+      'ancient-language':'ancient-language','ancient-translation':'ancient-translation','ancienttranslated':'ancient-translation','ancient':'ancient','archaia-b-lykeiou':'ancient',
       'math':'math','mathematics':'math','algebra':'math','geometry':'math',
       'physics':'physics','chemistry':'chemistry','biology':'biology','geography':'geography',
       'history':'history','religion':'religion','english':'english','technology':'technology',
-      'informatics':'informatics','pliroforiki-b-lykeiou':'informatics','economics':'economics','home-economics':'home-economics',
+      'informatics':'informatics','pliroforiki-b-lykeiou':'informatics','economics':'economics','home-economics':'home-economics','homeeconomics':'home-economics',
       'social-civic':'civics','civics':'civics','pe':'physical-education','physical-education':'physical-education',
-      'music':'music','art':'art','arts':'art','skills-labs':'skills-labs',
+      'music':'music','musictheatre':'music','art':'art','arts':'art','skills-labs':'skills-labs','skills':'skills-labs',
       'philosophy':'philosophy','sociology':'sociology','latin':'latin','orientation':'orientation',
-      'health':'health','mechanics':'mechanics','structures':'structures','creativezone':'creativezone'
+      'health':'health','mechanics':'mechanics','structures':'structures','creativezone':'creativezone','creative-zone':'creativezone'
     };
     if(byId[sid]) return byId[sid];
     const s=norm(label);
     if(!s) return '';
     if(s.includes('φυσικη αγωγη')) return 'physical-education';
     if(s.includes('οικιακη οικονομια')) return 'home-economics';
-    if(s.includes('αρχαια ελληνικα απο μεταφραση')||s.includes('αρχαια απο μεταφραση')) return 'ancient-translation';
+    if(s.includes('αρχαια')&&s.includes('μεταφραση')) return 'ancient-translation';
     if(s.includes('αρχαια ελληνικη γλωσσα')) return 'ancient-language';
     if(s.includes('αρχαια ελληνικα')) return 'ancient';
     if(s.includes('νεοελληνικη λογοτεχνια')||s.includes('λογοτεχνια')) return 'literature';
@@ -117,7 +117,21 @@
     }
   };
 
+  const PE_TEXTBOOK={
+    sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html',
+    a:['Κεφάλαιο 1 — Η ιστορία του αθλητισμού','Κεφάλαιο 2 — Αθλητικές και κινητικές δραστηριότητες που διδάσκονται στο μάθημα της Φυσικής Αγωγής'],
+    b:['Κεφάλαιο 3 — Η αξία της δια βίου άσκησης','Κεφάλαιο 4 — Μέθοδοι βελτίωσης των φυσικών ικανοτήτων των μαθητών'],
+    c:['Κεφάλαιο 5 — Ειδικά θέματα','Κεφάλαιο 6 — Συμμετοχή των μαθητών στην οργάνωση σχολικών δραστηριοτήτων']
+  };
+
   function topicReference(zone,gradeId,localSubject){
+    const merged=typeof window.mergeSubjects==='function'?(window.mergeSubjects(zone,gradeId)||[]):[];
+    const mergedFound=merged.find(s=>strictSubjectMatch(s.label||s.subjectLabelEl,localSubject,s.id));
+    const mergedTopics=(mergedFound?.topics||[]).map(t=>typeof t==='string'?t:t?.labelEl).filter(Boolean);
+    if(mergedTopics.length){
+      return {topics:mergedTopics,basis:zone==='high'?'general-lyceum-2026-27':'general-gymnasium-2026-27',label:zone==='high'?'την πλήρη χαρτογράφηση ΓΕΛ 2026–27 του site':'την πλήρη χαρτογράφηση Γυμνασίου 2026–27 του site',sourceUrl:''};
+    }
+
     const list=CAT?.getSubjects?.(zone,gradeId)||[];
     const found=list.find(s=>strictSubjectMatch(s.subjectLabelEl,localSubject,s.id));
     const mapped=(found?.topics||[]).map(t=>t.labelEl).filter(Boolean);
@@ -127,6 +141,11 @@
     if(zone==='middle'&&subjectKey(localSubject?.label||localSubject,localSubject?.id)==='literature'){
       const ref=LITERATURE_TEXTBOOK[String(gradeId||'').toLowerCase()];
       if(ref) return {topics:ref.topics,basis:'official-digital-textbook',label:'το επίσημο Διαδραστικό Σχολικό Βιβλίο Νεοελληνικής Λογοτεχνίας',sourceUrl:ref.sourceUrl};
+    }
+    if(zone==='middle'&&subjectKey(localSubject?.label||localSubject,localSubject?.id)==='physical-education'){
+      const gid=String(gradeId||'').toLowerCase();
+      const topics=PE_TEXTBOOK[gid]||[];
+      if(topics.length) return {topics,basis:'official-digital-textbook',label:'το επίσημο Διαδραστικό Σχολικό Βιβλίο Φυσικής Αγωγής',sourceUrl:PE_TEXTBOOK.sourceUrl};
     }
     return {topics:[],basis:zone==='high'?'general-lyceum-2026-27':'general-gymnasium-2026-27',label:zone==='high'?'την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27':'την επαληθευμένη χαρτογράφηση Γυμνασίου 2026–27',sourceUrl:''};
   }
@@ -216,8 +235,10 @@
 
     ['a','b','c'].forEach(gid=>{
       const gradeLabel=window.SPECIAL_LYCEUM_2026_2027.grades[gid].labelEl;
-      (CAT.getSubjects?.('high',gid)||[]).forEach(s=>{
-        addBridge('special-lyceum',gid.toUpperCase(),gradeLabel,{id:s.id,label:s.subjectLabelEl},(s.topics||[]).map(t=>t.labelEl).filter(Boolean),`lyc-${gid}`,'general-lyceum-2026-27','την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27');
+      const source=typeof window.mergeSubjects==='function'?(window.mergeSubjects('high',gid)||[]):(CAT.getSubjects?.('high',gid)||[]).map(s=>({id:s.id,label:s.subjectLabelEl,topics:(s.topics||[]).map(t=>t.labelEl)}));
+      source.forEach(s=>{
+        const topics=(s.topics||[]).map(t=>typeof t==='string'?t:t?.labelEl).filter(Boolean);
+        addBridge('special-lyceum',gid.toUpperCase(),gradeLabel,{id:s.id,label:s.label||s.subjectLabelEl},topics,`lyc-${gid}`,'general-lyceum-2026-27','την πλήρη χαρτογράφηση ΓΕΛ 2026–27 του site');
       });
     });
 

@@ -9,6 +9,7 @@ on:
       - 'pwa.js'
       - 'teacher-assistant.html'
       - 'tests/special-education-*.mjs'
+      - 'tests/teacher-curriculum-coverage-audit.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
   push:
     branches: [main]
@@ -19,6 +20,7 @@ on:
       - 'pwa.js'
       - 'teacher-assistant.html'
       - 'tests/special-education-*.mjs'
+      - 'tests/teacher-curriculum-coverage-audit.mjs'
       - '.github/workflows/special-education-data-smoke.yml'
 
 jobs:
@@ -51,6 +53,8 @@ jobs:
           exit 1
       - name: Run strict teacher curriculum mapping smoke
         run: node tests/special-education-teacher-curriculum-smoke.mjs
+      - name: Audit teacher curriculum coverage across every school context
+        run: node tests/teacher-curriculum-coverage-audit.mjs
       - name: Run Special Education page desktop/mobile smoke
         run: node tests/special-education-page-smoke.mjs
       - name: Run Special Education homepage diagnostic smoke

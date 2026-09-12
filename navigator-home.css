@@ -21,6 +21,13 @@ html body.pwa-mobile-ui #zoneSelectView .hero #pwaMobileLauncher{
   display:none!important;
 }
 
+/* The header entry is now the clear educator gateway. It still opens the
+ * simplified classroom landing page, where the AI Teacher Assistant is primary. */
+.classroom-menu-link{border-color:#b9d9ce!important;background:#eef7f3!important;color:#24594c!important;font-weight:800!important;}
+.classroom-menu-link__text{font-size:0!important;}
+.classroom-menu-link__text::after{content:"Για εκπαιδευτικούς";font-size:.86rem;}
+html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
+
 #zoneSelectView .hero{
   max-width:1040px;
   margin:0 auto 22px;

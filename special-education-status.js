@@ -57,6 +57,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     "/teacher-curriculum-extensions-2026-2027.js",
     "/teacher-curriculum-epal-2026-2027.js",
     "/teacher-curriculum-epal-c-specialties-2026-2027.js",
+    "/teacher-curriculum-epal-c-final-sectors-2026-2027.js",
     "/teacher-curriculum-special-extra-2026-2027.js"
   ];
   if(document.readyState==="loading"){

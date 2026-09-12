@@ -37,6 +37,19 @@ try{
     assert.notDeepEqual(topics,physicsTopics,`${subjectId} incorrectly received the complete Physics topic list`);
   }
 
+  const literatureOption=page.locator('#subject option').filter({hasText:'Νεοελληνική Λογοτεχνία'});
+  assert.ok(await literatureOption.count(),'Special Gymnasium A must expose Modern Greek Literature');
+  await page.selectOption('#subject',{label:'Νεοελληνική Λογοτεχνία'});
+  const literatureTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(literatureTopics.length>=13,'Special Gymnasium A Literature should expose the official textbook thematic units');
+  assert.ok(literatureTopics.some(x=>x.includes('Ο άνθρωπος και η φύση')),'Literature textbook theme “Ο άνθρωπος και η φύση” missing');
+  assert.ok(!literatureTopics.some(x=>x.includes('Δεν υπάρχει χαρτογραφημένη')),'Literature must not fall back to an empty custom-unit selector when official textbook sections exist');
+
+  const literatureBridge=await page.evaluate(()=>Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).find(e=>
+    e.schoolType==='special-gymnasium'&&e.grade==='A'&&e.subjectId==='literature'&&e.verificationBasis==='official-digital-textbook'
+  ));
+  assert.ok(literatureBridge?.referenceSourceUrl?.includes('ebooks.edu.gr'),'Literature bridge must retain its official digital-textbook source');
+
   const bridgeLeak=await page.evaluate(()=>{
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{});
     const physics=entries.find(e=>e.schoolType==='special-gymnasium'&&e.grade==='A'&&e.subjectId==='physics'&&e.verificationBasis==='general-gymnasium-2026-27');

@@ -1,5 +1,5 @@
 window.SPECIAL_EDUCATION_STATUS = {
-  lastUpdated: "2026-09-12",
+  lastUpdated: "2026-09-13",
   legend: {verified:"Επαληθευμένο",indexed:"Επίσημη πηγή εντοπίστηκε",pending:"Σε αναμονή χαρτογράφησης"},
   rows: [
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Ζώνη Δημιουργικών Δραστηριοτήτων",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
@@ -13,7 +13,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Βασικές Αρχές Σύνθεσης / Εφαρμοσμένες Τέχνες",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Ερευνητική Εργασία στην Τεχνολογία",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Αρχές Μηχανολογίας / Τομέας Μηχανολογίας",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
-    {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Πληροφορικής",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
+    {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Πληροφορικής",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Γεωπονία και Αειφόρος Ανάπτυξη / Τομέας Γεωπονίας",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Μαθηματικά",curriculum:"pending",learning:"pending",quiz:"pending",tutorContext:"pending"},
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Νεοελληνική Γλώσσα",curriculum:"pending",learning:"pending",quiz:"pending",tutorContext:"pending"}
@@ -63,6 +63,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     "/teacher-curriculum-epal-panhellenic-note-fix.js",
     "/teacher-curriculum-special-extra-2026-2027.js",
     "/teacher-curriculum-eneegyl-d-support-2026-2027.js",
+    "/teacher-curriculum-eneegyl-informatics-2026-2027.js",
     "/teacher-curriculum-special-support-note.js"
   ];
   if(document.readyState==="loading"){

@@ -33,6 +33,8 @@
       aiMiddle: "Γυμνάσιο 13+",
       aiHigh: "Λύκειο",
       aiSpecial: "Ειδικά σχολεία",
+      educatorNote: "Για εκπαιδευτικούς υπάρχει και AI Βοηθός Εκπαιδευτικού",
+      educatorLink: "Άνοιγμα βοηθού",
       needsTitle: "Τι άλλο θα ήθελες να κάνεις;",
       needsHint: "PDF · Έρευνα · Flashcards · Παρουσίαση · Ανάγνωση · Δημιουργία",
       needs: [
@@ -71,6 +73,8 @@
       aiMiddle: "Middle School 13+",
       aiHigh: "High School",
       aiSpecial: "Special schools",
+      educatorNote: "Educators can also use the AI Teacher Assistant",
+      educatorLink: "Open assistant",
       needsTitle: "What else would you like to do?",
       needsHint: "PDF · Research · Flashcards · Presentation · Reading · Create",
       needs: [
@@ -218,6 +222,15 @@
       </div>`;
   }
 
+  function educatorHintMarkup(){
+    const c = currentCopy();
+    return `
+      <div class="home-v8-educator-hint">
+        <span>${c.educatorNote}</span>
+        <a href="/teacher-assistant.html">${c.educatorLink}</a>
+      </div>`;
+  }
+
   function needsMarkup(){
     const c = currentCopy();
     return `
@@ -275,12 +288,20 @@
     }
     helpers.innerHTML = helpersMarkup();
 
+    let educatorHint = document.getElementById("homeV8EducatorHint");
+    if(!educatorHint){
+      educatorHint = document.createElement("div");
+      educatorHint.id = "homeV8EducatorHint";
+      helpers.insertAdjacentElement("afterend", educatorHint);
+    }
+    educatorHint.innerHTML = educatorHintMarkup();
+
     let needs = document.getElementById("homeV8Needs");
     if(!needs){
       needs = document.createElement("section");
       needs.id = "homeV8Needs";
       needs.className = "home-v8-needs";
-      helpers.insertAdjacentElement("afterend", needs);
+      educatorHint.insertAdjacentElement("afterend", needs);
     }
     const expanded = needs.querySelector("#homeV8NeedsToggle")?.getAttribute("aria-expanded") === "true";
     needs.innerHTML = needsMarkup();

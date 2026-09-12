@@ -98,10 +98,9 @@
     S.rows.splice(firstPending<0?S.rows.length:firstPending,0,row);
   }
 
-  // Bridge the already-verified 2026-27 Gymnasium curriculum into the
-  // Special Gymnasium and the Gymnasium part of EN.E.E.GY.-L. for selection.
-  // These are support mappings from the verified general Gymnasium guidance,
-  // not a claim of a separate special-education syllabus.
+  // Teacher-assistant curriculum bridge. Reuse every mapped topic that already
+  // exists in the site's verified/current school catalogs instead of showing
+  // generic "introduction / practice" placeholders.
   const CAT=window.AITOOLSKIDS_TUTOR_CATALOG;
   const SG=window.SPECIAL_GYMNASIUM_2026_2027;
   const EG=window.ENEEGYL_2026_2027_STRUCTURE;
@@ -109,45 +108,90 @@
     const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[΄’'·.,:;()\/\\-]/g,' ').replace(/\s+/g,' ').trim();
     const aliases={
       biology:['βιολογ'],physics:['φυσικ'],chemistry:['χημει'],math:['μαθηματικ','αλγεβρ','γεωμετρ'],
-      language:['γλωσσ','νεοελλην'],literature:['λογοτεχν'],geography:['γεωλογ','γεωγραφ'],history:['ιστορι'],
-      religion:['θρησκευ'],english:['αγγλικ'],technology:['τεχνολογ'],informatics:['πληροφορ']
+      language:['γλωσσ','νεοελλην','νεα ελληνικ'],literature:['λογοτεχν'],ancienttranslated:['αρχαι','κειμενα απο μεταφραση'],
+      geography:['γεωλογ','γεωγραφ'],history:['ιστορι'],religion:['θρησκευ','ηθικ'],english:['αγγλικ'],
+      technology:['τεχνολογ'],informatics:['πληροφορ','επιστημη των η υ','υπολογισ'],economics:['οικονομ'],
+      civics:['πολιτικ','κοινωνικ'],homeeconomics:['οικιακ οικονομ'],pe:['φυσικ αγωγ'],arts:['καλλιτεχν'],
+      musictheatre:['μουσικ','θεατρικ'],career:['επαγγελματικ προσανατολισ'],creativezone:['δημιουργικ δραστηριοτ'],
+      skills:['εργαστηρια δεξιοτητ'],health:['υγεια','διατροφ'],mechanics:['μηχανολογ','θερμοδυναμ'],
+      structures:['τοπογραφ','δομικ','αρχιτεκτον'],electrical:['ηλεκτρολογ','ηλεκτρον'],agriculture:['γεωπον','τροφ','περιβαλλον']
+    };
+    const aliasKeys=(id,label)=>{
+      const out=[]; const nid=norm(id).replace(/\s/g,'');
+      Object.entries(aliases).forEach(([k,v])=>{if(nid.includes(k)||norm(label).includes(norm(k)))out.push(...v);});
+      return out;
     };
     const subjectMatch=(a,b,id)=>{
-      const x=norm(a),y=norm(b); if(x.includes(y)||y.includes(x)) return true;
-      return (aliases[id]||[]).some(k=>x.includes(norm(k))||y.includes(norm(k)));
+      const x=norm(a),y=norm(b); if(!x||!y)return false;
+      if(x.includes(y)||y.includes(x)) return true;
+      return aliasKeys(id,b).some(k=>x.includes(norm(k))||y.includes(norm(k)));
     };
-    const generalSubjects=grade=>CAT.getSubjects?.('middle',grade)||[];
+    const generalSubjects=(zone,grade)=>CAT.getSubjects?.(zone,grade)||[];
     const mapTopics=(subjects,subject)=>{
-      const found=subjects.find(s=>subjectMatch(s.subjectLabelEl,subject.label,subject.id));
+      const found=subjects.find(s=>subjectMatch(s.subjectLabelEl,subject.label||subject.subjectLabelEl,subject.id));
       return found?(found.topics||[]).map(t=>t.labelEl).filter(Boolean):[];
     };
-    const addEntry=(schoolType,grade,gradeLabel,subject,topics,suffix)=>{
+    const addEntry=(schoolType,grade,gradeLabel,subject,topics,suffix,basis)=>{
       if(!topics.length) return;
       const key=`bridge-${schoolType}-${suffix}-${subject.id}`.replace(/[^a-z0-9-]/gi,'-').toLowerCase();
       if(C.entries[key]) return;
       C.entries[key]={
-        id:key,schoolType,grade,gradeLabel,subject:subject.label,
-        subjectType:'Υποστηρικτική χαρτογράφηση από επαληθευμένες οδηγίες Γυμνασίου 2026–27',
-        status:'verified-reference',coverageStatus:'reference',verificationBasis:'general-gymnasium-2026-27',
+        id:key,schoolType,grade,gradeLabel,subject:subject.label||subject.subjectLabelEl,
+        subjectType:'Υποστηρικτική χαρτογράφηση από το αντίστοιχο σχολικό curriculum του site',
+        status:'verified-reference',coverageStatus:'reference',verificationBasis:basis,
         verificationDate:'2026-09-12',officialAnchors:topics,
-        verificationNote:'Οι ενότητες προέρχονται από την επαληθευμένη ύλη Γυμνασίου 2026–27 του site και χρησιμοποιούνται ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ειδική εξεταστέα ύλη.'
+        verificationNote:'Οι ενότητες χρησιμοποιούνται ως ασφαλές πλαίσιο επιλογής από το αντίστοιχο χαρτογραφημένο μάθημα/τάξη. Δεν παρουσιάζονται ως ξεχωριστή εξεταστέα ύλη ειδικής εκπαίδευσης.'
       };
     };
 
+    // Special Gymnasium: map every subject for A/B/C to the matching verified
+    // Gymnasium curriculum when a dedicated special-education map is absent.
     if(SG){
       Object.entries(SG.grades||{}).forEach(([gid,g])=>{
         if(!['a','b','c'].includes(gid)) return;
-        const gen=generalSubjects(gid);
-        (g.subjects||[]).forEach(subject=>addEntry('special-gymnasium',gid.toUpperCase(),g.label,subject,mapTopics(gen,subject),`gym-${gid}`));
+        const gen=generalSubjects('middle',gid);
+        (g.subjects||[]).forEach(subject=>addEntry('special-gymnasium',gid.toUpperCase(),g.label,subject,mapTopics(gen,subject),`gym-${gid}`,'general-gymnasium-2026-27'));
       });
     }
 
+    // EN.E.E.GY.-L. Gymnasium: same-grade Gymnasium support map for every
+    // matching general subject. Vocational/special entries remain higher priority.
     if(EG){
       ['gym-a','gym-b','gym-c'].forEach(gid=>{
         const g=EG.grades?.[gid]; if(!g) return;
-        const short=gid.slice(-1),gen=generalSubjects(short);
-        (g.subjects||[]).forEach(subject=>addEntry('eneegyl',short.toUpperCase(),g.label,subject,mapTopics(gen,subject),gid));
+        const short=gid.slice(-1),gen=generalSubjects('middle',short);
+        (g.subjects||[]).forEach(subject=>addEntry('eneegyl',short.toUpperCase(),g.label,subject,mapTopics(gen,subject),gid,'general-gymnasium-2026-27'));
+      });
+
+      // EN.E.E.GY.-L. Lyceum: bridge shared general subjects to the mapped
+      // Lyceum catalog. Keep sector/specialty subjects on their dedicated data.
+      [['lyc-a','a'],['lyc-b','b'],['lyc-c','c'],['lyc-d','c']].forEach(([gid,refGrade])=>{
+        const g=EG.grades?.[gid]; if(!g) return;
+        const gen=generalSubjects('high',refGrade);
+        (g.subjects||[]).filter(s=>s.type!=='sector-gateway').forEach(subject=>{
+          const topics=mapTopics(gen,subject);
+          addEntry('eneegyl',String(g.letter||refGrade).toUpperCase(),g.label,subject,topics,gid,'general-lyceum-curriculum-reference');
+        });
       });
     }
+
+    // After the page's inline functions have been declared, enrich the EPAL
+    // selector with the site's mapped Lyceum topics for common subjects. This
+    // is explicitly support/reference material, not a claim of identical scope.
+    const installTeacherOverrides=()=>{
+      if(typeof window.epalSubjects==='function'){
+        window.epalSubjects=function(){
+          const grade=window.grade?.value||'a';
+          const ref=generalSubjects('high',grade);
+          const base=['Νέα Ελληνικά','Μαθηματικά','Φυσική','Χημεία','Αγγλικά','Πληροφορική','Τεχνολογικά / Επαγγελματικά μαθήματα'];
+          return base.map(label=>{
+            const probe={id:label,label};
+            return {id:label,label,topics:mapTopics(ref,probe),supportOnly:true};
+          });
+        };
+      }
+    };
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',installTeacherOverrides,{once:true});
+    else setTimeout(installTeacherOverrides,0);
   }
 })();

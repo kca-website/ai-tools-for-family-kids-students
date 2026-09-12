@@ -96,17 +96,50 @@
     return norm(generalLabel)===norm(localLabel);
   }
 
-  function topicsFor(zone,gradeId,localSubject){
+  const LITERATURE_TEXTBOOK={
+    a:{
+      sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2228/Keimena-Neoellinikis-Logotechnias_AGymnasiou_html-empl/index.html',
+      topics:[
+        'Ο άνθρωπος και η φύση — Πόλη — Ύπαιθρος','Λαογραφικά','Οικογενειακές σχέσεις','Θρησκευτική ζωή','Εθνική ζωή','Παλαιότερες μορφές ζωής','Ταξιδιωτικά κείμενα','Η αποδημία — Ο καημός της ξενιτιάς — Ο ελληνισμός έξω από τα σύνορα — Τα Μικρασιατικά — Οι πρόσφυγες','Αθλητισμός','Η αγάπη για τους συνανθρώπους μας — Οι φιλικοί δεσμοί — Η αγάπη','Η βιοπάλη — Το αγωνιστικό πνεύμα του ανθρώπου','Προβλήματα της σύγχρονης ζωής','Οι φίλοι μας τα ζώα'
+      ]
+    },
+    b:{
+      sourceUrl:'https://www.ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/',
+      topics:[
+        'Ο άνθρωπος και η φύση — Πόλη — Ύπαιθρος','Λαογραφικά','Οικογενειακές σχέσεις','Θρησκευτική ζωή','Εθνική ζωή','Παλαιότερες μορφές ζωής','Ταξιδιωτικά κείμενα','Η αποδημία — Ο καημός της ξενιτιάς — Ο ελληνισμός έξω από τα σύνορα — Τα Μικρασιατικά — Οι πρόσφυγες','Αθλητισμός','Η αγάπη για τους συνανθρώπους μας — Οι φιλικοί δεσμοί — Η αγάπη','Η βιοπάλη — Το αγωνιστικό πνεύμα του ανθρώπου','Προβλήματα της σύγχρονης ζωής','Οι φίλοι μας τα ζώα'
+      ]
+    },
+    c:{
+      sourceUrl:'https://www.ebooks.edu.gr/ebooks/v/html/8547/2218/Keimena-Neoellinikis-Logotechnias_GGymnasiou_html/index.html',
+      topics:[
+        'Δημοτικά τραγούδια','Κρητική λογοτεχνία','Νεοελληνικός Διαφωτισμός','Απομνημονεύματα','Η λογοτεχνία στα Επτάνησα','Οι Φαναριώτες και οι Ρομαντικοί των Αθηνών','Η Νέα Αθηναϊκή Σχολή (1880–1922)','Η νεότερη λογοτεχνία — Η λογοτεχνία από το 1922 ως το 1945','Η νεότερη λογοτεχνία — Μεταπολεμική και σύγχρονη λογοτεχνία'
+      ]
+    }
+  };
+
+  function topicReference(zone,gradeId,localSubject){
     const list=CAT?.getSubjects?.(zone,gradeId)||[];
     const found=list.find(s=>strictSubjectMatch(s.subjectLabelEl,localSubject,s.id));
-    return found?(found.topics||[]).map(t=>t.labelEl).filter(Boolean):[];
+    const mapped=(found?.topics||[]).map(t=>t.labelEl).filter(Boolean);
+    if(mapped.length){
+      return {topics:mapped,basis:zone==='high'?'general-lyceum-2026-27':'general-gymnasium-2026-27',label:zone==='high'?'την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27':'την επαληθευμένη χαρτογράφηση Γυμνασίου 2026–27',sourceUrl:''};
+    }
+    if(zone==='middle'&&subjectKey(localSubject?.label||localSubject,localSubject?.id)==='literature'){
+      const ref=LITERATURE_TEXTBOOK[String(gradeId||'').toLowerCase()];
+      if(ref) return {topics:ref.topics,basis:'official-digital-textbook',label:'το επίσημο Διαδραστικό Σχολικό Βιβλίο Νεοελληνικής Λογοτεχνίας',sourceUrl:ref.sourceUrl};
+    }
+    return {topics:[],basis:zone==='high'?'general-lyceum-2026-27':'general-gymnasium-2026-27',label:zone==='high'?'την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27':'την επαληθευμένη χαρτογράφηση Γυμνασίου 2026–27',sourceUrl:''};
+  }
+
+  function topicsFor(zone,gradeId,localSubject){
+    return topicReference(zone,gradeId,localSubject).topics;
   }
 
   function bridgeId(schoolType,suffix,subject){
     return `bridge-${schoolType}-${suffix}-${subject.id||norm(subject.label)}`.replace(/[^a-z0-9-]/gi,'-').toLowerCase();
   }
 
-  function addBridge(schoolType,grade,gradeLabel,subject,topics,suffix,basis,label){
+  function addBridge(schoolType,grade,gradeLabel,subject,topics,suffix,basis,label,sourceUrl){
     if(!C?.entries||!topics.length) return;
     const id=bridgeId(schoolType,suffix,subject);
     C.entries[id]={
@@ -114,7 +147,10 @@
       subjectType:`Υποστηρικτική χαρτογράφηση από ${label}`,
       status:'verified-reference',coverageStatus:'reference',verificationBasis:basis,
       verificationDate:'2026-09-12',officialAnchors:[...new Set(topics)],
-      verificationNote:`Οι ενότητες προέρχονται από ${label} του site και χρησιμοποιούνται μόνο ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ειδική εξεταστέα ύλη.`
+      referenceSourceUrl:sourceUrl||'',
+      verificationNote:basis==='official-digital-textbook'
+        ?`Οι επιλογές είναι πραγματικές ενότητες του επίσημου σχολικού βιβλίου και χρησιμοποιούνται ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ετήσια εξεταστέα ύλη Ε.Α.Ε. 2026–27.`
+        :`Οι ενότητες προέρχονται από ${label} του site και χρησιμοποιούνται μόνο ως πλαίσιο επιλογής. Δεν παρουσιάζονται ως ξεχωριστή ειδική εξεταστέα ύλη.`
     };
   }
 
@@ -143,15 +179,15 @@
 
     Object.keys(C.entries).forEach(id=>{
       const e=C.entries[id];
-      if(e?.verificationBasis==='general-gymnasium-2026-27'||e?.verificationBasis==='general-lyceum-2026-27') delete C.entries[id];
+      if(['general-gymnasium-2026-27','general-lyceum-2026-27','official-digital-textbook'].includes(e?.verificationBasis)) delete C.entries[id];
     });
 
     const SG=window.SPECIAL_GYMNASIUM_2026_2027;
     if(SG){
       Object.entries(SG.grades||{}).forEach(([gid,g])=>{
         (g.subjects||[]).forEach(subject=>{
-          const topics=topicsFor('middle',gid,subject);
-          addBridge('special-gymnasium',gid.toUpperCase(),g.label,subject,topics,`gym-${gid}`,'general-gymnasium-2026-27','την επαληθευμένη χαρτογράφηση Γυμνασίου 2026–27');
+          const ref=topicReference('middle',gid,subject);
+          addBridge('special-gymnasium',gid.toUpperCase(),g.label,subject,ref.topics,`gym-${gid}`,ref.basis,ref.label,ref.sourceUrl);
         });
       });
     }
@@ -162,8 +198,8 @@
         const middleGrade=gid.slice(-1);
         (g.subjects||[]).forEach(subject=>{
           if(subject.type==='sector-gateway') return;
-          const topics=topicsFor('middle',middleGrade,subject);
-          addBridge('eneegyl',middleGrade.toUpperCase(),g.label,subject,topics,gid,'general-gymnasium-2026-27','την επαληθευμένη χαρτογράφηση Γυμνασίου 2026–27');
+          const ref=topicReference('middle',middleGrade,subject);
+          addBridge('eneegyl',middleGrade.toUpperCase(),g.label,subject,ref.topics,gid,ref.basis,ref.label,ref.sourceUrl);
         });
       });
 
@@ -172,8 +208,8 @@
         const highGrade=gid==='lyc-d'?'c':gid.slice(-1);
         (g.subjects||[]).forEach(subject=>{
           if(subject.type==='sector-gateway') return;
-          const topics=topicsFor('high',highGrade,subject);
-          addBridge('eneegyl',gid.slice(-1).toUpperCase(),g.label,subject,topics,gid,'general-lyceum-2026-27','την επαληθευμένη χαρτογράφηση ΓΕΛ 2026–27');
+          const ref=topicReference('high',highGrade,subject);
+          addBridge('eneegyl',gid.slice(-1).toUpperCase(),g.label,subject,ref.topics,gid,ref.basis,ref.label,ref.sourceUrl);
         });
       });
     }

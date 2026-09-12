@@ -215,6 +215,25 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   color:#3C3489;
 }
 
+.home-v8-educator-hint{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin:12px auto 0;
+  color:#4B5563;
+  font-size:12.5px;
+  line-height:1.4;
+}
+.home-v8-educator-hint a{
+  color:#24594C;
+  font-weight:700;
+  text-decoration:none;
+}
+.home-v8-educator-hint a:hover{
+  text-decoration:underline;
+}
+
 .home-v8-needs{
   margin-top:22px;
 }
@@ -382,6 +401,12 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   .home-v8-helpers,
   .home-v8-needs__grid{
     grid-template-columns:1fr;
+  }
+  .home-v8-educator-hint{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:3px;
+    text-align:left;
   }
   .home-v8-eng{
     align-items:flex-start;

@@ -38,8 +38,6 @@
 
   const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[΄’'·.,:;()\/\\-]/g,' ').replace(/\s+/g,' ').trim();
 
-  // Canonical subject keys. Order matters: compound names must be recognized
-  // before shorter words such as «Φυσική» or «Οικονομία».
   function subjectKey(label,id){
     const sid=norm(id).replace(/\s+/g,'-');
     const byId={
@@ -119,7 +117,6 @@
     };
   }
 
-  // Initial Lyceum bridge with strict subject identity.
   if(C?.entries&&CAT){
     ['a','b','c'].forEach(gid=>{
       const gradeLabel=window.SPECIAL_LYCEUM_2026_2027.grades[gid].labelEl;
@@ -140,9 +137,6 @@
     }
   }
 
-  // The Gymnasium bridge is created by another dataset earlier/later in the page.
-  // Reconcile ALL support bridges after document scripts have loaded, using strict
-  // subject identity. This prevents collisions such as Φυσική -> Φυσική Αγωγή.
   function reconcileTeacherCurriculum(){
     if(!C?.entries||!CAT) return;
 
@@ -190,7 +184,6 @@
       });
     });
 
-    // Replace the teacher page's permissive substring matcher with strict subject keys.
     window.subjectMatches=function(entry,subject){
       const entryKey=subjectKey(entry?.subject,entry?.subjectId||entry?.sourceSubjectId||'');
       const subjectLabel=subject?.label||subject||'';
@@ -200,7 +193,6 @@
       return norm(entry?.subject)===norm(subjectLabel);
     };
 
-    // Lightweight audit exposed for debugging and future regression checks.
     const collisions=[];
     Object.values(C.entries).forEach(e=>{
       if(!String(e?.id||'').startsWith('bridge-')||!e.subjectId) return;
@@ -212,6 +204,6 @@
     if(typeof window.refreshSubjects==='function') window.refreshSubjects();
   }
 
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',reconcileTeacherCurriculum,{once:true});
+  if(typeof document!=='undefined'&&document.readyState==='loading') document.addEventListener('DOMContentLoaded',reconcileTeacherCurriculum,{once:true});
   else reconcileTeacherCurriculum();
 })();

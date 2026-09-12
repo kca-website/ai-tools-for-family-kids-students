@@ -1,5 +1,5 @@
 window.SPECIAL_EDUCATION_STATUS = {
-  lastUpdated: "2026-09-07",
+  lastUpdated: "2026-09-12",
   legend: {verified:"Επαληθευμένο",indexed:"Επίσημη πηγή εντοπίστηκε",pending:"Σε αναμονή χαρτογράφησης"},
   rows: [
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Ζώνη Δημιουργικών Δραστηριοτήτων",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
@@ -48,4 +48,16 @@ window.SPECIAL_EDUCATION_STATUS = {
 
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",enhanceSpecialEducationPage,{once:true});
   else enhanceSpecialEducationPage();
+})();
+
+(function(){
+  "use strict";
+  if(typeof document==="undefined") return;
+  if(document.readyState==="loading"){
+    document.write('<script src="/teacher-curriculum-extensions-2026-2027.js"><\/script>');
+  }else{
+    const s=document.createElement("script");
+    s.src="/teacher-curriculum-extensions-2026-2027.js";
+    document.head.appendChild(s);
+  }
 })();

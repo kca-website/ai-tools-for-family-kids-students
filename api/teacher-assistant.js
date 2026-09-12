@@ -1,3 +1,4 @@
+// Server-side Groq proxy for the teacher assistant.
 module.exports = async function handler(req, res) {
   const apiKey = process.env.GROQ_API_KEY;
 

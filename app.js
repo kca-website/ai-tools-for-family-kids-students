@@ -132,7 +132,7 @@
       subjectFilterLabel: "Φίλτρο μαθήματος",
       subjectAll: "Όλα",
       subjectEmptyState: "Δεν υπάρχει ακόμα αντιστοίχιση εργαλείου για αυτό το μάθημα σε αυτή τη ζώνη.",
-      a11yFilterLabel: "♿ Δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα",
+      a11yFilterLabel: "✓ Δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα",
       a11yFilterEmptyState: "Κανένα από τα εργαλεία αυτής της ζώνης δεν έχει επίσημη δήλωση προσβασιμότητας. Δες όλα τα εργαλεία στη σελίδα Προσβασιμότητα.",
       // ---------- Parent Quiz (νέο) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Δοκίμασε κι εσύ, γονιέ!",
@@ -242,7 +242,7 @@
       subjectFilterLabel: "Subject filter",
       subjectAll: "All",
       subjectEmptyState: "No tool mapping yet for this subject in this zone.",
-      a11yFilterLabel: "♿ Show only tools with documented accessibility",
+      a11yFilterLabel: "✓ Show only tools with documented accessibility",
       a11yFilterEmptyState: "None of the tools in this zone have an official accessibility statement. See all tools on the Accessibility page.",
       // ---------- Parent Quiz (new) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Try it yourself, parent!",
@@ -656,8 +656,8 @@ function renderToolGrid(pathTools, targetElement) {
     const a11y = typeof ACCESSIBILITY_INFO !== "undefined" ? ACCESSIBILITY_INFO[tool.id] : null;
     if (a11y && a11y.status === "good") {
       accessibilityBadge = state.lang === "el"
-        ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEl)}">♿ Επίσημη δήλωση προσβασιμότητας</span>`
-        : `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEn)}">♿ Official accessibility statement</span>`;
+        ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEl)}">✓ Επίσημη δήλωση προσβασιμότητας</span>`
+        : `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEn)}">✓ Official accessibility statement</span>`;
     } else if (a11y && a11y.status === "caution") {
       accessibilityBadge = state.lang === "el"
         ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--caution" title="${escapeAttr(a11y.noteEl)}">⚠️ Τεκμηριωμένο πρόβλημα προσβασιμότητας</span>`

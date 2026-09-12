@@ -53,11 +53,10 @@ window.SPECIAL_EDUCATION_STATUS = {
 (function(){
   "use strict";
   if(typeof document==="undefined") return;
+  const files=["/teacher-curriculum-extensions-2026-2027.js","/teacher-curriculum-epal-2026-2027.js"];
   if(document.readyState==="loading"){
-    document.write('<script src="/teacher-curriculum-extensions-2026-2027.js"><\/script>');
+    files.forEach(src=>document.write(`<script src="${src}"><\/script>`));
   }else{
-    const s=document.createElement("script");
-    s.src="/teacher-curriculum-extensions-2026-2027.js";
-    document.head.appendChild(s);
+    files.forEach(src=>{const s=document.createElement("script");s.src=src;document.head.appendChild(s);});
   }
 })();

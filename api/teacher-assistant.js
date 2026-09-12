@@ -1,10 +1,16 @@
 module.exports = async function handler(req, res) {
+  const apiKey = process.env.GROQ_API_KEY;
+
+  if (req.method === 'GET') {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({ configured: !!apiKey, model: 'openai/gpt-oss-20b' });
+  }
+
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
     return res.status(503).json({
       error: 'groq_not_configured',
@@ -52,10 +58,10 @@ module.exports = async function handler(req, res) {
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({ text, model: 'openai/gpt-oss-20b' });
   } catch (err) {
-    const timeout = err?.name === 'AbortError';
-    return res.status(timeout ? 504 : 500).json({
-      error: timeout ? 'timeout' : 'server_error',
-      message: timeout ? 'The AI service took too long to respond.' : 'Could not generate a result.'
+    const timedOut = err?.name === 'AbortError';
+    return res.status(timedOut ? 504 : 500).json({
+      error: timedOut ? 'timeout' : 'server_error',
+      message: timedOut ? 'The AI service took too long to respond.' : 'Could not generate a result.'
     });
   }
 };

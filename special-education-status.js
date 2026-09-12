@@ -60,6 +60,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     "/teacher-curriculum-epal-c-final-sectors-2026-2027.js",
     "/teacher-curriculum-epal-runtime-guard.js",
     "/teacher-curriculum-epal-panhellenic-2027.js",
+    "/teacher-curriculum-epal-panhellenic-note-fix.js",
     "/teacher-curriculum-special-extra-2026-2027.js"
   ];
   if(document.readyState==="loading"){

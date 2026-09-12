@@ -42,11 +42,11 @@
     const sid=norm(id).replace(/\s+/g,'-');
     const byId={
       'language':'language','greek':'language','literature':'literature',
-      'ancient-language':'ancient-language','ancient-translation':'ancient-translation','ancient':'ancient',
+      'ancient-language':'ancient-language','ancient-translation':'ancient-translation','ancient':'ancient','archaia-b-lykeiou':'ancient',
       'math':'math','mathematics':'math','algebra':'math','geometry':'math',
       'physics':'physics','chemistry':'chemistry','biology':'biology','geography':'geography',
       'history':'history','religion':'religion','english':'english','technology':'technology',
-      'informatics':'informatics','economics':'economics','home-economics':'home-economics',
+      'informatics':'informatics','pliroforiki-b-lykeiou':'informatics','economics':'economics','home-economics':'home-economics',
       'social-civic':'civics','civics':'civics','pe':'physical-education','physical-education':'physical-education',
       'music':'music','art':'art','arts':'art','skills-labs':'skills-labs',
       'philosophy':'philosophy','sociology':'sociology','latin':'latin','orientation':'orientation',
@@ -59,12 +59,13 @@
     if(s.includes('οικιακη οικονομια')) return 'home-economics';
     if(s.includes('αρχαια ελληνικα απο μεταφραση')||s.includes('αρχαια απο μεταφραση')) return 'ancient-translation';
     if(s.includes('αρχαια ελληνικη γλωσσα')) return 'ancient-language';
+    if(s.includes('αρχαια ελληνικα')) return 'ancient';
     if(s.includes('νεοελληνικη λογοτεχνια')||s.includes('λογοτεχνια')) return 'literature';
     if(s.includes('γλωσσικη διδασκαλια')||s.includes('νεα ελληνικα')||s.includes('νεοελληνικη γλωσσα')||s==='ελληνικη γλωσσα') return 'language';
     if(s.includes('γεωλογια')||s.includes('γεωγραφια')) return 'geography';
     if(s.includes('κοινωνικη και πολιτικη αγωγη')||s.includes('πολιτικη παιδεια')) return 'civics';
     if(s.includes('εργαστηρια δεξιοτητων')) return 'skills-labs';
-    if(s.includes('πληροφορικ')||s.includes('επιστημη των η υ')) return 'informatics';
+    if(s.includes('πληροφορικ')||s.includes('επιστημη των η υ')||s.includes('επιστημης των η υ')) return 'informatics';
     if(s.includes('μαθηματικ')||s.includes('αλγεβρ')||s.includes('γεωμετρ')) return 'math';
     if(s.includes('βιολογ')) return 'biology';
     if(s.includes('χημει')) return 'chemistry';

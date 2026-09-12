@@ -62,7 +62,8 @@ window.SPECIAL_EDUCATION_STATUS = {
     "/teacher-curriculum-epal-panhellenic-2027.js",
     "/teacher-curriculum-epal-panhellenic-note-fix.js",
     "/teacher-curriculum-special-extra-2026-2027.js",
-    "/teacher-curriculum-eneegyl-d-support-2026-2027.js"
+    "/teacher-curriculum-eneegyl-d-support-2026-2027.js",
+    "/teacher-curriculum-special-support-note.js"
   ];
   if(document.readyState==="loading"){
     files.forEach(src=>document.write(`<script src="${src}"><\/script>`));

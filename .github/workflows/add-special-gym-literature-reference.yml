@@ -1,0 +1,53 @@
+name: Add Special Gymnasium Literature reference
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-special-gym-literature-reference.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add verified Literature A reference
+        shell: python
+        run: |
+          from pathlib import Path
+          path=Path('teacher-curriculum-extensions-2026-2027.js')
+          text=path.read_text(encoding='utf-8')
+          original=text
+
+          source_anchor='    homeA:"https://ebooks.edu.gr/ebooks/handle/8547/133",\n'
+          source_insert='    homeA:"https://ebooks.edu.gr/ebooks/handle/8547/133",\n    literatureA:"https://www.ebooks.edu.gr/ebooks/handle/8547/130",\n'
+          if source_anchor not in text:
+            raise SystemExit('SOURCES anchor not found')
+          text=text.replace(source_anchor,source_insert,1)
+
+          const_anchor='  const SKILLS=[\n'
+          literature='''  const LITERATURE_A=[\n    "Ο άνθρωπος και η φύση • Πόλη – Ύπαιθρος",\n    "Λαογραφικά",\n    "Οικογενειακές σχέσεις",\n    "Θρησκευτική ζωή",\n    "Εθνική ζωή",\n    "Παλαιότερες μορφές ζωής",\n    "Ταξιδιωτικά κείμενα",\n    "Η αποδημία • Ο καημός της ξενιτιάς • Ο ελληνισμός έξω από τα σύνορα • Τα μικρασιατικά • Οι πρόσφυγες",\n    "Αθλητισμός",\n    "Η αγάπη για τους συνανθρώπους μας • Οι φιλικοί δεσμοί • Η αγάπη",\n    "Η βιοπάλη • Το αγωνιστικό πνεύμα του ανθρώπου",\n    "Προβλήματα της σύγχρονης ζωής",\n    "Οι φίλοι μας τα ζώα"\n  ];\n\n'''
+          if const_anchor not in text:
+            raise SystemExit('SKILLS anchor not found')
+          text=text.replace(const_anchor,literature+const_anchor,1)
+
+          entry_anchor='    addEntry(C,{id:"teacher-ext-special-gym-a-home",schoolType:"special-gymnasium",grade:"A",gradeLabel:grades.a,subject:"Οικιακή Οικονομία",subjectId:"home-economics",topics:HOME_A,sourceUrl:SOURCES.homeA,sourceTitle:"Διαδραστικά Σχολικά Βιβλία — Οικιακή Οικονομία Α΄ Γυμνασίου"});\n'
+          entry_insert=entry_anchor+'    addEntry(C,{id:"teacher-ext-special-gym-a-literature",schoolType:"special-gymnasium",grade:"A",gradeLabel:grades.a,subject:"Νεοελληνική Λογοτεχνία",subjectId:"literature",topics:LITERATURE_A,sourceUrl:SOURCES.literatureA,sourceTitle:"Διαδραστικά Σχολικά Βιβλία — Νεοελληνική Λογοτεχνία Α΄ Γυμνασίου",basis:"official-digital-textbook",coverageStatus:"reference",note:"Οι 13 θεματικές ενότητες προέρχονται από το επίσημο σχολικό βιβλίο της Α΄ Γυμνασίου και χρησιμοποιούνται ως επαληθευμένη αναφορά επιλογής ενότητας. Δεν παρουσιάζονται ως ξεχωριστή εξεταστέα ύλη Ειδικού Γυμνασίου."});\n'
+          if entry_anchor not in text:
+            raise SystemExit('Special Gymnasium A entry anchor not found')
+          text=text.replace(entry_anchor,entry_insert,1)
+
+          if text==original:
+            raise SystemExit('No changes made')
+          path.write_text(text,encoding='utf-8')
+      - name: Commit reference
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add teacher-curriculum-extensions-2026-2027.js
+          git commit -m "Add verified Special Gymnasium Literature reference"
+          git push origin main

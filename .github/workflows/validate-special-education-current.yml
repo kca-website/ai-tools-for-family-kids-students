@@ -1,0 +1,43 @@
+name: Validate current Special Education
+
+on:
+  push:
+    paths:
+      - '.github/workflows/validate-special-education-current.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Data checks
+        run: |
+          node tests/special-education-data-smoke.mjs
+          node tests/special-gymnasium-bc-data-smoke.mjs
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/aitools4kids-validate.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/teacher-assistant.html >/dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: Browser and curriculum checks
+        run: |
+          node tests/special-education-teacher-curriculum-smoke.mjs
+          node tests/teacher-epal-specialties-smoke.mjs
+          node tests/teacher-eneegyl-informatics-smoke.mjs
+          node tests/teacher-eneegyl-official-sectors-smoke.mjs
+          node tests/teacher-curriculum-coverage-audit.mjs
+          node tests/special-education-page-smoke.mjs
+          node tests/special-education-diagnostic-smoke.mjs
+          node tests/special-education-tutor-smoke.mjs
+          node tests/special-education-tutor-actions-smoke.mjs
+          node tests/special-education-deeplink-smoke.mjs

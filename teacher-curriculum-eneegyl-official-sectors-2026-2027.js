@@ -28,7 +28,7 @@
 
   function add({id,grade,subject,sector="",sourceUrl,topics=[],requiresExactUnit=false,note="",protocol=""}){
     id=id||`eneegyl-official-${grade.toLowerCase()}-${slug(subject)}`;
-    if(C.entries[id]) return C.entries[id];
+    if(C.entries[id]){if(!added.includes(id))added.push(id);return C.entries[id];}
     C.entries[id]={
       id,schoolType:"eneegyl",grade,gradeLabel:GRADE[grade],sector,subject,
       status:"verified",coverageStatus:"official-course-guidance",verificationBasis:"annual-instructions-2026-27",

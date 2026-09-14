@@ -40,30 +40,12 @@ try {
   assert.equal(await teacherDiscovery.count(), 1, 'Educator view should expose the discovery source');
   assert.equal(await teacherDiscovery.getAttribute('href'), 'https://edu.klimaka.gr/mathimata/gymnasiou/3032-odhgies-mathimatika-a-gymnasiou');
 
-  const classroom = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await classroom.goto(`${BASE}/classroom.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await classroom.waitForSelector('#workspace.visible', { timeout: 10000 });
-  await selectLabel(classroom, '#subject', 'Μαθηματικά');
-  const primaryInfo = classroom.locator('#annualWarning');
-  assert.equal(await primaryInfo.getAttribute('hidden'), null, 'Primary annual guidance should be visible');
-  assert.ok((await primaryInfo.getAttribute('class') || '').includes('verified'), 'Primary annual guidance should use verified styling');
-  assert.match(await primaryInfo.innerText(), /Ετήσιες οδηγίες 2026–27 δημοσιευμένες/);
-  assert.ok(await classroom.locator('.annual-source').count(), 'Classroom annual source link is missing');
-
-  await classroom.getByRole('button', { name: 'Γυμνάσιο' }).click();
-  await selectLabel(classroom, '#subject', 'Μαθηματικά');
-  const middleInfo = classroom.locator('#annualWarning');
-  assert.equal(await middleInfo.getAttribute('hidden'), null, 'Middle Mathematics annual reference should be visible');
-  assert.ok(!(await middleInfo.getAttribute('class') || '').includes('verified'), 'Pending Middle reference must not use verified styling');
-  const middleText = await middleInfo.innerText();
-  assert.match(middleText, /111798\/Δ2\/28-08-2026/);
-  assert.match(middleText, /άμεσο URL του επίσημου συνημμένου/i);
-  assert.doesNotMatch(middleText, /ακριβής.*αντιστοίχιση|exact annual alignment verified/i);
-  const classroomDiscovery = classroom.locator('.discovery-source');
-  assert.equal(await classroomDiscovery.count(), 1, 'Classroom should expose the non-official discovery source for pending Middle guidance');
-  assert.equal(await classroomDiscovery.getAttribute('href'), 'https://edu.klimaka.gr/mathimata/gymnasiou/3032-odhgies-mathimatika-a-gymnasiou');
-
-  const resolverState = await classroom.evaluate(() => {
+  // classroom.html no longer loads official-annual-instructions-2026-2027.js or renders an
+  // annual-guidance banner (#annualWarning / .annual-source / .discovery-source) — the
+  // "quick activity" redesign delegates all curriculum material, including annual guidance,
+  // to xartis-ylis.html and teacher-assistant.html. The resolver-correctness and no-storage
+  // checks below stay on xartis-ylis.html, the only page that still owns this data.
+  const resolverState = await map.evaluate(() => {
     const base = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
     const annual = window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027;
     const primary = annual.resolve(base.getByQuizId('math-a-dimotikou'));
@@ -77,7 +59,7 @@ try {
   assert.equal(resolverState.middleMath.directOfficialDocumentRecorded, false);
   assert.equal(resolverState.high, null);
 
-  const storage = await classroom.evaluate(() => ({
+  const storage = await map.evaluate(() => ({
     local: Object.keys(localStorage),
     session: Object.keys(sessionStorage),
     cookie: document.cookie,
@@ -87,7 +69,6 @@ try {
   assert.equal(storage.cookie, '');
 
   await map.close();
-  await classroom.close();
   console.log('Annual guidance source-awareness smoke passed.');
 } finally {
   await browser.close();

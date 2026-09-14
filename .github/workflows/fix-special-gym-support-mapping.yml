@@ -1,0 +1,36 @@
+name: Fix Special Gymnasium support mapping
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-special-gym-support-mapping.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Patch teacher assistant Special Gymnasium fallback mapping
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path('teacher-assistant.html')
+          text = path.read_text(encoding='utf-8')
+          old = "function specialGymSubjects(gid){const s=window.SPECIAL_GYMNASIUM_2026_2027;if(!s)return[];const g=gid==='preliminary'?s.preliminary:s.grades[gid],gl=g?.label||'';return (g?.subjects||[]).map(x=>{const rows=specialEntries().filter(e=>e.schoolType==='special-gymnasium'&&gradeMatches(e,gid,gl)&&subjectMatches(e,x));return{id:x.id,label:x.label,topics:uniq(rows.flatMap(concreteAnchors)),mapped:rows.length};});}"
+          new = "function specialGymSubjects(gid){const s=window.SPECIAL_GYMNASIUM_2026_2027;if(!s)return[];const g=gid==='preliminary'?s.preliminary:s.grades[gid],gl=g?.label||'';const general=gid==='preliminary'?[]:mergeSubjects('middle',gid);return (g?.subjects||[]).map(x=>{const rows=specialEntries().filter(e=>e.schoolType==='special-gymnasium'&&gradeMatches(e,gid,gl)&&subjectMatches(e,x));let topics=uniq(rows.flatMap(concreteAnchors));let supportOnly=false;if(!topics.length){const fallback=general.find(y=>y.id===x.id||norm(y.label)===norm(x.label));if(fallback?.topics?.length){topics=uniq(fallback.topics);supportOnly=true;}}return{id:x.id,label:x.label,topics,mapped:rows.length,supportOnly};});}"
+          if old not in text:
+              raise SystemExit('Expected specialGymSubjects implementation not found; aborting safely.')
+          text = text.replace(old,new,1)
+          path.write_text(text,encoding='utf-8')
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add teacher-assistant.html
+          git commit -m "Fix Special Gymnasium support mapping"
+          git push origin main

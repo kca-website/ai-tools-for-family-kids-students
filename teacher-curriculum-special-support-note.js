@@ -23,6 +23,24 @@
     return c.includes("official course guidance")||c.includes("exam verified")||c.includes("panhellenic")||b.includes("annual instructions 2026 27")||b.includes("panhellenic");
   }
   function safeUrl(url){return /^https:\/\//i.test(String(url||""))?String(url):"";}
+
+  // A previous bridge-generation pass could attach the complete Physics anchor list
+  // to Physical Education because both labels start with "Φυσική". Keep this guard
+  // deliberately narrow: remove only a PE general-gymnasium bridge whose anchors are
+  // an exact copy of the Physics bridge for the same grade. Distinct PE mappings remain.
+  function sanitizeCopiedPhysicsBridge(){
+    const entries=window.SPECIAL_EDUCATION_CURRICULUM?.entries;
+    if(!entries) return;
+    const all=Object.entries(entries);
+    for(const [peKey,pe] of all){
+      if(pe?.schoolType!=="special-gymnasium"||pe?.subjectId!=="pe"||pe?.verificationBasis!=="general-gymnasium-2026-27") continue;
+      const physics=all.map(([,e])=>e).find(e=>e?.schoolType==="special-gymnasium"&&e?.grade===pe.grade&&e?.subjectId==="physics"&&e?.verificationBasis==="general-gymnasium-2026-27");
+      const p=(physics?.officialAnchors||[]).map(String);
+      const q=(pe?.officialAnchors||[]).map(String);
+      if(p.length&&q.length===p.length&&q.every((x,i)=>x===p[i])) delete entries[peKey];
+    }
+  }
+
   function apply(){
     const c=contextId();
     if(!schoolType[c]) return;
@@ -49,6 +67,7 @@
     note.innerHTML=`<strong>ℹ Υποστηρικτική χαρτογράφηση${count?` · ${count} επιλογές`:""}.</strong> Οι ενότητες είναι πραγματικές επιλογές από επαληθευμένη σχολική/εκπαιδευτική πηγή, αλλά δεν παρουσιάζονται ως ξεχωριστή επίσημη ετήσια διδακτέα ή εξεταστέα ύλη της συγκεκριμένης δομής Ε.Α.Ε. Ο εκπαιδευτικός επιβεβαιώνει ότι η επιλεγμένη ενότητα αντιστοιχεί σε αυτό που διδάσκει.`;
   }
   function install(){
+    sanitizeCopiedPhysicsBridge();
     ["context","grade","subject","unit","epalSpecialty"].forEach(id=>document.getElementById(id)?.addEventListener("change",()=>setTimeout(apply,0)));
     const note=document.getElementById("curriculumNote");
     if(note&&typeof MutationObserver!=="undefined"){

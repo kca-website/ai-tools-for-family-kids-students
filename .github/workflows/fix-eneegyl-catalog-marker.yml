@@ -1,0 +1,36 @@
+name: Fix ENEEGYL catalog marker
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-eneegyl-catalog-marker.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Make catalog marker load-order independent
+        shell: python
+        run: |
+          from pathlib import Path
+          path=Path('teacher-curriculum-eneegyl-official-sectors-2026-2027.js')
+          text=path.read_text(encoding='utf-8')
+          old='''    if(C.entries[id]) return C.entries[id];\n    C.entries[id]={'''
+          new='''    if(C.entries[id]){if(!added.includes(id))added.push(id);return C.entries[id];}\n    C.entries[id]={'''
+          if old not in text:
+            raise SystemExit('Expected ENEEGYL add() guard not found')
+          text=text.replace(old,new,1)
+          path.write_text(text,encoding='utf-8')
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add teacher-curriculum-eneegyl-official-sectors-2026-2027.js
+          git commit -m "Make ENEEGYL catalog marker load-order independent"
+          git push origin main

@@ -10,6 +10,7 @@
 
   const SOURCES={
     homeA:"https://ebooks.edu.gr/ebooks/handle/8547/133",
+    literatureA:"https://www.ebooks.edu.gr/ebooks/handle/8547/130",
     infoA:"https://ebooks.edu.gr/ebooks/handle/8547/139",
     infoB:"https://ebooks.edu.gr/ebooks/handle/8547/140",
     infoC:"https://ebooks.edu.gr/ebooks/handle/8547/141",
@@ -111,6 +112,22 @@
     ]
   };
 
+  const LITERATURE_A=[
+    "Ο άνθρωπος και η φύση • Πόλη – Ύπαιθρος",
+    "Λαογραφικά",
+    "Οικογενειακές σχέσεις",
+    "Θρησκευτική ζωή",
+    "Εθνική ζωή",
+    "Παλαιότερες μορφές ζωής",
+    "Ταξιδιωτικά κείμενα",
+    "Η αποδημία • Ο καημός της ξενιτιάς • Ο ελληνισμός έξω από τα σύνορα • Τα μικρασιατικά • Οι πρόσφυγες",
+    "Αθλητισμός",
+    "Η αγάπη για τους συνανθρώπους μας • Οι φιλικοί δεσμοί • Η αγάπη",
+    "Η βιοπάλη • Το αγωνιστικό πνεύμα του ανθρώπου",
+    "Προβλήματα της σύγχρονης ζωής",
+    "Οι φίλοι μας τα ζώα"
+  ];
+
   const SKILLS=[
     "Ζω Καλύτερα – Ευ Ζην",
     "Φροντίζω το Περιβάλλον",
@@ -150,6 +167,7 @@
     const artSources={a:SOURCES.artA,b:SOURCES.artB,c:SOURCES.artC};
 
     addEntry(C,{id:"teacher-ext-special-gym-a-home",schoolType:"special-gymnasium",grade:"A",gradeLabel:grades.a,subject:"Οικιακή Οικονομία",subjectId:"home-economics",topics:HOME_A,sourceUrl:SOURCES.homeA,sourceTitle:"Διαδραστικά Σχολικά Βιβλία — Οικιακή Οικονομία Α΄ Γυμνασίου"});
+    addEntry(C,{id:"teacher-ext-special-gym-a-literature",schoolType:"special-gymnasium",grade:"A",gradeLabel:grades.a,subject:"Νεοελληνική Λογοτεχνία",subjectId:"literature",topics:LITERATURE_A,sourceUrl:SOURCES.literatureA,sourceTitle:"Διαδραστικά Σχολικά Βιβλία — Νεοελληνική Λογοτεχνία Α΄ Γυμνασίου",basis:"official-digital-textbook",coverageStatus:"reference",note:"Οι 13 θεματικές ενότητες προέρχονται από το επίσημο σχολικό βιβλίο της Α΄ Γυμνασίου και χρησιμοποιούνται ως επαληθευμένη αναφορά επιλογής ενότητας. Δεν παρουσιάζονται ως ξεχωριστή εξεταστέα ύλη Ειδικού Γυμνασίου."});
     ["a","b","c"].forEach(g=>{
       addEntry(C,{id:`teacher-ext-special-gym-${g}-informatics`,schoolType:"special-gymnasium",grade:g.toUpperCase(),gradeLabel:grades[g],subject:"Πληροφορική",subjectId:"informatics",topics:INFO[g],sourceUrl:infoSources[g],sourceTitle:`Διαδραστικά Σχολικά Βιβλία — Πληροφορική ${grades[g]}`});
       addEntry(C,{id:`teacher-ext-special-gym-${g}-music`,schoolType:"special-gymnasium",grade:g.toUpperCase(),gradeLabel:grades[g],subject:"Μουσική",subjectId:"music",topics:MUSIC[g],sourceUrl:musicSources[g],sourceTitle:`Διαδραστικά Σχολικά Βιβλία — Μουσική ${grades[g]}`});

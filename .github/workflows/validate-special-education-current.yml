@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/workflows/validate-special-education-current.yml'
 
-# One-time full validation after the verified Literature A support-reference mapping.
+# One-time full validation after the Special Gymnasium and ENEEGYL fixes.
 jobs:
   validate:
     runs-on: ubuntu-latest

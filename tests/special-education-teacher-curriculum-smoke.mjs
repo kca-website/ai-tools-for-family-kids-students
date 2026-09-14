@@ -58,7 +58,8 @@ try{
   const literatureBridge=await page.evaluate(()=>Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).find(e=>
     e.schoolType==='special-gymnasium'&&e.grade==='A'&&e.subjectId==='literature'&&e.verificationBasis==='official-digital-textbook'
   ));
-  assert.ok(literatureBridge?.referenceSourceUrl?.includes('ebooks.edu.gr'),'Literature bridge must retain its official digital-textbook source');
+  const literatureSource=literatureBridge?.sourceUrl||literatureBridge?.referenceSourceUrl||'';
+  assert.ok(literatureSource.includes('ebooks.edu.gr'),'Literature bridge must retain its official digital-textbook source');
 
   const bridgeLeak=await page.evaluate(()=>{
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{});

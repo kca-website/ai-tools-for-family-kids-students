@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Πώς χρησιμοποιώ σωστά το AI; | AI Tools for Kids</title>
+  <meta name="description" content="Πρακτικός οδηγός για σωστή χρήση AI σε σχολικές εργασίες, χωρίς έτοιμες λύσεις." />
+  <link rel="canonical" href="https://www.aitools4kids.gr/guide.html" />
+  <style>
+    :root{--ink:#1f2430;--muted:#667085;--bg:#fafaf8;--surface:#fff;--border:#e4e7ec;--green:#2e6f5e;--blue:#3b82c4;--shadow:0 8px 28px rgba(31,36,48,.07)}
+    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}a{color:#1f638e}.top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border)}.top__in{max-width:980px;margin:auto;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-weight:800;color:var(--ink);text-decoration:none}.actions{display:flex;gap:8px}.btn{border:1px solid var(--border);background:#fff;border-radius:9px;padding:7px 10px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none;color:var(--ink)}.btn.active{background:var(--green);border-color:var(--green);color:#fff}.wrap{max-width:980px;margin:auto;padding:28px 18px 64px}.hero{background:linear-gradient(135deg,#eaf6f0,#edf4fb 58%,#f4effc);border:1px solid #dfe9e4;border-radius:20px;padding:26px;margin-bottom:18px}.kicker{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--green)}h1{margin:7px 0 10px;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15}.lead{margin:0;color:var(--muted);max-width:760px}.section{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:18px 20px;margin-top:14px}.section h2{margin:0 0 10px;font-size:1.15rem}.section h4{margin:18px 0 8px}.section p:first-child{margin-top:0}.guide-table-wrapper{overflow-x:auto}.guide-table{width:100%;border-collapse:collapse;font-size:.93rem}.guide-table th,.guide-table td{border-bottom:1px solid var(--border);padding:10px;vertical-align:top;text-align:left}.guide-table th{background:#f7f9fb}.back{display:inline-flex;margin-top:20px;font-weight:750;text-decoration:none}.error{padding:16px;border:1px solid #f1c6c6;background:#fff5f5;border-radius:12px;color:#7a2525}footer{margin-top:28px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:.88rem}@media(max-width:640px){.top__in{padding:10px 12px}.wrap{padding:18px 12px 46px}.hero{padding:20px 16px}.section{padding:15px}.guide-table{font-size:.86rem}.actions .btn:first-child{display:none}}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top__in">
+      <a class="brand" href="/">🤖 AI Tools for Kids</a>
+      <div class="actions">
+        <a class="btn" href="/xartis-ylis.html" id="backTop">Ύλη & Εξάσκηση</a>
+        <button class="btn active" id="langEl" type="button">ΕΛ</button>
+        <button class="btn" id="langEn" type="button">EN</button>
+      </div>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker" id="kicker">Οδηγός σωστής χρήσης</div>
+      <h1 id="pageTitle">Πώς χρησιμοποιώ σωστά το AI;</h1>
+      <p class="lead" id="pageLead">Χρησιμοποίησε το AI για να καταλάβεις, να οργανώσεις και να ελέγξεις τη σκέψη σου. Όχι για να παραδώσεις έτοιμη εργασία που δεν έκανες εσύ.</p>
+    </section>
+    <div id="content"></div>
+    <a class="back" href="/xartis-ylis.html" id="backBottom">← Πίσω στην Ύλη & Εξάσκηση</a>
+    <footer id="footerText">Ανεξάρτητο εκπαιδευτικό έργο. Ο οδηγός αποτελεί μέρος του AI Tools for Kids.</footer>
+  </main>
+  <script src="/guide-data.js"></script>
+  <script>
+  (function(){
+    'use strict';
+    var lang='el';
+    var content=document.getElementById('content');
+    var copy={
+      el:{k:'Οδηγός σωστής χρήσης',t:'Πώς χρησιμοποιώ σωστά το AI;',l:'Χρησιμοποίησε το AI για να καταλάβεις, να οργανώσεις και να ελέγξεις τη σκέψη σου. Όχι για να παραδώσεις έτοιμη εργασία που δεν έκανες εσύ.',top:'Ύλη & Εξάσκηση',back:'← Πίσω στην Ύλη & Εξάσκηση',foot:'Ανεξάρτητο εκπαιδευτικό έργο. Ο οδηγός αποτελεί μέρος του AI Tools for Kids.'},
+      en:{k:'Responsible use guide',t:'How do I use AI well?',l:'Use AI to understand, organise and check your thinking, not to hand in work you did not do yourself.',top:'Curriculum & Practice',back:'← Back to Curriculum & Practice',foot:'Independent educational project. This guide is part of AI Tools for Kids.'}
+    };
+    function render(){
+      document.documentElement.lang=lang;
+      var c=copy[lang];
+      document.getElementById('kicker').textContent=c.k;
+      document.getElementById('pageTitle').textContent=c.t;
+      document.getElementById('pageLead').textContent=c.l;
+      document.getElementById('backTop').textContent=c.top;
+      document.getElementById('backBottom').textContent=c.back;
+      document.getElementById('footerText').textContent=c.foot;
+      document.getElementById('langEl').classList.toggle('active',lang==='el');
+      document.getElementById('langEn').classList.toggle('active',lang==='en');
+      if(typeof GUIDE_DATA==='undefined'||!GUIDE_DATA[lang]){
+        content.innerHTML='<div class="error">'+(lang==='el'?'Ο οδηγός δεν μπόρεσε να φορτωθεί.':'The guide could not be loaded.')+'</div>';
+        return;
+      }
+      content.innerHTML=GUIDE_DATA[lang].sections.map(function(s){
+        return '<section class="section" id="'+s.id+'"><h2>'+s.title+'</h2>'+s.content+'</section>';
+      }).join('');
+    }
+    document.getElementById('langEl').addEventListener('click',function(){lang='el';render()});
+    document.getElementById('langEn').addEventListener('click',function(){lang='en';render()});
+    render();
+  })();
+  </script>
+</body>
+</html>

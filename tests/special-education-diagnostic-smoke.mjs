@@ -6,19 +6,18 @@ const browser=await chromium.launch({headless:true});
 
 async function openPicker(page){
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForSelector('#heroQuizCtaBtn',{state:'attached',timeout:30000});
-  // The simplified homepage may intentionally keep the legacy quiz CTA visually hidden.
-  // This test validates the diagnostic flow itself without forcing the old homepage layout back.
-  await page.evaluate(()=>document.getElementById('heroQuizCtaBtn')?.click());
-  await page.waitForSelector('#heroQuizPicker:not([hidden])',{timeout:10000});
-  await page.waitForSelector('[data-special-education-diagnostic-entry="1"]',{state:'visible',timeout:10000});
+  await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC,{timeout:30000});
+  assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA),false,'Special Education diagnostic catalog was preloaded');
+  assert.equal(await page.locator('script[src*="special-education-diagnostic-data.js"]').count(),0,'heavy diagnostic data script loaded before open');
+  // The redesigned homepage intentionally hides the legacy picker. Exercise the
+  // diagnostic through its public runtime API instead of depending on old UI.
+  await page.evaluate(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC.open());
+  await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
 }
 
 async function reopenPicker(page){
-  await page.waitForSelector('#heroQuizCtaBtn',{state:'attached',timeout:10000});
-  await page.evaluate(()=>document.getElementById('heroQuizCtaBtn')?.click());
-  await page.waitForSelector('#heroQuizPicker:not([hidden])',{timeout:10000});
-  await page.waitForSelector('[data-special-education-diagnostic-entry="1"]',{state:'visible',timeout:10000});
+  await page.evaluate(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC.open());
+  await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
 }
 
 async function chooseSchool(page,id){
@@ -31,19 +30,15 @@ try{
     const label=viewport.width<600?'mobile':'desktop';
     const page=await browser.newPage({viewport});
     await page.route('**/_vercel/insights/script.js',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
+    await page.route('https://cdn.jsdelivr.net/**',route=>route.fulfill({status:200,contentType:'application/javascript',body:'export const inject=()=>{};'}));
+    await page.route('https://fonts.googleapis.com/**',route=>route.fulfill({status:200,contentType:'text/css',body:''}));
+    await page.route('https://fonts.gstatic.com/**',route=>route.fulfill({status:204,body:''}));
     const errors=[];
     page.on('pageerror',(err)=>errors.push(err.message));
     page.on('console',(msg)=>{if(msg.type()==='error') errors.push(msg.text());});
 
     await openPicker(page);
 
-    const normalButtons=await page.locator('#heroQuizPickerGrid .hero__quiz-picker-btn:not([data-special-education-diagnostic-entry])').count();
-    assert.equal(normalButtons,3,`${label}: normal Primary/Middle/High diagnostic entries changed`);
-    assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA),false,`${label}: Special Education diagnostic catalog was preloaded`);
-    assert.equal(await page.locator('script[src*="special-education-diagnostic-data.js"]').count(),0,`${label}: heavy diagnostic data script loaded before click`);
-
-    await page.click('[data-special-education-diagnostic-entry="1"]');
-    await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
     await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA,{timeout:15000});
     assert.equal(await page.locator('#spdiagSchools .spdiag__school').count(),3,`${label}: expected three Special Education school types`);
 
@@ -114,7 +109,6 @@ try{
 
     await page.click('.spdiag__close');
     await reopenPicker(page);
-    await page.click('[data-special-education-diagnostic-entry="1"]');
     await chooseSchool(page,'special-gymnasium');
     await page.selectOption('#spdiagGrade','a');
     assert.ok(await page.locator('#spdiagSubject option').count()>=18,`${label}: Special Gymnasium A subjects incomplete`);

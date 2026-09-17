@@ -2,23 +2,24 @@
 
 Date: 2026-09-17
 HTML files checked: 66
-Files updated: 0
 
-## Updated files
-
-## H1 issues
-- report-error.html: 2 H1
-- index.html: 2 H1
-- sign-language.html: 2 H1
-- special-education-parent-guide.html: 2 H1
-- methodology.html: 2 H1
-- special-education-preview.html: 0 H1
-
-## noindex pages
+## Heading/metadata cleanup files
 - report-error.html
-
-## Missing title/description/canonical
+- index.html
+- sign-language.html
+- special-education-parent-guide.html
+- methodology.html
 - special-education-preview.html
+
+## H1 issues on indexable pages
+- None
+
+## Intentional noindex pages
+- report-error.html
+- special-education-preview.html
+
+## Missing title/description/canonical on indexable pages
+- None
 
 ## Images missing alt
 - None
@@ -27,4 +28,4 @@ Files updated: 0
 - None
 
 ## Core Web Vitals
-- Requires live measurement; static audit does not invent LCP/INP/CLS values.
+- Live measurement required; no synthetic values are invented by this static audit.

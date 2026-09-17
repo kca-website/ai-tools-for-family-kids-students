@@ -1,0 +1,138 @@
+name: SEO finalization (one-time)
+
+on:
+  push:
+    branches: [seo-final-audit-2026-09-17]
+    paths: ['.github/workflows/seo-finalize-once.yml']
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: seo-final-audit-2026-09-17
+          fetch-depth: 0
+      - name: Finalize SEO metadata, headings, sitemap and audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.parse import urlparse
+          import re, subprocess, datetime
+
+          ROOT=Path('.')
+          OG='https://www.aitools4kids.gr/assets/og-image.png'
+          SITE='https://www.aitools4kids.gr'
+          changed=[]
+
+          def meta(content, key, prop=False):
+              attr='property' if prop else 'name'
+              m=re.search(r'<meta\s+[^>]*'+attr+r'=["\']'+re.escape(key)+r'["\'][^>]*content=["\']([^"\']*)["\'][^>]*>', content, re.I)
+              if not m:
+                  m=re.search(r'<meta\s+[^>]*content=["\']([^"\']*)["\'][^>]*'+attr+r'=["\']'+re.escape(key)+r'["\'][^>]*>', content, re.I)
+              return m.group(1).strip() if m else ''
+
+          htmls=[p for p in ROOT.rglob('*.html') if '.git' not in p.parts and 'node_modules' not in p.parts]
+          for p in htmls:
+              s=p.read_text(encoding='utf-8')
+              orig=s
+              title_m=re.search(r'<title>(.*?)</title>',s,re.I|re.S)
+              title=re.sub(r'\s+',' ',title_m.group(1)).strip() if title_m else ''
+              desc=meta(s,'description')
+              can_m=re.search(r'<link\s+[^>]*rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\'][^>]*>',s,re.I)
+              canonical=can_m.group(1).strip() if can_m else ''
+
+              # Add social image metadata only where a canonical public page and basic metadata already exist.
+              if title and desc and canonical and 'aitools4kids.gr' in canonical:
+                  insert=[]
+                  if not meta(s,'og:image',True): insert.append(f'<meta property="og:image" content="{OG}">')
+                  if not meta(s,'og:image:width',True): insert.append('<meta property="og:image:width" content="1200">')
+                  if not meta(s,'og:image:height',True): insert.append('<meta property="og:image:height" content="630">')
+                  if not meta(s,'og:image:alt',True): insert.append('<meta property="og:image:alt" content="AI Tools for Family, Kids & Students">')
+                  if not meta(s,'twitter:card'): insert.append('<meta name="twitter:card" content="summary_large_image">')
+                  if not meta(s,'twitter:image'): insert.append(f'<meta name="twitter:image" content="{OG}">')
+                  if insert:
+                      anchor=can_m.end() if can_m else s.lower().find('</head>')
+                      s=s[:anchor]+'\n'+'\n'.join(insert)+s[anchor:]
+
+              # Home page: enforce one meaningful H1 in source without changing visible hero H1.
+              if p.as_posix()=='index.html':
+                  s=re.sub(r'(<noscript>.*?<div[^>]*>)\s*<h1>(.*?)</h1>', r'\1\n      <p><strong>\2</strong></p>', s, count=1, flags=re.I|re.S)
+                  s=s.replace('<h1 id="pathZoneHeading"></h1>','<h2 id="pathZoneHeading"></h2>')
+                  s=s.replace('<h1 id="pathZoneHeading">','<h2 id="pathZoneHeading">').replace('</h1><!-- pathZoneHeading -->','</h2><!-- pathZoneHeading -->')
+
+              if s!=orig:
+                  p.write_text(s,encoding='utf-8')
+                  changed.append(p.as_posix())
+
+          # Sitemap: preserve URLs, set lastmod from actual file history; changed files get today's date.
+          sm=ROOT/'sitemap.xml'
+          if sm.exists():
+              x=sm.read_text(encoding='utf-8')
+              today=datetime.date.today().isoformat()
+              def repl(m):
+                  block=m.group(0); locm=re.search(r'<loc>(.*?)</loc>',block)
+                  if not locm: return block
+                  u=urlparse(locm.group(1)); path=u.path.lstrip('/') or 'index.html'
+                  if path.endswith('/'): path += 'index.html'
+                  fp=ROOT/path
+                  if not fp.exists(): return block
+                  if path in changed: d=today
+                  else:
+                      try: d=subprocess.check_output(['git','log','-1','--format=%cs','--',path],text=True).strip() or today
+                      except: d=today
+                  if '<lastmod>' in block: return re.sub(r'<lastmod>.*?</lastmod>',f'<lastmod>{d}</lastmod>',block)
+                  return block.replace('</url>',f'  <lastmod>{d}</lastmod>\n</url>')
+              nx=re.sub(r'<url>.*?</url>',repl,x,flags=re.S)
+              if nx!=x:
+                  sm.write_text(nx,encoding='utf-8'); changed.append('sitemap.xml')
+
+          # Audit all HTML for checklist items and internal static broken links.
+          issues=[]; noindex=[]; missing_alt=[]; h1bad=[]; missing_basic=[]; broken=set()
+          class P(HTMLParser):
+              def __init__(self): super().__init__(); self.hrefs=[]; self.imgs=[]
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if tag=='a' and a.get('href'): self.hrefs.append(a['href'])
+                  if tag=='img': self.imgs.append(a)
+          for p in htmls:
+              s=p.read_text(encoding='utf-8')
+              h1=len(re.findall(r'<h1\b',s,re.I))
+              if h1!=1: h1bad.append(f'{p}: {h1} H1')
+              if re.search(r'<meta[^>]+name=["\']robots["\'][^>]+noindex',s,re.I): noindex.append(str(p))
+              title=bool(re.search(r'<title>.+?</title>',s,re.I|re.S)); desc=bool(meta(s,'description')); can=bool(re.search(r'<link[^>]+rel=["\']canonical["\']',s,re.I))
+              if not(title and desc and can): missing_basic.append(f'{p}: title={title}, description={desc}, canonical={can}')
+              parser=P(); parser.feed(s)
+              for im in parser.imgs:
+                  if 'alt' not in im: missing_alt.append(str(p))
+              for href in parser.hrefs:
+                  if href.startswith(('#','mailto:','tel:','javascript:','http://','https://')): continue
+                  path=urlparse(href).path
+                  if not path: continue
+                  target=(ROOT/path.lstrip('/')) if path.startswith('/') else (p.parent/path)
+                  # Extensionless paths are SPA routes; validate only file-like internal links.
+                  if Path(path).suffix and not target.exists(): broken.add(f'{p} -> {href}')
+
+          report=['# SEO final audit','',f'Date: {datetime.date.today().isoformat()}','',f'HTML files checked: {len(htmls)}',f'Files updated automatically: {len(changed)}','', '## Automated changes']
+          report += [f'- {c}' for c in changed] or ['- None']
+          report += ['', '## H1 issues'] + ([f'- {i}' for i in h1bad] or ['- None'])
+          report += ['', '## Pages with noindex'] + ([f'- {i}' for i in noindex] or ['- None'])
+          report += ['', '## Missing title / description / canonical'] + ([f'- {i}' for i in missing_basic] or ['- None'])
+          report += ['', '## Images missing alt'] + ([f'- {i}' for i in sorted(set(missing_alt))] or ['- None'])
+          report += ['', '## Broken file-like internal links'] + ([f'- {i}' for i in sorted(broken)] or ['- None'])
+          report += ['', '## Notes','- robots.txt is intentionally not rewritten by this workflow.','- noindex is reported, not added automatically.','- Core Web Vitals require live field/lab measurement and are not fabricated by a static audit.']
+          (ROOT/'SEO-FINAL-AUDIT.md').write_text('\n'.join(report)+'\n',encoding='utf-8')
+          PY
+      - name: Commit final SEO fixes and report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Finalize technical SEO audit and metadata"
+            git push origin HEAD:seo-final-audit-2026-09-17
+          fi

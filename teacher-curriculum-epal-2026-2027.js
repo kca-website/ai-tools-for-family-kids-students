@@ -14,6 +14,8 @@
   const MECH_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162059_1_2026_07_31_%CE%95%CE%9E%CE%95_103738_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%9C%CE%97%CE%A7%CE%91%CE%9D%CE%9F%CE%9B_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_6%CE%A3%CE%9D%CE%A046%CE%9D%CE%9A%CE%A0%CE%94_%CE%98%CE%A8%CE%A5.pdf";
   const AGRI_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162060_1_2026_07_31_%CE%95%CE%9E%CE%95_103630_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%93%CE%95%CE%A9%CE%A0%CE%9F%CE%9D%CE%99%CE%91%CE%A3_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A8%CE%9D2246%CE%9D%CE%9A%CE%A0%CE%94_%CE%98%CE%93%CE%A6.pdf";
   const ARTS_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162056_1_2026_07_31_%CE%95%CE%9E%CE%95_103707_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%95%CE%A6%CE%91%CE%A1%CE%9C_%CE%A4%CE%95%CE%A7%CE%9D%CE%A9%CE%9D_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_9%CE%9B%CE%A3646%CE%9D%CE%9A%CE%A0%CE%94_9%CE%92%CE%9F.pdf";
+  const STRUCTURES_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162057_1_2026_07_31_%CE%95%CE%9E%CE%95_103669_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%B9%CE%B5%CF%82_%CE%94%CE%9F%CE%9C%CE%99%CE%9A%CE%A9%CE%9D_%CE%95%CE%A1%CE%93%CE%A9%CE%9D_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_9%CE%A43%CE%9D46%CE%9D%CE%9A%CE%A0%CE%94_%CE%A871.pdf";
+  const MARITIME_TIMETABLE="https://www.iep.edu.gr/wp-content/uploads/2025/01/2018-08-07_3224_t_b_fek_naytiliakon.pdf";
 
   const NEW_GREEK={
     a:["Βιώματα, εμπειρίες και ενδιαφέροντα των εφήβων","Γνωριμία με τον κόσμο της επιστήμης και της τεχνολογίας","Ο άνθρωπος και η φύση","Ταξίδια","Όψεις της σύγχρονης ενημέρωσης","Πέρα από τα σύνορα"],
@@ -67,6 +69,22 @@
     sectorSubject("Μηχανολογίας","machine-elements-design","Σχεδιασμός και Περιγραφή Στοιχείων Μηχανών",[],MECH_2026),
     sectorSubject("Μηχανολογίας","manufacturing","Τεχνολογία Μηχανολογικών Κατασκευών-Εφαρμογές",[],MECH_2026),
     sectorSubject("Μηχανολογίας","basic-electrical","Βασική Ηλεκτρολογία και Εφαρμογές",[],MECH_2026),
+
+    sectorSubject("Δομικών Έργων, Δομημένου Περιβάλλοντος και Αρχιτεκτονικού Σχεδιασμού","building-drawing","Οικοδομικό Σχέδιο",[],STRUCTURES_2026),
+    sectorSubject("Δομικών Έργων, Δομημένου Περιβάλλοντος και Αρχιτεκτονικού Σχεδιασμού","surveying","Τοπογραφία",[],STRUCTURES_2026),
+    sectorSubject("Δομικών Έργων, Δομημένου Περιβάλλοντος και Αρχιτεκτονικού Σχεδιασμού","survey-digital-map","Τοπογραφικό Σχέδιο – Ψηφιακή Χαρτογραφία",[],STRUCTURES_2026),
+    sectorSubject("Δομικών Έργων, Δομημένου Περιβάλλοντος και Αρχιτεκτονικού Σχεδιασμού","building-materials","Κτιριακά Έργα και Δομικά Υλικά",[],STRUCTURES_2026),
+    sectorSubject("Δομικών Έργων, Δομημένου Περιβάλλοντος και Αρχιτεκτονικού Σχεδιασμού","cad-structures-1","Σχέδιο Δομικών Έργων με χρήση Η/Υ Ι",[],STRUCTURES_2026),
+    sectorSubject("Δομικών Έργων, Δομημένου Περιβάλλοντος και Αρχιτεκτονικού Σχεδιασμού","urban-environment","Δομημένο Περιβάλλον και Πολεοδομικές Εφαρμογές",[],STRUCTURES_2026),
+
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","navigation-weather","Ναυσιπλοΐα Ι – Ναυτική Μετεωρολογία",[],MARITIME_TIMETABLE),
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","ship-electrical-1","Ηλεκτρολογικές Εγκαταστάσεις Πλοίου Ι",[],MARITIME_TIMETABLE),
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","shipbuilding-stability","Ναυπηγία – Ευστάθεια – Πρόωση",[],MARITIME_TIMETABLE),
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","maritime-english-1","Ναυτικά Αγγλικά Ι",[],MARITIME_TIMETABLE),
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","marine-engineering","Ναυτική Μηχανολογία – Εφαρμογές",[],MARITIME_TIMETABLE),
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","ship-drawing","Ναυπηγικό - Μηχανολογικό – Ηλεκτρολογικό Σχέδιο",[],MARITIME_TIMETABLE),
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","bridge-engine-control","Συστήματα Ελέγχου Γέφυρας – Μηχανοστασίου",[],MARITIME_TIMETABLE),
+    sectorSubject("Ναυτιλιακών Επαγγελμάτων","human-relations","Ανθρώπινες Σχέσεις – Διοίκηση Πλοίου",[],MARITIME_TIMETABLE),
 
     sectorSubject("Εφαρμοσμένων Τεχνών","freehand-drawing","Ελεύθερο Σχέδιο",[],ARTS_2026),
     sectorSubject("Εφαρμοσμένων Τεχνών","linear-drawing","Γραμμικό Σχέδιο",[],ARTS_2026),
@@ -155,8 +173,8 @@
     version:"1.1.0",
     schoolYear:"2026-2027",
     verificationDate:"2026-09-12",
-    sourceUrls:Object.freeze({generalGuidance:GENERAL_GUIDANCE,epalHub:EPAL_HUB,epalGeneralHub:EPAL_GENERAL_HUB,foreignLanguages:FOREIGN_LANG,maritimeStructure:MARITIME_STRUCTURE,informatics:INF_2026,electrical:ELEC_2026,administrationEconomy:ADMIN_2026,mechanical:MECH_2026,agriculture:AGRI_2026,appliedArts:ARTS_2026}),
-    note:"Τα μαθήματα Γενικής Παιδείας ακολουθούν την τρέχουσα εγκύκλιο 2026–27. Στη Β΄ ΕΠΑ.Λ. εμφανίζονται πλέον τα πραγματικά μαθήματα των έξι τομέων που έχουν επαληθευτεί απευθείας στις τρέχουσες οδηγίες· Δομικά, Υγεία και Ναυτιλιακά παραμένουν προσωρινά ως πύλες μέχρι να ολοκληρωθεί η ίδια αυστηρή εξαγωγή. Στη Γ΄ τάξη διατηρούνται πύλες ειδικοτήτων μέχρι να περαστούν πλήρεις λίστες ανά ειδικότητα. Δεν επινοούνται κεφάλαια.",
+    sourceUrls:Object.freeze({generalGuidance:GENERAL_GUIDANCE,epalHub:EPAL_HUB,epalGeneralHub:EPAL_GENERAL_HUB,foreignLanguages:FOREIGN_LANG,maritimeStructure:MARITIME_STRUCTURE,maritimeTimetable:MARITIME_TIMETABLE,informatics:INF_2026,electrical:ELEC_2026,administrationEconomy:ADMIN_2026,mechanical:MECH_2026,agriculture:AGRI_2026,appliedArts:ARTS_2026,structures:STRUCTURES_2026}),
+    note:"Τα μαθήματα Γενικής Παιδείας ακολουθούν την τρέχουσα εγκύκλιο 2026–27. Στη Β΄ ΕΠΑ.Λ. εμφανίζονται τα πραγματικά μαθήματα όλων των τομέων, με τις τρέχουσες οδηγίες ΙΕΠ και την ισχύουσα επίσημη δομή του Τομέα Ναυτιλιακών Επαγγελμάτων. Στη Γ΄ τάξη εμφανίζονται οι επαληθευμένες ειδικότητες και τα μαθήματά τους. Οι ακριβείς επίσημες ενότητες διακρίνονται από τις θεματικές υποστήριξης.",
     grades:Object.freeze({a:Object.freeze(GRADES.a),b:Object.freeze(GRADES.b),c:Object.freeze(GRADES.c)})
   });
 

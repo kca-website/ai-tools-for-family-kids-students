@@ -373,7 +373,7 @@
     const gap = getCurrentGap();
     const catalogSubject = getCatalogSubject();
     if (catalogSubject && gap?.id) {
-      const annuallyVerified = catalogSubject.curriculum?.annualInstructionsStatus === "2026-27-verified";
+      const annuallyVerified = catalogSubject.curriculum?.annualInstructionsStatus === "2026-27-verified" && gap.officialExact !== false;
       return {
         status: annuallyVerified ? "exact-section-verified" : "official-course-topic-anchor",
         statusLabelEl: annuallyVerified

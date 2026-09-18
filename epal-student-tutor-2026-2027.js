@@ -4,6 +4,7 @@
   const base=window.EPAL_2026_2027_TEACHER_STRUCTURE;
   const detail=window.AITOOLSKIDS_EPAL_C_SPECIALTY_DATA_2026_2027;
   const finalData=window.AITOOLSKIDS_EPAL_C_FINAL_SECTOR_DATA_2026_2027;
+  const topicLayer=window.AITOOLSKIDS_EPAL_STUDENT_TOPICS_2026_2027;
   if(!base){
     console.warn("[EPAL student tutor] Base 2026-27 EPAL structure is missing.");
     return;
@@ -24,22 +25,24 @@
       .toLowerCase().replace(/[^a-z0-9α-ω]+/gi,"-").replace(/^-|-$/g,"").slice(0,80)||"item";
   }
 
-  function curriculum(sourceUrl,topicsVerified,scopeNoteEl){
+  function curriculum(sourceUrl,topicsVerified,scopeNoteEl,hasSupportTopics=false){
     const verified=!!topicsVerified;
     return {
       schoolYear:SCHOOL_YEAR,
       schoolType:"epal",
       verificationDate:VERIFIED,
-      coverageStatus:verified?"annual-instructions-verified":"official-course-verified",
-      coverageLabelEl:verified?"Επαληθευμένες ενότητες ΕΠΑΛ 2026–27":"Επαληθευμένο μάθημα/δομή ΕΠΑΛ 2026–27",
-      coverageLabelEn:verified?"Verified EPAL 2026–27 units":"Verified EPAL 2026–27 course/structure",
-      annualInstructionsStatus:verified?"2026-27-verified":"2026-27-published",
+      coverageStatus:verified?"annual-instructions-verified":(hasSupportTopics?"official-course-topic-support":"official-course-verified"),
+      coverageLabelEl:verified?"Επαληθευμένες ενότητες ΕΠΑΛ 2026–27":(hasSupportTopics?"Επαληθευμένο μάθημα με θεματικές υποστήριξης":"Επαληθευμένο μάθημα/δομή ΕΠΑΛ 2026–27"),
+      coverageLabelEn:verified?"Verified EPAL 2026–27 units":(hasSupportTopics?"Verified course with support themes":"Verified EPAL 2026–27 course/structure"),
+      annualInstructionsStatus:(verified||hasSupportTopics)?"2026-27-verified":"2026-27-published",
       annualInstructionsUrl:sourceUrl||HUB,
       catalogUrl:sourceUrl||HUB,
       sourceLabelEl:"ΙΕΠ/ΥΠΑΙΘΑ: Οδηγίες διδασκαλίας ΕΠΑΛ 2026–27",
       sourceLabelEn:"IEP/Ministry: EPAL teaching guidance 2026–27",
       scopeNoteEl:scopeNoteEl||(verified
         ?"Οι εμφανιζόμενες ενότητες προέρχονται από την καταγεγραμμένη τρέχουσα χαρτογράφηση 2026–27."
+        :hasSupportTopics
+          ?"Οι επιλογές με ένδειξη «Θεματική υποστήριξης» βοηθούν την πλοήγηση, αλλά δεν παρουσιάζονται ως επίσημοι τίτλοι κεφαλαίων. Για διαφορετικό κεφάλαιο γράψε τον ακριβή τίτλο από το βιβλίο ή την άσκησή σου."
         :"Το μάθημα ή η δομή έχει επαληθευτεί, αλλά δεν έχει κωδικοποιηθεί πλήρης section-level ύλη. Ο μαθητής γράφει τον ακριβή τίτλο κεφαλαίου/άσκησης."),
       scopeNoteEn:verified
         ?"Displayed units come from the site's recorded current 2026–27 mapping."
@@ -51,13 +54,17 @@
 
   function subjectFromItem(grade,item,prefix=""){
     const baseId=`epal-${grade}-${prefix?prefix+"-":""}${slug(item.id||item.label)}`;
-    const topics=(item.topics||[]).map((label,index)=>({
+    const resolved=topicLayer?.resolve?.(item.label,item.topics||[])||(item.topics||[]).map(label=>({label,officialExact:true}));
+    const topics=resolved.map((entry,index)=>({
       id:`${baseId}.topic-${index+1}`,
-      labelEl:label,
-      labelEn:label,
-      explainEl:`Δούλεψε την ενότητα «${label}» με μικρές υποδείξεις και έλεγχο κατανόησης.`,
-      explainEn:`Work on “${label}” with small hints and understanding checks.`
+      labelEl:entry.label,
+      labelEn:entry.label,
+      officialExact:entry.officialExact!==false,
+      customTitle:!!entry.customTitle,
+      explainEl:`Δούλεψε την ενότητα «${entry.label}» με μικρές υποδείξεις και έλεγχο κατανόησης.`,
+      explainEn:`Work on “${entry.label}” with small hints and understanding checks.`
     }));
+    const exactTopics=topics.length>0&&topics.every(x=>x.officialExact)&&!item.structureOnly;
     return {
       id:baseId,
       grade,
@@ -66,7 +73,7 @@
       topics,
       sector:item.sector||"",
       specialty:item.specialty||"",
-      curriculum:curriculum(item.sourceUrl||HUB,topics.length>0&&!item.structureOnly)
+      curriculum:curriculum(item.sourceUrl||HUB,exactTopics,"",topics.length>0&&!exactTopics)
     };
   }
 
@@ -157,7 +164,7 @@
 
   window.AITOOLSKIDS_EPAL_STUDENT_CATALOG=Object.freeze({
     meta:Object.freeze({
-      version:"1.0.0",
+      version:"1.1.0",
       schoolYear:SCHOOL_YEAR,
       verified:VERIFIED,
       source:HUB,

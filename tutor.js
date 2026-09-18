@@ -72,7 +72,7 @@
       age15Allowed: "Η AI Βοήθεια μπορεί να χρησιμοποιηθεί με προσωπικό λογαριασμό Puter.",
       highAllowed: "Μαθητής Λυκείου: η AI Βοήθεια είναι διαθέσιμη χωρίς λογαριασμό μέσω GPT-OSS 120B.",
       noContent: "Δεν υπάρχει ακόμη περιεχόμενο για αυτή την τάξη",
-      generalHelp: "Γενική βοήθεια στο μάθημα",
+      generalHelp: "Γράψε το ακριβές κεφάλαιο ή την άσκηση στο μήνυμα",
       contextClass: "Τάξη",
       contextSubject: "Μάθημα",
       contextGoal: "Στόχος",
@@ -174,7 +174,7 @@
       age15Allowed: "AI Help can be used with a personal Puter account.",
       highAllowed: "High-school student: AI Help is available without an account through GPT-OSS 120B.",
       noContent: "No content yet for this grade",
-      generalHelp: "General help with this subject",
+      generalHelp: "Type the exact chapter or exercise in your message",
       contextClass: "Grade",
       contextSubject: "Subject",
       contextGoal: "Goal",
@@ -567,10 +567,23 @@
     populateTopics();
   }
 
+  function hasVerifiedAnnualTopicScope(subject) {
+    const c = subject?.curriculum || {};
+    return c.annualInstructionsStatus === "2026-27-verified" ||
+      c.coverageStatus === "annual-instructions-verified" ||
+      c.coverageStatus === "annual-exam-syllabus-verified" ||
+      c.coverageStatus === "panhellenic-2027-verified";
+  }
+
   function populateTopics() {
     const quiz = getCurrentQuiz();
-    const catalogTopics = getCatalogSubject()?.topics || [];
-    const tags = catalogTopics.length ? catalogTopics.map((topic) => topic.id) : getGapTagsForQuiz(quiz);
+    const catalogSubject = getCatalogSubject();
+    const catalogTopics = hasVerifiedAnnualTopicScope(catalogSubject) ? (catalogSubject?.topics || []) : [];
+    const verifiedQuizTags = getGapTagsForQuiz(quiz).filter((id) => {
+      const a = window.AITOOLSKIDS_OFFICIAL_CURRICULUM?.getGapAlignment?.(id);
+      return !!a?.annualScopeVerified && (a.status === "exact-section-verified" || a.status === "related-section-verified");
+    });
+    const tags = catalogTopics.length ? catalogTopics.map((topic) => topic.id) : verifiedQuizTags;
     refs.topic.innerHTML = "";
     for (const id of tags) {
       const gap = GAP_TAGS[id] || catalogTopics.find((topic) => topic.id === id);

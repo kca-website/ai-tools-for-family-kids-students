@@ -8,9 +8,9 @@
   if(!C?.entries || !L || !Q || !S?.rows) throw new Error("Special Education base datasets must load before Special Gymnasium data");
 
   const TIMETABLE="https://www.iep.edu.gr/wp-content/uploads/2026/04/%CE%A9%CE%A0_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95.pdf";
-  const HUB="https://www.minedu.gov.gr/eidiki-entaksiaki-ekpaidefsi";
+  const HUB="https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e";
   const ADAPTATIONS="https://prosvasimo.iep.edu.gr/el/89-yparxon-ekpaideutiko-logismiko";
-  const VERIFIED="2026-09-06";
+  const VERIFIED="2026-09-18";
 
   const subject=(id,label,hours)=>({id,label,hours});
   const shared={
@@ -36,7 +36,7 @@
     officialHubUrl:HUB,
     timetableSourceUrl:TIMETABLE,
     timetableReference:"Υ.Α. 44101/Δ3 · ΦΕΚ Β΄ 2111/09-04-2026",
-    scopeNote:"Το ωρολόγιο πρόγραμμα επαληθεύει τάξεις, μαθήματα και ώρες. Δεν χρησιμοποιείται ως απόδειξη συγκεκριμένων κεφαλαίων διδακτέας ή εξεταστέας ύλης.",
+    scopeNote:"Το ωρολόγιο πρόγραμμα επαληθεύει τάξεις, μαθήματα και ώρες και το ΥΠΑΙΘΑ έχει δημοσιεύσει τις οδηγίες Γυμνασίου Ε.Α.Ε. 2026–27 στις 15/09/2026. Μέχρι να ολοκληρωθεί section-level εξαγωγή ανά μάθημα, δεν παρουσιάζουμε δικά μας topic anchors ως αυτούσια επίσημα κεφάλαια.",
     preliminary:{
       label:"Προκαταρκτική τάξη",
       totalHours:34,
@@ -79,8 +79,8 @@
     tutorPolicy:{
       genericTopicEl:"Δούλεψε πάνω στο συγκεκριμένο κεφάλαιο, κείμενο ή άσκηση που έχεις μπροστά σου",
       genericTopicEn:"Work on the exact chapter, text or exercise you currently have",
-      warningEl:"Η τάξη και το μάθημα είναι επαληθευμένα από το ωρολόγιο 2026-27. Δεν έχει δηλωθεί εδώ ξεχωριστά επαληθευμένο κεφάλαιο Ε.Α.Ε.: ο μαθητής ή ο γονιός πρέπει να δώσει το συγκεκριμένο θέμα/άσκηση.",
-      warningEn:"The grade and subject are verified from the 2026-27 timetable. No separate E.A.E. chapter scope is claimed here: the learner or parent should provide the exact topic/exercise."
+      warningEl:"Η τάξη και το μάθημα είναι επαληθευμένα και οι επίσημες οδηγίες Γυμνασίου Ε.Α.Ε. 2026–27 έχουν δημοσιευθεί. Όπου δεν έχει ολοκληρωθεί section-level χαρτογράφηση, ο μαθητής, ο γονιός ή ο εκπαιδευτικός δίνει το συγκεκριμένο θέμα/άσκηση και το σύστημα δεν επινοεί κεφάλαιο.",
+      warningEn:"The grade and subject are verified and official 2026–27 E.A.E. Middle-school guidance has been published. Where section-level mapping is not yet encoded, the learner, parent or teacher provides the exact topic/exercise and the system must not invent a chapter."
     }
   };
 

@@ -1,12 +1,13 @@
 /**
  * tutor.js
  * ------------------------------------------------------------
- * AI Help integration powered by Puter.js.
- * - No Puter script is loaded until the user explicitly clicks Connect.
+ * AI Help integration powered by GPT-OSS 120B, with Puter as an alternative.
+ * - Text help works through the site's server endpoint without an account.
+ * - No Puter script is loaded until the user explicitly selects/connects Puter.
  * - Primary-school student role does not expose this view (enforced in app.js).
  * - Parent/guardian role uses Parent Helper mode.
- * - Middle-school student mode asks age: 12 is blocked, 13-14 requires parental consent, 15 is allowed.
- * - High-school student mode is 15+.
+ * - Direct student use is available only in the high-school zone.
+ * - Parent/guardian use remains available in every school zone.
  * - Uses existing QUIZZES -> GAP_TAGS -> LEARNING_PATHS as tutoring context.
  * - Optional push-to-talk speech input works through Puter speech-to-text.
  * - Optional spoken replies use the device/browser speech engine when available.
@@ -25,8 +26,13 @@
       titleParent: "Βοηθός Γονέα",
       subtitleStudent: "Δεν λύνει την άσκηση για εσένα. Σε καθοδηγεί με ερωτήσεις και μικρές υποδείξεις μέχρι να καταλάβεις το «γιατί».",
       subtitleParent: "Γράψε πού έχει κολλήσει το παιδί. Ο βοηθός θα σου προτείνει πώς να το καθοδηγήσεις, χωρίς να του δώσεις έτοιμη λύση.",
-      signInTitle: "Σύνδεση για την AI Βοήθεια",
-      signInIntro: "Ο οδηγός, το διαγνωστικό και οι προτάσεις λειτουργούν χωρίς λογαριασμό. Μόνο η προαιρετική AI Βοήθεια χρησιμοποιεί Puter για πρόσβαση στο μοντέλο AI.",
+      signInTitle: "Διάλεξε τρόπο δημιουργίας",
+      signInIntro: "Το GPT-OSS 120B λειτουργεί εδώ χωρίς λογαριασμό. Το Puter παραμένει προαιρετική εναλλακτική και μπορεί να ζητήσει σύνδεση.",
+      groqChoice: "⚡ GPT-OSS 120B",
+      groqChoiceText: "Χωρίς λογαριασμό · με τη χαρτογραφημένη ύλη του site",
+      puterChoice: "☁️ Puter",
+      puterChoiceText: "Εναλλακτική επιλογή · μπορεί να ζητήσει σύνδεση",
+      groqReady: "Έτοιμο χωρίς σύνδεση",
       connect: "Σύνδεση με Puter",
       switchAccount: "Αλλαγή λογαριασμού",
       notSignedIn: "Δεν έχει γίνει σύνδεση",
@@ -56,14 +62,15 @@
       modeStudentText: "Η AI Βοήθεια μιλά απευθείας στον μαθητή, μία βασική ερώτηση κάθε φορά, χωρίς να παραδίδει έτοιμη λύση.",
       allowed: "✓ Επιτρέπεται η λειτουργία",
       actionNeeded: "⚠ Χρειάζεται ενέργεια",
-      primaryParent: "Στο Δημοτικό η λειτουργία είναι μόνο για γονέα/κηδεμόνα και χρησιμοποιείται με τον δικό του λογαριασμό Puter.",
-      parentAllowed: "Ο γονέας/κηδεμόνας χρησιμοποιεί τον δικό του λογαριασμό Puter.",
+      primaryParent: "Στο Δημοτικό η λειτουργία είναι διαθέσιμη μόνο στον γονέα/κηδεμόνα.",
+      parentAllowed: "Ο Βοηθός Γονέα είναι διαθέσιμος σε όλες τις σχολικές βαθμίδες.",
+      studentLevelBlocked: "Η άμεση AI Βοήθεια μαθητή είναι διαθέσιμη μόνο στο Λύκειο. Για Δημοτικό ή Γυμνάσιο χρησιμοποίησε τον ρόλο γονέα/κηδεμόνα.",
       selectAgeMsg: "Διάλεξε πρώτα την ηλικία του μαθητή.",
       age12Blocked: "Στα 12 δεν επιτρέπουμε άμεση χρήση του Puter από τον μαθητή. Γύρισε στον ρόλο «Γονιός / Εκπαιδευτικός» για χρήση του Βοηθού Γονέα.",
       consentNeeded: "Για μαθητή 13–14 ετών χρειάζεται γονική συναίνεση πριν ενεργοποιηθεί η AI Βοήθεια.",
       consentOk: "Η γονική συναίνεση δηλώθηκε. Ο μαθητής πρέπει να χρησιμοποιεί δικό του λογαριασμό Puter.",
       age15Allowed: "Η AI Βοήθεια μπορεί να χρησιμοποιηθεί με προσωπικό λογαριασμό Puter.",
-      highAllowed: "Μαθητής Λυκείου: η AI Βοήθεια μπορεί να χρησιμοποιηθεί με προσωπικό λογαριασμό Puter.",
+      highAllowed: "Μαθητής Λυκείου: η AI Βοήθεια είναι διαθέσιμη χωρίς λογαριασμό μέσω GPT-OSS 120B.",
       noContent: "Δεν υπάρχει ακόμη περιεχόμενο για αυτή την τάξη",
       generalHelp: "Γενική βοήθεια στο μάθημα",
       contextClass: "Τάξη",
@@ -79,7 +86,7 @@
       emptyStudent: "Γράψε τι δεν καταλαβαίνεις ή πού έχεις κολλήσει. Η AI Βοήθεια θα ξεκινήσει από τη δική σου προσπάθεια.",
       emptyParent: "Περιέγραψε τι δυσκολεύει το παιδί. Ο βοηθός θα σου προτείνει το επόμενο μικρό βήμα.",
       placeholder: "Γράψε την απορία ή την άσκηση εδώ…",
-      placeholderConnect: "Συνδέσου πρώτα με Puter για να χρησιμοποιήσεις την AI Βοήθεια…",
+      placeholderConnect: "Συνδέσου πρώτα με Puter ή επίλεξε GPT-OSS 120B…",
       placeholderBlocked: "Η λειτουργία δεν είναι διαθέσιμη με αυτή την ηλικιακή ρύθμιση.",
       sample: "Βάλε παράδειγμα",
       send: "Στείλε",
@@ -103,7 +110,7 @@
       tutor: "AI Βοήθεια",
       parentHelper: "Βοηθός Γονέα",
       prototypeNote: "Σημαντικό: το AI μπορεί να κάνει λάθος. Για πραγματολογικές πληροφορίες ή σχολική ύλη έλεγξε την απάντηση σε αξιόπιστη πηγή ή στο σχολικό βιβλίο.",
-      privacyNote: "Τα μηνύματα της AI Βοήθειας αποστέλλονται στην υπηρεσία Puter και στον πάροχο AI για να παραχθεί απάντηση. Αν χρησιμοποιήσεις το μικρόφωνο, το ηχητικό απόσπασμα αποστέλλεται μέσω Puter για μεταγραφή σε κείμενο. Το aitools4kids.gr δεν αποθηκεύει μηνύματα ή ηχογραφήσεις σε δική του βάση δεδομένων. Μην δίνεις προσωπικά ή ευαίσθητα δεδομένα.",
+      privacyNote: "Τα μηνύματα αποστέλλονται στον επιλεγμένο πάροχο AI μόνο για να παραχθεί απάντηση. Αν χρησιμοποιήσεις μικρόφωνο, η μεταγραφή γίνεται μέσω Puter. Το aitools4kids.gr δεν αποθηκεύει μηνύματα ή ηχογραφήσεις σε δική του βάση δεδομένων. Μην δίνεις προσωπικά ή ευαίσθητα δεδομένα.",
       authCancelled: "Η σύνδεση ακυρώθηκε",
       authFailed: "Η σύνδεση δεν ολοκληρώθηκε",
       consentFirst: "Πρώτα δήλωσε τη γονική συναίνεση",
@@ -121,8 +128,13 @@
       titleParent: "Parent Helper",
       subtitleStudent: "It doesn't solve the exercise for you. It guides you with questions and small hints until you understand the why.",
       subtitleParent: "Describe where your child is stuck. The helper suggests how to guide them without handing over the answer.",
-      signInTitle: "Sign in for AI Help",
-      signInIntro: "The rest of aitools4kids.gr works without an account. Only this optional feature uses Puter to access the AI model.",
+      signInTitle: "Choose how to generate",
+      signInIntro: "GPT-OSS 120B works here without an account. Puter remains an optional alternative and may require sign-in.",
+      groqChoice: "⚡ GPT-OSS 120B",
+      groqChoiceText: "No account · grounded in the site's mapped curriculum",
+      puterChoice: "☁️ Puter",
+      puterChoiceText: "Alternative option · may require sign-in",
+      groqReady: "Ready without sign-in",
       connect: "Sign in with Puter",
       switchAccount: "Switch account",
       notSignedIn: "Not signed in",
@@ -152,14 +164,15 @@
       modeStudentText: "AI Help speaks directly to the student, one main question at a time, without handing over a finished solution.",
       allowed: "✓ Feature available",
       actionNeeded: "⚠ Action needed",
-      primaryParent: "For Primary School, this feature is only for a parent/guardian using their own Puter account.",
-      parentAllowed: "The parent/guardian uses their own Puter account.",
+      primaryParent: "For Primary School, this feature is available only to a parent/guardian.",
+      parentAllowed: "Parent Helper is available across all school levels.",
+      studentLevelBlocked: "Direct Student AI Help is available only in High School. For Primary or Middle School, use the parent/guardian role.",
       selectAgeMsg: "Choose the student's age first.",
       age12Blocked: "At age 12 we do not allow direct student use of Puter. Switch to the Parent / Educator role to use Parent Helper.",
       consentNeeded: "A 13–14-year-old student needs parent/guardian consent before AI Help can be enabled.",
       consentOk: "Parent/guardian consent has been declared. The student must use their own Puter account.",
       age15Allowed: "AI Help can be used with a personal Puter account.",
-      highAllowed: "High-school student: AI Help can be used with a personal Puter account.",
+      highAllowed: "High-school student: AI Help is available without an account through GPT-OSS 120B.",
       noContent: "No content yet for this grade",
       generalHelp: "General help with this subject",
       contextClass: "Grade",
@@ -175,7 +188,7 @@
       emptyStudent: "Write what you don't understand or where you're stuck. AI Help will start from your own attempt.",
       emptyParent: "Describe what your child is struggling with. The helper will suggest the next small step.",
       placeholder: "Write the question or exercise here…",
-      placeholderConnect: "Sign in with Puter first to use AI Help…",
+      placeholderConnect: "Sign in with Puter or select GPT-OSS 120B…",
       placeholderBlocked: "This feature is not available with the current age setting.",
       sample: "Insert example",
       send: "Send",
@@ -199,7 +212,7 @@
       tutor: "AI Βοήθεια",
       parentHelper: "Parent Helper",
       prototypeNote: "Important: AI can make mistakes. Check factual information and school content against a reliable source or textbook.",
-      privacyNote: "AI Help messages are sent to Puter and the AI provider to generate a response. If you use the microphone, the audio clip is sent through Puter for speech-to-text transcription. aitools4kids.gr does not store messages or recordings in its own database. Do not enter personal or sensitive information.",
+      privacyNote: "Messages are sent only to the selected AI provider to generate a response. If you use the microphone, transcription is handled through Puter. aitools4kids.gr does not store messages or recordings in its own database. Do not enter personal or sensitive information.",
       authCancelled: "Sign-in cancelled",
       authFailed: "Sign-in did not complete",
       consentFirst: "Declare parent/guardian consent first",
@@ -220,6 +233,7 @@
   let conversation = [];
   let busy = false;
   let authReady = false;
+  let providerMode = "groq";
   let signedInUser = null;
   let puterLoadPromise = null;
   let renderKey = "";
@@ -417,9 +431,6 @@
 
   function accessState() {
     if (!ctx) return { allowed: false, type: "blocked", message: "" };
-    if (ctx.zoneId === "primary" && ctx.roleId === "student") {
-      return { allowed: false, type: "blocked", message: tr("age12Blocked") };
-    }
     if (isParentMode()) {
       return {
         allowed: true,
@@ -430,14 +441,7 @@
     if (ctx.zoneId === "high") {
       return { allowed: true, type: "student", message: tr("highAllowed") };
     }
-    const age = refs.age?.value || "";
-    if (!age) return { allowed: false, type: "age", message: tr("selectAgeMsg") };
-    if (age === "12") return { allowed: false, type: "blocked", message: tr("age12Blocked") };
-    if (age === "13-14" && !refs.consent?.checked) {
-      return { allowed: false, type: "consent", message: tr("consentNeeded") };
-    }
-    if (age === "13-14") return { allowed: true, type: "student", message: tr("consentOk") };
-    return { allowed: true, type: "student", message: tr("age15Allowed") };
+    return { allowed: false, type: "blocked", message: tr("studentLevelBlocked") };
   }
 
   function formatUser(user) {
@@ -643,6 +647,20 @@
 
   function updateAuthUi() {
     if (!refs.authDot) return;
+    const usingPuter = providerMode === "puter";
+    refs.groqChoice?.classList.toggle("tutor-provider-choice--active", !usingPuter);
+    refs.puterChoice?.classList.toggle("tutor-provider-choice--active", usingPuter);
+    if (refs.puterDetails) refs.puterDetails.hidden = !usingPuter;
+    if (!usingPuter) {
+      refs.authDot.classList.add("tutor-auth-dot--on");
+      refs.authStatus.textContent = tr("groqReady");
+      refs.authUser.textContent = "· GPT-OSS 120B";
+      refs.signIn.hidden = true;
+      refs.switchAccount.hidden = true;
+      refs.usageWrap.hidden = true;
+      updateComposerState();
+      return;
+    }
     if (!authReady) {
       refs.authDot.classList.remove("tutor-auth-dot--on");
       refs.authStatus.textContent = tr("notSignedIn");
@@ -663,12 +681,13 @@
   function updateComposerState() {
     if (!refs.input || !refs.send) return;
     const allowed = accessState().allowed;
-    const canChat = allowed && authReady && !busy;
+    const providerReady = providerMode === "groq" || authReady;
+    const canChat = allowed && providerReady && !busy;
     refs.input.disabled = !canChat;
     refs.send.disabled = !canChat;
     refs.sample.disabled = !allowed;
     if (!allowed) refs.input.placeholder = tr("placeholderBlocked");
-    else if (!authReady) refs.input.placeholder = tr("placeholderConnect");
+    else if (!providerReady) refs.input.placeholder = tr("placeholderConnect");
     else refs.input.placeholder = tr("placeholder");
     setMicUi();
   }
@@ -1368,7 +1387,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
       renderAccessGate();
       return;
     }
-    if (!authReady) {
+    if (providerMode === "puter" && !authReady) {
       await explicitSignIn(false);
       if (!authReady) return;
     }
@@ -1394,14 +1413,27 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
         { role: "system", content: buildSystemPrompt() },
         { role: "user", content: continuationPrompt },
       ];
-      const options = {
-        model: MODEL_ID,
-        provider: MODEL_PROVIDER,
-        max_tokens: 700,
+      const options = { model: MODEL_ID, provider: MODEL_PROVIDER, max_tokens: 700 };
+      const callProvider = async (requestMessages) => {
+        if (providerMode === "puter") {
+          const puterObj = await ensurePuterLoaded();
+          return puterObj.ai.chat(requestMessages, options);
+        }
+        const response = await fetch("/api/tutor-assistant", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            system: requestMessages[0]?.content || "",
+            prompt: requestMessages[1]?.content || "",
+            audience: isParentMode() ? "parent" : "high_student",
+          }),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.message || tr("callFailed"));
+        return data.text || "";
       };
 
-      const puterObj = await ensurePuterLoaded();
-      let resp = await puterObj.ai.chat(messages, options);
+      let resp = await callProvider(messages);
       let answer = extractText(resp) || tr("noResponse");
 
       const lostContext = conversation.length >= 2 && /^(hello|hi\b|how can i help|πώς μπορώ να βοηθήσω|γεια[!,. ]*$)/i.test(answer.trim());
@@ -1410,7 +1442,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           { role: "system", content: buildSystemPrompt() },
           { role: "user", content: `IMPORTANT: the previous attempt lost the conversation context. Do not start a new conversation.\n\n${continuationPrompt}\n\nAnswer specifically to the user's last phrase and connect it to the tutor's previous question.` },
         ];
-        resp = await puterObj.ai.chat(retryMessages, options);
+        resp = await callProvider(retryMessages);
         answer = extractText(resp) || answer;
       }
 
@@ -1465,6 +1497,16 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     }
     refs.signIn.addEventListener("click", () => explicitSignIn(false));
     refs.switchAccount.addEventListener("click", () => explicitSignIn(true));
+    refs.groqChoice?.addEventListener("click", () => {
+      providerMode = "groq";
+      resetConversation();
+      updateAuthUi();
+    });
+    refs.puterChoice?.addEventListener("click", () => {
+      providerMode = "puter";
+      resetConversation();
+      updateAuthUi();
+    });
     refs.newChat.addEventListener("click", () => resetConversation());
     refs.mic?.addEventListener("click", () => { primeAudioOutput(); toggleRecording(); });
     refs.autoSpeak?.addEventListener("change", () => {
@@ -1492,7 +1534,6 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
 
   function html() {
     const parentMode = isParentMode();
-    const middleStudent = ctx.zoneId === "middle" && ctx.roleId === "student";
     return `
       <section class="tutor-shell" aria-labelledby="tutorHeading">
         <div class="tutor-heading">
@@ -1509,6 +1550,11 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             </div>
             <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorSwitchAccount" hidden>${escapeHtml(tr("switchAccount"))}</button>
           </div>
+          <div class="tutor-provider-picker" role="group" aria-label="${escapeHtml(tr("signInTitle"))}">
+            <button type="button" class="tutor-provider-choice tutor-provider-choice--active" id="tutorGroqChoice"><strong>${escapeHtml(tr("groqChoice"))}</strong><span>${escapeHtml(tr("groqChoiceText"))}</span></button>
+            <button type="button" class="tutor-provider-choice" id="tutorPuterChoice"><strong>${escapeHtml(tr("puterChoice"))}</strong><span>${escapeHtml(tr("puterChoiceText"))}</span></button>
+          </div>
+          <div id="tutorPuterDetails" hidden>
           <div class="tutor-auth-status" id="tutorAuthBox">
             <span class="tutor-auth-dot" id="tutorAuthDot" aria-hidden="true"></span>
             <strong id="tutorAuthStatus">${escapeHtml(tr("notSignedIn"))}</strong>
@@ -1525,26 +1571,13 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             <span>${escapeHtml(tr("steps3"))}</span>
           </div>
           <p class="tutor-auth-links"><a href="https://puter.com/terms" target="_blank" rel="noopener">${escapeHtml(tr("puterTerms"))}</a> · <a href="https://puter.com/privacy" target="_blank" rel="noopener">${escapeHtml(tr("puterPrivacy"))}</a></p>
+          </div>
           <div class="tutor-privacy-note">${escapeHtml(tr("privacyNote"))}</div>
         </div>
 
         <div class="tutor-layout">
           <aside class="tutor-settings">
             <h3>${escapeHtml(tr("settings"))}</h3>
-            ${middleStudent ? `
-              <label class="tutor-field">
-                <span>${escapeHtml(tr("age"))}</span>
-                <select id="tutorAge">
-                  <option value="">${escapeHtml(tr("chooseAge"))}</option>
-                  <option value="12">${escapeHtml(tr("age12"))}</option>
-                  <option value="13-14">${escapeHtml(tr("age13_14"))}</option>
-                  <option value="15">${escapeHtml(tr("age15"))}</option>
-                </select>
-              </label>
-              <label class="tutor-consent" id="tutorConsentRow" hidden>
-                <input type="checkbox" id="tutorConsent">
-                <span>${escapeHtml(tr("consent"))}</span>
-              </label>` : ""}
             <label class="tutor-field"><span>${escapeHtml(tr("grade"))}</span><select id="tutorGrade"></select></label>
             <label class="tutor-field"><span>${escapeHtml(tr("subject"))}</span><select id="tutorSubject"></select></label>
             <label class="tutor-field"><span>${escapeHtml(tr("topic"))}</span><select id="tutorTopic"></select></label>
@@ -1588,6 +1621,9 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     const byId = (id) => document.getElementById(id);
     refs = {
       signIn: byId("tutorSignIn"),
+      groqChoice: byId("tutorGroqChoice"),
+      puterChoice: byId("tutorPuterChoice"),
+      puterDetails: byId("tutorPuterDetails"),
       switchAccount: byId("tutorSwitchAccount"),
       authBox: byId("tutorAuthBox"),
       authDot: byId("tutorAuthDot"),
@@ -1641,6 +1677,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     conversation = [];
     busy = false;
     authReady = false;
+    providerMode = "groq";
     signedInUser = null;
     mount.innerHTML = html();
     mount.dataset.ready = "1";

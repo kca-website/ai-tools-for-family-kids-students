@@ -49,7 +49,7 @@
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
       badgeZeroTracking: "Χωρίς Cookies στον οδηγό",
-      badgeZeroTrackingExplainer: "Ο οδηγός, τα εργαλεία και ο Χάρτης Εξάσκησης δεν χρησιμοποιούν cookies ούτε απαιτούν λογαριασμό. Η πρόοδος του Χάρτη μπορεί να αποθηκευτεί μόνο τοπικά στη συσκευή σου. Μόνο η προαιρετική AI Βοήθεια χρησιμοποιεί Puter: όταν επιλέξεις να συνδεθείς, ισχύουν οι όροι και η πολιτική απορρήτου του Puter.",
+      badgeZeroTrackingExplainer: "Ο οδηγός, τα εργαλεία και ο Χάρτης Εξάσκησης δεν χρησιμοποιούν cookies ούτε απαιτούν λογαριασμό. Η πρόοδος του Χάρτη μπορεί να αποθηκευτεί μόνο τοπικά στη συσκευή σου. Η προαιρετική AI Βοήθεια χρησιμοποιεί GPT-OSS 120B χωρίς λογαριασμό ή, αν το επιλέξεις, Puter.",
       chooseZoneHeading: "Διάλεξε ηλικιακή ζώνη",
       chooseZoneSubheading: "Αν ξέρεις ήδη τη σχολική βαθμίδα, μπες από εδώ. Σε κάθε ζώνη θα βρεις Χάρτη Εξάσκησης, Μονοπάτια Μάθησης, καθοδήγηση και επιλεγμένα εργαλεία.",
       heroFlowLabel: "Η διαδρομή μάθησης",
@@ -64,12 +64,12 @@
       heroHelpBadge: "Κόλλησα εδώ",
       heroHelpTitle: "Δείξε μου πώς να το μάθω, όχι τη λύση",
       heroHelpSub: "Η AI Βοήθεια ξεκινά από τη δική σου προσπάθεια και σε καθοδηγεί με μία ερώτηση ή μικρή υπόδειξη τη φορά, χωρίς έτοιμη τελική απάντηση.",
-      heroHelpNote: "Η βασική πλατφόρμα παραμένει χωρίς λογαριασμό. Η AI Βοήθεια είναι προαιρετική, χρησιμοποιεί Puter και υπόκειται στα δικά του όρια χρήσης.",
+      heroHelpNote: "Η βασική πλατφόρμα παραμένει χωρίς λογαριασμό. Η προαιρετική AI Βοήθεια χρησιμοποιεί GPT-OSS 120B χωρίς σύνδεση, με το Puter ως εναλλακτική επιλογή.",
       heroHelpPrimary: "Γονιός Δημοτικού",
-      heroHelpMiddle: "Γυμνάσιο 13+",
-      heroHelpHigh: "Λύκειο",
+      heroHelpMiddle: "Γονιός Γυμνασίου",
+      heroHelpHigh: "Μαθητής Λυκείου",
       backToZones: "Πίσω σε όλες τις ζώνες",
-      footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Η προαιρετική AI Βοήθεια χρησιμοποιεί τεχνικά την υπηρεσία Puter.",
+      footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Η προαιρετική AI Βοήθεια χρησιμοποιεί Groq/GPT-OSS 120B ή Puter.",
       emptyState: "Δεν έχουν προστεθεί ακόμα εργαλεία για αυτόν τον συνδυασμό. Έρχονται σύντομα.",
       useCaseLabel: "Για ποια δουλειά",
       howToLabel: "Πώς να το χρησιμοποιήσεις",
@@ -159,7 +159,7 @@
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
       badgeZeroTracking: "No Cookies in the guide",
-      badgeZeroTrackingExplainer: "The guide, tool directory and Practice Map use no cookies and require no account. Practice Map progress may be stored only on your device. Only the optional AI Help feature uses Puter; if you choose to sign in, Puter’s own terms and privacy policy apply.",
+      badgeZeroTrackingExplainer: "The guide, tool directory and Practice Map use no cookies and require no account. Practice Map progress may be stored only on your device. Optional AI Help uses GPT-OSS 120B without an account or, if selected, Puter.",
       chooseZoneHeading: "Choose an age zone",
       chooseZoneSubheading: "If you already know the school level, start here. Each zone includes the Practice Map, Learning Paths, guidance and a curated set of tools.",
       heroFlowLabel: "The learning route",
@@ -174,12 +174,12 @@
       heroHelpBadge: "I’m stuck here",
       heroHelpTitle: "Show me how to learn it, not the answer",
       heroHelpSub: "AI Help starts from your own attempt and guides you with one question or small hint at a time, without handing over a finished answer.",
-      heroHelpNote: "The core site remains account-free. AI Help is optional, uses Puter, and is subject to Puter’s own usage limits.",
+      heroHelpNote: "The core site remains account-free. Optional AI Help uses GPT-OSS 120B without sign-in, with Puter as an alternative.",
       heroHelpPrimary: "Primary parent",
-      heroHelpMiddle: "Middle School 13+",
-      heroHelpHigh: "High School",
+      heroHelpMiddle: "Middle School parent",
+      heroHelpHigh: "High School student",
       backToZones: "Back to all zones",
-      footerText: "Independent project. It is not an official product or partnership of any AI provider. The optional AI Help feature technically uses Puter.",
+      footerText: "Independent project. It is not an official product or partnership of any AI provider. Optional AI Help uses Groq/GPT-OSS 120B or Puter.",
       emptyState: "No tools added yet for this combination. Coming soon.",
       useCaseLabel: "Best for",
       howToLabel: "How to use it",
@@ -695,8 +695,8 @@ function renderToolGrid(pathTools, targetElement) {
 
   // ---------- Rendering: View tabs ----------
   function isTutorViewAvailable(zoneId = state.currentZone, roleId = state.currentRole) {
-    // Στο Δημοτικό ο Tutor εμφανίζεται μόνο στο λεωφορείο Γονιός/Εκπαιδευτικός.
-    return !(zoneId === "primary" && roleId === "student");
+    // Γονείς/κηδεμόνες: όλες οι βαθμίδες. Μαθητές: μόνο Λύκειο.
+    return roleId === "guardian" || (roleId === "student" && zoneId === "high");
   }
 
   function renderTutorView() {

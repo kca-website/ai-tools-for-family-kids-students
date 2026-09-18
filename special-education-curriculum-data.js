@@ -1,10 +1,10 @@
 window.SPECIAL_EDUCATION_CURRICULUM = {
   schoolYear: "2026-2027",
-  verificationDate: "2026-09-06",
+  verificationDate: "2026-09-18",
   disclaimer: "Η ύπαρξη θεματικού τίτλου ή topic anchor δεν αποδεικνύει από μόνη της ότι αποτελεί εξεταστέα ύλη. Η επίσημη εγκύκλιος και οι ισχύουσες οδηγίες παραμένουν η πηγή αναφοράς.",
-  officialHubUrl: "https://www.minedu.gov.gr/eidiki-entaksiaki-ekpaidefsi",
+  officialHubUrl: "https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",
   schools: {
-    specialGymnasium: {id:"special-gymnasium",label:"Ειδικό Γυμνάσιο",type:"general-education",status:"pending-2026-27-subject-verification",note:"Ξεχωριστό dataset από το ΕΝ.Ε.Ε.ΓΥ.-Λ. Δεν χρησιμοποιούμε παλαιότερες οδηγίες ως τρέχουσα ύλη χωρίς νέα επαλήθευση."},
+    specialGymnasium: {id:"special-gymnasium",label:"Ειδικό Γυμνάσιο",type:"general-education",status:"official-2026-27-guidance-published",note:"Οι οδηγίες Γυμνασίου Ε.Α.Ε. 2026–27 δημοσιεύθηκαν από το ΥΠΑΙΘΑ στις 15/09/2026. Η δημοσίευση επιβεβαιώνει την τρέχουσα επίσημη βάση· section-level αντιστοίχιση δηλώνεται μόνο όπου έχει καταχωριστεί ρητά."},
     eneegyl: {id:"eneegyl",label:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",type:"vocational-technological",status:"active"}
   },
   entries: {

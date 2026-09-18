@@ -52,8 +52,27 @@
     return null;
   }
 
+  function applyToActiveCurriculum(){
+    var byQuiz = window.AITOOLSKIDS_OFFICIAL_CURRICULUM && window.AITOOLSKIDS_OFFICIAL_CURRICULUM.byQuiz;
+    if(!byQuiz) return;
+    Object.keys(byQuiz).forEach(function(key){
+      var entry = byQuiz[key];
+      var annual = resolve(entry);
+      if(!annual || !entry || Object.isFrozen(entry)) return;
+      entry.annualInstructionsStatus = annual.status;
+      entry.annualInstructionsUrl = annual.sourceUrl;
+      entry.annualInstructionsNoteEl = annual.noteEl;
+      entry.annualInstructionsNoteEn = annual.noteEn;
+      entry.annualInstructionsSourceLabelEl = annual.sourceLabelEl;
+      entry.annualInstructionsSourceLabelEn = annual.sourceLabelEn;
+    });
+  }
+
+  applyToActiveCurriculum();
+
   window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027 = Object.freeze({
     meta: META,
-    resolve: resolve
+    resolve: resolve,
+    applyToActiveCurriculum: applyToActiveCurriculum
   });
 })();

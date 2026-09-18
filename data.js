@@ -36,8 +36,8 @@ const ZONES = [
     labelEn: "High School",
     ageRangeEl: "15 έως 18 ετών",
     ageRangeEn: "Ages 15 to 18",
-    descriptionEl: "ΓΕΛ για μαθητές. Για εκπαιδευτικούς υποστηρίζεται επίσης ΕΠΑΛ με χαρτογράφηση 2026–27.",
-    descriptionEn: "General Lyceum for students. Educators also get EPAL support mapped to 2026–27 sources.",
+    descriptionEl: "ΓΕΛ και ΕΠΑΛ για μαθητές, με επιλογή τάξης και όπου χρειάζεται τομέα ή ειδικότητας. Ύλη 2026–27 χωρίς επινοημένα κεφάλαια.",
+    descriptionEn: "GEL and EPAL for students, with grade and where needed sector or specialty selection. 2026–27 support without invented chapters.",
   },
 ];
 

@@ -60,6 +60,14 @@
     "Ανατομία-Φυσιολογία I","Πρώτες Βοήθειες","Υγεία και Διατροφή","Διαπροσωπικές Σχέσεις","Εργασιακό Περιβάλλον Τομέα","Μικροβιολογία Ι","Νοσηλευτική Ι","Δημιουργική Απασχόληση στην Προσχολική Ηλικία I","Σύγχρονη Αισθητική Ι","Εισαγωγή στη Φυσικοθεραπεία Ι","Βασικές Εφαρμογές Κομμωτικής Ι","Οδοντοτεχνία Ι","Φαρμακευτική Τεχνολογία Ι","Ακτινοτεχνολογία Ι"
   ];
 
+  window.AITOOLSKIDS_EPAL_C_SPECIALTY_DATA_2026_2027=Object.freeze({
+    version:"1.1.0",
+    verified:"2026-09-18",
+    specialties:Object.freeze(SPECIALTIES.map(x=>Object.freeze({...x,subjects:Object.freeze([...x.subjects])}))),
+    bHealth:Object.freeze([...B_HEALTH]),
+    sources:Object.freeze({...SRC})
+  });
+
   const baseGrade=id=>window.EPAL_2026_2027_TEACHER_STRUCTURE?.grades?.[id]||[];
   const baseGeneralC=()=>baseGrade("c").filter(x=>!x.sectorGateway);
   const specialtyById=id=>SPECIALTIES.find(x=>x.id===id)||SPECIALTIES[0];

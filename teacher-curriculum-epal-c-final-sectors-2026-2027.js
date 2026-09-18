@@ -56,6 +56,12 @@
     }
   ];
 
+  window.AITOOLSKIDS_EPAL_C_FINAL_SECTOR_DATA_2026_2027=Object.freeze({
+    version:"1.1.0",
+    verified:"2026-09-18",
+    specialties:Object.freeze(EXTRA.map(x=>Object.freeze({...x,subjects:Object.freeze([...x.subjects])})))
+  });
+
   const byId=id=>EXTRA.find(x=>x.id===id);
   const generalC=()=>((window.EPAL_2026_2027_TEACHER_STRUCTURE?.grades?.c)||[]).filter(x=>!x.sectorGateway).map(x=>({...x,topics:[...(x.topics||[])]}));
   const mk=(specialty,label,i)=>({

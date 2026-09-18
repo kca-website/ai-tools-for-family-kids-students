@@ -53,6 +53,13 @@
       age13_14: "13–14 ετών",
       age15: "15 ετών",
       consent: "Έχω τη συγκατάθεση γονέα/κηδεμόνα για τη χρήση του Puter από μαθητή 13–14 ετών.",
+      schoolType: "Τύπος Λυκείου",
+      gel: "ΓΕΛ",
+      epal: "ΕΠΑΛ",
+      sector: "Τομέας ΕΠΑΛ",
+      chooseSector: "Γενική Παιδεία / διάλεξε τομέα",
+      specialty: "Ειδικότητα ΕΠΑΛ",
+      chooseSpecialty: "Γενική Παιδεία / διάλεξε ειδικότητα",
       grade: "Τάξη",
       subject: "Μάθημα",
       topic: "Θέμα / δυσκολία",
@@ -70,9 +77,12 @@
       consentNeeded: "Για μαθητή 13–14 ετών χρειάζεται γονική συναίνεση πριν ενεργοποιηθεί η AI Βοήθεια.",
       consentOk: "Η γονική συναίνεση δηλώθηκε. Ο μαθητής πρέπει να χρησιμοποιεί δικό του λογαριασμό Puter.",
       age15Allowed: "Η AI Βοήθεια μπορεί να χρησιμοποιηθεί με προσωπικό λογαριασμό Puter.",
-      highAllowed: "Μαθητής Λυκείου: η AI Βοήθεια είναι διαθέσιμη χωρίς λογαριασμό μέσω GPT-OSS 120B.",
+      highAllowed: "Μαθητής Λυκείου (ΓΕΛ ή ΕΠΑΛ): η AI Βοήθεια είναι διαθέσιμη χωρίς λογαριασμό μέσω GPT-OSS 120B.",
       noContent: "Δεν υπάρχει ακόμη περιεχόμενο για αυτή την τάξη",
       generalHelp: "Γράψε το ακριβές κεφάλαιο ή την άσκηση στο μήνυμα",
+      contextSchoolType: "Τύπος Λυκείου",
+      contextSector: "Τομέας",
+      contextSpecialty: "Ειδικότητα",
       contextClass: "Τάξη",
       contextSubject: "Μάθημα",
       contextGoal: "Στόχος",
@@ -155,6 +165,13 @@
       age13_14: "13–14 years old",
       age15: "15 years old",
       consent: "I have parent/guardian consent for a 13–14-year-old student to use Puter.",
+      schoolType: "High-school type",
+      gel: "General Lyceum (GEL)",
+      epal: "Vocational Lyceum (EPAL)",
+      sector: "EPAL sector",
+      chooseSector: "General subjects / choose sector",
+      specialty: "EPAL specialty",
+      chooseSpecialty: "General subjects / choose specialty",
       grade: "Grade",
       subject: "Subject",
       topic: "Topic / difficulty",
@@ -172,9 +189,12 @@
       consentNeeded: "A 13–14-year-old student needs parent/guardian consent before AI Help can be enabled.",
       consentOk: "Parent/guardian consent has been declared. The student must use their own Puter account.",
       age15Allowed: "AI Help can be used with a personal Puter account.",
-      highAllowed: "High-school student: AI Help is available without an account through GPT-OSS 120B.",
+      highAllowed: "High-school student (GEL or EPAL): AI Help is available without an account through GPT-OSS 120B.",
       noContent: "No content yet for this grade",
       generalHelp: "Type the exact chapter or exercise in your message",
+      contextSchoolType: "High-school type",
+      contextSector: "Sector",
+      contextSpecialty: "Specialty",
       contextClass: "Grade",
       contextSubject: "Subject",
       contextGoal: "Goal",
@@ -284,13 +304,28 @@
     return ctx?.roleId === "guardian" || ctx?.zoneId === "primary";
   }
 
+  function isHighEpalMode() {
+    return ctx?.zoneId === "high" && refs.schoolType?.value === "epal";
+  }
+
   function getCatalogSubject() {
+    if (!refs.subject?.value || !refs.grade?.value) return null;
+    if (isHighEpalMode()) {
+      const epal = window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+      return epal?.getSubject?.(
+        refs.grade.value,
+        refs.subject.value,
+        refs.sector?.value || "",
+        refs.specialty?.value || ""
+      ) || null;
+    }
     const catalog = window.AITOOLSKIDS_TUTOR_CATALOG;
-    if (!catalog || !refs.subject?.value || !refs.grade?.value) return null;
+    if (!catalog) return null;
     return catalog.getSubject?.(ctx.zoneId, refs.grade.value, refs.subject.value) || null;
   }
 
   function getCurrentQuiz() {
+    if (isHighEpalMode()) return null;
     const subject = getCatalogSubject();
     const quizId = subject?.quizId || subject?.id || refs.subject?.value;
     return (QUIZZES[ctx.zoneId] || {})[quizId] || null;
@@ -316,8 +351,20 @@
   }
 
   function getOfficialAnnualGuidance() {
-    const annualLayer = window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027;
     const entry = getOfficialCurriculumEntry();
+    if (isHighEpalMode() && entry) {
+      return {
+        status: entry.annualInstructionsStatus || "2026-27-published",
+        sourceUrl: entry.annualInstructionsUrl || entry.catalogUrl || "",
+        labelEl: entry.coverageLabelEl || "Επίσημες οδηγίες ΕΠΑΛ 2026–27",
+        labelEn: entry.coverageLabelEn || "Official EPAL 2026–27 guidance",
+        sourceLabelEl: entry.sourceLabelEl || "ΙΕΠ/ΥΠΑΙΘΑ: ΕΠΑΛ 2026–27",
+        sourceLabelEn: entry.sourceLabelEn || "IEP/Ministry: EPAL 2026–27",
+        noteEl: entry.annualInstructionsNoteEl || entry.scopeNoteEl || "",
+        noteEn: entry.annualInstructionsNoteEn || entry.scopeNoteEn || "",
+      };
+    }
+    const annualLayer = window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027;
     return annualLayer?.resolve?.(entry) || null;
   }
 
@@ -506,6 +553,7 @@
 
   function populateGrades() {
     refs.grade.innerHTML = "";
+    const epalMode = isHighEpalMode();
 
     // Defensive fallback: the Tutor must never stop initializing just because
     // navigation metadata is missing. Prefer the shared GRADES map; if it is
@@ -539,18 +587,66 @@
     for (const grade of gradeList) {
       const option = document.createElement("option");
       option.value = grade.id;
-      option.textContent = langValue(grade, "labelEl", "labelEn", grade.id);
+      if (epalMode && ctx.zoneId === "high") {
+        const el = { a:"Α", b:"Β", c:"Γ" }[grade.id] || grade.id;
+        const en = { a:"1", b:"2", c:"3" }[grade.id] || grade.id;
+        option.textContent = ctx.lang === "en" ? `EPAL Year ${en}` : `${el}' ΕΠΑΛ`;
+      } else {
+        option.textContent = langValue(grade, "labelEl", "labelEn", grade.id);
+      }
       refs.grade.appendChild(option);
     }
     populateSubjects();
   }
 
+  function fillSelect(select, firstLabel, rows, valueKey, labelKey) {
+    if (!select) return;
+    const previous = select.value;
+    select.innerHTML = "";
+    const first = document.createElement("option");
+    first.value = "";
+    first.textContent = firstLabel;
+    select.appendChild(first);
+    for (const row of rows || []) {
+      const option = document.createElement("option");
+      option.value = row[valueKey];
+      option.textContent = row[labelKey] || row[valueKey];
+      select.appendChild(option);
+    }
+    if ([...select.options].some((o) => o.value === previous)) select.value = previous;
+  }
+
+  function populateEpalTrackFields() {
+    if (!refs.sectorField || !refs.specialtyField) return;
+    const epal = isHighEpalMode();
+    const gradeId = refs.grade?.value || "a";
+    const catalog = window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+    refs.sectorField.hidden = !(epal && gradeId === "b");
+    refs.specialtyField.hidden = !(epal && gradeId === "c");
+    if (epal && gradeId === "b") {
+      fillSelect(refs.sector, tr("chooseSector"), catalog?.getSectors?.() || [], "id", "label");
+    }
+    if (epal && gradeId === "c") {
+      fillSelect(refs.specialty, tr("chooseSpecialty"), catalog?.getSpecialties?.() || [], "id", "label");
+    }
+  }
+
   function populateSubjects() {
     const gradeId = refs.grade.value;
-    const quizzes = Object.values(QUIZZES[ctx.zoneId] || {}).filter((q) => (q.grades || []).includes(gradeId));
-    const catalogSubjects = window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(ctx.zoneId, gradeId) || [];
-    const represented = new Set(catalogSubjects.map((subject) => subject.quizId || subject.id));
-    const subjects = catalogSubjects.concat(quizzes.filter((quiz) => !represented.has(quiz.id)));
+    populateEpalTrackFields();
+    let subjects = [];
+    if (isHighEpalMode()) {
+      subjects = window.AITOOLSKIDS_EPAL_STUDENT_CATALOG?.getSubjects?.(
+        gradeId,
+        refs.sector?.value || "",
+        refs.specialty?.value || ""
+      ) || [];
+    } else {
+      const quizzes = Object.values(QUIZZES[ctx.zoneId] || {}).filter((q) => (q.grades || []).includes(gradeId));
+      const catalogSubjects = window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(ctx.zoneId, gradeId) || [];
+      const represented = new Set(catalogSubjects.map((subject) => subject.quizId || subject.id));
+      subjects = catalogSubjects.concat(quizzes.filter((quiz) => !represented.has(quiz.id)));
+    }
     refs.subject.innerHTML = "";
     for (const subject of subjects) {
       const option = document.createElement("option");
@@ -630,7 +726,18 @@
       ${annualGuidance?.sourceUrl ? `<br><a href="${escapeHtml(annualGuidance.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(annualSourceLabel || (ctx.lang === "en" ? "Official 2026–27 source" : "Επίσημη πηγή 2026–27"))} ↗</a>` : ""}
       ${gapStatusLabel ? `<br><span${mismatch ? ' style="color:#b45309;font-weight:700"' : ""}>${escapeHtml(gapStatusLabel)}</span>` : ""}` : "";
 
+    const schoolContext = ctx.zoneId === "high"
+      ? `<b>${escapeHtml(tr("contextSchoolType"))}:</b> ${escapeHtml(isHighEpalMode() ? tr("epal") : tr("gel"))}<br>`
+      : "";
+    const sectorContext = isHighEpalMode() && refs.sector?.value
+      ? `<b>${escapeHtml(tr("contextSector"))}:</b> ${escapeHtml(refs.sector.options[refs.sector.selectedIndex]?.textContent || "")}<br>`
+      : "";
+    const specialtyContext = isHighEpalMode() && refs.specialty?.value
+      ? `<b>${escapeHtml(tr("contextSpecialty"))}:</b> ${escapeHtml(refs.specialty.options[refs.specialty.selectedIndex]?.textContent || "")}<br>`
+      : "";
+
     refs.contextBox.innerHTML = `
+      ${schoolContext}${sectorContext}${specialtyContext}
       <b>${escapeHtml(tr("contextClass"))}:</b> ${escapeHtml(getSelectedGradeLabel())}<br>
       <b>${escapeHtml(tr("contextSubject"))}:</b> ${escapeHtml(langValue(subject, "subjectLabelEl", "subjectLabelEn", ":"))}<br>
       <b>${escapeHtml(tr("contextGoal"))}:</b> ${escapeHtml(langValue(gap, "labelEl", "labelEn", tr("generalHelp")))}<br><br>
@@ -775,11 +882,18 @@
     }).join("\n");
     const ageText = ctx.zoneId === "high" ? "15-18" : (refs.age?.value || "13+");
     const officialCurriculumText = buildOfficialCurriculumPrompt();
+    const schoolContextLines = [];
+    if (ctx.zoneId === "high") {
+      schoolContextLines.push(`- High-school type: ${isHighEpalMode() ? "EPAL" : "GEL"}`);
+      if (isHighEpalMode() && refs.sector?.value) schoolContextLines.push(`- EPAL sector: ${refs.sector.options[refs.sector.selectedIndex]?.textContent || refs.sector.value}`);
+      if (isHighEpalMode() && refs.specialty?.value) schoolContextLines.push(`- EPAL specialty: ${refs.specialty.options[refs.specialty.selectedIndex]?.textContent || refs.specialty.value}`);
+    }
 
     return `You are the AI Tutor for AI Tools for Kids. Your goal is UNDERSTANDING, not producing finished schoolwork.
 
 CONTEXT
 - Grade: ${getSelectedGradeLabel()}
+${schoolContextLines.join("\n")}
 - Subject: ${langValue(subject, "subjectLabelEl", "subjectLabelEn", "general school subject")}
 - Focus: ${langValue(gap, "labelEl", "labelEn", "general question")}
 - Likely learning difficulty: ${langValue(gap, "explainEl", "explainEn", "no specific difficulty defined")}
@@ -1503,7 +1617,10 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
   }
 
   function bindEvents() {
+    refs.schoolType?.addEventListener("change", () => { populateGrades(); renderContext(); resetConversation(); });
     refs.grade.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
+    refs.sector?.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
+    refs.specialty?.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
     refs.subject.addEventListener("change", () => { populateTopics(); renderContext(); resetConversation(); });
     refs.topic.addEventListener("change", () => { renderContext(); resetConversation(); });
     if (refs.age) {
@@ -1607,7 +1724,10 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
         <div class="tutor-layout">
           <aside class="tutor-settings">
             <h3>${escapeHtml(tr("settings"))}</h3>
+            <label class="tutor-field" id="tutorSchoolTypeField" ${ctx.zoneId === "high" ? "" : "hidden"}><span>${escapeHtml(tr("schoolType"))}</span><select id="tutorSchoolType"><option value="gel">${escapeHtml(tr("gel"))}</option><option value="epal">${escapeHtml(tr("epal"))}</option></select></label>
             <label class="tutor-field"><span>${escapeHtml(tr("grade"))}</span><select id="tutorGrade"></select></label>
+            <label class="tutor-field" id="tutorSectorField" hidden><span>${escapeHtml(tr("sector"))}</span><select id="tutorSector"></select></label>
+            <label class="tutor-field" id="tutorSpecialtyField" hidden><span>${escapeHtml(tr("specialty"))}</span><select id="tutorSpecialty"></select></label>
             <label class="tutor-field"><span>${escapeHtml(tr("subject"))}</span><select id="tutorSubject"></select></label>
             <label class="tutor-field"><span>${escapeHtml(tr("topic"))}</span><select id="tutorTopic"></select></label>
 
@@ -1664,7 +1784,13 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       age: byId("tutorAge"),
       consent: byId("tutorConsent"),
       consentRow: byId("tutorConsentRow"),
+      schoolTypeField: byId("tutorSchoolTypeField"),
+      schoolType: byId("tutorSchoolType"),
       grade: byId("tutorGrade"),
+      sectorField: byId("tutorSectorField"),
+      sector: byId("tutorSector"),
+      specialtyField: byId("tutorSpecialtyField"),
+      specialty: byId("tutorSpecialty"),
       subject: byId("tutorSubject"),
       topic: byId("tutorTopic"),
       modeBox: byId("tutorModeBox"),

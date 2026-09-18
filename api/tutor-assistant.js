@@ -44,7 +44,12 @@ module.exports = async function handler(req, res) {
   try {
     let result;
     if (groqKey) {
-      result = await callProvider('https://api.groq.com/openai/v1/chat/completions', groqKey, model, messages);
+      try {
+        result = await callProvider('https://api.groq.com/openai/v1/chat/completions', groqKey, model, messages);
+      } catch (err) {
+        if (!togetherKey) throw err;
+        result = { ok: false, retryable: true, status: err?.name === 'AbortError' ? 504 : 502 };
+      }
     }
     if ((!result || !result.ok) && togetherKey && (!result || result.retryable)) {
       result = await callProvider('https://api.together.xyz/v1/chat/completions', togetherKey, model, messages);

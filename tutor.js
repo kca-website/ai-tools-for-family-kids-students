@@ -315,6 +315,12 @@
     return layer.getByQuizId?.(quiz.id) || layer.byQuiz?.[quiz.id] || null;
   }
 
+  function getOfficialAnnualGuidance() {
+    const annualLayer = window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027;
+    const entry = getOfficialCurriculumEntry();
+    return annualLayer?.resolve?.(entry) || null;
+  }
+
   function getOfficialGapAlignment() {
     const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
     const gap = getCurrentGap();
@@ -353,6 +359,7 @@
       return `OFFICIAL CURRICULUM STATUS\n- No verified curriculum-layer entry is available for this selection. Do NOT claim Ministry/IEP alignment for this topic.`;
     }
     const gapAlignment = getOfficialGapAlignment();
+    const annualGuidance = getOfficialAnnualGuidance();
     const book = entry.officialBook;
     const sections = ctx?.lang === "en"
       ? (entry.officialSectionsEn?.length ? entry.officialSectionsEn : entry.officialSectionsEl || [])
@@ -390,9 +397,13 @@
     }
     const scopeNote = officialValue(entry, "scopeNoteEl", "scopeNoteEn");
     if (scopeNote) lines.push(`- Scope note: ${scopeNote}`);
-    lines.push(`- Annual ${entry.schoolYear || "2026-2027"} teaching-instructions status: ${entry.annualInstructionsStatus || "unknown"}`);
-    if (entry.annualInstructionsUrl) lines.push(`- Official annual-syllabus/instructions source: ${entry.annualInstructionsUrl}`);
-    const annualNote = officialValue(entry, "annualInstructionsNoteEl", "annualInstructionsNoteEn");
+    const annualStatus = annualGuidance?.status || entry.annualInstructionsStatus || "unknown";
+    const annualUrl = annualGuidance?.sourceUrl || entry.annualInstructionsUrl || "";
+    const annualNote = annualGuidance
+      ? officialValue(annualGuidance, "noteEl", "noteEn")
+      : officialValue(entry, "annualInstructionsNoteEl", "annualInstructionsNoteEn");
+    lines.push(`- Annual ${entry.schoolYear || "2026-2027"} teaching-instructions status: ${annualStatus}`);
+    if (annualUrl) lines.push(`- Official annual-syllabus/instructions source: ${annualUrl}`);
     if (annualNote) lines.push(`- Annual-instructions note: ${annualNote}`);
     lines.push(``, `SOURCE-DISCIPLINE RULES`,
       `A. Treat "catalog-verified" only as proof that the grade/subject appears in the official 2026-27 textbook package. It is NOT chapter-level or annual-syllabus verification.`,
@@ -401,7 +412,7 @@
       `D. When an exact or related gap-to-section mapping is supplied, prefer that section's terminology, sequence and expected level.`,
       `D2. "official-course-topic-anchor" and "catalog-topic-anchor" are navigation aids only. They are NOT official chapter titles and NOT section-level verification.`,
       `D3. "curriculum-mismatch-review-needed" means you MUST NOT claim official grade alignment; answer only as general educational support and, when relevant, say the site's curriculum mapping is under review.`,
-      `E. Never say "this is in the 2026-27 taught/examined syllabus" unless annual instructions are explicitly marked verified.`,
+      `E. A published annual-guidance source verifies that official guidance exists for the subject, not that every topic anchor is included. Say a selected topic is in the 2026-27 taught/examined scope only when exact topic alignment is explicitly verified.`,
       `F. If the learner asks something outside verified scope, you may explain it as general knowledge only if useful, but clearly avoid presenting it as required Greek-school curriculum.`,
       `G. Prefer methods and terminology compatible with the official textbook; do not introduce a more advanced method as if it were the expected classroom method.`,
       `H. If verified source context conflicts with your general memory, follow the verified source context and acknowledge uncertainty rather than silently overriding it.`
@@ -594,11 +605,16 @@
       ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
       : officialValue(official, "sourceLabelEl", "sourceLabelEn", tr("officialCatalog"));
     const gapOfficial = getOfficialGapAlignment();
+    const annualGuidance = getOfficialAnnualGuidance();
+    const annualLabel = annualGuidance ? officialValue(annualGuidance, "labelEl", "labelEn", annualGuidance.status || "") : "";
+    const annualSourceLabel = annualGuidance ? officialValue(annualGuidance, "sourceLabelEl", "sourceLabelEn", "") : "";
     const gapStatusLabel = gapOfficial ? officialValue(gapOfficial, "statusLabelEl", "statusLabelEn", gapOfficial.status || "") : "";
     const mismatch = gapOfficial?.status === "curriculum-mismatch-review-needed";
     const officialHtml = official ? `<br><br>
       <b>${escapeHtml(tr("officialBasis"))}:</b> ${escapeHtml(officialLabel)}<br>
       ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceName)} ↗</a>` : ""}
+      ${annualLabel ? `<br><b>${ctx.lang === "en" ? "Annual guidance" : "Ετήσιες οδηγίες"}:</b> ${escapeHtml(annualLabel)}` : ""}
+      ${annualGuidance?.sourceUrl ? `<br><a href="${escapeHtml(annualGuidance.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(annualSourceLabel || (ctx.lang === "en" ? "Official 2026–27 source" : "Επίσημη πηγή 2026–27"))} ↗</a>` : ""}
       ${gapStatusLabel ? `<br><span${mismatch ? ' style="color:#b45309;font-weight:700"' : ""}>${escapeHtml(gapStatusLabel)}</span>` : ""}` : "";
 
     refs.contextBox.innerHTML = `

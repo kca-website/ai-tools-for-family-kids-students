@@ -1,7 +1,7 @@
 /**
  * tutor-study-tools.js
  * Quiz + presentation helpers for AI Help.
- * - One Puter AI call generates a complete quiz or presentation outline.
+ * - The selected AI provider (Groq or Puter) generates a complete quiz or presentation outline.
  * - Answering, grading, navigation, copying and reopening cached material are local-only.
  * - No MutationObserver, interval or background polling.
  */
@@ -20,7 +20,7 @@
     el: {
       title: "🧰 Εργαλεία μελέτης",
       intro: "Δημιούργησε υλικό πάνω στην τάξη, το μάθημα και το θέμα που έχεις ήδη επιλέξει.",
-      usage: "ℹ️ Κάθε νέα δημιουργία χρησιμοποιεί ένα μικρό μέρος από τη δωρεάν μηνιαία χρήση AI του Puter. Μετά τη δημιουργία, η χρήση του quiz ή της παρουσίασης δεν καταναλώνει επιπλέον AI.",
+      usage: "ℹ️ Το quiz και η παρουσίαση δημιουργούνται από την επιλογή επάνω: GPT-OSS 120B μέσω Groq χωρίς λογαριασμό ή Puter. Μετά τη δημιουργία, η χρήση τους δεν καταναλώνει επιπλέον AI.",
       quiz: "📝 Φτιάξε quiz εξάσκησης",
       quizExam: "📝 Φτιάξε quiz επιπέδου εξετάσεων",
       slides: "🎞️ Φτιάξε παρουσίαση 6 διαφανειών",
@@ -55,7 +55,7 @@
     en: {
       title: "🧰 Study tools",
       intro: "Create material for the grade, subject and topic you have already selected.",
-      usage: "ℹ️ Each new generation uses a small part of your free monthly Puter AI allowance. After generation, using the quiz or presentation does not consume more AI.",
+      usage: "ℹ️ Quizzes and presentations use the provider selected above: GPT-OSS 120B through Groq without an account, or Puter. After generation, using them does not consume more AI.",
       quiz: "📝 Create a practice quiz",
       quizExam: "📝 Create an exam-level quiz",
       slides: "🎞️ Create a 6-slide presentation",
@@ -249,6 +249,35 @@
     return !!input && !input.disabled;
   }
   function isSignedIn() { try { return !!window.puter?.auth?.isSignedIn?.(); } catch (_) { return false; } }
+
+  function selectedProvider() {
+    return window.AITutor?.getProvider?.() === "puter" ? "puter" : "groq";
+  }
+
+  async function callAI(prompt, maxTokens, temperature, task) {
+    if (selectedProvider() === "puter") {
+      if (!window.puter?.ai?.chat) throw new Error(tr("needConnect"));
+      return window.puter.ai.chat(prompt, {
+        model: MODEL,
+        normalize: true,
+        max_tokens: maxTokens,
+        temperature,
+      });
+    }
+    const response = await fetch("/api/tutor-assistant", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        system: "Create accurate, age-appropriate learning material. Follow the requested JSON schema exactly and return JSON only.",
+        prompt,
+        audience: location.pathname.includes("/parent/") ? "parent" : "high_student",
+        task,
+      }),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.message || tr("failed"));
+    return data.text || "";
+  }
   function setStatus(panel, text, isError) {
     const el = panel.querySelector(".tutor-study-tools__status");
     if (!el) return;
@@ -354,11 +383,11 @@
     if (panel.dataset.busy === "1") return;
     const c = currentContext();
     if (!canUseTutor()) {
-      if (!isSignedIn()) { setStatus(panel, tr("needConnect"), true); document.getElementById("tutorSignIn")?.focus(); }
+      if (selectedProvider() === "puter" && !isSignedIn()) { setStatus(panel, tr("needConnect"), true); document.getElementById("tutorSignIn")?.focus(); }
       else setStatus(panel, tr("unavailable"), true);
       return;
     }
-    if (!window.puter?.ai?.chat) { setStatus(panel, tr("needConnect"), true); return; }
+    if (selectedProvider() === "puter" && !window.puter?.ai?.chat) { setStatus(panel, tr("needConnect"), true); return; }
 
     panel.dataset.busy = "1";
     panel.querySelectorAll("[data-study-tool]").forEach((b) => { b.disabled = true; });
@@ -366,12 +395,12 @@
     try {
       const prompt = type === "quiz" ? quizPrompt(c) : slidesPrompt(c);
       const examQuiz = type === "quiz" && isHighSchool(c);
-      const response = await window.puter.ai.chat(prompt, {
-        model: MODEL,
-        normalize: true,
-        max_tokens: type === "quiz" ? (examQuiz ? 2200 : 1500) : 1400,
-        temperature: examQuiz ? 0.18 : 0.25,
-      });
+      const response = await callAI(
+        prompt,
+        type === "quiz" ? (examQuiz ? 2200 : 1500) : 1400,
+        examQuiz ? 0.18 : 0.25,
+        type
+      );
       if (type === "quiz") {
         const questions = parseQuiz(extractText(response)); saveCached(type, c, questions); renderQuiz(panel, questions, false);
       } else {

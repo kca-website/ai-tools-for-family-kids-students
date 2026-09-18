@@ -1,7 +1,7 @@
 /**
  * tutor-flashcards.js
  * Lightweight flashcard generator for AI Help.
- * - One Puter AI call creates the full set.
+ * - The selected AI provider (Groq or Puter) creates the full set.
  * - Review, flip, navigation and self-rating are local-only.
  * - Recent sets are cached locally so reopening the same context costs no AI call.
  * - No MutationObserver, interval or background polling.
@@ -20,7 +20,7 @@
     el: {
       title: "🃏 Flashcards εξάσκησης",
       intro: "Φτιάξε 8 σύντομες κάρτες για το επιλεγμένο θέμα.",
-      cost: "ℹ️ Χρήση Puter: Η δημιουργία των 8 καρτών χρησιμοποιεί ένα μικρό μέρος από τη δωρεάν μηνιαία χρήση AI του Puter. Μετά τη δημιουργία, το γύρισμα, η πλοήγηση και το «Το ξέρω» δεν χρησιμοποιούν επιπλέον AI.",
+      cost: "ℹ️ Οι κάρτες δημιουργούνται από την επιλογή επάνω: GPT-OSS 120B μέσω Groq χωρίς λογαριασμό ή Puter. Μετά τη δημιουργία, το γύρισμα, η πλοήγηση και το «Το ξέρω» δεν χρησιμοποιούν επιπλέον AI.",
       generate: "🃏 Φτιάξε 8 flashcards",
       openSaved: "Άνοιξε αποθηκευμένες κάρτες · χωρίς νέα χρήση AI",
       regenerate: "Νέο σετ · χρησιμοποιεί ξανά AI",
@@ -45,7 +45,7 @@
     en: {
       title: "🃏 Practice flashcards",
       intro: "Create 8 short cards for the selected topic.",
-      cost: "ℹ️ Puter usage: Creating the 8 cards uses a small part of your free monthly Puter AI allowance. After creation, flipping, navigation and self-rating use no additional AI.",
+      cost: "ℹ️ Cards use the provider selected above: GPT-OSS 120B through Groq without an account, or Puter. After creation, flipping, navigation and self-rating use no additional AI.",
       generate: "🃏 Create 8 flashcards",
       openSaved: "Open saved cards · no new AI usage",
       regenerate: "New set · uses AI again",
@@ -185,6 +185,35 @@
 
   function isSignedIn() { try { return !!window.puter?.auth?.isSignedIn?.(); } catch (_) { return false; } }
 
+  function selectedProvider() {
+    return window.AITutor?.getProvider?.() === "puter" ? "puter" : "groq";
+  }
+
+  async function callAI(prompt, maxTokens, temperature) {
+    if (selectedProvider() === "puter") {
+      if (!window.puter?.ai?.chat) throw new Error(tr("needConnect"));
+      return window.puter.ai.chat(prompt, {
+        model: MODEL,
+        normalize: true,
+        max_tokens: maxTokens,
+        temperature,
+      });
+    }
+    const response = await fetch("/api/tutor-assistant", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        system: "Create accurate, age-appropriate learning material. Follow the requested JSON schema exactly and return JSON only.",
+        prompt,
+        audience: location.pathname.includes("/parent/") ? "parent" : "high_student",
+        task: "flashcards",
+      }),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.message || tr("failed"));
+    return data.text || "";
+  }
+
   function setStatus(panel, text, isError) {
     const el = panel.querySelector(".tutor-flashcards__status");
     if (!el) return;
@@ -249,23 +278,18 @@
     if (panel.dataset.busy === "1") return;
     const c = currentContext();
     if (!canUseTutor()) {
-      if (!isSignedIn()) { setStatus(panel, tr("needConnect"), true); document.getElementById("tutorSignIn")?.focus(); }
+      if (selectedProvider() === "puter" && !isSignedIn()) { setStatus(panel, tr("needConnect"), true); document.getElementById("tutorSignIn")?.focus(); }
       else setStatus(panel, tr("unavailable"), true);
       return;
     }
-    if (!window.puter?.ai?.chat) { setStatus(panel, tr("needConnect"), true); return; }
+    if (selectedProvider() === "puter" && !window.puter?.ai?.chat) { setStatus(panel, tr("needConnect"), true); return; }
 
     panel.dataset.busy = "1";
     const btn = panel.querySelector("[data-flashcards-generate]");
     if (btn) btn.disabled = true;
     setStatus(panel, tr("generating"), false);
     try {
-      const response = await window.puter.ai.chat(makePrompt(c), {
-        model: MODEL,
-        normalize: true,
-        max_tokens: 1100,
-        temperature: 0.25,
-      });
+      const response = await callAI(makePrompt(c), 1100, 0.25);
       const cards = parseCards(extractText(response));
       saveCached(c, cards);
       openCards(panel, cards, false);

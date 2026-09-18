@@ -1689,5 +1689,8 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     updateAuthUi();
   }
 
-  window.AITutor = { render };
+  window.AITutor = {
+    render,
+    getProvider: () => providerMode,
+  };
 })();

@@ -315,8 +315,8 @@
       return epal?.getSubject?.(
         refs.grade.value,
         refs.subject.value,
-        refs.sector?.value || "",
-        refs.specialty?.value || ""
+        refs.grade.value === "b" ? (refs.sector?.value || "") : "",
+        refs.grade.value === "c" ? (refs.specialty?.value || "") : ""
       ) || null;
     }
     const catalog = window.AITOOLSKIDS_TUTOR_CATALOG;
@@ -623,6 +623,8 @@
     const catalog = window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
     refs.sectorField.hidden = !(epal && gradeId === "b");
     refs.specialtyField.hidden = !(epal && gradeId === "c");
+    if (gradeId !== "b" && refs.sector) refs.sector.value = "";
+    if (gradeId !== "c" && refs.specialty) refs.specialty.value = "";
     if (epal && gradeId === "b") {
       fillSelect(refs.sector, tr("chooseSector"), catalog?.getSectors?.() || [], "id", "label");
     }
@@ -638,8 +640,8 @@
     if (isHighEpalMode()) {
       subjects = window.AITOOLSKIDS_EPAL_STUDENT_CATALOG?.getSubjects?.(
         gradeId,
-        refs.sector?.value || "",
-        refs.specialty?.value || ""
+        gradeId === "b" ? (refs.sector?.value || "") : "",
+        gradeId === "c" ? (refs.specialty?.value || "") : ""
       ) || [];
     } else {
       const quizzes = Object.values(QUIZZES[ctx.zoneId] || {}).filter((q) => (q.grades || []).includes(gradeId));
@@ -729,10 +731,10 @@
     const schoolContext = ctx.zoneId === "high"
       ? `<b>${escapeHtml(tr("contextSchoolType"))}:</b> ${escapeHtml(isHighEpalMode() ? tr("epal") : tr("gel"))}<br>`
       : "";
-    const sectorContext = isHighEpalMode() && refs.sector?.value
+    const sectorContext = isHighEpalMode() && refs.grade?.value === "b" && refs.sector?.value
       ? `<b>${escapeHtml(tr("contextSector"))}:</b> ${escapeHtml(refs.sector.options[refs.sector.selectedIndex]?.textContent || "")}<br>`
       : "";
-    const specialtyContext = isHighEpalMode() && refs.specialty?.value
+    const specialtyContext = isHighEpalMode() && refs.grade?.value === "c" && refs.specialty?.value
       ? `<b>${escapeHtml(tr("contextSpecialty"))}:</b> ${escapeHtml(refs.specialty.options[refs.specialty.selectedIndex]?.textContent || "")}<br>`
       : "";
 
@@ -885,8 +887,8 @@
     const schoolContextLines = [];
     if (ctx.zoneId === "high") {
       schoolContextLines.push(`- High-school type: ${isHighEpalMode() ? "EPAL" : "GEL"}`);
-      if (isHighEpalMode() && refs.sector?.value) schoolContextLines.push(`- EPAL sector: ${refs.sector.options[refs.sector.selectedIndex]?.textContent || refs.sector.value}`);
-      if (isHighEpalMode() && refs.specialty?.value) schoolContextLines.push(`- EPAL specialty: ${refs.specialty.options[refs.specialty.selectedIndex]?.textContent || refs.specialty.value}`);
+      if (isHighEpalMode() && refs.grade?.value === "b" && refs.sector?.value) schoolContextLines.push(`- EPAL sector: ${refs.sector.options[refs.sector.selectedIndex]?.textContent || refs.sector.value}`);
+      if (isHighEpalMode() && refs.grade?.value === "c" && refs.specialty?.value) schoolContextLines.push(`- EPAL specialty: ${refs.specialty.options[refs.specialty.selectedIndex]?.textContent || refs.specialty.value}`);
     }
 
     return `You are the AI Tutor for AI Tools for Kids. Your goal is UNDERSTANDING, not producing finished schoolwork.

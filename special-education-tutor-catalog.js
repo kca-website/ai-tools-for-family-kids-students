@@ -203,7 +203,8 @@
             coverageLabelEl:"Ειδικό Λύκειο · υποστηρικτικό μενού μαθημάτων",coverageLabelEn:"Special Lyceum · tutoring subject menu",
             officialSectionsEl:[`${grade.labelEl}: υποστηρικτική επιλογή ${rawEl}`],officialSectionsEn:[],
             scopeNoteEl:SL.scopeNoteEl,scopeNoteEn:SL.scopeNoteEn,
-            annualInstructionsStatus:"not-claimed",teachingInstructionsStatus:"not-claimed",
+            annualInstructionsStatus:SL.annualGuidanceStatus||"official-2026-27-guidance-published",
+            annualInstructionsUrl:SL.sourceUrl,teachingInstructionsStatus:"official-guidance-published",
             officialTimetableStatus:"school-type-verified",catalogUrl:SL.sourceUrl,
             sourceLabelEl:SL.sourceLabelEl,sourceLabelEn:SL.sourceLabelEn,
             specialEducation:true,schoolType:"special-lyceum",structureOnly:true

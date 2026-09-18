@@ -1,17 +1,25 @@
 {
   "git": {
     "deploymentEnabled": {
+      "main": false,
       "work/*": false,
       "hardening/*": false
     }
   },
   "routes": [
-    { "handle": "filesystem" },
+    {
+      "handle": "filesystem"
+    },
     {
       "src": "/assets/(.*)",
-      "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
       "continue": true
     },
-    { "src": "/(.*)", "dest": "/" }
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
   ]
 }

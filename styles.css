@@ -1887,6 +1887,10 @@ main {
   margin-bottom: 11px;
 }
 
+.tutor-field[hidden] {
+  display: none !important;
+}
+
 .tutor-field > span {
   font-size: .72rem;
   font-weight: 800;

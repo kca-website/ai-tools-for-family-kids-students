@@ -2,8 +2,8 @@
   "git": {
     "deploymentEnabled": {
       "main": true,
-      "work/*": false,
-      "hardening/*": false
+      "hardening/*": false,
+      "work/*": false
     }
   },
   "routes": [

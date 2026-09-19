@@ -51,7 +51,7 @@
 
     // Lightweight homepage integrations. The diagnostic catalog is still fetched
     // only after the user chooses that option; analytics records only entry source.
-    {id:"epal-practice-map",src:"/epal-practice-map.js"},
+    {id:"epal-practice-map-v1",src:"/epal-practice-map.js"},
     {id:"special-education-diagnostic",src:"/special-education-diagnostic.js"},
     {id:"special-education-entry-analytics",src:"/special-education-entry-analytics.js"},
 

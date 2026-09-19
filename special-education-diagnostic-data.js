@@ -249,6 +249,41 @@
   // stays inside a unit listed in the official syllabus of that subject and grade.
   const OFFICIAL_SOURCE_TITLE="Επίσημες οδηγίες διδασκαλίας Γυμνασίων Ε.Α.Ε. 2026-2027";
   const OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION=Object.freeze({
+    "special-gymnasium|a||technology":{id:"special-gym-a-technology-official-2026-27",basis:"Τεχνολογία Α΄ Γυμνασίου Ε.Α.Ε.: μέθοδος ατομικής εργασίας, πηγές πληροφόρησης, εργαλεία και υλικά",questions:[
+      {text:"Στην Α΄ Γυμνασίου, ποια μορφή εργασίας προβλέπεται κυρίως στην Τεχνολογία;",options:["Ατομική εργασία","Γραμμή παραγωγής"],correctIndex:0},
+      {text:"Πριν αρχίσει μια τεχνολογική κατασκευή, τι χρειάζεται να κάνει ο μαθητής;",options:["Να επιλέξει τυχαία υλικά","Να ερευνήσει πηγές και να συγκεντρώσει πληροφορίες"],correctIndex:1},
+      {text:"Ο καθορισμός των εργαλείων και των υλικών γίνεται με βάση τι;",options:["Τις ανάγκες του έργου","Το χρώμα της σχολικής τσάντας"],correctIndex:0}
+    ]},
+    "special-gymnasium|b||technology":{id:"special-gym-b-technology-official-2026-27",basis:"Τεχνολογία Β΄ Γυμνασίου Ε.Α.Ε.: ομαδική εργασία ή γραμμή παραγωγής και μελέτη της βιομηχανίας",questions:[
+      {text:"Στη Β΄ Γυμνασίου, ποια μορφή εργασίας χρησιμοποιείται για τη μελέτη της βιομηχανίας;",options:["Μόνο ατομική αποστήθιση","Ομαδική εργασία ή γραμμή παραγωγής"],correctIndex:1},
+      {text:"Τι είναι κεντρικό στην ανάπτυξη νέων προϊόντων και συστημάτων;",options:["Η δημιουργικότητα","Η αντιγραφή χωρίς έλεγχο"],correctIndex:0},
+      {text:"Ποιοι παράγοντες μπορούν να επηρεάσουν την ανάπτυξη της τεχνολογίας;",options:["Οικονομικοί, πολιτικοί και περιβαλλοντικοί","Μόνο το όνομα του προϊόντος"],correctIndex:0}
+    ]},
+    "special-gymnasium|c||technology":{id:"special-gym-c-technology-official-2026-27",basis:"Τεχνολογία Γ΄ Γυμνασίου Ε.Α.Ε.: έρευνα και πειραματισμός, σχεδίαση έρευνας, δοκίμια και γραπτή εργασία",questions:[
+      {text:"Ποια μέθοδος εφαρμόζεται κυρίως στην Τεχνολογία Γ΄ Γυμνασίου;",options:["Έρευνα και πειραματισμός","Αντιγραφή έτοιμης κατασκευής χωρίς έλεγχο"],correctIndex:0},
+      {text:"Τι πρέπει να προηγείται ενός πειράματος;",options:["Η σχεδίαση της ερευνητικής διαδικασίας","Η ανακοίνωση αποτελέσματος χωρίς δοκιμή"],correctIndex:0},
+      {text:"Πώς καταγράφονται οργανωμένα η διαδικασία και τα αποτελέσματα;",options:["Σε γραπτή εργασία","Μόνο προφορικά και χωρίς σημειώσεις"],correctIndex:0}
+    ]},
+    "special-gymnasium|a||informatics":{id:"special-gym-a-informatics-official-2026-27",basis:"Πληροφορική Α΄ Γυμνασίου Ε.Α.Ε.: Ψηφιακός Κόσμος, υλικό υπολογιστή, Κυβερνοασφάλεια",questions:[
+      {text:"Ποιο από τα δύο είναι υλικό μέρος ενός υπολογιστή;",options:["Το πληκτρολόγιο","Ένα αρχείο κειμένου"],correctIndex:0},
+      {text:"Ποια πρακτική προστατεύει καλύτερα έναν λογαριασμό;",options:["Ισχυρός και μοναδικός κωδικός","Ο ίδιος απλός κωδικός παντού"],correctIndex:0},
+      {text:"Πριν ανοίξουμε έναν άγνωστο σύνδεσμο, τι είναι ασφαλέστερο;",options:["Να ελέγξουμε αποστολέα και διεύθυνση","Να τον ανοίξουμε αμέσως"],correctIndex:0}
+    ]},
+    "special-gymnasium|b||informatics":{id:"special-gym-b-informatics-official-2026-27",basis:"Πληροφορική Β΄ Γυμνασίου Ε.Α.Ε.: Ψηφιακός Κόσμος, Δίκτυα Υπολογιστών, Ανάλυση Δεδομένων με Υπολογιστικά Φύλλα",questions:[
+      {text:"Ποια είναι η μικρότερη μονάδα ψηφιακής πληροφορίας;",options:["Το bit","Το μέτρο"],correctIndex:0},
+      {text:"Τι επιτρέπει ένα δίκτυο υπολογιστών;",options:["Επικοινωνία και κοινή χρήση πόρων","Μόνο εκτύπωση χωρίς σύνδεση"],correctIndex:0},
+      {text:"Ποιο εργαλείο είναι κατάλληλο για υπολογισμούς σε πίνακες δεδομένων;",options:["Υπολογιστικό φύλλο","Πρόγραμμα ζωγραφικής"],correctIndex:0}
+    ]},
+    "special-gymnasium|c||informatics":{id:"special-gym-c-informatics-official-2026-27",basis:"Πληροφορική Γ΄ Γυμνασίου Ε.Α.Ε.: Αλγοριθμική, Προγραμματισμός με Python (EduBlocks), Φυσική Υπολογιστική / Ρομποτικές Διατάξεις",questions:[
+      {text:"Τι είναι ένας αλγόριθμος;",options:["Σαφής σειρά βημάτων για λύση προβλήματος","Τυχαία σειρά εντολών χωρίς στόχο"],correctIndex:0},
+      {text:"Ποια γλώσσα αναφέρεται στις επίσημες οδηγίες της Γ΄ Γυμνασίου;",options:["Python","HTML ως γλώσσα προγραμματισμού ρομπότ"],correctIndex:0},
+      {text:"Σε μια ρομποτική διάταξη, τι μπορεί να ανιχνεύει το περιβάλλον;",options:["Ένας αισθητήρας","Ένα στατικό αυτοκόλλητο"],correctIndex:0}
+    ]},
+    "special-gymnasium|c||economics":{id:"special-gym-c-economics-official-2026-27",basis:"Οικονομικά Γ΄ Γυμνασίου Ε.Α.Ε.: ανάγκες και αγαθά, στενότητα και κόστος ευκαιρίας, συντελεστές παραγωγής",questions:[
+      {text:"Γιατί χρειάζεται να κάνουμε οικονομικές επιλογές;",options:["Επειδή οι πόροι είναι περιορισμένοι","Επειδή όλες οι ανάγκες ικανοποιούνται χωρίς όρια"],correctIndex:0},
+      {text:"Τι ονομάζουμε κόστος ευκαιρίας;",options:["Την καλύτερη εναλλακτική που αφήνουμε όταν επιλέγουμε κάτι","Μόνο την τιμή ενός προϊόντος στο ταμείο"],correctIndex:0},
+      {text:"Ποιο είναι συντελεστής παραγωγής;",options:["Η εργασία","Η ημερομηνία στο ημερολόγιο"],correctIndex:0}
+    ]},
     "special-gymnasium|b||chemistry":{id:"special-gym-b-chemistry-official-2026-27",basis:"Χημεία Β΄ Γυμνασίου Ε.Α.Ε.: 1.2 Καταστάσεις των υλικών, 2.2 Το νερό ως διαλύτης, 3.1 Σύσταση του ατμοσφαιρικού αέρα",questions:[
       {text:"Ποια κατάσταση της ύλης έχει καθορισμένο σχήμα και καθορισμένο όγκο;",options:["Αέρια","Στερεή"],correctIndex:1},
       {text:"Διαλύουμε αλάτι στο νερό. Ποιο είναι ο διαλύτης;",options:["Το νερό","Το αλάτι"],correctIndex:0},
@@ -311,7 +346,7 @@
     };
   }
 
-  const DATA={version:7,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
+  const DATA={version:8,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
     "special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"eneegyl":ENEEGYL
   },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length+Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,quizForSelection};
 

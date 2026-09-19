@@ -13,7 +13,7 @@ async function openPicker(page){
   await page.locator('#viewTabQuiz').click();
   const entry=page.locator('#quizContent [data-special-education-diagnostic]');
   await entry.waitFor({state:'visible',timeout:10000});
-  assert.match(await entry.innerText(),/73 διαθέσιμα σύντομα τεστ|73 available short tests/i,'Special Education entry is missing from the regular Tests view');
+  assert.match(await entry.innerText(),/80 διαθέσιμα σύντομα τεστ|80 available short tests/i,'Special Education entry is missing from the regular Tests view');
   await entry.click();
   await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
 }
@@ -73,10 +73,10 @@ try{
   });
   assert.deepEqual(integrity.failures,[],`${label}: verified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
   assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
-  assert.equal(integrity.ready,73,`${label}: all static Special Education and bounded same-grade support tests must be exposed`);
-  assert.equal(integrity.declared,14,`${label}: declared verified quiz count is wrong`);
+  assert.equal(integrity.ready,80,`${label}: all static Special Education and bounded same-grade support tests must be exposed`);
+  assert.equal(integrity.declared,21,`${label}: declared verified quiz count is wrong`);
   assert.equal(integrity.support,59,`${label}: same-grade support quiz count is wrong`);
-  assert.equal(integrity.total,73,`${label}: total available Special Education quiz count is wrong`);
+  assert.equal(integrity.total,80,`${label}: total available Special Education quiz count is wrong`);
     assert.deepEqual(integrity.eneegylGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL must expose 8 grades`);
 
     await chooseSchool(page,'eneegyl');
@@ -154,7 +154,7 @@ try{
     assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
     await page.close();
   }
-  console.log('Special Education diagnostic passed on desktop/mobile with lazy data, eleven verified quizzes and no generic curriculum claims.');
+  console.log('Special Education diagnostic passed on desktop/mobile with lazy data, twenty-one reviewed quizzes and no generic curriculum claims.');
 }finally{
   await browser.close();
 }

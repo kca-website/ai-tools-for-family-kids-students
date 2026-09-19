@@ -85,7 +85,7 @@
     b.type="button";
     b.className="quiz-grade-card spdiag-entry";
     b.dataset.specialEducationDiagnostic="1";
-    const count=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA?.totalAvailableQuizCount||71;
+    const count=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA?.totalAvailableQuizCount||80;
     b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ.","Special Education / EN.E.E.GY.-L.")}</span><span class="spdiag-entry__sub">${t(`${count} διαθέσιμα σύντομα τεστ · 3 ερωτήσεις · 2 επιλογές`,`${count} available short tests · 3 questions · 2 choices`)}</span>`;
     grid.appendChild(b);
   }

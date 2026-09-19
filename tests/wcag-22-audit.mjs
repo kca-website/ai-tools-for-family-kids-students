@@ -84,7 +84,7 @@ async function renderStudentTutor(page, zoneId) {
     window.dispatchEvent(new PopStateEvent('popstate'));
     window.AITutor.render({ zoneId: zone, roleId: 'student', lang: 'el' });
   }, zoneId);
-  await page.waitForSelector('#tutorAccessGate');
+  await page.waitForSelector('#tutorAccessGate', { state: 'attached' });
 }
 
 async function disclosureKeyboardCheck(page) {

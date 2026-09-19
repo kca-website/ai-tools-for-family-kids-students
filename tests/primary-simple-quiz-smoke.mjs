@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 
 const LOCAL='http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
+const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
 
 try{
-  const page=await browser.newPage({viewport:{width:390,height:844}});
+  const page=await context.newPage();
   const errors=[];
   page.on('pageerror',(err)=>errors.push(`pageerror: ${err.message}`));
   page.on('console',(msg)=>{if(msg.type()==='error') errors.push(`console: ${msg.text()}`);});
@@ -88,5 +89,6 @@ try{
   assert.deepEqual(errors,[],`Primary simple quiz browser errors:\n${errors.join('\n')}`);
   console.log('Short 3x2 quiz passed for Primary, Middle School and GEL with tool recommendations.');
 }finally{
+  await context.close();
   await browser.close();
 }

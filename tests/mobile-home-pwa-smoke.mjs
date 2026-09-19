@@ -41,7 +41,7 @@ try {
   assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), false, 'Legacy diagnostic entry should remain suppressed on homepage v8');
   assert.equal(await page.locator('#zoneSelectView .hero__ai-help').isVisible(), false, 'Legacy AI Help entry should remain suppressed on homepage v8');
 
-  const specialText=await page.locator('#specialSchoolZoneCard').innerText();
+  const specialText=(await page.locator('#specialSchoolZoneCard').textContent()) || '';
   assert.match(specialText,/Ειδικά σχολεία/,'integrated Special Education school card needs a clear label');
   assert.match(specialText,/Ειδικό Γυμνάσιο.*Ειδικό Λύκειο.*ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./s,'integrated Special Education card must name all three school types');
   assert.ok(specialText.includes('🏫'),'Special Education school card must use the neutral school icon');

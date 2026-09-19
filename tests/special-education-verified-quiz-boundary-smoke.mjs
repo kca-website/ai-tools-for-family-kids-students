@@ -19,10 +19,10 @@ for(const file of [
 
 const data=context.window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA;
 assert.ok(data,'Special Education diagnostic data did not load');
-assert.equal(data.version,8);
+assert.equal(data.version,10);
 assert.equal(data.verifiedQuizCount,21,'All explicitly reviewed Special Education quizzes should be marked verified');
 assert.equal(data.supportQuizCount,59,'All bounded same-grade, same-subject support quizzes should be declared separately');
-assert.equal(data.totalAvailableQuizCount,80,'Total available Special Education short-test count is wrong');
+assert.equal(data.totalAvailableQuizCount,120,'Total available Special Education short-test count is wrong');
 
 let subjects=0,ready=0;
 for(const schoolId of data.schoolOrder){
@@ -34,7 +34,7 @@ for(const schoolId of data.schoolOrder){
   }
 }
 assert.ok(subjects>250,'Special Education catalog unexpectedly shrank');
-assert.equal(ready,80,'Expected twenty-one reviewed tests plus fifty-nine bounded support tests');
+assert.equal(ready,120,'Expected reviewed/support tests plus their shared Deaf/Hard-of-Hearing curriculum paths');
 assert.equal(data.quizForSelection('special-gymnasium','a','',{id:'math',label:'Μαθηματικά'})?.id,'special-gym-a-math-problem-reading','Verified Special Gymnasium Maths support quiz must be exposed');
 assert.equal(data.quizForSelection('special-lyceum','a','',{id:'new-greek',label:'Νεοελληνική Γλώσσα και Λογοτεχνία'})?.scope,'verified-general-support-mapping','Special Lyceum must expose the bounded general-education support mapping honestly');
 assert.equal(data.quizForSelection('eneegyl','lyc-a','',{id:'new-greek',label:'Νέα Ελληνικά'})?.scope,'verified-general-support-mapping','ENEEGYL A Lyceum must expose the bounded same-grade support test');
@@ -59,6 +59,7 @@ for(const [g,sid] of [['a','technology'],['b','technology'],['c','technology'],[
 
 const source=fs.readFileSync(new URL('special-education-diagnostic-data.js',root),'utf8');
 assert.doesNotMatch(source,/function category\(|const Q=|basic-subject-check/,'Generic category quiz generator must not return');
+assert.doesNotMatch(source,/official-curriculum-readiness-check|Πριν ξεκινήσεις το μάθημα/,'Unrelated readiness questions must never be used as subject quizzes');
 const navigator=fs.readFileSync(new URL('navigator-home.js',root),'utf8');
 assert.match(navigator,/data-special-education-diagnostic/,'Homepage Practice Map must open the Special Education diagnostic');
 console.log('Special Education verified-quiz boundary smoke passed.');

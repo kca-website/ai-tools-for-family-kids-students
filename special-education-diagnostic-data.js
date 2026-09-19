@@ -333,19 +333,7 @@
       const support=SUPPORT_QUIZ_BY_SELECTION[key];
       if(support)return supportQuiz(support[0],support[1],subject,false);
       const adjacent=ADJACENT_GRADE_SUPPORT_BY_SELECTION[key];
-      if(adjacent)return supportQuiz(adjacent[0],adjacent[1],subject,true);
-      return {
-        id:`special-education-readiness-${canonicalSchool}-${gradeId}-${groupId||"common"}-${subject.id}`,
-        subjectId:subject.id,
-        subjectLabel:subject.label,
-        scope:"official-curriculum-readiness-check",
-        scopeLabel:"Έλεγχος προετοιμασίας για το μάθημα που περιλαμβάνεται στο επίσημο πρόγραμμα 2026–27. Δεν ελέγχει γνώση συγκεκριμένου κεφαλαίου και δεν παρουσιάζεται ως επαληθευμένο τεστ ύλης.",
-        questions:[
-          {text:`Πριν ξεκινήσεις το μάθημα «${subject.label}», τι πρέπει να έχεις μπροστά σου;`,options:["Το σωστό βιβλίο ή υλικό και την ακριβή ενότητα","Ένα τυχαίο κεφάλαιο από άλλο μάθημα"],correctIndex:0},
-          {text:"Αν δεν καταλαβαίνεις μια οδηγία, ποιο είναι το σωστό επόμενο βήμα;",options:["Να μαντέψεις χωρίς να ξαναδείς την οδηγία","Να τη διαβάσεις ξανά και να ζητήσεις διευκρίνιση"],correctIndex:1},
-          {text:"Πώς ελέγχεις ότι ολοκλήρωσες σωστά μια άσκηση;",options:["Συγκρίνεις με το ζητούμενο και ελέγχεις τα βήματά σου","Αλλάζεις μάθημα χωρίς έλεγχο"],correctIndex:0}
-        ]
-      };
+      return adjacent?supportQuiz(adjacent[0],adjacent[1],subject,true):null;
     }
     return {
       id:quizId,
@@ -362,8 +350,8 @@
   const DEAF_GYM={...SPECIAL_GYM,id:"deaf-gymnasium",label:"Γυμνάσιο Κωφών και Βαρηκόων",curriculumAlias:"special-gymnasium",accessibility:"Ίδια επίσημη ύλη Ε.Α.Ε.· γραπτές και οπτικές οδηγίες, χωρίς αποκλειστική εξάρτηση από ήχο."};
   const DEAF_LYC={...SPECIAL_LYC,id:"deaf-lyceum",label:"Λύκειο Κωφών και Βαρηκόων",curriculumAlias:"special-lyceum",accessibility:"Ίδια επίσημη ύλη Ε.Α.Ε.· γραπτές και οπτικές οδηγίες, χωρίς αποκλειστική εξάρτηση από ήχο."};
   const SCHOOLS={"special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"deaf-gymnasium":DEAF_GYM,"deaf-lyceum":DEAF_LYC,"eneegyl":ENEEGYL};
-  const selectionCount=Object.values(SCHOOLS).reduce((total,school)=>total+school.gradeOrder.reduce((gradeTotal,gradeId)=>{const grade=school.grades[gradeId];return gradeTotal+(grade.subjects||[]).length+(grade.groups||[]).reduce((sum,group)=>sum+(group.subjects||[]).length,0);},0),0);
-  const DATA={version:9,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","deaf-gymnasium","deaf-lyceum","eneegyl"],schools:SCHOOLS,quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Σύντομη δραστηριότητα 3 ερωτήσεων. Η οθόνη δηλώνει καθαρά αν πρόκειται για επαληθευμένο έλεγχο ύλης, τεστ υποστήριξης ή έλεγχο προετοιμασίας."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:selectionCount,quizForSelection};
+  const availableSelectionCount=Object.entries(SCHOOLS).reduce((total,[schoolId,school])=>total+school.gradeOrder.reduce((gradeTotal,gradeId)=>{const grade=school.grades[gradeId];const common=(grade.subjects||[]).filter(subject=>quizForSelection(schoolId,gradeId,"",subject)).length;const grouped=(grade.groups||[]).reduce((sum,group)=>sum+(group.subjects||[]).filter(subject=>quizForSelection(schoolId,gradeId,group.id,subject)).length,0);return gradeTotal+common+grouped;},0),0);
+  const DATA={version:10,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","deaf-gymnasium","deaf-lyceum","eneegyl"],schools:SCHOOLS,quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος έλεγχος 3 ερωτήσεων. Ενεργοποιείται μόνο όταν υπάρχει πραγματικό τεστ του μαθήματος ή σαφώς επισημασμένο τεστ υποστήριξης."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:availableSelectionCount,quizForSelection};
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA=Object.freeze(DATA);
 })();

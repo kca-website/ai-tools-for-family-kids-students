@@ -73,10 +73,10 @@ try{
   });
   assert.deepEqual(integrity.failures,[],`${label}: verified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
   assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
-  assert.equal(integrity.ready,120,`${label}: only reviewed or explicitly bounded support tests must be exposed`);
-  assert.equal(integrity.declared,21,`${label}: declared verified quiz count is wrong`);
+  assert.equal(integrity.ready,136,`${label}: only reviewed or explicitly bounded support tests must be exposed`);
+  assert.equal(integrity.declared,38,`${label}: declared verified quiz count is wrong`);
   assert.equal(integrity.support,59,`${label}: same-grade support quiz count is wrong`);
-  assert.equal(integrity.total,120,`${label}: total available Special Education test count is wrong`);
+  assert.equal(integrity.total,136,`${label}: total available Special Education test count is wrong`);
     assert.deepEqual(integrity.eneegylGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL must expose 8 grades`);
 
     await chooseSchool(page,'eneegyl');

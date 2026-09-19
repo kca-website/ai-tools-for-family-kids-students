@@ -248,6 +248,7 @@
   // instructions for Special Education (E.A.E.) Gymnasiums. Every question
   // stays inside a unit listed in the official syllabus of that subject and grade.
   const OFFICIAL_SOURCE_TITLE="Επίσημες οδηγίες διδασκαλίας Γυμνασίων Ε.Α.Ε. 2026-2027";
+  const ENEEGYL_SOURCE="https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l";
   const OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION=Object.freeze({
     "special-gymnasium|a||technology":{id:"special-gym-a-technology-official-2026-27",basis:"Τεχνολογία Α΄ Γυμνασίου Ε.Α.Ε.: μέθοδος ατομικής εργασίας, πηγές πληροφόρησης, εργαλεία και υλικά",questions:[
       {text:"Στην Α΄ Γυμνασίου, ποια μορφή εργασίας προβλέπεται κυρίως στην Τεχνολογία;",options:["Ατομική εργασία","Γραμμή παραγωγής"],correctIndex:0},
@@ -298,6 +299,91 @@
       {text:"Ποιο είναι παράδειγμα κοινωνικής ομάδας;",options:["Η σχολική τάξη","Άνθρωποι που περνούν τυχαία από την ίδια γωνιά"],correctIndex:0},
       {text:"Ποιο είναι παράδειγμα κοινωνικού κανόνα;",options:["Το ύψος ενός ανθρώπου","Σταματάμε στο κόκκινο φανάρι"],correctIndex:1},
       {text:"Τι περιγράφει ο κοινωνικός ρόλος;",options:["Τη συμπεριφορά που αναμένεται από ένα άτομο με μια κοινωνική θέση","Τον αριθμό των ανθρώπων μιας χώρας"],correctIndex:0}
+    ]},
+    "special-gymnasium|a||physics":{id:"special-gym-a-physics-official-2026-27",basis:"Φυσική Α΄ Γυμνασίου Ε.Α.Ε.: μετρήσεις μήκους, χρόνου, μάζας και πυκνότητας",questions:[
+      {text:"Μετράμε ένα θρανίο πολλές φορές. Ποια τιμή μειώνει την επίδραση μικρών τυχαίων διαφορών;",options:["Ο μέσος όρος των μετρήσεων","Μόνο η μεγαλύτερη μέτρηση"],correctIndex:0},
+      {text:"Ποιο όργανο είναι κατάλληλο για τη μέτρηση της μάζας;",options:["Ζυγός","Χρονόμετρο"],correctIndex:0},
+      {text:"Πώς υπολογίζεται η πυκνότητα ενός σώματος;",options:["Μάζα προς όγκο","Όγκος προς χρόνο"],correctIndex:0}
+    ]},
+    "special-gymnasium|b||physics":{id:"special-gym-b-physics-official-2026-27",basis:"Φυσική Β΄ Γυμνασίου Ε.Α.Ε.: κίνηση, δυνάμεις, πίεση και ενέργεια",questions:[
+      {text:"Πώς υπολογίζεται η μέση ταχύτητα;",options:["Διάστημα προς χρόνο","Χρόνος προς μάζα"],correctIndex:0},
+      {text:"Τι συμβαίνει όταν η συνισταμένη δύναμη σε ακίνητο σώμα είναι μηδέν;",options:["Το σώμα παραμένει ακίνητο","Το σώμα επιταχύνεται υποχρεωτικά"],correctIndex:0},
+      {text:"Ποια αρχή εξηγεί την άνωση σε βυθισμένο σώμα;",options:["Η αρχή του Αρχιμήδη","Ο νόμος της ανάκλασης"],correctIndex:0}
+    ]},
+    "special-gymnasium|c||physics":{id:"special-gym-c-physics-official-2026-27",basis:"Φυσική Γ΄ Γυμνασίου Ε.Α.Ε.: ηλεκτρικό ρεύμα, κυκλώματα, ταλαντώσεις και κύματα",questions:[
+      {text:"Τι μετρά το αμπερόμετρο σε ένα ηλεκτρικό κύκλωμα;",options:["Την ένταση του ρεύματος","Τη μάζα του αγωγού"],correctIndex:0},
+      {text:"Σε σύνδεση αντιστατών σε σειρά, τι είναι ίδιο σε όλους;",options:["Η ένταση του ρεύματος","Η αντίσταση κάθε αντιστάτη"],correctIndex:0},
+      {text:"Τι μεταφέρει ένα μηχανικό κύμα;",options:["Ενέργεια χωρίς μόνιμη μεταφορά ύλης","Ύλη χωρίς ενέργεια"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-a||economics":{id:"eneegyl-lyc-a-economics-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Διοίκησης και Οικονομίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Αρχές Οικονομίας: ανάγκες και αγαθά, συντελεστές παραγωγής, ζήτηση και προσφορά",questions:[
+      {text:"Ποιο από τα παρακάτω είναι συντελεστής παραγωγής;",options:["Η εργασία","Η απόδειξη αγοράς"],correctIndex:0},
+      {text:"Σύμφωνα με τον νόμο της ζήτησης, όταν αυξάνεται η τιμή και όλα τα άλλα μένουν σταθερά, η ζητούμενη ποσότητα συνήθως…",options:["μειώνεται","αυξάνεται"],correctIndex:0},
+      {text:"Τι δείχνει η καμπύλη παραγωγικών δυνατοτήτων;",options:["Τους μέγιστους εφικτούς συνδυασμούς παραγωγής","Μόνο τις τιμές ενός προϊόντος"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-a||mechanics":{id:"eneegyl-lyc-a-mechanics-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Μηχανολογίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Αρχές Μηχανολογίας: εφαρμογές παραγωγής και μετατροπής έργου και ενέργειας, εργαλεία και μηχανές",questions:[
+      {text:"Ποιο σύστημα μεταφέρει θερμότητα από έναν ψυχρότερο χώρο προς το περιβάλλον;",options:["Το σύστημα ψύξης","Ένας απλός χάρακας"],correctIndex:0},
+      {text:"Ποια εργασία ανήκει σε βασική μηχανολογική εφαρμογή;",options:["Συντήρηση μηχανήματος","Διόρθωση ορθογραφίας κειμένου"],correctIndex:0},
+      {text:"Τι κάνει ένας κινητήρας;",options:["Μετατρέπει μια μορφή ενέργειας σε μηχανικό έργο","Μετρά αποκλειστικά το μήκος"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-a||agriculture":{id:"eneegyl-lyc-a-agriculture-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Γεωπονίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Γεωπονία και Αειφόρος Ανάπτυξη: αγροτική ανάπτυξη, εξέλιξη φυτών, βιοτεχνολογία και ενέργεια στη γεωργία",questions:[
+      {text:"Ποια πρακτική ταιριάζει περισσότερο στην αειφόρο γεωργία;",options:["Ορθολογική χρήση νερού και εδάφους","Ανεξέλεγκτη σπατάλη νερού"],correctIndex:0},
+      {text:"Η βιοτεχνολογία στη γεωργία αξιοποιεί κυρίως…",options:["βιολογικές διεργασίες και οργανισμούς","μόνο μηχανικά σχέδια κτιρίων"],correctIndex:0},
+      {text:"Ποια ανανεώσιμη πηγή μπορεί να αξιοποιηθεί σε μια γεωργική εγκατάσταση;",options:["Η ηλιακή ενέργεια","Ο καπνός από ανεξέλεγκτη καύση"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-a||health":{id:"eneegyl-lyc-a-health-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Υγείας, Πρόνοιας και Ευεξίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Αγωγή Υγείας: ενεργητική ακρόαση, πρόληψη εξαρτήσεων, διατροφή και κυκλοφοριακή αγωγή",questions:[
+      {text:"Τι χαρακτηρίζει την ενεργητική ακρόαση;",options:["Ακούμε προσεκτικά και ελέγχουμε ότι καταλάβαμε","Διακόπτουμε πριν ολοκληρώσει ο άλλος"],correctIndex:0},
+      {text:"Ποια ενέργεια προστατεύει την υγεία ενός επιβάτη αυτοκινήτου;",options:["Η χρήση ζώνης ασφαλείας","Η μετακίνηση χωρίς ζώνη σε μικρές διαδρομές"],correctIndex:0},
+      {text:"Ποια επιλογή συμβάλλει στην πρόληψη εξαρτήσεων;",options:["Έγκυρη ενημέρωση και αναζήτηση υποστήριξης","Απόκρυψη του προβλήματος και απομόνωση"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-a||architectural-drawing":{id:"eneegyl-lyc-a-architectural-drawing-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Δομικών Έργων 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Αρχές Γραμμικού και Αρχιτεκτονικού Σχεδίου: γραμμές, κλίμακα, διαστασιολόγηση και προβολές",questions:[
+      {text:"Τι σημαίνει κλίμακα 1:50 σε ένα σχέδιο;",options:["1 μονάδα στο σχέδιο αντιστοιχεί σε 50 μονάδες στο πραγματικό αντικείμενο","50 μονάδες στο σχέδιο αντιστοιχούν πάντα σε 1 χιλιοστό"],correctIndex:0},
+      {text:"Σε τι χρησιμεύει η διαστασιολόγηση;",options:["Δηλώνει τις πραγματικές διαστάσεις του αντικειμένου","Αλλάζει μόνο το χρώμα του σχεδίου"],correctIndex:0},
+      {text:"Τι δείχνει μια κάτοψη κτιρίου;",options:["Οριζόντια τομή και διάταξη των χώρων","Μόνο την εξωτερική όψη από μπροστά"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-a||composition":{id:"eneegyl-lyc-a-composition-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Εφαρμοσμένων Τεχνών 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Βασικές Αρχές Σύνθεσης: τέχνη, εφαρμοσμένες τέχνες και γεωμετρικά στοιχεία σύνθεσης",questions:[
+      {text:"Τι είναι σύνθεση στις εφαρμοσμένες τέχνες;",options:["Η οργανωμένη διάταξη οπτικών στοιχείων","Η τυχαία τοποθέτηση χωρίς σχέση"],correctIndex:0},
+      {text:"Ποιο είναι βασικό γεωμετρικό στοιχείο μιας σύνθεσης;",options:["Η γραμμή","Η θερμοκρασία"],correctIndex:0},
+      {text:"Ποια ανάλυση βοηθά να κατανοήσουμε μια αφίσα;",options:["Η εξέταση δομής, σχημάτων και σχέσεων των στοιχείων","Η μέτρηση μόνο του βάρους του χαρτιού"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-a||research-technology":{id:"eneegyl-lyc-a-research-technology-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Ερευνητική Εργασία στην Τεχνολογία 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Ερευνητική Εργασία στην Τεχνολογία: επιλογή θέματος από ενδιαφέροντα, ομαδική εργασία, σχεδιασμός και τεκμηρίωση",questions:[
+      {text:"Με ποιο κριτήριο επιλέγεται αρχικά το θέμα μιας ερευνητικής εργασίας;",options:["Με βάση ενδιαφέροντα και εκπαιδευτικές ή επαγγελματικές επιλογές της ομάδας","Με τυχαία επιλογή χωρίς συζήτηση"],correctIndex:0},
+      {text:"Τι πρέπει να γίνει πριν από τη συλλογή αποτελεσμάτων;",options:["Να οριστούν ερώτημα και σχέδιο εργασίας","Να γραφτεί αυθαίρετα το συμπέρασμα"],correctIndex:0},
+      {text:"Πώς στηρίζεται ένα συμπέρασμα ερευνητικής εργασίας;",options:["Με δεδομένα και καταγεγραμμένες πηγές","Μόνο με προσωπική προτίμηση"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-b|administration-economy|accounting":{id:"eneegyl-lyc-b-accounting-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Διοίκησης και Οικονομίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Αρχές Λογιστικής: ενεργητικό, παθητικό, απογραφή και ισολογισμός",questions:[
+      {text:"Πού κατατάσσονται τα περιουσιακά στοιχεία που ανήκουν στην επιχείρηση;",options:["Στο ενεργητικό","Στο πραγματικό παθητικό"],correctIndex:0},
+      {text:"Τι καταγράφει η απογραφή;",options:["Αναλυτικά την περιουσία μιας επιχείρησης σε συγκεκριμένη στιγμή","Μόνο τις μελλοντικές πωλήσεις"],correctIndex:0},
+      {text:"Ποια βασική ισότητα πρέπει να ισχύει στον ισολογισμό;",options:["Ενεργητικό = Παθητικό","Έσοδα = Αριθμός εργαζομένων"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-b|administration-economy|marketing":{id:"eneegyl-lyc-b-marketing-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Διοίκησης και Οικονομίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Εισαγωγή στο Μάρκετινγκ: έννοια, φιλοσοφία, περιβάλλον και προγραμματισμός μάρκετινγκ",questions:[
+      {text:"Ποιο είναι βασικό σημείο της φιλοσοφίας του μάρκετινγκ;",options:["Η κατανόηση των αναγκών του πελάτη","Η παραγωγή χωρίς να εξετάζεται η αγορά"],correctIndex:0},
+      {text:"Τι εξετάζει το περιβάλλον μάρκετινγκ;",options:["Παράγοντες μέσα και έξω από την επιχείρηση που επηρεάζουν τις αποφάσεις","Μόνο το χρώμα του λογότυπου"],correctIndex:0},
+      {text:"Γιατί γίνεται προγραμματισμός μάρκετινγκ;",options:["Για να οριστούν στόχοι και ενέργειες","Για να αποφεύγεται κάθε μέτρηση αποτελεσμάτων"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-b|administration-economy|tourism":{id:"eneegyl-lyc-b-tourism-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Διοίκησης και Οικονομίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Θεωρία Τουρισμού: ατομικός, οικογενειακός, μαζικός, εσωτερικός και εξωτερικός τουρισμός",questions:[
+      {text:"Πώς λέγεται ο τουρισμός που πραγματοποιείται μέσα στη χώρα μόνιμης κατοικίας;",options:["Εσωτερικός τουρισμός","Εξωτερικός τουρισμός"],correctIndex:0},
+      {text:"Ποια μορφή οργανώνεται για μεγάλο αριθμό ταξιδιωτών με τυποποιημένες υπηρεσίες;",options:["Μαζικός τουρισμός","Ατομικός τουρισμός"],correctIndex:0},
+      {text:"Ποια μπορεί να είναι συνέπεια της τουριστικής ανάπτυξης;",options:["Οικονομική, κοινωνική και περιβαλλοντική επίδραση","Καμία επίδραση στον προορισμό"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-b|administration-economy|logistics":{id:"eneegyl-lyc-b-logistics-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Διοίκησης και Οικονομίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Εισαγωγή στην Εφοδιαστική: προμήθειες, αποθέματα, αποθήκευση, διανομή και μεταφορές",questions:[
+      {text:"Ποια λειτουργία αποφασίζει πότε και πόσο υλικό πρέπει να παραγγελθεί;",options:["Η διαχείριση αποθεμάτων","Η επιλογή γραμματοσειράς"],correctIndex:0},
+      {text:"Ποιος είναι βασικός στόχος της αποθήκευσης;",options:["Ασφαλής φύλαξη και σωστή διακίνηση προϊόντων","Τυχαία τοποθέτηση χωρίς καταγραφή"],correctIndex:0},
+      {text:"Τι συνδέει τα προϊόντα από την προμήθεια έως τον πελάτη;",options:["Η εφοδιαστική αλυσίδα","Μόνο η διαφήμιση"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-b|informatics|informatics-basics":{id:"eneegyl-lyc-b-informatics-basics-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Πληροφορικής 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Βασικά Θέματα Πληροφορικής: επίσημες σημειώσεις, όλα τα κεφάλαια",questions:[
+      {text:"Ποια μονάδα εκτελεί τις εντολές ενός προγράμματος;",options:["Η κεντρική μονάδα επεξεργασίας","Η οθόνη"],correctIndex:0},
+      {text:"Ποια μνήμη χάνει συνήθως τα δεδομένα της όταν κλείσει ο υπολογιστής;",options:["Η RAM","Ο αποθηκευτικός δίσκος"],correctIndex:0},
+      {text:"Ποιο από τα παρακάτω είναι λογισμικό;",options:["Το λειτουργικό σύστημα","Το πληκτρολόγιο"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-b|informatics|os-security":{id:"eneegyl-lyc-b-os-security-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Πληροφορικής 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Λειτουργικά Συστήματα και Ασφάλεια Πληροφοριακών Συστημάτων: επίσημες σημειώσεις και εξαιρέσεις ύλης",questions:[
+      {text:"Ποια είναι βασική λειτουργία του λειτουργικού συστήματος;",options:["Διαχείριση υλικού και εκτέλεση εφαρμογών","Αντικατάσταση όλων των αρχείων με εικόνες"],correctIndex:0},
+      {text:"Ποια πρακτική μειώνει τον κίνδυνο απώλειας δεδομένων;",options:["Τακτικό αντίγραφο ασφαλείας","Αποθήκευση μόνο σε ένα σημείο"],correctIndex:0},
+      {text:"Ποια αρχή δίνει σε κάθε χρήστη μόνο τα δικαιώματα που χρειάζεται;",options:["Η αρχή του ελάχιστου προνομίου","Η κοινή χρήση ενός λογαριασμού από όλους"],correctIndex:0}
+    ]},
+    "eneegyl|lyc-c|health|first-aid":{id:"eneegyl-lyc-c-first-aid-official-2026-27",sourceTitle:"ΥΠΑΙΘΑ — ΕΝ.Ε.Ε.ΓΥ.-Λ. Υγείας, Πρόνοιας και Ευεξίας 2026-2027",sourceUrl:ENEEGYL_SOURCE,basis:"Πρώτες Βοήθειες: εκτίμηση συμβάντος, κλήση 112, αιμορραγίες και βασική υποστήριξη ζωτικών λειτουργιών",questions:[
+      {text:"Πριν πλησιάσεις ένα ατύχημα, ποιο είναι το πρώτο βήμα;",options:["Να ελέγξεις ότι ο χώρος είναι ασφαλής","Να μετακινήσεις αμέσως κάθε τραυματία"],correctIndex:0},
+      {text:"Ποιος αριθμός χρησιμοποιείται για επείγουσα βοήθεια σε όλη την Ευρωπαϊκή Ένωση;",options:["112","11888"],correctIndex:0},
+      {text:"Σε έντονη εξωτερική αιμορραγία, ποια είναι βασική άμεση ενέργεια;",options:["Σταθερή άμεση πίεση με καθαρό υλικό","Αφαίρεση κάθε επιδέσμου για συνεχή έλεγχο"],correctIndex:0}
     ]}
   });
 
@@ -324,7 +410,8 @@
       subjectLabel:subject.label,
       scope:"verified-official-instruction-check",
       scopeLabel:"Περιορισμένος έλεγχος 3 ερωτήσεων, γραμμένος από ενότητες των επίσημων οδηγιών 2026-27 ("+official.basis+"). Δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης.",
-      sourceTitle:OFFICIAL_SOURCE_TITLE,
+      sourceTitle:official.sourceTitle||OFFICIAL_SOURCE_TITLE,
+      sourceUrl:official.sourceUrl||SCHOOLS?.[canonicalSchool]?.sourceUrl||"",
       questions:official.questions.map(q=>({text:q.text,options:[...q.options],correctIndex:q.correctIndex}))
     };
     const quizId=VERIFIED_QUIZ_BY_SELECTION[key];
@@ -351,7 +438,7 @@
   const DEAF_LYC={...SPECIAL_LYC,id:"deaf-lyceum",label:"Λύκειο Κωφών και Βαρηκόων",curriculumAlias:"special-lyceum",accessibility:"Ίδια επίσημη ύλη Ε.Α.Ε.· γραπτές και οπτικές οδηγίες, χωρίς αποκλειστική εξάρτηση από ήχο."};
   const SCHOOLS={"special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"deaf-gymnasium":DEAF_GYM,"deaf-lyceum":DEAF_LYC,"eneegyl":ENEEGYL};
   const availableSelectionCount=Object.entries(SCHOOLS).reduce((total,[schoolId,school])=>total+school.gradeOrder.reduce((gradeTotal,gradeId)=>{const grade=school.grades[gradeId];const common=(grade.subjects||[]).filter(subject=>quizForSelection(schoolId,gradeId,"",subject)).length;const grouped=(grade.groups||[]).reduce((sum,group)=>sum+(group.subjects||[]).filter(subject=>quizForSelection(schoolId,gradeId,group.id,subject)).length,0);return gradeTotal+common+grouped;},0),0);
-  const DATA={version:10,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","deaf-gymnasium","deaf-lyceum","eneegyl"],schools:SCHOOLS,quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος έλεγχος 3 ερωτήσεων. Ενεργοποιείται μόνο όταν υπάρχει πραγματικό τεστ του μαθήματος ή σαφώς επισημασμένο τεστ υποστήριξης."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:availableSelectionCount,quizForSelection};
+  const DATA={version:11,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","deaf-gymnasium","deaf-lyceum","eneegyl"],schools:SCHOOLS,quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος έλεγχος 3 ερωτήσεων. Ενεργοποιείται μόνο όταν υπάρχει πραγματικό τεστ του μαθήματος ή σαφώς επισημασμένο τεστ υποστήριξης."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:availableSelectionCount,quizForSelection};
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA=Object.freeze(DATA);
 })();

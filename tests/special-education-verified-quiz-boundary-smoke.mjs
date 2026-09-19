@@ -19,10 +19,10 @@ for(const file of [
 
 const data=context.window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA;
 assert.ok(data,'Special Education diagnostic data did not load');
-assert.equal(data.version,10);
-assert.equal(data.verifiedQuizCount,21,'All explicitly reviewed Special Education quizzes should be marked verified');
+assert.equal(data.version,11);
+assert.equal(data.verifiedQuizCount,38,'All explicitly reviewed Special Education quizzes should be marked verified');
 assert.equal(data.supportQuizCount,59,'All bounded same-grade, same-subject support quizzes should be declared separately');
-assert.equal(data.totalAvailableQuizCount,120,'Total available Special Education short-test count is wrong');
+assert.equal(data.totalAvailableQuizCount,136,'Total available Special Education short-test count is wrong');
 
 let subjects=0,ready=0;
 for(const schoolId of data.schoolOrder){
@@ -34,7 +34,7 @@ for(const schoolId of data.schoolOrder){
   }
 }
 assert.ok(subjects>250,'Special Education catalog unexpectedly shrank');
-assert.equal(ready,120,'Expected reviewed/support tests plus their shared Deaf/Hard-of-Hearing curriculum paths');
+assert.equal(ready,136,'Expected reviewed/support tests plus their shared Deaf/Hard-of-Hearing curriculum paths');
 assert.equal(data.quizForSelection('special-gymnasium','a','',{id:'math',label:'Μαθηματικά'})?.id,'special-gym-a-math-problem-reading','Verified Special Gymnasium Maths support quiz must be exposed');
 assert.equal(data.quizForSelection('special-lyceum','a','',{id:'new-greek',label:'Νεοελληνική Γλώσσα και Λογοτεχνία'})?.scope,'verified-general-support-mapping','Special Lyceum must expose the bounded general-education support mapping honestly');
 assert.equal(data.quizForSelection('eneegyl','lyc-a','',{id:'new-greek',label:'Νέα Ελληνικά'})?.scope,'verified-general-support-mapping','ENEEGYL A Lyceum must expose the bounded same-grade support test');
@@ -54,6 +54,21 @@ for(const [g,sid] of [['a','technology'],['b','technology'],['c','technology'],[
   const q=data.quizForSelection('special-gymnasium',g,'',{id:sid,label:sid});
   assert.equal(q?.scope,'verified-official-instruction-check',`Special Gymnasium ${g}/${sid} must use the official-instruction quiz`);
   assert.equal(q.questions.length,3);
+  q.questions.forEach(x=>{assert.equal(x.options.length,2);assert.ok(x.correctIndex===0||x.correctIndex===1);});
+}
+
+for(const [grade,group,sid] of [
+  ['lyc-a','','economics'],['lyc-a','','mechanics'],['lyc-a','','agriculture'],['lyc-a','','health'],
+  ['lyc-a','','architectural-drawing'],['lyc-a','','composition'],['lyc-a','','research-technology'],
+  ['lyc-b','administration-economy','accounting'],['lyc-b','administration-economy','marketing'],
+  ['lyc-b','administration-economy','tourism'],['lyc-b','administration-economy','logistics'],
+  ['lyc-b','informatics','informatics-basics'],['lyc-b','informatics','os-security'],
+  ['lyc-c','health','first-aid']
+]){
+  const q=data.quizForSelection('eneegyl',grade,group,{id:sid,label:sid});
+  assert.equal(q?.scope,'verified-official-instruction-check',`ENEEGYL ${grade}/${group}/${sid} must use its official-instruction quiz`);
+  assert.match(q.sourceTitle,/ΥΠΑΙΘΑ/);
+  assert.match(q.sourceUrl,/minedu\.gov\.gr/);
   q.questions.forEach(x=>{assert.equal(x.options.length,2);assert.ok(x.correctIndex===0||x.correctIndex===1);});
 }
 

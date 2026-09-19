@@ -26,20 +26,6 @@
   }
   function unique(arr) { return [...new Set((arr || []).filter(Boolean))]; }
 
-  // v3.1: make the recommended learning mode explicit on mainstream tools.
-  // These are additions, never replacements for AI Help or browser-based alternatives.
-  if (typeof TOOLS !== "undefined" && TOOLS.chatgpt) {
-    Object.assign(TOOLS.chatgpt, {
-      shortDescEl: "AI βοηθός γενικής χρήσης. Για σχολική μελέτη σε κατάλληλες ηλικίες προτίμησε το Study Mode, ώστε η συζήτηση να δουλεύει περισσότερο με ερωτήσεις, βήματα και έλεγχο κατανόησης αντί για έτοιμη απάντηση.",
-      shortDescEn: "General-purpose AI assistant. For school study at appropriate ages, prefer Study Mode so the conversation uses questions, steps and understanding checks rather than simply handing over an answer.",
-      greekTips: "Για σχολική χρήση: άνοιξε Study Mode και ξεκίνα γράφοντας τάξη, μάθημα, θέμα και τι έχεις ήδη προσπαθήσει. Μην χρησιμοποιείς προσωπικά στοιχεία ή έτοιμη απάντηση ως παραδοτέο."
-    });
-  }
-  if (typeof TOOLS !== "undefined" && TOOLS.copilot) {
-    TOOLS.copilot.shortDescEl = "AI βοηθός της Microsoft. Σε σχολεία με Microsoft 365 Education μπορεί να χρησιμοποιείται μέσω σχολικού λογαριασμού και, όπου είναι διαθέσιμο/ενεργοποιημένο, σε λειτουργία Study and Learn.";
-    TOOLS.copilot.shortDescEn = "Microsoft AI assistant. In schools using Microsoft 365 Education it can be accessed through a school account and, where available/enabled, used with Study and Learn.";
-  }
-
   function patchPathTool(zone, role, toolId, patch) {
     const row = PATHS?.[zone]?.[role]?.tools?.find((x) => x.toolId === toolId);
     if (row) Object.assign(row, patch);

@@ -91,6 +91,20 @@
     ]]
   ];
   const TOPICS=new Map(rows.map(([label,topics])=>[norm(label),Object.freeze([...topics])]));
+  const API=Object.freeze({
+    version:"1.0.0",
+    schoolYear:"2026-2027",
+    fek:"Β΄ 4328/14.07.2026",
+    decision:"Φ6/91809/Δ4",
+    sourceUrl:FEK,
+    announcementUrl:MINEDU,
+    getTopics(label){
+      const topics=TOPICS.get(norm(label));
+      return topics?[...topics]:[];
+    },
+    mappedSubjects:Object.freeze(rows.map(([label,topics])=>Object.freeze({label,topicCount:topics.length})))
+  });
+  window.AITOOLSKIDS_EPAL_PANHELLENIC_2027=API;
 
   function isEpalC(){return document.getElementById("context")?.value==="epal"&&String(document.getElementById("grade")?.value||"").toLowerCase()==="c";}
   function enrich(list){
@@ -134,15 +148,7 @@
     }
 
     if(isEpalC()&&typeof refreshSubjects==="function") refreshSubjects();
-    window.AITOOLSKIDS_EPAL_PANHELLENIC_2027=Object.freeze({
-      version:"1.0.0",
-      schoolYear:"2026-2027",
-      fek:"Β΄ 4328/14.07.2026",
-      decision:"Φ6/91809/Δ4",
-      sourceUrl:FEK,
-      announcementUrl:MINEDU,
-      mappedSubjects:Object.freeze(rows.map(([label,topics])=>Object.freeze({label,topicCount:topics.length})))
-    });
+    window.AITOOLSKIDS_EPAL_PANHELLENIC_2027=API;
   }
 
   if(typeof document==="undefined") return;

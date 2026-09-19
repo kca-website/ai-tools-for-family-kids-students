@@ -15,6 +15,7 @@
   const AGRI_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162060_1_2026_07_31_%CE%95%CE%9E%CE%95_103630_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%93%CE%95%CE%A9%CE%A0%CE%9F%CE%9D%CE%99%CE%91%CE%A3_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A8%CE%9D2246%CE%9D%CE%9A%CE%A0%CE%94_%CE%98%CE%93%CE%A6.pdf";
   const ARTS_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162056_1_2026_07_31_%CE%95%CE%9E%CE%95_103707_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%95%CE%A6%CE%91%CE%A1%CE%9C_%CE%A4%CE%95%CE%A7%CE%9D%CE%A9%CE%9D_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_9%CE%9B%CE%A3646%CE%9D%CE%9A%CE%A0%CE%94_9%CE%92%CE%9F.pdf";
   const STRUCTURES_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162057_1_2026_07_31_%CE%95%CE%9E%CE%95_103669_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%B9%CE%B5%CF%82_%CE%94%CE%9F%CE%9C%CE%99%CE%9A%CE%A9%CE%9D_%CE%95%CE%A1%CE%93%CE%A9%CE%9D_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_9%CE%A43%CE%9D46%CE%9D%CE%9A%CE%A0%CE%94_%CE%A871.pdf";
+  const HEALTH_2026="https://www.iep.edu.gr/wp-content/uploads/2026/09/162321_1_2026_08_10_%CE%95%CE%9E%CE%95_13661_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%A5%CE%93_%CE%A0%CE%A1_%CE%95%CE%A5%CE%95%CE%9E_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A8%CE%A7%CE%A3246%CE%9D%CE%9A%CE%A0%CE%94_%CE%A44%CE%95.pdf";
   const MARITIME_TIMETABLE="https://www.iep.edu.gr/wp-content/uploads/2025/01/2018-08-07_3224_t_b_fek_naytiliakon.pdf";
 
   const NEW_GREEK={
@@ -173,8 +174,8 @@
     version:"1.1.0",
     schoolYear:"2026-2027",
     verificationDate:"2026-09-12",
-    sourceUrls:Object.freeze({generalGuidance:GENERAL_GUIDANCE,epalHub:EPAL_HUB,epalGeneralHub:EPAL_GENERAL_HUB,foreignLanguages:FOREIGN_LANG,maritimeStructure:MARITIME_STRUCTURE,maritimeTimetable:MARITIME_TIMETABLE,informatics:INF_2026,electrical:ELEC_2026,administrationEconomy:ADMIN_2026,mechanical:MECH_2026,agriculture:AGRI_2026,appliedArts:ARTS_2026,structures:STRUCTURES_2026}),
-    note:"Τα μαθήματα Γενικής Παιδείας ακολουθούν την τρέχουσα εγκύκλιο 2026–27. Στη Β΄ ΕΠΑ.Λ. εμφανίζονται τα πραγματικά μαθήματα όλων των τομέων, με τις τρέχουσες οδηγίες ΙΕΠ και την ισχύουσα επίσημη δομή του Τομέα Ναυτιλιακών Επαγγελμάτων. Στη Γ΄ τάξη εμφανίζονται οι επαληθευμένες ειδικότητες και τα μαθήματά τους. Οι ακριβείς επίσημες ενότητες διακρίνονται από τις θεματικές υποστήριξης.",
+    sourceUrls:Object.freeze({generalGuidance:GENERAL_GUIDANCE,epalHub:EPAL_HUB,epalGeneralHub:EPAL_GENERAL_HUB,foreignLanguages:FOREIGN_LANG,maritimeStructure:MARITIME_STRUCTURE,maritimeTimetable:MARITIME_TIMETABLE,informatics:INF_2026,electrical:ELEC_2026,administrationEconomy:ADMIN_2026,mechanical:MECH_2026,agriculture:AGRI_2026,appliedArts:ARTS_2026,structures:STRUCTURES_2026,health:HEALTH_2026}),
+    note:"Τα μαθήματα Γενικής Παιδείας ακολουθούν την τρέχουσα εγκύκλιο 2026–27. Στη Β΄ ΕΠΑ.Λ. εμφανίζονται τα πραγματικά μαθήματα όλων των τομέων, με τις τρέχουσες οδηγίες ΙΕΠ και την ισχύουσα επίσημη δομή του Τομέα Ναυτιλιακών Επαγγελμάτων. Στη Γ΄ τάξη εμφανίζονται οι επαληθευμένες ειδικότητες και τα μαθήματά τους. Ενότητες εμφανίζονται μόνο όταν έχουν αντιστοιχιστεί σε επίσημη πηγή· διαφορετικά ο μαθητής γράφει τον ακριβή τίτλο.",
     grades:Object.freeze({a:Object.freeze(GRADES.a),b:Object.freeze(GRADES.b),c:Object.freeze(GRADES.c)})
   });
 

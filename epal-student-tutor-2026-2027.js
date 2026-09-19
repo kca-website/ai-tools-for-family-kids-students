@@ -25,29 +25,28 @@
       .toLowerCase().replace(/[^a-z0-9α-ω]+/gi,"-").replace(/^-|-$/g,"").slice(0,80)||"item";
   }
 
-  function curriculum(sourceUrl,topicsVerified,scopeNoteEl,hasSupportTopics=false){
+  function curriculum(sourceUrl,topicsVerified,scopeNoteEl,needsExactTitle=false){
     const verified=!!topicsVerified;
+    const panhellenic=/91809|4328/i.test(String(sourceUrl||""));
     return {
       schoolYear:SCHOOL_YEAR,
       schoolType:"epal",
       verificationDate:VERIFIED,
-      coverageStatus:verified?"annual-instructions-verified":(hasSupportTopics?"official-course-topic-support":"official-course-verified"),
-      coverageLabelEl:verified?"Επαληθευμένες ενότητες ΕΠΑΛ 2026–27":(hasSupportTopics?"Επαληθευμένο μάθημα με θεματικές υποστήριξης":"Επαληθευμένο μάθημα/δομή ΕΠΑΛ 2026–27"),
-      coverageLabelEn:verified?"Verified EPAL 2026–27 units":(hasSupportTopics?"Verified course with support themes":"Verified EPAL 2026–27 course/structure"),
-      annualInstructionsStatus:(verified||hasSupportTopics)?"2026-27-verified":"2026-27-published",
+      coverageStatus:panhellenic?"panhellenic-2027-verified":(verified?"annual-instructions-verified":"official-course-verified"),
+      coverageLabelEl:panhellenic?"Επίσημη ύλη Πανελλαδικών ΕΠΑΛ 2027":(verified?"Επαληθευμένες ενότητες ΕΠΑΛ 2026–27":"Επαληθευμένο μάθημα ΕΠΑΛ — γράψε την ακριβή ενότητα"),
+      coverageLabelEn:panhellenic?"Official 2027 EPAL Panhellenic syllabus":(verified?"Verified EPAL 2026–27 units":"Verified EPAL course — enter the exact unit"),
+      annualInstructionsStatus:verified?"2026-27-verified":"section-level-scope-not-encoded",
       annualInstructionsUrl:sourceUrl||HUB,
       catalogUrl:sourceUrl||HUB,
-      sourceLabelEl:"ΙΕΠ/ΥΠΑΙΘΑ: Οδηγίες διδασκαλίας ΕΠΑΛ 2026–27",
-      sourceLabelEn:"IEP/Ministry: EPAL teaching guidance 2026–27",
+      sourceLabelEl:panhellenic?"ΥΠΑΙΘΑ: ΦΕΚ ύλης Πανελλαδικών ΕΠΑΛ 2027":"ΙΕΠ/ΥΠΑΙΘΑ: Οδηγίες διδασκαλίας ΕΠΑΛ 2026–27",
+      sourceLabelEn:panhellenic?"Ministry: Official 2027 EPAL Panhellenic syllabus":"IEP/Ministry: EPAL teaching guidance 2026–27",
       scopeNoteEl:scopeNoteEl||(verified
         ?"Οι εμφανιζόμενες ενότητες προέρχονται από την καταγεγραμμένη τρέχουσα χαρτογράφηση 2026–27."
-        :hasSupportTopics
-          ?"Οι επιλογές με ένδειξη «Θεματική υποστήριξης» βοηθούν την πλοήγηση, αλλά δεν παρουσιάζονται ως επίσημοι τίτλοι κεφαλαίων. Για διαφορετικό κεφάλαιο γράψε τον ακριβή τίτλο από το βιβλίο ή την άσκησή σου."
-        :"Το μάθημα ή η δομή έχει επαληθευτεί, αλλά δεν έχει κωδικοποιηθεί πλήρης section-level ύλη. Ο μαθητής γράφει τον ακριβή τίτλο κεφαλαίου/άσκησης."),
+        :"Το μάθημα έχει επαληθευτεί, αλλά η πλήρης αναλυτική ύλη δεν έχει ακόμη κωδικοποιηθεί. Γράψε τον ακριβή τίτλο από το επίσημο βιβλίο ή την εγκύκλιο· δεν εμφανίζονται εικασίες."),
       scopeNoteEn:verified
         ?"Displayed units come from the site's recorded current 2026–27 mapping."
         :"The course or structure is verified, but complete section-level scope is not encoded. The student should type the exact chapter or exercise.",
-      annualInstructionsNoteEl:"Δεν παρουσιάζονται μη επαληθευμένα topic anchors ως επίσημα κεφάλαια.",
+      annualInstructionsNoteEl:needsExactTitle?"Δεν παρουσιάζονται μη επαληθευμένες θεματικές ως ύλη.":"Οι ενότητες έχουν αντιστοιχιστεί στην επίσημη πηγή.",
       annualInstructionsNoteEn:"Unverified topic anchors are not presented as official chapters."
     };
   }
@@ -61,6 +60,8 @@
       labelEn:entry.label,
       officialExact:entry.officialExact!==false,
       customTitle:!!entry.customTitle,
+      sourceUrl:entry.sourceUrl||"",
+      sourceKind:entry.sourceKind||"",
       explainEl:`Δούλεψε την ενότητα «${entry.label}» με μικρές υποδείξεις και έλεγχο κατανόησης.`,
       explainEn:`Work on “${entry.label}” with small hints and understanding checks.`
     }));
@@ -73,7 +74,7 @@
       topics,
       sector:item.sector||"",
       specialty:item.specialty||"",
-      curriculum:curriculum(item.sourceUrl||HUB,exactTopics,"",topics.length>0&&!exactTopics)
+      curriculum:curriculum(topics.find(x=>x.sourceUrl)?.sourceUrl||item.sourceUrl||HUB,exactTopics,"",topics.some(x=>x.customTitle))
     };
   }
 
@@ -168,7 +169,7 @@
       schoolYear:SCHOOL_YEAR,
       verified:VERIFIED,
       source:HUB,
-      note:"Student-facing EPAL catalog reuses the verified 2026-27 EPAL structure. Exact units are shown only where encoded; otherwise the learner enters the real chapter/exercise."
+      note:"Student-facing EPAL catalog reuses the verified 2026-27 EPAL structure. Only source-verified units are shown; otherwise the learner enters the exact chapter/exercise from the official material."
     }),
     getSectors:()=>sectors.map(x=>({...x})),
     getSpecialties:()=>specialties.map(x=>({...x})),

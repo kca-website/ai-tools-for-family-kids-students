@@ -169,27 +169,68 @@
     "eneegyl|lyc-b|agriculture|plant-production":"eneegyl-b-agriculture-plant-basics"
   });
 
-  // Special Lyceum uses the existing fixed GEL question bank only where the
-  // subject and grade match directly. These are support mappings, not a claim
-  // that GEL and Special Lyceum have identical annual examinable syllabi.
-  const GEL_SUPPORT_QUIZ_BY_SELECTION=Object.freeze({
-    "special-lyceum|a||new-greek":"ekthesi-a-lykeiou",
-    "special-lyceum|a||algebra":"mathimatika-a-lykeiou",
-    "special-lyceum|a||physics":"fysiki-a-lykeiou",
-    "special-lyceum|a||history":"istoria-a-lykeiou",
-    "special-lyceum|a||biology":"biologia-a-lykeiou",
-    "special-lyceum|b||new-greek":"ekthesi-b-lykeiou",
-    "special-lyceum|b||physics":"fysiki-b-lykeiou",
-    "special-lyceum|b||history":"istoria-b-lykeiou",
-    "special-lyceum|b||english":"english-b-lykeiou",
-    "special-lyceum|b||biology":"biologia-b-lykeiou",
-    "special-lyceum|c||new-greek":"ekthesi-g-lykeiou",
-    "special-lyceum|c||english":"english-g-lykeiou",
-    "special-lyceum|c|humanities|history":"istoria-g-lykeiou"
+  // Reuse the fixed, reviewed general-education banks only when both grade and
+  // subject match directly. These remain clearly labelled support tests: they
+  // do not claim that the annual Special Education syllabus is identical.
+  const SUPPORT_QUIZ_BY_SELECTION=Object.freeze({
+    "special-gymnasium|a||history":["middle","istoria-a-gymnasiou"],
+    "special-gymnasium|a||english":["middle","english-a-gymnasiou"],
+    "special-gymnasium|a||biology":["middle","biologia-a-gymnasiou"],
+    "special-gymnasium|b||history":["middle","istoria-b-gymnasiou"],
+    "special-gymnasium|b||english":["middle","english-b-gymnasiou"],
+    "special-gymnasium|b||physics":["middle","physics-gymnasiou"],
+    "special-gymnasium|b||biology":["middle","biologia-b-gymnasiou"],
+    "special-gymnasium|c||history":["middle","istoria-g-gymnasiou"],
+    "special-gymnasium|c||english":["middle","english-g-gymnasiou"],
+    "special-gymnasium|c||physics":["middle","fysiki-g-gymnasiou"],
+    "special-gymnasium|c||chemistry":["middle","chimeia-g-gymnasiou"],
+    "special-gymnasium|c||biology":["middle","biologia-g-gymnasiou"],
+
+    "special-lyceum|a||new-greek":["high","ekthesi-a-lykeiou"],
+    "special-lyceum|a||algebra":["high","mathimatika-a-lykeiou"],
+    "special-lyceum|a||physics":["high","fysiki-a-lykeiou"],
+    "special-lyceum|a||history":["high","istoria-a-lykeiou"],
+    "special-lyceum|a||biology":["high","biologia-a-lykeiou"],
+    "special-lyceum|b||new-greek":["high","ekthesi-b-lykeiou"],
+    "special-lyceum|b||physics":["high","fysiki-b-lykeiou"],
+    "special-lyceum|b||history":["high","istoria-b-lykeiou"],
+    "special-lyceum|b||english":["high","english-b-lykeiou"],
+    "special-lyceum|b||biology":["high","biologia-b-lykeiou"],
+    "special-lyceum|c||new-greek":["high","ekthesi-g-lykeiou"],
+    "special-lyceum|c||english":["high","english-g-lykeiou"],
+    "special-lyceum|c|humanities|history":["high","istoria-g-lykeiou"],
+
+    "eneegyl|gym-a||language":["middle","glossa-a-gymnasiou"],
+    "eneegyl|gym-a||math":["middle","mathimatika-a-gymnasiou"],
+    "eneegyl|gym-a||history":["middle","istoria-a-gymnasiou"],
+    "eneegyl|gym-a||english":["middle","english-a-gymnasiou"],
+    "eneegyl|gym-a||biology":["middle","biologia-a-gymnasiou"],
+    "eneegyl|gym-b||language":["middle","glossa-b-gymnasiou"],
+    "eneegyl|gym-b||math":["middle","mathimatika-b-gymnasiou"],
+    "eneegyl|gym-b||physics":["middle","physics-gymnasiou"],
+    "eneegyl|gym-b||history":["middle","istoria-b-gymnasiou"],
+    "eneegyl|gym-b||english":["middle","english-b-gymnasiou"],
+    "eneegyl|gym-b||biology":["middle","biologia-b-gymnasiou"],
+    "eneegyl|gym-c||language":["middle","glossa-gymnasiou"],
+    "eneegyl|gym-c||math":["middle","mathimatika-g-gymnasiou"],
+    "eneegyl|gym-c||physics":["middle","fysiki-g-gymnasiou"],
+    "eneegyl|gym-c||history":["middle","istoria-g-gymnasiou"],
+    "eneegyl|gym-c||english":["middle","english-g-gymnasiou"],
+
+    "eneegyl|lyc-a||new-greek":["high","ekthesi-a-lykeiou"],
+    "eneegyl|lyc-a||algebra":["high","mathimatika-a-lykeiou"],
+    "eneegyl|lyc-a||physics":["high","fysiki-a-lykeiou"],
+    "eneegyl|lyc-a||history":["high","istoria-a-lykeiou"],
+    "eneegyl|lyc-a||biology":["high","biologia-a-lykeiou"],
+    "eneegyl|lyc-b||new-greek":["high","ekthesi-b-lykeiou"],
+    "eneegyl|lyc-b||physics":["high","fysiki-b-lykeiou"],
+    "eneegyl|lyc-b||english":["high","english-b-lykeiou"],
+    "eneegyl|lyc-c||new-greek":["high","ekthesi-g-lykeiou"],
+    "eneegyl|lyc-c||english":["high","english-g-lykeiou"]
   });
 
-  function gelSupportQuiz(quizId,subject){
-    const raw=typeof QUIZZES!=="undefined"?QUIZZES?.high?.[quizId]:null;
+  function supportQuiz(tier,quizId,subject){
+    const raw=typeof QUIZZES!=="undefined"?QUIZZES?.[tier]?.[quizId]:null;
     if(!raw||!Array.isArray(raw.questions))return null;
     const questions=raw.questions.filter(q=>Array.isArray(q.options)&&q.options.some(o=>o.isCorrect)&&q.options.some(o=>!o.isCorrect)).slice(0,3).map((q,index)=>{
       const correct=q.options.find(o=>o.isCorrect),wrong=q.options.find(o=>!o.isCorrect);
@@ -197,7 +238,7 @@
       return {text:q.textEl||q.textEn,options:options.map(o=>o.textEl||o.textEn),correctIndex:index%2?1:0};
     });
     if(questions.length!==3)return null;
-    return {id:`special-lyceum-support-${quizId}`,subjectId:subject.id,subjectLabel:subject.label,scope:"verified-gel-support-mapping",scopeLabel:"Σύντομο τεστ υποστήριξης από το σταθερό, επαληθευμένο τεστ της αντίστοιχης τάξης ΓΕΛ. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικού Λυκείου 2026–27.",questions};
+    return {id:`special-education-support-${quizId}`,subjectId:subject.id,subjectLabel:subject.label,scope:"verified-general-support-mapping",scopeLabel:"Σύντομο τεστ υποστήριξης από το σταθερό, επαληθευμένο τεστ του ίδιου μαθήματος και της αντίστοιχης τάξης γενικής εκπαίδευσης. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικής Εκπαίδευσης 2026–27.",questions};
   }
 
   function quizForSelection(schoolId,gradeId,groupId,subject){
@@ -205,8 +246,8 @@
     const quizId=VERIFIED_QUIZ_BY_SELECTION[key];
     const raw=quizId?window.SPECIAL_EDUCATION_QUIZZES?.[quizId]:null;
     if(!raw||raw.status!=="ready"||!Array.isArray(raw.questions)){
-      const supportId=GEL_SUPPORT_QUIZ_BY_SELECTION[key];
-      return supportId?gelSupportQuiz(supportId,subject):null;
+      const support=SUPPORT_QUIZ_BY_SELECTION[key];
+      return support?supportQuiz(support[0],support[1],subject):null;
     }
     return {
       id:quizId,
@@ -220,9 +261,9 @@
     };
   }
 
-  const DATA={version:4,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
+  const DATA={version:5,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
     "special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"eneegyl":ENEEGYL
-  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(GEL_SUPPORT_QUIZ_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(GEL_SUPPORT_QUIZ_BY_SELECTION).length,quizForSelection};
+  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(SUPPORT_QUIZ_BY_SELECTION).length,quizForSelection};
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA=Object.freeze(DATA);
 })();

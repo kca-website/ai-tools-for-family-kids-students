@@ -19,10 +19,10 @@ for(const file of [
 
 const data=context.window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA;
 assert.ok(data,'Special Education diagnostic data did not load');
-assert.equal(data.version,4);
+assert.equal(data.version,5);
 assert.equal(data.verifiedQuizCount,11,'All eleven explicitly reviewed Special Education quizzes should be marked verified');
-assert.equal(data.supportQuizCount,13,'Thirteen bounded Special Lyceum GEL-support quizzes should be declared separately');
-assert.equal(data.totalAvailableQuizCount,24,'Total available Special Education short-test count is wrong');
+assert.equal(data.supportQuizCount,51,'All bounded same-grade, same-subject support quizzes should be declared separately');
+assert.equal(data.totalAvailableQuizCount,62,'Total available Special Education short-test count is wrong');
 
 let subjects=0,ready=0;
 for(const schoolId of data.schoolOrder){
@@ -34,9 +34,12 @@ for(const schoolId of data.schoolOrder){
   }
 }
 assert.ok(subjects>250,'Special Education catalog unexpectedly shrank');
-assert.equal(ready,24,'Expected eleven reviewed Special Education tests plus thirteen bounded Special Lyceum support tests');
+assert.equal(ready,62,'Expected eleven reviewed Special Education tests plus fifty-one bounded support tests');
 assert.equal(data.quizForSelection('special-gymnasium','a','',{id:'math',label:'Μαθηματικά'})?.id,'special-gym-a-math-problem-reading','Verified Special Gymnasium Maths support quiz must be exposed');
-assert.equal(data.quizForSelection('special-lyceum','a','',{id:'new-greek',label:'Νεοελληνική Γλώσσα και Λογοτεχνία'})?.scope,'verified-gel-support-mapping','Special Lyceum must expose the bounded GEL support mapping honestly');
+assert.equal(data.quizForSelection('special-lyceum','a','',{id:'new-greek',label:'Νεοελληνική Γλώσσα και Λογοτεχνία'})?.scope,'verified-general-support-mapping','Special Lyceum must expose the bounded general-education support mapping honestly');
+assert.equal(data.quizForSelection('eneegyl','lyc-a','',{id:'new-greek',label:'Νέα Ελληνικά'})?.scope,'verified-general-support-mapping','ENEEGYL A Lyceum must expose the bounded same-grade support test');
+assert.equal(data.quizForSelection('eneegyl','gym-b','',{id:'physics',label:'Φυσική'})?.scope,'verified-general-support-mapping','ENEEGYL B Gymnasium must expose the bounded same-grade Physics support test');
+assert.equal(data.quizForSelection('eneegyl','gym-d','',{id:'physics',label:'Φυσική'}),null,'No nearby-grade test may be relabelled as verified for ENEEGYL D Gymnasium');
 
 const source=fs.readFileSync(new URL('special-education-diagnostic-data.js',root),'utf8');
 assert.doesNotMatch(source,/function category\(|const Q=|basic-subject-check/,'Generic category quiz generator must not return');

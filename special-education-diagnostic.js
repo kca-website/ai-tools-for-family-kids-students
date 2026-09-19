@@ -85,7 +85,8 @@
     b.type="button";
     b.className="quiz-grade-card spdiag-entry";
     b.dataset.specialEducationDiagnostic="1";
-    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ.","Special Education / EN.E.E.GY.-L.")}</span><span class="spdiag-entry__sub">${t("24 διαθέσιμα σύντομα τεστ · 3 ερωτήσεις · 2 επιλογές","24 available short tests · 3 questions · 2 choices")}</span>`;
+    const count=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA?.totalAvailableQuizCount||62;
+    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ.","Special Education / EN.E.E.GY.-L.")}</span><span class="spdiag-entry__sub">${t(`${count} διαθέσιμα σύντομα τεστ · 3 ερωτήσεις · 2 επιλογές`,`${count} available short tests · 3 questions · 2 choices`)}</span>`;
     grid.appendChild(b);
   }
 
@@ -163,20 +164,20 @@
   function populateSubjects(){
     const sel=modal().querySelector("#spdiagSubject"),subjects=currentSubjects();sel.innerHTML="";sel.disabled=!subjects.length;
     const first=document.createElement("option");first.value="";first.textContent=t("Διάλεξε μάθημα","Choose subject");sel.appendChild(first);
-    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;const ready=!!data().quizForSelection(state.schoolId,state.gradeId,state.groupId,s);o.textContent=ready?s.label:`${s.label} · ${t("χωρίς επαληθευμένο τεστ ακόμη","verified test not yet available")}`;o.dataset.quizReady=ready?"1":"0";sel.appendChild(o);});
+    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;const quiz=data().quizForSelection(state.schoolId,state.gradeId,state.groupId,s);const support=quiz?.scope==="verified-general-support-mapping";o.textContent=quiz?(support?`${s.label} · ${t("τεστ υποστήριξης","support test")}`:s.label):`${s.label} · ${t("χωρίς επαληθευμένο τεστ ακόμη","verified test not yet available")}`;o.dataset.quizReady=quiz?"1":"0";o.dataset.quizScope=support?"support":quiz?"verified":"unavailable";sel.appendChild(o);});
     state.subjectId="";sel.value="";updateStart();updateScope();
   }
   function updateScope(){
     const p=modal()?.querySelector("#spdiagScope");if(!p)return;const src=school()?.sourceUrl;
     const ready=selectedQuiz();
     const msg=ready
-      ?(ready.scope==="verified-gel-support-mapping"
-        ?t("Υπάρχει σύντομο τεστ υποστήριξης από την επαληθευμένη αντιστοίχιση της ίδιας τάξης ΓΕΛ. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικού Λυκείου.","A short support test is available from the verified GEL mapping for the same grade. It is not presented as the full or identical Special Lyceum syllabus.")
+      ?(ready.scope==="verified-general-support-mapping"
+        ?t("Υπάρχει σύντομο τεστ υποστήριξης από επαληθευμένο τεστ του ίδιου μαθήματος και της αντίστοιχης τάξης γενικής εκπαίδευσης. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικής Εκπαίδευσης.","A short support test is available from a verified general-education test for the same subject and corresponding grade. It is not presented as the full or identical Special Education syllabus.")
         :t("Υπάρχει περιορισμένο, επαληθευμένο τεστ 3 ερωτήσεων για τη συγκεκριμένη ενότητα. Δεν αποτελεί πλήρη έλεγχο της ύλης 2026–27.","A limited, verified three-question check is available for this unit. It is not a complete check of the 2026–27 syllabus."))
       :t("Για το επιλεγμένο μάθημα δεν υπάρχει ακόμη επαληθευμένο τεστ. Δεν εμφανίζουμε γενικές ή επινοημένες ερωτήσεις ως σχολική ύλη.","No verified test is available for the selected subject yet. Generic or invented questions are not presented as curriculum content.");
     p.innerHTML=`${esc(msg)}${src?` <a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(t("Επίσημη βάση 2026-27 ↗","Official 2026-27 basis ↗"))}</a>`:""}`;
   }
-  function updateStart(){const b=modal().querySelector("#spdiagStart"),quiz=selectedQuiz(),ready=!!quiz;b.disabled=!ready;b.textContent=quiz?.scope==="verified-gel-support-mapping"?t("Ξεκίνα το σύντομο τεστ υποστήριξης","Start short support test"):ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
+  function updateStart(){const b=modal().querySelector("#spdiagStart"),quiz=selectedQuiz(),ready=!!quiz;b.disabled=!ready;b.textContent=quiz?.scope==="verified-general-support-mapping"?t("Ξεκίνα το σύντομο τεστ υποστήριξης","Start short support test"):ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
   function selectedSubject(){return currentSubjects().find((x)=>x.id===state.subjectId)||null;}
   function selectedQuiz(){const subj=selectedSubject();return subj?data()?.quizForSelection?.(state.schoolId,state.gradeId,state.groupId,subj):null;}
 

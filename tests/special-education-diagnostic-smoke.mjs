@@ -13,7 +13,7 @@ async function openPicker(page){
   await page.locator('#viewTabQuiz').click();
   const entry=page.locator('#quizContent [data-special-education-diagnostic]');
   await entry.waitFor({state:'visible',timeout:10000});
-  assert.match(await entry.innerText(),/24 διαθέσιμα σύντομα τεστ|24 available short tests/i,'Special Education entry is missing from the regular Tests view');
+  assert.match(await entry.innerText(),/62 διαθέσιμα σύντομα τεστ|62 available short tests/i,'Special Education entry is missing from the regular Tests view');
   await entry.click();
   await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
 }
@@ -73,10 +73,10 @@ try{
   });
   assert.deepEqual(integrity.failures,[],`${label}: verified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
   assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
-  assert.equal(integrity.ready,24,`${label}: all static Special Education and bounded Special Lyceum support tests must be exposed`);
+  assert.equal(integrity.ready,62,`${label}: all static Special Education and bounded same-grade support tests must be exposed`);
   assert.equal(integrity.declared,11,`${label}: declared verified quiz count is wrong`);
-  assert.equal(integrity.support,13,`${label}: Special Lyceum GEL-support quiz count is wrong`);
-  assert.equal(integrity.total,24,`${label}: total available Special Education quiz count is wrong`);
+  assert.equal(integrity.support,51,`${label}: same-grade support quiz count is wrong`);
+  assert.equal(integrity.total,62,`${label}: total available Special Education quiz count is wrong`);
     assert.deepEqual(integrity.eneegylGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL must expose 8 grades`);
 
     await chooseSchool(page,'eneegyl');
@@ -90,6 +90,10 @@ try{
     for(const expected of ['Αρχές Οικονομίας','Αγωγή Υγείας','Αρχές Μηχανολογίας','Γεωπονία και Αειφόρος Ανάπτυξη']){
       assert.ok(aSubjects.some(x=>x.startsWith(expected)),`${label}: ENEEGYL A Lyceum missing ${expected}`);
     }
+    assert.ok(aSubjects.some(x=>x.startsWith('Νέα Ελληνικά')&&x.includes('τεστ υποστήριξης')),`${label}: ENEEGYL A Lyceum support test is not labelled honestly`);
+    await page.selectOption('#spdiagSubject','new-greek');
+    assert.equal(await page.locator('#spdiagStart').isEnabled(),true,`${label}: ENEEGYL A Lyceum Greek support test should start`);
+    assert.match(await page.locator('#spdiagScope').innerText(),/ίδιου μαθήματος.*αντίστοιχης τάξης/i,`${label}: ENEEGYL support-test boundary message missing`);
 
     await page.selectOption('#spdiagGrade','lyc-b');
     await page.waitForTimeout(100);

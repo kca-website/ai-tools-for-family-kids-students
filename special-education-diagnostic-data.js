@@ -156,6 +156,12 @@
   }};
 
   const VERIFIED_QUIZ_BY_SELECTION=Object.freeze({
+    "special-gymnasium|a||language":"special-gym-a-language-comprehension",
+    "special-gymnasium|a||math":"special-gym-a-math-problem-reading",
+    "special-gymnasium|b||language":"special-gym-b-language-comprehension",
+    "special-gymnasium|b||math":"special-gym-b-math-problem-reading",
+    "special-gymnasium|c||language":"special-gym-c-language-comprehension",
+    "special-gymnasium|c||math":"special-gym-c-math-problem-reading",
     "eneegyl|lyc-a||creative-zone":"eneegyl-a-zdd",
     "eneegyl|lyc-b|health|health-nutrition":"eneegyl-b-health-nutrition",
     "eneegyl|lyc-b|mechanical|thermodynamics":"eneegyl-b-mechanics-thermo-basics",
@@ -179,7 +185,7 @@
     };
   }
 
-  const DATA={version:2,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
+  const DATA={version:3,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
     "special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"eneegyl":ENEEGYL
   },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,quizForSelection};
 

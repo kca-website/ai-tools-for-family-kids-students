@@ -9,9 +9,12 @@ async function openPicker(page){
   await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC,{timeout:30000});
   assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA),false,'Special Education diagnostic catalog was preloaded');
   assert.equal(await page.locator('script[src*="special-education-diagnostic-data.js"]').count(),0,'heavy diagnostic data script loaded before open');
-  // The redesigned homepage intentionally hides the legacy picker. Exercise the
-  // diagnostic through its public runtime API instead of depending on old UI.
-  await page.evaluate(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC.open());
+  await page.locator('.zone-card[data-zone="primary"]').click();
+  await page.locator('#viewTabQuiz').click();
+  const entry=page.locator('#quizContent [data-special-education-diagnostic]');
+  await entry.waitFor({state:'visible',timeout:10000});
+  assert.match(await entry.innerText(),/11 επαληθευμένα απλά τεστ|11 verified simple tests/i,'Special Education entry is missing from the regular Tests view');
+  await entry.click();
   await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
 }
 
@@ -70,8 +73,8 @@ try{
   });
   assert.deepEqual(integrity.failures,[],`${label}: verified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
   assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
-  assert.equal(integrity.ready,5,`${label}: only the five explicitly verified Special Education quizzes may be exposed`);
-  assert.equal(integrity.declared,5,`${label}: declared verified quiz count is wrong`);
+  assert.equal(integrity.ready,11,`${label}: the eleven explicitly verified Special Education quizzes must be exposed`);
+  assert.equal(integrity.declared,11,`${label}: declared verified quiz count is wrong`);
     assert.deepEqual(integrity.eneegylGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL must expose 8 grades`);
 
     await chooseSchool(page,'eneegyl');
@@ -128,14 +131,14 @@ try{
     await page.selectOption('#spdiagGrade','a');
     assert.ok(await page.locator('#spdiagSubject option').count()>=18,`${label}: Special Gymnasium A subjects incomplete`);
     await page.selectOption('#spdiagSubject','math');
-    assert.equal(await page.locator('#spdiagStart').isDisabled(),true,`${label}: Special Gymnasium generic quiz must not be presented as verified`);
+    assert.equal(await page.locator('#spdiagStart').isEnabled(),true,`${label}: verified Special Gymnasium Maths support quiz must be available`);
 
     const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
     assert.ok(noOverflow,`${label}: horizontal overflow introduced by Special Education diagnostic`);
     assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
     await page.close();
   }
-  console.log('Special Education diagnostic passed on desktop/mobile with lazy data, five verified quizzes and no generic curriculum claims.');
+  console.log('Special Education diagnostic passed on desktop/mobile with lazy data, eleven verified quizzes and no generic curriculum claims.');
 }finally{
   await browser.close();
 }

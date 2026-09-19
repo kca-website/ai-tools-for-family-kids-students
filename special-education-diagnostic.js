@@ -3,7 +3,15 @@
 
   const ENTRY_ID="specialEducationDiagnosticEntry";
   const MODAL_ID="specialDiagnosticModal";
-  const DATA_SOURCES=["/special-education-quiz-data.js","/special-education-diagnostic-data.js"];
+  const DATA_SOURCES=[
+    "/special-education-curriculum-data.js",
+    "/special-education-learning-data.js",
+    "/special-education-quiz-data.js",
+    "/special-education-status.js",
+    "/special-education-special-gymnasium-data.js",
+    "/special-education-assessment-policy.js",
+    "/special-education-diagnostic-data.js"
+  ];
   let dataPromise=null;
   let lastFocus=null;
   const state={schoolId:"",gradeId:"",groupId:"",subjectId:"",quiz:null,index:0,score:0,answered:false};
@@ -18,6 +26,7 @@
     s.id="specialDiagnosticStyles";
     s.textContent=`
       .hero__quiz-picker-btn--special{grid-column:1/-1;border-color:#b7d6cb!important;background:#f3faf7!important;color:#245c4e!important}
+      .quiz-grade-card.spdiag-entry{border-color:#8fc7b7;background:linear-gradient(145deg,#f0faf6,#eef6ff);grid-column:1/-1;text-align:left}.spdiag-entry__sub{display:block;margin-top:6px;color:#526173;font-size:.78rem;font-weight:650;line-height:1.45}
       .spdiag-overlay[hidden]{display:none!important}.spdiag-overlay{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:18px;background:rgba(15,23,42,.56)}
       .spdiag{width:min(720px,100%);max-height:min(90vh,850px);overflow:auto;overscroll-behavior:contain;background:#fff;border-radius:18px;box-shadow:0 24px 70px rgba(15,23,42,.25);padding:20px;color:#1e293b}
       .spdiag__head{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}.spdiag__head h2{margin:0;font-size:1.22rem}.spdiag__head p{margin:5px 0 0;color:#64748b;font-size:.84rem;line-height:1.5}
@@ -38,8 +47,15 @@
     if(window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA) return Promise.resolve(window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA);
     if(dataPromise) return dataPromise;
     const load=(src)=>new Promise((resolve,reject)=>{
-      if(src.includes("special-education-quiz-data")&&window.SPECIAL_EDUCATION_QUIZZES){resolve();return;}
-      if(src.includes("special-education-diagnostic-data")&&window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA){resolve();return;}
+      const ready=()=>
+        (src.includes("curriculum-data")&&!!window.SPECIAL_EDUCATION_CURRICULUM) ||
+        (src.includes("learning-data")&&!!window.SPECIAL_EDUCATION_LEARNING) ||
+        (src.includes("quiz-data")&&!!window.SPECIAL_EDUCATION_QUIZZES) ||
+        (src.includes("special-education-status")&&!!window.SPECIAL_EDUCATION_STATUS) ||
+        (src.includes("special-gymnasium-data")&&!!window.SPECIAL_GYMNASIUM_2026_2027) ||
+        (src.includes("assessment-policy")&&!!window.SPECIAL_EDUCATION_ASSESSMENT_POLICY) ||
+        (src.includes("diagnostic-data")&&!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA);
+      if(ready()){resolve();return;}
       const existing=document.querySelector(`script[src="${src}"]`);
       if(existing){if(existing.dataset.loaded==="1"){resolve();return;}existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return;}
       const s=document.createElement("script");s.src=src;s.async=false;s.dataset.specialDiagnosticData="1";
@@ -58,6 +74,17 @@
     b.type="button";b.id=ENTRY_ID;b.className="hero__quiz-picker-btn hero__quiz-picker-btn--special";b.dataset.specialEducationDiagnosticEntry="1";
     b.innerHTML=`<span aria-hidden="true">🎓</span> ${t("Ειδική Εκπαίδευση","Special Education")}`;
     b.addEventListener("click",openModal);
+    grid.appendChild(b);
+  }
+
+  function ensureQuizViewEntry(){
+    const grid=document.querySelector("#quizContent .quiz-grade-grid");
+    if(!grid||grid.querySelector("[data-special-education-diagnostic]")) return;
+    const b=document.createElement("button");
+    b.type="button";
+    b.className="quiz-grade-card spdiag-entry";
+    b.dataset.specialEducationDiagnostic="1";
+    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ.","Special Education / EN.E.E.GY.-L.")}</span><span class="spdiag-entry__sub">${t("11 επαληθευμένα απλά τεστ · 3 ερωτήσεις · 2 επιλογές","11 verified simple tests · 3 questions · 2 choices")}</span>`;
     grid.appendChild(b);
   }
 
@@ -181,10 +208,16 @@
   document.addEventListener("keydown",(e)=>{if(e.key==="Escape"&&!modal()?.hidden)closeModal();});
   document.addEventListener("click",(e)=>{const trigger=e.target instanceof Element?e.target.closest("[data-special-education-diagnostic]"):null;if(trigger){e.preventDefault();openModal(e);}});
   document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#langEl,#langEn"))setTimeout(()=>{const m=modal();if(m&&!m.hidden)closeModal();ensureEntry();},0);});
-  const init=()=>{injectStyles();ensureEntry();setTimeout(ensureEntry,250);};
+  const init=()=>{
+    injectStyles();ensureEntry();ensureQuizViewEntry();
+    setTimeout(()=>{ensureEntry();ensureQuizViewEntry();},250);
+    const root=document.getElementById("quizContent");
+    if(root) new MutationObserver(ensureQuizViewEntry).observe(root,{childList:true,subtree:true});
+  };
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
   window.addEventListener("load",ensureEntry,{once:true});
   document.getElementById("heroQuizCtaBtn")?.addEventListener("click",()=>setTimeout(ensureEntry,0));
+  document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#viewTabQuiz,.quiz-grade-back-btn,.quiz-back-btn"))setTimeout(ensureQuizViewEntry,0);});
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:2,ensureEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:3,ensureEntry,ensureQuizViewEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
 })();

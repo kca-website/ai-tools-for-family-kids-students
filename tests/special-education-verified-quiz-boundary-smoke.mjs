@@ -4,14 +4,22 @@ import vm from 'node:vm';
 
 const root=new URL('../',import.meta.url);
 const context=vm.createContext({window:{}});
-for(const file of ['special-education-quiz-data.js','special-education-diagnostic-data.js']){
+for(const file of [
+  'special-education-curriculum-data.js',
+  'special-education-learning-data.js',
+  'special-education-quiz-data.js',
+  'special-education-status.js',
+  'special-education-special-gymnasium-data.js',
+  'special-education-assessment-policy.js',
+  'special-education-diagnostic-data.js'
+]){
   vm.runInContext(fs.readFileSync(new URL(file,root),'utf8'),context,{filename:file});
 }
 
 const data=context.window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA;
 assert.ok(data,'Special Education diagnostic data did not load');
-assert.equal(data.version,2);
-assert.equal(data.verifiedQuizCount,5,'Only the five explicitly reviewed quizzes should be marked verified');
+assert.equal(data.version,3);
+assert.equal(data.verifiedQuizCount,11,'All eleven explicitly reviewed Special Education quizzes should be marked verified');
 
 let subjects=0,ready=0;
 for(const schoolId of data.schoolOrder){
@@ -23,8 +31,8 @@ for(const schoolId of data.schoolOrder){
   }
 }
 assert.ok(subjects>250,'Special Education catalog unexpectedly shrank');
-assert.equal(ready,5,'Generic category questions must not be exposed as verified curriculum tests');
-assert.equal(data.quizForSelection('special-gymnasium','a','',{id:'math',label:'Μαθηματικά'}),null,'Special Gymnasium must not receive an invented generic quiz');
+assert.equal(ready,11,'Only the eleven reviewed static quizzes may be exposed as verified tests');
+assert.equal(data.quizForSelection('special-gymnasium','a','',{id:'math',label:'Μαθηματικά'})?.id,'special-gym-a-math-problem-reading','Verified Special Gymnasium Maths support quiz must be exposed');
 
 const source=fs.readFileSync(new URL('special-education-diagnostic-data.js',root),'utf8');
 assert.doesNotMatch(source,/function category\(|const Q=|basic-subject-check/,'Generic category quiz generator must not return');

@@ -1813,6 +1813,33 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     };
   }
 
+  function selectUrlValue(select, value) {
+    if (!select || !value) return false;
+    const exists = [...select.options].some((option) => option.value === value);
+    if (exists) select.value = value;
+    return exists;
+  }
+
+  function applyUrlCurriculumSelection() {
+    if (ctx?.zoneId !== "high") return;
+    const params = new URLSearchParams(location.search);
+    if (params.get("schoolType") !== "epal") return;
+
+    refs.schoolType.value = "epal";
+    populateGrades();
+    selectUrlValue(refs.grade, params.get("grade"));
+    populateSubjects();
+
+    if (refs.grade.value === "b" && selectUrlValue(refs.sector, params.get("sector"))) {
+      populateSubjects();
+    }
+    if (refs.grade.value === "c" && selectUrlValue(refs.specialty, params.get("specialty"))) {
+      populateSubjects();
+    }
+    if (selectUrlValue(refs.subject, params.get("subject"))) populateTopics();
+    if (selectUrlValue(refs.topic, params.get("topic"))) renderContext();
+  }
+
   function render(context) {
     mount = document.getElementById("tutorMount");
     if (!mount || !context?.zoneId || !context?.roleId) return;
@@ -1843,6 +1870,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     populateGrades();
     renderAccessGate();
     bindEvents();
+    applyUrlCurriculumSelection();
     updateAuthUi();
   }
 

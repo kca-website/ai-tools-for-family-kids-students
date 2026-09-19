@@ -3,7 +3,7 @@
 
   const ENTRY_ID="specialEducationDiagnosticEntry";
   const MODAL_ID="specialDiagnosticModal";
-  const DATA_SRC="/special-education-diagnostic-data.js";
+  const DATA_SOURCES=["/special-education-quiz-data.js","/special-education-diagnostic-data.js"];
   let dataPromise=null;
   let lastFocus=null;
   const state={schoolId:"",gradeId:"",groupId:"",subjectId:"",quiz:null,index:0,score:0,answered:false};
@@ -37,14 +37,17 @@
   function ensureData(){
     if(window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA) return Promise.resolve(window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA);
     if(dataPromise) return dataPromise;
-    dataPromise=new Promise((resolve,reject)=>{
-      const existing=document.querySelector('script[data-special-diagnostic-data="1"]');
-      if(existing){ existing.addEventListener("load",()=>resolve(window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA),{once:true}); existing.addEventListener("error",reject,{once:true}); return; }
-      const s=document.createElement("script");s.src=DATA_SRC;s.async=false;s.dataset.specialDiagnosticData="1";
-      s.onload=()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA?resolve(window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA):reject(new Error("Special Education diagnostic data missing"));
-      s.onerror=()=>reject(new Error("Could not load Special Education diagnostic data"));
-      document.head.appendChild(s);
-    }).catch((err)=>{dataPromise=null;throw err;});
+    const load=(src)=>new Promise((resolve,reject)=>{
+      if(src.includes("special-education-quiz-data")&&window.SPECIAL_EDUCATION_QUIZZES){resolve();return;}
+      if(src.includes("special-education-diagnostic-data")&&window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA){resolve();return;}
+      const existing=document.querySelector(`script[src="${src}"]`);
+      if(existing){if(existing.dataset.loaded==="1"){resolve();return;}existing.addEventListener("load",resolve,{once:true});existing.addEventListener("error",reject,{once:true});return;}
+      const s=document.createElement("script");s.src=src;s.async=false;s.dataset.specialDiagnosticData="1";
+      s.onload=()=>{s.dataset.loaded="1";resolve();};s.onerror=()=>reject(new Error(`Could not load ${src}`));document.head.appendChild(s);
+    });
+    dataPromise=DATA_SOURCES.reduce((promise,src)=>promise.then(()=>load(src)),Promise.resolve())
+      .then(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA||Promise.reject(new Error("Special Education diagnostic data missing")))
+      .catch((err)=>{dataPromise=null;throw err;});
     return dataPromise;
   }
 
@@ -82,7 +85,7 @@
     wrap.addEventListener("click",(e)=>{if(e.target===wrap) closeModal();});
     wrap.querySelector("#spdiagGrade").addEventListener("change",onGrade);
     wrap.querySelector("#spdiagGroup").addEventListener("change",()=>{state.groupId=wrap.querySelector("#spdiagGroup").value;populateSubjects();});
-    wrap.querySelector("#spdiagSubject").addEventListener("change",()=>{state.subjectId=wrap.querySelector("#spdiagSubject").value;updateStart();});
+    wrap.querySelector("#spdiagSubject").addEventListener("change",()=>{state.subjectId=wrap.querySelector("#spdiagSubject").value;updateStart();updateScope();});
     wrap.querySelector("#spdiagStart").addEventListener("click",startQuiz);
     return wrap;
   }
@@ -131,18 +134,24 @@
   function currentSubjects(){const g=grade();if(!g)return[];const common=[...(g.subjects||[])];const selected=g.groups?.find((x)=>x.id===state.groupId);return common.concat(selected?.subjects||[]);}
   function populateSubjects(){
     const sel=modal().querySelector("#spdiagSubject"),subjects=currentSubjects();sel.innerHTML="";sel.disabled=!subjects.length;
-    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;o.textContent=s.label;sel.appendChild(o);});
-    state.subjectId=subjects[0]?.id||"";sel.value=state.subjectId;updateStart();updateScope();
+    const first=document.createElement("option");first.value="";first.textContent=t("Διάλεξε μάθημα","Choose subject");sel.appendChild(first);
+    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;const ready=!!data().quizForSelection(state.schoolId,state.gradeId,state.groupId,s);o.textContent=ready?s.label:`${s.label} · ${t("χωρίς επαληθευμένο τεστ ακόμη","verified test not yet available")}`;o.dataset.quizReady=ready?"1":"0";sel.appendChild(o);});
+    state.subjectId="";sel.value="";updateStart();updateScope();
   }
   function updateScope(){
     const p=modal()?.querySelector("#spdiagScope");if(!p)return;const src=school()?.sourceUrl;
-    p.innerHTML=`${esc(t("Το τεστ είναι σκόπιμα απλοποιημένο: 3 σύντομες ερωτήσεις, 2 επιλογές, χωρίς παγίδες. Είναι βασικός έλεγχος κατανόησης και όχι πλήρης έλεγχος της διδακτέας ή εξεταστέας ύλης 2026-27.","The test is intentionally simplified: 3 short questions, 2 choices, no traps. It is a basic understanding check, not a full check of the 2026-27 taught/examined syllabus."))}${src?` <a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(t("Επίσημη βάση 2026-27 ↗","Official 2026-27 basis ↗"))}</a>`:""}`;
+    const ready=selectedQuiz();
+    const msg=ready
+      ?t("Υπάρχει περιορισμένο, επαληθευμένο τεστ 3 ερωτήσεων για τη συγκεκριμένη ενότητα. Δεν αποτελεί πλήρη έλεγχο της ύλης 2026–27.","A limited, verified three-question check is available for this unit. It is not a complete check of the 2026–27 syllabus.")
+      :t("Για το επιλεγμένο μάθημα δεν υπάρχει ακόμη επαληθευμένο τεστ. Δεν εμφανίζουμε γενικές ή επινοημένες ερωτήσεις ως σχολική ύλη.","No verified test is available for the selected subject yet. Generic or invented questions are not presented as curriculum content.");
+    p.innerHTML=`${esc(msg)}${src?` <a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(t("Επίσημη βάση 2026-27 ↗","Official 2026-27 basis ↗"))}</a>`:""}`;
   }
-  function updateStart(){modal().querySelector("#spdiagStart").disabled=!(state.schoolId&&state.gradeId&&state.subjectId);}
+  function updateStart(){const b=modal().querySelector("#spdiagStart"),ready=!!selectedQuiz();b.disabled=!ready;b.textContent=ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
   function selectedSubject(){return currentSubjects().find((x)=>x.id===state.subjectId)||null;}
+  function selectedQuiz(){const subj=selectedSubject();return subj?data()?.quizForSelection?.(state.schoolId,state.gradeId,state.groupId,subj):null;}
 
   function startQuiz(){
-    const subj=selectedSubject();if(!subj)return;state.quiz=data().quizForSubject(subj);state.index=0;state.score=0;state.answered=false;
+    state.quiz=selectedQuiz();if(!state.quiz)return;state.index=0;state.score=0;state.answered=false;
     modal().querySelector("#spdiagSetup").hidden=true;modal().querySelector("#spdiagQuiz").hidden=false;renderQuestion();
   }
   function renderQuestion(){
@@ -170,6 +179,7 @@
   }
 
   document.addEventListener("keydown",(e)=>{if(e.key==="Escape"&&!modal()?.hidden)closeModal();});
+  document.addEventListener("click",(e)=>{const trigger=e.target instanceof Element?e.target.closest("[data-special-education-diagnostic]"):null;if(trigger){e.preventDefault();openModal(e);}});
   document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#langEl,#langEn"))setTimeout(()=>{const m=modal();if(m&&!m.hidden)closeModal();ensureEntry();},0);});
   const init=()=>{injectStyles();ensureEntry();setTimeout(ensureEntry,250);};
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();

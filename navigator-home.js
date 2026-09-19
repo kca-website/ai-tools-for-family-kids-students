@@ -23,7 +23,8 @@
       mapDesc: "Σύντομο τεστ περίπου 2 λεπτών, χωρίς βαθμό.",
       mapPrimary: "Δημοτικό",
       mapMiddle: "Γυμνάσιο",
-      mapHigh: "Λύκειο",
+      mapGel: "ΓΕΛ",
+      mapEpal: "ΕΠΑΛ",
       mapSpecial: "Ειδικά σχολεία",
       aiBadgeNew: "Νέο",
       aiBadgeFree: "Δωρεάν",
@@ -63,7 +64,8 @@
       mapDesc: "A short check of about 2 minutes, with no grade.",
       mapPrimary: "Primary",
       mapMiddle: "Middle School",
-      mapHigh: "High School",
+      mapGel: "General Lyceum (GEL)",
+      mapEpal: "Vocational Lyceum (EPAL)",
       mapSpecial: "Special schools",
       aiBadgeNew: "New",
       aiBadgeFree: "Free",
@@ -200,8 +202,9 @@
           <div class="home-v8-helper-links">
             <a href="/primary/guardian/quiz">${c.mapPrimary}</a>
             <a href="/middle/guardian/quiz">${c.mapMiddle}</a>
-            <a href="/high/guardian/quiz">${c.mapHigh}</a>
-            <a href="/special-education.html">${c.mapSpecial}</a>
+            <a href="/high/guardian/quiz">${c.mapGel}</a>
+            <a href="#" data-epal-practice-map>${c.mapEpal}</a>
+            <a href="#" data-special-education-diagnostic>${c.mapSpecial}</a>
           </div>
         </section>
 

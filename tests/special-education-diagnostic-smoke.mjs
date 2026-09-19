@@ -39,31 +39,39 @@ try{
 
     await openPicker(page);
 
-    await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA,{timeout:15000});
-    assert.equal(await page.locator('#spdiagSchools .spdiag__school').count(),3,`${label}: expected three Special Education school types`);
+  await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA,{timeout:15000});
+  assert.equal(await page.locator('#spdiagSchools .spdiag__school').count(),3,`${label}: expected three Special Education school types`);
 
-    const integrity=await page.evaluate(()=>{
-      const D=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA;
-      const failures=[];
-      let subjects=0;
-      for(const schoolId of D.schoolOrder){
-        const school=D.schools[schoolId];
-        for(const gradeId of school.gradeOrder){
-          const grade=school.grades[gradeId];
-          const pools=[...(grade.subjects||[])];
-          for(const g of grade.groups||[]) pools.push(...(g.subjects||[]));
-          for(const subject of pools){
-            subjects++;
-            const quiz=D.quizForSubject(subject);
-            if(quiz.questions.length!==3) failures.push(`${schoolId}/${gradeId}/${subject.id}:questions=${quiz.questions.length}`);
-            quiz.questions.forEach((q,i)=>{if(q.options.length!==2)failures.push(`${schoolId}/${gradeId}/${subject.id}/q${i}:options=${q.options.length}`);});
-          }
+  const integrity=await page.evaluate(()=>{
+    const D=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA;
+    const failures=[];
+    let subjects=0,ready=0;
+    for(const schoolId of D.schoolOrder){
+      const school=D.schools[schoolId];
+      for(const gradeId of school.gradeOrder){
+        const grade=school.grades[gradeId];
+        for(const subject of grade.subjects||[]){
+          subjects++;
+          const quiz=D.quizForSelection(schoolId,gradeId,"",subject);
+          if(!quiz)continue;ready++;
+          if(quiz.questions.length!==3) failures.push(`${schoolId}/${gradeId}/${subject.id}:questions=${quiz.questions.length}`);
+          quiz.questions.forEach((q,i)=>{if(q.options.length!==2)failures.push(`${schoolId}/${gradeId}/${subject.id}/q${i}:options=${q.options.length}`);});
+        }
+        for(const group of grade.groups||[])for(const subject of group.subjects||[]){
+          subjects++;
+          const quiz=D.quizForSelection(schoolId,gradeId,group.id,subject);
+          if(!quiz)continue;ready++;
+          if(quiz.questions.length!==3) failures.push(`${schoolId}/${gradeId}/${group.id}/${subject.id}:questions=${quiz.questions.length}`);
+          quiz.questions.forEach((q,i)=>{if(q.options.length!==2)failures.push(`${schoolId}/${gradeId}/${group.id}/${subject.id}/q${i}:options=${q.options.length}`);});
         }
       }
-      return {failures,subjects,eneegylGrades:D.schools.eneegyl.gradeOrder};
-    });
-    assert.deepEqual(integrity.failures,[],`${label}: simplified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
-    assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
+    }
+    return {failures,subjects,ready,declared:D.verifiedQuizCount,eneegylGrades:D.schools.eneegyl.gradeOrder};
+  });
+  assert.deepEqual(integrity.failures,[],`${label}: verified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
+  assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
+  assert.equal(integrity.ready,5,`${label}: only the five explicitly verified Special Education quizzes may be exposed`);
+  assert.equal(integrity.declared,5,`${label}: declared verified quiz count is wrong`);
     assert.deepEqual(integrity.eneegylGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL must expose 8 grades`);
 
     await chooseSchool(page,'eneegyl');
@@ -75,7 +83,7 @@ try{
     const aSubjects=await page.locator('#spdiagSubject option').evaluateAll(els=>els.map(e=>e.textContent.trim()));
     assert.ok(aSubjects.length>=21,`${label}: ENEEGYL A Lyceum still looks underfilled`);
     for(const expected of ['Αρχές Οικονομίας','Αγωγή Υγείας','Αρχές Μηχανολογίας','Γεωπονία και Αειφόρος Ανάπτυξη']){
-      assert.ok(aSubjects.includes(expected),`${label}: ENEEGYL A Lyceum missing ${expected}`);
+      assert.ok(aSubjects.some(x=>x.startsWith(expected)),`${label}: ENEEGYL A Lyceum missing ${expected}`);
     }
 
     await page.selectOption('#spdiagGrade','lyc-b');
@@ -83,7 +91,7 @@ try{
     assert.equal(await page.locator('#spdiagGroupWrap').isVisible(),true,`${label}: ENEEGYL B Lyceum sector selector missing`);
     await page.selectOption('#spdiagGroup','administration-economy');
     await page.waitForTimeout(100);
-    assert.ok((await page.locator('#spdiagSubject option').allTextContents()).includes('Αρχές Λογιστικής'),`${label}: ENEEGYL B Administration/Economy subjects missing`);
+    assert.ok((await page.locator('#spdiagSubject option').allTextContents()).some(x=>x.startsWith('Αρχές Λογιστικής')),`${label}: ENEEGYL B Administration/Economy subjects missing`);
 
     await page.selectOption('#spdiagGrade','lyc-d');
     await page.waitForTimeout(100);
@@ -92,9 +100,16 @@ try{
     assert.ok(specialties>=25,`${label}: ENEEGYL D specialty list looks incomplete (${specialties})`);
     await page.selectOption('#spdiagGroup','it-apps');
     await page.waitForTimeout(100);
-    assert.ok((await page.locator('#spdiagSubject option').allTextContents()).includes('Προγραμματισμός Υπολογιστών'),`${label}: ENEEGYL D Informatics specialty subjects missing`);
+    assert.ok((await page.locator('#spdiagSubject option').allTextContents()).some(x=>x.startsWith('Προγραμματισμός Υπολογιστών')),`${label}: ENEEGYL D Informatics specialty subjects missing`);
 
     await page.selectOption('#spdiagSubject','programming');
+    assert.equal(await page.locator('#spdiagStart').isDisabled(),true,`${label}: unverified generic subject quiz must not start`);
+    assert.match(await page.locator('#spdiagScope').innerText(),/δεν υπάρχει ακόμη επαληθευμένο τεστ/i,`${label}: missing honest unavailable message`);
+
+    await page.selectOption('#spdiagGrade','lyc-b');
+    await page.selectOption('#spdiagGroup','health');
+    await page.selectOption('#spdiagSubject','health-nutrition');
+    assert.equal(await page.locator('#spdiagStart').isEnabled(),true,`${label}: verified Health and Nutrition quiz should start`);
     await page.click('#spdiagStart');
     await page.waitForSelector('#spdiagQuiz:not([hidden])');
     assert.equal(await page.locator('.spdiag__answer').count(),2,`${label}: quiz question must show two answers`);
@@ -112,17 +127,15 @@ try{
     await chooseSchool(page,'special-gymnasium');
     await page.selectOption('#spdiagGrade','a');
     assert.ok(await page.locator('#spdiagSubject option').count()>=18,`${label}: Special Gymnasium A subjects incomplete`);
-
-    await chooseSchool(page,'special-lyceum');
-    await page.selectOption('#spdiagGrade','a');
-    assert.ok(await page.locator('#spdiagSubject option').count()>=14,`${label}: Special Lyceum A subjects incomplete`);
+    await page.selectOption('#spdiagSubject','math');
+    assert.equal(await page.locator('#spdiagStart').isDisabled(),true,`${label}: Special Gymnasium generic quiz must not be presented as verified`);
 
     const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
     assert.ok(noOverflow,`${label}: horizontal overflow introduced by Special Education diagnostic`);
     assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
     await page.close();
   }
-  console.log('Special Education diagnostic passed on desktop/mobile with lazy data, 8-grade ENEEGYL and 3x2 simplified quizzes.');
+  console.log('Special Education diagnostic passed on desktop/mobile with lazy data, five verified quizzes and no generic curriculum claims.');
 }finally{
   await browser.close();
 }

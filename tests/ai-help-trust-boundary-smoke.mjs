@@ -34,7 +34,7 @@ try {
     window.dispatchEvent(new PopStateEvent('popstate'));
     window.AITutor.render({ zoneId: 'middle', roleId: 'student', lang: 'el' });
   });
-  await page.waitForSelector('#tutorAccessGate');
+  await page.waitForSelector('#tutorAccessGate', { state: 'attached' });
   assert.equal(await page.locator('#tutorAccessGate.tutor-access--good').count(), 0, 'Middle-school direct student access should remain blocked');
 
   // High-school student AI Help is allowed. Choose the optional Puter provider,

@@ -472,7 +472,7 @@ const TOOLS = {
     shortDescEn: "Simple concept maps, ideal for organizing assignments or structuring a project before writing.",
     greekTips: "Η διεπαφή είναι μόνο στα αγγλικά, χωρίς επιλογή ελληνικών, αλλά είναι κυρίως εικονίδια και σχήματα: το παιδί μπορεί να γράφει κανονικά ελληνικά μέσα στους κόμβους του χάρτη.",
     isExpert: true,
-  },,
+  },
   "ai-help": {
     id: "ai-help",
     name: "AI Βοήθεια του aitools4kids.gr",

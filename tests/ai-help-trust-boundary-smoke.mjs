@@ -3,24 +3,6 @@ import assert from 'node:assert/strict';
 
 const LOCAL = 'http://127.0.0.1:4173/';
 
-async function setTutorAge(page, value) {
-  await page.evaluate((nextValue) => {
-    const age = document.getElementById('tutorAge');
-    if (!age) throw new Error('Missing #tutorAge');
-    age.value = nextValue;
-    age.dispatchEvent(new Event('change', { bubbles: true }));
-  }, value);
-}
-
-async function setTutorConsent(page, checked) {
-  await page.evaluate((nextChecked) => {
-    const consent = document.getElementById('tutorConsent');
-    if (!consent) throw new Error('Missing #tutorConsent');
-    consent.checked = nextChecked;
-    consent.dispatchEvent(new Event('change', { bubbles: true }));
-  }, checked);
-}
-
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
@@ -43,7 +25,7 @@ try {
   // The disclosure script is not part of normal page/tutor startup.
   assert.equal(await page.locator('script[src="/ai-help-trust-boundary.js"]').count(), 0, 'Trust disclosure should be lazy before sign-in');
 
-  // Render middle-school student AI Help and choose an allowed age.
+  // Middle-school direct student AI Help is blocked by the current access model.
   await page.waitForFunction(() => window.AITutor?.render && document.getElementById('tutorMount'), null, { timeout: 30000 });
   await page.evaluate(() => {
     history.replaceState({}, '', '/middle/student/tutor');
@@ -52,12 +34,19 @@ try {
     window.dispatchEvent(new PopStateEvent('popstate'));
     window.AITutor.render({ zoneId: 'middle', roleId: 'student', lang: 'el' });
   });
-  await page.waitForSelector('#tutorAge');
-  // Mobile Compact keeps settings collapsed; change the underlying control directly
-  // so this test verifies trust behavior without depending on mobile layout state.
-  await setTutorAge(page, '15');
+  await page.waitForSelector('#tutorAccessGate');
+  assert.equal(await page.locator('#tutorAccessGate.tutor-access--good').count(), 0, 'Middle-school direct student access should remain blocked');
 
-  // First sign-in click lazy-loads the disclosure, which must appear before Puter.
+  // High-school student AI Help is allowed. Choose the optional Puter provider,
+  // then verify the disclosure appears before Puter is loaded.
+  await page.evaluate(() => {
+    history.replaceState({}, '', '/high/student/tutor');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    window.AITutor.render({ zoneId: 'high', roleId: 'student', lang: 'el' });
+  });
+  await page.waitForFunction(() => document.getElementById('tutorAccessGate')?.classList.contains('tutor-access--good'));
+  await page.click('#tutorPuterChoice');
+  await page.waitForSelector('#tutorPuterDetails:not([hidden])');
   await page.click('#tutorSignIn');
   await page.waitForFunction(() => window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY?.disclosureBeforePuter === true, null, { timeout: 10000 });
   await page.waitForSelector('#aiHelpTrustBoundary:not([hidden])');
@@ -70,15 +59,6 @@ try {
   await page.click('[data-ai-help-boundary-cancel]');
   assert.equal(await page.locator('#aiHelpTrustBoundary:not([hidden])').count(), 0);
   assert.equal(await page.locator('script[src="https://js.puter.com/v2/"]').count(), 0, 'Puter loaded after disclosure cancel');
-
-  // Ages 13–14 get the extra transparency note after the existing consent gate.
-  await setTutorAge(page, '13-14');
-  await setTutorConsent(page, true);
-  await page.click('#tutorSignIn');
-  await page.waitForSelector('#aiHelpTrustBoundary:not([hidden])');
-  const minorNote = await page.textContent('.ai-help-boundary__minor');
-  assert.match(minorNote || '', /δεν αποτελεί τεχνική επαλήθευση ταυτότητας ή ηλικίας/);
-  await page.click('[data-ai-help-boundary-cancel]');
 
   // Language switching keeps the neutral school-zone label without loading disclosure code.
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });

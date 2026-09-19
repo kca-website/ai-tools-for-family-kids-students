@@ -84,11 +84,6 @@
     isGreek: false,
     schoolOnly: true,
   });
-  // Gemini account age remains localized for Greece.
-  if (typeof TOOLS !== "undefined" && TOOLS.gemini) {
-    TOOLS.gemini.minAge = 15;
-    TOOLS.gemini.minAgeNote = "Για προσωπικό λογαριασμό στην Ελλάδα: 15+ (το ισχύον εθνικό όριο διαχείρισης Google Account). Οι εποπτευόμενοι Family Link λογαριασμοί για μικρότερες ηλικίες δεν έχουν πρόσβαση στο Gemini στον ΕΟΧ. Ξεχωριστή σχολική διαδρομή υπάρχει μέσω Google Workspace for Education όταν το σχολείο την ενεργοποιεί.";
-  }
 
   // v3.1: make the recommended learning mode explicit on mainstream tools.
   // These are additions, never replacements for AI Help or browser-based alternatives.

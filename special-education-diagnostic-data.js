@@ -229,7 +229,23 @@
     "eneegyl|lyc-c||english":["high","english-g-lykeiou"]
   });
 
-  function supportQuiz(tier,quizId,subject){
+  // Grade D of EN.E.E.GY.-L. has no separate reviewed bank and no same-grade
+  // general-education equivalent. Following the existing teacher-curriculum
+  // precedent, the reviewed test of the closest lower grade (C) is offered
+  // only as a clearly labelled study reference for the same-named subject.
+  const ADJACENT_GRADE_SUPPORT_BY_SELECTION=Object.freeze({
+    "eneegyl|gym-d||language":["middle","glossa-gymnasiou"],
+    "eneegyl|gym-d||math":["middle","mathimatika-g-gymnasiou"],
+    "eneegyl|gym-d||physics":["middle","fysiki-g-gymnasiou"],
+    "eneegyl|gym-d||chemistry":["middle","chimeia-g-gymnasiou"],
+    "eneegyl|gym-d||biology":["middle","biologia-g-gymnasiou"],
+    "eneegyl|gym-d||history":["middle","istoria-g-gymnasiou"],
+    "eneegyl|gym-d||english":["middle","english-g-gymnasiou"],
+    "eneegyl|lyc-d||new-greek":["high","ekthesi-g-lykeiou"],
+    "eneegyl|lyc-d||english":["high","english-g-lykeiou"]
+  });
+
+  function supportQuiz(tier,quizId,subject,adjacent){
     const raw=typeof QUIZZES!=="undefined"?QUIZZES?.[tier]?.[quizId]:null;
     if(!raw||!Array.isArray(raw.questions))return null;
     const questions=raw.questions.filter(q=>Array.isArray(q.options)&&q.options.some(o=>o.isCorrect)&&q.options.some(o=>!o.isCorrect)).slice(0,3).map((q,index)=>{
@@ -238,6 +254,7 @@
       return {text:q.textEl||q.textEn,options:options.map(o=>o.textEl||o.textEn),correctIndex:index%2?1:0};
     });
     if(questions.length!==3)return null;
+    if(adjacent)return {id:`special-education-adjacent-support-${quizId}`,subjectId:subject.id,subjectLabel:subject.label,scope:"verified-adjacent-grade-support-mapping",scopeLabel:"Σύντομο τεστ υποστήριξης από το σταθερό, επαληθευμένο τεστ της Γ΄ τάξης για το ομώνυμο μάθημα. Η Δ΄ τάξη δεν έχει δικό της επαληθευμένο τεστ και δεν παρουσιάζεται ως η ύλη της Δ΄ τάξης 2026–27.",questions};
     return {id:`special-education-support-${quizId}`,subjectId:subject.id,subjectLabel:subject.label,scope:"verified-general-support-mapping",scopeLabel:"Σύντομο τεστ υποστήριξης από το σταθερό, επαληθευμένο τεστ του ίδιου μαθήματος και της αντίστοιχης τάξης γενικής εκπαίδευσης. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικής Εκπαίδευσης 2026–27.",questions};
   }
 
@@ -247,7 +264,9 @@
     const raw=quizId?window.SPECIAL_EDUCATION_QUIZZES?.[quizId]:null;
     if(!raw||raw.status!=="ready"||!Array.isArray(raw.questions)){
       const support=SUPPORT_QUIZ_BY_SELECTION[key];
-      return support?supportQuiz(support[0],support[1],subject):null;
+      if(support)return supportQuiz(support[0],support[1],subject,false);
+      const adjacent=ADJACENT_GRADE_SUPPORT_BY_SELECTION[key];
+      return adjacent?supportQuiz(adjacent[0],adjacent[1],subject,true):null;
     }
     return {
       id:quizId,
@@ -261,9 +280,9 @@
     };
   }
 
-  const DATA={version:5,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
+  const DATA={version:6,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
     "special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"eneegyl":ENEEGYL
-  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(SUPPORT_QUIZ_BY_SELECTION).length,quizForSelection};
+  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,quizForSelection};
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA=Object.freeze(DATA);
 })();

@@ -29,6 +29,9 @@ jobs:
             node --check "$file"
           done < <(find . -maxdepth 2 -type f -name '*.js' -print0)
 
+      - name: Run repository data integrity smoke
+        run: node tests/repository-data-integrity-smoke.mjs
+
       - name: Install Playwright and axe-core
         run: |
           npm install --no-save playwright@1.55.0 axe-core@4.10.3

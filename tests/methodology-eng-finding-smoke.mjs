@@ -14,7 +14,7 @@ try {
 
   let response = await page.goto(`${LOCAL}/methodology.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
   assert(response?.ok(), `methodology.html returned ${response?.status()}`);
-  await page.waitForSelector('h1[data-lang="el"]');
+  await page.waitForSelector('h1 [data-lang="el"]');
 
   const methodEl = await page.locator('body').innerText();
   assert(methodEl.includes('Τι σημαίνουν τα «Στοιχεία εργαλείου»'), 'Missing Tool Nutrition Labels methodology section');
@@ -32,7 +32,7 @@ try {
 
   await page.click('#en');
   assert((await page.locator('html').getAttribute('lang')) === 'en', 'Methodology language switch did not set html lang=en');
-  assert(await page.locator('h1[data-lang="en"]').isVisible(), 'English methodology heading not visible');
+  assert(await page.locator('h1 [data-lang="en"]').isVisible(), 'English methodology heading not visible');
   const methodEn = await page.locator('body').innerText();
   assert(methodEn.includes('What the Tool Nutrition Labels mean'), 'English Tool Nutrition Labels methodology missing');
   assert(methodEn.includes('32 tools'), 'English 32-tool research scope missing');

@@ -37,8 +37,12 @@ try {
   await page.waitForSelector('#tutorAccessGate', { state: 'attached' });
   assert.equal(await page.locator('#tutorAccessGate.tutor-access--good').count(), 0, 'Middle-school direct student access should remain blocked');
 
-  // High-school student AI Help is allowed. Choose the optional Puter provider,
-  // then verify the disclosure appears before Puter is loaded.
+  // High-school student AI Help is allowed. Use a fresh page so the SPA router
+  // cannot retain the previous middle-school context.
+  await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForFunction(() => window.AITutor?.render && document.getElementById('tutorMount'), null, { timeout: 30000 });
+  assert.equal(await page.locator('script[src="/ai-help-trust-boundary.js"]').count(), 0, 'Trust disclosure should still be lazy before high-school sign-in');
+  // Choose the optional Puter provider, then verify disclosure appears before Puter loads.
   await page.evaluate(() => {
     history.replaceState({}, '', '/high/student/tutor');
     window.dispatchEvent(new PopStateEvent('popstate'));

@@ -1,7 +1,7 @@
-/* Optional simplified diagnostic mode for A-B Primary.
+/* Short quiz mode for every regular school zone.
  * Keeps the normal Learning Compass untouched: this layer opens in a modal,
- * reuses the same quiz questions/gap tags, limits the session to 3 questions
- * and presents only 2 clear choices.
+ * reuses the verified quiz bank and gap tags, limits the session to 3 questions,
+ * presents 2 clear choices and finishes with age-appropriate tools.
  */
 (function(){
   "use strict";
@@ -17,7 +17,14 @@
   }
   function text(el,en){ return isEnglish()?en:el; }
   function routeIsPrimary(){
-    return location.pathname.split("/").filter(Boolean)[0]==="primary";
+    return routeZone()==="primary";
+  }
+  function routeZone(){
+    const zone=location.pathname.split("/").filter(Boolean)[0];
+    return ["primary","middle","high"].includes(zone)?zone:"";
+  }
+  function routeRole(){
+    return location.pathname.split("/").filter(Boolean)[1]||"student";
   }
   function escapeHtml(value){
     return String(value??"").replace(/[&<>\"']/g,(c)=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
@@ -41,6 +48,7 @@
       .psq__feedback{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:#f8fafc;color:#475569;font-size:.86rem;line-height:1.5}
       .psq__next{width:100%;min-height:44px;margin-top:12px;border:0;border-radius:10px;background:#2e6f5e;color:#fff;font:inherit;font-weight:800;cursor:pointer}
       .psq__result h3{margin:17px 0 7px}.psq__score{font-size:2rem;font-weight:900;color:#245c4e}.psq__gap{margin:9px 0;padding:11px 12px;border:1px solid #dbeafe;border-radius:10px;background:#f8fbff}.psq__gap strong{display:block;margin-bottom:3px}.psq__gap p{margin:0;color:#475569;font-size:.84rem;line-height:1.5}
+      .psq__tools{margin-top:15px;padding:13px;border:1px solid #dbeafe;border-radius:12px;background:#f8fbff}.psq__tools h4{margin:0 0 9px;font-size:.92rem}.psq__tool{display:block;margin-top:7px;padding:9px 10px;border:1px solid #bfdbfe;border-radius:9px;background:#fff;color:#1d4ed8;text-decoration:none;font-weight:800}.psq__tool small{display:block;margin-top:3px;color:#64748b;font-weight:500;line-height:1.35}
       .psq__actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.psq__actions button{min-height:42px;padding:9px 12px;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#334155;font:inherit;font-weight:750;cursor:pointer}.psq__actions .psq__regular{background:#2e6f5e;color:#fff;border-color:#2e6f5e}
       @media(max-width:620px){.psq-overlay{padding:8px;place-items:end center}.psq{max-height:92vh;border-radius:16px 16px 8px 8px;padding:16px}.psq__answers{grid-template-columns:1fr}.psq__answer{min-height:54px}.psq__actions{display:grid}.psq__actions button{width:100%}}
     `;
@@ -80,7 +88,7 @@
 
   function getQuiz(subjectId){
     if(typeof QUIZZES==="undefined") return null;
-    return QUIZZES?.primary?.[subjectId]||null;
+    return QUIZZES?.[routeZone()]?.[subjectId]||null;
   }
 
   function createModal(){
@@ -105,11 +113,13 @@
     const questions=getSimpleQuestions(quiz);
     if(!questions.length) return;
     lastFocus=trigger||document.activeElement;
-    session={subjectId,quiz,questions,index:0,score:0,gaps:[],answered:false};
+    session={zone:routeZone(),subjectId,quiz,questions,index:0,score:0,gaps:[],answered:false};
     const modal=createModal();
     modal.hidden=false;
     document.body.style.overflow="hidden";
-    modal.querySelector("#psqTitle").textContent=text("Απλή εκδοχή διαγνωστικού","Simple diagnostic mode");
+    modal.querySelector("#psqTitle").textContent=routeIsPrimary()&&EARLY_GRADES.has(selectedGrade)
+      ? text("Απλή εκδοχή διαγνωστικού","Simple diagnostic mode")
+      : text("Σύντομο τεστ εξάσκησης","Short practice test");
     modal.querySelector("#psqSubtitle").textContent=text("3 σύντομες ερωτήσεις · 2 επιλογές · μία ιδέα τη φορά","3 short questions · 2 choices · one idea at a time");
     modal.querySelector(".psq__close").setAttribute("aria-label",text("Κλείσιμο","Close"));
     renderQuestion();
@@ -178,7 +188,8 @@
       return `<div class="psq__gap"><strong>${escapeHtml(label)}</strong><p>${escapeHtml(explain)}</p></div>`;
     }).join("");
     const allGood=!uniqueGaps.length && session.score===session.questions.length;
-    body.innerHTML=`<div class="psq__result"><div class="psq__score">${session.score}/${session.questions.length}</div><h3>${allGood?text("Δεν φάνηκε συγκεκριμένο σημείο δυσκολίας","No specific difficulty showed up"):text("Σημεία για λίγη εξάσκηση","A few points to practise")}</h3><p>${allGood?text("Αυτό είναι ένα πολύ μικρό check, όχι βαθμός και όχι διάγνωση.","This is a very small check, not a grade and not a diagnosis."):text("Το αποτέλεσμα δείχνει μόνο πού αξίζει να γίνει λίγη ακόμη εξάσκηση. Δεν είναι βαθμός ούτε διάγνωση.","The result only shows where a little more practice may help. It is not a grade or diagnosis.")}</p>${gapHtml}<div class="psq__actions"><button type="button" class="psq__regular">${text("Κάνε το κανονικό τεστ","Take the regular test")}</button><button type="button" class="psq__again">${text("Ξανά την απλή εκδοχή","Retake simple mode")}</button><button type="button" class="psq__done">${text("Κλείσιμο","Close")}</button></div></div>`;
+    const toolsHtml=renderRecommendedTools(uniqueGaps);
+    body.innerHTML=`<div class="psq__result"><div class="psq__score">${session.score}/${session.questions.length}</div><h3>${allGood?text("Δεν φάνηκε συγκεκριμένο σημείο δυσκολίας","No specific difficulty showed up"):text("Σημεία για λίγη εξάσκηση","A few points to practise")}</h3><p>${allGood?text("Αυτό είναι ένα πολύ μικρό check, όχι βαθμός και όχι διάγνωση.","This is a very small check, not a grade and not a diagnosis."):text("Το αποτέλεσμα δείχνει μόνο πού αξίζει να γίνει λίγη ακόμη εξάσκηση. Δεν είναι βαθμός ούτε διάγνωση.","The result only shows where a little more practice may help. It is not a grade or diagnosis.")}</p>${gapHtml}${toolsHtml}<div class="psq__actions"><button type="button" class="psq__regular">${text("Κάνε το κανονικό τεστ","Take the regular test")}</button><button type="button" class="psq__again">${text("Ξανά το σύντομο τεστ","Retake short test")}</button><button type="button" class="psq__done">${text("Κλείσιμο","Close")}</button></div></div>`;
     body.querySelector(".psq__done").addEventListener("click",closeModal);
     body.querySelector(".psq__again").addEventListener("click",()=>openSimpleQuiz(session.subjectId,lastFocus));
     body.querySelector(".psq__regular").addEventListener("click",()=>{
@@ -188,8 +199,31 @@
     });
   }
 
+  function renderRecommendedTools(gapIds){
+    if(typeof GAP_TAGS==="undefined"||typeof TOOLS==="undefined")return "";
+    const ids=[];
+    const source=gapIds.length
+      ? gapIds
+      : session.questions.flatMap(q=>(q.options||[]).map(o=>o.gapTag).filter(Boolean));
+    source.forEach(tag=>(GAP_TAGS[tag]?.recommendedToolIds||[]).forEach(id=>{
+      if(id!=="ai-help"&&!ids.includes(id)&&TOOLS[id])ids.push(id);
+    }));
+    const maxAge={primary:12,middle:15,high:18}[session.zone];
+    const guardian=routeRole()==="guardian";
+    const allowed=ids.filter(id=>{
+      const tool=TOOLS[id];
+      return !tool.isMobileApp&&(guardian||typeof tool.minAge!=="number"||tool.minAge<=maxAge);
+    }).slice(0,3);
+    if(!allowed.length)return "";
+    return `<section class="psq__tools"><h4>${text("🧰 Προτεινόμενα εργαλεία για το επόμενο βήμα","🧰 Recommended tools for the next step")}</h4>${allowed.map(id=>{
+      const tool=TOOLS[id],desc=(isEnglish()?tool.shortDescEn:tool.shortDescEl)||"";
+      return `<a class="psq__tool" href="/tools/${escapeHtml(id)}.html" target="_blank" rel="noopener noreferrer">${escapeHtml(tool.name)}${desc?`<small>${escapeHtml(desc)}</small>`:""}</a>`;
+    }).join("")}</section>`;
+  }
+
   function enhanceSubjectPicker(){
-    if(!routeIsPrimary()||!EARLY_GRADES.has(selectedGrade)) return;
+    const zone=routeZone();
+    if(!zone) return;
     const root=document.getElementById("quizContent");
     if(!root) return;
     // The buttons are inserted dynamically, so their styles must exist before
@@ -205,7 +239,8 @@
       button.type="button";
       button.className="primary-simple-start";
       button.dataset.subjectId=subjectId;
-      button.innerHTML=`${text("Απλή εκδοχή","Simple mode")}<small>${text("3 ερωτήσεις · 2 επιλογές","3 questions · 2 choices")}</small>`;
+      const early=zone==="primary"&&EARLY_GRADES.has(selectedGrade);
+      button.innerHTML=`${early?text("Απλή εκδοχή","Simple mode"):text("Σύντομο τεστ","Short test")}<small>${text("3 ερωτήσεις · 2 επιλογές","3 questions · 2 choices")}</small>`;
       button.addEventListener("click",()=>openSimpleQuiz(subjectId,button));
       start.insertAdjacentElement("afterend",button);
     });
@@ -251,5 +286,5 @@
   else{scheduleEnhance();normalizeSpecialEducationEntries();}
   window.addEventListener("load",()=>setTimeout(normalizeSpecialEducationEntries,0),{once:true});
 
-  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:4,grades:["a","b"],questionsPerSession:3,choicesPerQuestion:2});
+  window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ=Object.freeze({version:5,zones:["primary","middle","high"],grades:"all-with-verified-bank",questionsPerSession:3,choicesPerQuestion:2});
 })();

@@ -13,7 +13,7 @@ async function openPicker(page){
   await page.locator('#viewTabQuiz').click();
   const entry=page.locator('#quizContent [data-special-education-diagnostic]');
   await entry.waitFor({state:'visible',timeout:10000});
-  assert.match(await entry.innerText(),/11 επαληθευμένα απλά τεστ|11 verified simple tests/i,'Special Education entry is missing from the regular Tests view');
+  assert.match(await entry.innerText(),/24 διαθέσιμα σύντομα τεστ|24 available short tests/i,'Special Education entry is missing from the regular Tests view');
   await entry.click();
   await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
 }
@@ -69,12 +69,14 @@ try{
         }
       }
     }
-    return {failures,subjects,ready,declared:D.verifiedQuizCount,eneegylGrades:D.schools.eneegyl.gradeOrder};
+    return {failures,subjects,ready,declared:D.verifiedQuizCount,support:D.supportQuizCount,total:D.totalAvailableQuizCount,eneegylGrades:D.schools.eneegyl.gradeOrder};
   });
   assert.deepEqual(integrity.failures,[],`${label}: verified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
   assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
-  assert.equal(integrity.ready,11,`${label}: the eleven explicitly verified Special Education quizzes must be exposed`);
+  assert.equal(integrity.ready,24,`${label}: all static Special Education and bounded Special Lyceum support tests must be exposed`);
   assert.equal(integrity.declared,11,`${label}: declared verified quiz count is wrong`);
+  assert.equal(integrity.support,13,`${label}: Special Lyceum GEL-support quiz count is wrong`);
+  assert.equal(integrity.total,24,`${label}: total available Special Education quiz count is wrong`);
     assert.deepEqual(integrity.eneegylGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL must expose 8 grades`);
 
     await chooseSchool(page,'eneegyl');
@@ -124,6 +126,7 @@ try{
     await page.waitForSelector('.spdiag__result');
     assert.match(await page.locator('.spdiag__result').innerText(),/\/3/,`${label}: result score missing`);
     assert.ok((await page.locator('.spdiag__result').innerText()).includes('AI Βοήθεια'),`${label}: AI Help result action missing`);
+    assert.ok(await page.locator('.spdiag__result .spdiag__tool').count()>=2,`${label}: Special Education tool recommendations missing`);
 
     await page.click('.spdiag__close');
     await reopenPicker(page);
@@ -132,6 +135,14 @@ try{
     assert.ok(await page.locator('#spdiagSubject option').count()>=18,`${label}: Special Gymnasium A subjects incomplete`);
     await page.selectOption('#spdiagSubject','math');
     assert.equal(await page.locator('#spdiagStart').isEnabled(),true,`${label}: verified Special Gymnasium Maths support quiz must be available`);
+
+    await page.click('.spdiag__close');
+    await reopenPicker(page);
+    await chooseSchool(page,'special-lyceum');
+    await page.selectOption('#spdiagGrade','a');
+    await page.selectOption('#spdiagSubject','new-greek');
+    assert.equal(await page.locator('#spdiagStart').isEnabled(),true,`${label}: bounded Special Lyceum GEL-support quiz must be available`);
+    assert.match(await page.locator('#spdiagScope').innerText(),/αντιστοίχιση.*ΓΕΛ|GEL mapping/i,`${label}: Special Lyceum support boundary is not disclosed`);
 
     const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
     assert.ok(noOverflow,`${label}: horizontal overflow introduced by Special Education diagnostic`);

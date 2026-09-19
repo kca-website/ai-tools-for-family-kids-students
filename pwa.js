@@ -89,17 +89,16 @@
   function isHomepage(){
     return routeParts().length===0;
   }
-  function isPrimaryOrHomepage(){
+  function needsShortQuizRuntime(){
     const parts=routeParts();
-    return parts.length===0 || parts[0]==="primary";
+    return parts.length===0 || (["primary","middle","high"].includes(parts[0]) && parts[2]!=="tutor");
   }
 
   function loadRuntimeScripts(){
     RUNTIME_SCRIPTS.forEach(({id,src})=>{
-      // The optional A-B Primary mode also carries the homepage icon consistency
-      // pass, so it is needed on / and /primary only. Never load it on middle/high
-      // tutor routes where it has no function and could perturb established timing.
-      if(id==="primary-simple-quiz" && !isPrimaryOrHomepage()) return;
+      // The short-test layer serves all regular school zones but is not needed on
+      // standalone tutor routes, where it has no UI to enhance.
+      if(id==="primary-simple-quiz" && !needsShortQuizRuntime()) return;
       if(id==="navigator-home" && !isHomepage()) return;
       if(id==="special-education-entry-analytics" && !isHomepage()) return;
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;

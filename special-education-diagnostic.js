@@ -38,6 +38,7 @@
       .spdiag__start,.spdiag__next{width:100%;min-height:46px;margin-top:14px;border:0;border-radius:11px;background:#2e6f5e;color:#fff;font:inherit;font-weight:800;cursor:pointer}.spdiag__start:disabled{opacity:.45;cursor:not-allowed}
       .spdiag__quiz{margin-top:18px}.spdiag__progress{color:#64748b;font-size:.78rem;font-weight:700}.spdiag__question{margin:8px 0 12px;font-size:1.05rem;line-height:1.45}.spdiag__answers{display:grid;grid-template-columns:1fr 1fr;gap:9px}.spdiag__answer{min-height:52px;padding:10px;border:1px solid #cbd5e1;border-radius:11px;background:#fff;font:inherit;font-weight:700;cursor:pointer}.spdiag__answer.is-correct{border-color:#15803d;background:#f0fdf4}.spdiag__answer.is-wrong{border-color:#b91c1c;background:#fef2f2}.spdiag__answer:disabled{cursor:default;opacity:1}
       .spdiag__result{text-align:center;padding:8px 0}.spdiag__score{font-size:2rem;font-weight:900;color:#245c4e}.spdiag__result h3{margin:5px 0}.spdiag__result p{color:#475569;line-height:1.5}.spdiag__actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}.spdiag__actions a,.spdiag__actions button{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:8px 12px;border-radius:9px;border:1px solid #cbd5e1;background:#fff;color:#334155;text-decoration:none;font:inherit;font-weight:750;cursor:pointer}.spdiag__actions a:first-child{background:#2e6f5e;color:#fff;border-color:#2e6f5e}
+      .spdiag__tools{margin-top:14px;padding:12px;border:1px solid #bfdbfe;border-radius:11px;background:#f8fbff;text-align:left}.spdiag__tools h4{margin:0 0 7px}.spdiag__tool{display:block;margin-top:7px;padding:9px 10px;border:1px solid #bfdbfe;border-radius:9px;background:#fff;color:#1d4ed8;text-decoration:none;font-weight:800}.spdiag__tool small{display:block;margin-top:3px;color:#64748b;font-weight:500;line-height:1.35}
       @media(max-width:620px){.spdiag-overlay{padding:8px;place-items:end center}.spdiag{max-height:92vh;border-radius:16px 16px 8px 8px;padding:16px}.spdiag__schools,.spdiag__grid,.spdiag__answers{grid-template-columns:1fr}.spdiag__school{min-height:44px}.spdiag__actions{display:grid}.spdiag__actions>*{width:100%;box-sizing:border-box}}
     `;
     document.head.appendChild(s);
@@ -84,7 +85,7 @@
     b.type="button";
     b.className="quiz-grade-card spdiag-entry";
     b.dataset.specialEducationDiagnostic="1";
-    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ.","Special Education / EN.E.E.GY.-L.")}</span><span class="spdiag-entry__sub">${t("11 επαληθευμένα απλά τεστ · 3 ερωτήσεις · 2 επιλογές","11 verified simple tests · 3 questions · 2 choices")}</span>`;
+    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ.","Special Education / EN.E.E.GY.-L.")}</span><span class="spdiag-entry__sub">${t("24 διαθέσιμα σύντομα τεστ · 3 ερωτήσεις · 2 επιλογές","24 available short tests · 3 questions · 2 choices")}</span>`;
     grid.appendChild(b);
   }
 
@@ -169,7 +170,9 @@
     const p=modal()?.querySelector("#spdiagScope");if(!p)return;const src=school()?.sourceUrl;
     const ready=selectedQuiz();
     const msg=ready
-      ?t("Υπάρχει περιορισμένο, επαληθευμένο τεστ 3 ερωτήσεων για τη συγκεκριμένη ενότητα. Δεν αποτελεί πλήρη έλεγχο της ύλης 2026–27.","A limited, verified three-question check is available for this unit. It is not a complete check of the 2026–27 syllabus.")
+      ?(ready.scope==="verified-gel-support-mapping"
+        ?t("Υπάρχει σύντομο τεστ υποστήριξης από την επαληθευμένη αντιστοίχιση της ίδιας τάξης ΓΕΛ. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικού Λυκείου.","A short support test is available from the verified GEL mapping for the same grade. It is not presented as the full or identical Special Lyceum syllabus.")
+        :t("Υπάρχει περιορισμένο, επαληθευμένο τεστ 3 ερωτήσεων για τη συγκεκριμένη ενότητα. Δεν αποτελεί πλήρη έλεγχο της ύλης 2026–27.","A limited, verified three-question check is available for this unit. It is not a complete check of the 2026–27 syllabus."))
       :t("Για το επιλεγμένο μάθημα δεν υπάρχει ακόμη επαληθευμένο τεστ. Δεν εμφανίζουμε γενικές ή επινοημένες ερωτήσεις ως σχολική ύλη.","No verified test is available for the selected subject yet. Generic or invented questions are not presented as curriculum content.");
     p.innerHTML=`${esc(msg)}${src?` <a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(t("Επίσημη βάση 2026-27 ↗","Official 2026-27 basis ↗"))}</a>`:""}`;
   }
@@ -197,11 +200,25 @@
     if(state.schoolId==="special-lyceum") return `/high/student/tutor?schoolTrack=special-lyceum${state.gradeId!=="pre"?`&grade=${encodeURIComponent(state.gradeId)}`:""}`;
     return `/high/student/tutor?schoolTrack=eneegyl&grade=${encodeURIComponent(state.gradeId)}`;
   }
+  function recommendedToolIds(){
+    const id=String(state.subjectId||"").toLowerCase();
+    if(/language|greek|new-greek|english|liter|reading/.test(id))return ["reading-coach","mindmup","quizlet"];
+    if(/math|algebra|geometry|thermo|physics|mechan|electr|topograph/.test(id))return ["geogebra","photomath","quizlet"];
+    if(/program|informatic|network|computer|database|web/.test(id))return ["replit-ai","quizlet","mindmup"];
+    if(/drawing|graphic|design|art|creative|fashion|interior/.test(id))return ["canva-magic","autodraw","mindmup"];
+    return ["quizlet","mindmup","notebooklm"];
+  }
+  function recommendedToolsHtml(){
+    if(typeof TOOLS==="undefined")return "";
+    const ids=recommendedToolIds().filter(id=>TOOLS[id]).slice(0,3);
+    if(!ids.length)return "";
+    return `<section class="spdiag__tools"><h4>${esc(t("🧰 Προτεινόμενα εργαλεία για εξάσκηση","🧰 Recommended practice tools"))}</h4>${ids.map(id=>{const tool=TOOLS[id],desc=(en()?tool.shortDescEn:tool.shortDescEl)||"";return `<a class="spdiag__tool" href="/tools/${esc(id)}.html" target="_blank" rel="noopener noreferrer">${esc(tool.name)}${desc?`<small>${esc(desc)}</small>`:""}</a>`;}).join("")}</section>`;
+  }
   function renderResult(){
     const box=modal().querySelector("#spdiagQuiz"),score=state.score;
     const title=score===3?t("Καλή βάση","Good foundation"):score===2?t("Λίγη εξάσκηση","A little practice"):t("Χρειάζεται βοήθεια στα βασικά","Help with the basics will help");
     const msg=score===3?t("Το βασικό επίπεδο φαίνεται καλό. Μπορείς να συνεχίσεις με το επόμενο θέμα.","The basic level looks good. You can continue with the next topic."):score===2?t("Υπάρχει βάση, αλλά αξίζει λίγη στοχευμένη εξάσκηση.","There is a foundation, but some targeted practice would help."):t("Καλύτερα να δουλευτεί το μάθημα σε μικρά βήματα και με απλά παραδείγματα.","It is better to work through the subject in small steps with simple examples.");
-    box.innerHTML=`<div class="spdiag__result"><div class="spdiag__score">${score}/3</div><h3>${esc(title)}</h3><p>${esc(msg)}</p><p class="spdiag__scope">${esc(data().quizPolicy.scopeLabel)}</p><div class="spdiag__actions"><a href="${esc(tutorUrl())}">${esc(t("Ρώτα την AI Βοήθεια","Ask AI Help"))}</a><a href="/special-education.html#spSupportTitle">${esc(t("Εργαλεία υποστήριξης","Support tools"))}</a><button type="button" id="spdiagRetake">${esc(t("Ξανακάνε","Retake"))}</button></div></div>`;
+    box.innerHTML=`<div class="spdiag__result"><div class="spdiag__score">${score}/3</div><h3>${esc(title)}</h3><p>${esc(msg)}</p><p class="spdiag__scope">${esc(state.quiz.scopeLabel||data().quizPolicy.scopeLabel)}</p>${recommendedToolsHtml()}<div class="spdiag__actions"><a href="${esc(tutorUrl())}">${esc(t("Ρώτα την AI Βοήθεια","Ask AI Help"))}</a><a href="/special-education.html#spSupportTitle">${esc(t("Περισσότερα εργαλεία υποστήριξης","More support tools"))}</a><button type="button" id="spdiagRetake">${esc(t("Ξανακάνε","Retake"))}</button></div></div>`;
     box.querySelector("#spdiagRetake").addEventListener("click",()=>{modal().querySelector("#spdiagSetup").hidden=false;box.hidden=true;box.innerHTML="";updateStart();});
   }
 
@@ -219,5 +236,5 @@
   document.getElementById("heroQuizCtaBtn")?.addEventListener("click",()=>setTimeout(ensureEntry,0));
   document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#viewTabQuiz,.quiz-grade-back-btn,.quiz-back-btn"))setTimeout(ensureQuizViewEntry,0);});
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:3,ensureEntry,ensureQuizViewEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:4,toolRecommendations:true,ensureEntry,ensureQuizViewEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
 })();

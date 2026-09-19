@@ -67,7 +67,9 @@ assert.ok(catalog.getSectors().length>=9,'B EPAL sector selection is incomplete'
 assert.ok(catalog.getSpecialties().length>=35,'C EPAL specialty selection is incomplete');
 const practiceMap=fs.readFileSync(new URL('epal-practice-map.js',root),'utf8');
 assert.match(practiceMap,/data-epal-practice-map/,'Homepage EPAL Practice Map trigger is missing');
-assert.match(practiceMap,/schoolType:\s*"epal"/,'Practice Map handoff must preserve EPAL mode');
+assert.match(practiceMap,/fetch\("\/api\/tutor-assistant"/,'Practice Map must generate the short test inline');
+assert.match(practiceMap,/Official mapped unit:/,'Practice Map generation must preserve the selected official unit');
+assert.match(practiceMap,/questionsPerSession:3,choicesPerQuestion:2,inlineQuiz:true/,'Practice Map must expose the inline 3x2 quiz contract');
 assert.match(practiceMap,/verifiedTopics\(subject\)/,'Practice Map must filter to official exact topics');
 assert.doesNotMatch(practiceMap,/Θεματική υποστήριξης|Math\.random/,'Practice Map must not generate guessed topics');
 const navigator=fs.readFileSync(new URL('navigator-home.js',root),'utf8');

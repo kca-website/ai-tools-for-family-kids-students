@@ -36,7 +36,7 @@
     }
   };
 
-  const SL_SOURCE="https://www.minedu.gov.gr/eidiki-entaksiaki-ekpaidefsi";
+  const SL_SOURCE="https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/";
   const SL_COMMON_B=[
     ["ancient","Αρχαία Ελληνική Γλώσσα και Γραμματεία"],["new-greek","Νεοελληνική Γλώσσα και Λογοτεχνία"],
     ["algebra","Άλγεβρα"],["geometry","Γεωμετρία"],["physics","Φυσική"],["chemistry","Χημεία"],["biology","Βιολογία"],
@@ -169,25 +169,60 @@
     "eneegyl|lyc-b|agriculture|plant-production":"eneegyl-b-agriculture-plant-basics"
   });
 
+  // Special Lyceum uses the existing fixed GEL question bank only where the
+  // subject and grade match directly. These are support mappings, not a claim
+  // that GEL and Special Lyceum have identical annual examinable syllabi.
+  const GEL_SUPPORT_QUIZ_BY_SELECTION=Object.freeze({
+    "special-lyceum|a||new-greek":"ekthesi-a-lykeiou",
+    "special-lyceum|a||algebra":"mathimatika-a-lykeiou",
+    "special-lyceum|a||physics":"fysiki-a-lykeiou",
+    "special-lyceum|a||history":"istoria-a-lykeiou",
+    "special-lyceum|a||biology":"biologia-a-lykeiou",
+    "special-lyceum|b||new-greek":"ekthesi-b-lykeiou",
+    "special-lyceum|b||physics":"fysiki-b-lykeiou",
+    "special-lyceum|b||history":"istoria-b-lykeiou",
+    "special-lyceum|b||english":"english-b-lykeiou",
+    "special-lyceum|b||biology":"biologia-b-lykeiou",
+    "special-lyceum|c||new-greek":"ekthesi-g-lykeiou",
+    "special-lyceum|c||english":"english-g-lykeiou",
+    "special-lyceum|c|humanities|history":"istoria-g-lykeiou"
+  });
+
+  function gelSupportQuiz(quizId,subject){
+    const raw=typeof QUIZZES!=="undefined"?QUIZZES?.high?.[quizId]:null;
+    if(!raw||!Array.isArray(raw.questions))return null;
+    const questions=raw.questions.filter(q=>Array.isArray(q.options)&&q.options.some(o=>o.isCorrect)&&q.options.some(o=>!o.isCorrect)).slice(0,3).map((q,index)=>{
+      const correct=q.options.find(o=>o.isCorrect),wrong=q.options.find(o=>!o.isCorrect);
+      const options=index%2?[wrong,correct]:[correct,wrong];
+      return {text:q.textEl||q.textEn,options:options.map(o=>o.textEl||o.textEn),correctIndex:index%2?1:0};
+    });
+    if(questions.length!==3)return null;
+    return {id:`special-lyceum-support-${quizId}`,subjectId:subject.id,subjectLabel:subject.label,scope:"verified-gel-support-mapping",scopeLabel:"Σύντομο τεστ υποστήριξης από το σταθερό, επαληθευμένο τεστ της αντίστοιχης τάξης ΓΕΛ. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικού Λυκείου 2026–27.",questions};
+  }
+
   function quizForSelection(schoolId,gradeId,groupId,subject){
     const key=[schoolId,gradeId,groupId||"",subject?.id||""].join("|");
     const quizId=VERIFIED_QUIZ_BY_SELECTION[key];
     const raw=quizId?window.SPECIAL_EDUCATION_QUIZZES?.[quizId]:null;
-    if(!raw||raw.status!=="ready"||!Array.isArray(raw.questions)) return null;
+    if(!raw||raw.status!=="ready"||!Array.isArray(raw.questions)){
+      const supportId=GEL_SUPPORT_QUIZ_BY_SELECTION[key];
+      return supportId?gelSupportQuiz(supportId,subject):null;
+    }
     return {
       id:quizId,
       subjectId:subject.id,
       subjectLabel:subject.label,
       scope:"verified-limited-curriculum-check",
+      scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27.",
       questions:raw.questions.map(q=>({text:q.q,options:[...q.options],correctIndex:q.correctIndex})),
       successMessage:raw.successMessage||"",
       retryMessage:raw.retryMessage||""
     };
   }
 
-  const DATA={version:3,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
+  const DATA={version:4,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
     "special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"eneegyl":ENEEGYL
-  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,quizForSelection};
+  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(GEL_SUPPORT_QUIZ_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(GEL_SUPPORT_QUIZ_BY_SELECTION).length,quizForSelection};
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA=Object.freeze(DATA);
 })();

@@ -12,10 +12,10 @@ try{
   await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
 
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForFunction(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ?.version>=4,null,{timeout:10000});
+  await page.waitForFunction(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ?.version>=5,null,{timeout:10000});
 
   const runtime=await page.evaluate(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ);
-  assert.deepEqual(runtime.grades,['a','b']);
+  assert.deepEqual(runtime.zones,['primary','middle','high']);
   assert.equal(runtime.questionsPerSession,3);
   assert.equal(runtime.choicesPerQuestion,2);
 
@@ -53,6 +53,7 @@ try{
   await page.waitForSelector('#primarySimpleQuizModal .psq__result',{state:'visible',timeout:5000});
   assert.match((await page.locator('#primarySimpleQuizModal .psq__score').innerText()).trim(),/^\d\/3$/,'Simple mode result must be out of three');
   assert.match(await page.locator('#primarySimpleQuizModal .psq__result').innerText(),/(δεν είναι βαθμός ούτε διάγνωση|not a grade or diagnosis)/i,'Result must explicitly avoid diagnostic/grade framing');
+  assert.ok(await page.locator('#primarySimpleQuizModal .psq__tool').count()>0,'Short-test result must recommend at least one age-appropriate tool');
   await page.locator('#primarySimpleQuizModal .psq__done').click();
 
   await page.locator('#quizBackToGradesBtn').click();
@@ -64,14 +65,28 @@ try{
   const laterGrade=page.locator('.quiz-grade-card[data-grade-id="c"]');
   if(await laterGrade.count()){
     await laterGrade.click();
-    await page.waitForTimeout(50);
-    assert.equal(await page.locator('.primary-simple-start').count(),0,'Simple mode must not appear from C Primary onward');
+    await page.waitForSelector('.primary-simple-start',{state:'visible',timeout:10000});
+    assert.ok(await page.locator('.primary-simple-start').count()>0,'C Primary and later grades must expose a short test when a verified bank exists');
+  }
+
+  for(const zone of ['middle','high']){
+    await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
+    await page.waitForFunction(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ?.version>=5,null,{timeout:10000});
+    await page.locator(`.zone-card[data-zone="${zone}"]`).click();
+    await page.waitForSelector('#roleTabs .role-tab',{state:'visible',timeout:10000});
+    await page.locator('#roleTabs .role-tab').nth(1).click();
+    await page.locator('#viewTabQuiz').click();
+    await page.waitForSelector('.quiz-grade-card[data-grade-id]',{state:'visible',timeout:10000});
+    await page.locator('.quiz-grade-card[data-grade-id]').first().click();
+    await page.waitForSelector('.primary-simple-start',{state:'visible',timeout:10000});
+    assert.ok(await page.locator('.primary-simple-start').count()>0,`${zone}: verified subjects must expose the 3x2 short test`);
+    assert.match(await page.locator('.primary-simple-start').first().innerText(),/(Σύντομο τεστ|Short test)/i,`${zone}: short-test label missing`);
   }
 
   const overflow=await page.evaluate(()=>Math.max(0,document.documentElement.scrollWidth-document.documentElement.clientWidth));
   assert.ok(overflow<=1,`mobile Primary quiz has horizontal overflow: ${overflow}px`);
   assert.deepEqual(errors,[],`Primary simple quiz browser errors:\n${errors.join('\n')}`);
-  console.log('Early Primary simple quiz smoke passed.');
+  console.log('Short 3x2 quiz passed for Primary, Middle School and GEL with tool recommendations.');
 }finally{
   await browser.close();
 }

@@ -166,6 +166,7 @@ try {
   await page.waitForFunction(() => !document.getElementById('tutorAccessGate')?.classList.contains('tutor-access--good'));
   reports.push(['middle student tutor', await scan(page, 'middle student tutor')]);
 
+  await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await renderStudentTutor(page, 'high');
   await page.waitForFunction(() => document.getElementById('tutorAccessGate')?.classList.contains('tutor-access--good'));
   await page.click('#tutorPuterChoice');

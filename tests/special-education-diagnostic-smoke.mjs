@@ -143,6 +143,7 @@ try{
     await page.selectOption('#spdiagSubject','new-greek');
     assert.equal(await page.locator('#spdiagStart').isEnabled(),true,`${label}: bounded Special Lyceum GEL-support quiz must be available`);
     assert.match(await page.locator('#spdiagScope').innerText(),/αντιστοίχιση.*ΓΕΛ|GEL mapping/i,`${label}: Special Lyceum support boundary is not disclosed`);
+    assert.match(await page.locator('#spdiagStart').innerText(),/τεστ υποστήριξης|support test/i,`${label}: Special Lyceum button must not label a GEL support mapping as a verified Special Lyceum test`);
 
     const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
     assert.ok(noOverflow,`${label}: horizontal overflow introduced by Special Education diagnostic`);

@@ -176,7 +176,7 @@
       :t("Για το επιλεγμένο μάθημα δεν υπάρχει ακόμη επαληθευμένο τεστ. Δεν εμφανίζουμε γενικές ή επινοημένες ερωτήσεις ως σχολική ύλη.","No verified test is available for the selected subject yet. Generic or invented questions are not presented as curriculum content.");
     p.innerHTML=`${esc(msg)}${src?` <a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(t("Επίσημη βάση 2026-27 ↗","Official 2026-27 basis ↗"))}</a>`:""}`;
   }
-  function updateStart(){const b=modal().querySelector("#spdiagStart"),ready=!!selectedQuiz();b.disabled=!ready;b.textContent=ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
+  function updateStart(){const b=modal().querySelector("#spdiagStart"),quiz=selectedQuiz(),ready=!!quiz;b.disabled=!ready;b.textContent=quiz?.scope==="verified-gel-support-mapping"?t("Ξεκίνα το σύντομο τεστ υποστήριξης","Start short support test"):ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
   function selectedSubject(){return currentSubjects().find((x)=>x.id===state.subjectId)||null;}
   function selectedQuiz(){const subj=selectedSubject();return subj?data()?.quizForSelection?.(state.schoolId,state.gradeId,state.groupId,subj):null;}
 

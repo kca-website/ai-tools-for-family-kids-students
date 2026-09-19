@@ -84,18 +84,7 @@
     isGreek: false,
     schoolOnly: true,
   });
-
-  // Correct the effective Notebook entry (the source file historically contained conflicting declarations).
-  if (typeof TOOLS !== "undefined" && TOOLS.notebooklm) {
-    Object.assign(TOOLS.notebooklm, {
-      name: "NotebookLM",
-      url: "https://notebooklm.google.com/",
-      minAge: 15,
-      minAgeNote: "Με προσωπικό Google Account στην Ελλάδα απαιτείται το ισχύον όριο διαχείρισης λογαριασμού (15+). Με Google Workspace for Education, το NotebookLM είναι διαθέσιμο σε χρήστες όλων των ηλικιών όταν το σχολείο το ενεργοποιεί. Ορισμένες λειτουργίες παραμένουν 18+.",
-      shortDescEl: "AI βοηθός έρευνας που απαντά πάνω στις πηγές που του δίνεις και εμφανίζει παραπομπές. Με σχολικό Workspace μπορεί να χρησιμοποιείται σε όλες τις ηλικίες, αν ενεργοποιηθεί από το σχολείο.",
-      shortDescEn: "AI research assistant grounded in the sources you provide, with citations. Education Workspace users can access it at all ages when enabled by the school.",
-    });
-  }
+  // Gemini account age remains localized for Greece.
   if (typeof TOOLS !== "undefined" && TOOLS.gemini) {
     TOOLS.gemini.minAge = 15;
     TOOLS.gemini.minAgeNote = "Για προσωπικό λογαριασμό στην Ελλάδα: 15+ (το ισχύον εθνικό όριο διαχείρισης Google Account). Οι εποπτευόμενοι Family Link λογαριασμοί για μικρότερες ηλικίες δεν έχουν πρόσβαση στο Gemini στον ΕΟΧ. Ξεχωριστή σχολική διαδρομή υπάρχει μέσω Google Workspace for Education όταν το σχολείο την ενεργοποιεί.";

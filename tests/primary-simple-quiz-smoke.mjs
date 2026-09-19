@@ -9,7 +9,18 @@ try{
   const page=await context.newPage();
   const errors=[];
   page.on('pageerror',(err)=>errors.push(`pageerror: ${err.message}`));
-  page.on('console',(msg)=>{if(msg.type()==='error') errors.push(`console: ${msg.text()}`);});
+  page.on('console',(msg)=>{
+    if(msg.type()!=='error') return;
+    const text=msg.text();
+    if(/^Failed to load resource:/.test(text)) return;
+    errors.push(`console: ${text}`);
+  });
+  page.on('response',(response)=>{
+    if(response.status()<400) return;
+    const url=response.url();
+    if(url.includes('/_vercel/insights/script.js')) return;
+    errors.push(`http ${response.status()}: ${url}`);
+  });
   await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
 
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});

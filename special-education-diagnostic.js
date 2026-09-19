@@ -32,7 +32,7 @@
       .spdiag__head{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}.spdiag__head h2{margin:0;font-size:1.22rem}.spdiag__head p{margin:5px 0 0;color:#64748b;font-size:.84rem;line-height:1.5}
       .spdiag__close{flex:0 0 auto;border:0;background:#f1f5f9;border-radius:9px;width:38px;height:38px;font-size:1.2rem;cursor:pointer}
       .spdiag__step{margin-top:17px}.spdiag__label{display:block;margin-bottom:7px;font-weight:800;font-size:.82rem;color:#334155}
-      .spdiag__schools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.spdiag__school{min-height:48px;padding:9px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;font:inherit;font-weight:750;cursor:pointer}.spdiag__school.is-active{border-color:#2e6f5e;background:#edf7f3;color:#245c4e}
+      .spdiag__schools{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.spdiag__school{min-height:48px;padding:9px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;font:inherit;font-weight:750;cursor:pointer}.spdiag__school.is-active{border-color:#2e6f5e;background:#edf7f3;color:#245c4e}
       .spdiag select{width:100%;min-height:44px;padding:8px 11px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;font:inherit;color:#1e293b}
       .spdiag__grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.spdiag__scope{margin:14px 0 0;padding:10px 12px;border-radius:10px;background:#f8fafc;color:#64748b;font-size:.78rem;line-height:1.5}.spdiag__scope a{color:#315f93;font-weight:700}
       .spdiag__start,.spdiag__next{width:100%;min-height:46px;margin-top:14px;border:0;border-radius:11px;background:#2e6f5e;color:#fff;font:inherit;font-weight:800;cursor:pointer}.spdiag__start:disabled{opacity:.45;cursor:not-allowed}
@@ -85,8 +85,8 @@
     b.type="button";
     b.className="quiz-grade-card spdiag-entry";
     b.dataset.specialEducationDiagnostic="1";
-    const count=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA?.totalAvailableQuizCount||80;
-    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ.","Special Education / EN.E.E.GY.-L.")}</span><span class="spdiag-entry__sub">${t(`${count} διαθέσιμα σύντομα τεστ · 3 ερωτήσεις · 2 επιλογές`,`${count} available short tests · 3 questions · 2 choices`)}</span>`;
+    const count=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA?.totalAvailableQuizCount||651;
+    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ. / Κωφών και Βαρηκόων","Special Education / EN.E.E.GY.-L. / Deaf and Hard of Hearing")}</span><span class="spdiag-entry__sub">${t(`${count} διαθέσιμες σύντομες δραστηριότητες · 3 ερωτήσεις · 2 επιλογές`,`${count} available short activities · 3 questions · 2 choices`)}</span>`;
     grid.appendChild(b);
   }
 
@@ -164,14 +164,16 @@
   function populateSubjects(){
     const sel=modal().querySelector("#spdiagSubject"),subjects=currentSubjects();sel.innerHTML="";sel.disabled=!subjects.length;
     const first=document.createElement("option");first.value="";first.textContent=t("Διάλεξε μάθημα","Choose subject");sel.appendChild(first);
-    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;const quiz=data().quizForSelection(state.schoolId,state.gradeId,state.groupId,s);const support=/support-mapping$/.test(quiz?.scope||"");o.textContent=quiz?(support?`${s.label} · ${t("τεστ υποστήριξης","support test")}`:s.label):`${s.label} · ${t("χωρίς επαληθευμένο τεστ ακόμη","verified test not yet available")}`;o.dataset.quizReady=quiz?"1":"0";o.dataset.quizScope=support?"support":quiz?"verified":"unavailable";sel.appendChild(o);});
+    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;const quiz=data().quizForSelection(state.schoolId,state.gradeId,state.groupId,s);const support=/support-mapping$/.test(quiz?.scope||""),readiness=quiz?.scope==="official-curriculum-readiness-check";o.textContent=support?`${s.label} · ${t("τεστ υποστήριξης","support test")}`:readiness?`${s.label} · ${t("έλεγχος προετοιμασίας","readiness check")}`:s.label;o.dataset.quizReady=quiz?"1":"0";o.dataset.quizScope=readiness?"readiness":support?"support":"verified";sel.appendChild(o);});
     state.subjectId="";sel.value="";updateStart();updateScope();
   }
   function updateScope(){
     const p=modal()?.querySelector("#spdiagScope");if(!p)return;const src=school()?.sourceUrl;
     const ready=selectedQuiz();
     const msg=ready
-      ?(ready.scope==="verified-adjacent-grade-support-mapping"
+      ?(ready.scope==="official-curriculum-readiness-check"
+        ?t("Το μάθημα ανήκει στο επίσημο πρόγραμμα 2026–27. Διατίθεται έλεγχος προετοιμασίας, όχι τεστ γνώσης συγκεκριμένης ενότητας. Για αξιολόγηση ύλης χρειάζεται η ακριβής επίσημη ενότητα.","The subject belongs to the official 2026–27 programme. A readiness check is available, not a knowledge test for a specific unit. The exact official unit is required for curriculum assessment.")
+        :ready.scope==="verified-adjacent-grade-support-mapping"
         ?t("Υπάρχει σύντομο τεστ υποστήριξης από το επαληθευμένο τεστ της Γ΄ τάξης για το ομώνυμο μάθημα. Η Δ΄ τάξη δεν έχει δικό της επαληθευμένο τεστ και το περιεχόμενο δεν παρουσιάζεται ως η ύλη της Δ΄ τάξης.","A short support test is available from the verified Grade C test for the same-named subject. Grade D has no test of its own, and this is not presented as the Grade D syllabus.")
         :ready.scope==="verified-general-support-mapping"
         ?t("Υπάρχει σύντομο τεστ υποστήριξης από επαληθευμένο τεστ του ίδιου μαθήματος και της αντίστοιχης τάξης γενικής εκπαίδευσης. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικής Εκπαίδευσης.","A short support test is available from a verified general-education test for the same subject and corresponding grade. It is not presented as the full or identical Special Education syllabus.")
@@ -179,7 +181,7 @@
       :t("Για το επιλεγμένο μάθημα δεν υπάρχει ακόμη επαληθευμένο τεστ. Δεν εμφανίζουμε γενικές ή επινοημένες ερωτήσεις ως σχολική ύλη.","No verified test is available for the selected subject yet. Generic or invented questions are not presented as curriculum content.");
     p.innerHTML=`${esc(msg)}${src?` <a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(t("Επίσημη βάση 2026-27 ↗","Official 2026-27 basis ↗"))}</a>`:""}`;
   }
-  function updateStart(){const b=modal().querySelector("#spdiagStart"),quiz=selectedQuiz(),ready=!!quiz;b.disabled=!ready;b.textContent=/support-mapping$/.test(quiz?.scope||"")?t("Ξεκίνα το σύντομο τεστ υποστήριξης","Start short support test"):ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
+  function updateStart(){const b=modal().querySelector("#spdiagStart"),quiz=selectedQuiz(),ready=!!quiz;b.disabled=!ready;b.textContent=quiz?.scope==="official-curriculum-readiness-check"?t("Ξεκίνα τον έλεγχο προετοιμασίας","Start readiness check"):/support-mapping$/.test(quiz?.scope||"")?t("Ξεκίνα το σύντομο τεστ υποστήριξης","Start short support test"):ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη δραστηριότητα","Activity not yet available");}
   function selectedSubject(){return currentSubjects().find((x)=>x.id===state.subjectId)||null;}
   function selectedQuiz(){const subj=selectedSubject();return subj?data()?.quizForSelection?.(state.schoolId,state.gradeId,state.groupId,subj):null;}
 
@@ -199,8 +201,8 @@
     modal().querySelector(".spdiag__next").hidden=false;
   }
   function tutorUrl(){
-    if(state.schoolId==="special-gymnasium") return `/middle/student/tutor?schoolTrack=special-gymnasium${state.gradeId!=="pre"?`&grade=${encodeURIComponent(state.gradeId)}`:""}`;
-    if(state.schoolId==="special-lyceum") return `/high/student/tutor?schoolTrack=special-lyceum${state.gradeId!=="pre"?`&grade=${encodeURIComponent(state.gradeId)}`:""}`;
+    if(state.schoolId==="special-gymnasium"||state.schoolId==="deaf-gymnasium") return `/middle/student/tutor?schoolTrack=special-gymnasium${state.gradeId!=="pre"?`&grade=${encodeURIComponent(state.gradeId)}`:""}${state.schoolId==="deaf-gymnasium"?"&accessibility=deaf-hard-of-hearing":""}`;
+    if(state.schoolId==="special-lyceum"||state.schoolId==="deaf-lyceum") return `/high/student/tutor?schoolTrack=special-lyceum${state.gradeId!=="pre"?`&grade=${encodeURIComponent(state.gradeId)}`:""}${state.schoolId==="deaf-lyceum"?"&accessibility=deaf-hard-of-hearing":""}`;
     return `/high/student/tutor?schoolTrack=eneegyl&grade=${encodeURIComponent(state.gradeId)}`;
   }
   function recommendedToolIds(){

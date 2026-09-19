@@ -13,7 +13,7 @@ async function openPicker(page){
   await page.locator('#viewTabQuiz').click();
   const entry=page.locator('#quizContent [data-special-education-diagnostic]');
   await entry.waitFor({state:'visible',timeout:10000});
-  assert.match(await entry.innerText(),/80 διαθέσιμα σύντομα τεστ|80 available short tests/i,'Special Education entry is missing from the regular Tests view');
+  assert.match(await entry.innerText(),/διαθέσιμες σύντομες δραστηριότητες|available short activities/i,'Special Education entry is missing from the regular Tests view');
   await entry.click();
   await page.waitForSelector('#specialDiagnosticModal:not([hidden])',{timeout:10000});
 }
@@ -43,7 +43,7 @@ try{
     await openPicker(page);
 
   await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA,{timeout:15000});
-  assert.equal(await page.locator('#spdiagSchools .spdiag__school').count(),3,`${label}: expected three Special Education school types`);
+  assert.equal(await page.locator('#spdiagSchools .spdiag__school').count(),5,`${label}: expected five Special Education school types including Deaf/Hard of Hearing`);
 
   const integrity=await page.evaluate(()=>{
     const D=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA;
@@ -73,10 +73,10 @@ try{
   });
   assert.deepEqual(integrity.failures,[],`${label}: verified 3x2 quiz policy failed: ${integrity.failures.join(', ')}`);
   assert.ok(integrity.subjects>250,`${label}: diagnostic catalog looks incomplete (${integrity.subjects} subject entries)`);
-  assert.equal(integrity.ready,80,`${label}: all static Special Education and bounded same-grade support tests must be exposed`);
+  assert.equal(integrity.ready,integrity.subjects,`${label}: every selection must expose an honestly classified activity`);
   assert.equal(integrity.declared,21,`${label}: declared verified quiz count is wrong`);
   assert.equal(integrity.support,59,`${label}: same-grade support quiz count is wrong`);
-  assert.equal(integrity.total,80,`${label}: total available Special Education quiz count is wrong`);
+  assert.equal(integrity.total,integrity.subjects,`${label}: total available Special Education activity count is wrong`);
     assert.deepEqual(integrity.eneegylGrades,['gym-a','gym-b','gym-c','gym-d','lyc-a','lyc-b','lyc-c','lyc-d'],`${label}: ENEEGYL must expose 8 grades`);
 
     await chooseSchool(page,'eneegyl');
@@ -112,8 +112,8 @@ try{
     assert.ok((await page.locator('#spdiagSubject option').allTextContents()).some(x=>x.startsWith('Προγραμματισμός Υπολογιστών')),`${label}: ENEEGYL D Informatics specialty subjects missing`);
 
     await page.selectOption('#spdiagSubject','programming');
-    assert.equal(await page.locator('#spdiagStart').isDisabled(),true,`${label}: unverified generic subject quiz must not start`);
-    assert.match(await page.locator('#spdiagScope').innerText(),/δεν υπάρχει ακόμη επαληθευμένο τεστ/i,`${label}: missing honest unavailable message`);
+    assert.equal(await page.locator('#spdiagStart').isEnabled(),true,`${label}: readiness check must start`);
+    assert.match(await page.locator('#spdiagScope').innerText(),/έλεγχος προετοιμασίας.*όχι τεστ γνώσης/i,`${label}: readiness activity boundary is not disclosed`);
 
     await page.selectOption('#spdiagGrade','lyc-b');
     await page.selectOption('#spdiagGroup','health');
@@ -154,7 +154,7 @@ try{
     assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
     await page.close();
   }
-  console.log('Special Education diagnostic passed on desktop/mobile with lazy data, twenty-one reviewed quizzes and no generic curriculum claims.');
+  console.log('Special Education diagnostic passed on desktop/mobile with five school paths, honest activity tiers and no generic curriculum claims.');
 }finally{
   await browser.close();
 }

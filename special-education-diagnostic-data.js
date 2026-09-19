@@ -183,7 +183,6 @@
     "special-gymnasium|c||history":["middle","istoria-g-gymnasiou"],
     "special-gymnasium|c||english":["middle","english-g-gymnasiou"],
     "special-gymnasium|c||physics":["middle","fysiki-g-gymnasiou"],
-    "special-gymnasium|c||chemistry":["middle","chimeia-g-gymnasiou"],
     "special-gymnasium|c||biology":["middle","biologia-g-gymnasiou"],
 
     "special-lyceum|a||new-greek":["high","ekthesi-a-lykeiou"],
@@ -245,6 +244,28 @@
     "eneegyl|lyc-d||english":["high","english-g-lykeiou"]
   });
 
+  // Short checks written directly from the official 2026-27 teaching
+  // instructions for Special Education (E.A.E.) Gymnasiums. Every question
+  // stays inside a unit listed in the official syllabus of that subject and grade.
+  const OFFICIAL_SOURCE_TITLE="Επίσημες οδηγίες διδασκαλίας Γυμνασίων Ε.Α.Ε. 2026-2027";
+  const OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION=Object.freeze({
+    "special-gymnasium|b||chemistry":{id:"special-gym-b-chemistry-official-2026-27",basis:"Χημεία Β΄ Γυμνασίου Ε.Α.Ε.: 1.2 Καταστάσεις των υλικών, 2.2 Το νερό ως διαλύτης, 3.1 Σύσταση του ατμοσφαιρικού αέρα",questions:[
+      {text:"Ποια κατάσταση της ύλης έχει καθορισμένο σχήμα και καθορισμένο όγκο;",options:["Αέρια","Στερεή"],correctIndex:1},
+      {text:"Διαλύουμε αλάτι στο νερό. Ποιο είναι ο διαλύτης;",options:["Το νερό","Το αλάτι"],correctIndex:0},
+      {text:"Ποιο αέριο υπάρχει στη μεγαλύτερη αναλογία στον ατμοσφαιρικό αέρα;",options:["Το οξυγόνο","Το άζωτο"],correctIndex:1}
+    ]},
+    "special-gymnasium|c||chemistry":{id:"special-gym-c-chemistry-official-2026-27",basis:"Χημεία Γ΄ Γυμνασίου Ε.Α.Ε.: 1.5 Το pH των όξινων διαλυμάτων, 3.1 Εξουδετέρωση, 3.1.3 Καύση των υδρογονανθράκων",questions:[
+      {text:"Ένα διάλυμα έχει pH 3. Τι είδους διάλυμα είναι;",options:["Όξινο","Βασικό"],correctIndex:0},
+      {text:"Όταν ένα οξύ εξουδετερώνεται από μια βάση, ποια ουσία σχηματίζεται εκτός από νερό;",options:["Άλας","Οξυγόνο"],correctIndex:0},
+      {text:"Ποια προϊόντα παράγονται κατά την πλήρη καύση ενός υδρογονάνθρακα;",options:["Οξυγόνο και άζωτο","Διοξείδιο του άνθρακα και νερό"],correctIndex:1}
+    ]},
+    "special-gymnasium|b||social-civic":{id:"special-gym-b-social-civic-official-2026-27",basis:"Κοινωνική και Πολιτική Αγωγή Β΄ Γυμνασίου Ε.Α.Ε.: Κεφ. 2 Κοινωνικές ομάδες, Κεφ. 3 Κοινωνικός ρόλος και κοινωνικοί κανόνες",questions:[
+      {text:"Ποιο είναι παράδειγμα κοινωνικής ομάδας;",options:["Η σχολική τάξη","Άνθρωποι που περνούν τυχαία από την ίδια γωνιά"],correctIndex:0},
+      {text:"Ποιο είναι παράδειγμα κοινωνικού κανόνα;",options:["Το ύψος ενός ανθρώπου","Σταματάμε στο κόκκινο φανάρι"],correctIndex:1},
+      {text:"Τι περιγράφει ο κοινωνικός ρόλος;",options:["Τη συμπεριφορά που αναμένεται από ένα άτομο με μια κοινωνική θέση","Τον αριθμό των ανθρώπων μιας χώρας"],correctIndex:0}
+    ]}
+  });
+
   function supportQuiz(tier,quizId,subject,adjacent){
     const raw=typeof QUIZZES!=="undefined"?QUIZZES?.[tier]?.[quizId]:null;
     if(!raw||!Array.isArray(raw.questions))return null;
@@ -260,6 +281,16 @@
 
   function quizForSelection(schoolId,gradeId,groupId,subject){
     const key=[schoolId,gradeId,groupId||"",subject?.id||""].join("|");
+    const official=OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION[key];
+    if(official)return {
+      id:official.id,
+      subjectId:subject.id,
+      subjectLabel:subject.label,
+      scope:"verified-official-instruction-check",
+      scopeLabel:"Περιορισμένος έλεγχος 3 ερωτήσεων, γραμμένος από ενότητες των επίσημων οδηγιών 2026-27 ("+official.basis+"). Δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης.",
+      sourceTitle:OFFICIAL_SOURCE_TITLE,
+      questions:official.questions.map(q=>({text:q.text,options:[...q.options],correctIndex:q.correctIndex}))
+    };
     const quizId=VERIFIED_QUIZ_BY_SELECTION[key];
     const raw=quizId?window.SPECIAL_EDUCATION_QUIZZES?.[quizId]:null;
     if(!raw||raw.status!=="ready"||!Array.isArray(raw.questions)){
@@ -280,9 +311,9 @@
     };
   }
 
-  const DATA={version:6,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
+  const DATA={version:7,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","eneegyl"],schools:{
     "special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"eneegyl":ENEEGYL
-  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,quizForSelection};
+  },quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος, επαληθευμένος έλεγχος της συγκεκριμένης ενότητας — δεν αποτελεί πλήρη έλεγχο της διδακτέας ή εξεταστέας ύλης 2026-27."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length+Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,quizForSelection};
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA=Object.freeze(DATA);
 })();

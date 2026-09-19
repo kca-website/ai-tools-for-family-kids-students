@@ -7,6 +7,15 @@ const browser=await chromium.launch({headless:true});
 async function prepare(page,viewport){
   await page.setViewportSize(viewport);
   await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
+  await page.route('**/api/tutor-assistant',(route)=>route.fulfill({
+    status:200,
+    contentType:'application/json',
+    body:JSON.stringify({text:JSON.stringify({questions:[
+      {q:'Ποια επιλογή ταιριάζει;',options:['Η πρώτη','Η δεύτερη'],correct:0,explanation:'Η πρώτη επιλογή ταιριάζει.'},
+      {q:'Ποια απάντηση είναι σωστή;',options:['Η σωστή','Η λάθος'],correct:0,explanation:'Η πρώτη είναι η σωστή.'},
+      {q:'Τι επιλέγουμε;',options:['Το σωστό','Το άλλο'],correct:0,explanation:'Επιλέγουμε το σωστό.'}
+    ]})})
+  }));
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>window.AITutor?.render && window.AITutorRenderHost?.eventName,{timeout:30000});
   const globalSpecial=await page.evaluate(()=>({
@@ -87,6 +96,11 @@ async function checkUnified(page,label){
   await selectOption(page,'#tutorGrade','a');
   const sgSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
   assert.ok(sgSubjects.includes('special-gym-a-language-comprehension')&&sgSubjects.includes('special-gym-a-math-problem-reading'),`${label}: Special Gymnasium detailed subjects missing`);
+  assert.equal(await page.evaluate(()=>window.AITutor.getProvider()),'groq',`${label}: GPT-OSS/Groq should be the default provider`);
+  await page.locator('#tutorMount [data-special-simple-quiz="1"]').click();
+  await page.waitForSelector('#tutorMount .tutor-study-tools__result[data-type="quiz-special-simple"]',{timeout:10000});
+  assert.equal(await page.locator('#tutorMount .study-quiz__question').count(),1,`${label}: Special Education quiz was not rendered inline`);
+  assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,`${label}: inline Groq quiz unexpectedly loaded Puter`);
 
   await selectTrack(page,'special-lyceum');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-lyceum',`${label}: Special Lyceum selection failed`);

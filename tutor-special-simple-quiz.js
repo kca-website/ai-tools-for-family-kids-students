@@ -28,7 +28,7 @@
       saved:["Άνοιξε αποθηκευμένο απλό quiz","Open saved simple quiz"],
       again:["Νέο απλό quiz","New simple quiz"],
       generating:["Δημιουργείται απλό quiz…","Creating simple quiz…"],
-      needConnect:["Συνδέσου πρώτα με Puter.","Connect to Puter first."],
+      needConnect:["Συνδέσου πρώτα με Puter ή επίλεξε GPT-OSS 120B.","Connect to Puter first or choose GPT-OSS 120B."],
       failed:["Δεν μπόρεσα να δημιουργήσω σωστό απλό quiz. Δεν έγινε αυτόματη δεύτερη κλήση.","I could not create a valid simple quiz. No automatic second call was made."],
       cached:["Φορτώθηκε από τον browser χωρίς νέα χρήση AI.","Loaded from this browser with no new AI usage."],
       stored:["Αποθηκεύτηκε στον browser για αυτό το θέμα.","Saved in this browser for this topic."],
@@ -127,6 +127,30 @@
     return "";
   }
 
+  function selectedProvider(){
+    return window.AITutor?.getProvider?.()==="puter"?"puter":"groq";
+  }
+
+  async function callAI(value){
+    if(selectedProvider()==="puter"){
+      if(!window.puter?.ai?.chat) throw new Error(text("needConnect"));
+      return window.puter.ai.chat(value,{model:MODEL,normalize:true,max_tokens:950,temperature:0.2});
+    }
+    const response=await fetch("/api/tutor-assistant",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        system:"Create an accurate, accessible Special Education practice quiz. Follow the requested JSON schema exactly and return JSON only. Do not diagnose or grade the learner.",
+        prompt:value,
+        audience:location.pathname.includes("/parent/")?"parent":"high_student",
+        task:"quiz"
+      })
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok) throw new Error(data.message||text("failed"));
+    return data.text||"";
+  }
+
   function parseQuestions(raw){
     const text=String(raw||"").trim().replace(/^```(?:json)?\s*/i,"").replace(/\s*```$/i,"");
     const start=text.indexOf("{");
@@ -215,14 +239,15 @@
     if(panel.dataset.specialQuizBusy==="1") return;
     const c=context();
     const input=document.getElementById("tutorInput");
-    if(!input||input.disabled||!window.puter?.ai?.chat){ setStatus(panel,text("needConnect"),true); return; }
+    if(!input||input.disabled){ setStatus(panel,text("failed"),true); return; }
+    if(selectedProvider()==="puter"&&!window.puter?.ai?.chat){ setStatus(panel,text("needConnect"),true); return; }
     panel.dataset.specialQuizBusy="1";
     const btn=panel.querySelector('[data-special-simple-quiz="1"]');
     if(btn) btn.disabled=true;
     setStatus(panel,text("generating"));
     try{
       await appendPolicy();
-      const response=await window.puter.ai.chat(prompt(c),{model:MODEL,normalize:true,max_tokens:950,temperature:0.2});
+      const response=await callAI(prompt(c));
       const questions=parseQuestions(extractText(response));
       saveCached(c,questions);
       render(panel,questions,false);
@@ -292,5 +317,5 @@
   window.addEventListener("popstate",schedule);
   schedule();
 
-  window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ=Object.freeze({version:1,sync:syncAll,isSpecialTrack});
+  window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ=Object.freeze({version:2,sync:syncAll,isSpecialTrack});
 })();

@@ -75,25 +75,16 @@ async function scan(page, label) {
   return result;
 }
 
-async function setTutorAge(page, value) {
-  await page.evaluate((nextValue) => {
-    const age = document.getElementById('tutorAge');
-    if (!age) throw new Error('Missing #tutorAge');
-    age.value = nextValue;
-    age.dispatchEvent(new Event('change', { bubbles: true }));
-  }, value);
-}
-
-async function renderMiddleStudentTutor(page) {
+async function renderStudentTutor(page, zoneId) {
   await page.waitForFunction(() => window.AITutor?.render && document.getElementById('tutorMount'), null, { timeout: 30000 });
-  await page.evaluate(() => {
-    history.replaceState({}, '', '/middle/student/tutor');
+  await page.evaluate((zone) => {
+    history.replaceState({}, '', `/${zone}/student/tutor`);
     const tutorView = document.getElementById('tutorView');
     if (tutorView) tutorView.hidden = false;
     window.dispatchEvent(new PopStateEvent('popstate'));
-    window.AITutor.render({ zoneId: 'middle', roleId: 'student', lang: 'el' });
-  });
-  await page.waitForSelector('#tutorAge');
+    window.AITutor.render({ zoneId: zone, roleId: 'student', lang: 'el' });
+  }, zoneId);
+  await page.waitForSelector('#tutorAccessGate');
 }
 
 async function disclosureKeyboardCheck(page) {
@@ -171,10 +162,14 @@ try {
   reports.push(['primary zone', await scan(page, 'primary zone')]);
 
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await renderMiddleStudentTutor(page);
+  await renderStudentTutor(page, 'middle');
+  await page.waitForFunction(() => !document.getElementById('tutorAccessGate')?.classList.contains('tutor-access--good'));
   reports.push(['middle student tutor', await scan(page, 'middle student tutor')]);
 
-  await setTutorAge(page, '15');
+  await renderStudentTutor(page, 'high');
+  await page.waitForFunction(() => document.getElementById('tutorAccessGate')?.classList.contains('tutor-access--good'));
+  await page.click('#tutorPuterChoice');
+  await page.waitForSelector('#tutorPuterDetails:not([hidden])');
   await page.click('#tutorSignIn');
   await page.waitForFunction(() => window.AITOOLSKIDS_AI_HELP_TRUST_BOUNDARY?.disclosureBeforePuter === true, null, { timeout: 10000 });
   await page.waitForSelector('#aiHelpTrustBoundary:not([hidden])');

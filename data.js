@@ -73,6 +73,7 @@ const CATEGORIES = [
   // ΝΕΕΣ ΚΑΤΗΓΟΡΙΕΣ ΓΙΑ ΕΛΛΗΝΙΚΑ
   { id: "greek-edtech", labelEl: "🇬🇷 Ελληνική EdTech", labelEn: "🇬🇷 Greek EdTech" },
   { id: "greek-program", labelEl: "🇬🇷 Ελληνικό Πρόγραμμα", labelEn: "🇬🇷 Greek Program" },
+  { id: "learning-tool", labelEl: "Συμπληρωματικό εργαλείο μάθησης", labelEn: "Complementary learning tool" },
 ];
 
 /**
@@ -471,7 +472,55 @@ const TOOLS = {
     shortDescEn: "Simple concept maps, ideal for organizing assignments or structuring a project before writing.",
     greekTips: "Η διεπαφή είναι μόνο στα αγγλικά, χωρίς επιλογή ελληνικών, αλλά είναι κυρίως εικονίδια και σχήματα: το παιδί μπορεί να γράφει κανονικά ελληνικά μέσα στους κόμβους του χάρτη.",
     isExpert: true,
+  },,
+  "ai-help": {
+    id: "ai-help",
+    name: "AI Βοήθεια του aitools4kids.gr",
+    url: "/middle/student/tutor",
+    category: "greek-program",
+    logo: null,
+    shortDescEl: "Ο δικός μας βοηθός μελέτης: κάνει μία ερώτηση τη φορά, δίνει υποδείξεις αντί για έτοιμη λύση και χρησιμοποιεί το πλαίσιο τάξης/μαθήματος του site.",
+    shortDescEn: "Our guided study helper: one question at a time, hints instead of ready-made answers, using the site's grade/subject context.",
+    greekTips: "Στο Δημοτικό το χειρίζεται ο γονέας/κηδεμόνας. Στο Γυμνάσιο και Λύκειο ισχύουν οι ηλικιακοί κανόνες που εμφανίζονται μέσα στην AI Βοήθεια.",
+    isGreek: true,
+    internalTool: true,
   },
+  "phet": {
+    id: "phet",
+    name: "PhET Interactive Simulations",
+    url: "https://phet.colorado.edu/el/",
+    category: "learning-tool",
+    logo: null,
+    shortDescEl: "Δωρεάν προσομοιώσεις Φυσικής, Χημείας, Βιολογίας, Γης και Μαθηματικών. Δεν είναι chatbot AI: είναι συμπληρωματικό εργαλείο κατανόησης μέσω πειραματισμού.",
+    shortDescEn: "Free Physics, Chemistry, Biology, Earth Science and Math simulations. Not an AI chatbot: a complementary learning tool based on exploration.",
+    greekTips: "Η ιστοσελίδα έχει ελληνική έκδοση και οι προσομοιώσεις τρέχουν online σε σύγχρονο browser.",
+    isGreek: false,
+    isAi: false,
+  },
+  "google-arts-culture": {
+    id: "google-arts-culture",
+    name: "Google Arts & Culture Learn",
+    url: "https://artsandculture.google.com/project/education",
+    category: "learning-tool",
+    logo: null,
+    shortDescEl: "Ψηφιακές συλλογές, ιστορικά θέματα, επιστήμες και εικονικές επισκέψεις. Ορισμένες εμπειρίες χρησιμοποιούν AI/ML, αλλά η υπηρεσία δεν είναι AI tutor.",
+    shortDescEn: "Digital collections, history and science topics, plus virtual field trips. Some experiences use AI/ML, but the service is not an AI tutor.",
+    greekTips: "Χρησιμοποίησέ το για οπτική εξερεύνηση και διασταύρωσε το σχολικό θέμα με το βιβλίο σου· δεν είναι υποκατάστατο της ελληνικής διδακτέας ύλης.",
+    isGreek: false,
+    isAi: false,
+  },
+  "gemini-education": {
+    id: "gemini-education",
+    name: "Gemini for Education",
+    url: "https://gemini.google.com/",
+    category: "greek-program",
+    logo: null,
+    shortDescEl: "Gemini μέσω σχολικού Google Workspace. Μπορεί να είναι διαθέσιμο σε μαθητές όλων των ηλικιών μέσα από επιλέξιμες εκδόσεις Education, με διαχείριση από το σχολείο.",
+    shortDescEn: "Gemini through a school Google Workspace account. It can be available to students of all ages on eligible Education editions, controlled by the school.",
+    greekTips: "Αν δεν υπάρχει σχολικός λογαριασμός, χρησιμοποίησε τις άλλες προτάσεις της σελίδας ή την AI Βοήθεια του aitools4kids με τον κατάλληλο ρόλο.",
+    isGreek: false,
+    schoolOnly: true,
+  }
 };
 
 /**

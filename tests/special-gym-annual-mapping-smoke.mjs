@@ -23,8 +23,30 @@ assert.ok(!M.publishedPending.some(x=>x.subjectId==='history'),'History must no 
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='informatics'),'Informatics must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='music'),'Music must no longer be pending after exact Culture mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='art'),'Art must no longer be pending after exact Culture mapping');
-assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='music'&&x.sourceUrl.includes('minedu.gov.gr')));
-assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='art'&&x.sourceUrl.includes('minedu.gov.gr')));
+assert.equal(M.frameworkEntries.length,4);
+for(const id of M.frameworkEntries){
+  assert.ok(C[id],`missing framework ${id}`);
+  assert.equal(C[id].coverageStatus,'annual-framework-verified');
+  assert.equal(C[id].annualInstructionsStatus,'2026-27-framework-verified');
+  assert.equal(C[id].frameworkOnly,true);
+  assert.ok(C[id].officialAnchors.length>0,`${id} has no framework anchors`);
+}
+const homeEconomics=C['teacher-framework-special-gym-a-home-economics'];
+assert.equal(homeEconomics.weeklyHours,2);
+assert.equal(homeEconomics.officialAnchors.length,6);
+assert.ok(homeEconomics.officialAnchors.includes('2. Οικονομικά της οικογένειας'));
+assert.ok(homeEconomics.textbookUrl.includes('ebooks.edu.gr'));
+assert.ok(!C['teacher-framework-special-gym-c-home-economics'],'Home Economics must not be mislabelled as C Special Gymnasium');
+
+for(const [grade,hours] of Object.entries({a:2,b:1,c:1})){
+  const skills=C[`teacher-framework-special-gym-${grade}-skills-labs`];
+  assert.equal(skills.weeklyHours,hours);
+  assert.equal(skills.selectionFramework,true);
+  assert.equal(skills.selectionStatus,'school-selected-program');
+  assert.equal(skills.officialAnchors.length,4);
+  assert.ok(skills.officialAnchors.includes('Ζω Καλύτερα - Ευ Ζην'));
+  assert.ok(skills.officialAnchors.includes('Δημιουργώ και Καινοτομώ - Δημιουργική Σκέψη και Πρωτοβουλία'));
+}
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');
@@ -368,4 +390,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 52 official mappings; 0 published mappings pending.');
+console.log('Special Gymnasium 2026-2027 mapping smoke passed: 52 exact annual mappings + 4 verified frameworks; 0 published mappings pending.');

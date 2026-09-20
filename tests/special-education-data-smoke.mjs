@@ -142,7 +142,9 @@ for (const id of ['special-gym-a-language-comprehension','special-gym-a-math-pro
 
 assert(SL.status === 'verified-structure', 'Special Lyceum must be present as a verified current school structure');
 assert(SL.schoolType === 'special-lyceum', 'Special Lyceum school identity is wrong');
-assert(SL.sourceUrl?.includes('minedu.gov.gr'), 'Special Lyceum official Ministry source missing');
+assert(/iep\.edu\.gr|minedu\.gov\.gr/.test(SL.sourceUrl||''), 'Special Lyceum official IEP/Ministry source missing');
+assert(SL.annualGuidanceStatus === 'published-guidance-source-indexed-section-mapping-in-progress', 'Special Lyceum must distinguish published guidance from completed section mapping');
+assert((SL.annualGuidanceIndex||[]).length >= 10, 'Special Lyceum published 2026-27 guidance index looks incomplete');
 assert(Object.keys(SL.grades || {}).sort().join(',') === 'a,b,c', 'Special Lyceum must expose A/B/C Lyceum grades');
 assert(/δεν|not/i.test(SL.scopeNoteEl + ' ' + SL.scopeNoteEn), 'Special Lyceum must state the no-invented-syllabus boundary');
 

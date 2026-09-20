@@ -86,6 +86,14 @@
         sourceUrl: "https://www.uniwa.gr/",
         departments: ["uniwa-ice"],
       },
+      upatras: {
+        id: "upatras",
+        nameEl: "Πανεπιστήμιο Πατρών",
+        nameEn: "University of Patras",
+        legacyAliases: [],
+        sourceUrl: "https://www.upatras.gr/",
+        departments: ["upatras-biology"],
+      },
       hmu: {
         id: "hmu",
         nameEl: "Ελληνικό Μεσογειακό Πανεπιστήμιο",
@@ -173,6 +181,37 @@
           { code: "ICE-7109", semester: 7, titleEl: "Μοντελοποίηση και Προγραμματισμός Περιορισμών", tasks: ["understand","coding","practice","papers"] },
           { code: "ICE-7113", semester: 9, titleEl: "Συστήματα Αποφάσεων και Διαχείρισης Διεργασιών", tasks: ["understand","research","papers","feedback"] },
           { code: "ICE-8206", semester: 8, titleEl: "Στοχαστικά και μη Γραμμικά Συστήματα", tasks: ["understand","calculations","practice","papers"] },
+        ],
+      },
+
+      "upatras-biology": {
+        institutionId: "upatras",
+        schoolEl: "Σχολή Θετικών Επιστημών",
+        departmentEl: "Τμήμα Βιολογίας",
+        departmentEn: "Department of Biology",
+        degreeLevel: 6,
+        nominalSemesters: 8,
+        coverageStatus: "pilot-verified-core",
+        sourceConfidence: "high",
+        sources: [
+          "https://biology.upatras.gr/program-study/",
+          "https://biology.upatras.gr/study_guide/",
+          "https://biology.upatras.gr/undergraduate-lessons/"
+        ],
+        notesEl: "Το Τμήμα έχει επίσημο πρόγραμμα σπουδών 2026-2027 και επίσημο οδηγό σπουδών. Η πιλοτική καταχώριση περιλαμβάνει επαληθευμένα βασικά μαθήματα· η πλήρης αντιστοίχιση ανά εξάμηνο/κωδικό θα προστεθεί μόνο από το επίσημο πρόγραμμα κατανομής.",
+        courses: [
+          { code: null, semester: null, titleEl: "Βιολογία Κυττάρου Ι", tasks: ["understand","notes","papers","practice"] },
+          { code: null, semester: null, titleEl: "Βιολογία Κυττάρου ΙΙ", tasks: ["understand","papers","practice"] },
+          { code: null, semester: null, titleEl: "Βιοστατιστική", tasks: ["understand","calculations","practice","research"] },
+          { code: null, semester: null, titleEl: "Βιοχημεία Ι", tasks: ["understand","notes","practice"] },
+          { code: null, semester: null, titleEl: "Γενετική Ι", tasks: ["understand","papers","practice"] },
+          { code: null, semester: null, titleEl: "Μικροβιολογία", tasks: ["understand","papers","research","practice"] },
+          { code: null, semester: null, titleEl: "Μοριακή Βιολογία Ι", tasks: ["understand","papers","research","notes"] },
+          { code: null, semester: null, titleEl: "Οικολογία Ι", tasks: ["understand","research","papers","practice"] },
+          { code: null, semester: null, titleEl: "Αναπτυξιακή Βιολογία", tasks: ["understand","papers","notes","practice"] },
+          { code: null, semester: null, titleEl: "Βιοπληροφορική", tasks: ["understand","coding","papers","research"] },
+          { code: null, semester: null, titleEl: "Βιοτεχνολογία", tasks: ["understand","papers","research","feedback"] },
+          { code: null, semester: null, titleEl: "Γενετική Ανθρώπου – Ιατρική Γενετική", tasks: ["understand","papers","research","notes"] }
         ],
       },
 

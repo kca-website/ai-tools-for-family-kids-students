@@ -264,34 +264,36 @@ try {
 
 
   for (const lang of ['el', 'en']) {
+    for (const zoneId of ['primary', 'middle']) {
     const page = await browser.newPage();
     await prepare(page, LOCAL, { width: 390, height: 844 }, lang);
-    await renderContext(page, { zoneId: 'middle', roleId: 'guardian' }, lang);
+    await renderContext(page, { zoneId, roleId: 'guardian' }, lang);
 
     const heading = (await page.locator('#tutorMount .tutor-heading').innerText()).replace(/\s+/g, ' ').trim();
     if (lang === 'en') assert.match(heading, /First choose the subject/i, 'Parent Helper English onboarding must explain subject-first flow');
     else assert.match(heading, /Πρώτα επίλεξε μάθημα/i, 'Parent Helper Greek onboarding must explain subject-first flow');
 
     const initial = await snapshot(page);
-    assert.equal(initial.subjectValue, '', `parent ${lang}: subject must not be silently auto-selected`);
-    assert.equal(initial.settingsOpen, true, `parent ${lang}: lesson settings must stay visible until subject selection`);
-    assert.equal(initial.inputDisabled, true, `parent ${lang}: chat must be disabled before subject selection`);
-    assert.equal(initial.flashGenerateDisabled, true, `parent ${lang}: flashcards must be disabled before subject selection`);
-    assert.equal(initial.studyQuizDisabled, true, `parent ${lang}: study tools must be disabled before subject selection`);
+    assert.equal(initial.subjectValue, '', `parent ${zoneId} ${lang}: subject must not be silently auto-selected`);
+    assert.equal(initial.settingsOpen, true, `parent ${zoneId} ${lang}: lesson settings must stay visible until subject selection`);
+    assert.equal(initial.inputDisabled, true, `parent ${zoneId} ${lang}: chat must be disabled before subject selection`);
+    assert.equal(initial.flashGenerateDisabled, true, `parent ${zoneId} ${lang}: flashcards must be disabled before subject selection`);
+    assert.equal(initial.studyQuizDisabled, true, `parent ${zoneId} ${lang}: study tools must be disabled before subject selection`);
     assert.match(initial.inputPlaceholder, lang === 'en' ? /Choose a subject first/i : /Επίλεξε πρώτα μάθημα/i,
       `parent ${lang}: composer must explain why it is locked`);
 
     const firstSubject = initial.subjectOptions.find((option) => option.value)?.value || '';
-    assert.ok(firstSubject, `parent ${lang}: no selectable subject was available`);
+    assert.ok(firstSubject, `parent ${zoneId} ${lang}: no selectable subject was available`);
     await page.selectOption('#tutorSubject', firstSubject);
     await page.waitForTimeout(100);
 
     const selected = await snapshot(page);
-    assert.equal(selected.subjectValue, firstSubject, `parent ${lang}: selected subject was not retained`);
-    assert.equal(selected.inputDisabled, false, `parent ${lang}: chat must unlock after explicit subject selection`);
-    assert.equal(selected.flashGenerateDisabled, false, `parent ${lang}: flashcards must unlock after explicit subject selection`);
-    assert.equal(selected.studyQuizDisabled, false, `parent ${lang}: study tools must unlock after explicit subject selection`);
+    assert.equal(selected.subjectValue, firstSubject, `parent ${zoneId} ${lang}: selected subject was not retained`);
+    assert.equal(selected.inputDisabled, false, `parent ${zoneId} ${lang}: chat must unlock after explicit subject selection`);
+    assert.equal(selected.flashGenerateDisabled, false, `parent ${zoneId} ${lang}: flashcards must unlock after explicit subject selection`);
+    assert.equal(selected.studyQuizDisabled, false, `parent ${zoneId} ${lang}: study tools must unlock after explicit subject selection`);
     await page.close();
+    }
   }
 
   for (const context of [

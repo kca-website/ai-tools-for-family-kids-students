@@ -44,6 +44,12 @@ async function check(viewport,label){
   assert((await bioACard.innerText()).includes('14 επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27'),`${label}: A Biology mapped-section status missing`);
   const bioAAi=await bioACard.locator('.sp-action--ai').getAttribute('href');
   assert(bioAAi?.includes('subject=special-gym-a-biology'),`${label}: A Biology AI deep link must target mapped annual subject`);
+  const homeEconomicsCard=page.locator('#spSpecialGymProfile [data-sg-subject="home-economics"]');
+  assert((await homeEconomicsCard.innerText()).includes('Επίσημο πλαίσιο 2026–27'),`${label}: A Home Economics must be marked as verified framework, not generic fallback`);
+  assert((await homeEconomicsCard.innerText()).includes('6 επίσημες επιλογές πλαισίου'),`${label}: A Home Economics chapter framework count missing`);
+  const skillsACard=page.locator('#spSpecialGymProfile [data-sg-subject="skills-labs"]');
+  assert((await skillsACard.innerText()).includes('Επίσημο πλαίσιο 2026–27'),`${label}: A Skills Labs framework badge missing`);
+  assert((await skillsACard.innerText()).includes('4 επίσημες επιλογές πλαισίου'),`${label}: A Skills Labs must expose only four official themes`);
 
   await page.locator('[data-open-sg-unit="special-gym-a-language-comprehension"][data-focus="quiz"]').click();
   await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({state:'visible'});
@@ -57,6 +63,10 @@ async function check(viewport,label){
     await page.locator(`[data-sg-grade="${grade.id}"]`).click();
     assert((await page.locator('#spSpecialGymProfile').innerText()).includes(grade.labelEl),`${label}: Special Gymnasium ${grade.id.toUpperCase()} selection failed`);
     const bioCard=page.locator('#spSpecialGymProfile [data-sg-subject="biology"]');
+    const skillsCard=page.locator('#spSpecialGymProfile [data-sg-subject="skills-labs"]');
+    assert((await skillsCard.innerText()).includes('Επίσημο πλαίσιο 2026–27'),`${label}: Special Gym ${grade.id.toUpperCase()} Skills Labs framework missing`);
+    assert((await skillsCard.innerText()).includes('4 επίσημες επιλογές πλαισίου'),`${label}: Special Gym ${grade.id.toUpperCase()} Skills Labs theme count wrong`);
+    assert(await page.locator('#spSpecialGymProfile [data-sg-subject="home-economics"]').count()===0,`${label}: Home Economics must exist only in A Special Gymnasium`);
     const expectedBioCount=grade.id==='b'?14:12;
     assert((await bioCard.innerText()).includes(`${expectedBioCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27`),`${label}: Special Gym ${grade.id.toUpperCase()} Biology mapped count missing`);
     assert(await page.locator(`#spSpecialGymProfile [data-open-sg-unit^="special-gym-${grade.id}-"][data-focus="quiz"]`).count()===2,`${label}: Special Gymnasium ${grade.id.toUpperCase()} must expose Language + Math micro quizzes`);
@@ -71,6 +81,8 @@ async function check(viewport,label){
   const slText=await page.locator('#spSpecialLyceum').innerText();
   assert(slText.includes('Ειδικό Λύκειο'),`${label}: Special Lyceum route missing`);
   assert(slText.includes('δεν χρησιμοποιούμε το απαιτητικό exam-level quiz'),`${label}: Special Lyceum simplified quiz boundary missing`);
+  assert((await page.locator('#spSpecialLyceumProfile').innerText()).includes('Επίσημη δομή'),`${label}: Special Lyceum structure status badge missing`);
+  assert((await page.locator('#spSpecialLyceumProfile').innerText()).includes('section-level'),`${label}: Special Lyceum mapping boundary must be explicit`);
   assert(await page.locator('#spSpecialLyceumProfile [data-sl-grade]').count()===3,`${label}: Special Lyceum must expose A/B/C grades`);
   const slHref=await page.locator('#spSpecialLyceumProfile .sp-action--ai').first().getAttribute('href');
   assert(slHref?.includes('schoolTrack=special-lyceum')&&slHref.includes('grade=a'),`${label}: Special Lyceum AI deep link missing`);
@@ -95,6 +107,7 @@ async function check(viewport,label){
   await page.locator('[data-en-grade="lyc-a"]').click();
   assert(await page.locator('#spEneegylProfile [data-en-structure-subject]').count()===18,`${label}: ENEEGYL A Lyceum should expose 18 timetable subject choices/groups`);
   const aLyceumText=await page.locator('#spEneegylProfile').innerText();
+  assert(aLyceumText.includes('Μερική χαρτογράφηση')||aLyceumText.includes('Επίσημη δομή')||aLyceumText.includes('Υποστηρικτική αντιστοίχιση'),`${label}: ENEEGYL coverage taxonomy not rendered`);
   assert(aLyceumText.includes('Αγωγή Υγείας')&&aLyceumText.includes('Αρχές Οικονομίας')&&aLyceumText.includes('Ερευνητική Εργασία στην Τεχνολογία'),`${label}: ENEEGYL A Lyceum enrichment incomplete`);
   assert(await page.locator('[data-en-structure-subject="creative-zone"] .sp-ready-pill').count()===1,`${label}: mapped A Lyceum ZDD route should be marked ready`);
   const zddAi=await page.locator('[data-en-structure-subject="creative-zone"] .sp-action--ai').getAttribute('href');

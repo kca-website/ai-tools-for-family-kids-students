@@ -132,7 +132,10 @@
         const department = HE.departments[departmentId];
         const departmentTerms = [department.departmentEl, department.departmentEn, ...(department.legacyDepartmentAliases || []), ...(department.legacyInstitutionAliases || [])];
         const departmentMatch = departmentTerms.some((term) => normalize(term).includes(q) || q.includes(normalize(term)));
-        if (institutionMatch || departmentMatch) matches.push({ institutionId, departmentId, institution, department });
+        const combined = normalize([...institutionTerms, ...departmentTerms].join(" "));
+        const tokens = q.split(" ").filter(Boolean);
+        const combinedMatch = tokens.length > 1 && tokens.every((token) => combined.includes(token));
+        if (institutionMatch || departmentMatch || combinedMatch) matches.push({ institutionId, departmentId, institution, department });
       }
     }
 

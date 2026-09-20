@@ -232,6 +232,26 @@
     });
   }
 
+  function specialLyceumGuideFor(gradeId,base){
+    const id=String(base?.id||"").toLowerCase();
+    const label=String(base?.subjectLabelEl||base?.subjectLabelEn||base?.id||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+    return (SL?.annualGuidanceIndex||[]).find((g)=>{
+      if(!(g.grades||[]).includes(gradeId)) return false;
+      const key=String(g.key||"");
+      if(key==="language-literature") return /language|literature|greek|νεοελλην/.test(`${id} ${label}`);
+      if(key==="biology") return /biology|βιολογ/.test(`${id} ${label}`);
+      if(key==="economics") return /econom|οικονομ/.test(`${id} ${label}`);
+      if(key==="ancient") return /ancient|αρχαι/.test(`${id} ${label}`);
+      if(key==="history") return /history|ιστορι/.test(`${id} ${label}`);
+      if(key==="informatics") return /informat|computer|πληροφορ|επιστημη.*η.*υ/.test(`${id} ${label}`);
+      if(key==="english") return /english|αγγλικ/.test(`${id} ${label}`);
+      if(key==="second-foreign-language") return /foreign|french|german|γαλλ|γερμαν|2η.*ξεν/.test(`${id} ${label}`);
+      if(key==="latin") return /latin|λατιν/.test(`${id} ${label}`);
+      if(key==="ethics") return /ethics|religion|ηθικ|θρησκευ/.test(`${id} ${label}`);
+      return false;
+    })||null;
+  }
+
   // Special Lyceum:  // Special Lyceum: one unified AI Help menu. We mirror the already available
   // Lyceum subject catalog for navigation only; this is NOT a claim that every
   // mirrored subject has a separately verified E.A.E. syllabus mapping.
@@ -256,6 +276,7 @@
         });
         const rawEl=String(base.subjectLabelEl||base.id).replace(/^.*?·\s*/,"");
         const rawEn=String(base.subjectLabelEn||base.subjectLabelEl||base.id).replace(/^.*?·\s*/,"");
+        const publishedGuide=specialLyceumGuideFor(gradeId,base);
         registerSubject("high",gradeId,{
           id,quizId:null,grade:gradeId,
           subjectLabelEl:`Ειδικό Λύκειο · ${rawEl}`,
@@ -263,17 +284,19 @@
           topics,
           curriculum:{
             schoolYear:SL.schoolYear,verificationDate:SL.verificationDate,
-            verificationBasis:"official-school-type-support-menu",coverageStatus:"special-lyceum-support-menu",
-            coverageLabelEl:"Ειδικό Λύκειο · υποστηρικτικό μενού μαθημάτων",coverageLabelEn:"Special Lyceum · tutoring subject menu",
+            verificationBasis:publishedGuide?"official-special-lyceum-guidance-source-indexed":"official-school-type-support-menu",
+            coverageStatus:publishedGuide?"special-lyceum-guidance-source-indexed-support":"special-lyceum-support-menu",
+            coverageLabelEl:publishedGuide?"Ειδικό Λύκειο · ειδική οδηγία 2026–27 εντοπίστηκε · section mapping σε εξέλιξη":"Ειδικό Λύκειο · υποστηρικτικό μενού μαθημάτων",
+            coverageLabelEn:publishedGuide?"Special Lyceum · official 2026–27 guidance found · section mapping in progress":"Special Lyceum · tutoring subject menu",
             officialSectionsEl:[`${grade.labelEl}: υποστηρικτική επιλογή ${rawEl}`],officialSectionsEn:[],
             scopeNoteEl:SL.scopeNoteEl,scopeNoteEn:SL.scopeNoteEn,
-            annualInstructionsStatus:SL.annualGuidanceStatus||"official-2026-27-guidance-published",
+            annualInstructionsStatus:publishedGuide?(publishedGuide.status||"published-2026-27"):(SL.annualGuidanceStatus||"official-2026-27-guidance-published"),
             annualInstructionsUrl:SL.sourceUrl,teachingInstructionsStatus:"official-guidance-published",
             officialTimetableStatus:"school-type-verified",catalogUrl:SL.sourceUrl,
             sourceLabelEl:SL.sourceLabelEl,sourceLabelEn:SL.sourceLabelEn,
-            specialEducation:true,schoolType:"special-lyceum",structureOnly:true
+            specialEducation:true,schoolType:"special-lyceum",structureOnly:true,sourceIndexed:!!publishedGuide,publishedGuidanceKey:publishedGuide?.key||""
           },
-          specialEducation:true,schoolType:"special-lyceum",schoolTrack:"special-lyceum",structureOnly:true,
+          specialEducation:true,schoolType:"special-lyceum",schoolTrack:"special-lyceum",structureOnly:true,sourceIndexed:!!publishedGuide,
           sourceBaseSubjectId:base.id
         },{gradeLabel:grade.labelEl,detailedLearning:false,structureOnly:true,mirroredSupportMenu:true,order:index});
       });

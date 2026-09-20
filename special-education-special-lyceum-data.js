@@ -1,10 +1,10 @@
 /**
  * Special Lyceum E.A.E. — current institutional structure metadata.
  *
- * IMPORTANT: official 2026-27 E.A.E. teaching guidance is now published.
- * This file confirms the school type and A/B/C Lyceum structure used for navigation,
- * while exact chapter/section claims are made only where section-level evidence has
- * been encoded. General Lyceum mappings may still be used only as support references.
+ * IMPORTANT: this file confirms the school type and A/B/C Lyceum structure used
+ * for navigation. It does not claim a separately mapped 2026-27 chapter syllabus
+ * for every subject. Where a matching verified General Lyceum mapping already
+ * exists in the site, it may be reused as a support reference for chapter selection.
  */
 (function(){
   "use strict";
@@ -15,21 +15,21 @@
     labelEn:"Special Lyceum",
     status:"verified-structure",
     schoolYear:"2026-2027",
-    verificationDate:"2026-09-18",
-    sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
-    sourceLabelEl:"ΙΕΠ — Ύλη και Οδηγίες Ε.Α.Ε. 2026–27",
-    sourceLabelEn:"IEP — E.A.E. curriculum and guidance 2026–27",
-    annualGuidanceStatus:"official-2026-27-guidance-published",
+    verificationDate:"2026-09-20",
+    sourceUrl:"https://www.minedu.gov.gr/eidiki-entaksiaki-ekpaidefsi",
+    sourceLabelEl:"Υπουργείο Παιδείας — Λύκειο Ε.Α.Ε.",
+    sourceLabelEn:"Ministry of Education — Special Lyceum E.A.E.",
+    annualGuidanceStatus:"structure-verified-guidance-not-separately-mapped",
     grades:Object.freeze({
       a:Object.freeze({id:"a",labelEl:"Α΄ Λυκείου",labelEn:"Lyceum A"}),
       b:Object.freeze({id:"b",labelEl:"Β΄ Λυκείου",labelEn:"Lyceum B"}),
       c:Object.freeze({id:"c",labelEl:"Γ΄ Λυκείου",labelEn:"Lyceum C"})
     }),
-    scopeNoteEl:"Το ΙΕΠ έχει δημοσιεύσει επίσημες οδηγίες Λυκείου Ε.Α.Ε. 2026–27. Όπου έχει γίνει section-level χαρτογράφηση, ακολουθούμε αυτή την επίσημη πηγή. Όπου δεν έχει ολοκληρωθεί, χρησιμοποιούμε το πραγματικό κεφάλαιο/άσκηση του μαθητή και τυχόν χαρτογράφηση ΓΕΛ μόνο ως υποστηρικτικό πλαίσιο, όχι ως υποκατάστατο της ειδικής ύλης.",
-    scopeNoteEn:"IEP has published official 2026–27 Special Lyceum E.A.E. guidance. Where section-level mapping is encoded, that official source is followed. Elsewhere, the learner's actual chapter/exercise is used and any General Lyceum mapping remains a support reference, not a substitute for E.A.E. curriculum.",
+    scopeNoteEl:"Το Λύκειο Ε.Α.Ε. είναι ξεχωριστός επίσημος τύπος Λυκείου. Όπου υπάρχει ήδη επαληθευμένη χαρτογράφηση αντίστοιχου μαθήματος του ΓΕΛ 2026–27, χρησιμοποιείται ως πρακτικό πλαίσιο επιλογής κεφαλαίου και όχι ως δήλωση ξεχωριστής ειδικής εξεταστέας ύλης.",
+    scopeNoteEn:"Special Lyceum E.A.E. is an official distinct Lyceum type. Where a verified matching 2026-27 General Lyceum mapping exists, it can be reused as a practical chapter-selection reference, not as a claim of a separate official E.A.E. syllabus.",
     tutorPolicy:Object.freeze({
-      warningEl:"Οι επίσημες οδηγίες Λυκείου Ε.Α.Ε. 2026–27 έχουν δημοσιευθεί. Μην επινοείς ενότητα: χρησιμοποίησε section-level αντιστοίχιση όπου υπάρχει, αλλιώς το πραγματικό κεφάλαιο, κείμενο ή άσκηση του μαθητή.",
-      warningEn:"Official 2026–27 Special Lyceum E.A.E. guidance is published. Do not invent a unit: use section-level mapping where available, otherwise use the learner's actual chapter, text or exercise."
+      warningEl:"Μην επινοείς ξεχωριστή επίσημη ύλη Ε.Α.Ε. Χρησιμοποίησε επαληθευμένες αντίστοιχες ενότητες όπου υπάρχουν και το πραγματικό κεφάλαιο, κείμενο ή άσκηση του μαθητή.",
+      warningEn:"Do not invent a separate official E.A.E. syllabus. Use verified matching chapter references where available and the learner's actual chapter, text or exercise."
     })
   });
 

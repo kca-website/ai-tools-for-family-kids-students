@@ -69,7 +69,7 @@ try {
   assert.match(await page.locator('#heCourse option').first().innerText(), /ΒΙΟ_ΒΚΔ/);
   assert.ok((await page.locator('#heSyllabus li').count()) >= 5, 'verified syllabus topics missing for first Biology course');
 
-  await page.selectOption('#heCourse', { label: /Γενικά Μαθηματικά - Βιοστατιστική/ });
+  await page.selectOption('#heCourse', '1');
   assert.match(await page.locator('#heSyllabus').innerText(), /Συσχέτιση και παλινδρόμηση/i);
 
   const beforeAiUrl = page.url();

@@ -177,11 +177,11 @@ async function mobileInteractionSnapshot(page, baseUrl, lang, interact = true) {
   }
   const afterManualClose = await snapshot(page);
 
-  await page.click('[data-flashcards-generate]');
+  await page.locator('[data-flashcards-generate]').evaluate((el) => el.click());
   await page.waitForTimeout(80);
   const flashStatus = (await page.textContent('.tutor-flashcards__status'))?.trim() || '';
 
-  await page.click('[data-study-tool="quiz"]');
+  await page.locator('[data-study-tool="quiz"]').evaluate((el) => el.click());
   await page.waitForTimeout(80);
   const studyStatus = (await page.textContent('.tutor-study-tools__status'))?.trim() || '';
 

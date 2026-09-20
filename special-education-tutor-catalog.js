@@ -137,22 +137,25 @@
 
   // Special Gymnasium: prefer exact annual 2026-27 mappings; generic fallback only where no exact map exists.
   function annualSpecialGymEntry(gradeId,subjectId){
-    return Object.values(C.entries||{}).find((entry)=>
+    const entries=Object.values(C.entries||{}).filter((entry)=>
       entry?.schoolType==="special-gymnasium" &&
       String(entry?.grade||"").toLowerCase()===String(gradeId||"").toLowerCase() &&
       entry?.subjectId===subjectId &&
-      entry?.annualInstructionsStatus==="2026-27-verified" &&
       Array.isArray(entry?.officialAnchors) && entry.officialAnchors.length>0
-    )||null;
+    );
+    return entries.find((entry)=>entry?.annualInstructionsStatus==="2026-27-verified") ||
+      entries.find((entry)=>entry?.annualInstructionsStatus==="2026-27-framework-verified") ||
+      null;
   }
 
   function makeAnnualSpecialGymSubject(entry,row,gradeId){
     const id=`special-gym-${gradeId}-${row.id}`;
+    const frameworkOnly=entry?.frameworkOnly===true||entry?.annualInstructionsStatus==="2026-27-framework-verified";
     const topics=(entry.officialAnchors||[]).map((label,index)=>({
       id:`${id}.topic-${index+1}`,
       labelEl:String(label),labelEn:String(label),
       explainEl:String(label),explainEn:String(label),
-      specialEducation:true,schoolType:"special-gymnasium",annualInstructionsStatus:"2026-27-verified"
+      specialEducation:true,schoolType:"special-gymnasium",annualInstructionsStatus:frameworkOnly?"2026-27-framework-verified":"2026-27-verified",frameworkOnly
     }));
     return {
       id,quizId:null,grade:gradeId,
@@ -162,24 +165,24 @@
       curriculum:{
         schoolYear:SG.schoolYear,verificationDate:entry.verificationDate||SG.verificationDate,
         verificationBasis:entry.verificationBasis||"annual-eae-instructions-2026-27",
-        coverageStatus:"annual-instructions-verified",
-        coverageLabelEl:"Ειδικό Γυμνάσιο · επίσημη χαρτογράφηση ύλης 2026–27",
-        coverageLabelEn:"Special Gymnasium · verified 2026–27 annual mapping",
+        coverageStatus:frameworkOnly?"annual-framework-verified":"annual-instructions-verified",
+        coverageLabelEl:frameworkOnly?"Ειδικό Γυμνάσιο · επίσημο πλαίσιο 2026–27":"Ειδικό Γυμνάσιο · επίσημη χαρτογράφηση ύλης 2026–27",
+        coverageLabelEn:frameworkOnly?"Special Gymnasium · verified 2026–27 framework":"Special Gymnasium · verified 2026–27 annual mapping",
         officialSectionsEl:[...(entry.officialAnchors||[])],officialSectionsEn:[],
         scopeNoteEl:entry.verificationNote||"Χρησιμοποίησε μόνο τις επαληθευμένες φετινές ενότητες.",
-        scopeNoteEn:"Use only the verified 2026-27 E.A.E. sections.",
-        annualInstructionsStatus:"2026-27-verified",
+        scopeNoteEn:frameworkOnly?"Use these as verified framework choices, not as a claim of complete section-level annual syllabus.":"Use only the verified 2026-27 E.A.E. sections.",
+        annualInstructionsStatus:frameworkOnly?"2026-27-framework-verified":"2026-27-verified",
         annualInstructionsUrl:entry.sourceUrl||entry.instructionSourceUrl||"",
-        teachingInstructionsStatus:"2026-27-verified",
+        teachingInstructionsStatus:frameworkOnly?"2026-27-framework-verified":"2026-27-verified",
         teachingInstructionsUrl:entry.instructionSourceUrl||entry.sourceUrl||"",
         officialTimetableStatus:"2026-27-verified",adaptationResourceStatus:"available",
         adaptationSourceUrl:SG.adaptationResources?.hub||"",catalogUrl:entry.sourceUrl||SG.timetableSourceUrl,
         sourceLabelEl:entry.sourceTitle||"Επίσημες οδηγίες Γυμνασίου Ε.Α.Ε. 2026–27",
         sourceLabelEn:"Official E.A.E. 2026–27 guidance",
-        specialEducation:true,schoolType:"special-gymnasium",structureOnly:false
+        specialEducation:true,schoolType:"special-gymnasium",structureOnly:false,frameworkOnly
       },
       specialEducation:true,schoolType:"special-gymnasium",schoolTrack:"special-gymnasium",
-      structureOnly:false,annualMapped:true,sourceCurriculumId:entry.id
+      structureOnly:false,annualMapped:!frameworkOnly,frameworkMapped:frameworkOnly,sourceCurriculumId:entry.id
     };
   }
 
@@ -197,8 +200,8 @@
         const annualEntry=annualSpecialGymEntry(gradeId,row.id);
         if(annualEntry){
           registerSubject("middle",gradeId,makeAnnualSpecialGymSubject(annualEntry,row,gradeId),{
-            gradeLabel:grade.label,detailedLearning:false,structureOnly:false,annualMapped:true,
-            subjectKey:row.id,sourceCurriculumId:annualEntry.id
+            gradeLabel:grade.label,detailedLearning:false,structureOnly:false,annualMapped:annualEntry?.frameworkOnly!==true,
+            frameworkMapped:annualEntry?.frameworkOnly===true,subjectKey:row.id,sourceCurriculumId:annualEntry.id
           });
           return;
         }

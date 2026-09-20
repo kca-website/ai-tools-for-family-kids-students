@@ -60,6 +60,81 @@
       },
     },
 
+    toolProfiles: {
+      "life-sciences": {
+        labelEl: "Βιοεπιστήμες",
+        tools: [
+          { id: "notebooklm", tasks: ["understand","notes","practice"], whyEl: "Μελέτη πάνω στις δικές σου σημειώσεις, papers και επίσημες πηγές χωρίς να ανοίγει αυθαίρετα το πεδίο." },
+          { id: "elicit", tasks: ["research","papers"], whyEl: "Αναζήτηση και σύγκριση ακαδημαϊκών papers για βιολογικά και βιοϊατρικά ερωτήματα." },
+          { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Έλεγχος αν μια επιστημονική εργασία υποστηρίζει ή αντικρούει έναν ισχυρισμό." },
+          { id: "perplexity", tasks: ["research","understand"], whyEl: "Γρήγορη αρχική χαρτογράφηση θέματος με παραπομπές που πρέπει να ελεγχθούν στις πρωτογενείς πηγές." }
+        ]
+      },
+      "bioinformatics": {
+        labelEl: "Βιοπληροφορική",
+        tools: [
+          { id: "github-copilot", tasks: ["coding","feedback","practice"], whyEl: "Βοήθεια μέσα στον editor για Python/R και βιοπληροφορικά scripts, με έλεγχο του κώδικα από τον φοιτητή." },
+          { id: "notebooklm", tasks: ["understand","notes","papers"], whyEl: "Σύνδεση κώδικα, σημειώσεων και papers σε ένα source-based notebook." },
+          { id: "elicit", tasks: ["research","papers"], whyEl: "Εντοπισμός papers και μεθόδων για pipelines, γονιδιωματική και ανάλυση δεδομένων." },
+          { id: "scite", tasks: ["research","papers"], whyEl: "Έλεγχος βιβλιογραφικών ισχυρισμών πριν χρησιμοποιηθούν σε εργασία ή αναφορά." }
+        ]
+      },
+      "quantitative": {
+        labelEl: "Μαθηματικά / Στατιστική",
+        tools: [
+          { id: "wolfram-alpha", tasks: ["calculations","practice","understand"], whyEl: "Έλεγχος υπολογισμών, συναρτήσεων, άλγεβρας, πιθανοτήτων και στατιστικών βημάτων." },
+          { id: "geogebra", tasks: ["understand","practice","calculations"], whyEl: "Οπτικοποίηση συναρτήσεων, άλγεβρας, γεωμετρίας και στατιστικών εννοιών." },
+          { id: "notebooklm", tasks: ["notes","understand"], whyEl: "Οργάνωση θεωρίας και παραδειγμάτων αποκλειστικά από το υλικό που ανεβάζει ο φοιτητής." },
+          { id: "perplexity", tasks: ["research"], whyEl: "Αναζήτηση τεκμηρίωσης για μεθόδους και εφαρμογές με εμφανείς πηγές." }
+        ]
+      },
+      "chemistry": {
+        labelEl: "Χημεία",
+        tools: [
+          { id: "wolfram-alpha", tasks: ["calculations","practice","understand"], whyEl: "Υπολογισμοί, εξισώσεις, στοιχειομετρία και έλεγχος αριθμητικών βημάτων." },
+          { id: "phet", tasks: ["understand","practice"], whyEl: "Διαδραστικές προσομοιώσεις για χημικές έννοιες. Δεν είναι AI, αλλά είναι χρήσιμο συμπληρωματικό εργαλείο." },
+          { id: "notebooklm", tasks: ["notes","understand","practice"], whyEl: "Μελέτη πάνω στις επίσημες σημειώσεις και πηγές του μαθήματος." },
+          { id: "scite", tasks: ["research","papers"], whyEl: "Έλεγχος επιστημονικών αναφορών όταν το μάθημα περιλαμβάνει βιβλιογραφική εργασία." }
+        ]
+      },
+      "physics-engineering": {
+        labelEl: "Φυσική / Μηχανική",
+        tools: [
+          { id: "wolfram-alpha", tasks: ["calculations","practice","understand"], whyEl: "Έλεγχος εξισώσεων, μονάδων και αριθμητικών βημάτων σε φυσική και μηχανική." },
+          { id: "phet", tasks: ["understand","practice"], whyEl: "Προσομοιώσεις για κυκλώματα, φυσική και βασικά φαινόμενα. Συμπληρωματικό, όχι chatbot." },
+          { id: "notebooklm", tasks: ["notes","understand"], whyEl: "Source-based μελέτη από διαφάνειες, σημειώσεις και επίσημο υλικό." },
+          { id: "perplexity", tasks: ["research"], whyEl: "Αρχική τεχνική αναζήτηση με παραπομπές για περαιτέρω έλεγχο." }
+        ]
+      },
+      "computing": {
+        labelEl: "Πληροφορική / Προγραμματισμός",
+        tools: [
+          { id: "github-copilot", tasks: ["coding","feedback","practice"], whyEl: "Εξειδικευμένος AI βοηθός μέσα στον editor για κώδικα, debugging και μικρές προτάσεις." },
+          { id: "notebooklm", tasks: ["notes","understand"], whyEl: "Μελέτη από δικές σου σημειώσεις, documentation και PDFs χωρίς να τα αντικαθιστά με γενικές απαντήσεις." },
+          { id: "perplexity", tasks: ["research","understand"], whyEl: "Αναζήτηση documentation και τεχνικών πηγών με παραπομπές που μπορείς να ανοίξεις." },
+          { id: "chatgpt", tasks: ["understand","feedback","coding"], whyEl: "Χρήσιμο για εξήγηση κώδικα και feedback όταν δίνεις το δικό σου snippet και ζητάς αιτιολόγηση, όχι έτοιμη λύση." }
+        ]
+      },
+      "psychology": {
+        labelEl: "Ψυχολογία / Κοινωνικές Επιστήμες",
+        tools: [
+          { id: "elicit", tasks: ["research","papers"], whyEl: "Εξειδικευμένη αναζήτηση ακαδημαϊκών papers και εξαγωγή βασικών στοιχείων μελέτης." },
+          { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Έλεγχος του πώς έχει χρησιμοποιηθεί μια μελέτη από μεταγενέστερη βιβλιογραφία." },
+          { id: "notebooklm", tasks: ["understand","notes","papers"], whyEl: "Σύνθεση μόνο από τις πηγές που ανεβάζεις, χρήσιμη για θεωρίες, άρθρα και σημειώσεις." },
+          { id: "perplexity", tasks: ["research","understand"], whyEl: "Αρχική βιβλιογραφική χαρτογράφηση με εμφανείς πηγές, πριν περάσεις στις πρωτογενείς μελέτες." }
+        ]
+      },
+      "academic-research": {
+        labelEl: "Ακαδημαϊκή έρευνα",
+        tools: [
+          { id: "elicit", tasks: ["research","papers"], whyEl: "Αναζήτηση και σύγκριση ακαδημαϊκών εργασιών." },
+          { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Έλεγχος citations και επιστημονικών ισχυρισμών." },
+          { id: "notebooklm", tasks: ["understand","notes","papers"], whyEl: "Source-based οργάνωση σημειώσεων και βιβλιογραφίας." },
+          { id: "perplexity", tasks: ["research"], whyEl: "Γρήγορη αναζήτηση με παραπομπές για να βρεις τις πρωτογενείς πηγές." }
+        ]
+      }
+    },
+
     institutions: {
       aueb: {
         id: "aueb",
@@ -686,6 +761,44 @@
       },
     },
   });
+
+  function inferToolProfile(departmentId, course) {
+    const title = String(course?.titleEl || "").toLowerCase();
+
+    if (departmentId === "nkua-psychology") return "psychology";
+
+    if (departmentId === "upatras-biology") {
+      if (/βιοπληροφορ/.test(title)) return "bioinformatics";
+      if (/στατισ|μαθηματ|πιθανοτ/.test(title)) return "quantitative";
+      if (/χημε/.test(title)) return "chemistry";
+      if (/φυσικ/.test(title) && !/φυσιολογ/.test(title)) return "physics-engineering";
+      return "life-sciences";
+    }
+
+    if (departmentId === "aueb-cs") {
+      if (/μαθηματ|πιθανοτ|στατισ|βελτιστοποι|θεωρία πληροφορίας/.test(title)) return "quantitative";
+      return "computing";
+    }
+
+    if (departmentId === "uniwa-ice") {
+      if (/μικροηλεκτρο|στοχασ|μη γραμμ|κυκλω|ηλεκτρο/.test(title)) return "physics-engineering";
+      return "computing";
+    }
+
+    if (departmentId === "hmu-ece") {
+      if (/λογισμ|άλγεβρ|διαφορικ|πιθανοτ|στατισ/.test(title)) return "quantitative";
+      if (/προγραμματ|βάσεις δεδομένων/.test(title)) return "computing";
+      return "physics-engineering";
+    }
+
+    return "academic-research";
+  }
+
+  for (const [departmentId, department] of Object.entries(DATA.departments)) {
+    for (const course of department.courses || []) {
+      if (!course.toolProfile) course.toolProfile = inferToolProfile(departmentId, course);
+    }
+  }
 
   window.AITOOLSKIDS_HIGHER_EDUCATION = DATA;
 })();

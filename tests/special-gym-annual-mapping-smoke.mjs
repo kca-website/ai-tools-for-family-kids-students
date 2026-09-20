@@ -15,10 +15,10 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,32);
-assert.equal(M.publishedPending.length,20);
+assert.equal(M.mappedEntries.length,34);
+assert.equal(M.publishedPending.length,18);
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='biology'),'Biology must no longer be pending after exact 2026-27 mapping');
-assert.ok(M.publishedPending.some(x=>x.grade==='B'&&x.subjectId==='geography'));
+assert.ok(!M.publishedPending.some(x=>x.subjectId==='geography'),'Geography must no longer be pending after exact 2026-27 mapping');
 assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='history'));
 assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='music'&&x.sourceUrl.includes('minedu.gov.gr')));
 assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='art'&&x.sourceUrl.includes('minedu.gov.gr')));
@@ -66,6 +66,26 @@ assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191'))
 assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
 assert.equal(transC.helenPlannedHours,35);
 assert.equal(transC.philosophyPlannedHours,13);
+
+const geoA=C['teacher-annual-special-gym-a-geography'];
+assert.equal(geoA.plannedHours,30);
+assert.ok(geoA.officialAnchors.includes('Β3.4 Τα ποτάμια του κόσμου'));
+assert.ok(geoA.officialAnchors.some(x=>x.startsWith('Με προσαρμογή — Β4.4')));
+assert.ok(geoA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — Δ.1 Αφρική')));
+assert.ok(geoA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — Δ.6 Ανταρκτική')));
+assert.ok(geoA.excludedAnchors.includes('Β3.3 Άνθρωποι και θάλασσα – Τα νησιωτικά κράτη'));
+assert.ok(geoA.excludedAnchors.includes('Γ1.2 Η κατανομή των ανθρώπων στη Γη'));
+assert.ok(!geoA.officialAnchors.some(x=>x.includes('Β3.3 Άνθρωποι και θάλασσα')));
+
+const geoB=C['teacher-annual-special-gym-b-geography'];
+assert.equal(geoB.plannedHours,67);
+assert.ok(geoB.officialAnchors.includes('Μάθημα 6 — Η γεωλογική ιστορία της Ευρώπης και η ορογένεση'));
+assert.ok(geoB.officialAnchors.includes('Μάθημα 44 — Ο δευτερογενής τομέας στην Ελλάδα'));
+assert.ok(geoB.officialAnchors.some(x=>x.startsWith('Προαιρετικό — Μάθημα 17')));
+assert.ok(geoB.officialAnchors.some(x=>x.startsWith('Προαιρετικό — Μάθημα 48')));
+assert.ok(geoB.excludedAnchors.some(x=>x.startsWith('Μάθημα 4')));
+assert.ok(geoB.excludedAnchors.some(x=>x.startsWith('Μάθημα 5')));
+assert.ok(!geoB.officialAnchors.some(x=>/^Μάθημα 4 —/.test(x)));
 
 const bioA=C['teacher-annual-special-gym-a-biology'];
 assert.equal(bioA.plannedHours,25);
@@ -221,4 +241,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 32 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 34 official mappings.');

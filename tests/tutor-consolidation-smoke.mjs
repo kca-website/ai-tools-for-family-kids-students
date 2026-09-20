@@ -169,9 +169,13 @@ async function mobileInteractionSnapshot(page, baseUrl, lang, interact = true) {
 
   const afterAge = await snapshot(page);
 
-  // The current compact UI keeps settings open while editing; the toggle may be
-  // visually suppressed in that state, so closure is not a stable interaction contract.
-  const afterManualClose = afterAge;
+  // Close through the installed control handler. In headless parity runs the
+  // toggle can be visually suppressed by timing/layout while its state handler remains valid.
+  if (afterAge.settingsOpen) {
+    await page.locator('#tutorMount .tutor-mobile-settings-toggle').evaluate((el) => el.click());
+    await page.waitForTimeout(50);
+  }
+  const afterManualClose = await snapshot(page);
 
   await page.click('[data-flashcards-generate]');
   await page.waitForTimeout(80);
@@ -214,6 +218,7 @@ try {
     compareParity(local.before, prod.before, `mobile ${lang} initial`);
     assert.equal(local.opened.settingsOpen, true, `mobile ${lang}: settings should be open while editing`);
     assert.equal(local.afterAge.settingsOpen, true, `mobile ${lang}: settings must remain open until the user closes them`);
+    assert.equal(local.afterManualClose.settingsOpen, false, `mobile ${lang}: settings close handler must clear the open state`);
 
     // Disconnected-state copy is a source-owned contract, not a live-production parity signal.
     // Production may be on a different deployment/timing while this PR is evaluated.

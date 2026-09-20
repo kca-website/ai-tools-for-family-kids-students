@@ -12,7 +12,6 @@
   const yearField = $("heYearField");
   const semesterField = $("heSemesterField");
   const courseSelect = $("heCourse");
-  const taskSelect = $("heTask");
   const result = $("heResult");
   const coverage = $("heCoverage");
   const syllabus = $("heSyllabus");
@@ -28,6 +27,20 @@
   const printArea = $("hePrintArea");
   let aiAction = "explain";
   let puterLoadPromise = null;
+
+  const ACTION_TASK = Object.freeze({
+    explain: "understand",
+    quiz: "practice",
+    flashcards: "notes",
+    "study-plan": "notes",
+    paper: "papers",
+    feedback: "feedback",
+    research: "research"
+  });
+
+  function currentTask() {
+    return HE.taskTypes[ACTION_TASK[aiAction]] || HE.taskTypes.understand;
+  }
 
   const normalize = (value) => String(value || "")
     .normalize("NFD")
@@ -121,12 +134,6 @@
   }
 
   function populateTasks() {
-    const course = currentCourse();
-    taskSelect.replaceChildren();
-    for (const taskId of course?.tasks || []) {
-      const task = HE.taskTypes[taskId];
-      if (task) taskSelect.append(option(taskId, task.labelEl));
-    }
     render();
     renderSyllabus();
   }
@@ -218,7 +225,7 @@
 
   function render() {
     const course = currentCourse();
-    const task = HE.taskTypes[taskSelect.value];
+    const task = currentTask();
     if (!course || !task) {
       result.innerHTML = '<p class="he-empty">Διάλεξε μάθημα και στόχο.</p>';
       return;
@@ -425,7 +432,7 @@
     const institution = HE.institutions[institutionSelect.value];
     const department = HE.departments[departmentSelect.value];
     const course = currentCourse();
-    const task = HE.taskTypes[taskSelect.value];
+    const task = currentTask();
     return { institution, department, course, task };
   }
 
@@ -634,6 +641,7 @@
       "study-plan": "Προαιρετικά γράψε πόσο χρόνο έχεις και ποια σημεία σε δυσκολεύουν."
     };
     aiInput.placeholder = placeholders[aiAction] || "";
+    render();
   });
 
   aiGroq.addEventListener("click", generateInlineGroq);
@@ -646,7 +654,6 @@
   yearSelect.addEventListener("change", populateSemesters);
   semesterSelect.addEventListener("change", populateCourses);
   courseSelect.addEventListener("change", populateTasks);
-  taskSelect.addEventListener("change", render);
   search.addEventListener("input", handleSearch);
 
   populateInstitutions();

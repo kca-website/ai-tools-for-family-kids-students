@@ -3,6 +3,7 @@ name: Trust metadata and homepage positioning smoke
 on:
   push:
     branches:
+      - 'feature/**'
       - main
       - fix/trust-date-positioning-20260909
   pull_request:

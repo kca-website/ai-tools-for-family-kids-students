@@ -676,7 +676,12 @@
   function populateTopics() {
     const quiz = getCurrentQuiz();
     const catalogSubject = getCatalogSubject();
-    const catalogTopics = hasVerifiedAnnualTopicScope(catalogSubject) ? (catalogSubject?.topics || []) : [];
+    const allCatalogTopics = catalogSubject?.topics || [];
+    // Support actions do not make curriculum-scope claims, so keep them
+    // available even when a subject is intentionally structure-only.
+    const catalogTopics = hasVerifiedAnnualTopicScope(catalogSubject)
+      ? allCatalogTopics
+      : allCatalogTopics.filter((topic) => topic?.specialSupportAction);
     const verifiedQuizTags = getGapTagsForQuiz(quiz).filter((id) => {
       const a = window.AITOOLSKIDS_OFFICIAL_CURRICULUM?.getGapAlignment?.(id);
       return !!a?.annualScopeVerified && (a.status === "exact-section-verified" || a.status === "related-section-verified");

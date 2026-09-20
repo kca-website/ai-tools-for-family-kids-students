@@ -15,7 +15,7 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,8);
+assert.equal(M.mappedEntries.length,13);
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');
@@ -24,9 +24,43 @@ for(const id of M.mappedEntries){
   assert.ok(C[id].sourceUrl.includes('minedu.gov.gr'),`${id} must retain official ministry source`);
 }
 
-assert.equal(C['teacher-annual-special-gym-a-physics'].officialAnchors.length,10);
-assert.ok(C['teacher-annual-special-gym-a-physics'].officialAnchors.some(x=>x.includes('Πυκνότητας')));
-assert.ok(C['teacher-annual-special-gym-a-physics'].officialAnchors.some(x=>x.includes('Γεννήτρια')));
+const mathA=C['teacher-annual-special-gym-a-math'];
+assert.ok(mathA.officialAnchors.includes('7.5 Πολλαπλασιασμός ρητών αριθμών'));
+assert.ok(mathA.officialAnchors.some(x=>x.includes('Γεωμετρία 2.3 Μεσοκάθετος')));
+assert.ok(mathA.excludedAnchors.some(x=>x.includes('αδύνατη εξίσωση')));
+assert.ok(mathA.excludedAnchors.some(x=>x.includes('ταυτότητα')));
+
+const mathB=C['teacher-annual-special-gym-b-math'];
+assert.ok(mathB.officialAnchors.includes('3.4 Η συνάρτηση y = α·x + β'));
+assert.ok(mathB.officialAnchors.some(x=>x.includes('Πυθαγόρειο')));
+assert.ok(mathB.excludedAnchors.some(x=>x.includes('α·x + β·y = γ')));
+assert.ok(mathB.excludedAnchors.some(x=>x.includes('ομαδοποιημένης κατανομής')));
+assert.equal(mathB.nonExamAnchors.length,3);
+
+const mathC=C['teacher-annual-special-gym-c-math'];
+assert.ok(mathC.officialAnchors.includes('3.3 Αλγεβρική επίλυση γραμμικού συστήματος'));
+assert.ok(mathC.officialAnchors.some(x=>x.includes('Τριγωνομετρία 2.3')));
+assert.ok(mathC.excludedAnchors.some(x=>x.includes('Διαφορά κύβων')));
+assert.ok(mathC.excludedAnchors.some(x=>x.includes('Βασικοί κανόνες λογισμού')));
+
+const physicsA=C['teacher-annual-special-gym-a-physics'];
+assert.equal(physicsA.officialAnchors.length,10);
+assert.ok(physicsA.officialAnchors.some(x=>x.includes('Πυκνότητας')));
+assert.ok(physicsA.officialAnchors.some(x=>x.includes('Γεννήτρια')));
+
+const physicsB=C['teacher-annual-special-gym-b-physics'];
+assert.ok(physicsB.officialAnchors.some(x=>x.includes('Άνωση - Αρχή του Αρχιμήδη')));
+assert.ok(physicsB.officialAnchors.some(x=>x.includes('Θερμική διαστολή')));
+assert.ok(physicsB.excludedAnchors.some(x=>x.includes('4.6 Πλεύση')));
+assert.ok(physicsB.excludedAnchors.some(x=>x.includes('5.6 Πηγές ενέργειας')));
+assert.ok(!physicsB.officialAnchors.some(x=>x.includes('4.6 Πλεύση')));
+
+const physicsC=C['teacher-annual-special-gym-c-physics'];
+assert.ok(physicsC.officialAnchors.includes('3.6 Ενέργεια και ισχύς του ηλεκτρικού ρεύματος'));
+assert.ok(physicsC.officialAnchors.some(x=>x.includes('5.3 Χαρακτηριστικά μεγέθη')));
+assert.ok(physicsC.officialAnchors.some(x=>x.includes('8.3 Ανάλυση του φωτός')));
+assert.ok(physicsC.excludedAnchors.some(x=>x.includes('3.4 Ηλεκτρική και μηχανική ενέργεια')));
+assert.ok(physicsC.excludedAnchors.some(x=>x.includes('Νόμος της διάθλασης - Snell')));
 
 assert.equal(C['teacher-annual-special-gym-a-pe'].officialAnchors.length,9);
 assert.equal(C['teacher-annual-special-gym-b-pe'].officialAnchors.length,9);
@@ -52,4 +86,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 8 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 13 official mappings.');

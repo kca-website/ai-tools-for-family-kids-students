@@ -19,8 +19,15 @@
     return /support|reference|equivalent/.test(`${c} ${b} ${t}`)||b.includes("general gym")||b.includes("general lyceum")||b.includes("textbook");
   }
   function isExactAnnual(e){
-    const c=norm(e?.coverageStatus),b=norm(e?.verificationBasis);
-    return c.includes("official course guidance")||c.includes("exam verified")||c.includes("panhellenic")||b.includes("annual instructions 2026 27")||b.includes("panhellenic");
+    const c=norm(e?.coverageStatus),b=norm(e?.verificationBasis),a=norm(e?.annualInstructionsStatus);
+    return c.includes("annual instructions verified")||
+      a.includes("2026 27 verified")||
+      c.includes("official course guidance")||
+      c.includes("exam verified")||
+      c.includes("panhellenic")||
+      b.includes("annual instructions 2026 27")||
+      b.includes("annual eae instructions 2026 27")||
+      b.includes("panhellenic");
   }
   function safeUrl(url){return /^https:\/\//i.test(String(url||""))?String(url):"";}
 
@@ -47,6 +54,8 @@
     const note=document.getElementById("curriculumNote"),unit=document.getElementById("unit");
     if(!note||!unit) return;
     const gid=document.getElementById("grade")?.value||"",glabel=selectedLabel("grade"),sid=document.getElementById("subject")?.value||"",slabel=selectedLabel("subject");
+    const selected=(typeof window.selectedSubject==="function")?window.selectedSubject():null;
+    if(selected?.annualMapped&&!selected?.supportOnly) return;
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).filter(e=>entryMatches(e,c,gid,glabel,sid,slabel));
     const exact=entries.find(isExactAnnual);
     const count=[...unit.options].filter(o=>o.value!=="custom").length;

@@ -89,9 +89,29 @@ try{
 
   await page.selectOption('#grade','a');
   await page.selectOption('#subject','biology');
+  const biologyATopics=await page.locator('#unit option').allTextContents();
+  assert.equal(biologyATopics.length,14,'Biology A must expose 12 core + 2 optional official E.A.E. sections');
+  assert.ok(biologyATopics.includes('1.1 Τα χαρακτηριστικά των οργανισμών'),'Biology A 1.1 missing');
+  assert.ok(biologyATopics.some(x=>x.startsWith('Προαιρετικό — 1.4 Αλληλεπιδράσεις και προσαρμογές')),'Biology A optional 1.4 status missing');
   const biologyNote=await page.locator('#curriculumNote').innerText();
   assert.match(biologyNote,/πραγματικές χαρτογραφημένες επιλογές από την τρέχουσα ύλη\/οδηγίες/i,'Biology A must now resolve through the exact annual mapping');
   assert.ok(!/section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i.test(biologyNote),'Biology must no longer be marked pending');
+
+  await page.selectOption('#grade','b');
+  await page.selectOption('#subject','biology');
+  const biologyBTopics=await page.locator('#unit option').allTextContents();
+  assert.equal(biologyBTopics.length,14,'Biology B must expose 13 core + 1 optional official E.A.E. sections');
+  assert.ok(biologyBTopics.includes('Βιολογία Α΄ — 6.4 Η αναπαραγωγή στον άνθρωπο'),'Biology B reproduction mapping missing');
+  assert.ok(biologyBTopics.some(x=>x.startsWith('Προαιρετικό — Βιολογία Β΄-Γ΄ — 1.2 Κύτταρο')),'Biology B optional cell mapping missing');
+
+  await page.selectOption('#grade','c');
+  await page.selectOption('#subject','biology');
+  const biologyCTopics=await page.locator('#unit option').allTextContents();
+  assert.equal(biologyCTopics.length,12,'Biology C must expose 12 official E.A.E. sections');
+  assert.ok(biologyCTopics.includes('5.5 Κληρονομικότητα'),'Biology C inheritance mapping missing');
+  assert.ok(biologyCTopics.includes('7.2 Η εξέλιξη του ανθρώπου'),'Biology C evolution mapping missing');
+
+  await page.selectOption('#grade','a');
 
   await page.selectOption('#subject','history');
   const historyNote=await page.locator('#curriculumNote').innerText();

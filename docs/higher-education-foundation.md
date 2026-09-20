@@ -56,3 +56,14 @@ The dataset is intentionally separate from `data.js`, `curriculum-data.js`, `qui
 4. Add task selector and recommendations using existing `TOOLS` IDs.
 5. Add an AI Help university context adapter with anti-assignment guardrails.
 6. Expand official curricula department-by-department only after the pilot passes UX tests.
+
+
+## Patras Biology source-lock rule
+
+For the University of Patras Biology pilot, a course title is not enough to authorize course-specific AI generation. Quiz, flashcards, explanation and study-plan actions are source-locked:
+
+- when an official course outline has been mapped, generation is limited to the stored verified topics plus material supplied by the student;
+- each quiz question must map directly to a verified topic;
+- when no verified topic list exists, the student must provide notes, an outline or other source material before course-specific generation is allowed;
+- related prerequisite knowledge must not be silently presented as registered syllabus content;
+- the UI shows the academic year of the detailed outline separately from the current 2026-2027 course allocation.

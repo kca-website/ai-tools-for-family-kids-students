@@ -115,6 +115,18 @@ try{
   assert.match(infoBPrompt,/Οι μαθητές διατυπώνουν πρώτα δική τους απάντηση\/λύση/i,'B Informatics must use student-first critical comparison');
 
   await page.selectOption('#grade','a');
+  await page.selectOption('#subject','music');
+  const musicTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(musicTopics.includes('Α4. Τα χρώματα των ήχων'),'A Music annual E.A.E. mapping missing');
+  assert.ok(!musicTopics.includes('Δ1. Μουσική σε δύο χρόνους'),'A Music excluded section leaked into selector');
+
+  await page.selectOption('#subject','art');
+  const artTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(artTopics.includes('10ο Κεφάλαιο — Ένα πρωινό στον Παρθενώνα'),'A Art annual framework missing');
+  const artNote=await page.locator('#curriculumNote').innerText();
+  assert.match(artNote,/δεν αποτελούν υποχρεωτική λίστα/i,'Art must be presented as an open selection framework');
+
+  await page.selectOption('#grade','a');
   await page.selectOption('#subject','math');
   const mathNote=await page.locator('#curriculumNote').innerText();
   assert.match(mathNote,/τρέχουσα ύλη\/οδηγίες/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');

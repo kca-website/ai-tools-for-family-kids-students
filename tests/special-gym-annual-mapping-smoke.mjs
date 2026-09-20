@@ -15,12 +15,14 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,43);
-assert.equal(M.publishedPending.length,9);
+assert.equal(M.mappedEntries.length,49);
+assert.equal(M.publishedPending.length,3);
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='biology'),'Biology must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='geography'),'Geography must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='history'),'History must no longer be pending after official 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='informatics'),'Informatics must no longer be pending after exact 2026-27 mapping');
+assert.ok(!M.publishedPending.some(x=>x.subjectId==='music'),'Music must no longer be pending after exact Culture mapping');
+assert.ok(!M.publishedPending.some(x=>x.subjectId==='art'),'Art must no longer be pending after exact Culture mapping');
 assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='music'&&x.sourceUrl.includes('minedu.gov.gr')));
 assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='art'&&x.sourceUrl.includes('minedu.gov.gr')));
 for(const id of M.mappedEntries){
@@ -67,6 +69,38 @@ assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191'))
 assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
 assert.equal(transC.helenPlannedHours,35);
 assert.equal(transC.philosophyPlannedHours,13);
+
+const musicA=C['teacher-annual-special-gym-a-music'];
+assert.ok(musicA.officialAnchors.includes('Α4. Τα χρώματα των ήχων'));
+assert.ok(musicA.excludedAnchors.includes('Δ1. Μουσική σε δύο χρόνους'));
+assert.ok(!musicA.officialAnchors.some(x=>x==='Δ1. Μουσική σε δύο χρόνους'));
+
+const musicB=C['teacher-annual-special-gym-b-music'];
+assert.equal(musicB.plannedHours,25);
+assert.ok(musicB.officialAnchors.includes('6. Ο γύρος της Ελλάδας'));
+assert.ok(musicB.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 3. Μπαλινέζικο γκαμελάν')));
+assert.ok(musicB.excludedAnchors.some(x=>x.includes('προκολομβιανή')));
+
+const musicC=C['teacher-annual-special-gym-c-music'];
+assert.equal(musicC.teachingGuidanceOptional,true);
+assert.ok(musicC.officialAnchors.includes('2. Εικόνα και Ήχος'));
+assert.ok(musicC.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 4. Ελληνική Τζαζ')));
+
+const artA=C['teacher-annual-special-gym-a-art'];
+assert.equal(artA.selectionFramework,true);
+assert.equal(artA.selectionStatus,'open-teacher-designed-art-framework');
+assert.equal(artA.officialAnchors.length,11);
+assert.ok(artA.officialAnchors.includes('10ο Κεφάλαιο — Ένα πρωινό στον Παρθενώνα'));
+
+const artB=C['teacher-annual-special-gym-b-art'];
+assert.equal(artB.selectionFramework,true);
+assert.equal(artB.officialAnchors.length,4);
+assert.ok(artB.officialAnchors.includes('4η Διδακτική Ενότητα — Ανάλυση έργου – Ιστορία Τέχνης'));
+
+const artC=C['teacher-annual-special-gym-c-art'];
+assert.equal(artC.selectionFramework,true);
+assert.ok(artC.officialAnchors.includes('3η Διδακτική Ενότητα — Νέες τεχνολογίες'));
+assert.ok(artC.officialAnchors.includes('4η Διδακτική Ενότητα — Σύγχρονες μορφές εικαστικών τεχνών'));
 
 const infoA=C['teacher-annual-special-gym-a-informatics'];
 assert.equal(infoA.plannedHours,52);
@@ -310,4 +344,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 43 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 49 official mappings.');

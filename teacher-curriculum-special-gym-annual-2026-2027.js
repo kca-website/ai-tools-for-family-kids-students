@@ -36,12 +36,6 @@
     {grade:"A",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
     {grade:"B",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
     {grade:"C",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
-    {grade:"A",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
-    {grade:"B",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
-    {grade:"C",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
-    {grade:"A",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
-    {grade:"B",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
-    {grade:"C",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
   ]);
 
   const GRADE_LABEL={A:"Α΄ Γυμνασίου",B:"Β΄ Γυμνασίου",C:"Γ΄ Γυμνασίου"};
@@ -294,6 +288,130 @@
 
 
 
+
+
+  upsert({
+    id:"teacher-annual-special-gym-a-music",grade:"A",subject:"Μουσική",subjectId:"music",
+    sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΓΥΜΝ EAE ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27",sourceUrl:SOURCES.culture,
+    required:[
+      "Α1. Διάλογοι στην ήπειρο του ρυθμού",
+      "Α2. Μουσικοί διάλογοι και Αντίφωνα",
+      "Α3. Ανακαλύπτω τη φωνή",
+      "Α4. Τα χρώματα των ήχων",
+      "Β1β. Επιμένω μουσικά — μόνο η έννοια και το μουσικό φαινόμενο του κανόνα",
+      "Β2α+Β2β. Μουσικές σε πέντε τόνους",
+      "Β3. Ανεβαίνω τη σκάλα — μόνο η έννοια της σκάλας",
+      "Δ4. Μουσική σε κύκλο — φόρμα ροντό",
+      "ΣΤ1α+ΣΤ1β+ΣΤ2. Καλαματιανός, Τσάμικος, Βαλς — περιληπτικά",
+      "Η1α+Η1γ. Το νερό"
+    ],
+    excluded:[
+      "Β1α. Επιμένω μουσικά",
+      "Γ΄ Ενότητα — Ας κάνουμε μια επανάληψη (1)",
+      "Δ1. Μουσική σε δύο χρόνους","Δ2. Α, Β στη σειρά","Δ3. Τί-κε-τα-κε",
+      "Ε1α. Ταξίδι στο παρελθόν 1","Ε1β. Ταξίδι στο παρελθόν 2","Ε2. Στη χώρα του παραμυθιού",
+      "Ζ΄ Ενότητα — Ας κάνουμε μια επανάληψη (2)",
+      "Η1β. Το νερό - η θάλασσα","Η1δ. Το νερό - Τελική Παρουσίαση"
+    ],
+    note:"Ακριβής χαρτογράφηση Μουσικής Α΄ Γυμνασίου Ε.Α.Ε. 2026-2027. Οι ρητά εξαιρούμενες υποενότητες δεν εμφανίζονται ως επιλογές. Στις συμπτυγμένες ενότητες διατηρείται ο περιορισμός της επίσημης οδηγίας.",
+    meta:{weeklyHours:1,coverageCompleteness:"section-level-verified",classificationStatus:"official-required-excluded-preserved",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-26-27.pdf"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-music",grade:"B",subject:"Μουσική",subjectId:"music",
+    sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΓΥΜΝ EAE ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27",sourceUrl:SOURCES.culture,
+    required:[
+      "1. Ένας κόσμος μετά μουσικής",
+      "2. Σε ρυθμούς… αφρικάνικους",
+      "3. Μελωδικοί εξωτικοί αυτοσχεδιασμοί — βασικός κορμός",
+      "4. Μουσική για… χορό — με τις επίσημες περικοπές",
+      "5. Ευρωπαϊκές προδιαγραφές — βασικός κορμός",
+      "6. Ο γύρος της Ελλάδας"
+    ],
+    optional:[
+      "3. Μπαλινέζικο γκαμελάν","3. Η πολυσύνθετη μουσική της Κίνας","3. Η χώρα του Ανατέλλοντος Ηλίου",
+      "5. Μανουέλ ντε Φάλλα, Ισαάκ Αλμπένιθ, Τραγούδι (σ. 59) και Μουσικά όργανα (σ. 60)",
+      "5. Η γέννηση της όπερας στην Ιταλία — περιληπτικά, χωρίς έμφαση στα ονόματα"
+    ],
+    excluded:[
+      "4. Η μουσική στη Λατινική Αμερική — σελ. 34",
+      "4. Η μουσική κατά την προκολομβιανή περίοδο",
+      "4. Τα μουσικά όργανα των ιθαγενών",
+      "4. Τα μουσικά όργανα μας μπατερία"
+    ],
+    note:"Η Β΄ Γυμνασίου Ε.Α.Ε. διατηρεί έξι βασικά κεφάλαια, με ρητές προαιρετικές και εξαιρούμενες υποενότητες. Το κεφάλαιο «Ευρωπαϊκές προδιαγραφές» προβλέπεται να διδαχθεί τελευταίο.",
+    meta:{weeklyHours:1,plannedHours:25,coverageCompleteness:"section-level-verified",classificationStatus:"official-required-optional-excluded-preserved",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-26-27.pdf"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-music",grade:"C",subject:"Μουσική",subjectId:"music",
+    sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΓΥΜΝ EAE ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27",sourceUrl:SOURCES.culture,
+    required:[
+      "1. Το ταξίδι της μουσικής στον 20ό αιώνα",
+      "2. Εικόνα και Ήχος",
+      "3. Από το γκόσπελ στο ροκ",
+      "4. Ελληνικές μουσικές ιστορίες — βασικός κορμός",
+      "5. Στις γειτονιές του ελληνικού τραγουδιού — βασικός κορμός"
+    ],
+    optional:[
+      "4. Ελληνική Τζαζ",
+      "5. Η επιστροφή του Οδυσσέα του Γιάννη Μαρκόπουλου",
+      "5. Η γειτονιά του Σταύρου Ξαρχάκου",
+      "5. Ο δρόμος του Μάνου Λοΐζου",
+      "5. Για τη μικρή Ελλάδα του Διονύση Σαββόπουλου",
+      "5. Η επιστροφή στις ρίζες του Γιάννη Μαρκόπουλου",
+      "6. Είμαστε στον αέρα!",
+      "6. Πολύτεχνο υπερθέαμα"
+    ],
+    note:"Η Γ΄ Γυμνασίου Ε.Α.Ε. κρατά τον βασικό κορμό των πέντε κεφαλαίων και χωριστά τις ρητά προαιρετικές υποενότητες/σχέδια εργασίας. Οι ίδιες οι αναλυτικές προτάσεις τρόπου διδασκαλίας επισημαίνονται ως προαιρετικές.",
+    meta:{weeklyHours:1,coverageCompleteness:"section-level-verified",classificationStatus:"official-core-optional-preserved",teachingGuidanceOptional:true,mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-26-27.pdf"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-a-art",grade:"A",subject:"Καλλιτεχνικά",subjectId:"art",
+    sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΓΥΜΝ EAE ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27",sourceUrl:SOURCES.culture,
+    official:[
+      "1ο Κεφάλαιο — Από την κίνηση στην έκφραση",
+      "2ο Κεφάλαιο — Όλα είναι χρώμα",
+      "3ο Κεφάλαιο — Οργανώνω, σύνθεση και αισθητική",
+      "4ο Κεφάλαιο — Σχέδιο για όλους, μορφικά στοιχεία, μορφοποίηση",
+      "5ο Κεφάλαιο — Η δική μου πραγματικότητα, σχέδιο από τη φύση, κοινωνικές επιδράσεις στην Τέχνη",
+      "6ο Κεφάλαιο — Κινούμενο σχέδιο, εξέλιξη και λειτουργία",
+      "7ο Κεφάλαιο — Πηλός, πλαστική, Αρχαίοι Πολιτισμοί",
+      "8ο Κεφάλαιο — Χαρακτική, μορφή και Περιεχόμενο",
+      "9ο Κεφάλαιο — Η ζωή και οι τέχνες",
+      "10ο Κεφάλαιο — Ένα πρωινό στον Παρθενώνα",
+      "11ο Κεφάλαιο — Στους θησαυρούς του Μουσείου"
+    ],
+    note:"Οι οδηγίες Καλλιτεχνικών είναι ανοικτού τύπου και ο/η εικαστικός επιλέγει και διαφοροποιεί ενότητες, δραστηριότητες και βάθος με βάση την τάξη. Το μενού λειτουργεί ως επαληθευμένο πλαίσιο πλοήγησης, όχι ως δεσμευτική εξεταστέα σειρά. Στη χαρακτική, η χάραξη φύλλων χαλκού αναφέρεται ως προαιρετική και απαιτεί ιδιαίτερη προσοχή.",
+    meta:{weeklyHours:1,selectionFramework:true,selectionStatus:"open-teacher-designed-art-framework",anchorPolicy:"official-open-art-guidance",coverageCompleteness:"chapter-framework-verified",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-26-27.pdf"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-art",grade:"B",subject:"Καλλιτεχνικά",subjectId:"art",
+    sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΓΥΜΝ EAE ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27",sourceUrl:SOURCES.culture,
+    official:[
+      "1η Διδακτική Ενότητα — Υλικά, Τεχνικές, Πειραματισμοί",
+      "2η Διδακτική Ενότητα — Εφαρμοσμένες τέχνες",
+      "3η Διδακτική Ενότητα — Μορφικά Στοιχεία",
+      "4η Διδακτική Ενότητα — Ανάλυση έργου – Ιστορία Τέχνης"
+    ],
+    note:"Ανοικτό, μη δεσμευτικό πλαίσιο Καλλιτεχνικών Β΄ Ε.Α.Ε. Ο/Η εκπαιδευτικός επιλέγει επίπεδο εμβάθυνσης και εφαρμογές με βάση υλικά, ασφάλεια και ανάγκες της τάξης· η ξυλογλυπτική/σκάλισμα προτείνεται μόνο εφόσον οι συνθήκες το επιτρέπουν.",
+    meta:{weeklyHours:1,selectionFramework:true,selectionStatus:"open-teacher-designed-art-framework",anchorPolicy:"official-open-art-guidance",coverageCompleteness:"unit-framework-verified",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-26-27.pdf"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-art",grade:"C",subject:"Καλλιτεχνικά",subjectId:"art",
+    sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΓΥΜΝ EAE ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27",sourceUrl:SOURCES.culture,
+    official:[
+      "1η Διδακτική Ενότητα — Μορφικά στοιχεία",
+      "2η Διδακτική Ενότητα — Εφαρμοσμένες Τέχνες",
+      "3η Διδακτική Ενότητα — Νέες τεχνολογίες",
+      "4η Διδακτική Ενότητα — Σύγχρονες μορφές εικαστικών τεχνών"
+    ],
+    note:"Ανοικτό, μη δεσμευτικό πλαίσιο Καλλιτεχνικών Γ΄ Ε.Α.Ε. Η 2η ενότητα προτείνεται να ενσωματώνεται σε άλλες ενότητες, ενώ στη 3η το βίντεο/ΗΥ μπορεί επίσης να ενσωματώνεται σε άλλες δραστηριότητες. Οι επιλογές είναι πλαίσιο σχεδιασμού και όχι σταθερή εξεταστέα ύλη.",
+    meta:{weeklyHours:1,selectionFramework:true,selectionStatus:"open-teacher-designed-art-framework",anchorPolicy:"official-open-art-guidance",coverageCompleteness:"unit-framework-verified",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-26-27.pdf"}
+  });
 
   upsert({
     id:"teacher-annual-special-gym-a-informatics",grade:"A",subject:"Πληροφορική",subjectId:"informatics",
@@ -1200,7 +1318,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.11.0",
+    version:"1.12.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
@@ -1208,6 +1326,8 @@
     mappedEntries:Object.freeze([
       "teacher-annual-special-gym-a-ancient-language","teacher-annual-special-gym-b-ancient-language","teacher-annual-special-gym-c-ancient-language",
       "teacher-annual-special-gym-a-ancient-translation","teacher-annual-special-gym-b-ancient-translation","teacher-annual-special-gym-c-ancient-translation",
+      "teacher-annual-special-gym-a-music","teacher-annual-special-gym-b-music","teacher-annual-special-gym-c-music",
+      "teacher-annual-special-gym-a-art","teacher-annual-special-gym-b-art","teacher-annual-special-gym-c-art",
       "teacher-annual-special-gym-a-informatics","teacher-annual-special-gym-b-informatics","teacher-annual-special-gym-c-informatics",
       "teacher-annual-special-gym-a-history","teacher-annual-special-gym-b-history","teacher-annual-special-gym-c-history",
       "teacher-annual-special-gym-a-technology","teacher-annual-special-gym-b-technology","teacher-annual-special-gym-c-technology",

@@ -15,9 +15,9 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,29);
-assert.equal(M.publishedPending.length,23);
-assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='biology'));
+assert.equal(M.mappedEntries.length,32);
+assert.equal(M.publishedPending.length,20);
+assert.ok(!M.publishedPending.some(x=>x.subjectId==='biology'),'Biology must no longer be pending after exact 2026-27 mapping');
 assert.ok(M.publishedPending.some(x=>x.grade==='B'&&x.subjectId==='geography'));
 assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='history'));
 assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='music'&&x.sourceUrl.includes('minedu.gov.gr')));
@@ -66,6 +66,27 @@ assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191'))
 assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
 assert.equal(transC.helenPlannedHours,35);
 assert.equal(transC.philosophyPlannedHours,13);
+
+const bioA=C['teacher-annual-special-gym-a-biology'];
+assert.equal(bioA.plannedHours,25);
+assert.ok(bioA.officialAnchors.includes('1.1 Τα χαρακτηριστικά των οργανισμών'));
+assert.ok(bioA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 1.4')));
+assert.ok(bioA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 2.3')));
+assert.ok(!bioA.officialAnchors.some(x=>x.includes('5.1 Στήριξη')),'A Biology must stop before the B-year carry-over chapters');
+
+const bioB=C['teacher-annual-special-gym-b-biology'];
+assert.equal(bioB.plannedHours,25);
+assert.ok(bioB.officialAnchors.includes('Βιολογία Α΄ — 5.4 Το μυοσκελετικό σύστημα του ανθρώπου'));
+assert.ok(bioB.officialAnchors.includes('Βιολογία Α΄ — 6.4 Η αναπαραγωγή στον άνθρωπο'));
+assert.ok(bioB.officialAnchors.includes('Βιολογία Β΄-Γ΄ — 4.4 Τρόπος ζωής και ασθένειες'));
+assert.ok(bioB.officialAnchors.some(x=>x.startsWith('Προαιρετικό — Βιολογία Β΄-Γ΄ — 1.2')));
+
+const bioC=C['teacher-annual-special-gym-c-biology'];
+assert.equal(bioC.plannedHours,25);
+assert.ok(bioC.officialAnchors.includes('5.2 Η ροή της γενετικής πληροφορίας'));
+assert.ok(bioC.officialAnchors.includes('5.5 Κληρονομικότητα'));
+assert.ok(bioC.officialAnchors.includes('7.2 Η εξέλιξη του ανθρώπου'));
+assert.ok(!bioC.officialAnchors.some(x=>/^3\./.test(x)),'C Biology must not invent omitted chapter 3 sections');
 
 const mathA=C['teacher-annual-special-gym-a-math'];
 assert.ok(mathA.officialAnchors.includes('7.5 Πολλαπλασιασμός ρητών αριθμών'));
@@ -200,4 +221,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 29 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 32 official mappings.');

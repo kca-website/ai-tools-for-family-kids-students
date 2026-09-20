@@ -33,9 +33,6 @@
 
 
   const PUBLISHED_PENDING=Object.freeze([
-    {grade:"A",subjectId:"biology",label:"Βιολογία",sourceTitle:"ΒΙΟΛΟΓΙΑ Α ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyA},
-    {grade:"B",subjectId:"biology",label:"Βιολογία",sourceTitle:"ΒΙΟΛΟΓΙΑ Β ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyB},
-    {grade:"C",subjectId:"biology",label:"Βιολογία",sourceTitle:"ΒΙΟΛΟΓΙΑ Γ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyC},
     {grade:"A",subjectId:"geography",label:"Γεωλογία-Γεωγραφία",sourceTitle:"ΓΕΩΛΟΓΙΑ-ΓΕΩΓΡΑΦΙΑ Α-Β ΓΥΜΝ ΕΑΕ ΟΔΗΓΙΕΣ 26-27",sourceUrl:SOURCES.geographyAB},
     {grade:"B",subjectId:"geography",label:"Γεωλογία-Γεωγραφία",sourceTitle:"ΓΕΩΛΟΓΙΑ-ΓΕΩΓΡΑΦΙΑ Α-Β ΓΥΜΝ ΕΑΕ ΟΔΗΓΙΕΣ 26-27",sourceUrl:SOURCES.geographyAB},
     {grade:"A",subjectId:"history",label:"Ιστορία",sourceTitle:"ΙΣΤΟΡΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝΑΣΙΟΥ Ε.Α.Ε. 2026-2027",sourceUrl:SOURCES.history},
@@ -302,6 +299,94 @@
     ],
     note:"Η Γ΄ Γυμνασίου Ε.Α.Ε. διδάσκει την «Ελένη» του Ευριπίδη από Σεπτέμβριο έως το τέλος Φεβρουαρίου και το Ανθολόγιο Φιλοσοφικών Κειμένων από Μάρτιο έως Μάιο. Οι χαρακτηρισμοί «αναλυτικά» και «περιληπτικά» διατηρούνται όπως στην επίσημη οδηγία.",
     meta:{weeklyHours:2,helenPlannedHours:35,philosophyPlannedHours:13,coverageCompleteness:"section-level-verified",anchorPolicy:"official-annual-text-selections"}
+  });
+
+
+  upsert({
+    id:"teacher-annual-special-gym-a-biology",grade:"A",subject:"Βιολογία",subjectId:"biology",
+    sourceTitle:"ΒΙΟΛΟΓΙΑ Α ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyA,
+    required:[
+      "1.1 Τα χαρακτηριστικά των οργανισμών",
+      "1.2 Κύτταρο: Η μονάδα της ζωής",
+      "1.3 Η οργάνωση των πολυκύτταρων οργανισμών",
+      "2.1 Η παραγωγή θρεπτικών ουσιών στα φυτά – φωτοσύνθεση",
+      "2.2 Η πρόσληψη ουσιών και πέψη στους μονοκύτταρους οργανισμούς",
+      "2.4 Η πρόσληψη ουσιών και πέψη στον άνθρωπο",
+      "3.1 Η μεταφορά και η αποβολή ουσιών στους μονοκύτταρους οργανισμούς",
+      "3.2 Η μεταφορά και αποβολή ουσιών στα φυτά",
+      "3.4 Η μεταφορά και αποβολή ουσιών στον άνθρωπο",
+      "4.1 Η αναπνοή στους μονοκύτταρους οργανισμούς",
+      "4.2 Η αναπνοή στα φυτά",
+      "4.4 Η αναπνοή στον άνθρωπο"
+    ],
+    optional:[
+      "1.4 Αλληλεπιδράσεις και προσαρμογές",
+      "2.3 Η πρόσληψη ουσιών και πέψη στους ζωικούς οργανισμούς"
+    ],
+    note:"Ακριβής χαρτογράφηση από την επίσημη ύλη Βιολογίας Α΄ Γυμνασίου Ε.Α.Ε. 2026-2027. Οι 1.4 και 2.3 αναφέρονται ρητά ως προαιρετικές. Δεν εμφανίζονται στο μενού ενότητες που δεν περιλαμβάνονται στον επίσημο φετινό κατάλογο ύλης.",
+    meta:{
+      plannedHours:25,
+      coverageCompleteness:"section-level-verified",
+      classificationStatus:"official-required-optional-preserved",
+      mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%91-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95AE-26-27.pdf"
+    }
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-biology",grade:"B",subject:"Βιολογία",subjectId:"biology",
+    sourceTitle:"ΒΙΟΛΟΓΙΑ Β ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyB,
+    required:[
+      "Βιολογία Α΄ — 5.1 Στήριξη και κίνηση στους μονοκύτταρους οργανισμούς",
+      "Βιολογία Α΄ — 5.2 Η στήριξη στα φυτά",
+      "Βιολογία Α΄ — 5.3 Η στήριξη και κίνηση στους ζωικούς οργανισμούς",
+      "Βιολογία Α΄ — 5.4 Το μυοσκελετικό σύστημα του ανθρώπου",
+      "Βιολογία Α΄ — Αναπαραγωγή (εισαγωγικό κείμενο σελ. 114)",
+      "Βιολογία Α΄ — 6.1 Η αναπαραγωγή στους μονοκύτταρους οργανισμούς",
+      "Βιολογία Α΄ — 6.2 Η αναπαραγωγή στα φυτά",
+      "Βιολογία Α΄ — 6.3 Η αναπαραγωγή στους ζωικούς οργανισμούς",
+      "Βιολογία Α΄ — 6.4 Η αναπαραγωγή στον άνθρωπο",
+      "Βιολογία Β΄-Γ΄ — 4.1 Ομοιόσταση",
+      "Βιολογία Β΄-Γ΄ — 4.2 Ασθένειες",
+      "Βιολογία Β΄-Γ΄ — 4.3 Αμυντικοί μηχανισμοί του ανθρώπου",
+      "Βιολογία Β΄-Γ΄ — 4.4 Τρόπος ζωής και ασθένειες"
+    ],
+    optional:[
+      "Βιολογία Β΄-Γ΄ — 1.2 Κύτταρο: η μονάδα της ζωής"
+    ],
+    note:"Η Β΄ Γυμνασίου Ε.Α.Ε. 2026-2027 χρησιμοποιεί δύο σχολικά βιβλία. Οι ενότητες Στήριξης-Κίνησης και Αναπαραγωγής που δεν διδάχθηκαν στην Α΄ μεταφέρονται στη Β΄, ενώ από το βιβλίο Β΄-Γ΄ διδάσκεται το Κεφάλαιο 4. Η 1.2 «Κύτταρο» αναφέρεται ρητά ως προαιρετική.",
+    meta:{
+      plannedHours:25,
+      coverageCompleteness:"section-level-verified",
+      classificationStatus:"official-required-optional-preserved",
+      sourceBooks:["Βιολογία Α΄ Γυμνασίου","Βιολογία Β΄ & Γ΄ Γυμνασίου"],
+      mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-B-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95AE-26-27.pdf"
+    }
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-biology",grade:"C",subject:"Βιολογία",subjectId:"biology",
+    sourceTitle:"ΒΙΟΛΟΓΙΑ Γ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyC,
+    required:[
+      "1.1 Τα μόρια της ζωής",
+      "1.2 Κύτταρο: η μονάδα της ζωής",
+      "2.1 Ισορροπία στα βιολογικά οικοσυστήματα",
+      "2.2 Οργάνωση και λειτουργίες οικοσυστήματος – Ο ρόλος της ενέργειας",
+      "5.1 Το γενετικό υλικό οργανώνεται σε χρωμοσώματα",
+      "5.2 Η ροή της γενετικής πληροφορίας",
+      "5.3 Αλληλόμορφα",
+      "5.4 Κυτταρική διαίρεση",
+      "5.5 Κληρονομικότητα",
+      "5.6 Μεταλλάξεις",
+      "7.1 Η εξέλιξη και οι μαρτυρίες της – Βιοχημικές αποδείξεις",
+      "7.2 Η εξέλιξη του ανθρώπου"
+    ],
+    note:"Ακριβής χαρτογράφηση του επίσημου καταλόγου ύλης Βιολογίας Γ΄ Γυμνασίου Ε.Α.Ε. 2026-2027. Το site εκθέτει μόνο τις ενότητες που περιλαμβάνονται στον φετινό κατάλογο και δεν συμπληρώνει τα κενά κεφαλαίων από μνήμη ή από παλαιότερη ύλη.",
+    meta:{
+      plannedHours:25,
+      coverageCompleteness:"section-level-verified",
+      classificationStatus:"official-syllabus-index-verified",
+      mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%93-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95AE-26-27.pdf"
+    }
   });
 
   upsert({
@@ -781,7 +866,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.6.2",
+    version:"1.7.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
@@ -789,6 +874,7 @@
     mappedEntries:Object.freeze([
       "teacher-annual-special-gym-a-ancient-language","teacher-annual-special-gym-b-ancient-language","teacher-annual-special-gym-c-ancient-language",
       "teacher-annual-special-gym-a-ancient-translation","teacher-annual-special-gym-b-ancient-translation","teacher-annual-special-gym-c-ancient-translation",
+      "teacher-annual-special-gym-a-biology","teacher-annual-special-gym-b-biology","teacher-annual-special-gym-c-biology",
       "teacher-annual-special-gym-a-math","teacher-annual-special-gym-b-math","teacher-annual-special-gym-c-math",
       "teacher-annual-special-gym-a-physics","teacher-annual-special-gym-b-physics","teacher-annual-special-gym-c-physics",
       "teacher-annual-special-gym-a-pe","teacher-annual-special-gym-b-pe","teacher-annual-special-gym-c-pe",

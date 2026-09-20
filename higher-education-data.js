@@ -124,6 +124,15 @@
           { id: "perplexity", tasks: ["research","understand"], whyEl: "Αρχική βιβλιογραφική χαρτογράφηση με εμφανείς πηγές, πριν περάσεις στις πρωτογενείς μελέτες." }
         ]
       },
+      "economics": {
+        labelEl: "Οικονομικά / Οικονομετρία",
+        tools: [
+          { id: "wolfram-alpha", tasks: ["calculations","practice","understand"], whyEl: "Έλεγχος μαθηματικών και οικονομετρικών υπολογισμών, συναρτήσεων και μοντέλων." },
+          { id: "elicit", tasks: ["research","papers"], whyEl: "Αναζήτηση ακαδημαϊκών papers για οικονομικά, πολιτική και εφαρμοσμένη έρευνα." },
+          { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Έλεγχος του πώς υποστηρίζονται ή αμφισβητούνται οικονομικοί ισχυρισμοί στη βιβλιογραφία." },
+          { id: "notebooklm", tasks: ["understand","notes","papers"], whyEl: "Source-based μελέτη από σημειώσεις, άρθρα, επίσημες πηγές και course material." }
+        ]
+      },
       "academic-research": {
         labelEl: "Ακαδημαϊκή έρευνα",
         tools: [
@@ -142,7 +151,15 @@
         nameEn: "Athens University of Economics and Business",
         legacyAliases: [],
         sourceUrl: "https://www.aueb.gr/",
-        departments: ["aueb-cs"],
+        departments: ["aueb-cs", "aueb-econ"],
+      },
+      unipi: {
+        id: "unipi",
+        nameEl: "Πανεπιστήμιο Πειραιώς",
+        nameEn: "University of Piraeus",
+        legacyAliases: [],
+        sourceUrl: "https://www.unipi.gr/",
+        departments: ["unipi-ds"],
       },
       nkua: {
         id: "nkua",
@@ -317,6 +334,86 @@
         ]
       },
 
+      "aueb-econ": {
+        institutionId: "aueb",
+        schoolEl: "Σχολή Οικονομικών Επιστημών",
+        departmentEl: "Τμήμα Οικονομικής Επιστήμης",
+        departmentEn: "Department of Economics",
+        degreeLevel: 6,
+        nominalSemesters: 8,
+        ectsTotal: 240,
+        coverageStatus: "pilot-source-locked",
+        sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
+        currentAcademicYearSource: "https://dept.aueb.gr/el/node/716/mid/4157",
+        notesEl: "Η τρέχουσα δομή βασίζεται στις επίσημες σελίδες προγράμματος και στον Οδηγό Σπουδών 2026-2027. Αναλυτικές θεματικές ενεργοποιούνται μόνο για μαθήματα με επίσημη περιγραφή που έχει επαληθευτεί.",
+        sources: [
+          "https://dept.aueb.gr/el/node/716/mid/4157",
+          "https://www.dept.aueb.gr/el/econ_courses",
+          "https://dept.aueb.gr/el/econ"
+        ],
+        courses: [
+          { code: null, semester: 1, year: 1, required: true, titleEl: "Εισαγωγή στην Οικονομική Ανάλυση Ι", tasks: ["understand","practice","notes"] },
+          { code: null, semester: 1, year: 1, required: true, titleEl: "Στατιστική Ι", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 1, year: 1, required: true, titleEl: "Μαθηματικά για Οικονομολόγους Ι", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 1, year: 1, required: true, titleEl: "Οικονομική Ιστορία", tasks: ["understand","notes","research","papers"] },
+          { code: null, semester: 2, year: 1, required: true, titleEl: "Εισαγωγή στην Οικονομική Ανάλυση ΙΙ", tasks: ["understand","practice","notes"] },
+          { code: null, semester: 2, year: 1, required: true, titleEl: "Στατιστική ΙΙ", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 2, year: 1, required: true, titleEl: "Μαθηματικά για Οικονομολόγους ΙΙ", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 2, year: 1, required: true, titleEl: "Αρχές Χρηματοοικονομικής Λογιστικής", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 3, year: 2, required: true, titleEl: "Μικροοικονομική Θεωρία Ι", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 3, year: 2, required: true, titleEl: "Μακροοικονομική Θεωρία Ι", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 4, year: 2, required: true, titleEl: "Μικροοικονομική Θεωρία ΙΙ", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 4, year: 2, required: true, titleEl: "Μακροοικονομική Θεωρία ΙΙ", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 4, year: 2, required: true, titleEl: "Διεθνής Οικονομική", tasks: ["understand","research","papers","practice"] },
+          { code: null, semester: 4, year: 2, required: true, titleEl: "Εισαγωγή στην Οικονομετρία", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 5, year: 3, required: true, titleEl: "Βιομηχανική Οργάνωση", tasks: ["understand","research","practice"] },
+          { code: null, semester: 5, year: 3, required: true, titleEl: "Οικονομετρία Ι", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 5, year: 3, required: true, titleEl: "Ιστορία Οικονομικής Σκέψης", tasks: ["understand","research","papers"] },
+          { code: null, semester: 5, year: 3, required: true, titleEl: "Δημόσια Οικονομική Ι", tasks: ["understand","research","practice"] },
+          { code: null, semester: 6, year: 3, required: true, titleEl: "Χρήμα και Τραπεζική", tasks: ["understand","research","papers","practice"] },
+          {
+            code: "1363", semester: 6, year: 3, ects: 6, required: false,
+            titleEl: "Οικονομική Ανάπτυξη",
+            tasks: ["understand","research","papers","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.dept.aueb.gr/el/node/12684",
+            syllabusSourceAcademicYear: "2025-2026",
+            topics: [
+              "Οικονομική ανάπτυξη και οικονομική μεγέθυνση - χαρακτηριστικά αναπτυσσόμενων χωρών και δείκτες ανάπτυξης",
+              "Θεωρίες ανάπτυξης και μεγέθυνσης: δυισμός, πλεονάζουσα εργασία, κλασικά και νεοκλασικά υποδείγματα",
+              "Ανάπτυξη, ανισότητα, φτώχεια και υπόθεση Kuznets",
+              "Πληθυσμός, εσωτερική μετανάστευση, εκπαίδευση, τεχνολογία και απασχόληση",
+              "Δημοσιονομική και νομισματική πολιτική στις αναπτυσσόμενες χώρες",
+              "Ξένες άμεσες επενδύσεις, διεθνής δανεισμός, βοήθεια και εξωτερικό χρέος",
+              "Εκβιομηχάνιση, διεθνές εμπόριο και στρατηγικές υποκατάστασης εισαγωγών ή προώθησης εξαγωγών",
+              "Ρόλος κράτους και διεθνών οργανισμών στην οικονομική ανάπτυξη"
+            ]
+          },
+          {
+            code: "1880", semester: 7, year: 4, required: false,
+            titleEl: "Διάρθρωση και Προβλήματα της Ελληνικής Οικονομίας",
+            tasks: ["understand","research","papers","notes"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.dept.aueb.gr/el/econ/content/%CE%B4%CE%B9%CE%AC%CF%81%CE%B8%CF%81%CF%89%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CF%80%CF%81%CE%BF%CE%B2%CE%BB%CE%AE%CE%BC%CE%B1%CF%84%CE%B1-%CF%84%CE%B7%CF%82-%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AE%CF%82-%CE%BF%CE%B9%CE%BA%CE%BF%CE%BD%CE%BF%CE%BC%CE%AF%CE%B1%CF%82-%CE%B6-%CE%B5%CE%BE%CE%AC%CE%BC%CE%B7%CE%BD%CE%BF-%CE%B3%CE%B9%CE%B1-%CF%84%CE%BF-%CE%B1%CE%BA%CE%B1%CE%B4-%CE%AD%CF%84%CE%BF%CF%82-2025-26",
+            syllabusSourceAcademicYear: "2025-2026",
+            topics: [
+              "Εξελίξεις στο διεθνές και ευρωπαϊκό περιβάλλον",
+              "Νομισματική πολιτική στην ευρωζώνη: πληθωρισμός, επιτόκια και ποσοτική χαλάρωση",
+              "Μακροοικονομικές και μικροοικονομικές εξελίξεις: ανάπτυξη, απασχόληση, μετανάστευση, ανισοκατανομή, ανταγωνιστικότητα και εμπόριο",
+              "Δημοσιονομικές εξελίξεις: φορολογικά έσοδα, δαπάνες, έλλειμμα και χρέος",
+              "Αγορές χρήματος και κεφαλαίων, τραπεζική χρηματοδότηση, ομόλογα, μετοχές και άμεσες ξένες επενδύσεις",
+              "Τραπεζικός τομέας, μη εξυπηρετούμενα δάνεια, κεφαλαιακή επάρκεια, εποπτεία και εξυγίανση"
+            ]
+          },
+          { code: null, semester: 8, year: 4, required: false, titleEl: "Θεωρία Οικονομικής Μεγέθυνσης", tasks: ["understand","research","papers","practice"] },
+          { code: null, semester: 8, year: 4, required: false, titleEl: "Θεωρία και Πολιτική Διεθνούς Εμπορίου", tasks: ["understand","research","papers","practice"] },
+          { code: null, semester: 8, year: 4, required: false, titleEl: "Πολιτική Οικονομία της Ε.Ε.", tasks: ["understand","research","papers"] }
+        ]
+      },
+
       "nkua-psychology": {
         institutionId: "nkua",
         schoolEl: "Φιλοσοφική Σχολή",
@@ -429,6 +526,114 @@
           { code: "PSY61", semester: 2, year: 1, ects: 5, required: true, titleEl: "Μέθοδοι Έρευνας στην Ψυχολογία", tasks: ["understand","research","practice","papers"] },
           { code: "PSY38", semester: null, year: null, ects: 4, required: false, titleEl: "Ιστορία της Ψυχολογίας", tasks: ["understand","research","papers"] },
           { code: "PSY76", semester: null, year: null, ects: 4, required: false, titleEl: "Πρόληψη και Παρέμβαση στην Οικογένεια και στο Σχολείο", tasks: ["understand","papers","research","feedback"] }
+        ]
+      },
+
+      "unipi-ds": {
+        institutionId: "unipi",
+        schoolEl: "Σχολή Τεχνολογιών Πληροφορικής και Επικοινωνιών",
+        departmentEl: "Τμήμα Ψηφιακών Συστημάτων",
+        departmentEn: "Department of Digital Systems",
+        degreeLevel: 6,
+        nominalSemesters: 8,
+        coverageStatus: "pilot-source-locked",
+        sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
+        currentAcademicYearSource: "https://www.ds.unipi.gr/courses/",
+        notesEl: "Η τρέχουσα διάρθρωση μαθημάτων προέρχεται από την επίσημη σελίδα Προγράμματος Σπουδών. Αναλυτικές θεματικές χρησιμοποιούνται μόνο από επίσημες σελίδες μαθημάτων.",
+        sources: [
+          "https://www.ds.unipi.gr/courses/",
+          "https://www.ds.unipi.gr/undergraduate/",
+          "https://www.ds.unipi.gr/documents/"
+        ],
+        courses: [
+          { code: "ΨΣ-109", semester: 1, year: 1, required: true, titleEl: "Ψηφιακή Σχεδίαση", tasks: ["understand","practice","calculations"] },
+          {
+            code: "ΨΣ-010", semester: 1, year: 1, ects: 6, required: true,
+            titleEl: "Θεωρία Πιθανοτήτων",
+            tasks: ["understand","calculations","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.ds.unipi.gr/courses/probability-theory-3/",
+            syllabusSourceAcademicYear: "current course page",
+            topics: [
+              "Βασικά μαθηματικά εργαλεία Θεωρίας Πιθανοτήτων",
+              "Μέθοδοι εξαγωγής συμπερασμάτων στη θεωρία πιθανοτήτων",
+              "Εφαρμογές πιθανοτήτων σε επιστήμη υπολογιστών και ψηφιακά συστήματα",
+              "Εφαρμογές σε τηλεπικοινωνίες, κρυπτογραφία και ψηφιακές υπηρεσίες",
+              "Χρήση Matlab, Octave, SPSS και R σε σχετικά παραδείγματα"
+            ]
+          },
+          { code: "ΨΣ-014", semester: 1, year: 1, required: true, titleEl: "Λογική και Λογικός Προγραμματισμός", tasks: ["understand","coding","practice"] },
+          {
+            code: "ΨΣ-006", semester: 1, year: 1, ects: 7, required: true,
+            titleEl: "Μαθηματική Ανάλυση και Στοιχεία Γραμμικής Άλγεβρας",
+            tasks: ["understand","calculations","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.ds.unipi.gr/courses/mathematical-analysis-linear-algebra/",
+            syllabusSourceAcademicYear: "current course page",
+            topics: [
+              "Πραγματικοί αριθμοί και απεικονίσεις",
+              "Όριο και συνέχεια συνάρτησης",
+              "Παράγωγος συνάρτησης και εφαρμογές",
+              "Αόριστο ολοκλήρωμα, διαφορικές εξισώσεις και εφαρμογές",
+              "Ορισμένο ολοκλήρωμα και εφαρμογές",
+              "Πίνακες, ορίζουσες και γραμμικά συστήματα - μέθοδοι Gauss και Cramer",
+              "Διανύσματα, διανυσματικοί χώροι, υπόχωροι και βάσεις",
+              "Γραμμικές απεικονίσεις, πυρήνας και πεδίο τιμών",
+              "Ακολουθίες και σειρές πραγματικών αριθμών"
+            ]
+          },
+          {
+            code: "ΨΣ-501", semester: 1, year: 1, ects: 7, required: true,
+            titleEl: "Γλώσσα Προγραμματισμού C",
+            tasks: ["understand","coding","practice","feedback"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.ds.unipi.gr/courses/programming-c/",
+            syllabusSourceAcademicYear: "current course page",
+            topics: [
+              "Αλγόριθμοι, ψευδοκώδικας και βασικά στοιχεία προγράμματος C",
+              "Τύποι δεδομένων, μεταβλητές, τελεστές, εκφράσεις και μετατροπές τύπων",
+              "Εντολές ελέγχου ροής: if, if-else, for, while και do",
+              "Πίνακες και αλφαριθμητικά",
+              "Δείκτες",
+              "Συναρτήσεις, πρωτότυπα, αναδρομή και παράμετροι",
+              "Συναρτήσεις εισόδου και εξόδου",
+              "Διαχείριση αρχείων και streams",
+              "Δομές, ενώσεις και απαριθμητοί τύποι"
+            ]
+          },
+          { code: "ΨΣ-502", semester: 2, year: 1, required: true, titleEl: "Αντικειμενοστρεφής Προγραμματισμός", tasks: ["understand","coding","practice","feedback"] },
+          { code: "ΨΣ-201", semester: 2, year: 1, required: true, titleEl: "Αρχιτεκτονικές Υπολογιστών", tasks: ["understand","practice"] },
+          { code: "ΨΣ-004", semester: 2, year: 1, required: true, titleEl: "Διακριτά Μαθηματικά", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-012", semester: 2, year: 1, required: true, titleEl: "Στοχαστικές Ανελίξεις", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-002", semester: 2, year: 1, required: true, titleEl: "Μαθηματική Ανάλυση ΙΙ", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-307", semester: 3, year: 2, required: true, titleEl: "Σήματα και Συστήματα", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-805", semester: 3, year: 2, required: true, titleEl: "Θεωρία Πληροφορίας", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-301", semester: 3, year: 2, required: true, titleEl: "Εισαγωγή στις Τηλεπικοινωνίες", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-507", semester: 3, year: 2, required: true, titleEl: "Τεχνολογία Λογισμικού", tasks: ["understand","coding","feedback"] },
+          { code: "ΨΣ-503", semester: 3, year: 2, required: true, titleEl: "Δομές Δεδομένων", tasks: ["understand","coding","practice"] },
+          { code: "ΨΣ-504", semester: 4, year: 2, required: true, titleEl: "Σχεδιασμός Βάσεων Δεδομένων", tasks: ["understand","coding","practice"] },
+          { code: "ΨΣ-320", semester: 4, year: 2, required: true, titleEl: "Δίκτυα Υπολογιστών Ι", tasks: ["understand","practice"] },
+          { code: "ΨΣ-101", semester: 4, year: 2, required: true, titleEl: "Αλγόριθμοι και Πολυπλοκότητα", tasks: ["understand","coding","practice"] },
+          { code: "ΨΣ-210", semester: 4, year: 2, required: true, titleEl: "Λειτουργικά Συστήματα - UNIX", tasks: ["understand","coding","practice"] },
+          { code: "ΨΣ-011", semester: 4, year: 2, required: true, titleEl: "Στατιστική", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-529", semester: 4, year: 2, required: true, titleEl: "Ανάλυση Δεδομένων", tasks: ["understand","calculations","coding","research"] },
+          { code: "ΨΣ-305", semester: 5, year: 3, required: true, titleEl: "Ψηφιακές Επικοινωνίες", tasks: ["understand","calculations","practice"] },
+          { code: "ΨΣ-801", semester: 5, year: 3, required: true, titleEl: "Πολιτικές και Διαχείριση Ασφάλειας", tasks: ["understand","research","papers"] },
+          { code: "ΨΣ-518", semester: 5, year: 3, required: true, titleEl: "Τεχνητή Νοημοσύνη", tasks: ["understand","coding","papers","research"] },
+          { code: "ΨΣ-332-1", semester: 6, year: 3, required: true, titleEl: "Διαδικτυακά Πληροφοριακά Συστήματα", tasks: ["understand","coding","practice"] },
+          { code: "ΨΣ-326", semester: 6, year: 3, required: true, titleEl: "Πρωτόκολλα Διαδικτύου", tasks: ["understand","practice"] },
+          { code: "ΨΣ-406", semester: 6, year: 3, required: true, titleEl: "Επικοινωνίες Πολυμέσων", tasks: ["understand","practice","research"] },
+          { code: "ΨΣ-802", semester: 6, year: 3, required: true, titleEl: "Ασφάλεια Πληροφοριακών Συστημάτων", tasks: ["understand","research","papers"] },
+          { code: "ΨΣ-906", semester: 7, year: 4, required: true, titleEl: "Πτυχιακή Εργασία", tasks: ["research","papers","feedback","notes"] },
+          { code: "ΨΣ-535", semester: 7, year: 4, required: false, titleEl: "Διαδικτυακός Προγραμματισμός", tasks: ["coding","practice","feedback"] },
+          { code: "ΨΣ-404", semester: 7, year: 4, required: false, titleEl: "Αναγνώριση Προτύπων", tasks: ["understand","coding","research","papers"] },
+          { code: "ΨΣ-907", semester: 8, year: 4, required: true, titleEl: "Πτυχιακή Εργασία", tasks: ["research","papers","feedback","notes"] },
+          { code: "ΨΣ-333", semester: 8, year: 4, required: false, titleEl: "Διαδίκτυο των Πραγμάτων", tasks: ["understand","coding","research"] },
+          { code: "ΨΣ-506", semester: 8, year: 4, required: false, titleEl: "Αποθήκες και Εξόρυξη Δεδομένων", tasks: ["understand","coding","research","papers"] }
         ]
       },
 
@@ -777,6 +982,17 @@
 
     if (departmentId === "aueb-cs") {
       if (/μαθηματ|πιθανοτ|στατισ|βελτιστοποι|θεωρία πληροφορίας/.test(title)) return "quantitative";
+      return "computing";
+    }
+
+    if (departmentId === "aueb-econ") {
+      if (/μαθηματ|στατισ|οικονομετρ/.test(title)) return "quantitative";
+      return "economics";
+    }
+
+    if (departmentId === "unipi-ds") {
+      if (/μαθηματ|πιθανοτ|στατισ|στοχασ/.test(title)) return "quantitative";
+      if (/σήματα|τηλεπικοινων|επικοινων|ψηφιακή σχεδίαση/.test(title)) return "physics-engineering";
       return "computing";
     }
 

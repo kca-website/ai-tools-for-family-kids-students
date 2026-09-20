@@ -76,6 +76,7 @@ try{
     const enGymErrors=[];
     enGym.on('pageerror',(err)=>enGymErrors.push(err.message));
     enGym.on('console',(msg)=>{if(msg.type()==='error') enGymErrors.push(msg.text());});
+    enGym.on('response',(res)=>{if(res.status()===404) enGymErrors.push(`404 ${res.url()}`);});
     await openDeepLink(enGym,{startZone:'middle',expectedZone:'high',role:'student',track:'eneegyl',grade:'gym-d',subject:'eneegyl-gym-d-economics'});
     assert.equal(await enGym.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL Gymnasium track deep link failed`);
     assert.equal(await enGym.inputValue('#tutorGrade'),'gym-d',`${label}: ENEEGYL D Gymnasium grade deep link failed`);

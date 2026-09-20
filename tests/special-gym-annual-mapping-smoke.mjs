@@ -16,6 +16,12 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
 assert.equal(M.mappedEntries.length,29);
+assert.equal(M.publishedPending.length,23);
+assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='biology'));
+assert.ok(M.publishedPending.some(x=>x.grade==='B'&&x.subjectId==='geography'));
+assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='history'));
+assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='music'&&x.sourceUrl.includes('minedu.gov.gr')));
+assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='art'&&x.sourceUrl.includes('minedu.gov.gr')));
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');

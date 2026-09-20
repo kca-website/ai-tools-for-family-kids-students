@@ -16,6 +16,7 @@
     ethics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%94%CE%B9%CE%B4%CE%B1%CF%83%CE%BA%CE%B1%CE%BB%CE%AF%CE%B1%CF%82_%CE%97%CE%B8%CE%B9%CE%BA%CE%AE%CF%82_%CE%93%CF%85%CE%BC%CE%BD%CE%B1%CF%83%CE%AF%CF%89%CE%BD_%CE%95%CE%91%CE%95_%CE%A0%CF%81%CF%8E%CF%84%CE%BF_%CE%9C%CE%AD%CF%81%CE%BF%CF%82.docx",
     history:"https://www.minedu.gov.gr/publications/docs2026/%CE%99%CE%A3%CE%A4%CE%9F%CE%A1%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._2026-2027.docx",
     informatics:"https://www.minedu.gov.gr/publications/docs2026/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95_26-27.docx",
+    culture:"https://www.minedu.gov.gr/publications/docs2026/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_EAE_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3_26-27.docx",
     technology:"https://www.minedu.gov.gr/publications/docs2026/%CE%A4%CE%95%CE%A7%CE%9D%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3_26-27_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95.docx",
     mathA:"https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_EAE_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
     mathB:"https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%92_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
@@ -46,6 +47,12 @@
     {grade:"A",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
     {grade:"B",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
     {grade:"C",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
+    {grade:"A",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
+    {grade:"B",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
+    {grade:"C",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
+    {grade:"A",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
+    {grade:"B",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
+    {grade:"C",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
     {grade:"A",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology},
     {grade:"B",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology},
     {grade:"C",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology}
@@ -774,7 +781,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.6.1",
+    version:"1.6.2",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),

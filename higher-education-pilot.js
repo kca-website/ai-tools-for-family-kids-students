@@ -13,6 +13,13 @@
   const coverage = $("heCoverage");
   const search = $("heSearch");
   const searchHint = $("heSearchHint");
+  const aiInput = $("heAiInput");
+  const aiStatus = $("heAiStatus");
+  const aiOutput = $("heAiOutput");
+  const aiGroq = $("heAiGroq");
+  const aiPuter = $("heAiPuter");
+  let aiAction = "explain";
+  let puterLoadPromise = null;
 
   const normalize = (value) => String(value || "")
     .normalize("NFD")
@@ -159,6 +166,167 @@
       ? `Το παλιό όνομα αντιστοιχίστηκε στη σημερινή οντότητα: ${first.institution.nameEl} · ${first.department.departmentEl}.`
       : `Βρέθηκε: ${first.institution.nameEl} · ${first.department.departmentEl}.`;
   }
+
+  const ACTIONS = {
+    explain: {
+      label: "Εξήγηση",
+      instruction: "Εξήγησε την έννοια καθαρά σε επίπεδο προπτυχιακού φοιτητή. Ξεκίνα από τη βασική ιδέα, χρησιμοποίησε ένα παράδειγμα και κλείσε με 2 ερωτήσεις αυτοελέγχου."
+    },
+    quiz: {
+      label: "Quiz",
+      instruction: "Δημιούργησε 8 ερωτήσεις εξάσκησης σχετικές με το μάθημα, με κλιμακούμενη δυσκολία. Βάλε τις απαντήσεις και σύντομη αιτιολόγηση στο τέλος, όχι αμέσως μετά από κάθε ερώτηση."
+    },
+    flashcards: {
+      label: "Flashcards",
+      instruction: "Δημιούργησε 12 σύντομες flashcards Ερώτηση → Απάντηση. Προτίμησε έννοιες και σχέσεις που αξίζει να ανακαλεί ο φοιτητής, όχι άσχετες λεπτομέρειες."
+    },
+    "study-plan": {
+      label: "Πλάνο μελέτης",
+      instruction: "Φτιάξε πρακτικό πλάνο μελέτης σε βήματα: τι να καταλάβω πρώτα, τι να εξασκήσω, πώς να αυτοελεγχθώ και τι να επαναλάβω. Μην υποθέτεις εξεταστέα ύλη που δεν παρέχεται."
+    },
+    paper: {
+      label: "Paper helper",
+      instruction: "Βοήθησε τον φοιτητή να διαβάσει το paper/abstract/σημειώσεις που επικόλλησε: σκοπός, βασική υπόθεση, μέθοδος, κύρια ευρήματα, περιορισμοί, άγνωστοι όροι και 5 ερωτήσεις κατανόησης. Αν δεν έχει επικολλήσει υλικό, ζήτησέ του να το προσθέσει αντί να επινοήσεις paper."
+    },
+    feedback: {
+      label: "Feedback στη δουλειά μου",
+      instruction: "Δώσε feedback μόνο πάνω στο κείμενο/κώδικα/λύση που έδωσε ο φοιτητής. Εντόπισε τι είναι σωστό, τι θέλει βελτίωση και δώσε συγκεκριμένες επόμενες κινήσεις. Μην ξαναγράψεις ολόκληρο παραδοτέο για υποβολή. Αν δεν έχει δώσει δική του προσπάθεια, ζήτησέ την."
+    },
+    research: {
+      label: "Έρευνα / πηγές",
+      instruction: "Βοήθησε να οργανωθεί στρατηγική έρευνας: βασικά ερευνητικά ερωτήματα, keywords στα ελληνικά και αγγλικά, τύποι αξιόπιστων πηγών και κριτήρια αξιολόγησης. Μην επινοήσεις βιβλιογραφικές αναφορές ή DOI. Αν δεν μπορείς να επαληθεύσεις συγκεκριμένη πηγή, πες το."
+    }
+  };
+
+  function universityContext() {
+    const institution = HE.institutions[institutionSelect.value];
+    const department = HE.departments[departmentSelect.value];
+    const course = currentCourse();
+    const task = HE.taskTypes[taskSelect.value];
+    return { institution, department, course, task };
+  }
+
+  function buildAiRequest() {
+    const { institution, department, course, task } = universityContext();
+    const extra = aiInput.value.trim();
+    const action = ACTIONS[aiAction] || ACTIONS.explain;
+    const sources = (department?.sources || []).join("\n");
+    const system = [
+      "Είσαι ο AI Βοηθός Φοιτητή του AITOOLS4KIDS.",
+      "Στόχος σου είναι να βοηθάς τον φοιτητή να κατανοεί, να ερευνά, να εξασκείται και να βελτιώνει τη δική του δουλειά.",
+      "Δεν γράφεις ολοκληρωμένη εργασία, report, essay, lab report ή άλλο παραδοτέο για υποβολή αντί για τον φοιτητή.",
+      "Μπορείς να δώσεις outline, ερευνητικά ερωτήματα, μικρά παραδείγματα, feedback, hints, quiz, flashcards και πλάνο μελέτης.",
+      "Μην επινοείς πηγές, DOI, αποτελέσματα μελετών ή στοιχεία του προγράμματος σπουδών.",
+      "Τα παρακάτω στοιχεία μαθήματος είναι context του pilot και όχι απόδειξη πλήρους εξεταστέας ύλης.",
+      "Αν λείπει πληροφορία, δήλωσέ το καθαρά.",
+      "Απάντησε στα ελληνικά εκτός αν ο φοιτητής ζητήσει άλλη γλώσσα."
+    ].join("\n");
+    const prompt = [
+      `Ίδρυμα: ${institution?.nameEl || ""}`,
+      `Τμήμα: ${department?.departmentEl || ""}`,
+      `Μάθημα: ${course?.code ? course.code + " · " : ""}${course?.titleEl || ""}`,
+      `Στόχος που επέλεξε: ${task?.labelEl || ""}`,
+      `Ενέργεια: ${action.label}`,
+      `Coverage status: ${department?.coverageStatus || ""}`,
+      `Επίσημες πηγές τμήματος που έχουμε καταχωρίσει:\n${sources || "Καμία"}`,
+      "",
+      `Οδηγία: ${action.instruction}`,
+      extra ? `\nΠρόσθετο υλικό/ερώτημα του φοιτητή:\n${extra}` : ""
+    ].filter(Boolean).join("\n");
+    return { system, prompt };
+  }
+
+  function setAiBusy(busy, message) {
+    aiGroq.disabled = busy;
+    aiPuter.disabled = busy;
+    aiStatus.textContent = message || "";
+  }
+
+  function showAiOutput(text, provider) {
+    aiOutput.textContent = String(text || "").trim();
+    aiOutput.classList.add("visible");
+    aiStatus.textContent = `Έτοιμο · ${provider}`;
+    aiOutput.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  async function generateInlineGroq() {
+    setAiBusy(true, "Δημιουργία…");
+    try {
+      const payload = buildAiRequest();
+      const response = await fetch("/api/teacher-assistant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || "Αποτυχία δημιουργίας");
+      if (!data.text) throw new Error("Δεν επέστρεψε κείμενο.");
+      showAiOutput(data.text, `GPT-OSS 120B${data.model ? " · " + data.model : ""}`);
+    } catch (error) {
+      aiStatus.textContent = "Δεν ολοκληρώθηκε: " + (error?.message || error);
+    } finally {
+      aiGroq.disabled = false;
+      aiPuter.disabled = false;
+    }
+  }
+
+  function ensurePuter() {
+    if (window.puter) return Promise.resolve(window.puter);
+    if (puterLoadPromise) return puterLoadPromise;
+    puterLoadPromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://js.puter.com/v2/";
+      script.async = true;
+      script.onload = () => resolve(window.puter);
+      script.onerror = () => reject(new Error("Δεν φορτώθηκε το Puter."));
+      document.head.appendChild(script);
+    });
+    return puterLoadPromise;
+  }
+
+  async function generateInlinePuter() {
+    setAiBusy(true, "Φόρτωση Puter…");
+    try {
+      const puter = await ensurePuter();
+      const payload = buildAiRequest();
+      const response = await puter.ai.chat(
+        [{ role: "system", content: payload.system }, { role: "user", content: payload.prompt }],
+        { model: "gpt-5.6-luna", provider: "openai", max_tokens: 1200 }
+      );
+      const text = typeof response === "string"
+        ? response
+        : (response?.message?.content || response?.text || "");
+      if (!text) throw new Error("Δεν επέστρεψε κείμενο.");
+      showAiOutput(text, "Puter");
+    } catch (error) {
+      aiStatus.textContent = "Το Puter δεν ολοκλήρωσε: " + (error?.message || error);
+    } finally {
+      aiGroq.disabled = false;
+      aiPuter.disabled = false;
+    }
+  }
+
+  document.getElementById("heAiActions")?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-he-action]");
+    if (!button) return;
+    aiAction = button.dataset.heAction;
+    document.querySelectorAll("[data-he-action]").forEach((item) => {
+      item.setAttribute("aria-pressed", String(item === button));
+    });
+    const placeholders = {
+      paper: "Επικόλλησε abstract, απόσπασμα ή σημειώσεις από το paper.",
+      feedback: "Επικόλλησε τη δική σου παράγραφο, λύση, κώδικα ή draft για feedback.",
+      research: "Γράψε το ερευνητικό θέμα ή το ερώτημα που θέλεις να διερευνήσεις.",
+      explain: "Ποιο ακριβώς σημείο δεν καταλαβαίνεις;",
+      quiz: "Προαιρετικά γράψε ποια ενότητα θέλεις να εξασκήσεις.",
+      flashcards: "Προαιρετικά γράψε την ενότητα ή τις σημειώσεις σου.",
+      "study-plan": "Προαιρετικά γράψε πόσο χρόνο έχεις και ποια σημεία σε δυσκολεύουν."
+    };
+    aiInput.placeholder = placeholders[aiAction] || "";
+  });
+
+  aiGroq.addEventListener("click", generateInlineGroq);
+  aiPuter.addEventListener("click", generateInlinePuter);
 
   institutionSelect.addEventListener("change", populateDepartments);
   departmentSelect.addEventListener("change", populateCourses);

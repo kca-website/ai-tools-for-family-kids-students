@@ -101,6 +101,9 @@
     specialRuntimePromise=(async()=>{
       for(const [id,src] of SPECIAL_SCRIPTS) await appendScript(id,src);
       if(!specialRuntimeReady()) throw new Error("Special Education catalog did not initialize.");
+      // The shared action adapter loads before this lazy catalog. Apply it now so
+      // the first Special Education render already contains all support actions.
+      window.AITOOLSKIDS_SPECIAL_TUTOR_ACTIONS?.apply?.();
       return window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG;
     })().catch((err)=>{
       specialRuntimePromise=null;

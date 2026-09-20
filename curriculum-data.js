@@ -31,7 +31,7 @@ const CURRICULUM = {
     math: {toolIds: ["ai-help", "wolfram-alpha", "gemini-education", "copilot", "chatgpt"],noteEl: "Βήμα-βήμα επίλυση και επαλήθευση ασκήσεων Μαθηματικών.",noteEn: "Step-by-step solving and verification of math exercises."},
     science: {toolIds: ["phet", "ai-help", "wolfram-alpha", "gemini-education", "copilot", "chatgpt"],noteEl: "Εξήγηση εννοιών Φυσικής/Χημείας και υπολογισμοί.",noteEn: "Physics/Chemistry concept explanations and calculations."},
     history: {toolIds: ["google-arts-culture", "ai-help", "perplexity", "gemini-education", "copilot", "chatgpt"],noteEl: "Οργάνωση σημείων για παρουσίαση, και έλεγχος γεγονότων με πηγές πριν τα εμπιστευτείς.",noteEn: "Organizing points for a presentation, and checking facts against sources before trusting them."},
-    "foreign-language": {toolIds: ["ai-help", "gemini", "erla", "gemini-education", "copilot", "chatgpt"],noteEl: "Βοήθεια σε ξένη γλώσσα μέσα από σχολικό λογαριασμό, γενικό chatbot AI, ή εξάσκηση ακρόασης/ομιλίας με το Erla.",noteEn: "Foreign language help through a school account, a general AI chatbot, or listening/speaking practice with Erla."},
+    "foreign-language": {toolIds: ["ai-help", "gemini", "gemini-education", "copilot", "chatgpt"],noteEl: "Βοήθεια σε ξένη γλώσσα μέσα από σχολικό λογαριασμό, γενικό chatbot AI, ή εξάσκηση ακρόασης/ομιλίας με το Erla.",noteEn: "Foreign language help through a school account, a general AI chatbot, or listening/speaking practice with Erla."},
   },
   high: {
     language: {toolIds: ["ai-help", "gemini-education", "copilot", "chatgpt"],noteEl: "Ανάπτυξη και έλεγχος επιχειρημάτων για έκθεση, προετοιμασία Πανελληνίων.",noteEn: "Developing and stress-testing essay arguments, Panhellenic exam prep."},

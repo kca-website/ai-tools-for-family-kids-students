@@ -256,7 +256,7 @@
       const response = await fetch("/api/teacher-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ ...payload, audience: "university_student" })
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || "Αποτυχία δημιουργίας");

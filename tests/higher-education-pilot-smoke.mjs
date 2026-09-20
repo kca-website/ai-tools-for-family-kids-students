@@ -54,8 +54,10 @@ try {
   assert.equal(await page.locator('#heInstitution').inputValue(), 'uniwa');
   assert.equal(await page.locator('#heDepartment').inputValue(), 'uniwa-ice');
 
-  const policyText = await page.locator('.he-warning').innerText();
-  assert.match(policyText, /Δεν προορίζεται για έτοιμη εργασία προς υποβολή/i);
+  const warnings = page.locator('.he-warning');
+  assert.equal(await warnings.count(), 2, 'expected general and inline-AI guardrails');
+  assert.match(await warnings.nth(0).innerText(), /Δεν προορίζεται για έτοιμη εργασία προς υποβολή/i);
+  assert.match(await warnings.nth(1).innerText(), /Όχι έτοιμη εργασία/i);
 
   await page.locator('#heSearch').fill('Βιολογία Πατρών');
   await page.waitForTimeout(80);

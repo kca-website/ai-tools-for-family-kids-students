@@ -154,3 +154,9 @@ No new file may independently reassign `window.AITutor.render`. Any future tutor
 
 ## Status update — 2026-09-09
 The original branch-status section above is now historical. The transitional lifecycle architecture (`tutor-render-host.js` plus event-based extensions) is already present on `main`. Do **not** merge the old consolidation branch wholesale. Any remaining consolidation must start from current `main`, preserve the existing smoke coverage, and move lifecycle ownership into canonical `tutor.js` in a separate behavior-preserving refactor.
+
+
+## Hardening update — 2026-09-20
+- `tutor-extensions.css` was removed from the repository because it was not loaded by the application and had no runtime references.
+- The active tutor extensions continue to inject their existing styles, so this removal is behavior-preserving.
+- Any future stylesheet consolidation should move styles directly into the canonical loaded stylesheet path instead of keeping an unused staging CSS file.

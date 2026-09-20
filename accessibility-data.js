@@ -19,6 +19,30 @@
  */
 
 const ACCESSIBILITY_INFO = {
+  "ai-help": {
+    status: "partial",
+    noteEl: "Εσωτερικό εργαλείο του aitools4kids.gr. Οι αυτοματοποιημένοι έλεγχοι axe-core/Playwright στις βασικές ροές δεν εντόπισαν παραβιάσεις στις καταστάσεις που ελέγχθηκαν, αλλά δεν υπάρχει ανεξάρτητη πλήρης χειροκίνητη αξιολόγηση ή VPAT/ACR.",
+    noteEn: "Internal aitools4kids.gr tool. Automated axe-core/Playwright checks found no violations in the tested core flows, but there is no independent full manual audit or VPAT/ACR.",
+    sourceUrl: "/accessibility.html",
+  },
+  "phet": {
+    status: "good",
+    noteEl: "Επίσημη δήλωση προσβασιμότητας του PhET: στόχος WCAG 2.1 AA, εναλλακτική είσοδος, keyboard navigation, screen-reader descriptions/voicing σε επιλεγμένες προσομοιώσεις και ACR διαθέσιμο κατόπιν αιτήματος. Δεν έχουν όλες οι παλιότερες προσομοιώσεις το πλήρες σύνολο λειτουργιών.",
+    noteEn: "Official PhET accessibility statement: WCAG 2.1 AA target, alternative input, keyboard navigation, screen-reader descriptions/voicing in selected simulations, and an ACR available on request. Not all older simulations include the full feature set.",
+    sourceUrl: "https://phet.colorado.edu/en/inclusive-design/accessibility-statement",
+  },
+  "google-arts-culture": {
+    status: "none",
+    noteEl: "Δεν εντοπίστηκε ειδική, επαρκής επίσημη δήλωση προσβασιμότητας για την εμπειρία Google Arts & Culture που να επιτρέπει συγκεκριμένο χαρακτηρισμό. Αυτό δεν σημαίνει ότι η υπηρεσία είναι μη προσβάσιμη.",
+    noteEn: "No specific, sufficient official accessibility statement was located for the Google Arts & Culture experience that would support a stronger classification. This does not mean the service is inaccessible.",
+    sourceUrl: null,
+  },
+  "gemini-education": {
+    status: "partial",
+    noteEl: "Σχολική διαδρομή του Gemini μέσω Google Workspace for Education. Κληρονομεί το ίδιο γενικό οικοσύστημα προσβασιμότητας της Google/Gemini, αλλά δεν εντοπίστηκε ξεχωριστό ACR/VPAT ειδικά για το Gemini for Education.",
+    noteEn: "School-managed Gemini route through Google Workspace for Education. It inherits the broader Google/Gemini accessibility ecosystem, but no separate ACR/VPAT specific to Gemini for Education was located.",
+    sourceUrl: "https://support.google.com/gemini/answer/14620100?co=DASHER._Family%3DEducation&hl=en",
+  },
   "desmos": {
     status: "good",
     noteEl: "Επίσημο Accessibility Conformance Report. Audio trace σε γραφήματα, screen-reader συμβατός equation editor, υποστήριξη Braille. Περιορισμός: πολικά γραφήματα δεν καλύπτονται.",
@@ -54,12 +78,6 @@ const ACCESSIBILITY_INFO = {
     noteEl: "Επίσημη δήλωση, tested με NVDA/JAWS/VoiceOver. Σημείωση: υπήρξε αγωγή ADA το 2021 για μη συμμόρφωση.",
     noteEn: "Official statement, tested with NVDA/JAWS/VoiceOver. Note: faced an ADA lawsuit in 2021 over non-compliance.",
     sourceUrl: "https://www.grammarly.com/accessibility-statement",
-  },
-  "khanmigo": {
-    status: "good",
-    noteEl: "Επίσημη δήλωση, ρυθμίσεις προσβασιμότητας, σύσταση NVDA+Chrome, ενσωματωμένο read-aloud, VPAT κατόπιν αιτήματος.",
-    noteEn: "Official statement, accessibility settings, recommended NVDA+Chrome, built-in read-aloud, VPAT on request.",
-    sourceUrl: "https://support.khanacademy.org/hc/en-us/articles/360015623271-Khan-Academy-s-accessibility-settings",
   },
   "khan-academy-kids": {
     status: "good",

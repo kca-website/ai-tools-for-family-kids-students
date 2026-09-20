@@ -40,6 +40,10 @@ async function check(viewport,label){
   assert(await page.locator('#spSpecialGymProfile .sp-subject-card').count()===18,`${label}: Special Gymnasium A should show 18 subjects`);
   const firstAiHref=await page.locator('#spSpecialGymProfile .sp-action--ai').first().getAttribute('href');
   assert(firstAiHref?.includes('schoolTrack=special-gymnasium')&&firstAiHref.includes('grade=a'),`${label}: Special Gymnasium AI link missing context`);
+  const bioACard=page.locator('#spSpecialGymProfile [data-sg-subject="biology"]');
+  assert((await bioACard.innerText()).includes('14 επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27'),`${label}: A Biology mapped-section status missing`);
+  const bioAAi=await bioACard.locator('.sp-action--ai').getAttribute('href');
+  assert(bioAAi?.includes('subject=special-gym-a-biology'),`${label}: A Biology AI deep link must target mapped annual subject`);
 
   await page.locator('[data-open-sg-unit="special-gym-a-language-comprehension"][data-focus="quiz"]').click();
   await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({state:'visible'});
@@ -52,6 +56,9 @@ async function check(viewport,label){
   ]){
     await page.locator(`[data-sg-grade="${grade.id}"]`).click();
     assert((await page.locator('#spSpecialGymProfile').innerText()).includes(grade.labelEl),`${label}: Special Gymnasium ${grade.id.toUpperCase()} selection failed`);
+    const bioCard=page.locator('#spSpecialGymProfile [data-sg-subject="biology"]');
+    const expectedBioCount=grade.id==='b'?14:12;
+    assert((await bioCard.innerText()).includes(`${expectedBioCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27`),`${label}: Special Gym ${grade.id.toUpperCase()} Biology mapped count missing`);
     assert(await page.locator(`#spSpecialGymProfile [data-open-sg-unit^="special-gym-${grade.id}-"][data-focus="quiz"]`).count()===2,`${label}: Special Gymnasium ${grade.id.toUpperCase()} must expose Language + Math micro quizzes`);
     await page.locator(`[data-open-sg-unit="${grade.language}"][data-focus="quiz"]`).click();
     await page.locator('#spSpecialGymUnitMount .sp-unit').waitFor({state:'visible'});

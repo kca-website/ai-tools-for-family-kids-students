@@ -103,6 +103,17 @@
     }).join("")}</div>`;
   }
 
+  function annualSpecialGymEntry(gradeId,subjectId){
+    return Object.values(C?.entries||{}).find((entry)=>
+      entry?.schoolType==="special-gymnasium" &&
+      String(entry?.grade||"").toLowerCase()===String(gradeId||"").toLowerCase() &&
+      entry?.subjectId===subjectId &&
+      entry?.annualInstructionsStatus==="2026-27-verified" &&
+      Array.isArray(entry?.officialAnchors) &&
+      entry.officialAnchors.length>0
+    )||null;
+  }
+
   function renderSpecialGymProfile(){
     if(!sgProfile||!SG?.grades) return;
     const grades=Object.entries(SG.grades).map(([id,g])=>({id,label:g.label}));
@@ -113,16 +124,24 @@
       const detailedId=SG_DETAILED[`${selectedSpecialGymGrade}|${row.id}`]||null;
       const subjectId=detailedId||`special-gym-${selectedSpecialGymGrade}-${row.id}`;
       const hasLearning=!!(detailedId&&L?.[detailedId]?.status==="ready");
+      const annual=annualSpecialGymEntry(selectedSpecialGymGrade,row.id);
+      const mappedCount=annual?.officialAnchors?.length||0;
       const helper=hasLearning
         ? "Έχει έτοιμη βήμα-βήμα μελέτη και μικρό τεστ."
-        : "Άνοιξε την AI Βοήθεια και γράψε το συγκεκριμένο κεφάλαιο, κείμενο ή άσκηση.";
-      return `<article class="sp-subject-card">
-        <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade.label)}</span><h3>${esc(row.label)}</h3></div>${hasLearning?'<span class="sp-ready-pill">Μελέτη + τεστ</span>':""}</div>
+        : mappedCount
+          ? `${mappedCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27 στην AI Βοήθεια.`
+          : "Άνοιξε την AI Βοήθεια και γράψε το συγκεκριμένο κεφάλαιο, κείμενο ή άσκηση.";
+      const badge=hasLearning
+        ? '<span class="sp-ready-pill">Μελέτη + τεστ</span>'
+        : mappedCount
+          ? '<span class="sp-ready-pill">Ύλη 2026–27</span>'
+          : "";
+      return `<article class="sp-subject-card" data-sg-subject="${esc(row.id)}">
+        <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade.label)}</span><h3>${esc(row.label)}</h3></div>${badge}</div>
         <p>${esc(helper)}</p>
-        ${subjectActions({schoolType:"special-gymnasium",gradeId:selectedSpecialGymGrade,subjectId,learningId:detailedId,sourceUrl:SG.timetableSourceUrl,target:"sg"})}
+        ${subjectActions({schoolType:"special-gymnasium",gradeId:selectedSpecialGymGrade,subjectId,learningId:detailedId,sourceUrl:annual?.sourceUrl||SG.timetableSourceUrl,target:"sg"})}
       </article>`;
     }).join("");
-
     sgProfile.innerHTML=`
       <div class="sp-choice-block"><h3>2. Διάλεξε τάξη</h3>${gradeTabs(grades,selectedSpecialGymGrade,"data-sg-grade")}</div>
       <div class="sp-choice-block"><h3>3. Διάλεξε μάθημα</h3><div class="sp-subject-grid">${cards}</div></div>`;

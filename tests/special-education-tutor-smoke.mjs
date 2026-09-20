@@ -96,6 +96,28 @@ async function checkUnified(page,label){
   await selectOption(page,'#tutorGrade','a');
   const sgSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
   assert.ok(sgSubjects.includes('special-gym-a-language-comprehension')&&sgSubjects.includes('special-gym-a-math-problem-reading'),`${label}: Special Gymnasium detailed subjects missing`);
+  assert.ok(sgSubjects.includes('special-gym-a-biology'),`${label}: Special Gymnasium A Biology annual mapping missing from subject menu`);
+  await selectOption(page,'#tutorSubject','special-gym-a-biology');
+  const bioATopics=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>e.textContent.trim()));
+  assert.equal(bioATopics.length,14,`${label}: A Biology should expose 12 core + 2 optional mapped sections`);
+  assert.ok(bioATopics.includes('1.1 Τα χαρακτηριστικά των οργανισμών'),`${label}: A Biology 1.1 missing`);
+  assert.ok(bioATopics.some(x=>x.startsWith('Προαιρετικό — 1.4 Αλληλεπιδράσεις και προσαρμογές')),`${label}: A Biology optional 1.4 status missing`);
+
+  await selectOption(page,'#tutorGrade','b');
+  await selectOption(page,'#tutorSubject','special-gym-b-biology');
+  const bioBTopics=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>e.textContent.trim()));
+  assert.equal(bioBTopics.length,14,`${label}: B Biology should expose 13 core + 1 optional mapped sections`);
+  assert.ok(bioBTopics.includes('Βιολογία Α΄ — 6.4 Η αναπαραγωγή στον άνθρωπο'),`${label}: B Biology reproduction mapping missing`);
+  assert.ok(bioBTopics.some(x=>x.startsWith('Προαιρετικό — Βιολογία Β΄-Γ΄ — 1.2 Κύτταρο')),`${label}: B Biology optional cell unit missing`);
+
+  await selectOption(page,'#tutorGrade','c');
+  await selectOption(page,'#tutorSubject','special-gym-c-biology');
+  const bioCTopics=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>e.textContent.trim()));
+  assert.equal(bioCTopics.length,12,`${label}: C Biology should expose 12 mapped sections`);
+  assert.ok(bioCTopics.includes('5.5 Κληρονομικότητα'),`${label}: C Biology inheritance mapping missing`);
+  assert.ok(bioCTopics.includes('7.2 Η εξέλιξη του ανθρώπου'),`${label}: C Biology human evolution mapping missing`);
+
+  await selectOption(page,'#tutorGrade','a');
   assert.equal(await page.evaluate(()=>window.AITutor.getProvider()),'groq',`${label}: GPT-OSS/Groq should be the default provider`);
   await page.locator('#tutorMount [data-special-simple-quiz="1"]').click();
   await page.waitForSelector('#tutorMount .tutor-study-tools__result[data-type="quiz-special-simple"]',{timeout:10000});
@@ -167,13 +189,17 @@ async function checkUnified(page,label){
     lyceum:!!window.SPECIAL_LYCEUM_2026_2027,
     eneegylStructure:!!window.ENEEGYL_2026_2027_STRUCTURE,
     simpleQuiz:!!window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ,
-    runtimeScripts:[...document.scripts].filter(s=>s.dataset.specialEducationRuntime).length
+    runtimeScripts:[...document.scripts].filter(s=>s.dataset.specialEducationRuntime).length,
+    annualMapLoaded:[...document.scripts].some(s=>/teacher-curriculum-special-gym-annual-2026-2027\.js/.test(s.src)),
+    annualMapVersion:window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027?.version||''
   }));
   assert.equal(lazyState.catalog,true,`${label}: special catalog missing after selection`);
   assert.equal(lazyState.lyceum,true,`${label}: Special Lyceum metadata was not lazy-loaded`);
   assert.equal(lazyState.eneegylStructure,true,`${label}: ENEEGYL structure missing after Special Education selection`);
   assert.equal(lazyState.simpleQuiz,true,`${label}: simplified Special Education quiz adapter missing`);
-  assert.ok(lazyState.runtimeScripts>=8,`${label}: expected lazy Special Education runtime scripts`);
+  assert.ok(lazyState.runtimeScripts>=9,`${label}: expected lazy Special Education runtime scripts including annual mapping`);
+  assert.equal(lazyState.annualMapLoaded,true,`${label}: annual Special Gymnasium map was not lazy-loaded`);
+  assert.equal(lazyState.annualMapVersion,'1.13.0',`${label}: wrong annual Special Gymnasium mapping version`);
 }
 
 try{

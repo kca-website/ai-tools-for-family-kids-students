@@ -135,13 +135,74 @@
     });
   });
 
-  // Special Gymnasium: official grade/subject structure plus two detailed A routes.
+  // Special Gymnasium: prefer exact annual 2026-27 mappings; generic fallback only where no exact map exists.
+  function annualSpecialGymEntry(gradeId,subjectId){
+    return Object.values(C.entries||{}).find((entry)=>
+      entry?.schoolType==="special-gymnasium" &&
+      String(entry?.grade||"").toLowerCase()===String(gradeId||"").toLowerCase() &&
+      entry?.subjectId===subjectId &&
+      entry?.annualInstructionsStatus==="2026-27-verified" &&
+      Array.isArray(entry?.officialAnchors) && entry.officialAnchors.length>0
+    )||null;
+  }
+
+  function makeAnnualSpecialGymSubject(entry,row,gradeId){
+    const id=`special-gym-${gradeId}-${row.id}`;
+    const topics=(entry.officialAnchors||[]).map((label,index)=>({
+      id:`${id}.topic-${index+1}`,
+      labelEl:String(label),labelEn:String(label),
+      explainEl:String(label),explainEn:String(label),
+      specialEducation:true,schoolType:"special-gymnasium",annualInstructionsStatus:"2026-27-verified"
+    }));
+    return {
+      id,quizId:null,grade:gradeId,
+      subjectLabelEl:`Ειδικό Γυμνάσιο · ${row.label}`,
+      subjectLabelEn:`Special Gymnasium · ${row.label}`,
+      topics,
+      curriculum:{
+        schoolYear:SG.schoolYear,verificationDate:entry.verificationDate||SG.verificationDate,
+        verificationBasis:entry.verificationBasis||"annual-eae-instructions-2026-27",
+        coverageStatus:"annual-instructions-verified",
+        coverageLabelEl:"Ειδικό Γυμνάσιο · επίσημη χαρτογράφηση ύλης 2026–27",
+        coverageLabelEn:"Special Gymnasium · verified 2026–27 annual mapping",
+        officialSectionsEl:[...(entry.officialAnchors||[])],officialSectionsEn:[],
+        scopeNoteEl:entry.verificationNote||"Χρησιμοποίησε μόνο τις επαληθευμένες φετινές ενότητες.",
+        scopeNoteEn:"Use only the verified 2026-27 E.A.E. sections.",
+        annualInstructionsStatus:"2026-27-verified",
+        annualInstructionsUrl:entry.sourceUrl||entry.instructionSourceUrl||"",
+        teachingInstructionsStatus:"2026-27-verified",
+        teachingInstructionsUrl:entry.instructionSourceUrl||entry.sourceUrl||"",
+        officialTimetableStatus:"2026-27-verified",adaptationResourceStatus:"available",
+        adaptationSourceUrl:SG.adaptationResources?.hub||"",catalogUrl:entry.sourceUrl||SG.timetableSourceUrl,
+        sourceLabelEl:entry.sourceTitle||"Επίσημες οδηγίες Γυμνασίου Ε.Α.Ε. 2026–27",
+        sourceLabelEn:"Official E.A.E. 2026–27 guidance",
+        specialEducation:true,schoolType:"special-gymnasium",structureOnly:false
+      },
+      specialEducation:true,schoolType:"special-gymnasium",schoolTrack:"special-gymnasium",
+      structureOnly:false,annualMapped:true,sourceCurriculumId:entry.id
+    };
+  }
+
   if(SG?.status==="verified-structure"&&SG.grades){
-    const pilotByKey={"a|language":"special-gym-a-language-comprehension","a|math":"special-gym-a-math-problem-reading"};
+    const pilotByKey={
+      "a|language":"special-gym-a-language-comprehension","a|math":"special-gym-a-math-problem-reading",
+      "b|language":"special-gym-b-language-comprehension","b|math":"special-gym-b-math-problem-reading",
+      "c|language":"special-gym-c-language-comprehension","c|math":"special-gym-c-math-problem-reading"
+    };
     Object.entries(SG.grades).forEach(([gradeId,grade])=>{
       (grade.subjects||[]).forEach((row)=>{
         const pilotId=pilotByKey[`${gradeId}|${row.id}`];
         if(pilotId&&exposed.some((x)=>x.id===pilotId)) return;
+
+        const annualEntry=annualSpecialGymEntry(gradeId,row.id);
+        if(annualEntry){
+          registerSubject("middle",gradeId,makeAnnualSpecialGymSubject(annualEntry,row,gradeId),{
+            gradeLabel:grade.label,detailedLearning:false,structureOnly:false,annualMapped:true,
+            subjectKey:row.id,sourceCurriculumId:annualEntry.id
+          });
+          return;
+        }
+
         const id=`special-gym-${gradeId}-${row.id}`;
         const topicEl=SG.tutorPolicy?.genericTopicEl||"Δούλεψε πάνω στο συγκεκριμένο θέμα ή την άσκηση που έχεις μπροστά σου";
         const topicEn=SG.tutorPolicy?.genericTopicEn||"Work on the exact topic or exercise you have";
@@ -168,7 +229,7 @@
     });
   }
 
-  // Special Lyceum: one unified AI Help menu. We mirror the already available
+  // Special Lyceum:  // Special Lyceum: one unified AI Help menu. We mirror the already available
   // Lyceum subject catalog for navigation only; this is NOT a claim that every
   // mirrored subject has a separately verified E.A.E. syllabus mapping.
   if(SL?.status==="verified-structure"&&SL.grades){

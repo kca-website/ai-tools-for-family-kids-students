@@ -23,6 +23,18 @@
     .he-tool h3{margin:0 0 6px;font-size:1rem}
     .he-tool p{margin:0 0 10px;font-size:.9rem;line-height:1.45}
     .he-tool a{font-weight:800}
+    .he-tool-why{padding:8px 10px;border-radius:9px;background:#f7fafc}
+    .he-tool-badges{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px}
+    .he-tool-badge{font-size:.72rem;font-weight:800;padding:3px 7px;border-radius:999px;background:#eef2f7;color:#415164}
+    .he-tools-details{padding:0}
+    .he-tools-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;cursor:pointer;list-style:none}
+    .he-tools-details>summary::-webkit-details-marker{display:none}
+    .he-tools-summary-copy{display:grid;gap:3px;min-width:0}
+    .he-tools-summary-copy strong{font-size:1.15rem}
+    .he-tools-summary-copy small{font-size:.8rem;font-weight:500;color:#64748b;line-height:1.35}
+    .he-tools-arrow{flex:0 0 auto;font-size:.8rem;color:#64748b;transition:transform .18s ease}
+    .he-tools-details[open] .he-tools-arrow{transform:rotate(180deg)}
+    .he-tools-body{padding:0 18px 18px;border-top:1px solid #e5eaf0}
     .he-meta{font-size:.82rem;color:#5f6c7b}
     .he-empty{color:#5f6c7b;font-style:italic}
     .he-legacy{margin-top:10px;font-size:.86rem;color:#5f6c7b}
@@ -160,9 +172,19 @@
       </div>
     </section>
 
-    <section class="he-card" aria-labelledby="resultTitle">
-      <h2 id="resultTitle">Προτεινόμενα εργαλεία</h2>
-      <div id="heResult" aria-live="polite"></div>
+    <section class="he-card he-tools-details">
+      <details id="heToolsDetails">
+        <summary>
+          <span class="he-tools-summary-copy">
+            <strong>Προτεινόμενα εργαλεία</strong>
+            <small id="heToolsSummary">Εξειδικευμένες προτάσεις για το επιλεγμένο μάθημα</small>
+          </span>
+          <span class="he-tools-arrow" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="he-tools-body">
+          <div id="heResult" aria-live="polite"></div>
+        </div>
+      </details>
     </section>
 
     <section class="he-card">

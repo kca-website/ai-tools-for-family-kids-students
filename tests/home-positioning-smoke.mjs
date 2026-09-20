@@ -30,6 +30,10 @@ try {
 
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#homeV8Shell', { timeout: 10000 });
+  await page.waitForSelector('#homeHigherEducationPilot', { state: 'visible', timeout: 10000 });
+  assert.equal(await page.locator('#homeHigherEducationPilot').getAttribute('href'), '/higher-education-pilot.html');
+  assert.match(await page.locator('#homeHigherEducationPilot').innerText(), /Φοιτητές ΑΕΙ|University students/i);
+
   await page.waitForSelector('#specialSchoolZoneCard', { timeout: 10000 });
   await page.waitForSelector('#homeV8Needs', { timeout: 10000 });
   await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));

@@ -50,10 +50,13 @@ try{
     sgBio.on('console',(msg)=>{if(msg.type()==='error') sgBioErrors.push(msg.text());});
     await openDeepLink(sgBio,{startZone:'middle',expectedZone:'middle',role:'guardian',track:'special-gymnasium',grade:'b',subject:'special-gym-b-biology'});
     assert.equal(await sgBio.inputValue('#tutorSubject'),'special-gym-b-biology',`${label}: Special Gymnasium B Biology deep link failed`);
-    const sgBioTopics=await sgBio.locator('#tutorTopic option').allTextContents();
-    assert.equal(sgBioTopics.length,14,`${label}: Biology deep link did not expose mapped B E.A.E. sections`);
-    assert.ok(sgBioTopics.some(x=>x.includes('6.4 Η αναπαραγωγή στον άνθρωπο')),`${label}: Biology deep link lost official section mapping`);
-    assert.ok(!sgBioTopics.some(x=>/γράψε.*κεφάλαιο|συγκεκριμένο θέμα/i.test(x)),`${label}: Biology still fell back to generic unmapped topic`);
+    const sgBioOptions=await sgBio.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})));
+    const sgBioSections=sgBioOptions.filter(x=>!x.value.includes('.action-'));
+    const sgBioActions=sgBioOptions.filter(x=>x.value.includes('.action-'));
+    assert.equal(sgBioSections.length,14,`${label}: Biology deep link did not expose all 14 mapped B E.A.E. sections`);
+    assert.equal(sgBioActions.length,7,`${label}: Biology deep link lost the Special Education support actions`);
+    assert.ok(sgBioSections.some(x=>x.text.includes('6.4 Η αναπαραγωγή στον άνθρωπο')),`${label}: Biology deep link lost official section mapping`);
+    assert.ok(!sgBioSections.some(x=>/γράψε.*κεφάλαιο|συγκεκριμένο θέμα/i.test(x.text)),`${label}: Biology curriculum still fell back to generic unmapped topic`);
     assert.deepEqual(sgBioErrors,[],`${label}: Special Gymnasium Biology deep-link errors: ${sgBioErrors.join('\n')}`);
     await sgBio.close();
 

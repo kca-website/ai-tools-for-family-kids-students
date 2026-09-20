@@ -98,24 +98,33 @@ async function checkUnified(page,label){
   assert.ok(sgSubjects.includes('special-gym-a-language-comprehension')&&sgSubjects.includes('special-gym-a-math-problem-reading'),`${label}: Special Gymnasium detailed subjects missing`);
   assert.ok(sgSubjects.includes('special-gym-a-biology'),`${label}: Special Gymnasium A Biology annual mapping missing from subject menu`);
   await selectOption(page,'#tutorSubject','special-gym-a-biology');
-  const bioATopics=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>e.textContent.trim()));
-  assert.equal(bioATopics.length,14,`${label}: A Biology should expose 12 core + 2 optional mapped sections`);
-  assert.ok(bioATopics.includes('1.1 Τα χαρακτηριστικά των οργανισμών'),`${label}: A Biology 1.1 missing`);
-  assert.ok(bioATopics.some(x=>x.startsWith('Προαιρετικό — 1.4 Αλληλεπιδράσεις και προσαρμογές')),`${label}: A Biology optional 1.4 status missing`);
+  const bioAOptions=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})));
+  const bioASections=bioAOptions.filter(x=>!x.value.includes('.action-'));
+  const bioAActions=bioAOptions.filter(x=>x.value.includes('.action-'));
+  assert.equal(bioASections.length,14,`${label}: A Biology should expose exactly 12 core + 2 optional mapped sections`);
+  assert.equal(bioAActions.length,7,`${label}: A Biology should retain the 7 Special Education support actions separately from curriculum sections`);
+  assert.ok(bioASections.some(x=>x.text==='1.1 Τα χαρακτηριστικά των οργανισμών'),`${label}: A Biology 1.1 missing`);
+  assert.ok(bioASections.some(x=>x.text.startsWith('Προαιρετικό — 1.4 Αλληλεπιδράσεις και προσαρμογές')),`${label}: A Biology optional 1.4 status missing`);
 
   await selectOption(page,'#tutorGrade','b');
   await selectOption(page,'#tutorSubject','special-gym-b-biology');
-  const bioBTopics=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>e.textContent.trim()));
-  assert.equal(bioBTopics.length,14,`${label}: B Biology should expose 13 core + 1 optional mapped sections`);
-  assert.ok(bioBTopics.includes('Βιολογία Α΄ — 6.4 Η αναπαραγωγή στον άνθρωπο'),`${label}: B Biology reproduction mapping missing`);
-  assert.ok(bioBTopics.some(x=>x.startsWith('Προαιρετικό — Βιολογία Β΄-Γ΄ — 1.2 Κύτταρο')),`${label}: B Biology optional cell unit missing`);
+  const bioBOptions=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})));
+  const bioBSections=bioBOptions.filter(x=>!x.value.includes('.action-'));
+  const bioBActions=bioBOptions.filter(x=>x.value.includes('.action-'));
+  assert.equal(bioBSections.length,14,`${label}: B Biology should expose exactly 13 core + 1 optional mapped sections`);
+  assert.equal(bioBActions.length,7,`${label}: B Biology should retain the 7 Special Education support actions`);
+  assert.ok(bioBSections.some(x=>x.text==='Βιολογία Α΄ — 6.4 Η αναπαραγωγή στον άνθρωπο'),`${label}: B Biology reproduction mapping missing`);
+  assert.ok(bioBSections.some(x=>x.text.startsWith('Προαιρετικό — Βιολογία Β΄-Γ΄ — 1.2 Κύτταρο')),`${label}: B Biology optional cell unit missing`);
 
   await selectOption(page,'#tutorGrade','c');
   await selectOption(page,'#tutorSubject','special-gym-c-biology');
-  const bioCTopics=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>e.textContent.trim()));
-  assert.equal(bioCTopics.length,12,`${label}: C Biology should expose 12 mapped sections`);
-  assert.ok(bioCTopics.includes('5.5 Κληρονομικότητα'),`${label}: C Biology inheritance mapping missing`);
-  assert.ok(bioCTopics.includes('7.2 Η εξέλιξη του ανθρώπου'),`${label}: C Biology human evolution mapping missing`);
+  const bioCOptions=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})));
+  const bioCSections=bioCOptions.filter(x=>!x.value.includes('.action-'));
+  const bioCActions=bioCOptions.filter(x=>x.value.includes('.action-'));
+  assert.equal(bioCSections.length,12,`${label}: C Biology should expose exactly 12 mapped sections`);
+  assert.equal(bioCActions.length,7,`${label}: C Biology should retain the 7 Special Education support actions`);
+  assert.ok(bioCSections.some(x=>x.text==='5.5 Κληρονομικότητα'),`${label}: C Biology inheritance mapping missing`);
+  assert.ok(bioCSections.some(x=>x.text==='7.2 Η εξέλιξη του ανθρώπου'),`${label}: C Biology human evolution mapping missing`);
 
   await selectOption(page,'#tutorGrade','a');
   assert.equal(await page.evaluate(()=>window.AITutor.getProvider()),'groq',`${label}: GPT-OSS/Groq should be the default provider`);

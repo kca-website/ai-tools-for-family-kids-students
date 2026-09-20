@@ -15,7 +15,7 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,23);
+assert.equal(M.mappedEntries.length,26);
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');
@@ -42,6 +42,24 @@ assert.ok(ancientC.officialAnchors.some(x=>x.includes('Ζ΄ Βιβλίο, Κεφ
 assert.ok(ancientC.excludedAnchors.includes('Ενότητα 12 — να μη διδαχθεί'));
 assert.ok(ancientC.excludedAnchors.some(x=>x.includes('Β΄ Βιβλίο, Κεφ. 4, 9-11')));
 assert.equal(ancientC.arrianPlannedHours,14);
+
+const transA=C['teacher-annual-special-gym-a-ancient-translation'];
+assert.ok(transA.officialAnchors.some(x=>x.includes('Οδύσσεια — α 26–108')));
+assert.ok(transA.officialAnchors.some(x=>x.includes('Ηρόδοτος, Βιβλίο 6 — Ενότητα 11')));
+assert.equal(transA.odysseyPlannedHours,36);
+assert.equal(transA.herodotusPlannedHours,13);
+
+const transB=C['teacher-annual-special-gym-b-ancient-translation'];
+assert.ok(transB.officialAnchors.some(x=>x.includes('Ιλιάδα — Α 54–306')));
+assert.ok(transB.officialAnchors.some(x=>x.includes('Αθήνα (επιλογή τουλάχιστον δύο κειμένων)')));
+assert.equal(transB.iliadPlannedHours,35);
+assert.equal(transB.ancientGreecePlannedHours,13);
+
+const transC=C['teacher-annual-special-gym-c-ancient-translation'];
+assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191')));
+assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
+assert.equal(transC.helenPlannedHours,35);
+assert.equal(transC.philosophyPlannedHours,13);
 
 const mathA=C['teacher-annual-special-gym-a-math'];
 assert.ok(mathA.officialAnchors.includes('7.5 Πολλαπλασιασμός ρητών αριθμών'));
@@ -152,4 +170,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 23 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 26 official mappings.');

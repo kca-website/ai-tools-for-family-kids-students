@@ -26,42 +26,6 @@
   }
   function unique(arr) { return [...new Set((arr || []).filter(Boolean))]; }
 
-  function patchPathTool(zone, role, toolId, patch) {
-    const row = PATHS?.[zone]?.[role]?.tools?.find((x) => x.toolId === toolId);
-    if (row) Object.assign(row, patch);
-  }
-
-  ["middle","high"].forEach((zone) => {
-    patchPathTool(zone, "student", "chatgpt", {
-      useCaseEl: "Για καθοδηγούμενη μελέτη, εξήγηση δύσκολης έννοιας και εξάσκηση. Για σχολικές ερωτήσεις προτίμησε το Study Mode.",
-      useCaseEn: "For guided study, explaining a difficult concept and practice. Prefer Study Mode for school questions.",
-      howToEl: "Άνοιξε Study Mode, γράψε την τάξη/μάθημα/θέμα και τι έχεις ήδη δοκιμάσει. Ζήτησε μία υπόδειξη ή ερώτηση τη φορά, όχι την τελική λύση.",
-      howToEn: "Open Study Mode, provide your grade/subject/topic and what you have already tried. Ask for one hint or question at a time, not the final answer.",
-      cautionEl: "Ισχύουν οι όροι και οι ηλικιακοί κανόνες του ChatGPT. Μπορεί να κάνει λάθος· έλεγχε πραγματολογικά στοιχεία με βιβλίο ή αξιόπιστη πηγή.",
-      cautionEn: "ChatGPT's terms and age rules apply. It can be wrong; verify factual claims against the textbook or a reliable source."
-    });
-    patchPathTool(zone, "guardian", "chatgpt", {
-      useCaseEl: "Για να βοηθήσεις τον μαθητή να μελετήσει με ερωτήσεις αντί να πάρει έτοιμη λύση. Όταν χρησιμοποιείται ChatGPT για σχολική μελέτη, προτίμησε Study Mode.",
-      useCaseEn: "To help the student study through questions rather than receive a ready answer. Prefer Study Mode when ChatGPT is used for school study.",
-      howToEl: "Βάλε το παιδί να πει πρώτα τι κατάλαβε ή τι δοκίμασε και ζήτησε από το Study Mode το επόμενο μικρό βήμα.",
-      howToEn: "Have the learner explain what they understood or tried first, then ask Study Mode for the next small step."
-    });
-
-    patchPathTool(zone, "student", "copilot", {
-      useCaseEl: "Πρόσθετη σχολική επιλογή αν το σχολείο σου παρέχει Microsoft 365/Copilot. Όπου είναι ενεργοποιημένο, το Study and Learn είναι προτιμότερο για μελέτη.",
-      useCaseEn: "An additional school option if your school provides Microsoft 365/Copilot. Where enabled, Study and Learn is preferable for studying.",
-      howToEl: "Χρησιμοποίησε τον σχολικό λογαριασμό που σου έχει δώσει το σχολείο. Αν δεν υπάρχει πρόσβαση, χρησιμοποίησε τις άλλες προτάσεις ή την AI Βοήθεια.",
-      howToEn: "Use the school account provided by your school. If you do not have access, use the other recommendations or AI Help.",
-      cautionEl: "Η διαθεσιμότητα και οι ηλικιακές ρυθμίσεις εξαρτώνται από το σχολείο/διαχειριστή.",
-      cautionEn: "Availability and age settings depend on the school/administrator."
-    });
-    patchPathTool(zone, "guardian", "copilot", {
-      useCaseEl: "Για μαθητές σε σχολείο με Microsoft 365 Education: πρόσθετη διαχειριζόμενη επιλογή με Copilot και, όπου διατίθεται, Study and Learn.",
-      useCaseEn: "For students in a school using Microsoft 365 Education: an additional managed option with Copilot and, where available, Study and Learn.",
-      howToEl: "Χρησιμοποιείται μόνο εφόσον το σχολείο έχει δώσει πρόσβαση και έχει ενεργοποιήσει την υπηρεσία για την κατάλληλη ηλικιακή ομάδα.",
-      howToEn: "Use it only if the school has provided access and enabled the service for the appropriate age group."
-    });
-  });
 
   // Remove references to retired/unsupported Khanmigo if any stale data survives elsewhere.
   if (typeof TOOLS !== "undefined") delete TOOLS.khanmigo;

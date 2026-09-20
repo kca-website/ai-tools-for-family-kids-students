@@ -69,6 +69,19 @@ try{
   assert.match(mathNote,/τρέχουσα ύλη\/οδηγίες/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');
   assert.ok(!/υποστηρικτικές επιλογές/i.test(mathNote),'Verified annual Mathematics mapping must not be marked support-only');
 
+  const specialPrompt=await page.evaluate(()=>window.promptText());
+  assert.match(specialPrompt,/Καθολικού Σχεδιασμού για τη Μάθηση/,'Special-school teacher prompt must apply the official UDL/differentiation framework');
+  assert.match(specialPrompt,/πολλαπλούς τρόπους αναπαράστασης/,'Special-school prompt must offer multiple representations');
+  assert.match(specialPrompt,/Μην υποθέτεις διάγνωση/,'Special-school differentiation must not infer a diagnosis');
+
+  await page.selectOption('#context','middle');
+  const generalPrompt=await page.evaluate(()=>window.promptText());
+  assert.ok(!/Επίσημες αρχές διαφοροποιημένης διδασκαλίας Ε\.Α\.Ε\./.test(generalPrompt),'E.A.E. differentiation block must not be injected into the general Gymnasium context');
+
+  await page.selectOption('#context','specialGym');
+  await page.selectOption('#grade','a');
+  await page.selectOption('#subject','physics');
+
   const bridgeLeak=await page.evaluate(()=>{
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{});
     const physics=entries.find(e=>e.schoolType==='special-gymnasium'&&e.grade==='A'&&e.subjectId==='physics'&&e.verificationBasis==='general-gymnasium-2026-27');

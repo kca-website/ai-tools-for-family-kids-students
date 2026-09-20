@@ -432,7 +432,9 @@
     const q = panel.querySelector('[data-study-tool="quiz"]');
     const s = panel.querySelector('[data-study-tool="slides"]');
     const examQuiz = isHighSchool(c);
-    if (q) {
+    // The Special Education adapter owns the quiz button while its marker is
+    // present. Do not overwrite its simplified 3-question label on rerenders.
+    if (q && q.dataset.specialSimpleQuiz !== "1") {
       const newLabel = examQuiz ? tr("quizExamNew") : tr("quizNew");
       const savedLabel = examQuiz ? tr("quizExamSaved") : tr("quizSaved");
       const createLabel = examQuiz ? tr("quizExam") : tr("quiz");

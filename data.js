@@ -533,6 +533,16 @@ const PATHS = {
       introEn: "At this age, every AI tool needs your account, your setup, or your direct presence. Below: which tool fits which specific schoolwork, and how the child gets access the right way.",
       tools: [
         {
+          toolId: "ai-help",
+          useCaseEl: "Όταν το παιδί έχει κολλήσει σε οποιοδήποτε μάθημα, άνοιξε τον «Βοηθό Γονέα» και περιέγραψε πού δυσκολεύεται.",
+          useCaseEn: "When the child is stuck in any subject, open Parent Helper and describe where they are struggling.",
+          howToEl: "Εσύ χειρίζεσαι τη συνομιλία με τον δικό σου λογαριασμό Puter. Ο βοηθός προτείνει μία ερώτηση ή ένα μικρό βήμα κάθε φορά για να το δουλέψεις μαζί με το παιδί.",
+          howToEn: "You operate the chat with your own Puter account. The helper suggests one question or small step at a time to work through with the child.",
+          cautionEl: "Μην εισάγεις προσωπικά ή ευαίσθητα δεδομένα του παιδιού.",
+          cautionEn: "Do not enter the child's personal or sensitive information.",
+        },
+
+        {
           toolId: "autodraw",
           useCaseEl: "Ζωγραφική και δημιουργικές δραστηριότητες, χωρίς να χρειάζεται να ξέρει το παιδί να διαβάζει.",
           useCaseEn: "Drawing and creative activities, no reading required.",
@@ -629,6 +639,16 @@ const PATHS = {
       introEn: "You always use these tools through an account your parent or teacher set up, not on your own.",
       tools: [
         {
+          toolId: "ai-help",
+          useCaseEl: "Αν κολλήσεις σε μάθημα, ζήτησε από γονέα/κηδεμόνα να ανοίξει μαζί σου τον «Βοηθό Γονέα» του aitools4kids.",
+          useCaseEn: "If you get stuck, ask a parent/guardian to open the aitools4kids Parent Helper with you.",
+          howToEl: "Στο Δημοτικό δεν ανοίγεις μόνος/η λογαριασμό Puter. Ο γονιός χειρίζεται τη συνομιλία και εσύ κάνεις την προσπάθεια.",
+          howToEn: "In Primary School you do not create/use a Puter account on your own. The parent operates the chat while you do the thinking.",
+          cautionEl: "Η AI Βοήθεια δεν δίνει έτοιμη εργασία και μπορεί να κάνει λάθος: έλεγχε με το βιβλίο.",
+          cautionEn: "AI Help does not hand over finished schoolwork and can be wrong: check against the textbook.",
+        },
+
+        {
           toolId: "autodraw",
           useCaseEl: "Για να ζωγραφίσεις και να δεις πώς η ΤΝ μαντεύει τι σχεδιάζεις.",
           useCaseEn: "To draw and see how AI guesses what you're drawing.",
@@ -673,6 +693,16 @@ const PATHS = {
       introEl: "Στα 13, ανοίγει η πρόσβαση στα περισσότερα mainstream AI chatbots, αλλά σχεδόν όλα απαιτούν τη δική σου συγκατάθεση μέχρι τα 17. Εδώ θα βρεις ποιο εργαλείο ταιριάζει σε ποια σχολική δουλειά, ώστε να καθοδηγήσεις τη χρήση αντί απλώς να την επιτρέψεις ή να την απαγορεύσεις.",
       introEn: "At 13, access opens up to most mainstream AI chatbots, but nearly all require your consent until age 17. Here's which tool fits which schoolwork, so you can guide the use rather than just allow or ban it.",
       tools: [
+        {
+          toolId: "ai-help",
+          useCaseEl: "Βοηθός Γονέα για οποιοδήποτε μάθημα, με βάση την τάξη και το επιλεγμένο θέμα.",
+          useCaseEn: "Parent Helper for any subject, based on grade and selected topic.",
+          howToEl: "Περιέγραψε πού κόλλησε ο μαθητής και ζήτησε το επόμενο μικρό βήμα, όχι τη λύση.",
+          howToEn: "Describe where the student is stuck and ask for the next small step, not the solution.",
+          cautionEl: "Για άμεση μαθητική χρήση ισχύουν οι ηλικιακοί κανόνες μέσα στην AI Βοήθεια.",
+          cautionEn: "Direct student use follows the age rules shown inside AI Help.",
+        },
+
         {
           toolId: "erla",
           useCaseEl: "Εκμάθηση ξένης γλώσσας (π.χ. Αγγλικά) μέσα από ακρόαση, ανάγνωση και συνομιλία με AI.",
@@ -743,6 +773,16 @@ const PATHS = {
       introEn: "You're starting to use AI more on your own, but your parent needs to give permission for most chatbots. See which tool fits which task.",
       tools: [
         {
+          toolId: "ai-help",
+          useCaseEl: "Καθοδήγηση σε οποιοδήποτε μάθημα με ερωτήσεις και υποδείξεις αντί για έτοιμη λύση.",
+          useCaseEn: "Guidance in any subject through questions and hints rather than ready answers.",
+          howToEl: "Διάλεξε τάξη, μάθημα και θέμα, γράψε ή μίλα και εξήγησε πρώτα τι έχεις δοκιμάσει.",
+          howToEn: "Choose grade, subject and topic, type or speak, and first explain what you have tried.",
+          cautionEl: "Στα 12 δεν υπάρχει άμεση χρήση Puter· στα 13–14 ζητείται δήλωση γονικής συναίνεσης.",
+          cautionEn: "At 12 there is no direct Puter use; at 13–14 declared parental consent is required.",
+        },
+
+        {
           toolId: "erla",
           useCaseEl: "Για να εξασκηθείς σε μια ξένη γλώσσα (π.χ. Αγγλικά) με ακρόαση, ανάγνωση και συνομιλία.",
           useCaseEn: "To practice a foreign language (e.g. English) through listening, reading, and conversation.",
@@ -805,6 +845,16 @@ const PATHS = {
       introEl: "Στο Λύκειο το φάσμα εργαλείων είναι ευρύ, αλλά κάθε υπηρεσία έχει τους δικούς της ηλικιακούς και λογαριασμιακούς κανόνες. Η έμφαση μετατοπίζεται στη σωστή, παραγωγική χρήση για προετοιμασία εξετάσεων, έρευνα και εργασίες.",
       introEn: "In high school the range of tools is broad, but each service has its own age and account rules. The focus shifts to proper, productive use for exam prep, research, and projects.",
       tools: [
+        {
+          toolId: "ai-help",
+          useCaseEl: "Βοηθός Γονέα για να υποστηρίξεις διάβασμα και κατανόηση χωρίς να κάνεις την εργασία αντί για τον μαθητή.",
+          useCaseEn: "Parent Helper for supporting study and understanding without doing the work for the student.",
+          howToEl: "Δώσε το μάθημα/θέμα και ζήτησε ερωτήσεις ελέγχου ή τρόπο εξήγησης.",
+          howToEn: "Provide the subject/topic and ask for checking questions or an explanation strategy.",
+          cautionEl: "Επαλήθευση πραγματολογικών πληροφοριών με σχολικό βιβλίο/επίσημη πηγή.",
+          cautionEn: "Verify factual information against the textbook/official source.",
+        },
+
         {
           toolId: "grammarly",
           useCaseEl: "Έλεγχος γραμματικής, ύφους και δομής σε αγγλικά κείμενα (π.χ. εργασίες Αγγλικών, IELTS/Cambridge προετοιμασία).",
@@ -892,6 +942,16 @@ const PATHS = {
       introEl: "Έχεις πρόσβαση σχεδόν στο πλήρες φάσμα εργαλείων. Το θέμα δεν είναι αν επιτρέπεται. Είναι ποιο εργαλείο ταιριάζει σε ποια δουλειά και πώς να το χρησιμοποιήσεις σωστά, ειδικά τώρα που ετοιμάζεσαι για εξετάσεις ή για σπουδές.",
       introEn: "You have access to nearly the full range of tools. The question isn't whether it's allowed. It's which tool fits which task and how to use it properly, especially now that you're preparing for exams or further studies.",
       tools: [
+        {
+          toolId: "ai-help",
+          useCaseEl: "Καθοδηγούμενη βοήθεια σε όλα τα μαθήματα, γραπτά ή με φωνή, με βάση την τάξη και το θέμα.",
+          useCaseEn: "Guided help across subjects, by text or voice, based on grade and topic.",
+          howToEl: "Δείξε πρώτα τη δική σου προσπάθεια και ζήτησε μία υπόδειξη τη φορά.",
+          howToEn: "Show your own attempt first and ask for one hint at a time.",
+          cautionEl: "Μην χρησιμοποιείς την απάντηση ως έτοιμο παραδοτέο· έλεγχε πραγματολογικά στοιχεία.",
+          cautionEn: "Do not use the response as submit-ready work; verify factual claims.",
+        },
+
         {
           toolId: "grammarly",
           useCaseEl: "Για να ελέγξεις αγγλικά κείμενα (εργασίες Αγγλικών, προετοιμασία IELTS/Cambridge) με σωστή δομή και γραμματική.",

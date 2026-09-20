@@ -115,6 +115,27 @@ try{
   assert.match(infoBPrompt,/Οι μαθητές διατυπώνουν πρώτα δική τους απάντηση\/λύση/i,'B Informatics must use student-first critical comparison');
 
   await page.selectOption('#grade','a');
+  await page.selectOption('#subject','religion');
+  const religionEthicsATopics=await page.locator('#unit option').allTextContents();
+  assert.ok(religionEthicsATopics.some(x=>x.includes('Θρησκευτικά — Δ΄ Θεματική')),'A Religion full thematic framework missing');
+  assert.ok(religionEthicsATopics.some(x=>x.includes('Ηθική (Α΄ μέρος')&&x.includes('Ποιες πράξεις θεωρούμε ηθικές')),'A Ethics published first-part unit missing');
+  const religionEthicsANote=await page.locator('#curriculumNote').innerText();
+  assert.match(religionEthicsANote,/μόνο το Πρώτο Μέρος \(Σεπτέμβριος–Νοέμβριος 2026\)/i,'Ethics coverage must be visibly limited to the published first part');
+  const religionEthicsAPrompt=await page.evaluate(()=>window.promptText());
+  assert.match(religionEthicsAPrompt,/Μην επινοήσεις ή παρουσιάσεις ως επίσημη ύλη Ηθικής για Δεκέμβριο 2026 και μετά/i,'Teacher prompt must prevent invented full-year Ethics syllabus');
+
+  await page.selectOption('#grade','b');
+  await page.selectOption('#subject','religion');
+  const religionEthicsBTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(religionEthicsBTopics.some(x=>x.includes('Η αρχαία φιλοσοφία ως τέχνη του βίου')),'B Ethics first-part mapping missing');
+
+  await page.selectOption('#grade','c');
+  await page.selectOption('#subject','religion');
+  const religionEthicsCTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(religionEthicsCTopics.some(x=>x.includes('Ηθικός νόμος και ορθολογικές προσταγές')),'C Ethics first-part mapping missing');
+  assert.ok(religionEthicsCTopics.some(x=>x.includes('Μονοθεϊστικές θρησκείες')),'C Religion thematic framework missing');
+
+  await page.selectOption('#grade','a');
   await page.selectOption('#subject','music');
   const musicTopics=await page.locator('#unit option').allTextContents();
   assert.ok(musicTopics.includes('Α4. Τα χρώματα των ήχων'),'A Music annual E.A.E. mapping missing');

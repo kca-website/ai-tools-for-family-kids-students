@@ -15,8 +15,8 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,49);
-assert.equal(M.publishedPending.length,3);
+assert.equal(M.mappedEntries.length,52);
+assert.equal(M.publishedPending.length,0);
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='biology'),'Biology must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='geography'),'Geography must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='history'),'History must no longer be pending after official 2026-27 mapping');
@@ -69,6 +69,30 @@ assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191'))
 assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
 assert.equal(transC.helenPlannedHours,35);
 assert.equal(transC.philosophyPlannedHours,13);
+
+const relA=C['teacher-annual-special-gym-a-religion-ethics'];
+assert.equal(relA.ethicsCoverageStatus,'first-part-september-november-2026-only');
+assert.equal(relA.selectionStatus,'religion-current-guidance-plus-ethics-first-part-only');
+assert.equal(relA.officialAnchors.length,13);
+assert.ok(relA.officialAnchors.some(x=>x.includes('Θρησκευτικά — Δ΄ Θεματική')));
+assert.ok(relA.officialAnchors.some(x=>x.includes('Ηθική (Α΄ μέρος')&&x.includes('Ποιες πράξεις θεωρούμε ηθικές')));
+assert.ok(relA.optionalAnchors.some(x=>x.includes('Η έκφραση της οδύνης στην τέχνη')));
+assert.ok(relA.excludedAnchors.some(x=>x.includes('Ο άνθρωπος ως δημιουργός')));
+
+const relB=C['teacher-annual-special-gym-b-religion-ethics'];
+assert.equal(relB.officialAnchors.length,12);
+assert.ok(relB.officialAnchors.some(x=>x.includes('Χριστιανική παράδοση και αρχαία ελληνική φιλοσοφία')));
+assert.ok(relB.officialAnchors.some(x=>x.includes('Η αρχαία φιλοσοφία ως τέχνη του βίου')));
+assert.ok(relB.excludedAnchors.some(x=>x.includes('Η Εκκλησία οργανώνεται')));
+assert.ok(relB.excludedAnchors.some(x=>x.includes('Η δύναμη της εικόνας')));
+
+const relC=C['teacher-annual-special-gym-c-religion-ethics'];
+assert.equal(relC.officialAnchors.length,13);
+assert.ok(relC.officialAnchors.some(x=>x.includes('Μονοθεϊστικές θρησκείες')));
+assert.ok(relC.officialAnchors.some(x=>x.includes('Πώς θα γίνουμε ενάρετοι')));
+assert.ok(relC.officialAnchors.some(x=>x.includes('Ηθικός νόμος και ορθολογικές προσταγές')));
+assert.ok(relC.excludedAnchors.some(x=>x.includes('Από τα Ανάλεκτα του Κομφούκιου')));
+assert.ok(relC.coverageCaveat.includes('Δεκέμβριο 2026 και μετά'));
 
 const musicA=C['teacher-annual-special-gym-a-music'];
 assert.ok(musicA.officialAnchors.includes('Α4. Τα χρώματα των ήχων'));
@@ -344,4 +368,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 49 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 52 official mappings; 0 published mappings pending.');

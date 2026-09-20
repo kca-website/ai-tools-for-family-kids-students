@@ -27,7 +27,9 @@ const curriculum = read('curriculum-data.js');
 const curriculumToolArrays = curriculum.match(/toolIds:\s*\[[^\]]*\]/g) || [];
 assert.ok(curriculumToolArrays.length > 0, 'curriculum tool arrays must exist');
 for (const row of curriculumToolArrays) {
-  assert.match(row, /toolIds:\s*\[\s*["']ai-help["']/, 'AI Help must be the first canonical tool in every curriculum subject');
+  const ids = row.match(/["']([^"']+)["']/g) || [];
+  const aiHelpCount = ids.filter((id) => id === '"ai-help"' || id === "'ai-help'").length;
+  assert.equal(aiHelpCount, 1, 'AI Help must appear exactly once in every canonical curriculum subject');
 }
 
 assert.doesNotMatch(overrides, /const\s+aiHelpEntries\s*=/, 'AI Help must not be injected from runtime overrides');

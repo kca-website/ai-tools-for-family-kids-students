@@ -16,19 +16,31 @@
     status:"verified-structure",
     schoolYear:"2026-2027",
     verificationDate:"2026-09-20",
-    sourceUrl:"https://www.minedu.gov.gr/eidiki-entaksiaki-ekpaidefsi",
-    sourceLabelEl:"Υπουργείο Παιδείας — Λύκειο Ε.Α.Ε.",
-    sourceLabelEn:"Ministry of Education — Special Lyceum E.A.E.",
-    annualGuidanceStatus:"structure-verified-guidance-not-separately-mapped",
+    sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
+    sourceLabelEl:"ΙΕΠ — Ύλη και Οδηγίες Λυκείου Ε.Α.Ε. 2026–27",
+    sourceLabelEn:"IEP — Special Lyceum E.A.E. 2026–27 guidance",
+    annualGuidanceStatus:"published-guidance-source-indexed-section-mapping-in-progress",
+    annualGuidanceIndex:Object.freeze([
+      Object.freeze({key:"language-literature",grades:["a","b","c"],labelEl:"Νεοελληνική Γλώσσα και Λογοτεχνία",status:"published-2026-27"}),
+      Object.freeze({key:"biology",grades:["a","b","c"],labelEl:"Βιολογία",status:"published-2026-27"}),
+      Object.freeze({key:"economics",grades:["c"],labelEl:"Οικονομία Προσανατολισμού",status:"published-2026-27"}),
+      Object.freeze({key:"ancient",grades:["a","b","c"],labelEl:"Αρχαία Ελληνική Γλώσσα και Γραμματεία",status:"published-2026-27"}),
+      Object.freeze({key:"history",grades:["a","b","c"],labelEl:"Ιστορία",status:"published-2026-27"}),
+      Object.freeze({key:"informatics",grades:["a","b","c"],labelEl:"Πληροφορική / Επιστήμη Η/Υ",status:"published-2026-27"}),
+      Object.freeze({key:"english",grades:["a","b","c"],labelEl:"Αγγλικά",status:"published-2026-27"}),
+      Object.freeze({key:"second-foreign-language",grades:["a","b"],labelEl:"2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)",status:"published-2026-27"}),
+      Object.freeze({key:"latin",grades:["b","c"],labelEl:"Λατινικά Προσανατολισμού",status:"published-2026-27"}),
+      Object.freeze({key:"ethics",grades:["a","b","c"],labelEl:"Ηθική — Α΄ μέρος Σεπτέμβριος–Νοέμβριος 2026",status:"published-part-1"})
+    ]),
     grades:Object.freeze({
       a:Object.freeze({id:"a",labelEl:"Α΄ Λυκείου",labelEn:"Lyceum A"}),
       b:Object.freeze({id:"b",labelEl:"Β΄ Λυκείου",labelEn:"Lyceum B"}),
       c:Object.freeze({id:"c",labelEl:"Γ΄ Λυκείου",labelEn:"Lyceum C"})
     }),
-    scopeNoteEl:"Το Λύκειο Ε.Α.Ε. είναι ξεχωριστός επίσημος τύπος Λυκείου. Όπου υπάρχει ήδη επαληθευμένη χαρτογράφηση αντίστοιχου μαθήματος του ΓΕΛ 2026–27, χρησιμοποιείται ως πρακτικό πλαίσιο επιλογής κεφαλαίου και όχι ως δήλωση ξεχωριστής ειδικής εξεταστέας ύλης.",
+    scopeNoteEl:"Το Λύκειο Ε.Α.Ε. είναι ξεχωριστός επίσημος τύπος Λυκείου και το ΙΕΠ έχει δημοσιεύσει ειδικές οδηγίες 2026–27 για σειρά μαθημάτων. Μέχρι να περαστούν section-level οι συγκεκριμένες οδηγίες, οι αντίστοιχες χαρτογραφήσεις ΓΕΛ χρησιμοποιούνται μόνο ως υποστηρικτικό πλαίσιο και όχι ως δήλωση ξεχωριστής ύλης Ε.Α.Ε.",
     scopeNoteEn:"Special Lyceum E.A.E. is an official distinct Lyceum type. Where a verified matching 2026-27 General Lyceum mapping exists, it can be reused as a practical chapter-selection reference, not as a claim of a separate official E.A.E. syllabus.",
     tutorPolicy:Object.freeze({
-      warningEl:"Μην επινοείς ξεχωριστή επίσημη ύλη Ε.Α.Ε. Χρησιμοποίησε επαληθευμένες αντίστοιχες ενότητες όπου υπάρχουν και το πραγματικό κεφάλαιο, κείμενο ή άσκηση του μαθητή.",
+      warningEl:"Για αρκετά μαθήματα υπάρχει δημοσιευμένη ειδική οδηγία Λυκείου Ε.Α.Ε. 2026–27 που δεν έχει ακόμη περαστεί section-level στο site. Μην αντικαθιστάς αυτή την εκκρεμότητα με αυθαίρετη ύλη· χρησιμοποίησε μόνο ρητά χαρτογραφημένη Ε.Α.Ε. ύλη ή, όπου αυτή λείπει, υποστηρικτικές ενότητες ΓΕΛ μαζί με το πραγματικό κεφάλαιο/άσκηση του μαθητή.",
       warningEn:"Do not invent a separate official E.A.E. syllabus. Use verified matching chapter references where available and the learner's actual chapter, text or exercise."
     })
   });

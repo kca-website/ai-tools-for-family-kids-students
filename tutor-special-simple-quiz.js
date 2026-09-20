@@ -25,8 +25,8 @@
     const en=isEnglish();
     const T={
       create:["📝 Φτιάξε απλό quiz 3 ερωτήσεων","📝 Create a simple 3-question quiz"],
-      saved:["Άνοιξε αποθηκευμένο απλό quiz","Open saved simple quiz"],
-      again:["Νέο απλό quiz","New simple quiz"],
+      saved:["Άνοιξε αποθηκευμένο απλό quiz 3 ερωτήσεων","Open saved simple 3-question quiz"],
+      again:["Νέο απλό quiz 3 ερωτήσεων","New simple 3-question quiz"],
       generating:["Δημιουργείται απλό quiz…","Creating simple quiz…"],
       needConnect:["Συνδέσου πρώτα με Puter ή επίλεξε GPT-OSS 120B.","Connect to Puter first or choose GPT-OSS 120B."],
       failed:["Δεν μπόρεσα να δημιουργήσω σωστό απλό quiz. Δεν έγινε αυτόματη δεύτερη κλήση.","I could not create a valid simple quiz. No automatic second call was made."],

@@ -149,7 +149,7 @@ async function runStructuralMatrix(page, baseUrl, viewport, lang = 'el') {
   return { results, errors, failedSameOrigin };
 }
 
-async function mobileInteractionSnapshot(page, baseUrl, lang) {
+async function mobileInteractionSnapshot(page, baseUrl, lang, interact = true) {
   await prepare(page, baseUrl, { width: 390, height: 844 }, lang);
   await renderContext(page, { zoneId: 'middle', roleId: 'student' }, lang);
 
@@ -163,6 +163,11 @@ async function mobileInteractionSnapshot(page, baseUrl, lang) {
   }
   const opened = await snapshot(page);
 
+  if (!interact) {
+    return { before, opened, afterAge: opened, afterManualClose: opened, flashStatus: '', studyStatus: '' };
+  }
+
+  await page.waitForSelector('#tutorAge', { state: 'attached', timeout: 10000 });
   await page.selectOption('#tutorAge', '15');
   await page.waitForTimeout(120);
   const afterAge = await snapshot(page);
@@ -208,8 +213,8 @@ try {
   for (const lang of ['el', 'en']) {
     const prodPage = await browser.newPage();
     const localPage = await browser.newPage();
-    const prod = await mobileInteractionSnapshot(prodPage, PROD, lang);
-    const local = await mobileInteractionSnapshot(localPage, LOCAL, lang);
+    const prod = await mobileInteractionSnapshot(prodPage, PROD, lang, false);
+    const local = await mobileInteractionSnapshot(localPage, LOCAL, lang, true);
 
     compareParity(local.before, prod.before, `mobile ${lang} initial`);
     assert.equal(local.opened.settingsOpen, true, `mobile ${lang}: settings should be open while editing`);

@@ -18,6 +18,8 @@
   const search = $("heSearch");
   const searchHint = $("heSearchHint");
   const aiInput = $("heAiInput");
+  const aiInputLabel = $("heAiInputLabel");
+  const aiInputHint = $("heAiInputHint");
   const aiStatus = $("heAiStatus");
   const aiOutput = $("heAiOutput");
   const aiGroq = $("heAiGroq");
@@ -440,15 +442,53 @@
 
   const SOURCE_LOCKED_ACTIONS = new Set(["explain","quiz","flashcards","study-plan"]);
 
+  function actionNeedsOwnMaterial() {
+    return aiAction === "feedback";
+  }
+
+  function updateAiInputState({ focus = false } = {}) {
+    const required = actionNeedsOwnMaterial();
+
+    if (required) {
+      aiInputLabel.textContent = "Επικόλλησε εδώ τη δουλειά σου · υποχρεωτικό";
+      aiInputHint.textContent = "Βάλε τη δική σου παράγραφο, λύση, κώδικα ή draft. Η AI θα σχολιάσει μόνο αυτό που θα δώσεις.";
+      aiInputHint.classList.add("is-required");
+      aiInput.classList.add("is-required");
+      aiInput.setAttribute("aria-required", "true");
+      aiInput.required = true;
+
+      if (focus) {
+        aiInput.focus({ preventScroll: true });
+        aiInput.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    } else {
+      aiInputLabel.textContent = "Προαιρετικές λεπτομέρειες ή δικό σου υλικό";
+      aiInputHint.textContent = "Μπορείς να προσθέσεις σημειώσεις, εκφώνηση, απόσπασμα, κώδικα ή δικό σου draft.";
+      aiInputHint.classList.remove("is-required");
+      aiInput.classList.remove("is-required");
+      aiInput.removeAttribute("aria-required");
+      aiInput.required = false;
+    }
+  }
+
   function generationScope() {
     const course = currentCourse();
     const extra = aiInput.value.trim();
     const verified = courseHasVerifiedTopics(course);
     const sourceLocked = SOURCE_LOCKED_ACTIONS.has(aiAction);
 
+    if (actionNeedsOwnMaterial() && !extra) {
+      return {
+        ok: false,
+        focusInput: true,
+        message: "Για feedback χρειάζομαι πρώτα τη δική σου δουλειά. Επικόλλησέ την στο πεδίο «Επικόλλησε εδώ τη δουλειά σου»."
+      };
+    }
+
     if (sourceLocked && !verified && !extra) {
       return {
         ok: false,
+        focusInput: true,
         message: "Για αυτό το μάθημα δεν έχουμε ακόμη επαληθευμένες θεματικές. Πρόσθεσε σημειώσεις, περίγραμμα ή την ενότητα που σας έχει δοθεί και θα δουλέψω μόνο πάνω σε αυτό."
       };
     }
@@ -562,6 +602,7 @@
       aiStatus.textContent = scope.message;
       aiOutput.classList.remove("visible");
       printActions.classList.remove("visible");
+      if (scope.focusInput) updateAiInputState({ focus: true });
       return;
     }
     setAiBusy(true, "Δημιουργία…");
@@ -603,6 +644,8 @@
     if (!scope.ok) {
       aiStatus.textContent = scope.message;
       aiOutput.classList.remove("visible");
+      printActions.classList.remove("visible");
+      if (scope.focusInput) updateAiInputState({ focus: true });
       return;
     }
     setAiBusy(true, "Φόρτωση Puter…");
@@ -643,6 +686,10 @@
       "study-plan": "Προαιρετικά γράψε πόσο χρόνο έχεις και ποια σημεία σε δυσκολεύουν."
     };
     aiInput.placeholder = placeholders[aiAction] || "";
+    aiStatus.textContent = "";
+    aiOutput.classList.remove("visible");
+    printActions.classList.remove("visible");
+    updateAiInputState({ focus: aiAction === "feedback" });
     render();
   });
 
@@ -658,5 +705,6 @@
   courseSelect.addEventListener("change", populateTasks);
   search.addEventListener("input", handleSearch);
 
+  updateAiInputState();
   populateInstitutions();
 })();

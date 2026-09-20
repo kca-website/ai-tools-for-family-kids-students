@@ -162,7 +162,28 @@ try {
   assert.equal(aiRequestCount, beforeBlocked, 'unverified title-only quiz should be blocked');
   assert.match(await page.locator('#heAiStatus').innerText(), /δεν έχουμε ακόμη επαληθευμένες θεματικές/i);
 
+  // Feedback must require the student's own material and point to the paste field.
+  await page.locator('[data-he-action="feedback"]').click();
+  assert.match(await page.locator('#heAiInputLabel').innerText(), /Επικόλλησε εδώ τη δουλειά σου/i);
+  assert.equal(await page.locator('#heAiInput').getAttribute('aria-required'), 'true');
+  assert.equal(await page.locator('#heAiInput').evaluate((el) => el.classList.contains('is-required')), true);
+  await page.locator('#heAiInput').fill('');
+  const beforeEmptyFeedback = aiRequestCount;
+  await page.locator('#heAiGroq').click();
+  await page.waitForTimeout(100);
+  assert.equal(aiRequestCount, beforeEmptyFeedback, 'empty feedback must not call AI');
+  assert.match(await page.locator('#heAiStatus').innerText(), /χρειάζομαι πρώτα τη δική σου δουλειά/i);
+  assert.equal(await page.evaluate(() => document.activeElement?.id), 'heAiInput', 'empty feedback must focus the paste field');
+
+  await page.locator('#heAiInput').fill('Δικό μου draft: Η μοριακή βιολογία μελετά...');
+  const beforeFilledFeedback = aiRequestCount;
+  await page.locator('#heAiGroq').click();
+  await page.waitForTimeout(100);
+  assert.equal(aiRequestCount, beforeFilledFeedback + 1, 'filled feedback should call AI');
+  assert.match(lastAiPayload.prompt, /Δικό μου draft: Η μοριακή βιολογία μελετά/);
+
   // The same unverified course is allowed when the student supplies source material.
+  await page.locator('[data-he-action="quiz"]').click();
   await page.locator('#heAiInput').fill('Σημειώσεις μαθήματος: Δευτεροστόμια, Εχινόδερμα, Χορδωτά.');
   const beforeMaterial = aiRequestCount;
   await page.locator('#heAiGroq').click();

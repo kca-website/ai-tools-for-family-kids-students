@@ -33,6 +33,10 @@
     .he-ai-provider.he-puter{background:#7653bd;border-color:#7653bd}
     .he-ai-provider:disabled{opacity:.55;cursor:wait}
     .he-ai-input{width:100%;min-height:110px;padding:12px;border:1px solid #cfd8e3;border-radius:10px;font:inherit;resize:vertical}
+    .he-ai-input.is-required{border:2px solid #b45309;background:#fffaf3}
+    .he-ai-input:focus{outline:3px solid rgba(37,95,142,.18);outline-offset:2px}
+    .he-ai-input-hint{margin:6px 0 0;font-size:.82rem;line-height:1.4;color:#64748b}
+    .he-ai-input-hint.is-required{color:#92400e;font-weight:700}
     .he-ai-providers{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
     .he-ai-status{min-height:1.5em;margin-top:10px;font-size:.88rem;color:#526273}
     .he-ai-output{display:none;margin-top:14px;padding:16px;border:1px solid #dbe3ee;border-radius:12px;background:#fbfcfd;line-height:1.58;overflow-wrap:anywhere}
@@ -140,8 +144,9 @@
         <button type="button" class="he-ai-action" data-he-action="feedback" aria-pressed="false">Feedback στη δουλειά μου</button>
         <button type="button" class="he-ai-action" data-he-action="research" aria-pressed="false">Έρευνα / πηγές</button>
       </div>
-      <label for="heAiInput"><strong>Προαιρετικές λεπτομέρειες ή δικό σου υλικό</strong></label>
+      <label for="heAiInput"><strong id="heAiInputLabel">Προαιρετικές λεπτομέρειες ή δικό σου υλικό</strong></label>
       <textarea id="heAiInput" class="he-ai-input" placeholder="π.χ. Δεν καταλαβαίνω τη μείωση ΙΙ / Επικόλλησε εδώ abstract, σημειώσεις, κώδικα ή δικό σου κείμενο για feedback."></textarea>
+      <p class="he-ai-input-hint" id="heAiInputHint">Μπορείς να προσθέσεις σημειώσεις, εκφώνηση, απόσπασμα, κώδικα ή δικό σου draft.</p>
       <div class="he-warning" style="margin-top:12px"><strong>Όχι έτοιμη εργασία:</strong> για εργασίες η AI βοηθά με δομή, ερωτήματα, έλεγχο και feedback πάνω στη δική σου προσπάθεια. Δεν συντάσσει παραδοτέο για υποβολή.</div>
       <div class="he-ai-providers">
         <button type="button" class="he-ai-provider" id="heAiGroq">⚡ Δημιούργησέ το εδώ · GPT-OSS 120B</button>

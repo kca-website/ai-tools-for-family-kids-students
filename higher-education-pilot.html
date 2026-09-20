@@ -49,10 +49,35 @@
     .he-ai-output table{width:100%;min-width:560px;border-collapse:collapse;background:#fff}
     .he-ai-output th,.he-ai-output td{padding:8px 9px;border:1px solid #d7dee8;text-align:left;vertical-align:top}
     .he-ai-output th{background:#eef6ff}
-    .he-syllabus{margin-top:14px;padding:14px;border:1px solid #dbe3ee;border-radius:12px;background:#fbfcfd}
-    .he-syllabus h3{margin:0 0 8px}
-    .he-topic-list{margin:8px 0 0;padding-left:1.25rem}
+    .he-syllabus{margin-top:14px}
+    .he-syllabus details{border:1px solid #dbe3ee;border-radius:12px;background:#fbfcfd;overflow:hidden}
+    .he-syllabus summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;cursor:pointer;list-style:none;font-weight:800}
+    .he-syllabus summary::-webkit-details-marker{display:none}
+    .he-syllabus-summary{display:grid;gap:2px;min-width:0}
+    .he-syllabus-summary small{font-size:.78rem;font-weight:500;color:#64748b;line-height:1.35}
+    .he-syllabus-arrow{flex:0 0 auto;font-size:.8rem;color:#64748b;transition:transform .18s ease}
+    .he-syllabus details[open] .he-syllabus-arrow{transform:rotate(180deg)}
+    .he-syllabus-body{padding:0 14px 14px;border-top:1px solid #e5eaf0}
+    .he-syllabus-body .he-meta{margin-top:10px}
+    .he-topic-list{margin:10px 0 0;padding-left:1.25rem}
     .he-topic-list li{margin:4px 0}
+    .he-print-actions{display:none;align-items:center;gap:10px;margin-top:10px}
+    .he-print-actions.visible{display:flex}
+    .he-print-btn{min-height:40px;padding:8px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#172033;font:inherit;font-weight:800;cursor:pointer}
+    .he-print-hint{font-size:.78rem;color:#64748b}
+    .he-print-area{display:none}
+    @media print{
+      body.he-printing > *:not(.he-print-area){display:none!important}
+      body.he-printing .he-print-area{display:block!important}
+      .he-print-area{font-family:Arial,sans-serif;color:#111;max-width:none;padding:0}
+      .he-print-area h1{font-size:20pt;margin:0 0 8pt}
+      .he-print-area .he-print-meta{font-size:10pt;color:#444;margin-bottom:14pt;line-height:1.45}
+      .he-print-area h2,.he-print-area h3,.he-print-area h4{page-break-after:avoid}
+      .he-print-area table{width:100%;border-collapse:collapse}
+      .he-print-area th,.he-print-area td{border:1px solid #bbb;padding:6px;text-align:left;vertical-align:top}
+      .he-print-area a{color:#111;text-decoration:underline}
+      @page{margin:14mm}
+    }
     @media(max-width:700px){.he-grid{grid-template-columns:1fr}.he-wrap{padding:18px 12px 42px}.he-hero{padding:18px}.he-ai-providers{display:grid;grid-template-columns:1fr}.he-ai-provider{width:100%}}
   </style>
 </head>
@@ -128,6 +153,10 @@
       </div>
       <div class="he-ai-status" id="heAiStatus" aria-live="polite"></div>
       <div class="he-ai-output" id="heAiOutput" aria-live="polite"></div>
+      <div class="he-print-actions" id="hePrintActions">
+        <button type="button" class="he-print-btn" id="hePrintAi">Εκτύπωση / PDF</button>
+        <span class="he-print-hint">Στο παράθυρο εκτύπωσης μπορείς να επιλέξεις «Αποθήκευση ως PDF».</span>
+      </div>
     </section>
 
     <section class="he-card" aria-labelledby="resultTitle">
@@ -140,6 +169,8 @@
       <p>Τα μαθήματα και οι πηγές προστίθενται μόνο όταν υπάρχει επίσημη τεκμηρίωση. Αν δεν έχουμε πλήρη επίσημο οδηγό, το τμήμα εμφανίζεται ως μερικώς καλυμμένο αντί να συμπληρώνουμε κενά με υποθέσεις.</p>
     </section>
   </main>
+
+  <section class="he-print-area" id="hePrintArea" aria-hidden="true"></section>
 
   <script src="/data.js"></script>
   <script src="/higher-education-data.js"></script>

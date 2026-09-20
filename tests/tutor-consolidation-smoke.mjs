@@ -60,6 +60,10 @@ async function snapshot(page) {
     const mobileToggle = document.querySelector('#tutorMount .tutor-mobile-settings-toggle');
     const mobileAction = mobileToggle?.querySelector('.tutor-mobile-settings-action');
     const settings = document.querySelector('#tutorMount .tutor-settings');
+    const subject = document.getElementById('tutorSubject');
+    const input = document.getElementById('tutorInput');
+    const flashGenerate = document.querySelector('#tutorMount [data-flashcards-generate]');
+    const studyQuiz = document.querySelector('#tutorMount [data-study-tool="quiz"]');
 
     const styleOf = (selector) => {
       const el = document.querySelector(selector);
@@ -94,6 +98,12 @@ async function snapshot(page) {
       mobileActionText: mobileAction?.textContent?.trim() || '',
       settingsOpen: !!settings?.classList.contains('mobile-settings-open'),
       bodyTutorMobileActive: document.body.classList.contains('tutor-mobile-active'),
+      subjectValue: subject?.value || '',
+      subjectOptions: subject ? [...subject.options].map((o) => ({ value: o.value, text: o.textContent?.trim() || '' })) : [],
+      inputDisabled: !!input?.disabled,
+      inputPlaceholder: input?.placeholder || '',
+      flashGenerateDisabled: !!flashGenerate?.disabled,
+      studyQuizDisabled: !!studyQuiz?.disabled,
       styles: {
         heading: styleOf('#tutorMount .tutor-heading'),
         settings: styleOf('#tutorMount .tutor-settings'),
@@ -167,6 +177,13 @@ async function mobileInteractionSnapshot(page, baseUrl, lang, interact = true) {
     return { before, opened, afterAge: opened, afterManualClose: opened, flashStatus: '', studyStatus: '' };
   }
 
+  const firstSubject = await page.locator('#tutorSubject option').evaluateAll((options) => {
+    const option = options.find((item) => item.value);
+    return option?.value || '';
+  });
+  assert.ok(firstSubject, `${baseUrl}: expected at least one real subject option`);
+  await page.selectOption('#tutorSubject', firstSubject);
+  await page.waitForTimeout(80);
   const afterAge = await snapshot(page);
 
   // Close through the installed control handler. In headless parity runs the
@@ -188,14 +205,16 @@ async function mobileInteractionSnapshot(page, baseUrl, lang, interact = true) {
   return { before, opened, afterAge, afterManualClose, flashStatus, studyStatus };
 }
 
-function compareParity(local, prod, label) {
+function compareParity(local, prod, label, { ignoreMobileSettingsState = false } = {}) {
   assert.deepEqual(local.directChildren, prod.directChildren, `${label}: direct chat DOM order differs from production`);
   assert.equal(local.composerIndex, prod.composerIndex, `${label}: composer position differs`);
   assert.equal(local.flashIndex, prod.flashIndex, `${label}: flashcards position differs`);
   assert.equal(local.studyIndex, prod.studyIndex, `${label}: study tools position differs`);
   assert.equal(local.mobileToggle, prod.mobileToggle, `${label}: mobile toggle presence differs`);
-  assert.equal(local.mobileActionText, prod.mobileActionText, `${label}: mobile action label differs`);
-  assert.equal(local.settingsOpen, prod.settingsOpen, `${label}: mobile settings open/closed state differs`);
+  if (!ignoreMobileSettingsState) {
+    assert.equal(local.mobileActionText, prod.mobileActionText, `${label}: mobile action label differs`);
+    assert.equal(local.settingsOpen, prod.settingsOpen, `${label}: mobile settings open/closed state differs`);
+  }
   assert.deepEqual(local.styles, prod.styles, `${label}: computed tutor styles differ from production`);
 }
 
@@ -215,8 +234,13 @@ try {
     const prod = await mobileInteractionSnapshot(prodPage, PROD, lang, false);
     const local = await mobileInteractionSnapshot(localPage, LOCAL, lang, true);
 
-    compareParity(local.before, prod.before, `mobile ${lang} initial`);
+    compareParity(local.before, prod.before, `mobile ${lang} initial`, { ignoreMobileSettingsState: true });
+    assert.equal(local.before.subjectValue, '', `mobile ${lang}: subject must start unselected`);
+    assert.equal(local.before.settingsOpen, true, `mobile ${lang}: settings must start open until a subject is explicitly selected`);
+    assert.equal(local.before.flashGenerateDisabled, true, `mobile ${lang}: flashcards must be disabled before subject selection`);
+    assert.equal(local.before.studyQuizDisabled, true, `mobile ${lang}: study tools must be disabled before subject selection`);
     assert.equal(local.opened.settingsOpen, true, `mobile ${lang}: settings should be open while editing`);
+    assert.notEqual(local.afterAge.subjectValue, '', `mobile ${lang}: explicit subject selection did not stick`);
     assert.equal(local.afterAge.settingsOpen, true, `mobile ${lang}: settings must remain open until the user closes them`);
     assert.equal(local.afterManualClose.settingsOpen, false, `mobile ${lang}: settings close handler must clear the open state`);
 
@@ -233,6 +257,38 @@ try {
 
     await prodPage.close();
     await localPage.close();
+  }
+
+
+  for (const lang of ['el', 'en']) {
+    const page = await browser.newPage();
+    await prepare(page, LOCAL, { width: 390, height: 844 }, lang);
+    await renderContext(page, { zoneId: 'middle', roleId: 'guardian' }, lang);
+
+    const heading = (await page.locator('#tutorMount .tutor-heading').innerText()).replace(/\s+/g, ' ').trim();
+    if (lang === 'en') assert.match(heading, /First choose the subject/i, 'Parent Helper English onboarding must explain subject-first flow');
+    else assert.match(heading, /Πρώτα επίλεξε μάθημα/i, 'Parent Helper Greek onboarding must explain subject-first flow');
+
+    const initial = await snapshot(page);
+    assert.equal(initial.subjectValue, '', `parent ${lang}: subject must not be silently auto-selected`);
+    assert.equal(initial.settingsOpen, true, `parent ${lang}: lesson settings must stay visible until subject selection`);
+    assert.equal(initial.inputDisabled, true, `parent ${lang}: chat must be disabled before subject selection`);
+    assert.equal(initial.flashGenerateDisabled, true, `parent ${lang}: flashcards must be disabled before subject selection`);
+    assert.equal(initial.studyQuizDisabled, true, `parent ${lang}: study tools must be disabled before subject selection`);
+    assert.match(initial.inputPlaceholder, lang === 'en' ? /Choose a subject first/i : /Επίλεξε πρώτα μάθημα/i,
+      `parent ${lang}: composer must explain why it is locked`);
+
+    const firstSubject = initial.subjectOptions.find((option) => option.value)?.value || '';
+    assert.ok(firstSubject, `parent ${lang}: no selectable subject was available`);
+    await page.selectOption('#tutorSubject', firstSubject);
+    await page.waitForTimeout(100);
+
+    const selected = await snapshot(page);
+    assert.equal(selected.subjectValue, firstSubject, `parent ${lang}: selected subject was not retained`);
+    assert.equal(selected.inputDisabled, false, `parent ${lang}: chat must unlock after explicit subject selection`);
+    assert.equal(selected.flashGenerateDisabled, false, `parent ${lang}: flashcards must unlock after explicit subject selection`);
+    assert.equal(selected.studyQuizDisabled, false, `parent ${lang}: study tools must unlock after explicit subject selection`);
+    await page.close();
   }
 
   for (const context of [

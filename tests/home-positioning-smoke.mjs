@@ -52,6 +52,9 @@ try {
   assert.ok(await page.locator('#homeV8Needs a[href="/meleti-pdf-me-ai.html"]').count());
   assert.ok(await page.locator('#homeV8Needs a[href="/erevna-me-piges-ai.html"]').count());
   assert.ok(await page.locator('#heroGslBadge').count());
+  assert.equal(await page.evaluate(() => window.AITOOLSKIDS_SITE_META?.signLanguageConceptCount), 167, 'canonical GSL concept count must be 167');
+  assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'Greek homepage GSL block must show 167 concepts');
+  assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'Greek homepage GSL block must not show stale 153 count');
 
   await assertNeedsToggle(page, 'mobile');
 
@@ -66,6 +69,8 @@ try {
   assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 6);
   assert.ok(await page.locator('#homeV8Needs a[href="/en/study-pdf-with-ai.html"]').count());
   assert.ok(await page.locator('#homeV8Needs a[href="/en/research-with-sources-ai.html"]').count());
+  assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'English homepage GSL block must show 167 concepts');
+  assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'English homepage GSL block must not show stale 153 count');
 
   const desktop = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   await desktop.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });

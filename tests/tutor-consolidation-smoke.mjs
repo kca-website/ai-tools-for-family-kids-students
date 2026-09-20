@@ -182,7 +182,10 @@ async function mobileInteractionSnapshot(page, baseUrl, lang, interact = true) {
     return option?.value || '';
   });
   assert.ok(firstSubject, `${baseUrl}: expected at least one real subject option`);
-  await page.selectOption('#tutorSubject', firstSubject);
+  await page.locator('#tutorSubject').evaluate((select, value) => {
+    select.value = value;
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  }, firstSubject);
   await page.waitForTimeout(80);
   const afterAge = await snapshot(page);
 

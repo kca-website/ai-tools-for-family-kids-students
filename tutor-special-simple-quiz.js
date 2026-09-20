@@ -308,6 +308,10 @@
         state.original=q;
         const replacement=q.cloneNode(true);
         replacement.dataset.specialSimpleQuiz="1";
+        // The shared study-tools gate may have disabled the generic button before
+        // the Special Education adapter takes ownership. Re-enable the dedicated
+        // simple-quiz control; generate() still validates the selected context.
+        replacement.disabled=false;
         replacement.addEventListener("click",()=>openOrGenerate(panel));
         q.replaceWith(replacement);
         state.special=replacement;

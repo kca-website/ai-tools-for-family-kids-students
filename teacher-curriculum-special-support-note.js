@@ -29,6 +29,10 @@
       b.includes("annual eae instructions 2026 27")||
       b.includes("panhellenic");
   }
+  function isFramework(e){
+    const c=norm(e?.coverageStatus),a=norm(e?.annualInstructionsStatus);
+    return c.includes("annual framework verified")||a.includes("2026 27 framework verified")||e?.frameworkOnly===true;
+  }
   function safeUrl(url){return /^https:\/\//i.test(String(url||""))?String(url):"";}
 
   // A previous bridge-generation pass could attach the complete Physics anchor list
@@ -55,9 +59,10 @@
     if(!note||!unit) return;
     const gid=document.getElementById("grade")?.value||"",glabel=selectedLabel("grade"),sid=document.getElementById("subject")?.value||"",slabel=selectedLabel("subject");
     const selected=(typeof window.selectedSubject==="function")?window.selectedSubject():null;
-    if(selected?.annualMapped&&!selected?.supportOnly) return;
+    if((selected?.annualMapped||selected?.frameworkMapped)&&!selected?.supportOnly) return;
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).filter(e=>entryMatches(e,c,gid,glabel,sid,slabel));
     const exact=entries.find(isExactAnnual);
+    const framework=entries.find(isFramework);
     const count=[...unit.options].filter(o=>o.value!=="custom").length;
     if(exact){
       const source=safeUrl(exact.sourceUrl);
@@ -68,6 +73,12 @@
       }else{
         note.innerHTML=`<strong>✓ Επαληθευμένη χαρτογράφηση 2026–27${count?` · ${count} επιλογές`:""}.</strong> Οι ενότητες προέρχονται από ${scope} για το συγκεκριμένο μάθημα.${sourceLink}`;
       }
+      return;
+    }
+    if(framework){
+      const source=safeUrl(framework.sourceUrl);
+      const sourceLink=source?` <a href="${source}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a>`:"";
+      note.innerHTML=`<strong>✓ Επαληθευμένο επίσημο πλαίσιο 2026–27${count?` · ${count} επιλογές`:""}.</strong> Οι επιλογές είναι πραγματικές θεματικές/κεφάλαια του επίσημου πλαισίου, αλλά δεν παρουσιάζονται ως πλήρης section-level ετήσια ύλη. Ο εκπαιδευτικός επιλέγει αυτό που πράγματι δουλεύει η τάξη.${sourceLink}`;
       return;
     }
     if(unit.value==="custom") return;
@@ -82,7 +93,7 @@
     if(note&&typeof MutationObserver!=="undefined"){
       let busy=false;
       new MutationObserver(()=>{
-        if(busy||!schoolType[contextId()]||note.textContent.includes("Επαληθευμένο μάθημα")||note.textContent.includes("Επαληθευμένη χαρτογράφηση")||note.textContent.includes("Υποστηρικτική χαρτογράφηση")) return;
+        if(busy||!schoolType[contextId()]||note.textContent.includes("Επαληθευμένο μάθημα")||note.textContent.includes("Επαληθευμένη χαρτογράφηση")||note.textContent.includes("Υποστηρικτική χαρτογράφηση")||note.textContent.includes("Επαληθευμένο επίσημο πλαίσιο")) return;
         busy=true;setTimeout(()=>{busy=false;apply();},0);
       }).observe(note,{childList:true,subtree:true,characterData:true});
     }

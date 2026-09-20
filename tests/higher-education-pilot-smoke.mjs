@@ -82,6 +82,8 @@ try {
 
   // Verified Biostatistics course passes official topics to AI and rich output renders correctly.
   await page.selectOption('#heCourse', '1');
+  assert.equal(await page.locator('#heSyllabus details').getAttribute('open'), null, 'course-change syllabus must remain collapsed by default');
+  await page.locator('#heSyllabus summary').click();
   assert.match(await page.locator('#heSyllabus').innerText(), /Συσχέτιση και παλινδρόμηση/i);
   const beforeAiUrl = page.url();
   await page.locator('[data-he-action="study-plan"]').click();
@@ -119,6 +121,8 @@ try {
   const neuroValue = await neuroOption.getAttribute('value');
   assert.ok(neuroValue, 'Neurobiology option missing from semester 7');
   await page.selectOption('#heCourse', neuroValue);
+  assert.equal(await page.locator('#heSyllabus details').getAttribute('open'), null, 'Neurobiology syllabus must be collapsed by default');
+  await page.locator('#heSyllabus summary').click();
   assert.match(await page.locator('#heSyllabus').innerText(), /Συναπτική διαβίβαση/i);
   assert.match(await page.locator('#heSyllabus').innerText(), /Νευροαπεικονιστικές τεχνικές/i);
   assert.match(await page.locator('#heSyllabus').innerText(), /Source-locked/i);
@@ -141,6 +145,8 @@ try {
   const unverifiedValue = await unverifiedOption.getAttribute('value');
   assert.ok(unverifiedValue, 'unverified fixture course missing');
   await page.selectOption('#heCourse', unverifiedValue);
+  assert.equal(await page.locator('#heSyllabus details').getAttribute('open'), null, 'unverified syllabus notice must also stay collapsed');
+  await page.locator('#heSyllabus summary').click();
   assert.match(await page.locator('#heSyllabus').innerText(), /Δεν έχουμε ακόμη επαληθευμένο αναλυτικό περίγραμμα/i);
 
   await page.locator('[data-he-action="quiz"]').click();

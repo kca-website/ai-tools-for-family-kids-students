@@ -11,6 +11,10 @@ vm.runInContext(read('higher-education-data.js'), sandbox, { filename: 'higher-e
 
 const he = sandbox.window.AITOOLSKIDS_HIGHER_EDUCATION;
 assert.ok(he, 'Higher Education dataset must expose window.AITOOLSKIDS_HIGHER_EDUCATION');
+assert.ok(Object.keys(he.institutions).length >= 5, 'pilot must include at least 5 institutions');
+assert.ok(he.departments['upatras-biology'], 'University of Patras Biology pilot is missing');
+assert.equal(he.departments['upatras-biology'].nominalSemesters, 8);
+
 assert.equal(he.meta.status, 'pilot');
 assert.match(he.meta.policyEl, /δεν δημιουργεί έτοιμη εργασία/i);
 

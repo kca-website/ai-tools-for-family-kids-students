@@ -55,12 +55,6 @@ const ACCESSIBILITY_INFO = {
     noteEn: "Official statement, tested with NVDA/JAWS/VoiceOver. Note: faced an ADA lawsuit in 2021 over non-compliance.",
     sourceUrl: "https://www.grammarly.com/accessibility-statement",
   },
-  "khanmigo": {
-    status: "good",
-    noteEl: "Επίσημη δήλωση, ρυθμίσεις προσβασιμότητας, σύσταση NVDA+Chrome, ενσωματωμένο read-aloud, VPAT κατόπιν αιτήματος.",
-    noteEn: "Official statement, accessibility settings, recommended NVDA+Chrome, built-in read-aloud, VPAT on request.",
-    sourceUrl: "https://support.khanacademy.org/hc/en-us/articles/360015623271-Khan-Academy-s-accessibility-settings",
-  },
   "khan-academy-kids": {
     status: "good",
     noteEl: "Επίσημη δήλωση προσβασιμότητας, δραστηριότητες σε πολλαπλές αισθητηριακές μορφές.",

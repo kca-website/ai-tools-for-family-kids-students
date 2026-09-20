@@ -50,6 +50,8 @@ jobs:
         run: node tests/special-education-data-smoke.mjs
       - name: Validate Special Gymnasium B/C support quizzes
         run: node tests/special-gymnasium-bc-data-smoke.mjs
+      - name: Validate Special Gymnasium exact + framework curriculum coverage
+        run: node tests/special-gym-annual-mapping-smoke.mjs
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.55.0
@@ -77,6 +79,8 @@ jobs:
         run: node tests/teacher-curriculum-coverage-audit.mjs
       - name: Run Special Education page desktop/mobile smoke
         run: node tests/special-education-page-smoke.mjs
+      - name: Run Special Education coverage boundary smoke
+        run: node tests/special-education-coverage-boundary-smoke.mjs
       - name: Run Special Education homepage diagnostic smoke
         run: node tests/special-education-diagnostic-smoke.mjs
       - name: Run Special Education AI Tutor desktop/mobile smoke

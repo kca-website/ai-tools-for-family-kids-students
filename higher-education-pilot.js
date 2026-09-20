@@ -13,6 +13,8 @@
   const semesterField = $("heSemesterField");
   const courseSelect = $("heCourse");
   const result = $("heResult");
+  const toolsDetails = $("heToolsDetails");
+  const toolsSummary = $("heToolsSummary");
   const coverage = $("heCoverage");
   const syllabus = $("heSyllabus");
   const search = $("heSearch");
@@ -136,6 +138,7 @@
   }
 
   function populateTasks() {
+    if (toolsDetails) toolsDetails.open = false;
     render();
     renderSyllabus();
   }
@@ -227,32 +230,64 @@
       </details>`;
   }
 
+  function recommendedToolsForCourse(course) {
+    const profile = HE.toolProfiles?.[course?.toolProfile] || HE.toolProfiles?.["academic-research"];
+    const taskId = ACTION_TASK[aiAction] || "understand";
+    const recommendations = (profile?.tools || [])
+      .map((rec, index) => {
+        const tool = TOOLS[rec.id];
+        if (!tool) return null;
+        const taskMatch = Array.isArray(rec.tasks) && rec.tasks.includes(taskId);
+        const generalMatch = !rec.tasks?.length;
+        return { rec, tool, score: taskMatch ? 20 : generalMatch ? 10 : 0, index };
+      })
+      .filter(Boolean)
+      .sort((a,b) => (b.score - a.score) || (a.index - b.index))
+      .slice(0,4);
+
+    return { profile, taskId, recommendations };
+  }
+
+  function toolKindLabel(tool) {
+    if (tool?.isAi === false) return "Συμπληρωματικό";
+    if (tool?.id === "wolfram-alpha") return "Υπολογιστικό";
+    if (tool?.id === "geogebra") return "Διαδραστικό";
+    return "AI";
+  }
+
   function render() {
     const course = currentCourse();
     const task = currentTask();
     if (!course || !task) {
-      result.innerHTML = '<p class="he-empty">Διάλεξε μάθημα και στόχο.</p>';
+      toolsSummary.textContent = "Διάλεξε μάθημα για να δεις εξειδικευμένες προτάσεις";
+      result.innerHTML = '<p class="he-empty">Δεν έχει επιλεγεί ακόμη μάθημα.</p>';
       return;
     }
 
-    const tools = task.preferredTools
-      .map((id) => TOOLS[id])
-      .filter(Boolean);
-
+    const { profile, recommendations } = recommendedToolsForCourse(course);
     const courseTitle = course.code ? `${course.code} · ${course.titleEl}` : course.titleEl;
-    const cards = tools.map((tool) => `
+    const profileLabel = profile?.labelEl || "Ακαδημαϊκά εργαλεία";
+
+    toolsSummary.textContent = `${profileLabel} · ${recommendations.length} εργαλεία · αλλάζουν ανά ενέργεια`;
+
+    const cards = recommendations.map(({ tool, rec }) => `
       <article class="he-tool">
-        <h3>${tool.name}</h3>
-        <p>${tool.shortDescEl || ""}</p>
-        <a href="${tool.url}" target="_blank" rel="noopener noreferrer">Άνοιγμα εργαλείου</a>
+        <div class="he-tool-badges">
+          <span class="he-tool-badge">${escapeHtml(toolKindLabel(tool))}</span>
+          <span class="he-tool-badge">${escapeHtml(profileLabel)}</span>
+        </div>
+        <h3>${escapeHtml(tool.name)}</h3>
+        <p class="he-tool-why"><strong>Γιατί εδώ:</strong> ${escapeHtml(rec.whyEl || "")}</p>
+        <p>${escapeHtml(tool.shortDescEl || "")}</p>
+        <a href="${escapeHtml(tool.url)}" target="_blank" rel="noopener noreferrer">Άνοιγμα εργαλείου</a>
       </article>
     `).join("");
 
     result.innerHTML = `
-      <p><strong>${courseTitle}</strong></p>
-      <p class="he-meta">Στόχος: ${task.labelEl}</p>
-      <div class="he-note">Ξεκίνα λέγοντας στην AI τι έχεις ήδη διαβάσει ή δοκιμάσει. Ζήτησε εξήγηση, έλεγχο, ερώτηση ή feedback — όχι τελικό παραδοτέο.</div>
-      <div class="he-tools">${cards || '<p class="he-empty">Δεν υπάρχει ακόμη αντιστοίχιση εργαλείων.</p>'}</div>
+      <p><strong>${escapeHtml(courseTitle)}</strong></p>
+      <p class="he-meta">Στόχος: ${escapeHtml(task.labelEl)} · Προφίλ: ${escapeHtml(profileLabel)}</p>
+      <div class="he-note">Οι προτάσεις αφορούν το είδος του μαθήματος και τη συγκεκριμένη ενέργεια που διάλεξες. Δεν αποτελούν μέρος της επίσημης ύλης.</div>
+      <div class="he-tools">${cards || '<p class="he-empty">Δεν υπάρχει ακόμη ασφαλής εξειδικευμένη αντιστοίχιση εργαλείων.</p>'}</div>
     `;
   }
 

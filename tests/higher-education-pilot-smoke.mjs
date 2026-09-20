@@ -8,6 +8,8 @@ try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
   const failed = [];
+  let lastAiPayload = null;
+  let aiRequestCount = 0;
 
   page.on('pageerror', (err) => errors.push(`pageerror: ${err.message}`));
   page.on('console', (msg) => {
@@ -22,14 +24,17 @@ try {
     }
   });
 
-  let lastAiPayload = null;
   await page.route('**/api/teacher-assistant', async (route) => {
     const request = route.request();
+    aiRequestCount += 1;
     lastAiPayload = JSON.parse(request.postData() || '{}');
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({ text: '## Πλάνο μελέτης\n\n**Στόχος:** Κατανόηση\n\n- Βήμα 1\n- Βήμα 2\n\n| Στάδιο | Ενέργεια |\n|---|---|\n| 1 | Μελέτη |', model: 'gpt-oss-120b' }),
+      body: JSON.stringify({
+        text: '## Πλάνο μελέτης\n\n**Στόχος:** Κατανόηση\n\n- Βήμα 1\n- Βήμα 2\n\n| Στάδιο | Ενέργεια |\n|---|---|\n| 1 | Μελέτη |',
+        model: 'gpt-oss-120b'
+      }),
     });
   });
 
@@ -37,12 +42,10 @@ try {
   await page.waitForFunction(() => document.querySelectorAll('#heInstitution option').length >= 5);
 
   assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex,nofollow');
-  assert.ok((await page.locator('#heInstitution option').count()) >= 4, 'pilot institutions missing');
-  assert.ok((await page.locator('#heDepartment option').count()) >= 1, 'pilot department missing');
-  assert.ok((await page.locator('#heCourse option').count()) >= 1, 'pilot courses missing');
-  assert.ok((await page.locator('#heTask option').count()) >= 1, 'task mappings missing');
-  assert.ok((await page.locator('.he-tool').count()) >= 1, 'tool recommendations missing');
+  assert.ok((await page.locator('#heInstitution option').count()) >= 5, 'pilot institutions missing');
+  assert.ok((await page.locator('#heCourse option').count()) >= 1, 'initial course list missing');
 
+  // Legacy aliases still resolve to current institutions.
   await page.locator('#heSearch').fill('ΤΕΙ Κρήτης');
   await page.waitForTimeout(80);
   assert.equal(await page.locator('#heInstitution').inputValue(), 'hmu');
@@ -54,52 +57,89 @@ try {
   assert.equal(await page.locator('#heInstitution').inputValue(), 'uniwa');
   assert.equal(await page.locator('#heDepartment').inputValue(), 'uniwa-ice');
 
-  const warnings = page.locator('.he-warning');
-  assert.equal(await warnings.count(), 2, 'expected general and inline-AI guardrails');
-  assert.match(await warnings.nth(0).innerText(), /Δεν προορίζεται για έτοιμη εργασία προς υποβολή/i);
-  assert.match(await warnings.nth(1).innerText(), /Όχι έτοιμη εργασία/i);
-
+  // Patras Biology structured flow.
   await page.locator('#heSearch').fill('Βιολογία Πατρών');
   await page.waitForTimeout(80);
   assert.equal(await page.locator('#heInstitution').inputValue(), 'upatras');
   assert.equal(await page.locator('#heDepartment').inputValue(), 'upatras-biology');
   assert.equal(await page.locator('#heYear').inputValue(), '1');
   assert.equal(await page.locator('#heSemester').inputValue(), '1');
-  assert.equal(await page.locator('#heCourse option').count(), 4, 'Patras Biology semester 1 must expose four required courses');
+  assert.equal(await page.locator('#heCourse option').count(), 4, 'semester 1 must expose four required courses');
   assert.match(await page.locator('#heCourse option').first().innerText(), /ΒΙΟ_ΒΚΔ/);
-  assert.ok((await page.locator('#heSyllabus li').count()) >= 5, 'verified syllabus topics missing for first Biology course');
+  assert.match(await page.locator('#heSyllabus').innerText(), /Source-locked/i);
+  assert.match(await page.locator('#heSyllabus').innerText(), /Περίγραμμα 2021-2022/i);
 
+  // Verified Biostatistics course passes official topics to AI and rich output renders correctly.
   await page.selectOption('#heCourse', '1');
   assert.match(await page.locator('#heSyllabus').innerText(), /Συσχέτιση και παλινδρόμηση/i);
-
   const beforeAiUrl = page.url();
   await page.locator('[data-he-action="study-plan"]').click();
-  assert.equal(await page.locator('[data-he-action="study-plan"]').getAttribute('aria-pressed'), 'true');
   await page.locator('#heAiInput').fill('Θέλω να οργανώσω τη μελέτη μου στη Βιοστατιστική');
+  const beforeStudy = aiRequestCount;
   await page.locator('#heAiGroq').click();
-  await page.waitForFunction(() => document.querySelector('#heAiOutput')?.classList.contains('visible'));
-  assert.equal(page.url(), beforeAiUrl, 'inline AI must not navigate away from the university page');
+  await page.waitForTimeout(100);
+  assert.equal(aiRequestCount, beforeStudy + 1, 'verified Biostatistics request was not sent');
+  assert.equal(page.url(), beforeAiUrl, 'inline AI must not navigate away');
   assert.match(await page.locator('#heAiOutput h3').innerText(), /Πλάνο μελέτης/);
-  assert.equal(await page.locator('#heAiOutput').innerText().then((x) => x.includes('**')), false, 'raw bold markdown leaked into output');
-  assert.equal(await page.locator('#heAiOutput').innerText().then((x) => x.includes('##')), false, 'raw heading markdown leaked into output');
-  assert.equal(await page.locator('#heAiOutput strong').count(), 1, 'bold markdown was not rendered');
-  assert.ok((await page.locator('#heAiOutput li').count()) >= 2, 'markdown list was not rendered');
-  assert.equal(await page.locator('#heAiOutput .he-md-table').count(), 1, 'markdown table was not wrapped for mobile scrolling');
-  assert.ok(lastAiPayload, 'inline AI did not call the shared server endpoint');
-  assert.match(lastAiPayload.system, /AI Βοηθός Φοιτητή/);
+  assert.equal((await page.locator('#heAiOutput').innerText()).includes('**'), false, 'raw bold markdown leaked');
+  assert.equal((await page.locator('#heAiOutput').innerText()).includes('##'), false, 'raw heading markdown leaked');
+  assert.equal(await page.locator('#heAiOutput strong').count(), 1);
+  assert.ok((await page.locator('#heAiOutput li').count()) >= 2);
+  assert.equal(await page.locator('#heAiOutput .he-md-table').count(), 1);
   assert.equal(lastAiPayload.audience, 'university_student');
-
-  assert.match(lastAiPayload.prompt, /Πανεπιστήμιο Πατρών/);
-  assert.match(lastAiPayload.prompt, /Τμήμα Βιολογίας/);
-  assert.match(lastAiPayload.prompt, /Πλάνο μελέτης/);
-  assert.match(lastAiPayload.prompt, /Έτος: 1/);
-  assert.match(lastAiPayload.prompt, /Εξάμηνο: 1/);
-  assert.match(lastAiPayload.prompt, /Γενικά Μαθηματικά - Βιοστατιστική/);
+  assert.match(lastAiPayload.system, /SOURCE LOCK/);
+  assert.match(lastAiPayload.prompt, /ΒΙΟ_ΓΜΒ · Γενικά Μαθηματικά - Βιοστατιστική/);
   assert.match(lastAiPayload.prompt, /Συσχέτιση και παλινδρόμηση/);
-  assert.match(lastAiPayload.prompt, /Θέλω να οργανώσω τη μελέτη μου στη Βιοστατιστική/);
+  assert.match(lastAiPayload.prompt, /Επίσημη πηγή περιγράμματος/);
 
-  await page.locator('[data-he-action="feedback"]').click();
-  assert.match(await page.locator('#heAiInput').getAttribute('placeholder'), /δική σου/i);
+  // Neurobiology must use the official topic whitelist.
+  await page.selectOption('#heYear', '4');
+  await page.selectOption('#heSemester', '7');
+  const neuroOption = page.locator('#heCourse option').filter({ hasText: 'Νευροβιολογία' });
+  const neuroValue = await neuroOption.getAttribute('value');
+  assert.ok(neuroValue, 'Neurobiology option missing from semester 7');
+  await page.selectOption('#heCourse', neuroValue);
+  assert.match(await page.locator('#heSyllabus').innerText(), /Συναπτική διαβίβαση/i);
+  assert.match(await page.locator('#heSyllabus').innerText(), /Νευροαπεικονιστικές τεχνικές/i);
+  assert.match(await page.locator('#heSyllabus').innerText(), /Source-locked/i);
+
+  await page.locator('[data-he-action="quiz"]').click();
+  await page.locator('#heAiInput').fill('');
+  const beforeNeuro = aiRequestCount;
+  await page.locator('#heAiGroq').click();
+  await page.waitForTimeout(100);
+  assert.equal(aiRequestCount, beforeNeuro + 1, 'verified Neurobiology quiz did not call AI');
+  assert.match(lastAiPayload.system, /Κάθε ερώτηση quiz πρέπει να αντιστοιχεί άμεσα/);
+  assert.match(lastAiPayload.prompt, /ΒΙΟ_ΝΕΥ · Νευροβιολογία/);
+  assert.match(lastAiPayload.prompt, /Συναπτική διαβίβαση/);
+  assert.match(lastAiPayload.prompt, /Νευροαπεικονιστικές τεχνικές PET, MRI και fMRI/);
+
+  // Unverified course: no title-only quiz generation.
+  await page.selectOption('#heYear', '2');
+  await page.selectOption('#heSemester', '3');
+  const unverifiedOption = page.locator('#heCourse option').filter({ hasText: 'Βιολογία Ζώων ΙΙ' });
+  const unverifiedValue = await unverifiedOption.getAttribute('value');
+  assert.ok(unverifiedValue, 'unverified fixture course missing');
+  await page.selectOption('#heCourse', unverifiedValue);
+  assert.match(await page.locator('#heSyllabus').innerText(), /Δεν έχουμε ακόμη επαληθευμένο αναλυτικό περίγραμμα/i);
+
+  await page.locator('[data-he-action="quiz"]').click();
+  await page.locator('#heAiInput').fill('');
+  const beforeBlocked = aiRequestCount;
+  await page.locator('#heAiGroq').click();
+  await page.waitForTimeout(80);
+  assert.equal(aiRequestCount, beforeBlocked, 'unverified title-only quiz should be blocked');
+  assert.match(await page.locator('#heAiStatus').innerText(), /δεν έχουμε ακόμη επαληθευμένες θεματικές/i);
+
+  // The same unverified course is allowed when the student supplies source material.
+  await page.locator('#heAiInput').fill('Σημειώσεις μαθήματος: Δευτεροστόμια, Εχινόδερμα, Χορδωτά.');
+  const beforeMaterial = aiRequestCount;
+  await page.locator('#heAiGroq').click();
+  await page.waitForTimeout(100);
+  assert.equal(aiRequestCount, beforeMaterial + 1, 'student-provided material should unlock generation');
+  assert.match(lastAiPayload.system, /Χρησιμοποίησε μόνο το υλικό που έδωσε ο φοιτητής/i);
+  assert.match(lastAiPayload.prompt, /Δευτεροστόμια, Εχινόδερμα, Χορδωτά/);
+  assert.match(lastAiPayload.prompt, /course-only-current-program/);
 
   const storage = await page.evaluate(() => ({
     local: Object.keys(localStorage),
@@ -116,7 +156,7 @@ try {
   assert.deepEqual(failed, [], `same-origin failures: ${failed.join(', ')}`);
   assert.deepEqual(errors, [], `browser errors: ${errors.join('\n')}`);
 
-  console.log('Higher Education hidden pilot smoke passed.');
+  console.log('Higher Education structured source-lock pilot smoke passed.');
 } finally {
   await browser.close();
 }

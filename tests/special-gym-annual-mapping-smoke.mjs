@@ -15,11 +15,12 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,40);
-assert.equal(M.publishedPending.length,12);
+assert.equal(M.mappedEntries.length,43);
+assert.equal(M.publishedPending.length,9);
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='biology'),'Biology must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='geography'),'Geography must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='history'),'History must no longer be pending after official 2026-27 mapping');
+assert.ok(!M.publishedPending.some(x=>x.subjectId==='informatics'),'Informatics must no longer be pending after exact 2026-27 mapping');
 assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='music'&&x.sourceUrl.includes('minedu.gov.gr')));
 assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='art'&&x.sourceUrl.includes('minedu.gov.gr')));
 for(const id of M.mappedEntries){
@@ -66,6 +67,27 @@ assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191'))
 assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
 assert.equal(transC.helenPlannedHours,35);
 assert.equal(transC.philosophyPlannedHours,13);
+
+const infoA=C['teacher-annual-special-gym-a-informatics'];
+assert.equal(infoA.plannedHours,52);
+assert.equal(infoA.aiClassroomPolicy,'avoid-direct-student-ai-use-in-a-grade');
+assert.ok(infoA.officialAnchors.includes('6. Κυβερνοασφάλεια'));
+assert.ok(infoA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 2. Το υλικό του υπολογιστή')));
+assert.ok(infoA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 9. Προγραμματισμός Υπολογιστικών Συστημάτων')));
+
+const infoB=C['teacher-annual-special-gym-b-informatics'];
+assert.equal(infoB.plannedHours,25);
+assert.equal(infoB.aiIntroductionUnit,'7. Τεχνητή Νοημοσύνη');
+assert.ok(infoB.officialAnchors.includes('7. Τεχνητή Νοημοσύνη'));
+assert.ok(infoB.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 4. Παρουσιάσεις')));
+assert.equal(infoB.studentFirstThenAiCompare,true);
+
+const infoC=C['teacher-annual-special-gym-c-informatics'];
+assert.equal(infoC.plannedHours,25);
+assert.equal(infoC.programmingPriority,'Python');
+assert.ok(infoC.officialAnchors.some(x=>x.startsWith('Με προσαρμογή — 2. Προγραμματισμός με τη γλώσσα Python')));
+assert.ok(infoC.officialAnchors.includes('3. Φυσική Υπολογιστική / Ρομποτικές Διατάξεις'));
+assert.ok(infoC.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 4. Τεχνητή Νοημοσύνη')));
 
 const histA=C['teacher-annual-special-gym-a-history'];
 assert.equal(histA.plannedHours,37);
@@ -288,4 +310,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 40 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 43 official mappings.');

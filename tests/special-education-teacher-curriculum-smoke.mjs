@@ -90,15 +90,31 @@ try{
   await page.selectOption('#grade','a');
   await page.selectOption('#subject','biology');
   const biologyNote=await page.locator('#curriculumNote').innerText();
-  assert.match(biologyNote,/επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί/i,'Biology A must acknowledge the current official guidance file');
-  assert.match(biologyNote,/ακριβής section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i,'Biology A must not pretend its current section mapping is complete');
-  const biologyHref=await page.locator('#curriculumNote a').getAttribute('href');
-  assert.ok(String(biologyHref||'').includes('minedu.gov.gr/publications/docs2026'),'Pending Biology status must link to the current Ministry file');
+  assert.match(biologyNote,/πραγματικές χαρτογραφημένες επιλογές από την τρέχουσα ύλη\/οδηγίες/i,'Biology A must now resolve through the exact annual mapping');
+  assert.ok(!/section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i.test(biologyNote),'Biology must no longer be marked pending');
 
   await page.selectOption('#subject','history');
   const historyNote=await page.locator('#curriculumNote').innerText();
-  assert.match(historyNote,/section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i,'History must remain explicitly pending until its current file is mapped');
+  assert.match(historyNote,/επαληθευμένες επιλογές μέσα στο επίσημο πλαίσιο 2026–27/i,'History A status-aware annual framework must be active');
+  assert.ok(!/section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i.test(historyNote),'History must no longer be marked pending');
 
+  await page.selectOption('#subject','informatics');
+  const infoATopics=await page.locator('#unit option').allTextContents();
+  assert.ok(infoATopics.includes('1. Ψηφιακός Κόσμος'),'A Informatics official topic missing');
+  assert.ok(infoATopics.some(x=>x.startsWith('Προαιρετικό — 9. Προγραμματισμός Υπολογιστικών Συστημάτων')),'A Informatics optional status missing');
+  const infoAPrompt=await page.evaluate(()=>window.promptText());
+  assert.match(infoAPrompt,/προτείνουν να αποφεύγεται η χρήση εργαλείων ΤΝ από τους μαθητές/i,'A Informatics must enforce the official AI-use caution');
+  assert.match(infoAPrompt,/Μην ζητήσεις ούτε προτείνεις εισαγωγή προσωπικών δεδομένων μαθητών/i,'Informatics prompt must protect student personal data');
+  assert.match(infoAPrompt,/Μην σχεδιάσεις δραστηριότητα που προϋποθέτει προσωπικό λογαριασμό μαθητή/i,'Informatics prompt must not require a personal student AI account');
+
+  await page.selectOption('#grade','b');
+  await page.selectOption('#subject','informatics');
+  const infoBTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(infoBTopics.includes('7. Τεχνητή Νοημοσύνη'),'B Informatics official AI unit missing');
+  const infoBPrompt=await page.evaluate(()=>window.promptText());
+  assert.match(infoBPrompt,/Οι μαθητές διατυπώνουν πρώτα δική τους απάντηση\/λύση/i,'B Informatics must use student-first critical comparison');
+
+  await page.selectOption('#grade','a');
   await page.selectOption('#subject','math');
   const mathNote=await page.locator('#curriculumNote').innerText();
   assert.match(mathNote,/τρέχουσα ύλη\/οδηγίες/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');

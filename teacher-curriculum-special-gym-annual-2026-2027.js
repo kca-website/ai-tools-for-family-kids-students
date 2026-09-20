@@ -36,9 +36,6 @@
     {grade:"A",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
     {grade:"B",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
     {grade:"C",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
-    {grade:"A",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
-    {grade:"B",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
-    {grade:"C",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
     {grade:"A",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
     {grade:"B",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
     {grade:"C",subjectId:"music",label:"Μουσική",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
@@ -296,6 +293,35 @@
 
 
 
+
+
+  upsert({
+    id:"teacher-annual-special-gym-a-informatics",grade:"A",subject:"Πληροφορική",subjectId:"informatics",
+    sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics,
+    required:["1. Ψηφιακός Κόσμος","3. Το εσωτερικό του υπολογιστή","4. Λογισμικό","5. Γνωρίζω το Διαδίκτυο και Επικοινωνώ","6. Κυβερνοασφάλεια","8. Αλγοριθμική","10. Πληροφορική και Κοινωνία"],
+    optional:["2. Το υλικό του υπολογιστή","7. Δημιουργώ με τον Κειμενογράφο","9. Προγραμματισμός Υπολογιστικών Συστημάτων"],
+    note:"Η σειρά και οι ώρες είναι ενδεικτικές και προσαρμόζονται στις ανάγκες της τάξης. Οι ενότητες 2, 7 και 9 είναι προαιρετικές. Οι επίσημες οδηγίες προτείνουν στην Α΄ Γυμνασίου να αποφεύγεται η χρήση εργαλείων Τεχνητής Νοημοσύνης από τους μαθητές.",
+    meta:{plannedHours:52,sequenceFlexible:true,spiralApproachRecommended:true,projectAndProblemSolvingRecommended:true,aiClassroomPolicy:"avoid-direct-student-ai-use-in-a-grade",noStudentPersonalDataInPrompts:true,personalStudentAccountsAtSchool:false,coverageCompleteness:"section-level-verified",classificationStatus:"official-required-optional-preserved",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95%CE%91%CE%95-26-27.pdf"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-informatics",grade:"B",subject:"Πληροφορική",subjectId:"informatics",
+    sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics,
+    required:["1. Ψηφιακός Κόσμος","2. Δίκτυα Υπολογιστών","3. Ανάλυση Δεδομένων με Υπολογιστικά Φύλλα","6. Δομές Δεδομένων","7. Τεχνητή Νοημοσύνη","8. Πληροφορική και Κοινωνία"],
+    optional:["4. Παρουσιάσεις","5. Τμηματικός Προγραμματισμός"],
+    note:"Η Β΄ Γυμνασίου Ε.Α.Ε. περιλαμβάνει εισαγωγική ενότητα Τεχνητής Νοημοσύνης. Οι ενότητες 4 και 5 είναι προαιρετικές. Η σειρά/χρονική κατανομή είναι ενδεικτική και επιτρέπεται συνδυασμός ενοτήτων.",
+    meta:{plannedHours:25,sequenceFlexible:true,spiralApproachRecommended:true,aiIntroductionUnit:"7. Τεχνητή Νοημοσύνη",aiClassroomPolicy:"introductory-supervised-critical-ai-use",noStudentPersonalDataInPrompts:true,personalStudentAccountsAtSchool:false,studentFirstThenAiCompare:true,coverageCompleteness:"section-level-verified",classificationStatus:"official-required-optional-preserved",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95%CE%91%CE%95-26-27.pdf"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-informatics",grade:"C",subject:"Πληροφορική",subjectId:"informatics",
+    sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics,
+    required:["1. Αλγοριθμική","3. Φυσική Υπολογιστική / Ρομποτικές Διατάξεις","5. Συνεργάζομαι σε διαδικτυακά περιβάλλοντα","7. Επιστημονικός Προγραμματισμός"],
+    modified:["2. Προγραμματισμός με τη γλώσσα Python — το EduBlocks είναι προαιρετικό· έμφαση σε πραγματικό Python IDE"],
+    optional:["4. Τεχνητή Νοημοσύνη","6. Πληροφορική και Κοινωνία — δεν απαιτείται πλήρης κάλυψη"],
+    note:"Στη Γ΄ Γυμνασίου Ε.Α.Ε. δίνεται προτεραιότητα στην αλγοριθμική/υπολογιστική σκέψη, στη συστηματική επαφή με Python και στη φυσική υπολογιστική. Το EduBlocks μπορεί να παραλειφθεί υπέρ πραγματικού Python IDE.",
+    meta:{plannedHours:25,sequenceFlexible:true,spiralApproachRecommended:true,programmingPriority:"Python",aiClassroomPolicy:"supervised-critical-ai-use-when-selected",noStudentPersonalDataInPrompts:true,personalStudentAccountsAtSchool:false,studentFirstThenAiCompare:true,coverageCompleteness:"section-level-verified",classificationStatus:"official-required-modified-optional-preserved",mirrorPdfUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95%CE%91%CE%95-26-27.pdf"}
+  });
 
   upsert({
     id:"teacher-annual-special-gym-a-history",grade:"A",subject:"Ιστορία",subjectId:"history",
@@ -1174,7 +1200,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.10.0",
+    version:"1.11.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
@@ -1182,6 +1208,7 @@
     mappedEntries:Object.freeze([
       "teacher-annual-special-gym-a-ancient-language","teacher-annual-special-gym-b-ancient-language","teacher-annual-special-gym-c-ancient-language",
       "teacher-annual-special-gym-a-ancient-translation","teacher-annual-special-gym-b-ancient-translation","teacher-annual-special-gym-c-ancient-translation",
+      "teacher-annual-special-gym-a-informatics","teacher-annual-special-gym-b-informatics","teacher-annual-special-gym-c-informatics",
       "teacher-annual-special-gym-a-history","teacher-annual-special-gym-b-history","teacher-annual-special-gym-c-history",
       "teacher-annual-special-gym-a-technology","teacher-annual-special-gym-b-technology","teacher-annual-special-gym-c-technology",
       "teacher-annual-special-gym-a-geography","teacher-annual-special-gym-b-geography",

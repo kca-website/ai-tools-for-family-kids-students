@@ -52,6 +52,9 @@ jobs:
           cat /tmp/aitools4kids-http.log
           exit 1
 
+      - name: Run Higher Education hidden pilot smoke
+        run: node tests/higher-education-pilot-smoke.mjs
+
       - name: Run WCAG 2.2 report-only audit
         run: node tests/wcag-22-audit.mjs
 

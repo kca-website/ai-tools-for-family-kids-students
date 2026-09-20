@@ -11,7 +11,7 @@ vm.runInContext(read('higher-education-data.js'), sandbox, { filename: 'higher-e
 
 const he = sandbox.window.AITOOLSKIDS_HIGHER_EDUCATION;
 assert.ok(he, 'Higher Education dataset must expose window.AITOOLSKIDS_HIGHER_EDUCATION');
-assert.ok(Object.keys(he.institutions).length >= 5, 'pilot must include at least 5 institutions');
+assert.ok(Object.keys(he.institutions).length >= 6, 'pilot must include at least 6 institutions');
 assert.ok(he.departments['upatras-biology'], 'University of Patras Biology pilot is missing');
 assert.equal(he.departments['upatras-biology'].nominalSemesters, 8);
 const patrasBiology = he.departments['upatras-biology'];
@@ -63,6 +63,22 @@ assert.equal(hmuEce.courses.filter((course) => course.semester === 1).length, 6)
 assert.ok(hmuEce.courses.some((course) => course.code === '1.001' && course.topics?.some((topic) => /σειρές Taylor/.test(topic))));
 assert.ok(hmuEce.courses.some((course) => course.code === '1.002' && course.topics?.some((topic) => /Ιδιοτιμές/.test(topic))));
 assert.ok(hmuEce.courses.some((course) => course.code === '1.004' && course.topicsVerified === true));
+
+const auebEcon = he.departments['aueb-econ'];
+assert.ok(auebEcon, 'AUEB Economics pilot missing');
+assert.equal(auebEcon.curriculumDisplay, 'year-semester-course-topic');
+assert.ok(auebEcon.courses.some((course) => course.code === '1363' && course.topicsVerified === true));
+assert.ok(auebEcon.courses.some((course) => course.code === '1880' && course.topics?.some((topic) => /Νομισματική πολιτική/.test(topic))));
+
+const unipiDs = he.departments['unipi-ds'];
+assert.ok(unipiDs, 'University of Piraeus Digital Systems pilot missing');
+assert.equal(unipiDs.courses.filter((course) => course.semester === 1).length, 5);
+assert.ok(unipiDs.courses.some((course) => course.code === 'ΨΣ-501' && course.topics?.some((topic) => /Δείκτες/.test(topic))));
+assert.ok(unipiDs.courses.some((course) => course.code === 'ΨΣ-006' && course.topicsVerified === true));
+assert.ok(unipiDs.courses.some((course) => course.code === 'ΨΣ-010' && course.ects === 6));
+
+const hePage = read('higher-education-pilot.html');
+assert.match(hePage, /href="\/"[^>]*>← Αρχική AITOOLS4KIDS<\/a>/, 'Higher Education page needs a home link');
 
 assert.equal(he.meta.status, 'pilot');
 assert.match(he.meta.policyEl, /δεν δημιουργεί έτοιμη εργασία/i);

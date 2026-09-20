@@ -19,4 +19,18 @@ assert.doesNotMatch(overrides, /setTool\("(?:ai-help|phet|google-arts-culture|ge
 const notebookDecls = data.match(/["']notebooklm["']\s*:\s*\{/g) || [];
 assert.equal(notebookDecls.length, 1, 'Gemini Notebook / NotebookLM must not have duplicate canonical declarations');
 
+
+const aiHelpPathRefs = data.match(/toolId:\s*["']ai-help["']/g) || [];
+assert.equal(aiHelpPathRefs.length, 6, 'AI Help must be canonical in all 6 zone/role PATHS');
+
+const curriculum = read('curriculum-data.js');
+const curriculumToolArrays = curriculum.match(/toolIds:\s*\[[^\]]*\]/g) || [];
+assert.ok(curriculumToolArrays.length > 0, 'curriculum tool arrays must exist');
+for (const row of curriculumToolArrays) {
+  assert.match(row, /toolIds:\s*\[\s*["']ai-help["']/, 'AI Help must be the first canonical tool in every curriculum subject');
+}
+
+assert.doesNotMatch(overrides, /const\s+aiHelpEntries\s*=/, 'AI Help must not be injected from runtime overrides');
+assert.doesNotMatch(overrides, /ensurePathTool\([^\n]*ai-help/, 'AI Help must not be runtime-injected into PATHS');
+
 console.log('Repository data integrity smoke passed.');

@@ -104,14 +104,16 @@
   }
 
   function annualSpecialGymEntry(gradeId,subjectId){
-    return Object.values(C?.entries||{}).find((entry)=>
+    const entries=Object.values(C?.entries||{}).filter((entry)=>
       entry?.schoolType==="special-gymnasium" &&
       String(entry?.grade||"").toLowerCase()===String(gradeId||"").toLowerCase() &&
       entry?.subjectId===subjectId &&
-      entry?.annualInstructionsStatus==="2026-27-verified" &&
       Array.isArray(entry?.officialAnchors) &&
       entry.officialAnchors.length>0
-    )||null;
+    );
+    return entries.find((entry)=>entry?.annualInstructionsStatus==="2026-27-verified") ||
+      entries.find((entry)=>entry?.annualInstructionsStatus==="2026-27-framework-verified") ||
+      null;
   }
 
   function renderSpecialGymProfile(){
@@ -126,15 +128,20 @@
       const hasLearning=!!(detailedId&&L?.[detailedId]?.status==="ready");
       const annual=annualSpecialGymEntry(selectedSpecialGymGrade,row.id);
       const mappedCount=annual?.officialAnchors?.length||0;
+      const frameworkOnly=annual?.frameworkOnly===true||annual?.annualInstructionsStatus==="2026-27-framework-verified";
       const helper=hasLearning
         ? "Έχει έτοιμη βήμα-βήμα μελέτη και μικρό τεστ."
         : mappedCount
-          ? `${mappedCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27 στην AI Βοήθεια.`
+          ? frameworkOnly
+            ? `${mappedCount} επίσημες επιλογές πλαισίου 2026–27 στην AI Βοήθεια. Δεν παρουσιάζονται ως πλήρης section-level ύλη.`
+            : `${mappedCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27 στην AI Βοήθεια.`
           : "Άνοιξε την AI Βοήθεια και γράψε το συγκεκριμένο κεφάλαιο, κείμενο ή άσκηση.";
       const badge=hasLearning
         ? '<span class="sp-ready-pill">Μελέτη + τεστ</span>'
         : mappedCount
-          ? '<span class="sp-ready-pill">Ύλη 2026–27</span>'
+          ? frameworkOnly
+            ? '<span class="sp-ready-pill">Επίσημο πλαίσιο 2026–27</span>'
+            : '<span class="sp-ready-pill">Ύλη 2026–27</span>'
           : "";
       return `<article class="sp-subject-card" data-sg-subject="${esc(row.id)}">
         <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade.label)}</span><h3>${esc(row.label)}</h3></div>${badge}</div>
@@ -155,7 +162,7 @@
     slProfile.innerHTML=`
       <div class="sp-choice-block"><h3>2. Διάλεξε τάξη</h3>${gradeTabs(grades,selectedSpecialLyceumGrade,"data-sl-grade")}</div>
       <article class="sp-subject-card sp-subject-card--gateway">
-        <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade?.labelEl||"")}</span><h3>Διάλεξε μάθημα μέσα στην AI Βοήθεια</h3></div></div>
+        <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade?.labelEl||"")}</span><h3>Διάλεξε μάθημα μέσα στην AI Βοήθεια</h3></div><span class="sp-ready-pill">Επίσημη δομή</span></div>
         <p>Η ίδια AI Βοήθεια έχει πλέον ένα ενιαίο πεδίο «Σχολείο». Θα ανοίξει στο Ειδικό Λύκειο και στην τάξη που επέλεξες και από εκεί διαλέγεις μάθημα.</p>
         <div class="sp-card-actions">
           <a class="sp-action sp-action--ai" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","student"))}">🤖 AI Βοήθεια μαθητή</a>
@@ -163,7 +170,7 @@
           <a class="sp-source-link" href="${esc(SL.sourceUrl)}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a>
         </div>
       </article>
-      <p class="sp-small-note">Δεν εμφανίζουμε εδώ αυθαίρετη «ειδική ύλη». Όπου δεν έχει χαρτογραφηθεί ξεχωριστά η φετινή ύλη Ε.Α.Ε., το AI δουλεύει πάνω στο πραγματικό κεφάλαιο ή την άσκηση που του δίνεις.</p>`;
+      <p class="sp-small-note"><strong>Κατάσταση:</strong> επίσημη δομή Λυκείου Ε.Α.Ε., όχι καθολική ξεχωριστή section-level χαρτογράφηση. Όπου υπάρχει επίσημη φετινή οδηγία Ε.Α.Ε. τη χρησιμοποιούμε· διαφορετικά η AI Βοήθεια δείχνει ρητά υποστηρικτική αντιστοίχιση και δουλεύει πάνω στο πραγματικό κεφάλαιο ή την άσκηση που δίνεις.</p>`;
   }
 
   function eneegylEntries(){
@@ -177,17 +184,44 @@
     return grade?.label||"ΕΝ.Ε.Ε.ΓΥ.-Λ.";
   }
 
+  function eneegylCoverage(row,grade){
+    if(row?.type==="sector-gateway") return {kind:"structure",label:"Επίσημη δομή"};
+    const gid=String(selectedEneegylGrade||"").replace(/^gym-|^lyc-/,"").toUpperCase();
+    const entries=Object.values(C?.entries||{}).filter((entry)=>{
+      if(entry?.schoolType!=="eneegyl") return false;
+      const gradeMatch=String(entry?.grade||"").toUpperCase()===gid || String(entry?.gradeLabel||"")===String(grade?.label||"");
+      if(!gradeMatch) return false;
+      if(typeof window.subjectMatches==="function") return window.subjectMatches(entry,{id:row.id,label:row.label});
+      return String(entry?.subjectId||"")===String(row.id||"") || String(entry?.subject||"")===String(row.label||"");
+    });
+    const exact=entries.find(e=>e?.annualInstructionsStatus==="2026-27-verified"||e?.coverageStatus==="annual-instructions-verified"||e?.coverageStatus==="annual-exam-syllabus-verified"||e?.coverageStatus==="panhellenic-2027-verified");
+    if(exact) return {kind:"exact",label:"Ύλη 2026–27",entry:exact};
+    const partial=entries.find(e=>e?.coverageStatus==="partial"&&(e?.currentExamSyllabusStatus==="verified"||e?.annualInstructionsStatus==="source-indexed"));
+    if(partial) return {kind:"partial",label:"Μερική χαρτογράφηση",entry:partial};
+    const support=entries.find(e=>e?.coverageStatus==="reference"||e?.status==="verified-reference");
+    if(support) return {kind:"support",label:"Υποστηρικτική αντιστοίχιση",entry:support};
+    return {kind:"structure",label:"Επίσημη δομή"};
+  }
+
   function renderEneegylStructureCard(grade,row){
     const detailedId=EN_STRUCTURE_DETAILED[`${selectedEneegylGrade}|${row.id}`]||null;
     const hasLearning=!!(detailedId&&L?.[detailedId]?.status==="ready");
     const subjectId=detailedId||`eneegyl-${selectedEneegylGrade}-${row.id}`;
+    const coverage=eneegylCoverage(row,grade);
     const helper=hasLearning
       ? "Έχει έτοιμη βήμα-βήμα μελέτη, εξάσκηση και απλοποιημένο μικρό τεστ."
       : row?.requiresExactLesson
         ? "Τα μαθήματα εξαρτώνται από τον τομέα ή την ειδικότητα. Στην AI Βοήθεια γράψε το ακριβές μάθημα και το κεφάλαιο που δουλεύεις."
-        : "Το μάθημα εμφανίζεται στο επίσημο σχολικό πλαίσιο. Στην AI Βοήθεια δώσε το πραγματικό κεφάλαιο, κείμενο ή άσκηση που έχεις μπροστά σου.";
-    return `<article class="sp-subject-card" data-en-structure-subject="${esc(row.id)}">
-      <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(eneegylTypeLabel(row,grade))}</span><h3>${esc(row.label)}</h3></div>${hasLearning?'<span class="sp-ready-pill">Έτοιμη διαδρομή</span>':""}</div>
+        : coverage.kind==="partial"
+          ? "Υπάρχει επαληθευμένη μερική κάλυψη από τρέχουσα επίσημη πηγή. Δεν παρουσιάζεται ως πλήρης ύλη του μαθήματος."
+          : coverage.kind==="support"
+            ? "Υπάρχει μόνο υποστηρικτική αντιστοίχιση με άλλο επαληθευμένο σχολικό curriculum. Επιβεβαίωσε το πραγματικό κεφάλαιο που διδάσκεσαι."
+            : coverage.kind==="exact"
+              ? "Υπάρχει τρέχουσα επαληθευμένη χαρτογράφηση 2026–27 για το μάθημα."
+              : "Το μάθημα εμφανίζεται στην επίσημη σχολική δομή, αλλά δεν ισχυριζόμαστε πλήρη χαρτογραφημένη ύλη.";
+    const statusBadge=hasLearning?'<span class="sp-ready-pill">Έτοιμη διαδρομή</span>':`<span class="sp-ready-pill">${esc(coverage.label)}</span>`;
+    return `<article class="sp-subject-card" data-en-structure-subject="${esc(row.id)}" data-coverage="${esc(coverage.kind)}">
+      <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(eneegylTypeLabel(row,grade))}</span><h3>${esc(row.label)}</h3></div>${statusBadge}</div>
       <p>${esc(helper)}</p>
       ${subjectActions({schoolType:"eneegyl",gradeId:selectedEneegylGrade,subjectId,learningId:detailedId,sourceUrl:grade?.sourceUrl||"",target:"en"})}
     </article>`;
@@ -222,7 +256,7 @@
       <div class="sp-choice-block"><h3>2. Διάλεξε τάξη</h3>${eneegylGradeTabs()}</div>
       <div class="sp-choice-block">
         <h3>3. Διάλεξε μάθημα</h3>
-        <p class="sp-small-note">${esc(grade.label)} · ${grade.level==="gymnasium"?"Γυμνάσιο ΕΝ.Ε.Ε.ΓΥ.-Λ.":"Λύκειο ΕΝ.Ε.Ε.ΓΥ.-Λ."}. Τα μαθήματα παρακάτω είναι το σχολικό πλαίσιο· μόνο όσα γράφουν «Έτοιμη διαδρομή» έχουν ήδη αναλυτική χαρτογράφηση στο site.</p>
+        <p class="sp-small-note">${esc(grade.label)} · ${grade.level==="gymnasium"?"Γυμνάσιο ΕΝ.Ε.Ε.ΓΥ.-Λ.":"Λύκειο ΕΝ.Ε.Ε.ΓΥ.-Λ."}. Κάθε κάρτα ξεχωρίζει πλέον αν έχουμε <strong>ύλη 2026–27</strong>, <strong>μερική χαρτογράφηση</strong>, <strong>υποστηρικτική αντιστοίχιση</strong> ή μόνο <strong>επίσημη δομή</strong>. Το «Έτοιμη διαδρομή» αφορά διαθέσιμο μαθησιακό υλικό και δεν σημαίνει από μόνο του πλήρη επίσημη ύλη.</p>
         ${note}
         <div class="sp-subject-grid">${structureCards||'<div class="sp-empty">Δεν βρέθηκε σχολική δομή για αυτή την τάξη.</div>'}</div>
         ${readyBlock}

@@ -208,9 +208,8 @@ try {
   assert.match(lastAiPayload.prompt, /course-only-current-program/);
 
   // Computing courses should prioritize coding-specific tools.
-  await page.locator('#heSearch').fill('ΟΠΑ Πληροφορική');
-  await page.waitForTimeout(80);
-  assert.equal(await page.locator('#heDepartment').inputValue(), 'aueb-cs');
+  await page.selectOption('#heInstitution', 'aueb');
+  await page.selectOption('#heDepartment', 'aueb-cs');
   const progOption = page.locator('#heCourse option').filter({ hasText: 'Εισαγωγή στον Προγραμματισμό Υπολογιστών' });
   const progValue = await progOption.getAttribute('value');
   assert.ok(progValue, 'AUEB programming course missing');

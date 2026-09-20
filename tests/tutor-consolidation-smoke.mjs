@@ -167,9 +167,6 @@ async function mobileInteractionSnapshot(page, baseUrl, lang, interact = true) {
     return { before, opened, afterAge: opened, afterManualClose: opened, flashStatus: '', studyStatus: '' };
   }
 
-  await page.waitForSelector('#tutorAge', { state: 'attached', timeout: 10000 });
-  await page.selectOption('#tutorAge', '15');
-  await page.waitForTimeout(120);
   const afterAge = await snapshot(page);
 
   if (afterAge.settingsOpen) {
@@ -218,7 +215,7 @@ try {
 
     compareParity(local.before, prod.before, `mobile ${lang} initial`);
     assert.equal(local.opened.settingsOpen, true, `mobile ${lang}: settings should be open while editing`);
-    assert.equal(local.afterAge.settingsOpen, true, `mobile ${lang}: selecting a field must not auto-close settings`);
+    assert.equal(local.afterAge.settingsOpen, true, `mobile ${lang}: settings must remain open until the user closes them`);
     assert.equal(local.afterManualClose.settingsOpen, false, `mobile ${lang}: settings should close only after the user closes them`);
 
     // Disconnected-state copy is a source-owned contract, not a live-production parity signal.

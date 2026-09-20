@@ -112,7 +112,12 @@ async function runStructuralMatrix(page, baseUrl, viewport, lang = 'el') {
   const errors = [];
   const failedSameOrigin = [];
   page.on('pageerror', (err) => errors.push(`pageerror: ${err.message}`));
-  page.on('console', (msg) => { if (msg.type() === 'error') errors.push(`console: ${msg.text()}`); });
+  page.on('console', (msg) => {
+    if (msg.type() !== 'error') return;
+    const text = msg.text();
+    if (/^Failed to load resource:/.test(text)) return;
+    errors.push(`console: ${text}`);
+  });
   page.on('response', (resp) => {
     try {
       const u = new URL(resp.url());

@@ -598,12 +598,12 @@ const PATHS = {
         },
         {
           toolId: "perplexity",
-          useCaseEl: "Γρήγορη, τεκμηριωμένη απάντηση σε ερωτήσεις «γιατί» που κάνει το παιδί (π.χ. γιατί ο ουρανός είναι μπλε), με πηγές που μπορείς να διασταυρώσεις.",
-          useCaseEn: "Quick, sourced answers to the 'why' questions kids ask (e.g. why is the sky blue), with sources you can double-check.",
-          howToEl: "Ρώτα ό,τι σε ρώτησε το παιδί με τα δικά του λόγια, και δες τις πηγές κάτω από την απάντηση πριν του τη μεταφέρεις.",
-          howToEn: "Ask whatever the child asked you, in their own words, and check the sources under the answer before you pass it on.",
-          cautionEl: "Λογαριασμός 18+.",
-          cautionEn: "18+ account.",
+          useCaseEl: "Για έρευνα με πηγές σε Ιστορία ή Φυσικές Επιστήμες, όταν θέλεις εσύ ως γονέας να ελέγξεις ένα γεγονός ή μια εξήγηση μαζί με το παιδί.",
+          useCaseEn: "For sourced research in History or Science when you, as the parent, want to check a fact or explanation together with the child.",
+          howToEl: "Ο γονέας χειρίζεται τον δικό του λογαριασμό/την υπηρεσία και ανοίγει τις πηγές μαζί με το παιδί. Παιδιά κάτω των 13 δεν επιτρέπεται να χρησιμοποιούν το Perplexity.",
+          howToEn: "The parent operates their own account/service and reviews sources with the child. Children under 13 are not permitted to use Perplexity.",
+          cautionEl: "Μην δίνεις στο παιδί κάτω των 13 δικό του λογαριασμό ή αυτόνομη χρήση. Δείξε του πώς ελέγχουμε τουλάχιστον μία από τις πηγές.",
+          cautionEn: "Do not give an under-13 child their own account or independent use. Show them how to check at least one cited source.",
         },
         {
           toolId: "gemini",

@@ -73,6 +73,8 @@ try {
   assert.match(await page.locator('#heAiOutput').innerText(), /Δοκιμαστική inline απάντηση AI/);
   assert.ok(lastAiPayload, 'inline AI did not call the shared server endpoint');
   assert.match(lastAiPayload.system, /AI Βοηθός Φοιτητή/);
+  assert.equal(lastAiPayload.audience, 'university_student');
+
   assert.match(lastAiPayload.prompt, /Πανεπιστήμιο Πατρών/);
   assert.match(lastAiPayload.prompt, /Τμήμα Βιολογίας/);
   assert.match(lastAiPayload.prompt, /Quiz/);

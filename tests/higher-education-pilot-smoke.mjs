@@ -23,7 +23,7 @@ try {
   });
 
   await page.goto(`${BASE}/higher-education-pilot.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForSelector('#heInstitution option');
+  await page.waitForFunction(() => document.querySelectorAll('#heInstitution option').length >= 5);
 
   assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex,nofollow');
   assert.ok((await page.locator('#heInstitution option').count()) >= 4, 'pilot institutions missing');

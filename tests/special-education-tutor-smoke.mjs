@@ -208,7 +208,7 @@ async function checkUnified(page,label){
   assert.equal(lazyState.simpleQuiz,true,`${label}: simplified Special Education quiz adapter missing`);
   assert.ok(lazyState.runtimeScripts>=9,`${label}: expected lazy Special Education runtime scripts including annual mapping`);
   assert.equal(lazyState.annualMapLoaded,true,`${label}: annual Special Gymnasium map was not lazy-loaded`);
-  assert.equal(lazyState.annualMapVersion,'1.13.0',`${label}: wrong annual Special Gymnasium mapping version`);
+  assert.equal(lazyState.annualMapVersion,'1.14.0',`${label}: wrong annual Special Gymnasium mapping version`);
 }
 
 try{

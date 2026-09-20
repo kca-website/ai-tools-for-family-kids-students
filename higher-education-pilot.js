@@ -253,7 +253,7 @@
     institutionSelect.value = first.institutionId;
     populateDepartments();
     departmentSelect.value = first.departmentId;
-    populateCourses();
+    populateYears();
 
     const legacy = (first.institution.legacyAliases || []).some((x) => normalize(x).includes(q)) ||
       (first.department.legacyDepartmentAliases || []).some((x) => normalize(x).includes(q)) ||

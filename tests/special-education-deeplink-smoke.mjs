@@ -4,6 +4,20 @@ import assert from 'node:assert/strict';
 const LOCAL='http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
 
+function collectAppErrors(page,errors){
+  page.on('pageerror',(err)=>errors.push(err.message));
+  page.on('console',(msg)=>{
+    if(msg.type()==='error'&&!msg.text().startsWith('Failed to load resource:')) errors.push(msg.text());
+  });
+  page.on('requestfailed',(request)=>{
+    const url=request.url();
+    if(url.startsWith(LOCAL)) errors.push(`request failed ${url}: ${request.failure()?.errorText||'unknown error'}`);
+  });
+  page.on('response',(response)=>{
+    if(response.status()>=400&&response.url().startsWith(LOCAL)) errors.push(`${response.status()} ${response.url()}`);
+  });
+}
+
 async function openDeepLink(page,{startZone,expectedZone,role,track,grade,subject=''}){
   const params=new URLSearchParams({schoolTrack:track});
   if(grade) params.set('grade',grade);
@@ -36,8 +50,7 @@ try{
 
     const sg=await browser.newPage({viewport});
     const sgErrors=[];
-    sg.on('pageerror',(err)=>sgErrors.push(err.message));
-    sg.on('console',(msg)=>{if(msg.type()==='error') sgErrors.push(msg.text());});
+    collectAppErrors(sg,sgErrors);
     await openDeepLink(sg,{startZone:'high',expectedZone:'middle',role:'student',track:'special-gymnasium',grade:'a',subject:'special-gym-a-language-comprehension'});
     assert.equal(await sg.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: Special Gymnasium track deep link failed`);
     assert.match(await sg.locator('#tutorContextBox').innerText(),/Γλωσσική Διδασκαλία|Ειδικό Γυμνάσιο/i,`${label}: Special Gymnasium context failed`);
@@ -46,8 +59,7 @@ try{
 
     const sgBio=await browser.newPage({viewport});
     const sgBioErrors=[];
-    sgBio.on('pageerror',(err)=>sgBioErrors.push(err.message));
-    sgBio.on('console',(msg)=>{if(msg.type()==='error') sgBioErrors.push(msg.text());});
+    collectAppErrors(sgBio,sgBioErrors);
     await openDeepLink(sgBio,{startZone:'middle',expectedZone:'middle',role:'guardian',track:'special-gymnasium',grade:'b',subject:'special-gym-b-biology'});
     assert.equal(await sgBio.inputValue('#tutorSubject'),'special-gym-b-biology',`${label}: Special Gymnasium B Biology deep link failed`);
     const sgBioOptions=await sgBio.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})));
@@ -62,8 +74,7 @@ try{
 
     const sl=await browser.newPage({viewport});
     const slErrors=[];
-    sl.on('pageerror',(err)=>slErrors.push(err.message));
-    sl.on('console',(msg)=>{if(msg.type()==='error') slErrors.push(msg.text());});
+    collectAppErrors(sl,slErrors);
     await openDeepLink(sl,{startZone:'middle',expectedZone:'high',role:'guardian',track:'special-lyceum',grade:'b'});
     assert.equal(await sl.inputValue('#tutorSchoolTrack'),'special-lyceum',`${label}: Special Lyceum track deep link failed`);
     assert.equal(await sl.inputValue('#tutorGrade'),'b',`${label}: Special Lyceum grade deep link failed`);
@@ -74,9 +85,7 @@ try{
 
     const enGym=await browser.newPage({viewport});
     const enGymErrors=[];
-    enGym.on('pageerror',(err)=>enGymErrors.push(err.message));
-    enGym.on('console',(msg)=>{if(msg.type()==='error') enGymErrors.push(msg.text());});
-    enGym.on('response',(res)=>{if(res.status()===404) enGymErrors.push(`404 ${res.url()}`);});
+    collectAppErrors(enGym,enGymErrors);
     await openDeepLink(enGym,{startZone:'middle',expectedZone:'high',role:'student',track:'eneegyl',grade:'gym-d',subject:'eneegyl-gym-d-economics'});
     assert.equal(await enGym.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL Gymnasium track deep link failed`);
     assert.equal(await enGym.inputValue('#tutorGrade'),'gym-d',`${label}: ENEEGYL D Gymnasium grade deep link failed`);
@@ -89,8 +98,7 @@ try{
 
     const en=await browser.newPage({viewport});
     const enErrors=[];
-    en.on('pageerror',(err)=>enErrors.push(err.message));
-    en.on('console',(msg)=>{if(msg.type()==='error') enErrors.push(msg.text());});
+    collectAppErrors(en,enErrors);
     await openDeepLink(en,{startZone:'middle',expectedZone:'high',role:'guardian',track:'eneegyl',grade:'lyc-b',subject:'eneegyl-b-economy-accounting-basics'});
     assert.equal(await en.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL Lyceum track deep link failed`);
     assert.equal(await en.inputValue('#tutorGrade'),'lyc-b',`${label}: ENEEGYL B Lyceum grade deep link failed`);

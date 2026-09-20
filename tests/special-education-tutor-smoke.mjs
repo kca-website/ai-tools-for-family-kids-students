@@ -216,7 +216,9 @@ try{
     const page=await browser.newPage();
     const errors=[];
     page.on('pageerror',(err)=>errors.push(err.message));
-    page.on('console',(msg)=>{if(msg.type()==='error') errors.push(msg.text());});
+    page.on('console',(msg)=>{if(msg.type()==='error'&&!msg.text().startsWith('Failed to load resource:')) errors.push(msg.text());});
+    page.on('requestfailed',(request)=>{if(request.url().startsWith(LOCAL)) errors.push(`request failed ${request.url()}: ${request.failure()?.errorText||'unknown error'}`);});
+    page.on('response',(response)=>{if(response.status()>=400&&response.url().startsWith(LOCAL)) errors.push(`${response.status()} ${response.url()}`);});
     await prepare(page,viewport);
     await checkUnified(page,label);
     const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);

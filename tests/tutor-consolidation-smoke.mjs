@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 const LOCAL = 'http://127.0.0.1:4173/';
 const PROD = 'https://www.aitools4kids.gr/';
+const CHECK_PRODUCTION = process.env.SKIP_PRODUCTION_PARITY !== '1';
 
 const contexts = [
   { zoneId: 'primary', roleId: 'guardian' },
@@ -232,12 +233,15 @@ try {
   }
 
   for (const lang of ['el', 'en']) {
-    const prodPage = await browser.newPage();
     const localPage = await browser.newPage();
-    const prod = await mobileInteractionSnapshot(prodPage, PROD, lang, false);
     const local = await mobileInteractionSnapshot(localPage, LOCAL, lang, true);
 
-    compareParity(local.before, prod.before, `mobile ${lang} initial`, { ignoreMobileSettingsState: true });
+    if (CHECK_PRODUCTION) {
+      const prodPage = await browser.newPage();
+      const prod = await mobileInteractionSnapshot(prodPage, PROD, lang, false);
+      compareParity(local.before, prod.before, `mobile ${lang} initial`, { ignoreMobileSettingsState: true });
+      await prodPage.close();
+    }
     assert.equal(local.before.subjectValue, '', `mobile ${lang}: subject must start unselected`);
     assert.equal(local.before.settingsOpen, true, `mobile ${lang}: settings must start open until a subject is explicitly selected`);
     assert.equal(local.before.flashGenerateDisabled, true, `mobile ${lang}: flashcards must be disabled before subject selection`);
@@ -258,7 +262,6 @@ try {
     assert.equal(local.flashStatus, expectedFlash, `mobile ${lang}: flashcards age-gate copy changed`);
     assert.equal(local.studyStatus, expectedStudy, `mobile ${lang}: study-tools age-gate copy changed`);
 
-    await prodPage.close();
     await localPage.close();
   }
 
@@ -296,23 +299,25 @@ try {
     }
   }
 
-  for (const context of [
-    { zoneId: 'primary', roleId: 'guardian' },
-    { zoneId: 'middle', roleId: 'student' },
-    { zoneId: 'high', roleId: 'student' },
-  ]) {
-    const prodPage = await browser.newPage();
-    const localPage = await browser.newPage();
-    await prepare(prodPage, PROD, { width: 1280, height: 900 }, 'el');
-    await prepare(localPage, LOCAL, { width: 1280, height: 900 }, 'el');
-    await renderContext(prodPage, context, 'el');
-    await renderContext(localPage, context, 'el');
-    compareParity(await snapshot(localPage), await snapshot(prodPage), `desktop ${context.zoneId}/${context.roleId}`);
-    await prodPage.close();
-    await localPage.close();
+  if (CHECK_PRODUCTION) {
+    for (const context of [
+      { zoneId: 'primary', roleId: 'guardian' },
+      { zoneId: 'middle', roleId: 'student' },
+      { zoneId: 'high', roleId: 'student' },
+    ]) {
+      const prodPage = await browser.newPage();
+      const localPage = await browser.newPage();
+      await prepare(prodPage, PROD, { width: 1280, height: 900 }, 'el');
+      await prepare(localPage, LOCAL, { width: 1280, height: 900 }, 'el');
+      await renderContext(prodPage, context, 'el');
+      await renderContext(localPage, context, 'el');
+      compareParity(await snapshot(localPage), await snapshot(prodPage), `desktop ${context.zoneId}/${context.roleId}`);
+      await prodPage.close();
+      await localPage.close();
+    }
   }
 
-  console.log('Tutor consolidation smoke/parity checks passed.');
+  console.log(`Tutor consolidation smoke checks passed${CHECK_PRODUCTION?' with production parity':' (local-only; production parity skipped)'}.`);
 } finally {
   await browser.close();
 }

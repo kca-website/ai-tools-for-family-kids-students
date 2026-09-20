@@ -14,9 +14,14 @@ async function runDiagnostic(page,root,expectedOptions,label){
 
 async function check(viewport,label){
   const page=await browser.newPage({viewport});
+  await page.route('https://fonts.googleapis.com/**',route=>route.fulfill({status:200,contentType:'text/css',body:''}));
+  await page.route('https://fonts.gstatic.com/**',route=>route.fulfill({status:204,body:''}));
+  await page.route('**/_vercel/insights/script.js',route=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
   const errors=[];
   page.on('pageerror',(err)=>errors.push(err.message));
-  page.on('console',(msg)=>{if(msg.type()==='error') errors.push(msg.text());});
+  page.on('console',(msg)=>{if(msg.type()==='error'&&!msg.text().startsWith('Failed to load resource:')) errors.push(msg.text());});
+  page.on('requestfailed',(request)=>{if(request.url().startsWith('http://127.0.0.1:4173/')) errors.push(`request failed ${request.url()}: ${request.failure()?.errorText||'unknown error'}`);});
+  page.on('response',(response)=>{if(response.status()>=400&&response.url().startsWith('http://127.0.0.1:4173/')) errors.push(`${response.status()} ${response.url()}`);});
   await page.goto(base,{waitUntil:'networkidle'});
 
   assert((await page.title()).includes('Ειδική Εκπαίδευση'),`${label}: wrong page title`);

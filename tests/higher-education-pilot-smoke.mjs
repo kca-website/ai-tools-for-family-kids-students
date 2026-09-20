@@ -46,6 +46,12 @@ try {
   const policyText = await page.locator('.he-warning').innerText();
   assert.match(policyText, /Δεν προορίζεται για έτοιμη εργασία προς υποβολή/i);
 
+  await page.locator('#heSearch').fill('Βιολογία Πατρών');
+  await page.waitForTimeout(80);
+  assert.equal(await page.locator('#heInstitution').inputValue(), 'upatras');
+  assert.equal(await page.locator('#heDepartment').inputValue(), 'upatras-biology');
+  assert.ok((await page.locator('#heCourse option').count()) >= 10, 'Patras Biology pilot courses missing');
+
   const storage = await page.evaluate(() => ({
     local: Object.keys(localStorage),
     session: Object.keys(sessionStorage),

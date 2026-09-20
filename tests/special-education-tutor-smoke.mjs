@@ -141,6 +141,14 @@ async function checkUnified(page,label){
   const slSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
   assert.ok(slSubjects.length>0,`${label}: Special Lyceum needs a usable subject menu`);
   assert.ok(slSubjects.every(id=>id.startsWith('special-lyceum-a-')),`${label}: Special Lyceum subject menu leaked another school type`);
+  const slInformatics=slSubjects.find(id=>id.includes('pliroforiki-a-lykeiou'));
+  assert.ok(slInformatics,`${label}: Special Lyceum A exact Informatics mapping missing`);
+  await selectOption(page,'#tutorSubject',slInformatics);
+  const slInfoTopics=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})).filter(x=>x.text));
+  const slInfoSections=slInfoTopics.filter(x=>!x.value.includes('.action-'));
+  assert.equal(slInfoSections.length,20,`${label}: Special Lyceum A Informatics must expose 20 official sections: ${JSON.stringify(slInfoTopics)}`);
+  assert.ok(slInfoSections.some(x=>x.text.includes('7.1 Προγραμματισμός εφαρμογών για φορητές συσκευές')),`${label}: Special Lyceum A Informatics 7.1 missing`);
+  assert.ok(slInfoSections.some(x=>x.text.includes('16.4 Ιδιωτικότητα και προσωπικά δεδομένα')),`${label}: Special Lyceum A Informatics 16.4 missing`);
   const slContext=await page.locator('#tutorContextBox').innerText();
   assert.match(slContext,/Ειδικό Λύκειο|Special Lyceum/i,`${label}: Special Lyceum context identity missing`);
 

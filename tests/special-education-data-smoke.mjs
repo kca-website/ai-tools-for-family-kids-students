@@ -13,6 +13,7 @@ const files = [
   'special-education-status.js',
   ...sectorModules,
   'special-education-special-gymnasium-data.js',
+  'teacher-curriculum-special-lyceum-annual-2026-2027.js',
   'special-education-special-lyceum-data.js',
   'special-education-eneegyl-structure-data.js',
   'special-education-support-tools-data.js',
@@ -33,6 +34,7 @@ const T = context.window.SPECIAL_EDUCATION_TUTOR_CONTEXT;
 const A = context.window.SPECIAL_EDUCATION_ASSESSMENT_POLICY;
 const SG = context.window.SPECIAL_GYMNASIUM_2026_2027;
 const SL = context.window.SPECIAL_LYCEUM_2026_2027;
+const SLA = context.window.AITOOLSKIDS_SPECIAL_LYCEUM_ANNUAL_2026_2027;
 const EN = context.window.ENEEGYL_2026_2027_STRUCTURE;
 const SUPPORT = context.window.SPECIAL_EDUCATION_SUPPORT_TOOLS;
 
@@ -147,6 +149,11 @@ assert(SL.annualGuidanceStatus === 'published-guidance-source-indexed-section-ma
 assert((SL.annualGuidanceIndex||[]).length >= 10, 'Special Lyceum published 2026-27 guidance index looks incomplete');
 assert(Object.keys(SL.grades || {}).sort().join(',') === 'a,b,c', 'Special Lyceum must expose A/B/C Lyceum grades');
 assert(/δεν|not/i.test(SL.scopeNoteEl + ' ' + SL.scopeNoteEn), 'Special Lyceum must state the no-invented-syllabus boundary');
+const slInfoA=SLA.entries['a|informatics'];
+assert(slInfoA.coverageStatus === 'exact', 'Special Lyceum A Informatics must be an exact annual mapping');
+assert(slInfoA.officialAnchors.length === 20, `Special Lyceum A Informatics must expose 20 official sections, got ${slInfoA.officialAnchors.length}`);
+assert(slInfoA.officialAnchors.includes('7.1 Προγραμματισμός εφαρμογών για φορητές συσκευές'), 'Special Lyceum A Informatics section 7.1 missing');
+assert(slInfoA.officialAnchors.includes('16.4 Ιδιωτικότητα και προσωπικά δεδομένα στο Διαδίκτυο'), 'Special Lyceum A Informatics section 16.4 missing');
 
 assert(EN.schoolType === 'eneegyl', 'ENEEGYL structure identity is wrong');
 assert(EN.totalGrades === 8, `ENEEGYL must have 8 grades, got ${EN.totalGrades}`);

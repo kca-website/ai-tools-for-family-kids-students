@@ -31,6 +31,7 @@
     ["special-education-economy","/special-education-sector-economy-data.js"],
     ["special-education-special-gymnasium","/special-education-special-gymnasium-data.js"],
     ["special-gym-annual-2026-2027","/teacher-curriculum-special-gym-annual-2026-2027.js"],
+    ["special-lyceum-annual-2026-2027","/teacher-curriculum-special-lyceum-annual-2026-2027.js"],
     ["special-education-special-lyceum","/special-education-special-lyceum-data.js"],
     ["special-education-tutor-context","/special-education-tutor-context.js"],
     ["special-education-tutor-catalog","/special-education-tutor-catalog.js"]

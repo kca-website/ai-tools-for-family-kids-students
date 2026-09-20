@@ -27,16 +27,6 @@
   function unique(arr) { return [...new Set((arr || []).filter(Boolean))]; }
 
 
-  // Remove references to retired/unsupported Khanmigo if any stale data survives elsewhere.
-  if (typeof TOOLS !== "undefined") delete TOOLS.khanmigo;
-  if (typeof ACCESSIBILITY_INFO !== "undefined") delete ACCESSIBILITY_INFO.khanmigo;
-  Object.values(PATHS || {}).forEach((roles) => Object.values(roles || {}).forEach((p) => {
-    if (Array.isArray(p?.tools)) p.tools = p.tools.filter((x) => x.toolId !== "khanmigo");
-  }));
-  Object.values(CURRICULUM || {}).forEach((subjects) => Object.values(subjects || {}).forEach((s) => {
-    if (Array.isArray(s?.toolIds)) s.toolIds = s.toolIds.filter((id) => id !== "khanmigo");
-  }));
-
   // Our AI Help is a baseline option across every existing subject and role.
   const aiHelpEntries = {
     primary: {

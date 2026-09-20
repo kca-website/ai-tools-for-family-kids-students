@@ -14,6 +14,7 @@
     .he-field{display:grid;gap:6px}
     .he-field label{font-weight:800}
     .he-field select,.he-field input{width:100%;min-height:46px;padding:10px 12px;border:1px solid #cfd8e3;border-radius:10px;background:#fff;color:#172033;font:inherit}
+    .he-field[hidden]{display:none!important}
     .he-card{margin-top:18px;padding:18px;border:1px solid #dbe3ee;border-radius:16px;background:#fff}
     .he-note{padding:12px 14px;border-radius:12px;background:#f7fafc;line-height:1.5}
     .he-warning{padding:12px 14px;border-radius:12px;background:#fff7ed;color:#8a3b12;line-height:1.5}
@@ -34,8 +35,24 @@
     .he-ai-input{width:100%;min-height:110px;padding:12px;border:1px solid #cfd8e3;border-radius:10px;font:inherit;resize:vertical}
     .he-ai-providers{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
     .he-ai-status{min-height:1.5em;margin-top:10px;font-size:.88rem;color:#526273}
-    .he-ai-output{display:none;margin-top:14px;padding:16px;border:1px solid #dbe3ee;border-radius:12px;background:#fbfcfd;white-space:pre-wrap;line-height:1.58}
+    .he-ai-output{display:none;margin-top:14px;padding:16px;border:1px solid #dbe3ee;border-radius:12px;background:#fbfcfd;line-height:1.58;overflow-wrap:anywhere}
     .he-ai-output.visible{display:block}
+    .he-ai-output h2,.he-ai-output h3,.he-ai-output h4{margin:1em 0 .45em;line-height:1.25}
+    .he-ai-output p{margin:.55em 0}
+    .he-ai-output ul,.he-ai-output ol{margin:.55em 0;padding-left:1.35rem}
+    .he-ai-output li{margin:.32em 0}
+    .he-ai-output blockquote{margin:.7em 0;padding:.65em .85em;border-left:4px solid #9ab7cc;background:#f4f8fb}
+    .he-ai-output code{padding:.08em .28em;border-radius:5px;background:#eef2f7;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+    .he-ai-output pre{overflow:auto;padding:12px;border-radius:10px;background:#111827;color:#f8fafc}
+    .he-ai-output pre code{padding:0;background:transparent;color:inherit}
+    .he-md-table{overflow-x:auto;margin:.85em 0}
+    .he-ai-output table{width:100%;min-width:560px;border-collapse:collapse;background:#fff}
+    .he-ai-output th,.he-ai-output td{padding:8px 9px;border:1px solid #d7dee8;text-align:left;vertical-align:top}
+    .he-ai-output th{background:#eef6ff}
+    .he-syllabus{margin-top:14px;padding:14px;border:1px solid #dbe3ee;border-radius:12px;background:#fbfcfd}
+    .he-syllabus h3{margin:0 0 8px}
+    .he-topic-list{margin:8px 0 0;padding-left:1.25rem}
+    .he-topic-list li{margin:4px 0}
     @media(max-width:700px){.he-grid{grid-template-columns:1fr}.he-wrap{padding:18px 12px 42px}.he-hero{padding:18px}.he-ai-providers{display:grid;grid-template-columns:1fr}.he-ai-provider{width:100%}}
   </style>
 </head>
@@ -68,6 +85,14 @@
           <label for="heDepartment">Τμήμα</label>
           <select id="heDepartment"></select>
         </div>
+        <div class="he-field" id="heYearField">
+          <label for="heYear">Έτος</label>
+          <select id="heYear"></select>
+        </div>
+        <div class="he-field" id="heSemesterField">
+          <label for="heSemester">Εξάμηνο</label>
+          <select id="heSemester"></select>
+        </div>
         <div class="he-field">
           <label for="heCourse">Μάθημα</label>
           <select id="heCourse"></select>
@@ -78,6 +103,7 @@
         </div>
       </div>
       <div id="heCoverage" class="he-note" style="margin-top:14px"></div>
+      <div id="heSyllabus" class="he-syllabus" hidden></div>
     </section>
 
     <section class="he-card" aria-labelledby="aiTitle">

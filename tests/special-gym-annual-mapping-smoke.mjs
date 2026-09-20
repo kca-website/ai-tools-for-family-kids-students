@@ -15,7 +15,7 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,20);
+assert.equal(M.mappedEntries.length,23);
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');
@@ -23,6 +23,25 @@ for(const id of M.mappedEntries){
   assert.ok(C[id].officialAnchors.length>0,`${id} has no selectable anchors`);
   assert.ok(C[id].sourceUrl.includes('minedu.gov.gr'),`${id} must retain official ministry source`);
 }
+
+const ancientA=C['teacher-annual-special-gym-a-ancient-language'];
+assert.ok(ancientA.officialAnchors.includes('Ενότητα 8 — δευτερόκλιτα επίθετα και δεικτική αντωνυμία'));
+assert.ok(ancientA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — Ενότητα 10')));
+assert.ok(ancientA.excludedAnchors.some(x=>x.includes('Ενότητες 14-18')));
+
+const ancientB=C['teacher-annual-special-gym-b-ancient-language'];
+assert.ok(ancientB.officialAnchors.some(x=>x.startsWith('Ενότητα 8 — χρήση παράλληλου κειμένου')));
+assert.ok(ancientB.excludedAnchors.includes('Ενότητα 1 — να μη διδαχθεί'));
+assert.ok(ancientB.excludedAnchors.some(x=>x.includes('Ενότητες 17-18')));
+assert.ok(!ancientB.officialAnchors.some(x=>x==='Ενότητα 1'));
+
+const ancientC=C['teacher-annual-special-gym-c-ancient-language'];
+assert.ok(ancientC.officialAnchors.some(x=>x.startsWith('Προαιρετικό — Ενότητα 1')));
+assert.ok(ancientC.officialAnchors.some(x=>x.includes('Α΄ Βιβλίο, Κεφ. 13, 3-7')));
+assert.ok(ancientC.officialAnchors.some(x=>x.includes('Ζ΄ Βιβλίο, Κεφ. 28-30')));
+assert.ok(ancientC.excludedAnchors.includes('Ενότητα 12 — να μη διδαχθεί'));
+assert.ok(ancientC.excludedAnchors.some(x=>x.includes('Β΄ Βιβλίο, Κεφ. 4, 9-11')));
+assert.equal(ancientC.arrianPlannedHours,14);
 
 const mathA=C['teacher-annual-special-gym-a-math'];
 assert.ok(mathA.officialAnchors.includes('7.5 Πολλαπλασιασμός ρητών αριθμών'));
@@ -133,4 +152,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 20 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 23 official mappings.');

@@ -291,7 +291,22 @@
       const def=TRACKS[chosen];
       if(!def) return;
       const currentGrade=grade.value;
-      if(def.zoneId!==ctx.zoneId||(def.special&&!specialRuntimeReady())){
+      if(def.special&&!specialRuntimeReady()&&def.zoneId===ctx.zoneId){
+        try{
+          field.classList.add("is-loading");
+          field.querySelector(".tutor-school-track-note").textContent=text("loading");
+          await ensureSpecialRuntime();
+          applyTrackInPlace(ctx,chosen,currentGrade,null,select,grade,baseGrades);
+          field.classList.remove("is-loading");
+          field.querySelector(".tutor-school-track-note").textContent=text("note");
+        }catch(_){
+          field.classList.remove("is-loading");
+          field.querySelector(".tutor-school-track-note").textContent=text("note");
+          select.value=defaultTrackForZone(ctx.zoneId);
+        }
+        return;
+      }
+      if(def.zoneId!==ctx.zoneId){
         try{ await rerenderForTrack(ctx,chosen,null,null,field); }
         catch(_){
           field.classList.remove("is-loading");
@@ -304,13 +319,29 @@
     });
 
     // A direct special-school URL can arrive before its data has been loaded.
+    // If it targets the current zone (e.g. Special Gymnasium from /middle/...),
+    // load the lazy catalog and apply the requested grade/subject in place.
     if(TRACKS[track].special&&!specialRuntimeReady()){
       select.value=track;
-      rerenderForTrack(ctx,track,requested.grade||null,requested.subject||null,field).catch(()=>{
-        field.classList.remove("is-loading");
-        field.querySelector(".tutor-school-track-note").textContent=text("note");
-        select.value=defaultTrackForZone(ctx.zoneId);
-      });
+      if(TRACKS[track].zoneId===ctx.zoneId){
+        field.classList.add("is-loading");
+        field.querySelector(".tutor-school-track-note").textContent=text("loading");
+        ensureSpecialRuntime().then(()=>{
+          applyTrackInPlace(ctx,track,requested.grade||null,requested.subject||null,select,grade,baseGrades);
+          field.classList.remove("is-loading");
+          field.querySelector(".tutor-school-track-note").textContent=text("note");
+        }).catch(()=>{
+          field.classList.remove("is-loading");
+          field.querySelector(".tutor-school-track-note").textContent=text("note");
+          select.value=defaultTrackForZone(ctx.zoneId);
+        });
+      }else{
+        rerenderForTrack(ctx,track,requested.grade||null,requested.subject||null,field).catch(()=>{
+          field.classList.remove("is-loading");
+          field.querySelector(".tutor-school-track-note").textContent=text("note");
+          select.value=defaultTrackForZone(ctx.zoneId);
+        });
+      }
       return;
     }
 
@@ -327,7 +358,7 @@
   else enhance(null);
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({
-    version:5,enhance,ensureSpecialRuntime,
+    version:6,enhance,ensureSpecialRuntime,
     tracks:Object.freeze(Object.keys(TRACKS))
   });
 })();

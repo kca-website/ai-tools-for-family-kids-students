@@ -6,6 +6,10 @@ const browser = await chromium.launch({ headless: true });
 
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await page.addInitScript(() => {
+    window.__printCalls = 0;
+    window.print = () => { window.__printCalls += 1; };
+  });
   const errors = [];
   const failed = [];
   let lastAiPayload = null;
@@ -66,8 +70,15 @@ try {
   assert.equal(await page.locator('#heSemester').inputValue(), '1');
   assert.equal(await page.locator('#heCourse option').count(), 4, 'semester 1 must expose four required courses');
   assert.match(await page.locator('#heCourse option').first().innerText(), /ΒΙΟ_ΒΚΔ/);
+  const syllabusDetails = page.locator('#heSyllabus details');
+  assert.equal(await syllabusDetails.getAttribute('open'), null, 'verified topics must be collapsed by default');
+  assert.match(await page.locator('#heSyllabus summary').innerText(), /επαληθευμένες θεματικές/i);
+  assert.match(await page.locator('#heSyllabus summary').innerText(), /Περίγραμμα 2021-2022/i);
+  await page.locator('#heSyllabus summary').click();
+  assert.notEqual(await syllabusDetails.getAttribute('open'), null, 'syllabus summary did not expand');
   assert.match(await page.locator('#heSyllabus').innerText(), /Source-locked/i);
-  assert.match(await page.locator('#heSyllabus').innerText(), /Περίγραμμα 2021-2022/i);
+  await page.locator('#heSyllabus summary').click();
+  assert.equal(await syllabusDetails.getAttribute('open'), null, 'syllabus summary did not collapse');
 
   // Verified Biostatistics course passes official topics to AI and rich output renders correctly.
   await page.selectOption('#heCourse', '1');
@@ -86,6 +97,15 @@ try {
   assert.equal(await page.locator('#heAiOutput strong').count(), 1);
   assert.ok((await page.locator('#heAiOutput li').count()) >= 2);
   assert.equal(await page.locator('#heAiOutput .he-md-table').count(), 1);
+  assert.equal(await page.locator('#hePrintActions').evaluate((el) => el.classList.contains('visible')), true, 'print/PDF action must appear after AI output');
+  assert.match(await page.locator('#hePrintAi').innerText(), /Εκτύπωση \/ PDF/);
+  await page.locator('#hePrintAi').click();
+  assert.equal(await page.evaluate(() => window.__printCalls), 1, 'print action did not call window.print');
+  assert.match(await page.locator('#hePrintArea').innerText(), /Γενικά Μαθηματικά - Βιοστατιστική/);
+  assert.match(await page.locator('#hePrintArea').innerText(), /1ο έτος/);
+  assert.match(await page.locator('#hePrintArea').innerText(), /1ο εξάμηνο/);
+  assert.match(await page.locator('#hePrintArea').innerText(), /Πλάνο μελέτης/);
+  assert.match(await page.locator('#hePrintArea').innerText(), /Βήμα 1/);
   assert.equal(lastAiPayload.audience, 'university_student');
   assert.match(lastAiPayload.system, /SOURCE LOCK/);
   assert.match(lastAiPayload.prompt, /ΒΙΟ_ΓΜΒ · Γενικά Μαθηματικά - Βιοστατιστική/);

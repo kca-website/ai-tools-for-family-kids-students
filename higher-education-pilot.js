@@ -146,27 +146,50 @@
     coverage.textContent = `${statusMap[department.coverageStatus] || department.coverageStatus} · Πηγές: ${sourceCount} · Confidence: ${department.sourceConfidence}${structuredNote}`;
   }
 
+  function courseHasVerifiedTopics(course) {
+    return !!(course?.topicsVerified === true && Array.isArray(course?.topics) && course.topics.length);
+  }
+
   function renderSyllabus() {
-    const department = HE.departments[departmentSelect.value];
     const course = currentCourse();
-    const topics = Array.isArray(course?.topics) ? course.topics : [];
-    if (!course || !topics.length) {
+    if (!course) {
       syllabus.hidden = true;
       syllabus.replaceChildren();
       return;
     }
+
+    const topics = Array.isArray(course?.topics) ? course.topics : [];
+    const verified = courseHasVerifiedTopics(course);
     const meta = [
       course.year ? `${course.year}ο έτος` : "",
       course.semester ? `${course.semester}ο εξάμηνο` : "",
       Number.isFinite(Number(course.ects)) ? `${course.ects} ECTS` : "",
       course.required === false ? "Επιλογής" : "Υποχρεωτικό"
     ].filter(Boolean).join(" · ");
+
     syllabus.hidden = false;
+
+    if (!verified) {
+      syllabus.innerHTML = `
+        <h3>Ύλη / θεματικές</h3>
+        <div class="he-meta">${escapeHtml(meta)}</div>
+        <div class="he-warning" style="margin-top:10px">
+          <strong>Δεν έχουμε ακόμη επαληθευμένο αναλυτικό περίγραμμα για αυτό το μάθημα.</strong>
+          Για quiz, flashcards ή πλάνο μελέτης πρόσθεσε σημειώσεις/περίγραμμα στο πεδίο της AI. Δεν θα μαντέψουμε ύλη από τον τίτλο του μαθήματος.
+        </div>`;
+      return;
+    }
+
+    const sourceYear = course.syllabusSourceAcademicYear ? ` · Περίγραμμα ${course.syllabusSourceAcademicYear}` : "";
+    const sourceLink = course.syllabusSource
+      ? `<a href="${escapeHtml(course.syllabusSource)}" target="_blank" rel="noopener noreferrer">Επίσημη πηγή</a>`
+      : "";
+
     syllabus.innerHTML = `
-      <h3>Ύλη / θεματικές που έχουμε επαληθεύσει</h3>
-      <div class="he-meta">${escapeHtml(meta)}</div>
+      <h3>Επαληθευμένες θεματικές</h3>
+      <div class="he-meta">${escapeHtml(meta)}${escapeHtml(sourceYear)} ${sourceLink}</div>
       <ul class="he-topic-list">${topics.map((topic) => `<li>${escapeHtml(topic)}</li>`).join("")}</ul>
-      <p class="he-meta">Οι θεματικές λειτουργούν ως πλαίσιο μελέτης για την AI και όχι ως δήλωση πλήρους εξεταστέας ύλης.</p>`;
+      <p class="he-meta"><strong>Source-locked:</strong> η AI επιτρέπεται να δημιουργεί course-specific υλικό μόνο από τις παραπάνω θεματικές και από υλικό που δίνει ο φοιτητής. Δεν αποτελούν δήλωση πλήρους εξεταστέας ύλης.</p>`;
   }
 
   function render() {
@@ -382,37 +405,73 @@
     return { institution, department, course, task };
   }
 
+  const SOURCE_LOCKED_ACTIONS = new Set(["explain","quiz","flashcards","study-plan"]);
+
+  function generationScope() {
+    const course = currentCourse();
+    const extra = aiInput.value.trim();
+    const verified = courseHasVerifiedTopics(course);
+    const sourceLocked = SOURCE_LOCKED_ACTIONS.has(aiAction);
+
+    if (sourceLocked && !verified && !extra) {
+      return {
+        ok: false,
+        message: "Για αυτό το μάθημα δεν έχουμε ακόμη επαληθευμένες θεματικές. Πρόσθεσε σημειώσεις, περίγραμμα ή την ενότητα που σας έχει δοθεί και θα δουλέψω μόνο πάνω σε αυτό."
+      };
+    }
+
+    return { ok: true, verified, sourceLocked, extra };
+  }
+
   function buildAiRequest() {
     const { institution, department, course, task } = universityContext();
     const extra = aiInput.value.trim();
     const action = ACTIONS[aiAction] || ACTIONS.explain;
     const sources = (department?.sources || []).join("\n");
+    const verified = courseHasVerifiedTopics(course);
+    const sourceLocked = SOURCE_LOCKED_ACTIONS.has(aiAction);
+    const topicList = verified ? course.topics : [];
+
     const system = [
       "Είσαι ο AI Βοηθός Φοιτητή του AITOOLS4KIDS.",
       "Στόχος σου είναι να βοηθάς τον φοιτητή να κατανοεί, να ερευνά, να εξασκείται και να βελτιώνει τη δική του δουλειά.",
       "Δεν γράφεις ολοκληρωμένη εργασία, report, essay, lab report ή άλλο παραδοτέο για υποβολή αντί για τον φοιτητή.",
       "Μπορείς να δώσεις outline, ερευνητικά ερωτήματα, μικρά παραδείγματα, feedback, hints, quiz, flashcards και πλάνο μελέτης.",
       "Μην επινοείς πηγές, DOI, αποτελέσματα μελετών ή στοιχεία του προγράμματος σπουδών.",
-      "Τα παρακάτω στοιχεία μαθήματος είναι context του pilot και όχι απόδειξη πλήρους εξεταστέας ύλης.",
-      "Αν λείπει πληροφορία, δήλωσέ το καθαρά.",
+      "Μην παρουσιάζεις συγγενικές ή προαπαιτούμενες έννοιες ως καταχωρισμένη ύλη αν δεν βρίσκονται στις verified θεματικές.",
+      sourceLocked && verified
+        ? "SOURCE LOCK: Για course-specific υλικό χρησιμοποίησε μόνο τις verified θεματικές που δίνονται παρακάτω και το πρόσθετο υλικό του φοιτητή. Κάθε ερώτηση quiz πρέπει να αντιστοιχεί άμεσα σε μία από αυτές τις θεματικές. Μην εισάγεις νέα υποενότητα επειδή είναι γενικά σχετική με το μάθημα."
+        : "",
+      sourceLocked && !verified
+        ? "SOURCE LOCK: Δεν υπάρχει verified syllabus για αυτό το μάθημα. Χρησιμοποίησε μόνο το υλικό που έδωσε ο φοιτητής. Μην συμπληρώνεις ύλη από γενική γνώση ή από τον τίτλο του μαθήματος."
+        : "",
+      aiAction === "quiz" && verified
+        ? "Στο quiz γράψε σε κάθε ερώτηση μία σύντομη ένδειξη «Θεματική: …» χρησιμοποιώντας ακριβώς μία από τις verified θεματικές."
+        : "",
+      "Αν κάτι δεν καλύπτεται από το διαθέσιμο source-locked υλικό, πες ότι δεν είναι επαληθευμένο στο συγκεκριμένο περίγραμμα αντί να το εφεύρεις.",
       "Απάντησε στα ελληνικά εκτός αν ο φοιτητής ζητήσει άλλη γλώσσα.",
       "Μορφοποίησε την απάντηση καθαρά για κινητό: σύντομες ενότητες, bullets και αριθμημένα βήματα. Απόφυγε φαρδείς πίνακες εκτός αν είναι πραγματικά απαραίτητοι."
-    ].join("\n");
+    ].filter(Boolean).join("\n");
+
     const prompt = [
       `Ίδρυμα: ${institution?.nameEl || ""}`,
       `Τμήμα: ${department?.departmentEl || ""}`,
       `Έτος: ${course?.year || "μη καταχωρισμένο"}`,
       `Εξάμηνο: ${course?.semester || "μη καταχωρισμένο"}`,
       `Μάθημα: ${course?.code ? course.code + " · " : ""}${course?.titleEl || ""}`,
-      Array.isArray(course?.topics) && course.topics.length ? `Επαληθευμένες θεματικές:\n- ${course.topics.join("\n- ")}` : "Δεν έχουμε ακόμη καταχωρισμένες αναλυτικές θεματικές για αυτό το μάθημα.",
+      `Syllabus status: ${verified ? "verified-official-outline" : "course-only-current-program"}`,
+      verified && course?.syllabusSourceAcademicYear ? `Έτος επίσημου αναλυτικού περιγράμματος: ${course.syllabusSourceAcademicYear}` : "",
+      verified ? `Verified θεματικές:\n- ${topicList.join("\n- ")}` : "Δεν έχουμε verified αναλυτικές θεματικές για το μάθημα.",
       `Στόχος που επέλεξε: ${task?.labelEl || ""}`,
       `Ενέργεια: ${action.label}`,
       `Coverage status: ${department?.coverageStatus || ""}`,
+      verified && course?.syllabusSource ? `Επίσημη πηγή περιγράμματος: ${course.syllabusSource}` : "",
       `Επίσημες πηγές τμήματος που έχουμε καταχωρίσει:\n${sources || "Καμία"}`,
       "",
       `Οδηγία: ${action.instruction}`,
-      extra ? `\nΠρόσθετο υλικό/ερώτημα του φοιτητή:\n${extra}` : ""
+      extra ? `\nΥλικό/ερώτημα του φοιτητή:\n${extra}` : ""
     ].filter(Boolean).join("\n");
+
     return { system, prompt };
   }
 
@@ -430,6 +489,12 @@
   }
 
   async function generateInlineGroq() {
+    const scope = generationScope();
+    if (!scope.ok) {
+      aiStatus.textContent = scope.message;
+      aiOutput.classList.remove("visible");
+      return;
+    }
     setAiBusy(true, "Δημιουργία…");
     try {
       const payload = buildAiRequest();
@@ -465,6 +530,12 @@
   }
 
   async function generateInlinePuter() {
+    const scope = generationScope();
+    if (!scope.ok) {
+      aiStatus.textContent = scope.message;
+      aiOutput.classList.remove("visible");
+      return;
+    }
     setAiBusy(true, "Φόρτωση Puter…");
     try {
       const puter = await ensurePuter();

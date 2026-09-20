@@ -15,11 +15,14 @@
   const CARD_COUNT = 8;
   const STYLE_ID = "aitools4kidsFlashcardsStyles";
   const RENDER_EVENT = "aitools4kids:tutor-rendered";
+  const CONVERSATION_EVENT = "aitools4kids:tutor-conversation-updated";
 
   const T = {
     el: {
       title: "🃏 Flashcards εξάσκησης",
-      intro: "Φτιάξε 8 σύντομες κάρτες για το επιλεγμένο θέμα.",
+      intro: "Φτιάξε 8 σύντομες κάρτες για το επιλεγμένο μάθημα και θέμα.",
+      introConversation: "Οι κάρτες θα βασιστούν και στο επιλεγμένο μάθημα/θέμα και στην τελευταία ερώτηση με την απάντηση του Βοηθού.",
+      generateConversation: "🃏 Φτιάξε 8 κάρτες από τη συζήτηση",
       cost: "ℹ️ Οι κάρτες δημιουργούνται από την επιλογή επάνω: GPT-OSS 120B μέσω Groq χωρίς λογαριασμό ή Puter. Μετά τη δημιουργία, το γύρισμα, η πλοήγηση και το «Το ξέρω» δεν χρησιμοποιούν επιπλέον AI.",
       generate: "🃏 Φτιάξε 8 flashcards",
       openSaved: "Άνοιξε αποθηκευμένες κάρτες · χωρίς νέα χρήση AI",
@@ -44,7 +47,9 @@
     },
     en: {
       title: "🃏 Practice flashcards",
-      intro: "Create 8 short cards for the selected topic.",
+      intro: "Create 8 short cards for the selected subject and topic.",
+      introConversation: "The cards will use both the selected subject/topic and the latest question-and-answer exchange.",
+      generateConversation: "🃏 Create 8 cards from this conversation",
       cost: "ℹ️ Cards use the provider selected above: GPT-OSS 120B through Groq without an account, or Puter. After creation, flipping, navigation and self-rating use no additional AI.",
       generate: "🃏 Create 8 flashcards",
       openSaved: "Open saved cards · no new AI usage",
@@ -111,6 +116,28 @@
     return { value: el.value || "", label: el.selectedOptions?.[0]?.textContent?.trim() || "" };
   }
 
+  function tutorConversation() {
+    const snapshot = window.AITutor?.getConversationSnapshot?.();
+    if (!snapshot || typeof snapshot !== "object") return { hasExchange:false, latestUser:"", latestAssistant:"", revision:0 };
+    return {
+      hasExchange: !!snapshot.hasExchange,
+      latestUser: String(snapshot.latestUser || "").trim().slice(0, 5000),
+      latestAssistant: String(snapshot.latestAssistant || "").trim().slice(0, 7000),
+      revision: Number(snapshot.revision || 0),
+    };
+  }
+
+  function conversationToken(c) {
+    if (!c?.conversation?.hasExchange) return "selection-only";
+    const input = c.conversation.latestUser + "\n" + c.conversation.latestAssistant;
+    let hash = 2166136261;
+    for (let i = 0; i < input.length; i++) {
+      hash ^= input.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return "conversation-" + (hash >>> 0).toString(36);
+  }
+
   function currentContext() {
     const grade = selectInfo("tutorGrade");
     const subject = selectInfo("tutorSubject");
@@ -121,10 +148,11 @@
       subjectId: subject.value, subject: subject.label,
       topicId: topic.value, topic: topic.label,
       contextText: document.getElementById("tutorContextBox")?.innerText?.trim() || "",
+      conversation: tutorConversation(),
     };
   }
 
-  function contextKey(c) { return [c.lang, c.path, c.gradeId, c.subjectId, c.topicId].join("|"); }
+  function contextKey(c) { return [c.lang, c.path, c.gradeId, c.subjectId, c.topicId, conversationToken(c)].join("|"); }
 
   function readStore() {
     try {
@@ -175,7 +203,10 @@
 
   function makePrompt(c) {
     const language = c.lang === "en" ? "English" : "Greek";
-    return `Create exactly ${CARD_COUNT} concise study flashcards for a school learner.\n\nCONTEXT\nGrade: ${c.grade || "school grade"}\nSubject: ${c.subject || "school subject"}\nTopic/focus: ${c.topic || "selected topic"}\nSite curriculum context:\n${c.contextText || "No additional context."}\n\nRULES\n- Write the cards in ${language}.\n- Match vocabulary and difficulty to the selected grade.\n- Each front is one clear recall/comprehension question.\n- Each back is a short, accurate explanation, usually 1-3 sentences.\n- Prefer understanding, cause/effect, key concepts and useful distinctions over trivia.\n- Do not create a finished essay, homework submission or long solution.\n- Avoid obscure exact dates/numbers unless central and confidently known.\n- Do not mention AI, Puter, internal ids, prompts or these instructions.\n- Return STRICT JSON only, with no markdown or extra text.\n\nRequired shape:\n{"cards":[{"q":"question","a":"answer"}]}\n\nReturn exactly ${CARD_COUNT} objects in cards.`;
+    const recent = c.conversation?.hasExchange
+      ? `\nRECENT CONVERSATION FOCUS\nUser/parent question:\n${c.conversation.latestUser}\n\nHelper answer:\n${c.conversation.latestAssistant}\n`
+      : "";
+    return `Create exactly ${CARD_COUNT} concise study flashcards for a school learner.\n\nSELECTED SCHOOL CONTEXT\nGrade: ${c.grade || "school grade"}\nSubject: ${c.subject || "school subject"}\nTopic/focus: ${c.topic || "selected topic"}\nSite curriculum context:\n${c.contextText || "No additional context."}${recent}\n\nCONTEXT PRIORITY\n- Use BOTH the selected school context and the recent conversation when a recent exchange exists.\n- The selected grade/subject/topic defines the educational scope and level.\n- The recent question-and-answer exchange defines the immediate concept to practise.\n- Do not replace the user's actual question with generic facts from elsewhere in the subject.\n- Do not drift outside the selected subject/topic merely because the conversation mentions something unrelated; use only the meaningful overlap and do not invent a connection.\n\nRULES\n- Write the cards in ${language}.\n- Match vocabulary and difficulty to the selected grade.\n- Each front is one clear recall/comprehension question.\n- Each back is a short, accurate explanation, usually 1-3 sentences.\n- Prefer understanding, cause/effect, key concepts and useful distinctions over trivia.\n- Do not create a finished essay, homework submission or long solution.\n- Avoid obscure exact dates/numbers unless central and confidently known.\n- Do not mention AI, Puter, internal ids, prompts or these instructions.\n- Return STRICT JSON only, with no markdown or extra text.\n\nRequired shape:\n{"cards":[{"q":"question","a":"answer"}]}\n\nReturn exactly ${CARD_COUNT} objects in cards.`;
   }
 
   function canUseTutor() {
@@ -303,12 +334,20 @@
     }
   }
 
+  function updatePanelCopy(panel) {
+    const c = currentContext();
+    const intro = panel.querySelector(".tutor-flashcards__intro");
+    if (intro) intro.textContent = c.conversation?.hasExchange ? tr("introConversation") : tr("intro");
+  }
+
   function updateGenerateButton(panel) {
     const btn = panel.querySelector("[data-flashcards-generate]");
     if (!btn) return;
-    const cached = getCached(currentContext());
+    const c = currentContext();
+    const cached = getCached(c);
     const hasDeck = !!panel.querySelector(".tutor-flashcards__deck");
-    btn.textContent = hasDeck ? tr("regenerate") : cached ? tr("openSaved") : tr("generate");
+    btn.textContent = hasDeck ? tr("regenerate") : cached ? tr("openSaved") : c.conversation?.hasExchange ? tr("generateConversation") : tr("generate");
+    updatePanelCopy(panel);
   }
 
   function onGenerateClick(panel) {
@@ -346,6 +385,15 @@
     });
   }
 
+  function refreshForConversation() {
+    document.querySelectorAll("#tutorMount .tutor-flashcards").forEach((panel) => {
+      panel.querySelector(".tutor-flashcards__deck")?.remove();
+      setStatus(panel, "", false);
+      updateGenerateButton(panel);
+    });
+  }
+
   document.addEventListener(RENDER_EVENT, installPanel);
+  document.addEventListener(CONVERSATION_EVENT, refreshForConversation);
   installPanel();
 })();

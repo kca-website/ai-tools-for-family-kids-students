@@ -10,6 +10,7 @@
   "use strict";
 
   const RENDER_EVENT="aitools4kids:tutor-rendered";
+  const CONVERSATION_EVENT="aitools4kids:tutor-conversation-updated";
   const MODEL="openai/gpt-4.1-nano";
   const STORE_KEY="aitools4kids_special_simple_quiz_v1";
   const SPECIAL_TRACKS=new Set(["special-gymnasium","special-lyceum","eneegyl"]);
@@ -25,6 +26,7 @@
     const en=isEnglish();
     const T={
       create:["📝 Φτιάξε απλό quiz 3 ερωτήσεων","📝 Create a simple 3-question quiz"],
+      createConversation:["📝 Φτιάξε απλό quiz από τη συζήτηση","📝 Create a simple quiz from this conversation"],
       saved:["Άνοιξε αποθηκευμένο απλό quiz 3 ερωτήσεων","Open saved simple 3-question quiz"],
       again:["Νέο απλό quiz 3 ερωτήσεων","New simple 3-question quiz"],
       generating:["Δημιουργείται απλό quiz…","Creating simple quiz…"],
@@ -85,6 +87,25 @@
     return {value:el?.value||"",label:el?.selectedOptions?.[0]?.textContent?.trim()||""};
   }
 
+  function tutorConversation(){
+    const snapshot=window.AITutor?.getConversationSnapshot?.();
+    if(!snapshot||typeof snapshot!=="object")return {hasExchange:false,latestUser:"",latestAssistant:"",revision:0};
+    return {
+      hasExchange:!!snapshot.hasExchange,
+      latestUser:String(snapshot.latestUser||"").trim().slice(0,5000),
+      latestAssistant:String(snapshot.latestAssistant||"").trim().slice(0,7000),
+      revision:Number(snapshot.revision||0)
+    };
+  }
+
+  function conversationToken(c){
+    if(!c?.conversation?.hasExchange)return "selection-only";
+    const input=c.conversation.latestUser+"\n"+c.conversation.latestAssistant;
+    let hash=2166136261;
+    for(let i=0;i<input.length;i++){hash^=input.charCodeAt(i);hash=Math.imul(hash,16777619);}
+    return "conversation-"+(hash>>>0).toString(36);
+  }
+
   function context(){
     const grade=selectInfo("tutorGrade");
     const subject=selectInfo("tutorSubject");
@@ -95,11 +116,12 @@
       subjectId:subject.value,subject:subject.label,
       topicId:topic.value,topic:topic.label,
       contextText:document.getElementById("tutorContextBox")?.innerText?.trim()||"",
-      lang:isEnglish()?"en":"el"
+      lang:isEnglish()?"en":"el",
+      conversation:tutorConversation()
     };
   }
 
-  function cacheKey(c){ return [c.track,c.lang,c.gradeId,c.subjectId,c.topicId].join("|"); }
+  function cacheKey(c){ return [c.track,c.lang,c.gradeId,c.subjectId,c.topicId,conversationToken(c)].join("|"); }
   function readStore(){
     try{
       const data=JSON.parse(localStorage.getItem(STORE_KEY)||"null");
@@ -171,7 +193,10 @@
     const language=c.lang==="en"?"English":"Greek";
     const policy=window.SPECIAL_EDUCATION_ASSESSMENT_POLICY;
     const extra=policy?.aiPromptRules||"Create 3 very short questions with exactly 2 options. One basic idea at a time. No exam-level difficulty or trick wording.";
-    return `Create a SIMPLE PRACTICE QUIZ for a learner in Special Education.\n\nSchool: ${c.track}\nGrade: ${c.grade||"selected grade"}\nSubject: ${c.subject||"selected subject"}\nTopic: ${c.topic||"selected topic"}\n\nVerified/site context:\n${c.contextText||"Use only the selected subject/topic context."}\n\n${extra}\n\nAdditional rules:\n- Write in ${language}.\n- Stay inside the selected subject/topic. Do not invent syllabus coverage.\n- Ask only concrete, basic understanding questions.\n- Exactly 3 questions and exactly 2 options per question.\n- correct must be 0 or 1.\n- explanation must be one short sentence.\n- Return STRICT JSON only, no markdown.\n\nRequired shape:\n{"questions":[{"q":"short question","options":["A","B"],"correct":0,"explanation":"one short sentence"}]}`;
+    const recent=c.conversation?.hasExchange
+      ? `\nRecent conversation focus:\nUser/parent question: ${c.conversation.latestUser}\nHelper answer: ${c.conversation.latestAssistant}\n`
+      : "";
+    return `Create a SIMPLE PRACTICE QUIZ for a learner in Special Education.\n\nSchool: ${c.track}\nGrade: ${c.grade||"selected grade"}\nSubject: ${c.subject||"selected subject"}\nTopic: ${c.topic||"selected topic"}\n\nVerified/site context:\n${c.contextText||"Use only the selected subject/topic context."}${recent}\n\nContext rule: use BOTH the selected school subject/topic and the recent conversation when available. The school selection defines scope and level; the conversation defines the immediate concept. Do not drift to unrelated content and do not invent syllabus coverage.\n\n${extra}\n\nAdditional rules:\n- Write in ${language}.\n- Stay inside the selected subject/topic. Do not invent syllabus coverage.\n- Ask only concrete, basic understanding questions.\n- Exactly 3 questions and exactly 2 options per question.\n- correct must be 0 or 1.\n- explanation must be one short sentence.\n- Return STRICT JSON only, no markdown.\n\nRequired shape:\n{"questions":[{"q":"short question","options":["A","B"],"correct":0,"explanation":"one short sentence"}]}`;
   }
 
   function setStatus(panel,value,error=false){
@@ -290,7 +315,8 @@
       }
       if(state.lastTrack&&state.lastTrack!==activeTrack) panel.querySelector(".tutor-study-tools__result")?.remove();
       const current=panel.querySelector(".tutor-study-tools__result")?.dataset?.type;
-      q.textContent=current==="quiz-special-simple"?text("again"):(getCached(context())?text("saved"):text("create"));
+      const c=context();
+      q.textContent=current==="quiz-special-simple"?text("again"):(getCached(c)?text("saved"):(c.conversation?.hasExchange?text("createConversation"):text("create")));
       appendPolicy().catch(()=>{});
     }else if(q?.dataset.specialSimpleQuiz==="1"&&state.original){
       q.replaceWith(state.original);
@@ -305,7 +331,18 @@
   }
   function schedule(){ setTimeout(syncAll,0); }
 
+  function refreshForConversation(){
+    document.querySelectorAll("#tutorMount .tutor-study-tools").forEach((panel)=>{
+      if(isSpecialTrack(track())){
+        panel.querySelector(".tutor-study-tools__result")?.remove();
+        setStatus(panel,"");
+      }
+    });
+    schedule();
+  }
+
   document.addEventListener(RENDER_EVENT,schedule);
+  document.addEventListener(CONVERSATION_EVENT,refreshForConversation);
   document.addEventListener("change",(event)=>{
     const target=event.target instanceof Element?event.target:null;
     if(target?.matches("#tutorSchoolTrack,#tutorGrade,#tutorSubject,#tutorTopic,#tutorAge,#tutorConsent")) schedule();

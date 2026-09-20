@@ -15,11 +15,16 @@
   const SLIDE_COUNT = 6;
   const STYLE_ID = "aitools4kidsStudyToolsStyles";
   const RENDER_EVENT = "aitools4kids:tutor-rendered";
+  const CONVERSATION_EVENT = "aitools4kids:tutor-conversation-updated";
 
   const T = {
     el: {
       title: "🧰 Εργαλεία μελέτης",
       intro: "Δημιούργησε υλικό πάνω στην τάξη, το μάθημα και το θέμα που έχεις ήδη επιλέξει.",
+      introConversation: "Το υλικό θα συνδυάσει το επιλεγμένο μάθημα/θέμα με την τελευταία ερώτηση και απάντηση της συζήτησης.",
+      quizConversation: "📝 Φτιάξε quiz από τη συζήτηση",
+      quizExamConversation: "📝 Φτιάξε quiz εξετάσεων από τη συζήτηση",
+      slidesConversation: "🎞️ Φτιάξε παρουσίαση από τη συζήτηση",
       usage: "ℹ️ Το quiz και η παρουσίαση δημιουργούνται από την επιλογή επάνω: GPT-OSS 120B μέσω Groq χωρίς λογαριασμό ή Puter. Μετά τη δημιουργία, η χρήση τους δεν καταναλώνει επιπλέον AI.",
       quiz: "📝 Φτιάξε quiz εξάσκησης",
       quizExam: "📝 Φτιάξε quiz επιπέδου εξετάσεων",
@@ -55,6 +60,10 @@
     en: {
       title: "🧰 Study tools",
       intro: "Create material for the grade, subject and topic you have already selected.",
+      introConversation: "The material will combine the selected subject/topic with the latest question-and-answer exchange.",
+      quizConversation: "📝 Create a quiz from this conversation",
+      quizExamConversation: "📝 Create an exam-level quiz from this conversation",
+      slidesConversation: "🎞️ Create a presentation from this conversation",
       usage: "ℹ️ Quizzes and presentations use the provider selected above: GPT-OSS 120B through Groq without an account, or Puter. After generation, using them does not consume more AI.",
       quiz: "📝 Create a practice quiz",
       quizExam: "📝 Create an exam-level quiz",
@@ -135,6 +144,28 @@
     return { value: el.value || "", label: el.selectedOptions?.[0]?.textContent?.trim() || "" };
   }
 
+  function tutorConversation() {
+    const snapshot = window.AITutor?.getConversationSnapshot?.();
+    if (!snapshot || typeof snapshot !== "object") return { hasExchange:false, latestUser:"", latestAssistant:"", revision:0 };
+    return {
+      hasExchange: !!snapshot.hasExchange,
+      latestUser: String(snapshot.latestUser || "").trim().slice(0, 5000),
+      latestAssistant: String(snapshot.latestAssistant || "").trim().slice(0, 7000),
+      revision: Number(snapshot.revision || 0),
+    };
+  }
+
+  function conversationToken(c) {
+    if (!c?.conversation?.hasExchange) return "selection-only";
+    const input = c.conversation.latestUser + "\n" + c.conversation.latestAssistant;
+    let hash = 2166136261;
+    for (let i = 0; i < input.length; i++) {
+      hash ^= input.charCodeAt(i);
+      hash = Math.imul(hash, 16777619);
+    }
+    return "conversation-" + (hash >>> 0).toString(36);
+  }
+
   function currentContext() {
     const grade = selectInfo("tutorGrade");
     const subject = selectInfo("tutorSubject");
@@ -145,6 +176,7 @@
       subjectId: subject.value, subject: subject.label,
       topicId: topic.value, topic: topic.label,
       contextText: document.getElementById("tutorContextBox")?.innerText?.trim() || "",
+      conversation: tutorConversation(),
     };
   }
 
@@ -154,7 +186,7 @@
 
   function contextKey(type, c) {
     const cacheType = type === "quiz" && isHighSchool(c) ? "quiz-exam-v2" : type;
-    return [cacheType, c.lang, c.path, c.gradeId, c.subjectId, c.topicId].join("|");
+    return [cacheType, c.lang, c.path, c.gradeId, c.subjectId, c.topicId, conversationToken(c)].join("|");
   }
   function readStore() {
     try {
@@ -219,7 +251,10 @@
   }
 
   function baseContextPrompt(c) {
-    return `Grade: ${c.grade || "school grade"}\nSubject: ${c.subject || "school subject"}\nTopic/focus: ${c.topic || "selected topic"}\nSite curriculum context:\n${c.contextText || "No additional context."}`;
+    const recent = c.conversation?.hasExchange
+      ? `\nRecent conversation focus:\nUser/parent question: ${c.conversation.latestUser}\nHelper answer: ${c.conversation.latestAssistant}\n`
+      : "";
+    return `Grade: ${c.grade || "school grade"}\nSubject: ${c.subject || "school subject"}\nTopic/focus: ${c.topic || "selected topic"}\nSite curriculum context:\n${c.contextText || "No additional context."}${recent}\nContext rule: the selected grade/subject/topic defines the educational scope and level; the recent conversation defines the immediate focus. Use both when both are available. Do not drift to unrelated parts of the subject or ignore the user's actual question.`;
   }
 
   function highSchoolExamLevel(c) {
@@ -426,6 +461,11 @@
     generate(panel, type);
   }
 
+  function updatePanelCopy(panel, c = currentContext()) {
+    const intro = panel.querySelector(".tutor-study-tools__intro");
+    if (intro) intro.textContent = c.conversation?.hasExchange ? tr("introConversation") : tr("intro");
+  }
+
   function updateButtons(panel) {
     const c = currentContext();
     const resultType = panel.querySelector(".tutor-study-tools__result")?.dataset?.type || "";
@@ -437,10 +477,16 @@
     if (q && q.dataset.specialSimpleQuiz !== "1") {
       const newLabel = examQuiz ? tr("quizExamNew") : tr("quizNew");
       const savedLabel = examQuiz ? tr("quizExamSaved") : tr("quizSaved");
-      const createLabel = examQuiz ? tr("quizExam") : tr("quiz");
+      const createLabel = c.conversation?.hasExchange
+        ? (examQuiz ? tr("quizExamConversation") : tr("quizConversation"))
+        : (examQuiz ? tr("quizExam") : tr("quiz"));
       q.textContent = resultType === "quiz" ? newLabel : getCached("quiz", c) ? savedLabel : createLabel;
     }
-    if (s) s.textContent = resultType === "slides" ? tr("slidesNew") : getCached("slides", c) ? tr("slidesSaved") : tr("slides");
+    if (s) {
+      const createSlides = c.conversation?.hasExchange ? tr("slidesConversation") : tr("slides");
+      s.textContent = resultType === "slides" ? tr("slidesNew") : getCached("slides", c) ? tr("slidesSaved") : createSlides;
+    }
+    updatePanelCopy(panel, c);
   }
 
   function installPanel() {
@@ -471,6 +517,15 @@
     });
   }
 
+  function refreshForConversation() {
+    document.querySelectorAll("#tutorMount .tutor-study-tools").forEach((panel) => {
+      clearResult(panel);
+      setStatus(panel, "", false);
+      updateButtons(panel);
+    });
+  }
+
   document.addEventListener(RENDER_EVENT, installPanel);
+  document.addEventListener(CONVERSATION_EVENT, refreshForConversation);
   installPanel();
 })();

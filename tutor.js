@@ -19,6 +19,7 @@
   const MODEL_ID = "gpt-5.6-luna";
   const MODEL_PROVIDER = "openai";
   const PUTER_SRC = "https://js.puter.com/v2/";
+  const CONVERSATION_EVENT = "aitools4kids:tutor-conversation-updated";
 
   const TEXT = {
     el: {
@@ -251,6 +252,7 @@
   let ctx = null;
   let refs = {};
   let conversation = [];
+  let conversationRevision = 0;
   let busy = false;
   let authReady = false;
   let providerMode = "groq";
@@ -298,6 +300,32 @@
 
   function unique(arr) {
     return [...new Set(arr)];
+  }
+
+  function conversationSnapshot() {
+    const messages = conversation.slice(-8).map((m) => ({
+      role: m.role === "assistant" ? "assistant" : "user",
+      content: String(m.content || "").trim().slice(0, 6000),
+    })).filter((m) => m.content);
+    let latestUser = "";
+    let latestAssistant = "";
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (!latestAssistant && messages[i].role === "assistant") latestAssistant = messages[i].content;
+      if (!latestUser && messages[i].role === "user") latestUser = messages[i].content;
+      if (latestUser && latestAssistant) break;
+    }
+    return {
+      revision: conversationRevision,
+      latestUser,
+      latestAssistant,
+      hasExchange: !!latestUser && !!latestAssistant,
+      messages,
+    };
+  }
+
+  function emitConversationUpdated() {
+    conversationRevision += 1;
+    document.dispatchEvent(new CustomEvent(CONVERSATION_EVENT, { detail: conversationSnapshot() }));
   }
 
   function isParentMode() {
@@ -925,6 +953,7 @@ TUTORING RULES
 12. FORMATTING: use simple school-friendly text. Avoid LaTeX and code formatting for ordinary school maths. Write e.g. -2/3, -0.67, 3/4.
 13. PRIVACY / MINIMIZATION: never ask for or encourage the learner's full name, school/class identifier, home address, phone number, email, passwords, health information or other personal/sensitive details. They are not needed for tutoring. If the user volunteers such information, do not repeat it unnecessarily; briefly say it is not needed and continue with the school question.
 14. FORMATIVE-ONLY ASSESSMENT: do not present yourself as an official grader, diagnostician or decision-maker. Do not label the learner as "weak", "gifted", "bad at maths", etc.; do not diagnose a learning difficulty; do not predict future performance or recommend an educational track as a decision. You may give specific formative feedback about the CURRENT attempt or topic (for example, "this topic needs more practice") and explain mistakes.
+15. CURRICULUM + QUESTION TOGETHER: treat the selected grade, subject and topic as the educational scope, and the user's current question as the immediate focus. Use BOTH. Do not ignore the selected school context, and do not drift to unrelated curriculum material just because it exists in the catalog.
 
 ${parentMode ? `PARENT MODE
 - Speak to the parent, not directly to the child.
@@ -1521,6 +1550,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     if (recording) cancelRecording();
     else stopVad().catch(() => {});
     conversation = [];
+    emitConversationUpdated();
     if (clearMessages && refs.messages) {
       refs.messages.innerHTML = `
         <div class="tutor-empty" id="tutorEmptyState">
@@ -1597,6 +1627,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       }
 
       conversation.push({ role: "assistant", content: answer });
+      emitConversationUpdated();
       const answerBubble = addBubble("assistant", answer);
       if (refs.autoSpeak?.checked) {
         const speakButton = answerBubble?.querySelector(".tutor-speak-btn");
@@ -1882,5 +1913,6 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
   window.AITutor = {
     render,
     getProvider: () => providerMode,
+    getConversationSnapshot: conversationSnapshot,
   };
 })();

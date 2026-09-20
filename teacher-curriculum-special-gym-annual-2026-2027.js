@@ -16,6 +16,7 @@
     chemistryC:"https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._26-27_.docx",
     civics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9A%CE%A0%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%95.%CE%91.%CE%95._26-27.docx",
     english:"https://www.minedu.gov.gr/publications/docs2026/%CE%9E%CE%95%CE%9D%CE%95%CE%A3_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%A9%CE%9D_EAE_%CE%91%CE%93%CE%93%CE%9B%CE%99%CE%9A%CE%91.docx",
+    greekLanguageLiterature:"https://www.minedu.gov.gr/publications/docs2026/%CE%9D.%CE%95._%CE%9B%CE%9F%CE%93%CE%9F%CE%A4%CE%95%CE%A7%CE%9D%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95.%CE%91.%CE%95._26-27.docx",
     economics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026-2027.pdf"
   };
 
@@ -334,6 +335,72 @@
 
 
 
+
+
+  upsert({
+    id:"teacher-annual-special-gym-a-language",grade:"A",subject:"Γλωσσική Διδασκαλία",subjectId:"language",
+    sourceTitle:"Ν.Ε. ΛΟΓΟΤΕΧΝΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.greekLanguageLiterature,
+    required:[
+      "1η Ενότητα — Οι πρώτες μέρες σε ένα νέο σχολείο",
+      "2η Ενότητα — Επικοινωνία στο σχολείο",
+      "6η Ενότητα — Οι δημιουργικές δραστηριότητες στη ζωή μου"
+    ],
+    optional:[
+      "8η Ενότητα — Αθλητισμός και Ολυμπιακοί αγώνες: Παρακολουθώ και συμμετέχω",
+      "9η Ενότητα — Ανακαλύπτω τη μαγεία της γνώσης"
+    ],
+    note:"Οι οδηγίες της Α΄ Γυμνασίου Ε.Α.Ε. δεν προτείνουν γραμμική κάλυψη όλου του βιβλίου. Διακρίνουν τρεις βασικές και δύο συμπληρωματικές ενότητες, ενώ οι γλωσσικές δεξιότητες και τα γραμματικοσυντακτικά φαινόμενα ενσωματώνονται σε όλη τη διάρκεια του έτους.",
+    meta:{
+      weeklyHours:4,
+      anchorPolicy:"official-basic-and-supplementary-units-flexible-order",
+      coverageCompleteness:"section-level-verified",
+      thematicAxes:["Σχολείο","Φύση, Υγεία και Διατροφή","Θέατρο/Κινηματογράφος","Δραστηριότητες","Ο κόσμος μέσα από την οθόνη/εικόνα","Αθλητισμός","Γνώση","Τόπος και Πολιτισμός"],
+      textGenres:["Περιγραφή","Αφήγηση","Επιχειρηματολογία","Πολυτροπικά κείμενα"]
+    }
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-language",grade:"B",subject:"Γλωσσική Διδασκαλία",subjectId:"language",
+    sourceTitle:"Ν.Ε. ΛΟΓΟΤΕΧΝΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.greekLanguageLiterature,
+    official:[
+      "Θεματικός άξονας — Ταξίδια",
+      "Θεματικός άξονας — Οικογένεια",
+      "Θεματικός άξονας — Φιλία",
+      "Θεματικός άξονας — Σχολείο",
+      "Θεματικός άξονας — Εργασία",
+      "Θεματικός άξονας — Ενημέρωση",
+      "Θεματικός άξονας — Σύγχρονα κοινωνικά προβλήματα"
+    ],
+    note:"Στη Β΄ Γυμνασίου το βιβλίο έχει εννέα διδακτικές ενότητες, αλλά οι επίσημες οδηγίες αφήνουν ρητά στον/στην εκπαιδευτικό την επιλογή θεματικών και τη συνεξέταση ενοτήτων με βάση τα ενδιαφέροντα των μαθητών/τριών. Για να μη δημιουργηθεί ψευδής υποχρεωτική σειρά κεφαλαίων, το site εκθέτει τους επαληθευμένους θεματικούς άξονες.",
+    meta:{
+      weeklyHours:4,
+      anchorPolicy:"target-oriented-flexible-thematic-framework",
+      coverageCompleteness:"thematic-framework-verified",
+      textGenres:["Περιγραφή","Αφήγηση","Επιχειρηματολογία"],
+      languageSkills:["Κατανόηση προφορικού λόγου","Κατανόηση γραπτού λόγου","Παραγωγή προφορικού λόγου","Παραγωγή γραπτού λόγου","Τρόποι ανάπτυξης παραγράφου","Περίληψη κειμένου - Πλαγιότιτλοι","Συνοχή ευρύτερου κειμένου","Αξιολόγηση και διατύπωση επιχειρημάτων"]
+    }
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-language",grade:"C",subject:"Γλωσσική Διδασκαλία",subjectId:"language",
+    sourceTitle:"Ν.Ε. ΛΟΓΟΤΕΧΝΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.greekLanguageLiterature,
+    official:[
+      "3η Ενότητα — Είμαστε όλοι ίδιοι. Είμαστε όλοι διαφορετικοί",
+      "2η Ενότητα — Γλώσσα - Γλώσσες και πολιτισμοί του κόσμου",
+      "1η Ενότητα — Η Ελλάδα στον κόσμο",
+      "4η Ενότητα — Ενωμένη Ευρώπη και Ευρωπαίοι πολίτες",
+      "5η Ενότητα — Ειρήνη - Πόλεμος",
+      "6η Ενότητα — Ενεργοί πολίτες για την υπεράσπιση οικουμενικών αξιών"
+    ],
+    note:"Η σειρά αυτή αποτυπώνει την ενδεικτική αναδιάταξη των επίσημων οδηγιών για πρόγραμμα περίπου 50 διδακτικών ωρών. Δεν χαρακτηρίζεται ως υποχρεωτική γραμμική σειρά· το site κρατά τους πραγματικούς τίτλους χωρίς να επινοεί πρόσθετες ενότητες.",
+    meta:{
+      weeklyHours:4,
+      approximateProgramHours:50,
+      anchorPolicy:"official-indicative-reordered-units-not-mandatory-sequence",
+      coverageCompleteness:"section-level-verified"
+    }
+  });
+
   upsert({
     id:"teacher-annual-special-gym-c-social-civic",grade:"C",subject:"Κοινωνική και Πολιτική Αγωγή",subjectId:"social-civic",
     sourceTitle:"ΚΠΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.civics,
@@ -405,7 +472,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.2.0",
+    version:"1.3.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
@@ -414,6 +481,7 @@
       "teacher-annual-special-gym-a-physics","teacher-annual-special-gym-b-physics","teacher-annual-special-gym-c-physics",
       "teacher-annual-special-gym-a-pe","teacher-annual-special-gym-b-pe","teacher-annual-special-gym-c-pe",
       "teacher-annual-special-gym-b-chemistry","teacher-annual-special-gym-c-chemistry",
+      "teacher-annual-special-gym-a-language","teacher-annual-special-gym-b-language","teacher-annual-special-gym-c-language",
       "teacher-annual-special-gym-b-social-civic","teacher-annual-special-gym-c-social-civic",
       "teacher-annual-special-gym-a-english","teacher-annual-special-gym-b-english","teacher-annual-special-gym-c-english",
       "teacher-extra-special-gym-c-economics"

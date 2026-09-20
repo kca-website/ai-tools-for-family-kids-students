@@ -15,7 +15,7 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,17);
+assert.equal(M.mappedEntries.length,20);
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');
@@ -72,6 +72,31 @@ assert.ok(C['teacher-annual-special-gym-b-chemistry'].excludedAnchors.some(x=>x.
 assert.ok(C['teacher-annual-special-gym-c-chemistry'].officialAnchors.some(x=>x.includes('Εξουδετέρωση')));
 assert.ok(C['teacher-annual-special-gym-c-chemistry'].officialAnchors.some(x=>x.includes('Πολυμερισμός')));
 
+const langA=C['teacher-annual-special-gym-a-language'];
+assert.ok(langA.officialAnchors.includes('1η Ενότητα — Οι πρώτες μέρες σε ένα νέο σχολείο'));
+assert.ok(langA.officialAnchors.includes('6η Ενότητα — Οι δημιουργικές δραστηριότητες στη ζωή μου'));
+assert.ok(langA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 8η Ενότητα')));
+assert.ok(langA.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 9η Ενότητα')));
+assert.equal(langA.anchorPolicy,'official-basic-and-supplementary-units-flexible-order');
+
+const langB=C['teacher-annual-special-gym-b-language'];
+assert.equal(langB.anchorPolicy,'target-oriented-flexible-thematic-framework');
+assert.equal(langB.officialAnchors.length,7);
+assert.ok(langB.officialAnchors.includes('Θεματικός άξονας — Οικογένεια'));
+assert.ok(langB.officialAnchors.includes('Θεματικός άξονας — Σύγχρονα κοινωνικά προβλήματα'));
+assert.ok(langB.officialAnchors.every(x=>x.startsWith('Θεματικός άξονας — ')));
+assert.ok(langB.languageSkills.includes('Περίληψη κειμένου - Πλαγιότιτλοι'));
+
+const langC=C['teacher-annual-special-gym-c-language'];
+assert.equal(langC.officialAnchors.length,6);
+assert.equal(langC.approximateProgramHours,50);
+assert.ok(langC.officialAnchors.includes('3η Ενότητα — Είμαστε όλοι ίδιοι. Είμαστε όλοι διαφορετικοί'));
+assert.ok(langC.officialAnchors.includes('2η Ενότητα — Γλώσσα - Γλώσσες και πολιτισμοί του κόσμου'));
+assert.ok(langC.officialAnchors.includes('1η Ενότητα — Η Ελλάδα στον κόσμο'));
+assert.ok(langC.officialAnchors.includes('4η Ενότητα — Ενωμένη Ευρώπη και Ευρωπαίοι πολίτες'));
+assert.ok(langC.officialAnchors.includes('5η Ενότητα — Ειρήνη - Πόλεμος'));
+assert.ok(langC.officialAnchors.includes('6η Ενότητα — Ενεργοί πολίτες για την υπεράσπιση οικουμενικών αξιών'));
+
 const civ=C['teacher-annual-special-gym-b-social-civic'];
 assert.ok(civ.officialAnchors.some(x=>x==='1.2 Τι είναι κοινωνία'));
 assert.ok(civ.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 1.1')));
@@ -108,4 +133,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 17 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 20 official mappings.');

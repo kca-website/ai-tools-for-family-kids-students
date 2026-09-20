@@ -27,40 +27,6 @@
   function unique(arr) { return [...new Set((arr || []).filter(Boolean))]; }
 
 
-  // Our AI Help is a baseline option across every existing subject and role.
-  const aiHelpEntries = {
-    primary: {
-      guardian: {
-        toolId: "ai-help",
-        useCaseEl: "Όταν το παιδί έχει κολλήσει σε οποιοδήποτε μάθημα, άνοιξε τον «Βοηθό Γονέα» και περιέγραψε πού δυσκολεύεται.",
-        useCaseEn: "When the child is stuck in any subject, open Parent Helper and describe where they are struggling.",
-        howToEl: "Εσύ χειρίζεσαι τη συνομιλία με τον δικό σου λογαριασμό Puter. Ο βοηθός προτείνει μία ερώτηση ή ένα μικρό βήμα κάθε φορά για να το δουλέψεις μαζί με το παιδί.",
-        howToEn: "You operate the chat with your own Puter account. The helper suggests one question or small step at a time to work through with the child.",
-        cautionEl: "Μην εισάγεις προσωπικά ή ευαίσθητα δεδομένα του παιδιού.",
-        cautionEn: "Do not enter the child's personal or sensitive information.",
-      },
-      student: {
-        toolId: "ai-help",
-        useCaseEl: "Αν κολλήσεις σε μάθημα, ζήτησε από γονέα/κηδεμόνα να ανοίξει μαζί σου τον «Βοηθό Γονέα» του aitools4kids.",
-        useCaseEn: "If you get stuck, ask a parent/guardian to open the aitools4kids Parent Helper with you.",
-        howToEl: "Στο Δημοτικό δεν ανοίγεις μόνος/η λογαριασμό Puter. Ο γονιός χειρίζεται τη συνομιλία και εσύ κάνεις την προσπάθεια.",
-        howToEn: "In Primary School you do not create/use a Puter account on your own. The parent operates the chat while you do the thinking.",
-        cautionEl: "Η AI Βοήθεια δεν δίνει έτοιμη εργασία και μπορεί να κάνει λάθος: έλεγχε με το βιβλίο.",
-        cautionEn: "AI Help does not hand over finished schoolwork and can be wrong: check against the textbook.",
-      },
-    },
-    middle: {
-      guardian: { toolId:"ai-help", useCaseEl:"Βοηθός Γονέα για οποιοδήποτε μάθημα, με βάση την τάξη και το επιλεγμένο θέμα.", useCaseEn:"Parent Helper for any subject, based on grade and selected topic.", howToEl:"Περιέγραψε πού κόλλησε ο μαθητής και ζήτησε το επόμενο μικρό βήμα, όχι τη λύση.", howToEn:"Describe where the student is stuck and ask for the next small step, not the solution.", cautionEl:"Για άμεση μαθητική χρήση ισχύουν οι ηλικιακοί κανόνες μέσα στην AI Βοήθεια.", cautionEn:"Direct student use follows the age rules shown inside AI Help." },
-      student: { toolId:"ai-help", useCaseEl:"Καθοδήγηση σε οποιοδήποτε μάθημα με ερωτήσεις και υποδείξεις αντί για έτοιμη λύση.", useCaseEn:"Guidance in any subject through questions and hints rather than ready answers.", howToEl:"Διάλεξε τάξη, μάθημα και θέμα, γράψε ή μίλα και εξήγησε πρώτα τι έχεις δοκιμάσει.", howToEn:"Choose grade, subject and topic, type or speak, and first explain what you have tried.", cautionEl:"Στα 12 δεν υπάρχει άμεση χρήση Puter· στα 13–14 ζητείται δήλωση γονικής συναίνεσης.", cautionEn:"At 12 there is no direct Puter use; at 13–14 declared parental consent is required." },
-    },
-    high: {
-      guardian: { toolId:"ai-help", useCaseEl:"Βοηθός Γονέα για να υποστηρίξεις διάβασμα και κατανόηση χωρίς να κάνεις την εργασία αντί για τον μαθητή.", useCaseEn:"Parent Helper for supporting study and understanding without doing the work for the student.", howToEl:"Δώσε το μάθημα/θέμα και ζήτησε ερωτήσεις ελέγχου ή τρόπο εξήγησης.", howToEn:"Provide the subject/topic and ask for checking questions or an explanation strategy.", cautionEl:"Επαλήθευση πραγματολογικών πληροφοριών με σχολικό βιβλίο/επίσημη πηγή.", cautionEn:"Verify factual information against the textbook/official source." },
-      student: { toolId:"ai-help", useCaseEl:"Καθοδηγούμενη βοήθεια σε όλα τα μαθήματα, γραπτά ή με φωνή, με βάση την τάξη και το θέμα.", useCaseEn:"Guided help across subjects, by text or voice, based on grade and topic.", howToEl:"Δείξε πρώτα τη δική σου προσπάθεια και ζήτησε μία υπόδειξη τη φορά.", howToEn:"Show your own attempt first and ask for one hint at a time.", cautionEl:"Μην χρησιμοποιείς την απάντηση ως έτοιμο παραδοτέο· έλεγχε πραγματολογικά στοιχεία.", cautionEn:"Do not use the response as submit-ready work; verify factual claims." },
-    },
-  };
-  ["primary","middle","high"].forEach((z) => ["guardian","student"].forEach((r) => ensurePathTool(z,r,aiHelpEntries[z][r],true)));
-  Object.keys(CURRICULUM || {}).forEach((zone) => Object.keys(CURRICULUM[zone] || {}).forEach((subject) => ensureSubjectTool(zone, subject, "ai-help", true)));
-
   // Direct browser-based alternatives for Primary Science/History; also useful in older zones.
   const phetGuardian = { toolId:"phet", useCaseEl:"Οπτικοποίηση εννοιών Φυσικής και άλλων Φυσικών Επιστημών μέσα από ασφαλή διαδραστικό πειραματισμό στον browser.", useCaseEn:"Visualize Physics and other science concepts through interactive browser-based experimentation.", howToEl:"Διάλεξε μια σχετική ελληνική προσομοίωση και ζήτησε από το παιδί να προβλέψει τι θα συμβεί πριν αλλάξει μια παράμετρο.", howToEn:"Choose a relevant simulation and ask the child to predict what will happen before changing a parameter.", cautionEl:"Δεν είναι AI tutor και δεν ακολουθεί μόνο του την ελληνική ύλη· σύνδεσέ το με το συγκεκριμένο κεφάλαιο του βιβλίου.", cautionEn:"It is not an AI tutor and does not automatically follow the Greek curriculum; tie it to the textbook chapter." };
   const phetStudent = { toolId:"phet", useCaseEl:"Για να δεις μια έννοια Φυσικής/Επιστημών να «κινείται» και να πειραματιστείς αντί να τη μαθαίνεις μόνο απ' έξω.", useCaseEn:"To see a science concept in action and experiment instead of only memorizing it.", howToEl:"Πριν αλλάξεις κάτι στην προσομοίωση, μάντεψε τι θα γίνει. Μετά σύγκρινε την πρόβλεψή σου με αυτό που βλέπεις.", howToEn:"Before changing anything, predict what will happen. Then compare your prediction with what you observe.", cautionEl:"Χρησιμοποίησέ το μαζί με το σχολικό κεφάλαιο, όχι σαν ξεχωριστή ύλη.", cautionEn:"Use it alongside your textbook chapter, not as a separate syllabus." };

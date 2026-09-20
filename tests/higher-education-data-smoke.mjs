@@ -22,6 +22,24 @@ assert.ok(patrasBiology.courses.some((course) => course.code === 'ΒΙΟ_ΒΚΔ'
 assert.ok(patrasBiology.courses.some((course) => course.code === 'ΒΙΟ_ΓΜΒ' && course.topics?.includes('Συσχέτιση και παλινδρόμηση')));
 assert.ok(!patrasBiology.courses.some((course) => course.titleEl === 'Βιολογία Κυττάρου Ι'), 'obsolete Patras Biology title must not return');
 assert.ok(!patrasBiology.courses.some((course) => course.titleEl === 'Γενετική Ι'), 'obsolete Genetics I title must not return');
+const neuro = patrasBiology.courses.find((course) => course.code === 'ΒΙΟ_ΝΕΥ');
+assert.ok(neuro, 'Neurobiology course missing');
+assert.equal(neuro.topicsVerified, true);
+assert.equal(neuro.syllabusStatus, 'verified-official-outline');
+assert.match(neuro.syllabusSource, /Course_Outines_Biology-Dpt-2022_GRE\.pdf$/);
+assert.ok(neuro.topics.includes('Συναπτική διαβίβαση'));
+assert.ok(neuro.topics.some((topic) => /Νευροαπεικονιστικές τεχνικές/.test(topic)));
+
+for (const code of ['ΒΙΟ_ΒΚΔ','ΒΙΟ_ΓΜΒ','ΒΙΟ_ΓΧΜ']) {
+  const course = patrasBiology.courses.find((item) => item.code === code);
+  assert.equal(course?.topicsVerified, true, `${code} must have verified official topics`);
+  assert.ok(course?.topics?.length >= 10, `${code} verified topics are unexpectedly sparse`);
+}
+const unverified = patrasBiology.courses.find((course) => course.code === 'ΒΙΟ_ΒΖΔ');
+assert.ok(unverified, 'unverified-course fixture missing');
+assert.equal(unverified.topicsVerified, undefined);
+assert.equal(unverified.topics, undefined, 'unverified course must not carry pseudo-syllabus topics');
+
 
 
 assert.equal(he.meta.status, 'pilot');

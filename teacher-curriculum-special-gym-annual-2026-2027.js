@@ -28,7 +28,10 @@
     civics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9A%CE%A0%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%95.%CE%91.%CE%95._26-27.docx",
     english:"https://www.minedu.gov.gr/publications/docs2026/%CE%9E%CE%95%CE%9D%CE%95%CE%A3_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%A9%CE%9D_EAE_%CE%91%CE%93%CE%93%CE%9B%CE%99%CE%9A%CE%91.docx",
     greekLanguageLiterature:"https://www.minedu.gov.gr/publications/docs2026/%CE%9D.%CE%95._%CE%9B%CE%9F%CE%93%CE%9F%CE%A4%CE%95%CE%A7%CE%9D%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95.%CE%91.%CE%95._26-27.docx",
-    economics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026-2027.pdf"
+    economics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026-2027.pdf",
+    homeEconomics:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
+    homeEconomicsBook:"https://ebooks.edu.gr/ebooks/v/html/8547/2328/Oikiaki-Oikonomia_A-Gymnasiou_html-apli/index.html",
+    skillsLabs:"https://www.iep.edu.gr/ergastiria-dexiotiton-2-2/"
   };
 
 
@@ -74,7 +77,32 @@
   }
 
 
-
+  function upsertFramework({
+    id,grade,subject,subjectId,sourceTitle,sourceUrl,official=[],note="",meta={}
+  }){
+    C.entries[id]={
+      id,
+      schoolType:"special-gymnasium",
+      grade,
+      gradeLabel:GRADE_LABEL[grade],
+      subject,
+      subjectId,
+      subjectType:"Επίσημο πλαίσιο μαθήματος/δράσης Ε.Α.Ε. 2026-2027",
+      status:"verified",
+      coverageStatus:"annual-framework-verified",
+      annualInstructionsStatus:"2026-27-framework-verified",
+      verificationBasis:"official-2026-27-framework",
+      verificationDate:VERIFIED,
+      sourceTitle,
+      sourceUrl,
+      instructionSourceUrl:sourceUrl,
+      officialHubUrl:HUB,
+      officialAnchors:[...official],
+      verificationNote:note || "Επαληθευμένο επίσημο πλαίσιο 2026-2027. Δεν παρουσιάζεται ως πλήρης section-level ετήσια ύλη.",
+      frameworkOnly:true,
+      ...meta
+    };
+  }
 
 
   upsert({
@@ -1438,12 +1466,48 @@
     meta:{sourceBookUrl:"https://ebooks.edu.gr/ebooks/handle/8547/5582"}
   });
 
+
+  upsertFramework({
+    id:"teacher-framework-special-gym-a-home-economics",grade:"A",subject:"Οικιακή Οικονομία",subjectId:"home-economics",
+    sourceTitle:"Οδηγίες διδασκαλίας Οικιακής Οικονομίας Γυμνασίου Ε.Α.Ε. 2026-2027",sourceUrl:SOURCES.homeEconomics,
+    official:[
+      "1. Η οικογένεια και ο κοινωνικός περίγυρος",
+      "2. Οικονομικά της οικογένειας",
+      "3. Διατροφή",
+      "4. Αγωγή υγείας - Πρόληψη ατυχημάτων",
+      "5. Κατοικία",
+      "6. Ενδυμασία"
+    ],
+    note:"Η τρέχουσα οδηγία Ε.Α.Ε. 2026-2027 για την Οικιακή Οικονομία είναι δημοσιευμένη από το ΙΕΠ. Οι έξι επιλογές είναι τα πραγματικά κεφάλαια του επίσημου βιβλίου Α΄ Γυμνασίου και χρησιμοποιούνται ως ασφαλές πλαίσιο επιλογής. Δεν ισχυριζόμαστε εδώ ότι όλα τα υποκεφάλαια διδάσκονται χωρίς περικοπές.",
+    meta:{weeklyHours:2,frameworkKind:"official-textbook-chapters",textbookUrl:SOURCES.homeEconomicsBook,coverageCompleteness:"chapter-framework-verified"}
+  });
+
+  ["A","B","C"].forEach((grade)=>{
+    const hours={A:2,B:1,C:1}[grade];
+    upsertFramework({
+      id:`teacher-framework-special-gym-${grade.toLowerCase()}-skills-labs`,grade,subject:"Εργαστήρια Δεξιοτήτων",subjectId:"skills-labs",
+      sourceTitle:"ΙΕΠ — Εργαστήρια Δεξιοτήτων 2026-2027",sourceUrl:SOURCES.skillsLabs,
+      official:[
+        "Ζω Καλύτερα - Ευ Ζην",
+        "Φροντίζω το Περιβάλλον",
+        "Ενδιαφέρομαι και Ενεργώ - Κοινωνική Συναίσθηση και Ευθύνη",
+        "Δημιουργώ και Καινοτομώ - Δημιουργική Σκέψη και Πρωτοβουλία"
+      ],
+      note:"Τα Εργαστήρια Δεξιοτήτων είναι δυναμική εκπαιδευτική δράση και όχι μάθημα με σταθερή ετήσια ακολουθία κεφαλαίων. Οι τέσσερις επιλογές είναι οι επίσημες θεματικές του ΙΕΠ. Η συγκεκριμένη δράση/πρόγραμμα επιλέγεται από τη σχολική μονάδα και τον/την εκπαιδευτικό.",
+      meta:{weeklyHours:hours,frameworkKind:"skills-labs-thematic-framework",selectionFramework:true,selectionStatus:"school-selected-program",coverageCompleteness:"thematic-framework-verified"}
+    });
+  });
+
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.13.0",
+    version:"1.14.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
     publishedPending:PUBLISHED_PENDING,
+    frameworkEntries:Object.freeze([
+      "teacher-framework-special-gym-a-home-economics",
+      "teacher-framework-special-gym-a-skills-labs","teacher-framework-special-gym-b-skills-labs","teacher-framework-special-gym-c-skills-labs"
+    ]),
     mappedEntries:Object.freeze([
       "teacher-annual-special-gym-a-ancient-language","teacher-annual-special-gym-b-ancient-language","teacher-annual-special-gym-c-ancient-language",
       "teacher-annual-special-gym-a-ancient-translation","teacher-annual-special-gym-b-ancient-translation","teacher-annual-special-gym-c-ancient-translation",

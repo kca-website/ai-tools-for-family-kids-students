@@ -194,9 +194,18 @@
       if(typeof window.subjectMatches==="function") return window.subjectMatches(entry,{id:row.id,label:row.label});
       return String(entry?.subjectId||"")===String(row.id||"") || String(entry?.subject||"")===String(row.label||"");
     });
-    const exact=entries.find(e=>e?.annualInstructionsStatus==="2026-27-verified"||e?.coverageStatus==="annual-instructions-verified"||e?.coverageStatus==="annual-exam-syllabus-verified"||e?.coverageStatus==="panhellenic-2027-verified");
+    const exact=entries.find(e=>
+      e?.annualInstructionsStatus==="2026-27-verified"||
+      e?.coverageStatus==="annual-instructions-verified"||
+      e?.coverageStatus==="annual-exam-syllabus-verified"||
+      e?.coverageStatus==="panhellenic-2027-verified"||
+      (e?.coverageStatus==="official-course-guidance"&&e?.requiresExactUnit!==true&&Array.isArray(e?.officialAnchors)&&e.officialAnchors.length>0)
+    );
     if(exact) return {kind:"exact",label:"Ύλη 2026–27",entry:exact};
-    const partial=entries.find(e=>e?.coverageStatus==="partial"&&(e?.currentExamSyllabusStatus==="verified"||e?.annualInstructionsStatus==="source-indexed"));
+    const partial=entries.find(e=>
+      (e?.coverageStatus==="partial"&&(e?.currentExamSyllabusStatus==="verified"||e?.annualInstructionsStatus==="source-indexed"))||
+      (e?.coverageStatus==="official-course-guidance"&&e?.requiresExactUnit===true)
+    );
     if(partial) return {kind:"partial",label:"Μερική χαρτογράφηση",entry:partial};
     const support=entries.find(e=>e?.coverageStatus==="reference"||e?.status==="verified-reference");
     if(support) return {kind:"support",label:"Υποστηρικτική αντιστοίχιση",entry:support};

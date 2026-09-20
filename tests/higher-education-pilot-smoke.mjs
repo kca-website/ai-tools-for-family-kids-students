@@ -152,7 +152,10 @@ try {
   assert.match(lastAiPayload.system, /Κάθε ερώτηση quiz πρέπει να αντιστοιχεί άμεσα/);
   assert.match(lastAiPayload.prompt, /ΒΙΟ_ΝΕΥ · Νευροβιολογία/);
   assert.match(lastAiPayload.prompt, /Στόχος που επέλεξε: Να κάνω εξάσκηση/);
+  assert.equal(await page.locator('#heToolsDetails').getAttribute('open'), null, 'tool recommendations should remain collapsed after quiz selection');
+  await page.locator('#heToolsDetails > summary').click();
   assert.match(await page.locator('#heResult').innerText(), /Στόχος: Να κάνω εξάσκηση/);
+  await page.locator('#heToolsDetails > summary').click();
 
   assert.match(lastAiPayload.prompt, /Συναπτική διαβίβαση/);
   assert.match(lastAiPayload.prompt, /Νευροαπεικονιστικές τεχνικές PET, MRI και fMRI/);

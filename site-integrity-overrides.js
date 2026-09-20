@@ -64,25 +64,6 @@
   });
   if (CURRICULUM?.primary?.language) ensureSubjectTool("primary","language","reading-coach",true);
 
-  // Fix stale Primary Perplexity wording: under 13, the adult operates it; child does not use the service/account.
-  const pg = PATHS?.primary?.guardian?.tools?.find((x) => x.toolId === "perplexity");
-  if (pg) Object.assign(pg, {
-    useCaseEl:"Για έρευνα με πηγές σε Ιστορία ή Φυσικές Επιστήμες, όταν θέλεις εσύ ως γονέας να ελέγξεις ένα γεγονός ή μια εξήγηση μαζί με το παιδί.",
-    useCaseEn:"For sourced research in History or Science when you, as the parent, want to check a fact or explanation together with the child.",
-    howToEl:"Ο γονέας χειρίζεται τον δικό του λογαριασμό/την υπηρεσία και ανοίγει τις πηγές μαζί με το παιδί. Παιδιά κάτω των 13 δεν επιτρέπεται να χρησιμοποιούν το Perplexity.",
-    howToEn:"The parent operates their own account/service and reviews sources with the child. Children under 13 are not permitted to use Perplexity.",
-    cautionEl:"Μην δίνεις στο παιδί κάτω των 13 δικό του λογαριασμό ή αυτόνομη χρήση. Δείξε του πώς ελέγχουμε τουλάχιστον μία από τις πηγές.",
-    cautionEn:"Do not give an under-13 child their own account or independent use. Show them how to check at least one cited source.",
-  });
-
-  // Accessibility entries for new tools (where we have a documented source).
-  if (typeof ACCESSIBILITY_INFO !== "undefined") {
-    ACCESSIBILITY_INFO["phet"] = { status:"good", noteEl:"Το PhET διαθέτει ειδική πρωτοβουλία Accessible Sims και τεκμηρίωση προσβασιμότητας για προσομοιώσεις.", noteEn:"PhET has a dedicated Accessible Sims initiative and accessibility documentation for simulations.", sourceUrl:"https://phet.colorado.edu/en/accessibility" };
-    ACCESSIBILITY_INFO["google-arts-culture"] = { status:"none", noteEl:"Δεν καταχωρίσαμε συγκεκριμένο ACR/VPAT για το Google Arts & Culture στον παρόντα έλεγχο.", noteEn:"No specific ACR/VPAT for Google Arts & Culture was recorded in this audit.", sourceUrl:"https://artsandculture.google.com/project/education" };
-    ACCESSIBILITY_INFO["gemini-education"] = { status:"partial", noteEl:"Η πρόσβαση γίνεται μέσω Google Workspace for Education· η ακριβής εμπειρία προσβασιμότητας εξαρτάται από τις υπηρεσίες/ρυθμίσεις του σχολικού λογαριασμού.", noteEn:"Access is through Google Workspace for Education; the exact accessibility experience depends on the school's services and settings.", sourceUrl:"https://support.google.com/gemini/answer/14620100" };
-    ACCESSIBILITY_INFO["ai-help"] = { status:"partial", noteEl:"Η AI Βοήθεια του site υποστηρίζει κείμενο και φωνή. Η τελική προσβασιμότητα εξαρτάται επίσης από browser, Puter και τη συσκευή.", noteEn:"The site's AI Help supports text and voice. End-to-end accessibility also depends on the browser, Puter and device.", sourceUrl:"https://www.aitools4kids.gr/accessibility.html" };
-  }
-
   // ---------- Environment Studies diagnostics (A-D Primary) ----------
   function gap(id, labelEl, labelEn, explainEl, explainEn) {
     GAP_TAGS[id] = {

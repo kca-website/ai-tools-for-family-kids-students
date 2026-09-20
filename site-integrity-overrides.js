@@ -17,33 +17,11 @@
     else if (first) arr.unshift(entry);
     else arr.push(entry);
   }
-  function ensureSubjectTool(zone, subject, toolId, first = false) {
-    const target = CURRICULUM?.[zone]?.[subject];
-    if (!target) return;
-    if (!Array.isArray(target.toolIds)) target.toolIds = [];
-    target.toolIds = target.toolIds.filter((id) => id !== toolId);
-    first ? target.toolIds.unshift(toolId) : target.toolIds.push(toolId);
-  }
   function unique(arr) { return [...new Set((arr || []).filter(Boolean))]; }
 
 
   // Canonical PhET / Google Arts & Culture / Gemini for Education PATHS live in data.js.
-  ["primary","middle","high"].forEach((z) => {
-    if (CURRICULUM?.[z]?.science) ensureSubjectTool(z,"science","phet",true);
-    if (CURRICULUM?.[z]?.history) ensureSubjectTool(z,"history","google-arts-culture",true);
-  });
-  // Google Arts & Culture also has dedicated Physics/Chemistry/Biology learning collections.
-  if (CURRICULUM?.primary?.science) ensureSubjectTool("primary","science","google-arts-culture",false);
-  ["science","history","language","math","foreign-language"].forEach((s) => { if (CURRICULUM?.primary?.[s]) ensureSubjectTool("primary",s,"gemini-education",false); });
-  // v3.1: school-managed Google/Microsoft routes are additional options across older-zone subjects.
-  ["middle","high"].forEach((z) => {
-    Object.keys(CURRICULUM?.[z] || {}).forEach((subject) => {
-      ensureSubjectTool(z, subject, "gemini-education", false);
-      ensureSubjectTool(z, subject, "copilot", false);
-      ensureSubjectTool(z, subject, "chatgpt", false);
-    });
-  });
-  if (CURRICULUM?.primary?.language) ensureSubjectTool("primary","language","reading-coach",true);
+  // Supplemental curriculum mappings are canonical in curriculum-data.js.
 
   // ---------- Environment Studies diagnostics (A-D Primary) ----------
   function gap(id, labelEl, labelEn, explainEl, explainEn) {

@@ -15,7 +15,7 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,13);
+assert.equal(M.mappedEntries.length,17);
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');
@@ -77,6 +77,28 @@ assert.ok(civ.officialAnchors.some(x=>x==='1.2 Τι είναι κοινωνία'
 assert.ok(civ.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 1.1')));
 assert.ok(civ.officialAnchors.some(x=>x.includes('6.5 Αθλητισμός και βία')));
 
+const civC=C['teacher-annual-special-gym-c-social-civic'];
+assert.ok(civC.officialAnchors.includes('8.3 Τι είναι Σύνταγμα'));
+assert.ok(civC.officialAnchors.includes('10.1.1 Η σύνθεση της Βουλής'));
+assert.ok(civC.officialAnchors.includes('12.3 Ατομικά Δικαιώματα'));
+assert.ok(civC.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 9.5')));
+assert.ok(civC.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 13.1')));
+assert.ok(civC.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 14.2.5')));
+assert.ok(civC.excludedAnchors.some(x=>x.includes('Κεφάλαιο 7')));
+assert.ok(civC.excludedAnchors.some(x=>x.includes('Κεφάλαιο 11')));
+assert.ok(!civC.officialAnchors.some(x=>x.includes('Κεφάλαιο 11')));
+
+const expectedEnglishLevels={a:'A2-/B1-',b:'B1-/B1+',c:'B1+/B2-'};
+for(const [grade,level] of Object.entries(expectedEnglishLevels)){
+  const e=C[`teacher-annual-special-gym-${grade}-english`];
+  assert.equal(e.expectedCefrLevel,level);
+  assert.equal(e.anchorPolicy,'competency-framework-not-chapter-syllabus');
+  assert.equal(e.officialAnchors.length,6);
+  assert.ok(e.officialAnchors.includes('Κατανόηση γραπτού λόγου'));
+  assert.ok(e.officialAnchors.includes('Προφορική διαμεσολάβηση'));
+  assert.ok(e.officialAnchors.every(x=>!/^unit\s|^κεφ/i.test(x)),'English must not invent chapter/unit syllabus');
+}
+
 const eco=C['teacher-extra-special-gym-c-economics'];
 for(const wrong of ['Ακαθάριστο Εγχώριο Προϊόν','Πληθωρισμός','Αποταμίευση','χρηματοπιστωτικά']){
   assert.ok(!eco.officialAnchors.some(x=>x.includes(wrong)),`obsolete economics anchor survived: ${wrong}`);
@@ -86,4 +108,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 13 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 17 official mappings.');

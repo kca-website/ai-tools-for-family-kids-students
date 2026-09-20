@@ -15,6 +15,7 @@
     chemistryB:"https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%92_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95.__26-27_.docx",
     chemistryC:"https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._26-27_.docx",
     civics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9A%CE%A0%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%95.%CE%91.%CE%95._26-27.docx",
+    english:"https://www.minedu.gov.gr/publications/docs2026/%CE%9E%CE%95%CE%9D%CE%95%CE%A3_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%A9%CE%9D_EAE_%CE%91%CE%93%CE%93%CE%9B%CE%99%CE%9A%CE%91.docx",
     economics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026-2027.pdf"
   };
 
@@ -331,6 +332,56 @@
     meta:{weeklyHours:1}
   });
 
+
+
+  upsert({
+    id:"teacher-annual-special-gym-c-social-civic",grade:"C",subject:"Κοινωνική και Πολιτική Αγωγή",subjectId:"social-civic",
+    sourceTitle:"ΚΠΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.civics,
+    required:[
+      "8.1 Μορφές Πολιτευμάτων","8.2 Το Πολίτευμα της Ελλάδας","8.3 Τι είναι Σύνταγμα","8.4 Βασικές αρχές του Συντάγματος","8.4.1 Λαϊκή Κυριαρχία","8.4.2 Κράτος Δικαίου","8.4.3 Κοινωνικό Κράτος","8.4 Αρχή της Διάκρισης των Λειτουργιών",
+      "9.1 Εκλογικό σώμα","9.2 Ψηφοφορία - Βασικές αρχές","9.3 Εκλογικά συστήματα","9.4 Τα πολιτικά κόμματα",
+      "10.1 Νομοθετική Λειτουργία","10.1.1 Η σύνθεση της Βουλής","10.1.2 Αρμοδιότητες της Βουλής","10.2 Εκτελεστική Λειτουργία","10.2.1 Πρόεδρος της Δημοκρατίας","10.2.2 Κυβέρνηση","10.2.3 Η Δικαστική Λειτουργία",
+      "12.1 Αντιστοιχία Δικαιωμάτων και Υποχρεώσεων","12.2 Προστασία των Δικαιωμάτων","12.3 Ατομικά Δικαιώματα","12.4 Τα πολιτικά δικαιώματα","12.5 Τα κοινωνικά δικαιώματα","12.5.1 Δικαίωμα της παιδείας","12.5.2 Δικαίωμα της εργασίας","12.5.3 Προστασία της υγείας - Αγωγή Υγείας","12.5.4 Προστασία του περιβάλλοντος - περιβαλλοντική αγωγή",
+      "13.2 Βασικοί θεσμοί","13.3 Βασικές πολιτικές","13.4 Πολίτης και Ευρωπαϊκή Ένωση",
+      "14.1 Η διεθνής κοινότητα και το διεθνές δίκαιο","14.2.1 Οι Διεθνείς Οργανισμοί","14.2.2 Οργανισμός Ηνωμένων Εθνών (περιληπτικά)","14.2.3 Οργανισμός Βορειοατλαντικού Συμφώνου (ΝΑΤΟ) (περιληπτικά)","14.2.4 Οργανισμός για την Ασφάλεια και τη Συνεργασία στην Ευρώπη (ΟΑΣΕ) (περιληπτικά)","14.3 Ανθρώπινα Δικαιώματα"
+    ],
+    optional:[
+      "9.5 Μέσα Μαζικής Επικοινωνίας (ΜΜΕ)",
+      "13.1 Ίδρυση και εξέλιξη της Ευρωπαϊκής Ένωσης",
+      "14.2.5 Άλλοι Διεθνείς Οργανισμοί - Μη Κυβερνητικές Οργανώσεις (Μ.Κ.Ο.)"
+    ],
+    excluded:[
+      "Κεφάλαιο 7 — δεν περιλαμβάνεται στον επίσημο πίνακα διδακτέας ύλης Γ΄ Ε.Α.Ε. 2026-27",
+      "Κεφάλαιο 11 — δεν περιλαμβάνεται στον επίσημο πίνακα διδακτέας ύλης Γ΄ Ε.Α.Ε. 2026-27"
+    ],
+    note:"Η Γ΄ τάξη χαρτογραφείται μόνο από τον επίσημο πίνακα διδακτέας ύλης 2026-2027. Οι 9.5, 13.1 και 14.2.5 διατηρούνται ως ρητά προαιρετικές. Τα Κεφάλαια 7 και 11 υπάρχουν στο σχολικό βιβλίο αλλά δεν εμφανίζονται στον φετινό πίνακα διδακτέας ύλης, οπότε δεν εκτίθενται ως επιλογές.",
+    meta:{weeklyHours:2,coverageCompleteness:"section-level-verified",classificationStatus:"official-required-optional-preserved"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-a-english",grade:"A",subject:"Αγγλικά",subjectId:"english",
+    sourceTitle:"ΞΕΝΕΣ ΓΛΩΣΣΕΣ ΟΔΗΓΙΕΣ ΓΥΜΝΑΣΙΩΝ EAE (ΑΓΓΛΙΚΑ)",sourceUrl:SOURCES.english,
+    official:["Κατανόηση γραπτού λόγου","Παραγωγή γραπτού λόγου & γραπτή διάδραση","Γραπτή διαμεσολάβηση","Κατανόηση προφορικού λόγου","Παραγωγή προφορικού λόγου & προφορική διάδραση","Προφορική διαμεσολάβηση"],
+    note:"Οι επίσημες οδηγίες Αγγλικής στα Γυμνάσια Ε.Α.Ε. οργανώνουν τη μάθηση με επικοινωνιακές δεξιότητες και επίπεδα γλωσσομάθειας, όχι με δεσμευτική σειρά κεφαλαίων σχολικού βιβλίου. Για αυτό το μενού εμφανίζει μόνο επαληθευμένους τομείς δεξιοτήτων και δεν κατασκευάζει τεχνητές ενότητες.",
+    meta:{expectedCefrLevel:"A2-/B1-",anchorPolicy:"competency-framework-not-chapter-syllabus",coverageCompleteness:"competency-framework-verified"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-english",grade:"B",subject:"Αγγλικά",subjectId:"english",
+    sourceTitle:"ΞΕΝΕΣ ΓΛΩΣΣΕΣ ΟΔΗΓΙΕΣ ΓΥΜΝΑΣΙΩΝ EAE (ΑΓΓΛΙΚΑ)",sourceUrl:SOURCES.english,
+    official:["Κατανόηση γραπτού λόγου","Παραγωγή γραπτού λόγου & γραπτή διάδραση","Γραπτή διαμεσολάβηση","Κατανόηση προφορικού λόγου","Παραγωγή προφορικού λόγου & προφορική διάδραση","Προφορική διαμεσολάβηση"],
+    note:"Οι επίσημες οδηγίες Αγγλικής στα Γυμνάσια Ε.Α.Ε. οργανώνουν τη μάθηση με επικοινωνιακές δεξιότητες και επίπεδα γλωσσομάθειας, όχι με δεσμευτική σειρά κεφαλαίων σχολικού βιβλίου. Για αυτό το μενού εμφανίζει μόνο επαληθευμένους τομείς δεξιοτήτων και δεν κατασκευάζει τεχνητές ενότητες.",
+    meta:{expectedCefrLevel:"B1-/B1+",anchorPolicy:"competency-framework-not-chapter-syllabus",coverageCompleteness:"competency-framework-verified"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-english",grade:"C",subject:"Αγγλικά",subjectId:"english",
+    sourceTitle:"ΞΕΝΕΣ ΓΛΩΣΣΕΣ ΟΔΗΓΙΕΣ ΓΥΜΝΑΣΙΩΝ EAE (ΑΓΓΛΙΚΑ)",sourceUrl:SOURCES.english,
+    official:["Κατανόηση γραπτού λόγου","Παραγωγή γραπτού λόγου & γραπτή διάδραση","Γραπτή διαμεσολάβηση","Κατανόηση προφορικού λόγου","Παραγωγή προφορικού λόγου & προφορική διάδραση","Προφορική διαμεσολάβηση"],
+    note:"Οι επίσημες οδηγίες Αγγλικής στα Γυμνάσια Ε.Α.Ε. οργανώνουν τη μάθηση με επικοινωνιακές δεξιότητες και επίπεδα γλωσσομάθειας, όχι με δεσμευτική σειρά κεφαλαίων σχολικού βιβλίου. Για αυτό το μενού εμφανίζει μόνο επαληθευμένους τομείς δεξιοτήτων και δεν κατασκευάζει τεχνητές ενότητες.",
+    meta:{expectedCefrLevel:"B1+/B2-",anchorPolicy:"competency-framework-not-chapter-syllabus",coverageCompleteness:"competency-framework-verified"}
+  });
+
   upsert({
     id:"teacher-extra-special-gym-c-economics",grade:"C",subject:"Οικονομικά",subjectId:"economics",
     sourceTitle:"ΟΙΚΟΝΟΜΙΚΑ Γ ΓΥΜΝΑΣΙΟΥ ΕΑΕ 2026-2027",sourceUrl:SOURCES.economics,
@@ -354,7 +405,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.1.0",
+    version:"1.2.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
@@ -363,7 +414,9 @@
       "teacher-annual-special-gym-a-physics","teacher-annual-special-gym-b-physics","teacher-annual-special-gym-c-physics",
       "teacher-annual-special-gym-a-pe","teacher-annual-special-gym-b-pe","teacher-annual-special-gym-c-pe",
       "teacher-annual-special-gym-b-chemistry","teacher-annual-special-gym-c-chemistry",
-      "teacher-annual-special-gym-b-social-civic","teacher-extra-special-gym-c-economics"
+      "teacher-annual-special-gym-b-social-civic","teacher-annual-special-gym-c-social-civic",
+      "teacher-annual-special-gym-a-english","teacher-annual-special-gym-b-english","teacher-annual-special-gym-c-english",
+      "teacher-extra-special-gym-c-economics"
     ])
   });
 

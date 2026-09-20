@@ -3,6 +3,7 @@ name: Tutor consolidation smoke
 on:
   push:
     branches:
+      - 'feature/**'
       - refactor/tutor-consolidation
   pull_request:
     branches:

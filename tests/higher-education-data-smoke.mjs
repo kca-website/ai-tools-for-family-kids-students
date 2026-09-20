@@ -72,6 +72,16 @@ const canonicalToolIds = new Set(
   [...dataSource.matchAll(/^\s{2}"([^"]+)":\s*\{/gm)].map((m) => m[1])
 );
 
+for (const [profileId, profile] of Object.entries(he.toolProfiles || {})) {
+  assert.ok(profile.labelEl, `tool profile ${profileId} needs a label`);
+  assert.ok(Array.isArray(profile.tools) && profile.tools.length >= 3, `tool profile ${profileId} needs at least 3 tools`);
+  for (const rec of profile.tools) {
+    assert.ok(canonicalToolIds.has(rec.id), `tool profile ${profileId} references unknown tool ${rec.id}`);
+    assert.ok(rec.whyEl, `tool profile ${profileId}/${rec.id} needs a course-specific reason`);
+    assert.ok(Array.isArray(rec.tasks) && rec.tasks.length > 0, `tool profile ${profileId}/${rec.id} needs task targeting`);
+  }
+}
+
 for (const [taskId, task] of Object.entries(he.taskTypes)) {
   assert.ok(task.labelEl && task.labelEn, `task ${taskId} needs bilingual labels`);
   assert.ok(Array.isArray(task.preferredTools) && task.preferredTools.length > 0, `task ${taskId} has no tools`);
@@ -108,6 +118,8 @@ for (const [departmentId, department] of Object.entries(he.departments)) {
     assert.ok(!courseKeys.has(key), `${departmentId} duplicate course ${key}`);
     courseKeys.add(key);
     assert.ok(Array.isArray(course.tasks) && course.tasks.length > 0, `${departmentId}/${course.titleEl} has no task mapping`);
+    assert.ok(course.toolProfile, `${departmentId}/${course.titleEl} has no specialized tool profile`);
+    assert.ok(he.toolProfiles[course.toolProfile], `${departmentId}/${course.titleEl} references unknown tool profile ${course.toolProfile}`);
     if (Array.isArray(course.topics) && course.topics.length) {
       assert.equal(course.topicsVerified, true, `${departmentId}/${course.titleEl} has topics without topicsVerified`);
       assert.ok(course.syllabusSource, `${departmentId}/${course.titleEl} verified topics need an official syllabusSource`);

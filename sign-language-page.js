@@ -15,19 +15,23 @@
 
   const subjectEl = {
     biology: "🧬 Βιολογία / Σώμα",
-    science: "🔬 Φυσικές Επιστήμες",
+    science: "🔬 Φυσικές Επιστήμες / Τεχνολογία",
     geography: "🌍 Γεωγραφία / Περιβάλλον",
     math: "📐 Μαθηματικά",
     history: "🏛️ Ιστορία",
+    language: "📝 Γλώσσα",
+    civics: "🏛️ Πολιτική Παιδεία",
   };
   const subjectEn = {
     biology: "🧬 Biology / Body",
-    science: "🔬 Science",
+    science: "🔬 Science / Technology",
     geography: "🌍 Geography / Environment",
     math: "📐 Mathematics",
     history: "🏛️ History",
+    language: "📝 Language",
+    civics: "🏛️ Civics",
   };
-  const subjectOrder = { math: 1, geography: 2, science: 3, biology: 4, history: 5 };
+  const subjectOrder = { language: 1, math: 2, geography: 3, science: 4, biology: 5, history: 6, civics: 7 };
 
   const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",

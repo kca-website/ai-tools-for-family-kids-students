@@ -458,8 +458,8 @@
       aiInput.required = true;
 
       if (focus) {
+        aiInput.focus({ preventScroll: true });
         aiInput.scrollIntoView({ behavior: "smooth", block: "center" });
-        setTimeout(() => aiInput.focus({ preventScroll: true }), 250);
       }
     } else {
       aiInputLabel.textContent = "Προαιρετικές λεπτομέρειες ή δικό σου υλικό";

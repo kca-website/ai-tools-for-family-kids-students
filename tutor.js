@@ -734,6 +734,10 @@
     }
     renderContext();
     resetConversation(false);
+    // Subject changes rebuild the topic list, but they must also re-evaluate
+    // the composer gate. Otherwise the selected subject is shown in the
+    // settings/context while the textarea keeps its initial disabled state.
+    updateComposerState();
   }
 
   function renderContext() {

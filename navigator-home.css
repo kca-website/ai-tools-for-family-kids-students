@@ -472,3 +472,51 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   .home-v8-needs__toggle{min-height:78px;}
   .home-v8-needs__copy>span{line-height:1.45;}
 }
+
+
+.home-v8-higher-ed{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:14px;
+  margin:0 0 14px;
+  padding:15px 16px;
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  background:linear-gradient(135deg,#f8fafc 0%,#eef6ff 100%);
+  color:inherit;
+  text-align:left;
+  text-decoration:none;
+}
+.home-v8-higher-ed:hover{
+  border-color:#94a3b8;
+  box-shadow:0 4px 12px rgba(0,0,0,.06);
+}
+.home-v8-higher-ed:focus-visible{
+  outline:3px solid #F59E0B;
+  outline-offset:3px;
+}
+.home-v8-higher-ed__icon{font-size:28px;line-height:1;}
+.home-v8-higher-ed__body{display:grid;gap:3px;min-width:0;}
+.home-v8-higher-ed__badge{
+  width:max-content;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#e0f2fe;
+  color:#075985;
+  font-size:.68rem;
+  font-weight:800;
+}
+.home-v8-higher-ed__body strong{font-size:.96rem;}
+.home-v8-higher-ed__body small{color:#64748b;font-size:.77rem;line-height:1.4;}
+.home-v8-higher-ed__action{font-size:.78rem;font-weight:800;color:#2563a8;white-space:nowrap;}
+@media(max-width:700px){
+  .home-v8-higher-ed{grid-template-columns:auto minmax(0,1fr);}
+  .home-v8-higher-ed__action{grid-column:2;white-space:normal;}
+}
+@media(max-width:480px){
+  .home-v8-higher-ed{padding:13px 12px;gap:10px;}
+  .home-v8-higher-ed__icon{font-size:24px;}
+  .home-v8-higher-ed__body small{font-size:.72rem;}
+}
+

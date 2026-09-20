@@ -88,6 +88,17 @@ try{
   assert.equal(literatureCMeta?.anchorPolicy,'historical-literary-chronological-with-thematic-links','C Literature must retain historical-literary guidance');
 
   await page.selectOption('#grade','a');
+  await page.selectOption('#subject','biology');
+  const biologyNote=await page.locator('#curriculumNote').innerText();
+  assert.match(biologyNote,/επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί/i,'Biology A must acknowledge the current official guidance file');
+  assert.match(biologyNote,/ακριβής section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i,'Biology A must not pretend its current section mapping is complete');
+  const biologyHref=await page.locator('#curriculumNote a').getAttribute('href');
+  assert.ok(String(biologyHref||'').includes('minedu.gov.gr/publications/docs2026'),'Pending Biology status must link to the current Ministry file');
+
+  await page.selectOption('#subject','history');
+  const historyNote=await page.locator('#curriculumNote').innerText();
+  assert.match(historyNote,/section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i,'History must remain explicitly pending until its current file is mapped');
+
   await page.selectOption('#subject','math');
   const mathNote=await page.locator('#curriculumNote').innerText();
   assert.match(mathNote,/τρέχουσα ύλη\/οδηγίες/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');

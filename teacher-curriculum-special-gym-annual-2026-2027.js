@@ -8,6 +8,15 @@
   const HUB="https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e";
   const SOURCES={
     ancientGreek:"https://www.minedu.gov.gr/publications/docs2026/%CE%91%CE%A1%CE%A7%CE%91%CE%99%CE%91_%CE%95%CE%9B%CE%9B_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%91_%CE%93%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026_27.pdf",
+    biologyA:"https://www.minedu.gov.gr/publications/docs2026/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_%CE%91_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95AE_26-27.docx",
+    biologyB:"https://www.minedu.gov.gr/publications/docs2026/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_B_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95AE_26-27.docx",
+    biologyC:"https://www.minedu.gov.gr/publications/docs2026/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95AE_26-27.docx",
+    geographyAB:"https://www.minedu.gov.gr/publications/docs2026/%CE%93%CE%95%CE%A9%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%93%CE%95%CE%A9%CE%93%CE%A1%CE%91%CE%A6%CE%99%CE%91_%CE%91-%CE%92_%CE%93%CE%A5%CE%9C%CE%9D_EAE_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27.docx",
+    religion:"https://www.minedu.gov.gr/publications/docs2026/%CE%98%CE%A1%CE%97%CE%A3%CE%9A%CE%95%CE%A5%CE%A4%CE%99%CE%9A%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%95%CE%91%CE%95_26-27.docx",
+    ethics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%94%CE%B9%CE%B4%CE%B1%CF%83%CE%BA%CE%B1%CE%BB%CE%AF%CE%B1%CF%82_%CE%97%CE%B8%CE%B9%CE%BA%CE%AE%CF%82_%CE%93%CF%85%CE%BC%CE%BD%CE%B1%CF%83%CE%AF%CF%89%CE%BD_%CE%95%CE%91%CE%95_%CE%A0%CF%81%CF%8E%CF%84%CE%BF_%CE%9C%CE%AD%CF%81%CE%BF%CF%82.docx",
+    history:"https://www.minedu.gov.gr/publications/docs2026/%CE%99%CE%A3%CE%A4%CE%9F%CE%A1%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._2026-2027.docx",
+    informatics:"https://www.minedu.gov.gr/publications/docs2026/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95_26-27.docx",
+    technology:"https://www.minedu.gov.gr/publications/docs2026/%CE%A4%CE%95%CE%A7%CE%9D%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3_26-27_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95.docx",
     mathA:"https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_EAE_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
     mathB:"https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%92_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
     mathC:"https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
@@ -20,6 +29,27 @@
     greekLanguageLiterature:"https://www.minedu.gov.gr/publications/docs2026/%CE%9D.%CE%95._%CE%9B%CE%9F%CE%93%CE%9F%CE%A4%CE%95%CE%A7%CE%9D%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95.%CE%91.%CE%95._26-27.docx",
     economics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026-2027.pdf"
   };
+
+
+  const PUBLISHED_PENDING=Object.freeze([
+    {grade:"A",subjectId:"biology",label:"Βιολογία",sourceTitle:"ΒΙΟΛΟΓΙΑ Α ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyA},
+    {grade:"B",subjectId:"biology",label:"Βιολογία",sourceTitle:"ΒΙΟΛΟΓΙΑ Β ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyB},
+    {grade:"C",subjectId:"biology",label:"Βιολογία",sourceTitle:"ΒΙΟΛΟΓΙΑ Γ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.biologyC},
+    {grade:"A",subjectId:"geography",label:"Γεωλογία-Γεωγραφία",sourceTitle:"ΓΕΩΛΟΓΙΑ-ΓΕΩΓΡΑΦΙΑ Α-Β ΓΥΜΝ ΕΑΕ ΟΔΗΓΙΕΣ 26-27",sourceUrl:SOURCES.geographyAB},
+    {grade:"B",subjectId:"geography",label:"Γεωλογία-Γεωγραφία",sourceTitle:"ΓΕΩΛΟΓΙΑ-ΓΕΩΓΡΑΦΙΑ Α-Β ΓΥΜΝ ΕΑΕ ΟΔΗΓΙΕΣ 26-27",sourceUrl:SOURCES.geographyAB},
+    {grade:"A",subjectId:"history",label:"Ιστορία",sourceTitle:"ΙΣΤΟΡΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝΑΣΙΟΥ Ε.Α.Ε. 2026-2027",sourceUrl:SOURCES.history},
+    {grade:"B",subjectId:"history",label:"Ιστορία",sourceTitle:"ΙΣΤΟΡΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝΑΣΙΟΥ Ε.Α.Ε. 2026-2027",sourceUrl:SOURCES.history},
+    {grade:"C",subjectId:"history",label:"Ιστορία",sourceTitle:"ΙΣΤΟΡΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝΑΣΙΟΥ Ε.Α.Ε. 2026-2027",sourceUrl:SOURCES.history},
+    {grade:"A",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
+    {grade:"B",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
+    {grade:"C",subjectId:"religion",label:"Θρησκευτικά / Ηθική",sourceTitle:"ΘΡΗΣΚΕΥΤΙΚΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ ΕΑΕ 26-27 + Οδηγίες Ηθικής",sourceUrl:SOURCES.religion,alternateSourceUrl:SOURCES.ethics},
+    {grade:"A",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
+    {grade:"B",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
+    {grade:"C",subjectId:"informatics",label:"Πληροφορική",sourceTitle:"ΠΛΗΡΟΦΟΡΙΚΗ ΟΔΗΓΙΕΣ ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.informatics},
+    {grade:"A",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology},
+    {grade:"B",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology},
+    {grade:"C",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology}
+  ]);
 
   const GRADE_LABEL={A:"Α΄ Γυμνασίου",B:"Β΄ Γυμνασίου",C:"Γ΄ Γυμνασίου"};
   const pref=(label,arr)=>(arr||[]).map(x=>`${label} — ${x}`);
@@ -744,10 +774,11 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.6.0",
+    version:"1.6.1",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
+    publishedPending:PUBLISHED_PENDING,
     mappedEntries:Object.freeze([
       "teacher-annual-special-gym-a-ancient-language","teacher-annual-special-gym-b-ancient-language","teacher-annual-special-gym-c-ancient-language",
       "teacher-annual-special-gym-a-ancient-translation","teacher-annual-special-gym-b-ancient-translation","teacher-annual-special-gym-c-ancient-translation",

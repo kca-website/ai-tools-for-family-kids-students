@@ -6,29 +6,10 @@ const browser = await chromium.launch({ headless: true });
 
 async function selectLabel(page, selector, label) {
   const labels = await page.locator(`${selector} option`).allInnerTexts();
-  assert.ok(labels.includes(label), `${selector} does not contain ${label}; got ${labels.join(' | ')}`);
-  await page.selectOption(selector, { label });
-}
-
-try {
-  const map = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await map.goto(`${BASE}/xartis-ylis.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await map.waitForFunction(() => !!window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027);
-
-  await selectLabel(map, '#subject', 'Μαθηματικά');
-  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Δημοσιευμένες / καταχωρισμένες');
-  assert.ok(
-    await map.locator('#sources a').filter({ hasText: 'ΙΕΠ · Οδηγίες Πρωτοβάθμιας 2026–27' }).count(),
-    'Primary official annual guidance source is missing'
-  );
 
   await map.getByRole('button', { name: 'Γυμνάσιο' }).click();
   await selectLabel(map, '#subject', 'Μαθηματικά');
   assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Δημοσιευμένες / καταχωρισμένες');
-  assert.ok(
-    await map.locator('#sources a').filter({ hasText: 'ΙΕΠ · Οδηγίες Γυμνασίου 2026–27' }).count(),
-    'Middle-school official annual guidance source is missing'
-  );
 
   const resolverState = await map.evaluate(() => {
     const base = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;

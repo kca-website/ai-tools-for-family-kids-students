@@ -25,7 +25,18 @@
     .he-meta{font-size:.82rem;color:#5f6c7b}
     .he-empty{color:#5f6c7b;font-style:italic}
     .he-legacy{margin-top:10px;font-size:.86rem;color:#5f6c7b}
-    @media(max-width:700px){.he-grid{grid-template-columns:1fr}.he-wrap{padding:18px 12px 42px}.he-hero{padding:18px}}
+    .he-ai-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+    .he-ai-action,.he-ai-provider{min-height:42px;padding:9px 12px;border:1px solid #cfd8e3;border-radius:10px;background:#fff;color:#172033;font:inherit;font-weight:800;cursor:pointer}
+    .he-ai-action[aria-pressed="true"]{background:#eaf6f0;border-color:#72ad99}
+    .he-ai-provider{background:#245f8e;color:#fff;border-color:#245f8e}
+    .he-ai-provider.he-puter{background:#7653bd;border-color:#7653bd}
+    .he-ai-provider:disabled{opacity:.55;cursor:wait}
+    .he-ai-input{width:100%;min-height:110px;padding:12px;border:1px solid #cfd8e3;border-radius:10px;font:inherit;resize:vertical}
+    .he-ai-providers{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .he-ai-status{min-height:1.5em;margin-top:10px;font-size:.88rem;color:#526273}
+    .he-ai-output{display:none;margin-top:14px;padding:16px;border:1px solid #dbe3ee;border-radius:12px;background:#fbfcfd;white-space:pre-wrap;line-height:1.58}
+    .he-ai-output.visible{display:block}
+    @media(max-width:700px){.he-grid{grid-template-columns:1fr}.he-wrap{padding:18px 12px 42px}.he-hero{padding:18px}.he-ai-providers{display:grid;grid-template-columns:1fr}.he-ai-provider{width:100%}}
   </style>
 </head>
 <body>
@@ -67,6 +78,30 @@
         </div>
       </div>
       <div id="heCoverage" class="he-note" style="margin-top:14px"></div>
+    </section>
+
+    <section class="he-card" aria-labelledby="aiTitle">
+      <div class="he-kicker">Η δική μας AI · μέσα στην ίδια σελίδα</div>
+      <h2 id="aiTitle">Τι θέλεις να κάνουμε τώρα;</h2>
+      <p>Το ίδρυμα, το τμήμα και το μάθημα περνούν αυτόματα στην AI. Διάλεξε ενέργεια και, αν χρειάζεται, πρόσθεσε το δικό σου υλικό.</p>
+      <div class="he-ai-actions" id="heAiActions" role="group" aria-label="Ενέργεια AI">
+        <button type="button" class="he-ai-action" data-he-action="explain" aria-pressed="true">Εξήγηση</button>
+        <button type="button" class="he-ai-action" data-he-action="quiz" aria-pressed="false">Quiz</button>
+        <button type="button" class="he-ai-action" data-he-action="flashcards" aria-pressed="false">Flashcards</button>
+        <button type="button" class="he-ai-action" data-he-action="study-plan" aria-pressed="false">Πλάνο μελέτης</button>
+        <button type="button" class="he-ai-action" data-he-action="paper" aria-pressed="false">Paper helper</button>
+        <button type="button" class="he-ai-action" data-he-action="feedback" aria-pressed="false">Feedback στη δουλειά μου</button>
+        <button type="button" class="he-ai-action" data-he-action="research" aria-pressed="false">Έρευνα / πηγές</button>
+      </div>
+      <label for="heAiInput"><strong>Προαιρετικές λεπτομέρειες ή δικό σου υλικό</strong></label>
+      <textarea id="heAiInput" class="he-ai-input" placeholder="π.χ. Δεν καταλαβαίνω τη μείωση ΙΙ / Επικόλλησε εδώ abstract, σημειώσεις, κώδικα ή δικό σου κείμενο για feedback."></textarea>
+      <div class="he-warning" style="margin-top:12px"><strong>Όχι έτοιμη εργασία:</strong> για εργασίες η AI βοηθά με δομή, ερωτήματα, έλεγχο και feedback πάνω στη δική σου προσπάθεια. Δεν συντάσσει παραδοτέο για υποβολή.</div>
+      <div class="he-ai-providers">
+        <button type="button" class="he-ai-provider" id="heAiGroq">⚡ Δημιούργησέ το εδώ · GPT-OSS 120B</button>
+        <button type="button" class="he-ai-provider he-puter" id="heAiPuter">☁️ Εναλλακτικά με Puter</button>
+      </div>
+      <div class="he-ai-status" id="heAiStatus" aria-live="polite"></div>
+      <div class="he-ai-output" id="heAiOutput" aria-live="polite"></div>
     </section>
 
     <section class="he-card" aria-labelledby="resultTitle">

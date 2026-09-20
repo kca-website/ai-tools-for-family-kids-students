@@ -220,13 +220,16 @@ try {
     assert.equal(local.afterAge.settingsOpen, true, `mobile ${lang}: settings must remain open until the user closes them`);
     assert.equal(local.afterManualClose.settingsOpen, false, `mobile ${lang}: settings close handler must clear the open state`);
 
-    // Disconnected-state copy is a source-owned contract, not a live-production parity signal.
-    // Production may be on a different deployment/timing while this PR is evaluated.
-    const expectedConnect = lang === 'en'
-      ? 'Connect to Puter first using the box above.'
-      : 'Συνδέσου πρώτα με Puter από το πλαίσιο επάνω.';
-    assert.equal(local.flashStatus, expectedConnect, `mobile ${lang}: flashcards disconnected-state copy changed`);
-    assert.equal(local.studyStatus, expectedConnect, `mobile ${lang}: study-tools disconnected-state copy changed`);
+    // With no explicit age selected in this current tutor flow, the canonical
+    // access policy blocks generated study tools before authentication is considered.
+    const expectedFlash = lang === 'en'
+      ? 'Flashcards are not available with the current age setting.'
+      : 'Οι flashcards δεν είναι διαθέσιμες με την τωρινή ηλικιακή ρύθμιση.';
+    const expectedStudy = lang === 'en'
+      ? 'This feature is not available with the current age setting.'
+      : 'Η λειτουργία δεν είναι διαθέσιμη με την τωρινή ηλικιακή ρύθμιση.';
+    assert.equal(local.flashStatus, expectedFlash, `mobile ${lang}: flashcards age-gate copy changed`);
+    assert.equal(local.studyStatus, expectedStudy, `mobile ${lang}: study-tools age-gate copy changed`);
 
     await prodPage.close();
     await localPage.close();

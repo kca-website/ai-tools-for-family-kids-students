@@ -1,5 +1,5 @@
 window.SPECIAL_EDUCATION_STATUS = {
-  lastUpdated: "2026-09-13",
+  lastUpdated: "2026-09-20",
   legend: {verified:"Επαληθευμένο",indexed:"Επίσημη πηγή εντοπίστηκε",pending:"Σε αναμονή χαρτογράφησης"},
   rows: [
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Ζώνη Δημιουργικών Δραστηριοτήτων",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
@@ -21,8 +21,10 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Μηχανολογίας",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Πληροφορικής",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Γεωπονίας, Τροφίμων και Περιβάλλοντος",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Μαθηματικά",curriculum:"pending",learning:"pending",quiz:"pending",tutorContext:"pending"},
-    {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Νεοελληνική Γλώσσα",curriculum:"pending",learning:"pending",quiz:"pending",tutorContext:"pending"}
+    {school:"Ειδικό Γυμνάσιο",scope:"Α΄–Γ΄ · 52 ακριβείς ετήσιες χαρτογραφήσεις 2026–27",curriculum:"verified",learning:"verified",quiz:"indexed",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Οικιακή Οικονομία — επίσημο πλαίσιο κεφαλαίων",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
+    {school:"Ειδικό Γυμνάσιο",scope:"Α΄–Γ΄ · Εργαστήρια Δεξιοτήτων — επίσημο θεματικό πλαίσιο",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
+    {school:"Ειδικό Λύκειο",scope:"Δημοσιευμένες ειδικές οδηγίες Ε.Α.Ε. 2026–27 — source indexed, section mapping σε εξέλιξη",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"verified"}
   ]
 };
 

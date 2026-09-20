@@ -51,19 +51,43 @@ try{
   assert.ok(await literatureOption.count(),'Special Gymnasium A must expose Modern Greek Literature');
   await page.selectOption('#subject',{label:'Νεοελληνική Λογοτεχνία'});
   const literatureTopics=await page.locator('#unit option').allTextContents();
-  assert.ok(literatureTopics.length>=13,'Special Gymnasium A Literature should expose its official textbook support themes');
-  assert.ok(literatureTopics.some(x=>x.includes('Ο άνθρωπος και η φύση')),'Literature textbook theme “Ο άνθρωπος και η φύση” missing');
-  assert.ok(!literatureTopics.some(x=>x.includes('Δεν υπάρχει χαρτογραφημένη')),'Literature must not fall back to an empty custom-unit selector when official textbook support sections exist');
+  assert.ok(literatureTopics.length>=13,'Special Gymnasium A Literature should expose the verified annual selection framework');
+  assert.ok(literatureTopics.some(x=>x.includes('Ο άνθρωπος και η φύση')),'Literature theme “Ο άνθρωπος και η φύση” missing');
+  assert.ok(!literatureTopics.some(x=>x.includes('Δεν υπάρχει χαρτογραφημένη')),'Literature must not fall back to an empty custom-unit selector');
   const literatureNote=await page.locator('#curriculumNote').innerText();
-  assert.match(literatureNote,/υποστηρικτικές επιλογές/i,'Textbook-only Literature themes must be labeled as support, not as annual section-level E.A.E. mapping');
-  assert.match(literatureNote,/δεν παρουσιάζονται ως αυτούσια section-level ύλη/i,'Literature support warning must explicitly prevent annual-syllabus overclaim');
+  assert.match(literatureNote,/επαληθευμένες επιλογές μέσα στο επίσημο πλαίσιο 2026–27/i,'Literature must be labeled as an annual selection framework');
+  assert.match(literatureNote,/δεν αποτελούν υποχρεωτική λίστα/i,'Literature UI must not imply every theme/text is compulsory');
+  assert.ok(!/υποστηρικτικές επιλογές/i.test(literatureNote),'Annual Literature framework must take precedence over the textbook-only bridge');
 
-  const literatureBridge=await page.evaluate(()=>Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).find(e=>
-    e.schoolType==='special-gymnasium'&&e.grade==='A'&&e.subjectId==='literature'&&e.verificationBasis==='official-digital-textbook'
+  const literatureEntries=await page.evaluate(()=>Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).filter(e=>
+    e.schoolType==='special-gymnasium'&&e.grade==='A'&&e.subjectId==='literature'
   ));
-  const literatureSource=literatureBridge?.sourceUrl||literatureBridge?.referenceSourceUrl||'';
-  assert.ok(literatureSource.includes('ebooks.edu.gr'),'Literature bridge must retain its official digital-textbook source');
+  const annualLiterature=literatureEntries.find(e=>e.annualInstructionsStatus==='2026-27-verified');
+  assert.equal(annualLiterature?.selectionFramework,true,'Annual Literature row must explicitly declare selection-framework semantics');
+  assert.equal(annualLiterature?.selectionStatus,'teacher-selected-not-fixed-syllabus','A Literature must remain teacher-selected rather than a fixed syllabus');
+  assert.ok(String(annualLiterature?.sourceUrl||'').includes('minedu.gov.gr'),'Annual Literature must retain the official ministry guidance source');
+  assert.ok(String(annualLiterature?.textbookSourceUrl||'').includes('ebooks.edu.gr'),'Annual Literature must retain the official textbook navigation source');
 
+  const literatureBridge=literatureEntries.find(e=>e.verificationBasis==='official-digital-textbook');
+  const literatureSource=literatureBridge?.sourceUrl||literatureBridge?.referenceSourceUrl||'';
+  assert.ok(literatureSource.includes('ebooks.edu.gr'),'Older Literature support bridge must remain traceable');
+
+  await page.selectOption('#grade','b');
+  await page.selectOption('#subject',{label:'Νεοελληνική Λογοτεχνία'});
+  const literatureBNote=await page.locator('#curriculumNote').innerText();
+  assert.match(literatureBNote,/δεν αποτελούν υποχρεωτική λίστα/i,'B Literature must preserve teacher selection');
+
+  await page.selectOption('#grade','c');
+  await page.selectOption('#subject',{label:'Νεοελληνική Λογοτεχνία'});
+  const literatureCTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(literatureCTopics.some(x=>x.includes('Νεοελληνικός Διαφωτισμός')),'C Literature historical framework missing');
+  assert.ok(literatureCTopics.some(x=>x.includes('Νέα Αθηναϊκή Σχολή')),'C Literature period missing');
+  const literatureCMeta=await page.evaluate(()=>Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).find(e=>
+    e.schoolType==='special-gymnasium'&&e.grade==='C'&&e.subjectId==='literature'&&e.annualInstructionsStatus==='2026-27-verified'
+  ));
+  assert.equal(literatureCMeta?.anchorPolicy,'historical-literary-chronological-with-thematic-links','C Literature must retain historical-literary guidance');
+
+  await page.selectOption('#grade','a');
   await page.selectOption('#subject','math');
   const mathNote=await page.locator('#curriculumNote').innerText();
   assert.match(mathNote,/τρέχουσα ύλη\/οδηγίες/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');

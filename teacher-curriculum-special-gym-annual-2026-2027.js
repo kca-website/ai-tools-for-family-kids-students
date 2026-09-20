@@ -608,6 +608,71 @@
     }
   });
 
+
+  upsert({
+    id:"teacher-annual-special-gym-a-literature",grade:"A",subject:"Νεοελληνική Λογοτεχνία",subjectId:"literature",
+    sourceTitle:"Ν.Ε. ΛΟΓΟΤΕΧΝΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.greekLanguageLiterature,
+    official:[
+    "Ο άνθρωπος και η φύση • Πόλη – Ύπαιθρος",
+    "Λαογραφικά",
+    "Οικογενειακές σχέσεις",
+    "Θρησκευτική ζωή",
+    "Εθνική ζωή",
+    "Παλαιότερες μορφές ζωής",
+    "Ταξιδιωτικά κείμενα",
+    "Η αποδημία • Ο καημός της ξενιτιάς • Ο ελληνισμός έξω από τα σύνορα • Τα μικρασιατικά • Οι πρόσφυγες",
+    "Αθλητισμός",
+    "Η αγάπη για τους συνανθρώπους μας • Οι φιλικοί δεσμοί • Η αγάπη",
+    "Η βιοπάλη • Το αγωνιστικό πνεύμα του ανθρώπου",
+    "Προβλήματα της σύγχρονης ζωής",
+    "Οι φίλοι μας τα ζώα"
+],
+    note:"Οι επίσημες οδηγίες Ε.Α.Ε. 2026-2027 ορίζουν επιλογή κειμένων από τον/την διδάσκοντα/ουσα και, για την Α΄ και Β΄ τάξη, επιδίωξη ποικιλίας θεματικών ενοτήτων. Οι θεματικές εδώ λειτουργούν ως πλαίσιο επιλογής από το επίσημο σχολικό βιβλίο και όχι ως υποχρεωτική γραμμική ή εξεταστέα λίστα.",
+    meta:{weeklyHours:2,continuousDoublePeriodRecommended:true,selectionFramework:true,selectionStatus:"teacher-selected-not-fixed-syllabus",anchorPolicy:"annual-selection-framework-plus-official-textbook-themes",textbookSourceUrl:"https://www.ebooks.edu.gr/ebooks/handle/8547/130",coverageCompleteness:"annual-selection-framework-verified"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-literature",grade:"B",subject:"Νεοελληνική Λογοτεχνία",subjectId:"literature",
+    sourceTitle:"Ν.Ε. ΛΟΓΟΤΕΧΝΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.greekLanguageLiterature,
+    official:[
+    "Ο άνθρωπος και η φύση • Πόλη – Ύπαιθρος",
+    "Λαογραφικά",
+    "Οικογενειακές σχέσεις",
+    "Θρησκευτική ζωή",
+    "Εθνική ζωή",
+    "Παλαιότερες μορφές ζωής",
+    "Ταξιδιωτικά κείμενα",
+    "Η αποδημία • Ο καημός της ξενιτιάς • Ο ελληνισμός έξω από τα σύνορα • Τα μικρασιατικά • Οι πρόσφυγες",
+    "Αθλητισμός",
+    "Η αγάπη για τους συνανθρώπους μας • Οι φιλικοί δεσμοί • Η αγάπη",
+    "Η βιοπάλη • Το αγωνιστικό πνεύμα του ανθρώπου",
+    "Προβλήματα της σύγχρονης ζωής",
+    "Οι φίλοι μας τα ζώα"
+],
+    note:"Οι επίσημες οδηγίες Ε.Α.Ε. 2026-2027 αφήνουν την επιλογή κειμένων στον/στην διδάσκοντα/ουσα και ζητούν, κατά το δυνατόν, ποικιλία θεματικών ενοτήτων στην Α΄ και Β΄ τάξη. Οι επιλογές του μενού είναι θεματικό πλαίσιο του επίσημου σχολικού βιβλίου, όχι υποχρεωτική σειρά διδασκαλίας.",
+    meta:{weeklyHours:2,continuousDoublePeriodRecommended:true,selectionFramework:true,selectionStatus:"teacher-selected-not-fixed-syllabus",anchorPolicy:"annual-selection-framework-plus-official-textbook-themes",textbookSourceUrl:"https://www.ebooks.edu.gr/ebooks/handle/8547/131",coverageCompleteness:"annual-selection-framework-verified"}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-literature",grade:"C",subject:"Νεοελληνική Λογοτεχνία",subjectId:"literature",
+    sourceTitle:"Ν.Ε. ΛΟΓΟΤΕΧΝΙΑ ΟΔΗΓΙΕΣ ΓΥΜΝ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.greekLanguageLiterature,
+    official:[
+    "Δημοτικά τραγούδια",
+    "Η λόγια παραγωγή (1000–1600)",
+    "Κρητική λογοτεχνία",
+    "Νεοελληνικός Διαφωτισμός",
+    "Ο 19ος αιώνας έως το 1880 — Απομνημονεύματα",
+    "Ο 19ος αιώνας έως το 1880 — Επτανησιακή Σχολή",
+    "Ο 19ος αιώνας έως το 1880 — Φαναριώτες και Ρομαντική Σχολή των Αθηνών",
+    "Η Νέα Αθηναϊκή Σχολή (1880–1922)",
+    "Η νεότερη λογοτεχνία — 1922–1945",
+    "Η νεότερη λογοτεχνία — Πρώτη μεταπολεμική περίοδος",
+    "Η νεότερη λογοτεχνία — Δεύτερη μεταπολεμική γενιά και γενιές του ’70 και ’80"
+],
+    note:"Στη Γ΄ Γυμνασίου Ε.Α.Ε. οι επίσημες οδηγίες χαρακτηρίζουν τη διάταξη ιστορικογραμματολογική: μπορεί να ακολουθείται η χρονολογική σειρά του εγχειριδίου, με παράλληλες θεματικές συνδέσεις. Οι περίοδοι του μενού είναι πλαίσιο πλοήγησης και επιλογής κειμένων, όχι δήλωση ότι κάθε κείμενο του βιβλίου είναι υποχρεωτικό.",
+    meta:{weeklyHours:2,continuousDoublePeriodRecommended:true,selectionFramework:true,selectionStatus:"teacher-selected-historical-literary-framework",anchorPolicy:"historical-literary-chronological-with-thematic-links",textbookSourceUrl:"https://www.ebooks.edu.gr/ebooks/handle/8547/2217",coverageCompleteness:"annual-historical-framework-verified"}
+  });
+
   upsert({
     id:"teacher-annual-special-gym-c-social-civic",grade:"C",subject:"Κοινωνική και Πολιτική Αγωγή",subjectId:"social-civic",
     sourceTitle:"ΚΠΑ ΓΥΜΝΑΣΙΟΥ ΟΔΗΓΙΕΣ Ε.Α.Ε. 26-27",sourceUrl:SOURCES.civics,
@@ -679,7 +744,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.5.0",
+    version:"1.6.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
@@ -691,6 +756,7 @@
       "teacher-annual-special-gym-a-pe","teacher-annual-special-gym-b-pe","teacher-annual-special-gym-c-pe",
       "teacher-annual-special-gym-b-chemistry","teacher-annual-special-gym-c-chemistry",
       "teacher-annual-special-gym-a-language","teacher-annual-special-gym-b-language","teacher-annual-special-gym-c-language",
+      "teacher-annual-special-gym-a-literature","teacher-annual-special-gym-b-literature","teacher-annual-special-gym-c-literature",
       "teacher-annual-special-gym-b-social-civic","teacher-annual-special-gym-c-social-civic",
       "teacher-annual-special-gym-a-english","teacher-annual-special-gym-b-english","teacher-annual-special-gym-c-english",
       "teacher-extra-special-gym-c-economics"

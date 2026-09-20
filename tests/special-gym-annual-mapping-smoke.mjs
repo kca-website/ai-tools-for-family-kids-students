@@ -15,7 +15,7 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,26);
+assert.equal(M.mappedEntries.length,29);
 for(const id of M.mappedEntries){
   assert.ok(C[id],`missing ${id}`);
   assert.equal(C[id].coverageStatus,'annual-instructions-verified');
@@ -134,6 +134,30 @@ assert.ok(langC.officialAnchors.includes('4η Ενότητα — Ενωμένη 
 assert.ok(langC.officialAnchors.includes('5η Ενότητα — Ειρήνη - Πόλεμος'));
 assert.ok(langC.officialAnchors.includes('6η Ενότητα — Ενεργοί πολίτες για την υπεράσπιση οικουμενικών αξιών'));
 
+const litA=C['teacher-annual-special-gym-a-literature'];
+assert.equal(litA.selectionFramework,true);
+assert.equal(litA.selectionStatus,'teacher-selected-not-fixed-syllabus');
+assert.equal(litA.weeklyHours,2);
+assert.equal(litA.officialAnchors.length,13);
+assert.ok(litA.officialAnchors.includes('Ο άνθρωπος και η φύση • Πόλη – Ύπαιθρος'));
+assert.ok(litA.officialAnchors.includes('Οι φίλοι μας τα ζώα'));
+assert.ok(litA.textbookSourceUrl.includes('ebooks.edu.gr'));
+
+const litB=C['teacher-annual-special-gym-b-literature'];
+assert.equal(litB.selectionFramework,true);
+assert.equal(litB.selectionStatus,'teacher-selected-not-fixed-syllabus');
+assert.equal(litB.officialAnchors.length,13);
+assert.ok(litB.officialAnchors.includes('Οικογενειακές σχέσεις'));
+
+const litC=C['teacher-annual-special-gym-c-literature'];
+assert.equal(litC.selectionFramework,true);
+assert.equal(litC.selectionStatus,'teacher-selected-historical-literary-framework');
+assert.equal(litC.anchorPolicy,'historical-literary-chronological-with-thematic-links');
+assert.ok(litC.officialAnchors.includes('Δημοτικά τραγούδια'));
+assert.ok(litC.officialAnchors.includes('Νεοελληνικός Διαφωτισμός'));
+assert.ok(litC.officialAnchors.some(x=>x.includes('Νέα Αθηναϊκή Σχολή')));
+assert.ok(litC.officialAnchors.some(x=>x.includes('Δεύτερη μεταπολεμική γενιά')));
+
 const civ=C['teacher-annual-special-gym-b-social-civic'];
 assert.ok(civ.officialAnchors.some(x=>x==='1.2 Τι είναι κοινωνία'));
 assert.ok(civ.officialAnchors.some(x=>x.startsWith('Προαιρετικό — 1.1')));
@@ -170,4 +194,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 26 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 29 official mappings.');

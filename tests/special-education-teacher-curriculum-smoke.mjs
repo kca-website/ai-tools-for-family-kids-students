@@ -51,15 +51,23 @@ try{
   assert.ok(await literatureOption.count(),'Special Gymnasium A must expose Modern Greek Literature');
   await page.selectOption('#subject',{label:'Νεοελληνική Λογοτεχνία'});
   const literatureTopics=await page.locator('#unit option').allTextContents();
-  assert.ok(literatureTopics.length>=13,'Special Gymnasium A Literature should expose the official textbook thematic units');
+  assert.ok(literatureTopics.length>=13,'Special Gymnasium A Literature should expose its official textbook support themes');
   assert.ok(literatureTopics.some(x=>x.includes('Ο άνθρωπος και η φύση')),'Literature textbook theme “Ο άνθρωπος και η φύση” missing');
-  assert.ok(!literatureTopics.some(x=>x.includes('Δεν υπάρχει χαρτογραφημένη')),'Literature must not fall back to an empty custom-unit selector when official textbook sections exist');
+  assert.ok(!literatureTopics.some(x=>x.includes('Δεν υπάρχει χαρτογραφημένη')),'Literature must not fall back to an empty custom-unit selector when official textbook support sections exist');
+  const literatureNote=await page.locator('#curriculumNote').innerText();
+  assert.match(literatureNote,/υποστηρικτικές επιλογές/i,'Textbook-only Literature themes must be labeled as support, not as annual section-level E.A.E. mapping');
+  assert.match(literatureNote,/δεν παρουσιάζονται ως αυτούσια section-level ύλη/i,'Literature support warning must explicitly prevent annual-syllabus overclaim');
 
   const literatureBridge=await page.evaluate(()=>Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).find(e=>
     e.schoolType==='special-gymnasium'&&e.grade==='A'&&e.subjectId==='literature'&&e.verificationBasis==='official-digital-textbook'
   ));
   const literatureSource=literatureBridge?.sourceUrl||literatureBridge?.referenceSourceUrl||'';
   assert.ok(literatureSource.includes('ebooks.edu.gr'),'Literature bridge must retain its official digital-textbook source');
+
+  await page.selectOption('#subject','math');
+  const mathNote=await page.locator('#curriculumNote').innerText();
+  assert.match(mathNote,/τρέχουσα ύλη\/οδηγίες/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');
+  assert.ok(!/υποστηρικτικές επιλογές/i.test(mathNote),'Verified annual Mathematics mapping must not be marked support-only');
 
   const bridgeLeak=await page.evaluate(()=>{
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{});

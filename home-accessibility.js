@@ -65,9 +65,9 @@
     if (panel) {
       const title = en ? "🤟 School concepts in Greek Sign Language (GSL)" : "🤟 Έννοιες στην Ελληνική Νοηματική Γλώσσα";
       const text = en
-        ? "153 school concepts organized by subject and grade, with simple explanations, educational visuals and direct official GSL videos from IEP."
-        : "153 σχολικές έννοιες οργανωμένες ανά μάθημα και τάξη, με απλή εξήγηση, εκπαιδευτική εικόνα και απευθείας επίσημο βίντεο ΕΝΓ από το ΙΕΠ.";
-      const cta = en ? "Explore the 153 concepts →" : "Δες τις 153 έννοιες →";
+        ? "167 school concepts organized by subject and grade, with simple explanations, educational visuals and direct official GSL videos from IEP."
+        : "167 σχολικές έννοιες οργανωμένες ανά μάθημα και τάξη, με απλή εξήγηση, εκπαιδευτική εικόνα και απευθείας επίσημο βίντεο ΕΝΓ από το ΙΕΠ.";
+      const cta = en ? "Explore the 167 concepts →" : "Δες τις 167 έννοιες →";
       const signature = [en, title, text, cta].join("|");
 
       if (panel.dataset.gslSignature !== signature) {

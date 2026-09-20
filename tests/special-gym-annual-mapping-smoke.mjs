@@ -15,8 +15,8 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,34);
-assert.equal(M.publishedPending.length,18);
+assert.equal(M.mappedEntries.length,37);
+assert.equal(M.publishedPending.length,15);
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='biology'),'Biology must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='geography'),'Geography must no longer be pending after exact 2026-27 mapping');
 assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='history'));
@@ -66,6 +66,27 @@ assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191'))
 assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
 assert.equal(transC.helenPlannedHours,35);
 assert.equal(transC.philosophyPlannedHours,13);
+
+const techA=C['teacher-annual-special-gym-a-technology'];
+assert.equal(techA.selectionFramework,true);
+assert.equal(techA.explicitNoFixedSyllabus,true);
+assert.equal(techA.anchorPolicy,'official-individual-project-method');
+assert.ok(techA.officialAnchors.some(x=>x.includes('Μέθοδος ατομικής εργασίας')));
+assert.ok(techA.officialAnchors.some(x=>x.includes('Έρευνα βιβλιογραφίας')));
+
+const techB=C['teacher-annual-special-gym-b-technology'];
+assert.equal(techB.selectionFramework,true);
+assert.equal(techB.explicitNoFixedSyllabus,true);
+assert.ok(techB.officialAnchors.some(x=>x.includes('μελέτη βιομηχανίας')));
+assert.ok(techB.officialAnchors.some(x=>x.includes('Γραμμή παραγωγής')));
+
+const techC=C['teacher-annual-special-gym-c-technology'];
+assert.equal(techC.selectionFramework,true);
+assert.equal(techC.explicitNoFixedSyllabus,true);
+assert.equal(techC.anchorPolicy,'official-research-and-experimentation-method');
+assert.ok(techC.officialAnchors.some(x=>x.includes('Έρευνα και Πειραματισμός')));
+assert.ok(techC.officialAnchors.some(x=>x.includes('Συγγραφή ομαδικής ερευνητικής εργασίας')));
+assert.ok(!M.publishedPending.some(x=>x.subjectId==='technology'),'Technology must no longer be pending after method-framework mapping');
 
 const geoA=C['teacher-annual-special-gym-a-geography'];
 assert.equal(geoA.plannedHours,30);
@@ -241,4 +262,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 34 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 37 official mappings.');

@@ -48,9 +48,6 @@
     {grade:"A",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
     {grade:"B",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
     {grade:"C",subjectId:"art",label:"Καλλιτεχνικά",sourceTitle:"ΠΟΛΙΤΙΣΜΟΣ ΚΑΙ ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ (Μουσική – Καλλιτεχνικά) ΓΥΜΝ ΕΑΕ 26-27",sourceUrl:SOURCES.culture},
-    {grade:"A",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology},
-    {grade:"B",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology},
-    {grade:"C",subjectId:"technology",label:"Τεχνολογία",sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology}
   ]);
 
   const GRADE_LABEL={A:"Α΄ Γυμνασίου",B:"Β΄ Γυμνασίου",C:"Γ΄ Γυμνασίου"};
@@ -300,6 +297,56 @@
   });
 
 
+
+
+  upsert({
+    id:"teacher-annual-special-gym-a-technology",grade:"A",subject:"Τεχνολογία",subjectId:"technology",
+    sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology,
+    official:[
+      "Μέθοδος ατομικής εργασίας — αναγνώριση και μελέτη του τεχνολογικού περιβάλλοντος",
+      "Ατομική επιλογή τεχνολογικού έργου",
+      "Έρευνα βιβλιογραφίας και πηγών πληροφόρησης για το επιλεγμένο έργο",
+      "Συλλογή στοιχείων από το τεχνολογικό περιβάλλον",
+      "Ταξινόμηση πληροφόρησης και καθορισμός εργαλείων/υλικών",
+      "Προγραμματισμός εργασίας και παρουσίαση σε σεμινάριο"
+    ],
+    note:"Οι επίσημες οδηγίες Τεχνολογίας Γυμνασίου Ε.Α.Ε. 2026-2027 δηλώνουν ρητά ότι δεν διδάσκεται συγκεκριμένη κοινή ύλη ανά τάξη. Στην Α΄ εφαρμόζεται η μέθοδος της ατομικής εργασίας. Οι επιλογές του site αποτυπώνουν στάδια/δραστηριότητες της μεθόδου και δεν παρουσιάζονται ως κεφάλαια ή εξεταστέα ύλη.",
+    meta:{weeklyHours:1,selectionFramework:true,selectionStatus:"activity-method-framework-not-fixed-syllabus",anchorPolicy:"official-individual-project-method",coverageCompleteness:"method-framework-verified",explicitNoFixedSyllabus:true}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-b-technology",grade:"B",subject:"Τεχνολογία",subjectId:"technology",
+    sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology,
+    official:[
+      "Ομαδική εργασία — μελέτη βιομηχανίας και βιομηχανικής παραγωγικής μονάδας",
+      "Ανάλυση οργάνωσης βιομηχανικής μονάδας και αρμοδιοτήτων τμημάτων",
+      "Ανάλυση συνεργασίας τμημάτων/εργαζομένων και τεχνολογιών κάθε τμήματος",
+      "Συγκρότηση ομάδων — επιλογή βιομηχανίας, μοντέλου και ρόλων",
+      "Συλλογή και παρουσίαση πληροφοριών για τον ρόλο κάθε μαθητή/τριας",
+      "Γραμμή παραγωγής — μελέτη οργάνωσης παραγωγικής γραμμής",
+      "Επιλογή προϊόντος για παραγωγή σε μεγάλη ποσότητα και κατανομή ρόλων"
+    ],
+    note:"Στη Β΄ Γυμνασίου Ε.Α.Ε. εφαρμόζεται, ανάλογα με την υλικοτεχνική υποδομή του σχολείου, η μέθοδος της ομαδικής εργασίας ή της γραμμής παραγωγής για τη μελέτη της βιομηχανίας. Δεν μετατρέπουμε τη μέθοδο σε τεχνητή λίστα κεφαλαίων.",
+    meta:{weeklyHours:1,selectionFramework:true,selectionStatus:"activity-method-framework-not-fixed-syllabus",anchorPolicy:"official-industry-group-work-or-production-line-method",coverageCompleteness:"method-framework-verified",explicitNoFixedSyllabus:true}
+  });
+
+  upsert({
+    id:"teacher-annual-special-gym-c-technology",grade:"C",subject:"Τεχνολογία",subjectId:"technology",
+    sourceTitle:"ΤΕΧΝΟΛΟΓΙΑ ΟΔΗΓΙΕΣ ΔΙΔΑΣΚΑΛΙΑΣ 26-27 ΓΥΜΝ ΕΑΕ",sourceUrl:SOURCES.technology,
+    official:[
+      "Μέθοδος «Έρευνα και Πειραματισμός» σε τεχνολογικό θέμα",
+      "Ενημέρωση για τη φύση και τα στάδια της ερευνητικής διαδικασίας",
+      "Σύνδεση της έρευνας με πραγματικές τεχνολογικές καταστάσεις",
+      "Σχεδίαση ερευνητικής διαδικασίας",
+      "Επιλογή ερευνητικού θέματος από την ομάδα",
+      "Αναζήτηση και αξιολόγηση πηγών πληροφόρησης",
+      "Κατασκευές/δοκίμια και πειραματισμός",
+      "Συγγραφή ομαδικής ερευνητικής εργασίας",
+      "Σεμινάρια προόδου, παρουσίαση και σημεία ελέγχου/αξιολόγησης"
+    ],
+    note:"Στη Γ΄ Γυμνασίου Ε.Α.Ε. η επίσημη μέθοδος είναι «Έρευνα και Πειραματισμός». Το θέμα επιλέγεται από την ομάδα με έγκριση του/της εκπαιδευτικού. Το site εμφανίζει τα επαληθευμένα στάδια της ερευνητικής διαδικασίας και όχι επινοημένη κοινή ύλη.",
+    meta:{weeklyHours:1,selectionFramework:true,selectionStatus:"activity-method-framework-not-fixed-syllabus",anchorPolicy:"official-research-and-experimentation-method",coverageCompleteness:"method-framework-verified",explicitNoFixedSyllabus:true}
+  });
 
   upsert({
     id:"teacher-annual-special-gym-a-geography",grade:"A",subject:"Γεωλογία-Γεωγραφία",subjectId:"geography",
@@ -986,7 +1033,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027=Object.freeze({
-    version:"1.8.0",
+    version:"1.9.0",
     verified:VERIFIED,
     officialHubUrl:HUB,
     sources:Object.freeze({...SOURCES}),
@@ -994,6 +1041,7 @@
     mappedEntries:Object.freeze([
       "teacher-annual-special-gym-a-ancient-language","teacher-annual-special-gym-b-ancient-language","teacher-annual-special-gym-c-ancient-language",
       "teacher-annual-special-gym-a-ancient-translation","teacher-annual-special-gym-b-ancient-translation","teacher-annual-special-gym-c-ancient-translation",
+      "teacher-annual-special-gym-a-technology","teacher-annual-special-gym-b-technology","teacher-annual-special-gym-c-technology",
       "teacher-annual-special-gym-a-geography","teacher-annual-special-gym-b-geography",
       "teacher-annual-special-gym-a-biology","teacher-annual-special-gym-b-biology","teacher-annual-special-gym-c-biology",
       "teacher-annual-special-gym-a-math","teacher-annual-special-gym-b-math","teacher-annual-special-gym-c-math",

@@ -48,6 +48,8 @@ try {
   assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex,nofollow');
   assert.ok((await page.locator('#heInstitution option').count()) >= 5, 'pilot institutions missing');
   assert.ok((await page.locator('#heCourse option').count()) >= 1, 'initial course list missing');
+  assert.equal(await page.locator('#heTask').count(), 0, 'duplicate top-level goal selector must not exist');
+
 
   // Legacy aliases still resolve to current institutions.
   await page.locator('#heSearch').fill('ΤΕΙ Κρήτης');
@@ -135,6 +137,9 @@ try {
   assert.equal(aiRequestCount, beforeNeuro + 1, 'verified Neurobiology quiz did not call AI');
   assert.match(lastAiPayload.system, /Κάθε ερώτηση quiz πρέπει να αντιστοιχεί άμεσα/);
   assert.match(lastAiPayload.prompt, /ΒΙΟ_ΝΕΥ · Νευροβιολογία/);
+  assert.match(lastAiPayload.prompt, /Στόχος που επέλεξε: Να κάνω εξάσκηση/);
+  assert.match(await page.locator('#heResult').innerText(), /Στόχος: Να κάνω εξάσκηση/);
+
   assert.match(lastAiPayload.prompt, /Συναπτική διαβίβαση/);
   assert.match(lastAiPayload.prompt, /Νευροαπεικονιστικές τεχνικές PET, MRI και fMRI/);
 

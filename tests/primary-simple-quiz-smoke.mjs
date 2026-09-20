@@ -19,6 +19,7 @@ try{
     if(response.status()<400) return;
     const url=response.url();
     if(url.includes('/_vercel/insights/script.js')) return;
+    if(url.startsWith('https://t0.gstatic.com/faviconV2')) return;
     errors.push(`http ${response.status()}: ${url}`);
   });
   await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));

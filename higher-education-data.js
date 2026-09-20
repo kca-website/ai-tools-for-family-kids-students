@@ -191,28 +191,178 @@
         departmentEn: "Department of Biology",
         degreeLevel: 6,
         nominalSemesters: 8,
-        coverageStatus: "pilot-verified-core",
+        ectsTotal: 240,
+        coverageStatus: "pilot-structured",
         sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
+        currentAcademicYearSource: "https://biology.upatras.gr/program-study/",
+        detailedSyllabusSource: "https://biology.upatras.gr/study_guide/",
+        detailedSyllabusAcademicYear: "2025-2026",
+        notesEl: "Το Τμήμα έχει δημοσιευμένο πρόγραμμα κατανομής μαθημάτων για το 2026-2027. Η δομή εξαμήνων βασίζεται στην επίσημη κατανομή και τα αναλυτικά topics που εμφανίζονται στο pilot προέρχονται από τον τελευταίο επίσημο οδηγό σπουδών που είναι διαθέσιμος σε μηχαναναγνώσιμη μορφή. Δεν παρουσιάζονται ως πλήρης εξεταστέα ύλη.",
         sources: [
           "https://biology.upatras.gr/program-study/",
           "https://biology.upatras.gr/study_guide/",
-          "https://biology.upatras.gr/undergraduate-lessons/"
+          "https://biology.upatras.gr/undergraduate-lessons/",
+          "https://biology.upatras.gr/annual_timetable/"
         ],
-        notesEl: "Το Τμήμα έχει επίσημο πρόγραμμα σπουδών 2026-2027 και επίσημο οδηγό σπουδών. Η πιλοτική καταχώριση περιλαμβάνει επαληθευμένα βασικά μαθήματα· η πλήρης αντιστοίχιση ανά εξάμηνο/κωδικό θα προστεθεί μόνο από το επίσημο πρόγραμμα κατανομής.",
         courses: [
-          { code: null, semester: null, titleEl: "Βιολογία Κυττάρου Ι", tasks: ["understand","notes","papers","practice"] },
-          { code: null, semester: null, titleEl: "Βιολογία Κυττάρου ΙΙ", tasks: ["understand","papers","practice"] },
-          { code: null, semester: null, titleEl: "Βιοστατιστική", tasks: ["understand","calculations","practice","research"] },
-          { code: null, semester: null, titleEl: "Βιοχημεία Ι", tasks: ["understand","notes","practice"] },
-          { code: null, semester: null, titleEl: "Γενετική Ι", tasks: ["understand","papers","practice"] },
-          { code: null, semester: null, titleEl: "Μικροβιολογία", tasks: ["understand","papers","research","practice"] },
-          { code: null, semester: null, titleEl: "Μοριακή Βιολογία Ι", tasks: ["understand","papers","research","notes"] },
-          { code: null, semester: null, titleEl: "Οικολογία Ι", tasks: ["understand","research","papers","practice"] },
-          { code: null, semester: null, titleEl: "Αναπτυξιακή Βιολογία", tasks: ["understand","papers","notes","practice"] },
-          { code: null, semester: null, titleEl: "Βιοπληροφορική", tasks: ["understand","coding","papers","research"] },
-          { code: null, semester: null, titleEl: "Βιοτεχνολογία", tasks: ["understand","papers","research","feedback"] },
-          { code: null, semester: null, titleEl: "Γενετική Ανθρώπου – Ιατρική Γενετική", tasks: ["understand","papers","research","notes"] }
-        ],
+          {
+            code: "ΒΙΟ_ΒΚΔ", semester: 1, year: 1, ects: 8, required: true,
+            titleEl: "Βασικές Αρχές Βιολογίας Κυττάρου - Διδακτική",
+            tasks: ["understand","notes","papers","practice"],
+            topics: [
+              "Δομή και μοριακή οργάνωση του κυττάρου",
+              "Εργαστηριακές τεχνικές μελέτης βιομορίων και κυττάρων",
+              "Δομή και λειτουργία πλασματικής μεμβράνης",
+              "Δομή και οργάνωση πυρήνα",
+              "Οργάνωση γενετικού υλικού",
+              "Κυτταροπλασματικό σύστημα μεμβρανών",
+              "Σύνθεση, διαλογή και λειτουργική ωρίμανση πρωτεϊνών",
+              "Πρόσληψη κυττάρων και μακρομορίων",
+              "Αυτοαναπαραγόμενα κυτταροπλασματικά οργανίδια"
+            ]
+          },
+          {
+            code: "ΒΙΟ_ΓΜΒ", semester: 1, year: 1, ects: 8, required: true,
+            titleEl: "Γενικά Μαθηματικά - Βιοστατιστική",
+            tasks: ["understand","calculations","practice","research"],
+            topics: [
+              "Μαθηματικά και στατιστική στη Βιολογία",
+              "Συναρτήσεις, όρια και συνέχεια",
+              "Παράγωγοι και εφαρμογές",
+              "Διαφορικές εξισώσεις και εφαρμογές στη Βιολογία",
+              "Ολοκληρώματα",
+              "Βασικές έννοιες στατιστικής",
+              "Θεωρία πιθανοτήτων και βασικές κατανομές",
+              "Δειγματοληψία και εκτιμήσεις",
+              "Σχεδιασμός δειγματοληψίας και πειραμάτων",
+              "Περιγραφική στατιστική",
+              "Έλεγχος υποθέσεων",
+              "Συσχέτιση και παλινδρόμηση"
+            ]
+          },
+          {
+            code: "ΒΙΟ_ΓΧΜ", semester: 1, year: 1, ects: 7, required: true,
+            titleEl: "Γενική Χημεία",
+            tasks: ["understand","calculations","practice"],
+            topics: [
+              "Χημικές μετρήσεις, άτομα, μόρια και ιόντα",
+              "Χημικοί τύποι, εξισώσεις και στοιχειομετρία",
+              "Χημικές αντιδράσεις και διαλύματα",
+              "Θερμοχημεία και ενθαλπία",
+              "Κβαντική θεωρία και ατομική δομή",
+              "Ηλεκτρονικές δομές και περιοδικότητα",
+              "Ιοντικός και ομοιοπολικός δεσμός",
+              "Μοριακή γεωμετρία",
+              "Διαλύματα και αθροιστικές ιδιότητες",
+              "Χημική κινητική",
+              "Χημική ισορροπία",
+              "Οξέα και βάσεις"
+            ]
+          },
+          {
+            code: "ΒΙΟ_ΦΥΣ", semester: 1, year: 1, ects: 7, required: true,
+            titleEl: "Φυσική",
+            tasks: ["understand","calculations","practice"],
+            topics: [
+              "Βασικές αρχές και νόμοι της Φυσικής",
+              "Μηχανική και φαινόμενα σχετικά με βιολογικά συστήματα",
+              "Κύματα και εφαρμογές",
+              "Ηλεκτρισμός και ηλεκτρομαγνητισμός",
+              "Οπτική και εφαρμογές στη Βιολογία"
+            ]
+          },
+          {
+            code: "ΒΙΟ_ΒΖΙ", semester: 2, year: 1, ects: 8, required: true,
+            titleEl: "Βιολογία Ζώων Ι: Βασικά Φύλα & Πρωτοστόμια",
+            tasks: ["understand","notes","practice","papers"],
+            topics: [
+              "Βασικές αρχές Ζωολογίας",
+              "Εξέλιξη και φυλογένεση των ζώων",
+              "Βασικά σχέδια και οργάνωση σώματος ζώων",
+              "Μορφολογία και εσωτερική οργάνωση Πρωτοστόμιων",
+              "Συστηματική Πρωτοστόμιων",
+              "Οικολογία Πρωτοστόμιων",
+              "Αναγνώριση αντιπροσώπων κύριων ζωικών φύλων"
+            ]
+          },
+          {
+            code: "ΒΙΟ_ΑΒΧ", semester: 2, year: 1, ects: 7, required: true,
+            titleEl: "Βιοχημεία Ι",
+            tasks: ["understand","notes","practice","calculations"],
+            topics: [
+              "Δομή και ιδιότητες βιομορίων",
+              "Αμινοξέα και πρωτεΐνες",
+              "Ένζυμα και ενζυμική κατάλυση",
+              "Υδατάνθρακες",
+              "Λιπίδια και βιολογικές μεμβράνες",
+              "Βασικές αρχές βιοενεργητικής και μεταβολισμού"
+            ]
+          },
+          {
+            code: "ΒΙΟ_ΓΕΝ", semester: 2, year: 1, ects: 8, required: true,
+            titleEl: "Γενετική",
+            tasks: ["understand","notes","practice","papers"],
+            topics: [
+              "Μενδελική κληρονομικότητα",
+              "Χρωμοσώματα και κυτταρική διαίρεση",
+              "Σύνδεση γονιδίων και γενετικοί χάρτες",
+              "Μεταλλάξεις και χρωμοσωμικές μεταβολές",
+              "Έκφραση και ρύθμιση γενετικής πληροφορίας",
+              "Βασικές αρχές πληθυσμιακής και ποσοτικής γενετικής"
+            ]
+          },
+          {
+            code: "ΒΙΟ_ΟΧΜ", semester: 2, year: 1, ects: 7, required: true,
+            titleEl: "Οργανική Χημεία",
+            tasks: ["understand","calculations","practice"],
+            topics: [
+              "Λειτουργικές ομάδες και ονοματολογία οργανικών ενώσεων",
+              "Χημικοί δεσμοί και μοριακές δομές",
+              "Στερεοχημεία",
+              "Επαγωγικό φαινόμενο και συντονισμός",
+              "Οξύτητα και βασικότητα",
+              "Μηχανισμοί οργανικών αντιδράσεων",
+              "Υδρογονάνθρακες, αλκυλαλογονίδια, αλκοόλες και αιθέρες",
+              "Αλδεΰδες, κετόνες, καρβοξυλικά οξέα και παράγωγα",
+              "Αμίνες και ετεροκυκλικές ενώσεις",
+              "Υδατάνθρακες, αμινοξέα, πρωτεΐνες, νουκλεοτίδια, νουκλεϊκά οξέα και λιπίδια"
+            ]
+          },
+
+          { code: "ΒΙΟ_ΒΖΔ", semester: 3, year: 2, ects: 8, required: true, titleEl: "Βιολογία Ζώων ΙΙ: Δευτεροστόμια", tasks: ["understand","notes","practice","papers"] },
+          { code: "ΒΙΟ_ΒΙΙ", semester: 3, year: 2, ects: 7, required: true, titleEl: "Βιοχημεία ΙΙ", tasks: ["understand","practice","calculations","papers"] },
+          { code: "ΒΙΟ_ΜΑΦ", semester: 3, year: 2, ects: 8, required: true, titleEl: "Μορφολογία και Ανατομία Φυτών - Διδακτική", tasks: ["understand","notes","practice"] },
+          { code: "ΒΙΟ_ΠΛΟ", semester: 3, year: 2, ects: 7, required: true, titleEl: "Πληθυσμιακή Οικολογία", tasks: ["understand","calculations","research","practice"] },
+
+          { code: "ΒΙΟ_ΑΞΒ", semester: 4, year: 2, ects: 6, required: true, titleEl: "Αναπτυξιακή Βιολογία", tasks: ["understand","notes","papers","practice"] },
+          { code: "ΒΙΟ_ΜΚΛ", semester: 4, year: 2, ects: 6, required: true, titleEl: "Μοριακή Βάση των Κυτταρικών Λειτουργιών", tasks: ["understand","notes","papers","practice"] },
+          { code: "ΒΙΟ_ΜΡΒ", semester: 4, year: 2, ects: 6, required: true, titleEl: "Μοριακή Βιολογία", tasks: ["understand","papers","research","notes"] },
+          { code: "ΒΙΟ_ΟΒΟ", semester: 4, year: 2, ects: 6, required: true, titleEl: "Οικολογία Βιοκοινοτήτων & Οικοσυστημάτων", tasks: ["understand","research","papers","practice"] },
+          { code: "ΒΙΟ_ΣΦΤ", semester: 4, year: 2, ects: 6, required: true, titleEl: "Συστηματική Φυτών", tasks: ["understand","notes","practice"] },
+
+          { code: "ΒΙΟ_ΡΒΑ", semester: 5, year: 3, ects: 7, required: true, titleEl: "Μικροβιολογία", tasks: ["understand","papers","research","practice"] },
+          { code: "ΒΙΟ_ΜΓΝ", semester: 5, year: 3, ects: 7, required: true, titleEl: "Μοριακή Γενετική", tasks: ["understand","papers","research","practice"] },
+          { code: "ΒΙΟ_ΦΖΟ", semester: 5, year: 3, ects: 9, required: true, titleEl: "Φυσιολογία Ζωικών Οργανισμών", tasks: ["understand","notes","practice","papers"] },
+          { code: "ΒΙΟ_ΦΦΤ", semester: 5, year: 3, ects: 7, required: true, titleEl: "Φυσιολογία Φυτών", tasks: ["understand","notes","practice","papers"] },
+
+          { code: "ΒΙΟ_ΕΞΛ", semester: 6, year: 3, ects: 6, required: true, titleEl: "Εξέλιξη", tasks: ["understand","papers","research","practice"] },
+
+          { code: "ΒΙΟ_ΒΠΛ", semester: 6, year: 3, ects: 3, required: false, group: "A", titleEl: "Βιοπληροφορική", tasks: ["understand","coding","papers","research"] },
+          { code: "ΒΙΟ_ΓΑΙ", semester: 6, year: 3, ects: 6, required: false, group: "A", titleEl: "Γενετική Ανθρώπου - Ιατρική Γενετική", tasks: ["understand","papers","research","notes"] },
+          { code: "ΒΙΟ_ΕΒΣ", semester: 6, year: 3, ects: 6, required: false, group: "A", titleEl: "Εφαρμοσμένη Βιοστατιστική", tasks: ["understand","calculations","research","practice"] },
+          { code: "ΒΙΟ_ΕΜΚ", semester: 6, year: 3, ects: 6, required: false, group: "A", titleEl: "Εφαρμοσμένη Μικροβιολογία", tasks: ["understand","papers","research","practice"] },
+          { code: "ΒΙΟ_ΘΟΛ", semester: 6, year: 3, ects: 6, required: false, group: "A", titleEl: "Θαλάσσια Οικολογία", tasks: ["understand","research","papers","practice"] },
+
+          { code: "ΒΙΟ_ΑΝΒ", semester: 7, year: 4, ects: 6, required: false, group: "B", titleEl: "Ανοσοβιολογία", tasks: ["understand","papers","research","practice"] },
+          { code: "ΒΙΟ_ΕΗΒ", semester: 7, year: 4, ects: 3, required: false, group: "B", titleEl: "Εφαρμοσμένη Ηθική και Βιοηθική", tasks: ["understand","research","papers","feedback"] },
+          { code: "ΒΙΟ_ΝΕΥ", semester: 7, year: 4, ects: 3, required: false, group: "B", titleEl: "Νευροβιολογία", tasks: ["understand","papers","research","notes"] },
+          { code: "ΒΙΟ_ΔΙΠΛ1", semester: 7, year: 4, ects: 6, required: false, group: "B", titleEl: "Διπλωματική Εργασία Ι", tasks: ["research","papers","feedback","notes"] },
+          { code: "ΒΙΟ_ΠΡΧ", semester: 7, year: 4, ects: 6, required: false, group: "B", titleEl: "Πρακτική Άσκηση Ι", tasks: ["notes","feedback","research"] },
+
+          { code: "ΒΙΟ_ΔΙΠΛ2", semester: 8, year: 4, ects: 12, required: false, group: "C", titleEl: "Διπλωματική Εργασία ΙΙ", tasks: ["research","papers","feedback","notes"] },
+          { code: "ΒΙΟ_ΠΡΕ", semester: 8, year: 4, ects: 6, required: false, group: "C", titleEl: "Πρακτική Άσκηση ΙΙ", tasks: ["notes","feedback","research"] }
+        ]
       },
 
       "hmu-ece": {

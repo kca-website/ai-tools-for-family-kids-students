@@ -7,10 +7,15 @@
   const $ = (id) => document.getElementById(id);
   const institutionSelect = $("heInstitution");
   const departmentSelect = $("heDepartment");
+  const yearSelect = $("heYear");
+  const semesterSelect = $("heSemester");
+  const yearField = $("heYearField");
+  const semesterField = $("heSemesterField");
   const courseSelect = $("heCourse");
   const taskSelect = $("heTask");
   const result = $("heResult");
   const coverage = $("heCoverage");
+  const syllabus = $("heSyllabus");
   const search = $("heSearch");
   const searchHint = $("heSearchHint");
   const aiInput = $("heAiInput");
@@ -43,6 +48,12 @@
     populateDepartments();
   }
 
+  function courseYear(course) {
+    if (Number.isFinite(Number(course?.year))) return Number(course.year);
+    if (Number.isFinite(Number(course?.semester))) return Math.ceil(Number(course.semester) / 2);
+    return null;
+  }
+
   function populateDepartments() {
     const institution = HE.institutions[institutionSelect.value];
     departmentSelect.replaceChildren();
@@ -50,19 +61,55 @@
       const department = HE.departments[id];
       if (department) departmentSelect.append(option(id, department.departmentEl));
     }
+    populateYears();
+  }
+
+  function populateYears() {
+    const department = HE.departments[departmentSelect.value];
+    const years = [...new Set((department?.courses || []).map(courseYear).filter(Boolean))].sort((a,b) => a-b);
+    const structured = years.length > 0;
+    yearField.hidden = !structured;
+    semesterField.hidden = !structured;
+    yearSelect.replaceChildren();
+    if (!structured) {
+      populateCourses();
+      return;
+    }
+    for (const year of years) yearSelect.append(option(String(year), `${year}ο έτος`));
+    populateSemesters();
+  }
+
+  function populateSemesters() {
+    const department = HE.departments[departmentSelect.value];
+    const selectedYear = Number(yearSelect.value);
+    const semesters = [...new Set(
+      (department?.courses || [])
+        .filter((course) => courseYear(course) === selectedYear)
+        .map((course) => Number(course.semester))
+        .filter(Boolean)
+    )].sort((a,b) => a-b);
+    semesterSelect.replaceChildren();
+    for (const semester of semesters) semesterSelect.append(option(String(semester), `${semester}ο εξάμηνο`));
     populateCourses();
   }
 
   function populateCourses() {
     const department = HE.departments[departmentSelect.value];
+    const selectedYear = yearField.hidden ? null : Number(yearSelect.value);
+    const selectedSemester = semesterField.hidden ? null : Number(semesterSelect.value);
     courseSelect.replaceChildren();
-    for (const [index, course] of (department?.courses || []).entries()) {
+
+    (department?.courses || []).forEach((course, index) => {
+      if (selectedYear && courseYear(course) !== selectedYear) return;
+      if (selectedSemester && Number(course.semester) !== selectedSemester) return;
       const prefix = course.code ? `${course.code} · ` : "";
-      const suffix = course.semester ? ` · ${course.semester}ο εξ.` : "";
-      courseSelect.append(option(String(index), `${prefix}${course.titleEl}${suffix}`));
-    }
+      const type = course.required === false ? " · επιλογής" : "";
+      courseSelect.append(option(String(index), `${prefix}${course.titleEl}${type}`));
+    });
+
     populateTasks();
     renderCoverage();
+    renderSyllabus();
   }
 
   function currentCourse() {
@@ -78,6 +125,7 @@
       if (task) taskSelect.append(option(taskId, task.labelEl));
     }
     render();
+    renderSyllabus();
   }
 
   function renderCoverage() {
@@ -92,7 +140,33 @@
       "pilot-legacy-mapping": "Pilot · legacy mapping + επαληθευμένα δείγματα μαθημάτων",
     };
     const sourceCount = department.sources?.length || 0;
-    coverage.textContent = `${statusMap[department.coverageStatus] || department.coverageStatus} · Πηγές: ${sourceCount} · Confidence: ${department.sourceConfidence}`;
+    const structuredNote = department.curriculumDisplay === "year-semester-course-topic"
+      ? " · Δομή: έτος → εξάμηνο → μάθημα → θεματικές"
+      : "";
+    coverage.textContent = `${statusMap[department.coverageStatus] || department.coverageStatus} · Πηγές: ${sourceCount} · Confidence: ${department.sourceConfidence}${structuredNote}`;
+  }
+
+  function renderSyllabus() {
+    const department = HE.departments[departmentSelect.value];
+    const course = currentCourse();
+    const topics = Array.isArray(course?.topics) ? course.topics : [];
+    if (!course || !topics.length) {
+      syllabus.hidden = true;
+      syllabus.replaceChildren();
+      return;
+    }
+    const meta = [
+      course.year ? `${course.year}ο έτος` : "",
+      course.semester ? `${course.semester}ο εξάμηνο` : "",
+      Number.isFinite(Number(course.ects)) ? `${course.ects} ECTS` : "",
+      course.required === false ? "Επιλογής" : "Υποχρεωτικό"
+    ].filter(Boolean).join(" · ");
+    syllabus.hidden = false;
+    syllabus.innerHTML = `
+      <h3>Ύλη / θεματικές που έχουμε επαληθεύσει</h3>
+      <div class="he-meta">${escapeHtml(meta)}</div>
+      <ul class="he-topic-list">${topics.map((topic) => `<li>${escapeHtml(topic)}</li>`).join("")}</ul>
+      <p class="he-meta">Οι θεματικές λειτουργούν ως πλαίσιο μελέτης για την AI και όχι ως δήλωση πλήρους εξεταστέας ύλης.</p>`;
   }
 
   function render() {
@@ -167,6 +241,108 @@
       : `Βρέθηκε: ${first.institution.nameEl} · ${first.department.departmentEl}.`;
   }
 
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function inlineMarkdown(value) {
+    let text = escapeHtml(value);
+    text = text.replace(/\`([^\`]+)\`/g, "<code>$1</code>");
+    text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    text = text.replace(/__([^_]+)__/g, "<strong>$1</strong>");
+    text = text.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+    text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    return text;
+  }
+
+  function renderMarkdown(value) {
+    const lines = String(value || "").replace(/\r/g, "").split("\n");
+    let html = "";
+    let ul = false;
+    let ol = false;
+    let code = false;
+    let codeLines = [];
+
+    const closeLists = () => {
+      if (ul) { html += "</ul>"; ul = false; }
+      if (ol) { html += "</ol>"; ol = false; }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const raw = lines[i];
+      const line = raw.trim();
+
+      if (/^\`\`\`/.test(line)) {
+        closeLists();
+        if (!code) {
+          code = true;
+          codeLines = [];
+        } else {
+          html += `<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`;
+          code = false;
+        }
+        continue;
+      }
+      if (code) {
+        codeLines.push(raw);
+        continue;
+      }
+      if (!line) {
+        closeLists();
+        continue;
+      }
+
+      const next = lines[i + 1]?.trim() || "";
+      if (line.includes("|") && /^\|?\s*:?-{3,}/.test(next)) {
+        closeLists();
+        const headers = line.replace(/^\||\|$/g, "").split("|").map((x) => x.trim());
+        i += 1;
+        const rows = [];
+        while (i + 1 < lines.length && lines[i + 1].includes("|") && lines[i + 1].trim()) {
+          i += 1;
+          rows.push(lines[i].trim().replace(/^\||\|$/g, "").split("|").map((x) => x.trim()));
+        }
+        html += '<div class="he-md-table"><table><thead><tr>' +
+          headers.map((x) => `<th>${inlineMarkdown(x)}</th>`).join("") +
+          '</tr></thead><tbody>' +
+          rows.map((row) => '<tr>' + row.map((x) => `<td>${inlineMarkdown(x)}</td>`).join("") + '</tr>').join("") +
+          '</tbody></table></div>';
+        continue;
+      }
+
+      if (/^###\s+/.test(line)) { closeLists(); html += `<h4>${inlineMarkdown(line.replace(/^###\s+/, ""))}</h4>`; continue; }
+      if (/^##\s+/.test(line)) { closeLists(); html += `<h3>${inlineMarkdown(line.replace(/^##\s+/, ""))}</h3>`; continue; }
+      if (/^#\s+/.test(line)) { closeLists(); html += `<h2>${inlineMarkdown(line.replace(/^#\s+/, ""))}</h2>`; continue; }
+      if (/^>\s?/.test(line)) { closeLists(); html += `<blockquote>${inlineMarkdown(line.replace(/^>\s?/, ""))}</blockquote>`; continue; }
+
+      if (/^[-*]\s+/.test(line)) {
+        if (ol) { html += "</ol>"; ol = false; }
+        if (!ul) { html += "<ul>"; ul = true; }
+        html += `<li>${inlineMarkdown(line.replace(/^[-*]\s+/, ""))}</li>`;
+        continue;
+      }
+      if (/^\d+[.)]\s+/.test(line)) {
+        if (ul) { html += "</ul>"; ul = false; }
+        if (!ol) { html += "<ol>"; ol = true; }
+        html += `<li>${inlineMarkdown(line.replace(/^\d+[.)]\s+/, ""))}</li>`;
+        continue;
+      }
+
+      closeLists();
+      if (/^---+$/.test(line)) { html += "<hr>"; continue; }
+      html += `<p>${inlineMarkdown(line)}</p>`;
+    }
+
+    closeLists();
+    if (code && codeLines.length) html += `<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`;
+    return html;
+  }
+
   const ACTIONS = {
     explain: {
       label: "Εξήγηση",
@@ -182,7 +358,7 @@
     },
     "study-plan": {
       label: "Πλάνο μελέτης",
-      instruction: "Φτιάξε πρακτικό πλάνο μελέτης σε βήματα: τι να καταλάβω πρώτα, τι να εξασκήσω, πώς να αυτοελεγχθώ και τι να επαναλάβω. Μην υποθέτεις εξεταστέα ύλη που δεν παρέχεται."
+      instruction: "Φτιάξε πρακτικό πλάνο μελέτης σε αριθμημένα βήματα: τι να καταλάβω πρώτα, τι να εξασκήσω, πώς να αυτοελεγχθώ και τι να επαναλάβω. Προτίμησε bullets/checklist και όχι πίνακα. Μην υποθέτεις εξεταστέα ύλη που δεν παρέχεται."
     },
     paper: {
       label: "Paper helper",
@@ -219,12 +395,16 @@
       "Μην επινοείς πηγές, DOI, αποτελέσματα μελετών ή στοιχεία του προγράμματος σπουδών.",
       "Τα παρακάτω στοιχεία μαθήματος είναι context του pilot και όχι απόδειξη πλήρους εξεταστέας ύλης.",
       "Αν λείπει πληροφορία, δήλωσέ το καθαρά.",
-      "Απάντησε στα ελληνικά εκτός αν ο φοιτητής ζητήσει άλλη γλώσσα."
+      "Απάντησε στα ελληνικά εκτός αν ο φοιτητής ζητήσει άλλη γλώσσα.",
+      "Μορφοποίησε την απάντηση καθαρά για κινητό: σύντομες ενότητες, bullets και αριθμημένα βήματα. Απόφυγε φαρδείς πίνακες εκτός αν είναι πραγματικά απαραίτητοι."
     ].join("\n");
     const prompt = [
       `Ίδρυμα: ${institution?.nameEl || ""}`,
       `Τμήμα: ${department?.departmentEl || ""}`,
+      `Έτος: ${course?.year || "μη καταχωρισμένο"}`,
+      `Εξάμηνο: ${course?.semester || "μη καταχωρισμένο"}`,
       `Μάθημα: ${course?.code ? course.code + " · " : ""}${course?.titleEl || ""}`,
+      Array.isArray(course?.topics) && course.topics.length ? `Επαληθευμένες θεματικές:\n- ${course.topics.join("\n- ")}` : "Δεν έχουμε ακόμη καταχωρισμένες αναλυτικές θεματικές για αυτό το μάθημα.",
       `Στόχος που επέλεξε: ${task?.labelEl || ""}`,
       `Ενέργεια: ${action.label}`,
       `Coverage status: ${department?.coverageStatus || ""}`,
@@ -243,7 +423,7 @@
   }
 
   function showAiOutput(text, provider) {
-    aiOutput.textContent = String(text || "").trim();
+    aiOutput.innerHTML = renderMarkdown(String(text || "").trim());
     aiOutput.classList.add("visible");
     aiStatus.textContent = `Έτοιμο · ${provider}`;
     aiOutput.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -329,7 +509,9 @@
   aiPuter.addEventListener("click", generateInlinePuter);
 
   institutionSelect.addEventListener("change", populateDepartments);
-  departmentSelect.addEventListener("change", populateCourses);
+  departmentSelect.addEventListener("change", populateYears);
+  yearSelect.addEventListener("change", populateSemesters);
+  semesterSelect.addEventListener("change", populateCourses);
   courseSelect.addEventListener("change", populateTasks);
   taskSelect.addEventListener("change", render);
   search.addEventListener("input", handleSearch);

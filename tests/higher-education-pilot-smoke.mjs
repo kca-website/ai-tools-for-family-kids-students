@@ -29,7 +29,7 @@ try {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
-      body: JSON.stringify({ text: 'Δοκιμαστική inline απάντηση AI', model: 'gpt-oss-120b' }),
+      body: JSON.stringify({ text: '## Πλάνο μελέτης\n\n**Στόχος:** Κατανόηση\n\n- Βήμα 1\n- Βήμα 2\n\n| Στάδιο | Ενέργεια |\n|---|---|\n| 1 | Μελέτη |', model: 'gpt-oss-120b' }),
     });
   });
 
@@ -63,24 +63,40 @@ try {
   await page.waitForTimeout(80);
   assert.equal(await page.locator('#heInstitution').inputValue(), 'upatras');
   assert.equal(await page.locator('#heDepartment').inputValue(), 'upatras-biology');
-  assert.ok((await page.locator('#heCourse option').count()) >= 10, 'Patras Biology pilot courses missing');
+  assert.equal(await page.locator('#heYear').inputValue(), '1');
+  assert.equal(await page.locator('#heSemester').inputValue(), '1');
+  assert.equal(await page.locator('#heCourse option').count(), 4, 'Patras Biology semester 1 must expose four required courses');
+  assert.match(await page.locator('#heCourse option').first().innerText(), /ΒΙΟ_ΒΚΔ/);
+  assert.ok((await page.locator('#heSyllabus li').count()) >= 5, 'verified syllabus topics missing for first Biology course');
+
+  await page.selectOption('#heCourse', '1');
+  assert.match(await page.locator('#heSyllabus').innerText(), /Συσχέτιση και παλινδρόμηση/i);
 
   const beforeAiUrl = page.url();
-  await page.locator('[data-he-action="quiz"]').click();
-  assert.equal(await page.locator('[data-he-action="quiz"]').getAttribute('aria-pressed'), 'true');
-  await page.locator('#heAiInput').fill('Κάνε εξάσκηση στη Βιοστατιστική');
+  await page.locator('[data-he-action="study-plan"]').click();
+  assert.equal(await page.locator('[data-he-action="study-plan"]').getAttribute('aria-pressed'), 'true');
+  await page.locator('#heAiInput').fill('Θέλω να οργανώσω τη μελέτη μου στη Βιοστατιστική');
   await page.locator('#heAiGroq').click();
   await page.waitForFunction(() => document.querySelector('#heAiOutput')?.classList.contains('visible'));
   assert.equal(page.url(), beforeAiUrl, 'inline AI must not navigate away from the university page');
-  assert.match(await page.locator('#heAiOutput').innerText(), /Δοκιμαστική inline απάντηση AI/);
+  assert.match(await page.locator('#heAiOutput h3').innerText(), /Πλάνο μελέτης/);
+  assert.equal(await page.locator('#heAiOutput').innerText().then((x) => x.includes('**')), false, 'raw bold markdown leaked into output');
+  assert.equal(await page.locator('#heAiOutput').innerText().then((x) => x.includes('##')), false, 'raw heading markdown leaked into output');
+  assert.equal(await page.locator('#heAiOutput strong').count(), 1, 'bold markdown was not rendered');
+  assert.ok((await page.locator('#heAiOutput li').count()) >= 2, 'markdown list was not rendered');
+  assert.equal(await page.locator('#heAiOutput .he-md-table').count(), 1, 'markdown table was not wrapped for mobile scrolling');
   assert.ok(lastAiPayload, 'inline AI did not call the shared server endpoint');
   assert.match(lastAiPayload.system, /AI Βοηθός Φοιτητή/);
   assert.equal(lastAiPayload.audience, 'university_student');
 
   assert.match(lastAiPayload.prompt, /Πανεπιστήμιο Πατρών/);
   assert.match(lastAiPayload.prompt, /Τμήμα Βιολογίας/);
-  assert.match(lastAiPayload.prompt, /Quiz/);
-  assert.match(lastAiPayload.prompt, /Κάνε εξάσκηση στη Βιοστατιστική/);
+  assert.match(lastAiPayload.prompt, /Πλάνο μελέτης/);
+  assert.match(lastAiPayload.prompt, /Έτος: 1/);
+  assert.match(lastAiPayload.prompt, /Εξάμηνο: 1/);
+  assert.match(lastAiPayload.prompt, /Γενικά Μαθηματικά - Βιοστατιστική/);
+  assert.match(lastAiPayload.prompt, /Συσχέτιση και παλινδρόμηση/);
+  assert.match(lastAiPayload.prompt, /Θέλω να οργανώσω τη μελέτη μου στη Βιοστατιστική/);
 
   await page.locator('[data-he-action="feedback"]').click();
   assert.match(await page.locator('#heAiInput').getAttribute('placeholder'), /δική σου/i);

@@ -45,6 +45,15 @@ try{
     assert.equal(badges.length,count,`${grade}: every ENEEGYL structure card needs a coverage/readiness badge`);
   }
 
+  // A Lyceum ENEEGYL: current official course guidance must not collapse into generic structure.
+  await page.locator('[data-en-grade="lyc-a"]').click();
+  const economyA=page.locator('#spEneegylProfile [data-en-structure-subject="economics"]');
+  assert.equal(await economyA.getAttribute('data-coverage'),'exact','A ENEEGYL Principles of Economics has encoded current 2026-27 chapters');
+  assert.match(await economyA.innerText(),/Ύλη 2026–27/);
+  const drawingA=page.locator('#spEneegylProfile [data-en-structure-subject="architectural-drawing"]');
+  assert.equal(await drawingA.getAttribute('data-coverage'),'partial','A ENEEGYL Architectural Drawing is verified as a current course but exact subunits are not encoded');
+  assert.match(await drawingA.innerText(),/Μερική χαρτογράφηση/);
+
   // Special Lyceum: structure and source-index state must not be described as exact section mapping.
   await page.locator('#spEneegyl .sp-back').click();
   await page.locator('[data-branch="special-lyceum"]').click();

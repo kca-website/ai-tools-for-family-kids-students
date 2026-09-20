@@ -15,11 +15,11 @@ vm.runInContext(code,context,{filename:'teacher-curriculum-special-gym-annual-20
 
 const C=window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M=window.AITOOLSKIDS_SPECIAL_GYM_ANNUAL_2026_2027;
-assert.equal(M.mappedEntries.length,37);
-assert.equal(M.publishedPending.length,15);
+assert.equal(M.mappedEntries.length,40);
+assert.equal(M.publishedPending.length,12);
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='biology'),'Biology must no longer be pending after exact 2026-27 mapping');
 assert.ok(!M.publishedPending.some(x=>x.subjectId==='geography'),'Geography must no longer be pending after exact 2026-27 mapping');
-assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='history'));
+assert.ok(!M.publishedPending.some(x=>x.subjectId==='history'),'History must no longer be pending after official 2026-27 mapping');
 assert.ok(M.publishedPending.some(x=>x.grade==='A'&&x.subjectId==='music'&&x.sourceUrl.includes('minedu.gov.gr')));
 assert.ok(M.publishedPending.some(x=>x.grade==='C'&&x.subjectId==='art'&&x.sourceUrl.includes('minedu.gov.gr')));
 for(const id of M.mappedEntries){
@@ -66,6 +66,32 @@ assert.ok(transC.officialAnchors.some(x=>x.includes('Πρόλογος 1–191'))
 assert.ok(transC.officialAnchors.some(x=>x.includes('Στωική ηθική - απάθεια και αταραξία')));
 assert.equal(transC.helenPlannedHours,35);
 assert.equal(transC.philosophyPlannedHours,13);
+
+const histA=C['teacher-annual-special-gym-a-history'];
+assert.equal(histA.plannedHours,37);
+assert.equal(histA.selectionStatus,'analytic-summary-optional-status-preserved');
+assert.ok(histA.officialAnchors.some(x=>x==='Αναλυτικά — Κεφ. Β΄ 2. Ο Κυκλαδικός πολιτισμός'));
+assert.ok(histA.officialAnchors.some(x=>x.startsWith('Προαιρετικά — Κεφ. Γ΄ 1')));
+assert.ok(histA.officialAnchors.some(x=>x.startsWith('Συνοπτικά — Κεφ. Ζ΄ 3')));
+assert.ok(histA.officialAnchors.some(x=>x.includes('Κρίση του 3ου αιώνα')));
+
+const histB=C['teacher-annual-special-gym-b-history'];
+assert.equal(histB.plannedHours,40);
+assert.equal(histB.selectionStatus,'official-four-theme-restructured-course');
+assert.equal(histB.officialThemes.length,4);
+assert.ok(histB.officialAnchors.includes('Θεματική Ι — Πολιτικές εξελίξεις στη Βυζαντινή Αυτοκρατορία'));
+assert.ok(histB.officialAnchors.includes('Θεματική ΙΙΙ — Το Βυζάντιο και η Ανατολική Ευρώπη'));
+assert.ok(histB.officialAnchors.some(x=>x.includes('Αναγέννηση και Ανθρωπισμός')));
+assert.ok(histB.officialAnchors.some(x=>x.startsWith('IV · Συνοπτικά: Η θρησκευτική Μεταρρύθμιση')));
+
+const histC=C['teacher-annual-special-gym-c-history'];
+assert.equal(histC.plannedHours,42);
+assert.equal(histC.selectionStatus,'analytic-summary-optional-status-preserved');
+assert.ok(histC.officialAnchors.some(x=>x.includes('Εν. 7. Η Φιλική Εταιρεία')));
+assert.ok(histC.officialAnchors.some(x=>x.startsWith('Προαιρετικά — Κεφ. 8, Εν. 35')));
+assert.ok(histC.officialAnchors.some(x=>x.includes('Εν. 38. Ο Μικρασιατικός Πόλεμος')));
+assert.ok(histC.officialAnchors.some(x=>x.startsWith('Συνοπτικά — Κεφ. 11, Εν. 50-51')));
+assert.ok(histC.officialAnchors.some(x=>x.includes('Εν. 54-55. Εμφύλιος')));
 
 const techA=C['teacher-annual-special-gym-a-technology'];
 assert.equal(techA.selectionFramework,true);
@@ -262,4 +288,4 @@ assert.ok(eco.officialAnchors.includes('3.5 Επιχειρηματικότητα
 assert.ok(eco.officialAnchors.some(x=>x.includes('μόνο Τέλειος Ανταγωνισμός')));
 assert.ok(eco.excludedAnchors.some(x=>x.includes('Κεφάλαιο 5')));
 
-console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 37 official mappings.');
+console.log('Special Gymnasium annual 2026-2027 mapping smoke passed: 40 official mappings.');

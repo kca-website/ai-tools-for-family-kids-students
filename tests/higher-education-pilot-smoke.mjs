@@ -22,6 +22,17 @@ try {
     }
   });
 
+  let lastAiPayload = null;
+  await page.route('**/api/teacher-assistant', async (route) => {
+    const request = route.request();
+    lastAiPayload = JSON.parse(request.postData() || '{}');
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ text: 'Δοκιμαστική inline απάντηση AI', model: 'gpt-oss-120b' }),
+    });
+  });
+
   await page.goto(`${BASE}/higher-education-pilot.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForFunction(() => document.querySelectorAll('#heInstitution option').length >= 5);
 
@@ -51,6 +62,24 @@ try {
   assert.equal(await page.locator('#heInstitution').inputValue(), 'upatras');
   assert.equal(await page.locator('#heDepartment').inputValue(), 'upatras-biology');
   assert.ok((await page.locator('#heCourse option').count()) >= 10, 'Patras Biology pilot courses missing');
+
+  const beforeAiUrl = page.url();
+  await page.locator('[data-he-action="quiz"]').click();
+  assert.equal(await page.locator('[data-he-action="quiz"]').getAttribute('aria-pressed'), 'true');
+  await page.locator('#heAiInput').fill('Κάνε εξάσκηση στη Βιοστατιστική');
+  await page.locator('#heAiGroq').click();
+  await page.waitForFunction(() => document.querySelector('#heAiOutput')?.classList.contains('visible'));
+  assert.equal(page.url(), beforeAiUrl, 'inline AI must not navigate away from the university page');
+  assert.match(await page.locator('#heAiOutput').innerText(), /Δοκιμαστική inline απάντηση AI/);
+  assert.ok(lastAiPayload, 'inline AI did not call the shared server endpoint');
+  assert.match(lastAiPayload.system, /AI Βοηθός Φοιτητή/);
+  assert.match(lastAiPayload.prompt, /Πανεπιστήμιο Πατρών/);
+  assert.match(lastAiPayload.prompt, /Τμήμα Βιολογίας/);
+  assert.match(lastAiPayload.prompt, /Quiz/);
+  assert.match(lastAiPayload.prompt, /Κάνε εξάσκηση στη Βιοστατιστική/);
+
+  await page.locator('[data-he-action="feedback"]').click();
+  assert.match(await page.locator('#heAiInput').getAttribute('placeholder'), /δική σου/i);
 
   const storage = await page.evaluate(() => ({
     local: Object.keys(localStorage),

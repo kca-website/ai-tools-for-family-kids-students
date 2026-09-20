@@ -183,6 +183,7 @@ try {
   assert.match(lastAiPayload.prompt, /Δικό μου draft: Η μοριακή βιολογία μελετά/);
 
   // The same unverified course is allowed when the student supplies source material.
+  await page.locator('[data-he-action="quiz"]').click();
   await page.locator('#heAiInput').fill('Σημειώσεις μαθήματος: Δευτεροστόμια, Εχινόδερμα, Χορδωτά.');
   const beforeMaterial = aiRequestCount;
   await page.locator('#heAiGroq').click();

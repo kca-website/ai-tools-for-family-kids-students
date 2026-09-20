@@ -14,6 +14,15 @@ assert.ok(he, 'Higher Education dataset must expose window.AITOOLSKIDS_HIGHER_ED
 assert.ok(Object.keys(he.institutions).length >= 5, 'pilot must include at least 5 institutions');
 assert.ok(he.departments['upatras-biology'], 'University of Patras Biology pilot is missing');
 assert.equal(he.departments['upatras-biology'].nominalSemesters, 8);
+const patrasBiology = he.departments['upatras-biology'];
+assert.equal(patrasBiology.curriculumDisplay, 'year-semester-course-topic');
+assert.equal(patrasBiology.courses.filter((course) => course.semester === 1).length, 4);
+assert.equal(patrasBiology.courses.filter((course) => course.semester === 2).length, 4);
+assert.ok(patrasBiology.courses.some((course) => course.code === 'ΒΙΟ_ΒΚΔ' && course.topics?.length >= 5));
+assert.ok(patrasBiology.courses.some((course) => course.code === 'ΒΙΟ_ΓΜΒ' && course.topics?.includes('Συσχέτιση και παλινδρόμηση')));
+assert.ok(!patrasBiology.courses.some((course) => course.titleEl === 'Βιολογία Κυττάρου Ι'), 'obsolete Patras Biology title must not return');
+assert.ok(!patrasBiology.courses.some((course) => course.titleEl === 'Γενετική Ι'), 'obsolete Genetics I title must not return');
+
 
 assert.equal(he.meta.status, 'pilot');
 assert.match(he.meta.policyEl, /δεν δημιουργεί έτοιμη εργασία/i);

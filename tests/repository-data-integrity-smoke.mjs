@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 
 const read = (p) => fs.readFileSync(new URL(`../${p}`, import.meta.url), 'utf8');
 const data = read('data.js');
-const overrides = read('site-integrity-overrides.js');
+const overridePath = new URL('../site-integrity-overrides.js', import.meta.url);
+assert.equal(fs.existsSync(overridePath), false, 'obsolete site-integrity-overrides.js must not exist');
+
 
 for (const id of ['ai-help','phet','google-arts-culture','gemini-education','notebooklm']) {
   const pattern = new RegExp(`["']${id}["']\\s*:\\s*\\{`, 'g');
@@ -12,10 +14,6 @@ for (const id of ['ai-help','phet','google-arts-culture','gemini-education','not
 }
 
 assert.match(data, /id:\s*"learning-tool"/, 'learning-tool category must be canonical in data.js');
-assert.doesNotMatch(overrides, /function\s+setTool\s*\(/, 'runtime overrides must not own canonical tool creation');
-assert.doesNotMatch(overrides, /function\s+addCategory\s*\(/, 'runtime overrides must not own canonical category creation');
-assert.doesNotMatch(overrides, /setTool\("(?:ai-help|phet|google-arts-culture|gemini-education)"/, 'canonical tools must not be recreated at runtime');
-
 const notebookDecls = data.match(/["']notebooklm["']\s*:\s*\{/g) || [];
 assert.equal(notebookDecls.length, 1, 'Gemini Notebook / NotebookLM must not have duplicate canonical declarations');
 
@@ -32,7 +30,5 @@ for (const row of curriculumToolArrays) {
   assert.equal(aiHelpCount, 1, 'AI Help must appear exactly once in every canonical curriculum subject');
 }
 
-assert.doesNotMatch(overrides, /const\s+aiHelpEntries\s*=/, 'AI Help must not be injected from runtime overrides');
-assert.doesNotMatch(overrides, /ensurePathTool\([^\n]*ai-help/, 'AI Help must not be runtime-injected into PATHS');
 
 console.log('Repository data integrity smoke passed.');

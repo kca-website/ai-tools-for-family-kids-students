@@ -26,7 +26,7 @@
       titleStudent: "AI Βοήθεια",
       titleParent: "Βοηθός Γονέα",
       subtitleStudent: "Δεν λύνει την άσκηση για εσένα. Σε καθοδηγεί με ερωτήσεις και μικρές υποδείξεις μέχρι να καταλάβεις το «γιατί».",
-      subtitleParent: "Γράψε πού έχει κολλήσει το παιδί. Ο βοηθός θα σου προτείνει πώς να το καθοδηγήσεις, χωρίς να του δώσεις έτοιμη λύση.",
+      subtitleParent: "Πρώτα επίλεξε μάθημα από τη Ρύθμιση μαθήματος. Έπειτα γράψε σε ποιο σημείο δυσκολεύεται ο μαθητής. Ο Βοηθός θα σου προτείνει ερωτήσεις, μικρές υποδείξεις και επόμενα βήματα, χωρίς έτοιμη λύση.",
       signInTitle: "Διάλεξε τρόπο δημιουργίας",
       signInIntro: "Το GPT-OSS 120B λειτουργεί εδώ χωρίς λογαριασμό. Το Puter παραμένει προαιρετική εναλλακτική και μπορεί να ζητήσει σύνδεση.",
       groqChoice: "⚡ GPT-OSS 120B",
@@ -63,6 +63,8 @@
       chooseSpecialty: "Γενική Παιδεία / διάλεξε ειδικότητα",
       grade: "Τάξη",
       subject: "Μάθημα",
+      chooseSubject: "Διάλεξε πρώτα μάθημα",
+      selectSubjectFirst: "Επίλεξε πρώτα μάθημα από τη Ρύθμιση μαθήματος.",
       topic: "Θέμα / δυσκολία",
       modeParent: "Λειτουργία: Βοηθός Γονέα",
       modeParentText: "Ο βοηθός μιλά στον γονέα και προτείνει μία ερώτηση ή ένα βήμα κάθε φορά, ώστε το παιδί να σκεφτεί μόνο του.",
@@ -138,7 +140,7 @@
       titleStudent: "AI Help",
       titleParent: "Parent Helper",
       subtitleStudent: "It doesn't solve the exercise for you. It guides you with questions and small hints until you understand the why.",
-      subtitleParent: "Describe where your child is stuck. The helper suggests how to guide them without handing over the answer.",
+      subtitleParent: "First choose the subject in Lesson setup. Then describe where the student is struggling. The helper will suggest questions, small hints and next steps without handing over the answer.",
       signInTitle: "Choose how to generate",
       signInIntro: "GPT-OSS 120B works here without an account. Puter remains an optional alternative and may require sign-in.",
       groqChoice: "⚡ GPT-OSS 120B",
@@ -175,6 +177,8 @@
       chooseSpecialty: "General subjects / choose specialty",
       grade: "Grade",
       subject: "Subject",
+      chooseSubject: "Choose a subject first",
+      selectSubjectFirst: "Choose a subject first in Lesson setup.",
       topic: "Topic / difficulty",
       modeParent: "Mode: Parent Helper",
       modeParentText: "The helper talks to the parent and suggests one question or step at a time so the child does the thinking.",
@@ -678,19 +682,18 @@
       subjects = catalogSubjects.concat(quizzes.filter((quiz) => !represented.has(quiz.id)));
     }
     refs.subject.innerHTML = "";
+    const chooseSubject = document.createElement("option");
+    chooseSubject.value = "";
+    chooseSubject.textContent = subjects.length ? tr("chooseSubject") : tr("noContent");
+    refs.subject.appendChild(chooseSubject);
     for (const subject of subjects) {
       const option = document.createElement("option");
       option.value = subject.id;
       option.textContent = langValue(subject, "subjectLabelEl", "subjectLabelEn", subject.id);
       refs.subject.appendChild(option);
     }
-    if (!subjects.length) {
-      const option = document.createElement("option");
-      option.value = "";
-      option.textContent = tr("noContent");
-      refs.subject.appendChild(option);
-    }
     populateTopics();
+    updateComposerState();
   }
 
   function hasVerifiedAnnualTopicScope(subject) {
@@ -853,11 +856,13 @@
     if (!refs.input || !refs.send) return;
     const allowed = accessState().allowed;
     const providerReady = providerMode === "groq" || authReady;
-    const canChat = allowed && providerReady && !busy;
+    const subjectReady = !!refs.subject?.value;
+    const canChat = allowed && providerReady && subjectReady && !busy;
     refs.input.disabled = !canChat;
     refs.send.disabled = !canChat;
-    refs.sample.disabled = !allowed;
+    refs.sample.disabled = !allowed || !subjectReady;
     if (!allowed) refs.input.placeholder = tr("placeholderBlocked");
+    else if (!subjectReady) refs.input.placeholder = tr("selectSubjectFirst");
     else if (!providerReady) refs.input.placeholder = tr("placeholderConnect");
     else refs.input.placeholder = tr("placeholder");
     setMicUi();
@@ -1563,6 +1568,11 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
 
   async function sendMessage(text) {
     if (!text.trim() || busy) return;
+    if (!refs.subject?.value) {
+      updateComposerState();
+      refs.subject?.focus();
+      return;
+    }
     if (!accessState().allowed) {
       renderAccessGate();
       return;

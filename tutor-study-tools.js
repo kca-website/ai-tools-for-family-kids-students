@@ -37,6 +37,7 @@
       slidesNew: "Νέα παρουσίαση",
       needConnect: "Συνδέσου πρώτα με Puter από το πλαίσιο επάνω.",
       unavailable: "Η λειτουργία δεν είναι διαθέσιμη με την τωρινή ηλικιακή ρύθμιση.",
+      chooseSubject: "Επίλεξε πρώτα μάθημα από τη Ρύθμιση μαθήματος.",
       generatingQuiz: "Δημιουργείται το quiz…",
       generatingSlides: "Δημιουργείται η παρουσίαση…",
       failed: "Δεν μπόρεσα να δημιουργήσω έγκυρο υλικό. Δεν έγινε αυτόματη δεύτερη κλήση, ώστε να μη χρησιμοποιηθεί επιπλέον AI.",
@@ -76,6 +77,7 @@
       slidesNew: "New presentation",
       needConnect: "Connect to Puter first using the box above.",
       unavailable: "This feature is not available with the current age setting.",
+      chooseSubject: "Choose a subject first in Lesson setup.",
       generatingQuiz: "Creating the quiz…",
       generatingSlides: "Creating the presentation…",
       failed: "I couldn't create valid material. No automatic second call was made, so no extra AI usage was consumed.",
@@ -417,6 +419,11 @@
   async function generate(panel, type) {
     if (panel.dataset.busy === "1") return;
     const c = currentContext();
+    if (!c.subjectId) {
+      setStatus(panel, tr("chooseSubject"), true);
+      document.getElementById("tutorSubject")?.focus();
+      return;
+    }
     if (!canUseTutor()) {
       if (selectedProvider() === "puter" && !isSignedIn()) { setStatus(panel, tr("needConnect"), true); document.getElementById("tutorSignIn")?.focus(); }
       else setStatus(panel, tr("unavailable"), true);
@@ -472,6 +479,9 @@
     const q = panel.querySelector('[data-study-tool="quiz"]');
     const s = panel.querySelector('[data-study-tool="slides"]');
     const examQuiz = isHighSchool(c);
+    const subjectReady = !!c.subjectId;
+    if (q) q.disabled = !subjectReady || panel.dataset.busy === "1";
+    if (s) s.disabled = !subjectReady || panel.dataset.busy === "1";
     // The Special Education adapter owns the quiz button while its marker is
     // present. Do not overwrite its simplified 3-question label on rerenders.
     if (q && q.dataset.specialSimpleQuiz !== "1") {

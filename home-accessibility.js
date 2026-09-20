@@ -2,6 +2,8 @@
 (function(){
   "use strict";
 
+  const signLanguageConceptCount = Number(window.AITOOLSKIDS_SITE_META?.signLanguageConceptCount) || 167;
+
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active");
   }
@@ -65,9 +67,9 @@
     if (panel) {
       const title = en ? "🤟 School concepts in Greek Sign Language (GSL)" : "🤟 Έννοιες στην Ελληνική Νοηματική Γλώσσα";
       const text = en
-        ? "167 school concepts organized by subject and grade, with simple explanations, educational visuals and direct official GSL videos from IEP."
-        : "167 σχολικές έννοιες οργανωμένες ανά μάθημα και τάξη, με απλή εξήγηση, εκπαιδευτική εικόνα και απευθείας επίσημο βίντεο ΕΝΓ από το ΙΕΠ.";
-      const cta = en ? "Explore the 167 concepts →" : "Δες τις 167 έννοιες →";
+        ? `${signLanguageConceptCount} school concepts organized by subject and grade, with simple explanations, educational visuals and direct official GSL videos from IEP.`
+        : `${signLanguageConceptCount} σχολικές έννοιες οργανωμένες ανά μάθημα και τάξη, με απλή εξήγηση, εκπαιδευτική εικόνα και απευθείας επίσημο βίντεο ΕΝΓ από το ΙΕΠ.`;
+      const cta = en ? `Explore the ${signLanguageConceptCount} concepts →` : `Δες τις ${signLanguageConceptCount} έννοιες →`;
       const signature = [en, title, text, cta].join("|");
 
       if (panel.dataset.gslSignature !== signature) {

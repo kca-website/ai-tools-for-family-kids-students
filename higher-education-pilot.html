@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Φοιτητής · Higher Education Pilot | AITOOLS4KIDS</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .he-wrap{max-width:1040px;margin:0 auto;padding:28px 18px 56px}
+    .he-hero{padding:24px;border:1px solid #dbe3ee;border-radius:20px;background:#fff}
+    .he-kicker{font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#526273}
+    .he-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+    .he-field{display:grid;gap:6px}
+    .he-field label{font-weight:800}
+    .he-field select,.he-field input{width:100%;min-height:46px;padding:10px 12px;border:1px solid #cfd8e3;border-radius:10px;background:#fff;color:#172033;font:inherit}
+    .he-card{margin-top:18px;padding:18px;border:1px solid #dbe3ee;border-radius:16px;background:#fff}
+    .he-note{padding:12px 14px;border-radius:12px;background:#f7fafc;line-height:1.5}
+    .he-warning{padding:12px 14px;border-radius:12px;background:#fff7ed;color:#8a3b12;line-height:1.5}
+    .he-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .he-tool{padding:14px;border:1px solid #dbe3ee;border-radius:12px;background:#fff}
+    .he-tool h3{margin:0 0 6px;font-size:1rem}
+    .he-tool p{margin:0 0 10px;font-size:.9rem;line-height:1.45}
+    .he-tool a{font-weight:800}
+    .he-meta{font-size:.82rem;color:#5f6c7b}
+    .he-empty{color:#5f6c7b;font-style:italic}
+    .he-legacy{margin-top:10px;font-size:.86rem;color:#5f6c7b}
+    @media(max-width:700px){.he-grid{grid-template-columns:1fr}.he-wrap{padding:18px 12px 42px}.he-hero{padding:18px}}
+  </style>
+</head>
+<body>
+  <main class="he-wrap">
+    <section class="he-hero" aria-labelledby="heTitle">
+      <div class="he-kicker">Higher Education pilot</div>
+      <h1 id="heTitle">Φοιτητής</h1>
+      <p>Διάλεξε ίδρυμα, τμήμα, μάθημα και τι προσπαθείς να κάνεις. Θα δεις ποια εργαλεία ταιριάζουν και πώς να τα χρησιμοποιήσεις χωρίς να παραδώσεις τη σκέψη σου στην AI.</p>
+      <div class="he-warning"><strong>Κανόνας:</strong> η AI εδώ υποστηρίζει κατανόηση, έρευνα, εξάσκηση, οργάνωση και feedback. Δεν προορίζεται για έτοιμη εργασία προς υποβολή.</div>
+    </section>
+
+    <section class="he-card" aria-labelledby="legacyTitle">
+      <h2 id="legacyTitle">Βρες ίδρυμα ή παλιό όνομα</h2>
+      <div class="he-field">
+        <label for="heSearch">Αναζήτηση</label>
+        <input id="heSearch" type="search" autocomplete="off" placeholder="π.χ. ΟΠΑ, Ψυχολογία, ΤΕΙ Κρήτης, ΤΕΙ Αθήνας">
+      </div>
+      <div id="heSearchHint" class="he-legacy" aria-live="polite"></div>
+    </section>
+
+    <section class="he-card" aria-labelledby="flowTitle">
+      <h2 id="flowTitle">Διαδρομή</h2>
+      <div class="he-grid">
+        <div class="he-field">
+          <label for="heInstitution">Ίδρυμα</label>
+          <select id="heInstitution"></select>
+        </div>
+        <div class="he-field">
+          <label for="heDepartment">Τμήμα</label>
+          <select id="heDepartment"></select>
+        </div>
+        <div class="he-field">
+          <label for="heCourse">Μάθημα</label>
+          <select id="heCourse"></select>
+        </div>
+        <div class="he-field">
+          <label for="heTask">Τι θέλεις να κάνεις;</label>
+          <select id="heTask"></select>
+        </div>
+      </div>
+      <div id="heCoverage" class="he-note" style="margin-top:14px"></div>
+    </section>
+
+    <section class="he-card" aria-labelledby="resultTitle">
+      <h2 id="resultTitle">Προτεινόμενα εργαλεία</h2>
+      <div id="heResult" aria-live="polite"></div>
+    </section>
+
+    <section class="he-card">
+      <h2>Τι σημαίνει “pilot”</h2>
+      <p>Τα μαθήματα και οι πηγές προστίθενται μόνο όταν υπάρχει επίσημη τεκμηρίωση. Αν δεν έχουμε πλήρη επίσημο οδηγό, το τμήμα εμφανίζεται ως μερικώς καλυμμένο αντί να συμπληρώνουμε κενά με υποθέσεις.</p>
+    </section>
+  </main>
+
+  <script src="/data.js"></script>
+  <script src="/higher-education-data.js"></script>
+  <script src="/higher-education-pilot.js"></script>
+</body>
+</html>

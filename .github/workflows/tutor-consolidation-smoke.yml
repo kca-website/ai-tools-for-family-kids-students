@@ -32,6 +32,9 @@ jobs:
       - name: Run repository data integrity smoke
         run: node tests/repository-data-integrity-smoke.mjs
 
+      - name: Run Higher Education data smoke
+        run: node tests/higher-education-data-smoke.mjs
+
       - name: Install Playwright and axe-core
         run: |
           npm install --no-save playwright@1.55.0 axe-core@4.10.3
@@ -48,6 +51,9 @@ jobs:
           done
           cat /tmp/aitools4kids-http.log
           exit 1
+
+      - name: Run Higher Education hidden pilot smoke
+        run: node tests/higher-education-pilot-smoke.mjs
 
       - name: Run WCAG 2.2 report-only audit
         run: node tests/wcag-22-audit.mjs

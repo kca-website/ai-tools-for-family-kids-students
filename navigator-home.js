@@ -18,6 +18,10 @@
       specialTitle: "Ειδικά σχολεία",
       specialAge: "Ειδική Εκπαίδευση",
       specialDesc: "Ειδικό Γυμνάσιο, Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ.",
+      higherEdBadge: "Νέο · Δοκιμαστικό",
+      higherEdTitle: "Φοιτητές ΑΕΙ",
+      higherEdDesc: "5 πιλοτικά τμήματα: ΟΠΑ Πληροφορική, ΕΚΠΑ Ψυχολογία, ΠΑΔΑ Μηχανικών Πληροφορικής, ΕΛΜΕΠΑ Ηλεκτρολόγων/Υπολογιστών και Βιολογία Πατρών.",
+      higherEdAction: "Δοκίμασε τη φοιτητική διαδρομή →",
       mapTitle: "🧭 Χάρτης Εξάσκησης",
       mapLead: "Δες πού χρειάζεσαι λίγη παραπάνω εξάσκηση.",
       mapDesc: "Σύντομο τεστ περίπου 2 λεπτών, χωρίς βαθμό.",
@@ -59,6 +63,10 @@
       specialTitle: "Special schools",
       specialAge: "Special Education",
       specialDesc: "Special Gymnasium, Special Lyceum, EN.E.E.GY.-L.",
+      higherEdBadge: "New · Experimental",
+      higherEdTitle: "University students",
+      higherEdDesc: "5 pilot departments: AUEB Informatics, NKUA Psychology, UNIWA Informatics & Computer Engineering, HMU Electrical & Computer Engineering, and Biology at the University of Patras.",
+      higherEdAction: "Try the university pilot →",
       mapTitle: "🧭 Practice Map",
       mapLead: "See where a little more practice could help.",
       mapDesc: "A short check of about 2 minutes, with no grade.",
@@ -188,6 +196,30 @@
     card.querySelector(".zone-card__age").textContent = c.specialAge;
     card.querySelector(".zone-card__desc").textContent = c.specialDesc;
     card.setAttribute("aria-label", `${c.specialTitle}: ${c.specialAge}`);
+    return card;
+  }
+
+  function ensureHigherEducationPilot(){
+    const grid = document.getElementById("zoneGrid");
+    if(!grid) return null;
+    let card = document.getElementById("homeHigherEducationPilot");
+    if(!card){
+      card = document.createElement("a");
+      card.id = "homeHigherEducationPilot";
+      card.className = "home-v8-higher-ed";
+      card.href = "/higher-education-pilot.html";
+      grid.insertAdjacentElement("afterend", card);
+    }
+    const c = currentCopy();
+    card.innerHTML = `
+      <span class="home-v8-higher-ed__icon" aria-hidden="true">🎓</span>
+      <span class="home-v8-higher-ed__body">
+        <span class="home-v8-higher-ed__badge">${c.higherEdBadge}</span>
+        <strong>${c.higherEdTitle}</strong>
+        <small>${c.higherEdDesc}</small>
+      </span>
+      <span class="home-v8-higher-ed__action">${c.higherEdAction}</span>`;
+    card.setAttribute("aria-label", `${c.higherEdBadge}: ${c.higherEdTitle}`);
     return card;
   }
 
@@ -377,6 +409,7 @@
     ensureAccessibilityBadge();
     ensureSpecialSchoolCard();
     ensureMainShell();
+    ensureHigherEducationPilot();
     ensureEngSection();
     document.getElementById("homeV8FooterExtra")?.remove();
     suppressLegacyInjectedBlocks();

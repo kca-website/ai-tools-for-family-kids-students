@@ -10,7 +10,7 @@
     physics:"https://www.minedu.gov.gr/publications/docs2026/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F_%CE%95%CE%91%CE%95_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27.docx",
     pe:"https://www.minedu.gov.gr/publications/docs2026/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97_%CE%91%CE%93%CE%A9%CE%93%CE%97_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95.%CE%91.%CE%95._2026-2027.docx",
     chemistryB:"https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%92_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95.__26-27_.docx",
-    chemistryC:"https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._26-27_.docx".replace('%CE%A3','%CE%A3'),
+    chemistryC:"https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._26-27_.docx",
     civics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9A%CE%A0%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%95.%CE%91.%CE%95._26-27.docx",
     economics:"https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026-2027.pdf"
   };

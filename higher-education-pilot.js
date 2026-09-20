@@ -23,6 +23,9 @@
   const aiOutput = $("heAiOutput");
   const aiGroq = $("heAiGroq");
   const aiPuter = $("heAiPuter");
+  const printActions = $("hePrintActions");
+  const printAi = $("hePrintAi");
+  const printArea = $("hePrintArea");
   let aiAction = "explain";
   let puterLoadPromise = null;
 
@@ -171,25 +174,46 @@
 
     if (!verified) {
       syllabus.innerHTML = `
-        <h3>Ύλη / θεματικές</h3>
-        <div class="he-meta">${escapeHtml(meta)}</div>
-        <div class="he-warning" style="margin-top:10px">
-          <strong>Δεν έχουμε ακόμη επαληθευμένο αναλυτικό περίγραμμα για αυτό το μάθημα.</strong>
-          Για quiz, flashcards ή πλάνο μελέτης πρόσθεσε σημειώσεις/περίγραμμα στο πεδίο της AI. Δεν θα μαντέψουμε ύλη από τον τίτλο του μαθήματος.
-        </div>`;
+        <details>
+          <summary>
+            <span class="he-syllabus-summary">
+              <span>Ύλη / θεματικές</span>
+              <small>Δεν υπάρχει ακόμη επαληθευμένο αναλυτικό περίγραμμα</small>
+            </span>
+            <span class="he-syllabus-arrow" aria-hidden="true">⌄</span>
+          </summary>
+          <div class="he-syllabus-body">
+            <div class="he-meta">${escapeHtml(meta)}</div>
+            <div class="he-warning" style="margin-top:10px">
+              <strong>Δεν έχουμε ακόμη επαληθευμένο αναλυτικό περίγραμμα για αυτό το μάθημα.</strong>
+              Για quiz, flashcards ή πλάνο μελέτης πρόσθεσε σημειώσεις/περίγραμμα στο πεδίο της AI. Δεν θα μαντέψουμε ύλη από τον τίτλο του μαθήματος.
+            </div>
+          </div>
+        </details>`;
       return;
     }
 
-    const sourceYear = course.syllabusSourceAcademicYear ? ` · Περίγραμμα ${course.syllabusSourceAcademicYear}` : "";
+    const sourceYear = course.syllabusSourceAcademicYear ? `Περίγραμμα ${course.syllabusSourceAcademicYear}` : "Επίσημο περίγραμμα";
     const sourceLink = course.syllabusSource
       ? `<a href="${escapeHtml(course.syllabusSource)}" target="_blank" rel="noopener noreferrer">Επίσημη πηγή</a>`
       : "";
+    const countLabel = `${topics.length} επαληθευμένες θεματικές`;
 
     syllabus.innerHTML = `
-      <h3>Επαληθευμένες θεματικές</h3>
-      <div class="he-meta">${escapeHtml(meta)}${escapeHtml(sourceYear)} ${sourceLink}</div>
-      <ul class="he-topic-list">${topics.map((topic) => `<li>${escapeHtml(topic)}</li>`).join("")}</ul>
-      <p class="he-meta"><strong>Source-locked:</strong> η AI επιτρέπεται να δημιουργεί course-specific υλικό μόνο από τις παραπάνω θεματικές και από υλικό που δίνει ο φοιτητής. Δεν αποτελούν δήλωση πλήρους εξεταστέας ύλης.</p>`;
+      <details>
+        <summary>
+          <span class="he-syllabus-summary">
+            <span>Επαληθευμένες θεματικές</span>
+            <small>${escapeHtml(countLabel)} · ${escapeHtml(sourceYear)}</small>
+          </span>
+          <span class="he-syllabus-arrow" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="he-syllabus-body">
+          <div class="he-meta">${escapeHtml(meta)} · ${escapeHtml(sourceYear)} ${sourceLink}</div>
+          <ul class="he-topic-list">${topics.map((topic) => `<li>${escapeHtml(topic)}</li>`).join("")}</ul>
+          <p class="he-meta"><strong>Source-locked:</strong> η AI επιτρέπεται να δημιουργεί course-specific υλικό μόνο από τις παραπάνω θεματικές και από υλικό που δίνει ο φοιτητής. Δεν αποτελούν δήλωση πλήρους εξεταστέας ύλης.</p>
+        </div>
+      </details>`;
   }
 
   function render() {
@@ -481,9 +505,44 @@
     aiStatus.textContent = message || "";
   }
 
+  function printContext() {
+    const { institution, department, course } = universityContext();
+    const action = ACTIONS[aiAction] || ACTIONS.explain;
+    return {
+      institution: institution?.nameEl || "",
+      department: department?.departmentEl || "",
+      year: course?.year || "",
+      semester: course?.semester || "",
+      course: `${course?.code ? course.code + " · " : ""}${course?.titleEl || ""}`,
+      action: action.label
+    };
+  }
+
+  function preparePrintArea() {
+    const ctx = printContext();
+    printArea.innerHTML = `
+      <h1>${escapeHtml(ctx.action)} · ${escapeHtml(ctx.course)}</h1>
+      <div class="he-print-meta">
+        ${escapeHtml(ctx.institution)}<br>
+        ${escapeHtml(ctx.department)}<br>
+        ${ctx.year ? escapeHtml(ctx.year + "ο έτος") : ""}${ctx.year && ctx.semester ? " · " : ""}${ctx.semester ? escapeHtml(ctx.semester + "ο εξάμηνο") : ""}
+      </div>
+      <div class="he-print-content">${aiOutput.innerHTML}</div>
+      <p class="he-print-meta" style="margin-top:18pt">AITOOLS4KIDS · Εκπαιδευτικό υλικό από AI. Έλεγξε το περιεχόμενο και τις πηγές πριν το χρησιμοποιήσεις.</p>`;
+  }
+
+  function printCurrentAiOutput() {
+    if (!aiOutput.classList.contains("visible") || !aiOutput.textContent.trim()) return;
+    preparePrintArea();
+    document.body.classList.add("he-printing");
+    window.print();
+    setTimeout(() => document.body.classList.remove("he-printing"), 0);
+  }
+
   function showAiOutput(text, provider) {
     aiOutput.innerHTML = renderMarkdown(String(text || "").trim());
     aiOutput.classList.add("visible");
+    printActions.classList.add("visible");
     aiStatus.textContent = `Έτοιμο · ${provider}`;
     aiOutput.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
@@ -493,6 +552,7 @@
     if (!scope.ok) {
       aiStatus.textContent = scope.message;
       aiOutput.classList.remove("visible");
+      printActions.classList.remove("visible");
       return;
     }
     setAiBusy(true, "Δημιουργία…");
@@ -578,6 +638,8 @@
 
   aiGroq.addEventListener("click", generateInlineGroq);
   aiPuter.addEventListener("click", generateInlinePuter);
+  printAi.addEventListener("click", printCurrentAiOutput);
+  window.addEventListener("afterprint", () => document.body.classList.remove("he-printing"));
 
   institutionSelect.addEventListener("change", populateDepartments);
   departmentSelect.addEventListener("change", populateYears);

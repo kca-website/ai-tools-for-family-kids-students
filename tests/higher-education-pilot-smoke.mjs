@@ -84,6 +84,13 @@ try {
 
   // Verified Biostatistics course passes official topics to AI and rich output renders correctly.
   await page.selectOption('#heCourse', '1');
+  assert.equal(await page.locator('#heToolsDetails').getAttribute('open'), null, 'specialized tools must be collapsed by default');
+  assert.match(await page.locator('#heToolsSummary').innerText(), /Μαθηματικά \/ Στατιστική/i);
+  await page.locator('#heToolsDetails > summary').click();
+  assert.match(await page.locator('#heResult').innerText(), /Wolfram Alpha/);
+  assert.match(await page.locator('#heResult').innerText(), /Γιατί εδώ:/);
+  await page.locator('#heToolsDetails > summary').click();
+  assert.equal(await page.locator('#heToolsDetails').getAttribute('open'), null, 'specialized tools did not collapse');
   assert.equal(await page.locator('#heSyllabus details').getAttribute('open'), null, 'course-change syllabus must remain collapsed by default');
   await page.locator('#heSyllabus summary').click();
   assert.match(await page.locator('#heSyllabus').innerText(), /Συσχέτιση και παλινδρόμηση/i);
@@ -128,6 +135,13 @@ try {
   assert.match(await page.locator('#heSyllabus').innerText(), /Συναπτική διαβίβαση/i);
   assert.match(await page.locator('#heSyllabus').innerText(), /Νευροαπεικονιστικές τεχνικές/i);
   assert.match(await page.locator('#heSyllabus').innerText(), /Source-locked/i);
+
+  await page.locator('[data-he-action="research"]').click();
+  assert.match(await page.locator('#heToolsSummary').innerText(), /Βιοεπιστήμες/i);
+  await page.locator('#heToolsDetails > summary').click();
+  assert.match(await page.locator('#heResult').innerText(), /Elicit/);
+  assert.match(await page.locator('#heResult').innerText(), /Scite/);
+  await page.locator('#heToolsDetails > summary').click();
 
   await page.locator('[data-he-action="quiz"]').click();
   await page.locator('#heAiInput').fill('');
@@ -192,6 +206,20 @@ try {
   assert.match(lastAiPayload.system, /Χρησιμοποίησε μόνο το υλικό που έδωσε ο φοιτητής/i);
   assert.match(lastAiPayload.prompt, /Δευτεροστόμια, Εχινόδερμα, Χορδωτά/);
   assert.match(lastAiPayload.prompt, /course-only-current-program/);
+
+  // Computing courses should prioritize coding-specific tools.
+  await page.locator('#heSearch').fill('ΟΠΑ Πληροφορική');
+  await page.waitForTimeout(80);
+  assert.equal(await page.locator('#heDepartment').inputValue(), 'aueb-cs');
+  const progOption = page.locator('#heCourse option').filter({ hasText: 'Εισαγωγή στον Προγραμματισμό Υπολογιστών' });
+  const progValue = await progOption.getAttribute('value');
+  assert.ok(progValue, 'AUEB programming course missing');
+  await page.selectOption('#heCourse', progValue);
+  await page.locator('[data-he-action="feedback"]').click();
+  assert.match(await page.locator('#heToolsSummary').innerText(), /Πληροφορική \/ Προγραμματισμός/i);
+  await page.locator('#heToolsDetails > summary').click();
+  assert.match(await page.locator('#heResult').innerText(), /GitHub Copilot/);
+  await page.locator('#heToolsDetails > summary').click();
 
   const storage = await page.evaluate(() => ({
     local: Object.keys(localStorage),

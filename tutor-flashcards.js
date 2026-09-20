@@ -29,6 +29,7 @@
       regenerate: "Νέο σετ · χρησιμοποιεί ξανά AI",
       needConnect: "Συνδέσου πρώτα με Puter από το πλαίσιο επάνω.",
       unavailable: "Οι flashcards δεν είναι διαθέσιμες με την τωρινή ηλικιακή ρύθμιση.",
+      chooseSubject: "Επίλεξε πρώτα μάθημα από τη Ρύθμιση μαθήματος.",
       generating: "Δημιουργούνται οι κάρτες…",
       failed: "Δεν μπόρεσα να δημιουργήσω σωστό σετ καρτών. Δεν έγινε αυτόματη δεύτερη προσπάθεια, ώστε να μη χρησιμοποιηθεί επιπλέον AI.",
       question: "Ερώτηση",
@@ -56,6 +57,7 @@
       regenerate: "New set · uses AI again",
       needConnect: "Connect to Puter first using the box above.",
       unavailable: "Flashcards are not available with the current age setting.",
+      chooseSubject: "Choose a subject first in Lesson setup.",
       generating: "Creating cards…",
       failed: "I couldn't create a valid card set. No automatic second attempt was made, so no additional AI usage was consumed.",
       question: "Question",
@@ -308,6 +310,11 @@
   async function generate(panel) {
     if (panel.dataset.busy === "1") return;
     const c = currentContext();
+    if (!c.subjectId) {
+      setStatus(panel, tr("chooseSubject"), true);
+      document.getElementById("tutorSubject")?.focus();
+      return;
+    }
     if (!canUseTutor()) {
       if (selectedProvider() === "puter" && !isSignedIn()) { setStatus(panel, tr("needConnect"), true); document.getElementById("tutorSignIn")?.focus(); }
       else setStatus(panel, tr("unavailable"), true);
@@ -347,6 +354,7 @@
     const cached = getCached(c);
     const hasDeck = !!panel.querySelector(".tutor-flashcards__deck");
     btn.textContent = hasDeck ? tr("regenerate") : cached ? tr("openSaved") : c.conversation?.hasExchange ? tr("generateConversation") : tr("generate");
+    btn.disabled = !c.subjectId || panel.dataset.busy === "1";
     updatePanelCopy(panel);
   }
 

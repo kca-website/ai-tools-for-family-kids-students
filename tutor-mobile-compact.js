@@ -377,6 +377,8 @@
     const age = document.getElementById("tutorAge");
     const consent = document.getElementById("tutorConsent");
     const access = document.getElementById("tutorAccessGate");
+    const subject = document.getElementById("tutorSubject");
+    if (subject && !subject.value) return false;
     if (age && !age.value) return false;
     if (age?.value === "13-14" && consent && !consent.checked) return false;
     if (access && !access.classList.contains("tutor-access--good")) return false;

@@ -6,6 +6,8 @@
 (function(){
   "use strict";
 
+  const signLanguageConceptCount = Number(window.AITOOLSKIDS_SITE_META?.signLanguageConceptCount) || 167;
+
   function isHome(){
     return location.pathname === "/" || location.pathname === "";
   }
@@ -51,8 +53,8 @@
         ["✨","Να δημιουργήσω κάτι με AI","Ιδέες και εργαλεία για δημιουργική χρήση χωρίς έτοιμη εργασία","/dimiourgiko-ai-gia-mathites.html"]
       ],
       engTitle: "Έννοιες στην Ελληνική Νοηματική",
-      engDesc: "153 σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ",
-      engLink: "Δες τις 153 έννοιες →",
+      engDesc: `${signLanguageConceptCount} σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ`,
+      engLink: `Δες τις ${signLanguageConceptCount} έννοιες →`,
       curriculumPrefix: "Δες και:",
       curriculumLabel: "Ελληνικός Χάρτης Ύλης 2026-27",
       methodology: "Πώς επιλέγουμε & ελέγχουμε τα εργαλεία",
@@ -96,8 +98,8 @@
         ["✨","Create something with AI","Creative tools and ideas without ready-made schoolwork","/en/creative-ai-for-students.html"]
       ],
       engTitle: "Greek Sign Language concepts",
-      engDesc: "153 school concepts with a simple explanation and official GSL video",
-      engLink: "See the 153 concepts →",
+      engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,
+      engLink: `See the ${signLanguageConceptCount} concepts →`,
       curriculumPrefix: "See also:",
       curriculumLabel: "Greek Curriculum Map 2026-27",
       methodology: "How we choose and review tools",

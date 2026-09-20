@@ -42,6 +42,28 @@ assert.equal(unverified.topics, undefined, 'unverified course must not carry pse
 
 
 
+const auebCs = he.departments['aueb-cs'];
+assert.equal(auebCs.curriculumDisplay, 'year-semester-course-topic');
+assert.ok(auebCs.courses.filter((course) => course.semester === 1).length >= 5);
+assert.ok(auebCs.courses.some((course) => course.code === '3125' && course.topicsVerified === true));
+assert.ok(auebCs.courses.some((course) => course.code === '3135' && course.topics?.some((topic) => /Υπολογισιμότητα/.test(topic))));
+assert.ok(auebCs.courses.some((course) => course.code === '3531' && course.topics?.some((topic) => /αλγόριθμος A\*/.test(topic))));
+
+const nkuaPsych = he.departments['nkua-psychology'];
+assert.ok(nkuaPsych.courses.some((course) => course.code === 'PSY01' && course.topicsVerified === true));
+assert.ok(nkuaPsych.courses.some((course) => course.code === 'PSY32' && course.topics?.includes('Προσοχή')));
+assert.ok(nkuaPsych.courses.some((course) => course.code === 'PSY05' && course.topics?.includes('Λήψη αποφάσεων')));
+
+const uniwaIce = he.departments['uniwa-ice'];
+assert.ok(uniwaIce.courses.some((course) => course.code === 'ICE-5003' && course.topicsVerified === true));
+assert.ok(uniwaIce.courses.some((course) => course.code === 'ICE-6004' && course.ects === 5));
+
+const hmuEce = he.departments['hmu-ece'];
+assert.equal(hmuEce.courses.filter((course) => course.semester === 1).length, 6);
+assert.ok(hmuEce.courses.some((course) => course.code === '1.001' && course.topics?.some((topic) => /σειρές Taylor/.test(topic))));
+assert.ok(hmuEce.courses.some((course) => course.code === '1.002' && course.topics?.some((topic) => /Ιδιοτιμές/.test(topic))));
+assert.ok(hmuEce.courses.some((course) => course.code === '1.004' && course.topicsVerified === true));
+
 assert.equal(he.meta.status, 'pilot');
 assert.match(he.meta.policyEl, /δεν δημιουργεί έτοιμη εργασία/i);
 
@@ -79,16 +101,28 @@ for (const [departmentId, department] of Object.entries(he.departments)) {
   assert.ok(Array.isArray(department.sources) && department.sources.length > 0, `${departmentId} needs official sources`);
 
   const courseKeys = new Set();
+  let verifiedCount = 0;
   for (const course of department.courses || []) {
     assert.ok(course.titleEl, `${departmentId} course missing title`);
     const key = `${course.code || ''}|${course.semester ?? ''}|${course.titleEl}`;
     assert.ok(!courseKeys.has(key), `${departmentId} duplicate course ${key}`);
     courseKeys.add(key);
     assert.ok(Array.isArray(course.tasks) && course.tasks.length > 0, `${departmentId}/${course.titleEl} has no task mapping`);
+    if (Array.isArray(course.topics) && course.topics.length) {
+      assert.equal(course.topicsVerified, true, `${departmentId}/${course.titleEl} has topics without topicsVerified`);
+      assert.ok(course.syllabusSource, `${departmentId}/${course.titleEl} verified topics need an official syllabusSource`);
+      assert.ok(course.syllabusStatus, `${departmentId}/${course.titleEl} verified topics need syllabusStatus`);
+    }
+    if (course.topicsVerified === true) {
+      verifiedCount += 1;
+      assert.ok(Array.isArray(course.topics) && course.topics.length > 0, `${departmentId}/${course.titleEl} topicsVerified without topics`);
+      assert.match(course.syllabusSource, /^https:\/\//, `${departmentId}/${course.titleEl} syllabusSource must be absolute`);
+    }
     for (const taskId of course.tasks) {
       assert.ok(he.taskTypes[taskId], `${departmentId}/${course.titleEl} references unknown task ${taskId}`);
     }
   }
+  assert.ok(verifiedCount >= 1, `${departmentId} must have at least one source-locked verified course`);
 }
 
 for (const institution of Object.values(he.institutions)) {

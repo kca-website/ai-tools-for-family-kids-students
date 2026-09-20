@@ -113,24 +113,133 @@
         departmentEn: "Department of Informatics",
         degreeLevel: 6,
         nominalSemesters: 8,
-        coverageStatus: "pilot-verified-core",
+        coverageStatus: "pilot-structured",
         sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
+        currentAcademicYearSource: "https://www.dept.aueb.gr/el/cs/courses",
+        notesEl: "Η δομή εξαμήνων βασίζεται στην επίσημη τρέχουσα σελίδα μαθημάτων του Τμήματος. Αναλυτικές θεματικές εμφανίζονται μόνο σε μαθήματα με επίσημη σελίδα περιεχομένου που έχει αντιστοιχιστεί.",
         sources: [
           "https://www.dept.aueb.gr/el/cs/courses",
+          "https://www.dept.aueb.gr/el/cs/studiesguide",
           "https://www.dept.aueb.gr/en/cs/content/general-information"
         ],
         courses: [
-          { code: null, semester: 1, titleEl: "Εισαγωγή στον Προγραμματισμό Υπολογιστών", tasks: ["understand","coding","practice"] },
-          { code: null, semester: 1, titleEl: "Εισαγωγή στην Επιστήμη των Υπολογιστών", tasks: ["understand","notes","practice"] },
-          { code: null, semester: 1, titleEl: "Διακριτά Μαθηματικά", tasks: ["understand","practice","calculations"] },
-          { code: null, semester: 2, titleEl: "Προγραμματισμός Υπολογιστών με Java", tasks: ["coding","practice","feedback"] },
-          { code: null, semester: 3, titleEl: "Δομές Δεδομένων", tasks: ["understand","coding","practice"] },
-          { code: null, semester: 4, titleEl: "Αλγόριθμοι", tasks: ["understand","coding","practice"] },
-          { code: null, semester: 4, titleEl: "Βάσεις Δεδομένων", tasks: ["understand","coding","practice"] },
-          { code: null, semester: 5, titleEl: "Τεχνητή Νοημοσύνη", tasks: ["understand","papers","coding","research"] },
-          { code: null, semester: 6, titleEl: "Μηχανική Μάθηση", tasks: ["understand","papers","coding","calculations"] },
-          { code: null, semester: 8, titleEl: "Αλληλεπίδραση Ανθρώπου-Υπολογιστή", tasks: ["understand","research","papers","feedback"] },
-        ],
+          {
+            code: "3125", semester: 1, year: 1, ects: 6, required: true,
+            titleEl: "Εισαγωγή στον Προγραμματισμό Υπολογιστών",
+            tasks: ["understand","coding","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.dept.aueb.gr/el/cs/courses/3125",
+            syllabusSourceAcademicYear: "current",
+            topics: [
+              "Έννοια προγράμματος, μεταβλητές, τύποι, εκφράσεις και αριθμητικοί υπολογισμοί",
+              "Δομές ελέγχου και επανάληψης στην Python",
+              "Είσοδος και έξοδος δεδομένων",
+              "Εντοπισμός και άρση σφαλμάτων",
+              "Συναρτήσεις και μέθοδοι",
+              "Έννοια αλγορίθμου και αρχές δομημένου προγραμματισμού",
+              "Αλφαριθμητικά, λίστες και πίνακες",
+              "Αλγόριθμοι αναζήτησης και ταξινόμησης",
+              "Αρχεία δεδομένων",
+              "Αναδρομή και αναδρομικές συναρτήσεις",
+              "Βασικές έννοιες συναρτησιακού και αντικειμενοστρεφούς προγραμματισμού"
+            ]
+          },
+          {
+            code: "3135", semester: 1, year: 1, ects: 6, required: true,
+            titleEl: "Εισαγωγή στην Επιστήμη των Υπολογιστών",
+            tasks: ["understand","notes","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.dept.aueb.gr/el/cs/courses/3135",
+            syllabusSourceAcademicYear: "current",
+            topics: [
+              "Αλγόριθμοι και αρχές προγραμματισμού",
+              "Δομές δεδομένων: πίνακες, λίστες, στοίβες και δέντρα",
+              "Υπολογισιμότητα και πολυπλοκότητα - κλάσεις P και NP",
+              "Αρχιτεκτονική υπολογιστών",
+              "Γλώσσες προγραμματισμού και μεταγλωττιστές",
+              "Λειτουργικά συστήματα και χρονοπρογραμματισμός",
+              "Συστήματα αρχείων και βάσεις δεδομένων",
+              "Δίκτυα υπολογιστών και Διαδίκτυο"
+            ]
+          },
+          { code: null, semester: 1, year: 1, titleEl: "Εισαγωγή στην Οικονομική Επιστήμη", tasks: ["understand","notes","practice"] },
+          { code: null, semester: 1, year: 1, titleEl: "Διακριτά Μαθηματικά", tasks: ["understand","practice","calculations"] },
+          { code: null, semester: 1, year: 1, titleEl: "Μαθηματικά Ι", tasks: ["understand","practice","calculations"] },
+
+          { code: null, semester: 2, year: 1, titleEl: "Σχεδίαση Ψηφιακών Συστημάτων", tasks: ["understand","practice","calculations"] },
+          { code: null, semester: 2, year: 1, titleEl: "Προγραμματισμός Υπολογιστών με Java", tasks: ["coding","practice","feedback"] },
+          { code: null, semester: 2, year: 1, titleEl: "Μαθηματικά ΙΙ", tasks: ["understand","practice","calculations"] },
+          { code: null, semester: 2, year: 1, titleEl: "Πιθανότητες", tasks: ["understand","practice","calculations"] },
+          { code: null, semester: 2, year: 1, titleEl: "Εισαγωγή στη Διοίκηση Επιχειρήσεων", tasks: ["understand","notes","practice"] },
+
+          { code: null, semester: 3, year: 2, titleEl: "Δομές Δεδομένων", tasks: ["understand","coding","practice"] },
+          { code: null, semester: 3, year: 2, titleEl: "Οργάνωση Συστημάτων Υπολογιστών", tasks: ["understand","practice"] },
+          { code: null, semester: 3, year: 2, titleEl: "Προγραμματισμός Υπολογιστών με C++", tasks: ["coding","practice","feedback"] },
+          { code: null, semester: 3, year: 2, titleEl: "Υπολογιστικά Μαθηματικά", tasks: ["understand","practice","calculations"] },
+
+          { code: null, semester: 4, year: 2, titleEl: "Αλγόριθμοι", tasks: ["understand","coding","practice"] },
+          { code: null, semester: 4, year: 2, titleEl: "Αυτόματα και Πολυπλοκότητα", tasks: ["understand","practice","calculations"] },
+          { code: null, semester: 4, year: 2, titleEl: "Βάσεις Δεδομένων", tasks: ["understand","coding","practice"] },
+          { code: null, semester: 4, year: 2, titleEl: "Λειτουργικά Συστήματα", tasks: ["understand","coding","practice"] },
+
+          { code: null, semester: 5, year: 3, titleEl: "Τεχνολογία Λογισμικού", tasks: ["understand","coding","feedback"] },
+          { code: null, semester: 5, year: 3, titleEl: "Δίκτυα Επικοινωνιών", tasks: ["understand","practice"] },
+          { code: null, semester: 5, year: 3, titleEl: "Λογική", tasks: ["understand","practice"] },
+          { code: null, semester: 5, year: 3, titleEl: "Στατιστική στην Πληροφορική", tasks: ["understand","calculations","practice"] },
+          {
+            code: "3531", semester: 5, year: 3, ects: 7, required: false,
+            titleEl: "Τεχνητή Νοημοσύνη",
+            tasks: ["understand","papers","coding","research"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page",
+            syllabusSource: "https://www.dept.aueb.gr/el/cs/courses/3531",
+            syllabusSourceAcademicYear: "current",
+            topics: [
+              "Εισαγωγή στην Τεχνητή Νοημοσύνη και δοκιμασία Turing",
+              "Επίλυση προβλημάτων μέσω αναζήτησης",
+              "Ευρετικές και αλγόριθμος A*",
+              "Τοπική αναζήτηση, beam search και προσομοιωμένη ανόπτηση",
+              "Γενετικοί αλγόριθμοι, MiniMax και κλάδεμα α-β",
+              "Παράσταση γνώσεων και συλλογιστική με λογική",
+              "Σημασιολογικά δίκτυα, πλαίσια και οντολογίες",
+              "Έμπειρα συστήματα",
+              "Μηχανική μάθηση: k-NN, k-means, Bayes, δέντρα και Random Forest",
+              "Γραμμική και λογιστική παλινδρόμηση, Perceptron και MLPs",
+              "Επεξεργασία φυσικής γλώσσας και συντακτική ανάλυση"
+            ]
+          },
+
+          { code: null, semester: 6, year: 3, titleEl: "Κατανεμημένα Συστήματα", tasks: ["understand","coding","practice"] },
+          { code: null, semester: 6, year: 3, titleEl: "Ανάλυση και Σχεδίαση Πληροφοριακών Συστημάτων", tasks: ["understand","research","feedback"] },
+          { code: null, semester: 6, year: 3, titleEl: "Κυβερνοασφάλεια", tasks: ["understand","research","practice"] },
+          { code: null, semester: 6, year: 3, titleEl: "Δίκτυα Υπολογιστών", tasks: ["understand","practice"] },
+          { code: null, semester: 6, year: 3, titleEl: "Επαλήθευση, Επικύρωση και Συντήρηση Λογισμικού", tasks: ["understand","coding","feedback"] },
+          { code: null, semester: 6, year: 3, titleEl: "Θεωρία και Υποδείγματα Βελτιστοποίησης", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 6, year: 3, titleEl: "Συστήματα Διαχείρισης και Ανάλυσης Δεδομένων", tasks: ["understand","coding","research"] },
+
+          { code: null, semester: 7, year: 4, titleEl: "Ασφάλεια Δικτύων", tasks: ["understand","research","practice"] },
+          { code: null, semester: 7, year: 4, titleEl: "Ασύρματα Δίκτυα και Κινητές Επικοινωνίες", tasks: ["understand","research"] },
+          { code: null, semester: 7, year: 4, titleEl: "Γραφικά Υπολογιστών", tasks: ["understand","coding","practice"] },
+          { code: null, semester: 7, year: 4, titleEl: "Ειδικά Θέματα Αλγορίθμων", tasks: ["understand","coding","practice"] },
+          { code: null, semester: 7, year: 4, titleEl: "Εφαρμοσμένες Πιθανότητες και Πιθανοτικοί Αλγόριθμοι", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 7, year: 4, titleEl: "Μέθοδοι Στατιστικής και Μηχανικής Μάθησης", tasks: ["understand","calculations","coding"] },
+          { code: null, semester: 7, year: 4, titleEl: "Μεταγλωττιστές", tasks: ["understand","coding","practice"] },
+          { code: null, semester: 7, year: 4, titleEl: "Μηχανική Μάθηση", tasks: ["understand","papers","coding","calculations"] },
+          { code: null, semester: 7, year: 4, titleEl: "Τεχνολογία Πολυμέσων", tasks: ["understand","coding","feedback"] },
+          { code: null, semester: 7, year: 4, titleEl: "Τεχνολογίες και Προγραμματισμός Εφαρμογών στον Ιστό", tasks: ["coding","practice","feedback"] },
+
+          { code: null, semester: 8, year: 4, titleEl: "Αλληλεπίδραση Ανθρώπου-Υπολογιστή", tasks: ["understand","research","papers","feedback"] },
+          { code: null, semester: 8, year: 4, titleEl: "Ανάλυση Δεδομένων", tasks: ["understand","calculations","research"] },
+          { code: null, semester: 8, year: 4, titleEl: "Αρχιτεκτονική Υπολογιστών", tasks: ["understand","practice"] },
+          { code: null, semester: 8, year: 4, titleEl: "Εξόρυξη Γνώσης", tasks: ["understand","coding","research"] },
+          { code: null, semester: 8, year: 4, titleEl: "Θεωρία Πληροφορίας", tasks: ["understand","calculations","practice"] },
+          { code: null, semester: 8, year: 4, titleEl: "Συστήματα Ανάκτησης Πληροφοριών", tasks: ["understand","coding","research"] },
+          { code: null, semester: 8, year: 4, titleEl: "Πτυχιακή Εργασία", tasks: ["research","papers","feedback","notes"] },
+          { code: null, semester: 8, year: 4, titleEl: "Πρακτική Άσκηση", tasks: ["notes","feedback","research"] }
+        ]
       },
 
       "nkua-psychology": {
@@ -141,21 +250,111 @@
         degreeLevel: 6,
         nominalSemesters: 8,
         ectsTotal: 240,
-        coverageStatus: "pilot-partial",
+        coverageStatus: "pilot-structured",
         sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
+        studyGuideSource: "https://en.psych.uoa.gr/fileadmin/depts/psych.uoa.gr/www/uploads/study/undergraduate/student_handbook/EKPA_Psych_StudyGuide_En.pdf",
+        studyGuideAcademicYear: "2025-2026",
+        currentScheduleSource: "https://www.psych.uoa.gr/class_schedule",
+        notesEl: "Ο επίσημος οδηγός 2025-2026 παρέχει αναλυτικά course descriptions. Το χειμερινό πρόγραμμα διδασκαλίας 2026-2027 είναι δημοσιευμένο χωριστά. Η AI χρησιμοποιεί μόνο θεματικές από επίσημο course description ή υλικό που δίνει ο φοιτητής.",
         sources: [
           "https://www.psych.uoa.gr/undergraduate",
           "https://www.psych.uoa.gr/student_handbook",
           "https://www.psych.uoa.gr/class_schedule"
         ],
-        notesEl: "Το πρόγραμμα περιλαμβάνει υποχρεωτικά και κατ’ επιλογή μαθήματα, πρακτική και προαιρετική πτυχιακή/εναλλακτικές επιλογές. Η πλήρης καταχώριση μαθημάτων θα ακολουθήσει από τον επίσημο Οδηγό Σπουδών.",
         courses: [
-          { code: "ΨΧ01", semester: 1, titleEl: "Αναπτυξιακή Ψυχολογία Ι", tasks: ["understand","notes","papers","practice"] },
-          { code: "ΨΧ76", semester: null, titleEl: "Πρόληψη και Παρέμβαση στην Οικογένεια και στο Σχολείο", tasks: ["understand","papers","research","feedback"] },
-          { code: null, semester: null, titleEl: "Εισαγωγή στην Ψυχολογία", tasks: ["understand","notes","practice"] },
-          { code: null, semester: null, titleEl: "Ιστορία της Ψυχολογίας", tasks: ["understand","research","papers"] },
-          { code: null, semester: null, titleEl: "Γνωστική Ψυχολογία Ι", tasks: ["understand","papers","practice"] },
-        ],
+          {
+            code: "PSY01", semester: 1, year: 1, ects: 5, required: true,
+            titleEl: "Αναπτυξιακή Ψυχολογία Ι",
+            tasks: ["understand","notes","papers","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-handbook",
+            syllabusSource: "https://en.psych.uoa.gr/fileadmin/depts/psych.uoa.gr/www/uploads/study/undergraduate/student_handbook/EKPA_Psych_StudyGuide_En.pdf",
+            syllabusSourceAcademicYear: "2025-2026",
+            topics: [
+              "Αντικείμενο και θεωρίες της αναπτυξιακής ψυχολογίας",
+              "Κληρονομικότητα και περιβάλλον στην ανάπτυξη",
+              "Ανάπτυξη νεογνού και σταθερότητα",
+              "Κινητική και αισθητηριακή ανάπτυξη στη βρεφική ηλικία",
+              "Γνωστική ανάπτυξη στη βρεφική ηλικία: Piaget και επεξεργασία πληροφοριών",
+              "Γλωσσική ανάπτυξη στη βρεφική ηλικία",
+              "Κοινωνική ανάπτυξη, προσωπικότητα και ατομικές διαφορές στη βρεφική ηλικία",
+              "Σωματική, γνωστική και γλωσσική ανάπτυξη στην προσχολική ηλικία",
+              "Κοινωνική ανάπτυξη, προσωπικότητα, φίλοι και οικογένεια στην προσχολική ηλικία"
+            ]
+          },
+          {
+            code: "PSY32", semester: 1, year: 1, ects: 5, required: true,
+            titleEl: "Γνωστική Ψυχολογία Ι",
+            tasks: ["understand","papers","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-handbook",
+            syllabusSource: "https://en.psych.uoa.gr/fileadmin/depts/psych.uoa.gr/www/uploads/study/undergraduate/student_handbook/EKPA_Psych_StudyGuide_En.pdf",
+            syllabusSourceAcademicYear: "2025-2026",
+            topics: [
+              "Ορισμός και ιστορία της Γνωστικής Ψυχολογίας",
+              "Ερευνητικές μέθοδοι: πειραματικές, νευροαπεικονιστικές, προσομοιώσεις και AI",
+              "Βιολογικές βάσεις της νόησης",
+              "Θεωρία επεξεργασίας πληροφοριών",
+              "Νοητικές αναπαραστάσεις",
+              "Γνωστική Ψυχολογία και Γνωσιακή Επιστήμη",
+              "Προσοχή",
+              "Αντίληψη",
+              "Μνήμη και μάθηση"
+            ]
+          },
+          {
+            code: "PSY02", semester: 2, year: 1, ects: 5, required: true,
+            titleEl: "Αναπτυξιακή Ψυχολογία ΙΙ",
+            tasks: ["understand","notes","papers","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-handbook",
+            syllabusSource: "https://en.psych.uoa.gr/fileadmin/depts/psych.uoa.gr/www/uploads/study/undergraduate/student_handbook/EKPA_Psych_StudyGuide_En.pdf",
+            syllabusSourceAcademicYear: "2025-2026",
+            topics: [
+              "Γνωστική ανάπτυξη στην προσχολική ηλικία: Piaget, Vygotsky και επεξεργασία πληροφοριών",
+              "Γλώσσα και μάθηση",
+              "Κοινωνική ανάπτυξη και προσωπικότητα",
+              "Ηθική ανάπτυξη και επιθετικότητα",
+              "Σωματική και γνωστική ανάπτυξη στη σχολική ηλικία",
+              "Νοημοσύνη και γλωσσική ανάπτυξη",
+              "Κοινωνική ανάπτυξη στη σχολική ηλικία",
+              "Σωματική και γνωστική ανάπτυξη στην εφηβεία",
+              "Εφηβικός εγωκεντρισμός και ανάληψη κινδύνου",
+              "Ταυτότητα, ψυχολογικές διαταραχές και ψυχοσεξουαλική ταυτότητα στην εφηβεία"
+            ]
+          },
+          {
+            code: "PSY05", semester: 2, year: 1, ects: 5, required: true,
+            titleEl: "Γνωστική Ψυχολογία ΙΙ",
+            tasks: ["understand","papers","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-handbook",
+            syllabusSource: "https://en.psych.uoa.gr/fileadmin/depts/psych.uoa.gr/www/uploads/study/undergraduate/student_handbook/EKPA_Psych_StudyGuide_En.pdf",
+            syllabusSourceAcademicYear: "2025-2026",
+            topics: [
+              "Ορισμός και φύση της σκέψης",
+              "Μεθοδολογικά ζητήματα στη μελέτη της σκέψης",
+              "Επίλυση προβλημάτων",
+              "Συλλογιστική",
+              "Αναλογική σκέψη",
+              "Δημιουργικότητα",
+              "Λήψη αποφάσεων",
+              "Γλώσσα",
+              "Μεταγνωστικές διεργασίες",
+              "Γνωστική ανάπτυξη",
+              "Συνείδηση",
+              "Νόηση και συναισθήματα"
+            ]
+          },
+          { code: "PSY11", semester: 1, year: 1, ects: 5, required: true, titleEl: "Κοινωνική Ψυχολογία Ι", tasks: ["understand","notes","papers","practice"] },
+          { code: "PSY27", semester: 1, year: 1, ects: 5, required: true, titleEl: "Βιολογικές Βάσεις της Συμπεριφοράς", tasks: ["understand","notes","papers","practice"] },
+          { code: "PSY12", semester: 2, year: 1, ects: 5, required: true, titleEl: "Κοινωνική Ψυχολογία ΙΙ", tasks: ["understand","notes","papers","practice"] },
+          { code: "PSY44", semester: 2, year: 1, ects: 5, required: true, titleEl: "Συμβουλευτική Ψυχολογία", tasks: ["understand","papers","feedback"] },
+          { code: "PSY61", semester: 2, year: 1, ects: 5, required: true, titleEl: "Μέθοδοι Έρευνας στην Ψυχολογία", tasks: ["understand","research","practice","papers"] },
+          { code: "PSY38", semester: null, year: null, ects: 4, required: false, titleEl: "Ιστορία της Ψυχολογίας", tasks: ["understand","research","papers"] },
+          { code: "PSY76", semester: null, year: null, ects: 4, required: false, titleEl: "Πρόληψη και Παρέμβαση στην Οικογένεια και στο Σχολείο", tasks: ["understand","papers","research","feedback"] }
+        ]
       },
 
       "uniwa-ice": {
@@ -165,23 +364,53 @@
         departmentEn: "Department of Informatics and Computer Engineering",
         degreeLevel: 7,
         nominalSemesters: 10,
-        coverageStatus: "pilot-legacy-mapping",
-        sourceConfidence: "medium-high",
+        coverageStatus: "pilot-source-locked",
+        sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
         legacyDepartmentAliases: [
           "Τμήμα Μηχανικών Πληροφορικής ΤΕΙ Αθήνας",
           "Τμήμα Μηχανικών Ηλεκτρονικών Υπολογιστικών Συστημάτων ΑΕΙ Πειραιά ΤΤ"
         ],
+        notesEl: "Τα legacy ονόματα χρησιμοποιούνται μόνο για αναζήτηση. Οι θεματικές της AI ενεργοποιούνται μόνο όταν υπάρχει επίσημο περίγραμμα του σημερινού Τμήματος.",
         sources: [
-          "https://ice.uniwa.gr/wp-content/uploads/2019/06/20042019-%CE%A3%CE%A7%CE%95%CE%94%CE%99%CE%9F-%CE%A0%CE%A3-5-%CE%95%CE%A4%CE%95%CE%A3.pdf",
-          "https://ice.uniwa.gr/education/undergraduate/courses/analysis-and-design-of-information-systems/"
+          "https://ice.uniwa.gr/education/undergraduate/",
+          "https://ice.uniwa.gr/education/undergraduate/courses/analysis-and-design-of-information-systems/",
+          "https://ice.uniwa.gr/education/undergraduate/courses/microelectronics/"
         ],
         courses: [
-          { code: "ICE-5003", semester: 5, titleEl: "Ανάλυση και Σχεδιασμός Πληροφοριακών Συστημάτων", tasks: ["understand","research","feedback","coding"] },
-          { code: "ICE-6004", semester: 6, titleEl: "Μικροηλεκτρονική", tasks: ["understand","calculations","practice"] },
-          { code: "ICE-7109", semester: 7, titleEl: "Μοντελοποίηση και Προγραμματισμός Περιορισμών", tasks: ["understand","coding","practice","papers"] },
-          { code: "ICE-7113", semester: 9, titleEl: "Συστήματα Αποφάσεων και Διαχείρισης Διεργασιών", tasks: ["understand","research","papers","feedback"] },
-          { code: "ICE-8206", semester: 8, titleEl: "Στοχαστικά και μη Γραμμικά Συστήματα", tasks: ["understand","calculations","practice","papers"] },
-        ],
+          {
+            code: "ICE-5003", semester: 5, year: 3, ects: 5, required: true,
+            titleEl: "Ανάλυση και Σχεδιασμός Πληροφοριακών Συστημάτων",
+            tasks: ["understand","research","feedback","coding"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline",
+            syllabusSource: "https://ice.uniwa.gr/wp-content/uploads/2022/11/ICE-5003-%CE%91%CE%9D%CE%91%CE%9B%CE%A5%CE%A3%CE%97-KAI-%CE%A3%CE%A7%CE%95%CE%94%CE%99%CE%91%CE%A3%CE%9C%CE%9F%CE%A3-%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%91%CE%9A%CE%A9%CE%9D-%CE%A3%CE%A5%CE%A3%CE%A4%CE%97%CE%9C%CE%91%CE%A4%CE%A9%CE%9D.pdf",
+            syllabusSourceAcademicYear: "official outline",
+            topics: [
+              "Μοντελοποίηση, ανάλυση και σχεδιασμός πληροφοριακών συστημάτων",
+              "Βασικά μοντέλα και μέθοδοι ανάλυσης συστημάτων",
+              "Τεχνικές σχεδιασμού πληροφοριακών και επικοινωνιακών συστημάτων επιχειρήσεων και οργανισμών"
+            ]
+          },
+          {
+            code: "ICE-6004", semester: 6, year: 3, ects: 5, required: true,
+            titleEl: "Μικροηλεκτρονική",
+            tasks: ["understand","calculations","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline",
+            syllabusSource: "https://ice.uniwa.gr/wp-content/uploads/2022/11/ICE-6004-%CE%9C%CE%99%CE%9A%CE%A1%CE%9F%CE%97%CE%9B%CE%95%CE%9A%CE%A4%CE%A1%CE%9F%CE%9D%CE%99%CE%9A%CE%97.pdf",
+            syllabusSourceAcademicYear: "official outline",
+            topics: [
+              "Ημιαγωγικές διατάξεις",
+              "Σχεδίαση ψηφιακών λογικών πυλών",
+              "Διαφορικοί και τελεστικοί ενισχυτές",
+              "Τεχνολογίες και προγράμματα προσομοίωσης μικροηλεκτρονικών κυκλωμάτων"
+            ]
+          },
+          { code: "ICE-7109", semester: 7, year: 4, titleEl: "Μοντελοποίηση και Προγραμματισμός Περιορισμών", tasks: ["understand","coding","practice","papers"] },
+          { code: "ICE-8206", semester: 8, year: 4, titleEl: "Στοχαστικά και μη Γραμμικά Συστήματα", tasks: ["understand","calculations","practice","papers"] },
+          { code: "ICE-7113", semester: 9, year: 5, titleEl: "Συστήματα Αποφάσεων και Διαχείρισης Διεργασιών", tasks: ["understand","research","papers","feedback"] }
+        ]
       },
 
       "upatras-biology": {
@@ -373,23 +602,87 @@
         departmentEn: "Department of Electrical and Computer Engineering",
         degreeLevel: 7,
         nominalSemesters: 10,
-        coverageStatus: "pilot-legacy-mapping",
+        coverageStatus: "pilot-source-locked",
         sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
         legacyInstitutionAliases: ["ΤΕΙ Κρήτης"],
+        currentAcademicYearSource: "https://ece.hmu.gr/proptyxiakes/programma-spoydwn/",
+        notesEl: "Η τρέχουσα κατανομή μαθημάτων προέρχεται από την επίσημη σελίδα του Τμήματος. Αναλυτική AI ύλη ενεργοποιείται μόνο σε μαθήματα με επίσημο περίγραμμα.",
         sources: [
           "https://ece.hmu.gr/proptyxiakes/programma-spoydwn/",
+          "https://ece.hmu.gr/proptyxiakes/odigos-spoydwn/",
           "https://hmu.gr/"
         ],
         courses: [
-          { code: "1.001", semester: 1, titleEl: "Λογισμός I", tasks: ["understand","calculations","practice"] },
-          { code: "1.002", semester: 1, titleEl: "Γραμμική Άλγεβρα", tasks: ["understand","calculations","practice"] },
-          { code: "3.001", semester: 3, titleEl: "Διαφορικές Εξισώσεις και Μιγαδική Ανάλυση", tasks: ["understand","calculations","practice"] },
-          { code: "3.002", semester: 3, titleEl: "Ηλεκτρικά Κυκλώματα ΙΙ", tasks: ["understand","calculations","practice"] },
-          { code: "3.003", semester: 3, titleEl: "Θεωρία Πιθανοτήτων και Στατιστική", tasks: ["understand","calculations","practice","papers"] },
-          { code: "3.004", semester: 3, titleEl: "Ηλεκτρονική Ι", tasks: ["understand","calculations","practice"] },
-          { code: "3.005", semester: 3, titleEl: "Εισαγωγή στις Βάσεις Δεδομένων", tasks: ["understand","coding","practice"] },
-          { code: "3.006", semester: 3, titleEl: "Τεχνικό Σχέδιο", tasks: ["understand","practice","feedback"] },
-        ],
+          {
+            code: "1.001", semester: 1, year: 1, ects: 6, required: true,
+            titleEl: "Λογισμός I",
+            tasks: ["understand","calculations","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline",
+            syllabusSource: "https://ece.hmu.gr/wp-content/uploads/2022/01/1.001_Logismos_1.pdf",
+            syllabusSourceAcademicYear: "official outline",
+            topics: [
+              "Συναρτήσεις μιας μεταβλητής",
+              "Εκθετική, λογαριθμική, τριγωνομετρικές και υπερβολικές συναρτήσεις",
+              "Όρια και συνέχεια",
+              "Παράγωγος και εφαρμογές",
+              "Πολικές και παραμετρικές συναρτήσεις",
+              "Ακολουθίες και σειρές πραγματικών αριθμών",
+              "Δυναμοσειρές και σειρές Taylor",
+              "Αόριστα και ορισμένα ολοκληρώματα",
+              "Μέθοδοι ολοκλήρωσης και γενικευμένα ολοκληρώματα",
+              "Συνήθεις διαφορικές εξισώσεις πρώτης τάξης"
+            ]
+          },
+          {
+            code: "1.002", semester: 1, year: 1, ects: 5, required: true,
+            titleEl: "Γραμμική Άλγεβρα",
+            tasks: ["understand","calculations","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline",
+            syllabusSource: "https://ece.hmu.gr/wp-content/uploads/2021/04/1_002_grammikh_algebra.pdf",
+            syllabusSourceAcademicYear: "official outline",
+            topics: [
+              "Αναλυτική γεωμετρία, διανύσματα και διανυσματικοί χώροι",
+              "Υποχώροι, γραμμική ανεξαρτησία, βάση και διάσταση",
+              "Εσωτερικό, εξωτερικό και μικτό γινόμενο",
+              "Γραμμικές απεικονίσεις",
+              "Πίνακες και ορίζουσες",
+              "Αντίστροφος πίνακας και αλγόριθμος Gauss",
+              "Γραμμικά συστήματα και απαλοιφή Gauss/Gauss-Jordan",
+              "Ελάχιστα τετράγωνα",
+              "Ιδιοτιμές και ιδιοδιανύσματα",
+              "Παραγοντοποιήσεις LU",
+              "Εφαρμογές με Matlab/Python"
+            ]
+          },
+          { code: "1.003", semester: 1, year: 1, ects: 6, required: true, titleEl: "Φυσική", tasks: ["understand","calculations","practice"] },
+          {
+            code: "1.004", semester: 1, year: 1, ects: 6, required: true,
+            titleEl: "Δομημένος Προγραμματισμός",
+            tasks: ["understand","coding","practice"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline",
+            syllabusSource: "https://ece.hmu.gr/wp-content/uploads/2021/10/1_004_Domimenos_Programmatismos-10-21.pdf",
+            syllabusSourceAcademicYear: "official outline",
+            topics: [
+              "Βασικές αρχές σχεδίασης και υλοποίησης δομημένων προγραμμάτων",
+              "Γλώσσα προγραμματισμού C",
+              "Ανάλυση προβλημάτων και αλγοριθμική επίλυση",
+              "Δομές ακολουθίας, επιλογής και επανάληψης",
+              "Συναρτήσεις και δομημένη αποσύνθεση προγραμμάτων"
+            ]
+          },
+          { code: "1.005", semester: 1, year: 1, ects: 4, required: true, titleEl: "Ηλεκτροτεχνικά Υλικά I", tasks: ["understand","practice"] },
+          { code: "1.006", semester: 1, year: 1, ects: 3, required: true, titleEl: "Επιστημονικός Προγραμματισμός με την Python", tasks: ["understand","coding","practice"] },
+          { code: "3.001", semester: 3, year: 2, titleEl: "Διαφορικές Εξισώσεις και Μιγαδική Ανάλυση", tasks: ["understand","calculations","practice"] },
+          { code: "3.002", semester: 3, year: 2, titleEl: "Ηλεκτρικά Κυκλώματα ΙΙ", tasks: ["understand","calculations","practice"] },
+          { code: "3.003", semester: 3, year: 2, titleEl: "Θεωρία Πιθανοτήτων και Στατιστική", tasks: ["understand","calculations","practice","papers"] },
+          { code: "3.004", semester: 3, year: 2, titleEl: "Ηλεκτρονική Ι", tasks: ["understand","calculations","practice"] },
+          { code: "3.005", semester: 3, year: 2, titleEl: "Εισαγωγή στις Βάσεις Δεδομένων", tasks: ["understand","coding","practice"] },
+          { code: "3.006", semester: 3, year: 2, titleEl: "Τεχνικό Σχέδιο", tasks: ["understand","practice","feedback"] }
+        ]
       },
     },
   });

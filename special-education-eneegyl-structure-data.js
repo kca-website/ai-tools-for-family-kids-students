@@ -15,6 +15,11 @@
   const GYM_SOURCE="https://diavgeia.gov.gr/decision/view/6%CE%9C%CE%99%CE%A646%CE%9D%CE%9A%CE%A0%CE%94-%CE%9F%CE%935";
   const LYC_SOURCE="https://diavgeia.gov.gr/decision/view/%CE%A877%CE%9A46%CE%9D%CE%9A%CE%A0%CE%94-9%CE%95%CE%9B";
   const INSTRUCTIONS="https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l";
+  const ANNUAL_SOURCES={
+    lyceumMath:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%91%CE%92%CE%93%CE%94_2026-2027.zip",
+    lyceumPhysics:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
+    lyceumChemistry:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip"
+  };
 
   const gymBase={
     language:{label:"Νεοελληνική Γλώσσα και Γραμματεία"},
@@ -96,7 +101,12 @@
   ];
 
   function rows(list,type="general"){
-    return list.map(([id,label])=>({id,label,type}));
+    return list.map(([id,label])=>{
+      const annualSourceUrl=id==="math"?ANNUAL_SOURCES.lyceumMath:
+        id==="physics"?ANNUAL_SOURCES.lyceumPhysics:
+        id==="natural-sciences"?INSTRUCTIONS:"";
+      return {id,label,type,...(annualSourceUrl?{annualSourceUrl}:{})};
+    });
   }
   function sectorRows(prefix,labelPrefix){
     return sectors.map(([id,label])=>({
@@ -116,7 +126,7 @@
     label:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",
     totalGrades:8,
     structureNote:"4 τάξεις Γυμνασίου + 4 τάξεις Λυκείου. Η εμφάνιση μιας τάξης ή μαθήματος δεν σημαίνει ότι έχει ήδη χαρτογραφηθεί πλήρης ύλη στο site.",
-    sourceUrls:{gymnasium:GYM_SOURCE,lyceum:LYC_SOURCE,annualInstructions:INSTRUCTIONS},
+    sourceUrls:{gymnasium:GYM_SOURCE,lyceum:LYC_SOURCE,annualInstructions:INSTRUCTIONS,annualSubjects:Object.freeze({...ANNUAL_SOURCES})},
     gradeOrder:["gym-a","gym-b","gym-c","gym-d","lyc-a","lyc-b","lyc-c","lyc-d"],
     grades:{
       "gym-a":{id:"gym-a",level:"gymnasium",letter:"A",label:"Α΄ Γυμνασίου",sourceUrl:GYM_SOURCE,subjects:[

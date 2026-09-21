@@ -88,6 +88,15 @@ async function checkUnified(page,label){
   await assertGeneralQuizButton(page,`${label} General Gymnasium`);
 
   assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG),false,`${label}: special catalog loaded before selection`);
+  await selectOption(page,'#tutorGrade','lyc-d');
+  const dSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(dSubjects.includes('eneegyl-lyc-d-math-2026-27'),`${label}: exact D Lyceum Mathematics mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-d-math-2026-27');
+  const enMathDTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enMathDTopics.length,7,`${label}: ENEEGYL D Mathematics must expose 7 taught/exam anchors`);
+  const enMathDContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enMathDContext,/Διδακτέα-εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL D Mathematics must be labelled taught/exam syllabus`);
+
   await selectTrack(page,'special-gymnasium');
   await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedSpecialGymnasium,{timeout:20000});
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: Special Gymnasium selection failed`);
@@ -236,6 +245,14 @@ async function checkUnified(page,label){
   assert.ok(aSubjects.includes('eneegyl-a-zdd'),`${label}: mapped A Lyceum ZDD route missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-economics'),`${label}: A Lyceum Principles of Economy missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-health'),`${label}: A Lyceum Health elective missing`);
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-math-2026-27'),`${label}: exact A Lyceum Mathematics mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-math-2026-27');
+  const enMathATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enMathATopics.length,38,`${label}: ENEEGYL A Mathematics must expose 38 exact exam-scope anchors`);
+  const enMathAContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enMathAContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\. · Εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL A Mathematics must be labelled exam syllabus`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="iep.edu.gr"]').count()>=1,`${label}: ENEEGYL A Mathematics official archive link missing`);
+
   assert.ok(aSubjects.includes('eneegyl-lyc-a-chemistry-2026-27'),`${label}: exact A Lyceum Chemistry mapping missing`);
   await selectOption(page,'#tutorSubject','eneegyl-lyc-a-chemistry-2026-27');
   const enChemATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));

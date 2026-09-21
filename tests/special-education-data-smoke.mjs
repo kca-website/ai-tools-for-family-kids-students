@@ -178,6 +178,20 @@ assert(slInfoC.officialAnchors.length === 20, `Special Lyceum C Informatics must
 assert(slInfoC.officialAnchors.some(x=>x.includes('Δομή επιλογής')), 'Special Lyceum C Informatics selection structure missing');
 assert(slInfoC.officialAnchors.some(x=>x.includes('Αντικειμενοστραφής προγραμματισμός')), 'Special Lyceum C Informatics OOP group missing');
 
+const slLangA=SLA.entries['a|language'];
+assert(slLangA?.frameworkOnly === true && slLangA?.coverageStatus === 'framework', 'Special Lyceum A Modern Greek must be a verified framework, not exact chapter scope');
+assert(slLangA.officialAnchors.length === 8, `Special Lyceum A Modern Greek framework must expose 8 official process anchors, got ${slLangA.officialAnchors.length}`);
+assert(slLangA.officialAnchors.some(x=>x.includes('Α3 Κριτικός στοχασμός')), 'Special Lyceum A Modern Greek critical-reading framework missing');
+
+const slLangB=SLA.entries['b|language'];
+assert(slLangB?.frameworkOnly === true && slLangB?.coverageStatus === 'framework', 'Special Lyceum B Modern Greek must be a verified framework');
+assert(/ελεύθερη επιλογή κειμένων/.test(slLangB.verificationNote||''), 'Special Lyceum B Modern Greek must preserve the open-text-selection boundary');
+
+const slLangC=SLA.entries['c|language'];
+assert(slLangC?.frameworkOnly === true && slLangC?.coverageStatus === 'framework', 'Special Lyceum C Modern Greek must be a verified assessment framework');
+assert(slLangC.officialAnchors.length === 4, `Special Lyceum C Modern Greek must expose four documented task types, got ${slLangC.officialAnchors.length}`);
+assert(slLangC.officialAnchors.some(x=>x.startsWith('Θέμα Γ')), 'Special Lyceum C Modern Greek interpretive-comment framework missing');
+
 const slBioA=SLA.entries['a|biology'];
 assert(slBioA?.coverageStatus === 'exact', 'Special Lyceum A Biology must be an exact annual mapping');
 assert(slBioA.officialAnchors.length === 13, `Special Lyceum A Biology must expose 13 exact source-bounded sections, got ${slBioA.officialAnchors.length}`);

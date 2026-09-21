@@ -299,6 +299,30 @@ try {
     }
   }
 
+  {
+    const page = await browser.newPage();
+    await prepare(page, LOCAL, { width: 1280, height: 900 }, 'el');
+    await renderContext(page, { zoneId: 'high', roleId: 'student' }, 'el');
+    await page.selectOption('#tutorGrade', 'a');
+    await page.waitForTimeout(80);
+    await page.selectOption('#tutorSubject', 'biologia-a-lykeiou');
+    await page.waitForTimeout(100);
+
+    const biologyTopics = await page.locator('#tutorTopic option').evaluateAll((options) =>
+      options.map((option) => ({ value: option.value, text: option.textContent?.trim() || '' }))
+    );
+    assert.equal(biologyTopics.length, 14, 'GEL A Biology should expose the 14 published 2026–27 mapped study topics');
+    assert.ok(biologyTopics.some((option) => /Κύτταρα, ιστοί, όργανα/.test(option.text)),
+      'GEL A Biology mapped topics are not visible in AI Help');
+    assert.ok(!biologyTopics.some((option) => /Γράψε το ακριβές κεφάλαιο/.test(option.text)),
+      'GEL A Biology fell back to generic chapter entry despite having a published topic map');
+
+    const contextText = (await page.locator('#tutorContext').innerText()).replace(/\s+/g, ' ');
+    assert.match(contextText, /αναλυτικός χάρτης/i,
+      'GEL mapped topics must remain clearly labelled as a navigation map rather than exact official sections');
+    await page.close();
+  }
+
   if (CHECK_PRODUCTION) {
     for (const context of [
       { zoneId: 'primary', roleId: 'guardian' },

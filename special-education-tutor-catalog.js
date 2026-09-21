@@ -260,8 +260,9 @@
       (baseHigh[gradeId]||[]).forEach((base,index)=>{
         if(!base?.id||base.specialEducation) return;
         const id=`special-lyceum-${gradeId}-${base.id}`;
-        const exact=Object.values(window.AITOOLSKIDS_SPECIAL_LYCEUM_ANNUAL_2026_2027?.entries||{}).find(entry=>entry.gradeId===gradeId&&(entry.sourceSubjectIds||[entry.subjectId]).includes(base.id))||null;
-        const sourceTopics=exact?.officialAnchors?.length?exact.officialAnchors.map(labelEl=>({labelEl,labelEn:labelEl})):(base.topics||[]);
+        const annualEntry=Object.values(window.AITOOLSKIDS_SPECIAL_LYCEUM_ANNUAL_2026_2027?.entries||{}).find(entry=>entry.gradeId===gradeId&&(entry.sourceSubjectIds||[entry.subjectId]).includes(base.id))||null;
+        const frameworkOnly=annualEntry?.frameworkOnly===true||annualEntry?.coverageStatus==="framework";
+        const sourceTopics=annualEntry?.officialAnchors?.length?annualEntry.officialAnchors.map(labelEl=>({labelEl,labelEn:labelEl})):(base.topics||[]);
         const topics=sourceTopics.map((topic,i)=>({
           id:`${id}.topic-${i+1}`,
           labelEl:topic.labelEl||topic.labelEn||`Θέμα ${i+1}`,
@@ -286,20 +287,20 @@
           topics,
           curriculum:{
             schoolYear:SL.schoolYear,verificationDate:SL.verificationDate,
-            verificationBasis:exact?.verificationBasis||(publishedGuide?"official-special-lyceum-guidance-source-indexed":"official-school-type-support-menu"),
-            coverageStatus:exact?"annual-instructions-verified":(publishedGuide?"special-lyceum-guidance-source-indexed-support":"special-lyceum-support-menu"),
-            coverageLabelEl:exact?"Ειδικό Λύκειο · Ύλη 2026–27":(publishedGuide?"Ειδικό Λύκειο · ειδική οδηγία 2026–27 εντοπίστηκε · section mapping σε εξέλιξη":"Ειδικό Λύκειο · υποστηρικτικό μενού μαθημάτων"),
-            coverageLabelEn:exact?"Special Lyceum · 2026–27 curriculum":(publishedGuide?"Special Lyceum · official 2026–27 guidance found · section mapping in progress":"Special Lyceum · tutoring subject menu"),
-            officialSectionsEl:exact?[...exact.officialAnchors]:[`${grade.labelEl}: υποστηρικτική επιλογή ${rawEl}`],officialSectionsEn:[],
-            scopeNoteEl:SL.scopeNoteEl,scopeNoteEn:SL.scopeNoteEn,
-            annualInstructionsStatus:exact?"2026-27-verified":(publishedGuide?(publishedGuide.status||"published-2026-27"):(SL.annualGuidanceStatus||"official-2026-27-guidance-published")),
-            annualInstructionsUrl:exact?.sourceUrl||publishedGuide?.sourceUrlsByGrade?.[gradeId]||publishedGuide?.sourceUrl||SL.sourceUrl,teachingInstructionsStatus:"official-guidance-published",
+            verificationBasis:annualEntry?.verificationBasis||(publishedGuide?"official-special-lyceum-guidance-source-indexed":"official-school-type-support-menu"),
+            coverageStatus:annualEntry?(frameworkOnly?"annual-framework-verified":"annual-instructions-verified"):(publishedGuide?"special-lyceum-guidance-source-indexed-support":"special-lyceum-support-menu"),
+            coverageLabelEl:annualEntry?(frameworkOnly?"Ειδικό Λύκειο · επίσημο πλαίσιο 2026–27":"Ειδικό Λύκειο · Ύλη 2026–27"):(publishedGuide?"Ειδικό Λύκειο · ειδική οδηγία 2026–27 εντοπίστηκε · section mapping σε εξέλιξη":"Ειδικό Λύκειο · υποστηρικτικό μενού μαθημάτων"),
+            coverageLabelEn:annualEntry?(frameworkOnly?"Special Lyceum · verified 2026–27 framework":"Special Lyceum · 2026–27 curriculum"):(publishedGuide?"Special Lyceum · official 2026–27 guidance found · section mapping in progress":"Special Lyceum · tutoring subject menu"),
+            officialSectionsEl:annualEntry?[...annualEntry.officialAnchors]:[`${grade.labelEl}: υποστηρικτική επιλογή ${rawEl}`],officialSectionsEn:[],
+            scopeNoteEl:annualEntry?.verificationNote||SL.scopeNoteEl,scopeNoteEn:frameworkOnly?"Verified framework choices; not a claim of fixed chapter-by-chapter annual syllabus.":SL.scopeNoteEn,
+            annualInstructionsStatus:annualEntry?(frameworkOnly?"2026-27-framework-verified":"2026-27-verified"):(publishedGuide?(publishedGuide.status||"published-2026-27"):(SL.annualGuidanceStatus||"official-2026-27-guidance-published")),
+            annualInstructionsUrl:annualEntry?.sourceUrl||publishedGuide?.sourceUrlsByGrade?.[gradeId]||publishedGuide?.sourceUrl||SL.sourceUrl,teachingInstructionsStatus:frameworkOnly?"2026-27-framework-verified":"official-guidance-published",
             officialTimetableStatus:"school-type-verified",catalogUrl:SL.sourceUrl,
-            sourceLabelEl:exact?.sourceTitle||(publishedGuide?`ΙΕΠ — ειδική οδηγία 2026–27: ${publishedGuide.labelEl}`:SL.sourceLabelEl),
-            sourceLabelEn:exact?.sourceTitle||(publishedGuide?`IEP — Special Lyceum 2026–27 guidance: ${publishedGuide.labelEl}`:SL.sourceLabelEn),
-            specialEducation:true,schoolType:"special-lyceum",structureOnly:!exact,sourceIndexed:!!publishedGuide,publishedGuidanceKey:publishedGuide?.key||""
+            sourceLabelEl:annualEntry?.sourceTitle||(publishedGuide?`ΙΕΠ — ειδική οδηγία 2026–27: ${publishedGuide.labelEl}`:SL.sourceLabelEl),
+            sourceLabelEn:annualEntry?.sourceTitle||(publishedGuide?`IEP — Special Lyceum 2026–27 guidance: ${publishedGuide.labelEl}`:SL.sourceLabelEn),
+            specialEducation:true,schoolType:"special-lyceum",structureOnly:!annualEntry,frameworkOnly,sourceIndexed:!!publishedGuide,publishedGuidanceKey:publishedGuide?.key||""
           },
-          specialEducation:true,schoolType:"special-lyceum",schoolTrack:"special-lyceum",structureOnly:!exact,sourceIndexed:!!publishedGuide,
+          specialEducation:true,schoolType:"special-lyceum",schoolTrack:"special-lyceum",structureOnly:!annualEntry,frameworkOnly,sourceIndexed:!!publishedGuide,
           sourceBaseSubjectId:base.id
         },{gradeLabel:grade.labelEl,detailedLearning:false,structureOnly:true,mirroredSupportMenu:true,order:index});
       });

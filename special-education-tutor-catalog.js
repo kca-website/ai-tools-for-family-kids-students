@@ -341,7 +341,7 @@
             scopeNoteEl:"Το μάθημα υπάρχει στο επίσημο σχολικό πλαίσιο, αλλά η αναλυτική ύλη του δεν δηλώνεται ως πλήρως χαρτογραφημένη εδώ. Δώσε το πραγματικό κεφάλαιο/άσκηση.",
             scopeNoteEn:"The subject is part of the official school structure, but detailed syllabus coverage is not claimed here. Provide the real chapter/exercise.",
             annualInstructionsStatus:grade.level==="lyceum"?"2026-27-hub-available":"not-claimed",
-            annualInstructionsUrl:grade.level==="lyceum"?(EN.sourceUrls?.annualInstructions||""):"",
+            annualInstructionsUrl:grade.level==="lyceum"?(row.annualSourceUrl||EN.sourceUrls?.annualInstructions||""):"",
             officialTimetableStatus:"2026-27-verified",
             catalogUrl:grade.sourceUrl||"",
             sourceLabelEl:grade.level==="gymnasium"?"Ωρολόγιο πρόγραμμα Γυμνασίου ΕΝ.Ε.Ε.ΓΥ.-Λ. 2026–27":"Ωρολόγιο πρόγραμμα Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ. 2026–27",

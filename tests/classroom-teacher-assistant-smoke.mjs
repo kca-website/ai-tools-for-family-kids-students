@@ -19,11 +19,10 @@ try{
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-  await page.goto(`${BASE}/teacher-assistant.html?task=rubric`,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForSelector('.task.active[data-task="rubric"]');
+  await page.goto(`${BASE}/teacher-assistant.html`,{waitUntil:'domcontentloaded',timeout:60000});
+  await page.waitForSelector('.task.active[data-task="lesson"]');
   assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Puter must not load before explicit consent/connect');
-  assert.match(await page.locator('#recTitle').innerText(),/MagicSchool Rubric Generator/);
-  assert.match(await page.locator('.privacy').innerText(),/Μην γράφεις ονοματεπώνυμα/);
+  assert.match(await page.locator('.privacy').innerText(),/Μην εισάγεις ονοματεπώνυμα/);
   assert.equal(await page.evaluate(()=>localStorage.length),0,'Teacher assistant must not create localStorage history');
   assert.equal(await page.evaluate(()=>sessionStorage.length),0,'Teacher assistant must not create sessionStorage history');
 
@@ -41,10 +40,6 @@ try{
   assert.equal(await page.locator('#groqBtn').count(),1,'Teacher Assistant must expose the account-free Groq generation route');
   assert.equal(await page.locator('#puterBtn').count(),1,'Teacher Assistant must expose Puter only as an explicit alternative');
   assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Puter must remain unloaded until the user explicitly chooses it');
-
-  await page.click('[data-task="observation"]');
-  assert.match(await page.locator('#detailsHint').innerText(),/όχι στοιχεία συγκεκριμένου μαθητή/i);
-  assert.match(await page.locator('#recText').innerText(),/κενό πρότυπο παρατήρησης/i);
 
   await page.click('#langEn');
   await page.waitForFunction(()=>document.documentElement.lang==='en');

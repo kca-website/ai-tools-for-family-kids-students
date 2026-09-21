@@ -5450,6 +5450,8 @@
         ...coverage,
         officialSectionsEl: coverage.annualInstructionsStatus === "2026-27-verified" ? topics.map((x) => x.labelEl) : [],
         officialSectionsEn: coverage.annualInstructionsStatus === "2026-27-verified" ? topics.map((x) => x.labelEn) : [],
+        mappedTopicsEl: topics.map((x) => x.labelEl),
+        mappedTopicsEn: topics.map((x) => x.labelEn),
         annualInstructionsUrl: source,
         catalogUrl: source,
         examSyllabusUrl: spec.status === "exam-verified" ? GEL_EXAM :
@@ -5481,6 +5483,50 @@
   for (const grade of ["a", "b", "c"]) {
     const target = catalog.zones.high[grade];
     if (Array.isArray(target)) target.splice(0, target.length, ...high2026[grade]);
+  }
+
+  // Keep the public curriculum map and all source-aware views on the same
+  // 2026-27 GEL provenance as AI Help. Exact official sections stay separate
+  // from mapped navigation topics.
+  const officialLayer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
+  if (officialLayer?.byQuiz) {
+    const nextByQuiz = { ...officialLayer.byQuiz };
+    for (const grade of ["a", "b", "c"]) {
+      for (const subject of high2026[grade]) {
+        const key = subject.quizId || subject.id;
+        const current = nextByQuiz[key] || {};
+        const cc = subject.curriculum || {};
+        nextByQuiz[key] = Object.freeze({
+          ...current,
+          quizId: key,
+          zone: "high",
+          schoolYear: cc.schoolYear,
+          verificationDate: cc.verificationDate,
+          coverageStatus: cc.coverageStatus,
+          coverageLabelEl: cc.coverageLabelEl,
+          coverageLabelEn: cc.coverageLabelEn,
+          officialSectionsEl: [...(cc.officialSectionsEl || [])],
+          officialSectionsEn: [...(cc.officialSectionsEn || [])],
+          mappedTopicsEl: [...(cc.mappedTopicsEl || [])],
+          mappedTopicsEn: [...(cc.mappedTopicsEn || [])],
+          scopeNoteEl: cc.scopeNoteEl,
+          scopeNoteEn: cc.scopeNoteEn,
+          annualInstructionsStatus: cc.annualInstructionsStatus,
+          annualInstructionsUrl: cc.annualInstructionsUrl,
+          annualInstructionsNoteEl: cc.annualInstructionsNoteEl || cc.scopeNoteEl,
+          annualInstructionsNoteEn: cc.annualInstructionsNoteEn || cc.scopeNoteEn,
+          catalogUrl: cc.catalogUrl || cc.annualInstructionsUrl,
+          sourceLabelEl: cc.sourceLabelEl,
+          sourceLabelEn: cc.sourceLabelEn,
+        });
+      }
+    }
+    const getByQuizId = (id) => nextByQuiz[id] || null;
+    window.AITOOLSKIDS_OFFICIAL_CURRICULUM = Object.freeze({
+      ...officialLayer,
+      byQuiz: Object.freeze(nextByQuiz),
+      getByQuizId,
+    });
   }
 
   function learningPath(labelEl, labelEn) {

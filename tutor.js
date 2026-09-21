@@ -696,12 +696,26 @@
     updateComposerState();
   }
 
-  function hasVerifiedAnnualTopicScope(subject) {
+  function hasDisplayableAnnualTopicScope(subject) {
     const c = subject?.curriculum || {};
-    return c.annualInstructionsStatus === "2026-27-verified" ||
+    const documentedStatus =
+      c.annualInstructionsStatus === "2026-27-verified" ||
       c.coverageStatus === "annual-instructions-verified" ||
       c.coverageStatus === "annual-exam-syllabus-verified" ||
-      c.coverageStatus === "panhellenic-2027-verified";
+      c.coverageStatus === "panhellenic-2027-verified" ||
+      c.coverageStatus === "annual-guidance-detailed-map" ||
+      c.coverageStatus === "panhellenic-2027-detailed-map";
+    if (!documentedStatus) return false;
+
+    // Evidence-first rule: a topic list is visible only when its provenance is
+    // recorded. A status label by itself is not enough.
+    const sourceUrl = c.annualInstructionsUrl || c.examSyllabusUrl || c.catalogUrl || "";
+    const verificationDate = c.verificationDate || c.lastVerified || "";
+    if (!sourceUrl || !verificationDate) {
+      console.warn("[Tutor provenance] Hidden curriculum topics without complete source metadata:", subject?.id || "unknown");
+      return false;
+    }
+    return true;
   }
 
   function populateTopics() {
@@ -710,7 +724,7 @@
     const allCatalogTopics = catalogSubject?.topics || [];
     // Support actions do not make curriculum-scope claims, so keep them
     // available even when a subject is intentionally structure-only.
-    const catalogTopics = hasVerifiedAnnualTopicScope(catalogSubject)
+    const catalogTopics = hasDisplayableAnnualTopicScope(catalogSubject)
       ? allCatalogTopics
       : allCatalogTopics.filter((topic) => topic?.specialSupportAction);
     const verifiedQuizTags = getGapTagsForQuiz(quiz).filter((id) => {
@@ -751,21 +765,25 @@
     const official = getOfficialCurriculumEntry();
     const officialBook = official?.officialBook;
     const officialLabel = official ? officialValue(official, "coverageLabelEl", "coverageLabelEn", official.coverageStatus || "") : "";
-    const sourceUrl = officialBook?.url || official?.catalogUrl || "";
-    const sourceName = officialBook
-      ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
-      : officialValue(official, "sourceLabelEl", "sourceLabelEn", tr("officialCatalog"));
+    const sourceUrl = official?.annualInstructionsUrl || officialBook?.url || official?.catalogUrl || "";
+    const sourceName = official?.annualInstructionsUrl
+      ? officialValue(official, "sourceLabelEl", "sourceLabelEn", ctx.lang === "en" ? "Official 2026–27 guidance" : "Επίσημες οδηγίες 2026–27")
+      : officialBook
+        ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
+        : officialValue(official, "sourceLabelEl", "sourceLabelEn", tr("officialCatalog"));
     const gapOfficial = getOfficialGapAlignment();
     const annualGuidance = getOfficialAnnualGuidance();
     const annualLabel = annualGuidance ? officialValue(annualGuidance, "labelEl", "labelEn", annualGuidance.status || "") : "";
     const annualSourceLabel = annualGuidance ? officialValue(annualGuidance, "sourceLabelEl", "sourceLabelEn", "") : "";
     const gapStatusLabel = gapOfficial ? officialValue(gapOfficial, "statusLabelEl", "statusLabelEn", gapOfficial.status || "") : "";
     const mismatch = gapOfficial?.status === "curriculum-mismatch-review-needed";
+    const scopeNote = official ? officialValue(official, "scopeNoteEl", "scopeNoteEn", "") : "";
     const officialHtml = official ? `<br><br>
       <b>${escapeHtml(tr("officialBasis"))}:</b> ${escapeHtml(officialLabel)}<br>
       ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceName)} ↗</a>` : ""}
       ${annualLabel ? `<br><b>${ctx.lang === "en" ? "Annual guidance" : "Ετήσιες οδηγίες"}:</b> ${escapeHtml(annualLabel)}` : ""}
       ${annualGuidance?.sourceUrl ? `<br><a href="${escapeHtml(annualGuidance.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(annualSourceLabel || (ctx.lang === "en" ? "Official 2026–27 source" : "Επίσημη πηγή 2026–27"))} ↗</a>` : ""}
+      ${scopeNote ? `<br><span class="tutor-scope-note">${escapeHtml(scopeNote)}</span>` : ""}
       ${gapStatusLabel ? `<br><span${mismatch ? ' style="color:#b45309;font-weight:700"' : ""}>${escapeHtml(gapStatusLabel)}</span>` : ""}` : "";
 
     const schoolContext = ctx.zoneId === "high"

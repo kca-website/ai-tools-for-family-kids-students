@@ -16,6 +16,11 @@ const files = [
   'teacher-curriculum-special-lyceum-annual-2026-2027.js',
   'special-education-special-lyceum-data.js',
   'special-education-eneegyl-structure-data.js',
+  'teacher-curriculum-eneegyl-chemistry-2026-2027.js',
+  'teacher-curriculum-eneegyl-math-2026-2027.js',
+  'teacher-curriculum-eneegyl-physics-2026-2027.js',
+  'teacher-curriculum-eneegyl-new-greek-2026-2027.js',
+  'teacher-curriculum-eneegyl-english-2026-2027.js',
   'special-education-support-tools-data.js',
   'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
@@ -147,6 +152,20 @@ assert(SL.schoolType === 'special-lyceum', 'Special Lyceum school identity is wr
 assert(/iep\.edu\.gr|minedu\.gov\.gr/.test(SL.sourceUrl||''), 'Special Lyceum official IEP/Ministry source missing');
 assert(SL.annualGuidanceStatus === 'published-guidance-source-indexed-section-mapping-in-progress', 'Special Lyceum must distinguish published guidance from completed section mapping');
 assert((SL.annualGuidanceIndex||[]).length >= 10, 'Special Lyceum published 2026-27 guidance index looks incomplete');
+for (const guide of (SL.annualGuidanceIndex||[])) {
+  assert(/^https:\/\/(www\.)?iep\.edu\.gr\//.test(guide.sourceUrl||'') || /^https:\/\/dide\.ira\.sch\.gr\//.test(guide.sourceUrl||''),
+    `Special Lyceum guidance index ${guide.key}: official published sourceUrl missing`);
+  assert(/^2026-09-(20|21)$/.test(guide.verificationDate||''), `Special Lyceum guidance index ${guide.key}: verificationDate missing or stale`);
+  assert(/^official-(iep-(annual-guidance-index|guidance-archive)|published-guidance-pdf)$/.test(guide.sourceType||''),
+    `Special Lyceum guidance index ${guide.key}: provenance type missing`);
+}
+const ancientGuide=(SL.annualGuidanceIndex||[]).find(x=>x.key==='ancient');
+assert(/%CE%91%CE%A1%CE%A7%CE%91%CE%99%CE%91_/.test(ancientGuide?.sourceUrl||''), 'Special Lyceum Ancient Greek must point to its official 2026-27 guidance archive');
+
+const biologyGuide=(SL.annualGuidanceIndex||[]).find(x=>x.key==='biology');
+assert(/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-/.test(biologyGuide?.sourceUrl||''), 'Special Lyceum Biology must point to a direct official 2026-27 guidance PDF');
+assert(['a','b','c'].every(g=>/^https:\/\/dide\.ira\.sch\.gr\//.test(biologyGuide?.sourceUrlsByGrade?.[g]||'')),
+  'Special Lyceum Biology must have a direct grade-specific official PDF for A/B/C');
 assert(Object.keys(SL.grades || {}).sort().join(',') === 'a,b,c', 'Special Lyceum must expose A/B/C Lyceum grades');
 assert(/δεν|not/i.test(SL.scopeNoteEl + ' ' + SL.scopeNoteEn), 'Special Lyceum must state the no-invented-syllabus boundary');
 const slInfoA=SLA.entries['a|informatics'];
@@ -154,6 +173,71 @@ assert(slInfoA.coverageStatus === 'exact', 'Special Lyceum A Informatics must be
 assert(slInfoA.officialAnchors.length === 20, `Special Lyceum A Informatics must expose 20 official sections, got ${slInfoA.officialAnchors.length}`);
 assert(slInfoA.officialAnchors.includes('7.1 Προγραμματισμός εφαρμογών για φορητές συσκευές'), 'Special Lyceum A Informatics section 7.1 missing');
 assert(slInfoA.officialAnchors.includes('16.4 Ιδιωτικότητα και προσωπικά δεδομένα στο Διαδίκτυο'), 'Special Lyceum A Informatics section 16.4 missing');
+
+const slInfoB=SLA.entries['b|informatics'];
+assert(slInfoB?.coverageStatus === 'exact', 'Special Lyceum B Informatics must be an exact annual mapping');
+assert(slInfoB.officialAnchors.length === 8, `Special Lyceum B Informatics must expose 8 source-bounded teaching units, got ${slInfoB.officialAnchors.length}`);
+assert(slInfoB.officialAnchors.some(x=>x.startsWith('2.2 Αλγόριθμοι')), 'Special Lyceum B Informatics algorithms unit missing');
+assert(slInfoB.officialAnchors.some(x=>x.includes('εκτός 2.2.2')), 'Special Lyceum B Informatics exclusions must remain explicit');
+
+const slInfoC=SLA.entries['c|informatics'];
+assert(slInfoC?.coverageStatus === 'exact', 'Special Lyceum C Informatics must be an exact annual mapping');
+assert(slInfoC.officialAnchors.length === 20, `Special Lyceum C Informatics must expose 20 source-bounded teaching groups, got ${slInfoC.officialAnchors.length}`);
+assert(slInfoC.officialAnchors.some(x=>x.includes('Δομή επιλογής')), 'Special Lyceum C Informatics selection structure missing');
+assert(slInfoC.officialAnchors.some(x=>x.includes('Αντικειμενοστραφής προγραμματισμός')), 'Special Lyceum C Informatics OOP group missing');
+
+const slLatinB=SLA.entries['b|latin'];
+assert(slLatinB?.coverageStatus === 'exact', 'Special Lyceum B Latin must be exact annual mapping');
+assert(slLatinB.officialAnchors.length === 15, `Special Lyceum B Latin must expose 15 official units, got ${slLatinB.officialAnchors.length}`);
+assert(slLatinB.officialAnchors[0].startsWith('Ενότητα I'), 'Special Lyceum B Latin must begin with Unit I');
+assert(slLatinB.officialAnchors.at(-1).startsWith('Ενότητα XV'), 'Special Lyceum B Latin must end with Unit XV');
+
+const slLatinC=SLA.entries['c|latin'];
+assert(slLatinC?.coverageStatus === 'exact', 'Special Lyceum C Latin must be exact annual mapping');
+assert(slLatinC.officialAnchors.length === 35, `Special Lyceum C Latin must expose Lessons 16–50, got ${slLatinC.officialAnchors.length}`);
+assert(slLatinC.officialAnchors[0].startsWith('Μάθημα 16'), 'Special Lyceum C Latin must begin with Lesson 16');
+assert(slLatinC.officialAnchors.at(-1).startsWith('Μάθημα 50'), 'Special Lyceum C Latin must end with Lesson 50');
+
+for (const grade of ['a','b','c']) {
+  const h=SLA.entries[`${grade}|history`];
+  assert(h?.frameworkOnly === true && h?.coverageStatus === 'framework',
+    `Special Lyceum ${grade.toUpperCase()} History must remain a documented framework, not fabricated chapter scope`);
+  assert(h.officialAnchors.length === 6, `Special Lyceum ${grade.toUpperCase()} History framework should expose six methodological anchors`);
+}
+assert(/δεν.*κλειστή section-level/i.test(SLA.entries['a|history'].verificationNote||''), 'History A boundary note must reject a fabricated closed syllabus');
+assert(/Σύμβαση της Λοζάνης/.test(SLA.entries['c|history'].verificationNote||''), 'History C note must preserve the distinction between an example lesson and annual syllabus');
+
+const slLangA=SLA.entries['a|language'];
+assert(slLangA?.frameworkOnly === true && slLangA?.coverageStatus === 'framework', 'Special Lyceum A Modern Greek must be a verified framework, not exact chapter scope');
+assert(slLangA.officialAnchors.length === 8, `Special Lyceum A Modern Greek framework must expose 8 official process anchors, got ${slLangA.officialAnchors.length}`);
+assert(slLangA.officialAnchors.some(x=>x.includes('Α3 Κριτικός στοχασμός')), 'Special Lyceum A Modern Greek critical-reading framework missing');
+
+const slLangB=SLA.entries['b|language'];
+assert(slLangB?.frameworkOnly === true && slLangB?.coverageStatus === 'framework', 'Special Lyceum B Modern Greek must be a verified framework');
+assert(/ελεύθερη επιλογή κειμένων/.test(slLangB.verificationNote||''), 'Special Lyceum B Modern Greek must preserve the open-text-selection boundary');
+
+const slLangC=SLA.entries['c|language'];
+assert(slLangC?.frameworkOnly === true && slLangC?.coverageStatus === 'framework', 'Special Lyceum C Modern Greek must be a verified assessment framework');
+assert(slLangC.officialAnchors.length === 4, `Special Lyceum C Modern Greek must expose four documented task types, got ${slLangC.officialAnchors.length}`);
+assert(slLangC.officialAnchors.some(x=>x.startsWith('Θέμα Γ')), 'Special Lyceum C Modern Greek interpretive-comment framework missing');
+
+const slBioA=SLA.entries['a|biology'];
+assert(slBioA?.coverageStatus === 'exact', 'Special Lyceum A Biology must be an exact annual mapping');
+assert(slBioA.officialAnchors.length === 13, `Special Lyceum A Biology must expose 13 exact source-bounded sections, got ${slBioA.officialAnchors.length}`);
+assert(slBioA.officialAnchors.some(x=>x.includes('Κεφάλαιο 3: Κυκλοφορικό Σύστημα — Αίμα')), 'Special Lyceum A Biology blood section missing');
+assert(slBioA.officialAnchors.some(x=>x.includes('εκτός «Αυλάκωση»')), 'Special Lyceum A Biology embryo exclusions must remain explicit');
+
+const slBioB=SLA.entries['b|biology'];
+assert(slBioB?.coverageStatus === 'exact', 'Special Lyceum B Biology must be an exact annual mapping');
+assert(slBioB.officialAnchors.length === 32, `Special Lyceum B Biology must expose 32 exact source-bounded sections, got ${slBioB.officialAnchors.length}`);
+assert(slBioB.officialAnchors.some(x=>x.includes('1.3.2 Μηχανισμοί ειδικής άμυνας')), 'Special Lyceum B Biology immunity section missing');
+assert(slBioB.officialAnchors.some(x=>x.includes('μόνο εισαγωγή')), 'Special Lyceum B Biology pollution scope boundary missing');
+
+const slBioC=SLA.entries['c|biology'];
+assert(slBioC?.coverageStatus === 'exact', 'Special Lyceum C Biology must be an exact annual mapping');
+assert(slBioC.officialAnchors.length === 16, `Special Lyceum C Biology must expose 16 exact source-bounded sections, got ${slBioC.officialAnchors.length}`);
+assert(slBioC.officialAnchors.some(x=>x.includes('Κεφάλαιο 4: Τεχνολογία του ανασυνδυασμένου DNA')), 'Special Lyceum C Biology recombinant DNA chapter missing');
+assert(slBioC.officialAnchors.some(x=>x.includes('εκτός της παραγράφου για την παραγωγή πενικιλίνης')), 'Special Lyceum C Biology biotechnology exclusion missing');
 
 assert(EN.schoolType === 'eneegyl', 'ENEEGYL structure identity is wrong');
 assert(EN.totalGrades === 8, `ENEEGYL must have 8 grades, got ${EN.totalGrades}`);
@@ -166,12 +250,93 @@ for (const id of ['gym-a','gym-b','gym-c','gym-d']) {
 for (const id of ['lyc-a','lyc-b','lyc-c','lyc-d']) {
   assert(EN.grades[id]?.level === 'lyceum', `${id}: must be an ENEEGYL Lyceum grade`);
 }
+const enMathA=C.entries['eneegyl-lyc-a-math-2026-27'];
+assert(enMathA?.coverageStatus === 'exam-verified', 'ENEEGYL A Lyceum Mathematics exam mapping missing');
+assert(enMathA.officialAnchors.length === 38, `ENEEGYL A Mathematics must expose 38 exact exam-scope anchors, got ${enMathA.officialAnchors.length}`);
+assert(enMathA.officialAnchors.some(x=>x.includes('2.2 Διάταξη Πραγματικών Αριθμών')), 'ENEEGYL A Mathematics real-number scope missing');
+assert(enMathA.officialAnchors.some(x=>x.includes('4.8 Άθροισμα γωνιών κυρτού ν-γώνου')), 'ENEEGYL A Mathematics geometry scope missing');
+
+const enMathB=C.entries['eneegyl-lyc-b-math-2026-27'];
+assert(enMathB?.coverageStatus === 'exam-verified', 'ENEEGYL B Lyceum Mathematics exam mapping missing');
+assert(enMathB.officialAnchors.length === 10, `ENEEGYL B Mathematics must expose 10 exact exam-scope anchors, got ${enMathB.officialAnchors.length}`);
+assert(enMathB.officialAnchors.some(x=>x.includes('χωρίς «Λύση - Διερεύνηση γραμμικού συστήματος 2x2»')), 'ENEEGYL B Mathematics linear-system exclusion missing');
+
+const enMathC=C.entries['eneegyl-lyc-c-math-2026-27'];
+assert(enMathC?.coverageStatus === 'exam-verified', 'ENEEGYL C Lyceum Mathematics exam mapping missing');
+assert(enMathC.officialAnchors.length === 12, `ENEEGYL C Mathematics must expose 12 exact exam-scope anchors, got ${enMathC.officialAnchors.length}`);
+assert(enMathC.officialAnchors.some(x=>x.includes('βάσεις 10 και e')), 'ENEEGYL C Mathematics logarithmic-function boundary missing');
+
+const enMathD=C.entries['eneegyl-lyc-d-math-2026-27'];
+assert(enMathD?.coverageStatus === 'panhellenic-verified', 'ENEEGYL D Lyceum Mathematics taught/exam mapping missing');
+assert(enMathD.officialAnchors.length === 7, `ENEEGYL D Mathematics must expose 7 exact taught/exam anchors, got ${enMathD.officialAnchors.length}`);
+assert(enMathD.officialAnchors.some(x=>x.includes('χωρίς το κριτήριο της 2ης παραγώγου')), 'ENEEGYL D Mathematics derivative exclusion missing');
+assert(enMathD.officialAnchors.some(x=>x.includes('Ενδοτεταρτημοριακό εύρος')), 'ENEEGYL D Mathematics statistics exclusions missing');
+
+const enEnglishA=C.entries['eneegyl-lyc-a-english-2026-27'];
+assert(enEnglishA?.coverageStatus === 'exam-verified', 'ENEEGYL A Lyceum English exam mapping missing');
+assert(enEnglishA.officialAnchors.length === 5, `ENEEGYL A English must expose Units 1,2,3,4,6 only, got ${enEnglishA.officialAnchors.length}`);
+assert(enEnglishA.officialAnchors.includes('General English A΄ EPAL — Unit 6'), 'ENEEGYL A English Unit 6 missing');
+assert(!enEnglishA.officialAnchors.some(x=>x.includes('Unit 5')), 'ENEEGYL A English must not invent/include Unit 5');
+
+const enGreekA=C.entries['eneegyl-lyc-a-new-greek-2026-27'];
+assert(enGreekA?.coverageStatus === 'exam-verified', 'ENEEGYL A New Greek exam scope missing');
+assert(enGreekA.officialAnchors.length === 1, 'ENEEGYL A New Greek must remain book-level when the source does not enumerate fixed units');
+
+const enGreekB=C.entries['eneegyl-lyc-b-new-greek-2026-27'];
+assert(enGreekB?.coverageStatus === 'exam-verified', 'ENEEGYL B New Greek exam scope missing');
+assert(enGreekB.officialAnchors.length === 6, `ENEEGYL B New Greek must expose six official unit anchors, got ${enGreekB.officialAnchors.length}`);
+assert(enGreekB.officialAnchors.includes('Νέα Ελληνικά Β΄ ΕΠΑ.Λ. — Ενότητα 3'), 'ENEEGYL B New Greek B-book unit 3 missing');
+assert(enGreekB.officialAnchors.includes('Νέα Ελληνικά Α΄ ΕΠΑ.Λ. — Ενότητα 6'), 'ENEEGYL B New Greek A-book unit 6 missing');
+
+const enGreekC=C.entries['eneegyl-lyc-c-new-greek-2026-27'];
+assert(enGreekC?.coverageStatus === 'exam-verified', 'ENEEGYL C New Greek exam scope missing');
+assert(enGreekC.officialAnchors.length === 6, `ENEEGYL C New Greek must expose six official unit anchors, got ${enGreekC.officialAnchors.length}`);
+assert(enGreekC.officialAnchors.includes('Νέα Ελληνικά Β΄ ΕΠΑ.Λ. — Ενότητα 6'), 'ENEEGYL C New Greek B-book unit 6 missing');
+assert(enGreekC.officialAnchors.includes('Νέα Ελληνικά Α΄ ΕΠΑ.Λ. — Ενότητα 5'), 'ENEEGYL C New Greek A-book unit 5 missing');
+
+const enGreekD=C.entries['eneegyl-lyc-d-new-greek-2026-27'];
+assert(enGreekD?.coverageStatus === 'panhellenic-verified', 'ENEEGYL D New Greek taught/exam scope missing');
+assert(enGreekD.officialAnchors.length === 3, 'ENEEGYL D New Greek must expose the three official school books, not fabricated chapter titles');
+
+const enPhysicsA=C.entries['eneegyl-lyc-a-physics-2026-27'];
+assert(enPhysicsA?.coverageStatus === 'exam-verified', 'ENEEGYL A Lyceum Physics exam mapping missing');
+assert(enPhysicsA.officialAnchors.length === 25, `ENEEGYL A Physics must expose 25 source-bounded exam anchors, got ${enPhysicsA.officialAnchors.length}`);
+assert(enPhysicsA.officialAnchors.some(x=>x.includes('2.8 Σύνθεση δυνάμεων')), 'ENEEGYL A Physics force-composition scope missing');
+assert(enPhysicsA.officialAnchors.some(x=>x.includes('5.6 Έργο και ενέργεια')), 'ENEEGYL A Physics work-energy scope missing');
+
+const enPhysicsB=C.entries['eneegyl-lyc-b-physics-2026-27'];
+assert(enPhysicsB?.coverageStatus === 'exam-verified', 'ENEEGYL B Lyceum Physics exam mapping missing');
+assert(enPhysicsB.officialAnchors.length === 11, `ENEEGYL B Physics must expose 11 source-bounded exam anchors, got ${enPhysicsB.officialAnchors.length}`);
+assert(enPhysicsB.officialAnchors.some(x=>x.includes('1.1 Ο νόμος του Coulomb')), 'ENEEGYL B Physics Coulomb scope missing');
+assert(enPhysicsB.officialAnchors.some(x=>x.includes('2.9 Νόμος του Ohm')), 'ENEEGYL B Physics closed-circuit Ohm scope missing');
+assert(!C.entries['eneegyl-lyc-c-physics-2026-27'] && !C.entries['eneegyl-lyc-d-physics-2026-27'], 'ENEEGYL C/D Physics must not be fabricated before exact 2026-27 scope verification');
+
+const enChemA=C.entries['eneegyl-lyc-a-chemistry-2026-27'];
+assert(enChemA?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL A Lyceum Chemistry exact annual mapping missing');
+assert(enChemA.officialAnchors.length === 9, `ENEEGYL A Chemistry must expose 9 source-bounded sections, got ${enChemA.officialAnchors.length}`);
+assert(enChemA.officialAnchors.some(x=>x.startsWith('3.5 Χημικές αντιδράσεις')), 'ENEEGYL A Chemistry reaction scope missing');
+
+const enChemB=C.entries['eneegyl-lyc-b-chemistry-2026-27'];
+assert(enChemB?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL B Lyceum Chemistry exact annual mapping missing');
+assert(enChemB.officialAnchors.length === 12, `ENEEGYL B Chemistry must expose 12 source-bounded sections, got ${enChemB.officialAnchors.length}`);
+assert(enChemB.officialAnchors.some(x=>x.includes('εκτός μη καθαρών ουσιών')), 'ENEEGYL B Chemistry stoichiometry exclusions must remain explicit');
+
+const enChemC=C.entries['eneegyl-lyc-c-chemistry-2026-27'];
+assert(enChemC?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL C Lyceum Chemistry exact annual mapping missing');
+assert(enChemC.officialAnchors.length === 15, `ENEEGYL C Chemistry must expose 15 source-bounded sections, got ${enChemC.officialAnchors.length}`);
+assert(enChemC.officialAnchors.some(x=>x.includes('Βιοχημεία 3.3')), 'ENEEGYL C Chemistry biochemistry enzyme section missing');
+
 assert(EN.grades['gym-d'].subjects.some(x => x.id === 'economics'), 'ENEEGYL D Gymnasium must include Economics');
 assert(EN.grades['lyc-a'].subjects.length === 18, `ENEEGYL A Lyceum must expose 18 timetable choices/groups, got ${EN.grades['lyc-a'].subjects.length}`);
 assert(EN.grades['lyc-a'].subjects.filter(x => x.type === 'elective').length === 7, 'ENEEGYL A Lyceum must expose seven offered electives');
 assert(EN.grades['lyc-a'].subjects.some(x => x.id === 'creative-zone'), 'ENEEGYL A Lyceum must include Creative Activities Zone');
 assert(EN.grades['lyc-b'].subjects.filter(x => x.type === 'sector-gateway').length === 8, 'ENEEGYL B Lyceum must expose eight sector gateways');
 assert(EN.sourceUrls?.gymnasium?.includes('diavgeia.gov.gr') && EN.sourceUrls?.lyceum?.includes('diavgeia.gov.gr'), 'ENEEGYL current timetable sources missing');
+assert(/MAT|%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91/i.test(EN.sourceUrls?.annualSubjects?.lyceumMath||''), 'ENEEGYL Lyceum Mathematics annual source archive missing');
+assert(/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97/i.test(EN.sourceUrls?.annualSubjects?.lyceumPhysics||''), 'ENEEGYL Lyceum Physics annual source archive missing');
+assert(/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91/i.test(EN.sourceUrls?.annualSubjects?.lyceumChemistry||''), 'ENEEGYL Lyceum Chemistry annual source archive missing');
+assert(EN.grades['lyc-a'].subjects.find(x=>x.id==='math')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumMath, 'ENEEGYL A Lyceum Mathematics must carry its subject-specific annual source');
+assert(EN.grades['lyc-d'].subjects.find(x=>x.id==='physics')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumPhysics, 'ENEEGYL D Lyceum Physics must carry its subject-specific annual source');
 
 assert(Array.isArray(SUPPORT.items) && SUPPORT.items.length >= 6, 'Special Education support tools need at least six curated options');
 const supportIds=SUPPORT.items.map(x => x.id);

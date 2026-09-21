@@ -152,6 +152,62 @@ async function checkUnified(page,label){
   const slContext=await page.locator('#tutorContextBox').innerText();
   assert.match(slContext,/Ειδικό Λύκειο|Special Lyceum/i,`${label}: Special Lyceum context identity missing`);
 
+  await selectOption(page,'#tutorGrade','b');
+  const slBSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  const slInfoB=slBSubjects.find(id=>id.includes('pliroforiki-b-lykeiou'));
+  assert.ok(slInfoB,`${label}: Special Lyceum B exact Informatics mapping missing`);
+  await selectOption(page,'#tutorSubject',slInfoB);
+  const slInfoBSections=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slInfoBSections.length,8,`${label}: Special Lyceum B Informatics must expose 8 source-bounded units`);
+  assert.ok(slInfoBSections.some(x=>x.text.includes('2.2 Αλγόριθμοι')),`${label}: Special Lyceum B algorithms unit missing`);
+
+  await selectOption(page,'#tutorGrade','c');
+  const slCSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  const slInfoC=slCSubjects.find(id=>id.includes('pliroforiki-g-lykeiou'));
+  assert.ok(slInfoC,`${label}: Special Lyceum C exact Informatics mapping missing`);
+  await selectOption(page,'#tutorSubject',slInfoC);
+  const slInfoCSections=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slInfoCSections.length,20,`${label}: Special Lyceum C Informatics must expose 20 source-bounded teaching groups`);
+  assert.ok(slInfoCSections.some(x=>x.text.includes('Αντικειμενοστραφής προγραμματισμός')),`${label}: Special Lyceum C OOP teaching group missing`);
+
+  await selectOption(page,'#tutorGrade','b');
+  const slLatinB=slBSubjects.find(id=>id.includes('latinika-b-lykeiou'));
+  assert.ok(slLatinB,`${label}: Special Lyceum B Latin exact route missing`);
+  await selectOption(page,'#tutorSubject',slLatinB);
+  const slLatinBTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slLatinBTopics.length,15,`${label}: Special Lyceum B Latin must expose Units I-XV`);
+  assert.ok(slLatinBTopics[0].text.startsWith('Ενότητα I'),`${label}: Special Lyceum B Latin first unit wrong`);
+  assert.ok(slLatinBTopics.at(-1).text.startsWith('Ενότητα XV'),`${label}: Special Lyceum B Latin final unit wrong`);
+
+  await selectOption(page,'#tutorGrade','c');
+  const slLatinC=slCSubjects.find(id=>id.includes('latinika-g-lykeiou'));
+  assert.ok(slLatinC,`${label}: Special Lyceum C Latin exact route missing`);
+  await selectOption(page,'#tutorSubject',slLatinC);
+  const slLatinCTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slLatinCTopics.length,35,`${label}: Special Lyceum C Latin must expose Lessons 16-50`);
+  assert.ok(slLatinCTopics[0].text.startsWith('Μάθημα 16'),`${label}: Special Lyceum C Latin first lesson wrong`);
+  assert.ok(slLatinCTopics.at(-1).text.startsWith('Μάθημα 50'),`${label}: Special Lyceum C Latin final lesson wrong`);
+
+  await selectOption(page,'#tutorGrade','a');
+  const slHistoryA=slSubjects.find(id=>id.includes('istoria-a-lykeiou'));
+  assert.ok(slHistoryA,`${label}: Special Lyceum A History framework route missing`);
+  await selectOption(page,'#tutorSubject',slHistoryA);
+  const slHistoryContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(slHistoryContext,/επίσημο πλαίσιο 2026–27/i,`${label}: Special Lyceum History must be labelled as framework, not exact syllabus`);
+  assert.match(slHistoryContext,/Δεν τεκμηριώνει κλειστή section-level ετήσια λίστα κεφαλαίων/i,`${label}: Special Lyceum History scope boundary missing`);
+
+  await selectOption(page,'#tutorGrade','a');
+  const slBiology=slSubjects.find(id=>id.includes('biologia-a-lykeiou'));
+  assert.ok(slBiology,`${label}: Special Lyceum A Biology exact route missing`);
+  await selectOption(page,'#tutorSubject',slBiology);
+  const slBiologyTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slBiologyTopics.length,13,`${label}: Special Lyceum A Biology must expose 13 exact official sections`);
+  assert.ok(slBiologyTopics.some(x=>x.text.includes('Κυκλοφορικό Σύστημα — Αίμα')),`${label}: Special Lyceum A Biology blood section missing`);
+  const slBiologyContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(slBiologyContext,/Ειδικό Λύκειο · Ύλη 2026–27/i,`${label}: Special Lyceum A Biology must be labelled exact 2026-27 curriculum`);
+  assert.match(slBiologyContext,/Βιολογία Α΄ Λυκείου Ε\.Α\.Ε\./i,`${label}: Special Lyceum A Biology source label must name the exact guidance`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="dide.ira.sch.gr"]').count()>=1,`${label}: Special Lyceum A Biology direct official guidance link missing`);
+
   await selectTrack(page,'eneegyl');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL selection failed`);
   await assertSimpleQuizButton(page,`${label} ENEEGYL`);
@@ -180,13 +236,65 @@ async function checkUnified(page,label){
   assert.ok(aSubjects.includes('eneegyl-a-zdd'),`${label}: mapped A Lyceum ZDD route missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-economics'),`${label}: A Lyceum Principles of Economy missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-health'),`${label}: A Lyceum Health elective missing`);
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-math-2026-27'),`${label}: exact A Lyceum Mathematics mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-math-2026-27');
+  const enMathATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enMathATopics.length,38,`${label}: ENEEGYL A Mathematics must expose 38 exact exam-scope anchors`);
+  const enMathAContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enMathAContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\. · Εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL A Mathematics must be labelled exam syllabus`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="iep.edu.gr"]').count()>=1,`${label}: ENEEGYL A Mathematics official archive link missing`);
+
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-chemistry-2026-27'),`${label}: exact A Lyceum Chemistry mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-chemistry-2026-27');
+  const enChemATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enChemATopics.length,9,`${label}: ENEEGYL A Chemistry must expose 9 exact official sections`);
+  assert.ok(enChemATopics.some(x=>x.text.startsWith('3.5 Χημικές αντιδράσεις')),`${label}: ENEEGYL A Chemistry reaction scope missing`);
+  const enChemAContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enChemAContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\. · Ύλη 2026–27/i,`${label}: ENEEGYL A Chemistry must be labelled exact annual curriculum`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="esos.gr"]').count()>=1,`${label}: ENEEGYL A Chemistry source PDF missing`);
+
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-english-2026-27'),`${label}: exact A Lyceum English mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-english-2026-27');
+  const enEnglishATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enEnglishATopics.length,5,`${label}: ENEEGYL A English must expose five exact units`);
+  assert.ok(enEnglishATopics.some(x=>x.text.includes('Unit 6')),`${label}: ENEEGYL A English Unit 6 missing`);
+  assert.ok(!enEnglishATopics.some(x=>x.text.includes('Unit 5')),`${label}: ENEEGYL A English must not include Unit 5`);
+
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-physics-2026-27'),`${label}: exact A Lyceum Physics mapping missing`);
 
   await selectOption(page,'#tutorGrade','lyc-b');
   const bSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(bSubjects.includes('eneegyl-lyc-b-new-greek-2026-27'),`${label}: exact B Lyceum New Greek mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-b-new-greek-2026-27');
+  const enGreekBTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enGreekBTopics.length,6,`${label}: ENEEGYL B New Greek must expose six official unit anchors`);
+  assert.ok(enGreekBTopics.some(x=>x.text.includes('Β΄ ΕΠΑ.Λ. — Ενότητα 3')),`${label}: ENEEGYL B New Greek unit 3 missing`);
+
+  assert.ok(bSubjects.includes('eneegyl-lyc-b-physics-2026-27'),`${label}: exact B Lyceum Physics mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-b-physics-2026-27');
+  const enPhysicsBTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enPhysicsBTopics.length,11,`${label}: ENEEGYL B Physics must expose 11 exam-scope anchors`);
+  assert.ok(enPhysicsBTopics.some(x=>x.text.includes('1.1 Ο νόμος του Coulomb')),`${label}: ENEEGYL B Physics Coulomb section missing`);
+  const enPhysicsBContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enPhysicsBContext,/Εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL B Physics must be labelled exam syllabus`);
   assert.ok(bSubjects.length>5,`${label}: ENEEGYL B Lyceum must expose structure plus mapped routes, not only five units`);
   assert.ok(bSubjects.includes('eneegyl-b-economy-accounting-basics'),`${label}: accounting mapped route missing from B Lyceum`);
   assert.ok(bSubjects.some(id=>id.startsWith('eneegyl-lyc-b-b-sector-')),`${label}: B Lyceum sector gateways missing`);
   await assertSimpleQuizButton(page,`${label} ENEEGYL B Lyceum`);
+
+  await selectOption(page,'#tutorGrade','lyc-d');
+  const dSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(dSubjects.includes('eneegyl-lyc-d-new-greek-2026-27'),`${label}: D Lyceum New Greek taught/exam route missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-d-new-greek-2026-27');
+  const enGreekDTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enGreekDTopics.length,3,`${label}: ENEEGYL D New Greek must expose three official book anchors`);
+
+  assert.ok(dSubjects.includes('eneegyl-lyc-d-math-2026-27'),`${label}: exact D Lyceum Mathematics mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-d-math-2026-27');
+  const enMathDTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enMathDTopics.length,7,`${label}: ENEEGYL D Mathematics must expose 7 taught/exam anchors`);
+  const enMathDContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enMathDContext,/Διδακτέα-εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL D Mathematics must be labelled taught/exam syllabus`);
 
   await selectTrack(page,'special-gymnasium');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: cross-zone return to Special Gymnasium failed`);

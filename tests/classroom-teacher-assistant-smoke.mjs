@@ -7,28 +7,11 @@ const browser=await chromium.launch({headless:true});
 try{
   for(const viewport of [{width:1280,height:900},{width:390,height:844}]){
     const page=await browser.newPage({viewport});
-    const errors=[];
-    page.on('pageerror',e=>errors.push(e.message));
-    page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-
     await page.goto(`${BASE}/classroom.html`,{waitUntil:'domcontentloaded',timeout:60000});
-    await page.waitForSelector('#teacherTools',{state:'visible'});
-    assert.equal(await page.locator('#teacherTools .teacher-tool-card').count(),6,'Classroom must expose six teacher jobs');
-    assert.equal(await page.locator('#teacherTools a[href^="/teacher-assistant.html?task="]').count(),6,'Every teacher job must expose our assistant as either primary or alternate route');
-    assert.ok(await page.locator('#teacherTools a[href*="magicschool.ai/tools/rubric-generator"]').count(),'MagicSchool rubric recommendation missing');
-    assert.ok(await page.locator('#teacherTools a[href*="briskteaching.com/give-feedback"]').count(),'Brisk feedback recommendation missing');
-    assert.match(await page.locator('#teacherTools').innerText(),/Καρτέλα παρατήρησης/);
-    assert.match(await page.locator('#teacherTools').innerText(),/κενό πρότυπο/i);
-    assert.match(await page.locator('#teacherTools').innerText(),/μην εισάγεις ονοματεπώνυμα/i);
-
-    await page.click('#langEn');
-    await page.waitForFunction(()=>document.documentElement.lang==='en');
-    assert.match(await page.locator('#teacherToolsTitle').innerText(),/What do you need to do today/);
-    assert.match(await page.locator('#teacherTools').innerText(),/Observation template/);
-
+    await page.waitForURL(/\/teacher-assistant\.html(?:\?.*)?$/,{timeout:10000});
+    assert.match(await page.locator('h1').innerText(),/Εκπαιδευτικό υλικό|AI Teacher Assistant/i,'classroom redirect must land on Teacher Assistant');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-    assert.ok(overflow<=1,`Classroom teacher navigator horizontal overflow: ${overflow}`);
-    assert.deepEqual(errors,[],`Classroom browser errors: ${errors.join('\n')}`);
+    assert.ok(overflow<=1,`Teacher assistant redirect target horizontal overflow: ${overflow}`);
     await page.close();
   }
 
@@ -36,27 +19,28 @@ try{
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-  await page.goto(`${BASE}/teacher-assistant.html?task=rubric`,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForSelector('.task.active[data-task="rubric"]');
+  await page.goto(`${BASE}/teacher-assistant.html`,{waitUntil:'domcontentloaded',timeout:60000});
+  await page.waitForSelector('.task.active[data-task="lesson"]');
   assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Puter must not load before explicit consent/connect');
-  assert.match(await page.locator('#recTitle').innerText(),/MagicSchool Rubric Generator/);
-  assert.match(await page.locator('.privacy').innerText(),/Μην γράφεις ονοματεπώνυμα/);
+  assert.match(await page.locator('.privacy').innerText(),/Μην εισάγεις ονοματεπώνυμα/);
   assert.equal(await page.evaluate(()=>localStorage.length),0,'Teacher assistant must not create localStorage history');
   assert.equal(await page.evaluate(()=>sessionStorage.length),0,'Teacher assistant must not create sessionStorage history');
 
-  await page.click('#generateBtn');
-  assert.equal(await page.locator('#disclosure').isVisible(),true,'Disconnected generation must open Puter disclosure instead of silently loading Puter');
-  assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Opening disclosure alone must not load Puter');
-  await page.click('#cancelConnect');
+  await page.selectOption('#context','gel');
+  await page.selectOption('#grade','a');
+  const biologyOption=await page.locator('#subject option').evaluateAll((options)=>options.find(o=>/Βιολογία/.test(o.textContent||''))?.value||'');
+  assert.ok(biologyOption,'Teacher Assistant GEL A Biology subject missing');
+  await page.selectOption('#subject',biologyOption);
+  await page.waitForTimeout(80);
+  const biologyUnits=await page.locator('#unit option').allInnerTexts();
+  assert.equal(biologyUnits.length,14,'Teacher Assistant GEL A Biology should expose 14 documented mapped topics');
+  assert.match(await page.locator('#curriculumNote').innerText(),/αναλυτικό χάρτη/i,'Teacher Assistant must label GEL Biology topics as a documented navigation map');
+  assert.ok(await page.locator('#curriculumNote a[href^="https://"]').count()>=1,'Teacher Assistant mapped curriculum must expose a source link');
 
-  await page.click('[data-task="observation"]');
-  assert.match(await page.locator('#detailsHint').innerText(),/όχι στοιχεία συγκεκριμένου μαθητή/i);
-  assert.match(await page.locator('#recText').innerText(),/κενό πρότυπο παρατήρησης/i);
+  assert.equal(await page.locator('#groqBtn').count(),1,'Teacher Assistant must expose the account-free Groq generation route');
+  assert.equal(await page.locator('#puterBtn').count(),1,'Teacher Assistant must expose Puter only as an explicit alternative');
+  assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Puter must remain unloaded until the user explicitly chooses it');
 
-  await page.click('#langEn');
-  await page.waitForFunction(()=>document.documentElement.lang==='en');
-  assert.match(await page.locator('h1').innerText(),/AI Teacher Assistant/);
-  assert.match(await page.locator('.privacy').innerText(),/Do not enter student names/);
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   assert.ok(overflow<=1,`Teacher assistant mobile horizontal overflow: ${overflow}`);
   assert.deepEqual(errors,[],`Teacher assistant browser errors: ${errors.join('\n')}`);

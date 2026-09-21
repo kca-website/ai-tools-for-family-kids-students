@@ -886,10 +886,17 @@ ${compositeRule}
       else btn.removeAttribute("title");
     });
     renderCharacterCard();
+    renderModeBox();
   }
 
   function renderModeBox() {
     if (!refs.modeBox) return;
+    const character = learningMode === "character" ? resolveCharacterForCurrentTopic() : null;
+    if (character) {
+      const name = ctx.lang === "en" ? character.nameEn : character.nameEl;
+      refs.modeBox.innerHTML = `<strong>🎭 ${escapeHtml(name)}</strong><span>${escapeHtml(tr("characterCardBadge"))}</span>`;
+      return;
+    }
     const parent = isParentMode();
     refs.modeBox.innerHTML = parent
       ? `<strong>${escapeHtml(tr("modeParent"))}</strong><span>${escapeHtml(tr("modeParentText"))}</span>`
@@ -1305,13 +1312,18 @@ TUTORING RULES
 14. FORMATIVE-ONLY ASSESSMENT: do not present yourself as an official grader, diagnostician or decision-maker. Do not label the learner as "weak", "gifted", "bad at maths", etc.; do not diagnose a learning difficulty; do not predict future performance or recommend an educational track as a decision. You may give specific formative feedback about the CURRENT attempt or topic (for example, "this topic needs more practice") and explain mistakes.
 15. CURRICULUM + QUESTION TOGETHER: treat the selected grade, subject and topic as the educational scope, and the user's current question as the immediate focus. Use BOTH. Do not ignore the selected school context, and do not drift to unrelated curriculum material just because it exists in the catalog.
 
-${parentMode ? `PARENT MODE
+${learningMode === "character" ? `CHARACTER MODE OVERRIDE
+- The adult/parent context is supervision only. Do NOT switch into parent-coaching language.
+- Speak AS the mapped character/role directly in the dialogue.
+- Use first person where historically appropriate, but never claim invented eyewitness knowledge.
+- Do NOT say “ask the child”, “tell the child”, or “the parent should”.
+- Keep the exchange short and interactive: one idea + one question at a time.` : (parentMode ? `PARENT MODE
 - Speak to the parent, not directly to the child.
 - Suggest exactly one simple question the parent can ask the child now.
 - If useful, explain in 1-2 sentences what misconception may be present.
 - Never ask a minor to create an account or use an external AI service.` : `STUDENT MODE
 - Speak directly and naturally to the student.
-- Start from what they have already tried, not from a lecture.`}
+- Start from what they have already tried, not from a lecture.`)}
 
 Priority 1: make the learner think. Priority 2: give correct help. Priority 3: reach the solution.`;
   }
@@ -1868,12 +1880,22 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     }
   }
 
+  function currentCharacterName() {
+    if (learningMode !== "character") return "";
+    const character = resolveCharacterForCurrentTopic();
+    if (!character) return "";
+    return ctx.lang === "en" ? character.nameEn : character.nameEl;
+  }
+
   function addBubble(role, text) {
     refs.empty?.remove();
     refs.empty = null;
     const div = document.createElement("div");
     div.className = `tutor-bubble tutor-bubble--${role}`;
-    const label = role === "user" ? tr("you") : (isParentMode() ? tr("parentHelper") : tr("tutor"));
+    const characterLabel = currentCharacterName();
+    const label = role === "user"
+      ? tr("you")
+      : (characterLabel || (isParentMode() ? tr("parentHelper") : tr("tutor")));
     div.innerHTML = `<div class="tutor-bubble__meta">${escapeHtml(label)}</div><div class="tutor-bubble__text">${escapeHtml(text).replaceAll("\n", "<br>")}</div>`;
     if (role === "assistant") {
       const speak = document.createElement("button");
@@ -1961,6 +1983,11 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             system: requestMessages[0]?.content || "",
             prompt: requestMessages[1]?.content || "",
             audience: isParentMode() ? "parent" : "high_student",
+            mode: learningMode,
+            grade: getSelectedGradeLabel(),
+            subject: langValue(getCurrentSubject(), "subjectLabelEl", "subjectLabelEn", ""),
+            topic: langValue(getCurrentGap(), "labelEl", "labelEn", ""),
+            character: currentCharacterName(),
           }),
         });
         const data = await response.json().catch(() => ({}));
@@ -2001,6 +2028,12 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
   function sampleText() {
     const gap = getCurrentGap();
     const label = langValue(gap, "labelEl", "labelEn", "");
+    const character = learningMode === "character" ? resolveCharacterForCurrentTopic() : null;
+    if (character) {
+      const name = ctx.lang === "en" ? character.nameEn : character.nameEl;
+      if (ctx.lang === "en") return `${name}, tell me what changed and what stayed the same in this period. Ask me one question too.`;
+      return `${name}, πες μου τι άλλαξε και τι έμεινε ίδιο σε αυτή την περίοδο. Κάνε μου και μία ερώτηση.`;
+    }
     if (ctx.lang === "en") {
       if (isParentMode()) return label ? `My child is struggling with “${label}”. How can I help them understand it without giving away the answer?` : tr("sampleParentGeneric");
       return label ? `I don't understand “${label}” very well. Can you guide me step by step without giving me the answer straight away?` : tr("sampleStudentGeneric");

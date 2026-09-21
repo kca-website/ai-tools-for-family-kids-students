@@ -88,15 +88,6 @@ async function checkUnified(page,label){
   await assertGeneralQuizButton(page,`${label} General Gymnasium`);
 
   assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG),false,`${label}: special catalog loaded before selection`);
-  await selectOption(page,'#tutorGrade','lyc-d');
-  const dSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
-  assert.ok(dSubjects.includes('eneegyl-lyc-d-math-2026-27'),`${label}: exact D Lyceum Mathematics mapping missing`);
-  await selectOption(page,'#tutorSubject','eneegyl-lyc-d-math-2026-27');
-  const enMathDTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
-  assert.equal(enMathDTopics.length,7,`${label}: ENEEGYL D Mathematics must expose 7 taught/exam anchors`);
-  const enMathDContext=await page.locator('#tutorContextBox').innerText();
-  assert.match(enMathDContext,/Διδακτέα-εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL D Mathematics must be labelled taught/exam syllabus`);
-
   await selectTrack(page,'special-gymnasium');
   await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG?.hasVerifiedSpecialGymnasium,{timeout:20000});
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: Special Gymnasium selection failed`);
@@ -277,6 +268,15 @@ async function checkUnified(page,label){
   assert.ok(bSubjects.includes('eneegyl-b-economy-accounting-basics'),`${label}: accounting mapped route missing from B Lyceum`);
   assert.ok(bSubjects.some(id=>id.startsWith('eneegyl-lyc-b-b-sector-')),`${label}: B Lyceum sector gateways missing`);
   await assertSimpleQuizButton(page,`${label} ENEEGYL B Lyceum`);
+
+  await selectOption(page,'#tutorGrade','lyc-d');
+  const dSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(dSubjects.includes('eneegyl-lyc-d-math-2026-27'),`${label}: exact D Lyceum Mathematics mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-d-math-2026-27');
+  const enMathDTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enMathDTopics.length,7,`${label}: ENEEGYL D Mathematics must expose 7 taught/exam anchors`);
+  const enMathDContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enMathDContext,/Διδακτέα-εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL D Mathematics must be labelled taught/exam syllabus`);
 
   await selectTrack(page,'special-gymnasium');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: cross-zone return to Special Gymnasium failed`);

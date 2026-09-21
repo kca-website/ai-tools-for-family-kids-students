@@ -178,6 +178,27 @@ assert(slInfoC.officialAnchors.length === 20, `Special Lyceum C Informatics must
 assert(slInfoC.officialAnchors.some(x=>x.includes('Δομή επιλογής')), 'Special Lyceum C Informatics selection structure missing');
 assert(slInfoC.officialAnchors.some(x=>x.includes('Αντικειμενοστραφής προγραμματισμός')), 'Special Lyceum C Informatics OOP group missing');
 
+const slLatinB=SLA.entries['b|latin'];
+assert(slLatinB?.coverageStatus === 'exact', 'Special Lyceum B Latin must be exact annual mapping');
+assert(slLatinB.officialAnchors.length === 15, `Special Lyceum B Latin must expose 15 official units, got ${slLatinB.officialAnchors.length}`);
+assert(slLatinB.officialAnchors[0].startsWith('Ενότητα I'), 'Special Lyceum B Latin must begin with Unit I');
+assert(slLatinB.officialAnchors.at(-1).startsWith('Ενότητα XV'), 'Special Lyceum B Latin must end with Unit XV');
+
+const slLatinC=SLA.entries['c|latin'];
+assert(slLatinC?.coverageStatus === 'exact', 'Special Lyceum C Latin must be exact annual mapping');
+assert(slLatinC.officialAnchors.length === 35, `Special Lyceum C Latin must expose Lessons 16–50, got ${slLatinC.officialAnchors.length}`);
+assert(slLatinC.officialAnchors[0].startsWith('Μάθημα 16'), 'Special Lyceum C Latin must begin with Lesson 16');
+assert(slLatinC.officialAnchors.at(-1).startsWith('Μάθημα 50'), 'Special Lyceum C Latin must end with Lesson 50');
+
+for (const grade of ['a','b','c']) {
+  const h=SLA.entries[`${grade}|history`];
+  assert(h?.frameworkOnly === true && h?.coverageStatus === 'framework',
+    `Special Lyceum ${grade.toUpperCase()} History must remain a documented framework, not fabricated chapter scope`);
+  assert(h.officialAnchors.length === 6, `Special Lyceum ${grade.toUpperCase()} History framework should expose six methodological anchors`);
+}
+assert(/δεν.*κλειστή section-level/i.test(SLA.entries['a|history'].verificationNote||''), 'History A boundary note must reject a fabricated closed syllabus');
+assert(/Σύμβαση της Λοζάνης/.test(SLA.entries['c|history'].verificationNote||''), 'History C note must preserve the distinction between an example lesson and annual syllabus');
+
 const slLangA=SLA.entries['a|language'];
 assert(slLangA?.frameworkOnly === true && slLangA?.coverageStatus === 'framework', 'Special Lyceum A Modern Greek must be a verified framework, not exact chapter scope');
 assert(slLangA.officialAnchors.length === 8, `Special Lyceum A Modern Greek framework must expose 8 official process anchors, got ${slLangA.officialAnchors.length}`);

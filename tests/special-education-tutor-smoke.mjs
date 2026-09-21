@@ -170,6 +170,32 @@ async function checkUnified(page,label){
   assert.equal(slInfoCSections.length,20,`${label}: Special Lyceum C Informatics must expose 20 source-bounded teaching groups`);
   assert.ok(slInfoCSections.some(x=>x.text.includes('Αντικειμενοστραφής προγραμματισμός')),`${label}: Special Lyceum C OOP teaching group missing`);
 
+  await selectOption(page,'#tutorGrade','b');
+  const slLatinB=slBSubjects.find(id=>id.includes('latinika-b-lykeiou'));
+  assert.ok(slLatinB,`${label}: Special Lyceum B Latin exact route missing`);
+  await selectOption(page,'#tutorSubject',slLatinB);
+  const slLatinBTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slLatinBTopics.length,15,`${label}: Special Lyceum B Latin must expose Units I-XV`);
+  assert.ok(slLatinBTopics[0].text.startsWith('Ενότητα I'),`${label}: Special Lyceum B Latin first unit wrong`);
+  assert.ok(slLatinBTopics.at(-1).text.startsWith('Ενότητα XV'),`${label}: Special Lyceum B Latin final unit wrong`);
+
+  await selectOption(page,'#tutorGrade','c');
+  const slLatinC=slCSubjects.find(id=>id.includes('latinika-g-lykeiou'));
+  assert.ok(slLatinC,`${label}: Special Lyceum C Latin exact route missing`);
+  await selectOption(page,'#tutorSubject',slLatinC);
+  const slLatinCTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slLatinCTopics.length,35,`${label}: Special Lyceum C Latin must expose Lessons 16-50`);
+  assert.ok(slLatinCTopics[0].text.startsWith('Μάθημα 16'),`${label}: Special Lyceum C Latin first lesson wrong`);
+  assert.ok(slLatinCTopics.at(-1).text.startsWith('Μάθημα 50'),`${label}: Special Lyceum C Latin final lesson wrong`);
+
+  await selectOption(page,'#tutorGrade','a');
+  const slHistoryA=slSubjects.find(id=>id.includes('istoria-a-lykeiou'));
+  assert.ok(slHistoryA,`${label}: Special Lyceum A History framework route missing`);
+  await selectOption(page,'#tutorSubject',slHistoryA);
+  const slHistoryContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(slHistoryContext,/επίσημο πλαίσιο 2026–27/i,`${label}: Special Lyceum History must be labelled as framework, not exact syllabus`);
+  assert.match(slHistoryContext,/Δεν τεκμηριώνει κλειστή section-level ετήσια λίστα κεφαλαίων/i,`${label}: Special Lyceum History scope boundary missing`);
+
   await selectOption(page,'#tutorGrade','a');
   const slBiology=slSubjects.find(id=>id.includes('biologia-a-lykeiou'));
   assert.ok(slBiology,`${label}: Special Lyceum A Biology exact route missing`);

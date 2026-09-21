@@ -33,6 +33,7 @@
     ["special-gym-annual-2026-2027","/teacher-curriculum-special-gym-annual-2026-2027.js"],
     ["special-lyceum-annual-2026-2027","/teacher-curriculum-special-lyceum-annual-2026-2027.js"],
     ["special-education-special-lyceum","/special-education-special-lyceum-data.js"],
+    ["eneegyl-chemistry-2026-2027","/teacher-curriculum-eneegyl-chemistry-2026-2027.js"],
     ["special-education-tutor-context","/special-education-tutor-context.js"],
     ["special-education-tutor-catalog","/special-education-tutor-catalog.js"]
   ];

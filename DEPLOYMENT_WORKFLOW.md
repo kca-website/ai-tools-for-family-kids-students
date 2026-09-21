@@ -28,3 +28,5 @@ This project is intentionally conservative with Vercel deployments.
 Last production release trigger: 2026-09-21
 
 History/Religion provenance release trigger: 2026-09-21
+
+Consolidated production retry after build-rate reset: 2026-09-21T12:24Z

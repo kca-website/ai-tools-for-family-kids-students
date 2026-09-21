@@ -248,6 +248,11 @@ assert(EN.grades['lyc-a'].subjects.filter(x => x.type === 'elective').length ===
 assert(EN.grades['lyc-a'].subjects.some(x => x.id === 'creative-zone'), 'ENEEGYL A Lyceum must include Creative Activities Zone');
 assert(EN.grades['lyc-b'].subjects.filter(x => x.type === 'sector-gateway').length === 8, 'ENEEGYL B Lyceum must expose eight sector gateways');
 assert(EN.sourceUrls?.gymnasium?.includes('diavgeia.gov.gr') && EN.sourceUrls?.lyceum?.includes('diavgeia.gov.gr'), 'ENEEGYL current timetable sources missing');
+assert(/MAT|%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91/i.test(EN.sourceUrls?.annualSubjects?.lyceumMath||''), 'ENEEGYL Lyceum Mathematics annual source archive missing');
+assert(/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97/i.test(EN.sourceUrls?.annualSubjects?.lyceumPhysics||''), 'ENEEGYL Lyceum Physics annual source archive missing');
+assert(/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91/i.test(EN.sourceUrls?.annualSubjects?.lyceumChemistry||''), 'ENEEGYL Lyceum Chemistry annual source archive missing');
+assert(EN.grades['lyc-a'].subjects.find(x=>x.id==='math')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumMath, 'ENEEGYL A Lyceum Mathematics must carry its subject-specific annual source');
+assert(EN.grades['lyc-d'].subjects.find(x=>x.id==='physics')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumPhysics, 'ENEEGYL D Lyceum Physics must carry its subject-specific annual source');
 
 assert(Array.isArray(SUPPORT.items) && SUPPORT.items.length >= 6, 'Special Education support tools need at least six curated options');
 const supportIds=SUPPORT.items.map(x => x.id);

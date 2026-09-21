@@ -696,12 +696,14 @@
     updateComposerState();
   }
 
-  function hasVerifiedAnnualTopicScope(subject) {
+  function hasDisplayableAnnualTopicScope(subject) {
     const c = subject?.curriculum || {};
     return c.annualInstructionsStatus === "2026-27-verified" ||
       c.coverageStatus === "annual-instructions-verified" ||
       c.coverageStatus === "annual-exam-syllabus-verified" ||
-      c.coverageStatus === "panhellenic-2027-verified";
+      c.coverageStatus === "panhellenic-2027-verified" ||
+      c.coverageStatus === "annual-guidance-detailed-map" ||
+      c.coverageStatus === "panhellenic-2027-detailed-map";
   }
 
   function populateTopics() {
@@ -710,7 +712,7 @@
     const allCatalogTopics = catalogSubject?.topics || [];
     // Support actions do not make curriculum-scope claims, so keep them
     // available even when a subject is intentionally structure-only.
-    const catalogTopics = hasVerifiedAnnualTopicScope(catalogSubject)
+    const catalogTopics = hasDisplayableAnnualTopicScope(catalogSubject)
       ? allCatalogTopics
       : allCatalogTopics.filter((topic) => topic?.specialSupportAction);
     const verifiedQuizTags = getGapTagsForQuiz(quiz).filter((id) => {

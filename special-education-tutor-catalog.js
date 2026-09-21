@@ -310,6 +310,8 @@
   function makeAnnualEneegylSubject(entry){
     const gradeId=eneegylGradeId(entry);
     const partial=entry.coverageStatus==="partial"||entry.coverageStatus==="support-skill"||entry.coverageStatus==="current-exam-syllabus-verified-partial";
+    const panhellenic=entry.coverageStatus==="panhellenic-verified";
+    const examVerified=entry.coverageStatus==="exam-verified"||entry.currentExamSyllabusStatus==="verified";
     const topics=(entry.officialAnchors||[]).map((label,index)=>({
       id:`${entry.id}.topic-${index+1}`,
       labelEl:String(label),labelEn:String(label),
@@ -325,9 +327,9 @@
         schoolYear:C.schoolYear||"2026-2027",
         verificationDate:entry.verificationDate||C.verificationDate||"",
         verificationBasis:entry.verificationBasis||"annual-instructions-2026-27",
-        coverageStatus:partial?"annual-instructions-verified-partial":"annual-instructions-verified",
-        coverageLabelEl:partial?"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Μερική χαρτογράφηση 2026–27":"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Ύλη 2026–27",
-        coverageLabelEn:partial?"EN.E.E.GY.-L. · verified partial 2026–27 mapping":"EN.E.E.GY.-L. · verified 2026–27 curriculum",
+        coverageStatus:partial?"annual-instructions-verified-partial":panhellenic?"panhellenic-2027-verified":examVerified?"annual-exam-syllabus-verified":"annual-instructions-verified",
+        coverageLabelEl:partial?"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Μερική χαρτογράφηση 2026–27":panhellenic?"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Διδακτέα-εξεταστέα ύλη 2026–27":examVerified?"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Εξεταστέα ύλη 2026–27":"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Ύλη 2026–27",
+        coverageLabelEn:partial?"EN.E.E.GY.-L. · verified partial 2026–27 mapping":panhellenic?"EN.E.E.GY.-L. · 2026–27 taught/examinable syllabus":examVerified?"EN.E.E.GY.-L. · verified 2026–27 exam syllabus":"EN.E.E.GY.-L. · verified 2026–27 curriculum",
         officialSectionsEl:[...(entry.officialAnchors||[])],officialSectionsEn:[],
         scopeNoteEl:entry.verificationNote||"Χρησιμοποίησε μόνο τις ρητά επαληθευμένες ενότητες της πηγής.",
         scopeNoteEn:partial?"Use only the verified partial source scope.":"Use only the verified 2026-27 source scope.",

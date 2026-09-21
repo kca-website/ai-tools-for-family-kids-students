@@ -36,6 +36,7 @@
     ["eneegyl-chemistry-2026-2027","/teacher-curriculum-eneegyl-chemistry-2026-2027.js"],
     ["eneegyl-math-2026-2027","/teacher-curriculum-eneegyl-math-2026-2027.js"],
     ["eneegyl-physics-2026-2027","/teacher-curriculum-eneegyl-physics-2026-2027.js"],
+    ["eneegyl-new-greek-2026-2027","/teacher-curriculum-eneegyl-new-greek-2026-2027.js"],
     ["special-education-tutor-context","/special-education-tutor-context.js"],
     ["special-education-tutor-catalog","/special-education-tutor-catalog.js"]
   ];

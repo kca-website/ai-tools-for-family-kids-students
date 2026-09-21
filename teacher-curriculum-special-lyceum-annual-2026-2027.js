@@ -63,6 +63,25 @@
     "Βιβλίο 2 §1.3.1–1.3.4 Λίστες, δένδρα και γράφοι",
     "6.5 και Βιβλίο 2 §4.1–4.6 Αντικειμενοστραφής προγραμματισμός"
   ]);
+  const LANGUAGE_AB_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9D_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%91_%CE%9B%CE%9F%CE%93%CE%9F%CE%A4_%CE%91_%CE%92_%CE%95%CE%91%CE%95_2026-2027.pdf";
+  const languageABFramework=Object.freeze([
+    "Κατανόηση κειμένου — Α1 Εντοπισμός και αναγνώριση βασικών χαρακτηριστικών",
+    "Κατανόηση κειμένου — Α2 Ερμηνεία και μετασχηματισμοί",
+    "Κατανόηση κειμένου — Α3 Κριτικός στοχασμός / αξιολόγηση",
+    "Κατανόηση κειμένου — Α4 Αναστοχασμός στρατηγικών κατανόησης",
+    "Παραγωγή λόγου — Β1 Σχεδιασμός και οργάνωση κειμένων",
+    "Παραγωγή λόγου — Β2 Σύνθεση κειμένων",
+    "Παραγωγή λόγου — Β3 Αναθεώρηση και δημοσίευση",
+    "Παραγωγή λόγου — Β4 Αναστοχασμός στρατηγικών παραγωγής / μετασχηματισμού"
+  ]);
+  const LANGUAGE_C_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9D_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%91_%CE%9B%CE%9F%CE%93%CE%9F%CE%A4_%CE%93_%CE%95%CE%91%CE%95-2026-27.pdf";
+  const languageCFramework=Object.freeze([
+    "Θέμα Α — συνοπτική απόδοση / κατανόηση βασικού νοήματος",
+    "Θέμα Β — κατανόηση, γλωσσικές επιλογές και κριτική προσέγγιση μη λογοτεχνικού κειμένου",
+    "Θέμα Γ — ερμηνευτικό σχόλιο λογοτεχνικού κειμένου με κειμενικούς δείκτες και προσωπική ανταπόκριση",
+    "Θέμα Δ — παραγωγή τεκμηριωμένου λόγου σε συγκεκριμένο επικοινωνιακό πλαίσιο"
+  ]);
+
   const BIOLOGY_A_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%91-%CE%9BYK-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-2026-27.pdf";
   const biologyA=Object.freeze([
     "Κεφάλαιο 1: Από το κύτταρο στον οργανισμό — Κύτταρα και ιστοί",
@@ -160,6 +179,30 @@
         verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Πληροφορική Προσανατολισμού Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
         sourceUrl:INFORMATICS_C_PDF,officialAnchors:sectionsC,
         verificationNote:"Οι επιλογές προέρχονται από τον επίσημο Πίνακα 1 «Προτεινόμενη Διδασκαλία» και ομαδοποιούν μόνο τις ρητά καταγεγραμμένες ενότητες των δύο βασικών εγχειριδίων."
+      }),
+      "a|language":Object.freeze({
+        id:"special-lyceum-a-language-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"Νεοελληνική Γλώσσα και Λογοτεχνία",subjectId:"language",sourceSubjectIds:Object.freeze(["language","greek","glossa-a-high","ekthesi-a-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Νεοελληνική Γλώσσα και Λογοτεχνία Α΄–Β΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:LANGUAGE_AB_PDF,officialAnchors:languageABFramework,
+        verificationNote:"Επίσημο πλαίσιο δεξιοτήτων. Η οδηγία δηλώνει ανοικτή επιλογή κειμενικού υλικού, άρα οι επιλογές δεν παρουσιάζονται ως κεφάλαια ή κλειστή ετήσια ύλη."
+      }),
+      "b|language":Object.freeze({
+        id:"special-lyceum-b-language-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Νεοελληνική Γλώσσα και Λογοτεχνία",subjectId:"language",sourceSubjectIds:Object.freeze(["language","greek","glossa-b-high","ekthesi-b-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Νεοελληνική Γλώσσα και Λογοτεχνία Α΄–Β΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:LANGUAGE_AB_PDF,officialAnchors:languageABFramework,
+        verificationNote:"Επίσημο πλαίσιο δεξιοτήτων. Στη Β΄ τάξη η λογοτεχνία διδάσκεται με ελεύθερη επιλογή κειμένων από τον/την εκπαιδευτικό· δεν επινοείται λίστα κεφαλαίων."
+      }),
+      "c|language":Object.freeze({
+        id:"special-lyceum-c-language-framework-2026-27",grade:"C",gradeId:"c",gradeLabel:"Γ΄ Λυκείου",
+        subject:"Νεοελληνική Γλώσσα και Λογοτεχνία",subjectId:"language",sourceSubjectIds:Object.freeze(["language","greek","glossa-c-high","ekthesi-g-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Νεοελληνική Γλώσσα και Λογοτεχνία Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:LANGUAGE_C_PDF,officialAnchors:languageCFramework,
+        verificationNote:"Οι τέσσερις επιλογές αποτυπώνουν τον επίσημο τύπο εργασιών/αξιολόγησης της οδηγίας, όχι θεματικά κεφάλαια ή κλειστή εξεταστέα ύλη."
       }),
       "a|biology":Object.freeze({
         id:"special-lyceum-a-biology-official-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",

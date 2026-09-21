@@ -156,7 +156,7 @@ for (const guide of (SL.annualGuidanceIndex||[])) {
 }
 const biologyGuide=(SL.annualGuidanceIndex||[]).find(x=>x.key==='biology');
 assert(/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-/.test(biologyGuide?.sourceUrl||''), 'Special Lyceum Biology must point to a direct official 2026-27 guidance PDF');
-assert(['a','b','c'].every(g=>/^https:\/\/dide\.ira\.sch\.gr\/.test(biologyGuide?.sourceUrlsByGrade?.[g]||'')),
+assert(['a','b','c'].every(g=>/^https:\/\/dide\.ira\.sch\.gr\//.test(biologyGuide?.sourceUrlsByGrade?.[g]||'')),
   'Special Lyceum Biology must have a direct grade-specific official PDF for A/B/C');
 assert(Object.keys(SL.grades || {}).sort().join(',') === 'a,b,c', 'Special Lyceum must expose A/B/C Lyceum grades');
 assert(/δεν|not/i.test(SL.scopeNoteEl + ' ' + SL.scopeNoteEn), 'Special Lyceum must state the no-invented-syllabus boundary');

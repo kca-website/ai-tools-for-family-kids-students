@@ -57,7 +57,15 @@ try{
 
   const currentHigh=audit.filter(r=>r.zoneId==='high');
   assert.ok(currentHigh.every(r=>r.schoolYear==='2026-2027'), 'Every active GEL subject must now point to 2026–27 evidence');
-  assert.ok(currentHigh.every(r=>/2026-27|2027/.test(r.coverageStatus)), 'Every active GEL subject must carry a current-year coverage status');
+  const allowedCurrentHighStatuses=new Set([
+    'annual-instructions-verified',
+    'annual-exam-syllabus-verified',
+    'panhellenic-2027-verified',
+    'annual-guidance-detailed-map',
+    'panhellenic-2027-detailed-map'
+  ]);
+  assert.ok(currentHigh.every(r=>allowedCurrentHighStatuses.has(r.coverageStatus)),
+    'Every active GEL subject must carry a recognised current-year evidence status');
 
   // User-facing provenance: mapped material must display both its boundary and clickable source.
   await page.evaluate(()=>{

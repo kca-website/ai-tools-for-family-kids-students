@@ -236,6 +236,21 @@ async function checkUnified(page,label){
   assert.ok(aSubjects.includes('eneegyl-a-zdd'),`${label}: mapped A Lyceum ZDD route missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-economics'),`${label}: A Lyceum Principles of Economy missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-health'),`${label}: A Lyceum Health elective missing`);
+  assert.ok(!aSubjects.includes('eneegyl-lyc-a-math'),`${label}: generic A Mathematics duplicate must be hidden when exact annual mapping exists`);
+  assert.ok(!aSubjects.includes('eneegyl-lyc-a-physics'),`${label}: generic A Physics duplicate must be hidden when exact annual mapping exists`);
+  assert.ok(!aSubjects.includes('eneegyl-lyc-a-english'),`${label}: generic A English duplicate must be hidden when exact annual mapping exists`);
+  assert.ok(!aSubjects.includes('eneegyl-lyc-a-new-greek'),`${label}: generic A New Greek duplicate must be hidden when exact annual mapping exists`);
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-history'),`${label}: A Lyceum History guidance-indexed route missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-history');
+  const enHistoryContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enHistoryContext,/επίσημη οδηγία 2026–27 εντοπίστηκε · section mapping σε εξέλιξη/i,`${label}: A History must be labelled source-indexed, not exact syllabus`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="iep.edu.gr"]').count()>=1,`${label}: A History official guidance archive missing`);
+
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-religion'),`${label}: A Lyceum Religion guidance-indexed route missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-religion');
+  const enReligionContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enReligionContext,/επίσημη οδηγία 2026–27 εντοπίστηκε · section mapping σε εξέλιξη/i,`${label}: A Religion must be labelled source-indexed, not exact syllabus`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="iep.edu.gr"]').count()>=1,`${label}: A Religion official guidance archive missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-math-2026-27'),`${label}: exact A Lyceum Mathematics mapping missing`);
   await selectOption(page,'#tutorSubject','eneegyl-lyc-a-math-2026-27');
   const enMathATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));

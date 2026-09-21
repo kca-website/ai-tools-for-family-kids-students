@@ -63,6 +63,20 @@
     "Βιβλίο 2 §1.3.1–1.3.4 Λίστες, δένδρα και γράφοι",
     "6.5 και Βιβλίο 2 §4.1–4.6 Αντικειμενοστραφής προγραμματισμός"
   ]);
+  const LATIN_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9B%CE%91%CE%A4%CE%99%CE%9D%CE%99%CE%9A%CE%91_%CE%95%CE%91%CE%95_2026-2027.pdf";
+  const latinB=Object.freeze(Array.from({length:15},(_,i)=>`Ενότητα ${["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV"][i]} — κείμενο, μετάφραση, στοιχεία ρωμαιογνωσίας και τα γραμματικοσυντακτικά φαινόμενα που ορίζει η επίσημη οδηγία`));
+  const latinC=Object.freeze(Array.from({length:35},(_,i)=>`Μάθημα ${i+16} — κείμενο, μετάφραση, ρωμαιογνωσία και γλωσσικά φαινόμενα σύμφωνα με την επίσημη οδηγία`));
+
+  const HISTORY_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%99%CE%A3%CE%A4%CE%9F%CE%A1%CE%99%CE%91_%CE%95%CE%91%CE%95_2026-2027.pdf";
+  const historyFramework=Object.freeze([
+    "Χρονικός και γεωγραφικός προσδιορισμός ιστορικών φαινομένων",
+    "Αίτια, συνέπειες, κίνητρα και ιστορική συνέχεια",
+    "Αξιοποίηση πρωτογενών και δευτερογενών ιστορικών πηγών",
+    "Ένταξη πληροφοριών πηγών στο κατάλληλο ιστορικό πλαίσιο",
+    "Σύγκριση και αξιολόγηση διαφορετικών ιστορικών μαρτυριών",
+    "Παραγωγή ιστορικά τεκμηριωμένου λόγου χωρίς στερεότυπα"
+  ]);
+
   const LANGUAGE_AB_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9D_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%91_%CE%9B%CE%9F%CE%93%CE%9F%CE%A4_%CE%91_%CE%92_%CE%95%CE%91%CE%95_2026-2027.pdf";
   const languageABFramework=Object.freeze([
     "Κατανόηση κειμένου — Α1 Εντοπισμός και αναγνώριση βασικών χαρακτηριστικών",
@@ -179,6 +193,46 @@
         verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Πληροφορική Προσανατολισμού Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
         sourceUrl:INFORMATICS_C_PDF,officialAnchors:sectionsC,
         verificationNote:"Οι επιλογές προέρχονται από τον επίσημο Πίνακα 1 «Προτεινόμενη Διδασκαλία» και ομαδοποιούν μόνο τις ρητά καταγεγραμμένες ενότητες των δύο βασικών εγχειριδίων."
+      }),
+      "b|latin":Object.freeze({
+        id:"special-lyceum-b-latin-official-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Λατινικά Προσανατολισμού",subjectId:"latin",sourceSubjectIds:Object.freeze(["latin","latinika-b-lykeiou","latinika-b-high"]),status:"verified",coverageStatus:"exact",
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Λατινικά Β΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:LATIN_PDF,officialAnchors:latinB,
+        verificationNote:"Η επίσημη οδηγία οργανώνει ρητά τη Β΄ τάξη σε Ενότητες I–XV. Οι επιλογές κρατούν μόνο την επίσημη αρίθμηση και το τεκμηριωμένο διδακτικό εύρος, χωρίς επινοημένους τίτλους."
+      }),
+      "c|latin":Object.freeze({
+        id:"special-lyceum-c-latin-official-2026-27",grade:"C",gradeId:"c",gradeLabel:"Γ΄ Λυκείου",
+        subject:"Λατινικά Προσανατολισμού",subjectId:"latin",sourceSubjectIds:Object.freeze(["latin","latinika-g-lykeiou","latinika-c-high"]),status:"verified",coverageStatus:"exact",
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Λατινικά Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:LATIN_PDF,officialAnchors:latinC,
+        verificationNote:"Η επίσημη οδηγία συνεχίζει με τα Μαθήματα 16–50. Δεν προστίθενται τεχνητοί τίτλοι: εμφανίζεται η επίσημη αρίθμηση και το δηλωμένο εύρος μελέτης."
+      }),
+      "a|history":Object.freeze({
+        id:"special-lyceum-a-history-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"Ιστορία",subjectId:"history",sourceSubjectIds:Object.freeze(["history","istoria-a-lykeiou","istoria-a-high"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ιστορία Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:HISTORY_PDF,officialAnchors:historyFramework,
+        verificationNote:"Η οδηγία δίνει κυρίως μεθοδολογικό πλαίσιο και ενδεικτικές διδακτικές προτάσεις. Δεν τεκμηριώνει κλειστή section-level ετήσια λίστα κεφαλαίων, άρα δεν παρουσιάζεται ως τέτοια."
+      }),
+      "b|history":Object.freeze({
+        id:"special-lyceum-b-history-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Ιστορία",subjectId:"history",sourceSubjectIds:Object.freeze(["history","istoria-b-lykeiou","istoria-b-high"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ιστορία Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:HISTORY_PDF,officialAnchors:historyFramework,
+        verificationNote:"Επίσημο πλαίσιο διδασκαλίας και επεξεργασίας ιστορικών πηγών. Δεν μετατρέπονται οι ενδεικτικές προτάσεις σε υποτιθέμενη πλήρη ετήσια ύλη."
+      }),
+      "c|history":Object.freeze({
+        id:"special-lyceum-c-history-framework-2026-27",grade:"C",gradeId:"c",gradeLabel:"Γ΄ Λυκείου",
+        subject:"Ιστορία / Ιστορία Προσανατολισμού",subjectId:"history",sourceSubjectIds:Object.freeze(["history","istoria-g-lykeiou","istoria-c-high","istoria-prosanatolismou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-21",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ιστορία Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:HISTORY_PDF,officialAnchors:historyFramework,
+        verificationNote:"Η οδηγία περιλαμβάνει ενδεικτικό παράδειγμα για τη Σύμβαση της Λοζάνης, αλλά αυτό δεν αντιμετωπίζεται ως πλήρης ετήσια ύλη. Διατηρείται μόνο το τεκμηριωμένο μεθοδολογικό πλαίσιο."
       }),
       "a|language":Object.freeze({
         id:"special-lyceum-a-language-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",

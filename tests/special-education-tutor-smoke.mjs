@@ -172,12 +172,15 @@ async function checkUnified(page,label){
 
   await selectOption(page,'#tutorGrade','a');
   const slBiology=slSubjects.find(id=>id.includes('biologia-a-lykeiou'));
-  assert.ok(slBiology,`${label}: Special Lyceum A Biology support route missing`);
+  assert.ok(slBiology,`${label}: Special Lyceum A Biology exact route missing`);
   await selectOption(page,'#tutorSubject',slBiology);
+  const slBiologyTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slBiologyTopics.length,13,`${label}: Special Lyceum A Biology must expose 13 exact official sections`);
+  assert.ok(slBiologyTopics.some(x=>x.text.includes('Κυκλοφορικό Σύστημα — Αίμα')),`${label}: Special Lyceum A Biology blood section missing`);
   const slBiologyContext=await page.locator('#tutorContextBox').innerText();
-  assert.match(slBiologyContext,/ειδική οδηγία 2026–27 εντοπίστηκε/i,`${label}: Special Lyceum A Biology must expose its source-indexed status`);
-  assert.match(slBiologyContext,/Βιολογία/i,`${label}: Special Lyceum A Biology source label must name the subject`);
-  assert.ok(await page.locator('#tutorContextBox a[href^="https://www.iep.edu.gr/"]').count()>=1,`${label}: Special Lyceum A Biology official IEP source link missing`);
+  assert.match(slBiologyContext,/Ειδικό Λύκειο · Ύλη 2026–27/i,`${label}: Special Lyceum A Biology must be labelled exact 2026-27 curriculum`);
+  assert.match(slBiologyContext,/Βιολογία Α΄ Λυκείου Ε\.Α\.Ε\./i,`${label}: Special Lyceum A Biology source label must name the exact guidance`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="dide.ira.sch.gr"]').count()>=1,`${label}: Special Lyceum A Biology direct official guidance link missing`);
 
   await selectTrack(page,'eneegyl');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL selection failed`);

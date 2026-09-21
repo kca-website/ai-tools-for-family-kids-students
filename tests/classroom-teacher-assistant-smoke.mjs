@@ -55,10 +55,9 @@ try{
   assert.match(await page.locator('#curriculumNote').innerText(),/αναλυτικό χάρτη/i,'Teacher Assistant must label GEL Biology topics as a documented navigation map');
   assert.ok(await page.locator('#curriculumNote a[href^="https://"]').count()>=1,'Teacher Assistant mapped curriculum must expose a source link');
 
-  await page.click('#generateBtn');
-  assert.equal(await page.locator('#disclosure').isVisible(),true,'Disconnected generation must open Puter disclosure instead of silently loading Puter');
-  assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Opening disclosure alone must not load Puter');
-  await page.click('#cancelConnect');
+  assert.equal(await page.locator('#groqBtn').count(),1,'Teacher Assistant must expose the account-free Groq generation route');
+  assert.equal(await page.locator('#puterBtn').count(),1,'Teacher Assistant must expose Puter only as an explicit alternative');
+  assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Puter must remain unloaded until the user explicitly chooses it');
 
   await page.click('[data-task="observation"]');
   assert.match(await page.locator('#detailsHint').innerText(),/όχι στοιχεία συγκεκριμένου μαθητή/i);

@@ -36,6 +36,7 @@
       sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
       sourceEn: "Wikimedia Commons · public domain",
       topicIds: ["history.athens-sparta-confusion", "istoria-a-gym.peloponnesian-war-sides"],
+      topicPatterns: ["αθήνα vs σπάρτη", "αθηναϊκή δημοκρατία", "πελοποννησιακός πόλεμος", "athens vs sparta", "athenian democracy", "peloponnesian war"],
     },
     socrates: {
       id: "socrates",
@@ -52,6 +53,7 @@
       sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
       sourceEn: "Wikimedia Commons · public domain",
       topicIds: ["history.philosophers-confusion"],
+      topicPatterns: ["σωκράτης", "αρχαίοι φιλόσοφοι", "socrates", "ancient philosophers"],
     },
     alexander: {
       id: "alexander",
@@ -68,6 +70,25 @@
       sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
       sourceEn: "Wikimedia Commons · public domain",
       topicIds: ["istoria-a-gym.alexander-legacy"],
+      topicPatterns: ["μέγας αλέξανδρος", "έργο μεγάλου αλεξάνδρου", "ελληνιστικός κόσμος", "alexander the great", "hellenistic world"],
+    },
+    byzantineResident: {
+      id: "byzantineResident",
+      nameEl: "Κάτοικος της Βυζαντινής Αυτοκρατορίας",
+      nameEn: "Resident of the Byzantine Empire",
+      periodEl: "Βυζαντινή περίοδος",
+      periodEn: "Byzantine period",
+      roleEl: "Σύνθετος εκπαιδευτικός ρόλος",
+      roleEn: "Composite educational role",
+      introEl: "Δες τη συνέχεια και τις αλλαγές από τη σκοπιά ενός ανθρώπου της εποχής. Ο ρόλος δεν παριστάνει υπαρκτό συγκεκριμένο πρόσωπο και δεν αποτελεί ιστορική μαρτυρία.",
+      introEn: "Explore continuity and change from the viewpoint of a person living in the period. This is not a specific real person and is not historical testimony.",
+      imageUrl: "",
+      sourceUrl: "",
+      sourceEl: "",
+      sourceEn: "",
+      topicIds: [],
+      topicPatterns: ["βυζαντινή περίοδος", "βυζαντινή αυτοκρατορία", "byzantine period", "byzantine empire"],
+      composite: true,
     },
   };
   let learningMode = "understand";
@@ -660,10 +681,26 @@
 
   function resolveCharacterForCurrentTopic() {
     const gap = getCurrentGap();
-    if (!gap?.id) return null;
-    return Object.values(CHARACTER_CATALOG).find((character) =>
-      (character.topicIds || []).includes(gap.id)
-    ) || null;
+    const subject = getCurrentSubject();
+    if (!gap) return null;
+
+    const subjectText = `${subject?.id || ""} ${subject?.subjectLabelEl || ""} ${subject?.subjectLabelEn || ""}`.toLowerCase();
+    const topicText = `${gap.id || ""} ${gap.labelEl || ""} ${gap.labelEn || ""}`.toLowerCase();
+
+    // Character dialogue is only for historical/literary content, never just because a topic
+    // happens to sit inside a broad language/history selector.
+    const eligibleSubject = /ιστορ|history|λογοτεχν|literature/.test(subjectText);
+    if (!eligibleSubject) return null;
+
+    // Method/history-skills topics are intentionally NOT role-played.
+    if (/χρονογραμμ|διαδοχ.*γεγον|όρια.*τεκμηρ|ιστορικ.*τεκμηρ|ιστορικ.*πηγ|timeline|chronolog|historical source|source limits/.test(topicText)) {
+      return null;
+    }
+
+    return Object.values(CHARACTER_CATALOG).find((character) => {
+      if ((character.topicIds || []).includes(gap.id)) return true;
+      return (character.topicPatterns || []).some((pattern) => topicText.includes(String(pattern).toLowerCase()));
+    }) || null;
   }
 
   function renderCharacterCard() {
@@ -680,18 +717,24 @@
     const intro = ctx.lang === "en" ? character.introEn : character.introEl;
     const source = ctx.lang === "en" ? character.sourceEn : character.sourceEl;
     refs.characterCard.hidden = false;
+    const portraitHtml = character.imageUrl
+      ? `<div class="tutor-character-card__portrait-wrap">
+          <span class="tutor-character-card__fallback" aria-hidden="true">🏛️</span>
+          <img class="tutor-character-card__portrait" src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />
+        </div>`
+      : `<div class="tutor-character-card__portrait-wrap tutor-character-card__portrait-wrap--generic" aria-hidden="true"><span class="tutor-character-card__generic-icon">🏛️</span></div>`;
+    const sourceHtml = character.sourceUrl
+      ? `<a class="tutor-character-card__source" href="${escapeHtml(character.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tr("characterCardSource"))}: ${escapeHtml(source)} ↗</a>`
+      : "";
     refs.characterCard.innerHTML = `
-      <div class="tutor-character-card__portrait-wrap">
-        <span class="tutor-character-card__fallback" aria-hidden="true">🏛️</span>
-        <img class="tutor-character-card__portrait" src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />
-      </div>
+      ${portraitHtml}
       <div class="tutor-character-card__body">
         <span class="tutor-character-card__badge">${escapeHtml(tr("characterCardBadge"))}</span>
         <h3>${escapeHtml(name)}</h3>
         <p class="tutor-character-card__meta">${escapeHtml(period)} · ${escapeHtml(role)}</p>
         <p class="tutor-character-card__intro">${escapeHtml(intro)}</p>
         <p class="tutor-character-card__hint">${escapeHtml(tr("characterCardHint"))}</p>
-        <a class="tutor-character-card__source" href="${escapeHtml(character.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tr("characterCardSource"))}: ${escapeHtml(source)} ↗</a>
+        ${sourceHtml}
       </div>
     `;
   }
@@ -732,8 +775,12 @@
       const character = resolveCharacterForCurrentTopic();
       const characterName = character ? character.nameEn : "a historically plausible character";
       const characterRole = character ? character.roleEn : "a relevant historical role";
+      const compositeRule = character?.composite
+        ? "- This is a COMPOSITE educational role, not a real named person. Never claim personal eyewitness authority or invented biography."
+        : "- This is a representation of a documented historical/literary figure, not an authentic quotation or testimony.";
       return `LEARNING MODE: CHARACTER DIALOGUE
 - This is an educational role-play, not a primary historical/literary source.
+${compositeRule}
 - Role-play specifically as ${characterName} (${characterRole}) for this mapped topic.
 - Do not switch to another character unless the learner explicitly exits this mode.
 - Never invent quotations, documents, dates, events or biographical facts.
@@ -2113,6 +2160,15 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     return exists;
   }
 
+  function selectUrlText(select, textValue) {
+    if (!select || !textValue) return false;
+    const wanted = String(textValue).trim().toLowerCase();
+    const option = [...select.options].find((item) => String(item.textContent || "").trim().toLowerCase() === wanted);
+    if (!option) return false;
+    select.value = option.value;
+    return true;
+  }
+
   function applyUrlCurriculumSelection() {
     const params = new URLSearchParams(location.search);
 
@@ -2137,7 +2193,9 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     if (selectUrlValue(refs.subject, params.get("subject"))) {
       populateTopics();
     }
-    if (selectUrlValue(refs.topic, params.get("topic"))) {
+    const topicSelected = selectUrlValue(refs.topic, params.get("topic")) ||
+      selectUrlText(refs.topic, params.get("topicText"));
+    if (topicSelected) {
       renderContext();
     }
 

@@ -69,6 +69,16 @@
       heroHelpPrimary: "Γονιός Δημοτικού",
       heroHelpMiddle: "Γονιός Γυμνασίου",
       heroHelpHigh: "Μαθητής Λυκείου",
+      homeAiModesEyebrow: "AI για πραγματική μάθηση",
+      homeAiModesTitle: "Διάλεξε πώς θα σε βοηθήσει το AI να μάθεις",
+      homeAiModesIntro: "Το ίδιο AI δεν είναι κατάλληλο για κάθε δυσκολία. Πρώτα βρίσκουμε τι χρειάζεσαι και μετά ποιο εργαλείο ή τρόπος AI βοήθειας ταιριάζει.",
+      homeAiRecallTitle: "AI Επανάληψη",
+      homeAiRecallText: "Ξαναφέρνει στην κατάλληλη στιγμή όσα σε δυσκόλεψαν και σε ελέγχει με νέα ερώτηση.",
+      homeAiCharacterTitle: "Μίλα με έναν χαρακτήρα AI",
+      homeAiCharacterText: "Μάθε βιωματικά μέσα από τεκμηριωμένο διάλογο και μετά έλεγξε τι πραγματικά έμαθες.",
+      homeAiChallengeTitle: "AI Πρόκληση κατανόησης",
+      homeAiChallengeText: "Παίρνεις μικρές υποδείξεις, απαντάς μόνος σου και στο τέλος αποδεικνύεις ότι κατάλαβες.",
+      homeAiModesFoot: "Μάθημα → ανάγκη → κατάλληλη AI βοήθεια → προσπάθεια χωρίς AI.",
       backToZones: "Πίσω σε όλες τις ζώνες",
       footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Η προαιρετική AI Βοήθεια χρησιμοποιεί Groq/GPT-OSS 120B ή Puter.",
       emptyState: "Δεν έχουν προστεθεί ακόμα εργαλεία για αυτόν τον συνδυασμό. Έρχονται σύντομα.",
@@ -182,6 +192,16 @@
       heroHelpPrimary: "Primary parent",
       heroHelpMiddle: "Middle School parent",
       heroHelpHigh: "High School student",
+      homeAiModesEyebrow: "AI for real learning",
+      homeAiModesTitle: "Choose how AI should help you learn",
+      homeAiModesIntro: "The same AI is not right for every difficulty. First identify what you need, then choose the tool or AI learning mode that fits.",
+      homeAiRecallTitle: "AI Review",
+      homeAiRecallText: "Brings back what you struggled with at the right time and checks you with a new question.",
+      homeAiCharacterTitle: "Talk with an AI character",
+      homeAiCharacterText: "Learn through a grounded role-play dialogue, then verify what you actually learned.",
+      homeAiChallengeTitle: "AI Understanding Challenge",
+      homeAiChallengeText: "Get small hints, answer on your own, and finish by proving that you understood.",
+      homeAiModesFoot: "Subject → need → suitable AI help → try again without AI.",
       backToZones: "Back to all zones",
       footerText: "Independent project. It is not an official product or partnership of any AI provider. Optional AI Help uses Groq/GPT-OSS 120B or Puter.",
       emptyState: "No tools added yet for this combination. Coming soon.",
@@ -566,6 +586,16 @@
     });
   }
 
+  function accessibilityRank(toolId) {
+    if (typeof ACCESSIBILITY_INFO === "undefined") return 2;
+    const status = ACCESSIBILITY_INFO[toolId]?.status;
+    if (status === "good") return 0;
+    if (status === "partial") return 1;
+    if (status === "none" || !status) return 2;
+    if (status === "caution") return 3;
+    return 2;
+  }
+
   // ---------- Rendering: Path intro + tool grid (βασικά εργαλεία) ----------
   function renderPathContent() {
     const zone = ZONES.find((z) => z.id === state.currentZone);
@@ -622,14 +652,11 @@
       }
     }
 
-    if (state.a11yFilterOnly && typeof ACCESSIBILITY_INFO !== "undefined") {
-      toolsToShow = toolsToShow.filter(
-        (entry) => ACCESSIBILITY_INFO[entry.toolId] && ACCESSIBILITY_INFO[entry.toolId].status === "good"
-      );
-      if (!toolsToShow.length) {
-        els.toolGrid.innerHTML = `<div class="empty-state">${t("a11yFilterEmptyState")}</div>`;
-        return;
-      }
+    if (state.a11yFilterOnly) {
+      toolsToShow = toolsToShow
+        .map((entry, index) => ({ entry, index }))
+        .sort((a, b) => accessibilityRank(a.entry.toolId) - accessibilityRank(b.entry.toolId) || a.index - b.index)
+        .map(({ entry }) => entry);
     }
 
     renderToolGrid(toolsToShow, els.toolGrid);
@@ -643,17 +670,17 @@
     Object.keys(TOOLS).forEach((id) => {
       const tool = TOOLS[id];
       if (tool.isExpert) {
-        if (state.a11yFilterOnly && typeof ACCESSIBILITY_INFO !== "undefined") {
-          const a11y = ACCESSIBILITY_INFO[id];
-          if (!a11y || a11y.status !== "good") return;
-        }
         expertTools.push({ toolId: id, tool });
       }
     });
 
     if (!expertTools.length) {
-      els.advancedGrid.innerHTML = `<div class="empty-state">${state.a11yFilterOnly ? t("a11yFilterEmptyState") : t("emptyState")}</div>`;
+      els.advancedGrid.innerHTML = `<div class="empty-state">${t("emptyState")}</div>`;
       return;
+    }
+
+    if (state.a11yFilterOnly) {
+      expertTools.sort((a, b) => accessibilityRank(a.toolId) - accessibilityRank(b.toolId));
     }
 
     // Δημιουργούμε μια λίστα με την ίδια δομή με τα path tools

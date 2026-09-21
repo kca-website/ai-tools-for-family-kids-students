@@ -26,3 +26,5 @@ This project is intentionally conservative with Vercel deployments.
 - For high-traffic periods, keep a known-good production deployment available for rollback.
 
 Last production release trigger: 2026-09-21
+
+History/Religion provenance release trigger: 2026-09-21

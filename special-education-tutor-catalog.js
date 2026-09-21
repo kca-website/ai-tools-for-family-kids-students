@@ -375,6 +375,12 @@
       (grade?.subjects||[]).forEach((row,index)=>{
         const mapped=detailedA[`${gradeId}|${row.id}`];
         if(mapped&&exposed.some((x)=>x.id===mapped)) return;
+        const hasVerifiedAnnual=exposed.some((x)=>{
+          if(x.schoolType!=="eneegyl"||x.gradeId!==gradeId||x.structureOnly) return false;
+          const source=C.entries?.[x.sourceCurriculumId||x.id];
+          return source?.subjectId===row.id;
+        });
+        if(hasVerifiedAnnual) return;
         const id=`eneegyl-${gradeId}-${row.id}`;
         const exact=row.requiresExactLesson;
         const topicEl=exact
@@ -393,12 +399,14 @@
           }],
           curriculum:{
             schoolYear:EN.schoolYear,verificationDate:EN.verificationDate,
-            verificationBasis:"official-2026-timetable-structure",coverageStatus:"official-structure-only",
-            coverageLabelEl:"ΕΝ.Ε.Ε.ΓΥ.-Λ. · επίσημη δομή 8 τάξεων 2026–27",coverageLabelEn:"EN.E.E.GY.-L. · official 8-grade 2026–27 structure",
+            verificationBasis:row.annualSourceUrl?"official-2026-27-guidance-source-indexed":"official-2026-timetable-structure",
+            coverageStatus:row.annualSourceUrl?"annual-guidance-source-indexed":"official-structure-only",
+            coverageLabelEl:row.annualSourceUrl?"ΕΝ.Ε.Ε.ΓΥ.-Λ. · επίσημη οδηγία 2026–27 εντοπίστηκε · section mapping σε εξέλιξη":"ΕΝ.Ε.Ε.ΓΥ.-Λ. · επίσημη δομή 8 τάξεων 2026–27",
+            coverageLabelEn:row.annualSourceUrl?"EN.E.E.GY.-L. · official 2026–27 guidance found · section mapping in progress":"EN.E.E.GY.-L. · official 8-grade 2026–27 structure",
             officialSectionsEl:[`${grade.label}: ${row.label}`],officialSectionsEn:[],
-            scopeNoteEl:"Το μάθημα υπάρχει στο επίσημο σχολικό πλαίσιο, αλλά η αναλυτική ύλη του δεν δηλώνεται ως πλήρως χαρτογραφημένη εδώ. Δώσε το πραγματικό κεφάλαιο/άσκηση.",
-            scopeNoteEn:"The subject is part of the official school structure, but detailed syllabus coverage is not claimed here. Provide the real chapter/exercise.",
-            annualInstructionsStatus:grade.level==="lyceum"?"2026-27-hub-available":"not-claimed",
+            scopeNoteEl:row.annualSourceUrl?"Υπάρχει επίσημη οδηγία 2026–27 για το μάθημα, αλλά δεν δηλώνεται εδώ πλήρης section-level χαρτογράφηση πριν επαληθευτεί το περιεχόμενο της πηγής.":"Το μάθημα υπάρχει στο επίσημο σχολικό πλαίσιο, αλλά η αναλυτική ύλη του δεν δηλώνεται ως πλήρως χαρτογραφημένη εδώ. Δώσε το πραγματικό κεφάλαιο/άσκηση.",
+            scopeNoteEn:row.annualSourceUrl?"An official 2026–27 guidance source exists, but full section-level coverage is not claimed until the source content is verified.":"The subject is part of the official school structure, but detailed syllabus coverage is not claimed here. Provide the real chapter/exercise.",
+            annualInstructionsStatus:row.annualSourceUrl?"2026-27-source-indexed":grade.level==="lyceum"?"2026-27-hub-available":"not-claimed",
             annualInstructionsUrl:grade.level==="lyceum"?(row.annualSourceUrl||EN.sourceUrls?.annualInstructions||""):"",
             officialTimetableStatus:"2026-27-verified",
             catalogUrl:grade.sourceUrl||"",

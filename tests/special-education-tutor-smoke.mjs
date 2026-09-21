@@ -152,6 +152,14 @@ async function checkUnified(page,label){
   const slContext=await page.locator('#tutorContextBox').innerText();
   assert.match(slContext,/Ειδικό Λύκειο|Special Lyceum/i,`${label}: Special Lyceum context identity missing`);
 
+  const slBiology=slSubjects.find(id=>id.includes('biologia-a-lykeiou'));
+  assert.ok(slBiology,`${label}: Special Lyceum A Biology support route missing`);
+  await selectOption(page,'#tutorSubject',slBiology);
+  const slBiologyContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(slBiologyContext,/ειδική οδηγία 2026–27 εντοπίστηκε/i,`${label}: Special Lyceum A Biology must expose its source-indexed status`);
+  assert.match(slBiologyContext,/Βιολογία/i,`${label}: Special Lyceum A Biology source label must name the subject`);
+  assert.ok(await page.locator('#tutorContextBox a[href^="https://www.iep.edu.gr/"]').count()>=1,`${label}: Special Lyceum A Biology official IEP source link missing`);
+
   await selectTrack(page,'eneegyl');
   assert.equal(await page.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL selection failed`);
   await assertSimpleQuizButton(page,`${label} ENEEGYL`);

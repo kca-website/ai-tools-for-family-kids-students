@@ -152,6 +152,25 @@ async function checkUnified(page,label){
   const slContext=await page.locator('#tutorContextBox').innerText();
   assert.match(slContext,/Ειδικό Λύκειο|Special Lyceum/i,`${label}: Special Lyceum context identity missing`);
 
+  await selectOption(page,'#tutorGrade','b');
+  const slBSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  const slInfoB=slBSubjects.find(id=>id.includes('pliroforiki-b-lykeiou'));
+  assert.ok(slInfoB,`${label}: Special Lyceum B exact Informatics mapping missing`);
+  await selectOption(page,'#tutorSubject',slInfoB);
+  const slInfoBSections=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slInfoBSections.length,8,`${label}: Special Lyceum B Informatics must expose 8 source-bounded units`);
+  assert.ok(slInfoBSections.some(x=>x.text.includes('2.2 Αλγόριθμοι')),`${label}: Special Lyceum B algorithms unit missing`);
+
+  await selectOption(page,'#tutorGrade','c');
+  const slCSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  const slInfoC=slCSubjects.find(id=>id.includes('pliroforiki-g-lykeiou'));
+  assert.ok(slInfoC,`${label}: Special Lyceum C exact Informatics mapping missing`);
+  await selectOption(page,'#tutorSubject',slInfoC);
+  const slInfoCSections=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(slInfoCSections.length,20,`${label}: Special Lyceum C Informatics must expose 20 source-bounded teaching groups`);
+  assert.ok(slInfoCSections.some(x=>x.text.includes('Αντικειμενοστραφής προγραμματισμός')),`${label}: Special Lyceum C OOP teaching group missing`);
+
+  await selectOption(page,'#tutorGrade','a');
   const slBiology=slSubjects.find(id=>id.includes('biologia-a-lykeiou'));
   assert.ok(slBiology,`${label}: Special Lyceum A Biology support route missing`);
   await selectOption(page,'#tutorSubject',slBiology);

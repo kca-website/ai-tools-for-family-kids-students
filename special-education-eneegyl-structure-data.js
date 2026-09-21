@@ -18,7 +18,9 @@
   const ANNUAL_SOURCES={
     lyceumMath:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%91%CE%92%CE%93%CE%94_2026-2027.zip",
     lyceumPhysics:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
-    lyceumChemistry:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip"
+    lyceumChemistry:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
+    lyceumNewGreek:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%9D%CE%95%CE%91-%CE%95%CE%9B%CE%9B%CE%97%CE%9D%CE%99%CE%9A%CE%91_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
+    lyceumForeignLanguages:"https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%9E%CE%95%CE%9D%CE%95%CE%A3-%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip"
   };
 
   const gymBase={
@@ -104,6 +106,8 @@
     return list.map(([id,label])=>{
       const annualSourceUrl=id==="math"?ANNUAL_SOURCES.lyceumMath:
         id==="physics"?ANNUAL_SOURCES.lyceumPhysics:
+        id==="new-greek"?ANNUAL_SOURCES.lyceumNewGreek:
+        id==="english"?ANNUAL_SOURCES.lyceumForeignLanguages:
         id==="natural-sciences"?INSTRUCTIONS:"";
       return {id,label,type,...(annualSourceUrl?{annualSourceUrl}:{})};
     });

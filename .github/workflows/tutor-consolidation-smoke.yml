@@ -86,6 +86,9 @@ jobs:
       - name: Run annual guidance smoke
         run: node tests/annual-guidance-smoke.mjs
 
+      - name: Run curriculum provenance smoke
+        run: node tests/curriculum-provenance-smoke.mjs
+
       - name: Run desktop/mobile production parity checks
         run: node tests/tutor-consolidation-smoke.mjs
 

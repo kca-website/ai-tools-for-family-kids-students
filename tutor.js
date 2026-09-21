@@ -698,12 +698,24 @@
 
   function hasDisplayableAnnualTopicScope(subject) {
     const c = subject?.curriculum || {};
-    return c.annualInstructionsStatus === "2026-27-verified" ||
+    const documentedStatus =
+      c.annualInstructionsStatus === "2026-27-verified" ||
       c.coverageStatus === "annual-instructions-verified" ||
       c.coverageStatus === "annual-exam-syllabus-verified" ||
       c.coverageStatus === "panhellenic-2027-verified" ||
       c.coverageStatus === "annual-guidance-detailed-map" ||
       c.coverageStatus === "panhellenic-2027-detailed-map";
+    if (!documentedStatus) return false;
+
+    // Evidence-first rule: a topic list is visible only when its provenance is
+    // recorded. A status label by itself is not enough.
+    const sourceUrl = c.annualInstructionsUrl || c.examSyllabusUrl || c.catalogUrl || "";
+    const verificationDate = c.verificationDate || c.lastVerified || "";
+    if (!sourceUrl || !verificationDate) {
+      console.warn("[Tutor provenance] Hidden curriculum topics without complete source metadata:", subject?.id || "unknown");
+      return false;
+    }
+    return true;
   }
 
   function populateTopics() {

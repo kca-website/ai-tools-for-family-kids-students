@@ -16,9 +16,13 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { system, prompt, audience, task = 'conversation' } = req.body || {};
+  const { system, prompt, audience, task = 'conversation', mode = 'understand', grade = '', subject = '', topic = '', character = '' } = req.body || {};
   if (!['parent', 'high_student'].includes(audience)) {
     return res.status(403).json({ error: 'audience_not_allowed', message: 'Η λειτουργία είναι διαθέσιμη σε γονείς όλων των βαθμίδων και σε μαθητές Λυκείου.' });
+  }
+  const allowedModes = new Set(['understand', 'hint', 'challenge', 'review', 'character']);
+  if (!allowedModes.has(mode)) {
+    return res.status(400).json({ error: 'invalid_mode', message: 'Μη έγκυρη λειτουργία AI Βοήθειας.' });
   }
   if (typeof system !== 'string' || typeof prompt !== 'string' || !system.trim() || !prompt.trim()) {
     return res.status(400).json({ error: 'missing_prompt', message: 'Λείπει το εκπαιδευτικό πλαίσιο ή η ερώτηση.' });
@@ -36,11 +40,26 @@ module.exports = async function handler(req, res) {
     return res.status(413).json({ error: 'prompt_too_large', message: 'Η συνομιλία είναι πολύ μεγάλη. Ξεκίνα νέα συζήτηση.' });
   }
 
+  const selectedContext = [
+    grade ? `Grade: ${grade}` : '',
+    subject ? `Subject: ${subject}` : '',
+    topic ? `Topic: ${topic}` : '',
+  ].filter(Boolean).join(' | ');
+
+  const roleRule = mode === 'character'
+    ? `- CHARACTER MODE OVERRIDE: speak as the supplied mapped character/role directly in the dialogue. The parent route means adult supervision only; do NOT switch to parent-coaching language and do NOT say “ask/tell the child”. Character: ${character || 'mapped educational role'}.`
+    : (audience === 'parent'
+      ? '- Parent mode speaks to the parent and gives one coaching step/question at a time.'
+      : '- Student mode speaks directly to the high-school learner.');
+
   const fixedGuard = `You are a learning-first tutor for the Greek school context.
+- The supplied client curriculum context is authoritative for THIS session. Do not substitute a different syllabus from model memory.
+- Selected session context: ${selectedContext || 'provided in the system prompt'}.
 - Follow the supplied mapped curriculum context; never invent an official chapter, syllabus item or source.
+- Stay inside the selected grade + subject + topic unless the user explicitly asks to compare with something else.
 - In conversation mode, never provide finished homework or an immediately complete solution. Start from the learner's attempt and give one small hint or question at a time.
 - For flashcards, quizzes and presentation scaffolds, create the complete requested structured learning material, but do not turn it into a ready-to-submit school assignment.
-- Parent mode speaks to the parent. Student mode is allowed only for High School.
+${roleRule}
 - Do not request, repeat or retain personal or sensitive information.
 - Do not diagnose, label or officially grade a learner.
 - If curriculum evidence is missing or uncertain, say so and recommend checking the school textbook or official source.`;

@@ -3,7 +3,15 @@
   "use strict";
   const current = window.AITOOLSKIDS_TUTOR_CATALOG;
   if (!current) return;
-  const DATE = "2026-09-05";
+  const DATE = "2026-09-21";
+  const SOURCE = {
+    middle:"https://dide.ira.sch.gr/ekpedevtika-themata/ekp260828/",
+    high:"https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/"
+  };
+  const SOURCE_LABEL = {
+    middle:"Επίσημες οδηγίες Νεοελληνικής Γλώσσας και Γραμματείας Γυμνασίου 2026–27",
+    high:"Επίσημες οδηγίες Νεοελληνικής Γλώσσας και Λογοτεχνίας ΓΕΛ 2026–27"
+  };
 
   const ROWS = {
     middle: {
@@ -56,6 +64,10 @@
             annualInstructionsStatus:"2026-27-verified",
             coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",
             coverageLabelEn:"Verified 2026–27 teaching guidance",
+            annualInstructionsUrl:SOURCE[zone],
+            catalogUrl:SOURCE[zone],
+            sourceLabelEl:SOURCE_LABEL[zone],
+            sourceLabelEn:zone==="middle"?"Official 2026–27 Middle School Modern Greek guidance":"Official 2026–27 GEL Modern Greek guidance",
             scopeNoteEl:"Θεματικές δεξιότητες για διάλογο και εξάσκηση βάσει της επίσημης κατεύθυνσης 2026–27 — όχι τεστ αποστήθισης γραμματικών όρων.",
             scopeNoteEn:"Skill-based dialogue and practice aligned with official 2026–27 guidance — not a grammar-term memorisation drill."
           })
@@ -70,7 +82,7 @@
           subjectLabelEl:`Νεοελληνική Γλώσσα, ${grade.toUpperCase()}' ${zone === "middle" ? "Γυμνασίου" : "Λυκείου"}`,
           subjectLabelEn:`Modern Greek Language, ${zone === "middle" ? "Middle" : "High"} ${grade.toUpperCase()}`,
           topics:rows.map((row,i)=>topic(id,row,i)),
-          curriculum:{schoolYear:"2026-2027",verificationDate:DATE,coverageStatus:"annual-instructions-verified",annualInstructionsStatus:"2026-27-verified",coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",coverageLabelEn:"Verified 2026–27 teaching guidance"}
+          curriculum:{schoolYear:"2026-2027",verificationDate:DATE,coverageStatus:"annual-instructions-verified",annualInstructionsStatus:"2026-27-verified",coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",coverageLabelEn:"Verified 2026–27 teaching guidance",annualInstructionsUrl:SOURCE[zone],catalogUrl:SOURCE[zone],sourceLabelEl:SOURCE_LABEL[zone],sourceLabelEn:zone==="middle"?"Official 2026–27 Middle School Modern Greek guidance":"Official 2026–27 GEL Modern Greek guidance",scopeNoteEl:"Θεματικές δεξιότητες για διάλογο και εξάσκηση βάσει της επίσημης κατεύθυνσης 2026–27 — όχι τεστ αποστήθισης γραμματικών όρων.",scopeNoteEn:"Skill-based dialogue and practice aligned with official 2026–27 guidance — not a grammar-term memorisation drill."}
         });
       }
       zoneGrades[grade] = next;

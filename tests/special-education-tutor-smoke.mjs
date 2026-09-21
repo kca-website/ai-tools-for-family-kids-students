@@ -236,6 +236,14 @@ async function checkUnified(page,label){
   assert.ok(aSubjects.includes('eneegyl-a-zdd'),`${label}: mapped A Lyceum ZDD route missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-economics'),`${label}: A Lyceum Principles of Economy missing`);
   assert.ok(aSubjects.includes('eneegyl-lyc-a-health'),`${label}: A Lyceum Health elective missing`);
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-chemistry-2026-27'),`${label}: exact A Lyceum Chemistry mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-chemistry-2026-27');
+  const enChemATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enChemATopics.length,9,`${label}: ENEEGYL A Chemistry must expose 9 exact official sections`);
+  assert.ok(enChemATopics.some(x=>x.text.startsWith('3.5 Χημικές αντιδράσεις')),`${label}: ENEEGYL A Chemistry reaction scope missing`);
+  const enChemAContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enChemAContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\. · Ύλη 2026–27/i,`${label}: ENEEGYL A Chemistry must be labelled exact annual curriculum`);
+  assert.ok(await page.locator('#tutorContextBox a[href*="esos.gr"]').count()>=1,`${label}: ENEEGYL A Chemistry source PDF missing`);
 
   await selectOption(page,'#tutorGrade','lyc-b');
   const bSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));

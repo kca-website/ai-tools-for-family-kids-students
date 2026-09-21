@@ -2255,3 +2255,135 @@ main {
   .classroom-menu-link { width: 36px; padding: 6px; justify-content: center; }
   .classroom-menu-link__text { display: none; }
 }
+
+
+/* ---------- Learning activities inside Learning Path ---------- */
+.learning-activities {
+  margin: 20px 0 4px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fbfcfd;
+}
+.learning-activities__title {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1rem;
+}
+.learning-activities__sub {
+  margin: 4px 0 12px;
+  color: var(--color-text-muted);
+  font-size: .88rem;
+}
+.learning-activities__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+}
+.learning-activity-card {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+}
+.learning-activity-card:hover,
+.learning-activity-card:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-card-hover);
+}
+.learning-activity-card__title,
+.learning-activity-card__text {
+  display: block;
+}
+.learning-activity-card__title {
+  font-weight: 750;
+  margin-bottom: 5px;
+}
+.learning-activity-card__text {
+  color: var(--color-text-muted);
+  font-size: .84rem;
+  line-height: 1.45;
+}
+.learning-activity-output {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+.learning-activity-output__label {
+  margin: 0 0 7px;
+  font-weight: 700;
+}
+.learning-activity-output__prompt {
+  width: 100%;
+  min-height: 150px;
+  resize: vertical;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px;
+  font: inherit;
+  line-height: 1.45;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+.learning-activity-output__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.learning-activity-output__actions button,
+.learning-activity-output__actions a {
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-weight: 650;
+  font-size: .85rem;
+}
+.learning-activity-output__actions button {
+  border: none;
+  background: var(--color-accent);
+  color: #fff;
+  cursor: pointer;
+}
+.learning-activity-output__actions a {
+  border: 1px solid var(--color-accent);
+  text-decoration: none;
+}
+.learning-activity-output__note {
+  margin: 9px 0 0;
+  color: var(--color-text-muted);
+  font-size: .8rem;
+}
+.quiz-due-reviews {
+  margin: 0 0 18px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.quiz-due-reviews__title {
+  margin: 0;
+  font-weight: 800;
+}
+.quiz-due-reviews__sub {
+  margin: 4px 0 10px;
+  color: var(--color-text-muted);
+  font-size: .85rem;
+}
+.quiz-due-review-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.quiz-due-review-btn {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  background: transparent;
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-weight: 650;
+  cursor: pointer;
+}

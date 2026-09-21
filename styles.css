@@ -2387,3 +2387,87 @@ main {
   font-weight: 650;
   cursor: pointer;
 }
+
+
+/* ---------- Homepage: AI learning modes ---------- */
+.home-ai-modes {
+  margin: 8px 0 30px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.home-ai-modes__head { max-width: 760px; }
+.home-ai-modes__eyebrow {
+  margin: 0 0 4px;
+  color: var(--color-accent);
+  font-size: .78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.home-ai-modes__head h2 { margin: 0 0 7px; font-family: var(--font-heading); }
+.home-ai-modes__head p { margin: 0; color: var(--color-text-muted); }
+.home-ai-modes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.home-ai-mode-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: #fbfcfd;
+}
+.home-ai-mode-card__icon { font-size: 1.5rem; }
+.home-ai-mode-card h3 { margin: 8px 0 5px; font-size: 1rem; }
+.home-ai-mode-card p { margin: 0; color: var(--color-text-muted); font-size: .87rem; }
+.home-ai-modes__foot {
+  margin: 14px 0 0;
+  font-weight: 700;
+  color: var(--color-accent);
+  font-size: .85rem;
+}
+@media (max-width: 760px) {
+  .home-ai-modes__grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Need-first tool chooser ---------- */
+.need-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: -2px 0 14px;
+}
+.need-filter__label {
+  width: 100%;
+  color: var(--color-text-muted);
+  font-size: .78rem;
+  font-weight: 800;
+}
+.need-chip {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+.need-chip:hover,
+.need-chip:focus-visible,
+.need-chip.active {
+  border-color: var(--color-accent);
+  background: rgba(46,111,94,.08);
+  color: var(--color-accent);
+}
+.tool-card__a11y-badge--partial {
+  background: #EEF4FF;
+  color: #35518A;
+  border: 1px solid #C9D8F4;
+}

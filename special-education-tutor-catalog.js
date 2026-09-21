@@ -302,7 +302,7 @@
           },
           specialEducation:true,schoolType:"special-lyceum",schoolTrack:"special-lyceum",structureOnly:!annualEntry,frameworkOnly,sourceIndexed:!!publishedGuide,
           sourceBaseSubjectId:base.id
-        },{gradeLabel:grade.labelEl,detailedLearning:false,structureOnly:true,mirroredSupportMenu:true,order:index});
+        },{gradeLabel:grade.labelEl,detailedLearning:false,structureOnly:!annualEntry,annualMapped:!!annualEntry&&!frameworkOnly,frameworkMapped:frameworkOnly,mirroredSupportMenu:!annualEntry,order:index});
       });
     });
   }

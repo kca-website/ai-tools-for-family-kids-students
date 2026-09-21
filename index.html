@@ -394,31 +394,36 @@
         </section>
       </div>
 
-      <section class="home-ai-modes" id="homeAiLearningModes" aria-labelledby="homeAiModesTitle">
-        <div class="home-ai-modes__head">
-          <p class="home-ai-modes__eyebrow" data-i18n="homeAiModesEyebrow">AI για πραγματική μάθηση</p>
-          <h2 id="homeAiModesTitle" data-i18n="homeAiModesTitle">Διάλεξε πώς θα σε βοηθήσει το AI να μάθεις</h2>
-          <p data-i18n="homeAiModesIntro">Το ίδιο AI δεν είναι κατάλληλο για κάθε δυσκολία. Πρώτα βρίσκουμε τι χρειάζεσαι και μετά ποιο εργαλείο ή τρόπος AI βοήθειας ταιριάζει.</p>
+      <details class="home-ai-modes" id="homeAiLearningModes">
+        <summary class="home-ai-modes__summary">
+          <span>
+            <span class="home-ai-modes__eyebrow" data-i18n="homeAiModesEyebrow">AI για πραγματική μάθηση</span>
+            <strong id="homeAiModesTitle" data-i18n="homeAiModesTitle">Διάλεξε πώς θα σε βοηθήσει το AI να μάθεις</strong>
+          </span>
+          <span class="home-ai-modes__chevron" aria-hidden="true">⌄</span>
+        </summary>
+        <div class="home-ai-modes__body">
+          <p class="home-ai-modes__intro" data-i18n="homeAiModesIntro">Το ίδιο AI δεν είναι κατάλληλο για κάθε δυσκολία. Πρώτα βρίσκουμε τι χρειάζεσαι και μετά ποιο εργαλείο ή τρόπος AI βοήθειας ταιριάζει.</p>
+          <div class="home-ai-modes__grid">
+            <a class="home-ai-mode-card" href="/high/student/tutor?mode=review">
+              <span class="home-ai-mode-card__icon" aria-hidden="true">🧠</span>
+              <h3 data-i18n="homeAiRecallTitle">AI Επανάληψη</h3>
+              <p data-i18n="homeAiRecallText">Ξαναφέρνει στην κατάλληλη στιγμή όσα σε δυσκόλεψαν και σε ελέγχει με νέα ερώτηση.</p>
+            </a>
+            <a class="home-ai-mode-card" href="/primary/guardian/tutor?mode=character&amp;grade=e&amp;subject=istoria-e-dimotikou&amp;topic=history.athens-sparta-confusion">
+              <span class="home-ai-mode-card__icon" aria-hidden="true">🎭</span>
+              <h3 data-i18n="homeAiCharacterTitle">Μίλα με έναν χαρακτήρα AI</h3>
+              <p data-i18n="homeAiCharacterText">Μάθε βιωματικά μέσα από τεκμηριωμένο διάλογο και μετά έλεγξε τι πραγματικά έμαθες.</p>
+            </a>
+            <a class="home-ai-mode-card" href="/high/student/tutor?mode=challenge">
+              <span class="home-ai-mode-card__icon" aria-hidden="true">🎯</span>
+              <h3 data-i18n="homeAiChallengeTitle">AI Πρόκληση κατανόησης</h3>
+              <p data-i18n="homeAiChallengeText">Παίρνεις μικρές υποδείξεις, απαντάς μόνος σου και στο τέλος αποδεικνύεις ότι κατάλαβες.</p>
+            </a>
+          </div>
+          <p class="home-ai-modes__foot" data-i18n="homeAiModesFoot">Μάθημα → ανάγκη → κατάλληλη AI βοήθεια → προσπάθεια χωρίς AI.</p>
         </div>
-        <div class="home-ai-modes__grid">
-          <article class="home-ai-mode-card">
-            <span class="home-ai-mode-card__icon" aria-hidden="true">🧠</span>
-            <h3 data-i18n="homeAiRecallTitle">AI Επανάληψη</h3>
-            <p data-i18n="homeAiRecallText">Ξαναφέρνει στην κατάλληλη στιγμή όσα σε δυσκόλεψαν και σε ελέγχει με νέα ερώτηση.</p>
-          </article>
-          <article class="home-ai-mode-card">
-            <span class="home-ai-mode-card__icon" aria-hidden="true">🎭</span>
-            <h3 data-i18n="homeAiCharacterTitle">Μίλα με έναν χαρακτήρα AI</h3>
-            <p data-i18n="homeAiCharacterText">Μάθε βιωματικά μέσα από τεκμηριωμένο διάλογο και μετά έλεγξε τι πραγματικά έμαθες.</p>
-          </article>
-          <article class="home-ai-mode-card">
-            <span class="home-ai-mode-card__icon" aria-hidden="true">🎯</span>
-            <h3 data-i18n="homeAiChallengeTitle">AI Πρόκληση κατανόησης</h3>
-            <p data-i18n="homeAiChallengeText">Παίρνεις μικρές υποδείξεις, απαντάς μόνος σου και στο τέλος αποδεικνύεις ότι κατάλαβες.</p>
-          </article>
-        </div>
-        <p class="home-ai-modes__foot" data-i18n="homeAiModesFoot">Μάθημα → ανάγκη → κατάλληλη AI βοήθεια → προσπάθεια χωρίς AI.</p>
-      </section>
+      </details>
 
       <h2 class="section-heading" data-i18n="chooseZoneHeading">Διάλεξε ηλικιακή ζώνη</h2>
       <p class="section-subheading" data-i18n="chooseZoneSubheading">

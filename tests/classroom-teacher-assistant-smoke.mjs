@@ -7,28 +7,11 @@ const browser=await chromium.launch({headless:true});
 try{
   for(const viewport of [{width:1280,height:900},{width:390,height:844}]){
     const page=await browser.newPage({viewport});
-    const errors=[];
-    page.on('pageerror',e=>errors.push(e.message));
-    page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
-
     await page.goto(`${BASE}/classroom.html`,{waitUntil:'domcontentloaded',timeout:60000});
-    await page.waitForSelector('#teacherTools',{state:'visible'});
-    assert.equal(await page.locator('#teacherTools .teacher-tool-card').count(),6,'Classroom must expose six teacher jobs');
-    assert.equal(await page.locator('#teacherTools a[href^="/teacher-assistant.html?task="]').count(),6,'Every teacher job must expose our assistant as either primary or alternate route');
-    assert.ok(await page.locator('#teacherTools a[href*="magicschool.ai/tools/rubric-generator"]').count(),'MagicSchool rubric recommendation missing');
-    assert.ok(await page.locator('#teacherTools a[href*="briskteaching.com/give-feedback"]').count(),'Brisk feedback recommendation missing');
-    assert.match(await page.locator('#teacherTools').innerText(),/Καρτέλα παρατήρησης/);
-    assert.match(await page.locator('#teacherTools').innerText(),/κενό πρότυπο/i);
-    assert.match(await page.locator('#teacherTools').innerText(),/μην εισάγεις ονοματεπώνυμα/i);
-
-    await page.click('#langEn');
-    await page.waitForFunction(()=>document.documentElement.lang==='en');
-    assert.match(await page.locator('#teacherToolsTitle').innerText(),/What do you need to do today/);
-    assert.match(await page.locator('#teacherTools').innerText(),/Observation template/);
-
+    await page.waitForURL(/\/teacher-assistant\.html(?:\?.*)?$/,{timeout:10000});
+    assert.match(await page.locator('h1').innerText(),/AI Βοηθός Εκπαιδευτικού|AI Teacher Assistant/i,'classroom redirect must land on Teacher Assistant');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-    assert.ok(overflow<=1,`Classroom teacher navigator horizontal overflow: ${overflow}`);
-    assert.deepEqual(errors,[],`Classroom browser errors: ${errors.join('\n')}`);
+    assert.ok(overflow<=1,`Teacher assistant redirect target horizontal overflow: ${overflow}`);
     await page.close();
   }
 

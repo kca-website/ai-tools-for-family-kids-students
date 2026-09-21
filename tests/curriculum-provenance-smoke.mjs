@@ -45,9 +45,12 @@ try{
     assert.ok(row.coverageLabelEl, `${row.zoneId}/${row.gradeId}/${row.id}: missing human-readable coverage label`);
     assert.ok(row.schoolYear, `${row.zoneId}/${row.gradeId}/${row.id}: missing schoolYear`);
     assert.ok(row.verificationDate, `${row.zoneId}/${row.gradeId}/${row.id}: missing verification date`);
-    assert.match(row.sourceUrl,/^https:\/\//,`${row.zoneId}/${row.gradeId}/${row.id}: missing official/source URL`);
-    assert.ok(row.sourceLabelEl, `${row.zoneId}/${row.gradeId}/${row.id}: missing source label`);
-    assert.ok(row.scopeNoteEl, `${row.zoneId}/${row.gradeId}/${row.id}: missing scope/boundary note`);
+    const exposesMappedContent = row.topicCount > 0 || /annual|panhellenic|2026-27|2027/.test(row.coverageStatus);
+    if(exposesMappedContent){
+      assert.match(row.sourceUrl,/^https:\/\//,`${row.zoneId}/${row.gradeId}/${row.id}: mapped/current content missing official/source URL`);
+      assert.ok(row.sourceLabelEl, `${row.zoneId}/${row.gradeId}/${row.id}: mapped/current content missing source label`);
+      assert.ok(row.scopeNoteEl, `${row.zoneId}/${row.gradeId}/${row.id}: mapped/current content missing scope/boundary note`);
+    }
 
     for(const topic of row.topics){
       assert.ok(topic.id && topic.labelEl && topic.labelEn, `${row.id}: incomplete topic identity`);

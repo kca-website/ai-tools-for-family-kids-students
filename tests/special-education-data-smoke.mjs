@@ -148,12 +148,16 @@ assert(/iep\.edu\.gr|minedu\.gov\.gr/.test(SL.sourceUrl||''), 'Special Lyceum of
 assert(SL.annualGuidanceStatus === 'published-guidance-source-indexed-section-mapping-in-progress', 'Special Lyceum must distinguish published guidance from completed section mapping');
 assert((SL.annualGuidanceIndex||[]).length >= 10, 'Special Lyceum published 2026-27 guidance index looks incomplete');
 for (const guide of (SL.annualGuidanceIndex||[])) {
-  assert(/^https:\/\/(www\.)?iep\.edu\.gr\//.test(guide.sourceUrl||''), `Special Lyceum guidance index ${guide.key}: official IEP sourceUrl missing`);
+  assert(/^https:\/\/(www\.)?iep\.edu\.gr\//.test(guide.sourceUrl||'') || /^https:\/\/dide\.ira\.sch\.gr\//.test(guide.sourceUrl||''),
+    `Special Lyceum guidance index ${guide.key}: official published sourceUrl missing`);
   assert(/^2026-09-(20|21)$/.test(guide.verificationDate||''), `Special Lyceum guidance index ${guide.key}: verificationDate missing or stale`);
-  assert(/^official-iep-(annual-guidance-index|guidance-archive)$/.test(guide.sourceType||''), `Special Lyceum guidance index ${guide.key}: provenance type missing`);
+  assert(/^official-(iep-(annual-guidance-index|guidance-archive)|published-guidance-pdf)$/.test(guide.sourceType||''),
+    `Special Lyceum guidance index ${guide.key}: provenance type missing`);
 }
 const biologyGuide=(SL.annualGuidanceIndex||[]).find(x=>x.key==='biology');
-assert(/ΒΙΟΛΟΓΙΑ_|%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_/.test(biologyGuide?.sourceUrl||''), 'Special Lyceum Biology must point to its official 2026-27 guidance archive');
+assert(/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-/.test(biologyGuide?.sourceUrl||''), 'Special Lyceum Biology must point to a direct official 2026-27 guidance PDF');
+assert(['a','b','c'].every(g=>/^https:\/\/dide\.ira\.sch\.gr\/.test(biologyGuide?.sourceUrlsByGrade?.[g]||'')),
+  'Special Lyceum Biology must have a direct grade-specific official PDF for A/B/C');
 assert(Object.keys(SL.grades || {}).sort().join(',') === 'a,b,c', 'Special Lyceum must expose A/B/C Lyceum grades');
 assert(/δεν|not/i.test(SL.scopeNoteEl + ' ' + SL.scopeNoteEn), 'Special Lyceum must state the no-invented-syllabus boundary');
 const slInfoA=SLA.entries['a|informatics'];

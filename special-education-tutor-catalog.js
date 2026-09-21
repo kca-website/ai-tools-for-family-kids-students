@@ -293,9 +293,10 @@
             officialSectionsEl:exact?[...exact.officialAnchors]:[`${grade.labelEl}: υποστηρικτική επιλογή ${rawEl}`],officialSectionsEn:[],
             scopeNoteEl:SL.scopeNoteEl,scopeNoteEn:SL.scopeNoteEn,
             annualInstructionsStatus:exact?"2026-27-verified":(publishedGuide?(publishedGuide.status||"published-2026-27"):(SL.annualGuidanceStatus||"official-2026-27-guidance-published")),
-            annualInstructionsUrl:exact?.sourceUrl||SL.sourceUrl,teachingInstructionsStatus:"official-guidance-published",
+            annualInstructionsUrl:exact?.sourceUrl||publishedGuide?.sourceUrl||SL.sourceUrl,teachingInstructionsStatus:"official-guidance-published",
             officialTimetableStatus:"school-type-verified",catalogUrl:SL.sourceUrl,
-            sourceLabelEl:SL.sourceLabelEl,sourceLabelEn:SL.sourceLabelEn,
+            sourceLabelEl:exact?.sourceTitle||(publishedGuide?`ΙΕΠ — ειδική οδηγία 2026–27: ${publishedGuide.labelEl}`:SL.sourceLabelEl),
+            sourceLabelEn:exact?.sourceTitle||(publishedGuide?`IEP — Special Lyceum 2026–27 guidance: ${publishedGuide.labelEl}`:SL.sourceLabelEn),
             specialEducation:true,schoolType:"special-lyceum",structureOnly:!exact,sourceIndexed:!!publishedGuide,publishedGuidanceKey:publishedGuide?.key||""
           },
           specialEducation:true,schoolType:"special-lyceum",schoolTrack:"special-lyceum",structureOnly:!exact,sourceIndexed:!!publishedGuide,

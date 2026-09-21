@@ -21,16 +21,16 @@
     sourceLabelEn:"IEP — Special Lyceum E.A.E. 2026–27 guidance",
     annualGuidanceStatus:"published-guidance-source-indexed-section-mapping-in-progress",
     annualGuidanceIndex:Object.freeze([
-      Object.freeze({key:"language-literature",grades:["a","b","c"],labelEl:"Νεοελληνική Γλώσσα και Λογοτεχνία",status:"published-2026-27"}),
-      Object.freeze({key:"biology",grades:["a","b","c"],labelEl:"Βιολογία",status:"published-2026-27"}),
-      Object.freeze({key:"economics",grades:["c"],labelEl:"Οικονομία Προσανατολισμού",status:"published-2026-27"}),
-      Object.freeze({key:"ancient",grades:["a","b","c"],labelEl:"Αρχαία Ελληνική Γλώσσα και Γραμματεία",status:"published-2026-27"}),
-      Object.freeze({key:"history",grades:["a","b","c"],labelEl:"Ιστορία",status:"published-2026-27"}),
-      Object.freeze({key:"informatics",grades:["a","b","c"],labelEl:"Πληροφορική / Επιστήμη Η/Υ",status:"published-2026-27"}),
-      Object.freeze({key:"english",grades:["a","b","c"],labelEl:"Αγγλικά",status:"published-2026-27"}),
-      Object.freeze({key:"second-foreign-language",grades:["a","b"],labelEl:"2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)",status:"published-2026-27"}),
-      Object.freeze({key:"latin",grades:["b","c"],labelEl:"Λατινικά Προσανατολισμού",status:"published-2026-27"}),
-      Object.freeze({key:"ethics",grades:["a","b","c"],labelEl:"Ηθική — Α΄ μέρος Σεπτέμβριος–Νοέμβριος 2026",status:"published-part-1"})
+      Object.freeze({key:"language-literature",grades:["a","b","c"],labelEl:"Νεοελληνική Γλώσσα και Λογοτεχνία",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"biology",grades:["a","b","c"],labelEl:"Βιολογία",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"economics",grades:["c"],labelEl:"Οικονομία Προσανατολισμού",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"ancient",grades:["a","b","c"],labelEl:"Αρχαία Ελληνική Γλώσσα και Γραμματεία",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"history",grades:["a","b","c"],labelEl:"Ιστορία",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"informatics",grades:["a","b","c"],labelEl:"Πληροφορική / Επιστήμη Η/Υ",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"english",grades:["a","b","c"],labelEl:"Αγγλικά",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"second-foreign-language",grades:["a","b"],labelEl:"2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"latin",grades:["b","c"],labelEl:"Λατινικά Προσανατολισμού",status:"published-2026-27",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"}),
+      Object.freeze({key:"ethics",grades:["a","b","c"],labelEl:"Ηθική — Α΄ μέρος Σεπτέμβριος–Νοέμβριος 2026",status:"published-part-1",sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",verificationDate:"2026-09-20",sourceType:"official-iep-annual-guidance-index"})
     ]),
     grades:Object.freeze({
       a:Object.freeze({id:"a",labelEl:"Α΄ Λυκείου",labelEn:"Lyceum A"}),

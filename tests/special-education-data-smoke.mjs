@@ -20,6 +20,7 @@ const files = [
   'teacher-curriculum-eneegyl-math-2026-2027.js',
   'teacher-curriculum-eneegyl-physics-2026-2027.js',
   'teacher-curriculum-eneegyl-new-greek-2026-2027.js',
+  'teacher-curriculum-eneegyl-english-2026-2027.js',
   'special-education-support-tools-data.js',
   'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
@@ -270,6 +271,12 @@ assert(enMathD?.coverageStatus === 'panhellenic-verified', 'ENEEGYL D Lyceum Mat
 assert(enMathD.officialAnchors.length === 7, `ENEEGYL D Mathematics must expose 7 exact taught/exam anchors, got ${enMathD.officialAnchors.length}`);
 assert(enMathD.officialAnchors.some(x=>x.includes('χωρίς το κριτήριο της 2ης παραγώγου')), 'ENEEGYL D Mathematics derivative exclusion missing');
 assert(enMathD.officialAnchors.some(x=>x.includes('Ενδοτεταρτημοριακό εύρος')), 'ENEEGYL D Mathematics statistics exclusions missing');
+
+const enEnglishA=C.entries['eneegyl-lyc-a-english-2026-27'];
+assert(enEnglishA?.coverageStatus === 'exam-verified', 'ENEEGYL A Lyceum English exam mapping missing');
+assert(enEnglishA.officialAnchors.length === 5, `ENEEGYL A English must expose Units 1,2,3,4,6 only, got ${enEnglishA.officialAnchors.length}`);
+assert(enEnglishA.officialAnchors.includes('General English A΄ EPAL — Unit 6'), 'ENEEGYL A English Unit 6 missing');
+assert(!enEnglishA.officialAnchors.some(x=>x.includes('Unit 5')), 'ENEEGYL A English must not invent/include Unit 5');
 
 const enGreekA=C.entries['eneegyl-lyc-a-new-greek-2026-27'];
 assert(enGreekA?.coverageStatus === 'exam-verified', 'ENEEGYL A New Greek exam scope missing');

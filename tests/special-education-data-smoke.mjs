@@ -17,6 +17,7 @@ const files = [
   'special-education-special-lyceum-data.js',
   'special-education-eneegyl-structure-data.js',
   'teacher-curriculum-eneegyl-chemistry-2026-2027.js',
+  'teacher-curriculum-eneegyl-math-2026-2027.js',
   'special-education-support-tools-data.js',
   'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
@@ -246,6 +247,28 @@ for (const id of ['gym-a','gym-b','gym-c','gym-d']) {
 for (const id of ['lyc-a','lyc-b','lyc-c','lyc-d']) {
   assert(EN.grades[id]?.level === 'lyceum', `${id}: must be an ENEEGYL Lyceum grade`);
 }
+const enMathA=C.entries['eneegyl-lyc-a-math-2026-27'];
+assert(enMathA?.coverageStatus === 'exam-verified', 'ENEEGYL A Lyceum Mathematics exam mapping missing');
+assert(enMathA.officialAnchors.length === 38, `ENEEGYL A Mathematics must expose 38 exact exam-scope anchors, got ${enMathA.officialAnchors.length}`);
+assert(enMathA.officialAnchors.some(x=>x.includes('2.2 Διάταξη Πραγματικών Αριθμών')), 'ENEEGYL A Mathematics real-number scope missing');
+assert(enMathA.officialAnchors.some(x=>x.includes('4.8 Άθροισμα γωνιών κυρτού ν-γώνου')), 'ENEEGYL A Mathematics geometry scope missing');
+
+const enMathB=C.entries['eneegyl-lyc-b-math-2026-27'];
+assert(enMathB?.coverageStatus === 'exam-verified', 'ENEEGYL B Lyceum Mathematics exam mapping missing');
+assert(enMathB.officialAnchors.length === 10, `ENEEGYL B Mathematics must expose 10 exact exam-scope anchors, got ${enMathB.officialAnchors.length}`);
+assert(enMathB.officialAnchors.some(x=>x.includes('χωρίς «Λύση - Διερεύνηση γραμμικού συστήματος 2x2»')), 'ENEEGYL B Mathematics linear-system exclusion missing');
+
+const enMathC=C.entries['eneegyl-lyc-c-math-2026-27'];
+assert(enMathC?.coverageStatus === 'exam-verified', 'ENEEGYL C Lyceum Mathematics exam mapping missing');
+assert(enMathC.officialAnchors.length === 12, `ENEEGYL C Mathematics must expose 12 exact exam-scope anchors, got ${enMathC.officialAnchors.length}`);
+assert(enMathC.officialAnchors.some(x=>x.includes('βάσεις 10 και e')), 'ENEEGYL C Mathematics logarithmic-function boundary missing');
+
+const enMathD=C.entries['eneegyl-lyc-d-math-2026-27'];
+assert(enMathD?.coverageStatus === 'panhellenic-verified', 'ENEEGYL D Lyceum Mathematics taught/exam mapping missing');
+assert(enMathD.officialAnchors.length === 7, `ENEEGYL D Mathematics must expose 7 exact taught/exam anchors, got ${enMathD.officialAnchors.length}`);
+assert(enMathD.officialAnchors.some(x=>x.includes('χωρίς το κριτήριο της 2ης παραγώγου')), 'ENEEGYL D Mathematics derivative exclusion missing');
+assert(enMathD.officialAnchors.some(x=>x.includes('Ενδοτεταρτημοριακό εύρος')), 'ENEEGYL D Mathematics statistics exclusions missing');
+
 const enChemA=C.entries['eneegyl-lyc-a-chemistry-2026-27'];
 assert(enChemA?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL A Lyceum Chemistry exact annual mapping missing');
 assert(enChemA.officialAnchors.length === 9, `ENEEGYL A Chemistry must expose 9 source-bounded sections, got ${enChemA.officialAnchors.length}`);

@@ -137,6 +137,37 @@ main {
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
+.hero__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(330px, 0.82fr);
+  gap: 28px;
+  align-items: center;
+  max-width: 1040px;
+  margin-bottom: 20px;
+}
+
+.hero__intro-copy {
+  min-width: 0;
+}
+
+.hero__visual {
+  height: 230px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(59, 130, 196, 0.2);
+  border-radius: 20px;
+  background: #dff5ff;
+  box-shadow: 0 12px 30px rgba(31, 95, 139, 0.16);
+}
+
+.hero__visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
 .hero__title {
   font-size: 1.9rem;
   font-weight: 800;
@@ -158,7 +189,7 @@ main {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 18px;
+  margin-bottom: 0;
 }
 
 .hero__learning-loop {
@@ -395,6 +426,18 @@ main {
 }
 
 @media (max-width: 700px) {
+  .hero__intro {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hero__visual {
+    height: 190px;
+    order: 2;
+    border-radius: 16px;
+  }
+  .hero__visual img {
+    object-position: center bottom;
+  }
   .hero__learning-loop { padding: 10px 12px; }
   .hero__learning-loop-steps { font-size: .78rem; }
   .hero__learning-loop-steps li:not(:last-child)::after { margin: 0 6px; }

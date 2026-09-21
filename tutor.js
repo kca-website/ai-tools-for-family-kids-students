@@ -777,11 +777,13 @@
     const annualSourceLabel = annualGuidance ? officialValue(annualGuidance, "sourceLabelEl", "sourceLabelEn", "") : "";
     const gapStatusLabel = gapOfficial ? officialValue(gapOfficial, "statusLabelEl", "statusLabelEn", gapOfficial.status || "") : "";
     const mismatch = gapOfficial?.status === "curriculum-mismatch-review-needed";
+    const scopeNote = official ? officialValue(official, "scopeNoteEl", "scopeNoteEn", "") : "";
     const officialHtml = official ? `<br><br>
       <b>${escapeHtml(tr("officialBasis"))}:</b> ${escapeHtml(officialLabel)}<br>
       ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceName)} ↗</a>` : ""}
       ${annualLabel ? `<br><b>${ctx.lang === "en" ? "Annual guidance" : "Ετήσιες οδηγίες"}:</b> ${escapeHtml(annualLabel)}` : ""}
       ${annualGuidance?.sourceUrl ? `<br><a href="${escapeHtml(annualGuidance.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(annualSourceLabel || (ctx.lang === "en" ? "Official 2026–27 source" : "Επίσημη πηγή 2026–27"))} ↗</a>` : ""}
+      ${scopeNote ? `<br><span class="tutor-scope-note">${escapeHtml(scopeNote)}</span>` : ""}
       ${gapStatusLabel ? `<br><span${mismatch ? ' style="color:#b45309;font-weight:700"' : ""}>${escapeHtml(gapStatusLabel)}</span>` : ""}` : "";
 
     const schoolContext = ctx.zoneId === "high"

@@ -19,6 +19,7 @@ const files = [
   'teacher-curriculum-eneegyl-chemistry-2026-2027.js',
   'teacher-curriculum-eneegyl-math-2026-2027.js',
   'teacher-curriculum-eneegyl-physics-2026-2027.js',
+  'teacher-curriculum-eneegyl-new-greek-2026-2027.js',
   'special-education-support-tools-data.js',
   'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
@@ -269,6 +270,26 @@ assert(enMathD?.coverageStatus === 'panhellenic-verified', 'ENEEGYL D Lyceum Mat
 assert(enMathD.officialAnchors.length === 7, `ENEEGYL D Mathematics must expose 7 exact taught/exam anchors, got ${enMathD.officialAnchors.length}`);
 assert(enMathD.officialAnchors.some(x=>x.includes('χωρίς το κριτήριο της 2ης παραγώγου')), 'ENEEGYL D Mathematics derivative exclusion missing');
 assert(enMathD.officialAnchors.some(x=>x.includes('Ενδοτεταρτημοριακό εύρος')), 'ENEEGYL D Mathematics statistics exclusions missing');
+
+const enGreekA=C.entries['eneegyl-lyc-a-new-greek-2026-27'];
+assert(enGreekA?.coverageStatus === 'exam-verified', 'ENEEGYL A New Greek exam scope missing');
+assert(enGreekA.officialAnchors.length === 1, 'ENEEGYL A New Greek must remain book-level when the source does not enumerate fixed units');
+
+const enGreekB=C.entries['eneegyl-lyc-b-new-greek-2026-27'];
+assert(enGreekB?.coverageStatus === 'exam-verified', 'ENEEGYL B New Greek exam scope missing');
+assert(enGreekB.officialAnchors.length === 6, `ENEEGYL B New Greek must expose six official unit anchors, got ${enGreekB.officialAnchors.length}`);
+assert(enGreekB.officialAnchors.includes('Νέα Ελληνικά Β΄ ΕΠΑ.Λ. — Ενότητα 3'), 'ENEEGYL B New Greek B-book unit 3 missing');
+assert(enGreekB.officialAnchors.includes('Νέα Ελληνικά Α΄ ΕΠΑ.Λ. — Ενότητα 6'), 'ENEEGYL B New Greek A-book unit 6 missing');
+
+const enGreekC=C.entries['eneegyl-lyc-c-new-greek-2026-27'];
+assert(enGreekC?.coverageStatus === 'exam-verified', 'ENEEGYL C New Greek exam scope missing');
+assert(enGreekC.officialAnchors.length === 6, `ENEEGYL C New Greek must expose six official unit anchors, got ${enGreekC.officialAnchors.length}`);
+assert(enGreekC.officialAnchors.includes('Νέα Ελληνικά Β΄ ΕΠΑ.Λ. — Ενότητα 6'), 'ENEEGYL C New Greek B-book unit 6 missing');
+assert(enGreekC.officialAnchors.includes('Νέα Ελληνικά Α΄ ΕΠΑ.Λ. — Ενότητα 5'), 'ENEEGYL C New Greek A-book unit 5 missing');
+
+const enGreekD=C.entries['eneegyl-lyc-d-new-greek-2026-27'];
+assert(enGreekD?.coverageStatus === 'panhellenic-verified', 'ENEEGYL D New Greek taught/exam scope missing');
+assert(enGreekD.officialAnchors.length === 3, 'ENEEGYL D New Greek must expose the three official school books, not fabricated chapter titles');
 
 const enPhysicsA=C.entries['eneegyl-lyc-a-physics-2026-27'];
 assert(enPhysicsA?.coverageStatus === 'exam-verified', 'ENEEGYL A Lyceum Physics exam mapping missing');

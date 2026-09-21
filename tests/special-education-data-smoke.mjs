@@ -18,6 +18,7 @@ const files = [
   'special-education-eneegyl-structure-data.js',
   'teacher-curriculum-eneegyl-chemistry-2026-2027.js',
   'teacher-curriculum-eneegyl-math-2026-2027.js',
+  'teacher-curriculum-eneegyl-physics-2026-2027.js',
   'special-education-support-tools-data.js',
   'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
@@ -268,6 +269,19 @@ assert(enMathD?.coverageStatus === 'panhellenic-verified', 'ENEEGYL D Lyceum Mat
 assert(enMathD.officialAnchors.length === 7, `ENEEGYL D Mathematics must expose 7 exact taught/exam anchors, got ${enMathD.officialAnchors.length}`);
 assert(enMathD.officialAnchors.some(x=>x.includes('χωρίς το κριτήριο της 2ης παραγώγου')), 'ENEEGYL D Mathematics derivative exclusion missing');
 assert(enMathD.officialAnchors.some(x=>x.includes('Ενδοτεταρτημοριακό εύρος')), 'ENEEGYL D Mathematics statistics exclusions missing');
+
+const enPhysicsA=C.entries['eneegyl-lyc-a-physics-2026-27'];
+assert(enPhysicsA?.coverageStatus === 'exam-verified', 'ENEEGYL A Lyceum Physics exam mapping missing');
+assert(enPhysicsA.officialAnchors.length === 25, `ENEEGYL A Physics must expose 25 source-bounded exam anchors, got ${enPhysicsA.officialAnchors.length}`);
+assert(enPhysicsA.officialAnchors.some(x=>x.includes('2.8 Σύνθεση δυνάμεων')), 'ENEEGYL A Physics force-composition scope missing');
+assert(enPhysicsA.officialAnchors.some(x=>x.includes('5.6 Έργο και ενέργεια')), 'ENEEGYL A Physics work-energy scope missing');
+
+const enPhysicsB=C.entries['eneegyl-lyc-b-physics-2026-27'];
+assert(enPhysicsB?.coverageStatus === 'exam-verified', 'ENEEGYL B Lyceum Physics exam mapping missing');
+assert(enPhysicsB.officialAnchors.length === 11, `ENEEGYL B Physics must expose 11 source-bounded exam anchors, got ${enPhysicsB.officialAnchors.length}`);
+assert(enPhysicsB.officialAnchors.some(x=>x.includes('1.1 Ο νόμος του Coulomb')), 'ENEEGYL B Physics Coulomb scope missing');
+assert(enPhysicsB.officialAnchors.some(x=>x.includes('2.9 Νόμος του Ohm')), 'ENEEGYL B Physics closed-circuit Ohm scope missing');
+assert(!C.entries['eneegyl-lyc-c-physics-2026-27'] && !C.entries['eneegyl-lyc-d-physics-2026-27'], 'ENEEGYL C/D Physics must not be fabricated before exact 2026-27 scope verification');
 
 const enChemA=C.entries['eneegyl-lyc-a-chemistry-2026-27'];
 assert(enChemA?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL A Lyceum Chemistry exact annual mapping missing');

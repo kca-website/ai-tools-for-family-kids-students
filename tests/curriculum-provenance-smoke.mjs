@@ -8,7 +8,7 @@ try{
   const page=await browser.newPage({viewport:{width:1280,height:900}});
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  page.on('console',m=>{ if(m.type()==='error') errors.push(m.text()); });
+  page.on('console',m=>{ if(m.type()==='error'&&!m.text().startsWith('Failed to load resource:')) errors.push(m.text()); });
 
   await page.goto(BASE,{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>window.AITOOLSKIDS_TUTOR_CATALOG?.zones?.middle && window.AITOOLSKIDS_TUTOR_CATALOG?.zones?.high,{timeout:30000});

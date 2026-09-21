@@ -262,8 +262,17 @@ async function checkUnified(page,label){
   assert.match(enChemAContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\. · Ύλη 2026–27/i,`${label}: ENEEGYL A Chemistry must be labelled exact annual curriculum`);
   assert.ok(await page.locator('#tutorContextBox a[href*="esos.gr"]').count()>=1,`${label}: ENEEGYL A Chemistry source PDF missing`);
 
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-physics-2026-27'),`${label}: exact A Lyceum Physics mapping missing`);
+
   await selectOption(page,'#tutorGrade','lyc-b');
   const bSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(bSubjects.includes('eneegyl-lyc-b-physics-2026-27'),`${label}: exact B Lyceum Physics mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-b-physics-2026-27');
+  const enPhysicsBTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enPhysicsBTopics.length,11,`${label}: ENEEGYL B Physics must expose 11 exam-scope anchors`);
+  assert.ok(enPhysicsBTopics.some(x=>x.text.includes('1.1 Ο νόμος του Coulomb')),`${label}: ENEEGYL B Physics Coulomb section missing`);
+  const enPhysicsBContext=await page.locator('#tutorContextBox').innerText();
+  assert.match(enPhysicsBContext,/Εξεταστέα ύλη 2026–27/i,`${label}: ENEEGYL B Physics must be labelled exam syllabus`);
   assert.ok(bSubjects.length>5,`${label}: ENEEGYL B Lyceum must expose structure plus mapped routes, not only five units`);
   assert.ok(bSubjects.includes('eneegyl-b-economy-accounting-basics'),`${label}: accounting mapped route missing from B Lyceum`);
   assert.ok(bSubjects.some(id=>id.startsWith('eneegyl-lyc-b-b-sector-')),`${label}: B Lyceum sector gateways missing`);

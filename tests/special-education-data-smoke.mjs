@@ -162,6 +162,18 @@ assert(slInfoA.officialAnchors.length === 20, `Special Lyceum A Informatics must
 assert(slInfoA.officialAnchors.includes('7.1 Προγραμματισμός εφαρμογών για φορητές συσκευές'), 'Special Lyceum A Informatics section 7.1 missing');
 assert(slInfoA.officialAnchors.includes('16.4 Ιδιωτικότητα και προσωπικά δεδομένα στο Διαδίκτυο'), 'Special Lyceum A Informatics section 16.4 missing');
 
+const slInfoB=SLA.entries['b|informatics'];
+assert(slInfoB?.coverageStatus === 'exact', 'Special Lyceum B Informatics must be an exact annual mapping');
+assert(slInfoB.officialAnchors.length === 8, `Special Lyceum B Informatics must expose 8 source-bounded teaching units, got ${slInfoB.officialAnchors.length}`);
+assert(slInfoB.officialAnchors.some(x=>x.startsWith('2.2 Αλγόριθμοι')), 'Special Lyceum B Informatics algorithms unit missing');
+assert(slInfoB.officialAnchors.some(x=>x.includes('εκτός 2.2.2')), 'Special Lyceum B Informatics exclusions must remain explicit');
+
+const slInfoC=SLA.entries['c|informatics'];
+assert(slInfoC?.coverageStatus === 'exact', 'Special Lyceum C Informatics must be an exact annual mapping');
+assert(slInfoC.officialAnchors.length === 20, `Special Lyceum C Informatics must expose 20 source-bounded teaching groups, got ${slInfoC.officialAnchors.length}`);
+assert(slInfoC.officialAnchors.some(x=>x.includes('Δομή επιλογής')), 'Special Lyceum C Informatics selection structure missing');
+assert(slInfoC.officialAnchors.some(x=>x.includes('Αντικειμενοστραφής προγραμματισμός')), 'Special Lyceum C Informatics OOP group missing');
+
 assert(EN.schoolType === 'eneegyl', 'ENEEGYL structure identity is wrong');
 assert(EN.totalGrades === 8, `ENEEGYL must have 8 grades, got ${EN.totalGrades}`);
 assert(EN.gradeOrder?.join(',') === 'gym-a,gym-b,gym-c,gym-d,lyc-a,lyc-b,lyc-c,lyc-d', 'ENEEGYL grade order must be 4 Gymnasium + 4 Lyceum');

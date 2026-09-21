@@ -16,6 +16,7 @@ const files = [
   'teacher-curriculum-special-lyceum-annual-2026-2027.js',
   'special-education-special-lyceum-data.js',
   'special-education-eneegyl-structure-data.js',
+  'teacher-curriculum-eneegyl-chemistry-2026-2027.js',
   'special-education-support-tools-data.js',
   'special-education-assessment-policy.js',
   'special-education-tutor-context.js'
@@ -245,6 +246,21 @@ for (const id of ['gym-a','gym-b','gym-c','gym-d']) {
 for (const id of ['lyc-a','lyc-b','lyc-c','lyc-d']) {
   assert(EN.grades[id]?.level === 'lyceum', `${id}: must be an ENEEGYL Lyceum grade`);
 }
+const enChemA=C.entries['eneegyl-lyc-a-chemistry-2026-27'];
+assert(enChemA?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL A Lyceum Chemistry exact annual mapping missing');
+assert(enChemA.officialAnchors.length === 9, `ENEEGYL A Chemistry must expose 9 source-bounded sections, got ${enChemA.officialAnchors.length}`);
+assert(enChemA.officialAnchors.some(x=>x.startsWith('3.5 Χημικές αντιδράσεις')), 'ENEEGYL A Chemistry reaction scope missing');
+
+const enChemB=C.entries['eneegyl-lyc-b-chemistry-2026-27'];
+assert(enChemB?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL B Lyceum Chemistry exact annual mapping missing');
+assert(enChemB.officialAnchors.length === 12, `ENEEGYL B Chemistry must expose 12 source-bounded sections, got ${enChemB.officialAnchors.length}`);
+assert(enChemB.officialAnchors.some(x=>x.includes('εκτός μη καθαρών ουσιών')), 'ENEEGYL B Chemistry stoichiometry exclusions must remain explicit');
+
+const enChemC=C.entries['eneegyl-lyc-c-chemistry-2026-27'];
+assert(enChemC?.coverageStatus === 'annual-instructions-verified', 'ENEEGYL C Lyceum Chemistry exact annual mapping missing');
+assert(enChemC.officialAnchors.length === 15, `ENEEGYL C Chemistry must expose 15 source-bounded sections, got ${enChemC.officialAnchors.length}`);
+assert(enChemC.officialAnchors.some(x=>x.includes('Βιοχημεία 3.3')), 'ENEEGYL C Chemistry biochemistry enzyme section missing');
+
 assert(EN.grades['gym-d'].subjects.some(x => x.id === 'economics'), 'ENEEGYL D Gymnasium must include Economics');
 assert(EN.grades['lyc-a'].subjects.length === 18, `ENEEGYL A Lyceum must expose 18 timetable choices/groups, got ${EN.grades['lyc-a'].subjects.length}`);
 assert(EN.grades['lyc-a'].subjects.filter(x => x.type === 'elective').length === 7, 'ENEEGYL A Lyceum must expose seven offered electives');

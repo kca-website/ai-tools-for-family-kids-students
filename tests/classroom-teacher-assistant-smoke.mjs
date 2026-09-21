@@ -9,7 +9,7 @@ try{
     const page=await browser.newPage({viewport});
     await page.goto(`${BASE}/classroom.html`,{waitUntil:'domcontentloaded',timeout:60000});
     await page.waitForURL(/\/teacher-assistant\.html(?:\?.*)?$/,{timeout:10000});
-    assert.match(await page.locator('h1').innerText(),/AI Βοηθός Εκπαιδευτικού|AI Teacher Assistant/i,'classroom redirect must land on Teacher Assistant');
+    assert.match(await page.locator('h1').innerText(),/Εκπαιδευτικό υλικό|AI Teacher Assistant/i,'classroom redirect must land on Teacher Assistant');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     assert.ok(overflow<=1,`Teacher assistant redirect target horizontal overflow: ${overflow}`);
     await page.close();

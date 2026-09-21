@@ -257,6 +257,12 @@ async function checkUnified(page,label){
 
   await selectOption(page,'#tutorGrade','lyc-b');
   const bSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(bSubjects.includes('eneegyl-lyc-b-new-greek-2026-27'),`${label}: exact B Lyceum New Greek mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-b-new-greek-2026-27');
+  const enGreekBTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enGreekBTopics.length,6,`${label}: ENEEGYL B New Greek must expose six official unit anchors`);
+  assert.ok(enGreekBTopics.some(x=>x.text.includes('Β΄ ΕΠΑ.Λ. — Ενότητα 3')),`${label}: ENEEGYL B New Greek unit 3 missing`);
+
   assert.ok(bSubjects.includes('eneegyl-lyc-b-physics-2026-27'),`${label}: exact B Lyceum Physics mapping missing`);
   await selectOption(page,'#tutorSubject','eneegyl-lyc-b-physics-2026-27');
   const enPhysicsBTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
@@ -271,6 +277,11 @@ async function checkUnified(page,label){
 
   await selectOption(page,'#tutorGrade','lyc-d');
   const dSubjects=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(dSubjects.includes('eneegyl-lyc-d-new-greek-2026-27'),`${label}: D Lyceum New Greek taught/exam route missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-d-new-greek-2026-27');
+  const enGreekDTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enGreekDTopics.length,3,`${label}: ENEEGYL D New Greek must expose three official book anchors`);
+
   assert.ok(dSubjects.includes('eneegyl-lyc-d-math-2026-27'),`${label}: exact D Lyceum Mathematics mapping missing`);
   await selectOption(page,'#tutorSubject','eneegyl-lyc-d-math-2026-27');
   const enMathDTopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));

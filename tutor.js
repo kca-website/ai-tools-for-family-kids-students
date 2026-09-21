@@ -36,6 +36,7 @@
       sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
       sourceEn: "Wikimedia Commons · public domain",
       topicIds: ["history.athens-sparta-confusion", "istoria-a-gym.peloponnesian-war-sides"],
+      topicPatterns: ["αθήνα vs σπάρτη", "αθηναϊκή δημοκρατία", "πελοποννησιακός πόλεμος", "athens vs sparta", "athenian democracy", "peloponnesian war"],
     },
     socrates: {
       id: "socrates",
@@ -52,6 +53,7 @@
       sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
       sourceEn: "Wikimedia Commons · public domain",
       topicIds: ["history.philosophers-confusion"],
+      topicPatterns: ["σωκράτης", "αρχαίοι φιλόσοφοι", "socrates", "ancient philosophers"],
     },
     alexander: {
       id: "alexander",
@@ -68,6 +70,100 @@
       sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
       sourceEn: "Wikimedia Commons · public domain",
       topicIds: ["istoria-a-gym.alexander-legacy"],
+      topicPatterns: ["μέγας αλέξανδρος", "έργο μεγάλου αλεξάνδρου", "ελληνιστικός κόσμος", "alexander the great", "hellenistic world"],
+    },
+    athenianCitizen: {
+      id: "athenianCitizen",
+      nameEl: "Αθηναίος πολίτης",
+      nameEn: "Athenian citizen",
+      periodEl: "Κλασική Αθήνα",
+      periodEn: "Classical Athens",
+      roleEl: "Σύνθετος εκπαιδευτικός ρόλος",
+      roleEn: "Composite educational role",
+      introEl: "Δες πώς λειτουργούσε η άμεση δημοκρατία και τι σήμαινε η συμμετοχή στην Εκκλησία του Δήμου, χωρίς να παρουσιάζεται ο ρόλος ως πραγματική μαρτυρία.",
+      introEn: "Explore how direct democracy and participation in the Assembly worked, without presenting the role as authentic testimony.",
+      imageUrl: "", sourceUrl: "", sourceEl: "", sourceEn: "",
+      topicIds: [],
+      topicPatterns: ["άμεση δημοκρατία", "πορεία προς τη δημοκρατία", "direct democracy", "path toward democracy"],
+      composite: true,
+    },
+    romanGreekResident: {
+      id: "romanGreekResident",
+      nameEl: "Κάτοικος της ρωμαϊκής Ελλάδας",
+      nameEn: "Resident of Roman Greece",
+      periodEl: "Ελληνιστικοί και ρωμαϊκοί χρόνοι",
+      periodEn: "Hellenistic and Roman periods",
+      roleEl: "Σύνθετος εκπαιδευτικός ρόλος",
+      roleEn: "Composite educational role",
+      introEl: "Δες την κατάκτηση της Ελλάδας και τη σχέση ελληνικού και ρωμαϊκού πολιτισμού από την οπτική ενός κατοίκου της εποχής.",
+      introEn: "Explore the Roman conquest of Greece and the interaction of Greek and Roman culture from a period viewpoint.",
+      imageUrl: "", sourceUrl: "", sourceEl: "", sourceEn: "",
+      topicIds: [],
+      topicPatterns: ["ρωμαϊκή κατάκτηση της ελλάδας", "ελληνιστικοί και ρωμαϊκοί χρόνοι", "roman conquest of greece", "hellenistic and roman"],
+      composite: true,
+    },
+    byzantineResident: {
+      id: "byzantineResident",
+      nameEl: "Κάτοικος της Βυζαντινής Αυτοκρατορίας",
+      nameEn: "Resident of the Byzantine Empire",
+      periodEl: "Βυζαντινή περίοδος",
+      periodEn: "Byzantine period",
+      roleEl: "Σύνθετος εκπαιδευτικός ρόλος",
+      roleEn: "Composite educational role",
+      introEl: "Δες τη συνέχεια και τις αλλαγές από τη σκοπιά ενός ανθρώπου της εποχής. Ο ρόλος δεν παριστάνει υπαρκτό συγκεκριμένο πρόσωπο και δεν αποτελεί ιστορική μαρτυρία.",
+      introEn: "Explore continuity and change from the viewpoint of a person living in the period. This is not a specific real person and is not historical testimony.",
+      imageUrl: "",
+      sourceUrl: "",
+      sourceEl: "",
+      sourceEn: "",
+      topicIds: [],
+      topicPatterns: ["βυζαντινή περίοδος", "βυζαντινή αυτοκρατορία", "byzantine period", "byzantine empire"],
+      composite: true,
+    },
+    constantinopleResident1453: {
+      id: "constantinopleResident1453",
+      nameEl: "Κάτοικος της Κωνσταντινούπολης το 1453",
+      nameEn: "Resident of Constantinople in 1453",
+      periodEl: "Κωνσταντινούπολη · 1453",
+      periodEn: "Constantinople · 1453",
+      roleEl: "Σύνθετος εκπαιδευτικός ρόλος",
+      roleEn: "Composite educational role",
+      introEl: "Δες την Άλωση ως ιστορικό γεγονός από την οπτική ενός ανθρώπου της πόλης, χωρίς επινοημένες προσωπικές μαρτυρίες.",
+      introEn: "Explore the Fall of Constantinople from the viewpoint of a city resident, without invented personal testimony.",
+      imageUrl: "", sourceUrl: "", sourceEl: "", sourceEn: "",
+      topicIds: [],
+      topicPatterns: ["άλωση της κωνσταντινούπολης", "άλωση 1453", "1453", "fall of constantinople"],
+      composite: true,
+    },
+    renaissanceHumanist: {
+      id: "renaissanceHumanist",
+      nameEl: "Λόγιος της Αναγέννησης",
+      nameEn: "Renaissance humanist",
+      periodEl: "Ευρώπη · Αναγέννηση",
+      periodEn: "Europe · Renaissance",
+      roleEl: "Σύνθετος εκπαιδευτικός ρόλος",
+      roleEn: "Composite educational role",
+      introEl: "Δες τις αιτίες και τις ιδέες της Αναγέννησης μέσα από έναν σύνθετο ρόλο λογίου, χωρίς να αποδίδονται σε συγκεκριμένο υπαρκτό πρόσωπο λόγια που δεν τεκμηριώνονται.",
+      introEn: "Explore the causes and ideas of the Renaissance through a composite humanist role without attributing invented statements to a real person.",
+      imageUrl: "", sourceUrl: "", sourceEl: "", sourceEn: "",
+      topicIds: [],
+      topicPatterns: ["αιτίες αναγέννησης", "αναγέννηση και ανθρωπισμός", "renaissance", "humanism"],
+      composite: true,
+    },
+    revolution1821Member: {
+      id: "revolution1821Member",
+      nameEl: "Αγωνιστής του 1821",
+      nameEn: "1821 revolutionary",
+      periodEl: "Ελληνική Επανάσταση · 1821",
+      periodEn: "Greek Revolution · 1821",
+      roleEl: "Σύνθετος εκπαιδευτικός ρόλος",
+      roleEn: "Composite educational role",
+      introEl: "Δες γεγονότα και διλήμματα της Επανάστασης μέσα από σύνθετο ρόλο αγωνιστή, με σαφή διάκριση ανάμεσα σε τεκμηριωμένα γεγονότα και μεταγενέστερους θρύλους.",
+      introEn: "Explore events and dilemmas of the Greek Revolution through a composite role, clearly separating documented history from later legend.",
+      imageUrl: "", sourceUrl: "", sourceEl: "", sourceEn: "",
+      topicIds: [],
+      topicPatterns: ["επανάσταση του 1821", "ενότητα κατά την επανάσταση", "φιλική εταιρεία", "1821 revolution", "filiki etaireia"],
+      composite: true,
     },
   };
   let learningMode = "understand";
@@ -660,10 +756,26 @@
 
   function resolveCharacterForCurrentTopic() {
     const gap = getCurrentGap();
-    if (!gap?.id) return null;
-    return Object.values(CHARACTER_CATALOG).find((character) =>
-      (character.topicIds || []).includes(gap.id)
-    ) || null;
+    const subject = getCurrentSubject();
+    if (!gap) return null;
+
+    const subjectText = `${subject?.id || ""} ${subject?.subjectLabelEl || ""} ${subject?.subjectLabelEn || ""}`.toLowerCase();
+    const topicText = `${gap.id || ""} ${gap.labelEl || ""} ${gap.labelEn || ""}`.toLowerCase();
+
+    // Character dialogue is only for historical/literary content, never just because a topic
+    // happens to sit inside a broad language/history selector.
+    const eligibleSubject = /ιστορ|history|λογοτεχν|literature/.test(subjectText);
+    if (!eligibleSubject) return null;
+
+    // Method/history-skills topics are intentionally NOT role-played.
+    if (/χρονογραμμ|διαδοχ.*γεγον|όρια.*τεκμηρ|ιστορικ.*τεκμηρ|ιστορικ.*πηγ|timeline|chronolog|historical source|source limits/.test(topicText)) {
+      return null;
+    }
+
+    return Object.values(CHARACTER_CATALOG).find((character) => {
+      if ((character.topicIds || []).includes(gap.id)) return true;
+      return (character.topicPatterns || []).some((pattern) => topicText.includes(String(pattern).toLowerCase()));
+    }) || null;
   }
 
   function renderCharacterCard() {
@@ -680,18 +792,24 @@
     const intro = ctx.lang === "en" ? character.introEn : character.introEl;
     const source = ctx.lang === "en" ? character.sourceEn : character.sourceEl;
     refs.characterCard.hidden = false;
+    const portraitHtml = character.imageUrl
+      ? `<div class="tutor-character-card__portrait-wrap">
+          <span class="tutor-character-card__fallback" aria-hidden="true">🏛️</span>
+          <img class="tutor-character-card__portrait" src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />
+        </div>`
+      : `<div class="tutor-character-card__portrait-wrap tutor-character-card__portrait-wrap--generic" aria-hidden="true"><span class="tutor-character-card__generic-icon">🏛️</span></div>`;
+    const sourceHtml = character.sourceUrl
+      ? `<a class="tutor-character-card__source" href="${escapeHtml(character.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tr("characterCardSource"))}: ${escapeHtml(source)} ↗</a>`
+      : "";
     refs.characterCard.innerHTML = `
-      <div class="tutor-character-card__portrait-wrap">
-        <span class="tutor-character-card__fallback" aria-hidden="true">🏛️</span>
-        <img class="tutor-character-card__portrait" src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />
-      </div>
+      ${portraitHtml}
       <div class="tutor-character-card__body">
         <span class="tutor-character-card__badge">${escapeHtml(tr("characterCardBadge"))}</span>
         <h3>${escapeHtml(name)}</h3>
         <p class="tutor-character-card__meta">${escapeHtml(period)} · ${escapeHtml(role)}</p>
         <p class="tutor-character-card__intro">${escapeHtml(intro)}</p>
         <p class="tutor-character-card__hint">${escapeHtml(tr("characterCardHint"))}</p>
-        <a class="tutor-character-card__source" href="${escapeHtml(character.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tr("characterCardSource"))}: ${escapeHtml(source)} ↗</a>
+        ${sourceHtml}
       </div>
     `;
   }
@@ -732,8 +850,12 @@
       const character = resolveCharacterForCurrentTopic();
       const characterName = character ? character.nameEn : "a historically plausible character";
       const characterRole = character ? character.roleEn : "a relevant historical role";
+      const compositeRule = character?.composite
+        ? "- This is a COMPOSITE educational role, not a real named person. Never claim personal eyewitness authority or invented biography."
+        : "- This is a representation of a documented historical/literary figure, not an authentic quotation or testimony.";
       return `LEARNING MODE: CHARACTER DIALOGUE
 - This is an educational role-play, not a primary historical/literary source.
+${compositeRule}
 - Role-play specifically as ${characterName} (${characterRole}) for this mapped topic.
 - Do not switch to another character unless the learner explicitly exits this mode.
 - Never invent quotations, documents, dates, events or biographical facts.
@@ -2113,6 +2235,15 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     return exists;
   }
 
+  function selectUrlText(select, textValue) {
+    if (!select || !textValue) return false;
+    const wanted = String(textValue).trim().toLowerCase();
+    const option = [...select.options].find((item) => String(item.textContent || "").trim().toLowerCase() === wanted);
+    if (!option) return false;
+    select.value = option.value;
+    return true;
+  }
+
   function applyUrlCurriculumSelection() {
     const params = new URLSearchParams(location.search);
 
@@ -2137,7 +2268,9 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     if (selectUrlValue(refs.subject, params.get("subject"))) {
       populateTopics();
     }
-    if (selectUrlValue(refs.topic, params.get("topic"))) {
+    const topicSelected = selectUrlValue(refs.topic, params.get("topic")) ||
+      selectUrlText(refs.topic, params.get("topicText"));
+    if (topicSelected) {
       renderContext();
     }
 

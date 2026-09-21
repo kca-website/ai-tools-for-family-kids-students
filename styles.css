@@ -2661,3 +2661,16 @@ main {
   .tutor-character-card h3 { font-size: 1.1rem; }
   .tutor-character-card__intro { font-size: .78rem; }
 }
+
+.tutor-character-card__portrait-wrap--generic {
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+}
+.tutor-character-card__generic-icon {
+  font-size: 2.6rem;
+}
+@media (max-width: 620px) {
+  .tutor-character-card__portrait-wrap--generic { min-height: 118px; }
+  .tutor-character-card__generic-icon { font-size: 2rem; }
+}

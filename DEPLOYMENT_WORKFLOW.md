@@ -24,3 +24,5 @@ This project is intentionally conservative with Vercel deployments.
 - Do not deploy Special Education datasets globally; keep them on the dedicated page or lazy-load them after a special-school choice in AI Help.
 - Do not merge when the homepage/mobile smoke, tutor regression, or Special Education smoke is red.
 - For high-traffic periods, keep a known-good production deployment available for rollback.
+
+Last production release trigger: 2026-09-21

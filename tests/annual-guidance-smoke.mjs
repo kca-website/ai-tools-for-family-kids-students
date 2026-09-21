@@ -42,6 +42,15 @@ try {
   assert.equal(resolverState.meta.schoolYear, '2026-2027');
   assert.match(resolverState.meta.policyEl, /δεν σημαίνει ότι κάθε topic anchor/i);
 
+  await map.getByRole('button', { name: 'Λύκειο' }).click();
+  await selectLabel(map, '#subject', 'Βιολογία');
+  await map.selectOption('#course', 'biologia-a-lykeiou');
+  await map.waitForTimeout(80);
+  assert.match(await map.locator('#coverageBadge').innerText(), /αναλυτικός χάρτης/i, 'GEL A Biology curriculum map must show its documented-map status');
+  assert.equal(await map.locator('#topicList .topic').count(), 14, 'GEL A Biology curriculum map must expose 14 documented mapped topics');
+  assert.match(await map.locator('#topicList .topic').first().innerText(), /Αναλυτικός χάρτης οδηγίας/i, 'Mapped GEL topics must not be labelled as exact official sections');
+  assert.ok(await map.locator('#sources a[href*="dide.ira.sch.gr"]').count() >= 1, 'GEL A Biology curriculum map must expose its 2026-27 guidance source');
+
   await map.getByRole('button', { name: 'EN' }).click();
   assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Published / encoded');
 

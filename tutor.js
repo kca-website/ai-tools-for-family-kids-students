@@ -20,6 +20,56 @@
   const MODEL_PROVIDER = "openai";
   const PUTER_SRC = "https://js.puter.com/v2/";
   const CONVERSATION_EVENT = "aitools4kids:tutor-conversation-updated";
+  const CHARACTER_CATALOG = {
+    pericles: {
+      id: "pericles",
+      nameEl: "Περικλής",
+      nameEn: "Pericles",
+      periodEl: "Αθήνα · 5ος αιώνας π.Χ.",
+      periodEn: "Athens · 5th century BC",
+      roleEl: "Αθηναίος πολιτικός και στρατηγός",
+      roleEn: "Athenian statesman and general",
+      introEl: "Συζήτησε για την αθηναϊκή δημοκρατία, την Αθήνα και τον Πελοποννησιακό Πόλεμο από τη δική του ιστορική οπτική.",
+      introEn: "Discuss Athenian democracy, Athens and the Peloponnesian War from his historically grounded point of view.",
+      imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Pericles_bust.jpg?width=480",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Pericles_bust.jpg",
+      sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
+      sourceEn: "Wikimedia Commons · public domain",
+      topicIds: ["history.athens-sparta-confusion", "istoria-a-gym.peloponnesian-war-sides"],
+    },
+    socrates: {
+      id: "socrates",
+      nameEl: "Σωκράτης",
+      nameEn: "Socrates",
+      periodEl: "Αθήνα · 5ος αιώνας π.Χ.",
+      periodEn: "Athens · 5th century BC",
+      roleEl: "Αθηναίος φιλόσοφος",
+      roleEn: "Athenian philosopher",
+      introEl: "Συζήτησε για τη φιλοσοφική σκέψη μέσα από ερωτήσεις, χωρίς να παρουσιάζεται ο διάλογος ως αυθεντικό ιστορικό απόσπασμα.",
+      introEn: "Explore philosophical thinking through questions without presenting the dialogue as authentic historical testimony.",
+      imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Bust_of_Socrates.JPG?width=480",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Bust_of_Socrates.JPG",
+      sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
+      sourceEn: "Wikimedia Commons · public domain",
+      topicIds: ["history.philosophers-confusion"],
+    },
+    alexander: {
+      id: "alexander",
+      nameEl: "Μέγας Αλέξανδρος",
+      nameEn: "Alexander the Great",
+      periodEl: "Μακεδονία · 4ος αιώνας π.Χ.",
+      periodEn: "Macedon · 4th century BC",
+      roleEl: "Βασιλιάς της Μακεδονίας",
+      roleEn: "King of Macedon",
+      introEl: "Συζήτησε για τις εκστρατείες και την εξάπλωση του ελληνικού πολιτισμού, με σαφή διάκριση ανάμεσα σε τεκμηριωμένα γεγονότα και μεταγενέστερους θρύλους.",
+      introEn: "Discuss the campaigns and spread of Greek culture while clearly separating documented facts from later legends.",
+      imageUrl: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Alexander_The_Great_Bust.jpg?width=480",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Alexander_The_Great_Bust.jpg",
+      sourceEl: "Wikimedia Commons · δημόσιο κτήμα",
+      sourceEn: "Wikimedia Commons · public domain",
+      topicIds: ["istoria-a-gym.alexander-legacy"],
+    },
+  };
   let learningMode = "understand";
 
   const TEXT = {
@@ -82,7 +132,10 @@
       learningModeReviewText: "Active recall πάνω σε αυτό που δουλεύεις.",
       learningModeCharacter: "🎭 Χαρακτήρας",
       learningModeCharacterText: "Βιωματικός διάλογος με ιστορικό ή λογοτεχνικό ρόλο.",
-      characterNotAvailable: "Ο διάλογος χαρακτήρα ενεργοποιείται μόνο σε Ιστορία ή Λογοτεχνία.",
+      characterNotAvailable: "Δεν έχει ακόμη χαρτογραφηθεί κατάλληλος χαρακτήρας για αυτό το θέμα.",
+      characterCardBadge: "AI εκπαιδευτική αναπαράσταση",
+      characterCardHint: "Μίλα με τον χαρακτήρα, αλλά έλεγξε στο τέλος όσα ειπώθηκαν με το σχολικό βιβλίο ή την επίσημη πηγή.",
+      characterCardSource: "Εικόνα",
       allowed: "✓ Επιτρέπεται η λειτουργία",
       actionNeeded: "⚠ Χρειάζεται ενέργεια",
       primaryParent: "Στο Δημοτικό η λειτουργία είναι διαθέσιμη μόνο στον γονέα/κηδεμόνα.",
@@ -209,7 +262,10 @@
       learningModeReviewText: "Active recall on the topic you are studying.",
       learningModeCharacter: "🎭 Character",
       learningModeCharacterText: "Role-play with a historical or literary character.",
-      characterNotAvailable: "Character dialogue is available only for History or Literature.",
+      characterNotAvailable: "No suitable character has been mapped to this topic yet.",
+      characterCardBadge: "AI educational representation",
+      characterCardHint: "Talk with the character, then verify the claims against your textbook or official source.",
+      characterCardSource: "Image",
       allowed: "✓ Feature available",
       actionNeeded: "⚠ Action needed",
       primaryParent: "For Primary School, this feature is available only to a parent/guardian.",
@@ -602,14 +658,51 @@
     updateComposerState();
   }
 
+  function resolveCharacterForCurrentTopic() {
+    const gap = getCurrentGap();
+    if (!gap?.id) return null;
+    return Object.values(CHARACTER_CATALOG).find((character) =>
+      (character.topicIds || []).includes(gap.id)
+    ) || null;
+  }
+
+  function renderCharacterCard() {
+    if (!refs.characterCard) return;
+    const character = learningMode === "character" ? resolveCharacterForCurrentTopic() : null;
+    if (!character) {
+      refs.characterCard.hidden = true;
+      refs.characterCard.innerHTML = "";
+      return;
+    }
+    const name = ctx.lang === "en" ? character.nameEn : character.nameEl;
+    const period = ctx.lang === "en" ? character.periodEn : character.periodEl;
+    const role = ctx.lang === "en" ? character.roleEn : character.roleEl;
+    const intro = ctx.lang === "en" ? character.introEn : character.introEl;
+    const source = ctx.lang === "en" ? character.sourceEn : character.sourceEl;
+    refs.characterCard.hidden = false;
+    refs.characterCard.innerHTML = `
+      <div class="tutor-character-card__portrait-wrap">
+        <span class="tutor-character-card__fallback" aria-hidden="true">🏛️</span>
+        <img class="tutor-character-card__portrait" src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />
+      </div>
+      <div class="tutor-character-card__body">
+        <span class="tutor-character-card__badge">${escapeHtml(tr("characterCardBadge"))}</span>
+        <h3>${escapeHtml(name)}</h3>
+        <p class="tutor-character-card__meta">${escapeHtml(period)} · ${escapeHtml(role)}</p>
+        <p class="tutor-character-card__intro">${escapeHtml(intro)}</p>
+        <p class="tutor-character-card__hint">${escapeHtml(tr("characterCardHint"))}</p>
+        <a class="tutor-character-card__source" href="${escapeHtml(character.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tr("characterCardSource"))}: ${escapeHtml(source)} ↗</a>
+      </div>
+    `;
+  }
+
   function currentSubjectText() {
     const subject = getCurrentSubject();
     return `${subject?.id || ""} ${subject?.subjectLabelEl || ""} ${subject?.subjectLabelEn || ""}`.toLowerCase();
   }
 
   function isCharacterModeAvailable() {
-    const text = currentSubjectText();
-    return /history|ιστορ|literature|λογοτεχν|language|γλώσσα/.test(text);
+    return !!resolveCharacterForCurrentTopic();
   }
 
   function learningModeInstruction() {
@@ -636,9 +729,13 @@
 - Finish with one transfer question that uses the idea in a slightly different situation.`;
     }
     if (mode === "character") {
+      const character = resolveCharacterForCurrentTopic();
+      const characterName = character ? character.nameEn : "a historically plausible character";
+      const characterRole = character ? character.roleEn : "a relevant historical role";
       return `LEARNING MODE: CHARACTER DIALOGUE
 - This is an educational role-play, not a primary historical/literary source.
-- Adopt ONE historically or textually plausible character connected to the selected topic.
+- Role-play specifically as ${characterName} (${characterRole}) for this mapped topic.
+- Do not switch to another character unless the learner explicitly exits this mode.
 - Never invent quotations, documents, dates, events or biographical facts.
 - Clearly say when something is uncertain or cannot be known.
 - Stay grounded in the selected curriculum/topic and reliable established facts.
@@ -666,6 +763,7 @@
       if (disabled) btn.title = tr("characterNotAvailable");
       else btn.removeAttribute("title");
     });
+    renderCharacterCard();
   }
 
   function renderModeBox() {
@@ -1795,7 +1893,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     refs.sector?.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
     refs.specialty?.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
     refs.subject.addEventListener("change", () => { populateTopics(); renderContext(); resetConversation(); });
-    refs.topic.addEventListener("change", () => { renderContext(); resetConversation(); });
+    refs.topic.addEventListener("change", () => { renderContext(); renderLearningModePicker(); resetConversation(); });
     if (refs.age) {
       refs.age.addEventListener("change", () => {
         refs.consentRow.hidden = refs.age.value !== "13-14";
@@ -1833,6 +1931,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
         learningMode = nextMode;
         resetConversation(false);
         renderLearningModePicker();
+        renderContext();
       });
     });
     refs.newChat.addEventListener("click", () => resetConversation());
@@ -1938,6 +2037,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
               </div>
               <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorNewChat">${escapeHtml(tr("newChat"))}</button>
             </div>
+            <section class="tutor-character-card" id="tutorCharacterCard" hidden aria-live="polite"></section>
             <div class="tutor-messages" id="tutorMessages">
               <div class="tutor-empty" id="tutorEmptyState"><strong>${escapeHtml(tr("emptyTitle"))}</strong><br>${escapeHtml(parentMode ? tr("emptyParent") : tr("emptyStudent"))}</div>
             </div>
@@ -1990,6 +2090,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       modeBox: byId("tutorModeBox"),
       accessGate: byId("tutorAccessGate"),
       contextBox: byId("tutorContextBox"),
+      characterCard: byId("tutorCharacterCard"),
       messages: byId("tutorMessages"),
       empty: byId("tutorEmptyState"),
       form: byId("tutorForm"),

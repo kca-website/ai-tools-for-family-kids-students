@@ -765,10 +765,12 @@
     const official = getOfficialCurriculumEntry();
     const officialBook = official?.officialBook;
     const officialLabel = official ? officialValue(official, "coverageLabelEl", "coverageLabelEn", official.coverageStatus || "") : "";
-    const sourceUrl = officialBook?.url || official?.catalogUrl || "";
-    const sourceName = officialBook
-      ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
-      : officialValue(official, "sourceLabelEl", "sourceLabelEn", tr("officialCatalog"));
+    const sourceUrl = official?.annualInstructionsUrl || officialBook?.url || official?.catalogUrl || "";
+    const sourceName = official?.annualInstructionsUrl
+      ? officialValue(official, "sourceLabelEl", "sourceLabelEn", ctx.lang === "en" ? "Official 2026–27 guidance" : "Επίσημες οδηγίες 2026–27")
+      : officialBook
+        ? (ctx.lang === "en" ? (officialBook.titleEn || officialBook.titleEl) : officialBook.titleEl)
+        : officialValue(official, "sourceLabelEl", "sourceLabelEn", tr("officialCatalog"));
     const gapOfficial = getOfficialGapAlignment();
     const annualGuidance = getOfficialAnnualGuidance();
     const annualLabel = annualGuidance ? officialValue(annualGuidance, "labelEl", "labelEn", annualGuidance.status || "") : "";

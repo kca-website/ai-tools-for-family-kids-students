@@ -336,6 +336,8 @@ assert(/MAT|%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91/i.test(
 assert(/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97/i.test(EN.sourceUrls?.annualSubjects?.lyceumPhysics||''), 'ENEEGYL Lyceum Physics annual source archive missing');
 assert(/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91/i.test(EN.sourceUrls?.annualSubjects?.lyceumChemistry||''), 'ENEEGYL Lyceum Chemistry annual source archive missing');
 assert(EN.grades['lyc-a'].subjects.find(x=>x.id==='math')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumMath, 'ENEEGYL A Lyceum Mathematics must carry its subject-specific annual source');
+assert(EN.grades['lyc-a'].subjects.find(x=>x.id==='history')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumHistoryA, 'ENEEGYL A Lyceum History official 2026-27 guidance source missing');
+assert(EN.grades['lyc-a'].subjects.find(x=>x.id==='religion')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumReligionA, 'ENEEGYL A Lyceum Religion official 2026-27 guidance source missing');
 assert(EN.grades['lyc-d'].subjects.find(x=>x.id==='physics')?.annualSourceUrl === EN.sourceUrls.annualSubjects.lyceumPhysics, 'ENEEGYL D Lyceum Physics must carry its subject-specific annual source');
 
 assert(Array.isArray(SUPPORT.items) && SUPPORT.items.length >= 6, 'Special Education support tools need at least six curated options');

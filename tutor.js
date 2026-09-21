@@ -20,6 +20,7 @@
   const MODEL_PROVIDER = "openai";
   const PUTER_SRC = "https://js.puter.com/v2/";
   const CONVERSATION_EVENT = "aitools4kids:tutor-conversation-updated";
+  let learningMode = "understand";
 
   const TEXT = {
     el: {
@@ -70,6 +71,18 @@
       modeParentText: "Ο βοηθός μιλά στον γονέα και προτείνει μία ερώτηση ή ένα βήμα κάθε φορά, ώστε το παιδί να σκεφτεί μόνο του.",
       modeStudent: "Λειτουργία: AI Βοήθεια μαθητή",
       modeStudentText: "Η AI Βοήθεια μιλά απευθείας στον μαθητή, μία βασική ερώτηση κάθε φορά, χωρίς να παραδίδει έτοιμη λύση.",
+      learningModeLabel: "Πώς θέλεις να σε βοηθήσει το AI;",
+      learningModeUnderstand: "💡 Κατανόηση",
+      learningModeUnderstandText: "Εξήγηση με ερωτήσεις και μικρά βήματα.",
+      learningModeHint: "🧩 Υπόδειξη",
+      learningModeHintText: "Μόνο το επόμενο μικρό hint, όχι λύση.",
+      learningModeChallenge: "🎯 Πρόκληση",
+      learningModeChallengeText: "Νέες ερωτήσεις και έλεγχος κατανόησης.",
+      learningModeReview: "🧠 Επανάληψη",
+      learningModeReviewText: "Active recall πάνω σε αυτό που δουλεύεις.",
+      learningModeCharacter: "🎭 Χαρακτήρας",
+      learningModeCharacterText: "Βιωματικός διάλογος με ιστορικό ή λογοτεχνικό ρόλο.",
+      characterNotAvailable: "Ο διάλογος χαρακτήρα ενεργοποιείται μόνο σε Ιστορία ή Λογοτεχνία.",
       allowed: "✓ Επιτρέπεται η λειτουργία",
       actionNeeded: "⚠ Χρειάζεται ενέργεια",
       primaryParent: "Στο Δημοτικό η λειτουργία είναι διαθέσιμη μόνο στον γονέα/κηδεμόνα.",
@@ -89,6 +102,7 @@
       contextClass: "Τάξη",
       contextSubject: "Μάθημα",
       contextGoal: "Στόχος",
+      contextLearningMode: "Τρόπος AI βοήθειας",
       contextPath: "Υπάρχον learning path",
       officialBasis: "Επίσημη βάση",
       officialSource: "Επίσημη πηγή",
@@ -184,6 +198,18 @@
       modeParentText: "The helper talks to the parent and suggests one question or step at a time so the child does the thinking.",
       modeStudent: "Mode: Student AI Help",
       modeStudentText: "AI Help speaks directly to the student, one main question at a time, without handing over a finished solution.",
+      learningModeLabel: "How should AI help you?",
+      learningModeUnderstand: "💡 Understand",
+      learningModeUnderstandText: "Explanation through questions and small steps.",
+      learningModeHint: "🧩 Hint",
+      learningModeHintText: "Only the next small hint, not the solution.",
+      learningModeChallenge: "🎯 Challenge",
+      learningModeChallengeText: "New questions and an understanding check.",
+      learningModeReview: "🧠 Review",
+      learningModeReviewText: "Active recall on the topic you are studying.",
+      learningModeCharacter: "🎭 Character",
+      learningModeCharacterText: "Role-play with a historical or literary character.",
+      characterNotAvailable: "Character dialogue is available only for History or Literature.",
       allowed: "✓ Feature available",
       actionNeeded: "⚠ Action needed",
       primaryParent: "For Primary School, this feature is available only to a parent/guardian.",
@@ -203,6 +229,7 @@
       contextClass: "Grade",
       contextSubject: "Subject",
       contextGoal: "Goal",
+      contextLearningMode: "AI learning mode",
       contextPath: "Existing learning path",
       officialBasis: "Official basis",
       officialSource: "Official source",
@@ -575,6 +602,72 @@
     updateComposerState();
   }
 
+  function currentSubjectText() {
+    const subject = getCurrentSubject();
+    return `${subject?.id || ""} ${subject?.subjectLabelEl || ""} ${subject?.subjectLabelEn || ""}`.toLowerCase();
+  }
+
+  function isCharacterModeAvailable() {
+    const text = currentSubjectText();
+    return /history|ιστορ|literature|λογοτεχν|language|γλώσσα/.test(text);
+  }
+
+  function learningModeInstruction() {
+    const mode = learningMode || "understand";
+    if (mode === "hint") {
+      return `LEARNING MODE: HINT
+- Give exactly ONE small hint at a time.
+- Do not solve the exercise, do not reveal the next full step, and do not provide a worked answer.
+- After the hint, ask the learner to try again.`;
+    }
+    if (mode === "challenge") {
+      return `LEARNING MODE: CHALLENGE
+- First confirm the learner's current understanding with one short question.
+- Then give 3 new questions, one at a time, increasing difficulty gradually.
+- Do not reveal answers before the learner attempts each question.
+- Finish by asking the learner to explain the key idea in their own words.`;
+    }
+    if (mode === "review") {
+      return `LEARNING MODE: ACTIVE RECALL / REVIEW
+- Do not start with an explanation.
+- Ask short retrieval questions from the selected topic, one at a time.
+- If the learner misses something, give a brief cue and ask again later in the session.
+- Revisit missed ideas before ending.
+- Finish with one transfer question that uses the idea in a slightly different situation.`;
+    }
+    if (mode === "character") {
+      return `LEARNING MODE: CHARACTER DIALOGUE
+- This is an educational role-play, not a primary historical/literary source.
+- Adopt ONE historically or textually plausible character connected to the selected topic.
+- Never invent quotations, documents, dates, events or biographical facts.
+- Clearly say when something is uncertain or cannot be known.
+- Stay grounded in the selected curriculum/topic and reliable established facts.
+- Ask the learner questions too; do not monologue.
+- After about 4 exchanges, step OUT of character and ask the learner to state 2 things learned and 1 claim to verify in the textbook/source.
+- Do not imitate a living person or present role-play as authentic testimony.`;
+    }
+    return `LEARNING MODE: UNDERSTANDING
+- Start from what the learner already thinks.
+- Explain through one question or small step at a time.
+- Prefer analogies and contrasting examples over direct answers.
+- Finish with a new check question the learner answers without help.`;
+  }
+
+  function renderLearningModePicker() {
+    if (!refs.learningModePicker) return;
+    const characterAllowed = isCharacterModeAvailable();
+    if (learningMode === "character" && !characterAllowed) learningMode = "understand";
+    refs.learningModePicker.querySelectorAll("[data-learning-mode]").forEach((btn) => {
+      const mode = btn.dataset.learningMode;
+      const disabled = mode === "character" && !characterAllowed;
+      btn.disabled = disabled;
+      btn.classList.toggle("tutor-learning-mode--active", learningMode === mode);
+      btn.setAttribute("aria-pressed", learningMode === mode ? "true" : "false");
+      if (disabled) btn.title = tr("characterNotAvailable");
+      else btn.removeAttribute("title");
+    });
+  }
+
   function renderModeBox() {
     if (!refs.modeBox) return;
     const parent = isParentMode();
@@ -747,6 +840,7 @@
       refs.topic.appendChild(option);
     }
     renderContext();
+    renderLearningModePicker();
     resetConversation(false);
     // Subject changes rebuild the topic list, but they must also re-evaluate
     // the composer gate. Otherwise the selected subject is shown in the
@@ -800,7 +894,14 @@
       ${schoolContext}${sectorContext}${specialtyContext}
       <b>${escapeHtml(tr("contextClass"))}:</b> ${escapeHtml(getSelectedGradeLabel())}<br>
       <b>${escapeHtml(tr("contextSubject"))}:</b> ${escapeHtml(langValue(subject, "subjectLabelEl", "subjectLabelEn", ":"))}<br>
-      <b>${escapeHtml(tr("contextGoal"))}:</b> ${escapeHtml(langValue(gap, "labelEl", "labelEn", tr("generalHelp")))}<br><br>
+      <b>${escapeHtml(tr("contextGoal"))}:</b> ${escapeHtml(langValue(gap, "labelEl", "labelEn", tr("generalHelp")))}<br>
+      <b>${escapeHtml(tr("contextLearningMode"))}:</b> ${escapeHtml({
+        understand: tr("learningModeUnderstand"),
+        hint: tr("learningModeHint"),
+        challenge: tr("learningModeChallenge"),
+        review: tr("learningModeReview"),
+        character: tr("learningModeCharacter"),
+      }[learningMode] || tr("learningModeUnderstand"))}<br><br>
       <b>${escapeHtml(tr("contextPath"))}:</b><br>${pathSummary}${officialHtml}
     `;
   }
@@ -964,6 +1065,8 @@ ${pathText ? `- Existing learning path:\n${pathText}` : ""}
 - Reply primarily in ${languageName}, unless the school subject or the user's question clearly calls for another language.
 
 ${officialCurriculumText}
+
+${learningModeInstruction()}
 
 TUTORING RULES
 1. Do not immediately give the final answer or a fully solved exercise. Ask for the learner's attempt or thinking first.
@@ -1723,6 +1826,15 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       resetConversation();
       updateAuthUi();
     });
+    refs.learningModePicker?.querySelectorAll("[data-learning-mode]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const nextMode = btn.dataset.learningMode || "understand";
+        if (nextMode === "character" && !isCharacterModeAvailable()) return;
+        learningMode = nextMode;
+        resetConversation(false);
+        renderLearningModePicker();
+      });
+    });
     refs.newChat.addEventListener("click", () => resetConversation());
     refs.mic?.addEventListener("click", () => { primeAudioOutput(); toggleRecording(); });
     refs.autoSpeak?.addEventListener("change", () => {
@@ -1801,6 +1913,17 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             <label class="tutor-field"><span>${escapeHtml(tr("subject"))}</span><select id="tutorSubject"></select></label>
             <label class="tutor-field"><span>${escapeHtml(tr("topic"))}</span><select id="tutorTopic"></select></label>
 
+            <div class="tutor-learning-modes">
+              <p class="tutor-learning-modes__label">${escapeHtml(tr("learningModeLabel"))}</p>
+              <div class="tutor-learning-modes__grid" id="tutorLearningModePicker" role="group" aria-label="${escapeHtml(tr("learningModeLabel"))}">
+                <button type="button" class="tutor-learning-mode" data-learning-mode="understand"><strong>${escapeHtml(tr("learningModeUnderstand"))}</strong><span>${escapeHtml(tr("learningModeUnderstandText"))}</span></button>
+                <button type="button" class="tutor-learning-mode" data-learning-mode="hint"><strong>${escapeHtml(tr("learningModeHint"))}</strong><span>${escapeHtml(tr("learningModeHintText"))}</span></button>
+                <button type="button" class="tutor-learning-mode" data-learning-mode="challenge"><strong>${escapeHtml(tr("learningModeChallenge"))}</strong><span>${escapeHtml(tr("learningModeChallengeText"))}</span></button>
+                <button type="button" class="tutor-learning-mode" data-learning-mode="review"><strong>${escapeHtml(tr("learningModeReview"))}</strong><span>${escapeHtml(tr("learningModeReviewText"))}</span></button>
+                <button type="button" class="tutor-learning-mode" data-learning-mode="character"><strong>${escapeHtml(tr("learningModeCharacter"))}</strong><span>${escapeHtml(tr("learningModeCharacterText"))}</span></button>
+              </div>
+            </div>
+
             <div class="tutor-mode" id="tutorModeBox"></div>
             <div class="tutor-access" id="tutorAccessGate"></div>
             <div class="tutor-context" id="tutorContextBox"></div>
@@ -1863,6 +1986,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       specialty: byId("tutorSpecialty"),
       subject: byId("tutorSubject"),
       topic: byId("tutorTopic"),
+      learningModePicker: byId("tutorLearningModePicker"),
       modeBox: byId("tutorModeBox"),
       accessGate: byId("tutorAccessGate"),
       contextBox: byId("tutorContextBox"),
@@ -1935,6 +2059,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     mount.dataset.ready = "1";
     captureRefs();
     renderModeBox();
+    renderLearningModePicker();
     populateGrades();
     renderAccessGate();
     bindEvents();

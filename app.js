@@ -22,6 +22,7 @@
     currentRole: "guardian",
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "tutor" | "guide"
     currentSubject: null, // subjectId ή null = "Όλα"
+    currentNeed: null, // μαθησιακή ανάγκη: understand | practice | hint | check | revise | research
     a11yFilterOnly: false, // true = δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα
     // Quiz sub-state
     quizGradeId: null,
@@ -68,6 +69,16 @@
       heroHelpPrimary: "Γονιός Δημοτικού",
       heroHelpMiddle: "Γονιός Γυμνασίου",
       heroHelpHigh: "Μαθητής Λυκείου",
+      homeAiModesEyebrow: "AI για πραγματική μάθηση",
+      homeAiModesTitle: "Διάλεξε πώς θα σε βοηθήσει το AI να μάθεις",
+      homeAiModesIntro: "Το ίδιο AI δεν είναι κατάλληλο για κάθε δυσκολία. Πρώτα βρίσκουμε τι χρειάζεσαι και μετά ποιο εργαλείο ή τρόπος AI βοήθειας ταιριάζει.",
+      homeAiRecallTitle: "AI Επανάληψη",
+      homeAiRecallText: "Ξαναφέρνει στην κατάλληλη στιγμή όσα σε δυσκόλεψαν και σε ελέγχει με νέα ερώτηση.",
+      homeAiCharacterTitle: "Μίλα με έναν χαρακτήρα AI",
+      homeAiCharacterText: "Μάθε βιωματικά μέσα από τεκμηριωμένο διάλογο και μετά έλεγξε τι πραγματικά έμαθες.",
+      homeAiChallengeTitle: "AI Πρόκληση κατανόησης",
+      homeAiChallengeText: "Παίρνεις μικρές υποδείξεις, απαντάς μόνος σου και στο τέλος αποδεικνύεις ότι κατάλαβες.",
+      homeAiModesFoot: "Μάθημα → ανάγκη → κατάλληλη AI βοήθεια → προσπάθεια χωρίς AI.",
       backToZones: "Πίσω σε όλες τις ζώνες",
       footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Η προαιρετική AI Βοήθεια χρησιμοποιεί Groq/GPT-OSS 120B ή Puter.",
       emptyState: "Δεν έχουν προστεθεί ακόμα εργαλεία για αυτόν τον συνδυασμό. Έρχονται σύντομα.",
@@ -131,8 +142,11 @@
       pdfDownloading: "Δημιουργία PDF...",
       subjectFilterLabel: "Φίλτρο μαθήματος",
       subjectAll: "Όλα",
+      needFilterLabel: "Τι χρειάζεσαι τώρα;",
+      needAll: "Όλες οι ανάγκες",
+      needEmptyState: "Δεν βρέθηκε κατάλληλο εργαλείο για αυτόν τον συνδυασμό μαθήματος και ανάγκης.",
       subjectEmptyState: "Δεν υπάρχει ακόμα αντιστοίχιση εργαλείου για αυτό το μάθημα σε αυτή τη ζώνη.",
-      a11yFilterLabel: "✓ Δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα",
+      a11yFilterLabel: "♿ Προτεραιότητα σε εργαλεία με ισχυρή τεκμηρίωση προσβασιμότητας",
       a11yFilterEmptyState: "Κανένα από τα εργαλεία αυτής της ζώνης δεν έχει επίσημη δήλωση προσβασιμότητας. Δες όλα τα εργαλεία στη σελίδα Προσβασιμότητα.",
       // ---------- Parent Quiz (νέο) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Δοκίμασε κι εσύ, γονιέ!",
@@ -178,6 +192,16 @@
       heroHelpPrimary: "Primary parent",
       heroHelpMiddle: "Middle School parent",
       heroHelpHigh: "High School student",
+      homeAiModesEyebrow: "AI for real learning",
+      homeAiModesTitle: "Choose how AI should help you learn",
+      homeAiModesIntro: "The same AI is not right for every difficulty. First identify what you need, then choose the tool or AI learning mode that fits.",
+      homeAiRecallTitle: "AI Review",
+      homeAiRecallText: "Brings back what you struggled with at the right time and checks you with a new question.",
+      homeAiCharacterTitle: "Talk with an AI character",
+      homeAiCharacterText: "Learn through a grounded role-play dialogue, then verify what you actually learned.",
+      homeAiChallengeTitle: "AI Understanding Challenge",
+      homeAiChallengeText: "Get small hints, answer on your own, and finish by proving that you understood.",
+      homeAiModesFoot: "Subject → need → suitable AI help → try again without AI.",
       backToZones: "Back to all zones",
       footerText: "Independent project. It is not an official product or partnership of any AI provider. Optional AI Help uses Groq/GPT-OSS 120B or Puter.",
       emptyState: "No tools added yet for this combination. Coming soon.",
@@ -241,8 +265,11 @@
       pdfDownloading: "Generating PDF...",
       subjectFilterLabel: "Subject filter",
       subjectAll: "All",
+      needFilterLabel: "What do you need right now?",
+      needAll: "All needs",
+      needEmptyState: "No suitable tool was found for this subject and learning need.",
       subjectEmptyState: "No tool mapping yet for this subject in this zone.",
-      a11yFilterLabel: "✓ Show only tools with documented accessibility",
+      a11yFilterLabel: "♿ Prioritize tools with strong accessibility evidence",
       a11yFilterEmptyState: "None of the tools in this zone have an official accessibility statement. See all tools on the Accessibility page.",
       // ---------- Parent Quiz (new) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Try it yourself, parent!",
@@ -382,6 +409,7 @@
     els.pathZoneHeading = document.getElementById("pathZoneHeading");
     els.roleTabs = document.getElementById("roleTabs");
     els.subjectFilter = document.getElementById("subjectFilter");
+    els.needFilter = document.getElementById("needFilter");
     els.a11yFilterToggle = document.getElementById("a11yFilterToggle");
     els.a11yFilterToggleAdvanced = document.getElementById("a11yFilterToggleAdvanced");
     els.pathIntro = document.getElementById("pathIntro");
@@ -512,8 +540,60 @@
 
   function selectSubject(subjectId) {
     state.currentSubject = subjectId;
+    state.currentNeed = null;
     renderSubjectFilter();
+    renderNeedFilter();
     renderPathContent();
+  }
+
+  function renderNeedFilter() {
+    if (!els.needFilter) return;
+    els.needFilter.innerHTML = "";
+    if (!state.currentSubject || typeof LEARNING_NEEDS === "undefined") {
+      els.needFilter.hidden = true;
+      return;
+    }
+    els.needFilter.hidden = false;
+
+    const label = document.createElement("span");
+    label.className = "need-filter__label";
+    label.textContent = t("needFilterLabel");
+    els.needFilter.appendChild(label);
+
+    const all = document.createElement("button");
+    all.type = "button";
+    all.className = "need-chip" + (state.currentNeed === null ? " active" : "");
+    all.textContent = t("needAll");
+    all.addEventListener("click", () => {
+      state.currentNeed = null;
+      renderNeedFilter();
+      renderPathContent();
+    });
+    els.needFilter.appendChild(all);
+
+    LEARNING_NEEDS.forEach((need) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "need-chip" + (state.currentNeed === need.id ? " active" : "");
+      const labelText = state.lang === "el" ? need.labelEl : need.labelEn;
+      chip.innerHTML = `<span aria-hidden="true">${need.icon}</span> ${escapeHtml(labelText)}`;
+      chip.addEventListener("click", () => {
+        state.currentNeed = need.id;
+        renderNeedFilter();
+        renderPathContent();
+      });
+      els.needFilter.appendChild(chip);
+    });
+  }
+
+  function accessibilityRank(toolId) {
+    if (typeof ACCESSIBILITY_INFO === "undefined") return 2;
+    const status = ACCESSIBILITY_INFO[toolId]?.status;
+    if (status === "good") return 0;
+    if (status === "partial") return 1;
+    if (status === "none" || !status) return 2;
+    if (status === "caution") return 3;
+    return 2;
   }
 
   // ---------- Rendering: Path intro + tool grid (βασικά εργαλεία) ----------
@@ -539,28 +619,44 @@
     if (state.currentSubject) {
       const subjectData =
         CURRICULUM[state.currentZone] && CURRICULUM[state.currentZone][state.currentSubject];
-      const allowedToolIds = subjectData ? subjectData.toolIds : [];
-      toolsToShow = toolsToShow.filter((entry) => allowedToolIds.includes(entry.toolId));
+      let allowedToolIds = subjectData ? subjectData.toolIds.slice() : [];
+
+      if (state.currentNeed && typeof NEED_TOOL_MAP !== "undefined") {
+        const needIds = (NEED_TOOL_MAP[state.currentSubject] && NEED_TOOL_MAP[state.currentSubject][state.currentNeed]) || [];
+        allowedToolIds = allowedToolIds.filter((id) => needIds.includes(id));
+      }
+
+      const existingById = new Map((pathData.tools || []).map((entry) => [entry.toolId, entry]));
+      toolsToShow = allowedToolIds
+        .filter((id) => TOOLS[id] && isToolAgeAppropriate(TOOLS[id]))
+        .map((id) => existingById.get(id) || {
+          toolId: id,
+          useCaseEl: TOOLS[id].shortDescEl || "",
+          useCaseEn: TOOLS[id].shortDescEn || "",
+          howToEl: "Χρησιμοποίησέ το μόνο για τη συγκεκριμένη ανάγκη και έλεγξε την κατανόησή σου χωρίς AI στο τέλος.",
+          howToEn: "Use it only for the selected need and verify your understanding without AI at the end.",
+          cautionEl: "Μην χρησιμοποιείς την έτοιμη απάντηση ως υποκατάστατο της δικής σου προσπάθειας.",
+          cautionEn: "Do not use a ready-made answer as a substitute for your own attempt.",
+        });
 
       if (subjectData && subjectData.noteEl) {
         const note = state.lang === "el" ? subjectData.noteEl : subjectData.noteEn;
-        els.pathIntro.textContent = note;
+        const need = typeof LEARNING_NEEDS !== "undefined" ? LEARNING_NEEDS.find((item) => item.id === state.currentNeed) : null;
+        const needLabel = need ? (state.lang === "el" ? need.labelEl : need.labelEn) : "";
+        els.pathIntro.textContent = needLabel ? `${note} · ${needLabel}` : note;
       }
 
       if (!toolsToShow.length) {
-        els.toolGrid.innerHTML = `<div class="empty-state">${t("subjectEmptyState")}</div>`;
+        els.toolGrid.innerHTML = `<div class="empty-state">${t(state.currentNeed ? "needEmptyState" : "subjectEmptyState")}</div>`;
         return;
       }
     }
 
-    if (state.a11yFilterOnly && typeof ACCESSIBILITY_INFO !== "undefined") {
-      toolsToShow = toolsToShow.filter(
-        (entry) => ACCESSIBILITY_INFO[entry.toolId] && ACCESSIBILITY_INFO[entry.toolId].status === "good"
-      );
-      if (!toolsToShow.length) {
-        els.toolGrid.innerHTML = `<div class="empty-state">${t("a11yFilterEmptyState")}</div>`;
-        return;
-      }
+    if (state.a11yFilterOnly) {
+      toolsToShow = toolsToShow
+        .map((entry, index) => ({ entry, index }))
+        .sort((a, b) => accessibilityRank(a.entry.toolId) - accessibilityRank(b.entry.toolId) || a.index - b.index)
+        .map(({ entry }) => entry);
     }
 
     renderToolGrid(toolsToShow, els.toolGrid);
@@ -574,17 +670,17 @@
     Object.keys(TOOLS).forEach((id) => {
       const tool = TOOLS[id];
       if (tool.isExpert) {
-        if (state.a11yFilterOnly && typeof ACCESSIBILITY_INFO !== "undefined") {
-          const a11y = ACCESSIBILITY_INFO[id];
-          if (!a11y || a11y.status !== "good") return;
-        }
         expertTools.push({ toolId: id, tool });
       }
     });
 
     if (!expertTools.length) {
-      els.advancedGrid.innerHTML = `<div class="empty-state">${state.a11yFilterOnly ? t("a11yFilterEmptyState") : t("emptyState")}</div>`;
+      els.advancedGrid.innerHTML = `<div class="empty-state">${t("emptyState")}</div>`;
       return;
+    }
+
+    if (state.a11yFilterOnly) {
+      expertTools.sort((a, b) => accessibilityRank(a.toolId) - accessibilityRank(b.toolId));
     }
 
     // Δημιουργούμε μια λίστα με την ίδια δομή με τα path tools
@@ -658,6 +754,10 @@ function renderToolGrid(pathTools, targetElement) {
       accessibilityBadge = state.lang === "el"
         ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEl)}">✓ Επίσημη δήλωση προσβασιμότητας</span>`
         : `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEn)}">✓ Official accessibility statement</span>`;
+    } else if (a11y && a11y.status === "partial") {
+      accessibilityBadge = state.lang === "el"
+        ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--partial" title="${escapeAttr(a11y.noteEl)}">♿ Μερική τεκμηρίωση προσβασιμότητας</span>`
+        : `<span class="tool-card__a11y-badge tool-card__a11y-badge--partial" title="${escapeAttr(a11y.noteEn)}">♿ Partial accessibility evidence</span>`;
     } else if (a11y && a11y.status === "caution") {
       accessibilityBadge = state.lang === "el"
         ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--caution" title="${escapeAttr(a11y.noteEl)}">⚠️ Τεκμηριωμένο πρόβλημα προσβασιμότητας</span>`
@@ -1081,7 +1181,20 @@ function renderToolGrid(pathTools, targetElement) {
         </button>
       `;
     }).join("");
-    els.quizContent.innerHTML = `<p class="quiz-pick-heading">${t("quizPickGrade")}</p><div class="quiz-grade-grid">${cards}</div>`;
+    const dueReviews = getDueReviewsForCurrentZone();
+    const dueReviewsHtml = dueReviews.length ? `
+      <section class="quiz-due-reviews">
+        <p class="quiz-due-reviews__title">${state.lang === "el" ? "🧠 Ώρα για επανάληψη" : "🧠 Review due"}</p>
+        <p class="quiz-due-reviews__sub">${state.lang === "el" ? "Θέματα που είχες βάλει για επανάληψη και ήρθε η ώρα να τα ξαναδείς." : "Topics you saved for review that are now due."}</p>
+        <div class="quiz-due-review-list">
+          ${dueReviews.map((item) => `<button type="button" class="quiz-due-review-btn" data-gap-id="${escapeAttr(item.gapId)}">${escapeHtml(item.label || item.gapId)}</button>`).join("")}
+        </div>
+      </section>
+    ` : "";
+    els.quizContent.innerHTML = `${dueReviewsHtml}<p class="quiz-pick-heading">${t("quizPickGrade")}</p><div class="quiz-grade-grid">${cards}</div>`;
+    els.quizContent.querySelectorAll(".quiz-due-review-btn").forEach((btn) => {
+      btn.addEventListener("click", () => openLearningPathModal(btn.dataset.gapId));
+    });
     els.quizContent.querySelectorAll(".quiz-grade-card").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.quizGradeId = btn.dataset.gradeId;
@@ -1395,6 +1508,184 @@ function renderToolGrid(pathTools, targetElement) {
     });
   }
 
+  // ---------- Learning activities: recall / challenge / character ----------
+  const REVIEW_STORAGE_KEY = "aitools4kids_review_queue_v1";
+  const REVIEW_INTERVALS_DAYS = [1, 3, 7, 14];
+
+  function getReviewQueue() {
+    try {
+      const raw = localStorage.getItem(REVIEW_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveReviewQueue(items) {
+    try {
+      localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(items));
+    } catch (_) {}
+  }
+
+  function scheduleGapReview(gapId, label) {
+    const items = getReviewQueue();
+    const existing = items.find((item) => item.gapId === gapId && item.zone === state.currentZone);
+    const now = Date.now();
+    if (existing) {
+      existing.label = label;
+      existing.subjectId = state.quizSubjectId || existing.subjectId || null;
+      existing.stage = 0;
+      existing.dueAt = now + REVIEW_INTERVALS_DAYS[0] * 86400000;
+      existing.updatedAt = now;
+    } else {
+      items.push({
+        gapId,
+        label,
+        zone: state.currentZone,
+        subjectId: state.quizSubjectId || null,
+        stage: 0,
+        dueAt: now + REVIEW_INTERVALS_DAYS[0] * 86400000,
+        updatedAt: now,
+      });
+    }
+    saveReviewQueue(items);
+  }
+
+  function advanceGapReview(gapId) {
+    const items = getReviewQueue();
+    const item = items.find((entry) => entry.gapId === gapId && entry.zone === state.currentZone);
+    if (!item) return;
+    const nextStage = Math.min((item.stage || 0) + 1, REVIEW_INTERVALS_DAYS.length - 1);
+    item.stage = nextStage;
+    item.dueAt = Date.now() + REVIEW_INTERVALS_DAYS[nextStage] * 86400000;
+    item.updatedAt = Date.now();
+    saveReviewQueue(items);
+  }
+
+  function isGapReviewDue(gapId) {
+    const item = getReviewQueue().find((entry) => entry.gapId === gapId && entry.zone === state.currentZone);
+    return !!(item && item.dueAt <= Date.now());
+  }
+
+  function getDueReviewsForCurrentZone() {
+    return getReviewQueue().filter((item) => item.zone === state.currentZone && item.dueAt <= Date.now());
+  }
+
+  function getLearningActivityPrompt(action, gapId, gap) {
+    const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
+    const explain = state.lang === "el" ? gap.explainEl : gap.explainEn;
+    if (state.lang === "en") {
+      if (action === "character") {
+        return `Act as a historically plausible character connected with the topic "${label}". Stay within well-established facts, clearly say when something is uncertain, and do not invent quotations. Ask me one question at a time. After 4 exchanges, leave character and ask me to state 2 things I learned and 1 claim I should verify in my school material. Learning difficulty: ${explain}`;
+      }
+      return `Help me learn "${label}" without giving me the answer. Difficulty: ${explain}. First ask what I already think. Then give one small hint at a time. Finish with 3 new questions of increasing difficulty. Do not reveal the final answer unless I have attempted each one.`;
+    }
+    if (action === "character") {
+      return `Μπες στον ρόλο ενός ιστορικά εύλογου προσώπου που συνδέεται με το θέμα «${label}». Μείνε σε καλά τεκμηριωμένα ιστορικά στοιχεία, δήλωσε καθαρά όταν κάτι είναι αβέβαιο και μην επινοείς αποσπάσματα ή πηγές. Κάνε μου μία ερώτηση κάθε φορά. Μετά από 4 ανταλλαγές βγες από τον ρόλο και ζήτησέ μου να γράψω 2 πράγματα που έμαθα και 1 ισχυρισμό που πρέπει να ελέγξω στο σχολικό υλικό. Δυσκολία που δουλεύω: ${explain}`;
+    }
+    return `Βοήθησέ με να μάθω το θέμα «${label}» χωρίς να μου δώσεις τη λύση. Η δυσκολία μου είναι: ${explain}. Ρώτησέ με πρώτα τι σκέφτομαι ήδη. Μετά δώσε μία μικρή υπόδειξη κάθε φορά. Στο τέλος κάνε 3 καινούριες ερωτήσεις αυξανόμενης δυσκολίας. Μην αποκαλύψεις τελική απάντηση πριν προσπαθήσω σε καθεμία.`;
+  }
+
+  function renderLearningActivities(gapId, gap) {
+    const historyLike = /^history\./.test(gapId) || /ιστορ|history|σπάρτ|αθήν|βυζαν/i.test(
+      `${gap.labelEl || ""} ${gap.labelEn || ""}`
+    );
+    const due = isGapReviewDue(gapId);
+    const title = state.lang === "el" ? "Πώς να το δουλέψεις" : "How to work on this";
+    const sub = state.lang === "el"
+      ? "Διάλεξε μαθησιακή παρέμβαση πριν διαλέξεις AI εργαλείο."
+      : "Choose a learning intervention before choosing an AI tool.";
+    const recallTitle = state.lang === "el" ? "🧠 Θυμήσου το ξανά" : "🧠 Review it again";
+    const recallText = state.lang === "el"
+      ? (due ? "Ήρθε η ώρα για επανάληψη. Άνοιξε ξανά το θέμα και μετά προγραμμάτισε την επόμενη." : "Βάλε το θέμα σε επανάληψη. Θα εμφανιστεί ξανά στον Χάρτη Εξάσκησης.")
+      : (due ? "This review is due. Revisit it, then schedule the next interval." : "Add this topic to review. It will reappear in the Practice Map.");
+    const challengeTitle = state.lang === "el" ? "🎯 Πρόκληση κατανόησης" : "🎯 Understanding challenge";
+    const challengeText = state.lang === "el"
+      ? "Πάρε καθοδήγηση με μικρές υποδείξεις και μετά λύσε 3 νέες ερωτήσεις χωρίς έτοιμη απάντηση."
+      : "Get small hints, then answer 3 new questions without a ready-made solution.";
+    const characterHtml = historyLike ? `
+      <button type="button" class="learning-activity-card" data-learning-action="character" data-gap-id="${escapeAttr(gapId)}">
+        <span class="learning-activity-card__title">${state.lang === "el" ? "🎭 Μίλα με έναν χαρακτήρα" : "🎭 Talk with a character"}</span>
+        <span class="learning-activity-card__text">${state.lang === "el" ? "Βιωματικός διάλογος με ιστορικό ρόλο και υποχρεωτικό έλεγχο όσων ειπώθηκαν." : "Role-play with a historical character, followed by a required fact check."}</span>
+      </button>
+    ` : "";
+    return `
+      <section class="learning-activities" aria-label="${escapeAttr(title)}">
+        <div class="learning-activities__head">
+          <p class="learning-activities__title">${escapeHtml(title)}</p>
+          <p class="learning-activities__sub">${escapeHtml(sub)}</p>
+        </div>
+        <div class="learning-activities__grid">
+          <button type="button" class="learning-activity-card" data-learning-action="recall" data-gap-id="${escapeAttr(gapId)}">
+            <span class="learning-activity-card__title">${escapeHtml(recallTitle)}</span>
+            <span class="learning-activity-card__text">${escapeHtml(recallText)}</span>
+          </button>
+          <button type="button" class="learning-activity-card" data-learning-action="challenge" data-gap-id="${escapeAttr(gapId)}">
+            <span class="learning-activity-card__title">${escapeHtml(challengeTitle)}</span>
+            <span class="learning-activity-card__text">${escapeHtml(challengeText)}</span>
+          </button>
+          ${characterHtml}
+        </div>
+        <div class="learning-activity-output" data-learning-output hidden></div>
+      </section>
+    `;
+  }
+
+  function bindLearningActivityActions(gapId, gap, label) {
+    const container = els.pathModal.querySelector(".learning-activities");
+    if (!container) return;
+    const output = container.querySelector("[data-learning-output]");
+    container.querySelectorAll("[data-learning-action]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const action = btn.dataset.learningAction;
+        if (action === "recall") {
+          if (isGapReviewDue(gapId)) {
+            advanceGapReview(gapId);
+            btn.querySelector(".learning-activity-card__text").textContent = state.lang === "el"
+              ? "Έτοιμο. Προγραμματίστηκε η επόμενη επανάληψη."
+              : "Done. The next review has been scheduled.";
+          } else {
+            scheduleGapReview(gapId, label);
+            btn.querySelector(".learning-activity-card__text").textContent = state.lang === "el"
+              ? "Προστέθηκε. Θα το ξαναδείς όταν έρθει η ώρα της επανάληψης."
+              : "Added. You will see it again when the review is due.";
+          }
+          return;
+        }
+
+        const prompt = getLearningActivityPrompt(action, gapId, gap);
+        const tutorUrl = `/${state.currentZone}/${state.currentRole}/tutor`;
+        output.hidden = false;
+        output.innerHTML = `
+          <p class="learning-activity-output__label">${action === "character"
+            ? (state.lang === "el" ? "Prompt για διάλογο χαρακτήρα" : "Character dialogue prompt")
+            : (state.lang === "el" ? "Prompt για καθοδηγούμενη πρόκληση" : "Guided challenge prompt")}</p>
+          <textarea class="learning-activity-output__prompt" readonly>${escapeHtml(prompt)}</textarea>
+          <div class="learning-activity-output__actions">
+            <button type="button" class="learning-activity-copy">${state.lang === "el" ? "Αντιγραφή prompt" : "Copy prompt"}</button>
+            <a href="${escapeAttr(tutorUrl)}">${state.lang === "el" ? "Άνοιξε AI Βοήθεια →" : "Open AI Help →"}</a>
+          </div>
+          <p class="learning-activity-output__note">${state.lang === "el"
+            ? "Στόχος: καθοδήγηση, όχι έτοιμη λύση. Στον ιστορικό διάλογο έλεγξε στο τέλος όσα ειπώθηκαν με το σχολικό υλικό."
+            : "Goal: guidance, not a ready-made answer. In historical role-play, verify the claims against your school material at the end."}</p>
+        `;
+        const copyBtn = output.querySelector(".learning-activity-copy");
+        if (copyBtn) {
+          copyBtn.addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(prompt);
+              copyBtn.textContent = state.lang === "el" ? "Αντιγράφηκε ✓" : "Copied ✓";
+            } catch (_) {
+              fallbackCopy(prompt);
+              copyBtn.textContent = state.lang === "el" ? "Αντιγράφηκε ✓" : "Copied ✓";
+            }
+          }, { once: true });
+        }
+      });
+    });
+  }
+
   // ---------- Learning Paths (Μονοπάτια Μάθησης) ----------
   function openLearningPathModal(gapId) {
     if (typeof LEARNING_PATHS === "undefined") return;
@@ -1508,10 +1799,12 @@ function renderToolGrid(pathTools, targetElement) {
       <h3 class="path-modal__title">${escapeHtml(label)}</h3>
       <p class="path-modal__intro">${t("pathModalIntro")}</p>
       <div class="path-steps">${stepsHtml}</div>
+      ${renderLearningActivities(gapId, gap)}
       ${extraToolsHtml}
       ${adultToolsHtml}
     `;
     els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
+    bindLearningActivityActions(gapId, gap, label);
     els.pathModalOverlay.hidden = false;
     document.body.style.overflow = "hidden";
   }
@@ -1953,6 +2246,7 @@ function renderToolGrid(pathTools, targetElement) {
       state.currentView = "tools";
     }
     state.currentSubject = null;
+    state.currentNeed = null;
     resetQuizState();
   }
 
@@ -1978,6 +2272,7 @@ function renderToolGrid(pathTools, targetElement) {
 
     renderRoleTabs();
     renderSubjectFilter();
+    renderNeedFilter();
     renderPathContent();
     renderAdvancedTools();
     renderViewTabs();
@@ -2160,6 +2455,7 @@ function renderToolGrid(pathTools, targetElement) {
     if (state.currentZone) {
       renderRoleTabs();
       renderSubjectFilter();
+      renderNeedFilter();
       renderPathContent();
       renderAdvancedTools();
       renderPromptList();

@@ -1081,7 +1081,20 @@ function renderToolGrid(pathTools, targetElement) {
         </button>
       `;
     }).join("");
-    els.quizContent.innerHTML = `<p class="quiz-pick-heading">${t("quizPickGrade")}</p><div class="quiz-grade-grid">${cards}</div>`;
+    const dueReviews = getDueReviewsForCurrentZone();
+    const dueReviewsHtml = dueReviews.length ? `
+      <section class="quiz-due-reviews">
+        <p class="quiz-due-reviews__title">${state.lang === "el" ? "🧠 Ώρα για επανάληψη" : "🧠 Review due"}</p>
+        <p class="quiz-due-reviews__sub">${state.lang === "el" ? "Θέματα που είχες βάλει για επανάληψη και ήρθε η ώρα να τα ξαναδείς." : "Topics you saved for review that are now due."}</p>
+        <div class="quiz-due-review-list">
+          ${dueReviews.map((item) => `<button type="button" class="quiz-due-review-btn" data-gap-id="${escapeAttr(item.gapId)}">${escapeHtml(item.label || item.gapId)}</button>`).join("")}
+        </div>
+      </section>
+    ` : "";
+    els.quizContent.innerHTML = `${dueReviewsHtml}<p class="quiz-pick-heading">${t("quizPickGrade")}</p><div class="quiz-grade-grid">${cards}</div>`;
+    els.quizContent.querySelectorAll(".quiz-due-review-btn").forEach((btn) => {
+      btn.addEventListener("click", () => openLearningPathModal(btn.dataset.gapId));
+    });
     els.quizContent.querySelectorAll(".quiz-grade-card").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.quizGradeId = btn.dataset.gradeId;
@@ -1395,6 +1408,184 @@ function renderToolGrid(pathTools, targetElement) {
     });
   }
 
+  // ---------- Learning activities: recall / challenge / character ----------
+  const REVIEW_STORAGE_KEY = "aitools4kids_review_queue_v1";
+  const REVIEW_INTERVALS_DAYS = [1, 3, 7, 14];
+
+  function getReviewQueue() {
+    try {
+      const raw = localStorage.getItem(REVIEW_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveReviewQueue(items) {
+    try {
+      localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(items));
+    } catch (_) {}
+  }
+
+  function scheduleGapReview(gapId, label) {
+    const items = getReviewQueue();
+    const existing = items.find((item) => item.gapId === gapId && item.zone === state.currentZone);
+    const now = Date.now();
+    if (existing) {
+      existing.label = label;
+      existing.subjectId = state.quizSubjectId || existing.subjectId || null;
+      existing.stage = 0;
+      existing.dueAt = now + REVIEW_INTERVALS_DAYS[0] * 86400000;
+      existing.updatedAt = now;
+    } else {
+      items.push({
+        gapId,
+        label,
+        zone: state.currentZone,
+        subjectId: state.quizSubjectId || null,
+        stage: 0,
+        dueAt: now + REVIEW_INTERVALS_DAYS[0] * 86400000,
+        updatedAt: now,
+      });
+    }
+    saveReviewQueue(items);
+  }
+
+  function advanceGapReview(gapId) {
+    const items = getReviewQueue();
+    const item = items.find((entry) => entry.gapId === gapId && entry.zone === state.currentZone);
+    if (!item) return;
+    const nextStage = Math.min((item.stage || 0) + 1, REVIEW_INTERVALS_DAYS.length - 1);
+    item.stage = nextStage;
+    item.dueAt = Date.now() + REVIEW_INTERVALS_DAYS[nextStage] * 86400000;
+    item.updatedAt = Date.now();
+    saveReviewQueue(items);
+  }
+
+  function isGapReviewDue(gapId) {
+    const item = getReviewQueue().find((entry) => entry.gapId === gapId && entry.zone === state.currentZone);
+    return !!(item && item.dueAt <= Date.now());
+  }
+
+  function getDueReviewsForCurrentZone() {
+    return getReviewQueue().filter((item) => item.zone === state.currentZone && item.dueAt <= Date.now());
+  }
+
+  function getLearningActivityPrompt(action, gapId, gap) {
+    const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
+    const explain = state.lang === "el" ? gap.explainEl : gap.explainEn;
+    if (state.lang === "en") {
+      if (action === "character") {
+        return `Act as a historically plausible character connected with the topic "${label}". Stay within well-established facts, clearly say when something is uncertain, and do not invent quotations. Ask me one question at a time. After 4 exchanges, leave character and ask me to state 2 things I learned and 1 claim I should verify in my school material. Learning difficulty: ${explain}`;
+      }
+      return `Help me learn "${label}" without giving me the answer. Difficulty: ${explain}. First ask what I already think. Then give one small hint at a time. Finish with 3 new questions of increasing difficulty. Do not reveal the final answer unless I have attempted each one.`;
+    }
+    if (action === "character") {
+      return `Μπες στον ρόλο ενός ιστορικά εύλογου προσώπου που συνδέεται με το θέμα «${label}». Μείνε σε καλά τεκμηριωμένα ιστορικά στοιχεία, δήλωσε καθαρά όταν κάτι είναι αβέβαιο και μην επινοείς αποσπάσματα ή πηγές. Κάνε μου μία ερώτηση κάθε φορά. Μετά από 4 ανταλλαγές βγες από τον ρόλο και ζήτησέ μου να γράψω 2 πράγματα που έμαθα και 1 ισχυρισμό που πρέπει να ελέγξω στο σχολικό υλικό. Δυσκολία που δουλεύω: ${explain}`;
+    }
+    return `Βοήθησέ με να μάθω το θέμα «${label}» χωρίς να μου δώσεις τη λύση. Η δυσκολία μου είναι: ${explain}. Ρώτησέ με πρώτα τι σκέφτομαι ήδη. Μετά δώσε μία μικρή υπόδειξη κάθε φορά. Στο τέλος κάνε 3 καινούριες ερωτήσεις αυξανόμενης δυσκολίας. Μην αποκαλύψεις τελική απάντηση πριν προσπαθήσω σε καθεμία.`;
+  }
+
+  function renderLearningActivities(gapId, gap) {
+    const historyLike = /^history\./.test(gapId) || /ιστορ|history|σπάρτ|αθήν|βυζαν/i.test(
+      `${gap.labelEl || ""} ${gap.labelEn || ""}`
+    );
+    const due = isGapReviewDue(gapId);
+    const title = state.lang === "el" ? "Πώς να το δουλέψεις" : "How to work on this";
+    const sub = state.lang === "el"
+      ? "Διάλεξε μαθησιακή παρέμβαση πριν διαλέξεις AI εργαλείο."
+      : "Choose a learning intervention before choosing an AI tool.";
+    const recallTitle = state.lang === "el" ? "🧠 Θυμήσου το ξανά" : "🧠 Review it again";
+    const recallText = state.lang === "el"
+      ? (due ? "Ήρθε η ώρα για επανάληψη. Άνοιξε ξανά το θέμα και μετά προγραμμάτισε την επόμενη." : "Βάλε το θέμα σε επανάληψη. Θα εμφανιστεί ξανά στον Χάρτη Εξάσκησης.")
+      : (due ? "This review is due. Revisit it, then schedule the next interval." : "Add this topic to review. It will reappear in the Practice Map.");
+    const challengeTitle = state.lang === "el" ? "🎯 Πρόκληση κατανόησης" : "🎯 Understanding challenge";
+    const challengeText = state.lang === "el"
+      ? "Πάρε καθοδήγηση με μικρές υποδείξεις και μετά λύσε 3 νέες ερωτήσεις χωρίς έτοιμη απάντηση."
+      : "Get small hints, then answer 3 new questions without a ready-made solution.";
+    const characterHtml = historyLike ? `
+      <button type="button" class="learning-activity-card" data-learning-action="character" data-gap-id="${escapeAttr(gapId)}">
+        <span class="learning-activity-card__title">${state.lang === "el" ? "🎭 Μίλα με έναν χαρακτήρα" : "🎭 Talk with a character"}</span>
+        <span class="learning-activity-card__text">${state.lang === "el" ? "Βιωματικός διάλογος με ιστορικό ρόλο και υποχρεωτικό έλεγχο όσων ειπώθηκαν." : "Role-play with a historical character, followed by a required fact check."}</span>
+      </button>
+    ` : "";
+    return `
+      <section class="learning-activities" aria-label="${escapeAttr(title)}">
+        <div class="learning-activities__head">
+          <p class="learning-activities__title">${escapeHtml(title)}</p>
+          <p class="learning-activities__sub">${escapeHtml(sub)}</p>
+        </div>
+        <div class="learning-activities__grid">
+          <button type="button" class="learning-activity-card" data-learning-action="recall" data-gap-id="${escapeAttr(gapId)}">
+            <span class="learning-activity-card__title">${escapeHtml(recallTitle)}</span>
+            <span class="learning-activity-card__text">${escapeHtml(recallText)}</span>
+          </button>
+          <button type="button" class="learning-activity-card" data-learning-action="challenge" data-gap-id="${escapeAttr(gapId)}">
+            <span class="learning-activity-card__title">${escapeHtml(challengeTitle)}</span>
+            <span class="learning-activity-card__text">${escapeHtml(challengeText)}</span>
+          </button>
+          ${characterHtml}
+        </div>
+        <div class="learning-activity-output" data-learning-output hidden></div>
+      </section>
+    `;
+  }
+
+  function bindLearningActivityActions(gapId, gap, label) {
+    const container = els.pathModal.querySelector(".learning-activities");
+    if (!container) return;
+    const output = container.querySelector("[data-learning-output]");
+    container.querySelectorAll("[data-learning-action]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const action = btn.dataset.learningAction;
+        if (action === "recall") {
+          if (isGapReviewDue(gapId)) {
+            advanceGapReview(gapId);
+            btn.querySelector(".learning-activity-card__text").textContent = state.lang === "el"
+              ? "Έτοιμο. Προγραμματίστηκε η επόμενη επανάληψη."
+              : "Done. The next review has been scheduled.";
+          } else {
+            scheduleGapReview(gapId, label);
+            btn.querySelector(".learning-activity-card__text").textContent = state.lang === "el"
+              ? "Προστέθηκε. Θα το ξαναδείς όταν έρθει η ώρα της επανάληψης."
+              : "Added. You will see it again when the review is due.";
+          }
+          return;
+        }
+
+        const prompt = getLearningActivityPrompt(action, gapId, gap);
+        const tutorUrl = `/${state.currentZone}/${state.currentRole}/tutor`;
+        output.hidden = false;
+        output.innerHTML = `
+          <p class="learning-activity-output__label">${action === "character"
+            ? (state.lang === "el" ? "Prompt για διάλογο χαρακτήρα" : "Character dialogue prompt")
+            : (state.lang === "el" ? "Prompt για καθοδηγούμενη πρόκληση" : "Guided challenge prompt")}</p>
+          <textarea class="learning-activity-output__prompt" readonly>${escapeHtml(prompt)}</textarea>
+          <div class="learning-activity-output__actions">
+            <button type="button" class="learning-activity-copy">${state.lang === "el" ? "Αντιγραφή prompt" : "Copy prompt"}</button>
+            <a href="${escapeAttr(tutorUrl)}">${state.lang === "el" ? "Άνοιξε AI Βοήθεια →" : "Open AI Help →"}</a>
+          </div>
+          <p class="learning-activity-output__note">${state.lang === "el"
+            ? "Στόχος: καθοδήγηση, όχι έτοιμη λύση. Στον ιστορικό διάλογο έλεγξε στο τέλος όσα ειπώθηκαν με το σχολικό υλικό."
+            : "Goal: guidance, not a ready-made answer. In historical role-play, verify the claims against your school material at the end."}</p>
+        `;
+        const copyBtn = output.querySelector(".learning-activity-copy");
+        if (copyBtn) {
+          copyBtn.addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(prompt);
+              copyBtn.textContent = state.lang === "el" ? "Αντιγράφηκε ✓" : "Copied ✓";
+            } catch (_) {
+              fallbackCopy(prompt);
+              copyBtn.textContent = state.lang === "el" ? "Αντιγράφηκε ✓" : "Copied ✓";
+            }
+          }, { once: true });
+        }
+      });
+    });
+  }
+
   // ---------- Learning Paths (Μονοπάτια Μάθησης) ----------
   function openLearningPathModal(gapId) {
     if (typeof LEARNING_PATHS === "undefined") return;
@@ -1508,10 +1699,12 @@ function renderToolGrid(pathTools, targetElement) {
       <h3 class="path-modal__title">${escapeHtml(label)}</h3>
       <p class="path-modal__intro">${t("pathModalIntro")}</p>
       <div class="path-steps">${stepsHtml}</div>
+      ${renderLearningActivities(gapId, gap)}
       ${extraToolsHtml}
       ${adultToolsHtml}
     `;
     els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
+    bindLearningActivityActions(gapId, gap, label);
     els.pathModalOverlay.hidden = false;
     document.body.style.overflow = "hidden";
   }

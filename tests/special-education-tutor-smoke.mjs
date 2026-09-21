@@ -253,6 +253,13 @@ async function checkUnified(page,label){
   assert.match(enChemAContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\. · Ύλη 2026–27/i,`${label}: ENEEGYL A Chemistry must be labelled exact annual curriculum`);
   assert.ok(await page.locator('#tutorContextBox a[href*="esos.gr"]').count()>=1,`${label}: ENEEGYL A Chemistry source PDF missing`);
 
+  assert.ok(aSubjects.includes('eneegyl-lyc-a-english-2026-27'),`${label}: exact A Lyceum English mapping missing`);
+  await selectOption(page,'#tutorSubject','eneegyl-lyc-a-english-2026-27');
+  const enEnglishATopics=(await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})))).filter(x=>!x.value.includes('.action-'));
+  assert.equal(enEnglishATopics.length,5,`${label}: ENEEGYL A English must expose five exact units`);
+  assert.ok(enEnglishATopics.some(x=>x.text.includes('Unit 6')),`${label}: ENEEGYL A English Unit 6 missing`);
+  assert.ok(!enEnglishATopics.some(x=>x.text.includes('Unit 5')),`${label}: ENEEGYL A English must not include Unit 5`);
+
   assert.ok(aSubjects.includes('eneegyl-lyc-a-physics-2026-27'),`${label}: exact A Lyceum Physics mapping missing`);
 
   await selectOption(page,'#tutorGrade','lyc-b');

@@ -44,6 +44,17 @@ try{
   assert.equal(await page.evaluate(()=>localStorage.length),0,'Teacher assistant must not create localStorage history');
   assert.equal(await page.evaluate(()=>sessionStorage.length),0,'Teacher assistant must not create sessionStorage history');
 
+  await page.selectOption('#context','gel');
+  await page.selectOption('#grade','a');
+  const biologyOption=await page.locator('#subject option').evaluateAll((options)=>options.find(o=>/Βιολογία/.test(o.textContent||''))?.value||'');
+  assert.ok(biologyOption,'Teacher Assistant GEL A Biology subject missing');
+  await page.selectOption('#subject',biologyOption);
+  await page.waitForTimeout(80);
+  const biologyUnits=await page.locator('#unit option').allInnerTexts();
+  assert.equal(biologyUnits.length,14,'Teacher Assistant GEL A Biology should expose 14 documented mapped topics');
+  assert.match(await page.locator('#curriculumNote').innerText(),/αναλυτικό χάρτη/i,'Teacher Assistant must label GEL Biology topics as a documented navigation map');
+  assert.ok(await page.locator('#curriculumNote a[href^="https://"]').count()>=1,'Teacher Assistant mapped curriculum must expose a source link');
+
   await page.click('#generateBtn');
   assert.equal(await page.locator('#disclosure').isVisible(),true,'Disconnected generation must open Puter disclosure instead of silently loading Puter');
   assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Opening disclosure alone must not load Puter');

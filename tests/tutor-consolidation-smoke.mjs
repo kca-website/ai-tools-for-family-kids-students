@@ -317,7 +317,7 @@ try {
     assert.ok(!biologyTopics.some((option) => /Γράψε το ακριβές κεφάλαιο/.test(option.text)),
       'GEL A Biology fell back to generic chapter entry despite having a published topic map');
 
-    const contextText = (await page.locator('#tutorContext').innerText()).replace(/\s+/g, ' ');
+    const contextText = (await page.locator('#tutorContextBox').innerText()).replace(/\s+/g, ' ');
     assert.match(contextText, /αναλυτικός χάρτης/i,
       'GEL mapped topics must remain clearly labelled as a navigation map rather than exact official sections');
     await page.close();

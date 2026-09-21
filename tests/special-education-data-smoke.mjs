@@ -178,6 +178,24 @@ assert(slInfoC.officialAnchors.length === 20, `Special Lyceum C Informatics must
 assert(slInfoC.officialAnchors.some(x=>x.includes('Δομή επιλογής')), 'Special Lyceum C Informatics selection structure missing');
 assert(slInfoC.officialAnchors.some(x=>x.includes('Αντικειμενοστραφής προγραμματισμός')), 'Special Lyceum C Informatics OOP group missing');
 
+const slBioA=SLA.entries['a|biology'];
+assert(slBioA?.coverageStatus === 'exact', 'Special Lyceum A Biology must be an exact annual mapping');
+assert(slBioA.officialAnchors.length === 13, `Special Lyceum A Biology must expose 13 exact source-bounded sections, got ${slBioA.officialAnchors.length}`);
+assert(slBioA.officialAnchors.some(x=>x.includes('Κεφάλαιο 3: Κυκλοφορικό Σύστημα — Αίμα')), 'Special Lyceum A Biology blood section missing');
+assert(slBioA.officialAnchors.some(x=>x.includes('εκτός «Αυλάκωση»')), 'Special Lyceum A Biology embryo exclusions must remain explicit');
+
+const slBioB=SLA.entries['b|biology'];
+assert(slBioB?.coverageStatus === 'exact', 'Special Lyceum B Biology must be an exact annual mapping');
+assert(slBioB.officialAnchors.length === 32, `Special Lyceum B Biology must expose 32 exact source-bounded sections, got ${slBioB.officialAnchors.length}`);
+assert(slBioB.officialAnchors.some(x=>x.includes('1.3.2 Μηχανισμοί ειδικής άμυνας')), 'Special Lyceum B Biology immunity section missing');
+assert(slBioB.officialAnchors.some(x=>x.includes('μόνο εισαγωγή')), 'Special Lyceum B Biology pollution scope boundary missing');
+
+const slBioC=SLA.entries['c|biology'];
+assert(slBioC?.coverageStatus === 'exact', 'Special Lyceum C Biology must be an exact annual mapping');
+assert(slBioC.officialAnchors.length === 16, `Special Lyceum C Biology must expose 16 exact source-bounded sections, got ${slBioC.officialAnchors.length}`);
+assert(slBioC.officialAnchors.some(x=>x.includes('Κεφάλαιο 4: Τεχνολογία του ανασυνδυασμένου DNA')), 'Special Lyceum C Biology recombinant DNA chapter missing');
+assert(slBioC.officialAnchors.some(x=>x.includes('εκτός της παραγράφου για την παραγωγή πενικιλίνης')), 'Special Lyceum C Biology biotechnology exclusion missing');
+
 assert(EN.schoolType === 'eneegyl', 'ENEEGYL structure identity is wrong');
 assert(EN.totalGrades === 8, `ENEEGYL must have 8 grades, got ${EN.totalGrades}`);
 assert(EN.gradeOrder?.join(',') === 'gym-a,gym-b,gym-c,gym-d,lyc-a,lyc-b,lyc-c,lyc-d', 'ENEEGYL grade order must be 4 Gymnasium + 4 Lyceum');

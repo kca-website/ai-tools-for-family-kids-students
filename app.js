@@ -22,6 +22,7 @@
     currentRole: "guardian",
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "tutor" | "guide"
     currentSubject: null, // subjectId ή null = "Όλα"
+    currentNeed: null, // μαθησιακή ανάγκη: understand | practice | hint | check | revise | research
     a11yFilterOnly: false, // true = δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα
     // Quiz sub-state
     quizGradeId: null,
@@ -131,8 +132,11 @@
       pdfDownloading: "Δημιουργία PDF...",
       subjectFilterLabel: "Φίλτρο μαθήματος",
       subjectAll: "Όλα",
+      needFilterLabel: "Τι χρειάζεσαι τώρα;",
+      needAll: "Όλες οι ανάγκες",
+      needEmptyState: "Δεν βρέθηκε κατάλληλο εργαλείο για αυτόν τον συνδυασμό μαθήματος και ανάγκης.",
       subjectEmptyState: "Δεν υπάρχει ακόμα αντιστοίχιση εργαλείου για αυτό το μάθημα σε αυτή τη ζώνη.",
-      a11yFilterLabel: "✓ Δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα",
+      a11yFilterLabel: "♿ Προτεραιότητα σε εργαλεία με ισχυρή τεκμηρίωση προσβασιμότητας",
       a11yFilterEmptyState: "Κανένα από τα εργαλεία αυτής της ζώνης δεν έχει επίσημη δήλωση προσβασιμότητας. Δες όλα τα εργαλεία στη σελίδα Προσβασιμότητα.",
       // ---------- Parent Quiz (νέο) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Δοκίμασε κι εσύ, γονιέ!",
@@ -241,8 +245,11 @@
       pdfDownloading: "Generating PDF...",
       subjectFilterLabel: "Subject filter",
       subjectAll: "All",
+      needFilterLabel: "What do you need right now?",
+      needAll: "All needs",
+      needEmptyState: "No suitable tool was found for this subject and learning need.",
       subjectEmptyState: "No tool mapping yet for this subject in this zone.",
-      a11yFilterLabel: "✓ Show only tools with documented accessibility",
+      a11yFilterLabel: "♿ Prioritize tools with strong accessibility evidence",
       a11yFilterEmptyState: "None of the tools in this zone have an official accessibility statement. See all tools on the Accessibility page.",
       // ---------- Parent Quiz (new) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Try it yourself, parent!",
@@ -382,6 +389,7 @@
     els.pathZoneHeading = document.getElementById("pathZoneHeading");
     els.roleTabs = document.getElementById("roleTabs");
     els.subjectFilter = document.getElementById("subjectFilter");
+    els.needFilter = document.getElementById("needFilter");
     els.a11yFilterToggle = document.getElementById("a11yFilterToggle");
     els.a11yFilterToggleAdvanced = document.getElementById("a11yFilterToggleAdvanced");
     els.pathIntro = document.getElementById("pathIntro");
@@ -512,8 +520,50 @@
 
   function selectSubject(subjectId) {
     state.currentSubject = subjectId;
+    state.currentNeed = null;
     renderSubjectFilter();
+    renderNeedFilter();
     renderPathContent();
+  }
+
+  function renderNeedFilter() {
+    if (!els.needFilter) return;
+    els.needFilter.innerHTML = "";
+    if (!state.currentSubject || typeof LEARNING_NEEDS === "undefined") {
+      els.needFilter.hidden = true;
+      return;
+    }
+    els.needFilter.hidden = false;
+
+    const label = document.createElement("span");
+    label.className = "need-filter__label";
+    label.textContent = t("needFilterLabel");
+    els.needFilter.appendChild(label);
+
+    const all = document.createElement("button");
+    all.type = "button";
+    all.className = "need-chip" + (state.currentNeed === null ? " active" : "");
+    all.textContent = t("needAll");
+    all.addEventListener("click", () => {
+      state.currentNeed = null;
+      renderNeedFilter();
+      renderPathContent();
+    });
+    els.needFilter.appendChild(all);
+
+    LEARNING_NEEDS.forEach((need) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "need-chip" + (state.currentNeed === need.id ? " active" : "");
+      const labelText = state.lang === "el" ? need.labelEl : need.labelEn;
+      chip.innerHTML = `<span aria-hidden="true">${need.icon}</span> ${escapeHtml(labelText)}`;
+      chip.addEventListener("click", () => {
+        state.currentNeed = need.id;
+        renderNeedFilter();
+        renderPathContent();
+      });
+      els.needFilter.appendChild(chip);
+    });
   }
 
   // ---------- Rendering: Path intro + tool grid (βασικά εργαλεία) ----------
@@ -539,16 +589,35 @@
     if (state.currentSubject) {
       const subjectData =
         CURRICULUM[state.currentZone] && CURRICULUM[state.currentZone][state.currentSubject];
-      const allowedToolIds = subjectData ? subjectData.toolIds : [];
-      toolsToShow = toolsToShow.filter((entry) => allowedToolIds.includes(entry.toolId));
+      let allowedToolIds = subjectData ? subjectData.toolIds.slice() : [];
+
+      if (state.currentNeed && typeof NEED_TOOL_MAP !== "undefined") {
+        const needIds = (NEED_TOOL_MAP[state.currentSubject] && NEED_TOOL_MAP[state.currentSubject][state.currentNeed]) || [];
+        allowedToolIds = allowedToolIds.filter((id) => needIds.includes(id));
+      }
+
+      const existingById = new Map((pathData.tools || []).map((entry) => [entry.toolId, entry]));
+      toolsToShow = allowedToolIds
+        .filter((id) => TOOLS[id] && isToolAgeAppropriate(TOOLS[id]))
+        .map((id) => existingById.get(id) || {
+          toolId: id,
+          useCaseEl: TOOLS[id].shortDescEl || "",
+          useCaseEn: TOOLS[id].shortDescEn || "",
+          howToEl: "Χρησιμοποίησέ το μόνο για τη συγκεκριμένη ανάγκη και έλεγξε την κατανόησή σου χωρίς AI στο τέλος.",
+          howToEn: "Use it only for the selected need and verify your understanding without AI at the end.",
+          cautionEl: "Μην χρησιμοποιείς την έτοιμη απάντηση ως υποκατάστατο της δικής σου προσπάθειας.",
+          cautionEn: "Do not use a ready-made answer as a substitute for your own attempt.",
+        });
 
       if (subjectData && subjectData.noteEl) {
         const note = state.lang === "el" ? subjectData.noteEl : subjectData.noteEn;
-        els.pathIntro.textContent = note;
+        const need = typeof LEARNING_NEEDS !== "undefined" ? LEARNING_NEEDS.find((item) => item.id === state.currentNeed) : null;
+        const needLabel = need ? (state.lang === "el" ? need.labelEl : need.labelEn) : "";
+        els.pathIntro.textContent = needLabel ? `${note} · ${needLabel}` : note;
       }
 
       if (!toolsToShow.length) {
-        els.toolGrid.innerHTML = `<div class="empty-state">${t("subjectEmptyState")}</div>`;
+        els.toolGrid.innerHTML = `<div class="empty-state">${t(state.currentNeed ? "needEmptyState" : "subjectEmptyState")}</div>`;
         return;
       }
     }
@@ -658,6 +727,10 @@ function renderToolGrid(pathTools, targetElement) {
       accessibilityBadge = state.lang === "el"
         ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEl)}">✓ Επίσημη δήλωση προσβασιμότητας</span>`
         : `<span class="tool-card__a11y-badge tool-card__a11y-badge--good" title="${escapeAttr(a11y.noteEn)}">✓ Official accessibility statement</span>`;
+    } else if (a11y && a11y.status === "partial") {
+      accessibilityBadge = state.lang === "el"
+        ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--partial" title="${escapeAttr(a11y.noteEl)}">♿ Μερική τεκμηρίωση προσβασιμότητας</span>`
+        : `<span class="tool-card__a11y-badge tool-card__a11y-badge--partial" title="${escapeAttr(a11y.noteEn)}">♿ Partial accessibility evidence</span>`;
     } else if (a11y && a11y.status === "caution") {
       accessibilityBadge = state.lang === "el"
         ? `<span class="tool-card__a11y-badge tool-card__a11y-badge--caution" title="${escapeAttr(a11y.noteEl)}">⚠️ Τεκμηριωμένο πρόβλημα προσβασιμότητας</span>`
@@ -2146,6 +2219,7 @@ function renderToolGrid(pathTools, targetElement) {
       state.currentView = "tools";
     }
     state.currentSubject = null;
+    state.currentNeed = null;
     resetQuizState();
   }
 
@@ -2171,6 +2245,7 @@ function renderToolGrid(pathTools, targetElement) {
 
     renderRoleTabs();
     renderSubjectFilter();
+    renderNeedFilter();
     renderPathContent();
     renderAdvancedTools();
     renderViewTabs();
@@ -2353,6 +2428,7 @@ function renderToolGrid(pathTools, targetElement) {
     if (state.currentZone) {
       renderRoleTabs();
       renderSubjectFilter();
+      renderNeedFilter();
       renderPathContent();
       renderAdvancedTools();
       renderPromptList();

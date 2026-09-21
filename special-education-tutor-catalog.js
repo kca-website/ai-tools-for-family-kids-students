@@ -307,6 +307,62 @@
     });
   }
 
+  function makeAnnualEneegylSubject(entry){
+    const gradeId=eneegylGradeId(entry);
+    const partial=entry.coverageStatus==="partial"||entry.coverageStatus==="support-skill"||entry.coverageStatus==="current-exam-syllabus-verified-partial";
+    const topics=(entry.officialAnchors||[]).map((label,index)=>({
+      id:`${entry.id}.topic-${index+1}`,
+      labelEl:String(label),labelEn:String(label),
+      explainEl:String(label),explainEn:String(label),
+      specialEducation:true,schoolType:"eneegyl"
+    }));
+    return {
+      id:entry.id,quizId:null,grade:gradeId,
+      subjectLabelEl:`ΕΝ.Ε.Ε.ΓΥ.-Λ. · ${entry.subject}`,
+      subjectLabelEn:`EN.E.E.GY.-L. · ${entry.subject}`,
+      topics,
+      curriculum:{
+        schoolYear:C.schoolYear||"2026-2027",
+        verificationDate:entry.verificationDate||C.verificationDate||"",
+        verificationBasis:entry.verificationBasis||"annual-instructions-2026-27",
+        coverageStatus:partial?"annual-instructions-verified-partial":"annual-instructions-verified",
+        coverageLabelEl:partial?"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Μερική χαρτογράφηση 2026–27":"ΕΝ.Ε.Ε.ΓΥ.-Λ. · Ύλη 2026–27",
+        coverageLabelEn:partial?"EN.E.E.GY.-L. · verified partial 2026–27 mapping":"EN.E.E.GY.-L. · verified 2026–27 curriculum",
+        officialSectionsEl:[...(entry.officialAnchors||[])],officialSectionsEn:[],
+        scopeNoteEl:entry.verificationNote||"Χρησιμοποίησε μόνο τις ρητά επαληθευμένες ενότητες της πηγής.",
+        scopeNoteEn:partial?"Use only the verified partial source scope.":"Use only the verified 2026-27 source scope.",
+        annualInstructionsStatus:entry.annualInstructionsStatus==="verified"?"2026-27-verified":(entry.annualInstructionsStatus||"2026-27-verified"),
+        annualInstructionsUrl:entry.sourceUrl||entry.instructionSourceUrl||"",
+        teachingInstructionsStatus:entry.annualInstructionsStatus||"verified",
+        teachingInstructionsUrl:entry.instructionSourceUrl||entry.sourceUrl||"",
+        currentExamSyllabusStatus:entry.currentExamSyllabusStatus||"unknown",
+        currentExamSyllabusUrl:entry.currentExamSyllabusStatus==="verified"?(entry.sourceUrl||""):"",
+        catalogUrl:entry.sourceUrl||"",
+        sourceLabelEl:entry.sourceTitle||"Επίσημη πηγή ΕΝ.Ε.Ε.ΓΥ.-Λ. 2026–27",
+        sourceLabelEn:"Official EN.E.E.GY.-L. 2026–27 source",
+        specialEducation:true,schoolType:"eneegyl",structureOnly:false,partialMapping:partial,sector:entry.sector||""
+      },
+      specialEducation:true,schoolType:"eneegyl",schoolTrack:"eneegyl",structureOnly:false,
+      partialMapping:partial,sector:entry.sector||"",sourceCurriculumId:entry.id
+    };
+  }
+
+  // Register verified annual EN.E.E.GY.-L. mappings even when a separate
+  // learning-content card has not been authored yet. This keeps the Tutor's
+  // chapter selector source-bounded without inventing content.
+  Object.values(C.entries||{}).forEach((entry)=>{
+    if(entry?.schoolType!=="eneegyl"||entry?.status!=="verified") return;
+    if(!Array.isArray(entry.officialAnchors)||!entry.officialAnchors.length) return;
+    if(exposed.some((x)=>x.id===entry.id)) return;
+    const gradeId=eneegylGradeId(entry);
+    registerSubject("high",gradeId,makeAnnualEneegylSubject(entry),{
+      gradeLabel:EN?.grades?.[gradeId]?.label||entry.gradeLabel||gradeId,
+      detailedLearning:false,structureOnly:false,
+      annualMapped:true,partialMapping:entry.coverageStatus==="partial",
+      sector:entry.sector||"",sourceCurriculumId:entry.id
+    });
+  });
+
   // EN.E.E.GY.-L. has eight grades. Expose the official school structure even
   // when a grade/subject does not yet have a detailed mapped learning unit.
   // All eight grade IDs live under the single ENEEGYL track in the unified tutor.

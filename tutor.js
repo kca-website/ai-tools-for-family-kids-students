@@ -2114,23 +2114,42 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
   }
 
   function applyUrlCurriculumSelection() {
-    if (ctx?.zoneId !== "high") return;
     const params = new URLSearchParams(location.search);
-    if (params.get("schoolType") !== "epal") return;
 
-    refs.schoolType.value = "epal";
-    populateGrades();
-    selectUrlValue(refs.grade, params.get("grade"));
-    populateSubjects();
+    if (ctx?.zoneId === "high" && params.get("schoolType") === "epal") {
+      refs.schoolType.value = "epal";
+      populateGrades();
+    }
 
-    if (refs.grade.value === "b" && selectUrlValue(refs.sector, params.get("sector"))) {
+    if (selectUrlValue(refs.grade, params.get("grade"))) {
       populateSubjects();
     }
-    if (refs.grade.value === "c" && selectUrlValue(refs.specialty, params.get("specialty"))) {
-      populateSubjects();
+
+    if (ctx?.zoneId === "high" && refs.schoolType?.value === "epal") {
+      if (refs.grade.value === "b" && selectUrlValue(refs.sector, params.get("sector"))) {
+        populateSubjects();
+      }
+      if (refs.grade.value === "c" && selectUrlValue(refs.specialty, params.get("specialty"))) {
+        populateSubjects();
+      }
     }
-    if (selectUrlValue(refs.subject, params.get("subject"))) populateTopics();
-    if (selectUrlValue(refs.topic, params.get("topic"))) renderContext();
+
+    if (selectUrlValue(refs.subject, params.get("subject"))) {
+      populateTopics();
+    }
+    if (selectUrlValue(refs.topic, params.get("topic"))) {
+      renderContext();
+    }
+
+    const requestedMode = params.get("mode");
+    const allowedModes = new Set(["understand", "hint", "challenge", "review", "character"]);
+    if (allowedModes.has(requestedMode)) {
+      if (requestedMode !== "character" || isCharacterModeAvailable()) {
+        learningMode = requestedMode;
+      }
+    }
+    renderLearningModePicker();
+    renderContext();
   }
 
   function render(context) {

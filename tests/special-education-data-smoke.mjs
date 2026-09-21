@@ -154,6 +154,9 @@ for (const guide of (SL.annualGuidanceIndex||[])) {
   assert(/^official-(iep-(annual-guidance-index|guidance-archive)|published-guidance-pdf)$/.test(guide.sourceType||''),
     `Special Lyceum guidance index ${guide.key}: provenance type missing`);
 }
+const ancientGuide=(SL.annualGuidanceIndex||[]).find(x=>x.key==='ancient');
+assert(/%CE%91%CE%A1%CE%A7%CE%91%CE%99%CE%91_/.test(ancientGuide?.sourceUrl||''), 'Special Lyceum Ancient Greek must point to its official 2026-27 guidance archive');
+
 const biologyGuide=(SL.annualGuidanceIndex||[]).find(x=>x.key==='biology');
 assert(/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-/.test(biologyGuide?.sourceUrl||''), 'Special Lyceum Biology must point to a direct official 2026-27 guidance PDF');
 assert(['a','b','c'].every(g=>/^https:\/\/dide\.ira\.sch\.gr\//.test(biologyGuide?.sourceUrlsByGrade?.[g]||'')),

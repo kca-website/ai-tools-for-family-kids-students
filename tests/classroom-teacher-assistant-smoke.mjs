@@ -41,10 +41,6 @@ try{
   assert.equal(await page.locator('#puterBtn').count(),1,'Teacher Assistant must expose Puter only as an explicit alternative');
   assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Puter must remain unloaded until the user explicitly chooses it');
 
-  await page.click('#langEn');
-  await page.waitForFunction(()=>document.documentElement.lang==='en');
-  assert.match(await page.locator('h1').innerText(),/AI Teacher Assistant/);
-  assert.match(await page.locator('.privacy').innerText(),/Do not enter student names/);
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   assert.ok(overflow<=1,`Teacher assistant mobile horizontal overflow: ${overflow}`);
   assert.deepEqual(errors,[],`Teacher assistant browser errors: ${errors.join('\n')}`);

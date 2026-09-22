@@ -31,4 +31,89 @@ for (const row of curriculumToolArrays) {
 }
 
 
+const accessibility = read('accessibility-data.js');
+
+const toolMinAge = new Map();
+for (const match of data.matchAll(/"([^"]+)":\s*\{[\s\S]{0,700}?minAge:\s*(\d+)/g)) {
+  toolMinAge.set(match[1], Number(match[2]));
+}
+
+const zones = { primary: 12, middle: 15, high: 18 };
+const subjects = ['language','math','science','history','foreign-language'];
+const needs = ['understand','practice','hint','check','revise','research'];
+
+function zoneBlock(zone) {
+  const order = ['primary','middle','high'];
+  const start = curriculum.indexOf(`  ${zone}: {`, curriculum.indexOf('const CURRICULUM'));
+  assert.ok(start >= 0, `Missing curriculum zone: ${zone}`);
+  const idx = order.indexOf(zone);
+  const end = idx < order.length - 1
+    ? curriculum.indexOf(`  ${order[idx + 1]}: {`, start)
+    : curriculum.indexOf('\n};', start);
+  return curriculum.slice(start, end);
+}
+
+function idsFromArrayAfter(block, marker, errorMessage) {
+  const start = block.indexOf(marker);
+  assert.ok(start >= 0, errorMessage);
+  const open = block.indexOf('[', start);
+  const close = block.indexOf(']', open);
+  assert.ok(open >= 0 && close > open, errorMessage);
+  return [...block.slice(open + 1, close).matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+}
+
+function curriculumIds(zone, subject) {
+  const block = zoneBlock(zone);
+  const key = subject.includes('-') ? `"${subject}"` : subject;
+  return idsFromArrayAfter(
+    block,
+    `${key}: {toolIds:`,
+    `Missing curriculum subject mapping: ${zone}/${subject}`
+  );
+}
+
+function needIds(subject, need) {
+  const key = subject.includes('-') ? `"${subject}"` : subject;
+  const start = curriculum.indexOf(`${key}: {`, curriculum.indexOf('const NEED_TOOL_MAP'));
+  assert.ok(start >= 0, `Missing NEED_TOOL_MAP subject: ${subject}`);
+  const end = curriculum.indexOf('\n  },', start);
+  const block = curriculum.slice(start, end);
+  return idsFromArrayAfter(
+    block,
+    `${need}:`,
+    `Missing NEED_TOOL_MAP need: ${subject}/${need}`
+  );
+}
+
+for (const [zone, maxAge] of Object.entries(zones)) {
+  for (const subject of subjects) {
+    const subjectIds = curriculumIds(zone, subject);
+    for (const need of needs) {
+      const allowed = new Set(needIds(subject, need));
+      const ageAppropriate = subjectIds.filter((id) => {
+        if (!allowed.has(id)) return false;
+        const minAge = toolMinAge.get(id);
+        return minAge === undefined || minAge <= maxAge;
+      });
+      assert.ok(
+        ageAppropriate.length > 0,
+        `No age-appropriate tool for student path: ${zone}/${subject}/${need}`
+      );
+    }
+
+    for (const id of subjectIds) {
+      assert.ok(
+        accessibility.includes(`"${id}": {`) || accessibility.includes(`'${id}': {`),
+        `Curriculum tool ${id} is missing from accessibility-data.js`
+      );
+    }
+  }
+}
+
+assert.doesNotMatch(
+  curriculum,
+  /listening\/speaking practice with Erla|εξάσκηση ακρόασης\/ομιλίας με το Erla/,
+  'Foreign-language curriculum copy must not reference Erla unless it is actually mapped there'
+);
+
 console.log('Repository data integrity smoke passed.');

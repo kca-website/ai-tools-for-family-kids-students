@@ -67,20 +67,35 @@ try {
   {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await openPath(page, '/middle/student/tools');
-    const hrefs = await choose(page, 'Ξένη Γλώσσα', 'Να εξασκηθώ');
+    let hrefs = await choose(page, 'Ξένη Γλώσσα', 'Να εξασκηθώ');
+    assert.deepEqual(hrefs.slice(0, 3), [
+      '/tools/duolingo.html',
+      '/tools/reading-coach.html',
+      '/tools/ai-help.html',
+    ], 'Age 12 Middle School must default to tools valid for a 12-year-old');
+    assert.equal(hrefs.includes('/tools/quizlet.html'), false, 'Age 12 must not see 13+ Quizlet');
+
+    const age13 = page.locator('#studentAgeFilter [data-student-age="13"]');
+    await age13.evaluate((el) => el.click());
+    await page.waitForTimeout(150);
+    hrefs = await page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
+      links.map((a) => new URL(a.href).pathname)
+    );
     assert.deepEqual(hrefs.slice(0, 5), [
       '/tools/duolingo.html',
       '/tools/reading-coach.html',
       '/tools/ai-help.html',
       '/tools/quizlet.html',
       '/tools/anki.html',
-    ], 'Middle foreign-language practice should surface specialised language/revision tools');
+    ], 'Age 13 should unlock 13+ specialised revision tools without changing the subject/need');
     await page.close();
   }
 
   {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     await openPath(page, '/high/student/tools');
+    const age15 = page.locator('#studentAgeFilter [data-student-age="15"]');
+    assert.equal(await age15.getAttribute('aria-pressed'), 'true', 'High School student path should default to age 15');
     const hrefs = await choose(page, 'Μαθηματικά', 'Να ελέγξω λύση');
     assert.deepEqual(hrefs.slice(0, 5), [
       '/tools/photomath.html',

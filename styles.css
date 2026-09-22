@@ -2691,3 +2691,53 @@ main {
 .tutor-quick-action{border:1px solid var(--color-border);background:#f8fbff;color:#27486f;border-radius:999px;padding:6px 10px;font:inherit;font-size:.77rem;font-weight:700;cursor:pointer}
 .tutor-quick-action:hover{border-color:var(--color-middle-zone);background:#eef6ff}
 .tutor-quick-action:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+
+
+/* ---------- Ακριβής ηλικία μαθητή (Γυμνάσιο / Λύκειο) ---------- */
+.student-age-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -4px 0 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+.student-age-filter__label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.student-age-filter__chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.student-age-chip {
+  min-width: 38px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.student-age-chip:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+.student-age-chip.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+.student-age-filter__note {
+  flex: 1 1 220px;
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+}

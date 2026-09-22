@@ -23,6 +23,7 @@
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "tutor" | "guide"
     currentSubject: null, // subjectId ή null = "Όλα"
     currentNeed: null, // μαθησιακή ανάγκη: understand | practice | hint | check | revise | research
+    currentStudentAge: null, // ακριβής ηλικία για ζώνες που καλύπτουν διαφορετικά όρια χρήσης εργαλείων
     a11yFilterOnly: false, // true = δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα
     // Quiz sub-state
     quizGradeId: null,
@@ -142,6 +143,8 @@
       pdfDownloading: "Δημιουργία PDF...",
       subjectFilterLabel: "Φίλτρο μαθήματος",
       subjectAll: "Όλα",
+      studentAgeLabel: "Η ηλικία μου",
+      studentAgeNote: "Οι προτάσεις αλλάζουν με βάση τα ηλικιακά όρια των εργαλείων.",
       needFilterLabel: "Τι χρειάζεσαι τώρα;",
       needAll: "Όλες οι ανάγκες",
       needEmptyState: "Δεν βρέθηκε κατάλληλο εργαλείο για αυτόν τον συνδυασμό μαθήματος και ανάγκης.",
@@ -265,6 +268,8 @@
       pdfDownloading: "Generating PDF...",
       subjectFilterLabel: "Subject filter",
       subjectAll: "All",
+      studentAgeLabel: "My age",
+      studentAgeNote: "Recommendations change to respect each tool's age rules.",
       needFilterLabel: "What do you need right now?",
       needAll: "All needs",
       needEmptyState: "No suitable tool was found for this subject and learning need.",
@@ -408,6 +413,7 @@
     els.heroQuizPickerGrid = document.getElementById("heroQuizPickerGrid");
     els.pathZoneHeading = document.getElementById("pathZoneHeading");
     els.roleTabs = document.getElementById("roleTabs");
+    els.studentAgeFilter = document.getElementById("studentAgeFilter");
     els.subjectFilter = document.getElementById("subjectFilter");
     els.needFilter = document.getElementById("needFilter");
     els.a11yFilterToggle = document.getElementById("a11yFilterToggle");
@@ -503,6 +509,48 @@
       tab.innerHTML = `<span aria-hidden="true">${role.icon}</span> ${label}`;
       tab.addEventListener("click", () => selectRole(role.id));
       els.roleTabs.appendChild(tab);
+    });
+  }
+
+  const STUDENT_AGE_OPTIONS = {
+    middle: [12, 13, 14, 15],
+    high: [15, 16, 17, 18],
+  };
+
+  function defaultStudentAge(zoneId) {
+    const options = STUDENT_AGE_OPTIONS[zoneId];
+    if (options && options.length) return options[0];
+    return zoneId === "primary" ? 6 : null;
+  }
+
+  function renderStudentAgeFilter() {
+    if (!els.studentAgeFilter) return;
+    const ages = state.currentRole === "student" ? STUDENT_AGE_OPTIONS[state.currentZone] : null;
+    if (!ages) {
+      els.studentAgeFilter.hidden = true;
+      els.studentAgeFilter.innerHTML = "";
+      return;
+    }
+    if (!ages.includes(state.currentStudentAge)) {
+      state.currentStudentAge = ages[0];
+    }
+    els.studentAgeFilter.hidden = false;
+    els.studentAgeFilter.innerHTML = `
+      <span class="student-age-filter__label">${escapeHtml(t("studentAgeLabel"))}</span>
+      <div class="student-age-filter__chips">
+        ${ages.map((age) => `
+          <button type="button" class="student-age-chip${state.currentStudentAge === age ? " active" : ""}" data-student-age="${age}" aria-pressed="${state.currentStudentAge === age ? "true" : "false"}">${age}</button>
+        `).join("")}
+      </div>
+      <span class="student-age-filter__note">${escapeHtml(t("studentAgeNote"))}</span>
+    `;
+    els.studentAgeFilter.querySelectorAll("[data-student-age]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        state.currentStudentAge = Number(btn.dataset.studentAge);
+        renderStudentAgeFilter();
+        renderPathContent();
+        renderAdvancedTools();
+      });
     });
   }
 
@@ -1130,9 +1178,11 @@ function renderToolGrid(pathTools, targetElement) {
   function isToolAgeAppropriate(tool) {
     if (!tool) return false;
     if (state.currentRole === "guardian") return true;
-    const maxAge = ZONE_MAX_AGE[state.currentZone];
-    if (maxAge === undefined || tool.minAge === undefined) return true;
-    return tool.minAge <= maxAge;
+    const effectiveAge = Number.isFinite(state.currentStudentAge)
+      ? state.currentStudentAge
+      : defaultStudentAge(state.currentZone);
+    if (effectiveAge === null || effectiveAge === undefined || tool.minAge === undefined) return true;
+    return tool.minAge <= effectiveAge;
   }
 
   function renderQuizView() {
@@ -2249,6 +2299,7 @@ function renderToolGrid(pathTools, targetElement) {
     }
     state.currentZone = zoneId;
     state.currentRole = ROLES.some((r) => r.id === roleId) ? roleId : "guardian";
+    state.currentStudentAge = state.currentRole === "student" ? defaultStudentAge(zoneId) : null;
     state.currentView = VALID_VIEWS.includes(viewId) ? viewId : "tools";
     if (state.currentView === "tutor" && !isTutorViewAvailable(state.currentZone, state.currentRole)) {
       state.currentView = "tools";
@@ -2299,6 +2350,7 @@ function renderToolGrid(pathTools, targetElement) {
     }
 
     renderRoleTabs();
+    renderStudentAgeFilter();
     renderSubjectFilter();
     renderNeedFilter();
     renderPathContent();
@@ -2367,6 +2419,7 @@ function renderToolGrid(pathTools, targetElement) {
     if (!quiz) return; // το quiz μπορεί να έχει αφαιρεθεί/μετονομαστεί από τότε
     state.currentZone = progress.zoneId;
     state.currentRole = "guardian";
+    state.currentStudentAge = null;
     state.currentSubject = null;
     state.currentView = "quiz";
     resetQuizState();
@@ -2429,6 +2482,7 @@ function renderToolGrid(pathTools, targetElement) {
   function selectZone(zoneId) {
     state.currentZone = zoneId;
     state.currentRole = "guardian";
+    state.currentStudentAge = null;
     state.currentSubject = null;
     state.currentView = "tools";
     resetQuizState();
@@ -2450,6 +2504,7 @@ function renderToolGrid(pathTools, targetElement) {
 
   function selectRole(roleId) {
     state.currentRole = roleId;
+    state.currentStudentAge = roleId === "student" ? defaultStudentAge(state.currentZone) : null;
     if (state.currentView === "tutor" && !isTutorViewAvailable(state.currentZone, state.currentRole)) {
       state.currentView = "tools";
     }

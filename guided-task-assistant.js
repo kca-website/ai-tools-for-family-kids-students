@@ -285,7 +285,7 @@
       '<label class="guided__label" for="guidedMode">'+(isEn?"What would you like to do?":"Τι θέλεις να κάνουμε;")+'</label>'+
       '<select id="guidedMode" class="guided__select">'+cfg.modes.map(x=>'<option value="'+escapeHtml(x[0])+'">'+escapeHtml(x[1])+'</option>').join("")+'</select>'+
       '<label class="guided__label" for="guidedInput">'+escapeHtml(cfg.label)+'</label>'+
-      (kind==="pdf" ? '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(isEn?"Choose PDF":"Επίλεξε PDF")+'</label><input id="guidedPdfFile" type="file" accept="application/pdf,.pdf"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span></div>' : '')+
+      (kind==="pdf" ? '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(isEn?"Choose PDF":"Επίλεξε PDF")+'</label><input id="guidedPdfFile" type="file" accept="application/pdf,.pdf"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span><button type="button" id="guidedPdfRemove" class="guided__upload-remove" hidden>'+(isEn?"Remove PDF":"Αφαίρεση PDF")+'</button></div>' : '')+
       '<textarea id="guidedInput" class="guided__input" placeholder="'+escapeHtml(cfg.placeholder)+'"></textarea>'+
       '<p class="guided__privacy">'+(isEn?"Do not enter your name, school, phone number, health information or other personal data.":"Μην γράφεις όνομα, σχολείο, τηλέφωνο, στοιχεία υγείας ή άλλα προσωπικά δεδομένα.")+'</p>'+
       '<button id="guidedGo" class="guided__button" type="button">'+(isEn?"Help me":"Βοήθησέ με")+'</button>'+
@@ -293,7 +293,8 @@
       '<div id="guidedResult" class="guided__result" tabindex="0" aria-live="polite"><p class="guided__placeholder">'+(isEn?"The result will appear here.":"Το αποτέλεσμα θα εμφανιστεί εδώ.")+'</p></div>';
 
     const btn=root.querySelector("#guidedGo"), input=root.querySelector("#guidedInput"), mode=root.querySelector("#guidedMode"), result=root.querySelector("#guidedResult"), status=root.querySelector("#guidedStatus");
-    const pdfFile=root.querySelector("#guidedPdfFile"), pdfStatus=root.querySelector("#guidedPdfStatus");
+    const pdfFile=root.querySelector("#guidedPdfFile"), pdfStatus=root.querySelector("#guidedPdfStatus"), pdfRemove=root.querySelector("#guidedPdfRemove");
+    let attachedPdf=null;
     if(pdfFile){
       pdfFile.addEventListener("change",async()=>{
         const file=pdfFile.files&&pdfFile.files[0];
@@ -303,9 +304,12 @@
         try{
           const reader=await ensurePdfReader();
           const doc=await reader.read(file,{maxChars:42000,maxPages:70});
-          input.value=doc.text;
-          pdfStatus.textContent=(isEn?"Loaded ":"Φορτώθηκαν ")+doc.totalPages+(isEn?" pages":" σελίδες")+(doc.truncated?(isEn?" · long document, using the first readable part":" · μεγάλο αρχείο, χρησιμοποιείται το πρώτο αναγνώσιμο μέρος"):"");
+          attachedPdf=doc;
+          pdfStatus.textContent=doc.name+" · "+doc.totalPages+(isEn?" pages":" σελίδες")+(doc.truncated?(isEn?" · long document, using the first readable part":" · μεγάλο αρχείο, χρησιμοποιείται το πρώτο αναγνώσιμο μέρος"):"");
+          if(pdfRemove) pdfRemove.hidden=false;
         }catch(err){
+          attachedPdf=null;
+          if(pdfRemove) pdfRemove.hidden=true;
           const code=String(err&&err.message||err);
           pdfStatus.textContent=code==="no_selectable_text"
             ? (isEn?"No selectable text was found. This may be a scanned/image PDF.":"Δεν βρέθηκε επιλέξιμο κείμενο. Ίσως είναι σαρωμένο PDF/εικόνα.")
@@ -315,14 +319,25 @@
         }finally{pdfFile.disabled=false;}
       });
     }
+    if(pdfRemove){
+      pdfRemove.addEventListener("click",()=>{
+        attachedPdf=null;
+        if(pdfFile) pdfFile.value="";
+        if(pdfStatus) pdfStatus.textContent="";
+        pdfRemove.hidden=true;
+      });
+    }
     btn.addEventListener("click",async()=>{
       const value=input.value.trim();
-      if(!value){ status.textContent=isEn?"Enter a little material or your topic first.":"Γράψε πρώτα λίγο υλικό ή το θέμα σου."; input.focus(); return; }
+      const pdfText=attachedPdf?.text||"";
+      if(!value && !pdfText){ status.textContent=isEn?"Enter some material, a topic, or attach a PDF first.":"Γράψε λίγο υλικό/θέμα ή ανέβασε πρώτα PDF."; input.focus(); return; }
       btn.disabled=true; status.textContent=isEn?"Preparing the response…":"Ετοιμάζω την απάντηση…"; result.innerHTML='<p class="guided__placeholder">'+(isEn?"Working with what you entered…":"Δουλεύω πάνω σε αυτό που έγραψες…")+'</p>';
       try{
         const r=await fetch("/api/tutor-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
           system:cfg.system,
-          prompt:cfg.prompts[mode.value]+"\n\n"+(isEn?"User material:\n":"Υλικό χρήστη:\n")+value,
+          prompt:cfg.prompts[mode.value]
+            +"\n\n"+(pdfText?(isEn?"Attached PDF content:\n":"Περιεχόμενο συνημμένου PDF:\n")+pdfText:"")
+            +(value?"\n\n"+(isEn?"User notes/question:\n":"Σημείωση/ερώτηση χρήστη:\n")+value:""),
           audience:"study_user",mode:"organize",task:"guided_task",subject:cfg.subject
         })});
         const data=await r.json().catch(()=>({}));

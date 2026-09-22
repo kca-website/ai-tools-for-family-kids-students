@@ -97,7 +97,7 @@
         ["🎨","Make a presentation or poster","Tools for organising, designing and presenting ideas","/en/presentation-poster-ai.html"],
         ["📚","Practice reading or English","Tools for reading, pronunciation and languages","/en/reading-english-ai.html"],
         ["✨","Create something with AI","Creative tools and ideas without ready-made schoolwork","/en/creative-ai-for-students.html"],
-        ["🧩","Break study into steps","Turn a large task or messy notes into small next steps","/organosi-meletis-ai.html"]
+        ["🧩","Break study into steps","Turn a large task or messy notes into small next steps","/en/study-steps-ai.html"]
       ],
       engTitle: "Greek Sign Language concepts",
       engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,

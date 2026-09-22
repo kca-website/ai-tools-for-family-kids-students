@@ -33,6 +33,7 @@ module.exports = async function handler(req, res) {
     quiz: 3000,
     slides: 2500,
     study_plan: 1400,
+    guided_task: 1800,
   };
   if (!Object.prototype.hasOwnProperty.call(taskLimits, task)) {
     return res.status(400).json({ error: 'invalid_task', message: 'Μη έγκυρος τύπος εκπαιδευτικού υλικού.' });
@@ -63,6 +64,7 @@ module.exports = async function handler(req, res) {
 - In conversation mode, never provide finished homework or an immediately complete solution. Start from the learner's attempt and give one small hint or question at a time.
 - For flashcards, quizzes and presentation scaffolds, create the complete requested structured learning material, but do not turn it into a ready-to-submit school assignment.
 - For study_plan tasks, organize the learner's own task into small actionable steps, estimate only rough effort, and never solve the school task itself.
+- For guided_task tasks, follow the supplied page-specific system instructions. Keep the output structured and concise; never turn it into a ready-to-submit school assignment.
 ${roleRule}
 - Do not request, repeat or retain personal or sensitive information.
 - Do not diagnose, label or officially grade a learner.

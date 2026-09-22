@@ -30,8 +30,8 @@ const LEARNING_NEEDS = [
 
 const NEED_TOOL_MAP = {
   language: {
-    understand: ["ai-help", "chatgpt", "gemini-education", "gemini", "claude", "notebooklm"],
-    practice: ["ai-help", "chatgpt", "quizlet", "anki", "digital-tutoring"],
+    understand: ["reading-coach", "ai-help", "chatgpt", "gemini-education", "gemini", "claude", "notebooklm"],
+    practice: ["reading-coach", "ai-help", "chatgpt", "quizlet", "anki", "digital-tutoring"],
     hint: ["ai-help", "chatgpt"],
     check: ["ai-help", "gemini-education", "chatgpt", "grammarly", "notebooklm"],
     revise: ["ai-help", "gemini-education", "notebooklm", "quizlet", "anki", "notion", "digital-tutoring", "chatgpt"],
@@ -77,21 +77,21 @@ const CURRICULUM = {
     math: {toolIds: ["ai-help", "perplexity", "photomath", "chatgpt", "claude", "gemini", "wolfram-alpha", "notebooklm", "gemini-education"],noteEl: "Εξάσκηση με καθοδήγηση και έλεγχος λύσης μετά την προσπάθεια.",noteEn: "Guided practice and solution checking after the child's attempt."},
     science: {toolIds: ["phet", "ai-help", "chatgpt", "claude", "perplexity", "gemini", "notebooklm", "google-arts-culture", "gemini-education"],noteEl: "Απλή εξήγηση εννοιών Φυσικών Επιστημών με ερωτήσεις, όχι έτοιμες απαντήσεις.",noteEn: "Simple science concept explanations through questions, not ready answers."},
     history: {toolIds: ["google-arts-culture", "ai-help", "chatgpt", "claude", "perplexity", "gemini", "notebooklm", "gemini-education"],noteEl: "Απλή εξήγηση ιστορικών γεγονότων με καθοδηγητικές ερωτήσεις.",noteEn: "Simple explanation of historical events through guided questions."},
-    "foreign-language": {toolIds: ["ai-help", "duolingo", "gemini-education", "deepl"],noteEl: "Πρώτη επαφή με ξένη γλώσσα μέσα από σύντομα, παιχνιδοποιημένα μαθήματα.",noteEn: "First exposure to a foreign language through short, gamified lessons."},
+    "foreign-language": {toolIds: ["ai-help", "duolingo", "reading-coach", "gemini-education", "deepl"],noteEl: "Πρώτη επαφή με ξένη γλώσσα μέσα από σύντομα, παιχνιδοποιημένα μαθήματα.",noteEn: "First exposure to a foreign language through short, gamified lessons."},
   },
   middle: {
     language: {toolIds: ["ai-help", "gemini-education", "copilot", "chatgpt", "notebooklm", "quizlet", "perplexity", "anki"],noteEl: "Ανάπτυξη επιχειρημάτων για έκθεση, εξάσκηση στην ελληνική γλώσσα.",noteEn: "Developing essay arguments, Greek language practice."},
     math: {toolIds: ["ai-help", "wolfram-alpha", "gemini-education", "copilot", "chatgpt", "photomath", "symbolab", "desmos", "geogebra", "quizlet"],noteEl: "Βήμα-βήμα επίλυση και επαλήθευση ασκήσεων Μαθηματικών.",noteEn: "Step-by-step solving and verification of math exercises."},
     science: {toolIds: ["phet", "ai-help", "wolfram-alpha", "gemini-education", "copilot", "chatgpt", "notebooklm", "quizlet", "perplexity", "google-lens"],noteEl: "Εξήγηση εννοιών Φυσικής/Χημείας και υπολογισμοί.",noteEn: "Physics/Chemistry concept explanations and calculations."},
     history: {toolIds: ["google-arts-culture", "ai-help", "perplexity", "gemini-education", "copilot", "chatgpt", "notebooklm", "quizlet"],noteEl: "Οργάνωση σημείων για παρουσίαση, και έλεγχος γεγονότων με πηγές πριν τα εμπιστευτείς.",noteEn: "Organizing points for a presentation, and checking facts against sources before trusting them."},
-    "foreign-language": {toolIds: ["ai-help", "gemini", "gemini-education", "copilot", "chatgpt", "deepl"],noteEl: "Βοήθεια σε ξένη γλώσσα με καθοδηγούμενη εξάσκηση, σύγκριση διατυπώσεων με DeepL και σχολικό/γενικό AI όπου επιτρέπεται.",noteEn: "Foreign-language help through guided practice, comparing phrasings with DeepL, and school/general AI where permitted."},
+    "foreign-language": {toolIds: ["ai-help", "duolingo", "reading-coach", "quizlet", "anki", "gemini", "gemini-education", "copilot", "chatgpt", "deepl", "notebooklm", "perplexity"],noteEl: "Βοήθεια σε ξένη γλώσσα με καθοδηγούμενη εξάσκηση, σύγκριση διατυπώσεων με DeepL και σχολικό/γενικό AI όπου επιτρέπεται.",noteEn: "Foreign-language help through guided practice, comparing phrasings with DeepL, and school/general AI where permitted."},
   },
   high: {
     language: {toolIds: ["ai-help", "gemini-education", "copilot", "chatgpt", "notebooklm", "quizlet", "perplexity", "anki", "notion", "digital-tutoring"],noteEl: "Ανάπτυξη και έλεγχος επιχειρημάτων για έκθεση, προετοιμασία Πανελληνίων.",noteEn: "Developing and stress-testing essay arguments, Panhellenic exam prep."},
     math: {toolIds: ["ai-help", "wolfram-alpha", "gemini-education", "copilot", "chatgpt", "photomath", "symbolab", "desmos", "geogebra", "quizlet", "digital-tutoring"],noteEl: "Επαλήθευση σύνθετων προβλημάτων Μαθηματικών Προσανατολισμού.",noteEn: "Verification of complex advanced-track math problems."},
     science: {toolIds: ["phet", "ai-help", "wolfram-alpha", "chatgpt-edu", "gemini-education", "copilot", "chatgpt", "notebooklm", "quizlet", "perplexity", "google-lens", "digital-tutoring"],noteEl: "Υπολογισμοί Φυσικής/Χημείας και υποστήριξη μέσω σχολικού προγράμματος.",noteEn: "Physics/Chemistry calculations and support via the school pilot program."},
     history: {toolIds: ["google-arts-culture", "ai-help", "perplexity", "gemini-education", "copilot", "chatgpt", "notebooklm", "quizlet", "zotero", "gamma", "notion", "google-lens", "digital-tutoring"],noteEl: "Οργάνωση επιχειρημάτων και έλεγχος ιστορικών γεγονότων με πηγές πριν τα εμπιστευτείς.",noteEn: "Organizing arguments and checking historical facts against sources before trusting them."},
-    "foreign-language": {toolIds: ["ai-help", "grammarly", "gemini-education", "copilot", "chatgpt", "deepl"],noteEl: "Υποστήριξη στη συγγραφή επιστημονικών/ακαδημαϊκών κειμένων στα αγγλικά.",noteEn: "Support for writing scientific/academic texts in English."},
+    "foreign-language": {toolIds: ["ai-help", "duolingo", "reading-coach", "quizlet", "anki", "grammarly", "gemini-education", "copilot", "chatgpt", "deepl", "notebooklm", "perplexity"],noteEl: "Υποστήριξη στη συγγραφή επιστημονικών/ακαδημαϊκών κειμένων στα αγγλικά.",noteEn: "Support for writing scientific/academic texts in English."},
   },
 };
 

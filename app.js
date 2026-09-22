@@ -616,6 +616,10 @@
 
     let toolsToShow = pathData.tools || [];
 
+    if (state.currentRole === "student") {
+      toolsToShow = toolsToShow.filter((entry) => TOOLS[entry.toolId] && isToolAgeAppropriate(TOOLS[entry.toolId]));
+    }
+
     if (state.currentSubject) {
       const subjectData =
         CURRICULUM[state.currentZone] && CURRICULUM[state.currentZone][state.currentSubject];
@@ -673,7 +677,7 @@
     const expertTools = [];
     Object.keys(TOOLS).forEach((id) => {
       const tool = TOOLS[id];
-      if (tool.isExpert) {
+      if (tool.isExpert && isToolAgeAppropriate(tool)) {
         expertTools.push({ toolId: id, tool });
       }
     });

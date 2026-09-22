@@ -42,9 +42,39 @@ try {
   {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await openPath(page, '/primary/student/tools');
+    const genericHrefs = await page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
+      links.map((a) => new URL(a.href).pathname)
+    );
+    assert.equal(genericHrefs.includes('/tools/photomath.html'), false,
+      'Primary student generic list must not expose 13+ Photomath');
     const hrefs = await choose(page, 'Μαθηματικά', 'Να ελέγξω λύση');
     assert.deepEqual(hrefs, ['/tools/ai-help.html', '/tools/gemini-education.html'],
       'Primary Math/check should fall back to age-appropriate learning-first tools after 13+ math solvers are filtered out');
+    await page.close();
+  }
+
+  {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await openPath(page, '/primary/student/tools');
+    const hrefs = await choose(page, 'Γλώσσα', 'Να εξασκηθώ');
+    assert.deepEqual(hrefs.slice(0, 2), [
+      '/tools/reading-coach.html',
+      '/tools/ai-help.html',
+    ], 'Primary Language/practice should prioritise Reading Coach then guided AI Help');
+    await page.close();
+  }
+
+  {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await openPath(page, '/middle/student/tools');
+    const hrefs = await choose(page, 'Ξένη Γλώσσα', 'Να εξασκηθώ');
+    assert.deepEqual(hrefs.slice(0, 5), [
+      '/tools/duolingo.html',
+      '/tools/reading-coach.html',
+      '/tools/ai-help.html',
+      '/tools/quizlet.html',
+      '/tools/anki.html',
+    ], 'Middle foreign-language practice should surface specialised language/revision tools');
     await page.close();
   }
 

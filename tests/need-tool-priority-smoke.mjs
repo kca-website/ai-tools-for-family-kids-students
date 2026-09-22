@@ -43,8 +43,8 @@ try {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await openPath(page, '/primary/student/tools');
     const hrefs = await choose(page, 'Μαθηματικά', 'Να ελέγξω λύση');
-    assert.deepEqual(hrefs, ['/tools/photomath.html'],
-      'Primary Math/check should keep only the age-appropriate top-fit tool');
+    assert.deepEqual(hrefs, ['/tools/ai-help.html', '/tools/gemini-education.html'],
+      'Primary Math/check should fall back to age-appropriate learning-first tools after 13+ math solvers are filtered out');
     await page.close();
   }
 

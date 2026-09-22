@@ -336,9 +336,10 @@
         const r=await fetch("/api/tutor-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
           system:cfg.system,
           prompt:cfg.prompts[mode.value]
-            +"\n\n"+(pdfText?(isEn?"Attached PDF content:\n":"Περιεχόμενο συνημμένου PDF:\n")+pdfText:"")
             +(value?"\n\n"+(isEn?"User notes/question:\n":"Σημείωση/ερώτηση χρήστη:\n")+value:""),
-          audience:"study_user",mode:"organize",task:"guided_task",subject:cfg.subject
+          audience:"study_user",mode:"organize",task:"guided_task",subject:cfg.subject,
+          documentText:pdfText,
+          documentName:attachedPdf?.name||""
         })});
         const data=await r.json().catch(()=>({}));
         if(!r.ok) throw new Error(data.message||(isEn?"The service could not respond.":"Η υπηρεσία δεν μπόρεσε να απαντήσει."));

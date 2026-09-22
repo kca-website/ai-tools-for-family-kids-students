@@ -53,12 +53,23 @@ function zoneBlock(zone) {
   return curriculum.slice(start, end);
 }
 
+function idsFromArrayAfter(block, marker, errorMessage) {
+  const start = block.indexOf(marker);
+  assert.ok(start >= 0, errorMessage);
+  const open = block.indexOf('[', start);
+  const close = block.indexOf(']', open);
+  assert.ok(open >= 0 && close > open, errorMessage);
+  return [...block.slice(open + 1, close).matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+}
+
 function curriculumIds(zone, subject) {
   const block = zoneBlock(zone);
   const key = subject.includes('-') ? `"${subject}"` : subject;
-  const match = block.match(new RegExp(`${key}: \\\\{toolIds: \\\\[([^\\\\]]*)\\\\]`));
-  assert.ok(match, `Missing curriculum subject mapping: ${zone}/${subject}`);
-  return [...match[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  return idsFromArrayAfter(
+    block,
+    `${key}: {toolIds:`,
+    `Missing curriculum subject mapping: ${zone}/${subject}`
+  );
 }
 
 function needIds(subject, need) {
@@ -67,9 +78,11 @@ function needIds(subject, need) {
   assert.ok(start >= 0, `Missing NEED_TOOL_MAP subject: ${subject}`);
   const end = curriculum.indexOf('\n  },', start);
   const block = curriculum.slice(start, end);
-  const match = block.match(new RegExp(`${need}: \\\\[([^\\\\]]*)\\\\]`));
-  assert.ok(match, `Missing NEED_TOOL_MAP need: ${subject}/${need}`);
-  return [...match[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+  return idsFromArrayAfter(
+    block,
+    `${need}:`,
+    `Missing NEED_TOOL_MAP need: ${subject}/${need}`
+  );
 }
 
 for (const [zone, maxAge] of Object.entries(zones)) {

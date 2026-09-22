@@ -4,8 +4,13 @@ import assert from 'node:assert/strict';
 const LOCAL = 'http://127.0.0.1:4173';
 
 async function openPath(page, path) {
-  await page.goto(`${LOCAL}${path}`, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForSelector('#subjectFilter .subject-chip', { timeout: 30000 });
+  await page.goto(`${LOCAL}/`, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForSelector('#zoneGrid', { timeout: 30000 });
+  await page.evaluate((route) => {
+    history.replaceState({}, '', route);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  }, path);
+  await page.waitForSelector('#subjectFilter .subject-chip', { state: 'visible', timeout: 30000 });
 }
 
 async function choose(page, subjectLabel, needLabel) {

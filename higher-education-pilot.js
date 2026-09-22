@@ -574,6 +574,8 @@
   function buildAiRequest() {
     const { institution, department, course, task } = universityContext();
     const extra = aiInput.value.trim();
+    const documentText = attachedDocument?.text || "";
+    const documentName = attachedDocument?.name || "";
     const action = ACTIONS[aiAction] || ACTIONS.explain;
     const sources = (department?.sources || []).join("\n");
     const verified = courseHasVerifiedTopics(course);

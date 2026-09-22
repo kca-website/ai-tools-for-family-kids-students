@@ -623,7 +623,11 @@
 
       if (state.currentNeed && typeof NEED_TOOL_MAP !== "undefined") {
         const needIds = (NEED_TOOL_MAP[state.currentSubject] && NEED_TOOL_MAP[state.currentSubject][state.currentNeed]) || [];
-        allowedToolIds = allowedToolIds.filter((id) => needIds.includes(id));
+        const subjectIds = new Set(allowedToolIds);
+        // NEED_TOOL_MAP is ordered by best fit for the selected need.
+        // Intersect in NEED_TOOL_MAP order so the first cards are the most relevant,
+        // instead of inheriting the generic subject order.
+        allowedToolIds = needIds.filter((id) => subjectIds.has(id));
       }
 
       const existingById = new Map((pathData.tools || []).map((entry) => [entry.toolId, entry]));

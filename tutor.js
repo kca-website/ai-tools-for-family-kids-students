@@ -1247,6 +1247,8 @@ ${compositeRule}
     refs.input.disabled = !canChat;
     refs.send.disabled = !canChat;
     refs.sample.disabled = !allowed || !subjectReady;
+    if (refs.pdfFile) refs.pdfFile.disabled = !canChat;
+    refs.form?.querySelectorAll("[data-quick-action]").forEach((btn)=>{ btn.disabled = !canChat; });
     if (!allowed) refs.input.placeholder = tr("placeholderBlocked");
     else if (!subjectReady) refs.input.placeholder = tr("selectSubjectFirst");
     else if (!providerReady) refs.input.placeholder = tr("placeholderConnect");

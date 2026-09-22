@@ -19,7 +19,7 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <div class="badges"><span class="badge">Free</span><span class="badge">No account</span><span class="badge">Learning-first</span></div>
 <div class="tool">
 <label for="mode">What do you need?</label>
-<select id="mode"><option value="break">Break a task into small steps</option><option value="brain">Turn messy notes into a checklist</option><option value="simple">Explain what I need to do more simply</option><option value="plan">Make a study plan for this topic</option></select>
+<select id="mode"><option value="ask">What is this task actually asking me to do?</option><option value="break">Break a task into small steps</option><option value="first">Tell me only the first useful step</option><option value="check">Check whether I understood it</option><option value="brain">Turn messy notes into a checklist</option><option value="plan">Make a study plan for this topic</option></select>
 <label for="input">Enter the task, topic or your notes</label>
 <textarea id="input" placeholder="e.g. I have a Biology test on Friday: chapters 2 and 3, I mix up mitosis and meiosis, and I have about 45 minutes today."></textarea>
 <p class="help">Do not enter your name, school, phone number, health information or other personal data.</p>
@@ -33,9 +33,11 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 (function(){
  const btn=document.getElementById('go'),input=document.getElementById('input'),mode=document.getElementById('mode'),result=document.getElementById('result'),status=document.getElementById('status');
  const prompts={
+  ask:"Explain in plain language what the task is asking the learner to produce, what information/skills it requires, and what NOT to do. Do not solve it.",
   break:"Break the following school/university task into 4-7 very small actionable steps. Start each step with a verb. Do not solve the task or write the final submission. End with only the first step to do now.",
+  first:"Based on the task, give ONLY the first useful action the learner should take now, in one or two sentences. Do not solve the task.",
+  check:"Ask 3 short questions that check whether the learner understands what the task/topic is asking. Do not reveal model answers until the learner responds.",
   brain:"Turn the following messy notes into a short action checklist. Do not add unknown facts or ready-made assignment content.",
-  simple:"Explain in very simple language what this task/instruction is asking and give the first 3 things I should do. Do not give the solution.",
   plan:"Create a short study plan with small blocks, starting from what the user says is difficult. Do not teach the whole topic or solve exercises."
  };
  btn.addEventListener('click',async()=>{

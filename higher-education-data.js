@@ -26,12 +26,12 @@
       research: {
         labelEl: "Να βρω και να ελέγξω πηγές",
         labelEn: "Find and verify sources",
-        preferredTools: ["perplexity", "gemini", "chatgpt"],
+        preferredTools: ["scispace", "zotero", "perplexity", "gemini", "chatgpt"],
       },
       papers: {
         labelEl: "Να διαβάσω / οργανώσω papers",
         labelEn: "Read / organize papers",
-        preferredTools: ["notebooklm", "perplexity", "chatgpt"],
+        preferredTools: ["scispace", "zotero", "notebooklm", "perplexity", "chatgpt"],
       },
       coding: {
         labelEl: "Να γράψω ή να διορθώσω κώδικα",
@@ -46,7 +46,7 @@
       notes: {
         labelEl: "Να οργανώσω σημειώσεις",
         labelEn: "Organize notes",
-        preferredTools: ["notebooklm", "chatgpt", "gemini"],
+        preferredTools: ["notion", "anki", "notebooklm", "chatgpt", "gemini"],
       },
       feedback: {
         labelEl: "Να πάρω feedback στη δική μου δουλειά",
@@ -136,6 +136,8 @@
       "academic-research": {
         labelEl: "Ακαδημαϊκή έρευνα",
         tools: [
+          { id: "scispace", tasks: ["research","papers"], whyEl: "Literature Review, Chat with PDF και αναζήτηση papers σε μία ακαδημαϊκή πλατφόρμα. Χρησιμοποίησέ το για να εντοπίζεις και να συγκρίνεις πηγές, όχι για να παραδίδει έτοιμο κείμενο." },
+          { id: "zotero", tasks: ["research","papers","notes"], whyEl: "Οργάνωση πηγών, citations και βιβλιογραφίας με καθαρό ίχνος της έρευνάς σου." },
           { id: "elicit", tasks: ["research","papers"], whyEl: "Αναζήτηση και σύγκριση ακαδημαϊκών εργασιών." },
           { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Έλεγχος citations και επιστημονικών ισχυρισμών." },
           { id: "notebooklm", tasks: ["understand","notes","papers"], whyEl: "Source-based οργάνωση σημειώσεων και βιβλιογραφίας." },

@@ -41,7 +41,7 @@ const NEED_TOOL_MAP = {
     understand: ["ai-help", "chatgpt", "gemini-education", "desmos", "geogebra", "wolfram-alpha"],
     practice: ["ai-help", "symbolab", "photomath", "wolfram-alpha", "desmos", "geogebra", "digital-tutoring"],
     hint: ["ai-help", "chatgpt"],
-    check: ["photomath", "symbolab", "wolfram-alpha", "geogebra", "digital-tutoring"],
+    check: ["photomath", "symbolab", "wolfram-alpha", "geogebra", "digital-tutoring", "ai-help", "gemini-education"],
     revise: ["ai-help", "gemini-education", "quizlet", "anki", "digital-tutoring", "chatgpt"],
     research: ["gemini-education", "wolfram-alpha", "perplexity"],
   },

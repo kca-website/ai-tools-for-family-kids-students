@@ -275,6 +275,10 @@
       placeholderBlocked: "Η λειτουργία δεν είναι διαθέσιμη με αυτή την ηλικιακή ρύθμιση.",
       sample: "Βάλε παράδειγμα",
       send: "Στείλε",
+      quickAsk: "Τι μου ζητά;",
+      quickBreak: "Σπάσε το",
+      quickFirst: "Τι πρώτο;",
+      quickCheck: "Έλεγξε αν κατάλαβα",
       micStart: "🎤 Μίλα",
       micStop: "■ Σταμάτα",
       micListening: "Ηχογράφηση",
@@ -413,6 +417,10 @@
       placeholderBlocked: "This feature is not available with the current age setting.",
       sample: "Insert example",
       send: "Send",
+      quickAsk: "What is it asking?",
+      quickBreak: "Break it down",
+      quickFirst: "What first?",
+      quickCheck: "Check my understanding",
       micStart: "🎤 Speak",
       micStop: "■ Stop",
       micListening: "Recording",
@@ -2125,6 +2133,31 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     return label ? `Δεν καταλαβαίνω καλά το θέμα «${label}». Μπορείς να με βοηθήσεις βήμα-βήμα χωρίς να μου δώσεις κατευθείαν τη λύση;` : tr("sampleStudentGeneric");
   }
 
+
+  function applyQuickAction(action){
+    if(!refs.input || refs.input.disabled) return;
+    const en=ctx?.lang==="en";
+    const prompts={
+      ask: en
+        ? "Help me understand exactly what this task is asking me to do, without solving it: "
+        : "Βοήθησέ με να καταλάβω τι ακριβώς ζητά αυτή η άσκηση/εργασία, χωρίς να τη λύσεις: ",
+      break: en
+        ? "Break this task into small steps without solving it: "
+        : "Σπάσε αυτή την εργασία σε μικρά βήματα χωρίς να τη λύσεις: ",
+      first: en
+        ? "Tell me only the first useful step I should take now, without solving the task."
+        : "Πες μου μόνο το πρώτο χρήσιμο βήμα που πρέπει να κάνω τώρα, χωρίς να λύσεις την άσκηση.",
+      check: en
+        ? "Ask me 3 short questions to check whether I understood this topic/task. Do not reveal the answers before I respond."
+        : "Κάνε μου 3 σύντομες ερωτήσεις για να ελέγξεις αν κατάλαβα αυτό το θέμα/την εργασία. Μην αποκαλύψεις τις απαντήσεις πριν απαντήσω."
+    };
+    const next=prompts[action];
+    if(!next) return;
+    refs.input.value=next;
+    refs.input.focus();
+    refs.input.setSelectionRange?.(refs.input.value.length,refs.input.value.length);
+  }
+
   function bindEvents() {
     refs.schoolType?.addEventListener("change", () => { populateGrades(); renderContext(); resetConversation(); });
     refs.grade.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
@@ -2173,6 +2206,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       });
     });
     refs.newChat.addEventListener("click", () => resetConversation());
+    refs.form?.querySelectorAll("[data-quick-action]").forEach((btn)=>btn.addEventListener("click",()=>applyQuickAction(btn.dataset.quickAction)));
     refs.pdfFile?.addEventListener("change", () => handlePdfAttachment(refs.pdfFile.files?.[0]));
     refs.pdfRemove?.addEventListener("click", clearPdfAttachment);
     refs.mic?.addEventListener("click", () => { primeAudioOutput(); toggleRecording(); });
@@ -2282,6 +2316,12 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
               <div class="tutor-empty" id="tutorEmptyState"><strong>${escapeHtml(tr("emptyTitle"))}</strong><br>${escapeHtml(parentMode ? tr("emptyParent") : tr("emptyStudent"))}</div>
             </div>
             <form class="tutor-composer" id="tutorForm">
+              <div class="tutor-quick-actions" role="group" aria-label="${escapeHtml(ctx.lang === "en" ? "Quick study actions" : "Γρήγορες ενέργειες μελέτης")}">
+                <button type="button" class="tutor-quick-action" data-quick-action="ask">${escapeHtml(tr("quickAsk"))}</button>
+                <button type="button" class="tutor-quick-action" data-quick-action="break">${escapeHtml(tr("quickBreak"))}</button>
+                <button type="button" class="tutor-quick-action" data-quick-action="first">${escapeHtml(tr("quickFirst"))}</button>
+                <button type="button" class="tutor-quick-action" data-quick-action="check">${escapeHtml(tr("quickCheck"))}</button>
+              </div>
               <div class="tutor-doc-upload">
                 <label class="tutor-doc-upload__button" for="tutorPdfFile">${escapeHtml(tr("pdfChoose"))}</label>
                 <input id="tutorPdfFile" type="file" accept="application/pdf,.pdf" />

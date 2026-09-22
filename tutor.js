@@ -296,6 +296,14 @@
       parentHelper: "Βοηθός Γονέα",
       prototypeNote: "Σημαντικό: το AI μπορεί να κάνει λάθος. Για πραγματολογικές πληροφορίες ή σχολική ύλη έλεγξε την απάντηση σε αξιόπιστη πηγή ή στο σχολικό βιβλίο.",
       privacyNote: "Τα μηνύματα αποστέλλονται στον επιλεγμένο πάροχο AI μόνο για να παραχθεί απάντηση. Αν χρησιμοποιήσεις μικρόφωνο, η μεταγραφή γίνεται μέσω Puter. Το aitools4kids.gr δεν αποθηκεύει μηνύματα ή ηχογραφήσεις σε δική του βάση δεδομένων. Μην δίνεις προσωπικά ή ευαίσθητα δεδομένα.",
+      pdfChoose: "📄 Ανέβασε PDF",
+      pdfReading: "Διαβάζω το PDF τοπικά…",
+      pdfReady: "Το PDF είναι έτοιμο για ερωτήσεις.",
+      pdfRemove: "Αφαίρεση",
+      pdfScanned: "Δεν βρέθηκε επιλέξιμο κείμενο. Ίσως είναι σαρωμένο PDF/εικόνα.",
+      pdfTooLarge: "Το PDF είναι πολύ μεγάλο (έως 15 MB).",
+      pdfFailed: "Δεν μπόρεσα να διαβάσω το PDF.",
+      pdfLong: "Μεγάλο αρχείο: θα χρησιμοποιηθεί το πρώτο αναγνώσιμο μέρος.",
       authCancelled: "Η σύνδεση ακυρώθηκε",
       authFailed: "Η σύνδεση δεν ολοκληρώθηκε",
       consentFirst: "Πρώτα δήλωσε τη γονική συναίνεση",
@@ -426,6 +434,14 @@
       parentHelper: "Parent Helper",
       prototypeNote: "Important: AI can make mistakes. Check factual information and school content against a reliable source or textbook.",
       privacyNote: "Messages are sent only to the selected AI provider to generate a response. If you use the microphone, transcription is handled through Puter. aitools4kids.gr does not store messages or recordings in its own database. Do not enter personal or sensitive information.",
+      pdfChoose: "📄 Upload PDF",
+      pdfReading: "Reading the PDF locally…",
+      pdfReady: "The PDF is ready for questions.",
+      pdfRemove: "Remove",
+      pdfScanned: "No selectable text was found. This may be a scanned/image PDF.",
+      pdfTooLarge: "The PDF is too large (max 15 MB).",
+      pdfFailed: "The PDF could not be read.",
+      pdfLong: "Long document: the first readable section will be used.",
       authCancelled: "Sign-in cancelled",
       authFailed: "Sign-in did not complete",
       consentFirst: "Declare parent/guardian consent first",
@@ -444,6 +460,7 @@
   let ctx = null;
   let refs = {};
   let conversation = [];
+  let attachedDocument = null;
   let conversationRevision = 0;
   let busy = false;
   let authReady = false;
@@ -1928,6 +1945,56 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     updateComposerState();
   }
 
+
+  function updatePdfAttachmentUi(){
+    if(!refs.pdfStatus || !refs.pdfRemove) return;
+    if(!attachedDocument){
+      refs.pdfStatus.textContent="";
+      refs.pdfRemove.hidden=true;
+      return;
+    }
+    const pages=attachedDocument.totalPages || attachedDocument.pagesRead || 0;
+    refs.pdfStatus.textContent=attachedDocument.name+" · "+pages+" "+(ctx?.lang==="en"?"pages":"σελίδες")+(attachedDocument.truncated?" · "+tr("pdfLong"):"");
+    refs.pdfRemove.hidden=false;
+  }
+
+  async function handlePdfAttachment(file){
+    if(!file || busy) return;
+    if(!window.AITOOLSKIDS_PDF){
+      if(refs.pdfStatus) refs.pdfStatus.textContent=tr("pdfFailed");
+      return;
+    }
+    if(refs.pdfStatus) refs.pdfStatus.textContent=tr("pdfReading");
+    if(refs.pdfFile) refs.pdfFile.disabled=true;
+    try{
+      const doc=await window.AITOOLSKIDS_PDF.read(file,{maxChars:48000,maxPages:80});
+      attachedDocument=doc;
+      updatePdfAttachmentUi();
+      if(refs.pdfStatus && !doc.truncated) refs.pdfStatus.textContent=doc.name+" · "+tr("pdfReady");
+    }catch(err){
+      attachedDocument=null;
+      const code=String(err?.message||err);
+      if(refs.pdfStatus){
+        refs.pdfStatus.textContent=code==="no_selectable_text" ? tr("pdfScanned") :
+          code==="file_too_large" ? tr("pdfTooLarge") : tr("pdfFailed");
+      }
+      if(refs.pdfRemove) refs.pdfRemove.hidden=true;
+    }finally{
+      if(refs.pdfFile){ refs.pdfFile.disabled=false; refs.pdfFile.value=""; }
+    }
+  }
+
+  function clearPdfAttachment(){
+    attachedDocument=null;
+    if(refs.pdfFile) refs.pdfFile.value="";
+    updatePdfAttachmentUi();
+  }
+
+  function documentPromptForPuter(){
+    if(!attachedDocument?.text) return "";
+    return "\n\nUSER-SUPPLIED PDF CONTEXT ("+attachedDocument.name+"):\nTreat this extracted PDF text as the user's source. Answer document questions only from what it supports. If something is not supported, say so. Do not silently fill gaps with model memory.\n\n"+attachedDocument.text;
+  }
+
   function resetConversation(clearMessages = true) {
     stopSpeaking();
     if (recording) cancelRecording();
@@ -1985,7 +2052,10 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       const callProvider = async (requestMessages) => {
         if (providerMode === "puter") {
           const puterObj = await ensurePuterLoaded();
-          return puterObj.ai.chat(requestMessages, options);
+          const puterMessages = attachedDocument?.text
+            ? requestMessages.map((m,i)=>i===0 ? { ...m, content: String(m.content||"")+documentPromptForPuter() } : m)
+            : requestMessages;
+          return puterObj.ai.chat(puterMessages, options);
         }
         const response = await fetch("/api/tutor-assistant", {
           method: "POST",
@@ -1999,6 +2069,8 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             subject: langValue(getCurrentSubject(), "subjectLabelEl", "subjectLabelEn", ""),
             topic: langValue(getCurrentGap(), "labelEl", "labelEn", ""),
             character: currentCharacterName(),
+            documentText: attachedDocument?.text || "",
+            documentName: attachedDocument?.name || "",
           }),
         });
         const data = await response.json().catch(() => ({}));
@@ -2101,6 +2173,8 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       });
     });
     refs.newChat.addEventListener("click", () => resetConversation());
+    refs.pdfFile?.addEventListener("change", () => handlePdfAttachment(refs.pdfFile.files?.[0]));
+    refs.pdfRemove?.addEventListener("click", clearPdfAttachment);
     refs.mic?.addEventListener("click", () => { primeAudioOutput(); toggleRecording(); });
     refs.autoSpeak?.addEventListener("change", () => {
       if (refs.autoSpeak.checked) primeAudioOutput();
@@ -2208,6 +2282,12 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
               <div class="tutor-empty" id="tutorEmptyState"><strong>${escapeHtml(tr("emptyTitle"))}</strong><br>${escapeHtml(parentMode ? tr("emptyParent") : tr("emptyStudent"))}</div>
             </div>
             <form class="tutor-composer" id="tutorForm">
+              <div class="tutor-doc-upload">
+                <label class="tutor-doc-upload__button" for="tutorPdfFile">${escapeHtml(tr("pdfChoose"))}</label>
+                <input id="tutorPdfFile" type="file" accept="application/pdf,.pdf" />
+                <span class="tutor-doc-upload__status" id="tutorPdfStatus" aria-live="polite"></span>
+                <button type="button" class="tutor-doc-upload__remove" id="tutorPdfRemove" hidden>${escapeHtml(tr("pdfRemove"))}</button>
+              </div>
               <textarea id="tutorInput" rows="4" disabled></textarea>
               <div class="tutor-voice-hint">${escapeHtml(tr("voiceHint"))}</div>
               <div class="tutor-composer__bottom">
@@ -2261,6 +2341,9 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       empty: byId("tutorEmptyState"),
       form: byId("tutorForm"),
       input: byId("tutorInput"),
+      pdfFile: byId("tutorPdfFile"),
+      pdfStatus: byId("tutorPdfStatus"),
+      pdfRemove: byId("tutorPdfRemove"),
       sample: byId("tutorSample"),
       mic: byId("tutorMic"),
       voiceStatus: byId("tutorVoiceStatus"),
@@ -2373,6 +2456,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     mount.innerHTML = html();
     mount.dataset.ready = "1";
     captureRefs();
+    updatePdfAttachmentUi();
     renderModeBox();
     renderLearningModePicker();
     populateGrades();

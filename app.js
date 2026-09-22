@@ -598,6 +598,7 @@
 
   // ---------- Rendering: Path intro + tool grid (βασικά εργαλεία) ----------
   function renderPathContent() {
+    document.getElementById("needMoreTools")?.remove();
     const zone = ZONES.find((z) => z.id === state.currentZone);
     const role = ROLES.find((r) => r.id === state.currentRole);
     if (!zone || !role) return;
@@ -663,7 +664,27 @@
         .map(({ entry }) => entry);
     }
 
-    renderToolGrid(toolsToShow, els.toolGrid);
+    if (state.currentNeed && toolsToShow.length > 3) {
+      const primaryTools = toolsToShow.slice(0, 3);
+      const additionalTools = toolsToShow.slice(3);
+      renderToolGrid(primaryTools, els.toolGrid);
+
+      const details = document.createElement("details");
+      details.id = "needMoreTools";
+      details.className = "need-more-tools";
+      const summary = document.createElement("summary");
+      summary.className = "need-more-tools__summary";
+      summary.textContent = state.lang === "el"
+        ? `Άλλες κατάλληλες επιλογές (${additionalTools.length})`
+        : `Other suitable options (${additionalTools.length})`;
+      const grid = document.createElement("div");
+      grid.className = "tool-grid need-more-tools__grid";
+      details.append(summary, grid);
+      els.toolGrid.insertAdjacentElement("afterend", details);
+      renderToolGrid(additionalTools, grid);
+    } else {
+      renderToolGrid(toolsToShow, els.toolGrid);
+    }
   }
 
   // ---------- Rendering: Advanced tools (εξειδικευμένα) ----------

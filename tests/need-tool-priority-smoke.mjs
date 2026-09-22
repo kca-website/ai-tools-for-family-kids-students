@@ -45,6 +45,7 @@ try {
     const hrefs = await choose(page, 'Μαθηματικά', 'Να ελέγξω λύση');
     assert.deepEqual(hrefs, ['/tools/ai-help.html', '/tools/gemini-education.html'],
       'Primary Math/check should fall back to age-appropriate learning-first tools after 13+ math solvers are filtered out');
+    assert.equal(await page.locator('#needMoreTools').count(), 0, 'Two Primary recommendations should not create an additional-options disclosure');
     await page.close();
   }
 
@@ -52,13 +53,23 @@ try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     await openPath(page, '/high/student/tools');
     const hrefs = await choose(page, 'Μαθηματικά', 'Να ελέγξω λύση');
-    assert.deepEqual(hrefs.slice(0, 5), [
+    assert.deepEqual(hrefs, [
       '/tools/photomath.html',
       '/tools/symbolab.html',
       '/tools/wolfram-alpha.html',
+    ], 'High School Math/check must show the first three NEED_TOOL_MAP priorities');
+    assert.equal(await page.locator('#needMoreTools').count(), 1, 'High School Math/check should disclose additional suitable tools');
+    assert.equal(await page.locator('#needMoreTools').getAttribute('open'), null, 'Additional tools must start collapsed');
+    assert.match(await page.locator('#needMoreTools summary').innerText(), /Άλλες κατάλληλες επιλογές \(4\)/);
+    const extra = await page.locator('#needMoreTools .tool-card__link').evaluateAll((links) =>
+      links.map((a) => new URL(a.href).pathname)
+    );
+    assert.deepEqual(extra, [
       '/tools/geogebra.html',
       '/tools/digital-tutoring.html',
-    ], 'High School Math/check must follow NEED_TOOL_MAP priority');
+      '/tools/ai-help.html',
+      '/tools/gemini-education.html',
+    ], 'Additional Math/check tools must retain NEED_TOOL_MAP priority');
     await page.close();
   }
 
@@ -66,13 +77,18 @@ try {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     await openPath(page, '/high/student/tools');
     const hrefs = await choose(page, 'Ιστορία', 'Να κάνω έρευνα');
-    assert.deepEqual(hrefs.slice(0, 5), [
+    assert.deepEqual(hrefs, [
       '/tools/perplexity.html',
       '/tools/notebooklm.html',
       '/tools/google-arts-culture.html',
+    ], 'High School History/research must show the first three source-oriented tools');
+    const extra = await page.locator('#needMoreTools .tool-card__link').evaluateAll((links) =>
+      links.map((a) => new URL(a.href).pathname)
+    );
+    assert.deepEqual(extra, [
       '/tools/google-lens.html',
       '/tools/zotero.html',
-    ], 'High School History/research must prioritise source-oriented tools');
+    ], 'Additional History/research tools must remain available in priority order');
     await page.close();
   }
 

@@ -17,10 +17,10 @@ module.exports = async function handler(req, res) {
   }
 
   const { system, prompt, audience, task = 'conversation', mode = 'understand', grade = '', subject = '', topic = '', character = '' } = req.body || {};
-  if (!['parent', 'high_student'].includes(audience)) {
+  if (!['parent', 'high_student', 'study_user'].includes(audience)) {
     return res.status(403).json({ error: 'audience_not_allowed', message: 'Η λειτουργία είναι διαθέσιμη σε γονείς όλων των βαθμίδων και σε μαθητές Λυκείου.' });
   }
-  const allowedModes = new Set(['understand', 'hint', 'challenge', 'review', 'character']);
+  const allowedModes = new Set(['understand', 'hint', 'challenge', 'review', 'character', 'organize']);
   if (!allowedModes.has(mode)) {
     return res.status(400).json({ error: 'invalid_mode', message: 'Μη έγκυρη λειτουργία AI Βοήθειας.' });
   }
@@ -32,6 +32,7 @@ module.exports = async function handler(req, res) {
     flashcards: 1800,
     quiz: 3000,
     slides: 2500,
+    study_plan: 1400,
   };
   if (!Object.prototype.hasOwnProperty.call(taskLimits, task)) {
     return res.status(400).json({ error: 'invalid_task', message: 'Μη έγκυρος τύπος εκπαιδευτικού υλικού.' });
@@ -50,7 +51,9 @@ module.exports = async function handler(req, res) {
     ? `- CHARACTER MODE OVERRIDE: speak as the supplied mapped character/role directly in the dialogue. The parent route means adult supervision only; do NOT switch to parent-coaching language and do NOT say “ask/tell the child”. Character: ${character || 'mapped educational role'}.`
     : (audience === 'parent'
       ? '- Parent mode speaks to the parent and gives one coaching step/question at a time.'
-      : '- Student mode speaks directly to the high-school learner.');
+      : (audience === 'study_user'
+        ? '- Study organizer mode speaks directly to the learner. Keep steps short, concrete and non-judgmental.'
+        : '- Student mode speaks directly to the high-school learner.'));
 
   const fixedGuard = `You are a learning-first tutor for the Greek school context.
 - The supplied client curriculum context is authoritative for THIS session. Do not substitute a different syllabus from model memory.
@@ -59,6 +62,7 @@ module.exports = async function handler(req, res) {
 - Stay inside the selected grade + subject + topic unless the user explicitly asks to compare with something else.
 - In conversation mode, never provide finished homework or an immediately complete solution. Start from the learner's attempt and give one small hint or question at a time.
 - For flashcards, quizzes and presentation scaffolds, create the complete requested structured learning material, but do not turn it into a ready-to-submit school assignment.
+- For study_plan tasks, organize the learner's own task into small actionable steps, estimate only rough effort, and never solve the school task itself.
 ${roleRule}
 - Do not request, repeat or retain personal or sensitive information.
 - Do not diagnose, label or officially grade a learner.

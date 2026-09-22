@@ -32,9 +32,13 @@ for (const row of curriculumToolArrays) {
 
 
 const accessibility = read('accessibility-data.js');
+const septemberAudit = read('september-2026-tool-audit.js');
 
 const toolMinAge = new Map();
 for (const match of data.matchAll(/"([^"]+)":\s*\{[\s\S]{0,700}?minAge:\s*(\d+)/g)) {
+  toolMinAge.set(match[1], Number(match[2]));
+}
+for (const match of septemberAudit.matchAll(/patch\("([^"]+)",\s*\{[^}]*?minAge:\s*(\d+)/g)) {
   toolMinAge.set(match[1], Number(match[2]));
 }
 

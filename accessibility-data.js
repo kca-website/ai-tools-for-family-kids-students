@@ -19,6 +19,43 @@
  */
 
 const ACCESSIBILITY_INFO = {
+
+  "deepl": {
+    status: "partial",
+    noteEl: "Η DeepL δημοσιεύει επίσημη σελίδα προσβασιμότητας και αναφέρει ότι το WCAG 2.1 AA αποτελεί μέρος της διαδικασίας ανάπτυξης. Δεν εντοπίστηκε δημόσιο VPAT/ACR για πλήρη συμμόρφωση, οπότε καταγράφεται ως μερικό/υποσχόμενο.",
+    noteEn: "DeepL publishes an official accessibility page and says WCAG 2.1 AA is integrated into product development. No public VPAT/ACR confirming full conformance was located, so this is marked partial.",
+    sourceUrl: "https://www.deepl.com/accessibility",
+  },
+  "anki": {
+    status: "partial",
+    noteEl: "Δεν εντοπίστηκε σύγχρονο επίσημο VPAT/ACR. Δημόσιες συζητήσεις της κοινότητας/προγραμματιστών έχουν καταγράψει προβλήματα screen reader στο desktop/mobile, ενώ το AnkiWeb μπορεί να λειτουργεί καλύτερα για βασικές κάρτες. Χρειάζεται δοκιμή με την υποστηρικτική τεχνολογία του χρήστη.",
+    noteEn: "No current official VPAT/ACR was located. Public developer/community discussions have documented screen-reader issues on desktop/mobile, while AnkiWeb may work better for basic cards. Test with the user's assistive technology.",
+    sourceUrl: "https://forums.ankiweb.net/t/accessibility-questions-using-anki-if-you-need-to-use-assistive-technology-like-screen-readers/17856",
+  },
+  "zotero": {
+    status: "good",
+    noteEl: "Επίσημη τεκμηρίωση: το Zotero Desktop δηλώνει πλήρη συμμόρφωση με WCAG 2.2 AA, έχει ελεγχθεί με VoiceOver/NVDA/JAWS και διαθέτει VPAT/ACR. Το web library/ZoteroBib αξιολογούνται χωριστά.",
+    noteEn: "Official documentation: Zotero Desktop states full WCAG 2.2 AA conformance, is tested with VoiceOver/NVDA/JAWS and provides a VPAT/ACR. The web library/ZoteroBib are assessed separately.",
+    sourceUrl: "https://www.zotero.org/accessibility",
+  },
+  "google-lens": {
+    status: "partial",
+    noteEl: "Δεν εντοπίστηκε ξεχωριστό VPAT/ACR ειδικά για Google Lens. Η λειτουργία ενσωματώνεται σε Google/Chrome/Android με το γενικό οικοσύστημα προσβασιμότητας, αλλά επειδή είναι οπτικό εργαλείο χρειάζεται πρακτικός έλεγχος για screen-reader/low-vision χρήση.",
+    noteEn: "No Lens-specific VPAT/ACR was located. It runs inside Google's broader accessibility ecosystem, but because it is a visual tool, practical screen-reader/low-vision testing is still needed.",
+    sourceUrl: "https://support.google.com/websearch/answer/1325808",
+  },
+  "gamma": {
+    status: "partial",
+    noteEl: "Επίσημη δήλωση 2026: στόχος WCAG 2.2 AA, keyboard/focus βάση μέσω Chakra UI, contrast controls και reflow. Η Gamma δηλώνει ρητά ότι δεν έχει ακόμη VPAT/ACR ούτε ολοκληρωμένο formal screen-reader audit· alt text και tagged PDF εξαγωγές παραμένουν σε εξέλιξη.",
+    noteEn: "Official 2026 statement: WCAG 2.2 AA target, keyboard/focus foundation via Chakra UI, contrast controls and reflow. Gamma explicitly says it does not yet have a VPAT/ACR or completed formal screen-reader audit; alt text and tagged-PDF export are still in progress.",
+    sourceUrl: "https://gamma.app/accessibility",
+  },
+  "notion": {
+    status: "partial",
+    noteEl: "Το Notion διαθέτει Accessibility Conformance Report μέσω του Trust Center και έχει βελτιώσει keyboard/screen-reader support. Ανεξάρτητες αξιολογήσεις έχουν καταγράψει ακόμη κενά σε alt text, contrast και tabbing, γι' αυτό δεν χαρακτηρίζεται πλήρως προσβάσιμο.",
+    noteEn: "Notion provides an Accessibility Conformance Report through its Trust Center and has improved keyboard/screen-reader support. Independent evaluations still report gaps in alt text, contrast and tabbing, so it is not marked fully accessible.",
+    sourceUrl: "https://trust.notion.com/controls",
+  },
   "ai-help": {
     status: "partial",
     noteEl: "Εσωτερικό εργαλείο του aitools4kids.gr. Οι αυτοματοποιημένοι έλεγχοι axe-core/Playwright στις βασικές ροές δεν εντόπισαν παραβιάσεις στις καταστάσεις που ελέγχθηκαν, αλλά δεν υπάρχει ανεξάρτητη πλήρης χειροκίνητη αξιολόγηση ή VPAT/ACR.",

@@ -11,8 +11,9 @@
 a{color:var(--blue)}h1{line-height:1.15}.lead{color:var(--muted)}.tool{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:22px}
 label{font-weight:700;display:block;margin:12px 0 6px}textarea,select{width:100%;font:inherit;border:1px solid #94a3b8;border-radius:10px;padding:12px;background:white}textarea{min-height:150px;resize:vertical}
 button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;background:var(--blue);color:white;cursor:pointer;margin-top:14px}button[disabled]{opacity:.55;cursor:wait}
-.help{font-size:.92rem;color:var(--muted)}.result{white-space:pre-wrap;background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px;min-height:60px}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#e0ecff;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:700}.privacy{border-left:4px solid var(--ok);padding:10px 14px;background:#f0fdf4;margin-top:20px}
+.help{font-size:.92rem;color:var(--muted)}.result{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px;min-height:60px}.result p{margin:.45em 0}.result ol,.result ul{margin:.55em 0 .55em 1.35em}.result li{margin:.35em 0}.result h4{margin:1em 0 .35em}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#e0ecff;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:700}.privacy{border-left:4px solid var(--ok);padding:10px 14px;background:#f0fdf4;margin-top:20px}
 </style>
+<link rel="stylesheet" href="/guided-task-assistant.css">
 </head>
 <body>
 <a href="/">← Αρχική</a>
@@ -39,6 +40,7 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 
 <div class="privacy"><strong>Πώς διαφέρει από ένα γενικό chatbot:</strong> ζητά μόνο οργάνωση, βήματα και προτεραιότητες. Δεν ζητά έτοιμη λύση, έκθεση ή απάντηση άσκησης.</div>
 
+<script src="/guided-task-assistant.js"></script>
 <script>
 (function(){
  const btn=document.getElementById('go'), input=document.getElementById('input'), mode=document.getElementById('mode'), result=document.getElementById('result'), status=document.getElementById('status');
@@ -60,7 +62,7 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
      })});
      const d=await r.json().catch(()=>({}));
      if(!r.ok) throw new Error(d.message||"Η υπηρεσία δεν μπόρεσε να απαντήσει.");
-     result.textContent=d.text||"Δεν επιστράφηκε αποτέλεσμα.";
+     result.innerHTML=window.AITOOLSKIDS_GUIDED.renderMarkdown(d.text||"Δεν επιστράφηκε αποτέλεσμα.");
      status.textContent="Έτοιμο.";
      result.focus();
    }catch(e){result.textContent=e.message||"Παρουσιάστηκε σφάλμα.";status.textContent="";}

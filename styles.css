@@ -2574,8 +2574,8 @@ main {
 /* ---------- Visual Character Mode ---------- */
 .tutor-character-card {
   display: grid;
-  grid-template-columns: 132px minmax(0, 1fr);
-  gap: 16px;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 14px;
   margin: 14px 16px 0;
   padding: 14px;
   border: 1px solid #D9C8A7;
@@ -2586,10 +2586,14 @@ main {
 .tutor-character-card[hidden] { display: none !important; }
 .tutor-character-card__portrait-wrap {
   position: relative;
-  min-height: 150px;
+  width: 96px;
+  height: 96px;
+  align-self: start;
   overflow: hidden;
-  border-radius: 12px;
-  background: #ECE6D9;
+  border: 3px solid #FFF;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #F3E7CE, #E3D2B3);
+  box-shadow: 0 5px 14px rgba(75, 60, 35, .18);
 }
 .tutor-character-card__fallback {
   position: absolute;
@@ -2603,9 +2607,8 @@ main {
   z-index: 1;
   width: 100%;
   height: 100%;
-  min-height: 150px;
-  object-fit: cover;
-  object-position: center 18%;
+  object-fit: contain;
+  object-position: center bottom;
   display: block;
 }
 .tutor-character-card__body { min-width: 0; }
@@ -2649,14 +2652,15 @@ main {
 }
 @media (max-width: 620px) {
   .tutor-character-card {
-    grid-template-columns: 86px minmax(0, 1fr);
+    grid-template-columns: 72px minmax(0, 1fr);
     gap: 11px;
     margin: 10px 10px 0;
     padding: 10px;
   }
   .tutor-character-card__portrait-wrap,
   .tutor-character-card__portrait {
-    min-height: 118px;
+    width: 72px;
+    height: 72px;
   }
   .tutor-character-card h3 { font-size: 1.1rem; }
   .tutor-character-card__intro { font-size: .78rem; }
@@ -2665,12 +2669,10 @@ main {
 .tutor-character-card__portrait-wrap--generic {
   display: grid;
   place-items: center;
-  min-height: 150px;
 }
 .tutor-character-card__generic-icon {
   font-size: 2.6rem;
 }
 @media (max-width: 620px) {
-  .tutor-character-card__portrait-wrap--generic { min-height: 118px; }
   .tutor-character-card__generic-icon { font-size: 2rem; }
 }

@@ -42,8 +42,11 @@
       aiSpecial: "Ειδικά σχολεία",
       educatorNote: "Μαθητές Λυκείου: ΓΕΛ & ΕΠΑΛ · Εκπαιδευτικοί: όλες οι βαθμίδες, ΕΠΑΛ και ειδική εκπαίδευση με πηγές 2026–27",
       educatorLink: "Άνοιγμα βοηθού",
-      needsTitle: "Τι άλλο θα ήθελες να κάνεις;",
-      needsHint: "PDF · Έρευνα · Flashcards · Παρουσίαση · Ανάγνωση · Δημιουργία",
+      needsTitle: "Τι θέλεις να κάνεις με AI;",
+      needsHint: "PDF · Έρευνα · Flashcards · Παρουσίαση · Ανάγνωση · Δημιουργία · Οργάνωση",
+      needsTasksTitle: "Εργασίες & μελέτη",
+      needsLearningTitle: "AI για πραγματική μάθηση",
+      needsLearningIntro: "Διάλεξε τρόπο βοήθειας ανάλογα με αυτό που πραγματικά χρειάζεσαι.",
       needs: [
         ["📄","Να μελετήσω PDF ή σημειώσεις","Εργαλεία και τρόποι χρήσης για μελέτη πάνω στο δικό σου υλικό","/meleti-pdf-me-ai.html"],
         ["🔎","Να κάνω έρευνα με πηγές","Επιλογές για έρευνα, πηγές και έλεγχο πληροφοριών","/erevna-me-piges-ai.html"],
@@ -52,6 +55,11 @@
         ["📚","Να εξασκηθώ στην ανάγνωση ή στα Αγγλικά","Εργαλεία για ανάγνωση, προφορά και γλώσσες","/anagnosi-agglika-ai.html"],
         ["✨","Να δημιουργήσω κάτι με AI","Ιδέες και εργαλεία για δημιουργική χρήση χωρίς έτοιμη εργασία","/dimiourgiko-ai-gia-mathites.html"],
         ["🧩","Να σπάσω το διάβασμα σε βήματα","Μετέτρεψε μια μεγάλη εργασία ή μπερδεμένες σημειώσεις σε μικρά επόμενα βήματα","/organosi-meletis-ai.html"]
+      ],
+      learningModes: [
+        ["🧠","AI Επανάληψη","Ξαναφέρνει όσα σε δυσκόλεψαν και σε ελέγχει με νέα ερώτηση.","/high/student/tutor?mode=review"],
+        ["🎭","Μίλα με έναν χαρακτήρα AI","Βιωματική, τεκμηριωμένη συζήτηση και μετά έλεγχος του τι έμαθες.","/primary/guardian/tutor?mode=character&grade=e&subject=istoria-e-dimotikou&topicText=%CE%92%CF%85%CE%B6%CE%B1%CE%BD%CF%84%CE%B9%CE%BD%CE%AE%20%CF%80%CE%B5%CF%81%CE%AF%CE%BF%CE%B4%CE%BF%CF%82%3A%20%CF%83%CF%85%CE%BD%CE%AD%CF%87%CE%B5%CE%B9%CE%B1%20%CE%BA%CE%B1%CE%B9%20%CE%B1%CE%BB%CE%BB%CE%B1%CE%B3%CE%AE"],
+        ["🎯","AI Πρόκληση κατανόησης","Μικρές υποδείξεις, δική σου απάντηση και τελικός έλεγχος κατανόησης.","/high/student/tutor?mode=challenge"]
       ],
       engTitle: "Έννοιες στην Ελληνική Νοηματική",
       engDesc: `${signLanguageConceptCount} σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ`,
@@ -88,8 +96,11 @@
       aiSpecial: "Special schools",
       educatorNote: "High-school students: GEL & EPAL · Educators: all levels, EPAL and special education with 2026–27 sources",
       educatorLink: "Open assistant",
-      needsTitle: "What else would you like to do?",
-      needsHint: "PDF · Research · Flashcards · Presentation · Reading · Create",
+      needsTitle: "What do you want to do with AI?",
+      needsHint: "PDF · Research · Flashcards · Presentation · Reading · Create · Organise",
+      needsTasksTitle: "Tasks & study",
+      needsLearningTitle: "AI for real learning",
+      needsLearningIntro: "Choose the kind of help that matches what you actually need.",
       needs: [
         ["📄","Study a PDF or notes","Tools and methods for studying your own material","/en/study-pdf-with-ai.html"],
         ["🔎","Research with sources","Options for research, sources and checking information","/en/research-with-sources-ai.html"],
@@ -98,6 +109,11 @@
         ["📚","Practice reading or English","Tools for reading, pronunciation and languages","/en/reading-english-ai.html"],
         ["✨","Create something with AI","Creative tools and ideas without ready-made schoolwork","/en/creative-ai-for-students.html"],
         ["🧩","Break study into steps","Turn a large task or messy notes into small next steps","/en/study-steps-ai.html"]
+      ],
+      learningModes: [
+        ["🧠","AI Review","Bring back difficult points and check them with a new question.","/high/student/tutor?mode=review"],
+        ["🎭","Talk with an AI character","Learn through a grounded role-based dialogue, then check what you understood.","/primary/guardian/tutor?mode=character&grade=e&subject=istoria-e-dimotikou&topicText=%CE%92%CF%85%CE%B6%CE%B1%CE%BD%CF%84%CE%B9%CE%BD%CE%AE%20%CF%80%CE%B5%CF%81%CE%AF%CE%BF%CE%B4%CE%BF%CF%82%3A%20%CF%83%CF%85%CE%BD%CE%AD%CF%87%CE%B5%CE%B9%CE%B1%20%CE%BA%CE%B1%CE%B9%20%CE%B1%CE%BB%CE%BB%CE%B1%CE%B3%CE%AE"],
+        ["🎯","AI Understanding Challenge","Get small hints, answer yourself, then prove you understood.","/high/student/tutor?mode=challenge"]
       ],
       engTitle: "Greek Sign Language concepts",
       engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,
@@ -178,6 +194,7 @@
     document.querySelector("#zoneSelectView .hero__learning-loop")?.classList.add("home-v8-legacy");
     document.querySelector("#zoneSelectView .hero__quiz-cta-wrap")?.classList.add("home-v8-legacy");
     document.querySelector("#zoneSelectView .hero__ai-help")?.classList.add("home-v8-legacy");
+    document.getElementById("homeAiLearningModes")?.classList.add("home-v8-legacy");
     document.querySelector("#zoneSelectView > .section-heading")?.classList.add("home-v8-legacy");
     document.querySelector("#zoneSelectView > .section-subheading")?.classList.add("home-v8-legacy");
     suppressLegacyInjectedBlocks();
@@ -281,13 +298,27 @@
         <span class="home-v8-needs__arrow" aria-hidden="true">↓</span>
       </button>
       <div class="home-v8-needs__body" id="homeV8NeedsBody" hidden>
-        <div class="home-v8-needs__grid">
-          ${c.needs.map(([icon,title,desc,href]) => `
-            <a class="home-v8-needs-card" href="${href}">
-              <span class="home-v8-needs-card__icon" aria-hidden="true">${icon}</span>
-              <span><strong>${title}</strong><small>${desc}</small></span>
-            </a>`).join("")}
-        </div>
+        <section class="home-v8-needs-group" aria-labelledby="homeV8TasksTitle">
+          <h3 id="homeV8TasksTitle" class="home-v8-needs-group__title">${c.needsTasksTitle}</h3>
+          <div class="home-v8-needs__grid">
+            ${c.needs.map(([icon,title,desc,href]) => `
+              <a class="home-v8-needs-card" href="${href}">
+                <span class="home-v8-needs-card__icon" aria-hidden="true">${icon}</span>
+                <span><strong>${title}</strong><small>${desc}</small></span>
+              </a>`).join("")}
+          </div>
+        </section>
+        <section class="home-v8-needs-group home-v8-needs-group--learning" aria-labelledby="homeV8LearningTitle">
+          <h3 id="homeV8LearningTitle" class="home-v8-needs-group__title">${c.needsLearningTitle}</h3>
+          <p class="home-v8-needs-group__intro">${c.needsLearningIntro}</p>
+          <div class="home-v8-learning-grid">
+            ${c.learningModes.map(([icon,title,desc,href]) => `
+              <a class="home-v8-learning-card" href="${href}">
+                <span class="home-v8-learning-card__icon" aria-hidden="true">${icon}</span>
+                <span><strong>${title}</strong><small>${desc}</small></span>
+              </a>`).join("")}
+          </div>
+        </section>
       </div>`;
   }
 

@@ -164,41 +164,135 @@
     }
   };
 
+  const CONFIG_EN={
+    pdf:{
+      title:"Work with your notes",
+      intro:"Paste a short excerpt or your own notes. The helper will stay within the material you provide.",
+      label:"Text or notes",
+      placeholder:"Paste a short excerpt from your notes or write what they cover in your own words.",
+      modes:[["understand","Explain it in simpler language"],["questions","Create understanding questions"],["structure","Organise it into key ideas"],["review","Make a short revision plan"]],
+      prompts:{
+        understand:"Explain the material in simple language without adding facts that are not in the text. End with one understanding-check question.",
+        questions:"Create 5 short understanding questions based only on the material. Do not reveal the answers immediately.",
+        structure:"Organise the material into 3-6 key ideas and subpoints. Do not add new factual content.",
+        review:"Create a short revision plan in priority order based only on the material."
+      },
+      system:"You are a study helper working only from material supplied by the user. Do not introduce unsupported facts. If something is not in the material, say so.",
+      subject:"PDF/notes study"
+    },
+    research:{
+      title:"Organise your research",
+      intro:"Enter a topic, research question or claim. The helper plans the research; it does not pretend to have searched the web.",
+      label:"Topic or claim",
+      placeholder:"e.g. How did the Industrial Revolution change cities? or: 'AI always reduces creativity.'",
+      modes:[["question","Make my research question more specific"],["keywords","Give me search keywords"],["sources","Tell me what kinds of sources to look for"],["claim","Give me a claim-checking checklist"]],
+      prompts:{
+        question:"Turn the topic into 2-3 more specific research questions. Do not answer them.",
+        keywords:"Give useful English search terms and phrases, plus alternative keywords where helpful. Do not claim to have found sources.",
+        sources:"Suggest source types to look for and reliability criteria. Do not invent specific sources or URLs.",
+        claim:"Give a step-by-step checklist for testing the claim: what evidence is needed, what alternative explanations to check, and how to cross-check sources."
+      },
+      system:"You are a research-planning helper. You do not have web browsing in this mode. Never claim to have searched or found current sources. Organise questions, keywords, source types and verification criteria.",
+      subject:"Research with sources"
+    },
+    flashcards:{
+      title:"Turn your own material into revision",
+      intro:"Add terms, definitions or a short excerpt. The helper turns it into practice, not a ready-made school assignment.",
+      label:"Revision material",
+      placeholder:"e.g. Mitosis: ... / Meiosis: ... or paste a short excerpt from your notes.",
+      modes:[["cards","Make flashcards"],["quiz","Make a short quiz"],["recall","Create active-recall questions"],["mistakes","Spot ideas that are easy to mix up"]],
+      prompts:{
+        cards:"Create 8 short question → answer flashcards using only the material. Keep one key idea per card.",
+        quiz:"Create 5 multiple-choice questions with 3 options each. Do not reveal the correct answers until the end.",
+        recall:"Create 6 active-recall questions without answers, from easier to harder.",
+        mistakes:"Identify 3-5 parts of the material that could easily be confused and give a short way to distinguish them, without adding unsupported content."
+      },
+      system:"You are a revision helper. Use only the material supplied by the user. Do not invent syllabus content, definitions or facts.",
+      subject:"Flashcards and revision"
+    },
+    presentation:{
+      title:"Plan your presentation",
+      intro:"Enter the topic and what you already know. The helper builds structure and visual ideas, not a finished submission.",
+      label:"Topic and your notes",
+      placeholder:"e.g. Presentation about climate change. I already have: causes, effects, two examples...",
+      modes:[["outline","Create a slide outline"],["visual","Suggest visuals"],["speaker","Create short speaker notes"],["access","Check accessibility"]],
+      prompts:{
+        outline:"Create a 6-8 slide outline with a title and one short instruction for what the student should add to each slide. Do not write ready-made paragraphs.",
+        visual:"For each main point, suggest a suitable visual type (chart, image, timeline, diagram) and what it should show.",
+        speaker:"Turn the points into short speaker-note prompts, not a full script.",
+        access:"Give an accessibility checklist covering contrast, font size, alt text, captions, information overload and reading order."
+      },
+      system:"You are a presentation-planning helper. The learner keeps ownership of the idea and content. Give structure, visual organisation and accessibility checks, not a ready-to-submit presentation.",
+      subject:"Presentation/poster"
+    },
+    language:{
+      title:"Do focused language practice",
+      intro:"Enter a sentence, short text or words you find difficult. The helper creates practice instead of giving you something to copy.",
+      label:"Words or short text",
+      placeholder:"e.g. I went to school yesterday but I don't understand when to use did / was / went.",
+      modes:[["errors","Make me spot the mistakes"],["vocab","Create vocabulary practice"],["simple","Explain the rule simply"],["read","Break the text into reading chunks"]],
+      prompts:{
+        errors:"Based on the text, create 4 similar sentences with small mistakes for the learner to find. Do not give the corrections before they try.",
+        vocab:"Choose up to 8 useful words from the text and create a matching or gap-fill exercise.",
+        simple:"Explain the relevant language rule simply and give 2 short examples. Then ask one question.",
+        read:"Break the text into short meaning units for easier reading and mark natural pause points. Do not claim to have heard the learner's pronunciation."
+      },
+      system:"You are a language-practice helper. Give short exercises and explanations. Do not claim to have heard audio when none was provided, and do not make formal pronunciation assessments.",
+      subject:"Reading and English"
+    },
+    creative:{
+      title:"Turn an idea into your own project",
+      intro:"Describe what you want to create and the message you want to communicate. The helper helps you plan, not submit a finished project.",
+      label:"Your idea",
+      placeholder:"e.g. I want to make a recycling poster with three practical things a student can do.",
+      modes:[["concept","Give me 3 different directions"],["storyboard","Create a storyboard / structure"],["visual","Suggest a visual style"],["prompt","Help me write a better prompt"]],
+      prompts:{
+        concept:"Give 3 different creative directions based on the user's idea. For each one, give only the concept, goal and what the learner would need to create themselves.",
+        storyboard:"Turn the idea into a 4-6 step/frame storyboard or simple project structure. Do not write the final text or image.",
+        visual:"Suggest colour logic, composition, icon/image types and information hierarchy with an emphasis on clarity and accessibility.",
+        prompt:"Ask 3 questions to clarify purpose, audience and style. Then provide a fill-in-the-blanks prompt template the user completes themselves."
+      },
+      system:"You are a creative-planning helper. The idea, choices and final work belong to the user. Give directions, structure and questions, not a ready-to-submit school product.",
+      subject:"Creative project"
+    }
+  };
+
   function init(){
     const root=document.querySelector("[data-guided-assistant]");
     if(!root) return;
     const kind=root.getAttribute("data-guided-assistant");
-    const cfg=CONFIG[kind];
+    const isEn=(document.documentElement.lang||"").toLowerCase().startsWith("en");
+    const cfg=(isEn ? CONFIG_EN : CONFIG)[kind];
     if(!cfg) return;
     root.innerHTML =
       '<div class="guided__head"><span class="guided__spark">✦</span><div><h2>'+escapeHtml(cfg.title)+'</h2><p>'+escapeHtml(cfg.intro)+'</p></div></div>'+
-      '<label class="guided__label" for="guidedMode">Τι θέλεις να κάνουμε;</label>'+
+      '<label class="guided__label" for="guidedMode">'+(isEn?"What would you like to do?":"Τι θέλεις να κάνουμε;")+'</label>'+
       '<select id="guidedMode" class="guided__select">'+cfg.modes.map(x=>'<option value="'+escapeHtml(x[0])+'">'+escapeHtml(x[1])+'</option>').join("")+'</select>'+
       '<label class="guided__label" for="guidedInput">'+escapeHtml(cfg.label)+'</label>'+
       '<textarea id="guidedInput" class="guided__input" placeholder="'+escapeHtml(cfg.placeholder)+'"></textarea>'+
-      '<p class="guided__privacy">Μην γράφεις όνομα, σχολείο, τηλέφωνο, στοιχεία υγείας ή άλλα προσωπικά δεδομένα.</p>'+
-      '<button id="guidedGo" class="guided__button" type="button">Βοήθησέ με</button>'+
+      '<p class="guided__privacy">'+(isEn?"Do not enter your name, school, phone number, health information or other personal data.":"Μην γράφεις όνομα, σχολείο, τηλέφωνο, στοιχεία υγείας ή άλλα προσωπικά δεδομένα.")+'</p>'+
+      '<button id="guidedGo" class="guided__button" type="button">'+(isEn?"Help me":"Βοήθησέ με")+'</button>'+
       '<div id="guidedStatus" class="guided__status" role="status" aria-live="polite"></div>'+
-      '<div id="guidedResult" class="guided__result" tabindex="0" aria-live="polite"><p class="guided__placeholder">Το αποτέλεσμα θα εμφανιστεί εδώ.</p></div>';
+      '<div id="guidedResult" class="guided__result" tabindex="0" aria-live="polite"><p class="guided__placeholder">'+(isEn?"The result will appear here.":"Το αποτέλεσμα θα εμφανιστεί εδώ.")+'</p></div>';
 
     const btn=root.querySelector("#guidedGo"), input=root.querySelector("#guidedInput"), mode=root.querySelector("#guidedMode"), result=root.querySelector("#guidedResult"), status=root.querySelector("#guidedStatus");
     btn.addEventListener("click",async()=>{
       const value=input.value.trim();
-      if(!value){ status.textContent="Γράψε πρώτα λίγο υλικό ή το θέμα σου."; input.focus(); return; }
-      btn.disabled=true; status.textContent="Ετοιμάζω την απάντηση…"; result.innerHTML='<p class="guided__placeholder">Δουλεύω πάνω σε αυτό που έγραψες…</p>';
+      if(!value){ status.textContent=isEn?"Enter a little material or your topic first.":"Γράψε πρώτα λίγο υλικό ή το θέμα σου."; input.focus(); return; }
+      btn.disabled=true; status.textContent=isEn?"Preparing the response…":"Ετοιμάζω την απάντηση…"; result.innerHTML='<p class="guided__placeholder">'+(isEn?"Working with what you entered…":"Δουλεύω πάνω σε αυτό που έγραψες…")+'</p>';
       try{
         const r=await fetch("/api/tutor-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
           system:cfg.system,
-          prompt:cfg.prompts[mode.value]+"\n\nΥλικό χρήστη:\n"+value,
+          prompt:cfg.prompts[mode.value]+"\n\n"+(isEn?"User material:\n":"Υλικό χρήστη:\n")+value,
           audience:"study_user",mode:"organize",task:"guided_task",subject:cfg.subject
         })});
         const data=await r.json().catch(()=>({}));
-        if(!r.ok) throw new Error(data.message||"Η υπηρεσία δεν μπόρεσε να απαντήσει.");
+        if(!r.ok) throw new Error(data.message||(isEn?"The service could not respond.":"Η υπηρεσία δεν μπόρεσε να απαντήσει."));
         result.innerHTML=renderMarkdown(data.text);
-        status.textContent="Έτοιμο.";
+        status.textContent=isEn?"Ready.":"Έτοιμο.";
         result.focus();
       }catch(err){
-        result.innerHTML='<p>'+escapeHtml(err.message||"Παρουσιάστηκε σφάλμα.")+'</p>';
+        result.innerHTML='<p>'+escapeHtml(err.message||(isEn?"An error occurred.":"Παρουσιάστηκε σφάλμα."))+'</p>';
         status.textContent="";
       }finally{ btn.disabled=false; }
     });

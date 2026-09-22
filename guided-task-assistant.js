@@ -60,7 +60,7 @@
   const CONFIG={
     pdf:{
       title:"Δούλεψε πάνω στις σημειώσεις σου",
-      intro:"Επικόλλησε ένα μικρό απόσπασμα ή τις δικές σου σημειώσεις. Ο βοηθός θα δουλέψει μόνο πάνω σε αυτό που του δίνεις.",
+      intro:"Ανέβασε PDF ή επικόλλησε ένα μικρό απόσπασμα/τις δικές σου σημειώσεις. Το PDF διαβάζεται τοπικά στον browser και ο βοηθός δουλεύει πάνω στο εξαγόμενο κείμενο.",
       label:"Κείμενο ή σημειώσεις",
       placeholder:"Επικόλλησε εδώ ένα απόσπασμα από τις σημειώσεις σου ή γράψε με δικά σου λόγια τι περιέχουν.",
       modes:[
@@ -183,7 +183,7 @@
   const CONFIG_EN={
     pdf:{
       title:"Work with your notes",
-      intro:"Paste a short excerpt or your own notes. The helper will stay within the material you provide.",
+      intro:"Upload a PDF or paste a short excerpt/your own notes. The PDF is read locally in your browser and the helper works from the extracted text.",
       label:"Text or notes",
       placeholder:"Paste a short excerpt from your notes or write what they cover in your own words.",
       modes:[["understand","Explain it in simpler language"],["questions","Create understanding questions"],["structure","Organise it into key ideas"],["review","Make a short revision plan"]],

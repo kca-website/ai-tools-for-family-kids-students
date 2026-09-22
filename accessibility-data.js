@@ -19,6 +19,18 @@
  */
 
 const ACCESSIBILITY_INFO = {
+  "digital-tutoring": {
+    status: "good",
+    noteEl: "Επίσημη υπηρεσία ΥΠΑΙΘΑ με ειδική μέριμνα προσβασιμότητας: τα μαθήματα Πανελλαδικών μεταδίδονται με παράλληλη διερμηνεία στην Ελληνική Νοηματική Γλώσσα και αναρτώνται υποτιτλισμένα. Η κατάταξη αφορά το εκπαιδευτικό περιεχόμενο/υπηρεσία, όχι ανεξάρτητο πλήρες WCAG audit κάθε οθόνης.",
+    noteEn: "Official Greek Ministry service with explicit accessibility support: Panhellenic-exam lessons include Greek Sign Language interpretation and are later published with captions. This rating reflects the learning service/content, not a full independent WCAG audit of every interface screen.",
+    sourceUrl: "https://www.minedu.gov.gr/psifiako-frontistirio",
+  },
+  "scispace": {
+    status: "none",
+    noteEl: "Δεν εντοπίστηκε επίσημη δήλωση προσβασιμότητας ή VPAT/ACR για την κύρια πλατφόρμα SciSpace. Η ύπαρξη επιμέρους εργαλείου ελέγχου WCAG μέσα στο SciSpace δεν τεκμηριώνει την προσβασιμότητα του ίδιου του interface.",
+    noteEn: "No official accessibility statement or VPAT/ACR was located for the main SciSpace platform. A WCAG-checking agent inside SciSpace does not establish accessibility of the platform interface itself.",
+    sourceUrl: null,
+  },
 
   "deepl": {
     status: "partial",

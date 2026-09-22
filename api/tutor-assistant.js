@@ -16,7 +16,7 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { system, prompt, audience, task = 'conversation', mode = 'understand', grade = '', subject = '', topic = '', character = '' } = req.body || {};
+  const { system, prompt, audience, task = 'conversation', mode = 'understand', grade = '', subject = '', topic = '', character = '', documentText = '', documentName = '' } = req.body || {};
   if (!['parent', 'high_student', 'study_user'].includes(audience)) {
     return res.status(403).json({ error: 'audience_not_allowed', message: 'Η λειτουργία είναι διαθέσιμη σε γονείς όλων των βαθμίδων και σε μαθητές Λυκείου.' });
   }
@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
   if (!Object.prototype.hasOwnProperty.call(taskLimits, task)) {
     return res.status(400).json({ error: 'invalid_task', message: 'Μη έγκυρος τύπος εκπαιδευτικού υλικού.' });
   }
-  if (system.length > 24000 || prompt.length > 16000) {
+  if (system.length > 24000 || prompt.length > 16000 || String(documentText || '').length > 50000) {
     return res.status(413).json({ error: 'prompt_too_large', message: 'Η συνομιλία είναι πολύ μεγάλη. Ξεκίνα νέα συζήτηση.' });
   }
 
@@ -70,8 +70,12 @@ ${roleRule}
 - Do not diagnose, label or officially grade a learner.
 - If curriculum evidence is missing or uncertain, say so and recommend checking the school textbook or official source.`;
 
+  const documentContext = String(documentText || '').trim()
+    ? `\n\nUSER-SUPPLIED DOCUMENT CONTEXT${documentName ? ` (${String(documentName).slice(0,180)})` : ''}:\n- Treat this document text as the user's source material for this session.\n- Answer document questions only from what the excerpt supports. If the excerpt does not support a point, say so.\n- Do not silently replace missing details with model memory.\n\n${String(documentText).trim()}`
+    : '';
+
   const messages = [
-    { role: 'system', content: `${fixedGuard}\n\n${system}` },
+    { role: 'system', content: `${fixedGuard}\n\n${system}${documentContext}` },
     { role: 'user', content: prompt },
   ];
 

@@ -48,9 +48,15 @@ try {
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   assert.ok(await page.locator('#homeV8EducatorHint a[href="/teacher-assistant.html"]').count(), 'Teacher assistant link missing');
-  assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 6);
+  assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
+  assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);
+  assert.match(await page.locator('#homeV8NeedsToggle').innerText(), /Τι θέλεις να κάνεις με AI/);
   assert.ok(await page.locator('#homeV8Needs a[href="/meleti-pdf-me-ai.html"]').count());
   assert.ok(await page.locator('#homeV8Needs a[href="/erevna-me-piges-ai.html"]').count());
+  assert.ok(await page.locator('#homeV8Needs a[href="/organosi-meletis-ai.html"]').count(), 'Greek study-steps route missing');
+  assert.ok(await page.locator('#homeV8Needs a[href="/high/student/tutor?mode=review"]').count(), 'AI review route missing from unified block');
+  assert.ok(await page.locator('#homeV8Needs a[href="/high/student/tutor?mode=challenge"]').count(), 'AI challenge route missing from unified block');
+  assert.equal(await page.locator('#homeAiLearningModes').evaluate((el) => el.classList.contains('home-v8-legacy')), true, 'legacy standalone AI-learning block must be hidden');
   assert.ok(await page.locator('#heroGslBadge').count());
   assert.equal(await page.evaluate(() => window.AITOOLSKIDS_SITE_META?.signLanguageConceptCount), 167, 'canonical GSL concept count must be 167');
   assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'Greek homepage GSL block must show 167 concepts');
@@ -66,9 +72,12 @@ try {
   await page.waitForFunction(() => document.querySelector('#specialSchoolZoneCard')?.textContent?.includes('Special schools'));
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI tool for what you want to do and see how to use it properly. For parents, students 6 to 18, and educators.');
   assert.match(await page.locator('#specialSchoolZoneCard').innerText(), /Special schools/);
-  assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 6);
+  assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
+  assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);
+  assert.match(await page.locator('#homeV8NeedsToggle').innerText(), /What do you want to do with AI/);
   assert.ok(await page.locator('#homeV8Needs a[href="/en/study-pdf-with-ai.html"]').count());
   assert.ok(await page.locator('#homeV8Needs a[href="/en/research-with-sources-ai.html"]').count());
+  assert.ok(await page.locator('#homeV8Needs a[href="/en/study-steps-ai.html"]').count(), 'English study-steps route missing');
   assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'English homepage GSL block must show 167 concepts');
   assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'English homepage GSL block must not show stale 153 count');
 

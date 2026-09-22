@@ -118,6 +118,8 @@ try {
   assert.match(await page.locator('#hePrintArea').innerText(), /Πλάνο μελέτης/);
   assert.match(await page.locator('#hePrintArea').innerText(), /Βήμα 1/);
   assert.equal(lastAiPayload.audience, 'university_student');
+  assert.equal(lastAiPayload.documentText, '', 'request without PDF must still include a valid empty document context');
+  assert.equal(lastAiPayload.documentName, '', 'request without PDF must still include a valid empty document name');
   assert.match(lastAiPayload.system, /SOURCE LOCK/);
   assert.match(lastAiPayload.prompt, /ΒΙΟ_ΓΜΒ · Γενικά Μαθηματικά - Βιοστατιστική/);
   assert.match(lastAiPayload.prompt, /Συσχέτιση και παλινδρόμηση/);

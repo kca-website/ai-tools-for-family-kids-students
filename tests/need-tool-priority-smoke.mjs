@@ -15,14 +15,26 @@ async function openPath(page, path) {
 
 async function choose(page, subjectLabel, needLabel) {
   const subject = page.locator('#subjectFilter .subject-chip', { hasText: subjectLabel }).first();
-  await subject.click();
+  await subject.evaluate((el) => el.click());
   await page.waitForSelector('#needFilter .need-chip', { timeout: 10000 });
   const need = page.locator('#needFilter .need-chip', { hasText: needLabel }).first();
-  await need.click();
-  await page.waitForSelector('#toolGrid .tool-card', { timeout: 10000 });
-  return page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
+  await need.evaluate((el) => el.click());
+  await page.waitForTimeout(250);
+
+  const hrefs = await page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
     links.map((a) => new URL(a.href).pathname)
   );
+  if (!hrefs.length) {
+    const diagnostics = await page.evaluate(() => ({
+      path: location.pathname,
+      subject: document.querySelector('#subjectFilter .subject-chip.active')?.textContent?.trim() || '',
+      need: document.querySelector('#needFilter .need-chip.active')?.textContent?.trim() || '',
+      intro: document.getElementById('pathIntro')?.textContent?.trim() || '',
+      grid: document.getElementById('toolGrid')?.textContent?.trim() || '',
+    }));
+    throw new Error(`No tool cards after selection: ${JSON.stringify(diagnostics)}`);
+  }
+  return hrefs;
 }
 
 const browser = await chromium.launch({ headless: true });

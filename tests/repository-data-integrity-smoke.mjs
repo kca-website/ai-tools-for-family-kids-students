@@ -102,9 +102,8 @@ for (const [zone, maxAge] of Object.entries(zones)) {
     }
 
     for (const id of subjectIds) {
-      assert.match(
-        accessibility,
-        new RegExp(`["']${id}["']\\\\s*:\\\\s*\\\\{`),
+      assert.ok(
+        accessibility.includes(`"${id}": {`) || accessibility.includes(`'${id}': {`),
         `Curriculum tool ${id} is missing from accessibility-data.js`
       );
     }

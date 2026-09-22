@@ -41,10 +41,26 @@
     return html || "<p>Δεν επιστράφηκε αποτέλεσμα.</p>";
   }
 
+
+  let pdfReaderPromise=null;
+  function ensurePdfReader(){
+    if(window.AITOOLSKIDS_PDF) return Promise.resolve(window.AITOOLSKIDS_PDF);
+    if(pdfReaderPromise) return pdfReaderPromise;
+    pdfReaderPromise=new Promise((resolve,reject)=>{
+      const s=document.createElement("script");
+      s.src="/pdf-text-reader.js";
+      s.async=true;
+      s.onload=()=>window.AITOOLSKIDS_PDF?resolve(window.AITOOLSKIDS_PDF):reject(new Error("PDF reader unavailable"));
+      s.onerror=()=>reject(new Error("PDF reader unavailable"));
+      document.head.appendChild(s);
+    });
+    return pdfReaderPromise;
+  }
+
   const CONFIG={
     pdf:{
       title:"Δούλεψε πάνω στις σημειώσεις σου",
-      intro:"Επικόλλησε ένα μικρό απόσπασμα ή τις δικές σου σημειώσεις. Ο βοηθός θα δουλέψει μόνο πάνω σε αυτό που του δίνεις.",
+      intro:"Ανέβασε PDF ή επικόλλησε ένα μικρό απόσπασμα/τις δικές σου σημειώσεις. Το PDF διαβάζεται τοπικά στον browser και ο βοηθός δουλεύει πάνω στο εξαγόμενο κείμενο.",
       label:"Κείμενο ή σημειώσεις",
       placeholder:"Επικόλλησε εδώ ένα απόσπασμα από τις σημειώσεις σου ή γράψε με δικά σου λόγια τι περιέχουν.",
       modes:[
@@ -167,7 +183,7 @@
   const CONFIG_EN={
     pdf:{
       title:"Work with your notes",
-      intro:"Paste a short excerpt or your own notes. The helper will stay within the material you provide.",
+      intro:"Upload a PDF or paste a short excerpt/your own notes. The PDF is read locally in your browser and the helper works from the extracted text.",
       label:"Text or notes",
       placeholder:"Paste a short excerpt from your notes or write what they cover in your own words.",
       modes:[["understand","Explain it in simpler language"],["questions","Create understanding questions"],["structure","Organise it into key ideas"],["review","Make a short revision plan"]],
@@ -269,6 +285,7 @@
       '<label class="guided__label" for="guidedMode">'+(isEn?"What would you like to do?":"Τι θέλεις να κάνουμε;")+'</label>'+
       '<select id="guidedMode" class="guided__select">'+cfg.modes.map(x=>'<option value="'+escapeHtml(x[0])+'">'+escapeHtml(x[1])+'</option>').join("")+'</select>'+
       '<label class="guided__label" for="guidedInput">'+escapeHtml(cfg.label)+'</label>'+
+      (kind==="pdf" ? '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(isEn?"Choose PDF":"Επίλεξε PDF")+'</label><input id="guidedPdfFile" type="file" accept="application/pdf,.pdf"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span></div>' : '')+
       '<textarea id="guidedInput" class="guided__input" placeholder="'+escapeHtml(cfg.placeholder)+'"></textarea>'+
       '<p class="guided__privacy">'+(isEn?"Do not enter your name, school, phone number, health information or other personal data.":"Μην γράφεις όνομα, σχολείο, τηλέφωνο, στοιχεία υγείας ή άλλα προσωπικά δεδομένα.")+'</p>'+
       '<button id="guidedGo" class="guided__button" type="button">'+(isEn?"Help me":"Βοήθησέ με")+'</button>'+
@@ -276,6 +293,28 @@
       '<div id="guidedResult" class="guided__result" tabindex="0" aria-live="polite"><p class="guided__placeholder">'+(isEn?"The result will appear here.":"Το αποτέλεσμα θα εμφανιστεί εδώ.")+'</p></div>';
 
     const btn=root.querySelector("#guidedGo"), input=root.querySelector("#guidedInput"), mode=root.querySelector("#guidedMode"), result=root.querySelector("#guidedResult"), status=root.querySelector("#guidedStatus");
+    const pdfFile=root.querySelector("#guidedPdfFile"), pdfStatus=root.querySelector("#guidedPdfStatus");
+    if(pdfFile){
+      pdfFile.addEventListener("change",async()=>{
+        const file=pdfFile.files&&pdfFile.files[0];
+        if(!file) return;
+        pdfStatus.textContent=isEn?"Reading PDF locally…":"Διαβάζω το PDF τοπικά…";
+        pdfFile.disabled=true;
+        try{
+          const reader=await ensurePdfReader();
+          const doc=await reader.read(file,{maxChars:42000,maxPages:70});
+          input.value=doc.text;
+          pdfStatus.textContent=(isEn?"Loaded ":"Φορτώθηκαν ")+doc.totalPages+(isEn?" pages":" σελίδες")+(doc.truncated?(isEn?" · long document, using the first readable part":" · μεγάλο αρχείο, χρησιμοποιείται το πρώτο αναγνώσιμο μέρος"):"");
+        }catch(err){
+          const code=String(err&&err.message||err);
+          pdfStatus.textContent=code==="no_selectable_text"
+            ? (isEn?"No selectable text was found. This may be a scanned/image PDF.":"Δεν βρέθηκε επιλέξιμο κείμενο. Ίσως είναι σαρωμένο PDF/εικόνα.")
+            : code==="file_too_large"
+              ? (isEn?"The PDF is too large (max 15 MB).":"Το PDF είναι πολύ μεγάλο (έως 15 MB).")
+              : (isEn?"The PDF could not be read.":"Δεν μπόρεσα να διαβάσω το PDF.");
+        }finally{pdfFile.disabled=false;}
+      });
+    }
     btn.addEventListener("click",async()=>{
       const value=input.value.trim();
       if(!value){ status.textContent=isEn?"Enter a little material or your topic first.":"Γράψε πρώτα λίγο υλικό ή το θέμα σου."; input.focus(); return; }

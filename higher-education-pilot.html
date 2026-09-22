@@ -81,7 +81,7 @@
     .he-print-actions.visible{display:flex}
     .he-print-btn{min-height:40px;padding:8px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#172033;font:inherit;font-weight:800;cursor:pointer}
     .he-print-hint{font-size:.78rem;color:#64748b}
-    .he-print-area{display:none}
+    .he-pdf-upload{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}.he-pdf-upload input[type="file"]{position:absolute;width:1px;height:1px;opacity:0}.he-pdf-upload__button,.he-pdf-upload__remove{min-height:38px;padding:7px 10px;border:1px solid #cfd8e3;border-radius:9px;background:#fff;color:#172033;font:inherit;font-size:.82rem;font-weight:800;cursor:pointer}.he-pdf-upload__button:hover,.he-pdf-upload__remove:hover{background:#f7fafc}.he-pdf-upload input[type="file"]:focus ~ #hePdfStatus,.he-pdf-upload__remove:focus-visible{outline:3px solid #93c5fd;outline-offset:2px;border-radius:4px}.he-print-area{display:none}
     @media print{
       body.he-printing > *:not(.he-print-area){display:none!important}
       body.he-printing .he-print-area{display:block!important}
@@ -159,6 +159,12 @@
         <button type="button" class="he-ai-action" data-he-action="feedback" aria-pressed="false">Feedback στη δουλειά μου</button>
         <button type="button" class="he-ai-action" data-he-action="research" aria-pressed="false">Έρευνα / πηγές</button>
       </div>
+      <div class="he-pdf-upload">
+        <label class="he-pdf-upload__button" for="hePdfFile">📄 Ανέβασε PDF</label>
+        <input id="hePdfFile" type="file" accept="application/pdf,.pdf">
+        <span id="hePdfStatus" class="he-ai-input-hint" aria-live="polite"></span>
+        <button type="button" class="he-pdf-upload__remove" id="hePdfRemove" hidden>Αφαίρεση</button>
+      </div>
       <label for="heAiInput"><strong id="heAiInputLabel">Προαιρετικές λεπτομέρειες ή δικό σου υλικό</strong></label>
       <textarea id="heAiInput" class="he-ai-input" placeholder="π.χ. Δεν καταλαβαίνω τη μείωση ΙΙ / Επικόλλησε εδώ abstract, σημειώσεις, κώδικα ή δικό σου κείμενο για feedback."></textarea>
       <p class="he-ai-input-hint" id="heAiInputHint">Μπορείς να προσθέσεις σημειώσεις, εκφώνηση, απόσπασμα, κώδικα ή δικό σου draft.</p>
@@ -198,6 +204,7 @@
 
   <section class="he-print-area" id="hePrintArea" aria-hidden="true"></section>
 
+  <script src="/pdf-text-reader.js"></script>
   <script src="/data.js"></script>
   <script src="/higher-education-data.js"></script>
   <script src="/higher-education-pilot.js"></script>

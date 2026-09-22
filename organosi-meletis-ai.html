@@ -24,9 +24,11 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <div class="tool">
 <label for="mode">Τι χρειάζεσαι;</label>
 <select id="mode">
+<option value="ask">Τι ακριβώς μου ζητά η άσκηση;</option>
 <option value="break">Σπάσε μια εργασία σε μικρά βήματα</option>
+<option value="first">Πες μου μόνο το πρώτο χρήσιμο βήμα</option>
+<option value="check">Έλεγξε αν κατάλαβα τι πρέπει να κάνω</option>
 <option value="brain">Κάνε τις μπερδεμένες σημειώσεις μου checklist</option>
-<option value="simple">Πες μου τι πρέπει να κάνω πιο απλά</option>
 <option value="plan">Φτιάξε πλάνο διαβάσματος για αυτό το θέμα</option>
 </select>
 
@@ -45,9 +47,11 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 (function(){
  const btn=document.getElementById('go'), input=document.getElementById('input'), mode=document.getElementById('mode'), result=document.getElementById('result'), status=document.getElementById('status');
  const prompts={
+  ask:"Εξήγησε με απλά λόγια τι ακριβώς ζητά η άσκηση/εργασία να παραχθεί, ποιες πληροφορίες ή δεξιότητες χρειάζονται και τι ΔΕΝ πρέπει να κάνει ο μαθητής. Μη λύσεις την άσκηση.",
   break:"Σπάσε το παρακάτω σχολικό/φοιτητικό task σε 4-7 πολύ μικρά βήματα. Κάθε βήμα να ξεκινά με ρήμα. Μη λύσεις το task και μη γράψεις το παραδοτέο. Στο τέλος δώσε μόνο το 'πρώτο βήμα τώρα'.",
+  first:"Με βάση την εργασία, δώσε ΜΟΝΟ την πρώτη χρήσιμη ενέργεια που πρέπει να κάνει τώρα ο μαθητής, σε μία ή δύο προτάσεις. Μη λύσεις την άσκηση.",
+  check:"Κάνε 3 σύντομες ερωτήσεις που ελέγχουν αν ο μαθητής κατάλαβε τι ζητά η εργασία/το θέμα. Μην αποκαλύψεις σωστές απαντήσεις πριν απαντήσει.",
   brain:"Μετέτρεψε τις παρακάτω μπερδεμένες σημειώσεις σε σύντομο checklist ενεργειών. Μην προσθέσεις άγνωστα γεγονότα ή έτοιμο περιεχόμενο εργασίας.",
-  simple:"Εξήγησε με πολύ απλά λόγια τι ζητά αυτή η εργασία/οδηγία και ποια είναι τα 3 πρώτα πράγματα που πρέπει να κάνω. Μη δώσεις τη λύση.",
   plan:"Φτιάξε ένα σύντομο πλάνο μελέτης με μικρά blocks, ξεκινώντας από αυτά που ο χρήστης λέει ότι δυσκολεύεται. Μη διδάξεις όλο το θέμα και μη λύσεις ασκήσεις."
  };
  btn.addEventListener('click',async()=>{

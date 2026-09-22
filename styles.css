@@ -2676,3 +2676,18 @@ main {
 @media (max-width: 620px) {
   .tutor-character-card__generic-icon { font-size: 2rem; }
 }
+
+/* ---------- AI Help: local PDF attachment ---------- */
+.tutor-doc-upload{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.tutor-doc-upload input[type="file"]{position:absolute;width:1px;height:1px;opacity:0}.tutor-doc-upload input[type="file"]:focus ~ .tutor-doc-upload__status{outline:3px solid #93c5fd;outline-offset:2px;border-radius:4px}
+.tutor-doc-upload__button,.tutor-doc-upload__remove{border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);border-radius:9px;padding:7px 10px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}
+.tutor-doc-upload__button:hover,.tutor-doc-upload__remove:hover{border-color:var(--color-middle-zone);background:#f7fbff}
+.tutor-doc-upload__button:focus-within,.tutor-doc-upload__remove:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+.tutor-doc-upload__status{font-size:.78rem;color:var(--color-text-muted);flex:1 1 180px}
+.tutor-doc-upload__remove{color:#8a3b33}
+
+/* ---------- AI Help: quick learning-first actions ---------- */
+.tutor-quick-actions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.tutor-quick-action{border:1px solid var(--color-border);background:#f8fbff;color:#27486f;border-radius:999px;padding:6px 10px;font:inherit;font-size:.77rem;font-weight:700;cursor:pointer}
+.tutor-quick-action:hover{border-color:var(--color-middle-zone);background:#eef6ff}
+.tutor-quick-action:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}

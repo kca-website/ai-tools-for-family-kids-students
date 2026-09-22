@@ -39,6 +39,12 @@ try{
 
   assert.equal(await page.locator('#groqBtn').count(),1,'Teacher Assistant must expose the account-free Groq generation route');
   assert.equal(await page.locator('#puterBtn').count(),1,'Teacher Assistant must expose Puter only as an explicit alternative');
+  assert.equal(await page.locator('#teacherToolsDetails').count(),1,'Teacher Assistant must expose a collapsible specialised-tools section');
+  assert.equal(await page.locator('#teacherToolsDetails').getAttribute('open'),null,'Specialised-tools section should be collapsed by default');
+  assert.ok(await page.locator('#teacherToolsGrid .teacher-tool-card').count()>=2,'Teacher Assistant should render specialised tool recommendations');
+  assert.match(await page.locator('#teacherToolsSummary').innerText(),/Βιολογία|Σχέδιο μαθήματος/,'Recommendations should react to task/subject context');
+  const toolGuideHrefs=await page.locator('#teacherToolsGrid a').evaluateAll((links)=>links.map(a=>a.getAttribute('href')||''));
+  assert.ok(toolGuideHrefs.every(h=>/^\/tools\/.+\.html$/.test(h)),'Teacher tool recommendations should route through local tool guide pages');
   assert.equal(await page.locator('script[src*="js.puter.com"]').count(),0,'Puter must remain unloaded until the user explicitly chooses it');
 
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);

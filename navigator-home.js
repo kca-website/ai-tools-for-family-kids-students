@@ -50,7 +50,8 @@
         ["🧠","Να φτιάξω flashcards και επανάληψη","Κάρτες, μικρά τεστ και τρόποι αυτοελέγχου","/flashcards-epanalipsi-ai.html"],
         ["🎨","Να φτιάξω παρουσίαση ή αφίσα","Εργαλεία για οργάνωση, σχεδιασμό και παρουσίαση ιδεών","/parousiasi-afisa-ai.html"],
         ["📚","Να εξασκηθώ στην ανάγνωση ή στα Αγγλικά","Εργαλεία για ανάγνωση, προφορά και γλώσσες","/anagnosi-agglika-ai.html"],
-        ["✨","Να δημιουργήσω κάτι με AI","Ιδέες και εργαλεία για δημιουργική χρήση χωρίς έτοιμη εργασία","/dimiourgiko-ai-gia-mathites.html"],\n        ["🧩","Να σπάσω το διάβασμα σε βήματα","Μετέτρεψε μια μεγάλη εργασία ή μπερδεμένες σημειώσεις σε μικρά επόμενα βήματα","/organosi-meletis-ai.html"]
+        ["✨","Να δημιουργήσω κάτι με AI","Ιδέες και εργαλεία για δημιουργική χρήση χωρίς έτοιμη εργασία","/dimiourgiko-ai-gia-mathites.html"],
+        ["🧩","Να σπάσω το διάβασμα σε βήματα","Μετέτρεψε μια μεγάλη εργασία ή μπερδεμένες σημειώσεις σε μικρά επόμενα βήματα","/organosi-meletis-ai.html"]
       ],
       engTitle: "Έννοιες στην Ελληνική Νοηματική",
       engDesc: `${signLanguageConceptCount} σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ`,
@@ -95,7 +96,8 @@
         ["🧠","Make flashcards and revise","Cards, short quizzes and self-checking","/en/flashcards-revision-ai.html"],
         ["🎨","Make a presentation or poster","Tools for organising, designing and presenting ideas","/en/presentation-poster-ai.html"],
         ["📚","Practice reading or English","Tools for reading, pronunciation and languages","/en/reading-english-ai.html"],
-        ["✨","Create something with AI","Creative tools and ideas without ready-made schoolwork","/en/creative-ai-for-students.html"],\n        ["🧩","Break study into steps","Turn a large task or messy notes into small next steps","/organosi-meletis-ai.html"]
+        ["✨","Create something with AI","Creative tools and ideas without ready-made schoolwork","/en/creative-ai-for-students.html"],
+        ["🧩","Break study into steps","Turn a large task or messy notes into small next steps","/organosi-meletis-ai.html"]
       ],
       engTitle: "Greek Sign Language concepts",
       engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,

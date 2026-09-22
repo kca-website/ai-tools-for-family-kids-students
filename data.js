@@ -346,6 +346,32 @@ const TOOLS = {
     shortDescEn: "Organization for notes, assignments, projects, and study planning. The basic plan is free; AI features are not unlimited on the free tier.",
   },
 
+
+  "digital-tutoring": {
+    id: "digital-tutoring",
+    name: "Ψηφιακό Φροντιστήριο (ΥΠΑΙΘΑ)",
+    url: "https://streaming.digitalschool.gov.gr/",
+    category: "greek-program",
+    logo: null,
+    minAge: 15,
+    minAgeNote: "Επίσημη δωρεάν υπηρεσία του ΥΠΑΙΘΑ. Η προετοιμασία Πανελλαδικών καλύπτει τη Γ΄ Λυκείου και αποφοίτους, με live/on-demand μαθήματα και υλικό. Ο ανακοινωμένος AI βοηθός του 2026 αφορά σε πρώτη φάση τα ειδικά μαθήματα ξένων γλωσσών και βρίσκεται σε πορεία πιλοτικής εφαρμογής.",
+    shortDescEl: "Επίσημη δωρεάν προετοιμασία Πανελλαδικών με live/on-demand μαθήματα, ασκήσεις και προσομοιώσεις. Προβλέπεται πιλοτικός AI βοηθός αρχικά για τα ειδικά μαθήματα ξένων γλωσσών.",
+    shortDescEn: "Official free Panhellenic-exam preparation with live/on-demand lessons, exercises and mock exams. A pilot AI helper is planned initially for foreign-language special subjects.",
+    isGreek: true,
+    greekSource: "Υπουργείο Παιδείας",
+  },
+  "scispace": {
+    id: "scispace",
+    name: "SciSpace",
+    url: "https://scispace.com/",
+    category: "research",
+    logo: null,
+    minAge: 18,
+    minAgeNote: "Εργαλείο ακαδημαϊκής έρευνας με λογαριασμό. Δεν εντοπίστηκε σαφές δημόσιο ελάχιστο ηλικιακό όριο για ανήλικους· στο AITOOLS4KIDS το προτείνουμε μόνο στη φοιτητική διαδρομή/18+.",
+    shortDescEl: "AI πλατφόρμα για αναζήτηση papers, Literature Review, Chat with PDF, ακαδημαϊκή συγγραφή και citations.",
+    shortDescEn: "AI research platform for paper discovery, literature review, Chat with PDF, academic writing and citations.",
+  },
+
   // ---------- ΜΑΘΗΜΑΤΙΚΑ & ΛΟΓΙΚΗ ----------
   "photomath": {
     id: "photomath",
@@ -1208,6 +1234,16 @@ const PATHS = {
           cautionEl: "Το δωρεάν πλάνο δεν σημαίνει απεριόριστο Notion AI.",
           cautionEn: "The free plan does not mean unlimited Notion AI.",
         },
+
+        {
+          toolId: "digital-tutoring",
+          useCaseEl: "Επίσημη δωρεάν προετοιμασία Πανελλαδικών: live μαθήματα, βιντεομαθήματα, ασκήσεις και διαγωνίσματα προσομοίωσης για ΓΕΛ/ΕΠΑΛ και ειδικά μαθήματα.",
+          useCaseEn: "Official free Panhellenic-exam preparation: live lessons, recordings, exercises and mock exams for GEL/EPAL and special subjects.",
+          howToEl: "Χρησιμοποίησέ το ως βασική επίσημη πηγή παράλληλα με το σχολείο. Ο ανακοινωμένος AI βοηθός του 2026 αφορά αρχικά ξένες γλώσσες και δεν τον παρουσιάζουμε ως ήδη διαθέσιμο για όλα τα μαθήματα.",
+          howToEn: "Use it as an official study source alongside school. The announced 2026 AI helper initially targets foreign languages and is not presented as already available for every subject.",
+          cautionEl: "Ξεχώρισε το ήδη λειτουργικό Ψηφιακό Φροντιστήριο από τον AI βοηθό που βρίσκεται σε πιλοτική/σταδιακή υλοποίηση.",
+          cautionEn: "Distinguish the already-operational Digital Tutoring service from the AI helper that is being piloted/rolled out.",
+        },
         {
           toolId: "phet",
           useCaseEl: "Οπτικοποίηση εννοιών Φυσικής και άλλων Φυσικών Επιστημών μέσα από ασφαλή διαδραστικό πειραματισμό στον browser.",
@@ -1395,6 +1431,16 @@ const PATHS = {
           howToEn: "Use simple pages for subjects/assignments rather than elaborate dashboards that become a distraction.",
           cautionEl: "Το δωρεάν πλάνο δεν σημαίνει απεριόριστο Notion AI.",
           cautionEn: "The free plan does not mean unlimited Notion AI.",
+        },
+
+        {
+          toolId: "digital-tutoring",
+          useCaseEl: "Για Πανελλαδικές: δωρεάν επίσημα live/on-demand μαθήματα, ασκήσεις και προσομοιώσεις εξετάσεων.",
+          useCaseEn: "For Panhellenic exams: free official live/on-demand lessons, exercises and mock exams.",
+          howToEl: "Ξεκίνα από το μάθημα και την ενότητα που διαβάζεις και χρησιμοποίησε τις ασκήσεις/βίντεο ως δεύτερη εξήγηση και επανάληψη.",
+          howToEn: "Start from the subject and topic you are studying and use the exercises/videos for a second explanation and review.",
+          cautionEl: "Ο AI βοηθός που έχει ανακοινωθεί αφορά αρχικά τα ειδικά μαθήματα ξένων γλωσσών· μην περιμένεις AI tutor σε κάθε μάθημα ακόμη.",
+          cautionEn: "The announced AI helper initially targets foreign-language special subjects; do not expect an AI tutor in every subject yet.",
         },
         {
           toolId: "phet",

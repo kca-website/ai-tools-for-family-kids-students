@@ -2250,6 +2250,26 @@ function renderToolGrid(pathTools, targetElement) {
     resetQuizState();
   }
 
+  function applyQuizDeepLink() {
+    if (state.currentView !== "quiz") return;
+    const params = new URLSearchParams(location.search);
+    const gapId = params.get("gap");
+    const quizId = params.get("quiz");
+    const zoneQuizzes = getZoneQuizzes();
+    const quiz = quizId && zoneQuizzes?.[quizId];
+    if (quiz) {
+      const requestedGrade = params.get("grade");
+      state.quizGradeId = (quiz.grades || []).includes(requestedGrade)
+        ? requestedGrade
+        : ((quiz.grades || [])[0] || null);
+      state.quizBrowseTopicsId = quiz.id;
+      renderQuizView();
+    }
+    if (gapId && typeof LEARNING_PATHS !== "undefined" && LEARNING_PATHS[gapId]) {
+      openLearningPathModal(gapId);
+    }
+  }
+
   // Ζωγραφίζει ό,τι χρειάζεται με βάση το ΤΡΕΧΟΝ state.
   // Δεν αγγίζει το URL: αυτό το κάνει ξεχωριστά το pushRoute().
   function renderCurrentRoute() {
@@ -2515,6 +2535,7 @@ function renderToolGrid(pathTools, targetElement) {
     // Deep link: URL όπως /primary/guardian/quiz φορτώνει κατευθείαν εκεί.
     restoreStateFromPath(location.pathname);
     renderCurrentRoute();
+    applyQuizDeepLink();
 
     // Back/forward browser buttons.
     window.addEventListener("popstate", () => {

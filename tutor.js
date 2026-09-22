@@ -453,6 +453,7 @@
   let currentUtterance = null;
   let speechSession = 0;
   let audioPlayerUnlocked = false;
+  let urlTopicOverride = null;
   let vadAudioContext = null;
   let vadSource = null;
   let vadAnalyser = null;
@@ -549,7 +550,7 @@
   function getCurrentGap() {
     const id = refs.topic?.value;
     if (!id) return null;
-    return GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || null;
+    return GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || (urlTopicOverride?.id === id ? urlTopicOverride : null);
   }
 
   function getOfficialCurriculumEntry() {
@@ -1039,6 +1040,7 @@ ${compositeRule}
   }
 
   function populateTopics() {
+    urlTopicOverride = null;
     const quiz = getCurrentQuiz();
     const catalogSubject = getCatalogSubject();
     const allCatalogTopics = catalogSubject?.topics || [];
@@ -2301,8 +2303,26 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     if (selectUrlValue(refs.subject, params.get("subject"))) {
       populateTopics();
     }
-    const topicSelected = selectUrlValue(refs.topic, params.get("topic")) ||
+    let topicSelected = selectUrlValue(refs.topic, params.get("topic")) ||
       selectUrlText(refs.topic, params.get("topicText"));
+    const requestedTopicText = String(params.get("topicText") || "").trim();
+    if (!topicSelected && requestedTopicText && refs.subject?.value) {
+      const id = `url-topic:${requestedTopicText}`;
+      urlTopicOverride = {
+        id,
+        labelEl: requestedTopicText,
+        labelEn: requestedTopicText,
+        explainEl: "Επιλεγμένη ενότητα από τον Χάρτη Ύλης.",
+        explainEn: "Selected unit from the Curriculum Map.",
+        externalCurriculumSelection: true,
+      };
+      const option = document.createElement("option");
+      option.value = id;
+      option.textContent = requestedTopicText;
+      refs.topic.appendChild(option);
+      refs.topic.value = id;
+      topicSelected = true;
+    }
     if (topicSelected) {
       renderContext();
     }

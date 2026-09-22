@@ -108,7 +108,7 @@ const TEACHER_TOOL_WHY={
 function teacherSubjectToolIds(){
  const label=norm(subject?.options?.[subject.selectedIndex]?.textContent||'');
  if(/μαθηματικ|αλγεβρ|γεωμετρ/.test(label))return ['geogebra','desmos','wolfram-alpha'];
- if(/φυσικ|χημει|βιολογ|γεωγραφ|γεωλογ/.test(label))return ['phet','google-lens','notebooklm'];
+ if(/φυσικ|χημει|βιολογ|γεωγραφ|γεωλογ/.test(label))return ['phet','notebooklm','google-lens'];
  if(/ιστορι|κοινων|πολιτικ|θρησκευ|ηθικ/.test(label))return ['google-arts-culture','notebooklm','zotero'];
  if(/αγγλικ|γαλλικ|γερμαν|ιταλικ|ισπαν|ξεν/.test(label))return ['deepl','reading-coach','duolingo'];
  if(/πληροφορ|προγραμματισ/.test(label))return ['replit-ai','github-copilot','notebooklm'];
@@ -124,7 +124,9 @@ function accessibilityBadge(id){
 function renderTeacherTools(){
  const grid=$('teacherToolsGrid'),summary=$('teacherToolsSummary');
  if(!grid||typeof TOOLS==='undefined')return;
- const ids=uniq([...teacherSubjectToolIds(),...(TEACHER_TOOL_BASE[task]||[])]).filter(id=>TOOLS[id]).slice(0,4);
+ const subjectIds=teacherSubjectToolIds(),taskIds=TEACHER_TOOL_BASE[task]||[];
+ const mixed=[];for(let i=0;i<Math.max(taskIds.length,subjectIds.length);i++){if(taskIds[i])mixed.push(taskIds[i]);if(subjectIds[i])mixed.push(subjectIds[i]);}
+ const ids=uniq(mixed).filter(id=>TOOLS[id]).slice(0,4);
  const subjectLabel=subject?.options?.[subject.selectedIndex]?.textContent||'';
  summary.textContent=(subjectLabel?subjectLabel+' · ':'')+(taskLabels[task]||'')+' · '+ids.length+' προτάσεις';
  grid.innerHTML=ids.map(id=>{

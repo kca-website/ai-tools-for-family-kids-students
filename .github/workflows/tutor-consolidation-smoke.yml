@@ -74,6 +74,9 @@ jobs:
       - name: Run homepage positioning smoke
         run: node tests/home-positioning-smoke.mjs
 
+      - name: Run learning-need tool priority smoke
+        run: node tests/need-tool-priority-smoke.mjs
+
       - name: Run early Primary simple quiz smoke
         run: node tests/primary-simple-quiz-smoke.mjs
 

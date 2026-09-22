@@ -96,6 +96,7 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 .home-v8-helper-links a:focus-visible,
 .home-v8-needs__toggle:focus-visible,
 .home-v8-needs-card:focus-visible,
+.home-v8-learning-card:focus-visible,
 .home-v8-eng>a:focus-visible,
 .home-v8-curriculum a:focus-visible{
   outline:3px solid #F59E0B;
@@ -294,7 +295,12 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 .home-v8-needs.is-open .home-v8-needs__arrow{transform:rotate(180deg);}
 .home-v8-needs__body{padding-top:14px;}
 .home-v8-needs__body[hidden]{display:none!important;}
-.home-v8-needs__grid{
+.home-v8-needs-group{margin:0}
+.home-v8-needs-group+.home-v8-needs-group{margin-top:18px;padding-top:16px;border-top:1px solid #dce8e3}
+.home-v8-needs-group__title{margin:0 0 9px;color:#23483d;font-family:var(--font-heading);font-size:13px;font-weight:800}
+.home-v8-needs-group__intro{margin:-2px 0 10px;color:var(--color-text-muted);font-size:12px;line-height:1.45}
+.home-v8-needs__grid,
+.home-v8-learning-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
@@ -333,6 +339,23 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   font-size:12px;
   line-height:1.45;
 }
+.home-v8-learning-card{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  min-width:0;
+  padding:13px 14px;
+  border:1px solid #d7d2f5;
+  border-radius:10px;
+  background:#fbfaff;
+  color:inherit;
+  text-align:left;
+  text-decoration:none;
+}
+.home-v8-learning-card:hover{border-color:#aaa1e8;background:#f6f3ff}
+.home-v8-learning-card__icon{flex:0 0 auto;font-size:20px;line-height:1.2}
+.home-v8-learning-card strong{display:block;margin-bottom:3px;color:#332b74;font-size:13.5px;line-height:1.35}
+.home-v8-learning-card small{display:block;color:#69638e;font-size:12px;line-height:1.45}
 
 .home-v8-eng{
   display:flex;
@@ -399,7 +422,8 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
     grid-template-columns:1fr 1fr;
   }
   .home-v8-helpers,
-  .home-v8-needs__grid{
+  .home-v8-needs__grid,
+  .home-v8-learning-grid{
     grid-template-columns:1fr;
   }
   .home-v8-educator-hint{

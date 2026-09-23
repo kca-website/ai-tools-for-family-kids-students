@@ -116,7 +116,7 @@
         sourceUrl:preferred.sourceUrl||preferred.instructionSourceUrl||"",
         sourceLabelEl:preferred.sourceTitle||"Επίσημη πηγή 2026–27",
         sourceLabelEn:preferred.sourceTitle||"Official 2026–27 source"
-      }));
+      })):[];
       const structureOnly=!!(s.structureOnly||baseCurriculum.structureOnly) && !liveTopics.length;
       const rawTopics=(s.topics||[]).filter((t)=>!t?.specialSupportAction);
       const baseTopics=structureOnly?[]:rawTopics.map((t)=>Object.assign({},t,{

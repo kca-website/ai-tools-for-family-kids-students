@@ -493,6 +493,33 @@
         "Κεφάλαιο 14 — Επιστήμες, πνευματική και καλλιτεχνική δημιουργία κατά τον 20ό αιώνα"
       ]
     },
+    "english-a-gymnasiou":{
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+      sections:[
+        "Unit 1 — Welcome",
+        "Unit 2 — Junior High School Life",
+        "Unit 3 — Teen Matters",
+        "Unit 4 — Looking Back on the Past",
+        "Unit 5 — Times Change!",
+        "Unit 6 — Teens in Action",
+        "Unit 7 — Tomorrow and … Beyond!",
+        "Unit 8 — In the Papers!",
+        "Unit 9 — Happy Summer Holidays!"
+      ]
+    },
+    "english-b-gymnasiou":{
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2320/Agglika_B-Gymnasiou-Proch_html-empl/",
+      sections:[
+        "Unit 1 — Unity in Diversity",
+        "Unit 2 — Echoes of the Past",
+        "Unit 3 — Time Out",
+        "Unit 4 — Let's Change Our Schools",
+        "Unit 5 — The Arts!",
+        "Unit 6 — Healthy Living",
+        "Unit 7 — Embracing Our World",
+        "Unit 8 — Welcome to the World"
+      ]
+    },
     "english-g-gymnasiou":{
       sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C109/499/3246%2C21317/",
       sections:[
@@ -510,7 +537,7 @@
     }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.2.0",
+    version:"2.3.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

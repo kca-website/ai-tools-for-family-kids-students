@@ -59,22 +59,91 @@
     return (window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(zoneId,gradeId) || [])
       .filter((s)=>s?.schoolType===schoolType || s?.curriculum?.schoolType===schoolType);
   }
+  function specialGradeMatches(entry,gradeId){
+    const raw=String(entry?.gradeId||entry?.grade||"").toLowerCase().replace(/[΄’']/g,"").trim();
+    const gid=String(gradeId||"").toLowerCase().trim();
+    if(!raw||!gid) return false;
+    if(raw===gid) return true;
+    const simple=gid.replace(/^(gym|lyc)-/,"");
+    const greek={a:"α",b:"β",c:"γ",d:"δ"}[simple]||simple;
+    return raw===simple||raw===greek;
+  }
+  function specialEntryMatchesSubject(entry,s){
+    if(!entry||!s) return false;
+    if(s.sourceCurriculumId&&entry.id===s.sourceCurriculumId) return true;
+    if(entry.id===s.id) return true;
+    const refs=[...(entry.sourceSubjectIds||[]),entry.subjectId].filter(Boolean).map(String);
+    if(s.sourceBaseSubjectId&&refs.includes(String(s.sourceBaseSubjectId))) return true;
+    if(s.quizId&&refs.includes(String(s.quizId))) return true;
+    const subjectNorm=norm(entry.subject||"");
+    const labelNorm=norm(String(s.subjectLabelEl||"").replace(/^.*?·\s*/,""));
+    if(subjectNorm&&labelNorm&&(subjectNorm.includes(labelNorm)||labelNorm.includes(subjectNorm))) return true;
+    return refs.some((id)=>norm(s.id||"").includes(norm(id)));
+  }
+  function liveSpecialEntries(schoolType,gradeId,s){
+    const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{});
+    return entries.filter((entry)=>{
+      if(entry?.schoolType!==schoolType) return false;
+      if(!specialGradeMatches(entry,gradeId)) return false;
+      if(!Array.isArray(entry.officialAnchors)||!entry.officialAnchors.length) return false;
+      const status=String(entry.status||"");
+      const annual=String(entry.annualInstructionsStatus||"");
+      const coverage=String(entry.coverageStatus||"");
+      const verified=status==="verified"||status==="verified-framework"||annual==="verified"||annual==="2026-27-verified"||annual==="2026-27-framework-verified"||annual==="framework-verified"||/verified|framework|exact|partial/.test(coverage);
+      return verified&&specialEntryMatchesSubject(entry,s);
+    });
+  }
   function getSpecialSubjects(schoolType,zoneId,gradeId){
-    return specialCatalogRows(schoolType,zoneId,gradeId).map((s)=>{
-      const c=s.curriculum||{};
-      const structureOnly=!!(s.structureOnly||c.structureOnly);
+    const rows=specialCatalogRows(schoolType,zoneId,gradeId);
+    if(schoolType==="eneegyl"){
+      const alternate=zoneId==="middle"?"high":"middle";
+      rows.push(...specialCatalogRows(schoolType,alternate,gradeId));
+    }
+    const byId=new Map();
+    rows.forEach((s)=>{ if(s?.id&&!byId.has(s.id)) byId.set(s.id,s); });
+    return [...byId.values()].map((s)=>{
+      const baseCurriculum=s.curriculum||{};
+      const live=liveSpecialEntries(schoolType,gradeId,s);
+      const preferred=live.find(e=>e.frameworkOnly!==true&&e.coverageStatus!=="framework")||live[0]||null;
+      const liveTopics=preferred?(preferred.officialAnchors||[]).map((label,index)=>({
+        id:`${preferred.id}.resolved-${index+1}`,
+        labelEl:label,labelEn:label,
+        status:preferred.frameworkOnly||preferred.coverageStatus==="framework"||preferred.status==="verified-framework"?"verified-framework":
+          preferred.coverageStatus==="panhellenic-verified"?"panhellenic-2027-verified":
+          preferred.coverageStatus==="exam-verified"?"annual-exam-syllabus-verified":
+          "annual-instructions-verified",
+        sourceType:"special-current-entry",
+        sourceUrl:preferred.sourceUrl||preferred.instructionSourceUrl||"",
+        sourceLabelEl:preferred.sourceTitle||"Επίσημη πηγή 2026–27",
+        sourceLabelEn:preferred.sourceTitle||"Official 2026–27 source"
+      }));
+      const structureOnly=!!(s.structureOnly||baseCurriculum.structureOnly) && !liveTopics.length;
       const rawTopics=(s.topics||[]).filter((t)=>!t?.specialSupportAction);
-      const topics=structureOnly?[]:rawTopics.map((t)=>Object.assign({},t,{
+      const baseTopics=structureOnly?[]:rawTopics.map((t)=>Object.assign({},t,{
         status:t.status||(
-          c.annualInstructionsStatus==="2026-27-verified"?"annual-instructions-verified":
-          c.annualInstructionsStatus==="2026-27-framework-verified"?"verified-framework":
-          c.coverageStatus==="panhellenic-2027-verified"?"panhellenic-2027-verified":
-          c.coverageStatus==="annual-exam-syllabus-verified"?"annual-exam-syllabus-verified":
+          baseCurriculum.annualInstructionsStatus==="2026-27-verified"?"annual-instructions-verified":
+          baseCurriculum.annualInstructionsStatus==="2026-27-framework-verified"?"verified-framework":
+          baseCurriculum.coverageStatus==="panhellenic-2027-verified"?"panhellenic-2027-verified":
+          baseCurriculum.coverageStatus==="annual-exam-syllabus-verified"?"annual-exam-syllabus-verified":
           "mapped-navigation"
         ),
-        sourceUrl:t.sourceUrl||c.annualInstructionsUrl||c.examSyllabusUrl||c.catalogUrl||""
+        sourceUrl:t.sourceUrl||baseCurriculum.annualInstructionsUrl||baseCurriculum.examSyllabusUrl||baseCurriculum.catalogUrl||""
       }));
-      return Object.assign({},s,{topics,structureOnly,hasMappedTopics:topics.length>0});
+      const topics=mergeTopics([...liveTopics,...baseTopics]);
+      const curriculum=preferred?Object.assign({},baseCurriculum,{
+        schoolYear:preferred.schoolYear||baseCurriculum.schoolYear||"2026-2027",
+        verificationDate:preferred.verificationDate||baseCurriculum.verificationDate||"",
+        coverageStatus:preferred.frameworkOnly||preferred.coverageStatus==="framework"?"annual-framework-verified":
+          preferred.coverageStatus==="panhellenic-verified"?"panhellenic-2027-verified":
+          preferred.coverageStatus==="exam-verified"?"annual-exam-syllabus-verified":
+          "annual-instructions-verified",
+        annualInstructionsStatus:preferred.frameworkOnly||preferred.coverageStatus==="framework"||preferred.status==="verified-framework"?"2026-27-framework-verified":"2026-27-verified",
+        annualInstructionsUrl:preferred.sourceUrl||preferred.instructionSourceUrl||baseCurriculum.annualInstructionsUrl||"",
+        sourceLabelEl:preferred.sourceTitle||baseCurriculum.sourceLabelEl||"",
+        specialEducation:true,schoolType,
+        structureOnly:false,frameworkOnly:!!(preferred.frameworkOnly||preferred.coverageStatus==="framework"||preferred.status==="verified-framework")
+      }):baseCurriculum;
+      return Object.assign({},s,{topics,curriculum,structureOnly,hasMappedTopics:topics.length>0,resolvedSpecialEntryId:preferred?.id||""});
     });
   }
   function officialForQuiz(quizId){

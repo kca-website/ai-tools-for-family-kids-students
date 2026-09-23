@@ -75,7 +75,16 @@
     if(catalog){
       const status=catalogTopicStatus(catalog);
       const c=catalog.curriculum||{};
-      (catalog.topics||[]).forEach((t)=>rows.push(Object.assign({},t,{
+      const currentMapped = c.schoolYear==="2026-2027" && (
+        c.annualInstructionsStatus==="2026-27-verified" ||
+        c.coverageStatus==="annual-instructions-verified" ||
+        c.coverageStatus==="annual-exam-syllabus-verified" ||
+        c.coverageStatus==="panhellenic-2027-verified" ||
+        c.coverageStatus==="annual-guidance-detailed-map" ||
+        c.coverageStatus==="panhellenic-2027-detailed-map"
+      );
+      const visibleCatalogTopics=(catalog.topics||[]).filter((t)=>currentMapped || t?.specialSupportAction);
+      visibleCatalogTopics.forEach((t)=>rows.push(Object.assign({},t,{
         id:t.id || (catalog.id+".topic."+rows.length),
         status:t.status||status,
         sourceType:"catalog",

@@ -73,7 +73,7 @@
     const list = [
       subject(grade,"glossa","Νεοελληνική Γλώσσα","Modern Greek Language",LANGUAGE[grade],`glossa-${grade}-dimotikou`),
       subject(grade,"math","Μαθηματικά","Mathematics",MATH[grade],`math-${grade}-dimotikou`),
-      subject(grade,"science",["a","b","c","d"].includes(grade)?"Μελέτη Περιβάλλοντος":"Φυσικές Επιστήμες","Science / Environment Studies",SCIENCE[grade],["e","st"].includes(grade)?`science-${grade}-dimotikou`:null)
+      subject(grade,"science",["a","b","c","d"].includes(grade)?"Μελέτη Περιβάλλοντος":"Φυσικές Επιστήμες","Science / Environment Studies",SCIENCE[grade],["a","b","c","d"].includes(grade)?`environment-${grade}-dimotikou`:`science-${grade}-dimotikou`)
     ];
     if (HISTORY[grade]) list.push(subject(grade,"history","Ιστορία","History",HISTORY[grade],`istoria-${grade}-dimotikou`));
     primary[grade] = list;

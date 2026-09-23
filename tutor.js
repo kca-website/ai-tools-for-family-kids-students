@@ -565,6 +565,8 @@
         refs.grade.value === "c" ? (refs.specialty?.value || "") : ""
       ) || null;
     }
+    const resolver = window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+    if (resolver) return resolver.getSubject?.(ctx.zoneId, refs.grade.value, refs.subject.value) || null;
     const catalog = window.AITOOLSKIDS_TUTOR_CATALOG;
     if (!catalog) return null;
     return catalog.getSubject?.(ctx.zoneId, refs.grade.value, refs.subject.value) || null;
@@ -584,7 +586,7 @@
   function getCurrentGap() {
     const id = refs.topic?.value;
     if (!id) return null;
-    return GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || (urlTopicOverride?.id === id ? urlTopicOverride : null);
+    return GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getTopics?.(ctx.zoneId, refs.grade.value, refs.subject.value)?.find((topic) => topic.id === id) || (urlTopicOverride?.id === id ? urlTopicOverride : null);
   }
 
   function getOfficialCurriculumEntry() {
@@ -1031,10 +1033,15 @@ ${compositeRule}
         gradeId === "c" ? (refs.specialty?.value || "") : ""
       ) || [];
     } else {
-      const quizzes = Object.values(QUIZZES[ctx.zoneId] || {}).filter((q) => (q.grades || []).includes(gradeId));
-      const catalogSubjects = window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(ctx.zoneId, gradeId) || [];
-      const represented = new Set(catalogSubjects.map((subject) => subject.quizId || subject.id));
-      subjects = catalogSubjects.concat(quizzes.filter((quiz) => !represented.has(quiz.id)));
+      const resolver = window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+      if (resolver) {
+        subjects = resolver.getSubjects(ctx.zoneId, gradeId) || [];
+      } else {
+        const quizzes = Object.values(QUIZZES[ctx.zoneId] || {}).filter((q) => (q.grades || []).includes(gradeId));
+        const catalogSubjects = window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(ctx.zoneId, gradeId) || [];
+        const represented = new Set(catalogSubjects.map((subject) => subject.quizId || subject.id));
+        subjects = catalogSubjects.concat(quizzes.filter((quiz) => !represented.has(quiz.id)));
+      }
     }
     refs.subject.innerHTML = "";
     const chooseSubject = document.createElement("option");
@@ -1077,12 +1084,13 @@ ${compositeRule}
     urlTopicOverride = null;
     const quiz = getCurrentQuiz();
     const catalogSubject = getCatalogSubject();
+    const resolverTopics = window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getTopics?.(ctx.zoneId, refs.grade.value, refs.subject.value) || [];
     const allCatalogTopics = catalogSubject?.topics || [];
-    // Support actions do not make curriculum-scope claims, so keep them
-    // available even when a subject is intentionally structure-only.
-    const catalogTopics = hasDisplayableAnnualTopicScope(catalogSubject)
+    // The shared resolver returns only source-backed current mappings plus
+    // verified navigation anchors. Keep the older provenance gate as fallback.
+    const catalogTopics = resolverTopics.length ? resolverTopics : (hasDisplayableAnnualTopicScope(catalogSubject)
       ? allCatalogTopics
-      : allCatalogTopics.filter((topic) => topic?.specialSupportAction);
+      : allCatalogTopics.filter((topic) => topic?.specialSupportAction));
     const verifiedQuizTags = getGapTagsForQuiz(quiz).filter((id) => {
       const a = window.AITOOLSKIDS_OFFICIAL_CURRICULUM?.getGapAlignment?.(id);
       return !!a?.annualScopeVerified && (a.status === "exact-section-verified" || a.status === "related-section-verified");

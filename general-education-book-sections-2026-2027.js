@@ -173,6 +173,39 @@
         "Αναπαραγωγικό σύστημα"
       ]
     },
+    "glossa-e-dimotikou":{
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/",
+      sections:[
+        "Ενότητα 1 — Ο φίλος μας το περιβάλλον",
+        "Ενότητα 2 — Η ζωή στην πόλη",
+        "Ενότητα 3 — 28η Οκτωβρίου",
+        "Ενότητα 4 — Τα ζώα που ζουν κοντά μας",
+        "Ενότητα 5 — 17η Νοέμβρη",
+        "Ενότητα 6 — Οι φίλοι μας, οι φίλες μας",
+        "Ενότητα 7 — Μουσική",
+        "Ενότητα 8 — Χριστούγεννα",
+        "Ενότητα 9 — Βιβλία - βιβλιοθήκες",
+        "Ενότητα 10 — Μυστήρια - επιστημονική φαντασία",
+        "Ενότητα 11 — Παιχνίδια",
+        "Ενότητα 12 — 25η Μαρτίου",
+        "Ενότητα 13 — Κατασκευές",
+        "Ενότητα 14 — Πάσχα",
+        "Ενότητα 15 — Τηλεόραση",
+        "Ενότητα 16 — Αθλήματα - σπορ",
+        "Ενότητα 17 — Ταξίδια στο διάστημα"
+      ]
+    },
+    "math-st-dimotikou":{
+      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM101",
+      sections:[
+        "Ενότητα 1 — Αριθμοί και Πράξεις",
+        "Ενότητα 2 — Εξισώσεις",
+        "Ενότητα 3 — Λόγοι - αναλογίες",
+        "Ενότητα 4 — Συλλογή και επεξεργασία δεδομένων",
+        "Ενότητα 5 — Μετρήσεις - Μοτίβα",
+        "Ενότητα 6 — Γεωμετρία"
+      ]
+    },
     "english-c-dimotikou":{
       sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
       sections:[
@@ -454,7 +487,7 @@
     }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.0.0",
+    version:"2.1.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

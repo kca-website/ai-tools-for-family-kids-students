@@ -207,6 +207,23 @@
         "3η Ενότητα · Κεφάλαιο 4 — Υδατάνθρακες-Πρωτεΐνες-Λίπη"
       ]
     },
+    "biologia-a-lykeiou":{
+      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGL-A105",
+      sections:[
+        "Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό",
+        "Κεφάλαιο 2 — Πεπτικό σύστημα",
+        "Κεφάλαιο 3 — Κυκλοφορικό σύστημα",
+        "Κεφάλαιο 4 — Λεμφικό σύστημα",
+        "Κεφάλαιο 5 — Αναπνοή",
+        "Κεφάλαιο 6 — Απέκκριση και ωσμορρύθμιση",
+        "Κεφάλαιο 7 — Ερειστικό σύστημα",
+        "Κεφάλαιο 8 — Μυϊκό σύστημα",
+        "Κεφάλαιο 9 — Νευρικό σύστημα",
+        "Κεφάλαιο 10 — Αισθητήρια όργανα - Αισθήσεις",
+        "Κεφάλαιο 11 — Ενδοκρινείς αδένες",
+        "Κεφάλαιο 12 — Αναπαραγωγή - Ανάπτυξη"
+      ]
+    },
     "istoria-b-gymnasiou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2198/Istoria_B-Gymnasiou_html-empl/",
       sections:[
@@ -255,7 +272,7 @@
     }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"1.4.0",
+    version:"1.5.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

@@ -24,7 +24,48 @@
     c:["Από τον 20ό στον 21ο αιώνα","Ο πολίτης και οι θεσμοί","Ζώντας την καθημερινότητα","Μιλώντας για προβλήματα του ανθρώπου και του κόσμου","Η Ελλάδα και ο κόσμος"]
   };
 
-  const MATH_A=["Εισαγωγικό κεφάλαιο — Ε.2 Σύνολα","Κεφάλαιο 2 — Οι Πραγματικοί Αριθμοί","Κεφάλαιο 3 — Εξισώσεις","Κεφάλαιο 4 — Ανισώσεις","Κεφάλαιο 5 — Πρόοδοι","Κεφάλαιο 6 — Βασικές Έννοιες των Συναρτήσεων"];
+  const MATH_A=[
+    "Άλγεβρα — Εισαγωγικό κεφάλαιο: Ε.2 Σύνολα",
+    "Άλγεβρα — Κεφάλαιο 2: Οι Πραγματικοί Αριθμοί",
+    "Άλγεβρα — Κεφάλαιο 3: Εξισώσεις",
+    "Άλγεβρα — Κεφάλαιο 4: Ανισώσεις",
+    "Άλγεβρα — Κεφάλαιο 5: Πρόοδοι",
+    "Άλγεβρα — Κεφάλαιο 6: Βασικές Έννοιες των Συναρτήσεων",
+    "Γεωμετρία — Κεφάλαιο 2: Τα βασικά γεωμετρικά σχήματα",
+    "Γεωμετρία — Κεφάλαιο 3: Τρίγωνα",
+    "Γεωμετρία — Κεφάλαιο 4: Παράλληλες ευθείες"
+  ];
+  const HISTORY_A=[
+    "Κεφάλαιο 1 — Οι λαοί και οι πολιτισμοί της Εγγύς Ανατολής",
+    "Κεφάλαιο 2 — Οι αρχαίοι Έλληνες",
+    "Κεφάλαιο 3 — Ο ελληνικός κόσμος από το 1100 έως το 323 π.Χ.",
+    "Κεφάλαιο 5 — Οι μεγάλες κατακτήσεις των Ρωμαίων και οι συνέπειές τους"
+  ];
+  const PHYSICS_A=[
+    "Κεφάλαιο 2 — Δύναμη και ισορροπία",
+    "Κεφάλαιο 4 — Δύναμη και κίνηση",
+    "Κεφάλαιο 5 — Έργο και ενέργεια"
+  ];
+  const CHEMISTRY_A=[
+    "Κεφάλαιο 1 — Βασικές έννοιες",
+    "Κεφάλαιο 2 — Περιοδικός Πίνακας και χημικοί δεσμοί",
+    "Κεφάλαιο 3 — Οξέα, βάσεις, άλατα και οξείδια · §3.5 Χημικές αντιδράσεις"
+  ];
+  const MATH_B=[
+    "Άλγεβρα — Κεφάλαιο 1: Γραμμικά Συστήματα",
+    "Άλγεβρα — Κεφάλαιο 2: Ιδιότητες Συναρτήσεων",
+    "Άλγεβρα — Κεφάλαιο 3: Τριγωνομετρία",
+    "Άλγεβρα — Κεφάλαιο 4: Πολυώνυμα - Πολυωνυμικές εξισώσεις",
+    "Άλγεβρα — Κεφάλαιο 5: Εκθετική και Λογαριθμική συνάρτηση",
+    "Γεωμετρία — Κεφάλαιο 5: Παραλληλόγραμμα - Τραπέζια",
+    "Γεωμετρία — Κεφάλαιο 7: Αναλογίες",
+    "Γεωμετρία — Κεφάλαιο 8: Ομοιότητα",
+    "Γεωμετρία — Κεφάλαιο 9: Μετρικές σχέσεις"
+  ];
+  const PHYSICS_B=[
+    "Κεφάλαιο 1 — Δυνάμεις μεταξύ ηλεκτρικών φορτίων",
+    "Κεφάλαιο 2 — Συνεχές ηλεκτρικό ρεύμα"
+  ];
   const CS_B=["Ενότητα 1 — Βασικές Έννοιες","Κεφάλαιο 1.1 — Επιστήμη των Υπολογιστών","Ενότητα 2 — Θέματα Θεωρητικής Επιστήμης των Υπολογιστών","Κεφάλαιο 2.1 — Πρόβλημα","Κεφάλαιο 2.2 — Αλγόριθμοι","Κεφάλαιο 2.3 — Προγραμματισμός","Ενότητα 3 — Θέματα Εφαρμοσμένης Επιστήμης των Υπολογιστών","Κεφάλαιο 3.1 — Λειτουργικά Συστήματα","Κεφάλαιο 3.2 — Πληροφοριακά Συστήματα","Κεφάλαιο 3.3 — Δίκτυα Υπολογιστών","Κεφάλαιο 3.4 — Τεχνητή Νοημοσύνη"];
   const CS_C=["Κεφάλαιο 1 — επίσημες σημειώσεις «Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ»","Κεφάλαιο 2 — επίσημες σημειώσεις «Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ»","Κεφάλαιο 3 — επίσημες σημειώσεις «Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ»"];
   const ENGLISH_A=["Unit 1","Unit 2","Unit 3","Unit 4","Unit 6","Unit 7"];
@@ -126,11 +167,11 @@
     a:[
       common("new-greek","Νέα Ελληνικά",NEW_GREEK.a,{sourceUrl:GENERAL_GUIDANCE}),
       common("math","Μαθηματικά (Άλγεβρα + Γεωμετρία)",MATH_A,{sourceUrl:GENERAL_GUIDANCE}),
-      common("physics","Φυσική",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("chemistry","Χημεία",[],{sourceUrl:GENERAL_GUIDANCE}),
+      common("physics","Φυσική",PHYSICS_A,{sourceUrl:GENERAL_GUIDANCE}),
+      common("chemistry","Χημεία",CHEMISTRY_A,{sourceUrl:GENERAL_GUIDANCE}),
       common("biology","Βιολογία",[],{sourceUrl:GENERAL_GUIDANCE}),
       common("civics","Πολιτική Παιδεία",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("history","Ιστορία",[],{sourceUrl:GENERAL_GUIDANCE}),
+      common("history","Ιστορία",HISTORY_A,{sourceUrl:GENERAL_GUIDANCE}),
       common("religion","Θρησκευτικά",[],{sourceUrl:GENERAL_GUIDANCE}),
       common("pe","Φυσική Αγωγή",[],{sourceUrl:GENERAL_GUIDANCE}),
       common("informatics","Πληροφορική",[],{sourceUrl:GENERAL_GUIDANCE}),
@@ -149,8 +190,8 @@
     ],
     b:[
       common("new-greek","Νέα Ελληνικά",NEW_GREEK.b,{sourceUrl:GENERAL_GUIDANCE}),
-      common("math","Μαθηματικά (Άλγεβρα + Γεωμετρία)",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("physics","Φυσική",[],{sourceUrl:GENERAL_GUIDANCE}),
+      common("math","Μαθηματικά (Άλγεβρα + Γεωμετρία)",MATH_B,{sourceUrl:GENERAL_GUIDANCE}),
+      common("physics","Φυσική",PHYSICS_B,{sourceUrl:GENERAL_GUIDANCE}),
       common("chemistry","Χημεία",[],{sourceUrl:GENERAL_GUIDANCE}),
       common("religion","Θρησκευτικά",[],{sourceUrl:GENERAL_GUIDANCE}),
       common("computer-science","Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ",CS_B,{sourceUrl:GENERAL_GUIDANCE,textbookUrl:CS_BOOK}),
@@ -171,7 +212,7 @@
   };
 
   const DATA=Object.freeze({
-    version:"1.1.0",
+    version:"1.2.0",
     schoolYear:"2026-2027",
     verificationDate:"2026-09-12",
     sourceUrls:Object.freeze({generalGuidance:GENERAL_GUIDANCE,epalHub:EPAL_HUB,epalGeneralHub:EPAL_GENERAL_HUB,foreignLanguages:FOREIGN_LANG,maritimeStructure:MARITIME_STRUCTURE,maritimeTimetable:MARITIME_TIMETABLE,informatics:INF_2026,electrical:ELEC_2026,administrationEconomy:ADMIN_2026,mechanical:MECH_2026,agriculture:AGRI_2026,appliedArts:ARTS_2026,structures:STRUCTURES_2026,health:HEALTH_2026}),

@@ -21,6 +21,7 @@ try{
     const languageCGym=r.getSubject('middle','c','glossa-gymnasiou');
     const chemistryCGym=r.getSubject('middle','c','chimeia-g-gymnasiou');
     const biologyBGym=r.getSubject('middle','b','biologia-b-gymnasiou');
+    const biologyALyc=r.getSubject('high','a','biologia-a-lykeiou');
     return {
       primaryAEnvironmentCount:env.length,
       environmentQuizId:env[0]?.quizId||'',
@@ -40,7 +41,9 @@ try{
       chemistryCGymMode:chemistryCGym?.topicMode||'',
       chemistryCGymTopics:chemistryCGym?.topics?.map(t=>t.labelEl)||[],
       biologyBGymMode:biologyBGym?.topicMode||'',
-      biologyBGymTopics:biologyBGym?.topics?.map(t=>t.labelEl)||[]
+      biologyBGymTopics:biologyBGym?.topics?.map(t=>t.labelEl)||[],
+      biologyALycMode:biologyALyc?.topicMode||'',
+      biologyALycTopics:biologyALyc?.topics?.map(t=>t.labelEl)||[]
     };
   });
   if(audit.primaryAEnvironmentCount!==1) throw new Error('Environment Studies duplicate remains in Primary A');
@@ -55,6 +58,7 @@ try{
   if(audit.languageCGymMode!=='verified-official-sections' || audit.languageCGymTopics.length<8) throw new Error('Middle C Language verified book sections not resolved');
   if(audit.chemistryCGymMode!=='verified-official-sections' || audit.chemistryCGymTopics.length<15) throw new Error('Middle C Chemistry verified book sections not resolved');
   if(audit.biologyBGymMode!=='verified-official-sections' || audit.biologyBGymTopics.length<7) throw new Error('Middle B Biology verified book sections not resolved');
+  if(audit.biologyALycMode!=='verified-official-sections' || audit.biologyALycTopics.length<12) throw new Error('High A Biology verified book sections not resolved');
   const highA=await page.evaluate(()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER.getSubjects('high','a').map(s=>s.quizId||s.id));
   if(new Set(highA).size!==highA.length) throw new Error('Duplicate High School course identity remains');
 

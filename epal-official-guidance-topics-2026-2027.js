@@ -2706,15 +2706,47 @@
     "scope": "Από το βιβλίο «ΑΡΧΑΙΟΕΛΛΗΝΙΚΕΣ ΤΕΧΝΙΚΕΣ ΑΙΣΘΗΤΙΚΗΣ ΚΑΙ ΕΥΕΞΙΑΣ», (Βιβιλάκη Ε., Δενδραμή Φ., Θεοδωροπούλου Μ., Μπενέτου Α., Νταουντάκη Ε.) ΚΕΦΑΛΑΙΟ ΕΝΟΤΗΤΕΣ/ΠΑΡΑΓΡΑΦΟΙ 1Ο ΙΣΤΟΡΙΚΗ ΑΝΑΔΡΟΜΗ 2ο Ο ΚΑΛΛΩΠΙΣΜΟΣ ΣΤΗΝ ΑΡΧΑΙΑ ΕΛΛΑΔΑ"
   }
 ];
-  const norm=value=>String(value||"").replace(/^.*?\s·\s/,"").replace(/^Ειδικό εργαστηριακό:\s*/,"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9α-ω]+/g," ").replace(/\s+/g," ").trim().replace(/\bii\b/g,"ιι").replace(/\bi\b/g,"ι");
-  const byLabel=new Map(records.map(record=>[norm(record.label),Object.freeze(record)]));
+  const stripPrefix=value=>String(value||"").replace(/^.*?\s·\s/,"").replace(/^Ειδικό εργαστηριακό:\s*/,"");
+  const stripParen=value=>stripPrefix(value).replace(/\([^)]*\)/g," ");
+  const norm=value=>stripPrefix(value).replace(/&/g," και ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9α-ω]+/g," ").replace(/\s+/g," ").trim().replace(/\bii\b/g,"ιι").replace(/\bi\b/g,"ι");
+  const normBase=value=>stripParen(value).replace(/&/g," και ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9α-ω]+/g," ").replace(/\s+/g," ").trim().replace(/\bii\b/g,"ιι").replace(/\bi\b/g,"ι");
+  const compact=value=>norm(value).replace(/\s+/g,"");
+  const compactBase=value=>normBase(value).replace(/\s+/g,"");
+  const frozenRecords=records.map(Object.freeze);
+  const byLabel=new Map(frozenRecords.map(record=>[norm(record.label),record]));
+  const byCompact=new Map(frozenRecords.map(record=>[compact(record.label),record]));
+  const baseBuckets=new Map();
+  frozenRecords.forEach(record=>{
+    const key=compactBase(record.label);
+    if(!baseBuckets.has(key)) baseBuckets.set(key,[]);
+    baseBuckets.get(key).push(record);
+  });
   const aliases=new Map([
-    ["εισαγωγη στα υπολογιστικα συστηματα και στα δικτυα επικοινωνιων","εισαγωγη στα υπολογιστικα συστηματα και"]
+    ["εισαγωγη στα υπολογιστικα συστηματα και στα δικτυα επικοινωνιων","εισαγωγη στα υπολογιστικα συστηματα και"],
+    ["οικονομικα μαθηματικα και στατιστικη","οικονομικα μαθηματικα και στατιστικη"],
+    ["κτιριακα εργα και δομικα υλικα","κτιριακα εργα και δο μικα υλικα"],
+    ["δομημενο περιβαλλον και πολεοδομικες εφαρμογες","δομημενο περιβαλλον και πολεοδομικες εφα ρμογες"],
+    ["σχεδιο πολιτικου μηχανικου και εργων υποδομης","σχεδιο πολιτικου μηχανικου και εργων υπο δομης"],
+    ["οργανωση τεχνικων εργων","οργανωση τεχνικων ερ γων"],
+    ["εργαστηριο αναπαραγωγικου κοσμηματος σμαλτο","εργαστηριο αναπαραγωγικου κοσμη ματος σμαλτο"],
+    ["τεχνολογια παραγωγη ενδυματων","τεχνολογια παραγωγης ενδυματων"],
+    ["αγωγη βρεφους και νηπιου","αγωγη βρεφους και νηπιου θεωρητικο μερος"],
+    ["εφαρμογες marketing","εφαρμογες μαρκετινγκ"],
+    ["εγκατασταση και διαχειριση δικτυων συντηρηση υπολογιστικων συστηματων","εγκατασταση διαχειριση και συντηρηση υπολογιστικων συστηματων"],
+    ["ειδικα θεματα στον προγραμματισμο υπολογιστων","ειδικα θεματα στον προγραμματισμο υπολογ ιστων"],
+    ["ακτινοανατομικη","ακτινοατομικη"]
   ]);
   function get(label){
     const key=norm(label);
-    const direct=byLabel.get(key)||byLabel.get(aliases.get(key));
+    const direct=byLabel.get(key)||byCompact.get(compact(label));
     if(direct) return direct;
+    const aliasKey=aliases.get(key)||aliases.get(normBase(label));
+    if(aliasKey){
+      const aliased=byLabel.get(aliasKey)||byCompact.get(aliasKey.replace(/\s+/g,""));
+      if(aliased) return aliased;
+    }
+    const baseMatches=baseBuckets.get(compactBase(label))||[];
+    if(baseMatches.length===1) return baseMatches[0];
     const prefix=[...byLabel.entries()].filter(([candidate])=>candidate.length>=12&&key.startsWith(candidate)).sort((a,b)=>b[0].length-a[0].length)[0];
     return prefix?.[1]||null;
   }

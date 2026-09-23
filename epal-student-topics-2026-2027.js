@@ -3,14 +3,32 @@
 
   /* Never infer curriculum from the course title. A selectable unit is exposed
      only when verified curriculum data supplies it in currentTopics. */
+  function cleanGuidanceTopics(values=[]){
+    return (values||[]).map(value=>String(value||"").trim()).filter(value=>{
+      if(!value) return false;
+      const plain=value.toLowerCase().replace(/[–—:.;,/\\|()[\]]/g," ").replace(/\s+/g," ").trim();
+      if(/^(?:κεφαλαια?|κεφ|ενοτητες?|κεφαλαια?\s+ενοτητες?|κεφαλαιο\s+ενδεικτικες|ενοτητα\s+ωρες)$/.test(plain)) return false;
+      if(/^(?:κεφαλαια?|ενοτητες?)\s*$/.test(plain)) return false;
+      return true;
+    });
+  }
+  function scopeUnits(scope){
+    const text=String(scope||"").trim();
+    if(!text) return [];
+    const pieces=text.split(/[•]/).map(x=>x.replace(/^[-–—\s]+/,"").trim()).filter(Boolean);
+    const specific=pieces.filter(x=>/(?:κεφάλαι(?:ο|α)|κεφ\.|ενότητα|σελ\.?\s*\d|σελίδ|ολόκληρ|όλο\s+το\s+βιβλίο|ως\s+έχει\s+το\s+βιβλίο)/i.test(x));
+    if(specific.length>=2) return specific.map(x=>`Επίσημη έκταση — ${x}`);
+    const usable=/(?:όλα|όλες|όλο\s+το\s+βιβλίο|ολόκληρ|ως\s+έχει\s+το\s+βιβλίο|σελ\.?\s*\d|σελίδ(?:α|ες)?\s*\d|κεφάλαι(?:ο|α)\s*\d|κεφ\.\s*\d|ενότητες?\s*\d)/i.test(text);
+    return usable?[`Επίσημη έκταση ύλης — ${text}`]:[];
+  }
   function resolve(label,currentTopics=[]){
     const officialExamTopics=window.AITOOLSKIDS_EPAL_PANHELLENIC_2027?.getTopics?.(label)||[];
     const guidanceRecord=window.AITOOLSKIDS_EPAL_OFFICIAL_GUIDANCE_TOPICS_2026_2027?.get?.(label)||null;
-    const officialGuidanceTopics=guidanceRecord?.topics||[];
+    const officialGuidanceTopics=cleanGuidanceTopics(guidanceRecord?.topics||[]);
     const hasCurrent=Array.isArray(currentTopics)&&currentTopics.length>0;
     const fromExamSyllabus=!hasCurrent&&officialExamTopics.length>0;
-    const hasUsableScope=!officialGuidanceTopics.length&&/(?:όλα|όλες|ολόκληρ|κεφάλαι(?:ο|α)\s*\d|κεφ\.\s*\d|ενότητες?\s*\d)/i.test(guidanceRecord?.scope||"");
-    const scopeTopics=hasUsableScope?[`Επίσημη έκταση ύλης — ${guidanceRecord.scope}`]:[];
+    const scope=String(guidanceRecord?.scope||"").trim();
+    const scopeTopics=!officialGuidanceTopics.length?scopeUnits(scope):[];
     const fromOfficialGuidance=!hasCurrent&&!fromExamSyllabus&&(officialGuidanceTopics.length>0||scopeTopics.length>0);
     const sourceTopics=hasCurrent?currentTopics:(fromExamSyllabus?officialExamTopics:(officialGuidanceTopics.length?officialGuidanceTopics:scopeTopics));
     const sourceUrls=window.EPAL_2026_2027_TEACHER_STRUCTURE?.sourceUrls||{};
@@ -37,7 +55,7 @@
   }
 
   window.AITOOLSKIDS_EPAL_STUDENT_TOPICS_2026_2027=Object.freeze({
-    version:"2.1.0",
+    version:"2.3.0",
     verified:"2026-09-19",
     resolve,
     exactCount:(window.AITOOLSKIDS_EPAL_PANHELLENIC_2027?.mappedSubjects?.length||0)+(window.AITOOLSKIDS_EPAL_OFFICIAL_GUIDANCE_TOPICS_2026_2027?.recordCount||0),

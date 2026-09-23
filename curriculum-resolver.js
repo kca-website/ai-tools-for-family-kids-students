@@ -185,6 +185,18 @@
         sourceLabelEn:c.sourceLabelEn||c.coverageLabelEn||""
       })));
     }
+    const bookSections=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(subject.quizId||subject.id)||null;
+    if(bookSections?.sections?.length){
+      bookSections.sections.forEach((label,i)=>rows.push({
+        id:(subject.quizId||subject.id)+".verified-book-section-"+(i+1),
+        labelEl:label,labelEn:label,
+        status:"official-book-section-verified",
+        sourceType:"official-book-section",
+        sourceUrl:bookSections.sourceUrl||"",
+        sourceLabelEl:"Διαδραστικά Σχολικά Βιβλία · επίσημα περιεχόμενα",
+        sourceLabelEn:"Interactive School Textbooks · official contents"
+      }));
+    }
     if(official){
       const en=official.officialSectionsEn||[];
       (official.officialSectionsEl||[]).forEach((label,i)=>rows.push({

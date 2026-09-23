@@ -17,8 +17,8 @@
 (function () {
   "use strict";
 
-  const MIDDLE_INDEX = "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260828/";
-  const HIGH_REFERENCE = "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-genikou-lykeiou-gia-to-scholiko-etos-2025-2026/";
+  const MIDDLE_INDEX = "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/";
+  const HIGH_REFERENCE = "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/";
 
   function topics(subjectId, rows) {
     return rows.map((row, index) => ({
@@ -61,20 +61,20 @@
       id, grade, subjectLabelEl: labelEl, subjectLabelEn: labelEn,
       topics: list,
       curriculum: {
-        schoolYear: "2025-2026",
-        coverageStatus: "official-prior-year-reference",
-        coverageLabelEl: "Επίσημη βάση 2025–26: αναμονή οδηγιών 2026–27",
-        coverageLabelEn: "Official 2025–26 reference: awaiting 2026–27 guidance",
+        schoolYear: "2026-2027",
+        coverageStatus: "official-current-year-reference",
+        coverageLabelEl: "Επίσημες οδηγίες 2026–27 δημοσιευμένες · εκκρεμεί ακριβής χαρτογράφηση",
+        coverageLabelEn: "Official 2026–27 guidance published · exact mapping pending",
         officialSectionsEl: [],
         officialSectionsEn: [],
-        scopeNoteEl: "Τα θέματα λειτουργούν ως ασφαλείς άγκυρες πλοήγησης του μαθήματος. Δεν παρουσιάζονται ως φετινή διδακτέα ή εξεταστέα ύλη μέχρι να δημοσιευτούν και να ελεγχθούν οι οδηγίες 2026–27.",
-        scopeNoteEn: "Topics are navigation anchors only. They are not presented as this year's taught or examinable scope until the 2026–27 guidance is published and checked.",
-        annualInstructionsStatus: "2026-27-pending",
+        scopeNoteEl: "Οι επίσημες οδηγίες ΓΕΛ 2026–27 έχουν δημοσιευτεί. Τα υπάρχοντα θέματα του site παραμένουν μόνο άγκυρες πλοήγησης μέχρι να ελεγχθούν ένα προς ένα απέναντι στην τρέχουσα οδηγία· δεν παρουσιάζονται ως αυτούσια φετινή διδακτέα ή εξεταστέα ύλη.",
+        scopeNoteEn: "Official 2026–27 GEL guidance has been published. Existing site topics remain navigation anchors until checked one by one against the current guidance; they are not presented as the exact taught or examinable scope.",
+        annualInstructionsStatus: "2026-27-guidance-published",
         annualInstructionsUrl: HIGH_REFERENCE,
         catalogUrl: HIGH_REFERENCE,
-        sourceLabelEl: "Συλλογή οδηγιών Γενικού Λυκείου 2025–26 (ΙΕΠ)",
-        sourceLabelEn: "General Lyceum guidance collection 2025–26 (IEP)",
-        verificationDate: "2026-08-30",
+        sourceLabelEl: "ΙΕΠ · Οδηγίες Γενικού Λυκείου 2026–27",
+        sourceLabelEn: "IEP · General Lyceum guidance 2026–27",
+        verificationDate: "2026-09-23",
       },
     };
   }
@@ -360,7 +360,7 @@
   }
 
   window.AITOOLSKIDS_TUTOR_CATALOG = Object.freeze({
-    meta: Object.freeze({ schoolYear: "2026-2027", lastVerified: "2026-08-30", middleIndex: MIDDLE_INDEX, highReference: HIGH_REFERENCE }),
+    meta: Object.freeze({ schoolYear: "2026-2027", lastVerified: "2026-09-23", middleIndex: MIDDLE_INDEX, highReference: HIGH_REFERENCE }),
     zones: Object.freeze({ middle: Object.freeze(middle), high: Object.freeze(high) }),
     getSubjects,
     getSubject,

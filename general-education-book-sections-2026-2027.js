@@ -206,6 +206,29 @@
         "Ενότητα 6 — Γεωμετρία"
       ]
     },
+    "istoria-d-dimotikou":{
+      sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/",
+      sections:[
+        "Γεωμετρικά Χρόνια",
+        "Αρχαϊκά Χρόνια",
+        "Κλασικά Χρόνια",
+        "Ελληνιστικά Χρόνια",
+        "Θέματα από την Αρχαία Ιστορία",
+        "Θέματα Τοπικής Ιστορίας"
+      ]
+    },
+    "istoria-e-dimotikou":{
+      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E105/157/1111%2C4055/",
+      sections:[
+        "Α΄ — Οι Έλληνες και οι Ρωμαίοι",
+        "Β΄ — Η Ρωμαϊκή Αυτοκρατορία μεταμορφώνεται",
+        "Γ΄ — Το βυζαντινό κράτος, μια δύναμη που μεγαλώνει",
+        "Δ΄ — Το βυζαντινό κράτος και οι γειτονικοί λαοί",
+        "Ε΄ — Η μεγάλη ακμή του βυζαντινού κράτους",
+        "ΣΤ΄ — Το Βυζάντιο παρακμάζει και υποκύπτει σε κατακτητές",
+        "Ζ΄ — Θέματα από τη βυζαντινή ιστορία"
+      ]
+    },
     "english-c-dimotikou":{
       sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
       sections:[
@@ -487,7 +510,7 @@
     }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.1.0",
+    version:"2.2.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

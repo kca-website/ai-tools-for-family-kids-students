@@ -173,7 +173,7 @@
       if(row){ row.officialCurriculum=o; row.quizId=row.quizId||qid; row.aliases=uniq([...(row.aliases||[]),qid]); }
     });
 
-    return [...byName.values()].map((row)=>{
+    const resolved=[...byName.values()].map((row)=>{
       if(!row.officialCurriculum && row.quizId) row.officialCurriculum=officialForQuiz(row.quizId);
       const topics=topicsForResolvedSubject(row);
       const statuses=topics.map((t)=>t.status||"");
@@ -188,7 +188,23 @@
         curriculum:row.catalogSubject?.curriculum||row.officialCurriculum||row.curriculum||null,
         topics,topicMode:mode,hasMappedTopics:topics.length>0
       });
-    }).sort((a,b)=>String(a.subjectLabelEl||"").localeCompare(String(b.subjectLabelEl||""),"el"));
+    });
+    const modeRank={unmapped:0,"mapped-navigation":1,"verified-official-sections":2,"verified-annual":3};
+    const dedup=new Map();
+    resolved.forEach((s)=>{
+      const key=s.quizId?("quiz:"+s.quizId):("id:"+(s.id||norm(cleanSubject(s.subjectLabelEl))));
+      const current=dedup.get(key);
+      if(!current){ dedup.set(key,s); return; }
+      const currentScore=(modeRank[current.topicMode]||0)*100+(current.topics||[]).length;
+      const nextScore=(modeRank[s.topicMode]||0)*100+(s.topics||[]).length;
+      const preferred=nextScore>currentScore?s:current;
+      const other=preferred===s?current:s;
+      preferred.topics=mergeTopics([...(preferred.topics||[]),...(other.topics||[])]);
+      preferred.aliases=uniq([...(preferred.aliases||[]),...(other.aliases||[]),other.id,other.quizId]);
+      if(!preferred.officialCurriculum && other.officialCurriculum) preferred.officialCurriculum=other.officialCurriculum;
+      dedup.set(key,preferred);
+    });
+    return [...dedup.values()].sort((a,b)=>String(a.subjectLabelEl||"").localeCompare(String(b.subjectLabelEl||""),"el"));
   }
   function getSubject(zoneId,gradeId,subjectId){
     const wanted=String(subjectId||"");

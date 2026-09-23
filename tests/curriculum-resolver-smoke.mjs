@@ -21,6 +21,8 @@ try{
   if(audit.environmentTopics<3) throw new Error('Environment Studies topics missing');
   if(!audit.mathATopics.some(x=>/Φυσικοί αριθμοί/.test(x))) throw new Error('Middle A mathematics official sections not resolved');
   if(audit.englishDTopics.length<3) throw new Error('Primary D English topic anchors not resolved');
+  const highA=await page.evaluate(()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER.getSubjects('high','a').map(s=>s.quizId||s.id));
+  if(new Set(highA).size!==highA.length) throw new Error('Duplicate High School course identity remains');
 
   await page.goto(BASE+'/teacher-assistant.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.selectOption('#context','middle');

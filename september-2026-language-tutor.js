@@ -60,10 +60,10 @@
           curriculum: Object.assign({}, subject.curriculum || {}, {
             schoolYear:"2026-2027",
             verificationDate:DATE,
-            coverageStatus:"annual-instructions-verified",
-            annualInstructionsStatus:"2026-27-verified",
-            coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",
-            coverageLabelEn:"Verified 2026–27 teaching guidance",
+            coverageStatus:"annual-guidance-detailed-map",
+            annualInstructionsStatus:"2026-27-guidance-published",
+            coverageLabelEl:"Θεματικός χάρτης βάσει επίσημων οδηγιών 2026–27",
+            coverageLabelEn:"Topic map based on official 2026–27 guidance",
             annualInstructionsUrl:SOURCE[zone],
             catalogUrl:SOURCE[zone],
             sourceLabelEl:SOURCE_LABEL[zone],
@@ -82,7 +82,7 @@
           subjectLabelEl:`Νεοελληνική Γλώσσα, ${grade.toUpperCase()}' ${zone === "middle" ? "Γυμνασίου" : "Λυκείου"}`,
           subjectLabelEn:`Modern Greek Language, ${zone === "middle" ? "Middle" : "High"} ${grade.toUpperCase()}`,
           topics:rows.map((row,i)=>topic(id,row,i)),
-          curriculum:{schoolYear:"2026-2027",verificationDate:DATE,coverageStatus:"annual-instructions-verified",annualInstructionsStatus:"2026-27-verified",coverageLabelEl:"Επαληθευμένες οδηγίες διδασκαλίας 2026–27",coverageLabelEn:"Verified 2026–27 teaching guidance",annualInstructionsUrl:SOURCE[zone],catalogUrl:SOURCE[zone],sourceLabelEl:SOURCE_LABEL[zone],sourceLabelEn:zone==="middle"?"Official 2026–27 Middle School Modern Greek guidance":"Official 2026–27 GEL Modern Greek guidance",scopeNoteEl:"Θεματικές δεξιότητες για διάλογο και εξάσκηση βάσει της επίσημης κατεύθυνσης 2026–27 — όχι τεστ αποστήθισης γραμματικών όρων.",scopeNoteEn:"Skill-based dialogue and practice aligned with official 2026–27 guidance — not a grammar-term memorisation drill."}
+          curriculum:{schoolYear:"2026-2027",verificationDate:DATE,coverageStatus:"annual-guidance-detailed-map",annualInstructionsStatus:"2026-27-guidance-published",coverageLabelEl:"Θεματικός χάρτης βάσει επίσημων οδηγιών 2026–27",coverageLabelEn:"Topic map based on official 2026–27 guidance",annualInstructionsUrl:SOURCE[zone],catalogUrl:SOURCE[zone],sourceLabelEl:SOURCE_LABEL[zone],sourceLabelEn:zone==="middle"?"Official 2026–27 Middle School Modern Greek guidance":"Official 2026–27 GEL Modern Greek guidance",scopeNoteEl:"Θεματικές δεξιότητες για διάλογο και εξάσκηση βάσει της επίσημης κατεύθυνσης 2026–27 — όχι τεστ αποστήθισης γραμματικών όρων.",scopeNoteEn:"Skill-based dialogue and practice aligned with official 2026–27 guidance — not a grammar-term memorisation drill."}
         });
       }
       zoneGrades[grade] = next;

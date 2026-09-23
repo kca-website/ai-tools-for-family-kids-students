@@ -6,8 +6,10 @@
   function cleanGuidanceTopics(values=[]){
     return (values||[]).map(value=>String(value||"").trim()).filter(value=>{
       if(!value) return false;
-      const plain=value.toLowerCase().replace(/[–—:.;,]/g," ").replace(/\s+/g," ").trim();
-      return !/^(?:κεφαλαια?\s+ενοτητες?|κεφαλαιο|κεφ|ενοτητα)$/.test(plain);
+      const plain=value.toLowerCase().replace(/[–—:.;,/\\|()[\]]/g," ").replace(/\s+/g," ").trim();
+      if(/^(?:κεφαλαια?|κεφ|ενοτητες?|κεφαλαια?\s+ενοτητες?|κεφαλαιο\s+ενδεικτικες|ενοτητα\s+ωρες)$/.test(plain)) return false;
+      if(/^(?:κεφαλαια?|ενοτητες?)\s*$/.test(plain)) return false;
+      return true;
     });
   }
   function scopeUnits(scope){
@@ -53,7 +55,7 @@
   }
 
   window.AITOOLSKIDS_EPAL_STUDENT_TOPICS_2026_2027=Object.freeze({
-    version:"2.2.0",
+    version:"2.3.0",
     verified:"2026-09-19",
     resolve,
     exactCount:(window.AITOOLSKIDS_EPAL_PANHELLENIC_2027?.mappedSubjects?.length||0)+(window.AITOOLSKIDS_EPAL_OFFICIAL_GUIDANCE_TOPICS_2026_2027?.recordCount||0),

@@ -52,7 +52,30 @@
     return Object.values(QUIZZES[zoneId]).filter((q)=>(q.grades||[]).includes(gradeId));
   }
   function catalogRows(zoneId,gradeId){
-    return window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(zoneId,gradeId) || [];
+    return (window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(zoneId,gradeId) || [])
+      .filter((s)=>!s?.specialEducation && !s?.curriculum?.specialEducation && !s?.schoolType);
+  }
+  function specialCatalogRows(schoolType,zoneId,gradeId){
+    return (window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(zoneId,gradeId) || [])
+      .filter((s)=>s?.schoolType===schoolType || s?.curriculum?.schoolType===schoolType);
+  }
+  function getSpecialSubjects(schoolType,zoneId,gradeId){
+    return specialCatalogRows(schoolType,zoneId,gradeId).map((s)=>{
+      const c=s.curriculum||{};
+      const structureOnly=!!(s.structureOnly||c.structureOnly);
+      const rawTopics=(s.topics||[]).filter((t)=>!t?.specialSupportAction);
+      const topics=structureOnly?[]:rawTopics.map((t)=>Object.assign({},t,{
+        status:t.status||(
+          c.annualInstructionsStatus==="2026-27-verified"?"annual-instructions-verified":
+          c.annualInstructionsStatus==="2026-27-framework-verified"?"verified-framework":
+          c.coverageStatus==="panhellenic-2027-verified"?"panhellenic-2027-verified":
+          c.coverageStatus==="annual-exam-syllabus-verified"?"annual-exam-syllabus-verified":
+          "mapped-navigation"
+        ),
+        sourceUrl:t.sourceUrl||c.annualInstructionsUrl||c.examSyllabusUrl||c.catalogUrl||""
+      }));
+      return Object.assign({},s,{topics,structureOnly,hasMappedTopics:topics.length>0});
+    });
   }
   function officialForQuiz(quizId){
     const layer=window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
@@ -214,5 +237,5 @@
     return getSubject(zoneId,gradeId,subjectId)?.topics || [];
   }
 
-  window.AITOOLSKIDS_CURRICULUM_RESOLVER=Object.freeze({norm,cleanSubject,getSubjects,getSubject,getTopics});
+  window.AITOOLSKIDS_CURRICULUM_RESOLVER=Object.freeze({norm,cleanSubject,getSubjects,getSubject,getTopics,getSpecialSubjects});
 })();

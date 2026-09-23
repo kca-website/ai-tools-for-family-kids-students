@@ -95,7 +95,7 @@
   var layer=window.AITOOLSKIDS_OFFICIAL_CURRICULUM, annualLayer=window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027;
   var empty=document.getElementById('empty'), result=document.getElementById('result');
   if(!layer){empty.textContent='Ο Χάρτης Ύλης δεν μπόρεσε να φορτωθεί.';return;}
-  var lang='el', zone='primary', PAGE_VERIFIED_DATE='2026-09-22', subjectSelect=document.getElementById('subject'), courseSelect=document.getElementById('course'), topicPick=document.getElementById('topicPick');
+  var lang='el', zone='primary', PAGE_VERIFIED_DATE='2026-09-23', subjectSelect=document.getElementById('subject'), courseSelect=document.getElementById('course'), topicPick=document.getElementById('topicPick');
   var entries=Object.values(layer.byQuiz||{}), gapPairs=Object.entries(layer.gapAlignment||{});
   var zoneLabels={primary:{el:'Δημοτικό',en:'Primary'},middle:{el:'Γυμνάσιο',en:'Middle School'},high:{el:'Λύκειο',en:'High School'}};
   var quizRoute={primary:'/primary/guardian/quiz',middle:'/middle/guardian/quiz',high:'/high/guardian/quiz'};

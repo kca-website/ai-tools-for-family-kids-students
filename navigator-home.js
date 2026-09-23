@@ -1,4 +1,4 @@
-/* Homepage navigator v8.3.
+/* Homepage navigator v8.4.
  * Scope: homepage only.
  * Keeps the core app, routing, language system and school views untouched.
  * Legacy homepage injectors remain available to the rest of the app but are suppressed here.
@@ -298,27 +298,13 @@
         <span class="home-v8-needs__arrow" aria-hidden="true">↓</span>
       </button>
       <div class="home-v8-needs__body" id="homeV8NeedsBody" hidden>
-        <section class="home-v8-needs-group" aria-labelledby="homeV8TasksTitle">
-          <h3 id="homeV8TasksTitle" class="home-v8-needs-group__title">${c.needsTasksTitle}</h3>
-          <div class="home-v8-needs__grid">
-            ${c.needs.map(([icon,title,desc,href]) => `
-              <a class="home-v8-needs-card" href="${href}">
-                <span class="home-v8-needs-card__icon" aria-hidden="true">${icon}</span>
-                <span><strong>${title}</strong><small>${desc}</small></span>
-              </a>`).join("")}
-          </div>
-        </section>
-        <section class="home-v8-needs-group home-v8-needs-group--learning" aria-labelledby="homeV8LearningTitle">
-          <h3 id="homeV8LearningTitle" class="home-v8-needs-group__title">${c.needsLearningTitle}</h3>
-          <p class="home-v8-needs-group__intro">${c.needsLearningIntro}</p>
-          <div class="home-v8-learning-grid">
-            ${c.learningModes.map(([icon,title,desc,href]) => `
-              <a class="home-v8-learning-card" href="${href}">
-                <span class="home-v8-learning-card__icon" aria-hidden="true">${icon}</span>
-                <span><strong>${title}</strong><small>${desc}</small></span>
-              </a>`).join("")}
-          </div>
-        </section>
+        <div class="home-v8-needs__grid">
+          ${[...c.needs, ...c.learningModes].map(([icon,title,desc,href]) => `
+            <a class="home-v8-needs-card" href="${href}">
+              <span class="home-v8-needs-card__icon" aria-hidden="true">${icon}</span>
+              <span><strong>${title}</strong><small>${desc}</small></span>
+            </a>`).join("")}
+        </div>
       </div>`;
   }
 

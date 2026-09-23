@@ -109,6 +109,7 @@ try{
   if(audit.biologyALycMode!=='verified-official-sections' || audit.biologyALycTopics.length<12) throw new Error('High A Biology verified book sections not resolved');
   if(audit.mathAPrimaryMode!=='verified-official-sections' || audit.mathAPrimaryTopics.length<9) throw new Error('Primary A Mathematics verified book sections not resolved');
   if(audit.languageAPrimaryMode!=='verified-official-sections' || audit.languageAPrimaryTopics.length<10) throw new Error('Primary A Language verified book sections not resolved');
+  if(audit.languageAPrimaryTopics.some(x=>/^[a-z0-9-]+\.[a-z0-9.-]+$/i.test(x))) throw new Error('Primary A Language leaked internal topic ids');
   if(audit.languageBPrimaryMode!=='verified-official-sections' || audit.languageBPrimaryTopics.length<24) throw new Error('Primary B Language verified book sections not resolved');
   if(audit.mathBPrimaryMode!=='verified-official-sections' || audit.mathBPrimaryTopics.length<9) throw new Error('Primary B Mathematics verified book sections not resolved');
   if(audit.mathCPrimaryMode!=='verified-official-sections' || audit.mathCPrimaryTopics.length<9) throw new Error('Primary C Mathematics verified book sections not resolved');

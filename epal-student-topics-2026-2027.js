@@ -9,8 +9,9 @@
     const officialGuidanceTopics=guidanceRecord?.topics||[];
     const hasCurrent=Array.isArray(currentTopics)&&currentTopics.length>0;
     const fromExamSyllabus=!hasCurrent&&officialExamTopics.length>0;
-    const hasUsableScope=!officialGuidanceTopics.length&&/(?:όλα|όλες|ολόκληρ|κεφάλαι(?:ο|α)\s*\d|κεφ\.\s*\d|ενότητες?\s*\d)/i.test(guidanceRecord?.scope||"");
-    const scopeTopics=hasUsableScope?[`Επίσημη έκταση ύλης — ${guidanceRecord.scope}`]:[];
+    const scope=String(guidanceRecord?.scope||"").trim();
+    const hasUsableScope=!officialGuidanceTopics.length&&/(?:όλα|όλες|όλο\s+το\s+βιβλίο|ολόκληρ|ως\s+έχει\s+το\s+βιβλίο|σελ\.?\s*\d|σελίδ|κεφάλαι(?:ο|α)\s*\d|κεφ\.\s*\d|ενότητες?\s*\d)/i.test(scope);
+    const scopeTopics=hasUsableScope?[`Επίσημη έκταση ύλης — ${scope}`]:[];
     const fromOfficialGuidance=!hasCurrent&&!fromExamSyllabus&&(officialGuidanceTopics.length>0||scopeTopics.length>0);
     const sourceTopics=hasCurrent?currentTopics:(fromExamSyllabus?officialExamTopics:(officialGuidanceTopics.length?officialGuidanceTopics:scopeTopics));
     const sourceUrls=window.EPAL_2026_2027_TEACHER_STRUCTURE?.sourceUrls||{};

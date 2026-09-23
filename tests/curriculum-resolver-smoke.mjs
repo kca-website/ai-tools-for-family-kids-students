@@ -29,6 +29,15 @@ try{
     const mathCPrimary=r.getSubject('primary','c','math-c-dimotikou');
     const mathDPrimary=r.getSubject('primary','d','math-d-dimotikou');
     const languageCPrimary=r.getSubject('primary','c','glossa-c-dimotikou');
+    const historyDPrimary=r.getSubject('primary','d','istoria-d-dimotikou');
+    const historyEPrimary=r.getSubject('primary','e','istoria-e-dimotikou');
+    const languageDPrimary=r.getSubject('primary','d','glossa-d-dimotikou');
+    const languageEPrimary=r.getSubject('primary','e','glossa-e-dimotikou');
+    const mathEPrimary=r.getSubject('primary','e','math-e-dimotikou');
+    const mathStPrimary=r.getSubject('primary','st','math-st-dimotikou');
+    const scienceStPrimary=r.getSubject('primary','st','science-st-dimotikou');
+    const englishAGym=r.getSubject('middle','a','english-a-gymnasiou');
+    const englishBGym=r.getSubject('middle','b','english-b-gymnasiou');
     return {
       primaryAEnvironmentCount:env.length,
       environmentQuizId:env[0]?.quizId||'',
@@ -64,7 +73,25 @@ try{
       mathDPrimaryMode:mathDPrimary?.topicMode||'',
       mathDPrimaryTopics:mathDPrimary?.topics?.map(t=>t.labelEl)||[],
       languageCPrimaryMode:languageCPrimary?.topicMode||'',
-      languageCPrimaryTopics:languageCPrimary?.topics?.map(t=>t.labelEl)||[]
+      languageCPrimaryTopics:languageCPrimary?.topics?.map(t=>t.labelEl)||[],
+      historyDPrimaryMode:historyDPrimary?.topicMode||'',
+      historyDPrimaryTopics:historyDPrimary?.topics?.map(t=>t.labelEl)||[],
+      historyEPrimaryMode:historyEPrimary?.topicMode||'',
+      historyEPrimaryTopics:historyEPrimary?.topics?.map(t=>t.labelEl)||[],
+      languageDPrimaryMode:languageDPrimary?.topicMode||'',
+      languageDPrimaryTopics:languageDPrimary?.topics?.map(t=>t.labelEl)||[],
+      languageEPrimaryMode:languageEPrimary?.topicMode||'',
+      languageEPrimaryTopics:languageEPrimary?.topics?.map(t=>t.labelEl)||[],
+      mathEPrimaryMode:mathEPrimary?.topicMode||'',
+      mathEPrimaryTopics:mathEPrimary?.topics?.map(t=>t.labelEl)||[],
+      mathStPrimaryMode:mathStPrimary?.topicMode||'',
+      mathStPrimaryTopics:mathStPrimary?.topics?.map(t=>t.labelEl)||[],
+      scienceStPrimaryMode:scienceStPrimary?.topicMode||'',
+      scienceStPrimaryTopics:scienceStPrimary?.topics?.map(t=>t.labelEl)||[],
+      englishAGymMode:englishAGym?.topicMode||'',
+      englishAGymTopics:englishAGym?.topics?.map(t=>t.labelEl)||[],
+      englishBGymMode:englishBGym?.topicMode||'',
+      englishBGymTopics:englishBGym?.topics?.map(t=>t.labelEl)||[]
     };
   });
   if(audit.primaryAEnvironmentCount!==1) throw new Error('Environment Studies duplicate remains in Primary A');
@@ -87,6 +114,15 @@ try{
   if(audit.mathCPrimaryMode!=='verified-official-sections' || audit.mathCPrimaryTopics.length<9) throw new Error('Primary C Mathematics verified book sections not resolved');
   if(audit.mathDPrimaryMode!=='verified-official-sections' || audit.mathDPrimaryTopics.length<9) throw new Error('Primary D Mathematics verified book sections not resolved');
   if(audit.languageCPrimaryMode!=='verified-official-sections' || audit.languageCPrimaryTopics.length<14) throw new Error('Primary C Language verified book sections not resolved');
+  if(audit.historyDPrimaryMode!=='verified-official-sections' || audit.historyDPrimaryTopics.length<6) throw new Error('Primary D History verified book sections not resolved');
+  if(audit.historyEPrimaryMode!=='verified-official-sections' || audit.historyEPrimaryTopics.length<7) throw new Error('Primary E History verified book sections not resolved');
+  if(audit.languageDPrimaryMode!=='verified-official-sections' || audit.languageDPrimaryTopics.length<16) throw new Error('Primary D Language verified book sections not resolved');
+  if(audit.languageEPrimaryMode!=='verified-official-sections' || audit.languageEPrimaryTopics.length<17) throw new Error('Primary E Language verified book sections not resolved');
+  if(audit.mathEPrimaryMode!=='verified-official-sections' || audit.mathEPrimaryTopics.length<9) throw new Error('Primary E Mathematics verified book sections not resolved');
+  if(audit.mathStPrimaryMode!=='verified-official-sections' || audit.mathStPrimaryTopics.length<6) throw new Error('Primary ST Mathematics verified book sections not resolved');
+  if(audit.scienceStPrimaryMode!=='verified-official-sections' || audit.scienceStPrimaryTopics.length<13) throw new Error('Primary ST Science verified book sections not resolved');
+  if(audit.englishAGymMode!=='verified-official-sections' || audit.englishAGymTopics.length<9) throw new Error('Middle A English verified book sections not resolved');
+  if(audit.englishBGymMode!=='verified-official-sections' || audit.englishBGymTopics.length<8) throw new Error('Middle B English verified book sections not resolved');
   const highA=await page.evaluate(()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER.getSubjects('high','a').map(s=>s.quizId||s.id));
   if(new Set(highA).size!==highA.length) throw new Error('Duplicate High School course identity remains');
 

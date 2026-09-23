@@ -207,6 +207,16 @@
         "3η Ενότητα · Κεφάλαιο 4 — Υδατάνθρακες-Πρωτεΐνες-Λίπη"
       ]
     },
+    "ekthesi-g-lykeiou":{
+      sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/handle/8547/2678",
+      sections:[
+        "Κεφάλαιο 1 — Η πειθώ",
+        "Κεφάλαιο 2 — Το δοκίμιο - Το άρθρο - Η επιφυλλίδα",
+        "Κεφάλαιο 3 — Δίκαιος λόγος και άδικος λόγος",
+        "Παράρτημα 1 — Διαβάζω και γράφω",
+        "Παράρτημα 2 — Ερευνητική εργασία"
+      ]
+    },
     "biologia-a-lykeiou":{
       sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGL-A105",
       sections:[
@@ -272,7 +282,7 @@
     }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"1.5.0",
+    version:"1.6.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

@@ -59,6 +59,25 @@
         "24 — Να σου πω τι έμαθα;"
       ]
     },
+    "glossa-c-dimotikou":{
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/",
+      sections:[
+        "Πάλι μαζί!",
+        "Στο σπίτι και στη γειτονιά",
+        "Στη γη και στη θάλασσα",
+        "Ο κόσμος γύρω μας",
+        "Η πατρίδα μας γιορτάζει",
+        "Πολιτείες ντυμένες στα λευκά",
+        "Ιστορίες του χειμώνα",
+        "Έλα στην παρέα μας!",
+        "Άνθρωποι και μηχανές",
+        "Γιορτάζω και θυμάμαι",
+        "Ήτανε μια φορά…",
+        "Του κόσμου το ψωμί",
+        "Όλοι μια αγκαλιά",
+        "Γιορτή και ξενοιασιά"
+      ]
+    },
     "english-c-dimotikou":{
       sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
       sections:[
@@ -340,7 +359,7 @@
     }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"1.7.0",
+    version:"1.8.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

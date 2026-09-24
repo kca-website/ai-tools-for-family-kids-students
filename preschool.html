@@ -25,12 +25,12 @@
     .creator{margin:28px 0;border:1px solid #eadfcf;background:linear-gradient(135deg,#fffaf1,#f7fbff);border-radius:24px;padding:24px;box-shadow:0 8px 26px rgba(46,50,70,.05)}
     .creator h2{margin:0 0 6px;font-size:1.35rem}.creator>p{margin:0 0 16px;color:var(--muted);line-height:1.6}.mode-row,.idea-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
     .mode-btn,.idea-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:750;cursor:pointer;color:var(--ink)}.mode-btn.active{background:#fff0df;border-color:#e8a45d;color:#8a4b16}
-    .creator-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}.creator-input{width:100%;padding:13px 14px;border:1px solid #d9dde5;border-radius:14px;font:inherit}.creator-submit{border:0;border-radius:14px;padding:12px 18px;background:#2e6f5e;color:#fff;font-weight:800;cursor:pointer}.creator-submit:disabled{opacity:.55;cursor:wait}
+    .creator-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}.creator-option{display:flex;flex-direction:column;gap:5px}.creator-option label{font-size:.78rem;font-weight:800;color:#566172}.creator-option select{width:100%;padding:10px 11px;border:1px solid #d9dde5;border-radius:12px;background:#fff;font:inherit;color:var(--ink)}.creator-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}.creator-input{width:100%;padding:13px 14px;border:1px solid #d9dde5;border-radius:14px;font:inherit}.creator-submit{border:0;border-radius:14px;padding:12px 18px;background:#2e6f5e;color:#fff;font-weight:800;cursor:pointer}.creator-submit:disabled{opacity:.55;cursor:wait}
     .creator-note{font-size:.78rem;color:var(--muted);margin:8px 0 0}.creator-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.creator-action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;font-weight:750;cursor:pointer}.creator-status{margin:14px 0 0;font-size:.9rem;color:#4d596b}.creator-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.result-card{padding:16px;border-radius:17px;border:1px solid var(--line);background:#fff}.result-card h3{font-size:.95rem;margin:0 0 7px}.result-card p{margin:0;color:#4f5968;line-height:1.55;font-size:.9rem;white-space:pre-line}
     .adult{margin-top:28px;border:1px solid #dedbf1;background:#faf9ff;border-radius:20px;padding:22px}.adult h2{margin:0 0 8px;font-size:1.15rem}.adult p{margin:0 0 12px;color:var(--muted);line-height:1.6}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:7px 10px;border-radius:999px;background:#fff;border:1px solid #ddd9f2;font-size:.82rem;font-weight:700}
     .legal{margin-top:28px;padding:20px;border:1px solid #f0d7b7;background:#fffaf1;border-radius:18px}.legal h2{margin:0 0 8px;font-size:1.05rem}.legal ul{margin:0;padding-left:20px;color:#5f6673;line-height:1.65;font-size:.9rem}
     .footer{margin-top:28px;text-align:center;color:var(--muted);font-size:.82rem}
-    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:26px}.hero__art{min-height:140px;font-size:3.5rem}.grid,.creator-results{grid-template-columns:1fr}.creator-form{grid-template-columns:1fr}h1{font-size:1.8rem}}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:26px}.hero__art{min-height:140px;font-size:3.5rem}.grid,.creator-results,.creator-options{grid-template-columns:1fr}.creator-form{grid-template-columns:1fr}h1{font-size:1.8rem}}
   </style>
 </head>
 <body>
@@ -55,7 +55,7 @@
         <button class="mode-btn" type="button" data-mode="learn">🧩 Μαθαίνω παίζοντας</button>
         <button class="mode-btn" type="button" data-mode="offline">✂️ Χωρίς οθόνη</button>
       </div>
-      <div class="idea-row" aria-label="Έτοιμες ιδέες">
+      <div class="creator-options" aria-label="Προσαρμογή δραστηριότητας"><div class="creator-option"><label for="creatorAge">Ηλικία</label><select id="creatorAge"><option value="4">4 ετών</option><option value="5" selected>5 ετών</option><option value="6">6 ετών</option></select></div><div class="creator-option"><label for="creatorDuration">Χρόνος</label><select id="creatorDuration"><option value="5">5 λεπτά</option><option value="10" selected>10 λεπτά</option><option value="15">15 λεπτά</option></select></div><div class="creator-option"><label for="creatorPlace">Πού θα γίνει</label><select id="creatorPlace"><option value="home">Στο σπίτι</option><option value="classroom">Στην τάξη</option></select></div></div><div class="idea-row" aria-label="Έτοιμες ιδέες">
         <button class="idea-btn" type="button">Δεινόσαυρος</button><button class="idea-btn" type="button">Κάστρο</button><button class="idea-btn" type="button">Ρομπότ</button><button class="idea-btn" type="button">Ζώα</button><button class="idea-btn" type="button">Διάστημα</button><button class="idea-btn" type="button">Χρώματα</button><button class="idea-btn" type="button">Σχήματα</button><button class="idea-btn" type="button">Αριθμοί μέχρι το 5</button>
       </div>
       <form class="creator-form" id="creatorForm">
@@ -100,7 +100,7 @@
       const input = document.getElementById('creatorInput');
       const submit = document.getElementById('creatorSubmit');
       const status = document.getElementById('creatorStatus');
-      const results = document.getElementById('creatorResults'); const actions = document.getElementById('creatorActions'); const again = document.getElementById('creatorAgain'); const printBtn = document.getElementById('creatorPrint');
+      const results = document.getElementById('creatorResults'); const actions = document.getElementById('creatorActions'); const again = document.getElementById('creatorAgain'); const printBtn = document.getElementById('creatorPrint'); const age = document.getElementById('creatorAge'); const duration = document.getElementById('creatorDuration'); const place = document.getElementById('creatorPlace');
       let mode = 'story';
 
       document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => {
@@ -129,7 +129,7 @@
           const r = await fetch('/api/preschool-activity', {
             method:'POST',
             headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({idea, mode})
+            body:JSON.stringify({idea, mode, age:age.value, duration:duration.value, place:place.value})
           });
           const data = await r.json().catch(() => ({}));
           if (!r.ok) throw new Error(data.message || 'Δεν ήταν δυνατή η δημιουργία.');

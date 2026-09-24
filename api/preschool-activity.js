@@ -60,8 +60,7 @@ ${modeRule}`;
         model,
         messages:[{role:'system',content:system},{role:'user',content:user}],
         temperature:0.25,
-        max_completion_tokens:1400,
-        response_format:{type:'json_object'}
+        max_completion_tokens:1400
       }),
       signal: controller.signal
     });

@@ -1493,6 +1493,29 @@ function renderToolGrid(pathTools, targetElement) {
       gapsHtml = `<p class="quiz-gaps-found-label">${t("quizGapsFound")}</p><div class="quiz-gap-grid">${gapCards}</div>`;
     }
 
+    const quizAiAvailable = isTutorViewAvailable(state.currentZone, state.currentRole);
+    const quizGapLabels = gapTagIds.map((tagId) => {
+      const gap = (typeof GAP_TAGS !== "undefined" && GAP_TAGS[tagId]) || null;
+      return gap ? (state.lang === "el" ? gap.labelEl : gap.labelEn) : "";
+    }).filter(Boolean);
+    const quizAiPrompt = state.lang === "el"
+      ? (quizGapLabels.length
+          ? `Στο μικρό τεστ δυσκολεύτηκα στα εξής σημεία: ${quizGapLabels.join(", ")}. Βοήθησέ με να τα καταλάβω χωρίς να μου δώσεις έτοιμη λύση. Κάνε μία ερώτηση ή μικρή υπόδειξη τη φορά και στο τέλος βάλε μου 2 νέες ερωτήσεις για να ελέγξω αν το κατάλαβα.`
+          : "Στο μικρό τεστ τα πήγα καλά. Δώσε μου μια λίγο πιο απαιτητική πρόκληση στο ίδιο μάθημα, χωρίς έτοιμη λύση, και έλεγξε στο τέλος αν μπορώ να εξηγήσω τη σκέψη μου.")
+      : (quizGapLabels.length
+          ? `In the short quiz I struggled with: ${quizGapLabels.join(", ")}. Help me understand these without giving me the ready answer. Ask one question or give one small hint at a time, then finish with 2 new questions to check my understanding.`
+          : "I did well on the short quiz. Give me a slightly harder challenge in the same subject without a ready answer, then check whether I can explain my reasoning.");
+
+    const quizAiNextHtml = quizAiAvailable ? `
+      <div class="quiz-ai-next" style="margin:20px 0 0;padding:16px;border:1px solid #bfe3d5;border-radius:12px;background:#f3fbf7;">
+        <strong style="display:block;margin-bottom:5px;color:#175c4a;">${state.lang === "el" ? "🤖 Επόμενο βήμα: AI Βοήθεια" : "🤖 Next step: AI Help"}</strong>
+        <p style="margin:0 0 11px;color:var(--color-text-muted);font-size:.9rem;line-height:1.5;">${state.lang === "el"
+          ? (quizGapLabels.length ? "Δούλεψε ακριβώς τα σημεία που εντοπίστηκαν με καθοδήγηση και μετά ξαναδοκίμασε." : "Χρησιμοποίησε την AI Βοήθεια για πιο απαιτητική εξάσκηση στο ίδιο μάθημα.")
+          : (quizGapLabels.length ? "Work on exactly the gaps that were spotted with guided help, then try again." : "Use AI Help for a harder challenge in the same subject.")}</p>
+        <button type="button" class="quiz-ai-help-btn" style="border:0;border-radius:9px;background:var(--color-accent);color:#fff;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer;">${state.lang === "el" ? "Άνοιξε AI Βοήθεια →" : "Open AI Help →"}</button>
+      </div>
+    ` : "";
+
     // Υπολογισμός % επιτυχίας παιδιού (για τη σύγκριση με το Parent Quiz)
     const childTotal = state.quizSessionQuestions.length;
     const childCorrect = childTotal - gapTagIds.length >= 0
@@ -1508,6 +1531,7 @@ function renderToolGrid(pathTools, targetElement) {
     els.quizContent.innerHTML = `
       <h3 class="quiz-results-title">${t("quizResultsTitle")}</h3>
       ${gapsHtml}
+      ${quizAiNextHtml}
       <div class="quiz-achievement-section" style="margin-top: 32px; padding-top: 24px; border-top: 2px solid #E4E6EA;">
         <h4 style="font-size: 1rem; font-weight: 700; margin: 0 0 12px; color: var(--color-text-muted);">
           🏅 ${state.lang === 'el' ? 'Η Κάρτα Σου' : 'Your Card'}
@@ -1539,6 +1563,30 @@ function renderToolGrid(pathTools, targetElement) {
         <button type="button" class="quiz-back-btn">${t("quizBackToStart")}</button>
       </div>
     `;
+
+    const quizAiBtn = els.quizContent.querySelector('.quiz-ai-help-btn');
+    if (quizAiBtn) {
+      quizAiBtn.addEventListener('click', () => {
+        const preferredSubject = state.quizSubjectId || state.currentSubject;
+        state.currentSubject = preferredSubject || null;
+        state.currentView = "tutor";
+        pushRoute();
+        renderCurrentRoute();
+        setTimeout(() => {
+          const subject = document.getElementById("tutorSubject");
+          if (subject && preferredSubject && [...subject.options].some((o) => o.value === preferredSubject)) {
+            subject.value = preferredSubject;
+            subject.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+          const input = document.getElementById("tutorInput");
+          if (input) {
+            input.value = quizAiPrompt;
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+            input.focus();
+          }
+        }, 80);
+      });
+    }
 
     els.quizContent.querySelector('.quiz-download-btn').addEventListener('click', () => {
       downloadCardAsSquarePng(svgCard, 'aitools4kids-karta.png');

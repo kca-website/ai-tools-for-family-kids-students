@@ -344,6 +344,7 @@
         if (!generatedActivity) return;
         if (visualCartoon.classList.contains('is-playing') || visualPuppet.classList.contains('is-playing')) {
           stopMotion();
+          visualAnimate.disabled = false;
           visualImageNote.textContent = 'Η κίνηση σταμάτησε. Πάτησε ξανά για να συνεχίσει.';
           return;
         }

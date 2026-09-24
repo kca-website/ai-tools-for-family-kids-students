@@ -71,6 +71,7 @@
         <div class="creator-visual__head"><h3>🎨 Οπτική κάρτα για τη δραστηριότητα</h3><div class="creator-visual__buttons"><button id="visualStill" type="button" aria-pressed="false">🖼️ Φτιάξε AI εικόνα</button><button id="visualAnimate" type="button" aria-pressed="false">🎞️ Δώσε κίνηση</button></div></div>
         <div class="visual-scene" id="visualScene" data-bg="sky">
           <img class="visual-ai-image" id="visualAiImage" alt="" hidden>
+          <div class="visual-puppet" id="visualPuppet" hidden aria-label="Η ίδια AI εικόνα ζωντανεύει"><img class="visual-puppet__character" id="visualPuppetCharacter" alt=""></div>
           <div class="visual-cartoon" id="visualCartoon" hidden data-palette="sky"><div id="visualCartoonSvg"></div><p class="visual-cartoon__title" id="visualCartoonTitle"></p><p class="visual-cartoon__caption" id="visualCartoonCaption"></p></div>
           <div class="visual-scene__fallback"><div class="visual-scene__emojis"><span id="visualEmoji1">🌈</span><span id="visualEmoji2">🧸</span><span id="visualEmoji3">⭐</span></div><p class="visual-scene__title" id="visualTitle"></p><p class="visual-scene__caption" id="visualCaption"></p></div>
         </div>
@@ -174,6 +175,7 @@
     <p class="footer">Ανεξάρτητο εκπαιδευτικό έργο · Η σελίδα αυτή είναι ενημερωτική και δεν αποτελεί νομική συμβουλή.</p>
   </main>
   <script src="/preschool-scenes.js"></script>
+  <script src="/preschool-image-motion.js"></script>
   <script>
     (() => {
       const form = document.getElementById('creatorForm');
@@ -188,10 +190,14 @@
       const visualCartoonSvg = document.getElementById('visualCartoonSvg');
       const visualCartoonTitle = document.getElementById('visualCartoonTitle');
       const visualCartoonCaption = document.getElementById('visualCartoonCaption');
+      const visualPuppet = document.getElementById('visualPuppet');
+      const puppetCharacter = document.getElementById('visualPuppetCharacter');
       const fallback = visualScene.querySelector('.visual-scene__fallback');
       let mode = 'story', generatedActivity = null, generatedIdea = '', generatedAge = '5', generatedMode = 'story', generation = 0, imageRequest = 0;
+      let puppetSource = '', motionRequest = 0;
       function stopMotion() {
         visualCartoon.classList.remove('is-playing');
+        visualPuppet.classList.remove('is-playing');
         visualAnimate.classList.remove('active');
         visualAnimate.setAttribute('aria-pressed','false');
         visualAnimate.textContent = '🎞️ Δώσε κίνηση';
@@ -223,6 +229,7 @@
         const previousActionTop = isVariation ? actions.getBoundingClientRect().top : 0;
         const request = ++generation;
         ++imageRequest;
+        ++motionRequest;
         submit.disabled = true;
         again.disabled = true;
         visualStill.disabled = true;
@@ -269,6 +276,8 @@
           visualScene.dataset.bg = ['sky','mint','peach','lilac'].includes(data.activity.visualBg) ? data.activity.visualBg : 'sky';
           visualScene.classList.remove('is-animated','is-photo-animated','has-ai-image');
           visualCartoon.hidden = true;
+          visualPuppet.hidden = true;
+          puppetSource = '';
           visualCartoonSvg.replaceChildren();
           fallback.hidden = false;
           visualAiImage.hidden = true;
@@ -299,6 +308,7 @@
         visualStill.disabled = true;
         visualAnimate.disabled = true;
         const request = ++imageRequest;
+        ++motionRequest;
         visualImageNote.textContent = 'Δημιουργείται η εικόνα…';
         try {
           const r = await fetch('/api/preschool-image', {
@@ -313,6 +323,8 @@
           visualAiImage.alt = 'AI εικονογράφηση για τη δραστηριότητα ' + idea;
           visualAiImage.hidden = false;
           visualCartoon.hidden = true;
+          visualPuppet.hidden = true;
+          puppetSource = '';
           fallback.hidden = true;
           stopMotion();
           visualScene.classList.add('has-ai-image');
@@ -328,11 +340,40 @@
           if (request === imageRequest) { visualStill.disabled = false; visualAnimate.disabled = false; }
         }
       });
-      visualAnimate.addEventListener('click', () => {
+      visualAnimate.addEventListener('click', async () => {
         if (!generatedActivity) return;
-        if (visualCartoon.classList.contains('is-playing')) {
+        if (visualCartoon.classList.contains('is-playing') || visualPuppet.classList.contains('is-playing')) {
           stopMotion();
           visualImageNote.textContent = 'Η κίνηση σταμάτησε. Πάτησε ξανά για να συνεχίσει.';
+          return;
+        }
+        if (visualAiImage.src && !visualAiImage.hidden || !visualPuppet.hidden) {
+          const request = ++motionRequest;
+          if (puppetSource !== visualAiImage.src) {
+            visualAnimate.disabled = true;
+            visualImageNote.textContent = 'Ετοιμάζουμε τον ήρωα της εικόνας για να χορέψει…';
+            try {
+              const sprite = await window.PreschoolImageMotion.cutout(visualAiImage.src);
+              if (request !== motionRequest) return;
+              puppetCharacter.src = sprite.foreground;
+              visualPuppet.style.aspectRatio = `${sprite.width} / ${sprite.height}`;
+              puppetSource = visualAiImage.src;
+            } catch (error) {
+              if (request === motionRequest) visualImageNote.textContent = error.message?.startsWith('Δεν ') ? error.message : 'Δεν μπόρεσε να κινηθεί αυτή η εικόνα. Δοκίμασε ξανά.';
+              return;
+            } finally {
+              if (request === motionRequest) visualAnimate.disabled = false;
+            }
+          }
+          if (request !== motionRequest) return;
+          visualAiImage.hidden = true;
+          visualCartoon.hidden = true;
+          visualPuppet.hidden = false;
+          visualPuppet.classList.add('is-playing');
+          visualAnimate.classList.add('active');
+          visualAnimate.setAttribute('aria-pressed','true');
+          visualAnimate.textContent = '⏸️ Σταμάτησε την κίνηση';
+          visualImageNote.textContent = 'Ο ήρωας από την ίδια εικόνα χορεύει απαλά. Πάτησε ξανά για να σταματήσει.';
           return;
         }
         if (visualCartoon.hidden) {
@@ -353,14 +394,11 @@
         visualCartoon.classList.add('is-playing');
         visualAnimate.classList.add('active');
         visualAnimate.setAttribute('aria-pressed','true');
-        visualAnimate.textContent = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-          ? '🖼️ Η σκηνή εμφανίζεται ακίνητη'
-          : '⏸️ Σταμάτησε την κίνηση';
+        visualAnimate.textContent = '⏸️ Σταμάτησε την κίνηση';
         visualImageNote.textContent = sceneMotionNote(visualCartoonSvg.querySelector('svg'));
       });
       function sceneMotionNote(svg) {
         if (!svg) return 'Η ζωγραφιά ζωντανεύει απαλά.';
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 'Η ζωγραφιά μένει ακίνητη σύμφωνα με τη ρύθμιση της συσκευής σας.';
         return svg.querySelector('.tail') ? 'Κοίτα την ουρά, το κεφάλι και τα βήματα του δεινόσαυρου.' : 'Η ζωγραφιά ζωντανεύει απαλά.';
       }
       again.addEventListener('click', () => form.requestSubmit()); printBtn.addEventListener('click', () => window.print()); function escapeHtml(v){return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}

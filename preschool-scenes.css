@@ -1,11 +1,17 @@
 .visual-scene .visual-cartoon {width:100%;max-width:640px;min-width:0;overflow:hidden}
+.visual-scene .visual-puppet{position:relative;width:min(100%,440px);max-width:100%;max-height:440px;overflow:hidden;border-radius:14px;box-shadow:0 10px 28px rgba(0,0,0,.12);background:linear-gradient(#effaf6 72%,#dbf0e8);isolation:isolate}
+.visual-puppet::after{content:"";position:absolute;z-index:0;left:28%;right:28%;bottom:5%;height:7%;background:#85aea68a;border-radius:50%;filter:blur(8px)}
+.visual-puppet img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.visual-puppet__character{z-index:1;transform-origin:50% 78%;will-change:transform}
+.visual-puppet.is-playing .visual-puppet__character{animation:puppet-dance 2.1s ease-in-out infinite}
+@keyframes puppet-dance{0%,100%{transform:translate(0,0) rotate(-3deg)}25%{transform:translate(-3%, -4%) rotate(5deg)}50%{transform:translate(2%, 0) rotate(-4deg)}75%{transform:translate(3%, -5%) rotate(5deg)}}
 .visual-cartoon svg {display:block;width:100%;height:clamp(190px,32vw,380px);border-radius:14px;background:#eaf5fb}
 .visual-cartoon[data-palette="mint"] svg{background:#edf9f3}
 .visual-cartoon[data-palette="peach"] svg{background:#fff0df}
 .visual-cartoon[data-palette="lilac"] svg{background:#f5f0ff}
 .visual-cartoon__title{margin:9px 0 3px;font-weight:850;font-size:1.05rem;overflow-wrap:anywhere}
 .visual-cartoon__caption{margin:0;color:#556070;font-size:.86rem;line-height:1.5;overflow-wrap:anywhere}
-.visual-scene .visual-cartoon[hidden],.visual-scene .visual-ai-image[hidden],.visual-scene .visual-scene__fallback[hidden]{display:none}
+.visual-scene .visual-cartoon[hidden],.visual-scene .visual-puppet[hidden],.visual-scene .visual-ai-image[hidden],.visual-scene .visual-scene__fallback[hidden]{display:none}
 .visual-scene{min-height:520px}
 .visual-cartoon[data-mood="calm"] svg{filter:saturate(.84)}
 .visual-cartoon[data-mood="curious"] svg{filter:saturate(1.1)}
@@ -47,7 +53,9 @@
 @keyframes spin{50%{transform:rotate(15deg) translateY(-5px)}}
 @keyframes count-in{0%,10%{opacity:0;transform:translateY(12px)}20%,80%{opacity:1;transform:translateY(0)}95%,100%{opacity:0}}
 @media(max-width:600px){.visual-scene{padding:12px;min-height:350px}.creator-visual__buttons{width:100%}.creator-visual__buttons button{flex:1 1 140px;white-space:normal}}
-@media(prefers-reduced-motion:reduce){.visual-cartoon.is-playing svg *{animation:none!important;transition:none!important}.visual-cartoon.is-playing .count-item{opacity:1!important}.visual-cartoon .blink{opacity:0!important}}
+/* Motion is opt-in through the button even for devices requesting reduced motion. */
+@media(prefers-reduced-motion:reduce){.visual-cartoon.is-playing svg *{animation-duration:4s!important;transition:none!important}.visual-cartoon.is-playing .count-item{opacity:1!important}.visual-cartoon .blink{opacity:0!important}.visual-puppet.is-playing .visual-puppet__character{animation-duration:5s!important}}
+@media print{.visual-puppet.is-playing .visual-puppet__character{animation:none!important}}
 @media print{.visual-cartoon.is-playing svg *{animation:none!important}.visual-cartoon.is-playing .count-item{opacity:1!important}}
 .visual-cartoon[data-accent="coral"] svg{border:2px solid #f2bfaf}
 .visual-cartoon[data-accent="teal"] svg{border:2px solid #add9cc}

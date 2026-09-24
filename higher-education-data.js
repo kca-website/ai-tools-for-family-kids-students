@@ -31,7 +31,7 @@
       papers: {
         labelEl: "Να διαβάσω / οργανώσω papers",
         labelEn: "Read / organize papers",
-        preferredTools: ["scispace", "zotero", "notebooklm", "perplexity", "chatgpt"],
+        preferredTools: ["scispace", "zotero", "study-learn","notebooklm", "perplexity", "chatgpt"],
       },
       coding: {
         labelEl: "Να γράψω ή να διορθώσω κώδικα",

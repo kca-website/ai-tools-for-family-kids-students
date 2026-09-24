@@ -60,7 +60,29 @@ ${modeRule}`;
         model,
         messages:[{role:'system',content:system},{role:'user',content:user}],
         temperature:0.25,
-        max_completion_tokens:1400
+        reasoning_effort:'low',
+        include_reasoning:false,
+        max_completion_tokens:2200,
+        response_format:{
+          type:'json_schema',
+          json_schema:{
+            name:'preschool_activity',
+            strict:true,
+            schema:{
+              type:'object',
+              additionalProperties:false,
+              properties:{
+                story:{type:'string'},
+                words:{type:'string'},
+                game:{type:'string'},
+                make:{type:'string'},
+                offline:{type:'string'},
+                adultTip:{type:'string'}
+              },
+              required:['story','words','game','make','offline','adultTip']
+            }
+          }
+        }
       }),
       signal: controller.signal
     });

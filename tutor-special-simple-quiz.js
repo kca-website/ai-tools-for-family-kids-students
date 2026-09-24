@@ -43,6 +43,8 @@
       prev:["← Προηγούμενη","← Previous"],
       next:["Επόμενη →","Next →"],
       done:["Ολοκλήρωσες το απλό quiz.","You completed the simple quiz."],
+      aiNext:["🤖 Συνέχισε με AI Βοήθεια","🤖 Continue with AI Help"],
+      aiNextNote:["Δούλεψε τα σημεία που δυσκόλεψαν με μία μικρή υπόδειξη τη φορά. Το prompt θα μπει στο πεδίο χωρίς να σταλεί αυτόματα.","Work on the difficult points with one small hint at a time. The prompt will be placed in the input without being sent automatically."],
       note:["Προσαρμοσμένο για Ειδική Εκπαίδευση: 3 σύντομες ερωτήσεις, 2 επιλογές, μία έννοια τη φορά.","Adapted for Special Education: 3 short questions, 2 options, one idea at a time."]
     };
     return (T[key]||[key,key])[en?1:0];
@@ -253,7 +255,42 @@
       const next=document.createElement("button"); next.type="button"; next.className="tutor-study-tools__btn tutor-study-tools__btn--primary"; next.textContent=text("next"); next.disabled=local.index>=questions.length-1;
       next.addEventListener("click",()=>{ local.index+=1; draw(); });
       nav.append(prev,next); result.appendChild(nav);
-      if(Object.keys(local.answers).length===questions.length) setStatus(panel,`${text("done")} ${text("score")}: ${score}/${questions.length}`);
+      if(Object.keys(local.answers).length===questions.length){
+        setStatus(panel,`${text("done")} ${text("score")}: ${score}/${questions.length}`);
+        const wrongIndexes=Object.entries(local.answers)
+          .filter(([i,a])=>questions[Number(i)]?.correct!==a)
+          .map(([i])=>Number(i));
+        const c=context();
+        const follow=document.createElement("div");
+        follow.style.cssText="margin-top:12px;padding:10px 11px;border:1px solid #bfe3d5;border-radius:10px;background:#f3fbf7";
+        const title=document.createElement("strong");
+        title.style.cssText="display:block;color:#175c4a;font-size:.8rem;margin-bottom:4px";
+        title.textContent=text("aiNext");
+        const note=document.createElement("p");
+        note.style.cssText="margin:0 0 8px;color:#475569;font-size:.76rem;line-height:1.45";
+        note.textContent=text("aiNextNote");
+        const btn=document.createElement("button");
+        btn.type="button"; btn.className="tutor-study-tools__btn tutor-study-tools__btn--primary";
+        btn.textContent=text("aiNext");
+        btn.addEventListener("click",()=>{
+          const input=document.getElementById("tutorInput");
+          if(!input) return;
+          const wrongLabels=wrongIndexes.map((i)=>questions[i]?.q).filter(Boolean);
+          const prompt=isEnglish()
+            ? (wrongLabels.length
+                ? `I got these questions wrong in the short quiz: ${wrongLabels.join(" | ")}. Help me understand the underlying ideas without giving me the ready answer. Ask one simple question or give one small hint at a time, then give me 2 new questions to check if I understood.`
+                : `I got all ${questions.length} short-quiz questions right in ${c.subject||"this subject"}. Give me one slightly harder challenge on the same topic, without giving me the answer, and check my reasoning.`)
+            : (wrongLabels.length
+                ? `Στο μικρό quiz έκανα λάθος στις εξής ερωτήσεις: ${wrongLabels.join(" | ")}. Βοήθησέ με να καταλάβω τις βασικές ιδέες χωρίς να μου δώσεις έτοιμη απάντηση. Κάνε μία απλή ερώτηση ή μικρή υπόδειξη τη φορά και μετά βάλε μου 2 νέες ερωτήσεις για να ελέγξω αν το κατάλαβα.`
+                : `Απάντησα σωστά και στις ${questions.length} ερωτήσεις του μικρού quiz στο μάθημα ${c.subject||"αυτό"}. Δώσε μου μία λίγο πιο δύσκολη πρόκληση στο ίδιο θέμα, χωρίς να μου δώσεις τη λύση, και έλεγξε τη σκέψη μου.`);
+          input.value=prompt;
+          input.dispatchEvent(new Event("input",{bubbles:true}));
+          input.focus();
+          input.scrollIntoView({behavior:"smooth",block:"center"});
+        });
+        follow.append(title,note,btn);
+        result.appendChild(follow);
+      }
     }
     draw();
     setStatus(panel,cached?text("cached"):text("stored"));
@@ -358,5 +395,5 @@
   window.addEventListener("popstate",schedule);
   schedule();
 
-  window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ=Object.freeze({version:2,sync:syncAll,isSpecialTrack});
+  window.AITOOLSKIDS_SPECIAL_SIMPLE_QUIZ=Object.freeze({version:3,sync:syncAll,isSpecialTrack});
 })();

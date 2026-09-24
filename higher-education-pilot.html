@@ -96,15 +96,19 @@
     }
     @media(max-width:700px){.he-grid{grid-template-columns:1fr}.he-wrap{padding:18px 12px 42px}.he-hero{padding:18px}.he-ai-providers{display:grid;grid-template-columns:1fr}.he-ai-provider{width:100%}}
   
-    .he-flashcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px}
-    .he-flashcard{border:1px solid #d9e2ef;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+    .he-flashcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+    .he-flashcard{min-height:230px;perspective:1100px;cursor:pointer;outline:none}
+    .he-flashcard:focus-visible{outline:3px solid #93c5fd;outline-offset:3px;border-radius:14px}
+    .he-flashcard__inner{position:relative;width:100%;min-height:230px;transform-style:preserve-3d;transition:transform .45s ease}
+    .he-flashcard.is-flipped .he-flashcard__inner{transform:rotateY(180deg)}
+    .he-flashcard__face{position:absolute;inset:0;display:flex;flex-direction:column;border:1px solid #d9e2ef;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 3px 10px rgba(15,23,42,.07);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+    .he-flashcard__back{transform:rotateY(180deg);background:#f8fbff}
     .he-flashcard__num{padding:8px 12px;background:#eef4fb;color:#294a68;font-size:.78rem;font-weight:800}
-    .he-flashcard__q,.he-flashcard__a{padding:12px 14px}
-    .he-flashcard__q{border-bottom:1px solid #edf1f6}
-    .he-flashcard__q strong,.he-flashcard__a strong{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:#64748b;margin-bottom:5px}
-    .he-flashcard__q p,.he-flashcard__a p{margin:0;line-height:1.55}
-    .he-flashcard__a{background:#f8fbff}
-    @media(max-width:640px){.he-flashcards{grid-template-columns:1fr}}
+    .he-flashcard__q,.he-flashcard__a{padding:18px 16px;flex:1;display:flex;flex-direction:column;justify-content:center}
+    .he-flashcard__q strong,.he-flashcard__a strong{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:#64748b;margin-bottom:8px}
+    .he-flashcard__q p,.he-flashcard__a p{margin:0;line-height:1.6;font-size:1rem}
+    .he-flashcard__hint{padding:10px 12px;border-top:1px solid #edf1f6;color:#64748b;font-size:.78rem;font-weight:700;text-align:center}
+    @media(max-width:640px){.he-flashcards{grid-template-columns:1fr}.he-flashcard,.he-flashcard__inner{min-height:210px}}
 </style>
 </head>
 <body>

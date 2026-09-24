@@ -100,6 +100,22 @@
     },
     nutritionSources:["https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"]
   });
+  patch("eur-lex", {
+    nutritionFacts:{greekEl:"Πλήρης ελληνική διεπαφή/κείμενα ΕΕ",greekEn:"Greek interface and EU texts",costEl:"Δωρεάν",costEn:"Free",accountEl:"Χωρίς λογαριασμό για αναζήτηση",accountEn:"No account required for search"},
+    nutritionSources:["https://eur-lex.europa.eu/content/welcome/about.html?locale=en"]
+  });
+  patch("curia", {
+    nutritionFacts:{greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",costEl:"Δωρεάν",costEn:"Free",accountEl:"Χωρίς λογαριασμό",accountEn:"No account required"},
+    nutritionSources:["https://juris.curia.europa.eu/juris/recherche.jsf?language=el"]
+  });
+  patch("hudoc", {
+    nutritionFacts:{costEl:"Δωρεάν",costEn:"Free",accountEl:"Χωρίς λογαριασμό",accountEn:"No account required"},
+    nutritionSources:["https://www.echr.coe.int/hudoc-database"]
+  });
+  patch("ssrn", {
+    nutritionFacts:{costEl:"Δωρεάν αναζήτηση / πολλά papers δωρεάν",costEn:"Free search / many papers free",accountEl:"Προαιρετικός λογαριασμός",accountEn:"Optional account"},
+    nutritionSources:["https://www.ssrn.com/index.cfm/en/lsn/"]
+  });
   patch("consensus", {
     nutritionFacts:{costEl:"Δωρεάν tier + επί πληρωμή πλάνα",costEn:"Free tier + paid plans",accountEl:"Λογαριασμός για πλήρη χρήση/αποθήκευση",accountEn:"Account for full use/saved work"},
     nutritionSources:["https://help.consensus.app/en/articles/10087865-subscription-plans"]

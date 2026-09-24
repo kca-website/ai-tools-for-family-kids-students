@@ -46,7 +46,7 @@
     el: {
       menuClassroom: "Για την τάξη",
       heroTitle: "Μαθαίνω Έξυπνα με AI",
-      heroSubtitle: "Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, μαθητές 6 έως 18 και εκπαιδευτικούς.",
+      heroSubtitle: "Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.",
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
@@ -472,7 +472,7 @@
         <p class="zone-card__age">${age}</p>
         <p class="zone-card__desc">${desc}</p>
       `;
-      card.addEventListener("click", () => selectZone(zone.id));
+      card.addEventListener("click", () => { if (zone.href) { window.location.href = zone.href; return; } selectZone(zone.id); });
       els.zoneGrid.appendChild(card);
     });
   }
@@ -481,7 +481,7 @@
   function renderHeroQuizPicker() {
     if (!els.heroQuizPickerGrid) return;
     els.heroQuizPickerGrid.innerHTML = "";
-    ZONES.forEach((zone) => {
+    ZONES.filter((zone) => !zone.hideFromQuiz).forEach((zone) => {
       const label = state.lang === "el" ? zone.labelEl : zone.labelEn;
       const btn = document.createElement("button");
       btn.type = "button";

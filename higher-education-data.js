@@ -133,6 +133,16 @@
           { id: "notebooklm", tasks: ["understand","notes","papers"], whyEl: "Source-based μελέτη από σημειώσεις, άρθρα, επίσημες πηγές και course material." }
         ]
       },
+      "education": {
+        labelEl: "Εκπαίδευση / Παιδαγωγικές Επιστήμες",
+        tools: [
+          { id: "notebooklm", tasks: ["understand","notes","papers","practice"], whyEl: "Source-based μελέτη πάνω σε σημειώσεις, άρθρα και επίσημο υλικό του μαθήματος." },
+          { id: "elicit", tasks: ["research","papers"], whyEl: "Αναζήτηση και σύγκριση ακαδημαϊκών μελετών για παιδαγωγική, ψυχολογία και εκπαίδευση." },
+          { id: "zotero", tasks: ["research","papers","notes"], whyEl: "Οργάνωση βιβλιογραφίας και citations χωρίς να χάνεται το ίχνος των πηγών." },
+          { id: "study-learn", tasks: ["understand","practice","notes"], whyEl: "Για φοιτητές με Microsoft 365 Education: καθοδηγούμενη μελέτη πάνω σε πραγματικό υλικό, flashcards και quizzes." },
+          { id: "perplexity", tasks: ["research","understand"], whyEl: "Γρήγορη αρχική χαρτογράφηση με πηγές που πρέπει να ανοίγονται και να ελέγχονται." }
+        ]
+      },
       "academic-research": {
         labelEl: "Ακαδημαϊκή έρευνα",
         tools: [
@@ -179,6 +189,14 @@
         legacyNoteEl: "Τα παλιά ονόματα χρησιμοποιούνται μόνο ως aliases αναζήτησης. Η τρέχουσα οντότητα είναι το Πανεπιστήμιο Δυτικής Αττικής.",
         sourceUrl: "https://www.uniwa.gr/",
         departments: ["uniwa-ice"],
+      },
+      uoc: {
+        id: "uoc",
+        nameEl: "Πανεπιστήμιο Κρήτης",
+        nameEn: "University of Crete",
+        legacyAliases: [],
+        sourceUrl: "https://www.uoc.gr/",
+        departments: ["uoc-preschool"],
       },
       uoi: {
         id: "uoi",
@@ -644,6 +662,97 @@
           { code: "ΨΣ-907", semester: 8, year: 4, required: true, titleEl: "Πτυχιακή Εργασία", tasks: ["research","papers","feedback","notes"] },
           { code: "ΨΣ-333", semester: 8, year: 4, required: false, titleEl: "Διαδίκτυο των Πραγμάτων", tasks: ["understand","coding","research"] },
           { code: "ΨΣ-506", semester: 8, year: 4, required: false, titleEl: "Αποθήκες και Εξόρυξη Δεδομένων", tasks: ["understand","coding","research","papers"] }
+        ]
+      },
+
+      "uoc-preschool": {
+        institutionId: "uoc",
+        schoolEl: "Σχολή Επιστημών Αγωγής",
+        departmentEl: "Παιδαγωγικό Τμήμα Προσχολικής Εκπαίδευσης",
+        departmentEn: "Department of Preschool Education",
+        degreeLevel: 6,
+        nominalSemesters: 8,
+        coverageStatus: "pilot-partial-verified",
+        sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
+        currentAcademicYearSource: "https://ptpe.edc.uoc.gr/programma-mathimaton",
+        notesEl: "Μερική verified κάλυψη. Η προσφορά των μαθημάτων επιβεβαιώνεται από το πρόγραμμα χειμερινού εξαμήνου 2026–27. Οι θεματικές προέρχονται από το επίσημο περίγραμμα μαθημάτων του Τμήματος· δεν παρουσιάζεται ως πλήρης χαρτογράφηση του προγράμματος.",
+        sources: [
+          "https://ptpe.edc.uoc.gr/programma-mathimaton",
+          "https://ptpe.edc.uoc.gr/sites/default/files/pages/%CE%925_%CE%A0%CE%B5%CF%81%CE%B9%CE%B3%CF%81%CE%AC%CE%BC%CE%BC%CE%B1%CF%84%CE%B1%20%CE%9C%CE%B1%CE%B8%CE%B7%CE%BC%CE%AC%CF%84%CF%89%CE%BD_%CE%9F%CE%94%CE%97%CE%93%CE%9F%CE%A5%20%CE%A3%CE%A0%CE%9F%CE%A5%CE%94%CE%A9%CE%9D%20%CE%B5%CF%80%CE%B9%CE%BA_%20%CE%A3%CE%B5%CF%80%CF%84_2024.pdf"
+        ],
+        courses: [
+          {
+            code: "ΕΠΑ101", semester: 1, year: 1, ects: 4, required: true,
+            titleEl: "Εισαγωγή στην Παιδαγωγική",
+            tasks: ["understand","notes","research","papers"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline-current-offering",
+            syllabusSource: "https://ptpe.edc.uoc.gr/sites/default/files/pages/%CE%925_%CE%A0%CE%B5%CF%81%CE%B9%CE%B3%CF%81%CE%AC%CE%BC%CE%BC%CE%B1%CF%84%CE%B1%20%CE%9C%CE%B1%CE%B8%CE%B7%CE%BC%CE%AC%CF%84%CF%89%CE%BD_%CE%9F%CE%94%CE%97%CE%93%CE%9F%CE%A5%20%CE%A3%CE%A0%CE%9F%CE%A5%CE%94%CE%A9%CE%9D%20%CE%B5%CF%80%CE%B9%CE%BA_%20%CE%A3%CE%B5%CF%80%CF%84_2024.pdf",
+            syllabusSourceAcademicYear: "official outline; offering verified 2026-2027",
+            topics: [
+              "Γένεση και ιστορική-συστηματική ανάπτυξη της Παιδαγωγικής",
+              "Κλάδοι και μέθοδοι έρευνας της Παιδαγωγικής",
+              "Θεμελιώδεις έννοιες και ερωτήματα της Παιδαγωγικής Επιστήμης",
+              "Σχέση Παιδαγωγικής με άλλες επιστήμες",
+              "Εκπαίδευση ως θεσμός, κοινωνία και πολιτική",
+              "Επαγγελματισμός εκπαιδευτικών",
+              "Εκπαίδευση και παγκοσμιοποίηση",
+              "Παραδοσιακές και κριτικές/αναθεωρητικές παιδαγωγικές προσεγγίσεις"
+            ]
+          },
+          {
+            code: "ΕΠΑ301", semester: 1, year: 1, ects: 4, required: true,
+            titleEl: "Αναπτυξιακή Ψυχολογία Ι",
+            tasks: ["understand","notes","research","papers"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline-current-offering",
+            syllabusSource: "https://ptpe.edc.uoc.gr/sites/default/files/pages/%CE%925_%CE%A0%CE%B5%CF%81%CE%B9%CE%B3%CF%81%CE%AC%CE%BC%CE%BC%CE%B1%CF%84%CE%B1%20%CE%9C%CE%B1%CE%B8%CE%B7%CE%BC%CE%AC%CF%84%CF%89%CE%BD_%CE%9F%CE%94%CE%97%CE%93%CE%9F%CE%A5%20%CE%A3%CE%A0%CE%9F%CE%A5%CE%94%CE%A9%CE%9D%20%CE%B5%CF%80%CE%B9%CE%BA_%20%CE%A3%CE%B5%CF%80%CF%84_2024.pdf",
+            syllabusSourceAcademicYear: "official outline; offering verified 2026-2027",
+            topics: [
+              "Σύγχρονη Ψυχολογία και Αναπτυξιακή Ψυχολογία",
+              "Έννοια, γνωρίσματα, στάδια, ηλικίες και παράγοντες ψυχικής ανάπτυξης",
+              "Γνωστική ανάπτυξη",
+              "Ανάπτυξη αισθήσεων και κινήσεων",
+              "Αντίληψη χώρου, χρόνου, μορφών και αριθμού",
+              "Ψυχικός βίος βρέφους, νηπίου, παιδιού και εφήβου"
+            ]
+          },
+          {
+            code: "ΕΠΑ306", semester: 1, year: 1, ects: 4, required: false,
+            titleEl: "Ψυχολογία της Προσχολικής Ηλικίας",
+            tasks: ["understand","notes","research","papers"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline-current-offering",
+            syllabusSource: "https://ptpe.edc.uoc.gr/sites/default/files/pages/%CE%925_%CE%A0%CE%B5%CF%81%CE%B9%CE%B3%CF%81%CE%AC%CE%BC%CE%BC%CE%B1%CF%84%CF%89%CE%BD_%CE%9F%CE%94%CE%97%CE%93%CE%9F%CE%A5%20%CE%A3%CE%A0%CE%9F%CE%A5%CE%94%CE%A9%CE%9D%20%CE%B5%CF%80%CE%B9%CE%BA_%20%CE%A3%CE%B5%CF%80%CF%84_2024.pdf",
+            syllabusSourceAcademicYear: "official outline; offering verified 2026-2027",
+            topics: [
+              "Αναπτυξιακές θεωρίες",
+              "Αισθητηριακή και αντιληπτική ανάπτυξη στη βρεφική ηλικία",
+              "Οι πρώτες σχέσεις",
+              "Θεωρίες προσκόλλησης και εξωοικογενειακή φροντίδα",
+              "Γνωστική ανάπτυξη",
+              "Κοινωνική ανάπτυξη",
+              "Γλωσσική ανάπτυξη",
+              "Ηθική ανάπτυξη"
+            ]
+          },
+          {
+            code: "ΕΠΑ411", semester: 1, year: 1, ects: 4, required: false,
+            titleEl: "Διδασκαλία της Εκπαιδευτικής Ρομποτικής στην Προσχολική Εκπαίδευση",
+            tasks: ["understand","practice","research","feedback"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-outline-current-offering",
+            syllabusSource: "https://ptpe.edc.uoc.gr/sites/default/files/pages/%CE%925_%CE%A0%CE%B5%CF%81%CE%B9%CE%B3%CF%81%CE%AC%CE%BC%CE%BC%CE%B1%CF%84%CE%B1%20%CE%9C%CE%B1%CE%B8%CE%B7%CE%BC%CE%AC%CF%84%CF%89%CE%BD_%CE%9F%CE%94%CE%97%CE%93%CE%9F%CE%A5%20%CE%A3%CE%A0%CE%9F%CE%A5%CE%94%CE%A9%CE%9D%20%CE%B5%CF%80%CE%B9%CE%BA_%20%CE%A3%CE%B5%CF%80%CF%84_2024.pdf",
+            syllabusSourceAcademicYear: "official outline; offering verified 2026-2027",
+            topics: [
+              "Εισαγωγή στην Εκπαιδευτική Ρομποτική και ο ρόλος της στην προσχολική εκπαίδευση",
+              "Βασικές αρχές και προσεγγίσεις διδασκαλίας της Εκπαιδευτικής Ρομποτικής",
+              "Μεθοδολογίες διδασκαλίας με εκπαιδευτική ρομποτική",
+              "Σχεδιασμός και υλοποίηση διδακτικών δραστηριοτήτων με ρομποτικά παιχνίδια και εργαλεία",
+              "Αξιολόγηση της επίδρασης της εκπαιδευτικής ρομποτικής στη μάθηση και ανάπτυξη"
+            ]
+          }
         ]
       },
 
@@ -1124,6 +1233,12 @@
       if (/μαθηματ|πιθανοτ|στατισ|στοχασ/.test(title)) return "quantitative";
       if (/σήματα|τηλεπικοινων|επικοινων|ψηφιακή σχεδίαση/.test(title)) return "physics-engineering";
       return "computing";
+    }
+
+    if (departmentId === "uoc-preschool") {
+      if (/ψυχολογ/.test(title)) return "psychology";
+      if (/ρομποτικ|προγραμματισ|ψηφιακ/.test(title)) return "computing";
+      return "education";
     }
 
     if (departmentId === "uoi-cse") {

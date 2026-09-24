@@ -622,6 +622,17 @@ const TOOLS = {
     isGreek: false,
     schoolOnly: true,
   },
+  "codeai": {
+    id: "codeai",
+    name: "CodeAI / Code.org",
+    url: "https://code.org/en-US/curriculum/high-school",
+    category: "learning-tool",
+    logo: null,
+    shortDescEl: "Δωρεάν curricula για Πληροφορική, AI literacy, web/app/game development και υπεύθυνη χρήση AI από Δημοτικό έως Λύκειο. Ο ενσωματωμένος AI Tutor δεν είναι αυτή τη στιγμή διαθέσιμος εκτός ΗΠΑ.",
+    shortDescEn: "Free curricula for computer science, AI literacy, web/app/game development and responsible AI use from elementary through high school. The embedded AI Tutor is currently unavailable outside the US.",
+    minAgeNote: "Curricula για πολλές ηλικίες. Το AI Tutor έχει ξεχωριστούς ηλικιακούς/σχολικούς περιορισμούς και είναι αυτή τη στιγμή US-only.",
+    isGreek: false,
+  },
   "immersive-reader": {
     id: "immersive-reader",
     name: "Microsoft Immersive Reader",
@@ -1206,6 +1217,15 @@ const PATHS = {
       introEn: "You're starting to use AI more on your own, but your parent needs to give permission for most chatbots. See which tool fits which task.",
       tools: [
         {
+          toolId: "codeai",
+          useCaseEl: "Για να μάθεις Πληροφορική και AI literacy με δομημένο, δωρεάν curriculum και projects αντί να ζητάς απλώς κώδικα από chatbot.",
+          useCaseEn: "Learn computer science and AI literacy through a structured free curriculum and projects instead of simply asking a chatbot for code.",
+          howToEl: "Διάλεξε course/δραστηριότητα κατάλληλη για την ηλικία σου και δούλεψε τα projects. Στην Ελλάδα χρησιμοποίησέ το ως curriculum/resource — όχι με την προσδοκία ότι θα έχεις πρόσβαση στον AI Tutor.",
+          howToEn: "Choose an age-appropriate course/activity and work through the projects. Outside the US, use it as a curriculum/resource rather than expecting AI Tutor access.",
+          cautionEl: "Ο AI Tutor είναι αυτή τη στιγμή διαθέσιμος μόνο στις ΗΠΑ και απαιτεί teacher-managed πρόσβαση σε υποστηριζόμενα courses. Πολλά προχωρημένα curricula είναι αγγλόφωνα.",
+          cautionEn: "AI Tutor is currently US-only and requires teacher-managed access in supported courses. Many advanced curricula are English-first.",
+        },
+        {
           toolId: "ai-help",
           useCaseEl: "Καθοδήγηση σε οποιοδήποτε μάθημα με ερωτήσεις και υποδείξεις αντί για έτοιμη λύση.",
           useCaseEn: "Guidance in any subject through questions and hints rather than ready answers.",
@@ -1692,6 +1712,15 @@ const PATHS = {
       introEl: "Έχεις πρόσβαση σχεδόν στο πλήρες φάσμα εργαλείων. Το θέμα δεν είναι αν επιτρέπεται. Είναι ποιο εργαλείο ταιριάζει σε ποια δουλειά και πώς να το χρησιμοποιήσεις σωστά, ειδικά τώρα που ετοιμάζεσαι για εξετάσεις ή για σπουδές.",
       introEn: "You have access to nearly the full range of tools. The question isn't whether it's allowed. It's which tool fits which task and how to use it properly, especially now that you're preparing for exams or further studies.",
       tools: [
+        {
+          toolId: "codeai",
+          useCaseEl: "Για να μάθεις Πληροφορική και AI literacy με δομημένο, δωρεάν curriculum και projects αντί να ζητάς απλώς κώδικα από chatbot.",
+          useCaseEn: "Learn computer science and AI literacy through a structured free curriculum and projects instead of simply asking a chatbot for code.",
+          howToEl: "Διάλεξε course/δραστηριότητα κατάλληλη για την ηλικία σου και δούλεψε τα projects. Στην Ελλάδα χρησιμοποίησέ το ως curriculum/resource — όχι με την προσδοκία ότι θα έχεις πρόσβαση στον AI Tutor.",
+          howToEn: "Choose an age-appropriate course/activity and work through the projects. Outside the US, use it as a curriculum/resource rather than expecting AI Tutor access.",
+          cautionEl: "Ο AI Tutor είναι αυτή τη στιγμή διαθέσιμος μόνο στις ΗΠΑ και απαιτεί teacher-managed πρόσβαση σε υποστηριζόμενα courses. Πολλά προχωρημένα curricula είναι αγγλόφωνα.",
+          cautionEn: "AI Tutor is currently US-only and requires teacher-managed access in supported courses. Many advanced curricula are English-first.",
+        },
         {
           toolId: "ai-help",
           useCaseEl: "Καθοδηγούμενη βοήθεια σε όλα τα μαθήματα, γραπτά ή με φωνή, με βάση την τάξη και το θέμα.",

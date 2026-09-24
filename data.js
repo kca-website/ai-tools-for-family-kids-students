@@ -777,15 +777,7 @@ const PATHS = {
           cautionEl: "",
           cautionEn: "",
         },
-        {
-          toolId: "elsa-speak",
-          useCaseEl: "Αγγλικά 13+: εξάσκηση προφοράς και προφορικού λόγου με AI feedback σε ήχους, λέξεις και fluency.",
-          useCaseEn: "English 13+: pronunciation and speaking practice with AI feedback on sounds, words and fluency.",
-          howToEl: "Χρησιμοποίησέ το για σύντομη καθημερινή προφορική εξάσκηση και μετά επανάλαβε την ίδια φράση χωρίς να κοιτάς το feedback.",
-          howToEn: "Use it for short daily speaking practice, then repeat the same phrase again without looking at the feedback.",
-          cautionEl: "13+. Κάτω των 18 απαιτείται συμμετοχή γονέα/κηδεμόνα. Τα πιο προχωρημένα AI conversation features είναι επί πληρωμή.",
-          cautionEn: "13+. Under 18 requires parent/guardian involvement. Advanced AI conversation features are paid.",
-        },
+
         {
           toolId: "deepl",
           useCaseEl: "Για τον γονέα: έλεγχος ή σύγκριση μιας σύντομης μετάφρασης σε ξένη γλώσσα αφού το παιδί έχει προσπαθήσει πρώτα μόνο του.",
@@ -939,15 +931,7 @@ const PATHS = {
           cautionEl: "",
           cautionEn: "",
         },
-        {
-          toolId: "elsa-speak",
-          useCaseEl: "Αγγλικά 13+: εξάσκηση προφοράς και προφορικού λόγου με AI feedback σε ήχους, λέξεις και fluency.",
-          useCaseEn: "English 13+: pronunciation and speaking practice with AI feedback on sounds, words and fluency.",
-          howToEl: "Χρησιμοποίησέ το για σύντομη καθημερινή προφορική εξάσκηση και μετά επανάλαβε την ίδια φράση χωρίς να κοιτάς το feedback.",
-          howToEn: "Use it for short daily speaking practice, then repeat the same phrase again without looking at the feedback.",
-          cautionEl: "13+. Κάτω των 18 απαιτείται συμμετοχή γονέα/κηδεμόνα. Τα πιο προχωρημένα AI conversation features είναι επί πληρωμή.",
-          cautionEn: "13+. Under 18 requires parent/guardian involvement. Advanced AI conversation features are paid.",
-        },
+
         {
           toolId: "reading-coach",
           useCaseEl: "Για να εξασκηθείς στην ανάγνωση δυνατά και να ακούσεις πώς προφέρεις σωστά τις λέξεις.",
@@ -1164,8 +1148,7 @@ const PATHS = {
           howToEn: "Practise briefly and often, and connect what you learn to your school unit. Use it as a supplement, not a replacement for class.",
           cautionEl: "Η πρόσβαση/age-gating και τα κοινωνικά χαρακτηριστικά προσαρμόζονται ανά ηλικία και χώρα. Για μικρότερους χρήστες χρησιμοποίησε τις παιδικές/εποπτευόμενες ρυθμίσεις.",
           cautionEn: "Access, age-gating and social features vary by age and region. Use child/supervised settings for younger users.",
-        },
-        {
+        },        {
           toolId: "elsa-speak",
           useCaseEl: "Αγγλικά 13+: εξάσκηση προφοράς και προφορικού λόγου με AI feedback σε ήχους, λέξεις και fluency.",
           useCaseEn: "English 13+: pronunciation and speaking practice with AI feedback on sounds, words and fluency.",
@@ -1174,6 +1157,7 @@ const PATHS = {
           cautionEl: "13+. Κάτω των 18 απαιτείται συμμετοχή γονέα/κηδεμόνα. Τα πιο προχωρημένα AI conversation features είναι επί πληρωμή.",
           cautionEn: "13+. Under 18 requires parent/guardian involvement. Advanced AI conversation features are paid.",
         },
+
         {
           toolId: "anki",
           useCaseEl: "Επανάληψη όρων, λεξιλογίου, ιστορικών ημερομηνιών και βασικών εννοιών με spaced repetition.",
@@ -1379,6 +1363,14 @@ const PATHS = {
           howToEn: "Practise briefly and often, and connect what you learn to your school unit. Use it as a supplement, not a replacement for class.",
           cautionEl: "Η πρόσβαση/age-gating και τα κοινωνικά χαρακτηριστικά προσαρμόζονται ανά ηλικία και χώρα. Για μικρότερους χρήστες χρησιμοποίησε τις παιδικές/εποπτευόμενες ρυθμίσεις.",
           cautionEn: "Access, age-gating and social features vary by age and region. Use child/supervised settings for younger users.",
+        },        {
+          toolId: "elsa-speak",
+          useCaseEl: "Αγγλικά 13+: εξάσκηση προφοράς και προφορικού λόγου με AI feedback σε ήχους, λέξεις και fluency.",
+          useCaseEn: "English 13+: pronunciation and speaking practice with AI feedback on sounds, words and fluency.",
+          howToEl: "Χρησιμοποίησέ το για σύντομη καθημερινή προφορική εξάσκηση και μετά επανάλαβε την ίδια φράση χωρίς να κοιτάς το feedback.",
+          howToEn: "Use it for short daily speaking practice, then repeat the same phrase again without looking at the feedback.",
+          cautionEl: "13+. Κάτω των 18 απαιτείται συμμετοχή γονέα/κηδεμόνα. Τα πιο προχωρημένα AI conversation features είναι επί πληρωμή.",
+          cautionEn: "13+. Under 18 requires parent/guardian involvement. Advanced AI conversation features are paid.",
         },
         {
           toolId: "anki",
@@ -1911,6 +1903,14 @@ const PATHS = {
           howToEn: "Practise briefly and often, and connect what you learn to your school unit. Use it as a supplement, not a replacement for class.",
           cautionEl: "Η πρόσβαση/age-gating και τα κοινωνικά χαρακτηριστικά προσαρμόζονται ανά ηλικία και χώρα. Για μικρότερους χρήστες χρησιμοποίησε τις παιδικές/εποπτευόμενες ρυθμίσεις.",
           cautionEn: "Access, age-gating and social features vary by age and region. Use child/supervised settings for younger users.",
+        },        {
+          toolId: "elsa-speak",
+          useCaseEl: "Αγγλικά 13+: εξάσκηση προφοράς και προφορικού λόγου με AI feedback σε ήχους, λέξεις και fluency.",
+          useCaseEn: "English 13+: pronunciation and speaking practice with AI feedback on sounds, words and fluency.",
+          howToEl: "Χρησιμοποίησέ το για σύντομη καθημερινή προφορική εξάσκηση και μετά επανάλαβε την ίδια φράση χωρίς να κοιτάς το feedback.",
+          howToEn: "Use it for short daily speaking practice, then repeat the same phrase again without looking at the feedback.",
+          cautionEl: "13+. Κάτω των 18 απαιτείται συμμετοχή γονέα/κηδεμόνα. Τα πιο προχωρημένα AI conversation features είναι επί πληρωμή.",
+          cautionEn: "13+. Under 18 requires parent/guardian involvement. Advanced AI conversation features are paid.",
         },
         {
           toolId: "anki",

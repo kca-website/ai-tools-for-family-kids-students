@@ -8,6 +8,27 @@
   },
   "routes": [
     {
+      "src": "/primary/(.*)",
+      "headers": {
+        "X-Robots-Tag": "noindex, follow"
+      },
+      "dest": "/"
+    },
+    {
+      "src": "/middle/(.*)",
+      "headers": {
+        "X-Robots-Tag": "noindex, follow"
+      },
+      "dest": "/"
+    },
+    {
+      "src": "/high/(.*)",
+      "headers": {
+        "X-Robots-Tag": "noindex, follow"
+      },
+      "dest": "/"
+    },
+    {
       "handle": "filesystem"
     },
     {
@@ -40,35 +61,6 @@
       ],
       "destination": "https://www.aitools4kids.gr/:path*",
       "statusCode": 301
-    }
-  ],
-  "headers": [
-    {
-      "source": "/primary/:path*",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/middle/:path*",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/high/:path*",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
     }
   ]
 }

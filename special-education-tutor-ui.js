@@ -36,6 +36,7 @@
     ["special-education-special-lyceum","/special-education-special-lyceum-data.js"],
     ["special-education-eneegyl-structure","/special-education-eneegyl-structure-data.js"],
     ["eneegyl-official-sectors-2026-2027","/teacher-curriculum-eneegyl-official-sectors-2026-2027.js"],
+    ["eneegyl-exact-exam-2026-2027","/teacher-curriculum-eneegyl-exact-exam-2026-2027.js"],
     ["eneegyl-informatics-2026-2027","/teacher-curriculum-eneegyl-informatics-2026-2027.js"],
     ["special-education-eneegyl-informatics-learning","/special-education-eneegyl-informatics-learning-2026-2027.js"],
     ["special-education-eneegyl-a-learning","/special-education-eneegyl-a-learning-2026-2027.js"],

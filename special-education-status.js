@@ -15,6 +15,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄ · Τοπογραφία — βασικές έννοιες και μετρήσεις",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄ · Φυτική Παραγωγή — φυτό, ανάπτυξη και σπόρος",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄–Γ΄ · 12 ακριβείς χαρτογραφήσεις μαθημάτων 2026–27 — επίσημες ενότητες",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
+    {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Γ΄ · 4 νέα exact mappings από ΦΕΚ 4609/2026 — Οικοδομικό Σχέδιο, Ιστορία Σύγχρονης Τέχνης, Τεχνολογία Υλικών, Μηχανική–Αντοχή Υλικών",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Διοίκησης και Οικονομίας — υπόλοιπα subject-only μαθήματα",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Δομικών Έργων — υπόλοιπα subject-only μαθήματα",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Β΄-Δ΄ · Τομέας Υγείας - Πρόνοιας - Ευεξίας — subject-only μαθήματα",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},

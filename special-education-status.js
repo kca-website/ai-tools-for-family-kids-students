@@ -24,7 +24,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄–Γ΄ · 52 ακριβείς ετήσιες χαρτογραφήσεις 2026–27",curriculum:"verified",learning:"verified",quiz:"indexed",tutorContext:"verified"},
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Οικιακή Οικονομία — επίσημο πλαίσιο κεφαλαίων",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄–Γ΄ · Εργαστήρια Δεξιοτήτων — επίσημο θεματικό πλαίσιο",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
-    {school:"Ειδικό Λύκειο",scope:"Δημοσιευμένες ειδικές οδηγίες Ε.Α.Ε. 2026–27 — source indexed, section mapping σε εξέλιξη",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"verified"}
+    {school:"Ειδικό Λύκειο",scope:"Οδηγίες Ε.Α.Ε. 2026–27 — ακριβείς χαρτογραφήσεις για Πληροφορική, Λατινικά και Βιολογία · επίσημα πλαίσια για Ιστορία και Νεοελληνική Γλώσσα",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"}
   ]
 };
 

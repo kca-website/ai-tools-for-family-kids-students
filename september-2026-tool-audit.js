@@ -3,9 +3,9 @@
   "use strict";
   if (typeof TOOLS === "undefined") return;
 
-  const DATE = "2026-09-05";
-  const DATE_EL = "5 Σεπτεμβρίου 2026";
-  const DATE_EN = "5 September 2026";
+  const DATE = "2026-09-24";
+  const DATE_EL = "24 Σεπτεμβρίου 2026";
+  const DATE_EN = "24 September 2026";
 
   function patch(id, data){
     if (!TOOLS[id]) return;
@@ -35,6 +35,72 @@
 
   ["chatgpt","gemini","notebooklm","copilot","claude","perplexity","phet","google-arts-culture","gemini-education","ai-help"].forEach((id)=>patch(id, {}));
 
+  // Explicit nutrition facts are used only when verified from current official sources.
+  // The UI falls back to conservative text-derived inference for every other tool.
+  patch("ai-help", {
+    nutritionFacts:{
+      greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",
+      costEl:"Δωρεάν",costEn:"Free",
+      accountEl:"Χωρίς λογαριασμό με GPT-OSS 120B",accountEn:"No account with GPT-OSS 120B"
+    },
+    auditSource:"https://www.aitools4kids.gr/"
+  });
+  patch("chatgpt", {
+    nutritionFacts:{
+      greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",
+      costEl:"Δωρεάν + επί πληρωμή επιλογές",costEn:"Free + paid options"
+    },
+    nutritionSources:[
+      "https://help.openai.com/el-gr/articles/8357869-how-to-change-your-language-setting-in-chatgpt",
+      "https://help.openai.com/el-gr/articles/9275245-chatgpt-free-tier-faq"
+    ]
+  });
+  patch("reading-coach", {
+    nutritionFacts:{
+      greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",
+      costEl:"Δωρεάν",costEn:"Free",
+      accountEl:"Απαιτεί Microsoft λογαριασμό",accountEn:"Microsoft account required"
+    },
+    nutritionSources:[
+      "https://support.microsoft.com/en-us/education/learning-accelerators/reading-coach-language-settings",
+      "https://support.microsoft.com/en-us/education/learning-accelerators/getting-started-with-reading-coach"
+    ]
+  });
+  patch("gemini-education", {
+    nutritionFacts:{
+      greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",
+      costEl:"Χωρίς κόστος για επιλέξιμα ιδρύματα",costEn:"No cost for qualifying institutions",
+      accountEl:"Σχολικός / διαχειριζόμενος Google λογαριασμός",accountEn:"School / managed Google account"
+    },
+    nutritionSources:[
+      "https://edu.google.com/ai/gemini-for-education/",
+      "https://support.google.com/gemini/answer/13575153"
+    ]
+  });
+  patch("notebooklm", {
+    nutritionFacts:{
+      greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",
+      costEl:"Δωρεάν βασική έκδοση + επί πληρωμή αναβαθμίσεις",costEn:"Free standard tier + paid upgrades",
+      accountEl:"Απαιτεί Google λογαριασμό",accountEn:"Google account required"
+    },
+    nutritionSources:[
+      "https://support.google.com/notebooklm/answer/16164461",
+      "https://support.google.com/gemininotebook/answer/16213268"
+    ]
+  });
+  patch("photomath", {
+    nutritionFacts:{
+      costEl:"Δωρεάν βασική έκδοση + επί πληρωμή επιλογές",costEn:"Free basic tier + paid options"
+    },
+    nutritionSources:["https://photomath.com/"]
+  });
+  patch("perplexity", {
+    nutritionFacts:{
+      costEl:"Δωρεάν βασικό πλάνο + επί πληρωμή επιλογές",costEn:"Free standard plan + paid options"
+    },
+    nutritionSources:["https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"]
+  });
+
   function language(){
     return document.documentElement.lang === "en" ? "en" : "el";
   }
@@ -55,6 +121,8 @@
   }
 
   function greekFact(tool, lang){
+    const explicit=lang==="el"?tool.nutritionFacts?.greekEl:tool.nutritionFacts?.greekEn;
+    if(explicit) return explicit;
     const text = textFor(tool);
     if (tool.isGreek || /\(ελληνικά\)/i.test(tool.name || "")) {
       return lang === "el" ? "Ελληνικό / Ελληνικά" : "Greek / Greek-language";
@@ -69,6 +137,8 @@
   }
 
   function costFact(tool, lang){
+    const explicit=lang==="el"?tool.nutritionFacts?.costEl:tool.nutritionFacts?.costEn;
+    if(explicit) return explicit;
     const text = textFor(tool);
     const free = hasAny(text, ["δωρεάν", "free"]);
     const paid = hasAny(text, ["επί πληρωμή", "συνδρομή", "subscription", "paid plan", "premium"]);
@@ -79,6 +149,8 @@
   }
 
   function accountFact(tool, lang){
+    const explicit=lang==="el"?tool.nutritionFacts?.accountEl:tool.nutritionFacts?.accountEn;
+    if(explicit) return explicit;
     const text = textFor(tool);
     if (hasAny(text, ["χωρίς λογαριασμό", "δεν χρειάζεται λογαριασμό", "no account", "without an account"])) {
       return lang === "el" ? "Χωρίς λογαριασμό για βασική χρήση" : "No account for basic use";

@@ -100,6 +100,22 @@
     },
     nutritionSources:["https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"]
   });
+  patch("consensus", {
+    nutritionFacts:{costEl:"Δωρεάν tier + επί πληρωμή πλάνα",costEn:"Free tier + paid plans",accountEl:"Λογαριασμός για πλήρη χρήση/αποθήκευση",accountEn:"Account for full use/saved work"},
+    nutritionSources:["https://help.consensus.app/en/articles/10087865-subscription-plans"]
+  });
+  patch("semantic-scholar", {
+    nutritionFacts:{costEl:"Δωρεάν",costEn:"Free",accountEl:"Προαιρετικός λογαριασμός για library/alerts",accountEn:"Optional account for library/alerts"},
+    nutritionSources:["https://www.semanticscholar.org/"]
+  });
+  patch("biorender", {
+    nutritionFacts:{costEl:"Δωρεάν βασικό πλάνο + επί πληρωμή",costEn:"Free basic plan + paid plans",accountEl:"Απαιτεί λογαριασμό",accountEn:"Account required"},
+    nutritionSources:["https://www.biorender.com/pricing"]
+  });
+  patch("google-colab", {
+    nutritionFacts:{costEl:"Δωρεάν βασική χρήση + επί πληρωμή υπολογιστικοί πόροι",costEn:"Free basic use + paid compute options",accountEl:"Google λογαριασμός για κανονική χρήση/αποθήκευση",accountEn:"Google account for normal use/saving"},
+    nutritionSources:["https://research.google.com/colaboratory/faq.html"]
+  });
   patch("codeai", {
     nutritionFacts:{
       costEl:"Δωρεάν curricula",costEn:"Free curricula",

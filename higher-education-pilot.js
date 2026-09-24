@@ -189,6 +189,7 @@
       "pilot-verified-core": "Pilot · επαληθευμένος βασικός κορμός",
       "pilot-partial": "Pilot · μερική κάλυψη",
       "pilot-partial-verified": "Pilot · μερική αλλά επαληθευμένη κάλυψη",
+      "pilot-core-verified": "Pilot · πλήρης υποχρεωτικός κορμός επαληθευμένος",
       "pilot-legacy-mapping": "Pilot · legacy mapping + επαληθευμένα δείγματα μαθημάτων",
       "pilot-structured": "Pilot · οργανωμένο ανά έτος και εξάμηνο",
       "pilot-source-locked": "Pilot · AI κλειδωμένη σε επίσημες πηγές",

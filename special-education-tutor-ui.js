@@ -37,6 +37,7 @@
     ["special-education-eneegyl-structure","/special-education-eneegyl-structure-data.js"],
     ["eneegyl-official-sectors-2026-2027","/teacher-curriculum-eneegyl-official-sectors-2026-2027.js"],
     ["special-education-eneegyl-a-learning","/special-education-eneegyl-a-learning-2026-2027.js"],
+    ["special-education-eneegyl-bc-learning","/special-education-eneegyl-bc-learning-2026-2027.js"],
     ["special-education-framework-learning","/special-education-framework-learning-2026-2027.js"],
     ["eneegyl-chemistry-2026-2027","/teacher-curriculum-eneegyl-chemistry-2026-2027.js"],
     ["eneegyl-math-2026-2027","/teacher-curriculum-eneegyl-math-2026-2027.js"],

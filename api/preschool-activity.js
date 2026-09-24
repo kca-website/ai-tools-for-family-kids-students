@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
 
   const system = `You create preschool activity ideas for ADULTS to do together with children ages 4 to 6.
 This is not a child chatbot. Speak to the adult, not directly to the child.
-Return ONLY valid JSON with exactly these string keys: story, words, game, make, offline, adultTip, visualTitle, visualCaption, visualEmoji1, visualEmoji2, visualEmoji3, visualBg.
+Return ONLY valid JSON with these fields: story, words, game, make, offline, adultTip, visualTitle, visualCaption, visualEmoji1, visualEmoji2, visualEmoji3, visualBg, sceneType, sceneMood, scenePalette, sceneTitle, sceneCaption, sceneObjectCount, sceneAccent.
 Rules:
 1. Greek language only.
 2. Age appropriate, playful, simple, short and concrete.
@@ -49,6 +49,8 @@ Rules:
 13. For visualTitle and visualCaption, create a short child friendly visual card concept matching the theme.
 14. visualEmoji1, visualEmoji2 and visualEmoji3 must each contain one friendly emoji only.
 15. visualBg must be exactly one of: sky, mint, peach, lilac.
+16. Choose sceneType from dinosaur, robot, animals, space, castle, colors, shapes, numbers, generic according to the adult's theme, not the story details. Butterfly is animals, rocket is space, counting up to five is numbers. Unmatched themes are generic.
+17. sceneMood is calm, playful or curious. scenePalette is sky, mint, peach or lilac. sceneAccent is coral, teal, gold or violet. sceneTitle and sceneCaption are brief Greek phrases for the adult's visual card. sceneObjectCount is an integer from 1 to 5, and is 5 for counting to five. These fields describe one cartoon scene, not animation frames. No unsafe content or real people.
 ${modeRule}`;
 
   const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}.`;
@@ -86,9 +88,16 @@ ${modeRule}`;
                 visualEmoji1:{type:'string'},
                 visualEmoji2:{type:'string'},
                 visualEmoji3:{type:'string'},
-                visualBg:{type:'string',enum:['sky','mint','peach','lilac']}
+                visualBg:{type:'string',enum:['sky','mint','peach','lilac']},
+                sceneType:{type:'string',enum:['dinosaur','robot','animals','space','castle','colors','shapes','numbers','generic']},
+                sceneMood:{type:'string',enum:['calm','playful','curious']},
+                scenePalette:{type:'string',enum:['sky','mint','peach','lilac']},
+                sceneTitle:{type:'string'},
+                sceneCaption:{type:'string'},
+                sceneObjectCount:{type:'integer',minimum:1,maximum:5},
+                sceneAccent:{type:'string',enum:['coral','teal','gold','violet']}
               },
-              required:['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg']
+              required:['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg','sceneType','sceneMood','scenePalette','sceneTitle','sceneCaption','sceneObjectCount','sceneAccent']
             }
           }
         }
@@ -99,7 +108,7 @@ ${modeRule}`;
     const raw = await response.json().catch(() => ({}));
     if (!response.ok) return res.status(response.status || 502).json({ error:'provider_error', message:'Η δραστηριότητα δεν μπόρεσε να δημιουργηθεί.' });
     const text = String(raw?.choices?.[0]?.message?.content || '').trim();
-    const activity = parseActivity(text);
+    const activity = parseActivity(text, idea);
     if (!activity) return res.status(502).json({ error:'invalid_result', message:'Το AI δεν επέστρεψε σωστή δραστηριότητα. Δοκίμασε ξανά.' });
     res.setHeader('Cache-Control','no-store');
     return res.status(200).json({ activity, model, provider:'groq' });
@@ -111,13 +120,39 @@ ${modeRule}`;
 function looksLikePersonalData(s) {
   return /@|https?:\/\/|\b\d{7,}\b|\b(email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)\b/i.test(s);
 }
-function parseActivity(text) {
+function parseActivity(text, idea) {
   try {
     const j = JSON.parse(text.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,''));
     const keys=['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg'];
     if (!keys.every(k => typeof j[k] === 'string' && j[k].trim())) return null;
-    return Object.fromEntries(keys.map(k => [k, clean(j[k])]));
+    const activity = Object.fromEntries(keys.map(k => [k, clean(j[k])]));
+    const types = ['dinosaur','robot','animals','space','castle','colors','shapes','numbers','generic'];
+    const palettes = ['sky','mint','peach','lilac'];
+    const accents = ['coral','teal','gold','violet'];
+    const moods = ['calm','playful','curious'];
+    const known = knownSceneType(idea);
+    activity.sceneType = known || (types.includes(j.sceneType) ? j.sceneType : 'generic');
+    activity.sceneMood = moods.includes(j.sceneMood) ? j.sceneMood : 'playful';
+    activity.scenePalette = palettes.includes(j.scenePalette) ? j.scenePalette : 'sky';
+    activity.sceneAccent = accents.includes(j.sceneAccent) ? j.sceneAccent : 'teal';
+    activity.sceneTitle = clean(typeof j.sceneTitle === 'string' ? j.sceneTitle : activity.visualTitle).replace(/[—–]/g, ',').slice(0,80) || activity.visualTitle;
+    activity.sceneCaption = clean(typeof j.sceneCaption === 'string' ? j.sceneCaption : activity.visualCaption).replace(/[—–]/g, ',').slice(0,180) || activity.visualCaption;
+    activity.sceneObjectCount = activity.sceneType === 'numbers' && /(?:μέχρι\s*(?:το\s*)?5|1\s*(?:ως|έως|μεχρι|-)\s*5)/i.test(idea)
+      ? 5 : Number.isInteger(j.sceneObjectCount) ? Math.max(1,Math.min(5,j.sceneObjectCount)) : 3;
+    return activity;
   } catch { return null; }
+}
+function knownSceneType(idea) {
+  const theme = String(idea).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  if (/δεινοσαυρ|dinosaur/.test(theme)) return 'dinosaur';
+  if (/ρομποτ|robot/.test(theme)) return 'robot';
+  if (/πεταλουδ|ζω[αο]|αρκουδ|γατ|σκυλ|πουλ|animal|butterfly/.test(theme)) return 'animals';
+  if (/καστρ|πυργ|castle/.test(theme)) return 'castle';
+  if (/διαστημ|πυραυλ|πλανητ|αστερ|(?:^|\s)αστρ|space|rocket/.test(theme)) return 'space';
+  if (/χρωμα|color/.test(theme)) return 'colors';
+  if (/σχημα|κυκλ|τριγων|τετραγων|shape/.test(theme)) return 'shapes';
+  if (/αριθμ|μετρα|μετρη|count|number/.test(theme)) return 'numbers';
+  return null;
 }
 function clean(s) {
   return String(s).replace(/<[^>]+>/g,'').replace(/\s{3,}/g,' ').trim().slice(0,1200);

@@ -1,0 +1,51 @@
+.visual-scene .visual-cartoon {width:100%;max-width:640px;min-width:0;overflow:hidden}
+.visual-cartoon svg {display:block;width:100%;height:clamp(190px,32vw,380px);border-radius:14px;background:#eaf5fb}
+.visual-cartoon[data-palette="mint"] svg{background:#edf9f3}
+.visual-cartoon[data-palette="peach"] svg{background:#fff0df}
+.visual-cartoon[data-palette="lilac"] svg{background:#f5f0ff}
+.visual-cartoon__title{margin:9px 0 3px;font-weight:850;font-size:1.05rem;overflow-wrap:anywhere}
+.visual-cartoon__caption{margin:0;color:#556070;font-size:.86rem;line-height:1.5;overflow-wrap:anywhere}
+.visual-scene .visual-cartoon[hidden],.visual-scene .visual-ai-image[hidden],.visual-scene .visual-scene__fallback[hidden]{display:none}
+.visual-scene{min-height:520px}
+.visual-cartoon[data-mood="calm"] svg{filter:saturate(.84)}
+.visual-cartoon[data-mood="curious"] svg{filter:saturate(1.1)}
+.visual-cartoon .blink{opacity:0}
+.visual-cartoon.is-playing .tail{animation:tail 3s ease-in-out infinite;transform-origin:110px 164px}
+.visual-cartoon.is-playing .head{animation:tilt 4s ease-in-out infinite;transform-origin:175px 125px}
+.visual-cartoon.is-playing .eye .blink{animation:blink 5s steps(1,end) infinite}
+.visual-cartoon.is-playing .step{animation:step 3s ease-in-out infinite}
+.visual-cartoon.is-playing .left-arm{animation:arm-left 3.6s ease-in-out infinite;transform-origin:105px 119px}
+.visual-cartoon.is-playing .right-arm{animation:arm-right 3.6s ease-in-out infinite;transform-origin:213px 119px}
+.visual-cartoon.is-playing .light{animation:glow 3s ease-in-out infinite}
+.visual-cartoon.is-playing .flutter{animation:float 4s ease-in-out infinite}
+.visual-cartoon.is-playing .left-wing{animation:wing-left 2.4s ease-in-out infinite;transform-origin:156px 125px}
+.visual-cartoon.is-playing .right-wing{animation:wing-right 2.4s ease-in-out infinite;transform-origin:164px 125px}
+.visual-cartoon.is-playing .rocket{animation:rise 5s ease-in-out infinite}
+.visual-cartoon.is-playing .flame{animation:flame 1.8s ease-in-out infinite;transform-origin:160px 169px}
+.visual-cartoon.is-playing .twinkle{animation:glow 4s ease-in-out infinite}
+.visual-cartoon.is-playing .planet{animation:planet 12s linear infinite;transform-origin:253px 167px}
+.visual-cartoon.is-playing .cloud{animation:cloud 9s ease-in-out infinite}
+.visual-cartoon.is-playing .flag{animation:flag 3s ease-in-out infinite;transform-origin:107px 54px}
+.visual-cartoon.is-playing .flag-second{transform-origin:213px 54px;animation-delay:.6s}
+.visual-cartoon.is-playing .ball-one,.visual-cartoon.is-playing .shape-one{animation:float 4s ease-in-out infinite}
+.visual-cartoon.is-playing .ball-two,.visual-cartoon.is-playing .shape-two{animation:float 4.5s ease-in-out -.8s infinite}
+.visual-cartoon.is-playing .ball-three,.visual-cartoon.is-playing .shape-three{animation:spin 8s ease-in-out infinite;transform-origin:234px 128px}
+.visual-cartoon.is-playing .ball-four,.visual-cartoon.is-playing .float{animation:float 4s ease-in-out -1.2s infinite}
+.visual-cartoon.is-playing .count-item{animation:count-in 5s ease-in-out infinite;animation-delay:calc(var(--order)*.55s);opacity:0}
+@keyframes tail{50%{transform:rotate(-10deg)}}@keyframes tilt{50%{transform:rotate(5deg)}}
+@keyframes blink{0%,89%,93%,100%{opacity:0}90%,92%{opacity:1}}
+@keyframes step{50%{transform:translate(3px,-4px)}}@keyframes arm-left{50%{transform:rotate(-20deg)}}
+@keyframes arm-right{50%{transform:rotate(20deg)}}@keyframes glow{50%{opacity:.55}}
+@keyframes float{50%{transform:translateY(-9px)}}@keyframes wing-left{50%{transform:scaleX(.65)}}
+@keyframes wing-right{50%{transform:scaleX(.65)}}@keyframes rise{50%{transform:translateY(-22px)}}
+@keyframes flame{50%{transform:scaleY(.7)}}@keyframes planet{to{transform:rotate(360deg)}}
+@keyframes cloud{50%{transform:translateX(25px)}}@keyframes flag{50%{transform:skewY(8deg)}}
+@keyframes spin{50%{transform:rotate(15deg) translateY(-5px)}}
+@keyframes count-in{0%,10%{opacity:0;transform:translateY(12px)}20%,80%{opacity:1;transform:translateY(0)}95%,100%{opacity:0}}
+@media(max-width:600px){.visual-scene{padding:12px;min-height:350px}.creator-visual__buttons{width:100%}.creator-visual__buttons button{flex:1 1 140px;white-space:normal}}
+@media(prefers-reduced-motion:reduce){.visual-cartoon.is-playing svg *{animation:none!important;transition:none!important}.visual-cartoon.is-playing .count-item{opacity:1!important}.visual-cartoon .blink{opacity:0!important}}
+@media print{.visual-cartoon.is-playing svg *{animation:none!important}.visual-cartoon.is-playing .count-item{opacity:1!important}}
+.visual-cartoon[data-accent="coral"] svg{border:2px solid #f2bfaf}
+.visual-cartoon[data-accent="teal"] svg{border:2px solid #add9cc}
+.visual-cartoon[data-accent="gold"] svg{border:2px solid #eddaa5}
+.visual-cartoon[data-accent="violet"] svg{border:2px solid #d9c3e9}

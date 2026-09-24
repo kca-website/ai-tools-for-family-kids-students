@@ -1426,56 +1426,24 @@ main {
 }
 
 /* ---------- Footer ---------- */
-.site-footer__dwrean-badge {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  width: 210px;
-  text-align: left;
-}
-
-.site-footer__dwrean-logo {
-  flex: 0 0 62px;
-}
-
-.site-footer__dwrean-logo img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.site-footer__dwrean-copy {
-  min-width: 0;
-  font-size: 0.7rem;
-  line-height: 1.25;
-  color: var(--color-text-muted);
-}
-
-.site-footer__dwrean-copy span,
-.site-footer__dwrean-copy small {
-  display: block;
-}
-
-.site-footer__dwrean-copy a {
-  color: var(--color-accent);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.site-footer__dwrean-copy a:hover {
-  text-decoration: underline;
-}
-
 .site-footer {
-  position: relative;
   border-top: 1px solid var(--color-border);
-  padding: 32px 240px 24px 0;
-  text-align: center;
+  padding: 32px 20px 24px;
   color: var(--color-text-muted);
+}
+
+.site-footer__inner {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 640px) 210px;
+  justify-content: center;
+  align-items: center;
+  column-gap: 56px;
+}
+
+.site-footer__main {
+  text-align: center;
 }
 
 .site-footer p {
@@ -1517,6 +1485,58 @@ main {
 
 .site-footer__legal a:hover {
   color: var(--color-accent);
+}
+
+.site-footer__dwrean-badge {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 210px;
+  text-align: left;
+  justify-self: start;
+}
+
+.site-footer__dwrean-logo {
+  flex: 0 0 62px;
+}
+
+.site-footer__dwrean-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.site-footer__dwrean-copy {
+  min-width: 0;
+  font-size: 0.7rem;
+  line-height: 1.25;
+  color: var(--color-text-muted);
+}
+
+.site-footer__dwrean-copy span,
+.site-footer__dwrean-copy small {
+  display: block;
+}
+
+.site-footer__dwrean-copy a {
+  color: var(--color-accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer__dwrean-copy a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .site-footer__inner {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+  }
+
+  .site-footer__dwrean-badge {
+    justify-self: center;
+  }
 }
 
 /* ---------- Responsive ---------- */
@@ -2803,20 +2823,5 @@ main {
 @media (min-width: 760px) and (max-width: 1039px) {
   .zone-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 900px) {
-  .site-footer {
-    padding-right: 0;
-  }
-
-  .site-footer__dwrean-badge {
-    position: static;
-    transform: none;
-    width: auto;
-    max-width: 320px;
-    margin: 12px auto 0;
-    justify-content: center;
   }
 }

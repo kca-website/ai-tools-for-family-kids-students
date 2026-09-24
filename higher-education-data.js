@@ -8,7 +8,7 @@
 
   const DATA = Object.freeze({
     meta: {
-      schemaVersion: "0.3.0",
+      schemaVersion: "0.4.0",
       academicYear: "2026-2027",
       lastVerified: "2026-09-24",
       status: "pilot",
@@ -722,7 +722,7 @@
         departmentEn: "Department of Preschool Education",
         degreeLevel: 6,
         nominalSemesters: 8,
-        coverageStatus: "pilot-partial-verified",
+        coverageStatus: "pilot-core-verified",
         sourceConfidence: "high",
         curriculumDisplay: "year-semester-course-topic",
         currentAcademicYearSource: "https://ptpe.edc.uoc.gr/programma-mathimaton",
@@ -929,21 +929,426 @@
       "nkua-law": {
         institutionId: "nkua",
         schoolEl: "Νομική Σχολή",
-        departmentEl: "Νομική Σχολή ΕΚΠΑ — 4ο έτος",
-        departmentEn: "NKUA Law School — 4th year",
+        departmentEl: "Νομική Σχολή ΕΚΠΑ",
+        departmentEn: "NKUA Law School",
         degreeLevel: 6,
         nominalSemesters: 8,
         coverageStatus: "pilot-partial-verified",
         sourceConfidence: "high",
         curriculumDisplay: "year-semester-course-topic",
         currentAcademicYearSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf",
-        notesEl: "Verified pilot subset για δοκιμή με φοιτητή 4ου έτους. Περιλαμβάνει τα 7 υποχρεωτικά μαθήματα Ζ΄ και Η΄ εξαμήνου του επίσημου Οδηγού Σπουδών 2026–27, με τις θεματικές που περιγράφει ο ίδιος ο οδηγός. Τα μαθήματα υποχρεωτικής/ελεύθερης επιλογής δεν έχουν ακόμη προστεθεί και δεν παρουσιάζονται ως καλυμμένα.",
+        notesEl: "Verified pilot του υποχρεωτικού κορμού της Νομικής ΕΚΠΑ 2026–27: 31/31 υποχρεωτικά μαθήματα Α΄–Η΄ εξαμήνου με επίσημες θεματικές από τον Οδηγό Σπουδών. Τα μαθήματα υποχρεωτικής επιλογής και ελεύθερης επιλογής δεν έχουν ακόμη χαρτογραφηθεί πλήρως και δεν παρουσιάζονται ως καλυμμένα.",
         sources: [
           "https://www.law.uoa.gr/odigos_spoydon",
           "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf",
           "https://www.law.uoa.gr/proptychiakes_spoydes"
         ],
         courses: [
+          {
+            code: "2000", semester: 1, year: 1, ects: 4, required: true, toolProfile: "law-research",
+            titleEl: "Ιστορία του Δικαίου",
+            tasks: ["understand","notes","research","papers"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Θεμελιώδη ζητήματα δημοσίου και ιδιωτικού δικαίου στην ελληνική αρχαιότητα",
+              "Ρωμαϊκό δίκαιο και γένεση της νομικής επιστήμης",
+              "Βυζαντινή έννομη τάξη",
+              "Δίκαιο των νεότερων χρόνων",
+              "Ιστορική εξέλιξη δημοσίου, αστικού και ποινικού δικαίου",
+              "Πηγές δικαίου και συστήματα απονομής δικαιοσύνης ανά ιστορική περίοδο"
+            ]
+          },
+          {
+            code: "2001", semester: 1, year: 1, ects: 8, required: true,
+            titleEl: "Συνταγματικό Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Κράτος: έννοια και στοιχεία",
+              "Σύνταγμα: έννοια, διακρίσεις και νομικοπολιτική σημασία",
+              "Πηγές συνταγματικού δικαίου",
+              "Συντακτική εξουσία και αναθεωρητική λειτουργία",
+              "Έλεγχος συνταγματικότητας των νόμων",
+              "Θεμελιώδεις έννοιες των πολιτευμάτων και αρχές του ελληνικού συνταγματικού δικαίου",
+              "Οργανωτικό μέρος του Συντάγματος",
+              "Ελληνική συνταγματική ιστορία"
+            ]
+          },
+          {
+            code: "2002", semester: 1, year: 1, ects: 8, required: true,
+            titleEl: "Γενικές Αρχές Αστικού Δικαίου",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Έννοια και λειτουργία του δικαίου, πηγές και κανόνες δικαίου",
+              "Δικαίωμα: έννοια, διακρίσεις, γένεση, κτήση, αλλοίωση, απώλεια και άσκηση",
+              "Φυσικά και νομικά πρόσωπα",
+              "Δικαιοπραξίες: έννοια, είδη και κατάρτιση σύμβασης",
+              "Ακυρότητα, ακυρωσία και ερμηνεία δικαιοπραξιών",
+              "Αιρέσεις, συγκατάθεση και αντιπροσώπευση",
+              "Παραγραφή"
+            ]
+          },
+          {
+            code: "2003", semester: 1, year: 1, ects: 4, required: true, toolProfile: "law-research",
+            titleEl: "Εισαγωγή στην Επιστήμη του Δικαίου",
+            tasks: ["understand","notes","research","papers"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Ορισμός του δικαίου και διάκρισή του από συνήθειες και κοινωνικές ηθικές αντιλήψεις",
+              "Ισχύς και αποτελεσματικότητα του δικαίου",
+              "Λειτουργίες του δικαίου και σχέσεις με πολιτική και ηθική",
+              "Φυσικό δίκαιο και νομικός θετικισμός",
+              "Δημόσιος εξαναγκασμός και υπακοή στον νόμο",
+              "Γνώση του δικαίου, νομική μεθοδολογία και συστηματικός προσανατολισμός",
+              "Ερμηνεία και θεμελίωση νομικών κρίσεων"
+            ]
+          },
+          {
+            code: "2004", semester: 2, year: 1, ects: 6, required: true,
+            titleEl: "Οικογενειακό Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Οικογένεια, συγγένεια και χαρακτηριστικά του οικογενειακού δικαίου",
+              "Σύγχρονα ζητήματα οικογενειακού δικαίου και υποβοηθούμενη αναπαραγωγή",
+              "Γάμος: σύναψη, ελαττωματικός γάμος και έγγαμη σχέση",
+              "Περιουσιακές σχέσεις συζύγων και συνεισφορά στις οικογενειακές ανάγκες",
+              "Διάσταση και διαζύγιο",
+              "Μητρότητα, πατρότητα και αναγνώριση",
+              "Υιοθεσία και γονική σχέση",
+              "Προστασία ανηλίκων και ανίκανων προσώπων"
+            ]
+          },
+          {
+            code: "2005", semester: 2, year: 1, ects: 8, required: true,
+            titleEl: "Γενικό Ποινικό Δίκαιο",
+            tasks: ["understand","notes","practice","feedback"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Ποινή και δικαιολογική βάση της",
+              "Αρχή νομιμότητας εγκλημάτων και ποινών",
+              "Τρεις βαθμίδες της έννοιας του εγκλήματος",
+              "Πράξη και ειδική υπόσταση εγκλήματος",
+              "Αντικειμενικός αιτιώδης σύνδεσμος και αντικειμενικός καταλογισμός",
+              "Υποκειμενική υπόσταση, δόλος και αμέλεια",
+              "Άδικο και καταλογισμός",
+              "Απόπειρα, συμμετοχή και συρροή"
+            ]
+          },
+          {
+            code: "2006", semester: 2, year: 1, ects: 7, required: true, toolProfile: "law-eu-international",
+            titleEl: "Δημόσιο Διεθνές Δίκαιο",
+            tasks: ["understand","notes","practice","research","papers"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Διεθνές δίκαιο και διεθνής κοινότητα: θεμελιώδεις αρχές",
+              "Πηγές διεθνούς δικαίου: έθιμο και διεθνείς συμβάσεις",
+              "Ιεράρχηση κανόνων και σχέσεις διεθνούς με εσωτερικό δίκαιο",
+              "Κράτος: συστατικά στοιχεία, αναγνώριση και διαδοχή",
+              "Διεθνείς οργανισμοί και νομική προσωπικότητα",
+              "Άτομα και μη κρατικές οντότητες στο διεθνές δίκαιο",
+              "Διπλωματικές/προξενικές σχέσεις, ετεροδικία, διεθνής ευθύνη και διπλωματική προστασία",
+              "ΟΗΕ, ειρηνική επίλυση διαφορών και Δίκαιο της Θάλασσας"
+            ]
+          },
+          {
+            code: "2007", semester: 2, year: 1, ects: 8, required: true,
+            titleEl: "Γενικό Διοικητικό Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Διοίκηση και διοικητικό δίκαιο",
+              "Πηγές διοικητικού δικαίου",
+              "Νομική δέσμευση και διακριτική ευχέρεια της διοίκησης",
+              "Έννομη σχέση διοικητικού δικαίου",
+              "Κανονιστική πράξη της διοίκησης",
+              "Ατομική διοικητική πράξη",
+              "Διοικητική σύμβαση",
+              "Άλλες μορφές δράσης και διοικητική διαδικασία"
+            ]
+          },
+          {
+            code: "2008", semester: 3, year: 2, ects: 6, required: true,
+            titleEl: "Εμπράγματο Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Εμπράγματα δικαιώματα: έννοια και βασικά χαρακτηριστικά",
+              "Γενικές αρχές εμπραγμάτου δικαίου: κλειστός αριθμός, ειδικότητα, δημοσιότητα",
+              "Σχέσεις εμπράγματου και ενοχικού δικαιώματος",
+              "Πράγματα και διακρίσεις",
+              "Νομή: έννοια, είδη, κτήση, απώλεια και προστασία",
+              "Κυριότητα: περιεχόμενο, γειτονικό δίκαιο, κτήση, απώλεια και προστασία",
+              "Δουλείες",
+              "Υποθήκη, ενέχυρο και δημοσιότητα εμπράγματων δικαιωμάτων"
+            ]
+          },
+          {
+            code: "2009", semester: 3, year: 2, ects: 8, required: true,
+            titleEl: "Γενικό Ενοχικό Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Πρωταρχικές έννοιες και ρυθμίσεις ενοχικού δικαίου",
+              "Είδη ενοχών κατά περιεχόμενο και γενεσιουργό λόγο",
+              "Ενοχές από δικαιοπραξία και από τον νόμο",
+              "Φυσιολογία και ανώμαλη εξέλιξη της ενοχής",
+              "Απόσβεση ενοχής και ενίσχυση του δανειστή",
+              "Συμμετοχή τρίτων προσώπων στην ενοχή",
+              "Μεταβίβαση ενοχικού δικαιώματος ή υποχρέωσης",
+              "Συμβάσεις, αδικοπραξίες και αδικαιολόγητος πλουτισμός"
+            ]
+          },
+          {
+            code: "2010", semester: 3, year: 2, ects: 8, required: true,
+            titleEl: "Ειδικό Ποινικό Δίκαιο",
+            tasks: ["understand","notes","practice","feedback"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Εισαγωγή στο Ειδικό Μέρος του Ποινικού Κώδικα",
+              "Εγκλήματα κατά της ζωής",
+              "Εγκλήματα κατά της σωματικής ακεραιότητας και υγείας",
+              "Εγκλήματα κατά της τιμής",
+              "Εγκλήματα κατά της προσωπικής ελευθερίας",
+              "Εγκλήματα κατά της ιδιοκτησίας και περιουσίας",
+              "Κλοπή, υπεξαίρεση, ληστεία, εκβίαση και απάτη",
+              "Βασική μεθοδολογία εφαρμογής ειδικών ποινικών διατάξεων"
+            ]
+          },
+          {
+            code: "2011", semester: 3, year: 2, ects: 7, required: true,
+            titleEl: "Εμπορικό Δίκαιο Ι (Γενικό Μέρος – Δίκαιο Αξιογράφων)",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Έννοια, αντικείμενο και ιστορική εξέλιξη του εμπορικού δικαίου",
+              "Σχέσεις εμπορικού δικαίου με άλλους κλάδους",
+              "Εμπορικές πράξεις και εμπορική ιδιότητα",
+              "Εμπορική επιχείρηση και εμπορικό μητρώο",
+              "Γενικές αρχές δικαίου αξιογράφων",
+              "Αξιόγραφα και λειτουργία τους στις συναλλαγές",
+              "Συναλλαγματική",
+              "Επιταγή"
+            ]
+          },
+          {
+            code: "2012", semester: 4, year: 2, ects: 6, required: true, toolProfile: "law-eu-international",
+            titleEl: "Ευρωπαϊκό Δίκαιο",
+            tasks: ["understand","notes","practice","research","papers"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Δίκαιο της Ευρωπαϊκής Ένωσης και διαφοροποίηση από εσωτερικό/δημόσιο διεθνές δίκαιο",
+              "ΕΕ ως έννομη τάξη και Ένωση δικαίου",
+              "Αυτονομία, αρμοδιότητες και αρχές λειτουργίας της Ένωσης",
+              "Πηγές και ιεράρχηση ενωσιακού δικαίου",
+              "Νομοθετικά όργανα της Ευρωπαϊκής Ένωσης",
+              "Δικαιοδοτικό σύστημα και μηχανισμοί δικαστικής προστασίας",
+              "Υπεροχή, άμεση εφαρμογή και άμεσο αποτέλεσμα",
+              "Σύμφωνη ερμηνεία και ευθύνη κράτους μέλους"
+            ]
+          },
+          {
+            code: "2013", semester: 4, year: 2, ects: 6, required: true,
+            titleEl: "Ειδικό Ενοχικό Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Επώνυμες ενοχικές συμβάσεις του Αστικού Κώδικα",
+              "Ενοχικές συμβάσεις ειδικών νόμων",
+              "Συμβάσεις μεταβίβασης δικαιώματος",
+              "Συμβάσεις παραχώρησης χρήσης",
+              "Συμβάσεις παροχής υπηρεσιών και έργου",
+              "Ενοχές από τον νόμο",
+              "Αδικοπραξίες",
+              "Αδικαιολόγητος πλουτισμός"
+            ]
+          },
+          {
+            code: "2014", semester: 4, year: 2, ects: 7, required: true, toolProfile: "law-eu-international",
+            titleEl: "Ατομικά και Κοινωνικά Δικαιώματα",
+            tasks: ["understand","notes","practice","research","papers"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Γενική θεωρία ατομικών και κοινωνικών δικαιωμάτων",
+              "Ιστορική εξέλιξη, σύγχρονη κατοχύρωση, φορείς και δεσμευτικότητα",
+              "Πεδίο ισχύος, τριτενέργεια και περιορισμοί δικαιωμάτων",
+              "Γενική ελευθερία και δικαίωμα ζωής",
+              "Σωματική και ψυχική ακεραιότητα",
+              "Προσωπική ελευθερία και ασφάλεια",
+              "Ιδιωτική σφαίρα",
+              "Στάθμιση και συγκρούσεις θεμελιωδών δικαιωμάτων"
+            ]
+          },
+          {
+            code: "2015", semester: 4, year: 2, ects: 7, required: true,
+            titleEl: "Πολιτική Δικονομία Ι",
+            tasks: ["understand","notes","practice","feedback"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Οργανισμός δικαστηρίων και πολιτική δικαιοδοσία",
+              "Δικαστήρια, δικαστικοί λειτουργοί και αρμοδιότητα",
+              "Διάδικοι και διαδικαστικές προϋποθέσεις",
+              "Άσκηση και αντικείμενο αγωγής",
+              "Διαδικασία ενώπιον πρωτοβάθμιου δικαστηρίου",
+              "Απόδειξη",
+              "Δικαστική απόφαση",
+              "Βασικές αρχές της διαγνωστικής πολιτικής δίκης"
+            ]
+          },
+          {
+            code: "2016", semester: 5, year: 3, ects: 8, required: true,
+            titleEl: "Ποινική Δικονομία",
+            tasks: ["understand","notes","practice","feedback"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Βασικές αρχές της ποινικής δίκης",
+              "Διάδικοι στην ποινική δίκη",
+              "Προδικασία: προκαταρκτική εξέταση, ποινική δίωξη, κύρια ανάκριση",
+              "Ενδιάμεση διαδικασία ενώπιον συμβουλίων",
+              "Παραπομπή στο ακροατήριο",
+              "Διαδικασία στο ακροατήριο και έκδοση απόφασης",
+              "Απόδειξη",
+              "Ένδικα μέσα και βοηθήματα"
+            ]
+          },
+          {
+            code: "2017", semester: 5, year: 3, ects: 6, required: true,
+            titleEl: "Κληρονομικό Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Κληρονομική διαδοχή και επαγωγή κληρονομίας",
+              "Εξ αδιαθέτου διαδοχή",
+              "Διαθήκη και εκ διαθήκης διαδοχή",
+              "Νόμιμη μοίρα",
+              "Κληρονομική ανικανότητα και αποκλεισμός από την κληρονομία",
+              "Αποδοχή και αποποίηση κληρονομίας",
+              "Ευθύνη κληρονόμου για κληρονομικά χρέη",
+              "Κοινωνία μεταξύ περισσότερων κληρονόμων"
+            ]
+          },
+          {
+            code: "2018", semester: 5, year: 3, ects: 5, required: true,
+            titleEl: "Διοικητική Δικονομία",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Έλεγχος της διοίκησης και διοικητική δικαιοσύνη",
+              "Διοικητικό δικονομικό δίκαιο και δικαίωμα δικαστικής προστασίας",
+              "Διοικητική δικαιοδοσία και διοικητικές διαφορές",
+              "Οργάνωση και αρμοδιότητες διοικητικών δικαστηρίων",
+              "Ακυρωτικές και ουσιαστικές διοικητικές διαφορές",
+              "Ένδικα βοηθήματα κατά πράξεων ή παραλείψεων της διοίκησης",
+              "Προθεσμίες και δικονομικές προϋποθέσεις",
+              "Ένδικα μέσα στη διοικητική δίκη"
+            ]
+          },
+          {
+            code: "2019", semester: 5, year: 3, ects: 6, required: true,
+            titleEl: "Εμπορικό Δίκαιο ΙΙ (Δίκαιο των Εμπορικών Εταιρειών)",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Έννοια και λειτουργία της εταιρίας ως ένωσης προσώπων ιδιωτικού δικαίου",
+              "Πλεονεκτήματα επιχειρηματικής δραστηριότητας μέσω εταιριών",
+              "Προσωπικές και κεφαλαιουχικές εταιρίες",
+              "Εταιρίες με και χωρίς νομική προσωπικότητα",
+              "Εμπορικές και μη εμπορικές εταιρίες",
+              "Αρχή κλειστού αριθμού εμπορικών εταιριών",
+              "Αυτονομία νομικού προσώπου και εταιρική οργάνωση",
+              "Βασικές μορφές και λειτουργία εμπορικών εταιριών"
+            ]
+          },
+          {
+            code: "2021", semester: 6, year: 3, ects: 6, required: true,
+            titleEl: "Ατομικό Εργατικό Δίκαιο",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Πηγές εργατικού δικαίου",
+              "Σύμβαση εξαρτημένης εργασίας και διάκριση από ανεξάρτητες υπηρεσίες/έργο",
+              "Κατηγορίες εργαζομένων και διευθύνοντες υπάλληλοι",
+              "Συμβάσεις ορισμένου και αορίστου χρόνου",
+              "Προσωρινή απασχόληση, μερική απασχόληση και τηλεργασία",
+              "Συμβατικές και παρεπόμενες υποχρεώσεις εργαζομένου/εργοδότη",
+              "Διευθυντικό δικαίωμα εργοδότη",
+              "Χρονικά όρια εργασίας, υπερωρία, υπερεργασία και άδεια"
+            ]
+          },
+          {
+            code: "2022", semester: 6, year: 3, ects: 4, required: true, toolProfile: "law-eu-international",
+            titleEl: "Εφαρμογές Διεθνούς και Ευρωπαϊκού Δικαίου",
+            tasks: ["understand","notes","practice","research","papers"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Εφαρμογή διεθνούς δικαίου στη διεθνή και εσωτερική έννομη τάξη",
+              "Ερμηνεία και εφαρμογή διεθνούς κανόνα από διεθνή και εθνικά δικαστήρια",
+              "Εφαρμογή διεθνούς δικαίου από την εθνική διοίκηση",
+              "Εφαρμογή ενωσιακού δικαίου από εθνικά και ενωσιακά δικαστήρια",
+              "Σχέσεις διεθνών και ενωσιακών δικαιοδοτικών οργάνων",
+              "Δικαστική προστασία σε διεθνές και ευρωπαϊκό επίπεδο",
+              "Νομολογία ως εργαλείο πρακτικής εφαρμογής",
+              "Σύνθεση κανόνων από παράλληλες υπερεθνικές έννομες τάξεις"
+            ]
+          },
+          {
+            code: "2023", semester: 6, year: 3, ects: 6, required: true,
+            titleEl: "Πολιτική Δικονομία ΙΙ",
+            tasks: ["understand","notes","practice","feedback"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Γενικές αρχές και γενικές διατάξεις των ενδίκων μέσων",
+              "Ανακοπή ερημοδικίας",
+              "Έφεση",
+              "Αναψηλάφηση",
+              "Αναίρεση",
+              "Αναγκαστική εκτέλεση",
+              "Ένδικα βοηθήματα κατά την αναγκαστική εκτέλεση",
+              "Σχέση διαγνωστικής δίκης και εκτέλεσης"
+            ]
+          },
+          {
+            code: "2112", semester: 6, year: 3, ects: 6, required: true,
+            titleEl: "Εμπορικό Δίκαιο ΙΙΙ (Δίκαιο Βιομηχανικής Ιδιοκτησίας)",
+            tasks: ["understand","notes","practice","research"],
+            topicsVerified: true, syllabusStatus: "verified-official-study-guide-2026-27",
+            syllabusSource: "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf", syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Βιομηχανική ιδιοκτησία και θέση της στο εμπορικό δίκαιο",
+              "Διακριτικά γνωρίσματα επιχείρησης και προϊόντων",
+              "Σήματα",
+              "Εφευρέσεις και διπλώματα ευρεσιτεχνίας",
+              "Βιομηχανικά σχέδια και υποδείγματα",
+              "Τεχνογνωσία και συναφή άυλα αγαθά",
+              "Προστασία έναντι προσβολών δικαιωμάτων βιομηχανικής ιδιοκτησίας",
+              "Σχέση βιομηχανικής ιδιοκτησίας με ανταγωνισμό και εμπορική δραστηριότητα"
+            ]
+          },
+
           {
             code: "2024", semester: 7, year: 4, ects: 4, required: true, toolProfile: "law-research",
             titleEl: "Φιλοσοφία του Δικαίου",

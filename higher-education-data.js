@@ -65,18 +65,27 @@
         labelEl: "Βιοεπιστήμες",
         tools: [
           { id: "notebooklm", tasks: ["understand","notes","practice"], whyEl: "Μελέτη πάνω στις δικές σου σημειώσεις, papers και επίσημες πηγές χωρίς να ανοίγει αυθαίρετα το πεδίο." },
+          { id: "pubmed", tasks: ["research","papers"], whyEl: "Βασική βιβλιογραφική αναζήτηση στη βιοϊατρική και τις επιστήμες ζωής με άμεση πρόσβαση στα πρωτογενή citations." },
+          { id: "consensus", tasks: ["research","papers","understand"], whyEl: "AI αναζήτηση για ερωτήματα τύπου «τι δείχνουν οι μελέτες;», με papers πίσω από κάθε σύνθεση." },
+          { id: "semantic-scholar", tasks: ["research","papers"], whyEl: "Δωρεάν AI-powered αναζήτηση papers, citations και σχετικής βιβλιογραφίας." },
           { id: "elicit", tasks: ["research","papers"], whyEl: "Αναζήτηση και σύγκριση ακαδημαϊκών papers για βιολογικά και βιοϊατρικά ερωτήματα." },
           { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Έλεγχος αν μια επιστημονική εργασία υποστηρίζει ή αντικρούει έναν ισχυρισμό." },
-          { id: "perplexity", tasks: ["research","understand"], whyEl: "Γρήγορη αρχική χαρτογράφηση θέματος με παραπομπές που πρέπει να ελεγχθούν στις πρωτογενείς πηγές." }
+          { id: "alphafold-db", tasks: ["understand","research"], whyEl: "Για πρωτεΐνες: εξερεύνηση προβλεπόμενων 3D δομών και confidence, χρήσιμη σε Μοριακή Βιολογία και Βιοχημεία." },
+          { id: "uniprot", tasks: ["research","understand"], whyEl: "Για πρωτεΐνες και λειτουργικές annotations, αλληλουχίες, domains και cross-references." },
+          { id: "biorender", tasks: ["feedback","notes"], whyEl: "Για καθαρά επιστημονικά figures και διαγράμματα βιολογικών διαδικασιών, όχι για παραγωγή επιστημονικών συμπερασμάτων." }
         ]
       },
       "bioinformatics": {
         labelEl: "Βιοπληροφορική",
         tools: [
+          { id: "google-colab", tasks: ["coding","practice","calculations"], whyEl: "Δωρεάν Python/Jupyter περιβάλλον για ανάλυση βιολογικών δεδομένων, notebooks και reproducible workflows χωρίς εγκατάσταση." },
           { id: "github-copilot", tasks: ["coding","feedback","practice"], whyEl: "Βοήθεια μέσα στον editor για Python/R και βιοπληροφορικά scripts, με έλεγχο του κώδικα από τον φοιτητή." },
+          { id: "ncbi-blast", tasks: ["research","practice","understand"], whyEl: "Για σύγκριση DNA/πρωτεϊνικών αλληλουχιών, αναγνώριση ομολογίας και λειτουργικών/εξελικτικών σχέσεων." },
+          { id: "uniprot", tasks: ["research","understand"], whyEl: "Για πρωτεϊνικές αλληλουχίες, λειτουργικές annotations, domains και cross-references." },
+          { id: "alphafold-db", tasks: ["research","understand"], whyEl: "Για προβλεπόμενες πρωτεϊνικές δομές και structural context με σαφή έλεγχο confidence." },
           { id: "notebooklm", tasks: ["understand","notes","papers"], whyEl: "Σύνδεση κώδικα, σημειώσεων και papers σε ένα source-based notebook." },
           { id: "elicit", tasks: ["research","papers"], whyEl: "Εντοπισμός papers και μεθόδων για pipelines, γονιδιωματική και ανάλυση δεδομένων." },
-          { id: "scite", tasks: ["research","papers"], whyEl: "Έλεγχος βιβλιογραφικών ισχυρισμών πριν χρησιμοποιηθούν σε εργασία ή αναφορά." }
+          { id: "semantic-scholar", tasks: ["research","papers"], whyEl: "Εντοπισμός σχετικής βιβλιογραφίας και citations γύρω από συγκεκριμένες μεθόδους ή datasets." }
         ]
       },
       "quantitative": {

@@ -18,3 +18,7 @@
 .sp-map-details ul{margin:0;padding:10px 28px 4px;border-top:1px solid #e5eaf0;font-size:.8rem;line-height:1.45;color:#475467}
 .sp-map-details li{margin:4px 0}
 .sp-map-note{margin:6px 12px 11px!important;font-size:.75rem!important;line-height:1.4!important;color:#64748b!important}
+
+.sp-quiz-ai-next{margin:14px 0;padding:12px 14px;border:1px solid #bfe3d5;border-radius:12px;background:#f3fbf7}
+.sp-quiz-ai-next>strong{display:block;color:#175c4a;font-size:.84rem;margin-bottom:4px}
+.sp-quiz-ai-next p{margin:0 0 10px!important;font-size:.8rem!important;line-height:1.45!important;color:#475467!important}

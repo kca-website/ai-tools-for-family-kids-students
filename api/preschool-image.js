@@ -36,6 +36,7 @@ module.exports = async function handler(req, res) {
   }
 
   const cleanIdea = idea.replace(/[<>\\{}\[\]]/g, ' ').replace(/\s+/g, ' ').slice(0, 100);
+  const subject = pictureSubject(cleanIdea);
   const modeHint = mode === 'story'
     ? 'storybook scene'
     : mode === 'learn'
@@ -43,10 +44,11 @@ module.exports = async function handler(req, res) {
       : 'screen-free play and craft inspired scene';
 
   const prompt = [
-    'A charming preschool picture-book illustration for an adult-led activity.',
-    `Theme: ${cleanIdea}.`,
-    `Age: ${age}. Style: ${modeHint}.`,
-    'Friendly non-human characters or objects only. No real people, no children, no faces resembling real people.',
+    `Single main subject: ${subject}.`,
+    'Show this subject clearly in the center, large and easy to recognize.',
+    `Theme from the adult: ${cleanIdea}. Style: ${modeHint}.`,
+    `A charming picture-book illustration suitable for age ${age}.`,
+    'Only the named non-human subject and a simple setting. No humans, no children, no families, no portraits.',
     'Pastel colors, simple rounded shapes, warm light, clean composition, one clear focal subject.',
     'Safe and calm for ages 4 to 6. No violence, fear, weapons, medicine, fire, sharp tools or dangerous situations.',
     'No letters, no words, no logos, no watermark, no UI, no photorealism.',
@@ -107,4 +109,19 @@ module.exports = async function handler(req, res) {
 
 function looksLikePersonalData(s) {
   return /@|https?:\/\/|\b\d{7,}\b|\b(email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)\b/i.test(s);
+}
+
+function pictureSubject(idea) {
+  const theme = idea.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  if (/δεινοσαυρ|dinosaur/.test(theme)) return 'one friendly round green cartoon dinosaur alone among soft plants';
+  if (/ρομποτ|robot/.test(theme)) return 'one friendly rounded toy robot alone';
+  if (/πεταλουδ|butterfly/.test(theme)) return 'one colorful butterfly above simple flowers';
+  if (/πυραυλ|rocket/.test(theme)) return 'one friendly toy rocket among pastel planets and stars, without fire';
+  if (/διαστημ|πλανητ|space/.test(theme)) return 'one pastel planet and a friendly toy spaceship among stars';
+  if (/καστρ|castle/.test(theme)) return 'one pastel storybook castle with flags and clouds';
+  if (/χρωμα|color/.test(theme)) return 'a group of large colorful balls arranged in a cheerful pattern';
+  if (/σχημα|shape/.test(theme)) return 'large colorful circles, squares and triangles in a simple pattern';
+  if (/αριθμ|number|count/.test(theme)) return 'five large colorful toy blocks arranged for counting, without written numerals';
+  if (/ζω[αο]|animal/.test(theme)) return 'one friendly cartoon animal in a calm garden';
+  return 'one friendly cartoon object inspired by the theme, with no humans';
 }

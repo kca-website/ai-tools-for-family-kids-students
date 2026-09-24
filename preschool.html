@@ -215,12 +215,18 @@
         const idea = input.value.trim();
         if (!idea) { status.textContent = 'Γράψε πρώτα μία απλή ιδέα.'; return; }
         const activityAge = age.value, activityMode = mode;
+        const isVariation = !results.hidden;
+        const previousActionTop = isVariation ? actions.getBoundingClientRect().top : 0;
         const request = ++generation;
         ++imageRequest;
-        generatedActivity = null;
-        stopMotion();
         submit.disabled = true;
-        results.hidden = true; visual.hidden = true; actions.hidden = true;
+        again.disabled = true;
+        visualStill.disabled = true;
+        visualAnimate.disabled = true;
+        if (!isVariation) {
+          generatedActivity = null;
+          results.hidden = true; visual.hidden = true; actions.hidden = true;
+        }
         status.textContent = 'Το AI ετοιμάζει τη δραστηριότητα…';
         try {
           const r = await fetch('/api/preschool-activity', {
@@ -231,6 +237,7 @@
           const data = await r.json().catch(() => ({}));
           if (request !== generation) return;
           if (!r.ok) throw new Error(data.message || 'Δεν ήταν δυνατή η δημιουργία.');
+          stopMotion();
           generatedActivity = data.activity;
           generatedIdea = idea;
           generatedAge = activityAge;
@@ -259,9 +266,17 @@
           visual.hidden = false;
           actions.hidden = false;
           status.textContent = 'Έτοιμο. Κρατήστε ό,τι σας ταιριάζει και κάντε το μαζί.';
+          if (isVariation) requestAnimationFrame(() => window.scrollBy(0, actions.getBoundingClientRect().top - previousActionTop));
         } catch (err) {
           if (request === generation) status.textContent = err.message || 'Κάτι πήγε στραβά. Δοκίμασε ξανά.';
-        } finally { submit.disabled = false; }
+        } finally {
+          if (request === generation) {
+            submit.disabled = false;
+            again.disabled = false;
+            visualStill.disabled = false;
+            visualAnimate.disabled = false;
+          }
+        }
       });
       visualStill.addEventListener('click', async () => {
         const idea = generatedIdea;
@@ -323,9 +338,16 @@
         visualCartoon.classList.add('is-playing');
         visualAnimate.classList.add('active');
         visualAnimate.setAttribute('aria-pressed','true');
-        visualAnimate.textContent = '⏸️ Σταμάτησε την κίνηση';
-        visualImageNote.textContent = 'Μια μικρή ζωγραφιά ζωντανεύει για τη δραστηριότητά σας.';
+        visualAnimate.textContent = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? '🖼️ Η σκηνή εμφανίζεται ακίνητη'
+          : '⏸️ Σταμάτησε την κίνηση';
+        visualImageNote.textContent = sceneMotionNote(visualCartoonSvg.querySelector('svg'));
       });
+      function sceneMotionNote(svg) {
+        if (!svg) return 'Η ζωγραφιά ζωντανεύει απαλά.';
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 'Η ζωγραφιά μένει ακίνητη σύμφωνα με τη ρύθμιση της συσκευής σας.';
+        return svg.querySelector('.tail') ? 'Κοίτα την ουρά, το κεφάλι και τα βήματα του δεινόσαυρου.' : 'Η ζωγραφιά ζωντανεύει απαλά.';
+      }
       again.addEventListener('click', () => form.requestSubmit()); printBtn.addEventListener('click', () => window.print()); function escapeHtml(v){return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
     })();
   </script>

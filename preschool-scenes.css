@@ -10,10 +10,12 @@
 .visual-cartoon[data-mood="calm"] svg{filter:saturate(.84)}
 .visual-cartoon[data-mood="curious"] svg{filter:saturate(1.1)}
 .visual-cartoon .blink{opacity:0}
-.visual-cartoon.is-playing .tail{animation:tail 3s ease-in-out infinite;transform-origin:110px 164px}
-.visual-cartoon.is-playing .head{animation:tilt 4s ease-in-out infinite;transform-origin:175px 125px}
-.visual-cartoon.is-playing .eye .blink{animation:blink 5s steps(1,end) infinite}
-.visual-cartoon.is-playing .step{animation:step 3s ease-in-out infinite}
+.visual-cartoon.is-playing .tail{animation:tail 2.2s ease-in-out infinite;transform-origin:110px 164px}
+.visual-cartoon.is-playing .head{animation:tilt 2.8s ease-in-out infinite;transform-origin:175px 125px}
+.visual-cartoon.is-playing .eye .blink{animation:blink 4s steps(1,end) infinite}
+.visual-cartoon.is-playing .step{animation:step 2s ease-in-out infinite}
+.visual-cartoon.is-playing .leg-front{animation:walk-front 1s ease-in-out infinite;transform-origin:127px 173px}
+.visual-cartoon.is-playing .leg-back{animation:walk-back 1s ease-in-out infinite;transform-origin:190px 173px}
 .visual-cartoon.is-playing .left-arm{animation:arm-left 3.6s ease-in-out infinite;transform-origin:105px 119px}
 .visual-cartoon.is-playing .right-arm{animation:arm-right 3.6s ease-in-out infinite;transform-origin:213px 119px}
 .visual-cartoon.is-playing .light{animation:glow 3s ease-in-out infinite}
@@ -32,9 +34,11 @@
 .visual-cartoon.is-playing .ball-three,.visual-cartoon.is-playing .shape-three{animation:spin 8s ease-in-out infinite;transform-origin:234px 128px}
 .visual-cartoon.is-playing .ball-four,.visual-cartoon.is-playing .float{animation:float 4s ease-in-out -1.2s infinite}
 .visual-cartoon.is-playing .count-item{animation:count-in 5s ease-in-out infinite;animation-delay:calc(var(--order)*.55s);opacity:0}
-@keyframes tail{50%{transform:rotate(-10deg)}}@keyframes tilt{50%{transform:rotate(5deg)}}
+@keyframes tail{0%,100%{transform:rotate(12deg)}50%{transform:rotate(-20deg)}}@keyframes tilt{50%{transform:rotate(10deg)}}
 @keyframes blink{0%,89%,93%,100%{opacity:0}90%,92%{opacity:1}}
-@keyframes step{50%{transform:translate(3px,-4px)}}@keyframes arm-left{50%{transform:rotate(-20deg)}}
+@keyframes step{0%,100%{transform:translate(-6px,0)}50%{transform:translate(8px,-6px)}}
+@keyframes walk-front{50%{transform:rotate(15deg)}}@keyframes walk-back{50%{transform:rotate(-15deg)}}
+@keyframes arm-left{50%{transform:rotate(-20deg)}}
 @keyframes arm-right{50%{transform:rotate(20deg)}}@keyframes glow{50%{opacity:.55}}
 @keyframes float{50%{transform:translateY(-9px)}}@keyframes wing-left{50%{transform:scaleX(.65)}}
 @keyframes wing-right{50%{transform:scaleX(.65)}}@keyframes rise{50%{transform:translateY(-22px)}}

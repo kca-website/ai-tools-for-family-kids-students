@@ -546,6 +546,7 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 
 
 .home-v8-higher-ed-card{
+  grid-column:span 3;
   background:linear-gradient(135deg,#f8fafc 0%,#eef6ff 100%)!important;
 }
 .home-v8-higher-ed-card .zone-card__age{
@@ -556,6 +557,9 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   color:#075985!important;
   font-size:.68rem!important;
   font-weight:800;
+}
+@media(max-width:700px){
+  .home-v8-higher-ed-card{grid-column:auto;}
 }
 @media(max-width:480px){
   .home-v8-higher-ed-card .zone-card__age{

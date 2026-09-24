@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
 
   const system = `You create preschool activity ideas for ADULTS to do together with children ages 4 to 6.
 This is not a child chatbot. Speak to the adult, not directly to the child.
-Return ONLY valid JSON with exactly these string keys: story, words, game, make, offline, adultTip.
+Return ONLY valid JSON with exactly these string keys: story, words, game, make, offline, adultTip, visualTitle, visualCaption, visualEmoji1, visualEmoji2, visualEmoji3, visualBg.
 Rules:
 1. Greek language only.
 2. Age appropriate, playful, simple, short and concrete.
@@ -46,6 +46,9 @@ Rules:
 10. Keep each field under 70 Greek words.
 11. Adapt difficulty and instructions to the supplied age, available time and setting.
 12. Avoid dash punctuation in Greek output. Prefer short sentences and headings.
+13. For visualTitle and visualCaption, create a short child friendly visual card concept matching the theme.
+14. visualEmoji1, visualEmoji2 and visualEmoji3 must each contain one friendly emoji only.
+15. visualBg must be exactly one of: sky, mint, peach, lilac.
 ${modeRule}`;
 
   const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}.`;
@@ -77,9 +80,15 @@ ${modeRule}`;
                 game:{type:'string'},
                 make:{type:'string'},
                 offline:{type:'string'},
-                adultTip:{type:'string'}
+                adultTip:{type:'string'},
+                visualTitle:{type:'string'},
+                visualCaption:{type:'string'},
+                visualEmoji1:{type:'string'},
+                visualEmoji2:{type:'string'},
+                visualEmoji3:{type:'string'},
+                visualBg:{type:'string',enum:['sky','mint','peach','lilac']}
               },
-              required:['story','words','game','make','offline','adultTip']
+              required:['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg']
             }
           }
         }
@@ -105,7 +114,7 @@ function looksLikePersonalData(s) {
 function parseActivity(text) {
   try {
     const j = JSON.parse(text.replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,''));
-    const keys=['story','words','game','make','offline','adultTip'];
+    const keys=['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg'];
     if (!keys.every(k => typeof j[k] === 'string' && j[k].trim())) return null;
     return Object.fromEntries(keys.map(k => [k, clean(j[k])]));
   } catch { return null; }

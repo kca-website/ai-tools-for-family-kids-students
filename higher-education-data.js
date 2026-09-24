@@ -8,9 +8,9 @@
 
   const DATA = Object.freeze({
     meta: {
-      schemaVersion: "0.1.0",
+      schemaVersion: "0.2.0",
       academicYear: "2026-2027",
-      lastVerified: "2026-09-20",
+      lastVerified: "2026-09-24",
       status: "pilot",
       policyEl: "Η AI υποστηρίζει κατανόηση, έρευνα, εξάσκηση, οργάνωση και έλεγχο της δικής σου δουλειάς. Δεν δημιουργεί έτοιμη εργασία προς υποβολή.",
       policyEn: "AI supports understanding, research, practice, organization and checking your own work. It is not a submit-ready assignment generator.",
@@ -179,6 +179,14 @@
         legacyNoteEl: "Τα παλιά ονόματα χρησιμοποιούνται μόνο ως aliases αναζήτησης. Η τρέχουσα οντότητα είναι το Πανεπιστήμιο Δυτικής Αττικής.",
         sourceUrl: "https://www.uniwa.gr/",
         departments: ["uniwa-ice"],
+      },
+      uoi: {
+        id: "uoi",
+        nameEl: "Πανεπιστήμιο Ιωαννίνων",
+        nameEn: "University of Ioannina",
+        legacyAliases: [],
+        sourceUrl: "https://www.uoi.gr/",
+        departments: ["uoi-cse"],
       },
       upatras: {
         id: "upatras",
@@ -639,6 +647,126 @@
         ]
       },
 
+      "uoi-cse": {
+        institutionId: "uoi",
+        schoolEl: "Πολυτεχνική Σχολή",
+        departmentEl: "Τμήμα Μηχανικών Ηλεκτρονικών Υπολογιστών και Πληροφορικής",
+        departmentEn: "Department of Computer Science and Engineering",
+        degreeLevel: 7,
+        nominalSemesters: 10,
+        coverageStatus: "pilot-partial-verified",
+        sourceConfidence: "high",
+        curriculumDisplay: "year-semester-course-topic",
+        currentAcademicYearSource: "https://www.cse.uoi.gr/spoudes/proptyxiakes-spoudes/genikes-plirofories-proptyxiakwn/",
+        notesEl: "Πρώτο verified subset για το ακαδημαϊκό έτος 2026–27. Περιλαμβάνει μόνο μαθήματα 1ου εξαμήνου με επίσημη τρέχουσα σελίδα περιγράμματος που έχει ελεγχθεί. Δεν παρουσιάζεται ως πλήρης χαρτογράφηση του 5ετούς προγράμματος.",
+        sources: [
+          "https://www.cse.uoi.gr/spoudes/proptyxiakes-spoudes/genikes-plirofories-proptyxiakwn/",
+          "https://www.cse.uoi.gr/course/%CE%B1%CF%80%CE%B5%CE%B9%CF%81%CE%BF%CF%83%CF%84%CE%B9%CE%BA%CF%8C%CF%82-%CE%BB%CE%BF%CE%B3%CE%B9%CF%83%CE%BC%CF%8C%CF%82-%CE%B9/",
+          "https://www.cse.uoi.gr/course/%CE%B3%CF%81%CE%B1%CE%BC%CE%BC%CE%B9%CE%BA%CE%AE-%CE%AC%CE%BB%CE%B3%CE%B5%CE%B2%CF%81%CE%B1/",
+          "https://www.cse.uoi.gr/course/%CE%B5%CE%B9%CF%83%CE%B1%CE%B3%CF%89%CE%B3%CE%AE-%CF%83%CF%84%CE%BF%CE%BD-%CF%80%CF%81%CE%BF%CE%B3%CF%81%CE%B1%CE%BC%CE%BC%CE%B1%CF%84%CE%B9%CF%83%CE%BC%CF%8C/",
+          "https://www.cse.uoi.gr/course/%CE%B3%CE%B5%CE%BD%CE%B9%CE%BA%CE%AE-%CF%86%CF%85%CF%83%CE%B9%CE%BA%CE%AE-2/",
+          "https://www.cse.uoi.gr/course/%CE%B5%CE%B9%CF%83%CE%B1%CE%B3%CF%89%CE%B3%CE%AE-%CF%83%CF%84%CE%BF%CF%85%CF%82-%CE%B7%CF%85-%CE%BA%CE%B1%CE%B9-%CF%83%CF%84%CE%B7%CE%BD-%CF%80%CE%BB%CE%B7%CF%81%CE%BF%CF%86%CE%BF%CF%81%CE%B9%CE%BA/"
+        ],
+        courses: [
+          {
+            code: "MYY102", semester: 1, year: 1, ects: 5.5, required: true,
+            titleEl: "Απειροστικός Λογισμός Ι",
+            tasks: ["understand","practice","calculations"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page-2026-27",
+            syllabusSource: "https://www.cse.uoi.gr/course/%CE%B1%CF%80%CE%B5%CE%B9%CF%81%CE%BF%CF%83%CF%84%CE%B9%CE%BA%CF%8C%CF%82-%CE%BB%CE%BF%CE%B3%CE%B9%CF%83%CE%BC%CF%8C%CF%82-%CE%B9/",
+            syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Πραγματικοί αριθμοί, supremum και infimum",
+              "Συναρτήσεις μιας μεταβλητής",
+              "Ακολουθίες και σειρές πραγματικών αριθμών",
+              "Όρια και συνέχεια",
+              "Παραγώγιση και εφαρμογές",
+              "Ανάπτυγμα Taylor",
+              "Ολοκληρώματα Riemann και τεχνικές ολοκλήρωσης",
+              "Μιγαδικοί αριθμοί και στοιχειώδεις μιγαδικές συναρτήσεις",
+              "Συνήθεις διαφορικές εξισώσεις"
+            ]
+          },
+          {
+            code: "MYY103", semester: 1, year: 1, ects: 5.5, required: true,
+            titleEl: "Γενική Φυσική",
+            tasks: ["understand","practice","calculations"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page-2026-27",
+            syllabusSource: "https://www.cse.uoi.gr/course/%CE%B3%CE%B5%CE%BD%CE%B9%CE%BA%CE%AE-%CF%86%CF%85%CF%83%CE%B9%CE%BA%CE%AE-2/",
+            syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Μαθηματική εισαγωγή και τρισδιάστατος χώρος",
+              "Εφαρμογές απειροστικού λογισμού στη φυσική",
+              "Ηλεκτρικό φορτίο, δύναμη και πεδίο",
+              "Δυναμικό και ηλεκτρική δυναμική ενέργεια",
+              "Ηλεκτρικό ρεύμα και κυκλώματα συνεχούς",
+              "Μαγνητικό πεδίο και δύναμη",
+              "Ηλεκτρομαγνητική επαγωγή και κυκλώματα εναλλασσομένου",
+              "Εξισώσεις Maxwell και ηλεκτρομαγνητικό φάσμα"
+            ]
+          },
+          {
+            code: "MYY104", semester: 1, year: 1, ects: 5.5, required: true,
+            titleEl: "Γραμμική Άλγεβρα",
+            tasks: ["understand","practice","calculations"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page-2026-27",
+            syllabusSource: "https://www.cse.uoi.gr/course/%CE%B3%CF%81%CE%B1%CE%BC%CE%BC%CE%B9%CE%BA%CE%AE-%CE%AC%CE%BB%CE%B3%CE%B5%CE%B2%CF%81%CE%B1/",
+            syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Πίνακες και πράξεις πινάκων",
+              "Ορίζουσες και ανάπτυγμα Laplace",
+              "Γραμμικά συστήματα, Gauss και Cramer",
+              "Διανυσματικοί χώροι, βάση και διάσταση",
+              "Γραμμικές απεικονίσεις και αλλαγή βάσης",
+              "Εσωτερικό γινόμενο και ορθογωνιότητα",
+              "Ιδιοτιμές, ιδιοδιανύσματα και διαγωνοποίηση"
+            ]
+          },
+          {
+            code: "MYY105", semester: 1, year: 1, ects: 6, required: true,
+            titleEl: "Εισαγωγή στον Προγραμματισμό",
+            tasks: ["understand","coding","practice","feedback"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page-2026-27",
+            syllabusSource: "https://www.cse.uoi.gr/course/%CE%B5%CE%B9%CF%83%CE%B1%CE%B3%CF%89%CE%B3%CE%AE-%CF%83%CF%84%CE%BF%CE%BD-%CF%80%CF%81%CE%BF%CE%B3%CF%81%CE%B1%CE%BC%CE%BC%CE%B1%CF%84%CE%B9%CF%83%CE%BC%CF%8C/",
+            syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Μεταβλητές, τύποι, εκφράσεις και αριθμητικοί υπολογισμοί",
+              "Δομημένοι τύποι, αλφαριθμητικά, λίστες και πίνακες",
+              "Συνθήκες, δομές απόφασης και βρόχοι",
+              "Είσοδος και έξοδος δεδομένων",
+              "Συναρτήσεις και αναδρομή",
+              "Αλγόριθμοι και λογικά διαγράμματα",
+              "Αναζήτηση και ταξινόμηση",
+              "Διαχείριση λαθών και αρχεία",
+              "Python"
+            ]
+          },
+          {
+            code: "MYY106", semester: 1, year: 1, ects: 5.5, required: true,
+            titleEl: "Εισαγωγή στους Η/Υ και στην Πληροφορική",
+            tasks: ["understand","practice","coding","notes"],
+            topicsVerified: true,
+            syllabusStatus: "verified-official-course-page-2026-27",
+            syllabusSource: "https://www.cse.uoi.gr/course/%CE%B5%CE%B9%CF%83%CE%B1%CE%B3%CF%89%CE%B3%CE%AE-%CF%83%CF%84%CE%BF%CF%85%CF%82-%CE%B7%CF%85-%CE%BA%CE%B1%CE%B9-%CF%83%CF%84%CE%B7%CE%BD-%CF%80%CE%BB%CE%B7%CF%81%CE%BF%CF%86%CE%BF%CF%81%CE%B9%CE%BA/",
+            syllabusSourceAcademicYear: "2026-2027",
+            topics: [
+              "Συστήματα υπολογιστών και επίπεδα αφαίρεσης",
+              "Δίκτυα υπολογιστών, TCP/IP και DNS",
+              "Αναπαράσταση δεδομένων και αριθμητικά συστήματα",
+              "Ψηφιακά κυκλώματα και άλγεβρα Boole",
+              "Οργάνωση επεξεργαστή και μικροαρχιτεκτονική",
+              "UNIX και σύστημα αρχείων",
+              "Παγκόσμιος Ιστός, HTML και CSS",
+              "LaTeX και τεχνική συγγραφή"
+            ]
+          }
+        ]
+      },
+
       "uniwa-ice": {
         institutionId: "uniwa",
         schoolEl: "Σχολή Μηχανικών",
@@ -995,6 +1123,12 @@
     if (departmentId === "unipi-ds") {
       if (/μαθηματ|πιθανοτ|στατισ|στοχασ/.test(title)) return "quantitative";
       if (/σήματα|τηλεπικοινων|επικοινων|ψηφιακή σχεδίαση/.test(title)) return "physics-engineering";
+      return "computing";
+    }
+
+    if (departmentId === "uoi-cse") {
+      if (/λογισμ|άλγεβρ|μαθηματ/.test(title)) return "quantitative";
+      if (/φυσικ/.test(title)) return "physics-engineering";
       return "computing";
     }
 

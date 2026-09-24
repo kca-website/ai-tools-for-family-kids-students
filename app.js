@@ -2364,15 +2364,27 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   function updateDocumentTitle() {
-    const base = "AI Tools for Family, Kids & Students";
+    const base = "AITOOLS4KIDS.gr";
     if (!state.currentZone) {
-      document.title = `${t("heroTitle")} · ${base}`;
-      return;
+      document.title = `${base} — ${t("heroTitle")}`;
+    } else {
+      const zone = ZONES.find((z) => z.id === state.currentZone);
+      const zoneLabel = zone ? (state.lang === "el" ? zone.labelEl : zone.labelEn) : "";
+      const viewKey = "viewTab" + state.currentView.charAt(0).toUpperCase() + state.currentView.slice(1);
+      document.title = `${zoneLabel} · ${t(viewKey)} · ${base}`;
     }
-    const zone = ZONES.find((z) => z.id === state.currentZone);
-    const zoneLabel = zone ? (state.lang === "el" ? zone.labelEl : zone.labelEn) : "";
-    const viewKey = "viewTab" + state.currentView.charAt(0).toUpperCase() + state.currentView.slice(1);
-    document.title = `${zoneLabel} · ${t(viewKey)} · ${base}`;
+
+    const canonicalUrl = "https://www.aitools4kids.gr" + (location.pathname || "/");
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+    }
+    canonical.href = canonicalUrl;
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute("content", canonicalUrl);
   }
 
   // ---------- Η διαδρομή μου (τοπική πρόοδος, μόνο σε αυτή τη συσκευή) ----------

@@ -21,5 +21,25 @@
       "src": "/(.*)",
       "dest": "/"
     }
+  ],
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": {
+            "inc": [
+              "aitools4kids.vercel.app",
+              "aitools4kids-kcawebsite.vercel.app",
+              "aitools4kids-git-main-kcawebsite.vercel.app"
+            ]
+          }
+        }
+      ],
+      "destination": "https://www.aitools4kids.gr/:path*",
+      "statusCode": 301
+    }
   ]
 }

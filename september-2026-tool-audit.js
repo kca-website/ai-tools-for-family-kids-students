@@ -100,6 +100,17 @@
     },
     nutritionSources:["https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"]
   });
+  patch("codeai", {
+    nutritionFacts:{
+      costEl:"Δωρεάν curricula",costEn:"Free curricula",
+      accountEl:"Πολλά tutorials χωρίς λογαριασμό · λογαριασμός για αποθήκευση προόδου",accountEn:"Many tutorials without account · account to save progress"
+    },
+    nutritionSources:[
+      "https://code.org/en-US/curriculum/high-school",
+      "https://support.code.org/hc/en-us/articles/44973066394765-How-can-I-get-access-to-AI-Tutor",
+      "https://support.code.org/hc/en-us/articles/40542019587213-AI-Tutor-FAQ"
+    ]
+  });
   patch("immersive-reader", {
     nutritionFacts:{
       greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",

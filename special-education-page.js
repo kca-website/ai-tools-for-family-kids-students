@@ -328,7 +328,7 @@
       ${sourceDetails(c)}
     </article>`;
 
-    renderQuiz(q,target);
+    renderQuiz(q,target,c);
     if(focus==="quiz"){
       const quizDetails=target.querySelector('[data-section="quiz"]');
       if(quizDetails) quizDetails.open=true;
@@ -336,9 +336,22 @@
     target.scrollIntoView({behavior:"smooth",block:"start"});
   }
 
-  function renderQuiz(quiz,target){
+  function renderQuiz(quiz,target,curriculum){
     const mount=target?.querySelector(".spQuiz");
     if(!mount||!quiz) return;
+
+    const quizAiLinks=(strong)=>{
+      if(!curriculum) return "";
+      const base=gradeKey(curriculum.grade);
+      const gradeId=curriculum.schoolType==="eneegyl"?`lyc-${base}`:base;
+      const studentHref=aiHref(curriculum.schoolType,gradeId,curriculum.id,"student");
+      const guardianHref=aiHref(curriculum.schoolType,gradeId,curriculum.id,"guardian");
+      const guidance=strong
+        ? "Το επόμενο βήμα είναι να εφαρμόσεις ό,τι κατάλαβες σε νέα παραδείγματα με καθοδήγηση, όχι να πάρεις έτοιμη λύση."
+        : "Το επόμενο βήμα είναι να ξαναδείς τα σημεία που σε δυσκόλεψαν με πιο απλή εξήγηση και μία ερώτηση τη φορά.";
+      const studentLabel=strong?"🤖 Συνέχισε με AI εξάσκηση":"🤖 Εξήγησέ μου ξανά με AI";
+      return `<div class="sp-quiz-ai-next"><strong>Προτεινόμενο επόμενο βήμα</strong><p>${esc(guidance)}</p><div class="sp-unit-actions"><a class="sp-action sp-action--ai" href="${esc(studentHref)}">${studentLabel}</a><a class="sp-action" href="${esc(guardianHref)}">👪 Βοηθός γονέα</a></div></div>`;
+    };
     mount.innerHTML=`<h4>${esc(quiz.title)}</h4><p>${esc(quiz.intro)}</p><button class="sp-action sp-action--ai" type="button" data-sp-quiz-start>Ξεκίνα τις ${quiz.questions.length} ερωτήσεις</button>`;
     let idx=0,score=0,locked=false;
     const start=()=>{idx=0;score=0;locked=false;renderQ();};
@@ -360,7 +373,7 @@
     const result=()=>{
       const strong=score>=Math.ceil(quiz.questions.length*.66);
       const message=strong?(quiz.successMessage||"Έπιασες τη βασική λογική."):(quiz.retryMessage||"Κάνε μια μικρή επανάληψη και ξαναδοκίμασε.");
-      mount.innerHTML=`<div class="sp-score">${score}/${quiz.questions.length}</div><p>${esc(message)}</p><button class="sp-action" type="button" data-sp-retry>Ξαναδοκίμασε</button>`;
+      mount.innerHTML=`<div class="sp-score">${score}/${quiz.questions.length}</div><p>${esc(message)}</p>${quizAiLinks(strong)}<button class="sp-action" type="button" data-sp-retry>Ξαναδοκίμασε</button>`;
       mount.querySelector("[data-sp-retry]").onclick=start;
     };
     mount.querySelector("[data-sp-quiz-start]")?.addEventListener("click",start);

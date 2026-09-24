@@ -1429,26 +1429,76 @@ main {
 .home-dwrean-thanks {
   display: flex;
   align-items: center;
-  gap: 22px;
-  max-width: 720px;
-  margin: 34px auto 12px;
-  padding: 18px 22px;
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 4px 18px rgba(25, 50, 78, 0.05);
+  justify-content: center;
+  gap: 10px;
+  max-width: 680px;
+  margin: 14px auto 0;
+  padding: 9px 12px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
 }
 
-.home-dwrean-thanks__logo { flex: 0 0 152px; }
-.home-dwrean-thanks__logo img { display: block; width: 100%; height: auto; }
-.home-dwrean-thanks__copy { min-width: 0; }
-.home-dwrean-thanks__copy h2 { margin: 0 0 5px; font-size: 1rem; color: var(--color-text); }
-.home-dwrean-thanks__copy p { margin: 0 0 7px; font-size: 0.86rem; line-height: 1.5; color: var(--color-text-muted); }
-.home-dwrean-thanks__copy a { font-size: 0.84rem; font-weight: 700; color: var(--color-accent); }
+.home-dwrean-thanks__logo {
+  flex: 0 0 74px;
+}
+
+.home-dwrean-thanks__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.home-dwrean-thanks__copy {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 6px;
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.home-dwrean-thanks__copy strong {
+  color: var(--color-text);
+  font-size: 0.77rem;
+}
+
+.home-dwrean-thanks__copy span {
+  color: var(--color-text-muted);
+}
+
+.home-dwrean-thanks__copy a {
+  color: var(--color-accent);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-dwrean-thanks__copy a:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 520px) {
-  .home-dwrean-thanks { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px; }
-  .home-dwrean-thanks__logo { flex-basis: auto; width: 148px; }
+  .home-dwrean-thanks {
+    align-items: flex-start;
+    gap: 8px;
+    padding: 9px 10px 0;
+  }
+
+  .home-dwrean-thanks__logo {
+    flex-basis: 58px;
+  }
+
+  .home-dwrean-thanks__copy {
+    display: block;
+    font-size: 0.74rem;
+  }
+
+  .home-dwrean-thanks__copy strong,
+  .home-dwrean-thanks__copy span,
+  .home-dwrean-thanks__copy a {
+    display: inline;
+  }
 }
 
 .site-footer {

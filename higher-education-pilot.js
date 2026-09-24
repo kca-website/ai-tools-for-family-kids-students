@@ -489,7 +489,7 @@
     },
     flashcards: {
       label: "Flashcards",
-      instruction: "Δημιούργησε 12 σύντομες flashcards Ερώτηση → Απάντηση. Προτίμησε έννοιες και σχέσεις που αξίζει να ανακαλεί ο φοιτητής, όχι άσχετες λεπτομέρειες."
+      instruction: "Δημιούργησε ακριβώς 12 σύντομες flashcards. Κάθε flashcard να είναι σε ΜΙΑ γραμμή και μόνο στη μορφή: CARD 1 || Ερώτηση || Απάντηση. Συνέχισε CARD 2 ... CARD 12. Μην χρησιμοποιήσεις Markdown table, bullets ή επιπλέον επεξηγηματικό κείμενο. Η απάντηση κάθε κάρτας να είναι σύντομη, 1–3 προτάσεις."
     },
     "study-plan": {
       label: "Πλάνο μελέτης",
@@ -668,8 +668,58 @@
     setTimeout(() => document.body.classList.remove("he-printing"), 0);
   }
 
+  function stripFlashcardMarkdown(value) {
+    return String(value || "")
+      .replace(/^\*\*|\*\*$/g, "")
+      .replace(/^__|__$/g, "")
+      .replace(/^[-–—]\s*/, "")
+      .trim();
+  }
+
+  function parseFlashcards(value) {
+    const raw = String(value || "").replace(/\r/g, "").trim();
+    const cards = [];
+
+    for (const line of raw.split("\n")) {
+      const m = line.trim().match(/^CARD\s+(\d{1,2})\s*\|\|\s*(.*?)\s*\|\|\s*(.+)$/i);
+      if (m) cards.push({ n:Number(m[1]), q:stripFlashcardMarkdown(m[2]), a:stripFlashcardMarkdown(m[3]) });
+    }
+    if (cards.length >= 2) return cards.sort((a,b)=>a.n-b.n);
+
+    const re = /(?:^|\n)\s*\|?\s*(\d{1,2})\s*\|\s*(.*?)\s*\|\s*([\s\S]*?)(?=(?:\n\s*\|?\s*\d{1,2}\s*\|)|$)/g;
+    let match;
+    while ((match = re.exec(raw))) {
+      let answer = String(match[3] || "")
+        .replace(/\n\s*\|?\s*/g, " ")
+        .replace(/\s*\|\s*$/,"")
+        .trim();
+      const question = stripFlashcardMarkdown(match[2]);
+      answer = stripFlashcardMarkdown(answer);
+      if (question && answer && !/^[-: ]+$/.test(question)) cards.push({ n:Number(match[1]), q:question, a:answer });
+    }
+    if (cards.length >= 2) return cards.sort((a,b)=>a.n-b.n);
+
+    for (const line of raw.split("\n")) {
+      const m = line.trim().match(/^(\d{1,2})[.)]\s*(.+?)\s*(?:→|—|\|)\s*(.+)$/);
+      if (m) cards.push({ n:Number(m[1]), q:stripFlashcardMarkdown(m[2]), a:stripFlashcardMarkdown(m[3]) });
+    }
+    return cards.sort((a,b)=>a.n-b.n);
+  }
+
+  function renderFlashcards(value) {
+    const cards=parseFlashcards(value);
+    if (!cards.length) return renderMarkdown(value);
+    return `<div class="he-flashcards">${cards.map((card,index)=>`
+      <article class="he-flashcard">
+        <div class="he-flashcard__num">Flashcard ${index+1}</div>
+        <div class="he-flashcard__q"><strong>Ερώτηση</strong><p>${inlineMarkdown(card.q)}</p></div>
+        <div class="he-flashcard__a"><strong>Απάντηση</strong><p>${inlineMarkdown(card.a)}</p></div>
+      </article>`).join("")}</div>`;
+  }
+
   function showAiOutput(text, provider) {
-    aiOutput.innerHTML = renderMarkdown(String(text || "").trim());
+    const clean=String(text || "").trim();
+    aiOutput.innerHTML = aiAction==="flashcards" ? renderFlashcards(clean) : renderMarkdown(clean);
     aiOutput.classList.add("visible");
     printActions.classList.add("visible");
     aiStatus.textContent = `Έτοιμο · ${provider}`;

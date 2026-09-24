@@ -710,16 +710,46 @@
     const cards=parseFlashcards(value);
     if (!cards.length) return renderMarkdown(value);
     return `<div class="he-flashcards">${cards.map((card,index)=>`
-      <article class="he-flashcard">
-        <div class="he-flashcard__num">Flashcard ${index+1}</div>
-        <div class="he-flashcard__q"><strong>Ερώτηση</strong><p>${inlineMarkdown(card.q)}</p></div>
-        <div class="he-flashcard__a"><strong>Απάντηση</strong><p>${inlineMarkdown(card.a)}</p></div>
+      <article class="he-flashcard" data-flashcard tabindex="0" role="button" aria-pressed="false" aria-label="Flashcard ${index+1}: πάτησε για να δεις την απάντηση">
+        <div class="he-flashcard__inner">
+          <section class="he-flashcard__face he-flashcard__front">
+            <div class="he-flashcard__num">Flashcard ${index+1}</div>
+            <div class="he-flashcard__q"><strong>Ερώτηση</strong><p>${inlineMarkdown(card.q)}</p></div>
+            <div class="he-flashcard__hint">Πάτησε για απάντηση ↻</div>
+          </section>
+          <section class="he-flashcard__face he-flashcard__back" aria-hidden="true">
+            <div class="he-flashcard__num">Flashcard ${index+1}</div>
+            <div class="he-flashcard__a"><strong>Απάντηση</strong><p>${inlineMarkdown(card.a)}</p></div>
+            <div class="he-flashcard__hint">Πάτησε για ερώτηση ↺</div>
+          </section>
+        </div>
       </article>`).join("")}</div>`;
+  }
+
+  function bindFlashcards() {
+    aiOutput.querySelectorAll("[data-flashcard]").forEach((card)=>{
+      const toggle=()=>{
+        const flipped=card.classList.toggle("is-flipped");
+        card.setAttribute("aria-pressed",String(flipped));
+        const front=card.querySelector(".he-flashcard__front");
+        const back=card.querySelector(".he-flashcard__back");
+        front?.setAttribute("aria-hidden",String(flipped));
+        back?.setAttribute("aria-hidden",String(!flipped));
+      };
+      card.addEventListener("click",toggle);
+      card.addEventListener("keydown",(event)=>{
+        if(event.key==="Enter"||event.key===" "){
+          event.preventDefault();
+          toggle();
+        }
+      });
+    });
   }
 
   function showAiOutput(text, provider) {
     const clean=String(text || "").trim();
     aiOutput.innerHTML = aiAction==="flashcards" ? renderFlashcards(clean) : renderMarkdown(clean);
+    if(aiAction==="flashcards") bindFlashcards();
     aiOutput.classList.add("visible");
     printActions.classList.add("visible");
     aiStatus.textContent = `Έτοιμο · ${provider}`;

@@ -50,6 +50,8 @@
       wrong: "✗ Όχι ακριβώς",
       explanation: "Γιατί",
       finished: "Ολοκλήρωσες το quiz.",
+      aiNext: "🤖 Συνέχισε με AI Βοήθεια",
+      aiNextNote: "Χρησιμοποίησε τα λάθη του quiz ως αφετηρία για καθοδήγηση, όχι για έτοιμη λύση. Το prompt θα μπει στο πεδίο χωρίς να σταλεί αυτόματα.",
       slide: "Διαφάνεια",
       yourPart: "Δική σου προσθήκη",
       copy: "Αντιγραφή διάρθρωσης",
@@ -90,6 +92,8 @@
       wrong: "✗ Not quite",
       explanation: "Why",
       finished: "You completed the quiz.",
+      aiNext: "🤖 Continue with AI Help",
+      aiNextNote: "Use the quiz mistakes as the starting point for guided help, not a ready-made answer. The prompt will be placed in the input without being sent automatically.",
       slide: "Slide",
       yourPart: "Your contribution",
       copy: "Copy outline",
@@ -371,7 +375,42 @@
       const next = document.createElement("button"); next.type = "button"; next.className = "tutor-study-tools__btn tutor-study-tools__btn--primary"; next.textContent = tr("next"); next.disabled = state.index >= questions.length - 1;
       next.addEventListener("click", () => { state.index += 1; draw(); });
       nav.append(prev, next); result.appendChild(nav);
-      if (Object.keys(state.answers).length === questions.length) setStatus(panel, `${tr("finished")} ${tr("score")}: ${score}/${questions.length}`, false);
+      if (Object.keys(state.answers).length === questions.length) {
+        setStatus(panel, `${tr("finished")} ${tr("score")}: ${score}/${questions.length}`, false);
+        const wrongIndexes=Object.entries(state.answers)
+          .filter(([i,a])=>questions[Number(i)]?.correct!==a)
+          .map(([i])=>Number(i));
+        const ctx=currentContext();
+        const follow=document.createElement("div");
+        follow.style.cssText="margin-top:12px;padding:10px 11px;border:1px solid #c7d2fe;border-radius:10px;background:#f5f7ff";
+        const title=document.createElement("strong");
+        title.style.cssText="display:block;color:#3730a3;font-size:.8rem;margin-bottom:4px";
+        title.textContent=tr("aiNext");
+        const note=document.createElement("p");
+        note.style.cssText="margin:0 0 8px;color:#64748b;font-size:.76rem;line-height:1.45";
+        note.textContent=tr("aiNextNote");
+        const btn=document.createElement("button");
+        btn.type="button"; btn.className="tutor-study-tools__btn tutor-study-tools__btn--primary";
+        btn.textContent=tr("aiNext");
+        btn.addEventListener("click",()=>{
+          const input=document.getElementById("tutorInput");
+          if(!input) return;
+          const wrongLabels=wrongIndexes.map((i)=>questions[i]?.q).filter(Boolean);
+          const prompt=lang()==="en"
+            ? (wrongLabels.length
+                ? `I got these quiz questions wrong: ${wrongLabels.join(" | ")}. Help me understand the underlying ideas without giving me the ready answer. Ask one question or give one small hint at a time, and finish with 2 new questions to check my understanding.`
+                : `I got all ${questions.length} quiz questions right in ${ctx.subject||"this subject"}. Give me a slightly harder challenge on the same topic without giving me the answer, then check my reasoning.`)
+            : (wrongLabels.length
+                ? `Στο quiz έκανα λάθος στις εξής ερωτήσεις: ${wrongLabels.join(" | ")}. Βοήθησέ με να καταλάβω τις βασικές ιδέες χωρίς να μου δώσεις έτοιμη απάντηση. Κάνε μία ερώτηση ή μικρή υπόδειξη τη φορά και στο τέλος βάλε μου 2 νέες ερωτήσεις για να ελέγξω αν το κατάλαβα.`
+                : `Απάντησα σωστά και στις ${questions.length} ερωτήσεις του quiz στο μάθημα ${ctx.subject||"αυτό"}. Δώσε μου μία λίγο πιο δύσκολη πρόκληση στο ίδιο θέμα χωρίς να μου δώσεις τη λύση και έλεγξε τη σκέψη μου.`);
+          input.value=prompt;
+          input.dispatchEvent(new Event("input",{bubbles:true}));
+          input.focus();
+          input.scrollIntoView({behavior:"smooth",block:"center"});
+        });
+        follow.append(title,note,btn);
+        result.appendChild(follow);
+      }
     }
     draw();
     setStatus(panel, cached ? tr("cached") : tr("saved"), false);

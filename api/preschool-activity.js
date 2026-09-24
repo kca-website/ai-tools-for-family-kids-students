@@ -59,7 +59,7 @@ Rules:
 17. sceneMood is calm, playful or curious. scenePalette is sky, mint, peach or lilac. sceneAccent is coral, teal, gold or violet. sceneTitle and sceneCaption are brief Greek phrases for the adult's visual card. sceneObjectCount is an integer from 1 to 5, and is 5 for counting to five. These fields describe one cartoon scene, not animation frames. No unsafe content or real people.
 18. Align the whole activity with the supplied official preschool curriculum context. Each proposed task should clearly practice at least one of those areas through play, conversation, observation, movement or creation. Do not invent official curriculum codes or claim that your wording is an official learning outcome.
 Official Greek Preschool Curriculum context selected by the application:
-${curriculum.map(x => '- ' + x.field + ' > ' + x.unit + ' > ' + x.subunit).join('\\n')}
+${curriculum.map(x => '- ' + x.field + ' > ' + x.unit + ' > ' + x.subunit).join('\n')}
 ${modeRule}`;
 
   const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}. Curriculum focus selected by adult: ${curriculumFocus}.`;

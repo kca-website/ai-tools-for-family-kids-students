@@ -69,25 +69,11 @@
   }
 
   function ensureEntry(){
-    const grid=document.getElementById("heroQuizPickerGrid");
-    if(!grid||document.getElementById(ENTRY_ID)) return;
-    const b=document.createElement("button");
-    b.type="button";b.id=ENTRY_ID;b.className="hero__quiz-picker-btn hero__quiz-picker-btn--special";b.dataset.specialEducationDiagnosticEntry="1";
-    b.innerHTML=`<span aria-hidden="true">🎓</span> ${t("Ειδική Εκπαίδευση","Special Education")}`;
-    b.addEventListener("click",openModal);
-    grid.appendChild(b);
+    document.getElementById(ENTRY_ID)?.remove();
   }
 
   function ensureQuizViewEntry(){
-    const grid=document.querySelector("#quizContent .quiz-grade-grid");
-    if(!grid||grid.querySelector("[data-special-education-diagnostic]")) return;
-    const b=document.createElement("button");
-    b.type="button";
-    b.className="quiz-grade-card spdiag-entry";
-    b.dataset.specialEducationDiagnostic="1";
-    const count=window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA?.totalAvailableQuizCount||80;
-    b.innerHTML=`<span class="quiz-grade-card__label">🏫 ${t("Ειδική Εκπαίδευση / ΕΝ.Ε.Ε.ΓΥ.-Λ. / Κωφών και Βαρηκόων","Special Education / EN.E.E.GY.-L. / Deaf and Hard of Hearing")}</span><span class="spdiag-entry__sub">${t(`${count} διαθέσιμα σύντομα τεστ · 3 ερωτήσεις · 2 επιλογές`,`${count} available short tests · 3 questions · 2 choices`)}</span>`;
-    grid.appendChild(b);
+    document.querySelectorAll("[data-special-education-diagnostic].spdiag-entry").forEach((el)=>el.remove());
   }
 
   function modal(){ return document.getElementById(MODAL_ID); }
@@ -199,9 +185,26 @@
     modal().querySelector(".spdiag__next").hidden=false;
   }
   function tutorUrl(){
-    if(state.schoolId==="special-gymnasium"||state.schoolId==="deaf-gymnasium") return `/middle/student/tutor?schoolTrack=special-gymnasium${state.gradeId!=="pre"?`&grade=${encodeURIComponent(state.gradeId)}`:""}${state.schoolId==="deaf-gymnasium"?"&accessibility=deaf-hard-of-hearing":""}`;
-    if(state.schoolId==="special-lyceum"||state.schoolId==="deaf-lyceum") return `/high/student/tutor?schoolTrack=special-lyceum${state.gradeId!=="pre"?`&grade=${encodeURIComponent(state.gradeId)}`:""}${state.schoolId==="deaf-lyceum"?"&accessibility=deaf-hard-of-hearing":""}`;
-    return `/high/student/tutor?schoolTrack=eneegyl&grade=${encodeURIComponent(state.gradeId)}`;
+    const params=new URLSearchParams();
+    const subject=String(state.subjectId||"");
+    if(state.schoolId==="special-gymnasium"||state.schoolId==="deaf-gymnasium"){
+      params.set("schoolTrack","special-gymnasium");
+      if(state.gradeId!=="pre") params.set("grade",state.gradeId);
+      if(subject) params.set("subject",`special-gym-${state.gradeId}-${subject}`);
+      if(state.schoolId==="deaf-gymnasium") params.set("accessibility","deaf-hard-of-hearing");
+      return `/middle/student/tutor?${params.toString()}`;
+    }
+    if(state.schoolId==="special-lyceum"||state.schoolId==="deaf-lyceum"){
+      params.set("schoolTrack","special-lyceum");
+      if(state.gradeId!=="pre") params.set("grade",state.gradeId);
+      if(subject) params.set("subject",`special-lyceum-${state.gradeId}-${subject}`);
+      if(state.schoolId==="deaf-lyceum") params.set("accessibility","deaf-hard-of-hearing");
+      return `/high/student/tutor?${params.toString()}`;
+    }
+    params.set("schoolTrack","eneegyl");
+    params.set("grade",state.gradeId);
+    if(subject) params.set("subject",`eneegyl-${state.gradeId}-${subject}`);
+    return `/high/student/tutor?${params.toString()}`;
   }
   function recommendedToolIds(){
     const id=String(state.subjectId||"").toLowerCase();
@@ -229,15 +232,11 @@
   document.addEventListener("click",(e)=>{const trigger=e.target instanceof Element?e.target.closest("[data-special-education-diagnostic]"):null;if(trigger){e.preventDefault();openModal(e);}});
   document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#langEl,#langEn"))setTimeout(()=>{const m=modal();if(m&&!m.hidden)closeModal();ensureEntry();},0);});
   const init=()=>{
-    injectStyles();ensureEntry();ensureQuizViewEntry();
-    setTimeout(()=>{ensureEntry();ensureQuizViewEntry();},250);
-    const root=document.getElementById("quizContent");
-    if(root) new MutationObserver(ensureQuizViewEntry).observe(root,{childList:true,subtree:true});
+    injectStyles();
+    ensureEntry();
+    ensureQuizViewEntry();
   };
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
-  window.addEventListener("load",ensureEntry,{once:true});
-  document.getElementById("heroQuizCtaBtn")?.addEventListener("click",()=>setTimeout(ensureEntry,0));
-  document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#viewTabQuiz,.quiz-grade-back-btn,.quiz-back-btn"))setTimeout(ensureQuizViewEntry,0);});
 
-  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:4,toolRecommendations:true,ensureEntry,ensureQuizViewEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
+  window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC=Object.freeze({version:5,toolRecommendations:true,ensureEntry,ensureQuizViewEntry,open:()=>openModal(null),dataLoaded:()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA});
 })();

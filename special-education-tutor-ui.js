@@ -68,10 +68,14 @@
     const style=document.createElement("style");
     style.id=STYLE_ID;
     style.textContent=`
-      .tutor-school-track-note{display:block;margin-top:5px;color:#64748b;font-size:.72rem;line-height:1.4}
-      .tutor-field--school-track select{border-color:#93c5fd;background:#f8fbff}
-      .tutor-field--school-track.is-loading select{opacity:.65;pointer-events:none}
-      @media(max-width:620px){.tutor-field--school-track{margin-bottom:10px}.tutor-field--school-track select{width:100%;max-width:100%}}
+      .tutor-special-context{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;padding:10px 12px;border:1px solid #bfdbfe;border-radius:12px;background:#f8fbff;color:#334155}
+      .tutor-special-context__copy{min-width:0}
+      .tutor-special-context__copy strong{display:block;font-size:.84rem;color:#1e3a5f}
+      .tutor-special-context__copy small{display:block;margin-top:2px;font-size:.72rem;line-height:1.35;color:#64748b}
+      .tutor-special-context__back{flex:0 0 auto;font-size:.74rem;font-weight:800;color:#2563eb;text-decoration:none;white-space:nowrap}
+      .tutor-special-context__back:hover{text-decoration:underline}
+      .tutor-special-context.is-loading{opacity:.7}
+      @media(max-width:620px){.tutor-special-context{align-items:flex-start;flex-direction:column}.tutor-special-context__back{white-space:normal}}
     `;
     document.head.appendChild(style);
   }
@@ -260,111 +264,74 @@
     });
   }
 
+  function specialTrackLabel(track){
+    if(track==="special-gymnasium") return text("specialGym");
+    if(track==="special-lyceum") return text("specialLyceum");
+    if(track==="eneegyl") return text("eneegyl");
+    return "";
+  }
+
   function enhance(context){
     const ctx=context?.zoneId?context:routeContext();
     if(!ctx?.zoneId||!["middle","high"].includes(ctx.zoneId)||!ctx.roleId) return;
+
+    const urlRequest=readUrlRequest();
+
+    // Normal Gymnasium/Lyceum pages stay clean. Special-school selection lives
+    // on /special-education.html and enters the tutor through a deep link.
+    if(!urlRequest){
+      document.getElementById("tutorSpecialSchoolContext")?.remove();
+      return;
+    }
+
     const settings=document.querySelector("#tutorMount .tutor-settings");
     const grade=document.getElementById("tutorGrade");
     const subject=document.getElementById("tutorSubject");
-    if(!settings||!grade||!subject||document.getElementById("tutorSchoolTrack")) return;
+    if(!settings||!grade||!subject) return;
 
     injectStyles();
-    const baseGrades=storeBaseGrades(grade);
-    const field=document.createElement("label");
-    field.className="tutor-field tutor-field--school-track";
-    field.innerHTML=`<span>${text("label")}</span><select id="tutorSchoolTrack"></select><small class="tutor-school-track-note">${text("note")}</small>`;
-    grade.closest(".tutor-field")?.insertAdjacentElement("beforebegin",field);
-    const select=field.querySelector("select");
-    addTrackOptions(select);
 
-    const urlRequest=readUrlRequest();
-    const pending=pendingSwitch&&pendingSwitch.roleId===ctx.roleId&&pendingSwitch.targetZone===ctx.zoneId?pendingSwitch:null;
-    if(pending) pendingSwitch=null;
-    const saved=stateByRole.get(ctx.roleId);
-    const requested=pending||urlRequest||saved||{track:defaultTrackForZone(ctx.zoneId)};
-    const track=TRACKS[requested.track]?requested.track:defaultTrackForZone(ctx.zoneId);
+    let field=document.getElementById("tutorSpecialSchoolContext");
+    if(!field){
+      field=document.createElement("div");
+      field.id="tutorSpecialSchoolContext";
+      field.className="tutor-special-context";
+      grade.closest(".tutor-field")?.insertAdjacentElement("beforebegin",field);
+    }
 
-    grade.addEventListener("change",()=>{
-      const active=select.value||defaultTrackForZone(ctx.zoneId);
-      const state=stateByRole.get(ctx.roleId)||{track:active};
-      state.grade=grade.value;
-      stateByRole.set(ctx.roleId,state);
-      queueMicrotask(()=>filterSubjects(active,state.subject||null));
-    });
+    field.innerHTML=`<div class="tutor-special-context__copy"><strong>${specialTrackLabel(urlRequest.track)}</strong><small>${isEnglish()?"Special Education context selected from the dedicated page.":"Πλαίσιο Ειδικής Αγωγής από την ειδική σελίδα. Τάξη και μάθημα προσαρμόζονται εδώ χωρίς να αναμειγνύονται με το Γενικό Λύκειο/Γυμνάσιο."}</small></div><a class="tutor-special-context__back" href="/special-education.html">${isEnglish()?"← Special Education":"← Ειδική Αγωγή"}</a>`;
 
-    select.addEventListener("change",async()=>{
-      const chosen=select.value;
-      const def=TRACKS[chosen];
-      if(!def) return;
-      const currentGrade=grade.value;
-      if(def.special&&!specialRuntimeReady()&&def.zoneId===ctx.zoneId){
-        try{
-          field.classList.add("is-loading");
-          field.querySelector(".tutor-school-track-note").textContent=text("loading");
-          await ensureSpecialRuntime();
-          applyTrackInPlace(ctx,chosen,currentGrade,null,select,grade,baseGrades);
-          field.classList.remove("is-loading");
-          field.querySelector(".tutor-school-track-note").textContent=text("note");
-        }catch(_){
-          field.classList.remove("is-loading");
-          field.querySelector(".tutor-school-track-note").textContent=text("note");
-          select.value=defaultTrackForZone(ctx.zoneId);
-        }
-        return;
-      }
-      if(def.zoneId!==ctx.zoneId){
-        try{ await rerenderForTrack(ctx,chosen,null,null,field); }
-        catch(_){
-          field.classList.remove("is-loading");
-          field.querySelector(".tutor-school-track-note").textContent=text("note");
-          select.value=defaultTrackForZone(ctx.zoneId);
-        }
-        return;
-      }
-      applyTrackInPlace(ctx,chosen,currentGrade,null,select,grade,baseGrades);
-    });
+    const requested=urlRequest;
+    const track=requested.track;
+    const def=TRACKS[track];
+    if(!def?.special) return;
 
-    // A direct special-school URL can arrive before its data has been loaded.
-    // If it targets the current zone (e.g. Special Gymnasium from /middle/...),
-    // load the lazy catalog and apply the requested grade/subject in place.
-    if(TRACKS[track].special&&!specialRuntimeReady()){
-      select.value=track;
-      if(TRACKS[track].zoneId===ctx.zoneId){
-        field.classList.add("is-loading");
-        field.querySelector(".tutor-school-track-note").textContent=text("loading");
-        ensureSpecialRuntime().then(()=>{
-          applyTrackInPlace(ctx,track,requested.grade||null,requested.subject||null,select,grade,baseGrades);
-          field.classList.remove("is-loading");
-          field.querySelector(".tutor-school-track-note").textContent=text("note");
-        }).catch(()=>{
-          field.classList.remove("is-loading");
-          field.querySelector(".tutor-school-track-note").textContent=text("note");
-          select.value=defaultTrackForZone(ctx.zoneId);
-        });
-      }else{
-        rerenderForTrack(ctx,track,requested.grade||null,requested.subject||null,field).catch(()=>{
-          field.classList.remove("is-loading");
-          field.querySelector(".tutor-school-track-note").textContent=text("note");
-          select.value=defaultTrackForZone(ctx.zoneId);
-        });
-      }
+    const applySpecial=()=>{
+      buildSpecialGrades(grade,track,requested.grade||grade.value);
+      grade.dispatchEvent(new Event("change",{bubbles:true}));
+      queueMicrotask(()=>filterSubjects(track,requested.subject||null));
+      history.replaceState({},"",cleanUrl(def.zoneId,ctx.roleId,track,grade.value,requested.subject||null));
+    };
+
+    if(!specialRuntimeReady()){
+      field.classList.add("is-loading");
+      ensureSpecialRuntime().then(()=>{
+        applySpecial();
+        field.classList.remove("is-loading");
+      }).catch(()=>{
+        field.classList.remove("is-loading");
+      });
       return;
     }
 
-    if(TRACKS[track].zoneId!==ctx.zoneId){
-      rerenderForTrack(ctx,track,requested.grade||null,requested.subject||null,field).catch(()=>{});
-      return;
-    }
-
-    applyTrackInPlace(ctx,track,requested.grade||null,requested.subject||null,select,grade,baseGrades);
+    applySpecial();
   }
-
   document.addEventListener(RENDER_EVENT,(event)=>enhance(event.detail?.context||null));
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",()=>enhance(null),{once:true});
   else enhance(null);
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_UI=Object.freeze({
-    version:6,enhance,ensureSpecialRuntime,
+    version:7,enhance,ensureSpecialRuntime,
     tracks:Object.freeze(Object.keys(TRACKS))
   });
 })();

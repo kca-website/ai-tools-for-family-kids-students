@@ -17,14 +17,16 @@ module.exports = async function handler(req, res) {
   const age = String(req.body?.age || '5');
   const duration = String(req.body?.duration || '10');
   const place = String(req.body?.place || 'home');
+  const curriculumFocus = String(req.body?.curriculumFocus || 'auto');
   if (!idea || idea.length > 120) return res.status(400).json({ error: 'invalid_idea', message: 'Γράψε μία σύντομη ιδέα έως 120 χαρακτήρες.' });
   if (!['story','learn','offline'].includes(mode)) return res.status(400).json({ error: 'invalid_mode', message: 'Μη έγκυρος τύπος δραστηριότητας.' });
   if (!['4','5','6'].includes(age)) return res.status(400).json({ error: 'invalid_age', message: 'Διάλεξε ηλικία 4, 5 ή 6 ετών.' });
   if (!['5','10','15'].includes(duration)) return res.status(400).json({ error: 'invalid_duration', message: 'Διάλεξε διάρκεια 5, 10 ή 15 λεπτών.' });
   if (!['home','classroom'].includes(place)) return res.status(400).json({ error: 'invalid_place', message: 'Διάλεξε σπίτι ή τάξη.' });
+  if (!['auto','language','math','science','social','arts','movement','technology'].includes(curriculumFocus)) return res.status(400).json({ error: 'invalid_curriculum_focus', message: 'Μη έγκυρη μαθησιακή εστίαση.' });
   if (looksLikePersonalData(idea)) return res.status(400).json({ error: 'personal_data', message: 'Χρησιμοποίησε μόνο ένα γενικό θέμα, χωρίς όνομα, email, τηλέφωνο ή άλλα προσωπικά στοιχεία παιδιού.' });
 
-  const curriculum = getCurriculumAlignment(idea, mode);
+  const curriculum = getCurriculumAlignment(idea, mode, curriculumFocus);
 
   const modeRule = mode === 'story'
     ? 'Give extra weight to a tiny imaginative story and conversation.'
@@ -58,7 +60,7 @@ Official Greek Preschool Curriculum context selected by the application:
 ${curriculum.map(x => '- ' + x.field + ' > ' + x.unit + ' > ' + x.subunit).join('\\n')}
 ${modeRule}`;
 
-  const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}.`;
+  const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}. Curriculum focus selected by adult: ${curriculumFocus}.`;
 
   try {
     const controller = new AbortController();
@@ -148,7 +150,7 @@ function parseActivity(text, idea) {
     return activity;
   } catch { return null; }
 }
-function getCurriculumAlignment(idea, mode) {
+function getCurriculumAlignment(idea, mode, curriculumFocus = 'auto') {
   const type = knownSceneType(idea);
   const theme = String(idea).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const alignments = [];
@@ -158,6 +160,17 @@ function getCurriculumAlignment(idea, mode) {
       alignments.push({ field, unit, subunit, activityGoal });
     }
   };
+
+  const forced = {
+    language: ['Α. Παιδί και Επικοινωνία', 'Γλώσσα', 'Προφορική Επικοινωνία', 'Αφήγηση, περιγραφή, λεξιλόγιο, ερωτήσεις και αναδιήγηση μέσα από παιχνίδι.'],
+    math: ['Γ. Παιδί και Θετικές Επιστήμες', 'Μαθηματικά', 'Αριθμοί-Πράξεις και Άλγεβρα', 'Παιχνίδι με ποσότητες, μέτρηση, αντιστοίχιση, μοτίβα και απλές μαθηματικές σχέσεις.'],
+    science: ['Γ. Παιδί και Θετικές Επιστήμες', 'Φυσικές Επιστήμες', 'Ύλη και Φαινόμενα', 'Παρατήρηση, πρόβλεψη, ερωτήσεις και απλή διερεύνηση φυσικών φαινομένων.'],
+    social: ['Β. Παιδί, Εαυτός και Κοινωνία', 'Προσωπική και Κοινωνικοσυναισθηματική Ανάπτυξη', 'Συναισθηματική Επίγνωση και Διαπροσωπικές Σχέσεις', 'Αναγνώριση συναισθημάτων, έκφραση αναγκών, ακρόαση και συνεργασία μέσα από παιχνίδι.'],
+    arts: ['Δ. Παιδί, Σώμα, Δημιουργία και Έκφραση', 'Τέχνες', 'Εικαστικές Τέχνες', 'Πειραματισμός με χρώματα, υλικά, σχήματα και προσωπική δημιουργική έκφραση.'],
+    movement: ['Δ. Παιδί, Σώμα, Δημιουργία και Έκφραση', 'Κινητική Αγωγή', 'Σώμα και Κίνηση', 'Δημιουργική κίνηση, συντονισμός και επίγνωση του σώματος μέσα από παιχνίδι.'],
+    technology: ['Γ. Παιδί και Θετικές Επιστήμες', 'Τεχνολογία Κατασκευών', 'Παραδοσιακά και Σύγχρονα Τεχνολογικά Εργαλεία/Εξοπλισμός και Συσκευές', 'Παρατήρηση του τρόπου λειτουργίας αντικειμένων και δημιουργική επίλυση απλών προβλημάτων.']
+  };
+  if (curriculumFocus !== 'auto' && forced[curriculumFocus]) add(...forced[curriculumFocus]);
 
   if (type === 'numbers') {
     add('Γ. Παιδί και Θετικές Επιστήμες', 'Μαθηματικά', 'Αριθμοί-Πράξεις και Άλγεβρα', 'Παιχνίδι με ποσότητες, μέτρηση, αντιστοίχιση και απλά αριθμητικά μοτίβα.');

@@ -1066,10 +1066,29 @@ function renderToolGrid(pathTools, targetElement) {
         </div>
         <p class="prompt-card__text">${escapeHtml(promptText)}</p>
         ${tip ? `<p class="prompt-card__tip"><strong>${t("tipLabel")}:</strong> ${escapeHtml(tip)}</p>` : ""}
-        <button type="button" class="prompt-card__copy">${t("copyPrompt")}</button>
+        <div class="prompt-card__actions">
+          <button type="button" class="prompt-card__copy">${t("copyPrompt")}</button>
+          ${isTutorViewAvailable(state.currentZone,state.currentRole)?`<button type="button" class="prompt-card__ai">${state.lang==="el"?"Άνοιξε στην AI Βοήθεια":"Open in AI Help"}</button>`:""}
+        </div>
       `;
       const copyBtn = card.querySelector(".prompt-card__copy");
       copyBtn.addEventListener("click", () => copyPromptToClipboard(promptText, copyBtn));
+      const aiBtn=card.querySelector(".prompt-card__ai");
+      if(aiBtn){
+        aiBtn.addEventListener("click",()=>{
+          state.currentView="tutor";
+          pushRoute();
+          renderCurrentRoute();
+          setTimeout(()=>{
+            const input=document.getElementById("tutorInput");
+            if(input){
+              input.value=promptText;
+              input.dispatchEvent(new Event("input",{bubbles:true}));
+              input.focus();
+            }
+          },80);
+        });
+      }
       els.promptList.appendChild(card);
     });
   }
@@ -1905,17 +1924,54 @@ function renderToolGrid(pathTools, targetElement) {
       `
       : "";
 
+    const pathTutorAvailable=isTutorViewAvailable(state.currentZone,state.currentRole);
+    const pathPrompt=state.lang==="el"
+      ? `Βοήθησέ με να δουλέψω τη δυσκολία «${label}». ${gap.explainEl||""} Μη μου δώσεις έτοιμη λύση. Ρώτησέ με πρώτα τι καταλαβαίνω ήδη, μετά δώσε μία μικρή υπόδειξη τη φορά και στο τέλος βάλε μου 2 νέες ερωτήσεις για να ελέγξω αν το κατάλαβα.`
+      : `Help me work on the difficulty “${label}”. ${gap.explainEn||gap.explainEl||""} Do not give me the ready answer. First ask what I already understand, then give one small hint at a time, and finish with 2 new questions to check my understanding.`;
+    const pathAiHtml=pathTutorAvailable?`
+      <div class="path-ai-next" style="margin:14px 0;padding:13px;border:1px solid #bfe3d5;border-radius:12px;background:#f3fbf7;">
+        <strong style="display:block;color:#175c4a;margin-bottom:4px;">${state.lang==="el"?"🤖 Δούλεψέ το με AI Βοήθεια":"🤖 Work on it with AI Help"}</strong>
+        <p style="margin:0 0 10px;color:var(--color-text-muted);font-size:.86rem;line-height:1.5;">${state.lang==="el"?"Η AI θα ξεκινήσει από αυτή τη συγκεκριμένη δυσκολία και θα σε καθοδηγήσει χωρίς έτοιμη λύση.":"AI Help will start from this exact difficulty and guide you without a ready-made answer."}</p>
+        <button type="button" class="path-ai-help-btn" style="border:0;border-radius:9px;background:var(--color-accent);color:#fff;padding:9px 13px;font:inherit;font-weight:700;cursor:pointer;">${state.lang==="el"?"Άνοιξε στην AI Βοήθεια →":"Open in AI Help →"}</button>
+      </div>
+    `:"";
+
     els.pathModal.innerHTML = `
       <button type="button" class="path-modal__close" aria-label="${t("pathModalClose")}">✕</button>
       <p class="path-modal__eyebrow">${t("pathModalTitle")}</p>
       <h3 class="path-modal__title">${escapeHtml(label)}</h3>
       <p class="path-modal__intro">${t("pathModalIntro")}</p>
       <div class="path-steps">${stepsHtml}</div>
+      ${pathAiHtml}
       ${renderLearningActivities(gapId, gap)}
       ${extraToolsHtml}
       ${adultToolsHtml}
     `;
     els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
+    const pathAiBtn=els.pathModal.querySelector(".path-ai-help-btn");
+    if(pathAiBtn){
+      pathAiBtn.addEventListener("click",()=>{
+        const preferredSubject=state.quizSubjectId||state.currentSubject;
+        closeLearningPathModal();
+        state.currentSubject=preferredSubject||null;
+        state.currentView="tutor";
+        pushRoute();
+        renderCurrentRoute();
+        setTimeout(()=>{
+          const subject=document.getElementById("tutorSubject");
+          if(subject&&preferredSubject&&[...subject.options].some((o)=>o.value===preferredSubject)){
+            subject.value=preferredSubject;
+            subject.dispatchEvent(new Event("change",{bubbles:true}));
+          }
+          const input=document.getElementById("tutorInput");
+          if(input){
+            input.value=pathPrompt;
+            input.dispatchEvent(new Event("input",{bubbles:true}));
+            input.focus();
+          }
+        },80);
+      });
+    }
     bindLearningActivityActions(gapId, gap, label);
     els.pathModalOverlay.hidden = false;
     document.body.style.overflow = "hidden";

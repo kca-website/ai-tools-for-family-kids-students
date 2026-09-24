@@ -40,8 +40,6 @@
       aiMiddle: "Γυμνάσιο 13+",
       aiHigh: "Λύκειο",
       aiSpecial: "Ειδικά σχολεία",
-      educatorNote: "Μαθητές Λυκείου: ΓΕΛ & ΕΠΑΛ · Εκπαιδευτικοί: όλες οι βαθμίδες, ΕΠΑΛ και ειδική εκπαίδευση με πηγές 2026–27",
-      educatorLink: "Άνοιγμα βοηθού",
       needsTitle: "Τι θέλεις να κάνεις με AI;",
       needsHint: "PDF · Έρευνα · Flashcards · Παρουσίαση · Ανάγνωση · Δημιουργία · Οργάνωση · Επανάληψη",
       needsTasksTitle: "Εργασίες & μελέτη",
@@ -94,8 +92,6 @@
       aiMiddle: "Middle School 13+",
       aiHigh: "High School",
       aiSpecial: "Special schools",
-      educatorNote: "High-school students: GEL & EPAL · Educators: all levels, EPAL and special education with 2026–27 sources",
-      educatorLink: "Open assistant",
       needsTitle: "What do you want to do with AI?",
       needsHint: "PDF · Research · Flashcards · Presentation · Reading · Create · Organise · Review",
       needsTasksTitle: "Tasks & study",
@@ -274,14 +270,6 @@
       </div>`;
   }
 
-  function educatorHintMarkup(){
-    const c = currentCopy();
-    return `
-      <div class="home-v8-educator-hint">
-        <span>${c.educatorNote}</span>
-        <a href="/teacher-assistant.html">${c.educatorLink}</a>
-      </div>`;
-  }
 
   function needsMarkup(){
     const c = currentCopy();
@@ -353,7 +341,7 @@
       educatorHint.id = "homeV8EducatorHint";
       helpers.insertAdjacentElement("afterend", educatorHint);
     }
-    educatorHint.innerHTML = educatorHintMarkup();
+    educatorHint.innerHTML = 
 
     let needs = document.getElementById("homeV8Needs");
     if(!needs){

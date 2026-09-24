@@ -35,7 +35,13 @@
     "c|math":"special-gym-c-math-problem-reading"
   };
   const EN_STRUCTURE_DETAILED={
-    "lyc-a|creative-zone":"eneegyl-a-zdd"
+    "lyc-a|creative-zone":"eneegyl-a-zdd",
+    "lyc-a|research-technology":"eneegyl-official-a-ερευνητικη-εργασια-στην-τεχνολογια",
+    "lyc-a|health":"eneegyl-official-a-αγωγη-υγειας",
+    "lyc-a|mechanics":"eneegyl-official-a-αρχες-μηχανολογιας",
+    "lyc-a|economics":"eneegyl-official-a-αρχες-οικονομιας",
+    "lyc-a|composition":"eneegyl-official-a-βασικες-αρχες-συνθεσης",
+    "lyc-a|agriculture-sustainability":"eneegyl-official-a-γεωπονια-και-αειφορος-αναπτυξη"
   };
 
   function esc(v){

@@ -38,8 +38,8 @@ const NEED_TOOL_MAP = {
     research: ["gemini-education", "perplexity", "notebooklm", "chatgpt", "zotero"],
   },
   math: {
-    understand: ["ai-help", "chatgpt", "gemini-education", "desmos", "geogebra", "wolfram-alpha"],
-    practice: ["ai-help", "symbolab", "photomath", "wolfram-alpha", "desmos", "geogebra", "digital-tutoring"],
+    understand: ["ai-help", "desmos", "geogebra", "chatgpt", "gemini-education", "wolfram-alpha"],
+    practice: ["ai-help", "desmos", "geogebra", "symbolab", "photomath", "wolfram-alpha", "digital-tutoring"],
     hint: ["ai-help", "chatgpt"],
     check: ["photomath", "symbolab", "wolfram-alpha", "geogebra", "digital-tutoring", "ai-help", "gemini-education"],
     revise: ["ai-help", "gemini-education", "quizlet", "anki", "digital-tutoring", "chatgpt"],

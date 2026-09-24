@@ -5,6 +5,7 @@
 
 :root {
   /* Χρώματα ανά ζώνη, προσαρμόσιμα */
+  --color-preschool-zone: #E9A23B; /* Νηπιαγωγείο */
   --color-primary-zone: #4CAF7D;   /* Δημοτικό */
   --color-middle-zone: #3B82C4;    /* Γυμνάσιο */
   --color-high-zone: #7C5CBF;      /* Λύκειο */
@@ -438,10 +439,12 @@ main {
   transform: translateY(-4px);
 }
 
+.zone-card[data-zone="preschool"] { border-top-color: var(--color-preschool-zone); }
 .zone-card[data-zone="primary"] { border-top-color: var(--color-primary-zone); }
 .zone-card[data-zone="middle"]  { border-top-color: var(--color-middle-zone); }
 .zone-card[data-zone="high"]    { border-top-color: var(--color-high-zone); }
 
+.zone-card[data-zone="preschool"]:hover { border-color: var(--color-preschool-zone); }
 .zone-card[data-zone="primary"]:hover { border-color: var(--color-primary-zone); }
 .zone-card[data-zone="middle"]:hover  { border-color: var(--color-middle-zone); }
 .zone-card[data-zone="high"]:hover    { border-color: var(--color-high-zone); }
@@ -457,6 +460,7 @@ main {
   border-radius: 50%;
 }
 
+.zone-card[data-zone="preschool"] .zone-card__icon { background: rgba(233, 162, 59, 0.15); }
 .zone-card[data-zone="primary"] .zone-card__icon { background: rgba(76, 175, 125, 0.14); }
 .zone-card[data-zone="middle"]  .zone-card__icon { background: rgba(59, 130, 196, 0.14); }
 .zone-card[data-zone="high"]    .zone-card__icon { background: rgba(124, 92, 191, 0.14); }
@@ -2740,4 +2744,19 @@ main {
   flex: 1 1 220px;
   font-size: 0.76rem;
   color: var(--color-text-muted);
+}
+
+/* ---------- Preschool zone: keep homepage philosophy, add one compact entry ---------- */
+@media (min-width: 1040px) {
+  .zone-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .zone-card {
+    padding: 18px;
+  }
+}
+@media (min-width: 760px) and (max-width: 1039px) {
+  .zone-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

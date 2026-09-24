@@ -46,7 +46,7 @@
     el: {
       menuClassroom: "Για την τάξη",
       heroTitle: "Μαθαίνω Έξυπνα με AI",
-      heroSubtitle: "Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, μαθητές 6 έως 18 και εκπαιδευτικούς.",
+      heroSubtitle: "Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.",
       badgeFree: "Δωρεάν",
       badgeIndependent: "Ανεξάρτητο",
       badgeBilingual: "Δίγλωσσο EL / EN",
@@ -171,7 +171,7 @@
     en: {
       menuClassroom: "Classroom",
       heroTitle: "Learn Smarter with AI",
-      heroSubtitle: "Find the right AI tool for what you want to do and see how to use it properly. For parents, students 6 to 18, and educators.",
+      heroSubtitle: "Find the right AI tool for what you want to do and see how to use it properly. For parents, children and students 4 to 18, and educators.",
       badgeFree: "Free",
       badgeIndependent: "Independent",
       badgeBilingual: "Bilingual EL / EN",
@@ -458,7 +458,7 @@
   // ---------- Rendering: Ζώνες ----------
   function renderZoneGrid() {
     els.zoneGrid.innerHTML = "";
-    ZONES.forEach((zone) => {
+    ZONES.filter((zone) => !zone.hideFromQuiz).forEach((zone) => {
       const card = document.createElement("button");
       card.type = "button";
       card.className = "zone-card";
@@ -472,7 +472,7 @@
         <p class="zone-card__age">${age}</p>
         <p class="zone-card__desc">${desc}</p>
       `;
-      card.addEventListener("click", () => selectZone(zone.id));
+      card.addEventListener("click", () => { if (zone.href) { window.location.href = zone.href; return; } selectZone(zone.id); });
       els.zoneGrid.appendChild(card);
     });
   }

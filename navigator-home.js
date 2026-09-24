@@ -335,20 +335,14 @@
     }
     helpers.innerHTML = helpersMarkup();
 
-    let educatorHint = document.getElementById("homeV8EducatorHint");
-    if(!educatorHint){
-      educatorHint = document.createElement("div");
-      educatorHint.id = "homeV8EducatorHint";
-      helpers.insertAdjacentElement("afterend", educatorHint);
-    }
-    educatorHint.innerHTML = 
+    document.getElementById("homeV8EducatorHint")?.remove();
 
     let needs = document.getElementById("homeV8Needs");
     if(!needs){
       needs = document.createElement("section");
       needs.id = "homeV8Needs";
       needs.className = "home-v8-needs";
-      educatorHint.insertAdjacentElement("afterend", needs);
+      helpers.insertAdjacentElement("afterend", needs);
     }
     const expanded = needs.querySelector("#homeV8NeedsToggle")?.getAttribute("aria-expanded") === "true";
     needs.innerHTML = needsMarkup();

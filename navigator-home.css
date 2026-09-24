@@ -544,3 +544,22 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   .home-v8-higher-ed__body small{font-size:.72rem;}
 }
 
+
+.home-v8-higher-ed-card{
+  background:linear-gradient(135deg,#f8fafc 0%,#eef6ff 100%)!important;
+}
+.home-v8-higher-ed-card .zone-card__age{
+  width:max-content;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#e0f2fe;
+  color:#075985!important;
+  font-size:.68rem!important;
+  font-weight:800;
+}
+@media(max-width:480px){
+  .home-v8-higher-ed-card .zone-card__age{
+    padding:2px 6px;
+    font-size:.62rem!important;
+  }
+}

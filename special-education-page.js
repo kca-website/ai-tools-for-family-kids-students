@@ -33,7 +33,11 @@
     "b|language":"special-gym-b-language-comprehension",
     "b|math":"special-gym-b-math-problem-reading",
     "c|language":"special-gym-c-language-comprehension",
-    "c|math":"special-gym-c-math-problem-reading"
+    "c|math":"special-gym-c-math-problem-reading",
+    "a|home-economics":"teacher-framework-special-gym-a-home-economics",
+    "a|skills-labs":"teacher-framework-special-gym-a-skills-labs",
+    "b|skills-labs":"teacher-framework-special-gym-b-skills-labs",
+    "c|skills-labs":"teacher-framework-special-gym-c-skills-labs"
   };
   const EN_STRUCTURE_DETAILED={
     "lyc-a|creative-zone":"eneegyl-a-zdd",
@@ -57,7 +61,12 @@
     const zone=schoolType==="special-gymnasium"?"middle":"high";
     const params=new URLSearchParams({schoolTrack:schoolType});
     if(gradeId) params.set("grade",gradeId);
-    if(subjectId) params.set("subject",subjectId);
+    let resolvedSubject=subjectId;
+    if(schoolType==="special-lyceum"&&subjectId&&!String(subjectId).startsWith("special-lyceum-")){
+      resolvedSubject=`special-lyceum-${gradeId}-${subjectId}`;
+    }
+    if(gradeId) params.set("grade",gradeId);
+    if(resolvedSubject) params.set("subject",resolvedSubject);
     return `/${zone}/${role}/tutor?${params.toString()}`;
   }
 
@@ -133,18 +142,23 @@
       const detailedId=SG_DETAILED[`${selectedSpecialGymGrade}|${row.id}`]||null;
       const subjectId=detailedId||`special-gym-${selectedSpecialGymGrade}-${row.id}`;
       const hasLearning=!!(detailedId&&L?.[detailedId]?.status==="ready");
+      const hasQuiz=!!(hasLearning&&Q?.[detailedId]?.questions?.length);
       const annual=annualSpecialGymEntry(selectedSpecialGymGrade,row.id);
       const mappedCount=annual?.officialAnchors?.length||0;
       const frameworkOnly=annual?.frameworkOnly===true||annual?.annualInstructionsStatus==="2026-27-framework-verified";
       const helper=hasLearning
-        ? "Έχει έτοιμη βήμα-βήμα μελέτη και μικρό τεστ."
+        ? hasQuiz
+          ? "Έχει έτοιμη βήμα-βήμα μελέτη και μικρό τεστ."
+          : "Έχει έτοιμη μελέτη πάνω στο επαληθευμένο επίσημο πλαίσιο. Δεν δημιουργούμε τεχνητό quiz όπου η πηγή δεν το στηρίζει."
         : mappedCount
           ? frameworkOnly
             ? `${mappedCount} επίσημες επιλογές πλαισίου 2026–27 στην AI Βοήθεια. Δεν παρουσιάζονται ως πλήρης section-level ύλη.`
             : `${mappedCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27 στην AI Βοήθεια.`
           : "Άνοιξε την AI Βοήθεια και γράψε το συγκεκριμένο κεφάλαιο, κείμενο ή άσκηση.";
       const badge=hasLearning
-        ? '<span class="sp-ready-pill">Μελέτη + τεστ</span>'
+        ? hasQuiz
+          ? '<span class="sp-ready-pill">Μελέτη + τεστ</span>'
+          : '<span class="sp-ready-pill">Μελέτη πλαισίου</span>'
         : mappedCount
           ? frameworkOnly
             ? '<span class="sp-ready-pill">Επίσημο πλαίσιο 2026–27</span>'

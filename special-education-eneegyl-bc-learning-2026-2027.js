@@ -6,7 +6,9 @@
   const Q=window.SPECIAL_EDUCATION_QUIZZES;
   if(!C?.entries||!L||!Q) return;
 
+  const OFFICIAL_IDS=new Set(window.AITOOLSKIDS_ENEEGYL_OFFICIAL_SECTORS_2026_2027?.addedEntries||[]);
   const TARGETS=Object.values(C.entries).filter((entry)=>
+    OFFICIAL_IDS.has(entry?.id) &&
     entry?.schoolType==="eneegyl" &&
     ["B","C"].includes(String(entry?.grade||"").toUpperCase()) &&
     entry?.status==="verified" &&

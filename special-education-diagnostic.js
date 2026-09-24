@@ -190,7 +190,15 @@
     if(state.schoolId==="special-gymnasium"||state.schoolId==="deaf-gymnasium"){
       params.set("schoolTrack","special-gymnasium");
       if(state.gradeId!=="pre") params.set("grade",state.gradeId);
-      if(subject) params.set("subject",`special-gym-${state.gradeId}-${subject}`);
+      const pilot={
+        "a|language":"special-gym-a-language-comprehension",
+        "a|math":"special-gym-a-math-problem-reading",
+        "b|language":"special-gym-b-language-comprehension",
+        "b|math":"special-gym-b-math-problem-reading",
+        "c|language":"special-gym-c-language-comprehension",
+        "c|math":"special-gym-c-math-problem-reading"
+      }[`${state.gradeId}|${subject}`];
+      if(subject) params.set("subject",pilot||`special-gym-${state.gradeId}-${subject}`);
       if(state.schoolId==="deaf-gymnasium") params.set("accessibility","deaf-hard-of-hearing");
       return `/middle/student/tutor?${params.toString()}`;
     }

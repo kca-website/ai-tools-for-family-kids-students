@@ -22,10 +22,15 @@
     .card:nth-child(1){background:var(--peach)}.card:nth-child(2){background:var(--sky)}.card:nth-child(3){background:var(--mint)}.card:nth-child(4){background:var(--lilac)}
     .icon{font-size:2rem}.card h2{font-size:1.06rem;margin:8px 0 6px}.card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
     .activity{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.75);font-size:.85rem;line-height:1.5}.activity b{display:block;margin-bottom:3px}
+    .creator{margin:28px 0;border:1px solid #eadfcf;background:linear-gradient(135deg,#fffaf1,#f7fbff);border-radius:24px;padding:24px;box-shadow:0 8px 26px rgba(46,50,70,.05)}
+    .creator h2{margin:0 0 6px;font-size:1.35rem}.creator>p{margin:0 0 16px;color:var(--muted);line-height:1.6}.mode-row,.idea-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+    .mode-btn,.idea-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:750;cursor:pointer;color:var(--ink)}.mode-btn.active{background:#fff0df;border-color:#e8a45d;color:#8a4b16}
+    .creator-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}.creator-input{width:100%;padding:13px 14px;border:1px solid #d9dde5;border-radius:14px;font:inherit}.creator-submit{border:0;border-radius:14px;padding:12px 18px;background:#2e6f5e;color:#fff;font-weight:800;cursor:pointer}.creator-submit:disabled{opacity:.55;cursor:wait}
+    .creator-note{font-size:.78rem;color:var(--muted);margin:8px 0 0}.creator-status{margin:14px 0 0;font-size:.9rem;color:#4d596b}.creator-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.result-card{padding:16px;border-radius:17px;border:1px solid var(--line);background:#fff}.result-card h3{font-size:.95rem;margin:0 0 7px}.result-card p{margin:0;color:#4f5968;line-height:1.55;font-size:.9rem;white-space:pre-line}
     .adult{margin-top:28px;border:1px solid #dedbf1;background:#faf9ff;border-radius:20px;padding:22px}.adult h2{margin:0 0 8px;font-size:1.15rem}.adult p{margin:0 0 12px;color:var(--muted);line-height:1.6}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:7px 10px;border-radius:999px;background:#fff;border:1px solid #ddd9f2;font-size:.82rem;font-weight:700}
     .legal{margin-top:28px;padding:20px;border:1px solid #f0d7b7;background:#fffaf1;border-radius:18px}.legal h2{margin:0 0 8px;font-size:1.05rem}.legal ul{margin:0;padding-left:20px;color:#5f6673;line-height:1.65;font-size:.9rem}
     .footer{margin-top:28px;text-align:center;color:var(--muted);font-size:.82rem}
-    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:26px}.hero__art{min-height:140px;font-size:3.5rem}.grid{grid-template-columns:1fr}h1{font-size:1.8rem}}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:26px}.hero__art{min-height:140px;font-size:3.5rem}.grid,.creator-results{grid-template-columns:1fr}.creator-form{grid-template-columns:1fr}h1{font-size:1.8rem}}
   </style>
 </head>
 <body>
@@ -42,6 +47,26 @@
 
     <div class="notice"><strong>Ο ενήλικας κρατά το τιμόνι.</strong> Σε αυτή τη ζώνη δεν ζητάμε από παιδί 4–6 ετών να ανοίξει λογαριασμό, να γράψει προσωπικά στοιχεία ή να συνομιλήσει μόνο του με εξωτερικό AI.</div>
 
+    <section class="creator" aria-labelledby="creatorTitle">
+      <h2 id="creatorTitle">✨ Δημιούργησε κάτι για να κάνετε μαζί</h2>
+      <p>Γράψε μία απλή ιδέα. Το AI θα ετοιμάσει ένα μικρό πακέτο δραστηριότητας για να το χρησιμοποιήσει ο ενήλικας μαζί με το παιδί.</p>
+      <div class="mode-row" role="group" aria-label="Τύπος δραστηριότητας">
+        <button class="mode-btn active" type="button" data-mode="story">📖 Ιστορία & παιχνίδι</button>
+        <button class="mode-btn" type="button" data-mode="learn">🧩 Μαθαίνω παίζοντας</button>
+        <button class="mode-btn" type="button" data-mode="offline">✂️ Χωρίς οθόνη</button>
+      </div>
+      <div class="idea-row" aria-label="Έτοιμες ιδέες">
+        <button class="idea-btn" type="button">Δεινόσαυρος</button><button class="idea-btn" type="button">Κάστρο</button><button class="idea-btn" type="button">Ρομπότ</button><button class="idea-btn" type="button">Ζώα</button><button class="idea-btn" type="button">Διάστημα</button><button class="idea-btn" type="button">Χρώματα</button><button class="idea-btn" type="button">Σχήματα</button><button class="idea-btn" type="button">Αριθμοί μέχρι το 5</button>
+      </div>
+      <form class="creator-form" id="creatorForm">
+        <input class="creator-input" id="creatorInput" maxlength="120" autocomplete="off" placeholder="π.χ. θάλασσα, πεταλούδα, αριθμοί μέχρι το 5" aria-label="Ιδέα δραστηριότητας">
+        <button class="creator-submit" id="creatorSubmit" type="submit">Φτιάξε δραστηριότητα</button>
+      </form>
+      <p class="creator-note">Μην γράφεις όνομα, σχολείο, φωτογραφίες, στοιχεία υγείας ή άλλα προσωπικά δεδομένα παιδιού.</p>
+      <p class="creator-status" id="creatorStatus" aria-live="polite"></p>
+      <div class="creator-results" id="creatorResults" hidden></div>
+    </section>
+
     <h2 class="section-title">Δραστηριότητες για να κάνετε μαζί</h2>
     <p class="section-sub">Πρώτα παιχνίδι και συζήτηση· το AI είναι απλώς εργαλείο προετοιμασίας για τον ενήλικα.</p>
 
@@ -54,7 +79,7 @@
 
     <section class="adult">
       <h2>Για γονείς & εκπαιδευτικούς</h2>
-      <p>Σύντομα εδώ θα μπουν επιλεγμένα prompts και εργαλεία που μπορούν να χρησιμοποιούν οι ενήλικες για να προετοιμάζουν δραστηριότητες, πάντα με εμφανές ηλικιακό όριο και χωρίς να προτείνεται προσωπικός λογαριασμός στο παιδί.</p>
+      <p>Η δημιουργία δραστηριότητας λειτουργεί με GPT OSS 120B μέσω του δικού μας server endpoint. Ο ενήλικας δίνει μόνο ένα θέμα και παίρνει ιδέες για κοινή δραστηριότητα. Δεν ζητείται λογαριασμός παιδιού και δεν προτείνεται άμεση συνομιλία παιδιού με το μοντέλο.</p>
       <div class="chips"><span class="chip">✓ χωρίς λογαριασμό παιδιού</span><span class="chip">✓ χωρίς προσωπικά δεδομένα παιδιού</span><span class="chip">✓ adult-led</span><span class="chip">✓ παιχνίδι πριν από οθόνη</span></div>
     </section>
 
@@ -69,5 +94,56 @@
     </section>
     <p class="footer">Ανεξάρτητο εκπαιδευτικό έργο · Η σελίδα αυτή είναι ενημερωτική και δεν αποτελεί νομική συμβουλή.</p>
   </main>
+  <script>
+    (() => {
+      const form = document.getElementById('creatorForm');
+      const input = document.getElementById('creatorInput');
+      const submit = document.getElementById('creatorSubmit');
+      const status = document.getElementById('creatorStatus');
+      const results = document.getElementById('creatorResults');
+      let mode = 'story';
+
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => {
+        document.querySelectorAll('.mode-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        mode = btn.dataset.mode;
+      }));
+      document.querySelectorAll('.idea-btn').forEach(btn => btn.addEventListener('click', () => {
+        input.value = btn.textContent.trim();
+        input.focus();
+      }));
+
+      const cards = [
+        ['story','📖 Μικρή ιστορία'],['words','🗣️ Λεξιλόγιο & κουβέντα'],['game','🔢 Μικρό παιχνίδι'],
+        ['make','🎨 Δημιουργώ'],['offline','🏃 Χωρίς οθόνη'],['adultTip','👪 Για τον ενήλικα']
+      ];
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const idea = input.value.trim();
+        if (!idea) { status.textContent = 'Γράψε πρώτα μία απλή ιδέα.'; return; }
+        submit.disabled = true;
+        results.hidden = true;
+        status.textContent = 'Το AI ετοιμάζει τη δραστηριότητα…';
+        try {
+          const r = await fetch('/api/preschool-activity', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({idea, mode})
+          });
+          const data = await r.json().catch(() => ({}));
+          if (!r.ok) throw new Error(data.message || 'Δεν ήταν δυνατή η δημιουργία.');
+          results.innerHTML = cards.map(([key,title]) =>
+            '<article class="result-card"><h3>'+title+'</h3><p>'+escapeHtml(data.activity[key] || '')+'</p></article>'
+          ).join('');
+          results.hidden = false;
+          status.textContent = 'Έτοιμο. Διάλεξε τι ταιριάζει στο παιδί και κάντε το μαζί.';
+        } catch (err) {
+          status.textContent = err.message || 'Κάτι πήγε στραβά. Δοκίμασε ξανά.';
+        } finally { submit.disabled = false; }
+      });
+      function escapeHtml(v){return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+    })();
+  </script>
 </body>
 </html>

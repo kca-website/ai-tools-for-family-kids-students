@@ -227,20 +227,16 @@
     if(!card){
       card = document.createElement("a");
       card.id = "homeHigherEducationPilot";
-      card.className = "home-v8-higher-ed";
+      card.className = "zone-card home-v8-higher-ed-card";
       card.href = "/higher-education-pilot.html";
-      grid.insertAdjacentElement("afterend", card);
+      card.innerHTML = '<span class="zone-card__icon" aria-hidden="true">🎓</span><p class="zone-card__label"></p><p class="zone-card__age"></p><p class="zone-card__desc"></p>';
     }
+    if(card.parentElement !== grid) grid.appendChild(card);
     const c = currentCopy();
-    card.innerHTML = `
-      <span class="home-v8-higher-ed__icon" aria-hidden="true">🎓</span>
-      <span class="home-v8-higher-ed__body">
-        <span class="home-v8-higher-ed__badge">${c.higherEdBadge}</span>
-        <strong>${c.higherEdTitle}</strong>
-        <small>${c.higherEdDesc}</small>
-      </span>
-      <span class="home-v8-higher-ed__action">${c.higherEdAction}</span>`;
-    card.setAttribute("aria-label", `${c.higherEdBadge}: ${c.higherEdTitle}`);
+    card.querySelector(".zone-card__label").textContent = c.higherEdTitle;
+    card.querySelector(".zone-card__age").textContent = c.higherEdBadge;
+    card.querySelector(".zone-card__desc").textContent = c.higherEdDesc;
+    card.setAttribute("aria-label", `${c.higherEdTitle}: ${c.higherEdBadge}`);
     return card;
   }
 

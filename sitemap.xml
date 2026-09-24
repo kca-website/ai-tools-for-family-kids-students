@@ -294,4 +294,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url><loc>https://www.aitools4kids.gr/tools/brisk.html</loc></url>
+  <url><loc>https://www.aitools4kids.gr/tools/diffit.html</loc></url>
+  <url><loc>https://www.aitools4kids.gr/tools/snorkl.html</loc></url>
+  <url><loc>https://www.aitools4kids.gr/tools/class-companion.html</loc></url>
 </urlset>

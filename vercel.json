@@ -29,6 +29,10 @@
       "dest": "/"
     },
     {
+      "src": "/preschool",
+      "dest": "/preschool.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

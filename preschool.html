@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Νηπιαγωγείο 4 έως 6 | AITOOLS4KIDS.gr</title>
+  <meta name="description" content="Δημιουργικές, παιγνιώδεις δραστηριότητες με τη βοήθεια AI για παιδιά 4 έως 6 ετών, με χρήση από γονέα ή εκπαιδευτικό.">
+  <link rel="canonical" href="https://www.aitools4kids.gr/preschool">
+  <style>
+    :root{--ink:#17213b;--muted:#667085;--line:#e6e8ec;--cream:#fffaf2;--peach:#fff0df;--mint:#edf9f3;--sky:#eef7ff;--lilac:#f5f0ff;--accent:#e8842f;--blue:#3b82c4;--green:#2e6f5e}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#fff}
+    a{color:inherit}.top{border-bottom:1px solid var(--line);background:#fff}.top__in{max-width:1080px;margin:auto;padding:15px 20px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+    .brand{font-weight:800;text-decoration:none}.back{font-size:.9rem;color:var(--green);font-weight:700;text-decoration:none}
+    main{max-width:1080px;margin:auto;padding:26px 20px 64px}
+    .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--cream),var(--sky) 60%,var(--lilac));border:1px solid #ece8df;border-radius:26px;padding:38px;display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:center}
+    .eyebrow{display:inline-flex;padding:6px 11px;border-radius:999px;background:#fff;border:1px solid #f0dcc7;color:#a95c1d;font-size:.78rem;font-weight:800}
+    h1{font-size:2.2rem;line-height:1.08;margin:14px 0 12px;font-family:Montserrat,system-ui,sans-serif}.hero p{color:var(--muted);line-height:1.65;max-width:650px}
+    .hero__art{min-height:210px;border-radius:22px;background:#fff8e9;display:grid;place-items:center;border:1px solid #f0dfc5;font-size:4.6rem;box-shadow:0 10px 30px rgba(83,65,35,.08)}
+    .notice{margin:18px 0 26px;padding:15px 17px;border-radius:16px;background:#f7fbf9;border:1px solid #d7ebe1;font-size:.92rem;line-height:1.55}
+    .notice strong{color:#245d4e}.section-title{font-size:1.35rem;margin:30px 0 8px}.section-sub{margin:0 0 18px;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--line);border-radius:20px;padding:20px;background:#fff;box-shadow:0 4px 14px rgba(25,33,59,.04)}
+    .card:nth-child(1){background:var(--peach)}.card:nth-child(2){background:var(--sky)}.card:nth-child(3){background:var(--mint)}.card:nth-child(4){background:var(--lilac)}
+    .icon{font-size:2rem}.card h2{font-size:1.06rem;margin:8px 0 6px}.card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .activity{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.75);font-size:.85rem;line-height:1.5}.activity b{display:block;margin-bottom:3px}
+    .creator{margin:28px 0;border:1px solid #eadfcf;background:linear-gradient(135deg,#fffaf1,#f7fbff);border-radius:24px;padding:24px;box-shadow:0 8px 26px rgba(46,50,70,.05)}
+    .creator h2{margin:0 0 6px;font-size:1.35rem}.creator>p{margin:0 0 16px;color:var(--muted);line-height:1.6}.mode-row,.idea-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+    .mode-btn,.idea-btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:750;cursor:pointer;color:var(--ink)}.mode-btn.active{background:#fff0df;border-color:#e8a45d;color:#8a4b16}
+    .creator-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}.creator-option{display:flex;flex-direction:column;gap:5px}.creator-option label{font-size:.78rem;font-weight:800;color:#566172}.creator-option select{width:100%;padding:10px 11px;border:1px solid #d9dde5;border-radius:12px;background:#fff;font:inherit;color:var(--ink)}.creator-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}.creator-input{width:100%;padding:13px 14px;border:1px solid #d9dde5;border-radius:14px;font:inherit}.creator-submit{border:0;border-radius:14px;padding:12px 18px;background:#2e6f5e;color:#fff;font-weight:800;cursor:pointer}.creator-submit:disabled{opacity:.55;cursor:wait}
+    .creator-note{font-size:.78rem;color:var(--muted);margin:8px 0 0}.creator-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.creator-action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;font-weight:750;cursor:pointer}.creator-status{margin:14px 0 0;font-size:.9rem;color:#4d596b}.creator-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.result-card{padding:16px;border-radius:17px;border:1px solid var(--line);background:#fff}.result-card h3{font-size:.95rem;margin:0 0 7px}.result-card p{margin:0;color:#4f5968;line-height:1.55;font-size:.9rem;white-space:pre-line}
+    .adult{margin-top:28px;border:1px solid #dedbf1;background:#faf9ff;border-radius:20px;padding:22px}.adult h2{margin:0 0 8px;font-size:1.15rem}.adult p{margin:0 0 12px;color:var(--muted);line-height:1.6}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:7px 10px;border-radius:999px;background:#fff;border:1px solid #ddd9f2;font-size:.82rem;font-weight:700}
+    .toolfinder{margin-top:30px;padding:24px;border:1px solid #dfe7ed;border-radius:24px;background:#fbfdff}.toolfinder h2{margin:0 0 6px;font-size:1.35rem}.toolfinder>p{margin:0 0 16px;color:var(--muted);line-height:1.6}.tool-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tool-filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:750;cursor:pointer}.tool-filter.active{background:#edf9f3;border-color:#83bba7;color:#245d4e}.tool-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.tool-card{border:1px solid var(--line);background:#fff;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}.tool-card[hidden]{display:none}.tool-card__top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.tool-card h3{margin:0;font-size:1.05rem}.tool-badge{font-size:.72rem;font-weight:800;padding:5px 8px;border-radius:999px;background:#f5f7fa;color:#526071}.tool-card p{margin:0;color:var(--muted);font-size:.89rem;line-height:1.55}.tool-card__meta{font-size:.78rem;color:#596579;background:#f8fafc;border-radius:10px;padding:9px 10px;line-height:1.45}.tool-card a{margin-top:auto;color:#245d4e;font-weight:800;text-decoration:none;font-size:.88rem}.toolfinder-note{margin-top:14px;font-size:.8rem;color:#6a7280;line-height:1.5}.legal{margin-top:28px;padding:20px;border:1px solid #f0d7b7;background:#fffaf1;border-radius:18px}.legal h2{margin:0 0 8px;font-size:1.05rem}.legal ul{margin:0;padding-left:20px;color:#5f6673;line-height:1.65;font-size:.9rem}
+    .footer{margin-top:28px;text-align:center;color:var(--muted);font-size:.82rem}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:26px}.hero__art{min-height:140px;font-size:3.5rem}.grid,.creator-results,.creator-options,.tool-cards{grid-template-columns:1fr}.creator-form{grid-template-columns:1fr}h1{font-size:1.8rem}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top__in"><a class="brand" href="/">🤖 AITOOLS4KIDS.gr</a><a class="back" href="/">← Αρχική</a></div></header>
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">🧸 Νηπιαγωγείο · 4 έως 6 ετών</span>
+        <h1>Παίζω, δημιουργώ και μαθαίνω με τη βοήθεια του AI</h1>
+        <p>Μικρές δραστηριότητες για φαντασία, γλώσσα, αριθμούς, σχήματα και δημιουργικό παιχνίδι. Ο γονιός ή ο εκπαιδευτικός χειρίζεται το AI και το παιδί συμμετέχει στο παιχνίδι και στη δημιουργία.</p>
+      </div>
+      <div class="hero__art" aria-hidden="true">🧩 🧸 🌈</div>
+    </section>
+
+    <div class="notice"><strong>Ο ενήλικας κρατά το τιμόνι.</strong> Σε αυτή τη ζώνη δεν ζητάμε από παιδί 4 έως 6 ετών να ανοίξει λογαριασμό, να γράψει προσωπικά στοιχεία ή να συνομιλήσει μόνο του με εξωτερικό AI.</div>
+
+    <section class="creator" aria-labelledby="creatorTitle">
+      <h2 id="creatorTitle">✨ Δημιούργησε κάτι για να κάνετε μαζί</h2>
+      <p>Γράψε μία απλή ιδέα. Το AI θα ετοιμάσει ένα μικρό πακέτο δραστηριότητας για να το χρησιμοποιήσει ο ενήλικας μαζί με το παιδί.</p>
+      <div class="mode-row" role="group" aria-label="Τύπος δραστηριότητας">
+        <button class="mode-btn active" type="button" data-mode="story">📖 Ιστορία & παιχνίδι</button>
+        <button class="mode-btn" type="button" data-mode="learn">🧩 Μαθαίνω παίζοντας</button>
+        <button class="mode-btn" type="button" data-mode="offline">✂️ Χωρίς οθόνη</button>
+      </div>
+      <div class="creator-options" aria-label="Προσαρμογή δραστηριότητας"><div class="creator-option"><label for="creatorAge">Ηλικία</label><select id="creatorAge"><option value="4">4 ετών</option><option value="5" selected>5 ετών</option><option value="6">6 ετών</option></select></div><div class="creator-option"><label for="creatorDuration">Χρόνος</label><select id="creatorDuration"><option value="5">5 λεπτά</option><option value="10" selected>10 λεπτά</option><option value="15">15 λεπτά</option></select></div><div class="creator-option"><label for="creatorPlace">Πού θα γίνει</label><select id="creatorPlace"><option value="home">Στο σπίτι</option><option value="classroom">Στην τάξη</option></select></div></div><div class="idea-row" aria-label="Έτοιμες ιδέες">
+        <button class="idea-btn" type="button">Δεινόσαυρος</button><button class="idea-btn" type="button">Κάστρο</button><button class="idea-btn" type="button">Ρομπότ</button><button class="idea-btn" type="button">Ζώα</button><button class="idea-btn" type="button">Διάστημα</button><button class="idea-btn" type="button">Χρώματα</button><button class="idea-btn" type="button">Σχήματα</button><button class="idea-btn" type="button">Αριθμοί μέχρι το 5</button>
+      </div>
+      <form class="creator-form" id="creatorForm">
+        <input class="creator-input" id="creatorInput" maxlength="120" autocomplete="off" placeholder="π.χ. θάλασσα, πεταλούδα, αριθμοί μέχρι το 5" aria-label="Ιδέα δραστηριότητας">
+        <button class="creator-submit" id="creatorSubmit" type="submit">Φτιάξε δραστηριότητα</button>
+      </form>
+      <p class="creator-note">Μην γράφεις όνομα, σχολείο, φωτογραφίες, στοιχεία υγείας ή άλλα προσωπικά δεδομένα παιδιού.</p>
+      <p class="creator-status" id="creatorStatus" aria-live="polite"></p>
+      <div class="creator-results" id="creatorResults" hidden></div><div class="creator-actions" id="creatorActions" hidden><button class="creator-action" id="creatorAgain" type="button">✨ Φτιάξε άλλη παραλλαγή</button><button class="creator-action" id="creatorPrint" type="button">🖨️ Εκτύπωσε τη δραστηριότητα</button></div>
+    </section>
+
+
+    <section class="toolfinder" aria-labelledby="toolfinderTitle">
+      <h2 id="toolfinderTitle">Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να φτιάξεις</h2>
+      <p>Εδώ το εργαλείο το χρησιμοποιεί ο γονιός ή ο εκπαιδευτικός. Το παιδί βλέπει, παίζει, ζωγραφίζει, ακούει ή συμμετέχει στη δραστηριότητα.</p>
+      <div class="tool-filters" role="group" aria-label="Τι θέλεις να φτιάξεις">
+        <button class="tool-filter active" type="button" data-tool-filter="all">Όλα</button>
+        <button class="tool-filter" type="button" data-tool-filter="story">Ιστορία</button>
+        <button class="tool-filter" type="button" data-tool-filter="visual">Εικόνα και ζωγραφική</button>
+        <button class="tool-filter" type="button" data-tool-filter="activity">Δραστηριότητα</button>
+        <button class="tool-filter" type="button" data-tool-filter="teacher">Για την τάξη</button>
+      </div>
+      <div class="tool-cards">
+        <article class="tool-card" data-tool-tags="story activity">
+          <div class="tool-card__top"><h3>ChatGPT</h3><span class="tool-badge">Για ενήλικα</span></div>
+          <p>Για ιδέες ιστοριών, παιχνίδια ρόλων, απλές δραστηριότητες και παραλλαγές πάνω σε ένα θέμα που αρέσει στο παιδί.</p>
+          <div class="tool-card__meta"><strong>Προσοχή:</strong> Δεν προορίζεται για παιδιά κάτω των 13 ετών. Για παιδιά αυτής της ηλικίας η αλληλεπίδραση πρέπει να γίνεται από ενήλικα.</div>
+          <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα ChatGPT ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="visual activity">
+          <div class="tool-card__top"><h3>Canva Magic Studio</h3><span class="tool-badge">Για γονέα ή εκπαιδευτικό</span></div>
+          <p>Για καρτέλες, μικρές αφίσες, εικόνες, παιχνίδια αντιστοίχισης και οπτικό υλικό γύρω από ένα θέμα.</p>
+          <div class="tool-card__meta"><strong>Προσοχή:</strong> Τα AI εργαλεία του Canva είναι για ηλικίες 13+ εκτός ειδικού πλαισίου Canva Education με επίβλεψη. Εδώ το χρησιμοποιεί ο ενήλικας.</div>
+          <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα Canva ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="visual activity">
+          <div class="tool-card__top"><h3>Adobe Express</h3><span class="tool-badge">Για ενήλικα</span></div>
+          <p>Για εικόνες, καρτέλες, μικρά posters και οπτικό υλικό που μπορεί μετά να χρησιμοποιηθεί σε παιχνίδι ή αφήγηση.</p>
+          <div class="tool-card__meta"><strong>Προσοχή:</strong> Για ατομικό Adobe ID απαιτείται ηλικία 13+. Για προσχολική ηλικία προτείνεται χρήση από γονέα ή εκπαιδευτικό.</div>
+          <a href="https://www.adobe.com/express/" target="_blank" rel="noopener noreferrer">Άνοιγμα Adobe Express ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="visual activity">
+          <div class="tool-card__top"><h3>AutoDraw</h3><span class="tool-badge">Απλό και οπτικό</span></div>
+          <p>Συνδυάζει machine learning με σχέδια καλλιτεχνών και βοηθά να μετατρέπεται ένα πρόχειρο σκίτσο σε καθαρό εικονίδιο. Χρήσιμο για κάρτες, ιστορίες και παιχνίδια εικόνων.</p>
+          <div class="tool-card__meta"><strong>Πώς το χρησιμοποιούμε εδώ:</strong> Μαζί με ενήλικα, ως δημιουργικό εργαλείο και όχι ως ελεύθερη συνομιλία AI.</div>
+          <a href="https://www.autodraw.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα AutoDraw ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="story visual teacher">
+          <div class="tool-card__top"><h3>Book Creator</h3><span class="tool-badge">Για ιστορίες και βιβλιαράκια</span></div>
+          <p>Για ψηφιακά βιβλία, ιστορίες και εικόνες. Διαθέτει και ενσωματωμένη δημιουργία εικόνων με AI για εκπαιδευτική χρήση.</p>
+          <div class="tool-card__meta"><strong>Κατάλληλο όταν:</strong> Ο ενήλικας ή ο εκπαιδευτικός θέλει να μετατρέψει μια ιδέα του παιδιού σε μικρό βιβλιαράκι ή οπτική ιστορία.</div>
+          <a href="https://bookcreator.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα Book Creator ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="activity teacher">
+          <div class="tool-card__top"><h3>MagicSchool</h3><span class="tool-badge">Μόνο για εκπαιδευτικούς</span></div>
+          <p>Για ιδέες μαθήματος, διαφοροποίηση δραστηριοτήτων και προετοιμασία εκπαιδευτικού υλικού με generative AI.</p>
+          <div class="tool-card__meta"><strong>Σημαντικό:</strong> Η υπηρεσία δηλώνει ότι προορίζεται για εκπαιδευτικούς και σχολικό προσωπικό ως επαγγελματικό βοήθημα, όχι για προσωπική χρήση γονέα.</div>
+          <a href="https://www.magicschool.ai/" target="_blank" rel="noopener noreferrer">Άνοιγμα MagicSchool ↗</a>
+        </article>
+      </div>
+      <p class="toolfinder-note">Οι ηλικιακοί όροι και οι δυνατότητες των υπηρεσιών αλλάζουν. Για αυτό η προσχολική ζώνη προτείνει κυρίως χρήση από ενήλικα και όχι προσωπικό λογαριασμό παιδιού.</p>
+    </section>
+
+    <h2 class="section-title">Δραστηριότητες για να κάνετε μαζί</h2>
+    <p class="section-sub">Πρώτα παιχνίδι και συζήτηση· το AI είναι απλώς εργαλείο προετοιμασίας για τον ενήλικα.</p>
+
+    <section class="grid">
+      <article class="card"><div class="icon">📖</div><h2>Ιστορίες με εικόνες</h2><p>Ο γονιός ή ο εκπαιδευτικός φτιάχνει μια μικρή ιστορία και το παιδί βάζει αρχή, μέση και τέλος.</p><div class="activity"><b>Ιδέα:</b> «Ένα αρκουδάκι, μια βροχερή μέρα και ένα κόκκινο καπέλο».</div></article>
+      <article class="card"><div class="icon">🔺</div><h2>Σχήματα & μοτίβα</h2><p>Παίζουμε με χρώματα, μεγέθη και επαναλαμβανόμενα μοτίβα χωρίς βαθμούς ή αξιολόγηση.</p><div class="activity"><b>Ιδέα:</b> 🔴 🔵 🔴 🔵 ποιο έρχεται μετά;</div></article>
+      <article class="card"><div class="icon">🗣️</div><h2>Λεξιλόγιο & περιγραφή</h2><p>Το παιδί περιγράφει εικόνες, βρίσκει αντίθετα ή λέξεις που αρχίζουν από έναν ήχο.</p><div class="activity"><b>Ιδέα:</b> «Βρες 3 πράγματα στο δωμάτιο που αρχίζουν από Μ».</div></article>
+      <article class="card"><div class="icon">✂️</div><h2>Δραστηριότητες χωρίς οθόνη</h2><p>Το AI βοηθά τον ενήλικα να σκεφτεί ένα παιχνίδι και μετά η οθόνη κλείνει.</p><div class="activity"><b>Ιδέα:</b> κυνήγι χρωμάτων, ταξινόμηση αντικειμένων, κατασκευή με τουβλάκια.</div></article>
+    </section>
+
+    <section class="adult">
+      <h2>Για γονείς & εκπαιδευτικούς</h2>
+      <p>Ο ενήλικας δίνει ένα γενικό θέμα και το AI ετοιμάζει υλικό για κοινή δραστηριότητα. Δεν χρειάζεται λογαριασμός παιδιού και το παιδί δεν συνομιλεί απευθείας με το μοντέλο.</p>
+      <div class="chips"><span class="chip">✓ χωρίς λογαριασμό παιδιού</span><span class="chip">✓ χωρίς προσωπικά δεδομένα παιδιού</span><span class="chip">✓ με καθοδήγηση ενηλίκου</span><span class="chip">✓ παιχνίδι πριν από οθόνη</span></div>
+    </section>
+
+    <section class="legal">
+      <h2>Ασφάλεια & νομικό πλαίσιο πώς σχεδιάστηκε αυτή η ζώνη</h2>
+      <ul>
+        <li>Η υπηρεσία απευθύνεται λειτουργικά στον γονιό ή τον εκπαιδευτικό, όχι απευθείας στο παιδί προσχολικής ηλικίας.</li>
+        <li>Δεν ζητάμε συγκατάθεση ή προσωπικά δεδομένα από το παιδί και δεν δημιουργείται παιδικό προφίλ.</li>
+        <li>Δεν χρησιμοποιούμε AI για βαθμολόγηση, διάγνωση, κατάταξη ή αποφάσεις που επηρεάζουν την εκπαιδευτική πορεία του παιδιού.</li>
+        <li>Κάθε εξωτερικό εργαλείο θα εμφανίζεται μόνο αφού ελεγχθούν οι όροι ηλικίας, η ιδιωτικότητα και η χρήση από ενήλικα.</li>
+      </ul>
+    </section>
+    <p class="footer">Ανεξάρτητο εκπαιδευτικό έργο · Η σελίδα αυτή είναι ενημερωτική και δεν αποτελεί νομική συμβουλή.</p>
+  </main>
+  <script>
+    (() => {
+      const form = document.getElementById('creatorForm');
+      const input = document.getElementById('creatorInput');
+      const submit = document.getElementById('creatorSubmit');
+      const status = document.getElementById('creatorStatus');
+      const results = document.getElementById('creatorResults'); const actions = document.getElementById('creatorActions'); const again = document.getElementById('creatorAgain'); const printBtn = document.getElementById('creatorPrint'); const age = document.getElementById('creatorAge'); const duration = document.getElementById('creatorDuration'); const place = document.getElementById('creatorPlace');
+      let mode = 'story';
+
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.addEventListener('click', () => {
+        document.querySelectorAll('.mode-btn').forEach(x => x.classList.remove('active'));
+        btn.classList.add('active');
+        mode = btn.dataset.mode;
+      }));
+      document.querySelectorAll('.idea-btn').forEach(btn => btn.addEventListener('click', () => {
+        input.value = btn.textContent.trim();
+        input.focus();
+      }));
+
+      document.querySelectorAll('.tool-filter').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.tool-filter').forEach(x => x.classList.remove('active')); btn.classList.add('active'); const tag = btn.dataset.toolFilter; document.querySelectorAll('.tool-card').forEach(card => { card.hidden = tag !== 'all' && !card.dataset.toolTags.split(' ').includes(tag); }); }));
+
+      const cards = [
+        ['story','📖 Μικρή ιστορία'],['words','🗣️ Λεξιλόγιο & κουβέντα'],['game','🔢 Μικρό παιχνίδι'],
+        ['make','🎨 Δημιουργώ'],['offline','🏃 Χωρίς οθόνη'],['adultTip','👪 Για τον ενήλικα']
+      ];
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const idea = input.value.trim();
+        if (!idea) { status.textContent = 'Γράψε πρώτα μία απλή ιδέα.'; return; }
+        submit.disabled = true;
+        results.hidden = true; actions.hidden = true;
+        status.textContent = 'Το AI ετοιμάζει τη δραστηριότητα…';
+        try {
+          const r = await fetch('/api/preschool-activity', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({idea, mode, age:age.value, duration:duration.value, place:place.value})
+          });
+          const data = await r.json().catch(() => ({}));
+          if (!r.ok) throw new Error(data.message || 'Δεν ήταν δυνατή η δημιουργία.');
+          results.innerHTML = cards.map(([key,title]) =>
+            '<article class="result-card"><h3>'+title+'</h3><p>'+escapeHtml(data.activity[key] || '')+'</p></article>'
+          ).join('');
+          results.hidden = false; actions.hidden = false;
+          status.textContent = 'Έτοιμο. Κρατήστε ό,τι σας ταιριάζει και κάντε το μαζί.';
+        } catch (err) {
+          status.textContent = err.message || 'Κάτι πήγε στραβά. Δοκίμασε ξανά.';
+        } finally { submit.disabled = false; }
+      });
+      again.addEventListener('click', () => form.requestSubmit()); printBtn.addEventListener('click', () => window.print()); function escapeHtml(v){return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+    })();
+  </script>
+</body>
+</html>

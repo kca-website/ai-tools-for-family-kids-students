@@ -95,7 +95,17 @@
       @page{margin:14mm}
     }
     @media(max-width:700px){.he-grid{grid-template-columns:1fr}.he-wrap{padding:18px 12px 42px}.he-hero{padding:18px}.he-ai-providers{display:grid;grid-template-columns:1fr}.he-ai-provider{width:100%}}
-  </style>
+  
+    .he-flashcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px}
+    .he-flashcard{border:1px solid #d9e2ef;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+    .he-flashcard__num{padding:8px 12px;background:#eef4fb;color:#294a68;font-size:.78rem;font-weight:800}
+    .he-flashcard__q,.he-flashcard__a{padding:12px 14px}
+    .he-flashcard__q{border-bottom:1px solid #edf1f6}
+    .he-flashcard__q strong,.he-flashcard__a strong{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:#64748b;margin-bottom:5px}
+    .he-flashcard__q p,.he-flashcard__a p{margin:0;line-height:1.55}
+    .he-flashcard__a{background:#f8fbff}
+    @media(max-width:640px){.he-flashcards{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
   <main class="he-wrap">

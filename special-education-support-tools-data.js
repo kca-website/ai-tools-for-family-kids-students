@@ -6,7 +6,7 @@
 (function(){
   "use strict";
   window.SPECIAL_EDUCATION_SUPPORT_TOOLS=Object.freeze({
-    version:2,
+    version:3,
     verificationDate:"2026-09-24",
     intro:"Διάλεξε εργαλείο ανάλογα με τη δυσκολία της στιγμής: ανάγνωση, γραφή, οπτική οργάνωση ή μαθηματική κατανόηση.",
     items:Object.freeze([
@@ -31,6 +31,17 @@
         url:"https://support.google.com/docs/answer/4492226?hl=el",
         sourceUrl:"https://support.google.com/docs/answer/4492226?hl=el",
         freeNote:"Διαθέσιμο στα Έγγραφα Google σε υποστηριζόμενο browser."
+      },
+      {
+        id:"math-progress",
+        name:"Microsoft Math Progress",
+        icon:"➗",
+        task:"Στοχευμένη μαθηματική εξάσκηση με παρακολούθηση προόδου",
+        why:"Ο εκπαιδευτικός μπορεί να δημιουργήσει ή να προσαρμόσει μαθηματικές ασκήσεις μέσα στο Teams, να χρησιμοποιήσει AI για προτάσεις προβλημάτων και να δει δεδομένα προόδου χωρίς να αφήνει τον μαθητή μόνο με ένα γενικό chatbot.",
+        bestFor:"Όταν χρειάζεται διαφοροποιημένη εξάσκηση σε μικρά βήματα και ο εκπαιδευτικός θέλει να παρακολουθεί ποια λάθη επαναλαμβάνονται.",
+        url:"https://support.microsoft.com/en-us/education/learning-accelerators/getting-started-with-math-progress",
+        sourceUrl:"https://support.microsoft.com/en-us/education/learning-accelerators/getting-started-with-math-progress",
+        freeNote:"Διατίθεται μέσα στο Microsoft Teams for Education· απαιτεί σχολικό περιβάλλον Microsoft 365."
       },
       {
         id:"desmos",

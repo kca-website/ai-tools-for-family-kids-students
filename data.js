@@ -792,8 +792,7 @@ const PATHS = {
           howToEn: "Free, at coach.microsoft.com. The child reads aloud and the tool listens and corrects.",
           cautionEl: "Τα ελληνικά el-GR υποστηρίζονται επίσημα σε Paste a Passage και Word Practice. Το Create a Story δεν περιλαμβάνει ελληνικά στην τρέχουσα λίστα γλωσσών.",
           cautionEn: "Greek el-GR is officially supported for Paste a Passage and Word Practice. Create a Story does not currently list Greek among its supported languages.",
-        },
-        {
+        },        {
           toolId: "immersive-reader",
           useCaseEl: "Ανάγνωση και κατανόηση με λιγότερα οπτικά εμπόδια: read-aloud, line focus, διάστιχο, γραμματική σήμανση και υποστήριξη δυσλεξίας.",
           useCaseEn: "Reading and comprehension with fewer visual barriers: read aloud, line focus, spacing, grammar marking and dyslexia support.",
@@ -802,24 +801,9 @@ const PATHS = {
           cautionEl: "Είναι εργαλείο πρόσβασης στο ίδιο περιεχόμενο, όχι εργαλείο που απλοποιεί αυτόματα την ύλη ή αντικαθιστά τη διδασκαλία.",
           cautionEn: "It improves access to the same content; it does not automatically simplify the curriculum or replace teaching.",
         },
-        {
-          toolId: "immersive-reader",
-          useCaseEl: "Ανάγνωση και κατανόηση με λιγότερα οπτικά εμπόδια: read-aloud, line focus, διάστιχο, γραμματική σήμανση και υποστήριξη δυσλεξίας.",
-          useCaseEn: "Reading and comprehension with fewer visual barriers: read aloud, line focus, spacing, grammar marking and dyslexia support.",
-          howToEl: "Άνοιξε το ίδιο σχολικό κείμενο σε Word, OneNote, Teams ή Edge και ενεργοποίησε μόνο τις ρυθμίσεις που βοηθούν πραγματικά τον μαθητή.",
-          howToEn: "Open the same school text in Word, OneNote, Teams or Edge and enable only the supports that genuinely help the learner.",
-          cautionEl: "Είναι εργαλείο πρόσβασης στο ίδιο περιεχόμενο, όχι εργαλείο που απλοποιεί αυτόματα την ύλη ή αντικαθιστά τη διδασκαλία.",
-          cautionEn: "It improves access to the same content; it does not automatically simplify the curriculum or replace teaching.",
-        },
-        {
-          toolId: "immersive-reader",
-          useCaseEl: "Ανάγνωση και κατανόηση με λιγότερα οπτικά εμπόδια: read-aloud, line focus, διάστιχο, γραμματική σήμανση και υποστήριξη δυσλεξίας.",
-          useCaseEn: "Reading and comprehension with fewer visual barriers: read aloud, line focus, spacing, grammar marking and dyslexia support.",
-          howToEl: "Άνοιξε το ίδιο σχολικό κείμενο σε Word, OneNote, Teams ή Edge και ενεργοποίησε μόνο τις ρυθμίσεις που βοηθούν πραγματικά τον μαθητή.",
-          howToEn: "Open the same school text in Word, OneNote, Teams or Edge and enable only the supports that genuinely help the learner.",
-          cautionEl: "Είναι εργαλείο πρόσβασης στο ίδιο περιεχόμενο, όχι εργαλείο που απλοποιεί αυτόματα την ύλη ή αντικαθιστά τη διδασκαλία.",
-          cautionEn: "It improves access to the same content; it does not automatically simplify the curriculum or replace teaching.",
-        },
+
+
+
         {
           toolId: "chatgpt",
           useCaseEl: "Εξήγηση μιας δύσκολης έννοιας με απλά λόγια πριν την εξηγήσεις εσύ στο παιδί, ή δημιουργία 5 σύντομων ερωτήσεων εξάσκησης πάνω σε ένα κεφάλαιο.",
@@ -1143,6 +1127,14 @@ const PATHS = {
           howToEn: "Use a short passage from class material and repeat only the words identified as difficult.",
           cautionEl: "Το Create a Story δεν έχει την ίδια γλωσσική κάλυψη με Paste a Passage/Word Practice.",
           cautionEn: "Create a Story does not have the same language coverage as Paste a Passage/Word Practice.",
+        },        {
+          toolId: "immersive-reader",
+          useCaseEl: "Ανάγνωση και κατανόηση με λιγότερα οπτικά εμπόδια: read-aloud, line focus, διάστιχο, γραμματική σήμανση και υποστήριξη δυσλεξίας.",
+          useCaseEn: "Reading and comprehension with fewer visual barriers: read aloud, line focus, spacing, grammar marking and dyslexia support.",
+          howToEl: "Άνοιξε το ίδιο σχολικό κείμενο σε Word, OneNote, Teams ή Edge και ενεργοποίησε μόνο τις ρυθμίσεις που βοηθούν πραγματικά τον μαθητή.",
+          howToEn: "Open the same school text in Word, OneNote, Teams or Edge and enable only the supports that genuinely help the learner.",
+          cautionEl: "Είναι εργαλείο πρόσβασης στο ίδιο περιεχόμενο, όχι εργαλείο που απλοποιεί αυτόματα την ύλη ή αντικαθιστά τη διδασκαλία.",
+          cautionEn: "It improves access to the same content; it does not automatically simplify the curriculum or replace teaching.",
         },
         {
           toolId: "quizlet",
@@ -1594,6 +1586,14 @@ const PATHS = {
           howToEn: "Use a short passage from class material and repeat only the words identified as difficult.",
           cautionEl: "Το Create a Story δεν έχει την ίδια γλωσσική κάλυψη με Paste a Passage/Word Practice.",
           cautionEn: "Create a Story does not have the same language coverage as Paste a Passage/Word Practice.",
+        },        {
+          toolId: "immersive-reader",
+          useCaseEl: "Ανάγνωση και κατανόηση με λιγότερα οπτικά εμπόδια: read-aloud, line focus, διάστιχο, γραμματική σήμανση και υποστήριξη δυσλεξίας.",
+          useCaseEn: "Reading and comprehension with fewer visual barriers: read aloud, line focus, spacing, grammar marking and dyslexia support.",
+          howToEl: "Άνοιξε το ίδιο σχολικό κείμενο σε Word, OneNote, Teams ή Edge και ενεργοποίησε μόνο τις ρυθμίσεις που βοηθούν πραγματικά τον μαθητή.",
+          howToEn: "Open the same school text in Word, OneNote, Teams or Edge and enable only the supports that genuinely help the learner.",
+          cautionEl: "Είναι εργαλείο πρόσβασης στο ίδιο περιεχόμενο, όχι εργαλείο που απλοποιεί αυτόματα την ύλη ή αντικαθιστά τη διδασκαλία.",
+          cautionEn: "It improves access to the same content; it does not automatically simplify the curriculum or replace teaching.",
         },
         {
           toolId: "quizlet",

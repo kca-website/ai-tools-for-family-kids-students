@@ -23,6 +23,25 @@ const DEFAULT_BY_FOCUS = {
   technology: 'programming-digital-play'
 };
 
+function contextualDefaultForFocus(focus, normalizedIdea) {
+  if (focus === 'math') {
+    if (/σχημα|κυκλ|τριγων|τετραγων|μεγεθ|μηκοσ|χωρο/.test(normalizedIdea)) return 'geometry-measurement';
+    if (/χρωμα|ταξινομ|ομαδοποι|πινακ|γραφημ|πιθανο|προβλεψ/.test(normalizedIdea)) return 'stochastic-mathematics';
+    return 'numbers-operations-algebra';
+  }
+  if (focus === 'movement') {
+    if (/μουσικ|ρυθμ|χορο|παραδοσιακ|κινητικο παιχνιδ/.test(normalizedIdea)) return 'sport-culture-creative-movement';
+    if (/περπατ|τρεξ|εξω|δραστηρι/.test(normalizedIdea)) return 'physically-active-life';
+    return 'body-movement';
+  }
+  if (focus === 'technology') {
+    if (/χτιζ|κατασκευ|γεφυρ|πυργ|τουβλακ|υλικ|σχεδιαζ/.test(normalizedIdea)) return 'construction-everyday-life';
+    if (/εργαλ|συσκευ|μηχαν|γραναζ|εξοπλισ/.test(normalizedIdea)) return 'tools-equipment-devices';
+    return 'programming-digital-play';
+  }
+  return DEFAULT_BY_FOCUS[focus];
+}
+
 function normalizeGreek(value) {
   return String(value || '')
     .normalize('NFD')
@@ -66,11 +85,13 @@ function resolvePreschoolCurriculum({ idea = '', mode = 'story', focus = 'auto',
   const safeFocus = FOCUS_FILTERS[focus] ? focus : 'auto';
   const focusFilter = FOCUS_FILTERS[safeFocus];
 
-  const ranked = SUBUNITS
-    .filter(focusFilter)
+  const rank = items => items
     .map(item => ({ item, score: scoreSubunit(item, normalizedIdea) }))
     .filter(x => x.score > 0)
     .sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title, 'el'));
+
+  const ranked = rank(SUBUNITS.filter(focusFilter));
+  const rankedAll = rank(SUBUNITS);
 
   const selected = [];
   const seen = new Set();
@@ -84,7 +105,8 @@ function resolvePreschoolCurriculum({ idea = '', mode = 'story', focus = 'auto',
   if (ranked.length) {
     push(ranked[0].item, safeFocus === 'auto' ? 'topic-keyword' : 'selected-focus+topic-keyword', ranked[0].score);
   } else if (safeFocus !== 'auto') {
-    push(SUBUNITS.find(item => item.id === DEFAULT_BY_FOCUS[safeFocus]), 'selected-focus-default');
+    const contextualDefault = contextualDefaultForFocus(safeFocus, normalizedIdea);
+    push(SUBUNITS.find(item => item.id === contextualDefault), 'selected-focus-contextual-default');
   }
 
   if (!selected.length) {
@@ -99,10 +121,11 @@ function resolvePreschoolCurriculum({ idea = '', mode = 'story', focus = 'auto',
     push(SUBUNITS.find(item => item.id === 'body-movement'), 'offline-mode');
   }
 
-  // Add one strong secondary topic match when it belongs to a different unit.
-  for (const candidate of ranked.slice(1)) {
+  // Add strong secondary topic matches, including cross-curricular matches outside a chosen focus.
+  const secondaryPool = safeFocus === 'auto' ? ranked.slice(1) : rankedAll;
+  for (const candidate of secondaryPool) {
     if (selected.length >= Math.max(1, Math.min(3, limit))) break;
-    if (!selected.some(x => x.unit === candidate.item.unit)) {
+    if (!selected.some(x => x.unit === candidate.item.unit && x.subunit === candidate.item.title)) {
       push(candidate.item, 'secondary-topic-keyword', candidate.score);
     }
   }

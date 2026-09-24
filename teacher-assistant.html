@@ -85,14 +85,18 @@
 const BASE={primary:{label:'Δημοτικό',grades:[['a','Α΄ Δημοτικού'],['b','Β΄ Δημοτικού'],['c','Γ΄ Δημοτικού'],['d','Δ΄ Δημοτικού'],['e','Ε΄ Δημοτικού'],['st','ΣΤ΄ Δημοτικού']],zone:'primary'},middle:{label:'Γυμνάσιο',grades:[['a','Α΄ Γυμνασίου'],['b','Β΄ Γυμνασίου'],['c','Γ΄ Γυμνασίου']],zone:'middle'},gel:{label:'Γενικό Λύκειο',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']],zone:'high'},specialGym:{label:'Ειδικό Γυμνάσιο',grades:[],zone:null},specialLyc:{label:'Ειδικό Λύκειο',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']],zone:null},deafGym:{label:'Γυμνάσιο Κωφών και Βαρηκόων',grades:[],zone:null},deafLyc:{label:'Λύκειο Κωφών και Βαρηκόων',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']],zone:null},eneegyl:{label:'ΕΝ.Ε.ΓΥ.-Λ.',grades:[],zone:null},epal:{label:'ΕΠΑΛ',grades:[['a','Α΄ ΕΠΑΛ'],['b','Β΄ ΕΠΑΛ'],['c','Γ΄ ΕΠΑΛ']],zone:null}};
 const taskLabels={lesson:'Σχέδιο μαθήματος',worksheet:'Φύλλο εργασίας',quiz:'Quiz / αξιολόγηση',activity:'Δραστηριότητα',explain:'Διαφορετική εξήγηση',noai:'Χωρίς AI για μαθητές'};let task='lesson',lastText='';
 const TEACHER_TOOL_BASE={
- lesson:['magicschool','gemini-education','notebooklm','gamma'],
- worksheet:['magicschool','canva-magic','gemini-education','notebooklm'],
- quiz:['magicschool','quizlet','gemini-education','notebooklm'],
- activity:['magicschool','canva-magic','gamma','phet'],
- explain:['notebooklm','gamma','phet','geogebra'],
+ lesson:['brisk','magicschool','gemini-education','notebooklm'],
+ worksheet:['diffit','brisk','magicschool','canva-magic'],
+ quiz:['class-companion','brisk','magicschool','quizlet'],
+ activity:['snorkl','brisk','canva-magic','phet'],
+ explain:['diffit','snorkl','notebooklm','phet'],
  noai:['canva-magic','phet','geogebra','google-arts-culture']
 };
 const TEACHER_TOOL_WHY={
+ brisk:'Δουλεύει μέσα στα εργαλεία που ήδη χρησιμοποιεί ο εκπαιδευτικός και βοηθά σε σχέδια μαθήματος, quiz, rubrics, feedback και διαφοροποίηση.',
+ diffit:'Ισχυρό για διαφοροποίηση υλικού, προσαρμογή επιπέδου ανάγνωσης, λεξιλόγιο, δραστηριότητες και υποστηρικτικούς οργανωτές.',
+ snorkl:'Οι μαθητές εξηγούν τη σκέψη τους με φωνή, γραφή ή σχεδίαση και παίρνουν άμεσο feedback· χρήσιμο όταν θέλουμε να δούμε τη διαδικασία σκέψης.',
+ 'class-companion':'Teacher-managed AI feedback και tutor για γραπτές απαντήσεις, επαναλήψεις και βελτίωση μετά την πρώτη προσπάθεια.',
  magicschool:'Εξειδικευμένο για εκπαιδευτικούς: σχέδια μαθήματος, διαφοροποίηση, φύλλα εργασίας και αξιολόγηση.',
  'gemini-education':'Εκπαιδευτική έκδοση/οικοσύστημα Google για προετοιμασία υλικού και εργασίες μέσα στο σχολικό περιβάλλον.',
  notebooklm:'Χρήσιμο όταν ο εκπαιδευτικός θέλει να δουλέψει πάνω σε συγκεκριμένες δικές του πηγές, PDF ή σημειώσεις.',
@@ -114,9 +118,9 @@ const TEACHER_TOOL_WHY={
 };
 function teacherSubjectToolIds(){
  const label=norm(subject?.options?.[subject.selectedIndex]?.textContent||'');
- if(/μαθηματικ|αλγεβρ|γεωμετρ/.test(label))return ['geogebra','desmos','wolfram-alpha'];
- if(/φυσικ|χημει|βιολογ|γεωγραφ|γεωλογ/.test(label))return ['phet','notebooklm','google-lens'];
- if(/ιστορι|κοινων|πολιτικ|θρησκευ|ηθικ/.test(label))return ['google-arts-culture','notebooklm','zotero'];
+ if(/μαθηματικ|αλγεβρ|γεωμετρ/.test(label))return ['snorkl','geogebra','desmos','wolfram-alpha'];
+ if(/φυσικ|χημει|βιολογ|γεωγραφ|γεωλογ/.test(label))return ['snorkl','phet','notebooklm','google-lens'];
+ if(/ιστορι|κοινων|πολιτικ|θρησκευ|ηθικ/.test(label))return ['class-companion','snorkl','google-arts-culture','notebooklm'];
  if(/αγγλικ|γαλλικ|γερμαν|ιταλικ|ισπαν|ξεν/.test(label))return ['deepl','reading-coach','duolingo'];
  if(/πληροφορ|προγραμματισ/.test(label))return ['replit-ai','github-copilot','notebooklm'];
  if(/γλωσσ|νεοελλην|λογοτεχν/.test(label))return ['notebooklm','gamma','canva-magic'];

@@ -194,10 +194,15 @@
       "pilot-source-locked": "Pilot · AI κλειδωμένη σε επίσημες πηγές",
     };
     const sourceCount = department.sources?.length || 0;
+    const courses = Array.isArray(department.courses) ? department.courses : [];
+    const verifiedCourses = courses.filter((course) => course?.topicsVerified === true && Array.isArray(course?.topics) && course.topics.length).length;
+    const verifiedNote = courses.length
+      ? ` · Επαληθευμένες θεματικές: ${verifiedCourses}/${courses.length} μαθήματα`
+      : "";
     const structuredNote = department.curriculumDisplay === "year-semester-course-topic"
       ? " · Δομή: έτος → εξάμηνο → μάθημα → θεματικές"
       : "";
-    coverage.textContent = `${statusMap[department.coverageStatus] || department.coverageStatus} · Πηγές: ${sourceCount} · Confidence: ${department.sourceConfidence}${structuredNote}`;
+    coverage.textContent = `${statusMap[department.coverageStatus] || department.coverageStatus}${verifiedNote} · Πηγές: ${sourceCount} · Confidence: ${department.sourceConfidence}${structuredNote}`;
   }
 
   function courseHasVerifiedTopics(course) {

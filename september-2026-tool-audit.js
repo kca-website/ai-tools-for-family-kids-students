@@ -100,6 +100,27 @@
     },
     nutritionSources:["https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"]
   });
+  patch("immersive-reader", {
+    nutritionFacts:{
+      greekEl:"Υποστήριξη Ελληνικών",greekEn:"Greek supported",
+      costEl:"Δωρεάν",costEn:"Free",
+      accountEl:"Χωρίς ξεχωριστό λογαριασμό όπου είναι ενσωματωμένο",accountEn:"No separate account where built in"
+    },
+    nutritionSources:[
+      "https://learn.microsoft.com/en-us/training/educator-center/product-guides/immersive-reader/",
+      "https://support.microsoft.com/en-us/education/learning-accelerators/languages-and-products-supported-by-immersive-reader"
+    ]
+  });
+  patch("elsa-speak", {
+    nutritionFacts:{
+      costEl:"Δωρεάν βασικό επίπεδο + επί πληρωμή Pro/Premium",costEn:"Free basic tier + paid Pro/Premium",
+      accountEl:"13+ · κάτω των 18 με γονέα/κηδεμόνα",accountEn:"13+ · under 18 with parent/guardian involvement"
+    },
+    nutritionSources:[
+      "https://elsaspeak.com/en/terms/",
+      "https://elsaspeak.com/en/elsa-subscription"
+    ]
+  });
   patch("study-learn", {
     nutritionFacts:{
       costEl:"Χωρίς επιπλέον κόστος σε επιλέξιμες άδειες Microsoft 365 Education",costEn:"No extra cost with eligible Microsoft 365 Education licenses",

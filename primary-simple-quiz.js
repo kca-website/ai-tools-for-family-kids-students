@@ -48,7 +48,7 @@
       .psq__feedback{margin:12px 0 0;padding:10px 12px;border-radius:10px;background:#f8fafc;color:#475569;font-size:.86rem;line-height:1.5}
       .psq__next{width:100%;min-height:44px;margin-top:12px;border:0;border-radius:10px;background:#2e6f5e;color:#fff;font:inherit;font-weight:800;cursor:pointer}
       .psq__result h3{margin:17px 0 7px}.psq__score{font-size:2rem;font-weight:900;color:#245c4e}.psq__gap{margin:9px 0;padding:11px 12px;border:1px solid #dbeafe;border-radius:10px;background:#f8fbff}.psq__gap strong{display:block;margin-bottom:3px}.psq__gap p{margin:0;color:#475569;font-size:.84rem;line-height:1.5}
-      .psq__tools{margin-top:15px;padding:13px;border:1px solid #dbeafe;border-radius:12px;background:#f8fbff}.psq__tools h4{margin:0 0 9px;font-size:.92rem}.psq__tool{display:block;margin-top:7px;padding:9px 10px;border:1px solid #bfdbfe;border-radius:9px;background:#fff;color:#1d4ed8;text-decoration:none;font-weight:800}.psq__tool small{display:block;margin-top:3px;color:#64748b;font-weight:500;line-height:1.35}
+      .psq__tools{margin-top:15px;padding:13px;border:1px solid #dbeafe;border-radius:12px;background:#f8fbff}.psq__ai-next{margin-top:15px;padding:13px;border:1px solid #bfe3d5;border-radius:12px;background:#f3fbf7}.psq__ai-next strong{display:block;color:#175c4a}.psq__ai-next p{margin:5px 0 10px;color:#475569;font-size:.84rem;line-height:1.45}.psq__ai-help{min-height:40px;border:0;border-radius:9px;background:#2e6f5e;color:#fff;padding:8px 12px;font:inherit;font-weight:800;cursor:pointer}.psq__tools h4{margin:0 0 9px;font-size:.92rem}.psq__tool{display:block;margin-top:7px;padding:9px 10px;border:1px solid #bfdbfe;border-radius:9px;background:#fff;color:#1d4ed8;text-decoration:none;font-weight:800}.psq__tool small{display:block;margin-top:3px;color:#64748b;font-weight:500;line-height:1.35}
       .psq__actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.psq__actions button{min-height:42px;padding:9px 12px;border-radius:10px;border:1px solid #cbd5e1;background:#fff;color:#334155;font:inherit;font-weight:750;cursor:pointer}.psq__actions .psq__regular{background:#2e6f5e;color:#fff;border-color:#2e6f5e}
       @media(max-width:620px){.psq-overlay{padding:8px;place-items:end center}.psq{max-height:92vh;border-radius:16px 16px 8px 8px;padding:16px}.psq__answers{grid-template-columns:1fr}.psq__answer{min-height:54px}.psq__actions{display:grid}.psq__actions button{width:100%}}
     `;
@@ -189,7 +189,36 @@
     }).join("");
     const allGood=!uniqueGaps.length && session.score===session.questions.length;
     const toolsHtml=renderRecommendedTools(uniqueGaps);
-    body.innerHTML=`<div class="psq__result"><div class="psq__score">${session.score}/${session.questions.length}</div><h3>${allGood?text("Δεν φάνηκε συγκεκριμένο σημείο δυσκολίας","No specific difficulty showed up"):text("Σημεία για λίγη εξάσκηση","A few points to practise")}</h3><p>${allGood?text("Αυτό είναι ένα πολύ μικρό check, όχι βαθμός και όχι διάγνωση.","This is a very small check, not a grade and not a diagnosis."):text("Το αποτέλεσμα δείχνει μόνο πού αξίζει να γίνει λίγη ακόμη εξάσκηση. Δεν είναι βαθμός ούτε διάγνωση.","The result only shows where a little more practice may help. It is not a grade or diagnosis.")}</p>${gapHtml}${toolsHtml}<div class="psq__actions"><button type="button" class="psq__regular">${text("Κάνε το κανονικό τεστ","Take the regular test")}</button><button type="button" class="psq__again">${text("Ξανά το σύντομο τεστ","Retake short test")}</button><button type="button" class="psq__done">${text("Κλείσιμο","Close")}</button></div></div>`;
+    const gapLabels=uniqueGaps.map((id)=>{
+      const gap=typeof GAP_TAGS!=="undefined"?GAP_TAGS[id]:null;
+      return gap?((isEnglish()?gap.labelEn:gap.labelEl)||gap.labelEl||id):"";
+    }).filter(Boolean);
+    const aiPrompt=isEnglish()
+      ? (gapLabels.length
+          ? `I struggled with these points in the short test: ${gapLabels.join(", ")}. Help me understand them with one small hint or question at a time. Do not give me the ready answer. Finish with 2 new questions.`
+          : "I did well on the short test. Give me a slightly harder challenge in the same subject without giving me the answer, then check my reasoning.")
+      : (gapLabels.length
+          ? `Στο σύντομο τεστ δυσκολεύτηκα στα εξής σημεία: ${gapLabels.join(", ")}. Βοήθησέ με να τα καταλάβω με μία μικρή υπόδειξη ή ερώτηση τη φορά. Μη μου δώσεις έτοιμη απάντηση. Στο τέλος βάλε μου 2 νέες ερωτήσεις.`
+          : "Στο σύντομο τεστ τα πήγα καλά. Δώσε μου μια λίγο πιο δύσκολη πρόκληση στο ίδιο μάθημα χωρίς να μου δώσεις τη λύση και έλεγξε τη σκέψη μου.");
+    body.innerHTML=`<div class="psq__result"><div class="psq__score">${session.score}/${session.questions.length}</div><h3>${allGood?text("Δεν φάνηκε συγκεκριμένο σημείο δυσκολίας","No specific difficulty showed up"):text("Σημεία για λίγη εξάσκηση","A few points to practise")}</h3><p>${allGood?text("Αυτό είναι ένα πολύ μικρό check, όχι βαθμός και όχι διάγνωση.","This is a very small check, not a grade and not a diagnosis."):text("Το αποτέλεσμα δείχνει μόνο πού αξίζει να γίνει λίγη ακόμη εξάσκηση. Δεν είναι βαθμός ούτε διάγνωση.","The result only shows where a little more practice may help. It is not a grade or diagnosis.")}</p>${gapHtml}${toolsHtml}<div class="psq__ai-next"><strong>${text("🤖 Επόμενο βήμα: AI Βοήθεια","🤖 Next step: AI Help")}</strong><p>${gapLabels.length?text("Δούλεψε ακριβώς τα σημεία που δυσκόλεψαν, με μικρές υποδείξεις.","Work on exactly the points that were difficult, using small hints."):text("Προχώρα σε λίγο πιο απαιτητική εξάσκηση στο ίδιο μάθημα.","Move on to slightly harder practice in the same subject.")}</p><button type="button" class="psq__ai-help">${text("Άνοιξε AI Βοήθεια →","Open AI Help →")}</button></div><div class="psq__actions"><button type="button" class="psq__regular">${text("Κάνε το κανονικό τεστ","Take the regular test")}</button><button type="button" class="psq__again">${text("Ξανά το σύντομο τεστ","Retake short test")}</button><button type="button" class="psq__done">${text("Κλείσιμο","Close")}</button></div></div>`;
+    body.querySelector(".psq__ai-help")?.addEventListener("click",()=>{
+      const subjectId=session.subjectId;
+      closeModal();
+      document.getElementById("viewTabTutor")?.click();
+      setTimeout(()=>{
+        const subject=document.getElementById("tutorSubject");
+        if(subject&&subjectId&&[...subject.options].some((o)=>o.value===subjectId)){
+          subject.value=subjectId;
+          subject.dispatchEvent(new Event("change",{bubbles:true}));
+        }
+        const input=document.getElementById("tutorInput");
+        if(input){
+          input.value=aiPrompt;
+          input.dispatchEvent(new Event("input",{bubbles:true}));
+          input.focus();
+        }
+      },80);
+    });
     body.querySelector(".psq__done").addEventListener("click",closeModal);
     body.querySelector(".psq__again").addEventListener("click",()=>openSimpleQuiz(session.subjectId,lastFocus));
     body.querySelector(".psq__regular").addEventListener("click",()=>{

@@ -228,7 +228,7 @@
           visualAnimate.classList.remove('active');
           visualStill.setAttribute('aria-pressed','false');
           visualAnimate.setAttribute('aria-pressed','false');
-          visualAnimate.disabled = true;
+          visualAnimate.disabled = false;
           visualImageNote.textContent = 'Η AI εικόνα δημιουργείται μόνο όταν το ζητήσει ο ενήλικας. Δεν ανεβάζεται φωτογραφία παιδιού.';
           visual.hidden = false;
           actions.hidden = false;
@@ -269,12 +269,22 @@
         }
       });
       visualAnimate.addEventListener('click', () => {
-        if (visualAiImage.hidden || !visualAiImage.src) return;
-        const moving = !visualScene.classList.contains('is-photo-animated');
-        visualScene.classList.toggle('is-photo-animated', moving);
+        const hasImage = !visualAiImage.hidden && !!visualAiImage.src;
+        const moving = hasImage
+          ? !visualScene.classList.contains('is-photo-animated')
+          : !visualScene.classList.contains('is-animated');
+        if (hasImage) {
+          visualScene.classList.toggle('is-photo-animated', moving);
+          visualScene.classList.remove('is-animated');
+        } else {
+          visualScene.classList.toggle('is-animated', moving);
+          visualScene.classList.remove('is-photo-animated');
+        }
         visualAnimate.classList.toggle('active', moving);
         visualAnimate.setAttribute('aria-pressed', String(moving));
-        visualImageNote.textContent = moving ? 'Η ίδια εικόνα κινείται απαλά μέσα στη σελίδα.' : 'Η κίνηση σταμάτησε.';
+        visualImageNote.textContent = moving
+          ? (hasImage ? 'Η AI εικόνα κινείται απαλά μέσα στη σελίδα.' : 'Η οπτική κάρτα κινείται απαλά μέσα στη σελίδα.')
+          : 'Η κίνηση σταμάτησε.';
       });
       again.addEventListener('click', () => form.requestSubmit()); printBtn.addEventListener('click', () => window.print()); function escapeHtml(v){return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
     })();

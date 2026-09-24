@@ -67,8 +67,7 @@ module.exports = async function handler(req, res) {
         },
         body: JSON.stringify({
           prompt,
-          steps: 4,
-          seed: Math.floor(Math.random() * 2147483646) + 1
+          steps: 4
         }),
         signal: controller.signal
       }
@@ -77,6 +76,10 @@ module.exports = async function handler(req, res) {
 
     const body = await response.json().catch(() => ({}));
     if (!response.ok || body?.success === false) {
+      console.error('Cloudflare Workers AI error', JSON.stringify({
+        status: response.status,
+        errors: body?.errors || body?.error || null
+      }));
       return res.status(response.status || 502).json({
         error: 'provider_error',
         message: 'Η εικόνα δεν μπόρεσε να δημιουργηθεί αυτή τη στιγμή.'

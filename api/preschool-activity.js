@@ -24,6 +24,8 @@ module.exports = async function handler(req, res) {
   if (!['home','classroom'].includes(place)) return res.status(400).json({ error: 'invalid_place', message: 'Διάλεξε σπίτι ή τάξη.' });
   if (looksLikePersonalData(idea)) return res.status(400).json({ error: 'personal_data', message: 'Χρησιμοποίησε μόνο ένα γενικό θέμα, χωρίς όνομα, email, τηλέφωνο ή άλλα προσωπικά στοιχεία παιδιού.' });
 
+  const curriculum = getCurriculumAlignment(idea, mode);
+
   const modeRule = mode === 'story'
     ? 'Give extra weight to a tiny imaginative story and conversation.'
     : mode === 'learn'
@@ -51,6 +53,9 @@ Rules:
 15. visualBg must be exactly one of: sky, mint, peach, lilac.
 16. Choose sceneType from dinosaur, robot, animals, space, castle, colors, shapes, numbers, generic according to the adult's theme, not the story details. Butterfly is animals, rocket is space, counting up to five is numbers. Unmatched themes are generic.
 17. sceneMood is calm, playful or curious. scenePalette is sky, mint, peach or lilac. sceneAccent is coral, teal, gold or violet. sceneTitle and sceneCaption are brief Greek phrases for the adult's visual card. sceneObjectCount is an integer from 1 to 5, and is 5 for counting to five. These fields describe one cartoon scene, not animation frames. No unsafe content or real people.
+18. Align the whole activity with the supplied official preschool curriculum context. Each proposed task should clearly practice at least one of those areas through play, conversation, observation, movement or creation. Do not invent official curriculum codes or claim that your wording is an official learning outcome.
+Official Greek Preschool Curriculum context selected by the application:
+${curriculum.map(x => '- ' + x.field + ' > ' + x.unit + ' > ' + x.subunit).join('\\n')}
 ${modeRule}`;
 
   const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}.`;
@@ -111,6 +116,7 @@ ${modeRule}`;
     const activity = parseActivity(text, idea);
     if (!activity) return res.status(502).json({ error:'invalid_result', message:'Το AI δεν επέστρεψε σωστή δραστηριότητα. Δοκίμασε ξανά.' });
     res.setHeader('Cache-Control','no-store');
+    activity.curriculum = curriculum;
     return res.status(200).json({ activity, model, provider:'groq' });
   } catch (err) {
     return res.status(err?.name === 'AbortError' ? 504 : 500).json({ error:'server_error', message:err?.name === 'AbortError' ? 'Η υπηρεσία άργησε να απαντήσει.' : 'Η δραστηριότητα δεν μπόρεσε να δημιουργηθεί.' });
@@ -142,6 +148,42 @@ function parseActivity(text, idea) {
     return activity;
   } catch { return null; }
 }
+function getCurriculumAlignment(idea, mode) {
+  const type = knownSceneType(idea);
+  const alignments = [];
+  const add = (field, unit, subunit, activityGoal) => {
+    const key = field + '|' + unit + '|' + subunit;
+    if (!alignments.some(x => (x.field + '|' + x.unit + '|' + x.subunit) === key)) {
+      alignments.push({ field, unit, subunit, activityGoal });
+    }
+  };
+
+  if (type === 'numbers') {
+    add('Γ. Παιδί και Θετικές Επιστήμες', 'Μαθηματικά', 'Αριθμοί, Πράξεις και Άλγεβρα', 'Παιχνίδι με ποσότητες, μέτρηση, αντιστοίχιση και απλά αριθμητικά μοτίβα.');
+  } else if (type === 'shapes') {
+    add('Γ. Παιδί και Θετικές Επιστήμες', 'Μαθηματικά', 'Γεωμετρία και μετρήσεις', 'Παρατήρηση, αναγνώριση, σύγκριση και σύνθεση σχημάτων μέσα από παιχνίδι.');
+  } else if (type === 'animals' || type === 'dinosaur') {
+    add('Γ. Παιδί και Θετικές Επιστήμες', 'Φυσικές Επιστήμες', 'Ζωντανοί Οργανισμοί', 'Παρατήρηση χαρακτηριστικών, ομοιοτήτων, διαφορών και σχέσεων των ζωντανών οργανισμών.');
+  } else if (type === 'space') {
+    add('Γ. Παιδί και Θετικές Επιστήμες', 'Φυσικές Επιστήμες', 'Γη, Πλανητικό Σύστημα και Διάστημα', 'Διερεύνηση και συζήτηση βασικών ιδεών για τη Γη, τον ουρανό και το διάστημα.');
+  } else if (type === 'robot') {
+    add('Γ. Παιδί και Θετικές Επιστήμες', 'Τεχνολογία Κατασκευών', 'Παραδοσιακά και Σύγχρονα Τεχνολογικά Εργαλεία, Εξοπλισμός και Συσκευές', 'Παρατήρηση της λειτουργίας τεχνολογικών αντικειμένων και δημιουργική επίλυση απλών προβλημάτων.');
+  } else if (type === 'colors') {
+    add('Δ. Παιδί, Σώμα, Δημιουργία και Έκφραση', 'Τέχνες', 'Εικαστικές Τέχνες', 'Πειραματισμός με χρώματα, υλικά, σχήματα και προσωπική εικαστική έκφραση.');
+  } else if (type === 'castle') {
+    add('Β. Παιδί, Εαυτός και Κοινωνία', 'Κοινωνικές Επιστήμες', 'Ιστορία και Πολιτισμός', 'Παρατήρηση στοιχείων του παρελθόντος και δημιουργική σύνδεσή τους με ιστορίες και πολιτισμικές αναφορές.');
+  }
+
+  if (mode === 'story' || alignments.length === 0) {
+    add('Α. Παιδί και Επικοινωνία', 'Γλώσσα', 'Προφορική Επικοινωνία', 'Αφήγηση, περιγραφή, λεξιλόγιο, ερωτήσεις και αναδιήγηση μέσα από παιχνίδι.');
+  }
+  if (mode === 'offline') {
+    add('Δ. Παιδί, Σώμα, Δημιουργία και Έκφραση', 'Κινητική Αγωγή', 'Σώμα και Κίνηση', 'Μάθηση με κίνηση, συντονισμό, μίμηση και ενεργή συμμετοχή χωρίς οθόνη.');
+  }
+
+  return alignments.slice(0, 3);
+}
+
 function knownSceneType(idea) {
   const theme = String(idea).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   if (/δεινοσαυρ|dinosaur/.test(theme)) return 'dinosaur';

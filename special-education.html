@@ -20,7 +20,7 @@
   <style>
     .sp-branch-grid--three{grid-template-columns:repeat(3,minmax(0,1fr))}
     .sp-unified-ai{display:inline-flex;align-items:center;justify-content:center;margin-top:14px;min-height:44px;padding:10px 15px;border-radius:10px;background:#2e6f5e;color:#fff;text-decoration:none;font-weight:800}
-    .sp-unified-ai:hover{background:#245c4e}
+    .sp-unified-ai:hover{background:#245c4e}.sp-diagnostic-launch{border:0;font:inherit;cursor:pointer}
     .sp-subject-card--gateway{margin-top:14px}
     .sp-small-note{margin:12px 0 0;color:#64748b;font-size:.82rem;line-height:1.55}
     .sp-adaptation-note{margin:12px 0 18px;padding:11px 13px;border:1px solid #dbeafe;border-radius:10px;background:#eff6ff;color:#334155;font-size:.84rem;line-height:1.55}
@@ -66,7 +66,7 @@
         <div>
           <h1>Ειδική Εκπαίδευση: Μαθαίνω βήμα βήμα</h1>
           <p>Διάλεξε σχολείο, τάξη και μάθημα. Η ίδια AI Βοήθεια σε ακολουθεί σε όλες τις διαδρομές και προσαρμόζει γλώσσα, βήματα και ρυθμό στο σχολείο που επέλεξες.</p>
-          <a class="sp-unified-ai" href="/middle/student/tutor">🤖 Άνοιξε την ενιαία AI Βοήθεια</a>
+          <button class="sp-unified-ai sp-diagnostic-launch" type="button" data-special-education-diagnostic>🧭 Κάνε το μικρό διαγνωστικό</button>
         </div>
       </div>
 
@@ -124,7 +124,7 @@
         <div>
           <span class="sp-kicker">Ειδικό Λύκειο · Λύκειο Ε.Α.Ε.</span>
           <h2>Διάλεξε τάξη και συνέχισε στην AI Βοήθεια</h2>
-          <p>Στην AI Βοήθεια θα βρεις στο ίδιο μενού Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ. και μετά επιλέγεις μάθημα.</p>
+          <p>Διάλεξε τάξη και μάθημα εδώ. Η AI Βοήθεια ανοίγει απευθείας στο σωστό πλαίσιο Ειδικού Λυκείου, χωρίς να αναμειγνύεται με το Γενικό Λύκειο.</p>
         </div>
       </div>
       <div class="sp-adaptation-note"><strong>Απλοποιημένα quiz:</strong> στο Ειδικό Λύκειο δεν χρησιμοποιούμε το απαιτητικό exam-level quiz του Γενικού Λυκείου. Το quiz μένει σύντομο, άμεσο και ελέγχει μία βασική έννοια τη φορά.</div>
@@ -166,6 +166,7 @@
   <script defer src="/teacher-curriculum-special-gym-annual-2026-2027.js"></script>
   <script defer src="/teacher-curriculum-special-lyceum-annual-2026-2027.js"></script>
   <script defer src="/special-education-special-lyceum-learning-2026-2027.js"></script>
+  <script defer src="/special-education-framework-learning-2026-2027.js"></script>
   <script defer src="/special-education-special-lyceum-data.js"></script>
   <script defer src="/special-education-eneegyl-structure-data.js"></script>
   <script defer src="/teacher-curriculum-eneegyl-official-sectors-2026-2027.js"></script>
@@ -173,6 +174,8 @@
   <script defer src="/special-education-support-tools-data.js"></script>
   <script defer src="/special-education-assessment-policy.js"></script>
   <script defer src="/special-education-tutor-context.js"></script>
+  <script defer src="/data.js"></script>
+  <script defer src="/special-education-diagnostic.js"></script>
   <script defer src="/special-education-page.js"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
   const Q=window.SPECIAL_EDUCATION_QUIZZES;
   const SG=window.SPECIAL_GYMNASIUM_2026_2027;
   const SL=window.SPECIAL_LYCEUM_2026_2027;
+  const SLA=window.AITOOLSKIDS_SPECIAL_LYCEUM_ANNUAL_2026_2027;
   const EN=window.ENEEGYL_2026_2027_STRUCTURE;
   const SUPPORT=window.SPECIAL_EDUCATION_SUPPORT_TOOLS;
 
@@ -165,20 +166,33 @@
     const grades=Object.entries(SL.grades).map(([id,g])=>({id,label:g.labelEl||id.toUpperCase()}));
     if(!SL.grades[selectedSpecialLyceumGrade]) selectedSpecialLyceumGrade=grades[0]?.id||"a";
     const grade=SL.grades[selectedSpecialLyceumGrade];
+    const annualEntries=Object.values(SLA?.entries||{}).filter((entry)=>entry?.gradeId===selectedSpecialLyceumGrade);
+    const mapped=annualEntries.map((entry)=>{
+      const exact=entry.coverageStatus==="exact"&&!entry.frameworkOnly;
+      const badge=exact?"Ακριβής ύλη 2026–27":"Επίσημο πλαίσιο 2026–27";
+      const helper=exact
+        ? `${entry.officialAnchors?.length||0} επαληθευμένες ενότητες/επιλογές από την επίσημη οδηγία.`
+        : `${entry.officialAnchors?.length||0} επαληθευμένες επιλογές πλαισίου. Δεν παρουσιάζονται ως κλειστή ετήσια ύλη.`;
+      const anchors=Array.isArray(entry.officialAnchors)&&entry.officialAnchors.length
+        ? `<details class="sp-map-details"><summary>Δες τη χαρτογράφηση (${entry.officialAnchors.length})</summary><ul>${entry.officialAnchors.map((x)=>`<li>${esc(x)}</li>`).join("")}</ul><p class="sp-map-note">${esc(entry.verificationNote||"")}</p></details>`
+        : "";
+      return `<article class="sp-subject-card" data-sl-annual="${esc(entry.id)}">
+        <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(entry.gradeLabel||grade?.labelEl||"")}</span><h3>${esc(entry.subject)}</h3></div><span class="sp-ready-pill">${badge}</span></div>
+        <p>${esc(helper)}</p>
+        ${anchors}
+        ${subjectActions({schoolType:"special-lyceum",gradeId:selectedSpecialLyceumGrade,subjectId:entry.subjectId||"",learningId:entry.id,sourceUrl:entry.sourceUrl||SLA?.sourceHub||SL.sourceUrl||"",target:"en"})}
+      </article>`;
+    }).join("");
+
+    const mappedBlock=mapped
+      ? `<div class="sp-ready-routes"><h4>Επαληθευμένη χαρτογράφηση 2026–27</h4><p>Οι ακριβείς χαρτογραφήσεις και τα επίσημα πλαίσια εμφανίζονται χωριστά ώστε να μη συγχέεται το framework με πλήρη section-level ύλη.</p><div class="sp-subject-grid">${mapped}</div></div>`
+      : `<article class="sp-subject-card sp-subject-card--gateway"><div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade?.labelEl||"")}</span><h3>Συνέχισε στην AI Βοήθεια</h3></div><span class="sp-ready-pill">Επίσημη δομή</span></div><p>Για αυτή την τάξη δεν εμφανίζουμε ακόμη section-level χαρτογράφηση στη σελίδα. Η AI Βοήθεια ζητά το πραγματικό κεφάλαιο ή την άσκηση.</p><div class="sp-card-actions"><a class="sp-action sp-action--ai" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","student"))}">🤖 AI Βοήθεια μαθητή</a><a class="sp-action" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","guardian"))}">👪 Βοηθός γονέα</a><a class="sp-source-link" href="${esc(SL.sourceUrl||"")}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a></div></article>`;
+
     slProfile.innerHTML=`
       <div class="sp-choice-block"><h3>2. Διάλεξε τάξη</h3>${gradeTabs(grades,selectedSpecialLyceumGrade,"data-sl-grade")}</div>
-      <article class="sp-subject-card sp-subject-card--gateway">
-        <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade?.labelEl||"")}</span><h3>Διάλεξε μάθημα μέσα στην AI Βοήθεια</h3></div><span class="sp-ready-pill">Επίσημη δομή</span></div>
-        <p>Η ίδια AI Βοήθεια έχει πλέον ένα ενιαίο πεδίο «Σχολείο». Θα ανοίξει στο Ειδικό Λύκειο και στην τάξη που επέλεξες και από εκεί διαλέγεις μάθημα.</p>
-        <div class="sp-card-actions">
-          <a class="sp-action sp-action--ai" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","student"))}">🤖 AI Βοήθεια μαθητή</a>
-          <a class="sp-action" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","guardian"))}">👪 Βοηθός γονέα</a>
-          <a class="sp-source-link" href="${esc(SL.sourceUrl)}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a>
-        </div>
-      </article>
-      <p class="sp-small-note"><strong>Κατάσταση:</strong> επίσημη δομή Λυκείου Ε.Α.Ε., όχι καθολική ξεχωριστή section-level χαρτογράφηση. Όπου υπάρχει επίσημη φετινή οδηγία Ε.Α.Ε. τη χρησιμοποιούμε· διαφορετικά η AI Βοήθεια δείχνει ρητά υποστηρικτική αντιστοίχιση και δουλεύει πάνω στο πραγματικό κεφάλαιο ή την άσκηση που δίνεις.</p>`;
+      ${mappedBlock}
+      <p class="sp-small-note"><strong>Σημείωση:</strong> «Ακριβής ύλη 2026–27» σημαίνει section-level μεταφορά της επίσημης οδηγίας. «Επίσημο πλαίσιο 2026–27» σημαίνει ότι η οδηγία δίνει δεξιότητες/μεθοδολογία και όχι κλειστή λίστα κεφαλαίων.</p>`;
   }
-
   function eneegylEntries(){
     return Object.values(C?.entries||{}).filter((entry)=>entry?.schoolType==="eneegyl"&&entry.status==="verified"&&L?.[entry.id]?.status==="ready");
   }

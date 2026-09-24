@@ -28,9 +28,9 @@
     .creator-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}.creator-option{display:flex;flex-direction:column;gap:5px}.creator-option label{font-size:.78rem;font-weight:800;color:#566172}.creator-option select{width:100%;padding:10px 11px;border:1px solid #d9dde5;border-radius:12px;background:#fff;font:inherit;color:var(--ink)}.creator-form{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}.creator-input{width:100%;padding:13px 14px;border:1px solid #d9dde5;border-radius:14px;font:inherit}.creator-submit{border:0;border-radius:14px;padding:12px 18px;background:#2e6f5e;color:#fff;font-weight:800;cursor:pointer}.creator-submit:disabled{opacity:.55;cursor:wait}
     .creator-note{font-size:.78rem;color:var(--muted);margin:8px 0 0}.creator-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.creator-action{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;font-weight:750;cursor:pointer}.creator-status{margin:14px 0 0;font-size:.9rem;color:#4d596b}.creator-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.result-card{padding:16px;border-radius:17px;border:1px solid var(--line);background:#fff}.result-card h3{font-size:.95rem;margin:0 0 7px}.result-card p{margin:0;color:#4f5968;line-height:1.55;font-size:.9rem;white-space:pre-line}
     .adult{margin-top:28px;border:1px solid #dedbf1;background:#faf9ff;border-radius:20px;padding:22px}.adult h2{margin:0 0 8px;font-size:1.15rem}.adult p{margin:0 0 12px;color:var(--muted);line-height:1.6}.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:7px 10px;border-radius:999px;background:#fff;border:1px solid #ddd9f2;font-size:.82rem;font-weight:700}
-    .legal{margin-top:28px;padding:20px;border:1px solid #f0d7b7;background:#fffaf1;border-radius:18px}.legal h2{margin:0 0 8px;font-size:1.05rem}.legal ul{margin:0;padding-left:20px;color:#5f6673;line-height:1.65;font-size:.9rem}
+    .toolfinder{margin-top:30px;padding:24px;border:1px solid #dfe7ed;border-radius:24px;background:#fbfdff}.toolfinder h2{margin:0 0 6px;font-size:1.35rem}.toolfinder>p{margin:0 0 16px;color:var(--muted);line-height:1.6}.tool-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tool-filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:750;cursor:pointer}.tool-filter.active{background:#edf9f3;border-color:#83bba7;color:#245d4e}.tool-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.tool-card{border:1px solid var(--line);background:#fff;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}.tool-card[hidden]{display:none}.tool-card__top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.tool-card h3{margin:0;font-size:1.05rem}.tool-badge{font-size:.72rem;font-weight:800;padding:5px 8px;border-radius:999px;background:#f5f7fa;color:#526071}.tool-card p{margin:0;color:var(--muted);font-size:.89rem;line-height:1.55}.tool-card__meta{font-size:.78rem;color:#596579;background:#f8fafc;border-radius:10px;padding:9px 10px;line-height:1.45}.tool-card a{margin-top:auto;color:#245d4e;font-weight:800;text-decoration:none;font-size:.88rem}.toolfinder-note{margin-top:14px;font-size:.8rem;color:#6a7280;line-height:1.5}.legal{margin-top:28px;padding:20px;border:1px solid #f0d7b7;background:#fffaf1;border-radius:18px}.legal h2{margin:0 0 8px;font-size:1.05rem}.legal ul{margin:0;padding-left:20px;color:#5f6673;line-height:1.65;font-size:.9rem}
     .footer{margin-top:28px;text-align:center;color:var(--muted);font-size:.82rem}
-    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:26px}.hero__art{min-height:140px;font-size:3.5rem}.grid,.creator-results,.creator-options{grid-template-columns:1fr}.creator-form{grid-template-columns:1fr}h1{font-size:1.8rem}}
+    @media(max-width:760px){.hero{grid-template-columns:1fr;padding:26px}.hero__art{min-height:140px;font-size:3.5rem}.grid,.creator-results,.creator-options,.tool-cards{grid-template-columns:1fr}.creator-form{grid-template-columns:1fr}h1{font-size:1.8rem}}
   </style>
 </head>
 <body>
@@ -65,6 +65,58 @@
       <p class="creator-note">Μην γράφεις όνομα, σχολείο, φωτογραφίες, στοιχεία υγείας ή άλλα προσωπικά δεδομένα παιδιού.</p>
       <p class="creator-status" id="creatorStatus" aria-live="polite"></p>
       <div class="creator-results" id="creatorResults" hidden></div><div class="creator-actions" id="creatorActions" hidden><button class="creator-action" id="creatorAgain" type="button">✨ Φτιάξε άλλη παραλλαγή</button><button class="creator-action" id="creatorPrint" type="button">🖨️ Εκτύπωσε τη δραστηριότητα</button></div>
+    </section>
+
+
+    <section class="toolfinder" aria-labelledby="toolfinderTitle">
+      <h2 id="toolfinderTitle">Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να φτιάξεις</h2>
+      <p>Εδώ το εργαλείο το χρησιμοποιεί ο γονιός ή ο εκπαιδευτικός. Το παιδί βλέπει, παίζει, ζωγραφίζει, ακούει ή συμμετέχει στη δραστηριότητα.</p>
+      <div class="tool-filters" role="group" aria-label="Τι θέλεις να φτιάξεις">
+        <button class="tool-filter active" type="button" data-tool-filter="all">Όλα</button>
+        <button class="tool-filter" type="button" data-tool-filter="story">Ιστορία</button>
+        <button class="tool-filter" type="button" data-tool-filter="visual">Εικόνα και ζωγραφική</button>
+        <button class="tool-filter" type="button" data-tool-filter="activity">Δραστηριότητα</button>
+        <button class="tool-filter" type="button" data-tool-filter="teacher">Για την τάξη</button>
+      </div>
+      <div class="tool-cards">
+        <article class="tool-card" data-tool-tags="story activity">
+          <div class="tool-card__top"><h3>ChatGPT</h3><span class="tool-badge">Για ενήλικα</span></div>
+          <p>Για ιδέες ιστοριών, παιχνίδια ρόλων, απλές δραστηριότητες και παραλλαγές πάνω σε ένα θέμα που αρέσει στο παιδί.</p>
+          <div class="tool-card__meta"><strong>Προσοχή:</strong> Δεν προορίζεται για παιδιά κάτω των 13 ετών. Για παιδιά αυτής της ηλικίας η αλληλεπίδραση πρέπει να γίνεται από ενήλικα.</div>
+          <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα ChatGPT ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="visual activity">
+          <div class="tool-card__top"><h3>Canva Magic Studio</h3><span class="tool-badge">Για γονέα ή εκπαιδευτικό</span></div>
+          <p>Για καρτέλες, μικρές αφίσες, εικόνες, παιχνίδια αντιστοίχισης και οπτικό υλικό γύρω από ένα θέμα.</p>
+          <div class="tool-card__meta"><strong>Προσοχή:</strong> Τα AI εργαλεία του Canva είναι για ηλικίες 13+ εκτός ειδικού πλαισίου Canva Education με επίβλεψη. Εδώ το χρησιμοποιεί ο ενήλικας.</div>
+          <a href="https://www.canva.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα Canva ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="visual activity">
+          <div class="tool-card__top"><h3>Adobe Express</h3><span class="tool-badge">Για ενήλικα</span></div>
+          <p>Για εικόνες, καρτέλες, μικρά posters και οπτικό υλικό που μπορεί μετά να χρησιμοποιηθεί σε παιχνίδι ή αφήγηση.</p>
+          <div class="tool-card__meta"><strong>Προσοχή:</strong> Για ατομικό Adobe ID απαιτείται ηλικία 13+. Για προσχολική ηλικία προτείνεται χρήση από γονέα ή εκπαιδευτικό.</div>
+          <a href="https://www.adobe.com/express/" target="_blank" rel="noopener noreferrer">Άνοιγμα Adobe Express ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="visual activity">
+          <div class="tool-card__top"><h3>AutoDraw</h3><span class="tool-badge">Απλό και οπτικό</span></div>
+          <p>Συνδυάζει machine learning με σχέδια καλλιτεχνών και βοηθά να μετατρέπεται ένα πρόχειρο σκίτσο σε καθαρό εικονίδιο. Χρήσιμο για κάρτες, ιστορίες και παιχνίδια εικόνων.</p>
+          <div class="tool-card__meta"><strong>Πώς το χρησιμοποιούμε εδώ:</strong> Μαζί με ενήλικα, ως δημιουργικό εργαλείο και όχι ως ελεύθερη συνομιλία AI.</div>
+          <a href="https://www.autodraw.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα AutoDraw ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="story visual teacher">
+          <div class="tool-card__top"><h3>Book Creator</h3><span class="tool-badge">Για ιστορίες και βιβλιαράκια</span></div>
+          <p>Για ψηφιακά βιβλία, ιστορίες και εικόνες. Διαθέτει και ενσωματωμένη δημιουργία εικόνων με AI για εκπαιδευτική χρήση.</p>
+          <div class="tool-card__meta"><strong>Κατάλληλο όταν:</strong> Ο ενήλικας ή ο εκπαιδευτικός θέλει να μετατρέψει μια ιδέα του παιδιού σε μικρό βιβλιαράκι ή οπτική ιστορία.</div>
+          <a href="https://bookcreator.com/" target="_blank" rel="noopener noreferrer">Άνοιγμα Book Creator ↗</a>
+        </article>
+        <article class="tool-card" data-tool-tags="activity teacher">
+          <div class="tool-card__top"><h3>MagicSchool</h3><span class="tool-badge">Μόνο για εκπαιδευτικούς</span></div>
+          <p>Για ιδέες μαθήματος, διαφοροποίηση δραστηριοτήτων και προετοιμασία εκπαιδευτικού υλικού με generative AI.</p>
+          <div class="tool-card__meta"><strong>Σημαντικό:</strong> Η υπηρεσία δηλώνει ότι προορίζεται για εκπαιδευτικούς και σχολικό προσωπικό ως επαγγελματικό βοήθημα, όχι για προσωπική χρήση γονέα.</div>
+          <a href="https://www.magicschool.ai/" target="_blank" rel="noopener noreferrer">Άνοιγμα MagicSchool ↗</a>
+        </article>
+      </div>
+      <p class="toolfinder-note">Οι ηλικιακοί όροι και οι δυνατότητες των υπηρεσιών αλλάζουν. Για αυτό η προσχολική ζώνη προτείνει κυρίως χρήση από ενήλικα και όχι προσωπικό λογαριασμό παιδιού.</p>
     </section>
 
     <h2 class="section-title">Δραστηριότητες για να κάνετε μαζί</h2>
@@ -112,6 +164,8 @@
         input.value = btn.textContent.trim();
         input.focus();
       }));
+
+      document.querySelectorAll('.tool-filter').forEach(btn => btn.addEventListener('click', () => { document.querySelectorAll('.tool-filter').forEach(x => x.classList.remove('active')); btn.classList.add('active'); const tag = btn.dataset.toolFilter; document.querySelectorAll('.tool-card').forEach(card => { card.hidden = tag !== 'all' && !card.dataset.toolTags.split(' ').includes(tag); }); }));
 
       const cards = [
         ['story','📖 Μικρή ιστορία'],['words','🗣️ Λεξιλόγιο & κουβέντα'],['game','🔢 Μικρό παιχνίδι'],

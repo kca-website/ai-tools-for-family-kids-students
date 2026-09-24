@@ -18,7 +18,7 @@ const ZONES = [
     ageRangeEn: "Ages 4 to 6",
     descriptionEl: "Για γονείς & εκπαιδευτικούς. Δημιουργικές δραστηριότητες με AI, πάντα με καθοδήγηση ενήλικα.",
     descriptionEn: "For parents & educators. Creative AI-assisted activities, always adult-led.",
-    href: "/preschool.html",
+    href: "/preschool",
     hideFromQuiz: true,
   },
   {

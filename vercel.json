@@ -8,6 +8,10 @@
   },
   "routes": [
     {
+      "src": "/preschool",
+      "dest": "/preschool.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

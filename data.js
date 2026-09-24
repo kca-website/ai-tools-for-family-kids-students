@@ -10,6 +10,18 @@
 // ---------- ΖΩΝΕΣ ----------
 const ZONES = [
   {
+    id: "preschool",
+    icon: "🧸",
+    labelEl: "Νηπιαγωγείο",
+    labelEn: "Preschool",
+    ageRangeEl: "4 έως 6 ετών",
+    ageRangeEn: "Ages 4 to 6",
+    descriptionEl: "Για γονείς & εκπαιδευτικούς. Δημιουργικές δραστηριότητες με AI, πάντα με καθοδήγηση ενήλικα.",
+    descriptionEn: "For parents & educators. Creative AI-assisted activities, always adult-led.",
+    href: "/preschool.html",
+    hideFromQuiz: true,
+  },
+  {
     id: "primary",
     icon: "🧒",
     labelEl: "Δημοτικό",

@@ -458,7 +458,7 @@
   // ---------- Rendering: Ζώνες ----------
   function renderZoneGrid() {
     els.zoneGrid.innerHTML = "";
-    ZONES.filter((zone) => !zone.hideFromQuiz).forEach((zone) => {
+    ZONES.forEach((zone) => {
       const card = document.createElement("button");
       card.type = "button";
       card.className = "zone-card";
@@ -481,7 +481,7 @@
   function renderHeroQuizPicker() {
     if (!els.heroQuizPickerGrid) return;
     els.heroQuizPickerGrid.innerHTML = "";
-    ZONES.forEach((zone) => {
+    ZONES.filter((zone) => !zone.hideFromQuiz).forEach((zone) => {
       const label = state.lang === "el" ? zone.labelEl : zone.labelEn;
       const btn = document.createElement("button");
       btn.type = "button";

@@ -14,8 +14,14 @@ module.exports = async function handler(req, res) {
 
   const idea = String(req.body?.idea || '').trim();
   const mode = String(req.body?.mode || 'story');
+  const age = String(req.body?.age || '5');
+  const duration = String(req.body?.duration || '10');
+  const place = String(req.body?.place || 'home');
   if (!idea || idea.length > 120) return res.status(400).json({ error: 'invalid_idea', message: 'Γράψε μία σύντομη ιδέα έως 120 χαρακτήρες.' });
   if (!['story','learn','offline'].includes(mode)) return res.status(400).json({ error: 'invalid_mode', message: 'Μη έγκυρος τύπος δραστηριότητας.' });
+  if (!['4','5','6'].includes(age)) return res.status(400).json({ error: 'invalid_age', message: 'Διάλεξε ηλικία 4, 5 ή 6 ετών.' });
+  if (!['5','10','15'].includes(duration)) return res.status(400).json({ error: 'invalid_duration', message: 'Διάλεξε διάρκεια 5, 10 ή 15 λεπτών.' });
+  if (!['home','classroom'].includes(place)) return res.status(400).json({ error: 'invalid_place', message: 'Διάλεξε σπίτι ή τάξη.' });
   if (looksLikePersonalData(idea)) return res.status(400).json({ error: 'personal_data', message: 'Χρησιμοποίησε μόνο ένα γενικό θέμα, χωρίς όνομα, email, τηλέφωνο ή άλλα προσωπικά στοιχεία παιδιού.' });
 
   const modeRule = mode === 'story'
@@ -38,9 +44,11 @@ Rules:
 8. Adult supervision is assumed. Mention it in adultTip only where useful.
 9. Use common, low-risk household materials. If scissors/glue could be involved, explicitly say adult handles or supervises them.
 10. Keep each field under 70 Greek words.
+11. Adapt difficulty and instructions to the supplied age, available time and setting.
+12. Avoid dash punctuation in Greek output. Prefer short sentences and headings.
 ${modeRule}`;
 
-  const user = `General theme supplied by the adult: ${idea}`;
+  const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}.`;
 
   try {
     const controller = new AbortController();

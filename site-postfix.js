@@ -290,6 +290,7 @@
     }
 
     const en=isEnglish();
+    const conceptCount=Number(window.AITOOLSKIDS_SITE_META?.signLanguageConceptCount)||167;
     const signature=String(en);
     if(panel.dataset.signature===signature) return;
     panel.dataset.signature=signature;
@@ -297,9 +298,9 @@
     const badge=en ? "New · Accessibility" : "Νέο · Προσβασιμότητα";
     const title=en ? "🤟 Concepts in Greek Sign Language" : "🤟 Έννοιες στην Ελληνική Νοηματική";
     const text=en
-      ? "167 selected school concepts, not a complete GSL dictionary: with simple explanations, scientific visuals, and direct official videos from IEP."
-      : "167 επιλεγμένες σχολικές έννοιες, όχι πλήρες λεξικό ΕΝΓ: με απλή εξήγηση, επιστημονική εικόνα και απευθείας επίσημο βίντεο από το ΙΕΠ.";
-    const cta=en ? "Explore the 167 concepts →" : "Δες τις 167 έννοιες →";
+      ? `${conceptCount} selected school concepts, not a complete GSL dictionary: with simple explanations, scientific visuals, and direct official videos from IEP.`
+      : `${conceptCount} επιλεγμένες σχολικές έννοιες, όχι πλήρες λεξικό ΕΝΓ: με απλή εξήγηση, επιστημονική εικόνα και απευθείας επίσημο βίντεο από το ΙΕΠ.`;
+    const cta=en ? `Explore the ${conceptCount} concepts →` : `Δες τις ${conceptCount} έννοιες →`;
 
     panel.innerHTML=`
       <div style="min-width:min(100%,520px);flex:1;">

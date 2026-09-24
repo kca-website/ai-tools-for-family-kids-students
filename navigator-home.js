@@ -299,9 +299,16 @@
       </button>
       <div class="home-v8-needs__body" id="homeV8NeedsBody" hidden>
         <div class="home-v8-needs__grid">
-          ${[...c.needs, ...c.learningModes].map(([icon,title,desc,href]) => `
+          ${c.needs.map(([icon,title,desc,href]) => `
             <a class="home-v8-needs-card" href="${href}">
               <span class="home-v8-needs-card__icon" aria-hidden="true">${icon}</span>
+              <span><strong>${title}</strong><small>${desc}</small></span>
+            </a>`).join("")}
+        </div>
+        <div class="home-v8-learning-grid">
+          ${c.learningModes.map(([icon,title,desc,href]) => `
+            <a class="home-v8-learning-card" href="${href}">
+              <span class="home-v8-learning-card__icon" aria-hidden="true">${icon}</span>
               <span><strong>${title}</strong><small>${desc}</small></span>
             </a>`).join("")}
         </div>

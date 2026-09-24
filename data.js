@@ -621,7 +621,7 @@ const TOOLS = {
     greekTips: "Αν δεν υπάρχει σχολικός λογαριασμός, χρησιμοποίησε τις άλλες προτάσεις της σελίδας ή την AI Βοήθεια του aitools4kids με τον κατάλληλο ρόλο.",
     isGreek: false,
     schoolOnly: true,
-  }
+  },
   "brisk": {
     id: "brisk",
     name: "Brisk Teaching",

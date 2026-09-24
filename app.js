@@ -103,7 +103,7 @@
       notGuideTitle: "Τι ΔΕΝ είναι αυτός ο οδηγός",
       notGuideItem1: "Δεν αντικαθιστά τον δάσκαλο ή τον γονιό.",
       notGuideItem2: "Δεν είναι τρόπος να αντιγράψεις μια εργασία έτοιμη.",
-      footerLastChecked: window.AITOOLSKIDS_SITE_META?.toolCatalogAuditLabelEl || "Τελευταίος πλήρης έλεγχος καταλόγου εργαλείων: 5 Σεπτεμβρίου 2026",
+      footerLastChecked: window.AITOOLSKIDS_SITE_META?.toolCatalogAuditLabelEl || "Τελευταίος πλήρης έλεγχος καταλόγου εργαλείων: 24 Σεπτεμβρίου 2026",
       footerPrivacyLink: "Πολιτική Απορρήτου",
       footerAccessibilityLink: "Προσβασιμότητα εργαλείων",
       toolAgeLabel: "Όροι Χρήσης",

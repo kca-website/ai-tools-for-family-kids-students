@@ -100,6 +100,35 @@
     },
     nutritionSources:["https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"]
   });
+  patch("brisk", {
+    nutritionFacts:{
+      costEl:"Δωρεάν πλάνο εκπαιδευτικού + σχολικά πλάνα",costEn:"Free teacher plan + school plans",
+      accountEl:"Απαιτεί λογαριασμό εκπαιδευτικού",accountEn:"Educator account required"
+    },
+    nutritionSources:["https://www.briskteaching.com/faq","https://www.briskteaching.com/privacy/privacy-center"]
+  });
+  patch("diffit", {
+    nutritionFacts:{
+      costEl:"Δωρεάν βασική έκδοση + σχολικά πλάνα",costEn:"Free basic tier + school plans",
+      accountEl:"Λογαριασμός εκπαιδευτικού",accountEn:"Educator account"
+    },
+    nutritionSources:["https://web.diffit.me/pricing","https://web.diffit.me/faq"]
+  });
+  patch("snorkl", {
+    nutritionFacts:{
+      costEl:"Δωρεάν πλάνο εκπαιδευτικού + σχολικά πλάνα",costEn:"Free teacher plan + school plans",
+      accountEl:"Teacher-managed σχολική χρήση",accountEn:"Teacher-managed school use"
+    },
+    nutritionSources:["https://snorkl.app/plans"]
+  });
+  patch("class-companion", {
+    nutritionFacts:{
+      costEl:"Δωρεάν για εκπαιδευτικό και μαθητές + σχολικά πλάνα",costEn:"Free for teachers and students + school plans",
+      accountEl:"Οι μαθητές μπαίνουν με πρόσκληση εκπαιδευτικού",accountEn:"Students join by teacher invitation"
+    },
+    nutritionSources:["https://classcompanion.com/","https://help.classcompanion.com/articles/7742025570-what-is-the-student-experience"]
+  });
+
 
   function language(){
     return document.documentElement.lang === "en" ? "en" : "el";

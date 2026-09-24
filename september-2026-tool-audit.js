@@ -100,6 +100,23 @@
     },
     nutritionSources:["https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you"]
   });
+  patch("study-learn", {
+    nutritionFacts:{
+      costEl:"Χωρίς επιπλέον κόστος σε επιλέξιμες άδειες Microsoft 365 Education",costEn:"No extra cost with eligible Microsoft 365 Education licenses",
+      accountEl:"Σχολικός Microsoft 365 λογαριασμός · 13+ · ενεργοποίηση από IT",accountEn:"School Microsoft 365 account · 13+ · IT enablement required"
+    },
+    nutritionSources:[
+      "https://support.microsoft.com/en-us/education/copilot/study-learn-agent",
+      "https://learn.microsoft.com/en-us/microsoft-365/education/guide/1-reference/enable-copilot-chat-for-learners"
+    ]
+  });
+  patch("math-progress", {
+    nutritionFacts:{
+      costEl:"Μέσα στο Microsoft Teams for Education",costEn:"Included within Microsoft Teams for Education",
+      accountEl:"Teacher-managed σχολικό Microsoft 365",accountEn:"Teacher-managed school Microsoft 365"
+    },
+    nutritionSources:["https://support.microsoft.com/en-us/education/learning-accelerators/getting-started-with-math-progress"]
+  });
   patch("brisk", {
     nutritionFacts:{
       costEl:"Δωρεάν πλάνο εκπαιδευτικού + σχολικά πλάνα",costEn:"Free teacher plan + school plans",

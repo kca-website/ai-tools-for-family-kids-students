@@ -143,13 +143,44 @@
         ]
       },
       "law": {
-        labelEl: "Νομική / Νομική έρευνα",
+        labelEl: "Νομική · μελέτη & πρακτική",
         tools: [
-          { id: "notebooklm", tasks: ["understand","notes","papers","practice"], whyEl: "Source-based μελέτη πάνω σε νόμους, αποφάσεις, σημειώσεις και PDF χωρίς να χάνεται η σύνδεση με το πρωτογενές υλικό." },
-          { id: "zotero", tasks: ["research","papers","notes"], whyEl: "Οργάνωση νομικής βιβλιογραφίας, άρθρων, αποφάσεων και παραπομπών." },
-          { id: "perplexity", tasks: ["research","understand"], whyEl: "Χρήσιμο μόνο για αρχική χαρτογράφηση όρων και πηγών· κάθε νομικός ισχυρισμός πρέπει να επαληθεύεται σε επίσημο κείμενο ή νομολογία." },
-          { id: "semantic-scholar", tasks: ["research","papers"], whyEl: "Για εντοπισμό ακαδημαϊκής βιβλιογραφίας και citations σε διεπιστημονικά ή θεωρητικά νομικά ζητήματα." },
-          { id: "study-learn", tasks: ["understand","practice","notes"], whyEl: "Σε σχολικό Microsoft 365 περιβάλλον: καθοδηγούμενη μελέτη πάνω σε πραγματικά κείμενα, flashcards και quiz." }
+          { id: "notebooklm", tasks: ["understand","notes","papers","practice"], whyEl: "Βάλε μόνο σύγγραμμα, σημειώσεις, νόμους και νομολογία του μαθήματος και κάνε source-based συγκρίσεις, περιλήψεις και ερωτήσεις εξάσκησης." },
+          { id: "chatgpt", tasks: ["practice","feedback","understand"], whyEl: "Για case analysis: απαντάς πρώτα εσύ με υπαγωγή και μετά ζητάς κριτική/επόμενο ερώτημα, όχι έτοιμη λύση." },
+          { id: "claude", tasks: ["practice","feedback","understand"], whyEl: "Χρήσιμο για ανάγνωση μεγάλων νομικών κειμένων και πρακτική σε υποθετικές υποθέσεις, με επαλήθευση κάθε νομικού ισχυρισμού." },
+          { id: "anki", tasks: ["practice","understand","notes"], whyEl: "Για ορισμούς, προϋποθέσεις, ένδικα μέσα, προθεσμίες και βασικές διατάξεις με spaced repetition." },
+          { id: "zotero", tasks: ["research","papers","notes"], whyEl: "Οργάνωση βιβλιογραφίας, αποφάσεων, άρθρων και παραπομπών." }
+        ]
+      },
+      "law-eu-international": {
+        labelEl: "Νομική · Ευρωπαϊκό & διεθνές",
+        tools: [
+          { id: "eur-lex", tasks: ["research","understand","papers","practice"], whyEl: "Πρώτη επίσημη πηγή για Συνθήκες, νομοθεσία ΕΕ, ενοποιημένα κείμενα και σχετική νομολογία." },
+          { id: "curia", tasks: ["research","understand","papers","practice"], whyEl: "Επίσημη νομολογία ΔΕΕ/Γενικού Δικαστηρίου για αποφάσεις, προτάσεις και στοιχεία υποθέσεων." },
+          { id: "hudoc", tasks: ["research","understand","papers","practice"], whyEl: "Επίσημη βάση ΕΔΔΑ για ΕΣΔΑ και νομολογία ανθρωπίνων δικαιωμάτων." },
+          { id: "notebooklm", tasks: ["understand","notes","practice"], whyEl: "Για να μελετήσεις μαζί Συνθήκες, αποφάσεις και σημειώσεις που έχεις ήδη συλλέξει." },
+          { id: "vlex-vincent", tasks: ["research","papers","feedback"], whyEl: "Premium legal AI για συγκριτικό/διεθνές research μόνο όταν υπάρχει πρόσβαση και με έλεγχο των citations." }
+        ]
+      },
+      "law-research": {
+        labelEl: "Νομική · έρευνα & βιβλιογραφία",
+        tools: [
+          { id: "heinonline", tasks: ["research","papers"], whyEl: "Εξειδικευμένη νομική βιβλιογραφία και ιστορικές συλλογές, συνήθως μέσω πανεπιστημιακής συνδρομής." },
+          { id: "ssrn", tasks: ["research","papers"], whyEl: "Working papers και σύγχρονη νομική θεωρία· έλεγξε πάντα αν το paper είναι peer reviewed ή preprint." },
+          { id: "semantic-scholar", tasks: ["research","papers"], whyEl: "Για citations και σχετική ακαδημαϊκή βιβλιογραφία, ιδιαίτερα σε διεπιστημονικά θέματα." },
+          { id: "elicit", tasks: ["research","papers"], whyEl: "Χρήσιμο όταν η νομική ερώτηση έχει εμπειρικό ή κοινωνικοεπιστημονικό σκέλος." },
+          { id: "consensus", tasks: ["research","papers","understand"], whyEl: "Για ερωτήματα που ζητούν τι δείχνει η δημοσιευμένη εμπειρική βιβλιογραφία, όχι για ισχύον δίκαιο." },
+          { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Δείχνει πώς παραπέμπεται ένα paper και βοηθά στον έλεγχο ακαδημαϊκών ισχυρισμών." },
+          { id: "zotero", tasks: ["research","papers","notes"], whyEl: "Οργάνωση πηγών και παραπομπών." }
+        ]
+      },
+      "law-premium-ai": {
+        labelEl: "Νομική · premium legal AI",
+        tools: [
+          { id: "vlex-vincent", tasks: ["research","papers","feedback","understand"], whyEl: "Legal AI με citations σε vLex πηγές· μόνο με διαθέσιμη πρόσβαση και πάντα source verification." },
+          { id: "lexis-plus-ai", tasks: ["research","papers","feedback"], whyEl: "Premium legal AI της LexisNexis· χρήσιμο κυρίως όπου η βιβλιοθήκη/ίδρυμα παρέχει συνδρομή." },
+          { id: "westlaw-ai", tasks: ["research","papers","feedback"], whyEl: "AI-assisted Westlaw research, κυρίως για αγγλοσαξονικές δικαιοδοσίες και μόνο με συνδρομή." },
+          { id: "notebooklm", tasks: ["understand","notes","practice"], whyEl: "Δωρεάν/προσβάσιμη εναλλακτική για source-based μελέτη των δικών σου νομικών αρχείων." }
         ]
       },
       "education": {
@@ -914,7 +945,7 @@
         ],
         courses: [
           {
-            code: "2024", semester: 7, year: 4, ects: 4, required: true,
+            code: "2024", semester: 7, year: 4, ects: 4, required: true, toolProfile: "law-research",
             titleEl: "Φιλοσοφία του Δικαίου",
             tasks: ["understand","notes","research","papers","practice"],
             topicsVerified: true,
@@ -938,7 +969,7 @@
             ]
           },
           {
-            code: "2025", semester: 7, year: 4, ects: 7, required: true,
+            code: "2025", semester: 7, year: 4, ects: 7, required: true, toolProfile: "law-eu-international",
             titleEl: "Ιδιωτικό Διεθνές Δίκαιο",
             tasks: ["understand","notes","practice","research"],
             topicsVerified: true,
@@ -954,7 +985,7 @@
             ]
           },
           {
-            code: "2026", semester: 7, year: 4, ects: 6, required: true,
+            code: "2026", semester: 7, year: 4, ects: 6, required: true, toolProfile: "law",
             titleEl: "Συλλογικό Εργατικό Δίκαιο",
             tasks: ["understand","notes","practice","research"],
             topicsVerified: true,
@@ -976,7 +1007,7 @@
             ]
           },
           {
-            code: "2027", semester: 7, year: 4, ects: 8, required: true,
+            code: "2027", semester: 7, year: 4, ects: 8, required: true, toolProfile: "law",
             titleEl: "Εφαρμογές Αστικού Δικαίου",
             tasks: ["understand","practice","feedback","research"],
             topicsVerified: true,
@@ -995,7 +1026,7 @@
             ]
           },
           {
-            code: "2028", semester: 8, year: 4, ects: 8, required: true,
+            code: "2028", semester: 8, year: 4, ects: 8, required: true, toolProfile: "law-eu-international",
             titleEl: "Εφαρμογές Δημοσίου Δικαίου",
             tasks: ["understand","practice","feedback","research"],
             topicsVerified: true,
@@ -1014,7 +1045,7 @@
             ]
           },
           {
-            code: "2029", semester: 8, year: 4, ects: 4, required: true,
+            code: "2029", semester: 8, year: 4, ects: 4, required: true, toolProfile: "law",
             titleEl: "Εφαρμογές Πολιτικής Δικονομίας",
             tasks: ["understand","practice","feedback","research"],
             topicsVerified: true,
@@ -1037,7 +1068,7 @@
             ]
           },
           {
-            code: "2030", semester: 8, year: 4, ects: 8, required: true,
+            code: "2030", semester: 8, year: 4, ects: 8, required: true, toolProfile: "law",
             titleEl: "Εφαρμογές Ποινικού Δικαίου – Ποινικής Δικονομίας",
             tasks: ["understand","practice","feedback","research"],
             topicsVerified: true,
@@ -1420,6 +1451,8 @@
     }
 
     if (departmentId === "nkua-law") {
+      if (/διεθν|ευρωπαϊ|δημοσίου/.test(title)) return "law-eu-international";
+      if (/φιλοσοφ|θεωρ/.test(title)) return "law-research";
       return "law";
     }
 

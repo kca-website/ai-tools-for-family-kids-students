@@ -426,7 +426,7 @@
       row=document.createElement("p");
       row.id="methodologyFooterLinks";
       row.style.cssText="font-size:.82rem;margin-top:8px;";
-      footer.appendChild(row);
+      (footer.querySelector(".site-footer__main") || footer).appendChild(row);
     }
     const en=isEnglish();
     const signature=String(en);

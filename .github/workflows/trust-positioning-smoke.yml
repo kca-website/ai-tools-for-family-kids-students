@@ -53,6 +53,9 @@ jobs:
       - name: Run homepage positioning smoke
         run: node tests/home-positioning-smoke.mjs
 
+      - name: Run stabilization release smoke
+        run: node tests/stabilization-release-smoke.mjs
+
       - name: Show local server log on failure
         if: failure()
         run: cat /tmp/aitools4kids-http.log || true

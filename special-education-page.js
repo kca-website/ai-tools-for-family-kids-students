@@ -146,24 +146,24 @@
       const annual=annualSpecialGymEntry(selectedSpecialGymGrade,row.id);
       const mappedCount=annual?.officialAnchors?.length||0;
       const frameworkOnly=annual?.frameworkOnly===true||annual?.annualInstructionsStatus==="2026-27-framework-verified";
-      const helper=hasLearning
-        ? hasQuiz
-          ? "Έχει έτοιμη βήμα-βήμα μελέτη και μικρό τεστ."
-          : "Έχει έτοιμη μελέτη πάνω στο επαληθευμένο επίσημο πλαίσιο. Δεν δημιουργούμε τεχνητό quiz όπου η πηγή δεν το στηρίζει."
-        : mappedCount
-          ? frameworkOnly
-            ? `${mappedCount} επίσημες επιλογές πλαισίου 2026–27 στην AI Βοήθεια. Δεν παρουσιάζονται ως πλήρης section-level ύλη.`
-            : `${mappedCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27 στην AI Βοήθεια.`
-          : "Άνοιξε την AI Βοήθεια και γράψε το συγκεκριμένο κεφάλαιο, κείμενο ή άσκηση.";
-      const badge=hasLearning
-        ? hasQuiz
-          ? '<span class="sp-ready-pill">Μελέτη + τεστ</span>'
-          : '<span class="sp-ready-pill">Μελέτη πλαισίου</span>'
-        : mappedCount
-          ? frameworkOnly
-            ? '<span class="sp-ready-pill">Επίσημο πλαίσιο 2026–27</span>'
-            : '<span class="sp-ready-pill">Ύλη 2026–27</span>'
-          : "";
+      const helper=frameworkOnly&&mappedCount
+        ? `${mappedCount} επίσημες επιλογές πλαισίου 2026–27 στην AI Βοήθεια. Δεν παρουσιάζονται ως πλήρης section-level ύλη.`
+        : hasLearning
+          ? hasQuiz
+            ? "Έχει έτοιμη βήμα-βήμα μελέτη και μικρό τεστ."
+            : "Έχει έτοιμη μελέτη πάνω στο επαληθευμένο επίσημο πλαίσιο. Δεν δημιουργούμε τεχνητό quiz όπου η πηγή δεν το στηρίζει."
+          : mappedCount
+            ? `${mappedCount} επίσημα χαρτογραφημένες ενότητες/επιλογές 2026–27 στην AI Βοήθεια.`
+            : "Άνοιξε την AI Βοήθεια και γράψε το συγκεκριμένο κεφάλαιο, κείμενο ή άσκηση.";
+      const badge=frameworkOnly&&mappedCount
+        ? '<span class="sp-ready-pill">Επίσημο πλαίσιο 2026–27</span>'
+        : hasLearning
+          ? hasQuiz
+            ? '<span class="sp-ready-pill">Μελέτη + τεστ</span>'
+            : '<span class="sp-ready-pill">Μελέτη πλαισίου</span>'
+          : mappedCount
+            ? '<span class="sp-ready-pill">Ύλη 2026–27</span>'
+            : "";
       return `<article class="sp-subject-card" data-sg-subject="${esc(row.id)}">
         <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade.label)}</span><h3>${esc(row.label)}</h3></div>${badge}</div>
         <p>${esc(helper)}</p>

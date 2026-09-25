@@ -170,7 +170,7 @@ try{
   await page.selectOption('#grade','a');
   await page.selectOption('#subject','math');
   const mathNote=await page.locator('#curriculumNote').innerText();
-  assert.match(mathNote,/τρέχουσα ύλη\/οδηγίες/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');
+  assert.match(mathNote,/ενότητες με ρητή αντιστοίχιση στην επίσημη ύλη\/οδηγίες 2026–27/i,'Annual Mathematics mapping must be distinguished from support-only textbook references');
   assert.ok(!/υποστηρικτικές επιλογές/i.test(mathNote),'Verified annual Mathematics mapping must not be marked support-only');
 
   const specialPrompt=await page.evaluate(()=>window.promptText());

@@ -44,6 +44,8 @@ async function openSpecial(page,{track,zone,role='guardian',grade,subject='' }){
   const query=new URLSearchParams({schoolTrack:track});
   if(grade) query.set('grade',grade);
   if(subject) query.set('subject',subject);
+  await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
+  await page.waitForFunction(()=>window.AITutor?.render&&window.AITutorRenderHost?.eventName,{timeout:30000});
   await page.evaluate(({zone,role,query})=>{
     history.replaceState({},'','/'+zone+'/'+role+'/tutor?'+query);
     window.dispatchEvent(new PopStateEvent('popstate'));

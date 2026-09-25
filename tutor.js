@@ -20,7 +20,9 @@
   const MODEL_PROVIDER = "openai";
   const PUTER_SRC = "https://js.puter.com/v2/";
   const CONVERSATION_EVENT = "aitools4kids:tutor-conversation-updated";
-  const CLASSROOM_MODE = new URLSearchParams(window.location.search).get("classroom") === "1";
+  function isClassroomMode() {
+    return new URLSearchParams(window.location.search).get("classroom") === "1";
+  }
   const CHARACTER_CATALOG = {
     pericles: {
       id: "pericles",
@@ -1710,8 +1712,8 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
 
   function setMicUi() {
     if (!refs.mic) return;
-    refs.mic.hidden = CLASSROOM_MODE || !micSupported();
-    if (CLASSROOM_MODE) {
+    refs.mic.hidden = isClassroomMode() || !micSupported();
+    if (isClassroomMode()) {
       refs.mic.disabled = true;
       refs.mic.setAttribute("aria-pressed", "false");
       return;
@@ -2368,7 +2370,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
                 <button type="button" class="tutor-doc-upload__remove" id="tutorPdfRemove" hidden>${escapeHtml(tr("pdfRemove"))}</button>
               </div>
               <textarea id="tutorInput" rows="4" disabled></textarea>
-              <div class="tutor-voice-hint">${escapeHtml(CLASSROOM_MODE ? tr("classroomVoiceHint") : tr("voiceHint"))}</div>
+              <div class="tutor-voice-hint">${escapeHtml(isClassroomMode() ? tr("classroomVoiceHint") : tr("voiceHint"))}</div>
               <div class="tutor-composer__bottom">
                 <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorSample">${escapeHtml(tr("sample"))}</button>
                 <button type="button" class="tutor-btn tutor-btn--secondary tutor-mic" id="tutorMic" aria-pressed="false">${escapeHtml(tr("micStart"))}</button>

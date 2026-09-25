@@ -45,7 +45,8 @@ try {
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.');
 
   assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card').count(), 6);
-  assert.equal(await page.locator('#homeV8Shell #zoneGrid a[href="/preschool"]').count(), 1, 'Preschool 4–6 card missing');
+  assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').count(), 1, 'Preschool 4–6 card missing');
+  assert.match(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').innerText(), /4\s*(έως|to)\s*6|4-6/i, 'Preschool card must show ages 4–6');
   assert.equal(await page.locator('#homeV8Shell #specialSchoolZoneCard').count(), 1);
   assert.equal(await page.locator('#specialSchoolZoneCard').getAttribute('href'), '/special-education.html');
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-map').count(), 1);

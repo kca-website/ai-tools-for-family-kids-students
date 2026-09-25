@@ -159,9 +159,7 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
       signal: controller.signal,
     });
     const data = await response.json().catch(() => ({}));
-    const text = typeof data?.result?.response === 'string'
-      ? data.result.response
-      : (typeof data?.response === 'string' ? data.response : '');
+    const text = extractCloudflareText(data);
     const hasText = text.trim().length > 0;
     const providerOk = response.ok && data?.success !== false;
     const ok = providerOk && hasText;
@@ -181,6 +179,38 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
   } finally {
     clearTimeout(timeout);
   }
+}
+
+function extractCloudflareText(data) {
+  const directCandidates = [
+    data?.result?.response,
+    data?.response,
+    data?.result?.output_text,
+    data?.output_text,
+    data?.result?.choices?.[0]?.message?.content,
+    data?.choices?.[0]?.message?.content,
+  ];
+
+  for (const value of directCandidates) {
+    if (typeof value === 'string' && value.trim()) return value;
+    // Workers AI JSON Mode may return the validated payload as an object.
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      try { return JSON.stringify(value); } catch {}
+    }
+  }
+
+  const outputs = Array.isArray(data?.result?.output)
+    ? data.result.output
+    : (Array.isArray(data?.output) ? data.output : []);
+  for (const item of outputs) {
+    const content = Array.isArray(item?.content) ? item.content : [];
+    for (const part of content) {
+      const value = part?.text ?? part?.output_text;
+      if (typeof value === 'string' && value.trim()) return value;
+    }
+  }
+
+  return '';
 }
 
 async function postOpenAiCompatible({ url, token, body, provider, model, timeoutMs }) {

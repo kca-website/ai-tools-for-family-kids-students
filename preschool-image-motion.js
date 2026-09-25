@@ -1,21 +1,40 @@
 /* The image and the model stay on the visitor's device. U2NetP weights: Apache-2.0,
-   https://huggingface.co/edgetools/u2netp (U²-Net, Qin et al., 2020). */
+   https://huggingface.co/edgetools/u2netp (U²-Net, Qin et al., 2020).
+   Heavy segmentation runs in a Web Worker so mobile UI stays responsive. */
 (() => {
-  const MODEL = '/assets/preschool-motion/u2netp.onnx';
-  const RUNTIME = '/assets/preschool-motion/ort.wasm.min.mjs';
-  let sessionPromise;
+  const WORKER = '/preschool-motion-worker.js';
+  let worker;
+  let nextId = 0;
+  const pending = new Map();
 
-  async function session() {
-    if (!sessionPromise) sessionPromise = (async () => {
-      const ort = await import(RUNTIME);
-      ort.env.wasm.numThreads = 1;
-      ort.env.wasm.wasmPaths = '/assets/preschool-motion/';
-      const response = await fetch(MODEL);
-      if (!response.ok) throw new Error('Δεν μπόρεσε να φορτωθεί η κίνηση. Δοκίμασε ξανά αργότερα.');
-      const bytes = await response.arrayBuffer();
-      return {ort, model: await ort.InferenceSession.create(bytes, {executionProviders:['wasm']})};
-    })().catch(error => { sessionPromise = null; throw error; });
-    return sessionPromise;
+  function getWorker() {
+    if (worker) return worker;
+    worker = new Worker(WORKER, { type: 'module' });
+    worker.onmessage = event => {
+      const { id, alphaBuffer, error } = event.data || {};
+      const request = pending.get(id);
+      if (!request) return;
+      pending.delete(id);
+      if (error) request.reject(new Error(error));
+      else request.resolve(new Uint8ClampedArray(alphaBuffer));
+    };
+    worker.onerror = () => {
+      const error = new Error('Δεν μπόρεσε να ξεκινήσει η κίνηση σε αυτή τη συσκευή. Δοκίμασε ξανά.');
+      for (const request of pending.values()) request.reject(error);
+      pending.clear();
+      worker.terminate();
+      worker = null;
+    };
+    return worker;
+  }
+
+  function segment(pixels) {
+    return new Promise((resolve, reject) => {
+      const id = ++nextId;
+      pending.set(id, { resolve, reject });
+      const copy = new Uint8ClampedArray(pixels);
+      getWorker().postMessage({ id, pixelsBuffer: copy.buffer }, [copy.buffer]);
+    });
   }
 
   function canvas(width, height) {
@@ -29,43 +48,48 @@
     const image = new Image();
     image.src = source;
     await image.decode();
-    const width = image.naturalWidth, height = image.naturalHeight;
+
+    const naturalWidth = image.naturalWidth;
+    const naturalHeight = image.naturalHeight;
+    const maxSide = matchMedia('(max-width: 700px)').matches ? 640 : 900;
+    const scale = Math.min(1, maxSide / Math.max(naturalWidth, naturalHeight));
+    const width = Math.max(1, Math.round(naturalWidth * scale));
+    const height = Math.max(1, Math.round(naturalHeight * scale));
+
     const small = canvas(320, 320);
-    const smallContext = small.getContext('2d', {willReadFrequently:true});
+    const smallContext = small.getContext('2d', { willReadFrequently: true });
     smallContext.drawImage(image, 0, 0, 320, 320);
     const pixels = smallContext.getImageData(0, 0, 320, 320).data;
-    const input = new Float32Array(3 * 320 * 320);
-    const mean = [.485,.456,.406], std = [.229,.224,.225];
-    for (let i = 0; i < 320 * 320; i++) {
-      for (let channel = 0; channel < 3; channel++)
-        input[channel * 320 * 320 + i] = (pixels[4 * i + channel] / 255 - mean[channel]) / std[channel];
-    }
-    const {ort, model} = await session();
-    const result = await model.run({[model.inputNames[0]]:new ort.Tensor('float32',input,[1,3,320,320])});
-    const values = result[model.outputNames[0]].data;
-    let low = Infinity, high = -Infinity;
-    for (const value of values) { if (value < low) low = value; if (value > high) high = value; }
-    const alpha = smallContext.createImageData(320,320);
-    let coverage = 0;
-    for (let i = 0; i < values.length; i++) {
-      const strength = Math.max(0,Math.min(1,(values[i]-low)/(high-low || 1)));
-      const opacity = Math.round(255 * Math.max(0,Math.min(1,(strength-.18)/.65)));
-      alpha.data[4*i+3] = opacity;
-      if (opacity > 120) coverage++;
-    }
-    // Do not present a mangled cutout as a successful animation.
-    if (coverage < 320*320*.035 || coverage > 320*320*.78)
-      throw new Error('Δεν μπόρεσα να ξεχωρίσω τον ήρωα αυτής της εικόνας. Δοκίμασε άλλη AI εικόνα.');
-    smallContext.putImageData(alpha,0,0);
-    const mask = canvas(width,height);
-    mask.getContext('2d').drawImage(small,0,0,width,height);
-    const foreground = canvas(width,height);
-    const foregroundContext = foreground.getContext('2d');
-    foregroundContext.drawImage(image,0,0);
-    foregroundContext.globalCompositeOperation = 'destination-in';
-    foregroundContext.drawImage(mask,0,0);
 
-    return {foreground:foreground.toDataURL('image/png'), width,height};
+    // Yield once before handing off the expensive work. This lets the loading
+    // message/button state paint immediately on slower phones.
+    await new Promise(resolve => requestAnimationFrame(() => resolve()));
+
+    const alphaValues = await segment(pixels);
+    const alpha = smallContext.createImageData(320, 320);
+    for (let i = 0; i < alphaValues.length; i++) {
+      alpha.data[4 * i + 3] = alphaValues[i];
+    }
+    smallContext.putImageData(alpha, 0, 0);
+
+    const mask = canvas(width, height);
+    mask.getContext('2d').drawImage(small, 0, 0, width, height);
+
+    const foreground = canvas(width, height);
+    const foregroundContext = foreground.getContext('2d');
+    foregroundContext.drawImage(image, 0, 0, width, height);
+    foregroundContext.globalCompositeOperation = 'destination-in';
+    foregroundContext.drawImage(mask, 0, 0);
+
+    const foregroundData = foreground.toDataURL('image/png');
+
+    // Explicitly release the large canvas backing stores after export.
+    small.width = small.height = 1;
+    mask.width = mask.height = 1;
+    foreground.width = foreground.height = 1;
+
+    return { foreground: foregroundData, width, height };
   }
-  window.PreschoolImageMotion = {cutout};
+
+  window.PreschoolImageMotion = { cutout };
 })();

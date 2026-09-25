@@ -868,6 +868,40 @@
   courseSelect.addEventListener("change", populateTasks);
   search.addEventListener("input", handleSearch);
 
+  function applyInitialDeepLink(){
+    let params;
+    try { params = new URLSearchParams(location.search); } catch (_error) { return; }
+    const departmentId = params.get("department");
+    const courseIndex = params.get("course");
+    if (!departmentId || !HE.departments[departmentId]) return;
+    const institutionId = HE.departments[departmentId].institutionId;
+    if (institutionId && HE.institutions[institutionId]) institutionSelect.value = institutionId;
+    populateDepartments();
+    departmentSelect.value = departmentId;
+    populateYears();
+
+    const course = HE.departments[departmentId]?.courses?.[Number(courseIndex)];
+    if (!course || courseIndex === null) return;
+    const year = courseYear(course);
+    if (!yearField.hidden && year) {
+      yearSelect.value = String(year);
+      populateSemesters();
+    }
+    if (!semesterField.hidden && course.semester) {
+      semesterSelect.value = String(course.semester);
+      populateCourses();
+    }
+    courseSelect.value = String(Number(courseIndex));
+    if (courseSelect.value !== String(Number(courseIndex))) {
+      populateCourses();
+      courseSelect.value = String(Number(courseIndex));
+    }
+    populateTasks();
+    renderCoverage();
+    renderSyllabus();
+  }
+
   updateAiInputState();
   populateInstitutions();
+  applyInitialDeepLink();
 })();

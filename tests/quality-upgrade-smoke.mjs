@@ -14,6 +14,10 @@ const teacher=read("teacher-assistant.html");
 const expansion=read("general-subject-expansion-2026-2027.js");
 const tutorApi=read("api/tutor-assistant.js");
 const teacherApi=read("api/teacher-assistant.js");
+const homeSearch=read("home-search.js");
+const feedback=read("tutor-feedback.js");
+const signPage=read("sign-language-page.js");
+const higherPilot=read("higher-education-pilot.js");
 
 assert.match(index,/παιδιά και μαθητές 4–18/);
 assert.doesNotMatch(index,/μαθητές 6–18/);
@@ -51,6 +55,15 @@ assert.match(teacher,/tutorDeepLink/);
 assert.match(teacher,/QR για την τάξη/);
 assert.match(teacher,/qrcode@1\.5\.4/);
 assert.match(teacher,/ΦΕΚ 3567\/Β\/04-08-2021/);
+assert.match(homeSearch,/Ψάξε σε όλο το AITOOLS4KIDS/);
+assert.match(homeSearch,/GAP_TAGS/);
+assert.match(homeSearch,/AITOOLSKIDS_TUTOR_CATALOG/);
+assert.match(homeSearch,/sign-language\.html\?q=/);
+assert.match(homeSearch,/higher-education-data\.js/);
+assert.match(feedback,/Ευχαριστούμε\. Δεν στάλθηκε κείμενο συνομιλίας\./);
+assert.doesNotMatch(feedback,/Ευχαριστούμε — δεν στάλθηκε/);
+assert.match(signPage,/URLSearchParams\(location\.search\)\.get\("q"\)/);
+assert.match(higherPilot,/function applyInitialDeepLink/);
 
 for (const [name,html] of [["teacher-assistant.html",teacher],["index.html",index]]) {
   const re=/<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi;

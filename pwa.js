@@ -40,6 +40,7 @@
     // datasets/extensions before it gets the compact mobile title and quick actions.
     {id:"pwa-core",src:"/pwa-core.js"},
     {id:"navigator-home",src:"/navigator-home.js"},
+    {id:"home-search",src:"/home-search.js"},
 
     // Data-only compatibility patches used by the normal school experience.
     {id:"tool-audit",src:"/september-2026-tool-audit.js"},
@@ -102,6 +103,7 @@
       // standalone tutor routes, where it has no UI to enhance.
       if(id==="primary-simple-quiz" && !needsShortQuizRuntime()) return;
       if(id==="navigator-home" && !isHomepage()) return;
+      if(id==="home-search" && !isHomepage()) return;
       if(id==="special-education-entry-analytics" && !isHomepage()) return;
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
       const script=document.createElement("script");

@@ -15,7 +15,7 @@
       row.querySelectorAll("[data-rate]").forEach(btn=>btn.addEventListener("click",()=>{
         track(btn.dataset.rate);
         row.querySelectorAll("[data-rate]").forEach(b=>b.disabled=true);
-        row.querySelector("[data-status]").textContent=en?" Thanks — no conversation text was sent.":" Ευχαριστούμε — δεν στάλθηκε κείμενο συνομιλίας.";
+        row.querySelector("[data-status]").textContent=en?" Thanks. No conversation text was sent.":" Ευχαριστούμε. Δεν στάλθηκε κείμενο συνομιλίας.";
       }));
       row.querySelector("[data-report]").addEventListener("click",(e)=>{
         e.preventDefault();

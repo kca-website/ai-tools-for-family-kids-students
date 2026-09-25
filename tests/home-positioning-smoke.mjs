@@ -62,6 +62,20 @@ try {
   assert.ok(await page.locator('#homeV8Needs a[href="/high/student/tutor?mode=challenge"]').count(), 'AI challenge route missing from unified block');
   assert.equal(await page.locator('#homeAiLearningModes').evaluate((el) => el.classList.contains('home-v8-legacy')), true, 'legacy standalone AI-learning block must be hidden');
   assert.ok(await page.locator('#heroGslBadge').count());
+
+  await page.waitForSelector('#homeGlobalSearchInput', { state: 'visible', timeout: 10000 });
+  const globalSearch = page.locator('#homeGlobalSearchInput');
+  await globalSearch.fill('κλάσματα');
+  await page.waitForSelector('#homeGlobalSearchResults .home-global-search__item', { timeout: 10000 });
+  assert.match(await page.locator('#homeGlobalSearchResults').innerText(), /κλάσμα/i, 'global search should find curriculum/learning results');
+  await globalSearch.fill('ηφαίστειο');
+  await page.waitForFunction(() => [...document.querySelectorAll('#homeGlobalSearchResults a')].some(a => /sign-language\.html\?q=/.test(a.getAttribute('href') || '')));
+  assert.ok(await page.locator('#homeGlobalSearchResults a[href*="/sign-language.html?q="]').count(), 'global search should deep-link GSL concepts');
+  await globalSearch.fill('Πανεπιστήμιο Πατρών');
+  await page.waitForFunction(() => [...document.querySelectorAll('#homeGlobalSearchResults a')].some(a => /higher-education-pilot\.html/.test(a.getAttribute('href') || '')), null, { timeout: 10000 });
+  assert.match(await page.locator('#homeGlobalSearchResults').innerText(), /Πανεπιστήμιο Πατρών/i, 'global search should lazy-load university results');
+  await globalSearch.fill('');
+
   assert.equal(await page.evaluate(() => window.AITOOLSKIDS_SITE_META?.signLanguageConceptCount), 167, 'canonical GSL concept count must be 167');
   assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'Greek homepage GSL block must show 167 concepts');
   assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'Greek homepage GSL block must not show stale 153 count');

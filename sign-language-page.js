@@ -135,6 +135,10 @@
   document.getElementById("btnEl").addEventListener("click", () => setLang("el"));
   document.getElementById("btnEn").addEventListener("click", () => setLang("en"));
 
+  try {
+    const initialSearch = new URLSearchParams(location.search).get("q");
+    if (initialSearch) search.value = initialSearch.slice(0, 120);
+  } catch (_error) {}
   renderCards();
   try { if (localStorage.getItem("aitools4kids_lang") === "en") setLang("en"); } catch (_error) {}
 })();

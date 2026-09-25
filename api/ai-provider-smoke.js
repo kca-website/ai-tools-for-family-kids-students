@@ -20,7 +20,7 @@ module.exports = async function handler(req, res) {
       { role: 'system', content: 'Return only the exact word OK.' },
       { role: 'user', content: 'Health check.' }
     ],
-    maxTokens: 8,
+    maxTokens: 256,
     temperature: 0,
     reasoningEffort: 'low',
     timeoutMs: 12000,

@@ -204,6 +204,7 @@
 
     slProfile.innerHTML=`
       <div class="sp-choice-block"><h3>2. Διάλεξε τάξη</h3>${gradeTabs(grades,selectedSpecialLyceumGrade,"data-sl-grade")}</div>
+      <div class="sp-small-note"><span class="sp-ready-pill">Επίσημη δομή</span> Η τάξη και η σχολική δομή είναι επαληθευμένες. Η ένδειξη αυτή είναι ανεξάρτητη από το πόσο αναλυτικά έχει χαρτογραφηθεί η ύλη κάθε μαθήματος.</div>
       ${mappedBlock}
       <p class="sp-small-note"><strong>Σημείωση:</strong> «Ακριβής ύλη 2026–27» σημαίνει section-level μεταφορά της επίσημης οδηγίας. «Επίσημο πλαίσιο 2026–27» σημαίνει ότι η οδηγία δίνει δεξιότητες/μεθοδολογία και όχι κλειστή λίστα κεφαλαίων.</p>`;
   }

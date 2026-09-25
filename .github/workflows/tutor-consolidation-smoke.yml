@@ -39,6 +39,9 @@ jobs:
       - name: Run Higher Education AI endpoint smoke
         run: node tests/higher-education-ai-endpoint-smoke.mjs
 
+      - name: Run AI provider router smoke
+        run: node tests/ai-provider-router-smoke.mjs
+
       - name: Install Playwright and axe-core
         run: |
           npm install --no-save playwright@1.55.0 axe-core@4.10.3

@@ -1,0 +1,196 @@
+// Server-side AI provider router for aitools4kids.gr.
+// Primary: Cloudflare Workers AI. Fallback: Groq.
+// No prompts or responses are logged here.
+const DEFAULT_TIMEOUT_MS = 18000;
+const CLOUDFLARE_MODELS = new Set(['@cf/openai/gpt-oss-120b', '@cf/openai/gpt-oss-20b']);
+const GROQ_MODELS = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
+
+function getAiStatus() {
+  const providers = getProviderOrder().map((name) => ({ name, model: modelFor(name) }));
+  return {
+    configured: providers.length > 0,
+    provider: providers[0]?.name || null,
+    model: providers[0]?.model || null,
+    providers,
+  };
+}
+
+function getProviderOrder() {
+  const requested = String(process.env.AI_PROVIDER_ORDER || 'cloudflare,groq')
+    .split(',')
+    .map((value) => value.trim().toLowerCase())
+    .filter(Boolean);
+  const unique = [...new Set(requested.filter((name) => name === 'cloudflare' || name === 'groq'))];
+  return unique.filter(isConfigured);
+}
+
+function isConfigured(name) {
+  if (name === 'cloudflare') {
+    return !!(process.env.CLOUDFLARE_LLM_ACCOUNT_ID && process.env.CLOUDFLARE_LLM_AI_TOKEN);
+  }
+  if (name === 'groq') return !!process.env.GROQ_API_KEY;
+  return false;
+}
+
+function modelFor(name) {
+  if (name === 'cloudflare') {
+    const configured = String(process.env.CLOUDFLARE_PRODUCTION_MODEL || '@cf/openai/gpt-oss-120b');
+    return CLOUDFLARE_MODELS.has(configured) ? configured : '@cf/openai/gpt-oss-120b';
+  }
+  const configured = String(process.env.GROQ_PRODUCTION_MODEL || 'openai/gpt-oss-120b');
+  return GROQ_MODELS.has(configured) ? configured : 'openai/gpt-oss-120b';
+}
+
+async function generateChat({
+  messages,
+  maxTokens = 700,
+  temperature = 0.1,
+  responseFormat,
+  reasoningEffort = 'low',
+  timeoutMs = DEFAULT_TIMEOUT_MS,
+} = {}) {
+  const order = getProviderOrder();
+  if (!order.length) {
+    return {
+      ok: false,
+      status: 503,
+      error: 'ai_not_configured',
+      message: 'No server-side AI provider is configured.',
+      retryable: false,
+      attempts: [],
+    };
+  }
+
+  const attempts = [];
+  let lastResult = null;
+
+  for (const provider of order) {
+    let result;
+    try {
+      result = provider === 'cloudflare'
+        ? await callCloudflare({ messages, maxTokens, temperature, responseFormat, timeoutMs })
+        : await callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs });
+    } catch (error) {
+      const timedOut = error?.name === 'AbortError';
+      result = {
+        ok: false,
+        status: timedOut ? 504 : 502,
+        error: timedOut ? 'timeout' : 'provider_error',
+        message: timedOut ? 'Provider request timed out.' : 'Provider request failed.',
+        retryable: true,
+        provider,
+        model: modelFor(provider),
+      };
+    }
+
+    attempts.push({
+      provider,
+      model: result.model || modelFor(provider),
+      status: result.status || 0,
+      ok: !!result.ok,
+    });
+
+    if (result.ok) return { ...result, attempts };
+    lastResult = result;
+    if (!result.retryable) break;
+  }
+
+  return { ...(lastResult || {}), attempts };
+}
+
+async function callCloudflare({ messages, maxTokens, temperature, responseFormat, timeoutMs }) {
+  const accountId = process.env.CLOUDFLARE_LLM_ACCOUNT_ID;
+  const token = process.env.CLOUDFLARE_LLM_AI_TOKEN;
+  const model = modelFor('cloudflare');
+  const body = {
+    model,
+    messages,
+    temperature,
+    max_tokens: maxTokens,
+    options: { rejectIfBusy: true },
+  };
+  if (responseFormat) body.response_format = normalizeCloudflareResponseFormat(responseFormat);
+
+  return postOpenAiCompatible({
+    url: 'https://api.cloudflare.com/client/v4/accounts/' + encodeURIComponent(accountId) + '/ai/v1/chat/completions',
+    token,
+    body,
+    provider: 'cloudflare',
+    model,
+    timeoutMs,
+  });
+}
+
+async function callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs }) {
+  const model = modelFor('groq');
+  const body = {
+    model,
+    messages,
+    temperature,
+    max_completion_tokens: maxTokens,
+  };
+  if (reasoningEffort) {
+    body.reasoning_effort = reasoningEffort;
+    body.include_reasoning = false;
+  }
+  if (responseFormat) body.response_format = responseFormat;
+
+  return postOpenAiCompatible({
+    url: 'https://api.groq.com/openai/v1/chat/completions',
+    token: process.env.GROQ_API_KEY,
+    body,
+    provider: 'groq',
+    model,
+    timeoutMs,
+  });
+}
+
+function normalizeCloudflareResponseFormat(format) {
+  if (format?.type === 'json_schema' && format?.json_schema?.schema) {
+    return { type: 'json_schema', json_schema: format.json_schema.schema };
+  }
+  return format;
+}
+
+async function postOpenAiCompatible({ url, token, body, provider, model, timeoutMs }) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+    const data = await response.json().catch(() => ({}));
+    return {
+      ok: response.ok,
+      status: response.status,
+      error: response.status === 429 ? 'provider_limit' : (response.ok ? null : 'provider_error'),
+      retryable: isRetryableStatus(response.status),
+      message: providerMessage(data),
+      text: data?.choices?.[0]?.message?.content || '',
+      provider,
+      model,
+    };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function isRetryableStatus(status) {
+  return status === 401 || status === 403 || status === 408 || status === 409 ||
+    status === 429 || status >= 500;
+}
+
+function providerMessage(data) {
+  return data?.error?.message ||
+    data?.errors?.[0]?.message ||
+    data?.message ||
+    '';
+}
+
+module.exports = { generateChat, getAiStatus };

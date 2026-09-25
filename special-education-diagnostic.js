@@ -79,8 +79,10 @@
     if(existing){
       const title=existing.querySelector(".quiz-grade-card__label");
       const sub=existing.querySelector(".spdiag-entry__sub");
-      if(title) title.textContent=t("Ειδική Εκπαίδευση","Special Education");
-      if(sub) sub.textContent=t("Διαθέσιμα σύντομα τεστ · 3 απλές ερωτήσεις · χωρίς βαθμό ή διάγνωση","Available short tests · 3 simple questions · no grade or diagnosis");
+      const titleText=t("Ειδική Εκπαίδευση","Special Education");
+      const subText=t("Διαθέσιμα σύντομα τεστ · 3 απλές ερωτήσεις · χωρίς βαθμό ή διάγνωση","Available short tests · 3 simple questions · no grade or diagnosis");
+      if(title&&title.textContent!==titleText) title.textContent=titleText;
+      if(sub&&sub.textContent!==subText) sub.textContent=subText;
       return;
     }
     const grid=content.querySelector(".quiz-grade-grid");

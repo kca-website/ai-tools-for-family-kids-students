@@ -38,6 +38,18 @@ try{
   assert.ok(await page.locator('#curriculumNote a[href^="https://"]').count()>=1,'Teacher Assistant mapped curriculum must expose a source link');
 
   assert.equal(await page.locator('#groqBtn').count(),1,'Teacher Assistant must expose the account-free Groq generation route');
+  assert.equal(await page.locator('.task[data-task="assessment"]').count(),1,'Teacher Assistant must expose the dedicated assessment-sheet task');
+  await page.locator('.task[data-task="assessment"]').click();
+  assert.equal(await page.locator('#assessmentOptions').isVisible(),true,'Assessment controls must appear when assessment task is selected');
+  await page.selectOption('#assessmentKind','diagnostic');
+  await page.selectOption('#assessmentDifficulty','mixed');
+  await page.selectOption('#assessmentCount','8');
+  await page.selectOption('#assessmentScale','20');
+  const assessmentPrompt=await page.evaluate(()=>promptText());
+  assert.match(assessmentPrompt,/Διαγνωστική αξιολόγηση/,'Assessment prompt must include selected assessment kind');
+  assert.match(assessmentPrompt,/8 ερωτήσεις/,'Assessment prompt must include selected question count');
+  assert.match(assessmentPrompt,/Φύλλο μαθητή/,'Assessment prompt must require a separate student sheet');
+  assert.match(assessmentPrompt,/κλειδί απαντήσεων/,'Assessment prompt must require teacher answer key');
   assert.equal(await page.locator('#puterBtn').count(),1,'Teacher Assistant must expose Puter only as an explicit alternative');
   assert.equal(await page.locator('#teacherToolsDetails').count(),1,'Teacher Assistant must expose a collapsible specialised-tools section');
   assert.equal(await page.locator('#teacherToolsDetails').getAttribute('open'),null,'Specialised-tools section should be collapsed by default');

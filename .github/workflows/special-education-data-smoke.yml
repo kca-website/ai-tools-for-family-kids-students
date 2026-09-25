@@ -75,8 +75,6 @@ jobs:
         run: node tests/teacher-eneegyl-informatics-smoke.mjs
       - name: Run ENEEGYL official sectors smoke
         run: node tests/teacher-eneegyl-official-sectors-smoke.mjs
-      - name: Audit teacher curriculum coverage across every school context
-        run: node tests/teacher-curriculum-coverage-audit.mjs
       - name: Run Special Education page desktop/mobile smoke
         run: node tests/special-education-page-smoke.mjs
       - name: Run Special Education coverage boundary smoke
@@ -89,6 +87,8 @@ jobs:
         run: node tests/special-education-tutor-actions-smoke.mjs
       - name: Run Special Education AI deep-link smoke
         run: node tests/special-education-deeplink-smoke.mjs
+      - name: Audit teacher curriculum coverage across every school context
+        run: node tests/teacher-curriculum-coverage-audit.mjs
       - name: Show local server log on failure
         if: failure()
         run: cat /tmp/aitools4kids-special-http.log || true

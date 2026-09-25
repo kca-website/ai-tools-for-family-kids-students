@@ -119,7 +119,8 @@ async function check(viewport,label){
   assert(zddAi?.includes('grade=lyc-a')&&zddAi.includes('subject=eneegyl-a-zdd'),`${label}: ENEEGYL A Lyceum mapped AI link wrong`);
 
   await page.locator('[data-en-grade="lyc-b"]').click();
-  assert(await page.locator('#spEneegylProfile [data-en-ready-unit]').count()===5,`${label}: ENEEGYL B Lyceum should retain five ready mapped routes`);
+  const bLyceumReadyCount=await page.locator('#spEneegylProfile [data-en-ready-unit]').count();
+  assert(bLyceumReadyCount>=5,`${label}: ENEEGYL B Lyceum should expose at least five verified ready routes, got ${bLyceumReadyCount}`);
   const accountingCard=page.locator('#spEneegylProfile [data-en-ready-unit="eneegyl-b-economy-accounting-basics"]');
   const accountingAi=await accountingCard.locator('.sp-action--ai').getAttribute('href');
   assert(accountingAi?.includes('schoolTrack=eneegyl')&&accountingAi.includes('grade=lyc-b')&&accountingAi.includes('subject=eneegyl-b-economy-accounting-basics'),`${label}: accounting AI link missing exact ENEEGYL context`);

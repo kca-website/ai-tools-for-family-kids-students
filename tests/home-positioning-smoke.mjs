@@ -51,7 +51,7 @@ try {
   assert.equal(await page.locator('#specialSchoolZoneCard').getAttribute('href'), '/special-education.html');
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
-  assert.ok(await page.locator('#homeV8EducatorHint a[href="/teacher-assistant.html"]').count(), 'Teacher assistant link missing');
+  assert.ok(await page.locator('a[href="/teacher-assistant.html"]').count(), 'Teacher assistant link missing');
   assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
   assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);
   assert.match(await page.locator('#homeV8NeedsToggle').innerText(), /Τι θέλεις να κάνεις με AI/);

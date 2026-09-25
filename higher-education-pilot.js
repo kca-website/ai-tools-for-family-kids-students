@@ -558,6 +558,15 @@
     const sourceLocked = SOURCE_LOCKED_ACTIONS.has(aiAction);
 
     const hasUserMaterial = !!extra || !!documentText;
+    const requiresVerifiedOrMaterial = ["quiz","flashcards","study-plan"].includes(aiAction);
+
+    if (requiresVerifiedOrMaterial && !verified && !hasUserMaterial) {
+      return {
+        ok: false,
+        focusInput: true,
+        message: "Για αυτή την ενέργεια δεν έχουμε ακόμη επαληθευμένες θεματικές. Πρόσθεσε σημειώσεις, απόσπασμα ή δικό σου υλικό για να συνεχίσεις."
+      };
+    }
 
     if (actionNeedsOwnMaterial() && !hasUserMaterial) {
       return {
@@ -579,6 +588,7 @@
     const sources = (department?.sources || []).join("\n");
     const verified = courseHasVerifiedTopics(course);
     const sourceLocked = SOURCE_LOCKED_ACTIONS.has(aiAction);
+    const hasUserMaterial = !!extra || !!documentText;
     const topicList = verified ? course.topics : [];
 
     const system = [
@@ -591,9 +601,11 @@
       sourceLocked && verified
         ? "SOURCE LOCK: Για course-specific υλικό χρησιμοποίησε μόνο τις verified θεματικές που δίνονται παρακάτω και το πρόσθετο υλικό του φοιτητή. Κάθε ερώτηση quiz πρέπει να αντιστοιχεί άμεσα σε μία από αυτές τις θεματικές. Μην εισάγεις νέα υποενότητα επειδή είναι γενικά σχετική με το μάθημα."
         : "",
-      sourceLocked && !verified
-        ? "Δεν υπάρχει verified αναλυτικό syllabus για αυτό το μάθημα. Επιτρέπεται να χρησιμοποιήσεις καθιερωμένη γενική ακαδημαϊκή γνώση που είναι άμεσα σχετική με τον τίτλο του μαθήματος, αλλά πρέπει να τη χαρακτηρίζεις ως γενική υποστήριξη και όχι ως επίσημη ή εξεταστέα ύλη. Αν ο φοιτητής δώσει δικό του υλικό, αυτό έχει προτεραιότητα."
-        : "",
+      sourceLocked && !verified && hasUserMaterial
+        ? "Δεν υπάρχει verified αναλυτικό syllabus για αυτό το μάθημα. Χρησιμοποίησε μόνο το υλικό που έδωσε ο φοιτητής ως βάση για τη συγκεκριμένη ενέργεια. Μην προσθέσεις θεματικές από γενική γνώση και μην τις παρουσιάσεις ως επίσημη ή εξεταστέα ύλη."
+        : sourceLocked && !verified
+          ? "Δεν υπάρχει verified αναλυτικό syllabus για αυτό το μάθημα. Για γενική εξήγηση μπορείς να χρησιμοποιήσεις καθιερωμένη ακαδημαϊκή γνώση σχετική με τον τίτλο, αλλά πρέπει να τη χαρακτηρίζεις ως γενική υποστήριξη και όχι ως επίσημη ή εξεταστέα ύλη."
+          : "",
       sourceLocked && !extra && !documentText
         ? (verified
             ? "Ο φοιτητής δεν έδωσε στενότερο θέμα. ΜΗΝ ζητήσεις διευκρίνιση και ΜΗΝ περιμένεις δεύτερο μήνυμα. Εκτέλεσε αμέσως την επιλεγμένη ενέργεια χρησιμοποιώντας μία αντιπροσωπευτική/θεμελιώδη verified θεματική· για πλάνο μελέτης, κάλυψε ισορροπημένα τις verified θεματικές."
@@ -615,7 +627,11 @@
       `Μάθημα: ${course?.code ? course.code + " · " : ""}${course?.titleEl || ""}`,
       `Syllabus status: ${verified ? "verified-official-outline" : "course-only-current-program"}`,
       verified && course?.syllabusSourceAcademicYear ? `Έτος επίσημου αναλυτικού περιγράμματος: ${course.syllabusSourceAcademicYear}` : "",
-      verified ? `Verified θεματικές:\n- ${topicList.join("\n- ")}` : "Δεν υπάρχει verified αναλυτικό περίγραμμα για το μάθημα. Δώσε γενική ακαδημαϊκή υποστήριξη σχετική με τον τίτλο του μαθήματος, χωρίς να την παρουσιάσεις ως επίσημη ή εξεταστέα ύλη.",
+      verified
+        ? `Verified θεματικές:\n- ${topicList.join("\n- ")}`
+        : (sourceLocked && hasUserMaterial
+          ? "Δεν υπάρχει verified αναλυτικό περίγραμμα για το μάθημα. Για αυτή την ενέργεια χρησιμοποίησε μόνο το υλικό που παρέχει ο φοιτητής."
+          : "Δεν υπάρχει verified αναλυτικό περίγραμμα για το μάθημα. Δώσε γενική ακαδημαϊκή υποστήριξη σχετική με τον τίτλο του μαθήματος, χωρίς να την παρουσιάσεις ως επίσημη ή εξεταστέα ύλη."),
       `Στόχος που επέλεξε: ${task?.labelEl || ""}`,
       `Ενέργεια: ${action.label}`,
       `Coverage status: ${department?.coverageStatus || ""}`,

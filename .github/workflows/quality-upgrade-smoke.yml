@@ -1,0 +1,30 @@
+name: Quality upgrade smoke
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: JavaScript syntax checks
+        run: |
+          node --check app.js
+          node --check tutor.js
+          node --check pwa.js
+          node --check tutor-learning-support.js
+          node --check tutor-feedback.js
+          node --check greek-support-data.js
+          node --check general-subject-expansion-2026-2027.js
+          node --check api/tutor-assistant.js
+          node --check api/teacher-assistant.js
+      - name: Quality upgrade smoke
+        run: node tests/quality-upgrade-smoke.mjs

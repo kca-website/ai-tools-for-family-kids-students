@@ -222,20 +222,22 @@
       }
     }
     const ids=uniq([subject.id,subject.quizId,catalog?.id,catalog?.quizId,quiz?.id,...(subject.aliases||[])]);
-    matchingGapRows(ids).forEach(([gapId,a])=>{
-      const gap=typeof GAP_TAGS!=="undefined"?GAP_TAGS[gapId]:null;
-      const exact=a?.status==="exact-section-verified" || a?.status==="related-section-verified";
-      rows.push({
-        id:gapId,
-        labelEl:(exact?a?.officialSectionEl:null)||a?.topicAnchorEl||gap?.labelEl||gapId,
-        labelEn:(exact?a?.officialSectionEn:null)||a?.topicAnchorEn||gap?.labelEn||gap?.labelEl||gapId,
-        status:a?.status||"official-course-topic-anchor",
-        sourceType:"gap-alignment",
-        sourceUrl:a?.sourceUrl||"",
-        sourceLabelEl:a?.statusLabelEl||"",
-        sourceLabelEn:a?.statusLabelEn||""
+    if(!preferCurrentCatalogTopics){
+      matchingGapRows(ids).forEach(([gapId,a])=>{
+        const gap=typeof GAP_TAGS!=="undefined"?GAP_TAGS[gapId]:null;
+        const exact=a?.status==="exact-section-verified" || a?.status==="related-section-verified";
+        rows.push({
+          id:gapId,
+          labelEl:(exact?a?.officialSectionEl:null)||a?.topicAnchorEl||gap?.labelEl||gapId,
+          labelEn:(exact?a?.officialSectionEn:null)||a?.topicAnchorEn||gap?.labelEn||gap?.labelEl||gapId,
+          status:a?.status||"official-course-topic-anchor",
+          sourceType:"gap-alignment",
+          sourceUrl:a?.sourceUrl||"",
+          sourceLabelEl:a?.statusLabelEl||"",
+          sourceLabelEn:a?.statusLabelEn||""
+        });
       });
-    });
+    }
     return mergeTopics(rows);
   }
 

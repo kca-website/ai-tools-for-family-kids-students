@@ -90,7 +90,14 @@ ${roleRule}
       taskLimits[task]
     );
     if (!result?.ok) {
-      return res.status(result?.status || 502).json({ error: 'provider_error', message: result?.message || 'Η AI Βοήθεια δεν μπόρεσε να απαντήσει.' });
+      const limited = result?.status === 429;
+      return res.status(result?.status || 502).json({
+        error: limited ? 'provider_limit' : 'provider_error',
+        message: limited
+          ? 'Η δωρεάν AI Βοήθεια έφτασε προσωρινά το όριο χρήσης της.'
+          : (result?.message || 'Η AI Βοήθεια δεν μπόρεσε να απαντήσει.'),
+        fallback: limited ? 'puter' : undefined,
+      });
     }
 
     const text = sanitize(result.text);

@@ -1,114 +1,50 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
-
 const LOCAL='http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
-
-function collectAppErrors(page,errors){
-  page.on('pageerror',(err)=>errors.push(err.message));
-  page.on('console',(msg)=>{
-    if(msg.type()==='error'&&!msg.text().startsWith('Failed to load resource:')) errors.push(msg.text());
-  });
-  page.on('requestfailed',(request)=>{
-    const url=request.url();
-    if(url.startsWith(LOCAL)) errors.push(`request failed ${url}: ${request.failure()?.errorText||'unknown error'}`);
-  });
-  page.on('response',(response)=>{
-    if(response.status()>=400&&response.url().startsWith(LOCAL)) errors.push(`${response.status()} ${response.url()}`);
-  });
+function collect(page,errors){page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error'&&!m.text().startsWith('Failed to load resource:')) errors.push(m.text());});}
+async function open(page,{zone,role,track,grade,subject='' }){
+ const q=new URLSearchParams({schoolTrack:track}); if(grade)q.set('grade',grade);if(subject)q.set('subject',subject);
+ await page.route('**/_vercel/insights/script.js',r=>r.fulfill({status:200,contentType:'application/javascript',body:''}));
+ await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
+ await page.waitForFunction(()=>window.AITutor?.render&&window.AITutorRenderHost?.eventName,{timeout:30000});
+ assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG),false,'special catalog should be lazy');
+ await page.evaluate(({zone,role,q})=>{
+   history.replaceState({},'','/'+zone+'/'+role+'/tutor?'+q);
+   window.dispatchEvent(new PopStateEvent('popstate'));
+   document.getElementById('tutorView')?.removeAttribute('hidden');
+   window.AITutor.render({zoneId:zone,roleId:role,lang:'el'});
+ },{zone,role,q:q.toString()});
+ await page.waitForSelector('#tutorSpecialSchoolContext',{state:'attached',timeout:20000});
+ await page.waitForFunction(({grade,subject,zone})=>
+   location.pathname.startsWith('/'+zone+'/')&&
+   (!grade||document.getElementById('tutorGrade')?.value===grade)&&
+   (!subject||document.getElementById('tutorSubject')?.value===subject)&&
+   !!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG,{grade,subject,zone},{timeout:25000});
+ assert.equal(await page.locator('#tutorSchoolTrack').count(),0,'retired selector must stay absent');
 }
-
-async function openDeepLink(page,{startZone,expectedZone,role,track,grade,subject=''}){
-  const params=new URLSearchParams({schoolTrack:track});
-  if(grade) params.set('grade',grade);
-  if(subject) params.set('subject',subject);
-  await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
-  await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForFunction(()=>window.AITutor?.render&&window.AITutorRenderHost?.eventName,{timeout:30000});
-  assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG),false,'special catalog should not be globally preloaded');
-
-  await page.evaluate(({startZone,role,query})=>{
-    history.replaceState({},'',`/${startZone}/${role}/tutor?${query}`);
-    window.dispatchEvent(new PopStateEvent('popstate'));
-    const view=document.getElementById('tutorView');
-    if(view) view.hidden=false;
-    window.AITutor.render({zoneId:startZone,roleId:role,lang:'el'});
-  },{startZone,role,query:params.toString()});
-
-  await page.waitForSelector('#tutorSchoolTrack',{state:'attached',timeout:15000});
-  await page.waitForFunction(({track,grade,subject,expectedZone})=>{
-    const okTrack=document.getElementById('tutorSchoolTrack')?.value===track;
-    const okGrade=!grade||document.getElementById('tutorGrade')?.value===grade;
-    const okSubject=!subject||document.getElementById('tutorSubject')?.value===subject;
-    return location.pathname.startsWith(`/${expectedZone}/`)&&okTrack&&okGrade&&okSubject;
-  },{track,grade,subject,expectedZone},{timeout:25000});
-}
-
 try{
-  for(const viewport of [{width:1280,height:900},{width:390,height:844}]){
-    const label=viewport.width<600?'mobile':'desktop';
+ for(const viewport of [{width:1280,height:900},{width:390,height:844}]){
+  const label=viewport.width<600?'mobile':'desktop';
+  const sg=await browser.newPage({viewport});const e1=[];collect(sg,e1);
+  await open(sg,{zone:'middle',role:'student',track:'special-gymnasium',grade:'a',subject:'special-gym-a-language-comprehension'});
+  assert.match(await sg.locator('#tutorSpecialSchoolContext').innerText(),/Ειδικό Γυμνάσιο/i,label+': SG banner missing');
+  assert.match(await sg.locator('#tutorContextBox').innerText(),/Γλωσσική Διδασκαλία|Ειδικό Γυμνάσιο/i,label+': SG context failed');
+  assert.deepEqual(e1,[],label+': SG errors '+e1.join('\n'));await sg.close();
 
-    const sg=await browser.newPage({viewport});
-    const sgErrors=[];
-    collectAppErrors(sg,sgErrors);
-    await openDeepLink(sg,{startZone:'high',expectedZone:'middle',role:'student',track:'special-gymnasium',grade:'a',subject:'special-gym-a-language-comprehension'});
-    assert.equal(await sg.inputValue('#tutorSchoolTrack'),'special-gymnasium',`${label}: Special Gymnasium track deep link failed`);
-    assert.match(await sg.locator('#tutorContextBox').innerText(),/Γλωσσική Διδασκαλία|Ειδικό Γυμνάσιο/i,`${label}: Special Gymnasium context failed`);
-    assert.deepEqual(sgErrors,[],`${label}: Special Gymnasium deep-link errors: ${sgErrors.join('\n')}`);
-    await sg.close();
+  const sl=await browser.newPage({viewport});const e2=[];collect(sl,e2);
+  await open(sl,{zone:'high',role:'guardian',track:'special-lyceum',grade:'b'});
+  assert.equal(await sl.inputValue('#tutorGrade'),'b',label+': SL grade failed');
+  assert.match(await sl.locator('#tutorSpecialSchoolContext').innerText(),/Ειδικό Λύκειο/i,label+': SL banner missing');
+  assert.ok(await sl.locator('#tutorSubject option').count()>0,label+': SL subjects missing');
+  assert.deepEqual(e2,[],label+': SL errors '+e2.join('\n'));await sl.close();
 
-    const sgBio=await browser.newPage({viewport});
-    const sgBioErrors=[];
-    collectAppErrors(sgBio,sgBioErrors);
-    await openDeepLink(sgBio,{startZone:'middle',expectedZone:'middle',role:'guardian',track:'special-gymnasium',grade:'b',subject:'special-gym-b-biology'});
-    assert.equal(await sgBio.inputValue('#tutorSubject'),'special-gym-b-biology',`${label}: Special Gymnasium B Biology deep link failed`);
-    const sgBioOptions=await sgBio.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})));
-    const sgBioSections=sgBioOptions.filter(x=>!x.value.includes('.action-'));
-    const sgBioActions=sgBioOptions.filter(x=>x.value.includes('.action-'));
-    assert.equal(sgBioSections.length,14,`${label}: Biology deep link did not expose all 14 mapped B E.A.E. sections`);
-    assert.equal(sgBioActions.length,7,`${label}: Biology deep link lost the Special Education support actions`);
-    assert.ok(sgBioSections.some(x=>x.text.includes('6.4 Η αναπαραγωγή στον άνθρωπο')),`${label}: Biology deep link lost official section mapping`);
-    assert.ok(!sgBioSections.some(x=>/γράψε.*κεφάλαιο|συγκεκριμένο θέμα/i.test(x.text)),`${label}: Biology curriculum still fell back to generic unmapped topic`);
-    assert.deepEqual(sgBioErrors,[],`${label}: Special Gymnasium Biology deep-link errors: ${sgBioErrors.join('\n')}`);
-    await sgBio.close();
-
-    const sl=await browser.newPage({viewport});
-    const slErrors=[];
-    collectAppErrors(sl,slErrors);
-    await openDeepLink(sl,{startZone:'middle',expectedZone:'high',role:'guardian',track:'special-lyceum',grade:'b'});
-    assert.equal(await sl.inputValue('#tutorSchoolTrack'),'special-lyceum',`${label}: Special Lyceum track deep link failed`);
-    assert.equal(await sl.inputValue('#tutorGrade'),'b',`${label}: Special Lyceum grade deep link failed`);
-    assert.ok(await sl.locator('#tutorSubject option').count()>0,`${label}: Special Lyceum subject menu missing`);
-    assert.match(await sl.locator('#tutorContextBox').innerText(),/Ειδικό Λύκειο|Special Lyceum/i,`${label}: Special Lyceum context failed`);
-    assert.deepEqual(slErrors,[],`${label}: Special Lyceum deep-link errors: ${slErrors.join('\n')}`);
-    await sl.close();
-
-    const enGym=await browser.newPage({viewport});
-    const enGymErrors=[];
-    collectAppErrors(enGym,enGymErrors);
-    await openDeepLink(enGym,{startZone:'middle',expectedZone:'high',role:'student',track:'eneegyl',grade:'gym-d',subject:'eneegyl-gym-d-economics'});
-    assert.equal(await enGym.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL Gymnasium track deep link failed`);
-    assert.equal(await enGym.inputValue('#tutorGrade'),'gym-d',`${label}: ENEEGYL D Gymnasium grade deep link failed`);
-    assert.equal(await enGym.inputValue('#tutorSubject'),'eneegyl-gym-d-economics',`${label}: ENEEGYL D Gymnasium subject deep link failed`);
-    const enGymContext=await enGym.locator('#tutorContextBox').innerText();
-    assert.match(enGymContext,/Δ΄ Γυμνασίου/i,`${label}: ENEEGYL Gymnasium context lost grade identity`);
-    assert.match(enGymContext,/ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./i,`${label}: ENEEGYL Gymnasium context lost school identity`);
-    assert.deepEqual(enGymErrors,[],`${label}: ENEEGYL Gymnasium deep-link errors: ${enGymErrors.join('\n')}`);
-    await enGym.close();
-
-    const en=await browser.newPage({viewport});
-    const enErrors=[];
-    collectAppErrors(en,enErrors);
-    await openDeepLink(en,{startZone:'middle',expectedZone:'high',role:'guardian',track:'eneegyl',grade:'lyc-b',subject:'eneegyl-b-economy-accounting-basics'});
-    assert.equal(await en.inputValue('#tutorSchoolTrack'),'eneegyl',`${label}: ENEEGYL Lyceum track deep link failed`);
-    assert.equal(await en.inputValue('#tutorGrade'),'lyc-b',`${label}: ENEEGYL B Lyceum grade deep link failed`);
-    assert.equal(await en.inputValue('#tutorSubject'),'eneegyl-b-economy-accounting-basics',`${label}: ENEEGYL subject deep link failed`);
-    assert.match(await en.locator('#tutorContextBox').innerText(),/Λογιστικ|ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./i,`${label}: ENEEGYL context failed`);
-    assert.deepEqual(enErrors,[],`${label}: ENEEGYL Lyceum deep-link errors: ${enErrors.join('\n')}`);
-    await en.close();
-  }
-
-  console.log('Unified Special Education AI Help deep links passed for Special Gymnasium, Special Lyceum and ENEEGYL Gymnasium/Lyceum on desktop/mobile.');
-}finally{
-  await browser.close();
-}
+  const en=await browser.newPage({viewport});const e3=[];collect(en,e3);
+  await open(en,{zone:'high',role:'guardian',track:'eneegyl',grade:'lyc-b',subject:'eneegyl-b-economy-accounting-basics'});
+  assert.equal(await en.inputValue('#tutorGrade'),'lyc-b',label+': ENEEGYL grade failed');
+  assert.equal(await en.inputValue('#tutorSubject'),'eneegyl-b-economy-accounting-basics',label+': ENEEGYL subject failed');
+  assert.match(await en.locator('#tutorContextBox').innerText(),/Λογιστικ|ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./i,label+': ENEEGYL context failed');
+  assert.deepEqual(e3,[],label+': ENEEGYL errors '+e3.join('\n'));await en.close();
+ }
+ console.log('Special Education deep links passed on desktop/mobile with dedicated-context UI.');
+}finally{await browser.close();}

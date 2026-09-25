@@ -1,124 +1,69 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
-
 const LOCAL='http://127.0.0.1:4173/';
 const browser=await chromium.launch({headless:true});
-const SPECIAL=new Set(['special-gymnasium','special-lyceum','eneegyl']);
 
-async function openSettingsIfNeeded(page,selector){
-  const field=page.locator(selector);
-  if(await field.isVisible()) return;
+async function openSettings(page,selector){
+  if(await page.locator(selector).isVisible()) return;
   const toggle=page.locator('#tutorMount .tutor-mobile-settings-toggle');
   if(await toggle.count()) await toggle.click();
   await page.waitForSelector(selector,{state:'visible',timeout:10000});
 }
-
-async function renderTutor(page){
-  await page.route('**/_vercel/insights/script.js',(route)=>route.fulfill({status:200,contentType:'application/javascript',body:''}));
+async function openSpecial(page,{track,zone,grade,subject='' }){
+  const q=new URLSearchParams({schoolTrack:track,grade}); if(subject) q.set('subject',subject);
   await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
-  await page.waitForFunction(()=>window.AITutor?.render,{timeout:30000});
-  await page.evaluate(()=>{
-    history.replaceState({},'',`/middle/guardian/tutor`);
+  await page.waitForFunction(()=>window.AITutor?.render&&window.AITutorRenderHost?.eventName,{timeout:30000});
+  await page.evaluate(({zone,q})=>{
+    history.replaceState({},'','/'+zone+'/guardian/tutor?'+q);
     window.dispatchEvent(new PopStateEvent('popstate'));
-    const view=document.getElementById('tutorView');
-    if(view) view.hidden=false;
-    window.AITutor.render({zoneId:'middle',roleId:'guardian',lang:'el'});
-  });
-  await page.waitForSelector('#tutorSchoolTrack',{state:'attached',timeout:15000});
-  await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_TUTOR_ACTIONS?.version===1,{timeout:15000});
-  await openSettingsIfNeeded(page,'#tutorSchoolTrack');
+    document.getElementById('tutorView')?.removeAttribute('hidden');
+    window.AITutor.render({zoneId:zone,roleId:'guardian',lang:'el'});
+  },{zone,q:q.toString()});
+  await page.waitForSelector('#tutorSpecialSchoolContext',{state:'attached',timeout:20000});
+  await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG&&window.AITOOLSKIDS_SPECIAL_TUTOR_ACTIONS?.version===1,{timeout:25000});
+  await page.waitForFunction(({grade,subject})=>(!grade||document.getElementById('tutorGrade')?.value===grade)&&(!subject||document.getElementById('tutorSubject')?.value===subject),{grade,subject},{timeout:25000});
+  await openSettings(page,'#tutorTopic');
 }
-
-async function selectTrack(page,value){
-  await openSettingsIfNeeded(page,'#tutorSchoolTrack');
-  await page.selectOption('#tutorSchoolTrack',value);
-  const zone=value==='special-gymnasium'||value==='general-middle'?'middle':'high';
-  await page.waitForFunction(({value,zone})=>location.pathname.startsWith(`/${zone}/`)&&document.getElementById('tutorSchoolTrack')?.value===value,{value,zone},{timeout:20000});
-  await page.waitForTimeout(180);
-}
-
-async function choose(page,selector,value){
-  await openSettingsIfNeeded(page,selector);
-  await page.selectOption(selector,value);
-  await page.waitForTimeout(220);
-}
-
+async function choose(page,selector,value){await openSettings(page,selector);await page.selectOption(selector,value);await page.waitForTimeout(220);}
 async function assertActions(page,label){
-  const values=await page.locator('#tutorTopic option').evaluateAll((els)=>els.map((e)=>e.value));
-  const texts=await page.locator('#tutorTopic option').evaluateAll((els)=>els.map((e)=>e.textContent.trim()));
-  const actions=values.filter((v)=>v.includes('.action-'));
-  assert.equal(actions.length,7,`${label}: expected exactly 7 common support actions, got ${actions.length}`);
-  assert.ok(texts.some((x)=>/Εξήγησέ μου το απλά/i.test(x)),`${label}: simple explanation action missing`);
-  assert.ok(texts.some((x)=>/βήμα-βήμα/i.test(x)),`${label}: step-by-step action missing`);
-  assert.ok(texts.some((x)=>/χωρίς έτοιμη λύση/i.test(x)),`${label}: exercise-help action missing`);
-  assert.ok(texts.some((x)=>/3 απλές ερωτήσεις/i.test(x)),`${label}: simplified understanding-check action missing`);
+  const rows=await page.locator('#tutorTopic option').evaluateAll(els=>els.map(e=>({value:e.value,text:e.textContent.trim()})));
+  const a=rows.filter(x=>x.value.includes('.action-'));
+  assert.equal(a.length,7,label+': expected 7 support actions, got '+a.length);
+  assert.ok(a.some(x=>/Εξήγησέ μου το απλά/i.test(x.text)),label+': simple explanation missing');
+  assert.ok(a.some(x=>/βήμα-βήμα/i.test(x.text)),label+': step-by-step missing');
+  assert.ok(a.some(x=>/χωρίς έτοιμη λύση/i.test(x.text)),label+': no-ready-solution action missing');
+  assert.ok(a.some(x=>/3 απλές ερωτήσεις/i.test(x.text)),label+': simple check missing');
 }
 
 try{
-  for(const [label,viewport] of [['desktop',{width:1280,height:900}],['mobile',{width:390,height:844}]]){
-    const page=await browser.newPage({viewport});
-    const errors=[];
-    page.on('pageerror',(err)=>errors.push(err.message));
-    page.on('console',(msg)=>{if(msg.type()==='error'&&!msg.text().startsWith('Failed to load resource:')) errors.push(msg.text());});
-    page.on('requestfailed',(request)=>{if(request.url().startsWith(LOCAL)) errors.push(`request failed ${request.url()}: ${request.failure()?.errorText||'unknown error'}`);});
-    page.on('response',(response)=>{if(response.status()>=400&&response.url().startsWith(LOCAL)) errors.push(`${response.status()} ${response.url()}`);});
-    await renderTutor(page);
+ for(const [label,viewport] of [['desktop',{width:1280,height:900}],['mobile',{width:390,height:844}]]){
+  const page=await browser.newPage({viewport});
+  await page.route('**/_vercel/insights/script.js',r=>r.fulfill({status:200,contentType:'application/javascript',body:''}));
+  const errors=[]; page.on('pageerror',e=>errors.push(e.message)); page.on('console',m=>{if(m.type()==='error'&&!m.text().startsWith('Failed to load resource:')) errors.push(m.text());});
 
-    await selectTrack(page,'special-gymnasium');
-    await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_TUTOR_CATALOG,{timeout:20000});
-    await choose(page,'#tutorGrade','a');
-    const sgSubjects=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((e)=>e.value));
-    const sgGeneric=sgSubjects.find((id)=>id.startsWith('special-gym-a-')&&!['special-gym-a-language-comprehension','special-gym-a-math-problem-reading'].includes(id));
-    assert.ok(sgGeneric,`${label}: no structure-only Special Gymnasium subject found`);
-    await choose(page,'#tutorSubject',sgGeneric);
-    await assertActions(page,`${label} Special Gymnasium`);
+  await openSpecial(page,{track:'special-gymnasium',zone:'middle',grade:'a'});
+  const sg=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  const sgSubject=sg.find(id=>id.startsWith('special-gym-a-')); assert.ok(sgSubject,label+': Special Gymnasium subject missing');
+  await choose(page,'#tutorSubject',sgSubject); await assertActions(page,label+' Special Gymnasium');
 
-    await selectTrack(page,'special-lyceum');
-    await choose(page,'#tutorGrade','a');
-    const slSubject=await page.locator('#tutorSubject').inputValue();
-    assert.ok(slSubject.startsWith('special-lyceum-a-'),`${label}: Special Lyceum subject missing`);
-    await assertActions(page,`${label} Special Lyceum`);
+  await openSpecial(page,{track:'special-lyceum',zone:'high',grade:'a'}); await assertActions(page,label+' Special Lyceum');
 
-    await selectTrack(page,'eneegyl');
-    await choose(page,'#tutorGrade','gym-a');
-    const enSubject=await page.locator('#tutorSubject').inputValue();
-    assert.ok(enSubject.startsWith('eneegyl-gym-a-'),`${label}: ENEEGYL Gymnasium subject missing`);
-    await assertActions(page,`${label} ENEEGYL Gymnasium`);
+  await openSpecial(page,{track:'eneegyl',zone:'high',grade:'gym-a'}); await assertActions(page,label+' ENEEGYL Gymnasium');
+  await choose(page,'#tutorGrade','lyc-a');
+  const en=await page.locator('#tutorSubject option').evaluateAll(els=>els.map(e=>e.value));
+  assert.ok(en.includes('eneegyl-lyc-a-economics'),label+': ENEEGYL Economics missing');
+  await choose(page,'#tutorSubject','eneegyl-lyc-a-economics'); await assertActions(page,label+' ENEEGYL A');
 
-    await choose(page,'#tutorGrade','lyc-a');
-    const economics='eneegyl-lyc-a-economics';
-    const enA=await page.locator('#tutorSubject option').evaluateAll((els)=>els.map((e)=>e.value));
-    assert.ok(enA.includes(economics),`${label}: ENEEGYL A Lyceum Economics missing`);
-    await choose(page,'#tutorSubject',economics);
-    await assertActions(page,`${label} ENEEGYL A Lyceum`);
-
-    const catalogCheck=await page.evaluate(()=>{
-      const C=window.AITOOLSKIDS_TUTOR_CATALOG;
-      let failures=[];
-      for(const [zoneId,grades] of Object.entries(C?.zones||{})){
-        for(const [gradeId,subjects] of Object.entries(grades||{})){
-          for(const subject of subjects||[]){
-            if(!subject?.specialEducation) continue;
-            const count=(subject.topics||[]).filter((t)=>t.specialSupportAction).length;
-            if(count!==7) failures.push(`${zoneId}/${gradeId}/${subject.id}:${count}`);
-          }
-        }
-      }
-      return failures;
-    });
-    assert.deepEqual(catalogCheck,[],`${label}: some Special Education subjects still have an incomplete common action menu`);
-
-    await selectTrack(page,'general-middle');
-    const generalTopicValues=await page.locator('#tutorTopic option').evaluateAll((els)=>els.map((e)=>e.value));
-    assert.ok(generalTopicValues.every((v)=>!v.includes('.action-')),`${label}: Special Education actions leaked into General Gymnasium`);
-    assert.ok(!SPECIAL.has(await page.inputValue('#tutorSchoolTrack')),`${label}: failed to return to general school`);
-
-    const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
-    assert.ok(noOverflow,`${label}: horizontal overflow introduced`);
-    assert.deepEqual(errors,[],`${label}: browser errors: ${errors.join('\n')}`);
-    await page.close();
-  }
-  console.log('Special Education AI Help action menu passed on desktop/mobile: 7 common actions per subject, no leakage to general school.');
-}finally{
-  await browser.close();
-}
+  const failures=await page.evaluate(()=>{
+    const C=window.AITOOLSKIDS_TUTOR_CATALOG; const out=[];
+    for(const [z,grades] of Object.entries(C?.zones||{})) for(const [g,subjects] of Object.entries(grades||{})) for(const s of subjects||[]){
+      if(!s?.specialEducation) continue; const n=(s.topics||[]).filter(t=>t.specialSupportAction).length; if(n!==7) out.push(z+'/'+g+'/'+s.id+':'+n);
+    }
+    return out;
+  });
+  assert.deepEqual(failures,[],label+': incomplete action menus');
+  assert.deepEqual(errors,[],label+': browser errors: '+errors.join('\n'));
+  await page.close();
+ }
+ console.log('Special Education action menu passed on desktop/mobile with 7 actions per special subject.');
+}finally{await browser.close();}

@@ -20,6 +20,9 @@
   const MODEL_PROVIDER = "openai";
   const PUTER_SRC = "https://js.puter.com/v2/";
   const CONVERSATION_EVENT = "aitools4kids:tutor-conversation-updated";
+  function isClassroomMode() {
+    return new URLSearchParams(window.location.search).get("classroom") === "1";
+  }
   const CHARACTER_CATALOG = {
     pericles: {
       id: "pericles",
@@ -299,7 +302,11 @@
       tutor: "AI Βοήθεια",
       parentHelper: "Βοηθός Γονέα",
       prototypeNote: "Σημαντικό: το AI μπορεί να κάνει λάθος. Για πραγματολογικές πληροφορίες ή σχολική ύλη έλεγξε την απάντηση σε αξιόπιστη πηγή ή στο σχολικό βιβλίο.",
-      privacyNote: "Τα μηνύματα και, αν ανεβάσεις PDF, μόνο το εξαγόμενο κείμενό του αποστέλλονται στον επιλεγμένο πάροχο AI για να παραχθεί απάντηση. Το αρχείο PDF διαβάζεται τοπικά στον browser και δεν αποθηκεύεται από το aitools4kids.gr. Αν χρησιμοποιήσεις μικρόφωνο, η μεταγραφή γίνεται μέσω Puter. Μην δίνεις προσωπικά ή ευαίσθητα δεδομένα.",
+      privacyNote: "Μην εισάγεις προσωπικά ή ευαίσθητα δεδομένα. Τα μηνύματα στέλνονται στον επιλεγμένο πάροχο AI μόνο για να παραχθεί η απάντηση.",
+      privacyDetailsTitle: "Προσωπικά δεδομένα & χρήση στο σχολείο",
+      privacyDetailsBody: "Μην γράφεις ονοματεπώνυμο, στοιχεία επικοινωνίας, φωτογραφίες, φωνητικά δείγματα, βαθμούς, διαγνώσεις, δεδομένα υγείας ή άλλα στοιχεία που μπορούν να ταυτοποιήσουν μαθητή. Αν ανεβάσεις PDF, το αρχείο διαβάζεται τοπικά και αποστέλλεται μόνο το αναγκαίο εξαγόμενο κείμενο. Σε σχολικό πλαίσιο, η χρήση AI χρειάζεται εκπαιδευτική εποπτεία και δεν πρέπει να χρησιμοποιείται ως αυτοματοποιημένη αξιολόγηση μαθητή.",
+      classroomVoiceHint: "Λειτουργία τάξης: γράψε την ερώτηση. Το μικρόφωνο είναι απενεργοποιημένο για να μη διαβιβάζεται φωνητικό δείγμα μαθητή.",
+      providerLimit: "Η δωρεάν AI Βοήθεια μέσω GPT-OSS 120B είναι προσωρινά φορτωμένη ή έφτασε το όριο χρήσης. Μπορείς να επιλέξεις Puter από πάνω ή να δοκιμάσεις ξανά αργότερα.",
       pdfChoose: "📄 Ανέβασε PDF",
       pdfReading: "Διαβάζω το PDF τοπικά…",
       pdfReady: "Το PDF είναι έτοιμο για ερωτήσεις.",
@@ -441,7 +448,11 @@
       tutor: "AI Βοήθεια",
       parentHelper: "Parent Helper",
       prototypeNote: "Important: AI can make mistakes. Check factual information and school content against a reliable source or textbook.",
-      privacyNote: "Messages and, if you attach a PDF, only its extracted text are sent to the selected AI provider to generate a response. The PDF file itself is read locally in your browser and is not stored by aitools4kids.gr. If you use the microphone, transcription is handled through Puter. Do not enter personal or sensitive information.",
+      privacyNote: "Do not enter personal or sensitive data. Messages are sent to the selected AI provider only to generate the response.",
+      privacyDetailsTitle: "Personal data & school use",
+      privacyDetailsBody: "Do not enter a student's full name, contact details, photos, voice samples, grades, diagnoses, health data, or other identifying information. If you attach a PDF, the file is read locally and only the necessary extracted text is sent. In a school setting, AI use should be supervised by an educator and should not be used for automated student assessment.",
+      classroomVoiceHint: "Classroom mode: type the question. The microphone is disabled so a student's voice sample is not transmitted.",
+      providerLimit: "Free AI Help through GPT-OSS 120B is temporarily busy or has reached its usage limit. You can choose Puter above or try again later.",
       pdfChoose: "📄 Upload PDF",
       pdfReading: "Reading the PDF locally…",
       pdfReady: "The PDF is ready for questions.",
@@ -1701,7 +1712,12 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
 
   function setMicUi() {
     if (!refs.mic) return;
-    refs.mic.hidden = !micSupported();
+    refs.mic.hidden = isClassroomMode() || !micSupported();
+    if (isClassroomMode()) {
+      refs.mic.disabled = true;
+      refs.mic.setAttribute("aria-pressed", "false");
+      return;
+    }
     refs.mic.classList.toggle("tutor-mic--recording", recording);
     refs.mic.textContent = recording ? tr("micStop") : tr("micStart");
     refs.mic.setAttribute("aria-pressed", recording ? "true" : "false");
@@ -2094,7 +2110,11 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           }),
         });
         const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.message || tr("callFailed"));
+        if (!response.ok) {
+          const error = new Error(data.message || tr("callFailed"));
+          error.code = data.error || (response.status === 429 ? "provider_limit" : "provider_error");
+          throw error;
+        }
         return data.text || "";
       };
 
@@ -2120,8 +2140,12 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       }
       refreshAuthStatus().catch(() => {});
     } catch (err) {
-      const msg = err?.message || String(err);
-      addBubble("assistant", `${tr("callFailed")} ${msg ? `(${msg})` : ""}`);
+      if (err?.code === "provider_limit") {
+        addBubble("assistant", tr("providerLimit"));
+      } else {
+        const msg = err?.message || String(err);
+        addBubble("assistant", `${tr("callFailed")} ${msg ? `(${msg})` : ""}`);
+      }
     } finally {
       setBusy(false);
       refs.input.focus();
@@ -2286,6 +2310,11 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           <p class="tutor-auth-links"><a href="https://puter.com/terms" target="_blank" rel="noopener">${escapeHtml(tr("puterTerms"))}</a> · <a href="https://puter.com/privacy" target="_blank" rel="noopener">${escapeHtml(tr("puterPrivacy"))}</a></p>
           </div>
           <div class="tutor-privacy-note">${escapeHtml(tr("privacyNote"))}</div>
+          <details class="tutor-privacy-details" style="margin-top:8px;border:1px solid #dbe4ea;border-radius:10px;background:#fbfcfd;padding:8px 10px;font-size:.82rem;color:#475569;">
+            <summary style="cursor:pointer;font-weight:750;color:#334155;">${escapeHtml(tr("privacyDetailsTitle"))}</summary>
+            <p style="margin:8px 0 5px;line-height:1.55;">${escapeHtml(tr("privacyDetailsBody"))}</p>
+            <a href="https://www.minedu.gov.gr/site/64941-13-05-26-i-ellada-thespizei-gia-proti-fora-olokliromeno-plaisio-gia-tin-asfali-xrisi-tis-texnitis-noimosynis-sta-sxoleia-3" target="_blank" rel="noopener noreferrer">${escapeHtml(ctx.lang === "en" ? "Greek Ministry school AI framework ↗" : "Πλαίσιο ΥΠΑΙΘΑ για ΤΝ στα σχολεία ↗")}</a>
+          </details>
         </div>
 
         <div class="tutor-layout">
@@ -2341,7 +2370,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
                 <button type="button" class="tutor-doc-upload__remove" id="tutorPdfRemove" hidden>${escapeHtml(tr("pdfRemove"))}</button>
               </div>
               <textarea id="tutorInput" rows="4" disabled></textarea>
-              <div class="tutor-voice-hint">${escapeHtml(tr("voiceHint"))}</div>
+              <div class="tutor-voice-hint">${escapeHtml(isClassroomMode() ? tr("classroomVoiceHint") : tr("voiceHint"))}</div>
               <div class="tutor-composer__bottom">
                 <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorSample">${escapeHtml(tr("sample"))}</button>
                 <button type="button" class="tutor-btn tutor-btn--secondary tutor-mic" id="tutorMic" aria-pressed="false">${escapeHtml(tr("micStart"))}</button>

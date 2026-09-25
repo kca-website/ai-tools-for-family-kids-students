@@ -24,7 +24,8 @@
     currentSubject: null, // subjectId ή null = "Όλα"
     currentNeed: null, // μαθησιακή ανάγκη: understand | practice | hint | check | revise | research
     currentStudentAge: null, // ακριβής ηλικία για ζώνες που καλύπτουν διαφορετικά όρια χρήσης εργαλείων
-    a11yFilterOnly: false, // true = δείξε μόνο εργαλεία με τεκμηριωμένη προσβασιμότητα
+    a11yFilterOnly: false, // true = προτεραιότητα σε εργαλεία με τεκμηριωμένη προσβασιμότητα
+    greekFilterOnly: false, // true = μόνο εργαλεία με επιβεβαιωμένη υποστήριξη Ελληνικών
     // Quiz sub-state
     quizGradeId: null,
     quizSubjectId: null,
@@ -154,6 +155,8 @@
       subjectEmptyState: "Δεν υπάρχει ακόμα αντιστοίχιση εργαλείου για αυτό το μάθημα σε αυτή τη ζώνη.",
       a11yFilterLabel: "♿ Προτεραιότητα σε εργαλεία με ισχυρή τεκμηρίωση προσβασιμότητας",
       a11yFilterEmptyState: "Κανένα από τα εργαλεία αυτής της ζώνης δεν έχει επίσημη δήλωση προσβασιμότητας. Δες όλα τα εργαλεία στη σελίδα Προσβασιμότητα.",
+      greekFilterLabel: "🇬🇷 Μόνο με επιβεβαιωμένη υποστήριξη Ελληνικών",
+      greekFilterEmptyState: "Δεν βρέθηκε εργαλείο με επιβεβαιωμένη υποστήριξη Ελληνικών για αυτόν τον συνδυασμό.",
       // ---------- Parent Quiz (νέο) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Δοκίμασε κι εσύ, γονιέ!",
       parentQuizCtaSub: "Δες αν ξέρεις τόσο καλά όσο νομίζεις τι κάνει το παιδί σου με το AI.",
@@ -282,6 +285,8 @@
       subjectEmptyState: "No tool mapping yet for this subject in this zone.",
       a11yFilterLabel: "♿ Prioritize tools with strong accessibility evidence",
       a11yFilterEmptyState: "None of the tools in this zone have an official accessibility statement. See all tools on the Accessibility page.",
+      greekFilterLabel: "🇬🇷 Only tools with verified Greek support",
+      greekFilterEmptyState: "No tool with verified Greek-language support was found for this combination.",
       // ---------- Parent Quiz (new) ----------
       parentQuizCta: "🧑‍🤝‍🧑 Try it yourself, parent!",
       parentQuizCtaSub: "See if you know as well as you think what your child does with AI.",
@@ -424,6 +429,10 @@
     els.needFilter = document.getElementById("needFilter");
     els.a11yFilterToggle = document.getElementById("a11yFilterToggle");
     els.a11yFilterToggleAdvanced = document.getElementById("a11yFilterToggleAdvanced");
+    els.greekFilterWrap = document.getElementById("greekFilterWrap");
+    els.greekFilterWrapAdvanced = document.getElementById("greekFilterWrapAdvanced");
+    els.greekFilterToggle = document.getElementById("greekFilterToggle");
+    els.greekFilterToggleAdvanced = document.getElementById("greekFilterToggleAdvanced");
     els.pathIntro = document.getElementById("pathIntro");
     els.toolGrid = document.getElementById("toolGrid");
     els.advancedGrid = document.getElementById("advancedGrid");
@@ -670,6 +679,10 @@
 
     let toolsToShow = pathData.tools || [];
 
+    const greekFilterAvailable = state.currentZone === "primary" || state.currentZone === "middle";
+    if (els.greekFilterWrap) els.greekFilterWrap.hidden = !greekFilterAvailable;
+    if (els.greekFilterWrapAdvanced) els.greekFilterWrapAdvanced.hidden = !greekFilterAvailable;
+
     if (state.currentRole === "student") {
       toolsToShow = toolsToShow.filter((entry) => TOOLS[entry.toolId] && isToolAgeAppropriate(TOOLS[entry.toolId]));
     }
@@ -721,6 +734,14 @@
         .map(({ entry }) => entry);
     }
 
+    if (state.greekFilterOnly && greekFilterAvailable && typeof GREEK_SUPPORT_INFO !== "undefined") {
+      toolsToShow = toolsToShow.filter((entry) => GREEK_SUPPORT_INFO[entry.toolId]?.status === "yes");
+      if (!toolsToShow.length) {
+        els.toolGrid.innerHTML = `<div class="empty-state">${t("greekFilterEmptyState")}</div>`;
+        return;
+      }
+    }
+
     renderToolGrid(toolsToShow, els.toolGrid);
   }
 
@@ -746,7 +767,11 @@
     }
 
     // Δημιουργούμε μια λίστα με την ίδια δομή με τα path tools
-    const pathTools = expertTools.map(({ toolId, tool }) => ({
+    const greekFilterAvailable = state.currentZone === "primary" || state.currentZone === "middle";
+    const filteredExpertTools = state.greekFilterOnly && greekFilterAvailable && typeof GREEK_SUPPORT_INFO !== "undefined"
+      ? expertTools.filter(({ toolId }) => GREEK_SUPPORT_INFO[toolId]?.status === "yes")
+      : expertTools;
+    const pathTools = filteredExpertTools.map(({ toolId, tool }) => ({
       toolId: toolId,
       useCaseEl: tool.shortDescEl || "",
       useCaseEn: tool.shortDescEn || "",
@@ -2738,6 +2763,22 @@ function renderToolGrid(pathTools, targetElement) {
       els.a11yFilterToggleAdvanced.addEventListener("change", () => {
         state.a11yFilterOnly = els.a11yFilterToggleAdvanced.checked;
         if (els.a11yFilterToggle) els.a11yFilterToggle.checked = state.a11yFilterOnly;
+        renderPathContent();
+        renderAdvancedTools();
+      });
+    }
+    if (els.greekFilterToggle) {
+      els.greekFilterToggle.addEventListener("change", () => {
+        state.greekFilterOnly = els.greekFilterToggle.checked;
+        if (els.greekFilterToggleAdvanced) els.greekFilterToggleAdvanced.checked = state.greekFilterOnly;
+        renderPathContent();
+        renderAdvancedTools();
+      });
+    }
+    if (els.greekFilterToggleAdvanced) {
+      els.greekFilterToggleAdvanced.addEventListener("change", () => {
+        state.greekFilterOnly = els.greekFilterToggleAdvanced.checked;
+        if (els.greekFilterToggle) els.greekFilterToggle.checked = state.greekFilterOnly;
         renderPathContent();
         renderAdvancedTools();
       });

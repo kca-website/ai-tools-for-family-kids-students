@@ -116,6 +116,10 @@
   function topicData(e){
     var out=[],seen={};
     function add(x){if(!x||!safeHumanLabel(x))return;var key=String(x.titleEl||x.labelEl||x.id).toLowerCase();if(seen[key])return;seen[key]=1;out.push(x)}
+    if((e.coverageStatus||'').indexOf('detailed-map')>=0&&(e.mappedTopicsEl||[]).length){
+      (e.mappedTopicsEl||[]).forEach(function(label,i){add({id:'map-'+i,titleEl:label,titleEn:(e.mappedTopicsEn||[])[i]||label,kind:'map',status:'navigation-map',noteEl:e.scopeNoteEl||'',noteEn:e.scopeNoteEn||''})});
+      if(out.length)return out;
+    }
     var book=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(e.quizId);
     if(book&&book.sections&&book.sections.length){
       book.sections.forEach(function(label,i){add({id:e.quizId+'.book-'+(i+1),titleEl:label,titleEn:label,kind:'official-book-section',status:'official-book-section-verified',noteEl:'Επίσημη ενότητα σχολικού βιβλίου. Δεν δηλώνεται ως αυτούσια ετήσια διδακτέα ή εξεταστέα ύλη 2026–27 χωρίς ξεχωριστή ρητή αντιστοίχιση.',noteEn:'Official textbook section. It is not presented as the exact 2026–27 taught or examinable scope without a separate explicit alignment.'})});

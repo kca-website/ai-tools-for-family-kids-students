@@ -1341,6 +1341,8 @@ ${officialCurriculumText}
 
 ${learningModeInstruction()}
 
+${window.AITOOLSKIDS_TUTOR_SUPPORT?.getPromptInstruction?.(ctx?.lang) || ""}
+
 TUTORING RULES
 1. Do not immediately give the final answer or a fully solved exercise. Ask for the learner's attempt or thinking first.
 2. Ask ONE main question at a time. Keep replies concise and clear.
@@ -2521,5 +2523,12 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     render,
     getProvider: () => providerMode,
     getConversationSnapshot: conversationSnapshot,
+    getQualityContext: () => ({
+      zone: ctx?.zoneId || "",
+      role: ctx?.roleId || "",
+      subject: refs.subject?.value || "",
+      mode: learningMode || "understand",
+      provider: providerMode || "groq",
+    }),
   };
 })();

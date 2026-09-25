@@ -58,6 +58,8 @@
     // Generic tutor tools. Special Education data is deliberately NOT loaded here.
     {id:"tutor-flashcards",src:"/tutor-flashcards.js"},
     {id:"tutor-study-tools",src:"/tutor-study-tools.js"},
+    {id:"tutor-learning-support",src:"/tutor-learning-support.js"},
+    {id:"tutor-feedback",src:"/tutor-feedback.js"},
 
     // One transitional render hook owns established tool ordering.
     {id:"tutor-render-host",src:"/tutor-render-host.js"},
@@ -238,7 +240,7 @@
   });
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_LAZY_RUNTIME=Object.freeze({
-    version:14,
+    version:15,
     loadTutorUi:loadSpecialTutorUi,
     globallyLoadsSpecialData:false,
     diagnosticCatalogLoadsOnDemand:true,

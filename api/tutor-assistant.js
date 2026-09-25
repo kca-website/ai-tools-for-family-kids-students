@@ -2,7 +2,9 @@
 // Groq is the only server-side AI provider used by this endpoint.
 module.exports = async function handler(req, res) {
   const groqKey = process.env.GROQ_API_KEY;
-  const model = 'openai/gpt-oss-120b';
+  const allowedProductionModels = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
+  const configuredModel = String(process.env.GROQ_PRODUCTION_MODEL || 'openai/gpt-oss-120b');
+  const model = allowedProductionModels.has(configuredModel) ? configuredModel : 'openai/gpt-oss-120b';
 
   if (req.method === 'GET') {
     res.setHeader('Cache-Control', 'no-store');

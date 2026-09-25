@@ -826,6 +826,24 @@ function renderToolGrid(pathTools, targetElement) {
         : `<span class="tool-card__a11y-badge tool-card__a11y-badge--caution" title="${escapeAttr(a11y.noteEn)}">⚠️ Documented accessibility issue</span>`;
     }
 
+    const greekSupport = (typeof GREEK_SUPPORT_INFO !== "undefined" && GREEK_SUPPORT_INFO[tool.id]) || null;
+    let greekSupportBadge = "";
+    if (greekSupport) {
+      const labelsEl = { yes:"Ελληνικά: Ναι", partial:"Ελληνικά: Μερικά", neutral:"Γλωσσικά ουδέτερο", no:"Ελληνικά: Όχι", unknown:"Ελληνικά: Δεν επιβεβαιώθηκε" };
+      const labelsEn = { yes:"Greek: Yes", partial:"Greek: Partial", neutral:"Language-neutral", no:"Greek: No", unknown:"Greek: Not verified" };
+      const palette = {
+        yes:["#ecfdf3","#176b45","#b7e4c7"],
+        partial:["#fff8e1","#7a5b00","#ead58b"],
+        neutral:["#eef6ff","#245f8e","#bfd7ee"],
+        no:["#f3f4f6","#5f6672","#d7dbe2"],
+        unknown:["#f8fafc","#64748b","#d7dce3"]
+      };
+      const p = palette[greekSupport.status] || palette.unknown;
+      const label = state.lang === "el" ? labelsEl[greekSupport.status] : labelsEn[greekSupport.status];
+      const note = state.lang === "el" ? greekSupport.noteEl : greekSupport.noteEn;
+      greekSupportBadge = `<span class="tool-card__greek-support" title="${escapeAttr(note || label)}" style="display:inline-block;margin:2px 0 8px;padding:4px 8px;border-radius:999px;background:${p[0]};color:${p[1]};border:1px solid ${p[2]};font-size:.73rem;font-weight:700;">🇬🇷 ${escapeHtml(label)}</span>`;
+    }
+
     const card = document.createElement("article");
     card.className = "tool-card";
     card.innerHTML = `
@@ -836,6 +854,7 @@ function renderToolGrid(pathTools, targetElement) {
         <p class="tool-card__name">${escapeHtml(tool.name)} ${greekBadge}${mobileBadge}${pendingBadge}</p>
       </div>
       ${accessibilityBadge}
+      ${greekSupportBadge}
       ${categoryLabel ? `<span class="tool-card__category">${escapeHtml(categoryLabel)}</span>` : ""}
       ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}
       ${howTo ? `<p class="tool-card__field-label">${t("howToLabel")}</p><p class="tool-card__field-value">${escapeHtml(howTo)}</p>` : ""}
@@ -1944,10 +1963,32 @@ function renderToolGrid(pathTools, targetElement) {
       <div class="path-steps">${stepsHtml}</div>
       ${pathAiHtml}
       ${renderLearningActivities(gapId, gap)}
+      <div class="path-self-check" data-gap-id="${escapeAttr(gapId)}" style="margin:14px 0;padding:13px;border:1px solid #d7e2ec;border-radius:12px;background:#fbfdff;">
+        <strong style="display:block;margin-bottom:5px;">${state.lang==="el"?"Έλεγχος στο τέλος της διαδρομής":"End-of-path check"}</strong>
+        <p style="margin:0 0 9px;color:var(--color-text-muted);font-size:.84rem;">${state.lang==="el"?"Δεν είναι βαθμός. Δήλωσε πού βρίσκεσαι τώρα για να ξέρεις το επόμενο βήμα.":"This is not a grade. Mark where you are now to choose the next step."}</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;">
+          <button type="button" data-path-score="1" style="border:1px solid #cbd5e1;border-radius:9px;background:#fff;padding:7px 10px;cursor:pointer;">${state.lang==="el"?"1 · Θέλω κι άλλη βοήθεια":"1 · Need more help"}</button>
+          <button type="button" data-path-score="2" style="border:1px solid #cbd5e1;border-radius:9px;background:#fff;padding:7px 10px;cursor:pointer;">${state.lang==="el"?"2 · Σχεδόν":"2 · Almost"}</button>
+          <button type="button" data-path-score="3" style="border:1px solid #cbd5e1;border-radius:9px;background:#fff;padding:7px 10px;cursor:pointer;">${state.lang==="el"?"3 · Το κατάλαβα":"3 · Got it"}</button>
+        </div>
+        <span class="path-self-check__status" style="display:block;margin-top:7px;font-size:.8rem;color:#2e6f5e;"></span>
+      </div>
       ${extraToolsHtml}
       ${adultToolsHtml}
     `;
     els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
+    els.pathModal.querySelectorAll("[data-path-score]").forEach((btn)=>{
+      btn.addEventListener("click",()=>{
+        const score=Number(btn.dataset.pathScore)||0;
+        const status=els.pathModal.querySelector(".path-self-check__status");
+        if(status) status.textContent=state.lang==="el"?"Καταγράφηκε ως ανώνυμη ένδειξη προόδου.":"Saved as an anonymous progress signal.";
+        els.pathModal.querySelectorAll("[data-path-score]").forEach((b)=>{ b.disabled=true; });
+        try{
+          if(typeof window.va!=="function") window.va=function(){(window.vaq=window.vaq||[]).push(arguments);};
+          window.va("event",{name:"Learning Path Check",data:{score:String(score),zone:String(state.currentZone||""),role:String(state.currentRole||""),gap:String(gapId).slice(0,80)}});
+        }catch(_){}
+      });
+    });
     const pathAiBtn=els.pathModal.querySelector(".path-ai-help-btn");
     if(pathAiBtn){
       pathAiBtn.addEventListener("click",()=>{

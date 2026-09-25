@@ -68,7 +68,7 @@ async function generateChat({
     let result;
     try {
       result = provider === 'cloudflare'
-        ? await callCloudflare({ messages, maxTokens, temperature, responseFormat, timeoutMs })
+        ? await callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs })
         : await callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs });
     } catch (error) {
       const timedOut = error?.name === 'AbortError';
@@ -98,7 +98,7 @@ async function generateChat({
   return { ...(lastResult || {}), attempts };
 }
 
-async function callCloudflare({ messages, maxTokens, temperature, responseFormat, timeoutMs }) {
+async function callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs }) {
   const accountId = process.env.CLOUDFLARE_LLM_ACCOUNT_ID;
   const token = process.env.CLOUDFLARE_LLM_AI_TOKEN;
   const model = modelFor('cloudflare');
@@ -106,7 +106,8 @@ async function callCloudflare({ messages, maxTokens, temperature, responseFormat
     model,
     messages,
     temperature,
-    max_tokens: maxTokens,
+    max_completion_tokens: maxTokens,
+    reasoning_effort: reasoningEffort || 'low',
     options: { rejectIfBusy: true },
   };
   if (responseFormat) body.response_format = normalizeCloudflareResponseFormat(responseFormat);
@@ -166,13 +167,21 @@ async function postOpenAiCompatible({ url, token, body, provider, model, timeout
       signal: controller.signal,
     });
     const data = await response.json().catch(() => ({}));
+    const text = typeof data?.choices?.[0]?.message?.content === 'string'
+      ? data.choices[0].message.content
+      : '';
+    const hasText = text.trim().length > 0;
+    const ok = response.ok && hasText;
+    const status = response.ok && !hasText ? 502 : response.status;
     return {
-      ok: response.ok,
-      status: response.status,
-      error: response.status === 429 ? 'provider_limit' : (response.ok ? null : 'provider_error'),
-      retryable: isRetryableStatus(response.status),
-      message: providerMessage(data),
-      text: data?.choices?.[0]?.message?.content || '',
+      ok,
+      status,
+      error: response.status === 429
+        ? 'provider_limit'
+        : (!response.ok ? 'provider_error' : (hasText ? null : 'empty_response')),
+      retryable: !hasText && response.ok ? true : isRetryableStatus(response.status),
+      message: providerMessage(data) || (!hasText && response.ok ? 'Provider returned an empty completion.' : ''),
+      text,
       provider,
       model,
     };

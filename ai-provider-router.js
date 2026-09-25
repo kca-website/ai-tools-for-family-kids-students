@@ -103,17 +103,16 @@ async function callCloudflare({ messages, maxTokens, temperature, responseFormat
   const token = process.env.CLOUDFLARE_LLM_AI_TOKEN;
   const model = modelFor('cloudflare');
   const body = {
-    model,
     messages,
     temperature,
-    max_completion_tokens: maxTokens,
+    max_tokens: maxTokens,
     reasoning_effort: reasoningEffort || 'low',
     options: { rejectIfBusy: true },
   };
-  if (responseFormat) body.response_format = normalizeCloudflareResponseFormat(responseFormat);
+  if (responseFormat) body.response_format = responseFormat;
 
-  return postOpenAiCompatible({
-    url: 'https://api.cloudflare.com/client/v4/accounts/' + encodeURIComponent(accountId) + '/ai/v1/chat/completions',
+  return postCloudflareNative({
+    url: 'https://api.cloudflare.com/client/v4/accounts/' + encodeURIComponent(accountId) + '/ai/run/' + model,
     token,
     body,
     provider: 'cloudflare',
@@ -146,11 +145,42 @@ async function callGroq({ messages, maxTokens, temperature, responseFormat, reas
   });
 }
 
-function normalizeCloudflareResponseFormat(format) {
-  if (format?.type === 'json_schema' && format?.json_schema?.schema) {
-    return { type: 'json_schema', json_schema: format.json_schema.schema };
+async function postCloudflareNative({ url, token, body, provider, model, timeoutMs }) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+    const data = await response.json().catch(() => ({}));
+    const text = typeof data?.result?.response === 'string'
+      ? data.result.response
+      : (typeof data?.response === 'string' ? data.response : '');
+    const hasText = text.trim().length > 0;
+    const providerOk = response.ok && data?.success !== false;
+    const ok = providerOk && hasText;
+    const status = providerOk && !hasText ? 502 : response.status;
+    return {
+      ok,
+      status,
+      error: response.status === 429
+        ? 'provider_limit'
+        : (!providerOk ? 'provider_error' : (hasText ? null : 'empty_response')),
+      retryable: providerOk && !hasText ? true : isRetryableStatus(response.status),
+      message: providerMessage(data) || (!hasText && providerOk ? 'Provider returned an empty completion.' : ''),
+      text,
+      provider,
+      model,
+    };
+  } finally {
+    clearTimeout(timeout);
   }
-  return format;
 }
 
 async function postOpenAiCompatible({ url, token, body, provider, model, timeoutMs }) {

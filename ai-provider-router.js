@@ -15,9 +15,11 @@ function getAiStatus() {
   };
 }
 
-function getProviderOrder() {
-  const requested = String(process.env.AI_PROVIDER_ORDER || 'cloudflare,groq')
-    .split(',')
+function getProviderOrder(providerOrder) {
+  const requested = (Array.isArray(providerOrder)
+    ? providerOrder
+    : String(process.env.AI_PROVIDER_ORDER || 'cloudflare,groq').split(','))
+    .map((value) => String(value))
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean);
   const unique = [...new Set(requested.filter((name) => name === 'cloudflare' || name === 'groq'))];
@@ -48,8 +50,9 @@ async function generateChat({
   responseFormat,
   reasoningEffort = 'low',
   timeoutMs = DEFAULT_TIMEOUT_MS,
+  providerOrder,
 } = {}) {
-  const order = getProviderOrder();
+  const order = getProviderOrder(providerOrder);
   if (!order.length) {
     return {
       ok: false,

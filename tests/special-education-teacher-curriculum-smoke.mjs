@@ -94,7 +94,7 @@ try{
   assert.ok(biologyATopics.includes('1.1 Τα χαρακτηριστικά των οργανισμών'),'Biology A 1.1 missing');
   assert.ok(biologyATopics.some(x=>x.startsWith('Προαιρετικό — 1.4 Αλληλεπιδράσεις και προσαρμογές')),'Biology A optional 1.4 status missing');
   const biologyNote=await page.locator('#curriculumNote').innerText();
-  assert.match(biologyNote,/πραγματικές χαρτογραφημένες επιλογές από την τρέχουσα ύλη\/οδηγίες/i,'Biology A must now resolve through the exact annual mapping');
+  assert.match(biologyNote,/ενότητες με ρητή αντιστοίχιση στην επίσημη ύλη\/οδηγίες 2026–27/i,'Biology A must now resolve through the exact annual mapping');
   assert.ok(!/section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i.test(biologyNote),'Biology must no longer be marked pending');
 
   await page.selectOption('#grade','b');

@@ -142,7 +142,11 @@
       }
 
       const guessed=guessSection(source);
-      if(guessed) document.getElementById("section").value=guessed;
+      const sectionParam=params.get("section");
+      const issueParam=params.get("issue");
+      if(sectionParam) document.getElementById("section").value=sectionParam.slice(0,180);
+      else if(guessed) document.getElementById("section").value=guessed;
+      if(issueParam) document.getElementById("problem").value=issueParam.slice(0,500);
       if(params.get("sent")==="1") document.getElementById("success").classList.add("show");
 
       function setLang(lang){

@@ -28,3 +28,5 @@ jobs:
           node --check api/teacher-assistant.js
       - name: Quality upgrade smoke
         run: node tests/quality-upgrade-smoke.mjs
+      - name: Enforce aitools4kids brand casing
+        run: node tests/brand-case-smoke.mjs

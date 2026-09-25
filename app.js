@@ -2515,7 +2515,7 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   function updateDocumentTitle() {
-    const base = "AITOOLS4KIDS.gr";
+    const base = "aitools4kids.gr";
     if (!state.currentZone) {
       document.title = `${base} — ${t("heroTitle")}`;
     } else {

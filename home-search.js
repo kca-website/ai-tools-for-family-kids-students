@@ -307,7 +307,7 @@
   function updateLanguage(){
     const box=document.getElementById("homeGlobalSearch");if(!box)return;
     const en=isEn(),input=box.querySelector("input"),label=box.querySelector("label"),clear=box.querySelector(".home-global-search__clear");
-    label.textContent=en?"Search all AITOOLS4KIDS":"Ψάξε σε όλο το AITOOLS4KIDS";
+    label.textContent=en?"Search all aitools4kids":"Ψάξε σε όλο το aitools4kids";
     input.placeholder=en?"e.g. fractions, Ancient Greek, dyslexia, presentation...":"π.χ. κλάσματα, δυσλεξία, Αρχαία, παρουσίαση…";
     input.setAttribute("aria-label",en?"Search tools, subjects, learning paths and sections":"Αναζήτηση εργαλείων, μαθημάτων, μονοπατιών και ενοτήτων");
     clear.setAttribute("aria-label",en?"Clear search":"Καθαρισμός αναζήτησης");

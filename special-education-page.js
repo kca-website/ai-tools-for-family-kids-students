@@ -263,7 +263,7 @@
             : coverage.kind==="exact"
               ? "Υπάρχει τρέχουσα επαληθευμένη χαρτογράφηση 2026–27 για το μάθημα."
               : "Το μάθημα εμφανίζεται στην επίσημη σχολική δομή, αλλά δεν ισχυριζόμαστε πλήρη χαρτογραφημένη ύλη.";
-    const statusBadge=hasLearning?'<span class="sp-ready-pill">Έτοιμη διαδρομή</span>':`<span class="sp-ready-pill">${esc(coverage.label)}</span>`;
+    const statusBadge=hasLearning?`<span class="sp-ready-pill">${esc(coverage.label)} · Έτοιμη διαδρομή</span>`:`<span class="sp-ready-pill">${esc(coverage.label)}</span>`;
     return `<article class="sp-subject-card" data-en-structure-subject="${esc(row.id)}" data-coverage="${esc(coverage.kind)}">
       <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(eneegylTypeLabel(row,grade))}</span><h3>${esc(row.label)}</h3></div>${statusBadge}</div>
       <p>${esc(helper)}</p>

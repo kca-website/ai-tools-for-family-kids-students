@@ -56,7 +56,7 @@ for (const [name,html] of [["teacher-assistant.html",teacher],["index.html",inde
   const re=/<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi;
   let match, count=0;
   while((match=re.exec(html))){
-    if(/type\s*=\s*["']application\/ld\+json["']/i.test(match[1])) continue;
+    if(/type\s*=\s*["'](?:application\/ld\+json|module)["']/i.test(match[1])) continue;
     const code=match[2].trim();
     if(!code)continue;
     count++;

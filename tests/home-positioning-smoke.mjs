@@ -42,7 +42,7 @@ try {
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, μαθητές 6 έως 18 και εκπαιδευτικούς.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.');
 
   assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card').count(), 4);
   assert.equal(await page.locator('#homeV8Shell #specialSchoolZoneCard').count(), 1);
@@ -72,7 +72,7 @@ try {
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => document.querySelector('#specialSchoolZoneCard')?.textContent?.includes('Special schools'));
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI tool for what you want to do and see how to use it properly. For parents, students 6 to 18, and educators.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI tool for what you want to do and see how to use it properly. For parents, children and students 4 to 18, and educators.');
   assert.match(await page.locator('#specialSchoolZoneCard').innerText(), /Special schools/);
   assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
   assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);

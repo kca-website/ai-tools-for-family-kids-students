@@ -1,18 +1,19 @@
 const { resolvePreschoolCurriculum } = require('../preschool-curriculum-mapper');
+const { generateChat, getAiStatus } = require('../ai-provider-router');
 
 module.exports = async function handler(req, res) {
-  const groqKey = process.env.GROQ_API_KEY;
-  const model = 'openai/gpt-oss-120b';
+  const aiStatus = getAiStatus();
+  const model = aiStatus.model || 'openai/gpt-oss-120b';
 
   if (req.method === 'GET') {
     res.setHeader('Cache-Control', 'no-store');
-    return res.status(200).json({ configured: !!groqKey, model, audience: 'adult_preschool' });
+    return res.status(200).json({ ...aiStatus, audience: 'adult_preschool' });
   }
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'method_not_allowed', message: 'Method not allowed.' });
   }
-  if (!groqKey) return res.status(503).json({ error: 'ai_not_configured', message: 'Η δημιουργία δραστηριότητας δεν είναι προσωρινά διαθέσιμη.' });
+  if (!aiStatus.configured) return res.status(503).json({ error: 'ai_not_configured', message: 'Η δημιουργία δραστηριότητας δεν είναι προσωρινά διαθέσιμη.' });
 
   const idea = String(req.body?.idea || '').trim();
   const mode = String(req.body?.mode || 'story');
@@ -65,63 +66,53 @@ ${modeRule}`;
   const user = `General theme supplied by the adult: ${idea}. Child age: ${age}. Time available: ${duration} minutes. Setting: ${place}. Curriculum focus selected by adult: ${curriculumFocus}.`;
 
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 30000);
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', Authorization:`Bearer ${groqKey}` },
-      body: JSON.stringify({
-        model,
-        messages:[{role:'system',content:system},{role:'user',content:user}],
-        temperature:0.25,
-        reasoning_effort:'low',
-        include_reasoning:false,
-        max_completion_tokens:2200,
-        response_format:{
-          type:'json_schema',
-          json_schema:{
-            name:'preschool_activity',
-            strict:true,
-            schema:{
-              type:'object',
-              additionalProperties:false,
-              properties:{
-                story:{type:'string'},
-                words:{type:'string'},
-                game:{type:'string'},
-                make:{type:'string'},
-                offline:{type:'string'},
-                adultTip:{type:'string'},
-                visualTitle:{type:'string'},
-                visualCaption:{type:'string'},
-                visualEmoji1:{type:'string'},
-                visualEmoji2:{type:'string'},
-                visualEmoji3:{type:'string'},
-                visualBg:{type:'string',enum:['sky','mint','peach','lilac']},
-                sceneType:{type:'string',enum:['dinosaur','robot','animals','space','castle','colors','shapes','numbers','generic']},
-                sceneMood:{type:'string',enum:['calm','playful','curious']},
-                scenePalette:{type:'string',enum:['sky','mint','peach','lilac']},
-                sceneTitle:{type:'string'},
-                sceneCaption:{type:'string'},
-                sceneObjectCount:{type:'integer',minimum:1,maximum:5},
-                sceneAccent:{type:'string',enum:['coral','teal','gold','violet']}
-              },
-              required:['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg','sceneType','sceneMood','scenePalette','sceneTitle','sceneCaption','sceneObjectCount','sceneAccent']
-            }
-          }
+    const responseFormat = {
+      type:'json_schema',
+      json_schema:{
+        name:'preschool_activity',
+        strict:true,
+        schema:{
+          type:'object',
+          additionalProperties:false,
+          properties:{
+            story:{type:'string'},
+            words:{type:'string'},
+            game:{type:'string'},
+            make:{type:'string'},
+            offline:{type:'string'},
+            adultTip:{type:'string'},
+            visualTitle:{type:'string'},
+            visualCaption:{type:'string'},
+            visualEmoji1:{type:'string'},
+            visualEmoji2:{type:'string'},
+            visualEmoji3:{type:'string'},
+            visualBg:{type:'string',enum:['sky','mint','peach','lilac']},
+            sceneType:{type:'string',enum:['dinosaur','robot','animals','space','castle','colors','shapes','numbers','generic']},
+            sceneMood:{type:'string',enum:['calm','playful','curious']},
+            scenePalette:{type:'string',enum:['sky','mint','peach','lilac']},
+            sceneTitle:{type:'string'},
+            sceneCaption:{type:'string'},
+            sceneObjectCount:{type:'integer',minimum:1,maximum:5},
+            sceneAccent:{type:'string',enum:['coral','teal','gold','violet']}
+          },
+          required:['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg','sceneType','sceneMood','scenePalette','sceneTitle','sceneCaption','sceneObjectCount','sceneAccent']
         }
-      }),
-      signal: controller.signal
+      }
+    };
+    const result = await generateChat({
+      messages:[{role:'system',content:system},{role:'user',content:user}],
+      temperature:0.25,
+      reasoningEffort:'low',
+      maxTokens:2200,
+      responseFormat,
     });
-    clearTimeout(timeout);
-    const raw = await response.json().catch(() => ({}));
-    if (!response.ok) return res.status(response.status || 502).json({ error:'provider_error', message:'Η δραστηριότητα δεν μπόρεσε να δημιουργηθεί.' });
-    const text = String(raw?.choices?.[0]?.message?.content || '').trim();
+    if (!result?.ok) return res.status(result?.status || 502).json({ error: result?.error || 'provider_error', message:'Η δραστηριότητα δεν μπόρεσε να δημιουργηθεί.' });
+    const text = String(result.text || '').trim();
     const activity = parseActivity(text, idea);
     if (!activity) return res.status(502).json({ error:'invalid_result', message:'Το AI δεν επέστρεψε σωστή δραστηριότητα. Δοκίμασε ξανά.' });
     res.setHeader('Cache-Control','no-store');
     activity.curriculum = curriculum;
-    return res.status(200).json({ activity, model, provider:'groq' });
+    return res.status(200).json({ activity, model: result.model || model, provider: result.provider });
   } catch (err) {
     return res.status(err?.name === 'AbortError' ? 504 : 500).json({ error:'server_error', message:err?.name === 'AbortError' ? 'Η υπηρεσία άργησε να απαντήσει.' : 'Η δραστηριότητα δεν μπόρεσε να δημιουργηθεί.' });
   }

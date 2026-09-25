@@ -1,20 +1,19 @@
 // Grounded, learning-first GPT-OSS proxy for Parent Helper and High-School AI Help.
-// Groq is the only server-side AI provider used by this endpoint.
+// Cloudflare Workers AI is primary; Groq is the server-side fallback.
+const { generateChat, getAiStatus } = require('../ai-provider-router');
 module.exports = async function handler(req, res) {
-  const groqKey = process.env.GROQ_API_KEY;
-  const allowedProductionModels = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
-  const configuredModel = String(process.env.GROQ_PRODUCTION_MODEL || 'openai/gpt-oss-120b');
-  const model = allowedProductionModels.has(configuredModel) ? configuredModel : 'openai/gpt-oss-120b';
+  const aiStatus = getAiStatus();
+  const model = aiStatus.model || 'openai/gpt-oss-120b';
 
   if (req.method === 'GET') {
     res.setHeader('Cache-Control', 'no-store');
-    return res.status(200).json({ configured: !!groqKey, model, provider: 'groq' });
+    return res.status(200).json(aiStatus);
   }
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'method_not_allowed', message: 'Method not allowed.' });
   }
-  if (!groqKey) {
+  if (!aiStatus.configured) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });
   }
 
@@ -82,13 +81,12 @@ ${roleRule}
   ];
 
   try {
-    const result = await callProvider(
-      'https://api.groq.com/openai/v1/chat/completions',
-      groqKey,
-      model,
+    const result = await generateChat({
       messages,
-      taskLimits[task]
-    );
+      maxTokens: taskLimits[task],
+      temperature: 0.1,
+      reasoningEffort: 'low',
+    });
     if (!result?.ok) {
       const limited = result?.status === 429;
       return res.status(result?.status || 502).json({
@@ -103,7 +101,7 @@ ${roleRule}
     const text = sanitize(result.text);
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'Δεν επιστράφηκε απάντηση.' });
     res.setHeader('Cache-Control', 'no-store');
-    return res.status(200).json({ text, model, provider: result.provider });
+    return res.status(200).json({ text, model: result.model || model, provider: result.provider });
   } catch (err) {
     const timedOut = err?.name === 'AbortError';
     return res.status(timedOut ? 504 : 500).json({
@@ -112,30 +110,6 @@ ${roleRule}
     });
   }
 };
-
-async function callProvider(url, apiKey, model, messages, maxTokens) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 30000);
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-      body: JSON.stringify({ model, messages, temperature: 0.1, max_completion_tokens: maxTokens }),
-      signal: controller.signal,
-    });
-    const data = await response.json().catch(() => ({}));
-    return {
-      ok: response.ok,
-      status: response.status,
-      retryable: response.status === 429 || response.status >= 500,
-      message: data?.error?.message,
-      text: data?.choices?.[0]?.message?.content || '',
-      provider: 'groq',
-    };
-  } finally {
-    clearTimeout(timeout);
-  }
-}
 
 function sanitize(text) {
   return String(text || '')

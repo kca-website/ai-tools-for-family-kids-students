@@ -22,7 +22,7 @@
 - Διαγνωστικό Χάρτη εξάσκησης
 - Μονοπάτια Μάθησης
 - Prompt Generator
-- προαιρετική AI Βοήθεια / Βοηθό Γονέα μέσω GPT-OSS 120B χωρίς λογαριασμό, με Puter ως εναλλακτική και πρόσβαση μαθητών μόνο στο Λύκειο
+- προαιρετική AI Βοήθεια / Βοηθό Γονέα μέσω GPT-OSS 120B χωρίς λογαριασμό, με Cloudflare Workers AI → Groq server-side failover και Puter ως προαιρετική εναλλακτική
 - στατικές SEO σελίδες για εργαλεία
 - ενότητα προσβασιμότητας για 43 canonical εργαλεία, με αυτόματους counters
 - εμφανή ένδειξη υποστήριξης Ελληνικών στις κάρτες εργαλείων
@@ -54,6 +54,7 @@
 - `quiz-data.js`: Διαγνωστικός Χάρτης
 - `learning-paths-data.js`: Μονοπάτια Μάθησης
 - `tutor.js`: AI Βοήθεια / Βοηθός Γονέα
+- `ai-provider-router.js`: server-side routing Cloudflare Workers AI → Groq, με failover χωρίς έκθεση API keys στον browser
 - `app.js`: βασικό rendering και navigation
 - `site-integrity-overrides.js`, `site-postfix.js`: συμβατότητα/μεταγενέστερες διορθώσεις που σταδιακά ενοποιούνται στη βασική λογική
 - `styles.css`: κύρια εμφάνιση

@@ -73,7 +73,7 @@ const NEED_TOOL_MAP = {
   },
   "foreign-language": {
     understand: ["ai-help", "gemini-education", "chatgpt", "deepl"],
-    practice: ["duolingo", "reading-coach", "quizlet", "ai-help", "anki", "deepl"],
+    practice: ["duolingo", "reading-coach", "ai-help", "quizlet", "anki", "deepl"],
     hint: ["ai-help", "chatgpt", "deepl"],
     check: ["ai-help", "gemini-education", "grammarly", "chatgpt", "deepl"],
     revise: ["quizlet", "duolingo", "ai-help", "gemini-education", "anki", "notebooklm", "deepl"],

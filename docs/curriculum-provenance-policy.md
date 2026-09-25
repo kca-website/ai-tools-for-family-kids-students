@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-21
 
-AITOOLS4KIDS is evidence-first. A curriculum option must never look more certain than its source allows.
+aitools4kids is evidence-first. A curriculum option must never look more certain than its source allows.
 
 ## Non-negotiable rule
 

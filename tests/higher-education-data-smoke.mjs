@@ -78,7 +78,7 @@ assert.ok(unipiDs.courses.some((course) => course.code === 'ΨΣ-006' && course.
 assert.ok(unipiDs.courses.some((course) => course.code === 'ΨΣ-010' && course.ects === 6));
 
 const hePage = read('higher-education-pilot.html');
-assert.match(hePage, /href="\/"[^>]*>← Αρχική AITOOLS4KIDS<\/a>/, 'Higher Education page needs a home link');
+assert.match(hePage, /href="\/"[^>]*>← Αρχική aitools4kids<\/a>/, 'Higher Education page needs a home link');
 
 assert.equal(he.meta.status, 'pilot');
 assert.match(he.meta.policyEl, /δεν δημιουργεί έτοιμη εργασία/i);

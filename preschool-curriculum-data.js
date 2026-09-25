@@ -1,9 +1,9 @@
 /**
- * Official Greek Preschool Curriculum taxonomy used by AITOOLS4KIDS.
+ * Official Greek Preschool Curriculum taxonomy used by aitools4kids.
  *
  * IMPORTANT:
  * - field / unit / subunit titles mirror the IEP Preschool Curriculum structure.
- * - keywords and activityGoal are AITOOLS4KIDS mapping metadata, not official IEP wording.
+ * - keywords and activityGoal are aitools4kids mapping metadata, not official IEP wording.
  * - Keep this file independent from visual-generation code so curriculum data can be reused safely.
  *
  * Official IEP sources:
@@ -16,7 +16,7 @@
 const PRESCHOOL_CURRICULUM = {
   version: '2026-09-24',
   authority: 'Ινστιτούτο Εκπαιδευτικής Πολιτικής (ΙΕΠ)',
-  disclaimer: 'Οι τίτλοι πεδίων, ενοτήτων και υποενοτήτων ακολουθούν την επίσημη δομή του ΙΕΠ. Οι λέξεις-κλειδιά και οι σύντομοι στόχοι είναι μεταδεδομένα του AITOOLS4KIDS.',
+  disclaimer: 'Οι τίτλοι πεδίων, ενοτήτων και υποενοτήτων ακολουθούν την επίσημη δομή του ΙΕΠ. Οι λέξεις-κλειδιά και οι σύντομοι στόχοι είναι μεταδεδομένα του aitools4kids.',
   fields: [
     {
       id: 'communication',

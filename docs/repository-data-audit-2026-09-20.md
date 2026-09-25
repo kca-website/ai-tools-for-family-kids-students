@@ -167,5 +167,5 @@ Former TEI names should be handled as legacy aliases for discoverability where r
 10. Merge to `main` only after parity checks.
 
 ## Non-negotiable product guardrail
-Cleanup must preserve the identity of AITOOLS4KIDS:
+Cleanup must preserve the identity of aitools4kids:
 AI supports understanding, practice, checking and research; it must not become a ready-answer or assignment-generation service.

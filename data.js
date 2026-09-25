@@ -380,7 +380,7 @@ const TOOLS = {
     category: "research",
     logo: null,
     minAge: 18,
-    minAgeNote: "Εργαλείο ακαδημαϊκής έρευνας με λογαριασμό. Δεν εντοπίστηκε σαφές δημόσιο ελάχιστο ηλικιακό όριο για ανήλικους· στο AITOOLS4KIDS το προτείνουμε μόνο στη φοιτητική διαδρομή/18+.",
+    minAgeNote: "Εργαλείο ακαδημαϊκής έρευνας με λογαριασμό. Δεν εντοπίστηκε σαφές δημόσιο ελάχιστο ηλικιακό όριο για ανήλικους· στο aitools4kids το προτείνουμε μόνο στη φοιτητική διαδρομή/18+.",
     shortDescEl: "AI πλατφόρμα για αναζήτηση papers, Literature Review, Chat with PDF, ακαδημαϊκή συγγραφή και citations.",
     shortDescEn: "AI research platform for paper discovery, literature review, Chat with PDF, academic writing and citations.",
   },

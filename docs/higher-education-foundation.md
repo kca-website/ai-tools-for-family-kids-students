@@ -4,7 +4,7 @@ Status: pilot foundation only. Not exposed in production navigation yet.
 
 ## Goal
 
-Add a university-student route without changing the core AITOOLS4KIDS identity:
+Add a university-student route without changing the core aitools4kids identity:
 
 **what you study → what course/topic you are on → what you are trying to do → which tool helps → how to use it without outsourcing the work.**
 

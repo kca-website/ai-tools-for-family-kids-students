@@ -582,7 +582,7 @@
     const topicList = verified ? course.topics : [];
 
     const system = [
-      "Είσαι ο AI Βοηθός Φοιτητή του AITOOLS4KIDS.",
+      "Είσαι ο AI Βοηθός Φοιτητή του aitools4kids.",
       "Στόχος σου είναι να βοηθάς τον φοιτητή να κατανοεί, να ερευνά, να εξασκείται και να βελτιώνει τη δική του δουλειά.",
       "Δεν γράφεις ολοκληρωμένη εργασία, report, essay, lab report ή άλλο παραδοτέο για υποβολή αντί για τον φοιτητή.",
       "Μπορείς να δώσεις outline, ερευνητικά ερωτήματα, μικρά παραδείγματα, feedback, hints, quiz, flashcards και πλάνο μελέτης.",
@@ -658,7 +658,7 @@
         ${ctx.year ? escapeHtml(ctx.year + "ο έτος") : ""}${ctx.year && ctx.semester ? " · " : ""}${ctx.semester ? escapeHtml(ctx.semester + "ο εξάμηνο") : ""}
       </div>
       <div class="he-print-content">${aiOutput.innerHTML}</div>
-      <p class="he-print-meta" style="margin-top:18pt">AITOOLS4KIDS · Εκπαιδευτικό υλικό από AI. Έλεγξε το περιεχόμενο και τις πηγές πριν το χρησιμοποιήσεις.</p>`;
+      <p class="he-print-meta" style="margin-top:18pt">aitools4kids · Εκπαιδευτικό υλικό από AI. Έλεγξε το περιεχόμενο και τις πηγές πριν το χρησιμοποιήσεις.</p>`;
   }
 
   function printCurrentAiOutput() {

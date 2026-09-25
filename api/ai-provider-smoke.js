@@ -15,7 +15,13 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ ok: false, ...status });
   }
 
+  const requestedProvider = String(req.query?.provider || '').trim().toLowerCase();
+  const providerOrder = requestedProvider === 'cloudflare' || requestedProvider === 'groq'
+    ? [requestedProvider]
+    : undefined;
+
   const result = await generateChat({
+    providerOrder,
     messages: [
       { role: 'system', content: 'Return only the exact word OK.' },
       { role: 'user', content: 'Health check.' }
@@ -33,6 +39,7 @@ module.exports = async function handler(req, res) {
     text: result.ok ? String(result.text || '').trim().slice(0, 40) : undefined,
     error: result.ok ? undefined : result.error,
     attempts: result.attempts || [],
+    requestedProvider: requestedProvider || null,
     configuredProviders: status.providers,
   });
 };

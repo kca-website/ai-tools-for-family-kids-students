@@ -84,8 +84,13 @@ module.exports = async function handler(req, res) {
 
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
+      const limited = response.status === 429;
       const providerMessage = data?.error?.message || 'Groq request failed.';
-      return res.status(response.status).json({ error: 'groq_error', message: providerMessage });
+      return res.status(response.status).json({
+        error: limited ? 'provider_limit' : 'groq_error',
+        message: limited ? 'Η δωρεάν δημιουργία μέσω Groq έφτασε προσωρινά το όριο χρήσης της.' : providerMessage,
+        fallback: limited ? 'puter' : undefined,
+      });
     }
 
     const text = sanitizeTeacherAssistantOutput(data?.choices?.[0]?.message?.content || '');

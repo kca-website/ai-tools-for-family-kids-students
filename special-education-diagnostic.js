@@ -73,7 +73,38 @@
   }
 
   function ensureQuizViewEntry(){
-    document.querySelectorAll("[data-special-education-diagnostic].spdiag-entry").forEach((el)=>el.remove());
+    const content=document.getElementById("quizContent");
+    if(!content) return;
+    const existing=content.querySelector("[data-special-education-diagnostic].spdiag-entry");
+    if(existing){
+      const title=existing.querySelector(".quiz-grade-card__label");
+      const sub=existing.querySelector(".spdiag-entry__sub");
+      if(title) title.textContent=t("Ειδική Εκπαίδευση","Special Education");
+      if(sub) sub.textContent=t("Διαθέσιμα σύντομα τεστ · 3 απλές ερωτήσεις · χωρίς βαθμό ή διάγνωση","Available short tests · 3 simple questions · no grade or diagnosis");
+      return;
+    }
+    const grid=content.querySelector(".quiz-grade-grid");
+    if(!grid) return;
+    const entry=document.createElement("button");
+    entry.type="button";
+    entry.className="quiz-grade-card spdiag-entry";
+    entry.dataset.specialEducationDiagnostic="1";
+    entry.innerHTML=`<span class="quiz-grade-card__label">${esc(t("Ειδική Εκπαίδευση","Special Education"))}</span><span class="spdiag-entry__sub">${esc(t("Διαθέσιμα σύντομα τεστ · 3 απλές ερωτήσεις · χωρίς βαθμό ή διάγνωση","Available short tests · 3 simple questions · no grade or diagnosis"))}</span>`;
+    grid.prepend(entry);
+  }
+
+  function watchQuizViewEntry(){
+    const content=document.getElementById("quizContent");
+    if(!content||content.dataset.spdiagObserved==="1") return;
+    content.dataset.spdiagObserved="1";
+    let queued=false;
+    const refresh=()=>{
+      if(queued) return;
+      queued=true;
+      queueMicrotask(()=>{queued=false;ensureQuizViewEntry();});
+    };
+    new MutationObserver(refresh).observe(content,{childList:true,subtree:true});
+    refresh();
   }
 
   function modal(){ return document.getElementById(MODAL_ID); }
@@ -238,11 +269,12 @@
 
   document.addEventListener("keydown",(e)=>{if(e.key==="Escape"&&!modal()?.hidden)closeModal();});
   document.addEventListener("click",(e)=>{const trigger=e.target instanceof Element?e.target.closest("[data-special-education-diagnostic]"):null;if(trigger){e.preventDefault();openModal(e);}});
-  document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#langEl,#langEn"))setTimeout(()=>{const m=modal();if(m&&!m.hidden)closeModal();ensureEntry();},0);});
+  document.addEventListener("click",(e)=>{if(e.target instanceof Element&&e.target.closest("#langEl,#langEn"))setTimeout(()=>{const m=modal();if(m&&!m.hidden)closeModal();ensureEntry();ensureQuizViewEntry();},0);});
   const init=()=>{
     injectStyles();
     ensureEntry();
     ensureQuizViewEntry();
+    watchQuizViewEntry();
   };
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 

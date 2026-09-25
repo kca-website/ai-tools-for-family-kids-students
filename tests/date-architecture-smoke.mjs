@@ -11,7 +11,7 @@ const postfix = read('site-postfix.js');
 const audit = read('september-2026-tool-audit.js');
 const report = read('report-link.js');
 
-assert.match(meta, /toolCatalogAuditDate:\s*"2026-09-05"/);
+assert.match(meta, /toolCatalogAuditDate:\s*"2026-09-24"/);
 assert.match(meta, /Τελευταίος πλήρης έλεγχος καταλόγου εργαλείων/);
 assert.ok(index.indexOf('/site-meta.js') < index.indexOf('/data.js'));
 assert.match(app, /AITOOLSKIDS_SITE_META\?\.toolCatalogAuditLabelEl/);

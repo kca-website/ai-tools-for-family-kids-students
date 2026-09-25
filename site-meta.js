@@ -1,9 +1,9 @@
 /** Canonical public maintenance metadata. Do not use deploy dates as tool-review dates. */
 window.AITOOLSKIDS_SITE_META = Object.freeze({
   version: 2,
-  toolCatalogAuditDate: "2026-09-25",
-  toolCatalogAuditLabelEl: "Τελευταίος πλήρης έλεγχος καταλόγου εργαλείων: 25 Σεπτεμβρίου 2026",
-  toolCatalogAuditLabelEn: "Last full tool-catalog review: 25 September 2026",
+  toolCatalogAuditDate: "2026-09-24",
+  toolCatalogAuditLabelEl: "Τελευταίος πλήρης έλεγχος καταλόγου εργαλείων: 24 Σεπτεμβρίου 2026",
+  toolCatalogAuditLabelEn: "Last full tool-catalog review: 24 September 2026",
   signLanguageConceptCount: 167,
   canonicalToolCount: 43,
   publicAgeRange: "4–18"

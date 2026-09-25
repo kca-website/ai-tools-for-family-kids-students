@@ -53,10 +53,11 @@ assert.match(teacher,/qrcode@1\.5\.4/);
 assert.match(teacher,/ΦΕΚ 3567\/Β\/04-08-2021/);
 
 for (const [name,html] of [["teacher-assistant.html",teacher],["index.html",index]]) {
-  const re=/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
+  const re=/<script(?![^>]*\bsrc=)([^>]*)>([\s\S]*?)<\/script>/gi;
   let match, count=0;
   while((match=re.exec(html))){
-    const code=match[1].trim();
+    if(/type\s*=\s*["']application\/ld\+json["']/i.test(match[1])) continue;
+    const code=match[2].trim();
     if(!code)continue;
     count++;
     new vm.Script(code,{filename:name+"#inline-"+count});

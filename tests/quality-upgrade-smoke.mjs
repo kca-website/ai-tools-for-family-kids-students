@@ -55,7 +55,7 @@ assert.match(teacher,/tutorDeepLink/);
 assert.match(teacher,/QR για την τάξη/);
 assert.match(teacher,/qrcode@1\.5\.4/);
 assert.match(teacher,/ΦΕΚ 3567\/Β\/04-08-2021/);
-assert.match(homeSearch,/Ψάξε σε όλο το AITOOLS4KIDS/);
+assert.match(homeSearch,/Ψάξε σε όλο το aitools4kids/);
 assert.match(homeSearch,/GAP_TAGS/);
 assert.match(homeSearch,/AITOOLSKIDS_TUTOR_CATALOG/);
 assert.match(homeSearch,/sign-language\.html\?q=/);

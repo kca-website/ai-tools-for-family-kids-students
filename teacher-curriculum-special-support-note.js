@@ -59,7 +59,7 @@
     if(!note||!unit) return;
     const gid=document.getElementById("grade")?.value||"",glabel=selectedLabel("grade"),sid=document.getElementById("subject")?.value||"",slabel=selectedLabel("subject");
     const selected=(typeof window.selectedSubject==="function")?window.selectedSubject():null;
-    if((selected?.annualMapped||selected?.frameworkMapped)&&!selected?.supportOnly) return;
+    if((selected?.annualMapped||selected?.frameworkMapped||selected?.selectionFramework)&&!selected?.supportOnly) return;
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).filter(e=>entryMatches(e,c,gid,glabel,sid,slabel));
     const exact=entries.find(isExactAnnual);
     const framework=entries.find(isFramework);

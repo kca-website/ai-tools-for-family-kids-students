@@ -67,9 +67,9 @@
           { id: "notebooklm", tasks: ["understand","notes","practice"], whyEl: "Μελέτη πάνω στις δικές σου σημειώσεις, papers και επίσημες πηγές χωρίς να ανοίγει αυθαίρετα το πεδίο." },
           { id: "pubmed", tasks: ["research","papers"], whyEl: "Βασική βιβλιογραφική αναζήτηση στη βιοϊατρική και τις επιστήμες ζωής με άμεση πρόσβαση στα πρωτογενή citations." },
           { id: "consensus", tasks: ["research","papers","understand"], whyEl: "AI αναζήτηση για ερωτήματα τύπου «τι δείχνουν οι μελέτες;», με papers πίσω από κάθε σύνθεση." },
-          { id: "semantic-scholar", tasks: ["research","papers"], whyEl: "Δωρεάν AI-powered αναζήτηση papers, citations και σχετικής βιβλιογραφίας." },
           { id: "elicit", tasks: ["research","papers"], whyEl: "Αναζήτηση και σύγκριση ακαδημαϊκών papers για βιολογικά και βιοϊατρικά ερωτήματα." },
           { id: "scite", tasks: ["research","papers","feedback"], whyEl: "Έλεγχος αν μια επιστημονική εργασία υποστηρίζει ή αντικρούει έναν ισχυρισμό." },
+          { id: "semantic-scholar", tasks: ["research","papers"], whyEl: "Δωρεάν AI-powered αναζήτηση papers, citations και σχετικής βιβλιογραφίας." },
           { id: "alphafold-db", tasks: ["understand","research"], whyEl: "Για πρωτεΐνες: εξερεύνηση προβλεπόμενων 3D δομών και confidence, χρήσιμη σε Μοριακή Βιολογία και Βιοχημεία." },
           { id: "uniprot", tasks: ["research","understand"], whyEl: "Για πρωτεΐνες και λειτουργικές annotations, αλληλουχίες, domains και cross-references." },
           { id: "biorender", tasks: ["feedback","notes"], whyEl: "Για καθαρά επιστημονικά figures και διαγράμματα βιολογικών διαδικασιών, όχι για παραγωγή επιστημονικών συμπερασμάτων." }

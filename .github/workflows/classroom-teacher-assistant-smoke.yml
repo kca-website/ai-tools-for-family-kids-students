@@ -10,6 +10,10 @@ on:
       - 'classroom.html'
       - 'classroom-teacher-tools.css'
       - 'teacher-assistant.html'
+      - 'curriculum-resolver.js'
+      - 'gel-2026-2027-update.js'
+      - 'general-education-book-sections-2026-2027.js'
+      - 'official-curriculum-data.js'
       - 'tests/classroom-teacher-assistant-smoke.mjs'
       - '.github/workflows/classroom-teacher-assistant-smoke.yml'
 

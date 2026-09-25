@@ -186,19 +186,53 @@
     if(preferred&&ids.includes(preferred)) grade.value=preferred;
   }
 
+  function specialSubjectsFor(track,gradeId){
+    const def=TRACKS[track];
+    if(!def?.special) return [];
+    const allowedIds=exposedFor(track,gradeId).map((x)=>x.id);
+    const rows=window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(def.zoneId,gradeId)||[];
+    const byId=new Map(rows.map((row)=>[row.id,row]));
+    return allowedIds.map((id)=>byId.get(id)).filter(Boolean);
+  }
+
+  function populateSpecialSubjects(track,preferredSubject=null){
+    const subject=document.getElementById("tutorSubject");
+    const grade=document.getElementById("tutorGrade");
+    if(!subject||!grade) return;
+    const rows=specialSubjectsFor(track,grade.value);
+    subject.replaceChildren();
+    rows.forEach((row)=>{
+      const option=document.createElement("option");
+      option.value=row.id;
+      option.textContent=isEnglish()?(row.subjectLabelEn||row.subjectLabelEl||row.id):(row.subjectLabelEl||row.subjectLabelEn||row.id);
+      subject.appendChild(option);
+    });
+    if(!subject.options.length){
+      const option=document.createElement("option");
+      option.value=""; option.disabled=true; option.textContent=text("noContent");
+      subject.appendChild(option); subject.disabled=true;
+    }else{
+      subject.disabled=false;
+      if(preferredSubject&&[...subject.options].some((o)=>o.value===preferredSubject)) subject.value=preferredSubject;
+      else subject.selectedIndex=0;
+    }
+    subject.dispatchEvent(new Event("change",{bubbles:true}));
+    const mount=document.getElementById("tutorMount");
+    if(mount) mount.dataset.schoolTrack=track;
+  }
+
   function filterSubjects(track,preferredSubject=null){
     const subject=document.getElementById("tutorSubject");
     const grade=document.getElementById("tutorGrade");
     if(!subject||!grade) return;
     const special=TRACKS[track]?.special;
-    const allowed=special?new Set(exposedFor(track,grade.value).map((x)=>x.id)):null;
-
+    if(special){
+      populateSpecialSubjects(track,preferredSubject);
+      return;
+    }
     [...subject.options].forEach((option)=>{
-      const optionIsSpecial=isSpecialSubjectId(option.value);
-      const keep=special?allowed.has(option.value):!optionIsSpecial;
-      if(!keep) option.remove();
+      if(isSpecialSubjectId(option.value)) option.remove();
     });
-
     if(!subject.options.length){
       const option=document.createElement("option");
       option.value=""; option.disabled=true; option.textContent=text("noContent");
@@ -300,6 +334,20 @@
     if(!settings||!grade||!subject) return;
 
     injectStyles();
+
+    if(!grade.dataset.specialGradeBinding){
+      grade.dataset.specialGradeBinding="1";
+      grade.addEventListener("change",()=>{
+        const activeTrack=document.getElementById("tutorMount")?.dataset.schoolTrack||"";
+        if(!TRACKS[activeTrack]?.special||!specialRuntimeReady()) return;
+        queueMicrotask(()=>{
+          populateSpecialSubjects(activeTrack,null);
+          const liveCtx=routeContext();
+          const def=TRACKS[activeTrack];
+          history.replaceState({},"",cleanUrl(def.zoneId,liveCtx.roleId||ctx.roleId,activeTrack,grade.value,subject.value||null));
+        });
+      });
+    }
 
     let field=document.getElementById("tutorSpecialSchoolContext");
     if(!field){

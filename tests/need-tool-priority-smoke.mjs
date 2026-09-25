@@ -96,14 +96,29 @@ try {
     await openPath(page, '/high/student/tools');
     const age15 = page.locator('#studentAgeFilter [data-student-age="15"]');
     assert.equal(await age15.getAttribute('aria-pressed'), 'true', 'High School student path should default to age 15');
-    const hrefs = await choose(page, 'Μαθηματικά', 'Να ελέγξω λύση');
+    let hrefs = await choose(page, 'Μαθηματικά', 'Να ελέγξω λύση');
+    assert.deepEqual(hrefs.slice(0, 5), [
+      '/tools/photomath.html',
+      '/tools/wolfram-alpha.html',
+      '/tools/geogebra.html',
+      '/tools/digital-tutoring.html',
+      '/tools/ai-help.html',
+    ], 'Age 15 High School Math/check must respect audited age limits and NEED_TOOL_MAP priority');
+    assert.equal(hrefs.includes('/tools/symbolab.html'), false, 'Age 15 in the EEA must not see audited 16+ Symbolab');
+
+    const age16 = page.locator('#studentAgeFilter [data-student-age="16"]');
+    await age16.evaluate((el) => el.click());
+    await page.waitForTimeout(150);
+    hrefs = await page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
+      links.map((a) => new URL(a.href).pathname)
+    );
     assert.deepEqual(hrefs.slice(0, 5), [
       '/tools/photomath.html',
       '/tools/symbolab.html',
       '/tools/wolfram-alpha.html',
       '/tools/geogebra.html',
       '/tools/digital-tutoring.html',
-    ], 'High School Math/check must follow NEED_TOOL_MAP priority');
+    ], 'Age 16 should unlock audited 16+ Symbolab in the intended Math/check priority');
     await page.close();
   }
 
@@ -118,6 +133,24 @@ try {
       '/tools/google-lens.html',
       '/tools/zotero.html',
     ], 'High School History/research must prioritise source-oriented tools');
+    await page.close();
+  }
+
+  {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await openPath(page, '/primary/student/tools');
+    let hrefs = await choose(page, 'Γλώσσα', 'Δυσκολεύομαι στην ανάγνωση / κατανόηση');
+    assert.deepEqual(hrefs.slice(0, 3), [
+      '/tools/immersive-reader.html',
+      '/tools/reading-coach.html',
+      '/tools/ai-help.html',
+    ], 'Reading-support need should reuse curated support tools without a diagnostic label');
+
+    hrefs = await choose(page, 'Μαθηματικά', 'Χρειάζομαι μικρά βήματα / καθαρή οργάνωση');
+    assert.deepEqual(hrefs.slice(0, 2), [
+      '/tools/ai-help.html',
+      '/tools/immersive-reader.html',
+    ], 'Step-by-step need should prioritise guided and low-clutter support');
     await page.close();
   }
 

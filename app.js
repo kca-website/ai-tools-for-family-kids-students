@@ -695,10 +695,13 @@
       if (state.currentNeed && typeof NEED_TOOL_MAP !== "undefined") {
         const needIds = (NEED_TOOL_MAP[state.currentSubject] && NEED_TOOL_MAP[state.currentSubject][state.currentNeed]) || [];
         const subjectIds = new Set(allowedToolIds);
-        // NEED_TOOL_MAP is ordered by best fit for the selected need.
-        // Intersect in NEED_TOOL_MAP order so the first cards are the most relevant,
-        // instead of inheriting the generic subject order.
-        allowedToolIds = needIds.filter((id) => subjectIds.has(id));
+        const selectedNeed = typeof LEARNING_NEEDS !== "undefined"
+          ? LEARNING_NEEDS.find((item) => item.id === state.currentNeed)
+          : null;
+        const allowCrossSubjectSupport = selectedNeed?.crossSubjectSupport === true;
+        // Ordered best-fit map. Neutral support needs may reuse curated support
+        // tools across subjects without changing the generic subject catalogue.
+        allowedToolIds = needIds.filter((id) => subjectIds.has(id) || allowCrossSubjectSupport);
       }
 
       const existingById = new Map((pathData.tools || []).map((entry) => [entry.toolId, entry]));
@@ -783,6 +786,83 @@
 
     renderToolGrid(pathTools, els.advancedGrid);
   }
+
+function normalizedFactText(tool, entry) {
+  return [
+    tool?.minAgeNote, tool?.shortDescEl, tool?.shortDescEn,
+    entry?.useCaseEl, entry?.useCaseEn, entry?.howToEl, entry?.howToEn,
+    entry?.cautionEl, entry?.cautionEn
+  ].filter(Boolean).join(" ").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function toolNutritionHtml(tool, entry, greekSupport, a11y) {
+  const text = normalizedFactText(tool, entry);
+  const free = /\bfree\b|δωρεαν|χωρις χρεωση|no cost/.test(text);
+  const paid = /subscription|paid plan|premium|συνδρομ|επι πληρωμη|higher limits|advanced features.*paid/.test(text);
+  const noAccount = /χωρις λογαριασμ|δεν χρειαζεται λογαριασμ|no account|without an account|does not require an account/.test(text);
+  const schoolAccount = /σχολικ[^.]{0,30}λογαριασμ|school[- ]managed|school account|workspace for education|education workspace/.test(text);
+  const accountMention = /λογαριασμ|account|sign[ -]?in|login/.test(text);
+
+  const costEl = free && paid ? "Δωρεάν βασική χρήση · ορισμένες λειτουργίες επί πληρωμή"
+    : free ? "Δωρεάν / δωρεάν βασική χρήση"
+    : paid ? "Επί πληρωμή ή μέσω φορέα"
+    : "Δεν έχει επιβεβαιωθεί";
+  const costEn = free && paid ? "Free basic use · some features are paid"
+    : free ? "Free / free basic use"
+    : paid ? "Paid or institution-provided"
+    : "Not yet verified";
+
+  const accountEl = noAccount ? "Δεν απαιτείται για βασική χρήση"
+    : schoolAccount ? "Σχολικός / διαχειριζόμενος λογαριασμός"
+    : accountMention ? "Απαιτείται ή εξαρτάται από τη λειτουργία"
+    : "Δεν έχει επιβεβαιωθεί";
+  const accountEn = noAccount ? "Not required for basic use"
+    : schoolAccount ? "School / managed account"
+    : accountMention ? "Required or feature-dependent"
+    : "Not yet verified";
+
+  const greekLabelsEl = {yes:"Ναι",partial:"Μερικά",neutral:"Γλωσσικά ουδέτερο",no:"Όχι",unknown:"Δεν επιβεβαιώθηκε"};
+  const greekLabelsEn = {yes:"Yes",partial:"Partial",neutral:"Language-neutral",no:"No",unknown:"Not verified"};
+  const greekStatus = greekSupport?.status || "unknown";
+
+  const a11yLabelsEl = {good:"Επίσημη τεκμηρίωση",partial:"Μερική τεκμηρίωση",caution:"Τεκμηριωμένη ανησυχία",none:"Δεν επιβεβαιώθηκε",unknown:"Δεν επιβεβαιώθηκε"};
+  const a11yLabelsEn = {good:"Official evidence",partial:"Partial evidence",caution:"Documented concern",none:"Not verified",unknown:"Not verified"};
+  const a11yStatus = a11y?.status || "unknown";
+
+  const ageBase = typeof tool?.minAge === "number"
+    ? `${tool.minAge}+`
+    : (state.lang === "el" ? "Δεν έχει επιβεβαιωθεί" : "Not yet verified");
+  const ageValue = tool?.minAgeNote ? `${ageBase} · ${tool.minAgeNote}` : ageBase;
+  const reviewValue = window.AITOOLSKIDS_SITE_META?.toolCatalogAuditDate ||
+    (state.lang === "el" ? "Δεν έχει επιβεβαιωθεί" : "Not yet verified");
+
+  const rows = state.lang === "el" ? [
+    ["Ηλικία", ageValue],
+    ["Ελληνικά", greekLabelsEl[greekStatus] || greekLabelsEl.unknown],
+    ["Κόστος", costEl],
+    ["Λογαριασμός", accountEl],
+    ["Προσβασιμότητα", a11yLabelsEl[a11yStatus] || a11yLabelsEl.unknown],
+    ["Έλεγχος", reviewValue],
+  ] : [
+    ["Age", ageValue],
+    ["Greek", greekLabelsEn[greekStatus] || greekLabelsEn.unknown],
+    ["Cost", costEn],
+    ["Account", accountEn],
+    ["Accessibility", a11yLabelsEn[a11yStatus] || a11yLabelsEn.unknown],
+    ["Review", reviewValue],
+  ];
+
+  return `<details class="tool-card__nutrition">
+    <summary>${state.lang === "el" ? "▸ Στοιχεία εργαλείου" : "▸ Tool facts"}</summary>
+    <div class="tool-card__nutrition-body">
+      ${rows.map(([key,value]) => `<div class="tool-card__nutrition-row"><span class="tool-card__nutrition-key">${escapeHtml(key)}</span><span class="tool-card__nutrition-value">${escapeHtml(value)}</span></div>`).join("")}
+      <p class="tool-card__nutrition-note">${state.lang === "el"
+        ? "Συνοπτική ετικέτα από τα επαληθευμένα στοιχεία του οδηγού· δεν αποτελεί πλήρη έλεγχο απορρήτου ή προσβασιμότητας."
+        : "Compact label from the guide's verified data; it is not a full privacy or accessibility audit."}</p>
+    </div>
+  </details>`;
+}
+
  // ---------- Generic tool grid renderer ----------
 function renderToolGrid(pathTools, targetElement) {
   targetElement.innerHTML = "";
@@ -884,8 +964,9 @@ function renderToolGrid(pathTools, targetElement) {
       ${useCase ? `<p class="tool-card__field-label">${t("useCaseLabel")}</p><p class="tool-card__field-value">${escapeHtml(useCase)}</p>` : ""}
       ${howTo ? `<p class="tool-card__field-label">${t("howToLabel")}</p><p class="tool-card__field-value">${escapeHtml(howTo)}</p>` : ""}
       ${caution ? `<div class="tool-card__caution"><strong>${t("cautionLabel")}:</strong> ${escapeHtml(caution)}</div>` : ""}
-      ${typeof tool.minAge === "number" ? `<p class="tool-card__age-note"><strong>${t("toolAgeLabel")}:</strong> ${tool.minAge}+${tool.minAgeNote ? ` · ${escapeHtml(tool.minAgeNote)}` : ""}</p>` : ""}
+      ${typeof tool.minAge === "number" ? `<p class="tool-card__age-note"><strong>${t("toolAgeLabel")}:</strong> ${tool.minAge}+</p>` : ""}
       ${tool.greekTips && state.lang === "el" ? `<p class="tool-card__greek-tips" style="margin-top: 8px; padding: 8px 10px; background: #F0F7FF; border-radius: 8px; font-size: 0.85rem; color: #334155;">🇬🇷 ${escapeHtml(tool.greekTips)}</p>` : ""}
+      ${toolNutritionHtml(tool, entry, greekSupport, a11y)}
       <div class="tool-card__actions">
         <a class="tool-card__link" href="${escapeAttr("/tools/" + tool.id + ".html")}" target="_blank" rel="noopener noreferrer">${t("detailsLink")}</a>
         <button type="button" class="tool-card__share-btn">🔗 ${t("shareToolBtn")}</button>

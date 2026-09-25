@@ -164,6 +164,7 @@
     const catalog=subject.catalogSubject;
     const quiz=subject.quiz;
     const official=subject.officialCurriculum;
+    let preferCurrentCatalogTopics=false;
     if(catalog){
       const status=catalogTopicStatus(catalog);
       const c=catalog.curriculum||{};
@@ -175,6 +176,7 @@
         c.coverageStatus==="annual-guidance-detailed-map" ||
         c.coverageStatus==="panhellenic-2027-detailed-map"
       );
+      preferCurrentCatalogTopics = currentMapped && (catalog.topics||[]).some((t)=>!t?.specialSupportAction);
       const visibleCatalogTopics=(catalog.topics||[]).filter((t)=>currentMapped || t?.specialSupportAction);
       visibleCatalogTopics.forEach((t)=>rows.push(Object.assign({},t,{
         id:t.id || (catalog.id+".topic."+rows.length),
@@ -186,7 +188,7 @@
       })));
     }
     const bookSections=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(subject.quizId||subject.id)||null;
-    if(bookSections?.sections?.length){
+    if(bookSections?.sections?.length && !preferCurrentCatalogTopics){
       bookSections.sections.forEach((label,i)=>rows.push({
         id:(subject.quizId||subject.id)+".verified-book-section-"+(i+1),
         labelEl:label,labelEn:label,
@@ -220,20 +222,22 @@
       }
     }
     const ids=uniq([subject.id,subject.quizId,catalog?.id,catalog?.quizId,quiz?.id,...(subject.aliases||[])]);
-    matchingGapRows(ids).forEach(([gapId,a])=>{
-      const gap=typeof GAP_TAGS!=="undefined"?GAP_TAGS[gapId]:null;
-      const exact=a?.status==="exact-section-verified" || a?.status==="related-section-verified";
-      rows.push({
-        id:gapId,
-        labelEl:(exact?a?.officialSectionEl:null)||a?.topicAnchorEl||gap?.labelEl||gapId,
-        labelEn:(exact?a?.officialSectionEn:null)||a?.topicAnchorEn||gap?.labelEn||gap?.labelEl||gapId,
-        status:a?.status||"official-course-topic-anchor",
-        sourceType:"gap-alignment",
-        sourceUrl:a?.sourceUrl||"",
-        sourceLabelEl:a?.statusLabelEl||"",
-        sourceLabelEn:a?.statusLabelEn||""
+    if(!preferCurrentCatalogTopics){
+      matchingGapRows(ids).forEach(([gapId,a])=>{
+        const gap=typeof GAP_TAGS!=="undefined"?GAP_TAGS[gapId]:null;
+        const exact=a?.status==="exact-section-verified" || a?.status==="related-section-verified";
+        rows.push({
+          id:gapId,
+          labelEl:(exact?a?.officialSectionEl:null)||a?.topicAnchorEl||gap?.labelEl||gapId,
+          labelEn:(exact?a?.officialSectionEn:null)||a?.topicAnchorEn||gap?.labelEn||gap?.labelEl||gapId,
+          status:a?.status||"official-course-topic-anchor",
+          sourceType:"gap-alignment",
+          sourceUrl:a?.sourceUrl||"",
+          sourceLabelEl:a?.statusLabelEl||"",
+          sourceLabelEn:a?.statusLabelEn||""
+        });
       });
-    });
+    }
     return mergeTopics(rows);
   }
 

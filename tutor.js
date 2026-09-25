@@ -577,7 +577,10 @@
       ) || null;
     }
     const resolver = window.AITOOLSKIDS_CURRICULUM_RESOLVER;
-    if (resolver) return resolver.getSubject?.(ctx.zoneId, refs.grade.value, refs.subject.value) || null;
+    if (resolver) {
+      const resolved = resolver.getSubject?.(ctx.zoneId, refs.grade.value, refs.subject.value) || null;
+      if (resolved) return resolved;
+    }
     const catalog = window.AITOOLSKIDS_TUTOR_CATALOG;
     if (!catalog) return null;
     return catalog.getSubject?.(ctx.zoneId, refs.grade.value, refs.subject.value) || null;

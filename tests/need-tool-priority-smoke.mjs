@@ -121,6 +121,24 @@ try {
     await page.close();
   }
 
+  {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await openPath(page, '/primary/student/tools');
+    let hrefs = await choose(page, 'Γλώσσα', 'Δυσκολεύομαι στην ανάγνωση / κατανόηση');
+    assert.deepEqual(hrefs.slice(0, 3), [
+      '/tools/immersive-reader.html',
+      '/tools/reading-coach.html',
+      '/tools/ai-help.html',
+    ], 'Reading-support need should reuse curated support tools without a diagnostic label');
+
+    hrefs = await choose(page, 'Μαθηματικά', 'Χρειάζομαι μικρά βήματα / καθαρή οργάνωση');
+    assert.deepEqual(hrefs.slice(0, 2), [
+      '/tools/ai-help.html',
+      '/tools/immersive-reader.html',
+    ], 'Step-by-step need should prioritise guided and low-clutter support');
+    await page.close();
+  }
+
   console.log('Learning-need tool priority smoke passed.');
 } finally {
   await browser.close();

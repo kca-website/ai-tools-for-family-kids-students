@@ -33,8 +33,6 @@ try{
   await page.selectOption('#subject',biologyOption);
   await page.waitForTimeout(80);
   const biologyUnits=await page.locator('#unit option').allInnerTexts();
-  const biologyCandidates=await page.locator('#subject option').evaluateAll((options)=>options.filter(o=>/Βιολογία/.test(o.textContent||'')).map(o=>({value:o.value,text:(o.textContent||'').trim()})));
-  console.log('Teacher Assistant Biology candidates:',JSON.stringify(biologyCandidates),'units:',JSON.stringify(biologyUnits));
   assert.equal(biologyUnits.length,14,'Teacher Assistant GEL A Biology should expose 14 documented mapped topics');
   assert.match(await page.locator('#curriculumNote').innerText(),/αναλυτικό χάρτη/i,'Teacher Assistant must label GEL Biology topics as a documented navigation map');
   assert.ok(await page.locator('#curriculumNote a[href^="https://"]').count()>=1,'Teacher Assistant mapped curriculum must expose a source link');

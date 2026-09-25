@@ -26,6 +26,8 @@ const LEARNING_NEEDS = [
   { id: "check", icon: "✅", labelEl: "Να ελέγξω λύση", labelEn: "Check my work" },
   { id: "revise", icon: "🧠", labelEl: "Να κάνω επανάληψη", labelEn: "Revise" },
   { id: "research", icon: "🔎", labelEl: "Να κάνω έρευνα", labelEn: "Research" },
+  { id: "reading-support", icon: "📖", labelEl: "Δυσκολεύομαι στην ανάγνωση / κατανόηση", labelEn: "Reading / comprehension support", crossSubjectSupport: true },
+  { id: "step-by-step", icon: "🪜", labelEl: "Χρειάζομαι μικρά βήματα / καθαρή οργάνωση", labelEn: "Smaller steps / clearer structure", crossSubjectSupport: true },
 ];
 
 const NEED_TOOL_MAP = {
@@ -36,6 +38,8 @@ const NEED_TOOL_MAP = {
     check: ["ai-help", "gemini-education", "chatgpt", "grammarly", "notebooklm"],
     revise: ["quizlet", "ai-help", "notebooklm", "gemini-education", "anki", "notion", "digital-tutoring", "chatgpt"],
     research: ["gemini-education", "perplexity", "notebooklm", "chatgpt", "zotero"],
+    "reading-support": ["immersive-reader", "reading-coach", "ai-help", "notebooklm"],
+    "step-by-step": ["ai-help", "immersive-reader", "notebooklm"],
   },
   math: {
     understand: ["ai-help", "desmos", "geogebra", "chatgpt", "gemini-education", "wolfram-alpha"],
@@ -44,6 +48,8 @@ const NEED_TOOL_MAP = {
     check: ["photomath", "symbolab", "geogebra", "wolfram-alpha", "google-lens", "digital-tutoring", "ai-help", "gemini-education"],
     revise: ["ai-help", "gemini-education", "quizlet", "anki", "digital-tutoring", "chatgpt"],
     research: ["gemini-education", "wolfram-alpha", "perplexity"],
+    "reading-support": ["immersive-reader", "ai-help", "notebooklm"],
+    "step-by-step": ["ai-help", "immersive-reader", "notebooklm"],
   },
   science: {
     understand: ["phet", "ai-help", "chatgpt", "gemini-education", "notebooklm"],
@@ -52,6 +58,8 @@ const NEED_TOOL_MAP = {
     check: ["ai-help", "phet", "google-lens", "wolfram-alpha", "gemini-education", "chatgpt", "notebooklm", "digital-tutoring"],
     revise: ["quizlet", "ai-help", "notebooklm", "phet", "gemini-education", "anki", "digital-tutoring", "chatgpt"],
     research: ["gemini-education", "google-arts-culture", "perplexity", "notebooklm", "google-lens", "scite"],
+    "reading-support": ["immersive-reader", "ai-help", "phet", "notebooklm"],
+    "step-by-step": ["ai-help", "phet", "immersive-reader", "notebooklm"],
   },
   history: {
     understand: ["google-arts-culture", "ai-help", "chatgpt", "gemini-education", "notebooklm"],
@@ -60,6 +68,8 @@ const NEED_TOOL_MAP = {
     check: ["ai-help", "gemini-education", "google-arts-culture", "perplexity", "chatgpt", "notebooklm"],
     revise: ["quizlet", "ai-help", "notebooklm", "google-arts-culture", "gemini-education", "anki", "notion", "digital-tutoring", "chatgpt"],
     research: ["perplexity", "notebooklm", "google-arts-culture", "google-lens", "zotero"],
+    "reading-support": ["immersive-reader", "ai-help", "notebooklm", "google-arts-culture"],
+    "step-by-step": ["ai-help", "immersive-reader", "notebooklm"],
   },
   "foreign-language": {
     understand: ["ai-help", "gemini-education", "chatgpt", "deepl"],
@@ -68,6 +78,8 @@ const NEED_TOOL_MAP = {
     check: ["ai-help", "gemini-education", "grammarly", "chatgpt", "deepl"],
     revise: ["quizlet", "duolingo", "ai-help", "gemini-education", "anki", "notebooklm", "deepl"],
     research: ["gemini-education", "perplexity", "chatgpt", "deepl"],
+    "reading-support": ["immersive-reader", "reading-coach", "ai-help", "deepl"],
+    "step-by-step": ["ai-help", "immersive-reader", "reading-coach", "deepl"],
   },
 };
 

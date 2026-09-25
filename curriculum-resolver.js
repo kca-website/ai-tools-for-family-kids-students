@@ -164,6 +164,7 @@
     const catalog=subject.catalogSubject;
     const quiz=subject.quiz;
     const official=subject.officialCurriculum;
+    let preferCurrentCatalogTopics=false;
     if(catalog){
       const status=catalogTopicStatus(catalog);
       const c=catalog.curriculum||{};
@@ -175,6 +176,7 @@
         c.coverageStatus==="annual-guidance-detailed-map" ||
         c.coverageStatus==="panhellenic-2027-detailed-map"
       );
+      preferCurrentCatalogTopics = currentMapped && (catalog.topics||[]).some((t)=>!t?.specialSupportAction);
       const visibleCatalogTopics=(catalog.topics||[]).filter((t)=>currentMapped || t?.specialSupportAction);
       visibleCatalogTopics.forEach((t)=>rows.push(Object.assign({},t,{
         id:t.id || (catalog.id+".topic."+rows.length),
@@ -186,7 +188,7 @@
       })));
     }
     const bookSections=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(subject.quizId||subject.id)||null;
-    if(bookSections?.sections?.length){
+    if(bookSections?.sections?.length && !preferCurrentCatalogTopics){
       bookSections.sections.forEach((label,i)=>rows.push({
         id:(subject.quizId||subject.id)+".verified-book-section-"+(i+1),
         labelEl:label,labelEn:label,

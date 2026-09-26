@@ -1049,6 +1049,90 @@ function reflectionSvgMarkup(){
   return baseSceneSvg("Ανάκλαση φωτός","Προσπίπτουσα ακτίνα, κάθετος και νόμος ανάκλασης.",scenes);
 }
 
+
+function neutralisationSvgMarkup(){
+  var acid='<circle cx="270" cy="190" r="34" fill="#ffe1e1" stroke="#c95151" stroke-width="4"/><text x="270" y="198" text-anchor="middle" font-size="22" font-weight="900" fill="#a32f2f">H⁺</text>';
+  var base='<circle cx="490" cy="190" r="34" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><text x="490" y="198" text-anchor="middle" font-size="21" font-weight="900" fill="#23637f">OH⁻</text>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Οξύ + βάση</text>'+acid+base+'<text x="270" y="255" text-anchor="middle" font-size="15" font-weight="850" fill="#a32f2f">όξινο</text><text x="490" y="255" text-anchor="middle" font-size="15" font-weight="850" fill="#23637f">βασικό</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Τα ιόντα πλησιάζουν</text><g class="ae-drift-right">'+acid+'</g><g class="ae-drift-left">'+base+'</g></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">H⁺ + OH⁻</text><g class="ae-pulse"><circle cx="350" cy="190" r="34" fill="#ffe1e1" stroke="#c95151" stroke-width="4"/><text x="350" y="198" text-anchor="middle" font-size="22" font-weight="900" fill="#a32f2f">H⁺</text><circle cx="430" cy="190" r="34" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><text x="430" y="198" text-anchor="middle" font-size="21" font-weight="900" fill="#23637f">OH⁻</text></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σχηματισμός νερού</text><g class="ae-pulse"><circle cx="380" cy="190" r="70" fill="#dff4ff" stroke="#4d9cbb" stroke-width="5"/><text x="380" y="200" text-anchor="middle" font-size="30" font-weight="900" fill="#23637f">H₂O</text></g><text x="380" y="300" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">H⁺ + OH⁻ → H₂O</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Εξουδετέρωση</text><rect x="240" y="120" width="280" height="150" rx="24" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><text x="380" y="180" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">οξύ + βάση</text><text x="380" y="225" text-anchor="middle" font-size="25" font-weight="900" fill="#24594c">→ νερό</text></g>'
+  ];
+  return baseSceneSvg("Εξουδετέρωση","Συνδυασμός H⁺ και OH⁻ και σχηματισμός νερού.",scenes);
+}
+function periodicTableSvgMarkup(){
+  function grid(highlightRow,highlightCol,metals){
+    var s='<g transform="translate(140 90)">';
+    for(var r=0;r<5;r++)for(var col=0;col<10;col++){
+      var fill=metals?(col<7||r>2?"#dff4ff":"#fff0d8"):"#f4f7fa";
+      if(r===highlightRow)fill="#d8ebff";
+      if(col===highlightCol)fill="#e7f5eb";
+      s+='<rect x="'+(col*48)+'" y="'+(r*44)+'" width="42" height="38" rx="5" fill="'+fill+'" stroke="#7893a8"/>';
+    }
+    return s+'</g>';
+  }
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ταξινόμηση στοιχείων</text>'+grid(-1,-1,false)+'<text x="380" y="330" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">θέση → οργανωμένη πληροφορία</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Περίοδος = οριζόντια σειρά</text>'+grid(2,-1,false)+'</g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ομάδα = κατακόρυφη στήλη</text>'+grid(-1,3,false)+'</g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Παρόμοιες ιδιότητες στην ίδια ομάδα</text>'+grid(-1,8,false)+'<g class="ae-pulse"><text x="650" y="190" font-size="18" font-weight="900" fill="#24594c">ίδια ομάδα</text></g></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μέταλλα και αμέταλλα</text>'+grid(-1,-1,true)+'<text x="245" y="330" text-anchor="middle" font-size="16" font-weight="900" fill="#23637f">κυρίως μέταλλα</text><text x="545" y="330" text-anchor="middle" font-size="16" font-weight="900" fill="#8a5310">πολλά αμέταλλα</text></g>'
+  ];
+  return baseSceneSvg("Περιοδικός πίνακας","Περίοδοι, ομάδες και κατανομή μετάλλων και αμετάλλων.",scenes);
+}
+function tectonicPlatesSvgMarkup(){
+  var base='<rect x="90" y="245" width="580" height="65" rx="18" fill="#f0a36c"/><text x="380" y="286" text-anchor="middle" font-size="17" font-weight="900" fill="#7a3e24">ασθενόσφαιρα</text>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Λιθοσφαιρικές πλάκες</text>'+base+'<path d="M110 220 L350 170 L350 245 H110 Z" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/><path d="M650 220 L410 170 L410 245 H650 Z" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αργή κίνηση πάνω στην ασθενόσφαιρα</text>'+base+'<g class="ae-drift-left"><rect x="145" y="165" width="220" height="70" rx="12" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/></g><g class="ae-drift-right"><rect x="395" y="165" width="220" height="70" rx="12" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/></g></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αποκλίνον όριο</text>'+base+'<g class="ae-drift-left"><rect x="160" y="165" width="190" height="70" rx="12" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/></g><g class="ae-drift-right"><rect x="410" y="165" width="190" height="70" rx="12" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/></g><path d="M380 245 V180" stroke="#d35b5b" stroke-width="8"/><polygon points="380,160 366,185 394,185" fill="#d35b5b"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Συγκλίνον όριο</text>'+base+'<g class="ae-drift-right"><path d="M120 185 H360 V240 H120 Z" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/></g><g class="ae-drift-left"><path d="M640 185 H400 V230 Q470 245 520 295 H640 Z" fill="#c7b17e" stroke="#8b7a52" stroke-width="4"/></g></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Όρια πλακών και γεωλογικά φαινόμενα</text><g class="ae-pulse"><path d="M160 270 L280 125 L380 240 L475 135 L600 270 Z" fill="#d9c89e" stroke="#8b7a52" stroke-width="4"/><path d="M465 145 Q485 95 505 145" fill="#ef7b55" stroke="#b94d31" stroke-width="4"/></g><text x="380" y="325" text-anchor="middle" font-size="16" font-weight="900" fill="#425466">σεισμοί · ηφαίστεια · ανάγλυφο</text></g>'
+  ];
+  return baseSceneSvg("Τεκτονικές πλάκες","Κίνηση πλακών, απόκλιση και σύγκλιση.",scenes);
+}
+function waterCycleSvgMarkup(){
+  var landscape='<path d="M0 280 Q120 230 240 270 Q340 310 460 260 Q600 210 760 260 V360 H0 Z" fill="#d8e8b9"/><path d="M0 300 Q120 275 240 300 Q360 330 760 292 V360 H0 Z" fill="#82c9e6"/>';
+  var sun='<circle cx="105" cy="82" r="42" fill="#ffe27a" stroke="#e0ad27" stroke-width="4"/>';
+  var cloud='<g fill="#eef6fc" stroke="#7aa8c3" stroke-width="3"><circle cx="450" cy="105" r="34"/><circle cx="490" cy="92" r="42"/><circle cx="535" cy="110" r="32"/><rect x="430" y="105" width="125" height="35" rx="18"/></g>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Εξάτμιση</text>'+landscape+sun+'<g class="ae-float"><path d="M180 280 C160 230 205 205 185 160 M250 290 C230 245 275 215 255 170" fill="none" stroke="#4d9cbb" stroke-width="6"/></g></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σχηματισμός νεφών</text>'+landscape+sun+cloud+'<g class="ae-float"><path d="M245 260 C260 210 320 185 390 135" fill="none" stroke="#4d9cbb" stroke-width="6"/></g></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Κατακρημνίσματα</text>'+landscape+cloud+'<g class="ae-drop"><path d="M455 150 V225 M495 150 V235 M535 150 V220" stroke="#4d9cbb" stroke-width="7"/></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Απορροή και κατείσδυση</text>'+landscape+'<path d="M520 245 Q460 285 390 305" fill="none" stroke="#4d9cbb" stroke-width="8"/><path d="M315 270 V330" stroke="#23637f" stroke-width="7"/><polygon points="315,345 302,323 328,323" fill="#23637f"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ο υδρολογικός κύκλος συνεχίζεται</text>'+landscape+sun+cloud+'<g class="ae-pulse"><path d="M180 260 C180 130 320 80 430 105 M550 145 C650 190 650 270 550 300 M500 310 C360 340 220 330 160 280" fill="none" stroke="#2e6f5e" stroke-width="7" stroke-dasharray="10 8"/></g></g>'
+  ];
+  return baseSceneSvg("Υδρολογικός κύκλος","Εξάτμιση, νέφη, κατακρημνίσματα, απορροή και κατείσδυση.",scenes);
+}
+function parabolaSvgMarkup(){
+  var axes='<line x1="100" y1="190" x2="660" y2="190" stroke="#657887" stroke-width="3"/><line x1="380" y1="65" x2="380" y2="315" stroke="#657887" stroke-width="3"/>';
+  var up='<path d="M185 80 Q380 340 575 80" fill="none" stroke="#4d9cbb" stroke-width="7"/>';
+  var down='<path d="M185 300 Q380 40 575 300" fill="none" stroke="#d35b5b" stroke-width="7"/>';
+  var narrow='<path d="M280 80 Q380 340 480 80" fill="none" stroke="#2e6f5e" stroke-width="7"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">y = αx²</text>'+axes+up+'<text x="575" y="105" font-size="16" font-weight="900" fill="#23637f">παραβολή</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">α &gt; 0</text>'+axes+'<g class="ae-pulse">'+up+'</g><text x="570" y="305" font-size="16" font-weight="900" fill="#23637f">προς τα πάνω</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">α &lt; 0</text>'+axes+'<g class="ae-pulse">'+down+'</g><text x="570" y="305" font-size="16" font-weight="900" fill="#b34444">προς τα κάτω</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μεγαλύτερο |α|</text>'+axes+up+'<g class="ae-pulse">'+narrow+'</g><text x="535" y="90" font-size="16" font-weight="900" fill="#24594c">στενότερη</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Το α αλλάζει τη γραφική παράσταση</text>'+axes+'<g class="ae-pulse">'+up+down+narrow+'</g></g>'
+  ];
+  return baseSceneSvg("Παραβολή y = αx²","Επίδραση του συντελεστή α στη γραφική παράσταση.",scenes);
+}
+function trigSvgMarkup(){
+  var axes='<line x1="110" y1="250" x2="650" y2="250" stroke="#657887" stroke-width="3"/><line x1="260" y1="310" x2="260" y2="65" stroke="#657887" stroke-width="3"/>';
+  var radius='<line x1="260" y1="250" x2="510" y2="115" stroke="#4d9cbb" stroke-width="6"/><circle cx="510" cy="115" r="13" fill="#4d9cbb"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Γωνία ω</text>'+axes+radius+'<path d="M335 250 A75 75 0 0 0 326 214" fill="none" stroke="#d59235" stroke-width="5"/><text x="335" y="220" font-size="18" font-weight="900" fill="#8a5310">ω</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σημείο Μ(x,y)</text>'+axes+radius+'<text x="530" y="110" font-size="18" font-weight="900" fill="#23637f">M(x,y)</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Οριζόντια συνιστώσα</text>'+axes+radius+'<line x1="260" y1="250" x2="510" y2="250" stroke="#2e6f5e" stroke-width="8"/><text x="385" y="282" text-anchor="middle" font-size="19" font-weight="900" fill="#24594c">συνω ↔ x</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Κατακόρυφη συνιστώσα</text>'+axes+radius+'<line x1="510" y1="250" x2="510" y2="115" stroke="#d35b5b" stroke-width="8"/><text x="555" y="185" font-size="19" font-weight="900" fill="#b34444">ημω ↔ y</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αλλάζει η γωνία → αλλάζουν ημω και συνω</text>'+axes+'<g class="ae-drift-right">'+radius+'</g><text x="380" y="330" text-anchor="middle" font-size="18" font-weight="900" fill="#425466">0° ≤ ω ≤ 180°</text></g>'
+  ];
+  return baseSceneSvg("Τριγωνομετρία","Γωνία σε σύστημα αξόνων και οριζόντια/κατακόρυφη συνιστώσα.",scenes);
+}
+
 function svgMarkup(config){
   if(config.visual==="chem-intro")return introSvgMarkup();
   if(config.visual==="states")return statesSvgMarkup();
@@ -1064,6 +1148,12 @@ function svgMarkup(config){
   if(config.visual==="phys-current")return currentSvgMarkup();
   if(config.visual==="phys-wave")return waveSvgMarkup();
   if(config.visual==="phys-reflection")return reflectionSvgMarkup();
+  if(config.visual==="chem-neutralisation")return neutralisationSvgMarkup();
+  if(config.visual==="chem-periodic")return periodicTableSvgMarkup();
+  if(config.visual==="geo-plates")return tectonicPlatesSvgMarkup();
+  if(config.visual==="geo-water-cycle")return waterCycleSvgMarkup();
+  if(config.visual==="math-parabola")return parabolaSvgMarkup();
+  if(config.visual==="math-trig")return trigSvgMarkup();
   return acidSvgMarkup();
 }
 

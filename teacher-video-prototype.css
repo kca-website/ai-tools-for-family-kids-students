@@ -58,3 +58,7 @@ body.teacher-video-active #teacherToolsDetails{margin-top:16px}
 .video-scene-actions button:hover{background:#f5f7f9}.video-scene-actions button[data-action="delete"]{color:#9b1c1c}
 .video-scene-regenerating{opacity:.55;pointer-events:none}
 @media(max-width:620px){.video-source-switch{align-items:stretch;flex-direction:column}.video-source-switch select{width:100%;min-width:0}.video-scene-fields{grid-template-columns:1fr}.video-scene-fields .video-scene-field--full{grid-column:auto}}
+
+.video-long-notice{display:flex;gap:8px;align-items:flex-start;margin:10px 0 12px;padding:10px 12px;border:1px solid #e7d6a7;border-radius:11px;background:#fffaf0;color:#654d12;font-size:.82rem;line-height:1.4}
+.video-long-notice[hidden]{display:none!important}.video-long-notice strong{white-space:nowrap}.video-long-notice span{color:#6b5a2d}
+@media(max-width:620px){.video-long-notice{display:block}.video-long-notice strong{display:block;margin-bottom:3px}}

@@ -507,6 +507,121 @@
   let speechDetected = false;
   let lastSpeechAt = 0;
   let vadNoiseFloor = 0.008;
+  let animationBridgeSrc = "";
+  let animationBridgeMessageBound = false;
+
+
+  function ensureAnimationBridgeStyles() {
+    if (document.getElementById("tutorAnimationBridgeStyles")) return;
+    const style = document.createElement("style");
+    style.id = "tutorAnimationBridgeStyles";
+    style.textContent = `
+      .tutor-animation-card{margin:0 0 14px;border:1px solid #cfddec;border-radius:16px;background:linear-gradient(135deg,#f8fbff,#f7fbf9);overflow:hidden}
+      .tutor-animation-card[hidden]{display:none!important}
+      .tutor-animation-card__head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 15px}
+      .tutor-animation-card__copy{min-width:0}
+      .tutor-animation-card__eyebrow{display:block;margin-bottom:3px;color:#2e6f5e;font-size:.74rem;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
+      .tutor-animation-card__title{display:block;color:#173f63;font-size:1rem;font-weight:900}
+      .tutor-animation-card__topic{display:block;margin-top:4px;color:#52606d;font-size:.83rem}
+      .tutor-animation-card__toggle,.tutor-animation-card__followup{border:1px solid #2e6f5e;border-radius:10px;background:#2e6f5e;color:#fff;padding:9px 12px;font-weight:850;cursor:pointer}
+      .tutor-animation-card__toggle[aria-expanded="true"]{background:#fff;color:#24594c}
+      .tutor-animation-card__frame-wrap{border-top:1px solid #dbe6ef;background:#fff}
+      .tutor-animation-card__frame-wrap[hidden]{display:none!important}
+      .tutor-animation-card iframe{display:block;width:100%;height:610px;border:0;background:#fff}
+      .tutor-animation-card__next{padding:12px 15px 15px;border-top:1px solid #dbe6ef;background:#f5fbf8}
+      .tutor-animation-card__next[hidden]{display:none!important}
+      .tutor-animation-card__next p{margin:0 0 9px;color:#425466;font-size:.86rem}
+      @media(max-width:700px){.tutor-animation-card__head{display:block}.tutor-animation-card__toggle{margin-top:10px;width:100%}.tutor-animation-card iframe{height:690px}}
+    `;
+    document.head.appendChild(style);
+  }
+
+  function selectedOptionText(select) {
+    return select?.options?.[select.selectedIndex]?.textContent?.trim() || "";
+  }
+
+  function animationContextId() {
+    if (ctx?.zoneId === "primary") return "primary";
+    if (ctx?.zoneId === "middle") return "middle";
+    if (ctx?.zoneId === "high" && refs.schoolType?.value !== "epal") return "gel";
+    return "";
+  }
+
+  function resetAnimationBridge() {
+    if (!refs.animationCard) return;
+    refs.animationCard.hidden = true;
+    refs.animationFrameWrap.hidden = true;
+    refs.animationNext.hidden = true;
+    refs.animationToggle.setAttribute("aria-expanded", "false");
+    refs.animationToggle.textContent = isParentMode() ? "Δες πώς να το εξηγήσεις" : "Δες το οπτικά";
+    if (refs.animationTopic) refs.animationTopic.textContent = "";
+  }
+
+  function refreshAnimationBridge() {
+    if (!refs.animationCard || !refs.animationFrame) return;
+    if (ctx?.lang !== "el") {
+      animationBridgeSrc = "";
+      refs.animationFrame.removeAttribute("src");
+      resetAnimationBridge();
+      return;
+    }
+    const contextId = animationContextId();
+    const grade = refs.grade?.value || "";
+    const subject = selectedOptionText(refs.subject);
+    const subjectValue = refs.subject?.value || "";
+    const unit = selectedOptionText(refs.topic);
+    if (!contextId || !grade || !subject || !unit || !refs.topic?.value) {
+      animationBridgeSrc = "";
+      refs.animationFrame.removeAttribute("src");
+      resetAnimationBridge();
+      return;
+    }
+    const url = new URL("/teacher-assistant.html", window.location.origin);
+    url.searchParams.set("aeEmbed", "1");
+    url.searchParams.set("context", contextId);
+    url.searchParams.set("grade", grade);
+    url.searchParams.set("subject", subject);
+    url.searchParams.set("subjectValue", subjectValue);
+    url.searchParams.set("unit", unit);
+    url.searchParams.set("role", isParentMode() ? "guardian" : "student");
+    const nextSrc = url.pathname + url.search;
+    if (nextSrc === animationBridgeSrc) return;
+    animationBridgeSrc = nextSrc;
+    resetAnimationBridge();
+    refs.animationFrame.src = nextSrc;
+  }
+
+  function handleAnimationBridgeMessage(event) {
+    if (event.origin !== window.location.origin || !refs.animationFrame || event.source !== refs.animationFrame.contentWindow) return;
+    const data = event.data || {};
+    if (data.source !== "aitools4kids-animation") return;
+    if (data.type === "aitools4kids:animation-status") {
+      refs.animationNext.hidden = true;
+      if (!data.available) {
+        refs.animationCard.hidden = true;
+        return;
+      }
+      refs.animationCard.hidden = false;
+      refs.animationTitle.textContent = isParentMode() ? "Δες πώς να το εξηγήσεις στο παιδί" : "Δες το οπτικά";
+      refs.animationTopic.textContent = data.topic || selectedOptionText(refs.topic);
+      refs.animationToggle.textContent = isParentMode() ? "Άνοιξε την οπτική εξήγηση" : "Άνοιξε την κινούμενη εξήγηση";
+    }
+    if (data.type === "aitools4kids:animation-height" && Number.isFinite(Number(data.height))) {
+      const height = Math.min(820, Math.max(520, Number(data.height) + 8));
+      refs.animationFrame.style.height = height + "px";
+    }
+    if (data.type === "aitools4kids:animation-complete") {
+      refs.animationNext.hidden = false;
+    }
+  }
+
+  async function runAnimationFollowup() {
+    const topic = selectedOptionText(refs.topic);
+    const prompt = isParentMode()
+      ? `Δώσε μου 2 σύντομες ερωτήσεις που μπορώ να κάνω στο παιδί για να ελέγξω αν κατάλαβε την ενότητα «${topic}». Μην δώσεις αμέσως τις απαντήσεις. Περίμενε πρώτα να σου πω τι απάντησε.`
+      : `Κάνε μου 3 σύντομες ερωτήσεις για να ελέγξεις αν κατάλαβα την ενότητα «${topic}». Μην μου δώσεις τις απαντήσεις πριν απαντήσω.`;
+    await sendMessage(prompt);
+  }
 
   function tr(key) {
     const lang = ctx?.lang === "en" ? "en" : "el";
@@ -1189,6 +1304,7 @@ ${compositeRule}
       }[learningMode] || tr("learningModeUnderstand"))}<br><br>
       <b>${escapeHtml(tr("contextPath"))}:</b><br>${pathSummary}${officialHtml}
     `;
+    refreshAnimationBridge();
   }
 
   async function refreshAuthStatus() {
@@ -2198,6 +2314,20 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
   }
 
   function bindEvents() {
+    if (!animationBridgeMessageBound) {
+      window.addEventListener("message", handleAnimationBridgeMessage);
+      animationBridgeMessageBound = true;
+    }
+    refs.animationToggle?.addEventListener("click", () => {
+      const open = refs.animationToggle.getAttribute("aria-expanded") === "true";
+      refs.animationToggle.setAttribute("aria-expanded", open ? "false" : "true");
+      refs.animationFrameWrap.hidden = open;
+      refs.animationToggle.textContent = open
+        ? (isParentMode() ? "Άνοιξε την οπτική εξήγηση" : "Άνοιξε την κινούμενη εξήγηση")
+        : "Κλείσιμο οπτικής εξήγησης";
+    });
+    refs.animationFollowup?.addEventListener("click", runAnimationFollowup);
+
     refs.schoolType?.addEventListener("change", () => { populateGrades(); renderContext(); resetConversation(); });
     refs.grade.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
     refs.sector?.addEventListener("change", () => { populateSubjects(); renderContext(); resetConversation(); });
@@ -2356,6 +2486,23 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
               <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorNewChat">${escapeHtml(tr("newChat"))}</button>
             </div>
             <section class="tutor-character-card" id="tutorCharacterCard" hidden aria-live="polite"></section>
+            <section class="tutor-animation-card" id="tutorAnimationCard" hidden aria-live="polite">
+              <div class="tutor-animation-card__head">
+                <div class="tutor-animation-card__copy">
+                  <span class="tutor-animation-card__eyebrow">Οπτική βοήθεια</span>
+                  <strong class="tutor-animation-card__title" id="tutorAnimationTitle"></strong>
+                  <span class="tutor-animation-card__topic" id="tutorAnimationTopic"></span>
+                </div>
+                <button type="button" class="tutor-animation-card__toggle" id="tutorAnimationToggle" aria-expanded="false">Δες το οπτικά</button>
+              </div>
+              <div class="tutor-animation-card__frame-wrap" id="tutorAnimationFrameWrap" hidden>
+                <iframe id="tutorAnimationFrame" title="Κινούμενη οπτική εξήγηση της επιλεγμένης ενότητας" allowfullscreen></iframe>
+              </div>
+              <div class="tutor-animation-card__next" id="tutorAnimationNext" hidden>
+                <p id="tutorAnimationNextText"></p>
+                <button type="button" class="tutor-animation-card__followup" id="tutorAnimationFollowup"></button>
+              </div>
+            </section>
             <div class="tutor-messages" id="tutorMessages">
               <div class="tutor-empty" id="tutorEmptyState"><strong>${escapeHtml(tr("emptyTitle"))}</strong><br>${escapeHtml(parentMode ? tr("emptyParent") : tr("emptyStudent"))}</div>
             </div>
@@ -2421,6 +2568,15 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       accessGate: byId("tutorAccessGate"),
       contextBox: byId("tutorContextBox"),
       characterCard: byId("tutorCharacterCard"),
+      animationCard: byId("tutorAnimationCard"),
+      animationTitle: byId("tutorAnimationTitle"),
+      animationTopic: byId("tutorAnimationTopic"),
+      animationToggle: byId("tutorAnimationToggle"),
+      animationFrameWrap: byId("tutorAnimationFrameWrap"),
+      animationFrame: byId("tutorAnimationFrame"),
+      animationNext: byId("tutorAnimationNext"),
+      animationNextText: byId("tutorAnimationNextText"),
+      animationFollowup: byId("tutorAnimationFollowup"),
       messages: byId("tutorMessages"),
       empty: byId("tutorEmptyState"),
       form: byId("tutorForm"),
@@ -2538,9 +2694,18 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     authReady = false;
     providerMode = "groq";
     signedInUser = null;
+    ensureAnimationBridgeStyles();
     mount.innerHTML = html();
     mount.dataset.ready = "1";
     captureRefs();
+    if (refs.animationNextText && refs.animationFollowup) {
+      refs.animationNextText.textContent = isParentMode()
+        ? "Η εξήγηση τελείωσε. Έλεγξε τώρα την κατανόηση χωρίς να δώσεις εσύ τη λύση."
+        : "Η εξήγηση τελείωσε. Έλεγξε τώρα αν το κατάλαβες χωρίς να δεις έτοιμες απαντήσεις.";
+      refs.animationFollowup.textContent = isParentMode()
+        ? "Δώσε μου 2 ερωτήσεις να κάνω στο παιδί"
+        : "Κάνε μου 3 ερωτήσεις";
+    }
     updatePdfAttachmentUi();
     renderModeBox();
     renderLearningModePicker();

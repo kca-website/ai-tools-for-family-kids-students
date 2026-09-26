@@ -10,6 +10,9 @@
   let browserSpeechActive=false;
   let puterPromise=null;
   let audioObjectUrl=null;
+  let exportedBlob=null;
+  let previewTotalMs=0;
+  let previewRunning=false;
 
   function selectedText(id){
     const el=q(id);
@@ -271,11 +274,40 @@
     return {i,local};
   }
 
+  function formatTime(seconds){
+    const s=Math.max(0,Math.round(Number(seconds)||0));
+    return Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+  }
+
+  function previewDurationSeconds(){
+    const selected=Math.max(1,Number(q("videoDuration")?.value||60));
+    const audio=Number.isFinite(narrationAudio?.duration)&&narrationAudio.duration>0?narrationAudio.duration:0;
+    return Math.max(selected,audio);
+  }
+
+  function updateTimeline(currentSeconds,totalSeconds=previewDurationSeconds()){
+    const current=Math.max(0,Math.min(totalSeconds,Number(currentSeconds)||0));
+    const frac=totalSeconds>0?current/totalSeconds:0;
+    if(q("videoTimeline")) q("videoTimeline").value=String(Math.round(frac*1000));
+    if(q("videoCurrentTime")) q("videoCurrentTime").textContent=formatTime(current);
+    if(q("videoTotalTime")) q("videoTotalTime").textContent=formatTime(totalSeconds);
+  }
+
+  function drawAtSeconds(seconds,totalSeconds=previewDurationSeconds()){
+    if(!project)return;
+    const frac=Math.min(1,Math.max(0,seconds/Math.max(.1,totalSeconds)));
+    const pos=sceneAtFraction(frac>=1?0.999999:frac);
+    drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3));
+    updateTimeline(seconds,totalSeconds);
+  }
+
   function stopPlayback(){
     cancelAnimationFrame(playFrame);
+    previewRunning=false;
     if(narrationAudio){try{narrationAudio.pause();narrationAudio.currentTime=0}catch(_){}}
     if(window.speechSynthesis){window.speechSynthesis.cancel();}
     browserSpeechActive=false;
+    if(q("videoPlayBtn"))q("videoPlayBtn").textContent="▶ Προεπισκόπηση από την αρχή";
   }
 
   function animateTimed(totalMs){
@@ -307,29 +339,43 @@
   async function play(){
     if(!project)return;
     stopPlayback();
-    q("videoDownload").hidden=true;
+    const totalSeconds=previewDurationSeconds();
+    previewTotalMs=totalSeconds*1000;
+    q("videoPlayBtn").textContent="■ Διακοπή προεπισκόπησης";
+    previewRunning=true;
+    updateTimeline(0,totalSeconds);
+
     if(narrationAudio){
-      narrationAudio.currentTime=0;
-      await narrationAudio.play();
-      const duration=(Number.isFinite(narrationAudio.duration)&&narrationAudio.duration>0?narrationAudio.duration:Number(q("videoDuration").value))*1000;
-      const start=performance.now();
-      function tick(){
-        const frac=Math.min(1,narrationAudio.currentTime/Math.max(.1,narrationAudio.duration||duration/1000));
-        const pos=sceneAtFraction(frac);
-        drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3));
-        if(!narrationAudio.paused&&!narrationAudio.ended)playFrame=requestAnimationFrame(tick);
+      try{
+        narrationAudio.currentTime=0;
+        await narrationAudio.play();
+      }catch(e){
+        q("videoStatus").textContent="Η προεπισκόπηση συνεχίζεται χωρίς αυτόματη αναπαραγωγή ήχου. Πάτησε ξανά αν ο browser μπλόκαρε τον ήχο.";
       }
-      playFrame=requestAnimationFrame(tick);
-    }else{
-      const ms=Number(q("videoDuration")?.value||60)*1000;
-      animateTimed(ms);
-      if(q("videoNarration")?.value==="browser")speakBrowser();
+    }else if(q("videoNarration")?.value==="browser"){
+      speakBrowser();
     }
+
+    const started=performance.now();
+    function tick(now){
+      if(!previewRunning)return;
+      const elapsed=Math.min(totalSeconds,(now-started)/1000);
+      drawAtSeconds(elapsed,totalSeconds);
+      if(elapsed<totalSeconds){
+        playFrame=requestAnimationFrame(tick);
+      }else{
+        drawAtSeconds(totalSeconds,totalSeconds);
+        previewRunning=false;
+        q("videoPlayBtn").textContent="▶ Προεπισκόπηση από την αρχή";
+        q("videoStatus").textContent="Η προεπισκόπηση ολοκληρώθηκε. Εμφανίστηκαν όλες οι σκηνές.";
+      }
+    }
+    playFrame=requestAnimationFrame(tick);
   }
 
   function renderFrameForTime(ctxAudio,total){
     const frac=Math.min(1,ctxAudio/Math.max(.1,total));
-    const pos=sceneAtFraction(frac);
+    const pos=sceneAtFraction(frac>=1?0.999999:frac);
     drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3));
   }
 
@@ -369,7 +415,7 @@
     rec.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data)};
     const done=new Promise(resolve=>{rec.onstop=resolve});
     rec.start(250);
-    const duration=recordAudio?.duration||Number(q("videoDuration")?.value||60);
+    const duration=previewDurationSeconds();
     const started=performance.now();
     if(recordAudio){
       await audioCtx?.resume?.();
@@ -379,8 +425,8 @@
       function tick(now){
         const current=recordAudio?recordAudio.currentTime:(now-started)/1000;
         renderFrameForTime(current,duration);
-        if(current<duration&&!(recordAudio&&recordAudio.ended))requestAnimationFrame(tick);
-        else setTimeout(resolve,220);
+        if(current<duration)requestAnimationFrame(tick);
+        else{renderFrameForTime(duration,duration);setTimeout(resolve,220);}
       }
       requestAnimationFrame(tick);
     });
@@ -390,12 +436,18 @@
     try{await audioCtx?.close?.()}catch(_){}
     if(audioObjectUrl)URL.revokeObjectURL(audioObjectUrl);
     const blob=new Blob(chunks,{type:mime});
+    exportedBlob=blob;
     audioObjectUrl=URL.createObjectURL(blob);
+    const filename=(project.title||"ekpaideutiko-video").replace(/[^a-zA-Z0-9α-ωΑ-Ωάέήίόύώϊϋΐΰ -]/g,"").trim().replace(/\s+/g,"-")+".webm";
     const a=q("videoDownload");
     a.href=audioObjectUrl;
-    a.download=(project.title||"ekpaideutiko-video").replace(/[^a-zA-Z0-9α-ωΑ-Ωάέήίόύώϊϋΐΰ -]/g,"").trim().replace(/\s+/g,"-")+".webm";
+    a.download=filename;
     a.hidden=false;
-    q("videoStatus").textContent="Έτοιμο. Το WebM δημιουργήθηκε στη συσκευή σου.";
+    const filePreview=q("videoFilePreview");
+    filePreview.src=audioObjectUrl;
+    filePreview.hidden=false;
+    q("videoSaveBtn").hidden=false;
+    q("videoStatus").textContent="Έτοιμο. Μπορείς να δεις ολόκληρο το αρχείο παρακάτω και να το κατεβάσεις.";
     q("videoExportBtn").disabled=false;
   }
 
@@ -423,18 +475,21 @@
         try{
           await createNarration();
           q("videoStudioHint").textContent="Το storyboard και η ελληνική AI αφήγηση είναι έτοιμα. Η εξαγωγή γίνεται τοπικά ως WebM χωρίς πρόγραμμα μοντάζ.";
-          q("videoExportBtn").hidden=false;
         }catch(e){
           narrationAudio=null;
           q("videoStudioHint").textContent="Το storyboard είναι έτοιμο. Η AI αφήγηση δεν ενεργοποιήθηκε ("+(e?.message||"Puter")+"). Η προεπισκόπηση μπορεί να χρησιμοποιήσει τη φωνή της συσκευής αν την επιλέξεις.";
           q("videoStatus").textContent="Το βίντεο δημιουργήθηκε χωρίς AI αφήγηση. Μπορείς να το δεις τώρα.";
         }
-      }else{
-        q("videoExportBtn").hidden=q("videoNarration").value!=="none";
       }
+      q("videoExportBtn").hidden=false;
+      q("videoDownload").hidden=true;
+      q("videoSaveBtn").hidden=true;
+      q("videoFilePreview").hidden=true;
+      q("videoFilePreview").removeAttribute("src");
       q("generationMessage").textContent="3/3 Σύνθεση προεπισκόπησης.";
       q("videoStudio").hidden=false;
-      q("videoStatus").textContent=narrationAudio?"Έτοιμο για προεπισκόπηση και εξαγωγή.":"Έτοιμο για προεπισκόπηση.";
+      updateTimeline(0,previewDurationSeconds());
+      q("videoStatus").textContent=narrationAudio?"Έτοιμο για πλήρη προεπισκόπηση και εξαγωγή.":"Έτοιμο για πλήρη προεπισκόπηση και εξαγωγή χωρίς AI ήχο.";
       q("videoStudio").scrollIntoView({behavior:"smooth",block:"start"});
     }catch(e){
       q("videoStatus").textContent="Δεν ολοκληρώθηκε: "+(e?.message||e);
@@ -444,17 +499,43 @@
     }
   }
 
+  async function saveOrShare(){
+    if(!exportedBlob||!audioObjectUrl)return;
+    const filename=q("videoDownload")?.download||"ekpaideutiko-video.webm";
+    try{
+      const file=new File([exportedBlob],filename,{type:exportedBlob.type||"video/webm"});
+      if(navigator.share&&navigator.canShare?.({files:[file]})){
+        await navigator.share({files:[file],title:project?.title||"Εκπαιδευτικό βίντεο"});
+        return;
+      }
+    }catch(e){
+      if(e?.name==="AbortError")return;
+    }
+    const a=q("videoDownload");
+    if(a){
+      a.click();
+      q("videoStatus").textContent="Ξεκίνησε η λήψη του αρχείου. Αν δεν εμφανιστεί στις Λήψεις, άνοιξε το WebM από το κουμπί λήψης.";
+    }
+  }
+
   function bind(){
     const btn=q("videoCreateBtn");
     if(!btn)return;
     btn.addEventListener("click",generate);
-    q("videoPlayBtn")?.addEventListener("click",play);
-    q("videoRestartBtn")?.addEventListener("click",()=>{stopPlayback();if(project)drawScene(project.scenes[0],0,1);});
+    q("videoPlayBtn")?.addEventListener("click",()=>{if(previewRunning){stopPlayback();return;}play();});
+    q("videoRestartBtn")?.addEventListener("click",()=>{stopPlayback();if(project){drawScene(project.scenes[0],0,1);updateTimeline(0,previewDurationSeconds());}});
     q("videoExportBtn")?.addEventListener("click",exportWebm);
-    q("videoNarration")?.addEventListener("change",()=>{q("videoDownload").hidden=true;});
+    q("videoSaveBtn")?.addEventListener("click",saveOrShare);
+    q("videoTimeline")?.addEventListener("input",()=>{
+      if(!project||previewRunning)return;
+      const total=previewDurationSeconds();
+      const seconds=(Number(q("videoTimeline").value)||0)/1000*total;
+      drawAtSeconds(seconds,total);
+    });
+    q("videoNarration")?.addEventListener("change",()=>{q("videoDownload").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;});
   }
 
-  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm};
+  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,previewDurationSeconds,formatTime};
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});
   else bind();

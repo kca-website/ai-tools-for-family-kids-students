@@ -26,3 +26,9 @@
 body.teacher-video-active #teacherToolsDetails{margin-top:16px}
 @media(max-width:620px){.video-options__head{display:block}.video-prototype-badge{display:inline-block;margin-top:8px}.video-studio__controls .btn,.video-studio__controls .video-download{flex:1 1 100%;text-align:center;justify-content:center}}
 @media print{.video-options{display:none!important}}
+
+.video-preview-progress{margin-top:12px}
+.video-preview-progress input[type="range"]{width:100%;accent-color:#2e6f5e}
+.video-preview-progress__time{display:flex;justify-content:space-between;margin-top:2px;color:#667085;font-size:.78rem;font-variant-numeric:tabular-nums}
+.video-file-preview{display:block;width:100%;margin-top:14px;border-radius:14px;background:#0f172a;aspect-ratio:16/9}
+.video-file-preview[hidden]{display:none!important}

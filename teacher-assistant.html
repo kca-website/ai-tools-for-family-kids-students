@@ -145,12 +145,18 @@
       <div class="video-stage-wrap">
         <canvas id="videoCanvas" class="video-canvas" width="1280" height="720" aria-label="Προεπισκόπηση εκπαιδευτικού βίντεο"></canvas>
       </div>
-      <div class="video-studio__controls">
-        <button type="button" class="btn" id="videoPlayBtn">▶ Προεπισκόπηση</button>
-        <button type="button" class="btn secondary" id="videoRestartBtn">↻ Από την αρχή</button>
-        <button type="button" class="btn secondary" id="videoExportBtn" hidden>⬇ Εξαγωγή WebM</button>
-        <a class="btn secondary video-download" id="videoDownload" hidden>Λήψη βίντεο</a>
+      <div class="video-preview-progress">
+        <input type="range" id="videoTimeline" min="0" max="1000" value="0" step="1" aria-label="Χρονογραμμή προεπισκόπησης">
+        <div class="video-preview-progress__time"><span id="videoCurrentTime">0:00</span><span id="videoTotalTime">0:00</span></div>
       </div>
+      <div class="video-studio__controls">
+        <button type="button" class="btn" id="videoPlayBtn">▶ Προεπισκόπηση από την αρχή</button>
+        <button type="button" class="btn secondary" id="videoRestartBtn">↻ Από την αρχή</button>
+        <button type="button" class="btn secondary" id="videoExportBtn" hidden>⬇ Δημιούργησε αρχείο βίντεο</button>
+        <a class="btn secondary video-download" id="videoDownload" hidden download>⬇ Λήψη WebM</a>
+        <button type="button" class="btn secondary" id="videoSaveBtn" hidden>📲 Αποθήκευση / κοινή χρήση</button>
+      </div>
+      <video id="videoFilePreview" class="video-file-preview" controls playsinline hidden></video>
       <p class="video-studio__hint" id="videoStudioHint">Το prototype δημιουργεί motion-graphics χωρίς εξωτερικό μοντάζ. Τα visuals είναι σχεδιαστικά/τυπογραφικά, όχι ακόμη AI-generated clips.</p>
       <details class="video-scenes-details"><summary>Δες το storyboard και το κείμενο αφήγησης</summary><div id="videoSceneList" class="video-scene-list"></div></details>
     </div>

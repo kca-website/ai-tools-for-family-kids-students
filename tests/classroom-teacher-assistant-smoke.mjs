@@ -64,6 +64,10 @@ try{
   assert.equal(await page.locator('#standardGenerationControls').isHidden(),true,'Video task must use one direct creation action instead of the generic provider chooser');
   assert.equal(await page.locator('#videoCreateBtn').count(),1,'Video prototype needs one direct create-video button');
   assert.equal(await page.locator('#videoCanvas').count(),1,'Video prototype needs a 16:9 preview canvas');
+  assert.equal(await page.locator('#videoTimeline').count(),1,'Video prototype needs a visible timeline so the full preview is trackable');
+  assert.equal(await page.locator('#videoExportBtn').count(),1,'Video prototype needs an export action');
+  assert.equal(await page.locator('#videoFilePreview').count(),1,'Exported video must be reviewable with native video controls');
+  assert.equal(await page.locator('#videoSaveBtn').count(),1,'Exported video needs a mobile-friendly save/share fallback');
   assert.equal(await page.evaluate(()=>typeof window.AITOOLSKIDS_TEACHER_VIDEO?.buildPrompt==='function'),true,'Video prototype runtime must expose its prompt builder');
   const videoPrompt=await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.buildPrompt());
   assert.match(videoPrompt,/JSON/,'Video prompt must request structured scene output');

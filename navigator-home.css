@@ -546,7 +546,7 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 
 
 .home-v8-higher-ed-card{
-  grid-column:span 3;
+  grid-column:span 2;
   background:linear-gradient(135deg,#f8fafc 0%,#eef6ff 100%)!important;
 }
 .home-v8-higher-ed-card .zone-card__age{
@@ -558,11 +558,33 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   font-size:.68rem!important;
   font-weight:800;
 }
+
+.home-v8-curriculum-card{
+  grid-column:span 1;
+  background:#fbfdfc!important;
+  border-color:#cfe1d8!important;
+}
+.home-v8-curriculum-card .zone-card__age{
+  width:max-content;
+  padding:3px 7px;
+  border-radius:999px;
+  background:#eaf3de;
+  color:#27500a!important;
+  font-size:.68rem!important;
+  font-weight:800;
+}
+.home-v8-curriculum-card:hover{
+  border-color:#9fc7b4!important;
+  background:#f7fbf8!important;
+}
+
 @media(max-width:700px){
-  .home-v8-higher-ed-card{grid-column:auto;}
+  .home-v8-higher-ed-card,
+  .home-v8-curriculum-card{grid-column:auto;}
 }
 @media(max-width:480px){
-  .home-v8-higher-ed-card .zone-card__age{
+  .home-v8-higher-ed-card .zone-card__age,
+  .home-v8-curriculum-card .zone-card__age{
     padding:2px 6px;
     font-size:.62rem!important;
   }

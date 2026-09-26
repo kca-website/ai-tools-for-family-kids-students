@@ -1,0 +1,60 @@
+/* Teacher educational-video prototype */
+.video-options{margin-top:16px;border:1px solid #cddff0;background:linear-gradient(135deg,#f7fbff,#f9f7ff);border-radius:16px;padding:16px}
+.video-options[hidden],.video-studio[hidden]{display:none!important}
+.video-options__head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.video-options__head strong{display:block;font-size:1.05rem}
+.video-options__head span:not(.video-prototype-badge){display:block;margin-top:3px;color:#667085;font-size:.85rem}
+.video-prototype-badge{flex:0 0 auto;border-radius:999px;padding:4px 9px;background:#e8eefc;color:#3b4d82;font-size:.72rem;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
+.video-options__grid{margin-top:14px}
+.video-options__note{margin:12px 0;color:#475467;font-size:.84rem}
+.video-create-btn{min-width:210px}
+.video-status{min-height:1.35em;margin-top:10px;color:#24594c;font-size:.88rem;font-weight:700}
+.video-studio{margin-top:17px;padding-top:17px;border-top:1px solid #dfe4ea}
+.video-stage-wrap{overflow:hidden;border-radius:18px;background:#0f172a;box-shadow:0 14px 34px rgba(15,23,42,.18);aspect-ratio:16/9}
+.video-canvas{display:block;width:100%;height:100%;aspect-ratio:16/9}
+.video-studio__controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.video-studio__hint{margin:9px 0 0;color:#667085;font-size:.82rem}
+.video-download{text-decoration:none;display:inline-flex;align-items:center}
+.video-scenes-details{margin-top:13px;border:1px solid #dfe4ea;border-radius:12px;background:#fff}
+.video-scenes-details summary{cursor:pointer;padding:11px 13px;font-weight:800}
+.video-scene-list{display:grid;gap:9px;padding:0 13px 13px}
+.video-scene-card{display:grid;grid-template-columns:42px 1fr;gap:10px;border-top:1px solid #eef1f4;padding-top:10px}
+.video-scene-card__no{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#eef6fc;color:#245f8e;font-weight:900}
+.video-scene-card h4{margin:0 0 3px;font-size:.94rem}
+.video-scene-card p{margin:2px 0;color:#475467;font-size:.84rem}
+.task[data-task="video"].active{background:#f3f7fd;border-color:#5d7bb8}
+body.teacher-video-active #teacherToolsDetails{margin-top:16px}
+@media(max-width:620px){.video-options__head{display:block}.video-prototype-badge{display:inline-block;margin-top:8px}.video-studio__controls .btn,.video-studio__controls .video-download{flex:1 1 100%;text-align:center;justify-content:center}}
+@media print{.video-options{display:none!important}}
+
+.video-preview-progress{margin-top:12px}
+.video-preview-progress input[type="range"]{width:100%;accent-color:#2e6f5e}
+.video-preview-progress__time{display:flex;justify-content:space-between;margin-top:2px;color:#667085;font-size:.78rem;font-variant-numeric:tabular-nums}
+.video-file-preview{display:block;width:100%;margin-top:14px;border-radius:14px;background:#0f172a;aspect-ratio:16/9}
+.video-file-preview[hidden]{display:none!important}
+
+.video-studio__controls #videoVttDownload{border-style:dashed}
+
+.video-stage-wrap:fullscreen,.video-stage-wrap:-webkit-full-screen{width:100vw;height:100vh;aspect-ratio:auto;border-radius:0;display:flex;align-items:center;justify-content:center;background:#000}
+.video-stage-wrap:fullscreen .video-canvas,.video-stage-wrap:-webkit-full-screen .video-canvas{width:100%;height:100%;object-fit:contain;aspect-ratio:auto}
+.video-stage-wrap{position:relative}
+@media(max-width:620px){#videoFullscreenBtn,#videoExportBtn,#videoExportMp4Btn{min-height:46px}}
+
+.video-source-switch{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 14px;border:1px solid #d8e4df;border-radius:13px;background:#fff}
+.video-source-switch select{min-width:230px;border:1px solid #dfe4ea;border-radius:10px;padding:10px;background:#fff}
+.video-own-material{margin-top:12px;padding:15px;border:1px solid #d9d5f0;border-radius:14px;background:#faf9ff}
+.video-own-material[hidden]{display:none!important}.video-own-material__head strong{display:block}.video-own-material__head span{display:block;margin-top:3px;color:#667085;font-size:.84rem}
+.video-file-status{min-height:1.3em;margin-top:8px;color:#475467;font-size:.84rem}.video-own-actions{margin-top:8px}
+.video-editor-note{margin:0;padding:0 13px 10px;color:#667085;font-size:.83rem}
+.video-scene-editor-actions{padding:0 13px 13px}
+.video-scene-card--edit{grid-template-columns:42px minmax(0,1fr);padding-bottom:12px}
+.video-scene-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.video-scene-fields .video-scene-field--full{grid-column:1/-1}
+.video-scene-fields label{display:block;font-size:.76rem;font-weight:800;color:#475467;margin-bottom:3px}
+.video-scene-fields input,.video-scene-fields textarea{width:100%;border:1px solid #dfe4ea;border-radius:9px;padding:8px 9px;background:#fff;font:inherit;color:#151922}
+.video-scene-fields textarea{min-height:72px;resize:vertical}
+.video-scene-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.video-scene-actions button{border:1px solid #dfe4ea;background:#fff;border-radius:8px;padding:6px 8px;font:inherit;font-size:.78rem;font-weight:750;cursor:pointer}
+.video-scene-actions button:hover{background:#f5f7f9}.video-scene-actions button[data-action="delete"]{color:#9b1c1c}
+.video-scene-regenerating{opacity:.55;pointer-events:none}
+@media(max-width:620px){.video-source-switch{align-items:stretch;flex-direction:column}.video-source-switch select{width:100%;min-width:0}.video-scene-fields{grid-template-columns:1fr}.video-scene-fields .video-scene-field--full{grid-column:auto}}

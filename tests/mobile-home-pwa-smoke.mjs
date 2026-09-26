@@ -82,16 +82,29 @@ try {
   assert.deepEqual(errors, [], `mobile homepage browser errors:\n${errors.join('\n')}`);
 
   // A standalone PWA can be restored directly on an internal route with no
-  // previous app history. Back must return to the app homepage instead of
-  // closing the standalone window.
-  await page.goto(LOCAL + 'middle/guardian/tools', { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForFunction(() => document.body.classList.contains('pwa-standalone'), null, { timeout: 10000 });
-  await page.waitForSelector('#pathView:not([hidden])', { state: 'visible', timeout: 10000 });
-  const restoredState=await page.evaluate(()=>history.state);
+  // previous app history. Use a clean page so there is no same-origin referrer
+  // or prior browser entry: this mirrors an Android standalone-app restore.
+  const restorePage=await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await restorePage.addInitScript(() => {
+    const nativeMatchMedia = window.matchMedia.bind(window);
+    window.matchMedia = (query) => {
+      if (query === '(display-mode: standalone)') {
+        return {matches:true,media:query,onchange:null,addListener(){},removeListener(){},addEventListener(){},removeEventListener(){},dispatchEvent(){return false;}};
+      }
+      return nativeMatchMedia(query);
+    };
+  });
+  const indexHtml=await (await restorePage.request.get(LOCAL)).text();
+  await restorePage.route('**/middle/guardian/tools',(route)=>route.fulfill({status:200,contentType:'text/html',body:indexHtml}));
+  await restorePage.goto(LOCAL + 'middle/guardian/tools', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await restorePage.waitForFunction(() => document.body.classList.contains('pwa-standalone'), null, { timeout: 10000 });
+  await restorePage.waitForSelector('#pathView:not([hidden])', { state: 'visible', timeout: 10000 });
+  const restoredState=await restorePage.evaluate(()=>history.state);
   assert.equal(restoredState?.__aitools4kidsPwaEntry,true,'direct standalone route must be marked as an internal PWA history entry');
-  await page.goBack({waitUntil:'domcontentloaded',timeout:10000}).catch(()=>null);
-  await page.waitForSelector('#zoneSelectView:not([hidden])', { state: 'visible', timeout: 10000 });
-  assert.equal(new URL(page.url()).pathname,'/','Back from a directly restored standalone route must return to the app homepage');
+  await restorePage.goBack({waitUntil:'domcontentloaded',timeout:10000}).catch(()=>null);
+  await restorePage.waitForSelector('#zoneSelectView:not([hidden])', { state: 'visible', timeout: 10000 });
+  assert.equal(new URL(restorePage.url()).pathname,'/','Back from a directly restored standalone route must return to the app homepage');
+  await restorePage.close();
 
   console.log('Mobile PWA homepage + integrated Special-school route + lazy-loading + analytics + back-navigation smoke passed.');
 } finally {

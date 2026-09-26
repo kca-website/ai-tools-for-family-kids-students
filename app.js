@@ -42,6 +42,8 @@
     childScorePercent: null,
   };
 
+  let activePathAnimationListener = null;
+
   // ---------- Στατικά strings ----------
   const STRINGS = {
     el: {
@@ -1950,6 +1952,101 @@ function renderToolGrid(pathTools, targetElement) {
     });
   }
 
+  function quizUsesGap(quiz, gapId) {
+    return (quiz?.questions || []).some((question) =>
+      (question.options || []).some((option) => option.gapTag === gapId)
+    );
+  }
+
+  function resolveQuizForPathAnimation(gapId) {
+    const zoneQuizzes = getZoneQuizzes() || {};
+    if (state.quizSubjectId && zoneQuizzes[state.quizSubjectId] && quizUsesGap(zoneQuizzes[state.quizSubjectId], gapId)) {
+      return { id: state.quizSubjectId, quiz: zoneQuizzes[state.quizSubjectId] };
+    }
+    const candidates = Object.entries(zoneQuizzes).filter(([, quiz]) => {
+      if (state.quizGradeId && !(quiz.grades || []).includes(state.quizGradeId)) return false;
+      return quizUsesGap(quiz, gapId);
+    });
+    return candidates.length === 1 ? { id: candidates[0][0], quiz: candidates[0][1] } : null;
+  }
+
+  function buildPathAnimationSrc(gapId, gap) {
+    if (state.lang !== "el" || !gap?.labelEl) return "";
+    const context = state.currentZone === "primary" ? "primary" : state.currentZone === "middle" ? "middle" : state.currentZone === "high" ? "gel" : "";
+    if (!context) return "";
+    const resolved = resolveQuizForPathAnimation(gapId);
+    if (!resolved) return "";
+    const quiz = resolved.quiz;
+    if (/epal/i.test(String(resolved.id || ""))) return "";
+    const grades = quiz.grades || [];
+    const grade = state.quizGradeId && grades.includes(state.quizGradeId)
+      ? state.quizGradeId
+      : (grades.length === 1 ? grades[0] : "");
+    if (!grade) return "";
+    const subject = quiz.subjectLabelEl || quiz.titleEl || resolved.id;
+    const url = new URL("/teacher-assistant.html", window.location.origin);
+    url.searchParams.set("aeEmbed", "1");
+    url.searchParams.set("context", context);
+    url.searchParams.set("grade", grade);
+    url.searchParams.set("subject", subject);
+    url.searchParams.set("subjectValue", resolved.id);
+    url.searchParams.set("unit", gap.labelEl);
+    url.searchParams.set("role", state.currentRole === "guardian" ? "guardian" : "student");
+    return url.pathname + url.search;
+  }
+
+  function cleanupPathAnimationBridge() {
+    if (activePathAnimationListener) {
+      window.removeEventListener("message", activePathAnimationListener);
+      activePathAnimationListener = null;
+    }
+  }
+
+  function bindPathAnimationBridge() {
+    cleanupPathAnimationBridge();
+    const card = els.pathModal?.querySelector(".path-animation-card");
+    const frame = els.pathModal?.querySelector(".path-animation-frame");
+    const wrap = els.pathModal?.querySelector(".path-animation-frame-wrap");
+    const toggle = els.pathModal?.querySelector(".path-animation-toggle");
+    const topic = els.pathModal?.querySelector(".path-animation-topic");
+    const done = els.pathModal?.querySelector(".path-animation-done");
+    const continueBtn = els.pathModal?.querySelector(".path-animation-continue");
+    if (!card || !frame || !wrap || !toggle) return;
+
+    activePathAnimationListener = (event) => {
+      if (event.origin !== window.location.origin || event.source !== frame.contentWindow) return;
+      const data = event.data || {};
+      if (data.source !== "aitools4kids-animation") return;
+      if (data.type === "aitools4kids:animation-status") {
+        if (!data.available) {
+          card.hidden = true;
+          return;
+        }
+        card.hidden = false;
+        if (topic) topic.textContent = data.topic || "";
+      }
+      if (data.type === "aitools4kids:animation-height" && Number.isFinite(Number(data.height))) {
+        frame.style.height = Math.min(820, Math.max(520, Number(data.height) + 8)) + "px";
+      }
+      if (data.type === "aitools4kids:animation-complete" && done) {
+        done.hidden = false;
+      }
+    };
+    window.addEventListener("message", activePathAnimationListener);
+
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", open ? "false" : "true");
+      wrap.hidden = open;
+      toggle.textContent = open
+        ? (state.currentRole === "guardian" ? "Άνοιξε την οπτική εξήγηση" : "Άνοιξε την κινούμενη εξήγηση")
+        : "Κλείσιμο οπτικής εξήγησης";
+    });
+    continueBtn?.addEventListener("click", () => {
+      els.pathModal?.querySelector(".path-steps")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
   // ---------- Learning Paths (Μονοπάτια Μάθησης) ----------
   function openLearningPathModal(gapId) {
     if (typeof LEARNING_PATHS === "undefined") return;
@@ -1959,6 +2056,25 @@ function renderToolGrid(pathTools, targetElement) {
 
     const label = state.lang === "el" ? gap.labelEl : gap.labelEn;
     const zoneMax = ZONE_MAX_AGE[state.currentZone];
+    const pathAnimationSrc = buildPathAnimationSrc(gapId, gap);
+    const pathAnimationHtml = pathAnimationSrc ? `
+      <section class="path-animation-card" hidden style="margin:14px 0;border:1px solid #cfddec;border-radius:14px;background:linear-gradient(135deg,#f8fbff,#f7fbf9);overflow:hidden;">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 14px;">
+          <div>
+            <strong style="display:block;color:#173f63;">${state.currentRole === "guardian" ? "🎬 Δες πώς να το εξηγήσεις στο παιδί" : "🎬 Δες το οπτικά"}</strong>
+            <span class="path-animation-topic" style="display:block;margin-top:4px;color:var(--color-text-muted);font-size:.82rem;"></span>
+          </div>
+          <button type="button" class="path-animation-toggle" aria-expanded="false" style="border:1px solid #2e6f5e;border-radius:9px;background:#2e6f5e;color:#fff;padding:8px 11px;font:inherit;font-weight:700;cursor:pointer;">${state.currentRole === "guardian" ? "Άνοιξε την οπτική εξήγηση" : "Άνοιξε την κινούμενη εξήγηση"}</button>
+        </div>
+        <div class="path-animation-frame-wrap" hidden style="border-top:1px solid #dbe6ef;background:#fff;">
+          <iframe class="path-animation-frame" src="${escapeAttr(pathAnimationSrc)}" title="Κινούμενη οπτική εξήγηση της επιλεγμένης δυσκολίας" style="display:block;width:100%;height:610px;border:0;background:#fff;" allowfullscreen></iframe>
+        </div>
+        <div class="path-animation-done" hidden style="padding:11px 14px 14px;border-top:1px solid #dbe6ef;background:#f5fbf8;">
+          <p style="margin:0 0 8px;color:var(--color-text-muted);font-size:.84rem;">${state.currentRole === "guardian" ? "Η οπτική εξήγηση τελείωσε. Συνέχισε στα βήματα και άφησε το παιδί να δοκιμάσει μόνο του." : "Η οπτική εξήγηση τελείωσε. Συνέχισε τώρα στα βήματα χωρίς να ζητήσεις έτοιμη λύση."}</p>
+          <button type="button" class="path-animation-continue" style="border:0;border-radius:9px;background:var(--color-accent);color:#fff;padding:8px 11px;font:inherit;font-weight:700;cursor:pointer;">Συνέχισε στο Μονοπάτι Μάθησης ↓</button>
+        </div>
+      </section>
+    ` : "";
 
     // Ίδια λογική με το renderQuizResults: ένα εργαλείο δεν εμφανίζεται καθόλου αν δεν
     // περνάει το isToolAgeAppropriate (π.χ. μαθητής Δημοτικού βλέπει το μονοπάτι). Αν
@@ -2074,6 +2190,7 @@ function renderToolGrid(pathTools, targetElement) {
       <p class="path-modal__eyebrow">${t("pathModalTitle")}</p>
       <h3 class="path-modal__title">${escapeHtml(label)}</h3>
       <p class="path-modal__intro">${t("pathModalIntro")}</p>
+      ${pathAnimationHtml}
       <div class="path-steps">${stepsHtml}</div>
       ${pathAiHtml}
       ${renderLearningActivities(gapId, gap)}
@@ -2090,6 +2207,7 @@ function renderToolGrid(pathTools, targetElement) {
       ${extraToolsHtml}
       ${adultToolsHtml}
     `;
+    bindPathAnimationBridge();
     els.pathModal.querySelector(".path-modal__close").addEventListener("click", closeLearningPathModal);
     els.pathModal.querySelectorAll("[data-path-score]").forEach((btn)=>{
       btn.addEventListener("click",()=>{
@@ -2133,6 +2251,7 @@ function renderToolGrid(pathTools, targetElement) {
   }
 
   function closeLearningPathModal() {
+    cleanupPathAnimationBridge();
     els.pathModalOverlay.hidden = true;
     els.pathModal.innerHTML = "";
     document.body.style.overflow = "";

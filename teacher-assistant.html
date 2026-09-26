@@ -1488,7 +1488,7 @@ var ANIMATED_EXPLANATIONS={
 function byId(id){return document.getElementById(id);}
 var aeEmbedParams=new URLSearchParams(window.location.search);
 var aeEmbedMode=aeEmbedParams.get("aeEmbed")==="1";
-var aeEmbedRole=aeEmbedParams.get("role")==="guardian"?"guardian":"student";
+var aeEmbedRole=aeEmbedParams.get("role")==="guardian"?"guardian":(aeEmbedParams.get("role")==="neutral"?"neutral":"student");
 var aeEmbedResizeObserver=null;
 function postEmbedMessage(payload){
   if(!aeEmbedMode||window.parent===window)return;
@@ -2537,7 +2537,7 @@ function renderExplanation(key,config){
     return '<li data-caption-index="'+i+'"><span class="animated-explanation__sr">Βήμα '+(i+1)+' από '+config.captions.length+'</span></li>';
   }).join("");
   var questionsHtml=config.questions.map(function(question){return "<li>"+question+"</li>";}).join("");
-  var comprehensionTitle=aeEmbedMode&&aeEmbedRole==="guardian"?"Δοκίμασε αυτές τις ερωτήσεις με το παιδί":"Έλεγξε αν το κατάλαβες";
+  var comprehensionTitle=aeEmbedMode&&aeEmbedRole==="guardian"?"Δοκίμασε αυτές τις ερωτήσεις με το παιδί":(aeEmbedMode&&aeEmbedRole==="neutral"?"Ερωτήσεις κατανόησης":"Έλεγξε αν το κατάλαβες");
 
   slot.innerHTML=[
     '<section class="animated-explanation" aria-labelledby="aeTitle">',

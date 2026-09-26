@@ -33,14 +33,6 @@
       "dest": "/preschool.html"
     },
     {
-      "src": "/social-preview.png",
-      "headers": {
-        "Content-Type": "image/png",
-        "Cache-Control": "public, max-age=86400"
-      },
-      "dest": "/assets/og-image.png"
-    },
-    {
       "handle": "filesystem"
     },
     {

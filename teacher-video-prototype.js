@@ -11,6 +11,8 @@
   let puterPromise=null;
   let audioObjectUrl=null;
   let exportedBlob=null;
+  let mp4ObjectUrl=null;
+  let exportedMp4Blob=null;
   let subtitleObjectUrl=null;
   let previewTotalMs=0;
   let previewRunning=false;
@@ -188,6 +190,19 @@
     a.hidden=false;
   }
 
+  function subtitleVisuals(){
+    const size=q("videoSubtitleSize")?.value||"large";
+    const contrast=q("videoSubtitleContrast")?.value||"high";
+    const fontSize=size==="xlarge"?48:size==="normal"?30:38;
+    const lineHeight=Math.round(fontSize*1.28);
+    return {
+      fontSize,
+      lineHeight,
+      maxLines:size==="xlarge"?2:2,
+      background:contrast==="soft"?"rgba(11,18,32,.68)":"rgba(0,0,0,.9)"
+    };
+  }
+
   function palette(){
     const mode=q("videoStyle")?.value||"clean";
     if(mode==="younger") return {a:"#F59E0B",b:"#EC4899",c:"#FFF7ED",ink:"#31160b"};
@@ -276,18 +291,22 @@
     if(subtitlesEnabled()){
       const subtitle=subtitleForScene(scene,local);
       if(subtitle){
-        ctx.font="700 29px system-ui, sans-serif";
-        const subtitleLines=wrapLines(ctx,subtitle,w-230,2);
-        const boxH=subtitleLines.length*38+28;
-        const boxY=h-170-boxH;
-        ctx.globalAlpha=.86;
-        ctx.fillStyle="#0B1220";
-        rounded(ctx,90,boxY,w-180,boxH,18);
-        ctx.fill();
+        const sv=subtitleVisuals();
+        ctx.font="800 "+sv.fontSize+"px system-ui, sans-serif";
+        const sidePadding=sv.fontSize>=48?150:115;
+        const subtitleLines=wrapLines(ctx,subtitle,w-sidePadding*2,sv.maxLines);
+        const boxH=subtitleLines.length*sv.lineHeight+34;
+        const boxY=h-150-boxH;
         ctx.globalAlpha=1;
+        ctx.fillStyle=sv.background;
+        rounded(ctx,sidePadding-22,boxY,w-(sidePadding-22)*2,boxH,20);
+        ctx.fill();
         ctx.fillStyle="#FFFFFF";
         ctx.textAlign="center";
-        subtitleLines.forEach((line,i)=>ctx.fillText(line,w/2,boxY+39+i*38));
+        ctx.shadowColor="rgba(0,0,0,.85)";
+        ctx.shadowBlur=5;
+        subtitleLines.forEach((line,i)=>ctx.fillText(line,w/2,boxY+sv.lineHeight-3+i*sv.lineHeight));
+        ctx.shadowBlur=0;
         ctx.textAlign="left";
       }
     }
@@ -475,76 +494,172 @@
     drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3),pos.local);
   }
 
-  async function exportWebm(){
-    if(!project)return;
-    if(!("MediaRecorder" in window)||!q("videoCanvas")?.captureStream){
-      q("videoStatus").textContent="Η συσκευή δεν υποστηρίζει εξαγωγή WebM από browser.";
-      return;
+  function supportedMime(format){
+    if(!("MediaRecorder" in window))return"";
+    const candidates=format==="mp4"
+      ?[
+        'video/mp4;codecs="avc1.424028,mp4a.40.2"',
+        'video/mp4;codecs="avc1,opus"',
+        'video/mp4'
+      ]
+      :[
+        "video/webm;codecs=vp9,opus",
+        "video/webm;codecs=vp8,opus",
+        "video/webm"
+      ];
+    return candidates.find(type=>MediaRecorder.isTypeSupported(type))||"";
+  }
+
+  async function renderVideoBlob(format="webm"){
+    if(!project)throw new Error("Δεν υπάρχει έτοιμο βίντεο.");
+    if(!q("videoCanvas")?.captureStream||!("MediaRecorder" in window)){
+      throw new Error("Η συσκευή δεν υποστηρίζει εξαγωγή βίντεο από browser.");
     }
+    const mime=supportedMime(format);
+    if(!mime){
+      if(format==="mp4")throw new Error("Ο browser αυτής της συσκευής δεν υποστηρίζει απευθείας MP4. Το WebM παραμένει διαθέσιμο.");
+      throw new Error("Ο browser αυτής της συσκευής δεν υποστηρίζει WebM.");
+    }
+
     stopPlayback();
-    q("videoStatus").textContent="3/3 Σύνθεση τελικού WebM…";
-    q("videoExportBtn").disabled=true;
     const canvas=q("videoCanvas");
     const canvasStream=canvas.captureStream(30);
     const tracks=[...canvasStream.getVideoTracks()];
     let recordAudio=null,audioCtx=null,dest=null;
+
     if(narrationAudio?.src){
       recordAudio=new Audio(narrationAudio.src);
       recordAudio.crossOrigin="anonymous";
-      await new Promise((resolve)=>{recordAudio.addEventListener("loadedmetadata",resolve,{once:true});recordAudio.load();setTimeout(resolve,2500);});
+      await new Promise((resolve)=>{
+        if(recordAudio.readyState>=1)return resolve();
+        recordAudio.addEventListener("loadedmetadata",resolve,{once:true});
+        recordAudio.load();
+        setTimeout(resolve,2500);
+      });
       try{
         audioCtx=new (window.AudioContext||window.webkitAudioContext)();
         dest=audioCtx.createMediaStreamDestination();
         const source=audioCtx.createMediaElementSource(recordAudio);
         source.connect(dest);
-        source.connect(audioCtx.destination);
         tracks.push(...dest.stream.getAudioTracks());
       }catch(e){
         q("videoStatus").textContent="Η εξαγωγή συνεχίζεται χωρίς ήχο στη συγκεκριμένη συσκευή.";
       }
     }
+
     const stream=new MediaStream(tracks);
-    const types=["video/webm;codecs=vp9,opus","video/webm;codecs=vp8,opus","video/webm"];
-    const mime=types.find(t=>MediaRecorder.isTypeSupported(t))||"video/webm";
     const chunks=[];
-    const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:4500000});
+    const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:4500000,audioBitsPerSecond:128000});
     rec.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data)};
-    const done=new Promise(resolve=>{rec.onstop=resolve});
+    const done=new Promise((resolve,reject)=>{
+      rec.onstop=resolve;
+      rec.onerror=e=>reject(e.error||new Error("Αποτυχία εγγραφής βίντεο."));
+    });
+
     rec.start(250);
     const duration=previewDurationSeconds();
     const started=performance.now();
+
     if(recordAudio){
-      await audioCtx?.resume?.();
-      await recordAudio.play();
+      try{
+        await audioCtx?.resume?.();
+        await recordAudio.play();
+      }catch(_){}
     }
+
     await new Promise(resolve=>{
       function tick(now){
-        const current=recordAudio?recordAudio.currentTime:(now-started)/1000;
+        // The video timeline always follows wall-clock time, not audio playback.
+        // This prevents early/late narration from truncating the final scenes.
+        const current=Math.min(duration,(now-started)/1000);
         renderFrameForTime(current,duration);
         if(current<duration)requestAnimationFrame(tick);
-        else{renderFrameForTime(duration,duration);setTimeout(resolve,220);}
+        else{renderFrameForTime(duration,duration);setTimeout(resolve,250);}
       }
       requestAnimationFrame(tick);
     });
+
     rec.stop();
     await done;
     stream.getTracks().forEach(t=>t.stop());
+    try{recordAudio?.pause?.()}catch(_){}
     try{await audioCtx?.close?.()}catch(_){}
-    if(audioObjectUrl)URL.revokeObjectURL(audioObjectUrl);
-    const blob=new Blob(chunks,{type:mime});
-    exportedBlob=blob;
-    audioObjectUrl=URL.createObjectURL(blob);
-    const filename=(project.title||"ekpaideutiko-video").replace(/[^a-zA-Z0-9α-ωΑ-Ωάέήίόύώϊϋΐΰ -]/g,"").trim().replace(/\s+/g,"-")+".webm";
-    const a=q("videoDownload");
-    a.href=audioObjectUrl;
-    a.download=filename;
-    a.hidden=false;
-    const filePreview=q("videoFilePreview");
-    filePreview.src=audioObjectUrl;
-    filePreview.hidden=false;
-    q("videoSaveBtn").hidden=false;
-    q("videoStatus").textContent="Έτοιμο. Μπορείς να δεις ολόκληρο το αρχείο παρακάτω και να το κατεβάσεις.";
-    q("videoExportBtn").disabled=false;
+
+    return new Blob(chunks,{type:mime});
+  }
+
+  function safeVideoFilename(ext){
+    return (project?.title||"ekpaideutiko-video")
+      .replace(/[^a-zA-Z0-9α-ωΑ-Ωάέήίόύώϊϋΐΰ -]/g,"")
+      .trim().replace(/\s+/g,"-")+"."+ext;
+  }
+
+  async function exportWebm(){
+    const btn=q("videoExportBtn");
+    if(!project)return;
+    btn.disabled=true;
+    q("videoStatus").textContent="Σύνθεση τελικού WebM…";
+    try{
+      const blob=await renderVideoBlob("webm");
+      exportedBlob=blob;
+      if(audioObjectUrl)URL.revokeObjectURL(audioObjectUrl);
+      audioObjectUrl=URL.createObjectURL(blob);
+      const a=q("videoDownload");
+      a.href=audioObjectUrl;
+      a.download=safeVideoFilename("webm");
+      a.hidden=false;
+      const filePreview=q("videoFilePreview");
+      filePreview.src=audioObjectUrl;
+      filePreview.hidden=false;
+      q("videoSaveBtn").hidden=false;
+      q("videoStatus").textContent="Έτοιμο WebM. Μπορείς να το δεις ολόκληρο και να το κατεβάσεις.";
+    }catch(e){
+      q("videoStatus").textContent=e?.message||"Δεν ολοκληρώθηκε η εξαγωγή WebM.";
+    }finally{
+      btn.disabled=false;
+    }
+  }
+
+  async function exportMp4(){
+    const btn=q("videoExportMp4Btn");
+    if(!project)return;
+    btn.disabled=true;
+    q("videoStatus").textContent="Σύνθεση MP4… Αυτό μπορεί να χρειαστεί όσο περίπου η διάρκεια του βίντεο.";
+    try{
+      const blob=await renderVideoBlob("mp4");
+      exportedMp4Blob=blob;
+      if(mp4ObjectUrl)URL.revokeObjectURL(mp4ObjectUrl);
+      mp4ObjectUrl=URL.createObjectURL(blob);
+      const a=q("videoMp4Download");
+      a.href=mp4ObjectUrl;
+      a.download=safeVideoFilename("mp4");
+      a.hidden=false;
+      const filePreview=q("videoFilePreview");
+      filePreview.src=mp4ObjectUrl;
+      filePreview.hidden=false;
+      q("videoStatus").textContent="Έτοιμο MP4. Μπορείς να το δεις και να το κατεβάσεις.";
+    }catch(e){
+      q("videoStatus").textContent=(e?.message||"Δεν ολοκληρώθηκε η εξαγωγή MP4.")+" Δοκίμασε WebM αν η συσκευή δεν υποστηρίζει MP4.";
+    }finally{
+      btn.disabled=false;
+    }
+  }
+
+  async function toggleFullscreen(){
+    const target=q("videoStageWrap");
+    if(!target)return;
+    try{
+      if(document.fullscreenElement||document.webkitFullscreenElement){
+        if(document.exitFullscreen)await document.exitFullscreen();
+        else if(document.webkitExitFullscreen)document.webkitExitFullscreen();
+        return;
+      }
+      if(target.requestFullscreen)await target.requestFullscreen();
+      else if(target.webkitRequestFullscreen)target.webkitRequestFullscreen();
+      else q("videoStatus").textContent="Η πλήρης οθόνη δεν υποστηρίζεται από αυτόν τον browser.";
+    }catch(e){
+      q("videoStatus").textContent="Δεν μπόρεσε να ανοίξει η πλήρης οθόνη.";
+    }
   }
 
   async function generate(){
@@ -579,7 +694,11 @@
         }
       }
       q("videoExportBtn").hidden=false;
+      q("videoExportMp4Btn").hidden=false;
+      q("videoExportMp4Btn").disabled=!supportedMime("mp4");
+      q("videoExportMp4Btn").title=supportedMime("mp4")?"Δημιουργία MP4 από τη συσκευή":"Ο browser δεν δηλώνει υποστήριξη εγγραφής MP4";
       q("videoDownload").hidden=true;
+      q("videoMp4Download").hidden=true;
       q("videoSaveBtn").hidden=true;
       q("videoFilePreview").hidden=true;
       q("videoFilePreview").removeAttribute("src");
@@ -622,6 +741,8 @@
     q("videoPlayBtn")?.addEventListener("click",()=>{if(previewRunning){stopPlayback();return;}play();});
     q("videoRestartBtn")?.addEventListener("click",()=>{stopPlayback();if(project){drawScene(project.scenes[0],0,1);updateTimeline(0,previewDurationSeconds());}});
     q("videoExportBtn")?.addEventListener("click",exportWebm);
+    q("videoExportMp4Btn")?.addEventListener("click",exportMp4);
+    q("videoFullscreenBtn")?.addEventListener("click",toggleFullscreen);
     q("videoSaveBtn")?.addEventListener("click",saveOrShare);
     q("videoTimeline")?.addEventListener("input",()=>{
       if(!project||previewRunning)return;
@@ -629,17 +750,25 @@
       const seconds=(Number(q("videoTimeline").value)||0)/1000*total;
       drawAtSeconds(seconds,total);
     });
-    q("videoNarration")?.addEventListener("change",()=>{q("videoDownload").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;});
+    q("videoNarration")?.addEventListener("change",()=>{q("videoDownload").hidden=true;q("videoMp4Download").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;});
+    ["videoSubtitleSize","videoSubtitleContrast"].forEach(id=>q(id)?.addEventListener("change",()=>{
+      if(project)drawAtSeconds((Number(q("videoTimeline")?.value)||0)/1000*previewDurationSeconds(),previewDurationSeconds());
+      q("videoDownload").hidden=true;
+      q("videoMp4Download").hidden=true;
+      q("videoSaveBtn").hidden=true;
+      q("videoFilePreview").hidden=true;
+    }));
     q("videoSubtitles")?.addEventListener("change",()=>{
       refreshVttDownload();
       q("videoDownload").hidden=true;
+      q("videoMp4Download").hidden=true;
       q("videoSaveBtn").hidden=true;
       q("videoFilePreview").hidden=true;
       if(project)drawAtSeconds((Number(q("videoTimeline")?.value)||0)/1000*previewDurationSeconds(),previewDurationSeconds());
     });
   }
 
-  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,previewDurationSeconds,formatTime,buildVtt,subtitleChunks};
+  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,exportMp4,toggleFullscreen,supportedMime,previewDurationSeconds,formatTime,buildVtt,subtitleChunks};
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});
   else bind();

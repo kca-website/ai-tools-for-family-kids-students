@@ -138,12 +138,14 @@
       <div class="field"><label for="videoStyle">Οπτικό ύφος</label><select id="videoStyle"><option value="clean" selected>Καθαρό εκπαιδευτικό</option><option value="visual">Πιο οπτικό / δυναμικό</option><option value="younger">Πιο φιλικό για μικρότερες ηλικίες</option></select></div>
       <div class="field"><label for="videoNarration">Αφήγηση</label><select id="videoNarration"><option value="ai" selected>Ελληνική AI αφήγηση</option><option value="browser">Αφήγηση συσκευής</option><option value="none">Χωρίς αφήγηση</option></select></div>
       <div class="field"><label for="videoSubtitles">Υπότιτλοι</label><select id="videoSubtitles"><option value="el" selected>Ελληνικά · ενσωματωμένοι + .vtt</option><option value="none">Χωρίς υπότιτλους</option></select></div>
+      <div class="field"><label for="videoSubtitleSize">Μέγεθος υποτίτλων</label><select id="videoSubtitleSize"><option value="normal">Κανονικοί</option><option value="large" selected>Μεγάλοι</option><option value="xlarge">Πολύ μεγάλοι</option></select></div>
+      <div class="field"><label for="videoSubtitleContrast">Αντίθεση υποτίτλων</label><select id="videoSubtitleContrast"><option value="high" selected>Υψηλή αντίθεση</option><option value="soft">Ηπιότερο φόντο</option></select></div>
     </div>
     <p class="video-options__note">Η δημιουργία σεναρίου γίνεται από το aitools4kids. Η επιλογή «Ελληνική AI αφήγηση» χρησιμοποιεί Puter TTS και μπορεί να ζητήσει σύνδεση ή να καταναλώσει χρήση του λογαριασμού Puter. Δεν χρησιμοποιούνται στοιχεία μαθητών.</p>
     <button type="button" class="btn video-create-btn" id="videoCreateBtn">🎬 Δημιούργησε βίντεο</button>
     <div class="video-status" id="videoStatus" role="status" aria-live="polite"></div>
     <div class="video-studio" id="videoStudio" hidden>
-      <div class="video-stage-wrap">
+      <div class="video-stage-wrap" id="videoStageWrap">
         <canvas id="videoCanvas" class="video-canvas" width="1280" height="720" aria-label="Προεπισκόπηση εκπαιδευτικού βίντεο"></canvas>
       </div>
       <div class="video-preview-progress">
@@ -153,13 +155,16 @@
       <div class="video-studio__controls">
         <button type="button" class="btn" id="videoPlayBtn">▶ Προεπισκόπηση από την αρχή</button>
         <button type="button" class="btn secondary" id="videoRestartBtn">↻ Από την αρχή</button>
-        <button type="button" class="btn secondary" id="videoExportBtn" hidden>⬇ Δημιούργησε αρχείο βίντεο</button>
+        <button type="button" class="btn secondary" id="videoFullscreenBtn">⛶ Πλήρης οθόνη</button>
+        <button type="button" class="btn secondary" id="videoExportBtn" hidden>⬇ Δημιούργησε WebM</button>
+        <button type="button" class="btn secondary" id="videoExportMp4Btn" hidden>⬇ Δημιούργησε MP4</button>
         <a class="btn secondary video-download" id="videoDownload" hidden download>⬇ Λήψη WebM</a>
+        <a class="btn secondary video-download" id="videoMp4Download" hidden download>⬇ Λήψη MP4</a>
         <a class="btn secondary video-download" id="videoVttDownload" hidden download>CC Λήψη υποτίτλων .vtt</a>
         <button type="button" class="btn secondary" id="videoSaveBtn" hidden>📲 Αποθήκευση / κοινή χρήση</button>
       </div>
       <video id="videoFilePreview" class="video-file-preview" controls playsinline hidden></video>
-      <p class="video-studio__hint" id="videoStudioHint">Το prototype δημιουργεί motion-graphics χωρίς εξωτερικό μοντάζ. Με ενεργούς υπότιτλους, το κείμενο ενσωματώνεται στο WebM και δίνεται επιπλέον αρχείο .vtt.</p>
+      <p class="video-studio__hint" id="videoStudioHint">Το prototype δημιουργεί motion-graphics χωρίς εξωτερικό μοντάζ. Με ενεργούς υπότιτλους, το κείμενο ενσωματώνεται στο βίντεο και δίνεται επιπλέον αρχείο .vtt. Η εξαγωγή MP4 χρησιμοποιεί τον encoder της συσκευής όταν αυτός υποστηρίζει MP4.</p>
       <details class="video-scenes-details"><summary>Δες το storyboard και το κείμενο αφήγησης</summary><div id="videoSceneList" class="video-scene-list"></div></details>
     </div>
   </div>

@@ -63,6 +63,15 @@ try{
   assert.equal(await page.locator('#videoOptions').isVisible(),true,'Video controls must appear when educational-video task is selected');
   assert.equal(await page.locator('#standardGenerationControls').isHidden(),true,'Video task must use one direct creation action instead of the generic provider chooser');
   assert.equal(await page.locator('#videoCreateBtn').count(),1,'Video prototype needs one direct create-video button');
+  assert.equal(await page.locator('#videoDuration option').count(),6,'Video duration selector must include 30s through 5 minutes');
+  await page.selectOption('#videoDuration','300');
+  assert.equal(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.sceneCount()),22,'Five-minute videos should plan about 22 scenes');
+  assert.equal(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.wordTarget()),'560–650','Five-minute videos should request long-form narration');
+  assert.equal(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.outputTokenBudget()),4800,'Five-minute videos need a larger bounded storyboard output budget');
+  const longPrompt=await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.buildPrompt());
+  assert.match(longPrompt,/300 δευτερόλεπτα/,'Five-minute prompt must carry the selected duration');
+  assert.match(longPrompt,/Ακριβώς 22 σκηνές/,'Five-minute prompt must request the long-form scene count');
+  await page.selectOption('#videoDuration','60');
   assert.equal(await page.locator('#videoCanvas').count(),1,'Video prototype needs a 16:9 preview canvas');
   assert.equal(await page.locator('#videoTimeline').count(),1,'Video prototype needs a visible timeline so the full preview is trackable');
   assert.equal(await page.locator('#videoExportBtn').count(),1,'Video prototype needs an export action');
@@ -97,6 +106,10 @@ try{
   assert.equal(await page.locator('#videoRefreshNarrationBtn').count(),1,'Edited narration needs a refresh-audio action');
   assert.equal(await page.evaluate(()=>typeof window.AITOOLSKIDS_TEACHER_VIDEO?.supportedMime==='function'),true,'Video export must use runtime codec detection');
   assert.deepEqual(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.subtitleChunks('Αυτό είναι ένα απλό παράδειγμα με αρκετές λέξεις για υπότιτλους.',5)),['Αυτό είναι ένα απλό παράδειγμα','με αρκετές λέξεις για υπότιτλους.'],'Subtitle chunking should keep readable short captions');
+  assert.equal(await page.evaluate(()=>{
+    const scenes=Array.from({length:12},(_,i)=>({title:'S'+i,onscreen:'x',narration:'αφήγηση '+i,symbol:'✨',visual:'κίνηση'}));
+    return window.AITOOLSKIDS_TEACHER_VIDEO.extractJson(JSON.stringify({title:'Long',scenes})).scenes.length;
+  }),12,'Long-form storyboard parser must preserve more than eight scenes');
   const videoPrompt=await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.buildPrompt());
   assert.match(videoPrompt,/JSON/,'Video prompt must request structured scene output');
   assert.match(videoPrompt,/σχολική ενότητα|ενότητα/i,'Video prompt must remain grounded in the selected curriculum topic');

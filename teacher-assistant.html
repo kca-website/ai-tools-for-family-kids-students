@@ -37,6 +37,14 @@
 
 /* ---------- Reusable animated explanations ---------- */
 .animated-explanation-slot[hidden]{display:none!important}
+body.ae-embed-mode{margin:0;background:#fff;min-height:0}
+body.ae-embed-mode> *:not(.animated-explanation-slot){display:none!important}
+body.ae-embed-mode .animated-explanation-slot{display:block!important;width:100%;max-width:900px;margin:0 auto;padding:0;background:#fff}
+body.ae-embed-mode .animated-explanation{margin:0;border:0;border-radius:0;box-shadow:none;background:#fff;padding:14px}
+body.ae-embed-mode .animated-explanation__head{gap:10px}
+body.ae-embed-mode .animated-explanation__topic{max-width:280px}
+@media(max-width:700px){body.ae-embed-mode .animated-explanation{padding:10px}body.ae-embed-mode .animated-explanation__head{display:block}body.ae-embed-mode .animated-explanation__topic{display:inline-block;margin-top:9px;max-width:100%}}
+
 .animated-explanation{margin-top:16px;border:1px solid #cfddec;border-radius:18px;background:linear-gradient(135deg,#f8fbff,#f7fbf9);padding:18px;overflow:hidden}
 .animated-explanation__head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
 .animated-explanation__head h3{margin:0;font-size:1.15rem;color:#173f63}
@@ -1478,6 +1486,20 @@ var ANIMATED_EXPLANATIONS={
   }
 };
 function byId(id){return document.getElementById(id);}
+var aeEmbedParams=new URLSearchParams(window.location.search);
+var aeEmbedMode=aeEmbedParams.get("aeEmbed")==="1";
+var aeEmbedRole=aeEmbedParams.get("role")==="guardian"?"guardian":"student";
+var aeEmbedResizeObserver=null;
+function postEmbedMessage(payload){
+  if(!aeEmbedMode||window.parent===window)return;
+  try{window.parent.postMessage(Object.assign({source:"aitools4kids-animation"},payload),window.location.origin);}catch(_){}
+}
+function reportEmbedHeight(){
+  if(!aeEmbedMode)return;
+  var slot=byId("animatedExplanationSlot");
+  if(!slot)return;
+  postEmbedMessage({type:"aitools4kids:animation-height",height:Math.ceil(slot.getBoundingClientRect().height||0)});
+}
 function normalizeText(value){
   return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
     .replace(/[΄’'·.,:;()\/\\–—-]/g," ").replace(/\s+/g," ").trim();
@@ -1486,6 +1508,15 @@ function selectedText(select){
   return select&&select.options&&select.options[select.selectedIndex]?select.options[select.selectedIndex].textContent:"";
 }
 function currentSelection(){
+  if(aeEmbedMode){
+    return{
+      context:aeEmbedParams.get("context")||"",
+      grade:aeEmbedParams.get("grade")||"",
+      subjectValue:aeEmbedParams.get("subjectValue")||aeEmbedParams.get("subject")||"",
+      subjectText:aeEmbedParams.get("subject")||"",
+      unitText:aeEmbedParams.get("unit")||""
+    };
+  }
   var context=byId("context"),grade=byId("grade"),subject=byId("subject"),unit=byId("unit"),custom=byId("customUnit");
   return{
     context:context?context.value:"",
@@ -2506,6 +2537,7 @@ function renderExplanation(key,config){
     return '<li data-caption-index="'+i+'"><span class="animated-explanation__sr">Βήμα '+(i+1)+' από '+config.captions.length+'</span></li>';
   }).join("");
   var questionsHtml=config.questions.map(function(question){return "<li>"+question+"</li>";}).join("");
+  var comprehensionTitle=aeEmbedMode&&aeEmbedRole==="guardian"?"Δοκίμασε αυτές τις ερωτήσεις με το παιδί":"Έλεγξε αν το κατάλαβες";
 
   slot.innerHTML=[
     '<section class="animated-explanation" aria-labelledby="aeTitle">',
@@ -2513,7 +2545,7 @@ function renderExplanation(key,config){
     '<div class="animated-explanation__stage" data-phase="0">',svgMarkup(config),'<div class="animated-explanation__caption" id="aeCaption" aria-live="polite" aria-atomic="true">'+config.captions[0]+'</div></div>',
     '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button></div>',
     '<ol class="animated-explanation__progress" aria-label="Πρόοδος εξήγησης">',progressHtml,'</ol>',
-    '<div class="animated-explanation__comprehension" data-ae-comprehension tabindex="-1" hidden><h4>Το κατάλαβες;</h4><ol>',questionsHtml,'</ol></div>',
+    '<div class="animated-explanation__comprehension" data-ae-comprehension tabindex="-1" hidden><h4>'+comprehensionTitle+'</h4><ol>',questionsHtml,'</ol></div>',
     '<span class="animated-explanation__sr" data-ae-status role="status" aria-live="polite"></span>',
     '</section>'
   ].join("");
@@ -2580,6 +2612,8 @@ function renderExplanation(key,config){
     setButtons();
     comprehension.hidden=false;
     status.textContent="Η κινούμενη εξήγηση ολοκληρώθηκε. Ακολούθησε το μικρό τεστ κατανόησης.";
+    postEmbedMessage({type:"aitools4kids:animation-complete",key:key,topic:config.topicLabel});
+    setTimeout(reportEmbedHeight,0);
   }
   function start(){
     if(running||finished)return;
@@ -2647,6 +2681,15 @@ function renderExplanation(key,config){
   applyPhase(0,false);
   setButtons();
   controller={destroy:destroy};
+  if(aeEmbedMode){
+    postEmbedMessage({type:"aitools4kids:animation-status",available:true,key:key,topic:config.topicLabel});
+    if(aeEmbedResizeObserver)aeEmbedResizeObserver.disconnect();
+    if(window.ResizeObserver){
+      aeEmbedResizeObserver=new ResizeObserver(function(){reportEmbedHeight();});
+      aeEmbedResizeObserver.observe(slot);
+    }
+    setTimeout(reportEmbedHeight,30);
+  }
 }
 function sync(){
   var slot=byId("animatedExplanationSlot");
@@ -2659,6 +2702,7 @@ function sync(){
       slot.replaceChildren();
     }
     slot.hidden=true;
+    if(aeEmbedMode)postEmbedMessage({type:"aitools4kids:animation-status",available:false});
     return;
   }
   if(activeKey!==found[0]||slot.hidden)renderExplanation(found[0],found[1]);
@@ -2671,6 +2715,11 @@ function deferredSync(){setTimeout(sync,0);}
 var customUnit=byId("customUnit");
 if(customUnit)customUnit.addEventListener("input",deferredSync);
 
+if(aeEmbedMode){
+  document.body.classList.add("ae-embed-mode");
+  var aeEmbedSlot=byId("animatedExplanationSlot");
+  if(aeEmbedSlot&&aeEmbedSlot.parentNode!==document.body)document.body.appendChild(aeEmbedSlot);
+}
 window.AITOOLSKIDS_ANIMATED_EXPLANATIONS={configs:ANIMATED_EXPLANATIONS,refresh:sync};
 sync();
 })();

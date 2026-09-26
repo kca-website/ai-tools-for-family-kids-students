@@ -71,8 +71,32 @@
 .animated-explanation__stage[data-phase="4"] .ae-hplus,.animated-explanation__stage[data-phase="5"] .ae-hplus{opacity:0;transform:translate(-126px,16px)}
 .animated-explanation__stage[data-phase="4"] .ae-hydronium,.animated-explanation__stage[data-phase="5"] .ae-hydronium,.animated-explanation__stage[data-phase="4"] .ae-reaction,.animated-explanation__stage[data-phase="5"] .ae-reaction{opacity:1}
 .animated-explanation__stage[data-phase="5"] .ae-final{opacity:1}
+
+.animated-explanation__source{display:inline-block;margin-top:7px;font-size:.78rem;font-weight:750}
+.animated-explanation__stage .ae-scene{opacity:0;transform:translateY(8px);transition:opacity .42s ease,transform .42s ease;pointer-events:none}
+.animated-explanation__stage[data-phase="0"] .ae-scene-0,
+.animated-explanation__stage[data-phase="1"] .ae-scene-1,
+.animated-explanation__stage[data-phase="2"] .ae-scene-2,
+.animated-explanation__stage[data-phase="3"] .ae-scene-3,
+.animated-explanation__stage[data-phase="4"] .ae-scene-4,
+.animated-explanation__stage[data-phase="5"] .ae-scene-5{opacity:1;transform:translateY(0)}
+.ae-float{animation:aeFloat 1.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.ae-drift-right{animation:aeDriftRight 1.9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.ae-drift-left{animation:aeDriftLeft 2.2s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.ae-pulse{animation:aePulse 1.35s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+.ae-drop{animation:aeDrop 1.6s ease-in infinite;transform-box:fill-box;transform-origin:center}
+@keyframes aeFloat{from{transform:translateY(-3px)}to{transform:translateY(4px)}}
+@keyframes aeDriftRight{from{transform:translateX(-5px)}to{transform:translateX(8px)}}
+@keyframes aeDriftLeft{from{transform:translateX(6px)}to{transform:translateX(-7px)}}
+@keyframes aePulse{from{transform:scale(.94)}to{transform:scale(1.05)}}
+@keyframes aeDrop{0%{transform:translateY(-24px);opacity:.25}55%,100%{transform:translateY(38px);opacity:1}}
+.animated-explanation:fullscreen{background:#f8fbff;padding:24px;overflow:auto}
+.animated-explanation:fullscreen .animated-explanation__stage{max-width:1120px;margin-left:auto;margin-right:auto}
+.animated-explanation.is-expanded{position:fixed;inset:12px;z-index:9999;background:#f8fbff;overflow:auto;box-shadow:0 20px 60px rgba(15,23,42,.28)}
+body.ae-no-scroll{overflow:hidden}
+
 @media(max-width:680px){.animated-explanation{padding:14px}.animated-explanation__head{display:block}.animated-explanation__topic{display:inline-block;max-width:none;margin-top:9px}.animated-explanation__caption{min-height:72px;font-size:.92rem}.animated-explanation__controls button{flex:1 1 30%;min-width:86px}}
-@media(prefers-reduced-motion:reduce){.animated-explanation__stage .ae-moving,.animated-explanation__progress li{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.animated-explanation__stage .ae-moving,.animated-explanation__stage .ae-scene,.animated-explanation__progress li{transition:none!important}.ae-float,.ae-drift-right,.ae-drift-left,.ae-pulse,.ae-drop{animation:none!important}}
 @media print{.animated-explanation__controls,.animated-explanation__progress{display:none!important}.animated-explanation{break-inside:avoid}}
 
 </style>
@@ -125,7 +149,7 @@
 </head><body>
 <header class="top"><div class="topin"><a class="brand" href="/">🤖 aitools4kids.gr</a><div class="toplinks"><a href="/teacher-assistant.html">Για εκπαιδευτικούς</a><a href="/xartis-ylis.html">Χάρτης Ύλης 2026-27</a></div></div></header>
 <main class="wrap">
-<section class="hero"><div class="eyebrow">Για εκπαιδευτικούς</div><h1>Εκπαιδευτικό υλικό</h1><p class="lead">Δημιούργησε υλικό πάνω σε επαληθευμένες πηγές 2026–27 για Δημοτικό, Γυμνάσιο, ΓΕΛ, ΕΠΑΛ και ειδική εκπαίδευση. Όπου δεν έχει ολοκληρωθεί section-level χαρτογράφηση, ζητάμε τον πραγματικό τίτλο της ενότητας αντί να επινοούμε ύλη.</p><div class="hero-actions"><a href="?task=assessment#builder">📝 Φύλλο αξιολόγησης</a><a href="?task=video#builder">🎥 Εκπαιδευτικό βίντεο</a><a href="#builder">✨ Πλήρης δημιουργία υλικού</a><a href="#quick">⚡ Γρήγορη δραστηριότητα</a><a href="/xartis-ylis.html">🗺️ Δες όλη την ύλη</a></div><div class="privacy"><strong>Προστασία δεδομένων:</strong> Μην εισάγεις ονοματεπώνυμα ή άλλα προσωπικά/ευαίσθητα στοιχεία μαθητών.
+<section class="hero"><div class="eyebrow">Για εκπαιδευτικούς</div><h1>Εκπαιδευτικό υλικό</h1><p class="lead">Δημιούργησε υλικό πάνω σε επαληθευμένες πηγές 2026–27 για Δημοτικό, Γυμνάσιο, ΓΕΛ, ΕΠΑΛ και ειδική εκπαίδευση. Όπου δεν έχει ολοκληρωθεί section-level χαρτογράφηση, ζητάμε τον πραγματικό τίτλο της ενότητας αντί να επινοούμε ύλη.</p><div class="hero-actions"><a href="?task=assessment#builder">📝 Φύλλο αξιολόγησης</a><a href="?task=video#builder">🎥 Εκπαιδευτικό βίντεο</a><a href="#builder">✨ Πλήρης δημιουργία υλικού</a><a href="/xartis-ylis.html">🗺️ Δες όλη την ύλη</a></div><div class="privacy"><strong>Προστασία δεδομένων:</strong> Μην εισάγεις ονοματεπώνυμα ή άλλα προσωπικά/ευαίσθητα στοιχεία μαθητών.
 <details style="margin-top:8px"><summary style="cursor:pointer;font-weight:800">Κανόνες χρήσης AI στο σχολείο</summary><ul style="margin:8px 0 6px 20px;padding:0"><li>Μην εισάγεις ονοματεπώνυμα, στοιχεία επικοινωνίας, φωτογραφίες, φωνητικά δείγματα, βαθμούς, διαγνώσεις ή δεδομένα υγείας.</li><li>Η χρήση στην τάξη γίνεται με εκπαιδευτική εποπτεία και ως βοήθημα μάθησης, όχι ως αυτοματοποιημένη αξιολόγηση μαθητή.</li><li>Οι μαθητές πρέπει να ελέγχουν τις απαντήσεις με το σχολικό βιβλίο ή άλλη αξιόπιστη πηγή και να μην παραδίδουν AI κείμενο ως δική τους εργασία.</li></ul><a href="https://www.minedu.gov.gr/site/64941-13-05-26-i-ellada-thespizei-gia-proti-fora-olokliromeno-plaisio-gia-tin-asfali-xrisi-tis-texnitis-noimosynis-sta-sxoleia-3" target="_blank" rel="noopener noreferrer">Πλαίσιο ΥΠΑΙΘΑ για ΤΝ στα σχολεία ↗</a></details></div></section>
 <section class="panel" id="builder"><p class="section-kicker">1. Πλήρης δημιουργία υλικού</p><h2>Τι θέλεις να φτιάξεις;</h2><p class="sub">Πρώτα διάλεξε είδος υλικού. Μετά τάξη, μάθημα και πραγματική χαρτογραφημένη ενότητα όπου υπάρχει.</p>
 <div class="tasks"><button class="task active" data-task="lesson"><span class="ico">📚</span><strong>Σχέδιο μαθήματος</strong><span>Στόχοι, στάδια και χρόνος</span></button><button class="task" data-task="package"><span class="ico">🧰</span><strong>Πακέτο 1 διδακτικής ώρας</strong><span>45΄ + φύλλο + έλεγχος + κανόνες</span></button><button class="task" data-task="worksheet"><span class="ico">📝</span><strong>Φύλλο εργασίας</strong><span>Ασκήσεις με σαφείς οδηγίες</span></button><button class="task" data-task="assessment"><span class="ico">📝</span><strong>Φύλλο αξιολόγησης</strong><span>Διαγνωστικό, επαναληπτικό, τελικό ή ρουμπρίκα</span></button><button class="task" data-task="video"><span class="ico">🎥</span><strong>Εκπαιδευτικό βίντεο</strong><span>Animated explainer με σενάριο και ελληνική αφήγηση</span></button><button class="task" data-task="activity"><span class="ico">🎯</span><strong>Δραστηριότητα</strong><span>Εμπέδωση μέσα στην τάξη</span></button><button class="task" data-task="explain"><span class="ico">💡</span><strong>Διαφορετική εξήγηση</strong><span>Με παραδείγματα και αναλογίες</span></button><button class="task" data-task="noai"><span class="ico">🧩</span><strong>Χωρίς AI για μαθητές</strong><span>AI μόνο στην προετοιμασία</span></button></div>
@@ -515,9 +539,12 @@ var ANIMATED_EXPLANATIONS={
     grade:"c",
     subjectTerms:["χημεια","chimeia","chemistry"],
     unitTerms:["1.1 ιδιοτητες των οξεων","1η ενοτητα κεφαλαιο 1 τα οξεα","οξεα βασεις και κλιμακα ph","τα οξεα"],
+    visual:"acid",
     title:"🎬 Κινούμενη εξήγηση",
     topicLabel:"Χημεία Γ΄ Γυμνασίου · 1.1 Ιδιότητες των οξέων",
     subtitle:"Δες βήμα βήμα τι συμβαίνει όταν ένα οξύ διαλύεται στο νερό.",
+    sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C102/223/",
+    sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
     captions:[
       "Όταν ένα οξύ διαλύεται στο νερό…",
       "…απελευθερώνει ιόντα υδρογόνου (H⁺).",
@@ -526,20 +553,96 @@ var ANIMATED_EXPLANATIONS={
       "Γι’ αυτό το διάλυμα εμφανίζει όξινες ιδιότητες."
     ],
     phases:[
-      {caption:0,duration:700},
-      {caption:0,duration:1450},
-      {caption:1,duration:1550},
-      {caption:2,duration:1650},
-      {caption:3,duration:1650},
-      {caption:4,duration:1250}
+      {caption:0,duration:700},{caption:0,duration:1450},{caption:1,duration:1550},
+      {caption:2,duration:1650},{caption:3,duration:1650},{caption:4,duration:1250}
     ],
     questions:[
       "Ποιο ιόν αυξάνεται σε ένα όξινο διάλυμα;",
       "Τι σχηματίζεται όταν το H⁺ συνδεθεί με νερό;"
     ]
+  },
+  "chemistry-b-gym-intro":{
+    context:"middle",
+    grade:"b",
+    subjectTerms:["χημεια","chimeia","chemistry"],
+    unitTerms:["εισαγωγη στη χημεια και ασφαλεια εργαστηριου","1.1 τι ειναι η χημεια και γιατι τη μελεταμε"],
+    visual:"chem-intro",
+    title:"🎬 Κινούμενη εξήγηση",
+    topicLabel:"Χημεία Β΄ Γυμνασίου · Εισαγωγή στη Χημεία",
+    subtitle:"Δες πώς η Χημεία ξεκινά από την παρατήρηση και φτάνει στο ασφαλές πείραμα.",
+    sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B202/219/",
+    sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:[
+      "Η Χημεία μελετά τα υλικά γύρω μας και τις μεταβολές τους.",
+      "Ξεκινάμε με προσεκτική παρατήρηση.",
+      "Μετράμε ιδιότητες ώστε τα στοιχεία μας να είναι πιο αξιόπιστα.",
+      "Στο εργαστήριο ακολουθούμε πάντα κανόνες ασφάλειας.",
+      "Με ασφαλές πείραμα ελέγχουμε ιδέες και εξηγούμε όσα παρατηρούμε."
+    ],
+    phases:[
+      {caption:0,duration:1500},{caption:1,duration:1500},{caption:2,duration:1500},
+      {caption:3,duration:1600},{caption:4,duration:1500}
+    ],
+    questions:[
+      "Τι μελετά η Χημεία;",
+      "Γιατί ακολουθούμε κανόνες ασφάλειας στο εργαστήριο;"
+    ]
+  },
+  "chemistry-b-gym-states-properties":{
+    context:"middle",
+    grade:"b",
+    subjectTerms:["χημεια","chimeia","chemistry"],
+    unitTerms:["καταστασεις και φυσικες ιδιοτητες των υλικων","1.2 καταστασεις των υλικων","1.3 φυσικες ιδιοτητες των υλικων"],
+    visual:"states",
+    title:"🎬 Κινούμενη εξήγηση",
+    topicLabel:"Χημεία Β΄ Γυμνασίου · Καταστάσεις και φυσικές ιδιότητες",
+    subtitle:"Δες πώς αλλάζει η κίνηση των σωματιδίων σε στερεό, υγρό και αέριο.",
+    sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B202/219/",
+    sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:[
+      "Τα υλικά μπορεί να βρίσκονται σε στερεή, υγρή ή αέρια κατάσταση.",
+      "Στο στερεό τα σωματίδια είναι πολύ κοντά και κινούνται γύρω από σταθερές θέσεις.",
+      "Στο υγρό παραμένουν κοντά, αλλά αλλάζουν θέσεις.",
+      "Στο αέριο βρίσκονται πολύ πιο αραιά και κινούνται ελεύθερα.",
+      "Οι φυσικές ιδιότητες μας βοηθούν να περιγράφουμε και να ξεχωρίζουμε τα υλικά."
+    ],
+    phases:[
+      {caption:0,duration:1500},{caption:1,duration:1600},{caption:2,duration:1600},
+      {caption:3,duration:1600},{caption:4,duration:1500}
+    ],
+    questions:[
+      "Σε ποια κατάσταση τα σωματίδια βρίσκονται πιο αραιά;",
+      "Σε τι μας βοηθούν οι φυσικές ιδιότητες ενός υλικού;"
+    ]
+  },
+  "chemistry-b-gym-water-mixtures":{
+    context:"middle",
+    grade:"b",
+    subjectTerms:["χημεια","chimeia","chemistry"],
+    unitTerms:["νερο μειγματα και διαλυματα","2.1 το νερο στη ζωη μας","2.2 το νερο ως διαλυτης μειγματα","2.2.1 μειγματα","2.2.2 διαλυματα"],
+    visual:"solution",
+    title:"🎬 Κινούμενη εξήγηση",
+    topicLabel:"Χημεία Β΄ Γυμνασίου · Νερό, μείγματα και διαλύματα",
+    subtitle:"Δες τι συμβαίνει όταν μια ουσία διαλύεται ομοιόμορφα στο νερό.",
+    sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B202/219/",
+    sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:[
+      "Το νερό μπορεί να λειτουργεί ως διαλύτης.",
+      "Όταν προσθέσουμε μια ουσία που διαλύεται, τα σωματίδιά της διασκορπίζονται στο νερό.",
+      "Το νερό είναι ο διαλύτης και η ουσία που προσθέσαμε η διαλυμένη ουσία.",
+      "Όταν η κατανομή είναι ομοιόμορφη, έχουμε ομογενές μείγμα: διάλυμα.",
+      "Αν μια ουσία δεν διαλυθεί, το μείγμα μπορεί να παραμείνει ετερογενές."
+    ],
+    phases:[
+      {caption:0,duration:1400},{caption:1,duration:1800},{caption:2,duration:1600},
+      {caption:3,duration:1600},{caption:4,duration:1500}
+    ],
+    questions:[
+      "Ποιος είναι ο διαλύτης σε ένα υδατικό διάλυμα;",
+      "Πώς λέγεται το ομογενές μείγμα διαλύτη και διαλυμένης ουσίας;"
+    ]
   }
 };
-
 function byId(id){return document.getElementById(id);}
 function normalizeText(value){
   return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
@@ -577,7 +680,7 @@ function resolveConfig(){
   }
   return null;
 }
-function svgMarkup(){
+function acidSvgMarkup(){
   return [
     '<svg class="animated-explanation__svg" viewBox="0 0 760 360" role="img" aria-labelledby="aeSvgTitle aeSvgDesc">',
     '<title id="aeSvgTitle">Διάλυση οξέος στο νερό και σχηματισμός ιόντος οξωνίου</title>',
@@ -604,6 +707,63 @@ function svgMarkup(){
   ].join("");
 }
 
+function baseSceneSvg(title,desc,scenes){
+  return [
+    '<svg class="animated-explanation__svg" viewBox="0 0 760 360" role="img" aria-labelledby="aeSvgTitle aeSvgDesc">',
+    '<title id="aeSvgTitle">'+title+'</title>',
+    '<desc id="aeSvgDesc">'+desc+'</desc>',
+    '<rect x="0" y="0" width="760" height="360" rx="18" fill="#fbfdff"/>',
+    scenes.join(""),
+    '</svg>'
+  ].join("");
+}
+function introSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="48" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Υλικά γύρω μας</text><g class="ae-float"><rect x="135" y="120" width="95" height="115" rx="14" fill="#dcebf7" stroke="#7893a8" stroke-width="3"/><text x="182" y="183" text-anchor="middle" font-size="18" font-weight="850" fill="#35556b">γυαλί</text></g><g class="ae-float"><circle cx="380" cy="178" r="58" fill="#fff0d8" stroke="#d59235" stroke-width="3"/><text x="380" y="184" text-anchor="middle" font-size="18" font-weight="850" fill="#8a5310">μέταλλο</text></g><g class="ae-float"><path d="M560 112 Q620 178 560 240 Q500 178 560 112" fill="#dff4ff" stroke="#4d9cbb" stroke-width="3"/><text x="560" y="185" text-anchor="middle" font-size="18" font-weight="850" fill="#23637f">νερό</text></g></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="55" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">1. Παρατηρώ</text><circle cx="315" cy="180" r="82" fill="#eef6fc" stroke="#7aa8c3" stroke-width="4"/><circle cx="315" cy="180" r="42" fill="#fff" stroke="#7aa8c3" stroke-width="3"/><line x1="372" y1="237" x2="440" y2="305" stroke="#52606d" stroke-width="16" stroke-linecap="round"/><g class="ae-pulse"><circle cx="315" cy="180" r="13" fill="#f6c45b"/><rect x="285" y="205" width="60" height="18" rx="9" fill="#83c5a5"/></g><text x="545" y="168" text-anchor="middle" font-size="17" font-weight="800" fill="#425466">χρώμα · όψη</text><text x="545" y="201" text-anchor="middle" font-size="17" font-weight="800" fill="#425466">σχήμα · κατάσταση</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="55" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">2. Μετρώ</text><g transform="translate(170 120)"><rect width="180" height="120" rx="16" fill="#f7f8fa" stroke="#9aa9b5" stroke-width="3"/><line x1="20" y1="92" x2="160" y2="92" stroke="#657887" stroke-width="4"/><g class="ae-drift-right"><rect x="45" y="42" width="90" height="34" rx="6" fill="#dff4ff" stroke="#4d9cbb" stroke-width="2"/></g><text x="90" y="112" text-anchor="middle" font-size="14" font-weight="800" fill="#425466">όγκος</text></g><g transform="translate(430 112)"><path d="M90 0 V145 M25 35 H155" stroke="#657887" stroke-width="5"/><path d="M30 38 L5 100 H55 Z M150 38 L125 100 H175 Z" fill="#fff0d8" stroke="#d59235" stroke-width="3"/><text x="90" y="175" text-anchor="middle" font-size="14" font-weight="800" fill="#425466">μάζα</text></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="52" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">3. Ασφάλεια στο εργαστήριο</text><g transform="translate(105 105)"><path d="M40 35 Q90 -5 140 35 L125 88 Q90 112 55 88 Z" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><circle cx="70" cy="55" r="20" fill="#fff"/><circle cx="112" cy="55" r="20" fill="#fff"/><text x="90" y="132" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">γυαλιά</text></g><g transform="translate(300 92)"><path d="M70 0 L95 0 L95 45 L145 170 Q152 190 128 196 H37 Q13 190 20 170 L70 45 Z" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><path d="M43 142 Q83 115 122 142 V176 H43 Z" fill="#83c5a5"/><text x="82" y="224" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">σωστή χρήση οργάνων</text></g><g transform="translate(555 110)" class="ae-pulse"><circle cx="55" cy="55" r="50" fill="#fff1f1" stroke="#d35b5b" stroke-width="4"/><path d="M30 30 L80 80 M80 30 L30 80" stroke="#c34141" stroke-width="9" stroke-linecap="round"/><text x="55" y="132" text-anchor="middle" font-size="15" font-weight="850" fill="#425466">όχι αυθαίρετα</text></g></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="52" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Παρατήρηση → Πείραμα → Εξήγηση</text><g transform="translate(95 115)"><rect width="150" height="110" rx="18" fill="#eef6fc" stroke="#7aa8c3" stroke-width="3"/><text x="75" y="66" text-anchor="middle" font-size="18" font-weight="900" fill="#35556b">Παρατηρώ</text></g><path d="M260 170 H330" stroke="#657887" stroke-width="4"/><polygon points="330,170 316,162 316,178" fill="#657887"/><g transform="translate(340 115)" class="ae-pulse"><rect width="150" height="110" rx="18" fill="#eef7f3" stroke="#2e6f5e" stroke-width="3"/><text x="75" y="66" text-anchor="middle" font-size="18" font-weight="900" fill="#24594c">Πειραματίζομαι</text></g><path d="M505 170 H575" stroke="#657887" stroke-width="4"/><polygon points="575,170 561,162 561,178" fill="#657887"/><g transform="translate(585 115)"><rect width="120" height="110" rx="18" fill="#fff0d8" stroke="#d59235" stroke-width="3"/><text x="60" y="66" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">Εξηγώ</text></g></g>'
+  ];
+  return baseSceneSvg("Εισαγωγή στη Χημεία","Παρατήρηση υλικών, μέτρηση, ασφάλεια και πείραμα.",scenes);
+}
+function statesSvgMarkup(){
+  var solidParticles='',liquidParticles='',gasParticles='';
+  [[0,0],[36,0],[72,0],[0,36],[36,36],[72,36],[0,72],[36,72],[72,72]].forEach(function(p){solidParticles+='<circle cx="'+(285+p[0])+'" cy="'+(145+p[1])+'" r="12" fill="#7aa8c3"/>';});
+  [[0,0],[34,9],[68,-4],[14,38],[48,44],[80,30],[0,72],[38,78],[75,70]].forEach(function(p){liquidParticles+='<circle cx="'+(276+p[0])+'" cy="'+(138+p[1])+'" r="12" fill="#4d9cbb"/>';});
+  [[0,0],[110,-35],[55,70],[-75,55],[125,75],[-90,-45],[30,-80]].forEach(function(p,i){gasParticles+='<circle class="'+(i%2?'ae-drift-right':'ae-drift-left')+'" cx="'+(375+p[0])+'" cy="'+(178+p[1])+'" r="13" fill="#83c5a5"/>';});
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="50" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Τρεις καταστάσεις των υλικών</text><g transform="translate(80 110)"><rect width="170" height="150" rx="18" fill="#eef6fc" stroke="#7aa8c3" stroke-width="3"/><text x="85" y="42" text-anchor="middle" font-size="18" font-weight="900" fill="#35556b">Στερεό</text><rect x="48" y="72" width="74" height="56" rx="8" fill="#7aa8c3"/></g><g transform="translate(295 110)"><rect width="170" height="150" rx="18" fill="#eef6fc" stroke="#4d9cbb" stroke-width="3"/><text x="85" y="42" text-anchor="middle" font-size="18" font-weight="900" fill="#23637f">Υγρό</text><path d="M40 77 H130 V126 Q85 142 40 126 Z" fill="#82c9e6"/></g><g transform="translate(510 110)"><rect width="170" height="150" rx="18" fill="#eef7f3" stroke="#83c5a5" stroke-width="3"/><text x="85" y="42" text-anchor="middle" font-size="18" font-weight="900" fill="#24594c">Αέριο</text><circle cx="45" cy="85" r="9" fill="#83c5a5"/><circle cx="120" cy="72" r="9" fill="#83c5a5"/><circle cx="84" cy="120" r="9" fill="#83c5a5"/></g></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="50" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Στερεό: κοντά και οργανωμένα</text><rect x="230" y="95" width="300" height="205" rx="20" fill="#f7f8fa" stroke="#9aa9b5" stroke-width="3"/>'+solidParticles+'<text x="380" y="330" text-anchor="middle" font-size="16" font-weight="800" fill="#425466">σταθερό σχήμα</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="50" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Υγρό: κοντά αλλά αλλάζουν θέσεις</text><path d="M220 105 V278 Q220 305 248 305 H512 Q540 305 540 278 V105" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/>'+liquidParticles+'<path d="M224 178 C290 164 340 188 402 176 S485 168 536 178" fill="none" stroke="#82c9e6" stroke-width="5"/><text x="380" y="332" text-anchor="middle" font-size="16" font-weight="800" fill="#425466">παίρνει το σχήμα του δοχείου</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="50" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αέριο: αραιά και ελεύθερη κίνηση</text><rect x="190" y="90" width="380" height="220" rx="24" fill="#f4fbf7" stroke="#83c5a5" stroke-width="4"/>'+gasParticles+'<text x="380" y="335" text-anchor="middle" font-size="16" font-weight="800" fill="#425466">καταλαμβάνει όλο τον διαθέσιμο χώρο</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="50" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Φυσικές ιδιότητες</text><g transform="translate(82 110)"><rect width="180" height="120" rx="16" fill="#eef6fc" stroke="#7aa8c3" stroke-width="3"/><text x="90" y="48" text-anchor="middle" font-size="17" font-weight="900" fill="#35556b">Κατάσταση</text><text x="90" y="82" text-anchor="middle" font-size="14" fill="#52606d">στερεό · υγρό · αέριο</text></g><g transform="translate(290 110)"><rect width="180" height="120" rx="16" fill="#fff0d8" stroke="#d59235" stroke-width="3"/><text x="90" y="48" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">Πυκνότητα</text><text x="90" y="82" text-anchor="middle" font-size="14" fill="#52606d">χαρακτηριστική ιδιότητα</text></g><g transform="translate(498 110)"><rect width="180" height="120" rx="16" fill="#eef7f3" stroke="#83c5a5" stroke-width="3"/><text x="90" y="48" text-anchor="middle" font-size="17" font-weight="900" fill="#24594c">Διαλυτότητα</text><text x="90" y="82" text-anchor="middle" font-size="14" fill="#52606d">αν διαλύεται και πόσο</text></g></g>'
+  ];
+  return baseSceneSvg("Καταστάσεις και φυσικές ιδιότητες","Σωματιδιακή απεικόνιση στερεού, υγρού και αερίου και παραδείγματα φυσικών ιδιοτήτων.",scenes);
+}
+function solutionSvgMarkup(){
+  function beaker(x,y,solute){
+    return '<g transform="translate('+x+' '+y+')"><path d="M0 0 V145 Q0 165 22 165 H158 Q180 165 180 145 V0" fill="#fff" stroke="#7893a8" stroke-width="4"/><path d="M4 70 C45 61 90 80 176 70 V161 H4 Z" fill="#dff4ff"/>'+solute+'</g>';
+  }
+  var drops='<g class="ae-drop"><circle cx="360" cy="108" r="8" fill="#d59235"/><circle cx="390" cy="92" r="8" fill="#d59235"/><circle cx="420" cy="112" r="8" fill="#d59235"/></g>';
+  var dispersed='<circle cx="304" cy="208" r="8" fill="#d59235"/><circle cx="350" cy="176" r="8" fill="#d59235"/><circle cx="395" cy="226" r="8" fill="#d59235"/><circle cx="437" cy="188" r="8" fill="#d59235"/><circle cx="470" cy="238" r="8" fill="#d59235"/><circle cx="330" cy="250" r="8" fill="#d59235"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="50" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Το νερό ως διαλύτης</text>'+beaker(290,100,'')+'<text x="380" y="302" text-anchor="middle" font-size="18" font-weight="900" fill="#23637f">νερό</text><g class="ae-float" transform="translate(555 120)"><rect width="100" height="54" rx="12" fill="#fff0d8" stroke="#d59235" stroke-width="3"/><text x="50" y="34" text-anchor="middle" font-size="16" font-weight="850" fill="#8a5310">ζάχαρη</text></g></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="50" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Η διαλυμένη ουσία μπαίνει στο νερό</text>'+beaker(290,100,'')+drops+'<path d="M380 72 V112" stroke="#657887" stroke-width="4"/><polygon points="380,122 371,108 389,108" fill="#657887"/></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="48" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Διαλύτης + διαλυμένη ουσία</text>'+beaker(290,100,dispersed)+'<path d="M210 180 H282" stroke="#4d9cbb" stroke-width="3"/><text x="198" y="175" text-anchor="end" font-size="16" font-weight="900" fill="#23637f">διαλύτης</text><path d="M478 170 H548" stroke="#d59235" stroke-width="3"/><text x="560" y="175" font-size="16" font-weight="900" fill="#8a5310">διαλυμένη ουσία</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="48" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ομοιόμορφη κατανομή → διάλυμα</text>'+beaker(290,100,dispersed)+'<g class="ae-pulse"><rect x="255" y="294" width="250" height="42" rx="21" fill="#eef7f3" stroke="#83c5a5" stroke-width="2"/><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#24594c">ομογενές μείγμα</text></g></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="46" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Όχι όλα τα μείγματα είναι διαλύματα</text>'+beaker(105,105,'<circle cx="55" cy="138" r="9" fill="#8a6b4b"/><circle cx="86" cy="145" r="9" fill="#8a6b4b"/><circle cx="117" cy="137" r="9" fill="#8a6b4b"/>')+'<text x="195" y="300" text-anchor="middle" font-size="16" font-weight="900" fill="#8a5310">ετερογενές μείγμα</text>'+beaker(475,105,'<circle cx="55" cy="95" r="7" fill="#d59235"/><circle cx="90" cy="118" r="7" fill="#d59235"/><circle cx="126" cy="88" r="7" fill="#d59235"/><circle cx="75" cy="140" r="7" fill="#d59235"/>')+'<text x="565" y="300" text-anchor="middle" font-size="16" font-weight="900" fill="#24594c">διάλυμα</text></g>'
+  ];
+  return baseSceneSvg("Νερό, μείγματα και διαλύματα","Διάλυση μιας ουσίας στο νερό και σύγκριση ομογενούς και ετερογενούς μείγματος.",scenes);
+}
+function svgMarkup(config){
+  if(config.visual==="chem-intro")return introSvgMarkup();
+  if(config.visual==="states")return statesSvgMarkup();
+  if(config.visual==="solution")return solutionSvgMarkup();
+  return acidSvgMarkup();
+}
+
+
 var activeKey=null;
 var controller=null;
 
@@ -625,9 +785,9 @@ function renderExplanation(key,config){
 
   slot.innerHTML=[
     '<section class="animated-explanation" aria-labelledby="aeTitle">',
-    '<div class="animated-explanation__head"><div><h3 id="aeTitle">'+config.title+'</h3><p>'+config.subtitle+'</p></div><span class="animated-explanation__topic">'+config.topicLabel+'</span></div>',
-    '<div class="animated-explanation__stage" data-phase="0">',svgMarkup(),'<div class="animated-explanation__caption" id="aeCaption" aria-live="polite" aria-atomic="true">'+config.captions[0]+'</div></div>',
-    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button></div>',
+    '<div class="animated-explanation__head"><div><h3 id="aeTitle">'+config.title+'</h3><p>'+config.subtitle+'</p>'+(config.sourceUrl?'<a class="animated-explanation__source" href="'+config.sourceUrl+'" target="_blank" rel="noopener">Πηγή ύλης: '+config.sourceLabel+' ↗</a>':'')+'</div><span class="animated-explanation__topic">'+config.topicLabel+'</span></div>',
+    '<div class="animated-explanation__stage" data-phase="0">',svgMarkup(config),'<div class="animated-explanation__caption" id="aeCaption" aria-live="polite" aria-atomic="true">'+config.captions[0]+'</div></div>',
+    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button></div>',
     '<ol class="animated-explanation__progress" aria-label="Πρόοδος εξήγησης">',progressHtml,'</ol>',
     '<div class="animated-explanation__comprehension" data-ae-comprehension tabindex="-1" hidden><h4>Το κατάλαβες;</h4><ol>',questionsHtml,'</ol></div>',
     '<span class="animated-explanation__sr" data-ae-status role="status" aria-live="polite"></span>',
@@ -639,6 +799,8 @@ function renderExplanation(key,config){
   var startBtn=slot.querySelector('[data-ae-action="start"]');
   var pauseBtn=slot.querySelector('[data-ae-action="pause"]');
   var restartBtn=slot.querySelector('[data-ae-action="restart"]');
+  var expandBtn=slot.querySelector('[data-ae-action="expand"]');
+  var section=slot.querySelector(".animated-explanation");
   var comprehension=slot.querySelector("[data-ae-comprehension]");
   var status=slot.querySelector("[data-ae-status]");
   var dots=Array.prototype.slice.call(slot.querySelectorAll("[data-caption-index]"));
@@ -719,14 +881,42 @@ function renderExplanation(key,config){
     status.textContent="Η εξήγηση ξεκίνησε από την αρχή.";
   }
   function restart(){reset();start();}
+  function setExpandLabel(){
+    var expanded=(document.fullscreenElement===section)||section.classList.contains("is-expanded");
+    expandBtn.textContent=expanded?"Κλείσιμο μεγέθυνσης":"Μεγέθυνση";
+  }
+  async function expand(){
+    if(document.fullscreenElement===section){
+      await document.exitFullscreen();
+      return;
+    }
+    if(section.classList.contains("is-expanded")){
+      section.classList.remove("is-expanded");
+      document.body.classList.remove("ae-no-scroll");
+      setExpandLabel();
+      return;
+    }
+    if(section.requestFullscreen){
+      try{await section.requestFullscreen();return;}catch(_){}
+    }
+    section.classList.add("is-expanded");
+    document.body.classList.add("ae-no-scroll");
+    setExpandLabel();
+  }
+  function fullscreenChanged(){setExpandLabel();}
   function destroy(){
     clearTimer();
+    document.removeEventListener("fullscreenchange",fullscreenChanged);
+    section.classList.remove("is-expanded");
+    document.body.classList.remove("ae-no-scroll");
     visualAnimations().forEach(function(animation){try{animation.cancel();}catch(_){}});
   }
 
   startBtn.addEventListener("click",start);
   pauseBtn.addEventListener("click",pause);
   restartBtn.addEventListener("click",restart);
+  expandBtn.addEventListener("click",expand);
+  document.addEventListener("fullscreenchange",fullscreenChanged);
   applyPhase(0,false);
   setButtons();
   controller={destroy:destroy};

@@ -1647,15 +1647,69 @@ function renderExplanation(key,config){
     }
     throw lastError||new Error("media-recorder-init");
   }
+  function fixWebmDurationBlob(blob,durationMs){
+    return new Promise(function(resolve,reject){
+      if(typeof window.ysFixWebmDuration!=="function"){
+        reject(new Error("webm-duration-fixer-unavailable"));
+        return;
+      }
+      var settled=false;
+      function done(value){
+        if(settled)return;
+        settled=true;
+        if(value&&value.size)resolve(value);
+        else reject(new Error("webm-duration-fix-empty"));
+      }
+      try{
+        var maybe=window.ysFixWebmDuration(blob,durationMs,function(fixedBlob){done(fixedBlob);},{logger:false});
+        if(maybe&&typeof maybe.then==="function"){
+          maybe.then(done).catch(function(error){if(!settled){settled=true;reject(error);}});
+        }
+      }catch(error){
+        if(!settled){settled=true;reject(error);}
+      }
+    });
+  }
+  function verifyVideoDuration(blob,expectedMs){
+    return new Promise(function(resolve,reject){
+      var video=document.createElement("video");
+      var url=URL.createObjectURL(blob);
+      var timeout=setTimeout(function(){cleanup();reject(new Error("webm-metadata-timeout"));},6000);
+      function cleanup(){
+        clearTimeout(timeout);
+        video.removeAttribute("src");
+        try{video.load();}catch(_){}
+        URL.revokeObjectURL(url);
+      }
+      video.preload="metadata";
+      video.muted=true;
+      video.onloadedmetadata=function(){
+        var seconds=video.duration;
+        cleanup();
+        var minSeconds=Math.max(1,(expectedMs/1000)*0.75);
+        if(!Number.isFinite(seconds)||seconds<minSeconds){
+          reject(new Error("webm-duration-invalid"));
+          return;
+        }
+        resolve(seconds);
+      };
+      video.onerror=function(){cleanup();reject(new Error("webm-playback-invalid"));};
+      video.src=url;
+    });
+  }
   async function exportWebM(){
     var mime=exportMimeType();
     if(!mime){
       var unsupported="Ο browser δεν υποστηρίζει εξαγωγή WebM. Δοκίμασε ενημερωμένο Chrome, Edge ή Firefox.";
       status.textContent=unsupported;exportStatus.textContent=unsupported;return;
     }
+    if(typeof window.ysFixWebmDuration!=="function"){
+      var missingFixer="Δεν φορτώθηκε ο μηχανισμός σωστής διάρκειας WebM. Κάνε ανανέωση της σελίδας και δοκίμασε ξανά.";
+      status.textContent=missingFixer;exportStatus.textContent=missingFixer;return;
+    }
     if(exporting)return;
     exporting=true;setButtons();
-    var creatingMessage="Γίνεται δημιουργία βίντεο…";
+    var creatingMessage="Γίνεται δημιουργία βίντεο 24 fps…";
     status.textContent=creatingMessage;
     exportStatus.textContent=creatingMessage;
     var exportStage=null,stream=null,recorder=null;
@@ -1670,7 +1724,10 @@ function renderExplanation(key,config){
       var canvas=document.createElement("canvas");canvas.width=1280;canvas.height=720;
       var ctx=canvas.getContext("2d",{alpha:false});
       if(!ctx)throw new Error("canvas-context");
-      stream=canvas.captureStream(15);
+
+      var fps=24;
+      var frameInterval=1000/fps;
+      stream=canvas.captureStream(fps);
       recorder=createWebMRecorder(stream,mime);
       var chunks=[];
       recorder.ondataavailable=function(event){if(event.data&&event.data.size)chunks.push(event.data);};
@@ -1681,32 +1738,51 @@ function renderExplanation(key,config){
         },{once:true});
       });
 
-      recorder.start(700);
+      exportStage.dataset.phase="0";
+      await sleep(100);
+      await paintExportFrame(ctx,canvas,exportStage,config.captions[config.phases[0].caption]);
+
+      recorder.start(1000);
+      var recordStartedAt=performance.now();
+
       for(var p=0;p<config.phases.length;p++){
         exportStage.dataset.phase=String(p);
-        await sleep(90);
+        await sleep(70);
         var duration=Math.max(600,config.phases[p].duration||1400);
-        var started=performance.now();
-        while(performance.now()-started<duration){
+        var phaseStarted=performance.now();
+        var nextFrame=phaseStarted;
+        while(performance.now()-phaseStarted<duration){
           await paintExportFrame(ctx,canvas,exportStage,config.captions[config.phases[p].caption]);
-          await sleep(60);
+          nextFrame+=frameInterval;
+          await sleep(Math.max(0,nextFrame-performance.now()));
         }
       }
+
       var outroStarted=performance.now();
+      var outroNextFrame=outroStarted;
       while(performance.now()-outroStarted<3200){
         await paintOutroFrame(ctx,canvas);
-        await sleep(60);
+        outroNextFrame+=frameInterval;
+        await sleep(Math.max(0,outroNextFrame-performance.now()));
       }
 
+      var recordDurationMs=Math.max(1000,Math.round(performance.now()-recordStartedAt));
       if(recorder.state==="recording"&&typeof recorder.requestData==="function"){
-        try{recorder.requestData();await sleep(120);}catch(_){}
+        try{recorder.requestData();await sleep(150);}catch(_){}
       }
       if(recorder.state!=="inactive")recorder.stop();
       await stopped;
       if(!chunks.length)throw new Error("empty-webm");
 
-      var outBlob=new Blob(chunks,{type:(recorder.mimeType||mime||"video/webm").split(";")[0]});
-      if(!outBlob.size)throw new Error("empty-webm");
+      var actualType=(recorder.mimeType||mime||"video/webm").split(";")[0];
+      var rawBlob=new Blob(chunks,{type:actualType});
+      if(!rawBlob.size)throw new Error("empty-webm");
+
+      status.textContent="Διορθώνεται η διάρκεια του βίντεο…";
+      exportStatus.textContent="Διορθώνεται η διάρκεια του βίντεο…";
+      var outBlob=await fixWebmDurationBlob(rawBlob,recordDurationMs);
+      await verifyVideoDuration(outBlob,recordDurationMs);
+
       var url=URL.createObjectURL(outBlob);
       var link=document.createElement("a");
       link.href=url;link.download=exportFilename();
@@ -1715,12 +1791,12 @@ function renderExplanation(key,config){
       link.click();
       link.remove();
       setTimeout(function(){URL.revokeObjectURL(url);},60000);
-      var doneMessage="Το βίντεο WebM δημιουργήθηκε και η λήψη ξεκίνησε.";
+      var doneMessage="Το WebM δημιουργήθηκε ως κανονικό βίντεο 24 fps με σωστή διάρκεια.";
       status.textContent=doneMessage;exportStatus.textContent=doneMessage;
     }catch(error){
       try{if(recorder&&recorder.state!=="inactive")recorder.stop();}catch(_){}
       console.error("AITOOLS4KIDS WebM export failed",error);
-      var failedMessage="Δεν ολοκληρώθηκε η λήψη WebM. Δοκίμασε ξανά σε ενημερωμένο Chrome ή Edge.";
+      var failedMessage="Δεν δημιουργήθηκε έγκυρο WebM με σωστή διάρκεια. Δοκίμασε ξανά σε ενημερωμένο Chrome ή Edge.";
       status.textContent=failedMessage;exportStatus.textContent=failedMessage;
     }finally{
       if(exportStage&&exportStage.parentNode)exportStage.remove();
@@ -1798,5 +1874,5 @@ window.AITOOLSKIDS_ANIMATED_EXPLANATIONS={configs:ANIMATED_EXPLANATIONS,refresh:
 sync();
 })();
 </script>
-<script src="/teacher-video-prototype.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fix-webm-duration@1.0.6/fix-webm-duration.js"></script>\n<script src="/teacher-video-prototype.js"></script>
 </body></html>

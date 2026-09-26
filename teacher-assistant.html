@@ -52,8 +52,11 @@
 .animated-explanation__controls button:disabled{opacity:.52;cursor:not-allowed}
 .animated-explanation__controls button:focus-visible{outline:3px solid rgba(59,130,196,.28);outline-offset:2px}
 
-.animated-explanation__export-note{margin:8px 0 0;color:#52606d;font-size:.78rem}
+.animated-explanation__export-note{margin:6px 0 0;color:#52606d;font-size:.78rem}
+.animated-explanation__export-status{margin:9px 0 0;min-height:1.25em;color:#173f63;font-size:.82rem;font-weight:850}
+.animated-explanation__export-status:empty{display:none}
 .animated-explanation__controls button[data-ae-action="export"]{border-color:#7aa8c3;background:#eef6fc;color:#173f63}
+.animated-explanation__controls button[data-ae-action="export"][aria-busy="true"]{background:#e6eef5}
 
 .animated-explanation__progress{display:flex;align-items:center;gap:7px;margin:12px 0 0;padding:0;list-style:none}
 .animated-explanation__progress li{width:26px;height:6px;border-radius:999px;background:#dce5ec;transition:background-color .2s ease,transform .2s ease}
@@ -816,6 +819,116 @@ var ANIMATED_EXPLANATIONS={
     captions:["Παίρνουμε γωνία ω σε ορθοκανονικό σύστημα αξόνων.","Ένα σημείο Μ πάνω στην τελική πλευρά της γωνίας έχει συντεταγμένες (x, y).","Το συνημίτονο συνδέεται με την οριζόντια συνιστώσα της θέσης.","Το ημίτονο συνδέεται με την κατακόρυφη συνιστώσα της θέσης.","Καθώς αλλάζει η γωνία, αλλάζουν οι τιμές ημω και συνω."],
     phases:[{caption:0,duration:1400},{caption:1,duration:1500},{caption:2,duration:1500},{caption:3,duration:1500},{caption:4,duration:1700}],
     questions:["Με ποια συνιστώσα συνδέεται το συνημίτονο;","Με ποια συνιστώσα συνδέεται το ημίτονο;"]
+  },
+  "biology-b-metabolism":{
+    context:"middle",grade:"b",subjectTerms:["βιολογια","biologia","biology"],
+    unitTerms:["μεταβολισμος","κεφαλαιο 3 μεταβολισμος","3 μεταβολισμος"],visual:"bio-metabolism",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Βιολογία Β΄ Γυμνασίου · Μεταβολισμός",
+    subtitle:"Δες πώς τα κύτταρα διασπούν και συνθέτουν ουσίες, μετατρέποντας ενέργεια.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index3.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Μεταβολισμός είναι το σύνολο των χημικών αντιδράσεων που γίνονται στα κύτταρα.","Στον καταβολισμό σύνθετες ουσίες διασπώνται σε απλούστερες και απελευθερώνεται ενέργεια.","Στον αναβολισμό απλούστερες ουσίες συνδέονται για να σχηματίσουν πιο σύνθετες, με κατανάλωση ενέργειας.","Τα ένζυμα επιταχύνουν συγκεκριμένες αντιδράσεις χωρίς να καταναλώνονται σε αυτές.","Καταβολισμός και αναβολισμός συνεργάζονται ώστε το κύτταρο να εξασφαλίζει ύλη και ενέργεια."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1700},{caption:2,duration:1700},{caption:3,duration:1700},{caption:4,duration:1500}],
+    questions:["Ποια διαδικασία απελευθερώνει ενέργεια διασπώντας σύνθετες ουσίες;","Ποιος είναι ο ρόλος των ενζύμων στις μεταβολικές αντιδράσεις;"]
+  },
+  "biology-b-defense":{
+    context:"middle",grade:"b",subjectTerms:["βιολογια","biologia","biology"],
+    unitTerms:["αμυντικοι μηχανισμοι του ανθρωπου","αμυντικοι μηχανισμοι του ανθρωπινου οργανισμου","4.3 αμυντικοι μηχανισμοι του ανθρωπινου οργανισμου"],visual:"bio-defense",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Βιολογία Β΄ Γυμνασίου · Αμυντικοί μηχανισμοί του ανθρώπου",
+    subtitle:"Δες πώς εξωτερικοί φραγμοί και εσωτερικές άμυνες προστατεύουν τον οργανισμό.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_3.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Παθογόνοι μικροοργανισμοί μπορεί να προσπαθήσουν να εισέλθουν στο σώμα.","Το δέρμα και οι βλεννογόνοι αποτελούν σημαντικούς εξωτερικούς φραγμούς.","Αν ένας παθογόνος παράγοντας περάσει τους φραγμούς, κύτταρα της άμυνας μπορούν να τον αναγνωρίσουν και να τον καταστρέψουν.","Τα αντισώματα συνδέονται ειδικά με συγκεκριμένα αντιγόνα και βοηθούν στην άμυνα.","Η προστασία του οργανισμού βασίζεται σε διαδοχικές γραμμές άμυνας που συνεργάζονται."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1600},{caption:2,duration:1800},{caption:3,duration:1800},{caption:4,duration:1500}],
+    questions:["Ποιοι εξωτερικοί φραγμοί εμποδίζουν την είσοδο παθογόνων;","Με τι συνδέονται ειδικά τα αντισώματα;"]
+  },
+  "biology-b-reproduction":{
+    context:"middle",grade:"b",subjectTerms:["βιολογια","biologia","biology"],
+    unitTerms:["αναπαραγωγη στα ζωα και στον ανθρωπο","αναπαραγωγη στον ανθρωπο","αναπαραγωγη"],visual:"bio-reproduction",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Βιολογία Β΄ Γυμνασίου · Αναπαραγωγή στα ζώα και στον άνθρωπο",
+    subtitle:"Δες σχηματικά τη συνάντηση των γαμετών, τη γονιμοποίηση και τα πρώτα στάδια ανάπτυξης.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Στην αμφιγονική αναπαραγωγή συμμετέχουν ειδικά αναπαραγωγικά κύτταρα, οι γαμέτες.","Ο αρσενικός και ο θηλυκός γαμέτης μεταφέρουν γενετικό υλικό.","Με τη γονιμοποίηση ενώνονται οι δύο γαμέτες και σχηματίζεται το ζυγωτό.","Το ζυγωτό αρχίζει διαδοχικές κυτταρικές διαιρέσεις.","Με την ανάπτυξη και διαφοροποίηση των κυττάρων σχηματίζεται σταδιακά ο νέος οργανισμός."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1500},{caption:2,duration:1800},{caption:3,duration:1700},{caption:4,duration:1700}],
+    questions:["Πώς ονομάζονται τα αναπαραγωγικά κύτταρα που συμμετέχουν στην αμφιγονική αναπαραγωγή;","Τι σχηματίζεται αμέσως μετά τη γονιμοποίηση;"]
+  },
+  "physics-b-energy":{
+    context:"middle",grade:"b",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["ενεργεια","κεφαλαιο 5 ενεργεια","5 ενεργεια"],visual:"phys-energy",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Β΄ Γυμνασίου · Ενέργεια",
+    subtitle:"Δες πώς η ενέργεια αποθηκεύεται, μεταφέρεται και μετατρέπεται από μορφή σε μορφή.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Η ενέργεια περιγράφει τη δυνατότητα ενός συστήματος να προκαλεί μεταβολές.","Ένα ανυψωμένο σώμα έχει βαρυτική δυναμική ενέργεια λόγω της θέσης του.","Όταν πέφτει, μέρος της δυναμικής ενέργειας μετατρέπεται σε κινητική.","Η ενέργεια μπορεί να μεταφέρεται και να αλλάζει μορφή, για παράδειγμα μέσω έργου.","Στις μετατροπές η συνολική ενέργεια διατηρείται, παρότι μπορεί να κατανέμεται σε διαφορετικές μορφές."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1600},{caption:2,duration:1800},{caption:3,duration:1600},{caption:4,duration:1700}],
+    questions:["Ποια μορφή ενέργειας έχει ένα σώμα επειδή βρίσκεται σε ύψος;","Τι συμβαίνει στη συνολική ενέργεια κατά τις μετατροπές της;"]
+  },
+  "physics-b-heat":{
+    context:"middle",grade:"b",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["θερμοτητα","κεφαλαιο 6 θερμοτητα","6 θερμοτητα"],visual:"phys-heat",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Β΄ Γυμνασίου · Θερμότητα",
+    subtitle:"Δες τη θερμότητα ως μεταφορά ενέργειας ανάμεσα σε σώματα διαφορετικής θερμοκρασίας.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index6.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Δύο σώματα μπορεί να έχουν διαφορετικές θερμοκρασίες.","Όταν έρθουν σε θερμική επαφή, μεταφέρεται ενέργεια από το θερμότερο προς το ψυχρότερο σώμα.","Αυτή η μεταφορά ενέργειας λόγω διαφοράς θερμοκρασίας ονομάζεται θερμότητα.","Καθώς μεταφέρεται ενέργεια, οι θερμοκρασίες των σωμάτων πλησιάζουν.","Σε θερμική ισορροπία έχουν ίδια θερμοκρασία και δεν υπάρχει καθαρή μεταφορά θερμότητας μεταξύ τους."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1800},{caption:2,duration:1600},{caption:3,duration:1700},{caption:4,duration:1600}],
+    questions:["Προς ποια κατεύθυνση μεταφέρεται αυθόρμητα θερμότητα;","Τι σημαίνει θερμική ισορροπία;"]
+  },
+  "physics-b-phase-changes":{
+    context:"middle",grade:"b",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["αλλαγες καταστασης","κεφαλαιο 7 αλλαγες καταστασης","7 αλλαγες καταστασης"],visual:"phys-phase-changes",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Β΄ Γυμνασίου · Αλλαγές κατάστασης",
+    subtitle:"Δες πώς ένα υλικό περνά από στερεό σε υγρό και αέριο καθώς ανταλλάσσει ενέργεια.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index7.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Στο στερεό τα σωματίδια βρίσκονται κοντά και ταλαντώνονται γύρω από σταθερές θέσεις.","Με απορρόφηση ενέργειας μπορεί να γίνει τήξη: στερεό προς υγρό.","Στο υγρό τα σωματίδια παραμένουν κοντά αλλά μετακινούνται μεταξύ τους.","Με περισσότερη ενέργεια μπορεί να γίνει εξαέρωση: υγρό προς αέριο.","Οι αντίστροφες μεταβολές είναι η υγροποίηση και η πήξη, όταν το υλικό αποδίδει ενέργεια."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1700},{caption:2,duration:1500},{caption:3,duration:1800},{caption:4,duration:1700}],
+    questions:["Πώς ονομάζεται η αλλαγή από στερεό σε υγρό;","Ποιες είναι οι αντίστροφες μεταβολές της εξαέρωσης και της τήξης;"]
+  },
+  "physics-b-heat-transfer":{
+    context:"middle",grade:"b",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["διαδοση θερμοτητας","κεφαλαιο 8 διαδοση θερμοτητας","8 διαδοση θερμοτητας"],visual:"phys-heat-transfer",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Β΄ Γυμνασίου · Διάδοση θερμότητας",
+    subtitle:"Σύγκρινε αγωγή, μεταφορά και ακτινοβολία μέσα από τρεις διαφορετικές οπτικές σκηνές.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index8.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Η θερμότητα μπορεί να διαδίδεται με διαφορετικούς μηχανισμούς.","Στην αγωγή η ενέργεια μεταδίδεται μέσα σε ένα υλικό χωρίς μακροσκοπική μεταφορά ύλης.","Στη μεταφορά, θερμότερα τμήματα ρευστού κινούνται και δημιουργούν ρεύματα.","Με ακτινοβολία η ενέργεια μεταφέρεται με ηλεκτρομαγνητικά κύματα και δεν απαιτείται υλικό μέσο.","Στην καθημερινότητα οι τρεις τρόποι διάδοσης συχνά εμφανίζονται ταυτόχρονα."],
+    phases:[{caption:0,duration:1400},{caption:1,duration:1800},{caption:2,duration:1800},{caption:3,duration:1800},{caption:4,duration:1600}],
+    questions:["Ποιος τρόπος διάδοσης δεν απαιτεί υλικό μέσο;","Σε ποιον τρόπο διάδοσης κινούνται θερμότερα τμήματα ενός ρευστού;"]
+  },
+  "physics-g-ohm":{
+    context:"middle",grade:"c",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["νομος του ohm","νομος του ωμ","ηλεκτρικη αντισταση νομος του ωμ","ηλεκτρικη αντισταση"],visual:"phys-ohm",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Γ΄ Γυμνασίου · Νόμος του Ohm",
+    subtitle:"Δες πώς συνδέονται τάση, ένταση ρεύματος και αντίσταση σε έναν ωμικό αντιστάτη.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Σε έναν αντιστάτη μετράμε την τάση V στα άκρα του και την ένταση I του ρεύματος που τον διαρρέει.","Για έναν ωμικό αντιστάτη σε σταθερή θερμοκρασία, η αντίσταση R παραμένει σταθερή.","Αν αυξήσουμε την τάση στον ίδιο αντιστάτη, αυξάνεται ανάλογα και η ένταση του ρεύματος.","Η σχέση γράφεται V = I·R, ή ισοδύναμα I = V/R.","Η γραφική παράσταση I ως προς V για σταθερό R είναι ευθεία που περνά από την αρχή των αξόνων."],
+    phases:[{caption:0,duration:1600},{caption:1,duration:1600},{caption:2,duration:1800},{caption:3,duration:1800},{caption:4,duration:1700}],
+    questions:["Τι συμβαίνει στην ένταση του ρεύματος αν διπλασιάσουμε την τάση με σταθερή αντίσταση;","Ποια σχέση συνδέει V, I και R;"]
+  },
+  "physics-g-resistors":{
+    context:"middle",grade:"c",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["συνδεσμολογια αντιστατων","συνδεση αντιστατων","αντιστατες σε σειρα και παραλληλα","συνδεση αντιστατων σε σειρα"],visual:"phys-resistors",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Γ΄ Γυμνασίου · Συνδεσμολογία αντιστατών",
+    subtitle:"Δες τη διαφορά ανάμεσα σε σύνδεση σε σειρά και παράλληλη σύνδεση.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Δύο ή περισσότεροι αντιστάτες μπορούν να συνδεθούν με διαφορετικούς τρόπους στο ίδιο κύκλωμα.","Σε σύνδεση σε σειρά υπάρχει μία διαδρομή και το ίδιο ρεύμα περνά από όλους τους αντιστάτες.","Στη σειρά η ισοδύναμη αντίσταση είναι Rολ = R₁ + R₂ + …","Σε παράλληλη σύνδεση οι αντιστάτες βρίσκονται σε ξεχωριστούς κλάδους με ίδια τάση στα άκρα τους.","Στην παράλληλη σύνδεση το συνολικό ρεύμα μοιράζεται στους κλάδους και η ισοδύναμη αντίσταση είναι μικρότερη από καθεμία από τις επιμέρους."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1800},{caption:2,duration:1700},{caption:3,duration:1800},{caption:4,duration:1800}],
+    questions:["Ποιο ηλεκτρικό μέγεθος είναι ίδιο σε όλους τους αντιστάτες που συνδέονται σε σειρά;","Τι είναι ίδιο στα άκρα των παράλληλα συνδεδεμένων αντιστατών;"]
+  },
+  "physics-g-refraction":{
+    context:"middle",grade:"c",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["διαθλαση του φωτος","κεφαλαιο 8 διαθλαση του φωτος","διαθλαση"],visual:"phys-refraction",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Γ΄ Γυμνασίου · Διάθλαση του φωτός",
+    subtitle:"Δες γιατί μια φωτεινή ακτίνα αλλάζει κατεύθυνση όταν περνά από ένα διαφανές μέσο σε άλλο.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index8.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Όταν το φως περνά από ένα διαφανές μέσο σε άλλο, αλλάζει η ταχύτητα διάδοσής του.","Η αλλαγή ταχύτητας μπορεί να συνοδεύεται από αλλαγή κατεύθυνσης: αυτό είναι η διάθλαση.","Από τον αέρα προς το νερό η ακτίνα συνήθως πλησιάζει την κάθετο.","Από το νερό προς τον αέρα η ακτίνα συνήθως απομακρύνεται από την κάθετο.","Η διάθλαση εξηγεί οπτικά φαινόμενα όπως το ότι ένα αντικείμενο μέσα στο νερό φαίνεται μετατοπισμένο."],
+    phases:[{caption:0,duration:1600},{caption:1,duration:1700},{caption:2,duration:1800},{caption:3,duration:1800},{caption:4,duration:1700}],
+    questions:["Τι μπορεί να αλλάξει όταν το φως περνά από ένα διαφανές μέσο σε άλλο;","Προς ποια γραμμή κάμπτεται συνήθως η ακτίνα όταν περνά από αέρα σε νερό;"]
+  },
+  "physics-g-lenses":{
+    context:"middle",grade:"c",subjectTerms:["φυσικη","physics","fysiki"],
+    unitTerms:["φακοι και οπτικα οργανα","κεφαλαιο 9 φακοι και οπτικα οργανα","φακοι"],visual:"phys-lenses",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Φυσική Γ΄ Γυμνασίου · Φακοί και οπτικά όργανα",
+    subtitle:"Δες πώς συγκλίνοντες και αποκλίνοντες φακοί αλλάζουν την πορεία των φωτεινών ακτίνων.",
+    sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index9.html",sourceLabel:"Διαδραστικά Σχολικά Βιβλία",
+    captions:["Οι φακοί είναι διαφανή σώματα που διαθλούν το φως στις επιφάνειές τους.","Ένας συγκλίνων φακός μπορεί να συγκεντρώνει παράλληλες ακτίνες σε ένα σημείο, την εστία.","Ένας αποκλίνων φακός κάνει παράλληλες ακτίνες να απομακρύνονται μεταξύ τους.","Με έναν συγκλίνοντα φακό μπορεί να σχηματιστεί πραγματικό είδωλο ενός αντικειμένου πάνω σε οθόνη.","Οπτικά όργανα, όπως μικροσκόπια και τηλεσκόπια, αξιοποιούν συνδυασμούς φακών για να σχηματίζουν χρήσιμα είδωλα."],
+    phases:[{caption:0,duration:1500},{caption:1,duration:1800},{caption:2,duration:1800},{caption:3,duration:1800},{caption:4,duration:1700}],
+    questions:["Τι κάνουν οι παράλληλες ακτίνες μετά από έναν συγκλίνοντα φακό;","Πώς αξιοποιούν τους φακούς οπτικά όργανα όπως το μικροσκόπιο;"]
   }
 };
 function byId(id){return document.getElementById(id);}
@@ -1133,6 +1246,134 @@ function trigSvgMarkup(){
   return baseSceneSvg("Τριγωνομετρία","Γωνία σε σύστημα αξόνων και οριζόντια/κατακόρυφη συνιστώσα.",scenes);
 }
 
+
+function metabolismSvgMarkup(){
+  var molecule='<g><circle cx="0" cy="0" r="24" fill="#ffe0b5" stroke="#d59235" stroke-width="3"/><circle cx="42" cy="-20" r="21" fill="#dff4ff" stroke="#4d9cbb" stroke-width="3"/><circle cx="44" cy="25" r="21" fill="#e7f5eb" stroke="#2e6f5e" stroke-width="3"/><line x1="18" y1="-8" x2="28" y2="-14" stroke="#657887" stroke-width="5"/><line x1="18" y1="10" x2="29" y2="18" stroke="#657887" stroke-width="5"/></g>';
+  var energy='<g class="ae-pulse"><polygon points="0,-28 18,-7 5,-7 20,28 -18,3 -5,3 -20,-28" fill="#ffd34f" stroke="#d69a35" stroke-width="2"/></g>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Μεταβολισμός = δίκτυο αντιδράσεων</text><g transform="translate(245 180)" class="ae-float">'+molecule+'</g><g transform="translate(515 180)">'+energy+'</g><path d="M330 180 H445" stroke="#657887" stroke-width="5"/><polygon points="455,180 438,170 438,190" fill="#657887"/><text x="380" y="315" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">ύλη ⇄ ενέργεια στα κύτταρα</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Καταβολισμός</text><g transform="translate(205 175)">'+molecule+'</g><path d="M305 175 H410" stroke="#657887" stroke-width="5"/><polygon points="425,175 405,164 405,186" fill="#657887"/><g transform="translate(490 145)"><circle r="24" fill="#ffe0b5" stroke="#d59235" stroke-width="3"/></g><g transform="translate(550 205)"><circle r="22" fill="#dff4ff" stroke="#4d9cbb" stroke-width="3"/></g><g transform="translate(625 150)">'+energy+'</g><text x="380" y="315" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">σύνθετο → απλούστερα + ενέργεια</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Αναβολισμός</text><circle cx="170" cy="155" r="24" fill="#ffe0b5" stroke="#d59235" stroke-width="3"/><circle cx="225" cy="210" r="22" fill="#dff4ff" stroke="#4d9cbb" stroke-width="3"/><g transform="translate(285 150)">'+energy+'</g><path d="M330 180 H430" stroke="#657887" stroke-width="5"/><polygon points="445,180 425,169 425,191" fill="#657887"/><g transform="translate(520 180)">'+molecule+'</g><text x="380" y="315" text-anchor="middle" font-size="17" font-weight="900" fill="#24594c">απλούστερα + ενέργεια → σύνθετο</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Ένζυμο: ειδικός καταλύτης</text><path d="M190 135 Q270 85 340 145 Q305 190 340 235 Q265 285 190 235 Q225 190 190 135" fill="#e9ddf7" stroke="#7b54c7" stroke-width="4"/><path d="M305 165 Q335 190 305 215" fill="#fbfdff" stroke="#7b54c7" stroke-width="3"/><g class="ae-drift-left"><circle cx="475" cy="190" r="35" fill="#ffe0b5" stroke="#d59235" stroke-width="4"/><path d="M450 190 H500" stroke="#8a5310" stroke-width="5"/></g><text x="260" y="310" text-anchor="middle" font-size="16" font-weight="900" fill="#60429e">ένζυμο</text><text x="475" y="310" text-anchor="middle" font-size="16" font-weight="900" fill="#8a5310">υπόστρωμα</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Συνεργασία καταβολισμού και αναβολισμού</text><g class="ae-pulse"><circle cx="380" cy="190" r="112" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><path d="M315 125 A85 85 0 0 1 455 145" fill="none" stroke="#d59235" stroke-width="8"/><polygon points="470,155 446,149 457,130" fill="#d59235"/><path d="M450 245 A85 85 0 0 1 305 225" fill="none" stroke="#4d9cbb" stroke-width="8"/><polygon points="292,212 316,219 304,238" fill="#4d9cbb"/></g><text x="380" y="177" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">καταβολισμός</text><text x="380" y="212" text-anchor="middle" font-size="17" font-weight="900" fill="#23637f">αναβολισμός</text><text x="380" y="330" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">ισορροπία ύλης και ενέργειας</text></g>'
+  ];
+  return baseSceneSvg("Μεταβολισμός","Καταβολισμός, αναβολισμός, ένζυμα και μετατροπές ενέργειας στο κύτταρο.",scenes);
+}
+function defenseSvgMarkup(){
+  var pathogen='<g><circle r="27" fill="#ffd9d9" stroke="#c95151" stroke-width="4"/><path d="M0 -39 V-28 M0 28 V39 M-39 0 H-28 M28 0 H39 M-27 -27 L-19 -19 M27 27 L19 19 M27 -27 L19 -19 M-27 27 L-19 19" stroke="#c95151" stroke-width="5" stroke-linecap="round"/></g>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#a33f3f">Παθογόνοι μικροοργανισμοί</text><g transform="translate(250 175)" class="ae-float">'+pathogen+'</g><g transform="translate(385 220)" class="ae-float">'+pathogen+'</g><g transform="translate(520 155)" class="ae-float">'+pathogen+'</g><text x="380" y="320" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">πρώτα πρέπει να ξεπεράσουν τους φραγμούς</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">1η γραμμή: εξωτερικοί φραγμοί</text><rect x="170" y="145" width="420" height="95" rx="28" fill="#f0c2a5" stroke="#b97858" stroke-width="4"/><path d="M185 215 Q250 185 315 215 T445 215 T575 215" fill="none" stroke="#dff4ff" stroke-width="18"/><g transform="translate(380 105)" class="ae-drop">'+pathogen+'</g><text x="380" y="300" text-anchor="middle" font-size="17" font-weight="900" fill="#24594c">δέρμα · βλεννογόνοι · εκκρίσεις</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">2η γραμμή: κύτταρα άμυνας</text><g transform="translate(460 190)">'+pathogen+'</g><g class="ae-drift-right"><path d="M170 125 Q250 90 315 150 Q340 210 290 260 Q210 285 155 225 Q130 170 170 125" fill="#dff4ff" stroke="#4d9cbb" stroke-width="5"/><path d="M215 150 Q270 165 255 220 Q205 230 180 190 Z" fill="#b5dff0"/></g><path d="M325 190 H395" stroke="#657887" stroke-width="5"/><polygon points="410,190 392,180 392,200" fill="#657887"/><text x="235" y="315" text-anchor="middle" font-size="16" font-weight="900" fill="#23637f">φαγοκύτταρο</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">Ειδική αναγνώριση</text><g transform="translate(380 190)">'+pathogen+'</g><g class="ae-pulse" stroke="#7b54c7" stroke-width="7" fill="none"><path d="M250 120 L280 155 L310 120 M480 120 L450 155 L420 120 M250 260 L280 225 L310 260 M480 260 L450 225 L420 260"/></g><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#60429e">αντισώματα ↔ συγκεκριμένα αντιγόνα</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="42" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Διαδοχικές γραμμές άμυνας</text><rect x="120" y="105" width="150" height="160" rx="24" fill="#fff1e8" stroke="#b97858" stroke-width="4"/><rect x="305" y="105" width="150" height="160" rx="24" fill="#eef6fc" stroke="#4d9cbb" stroke-width="4"/><rect x="490" y="105" width="150" height="160" rx="24" fill="#f3ecfb" stroke="#7b54c7" stroke-width="4"/><text x="195" y="165" text-anchor="middle" font-size="18" font-weight="900" fill="#8a5310">φραγμοί</text><text x="380" y="165" text-anchor="middle" font-size="18" font-weight="900" fill="#23637f">κύτταρα</text><text x="565" y="165" text-anchor="middle" font-size="18" font-weight="900" fill="#60429e">αντισώματα</text><path d="M270 185 H305 M455 185 H490" stroke="#657887" stroke-width="5"/><text x="380" y="315" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">συνεργασία για προστασία</text></g>'
+  ];
+  return baseSceneSvg("Αμυντικοί μηχανισμοί","Εξωτερικοί φραγμοί, κύτταρα άμυνας και ειδική δράση αντισωμάτων.",scenes);
+}
+function reproductionSvgMarkup(){
+  var ovum='<circle cx="0" cy="0" r="48" fill="#ffe8bf" stroke="#d59235" stroke-width="5"/><circle cx="0" cy="0" r="17" fill="#e8b85c"/>';
+  var sperm='<g><ellipse cx="0" cy="0" rx="20" ry="13" fill="#dff4ff" stroke="#4d9cbb" stroke-width="3"/><path d="M20 0 C55 -18 70 20 105 0" fill="none" stroke="#4d9cbb" stroke-width="5"/></g>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">Γαμέτες</text><g transform="translate(235 190)">'+sperm+'</g><g transform="translate(520 190)">'+ovum+'</g><text x="250" y="280" text-anchor="middle" font-size="16" font-weight="900" fill="#23637f">αρσενικός γαμέτης</text><text x="520" y="280" text-anchor="middle" font-size="16" font-weight="900" fill="#8a5310">θηλυκός γαμέτης</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">Μεταφορά γενετικού υλικού</text><g transform="translate(235 190)" class="ae-drift-right">'+sperm+'</g><g transform="translate(520 190)">'+ovum+'</g><circle cx="235" cy="190" r="6" fill="#60429e"/><circle cx="520" cy="190" r="10" fill="#60429e"/><text x="380" y="315" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">κάθε γαμέτης μεταφέρει γενετική πληροφορία</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">Γονιμοποίηση → ζυγωτό</text><g class="ae-pulse"><circle cx="380" cy="190" r="70" fill="#f4e7c9" stroke="#d59235" stroke-width="5"/><circle cx="360" cy="190" r="18" fill="#60429e"/><circle cx="400" cy="190" r="18" fill="#23637f"/></g><text x="380" y="300" text-anchor="middle" font-size="18" font-weight="900" fill="#8a5310">ένωση των δύο γαμετών</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">Διαδοχικές κυτταρικές διαιρέσεις</text><g class="ae-pulse" fill="#e9ddf7" stroke="#7b54c7" stroke-width="4"><circle cx="270" cy="190" r="42"/><circle cx="360" cy="150" r="36"/><circle cx="440" cy="150" r="36"/><circle cx="360" cy="235" r="36"/><circle cx="440" cy="235" r="36"/></g><path d="M315 190 H330" stroke="#657887" stroke-width="5"/><polygon points="342,190 326,181 326,199" fill="#657887"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">Ανάπτυξη και διαφοροποίηση</text><g transform="translate(220 190)" class="ae-pulse"><circle cx="0" cy="0" r="75" fill="#f3ecfb" stroke="#7b54c7" stroke-width="4"/><circle cx="-25" cy="-18" r="16" fill="#d6c0ef"/><circle cx="18" cy="-28" r="16" fill="#d6c0ef"/><circle cx="-5" cy="24" r="16" fill="#d6c0ef"/><circle cx="38" cy="18" r="16" fill="#d6c0ef"/></g><path d="M315 190 H415" stroke="#657887" stroke-width="5"/><polygon points="430,190 410,179 410,201" fill="#657887"/><g transform="translate(535 190)"><circle cx="0" cy="-45" r="30" fill="#ffe0b5" stroke="#d59235" stroke-width="3"/><path d="M0 -12 V78 M0 15 L-52 48 M0 15 L52 48 M0 78 L-42 130 M0 78 L42 130" stroke="#2e6f5e" stroke-width="12" stroke-linecap="round"/></g></g>'
+  ];
+  return baseSceneSvg("Αναπαραγωγή","Σχηματική πορεία από τους γαμέτες και τη γονιμοποίηση μέχρι τις πρώτες φάσεις ανάπτυξης.",scenes);
+}
+function energySvgMarkup(){
+  var ball='<circle cx="0" cy="0" r="34" fill="#dff4ff" stroke="#4d9cbb" stroke-width="5"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Η ενέργεια συνδέεται με μεταβολές</text><g class="ae-pulse"><rect x="275" y="130" width="210" height="110" rx="22" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><path d="M315 185 H445" stroke="#2e6f5e" stroke-width="8"/><polygon points="458,185 438,173 438,197" fill="#2e6f5e"/></g><text x="380" y="315" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">ενέργεια → δυνατότητα αλλαγής</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Βαρυτική δυναμική ενέργεια</text><line x1="120" y1="290" x2="640" y2="290" stroke="#7a5a3a" stroke-width="8"/><g transform="translate(380 105)">'+ball+'</g><path d="M455 105 V278" stroke="#657887" stroke-width="4" stroke-dasharray="10 8"/><text x="480" y="195" font-size="18" font-weight="900" fill="#425466">ύψος h</text><text x="380" y="335" text-anchor="middle" font-size="17" font-weight="900" fill="#23637f">ενέργεια λόγω θέσης</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Δυναμική → κινητική</text><line x1="120" y1="290" x2="640" y2="290" stroke="#7a5a3a" stroke-width="8"/><g class="ae-drop" transform="translate(380 110)">'+ball+'</g><path d="M470 105 V250" stroke="#d59235" stroke-width="8"/><polygon points="470,270 456,245 484,245" fill="#d59235"/><text x="540" y="175" font-size="17" font-weight="900" fill="#8a5310">ταχύτητα ↑</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μεταφορά ενέργειας μέσω έργου</text><g transform="translate(260 200)">'+ball+'</g><g class="ae-drift-right"><path d="M315 200 H510" stroke="#2e6f5e" stroke-width="9"/><polygon points="530,200 504,185 504,215" fill="#2e6f5e"/></g><rect x="535" y="155" width="100" height="90" rx="14" fill="#fff0d8" stroke="#d59235" stroke-width="4"/><text x="585" y="207" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">σύστημα</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Διατήρηση συνολικής ενέργειας</text><g class="ae-pulse"><rect x="120" y="120" width="520" height="160" rx="30" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><text x="230" y="180" text-anchor="middle" font-size="18" font-weight="900" fill="#23637f">δυναμική</text><text x="380" y="180" text-anchor="middle" font-size="18" font-weight="900" fill="#8a5310">κινητική</text><text x="530" y="180" text-anchor="middle" font-size="18" font-weight="900" fill="#b34444">θερμική</text><path d="M285 210 H340 M420 210 H475" stroke="#657887" stroke-width="5"/><text x="380" y="250" text-anchor="middle" font-size="20" font-weight="900" fill="#24594c">σύνολο = σταθερό</text></g></g>'
+  ];
+  return baseSceneSvg("Ενέργεια","Δυναμική και κινητική ενέργεια, μεταφορά μέσω έργου και αρχή διατήρησης.",scenes);
+}
+function heatSvgMarkup(){
+  function body(x,label,temp,fill,stroke){return '<g transform="translate('+x+' 175)"><rect x="-85" y="-65" width="170" height="130" rx="25" fill="'+fill+'" stroke="'+stroke+'" stroke-width="4"/><text x="0" y="-5" text-anchor="middle" font-size="21" font-weight="900" fill="'+stroke+'">'+label+'</text><text x="0" y="32" text-anchor="middle" font-size="18" font-weight="850" fill="#425466">'+temp+'</text></g>';}
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Διαφορετικές θερμοκρασίες</text>'+body(245,"θερμό","80 °C","#fff0e8","#c95151")+body(515,"ψυχρό","20 °C","#eef6fc","#4d9cbb")+'</g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ενέργεια από θερμότερο προς ψυχρότερο</text>'+body(220,"θερμό","80 °C","#fff0e8","#c95151")+body(540,"ψυχρό","20 °C","#eef6fc","#4d9cbb")+'<g class="ae-drift-right"><path d="M315 175 H445" stroke="#d59235" stroke-width="10"/><polygon points="465,175 438,160 438,190" fill="#d59235"/></g></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αυτή η μεταφορά λέγεται θερμότητα</text><g class="ae-pulse"><rect x="190" y="125" width="380" height="130" rx="28" fill="#fff7e6" stroke="#d59235" stroke-width="4"/><text x="380" y="185" text-anchor="middle" font-size="29" font-weight="900" fill="#8a5310">Q = μεταφερόμενη ενέργεια</text><text x="380" y="225" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">λόγω διαφοράς θερμοκρασίας</text></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Οι θερμοκρασίες πλησιάζουν</text>'+body(245,"Α","55 °C","#fff4eb","#d07a45")+body(515,"Β","45 °C","#f2f8fc","#5a8dab")+'<path d="M340 175 H420" stroke="#d59235" stroke-width="7"/><polygon points="435,175 414,163 414,187" fill="#d59235"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Θερμική ισορροπία</text>'+body(245,"Α","50 °C","#f7f3ef","#657887")+body(515,"Β","50 °C","#f7f3ef","#657887")+'<g class="ae-pulse"><text x="380" y="315" text-anchor="middle" font-size="18" font-weight="900" fill="#24594c">ίδια θερμοκρασία → χωρίς καθαρή ροή θερμότητας</text></g></g>'
+  ];
+  return baseSceneSvg("Θερμότητα","Μεταφορά ενέργειας λόγω διαφοράς θερμοκρασίας και προσέγγιση θερμικής ισορροπίας.",scenes);
+}
+function phaseChangesSvgMarkup(){
+  function solid(){var s='<g>';for(var r=0;r<3;r++)for(var col=0;col<5;col++)s+='<circle cx="'+(285+col*48)+'" cy="'+(125+r*50)+'" r="15" fill="#8ec9e3" stroke="#4d9cbb" stroke-width="2"/>';return s+'</g>';}
+  function liquid(){return '<g class="ae-float"><circle cx="285" cy="180" r="16" fill="#8ec9e3"/><circle cx="330" cy="205" r="16" fill="#8ec9e3"/><circle cx="375" cy="170" r="16" fill="#8ec9e3"/><circle cx="420" cy="215" r="16" fill="#8ec9e3"/><circle cx="465" cy="175" r="16" fill="#8ec9e3"/><circle cx="500" cy="220" r="16" fill="#8ec9e3"/></g>';}
+  function gas(){return '<g class="ae-float"><circle cx="220" cy="120" r="14" fill="#8ec9e3"/><circle cx="360" cy="245" r="14" fill="#8ec9e3"/><circle cx="520" cy="125" r="14" fill="#8ec9e3"/><circle cx="575" cy="250" r="14" fill="#8ec9e3"/><circle cx="315" cy="105" r="14" fill="#8ec9e3"/></g>';}
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Στερεό</text>'+solid()+'<text x="380" y="315" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">σωματίδια κοντά σε σταθερές θέσεις</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Τήξη: στερεό → υγρό</text><g transform="translate(-125 0) scale(.75)">'+solid()+'</g><path d="M345 185 H435" stroke="#d59235" stroke-width="8"/><polygon points="452,185 430,172 430,198" fill="#d59235"/><g transform="translate(225 0) scale(.75)">'+liquid()+'</g><text x="380" y="315" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">απορρόφηση ενέργειας</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Υγρό</text><path d="M205 120 V265 Q205 285 225 285 H535 Q555 285 555 265 V120" fill="#eaf7fc" stroke="#7893a8" stroke-width="4"/>'+liquid()+'<text x="380" y="325" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">κοντά, αλλά αλλάζουν θέσεις</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Εξαέρωση: υγρό → αέριο</text><g transform="translate(-120 35) scale(.72)">'+liquid()+'</g><path d="M340 185 H425" stroke="#d59235" stroke-width="8"/><polygon points="442,185 420,172 420,198" fill="#d59235"/><g transform="translate(210 0) scale(.7)">'+gas()+'</g><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">περισσότερη ενέργεια → ελεύθερη κίνηση</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="42" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Οι μεταβολές είναι αντιστρεπτές</text><rect x="100" y="125" width="150" height="105" rx="20" fill="#e8f4fb" stroke="#4d9cbb" stroke-width="4"/><rect x="305" y="125" width="150" height="105" rx="20" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><rect x="510" y="125" width="150" height="105" rx="20" fill="#f4fbff" stroke="#4d9cbb" stroke-width="4"/><text x="175" y="185" text-anchor="middle" font-size="19" font-weight="900" fill="#23637f">στερεό</text><text x="380" y="185" text-anchor="middle" font-size="19" font-weight="900" fill="#23637f">υγρό</text><text x="585" y="185" text-anchor="middle" font-size="19" font-weight="900" fill="#23637f">αέριο</text><path d="M250 155 H305 M305 205 H250 M455 155 H510 M510 205 H455" stroke="#657887" stroke-width="5"/><text x="278" y="110" text-anchor="middle" font-size="14" font-weight="900" fill="#8a5310">τήξη</text><text x="278" y="260" text-anchor="middle" font-size="14" font-weight="900" fill="#425466">πήξη</text><text x="482" y="110" text-anchor="middle" font-size="14" font-weight="900" fill="#8a5310">εξαέρωση</text><text x="482" y="260" text-anchor="middle" font-size="14" font-weight="900" fill="#425466">υγροποίηση</text></g>'
+  ];
+  return baseSceneSvg("Αλλαγές κατάστασης","Σωματιδιακή απεικόνιση στερεού, υγρού και αερίου και των μεταβολών μεταξύ τους.",scenes);
+}
+function heatTransferSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Τρεις τρόποι διάδοσης</text><rect x="100" y="120" width="160" height="130" rx="22" fill="#fff0e8" stroke="#c95151" stroke-width="4"/><rect x="300" y="120" width="160" height="130" rx="22" fill="#eef6fc" stroke="#4d9cbb" stroke-width="4"/><rect x="500" y="120" width="160" height="130" rx="22" fill="#fff8d8" stroke="#d59235" stroke-width="4"/><text x="180" y="192" text-anchor="middle" font-size="18" font-weight="900" fill="#a33f3f">αγωγή</text><text x="380" y="192" text-anchor="middle" font-size="18" font-weight="900" fill="#23637f">μεταφορά</text><text x="580" y="192" text-anchor="middle" font-size="18" font-weight="900" fill="#8a5310">ακτινοβολία</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#a33f3f">Αγωγή</text><rect x="140" y="165" width="480" height="60" rx="18" fill="#d7dce1" stroke="#657887" stroke-width="4"/><rect x="140" y="165" width="120" height="60" rx="18" fill="#ffb39d"/><g class="ae-drift-right"><circle cx="250" cy="195" r="11" fill="#c95151"/><circle cx="310" cy="195" r="11" fill="#d56f4e"/><circle cx="370" cy="195" r="11" fill="#dc8c5a"/><circle cx="430" cy="195" r="11" fill="#d7a66f"/></g><text x="380" y="305" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">ενέργεια μέσα στο υλικό · χωρίς ροή ύλης</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#23637f">Μεταφορά σε ρευστό</text><path d="M220 105 V265 Q220 290 245 290 H515 Q540 290 540 265 V105" fill="#e7f7ff" stroke="#4d9cbb" stroke-width="4"/><rect x="270" y="300" width="220" height="24" rx="12" fill="#ffb39d"/><g class="ae-pulse"><path d="M300 255 C260 190 290 125 345 115 M460 115 C515 145 520 220 465 265" fill="none" stroke="#c95151" stroke-width="8"/><polygon points="350,105 332,128 358,130" fill="#c95151"/><polygon points="455,275 470,249 444,249" fill="#4d9cbb"/></g><text x="380" y="345" text-anchor="middle" font-size="16" font-weight="900" fill="#425466">ρεύματα: θερμότερο ανεβαίνει, ψυχρότερο κατεβαίνει</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#8a5310">Ακτινοβολία</text><circle cx="205" cy="185" r="62" fill="#ffe27a" stroke="#d59235" stroke-width="5"/><g class="ae-pulse"><path d="M285 135 Q340 185 285 235 M335 120 Q410 185 335 250 M390 105 Q485 185 390 265" fill="none" stroke="#e0ad27" stroke-width="7"/></g><rect x="535" y="125" width="105" height="125" rx="18" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#8a5310">δεν απαιτείται υλικό μέσο</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Συχνά δρουν μαζί</text><rect x="225" y="195" width="310" height="70" rx="18" fill="#d7dce1" stroke="#657887" stroke-width="4"/><circle cx="380" cy="120" r="42" fill="#ffe27a" stroke="#d59235" stroke-width="4"/><path d="M380 165 V190" stroke="#d59235" stroke-width="6"/><g class="ae-pulse"><path d="M270 180 Q235 125 280 90 M490 180 Q525 125 480 90" fill="none" stroke="#c95151" stroke-width="6"/></g><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#24594c">αγωγή + μεταφορά + ακτινοβολία</text></g>'
+  ];
+  return baseSceneSvg("Διάδοση θερμότητας","Σύγκριση αγωγής, μεταφοράς και ακτινοβολίας.",scenes);
+}
+function ohmSvgMarkup(){
+  var circuit='<path d="M150 205 H260 M500 205 H610 M150 205 V105 H610 V205" fill="none" stroke="#657887" stroke-width="5"/><rect x="260" y="180" width="240" height="50" rx="12" fill="#fff0d8" stroke="#d59235" stroke-width="4"/><text x="380" y="212" text-anchor="middle" font-size="18" font-weight="900" fill="#8a5310">R</text><line x1="130" y1="235" x2="170" y2="235" stroke="#657887" stroke-width="5"/><line x1="140" y1="252" x2="160" y2="252" stroke="#657887" stroke-width="9"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Τάση V · Ρεύμα I · Αντίσταση R</text>'+circuit+'<text x="205" y="145" font-size="18" font-weight="900" fill="#23637f">I →</text><text x="380" y="310" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">μετράμε τα τρία ηλεκτρικά μεγέθη</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σταθερή αντίσταση</text>'+circuit+'<g class="ae-pulse"><rect x="315" y="265" width="130" height="50" rx="20" fill="#eef7f3" stroke="#2e6f5e" stroke-width="3"/><text x="380" y="297" text-anchor="middle" font-size="18" font-weight="900" fill="#24594c">R = σταθερή</text></g></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μεγαλύτερη V → μεγαλύτερη I</text>'+circuit+'<g class="ae-drift-right"><circle cx="210" cy="105" r="9" fill="#4d9cbb"/><circle cx="300" cy="105" r="9" fill="#4d9cbb"/><circle cx="390" cy="105" r="9" fill="#4d9cbb"/><circle cx="480" cy="105" r="9" fill="#4d9cbb"/></g><text x="555" y="145" font-size="18" font-weight="900" fill="#23637f">I ↑</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Νόμος του Ohm</text><g class="ae-pulse"><rect x="190" y="115" width="380" height="155" rx="30" fill="#eef6fc" stroke="#4d9cbb" stroke-width="4"/><text x="380" y="180" text-anchor="middle" font-size="38" font-weight="900" fill="#173f63">V = I · R</text><text x="380" y="230" text-anchor="middle" font-size="27" font-weight="900" fill="#23637f">I = V / R</text></g></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Γραφική I–V για ωμικό αντιστάτη</text><line x1="185" y1="290" x2="610" y2="290" stroke="#657887" stroke-width="4"/><line x1="185" y1="290" x2="185" y2="75" stroke="#657887" stroke-width="4"/><path d="M185 290 L555 95" stroke="#2e6f5e" stroke-width="8"/><text x="625" y="295" font-size="18" font-weight="900" fill="#425466">V</text><text x="170" y="70" font-size="18" font-weight="900" fill="#425466">I</text><circle cx="185" cy="290" r="8" fill="#2e6f5e"/><text x="440" y="330" text-anchor="middle" font-size="16" font-weight="850" fill="#24594c">ευθεία από την αρχή των αξόνων</text></g>'
+  ];
+  return baseSceneSvg("Νόμος του Ohm","Σχέση τάσης, έντασης ρεύματος και αντίστασης για ωμικό αντιστάτη.",scenes);
+}
+function resistorNetworksSvgMarkup(){
+  function resistor(x,y,label){return '<g transform="translate('+x+' '+y+')"><path d="M-65 0 H-42 L-30 -18 L-10 18 L10 -18 L30 18 L42 0 H65" fill="none" stroke="#d59235" stroke-width="5"/><text x="0" y="-35" text-anchor="middle" font-size="16" font-weight="900" fill="#8a5310">'+label+'</text></g>';}
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Οι αντιστάτες συνδέονται με διαφορετικούς τρόπους</text>'+resistor(285,185,"R₁")+resistor(485,185,"R₂")+'<path d="M90 185 H220 M350 185 H420 M550 185 H670" stroke="#657887" stroke-width="5"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σύνδεση σε σειρά: μία διαδρομή</text><path d="M95 190 H205" stroke="#657887" stroke-width="5"/>'+resistor(270,190,"R₁")+'<path d="M335 190 H425" stroke="#657887" stroke-width="5"/>'+resistor(490,190,"R₂")+'<path d="M555 190 H665" stroke="#657887" stroke-width="5"/><g class="ae-drift-right"><circle cx="180" cy="190" r="9" fill="#4d9cbb"/></g><text x="380" y="310" text-anchor="middle" font-size="17" font-weight="900" fill="#23637f">ίδιο ρεύμα I παντού</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ισοδύναμη αντίσταση σε σειρά</text><g class="ae-pulse"><rect x="185" y="125" width="390" height="145" rx="28" fill="#fff7e6" stroke="#d59235" stroke-width="4"/><text x="380" y="190" text-anchor="middle" font-size="31" font-weight="900" fill="#8a5310">Rολ = R₁ + R₂</text><text x="380" y="235" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">οι αντιστάσεις προστίθενται</text></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Παράλληλη σύνδεση: ξεχωριστοί κλάδοι</text><path d="M120 180 H220 V110 H315 M220 180 V250 H315 M445 110 H540 V180 H650 M445 250 H540" fill="none" stroke="#657887" stroke-width="5"/>'+resistor(380,110,"R₁")+resistor(380,250,"R₂")+'<g class="ae-drift-right"><circle cx="185" cy="180" r="9" fill="#4d9cbb"/></g><text x="380" y="330" text-anchor="middle" font-size="17" font-weight="900" fill="#23637f">ίδια τάση V στους δύο κλάδους</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="42" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Το ρεύμα μοιράζεται στους κλάδους</text><path d="M120 180 H250 M250 180 L390 115 M250 180 L390 245 M390 115 H610 M390 245 H610" fill="none" stroke="#657887" stroke-width="5"/><g class="ae-pulse"><text x="175" y="155" font-size="20" font-weight="900" fill="#23637f">I</text><text x="360" y="100" font-size="19" font-weight="900" fill="#2e6f5e">I₁</text><text x="360" y="280" font-size="19" font-weight="900" fill="#7b54c7">I₂</text></g><text x="500" y="190" font-size="24" font-weight="900" fill="#173f63">I = I₁ + I₂</text><text x="380" y="325" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">Rολ μικρότερη από κάθε επιμέρους αντίσταση</text></g>'
+  ];
+  return baseSceneSvg("Συνδεσμολογία αντιστατών","Αντιστάτες σε σειρά και παράλληλα, ρεύμα, τάση και ισοδύναμη αντίσταση.",scenes);
+}
+function refractionSvgMarkup(){
+  var boundary='<rect x="0" y="185" width="760" height="175" fill="#dff4ff"/><line x1="0" y1="185" x2="760" y2="185" stroke="#4d9cbb" stroke-width="4"/><text x="90" y="80" font-size="17" font-weight="900" fill="#52606d">αέρας</text><text x="90" y="230" font-size="17" font-weight="900" fill="#23637f">νερό</text><line x1="380" y1="55" x2="380" y2="320" stroke="#657887" stroke-width="3" stroke-dasharray="9 7"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="35" text-anchor="middle" font-size="21" font-weight="900" fill="#173f63">Όριο δύο διαφανών μέσων</text>'+boundary+'<path d="M190 75 L380 185" stroke="#d59235" stroke-width="7"/><path d="M380 185 L500 315" stroke="#d59235" stroke-width="7"/><circle cx="380" cy="185" r="9" fill="#c95151"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="35" text-anchor="middle" font-size="21" font-weight="900" fill="#173f63">Αλλαγή ταχύτητας → αλλαγή κατεύθυνσης</text>'+boundary+'<path d="M190 75 L380 185" stroke="#d59235" stroke-width="7"/><g class="ae-pulse"><path d="M380 185 L455 330" stroke="#c95151" stroke-width="8"/></g><text x="565" y="290" font-size="17" font-weight="900" fill="#a33f3f">διάθλαση</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="35" text-anchor="middle" font-size="21" font-weight="900" fill="#173f63">Αέρας → νερό: προς την κάθετο</text>'+boundary+'<path d="M170 65 L380 185" stroke="#d59235" stroke-width="7"/><path d="M380 185 L430 330" stroke="#c95151" stroke-width="8"/><path d="M330 150 A58 58 0 0 1 380 127" fill="none" stroke="#7b54c7" stroke-width="4"/><path d="M380 244 A59 59 0 0 1 400 239" fill="none" stroke="#7b54c7" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="35" text-anchor="middle" font-size="21" font-weight="900" fill="#173f63">Νερό → αέρας: μακριά από την κάθετο</text>'+boundary+'<path d="M335 330 L380 185" stroke="#c95151" stroke-width="8"/><path d="M380 185 L625 80" stroke="#d59235" stroke-width="7"/><path d="M380 125 A60 60 0 0 1 430 158" fill="none" stroke="#7b54c7" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="35" text-anchor="middle" font-size="21" font-weight="900" fill="#173f63">Φαινόμενη μετατόπιση στο νερό</text><rect x="0" y="185" width="760" height="175" fill="#dff4ff"/><line x1="0" y1="185" x2="760" y2="185" stroke="#4d9cbb" stroke-width="4"/><path d="M270 70 L380 185 L500 315" fill="none" stroke="#8a6b4b" stroke-width="17" stroke-linecap="round"/><path d="M270 70 L380 185 L455 285" fill="none" stroke="#d59235" stroke-width="4" stroke-dasharray="9 7"/><text x="530" y="315" font-size="16" font-weight="900" fill="#23637f">πραγματική θέση</text><text x="455" y="270" font-size="16" font-weight="900" fill="#8a5310">φαινόμενη</text></g>'
+  ];
+  return baseSceneSvg("Διάθλαση του φωτός","Αλλαγή κατεύθυνσης φωτεινής ακτίνας όταν περνά μεταξύ δύο διαφανών μέσων.",scenes);
+}
+function lensesSvgMarkup(){
+  var convex='<path d="M380 85 Q330 180 380 275 Q430 180 380 85 Z" fill="#dff4ff" fill-opacity=".72" stroke="#4d9cbb" stroke-width="5"/>';
+  var concave='<path d="M345 85 Q385 180 345 275 L415 275 Q375 180 415 85 Z" fill="#dff4ff" fill-opacity=".72" stroke="#4d9cbb" stroke-width="5"/>';
+  var axis='<line x1="80" y1="180" x2="680" y2="180" stroke="#7893a8" stroke-width="3" stroke-dasharray="9 7"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="40" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Οι φακοί διαθλούν το φως</text>'+axis+convex+'<path d="M110 115 H345 M110 180 H345 M110 245 H345" stroke="#d59235" stroke-width="5"/><path d="M415 115 L585 180 M415 180 L585 180 M415 245 L585 180" stroke="#c95151" stroke-width="5"/><circle cx="585" cy="180" r="9" fill="#7b54c7"/><text x="600" y="165" font-size="17" font-weight="900" fill="#60429e">F</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="40" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Συγκλίνων φακός</text>'+axis+convex+'<path d="M110 110 H345 M110 180 H345 M110 250 H345" stroke="#d59235" stroke-width="5"/><g class="ae-pulse"><path d="M415 110 L585 180 M415 180 L585 180 M415 250 L585 180" stroke="#c95151" stroke-width="6"/></g><circle cx="585" cy="180" r="9" fill="#7b54c7"/><text x="585" y="215" text-anchor="middle" font-size="17" font-weight="900" fill="#60429e">εστία</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="40" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αποκλίνων φακός</text>'+axis+concave+'<path d="M110 115 H345 M110 180 H345 M110 245 H345" stroke="#d59235" stroke-width="5"/><g class="ae-pulse"><path d="M415 115 L600 70 M415 180 H600 M415 245 L600 290" stroke="#c95151" stroke-width="6"/></g><path d="M415 115 L280 180 M415 245 L280 180" stroke="#7b54c7" stroke-width="3" stroke-dasharray="9 7"/><circle cx="280" cy="180" r="8" fill="#7b54c7"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="40" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σχηματισμός πραγματικού ειδώλου</text>'+axis+convex+'<path d="M175 245 V105" stroke="#2e6f5e" stroke-width="9"/><polygon points="175,90 160,115 190,115" fill="#2e6f5e"/><path d="M175 105 H355 M175 105 L380 180" stroke="#d59235" stroke-width="5"/><path d="M405 105 L575 245 M405 180 L575 245" stroke="#c95151" stroke-width="5"/><path d="M575 180 V245" stroke="#7b54c7" stroke-width="9"/><polygon points="575,260 560,235 590,235" fill="#7b54c7"/><text x="175" y="300" text-anchor="middle" font-size="16" font-weight="900" fill="#24594c">αντικείμενο</text><text x="575" y="300" text-anchor="middle" font-size="16" font-weight="900" fill="#60429e">είδωλο</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="40" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Οπτικά όργανα = συνδυασμοί φακών</text><g transform="translate(-175 0) scale(.72)">'+convex+'</g><g transform="translate(175 0) scale(.72)">'+convex+'</g><path d="M120 180 H250 M335 180 H425 M510 180 H640" stroke="#d59235" stroke-width="6"/><g class="ae-pulse"><rect x="210" y="90" width="340" height="180" rx="30" fill="none" stroke="#2e6f5e" stroke-width="5"/></g><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#24594c">μικροσκόπιο · τηλεσκόπιο · άλλα οπτικά συστήματα</text></g>'
+  ];
+  return baseSceneSvg("Φακοί και οπτικά όργανα","Συγκλίνοντες και αποκλίνοντες φακοί, εστία, είδωλο και χρήση σε οπτικά όργανα.",scenes);
+}
+
 function svgMarkup(config){
   if(config.visual==="chem-intro")return introSvgMarkup();
   if(config.visual==="states")return statesSvgMarkup();
@@ -1154,6 +1395,17 @@ function svgMarkup(config){
   if(config.visual==="geo-water-cycle")return waterCycleSvgMarkup();
   if(config.visual==="math-parabola")return parabolaSvgMarkup();
   if(config.visual==="math-trig")return trigSvgMarkup();
+  if(config.visual==="bio-metabolism")return metabolismSvgMarkup();
+  if(config.visual==="bio-defense")return defenseSvgMarkup();
+  if(config.visual==="bio-reproduction")return reproductionSvgMarkup();
+  if(config.visual==="phys-energy")return energySvgMarkup();
+  if(config.visual==="phys-heat")return heatSvgMarkup();
+  if(config.visual==="phys-phase-changes")return phaseChangesSvgMarkup();
+  if(config.visual==="phys-heat-transfer")return heatTransferSvgMarkup();
+  if(config.visual==="phys-ohm")return ohmSvgMarkup();
+  if(config.visual==="phys-resistors")return resistorNetworksSvgMarkup();
+  if(config.visual==="phys-refraction")return refractionSvgMarkup();
+  if(config.visual==="phys-lenses")return lensesSvgMarkup();
   return acidSvgMarkup();
 }
 
@@ -1181,7 +1433,7 @@ function renderExplanation(key,config){
     '<section class="animated-explanation" aria-labelledby="aeTitle">',
     '<div class="animated-explanation__head"><div><h3 id="aeTitle">'+config.title+'</h3><p>'+config.subtitle+'</p>'+(config.sourceUrl?'<a class="animated-explanation__source" href="'+config.sourceUrl+'" target="_blank" rel="noopener">Πηγή ύλης: '+config.sourceLabel+' ↗</a>':'')+'</div><span class="animated-explanation__topic">'+config.topicLabel+'</span></div>',
     '<div class="animated-explanation__stage" data-phase="0">',svgMarkup(config),'<div class="animated-explanation__caption" id="aeCaption" aria-live="polite" aria-atomic="true">'+config.captions[0]+'</div></div>',
-    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button><button type="button" data-ae-action="export">Λήψη WebM</button></div><p class="animated-explanation__export-note">Η λήψη δημιουργείται τοπικά στον browser· δεν ανεβαίνει περιεχόμενο σε εξωτερική υπηρεσία.</p>',
+    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button><button type="button" data-ae-action="export">Λήψη WebM</button></div><p class="animated-explanation__export-status" data-ae-export-status role="status" aria-live="polite"></p><p class="animated-explanation__export-note">Η λήψη δημιουργείται τοπικά στον browser· δεν ανεβαίνει περιεχόμενο σε εξωτερική υπηρεσία.</p>',
     '<ol class="animated-explanation__progress" aria-label="Πρόοδος εξήγησης">',progressHtml,'</ol>',
     '<div class="animated-explanation__comprehension" data-ae-comprehension tabindex="-1" hidden><h4>Το κατάλαβες;</h4><ol>',questionsHtml,'</ol></div>',
     '<span class="animated-explanation__sr" data-ae-status role="status" aria-live="polite"></span>',
@@ -1198,6 +1450,7 @@ function renderExplanation(key,config){
   var section=slot.querySelector(".animated-explanation");
   var comprehension=slot.querySelector("[data-ae-comprehension]");
   var status=slot.querySelector("[data-ae-status]");
+  var exportStatus=slot.querySelector("[data-ae-export-status]");
   var dots=Array.prototype.slice.call(slot.querySelectorAll("[data-caption-index]"));
 
   var phase=0,running=false,finished=false,exporting=false,timer=null,remaining=config.phases[0].duration,startedAt=0,lastCaption=-1;
@@ -1238,6 +1491,9 @@ function renderExplanation(key,config){
     restartBtn.disabled=exporting;
     expandBtn.disabled=exporting;
     exportBtn.disabled=exporting||!exportMimeType();
+    exportBtn.textContent=exporting?"Δημιουργία…":"Λήψη WebM";
+    exportBtn.setAttribute("aria-busy",exporting?"true":"false");
+    section.setAttribute("aria-busy",exporting?"true":"false");
     exportBtn.title=exportMimeType()?"Αποθήκευση της κινούμενης εξήγησης ως WebM":"Ο browser δεν υποστηρίζει εξαγωγή WebM από canvas.";
   }
   function clearTimer(){
@@ -1299,6 +1555,13 @@ function renderExplanation(key,config){
     var startY=y-((lines.length-1)*lineHeight/2);
     lines.forEach(function(row,i){ctx.fillText(row,x,startY+i*lineHeight);});
   }
+  function exportFilename(){
+    var map={α:"a",β:"v",γ:"g",δ:"d",ε:"e",ζ:"z",η:"i",θ:"th",ι:"i",κ:"k",λ:"l",μ:"m",ν:"n",ξ:"x",ο:"o",π:"p",ρ:"r",σ:"s",ς:"s",τ:"t",υ:"y",φ:"f",χ:"ch",ψ:"ps",ω:"o"};
+    var slug=String(config.topicLabel||"kinoumeni-exigisi").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
+      .replace(/[α-ω]/g,function(ch){return map[ch]||ch;})
+      .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,96);
+    return "aitools4kids-"+(slug||"kinoumeni-exigisi")+".webm";
+  }
   function copyComputedSvgStyles(sourceSvg,cloneSvg){
     var props=["display","visibility","opacity","transform","transform-origin","transform-box","fill","fill-opacity","stroke","stroke-opacity","stroke-width","stroke-linecap","stroke-linejoin","font-family","font-size","font-weight","font-style","letter-spacing","text-anchor"];
     var src=[sourceSvg].concat(Array.prototype.slice.call(sourceSvg.querySelectorAll("*")));
@@ -1341,12 +1604,35 @@ function renderExplanation(key,config){
     ctx.fillStyle="#52606d";ctx.font="500 17px system-ui, sans-serif";ctx.textAlign="right";
     ctx.fillText("aitools4kids.gr",1150,704);
   }
+  async function paintOutroFrame(ctx,canvas){
+    ctx.fillStyle="#f8fbff";ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#173f63";ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.font="800 34px system-ui, sans-serif";
+    canvasText(ctx,config.topicLabel,canvas.width/2,82,1110,40);
+    ctx.fillStyle="#24594c";ctx.font="800 21px system-ui, sans-serif";
+    ctx.fillText("Τελικός έλεγχος κατανόησης",canvas.width/2,142);
+    ctx.fillStyle="#ffffff";ctx.strokeStyle="#dbe6ef";ctx.lineWidth=2;
+    ctx.fillRect(120,185,1040,135);ctx.strokeRect(120,185,1040,135);
+    ctx.fillRect(120,345,1040,135);ctx.strokeRect(120,345,1040,135);
+    ctx.fillStyle="#22313f";ctx.font="700 25px system-ui, sans-serif";
+    canvasText(ctx,"1. "+(config.questions[0]||""),canvas.width/2,252,930,33);
+    canvasText(ctx,"2. "+(config.questions[1]||""),canvas.width/2,412,930,33);
+    ctx.fillStyle="#52606d";ctx.font="600 19px system-ui, sans-serif";
+    canvasText(ctx,"Πηγή ύλης: "+(config.sourceLabel||"Διαδραστικά Σχολικά Βιβλία"),canvas.width/2,550,1000,28);
+    ctx.fillStyle="#173f63";ctx.font="700 20px system-ui, sans-serif";
+    ctx.fillText("aitools4kids.gr",canvas.width/2,650);
+  }
   async function exportWebM(){
     var mime=exportMimeType();
-    if(!mime){status.textContent="Ο browser δεν υποστηρίζει εξαγωγή WebM. Δοκίμασε Chrome, Edge ή Firefox.";return;}
+    if(!mime){
+      var unsupported="Ο browser δεν υποστηρίζει εξαγωγή WebM. Δοκίμασε Chrome, Edge ή Firefox.";
+      status.textContent=unsupported;exportStatus.textContent=unsupported;return;
+    }
     if(exporting)return;
     exporting=true;setButtons();
-    status.textContent="Δημιουργία WebM… Η διαδικασία γίνεται τοπικά και διαρκεί όσο περίπου η εξήγηση.";
+    var creatingMessage="Γίνεται δημιουργία βίντεο…";
+    status.textContent=creatingMessage;
+    exportStatus.textContent=creatingMessage;
     var exportStage=document.createElement("div");
     exportStage.className="animated-explanation__stage";
     exportStage.setAttribute("aria-hidden","true");
@@ -1372,18 +1658,25 @@ function renderExplanation(key,config){
           await sleep(45);
         }
       }
+      var outroStarted=performance.now();
+      while(performance.now()-outroStarted<3200){
+        await paintOutroFrame(ctx,canvas);
+        await sleep(45);
+      }
       recorder.stop();
       await stopped;
       var outBlob=new Blob(chunks,{type:mime.split(";")[0]});
       var url=URL.createObjectURL(outBlob);
       var link=document.createElement("a");
-      link.href=url;link.download="aitools4kids-kinoumeni-exigisi.webm";
+      link.href=url;link.download=exportFilename();
       document.body.appendChild(link);link.click();link.remove();
       setTimeout(function(){URL.revokeObjectURL(url);},30000);
-      status.textContent="Το WebM δημιουργήθηκε και αποθηκεύτηκε.";
+      var doneMessage="Το βίντεο WebM δημιουργήθηκε και αποθηκεύτηκε.";
+      status.textContent=doneMessage;exportStatus.textContent=doneMessage;
     }catch(error){
       try{if(recorder.state!=="inactive")recorder.stop();}catch(_){}
-      status.textContent="Δεν ολοκληρώθηκε η λήψη WebM σε αυτόν τον browser.";
+      var failedMessage="Δεν ολοκληρώθηκε η λήψη WebM σε αυτόν τον browser.";
+      status.textContent=failedMessage;exportStatus.textContent=failedMessage;
     }finally{
       exportStage.remove();
       stream.getTracks().forEach(function(track){track.stop();});

@@ -34,6 +34,47 @@
 @media(prefers-reduced-motion:reduce){.generation-progress__spinner,.generation-progress__track::after{animation:none}.generation-progress__track::after{width:55%;transform:none}}
 .result{display:none}.result.visible{display:block}.output{margin-top:12px;border:1px solid var(--border);border-radius:15px;background:#fbfcfd;padding:18px}.output h2{background:var(--soft);border-left:4px solid var(--green);padding:8px 10px;border-radius:8px;font-size:1.08rem}.output h3{color:var(--green2)}.output blockquote{margin:12px 0;padding:10px 13px;border-left:4px solid #9ab7cc;background:#f5f9fc;color:#334155}.output hr{border:0;border-top:1px solid var(--border);margin:18px 0}.tablewrap{overflow:auto}.output table{border-collapse:collapse;width:100%;background:#fff}.output th{background:var(--blue)}.output th,.output td{border:1px solid var(--border);padding:9px;text-align:left;vertical-align:top}.result-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.meta{font-size:.82rem;color:var(--muted)}.section-kicker{margin:0 0 5px;color:var(--green);font-size:.78rem;font-weight:850;letter-spacing:.05em;text-transform:uppercase}.quick-disclosure{padding:0;overflow:hidden}.quick-disclosure summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px;cursor:pointer;list-style:none}.quick-disclosure summary::-webkit-details-marker{display:none}.quick-summary-text strong{display:block;font-size:1.2rem}.quick-summary-text span{display:block;margin-top:4px;color:var(--muted);font-size:.9rem}.quick-summary-action{flex:0 0 auto;border-radius:10px;background:var(--green);color:#fff;padding:9px 13px;font-weight:850}.quick-disclosure[open] .quick-summary-action{background:#fff;color:var(--ink);border:1px solid var(--border)}.quick-content{border-top:1px solid var(--border);padding:20px}.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-top:15px}.quick-note{margin-top:12px;border-radius:11px;background:#f5f8fb;border:1px solid #d8e2ec;padding:11px 13px;font-size:.85rem;color:#475467}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.step{border:1px solid var(--border);border-radius:15px;padding:16px;background:#fff}.step-no{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:var(--soft);color:var(--green2);font-weight:900}.step h3{font-size:1rem;margin:9px 0 6px}.step p{margin:0;color:#384250}.quick-prompt{margin-top:9px;padding:11px;border-radius:10px;background:#f7f8fa;border:1px solid var(--border);white-space:pre-wrap;font-size:.9rem}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}@media(max-width:800px){.tasks{grid-template-columns:1fr 1fr}.grid,.providers{grid-template-columns:1fr}.filters{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr}.full{grid-column:auto}}@media(max-width:520px){.tasks{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.quick-disclosure summary{align-items:flex-start;padding:16px}.quick-summary-action{font-size:.82rem}.quick-content{padding:16px}.wrap{padding:18px 12px 50px}.panel,.hero{padding:16px}.quick-disclosure{padding:0}}@media print{.top,.hero,#builder,.result:not(.visible),.filters,.quick-note,.actions,.quick-disclosure summary{display:none!important}.quick-content{border:0;padding:0}.panel{border:0;box-shadow:none;padding:0}.steps{grid-template-columns:1fr}.step{break-inside:avoid}}
 .assessment-options{margin-top:16px;border:1px solid #cfe0d8;background:#f8fcfa;border-radius:15px;padding:16px}.assessment-options__head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.assessment-options__head strong{display:block;font-size:1rem}.assessment-options__head span{display:block;margin-top:3px;color:var(--muted);font-size:.84rem}.assessment-options__head a{font-size:.84rem;font-weight:800;white-space:nowrap}.assessment-grid{margin-top:13px}.assessment-types{border:1px solid var(--border);border-radius:12px;padding:12px 13px;background:#fff}.assessment-types legend{font-weight:850;font-size:.9rem;padding:0 5px}.assessment-types label{display:inline-flex;align-items:center;gap:6px;margin:4px 14px 4px 0;font-size:.9rem}.assessment-note{margin:11px 0 0;color:#475467;font-size:.84rem}.task[data-task="assessment"].active{background:#f2faf6;border-color:#2e6f5e}@media(max-width:620px){.assessment-options__head{display:block}.assessment-options__head a{display:inline-block;margin-top:8px}.assessment-types label{display:flex;margin-right:0}}
+
+/* ---------- Reusable animated explanations ---------- */
+.animated-explanation-slot[hidden]{display:none!important}
+.animated-explanation{margin-top:16px;border:1px solid #cfddec;border-radius:18px;background:linear-gradient(135deg,#f8fbff,#f7fbf9);padding:18px;overflow:hidden}
+.animated-explanation__head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.animated-explanation__head h3{margin:0;font-size:1.15rem;color:#173f63}
+.animated-explanation__head p{margin:5px 0 0;color:#52606d;font-size:.9rem;max-width:760px}
+.animated-explanation__topic{flex:0 0 auto;max-width:310px;border:1px solid #d8e4ef;background:#fff;border-radius:999px;padding:6px 10px;color:#425466;font-size:.76rem;font-weight:800;text-align:center}
+.animated-explanation__stage{position:relative;margin-top:15px;border:1px solid #dbe6ef;border-radius:16px;background:#fff;overflow:hidden}
+.animated-explanation__svg{display:block;width:100%;height:auto;aspect-ratio:760/360}
+.animated-explanation__svg text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.animated-explanation__caption{min-height:58px;display:flex;align-items:center;justify-content:center;padding:12px 16px;border-top:1px solid #dbe6ef;background:#f9fbfd;text-align:center;font-weight:850;color:#22313f}
+.animated-explanation__controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.animated-explanation__controls button{border:1px solid #b9c9d7;border-radius:10px;background:#fff;color:#22313f;padding:9px 13px;font-weight:850;cursor:pointer}
+.animated-explanation__controls button:first-child{background:#2e6f5e;border-color:#2e6f5e;color:#fff}
+.animated-explanation__controls button:disabled{opacity:.52;cursor:not-allowed}
+.animated-explanation__controls button:focus-visible{outline:3px solid rgba(59,130,196,.28);outline-offset:2px}
+.animated-explanation__progress{display:flex;align-items:center;gap:7px;margin:12px 0 0;padding:0;list-style:none}
+.animated-explanation__progress li{width:26px;height:6px;border-radius:999px;background:#dce5ec;transition:background-color .2s ease,transform .2s ease}
+.animated-explanation__progress li.is-done{background:#8bb7a9}
+.animated-explanation__progress li.is-current{background:#2e6f5e;transform:scaleY(1.35)}
+.animated-explanation__comprehension{margin-top:15px;border:1px solid #cfe0d8;border-radius:14px;background:#f5fbf8;padding:15px 16px}
+.animated-explanation__comprehension[hidden]{display:none!important}
+.animated-explanation__comprehension h4{margin:0 0 7px;color:#24594c;font-size:1rem}
+.animated-explanation__comprehension ol{margin:0;padding-left:21px}
+.animated-explanation__comprehension li+li{margin-top:6px}
+.animated-explanation__sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.animated-explanation__stage .ae-moving{transform-box:fill-box;transform-origin:center;transition:transform 1.15s cubic-bezier(.2,.7,.2,1),opacity .42s ease}
+.animated-explanation__stage .ae-acid{transform:translate(165px,-112px)}
+.animated-explanation__stage[data-phase="1"] .ae-acid{transform:translate(0,0)}
+.animated-explanation__stage[data-phase="2"] .ae-acid,.animated-explanation__stage[data-phase="3"] .ae-acid,.animated-explanation__stage[data-phase="4"] .ae-acid,.animated-explanation__stage[data-phase="5"] .ae-acid{opacity:0;transform:translate(0,0)}
+.animated-explanation__stage .ae-hplus,.animated-explanation__stage .ae-anion,.animated-explanation__stage .ae-hydronium,.animated-explanation__stage .ae-reaction,.animated-explanation__stage .ae-final{opacity:0}
+.animated-explanation__stage[data-phase="2"] .ae-hplus,.animated-explanation__stage[data-phase="2"] .ae-anion,.animated-explanation__stage[data-phase="3"] .ae-hplus,.animated-explanation__stage[data-phase="3"] .ae-anion,.animated-explanation__stage[data-phase="4"] .ae-anion,.animated-explanation__stage[data-phase="5"] .ae-anion{opacity:1}
+.animated-explanation__stage[data-phase="3"] .ae-hplus{transform:translate(-126px,16px)}
+.animated-explanation__stage[data-phase="4"] .ae-hplus,.animated-explanation__stage[data-phase="5"] .ae-hplus{opacity:0;transform:translate(-126px,16px)}
+.animated-explanation__stage[data-phase="4"] .ae-hydronium,.animated-explanation__stage[data-phase="5"] .ae-hydronium,.animated-explanation__stage[data-phase="4"] .ae-reaction,.animated-explanation__stage[data-phase="5"] .ae-reaction{opacity:1}
+.animated-explanation__stage[data-phase="5"] .ae-final{opacity:1}
+@media(max-width:680px){.animated-explanation{padding:14px}.animated-explanation__head{display:block}.animated-explanation__topic{display:inline-block;max-width:none;margin-top:9px}.animated-explanation__caption{min-height:72px;font-size:.92rem}.animated-explanation__controls button{flex:1 1 30%;min-width:86px}}
+@media(prefers-reduced-motion:reduce){.animated-explanation__stage .ae-moving,.animated-explanation__progress li{transition:none!important}}
+@media print{.animated-explanation__controls,.animated-explanation__progress{display:none!important}.animated-explanation{break-inside:avoid}}
+
 </style>
 <script src="/data.js"></script>
 <script src="/accessibility-data.js"></script>
@@ -199,6 +240,7 @@
     </div>
   </div>
   <div class="curriculum-note" id="curriculumNote"></div>
+<div id="animatedExplanationSlot" class="animated-explanation-slot" hidden></div>
 <div id="standardGenerationControls"><h3>Διάλεξε πώς θα δημιουργηθεί</h3><div class="providers"><div class="provider groq"><strong>⚡ Δημιούργησέ το εδώ</strong><p>Groq + GPT-OSS 120B, χωρίς λογαριασμό.</p><button class="btn" id="groqBtn">Δημιούργησέ το εδώ</button></div><div class="provider puter"><strong>☁️ Δημιουργία με Puter</strong><p>Εναλλακτική επιλογή· μπορεί να ζητήσει σύνδεση.</p><button class="btn purple" id="puterBtn">Χρησιμοποίησε Puter</button></div></div>
 <div class="others"><strong>Γενικά AI — δες πρώτα τον οδηγό του εργαλείου</strong><div class="chips"><a href="/tools/chatgpt.html">ChatGPT</a><a href="/tools/gemini.html">Gemini</a><a href="/tools/copilot.html">Copilot</a><a href="/tools/perplexity.html">Perplexity</a></div></div></div><details class="teacher-tools-details" id="teacherToolsDetails">
 <summary><span><strong>🧰 Προτεινόμενα εξειδικευμένα εργαλεία</strong><span class="teacher-tools-sub" id="teacherToolsSummary">Αλλάζουν ανά εργασία και μάθημα</span></span><span class="teacher-tools-arrow" aria-hidden="true">⌄</span></summary>
@@ -216,7 +258,6 @@
   <div class="generation-progress__time" id="generationTime">Χρόνος αναμονής: 0″</div>
 </div></section>
 <section class="panel result" id="result"><h2>Έτοιμο υλικό</h2><div class="meta" id="meta"></div><div class="output" id="output"></div><div class="result-actions"><button class="btn secondary" id="copyBtn">Αντιγραφή</button><button class="btn secondary" onclick="window.print()">Εκτύπωση / PDF</button><button class="btn secondary" id="tutorLinkBtn">Άνοιγμα στο tutor</button><button class="btn secondary" id="copyTutorLinkBtn">Αντιγραφή deep link</button><button class="btn secondary" id="qrBtn">QR για την τάξη</button></div><div id="classQrPanel" hidden style="margin-top:14px;padding:14px;border:1px solid #dfe4ea;border-radius:12px;background:#fff"><strong>QR / deep link</strong><p class="meta" style="margin:5px 0 10px">Για χρήση από τον εκπαιδευτικό ή σύμφωνα με τους ηλικιακούς κανόνες της αντίστοιχης διαδρομής. Το link ανοίγει σε λειτουργία τάξης: το μικρόφωνο απενεργοποιείται και χρησιμοποιείται μόνο πληκτρολόγηση.</p><img id="classQrImage" alt="QR προς την κατάλληλη διαδρομή tutor" width="220" height="220" style="max-width:220px;width:100%;height:auto" hidden><p><a id="classTutorLink" href="#" target="_blank" rel="noopener"></a></p><div class="status" id="qrStatus"></div></div></section>
-<details class="panel quick-disclosure" id="quick"><summary><span class="quick-summary-text"><strong>⚡ Γρήγορη δραστηριότητα 3 βημάτων</strong><span>Για κάτι άμεσο μέσα στην τάξη: προσπάθεια, μία υπόδειξη και έλεγχος κατανόησης.</span></span><span class="quick-summary-action" id="quickSummaryAction">Άνοιγμα</span></summary><div class="quick-content"><p class="section-kicker">2. Γρήγορη δραστηριότητα</p><p class="sub">Χωρίς λογαριασμούς μαθητών και χωρίς αποθήκευση αποτελεσμάτων.</p><div class="filters"><div class="field"><label for="quickZone">Βαθμίδα</label><select id="quickZone"></select></div><div class="field"><label for="quickGrade">Τάξη</label><select id="quickGrade"></select></div><div class="field"><label for="quickSubject">Μάθημα</label><select id="quickSubject"></select></div><div class="field"><label for="quickTopic">Θέμα / ενότητα</label><select id="quickTopic"></select></div></div><div class="quick-note">Οι επιλογές προέρχονται από τη διαθέσιμη χαρτογράφηση του site. Τα μαθήματα ειδικής εκπαίδευσης δεν αναμειγνύονται με το Γυμνάσιο ή το Γενικό Λύκειο.</div><div class="steps"><article class="step"><div class="step-no">1</div><h3>Πρώτα χωρίς AI</h3><p id="quickStep1"></p></article><article class="step"><div class="step-no">2</div><h3>Μία καθοδηγούμενη υπόδειξη</h3><p>Χρησιμοποίησε το AI μόνο πάνω στην πρώτη προσπάθεια.</p><div class="quick-prompt" id="quickPrompt"></div></article><article class="step"><div class="step-no">3</div><h3>Έλεγχος κατανόησης</h3><p id="quickStep3"></p></article></div><div class="actions"><button class="btn" id="quickCopyPrompt">Αντιγραφή prompt</button><button class="btn secondary" id="quickPrintBtn">Εκτύπωση / PDF</button></div><div class="status" id="quickStatus"></div></div></details>
 </main>
 <script>
 const BASE={primary:{label:'Δημοτικό',grades:[['a','Α΄ Δημοτικού'],['b','Β΄ Δημοτικού'],['c','Γ΄ Δημοτικού'],['d','Δ΄ Δημοτικού'],['e','Ε΄ Δημοτικού'],['st','ΣΤ΄ Δημοτικού']],zone:'primary'},middle:{label:'Γυμνάσιο',grades:[['a','Α΄ Γυμνασίου'],['b','Β΄ Γυμνασίου'],['c','Γ΄ Γυμνασίου']],zone:'middle'},gel:{label:'Γενικό Λύκειο',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']],zone:'high'},specialGym:{label:'Ειδικό Γυμνάσιο',grades:[],zone:null},specialLyc:{label:'Ειδικό Λύκειο',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']],zone:null},deafGym:{label:'Γυμνάσιο Κωφών και Βαρηκόων',grades:[],zone:null},deafLyc:{label:'Λύκειο Κωφών και Βαρηκόων',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']],zone:null},eneegyl:{label:'ΕΝ.Ε.ΓΥ.-Λ.',grades:[],zone:null},epal:{label:'ΕΠΑΛ',grades:[['a','Α΄ ΕΠΑΛ'],['b','Β΄ ΕΠΑΛ'],['c','Γ΄ ΕΠΑΛ']],zone:null}};
@@ -464,21 +505,257 @@ $('qrBtn').onclick=async()=>{const panel=$('classQrPanel'),img=$('classQrImage')
 $('groqBtn').onclick=generateGroq;$('puterBtn').onclick=generatePuter;$('copyBtn').onclick=async()=>{await navigator.clipboard.writeText(lastText);$('copyBtn').textContent='Αντιγράφηκε';setTimeout(()=>$('copyBtn').textContent='Αντιγραφή',1200)};refreshContext();const requestedTask=new URLSearchParams(location.search).get('task');if(requestedTask)setTask(requestedTask);
 </script>
 <script>
+
 (function(){
-const Z=[{id:'primary',label:'Δημοτικό',grades:[['a','Α΄ Δημοτικού'],['b','Β΄ Δημοτικού'],['c','Γ΄ Δημοτικού'],['d','Δ΄ Δημοτικού'],['e','Ε΄ Δημοτικού'],['st','ΣΤ΄ Δημοτικού']]},{id:'middle',label:'Γυμνάσιο',grades:[['a','Α΄ Γυμνασίου'],['b','Β΄ Γυμνασίου'],['c','Γ΄ Γυμνασίου']]},{id:'high',label:'Γενικό Λύκειο',grades:[['a','Α΄ Λυκείου'],['b','Β΄ Λυκείου'],['c','Γ΄ Λυκείου']]}];
-const q=id=>document.getElementById(id),qZone=q('quickZone'),qGrade=q('quickGrade'),qSubject=q('quickSubject'),qTopic=q('quickTopic');
-function qOpts(el,arr){el.innerHTML='';arr.forEach(x=>{const o=document.createElement('option');if(Array.isArray(x)){o.value=x[0];o.textContent=x[1]}else{o.value=x.id||x.label;o.textContent=x.label}el.appendChild(o)});}
-function qClean(s){return String(s||'').split(',')[0].trim()}
-function qNorm(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[΄’'·.,:;()\/\\-]/g,' ').replace(/\s+/g,' ').trim()}
-function qUniq(a){return [...new Set(a.filter(Boolean).map(x=>String(x).trim()).filter(Boolean))]}
-function qQuizRows(z,g){if(typeof QUIZZES==='undefined'||!QUIZZES[z])return[];return Object.values(QUIZZES[z]).filter(x=>(x.grades||[]).includes(g)).map(x=>{const ids=[];(x.questions||[]).forEach(qu=>(qu.options||[]).forEach(o=>{if(o.gapTag&&!ids.includes(o.gapTag))ids.push(o.gapTag)}));const topics=ids.map(id=>{const a=window.AITOOLSKIDS_OFFICIAL_CURRICULUM?.getGapAlignment?.(id);const exact=a?.annualScopeVerified&&(a?.status==='exact-section-verified'||a?.status==='related-section-verified');return exact?(a.officialSectionEl||a.topicAnchorEl||null):null}).filter(Boolean);return{id:x.id,label:qClean(x.subjectLabelEl),topics}})}
-function qCatalogRows(z,g){const c=window.AITOOLSKIDS_TUTOR_CATALOG;return(c?.getSubjects?.(z,g)||[]).filter(s=>!s.specialEducation&&!s.curriculum?.specialEducation&&!s.schoolType).map(s=>{const cur=s?.curriculum||{},verified=cur.annualInstructionsStatus==='2026-27-verified'||cur.coverageStatus==='annual-instructions-verified'||cur.coverageStatus==='annual-exam-syllabus-verified'||cur.coverageStatus==='panhellenic-2027-verified';return{id:s.id,label:qClean(s.subjectLabelEl),topics:verified?(s.topics||[]).map(t=>t.labelEl):[]}})}
-function qRows(){const m=new Map();[...qQuizRows(qZone.value,qGrade.value),...qCatalogRows(qZone.value,qGrade.value)].forEach(s=>{const k=qNorm(s.label);if(!m.has(k))m.set(k,{id:s.id,label:s.label,topics:[]});m.get(k).topics=qUniq([...m.get(k).topics,...s.topics])});return[...m.values()].filter(x=>x.topics.length).sort((a,b)=>a.label.localeCompare(b.label,'el'))}
-function qRefreshZone(){qOpts(qGrade,Z.find(x=>x.id===qZone.value).grades);qRefreshSubject()}
-function qRefreshSubject(){const r=qRows();qOpts(qSubject,r.length?r:[{id:'none',label:'Γράψε το ακριβές μάθημα'}]);qRefreshTopic()}
-function qRefreshTopic(){const r=qRows(),s=r.find(x=>x.id===qSubject.value)||r.find(x=>x.label===qSubject.options[qSubject.selectedIndex]?.textContent),t=qUniq(s?.topics||[]);qOpts(qTopic,(t.length?t:['Συγκεκριμένο θέμα που δουλεύετε τώρα']).map(x=>({id:x,label:x})));qRender()}
-function qRender(){const g=qGrade.options[qGrade.selectedIndex]?.textContent||'',s=qSubject.options[qSubject.selectedIndex]?.textContent||'',t=qTopic.options[qTopic.selectedIndex]?.textContent||'';q('quickStep1').textContent=`Ζήτησε από τους μαθητές να γράψουν ή να πουν τι ήδη γνωρίζουν για «${t}» και να δώσουν ένα μικρό παράδειγμα χωρίς βοήθεια.`;q('quickPrompt').textContent=`Δουλεύουμε ${s}, ${g}: «${t}». Μην δώσεις έτοιμη απάντηση. Κάνε μία σύντομη ερώτηση ή δώσε μία μικρή υπόδειξη πάνω στην προσπάθεια του μαθητή και περίμενε να απαντήσει.`;q('quickStep3').textContent=`Κλείσε την πρώτη απάντηση του AI. Ζήτησε από τον μαθητή να εξηγήσει το «${t}» με δικά του λόγια και να εφαρμόσει την ιδέα σε ένα νέο παράδειγμα.`}
-qOpts(qZone,Z.map(x=>({id:x.id,label:x.label})));qZone.value='middle';qRefreshZone();qZone.onchange=qRefreshZone;qGrade.onchange=qRefreshSubject;qSubject.onchange=qRefreshTopic;qTopic.onchange=qRender;q('quickCopyPrompt').onclick=async()=>{try{await navigator.clipboard.writeText(q('quickPrompt').textContent);q('quickStatus').textContent='Το prompt αντιγράφηκε.'}catch(e){q('quickStatus').textContent='Δεν ήταν δυνατή η αυτόματη αντιγραφή.'}};q('quickPrintBtn').onclick=()=>window.print();const disclosure=q('quick'),action=q('quickSummaryAction');disclosure.open=false;action.textContent='Άνοιγμα';disclosure.addEventListener('toggle',()=>{action.textContent=disclosure.open?'Κλείσιμο':'Άνοιγμα'});document.querySelectorAll('a[href="#quick"]').forEach(a=>a.addEventListener('click',()=>{disclosure.open=true}));
+"use strict";
+
+var ANIMATED_EXPLANATIONS={
+  "chemistry-g-gym-acid-properties":{
+    context:"middle",
+    grade:"c",
+    subjectTerms:["χημεια","chimeia","chemistry"],
+    unitTerms:["1.1 ιδιοτητες των οξεων","1η ενοτητα κεφαλαιο 1 τα οξεα","οξεα βασεις και κλιμακα ph","τα οξεα"],
+    title:"🎬 Κινούμενη εξήγηση",
+    topicLabel:"Χημεία Γ΄ Γυμνασίου · 1.1 Ιδιότητες των οξέων",
+    subtitle:"Δες βήμα βήμα τι συμβαίνει όταν ένα οξύ διαλύεται στο νερό.",
+    captions:[
+      "Όταν ένα οξύ διαλύεται στο νερό…",
+      "…απελευθερώνει ιόντα υδρογόνου (H⁺).",
+      "Το H⁺ ενώνεται με μόριο νερού.",
+      "Έτσι σχηματίζεται ιόν οξωνίου (H₃O⁺).",
+      "Γι’ αυτό το διάλυμα εμφανίζει όξινες ιδιότητες."
+    ],
+    phases:[
+      {caption:0,duration:700},
+      {caption:0,duration:1450},
+      {caption:1,duration:1550},
+      {caption:2,duration:1650},
+      {caption:3,duration:1650},
+      {caption:4,duration:1250}
+    ],
+    questions:[
+      "Ποιο ιόν αυξάνεται σε ένα όξινο διάλυμα;",
+      "Τι σχηματίζεται όταν το H⁺ συνδεθεί με νερό;"
+    ]
+  }
+};
+
+function byId(id){return document.getElementById(id);}
+function normalizeText(value){
+  return String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
+    .replace(/[΄’'·.,:;()\/\\–—-]/g," ").replace(/\s+/g," ").trim();
+}
+function selectedText(select){
+  return select&&select.options&&select.options[select.selectedIndex]?select.options[select.selectedIndex].textContent:"";
+}
+function currentSelection(){
+  var context=byId("context"),grade=byId("grade"),subject=byId("subject"),unit=byId("unit"),custom=byId("customUnit");
+  return{
+    context:context?context.value:"",
+    grade:grade?grade.value:"",
+    subjectValue:subject?subject.value:"",
+    subjectText:selectedText(subject),
+    unitText:(unit&&unit.value==="custom"?(custom?custom.value:""):selectedText(unit))||""
+  };
+}
+function matchesConfig(config,selection){
+  if(selection.context!==config.context||selection.grade!==config.grade)return false;
+  var subjectHay=normalizeText(selection.subjectValue+" "+selection.subjectText);
+  if(!config.subjectTerms.some(function(term){return subjectHay.indexOf(normalizeText(term))!==-1;}))return false;
+  var unitHay=normalizeText(selection.unitText);
+  if(!unitHay)return false;
+  return config.unitTerms.some(function(term){
+    var needle=normalizeText(term);
+    return unitHay===needle||unitHay.indexOf(needle)!==-1||needle.indexOf(unitHay)!==-1;
+  });
+}
+function resolveConfig(){
+  var selection=currentSelection();
+  var keys=Object.keys(ANIMATED_EXPLANATIONS);
+  for(var i=0;i<keys.length;i++){
+    if(matchesConfig(ANIMATED_EXPLANATIONS[keys[i]],selection))return[keys[i],ANIMATED_EXPLANATIONS[keys[i]]];
+  }
+  return null;
+}
+function svgMarkup(){
+  return [
+    '<svg class="animated-explanation__svg" viewBox="0 0 760 360" role="img" aria-labelledby="aeSvgTitle aeSvgDesc">',
+    '<title id="aeSvgTitle">Διάλυση οξέος στο νερό και σχηματισμός ιόντος οξωνίου</title>',
+    '<desc id="aeSvgDesc">Ένα γενικό μόριο οξέος HA μπαίνει στο νερό, δίνει H⁺ σε ένα μόριο H₂O και σχηματίζεται H₃O⁺.</desc>',
+    '<defs><linearGradient id="aeWater" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dff4ff"/><stop offset="100%" stop-color="#b9e3f5"/></linearGradient><clipPath id="aeBeakerClip"><rect x="126" y="104" width="408" height="188" rx="20"/></clipPath></defs>',
+    '<text x="34" y="36" font-size="15" font-weight="800" fill="#425466">Νερό + οξύ</text>',
+    '<path d="M122 76 L122 284 Q122 306 145 306 L515 306 Q538 306 538 284 L538 76" fill="#fff" stroke="#7893a8" stroke-width="5" stroke-linecap="round"/>',
+    '<path d="M110 76 H550" stroke="#7893a8" stroke-width="5" stroke-linecap="round"/>',
+    '<g clip-path="url(#aeBeakerClip)"><rect x="126" y="142" width="408" height="164" fill="url(#aeWater)"/><path d="M126 146 C190 134 240 157 302 145 S420 136 534 146" fill="none" stroke="#82c9e6" stroke-width="5"/></g>',
+    '<g opacity=".76">',
+    '<g transform="translate(190 190)"><circle r="25" fill="#fff" stroke="#78b8d2" stroke-width="2"/><text text-anchor="middle" y="5" font-size="15" font-weight="800" fill="#23637f">H₂O</text></g>',
+    '<g transform="translate(250 255)"><circle r="25" fill="#fff" stroke="#78b8d2" stroke-width="2"/><text text-anchor="middle" y="5" font-size="15" font-weight="800" fill="#23637f">H₂O</text></g>',
+    '<g transform="translate(390 260)"><circle r="25" fill="#fff" stroke="#78b8d2" stroke-width="2"/><text text-anchor="middle" y="5" font-size="15" font-weight="800" fill="#23637f">H₂O</text></g>',
+    '<g transform="translate(478 190)"><circle r="25" fill="#fff" stroke="#78b8d2" stroke-width="2"/><text text-anchor="middle" y="5" font-size="15" font-weight="800" fill="#23637f">H₂O</text></g>',
+    '</g>',
+    '<g class="ae-acid ae-moving" transform="translate(435 190)"><rect x="-43" y="-24" width="86" height="48" rx="24" fill="#fff0d8" stroke="#d59235" stroke-width="3"/><text text-anchor="middle" y="6" font-size="20" font-weight="900" fill="#8a5310">HA</text><text x="0" y="45" text-anchor="middle" font-size="13" font-weight="700" fill="#6d5b43">μόριο οξέος</text></g>',
+    '<g class="ae-hplus ae-moving" transform="translate(430 202)"><circle r="25" fill="#ffe1e1" stroke="#c95151" stroke-width="3"/><text text-anchor="middle" y="7" font-size="20" font-weight="900" fill="#a32f2f">H⁺</text></g>',
+    '<g class="ae-anion ae-moving" transform="translate(474 230)"><circle r="24" fill="#fff3d9" stroke="#d69a35" stroke-width="3"/><text text-anchor="middle" y="6" font-size="18" font-weight="900" fill="#8a5310">A⁻</text></g>',
+    '<g transform="translate(304 218)"><circle r="30" fill="#fff" stroke="#4d9cbb" stroke-width="3"/><text text-anchor="middle" y="6" font-size="18" font-weight="900" fill="#23637f">H₂O</text></g>',
+    '<g class="ae-hydronium ae-moving" transform="translate(304 218)"><circle r="35" fill="#e7f5eb" stroke="#2e7a58" stroke-width="4"/><text text-anchor="middle" y="7" font-size="20" font-weight="900" fill="#24594c">H₃O⁺</text></g>',
+    '<g class="ae-reaction ae-moving"><path d="M566 142 H682" stroke="#56778e" stroke-width="3"/><polygon points="682,142 670,135 670,149" fill="#56778e"/><text x="624" y="121" text-anchor="middle" font-size="13" font-weight="700" fill="#52606d">στο νερό</text><text x="624" y="174" text-anchor="middle" font-size="19" font-weight="900" fill="#24594c">H₃O⁺</text><text x="624" y="196" text-anchor="middle" font-size="12" fill="#52606d">ιόν οξωνίου</text></g>',
+    '<g class="ae-final ae-moving"><rect x="173" y="317" width="414" height="33" rx="16" fill="#eaf6f0" stroke="#9bc8b6"/><text x="380" y="339" text-anchor="middle" font-size="15" font-weight="900" fill="#24594c">H₃O⁺ ↑  →  όξινες ιδιότητες</text></g>',
+    '</svg>'
+  ].join("");
+}
+
+var activeKey=null;
+var controller=null;
+
+function stopController(){
+  if(controller&&controller.destroy)controller.destroy();
+  controller=null;
+}
+function renderExplanation(key,config){
+  var slot=byId("animatedExplanationSlot");
+  if(!slot)return;
+  stopController();
+  activeKey=key;
+  slot.hidden=false;
+
+  var progressHtml=config.captions.map(function(_,i){
+    return '<li data-caption-index="'+i+'"><span class="animated-explanation__sr">Βήμα '+(i+1)+' από '+config.captions.length+'</span></li>';
+  }).join("");
+  var questionsHtml=config.questions.map(function(question){return "<li>"+question+"</li>";}).join("");
+
+  slot.innerHTML=[
+    '<section class="animated-explanation" aria-labelledby="aeTitle">',
+    '<div class="animated-explanation__head"><div><h3 id="aeTitle">'+config.title+'</h3><p>'+config.subtitle+'</p></div><span class="animated-explanation__topic">'+config.topicLabel+'</span></div>',
+    '<div class="animated-explanation__stage" data-phase="0">',svgMarkup(),'<div class="animated-explanation__caption" id="aeCaption" aria-live="polite" aria-atomic="true">'+config.captions[0]+'</div></div>',
+    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button></div>',
+    '<ol class="animated-explanation__progress" aria-label="Πρόοδος εξήγησης">',progressHtml,'</ol>',
+    '<div class="animated-explanation__comprehension" data-ae-comprehension tabindex="-1" hidden><h4>Το κατάλαβες;</h4><ol>',questionsHtml,'</ol></div>',
+    '<span class="animated-explanation__sr" data-ae-status role="status" aria-live="polite"></span>',
+    '</section>'
+  ].join("");
+
+  var stage=slot.querySelector(".animated-explanation__stage");
+  var caption=slot.querySelector("#aeCaption");
+  var startBtn=slot.querySelector('[data-ae-action="start"]');
+  var pauseBtn=slot.querySelector('[data-ae-action="pause"]');
+  var restartBtn=slot.querySelector('[data-ae-action="restart"]');
+  var comprehension=slot.querySelector("[data-ae-comprehension]");
+  var status=slot.querySelector("[data-ae-status]");
+  var dots=Array.prototype.slice.call(slot.querySelectorAll("[data-caption-index]"));
+
+  var phase=0,running=false,finished=false,timer=null,remaining=config.phases[0].duration,startedAt=0,lastCaption=-1;
+
+  function visualAnimations(){
+    try{return stage.getAnimations?stage.getAnimations({subtree:true}):[];}catch(_){return[];}
+  }
+  function updateProgress(captionIndex){
+    dots.forEach(function(dot,i){
+      dot.classList.toggle("is-done",i<captionIndex);
+      dot.classList.toggle("is-current",i===captionIndex);
+      dot.setAttribute("aria-current",i===captionIndex?"step":"false");
+    });
+  }
+  function applyPhase(index,announce){
+    phase=index;
+    stage.dataset.phase=String(index);
+    var captionIndex=config.phases[index].caption;
+    if(captionIndex!==lastCaption){
+      caption.textContent=config.captions[captionIndex];
+      if(announce)status.textContent=config.captions[captionIndex];
+      lastCaption=captionIndex;
+    }
+    updateProgress(captionIndex);
+    remaining=config.phases[index].duration;
+  }
+  function setButtons(){
+    startBtn.disabled=running||finished;
+    pauseBtn.disabled=!running;
+  }
+  function clearTimer(){
+    if(timer){clearTimeout(timer);timer=null;}
+  }
+  function schedule(ms){
+    clearTimer();
+    remaining=Math.max(0,ms);
+    startedAt=performance.now();
+    timer=setTimeout(advance,remaining);
+  }
+  function advance(){
+    timer=null;
+    if(phase<config.phases.length-1){
+      applyPhase(phase+1,true);
+      schedule(config.phases[phase].duration);
+      return;
+    }
+    running=false;
+    finished=true;
+    setButtons();
+    comprehension.hidden=false;
+    status.textContent="Η κινούμενη εξήγηση ολοκληρώθηκε. Ακολούθησε το μικρό τεστ κατανόησης.";
+  }
+  function start(){
+    if(running||finished)return;
+    running=true;
+    setButtons();
+    visualAnimations().forEach(function(animation){try{animation.play();}catch(_){}});
+    schedule(remaining||config.phases[phase].duration);
+  }
+  function pause(){
+    if(!running)return;
+    remaining=Math.max(50,remaining-(performance.now()-startedAt));
+    clearTimer();
+    running=false;
+    visualAnimations().forEach(function(animation){try{animation.pause();}catch(_){}});
+    setButtons();
+    status.textContent="Παύση.";
+  }
+  function reset(){
+    clearTimer();
+    visualAnimations().forEach(function(animation){try{animation.cancel();}catch(_){}});
+    running=false;finished=false;lastCaption=-1;
+    comprehension.hidden=true;
+    applyPhase(0,false);
+    setButtons();
+    status.textContent="Η εξήγηση ξεκίνησε από την αρχή.";
+  }
+  function restart(){reset();start();}
+  function destroy(){
+    clearTimer();
+    visualAnimations().forEach(function(animation){try{animation.cancel();}catch(_){}});
+  }
+
+  startBtn.addEventListener("click",start);
+  pauseBtn.addEventListener("click",pause);
+  restartBtn.addEventListener("click",restart);
+  applyPhase(0,false);
+  setButtons();
+  controller={destroy:destroy};
+}
+function sync(){
+  var slot=byId("animatedExplanationSlot");
+  if(!slot)return;
+  var found=resolveConfig();
+  if(!found){
+    if(activeKey!==null){
+      stopController();
+      activeKey=null;
+      slot.replaceChildren();
+    }
+    slot.hidden=true;
+    return;
+  }
+  if(activeKey!==found[0]||slot.hidden)renderExplanation(found[0],found[1]);
+}
+function deferredSync(){setTimeout(sync,0);}
+["context","grade","subject","unit"].forEach(function(id){
+  var node=byId(id);
+  if(node)node.addEventListener("change",deferredSync);
+});
+var customUnit=byId("customUnit");
+if(customUnit)customUnit.addEventListener("input",deferredSync);
+
+window.AITOOLSKIDS_ANIMATED_EXPLANATIONS={configs:ANIMATED_EXPLANATIONS,refresh:sync};
+sync();
 })();
 </script>
 <script src="/teacher-video-prototype.js"></script>

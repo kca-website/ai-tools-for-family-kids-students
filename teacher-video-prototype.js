@@ -5,6 +5,7 @@
   const q=(id)=>document.getElementById(id);
   let project=null;
   let narrationAudio=null;
+  let narrationObjectUrl=null;
   let playFrame=0;
   let playStarted=0;
   let browserSpeechActive=false;
@@ -37,12 +38,30 @@
 
   function sceneCount(){
     const sec=Number(q("videoDuration")?.value||60);
-    return sec<=30?4:sec<=60?6:8;
+    if(sec<=30)return 4;
+    if(sec<=60)return 6;
+    if(sec<=90)return 8;
+    if(sec<=120)return 11;
+    if(sec<=180)return 15;
+    return 22;
   }
 
   function wordTarget(){
     const sec=Number(q("videoDuration")?.value||60);
-    return sec<=30?"55–70":sec<=60?"115–135":"170–200";
+    if(sec<=30)return "55–70";
+    if(sec<=60)return "115–135";
+    if(sec<=90)return "170–200";
+    if(sec<=120)return "230–270";
+    if(sec<=180)return "340–400";
+    return "560–650";
+  }
+
+  function outputTokenBudget(){
+    const sec=Number(q("videoDuration")?.value||60);
+    if(sec<=90)return 2600;
+    if(sec<=120)return 3200;
+    if(sec<=180)return 3800;
+    return 4800;
   }
 
   function sourceMode(){return q("videoSourceMode")?.value||"curriculum";}
@@ -129,7 +148,7 @@ ${sourceBlock}
     if(start<0||end<=start) throw new Error("Το AI δεν επέστρεψε έγκυρο storyboard.");
     const parsed=JSON.parse(text.slice(start,end+1));
     if(!Array.isArray(parsed.scenes)||parsed.scenes.length<3) throw new Error("Το storyboard δεν περιέχει αρκετές σκηνές.");
-    parsed.scenes=parsed.scenes.slice(0,8).map((s,i)=>({
+    parsed.scenes=parsed.scenes.slice(0,24).map((s,i)=>({
       title:String(s.title||`Σκηνή ${i+1}`).trim(),
       onscreen:String(s.onscreen||"").trim(),
       narration:String(s.narration||"").trim(),
@@ -537,26 +556,128 @@ ${JSON.stringify(current)}
     return puterPromise;
   }
 
+  function narrationTextChunks(maxChars=1700){
+    const scenes=project?.scenes||[];
+    const chunks=[];
+    let current="";
+    for(const scene of scenes){
+      const text=String(scene?.narration||"").replace(/\s+/g," ").trim();
+      if(!text)continue;
+      if(current&&current.length+text.length+1>maxChars){
+        chunks.push(current.trim());
+        current="";
+      }
+      if(text.length>maxChars){
+        const sentences=text.split(/(?<=[.!?;])\s+/).filter(Boolean);
+        for(const sentence of sentences){
+          if(current&&current.length+sentence.length+1>maxChars){
+            chunks.push(current.trim());current="";
+          }
+          current+=(current?" ":"")+sentence;
+        }
+      }else{
+        current+=(current?" ":"")+text;
+      }
+    }
+    if(current.trim())chunks.push(current.trim());
+    return chunks;
+  }
+
+  function writeAscii(view,offset,text){
+    for(let i=0;i<text.length;i++)view.setUint8(offset+i,text.charCodeAt(i));
+  }
+
+  function decodedBuffersToMonoWav(buffers,sampleRate){
+    const totalFrames=buffers.reduce((sum,b)=>sum+b.length,0);
+    const dataBytes=totalFrames*2;
+    const out=new ArrayBuffer(44+dataBytes);
+    const view=new DataView(out);
+    writeAscii(view,0,"RIFF");
+    view.setUint32(4,36+dataBytes,true);
+    writeAscii(view,8,"WAVE");
+    writeAscii(view,12,"fmt ");
+    view.setUint32(16,16,true);
+    view.setUint16(20,1,true);
+    view.setUint16(22,1,true);
+    view.setUint32(24,sampleRate,true);
+    view.setUint32(28,sampleRate*2,true);
+    view.setUint16(32,2,true);
+    view.setUint16(34,16,true);
+    writeAscii(view,36,"data");
+    view.setUint32(40,dataBytes,true);
+    let offset=44;
+    for(const buffer of buffers){
+      const channels=[];
+      for(let c=0;c<buffer.numberOfChannels;c++)channels.push(buffer.getChannelData(c));
+      for(let i=0;i<buffer.length;i++){
+        let sample=0;
+        for(const ch of channels)sample+=ch[i]||0;
+        sample=channels.length?sample/channels.length:0;
+        sample=Math.max(-1,Math.min(1,sample));
+        view.setInt16(offset,sample<0?sample*0x8000:sample*0x7fff,true);
+        offset+=2;
+      }
+    }
+    return new Blob([out],{type:"audio/wav"});
+  }
+
+  async function mergeNarrationAudio(audioElements){
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx)throw new Error("Η συσκευή δεν υποστηρίζει ένωση τμημάτων αφήγησης.");
+    const ctx=new AudioCtx();
+    try{
+      const buffers=[];
+      for(let i=0;i<audioElements.length;i++){
+        const audio=audioElements[i];
+        const src=audio?.currentSrc||audio?.src;
+        if(!src)throw new Error("Δεν βρέθηκε το ηχητικό τμήμα "+(i+1)+".");
+        q("videoStatus").textContent=`Ενώνω την αφήγηση ${i+1}/${audioElements.length}…`;
+        const response=await fetch(src);
+        if(!response.ok)throw new Error("Δεν διαβάστηκε το ηχητικό τμήμα "+(i+1)+".");
+        const data=await response.arrayBuffer();
+        buffers.push(await ctx.decodeAudioData(data.slice(0)));
+      }
+      const wav=decodedBuffersToMonoWav(buffers,ctx.sampleRate);
+      if(narrationObjectUrl)URL.revokeObjectURL(narrationObjectUrl);
+      narrationObjectUrl=URL.createObjectURL(wav);
+      const audio=new Audio(narrationObjectUrl);
+      await new Promise(resolve=>{
+        if(audio.readyState>=1&&Number.isFinite(audio.duration))return resolve();
+        audio.addEventListener("loadedmetadata",resolve,{once:true});
+        setTimeout(resolve,3000);
+      });
+      return audio;
+    }finally{
+      try{await ctx.close()}catch(_){}
+    }
+  }
+
   async function createNarration(){
     const mode=q("videoNarration")?.value||"ai";
     narrationAudio=null;
     if(mode!=="ai") return null;
-    q("videoStatus").textContent="2/3 Δημιουργία ελληνικής αφήγησης…";
     await loadPuter();
-    const text=totalNarration().slice(0,2900);
-    const audio=await window.puter.ai.txt2speech(text,{
-      provider:"gemini",
-      model:"gemini-2.5-flash-preview-tts",
-      voice:"Kore",
-      instructions:"Μίλησε στα ελληνικά καθαρά, ζεστά και φυσικά, σαν εκπαιδευτικός σε τάξη. Μέτριος ρυθμός, σαφείς παύσεις."
-    });
-    narrationAudio=audio;
+    const chunks=narrationTextChunks();
+    if(!chunks.length)return null;
+    const audioParts=[];
+    for(let i=0;i<chunks.length;i++){
+      q("videoStatus").textContent=`2/3 Δημιουργία ελληνικής αφήγησης ${i+1}/${chunks.length}…`;
+      if(q("generationMessage"))q("generationMessage").textContent=`2/3 Αφήγηση ${i+1}/${chunks.length}.`;
+      const audio=await window.puter.ai.txt2speech(chunks[i],{
+        provider:"gemini",
+        model:"gemini-2.5-flash-preview-tts",
+        voice:"Kore",
+        instructions:"Μίλησε στα ελληνικά καθαρά, ζεστά και φυσικά, σαν εκπαιδευτικός σε τάξη. Μέτριος ρυθμός, σαφείς παύσεις. Διατήρησε σταθερό ύφος και ταχύτητα με τα υπόλοιπα τμήματα."
+      });
+      audioParts.push(audio);
+    }
+    narrationAudio=audioParts.length===1?audioParts[0]:await mergeNarrationAudio(audioParts);
     await new Promise((resolve)=>{
-      if(Number.isFinite(audio.duration)&&audio.duration>0) return resolve();
-      audio.addEventListener("loadedmetadata",resolve,{once:true});
-      setTimeout(resolve,2500);
+      if(Number.isFinite(narrationAudio?.duration)&&narrationAudio.duration>0) return resolve();
+      narrationAudio?.addEventListener?.("loadedmetadata",resolve,{once:true});
+      setTimeout(resolve,3000);
     });
-    return audio;
+    return narrationAudio;
   }
 
   function sceneWeights(){
@@ -860,7 +981,7 @@ ${JSON.stringify(current)}
     q("generationMessage").textContent="1/3 Σενάριο και storyboard πάνω στην επιλεγμένη ύλη.";
     try{
       const videoSystem="Είσαι εκπαιδευτικός σχεδιαστής σύντομων βίντεο για ελληνικό σχολικό πλαίσιο. Ακολουθείς αυστηρά την ενότητα και το καθεστώς ύλης που δίνει ο χρήστης. Επιστρέφεις μόνο το JSON που ζητείται, χωρίς markdown.";
-      const r=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:videoSystem,prompt:buildPrompt()})});
+      const r=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:videoSystem,prompt:buildPrompt(),outputTokens:outputTokenBudget()})});
       const d=await r.json();
       if(!r.ok)throw new Error(d.message||"Αποτυχία δημιουργίας storyboard.");
       project=extractJson(d.text);
@@ -990,7 +1111,7 @@ ${JSON.stringify(current)}
     });
   }
 
-  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,exportMp4,toggleFullscreen,supportedMime,previewDurationSeconds,formatTime,buildVtt,subtitleChunks,readOwnFile,addScene,regenerateScene};
+  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,exportMp4,toggleFullscreen,supportedMime,previewDurationSeconds,formatTime,buildVtt,subtitleChunks,readOwnFile,addScene,regenerateScene,sceneCount,wordTarget,outputTokenBudget,narrationTextChunks};
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});
   else bind();

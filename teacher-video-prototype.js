@@ -11,6 +11,7 @@
   let puterPromise=null;
   let audioObjectUrl=null;
   let exportedBlob=null;
+  let subtitleObjectUrl=null;
   let previewTotalMs=0;
   let previewRunning=false;
 
@@ -111,6 +112,82 @@
     return parsed;
   }
 
+  function subtitlesEnabled(){
+    return (q("videoSubtitles")?.value||"el")==="el";
+  }
+
+  function subtitleChunks(text,maxWords=9){
+    const words=String(text||"").replace(/\s+/g," ").trim().split(" ").filter(Boolean);
+    if(!words.length)return[];
+    const chunks=[];
+    let current=[];
+    for(const word of words){
+      current.push(word);
+      const sentenceEnd=/[.!?;:]$/.test(word);
+      if(current.length>=maxWords||sentenceEnd){
+        chunks.push(current.join(" "));
+        current=[];
+      }
+    }
+    if(current.length)chunks.push(current.join(" "));
+    if(chunks.length>1&&chunks[chunks.length-1].split(" ").length<3){
+      chunks[chunks.length-2]+=" "+chunks.pop();
+    }
+    return chunks;
+  }
+
+  function subtitleForScene(scene,local=0){
+    const chunks=subtitleChunks(scene?.narration||"");
+    if(!chunks.length)return"";
+    const index=Math.min(chunks.length-1,Math.floor(Math.max(0,Math.min(.999999,local))*chunks.length));
+    return chunks[index];
+  }
+
+  function vttTimestamp(seconds){
+    const total=Math.max(0,Number(seconds)||0);
+    const h=Math.floor(total/3600);
+    const m=Math.floor((total%3600)/60);
+    const s=Math.floor(total%60);
+    const ms=Math.floor((total-Math.floor(total))*1000);
+    return String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")+"."+String(ms).padStart(3,"0");
+  }
+
+  function buildVtt(){
+    if(!project)return"";
+    const total=previewDurationSeconds();
+    const weights=sceneWeights();
+    const cues=["WEBVTT",""];
+    let cueNo=1;
+    project.scenes.forEach((scene,i)=>{
+      const chunks=subtitleChunks(scene.narration);
+      if(!chunks.length)return;
+      const sceneStart=weights[i].start*total;
+      const sceneEnd=weights[i].end*total;
+      const span=Math.max(.3,(sceneEnd-sceneStart)/chunks.length);
+      chunks.forEach((chunk,j)=>{
+        const start=sceneStart+j*span;
+        const end=j===chunks.length-1?sceneEnd:sceneStart+(j+1)*span;
+        cues.push(String(cueNo++));
+        cues.push(vttTimestamp(start)+" --> "+vttTimestamp(Math.max(start+.25,end)));
+        cues.push(chunk);
+        cues.push("");
+      });
+    });
+    return cues.join("\n");
+  }
+
+  function refreshVttDownload(){
+    const a=q("videoVttDownload");
+    if(!a)return;
+    if(subtitleObjectUrl){URL.revokeObjectURL(subtitleObjectUrl);subtitleObjectUrl=null;}
+    if(!project||!subtitlesEnabled()){a.hidden=true;a.removeAttribute("href");return;}
+    const blob=new Blob([buildVtt()],{type:"text/vtt;charset=utf-8"});
+    subtitleObjectUrl=URL.createObjectURL(blob);
+    a.href=subtitleObjectUrl;
+    a.download=(project.title||"ekpaideutiko-video").replace(/[^a-zA-Z0-9α-ωΑ-Ωάέήίόύώϊϋΐΰ -]/g,"").trim().replace(/\s+/g,"-")+"-subtitles.vtt";
+    a.hidden=false;
+  }
+
   function palette(){
     const mode=q("videoStyle")?.value||"clean";
     if(mode==="younger") return {a:"#F59E0B",b:"#EC4899",c:"#FFF7ED",ink:"#31160b"};
@@ -148,7 +225,7 @@
     return lines;
   }
 
-  function drawScene(scene,index,phase=1){
+  function drawScene(scene,index,phase=1,local=0){
     const canvas=q("videoCanvas"); if(!canvas) return;
     const ctx=canvas.getContext("2d"),w=canvas.width,h=canvas.height,p=palette();
     ctx.clearRect(0,0,w,h);
@@ -195,6 +272,25 @@
     ctx.fillText("aitools4kids.gr",w-72,h-68);
     ctx.textAlign="left";
     ctx.globalAlpha=1;
+
+    if(subtitlesEnabled()){
+      const subtitle=subtitleForScene(scene,local);
+      if(subtitle){
+        ctx.font="700 29px system-ui, sans-serif";
+        const subtitleLines=wrapLines(ctx,subtitle,w-230,2);
+        const boxH=subtitleLines.length*38+28;
+        const boxY=h-170-boxH;
+        ctx.globalAlpha=.86;
+        ctx.fillStyle="#0B1220";
+        rounded(ctx,90,boxY,w-180,boxH,18);
+        ctx.fill();
+        ctx.globalAlpha=1;
+        ctx.fillStyle="#FFFFFF";
+        ctx.textAlign="center";
+        subtitleLines.forEach((line,i)=>ctx.fillText(line,w/2,boxY+39+i*38));
+        ctx.textAlign="left";
+      }
+    }
   }
 
   function renderStoryboard(){
@@ -297,7 +393,7 @@
     if(!project)return;
     const frac=Math.min(1,Math.max(0,seconds/Math.max(.1,totalSeconds)));
     const pos=sceneAtFraction(frac>=1?0.999999:frac);
-    drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3));
+    drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3),pos.local);
     updateTimeline(seconds,totalSeconds);
   }
 
@@ -316,7 +412,7 @@
     function tick(now){
       const frac=Math.min(1,(now-start)/totalMs);
       const pos=sceneAtFraction(frac);
-      drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3));
+      drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3),pos.local);
       if(frac<1) playFrame=requestAnimationFrame(tick);
     }
     playFrame=requestAnimationFrame(tick);
@@ -376,7 +472,7 @@
   function renderFrameForTime(ctxAudio,total){
     const frac=Math.min(1,ctxAudio/Math.max(.1,total));
     const pos=sceneAtFraction(frac>=1?0.999999:frac);
-    drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3));
+    drawScene(project.scenes[pos.i],pos.i,Math.min(1,pos.local*3),pos.local);
   }
 
   async function exportWebm(){
@@ -467,8 +563,9 @@
       const d=await r.json();
       if(!r.ok)throw new Error(d.message||"Αποτυχία δημιουργίας storyboard.");
       project=extractJson(d.text);
-      drawScene(project.scenes[0],0,1);
+      drawScene(project.scenes[0],0,1,0);
       renderStoryboard();
+      refreshVttDownload();
 
       q("generationMessage").textContent="2/3 Προετοιμασία αφήγησης.";
       if(q("videoNarration").value==="ai"){
@@ -533,9 +630,16 @@
       drawAtSeconds(seconds,total);
     });
     q("videoNarration")?.addEventListener("change",()=>{q("videoDownload").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;});
+    q("videoSubtitles")?.addEventListener("change",()=>{
+      refreshVttDownload();
+      q("videoDownload").hidden=true;
+      q("videoSaveBtn").hidden=true;
+      q("videoFilePreview").hidden=true;
+      if(project)drawAtSeconds((Number(q("videoTimeline")?.value)||0)/1000*previewDurationSeconds(),previewDurationSeconds());
+    });
   }
 
-  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,previewDurationSeconds,formatTime};
+  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,previewDurationSeconds,formatTime,buildVtt,subtitleChunks};
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});
   else bind();

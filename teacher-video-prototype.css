@@ -32,3 +32,5 @@ body.teacher-video-active #teacherToolsDetails{margin-top:16px}
 .video-preview-progress__time{display:flex;justify-content:space-between;margin-top:2px;color:#667085;font-size:.78rem;font-variant-numeric:tabular-nums}
 .video-file-preview{display:block;width:100%;margin-top:14px;border-radius:14px;background:#0f172a;aspect-ratio:16/9}
 .video-file-preview[hidden]{display:none!important}
+
+.video-studio__controls #videoVttDownload{border-style:dashed}

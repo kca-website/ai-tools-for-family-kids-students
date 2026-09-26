@@ -137,6 +137,7 @@
       <div class="field"><label for="videoPurpose">Σκοπός</label><select id="videoPurpose"><option value="explain" selected>Εξήγηση έννοιας</option><option value="intro">Εισαγωγή στο μάθημα</option><option value="review">Επανάληψη</option></select></div>
       <div class="field"><label for="videoStyle">Οπτικό ύφος</label><select id="videoStyle"><option value="clean" selected>Καθαρό εκπαιδευτικό</option><option value="visual">Πιο οπτικό / δυναμικό</option><option value="younger">Πιο φιλικό για μικρότερες ηλικίες</option></select></div>
       <div class="field"><label for="videoNarration">Αφήγηση</label><select id="videoNarration"><option value="ai" selected>Ελληνική AI αφήγηση</option><option value="browser">Αφήγηση συσκευής</option><option value="none">Χωρίς αφήγηση</option></select></div>
+      <div class="field"><label for="videoSubtitles">Υπότιτλοι</label><select id="videoSubtitles"><option value="el" selected>Ελληνικά · ενσωματωμένοι + .vtt</option><option value="none">Χωρίς υπότιτλους</option></select></div>
     </div>
     <p class="video-options__note">Η δημιουργία σεναρίου γίνεται από το aitools4kids. Η επιλογή «Ελληνική AI αφήγηση» χρησιμοποιεί Puter TTS και μπορεί να ζητήσει σύνδεση ή να καταναλώσει χρήση του λογαριασμού Puter. Δεν χρησιμοποιούνται στοιχεία μαθητών.</p>
     <button type="button" class="btn video-create-btn" id="videoCreateBtn">🎬 Δημιούργησε βίντεο</button>
@@ -154,10 +155,11 @@
         <button type="button" class="btn secondary" id="videoRestartBtn">↻ Από την αρχή</button>
         <button type="button" class="btn secondary" id="videoExportBtn" hidden>⬇ Δημιούργησε αρχείο βίντεο</button>
         <a class="btn secondary video-download" id="videoDownload" hidden download>⬇ Λήψη WebM</a>
+        <a class="btn secondary video-download" id="videoVttDownload" hidden download>CC Λήψη υποτίτλων .vtt</a>
         <button type="button" class="btn secondary" id="videoSaveBtn" hidden>📲 Αποθήκευση / κοινή χρήση</button>
       </div>
       <video id="videoFilePreview" class="video-file-preview" controls playsinline hidden></video>
-      <p class="video-studio__hint" id="videoStudioHint">Το prototype δημιουργεί motion-graphics χωρίς εξωτερικό μοντάζ. Τα visuals είναι σχεδιαστικά/τυπογραφικά, όχι ακόμη AI-generated clips.</p>
+      <p class="video-studio__hint" id="videoStudioHint">Το prototype δημιουργεί motion-graphics χωρίς εξωτερικό μοντάζ. Με ενεργούς υπότιτλους, το κείμενο ενσωματώνεται στο WebM και δίνεται επιπλέον αρχείο .vtt.</p>
       <details class="video-scenes-details"><summary>Δες το storyboard και το κείμενο αφήγησης</summary><div id="videoSceneList" class="video-scene-list"></div></details>
     </div>
   </div>

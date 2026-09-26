@@ -68,7 +68,12 @@ try{
   assert.equal(await page.locator('#videoExportBtn').count(),1,'Video prototype needs an export action');
   assert.equal(await page.locator('#videoFilePreview').count(),1,'Exported video must be reviewable with native video controls');
   assert.equal(await page.locator('#videoSaveBtn').count(),1,'Exported video needs a mobile-friendly save/share fallback');
+  assert.equal(await page.locator('#videoSubtitles').count(),1,'Video prototype needs a subtitle selector');
+  assert.equal(await page.locator('#videoSubtitles').inputValue(),'el','Greek subtitles should be enabled by default');
+  assert.equal(await page.locator('#videoVttDownload').count(),1,'Video prototype needs a separate VTT subtitle download');
   assert.equal(await page.evaluate(()=>typeof window.AITOOLSKIDS_TEACHER_VIDEO?.buildPrompt==='function'),true,'Video prototype runtime must expose its prompt builder');
+  assert.equal(await page.evaluate(()=>typeof window.AITOOLSKIDS_TEACHER_VIDEO?.buildVtt==='function'),true,'Video prototype runtime must expose VTT subtitle generation');
+  assert.deepEqual(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.subtitleChunks('Αυτό είναι ένα απλό παράδειγμα με αρκετές λέξεις για υπότιτλους.',5)),['Αυτό είναι ένα απλό παράδειγμα','με αρκετές λέξεις για υπότιτλους.'],'Subtitle chunking should keep readable short captions');
   const videoPrompt=await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.buildPrompt());
   assert.match(videoPrompt,/JSON/,'Video prompt must request structured scene output');
   assert.match(videoPrompt,/σχολική ενότητα|ενότητα/i,'Video prompt must remain grounded in the selected curriculum topic');

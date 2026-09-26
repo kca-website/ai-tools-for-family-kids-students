@@ -38,6 +38,9 @@ try{
   assert.ok(await page.locator('#curriculumNote a[href^="https://"]').count()>=1,'Teacher Assistant mapped curriculum must expose a source link');
 
   assert.equal(await page.locator('#groqBtn').count(),1,'Teacher Assistant must expose the account-free Groq generation route');
+  assert.equal(await page.locator('#generationProgress').count(),1,'Teacher Assistant must expose a visible generation-progress state');
+  assert.equal(await page.locator('#generationProgress').isHidden(),true,'Generation-progress state must be hidden before generation starts');
+  assert.equal(await page.evaluate(()=>typeof startGeneration==='function'&&typeof stopGeneration==='function'),true,'Generation lifecycle helpers must be available');
   assert.equal(await page.locator('.task[data-task="assessment"]').count(),1,'Teacher Assistant must expose the dedicated assessment-sheet task');
   await page.locator('.task[data-task="assessment"]').click();
   assert.equal(await page.locator('#assessmentOptions').isVisible(),true,'Assessment controls must appear when assessment task is selected');

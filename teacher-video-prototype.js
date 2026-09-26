@@ -64,6 +64,12 @@
     return 4800;
   }
 
+  function updateLongVideoNotice(){
+    const notice=q("videoLongNotice");
+    if(!notice)return;
+    notice.hidden=Number(q("videoDuration")?.value||60)<120;
+  }
+
   function sourceMode(){return q("videoSourceMode")?.value||"curriculum";}
 
   function ownMaterial(){
@@ -1048,6 +1054,8 @@ ${JSON.stringify(current)}
     const btn=q("videoCreateBtn");
     if(!btn)return;
     btn.addEventListener("click",generate);
+    q("videoDuration")?.addEventListener("change",updateLongVideoNotice);
+    updateLongVideoNotice();
     q("videoSourceMode")?.addEventListener("change",()=>{
       const own=q("videoSourceMode").value==="own";
       q("videoOwnMaterialPanel").hidden=!own;
@@ -1111,7 +1119,7 @@ ${JSON.stringify(current)}
     });
   }
 
-  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,exportMp4,toggleFullscreen,supportedMime,previewDurationSeconds,formatTime,buildVtt,subtitleChunks,readOwnFile,addScene,regenerateScene,sceneCount,wordTarget,outputTokenBudget,narrationTextChunks};
+  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,exportMp4,toggleFullscreen,supportedMime,previewDurationSeconds,formatTime,buildVtt,subtitleChunks,readOwnFile,addScene,regenerateScene,sceneCount,wordTarget,outputTokenBudget,narrationTextChunks,updateLongVideoNotice};
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});
   else bind();

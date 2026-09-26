@@ -65,6 +65,8 @@ try{
   assert.equal(await page.locator('#videoCreateBtn').count(),1,'Video prototype needs one direct create-video button');
   assert.equal(await page.locator('#videoDuration option').count(),6,'Video duration selector must include 30s through 5 minutes');
   await page.selectOption('#videoDuration','300');
+  assert.equal(await page.locator('#videoLongNotice').isVisible(),true,'Long video choices must show a visible time/use notice');
+  assert.match(await page.locator('#videoLongNotice').innerText(),/εξαγωγή χρειάζεται περίπου όσο το μήκος του βίντεο/i,'Long video notice must explain real-time export cost');
   assert.equal(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.sceneCount()),22,'Five-minute videos should plan about 22 scenes');
   assert.equal(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.wordTarget()),'560–650','Five-minute videos should request long-form narration');
   assert.equal(await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.outputTokenBudget()),4800,'Five-minute videos need a larger bounded storyboard output budget');
@@ -72,6 +74,7 @@ try{
   assert.match(longPrompt,/300 δευτερόλεπτα/,'Five-minute prompt must carry the selected duration');
   assert.match(longPrompt,/Ακριβώς 22 σκηνές/,'Five-minute prompt must request the long-form scene count');
   await page.selectOption('#videoDuration','60');
+  assert.equal(await page.locator('#videoLongNotice').isHidden(),true,'Short video choices should not show the long-duration notice');
   assert.equal(await page.locator('#videoCanvas').count(),1,'Video prototype needs a 16:9 preview canvas');
   assert.equal(await page.locator('#videoTimeline').count(),1,'Video prototype needs a visible timeline so the full preview is trackable');
   assert.equal(await page.locator('#videoExportBtn').count(),1,'Video prototype needs an export action');

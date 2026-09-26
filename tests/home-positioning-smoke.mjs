@@ -52,6 +52,8 @@ try {
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   assert.ok(await page.locator('a[href="/teacher-assistant.html"]').count(), 'Teacher assistant link missing');
+  assert.equal(await page.locator('#homeVideoNew').getAttribute('href'), '/teacher-assistant.html?task=video#builder', 'Homepage video promo must deep-link the educator video builder');
+  assert.match(await page.locator('#homeVideoNew').innerText(), /Ν(?:έ|Ε)ο?[\s\S]*Δημιουργία εκπαιδευτικών βίντεο/i, 'Homepage must surface the new educator video feature');
   assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
   assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);
   assert.match(await page.locator('#homeV8NeedsToggle').innerText(), /Τι θέλεις να κάνεις με AI/);
@@ -90,6 +92,7 @@ try {
   await page.waitForFunction(() => document.querySelector('#specialSchoolZoneCard')?.textContent?.includes('Special schools'));
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI tool for what you want to do and see how to use it properly. For parents, children and students 4 to 18, and educators.');
   assert.match(await page.locator('#specialSchoolZoneCard').innerText(), /Special schools/);
+  assert.match(await page.locator('#homeVideoNew').innerText(), /New[\s\S]*Create educational videos/i, 'Homepage video promo must translate to English');
   assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
   assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);
   assert.match(await page.locator('#homeV8NeedsToggle').innerText(), /What do you want to do with AI/);

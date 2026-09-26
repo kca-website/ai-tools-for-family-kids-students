@@ -82,8 +82,11 @@ try {
   assert.deepEqual(errors, [], `mobile homepage browser errors:\n${errors.join('\n')}`);
 
   // A standalone PWA can be restored directly on an internal route with no
-  // previous app history. Back must return to the app homepage instead of
-  // closing the standalone window.
+  // previous app history. The production host rewrites SPA routes to index.html;
+  // reproduce that rewrite here because python's static server otherwise returns 404.
+  const indexHtml=await (await page.request.get(LOCAL)).text();
+  await page.evaluate(async()=>{for(const reg of await navigator.serviceWorker.getRegistrations())await reg.unregister();});
+  await page.route('**/middle/guardian/tools',(route)=>route.fulfill({status:200,contentType:'text/html',body:indexHtml}));
   await page.goto(LOCAL + 'middle/guardian/tools', { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForFunction(() => document.body.classList.contains('pwa-standalone'), null, { timeout: 10000 });
   await page.waitForSelector('#pathView:not([hidden])', { state: 'visible', timeout: 10000 });

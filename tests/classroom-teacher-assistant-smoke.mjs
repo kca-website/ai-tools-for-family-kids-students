@@ -44,6 +44,10 @@ try{
   assert.equal(await page.locator('.task[data-task="assessment"]').count(),1,'Teacher Assistant must expose the dedicated assessment-sheet task');
   await page.locator('.task[data-task="assessment"]').click();
   assert.equal(await page.locator('#assessmentOptions').isVisible(),true,'Assessment controls must appear when assessment task is selected');
+  const assessmentTools=await page.locator('#teacherToolsGrid').innerText();
+  assert.match(assessmentTools,/Wayground/,'Assessment recommendations must include Wayground');
+  assert.match(assessmentTools,/Formative/,'Assessment recommendations must include Formative');
+  assert.doesNotMatch(assessmentTools,/Quizlet/,'Quizlet must not be a core assessment-sheet recommendation');
   await page.selectOption('#assessmentKind','diagnostic');
   await page.selectOption('#assessmentDifficulty','mixed');
   await page.selectOption('#assessmentCount','8');

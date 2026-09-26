@@ -153,7 +153,7 @@ const TEACHER_TOOL_BASE={
  lesson:['brisk','magicschool','gemini-education','notebooklm'],
  package:['brisk','diffit','class-companion','canva-magic'],
  worksheet:['diffit','brisk','magicschool','canva-magic'],
- assessment:['class-companion','brisk','magicschool','quizlet'],
+ assessment:['brisk','magicschool','wayground','formative'],
  activity:['snorkl','brisk','canva-magic','phet'],
  explain:['diffit','snorkl','notebooklm','phet'],
  noai:['canva-magic','phet','geogebra','google-arts-culture']
@@ -173,7 +173,9 @@ const TEACHER_TOOL_WHY={
  notebooklm:'Χρήσιμο όταν ο εκπαιδευτικός θέλει να δουλέψει πάνω σε συγκεκριμένες δικές του πηγές, PDF ή σημειώσεις.',
  gamma:'Για οπτική μετατροπή ήδη οργανωμένου υλικού σε παρουσίαση ή visual lesson.',
  'canva-magic':'Για φύλλα, αφίσες, οπτικό υλικό και παρουσιάσεις με έλεγχο από τον εκπαιδευτικό.',
- quizlet:'Για κάρτες, όρους και γρήγορη επανάληψη/αξιολόγηση.',
+ wayground:'Ισχυρό για διαδραστικές αξιολογήσεις/quiz: δημιουργία με AI από prompt, έγγραφο ή σύνδεσμο, live ή ασύγχρονη ανάθεση και αναφορές. Το δωρεάν Starter έχει βασικούς τύπους ερωτήσεων και Wayground AI.',
+ formative:'Ισχυρό για online formative assessment, answer keys, feedback και παρακολούθηση απαντήσεων. Το Free Teacher υποστηρίζει assessments και AI ερωτήσεις· η εκτύπωση/PDF είναι επί πληρωμή.',
+ quizlet:'Για κάρτες, όρους και γρήγορη επανάληψη. Το προτείνουμε για recall/flashcards, όχι ως βασικό εργαλείο δημιουργίας ολοκληρωμένου φύλλου αξιολόγησης.',
  phet:'Διαδραστικές προσομοιώσεις, ιδιαίτερα χρήσιμες σε Φυσική, Χημεία και Μαθηματικά.',
  geogebra:'Δυναμική γεωμετρία, άλγεβρα και οπτικοποίηση μαθηματικών εννοιών.',
  desmos:'Γραφικές παραστάσεις και διερεύνηση μαθηματικών σχέσεων.',
@@ -206,8 +208,17 @@ function accessibilityBadge(id){
 function renderTeacherTools(){
  const grid=$('teacherToolsGrid'),summary=$('teacherToolsSummary');
  if(!grid||typeof TOOLS==='undefined')return;
- const subjectIds=teacherSubjectToolIds(),taskIds=TEACHER_TOOL_BASE[task]||[];
- const mixed=[];for(let i=0;i<Math.max(taskIds.length,subjectIds.length);i++){if(taskIds[i])mixed.push(taskIds[i]);if(subjectIds[i])mixed.push(subjectIds[i]);}
+ const subjectIds=teacherSubjectToolIds();
+ let taskIds=TEACHER_TOOL_BASE[task]||[];
+ if(task==='assessment'&&document.querySelector('.assessment-type[value="Ανάπτυξης"]')?.checked){
+   taskIds=['class-companion','brisk','magicschool','wayground'];
+ }
+ const mixed=[];
+ if(task==='assessment'){
+   mixed.push(...taskIds,...subjectIds);
+ }else{
+   for(let i=0;i<Math.max(taskIds.length,subjectIds.length);i++){if(taskIds[i])mixed.push(taskIds[i]);if(subjectIds[i])mixed.push(subjectIds[i]);}
+ }
  const ids=uniq(mixed).filter(id=>TOOLS[id]).slice(0,4);
  const subjectLabel=subject?.options?.[subject.selectedIndex]?.textContent||'';
  summary.textContent=(subjectLabel?subjectLabel+' · ':'')+(taskLabels[task]||'')+' · '+ids.length+' προτάσεις';
@@ -245,6 +256,7 @@ function curriculumSourceLink(s){const c=s?.curriculum||{},o=s?.officialCurricul
 function officialBookSourceLink(s){const o=s?.officialCurriculum||{},b=o.officialBook||{};const url=b.url||o.catalogUrl||'';return url?` <a href="${url}" target="_blank" rel="noopener">Επίσημο σχολικό βιβλίο ↗</a>`:'';}
 function refreshUnits(){const s=selectedSubject();const topics=uniq(s?.topics||[]);const custom=$('customUnitField');if(topics.length){opts(unit,topics);custom.hidden=true;$('customUnit').value='';}else{opts(unit,[{id:'custom',label:'Γράψε την ακριβή ενότητα ή το κεφάλαιο παρακάτω'}]);custom.hidden=false;}let note='';const sourceLink=curriculumSourceLink(s);if(s?.officialPublishedPending){const link=s.officialPendingSource?` <a href="${s.officialPendingSource}" target="_blank" rel="noopener">Επίσημες οδηγίες ↗</a>`:'';note=topics.length?`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά χρειάζεται ο ακριβής τίτλος κεφαλαίου/ενότητας από την επίσημη πηγή.</strong> Οι ${topics.length} επιλογές που βλέπεις είναι μόνο υποστηρικτικό πλαίσιο· μη θεωρηθούν αυτούσια φετινή ύλη.${link}`:`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά χρειάζεται ο ακριβής τίτλος κεφαλαίου/ενότητας από την επίσημη πηγή.</strong> Γράψε τον πραγματικό τίτλο κεφαλαίου/ενότητας αντί να επινοηθεί ύλη.${link}`}else if(topics.length&&s?.supportOnly){note=`<strong>ℹ ${topics.length} υποστηρικτικές επιλογές από επίσημη αναφορά.</strong> Χρησιμοποιούνται ως βοήθημα επιλογής και δεν παρουσιάζονται ως αυτούσια επίσημη ετήσια ύλη Ε.Α.Ε. 2026–27.${sourceLink}`}else if(topics.length&&s?.selectionFramework){note=`<strong>✓ ${topics.length} επαληθευμένες επιλογές μέσα στο επίσημο πλαίσιο 2026–27.</strong> Δεν αποτελούν υποχρεωτική λίστα κειμένων/ενοτήτων· ο/η εκπαιδευτικός επιλέγει σύμφωνα με τις οδηγίες του μαθήματος.${sourceLink}`}else if(topics.length&&s?.bookSections){note=`<strong>📘 ${topics.length} επαληθευμένες ενότητες από το επίσημο σχολικό βιβλίο.</strong> Οι επίσημες οδηγίες 2026–27 για το μάθημα έχουν δημοσιευθεί, αλλά οι τίτλοι του βιβλίου δεν παρουσιάζονται αυτόματα ως αυτούσια ετήσια διδακτέα ή εξεταστέα ύλη.${officialBookSourceLink(s)}${sourceLink}`}else if(topics.length&&s?.navigationMap){note=`<strong>ℹ ${topics.length} τεκμηριωμένες επιλογές από αναλυτικό χάρτη των οδηγιών 2026–27.</strong> Είναι βοήθημα πλοήγησης και δεν παρουσιάζονται ως αυτούσιοι επίσημοι τίτλοι ενοτήτων.${sourceLink}`}else if(topics.length&&s?.annualMapped){note=`<strong>✓ ${topics.length} ενότητες με ρητή αντιστοίχιση στην επίσημη ύλη/οδηγίες 2026–27.</strong> Δεν προσθέτουμε γενικές ή τεχνητές ενότητες.${sourceLink}`}else if(topics.length){note=`<strong>ℹ ${topics.length} πραγματικές χαρτογραφημένες επιλογές.</strong> Η προέλευσή τους εμφανίζεται ξεχωριστά ώστε να μη συγχέονται με ετήσια ύλη 2026–27.${sourceLink}`}else if(context.value==='specialLyc'){note='Οι επίσημες οδηγίες Λυκείου Ε.Α.Ε. 2026-27 έχουν δημοσιευθεί. Όπου χρειάζεται ακριβέστερος τίτλος από την επίσημη πηγή, το μενού ΓΕΛ χρησιμοποιείται μόνο ως υποστηρικτικό πλαίσιο και ζητάμε το ακριβές κεφάλαιο που διδάσκεις.'}else if(context.value==='specialGym'){note='Οι επίσημες οδηγίες Γυμνασίου Ε.Α.Ε. 2026-27 έχουν δημοσιευθεί. Αν το συγκεκριμένο μάθημα χρειάζεται ακριβή τίτλο από την επίσημη πηγή, δεν εμφανίζουμε ψεύτικη «γενική ενότητα» και ζητάμε τον πραγματικό τίτλο.'}else if(context.value==='eneegyl'){note='Τα μαθήματα προέρχονται από τη δομή ΕΝ.Ε.ΓΥ.-Λ. 2026-27 και, όπου υπάρχουν, οι ενότητες από τα επαληθευμένα special-education datasets. Χωρίς χαρτογράφηση ζητάμε τον πραγματικό τίτλο κεφαλαίου.'}else{note='Για αυτή την επιλογή χρησιμοποίησε τον ακριβή τίτλο κεφαλαίου/ενότητας από το βιβλίο ή την επίσημη οδηγία.'}if(s?.coverageCaveat)note+=`<br><strong>Περιορισμός κάλυψης:</strong> ${s.coverageCaveat}`;$('curriculumNote').innerHTML=note;}
 context.onchange=refreshGrades;grade.onchange=refreshSubjects;subject.onchange=()=>{refreshUnits();renderTeacherTools();};
+document.querySelectorAll('.assessment-type,#assessmentKind,#assessmentDifficulty,#assessmentCount,#assessmentScale').forEach(el=>el.addEventListener('change',renderTeacherTools));
 function setTask(nextTask){
   const target=document.querySelector('.task[data-task="'+nextTask+'"]')||document.querySelector('.task[data-task="lesson"]');
   document.querySelectorAll('.task').forEach(x=>x.classList.toggle('active',x===target));

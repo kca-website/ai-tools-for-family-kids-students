@@ -63,7 +63,20 @@
     "physics-g-gym.ohms-law": "physics-g-ohm",
     "glossa-b-gym.argument-vs-evidence": "middle-b-argument-evidence-gap",
     "glossa-b-gym.summary-vs-opinion": "middle-b-summary-opinion-gap",
-    "ekthesi.summary-copying": "gel-c-summary-gap"
+    "ekthesi.summary-copying": "gel-c-summary-gap",
+    "physics-lyk.motion-implies-force": "gel-a-newton1-gap",
+    "physics-lyk.newton-third-law-bigger-force": "gel-a-newton3-gap",
+    "physics-lyk.energy-used-up": "gel-a-energy-conservation-gap",
+    "functions.quadratic-always-two-roots": "gel-a-quadratic-roots-gap",
+    "biologia-b-lyk.specific-nonspecific-immunity": "gel-b-immunity-types-gap",
+    "biologia-b-lyk.vaccine-immune-memory": "gel-b-vaccine-memory-gap",
+    "physics-b-lyk.momentum-conservation": "gel-b-momentum-gap",
+    "physics-b-lyk.circular-motion-tangent-velocity": "gel-b-circular-velocity-gap",
+    "physics-b-lyk.centripetal-force-direction": "gel-b-centripetal-gap",
+    "physics.density-mass-confusion": "middle-b-density-gap",
+    "physics-g-gym.speed-velocity-formula": "middle-c-speed-formula-gap",
+    "chimeia-g-gym.element-vs-compound": "middle-c-element-compound-gap",
+    "biologia-a-gym.plant-animal-cell": "middle-a-cell-compare-gap"
   });
 
   // ---------- Στατικά strings ----------

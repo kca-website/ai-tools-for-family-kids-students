@@ -206,8 +206,70 @@ main {
 }
 
 /* ---------- Hero quiz CTA (viral hook) ---------- */
+.hero__map-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 820px;
+  align-items: start;
+}
+
+.hero__curriculum-cta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 100%;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  background: linear-gradient(120deg, #5f57b8 0%, #3B82C4 100%);
+  box-shadow: 0 6px 16px rgba(73, 88, 177, 0.24);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero__curriculum-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(73, 88, 177, 0.30);
+}
+
+.hero__curriculum-cta-icon {
+  font-size: 1.7rem;
+  flex-shrink: 0;
+}
+
+.hero__curriculum-cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__curriculum-cta-badge {
+  width: fit-content;
+  margin-bottom: 2px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  color: rgba(255,255,255,.94);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.hero__curriculum-cta-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.hero__curriculum-cta-sub {
+  font-size: .84rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,.88);
+}
+
 .hero__quiz-cta-wrap {
-  max-width: 560px;
+  max-width: none;
 }
 
 .hero__quiz-cta {
@@ -399,6 +461,7 @@ main {
   .hero__learning-loop { padding: 10px 12px; }
   .hero__learning-loop-steps { font-size: .78rem; }
   .hero__learning-loop-steps li:not(:last-child)::after { margin: 0 6px; }
+  .hero__map-pair { grid-template-columns: 1fr; }
   .hero__ai-help { grid-template-columns: 1fr; }
   .hero__ai-help-actions { grid-template-columns: 1fr; }
 }

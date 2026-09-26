@@ -58,6 +58,17 @@ try{
   assert.match(assessmentPrompt,/Φύλλο μαθητή/,'Assessment prompt must require a separate student sheet');
   assert.match(assessmentPrompt,/κλειδί απαντήσεων/,'Assessment prompt must require teacher answer key');
   assert.equal(await page.locator('#puterBtn').count(),1,'Teacher Assistant must expose Puter only as an explicit alternative');
+  assert.equal(await page.locator('.task[data-task="video"]').count(),1,'Teacher Assistant must expose an educational-video task');
+  await page.locator('.task[data-task="video"]').click();
+  assert.equal(await page.locator('#videoOptions').isVisible(),true,'Video controls must appear when educational-video task is selected');
+  assert.equal(await page.locator('#standardGenerationControls').isHidden(),true,'Video task must use one direct creation action instead of the generic provider chooser');
+  assert.equal(await page.locator('#videoCreateBtn').count(),1,'Video prototype needs one direct create-video button');
+  assert.equal(await page.locator('#videoCanvas').count(),1,'Video prototype needs a 16:9 preview canvas');
+  assert.equal(await page.evaluate(()=>typeof window.AITOOLSKIDS_TEACHER_VIDEO?.buildPrompt==='function'),true,'Video prototype runtime must expose its prompt builder');
+  const videoPrompt=await page.evaluate(()=>window.AITOOLSKIDS_TEACHER_VIDEO.buildPrompt());
+  assert.match(videoPrompt,/JSON/,'Video prompt must request structured scene output');
+  assert.match(videoPrompt,/σχολική ενότητα|ενότητα/i,'Video prompt must remain grounded in the selected curriculum topic');
+  await page.locator('.task[data-task="assessment"]').click();
   assert.equal(await page.locator('#teacherToolsDetails').count(),1,'Teacher Assistant must expose a collapsible specialised-tools section');
   assert.equal(await page.locator('#teacherToolsDetails').getAttribute('open'),null,'Specialised-tools section should be collapsed by default');
   assert.ok(await page.locator('#teacherToolsGrid .teacher-tool-card').count()>=2,'Teacher Assistant should render specialised tool recommendations');

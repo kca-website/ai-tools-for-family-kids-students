@@ -51,6 +51,10 @@
 .animated-explanation__controls button:first-child{background:#2e6f5e;border-color:#2e6f5e;color:#fff}
 .animated-explanation__controls button:disabled{opacity:.52;cursor:not-allowed}
 .animated-explanation__controls button:focus-visible{outline:3px solid rgba(59,130,196,.28);outline-offset:2px}
+
+.animated-explanation__export-note{margin:8px 0 0;color:#52606d;font-size:.78rem}
+.animated-explanation__controls button[data-ae-action="export"]{border-color:#7aa8c3;background:#eef6fc;color:#173f63}
+
 .animated-explanation__progress{display:flex;align-items:center;gap:7px;margin:12px 0 0;padding:0;list-style:none}
 .animated-explanation__progress li{width:26px;height:6px;border-radius:999px;background:#dce5ec;transition:background-color .2s ease,transform .2s ease}
 .animated-explanation__progress li.is-done{background:#8bb7a9}
@@ -1025,7 +1029,7 @@ function renderExplanation(key,config){
     '<section class="animated-explanation" aria-labelledby="aeTitle">',
     '<div class="animated-explanation__head"><div><h3 id="aeTitle">'+config.title+'</h3><p>'+config.subtitle+'</p>'+(config.sourceUrl?'<a class="animated-explanation__source" href="'+config.sourceUrl+'" target="_blank" rel="noopener">Πηγή ύλης: '+config.sourceLabel+' ↗</a>':'')+'</div><span class="animated-explanation__topic">'+config.topicLabel+'</span></div>',
     '<div class="animated-explanation__stage" data-phase="0">',svgMarkup(config),'<div class="animated-explanation__caption" id="aeCaption" aria-live="polite" aria-atomic="true">'+config.captions[0]+'</div></div>',
-    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button></div>',
+    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button><button type="button" data-ae-action="export">Λήψη WebM</button></div><p class="animated-explanation__export-note">Η λήψη δημιουργείται τοπικά στον browser· δεν ανεβαίνει περιεχόμενο σε εξωτερική υπηρεσία.</p>',
     '<ol class="animated-explanation__progress" aria-label="Πρόοδος εξήγησης">',progressHtml,'</ol>',
     '<div class="animated-explanation__comprehension" data-ae-comprehension tabindex="-1" hidden><h4>Το κατάλαβες;</h4><ol>',questionsHtml,'</ol></div>',
     '<span class="animated-explanation__sr" data-ae-status role="status" aria-live="polite"></span>',
@@ -1038,12 +1042,13 @@ function renderExplanation(key,config){
   var pauseBtn=slot.querySelector('[data-ae-action="pause"]');
   var restartBtn=slot.querySelector('[data-ae-action="restart"]');
   var expandBtn=slot.querySelector('[data-ae-action="expand"]');
+  var exportBtn=slot.querySelector('[data-ae-action="export"]');
   var section=slot.querySelector(".animated-explanation");
   var comprehension=slot.querySelector("[data-ae-comprehension]");
   var status=slot.querySelector("[data-ae-status]");
   var dots=Array.prototype.slice.call(slot.querySelectorAll("[data-caption-index]"));
 
-  var phase=0,running=false,finished=false,timer=null,remaining=config.phases[0].duration,startedAt=0,lastCaption=-1;
+  var phase=0,running=false,finished=false,exporting=false,timer=null,remaining=config.phases[0].duration,startedAt=0,lastCaption=-1;
 
   function visualAnimations(){
     try{return stage.getAnimations?stage.getAnimations({subtree:true}):[];}catch(_){return[];}
@@ -1067,9 +1072,21 @@ function renderExplanation(key,config){
     updateProgress(captionIndex);
     remaining=config.phases[index].duration;
   }
+  function exportMimeType(){
+    if(!window.MediaRecorder||!HTMLCanvasElement.prototype.captureStream)return "";
+    var types=["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"];
+    for(var i=0;i<types.length;i++){
+      if(!MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(types[i]))return types[i];
+    }
+    return "";
+  }
   function setButtons(){
-    startBtn.disabled=running||finished;
-    pauseBtn.disabled=!running;
+    startBtn.disabled=running||finished||exporting;
+    pauseBtn.disabled=!running||exporting;
+    restartBtn.disabled=exporting;
+    expandBtn.disabled=exporting;
+    exportBtn.disabled=exporting||!exportMimeType();
+    exportBtn.title=exportMimeType()?"Αποθήκευση της κινούμενης εξήγησης ως WebM":"Ο browser δεν υποστηρίζει εξαγωγή WebM από canvas.";
   }
   function clearTimer(){
     if(timer){clearTimeout(timer);timer=null;}
@@ -1118,6 +1135,110 @@ function renderExplanation(key,config){
     setButtons();
     status.textContent="Η εξήγηση ξεκίνησε από την αρχή.";
   }
+
+  function sleep(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
+  function canvasText(ctx,text,x,y,maxWidth,lineHeight){
+    var words=String(text||"").split(/\s+/),line="",lines=[];
+    words.forEach(function(word){
+      var test=line?line+" "+word:word;
+      if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word;}else line=test;
+    });
+    if(line)lines.push(line);
+    var startY=y-((lines.length-1)*lineHeight/2);
+    lines.forEach(function(row,i){ctx.fillText(row,x,startY+i*lineHeight);});
+  }
+  function copyComputedSvgStyles(sourceSvg,cloneSvg){
+    var props=["display","visibility","opacity","transform","transform-origin","transform-box","fill","fill-opacity","stroke","stroke-opacity","stroke-width","stroke-linecap","stroke-linejoin","font-family","font-size","font-weight","font-style","letter-spacing","text-anchor"];
+    var src=[sourceSvg].concat(Array.prototype.slice.call(sourceSvg.querySelectorAll("*")));
+    var dst=[cloneSvg].concat(Array.prototype.slice.call(cloneSvg.querySelectorAll("*")));
+    for(var i=0;i<src.length&&i<dst.length;i++){
+      var style=getComputedStyle(src[i]);
+      props.forEach(function(prop){
+        var value=style.getPropertyValue(prop);
+        if(value)dst[i].style.setProperty(prop,value);
+      });
+    }
+  }
+  async function svgBitmapFromStage(exportStage){
+    var sourceSvg=exportStage.querySelector("svg");
+    var clone=sourceSvg.cloneNode(true);
+    copyComputedSvgStyles(sourceSvg,clone);
+    clone.setAttribute("xmlns","http://www.w3.org/2000/svg");
+    clone.setAttribute("width","1000");
+    clone.setAttribute("height","474");
+    var blob=new Blob([new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml;charset=utf-8"});
+    if(window.createImageBitmap)return await createImageBitmap(blob);
+    return await new Promise(function(resolve,reject){
+      var url=URL.createObjectURL(blob),img=new Image();
+      img.onload=function(){URL.revokeObjectURL(url);resolve(img);};
+      img.onerror=function(){URL.revokeObjectURL(url);reject(new Error("svg-render"));};
+      img.src=url;
+    });
+  }
+  async function paintExportFrame(ctx,canvas,exportStage,captionText){
+    ctx.fillStyle="#f8fbff";ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="#173f63";ctx.font="700 31px system-ui, sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+    canvasText(ctx,config.topicLabel,canvas.width/2,42,1160,36);
+    var bitmap=await svgBitmapFromStage(exportStage);
+    ctx.drawImage(bitmap,140,82,1000,474);
+    if(bitmap.close)bitmap.close();
+    ctx.fillStyle="#ffffff";ctx.fillRect(110,570,1060,112);
+    ctx.strokeStyle="#dbe6ef";ctx.lineWidth=2;ctx.strokeRect(110,570,1060,112);
+    ctx.fillStyle="#22313f";ctx.font="700 27px system-ui, sans-serif";
+    canvasText(ctx,captionText,canvas.width/2,626,990,34);
+    ctx.fillStyle="#52606d";ctx.font="500 17px system-ui, sans-serif";ctx.textAlign="right";
+    ctx.fillText("aitools4kids.gr",1150,704);
+  }
+  async function exportWebM(){
+    var mime=exportMimeType();
+    if(!mime){status.textContent="Ο browser δεν υποστηρίζει εξαγωγή WebM. Δοκίμασε Chrome, Edge ή Firefox.";return;}
+    if(exporting)return;
+    exporting=true;setButtons();
+    status.textContent="Δημιουργία WebM… Η διαδικασία γίνεται τοπικά και διαρκεί όσο περίπου η εξήγηση.";
+    var exportStage=document.createElement("div");
+    exportStage.className="animated-explanation__stage";
+    exportStage.setAttribute("aria-hidden","true");
+    exportStage.style.cssText="position:fixed;left:-12000px;top:0;width:760px;height:360px;pointer-events:none;opacity:1";
+    exportStage.innerHTML=svgMarkup(config);
+    document.body.appendChild(exportStage);
+    var canvas=document.createElement("canvas");canvas.width=1280;canvas.height=720;
+    var ctx=canvas.getContext("2d",{alpha:false});
+    var stream=canvas.captureStream(20);
+    var recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:4500000});
+    var chunks=[];
+    recorder.ondataavailable=function(event){if(event.data&&event.data.size)chunks.push(event.data);};
+    var stopped=new Promise(function(resolve){recorder.onstop=resolve;});
+    try{
+      recorder.start(500);
+      for(var p=0;p<config.phases.length;p++){
+        exportStage.dataset.phase=String(p);
+        await sleep(80);
+        var duration=Math.max(600,config.phases[p].duration||1400);
+        var started=performance.now();
+        while(performance.now()-started<duration){
+          await paintExportFrame(ctx,canvas,exportStage,config.captions[config.phases[p].caption]);
+          await sleep(45);
+        }
+      }
+      recorder.stop();
+      await stopped;
+      var outBlob=new Blob(chunks,{type:mime.split(";")[0]});
+      var url=URL.createObjectURL(outBlob);
+      var link=document.createElement("a");
+      link.href=url;link.download="aitools4kids-kinoumeni-exigisi.webm";
+      document.body.appendChild(link);link.click();link.remove();
+      setTimeout(function(){URL.revokeObjectURL(url);},30000);
+      status.textContent="Το WebM δημιουργήθηκε και αποθηκεύτηκε.";
+    }catch(error){
+      try{if(recorder.state!=="inactive")recorder.stop();}catch(_){}
+      status.textContent="Δεν ολοκληρώθηκε η λήψη WebM σε αυτόν τον browser.";
+    }finally{
+      exportStage.remove();
+      stream.getTracks().forEach(function(track){track.stop();});
+      exporting=false;setButtons();
+    }
+  }
+
   function restart(){reset();start();}
   function setExpandLabel(){
     var expanded=(document.fullscreenElement===section)||section.classList.contains("is-expanded");
@@ -1154,6 +1275,7 @@ function renderExplanation(key,config){
   pauseBtn.addEventListener("click",pause);
   restartBtn.addEventListener("click",restart);
   expandBtn.addEventListener("click",expand);
+  exportBtn.addEventListener("click",exportWebM);
   document.addEventListener("fullscreenchange",fullscreenChanged);
   applyPhase(0,false);
   setButtons();

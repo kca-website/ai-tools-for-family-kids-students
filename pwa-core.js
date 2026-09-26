@@ -31,6 +31,40 @@
     };
   }
 
+  const PWA_HISTORY_ROOT="__aitools4kidsPwaRoot";
+  const PWA_HISTORY_ENTRY="__aitools4kidsPwaEntry";
+
+  function isInternalSpaPath(pathname=location.pathname){
+    return /^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)\/?$/.test(pathname);
+  }
+
+  function sameOriginReferrer(){
+    if(!document.referrer) return false;
+    try{return new URL(document.referrer).origin===location.origin;}catch(_){return false;}
+  }
+
+  function ensureStandaloneBackHistory(){
+    if(!isStandalone() || !isInternalSpaPath()) return;
+
+    // Entries produced by the SPA router already have a valid in-app predecessor.
+    if(history.state?.[PWA_HISTORY_ENTRY]) return;
+
+    // Normal same-origin navigation also already has a previous in-app document.
+    if(sameOriginReferrer()){
+      history.replaceState({...history.state,[PWA_HISTORY_ENTRY]:true},"",location.href);
+      return;
+    }
+
+    // Android may restore/reopen a standalone PWA directly on an internal route.
+    // In that case this route can be the only history entry, so hardware Back
+    // closes the app. Seed a same-document home entry underneath it. The app's
+    // normal popstate router will then render the homepage; Back from homepage
+    // remains free to exit the application.
+    const current=location.pathname+location.search+location.hash;
+    history.replaceState({[PWA_HISTORY_ROOT]:true},"","/");
+    history.pushState({[PWA_HISTORY_ENTRY]:true,pwaRestoredRoute:true},"",current);
+  }
+
   function ensureHeadMetadata(){
     let manifest=document.querySelector('link[rel="manifest"]');
     if(!manifest){
@@ -596,6 +630,7 @@
 
   ensureHeadMetadata();
   injectStyles();
+  ensureStandaloneBackHistory();
   registerServiceWorker();
   queueMicrotask(refresh);
   document.addEventListener("DOMContentLoaded",refresh);

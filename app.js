@@ -2538,7 +2538,7 @@ function renderToolGrid(pathTools, targetElement) {
     const path = routePath(state.currentZone, state.currentRole, state.currentView);
     if (location.pathname === path) return; // avoid duplicate history entries
     history.pushState(
-      { zone: state.currentZone, role: state.currentRole, view: state.currentView },
+      { zone: state.currentZone, role: state.currentRole, view: state.currentView, __aitools4kidsPwaEntry: true },
       "",
       path
     );
@@ -2791,7 +2791,7 @@ function renderToolGrid(pathTools, targetElement) {
   function showZoneSelectView() {
     state.currentZone = null;
     if (location.pathname !== "/") {
-      history.pushState({}, "", "/");
+      history.pushState({ __aitools4kidsPwaEntry: true, __aitools4kidsPwaRoot: true }, "", "/");
     }
     renderCurrentRoute();
     window.scrollTo({ top: 0, behavior: "smooth" });

@@ -81,7 +81,19 @@ try {
   assert.ok(overflow <= 1, `mobile homepage has horizontal overflow: ${overflow}px`);
   assert.deepEqual(errors, [], `mobile homepage browser errors:\n${errors.join('\n')}`);
 
-  console.log('Mobile PWA homepage + integrated Special-school route + lazy-loading + analytics smoke passed.');
+  // A standalone PWA can be restored directly on an internal route with no
+  // previous app history. Back must return to the app homepage instead of
+  // closing the standalone window.
+  await page.goto(LOCAL + 'middle/guardian/tools', { waitUntil: 'domcontentloaded', timeout: 60000 });
+  await page.waitForFunction(() => document.body.classList.contains('pwa-standalone'), null, { timeout: 10000 });
+  await page.waitForSelector('#pathView:not([hidden])', { state: 'visible', timeout: 10000 });
+  const restoredState=await page.evaluate(()=>history.state);
+  assert.equal(restoredState?.__aitools4kidsPwaEntry,true,'direct standalone route must be marked as an internal PWA history entry');
+  await page.goBack({waitUntil:'domcontentloaded',timeout:10000}).catch(()=>null);
+  await page.waitForSelector('#zoneSelectView:not([hidden])', { state: 'visible', timeout: 10000 });
+  assert.equal(new URL(page.url()).pathname,'/','Back from a directly restored standalone route must return to the app homepage');
+
+  console.log('Mobile PWA homepage + integrated Special-school route + lazy-loading + analytics + back-navigation smoke passed.');
 } finally {
   await browser.close();
 }

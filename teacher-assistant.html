@@ -52,11 +52,6 @@
 .animated-explanation__controls button:disabled{opacity:.52;cursor:not-allowed}
 .animated-explanation__controls button:focus-visible{outline:3px solid rgba(59,130,196,.28);outline-offset:2px}
 
-.animated-explanation__export-note{margin:6px 0 0;color:#52606d;font-size:.78rem}
-.animated-explanation__export-status{margin:9px 0 0;min-height:1.25em;color:#173f63;font-size:.82rem;font-weight:850}
-.animated-explanation__export-status:empty{display:none}
-.animated-explanation__controls button[data-ae-action="export"]{border-color:#7aa8c3;background:#eef6fc;color:#173f63}
-.animated-explanation__controls button[data-ae-action="export"][aria-busy="true"]{background:#e6eef5}
 
 .animated-explanation__progress{display:flex;align-items:center;gap:7px;margin:12px 0 0;padding:0;list-style:none}
 .animated-explanation__progress li{width:26px;height:6px;border-radius:999px;background:#dce5ec;transition:background-color .2s ease,transform .2s ease}
@@ -540,6 +535,10 @@ $('groqBtn').onclick=generateGroq;$('puterBtn').onclick=generatePuter;$('copyBtn
 (function(){
 "use strict";
 
+function standardAePhases(slow){
+  var d=slow?[2200,2300,2400,2400,2200]:[1650,1750,1850,1850,1700];
+  return d.map(function(duration,i){return{caption:i,duration:duration};});
+}
 var ANIMATED_EXPLANATIONS={
   "chemistry-g-gym-acid-properties":{
     context:"middle",
@@ -1049,6 +1048,167 @@ var ANIMATED_EXPLANATIONS={
     captions:["Μονομερή είναι μικρότερα μόρια που μπορούν να συμμετέχουν σε αντιδράσεις πολυμερισμού.","Στον πολυμερισμό πολλά μονομερή συνδέονται και σχηματίζουν μακριές αλυσίδες.","Το προϊόν είναι ένα πολυμερές: ένα μακρομόριο με επαναλαμβανόμενες δομικές μονάδες.","Πολλά πλαστικά είναι συνθετικά πολυμερή με διαφορετικές ιδιότητες ανάλογα με τη δομή τους.","Η χρήση, επαναχρησιμοποίηση και διαχείριση των πλαστικών έχει σημαντικές περιβαλλοντικές συνέπειες."],
     phases:[{caption:0,duration:1600},{caption:1,duration:1900},{caption:2,duration:1800},{caption:3,duration:1700},{caption:4,duration:1900}],
     questions:["Τι είναι ένα μονομερές;","Τι σχηματίζεται όταν πολλά μονομερή συνδέονται σε αλυσίδα;"]
+  },
+  "special-gym-a-cell":{
+    context:"specialGym",grade:"a",subjectTerms:["βιολογια","biology"],unitTerms:["1 2 κυτταρο η μοναδα της ζωης","κυτταρο η μοναδα της ζωης"],visual:"bio-cell",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Γυμνάσιο Α΄ · Βιολογία · Κύτταρο",subtitle:"Καθαρά βήματα για τα βασικά μέρη του κυττάρου.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",sourceLabel:"ΥΠΑΙΘΑ · Βιολογία Α΄ Γυμνασίου Ε.Α.Ε. 2026–27",
+    captions:["Το κύτταρο είναι βασική μονάδα ζωής.","Η μεμβράνη ορίζει το κύτταρο και ελέγχει την είσοδο και έξοδο ουσιών.","Στο κυτταρόπλασμα γίνονται πολλές λειτουργίες.","Ο πυρήνας περιέχει γενετικό υλικό στα ευκαρυωτικά κύτταρα.","Τα μέρη συνεργάζονται για να λειτουργεί το κύτταρο."],phases:standardAePhases(true),
+    questions:["Ποιο μέρος περιβάλλει το κύτταρο;","Πού βρίσκεται το γενετικό υλικό στα ευκαρυωτικά κύτταρα;"]
+  },
+  "special-gym-a-photosynthesis":{
+    context:"specialGym",grade:"a",subjectTerms:["βιολογια","biology"],unitTerms:["2 1 η παραγωγη θρεπτικων ουσιων στα φυτα φωτοσυνθεση","φωτοσυνθεση"],visual:"bio-photo",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Γυμνάσιο Α΄ · Βιολογία · Φωτοσύνθεση",subtitle:"Φως, νερό και διοξείδιο του άνθρακα σε μία απλή οπτική διαδρομή.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",sourceLabel:"ΥΠΑΙΘΑ · Βιολογία Α΄ Γυμνασίου Ε.Α.Ε. 2026–27",
+    captions:["Το φυτό χρειάζεται φως.","Οι ρίζες προσλαμβάνουν νερό.","Τα φύλλα προσλαμβάνουν διοξείδιο του άνθρακα.","Με τη φωτοσύνθεση παράγονται οργανικές ουσίες και οξυγόνο.","Η φωτεινή ενέργεια αποθηκεύεται σε χημική μορφή."],phases:standardAePhases(true),
+    questions:["Τι ενέργεια χρειάζεται η φωτοσύνθεση;","Ποιο αέριο απελευθερώνεται;"]
+  },
+  "special-gym-b-musculoskeletal":{
+    context:"specialGym",grade:"b",subjectTerms:["βιολογια","biology"],unitTerms:["βιολογια α 5 4 το μυοσκελετικο συστημα του ανθρωπου","5 4 το μυοσκελετικο συστημα του ανθρωπου","μυοσκελετικο συστημα"],visual:"bio-musculoskeletal",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Γυμνάσιο Β΄ · Βιολογία · Μυοσκελετικό",subtitle:"Οστά, αρθρώσεις και μύες με μικρά διαδοχικά βήματα.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",sourceLabel:"ΥΠΑΙΘΑ · Βιολογία Β΄ Γυμνασίου Ε.Α.Ε. 2026–27",
+    captions:["Ο σκελετός στηρίζει το σώμα.","Οι αρθρώσεις συνδέουν οστά και επιτρέπουν κίνηση.","Οι μύες ασκούν δύναμη όταν συσπώνται.","Συχνά δύο μύες λειτουργούν ανταγωνιστικά.","Οστά, αρθρώσεις και μύες συνεργάζονται."],phases:standardAePhases(true),
+    questions:["Τι συνδέουν οι αρθρώσεις;","Τι κάνουν οι μύες όταν συσπώνται;"]
+  },
+  "special-gym-b-buoyancy":{
+    context:"specialGym",grade:"b",subjectTerms:["φυσικη","physics"],unitTerms:["4 5 ανωση αρχη του αρχιμηδη","ανωση αρχη του αρχιμηδη","ανωση"],visual:"phys-buoyancy",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Γυμνάσιο Β΄ · Φυσική · Άνωση",subtitle:"Βάρος και άνωση σε ένα σώμα μέσα σε υγρό.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",sourceLabel:"ΥΠΑΙΘΑ · Φυσική Β΄ Γυμνασίου Ε.Α.Ε. 2026–27",
+    captions:["Το βάρος δρα προς τα κάτω.","Το υγρό ασκεί άνωση προς τα πάνω.","Η άνωση συνδέεται με το υγρό που εκτοπίζει το σώμα.","Άνωση και βάρος μπορεί να ισορροπούν.","Η αρχή του Αρχιμήδη εξηγεί το μέγεθος της άνωσης."],phases:standardAePhases(true),
+    questions:["Προς τα πού δρα η άνωση;","Ποια δύναμη δρα προς τα κάτω;"]
+  },
+  "special-gym-c-oscillation":{
+    context:"specialGym",grade:"c",subjectTerms:["φυσικη","physics"],unitTerms:["4 2 μεγεθη που χαρακτηριζουν μια ταλαντωση","μεγεθη που χαρακτηριζουν μια ταλαντωση"],visual:"phys-pendulum",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Γυμνάσιο Γ΄ · Φυσική · Ταλάντωση",subtitle:"Θέση ισορροπίας, πλάτος και περίοδος με ένα εκκρεμές.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",sourceLabel:"ΥΠΑΙΘΑ · Φυσική Γ΄ Γυμνασίου Ε.Α.Ε. 2026–27",
+    captions:["Η ταλάντωση γίνεται γύρω από θέση ισορροπίας.","Το σώμα περνά ξανά από τη θέση ισορροπίας.","Πλάτος είναι η μέγιστη απομάκρυνση.","Περίοδος είναι ο χρόνος μίας πλήρους ταλάντωσης.","Με αυτά τα μεγέθη περιγράφουμε την κίνηση."],phases:standardAePhases(true),
+    questions:["Τι είναι πλάτος;","Τι είναι περίοδος;"]
+  },
+  "special-gym-c-waves":{
+    context:"specialGym",grade:"c",subjectTerms:["φυσικη","physics"],unitTerms:["5 1 μηχανικα κυματα","μηχανικα κυματα"],visual:"phys-wave",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Γυμνάσιο Γ΄ · Φυσική · Μηχανικά κύματα",subtitle:"Η διαταραχή ταξιδεύει, το μέσο ταλαντώνεται.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",sourceLabel:"ΥΠΑΙΘΑ · Φυσική Γ΄ Γυμνασίου Ε.Α.Ε. 2026–27",
+    captions:["Το μηχανικό κύμα χρειάζεται υλικό μέσο.","Η διαταραχή προχωρά από σημείο σε σημείο.","Τα σημεία του μέσου ταλαντώνονται.","Το κύμα μεταφέρει ενέργεια χωρίς συνολική μεταφορά ύλης.","Πλάτος, μήκος κύματος και συχνότητα περιγράφουν το κύμα."],phases:standardAePhases(true),
+    questions:["Τι χρειάζεται ένα μηχανικό κύμα;","Τι μεταφέρει το κύμα;"]
+  },
+  "special-lyc-a-circulation":{
+    context:"specialLyc",grade:"a",subjectTerms:["βιολογια","biology"],unitTerms:["κεφαλαιο 3 κυκλοφορικο συστημα η κυκλοφορια του αιματος","η κυκλοφορια του αιματος"],visual:"bio-circulation",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Λύκειο Α΄ · Βιολογία · Κυκλοφορία αίματος",subtitle:"Καρδιά, αρτηρίες, τριχοειδή και φλέβες.",
+    sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",sourceLabel:"ΙΕΠ · Βιολογία Α΄ Λυκείου Ε.Α.Ε. 2026–27",
+    captions:["Η καρδιά λειτουργεί ως αντλία.","Οι αρτηρίες μεταφέρουν αίμα μακριά από την καρδιά.","Στα τριχοειδή γίνονται ανταλλαγές με τους ιστούς.","Οι φλέβες επιστρέφουν το αίμα προς την καρδιά.","Πνευμονική και συστηματική κυκλοφορία συνεργάζονται."],phases:standardAePhases(true),
+    questions:["Ποια αγγεία απομακρύνουν αίμα από την καρδιά;","Πού γίνονται πολλές ανταλλαγές;"]
+  },
+  "special-lyc-b-immunity":{
+    context:"specialLyc",grade:"b",subjectTerms:["βιολογια","biology"],unitTerms:["1 3 2 μηχανισμοι ειδικης αμυνας ανοσια","μηχανισμοι ειδικης αμυνας ανοσια"],visual:"bio-defense",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Λύκειο Β΄ · Βιολογία · Ειδική άμυνα",subtitle:"Αντιγόνο, αντισώματα και ανοσολογική μνήμη.",
+    sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",sourceLabel:"ΙΕΠ · Βιολογία Β΄ Λυκείου Ε.Α.Ε. 2026–27",
+    captions:["Η ειδική άμυνα αναγνωρίζει συγκεκριμένα αντιγόνα.","Ειδικά κύτταρα ενεργοποιούνται μετά την αναγνώριση.","Τα αντισώματα συνδέονται ειδικά με αντιγόνα.","Μετά την απόκριση μπορούν να μείνουν κύτταρα μνήμης.","Η μνήμη βοηθά σε ταχύτερη επόμενη απόκριση."],phases:standardAePhases(true),
+    questions:["Τι αναγνωρίζει η ειδική άμυνα;","Τι προσφέρει η ανοσολογική μνήμη;"]
+  },
+  "special-lyc-c-genetics":{
+    context:"specialLyc",grade:"c",subjectTerms:["βιολογια","biology"],unitTerms:["τευχος β κεφαλαιο 1 το γενετικο υλικο ολες οι παραγραφοι","κεφαλαιο 1 το γενετικο υλικο"],visual:"bio-genetics",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ειδικό Λύκειο Γ΄ · Βιολογία · Γενετικό υλικό",subtitle:"Πυρήνας, χρωμόσωμα, DNA και γονίδιο.",
+    sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",sourceLabel:"ΙΕΠ · Βιολογία Γ΄ Λυκείου Ε.Α.Ε. 2026–27",
+    captions:["Το γενετικό υλικό αποθηκεύει βιολογική πληροφορία.","Στα ευκαρυωτικά κύτταρα πολύ DNA βρίσκεται στον πυρήνα.","Το DNA οργανώνεται σε χρωμοσώματα.","Γονίδιο είναι συγκεκριμένο τμήμα DNA.","Η οργάνωση βοηθά στην αντιγραφή και μεταβίβαση της πληροφορίας."],phases:standardAePhases(true),
+    questions:["Πού βρίσκεται πολύ από το DNA;","Τι είναι γονίδιο;"]
+  },
+  "gel-a-uniform-motion":{
+    context:"gel",grade:"a",subjectTerms:["φυσικη","physics"],unitTerms:["1 1 5 ταχυτητα στην ευθυγραμμη ομαλη κινηση","ταχυτητα στην ευθυγραμμη ομαλη κινηση"],visual:"phys-motion",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Α΄ Λυκείου · Φυσική · Ευθύγραμμη ομαλή κίνηση",subtitle:"Σταθερή ταχύτητα και ίσες μετατοπίσεις σε ίσους χρόνους.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",sourceLabel:"ΥΠΑΙΘΑ · Εξεταστέα ύλη ΓΕΛ 2026–27",
+    captions:["Η ταχύτητα παραμένει σταθερή.","Σε ίσους χρόνους έχουμε ίσες μετατοπίσεις.","Η θέση μεταβάλλεται γραμμικά με τον χρόνο.","Η κλίση της θέσης–χρόνου συνδέεται με την ταχύτητα.","Μεγαλύτερη ταχύτητα δίνει μεγαλύτερη μετατόπιση στον ίδιο χρόνο."],phases:standardAePhases(false),
+    questions:["Τι παραμένει σταθερό;","Τι δείχνει η κλίση στη γραφική θέση–χρόνος;"]
+  },
+  "gel-a-newton2":{
+    context:"gel",grade:"a",subjectTerms:["φυσικη","physics"],unitTerms:["1 2 4 δευτερος νομος του νευτωνα","δευτερος νομος του νευτωνα"],visual:"phys-forces",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Α΄ Λυκείου · Φυσική · 2ος νόμος Νεύτωνα",subtitle:"Συνισταμένη δύναμη, μάζα και επιτάχυνση.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",sourceLabel:"ΥΠΑΙΘΑ · Εξεταστέα ύλη ΓΕΛ 2026–27",
+    captions:["Μη μηδενική συνισταμένη δύναμη αλλάζει την κίνηση.","Η επιτάχυνση έχει κατεύθυνση της συνισταμένης.","Με ίδια μάζα, μεγαλύτερη δύναμη δίνει μεγαλύτερη επιτάχυνση.","Με ίδια δύναμη, μεγαλύτερη μάζα δίνει μικρότερη επιτάχυνση.","Η σχέση είναι ΣF=m·a."],phases:standardAePhases(false),
+    questions:["Προς τα πού έχει κατεύθυνση η επιτάχυνση;","Τι κάνει η μεγαλύτερη μάζα με ίδια δύναμη;"]
+  },
+  "gel-a-periodic":{
+    context:"gel",grade:"a",subjectTerms:["χημεια","chemistry"],unitTerms:["2 2 περιοδικος πινακας","περιοδικος πινακας"],visual:"chem-periodic",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Α΄ Λυκείου · Χημεία · Περιοδικός πίνακας",subtitle:"Περίοδοι, ομάδες και περιοδικότητα.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",sourceLabel:"ΥΠΑΙΘΑ · Εξεταστέα ύλη ΓΕΛ 2026–27",
+    captions:["Τα στοιχεία ταξινομούνται με βάση τον ατομικό αριθμό.","Οι οριζόντιες σειρές είναι περίοδοι.","Οι κατακόρυφες στήλες είναι ομάδες.","Στοιχεία ίδιας ομάδας συχνά έχουν συγγενείς ιδιότητες.","Η περιοδικότητα βοηθά στην πρόβλεψη τάσεων."],phases:standardAePhases(false),
+    questions:["Πώς λέγονται οι κατακόρυφες στήλες;","Με βάση ποιον αριθμό ταξινομούνται τα στοιχεία;"]
+  },
+  "gel-a-circulation":{
+    context:"gel",grade:"a",subjectTerms:["βιολογια","biology"],unitTerms:["κυκλοφορικο συστημα αιμα καρδια και αγγεια","κυκλοφορικο συστημα"],visual:"bio-circulation",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Α΄ Λυκείου · Βιολογία · Κυκλοφορικό",subtitle:"Η διαδρομή του αίματος μέσα από καρδιά και αγγεία.",
+    sourceUrl:"https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/",sourceLabel:"Οδηγίες Βιολογίας Α΄ Λυκείου 2026–27",
+    captions:["Η καρδιά κινεί το αίμα.","Οι αρτηρίες μεταφέρουν αίμα από την καρδιά.","Στα τριχοειδή γίνονται ανταλλαγές.","Οι φλέβες επιστρέφουν αίμα προς την καρδιά.","Η κυκλοφορία λειτουργεί ως συνεχές δίκτυο μεταφοράς."],phases:standardAePhases(false),
+    questions:["Πού γίνονται πολλές ανταλλαγές;","Τι κάνουν οι φλέβες;"]
+  },
+  "gel-a-linear":{
+    context:"gel",grade:"a",subjectTerms:["αλγεβρα","μαθηματικ","math"],unitTerms:["6 3 η συναρτηση f x αx β","η συναρτηση f x αx β","f x αx β"],visual:"math-linear",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Α΄ Λυκείου · Άλγεβρα · f(x)=αx+β",subtitle:"Κλίση και τομή με τον άξονα y.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",sourceLabel:"ΥΠΑΙΘΑ · Εξεταστέα ύλη ΓΕΛ 2026–27",
+    captions:["Η γραφική παράσταση είναι ευθεία.","Το α καθορίζει την κλίση.","Αν α>0 η ευθεία ανεβαίνει, αν α<0 κατεβαίνει.","Το β είναι η τιμή f(0), δηλαδή η τομή με τον άξονα y.","Αλλάζοντας α και β αλλάζει η ευθεία."],phases:standardAePhases(false),
+    questions:["Τι καθορίζει το α;","Τι εκφράζει το β;"]
+  },
+  "gel-b-immunity":{
+    context:"gel",grade:"b",subjectTerms:["βιολογια","biology"],unitTerms:["ειδικη αμυνα και ανοσια","αντισωματα αντιγονα και ανοσολογικη μνημη"],visual:"bio-defense",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Β΄ Λυκείου · Βιολογία · Ανοσία",subtitle:"Ειδική αναγνώριση, αντισώματα και μνήμη.",
+    sourceUrl:"https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",sourceLabel:"ΥΠΑΙΘΑ · Εξεταστέα ύλη ΓΕΛ 2026–27",
+    captions:["Η ειδική άμυνα στοχεύει συγκεκριμένα αντιγόνα.","Ενεργοποιούνται ειδικά κύτταρα.","Τα αντισώματα συνδέονται ειδικά με αντιγόνα.","Μπορούν να παραμείνουν κύτταρα μνήμης.","Η επόμενη απόκριση μπορεί να είναι ταχύτερη."],phases:standardAePhases(false),
+    questions:["Με τι συνδέονται τα αντισώματα;","Τι κάνουν τα κύτταρα μνήμης;"]
+  },
+  "primary-a-compare":{
+    context:"primary",grade:"a",subjectTerms:["μαθηματικ","math"],unitTerms:["αριθμοι και συγκριση ποσοτητων","συγκριση ποσοτητων"],visual:"primary-compare",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Α΄ Δημοτικού · Μαθηματικά · Σύγκριση",subtitle:"Μετρώ και συγκρίνω: περισσότερο, λιγότερο ή ίσο.",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Μετράμε κάθε ομάδα.","Βάζουμε τα αντικείμενα σε καθαρή σειρά.","Περισσότερα αντικείμενα σημαίνουν μεγαλύτερο αριθμό.","Ίδιο πλήθος σημαίνει ίσες ποσότητες.","Πρώτα μετρώ και μετά συγκρίνω."],phases:standardAePhases(true),
+    questions:["Τι κάνουμε πριν συγκρίνουμε;","Πότε δύο ποσότητες είναι ίσες;"]
+  },
+  "primary-a-living":{
+    context:"primary",grade:"a",subjectTerms:["μελετη περιβαλλοντος","science","environment"],unitTerms:["ζωντανο και μη ζωντανο"],visual:"primary-living",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Α΄ Δημοτικού · Μελέτη Περιβάλλοντος · Ζωντανό/μη ζωντανό",subtitle:"Παρατηρώ βασικά χαρακτηριστικά των ζωντανών οργανισμών.",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Φυτά και ζώα είναι ζωντανοί οργανισμοί.","Χρειάζονται νερό και κατάλληλες συνθήκες.","Μεγαλώνουν και αλλάζουν.","Μια πέτρα δεν τρέφεται και δεν μεγαλώνει από μόνη της.","Κοιτάμε περισσότερα από ένα χαρακτηριστικά."],phases:standardAePhases(true),
+    questions:["Πες ένα γνώρισμα ζωντανού οργανισμού.","Είναι μια πέτρα ζωντανή;"]
+  },
+  "primary-b-place-value":{
+    context:"primary",grade:"b",subjectTerms:["μαθηματικ","math"],unitTerms:["θεσιακη αξια και συγκριση αριθμων","θεσιακη αξια"],visual:"primary-place-value",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Β΄ Δημοτικού · Μαθηματικά · Θεσιακή αξία",subtitle:"Δεκάδες και μονάδες χτίζουν τον αριθμό.",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Το 34 έχει 3 δεκάδες και 4 μονάδες.","Μία δεκάδα είναι 10 μονάδες.","Η θέση του ψηφίου αλλάζει την αξία του.","Το 34 δεν είναι ίδιο με το 43.","Συγκρίνω πρώτα τις δεκάδες."],phases:standardAePhases(true),
+    questions:["Πόσες δεκάδες έχει το 34;","Τι κοιτάμε πρώτα όταν συγκρίνουμε διψήφιους;"]
+  },
+  "primary-c-fraction":{
+    context:"primary",grade:"c",subjectTerms:["μαθηματικ","math"],unitTerms:["κλασμα ως μερος του ολου","κλασμα"],visual:"primary-fraction",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Γ΄ Δημοτικού · Μαθηματικά · Κλάσμα",subtitle:"Χωρίζω ένα όλο σε ίσα μέρη.",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Το κλάσμα περιγράφει ίσα μέρη ενός όλου.","Ο παρονομαστής δείχνει σε πόσα ίσα μέρη χωρίστηκε το όλο.","Ο αριθμητής δείχνει πόσα μέρη παίρνουμε.","Στο 3/4 παίρνουμε 3 από 4 ίσα μέρη.","Τα μέρη πρέπει να είναι ίσα."],phases:standardAePhases(true),
+    questions:["Τι δείχνει ο παρονομαστής;","Τι δείχνει ο αριθμητής;"]
+  },
+  "primary-d-area":{
+    context:"primary",grade:"d",subjectTerms:["μαθηματικ","math"],unitTerms:["περιμετρος εμβαδον και δεδομενα","περιμετρος εμβαδον","εμβαδον"],visual:"primary-area",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Δ΄ Δημοτικού · Μαθηματικά · Περίμετρος και εμβαδόν",subtitle:"Γύρω από το σχήμα ή μέσα στο σχήμα;",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Η περίμετρος μετρά το μήκος γύρω από το σχήμα.","Προσθέτουμε τις πλευρές για να βρούμε περίμετρο.","Το εμβαδόν μετρά την επιφάνεια μέσα στο σχήμα.","Στο ορθογώνιο εμβαδόν = μήκος × πλάτος.","Περίμετρος και εμβαδόν είναι διαφορετικές μετρήσεις."],phases:standardAePhases(true),
+    questions:["Τι μετρά η περίμετρος;","Τι μετρά το εμβαδόν;"]
+  },
+  "primary-e-frac-decimal":{
+    context:"primary",grade:"e",subjectTerms:["μαθηματικ","math"],unitTerms:["κλασματα και δεκαδικοι"],visual:"primary-frac-decimal",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"Ε΄ Δημοτικού · Μαθηματικά · Κλάσματα και δεκαδικοί",subtitle:"Διαφορετικές γραφές της ίδιας ποσότητας.",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Το 1/2 είναι το μισό.","Το ίδιο μισό μπορεί να γραφτεί 5/10.","Το 5/10 γράφεται και 0,5.","Άρα 1/2 = 5/10 = 0,5.","Η αριθμογραμμή βοηθά να ελέγξουμε την ισοδυναμία."],phases:standardAePhases(true),
+    questions:["Με ποιον δεκαδικό ισούται το 1/2;","Γιατί 1/2 και 5/10 είναι ισοδύναμα;"]
+  },
+  "primary-st-percent":{
+    context:"primary",grade:"st",subjectTerms:["μαθηματικ","math"],unitTerms:["κλασματα δεκαδικοι και ποσοστα","ποσοστα"],visual:"primary-percent",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"ΣΤ΄ Δημοτικού · Μαθηματικά · Ποσοστά",subtitle:"Κλάσμα, δεκαδικός και ποσοστό μπορούν να είναι η ίδια ποσότητα.",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Το ποσοστό δείχνει μέρη στα 100.","25% σημαίνει 25/100.","25/100 απλοποιείται σε 1/4.","25/100 γράφεται 0,25.","Άρα 25% = 1/4 = 0,25."],phases:standardAePhases(true),
+    questions:["Τι σημαίνει 25%;","Με ποιο κλάσμα ισούται το 25%;"]
+  },
+  "primary-st-electricity":{
+    context:"primary",grade:"st",subjectTerms:["φυσικες επιστημες","science"],unitTerms:["ηλεκτρισμος και ασφαλεια","ηλεκτρισμος"],visual:"primary-electricity",
+    title:"🎬 Κινούμενη εξήγηση",topicLabel:"ΣΤ΄ Δημοτικού · Φυσικές Επιστήμες · Ηλεκτρισμός",subtitle:"Απλό κύκλωμα και βασικοί κανόνες ασφάλειας.",
+    sourceUrl:"https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",sourceLabel:"ΥΠΑΙΘΑ · Οδηγίες Δημοτικού 2026–27",
+    captions:["Ένα απλό κύκλωμα έχει πηγή, αγωγούς και συσκευή.","Το λαμπάκι ανάβει όταν το κύκλωμα είναι κλειστό.","Αν υπάρχει διακοπή, το λαμπάκι σβήνει.","Δεν αγγίζουμε πρίζες ή γυμνά καλώδια.","Στο σχολείο χρησιμοποιούμε μόνο ασφαλείς χαμηλές τάσεις με οδηγίες εκπαιδευτικού."],phases:standardAePhases(true),
+    questions:["Πότε ανάβει το λαμπάκι;","Τι δεν αγγίζουμε ποτέ στο σπίτι;"]
   }
 };
 function byId(id){return document.getElementById(id);}
@@ -1619,6 +1779,103 @@ function polymerisationSvgMarkup(){
   return baseSceneSvg("Πολυμερισμός και πλαστικά","Σύνδεση μονομερών σε πολυμερή και σχέση δομής, ιδιοτήτων και χρήσης.",scenes);
 }
 
+
+function circulationSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="44" text-anchor="middle" font-size="22" font-weight="900" fill="#a33f3f">Η καρδιά είναι αντλία</text><path d="M380 270 C245 180 285 80 355 128 C388 72 485 105 470 190 C460 235 420 260 380 290 C340 260 300 235 290 190" fill="#ffd9d9" stroke="#c95151" stroke-width="5"/><g class="ae-pulse"><path d="M380 145 V235" stroke="#c95151" stroke-width="8"/></g></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="44" text-anchor="middle" font-size="22" font-weight="900" fill="#a33f3f">Αρτηρίες: από την καρδιά</text><path d="M155 185 H600" stroke="#c95151" stroke-width="18" stroke-linecap="round"/><g class="ae-drift-right"><circle cx="270" cy="185" r="11" fill="#fff"/><circle cx="390" cy="185" r="11" fill="#fff"/><circle cx="510" cy="185" r="11" fill="#fff"/></g><polygon points="625,185 595,168 595,202" fill="#c95151"/></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="44" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">Τριχοειδή: ανταλλαγές</text><path d="M150 170 C250 95 300 250 380 170 C460 90 520 245 610 170" fill="none" stroke="#7b54c7" stroke-width="8"/><circle cx="300" cy="112" r="28" fill="#eef7f3"/><circle cx="475" cy="250" r="28" fill="#eef7f3"/><g class="ae-pulse"><path d="M300 142 V180 M475 220 V185" stroke="#4d9cbb" stroke-width="6"/></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="44" text-anchor="middle" font-size="22" font-weight="900" fill="#23637f">Φλέβες: προς την καρδιά</text><path d="M600 185 H160" stroke="#4d9cbb" stroke-width="18" stroke-linecap="round"/><g class="ae-drift-left"><circle cx="500" cy="185" r="11" fill="#fff"/><circle cx="385" cy="185" r="11" fill="#fff"/><circle cx="270" cy="185" r="11" fill="#fff"/></g><polygon points="135,185 165,168 165,202" fill="#4d9cbb"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="42" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Συνεχής κυκλοφορία</text><circle cx="380" cy="180" r="50" fill="#ffd9d9" stroke="#c95151" stroke-width="4"/><path d="M330 165 C185 85 120 180 220 255 C275 295 325 245 335 215" fill="none" stroke="#4d9cbb" stroke-width="9"/><path d="M430 165 C575 85 640 180 540 255 C485 295 435 245 425 215" fill="none" stroke="#c95151" stroke-width="9"/></g>'
+  ];return baseSceneSvg("Κυκλοφορικό σύστημα","Καρδιά, αρτηρίες, τριχοειδή και φλέβες.",scenes);
+}
+function linearFunctionSvgMarkup(){
+  var axes='<path d="M110 280 H670 M380 320 V55" stroke="#657887" stroke-width="3"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">f(x)=αx+β</text>'+axes+'<path d="M155 245 L610 90" stroke="#4d9cbb" stroke-width="6"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#60429e">α = κλίση</text>'+axes+'<path d="M150 245 L610 90" stroke="#7b54c7" stroke-width="6"/><path d="M150 215 L610 145" stroke="#b49bdc" stroke-width="5"/></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">α&gt;0 / α&lt;0</text>'+axes+'<path d="M150 245 L610 90" stroke="#2e6f5e" stroke-width="6"/><path d="M150 90 L610 245" stroke="#c95151" stroke-width="6"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#8a5310">β = f(0)</text>'+axes+'<path d="M155 250 L610 100" stroke="#d59235" stroke-width="6"/><circle cx="380" cy="176" r="10" fill="#c95151"/><text x="402" y="166" font-size="16" font-weight="900" fill="#a33f3f">(0,β)</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="38" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">Διαφορετικά α,β → διαφορετικές ευθείες</text>'+axes+'<path d="M150 260 L610 115" stroke="#4d9cbb" stroke-width="5"/><path d="M150 190 L610 105" stroke="#7b54c7" stroke-width="5"/><path d="M150 80 L610 260" stroke="#d59235" stroke-width="5"/></g>'
+  ];return baseSceneSvg("Γραμμική συνάρτηση","Κλίση και τομή για f(x)=αx+β.",scenes);
+}
+function primaryCompareSvgMarkup(){
+  function dots(n,y,x0){var s="";for(var i=0;i<n;i++)s+='<circle cx="'+(x0+i*52)+'" cy="'+y+'" r="20" fill="#e86060" stroke="#a33f3f" stroke-width="3"/>';return s;}
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#173f63">Μετράω κάθε ομάδα</text>'+dots(3,170,150)+dots(4,170,450)+'<text x="200" y="245" font-size="28" font-weight="900">3</text><text x="525" y="245" font-size="28" font-weight="900">4</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#60429e">Τα βάζω σε σειρά</text>'+dots(3,145,220)+dots(4,235,220)+'</g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">4 είναι περισσότερο από 3</text><text x="380" y="200" text-anchor="middle" font-size="58" font-weight="900" fill="#24594c">4 &gt; 3</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#23637f">Ίσες ποσότητες</text>'+dots(3,145,220)+dots(3,235,220)+'<text x="570" y="200" text-anchor="middle" font-size="44" font-weight="900" fill="#23637f">3 = 3</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#8a5310">Μετρώ → συγκρίνω</text><circle cx="285" cy="185" r="70" fill="#fff8e8"/><text x="285" y="195" text-anchor="middle" font-size="36" font-weight="900">5</text><path d="M370 185 H450" stroke="#657887" stroke-width="5"/><circle cx="545" cy="185" r="70" fill="#eef7f3"/><text x="545" y="195" text-anchor="middle" font-size="36" font-weight="900">?</text></g>'
+  ];return baseSceneSvg("Σύγκριση ποσοτήτων","Μέτρηση και σύγκριση ομάδων.",scenes);
+}
+function primaryLivingSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">Ζωντανοί οργανισμοί</text><path d="M230 280 V150" stroke="#2e6f5e" stroke-width="10"/><circle cx="230" cy="125" r="45" fill="#83c5a5"/><circle cx="530" cy="185" r="60" fill="#ffd9a8"/><circle cx="510" cy="170" r="6" fill="#425466"/><circle cx="550" cy="170" r="6" fill="#425466"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#23637f">Χρειάζονται νερό και συνθήκες</text><g class="ae-drop"><path d="M230 115 Q255 155 230 190 Q205 155 230 115" fill="#82c9e6"/></g><circle cx="520" cy="180" r="60" fill="#ffe27a"/><text x="520" y="190" text-anchor="middle" font-size="20" font-weight="900">φως</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">Μεγαλώνουν και αλλάζουν</text><path d="M220 275 Q245 210 275 255" fill="none" stroke="#2e6f5e" stroke-width="8"/><path d="M450 285 Q490 115 550 245" fill="none" stroke="#2e6f5e" stroke-width="12"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#425466">Μη ζωντανό</text><path d="M260 245 L330 110 L455 105 L525 245 Z" fill="#aeb8c2" stroke="#657887" stroke-width="5"/><text x="390" y="305" text-anchor="middle" font-size="18" font-weight="900">πέτρα</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#60429e">Κοιτάω πολλά χαρακτηριστικά</text><rect x="150" y="120" width="460" height="150" rx="20" fill="#faf7ff" stroke="#7b54c7" stroke-width="4"/><text x="380" y="165" text-anchor="middle" font-size="18" font-weight="900">χρειάζεται πόρους;</text><text x="380" y="205" text-anchor="middle" font-size="18" font-weight="900">μεγαλώνει;</text><text x="380" y="245" text-anchor="middle" font-size="18" font-weight="900">αλλάζει στη ζωή του;</text></g>'
+  ];return baseSceneSvg("Ζωντανό και μη ζωντανό","Βασικά χαρακτηριστικά των ζωντανών οργανισμών.",scenes);
+}
+function primaryPlaceValueSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#173f63">34 = 3 δεκάδες + 4 μονάδες</text><rect x="220" y="115" width="35" height="170" fill="#4d9cbb"/><rect x="275" y="115" width="35" height="170" fill="#4d9cbb"/><rect x="330" y="115" width="35" height="170" fill="#4d9cbb"/><circle cx="450" cy="150" r="16" fill="#d59235"/><circle cx="500" cy="150" r="16" fill="#d59235"/><circle cx="450" cy="215" r="16" fill="#d59235"/><circle cx="500" cy="215" r="16" fill="#d59235"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#23637f">1 δεκάδα = 10 μονάδες</text><rect x="210" y="110" width="40" height="180" fill="#4d9cbb"/><text x="380" y="205" text-anchor="middle" font-size="38" font-weight="900">= 10</text><circle cx="515" cy="185" r="18" fill="#d59235"/></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#60429e">Η θέση αλλάζει την αξία</text><text x="270" y="210" text-anchor="middle" font-size="60" font-weight="900" fill="#23637f">34</text><text x="500" y="210" text-anchor="middle" font-size="60" font-weight="900" fill="#8a5310">43</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">34 ≠ 43</text><text x="380" y="205" text-anchor="middle" font-size="58" font-weight="900" fill="#24594c">34 ≠ 43</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">Συγκρίνω πρώτα τις δεκάδες</text><text x="380" y="205" text-anchor="middle" font-size="58" font-weight="900" fill="#24594c">38 &lt; 42</text></g>'
+  ];return baseSceneSvg("Θεσιακή αξία","Δεκάδες, μονάδες και σύγκριση αριθμών.",scenes);
+}
+function primaryFractionSvgMarkup(){
+  function q(active){var s="";for(var i=0;i<4;i++)s+='<rect x="'+(180+i*100)+'" y="135" width="100" height="120" fill="'+(i<active?'#83c5a5':'#fff')+'" stroke="#2e6f5e" stroke-width="3"/>';return s;}
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900">Ένα όλο</text><rect x="220" y="120" width="320" height="150" rx="16" fill="#fff8e8" stroke="#d59235" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900">4 ίσα μέρη</text>'+q(0)+'</g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#60429e">Παρονομαστής = 4</text>'+q(0)+'<text x="380" y="320" text-anchor="middle" font-size="34" font-weight="900">□/4</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">Αριθμητής = 3</text>'+q(3)+'<text x="380" y="320" text-anchor="middle" font-size="34" font-weight="900">3/4</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#8a5310">Τα μέρη πρέπει να είναι ίσα</text><rect x="155" y="130" width="190" height="120" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><line x1="250" y1="130" x2="250" y2="250" stroke="#2e6f5e" stroke-width="4"/><rect x="440" y="130" width="190" height="120" fill="#fff1f1" stroke="#c95151" stroke-width="4"/><line x1="500" y1="130" x2="500" y2="250" stroke="#c95151" stroke-width="4"/></g>'
+  ];return baseSceneSvg("Κλάσμα ως μέρος του όλου","Ίσα μέρη, αριθμητής και παρονομαστής.",scenes);
+}
+function primaryAreaSvgMarkup(){
+  var grid="";for(var r=0;r<4;r++)for(var k=0;k<6;k++)grid+='<rect x="'+(235+k*48)+'" y="'+(105+r*48)+'" width="48" height="48" fill="#eef7f3" stroke="#8bb7a9" stroke-width="1.5"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900">Περίμετρος = γύρω γύρω</text><rect x="220" y="110" width="320" height="180" fill="#fff" stroke="#4d9cbb" stroke-width="10"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#23637f">Προσθέτω τις πλευρές</text><rect x="220" y="110" width="320" height="180" fill="#fff" stroke="#4d9cbb" stroke-width="5"/><text x="380" y="330" text-anchor="middle" font-size="20" font-weight="900">6+4+6+4</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">Εμβαδόν = μέσα στο σχήμα</text>'+grid+'</g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">6 × 4 = 24 τετραγωνικές μονάδες</text>'+grid+'</g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#60429e">Διαφορετικές μετρήσεις</text><circle cx="250" cy="185" r="85" fill="#eef6fc"/><text x="250" y="193" text-anchor="middle" font-size="18" font-weight="900">περίμετρος</text><circle cx="510" cy="185" r="85" fill="#eef7f3"/><text x="510" y="193" text-anchor="middle" font-size="18" font-weight="900">εμβαδόν</text></g>'
+  ];return baseSceneSvg("Περίμετρος και εμβαδόν","Περίγραμμα και επιφάνεια.",scenes);
+}
+function primaryFracDecimalSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900">1/2 = το μισό</text><rect x="220" y="120" width="320" height="150" fill="#fff"/><rect x="220" y="120" width="160" height="150" fill="#83c5a5"/><rect x="220" y="120" width="320" height="150" fill="none" stroke="#2e6f5e" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900">5/10 = το ίδιο μισό</text>'+Array.from({length:10},function(_,i){return '<rect x="'+(130+i*50)+'" y="140" width="50" height="100" fill="'+(i<5?'#83c5a5':'#fff')+'" stroke="#2e6f5e" stroke-width="2"/>';}).join("")+'</g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#23637f">5/10 = 0,5</text><text x="380" y="205" text-anchor="middle" font-size="64" font-weight="900" fill="#23637f">0,5</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#60429e">1/2 = 5/10 = 0,5</text><text x="380" y="205" text-anchor="middle" font-size="48" font-weight="900" fill="#60429e">½ = ⁵⁄₁₀ = 0,5</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#8a5310">Έλεγχος σε αριθμογραμμή</text><path d="M140 200 H620" stroke="#657887" stroke-width="5"/><path d="M140 185 V215 M380 185 V215 M620 185 V215" stroke="#657887" stroke-width="5"/><circle cx="380" cy="200" r="14" fill="#d59235"/></g>'
+  ];return baseSceneSvg("Κλάσματα και δεκαδικοί","Ισοδύναμες γραφές 1/2, 5/10 και 0,5.",scenes);
+}
+function primaryPercentSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900">Ποσοστό = μέρη στα 100</text><rect x="180" y="115" width="400" height="160" fill="#fff" stroke="#657887" stroke-width="3"/><rect x="180" y="115" width="100" height="160" fill="#83c5a5"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">25% = 25/100</text><text x="380" y="205" text-anchor="middle" font-size="56" font-weight="900">25% = 25/100</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#60429e">25/100 = 1/4</text><rect x="220" y="120" width="320" height="150" fill="#fff"/><rect x="220" y="120" width="80" height="150" fill="#e9ddf7"/><path d="M220 120 H540 V270 H220 Z M300 120 V270 M380 120 V270 M460 120 V270" fill="none" stroke="#7b54c7" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#23637f">25/100 = 0,25</text><text x="380" y="205" text-anchor="middle" font-size="64" font-weight="900">0,25</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#8a5310">25% = 1/4 = 0,25</text><text x="380" y="205" text-anchor="middle" font-size="52" font-weight="900">25% = ¼ = 0,25</text></g>'
+  ];return baseSceneSvg("Ποσοστά","Ποσοστό, κλάσμα και δεκαδικός.",scenes);
+}
+function primaryElectricitySvgMarkup(){
+  var closed='<rect x="180" y="115" width="400" height="170" rx="25" fill="#fff" stroke="#657887" stroke-width="5"/><rect x="165" y="175" width="30" height="50" fill="#fff8e8" stroke="#d59235" stroke-width="4"/><circle cx="580" cy="200" r="35" fill="#fff8d8" stroke="#d59235" stroke-width="4"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900">Απλό κύκλωμα</text>'+closed+'<text x="380" y="330" text-anchor="middle" font-size="17" font-weight="900">πηγή · αγωγοί · λαμπάκι</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">Κλειστό κύκλωμα → ανάβει</text>'+closed+'<g class="ae-pulse"><circle cx="580" cy="200" r="65" fill="#ffe27a" opacity=".45"/></g></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#a33f3f">Ανοιχτό κύκλωμα → σβήνει</text><path d="M180 115 H350 M410 115 H580 V285 H180 V115" fill="none" stroke="#657887" stroke-width="5"/><path d="M345 115 L405 80" stroke="#c95151" stroke-width="6"/><circle cx="580" cy="200" r="35" fill="#f3f4f6" stroke="#9aa9b5" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#a33f3f">Πρίζες και γυμνά καλώδια: ΟΧΙ</text><rect x="300" y="105" width="160" height="170" rx="25" fill="#f7f8fa" stroke="#657887" stroke-width="5"/><circle cx="345" cy="185" r="18" fill="#425466"/><circle cx="415" cy="185" r="18" fill="#425466"/><path d="M255 85 L505 300 M505 85 L255 300" stroke="#c95151" stroke-width="14"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="24" font-weight="900" fill="#24594c">Στο σχολείο: ασφαλές κύκλωμα</text><rect x="145" y="120" width="470" height="150" rx="22" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><text x="380" y="170" text-anchor="middle" font-size="18" font-weight="900">χαμηλή τάση</text><text x="380" y="210" text-anchor="middle" font-size="18" font-weight="900">σωστά υλικά</text><text x="380" y="250" text-anchor="middle" font-size="18" font-weight="900">οδηγίες εκπαιδευτικού</text></g>'
+  ];return baseSceneSvg("Ηλεκτρισμός και ασφάλεια","Κλειστό κύκλωμα και βασικοί κανόνες ασφάλειας.",scenes);
+}
+
 function svgMarkup(config){
   if(config.visual==="bio-transport-excretion")return transportExcretionSvgMarkup();
   if(config.visual==="bio-respiration")return respirationAsterSvgMarkup();
@@ -1632,6 +1889,16 @@ function svgMarkup(config){
   if(config.visual==="bio-mutations")return mutationsSvgMarkup();
   if(config.visual==="phys-pendulum")return pendulumSvgMarkup();
   if(config.visual==="chem-polymerisation")return polymerisationSvgMarkup();
+  if(config.visual==="bio-circulation")return circulationSvgMarkup();
+  if(config.visual==="math-linear")return linearFunctionSvgMarkup();
+  if(config.visual==="primary-compare")return primaryCompareSvgMarkup();
+  if(config.visual==="primary-living")return primaryLivingSvgMarkup();
+  if(config.visual==="primary-place-value")return primaryPlaceValueSvgMarkup();
+  if(config.visual==="primary-fraction")return primaryFractionSvgMarkup();
+  if(config.visual==="primary-area")return primaryAreaSvgMarkup();
+  if(config.visual==="primary-frac-decimal")return primaryFracDecimalSvgMarkup();
+  if(config.visual==="primary-percent")return primaryPercentSvgMarkup();
+  if(config.visual==="primary-electricity")return primaryElectricitySvgMarkup();
   if(config.visual==="chem-intro")return introSvgMarkup();
   if(config.visual==="states")return statesSvgMarkup();
   if(config.visual==="solution")return solutionSvgMarkup();
@@ -1690,7 +1957,7 @@ function renderExplanation(key,config){
     '<section class="animated-explanation" aria-labelledby="aeTitle">',
     '<div class="animated-explanation__head"><div><h3 id="aeTitle">'+config.title+'</h3><p>'+config.subtitle+'</p>'+(config.sourceUrl?'<a class="animated-explanation__source" href="'+config.sourceUrl+'" target="_blank" rel="noopener">Πηγή ύλης: '+config.sourceLabel+' ↗</a>':'')+'</div><span class="animated-explanation__topic">'+config.topicLabel+'</span></div>',
     '<div class="animated-explanation__stage" data-phase="0">',svgMarkup(config),'<div class="animated-explanation__caption" id="aeCaption" aria-live="polite" aria-atomic="true">'+config.captions[0]+'</div></div>',
-    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button><button type="button" data-ae-action="export">Λήψη WebM</button></div><p class="animated-explanation__export-status" data-ae-export-status role="status" aria-live="polite"></p><p class="animated-explanation__export-note">Η λήψη δημιουργείται τοπικά στον browser· δεν ανεβαίνει περιεχόμενο σε εξωτερική υπηρεσία.</p>',
+    '<div class="animated-explanation__controls" aria-label="Χειρισμός κινούμενης εξήγησης"><button type="button" data-ae-action="start">Έναρξη</button><button type="button" data-ae-action="pause" disabled>Παύση</button><button type="button" data-ae-action="restart">Ξανά</button><button type="button" data-ae-action="expand">Μεγέθυνση</button></div>',
     '<ol class="animated-explanation__progress" aria-label="Πρόοδος εξήγησης">',progressHtml,'</ol>',
     '<div class="animated-explanation__comprehension" data-ae-comprehension tabindex="-1" hidden><h4>Το κατάλαβες;</h4><ol>',questionsHtml,'</ol></div>',
     '<span class="animated-explanation__sr" data-ae-status role="status" aria-live="polite"></span>',
@@ -1703,14 +1970,12 @@ function renderExplanation(key,config){
   var pauseBtn=slot.querySelector('[data-ae-action="pause"]');
   var restartBtn=slot.querySelector('[data-ae-action="restart"]');
   var expandBtn=slot.querySelector('[data-ae-action="expand"]');
-  var exportBtn=slot.querySelector('[data-ae-action="export"]');
   var section=slot.querySelector(".animated-explanation");
   var comprehension=slot.querySelector("[data-ae-comprehension]");
   var status=slot.querySelector("[data-ae-status]");
-  var exportStatus=slot.querySelector("[data-ae-export-status]");
   var dots=Array.prototype.slice.call(slot.querySelectorAll("[data-caption-index]"));
 
-  var phase=0,running=false,finished=false,exporting=false,timer=null,remaining=config.phases[0].duration,startedAt=0,lastCaption=-1;
+  var phase=0,running=false,finished=false,timer=null,remaining=config.phases[0].duration,startedAt=0,lastCaption=-1;
 
   function visualAnimations(){
     try{return stage.getAnimations?stage.getAnimations({subtree:true}):[];}catch(_){return[];}
@@ -1734,24 +1999,11 @@ function renderExplanation(key,config){
     updateProgress(captionIndex);
     remaining=config.phases[index].duration;
   }
-  function exportMimeType(){
-    if(!window.MediaRecorder||!HTMLCanvasElement.prototype.captureStream)return "";
-    var types=["video/webm;codecs=vp9","video/webm;codecs=vp8","video/webm"];
-    for(var i=0;i<types.length;i++){
-      if(!MediaRecorder.isTypeSupported||MediaRecorder.isTypeSupported(types[i]))return types[i];
-    }
-    return "";
-  }
   function setButtons(){
-    startBtn.disabled=running||finished||exporting;
-    pauseBtn.disabled=!running||exporting;
-    restartBtn.disabled=exporting;
-    expandBtn.disabled=exporting;
-    exportBtn.disabled=exporting||!exportMimeType();
-    exportBtn.textContent=exporting?"Δημιουργία…":"Λήψη WebM";
-    exportBtn.setAttribute("aria-busy",exporting?"true":"false");
-    section.setAttribute("aria-busy",exporting?"true":"false");
-    exportBtn.title=exportMimeType()?"Αποθήκευση της κινούμενης εξήγησης ως WebM":"Ο browser δεν υποστηρίζει εξαγωγή WebM από canvas.";
+    startBtn.disabled=running||finished;
+    pauseBtn.disabled=!running;
+    restartBtn.disabled=false;
+    expandBtn.disabled=false;
   }
   function clearTimer(){
     if(timer){clearTimeout(timer);timer=null;}
@@ -1801,267 +2053,6 @@ function renderExplanation(key,config){
     status.textContent="Η εξήγηση ξεκίνησε από την αρχή.";
   }
 
-  function sleep(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
-  function canvasText(ctx,text,x,y,maxWidth,lineHeight){
-    var words=String(text||"").split(/\s+/),line="",lines=[];
-    words.forEach(function(word){
-      var test=line?line+" "+word:word;
-      if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word;}else line=test;
-    });
-    if(line)lines.push(line);
-    var startY=y-((lines.length-1)*lineHeight/2);
-    lines.forEach(function(row,i){ctx.fillText(row,x,startY+i*lineHeight);});
-  }
-  function exportFilename(){
-    var map={α:"a",β:"v",γ:"g",δ:"d",ε:"e",ζ:"z",η:"i",θ:"th",ι:"i",κ:"k",λ:"l",μ:"m",ν:"n",ξ:"x",ο:"o",π:"p",ρ:"r",σ:"s",ς:"s",τ:"t",υ:"y",φ:"f",χ:"ch",ψ:"ps",ω:"o"};
-    var slug=String(config.topicLabel||"kinoumeni-exigisi").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()
-      .replace(/[α-ω]/g,function(ch){return map[ch]||ch;})
-      .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,96);
-    return "aitools4kids-"+(slug||"kinoumeni-exigisi")+".webm";
-  }
-  function copyComputedSvgStyles(sourceSvg,cloneSvg){
-    var props=["display","visibility","opacity","transform","transform-origin","transform-box","fill","fill-opacity","stroke","stroke-opacity","stroke-width","stroke-linecap","stroke-linejoin","font-family","font-size","font-weight","font-style","letter-spacing","text-anchor"];
-    var src=[sourceSvg].concat(Array.prototype.slice.call(sourceSvg.querySelectorAll("*")));
-    var dst=[cloneSvg].concat(Array.prototype.slice.call(cloneSvg.querySelectorAll("*")));
-    for(var i=0;i<src.length&&i<dst.length;i++){
-      var style=getComputedStyle(src[i]);
-      props.forEach(function(prop){
-        var value=style.getPropertyValue(prop);
-        if(value)dst[i].style.setProperty(prop,value);
-      });
-    }
-  }
-  async function imageFromSvgBlob(blob){
-    return await new Promise(function(resolve,reject){
-      var url=URL.createObjectURL(blob),img=new Image();
-      var settled=false;
-      function cleanup(){URL.revokeObjectURL(url);}
-      img.onload=function(){if(settled)return;settled=true;cleanup();resolve(img);};
-      img.onerror=function(){if(settled)return;settled=true;cleanup();reject(new Error("svg-image-render"));};
-      img.src=url;
-    });
-  }
-  async function svgBitmapFromStage(exportStage){
-    var sourceSvg=exportStage.querySelector("svg");
-    if(!sourceSvg)throw new Error("svg-missing");
-    var clone=sourceSvg.cloneNode(true);
-    copyComputedSvgStyles(sourceSvg,clone);
-    clone.setAttribute("xmlns","http://www.w3.org/2000/svg");
-    clone.setAttribute("width","1000");
-    clone.setAttribute("height","474");
-    var blob=new Blob([new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml;charset=utf-8"});
-    try{
-      return await imageFromSvgBlob(blob);
-    }catch(imageError){
-      if(window.createImageBitmap){
-        try{return await createImageBitmap(blob);}catch(bitmapError){}
-      }
-      throw imageError;
-    }
-  }
-  async function paintExportFrame(ctx,canvas,exportStage,captionText){
-    ctx.fillStyle="#f8fbff";ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#173f63";ctx.font="700 31px system-ui, sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
-    canvasText(ctx,config.topicLabel,canvas.width/2,42,1160,36);
-    var bitmap=await svgBitmapFromStage(exportStage);
-    ctx.drawImage(bitmap,140,82,1000,474);
-    if(bitmap.close)bitmap.close();
-    ctx.fillStyle="#ffffff";ctx.fillRect(110,570,1060,112);
-    ctx.strokeStyle="#dbe6ef";ctx.lineWidth=2;ctx.strokeRect(110,570,1060,112);
-    ctx.fillStyle="#22313f";ctx.font="700 27px system-ui, sans-serif";
-    canvasText(ctx,captionText,canvas.width/2,626,990,34);
-    ctx.fillStyle="#52606d";ctx.font="500 17px system-ui, sans-serif";ctx.textAlign="right";
-    ctx.fillText("aitools4kids.gr",1150,704);
-  }
-  async function paintOutroFrame(ctx,canvas){
-    ctx.fillStyle="#f8fbff";ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#173f63";ctx.textAlign="center";ctx.textBaseline="middle";
-    ctx.font="800 34px system-ui, sans-serif";
-    canvasText(ctx,config.topicLabel,canvas.width/2,82,1110,40);
-    ctx.fillStyle="#24594c";ctx.font="800 21px system-ui, sans-serif";
-    ctx.fillText("Τελικός έλεγχος κατανόησης",canvas.width/2,142);
-    ctx.fillStyle="#ffffff";ctx.strokeStyle="#dbe6ef";ctx.lineWidth=2;
-    ctx.fillRect(120,185,1040,135);ctx.strokeRect(120,185,1040,135);
-    ctx.fillRect(120,345,1040,135);ctx.strokeRect(120,345,1040,135);
-    ctx.fillStyle="#22313f";ctx.font="700 25px system-ui, sans-serif";
-    canvasText(ctx,"1. "+(config.questions[0]||""),canvas.width/2,252,930,33);
-    canvasText(ctx,"2. "+(config.questions[1]||""),canvas.width/2,412,930,33);
-    ctx.fillStyle="#52606d";ctx.font="600 19px system-ui, sans-serif";
-    canvasText(ctx,"Πηγή ύλης: "+(config.sourceLabel||"Διαδραστικά Σχολικά Βιβλία"),canvas.width/2,550,1000,28);
-    ctx.fillStyle="#173f63";ctx.font="700 20px system-ui, sans-serif";
-    ctx.fillText("aitools4kids.gr",canvas.width/2,650);
-  }
-  function createWebMRecorder(stream,mime){
-    var attempts=[
-      {mimeType:mime,videoBitsPerSecond:3200000},
-      {mimeType:mime},
-      {videoBitsPerSecond:3200000},
-      {}
-    ];
-    var lastError=null;
-    for(var i=0;i<attempts.length;i++){
-      try{return new MediaRecorder(stream,attempts[i]);}catch(error){lastError=error;}
-    }
-    throw lastError||new Error("media-recorder-init");
-  }
-  function fixWebmDurationBlob(blob,durationMs){
-    return new Promise(function(resolve,reject){
-      if(typeof window.ysFixWebmDuration!=="function"){
-        reject(new Error("webm-duration-fixer-unavailable"));
-        return;
-      }
-      var settled=false;
-      function done(value){
-        if(settled)return;
-        settled=true;
-        if(value&&value.size)resolve(value);
-        else reject(new Error("webm-duration-fix-empty"));
-      }
-      try{
-        var maybe=window.ysFixWebmDuration(blob,durationMs,function(fixedBlob){done(fixedBlob);},{logger:false});
-        if(maybe&&typeof maybe.then==="function"){
-          maybe.then(done).catch(function(error){if(!settled){settled=true;reject(error);}});
-        }
-      }catch(error){
-        if(!settled){settled=true;reject(error);}
-      }
-    });
-  }
-  function verifyVideoDuration(blob,expectedMs){
-    return new Promise(function(resolve,reject){
-      var video=document.createElement("video");
-      var url=URL.createObjectURL(blob);
-      var timeout=setTimeout(function(){cleanup();reject(new Error("webm-metadata-timeout"));},6000);
-      function cleanup(){
-        clearTimeout(timeout);
-        video.removeAttribute("src");
-        try{video.load();}catch(_){}
-        URL.revokeObjectURL(url);
-      }
-      video.preload="metadata";
-      video.muted=true;
-      video.onloadedmetadata=function(){
-        var seconds=video.duration;
-        cleanup();
-        var minSeconds=Math.max(1,(expectedMs/1000)*0.75);
-        if(!Number.isFinite(seconds)||seconds<minSeconds){
-          reject(new Error("webm-duration-invalid"));
-          return;
-        }
-        resolve(seconds);
-      };
-      video.onerror=function(){cleanup();reject(new Error("webm-playback-invalid"));};
-      video.src=url;
-    });
-  }
-  async function exportWebM(){
-    var mime=exportMimeType();
-    if(!mime){
-      var unsupported="Ο browser δεν υποστηρίζει εξαγωγή WebM. Δοκίμασε ενημερωμένο Chrome, Edge ή Firefox.";
-      status.textContent=unsupported;exportStatus.textContent=unsupported;return;
-    }
-    if(typeof window.ysFixWebmDuration!=="function"){
-      var missingFixer="Δεν φορτώθηκε ο μηχανισμός σωστής διάρκειας WebM. Κάνε ανανέωση της σελίδας και δοκίμασε ξανά.";
-      status.textContent=missingFixer;exportStatus.textContent=missingFixer;return;
-    }
-    if(exporting)return;
-    exporting=true;setButtons();
-    var creatingMessage="Γίνεται δημιουργία βίντεο 24 fps…";
-    status.textContent=creatingMessage;
-    exportStatus.textContent=creatingMessage;
-    var exportStage=null,stream=null,recorder=null;
-    try{
-      exportStage=document.createElement("div");
-      exportStage.className="animated-explanation__stage";
-      exportStage.setAttribute("aria-hidden","true");
-      exportStage.style.cssText="position:fixed;left:-12000px;top:0;width:760px;height:360px;pointer-events:none;opacity:1";
-      exportStage.innerHTML=svgMarkup(config);
-      document.body.appendChild(exportStage);
-
-      var canvas=document.createElement("canvas");canvas.width=1280;canvas.height=720;
-      var ctx=canvas.getContext("2d",{alpha:false});
-      if(!ctx)throw new Error("canvas-context");
-
-      var fps=24;
-      var frameInterval=1000/fps;
-      stream=canvas.captureStream(fps);
-      recorder=createWebMRecorder(stream,mime);
-      var chunks=[];
-      recorder.ondataavailable=function(event){if(event.data&&event.data.size)chunks.push(event.data);};
-      var stopped=new Promise(function(resolve,reject){
-        recorder.addEventListener("stop",resolve,{once:true});
-        recorder.addEventListener("error",function(event){
-          reject(event.error||new Error("media-recorder-error"));
-        },{once:true});
-      });
-
-      exportStage.dataset.phase="0";
-      await sleep(100);
-      await paintExportFrame(ctx,canvas,exportStage,config.captions[config.phases[0].caption]);
-
-      recorder.start(1000);
-      var recordStartedAt=performance.now();
-
-      for(var p=0;p<config.phases.length;p++){
-        exportStage.dataset.phase=String(p);
-        await sleep(70);
-        var duration=Math.max(600,config.phases[p].duration||1400);
-        var phaseStarted=performance.now();
-        var nextFrame=phaseStarted;
-        while(performance.now()-phaseStarted<duration){
-          await paintExportFrame(ctx,canvas,exportStage,config.captions[config.phases[p].caption]);
-          nextFrame+=frameInterval;
-          await sleep(Math.max(0,nextFrame-performance.now()));
-        }
-      }
-
-      var outroStarted=performance.now();
-      var outroNextFrame=outroStarted;
-      while(performance.now()-outroStarted<3200){
-        await paintOutroFrame(ctx,canvas);
-        outroNextFrame+=frameInterval;
-        await sleep(Math.max(0,outroNextFrame-performance.now()));
-      }
-
-      var recordDurationMs=Math.max(1000,Math.round(performance.now()-recordStartedAt));
-      if(recorder.state==="recording"&&typeof recorder.requestData==="function"){
-        try{recorder.requestData();await sleep(150);}catch(_){}
-      }
-      if(recorder.state!=="inactive")recorder.stop();
-      await stopped;
-      if(!chunks.length)throw new Error("empty-webm");
-
-      var actualType=(recorder.mimeType||mime||"video/webm").split(";")[0];
-      var rawBlob=new Blob(chunks,{type:actualType});
-      if(!rawBlob.size)throw new Error("empty-webm");
-
-      status.textContent="Διορθώνεται η διάρκεια του βίντεο…";
-      exportStatus.textContent="Διορθώνεται η διάρκεια του βίντεο…";
-      var outBlob=await fixWebmDurationBlob(rawBlob,recordDurationMs);
-      await verifyVideoDuration(outBlob,recordDurationMs);
-
-      var url=URL.createObjectURL(outBlob);
-      var link=document.createElement("a");
-      link.href=url;link.download=exportFilename();
-      link.style.display="none";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(function(){URL.revokeObjectURL(url);},60000);
-      var doneMessage="Το WebM δημιουργήθηκε ως κανονικό βίντεο 24 fps με σωστή διάρκεια.";
-      status.textContent=doneMessage;exportStatus.textContent=doneMessage;
-    }catch(error){
-      try{if(recorder&&recorder.state!=="inactive")recorder.stop();}catch(_){}
-      console.error("AITOOLS4KIDS WebM export failed",error);
-      var failedMessage="Δεν δημιουργήθηκε έγκυρο WebM με σωστή διάρκεια. Δοκίμασε ξανά σε ενημερωμένο Chrome ή Edge.";
-      status.textContent=failedMessage;exportStatus.textContent=failedMessage;
-    }finally{
-      if(exportStage&&exportStage.parentNode)exportStage.remove();
-      if(stream)stream.getTracks().forEach(function(track){track.stop();});
-      exporting=false;setButtons();
-    }
-  }
-
   function restart(){reset();start();}
   function setExpandLabel(){
     var expanded=(document.fullscreenElement===section)||section.classList.contains("is-expanded");
@@ -2098,7 +2089,6 @@ function renderExplanation(key,config){
   pauseBtn.addEventListener("click",pause);
   restartBtn.addEventListener("click",restart);
   expandBtn.addEventListener("click",expand);
-  exportBtn.addEventListener("click",exportWebM);
   document.addEventListener("fullscreenchange",fullscreenChanged);
   applyPhase(0,false);
   setButtons();
@@ -2131,5 +2121,5 @@ window.AITOOLSKIDS_ANIMATED_EXPLANATIONS={configs:ANIMATED_EXPLANATIONS,refresh:
 sync();
 })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/fix-webm-duration@1.0.6/fix-webm-duration.js"></script>\n<script src="/teacher-video-prototype.js"></script>
+<script src="/teacher-video-prototype.js"></script>
 </body></html>

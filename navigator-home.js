@@ -24,6 +24,9 @@
       higherEdTitle: "Φοιτητές ΑΕΙ",
       higherEdDesc: "Πιλοτική κάλυψη επιλεγμένων πανεπιστημιακών τμημάτων με επίσημες πηγές και επαληθευμένα μαθήματα/θεματικές όπου είναι διαθέσιμα.",
       higherEdAction: "Δοκίμασε τη φοιτητική διαδρομή →",
+      curriculumCardBadge: "Ύλη 2026–27",
+      curriculumCardTitle: "Ελληνικός Χάρτης Ύλης",
+      curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα → AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
       mapTitle: "🧭 Χάρτης Εξάσκησης",
       mapLead: "Δες πού χρειάζεσαι λίγη παραπάνω εξάσκηση.",
       mapDesc: "Σύντομο τεστ περίπου 2 λεπτών, χωρίς βαθμό.",
@@ -76,6 +79,9 @@
       higherEdTitle: "University students",
       higherEdDesc: "5 pilot departments: AUEB Informatics, NKUA Psychology, UNIWA Informatics & Computer Engineering, HMU Electrical & Computer Engineering, and Biology at the University of Patras.",
       higherEdAction: "Try the university pilot →",
+      curriculumCardBadge: "Curriculum 2026–27",
+      curriculumCardTitle: "Greek Curriculum Map",
+      curriculumCardDesc: "Grade → subject → real curriculum unit → AI help, practice and visual explanation.",
       mapTitle: "🧭 Practice Map",
       mapLead: "See where a little more practice could help.",
       mapDesc: "A short check of about 2 minutes, with no grade.",
@@ -188,6 +194,7 @@
 
   function hideLegacyHomeBlocks(){
     document.querySelector("#zoneSelectView .hero__learning-loop")?.classList.add("home-v8-legacy");
+    document.querySelector("#zoneSelectView .hero__map-pair")?.classList.add("home-v8-legacy");
     document.querySelector("#zoneSelectView .hero__quiz-cta-wrap")?.classList.add("home-v8-legacy");
     document.querySelector("#zoneSelectView .hero__ai-help")?.classList.add("home-v8-legacy");
     document.getElementById("homeAiLearningModes")?.classList.add("home-v8-legacy");
@@ -233,6 +240,26 @@
     card.querySelector(".zone-card__age").textContent = c.higherEdBadge;
     card.querySelector(".zone-card__desc").textContent = c.higherEdDesc;
     card.setAttribute("aria-label", `${c.higherEdTitle}: ${c.higherEdBadge}`);
+    return card;
+  }
+
+  function ensureCurriculumMapCard(){
+    const grid = document.getElementById("zoneGrid");
+    if(!grid) return null;
+    let card = document.getElementById("homeCurriculumMapCard");
+    if(!card){
+      card = document.createElement("a");
+      card.id = "homeCurriculumMapCard";
+      card.className = "zone-card home-v8-curriculum-card";
+      card.href = "/xartis-ylis.html";
+      card.innerHTML = '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label"></p><p class="zone-card__age"></p><p class="zone-card__desc"></p>';
+    }
+    if(card.parentElement !== grid) grid.appendChild(card);
+    const copy = currentCopy();
+    card.querySelector(".zone-card__label").textContent = copy.curriculumCardTitle;
+    card.querySelector(".zone-card__age").textContent = copy.curriculumCardBadge;
+    card.querySelector(".zone-card__desc").textContent = copy.curriculumCardDesc;
+    card.setAttribute("aria-label", `${copy.curriculumCardTitle}: ${copy.curriculumCardBadge}`);
     return card;
   }
 
@@ -384,15 +411,7 @@
       </div>
       <a href="/sign-language.html">${c.engLink}</a>`;
 
-    let curriculum = document.getElementById("homeV8Curriculum");
-    if(!curriculum){
-      curriculum = document.createElement("p");
-      curriculum.id = "homeV8Curriculum";
-      curriculum.className = "home-v8-curriculum";
-      if(notGuide) notGuide.insertAdjacentElement("afterend", curriculum);
-      else zoneSection.appendChild(curriculum);
-    }
-    curriculum.innerHTML = `${c.curriculumPrefix} <a href="/xartis-ylis.html">${c.curriculumLabel}</a>`;
+    document.getElementById("homeV8Curriculum")?.remove();
   }
 
   function isSpaRoute(pathname){
@@ -416,6 +435,7 @@
     ensureSpecialSchoolCard();
     ensureMainShell();
     ensureHigherEducationPilot();
+    ensureCurriculumMapCard();
     ensureEngSection();
     document.getElementById("homeV8FooterExtra")?.remove();
     suppressLegacyInjectedBlocks();
@@ -460,6 +480,8 @@
     if(grid && "MutationObserver" in window){
       const observer = new MutationObserver(() => {
         ensureSpecialSchoolCard();
+        ensureHigherEducationPilot();
+        ensureCurriculumMapCard();
         suppressLegacyInjectedBlocks();
       });
       observer.observe(grid, {childList:true});

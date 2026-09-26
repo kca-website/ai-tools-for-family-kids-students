@@ -43,6 +43,28 @@
   };
 
   let activePathAnimationListener = null;
+  const PRACTICE_ANIMATION_MAP = Object.freeze({
+    "math-a-dim.subtraction-borrowing-concept": "primary-a-add-sub",
+    "math-b-dim.multiplication-as-repeated-addition": "primary-b-mult-div",
+    "math-c-dim.division-as-sharing": "primary-c-mult-div",
+    "math-c-dim.simple-fraction-recognition": "primary-c-fraction",
+    "glossa-b-dim.story-sequence": "primary-b-story-sequence-gap",
+    "glossa-c-dim.description-paragraph": "primary-c-language-paragraph",
+    "glossa-d-dim.paragraph-main-idea": "primary-d-main-idea-gap",
+    "istoria-c-dim.myth-vs-history": "primary-c-history-source",
+    "percent.as_fraction": "primary-e-percent-gap",
+    "measurement.area_perimeter_confusion": "primary-e-area-perimeter-gap",
+    "math-st-dim.discount-percent": "primary-st-percent",
+    "math-st-dim.probability-basic": "primary-st-probability",
+    "science-st-dim.circuit-open-closed": "primary-st-electricity",
+    "science-st-dim.states-of-matter-change": "primary-st-state-changes-gap",
+    "biologia-a-gym.cell-membrane-function": "biology-a-cell",
+    "physics.force-motion-confusion": "physics-b-forces",
+    "physics-g-gym.ohms-law": "physics-g-ohm",
+    "glossa-b-gym.argument-vs-evidence": "middle-b-argument-evidence-gap",
+    "glossa-b-gym.summary-vs-opinion": "middle-b-summary-opinion-gap",
+    "ekthesi.summary-copying": "gel-c-summary-gap"
+  });
 
   // ---------- Στατικά strings ----------
   const STRINGS = {
@@ -1972,6 +1994,14 @@ function renderToolGrid(pathTools, targetElement) {
 
   function buildPathAnimationSrc(gapId, gap) {
     if (state.lang !== "el" || !gap?.labelEl) return "";
+    const explicitAnimationKey = PRACTICE_ANIMATION_MAP[gapId];
+    if (explicitAnimationKey) {
+      const directUrl = new URL("/teacher-assistant.html", window.location.origin);
+      directUrl.searchParams.set("aeEmbed", "1");
+      directUrl.searchParams.set("animationKey", explicitAnimationKey);
+      directUrl.searchParams.set("role", state.currentRole === "guardian" ? "guardian" : "student");
+      return directUrl.pathname + directUrl.search;
+    }
     const context = state.currentZone === "primary" ? "primary" : state.currentZone === "middle" ? "middle" : state.currentZone === "high" ? "gel" : "";
     if (!context) return "";
     const resolved = resolveQuizForPathAnimation(gapId);
@@ -1994,6 +2024,8 @@ function renderToolGrid(pathTools, targetElement) {
     url.searchParams.set("role", state.currentRole === "guardian" ? "guardian" : "student");
     return url.pathname + url.search;
   }
+
+  window.AITOOLSKIDS_PRACTICE_ANIMATION_MAP = PRACTICE_ANIMATION_MAP;
 
   function cleanupPathAnimationBridge() {
     if (activePathAnimationListener) {

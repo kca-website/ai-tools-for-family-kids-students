@@ -6,6 +6,7 @@
 <meta name="description" content="Δωρεάν AI βοηθός εκπαιδευτικού με φύλλα αξιολόγησης, σχέδια μαθήματος και υλικό πάνω σε χαρτογραφημένη ύλη 2026-27 για Δημοτικό, Γυμνάσιο, ΓΕΛ, ΕΠΑΛ και ειδική εκπαίδευση.">
 <link rel="canonical" href="https://www.aitools4kids.gr/teacher-assistant.html">
 <link rel="stylesheet" href="/teacher-video-prototype.css">
+<script src="/pdf-text-reader.js"></script>
 <meta property="og:image" content="https://www.aitools4kids.gr/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -132,6 +133,26 @@
       <div><strong>🎥 Αυτόματο εκπαιδευτικό βίντεο</strong><span>Το site μετατρέπει την επιλεγμένη πραγματική ενότητα σε σύντομο animated explainer 16:9.</span></div>
       <span class="video-prototype-badge">Prototype</span>
     </div>
+    <div class="video-source-switch">
+      <label for="videoSourceMode"><strong>Από πού θα πάρει το περιεχόμενο;</strong></label>
+      <select id="videoSourceMode">
+        <option value="curriculum" selected>Από την επιλεγμένη ύλη</option>
+        <option value="own">Από δικό μου υλικό</option>
+      </select>
+    </div>
+    <div class="video-own-material" id="videoOwnMaterialPanel" hidden>
+      <div class="video-own-material__head">
+        <div><strong>📄 Δικό σου υλικό</strong><span>Γράψε/επικόλλησε κείμενο ή φόρτωσε PDF/TXT. Το αρχείο διαβάζεται πρώτα στον browser και το κείμενο στέλνεται στο AI μόνο όταν πατήσεις δημιουργία.</span></div>
+      </div>
+      <div class="grid">
+        <div class="field full"><label for="videoOwnInstruction">Τι θέλεις να λέει ή να πετυχαίνει το βίντεο;</label><textarea id="videoOwnInstruction" placeholder="π.χ. Εξήγησε ακριβώς αυτά τα σημεία, βάλε παράδειγμα με τακούνι και αθλητικό παπούτσι και κλείσε με μία ερώτηση."></textarea></div>
+        <div class="field full"><label for="videoOwnMaterial">Κείμενο / σημειώσεις εκπαιδευτικού</label><textarea id="videoOwnMaterial" rows="9" placeholder="Επικόλλησε εδώ το κείμενο, τις σημειώσεις ή το υλικό που θέλεις να μετατραπεί σε βίντεο."></textarea></div>
+        <div class="field"><label for="videoOwnPolicy">Πώς να χρησιμοποιηθεί</label><select id="videoOwnPolicy"><option value="exact" selected>Κράτα πιστά το περιεχόμενό μου</option><option value="improve">Βελτίωσέ το για εκπαιδευτικό βίντεο</option></select></div>
+        <div class="field"><label for="videoOwnFile">Αρχείο PDF ή TXT</label><input id="videoOwnFile" type="file" accept=".pdf,.txt,text/plain,application/pdf"></div>
+      </div>
+      <div class="video-file-status" id="videoOwnFileStatus" role="status" aria-live="polite"></div>
+      <div class="video-own-actions"><button type="button" class="btn secondary" id="videoOwnClearBtn">Καθαρισμός υλικού</button></div>
+    </div>
     <div class="grid video-options__grid">
       <div class="field"><label for="videoDuration">Διάρκεια</label><select id="videoDuration"><option value="30">≈ 30″</option><option value="60" selected>≈ 1 λεπτό</option><option value="90">≈ 1,5 λεπτό</option></select></div>
       <div class="field"><label for="videoPurpose">Σκοπός</label><select id="videoPurpose"><option value="explain" selected>Εξήγηση έννοιας</option><option value="intro">Εισαγωγή στο μάθημα</option><option value="review">Επανάληψη</option></select></div>
@@ -156,6 +177,7 @@
         <button type="button" class="btn" id="videoPlayBtn">▶ Προεπισκόπηση από την αρχή</button>
         <button type="button" class="btn secondary" id="videoRestartBtn">↻ Από την αρχή</button>
         <button type="button" class="btn secondary" id="videoFullscreenBtn">⛶ Πλήρης οθόνη</button>
+        <button type="button" class="btn secondary" id="videoRefreshNarrationBtn" hidden>🎙️ Ανανέωσε αφήγηση</button>
         <button type="button" class="btn secondary" id="videoExportBtn" hidden>⬇ Δημιούργησε WebM</button>
         <button type="button" class="btn secondary" id="videoExportMp4Btn" hidden>⬇ Δημιούργησε MP4</button>
         <a class="btn secondary video-download" id="videoDownload" hidden download>⬇ Λήψη WebM</a>
@@ -165,7 +187,11 @@
       </div>
       <video id="videoFilePreview" class="video-file-preview" controls playsinline hidden></video>
       <p class="video-studio__hint" id="videoStudioHint">Το prototype δημιουργεί motion-graphics χωρίς εξωτερικό μοντάζ. Με ενεργούς υπότιτλους, το κείμενο ενσωματώνεται στο βίντεο και δίνεται επιπλέον αρχείο .vtt. Η εξαγωγή MP4 χρησιμοποιεί τον encoder της συσκευής όταν αυτός υποστηρίζει MP4.</p>
-      <details class="video-scenes-details"><summary>Δες το storyboard και το κείμενο αφήγησης</summary><div id="videoSceneList" class="video-scene-list"></div></details>
+      <details class="video-scenes-details" open><summary>✏️ Επεξεργασία storyboard και αφήγησης</summary>
+        <p class="video-editor-note">Μπορείς να αλλάξεις κάθε σκηνή πριν την εξαγωγή, να αλλάξεις σειρά, να διαγράψεις, να προσθέσεις ή να ξαναδημιουργήσεις μόνο μία σκηνή.</p>
+        <div id="videoSceneList" class="video-scene-list"></div>
+        <div class="video-scene-editor-actions"><button type="button" class="btn secondary" id="videoAddSceneBtn">＋ Νέα σκηνή</button></div>
+      </details>
     </div>
   </div>
   <div class="curriculum-note" id="curriculumNote"></div>

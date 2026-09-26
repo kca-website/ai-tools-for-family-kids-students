@@ -16,6 +16,8 @@
   let subtitleObjectUrl=null;
   let previewTotalMs=0;
   let previewRunning=false;
+  let ownMaterialText="";
+  let projectDirty=false;
 
   function selectedText(id){
     const el=q(id);
@@ -43,6 +45,12 @@
     return sec<=30?"55–70":sec<=60?"115–135":"170–200";
   }
 
+  function sourceMode(){return q("videoSourceMode")?.value||"curriculum";}
+
+  function ownMaterial(){
+    return (q("videoOwnMaterial")?.value||ownMaterialText||"").trim();
+  }
+
   function buildPrompt(){
     const curriculum=(q("curriculumNote")?.innerText||"").replace(/\s+/g," ").trim();
     const context=selectedText("context");
@@ -55,13 +63,33 @@
     const duration=q("videoDuration")?.value||"60";
     const objective=q("objective")?.value.trim()||"Να κατανοηθεί η βασική έννοια και να συνδεθεί με ένα απλό παράδειγμα.";
     const notes=q("notes")?.value.trim()||"Καμία.";
+    const mode=sourceMode();
+    const own=ownMaterial();
+    const ownInstruction=(q("videoOwnInstruction")?.value||"").trim();
+    const ownPolicy=q("videoOwnPolicy")?.value||"exact";
+
+    if(mode==="own"&&!own) throw new Error("Πρόσθεσε κείμενο ή φόρτωσε PDF/TXT πριν δημιουργήσεις βίντεο.");
+
+    const sourceBlock=mode==="own"
+      ?`ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: Υλικό που έδωσε ο εκπαιδευτικός.
+Οδηγία εκπαιδευτικού: ${ownInstruction||"Μετέτρεψε το υλικό σε σαφές εκπαιδευτικό βίντεο."}
+Πολιτική χρήσης: ${ownPolicy==="exact"
+  ?"Κράτησε πιστά το νόημα και τα πραγματολογικά στοιχεία του υλικού. Μην προσθέσεις νέες πληροφορίες. Μπορείς μόνο να το χωρίσεις σε σκηνές και να προσθέσεις μικρές συνδετικές φράσεις."
+  :"Μπορείς να βελτιώσεις τη σειρά, τη σαφήνεια και την προφορικότητα, αλλά ΜΗΝ προσθέσεις γεγονότα ή πληροφορίες που δεν υπάρχουν στο υλικό."}
+ΥΛΙΚΟ ΕΚΠΑΙΔΕΥΤΙΚΟΥ:
+--- ΑΡΧΗ ΥΛΙΚΟΥ ---
+${own.slice(0,28000)}
+--- ΤΕΛΟΣ ΥΛΙΚΟΥ ---`
+      :`ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: Χαρτογραφημένη σχολική ύλη του aitools4kids.
+Συγκεκριμένη σχολική ενότητα: ${topic}
+Τεκμηρίωση/καθεστώς ύλης από το site: ${curriculum||"Χρησιμοποίησε μόνο την ακριβή ενότητα που δόθηκε και μην επινοήσεις επίσημη ύλη."}`;
+
     return `Δημιούργησε storyboard για σύντομο εκπαιδευτικό animated explainer στα ελληνικά.
 
 Σχολικό πλαίσιο: ${context}
 Τάξη: ${grade}
 Μάθημα: ${subject}
-Συγκεκριμένη σχολική ενότητα: ${topic}
-Τεκμηρίωση/καθεστώς ύλης από το site: ${curriculum||"Χρησιμοποίησε μόνο την ακριβή ενότητα που δόθηκε και μην επινοήσεις επίσημη ύλη."}
+${sourceBlock}
 Σκοπός βίντεο: ${purpose}
 Στόχος: ${objective}
 Οπτικό ύφος: ${style}
@@ -87,8 +115,8 @@
 }
 
 Κανόνες:
-- Μην επινοήσεις γεγονότα, τύπους, χρονολογίες ή επίσημη ύλη που δεν στηρίζονται στη δοθείσα ενότητα.
-- Η αφήγηση να είναι κατάλληλη για τη συγκεκριμένη τάξη και να ακούγεται φυσική, όχι σαν σχολικό εγχειρίδιο.
+- ${mode==="own"?"Βασίσου αποκλειστικά στο υλικό του εκπαιδευτικού.":"Μην επινοήσεις γεγονότα, τύπους, χρονολογίες ή επίσημη ύλη που δεν στηρίζονται στη δοθείσα ενότητα."}
+- Η αφήγηση να είναι κατάλληλη για τη συγκεκριμένη τάξη και να ακούγεται φυσική.
 - Κάθε σκηνή να έχει μία μόνο βασική ιδέα.
 - Ξεκίνα με σαφή οπτικό hook και κλείσε με σύντομη ερώτηση ανάκλησης ή εφαρμογής.
 - Μην αναφέρεις AI, prompts, πηγές ή τεχνικές οδηγίες μέσα στο βίντεο.
@@ -312,16 +340,135 @@
     }
   }
 
+  function invalidateExports(){
+    projectDirty=true;
+    ["videoDownload","videoMp4Download","videoSaveBtn"].forEach(id=>{if(q(id))q(id).hidden=true;});
+    if(q("videoFilePreview")){q("videoFilePreview").hidden=true;q("videoFilePreview").removeAttribute("src");}
+    refreshVttDownload();
+  }
+
+  function invalidateNarration(message=true){
+    if(narrationAudio){try{narrationAudio.pause()}catch(_){}}
+    narrationAudio=null;
+    if(q("videoNarration")?.value==="ai"&&project){
+      q("videoRefreshNarrationBtn").hidden=false;
+      if(message)q("videoStatus").textContent="Η αφήγηση άλλαξε. Πάτησε «Ανανέωσε αφήγηση» πριν την τελική εξαγωγή με φωνή.";
+    }
+  }
+
+  function syncPreviewAfterEdit(){
+    if(!project?.scenes?.length)return;
+    const total=previewDurationSeconds();
+    const seconds=(Number(q("videoTimeline")?.value)||0)/1000*total;
+    drawAtSeconds(seconds,total);
+    invalidateExports();
+  }
+
   function renderStoryboard(){
     const list=q("videoSceneList"); if(!list||!project) return;
     list.innerHTML=project.scenes.map((s,i)=>`
-      <article class="video-scene-card">
+      <article class="video-scene-card video-scene-card--edit" data-scene-index="${i}">
         <div class="video-scene-card__no">${i+1}</div>
-        <div><h4>${escapeHtml(s.symbol+" "+s.title)}</h4>
-        <p><strong>Οθόνη:</strong> ${escapeHtml(s.onscreen)}</p>
-        <p><strong>Αφήγηση:</strong> ${escapeHtml(s.narration)}</p>
-        <p><strong>Κίνηση:</strong> ${escapeHtml(s.visual)}</p></div>
+        <div>
+          <div class="video-scene-fields">
+            <div><label>Σύμβολο</label><input data-field="symbol" maxlength="4" value="${escapeAttr(s.symbol)}"></div>
+            <div><label>Τίτλος</label><input data-field="title" maxlength="80" value="${escapeAttr(s.title)}"></div>
+            <div class="video-scene-field--full"><label>Κείμενο στην οθόνη</label><textarea data-field="onscreen" maxlength="240">${escapeHtml(s.onscreen)}</textarea></div>
+            <div class="video-scene-field--full"><label>Αφήγηση / υπότιτλοι</label><textarea data-field="narration" maxlength="900">${escapeHtml(s.narration)}</textarea></div>
+            <div class="video-scene-field--full"><label>Οπτική / κίνηση</label><textarea data-field="visual" maxlength="320">${escapeHtml(s.visual)}</textarea></div>
+          </div>
+          <div class="video-scene-actions">
+            <button type="button" data-action="up" title="Μετακίνηση πάνω">↑ Πάνω</button>
+            <button type="button" data-action="down" title="Μετακίνηση κάτω">↓ Κάτω</button>
+            <button type="button" data-action="regenerate">↻ Ξαναφτιάξε σκηνή</button>
+            <button type="button" data-action="delete">🗑 Διαγραφή</button>
+          </div>
+        </div>
       </article>`).join("");
+  }
+
+  function escapeAttr(value){
+    return escapeHtml(value).replace(/\n/g,"&#10;");
+  }
+
+  function normaliseScene(s,i=0){
+    return {
+      title:String(s?.title||`Σκηνή ${i+1}`).trim(),
+      onscreen:String(s?.onscreen||"").trim(),
+      narration:String(s?.narration||"").trim(),
+      symbol:String(s?.symbol||"✨").trim().slice(0,4),
+      visual:String(s?.visual||"Απλή κίνηση και καθαρή τυπογραφία.").trim()
+    };
+  }
+
+  function updateSceneField(card,field,value){
+    const i=Number(card?.dataset?.sceneIndex);
+    if(!Number.isInteger(i)||!project?.scenes?.[i]||!["title","onscreen","narration","symbol","visual"].includes(field))return;
+    project.scenes[i][field]=String(value||"");
+    if(field==="narration")invalidateNarration(false);
+    syncPreviewAfterEdit();
+  }
+
+  function moveScene(index,delta){
+    const next=index+delta;
+    if(!project||next<0||next>=project.scenes.length)return;
+    const [scene]=project.scenes.splice(index,1);
+    project.scenes.splice(next,0,scene);
+    invalidateNarration(false);
+    renderStoryboard();syncPreviewAfterEdit();
+  }
+
+  function deleteScene(index){
+    if(!project||project.scenes.length<=1)return;
+    project.scenes.splice(index,1);
+    invalidateNarration(false);
+    renderStoryboard();syncPreviewAfterEdit();
+  }
+
+  function addScene(){
+    if(!project)return;
+    project.scenes.push(normaliseScene({title:"Νέα σκηνή",onscreen:"",narration:"",symbol:"✨",visual:"Απλή κίνηση και καθαρή τυπογραφία."},project.scenes.length));
+    invalidateNarration(false);
+    renderStoryboard();syncPreviewAfterEdit();
+    q("videoSceneList")?.lastElementChild?.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+
+  function extractSingleScene(raw,index){
+    const text=String(raw||"").trim().replace(/^\`\`\`(?:json)?/i,"").replace(/\`\`\`$/,"").trim();
+    const start=text.indexOf("{"),end=text.lastIndexOf("}");
+    if(start<0||end<=start)throw new Error("Δεν επέστρεψε έγκυρη σκηνή.");
+    const parsed=JSON.parse(text.slice(start,end+1));
+    return normaliseScene(parsed.scene||parsed,index);
+  }
+
+  async function regenerateScene(index,card){
+    if(!project?.scenes?.[index])return;
+    card?.classList.add("video-scene-regenerating");
+    q("videoStatus").textContent=`Ξαναδημιουργία σκηνής ${index+1}…`;
+    try{
+      const context=buildPrompt();
+      const current=project.scenes[index];
+      const prompt=`${context}
+
+Τώρα ξαναδημιούργησε ΜΟΝΟ τη σκηνή ${index+1}. Η τρέχουσα σκηνή είναι:
+${JSON.stringify(current)}
+
+Επέστρεψε ΜΟΝΟ JSON:
+{"title":"...","onscreen":"...","narration":"...","symbol":"...","visual":"..."}
+Να παραμένει συνεπής με τις προηγούμενες/επόμενες σκηνές και με την πηγή περιεχομένου.`;
+      const r=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:"Είσαι εκπαιδευτικός video editor. Επιστρέφεις μόνο έγκυρο JSON και δεν προσθέτεις πληροφορίες έξω από την πηγή.",prompt})});
+      const d=await r.json();
+      if(!r.ok)throw new Error(d.message||"Αποτυχία επαναδημιουργίας.");
+      project.scenes[index]=extractSingleScene(d.text,index);
+      invalidateNarration(false);
+      renderStoryboard();syncPreviewAfterEdit();
+      q("videoRefreshNarrationBtn").hidden=q("videoNarration")?.value!=="ai";
+      q("videoStatus").textContent=`Η σκηνή ${index+1} ενημερώθηκε.`;
+    }catch(e){
+      q("videoStatus").textContent="Δεν ολοκληρώθηκε: "+(e?.message||e);
+    }finally{
+      card?.classList.remove("video-scene-regenerating");
+    }
   }
 
   function escapeHtml(value){
@@ -330,6 +477,45 @@
 
   function totalNarration(){
     return project?.scenes?.map(s=>s.narration).filter(Boolean).join(" ")||"";
+  }
+
+  async function readOwnFile(file){
+    if(!file)return;
+    const status=q("videoOwnFileStatus");
+    status.textContent="Διαβάζω το αρχείο…";
+    try{
+      let text="",note="";
+      if(file.type==="application/pdf"||/\.pdf$/i.test(file.name||"")){
+        if(!window.AITOOLSKIDS_PDF?.read)throw new Error("Δεν φορτώθηκε ο αναγνώστης PDF.");
+        const result=await window.AITOOLSKIDS_PDF.read(file,{maxBytes:15*1024*1024,maxPages:60,maxChars:28000});
+        text=result.text;
+        note=`${result.pagesRead}/${result.totalPages} σελίδες${result.truncated?" · το κείμενο περιορίστηκε για ασφαλή επεξεργασία":""}`;
+      }else if(file.type==="text/plain"||/\.txt$/i.test(file.name||"")){
+        text=(await file.text()).slice(0,28000);
+        note=`${text.length.toLocaleString("el-GR")} χαρακτήρες`;
+      }else throw new Error("Υποστηρίζονται PDF και TXT.");
+      ownMaterialText=text;
+      q("videoOwnMaterial").value=text;
+      status.textContent=`✓ ${file.name} · ${note}`;
+    }catch(e){
+      ownMaterialText="";
+      status.textContent="Δεν διαβάστηκε το αρχείο: "+(e?.message||e);
+    }
+  }
+
+  async function refreshNarration(){
+    if(!project)return;
+    const btn=q("videoRefreshNarrationBtn");
+    btn.disabled=true;
+    q("videoStatus").textContent="Δημιουργώ ξανά την αφήγηση από το επεξεργασμένο storyboard…";
+    try{
+      await createNarration();
+      btn.hidden=true;
+      invalidateExports();
+      q("videoStatus").textContent="Η αφήγηση ενημερώθηκε και συμφωνεί με το νέο storyboard.";
+    }catch(e){
+      q("videoStatus").textContent="Δεν ολοκληρώθηκε η αφήγηση: "+(e?.message||e);
+    }finally{btn.disabled=false;}
   }
 
   function loadPuter(){
@@ -678,9 +864,11 @@
       const d=await r.json();
       if(!r.ok)throw new Error(d.message||"Αποτυχία δημιουργίας storyboard.");
       project=extractJson(d.text);
+      projectDirty=false;
       drawScene(project.scenes[0],0,1,0);
       renderStoryboard();
       refreshVttDownload();
+      q("videoRefreshNarrationBtn").hidden=true;
 
       q("generationMessage").textContent="2/3 Προετοιμασία αφήγησης.";
       if(q("videoNarration").value==="ai"){
@@ -689,6 +877,7 @@
           q("videoStudioHint").textContent="Το storyboard και η ελληνική AI αφήγηση είναι έτοιμα. Η εξαγωγή γίνεται τοπικά ως WebM χωρίς πρόγραμμα μοντάζ.";
         }catch(e){
           narrationAudio=null;
+          q("videoRefreshNarrationBtn").hidden=false;
           q("videoStudioHint").textContent="Το storyboard είναι έτοιμο. Η AI αφήγηση δεν ενεργοποιήθηκε ("+(e?.message||"Puter")+"). Η προεπισκόπηση μπορεί να χρησιμοποιήσει τη φωνή της συσκευής αν την επιλέξεις.";
           q("videoStatus").textContent="Το βίντεο δημιουργήθηκε χωρίς AI αφήγηση. Μπορείς να το δεις τώρα.";
         }
@@ -738,6 +927,36 @@
     const btn=q("videoCreateBtn");
     if(!btn)return;
     btn.addEventListener("click",generate);
+    q("videoSourceMode")?.addEventListener("change",()=>{
+      const own=q("videoSourceMode").value==="own";
+      q("videoOwnMaterialPanel").hidden=!own;
+      if(own)q("videoOwnInstruction")?.focus();
+    });
+    q("videoOwnFile")?.addEventListener("change",e=>readOwnFile(e.target.files?.[0]));
+    q("videoOwnMaterial")?.addEventListener("input",e=>{ownMaterialText=e.target.value.slice(0,28000);});
+    q("videoOwnClearBtn")?.addEventListener("click",()=>{
+      ownMaterialText="";
+      q("videoOwnMaterial").value="";
+      q("videoOwnInstruction").value="";
+      q("videoOwnFile").value="";
+      q("videoOwnFileStatus").textContent="";
+    });
+    q("videoSceneList")?.addEventListener("input",e=>{
+      const field=e.target?.dataset?.field;
+      if(field)updateSceneField(e.target.closest(".video-scene-card"),field,e.target.value);
+    });
+    q("videoSceneList")?.addEventListener("click",e=>{
+      const button=e.target.closest("button[data-action]");if(!button)return;
+      const card=button.closest(".video-scene-card"),index=Number(card?.dataset?.sceneIndex);
+      if(!Number.isInteger(index))return;
+      const action=button.dataset.action;
+      if(action==="up")moveScene(index,-1);
+      else if(action==="down")moveScene(index,1);
+      else if(action==="delete")deleteScene(index);
+      else if(action==="regenerate")regenerateScene(index,card);
+    });
+    q("videoAddSceneBtn")?.addEventListener("click",addScene);
+    q("videoRefreshNarrationBtn")?.addEventListener("click",refreshNarration);
     q("videoPlayBtn")?.addEventListener("click",()=>{if(previewRunning){stopPlayback();return;}play();});
     q("videoRestartBtn")?.addEventListener("click",()=>{stopPlayback();if(project){drawScene(project.scenes[0],0,1);updateTimeline(0,previewDurationSeconds());}});
     q("videoExportBtn")?.addEventListener("click",exportWebm);
@@ -750,7 +969,10 @@
       const seconds=(Number(q("videoTimeline").value)||0)/1000*total;
       drawAtSeconds(seconds,total);
     });
-    q("videoNarration")?.addEventListener("change",()=>{q("videoDownload").hidden=true;q("videoMp4Download").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;});
+    q("videoNarration")?.addEventListener("change",()=>{
+      q("videoDownload").hidden=true;q("videoMp4Download").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;
+      q("videoRefreshNarrationBtn").hidden=!(project&&q("videoNarration").value==="ai"&&!narrationAudio);
+    });
     ["videoSubtitleSize","videoSubtitleContrast"].forEach(id=>q(id)?.addEventListener("change",()=>{
       if(project)drawAtSeconds((Number(q("videoTimeline")?.value)||0)/1000*previewDurationSeconds(),previewDurationSeconds());
       q("videoDownload").hidden=true;
@@ -768,7 +990,7 @@
     });
   }
 
-  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,exportMp4,toggleFullscreen,supportedMime,previewDurationSeconds,formatTime,buildVtt,subtitleChunks};
+  window.AITOOLSKIDS_TEACHER_VIDEO={buildPrompt,extractJson,generate,play,exportWebm,exportMp4,toggleFullscreen,supportedMime,previewDurationSeconds,formatTime,buildVtt,subtitleChunks,readOwnFile,addScene,regenerateScene};
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bind,{once:true});
   else bind();

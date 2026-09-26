@@ -907,6 +907,82 @@ function mitosisSvgMarkup(){
   return baseSceneSvg("Μίτωση","Σχηματική ακολουθία βασικών σταδίων της μίτωσης.",scenes);
 }
 
+
+function motionSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σύστημα αναφοράς</text><line x1="100" y1="250" x2="660" y2="250" stroke="#657887" stroke-width="5"/><line x1="180" y1="230" x2="180" y2="275" stroke="#657887" stroke-width="4"/><text x="180" y="302" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">0 m</text><circle cx="300" cy="215" r="28" fill="#4d9cbb"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Θέση</text><line x1="100" y1="250" x2="660" y2="250" stroke="#657887" stroke-width="5"/><circle cx="500" cy="215" r="28" fill="#4d9cbb"/><text x="500" y="302" text-anchor="middle" font-size="17" font-weight="900" fill="#23637f">x = 6 m</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μετατόπιση</text><circle cx="230" cy="215" r="25" fill="#9aa9b5"/><circle cx="530" cy="215" r="25" fill="#4d9cbb"/><path d="M260 205 H495" stroke="#2e6f5e" stroke-width="6"/><polygon points="515,205 493,193 493,217" fill="#2e6f5e"/><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#24594c">Δx = xτελ − xαρχ</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Κίνηση στον χρόνο</text><line x1="100" y1="250" x2="660" y2="250" stroke="#657887" stroke-width="5"/><g class="ae-drift-right"><circle cx="380" cy="210" r="28" fill="#4d9cbb"/></g><text x="380" y="320" text-anchor="middle" font-size="18" font-weight="900" fill="#23637f">ταχύτητα ↔ μεταβολή θέσης / χρόνο</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σύγκριση κινήσεων</text><line x1="100" y1="150" x2="650" y2="150" stroke="#9aa9b5" stroke-width="4"/><line x1="100" y1="245" x2="650" y2="245" stroke="#9aa9b5" stroke-width="4"/><g class="ae-drift-right"><circle cx="410" cy="120" r="22" fill="#4d9cbb"/><circle cx="300" cy="215" r="22" fill="#83c5a5"/></g><text x="380" y="325" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">θέση + χρόνος περιγράφουν την κίνηση</text></g>'
+  ];
+  return baseSceneSvg("Κίνηση","Θέση, μετατόπιση και ταχύτητα.",scenes);
+}
+function forcesSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Δύναμη</text><rect x="320" y="155" width="120" height="90" rx="14" fill="#eef6fc" stroke="#7aa8c3" stroke-width="4"/><path d="M450 200 H610" stroke="#d35b5b" stroke-width="7"/><polygon points="630,200 604,186 604,214" fill="#d35b5b"/><text x="380" y="320" text-anchor="middle" font-size="16" font-weight="850" fill="#425466">μέτρο · διεύθυνση · φορά</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ίδια φορά</text><rect x="320" y="155" width="120" height="90" rx="14" fill="#eef6fc" stroke="#7aa8c3" stroke-width="4"/><path d="M250 180 H310 M250 220 H310" stroke="#2e6f5e" stroke-width="6"/><polygon points="310,180 294,170 294,190" fill="#2e6f5e"/><polygon points="310,220 294,210 294,230" fill="#2e6f5e"/><path d="M445 200 H610" stroke="#d35b5b" stroke-width="8"/><polygon points="630,200 605,186 605,214" fill="#d35b5b"/></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αντίθετες δυνάμεις</text><rect x="320" y="155" width="120" height="90" rx="14" fill="#eef6fc" stroke="#7aa8c3" stroke-width="4"/><path d="M315 200 H180" stroke="#4d9cbb" stroke-width="7"/><polygon points="160,200 185,186 185,214" fill="#4d9cbb"/><path d="M445 200 H580" stroke="#d35b5b" stroke-width="7"/><polygon points="600,200 575,186 575,214" fill="#d35b5b"/><text x="380" y="320" text-anchor="middle" font-size="17" font-weight="900" fill="#425466">ίσες και αντίθετες → συνισταμένη 0</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μη μηδενική συνισταμένη</text><line x1="100" y1="250" x2="660" y2="250" stroke="#9aa9b5" stroke-width="4"/><g class="ae-drift-right"><rect x="330" y="175" width="100" height="65" rx="12" fill="#eef6fc" stroke="#7aa8c3" stroke-width="4"/></g><path d="M445 150 H600" stroke="#d35b5b" stroke-width="7"/><polygon points="620,150 595,136 595,164" fill="#d35b5b"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Συνισταμένη</text><g class="ae-pulse"><circle cx="380" cy="190" r="105" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><text x="380" y="183" text-anchor="middle" font-size="20" font-weight="900" fill="#24594c">όλες οι δυνάμεις</text><text x="380" y="220" text-anchor="middle" font-size="23" font-weight="900" fill="#24594c">→ ΣF</text></g></g>'
+  ];
+  return baseSceneSvg("Δυνάμεις","Δυνάμεις και συνισταμένη.",scenes);
+}
+function pressureSvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Πίεση</text><rect x="300" y="215" width="160" height="45" fill="#dcebf7" stroke="#7893a8" stroke-width="3"/><path d="M380 80 V190" stroke="#d35b5b" stroke-width="8"/><polygon points="380,210 365,185 395,185" fill="#d35b5b"/><text x="380" y="320" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">p = F / A</text></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ίδια δύναμη, μικρότερο εμβαδόν</text><rect x="140" y="230" width="180" height="32" fill="#dcebf7" stroke="#7893a8" stroke-width="3"/><rect x="470" y="230" width="60" height="32" fill="#ffd9aa" stroke="#d59235" stroke-width="3"/><path d="M230 90 V205 M500 90 V205" stroke="#d35b5b" stroke-width="7"/><polygon points="230,225 216,200 244,200" fill="#d35b5b"/><polygon points="500,225 486,200 514,200" fill="#d35b5b"/><text x="500" y="305" text-anchor="middle" font-size="16" font-weight="850" fill="#8a5310">μεγαλύτερη πίεση</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="43" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Πίεση στο υγρό</text><rect x="230" y="80" width="300" height="230" rx="18" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><circle cx="380" cy="130" r="10" fill="#2e6f5e"/><circle cx="380" cy="205" r="16" fill="#2e6f5e"/><circle cx="380" cy="275" r="22" fill="#2e6f5e"/><text x="555" y="282" font-size="15" font-weight="850" fill="#425466">μεγαλύτερη σε βάθος</text></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ατμοσφαιρική πίεση</text><circle cx="380" cy="195" r="90" fill="#eef6fc" stroke="#7aa8c3" stroke-width="4"/><g class="ae-pulse"><path d="M380 65 V95 M380 295 V325 M250 195 H280 M480 195 H510" stroke="#4d9cbb" stroke-width="7"/></g><text x="380" y="201" text-anchor="middle" font-size="19" font-weight="900" fill="#35556b">σώμα</text></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Δύναμη και εμβαδόν μαζί</text><g class="ae-pulse"><rect x="245" y="135" width="270" height="115" rx="18" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><text x="380" y="183" text-anchor="middle" font-size="20" font-weight="900" fill="#24594c">F ↑ → p ↑</text><text x="380" y="220" text-anchor="middle" font-size="20" font-weight="900" fill="#24594c">A ↑ → p ↓</text></g></g>'
+  ];
+  return baseSceneSvg("Πίεση","Σχέση δύναμης, εμβαδού και βάθους.",scenes);
+}
+function buoyancySvgMarkup(){
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Σώμα μέσα σε υγρό</text><rect x="190" y="85" width="380" height="230" rx="20" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><rect x="325" y="145" width="110" height="100" rx="12" fill="#fff0d8" stroke="#d59235" stroke-width="4"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μεγαλύτερη πίεση χαμηλότερα</text><rect x="190" y="85" width="380" height="230" rx="20" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><rect x="325" y="145" width="110" height="100" rx="12" fill="#fff0d8" stroke="#d59235" stroke-width="4"/><path d="M380 275 V245" stroke="#2e6f5e" stroke-width="12"/><polygon points="380,235 365,258 395,258" fill="#2e6f5e"/></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Άνωση</text><rect x="190" y="85" width="380" height="230" rx="20" fill="#dff4ff" stroke="#4d9cbb" stroke-width="4"/><g class="ae-float"><rect x="325" y="170" width="110" height="90" rx="12" fill="#fff0d8" stroke="#d59235" stroke-width="4"/></g><path d="M380 175 V95" stroke="#2e6f5e" stroke-width="9"/><polygon points="380,78 365,103 395,103" fill="#2e6f5e"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Αρχή του Αρχιμήδη</text><g class="ae-pulse"><circle cx="380" cy="185" r="105" fill="#eef7f3" stroke="#2e6f5e" stroke-width="4"/><text x="380" y="170" text-anchor="middle" font-size="18" font-weight="900" fill="#24594c">Άνωση</text><text x="380" y="205" text-anchor="middle" font-size="17" font-weight="850" fill="#425466">= βάρος εκτοπιζόμενου υγρού</text></g></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Επίπλευση σε ισορροπία</text><path d="M160 210 C280 185 480 235 600 210 V310 H160 Z" fill="#dff4ff"/><rect x="310" y="160" width="140" height="80" rx="15" fill="#fff0d8" stroke="#d59235" stroke-width="4"/><path d="M380 160 V95" stroke="#2e6f5e" stroke-width="8"/><polygon points="380,78 366,101 394,101" fill="#2e6f5e"/><path d="M380 245 V310" stroke="#d35b5b" stroke-width="8"/><polygon points="380,327 366,304 394,304" fill="#d35b5b"/></g>'
+  ];
+  return baseSceneSvg("Άνωση","Άνωση και αρχή του Αρχιμήδη.",scenes);
+}
+function currentSvgMarkup(){
+  var circuit='<path d="M180 115 H580 V270 H180 Z" fill="none" stroke="#657887" stroke-width="7" stroke-linejoin="round"/><rect x="155" y="165" width="50" height="60" rx="6" fill="#fff" stroke="#657887" stroke-width="4"/><circle cx="580" cy="192" r="42" fill="#fff" stroke="#657887" stroke-width="4"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Απλό ηλεκτρικό κύκλωμα</text>'+circuit+'</g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ανοικτός διακόπτης</text>'+circuit+'<line x1="350" y1="112" x2="410" y2="75" stroke="#657887" stroke-width="7"/><circle cx="340" cy="115" r="8" fill="#657887"/><circle cx="420" cy="115" r="8" fill="#657887"/><text x="580" y="200" text-anchor="middle" font-size="20" font-weight="900" fill="#9aa9b5">OFF</text></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Κλειστό κύκλωμα</text>'+circuit+'<line x1="340" y1="115" x2="420" y2="115" stroke="#2e6f5e" stroke-width="7"/><g class="ae-drift-right"><circle cx="380" cy="115" r="10" fill="#4d9cbb"/></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ρεύμα και λαμπτήρας</text>'+circuit+'<line x1="340" y1="115" x2="420" y2="115" stroke="#2e6f5e" stroke-width="7"/><g class="ae-pulse"><circle cx="580" cy="192" r="32" fill="#ffe27a"/></g></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μεταφορά ενέργειας</text><rect x="115" y="145" width="160" height="95" rx="18" fill="#fff1f1" stroke="#d35b5b" stroke-width="4"/><text x="195" y="202" text-anchor="middle" font-size="20" font-weight="900" fill="#b34444">πηγή</text><path d="M290 192 H455" stroke="#2e6f5e" stroke-width="8"/><polygon points="475,192 450,178 450,206" fill="#2e6f5e"/><circle cx="575" cy="192" r="60" fill="#fff6c8" stroke="#e0ad27" stroke-width="4"/></g>'
+  ];
+  return baseSceneSvg("Ηλεκτρικό κύκλωμα","Ανοικτό και κλειστό κύκλωμα.",scenes);
+}
+function waveSvgMarkup(){
+  var wave='<path d="M100 195 C145 110 190 280 235 195 C280 110 325 280 370 195 C415 110 460 280 505 195 C550 110 595 280 640 195" fill="none" stroke="#4d9cbb" stroke-width="7"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μια διαταραχή ξεκινά</text><line x1="110" y1="200" x2="650" y2="200" stroke="#9aa9b5" stroke-width="4"/><g class="ae-float"><circle cx="150" cy="200" r="22" fill="#4d9cbb"/></g></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Η διαταραχή διαδίδεται</text>'+wave+'<g class="ae-drift-right"><circle cx="380" cy="195" r="12" fill="#2e6f5e"/></g></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Τα σωματίδια ταλαντώνονται τοπικά</text><line x1="100" y1="210" x2="650" y2="210" stroke="#9aa9b5" stroke-width="3"/><g class="ae-float"><circle cx="180" cy="210" r="14" fill="#4d9cbb"/><circle cx="280" cy="210" r="14" fill="#4d9cbb"/><circle cx="380" cy="210" r="14" fill="#4d9cbb"/><circle cx="480" cy="210" r="14" fill="#4d9cbb"/><circle cx="580" cy="210" r="14" fill="#4d9cbb"/></g></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Μεταφορά ενέργειας</text>'+wave+'<path d="M170 90 H590" stroke="#2e6f5e" stroke-width="7"/><polygon points="615,90 585,74 585,106" fill="#2e6f5e"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ο ήχος χρειάζεται υλικό μέσο</text><circle cx="250" cy="190" r="55" fill="#eef6fc" stroke="#4d9cbb" stroke-width="4"/><path d="M270 160 Q320 190 270 220 M290 140 Q365 190 290 240" fill="none" stroke="#4d9cbb" stroke-width="6"/><circle cx="555" cy="190" r="60" fill="#f7f8fa" stroke="#9aa9b5" stroke-width="4"/><text x="555" y="197" text-anchor="middle" font-size="18" font-weight="900" fill="#657887">κενό</text><path d="M495 135 L615 245" stroke="#d35b5b" stroke-width="8"/></g>'
+  ];
+  return baseSceneSvg("Μηχανικά κύματα","Διάδοση διαταραχής και μεταφορά ενέργειας.",scenes);
+}
+function reflectionSvgMarkup(){
+  var mirror='<line x1="115" y1="260" x2="645" y2="260" stroke="#657887" stroke-width="10"/>';
+  var normal='<line x1="380" y1="85" x2="380" y2="310" stroke="#9aa9b5" stroke-width="3" stroke-dasharray="8 8"/>';
+  var scenes=[
+    '<g class="ae-scene ae-scene-0"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Πρόσπτωση φωτός</text>'+mirror+'<path d="M155 90 L370 250" stroke="#f0ba2e" stroke-width="8"/><polygon points="380,258 354,252 369,237" fill="#f0ba2e"/></g>',
+    '<g class="ae-scene ae-scene-1"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Η κάθετος</text>'+mirror+normal+'<circle cx="380" cy="260" r="10" fill="#d35b5b"/></g>',
+    '<g class="ae-scene ae-scene-2"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Γωνία πρόσπτωσης</text>'+mirror+normal+'<path d="M155 90 L380 260" stroke="#f0ba2e" stroke-width="8"/><path d="M380 160 A100 100 0 0 0 300 200" fill="none" stroke="#d35b5b" stroke-width="5"/></g>',
+    '<g class="ae-scene ae-scene-3"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Ανακλώμενη ακτίνα</text>'+mirror+normal+'<path d="M155 90 L380 260" stroke="#f0ba2e" stroke-width="7"/><path d="M380 260 L605 90" stroke="#4d9cbb" stroke-width="7"/></g>',
+    '<g class="ae-scene ae-scene-4"><text x="380" y="45" text-anchor="middle" font-size="22" font-weight="900" fill="#173f63">Νόμος ανάκλασης</text>'+mirror+normal+'<path d="M155 90 L380 260" stroke="#f0ba2e" stroke-width="7"/><path d="M380 260 L605 90" stroke="#4d9cbb" stroke-width="7"/><g class="ae-pulse"><text x="380" y="330" text-anchor="middle" font-size="22" font-weight="900" fill="#24594c">θπ = θα</text></g></g>'
+  ];
+  return baseSceneSvg("Ανάκλαση φωτός","Προσπίπτουσα ακτίνα, κάθετος και νόμος ανάκλασης.",scenes);
+}
+
 function svgMarkup(config){
   if(config.visual==="chem-intro")return introSvgMarkup();
   if(config.visual==="states")return statesSvgMarkup();
@@ -915,6 +991,13 @@ function svgMarkup(config){
   if(config.visual==="bio-photo")return photosynthesisSvgMarkup();
   if(config.visual==="bio-digestion")return digestionSvgMarkup();
   if(config.visual==="bio-mitosis")return mitosisSvgMarkup();
+  if(config.visual==="phys-motion")return motionSvgMarkup();
+  if(config.visual==="phys-forces")return forcesSvgMarkup();
+  if(config.visual==="phys-pressure")return pressureSvgMarkup();
+  if(config.visual==="phys-buoyancy")return buoyancySvgMarkup();
+  if(config.visual==="phys-current")return currentSvgMarkup();
+  if(config.visual==="phys-wave")return waveSvgMarkup();
+  if(config.visual==="phys-reflection")return reflectionSvgMarkup();
   return acidSvgMarkup();
 }
 

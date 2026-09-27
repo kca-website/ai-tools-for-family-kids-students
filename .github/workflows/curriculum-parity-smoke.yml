@@ -22,6 +22,7 @@ jobs:
           node-version: '22'
       - name: Syntax checks
         run: |
+          node --check app.js
           node --check curriculum-resolver.js
           node --check general-subject-expansion-2026-2027.js
       - name: Install Playwright

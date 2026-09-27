@@ -139,3 +139,144 @@
     const button = $id("tmlUndo");
     if (button) button.disabled = state.versions.length < 2;
   }
+
+  }
+
+  function remember(text, label) {
+    const value = String(text || "").trim();
+    if (!value) return;
+    const last = state.versions[state.versions.length - 1];
+    if (last && last.text === value) return;
+    state.versions.push({ text: value, label: label || "Έκδοση", at: new Date().toISOString() });
+    if (state.versions.length > 12) state.versions.shift();
+    updateUndo();
+  }
+
+  function applyText(nextText, label) {
+    const previous = currentText();
+    if (previous) remember(previous, "Προηγούμενη έκδοση");
+    const next = String(nextText || "").trim();
+    if (!next) return;
+    try {
+      if (typeof lastText !== "undefined") lastText = next;
+      if (typeof show === "function") show(next, "Εργαστήριο · " + (label || "Νέα έκδοση"));
+      else if ($id("output")) $id("output").textContent = next;
+    } catch (_) {
+      if ($id("output")) $id("output").textContent = next;
+    }
+    remember(next, label || "Νέα έκδοση");
+    syncEditor();
+    renderSourceGate();
+    renderMisconceptions();
+  }
+
+  const transforms = {
+    simpler: "Ξαναγράψε το ίδιο υλικό με πιο απλή γλώσσα και συντομότερες προτάσεις, χωρίς να αφαιρέσεις το βασικό ακαδημαϊκό νόημα.",
+    steps: "Σπάσε τις οδηγίες και τις δραστηριότητες σε μικρά, σαφή, αριθμημένα βήματα. Μην προσθέσεις νέα ύλη.",
+    shorter: "Κάνε το υλικό αισθητά πιο σύντομο, κρατώντας μόνο ό,τι είναι αναγκαίο για τον δηλωμένο μαθησιακό στόχο.",
+    harder: "Κάνε το υλικό πιο απαιτητικό με περισσότερη εφαρμογή, αιτιολόγηση και σύνδεση ιδεών, αλλά μείνε αυστηρά στην ίδια ενότητα.",
+    example: "Πρόσθεσε ένα σύντομο, ηλικιακά κατάλληλο παράδειγμα που βοηθά να κατανοηθεί η ίδια έννοια. Μην εισάγεις μη επαληθευμένη ύλη.",
+    vocabulary: "Πρόσθεσε μικρή ενότητα «Βασικό λεξιλόγιο» με έως 6 όρους που ήδη υπάρχουν ή είναι αναγκαίοι για το ίδιο υλικό.",
+    visual: "Βελτίωσε την οπτική δομή για εκτύπωση: μικρές ενότητες, καθαρές επικεφαλίδες, bullets ή πίνακες όπου βοηθούν και περισσότερο λευκό χώρο. Μην αλλάξεις το περιεχόμενο."
+  };
+
+  const derivatives = {
+    exit: "Δημιούργησε exit ticket 3 σύντομων ερωτήσεων αποκλειστικά από το υλικό. Δώσε χωριστά πολύ σύντομο κλειδί για τον εκπαιδευτικό.",
+    check5: "Δημιούργησε 5 σύντομες ερωτήσεις ελέγχου κατανόησης αποκλειστικά από το υλικό. Συνδύασε κατανόηση και εφαρμογή, όχι μόνο ανάκληση. Δώσε χωριστό κλειδί.",
+    flashcards: "Δημιούργησε ακριβώς 6 flashcards από το υλικό. Μπροστά ερώτηση ή όρος και πίσω σύντομη εξήγηση. Μην προσθέσεις πληροφορίες που δεν στηρίζονται στο υλικό.",
+    vocab: "Δημιούργησε μικρό φύλλο βασικού λεξιλογίου με έως 8 όρους που προκύπτουν από το υλικό, απλή εξήγηση και σύντομη άσκηση χρήσης.",
+    review10: "Μετέτρεψε το υλικό σε επανάληψη 10 λεπτών: 2' ανάκληση χωρίς βοήθεια, 5' σύντομη καθοδηγούμενη εφαρμογή, 3' τελικό έλεγχο κατανόησης."
+  };
+
+  async function runTransform(kind) {
+    const instruction = transforms[kind];
+    const original = currentText();
+    if (!instruction || !original) return;
+    setBusy(true, "Το AI προσαρμόζει το ίδιο υλικό χωρίς να αλλάζει το curriculum context…");
+    try {
+      const system = "Είσαι βοηθός εκπαιδευτικού. Μετασχηματίζεις υπάρχον υλικό χωρίς να εφευρίσκεις νέα επίσημη ύλη, πηγές ή τίτλους. Διατηρείς το ίδιο σχολικό πλαίσιο, τάξη, μάθημα, ενότητα και στόχο. Δεν κάνεις διάγνωση. Επιστρέφεις μόνο το νέο υλικό σε καθαρό Markdown.";
+      const prompt = contextBlock() + "\n\nΕΝΤΟΛΗ\n" + instruction + "\n\nΥΠΑΡΧΟΝ ΥΛΙΚΟ\n---\n" + original + "\n---";
+      applyText(await callAI(system, prompt), "Προσαρμογή");
+      setBusy(false, "Έτοιμη νέα έκδοση. Η προηγούμενη παραμένει διαθέσιμη με «Πίσω».");
+    } catch (error) { setBusy(false, "Δεν ολοκληρώθηκε: " + error.message); }
+  }
+
+  async function runDerivative(kind) {
+    const instruction = derivatives[kind];
+    const original = currentText();
+    if (!instruction || !original) return;
+    setBusy(true, "Δημιουργείται παράγωγο από το ίδιο υλικό…");
+    try {
+      const system = "Είσαι βοηθός εκπαιδευτικού. Δημιουργείς παράγωγο υλικό μόνο από το παρεχόμενο υλικό και το δηλωμένο σχολικό context. Δεν προσθέτεις μη τεκμηριωμένη επίσημη ύλη. Δεν βαθμολογείς πραγματικούς μαθητές. Επιστρέφεις μόνο το νέο υλικό σε καθαρό Markdown.";
+      const prompt = contextBlock() + "\n\nΠΑΡΑΓΩΓΟ\n" + instruction + "\n\nΥΛΙΚΟ ΒΑΣΗΣ\n---\n" + original + "\n---";
+      applyText(await callAI(system, prompt), "Παράγωγο υλικό");
+      setBusy(false, "Το παράγωγο δημιουργήθηκε από την ίδια βάση.");
+    } catch (error) { setBusy(false, "Δεν ολοκληρώθηκε: " + error.message); }
+  }
+
+  function parseJson(raw) {
+    const cleaned = String(raw || "").trim().replace(/^\`\`\`(?:json)?\s*/i, "").replace(/\s*\`\`\`$/, "");
+    const start = cleaned.indexOf("{");
+    const end = cleaned.lastIndexOf("}");
+    if (start < 0 || end < start) throw new Error("Ο έλεγχος δεν επέστρεψε αναγνώσιμη δομή.");
+    return JSON.parse(cleaned.slice(start, end + 1));
+  }
+
+  async function runAudit() {
+    const original = currentText();
+    if (!original) return;
+    setBusy(true, "Γίνεται παιδαγωγική εκτίμηση. Η αντιστοίχιση ύλης εμφανίζεται χωριστά από τα verified δεδομένα.");
+    try {
+      const system = "Είσαι βοηθός ποιοτικού ελέγχου εκπαιδευτικού υλικού. Αξιολογείς μόνο παιδαγωγικά και παρουσιαστικά χαρακτηριστικά. Δεν αποφασίζεις αν το υλικό είναι επίσημα σωστό, εγκεκριμένο ή curriculum-aligned. Δεν δίνεις συνολικό verdict. Επιστρέφεις αυστηρά JSON χωρίς markdown.";
+      const prompt = contextBlock() + "\n\nΑξιολόγησε 5 κριτήρια: language, cognitiveLoad, clarity, accessibility, learningFirst. Για κάθε κριτήριο δώσε {\"status\":\"ok\" ή \"review\",\"note\":\"μία σύντομη συγκεκριμένη παρατήρηση στα ελληνικά\"}. Μην κάνεις διάγνωση. Το accessibility αφορά δομή και παρουσίαση.\n\nJSON shape:\n{\"language\":{\"status\":\"ok\",\"note\":\"\"},\"cognitiveLoad\":{\"status\":\"ok\",\"note\":\"\"},\"clarity\":{\"status\":\"ok\",\"note\":\"\"},\"accessibility\":{\"status\":\"ok\",\"note\":\"\"},\"learningFirst\":{\"status\":\"ok\",\"note\":\"\"}}\n\nΥΛΙΚΟ\n---\n" + original + "\n---";
+      state.lastAudit = parseJson(await callAI(system, prompt));
+      renderAudit();
+      setBusy(false, "Ο έλεγχος ολοκληρώθηκε. Τα παιδαγωγικά σημεία είναι AI εκτίμηση και χρειάζονται κρίση εκπαιδευτικού.");
+    } catch (error) { setBusy(false, "Δεν ολοκληρώθηκε ο έλεγχος: " + error.message); }
+  }
+
+  function renderSourceGate() {
+    const host = $id("tmlVerifiedGate");
+    if (!host) return;
+    const s = sourceStatus();
+    const symbols = { good: "✓", partial: "◐", unknown: "?" };
+    host.innerHTML = '<div class="tml-check-row tml-' + s.tone + '"><span class="tml-check-icon">' + (symbols[s.tone] || "?") + '</span><div><strong>Αντιστοίχιση / πηγή: ' + escapeHtml(s.label) + '</strong><p>' + escapeHtml(s.detail) + '</p><span class="tml-data-label">Δεδομένα aitools4kids · όχι AI εκτίμηση</span></div></div>';
+  }
+
+  function renderAudit() {
+    const host = $id("tmlAuditResults");
+    if (!host) return;
+    if (!state.lastAudit) {
+      host.innerHTML = '<p class="tml-muted">Δεν έχει γίνει ακόμη παιδαγωγικός έλεγχος.</p>';
+      return;
+    }
+    const fields = [
+      ["language", "Γλωσσική δυσκολία"],
+      ["cognitiveLoad", "Γνωστικό φορτίο"],
+      ["clarity", "Σαφήνεια οδηγιών"],
+      ["accessibility", "Δομή & προσβασιμότητα"],
+      ["learningFirst", "Learning-first συμπεριφορά"]
+    ];
+    host.innerHTML = '<div class="tml-ai-estimate"><strong>AI εκτίμηση — χρειάζεται κρίση εκπαιδευτικού</strong></div>' + fields.map(([key, label]) => {
+      const data = state.lastAudit[key] || {};
+      const ok = data.status === "ok";
+      return '<div class="tml-check-row ' + (ok ? "tml-good" : "tml-partial") + '"><span class="tml-check-icon">' + (ok ? "✓" : "◐") + '</span><div><strong>' + label + '</strong><p>' + escapeHtml(data.note || "Δεν δόθηκε παρατήρηση.") + '</p></div></div>';
+    }).join("");
+  }
+
+  function exactMisconceptions() {
+    if (currentTask() !== "assessment") return [];
+    if (typeof GAP_TAGS === "undefined") return [];
+    const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
+    if (!layer || typeof layer.getGapAlignment !== "function") return [];
+    const topic = norm(selectedUnitText());
+    if (!topic) return [];
+    const out = [];
+    Object.keys(GAP_TAGS).forEach((id) => {
+      const alignment = layer.getGapAlignment(id);
+      if (!alignment || !alignment.annualScopeVerified) return;
+      if (alignment.status !== "exact-section-verified" && alignment.status !== "related-section-verified") return;
+      const candidates = [alignment.officialSectionEl, alignment.topicAnchorEl].filter(Boolean).map(norm);
+      if (!candidates.some((value) => value === topic)) return;
+      const gap = GAP_TAGS[id];
+      out.push({ id, label: gap.labelEl || id, explain: gap.explainEl || "" });

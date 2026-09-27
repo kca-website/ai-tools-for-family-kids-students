@@ -101,7 +101,9 @@ try {
   await restorePage.waitForSelector('#pathView:not([hidden])', { state: 'visible', timeout: 10000 });
   const restoredState=await restorePage.evaluate(()=>history.state);
   assert.equal(restoredState?.__aitools4kidsPwaEntry,true,'direct standalone route must be marked as an internal PWA history entry');
-  await restorePage.goBack({waitUntil:'domcontentloaded',timeout:10000}).catch(()=>null);
+  assert.equal(restoredState?.pwaRestoredRoute,true,'direct standalone route must seed an in-app Home history entry');
+  await restorePage.evaluate(()=>history.back());
+  await restorePage.waitForFunction(()=>location.pathname==='/',null,{timeout:10000});
   await restorePage.waitForSelector('#zoneSelectView:not([hidden])', { state: 'visible', timeout: 10000 });
   assert.equal(new URL(restorePage.url()).pathname,'/','Back from a directly restored standalone route must return to the app homepage');
   await restorePage.close();

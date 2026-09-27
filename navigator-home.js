@@ -11,8 +11,7 @@
   function isHome(){
     return location.pathname === "/" || location.pathname === "";
   }
-  if(!isHome()) return;
-  document.documentElement.classList.add("home-v8-active");
+  if(isHome()) document.documentElement.classList.add("home-v8-active");
 
   const COPY = {
     el: {
@@ -439,6 +438,7 @@
 
   function apply(){
     if(!isHome()) return;
+    document.documentElement.classList.add("home-v8-active");
     const styleLink = ensureStyles();
     hideLegacyHomeBlocks();
     ensureAccessibilityBadge();
@@ -482,7 +482,13 @@
 
     window.addEventListener("popstate", () => {
       setTimeout(() => {
-        if(isHome()) apply();
+        if(!isHome()) return;
+        const zoneView=document.getElementById("zoneSelectView");
+        const pathView=document.getElementById("pathView");
+        if(zoneView?.hidden && pathView && !pathView.hidden){
+          document.getElementById("backToZones")?.click();
+        }
+        apply();
       }, 0);
     });
 

@@ -1632,7 +1632,7 @@ function renderToolGrid(pathTools, targetElement) {
         renderQuizView();
       });
     });
-    els.quizContent.querySelectorAll(".quiz-browse-btn").forEach((btn) => {
+    els.quizContent.querySelectorAll(".quiz-browse-btn:not(.quiz-curriculum-browse-btn)").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.quizBrowseTopicsId = btn.dataset.subjectId;
         renderQuizView();

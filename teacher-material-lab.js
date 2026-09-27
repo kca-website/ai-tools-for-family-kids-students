@@ -461,7 +461,7 @@
     root.id = "teacherMaterialLab";
     root.className = "teacher-material-lab";
     root.innerHTML = [
-      '<summary><span><strong>✨ Εργαστήριο Εκπαιδευτικού</strong><small>Επεξεργάσου · Προσαρμόσε · Έλεγξε · Αποθήκευσε</small></span><span aria-hidden="true">⌄</span></summary>',
+      '<summary><span><span class="tml-summary-kicker">Νέο επόμενο βήμα</span><strong>✨ Επεξεργάσου το υλικό πριν το χρησιμοποιήσεις</strong><small>Προσαρμογή · Έλεγχος · Παράγωγο υλικό · Αποθήκευση</small></span><span class="tml-summary-cta">Άνοιγμα εργαστηρίου</span></summary>',
       '<div class="tml-body">',
       '<div class="tml-top-actions"><button type="button" id="tmlSave">💾 Αποθήκευση σε αυτή τη συσκευή</button><button type="button" id="tmlUndo" disabled>↶ Πίσω στην προηγούμενη έκδοση</button></div>',
       '<div id="tmlVerifiedGate"></div>',
@@ -473,7 +473,9 @@
       '<div id="tmlStatus" class="tml-status" role="status" aria-live="polite"></div>',
       '</div>'
     ].join("");
-    result.appendChild(root);
+    const actions = result.querySelector(".result-actions");
+    if (actions) result.insertBefore(root, actions);
+    else result.appendChild(root);
 
     root.querySelectorAll(".tml-tabs button").forEach((button) => {
       button.addEventListener("click", () => {

@@ -421,3 +421,119 @@
         const seen = new Set();
         const merged = clean.concat(loadMaterials()).filter((x) => {
           const key = x.id || ((x.title || "") + "|" + (x.createdAt || ""));
+
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        }).slice(0, MAX_ITEMS);
+        writeMaterials(merged);
+        renderLibrary();
+        setBusy(false, "Το αρχείο εισήχθη τοπικά. Δεν ανέβηκε σε server.");
+      } catch (error) { setBusy(false, "Δεν έγινε εισαγωγή: " + error.message); }
+    };
+    reader.readAsText(file);
+  }
+
+  function undo() {
+    if (state.versions.length < 2) return;
+    state.versions.pop();
+    const previous = state.versions[state.versions.length - 1];
+    if (!previous) return;
+    try {
+      if (typeof lastText !== "undefined") lastText = previous.text;
+      if (typeof show === "function") show(previous.text, "Εργαστήριο · προηγούμενη έκδοση");
+    } catch (_) {}
+    syncEditor();
+    updateUndo();
+    renderSourceGate();
+    renderMisconceptions();
+  }
+
+  function applyManualEdit() {
+    const editor = $id("tmlEditor");
+    if (!editor || !editor.value.trim()) return;
+    applyText(editor.value.trim(), "Χειροκίνητη επεξεργασία");
+    setBusy(false, "Η χειροκίνητη έκδοση εφαρμόστηκε.");
+  }
+
+  function buildLab() {
+    const result = $id("result");
+    if (!result || $id("teacherMaterialLab")) return;
+    const root = document.createElement("details");
+    root.id = "teacherMaterialLab";
+    root.className = "teacher-material-lab";
+    root.innerHTML = [
+      '<summary><span><strong>✨ Εργαστήριο Εκπαιδευτικού</strong><small>Επεξεργάσου · Προσαρμόσε · Έλεγξε · Αποθήκευσε</small></span><span aria-hidden="true">⌄</span></summary>',
+      '<div class="tml-body">',
+      '<div class="tml-top-actions"><button type="button" id="tmlSave">💾 Αποθήκευση σε αυτή τη συσκευή</button><button type="button" id="tmlUndo" disabled>↶ Πίσω στην προηγούμενη έκδοση</button></div>',
+      '<div id="tmlVerifiedGate"></div>',
+      '<div class="tml-tabs" role="tablist" aria-label="Εργαστήριο υλικού"><button type="button" class="active" data-tab="adapt">Προσαρμόζω</button><button type="button" data-tab="derive">Φτιάξε από αυτό</button><button type="button" data-tab="audit">Έλεγχος</button><button type="button" data-tab="library">Τα υλικά μου</button></div>',
+      '<section class="tml-pane active" data-pane="adapt"><p class="tml-help">Οι αλλαγές δουλεύουν πάνω στο ίδιο υλικό και κρατούν το τρέχον πλαίσιο τάξης, μαθήματος και ενότητας.</p><div class="tml-chip-grid"><button type="button" data-ai-action="transform" data-kind="simpler">Πιο απλή γλώσσα</button><button type="button" data-ai-action="transform" data-kind="steps">Σπάσε σε βήματα</button><button type="button" data-ai-action="transform" data-kind="shorter">Πιο σύντομο</button><button type="button" data-ai-action="transform" data-kind="harder">Πιο απαιτητικό</button><button type="button" data-ai-action="transform" data-kind="example">Πρόσθεσε παράδειγμα</button><button type="button" data-ai-action="transform" data-kind="vocabulary">Βασικό λεξιλόγιο</button><button type="button" data-ai-action="transform" data-kind="visual">Πιο καθαρή οπτική δομή</button></div><details class="tml-manual"><summary>✏️ Χειροκίνητη επεξεργασία κειμένου</summary><textarea id="tmlEditor" rows="14" aria-label="Επεξεργασία παραγόμενου υλικού"></textarea><button type="button" id="tmlApplyEdit">Εφαρμογή αλλαγών</button></details></section>',
+      '<section class="tml-pane" data-pane="derive"><p class="tml-help">Παράγει νέο υλικό μόνο από το τρέχον αποτέλεσμα. Η προηγούμενη έκδοση δεν χάνεται.</p><div class="tml-chip-grid"><button type="button" data-ai-action="derive" data-kind="exit">Exit ticket</button><button type="button" data-ai-action="derive" data-kind="check5">5 ερωτήσεις κατανόησης</button><button type="button" data-ai-action="derive" data-kind="flashcards">6 flashcards</button><button type="button" data-ai-action="derive" data-kind="vocab">Φύλλο λεξιλογίου</button><button type="button" data-ai-action="derive" data-kind="review10">Επανάληψη 10΄</button></div><div id="tmlMisconceptionWrap" class="tml-misconception-wrap" hidden><h3>Τεκμηριωμένες παρανοήσεις για την αξιολόγηση</h3><div id="tmlMisconceptions"></div><button type="button" id="tmlApplyMisconceptions" data-ai-action="misconception">Ενσωμάτωσε τις επιλεγμένες</button></div></section>',
+      '<section class="tml-pane" data-pane="audit"><p class="tml-help"><strong>Δεν δίνουμε συνολικό «εγκεκριμένο».</strong> Η πηγή/ύλη ελέγχεται από τα δεδομένα του site. Τα υπόλοιπα είναι AI παιδαγωγική εκτίμηση.</p><button type="button" id="tmlAuditBtn" class="tml-primary" data-ai-action="audit">🔎 Έλεγξε το υλικό πριν το χρησιμοποιήσεις</button><div id="tmlAuditResults"></div></section>',
+      '<section class="tml-pane" data-pane="library"><div class="tml-library-head"><p class="tml-help">Αποθηκεύεται μόνο σε αυτόν τον browser. Μην αποθηκεύεις προσωπικά ή ευαίσθητα δεδομένα μαθητών.</p><div><button type="button" id="tmlExport">Export JSON</button><label class="tml-import">Import JSON<input type="file" id="tmlImport" accept="application/json,.json"></label></div></div><div id="tmlLibraryList"></div></section>',
+      '<div id="tmlStatus" class="tml-status" role="status" aria-live="polite"></div>',
+      '</div>'
+    ].join("");
+    result.appendChild(root);
+
+    root.querySelectorAll(".tml-tabs button").forEach((button) => {
+      button.addEventListener("click", () => {
+        root.querySelectorAll(".tml-tabs button").forEach((x) => x.classList.toggle("active", x === button));
+        root.querySelectorAll(".tml-pane").forEach((x) => x.classList.toggle("active", x.dataset.pane === button.dataset.tab));
+        if (button.dataset.tab === "library") renderLibrary();
+        if (button.dataset.tab === "audit") renderAudit();
+      });
+    });
+
+    root.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-ai-action]");
+      if (!button || state.busy) return;
+      if (button.dataset.aiAction === "transform") runTransform(button.dataset.kind);
+      else if (button.dataset.aiAction === "derive") runDerivative(button.dataset.kind);
+      else if (button.dataset.aiAction === "audit") runAudit();
+      else if (button.dataset.aiAction === "misconception") applyMisconceptions();
+    });
+    $id("tmlSave").addEventListener("click", saveCurrent);
+    $id("tmlUndo").addEventListener("click", undo);
+    $id("tmlApplyEdit").addEventListener("click", applyManualEdit);
+    $id("tmlExport").addEventListener("click", exportMaterials);
+    $id("tmlImport").addEventListener("change", function () {
+      if (this.files && this.files[0]) importMaterials(this.files[0]);
+      this.value = "";
+    });
+    $id("tmlLibraryList").addEventListener("click", libraryAction);
+  }
+
+  function refresh() {
+    buildLab();
+    const root = $id("teacherMaterialLab");
+    if (!root) return;
+    root.hidden = !isEligible() || !currentText().trim();
+    if (root.hidden) return;
+    remember(currentText(), "Αρχική έκδοση");
+    syncEditor();
+    renderSourceGate();
+    renderAudit();
+    renderMisconceptions();
+    renderLibrary();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    refresh();
+    const result = $id("result");
+    const output = $id("output");
+    if (result) new MutationObserver(refresh).observe(result, { attributes: true, attributeFilter: ["class"] });
+    if (output) new MutationObserver(() => setTimeout(refresh, 0)).observe(output, { childList: true, subtree: true });
+    ["context", "grade", "subject", "unit", "customUnit"].forEach((id) => {
+      const node = $id(id);
+      if (node) node.addEventListener("change", () => setTimeout(refresh, 0));
+    });
+  });
+
+  window.AITOOLSKIDS_TEACHER_MATERIAL_LAB = Object.freeze({
+    refresh,
+    sourceStatus,
+    exactMisconceptions
+  });
+})();

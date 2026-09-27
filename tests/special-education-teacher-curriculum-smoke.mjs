@@ -192,6 +192,7 @@ try{
   const specialLycMathNote=await page.locator('#curriculumNote').innerText();
   assert.match(specialLycMathNote,/οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί/i,'Special Lyceum Math must visibly report published 2026-27 guidance');
   assert.match(specialLycMathNote,/υποστηρικτικό πλαίσιο/i,'Special Lyceum Math must remain support-only until exact E.A.E. sections are mapped');
+  assert.match(specialLycMathNote,/Άλγεβρα και Γεωμετρία Γενικής Παιδείας/i,'Special Lyceum Math pending notice must expose the official grade-specific scope');
   assert.ok(await page.locator('#curriculumNote a[href*="iep.edu.gr"]').count(),'Special Lyceum Math pending status must link to an official IEP source');
 
   await page.selectOption('#context','middle');

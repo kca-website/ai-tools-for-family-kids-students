@@ -17,3 +17,9 @@ assert.match(evidence,/fractions\.whole_number_bias/);
 assert.match(evidence,/physics-lyk\.newton-third-law-bigger-force/);
 assert.match(evidence,/biologia-a-gym\.plant-vs-animal-digestion/);
 console.log("classroom activity + effectiveness + misconception evidence smoke: ok");
+
+assert.match(teacher,/renderClassQr/);
+assert.match(teacher,/Δραστηριότητα τάξης \/ QR/);
+assert.match(tutor,/options = \{\}/);
+assert.match(tutor,/hiddenUser/);
+assert.match(tutor,/INDEPENDENT CHECKS/);

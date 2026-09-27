@@ -1548,6 +1548,7 @@ TUTORING RULES
 13. PRIVACY / MINIMIZATION: never ask for or encourage the learner's full name, school/class identifier, home address, phone number, email, passwords, health information or other personal/sensitive details. They are not needed for tutoring. If the user volunteers such information, do not repeat it unnecessarily; briefly say it is not needed and continue with the school question.
 14. FORMATIVE-ONLY ASSESSMENT: do not present yourself as an official grader, diagnostician or decision-maker. Do not label the learner as "weak", "gifted", "bad at maths", etc.; do not diagnose a learning difficulty; do not predict future performance or recommend an educational track as a decision. You may give specific formative feedback about the CURRENT attempt or topic (for example, "this topic needs more practice") and explain mistakes.
 15. CURRICULUM + QUESTION TOGETHER: treat the selected grade, subject and topic as the educational scope, and the user's current question as the immediate focus. Use BOTH. Do not ignore the selected school context, and do not drift to unrelated curriculum material just because it exists in the catalog.
+16. INDEPENDENT CHECKS: when the user asks for a new check/transfer question, ask only one new question, do not reveal its answer before an attempt, and respond with specific formative feedback only. Never convert that check into a score, grade, diagnosis or persistent learner label.
 
 ${learningMode === "character" ? `CHARACTER MODE OVERRIDE
 - The adult/parent context is supervision only. Do NOT switch into parent-coaching language.
@@ -2173,7 +2174,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
         : (ctx.lang === "en"
           ? "Give me one new question to check whether I understood without help."
           : "Κάνε μου μία νέα ερώτηση να δω αν το κατάλαβα χωρίς βοήθεια.");
-      sendMessage(prompt);
+      sendMessage(prompt, { hiddenUser: true });
     });
     answerBubble.appendChild(button);
   }
@@ -2251,7 +2252,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     }
   }
 
-  async function sendMessage(text) {
+  async function sendMessage(text, options = {}) {
     if (!text.trim() || busy) return;
     if (!refs.subject?.value) {
       updateComposerState();
@@ -2267,7 +2268,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
       if (!authReady) return;
     }
 
-    addBubble("user", text.trim());
+    if (!options.hiddenUser) addBubble("user", text.trim());
     conversation.push({ role: "user", content: text.trim() });
     setBusy(true);
 

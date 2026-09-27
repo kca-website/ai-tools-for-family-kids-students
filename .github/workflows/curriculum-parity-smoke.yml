@@ -1,14 +1,10 @@
 name: Curriculum parity smoke
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-
 on:
   push:
     branches:
       - 'fix/curriculum-parity-*'
+      - 'fix/verified-sections-*'
   pull_request:
     branches:
       - main

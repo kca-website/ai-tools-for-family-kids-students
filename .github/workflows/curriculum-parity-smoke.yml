@@ -1,0 +1,42 @@
+name: Curriculum parity smoke
+
+on:
+  push:
+    branches:
+      - 'fix/curriculum-parity-*'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax checks
+        run: |
+          node --check app.js
+          node --check curriculum-resolver.js
+          node --check general-subject-expansion-2026-2027.js
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/aitools4kids-parity.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/xartis-ylis.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/aitools4kids-parity.log
+          exit 1
+      - name: Verify cross-surface curriculum parity
+        run: node tests/curriculum-cross-surface-parity-smoke.mjs
+      - name: Show server log on failure
+        if: failure()
+        run: cat /tmp/aitools4kids-parity.log || true

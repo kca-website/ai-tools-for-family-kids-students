@@ -1463,6 +1463,108 @@ function renderToolGrid(pathTools, targetElement) {
     });
   }
 
+  function curriculumPracticeNorm(value) {
+    return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[΄’'·.,:;()\/\\-]/g, " ").replace(/\s+/g, " ").trim();
+  }
+
+  function curriculumPracticeSource(subject) {
+    const curriculum = subject?.curriculum || subject?.officialCurriculum || {};
+    const source = curriculum.annualInstructionsUrl || curriculum.examSyllabusUrl || curriculum.catalogUrl || "";
+    const currentYear = curriculum.schoolYear === "2026-2027" ||
+      curriculum.annualInstructionsStatus === "2026-27-verified" ||
+      curriculum.annualInstructionsStatus === "2026-27-framework-verified" ||
+      /annual-|panhellenic-2027/.test(curriculum.coverageStatus || "");
+    if (!currentYear || !/^https?:\/\/(?:www\.)?(?:iep\.edu\.gr|www2\.iep\.edu\.gr|minedu\.gov\.gr)\//i.test(source)) return "";
+    return source;
+  }
+
+  function verifiedCurriculumPracticeTopics(subject) {
+    return (subject?.topics || []).filter((topic) => {
+      const status = String(topic?.status || "");
+      if (!topic?.labelEl && !topic?.labelEn) return false;
+      if (topic?.specialSupportAction || status === "support-action") return false;
+      return /annual-instructions-verified|annual-exam-syllabus-verified|panhellenic-2027-verified|verified-framework|official-book-section|related-section-verified|navigation-map/.test(status);
+    });
+  }
+
+  function sourceBackedCurriculumSubjectsForGrade(zoneQuizzes, subjectIds) {
+    const resolver = window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+    if (!resolver || !state.quizGradeId) return [];
+    const representedIds = new Set(subjectIds);
+    const representedNames = new Set(subjectIds.map((sid) => curriculumPracticeNorm(zoneQuizzes?.[sid]?.subjectLabelEl || "")));
+    return (resolver.getSubjects(state.currentZone, state.quizGradeId) || []).filter((subject) => {
+      if (!curriculumPracticeSource(subject)) return false;
+      if (representedIds.has(subject.id) || (subject.quizId && representedIds.has(subject.quizId))) return false;
+      const label = curriculumPracticeNorm(subject.subjectLabelEl || subject.id);
+      return label && !representedNames.has(label);
+    });
+  }
+
+  function curriculumPracticeTutorUrl(subject, topic) {
+    const role = state.currentZone === "high" ? state.currentRole : "guardian";
+    const params = new URLSearchParams({ grade: state.quizGradeId || "", subject: subject.id || subject.quizId || "", mode: "challenge" });
+    if (topic?.id) params.set("topic", topic.id);
+    const topicText = topic ? (state.lang === "el" ? (topic.labelEl || topic.labelEn) : (topic.labelEn || topic.labelEl)) : "";
+    if (topicText) params.set("topicText", topicText);
+    return `/${state.currentZone}/${role}/tutor?${params.toString()}`;
+  }
+
+  function renderCurriculumPracticeBrowser(subjectId) {
+    const resolver = window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+    const subject = resolver?.getSubject?.(state.currentZone, state.quizGradeId, subjectId);
+    if (!subject) {
+      renderQuizView();
+      return;
+    }
+    const source = curriculumPracticeSource(subject);
+    const topics = verifiedCurriculumPracticeTopics(subject);
+    const subjectLabel = state.lang === "el" ? (subject.subjectLabelEl || subject.id) : (subject.subjectLabelEn || subject.subjectLabelEl || subject.id);
+    const framework = subject.topicMode === "verified-framework" || subject.curriculum?.frameworkOnly === true;
+    const intro = state.lang === "el"
+      ? (framework
+          ? "Οι παρακάτω επιλογές είναι επίσημο πλαίσιο ΙΕΠ. Δεν παρουσιάζονται ως υποχρεωτική ετήσια σειρά κεφαλαίων."
+          : topics.length
+            ? "Εμφανίζονται μόνο ενότητες/θέματα που προέρχονται από επαληθευμένη επίσημη πηγή."
+            : "Το μάθημα και η επίσημη πηγή 2026–27 έχουν διασταυρωθεί, αλλά δεν έχουμε κωδικοποιήσει ακόμη ακριβείς ενότητες. Χρησιμοποίησε τον πραγματικό τίτλο κεφαλαίου από το βιβλίο ή την επίσημη οδηγία.")
+      : (framework
+          ? "The choices below are an official IEP framework, not a mandatory yearly chapter sequence."
+          : topics.length
+            ? "Only topics backed by a verified official source are shown."
+            : "The course and its official 2026–27 source are verified, but exact units are not encoded yet. Use the real chapter title from the textbook or official guidance.");
+
+    const topicHtml = topics.length ? topics.map((topic) => {
+      const label = state.lang === "el" ? (topic.labelEl || topic.labelEn) : (topic.labelEn || topic.labelEl);
+      const badge = /verified-framework/.test(topic.status || "")
+        ? (state.lang === "el" ? "Επίσημο πλαίσιο ΙΕΠ" : "Official IEP framework")
+        : (state.lang === "el" ? "Επαληθευμένη ενότητα/θέμα" : "Verified unit/topic");
+      return `
+        <button type="button" class="quiz-topic-card quiz-curriculum-topic-btn" data-subject-id="${escapeAttr(subject.id)}" data-topic-id="${escapeAttr(topic.id || "")}">
+          <span class="quiz-topic-card__label">${escapeHtml(label)}</span>
+          <span class="quiz-topic-card__explain">${escapeHtml(badge)}</span>
+        </button>
+      `;
+    }).join("") : `<div class="empty-state">${escapeHtml(intro)}</div>`;
+
+    els.quizContent.innerHTML = `
+      <button type="button" class="quiz-grade-back-btn" id="quizCurriculumBackBtn">${t("quizBackToGrades")}</button>
+      <p class="quiz-pick-heading">${escapeHtml(subjectLabel)}</p>
+      <p class="quiz-browse-intro">${escapeHtml(intro)}</p>
+      ${topics.length ? `<div class="quiz-topic-grid">${topicHtml}</div>` : topicHtml}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+        <a class="quiz-start-btn" href="${escapeAttr(curriculumPracticeTutorUrl(subject, null))}">${state.lang === "el" ? "AI Βοήθεια στο πραγματικό κεφάλαιο" : "AI Help with the real chapter"}</a>
+        ${source ? `<a class="quiz-browse-btn" href="${escapeAttr(source)}" target="_blank" rel="noopener noreferrer">${state.lang === "el" ? "Επίσημη πηγή 2026–27 ↗" : "Official 2026–27 source ↗"}</a>` : ""}
+      </div>
+    `;
+
+    document.getElementById("quizCurriculumBackBtn")?.addEventListener("click", () => renderQuizView());
+    els.quizContent.querySelectorAll(".quiz-curriculum-topic-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const selected = topics.find((topic) => String(topic.id || "") === btn.dataset.topicId) || null;
+        window.location.href = curriculumPracticeTutorUrl(subject, selected);
+      });
+    });
+  }
+
   function renderQuizSubjectPicker(zoneQuizzes, subjectIds) {
     const backBtnHtml = `<button type="button" class="quiz-grade-back-btn" id="quizBackToGradesBtn">${t("quizBackToGrades")}</button>`;
     if (!subjectIds.length) {
@@ -1491,7 +1593,25 @@ function renderToolGrid(pathTools, targetElement) {
         </article>
       `;
     }).join("");
-    els.quizContent.innerHTML = `${backBtnHtml}<p class="quiz-pick-heading">${t("quizPickSubject")}</p><div class="quiz-subject-grid">${cards}</div>`;
+    const curriculumOnly = sourceBackedCurriculumSubjectsForGrade(zoneQuizzes, subjectIds);
+    const curriculumCards = curriculumOnly.map((subject) => {
+      const label = state.lang === "el" ? (subject.subjectLabelEl || subject.id) : (subject.subjectLabelEn || subject.subjectLabelEl || subject.id);
+      const topics = verifiedCurriculumPracticeTopics(subject);
+      const scope = subject.topicMode === "verified-framework"
+        ? (state.lang === "el" ? "Επίσημο πλαίσιο ΙΕΠ 2026–27" : "Official IEP framework 2026–27")
+        : topics.length
+          ? (state.lang === "el" ? "Επίσημη πηγή 2026–27 · επαληθευμένες ενότητες" : "Official 2026–27 source · verified units")
+          : (state.lang === "el" ? "Επίσημη πηγή 2026–27 · χωρίς επινοημένες ενότητες" : "Official 2026–27 source · no invented units");
+      return `
+        <article class="quiz-subject-card quiz-subject-card--curriculum">
+          <p class="quiz-subject-card__subject">${escapeHtml(label)}</p>
+          <p class="quiz-subject-card__title">${escapeHtml(scope)}</p>
+          <p class="quiz-subject-card__intro">${state.lang === "el" ? "Δεν υπάρχει ακόμη επαληθευμένο σταθερό τεστ. Η εξάσκηση ξεκινά μόνο από διασταυρωμένη ενότητα ή από τον πραγματικό τίτλο κεφαλαίου." : "No verified fixed quiz yet. Practice starts only from a verified unit or the real chapter title."}</p>
+          <button type="button" class="quiz-browse-btn quiz-curriculum-browse-btn" data-subject-id="${escapeAttr(subject.id)}">${topics.length ? (state.lang === "el" ? "Δες επαληθευμένες ενότητες" : "See verified units") : (state.lang === "el" ? "Εξάσκηση στο πραγματικό κεφάλαιο" : "Practice the real chapter")}</button>
+        </article>
+      `;
+    }).join("");
+    els.quizContent.innerHTML = `${backBtnHtml}<p class="quiz-pick-heading">${t("quizPickSubject")}</p><div class="quiz-subject-grid">${cards}${curriculumCards}</div>`;
     const backBtn = document.getElementById("quizBackToGradesBtn");
     if (backBtn) {
       backBtn.addEventListener("click", () => {
@@ -1499,6 +1619,9 @@ function renderToolGrid(pathTools, targetElement) {
         renderQuizView();
       });
     }
+    els.quizContent.querySelectorAll(".quiz-curriculum-browse-btn").forEach((btn) => {
+      btn.addEventListener("click", () => renderCurriculumPracticeBrowser(btn.dataset.subjectId));
+    });
     els.quizContent.querySelectorAll(".quiz-start-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.quizSubjectId = btn.dataset.subjectId;
@@ -1509,7 +1632,7 @@ function renderToolGrid(pathTools, targetElement) {
         renderQuizView();
       });
     });
-    els.quizContent.querySelectorAll(".quiz-browse-btn").forEach((btn) => {
+    els.quizContent.querySelectorAll(".quiz-browse-btn:not(.quiz-curriculum-browse-btn)").forEach((btn) => {
       btn.addEventListener("click", () => {
         state.quizBrowseTopicsId = btn.dataset.subjectId;
         renderQuizView();

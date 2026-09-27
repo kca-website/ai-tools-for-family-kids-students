@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'fix/curriculum-parity-*'
+      - 'fix/verified-sections-*'
   pull_request:
     branches:
       - main

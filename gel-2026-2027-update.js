@@ -30,10 +30,13 @@
 (function () {
   "use strict";
 
-  const VERSION = "2.0.0";
+  const VERSION = "2.1.0";
   const SCHOOL_YEAR = "2026-2027";
-  const VERIFIED_ON = "2026-08-30";
+  const VERIFIED_ON = "2026-09-27";
   const DIDE_GUIDANCE = "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/";
+  const IEP_GEL_GUIDANCE = "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/";
+  const INFORMATICS_A_BOOK = "https://ebooks.edu.gr/ebooks/v/html/8547/2714/Pliroforiki_A-Lykeiou_html-empl/";
+  const INFORMATICS_B_BOOK = "https://ebooks.edu.gr/ebooks/v/html/8547/2716/Pliroforiki_B-Lykeiou_html-empl/";
   const GEL_EXAM = "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027";
   const PANHELLENIC_2027 = "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2";
 
@@ -889,59 +892,29 @@
       "grade": "a",
       "labelEl": "Εφαρμογές Πληροφορικής, Α' Λυκείου",
       "labelEn": "Computer Applications, 10th Grade",
-      "status": "annual-guidance-map",
+      "status": "official-book-verified",
       "topics": [
-        [
-          "Πληροφορική και ψηφιακές εφαρμογές στην καθημερινή ζωή",
-          "Computing and digital applications in everyday life"
-        ],
-        [
-          "Επίλυση προβλήματος και σχεδιασμός ψηφιακού έργου",
-          "Problem solving and digital project design"
-        ],
-        [
-          "Υπηρεσίες Παγκόσμιου Ιστού και Διαδικτύου",
-          "Web and Internet services"
-        ],
-        [
-          "HTML και βασική δημιουργία ιστοσελίδας",
-          "HTML and basic web-page creation"
-        ],
-        [
-          "Web 2.0 και κοινωνικά δίκτυα",
-          "Web 2.0 and social networks"
-        ],
-        [
-          "Υπολογιστικό νέφος (cloud computing)",
-          "Cloud computing"
-        ],
-        [
-          "Συνεργατικά έγγραφα και εργαλεία",
-          "Collaborative documents and tools"
-        ],
-        [
-          "Ψηφιακό περιεχόμενο και πολυμέσα",
-          "Digital content and multimedia"
-        ],
-        [
-          "Πνευματικά δικαιώματα και άδειες χρήσης",
-          "Copyright and licences"
-        ],
-        [
-          "Προσωπικά δεδομένα και ιδιωτικότητα",
-          "Personal data and privacy"
-        ],
-        [
-          "Ψηφιακή ταυτότητα και διαδικτυακή ασφάλεια",
-          "Digital identity and online safety"
-        ],
-        [
-          "Υπεύθυνη διαδικτυακή επικοινωνία",
-          "Responsible online communication"
-        ]
+        ["Κεφάλαιο 1 — Υλικό Υπολογιστών","Chapter 1 — Computer Hardware"],
+        ["Κεφάλαιο 2 — Λογισμικό","Chapter 2 — Software"],
+        ["Κεφάλαιο 3 — Εφαρμογές Υπολογιστών και Άνθρωπος","Chapter 3 — Computer Applications and People"],
+        ["Κεφάλαιο 4 — Κοινωνικές Επιπτώσεις","Chapter 4 — Social Impact"],
+        ["Κεφάλαιο 5 — Κύκλος Ζωής Εφαρμογών","Chapter 5 — Application Life Cycle"],
+        ["Κεφάλαιο 6 — Περιβάλλοντα Ανάπτυξης Εφαρμογών","Chapter 6 — Application Development Environments"],
+        ["Κεφάλαιο 7 — Υλοποίηση Εφαρμογών σε Προγραμματιστικά Περιβάλλοντα","Chapter 7 — Implementing Applications in Programming Environments"],
+        ["Κεφάλαιο 8 — Δίκτυα Υπολογιστών","Chapter 8 — Computer Networks"],
+        ["Κεφάλαιο 9 — Διαδίκτυο, Web 2.0 και Web X.0","Chapter 9 — Internet, Web 2.0 and Web X.0"],
+        ["Κεφάλαιο 10 — Υπηρεσίες και Εφαρμογές Διαδικτύου","Chapter 10 — Internet Services and Applications"],
+        ["Κεφάλαιο 11 — Εισαγωγή στην HTML","Chapter 11 — Introduction to HTML"],
+        ["Κεφάλαιο 12 — Η Μάθηση στο Διαδίκτυο","Chapter 12 — Learning on the Internet"],
+        ["Κεφάλαιο 13 — Εφαρμογές Νέφους","Chapter 13 — Cloud Applications"],
+        ["Κεφάλαιο 14 — Τηλεργασία – Ασύγχρονη και Σύγχρονη Συνεργασία από Απόσταση","Chapter 14 — Telework – Asynchronous and Synchronous Remote Collaboration"],
+        ["Κεφάλαιο 15 — Κοινωνικά Δίκτυα","Chapter 15 — Social Networks"],
+        ["Κεφάλαιο 16 — Ασφάλεια και Προστασία στο Διαδίκτυο","Chapter 16 — Internet Safety and Protection"]
       ],
-      "source": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/",
-      "quizId": "pliroforiki-a-lykeiou"
+      "source": IEP_GEL_GUIDANCE,
+      "bookSource": INFORMATICS_A_BOOK,
+      "quizId": "pliroforiki-a-lykeiou",
+      "noteEl": "Οι τίτλοι κεφαλαίων προέρχονται αυτούσιοι από το επίσημο σχολικό βιβλίο. Η ετήσια οδηγία 2026–27 επιβεβαιώνεται χωριστά από το ΙΕΠ· δεν υπονοείται ότι κάθε κεφάλαιο έχει την ίδια έκταση ή σειρά διδασκαλίας."
     },
     {
       "id": "english-a-lykeiou",
@@ -1972,44 +1945,21 @@
       "grade": "b",
       "labelEl": "Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ, Β' Λυκείου",
       "labelEn": "Introduction to Computer Science, 11th Grade",
-      "status": "annual-guidance-map",
+      "status": "official-book-verified",
       "topics": [
-        [
-          "1.1 Επιστήμη των Υπολογιστών",
-          "1.1 Computer Science"
-        ],
-        [
-          "2.1 Πρόβλημα",
-          "2.1 Problem"
-        ],
-        [
-          "2.2 Αλγόριθμοι (με τις επίσημες εξαιρέσεις)",
-          "2.2 Algorithms (with official exclusions)"
-        ],
-        [
-          "2.3 Προγραμματισμός (με τις επίσημες εξαιρέσεις)",
-          "2.3 Programming (with official exclusions)"
-        ],
-        [
-          "3.1 Λειτουργικά Συστήματα",
-          "3.1 Operating Systems"
-        ],
-        [
-          "3.2 Πληροφοριακά Συστήματα",
-          "3.2 Information Systems"
-        ],
-        [
-          "3.3 Δίκτυα",
-          "3.3 Networks"
-        ],
-        [
-          "3.4 Τεχνητή Νοημοσύνη",
-          "3.4 Artificial Intelligence"
-        ]
+        ["1.1 Επιστήμη των Υπολογιστών","1.1 Computer Science"],
+        ["2.1 Πρόβλημα","2.1 Problem"],
+        ["2.2 Αλγόριθμοι","2.2 Algorithms"],
+        ["2.3 Προγραμματισμός","2.3 Programming"],
+        ["3.1 Λειτουργικά Συστήματα","3.1 Operating Systems"],
+        ["3.2 Πληροφοριακά Συστήματα","3.2 Information Systems"],
+        ["3.3 Δίκτυα","3.3 Networks"],
+        ["3.4 Τεχνητή Νοημοσύνη","3.4 Artificial Intelligence"]
       ],
-      "source": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/",
+      "source": IEP_GEL_GUIDANCE,
+      "bookSource": INFORMATICS_B_BOOK,
       "quizId": "pliroforiki-b-lykeiou",
-      "noteEl": "Οι ενότητες ακολουθούν τη φετινή οδηγία διδασκαλίας. Για την ακριβή έκταση/εξαιρέσεις ανά υποενότητα ισχύει το επίσημο έγγραφο."
+      "noteEl": "Οι τίτλοι είναι αυτούσιοι από το επίσημο βιβλίο. Για την ακριβή έκταση, εξαιρέσεις ή προτεραιότητες του 2026–27 υπερισχύει η τρέχουσα οδηγία ΙΕΠ."
     },
     {
       "id": "english-b-lykeiou",
@@ -5387,6 +5337,16 @@
   }
 
   function coverageFor(spec) {
+    if (spec.status === "official-book-verified") {
+      return {
+        coverageStatus: "official-book-verified",
+        coverageLabelEl: "Επίσημη οδηγία 2026–27 + επαληθευμένες ενότητες επίσημου βιβλίου",
+        coverageLabelEn: "Official 2026–27 guidance + verified official-book sections",
+        annualInstructionsStatus: "2026-27-published",
+        scopeNoteEl: spec.noteEl || "Οι τίτλοι προέρχονται από επίσημο σχολικό βιβλίο. Η ακριβής ετήσια έκταση και οι εξαιρέσεις καθορίζονται από την τρέχουσα οδηγία 2026–27.",
+        scopeNoteEn: "Titles come from the official school book. Exact annual scope and exclusions are governed by the current 2026–27 guidance.",
+      };
+    }
     if (spec.status === "exam-verified") {
       return {
         coverageStatus: "annual-exam-syllabus-verified",
@@ -5435,6 +5395,7 @@
       labelEn: row[1] || row[0],
       explainEl: `Εστίαση στην ενότητα «${row[0]}» στο επίπεδο της ${spec.labelEl}. Ζήτησε υπόδειξη ή έλεγχο κατανόησης, όχι έτοιμη λύση.`,
       explainEn: `Focus on “${row[1] || row[0]}” at the level of ${spec.labelEn}. Ask for a hint or understanding check, not a finished answer.`,
+      ...(spec.status === "official-book-verified" ? { status: "related-section-verified", sourceUrl: spec.bookSource } : {}),
     }));
     const source = spec.source || DIDE_GUIDANCE;
     return {
@@ -5453,19 +5414,23 @@
         mappedTopicsEl: topics.map((x) => x.labelEl),
         mappedTopicsEn: topics.map((x) => x.labelEn),
         annualInstructionsUrl: source,
-        catalogUrl: source,
+        catalogUrl: spec.bookSource || source,
         examSyllabusUrl: spec.status === "exam-verified" ? GEL_EXAM :
                          spec.status.startsWith("panhellenic") ? PANHELLENIC_2027 : "",
         sourceLabelEl: spec.status === "exam-verified"
           ? "ΥΠΑΙΘΑ: Εξεταστέα ύλη ΓΕΛ 2026–27"
           : spec.status.startsWith("panhellenic")
             ? "ΥΠΑΙΘΑ: Εξεταστέα ύλη Πανελλαδικών 2027"
-            : "ΥΠΑΙΘΑ/ΙΕΠ: Οδηγίες διδασκαλίας ΓΕΛ 2026–27",
+            : spec.status === "official-book-verified"
+              ? "ΙΕΠ: Οδηγίες ΓΕΛ 2026–27 + Διαδραστικά Σχολικά Βιβλία"
+              : "ΥΠΑΙΘΑ/ΙΕΠ: Οδηγίες διδασκαλίας ΓΕΛ 2026–27",
         sourceLabelEn: spec.status === "exam-verified"
           ? "Ministry: GEL written-exam syllabus 2026–27"
           : spec.status.startsWith("panhellenic")
             ? "Ministry: Panhellenic examinations syllabus 2027"
-            : "Ministry/IEP: GEL teaching guidance 2026–27",
+            : spec.status === "official-book-verified"
+              ? "IEP: GEL 2026–27 guidance + Interactive School Books"
+              : "Ministry/IEP: GEL teaching guidance 2026–27",
         annualInstructionsNoteEl: spec.noteEl || "",
         annualInstructionsNoteEn: "",
       },

@@ -140,8 +140,6 @@
     if (button) button.disabled = state.versions.length < 2;
   }
 
-  }
-
   function remember(text, label) {
     const value = String(text || "").trim();
     if (!value) return;

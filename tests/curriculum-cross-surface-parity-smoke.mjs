@@ -51,6 +51,18 @@ try{
   assert.equal(units.length,4,'Teacher material flow must reuse the four verified framework themes');
   assert.match(await page.locator('#curriculumNote').innerText(),/επίσημο πλαίσιο 2026.?27/i,'Teacher flow must label framework scope honestly');
 
+  await page.goto(BASE+'/middle/guardian/quiz',{waitUntil:'domcontentloaded',timeout:60000});
+  await page.waitForSelector('.quiz-grade-card[data-grade-id="a"]',{state:'visible',timeout:20000});
+  await page.locator('.quiz-grade-card[data-grade-id="a"]').click();
+  await page.waitForSelector('.quiz-subject-grid',{state:'visible',timeout:10000});
+  const practiceSkills=page.locator('.quiz-subject-card--curriculum').filter({hasText:'Εργαστήρια Δεξιοτήτων'});
+  assert.equal(await practiceSkills.count(),1,'Practice Map must include source-backed Skills Labs even without a fixed quiz');
+  await practiceSkills.locator('.quiz-curriculum-browse-btn').click();
+  const practiceTopics=compact(await page.locator('.quiz-curriculum-topic-btn .quiz-topic-card__label').allTextContents());
+  assert.equal(practiceTopics.length,4,'Practice Map must expose the four verified IEP framework themes');
+  assert.match(await page.locator('#quizContent').innerText(),/Επίσημο πλαίσιο ΙΕΠ/i,'Practice Map must label framework scope honestly');
+  assert.ok(await page.locator('#quizContent a[href*="iep.edu.gr"]').count()>0,'Practice Map must link to the official IEP source');
+
   await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>window.AITutor?.render,{timeout:30000});
   await page.evaluate(()=>{

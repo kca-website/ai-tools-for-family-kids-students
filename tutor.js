@@ -61,8 +61,22 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       ? (ctx?.lang === "en" ? "Ends with one independent understanding check." : "Κλείνει με μία ανεξάρτητη ερώτηση κατανόησης.")
       : (ctx?.lang === "en" ? "No formal final check." : "Χωρίς τυπικό τελικό έλεγχο.");
     const privacy = ctx?.lang === "en" ? "No account, score or student tracking." : "Χωρίς λογαριασμό, βαθμό ή παρακολούθηση μαθητή.";
-    return `<section class="tutor-class-activity" aria-label="${escapeHtml(title)}"><div><span>${escapeHtml(title)}</span><strong>${escapeHtml(modeLabels[learningMode] || modeLabels.understand)} · ~${cfg.minutes}'</strong></div><p>${escapeHtml(finalText)} ${escapeHtml(privacy)}</p></section>`;
+    return `<section class="tutor-class-activity" aria-label="${escapeHtml(title)}"><div><span>${escapeHtml(title)}</span><strong id="tutorClassActivitySummary">${escapeHtml(modeLabels[learningMode] || modeLabels.understand)} · ~${cfg.minutes}'</strong></div><p>${escapeHtml(finalText)} ${escapeHtml(privacy)}</p></section>`;
   }
+  function renderClassroomActivityCard() {
+    const node = document.getElementById("tutorClassActivitySummary");
+    if (!node) return;
+    const cfg = classroomActivityConfig();
+    const labels = {
+      understand: ctx?.lang === "en" ? "Understanding" : "Κατανόηση",
+      hint: ctx?.lang === "en" ? "Hint" : "Υπόδειξη",
+      challenge: ctx?.lang === "en" ? "Challenge" : "Πρόκληση",
+      review: ctx?.lang === "en" ? "Review" : "Επανάληψη",
+      character: ctx?.lang === "en" ? "Character" : "Χαρακτήρας"
+    };
+    node.textContent = (labels[learningMode] || labels.understand) + " · ~" + cfg.minutes + "'";
+  }
+
   const CHARACTER_CATALOG = {
     pericles: {
       id: "pericles",
@@ -1095,6 +1109,7 @@ ${compositeRule}
     });
     renderCharacterCard();
     renderModeBox();
+    renderClassroomActivityCard();
   }
 
   function renderModeBox() {
@@ -2153,11 +2168,11 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
       button.textContent = ctx.lang === "en" ? "Preparing one independent question…" : "Ετοιμάζω μία ανεξάρτητη ερώτηση…";
       const prompt = isParentMode()
         ? (ctx.lang === "en"
-          ? "Give me ONE new short transfer question on the same topic that I can ask the learner without help. Do not give the answer. After their attempt, give specific formative feedback only; no score, grade, diagnosis or proficiency label."
-          : "Δώσε μου ΜΙΑ νέα σύντομη ερώτηση μεταφοράς στο ίδιο θέμα για να την κάνω στον μαθητή χωρίς βοήθεια. Μην δώσεις την απάντηση. Μετά την προσπάθειά του δώσε μόνο συγκεκριμένο διαμορφωτικό feedback, χωρίς βαθμό, διάγνωση ή χαρακτηρισμό επίδοσης.")
+          ? "Give me one new question to check whether they understood without help."
+          : "Δώσε μου μία νέα ερώτηση για να δω αν το κατάλαβε χωρίς βοήθεια.")
         : (ctx.lang === "en"
-          ? "Give me ONE new short transfer question on the same topic so I can answer without help. Do not give the answer yet. After my attempt, give specific formative feedback only; no score, grade, diagnosis or proficiency label."
-          : "Κάνε μου ΜΙΑ νέα σύντομη ερώτηση μεταφοράς στο ίδιο θέμα για να απαντήσω χωρίς βοήθεια. Μην δώσεις ακόμη την απάντηση. Μετά την προσπάθειά μου δώσε μόνο συγκεκριμένο διαμορφωτικό feedback, χωρίς βαθμό, διάγνωση ή χαρακτηρισμό επίδοσης.");
+          ? "Give me one new question to check whether I understood without help."
+          : "Κάνε μου μία νέα ερώτηση να δω αν το κατάλαβα χωρίς βοήθεια.");
       sendMessage(prompt);
     });
     answerBubble.appendChild(button);

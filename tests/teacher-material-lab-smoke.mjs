@@ -23,3 +23,7 @@ assert.match(js,/Επίσημη δομή \/ υποστηρικτική γέφυ�
 assert.match(js,/Πηγή καταχωρισμένη — εκκρεμεί χαρτογράφηση ενοτήτων/);
 assert.match(js,/sourceQuizId/);
 assert.match(css,/\.result-actions,#classQrPanel/);
+
+assert.match(js,/\["worksheet","assessment","lesson","activity"\]/);
+assert.match(js,/AITOOLSKIDS_MISCONCEPTION_EVIDENCE/);
+assert.match(js,/Παιδαγωγική τεκμηρίωση/);

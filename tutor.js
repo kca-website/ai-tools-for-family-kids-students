@@ -23,6 +23,60 @@
   function isClassroomMode() {
     return new URLSearchParams(window.location.search).get("classroom") === "1";
   }
+
+  function classroomActivityConfig() {
+    const params = new URLSearchParams(window.location.search);
+    const enabled = isClassroomMode() && params.get("activity") === "1";
+    const rawMinutes = Number(params.get("minutes") || 15);
+    const minutes = [10, 15, 20].includes(rawMinutes) ? rawMinutes : 15;
+    return { enabled, minutes, finalCheck: enabled && params.get("finalCheck") !== "0" };
+  }
+
+  function classroomActivityInstruction() {
+    const cfg = classroomActivityConfig();
+    if (!cfg.enabled) return "";
+    const turns = cfg.minutes <= 10 ? "2-3" : (cfg.minutes >= 20 ? "4-5" : "3-4");
+    return `CLASSROOM ACTIVITY
+- Teacher-created, account-free activity for approximately ${cfg.minutes} minutes.
+- Keep the interaction focused on the selected topic and learning mode.
+- Aim for roughly ${turns} short learner turns before a natural closing step; this is guidance, not a timer.
+- Do not collect names, grades, class identifiers or other student data.
+- Do not calculate, display or store a score.
+${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do not reveal its answer before the learner attempts it. Give formative feedback only; never a grade or proficiency label." : "- Do not add a formal final check unless the learner or teacher asks for one."}
+- The activity ends in the current browser session. Do not imply that progress is saved or monitored.`;
+  }
+
+  function classroomActivityHtml() {
+    const cfg = classroomActivityConfig();
+    if (!cfg.enabled) return "";
+    const modeLabels = {
+      understand: ctx?.lang === "en" ? "Understanding" : "Κατανόηση",
+      hint: ctx?.lang === "en" ? "Hint" : "Υπόδειξη",
+      challenge: ctx?.lang === "en" ? "Challenge" : "Πρόκληση",
+      review: ctx?.lang === "en" ? "Review" : "Επανάληψη",
+      character: ctx?.lang === "en" ? "Character" : "Χαρακτήρας"
+    };
+    const title = ctx?.lang === "en" ? "Classroom activity" : "Δραστηριότητα τάξης";
+    const finalText = cfg.finalCheck
+      ? (ctx?.lang === "en" ? "Ends with one independent understanding check." : "Κλείνει με μία ανεξάρτητη ερώτηση κατανόησης.")
+      : (ctx?.lang === "en" ? "No formal final check." : "Χωρίς τυπικό τελικό έλεγχο.");
+    const privacy = ctx?.lang === "en" ? "No account, score or student tracking." : "Χωρίς λογαριασμό, βαθμό ή παρακολούθηση μαθητή.";
+    return `<section class="tutor-class-activity" aria-label="${escapeHtml(title)}"><div><span>${escapeHtml(title)}</span><strong id="tutorClassActivitySummary">${escapeHtml(modeLabels[learningMode] || modeLabels.understand)} · ~${cfg.minutes}'</strong></div><p>${escapeHtml(finalText)} ${escapeHtml(privacy)}</p></section>`;
+  }
+  function renderClassroomActivityCard() {
+    const node = document.getElementById("tutorClassActivitySummary");
+    if (!node) return;
+    const cfg = classroomActivityConfig();
+    const labels = {
+      understand: ctx?.lang === "en" ? "Understanding" : "Κατανόηση",
+      hint: ctx?.lang === "en" ? "Hint" : "Υπόδειξη",
+      challenge: ctx?.lang === "en" ? "Challenge" : "Πρόκληση",
+      review: ctx?.lang === "en" ? "Review" : "Επανάληψη",
+      character: ctx?.lang === "en" ? "Character" : "Χαρακτήρας"
+    };
+    node.textContent = (labels[learningMode] || labels.understand) + " · ~" + cfg.minutes + "'";
+  }
+
   const CHARACTER_CATALOG = {
     pericles: {
       id: "pericles",
@@ -481,6 +535,7 @@
   let conversation = [];
   let attachedDocument = null;
   let conversationRevision = 0;
+  let effectivenessOfferShown = false;
   let busy = false;
   let authReady = false;
   let providerMode = "groq";
@@ -532,6 +587,7 @@
       .tutor-animation-card__next[hidden]{display:none!important}
       .tutor-animation-card__next p{margin:0 0 9px;color:#425466;font-size:.86rem}
       @media(max-width:700px){.tutor-animation-card__head{display:block}.tutor-animation-card__toggle{margin-top:10px;width:100%}.tutor-animation-card iframe{height:690px}}
+      .tutor-class-activity{margin:0 0 14px;padding:12px 14px;border:1px solid #b9d3e7;border-radius:14px;background:#f2f8fd}.tutor-class-activity>div{display:flex;justify-content:space-between;gap:10px;align-items:center}.tutor-class-activity span{font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#2e6f5e}.tutor-class-activity strong{color:#173f63}.tutor-class-activity p{margin:6px 0 0;color:#52606d;font-size:.84rem;line-height:1.45}.tutor-effectiveness-offer{display:block;margin:9px 0 0;border:1px solid #9bbfdc;border-radius:10px;background:#fff;color:#173f63;padding:8px 10px;font:inherit;font-size:.82rem;font-weight:850;cursor:pointer}.tutor-effectiveness-offer:hover{background:#f3f8fc}.tutor-effectiveness-offer:disabled{opacity:.6;cursor:default}
     `;
     document.head.appendChild(style);
   }
@@ -1053,6 +1109,7 @@ ${compositeRule}
     });
     renderCharacterCard();
     renderModeBox();
+    renderClassroomActivityCard();
   }
 
   function renderModeBox() {
@@ -1471,6 +1528,8 @@ ${officialCurriculumText}
 
 ${learningModeInstruction()}
 
+${classroomActivityInstruction()}
+
 ${window.AITOOLSKIDS_TUTOR_SUPPORT?.getPromptInstruction?.(ctx?.lang) || ""}
 
 TUTORING RULES
@@ -1489,6 +1548,7 @@ TUTORING RULES
 13. PRIVACY / MINIMIZATION: never ask for or encourage the learner's full name, school/class identifier, home address, phone number, email, passwords, health information or other personal/sensitive details. They are not needed for tutoring. If the user volunteers such information, do not repeat it unnecessarily; briefly say it is not needed and continue with the school question.
 14. FORMATIVE-ONLY ASSESSMENT: do not present yourself as an official grader, diagnostician or decision-maker. Do not label the learner as "weak", "gifted", "bad at maths", etc.; do not diagnose a learning difficulty; do not predict future performance or recommend an educational track as a decision. You may give specific formative feedback about the CURRENT attempt or topic (for example, "this topic needs more practice") and explain mistakes.
 15. CURRICULUM + QUESTION TOGETHER: treat the selected grade, subject and topic as the educational scope, and the user's current question as the immediate focus. Use BOTH. Do not ignore the selected school context, and do not drift to unrelated curriculum material just because it exists in the catalog.
+16. INDEPENDENT CHECKS: when the user asks for a new check/transfer question, ask only one new question, do not reveal its answer before an attempt, and respond with specific formative feedback only. Never convert that check into a score, grade, diagnosis or persistent learner label.
 
 ${learningMode === "character" ? `CHARACTER MODE OVERRIDE
 - The adult/parent context is supervision only. Do NOT switch into parent-coaching language.
@@ -2094,6 +2154,31 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     return div;
   }
 
+
+  function attachEffectivenessOffer(answerBubble) {
+    if (!answerBubble || effectivenessOfferShown || classroomActivityConfig().enabled) return;
+    effectivenessOfferShown = true;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "tutor-effectiveness-offer";
+    button.textContent = isParentMode()
+      ? (ctx.lang === "en" ? "Check if they understood without help" : "Να δούμε αν το κατάλαβε χωρίς βοήθεια;")
+      : (ctx.lang === "en" ? "Check if I understood without help" : "Να δούμε αν το κατάλαβα χωρίς βοήθεια;");
+    button.addEventListener("click", () => {
+      button.disabled = true;
+      button.textContent = ctx.lang === "en" ? "Preparing one independent question…" : "Ετοιμάζω μία ανεξάρτητη ερώτηση…";
+      const prompt = isParentMode()
+        ? (ctx.lang === "en"
+          ? "Give me one new question to check whether they understood without help."
+          : "Δώσε μου μία νέα ερώτηση για να δω αν το κατάλαβε χωρίς βοήθεια.")
+        : (ctx.lang === "en"
+          ? "Give me one new question to check whether I understood without help."
+          : "Κάνε μου μία νέα ερώτηση να δω αν το κατάλαβα χωρίς βοήθεια.");
+      sendMessage(prompt, { hiddenUser: true });
+    });
+    answerBubble.appendChild(button);
+  }
+
   function setBusy(value) {
     busy = value;
     refs.busy.textContent = value ? tr("thinking") : "";
@@ -2155,6 +2240,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     if (recording) cancelRecording();
     else stopVad().catch(() => {});
     conversation = [];
+    effectivenessOfferShown = false;
     emitConversationUpdated();
     if (clearMessages && refs.messages) {
       refs.messages.innerHTML = `
@@ -2166,7 +2252,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     }
   }
 
-  async function sendMessage(text) {
+  async function sendMessage(text, options = {}) {
     if (!text.trim() || busy) return;
     if (!refs.subject?.value) {
       updateComposerState();
@@ -2182,7 +2268,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
       if (!authReady) return;
     }
 
-    addBubble("user", text.trim());
+    if (!options.hiddenUser) addBubble("user", text.trim());
     conversation.push({ role: "user", content: text.trim() });
     setBusy(true);
 
@@ -2253,6 +2339,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       conversation.push({ role: "assistant", content: answer });
       emitConversationUpdated();
       const answerBubble = addBubble("assistant", answer);
+      attachEffectivenessOffer(answerBubble);
       if (refs.autoSpeak?.checked) {
         const speakButton = answerBubble?.querySelector(".tutor-speak-btn");
         speakText(answer, speakButton || null);
@@ -2485,6 +2572,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
               </div>
               <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorNewChat">${escapeHtml(tr("newChat"))}</button>
             </div>
+            ${classroomActivityHtml()}
             <section class="tutor-character-card" id="tutorCharacterCard" hidden aria-live="polite"></section>
             <section class="tutor-animation-card" id="tutorAnimationCard" hidden aria-live="polite">
               <div class="tutor-animation-card__head">
@@ -2689,6 +2777,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     ctx = nextCtx;
     renderKey = nextKey;
     conversation = [];
+    effectivenessOfferShown = false;
     attachedDocument = null;
     busy = false;
     authReady = false;

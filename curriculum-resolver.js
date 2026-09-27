@@ -174,6 +174,7 @@
         c.annualInstructionsStatus==="2026-27-framework-verified" ||
         c.coverageStatus==="annual-instructions-verified" ||
         c.coverageStatus==="annual-framework-verified" ||
+        c.coverageStatus==="official-book-verified" ||
         c.frameworkOnly===true ||
         c.coverageStatus==="annual-exam-syllabus-verified" ||
         c.coverageStatus==="panhellenic-2027-verified" ||

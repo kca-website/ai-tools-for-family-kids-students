@@ -280,3 +280,144 @@
       if (!candidates.some((value) => value === topic)) return;
       const gap = GAP_TAGS[id];
       out.push({ id, label: gap.labelEl || id, explain: gap.explainEl || "" });
+
+    });
+    return out.slice(0, 8);
+  }
+
+  function renderMisconceptions() {
+    const wrap = $id("tmlMisconceptionWrap");
+    const host = $id("tmlMisconceptions");
+    if (!wrap || !host) return;
+    wrap.hidden = currentTask() !== "assessment";
+    if (wrap.hidden) return;
+    const items = exactMisconceptions();
+    const button = $id("tmlApplyMisconceptions");
+    if (!items.length) {
+      host.innerHTML = '<p class="tml-muted">Δεν υπάρχουν αυτή τη στιγμή τεκμηριωμένες παρανοήσεις με ακριβή σύνδεση σε αυτή την ενότητα. Δεν θα δημιουργηθούν πιθανολογικά misconceptions από το μοντέλο.</p>';
+      if (button) button.hidden = true;
+      return;
+    }
+    host.innerHTML = items.map((item) => '<label class="tml-misconception"><input type="checkbox" value="' + escapeAttr(item.id) + '"><span><strong>' + escapeHtml(item.label) + '</strong><small>' + escapeHtml(item.explain) + '</small></span></label>').join("");
+    if (button) button.hidden = false;
+  }
+
+  async function applyMisconceptions() {
+    const host = $id("tmlMisconceptions");
+    if (!host) return;
+    const ids = Array.from(host.querySelectorAll('input[type="checkbox"]:checked')).map((x) => x.value);
+    if (!ids.length) { setBusy(false, "Επίλεξε τουλάχιστον μία τεκμηριωμένη παρανόηση."); return; }
+    const valid = exactMisconceptions().filter((x) => ids.includes(x.id));
+    if (!valid.length) { setBusy(false, "Δεν βρέθηκε ενεργή επαληθευμένη αντιστοίχιση."); return; }
+    const original = currentText();
+    setBusy(true, "Ενσωματώνονται μόνο οι επιλεγμένες τεκμηριωμένες παρανοήσεις…");
+    try {
+      const evidence = valid.map((x) => "- " + x.id + ": " + x.label + " — " + x.explain).join("\n");
+      const system = "Είσαι βοηθός εκπαιδευτικού. Αναθεωρείς υπάρχον φύλλο αξιολόγησης. Χρησιμοποιείς μόνο τα misconception IDs που δίνονται ρητά. Δεν εφευρίσκεις άλλες παρανοήσεις και δεν κάνεις διάγνωση μαθητή.";
+      const prompt = contextBlock() + "\n\nΤΕΚΜΗΡΙΩΜΕΝΕΣ ΠΑΡΑΝΟΗΣΕΙΣ ΑΠΟ ΤΟ DATA LAYER\n" + evidence + "\n\nΑναθεώρησε μόνο όπου ταιριάζει 1–2 distractors ώστε να ελέγχουν τις παραπάνω παρανοήσεις. Στις teacher-only σημειώσεις γράψε: «Η επιλογή μπορεί να αποτελεί ένδειξη ότι χρειάζεται επιπλέον έλεγχος της έννοιας…». Ποτέ μην γράψεις ότι ένας μαθητής έχει συγκεκριμένη δυσκολία ή διάγνωση επειδή επέλεξε μία απάντηση. Μην προσθέσεις νέο misconception.\n\nΥΠΑΡΧΟΝ ΦΥΛΛΟ\n---\n" + original + "\n---";
+      applyText(await callAI(system, prompt), "Assessment με τεκμηριωμένα misconceptions");
+      setBusy(false, "Η αξιολόγηση αναθεωρήθηκε μόνο με τεκμηριωμένα misconception IDs.");
+    } catch (error) { setBusy(false, "Δεν ολοκληρώθηκε: " + error.message); }
+  }
+
+  function syncEditor() {
+    const editor = $id("tmlEditor");
+    if (editor && document.activeElement !== editor) editor.value = currentText();
+  }
+
+  function loadMaterials() {
+    try {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(data) ? data : [];
+    } catch (_) { return []; }
+  }
+  function writeMaterials(items) { localStorage.setItem(STORAGE_KEY, JSON.stringify(items.slice(0, MAX_ITEMS))); }
+
+  function saveCurrent() {
+    const text = currentText();
+    if (!text) return;
+    const c = snapshot();
+    const item = {
+      schemaVersion: 1,
+      id: "mat-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7),
+      title: (c.task === "assessment" ? "Φύλλο αξιολόγησης" : "Φύλλο εργασίας") + " · " + (c.subjectLabel || "Μάθημα") + " · " + (c.unit || "Ενότητα"),
+      task: c.task,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      context: c.context,
+      contextLabel: c.contextLabel,
+      grade: c.grade,
+      gradeLabel: c.gradeLabel,
+      subject: c.subject,
+      subjectLabel: c.subjectLabel,
+      unit: c.unit,
+      objective: c.objective,
+      source: c.source,
+      text
+    };
+    try {
+      writeMaterials([item].concat(loadMaterials()));
+      renderLibrary();
+      setBusy(false, "Αποθηκεύτηκε μόνο σε αυτόν τον browser.");
+    } catch (_) { setBusy(false, "Δεν αποθηκεύτηκε: ο τοπικός χώρος του browser μπορεί να είναι γεμάτος."); }
+  }
+
+  function renderLibrary() {
+    const host = $id("tmlLibraryList");
+    if (!host) return;
+    const items = loadMaterials();
+    if (!items.length) {
+      host.innerHTML = '<p class="tml-muted">Δεν έχεις αποθηκεύσει υλικό σε αυτόν τον browser.</p>';
+      return;
+    }
+    host.innerHTML = items.map((item) => '<article class="tml-library-item" data-id="' + escapeAttr(item.id) + '"><div><strong>' + escapeHtml(item.title || "Υλικό") + '</strong><small>' + escapeHtml((item.gradeLabel || "") + " · " + (item.subjectLabel || "") + " · " + new Date(item.updatedAt || item.createdAt).toLocaleDateString("el-GR")) + '</small></div><div class="tml-library-actions"><button type="button" data-lib="open">Άνοιγμα</button><button type="button" data-lib="rename">Μετονομασία</button><button type="button" data-lib="delete">Διαγραφή</button></div></article>').join("");
+  }
+
+  function libraryAction(event) {
+    const button = event.target.closest("button[data-lib]");
+    if (!button) return;
+    const row = button.closest("[data-id]");
+    const items = loadMaterials();
+    const index = items.findIndex((x) => x.id === (row ? row.dataset.id : ""));
+    if (index < 0) return;
+    if (button.dataset.lib === "open") { applyText(items[index].text, "Τοπική βιβλιοθήκη"); return; }
+    if (button.dataset.lib === "rename") {
+      const next = window.prompt("Νέος τίτλος:", items[index].title || "Υλικό");
+      if (next && next.trim()) {
+        items[index].title = next.trim();
+        items[index].updatedAt = new Date().toISOString();
+        writeMaterials(items);
+        renderLibrary();
+      }
+      return;
+    }
+    if (button.dataset.lib === "delete" && window.confirm("Να διαγραφεί αυτό το τοπικά αποθηκευμένο υλικό;")) {
+      items.splice(index, 1);
+      writeMaterials(items);
+      renderLibrary();
+    }
+  }
+
+  function exportMaterials() {
+    const payload = { schema: "aitools4kids-teacher-materials", version: 1, exportedAt: new Date().toISOString(), materials: loadMaterials() };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "aitools4kids-materials-v1.json";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function importMaterials(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(String(reader.result || "{}"));
+        if (data.schema !== "aitools4kids-teacher-materials" || data.version !== 1 || !Array.isArray(data.materials)) throw new Error("Μη συμβατό αρχείο.");
+        const clean = data.materials.filter((x) => x && x.schemaVersion === 1 && typeof x.text === "string").slice(0, MAX_ITEMS);
+        const seen = new Set();
+        const merged = clean.concat(loadMaterials()).filter((x) => {
+          const key = x.id || ((x.title || "") + "|" + (x.createdAt || ""));

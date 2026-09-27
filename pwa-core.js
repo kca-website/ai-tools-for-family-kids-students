@@ -635,7 +635,7 @@
   queueMicrotask(refresh);
   document.addEventListener("DOMContentLoaded",refresh);
   window.addEventListener("popstate",(event)=>setTimeout(()=>{
-    if(event.state?.[PWA_HISTORY_ROOT] && location.pathname==="/"){
+    if(isStandalone() && location.pathname==="/"){
       const zoneView=document.getElementById("zoneSelectView");
       const pathView=document.getElementById("pathView");
       if(zoneView?.hidden && pathView && !pathView.hidden){

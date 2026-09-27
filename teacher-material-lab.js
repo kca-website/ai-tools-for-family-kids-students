@@ -291,8 +291,9 @@
       if (!alignment || !alignment.annualScopeVerified) return;
       if (alignment.status !== "exact-section-verified" && alignment.status !== "related-section-verified") return;
       if (alignment.sourceQuizId && (!acceptedSubjectIds.length || !acceptedSubjectIds.includes(alignment.sourceQuizId))) return;
-      const candidates = [alignment.officialSectionEl, alignment.topicAnchorEl].filter(Boolean).map(norm);
-      if (!candidates.some((value) => value === topic)) return;
+      const candidates = [alignment.officialSectionEl, alignment.sectionEl, alignment.topicAnchorEl].filter(Boolean).map(norm);
+      const topicMatches = candidates.some((value) => value === topic || (topic.length >= 8 && (value.includes(topic) || topic.includes(value))));
+      if (!topicMatches) return;
       const evidence = window.AITOOLSKIDS_MISCONCEPTION_EVIDENCE?.get?.(id);
       if (!evidence) return;
       const gap = GAP_TAGS[id];

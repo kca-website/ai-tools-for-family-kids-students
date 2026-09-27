@@ -62,15 +62,7 @@ try{
   await page.waitForSelector('.quiz-subject-grid',{state:'visible',timeout:10000});
   const practiceSkills=page.locator('.quiz-subject-card--curriculum').filter({hasText:'Εργαστήρια Δεξιοτήτων'});
   assert.equal(await practiceSkills.count(),1,'Practice Map must include source-backed Skills Labs even without a fixed quiz');
-  const practiceButtonText=(await practiceSkills.locator('.quiz-curriculum-browse-btn').innerText()).trim();
   await practiceSkills.locator('.quiz-curriculum-browse-btn').click();
-  const practiceState=await page.evaluate(()=>({
-    html:document.getElementById('quizContent')?.innerText||'',
-    grade:document.querySelector('.quiz-grade-card')?.dataset?.gradeId||'',
-    resolver:window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getSubject?.('middle','a','ergastiria-dexiotiton-a-gym')||null
-  }));
-  console.log('PRACTICE_SKILLS_BUTTON',practiceButtonText);
-  console.log('PRACTICE_SKILLS_STATE',JSON.stringify({html:practiceState.html,resolverMode:practiceState.resolver?.topicMode,resolverTopics:(practiceState.resolver?.topics||[]).map(t=>({label:t.labelEl,status:t.status}))}));
   const practiceTopics=compact(await page.locator('.quiz-curriculum-topic-btn .quiz-topic-card__label').allTextContents());
   assert.equal(practiceTopics.length,4,'Practice Map must expose the four verified IEP framework themes');
   assert.match(await page.locator('#quizContent').innerText(),/Επίσημο πλαίσιο ΙΕΠ/i,'Practice Map must label framework scope honestly');

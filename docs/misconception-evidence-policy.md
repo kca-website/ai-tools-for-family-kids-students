@@ -51,3 +51,17 @@ Added in this batch:
 - `biologia-g-lyk.mutation-definition`
 
 Research population is always shown in the evidence card because a misconception observed in one population must not be presented as a prevalence claim for Greek students.
+
+
+## Evidence expansion — second batch, 2026-09-27
+
+A further six evidence records were added after independent source review:
+
+- `math-a-gym.proportion-intro`
+- `physics-b-lyk.first-law-energy-balance`
+- `biologia-a-gym.cell-membrane-function`
+- `biologia-b-lyk.specific-nonspecific-immunity`
+- `biologia-b-lyk.producers-ecosystem`
+- `biologia-g-lyk.genetic-material-dna`
+
+These were selected because both the curriculum mapping and the misconception evidence were sufficiently specific. Other verified gaps (for example GCD/LCM, quadratic-root count, and heterozygous genotype) remain excluded until a source is found that supports the exact site gap rather than a broader neighboring concept.

@@ -1931,7 +1931,7 @@
     "noteEl": "Η αντιστοίχιση είναι ακριβής ως προς την ενότητα του επίσημου βιβλίου μαθητή Ε΄ Δημοτικού. Δεν παρουσιάζεται ως ξεχωριστή ετήσια εξεταστέα ύλη.",
     "noteEn": "Mapping is exact to the official Grade 5 student textbook section. It is not presented as a separate annual examinable syllabus.",
     "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/index-3_17.html"
-  }
+  },
   "fractions.add_across": {
     "topicAnchorEl": "Πρόσθεση κλασμάτων",
     "topicAnchorEn": "Adding fractions",
@@ -1954,7 +1954,7 @@
     "noteEl": "Η αντιστοίχιση είναι ακριβής ως προς την ενότητα του επίσημου βιβλίου μαθητή Ε΄ Δημοτικού. Δεν παρουσιάζεται ως ξεχωριστή ετήσια εξεταστέα ύλη.",
     "noteEn": "Mapping is exact to the official Grade 5 student textbook section. It is not presented as a separate annual examinable syllabus.",
     "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/index-5_26.html"
-  }
+  },
   "division.remainder": {
     "topicAnchorEl": "Διαίρεση με υπόλοιπο",
     "topicAnchorEn": "Division with remainder",

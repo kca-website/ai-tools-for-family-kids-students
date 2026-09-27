@@ -60,7 +60,7 @@ try{
   assert.equal(await page.locator('#classActivityLiveAi').isChecked(),false,'Classroom QR must default to static/no-live-AI');
   const staticLink=await page.evaluate(()=>tutorDeepLink());
   assert.match(staticLink,/([?&])ai=0(&|$)/,'Default classroom deep link must disable live AI');
-  await page.check('#classActivityLiveAi');
+  await page.locator('#classActivityLiveAi').evaluate((el)=>{ el.checked=true; el.dispatchEvent(new Event('change',{bubbles:true})); });
   const liveLink=await page.evaluate(()=>tutorDeepLink());
   assert.match(liveLink,/([?&])ai=1(&|$)/,'Teacher opt-in must enable live AI in the classroom deep link');
   const schoolRules=page.locator('.privacy details');

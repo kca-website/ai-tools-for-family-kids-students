@@ -178,26 +178,21 @@ try{
   assert.match(specialPrompt,/πολλαπλούς τρόπους αναπαράστασης/,'Special-school prompt must offer multiple representations');
   assert.match(specialPrompt,/Μην υποθέτεις διάγνωση/,'Special-school differentiation must not infer a diagnosis');
 
-  const specialLycPublished=await page.evaluate(()=>{
-    const index=window.SPECIAL_LYCEUM_2026_2027?.annualGuidanceIndex||[];
-    const a=window.specialLycSubjects?.('a')||[];
-    const c=window.specialLycSubjects?.('c')||[];
-    const math=a.find(s=>s.id==='math'||/μαθηματικ/i.test(s.label||''));
-    const economics=c.find(s=>s.id==='economics'||/οικονομ/i.test(s.label||''));
-    return{
-      keys:index.map(x=>x.key),
-      math:math?{supportOnly:math.supportOnly,pending:math.officialPublishedPending,source:math.officialPendingSource}:null,
-      economics:economics?{supportOnly:economics.supportOnly,pending:economics.officialPublishedPending,source:economics.officialPendingSource}:null
-    };
-  });
+  const specialLycKeys=await page.evaluate(()=>(window.SPECIAL_LYCEUM_2026_2027?.annualGuidanceIndex||[]).map(x=>x.key));
   for(const key of ['math','religion','civics','philosophy','economics','ancient','english','second-foreign-language','ethics']){
-    assert.ok(specialLycPublished.keys.includes(key),`Special Lyceum published-guidance index missing ${key}`);
+    assert.ok(specialLycKeys.includes(key),`Special Lyceum published-guidance index missing ${key}`);
   }
-  assert.equal(specialLycPublished.math?.supportOnly,true,'Special Lyceum Math must stay support-only until its E.A.E. sections are mapped');
-  assert.equal(specialLycPublished.math?.pending,true,'Special Lyceum Math must visibly report that official 2026-27 guidance is published');
-  assert.ok(String(specialLycPublished.math?.source||'').includes('iep.edu.gr'),'Special Lyceum Math pending status must link to an official source');
-  assert.equal(specialLycPublished.economics?.supportOnly,true,'Special Lyceum Economics must stay support-only until its E.A.E. sections are mapped');
-  assert.equal(specialLycPublished.economics?.pending,true,'Special Lyceum Economics must visibly report that official 2026-27 guidance is published');
+
+  await page.selectOption('#context','specialLyc');
+  await page.selectOption('#grade','a');
+  const specialLycAOptions=await page.locator('#subject option').evaluateAll(opts=>opts.map(o=>({value:o.value,label:o.textContent.trim()})));
+  const mathOption=specialLycAOptions.find(o=>/μαθηματικ/i.test(o.label));
+  assert.ok(mathOption,'Special Lyceum A must expose Mathematics in the Teacher Assistant');
+  await page.selectOption('#subject',mathOption.value);
+  const mathNote=await page.locator('#curriculumNote').innerText();
+  assert.match(mathNote,/οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί/i,'Special Lyceum Math must visibly report published 2026-27 guidance');
+  assert.match(mathNote,/υποστηρικτικό πλαίσιο/i,'Special Lyceum Math must remain support-only until exact E.A.E. sections are mapped');
+  assert.ok(await page.locator('#curriculumNote a[href*="iep.edu.gr"]').count(),'Special Lyceum Math pending status must link to an official IEP source');
 
   await page.selectOption('#context','middle');
   const generalPrompt=await page.evaluate(()=>window.promptText());

@@ -21,7 +21,7 @@
   function topicRank(status){
     status=String(status||"");
     if(/exact-section|annual-instructions-verified|annual-exam-syllabus-verified|panhellenic-2027-verified/.test(status)) return 5;
-    if(/official-book-section|related-section-verified/.test(status)) return 4;
+    if(/verified-framework|official-book-section|related-section-verified/.test(status)) return 4;
     if(/detailed-map|navigation-map/.test(status)) return 3;
     if(/topic-anchor|official-course/.test(status)) return 2;
     return 1;
@@ -29,6 +29,7 @@
   function catalogTopicStatus(subject){
     const c=subject?.curriculum||{};
     if(c.annualInstructionsStatus==="2026-27-verified" || c.coverageStatus==="annual-instructions-verified" || c.coverageStatus==="annual-exam-syllabus-verified" || c.coverageStatus==="panhellenic-2027-verified") return "annual-instructions-verified";
+    if(c.annualInstructionsStatus==="2026-27-framework-verified" || c.coverageStatus==="annual-framework-verified" || c.frameworkOnly===true) return "verified-framework";
     if(c.coverageStatus==="annual-guidance-detailed-map" || c.coverageStatus==="panhellenic-2027-detailed-map") return "navigation-map";
     return "catalog-topic-anchor";
   }
@@ -170,7 +171,10 @@
       const c=catalog.curriculum||{};
       const currentMapped = c.schoolYear==="2026-2027" && (
         c.annualInstructionsStatus==="2026-27-verified" ||
+        c.annualInstructionsStatus==="2026-27-framework-verified" ||
         c.coverageStatus==="annual-instructions-verified" ||
+        c.coverageStatus==="annual-framework-verified" ||
+        c.frameworkOnly===true ||
         c.coverageStatus==="annual-exam-syllabus-verified" ||
         c.coverageStatus==="panhellenic-2027-verified" ||
         c.coverageStatus==="annual-guidance-detailed-map" ||
@@ -286,8 +290,9 @@
       const topics=topicsForResolvedSubject(row);
       const statuses=topics.map((t)=>t.status||"");
       const annual=statuses.some((s)=>/annual-instructions-verified|annual-exam-syllabus-verified|panhellenic-2027-verified|exact-section/.test(s));
+      const framework=statuses.some((s)=>/verified-framework/.test(s)) || row.catalogSubject?.curriculum?.frameworkOnly===true || row.catalogSubject?.curriculum?.coverageStatus==="annual-framework-verified";
       const officialSections=statuses.some((s)=>/official-book-section|related-section/.test(s));
-      const mode=annual?"verified-annual":officialSections?"verified-official-sections":topics.length?"mapped-navigation":"unmapped";
+      const mode=annual?"verified-annual":framework?"verified-framework":officialSections?"verified-official-sections":topics.length?"mapped-navigation":"unmapped";
       return Object.assign({},row.catalogSubject||row.quiz||{},row,{
         id:row.catalogSubject?.id||row.id||row.quizId,
         quizId:row.quizId||row.quiz?.id||row.catalogSubject?.quizId||"",
@@ -297,7 +302,7 @@
         topics,topicMode:mode,hasMappedTopics:topics.length>0
       });
     });
-    const modeRank={unmapped:0,"mapped-navigation":1,"verified-official-sections":2,"verified-annual":3};
+    const modeRank={unmapped:0,"mapped-navigation":1,"verified-framework":2,"verified-official-sections":3,"verified-annual":4};
     const dedup=new Map();
     resolved.forEach((s)=>{
       const key=s.quizId?("quiz:"+s.quizId):("id:"+(s.id||norm(cleanSubject(s.subjectLabelEl))));

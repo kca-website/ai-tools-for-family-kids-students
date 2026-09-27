@@ -65,3 +65,19 @@ A further six evidence records were added after independent source review:
 - `biologia-g-lyk.genetic-material-dna`
 
 These were selected because both the curriculum mapping and the misconception evidence were sufficiently specific. Other verified gaps (for example GCD/LCM, quadratic-root count, and heterozygous genotype) remain excluded until a source is found that supports the exact site gap rather than a broader neighboring concept.
+
+
+## Coverage-audit rule — 2026-09-27
+
+Raw “verified gap coverage” is not the same as misconception coverage.
+
+The following categories must not be treated as a coverage failure merely because they lack research evidence:
+
+- factual recall/history gaps,
+- writing-production skill gaps,
+- grammar/procedural skill gaps,
+- simple terminology recall.
+
+Research evidence is required only when the site intends to surface a gap as a misconception-aware distractor or conceptual misconception.
+
+A verified curriculum gap may therefore remain intentionally outside the misconception evidence layer.

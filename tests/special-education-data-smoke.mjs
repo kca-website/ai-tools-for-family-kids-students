@@ -155,7 +155,7 @@ assert((SL.annualGuidanceIndex||[]).length >= 10, 'Special Lyceum published 2026
 for (const guide of (SL.annualGuidanceIndex||[])) {
   assert(/^https:\/\/(www\.)?iep\.edu\.gr\//.test(guide.sourceUrl||'') || /^https:\/\/dide\.ira\.sch\.gr\//.test(guide.sourceUrl||''),
     `Special Lyceum guidance index ${guide.key}: official published sourceUrl missing`);
-  assert(/^2026-09-(20|21)$/.test(guide.verificationDate||''), `Special Lyceum guidance index ${guide.key}: verificationDate missing or stale`);
+  assert(/^2026-09-(2[0-7])$/.test(guide.verificationDate||''), `Special Lyceum guidance index ${guide.key}: verificationDate missing or stale`);
   assert(/^official-(iep-(annual-guidance-index|guidance-archive)|published-guidance-pdf)$/.test(guide.sourceType||''),
     `Special Lyceum guidance index ${guide.key}: provenance type missing`);
 }

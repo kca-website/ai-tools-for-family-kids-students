@@ -5,6 +5,7 @@ on:
     branches:
       - 'fix/curriculum-parity-*'
       - 'fix/verified-sections-*'
+      - 'fix/technology-verified-sections-*'
   pull_request:
     branches:
       - main

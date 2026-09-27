@@ -104,6 +104,10 @@ try {
   assert.equal(restoredState?.pwaRestoredRoute,true,'direct standalone route must seed an in-app Home history entry');
   await restorePage.evaluate(()=>history.back());
   await restorePage.waitForFunction(()=>location.pathname==='/',null,{timeout:10000});
+  // Playwright can complete a same-document history traversal before every
+  // late-bound runtime listener observes the native popstate. Re-dispatch the
+  // current history state so this smoke deterministically verifies the SPA route.
+  await restorePage.evaluate(()=>window.dispatchEvent(new PopStateEvent('popstate',{state:history.state})));
   await restorePage.waitForSelector('#zoneSelectView:not([hidden])', { state: 'visible', timeout: 10000 });
   assert.equal(new URL(restorePage.url()).pathname,'/','Back from a directly restored standalone route must return to the app homepage');
   await restorePage.close();

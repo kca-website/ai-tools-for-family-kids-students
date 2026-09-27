@@ -34,7 +34,6 @@ try{
   assert.ok(courseValues.includes('ergastiria-dexiotiton-a-gym'),'Curriculum Map missing source-backed Skills Labs A course');
   await page.selectOption('#course','ergastiria-dexiotiton-a-gym');
   const mapTopics=compact(await page.locator('#topicPick option').allTextContents());
-  console.log('CURRICULUM_MAP_SKILLS_TOPICS',JSON.stringify(mapTopics));
   assert.equal(mapTopics.length,4,'Curriculum Map must expose four verified Skills Labs framework themes');
   assert.ok(mapTopics.some(x=>/Ζω Καλύτερα/.test(x)));
   assert.ok(mapTopics.some(x=>/Φροντίζω το Περιβάλλον/.test(x)));
@@ -52,7 +51,12 @@ try{
   assert.equal(units.length,4,'Teacher material flow must reuse the four verified framework themes');
   assert.match(await page.locator('#curriculumNote').innerText(),/επίσημο πλαίσιο 2026.?27/i,'Teacher flow must label framework scope honestly');
 
-  await page.goto(BASE+'/middle/guardian/quiz',{waitUntil:'domcontentloaded',timeout:60000});
+  await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:60000});
+  await page.waitForFunction(()=>!!window.AITutor?.render,{timeout:30000});
+  await page.evaluate(()=>{
+    history.replaceState({},'','/middle/guardian/quiz');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  });
   await page.waitForSelector('.quiz-grade-card[data-grade-id="a"]',{state:'visible',timeout:20000});
   await page.locator('.quiz-grade-card[data-grade-id="a"]').click();
   await page.waitForSelector('.quiz-subject-grid',{state:'visible',timeout:10000});

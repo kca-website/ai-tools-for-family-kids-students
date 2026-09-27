@@ -27,7 +27,7 @@
   function currentText() {
     try { return typeof lastText !== "undefined" ? String(lastText || "") : ""; } catch (_) { return ""; }
   }
-  function isEligible() { return currentTask() === "worksheet" || currentTask() === "assessment"; }
+  function isEligible() { return ["worksheet","assessment","lesson","activity"].includes(currentTask()); }
   function selectedUnitText() {
     const unitEl = $id("unit");
     const custom = $id("customUnit");
@@ -293,8 +293,10 @@
       if (alignment.sourceQuizId && (!acceptedSubjectIds.length || !acceptedSubjectIds.includes(alignment.sourceQuizId))) return;
       const candidates = [alignment.officialSectionEl, alignment.topicAnchorEl].filter(Boolean).map(norm);
       if (!candidates.some((value) => value === topic)) return;
+      const evidence = window.AITOOLSKIDS_MISCONCEPTION_EVIDENCE?.get?.(id);
+      if (!evidence) return;
       const gap = GAP_TAGS[id];
-      out.push({ id, label: gap.labelEl || id, explain: gap.explainEl || "", sourceQuizId: alignment.sourceQuizId || "" });
+      out.push({ id, label: gap.labelEl || id, explain: gap.explainEl || "", sourceQuizId: alignment.sourceQuizId || "", evidence });
     });
     return out.slice(0, 8);
   }
@@ -312,7 +314,7 @@
       if (button) button.hidden = true;
       return;
     }
-    host.innerHTML = items.map((item) => '<label class="tml-misconception"><input type="checkbox" value="' + escapeAttr(item.id) + '"><span><strong>' + escapeHtml(item.label) + '</strong><small>' + escapeHtml(item.explain) + '</small></span></label>').join("");
+    host.innerHTML = items.map((item) => '<label class="tml-misconception"><input type="checkbox" value="' + escapeAttr(item.id) + '"><span><strong>' + escapeHtml(item.label) + '</strong><small>' + escapeHtml(item.explain) + '</small><small><a href="' + escapeAttr(item.evidence.url) + '" target="_blank" rel="noopener">Παιδαγωγική τεκμηρίωση ↗</a> · ' + escapeHtml(item.evidence.populationEl || "") + '</small></span></label>').join("");
     if (button) button.hidden = false;
   }
 
@@ -354,7 +356,7 @@
     const item = {
       schemaVersion: 1,
       id: "mat-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7),
-      title: (c.task === "assessment" ? "Φύλλο αξιολόγησης" : "Φύλλο εργασίας") + " · " + (c.subjectLabel || "Μάθημα") + " · " + (c.unit || "Ενότητα"),
+      title: ({assessment:"Φύλλο αξιολόγησης",worksheet:"Φύλλο εργασίας",lesson:"Σχέδιο μαθήματος",activity:"Δραστηριότητα"}[c.task] || "Εκπαιδευτικό υλικό") + " · " + (c.subjectLabel || "Μάθημα") + " · " + (c.unit || "Ενότητα"),
       task: c.task,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),

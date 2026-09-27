@@ -23,6 +23,46 @@
   function isClassroomMode() {
     return new URLSearchParams(window.location.search).get("classroom") === "1";
   }
+
+  function classroomActivityConfig() {
+    const params = new URLSearchParams(window.location.search);
+    const enabled = isClassroomMode() && params.get("activity") === "1";
+    const rawMinutes = Number(params.get("minutes") || 15);
+    const minutes = [10, 15, 20].includes(rawMinutes) ? rawMinutes : 15;
+    return { enabled, minutes, finalCheck: enabled && params.get("finalCheck") !== "0" };
+  }
+
+  function classroomActivityInstruction() {
+    const cfg = classroomActivityConfig();
+    if (!cfg.enabled) return "";
+    const turns = cfg.minutes <= 10 ? "2-3" : (cfg.minutes >= 20 ? "4-5" : "3-4");
+    return `CLASSROOM ACTIVITY
+- Teacher-created, account-free activity for approximately ${cfg.minutes} minutes.
+- Keep the interaction focused on the selected topic and learning mode.
+- Aim for roughly ${turns} short learner turns before a natural closing step; this is guidance, not a timer.
+- Do not collect names, grades, class identifiers or other student data.
+- Do not calculate, display or store a score.
+${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do not reveal its answer before the learner attempts it. Give formative feedback only; never a grade or proficiency label." : "- Do not add a formal final check unless the learner or teacher asks for one."}
+- The activity ends in the current browser session. Do not imply that progress is saved or monitored.`;
+  }
+
+  function classroomActivityHtml() {
+    const cfg = classroomActivityConfig();
+    if (!cfg.enabled) return "";
+    const modeLabels = {
+      understand: ctx?.lang === "en" ? "Understanding" : "Κατανόηση",
+      hint: ctx?.lang === "en" ? "Hint" : "Υπόδειξη",
+      challenge: ctx?.lang === "en" ? "Challenge" : "Πρόκληση",
+      review: ctx?.lang === "en" ? "Review" : "Επανάληψη",
+      character: ctx?.lang === "en" ? "Character" : "Χαρακτήρας"
+    };
+    const title = ctx?.lang === "en" ? "Classroom activity" : "Δραστηριότητα τάξης";
+    const finalText = cfg.finalCheck
+      ? (ctx?.lang === "en" ? "Ends with one independent understanding check." : "Κλείνει με μία ανεξάρτητη ερώτηση κατανόησης.")
+      : (ctx?.lang === "en" ? "No formal final check." : "Χωρίς τυπικό τελικό έλεγχο.");
+    const privacy = ctx?.lang === "en" ? "No account, score or student tracking." : "Χωρίς λογαριασμό, βαθμό ή παρακολούθηση μαθητή.";
+    return `<section class="tutor-class-activity" aria-label="${escapeHtml(title)}"><div><span>${escapeHtml(title)}</span><strong>${escapeHtml(modeLabels[learningMode] || modeLabels.understand)} · ~${cfg.minutes}'</strong></div><p>${escapeHtml(finalText)} ${escapeHtml(privacy)}</p></section>`;
+  }
   const CHARACTER_CATALOG = {
     pericles: {
       id: "pericles",
@@ -481,6 +521,7 @@
   let conversation = [];
   let attachedDocument = null;
   let conversationRevision = 0;
+  let effectivenessOfferShown = false;
   let busy = false;
   let authReady = false;
   let providerMode = "groq";
@@ -532,6 +573,7 @@
       .tutor-animation-card__next[hidden]{display:none!important}
       .tutor-animation-card__next p{margin:0 0 9px;color:#425466;font-size:.86rem}
       @media(max-width:700px){.tutor-animation-card__head{display:block}.tutor-animation-card__toggle{margin-top:10px;width:100%}.tutor-animation-card iframe{height:690px}}
+      .tutor-class-activity{margin:0 0 14px;padding:12px 14px;border:1px solid #b9d3e7;border-radius:14px;background:#f2f8fd}.tutor-class-activity>div{display:flex;justify-content:space-between;gap:10px;align-items:center}.tutor-class-activity span{font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em;color:#2e6f5e}.tutor-class-activity strong{color:#173f63}.tutor-class-activity p{margin:6px 0 0;color:#52606d;font-size:.84rem;line-height:1.45}.tutor-effectiveness-offer{display:block;margin:9px 0 0;border:1px solid #9bbfdc;border-radius:10px;background:#fff;color:#173f63;padding:8px 10px;font:inherit;font-size:.82rem;font-weight:850;cursor:pointer}.tutor-effectiveness-offer:hover{background:#f3f8fc}.tutor-effectiveness-offer:disabled{opacity:.6;cursor:default}
     `;
     document.head.appendChild(style);
   }
@@ -1471,6 +1513,8 @@ ${officialCurriculumText}
 
 ${learningModeInstruction()}
 
+${classroomActivityInstruction()}
+
 ${window.AITOOLSKIDS_TUTOR_SUPPORT?.getPromptInstruction?.(ctx?.lang) || ""}
 
 TUTORING RULES
@@ -2094,6 +2138,31 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     return div;
   }
 
+
+  function attachEffectivenessOffer(answerBubble) {
+    if (!answerBubble || effectivenessOfferShown || classroomActivityConfig().enabled) return;
+    effectivenessOfferShown = true;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "tutor-effectiveness-offer";
+    button.textContent = isParentMode()
+      ? (ctx.lang === "en" ? "Check if they understood without help" : "Να δούμε αν το κατάλαβε χωρίς βοήθεια;")
+      : (ctx.lang === "en" ? "Check if I understood without help" : "Να δούμε αν το κατάλαβα χωρίς βοήθεια;");
+    button.addEventListener("click", () => {
+      button.disabled = true;
+      button.textContent = ctx.lang === "en" ? "Preparing one independent question…" : "Ετοιμάζω μία ανεξάρτητη ερώτηση…";
+      const prompt = isParentMode()
+        ? (ctx.lang === "en"
+          ? "Give me ONE new short transfer question on the same topic that I can ask the learner without help. Do not give the answer. After their attempt, give specific formative feedback only; no score, grade, diagnosis or proficiency label."
+          : "Δώσε μου ΜΙΑ νέα σύντομη ερώτηση μεταφοράς στο ίδιο θέμα για να την κάνω στον μαθητή χωρίς βοήθεια. Μην δώσεις την απάντηση. Μετά την προσπάθειά του δώσε μόνο συγκεκριμένο διαμορφωτικό feedback, χωρίς βαθμό, διάγνωση ή χαρακτηρισμό επίδοσης.")
+        : (ctx.lang === "en"
+          ? "Give me ONE new short transfer question on the same topic so I can answer without help. Do not give the answer yet. After my attempt, give specific formative feedback only; no score, grade, diagnosis or proficiency label."
+          : "Κάνε μου ΜΙΑ νέα σύντομη ερώτηση μεταφοράς στο ίδιο θέμα για να απαντήσω χωρίς βοήθεια. Μην δώσεις ακόμη την απάντηση. Μετά την προσπάθειά μου δώσε μόνο συγκεκριμένο διαμορφωτικό feedback, χωρίς βαθμό, διάγνωση ή χαρακτηρισμό επίδοσης.");
+      sendMessage(prompt);
+    });
+    answerBubble.appendChild(button);
+  }
+
   function setBusy(value) {
     busy = value;
     refs.busy.textContent = value ? tr("thinking") : "";
@@ -2155,6 +2224,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     if (recording) cancelRecording();
     else stopVad().catch(() => {});
     conversation = [];
+    effectivenessOfferShown = false;
     emitConversationUpdated();
     if (clearMessages && refs.messages) {
       refs.messages.innerHTML = `
@@ -2253,6 +2323,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       conversation.push({ role: "assistant", content: answer });
       emitConversationUpdated();
       const answerBubble = addBubble("assistant", answer);
+      attachEffectivenessOffer(answerBubble);
       if (refs.autoSpeak?.checked) {
         const speakButton = answerBubble?.querySelector(".tutor-speak-btn");
         speakText(answer, speakButton || null);
@@ -2485,6 +2556,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
               </div>
               <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorNewChat">${escapeHtml(tr("newChat"))}</button>
             </div>
+            ${classroomActivityHtml()}
             <section class="tutor-character-card" id="tutorCharacterCard" hidden aria-live="polite"></section>
             <section class="tutor-animation-card" id="tutorAnimationCard" hidden aria-live="polite">
               <div class="tutor-animation-card__head">
@@ -2689,6 +2761,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     ctx = nextCtx;
     renderKey = nextKey;
     conversation = [];
+    effectivenessOfferShown = false;
     attachedDocument = null;
     busy = false;
     authReady = false;

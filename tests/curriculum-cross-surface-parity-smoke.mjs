@@ -44,6 +44,23 @@ try{
   assert.ok(informaticsResolved[1].topics.some(t=>/Ψηφιακός Κόσμος/.test(t.label)));
   assert.ok(informaticsResolved[2].topics.some(t=>/Πρόβλημα – Αλγόριθμος/.test(t.label)));
 
+  const peResolved=await page.evaluate(()=>{
+    const r=window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+    return ['a','b','c'].map(g=>{
+      const s=r.getSubject('middle',g,'fysiki-agogi-'+g+'-gymnasiou');
+      return {grade:g,mode:s?.topicMode||'',topics:(s?.topics||[]).map(t=>({label:t.labelEl||'',status:t.status||'',source:t.sourceUrl||''})),source:s?.curriculum?.annualInstructionsUrl||''};
+    });
+  });
+  const peExpected={a:/Η Ιστορία του Αθλητισμού/,b:/Η Αξία της Διά Βίου Άσκησης/,c:/Ειδικά Θέματα/};
+  for(const row of peResolved){
+    assert.equal(row.mode,'verified-official-sections','Middle-school PE must expose verified official-book sections');
+    assert.equal(row.topics.length,2,'Each Middle-school PE grade must expose the two official-book chapters assigned to that grade');
+    assert.ok(row.topics.every(t=>/related-section-verified/.test(t.status)),'PE section anchors must stay explicitly section-verified');
+    assert.ok(row.topics.every(t=>/ebooks\.edu\.gr/i.test(t.source)),'PE section anchors must point to the official Interactive School Book');
+    assert.match(row.source,/iep\.edu\.gr\/yli-kai-odigies-didaskalias-gymnasiou/i,'PE must retain the official 2026–27 annual guidance hub');
+    assert.ok(row.topics.some(t=>peExpected[row.grade].test(t.label)),'PE grade must expose its verified official chapter focus');
+  }
+
   await page.locator('[data-zone="middle"]').click();
   const skillsSubject=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/Εργαστήρια Δεξιοτήτων/.test(o.textContent))?.value||'');
   assert.ok(skillsSubject,'Curriculum Map missing Skills Labs');
@@ -69,6 +86,16 @@ try{
   assert.equal(informaticsMapTopics.length,5,'Curriculum Map must expose five verified Informatics A section anchors');
   assert.ok(informaticsMapTopics.some(x=>/Κίνδυνοι στο Διαδίκτυο/.test(x)));
   assert.match(await page.locator('#sources').innerText(),/ΙΕΠ/i,'Curriculum Map Informatics must expose IEP provenance');
+
+  const peSubject=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/Φυσική Αγωγή/.test(o.textContent))?.value||'');
+  assert.ok(peSubject,'Curriculum Map missing Physical Education');
+  await page.selectOption('#subject',peSubject);
+  const peCourses=await page.locator('#course option').evaluateAll(opts=>opts.map(o=>o.value));
+  assert.ok(peCourses.includes('fysiki-agogi-a-gymnasiou'),'Curriculum Map missing verified PE A course');
+  await page.selectOption('#course','fysiki-agogi-a-gymnasiou');
+  const peMapTopics=compact(await page.locator('#topicPick option').allTextContents());
+  assert.equal(peMapTopics.length,2,'Curriculum Map must expose the two official PE A chapters');
+  assert.ok(peMapTopics.some(x=>/Η Ιστορία του Αθλητισμού/.test(x)));
 
   await page.goto(BASE+'/teacher-assistant.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.selectOption('#context','middle');

@@ -61,6 +61,26 @@ try{
     assert.ok(row.topics.some(t=>peExpected[row.grade].test(t.label)),'PE grade must expose its verified official chapter focus');
   }
 
+  const gelInformatics=await page.evaluate(()=>{
+    const r=window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+    return ['a','b'].map(g=>{
+      const s=r.getSubject('high',g,'pliroforiki-'+g+'-lykeiou');
+      return {grade:g,mode:s?.topicMode||'',topics:(s?.topics||[]).map(t=>({label:t.labelEl||'',status:t.status||'',source:t.sourceUrl||''})),annual:s?.curriculum?.annualInstructionsUrl||'',catalog:s?.curriculum?.catalogUrl||''};
+    });
+  });
+  assert.equal(gelInformatics[0].mode,'verified-official-sections','GEL A Informatics must expose official-book verified sections');
+  assert.equal(gelInformatics[0].topics.length,16,'GEL A Informatics must expose all 16 official-book chapters');
+  assert.ok(gelInformatics[0].topics.some(t=>/Κεφάλαιο 16 — Ασφάλεια και Προστασία στο Διαδίκτυο/.test(t.label)));
+  assert.equal(gelInformatics[1].mode,'verified-official-sections','GEL B Informatics must expose official-book verified sections');
+  assert.equal(gelInformatics[1].topics.length,8,'GEL B Informatics must expose the eight official-book sections');
+  assert.ok(gelInformatics[1].topics.some(t=>/3\.4 Τεχνητή Νοημοσύνη/.test(t.label)));
+  for(const row of gelInformatics){
+    assert.ok(row.topics.every(t=>t.status==='related-section-verified'),'GEL Informatics official-book topics must remain explicitly section-verified');
+    assert.ok(row.topics.every(t=>/ebooks\.edu\.gr/.test(t.source)),'GEL Informatics topics must point to official school books');
+    assert.match(row.annual,/iep\.edu\.gr\/yli-kai-odigies-didaskalias-genikou-lykeiou/i,'GEL Informatics must retain the current 2026–27 IEP guidance');
+    assert.match(row.catalog,/ebooks\.edu\.gr/i,'GEL Informatics catalog source must be the official school book');
+  }
+
   await page.locator('[data-zone="middle"]').click();
   const skillsSubject=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/Εργαστήρια Δεξιοτήτων/.test(o.textContent))?.value||'');
   assert.ok(skillsSubject,'Curriculum Map missing Skills Labs');

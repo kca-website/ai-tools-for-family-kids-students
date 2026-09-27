@@ -27,3 +27,27 @@ New evidence records require a stable research URL, population/age context, an e
 `annualScopeVerified` is an additional confidence marker where the site has an explicit annual/examinable-scope mapping (for example, some Lyceum subjects). It is **not** a universal prerequisite for misconception evidence.
 
 For school levels or subjects where the site stores verified official section mapping without an annual-scope flag, `exact-section-verified` or `related-section-verified` is sufficient, provided the subject/quiz id also matches and a research evidence record exists.
+
+
+## Evidence expansion — 2026-09-27
+
+A second research-backed batch extends coverage beyond the original seven records. New evidence records were added only where:
+
+- the gap already exists in `GAP_TAGS`,
+- the curriculum layer already marks the gap as `exact-section-verified` or `related-section-verified`,
+- the cited source supports the misconception pattern itself rather than merely explaining the correct concept.
+
+Added in this batch:
+- `math-a-gym.rational-number-order`
+- `math-a-gym.absolute-value`
+- `functions.one-formula-only`
+- `functions.inequality-no-sign-flip`
+- `physics-lyk.constant-velocity-needs-force`
+- `physics-lyk.energy-used-up`
+- `physics-b-lyk.momentum-conservation`
+- `biologia-b-lyk.vaccine-immune-memory`
+- `biologia-b-lyk.energy-trophic-levels`
+- `biologia-g-lyk.transcription-translation`
+- `biologia-g-lyk.mutation-definition`
+
+Research population is always shown in the evidence card because a misconception observed in one population must not be presented as a prevalence claim for Greek students.

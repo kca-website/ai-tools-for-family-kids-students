@@ -1,4 +1,4 @@
-name: Fix Special Gymnasium support mapping
+name: Fix Special Gymnasium support mapping (retired)
 
 on:
   workflow_dispatch:
@@ -10,5 +10,6 @@ jobs:
   retired:
     runs-on: ubuntu-latest
     steps:
-      - name: Retired one-shot migration
-        run: echo "Retired: this one-shot migration has already been incorporated into main. No repository changes are performed."
+      - name: Explain retirement
+        run: |
+          echo "This one-shot migration is retired and performs no repository changes."

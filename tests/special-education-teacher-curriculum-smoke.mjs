@@ -186,7 +186,7 @@ try{
   await page.selectOption('#context','specialLyc');
   await page.selectOption('#grade','a');
   const specialLycAOptions=await page.locator('#subject option').evaluateAll(opts=>opts.map(o=>({value:o.value,label:o.textContent.trim()})));
-  const mathOption=specialLycAOptions.find(o=>/μαθηματικ/i.test(o.label));
+  const mathOption=specialLycAOptions.find(o=>/(μαθηματικ|αλγεβρ|γεωμετρ)/i.test(o.label));
   assert.ok(mathOption,'Special Lyceum A must expose Mathematics in the Teacher Assistant');
   await page.selectOption('#subject',mathOption.value);
   const specialLycMathNote=await page.locator('#curriculumNote').innerText();

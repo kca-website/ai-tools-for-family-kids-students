@@ -636,8 +636,13 @@
     if(isStandalone() && location.pathname==="/"){
       const zoneView=document.getElementById("zoneSelectView");
       const pathView=document.getElementById("pathView");
-      if(zoneView?.hidden && pathView && !pathView.hidden){
-        document.getElementById("backToZones")?.click();
+      if(zoneView && pathView){
+        zoneView.hidden=false;
+        pathView.hidden=true;
+        document.body?.classList.remove("pwa-in-path","pwa-has-bottom-nav");
+        const bottomNav=document.getElementById("pwaBottomNav");
+        if(bottomNav) bottomNav.hidden=true;
+        document.documentElement.classList.remove("navigator-home-booting");
       }
     }
     refresh();

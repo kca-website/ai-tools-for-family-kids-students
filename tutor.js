@@ -84,7 +84,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       review: ctx?.lang === "en" ? "Review" : "Επανάληψη",
       character: ctx?.lang === "en" ? "Character" : "Χαρακτήρας"
     };
-    node.textContent = (labels[learningMode] || labels.understand) + " · ~" + cfg.minutes + "'";
+    node.textContent = (labels[learningMode] || labels.understand) + " · ~" + cfg.minutes + "'" + (cfg.liveAi ? " · live AI" : " · " + (ctx?.lang === "en" ? "static first" : "χωρίς live AI"));
   }
 
   const CHARACTER_CATALOG = {

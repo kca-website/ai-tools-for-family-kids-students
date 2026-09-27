@@ -1,5 +1,10 @@
 name: Add Special Gymnasium Literature reference
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+
 on:
   push:
     paths:

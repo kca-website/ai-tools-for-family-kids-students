@@ -57,6 +57,8 @@ jobs:
         run: node tests/special-gymnasium-bc-data-smoke.mjs
       - name: Validate Special Gymnasium exact + framework curriculum coverage
         run: node tests/special-gym-annual-mapping-smoke.mjs
+      - name: Audit Special Lyceum published guidance coverage
+        run: node tests/special-lyceum-guidance-coverage-audit.mjs
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.55.0

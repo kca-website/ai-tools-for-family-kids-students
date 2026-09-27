@@ -541,7 +541,7 @@ async function renderClassQr(){
   const revision=++classQrRevision,panel=$('classQrPanel'),img=$('classQrImage'),status=$('qrStatus'),url=setTutorLink();
   panel.hidden=false;status.textContent='Δημιουργία QR…';
   try{
-    const lib=await loadQrLibrary(),data=await lib.toDataURL(url,{width:220,margin:1});
+    const lib=await Promise.race([loadQrLibrary(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('QR timeout')),7000))]),data=await lib.toDataURL(url,{width:220,margin:1});
     if(revision!==classQrRevision)return;
     img.src=data;img.hidden=false;status.textContent='Έτοιμο. Το QR αντιστοιχεί στις επιλογές δραστηριότητας που φαίνονται παραπάνω.';
   }catch(_){

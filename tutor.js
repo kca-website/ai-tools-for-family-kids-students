@@ -1,7 +1,7 @@
 /**
  * tutor.js
  * ------------------------------------------------------------
- * AI Help integration powered by GPT-OSS 120B, with Puter as an alternative.
+ * AI Help integration powered by server-side GPT-OSS 120B (Cloudflare Workers AI → Groq fallback), with Puter as an alternative.
  * - Text help works through the site's server endpoint without an account.
  * - No Puter script is loaded until the user explicitly selects/connects Puter.
  * - Primary-school student role does not expose this view (enforced in app.js).
@@ -29,7 +29,8 @@
     const enabled = isClassroomMode() && params.get("activity") === "1";
     const rawMinutes = Number(params.get("minutes") || 15);
     const minutes = [10, 15, 20].includes(rawMinutes) ? rawMinutes : 15;
-    return { enabled, minutes, finalCheck: enabled && params.get("finalCheck") !== "0" };
+    const liveAi = !enabled || params.get("ai") === "1";
+    return { enabled, minutes, liveAi, finalCheck: enabled && params.get("finalCheck") !== "0" };
   }
 
   function classroomActivityInstruction() {
@@ -61,7 +62,16 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       ? (ctx?.lang === "en" ? "Ends with one independent understanding check." : "Κλείνει με μία ανεξάρτητη ερώτηση κατανόησης.")
       : (ctx?.lang === "en" ? "No formal final check." : "Χωρίς τυπικό τελικό έλεγχο.");
     const privacy = ctx?.lang === "en" ? "No account, score or student tracking." : "Χωρίς λογαριασμό, βαθμό ή παρακολούθηση μαθητή.";
-    return `<section class="tutor-class-activity" aria-label="${escapeHtml(title)}"><div><span>${escapeHtml(title)}</span><strong id="tutorClassActivitySummary">${escapeHtml(modeLabels[learningMode] || modeLabels.understand)} · ~${cfg.minutes}'</strong></div><p>${escapeHtml(finalText)} ${escapeHtml(privacy)}</p></section>`;
+    if (!cfg.liveAi) {
+      const steps = ctx?.lang === "en"
+        ? ["Write what you already know in your own words.", "Check the textbook or teacher material and correct one point.", "Create one question or example that proves you understood the topic."]
+        : ["Γράψε με δικά σου λόγια τι γνωρίζεις ήδη.", "Έλεγξε το σχολικό βιβλίο ή το υλικό του εκπαιδευτικού και διόρθωσε ένα σημείο.", "Φτιάξε μία ερώτηση ή ένα νέο παράδειγμα που δείχνει ότι κατάλαβες την ενότητα."];
+      const state = ctx?.lang === "en"
+        ? "Live AI is not enabled in this QR. The teacher can create a new QR with AI Help enabled if it is appropriate for the activity."
+        : "Η ζωντανή AI Βοήθεια δεν είναι ενεργοποιημένη σε αυτό το QR. Ο εκπαιδευτικός μπορεί να δημιουργήσει νέο QR με AI Help, αν το κρίνει κατάλληλο για τη δραστηριότητα.";
+      return `<section class="tutor-class-activity tutor-class-activity--static" aria-label="${escapeHtml(title)}"><div><span>${escapeHtml(title)}</span><strong id="tutorClassActivitySummary">${escapeHtml(modeLabels[learningMode] || modeLabels.understand)} · ~${cfg.minutes}' · ${escapeHtml(ctx?.lang === "en" ? "static first" : "χωρίς live AI")}</strong></div><p>${escapeHtml(finalText)} ${escapeHtml(privacy)}</p><ol>${steps.map((step)=>`<li>${escapeHtml(step)}</li>`).join("")}</ol><p><strong>${escapeHtml(state)}</strong></p></section>`;
+    }
+    return `<section class="tutor-class-activity" aria-label="${escapeHtml(title)}"><div><span>${escapeHtml(title)}</span><strong id="tutorClassActivitySummary">${escapeHtml(modeLabels[learningMode] || modeLabels.understand)} · ~${cfg.minutes}' · live AI</strong></div><p>${escapeHtml(finalText)} ${escapeHtml(privacy)}</p></section>`;
   }
   function renderClassroomActivityCard() {
     const node = document.getElementById("tutorClassActivitySummary");
@@ -2491,6 +2501,8 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
 
   function html() {
     const parentMode = isParentMode();
+    const classCfg = classroomActivityConfig();
+    const staticClassroom = classCfg.enabled && !classCfg.liveAi;
     return `
       <section class="tutor-shell" aria-labelledby="tutorHeading">
         <div class="tutor-heading">
@@ -2499,7 +2511,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           <p>${escapeHtml(parentMode ? tr("subtitleParent") : tr("subtitleStudent"))}</p>
         </div>
 
-        <div class="tutor-auth-card">
+        <div class="tutor-auth-card" ${staticClassroom ? "hidden" : ""}>
           <div class="tutor-auth-card__top">
             <div>
               <strong>${escapeHtml(tr("signInTitle"))}</strong>
@@ -2533,7 +2545,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           <details class="tutor-privacy-details" style="margin-top:8px;border:1px solid #dbe4ea;border-radius:10px;background:#fbfcfd;padding:8px 10px;font-size:.82rem;color:#475569;">
             <summary style="cursor:pointer;font-weight:750;color:#334155;">${escapeHtml(tr("privacyDetailsTitle"))}</summary>
             <p style="margin:8px 0 5px;line-height:1.55;">${escapeHtml(tr("privacyDetailsBody"))}</p>
-            <a href="https://www.minedu.gov.gr/site/64941-13-05-26-i-ellada-thespizei-gia-proti-fora-olokliromeno-plaisio-gia-tin-asfali-xrisi-tis-texnitis-noimosynis-sta-sxoleia-3" target="_blank" rel="noopener noreferrer">${escapeHtml(ctx.lang === "en" ? "Greek Ministry school AI framework ↗" : "Πλαίσιο ΥΠΑΙΘΑ για ΤΝ στα σχολεία ↗")}</a>
+            <a href="/school-ai-use.html">${escapeHtml(ctx.lang === "en" ? "AI use at school · Greek framework →" : "Χρήση AI στο σχολείο · πλαίσιο 2026 →")}</a>
           </details>
         </div>
 
@@ -2591,10 +2603,10 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
                 <button type="button" class="tutor-animation-card__followup" id="tutorAnimationFollowup"></button>
               </div>
             </section>
-            <div class="tutor-messages" id="tutorMessages">
+            <div class="tutor-messages" id="tutorMessages" ${staticClassroom ? "hidden" : ""}>
               <div class="tutor-empty" id="tutorEmptyState"><strong>${escapeHtml(tr("emptyTitle"))}</strong><br>${escapeHtml(parentMode ? tr("emptyParent") : tr("emptyStudent"))}</div>
             </div>
-            <form class="tutor-composer" id="tutorForm">
+            <form class="tutor-composer" id="tutorForm" ${staticClassroom ? "hidden" : ""}>
               <div class="tutor-quick-actions" role="group" aria-label="${escapeHtml(ctx.lang === "en" ? "Quick study actions" : "Γρήγορες ενέργειες μελέτης")}">
                 <button type="button" class="tutor-quick-action" data-quick-action="ask">${escapeHtml(tr("quickAsk"))}</button>
                 <button type="button" class="tutor-quick-action" data-quick-action="break">${escapeHtml(tr("quickBreak"))}</button>

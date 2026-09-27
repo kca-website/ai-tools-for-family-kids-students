@@ -431,6 +431,35 @@ main {
   font-size: .76rem !important;
 }
 
+.hero__ai-tech-details {
+  margin-top: 7px;
+  font-size: .76rem;
+  color: var(--color-text-muted);
+}
+.hero__ai-tech-details summary {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 750;
+  color: var(--color-middle-zone);
+  list-style: none;
+}
+.hero__ai-tech-details summary::-webkit-details-marker { display: none; }
+.hero__ai-tech-details summary:focus-visible {
+  outline: 2px solid var(--color-middle-zone);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.hero__ai-tech-details p {
+  margin: 7px 0 0 !important;
+  padding: 9px 11px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: var(--color-surface);
+  line-height: 1.5;
+}
+.hero__ai-tech-details a { font-weight: 700; }
+
 .hero__ai-help-actions {
   display: grid;
   gap: 8px;
@@ -2940,3 +2969,8 @@ main {
 .home-video-new__badge{display:inline-flex;width:max-content;padding:3px 7px;border-radius:999px;background:#163f34;color:#fff;font-size:.68rem;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
 .home-video-new__cta{white-space:nowrap;font-weight:850;font-size:.85rem;color:#245f4f}
 @media(max-width:620px){.home-video-new{grid-template-columns:auto 1fr;margin:14px auto 20px;padding:13px}.home-video-new__cta{grid-column:2;margin-top:2px}.home-video-new__copy{grid-template-columns:1fr}.home-video-new__copy>span:last-child{grid-column:auto}.home-video-new__badge{margin-bottom:3px}}
+
+/* Classroom QR: static-first activity until the teacher explicitly enables live AI. */
+.tutor-class-activity{margin:12px 14px 0;padding:12px 14px;border:1px solid #cfe0d8;border-radius:12px;background:#f8fcfa;color:#334155;font-size:.86rem;line-height:1.5}
+.tutor-class-activity>div{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.tutor-class-activity>div span{font-weight:800;color:#2e6f5e}.tutor-class-activity>div strong{color:#1f2430}.tutor-class-activity p{margin:6px 0 0}
+.tutor-class-activity--static{border-color:#cfddec;background:#f4f9fd}.tutor-class-activity--static ol{margin:9px 0 0 20px;padding:0}.tutor-class-activity--static li{margin:4px 0}

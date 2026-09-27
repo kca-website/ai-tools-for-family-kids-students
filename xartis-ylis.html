@@ -130,7 +130,7 @@
       gradeMap[z].forEach(function(g){
         (resolver.getSubjects(z,g)||[]).forEach(function(s){
           var key=s.quizId||s.id,c=s.curriculum||{},url=c.annualInstructionsUrl||c.examSyllabusUrl||c.catalogUrl||'';
-          if(!key||!url||!/https?:\\/\\/(?:www\\.)?(?:iep\\.edu\\.gr|www2\\.iep\\.edu\\.gr|minedu\\.gov\\.gr)\\//i.test(url))return;
+          if(!key||!url||!/https?:\/\/(?:www\.)?(?:iep\.edu\.gr|www2\.iep\.edu\.gr|minedu\.gov\.gr)\//i.test(url))return;
           if(entries.some(function(e){return e.zone===z&&e.quizId===key}))return;
           var mode=s.topicMode||'unmapped',framework=mode==='verified-framework'||c.frameworkOnly===true||c.coverageStatus==='annual-framework-verified';
           entries.push({

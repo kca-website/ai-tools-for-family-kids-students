@@ -178,6 +178,22 @@ try{
   assert.match(specialPrompt,/πολλαπλούς τρόπους αναπαράστασης/,'Special-school prompt must offer multiple representations');
   assert.match(specialPrompt,/Μην υποθέτεις διάγνωση/,'Special-school differentiation must not infer a diagnosis');
 
+  const specialLycKeys=await page.evaluate(()=>(window.SPECIAL_LYCEUM_2026_2027?.annualGuidanceIndex||[]).map(x=>x.key));
+  for(const key of ['math','religion','civics','philosophy','economics','ancient','english','second-foreign-language','ethics']){
+    assert.ok(specialLycKeys.includes(key),`Special Lyceum published-guidance index missing ${key}`);
+  }
+
+  await page.selectOption('#context','specialLyc');
+  await page.selectOption('#grade','a');
+  const specialLycAOptions=await page.locator('#subject option').evaluateAll(opts=>opts.map(o=>({value:o.value,label:o.textContent.trim()})));
+  const mathOption=specialLycAOptions.find(o=>/(μαθηματικ|αλγεβρ|γεωμετρ)/i.test(o.label));
+  assert.ok(mathOption,'Special Lyceum A must expose Mathematics in the Teacher Assistant');
+  await page.selectOption('#subject',mathOption.value);
+  const specialLycMathNote=await page.locator('#curriculumNote').innerText();
+  assert.match(specialLycMathNote,/οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί/i,'Special Lyceum Math must visibly report published 2026-27 guidance');
+  assert.match(specialLycMathNote,/υποστηρικτικό πλαίσιο/i,'Special Lyceum Math must remain support-only until exact E.A.E. sections are mapped');
+  assert.ok(await page.locator('#curriculumNote a[href*="iep.edu.gr"]').count(),'Special Lyceum Math pending status must link to an official IEP source');
+
   await page.selectOption('#context','middle');
   const generalPrompt=await page.evaluate(()=>window.promptText());
   assert.ok(!/Επίσημες αρχές διαφοροποιημένης διδασκαλίας Ε\.Α\.Ε\./.test(generalPrompt),'E.A.E. differentiation block must not be injected into the general Gymnasium context');

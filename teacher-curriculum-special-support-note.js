@@ -60,10 +60,18 @@
     const gid=document.getElementById("grade")?.value||"",glabel=selectedLabel("grade"),sid=document.getElementById("subject")?.value||"",slabel=selectedLabel("subject");
     const selected=(typeof window.selectedSubject==="function")?window.selectedSubject():null;
     if((selected?.annualMapped||selected?.frameworkMapped||selected?.selectionFramework)&&!selected?.supportOnly) return;
+    const count=[...unit.options].filter(o=>o.value!=="custom").length;
+    if(selected?.officialPublishedPending){
+      const source=safeUrl(selected.officialPendingSource);
+      const sourceLink=source?` <a href="${source}" target="_blank" rel="noopener">Επίσημες οδηγίες ↗</a>`:"";
+      note.innerHTML=count
+        ?`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά η ακριβής section-level χαρτογράφηση δεν έχει ακόμη ολοκληρωθεί.</strong> Οι ${count} επιλογές που βλέπεις είναι μόνο υποστηρικτικό πλαίσιο και δεν πρέπει να θεωρηθούν αυτούσια φετινή ύλη. Ο εκπαιδευτικός επιβεβαιώνει την πραγματική ενότητα που διδάσκει.${sourceLink}`
+        :`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά η ακριβής section-level χαρτογράφηση δεν έχει ακόμη ολοκληρωθεί.</strong> Χρησιμοποίησε τον πραγματικό τίτλο κεφαλαίου/ενότητας από την επίσημη πηγή αντί να επινοηθεί ύλη.${sourceLink}`;
+      return;
+    }
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).filter(e=>entryMatches(e,c,gid,glabel,sid,slabel));
     const exact=entries.find(isExactAnnual);
     const framework=entries.find(isFramework);
-    const count=[...unit.options].filter(o=>o.value!=="custom").length;
     if(exact){
       const source=safeUrl(exact.sourceUrl);
       const sourceLink=source?` <a href="${source}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a>`:"";

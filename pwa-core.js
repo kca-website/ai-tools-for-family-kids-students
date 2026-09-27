@@ -634,7 +634,16 @@
   registerServiceWorker();
   queueMicrotask(refresh);
   document.addEventListener("DOMContentLoaded",refresh);
-  window.addEventListener("popstate",()=>setTimeout(refresh,0));
+  window.addEventListener("popstate",(event)=>setTimeout(()=>{
+    if(event.state?.[PWA_HISTORY_ROOT] && location.pathname==="/"){
+      const zoneView=document.getElementById("zoneSelectView");
+      const pathView=document.getElementById("pathView");
+      if(zoneView?.hidden && pathView && !pathView.hidden){
+        document.getElementById("backToZones")?.click();
+      }
+    }
+    refresh();
+  },0));
   window.addEventListener("resize",()=>setTimeout(refresh,40));
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;

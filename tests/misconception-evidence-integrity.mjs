@@ -12,7 +12,7 @@ const api=sandbox.window.AITOOLSKIDS_MISCONCEPTION_EVIDENCE;
 assert.ok(api?.data,"evidence dataset should load");
 
 const ids=Object.keys(api.data);
-assert.ok(ids.length>=28,"expected at least 28 research-backed misconception records");
+assert.equal(ids.length,34,"conceptual STEM closure requires exactly 34 research-backed misconception records");
 
 for(const id of ids){
   const item=api.data[id];

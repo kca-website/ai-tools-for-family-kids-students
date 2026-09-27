@@ -30,9 +30,9 @@ try{
   const skillsSubject=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/Εργαστήρια Δεξιοτήτων/.test(o.textContent))?.value||'');
   assert.ok(skillsSubject,'Curriculum Map missing Skills Labs');
   await page.selectOption('#subject',skillsSubject);
-  const skillsCourse=await page.locator('#course option').first().getAttribute('value');
-  assert.ok(skillsCourse,'Curriculum Map missing Skills Labs course');
-  await page.selectOption('#course',skillsCourse);
+  const courseValues=await page.locator('#course option').evaluateAll(opts=>opts.map(o=>o.value));
+  assert.ok(courseValues.includes('ergastiria-dexiotiton-a-gym'),'Curriculum Map missing source-backed Skills Labs A course');
+  await page.selectOption('#course','ergastiria-dexiotiton-a-gym');
   const mapTopics=compact(await page.locator('#topicPick option').allTextContents());
   assert.equal(mapTopics.length,4,'Curriculum Map must expose four verified Skills Labs framework themes');
   assert.ok(mapTopics.some(x=>/Ζω Καλύτερα/.test(x)));

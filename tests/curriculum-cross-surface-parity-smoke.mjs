@@ -34,6 +34,7 @@ try{
   assert.ok(courseValues.includes('ergastiria-dexiotiton-a-gym'),'Curriculum Map missing source-backed Skills Labs A course');
   await page.selectOption('#course','ergastiria-dexiotiton-a-gym');
   const mapTopics=compact(await page.locator('#topicPick option').allTextContents());
+  console.log('CURRICULUM_MAP_SKILLS_TOPICS',JSON.stringify(mapTopics));
   assert.equal(mapTopics.length,4,'Curriculum Map must expose four verified Skills Labs framework themes');
   assert.ok(mapTopics.some(x=>/Ζω Καλύτερα/.test(x)));
   assert.ok(mapTopics.some(x=>/Φροντίζω το Περιβάλλον/.test(x)));

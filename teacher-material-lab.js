@@ -473,8 +473,8 @@
       '<div id="tmlStatus" class="tml-status" role="status" aria-live="polite"></div>',
       '</div>'
     ].join("");
-    const actions = result.querySelector(".result-actions");
-    if (actions) result.insertBefore(root, actions);
+    const output = result.querySelector("#output");
+    if (output) result.insertBefore(root, output);
     else result.appendChild(root);
 
     root.querySelectorAll(".tml-tabs button").forEach((button) => {

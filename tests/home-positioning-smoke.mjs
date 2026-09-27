@@ -44,7 +44,7 @@ try {
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.');
 
-  assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card').count(), 6);
+  assert.ok((await page.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 7, 'Homepage must expose the core age zones plus Special Education, University pilot and Curriculum Map');
   assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').count(), 1, 'Preschool 4–6 card missing');
   assert.match(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').innerText(), /4\s*(έως|to)\s*6|4-6/i, 'Preschool card must show ages 4–6');
   assert.equal(await page.locator('#homeV8Shell #specialSchoolZoneCard').count(), 1);
@@ -108,7 +108,7 @@ try {
   await desktop.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
   const heroWidth = await desktop.locator('#zoneSelectView .hero').evaluate((el) => el.getBoundingClientRect().width);
   assert.ok(heroWidth >= 1000 && heroWidth <= 1042, `desktop: homepage hero should use the wider ~1040px layout, got ${heroWidth}px`);
-  assert.equal(await desktop.locator('#homeV8Shell #zoneGrid .zone-card').count(), 6);
+  assert.ok((await desktop.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 7, 'desktop: expected the current navigator cards');
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   await desktop.close();

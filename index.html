@@ -349,7 +349,7 @@
       <p>
         Ανεξάρτητο, δωρεάν, δίγλωσσο (Ελληνικά/Αγγλικά) εργαλείο που βοηθά γονείς, παιδιά και μαθητές 4 έως 18 ετών
         και εκπαιδευτικούς να βρουν ποιο συγκεκριμένο AI εργαλείο ταιριάζει σε ποια σχολική δουλειά, ανά ηλικία.
-        Ο οδηγός και ο Χάρτης Εξάσκησης λειτουργούν χωρίς λογαριασμό. Η προαιρετική AI Βοήθεια μέσω GPT-OSS 120B απαιτεί μόνο JavaScript· το Puter παραμένει εναλλακτική επιλογή.
+        Ο οδηγός και ο Χάρτης Εξάσκησης λειτουργούν χωρίς λογαριασμό. Η προαιρετική AI Βοήθεια ενεργοποιείται μόνο όταν τη χρησιμοποιήσεις· οι τεχνικές λεπτομέρειες δημοσιεύονται στη σελίδα Διαφάνεια AI.
       </p>
       <h2>Ηλικιακές ζώνες</h2>
       <ul>
@@ -409,7 +409,7 @@
           <details class="privacy-badge-details">
             <summary class="badge badge--dark" data-i18n="badgeZeroTracking">Χωρίς Cookies στον οδηγό</summary>
             <p class="privacy-badge-explainer" data-i18n="badgeZeroTrackingExplainer">
-              Ο οδηγός, τα εργαλεία και ο Χάρτης Εξάσκησης δεν χρησιμοποιούν cookies ούτε απαιτούν λογαριασμό. Η πρόοδος του Χάρτη μπορεί να αποθηκευτεί μόνο τοπικά στη συσκευή σου. Η προαιρετική AI Βοήθεια χρησιμοποιεί GPT-OSS 120B χωρίς λογαριασμό ή, αν το επιλέξεις, Puter.
+              Ο οδηγός, τα εργαλεία και ο Χάρτης Εξάσκησης δεν χρησιμοποιούν cookies ούτε απαιτούν λογαριασμό. Η πρόοδος του Χάρτη μπορεί να αποθηκευτεί μόνο τοπικά στη συσκευή σου. Οι λειτουργίες AI είναι προαιρετικές και οι τεχνικές λεπτομέρειες εμφανίζονται στη Διαφάνεια AI.
             </p>
           </details>
         </div>
@@ -455,7 +455,11 @@
             <span class="hero__ai-help-badge" data-i18n="heroHelpBadge">Κόλλησα εδώ</span>
             <h2 id="heroAiHelpTitle" data-i18n="heroHelpTitle">Δείξε μου πώς να το μάθω, όχι τη λύση</h2>
             <p data-i18n="heroHelpSub">Η AI Βοήθεια ξεκινά από τη δική σου προσπάθεια και σε καθοδηγεί με μία ερώτηση ή μικρή υπόδειξη τη φορά, χωρίς έτοιμη τελική απάντηση.</p>
-            <p class="hero__ai-help-note" data-i18n="heroHelpNote">Η βασική πλατφόρμα παραμένει χωρίς λογαριασμό. Η προαιρετική AI Βοήθεια χρησιμοποιεί GPT-OSS 120B χωρίς σύνδεση, με το Puter ως εναλλακτική επιλογή.</p>
+            <p class="hero__ai-help-note" data-i18n="heroHelpNote">Η βασική πλατφόρμα παραμένει χωρίς λογαριασμό. Η τεχνική υλοποίηση της προαιρετικής AI Βοήθειας είναι διαθέσιμη με ένα κλικ.</p>
+            <details class="hero__ai-tech-details" id="homeAiTechDetails">
+              <summary title="GPT-OSS 120B · Cloudflare Workers AI → Groq · Puter optional"><span data-i18n="heroAiTechSummary">ⓘ Ποιο AI χρησιμοποιείται;</span></summary>
+              <p><strong>GPT-OSS 120B</strong> μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική. <a href="/ai-transparency.html" data-i18n="heroAiTechLink">Διαφάνεια AI →</a></p>
+            </details>
           </div>
           <div class="hero__ai-help-actions" aria-label="AI Βοήθεια ανά ηλικία">
             <a href="/primary/guardian/tutor"><span aria-hidden="true">👪</span><span data-i18n="heroHelpPrimary">Γονιός Δημοτικού</span></a>
@@ -639,7 +643,7 @@
     <div class="site-footer__inner">
       <div class="site-footer__main">
         <p data-i18n="footerText">
-          Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Η προαιρετική AI Βοήθεια χρησιμοποιεί Groq/GPT-OSS 120B ή Puter.
+          Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Οι λειτουργίες AI είναι προαιρετικές και τεκμηριώνονται στη Διαφάνεια AI.
         </p>
         <p class="site-footer__last-checked" data-i18n="footerLastChecked">
           Τελευταίος πλήρης έλεγχος καταλόγου εργαλείων: 24 Σεπτεμβρίου 2026
@@ -651,6 +655,7 @@
           <a href="/privacy-policy.html" data-i18n="footerPrivacyLink">Πολιτική Απορρήτου</a>
           · <a href="/accessibility.html" data-i18n="footerAccessibilityLink">Προσβασιμότητα εργαλείων</a>
           · <a href="/ai-transparency.html">Διαφάνεια AI</a>
+          · <a href="/school-ai-use.html">Χρήση AI στο σχολείο</a>
           · <a href="/about.html">Σχετικά / FAQ</a>
         </p>
       </div>

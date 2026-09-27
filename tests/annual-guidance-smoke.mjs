@@ -16,11 +16,11 @@ try {
   await map.waitForFunction(() => !!window.AITOOLSKIDS_OFFICIAL_ANNUAL_INSTRUCTIONS_2026_2027);
 
   await selectLabel(map, '#subject', 'Μαθηματικά');
-  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Επίσημες οδηγίες 2026–27 δημοσιευμένες');
+  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Επίσημες οδηγίες 2026–27 διασταυρωμένες');
 
   await map.getByRole('button', { name: 'Γυμνάσιο' }).click();
   await selectLabel(map, '#subject', 'Μαθηματικά');
-  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Επίσημες οδηγίες 2026–27 δημοσιευμένες');
+  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Επίσημες οδηγίες 2026–27 διασταυρωμένες');
 
   const resolverState = await map.evaluate(() => {
     const base = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
@@ -52,7 +52,7 @@ try {
   assert.ok(await map.locator('#sources a[href*="dide.ira.sch.gr"]').count() >= 1, 'GEL A Biology curriculum map must expose its 2026-27 guidance source');
 
   await map.getByRole('button', { name: 'EN' }).click();
-  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Official 2026–27 guidance published');
+  assert.equal((await map.locator('#annualStatus').innerText()).trim(), 'Official 2026–27 guidance verified');
 
   const storage = await map.evaluate(() => ({
     local: Object.keys(localStorage),

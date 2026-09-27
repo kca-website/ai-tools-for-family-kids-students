@@ -36,10 +36,12 @@ assert.match(tutor,/getQualityContext/);
 assert.match(pwa,/tutor-feedback\.js/);
 assert.match(pwa,/tutor-learning-support\.js/);
 
-assert.match(tutorApi,/GROQ_PRODUCTION_MODEL/);
-assert.match(teacherApi,/GROQ_PRODUCTION_MODEL/);
-assert.match(tutorApi,/allowedProductionModels/);
-assert.match(teacherApi,/allowedProductionModels/);
+assert.match(tutorApi,/ai-provider-router/);
+assert.match(teacherApi,/ai-provider-router/);
+assert.match(tutorApi,/generateChat/);
+assert.match(teacherApi,/generateChat/);
+assert.match(tutorApi,/getAiStatus/);
+assert.match(teacherApi,/getAiStatus/);
 
 assert.match(expansion,/Αρχαία Ελληνική Γλώσσα και Γραμματεία/);
 assert.match(expansion,/Πληροφορική/);
@@ -52,7 +54,7 @@ assert.match(expansion,/annual-framework-verified/);
 assert.match(teacher,/data-task="package"/);
 assert.match(teacher,/Πακέτο 1 διδακτικής ώρας/);
 assert.match(teacher,/tutorDeepLink/);
-assert.match(teacher,/QR για την τάξη/);
+assert.match(teacher,/Δραστηριότητα τάξης \/ QR/);
 assert.match(teacher,/qrcode@1\.5\.4/);
 assert.match(teacher,/ΦΕΚ 3567\/Β\/04-08-2021/);
 assert.match(homeSearch,/Ψάξε σε όλο το aitools4kids/);

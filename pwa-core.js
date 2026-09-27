@@ -49,11 +49,9 @@
     // Entries produced by the SPA router already have a valid in-app predecessor.
     if(history.state?.[PWA_HISTORY_ENTRY]) return;
 
-    // Normal same-origin navigation also already has a previous in-app document.
-    if(sameOriginReferrer()){
-      history.replaceState({...history.state,[PWA_HISTORY_ENTRY]:true},"",location.href);
-      return;
-    }
+    // A standalone app that boots on an internal route must always have a
+    // deterministic in-app Home entry underneath it. Normal navigation inside
+    // the installed app is SPA-based and already carries PWA_HISTORY_ENTRY.
 
     // Android may restore/reopen a standalone PWA directly on an internal route.
     // In that case this route can be the only history entry, so hardware Back
@@ -634,7 +632,21 @@
   registerServiceWorker();
   queueMicrotask(refresh);
   document.addEventListener("DOMContentLoaded",refresh);
-  window.addEventListener("popstate",()=>setTimeout(refresh,0));
+  window.addEventListener("popstate",(event)=>setTimeout(()=>{
+    if(isStandalone() && location.pathname==="/"){
+      const zoneView=document.getElementById("zoneSelectView");
+      const pathView=document.getElementById("pathView");
+      if(zoneView && pathView){
+        zoneView.hidden=false;
+        pathView.hidden=true;
+        document.body?.classList.remove("pwa-in-path","pwa-has-bottom-nav");
+        const bottomNav=document.getElementById("pwaBottomNav");
+        if(bottomNav) bottomNav.hidden=true;
+        document.documentElement.classList.remove("navigator-home-booting");
+      }
+    }
+    refresh();
+  },0));
   window.addEventListener("resize",()=>setTimeout(refresh,40));
   document.addEventListener("click",(event)=>{
     const target=event.target instanceof Element ? event.target : null;

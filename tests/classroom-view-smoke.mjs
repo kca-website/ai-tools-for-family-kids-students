@@ -28,7 +28,8 @@ try {
   assert.match(await page.locator('.privacy').innerText(), /Μην εισάγεις ονοματεπώνυμα|προσωπικά\/ευαίσθητα δεδομένα μαθητών/i);
   assert.ok(await page.locator('#groqBtn').isVisible(), 'Groq generation action is missing');
   assert.ok(await page.locator('#puterBtn').isVisible(), 'Puter generation action is missing');
-  assert.ok(await page.locator('#quick').count() === 1, 'quick classroom activity section is missing');
+  assert.equal(await page.locator('.task[data-task="package"]').count(), 1, 'one-period classroom package action is missing');
+  assert.equal(await page.locator('#qrBtn').count(), 1, 'classroom QR activity action is missing');
 
   const storage = await page.evaluate(() => ({
     local: Object.keys(localStorage),

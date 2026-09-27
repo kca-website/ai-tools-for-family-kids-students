@@ -11,8 +11,7 @@
   function isHome(){
     return location.pathname === "/" || location.pathname === "";
   }
-  if(!isHome()) return;
-  document.documentElement.classList.add("home-v8-active");
+  if(isHome()) document.documentElement.classList.add("home-v8-active");
 
   const COPY = {
     el: {
@@ -39,6 +38,9 @@
       aiBadgeFree: "Δωρεάν",
       aiTitle: "Η δική μας AI Βοήθεια, φτιαγμένη για τα σχολικά μαθήματα.",
       aiDesc: "Διαφορετική από τα εργαλεία του καταλόγου. Σε καθοδηγεί με ερωτήσεις και μικρές υποδείξεις, αντί να σου δίνει έτοιμη λύση.",
+      aiTechSummary: "ⓘ Ποιο AI χρησιμοποιείται;",
+      aiTechText: "GPT-OSS 120B μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική.",
+      aiTechLink: "Διαφάνεια AI →",
       aiPrimary: "Γονιός Δημοτικού",
       aiMiddle: "Γυμνάσιο 13+",
       aiHigh: "Λύκειο",
@@ -94,6 +96,9 @@
       aiBadgeFree: "Free",
       aiTitle: "Our AI Help, built for school subjects.",
       aiDesc: "Different from the tools in the catalogue. It guides you with questions and small hints instead of giving you a ready-made answer.",
+      aiTechSummary: "ⓘ Which AI is used?",
+      aiTechText: "GPT-OSS 120B via Cloudflare Workers AI, with Groq as the fallback provider. Puter is an optional alternative.",
+      aiTechLink: "AI transparency →",
       aiPrimary: "Primary parent",
       aiMiddle: "Middle School 13+",
       aiHigh: "High School",
@@ -287,6 +292,10 @@
           </div>
           <h3 id="homeV8AiTitle">${c.aiTitle}</h3>
           <p class="home-v8-helper-desc">${c.aiDesc}</p>
+          <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
+            <summary title="GPT-OSS 120B · Cloudflare Workers AI → Groq · Puter optional">${c.aiTechSummary}</summary>
+            <p>${c.aiTechText} <a href="/ai-transparency.html">${c.aiTechLink}</a></p>
+          </details>
           <div class="home-v8-helper-links home-v8-ai__links">
             <a href="/primary/guardian/tutor">${c.aiPrimary}</a>
             <a href="/middle/student/tutor">${c.aiMiddle}</a>
@@ -429,6 +438,7 @@
 
   function apply(){
     if(!isHome()) return;
+    document.documentElement.classList.add("home-v8-active");
     const styleLink = ensureStyles();
     hideLegacyHomeBlocks();
     ensureAccessibilityBadge();
@@ -472,7 +482,13 @@
 
     window.addEventListener("popstate", () => {
       setTimeout(() => {
-        if(isHome()) apply();
+        if(!isHome()) return;
+        const zoneView=document.getElementById("zoneSelectView");
+        const pathView=document.getElementById("pathView");
+        if(zoneView?.hidden && pathView && !pathView.hidden){
+          document.getElementById("backToZones")?.click();
+        }
+        apply();
       }, 0);
     });
 

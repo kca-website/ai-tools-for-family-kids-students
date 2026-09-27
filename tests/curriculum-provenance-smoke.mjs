@@ -65,7 +65,9 @@ try{
     'annual-exam-syllabus-verified',
     'panhellenic-2027-verified',
     'annual-guidance-detailed-map',
-    'panhellenic-2027-detailed-map'
+    'panhellenic-2027-detailed-map',
+    'official-current-year-reference',
+    'official-book-verified'
   ]);
   assert.ok(currentHigh.every(r=>allowedCurrentHighStatuses.has(r.coverageStatus)),
     'Every active GEL subject must carry a recognised current-year evidence status');

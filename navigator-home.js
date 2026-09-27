@@ -287,6 +287,10 @@
           </div>
           <h3 id="homeV8AiTitle">${c.aiTitle}</h3>
           <p class="home-v8-helper-desc">${c.aiDesc}</p>
+          <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
+            <summary title="GPT-OSS 120B · Cloudflare Workers AI → Groq · Puter optional">ⓘ Ποιο AI χρησιμοποιείται;</summary>
+            <p><strong>GPT-OSS 120B</strong> μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική. <a href="/ai-transparency.html">Διαφάνεια AI →</a></p>
+          </details>
           <div class="home-v8-helper-links home-v8-ai__links">
             <a href="/primary/guardian/tutor">${c.aiPrimary}</a>
             <a href="/middle/student/tutor">${c.aiMiddle}</a>

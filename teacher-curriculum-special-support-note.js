@@ -64,6 +64,8 @@
     if(selected?.officialPublishedPending){
       const source=safeUrl(selected.officialPendingSource);
       const sourceLink=source?` <a href="${source}" target="_blank" rel="noopener">Επίσημες οδηγίες ↗</a>`:"";
+      const scope=String(selected.officialPendingScope||"").trim();
+      const scopeLine=scope?`<br><strong>Επίσημο πεδίο για την τάξη:</strong> ${scope}.`:"";
       note.innerHTML=count
         ?`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά η ακριβής section-level χαρτογράφηση δεν έχει ακόμη ολοκληρωθεί.</strong> Οι ${count} επιλογές που βλέπεις είναι μόνο υποστηρικτικό πλαίσιο και δεν πρέπει να θεωρηθούν αυτούσια φετινή ύλη. Ο εκπαιδευτικός επιβεβαιώνει την πραγματική ενότητα που διδάσκει.${sourceLink}`
         :`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά η ακριβής section-level χαρτογράφηση δεν έχει ακόμη ολοκληρωθεί.</strong> Χρησιμοποίησε τον πραγματικό τίτλο κεφαλαίου/ενότητας από την επίσημη πηγή αντί να επινοηθεί ύλη.${sourceLink}`;

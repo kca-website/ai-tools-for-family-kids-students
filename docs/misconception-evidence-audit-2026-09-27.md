@@ -16,7 +16,7 @@ The initial evidence layer contained **7** records.
 
 This batch adds **11** records, bringing the research-evidence layer to **18** records.
 
-The audit also found that several entries that initially appeared to lack section labels already contained `officialSectionEl` and/or `topicAnchorEl`. The data itself was not missing; the relevant Teacher Assistant fallback had previously been too strict about `annualScopeVerified`. That resolver issue was corrected in the preceding production batch.
+The audit also found that several entries that initially appeared to lack section labels already contained `officialSectionEl` and/or `topicAnchorEl`. The data itself was not missing; the relevant Teacher Assistant fallback had previously been too strict about `annualScopeVerified`. That resolver issue was corrected in the preceding production batch. Two older Grade 5 Mathematics evidence records were genuinely only course-level anchors; they are now upgraded using exact official textbook sections: Chapter 17 for fraction comparison and Chapter 26 for decimal ordering/place value.
 
 ## Current priority areas still not evidence-backed
 

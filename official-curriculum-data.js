@@ -1922,13 +1922,16 @@
   "fractions.whole_number_bias": {
     "topicAnchorEl": "Σύγκριση κλασμάτων",
     "topicAnchorEn": "Comparing fractions",
-    "status": "official-course-topic-anchor",
+    "status": "exact-section-verified",
     "sourceQuizId": "math-e-dimotikou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E113"
-  },
+    "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας βιβλίου",
+    "statusLabelEn": "Exact official textbook section mapping",
+    "officialSectionEl": "Κεφ. 17: Σύγκριση και διάταξη κλασμάτων",
+    "officialSectionEn": "Chapter 17: Comparing and ordering fractions",
+    "noteEl": "Η αντιστοίχιση είναι ακριβής ως προς την ενότητα του επίσημου βιβλίου μαθητή Ε΄ Δημοτικού. Δεν παρουσιάζεται ως ξεχωριστή ετήσια εξεταστέα ύλη.",
+    "noteEn": "Mapping is exact to the official Grade 5 student textbook section. It is not presented as a separate annual examinable syllabus.",
+    "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/index-3_17.html"
+  }
   "fractions.add_across": {
     "topicAnchorEl": "Πρόσθεση κλασμάτων",
     "topicAnchorEn": "Adding fractions",
@@ -1942,13 +1945,16 @@
   "decimals.longer_is_larger": {
     "topicAnchorEl": "Σύγκριση δεκαδικών",
     "topicAnchorEn": "Comparing decimals",
-    "status": "official-course-topic-anchor",
+    "status": "exact-section-verified",
     "sourceQuizId": "math-e-dimotikou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E113"
-  },
+    "statusLabelEl": "Ακριβής επίσημη αντιστοίχιση ενότητας βιβλίου",
+    "statusLabelEn": "Exact official textbook section mapping",
+    "officialSectionEl": "Κεφ. 26: Διάταξη δεκαδικών αριθμών – Αξία θέσης ψηφίου στους δεκαδικούς",
+    "officialSectionEn": "Chapter 26: Ordering decimals – place value in decimals",
+    "noteEl": "Η αντιστοίχιση είναι ακριβής ως προς την ενότητα του επίσημου βιβλίου μαθητή Ε΄ Δημοτικού. Δεν παρουσιάζεται ως ξεχωριστή ετήσια εξεταστέα ύλη.",
+    "noteEn": "Mapping is exact to the official Grade 5 student textbook section. It is not presented as a separate annual examinable syllabus.",
+    "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/index-5_26.html"
+  }
   "division.remainder": {
     "topicAnchorEl": "Διαίρεση με υπόλοιπο",
     "topicAnchorEn": "Division with remainder",

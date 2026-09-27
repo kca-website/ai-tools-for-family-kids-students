@@ -15,3 +15,11 @@ assert.match(js,/aitools4kids-materials-v1\.json/);
 assert.match(js,/currentTask\(\) === "worksheet" \|\| currentTask\(\) === "assessment"/);
 assert.match(css,/\.teacher-material-lab/);
 console.log("teacher material lab smoke: ok");
+
+assert.match(js,/Ακριβής \/ επαληθευμένη ετήσια αντιστοίχιση/);
+assert.match(js,/Δημοσιευμένες ετήσιες οδηγίες — αναλυτικός χάρτης πλοήγησης/);
+assert.match(js,/Μερική χαρτογράφηση/);
+assert.match(js,/Επίσημη δομή \/ υποστηρικτική γέφυρα/);
+assert.match(js,/Πηγή καταχωρισμένη — εκκρεμεί χαρτογράφηση ενοτήτων/);
+assert.match(js,/sourceQuizId/);
+assert.match(css,/\.result-actions,#classQrPanel/);

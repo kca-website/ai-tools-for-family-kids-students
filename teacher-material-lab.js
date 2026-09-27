@@ -3,7 +3,7 @@
 
   const STORAGE_KEY = "aitools4kids_teacher_materials_v1";
   const MAX_ITEMS = 50;
-  const state = { versions: [], busy: false, lastAudit: null };
+  const state = { versions: [], busy: false, lastAudit: null, contextOverride: null };
 
   const $id = (id) => document.getElementById(id);
   const norm = (value) => String(value || "")
@@ -39,51 +39,62 @@
   }
 
   function sourceStatus() {
+    if (state.contextOverride && state.contextOverride.source) return state.contextOverride.source;
     const s = selectedSubjectSafe() || {};
     const topic = selectedUnitText();
-    if (s.officialPublishedPending) return {
-      tone: "unknown",
-      label: "Δεν έχει ακόμη επιβεβαιωθεί σε επίπεδο ενότητας",
-      detail: "Οι επίσημες οδηγίες έχουν δημοσιευθεί, αλλά δεν υπάρχει ακόμη ακριβής section-level αντιστοίχιση στο site."
-    };
-    if (s.supportOnly) return {
-      tone: "partial",
-      label: "Υποστηρικτική χαρτογράφηση",
-      detail: "Χρησιμοποιείται ως βοήθημα και δεν παρουσιάζεται ως αυτούσια επίσημη ετήσια ύλη."
-    };
-    if (s.selectionFramework) return {
-      tone: "partial",
-      label: "Επαληθευμένο επίσημο πλαίσιο",
-      detail: "Η θεματική βρίσκεται σε επαληθευμένο πλαίσιο, αλλά δεν αποτελεί αυτόματα υποχρεωτική ή εξεταστέα λίστα."
-    };
-    if (s.bookSections) return {
-      tone: "partial",
-      label: "Επαληθευμένη ενότητα σχολικού βιβλίου",
-      detail: "Η ενότητα υπάρχει στο επίσημο βιβλίο, αλλά δεν ταυτίζεται αυτόματα με την ετήσια διδακτέα ή εξεταστέα ύλη."
+
+    // Vocabulary is intentionally identical to docs/curriculum-provenance-policy.md.
+    if (s.annualMapped) return {
+      code: "exact-verified-annual-mapping",
+      policyState: 1,
+      tone: "good",
+      label: "Ακριβής / επαληθευμένη ετήσια αντιστοίχιση",
+      detail: "Υπάρχει section-level τεκμηρίωση και ρητή αντιστοίχιση στην τρέχουσα ύλη ή στις οδηγίες 2026–27."
     };
     if (s.navigationMap) return {
+      code: "published-guidance-navigation-map",
+      policyState: 2,
       tone: "partial",
-      label: "Τεκμηριωμένος χάρτης πλοήγησης",
-      detail: "Είναι βοήθημα πλοήγησης στις οδηγίες και όχι αυτούσιος επίσημος τίτλος ενότητας."
+      label: "Δημοσιευμένες ετήσιες οδηγίες — αναλυτικός χάρτης πλοήγησης",
+      detail: "Η τρέχουσα επίσημη οδηγία έχει χαρτογραφηθεί για πλοήγηση. Οι επιλογές δεν παρουσιάζονται ως αυτούσιοι επίσημοι τίτλοι ενοτήτων."
     };
-    if (s.annualMapped) return {
-      tone: "good",
-      label: "Επαληθευμένη αντιστοίχιση 2026–27",
-      detail: "Η επιλογή έχει ρητή αντιστοίχιση στην τρέχουσα ύλη ή στις οδηγίες του site."
-    };
-    if (topic && $id("unit") && $id("unit").value !== "custom") return {
+    if (topic && $id("unit") && $id("unit").value !== "custom" && !s.supportOnly && !s.selectionFramework && !s.bookSections && !s.officialPublishedPending) return {
+      code: "partial-mapping",
+      policyState: 3,
       tone: "partial",
-      label: "Χαρτογραφημένη επιλογή",
-      detail: "Η επιλογή είναι χαρτογραφημένη, αλλά δεν δηλώνεται εδώ ως ακριβής ετήσια section-level επιβεβαίωση."
+      label: "Μερική χαρτογράφηση",
+      detail: "Εμφανίζεται μόνο το τεκμηριωμένο μέρος της χαρτογράφησης. Δεν αναβαθμίζεται σε πλήρη ετήσια αντιστοίχιση."
+    };
+    if (s.supportOnly || s.selectionFramework || s.bookSections) return {
+      code: "official-structure-support-bridge",
+      policyState: 4,
+      tone: "partial",
+      label: "Επίσημη δομή / υποστηρικτική γέφυρα",
+      detail: "Το πλαίσιο, η δομή ή η πηγή είναι τεκμηριωμένα, αλλά οι λεπτομερείς ενότητες δεν παρουσιάζονται ως επίσημη ετήσια ύλη."
+    };
+    if (s.officialPublishedPending) return {
+      code: "source-indexed-section-mapping-pending",
+      policyState: 5,
+      tone: "unknown",
+      label: "Πηγή καταχωρισμένη — εκκρεμεί χαρτογράφηση ενοτήτων",
+      detail: "Υπάρχει γνωστή επίσημη πηγή 2026–27, αλλά η section-level εξαγωγή δεν έχει ολοκληρωθεί."
     };
     return {
+      code: "official-structure-support-bridge",
+      policyState: 4,
       tone: "unknown",
-      label: "Ενότητα που έδωσε ο/η εκπαιδευτικός",
-      detail: "Δεν υπάρχει αυτόματη section-level επιβεβαίωση από τα δεδομένα του site. Χρειάζεται έλεγχος από τον/την εκπαιδευτικό."
+      label: "Επίσημη δομή / υποστηρικτική γέφυρα",
+      detail: "Χρησιμοποιείται ο ακριβής τίτλος που έδωσε ο/η εκπαιδευτικός χωρίς να δηλώνεται μη τεκμηριωμένη section-level κάλυψη."
     };
   }
 
   function snapshot() {
+    if (state.contextOverride) {
+      return {
+        ...state.contextOverride,
+        source: state.contextOverride.source || sourceStatus()
+      };
+    }
     const s = selectedSubjectSafe() || {};
     return {
       schemaVersion: 1,
@@ -94,6 +105,7 @@
       gradeLabel: optionText($id("grade")),
       subject: $id("subject") ? $id("subject").value : "",
       subjectLabel: optionText($id("subject")),
+      quizId: s.quizId || "",
       unit: selectedUnitText(),
       objective: $id("objective") ? $id("objective").value : "",
       source: sourceStatus(),
@@ -238,7 +250,7 @@
     if (!host) return;
     const s = sourceStatus();
     const symbols = { good: "✓", partial: "◐", unknown: "?" };
-    host.innerHTML = '<div class="tml-check-row tml-' + s.tone + '"><span class="tml-check-icon">' + (symbols[s.tone] || "?") + '</span><div><strong>Αντιστοίχιση / πηγή: ' + escapeHtml(s.label) + '</strong><p>' + escapeHtml(s.detail) + '</p><span class="tml-data-label">Δεδομένα aitools4kids · όχι AI εκτίμηση</span></div></div>';
+    host.innerHTML = '<div class="tml-check-row tml-' + s.tone + '"><span class="tml-check-icon">' + (symbols[s.tone] || "?") + '</span><div><strong>Αντιστοίχιση / πηγή: ' + escapeHtml(s.label) + '</strong><p>' + escapeHtml(s.detail) + '</p><span class="tml-data-label">Provenance state ' + (s.policyState || "—") + '/5 · Δεδομένα aitools4kids · όχι AI εκτίμηση</span></div></div>';
   }
 
   function renderAudit() {
@@ -267,18 +279,22 @@
     if (typeof GAP_TAGS === "undefined") return [];
     const layer = window.AITOOLSKIDS_OFFICIAL_CURRICULUM;
     if (!layer || typeof layer.getGapAlignment !== "function") return [];
-    const topic = norm(selectedUnitText());
+
+    const c = snapshot();
+    const topic = norm(c.unit || selectedUnitText());
     if (!topic) return [];
+    const acceptedSubjectIds = [c.quizId, c.subject].filter(Boolean);
     const out = [];
+
     Object.keys(GAP_TAGS).forEach((id) => {
       const alignment = layer.getGapAlignment(id);
       if (!alignment || !alignment.annualScopeVerified) return;
       if (alignment.status !== "exact-section-verified" && alignment.status !== "related-section-verified") return;
+      if (alignment.sourceQuizId && (!acceptedSubjectIds.length || !acceptedSubjectIds.includes(alignment.sourceQuizId))) return;
       const candidates = [alignment.officialSectionEl, alignment.topicAnchorEl].filter(Boolean).map(norm);
       if (!candidates.some((value) => value === topic)) return;
       const gap = GAP_TAGS[id];
-      out.push({ id, label: gap.labelEl || id, explain: gap.explainEl || "" });
-
+      out.push({ id, label: gap.labelEl || id, explain: gap.explainEl || "", sourceQuizId: alignment.sourceQuizId || "" });
     });
     return out.slice(0, 8);
   }
@@ -348,6 +364,7 @@
       gradeLabel: c.gradeLabel,
       subject: c.subject,
       subjectLabel: c.subjectLabel,
+      quizId: c.quizId || "",
       unit: c.unit,
       objective: c.objective,
       source: c.source,
@@ -378,7 +395,7 @@
     const items = loadMaterials();
     const index = items.findIndex((x) => x.id === (row ? row.dataset.id : ""));
     if (index < 0) return;
-    if (button.dataset.lib === "open") { applyText(items[index].text, "Τοπική βιβλιοθήκη"); return; }
+    if (button.dataset.lib === "open") { state.contextOverride = { ...items[index] }; applyText(items[index].text, "Τοπική βιβλιοθήκη"); return; }
     if (button.dataset.lib === "rename") {
       const next = window.prompt("Νέος τίτλος:", items[index].title || "Υλικό");
       if (next && next.trim()) {
@@ -506,6 +523,8 @@
   }
 
   function refresh() {
+    const metaText = $id("meta") ? $id("meta").textContent : "";
+    if (state.contextOverride && metaText && !metaText.startsWith("Εργαστήριο ·")) state.contextOverride = null;
     buildLab();
     const root = $id("teacherMaterialLab");
     if (!root) return;

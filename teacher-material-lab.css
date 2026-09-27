@@ -20,3 +20,5 @@
 .tml-summary-cta{flex:0 0 auto;border:1px solid #9bbfdc;background:#fff;color:#173f63;border-radius:9px;padding:8px 10px;font-size:.8rem;font-weight:850}
 .teacher-material-lab[open] .tml-summary-cta{display:none}
 @media(max-width:680px){.teacher-material-lab>summary{align-items:flex-start}.tml-summary-cta{display:none}}
+
+@media print{.result-actions,#classQrPanel{display:none!important}}

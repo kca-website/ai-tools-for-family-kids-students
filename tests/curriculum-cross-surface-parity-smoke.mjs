@@ -184,7 +184,7 @@ try{
   assert.ok(tutorInformaticsTopics.some(x=>/Το Υλικό του Υπολογιστή/.test(x)));
 
   assert.deepEqual(errors,[],'Browser errors: '+errors.join('\n'));
-  console.log('Curriculum parity smoke passed: verified IEP framework is shared by Curriculum Map, AI Help and Teacher material flow.');
+  console.log('Curriculum parity smoke passed: verified frameworks and official-book sections stay aligned across Curriculum Map, Practice Map, AI Help and Teacher Material.');
 } finally {
   await browser.close();
 }

@@ -61,6 +61,26 @@ try{
     assert.ok(row.topics.some(t=>peExpected[row.grade].test(t.label)),'PE grade must expose its verified official chapter focus');
   }
 
+  const technologyResolved=await page.evaluate(()=>{
+    const r=window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+    return ['a','b'].map(g=>{
+      const s=r.getSubject('middle',g,'technologia-'+g+'-gymnasiou');
+      return {grade:g,mode:s?.topicMode||'',topics:(s?.topics||[]).map(t=>({label:t.labelEl||'',status:t.status||'',source:t.sourceUrl||''})),annual:s?.curriculum?.annualInstructionsUrl||'',catalog:s?.curriculum?.catalogUrl||''};
+    });
+  });
+  assert.equal(technologyResolved[0].mode,'verified-official-sections','Technology A must expose verified official-book chapters');
+  assert.equal(technologyResolved[0].topics.length,6,'Technology A must expose six official book chapters');
+  assert.ok(technologyResolved[0].topics.some(t=>/Κεφάλαιο 6 — Οργάνωση σεμιναρίων/.test(t.label)));
+  assert.equal(technologyResolved[1].mode,'verified-official-sections','Technology B must expose verified official-book chapters');
+  assert.equal(technologyResolved[1].topics.length,4,'Technology B must expose four official book chapters');
+  assert.ok(technologyResolved[1].topics.some(t=>/Οργάνωση των σύγχρονων παραγωγικών μονάδων/.test(t.label)));
+  for(const row of technologyResolved){
+    assert.ok(row.topics.every(t=>t.status==='related-section-verified'),'Technology chapters must remain explicitly section-verified');
+    assert.ok(row.topics.every(t=>/ebooks\.edu\.gr/.test(t.source)),'Technology chapter anchors must point to official Interactive School Books');
+    assert.match(row.annual,/iep\.edu\.gr\/yli-kai-odigies-didaskalias-gymnasiou/i,'Technology must retain current 2026–27 IEP guidance');
+    assert.match(row.catalog,/ebooks\.edu\.gr/i,'Technology catalog source must be an official school book');
+  }
+
   const gelInformatics=await page.evaluate(()=>{
     const r=window.AITOOLSKIDS_CURRICULUM_RESOLVER;
     return ['a','b'].map(g=>{
@@ -117,6 +137,16 @@ try{
   assert.equal(peMapTopics.length,2,'Curriculum Map must expose the two official PE A chapters');
   assert.ok(peMapTopics.some(x=>/Η Ιστορία του Αθλητισμού/.test(x)));
 
+  const technologySubject=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/^Τεχνολογία/.test((o.textContent||'').trim()))?.value||'');
+  assert.ok(technologySubject,'Curriculum Map missing Technology');
+  await page.selectOption('#subject',technologySubject);
+  const technologyCourses=await page.locator('#course option').evaluateAll(opts=>opts.map(o=>o.value));
+  assert.ok(technologyCourses.includes('technologia-a-gymnasiou'),'Curriculum Map missing verified Technology A course');
+  await page.selectOption('#course','technologia-a-gymnasiou');
+  const technologyMapTopics=compact(await page.locator('#topicPick option').allTextContents());
+  assert.equal(technologyMapTopics.length,6,'Curriculum Map must expose six verified Technology A chapters');
+  assert.ok(technologyMapTopics.some(x=>/Κατασκευή ατομικού έργου/.test(x)));
+
   await page.goto(BASE+'/teacher-assistant.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.selectOption('#context','middle');
   await page.selectOption('#grade','a');
@@ -133,6 +163,13 @@ try{
   const informaticsTeacherUnits=compact(await page.locator('#unit option').allTextContents());
   assert.equal(informaticsTeacherUnits.length,5,'Teacher material flow must reuse five verified Informatics A section anchors');
   assert.ok(informaticsTeacherUnits.some(x=>/Βασικές Έννοιες Πληροφορικής/.test(x)));
+
+  const teacherTechnology=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/^Τεχνολογία/.test((o.textContent||'').trim()))?.value||'');
+  assert.ok(teacherTechnology,'Teacher material flow missing Technology');
+  await page.selectOption('#subject',teacherTechnology);
+  const technologyTeacherUnits=compact(await page.locator('#unit option').allTextContents());
+  assert.equal(technologyTeacherUnits.length,6,'Teacher material flow must reuse six verified Technology A chapters');
+  assert.ok(technologyTeacherUnits.some(x=>/Συγγραφή γραπτής εργασίας/.test(x)));
 
   await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>!!window.AITutor?.render,{timeout:30000});
@@ -160,6 +197,15 @@ try{
   assert.equal(practiceInformaticsTopics.length,5,'Practice Map must expose five verified Informatics section anchors');
   assert.ok(practiceInformaticsTopics.some(x=>/Επεξεργασία Κειμένου/.test(x)));
 
+  await page.locator('#quizCurriculumBackBtn').click();
+  await page.waitForSelector('.quiz-subject-grid',{state:'visible',timeout:10000});
+  const practiceTechnology=page.locator('.quiz-subject-card--curriculum').filter({hasText:'Τεχνολογία'});
+  assert.equal(await practiceTechnology.count(),1,'Practice Map must include source-backed Technology');
+  await practiceTechnology.locator('.quiz-curriculum-browse-btn').click();
+  const practiceTechnologyTopics=compact(await page.locator('.quiz-curriculum-topic-btn .quiz-topic-card__label').allTextContents());
+  assert.equal(practiceTechnologyTopics.length,6,'Practice Map must expose six verified Technology A chapters');
+  assert.ok(practiceTechnologyTopics.some(x=>/Οργάνωση σεμιναρίων/.test(x)));
+
   await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>window.AITutor?.render,{timeout:30000});
   await page.evaluate(()=>{
@@ -182,6 +228,13 @@ try{
   const tutorInformaticsTopics=compact(await page.locator('#tutorTopic option').allTextContents());
   assert.equal(tutorInformaticsTopics.length,5,'AI Help must reuse five verified Informatics A section anchors');
   assert.ok(tutorInformaticsTopics.some(x=>/Το Υλικό του Υπολογιστή/.test(x)));
+
+  const tutorTechnology=await page.locator('#tutorSubject option').evaluateAll(opts=>opts.find(o=>/^Τεχνολογία/.test((o.textContent||'').trim()))?.value||'');
+  assert.ok(tutorTechnology,'AI Help missing Technology');
+  await page.selectOption('#tutorSubject',tutorTechnology);
+  const tutorTechnologyTopics=compact(await page.locator('#tutorTopic option').allTextContents());
+  assert.equal(tutorTechnologyTopics.length,6,'AI Help must reuse six verified Technology A chapters');
+  assert.ok(tutorTechnologyTopics.some(x=>/Η μέθοδος της ατομικής εργασίας/.test(x)));
 
   assert.deepEqual(errors,[],'Browser errors: '+errors.join('\n'));
   console.log('Curriculum parity smoke passed: verified frameworks and official-book sections stay aligned across Curriculum Map, Practice Map, AI Help and Teacher Material.');

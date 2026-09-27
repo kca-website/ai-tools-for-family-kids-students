@@ -535,13 +535,13 @@ function show(text,provider){lastText=String(text||'').replace(/<br\s*\/?>/gi,'\
   return location.origin+path+'?'+params.toString();
 }
 function setTutorLink(){const url=tutorDeepLink(),a=$('classTutorLink');if(a){a.href=url;a.textContent=url;}return url;}
-function loadQrLibrary(){return new Promise((resolve,reject)=>{if(window.QRCode?.toDataURL)return resolve(window.QRCode);const old=document.querySelector('script[data-class-qr="1"]');if(old){old.addEventListener('load',()=>resolve(window.QRCode),{once:true});old.addEventListener('error',reject,{once:true});return;}const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js';s.dataset.classQr='1';s.onload=()=>resolve(window.QRCode);s.onerror=reject;document.head.appendChild(s);});}
+function loadQrLibrary(){return new Promise((resolve,reject)=>{if(window.QRCode?.toDataURL)return resolve(window.QRCode);const old=document.querySelector('script[data-class-qr="1"]');if(old)old.remove();const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/qrcode@1.5.4/lib/browser.min.js';s.dataset.classQr='1';s.onload=()=>resolve(window.QRCode);s.onerror=reject;document.head.appendChild(s);});}
 let classQrRevision=0;
 async function renderClassQr(){
   const revision=++classQrRevision,panel=$('classQrPanel'),img=$('classQrImage'),status=$('qrStatus'),url=setTutorLink();
   panel.hidden=false;status.textContent='Δημιουργία QR…';
   try{
-    const lib=await loadQrLibrary(),data=await lib.toDataURL(url,{width:220,margin:1});
+    const lib=await Promise.race([loadQrLibrary(),new Promise((_,reject)=>setTimeout(()=>reject(new Error('QR timeout')),7000))]),data=await lib.toDataURL(url,{width:220,margin:1});
     if(revision!==classQrRevision)return;
     img.src=data;img.hidden=false;status.textContent='Έτοιμο. Το QR αντιστοιχεί στις επιλογές δραστηριότητας που φαίνονται παραπάνω.';
   }catch(_){

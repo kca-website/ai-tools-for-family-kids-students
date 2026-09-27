@@ -26,6 +26,24 @@ try{
     assert.match(row.source,/iep\.edu\.gr/i,'Skills Labs source must be IEP');
   }
 
+  const informaticsResolved=await page.evaluate(()=>{
+    const r=window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+    return ['a','b','c'].map(g=>{
+      const s=r.getSubject('middle',g,'pliroforiki-'+g+'-gymnasiou');
+      return {grade:g,mode:s?.topicMode||'',topics:(s?.topics||[]).map(t=>({label:t.labelEl||'',status:t.status||'',source:t.sourceUrl||''})),source:s?.curriculum?.annualInstructionsUrl||''};
+    });
+  });
+  for(const row of informaticsResolved){
+    assert.equal(row.mode,'verified-official-sections','Middle-school Informatics must expose verified official sections');
+    assert.equal(row.topics.length,5,'Each Middle-school Informatics grade must expose five verified official section anchors');
+    assert.ok(row.topics.every(t=>/related-section-verified/.test(t.status)),'Informatics topic anchors must stay explicitly section-verified');
+    assert.ok(row.topics.every(t=>/iep\.edu\.gr/i.test(t.source)),'Informatics topic anchors must point to IEP material');
+    assert.match(row.source,/iep\.edu\.gr\/yli-kai-odigies-didaskalias-gymnasiou/i,'Informatics must retain the official 2026–27 annual guidance hub');
+  }
+  assert.ok(informaticsResolved[0].topics.some(t=>/Βασικές Έννοιες Πληροφορικής/.test(t.label)));
+  assert.ok(informaticsResolved[1].topics.some(t=>/Ψηφιακός Κόσμος/.test(t.label)));
+  assert.ok(informaticsResolved[2].topics.some(t=>/Πρόβλημα – Αλγόριθμος/.test(t.label)));
+
   await page.locator('[data-zone="middle"]').click();
   const skillsSubject=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/Εργαστήρια Δεξιοτήτων/.test(o.textContent))?.value||'');
   assert.ok(skillsSubject,'Curriculum Map missing Skills Labs');
@@ -41,6 +59,17 @@ try{
   assert.ok(mapTopics.some(x=>/Δημιουργώ και Καινοτομώ/.test(x)));
   assert.match(await page.locator('#sources').innerText(),/Επίσημες|ΙΕΠ/i,'Curriculum Map must expose official provenance');
 
+  const informaticsSubject=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/Πληροφορική/.test(o.textContent))?.value||'');
+  assert.ok(informaticsSubject,'Curriculum Map missing Informatics');
+  await page.selectOption('#subject',informaticsSubject);
+  const informaticsCourses=await page.locator('#course option').evaluateAll(opts=>opts.map(o=>o.value));
+  assert.ok(informaticsCourses.includes('pliroforiki-a-gymnasiou'),'Curriculum Map missing verified Informatics A course');
+  await page.selectOption('#course','pliroforiki-a-gymnasiou');
+  const informaticsMapTopics=compact(await page.locator('#topicPick option').allTextContents());
+  assert.equal(informaticsMapTopics.length,5,'Curriculum Map must expose five verified Informatics A section anchors');
+  assert.ok(informaticsMapTopics.some(x=>/Κίνδυνοι στο Διαδίκτυο/.test(x)));
+  assert.match(await page.locator('#sources').innerText(),/ΙΕΠ/i,'Curriculum Map Informatics must expose IEP provenance');
+
   await page.goto(BASE+'/teacher-assistant.html',{waitUntil:'domcontentloaded',timeout:60000});
   await page.selectOption('#context','middle');
   await page.selectOption('#grade','a');
@@ -50,6 +79,13 @@ try{
   const units=compact(await page.locator('#unit option').allTextContents());
   assert.equal(units.length,4,'Teacher material flow must reuse the four verified framework themes');
   assert.match(await page.locator('#curriculumNote').innerText(),/επίσημο πλαίσιο 2026.?27/i,'Teacher flow must label framework scope honestly');
+
+  const teacherInformatics=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/^Πληροφορική/.test((o.textContent||'').trim()))?.value||'');
+  assert.ok(teacherInformatics,'Teacher material flow missing Informatics');
+  await page.selectOption('#subject',teacherInformatics);
+  const informaticsTeacherUnits=compact(await page.locator('#unit option').allTextContents());
+  assert.equal(informaticsTeacherUnits.length,5,'Teacher material flow must reuse five verified Informatics A section anchors');
+  assert.ok(informaticsTeacherUnits.some(x=>/Βασικές Έννοιες Πληροφορικής/.test(x)));
 
   await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>!!window.AITutor?.render,{timeout:30000});
@@ -68,6 +104,16 @@ try{
   assert.match(await page.locator('#quizContent').innerText(),/Επίσημο πλαίσιο ΙΕΠ/i,'Practice Map must label framework scope honestly');
   assert.ok(await page.locator('#quizContent a[href*="iep.edu.gr"]').count()>0,'Practice Map must link to the official IEP source');
 
+  document.body.dataset.testMarker='practice-informatics';
+  document.getElementById('quizCurriculumBackBtn')?.click();
+  await page.waitForSelector('.quiz-subject-grid',{state:'visible',timeout:10000});
+  const practiceInformatics=page.locator('.quiz-subject-card--curriculum').filter({hasText:'Πληροφορική'});
+  assert.equal(await practiceInformatics.count(),1,'Practice Map must include source-backed Informatics');
+  await practiceInformatics.locator('.quiz-curriculum-browse-btn').click();
+  const practiceInformaticsTopics=compact(await page.locator('.quiz-curriculum-topic-btn .quiz-topic-card__label').allTextContents());
+  assert.equal(practiceInformaticsTopics.length,5,'Practice Map must expose five verified Informatics section anchors');
+  assert.ok(practiceInformaticsTopics.some(x=>/Επεξεργασία Κειμένου/.test(x)));
+
   await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>window.AITutor?.render,{timeout:30000});
   await page.evaluate(()=>{
@@ -83,6 +129,13 @@ try{
   await page.selectOption('#tutorSubject',tutorSkills);
   const tutorTopics=compact(await page.locator('#tutorTopic option').allTextContents());
   assert.equal(tutorTopics.length,4,'AI Help must reuse the four verified framework themes');
+
+  const tutorInformatics=await page.locator('#tutorSubject option').evaluateAll(opts=>opts.find(o=>/^Πληροφορική/.test((o.textContent||'').trim()))?.value||'');
+  assert.ok(tutorInformatics,'AI Help missing Informatics');
+  await page.selectOption('#tutorSubject',tutorInformatics);
+  const tutorInformaticsTopics=compact(await page.locator('#tutorTopic option').allTextContents());
+  assert.equal(tutorInformaticsTopics.length,5,'AI Help must reuse five verified Informatics A section anchors');
+  assert.ok(tutorInformaticsTopics.some(x=>/Το Υλικό του Υπολογιστή/.test(x)));
 
   assert.deepEqual(errors,[],'Browser errors: '+errors.join('\n'));
   console.log('Curriculum parity smoke passed: verified IEP framework is shared by Curriculum Map, AI Help and Teacher material flow.');

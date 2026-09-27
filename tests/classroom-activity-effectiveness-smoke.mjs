@@ -23,3 +23,6 @@ assert.match(teacher,/Δραστηριότητα τάξης \/ QR/);
 assert.match(tutor,/options = \{\}/);
 assert.match(tutor,/hiddenUser/);
 assert.match(tutor,/INDEPENDENT CHECKS/);
+
+assert.match(teacher,/official\.sectionEl/);
+assert.doesNotMatch(teacher,/const exact=official\?\.annualScopeVerified/);

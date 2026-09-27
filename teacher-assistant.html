@@ -554,7 +554,7 @@ $('tutorLinkBtn').onclick=()=>window.open(setTutorLink(),'_blank','noopener,nore
 $('copyTutorLinkBtn').onclick=async()=>{const b=$('copyTutorLinkBtn');try{await navigator.clipboard.writeText(setTutorLink());b.textContent='Αντιγράφηκε';}catch(_){b.textContent='Δες το link από κάτω';$('classQrPanel').hidden=false;}setTimeout(()=>b.textContent='Αντιγραφή deep link',1400);};
 $('qrBtn').onclick=renderClassQr;
 ['classActivityMode','classActivityMinutes','classActivityLiveAi','classActivityFinalCheck'].forEach(id=>$(id)?.addEventListener('change',()=>{if(!$('classQrPanel')?.hidden)renderClassQr();}));
-$('groqBtn').onclick=generateGroq;$('puterBtn').onclick=generatePuter;$('copyBtn').onclick=async()=>{await navigator.clipboard.writeText(lastText);$('copyBtn').textContent='Αντιγράφηκε';setTimeout(()=>$('copyBtn').textContent='Αντιγραφή',1200)};refreshContext();hydrateTeacherProviderStatus();const requestedTask=new URLSearchParams(location.search).get('task');if(requestedTask)setTask(requestedTask);
+$('groqBtn').onclick=generateGroq;$('puterBtn').onclick=generatePuter;$('copyBtn').onclick=async()=>{await navigator.clipboard.writeText(lastText);$('copyBtn').textContent='Αντιγράφηκε';setTimeout(()=>$('copyBtn').textContent='Αντιγραφή',1200)};refreshContext();const providerDetails=$('teacherAiProviderDetails');providerDetails?.addEventListener('toggle',()=>{if(providerDetails.open&&!providerDetails.dataset.hydrated){providerDetails.dataset.hydrated='1';hydrateTeacherProviderStatus();}});const requestedTask=new URLSearchParams(location.search).get('task');if(requestedTask)setTask(requestedTask);
 </script>
 <script>
 

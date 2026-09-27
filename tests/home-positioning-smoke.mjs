@@ -44,7 +44,7 @@ try {
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.');
 
-  assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card').count(), 6);
+  assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card').count(), 7, 'Homepage must expose the 4 age zones plus Special Education, University pilot and Curriculum Map');
   assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').count(), 1, 'Preschool 4–6 card missing');
   assert.match(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').innerText(), /4\s*(έως|to)\s*6|4-6/i, 'Preschool card must show ages 4–6');
   assert.equal(await page.locator('#homeV8Shell #specialSchoolZoneCard').count(), 1);

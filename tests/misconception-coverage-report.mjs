@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import vm from "node:vm";
+import assert from "node:assert/strict";
 
 const evidenceSrc=fs.readFileSync(new URL("../misconception-evidence-data.js",import.meta.url),"utf8");
 const officialSrc=fs.readFileSync(new URL("../official-curriculum-data.js",import.meta.url),"utf8");
@@ -32,7 +33,16 @@ while((match=re.exec(officialSrc))){
   if(evidence.has(id))row.evidenced++;
   rows.set(source,row);
 }
-for(const row of [...rows.values()].sort((a,b)=>a.source.localeCompare(b.source))){
+const ordered=[...rows.values()].sort((a,b)=>a.source.localeCompare(b.source));
+assert.equal(ordered.length,8,"expected eight conceptual STEM source quizzes");
+let totalVerified=0,totalEvidenced=0;
+for(const row of ordered){
   row.coverage=Math.round(100*row.evidenced/row.verified);
+  totalVerified+=row.verified;
+  totalEvidenced+=row.evidenced;
+  assert.equal(row.evidenced,row.verified,`${row.source}: conceptual STEM misconception coverage must be 100%`);
   console.log(row);
 }
+assert.equal(totalVerified,34,"expected 34 verified conceptual STEM gaps");
+assert.equal(totalEvidenced,34,"expected all 34 conceptual STEM gaps to be research-backed");
+console.log("conceptual STEM misconception coverage: 34/34 (100%)");

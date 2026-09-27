@@ -81,3 +81,23 @@ The following categories must not be treated as a coverage failure merely becaus
 Research evidence is required only when the site intends to surface a gap as a misconception-aware distractor or conceptual misconception.
 
 A verified curriculum gap may therefore remain intentionally outside the misconception evidence layer.
+
+
+## Final conceptual-STEM closure — 2026-09-27
+
+The misconception evidence project is closed at **34 research-backed records**, matching all **34 verified conceptual STEM gaps** currently included in the coverage set.
+
+The final six evidence records are:
+- `math-a-gym.gcd-lcm-confusion`
+- `functions.quadratic-always-two-roots`
+- `functions.sqrt-drops-absolute-value`
+- `biologia-a-gym.plant-animal-cell`
+- `biologia-a-gym.unicellular-nutrition`
+- `biologia-g-lyk.heterozygous-genotype`
+
+Closure does not mean every diagnostic gap in the whole site is a misconception. History recall, writing-production skills, grammar/procedural skills and terminology recall remain deliberately outside the misconception-coverage metric unless future research justifies treating a specific gap as a conceptual misconception.
+
+Any future addition must continue to pass the same three gates:
+1. an existing site gap,
+2. exact/related verified curriculum section mapping,
+3. bounded research evidence with population context.

@@ -29,10 +29,10 @@ try{
 
   await page.goto(URL,{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>document.documentElement.classList.contains('navigator-home-ready'),null,{timeout:15000});
-  const visibleAiPromo=await page.locator('.hero__ai-help-copy').innerText();
-  assert.doesNotMatch(visibleAiPromo,/GPT-OSS|Groq|Cloudflare Workers AI/,'Homepage must keep provider jargon collapsed by default');
   assert.equal(await page.locator('#homeAiTechDetails[open]').count(),0,'Homepage AI technical details must start collapsed');
+  assert.equal(await page.locator('#homeAiTechDetails p').isVisible(),false,'Provider/model details must not be visible before user disclosure');
   await page.locator('#homeAiTechDetails summary').click();
+  assert.equal(await page.locator('#homeAiTechDetails p').isVisible(),true,'Provider/model details must become visible on demand');
   assert.match(await page.locator('#homeAiTechDetails').innerText(),/GPT-OSS 120B[\s\S]*Cloudflare Workers AI[\s\S]*Groq/,'AI details must reveal the model/provider chain on demand');
   await page.locator('#homeAiTechDetails summary').click();
   await page.locator('.zone-card[data-zone="primary"]').click();

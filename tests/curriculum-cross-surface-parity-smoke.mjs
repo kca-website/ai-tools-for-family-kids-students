@@ -151,7 +151,6 @@ try{
   assert.match(await page.locator('#quizContent').innerText(),/Επίσημο πλαίσιο ΙΕΠ/i,'Practice Map must label framework scope honestly');
   assert.ok(await page.locator('#quizContent a[href*="iep.edu.gr"]').count()>0,'Practice Map must link to the official IEP source');
 
-  document.body.dataset.testMarker='practice-informatics';
   document.getElementById('quizCurriculumBackBtn')?.click();
   await page.waitForSelector('.quiz-subject-grid',{state:'visible',timeout:10000});
   const practiceInformatics=page.locator('.quiz-subject-card--curriculum').filter({hasText:'Πληροφορική'});

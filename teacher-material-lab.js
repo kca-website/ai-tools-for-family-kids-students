@@ -288,7 +288,7 @@
 
     Object.keys(GAP_TAGS).forEach((id) => {
       const alignment = layer.getGapAlignment(id);
-      if (!alignment || !alignment.annualScopeVerified) return;
+      if (!alignment) return;
       if (alignment.status !== "exact-section-verified" && alignment.status !== "related-section-verified") return;
       if (alignment.sourceQuizId && (!acceptedSubjectIds.length || !acceptedSubjectIds.includes(alignment.sourceQuizId))) return;
       const candidates = [alignment.officialSectionEl, alignment.sectionEl, alignment.topicAnchorEl].filter(Boolean).map(norm);

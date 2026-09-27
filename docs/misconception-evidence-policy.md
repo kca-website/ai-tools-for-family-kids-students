@@ -20,3 +20,10 @@ First batch:
 Never say “the student has misconception X”. Use tentative wording such as “this choice may indicate that the concept needs an additional check”.
 
 New evidence records require a stable research URL, population/age context, an exact statement of what the source supports, an existing gapTag and separate curriculum verification.
+
+
+### Annual-scope flag
+
+`annualScopeVerified` is an additional confidence marker where the site has an explicit annual/examinable-scope mapping (for example, some Lyceum subjects). It is **not** a universal prerequisite for misconception evidence.
+
+For school levels or subjects where the site stores verified official section mapping without an annual-scope flag, `exact-section-verified` or `related-section-verified` is sufficient, provided the subject/quiz id also matches and a research evidence record exists.

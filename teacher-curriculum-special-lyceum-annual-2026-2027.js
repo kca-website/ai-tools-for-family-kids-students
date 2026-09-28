@@ -269,6 +269,30 @@
         sourceUrl:LANGUAGE_C_PDF,officialAnchors:languageCFramework,
         verificationNote:"Οι τέσσερις επιλογές αποτυπώνουν τον επίσημο τύπο εργασιών/αξιολόγησης της οδηγίας, όχι θεματικά κεφάλαια ή κλειστή εξεταστέα ύλη."
       }),
+      "a|english":Object.freeze({
+        id:"special-lyceum-a-english-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"Αγγλικά Γενικής Παιδείας",subjectId:"english",sourceSubjectIds:Object.freeze(["english","agglika","english-a-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ξένες Γλώσσες Λυκείου Ε.Α.Ε. — Αγγλικά Α΄ Λυκείου 2026–27",
+        sourceUrl:FOREIGN_LANGUAGES_PDF,officialAnchors:secondForeignFramework,
+        verificationNote:"Η επίσημη οδηγία Ξένων Γλωσσών Ε.Α.Ε. 2026–27 οργανώνει τη διδασκαλία των Αγγλικών με βάση το επίπεδο γλωσσομάθειας, τις επικοινωνιακές ανάγκες, τη λειτουργική χρήση της γλώσσας, την κοινωνικοπολιτισμική διάσταση και τη διαφοροποίηση. Δεν τεκμηριώνει κλειστή υποχρεωτική λίστα Units για την Α΄ τάξη, επομένως η χαρτογράφηση παραμένει framework-only."
+      }),
+      "b|english":Object.freeze({
+        id:"special-lyceum-b-english-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Αγγλικά Γενικής Παιδείας",subjectId:"english",sourceSubjectIds:Object.freeze(["english","agglika","english-b-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ξένες Γλώσσες Λυκείου Ε.Α.Ε. — Αγγλικά Β΄ Λυκείου 2026–27",
+        sourceUrl:FOREIGN_LANGUAGES_PDF,officialAnchors:secondForeignFramework,
+        verificationNote:"Η επίσημη οδηγία Ξένων Γλωσσών Ε.Α.Ε. 2026–27 οργανώνει τη διδασκαλία των Αγγλικών με βάση το επίπεδο γλωσσομάθειας, τις επικοινωνιακές ανάγκες, τη λειτουργική χρήση της γλώσσας, την κοινωνικοπολιτισμική διάσταση και τη διαφοροποίηση. Δεν παρουσιάζεται τεχνητή λίστα κεφαλαίων ή Units."
+      }),
+      "c|english":Object.freeze({
+        id:"special-lyceum-c-english-framework-2026-27",grade:"C",gradeId:"c",gradeLabel:"Γ΄ Λυκείου",
+        subject:"Αγγλικά Γενικής Παιδείας",subjectId:"english",sourceSubjectIds:Object.freeze(["english","agglika","english-c-lykeiou","english-g-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ξένες Γλώσσες Λυκείου Ε.Α.Ε. — Αγγλικά Γ΄ Λυκείου 2026–27",
+        sourceUrl:FOREIGN_LANGUAGES_PDF,officialAnchors:secondForeignFramework,
+        verificationNote:"Η επίσημη οδηγία Ξένων Γλωσσών Ε.Α.Ε. 2026–27 καλύπτει ρητά τα Αγγλικά Γενικής Παιδείας και στη Γ΄ τάξη. Η χαρτογράφηση διατηρεί μόνο το επαληθευμένο πλαίσιο γλωσσομάθειας/επικοινωνίας/διαφοροποίησης και δεν το μετατρέπει σε υποτιθέμενη section-level ύλη."
+      }),
       "a|second-foreign-language":Object.freeze({
         id:"special-lyceum-a-second-foreign-language-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
         subject:"2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)",subjectId:"second-foreign-language",sourceSubjectIds:Object.freeze(["second-foreign-language","french","german"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,

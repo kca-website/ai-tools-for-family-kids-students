@@ -36,6 +36,11 @@ const BOOKS = {
     title: "Ομηρικά Έπη – Οδύσσεια Α΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2232/Omirika-Epi-Odysseia_A-Gymnasiou_html-empl/",
     mode: "odyssey"
+  },
+  "iliada-b-gymnasiou": {
+    title: "Ομηρικά Έπη – Ιλιάδα Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/",
+    mode: "iliadSequence"
   }
 };
 
@@ -156,6 +161,14 @@ function resolveSectionPath(mode, topic) {
     const m = t.match(/^\s*(\d+)(?:η|ή|ὴ)?\s+Ενότητα/i) || t.match(/Ενότητα\s+(\d+)/i);
     if (!m) return "";
     return `index_${String(m[1]).padStart(2, "0")}.html`;
+  }
+
+  if (mode === "iliadSequence") {
+    const m = t.match(/^\s*(\d+)(?:η|ή|ὴ)?\s+Ενότητα/i);
+    if (!m) return "";
+    const n = Number(m[1]);
+    if (!Number.isInteger(n) || n < 1 || n > 21) return "";
+    return `index${String(n + 1).padStart(2, "0")}.html`;
   }
 
   if (mode === "history") {

@@ -28,9 +28,10 @@ try{
 
       for(const sub of subjects){
         await page.selectOption('#subject',sub.id);
-        const unitOptions=await page.locator('#unit option').allTextContents();
-        const units=unitOptions.map(x=>x.trim()).filter(Boolean);
-        const missing=units.length===0 || units.some(x=>x.startsWith('Δεν υπάρχει χαρτογραφημένη ενότητα'));
+        const unitOptions=await page.locator('#unit option').evaluateAll(opts=>opts.map(o=>({value:o.value,label:(o.textContent||'').trim()})));
+        const units=unitOptions.map(x=>x.label).filter(Boolean);
+        const customOnly=unitOptions.length===1&&unitOptions[0].value==='custom';
+        const missing=units.length===0 || customOnly || units.some(x=>x.startsWith('Δεν υπάρχει χαρτογραφημένη ενότητα')||x.startsWith('Γράψε την ακριβή ενότητα'));
         const usable=missing?[]:units;
         rows.push({context:ctx.label,contextId:ctx.id,grade:gr.label,gradeId:gr.id,subject:sub.label,subjectId:sub.id,topicCount:usable.length,missing,topics:usable});
 

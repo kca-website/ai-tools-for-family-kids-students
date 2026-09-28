@@ -11,7 +11,7 @@
   'use strict';
 
   var META = Object.freeze({
-    version: '1.2.0',
+    version: '1.2.1',
     schoolYear: '2026-2027',
     lastVerified: '2026-09-18',
     primaryIepUrl: 'https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/',
@@ -59,6 +59,9 @@
       var entry = byQuiz[key];
       var annual = resolve(entry);
       if(!annual || !entry || Object.isFrozen(entry)) return;
+      // Never downgrade an exact, section-level annual mapping to the generic
+      // "guidance published" state applied to subjects that are not indexed yet.
+      if(entry.annualInstructionsStatus === '2026-27-verified') return;
       entry.annualInstructionsStatus = annual.status;
       entry.annualInstructionsUrl = annual.sourceUrl;
       entry.annualInstructionsNoteEl = annual.noteEl;

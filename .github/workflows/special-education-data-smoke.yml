@@ -19,6 +19,7 @@ on:
       - 'teacher-assistant.html'
       - 'tests/special-education-*.mjs'
       - 'tests/teacher-curriculum-coverage-audit.mjs'
+      - 'tests/special-lyceum-guidance-coverage-audit.mjs'
       - 'tests/teacher-epal-specialties-smoke.mjs'
       - 'tests/teacher-eneegyl-informatics-smoke.mjs'
       - 'tests/teacher-eneegyl-official-sectors-smoke.mjs'

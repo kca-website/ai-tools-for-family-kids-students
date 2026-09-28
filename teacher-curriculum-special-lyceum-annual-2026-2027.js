@@ -96,6 +96,15 @@
     "Θέμα Δ — παραγωγή τεκμηριωμένου λόγου σε συγκεκριμένο επικοινωνιακό πλαίσιο"
   ]);
 
+  const FOREIGN_LANGUAGES_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9E%CE%95%CE%9D%CE%95%CE%A3-%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3-%CE%9B%CE%A5%CE%9A%CE%95%CE%99%CE%A9%CE%9D-EAE.pdf";
+  const secondForeignFramework=Object.freeze([
+    "Επίπεδο γλωσσομάθειας του/της μαθητή/τριας και μαθησιακές ανάγκες",
+    "Επικοινωνιακή προσέγγιση και λειτουργική χρήση της ξένης γλώσσας",
+    "Κοινωνικοπολιτισμική διάσταση της ξένης γλώσσας",
+    "Διαφοροποιημένη / εξατομικευμένη διδασκαλία και προσαρμογή υλικού",
+    "Αξιοποίηση εγκεκριμένων διδακτικών εγχειριδίων, φακέλων και ψηφιακού υλικού"
+  ]);
+
   const BIOLOGY_A_PDF="https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%91-%CE%9BYK-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-2026-27.pdf";
   const biologyA=Object.freeze([
     "Κεφάλαιο 1: Από το κύτταρο στον οργανισμό — Κύτταρα και ιστοί",
@@ -257,6 +266,22 @@
         verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Νεοελληνική Γλώσσα και Λογοτεχνία Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
         sourceUrl:LANGUAGE_C_PDF,officialAnchors:languageCFramework,
         verificationNote:"Οι τέσσερις επιλογές αποτυπώνουν τον επίσημο τύπο εργασιών/αξιολόγησης της οδηγίας, όχι θεματικά κεφάλαια ή κλειστή εξεταστέα ύλη."
+      }),
+      "a|second-foreign-language":Object.freeze({
+        id:"special-lyceum-a-second-foreign-language-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)",subjectId:"second-foreign-language",sourceSubjectIds:Object.freeze(["second-foreign-language","french","german"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ξένες Γλώσσες Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:FOREIGN_LANGUAGES_PDF,officialAnchors:secondForeignFramework,
+        verificationNote:"Η επίσημη καθοδήγηση οργανώνεται με βάση επίπεδο γλωσσομάθειας, επικοινωνιακές ανάγκες και διαφοροποίηση. Οι επιλογές είναι framework διδασκαλίας και όχι κλειστή λίστα κεφαλαίων."
+      }),
+      "b|second-foreign-language":Object.freeze({
+        id:"special-lyceum-b-second-foreign-language-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)",subjectId:"second-foreign-language",sourceSubjectIds:Object.freeze(["second-foreign-language","french","german"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ξένες Γλώσσες Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:FOREIGN_LANGUAGES_PDF,officialAnchors:secondForeignFramework,
+        verificationNote:"Η επίσημη καθοδήγηση οργανώνεται με βάση επίπεδο γλωσσομάθειας, επικοινωνιακές ανάγκες και διαφοροποίηση. Οι επιλογές είναι framework διδασκαλίας και όχι κλειστή λίστα κεφαλαίων."
       }),
       "a|biology":Object.freeze({
         id:"special-lyceum-a-biology-official-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",

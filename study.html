@@ -86,6 +86,7 @@
           <button class="upload-label" id="usePastedNotes" type="button" data-el="Χρησιμοποίησε αυτό το κείμενο" data-en="Use this text">Χρησιμοποίησε αυτό το κείμενο</button>
           <button class="upload-label hidden" id="clearNotes" type="button" data-el="Καθάρισε σημειώσεις" data-en="Clear notes">Καθάρισε σημειώσεις</button>
         </div>
+        <div id="sourceModeNotice" class="notice hidden" data-el="📄 Λειτουργία πηγής: με PDF ή σημειώσεις, το AI βασίζει απαντήσεις, quiz, κάρτες, επαναλήψεις και πλάνο μόνο σε αυτό το υλικό. Αν κάτι δεν υπάρχει στην πηγή, θα το δηλώσει αντί να το συμπληρώσει από γενικές γνώσεις." data-en="📄 Source mode: with a PDF or notes attached, AI bases answers, quizzes, cards, reviews and study plans only on that material. If something is not supported by the source, it will say so instead of filling gaps from general knowledge.">📄 Λειτουργία πηγής: με PDF ή σημειώσεις, το AI βασίζει απαντήσεις, quiz, κάρτες, επαναλήψεις και πλάνο μόνο σε αυτό το υλικό. Αν κάτι δεν υπάρχει στην πηγή, θα το δηλώσει αντί να το συμπληρώσει από γενικές γνώσεις.</div>
       </div>
 
       <h3 data-el="Στόχος μελέτης" data-en="Study goal">Στόχος μελέτης</h3>
@@ -216,16 +217,17 @@
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=populateTopics;$('topicPick').onchange=()=>{if($('topicPick').value)$('topicCustom').value=''};
 
-  $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:48000,maxPages:80});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);$('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
+  $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:300000,maxPages:200});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);$('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
   function refreshAttachedUi(){
     const has=!!attached?.text;
     $('clearNotes').classList.toggle('hidden',!has);
+    $('sourceModeNotice').classList.toggle('hidden',!has);
     if(has && !String($('notesStatus').textContent||'').trim()) $('notesStatus').textContent=attached.name|| (lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες');
   }
   $('usePastedNotes').onclick=()=>{
     const text=$('notesPaste').value.trim();
     if(!text){$('notesPaste').focus();return}
-    attached={name:lang==='en'?'pasted-notes.txt':'επικολλημένες-σημειώσεις.txt',text:text.slice(0,48000),pagesRead:1,totalPages:1,truncated:text.length>48000};
+    attached={name:lang==='en'?'pasted-notes.txt':'επικολλημένες-σημειώσεις.txt',text:text.slice(0,300000),pagesRead:1,totalPages:1,truncated:text.length>300000};
     $('notesStatus').textContent=(lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες')+(attached.truncated?(lang==='en'?' · first part used':' · χρησιμοποιήθηκε το πρώτο μέρος'):'');
     refreshAttachedUi();
   };
@@ -247,12 +249,57 @@
     return labels[goal]||goal;
   }
 
-  function representativeDocumentText(text,maxChars=24000){
+  function normalizeSourceText(value){
+    return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9α-ωάέήίόύώϊϋΐΰ]+/gi,' ').replace(/\s+/g,' ').trim();
+  }
+  function sourceChunks(text){
     const full=String(text||'').trim();
-    if(full.length<=maxChars)return full;
-    const part=Math.floor(maxChars/3);
-    const midStart=Math.max(0,Math.floor(full.length/2-part/2));
-    return [full.slice(0,part),full.slice(midStart,midStart+part),full.slice(-part)].join('\n\n[...selected excerpt...]\n\n');
+    if(!full)return[];
+    const pages=full.split(/(?=\[Page\s+\d+\]\s*\n?)/i).filter(Boolean);
+    const base=pages.length>1?pages:[full];
+    const out=[];
+    base.forEach(part=>{
+      if(part.length<=3200){out.push(part);return}
+      for(let i=0;i<part.length;i+=2800)out.push(part.slice(i,i+3200));
+    });
+    return out;
+  }
+  function sourceKeywords(query){
+    const stop=new Set(['και','των','την','τον','της','του','στο','στη','στην','στον','για','απο','από','με','σε','να','το','τα','οι','ένα','μια','the','and','for','with','from','this','that','what','how','into','about']);
+    const raw=[selectedSubjectLabel(),selectedTopic(),query||''].join(' ');
+    return [...new Set(normalizeSourceText(raw).split(' ').filter(w=>w.length>=3&&!stop.has(w)))].slice(0,24);
+  }
+  function sourceExcerpt(text,query,maxChars=18000,distributed=false){
+    const full=String(text||'').trim();
+    if(!full||full.length<=maxChars)return full;
+    const chunks=sourceChunks(full);
+    if(!chunks.length)return full.slice(0,maxChars);
+    if(distributed){
+      const count=Math.max(2,Math.floor(maxChars/3000)),picked=[],seen=new Set();
+      for(let i=0;i<count;i++){
+        const idx=Math.min(chunks.length-1,Math.round(i*(chunks.length-1)/Math.max(1,count-1)));
+        if(!seen.has(idx)){seen.add(idx);picked.push(chunks[idx])}
+      }
+      return picked.join('\n\n').slice(0,maxChars);
+    }
+    const keys=sourceKeywords(query);
+    const scored=chunks.map((chunk,index)=>{
+      const n=normalizeSourceText(chunk);
+      let score=0;
+      keys.forEach(k=>{if(n.includes(k))score+=k.length>=7?4:2});
+      return {chunk,index,score};
+    }).sort((a,b)=>b.score-a.score||a.index-b.index);
+    if(!scored.length||scored[0].score===0)return sourceExcerpt(full,query,maxChars,true);
+    const chosen=[];let used=0;
+    for(const row of scored){
+      if(used>=maxChars)break;
+      const room=maxChars-used;
+      if(room<500)break;
+      const piece=row.chunk.slice(0,room);
+      chosen.push({piece,index:row.index});
+      used+=piece.length;
+    }
+    return chosen.sort((a,b)=>a.index-b.index).map(x=>x.piece).join('\n\n').slice(0,maxChars);
   }
 
   function parsePlanJson(text){
@@ -290,8 +337,8 @@
     $('plan').innerHTML='<div class="step"><p>'+esc(lang==='en'?'Reading your choices and preparing a specific plan…':'Διαβάζω τις επιλογές σου και ετοιμάζω συγκεκριμένο πλάνο…')+'</p></div>';
 
     const system=lang==='en'
-      ? 'Create a personalized learning plan for the exact Greek curriculum context supplied. Use the learner goal, available minutes and any supplied notes. Do not give a generic study template. Every step must name what the learner should actually do with THIS topic/material. Return ONLY valid JSON.'
-      : 'Φτιάξε εξατομικευμένο πλάνο μελέτης για το ακριβές πλαίσιο της ελληνικής ύλης που δίνεται. Χρησιμοποίησε τον στόχο, τον διαθέσιμο χρόνο και τυχόν σημειώσεις. ΜΗ δώσεις γενικό template μελέτης. Κάθε βήμα πρέπει να λέει τι ακριβώς θα κάνει ο μαθητής πάνω ΣΕ ΑΥΤΟ το θέμα/υλικό. Επίστρεψε ΜΟΝΟ έγκυρο JSON.';
+      ? 'Create a personalized learning plan for the exact Greek curriculum context supplied. Use the learner goal, available minutes and any supplied notes. Do not give a generic study template. Every step must name what the learner should actually do with THIS topic/material. Preserve the exact terminology of the selected Greek school subject and textbook. Never replace an official term with a colloquial or approximate synonym; a plain-language clarification may appear only after the official term. SOURCE MODE: if a PDF or pasted notes are attached, they are the sole factual source for the plan. Do not add, correct or expand facts from model memory. Preserve the source terminology, organization, framing and level of detail. If something is not supported by the source, omit it or explicitly say it is not supported by the uploaded material. Return ONLY valid JSON.'
+      : 'Φτιάξε εξατομικευμένο πλάνο μελέτης για το ακριβές πλαίσιο της ελληνικής ύλης που δίνεται. Χρησιμοποίησε τον στόχο, τον διαθέσιμο χρόνο και τυχόν σημειώσεις. ΜΗ δώσεις γενικό template μελέτης. Κάθε βήμα πρέπει να λέει τι ακριβώς θα κάνει ο μαθητής πάνω ΣΕ ΑΥΤΟ το θέμα/υλικό. Διατήρησε ΑΚΡΙΒΩΣ την ορολογία του επιλεγμένου σχολικού μαθήματος και βιβλίου. Μην αντικαθιστάς επίσημο σχολικό όρο με καθημερινό ή περίπου συνώνυμο· μπορείς μόνο να τον εξηγήσεις μετά σε απλά λόγια. ΛΕΙΤΟΥΡΓΙΑ ΠΗΓΗΣ: αν υπάρχει PDF ή επικολλημένες σημειώσεις, είναι η ΜΟΝΑΔΙΚΗ πραγματολογική πηγή για το πλάνο. Μην προσθέτεις, διορθώνεις ή επεκτείνεις γεγονότα από γενικές γνώσεις του μοντέλου. Διατήρησε την ορολογία, τη δομή, το πλαίσιο και το επίπεδο λεπτομέρειας της πηγής. Αν κάτι δεν υποστηρίζεται από την πηγή, παράλειψέ το ή δήλωσε καθαρά ότι δεν προκύπτει από το ανεβασμένο υλικό. Επίστρεψε ΜΟΝΟ έγκυρο JSON.';
     const prompt=(lang==='en'
       ? 'Build a concrete study plan.'
       : 'Φτιάξε συγκεκριμένο πλάνο μελέτης.')+
@@ -303,7 +350,7 @@
       const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         system,prompt,audience:'study_user',task:'study_plan',mode:'organize',
         grade,subject,topic,
-        documentText:attached?.text?representativeDocumentText(attached.text):'',
+        documentText:attached?.text?sourceExcerpt(attached.text,prompt,28000,!topic):'',
         documentName:attached?.name||''
       })});
       const body=await res.json().catch(()=>({}));
@@ -330,8 +377,8 @@
   function actionConfig(action){
     const interactive=['quiz','truefalse','oral','written','weakspots'].includes(action);
     const systemBase=lang==='en'
-      ? 'You are the integrated AI Study coach. Stay strictly inside the selected Greek curriculum topic and/or the user supplied notes. Do not produce a ready-to-submit school assignment. Be concise, age-appropriate and learning-first.'
-      : 'Είσαι ο ενσωματωμένος βοηθός AI Μελέτης. Μείνε αυστηρά στο επιλεγμένο θέμα της ελληνικής ύλης και/ή στις σημειώσεις του χρήστη. Μην παράγεις έτοιμη εργασία προς παράδοση. Να είσαι σύντομος, κατάλληλος για την ηλικία και προσανατολισμένος στη μάθηση.';
+      ? 'You are the integrated AI Study coach. Stay strictly inside the selected Greek curriculum topic and/or the user supplied notes. Preserve the exact terminology, naming and level of the Greek school textbook. Never silently replace official textbook terms with colloquial or approximate synonyms. If you simplify a term, state the official term first and the plain-language explanation second. SOURCE MODE: if a PDF or pasted notes are attached, they become the sole factual source for this activity. Do not use model memory to fill, correct, reconcile or expand the source. Preserve its terminology, organization, framing and level of detail. If the learner asks something not supported by the uploaded material, explicitly say that it is not supported by the source. Do not introduce concepts that are not supported by the selected unit or supplied notes. Do not produce a ready-to-submit school assignment. Be concise, age-appropriate and learning-first.'
+      : 'Είσαι ο ενσωματωμένος βοηθός AI Μελέτης. Μείνε αυστηρά στο επιλεγμένο θέμα της ελληνικής ύλης και/ή στις σημειώσεις του χρήστη. Διατήρησε την ακριβή ορολογία, ονομασία και επίπεδο του ελληνικού σχολικού βιβλίου. ΠΟΤΕ μην αντικαθιστάς σιωπηρά επίσημο σχολικό όρο με καθημερινό ή περίπου συνώνυμο. Αν χρειάζεται απλοποίηση, γράψε πρώτα τον επίσημο όρο και μετά την απλή εξήγηση. ΛΕΙΤΟΥΡΓΙΑ ΠΗΓΗΣ: αν υπάρχει PDF ή επικολλημένες σημειώσεις, γίνονται η ΜΟΝΑΔΙΚΗ πραγματολογική πηγή για αυτή τη δραστηριότητα. Μην χρησιμοποιείς γενικές γνώσεις του μοντέλου για να συμπληρώσεις, διορθώσεις, συμφιλιώσεις ή επεκτείνεις την πηγή. Διατήρησε την ορολογία, τη δομή, το πλαίσιο και το επίπεδο λεπτομέρειας της πηγής. Αν ο μαθητής ρωτήσει κάτι που δεν υποστηρίζεται από το ανεβασμένο υλικό, πες καθαρά ότι δεν προκύπτει από την πηγή. Μην εισάγεις έννοιες που δεν στηρίζονται στην επιλεγμένη ενότητα ή στις σημειώσεις. Μην παράγεις έτοιμη εργασία προς παράδοση. Να είσαι σύντομος, κατάλληλος για την ηλικία και προσανατολισμένος στη μάθηση.';
     const instructions={
       audio: lang==='en'?'Write a short spoken mini-lesson for listening, about 2–3 minutes when read aloud. Natural spoken language, no markdown tables, grounded in this exact material.':'Γράψε ένα σύντομο προφορικό μικρομάθημα για ακρόαση, περίπου 2–3 λεπτά όταν διαβαστεί δυνατά. Φυσικός προφορικός λόγος, χωρίς πίνακες markdown, αυστηρά πάνω σε αυτό το υλικό.',
       flashcards: lang==='en'?'Return ONLY valid JSON: {"cards":[{"q":"...","a":"..."}]}. Create exactly 8 active-recall flashcards grounded in this material.':'Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"cards":[{"q":"...","a":"..."}]}. Φτιάξε ακριβώς 8 κάρτες ενεργής ανάκλησης βασισμένες σε αυτό το υλικό.',
@@ -365,7 +412,7 @@
       prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
       audience:'study_user',task:cfg.task,mode:cfg.mode,
       grade:selectedGradeLabel(),subject:selectedSubjectLabel(),topic:selectedTopic(),
-      documentText:attached?.text?representativeDocumentText(attached.text,action==='summary'?26000:16000):'',
+      documentText:attached?.text?sourceExcerpt(attached.text,(promptOverride||selectedTopic()||action),action==='quickreview'?24000:20000,false):'',
       documentName:attached?.name||''
     };
     lastServerPayload={action,payload};

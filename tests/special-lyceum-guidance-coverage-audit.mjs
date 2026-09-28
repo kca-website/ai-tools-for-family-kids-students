@@ -65,7 +65,7 @@ for(const entry of entryBlocks){
 for(const required of ['biology','informatics','latin']){
   assert.ok(exactGuidanceKeys.has(required),`Known exact Special Lyceum mapping missing: ${required}`);
 }
-for(const required of ['history','language-literature','second-foreign-language','math']){
+for(const required of ['history','language-literature','second-foreign-language','math','economics']){
   assert.ok(frameworkGuidanceKeys.has(required),`Known framework Special Lyceum mapping missing: ${required}`);
   assert.ok(!exactGuidanceKeys.has(required),`Framework-only Special Lyceum mapping must not be reported as exact: ${required}`);
 }
@@ -73,7 +73,7 @@ for(const required of ['history','language-literature','second-foreign-language'
 const covered=new Set([...exactGuidanceKeys,...frameworkGuidanceKeys]);
 const pending=indexKeys.filter(k=>!covered.has(k));
 
-for(const required of ['economics','ancient','religion','civics','philosophy','english','ethics']){
+for(const required of ['ancient','religion','civics','philosophy','english','ethics']){
   assert.ok(pending.includes(required),`Published Special Lyceum guidance should remain pending until section/framework mapping is verified: ${required}`);
 }
 
@@ -89,6 +89,15 @@ for(const grade of ['a','b','c']){
 assert.match(mathEntries.find(item=>item.grade==='a').body,/Άλγεβρα Γενικής Παιδείας[\s\S]*Γεωμετρία Γενικής Παιδείας/,'Special Lyceum A maths must expose Algebra and Geometry course-level anchors');
 assert.match(mathEntries.find(item=>item.grade==='b').body,/Άλγεβρα Γενικής Παιδείας[\s\S]*Γεωμετρία Γενικής Παιδείας[\s\S]*Μαθηματικά Ομάδας Προσανατολισμού/,'Special Lyceum B maths must expose Algebra, Geometry and Orientation course-level anchors');
 assert.match(mathEntries.find(item=>item.grade==='c').body,/Μαθηματικά Γενικής Παιδείας[\s\S]*Μαθηματικά Ομάδας Προσανατολισμού/,'Special Lyceum C maths must expose General and Orientation course-level anchors');
+
+const economicsEntries=entryBlocks.filter(entry=>entry.subject==='economics');
+assert.equal(economicsEntries.length,1,'Special Lyceum Economics must have exactly one annual mapping for Grade C');
+assert.equal(economicsEntries[0].grade,'c','Special Lyceum Economics must be mapped only to Grade C');
+assert.match(economicsEntries[0].body,/coverageStatus:"framework"/,'Special Lyceum Economics must remain framework until section-level official guidance is verified');
+assert.match(economicsEntries[0].body,/frameworkOnly:true/,'Special Lyceum Economics must be explicitly framework-only');
+assert.ok(!/coverageStatus:"exact"/.test(economicsEntries[0].body),'Special Lyceum Economics must not be promoted to exact without verified section-level source extraction');
+assert.match(economicsEntries[0].body,/Οικονομία Ομάδας Προσανατολισμού Σπουδών Οικονομίας και Πληροφορικής/,'Special Lyceum Economics must expose the verified OPOP Grade C scope');
+assert.match(economicsEntries[0].body,/dide\.ira\.sch\.gr\/wp-content\/uploads\/2026\/09\//,'Special Lyceum Economics must retain the published 2026-27 source URL');
 
 const ethicsIndexBlock=indexSource.match(/Object\.freeze\(\{key:"ethics"[\s\S]*?\}\)/)?.[0]||'';
 assert.ok(ethicsIndexBlock,'Special Lyceum Ethics guidance index entry is missing');

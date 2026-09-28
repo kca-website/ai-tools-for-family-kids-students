@@ -312,6 +312,36 @@
     `;
   }
 
+  function ensureAIStudyZoneCard(){
+    const zoneGrid=document.getElementById("zoneGrid");
+    if(!zoneGrid) return;
+
+    let card=document.getElementById("homeStudyZoneCard");
+    if(!card){
+      card=document.createElement("button");
+      card.type="button";
+      card.id="homeStudyZoneCard";
+      card.className="zone-card";
+      card.addEventListener("click",()=>{ window.location.href="/study.html"; });
+    }
+
+    const en=isEnglish();
+    card.innerHTML=en
+      ? '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label">AI Study</p><p class="zone-card__age"><span style="display:inline-block;padding:3px 9px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-size:.78rem;font-weight:800;">New · Free</span></p><p class="zone-card__desc">Curriculum or your own notes → plan, summary, flashcards, quiz and oral review.</p>'
+      : '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label">AI Μελέτη</p><p class="zone-card__age"><span style="display:inline-block;padding:3px 9px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-size:.78rem;font-weight:800;">Νέο · Δωρεάν</span></p><p class="zone-card__desc">Ύλη ή δικές σου σημειώσεις → πλάνο, σύνοψη, flashcards, quiz και προφορική εξέταση.</p>';
+
+    const cards=[...zoneGrid.querySelectorAll(".zone-card")].filter(x=>x!==card);
+    const mapCard=cards.find(x=>{
+      const text=(x.textContent||"").toLowerCase();
+      return text.includes("ελληνικός χάρτης ύλης") || text.includes("greek curriculum map");
+    });
+    if(mapCard){
+      if(card.previousElementSibling!==mapCard) mapCard.insertAdjacentElement("afterend",card);
+    }else if(!zoneGrid.contains(card)){
+      zoneGrid.appendChild(card);
+    }
+  }
+
   function ensureSpecialEducationEntry(){
     const host=document.getElementById("zoneSelectView");
     const zoneGrid=document.getElementById("zoneGrid");
@@ -455,6 +485,7 @@
     ensureQuizPathFlow();
     ensurePerfectScoreEnrichment();
     ensureSignLanguageEntry();
+    ensureAIStudyZoneCard();
     ensureSpecialEducationEntry();
     ensureMethodologyFooter();
   }

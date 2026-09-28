@@ -1,5 +1,5 @@
 window.SPECIAL_EDUCATION_STATUS = {
-  lastUpdated: "2026-09-25",
+  lastUpdated: "2026-09-28",
   legend: {verified:"Επαληθευμένο",indexed:"Επίσημη πηγή εντοπίστηκε",pending:"Σε αναμονή χαρτογράφησης"},
   rows: [
     {school:"ΕΝ.Ε.Ε.ΓΥ.-Λ.",scope:"Α΄ · Ζώνη Δημιουργικών Δραστηριοτήτων",curriculum:"verified",learning:"verified",quiz:"verified",tutorContext:"verified"},
@@ -29,7 +29,8 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄ · Οικιακή Οικονομία — επίσημο πλαίσιο κεφαλαίων",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄–Γ΄ · Εργαστήρια Δεξιοτήτων — επίσημο θεματικό πλαίσιο",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"Ειδικό Λύκειο",scope:"Πληροφορική, Λατινικά, Βιολογία — 8 ακριβείς section-level χαρτογραφήσεις 2026–27",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
-    {school:"Ειδικό Λύκειο",scope:"Ιστορία και Νεοελληνική Γλώσσα — επίσημα πλαίσια δεξιοτήτων/μεθοδολογίας 2026–27",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"}
+    {school:"Ειδικό Λύκειο",scope:"Ιστορία και Νεοελληνική Γλώσσα — επίσημα πλαίσια δεξιοτήτων/μεθοδολογίας 2026–27",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
+    {school:"Ειδικό Λύκειο",scope:"9 δημοσιευμένα επίσημα πεδία 2026–27 σε εκκρεμότητα ακριβούς χαρτογράφησης — Οικονομία, Αρχαία, Μαθηματικά, Θρησκευτικά, Πολιτική Παιδεία, Φιλοσοφία, Αγγλικά, 2η Ξένη Γλώσσα, Ηθική",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"verified"}
   ]
 };
 

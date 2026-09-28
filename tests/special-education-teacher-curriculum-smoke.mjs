@@ -216,6 +216,23 @@ try{
   const specialLycEconomicsTopics=await page.locator('#unit option').allTextContents();
   assert.ok(specialLycEconomicsTopics.some(x=>/Οικονομία Ομάδας Προσανατολισμού Σπουδών Οικονομίας και Πληροφορικής.*Γ΄ Λυκείου Ε\.Α\.Ε\./i.test(x)),'Special Lyceum C Economics must expose the verified OPOP course-level anchor');
 
+  for (const gradeId of ['a','b','c']) {
+    await page.selectOption('#context','specialLyc');
+    await page.selectOption('#grade',gradeId);
+    const englishOption=page.locator('#subject option').filter({hasText:/Αγγλικά|English/i}).first();
+    assert.ok(await englishOption.count(),`Special Lyceum ${gradeId.toUpperCase()} must expose English in the Teacher Assistant`);
+    await page.selectOption('#subject',await englishOption.getAttribute('value'));
+    const englishNote=await page.locator('#curriculumNote').innerText();
+    assert.match(englishNote,/επίσημο πλαίσιο 2026–27/i,`Special Lyceum ${gradeId.toUpperCase()} English must visibly report verified framework coverage`);
+    assert.match(englishNote,/δεν αποτελούν υποχρεωτική λίστα|framework/i,`Special Lyceum ${gradeId.toUpperCase()} English must not imply a fixed unit syllabus`);
+    assert.ok(await page.locator('#curriculumNote a[href*="dide.ira.sch.gr"]').count(),`Special Lyceum ${gradeId.toUpperCase()} English must retain the published 2026-27 source`);
+    const englishTopics=(await page.locator('#unit option').allTextContents()).map(x=>x.trim()).filter(Boolean);
+    assert.ok(englishTopics.length>=5,`Special Lyceum ${gradeId.toUpperCase()} English must expose the verified foreign-language framework choices`);
+    assert.ok(englishTopics.some(x=>/Επίπεδο γλωσσομάθειας/i.test(x)),`Special Lyceum ${gradeId.toUpperCase()} English must expose proficiency-level differentiation`);
+    assert.ok(englishTopics.some(x=>/Επικοινωνιακή προσέγγιση/i.test(x)),`Special Lyceum ${gradeId.toUpperCase()} English must expose communicative/functional language use`);
+    assert.ok(!englishTopics.some(x=>/Γράψε την ακριβή ενότητα/i.test(x)),`Special Lyceum ${gradeId.toUpperCase()} English must not fall back to manual-only entry`);
+  }
+
   await page.selectOption('#context','middle');
   const generalPrompt=await page.evaluate(()=>window.promptText());
   assert.ok(!/Επίσημες αρχές διαφοροποιημένης διδασκαλίας Ε\.Α\.Ε\./.test(generalPrompt),'E.A.E. differentiation block must not be injected into the general Gymnasium context');

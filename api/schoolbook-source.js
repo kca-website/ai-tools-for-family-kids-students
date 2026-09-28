@@ -1,5 +1,5 @@
 // Fetch a small, section-scoped excerpt from official Greek schoolbook HTML pages.
-// Pilot coverage: History B Gymnasium, Physics B Gymnasium, Biology B/C Gymnasium.
+// Official-book grounding coverage expands incrementally from verified HTML section patterns.
 
 const BOOKS = {
   "istoria-b-gymnasiou": {
@@ -16,6 +16,26 @@ const BOOKS = {
     title: "Βιολογία Β΄ και Γ΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
     mode: "numeric"
+  },
+  "archaia-glossa-a-gymnasiou": {
+    title: "Αρχαία Ελληνική Γλώσσα Α΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2244/Archaia-Elliniki-Glossa_A-Gymnasiou_html-empl/",
+    mode: "unit2digit"
+  },
+  "archaia-glossa-b-gymnasiou": {
+    title: "Αρχαία Ελληνική Γλώσσα Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2234/Archaia-Elliniki-Glossa_B-Gymnasiou_html-empl/",
+    mode: "unit2digit"
+  },
+  "archaia-glossa-g-gymnasiou": {
+    title: "Αρχαία Ελληνική Γλώσσα Γ΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2238/Archaia-Elliniki-Glossa_G-Gymnasiou_html-empl/",
+    mode: "unit2digit"
+  },
+  "odysseia-a-gymnasiou": {
+    title: "Ομηρικά Έπη – Οδύσσεια Α΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2232/Omirika-Epi-Odysseia_A-Gymnasiou_html-empl/",
+    mode: "odyssey"
   }
 };
 
@@ -124,6 +144,18 @@ function resolveSectionPath(mode, topic) {
     m = t.match(/Κεφάλαιο\s+(\d+)/i);
     if (m) return `index${m[1]}.html`;
     return "";
+  }
+
+  if (mode === "unit2digit") {
+    const m = t.match(/Ενότητα\s+(\d+)/i);
+    if (!m) return "";
+    return `index${String(m[1]).padStart(2, "0")}.html`;
+  }
+
+  if (mode === "odyssey") {
+    const m = t.match(/^\s*(\d+)(?:η|ή|ὴ)?\s+Ενότητα/i) || t.match(/Ενότητα\s+(\d+)/i);
+    if (!m) return "";
+    return `index_${String(m[1]).padStart(2, "0")}.html`;
   }
 
   if (mode === "history") {

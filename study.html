@@ -521,6 +521,37 @@
     renderAltAi(action);
   }
 
+  function extractiveOfficialLesson(sourceText,topic,maxChars=3400){
+    let raw=String(sourceText||'')
+      .replace(/\[Official page:[^\]]+\]/gi,'\n')
+      .replace(/https?:\/\/\S+/g,' ')
+      .replace(/Image:\s*εικόνα/gi,' ')
+      .replace(/\r/g,'')
+      .replace(/[ \t]+/g,' ')
+      .replace(/ *\n */g,'\n')
+      .replace(/\n{3,}/g,'\n\n')
+      .trim();
+    if(!raw)return'';
+
+    const stop=/^(Ερωτήσεις|Προβλήματα|Δραστηριότητες|ΛΕΞΕΙΣ[- ]ΚΛΕΙΔΙΑ|ΑΣ ΣΚΕΦΤΟΥΜΕ|ΠΕΡΙΛΗΨΗ)\b/i;
+    const noisy=/^(Αρχική|Περιεχόμενα|Επόμενο|Προηγούμενο|Κεφάλαιο\s+\d+\s*$)/i;
+    const blocks=raw.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);
+    const kept=[];
+    let used=0;
+    for(const block of blocks){
+      if(stop.test(block))break;
+      if(noisy.test(block)||block.length<25)continue;
+      const piece=block.replace(/\s+/g,' ').trim();
+      if(!piece)continue;
+      const room=maxChars-used;
+      if(room<120)break;
+      kept.push(piece.slice(0,room));
+      used+=Math.min(piece.length,room)+2;
+    }
+    const body=kept.join('\n\n').trim()||raw.slice(0,maxChars);
+    return (lang==='en'?'Official-source reading – ':'Ανάγνωση από την επίσημη πηγή – ')+(topic||'')+'\n\n'+body;
+  }
+
   async function runStudyAction(action){
     if(!selectedTopic()&&!attached){$('topicCustom').focus();return}
     if(action==='plan'){await buildAiPlan();$('plan').classList.remove('hidden');$('plan').scrollIntoView({behavior:'smooth',block:'nearest'});return}
@@ -535,7 +566,19 @@
     $('altAi').classList.add('hidden');
     $('aiOutput').innerHTML='<span class="ai-loading">'+esc(lang==='en'?'AI is preparing this…':'Το AI το ετοιμάζει…')+'</span>';
     try{
-      const text=await callStudyServer(action);
+      let text='';
+      if(action==='audio'&&!attached){
+        const officialSource=await officialSchoolbookSource();
+        if(officialSource?.grounded){
+          text=extractiveOfficialLesson(officialSource.text,selectedTopic());
+          if(!text)throw new Error(lang==='en'?'The official source did not contain readable text.':'Η επίσημη πηγή δεν περιείχε αναγνώσιμο κείμενο.');
+          $('providerStatus').textContent=lang==='en'?'Official textbook source':'Επίσημη σχολική πηγή';
+        }else{
+          text=await callStudyServer(action);
+        }
+      }else{
+        text=await callStudyServer(action);
+      }
       if(action==='flashcards')renderFlashcards(text);else renderPlain(text);
       if(action==='audio')$('audioControls').classList.remove('hidden');
       showResultTools(action);
@@ -614,31 +657,58 @@
     const synth=window.speechSynthesis;
     synth.cancel();
     setAudioStatus(lang==='en'?'Preparing audio…':'Προετοιμασία ανάγνωσης…');
+
     const start=(attempt=0)=>{
       if(runId!==audioRunId)return;
-      const voice=chooseSpeechVoice();
+      const primaryVoice=chooseSpeechVoice();
       const voices=synth.getVoices?.()||[];
-      if(!voice&&voices.length===0&&attempt<8){setTimeout(()=>start(attempt+1),120);return}
+      if(!primaryVoice&&voices.length===0&&attempt<8){setTimeout(()=>start(attempt+1),120);return}
       let index=0;
+
       const speakNext=()=>{
         if(runId!==audioRunId||index>=chunks.length){
           if(runId===audioRunId)setAudioStatus(index>=chunks.length?(lang==='en'?'Finished.':'Ολοκληρώθηκε.'):'');
           return;
         }
-        const u=new SpeechSynthesisUtterance(chunks[index]);
-        u.lang=lang==='en'?'en-US':'el-GR';
-        if(voice)u.voice=voice;
-        u.rate=.94;u.pitch=1;u.volume=1;
-        u.onstart=()=>setAudioStatus((lang==='en'?'Playing ':'Αναπαραγωγή ')+(index+1)+'/'+chunks.length);
-        u.onend=()=>{index++;setTimeout(speakNext,40)};
-        u.onerror=(e)=>{
+
+        const speakAttempt=(variant=0)=>{
           if(runId!==audioRunId)return;
-          if(e?.error==='canceled'||e?.error==='interrupted')return;
-          setAudioStatus(lang==='en'?'Could not start text-to-speech. Check the device speech settings.':'Δεν ξεκίνησε η ανάγνωση. Έλεγξε ότι είναι ενεργή η μετατροπή κειμένου σε ομιλία στη συσκευή.');
+          const u=new SpeechSynthesisUtterance(chunks[index]);
+          if(variant===0){
+            u.lang=lang==='en'?'en-US':'el-GR';
+            if(primaryVoice)u.voice=primaryVoice;
+          }else if(variant===1){
+            u.lang=lang==='en'?'en':'el';
+          }else{
+            u.lang='';
+          }
+          u.rate=.94;u.pitch=1;u.volume=1;
+          u.onstart=()=>setAudioStatus((lang==='en'?'Playing ':'Αναπαραγωγή ')+(index+1)+'/'+chunks.length);
+          u.onend=()=>{index++;setTimeout(speakNext,35)};
+          u.onerror=(e)=>{
+            if(runId!==audioRunId)return;
+            const code=String(e?.error||'unknown');
+            if(code==='canceled'||code==='interrupted')return;
+            if(variant<2 && !['not-allowed','synthesis-unavailable'].includes(code)){
+              setAudioStatus((lang==='en'?'Retrying audio… ':'Νέα προσπάθεια ανάγνωσης… ')+code);
+              setTimeout(()=>speakAttempt(variant+1),180);
+              return;
+            }
+            setAudioStatus((lang==='en'
+              ?'Text-to-speech failed ('+code+'). Enable a speech engine/voice in device settings.'
+              :'Η ανάγνωση απέτυχε ('+code+'). Ενεργοποίησε μηχανή/φωνή μετατροπής κειμένου σε ομιλία στις ρυθμίσεις της συσκευής.'));
+          };
+          try{try{synth.resume()}catch(_){};synth.speak(u)}
+          catch(err){
+            const code=String(err?.name||'exception');
+            setAudioStatus((lang==='en'?'Text-to-speech failed: ':'Η ανάγνωση απέτυχε: ')+code);
+          }
         };
-        try{synth.speak(u)}catch(_){setAudioStatus(lang==='en'?'Text-to-speech failed on this browser.':'Η ανάγνωση κειμένου απέτυχε σε αυτόν τον browser.')}
+
+        speakAttempt(0);
       };
-      setTimeout(()=>{try{synth.resume()}catch(_){};speakNext()},100);
+
+      setTimeout(speakNext,80);
     };
     start();
   }

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Μελέτη — Προσωπικό πλάνο & σημειώσεις | aitools4kids.gr</title>
+  <meta name="description" content="Δωρεάν χώρος μελέτης: διάλεξε πραγματική ενότητα από τον Ελληνικό Χάρτη Ύλης ή ανέβασε PDF σημειώσεων και συνέχισε με πλάνο, σύνοψη, flashcards, quiz και καθοδηγούμενη AI Βοήθεια.">
+  <link rel="canonical" href="https://www.aitools4kids.gr/study.html">
+  <meta name="theme-color" content="#3B82C4">
+  <style>
+    :root{--blue:#2e6ba3;--green:#1e7a4c;--ink:#1f2430;--muted:#5a6270;--bg:#f7fafc;--card:#fff;--border:#dfe6ee;--soft:#edf6ff;--radius:16px}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+    a{color:var(--blue)} button,input,select,textarea{font:inherit}.shell{max-width:1080px;margin:0 auto;padding:20px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.back{text-decoration:none;font-weight:800}
+    .lang{display:flex;gap:4px;border:1px solid var(--border);border-radius:10px;padding:3px;background:#fff}.lang button{border:0;background:transparent;padding:6px 10px;border-radius:7px;cursor:pointer}.lang button.active{background:var(--blue);color:#fff}
+    .hero{background:linear-gradient(135deg,#eaf6f0,#eaf1fb 58%,#f3eefb);border:1px solid var(--border);border-radius:22px;padding:28px;margin-bottom:18px}
+    .eyebrow{display:inline-block;background:#fff;border:1px solid var(--border);border-radius:999px;padding:5px 10px;font-size:.82rem;font-weight:800;color:var(--green)}
+    h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;margin:12px 0 10px;letter-spacing:-.04em}.hero p{max-width:800px;margin:0;color:#44505f;font-size:1.04rem}
+    .learning-loop{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.learning-loop span{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:7px 10px;border-radius:999px;font-size:.86rem;font-weight:700}
+    .grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 2px 10px rgba(30,50,70,.04)}
+    h2{font-size:1.25rem;margin:0 0 14px}h3{font-size:1rem;margin:18px 0 8px}label{display:block;font-weight:750;font-size:.9rem;margin:12px 0 6px}
+    select,input,textarea{width:100%;border:1px solid #cfd8e3;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink)}textarea{min-height:74px;resize:vertical}
+    .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.goal-grid,.time-grid,.study-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .choice{position:relative}.choice input{position:absolute;opacity:0;pointer-events:none}.choice label{margin:0;border:1px solid var(--border);border-radius:10px;padding:10px;cursor:pointer;font-weight:650;background:#fff}
+    .choice input:checked+label{border-color:var(--blue);background:var(--soft);box-shadow:0 0 0 2px rgba(46,107,163,.12)}
+    .primary{width:100%;margin-top:16px;border:0;border-radius:11px;background:var(--blue);color:#fff;padding:13px 16px;font-weight:800;cursor:pointer}.primary:hover{filter:brightness(.95)}
+    .micro{font-size:.82rem;color:var(--muted);margin:7px 0 0}.upload{margin-top:16px;padding:14px;border:1px dashed #b8c7d8;border-radius:12px;background:#fbfdff}.upload strong{display:block;margin-bottom:4px}
+    .upload-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}.upload-label{display:inline-flex;width:auto;margin:0;border:1px solid var(--blue);border-radius:9px;padding:8px 11px;color:var(--blue);font-weight:800;cursor:pointer;background:#fff}.upload input{display:none}.upload-status{font-size:.82rem;color:var(--muted)}
+    .result-empty{color:var(--muted);padding:12px 0}.plan{display:grid;gap:10px}.step{border:1px solid var(--border);border-radius:12px;padding:13px;background:#fff}.step-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.step strong{display:block}.mins{font-size:.78rem;background:#eef2f7;border-radius:999px;padding:4px 8px;white-space:nowrap}.step p{margin:6px 0 0;color:#475569;font-size:.93rem}
+    .material-panel{margin-top:18px;border-top:1px solid var(--border);padding-top:16px}.study-action{border:1px solid var(--border);background:#fff;border-radius:11px;padding:11px;text-align:left;cursor:pointer;font-weight:800}.study-action span{display:block;font-size:.78rem;font-weight:500;color:var(--muted);margin-top:2px}.study-action:hover{border-color:var(--blue);background:#fbfdff}
+    .actions{display:grid;gap:8px;margin-top:14px}.action{display:flex;justify-content:center;text-decoration:none;border-radius:10px;padding:11px 12px;font-weight:800;border:1px solid var(--blue);background:#fff}.action.main{background:var(--green);border-color:var(--green);color:#fff}
+    .principle{margin-top:14px;padding:12px;border-radius:10px;background:#f6f8fb;color:#475569;font-size:.86rem}.hidden{display:none!important}.notice{padding:10px 12px;border-radius:10px;background:#fff8e8;border:1px solid #efd8a3;color:#674b13;font-size:.84rem;margin-top:12px}
+    footer{margin:24px 0 8px;color:var(--muted);font-size:.82rem;text-align:center}
+    @media(max-width:800px){.grid{grid-template-columns:1fr}.hero{padding:22px}.row{grid-template-columns:1fr}.goal-grid,.time-grid,.study-actions{grid-template-columns:1fr 1fr}}
+    @media(max-width:480px){.goal-grid,.time-grid,.study-actions{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header><a class="back" href="/">← <span data-el="Αρχική" data-en="Home">Αρχική</span></a><div class="lang"><button id="elBtn" class="active" type="button">ΕΛ</button><button id="enBtn" type="button">EN</button></div></header>
+
+  <section class="hero">
+    <span class="eyebrow" data-el="ΝΕΟ · Δωρεάν" data-en="NEW · Free">ΝΕΟ · Δωρεάν</span>
+    <h1 data-el="AI Μελέτη" data-en="AI Study">AI Μελέτη</h1>
+    <p data-el="Διάλεξε πραγματική ενότητα από τη χαρτογραφημένη ελληνική ύλη ή ανέβασε τις δικές σου σημειώσεις. Φτιάξε πλάνο μελέτης και χρησιμοποίησε το AI για κατανόηση, flashcards, quiz και επανάληψη — όχι για έτοιμη σχολική εργασία."
+       data-en="Choose a real unit from the mapped Greek curriculum or add your own notes. Build a study plan and use AI for understanding, flashcards, quizzes and review — not ready-made schoolwork.">Διάλεξε πραγματική ενότητα από τη χαρτογραφημένη ελληνική ύλη ή ανέβασε τις δικές σου σημειώσεις. Φτιάξε πλάνο μελέτης και χρησιμοποίησε το AI για κατανόηση, flashcards, quiz και επανάληψη — όχι για έτοιμη σχολική εργασία.</p>
+    <div class="learning-loop"><span data-el="1 · Ύλη / σημειώσεις" data-en="1 · Curriculum / notes">1 · Ύλη / σημειώσεις</span><span data-el="2 · Κατανόηση" data-en="2 · Understand">2 · Κατανόηση</span><span data-el="3 · Εξάσκηση" data-en="3 · Practice">3 · Εξάσκηση</span><span data-el="4 · Έλεγχος" data-en="4 · Check">4 · Έλεγχος</span></div>
+  </section>
+
+  <main class="grid">
+    <section class="card">
+      <h2 data-el="Τι διαβάζεις;" data-en="What are you studying?">Τι διαβάζεις;</h2>
+      <div class="row">
+        <div><label for="zone" data-el="Βαθμίδα" data-en="School level">Βαθμίδα</label><select id="zone"><option value="primary" data-el="Δημοτικό" data-en="Primary">Δημοτικό</option><option value="middle" data-el="Γυμνάσιο" data-en="Middle School">Γυμνάσιο</option><option value="high" data-el="Λύκειο" data-en="High School">Λύκειο</option><option value="special" data-el="Ειδική Εκπαίδευση" data-en="Special Education">Ειδική Εκπαίδευση</option></select></div>
+        <div><label for="grade" data-el="Τάξη" data-en="Grade">Τάξη</label><select id="grade"></select></div>
+      </div>
+      <div id="highSchoolFields" class="hidden">
+        <label for="schoolType" data-el="Τύπος Λυκείου" data-en="High-school type">Τύπος Λυκείου</label>
+        <select id="schoolType"><option value="gel" data-el="ΓΕΛ" data-en="General Lyceum (GEL)">ΓΕΛ</option><option value="epal" data-el="ΕΠΑΛ" data-en="Vocational Lyceum (EPAL)">ΕΠΑΛ</option></select>
+        <div id="epalSectorField" class="hidden"><label for="epalSector" data-el="Τομέας ΕΠΑΛ" data-en="EPAL sector">Τομέας ΕΠΑΛ</label><select id="epalSector"></select></div>
+        <div id="epalSpecialtyField" class="hidden"><label for="epalSpecialty" data-el="Ειδικότητα ΕΠΑΛ" data-en="EPAL specialty">Ειδικότητα ΕΠΑΛ</label><select id="epalSpecialty"></select></div>
+      </div>
+      <div id="specialGateway" class="hidden notice">
+        <strong data-el="🏫 Ειδική Εκπαίδευση" data-en="🏫 Special Education">🏫 Ειδική Εκπαίδευση</strong><br>
+        <span data-el="Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές." data-en="Special Education uses separate adaptations, simplified quizzes and dedicated mappings. Open its dedicated route so those adaptations are preserved.">Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές.</span>
+        <div style="margin-top:10px"><a class="action main" href="/special-education.html" data-el="Άνοιξε Ειδική Εκπαίδευση →" data-en="Open Special Education →">Άνοιξε Ειδική Εκπαίδευση →</a></div>
+      </div>
+      <div id="standardStudyFields">
+      <label for="subject" data-el="Μάθημα" data-en="Subject">Μάθημα</label><select id="subject"></select>
+      <label for="topicPick" data-el="Ενότητα / θέμα" data-en="Unit / topic">Ενότητα / θέμα</label><select id="topicPick"></select>
+      <label for="topicCustom" data-el="Ή γράψε δικό σου θέμα" data-en="Or enter your own topic">Ή γράψε δικό σου θέμα</label><textarea id="topicCustom" placeholder="π.χ. Σύγκριση δεκαδικών"></textarea>
+      <p class="micro" data-el="Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη." data-en="Selections come from the site's Curriculum Map. If something is not mapped, you can enter it manually without presenting it as official curriculum.">Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη.</p>
+
+      </div>
+      <div id="standardStudyRest">
+      <div class="upload">
+        <strong data-el="📄 Δικές σου σημειώσεις" data-en="📄 Your own notes">📄 Δικές σου σημειώσεις</strong>
+        <span class="micro" data-el="PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια." data-en="PDF with selectable text. It is read locally in your browser; only extracted text is sent to AI when you choose an AI action.">PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια.</span>
+        <div class="upload-line"><label class="upload-label" for="notesFile" data-el="Ανέβασε PDF" data-en="Upload PDF">Ανέβασε PDF</label><input id="notesFile" type="file" accept="application/pdf,.pdf"><span class="upload-status" id="notesStatus" aria-live="polite"></span></div>
+        <label for="notesPaste" data-el="Ή επικόλλησε σημειώσεις" data-en="Or paste notes">Ή επικόλλησε σημειώσεις</label>
+        <textarea id="notesPaste" placeholder="Επικόλλησε εδώ σημειώσεις ή κείμενο..."></textarea>
+        <div class="upload-line">
+          <button class="upload-label" id="usePastedNotes" type="button" data-el="Χρησιμοποίησε αυτό το κείμενο" data-en="Use this text">Χρησιμοποίησε αυτό το κείμενο</button>
+          <button class="upload-label hidden" id="clearNotes" type="button" data-el="Καθάρισε σημειώσεις" data-en="Clear notes">Καθάρισε σημειώσεις</button>
+        </div>
+      </div>
+
+      <h3 data-el="Στόχος μελέτης" data-en="Study goal">Στόχος μελέτης</h3>
+      <div class="goal-grid">
+        <div class="choice"><input id="g1" type="radio" name="goal" value="understand" checked><label for="g1" data-el="💡 Να το καταλάβω" data-en="💡 Understand it">💡 Να το καταλάβω</label></div>
+        <div class="choice"><input id="g2" type="radio" name="goal" value="revise"><label for="g2" data-el="🧠 Επανάληψη" data-en="🧠 Review">🧠 Επανάληψη</label></div>
+        <div class="choice"><input id="g3" type="radio" name="goal" value="test"><label for="g3" data-el="📝 Γράφω τεστ" data-en="📝 Prepare for a test">📝 Γράφω τεστ</label></div>
+        <div class="choice"><input id="g4" type="radio" name="goal" value="practice"><label for="g4" data-el="🎯 Εξάσκηση" data-en="🎯 Practice">🎯 Εξάσκηση</label></div>
+      </div>
+      <h3 data-el="Χρόνος" data-en="Time">Χρόνος</h3>
+      <div class="time-grid"><div class="choice"><input id="t10" type="radio" name="time" value="10"><label for="t10">10′</label></div><div class="choice"><input id="t20" type="radio" name="time" value="20" checked><label for="t20">20′</label></div><div class="choice"><input id="t30" type="radio" name="time" value="30"><label for="t30">30′</label></div><div class="choice"><input id="t45" type="radio" name="time" value="45"><label for="t45">45′</label></div></div>
+      <button class="primary" id="makePlan" type="button" data-el="Φτιάξε το πλάνο μελέτης" data-en="Build my study plan">Φτιάξε το πλάνο μελέτης</button>
+      </div>
+    </section>
+
+    <section class="card" aria-live="polite">
+      <h2 data-el="Το πλάνο σου" data-en="Your study plan">Το πλάνο σου</h2>
+      <div id="empty" class="result-empty" data-el="Διάλεξε ενότητα ή γράψε θέμα και φτιάξε το πλάνο σου." data-en="Choose a unit or enter a topic and build your plan.">Διάλεξε ενότητα ή γράψε θέμα και φτιάξε το πλάνο σου.</div>
+      <div id="result" class="hidden">
+        <div id="plan" class="plan"></div>
+        <div class="material-panel">
+          <h3 data-el="Τι να κάνει το AI πάνω σε αυτό;" data-en="What should AI do with this?">Τι να κάνει το AI πάνω σε αυτό;</h3>
+          <div class="study-actions">
+            <button class="study-action" data-action="explain" type="button">💡 <span data-el="Εξήγησέ το" data-en="Explain it">Εξήγησέ το</span><span data-el="με ερωτήσεις και παραδείγματα" data-en="with questions and examples">με ερωτήσεις και παραδείγματα</span></button>
+            <button class="study-action" data-action="summary" type="button">🧾 <span data-el="Σύνοψη" data-en="Summary">Σύνοψη</span><span data-el="μόνο από την ύλη/σημειώσεις" data-en="only from curriculum/notes">μόνο από την ύλη/σημειώσεις</span></button>
+            <button class="study-action" data-action="flashcards" type="button">🗂️ <span>Flashcards</span><span data-el="8 κάρτες ενεργής ανάκλησης" data-en="8 active-recall cards">8 κάρτες ενεργής ανάκλησης</span></button>
+            <button class="study-action" data-action="quiz" type="button">❓ <span>Quiz</span><span data-el="μία ερώτηση τη φορά" data-en="one question at a time">μία ερώτηση τη φορά</span></button>
+            <button class="study-action" data-action="oral" type="button">🎤 <span data-el="Προφορική εξέταση" data-en="Oral review">Προφορική εξέταση</span><span data-el="ερωτήσεις χωρίς έτοιμες απαντήσεις" data-en="questions without ready answers">ερωτήσεις χωρίς έτοιμες απαντήσεις</span></button>
+            <button class="study-action" data-action="weakspots" type="button">🎯 <span data-el="Βρες κενά" data-en="Find weak spots">Βρες κενά</span><span data-el="έλεγχος κατανόησης" data-en="understanding check">έλεγχος κατανόησης</span></button>
+          </div>
+          <div class="notice" data-el="Οι AI ενέργειες χρησιμοποιούν την υπάρχουσα AI Βοήθεια. Για Δημοτικό/Γυμνάσιο ανοίγει η διαδρομή γονέα/κηδεμόνα· στο Λύκειο η μαθητική διαδρομή." data-en="AI actions use the existing AI Help. For Primary/Middle School they open the parent/guardian route; High School uses the student route.">Οι AI ενέργειες χρησιμοποιούν την υπάρχουσα AI Βοήθεια. Για Δημοτικό/Γυμνάσιο ανοίγει η διαδρομή γονέα/κηδεμόνα· στο Λύκειο η μαθητική διαδρομή.</div>
+        </div>
+        <div class="actions"><a id="tutorLink" class="action main" href="#" data-el="🤖 Άνοιξε την AI Βοήθεια" data-en="🤖 Open AI Help">🤖 Άνοιξε την AI Βοήθεια</a><a class="action" href="/xartis-ylis.html" data-el="📚 Ελληνικός Χάρτης Ύλης" data-en="📚 Greek Curriculum Map">📚 Ελληνικός Χάρτης Ύλης</a></div>
+        <div class="principle" data-el="Το τελευταίο βήμα γίνεται χωρίς AI. Αν δεν μπορείς να εξηγήσεις ή να εφαρμόσεις την ιδέα μόνος σου, η μελέτη δεν έχει τελειώσει ακόμη." data-en="The final step is done without AI. If you cannot explain or apply the idea on your own, studying is not finished yet.">Το τελευταίο βήμα γίνεται χωρίς AI. Αν δεν μπορείς να εξηγήσεις ή να εφαρμόσεις την ιδέα μόνος σου, η μελέτη δεν έχει τελειώσει ακόμη.</div>
+      </div>
+    </section>
+  </main>
+  <footer data-el="aitools4kids.gr · Ανεξάρτητο και δωρεάν εκπαιδευτικό έργο" data-en="aitools4kids.gr · Independent and free educational project">aitools4kids.gr · Ανεξάρτητο και δωρεάν εκπαιδευτικό έργο</footer>
+</div>
+
+<script src="/quiz-data.js"></script>
+<script src="/learning-paths-data.js"></script>
+<script src="/curriculum-2026-2027-expansion.js"></script>
+<script src="/general-subject-expansion-2026-2027.js"></script>
+<script src="/official-curriculum-data.js"></script>
+<script src="/official-annual-instructions-2026-2027.js"></script>
+<script src="/gel-2026-2027-update.js"></script>
+<script src="/september-2026-primary-tutor.js"></script>
+<script src="/september-2026-language-tutor.js"></script>
+<script src="/teacher-curriculum-epal-2026-2027.js"></script>
+<script src="/teacher-curriculum-epal-c-specialties-2026-2027.js"></script>
+<script src="/teacher-curriculum-epal-c-final-sectors-2026-2027.js"></script>
+<script src="/teacher-curriculum-epal-panhellenic-2027.js"></script>
+<script src="/epal-official-guidance-topics-2026-2027.js"></script>
+<script src="/epal-student-topics-2026-2027.js"></script>
+<script src="/epal-student-tutor-2026-2027.js"></script>
+<script src="/environment-studies-data.js"></script>
+<script src="/general-education-book-sections-2026-2027.js"></script>
+<script src="/curriculum-resolver.js"></script>
+<script src="/pdf-text-reader.js"></script>
+<script>
+(() => {
+  let lang='el', attached=null;
+  const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+  const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']]};
+  function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');populateGrades();}
+  $('elBtn').onclick=()=>{lang='el';localize()}; $('enBtn').onclick=()=>{lang='en';localize()};
+
+  function isEpal(){return $('zone').value==='high' && $('schoolType').value==='epal'}
+  function refreshSchoolTypeFields(){
+    const z=$('zone').value,high=z==='high',special=z==='special';
+    $('highSchoolFields').classList.toggle('hidden',!high);
+    $('specialGateway').classList.toggle('hidden',!special);
+    $('standardStudyFields').classList.toggle('hidden',special);
+    $('standardStudyRest').classList.toggle('hidden',special);
+    $('grade').closest('div').classList.toggle('hidden',special);
+    const epal=high&&$('schoolType').value==='epal',g=$('grade').value;
+    $('epalSectorField').classList.toggle('hidden',!(epal&&g==='b'));
+    $('epalSpecialtyField').classList.toggle('hidden',!(epal&&g==='c'));
+  }
+  function populateEpalChoices(){
+    const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+    $('epalSector').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose sector':'Γενική Παιδεία / διάλεξε τομέα')+'</option>'+(cat?.getSectors?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
+    $('epalSpecialty').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose specialty':'Γενική Παιδεία / διάλεξε ειδικότητα')+'</option>'+(cat?.getSpecialties?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
+  }
+  function populateGrades(){const z=$('zone').value;if(z==='special'){refreshSchoolTypeFields();return}$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?'Grade '+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
+  function subjectRows(){
+    const z=$('zone').value,g=$('grade').value;
+    if(isEpal()){
+      const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+      return cat?.getSubjects?.(g,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')||[];
+    }
+    return resolver()?.getSubjects?.(z,g)||[];
+  }
+  function populateSubjects(){const rows=subjectRows();$('subject').innerHTML=rows.length?rows.map(s=>'<option value="'+esc(s.id||s.quizId)+'">'+esc(lang==='en'?(s.subjectLabelEn||s.subjectLabelEl):(s.subjectLabelEl||s.subjectLabelEn||s.id))+'</option>').join(''):'<option value="">'+(lang==='en'?'No mapped subjects':'Δεν βρέθηκαν χαρτογραφημένα μαθήματα')+'</option>';populateTopics()}
+  function populateTopics(){
+    const z=$('zone').value,g=$('grade').value,s=$('subject').value;
+    let rows=[];
+    if(isEpal()){
+      const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+      rows=cat?.getSubject?.(g,s,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')?.topics||[];
+    }else rows=resolver()?.getTopics?.(z,g,s)||[];
+    $('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.label||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.label||t.titleEl):(t.labelEl||t.label||t.titleEl||t.labelEn||t.id))+'</option>').join('');
+  }
+  function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=populateTopics;$('topicPick').onchange=()=>{if($('topicPick').value)$('topicCustom').value=''};
+
+  $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:48000,maxPages:80});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);$('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
+  function refreshAttachedUi(){
+    const has=!!attached?.text;
+    $('clearNotes').classList.toggle('hidden',!has);
+    if(has && !String($('notesStatus').textContent||'').trim()) $('notesStatus').textContent=attached.name|| (lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες');
+  }
+  $('usePastedNotes').onclick=()=>{
+    const text=$('notesPaste').value.trim();
+    if(!text){$('notesPaste').focus();return}
+    attached={name:lang==='en'?'pasted-notes.txt':'επικολλημένες-σημειώσεις.txt',text:text.slice(0,48000),pagesRead:1,totalPages:1,truncated:text.length>48000};
+    $('notesStatus').textContent=(lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες')+(attached.truncated?(lang==='en'?' · first part used':' · χρησιμοποιήθηκε το πρώτο μέρος'):'');
+    refreshAttachedUi();
+  };
+  $('clearNotes').onclick=()=>{
+    attached=null;$('notesFile').value='';$('notesPaste').value='';$('notesStatus').textContent='';refreshAttachedUi();
+  };
+  $('notesFile').addEventListener('change',()=>setTimeout(refreshAttachedUi,0));
+
+  function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}
+  function alloc(total){const w=[.27,.23,.3,.2];let a=w.map(x=>Math.max(2,Math.round(total*x))),d=total-a.reduce((x,y)=>x+y,0);for(let i=0;d!==0;i=(i+1)%a.length){if(d>0){a[i]++;d--}else if(a[i]>2){a[i]--;d++}}return a}
+  const plans={
+    understand:[['Κατανόηση','Γράψε τι ήδη ξέρεις και βρες ποιο σημείο δεν είναι καθαρό.'],['Ανάκληση','Κλείσε την εξήγηση και πες 3 βασικές ιδέες από μνήμης.'],['Εξάσκηση','Κάνε 2–3 νέες ερωτήσεις ή ασκήσεις, με hint μόνο όταν κολλήσεις.'],['Έλεγχος χωρίς AI','Εξήγησέ το με δικά σου λόγια ή λύσε μία νέα εφαρμογή μόνος σου.']],
+    revise:[['Ανάκληση','Γράψε όσα θυμάσαι χωρίς σημειώσεις.'],['Στοχευμένες κάρτες','Κάνε flashcards μόνο στα σημεία που ξέχασες.'],['Μικτό quiz','Απάντησε πριν δεις οποιαδήποτε βοήθεια.'],['Επανέλεγχος','Ξαναδοκίμασε μόνο τα λάθη χωρίς AI.']],
+    test:[['Χάρτης ύλης','Σημείωσε τα βασικά υποθέματα και ποια σε δυσκολεύουν.'],['Active recall','Απάντησε από μνήμης αντί να ξαναδιαβάσεις παθητικά.'],['Mini τεστ','Κάνε νέες ερωτήσεις/ασκήσεις χωρίς βοήθεια στην πρώτη προσπάθεια.'],['Διόρθωση λαθών','Εξήγησε γιατί έγινε κάθε λάθος και ξαναδοκίμασε χωρίς AI.']],
+    practice:[['Θύμισε τη μέθοδο','Δες ένα παράδειγμα και ονόμασε τα βήματα.'],['Δική σου προσπάθεια','Κάνε 2 νέες ασκήσεις και σημείωσε πού ακριβώς κολλάς.'],['Μικρό hint','Ζήτησε μόνο μία υπόδειξη και συνέχισε εσύ.'],['Νέα εφαρμογή','Κλείσε τη βοήθεια και λύσε μία παρόμοια άσκηση από την αρχή.']]
+  };
+  function translatedSteps(goal){if(lang==='el')return plans[goal];const map={understand:[['Understand','Write what you know and identify the unclear point.'],['Recall','Close the explanation and state 3 key ideas from memory.'],['Practice','Do 2–3 new questions or exercises, using hints only when stuck.'],['No-AI check','Explain it in your own words or solve one new application alone.']],revise:[['Recall','Write what you remember without notes.'],['Targeted cards','Make flashcards only for things you forgot.'],['Mixed quiz','Answer before looking at any help.'],['Recheck','Retry only mistakes without AI.']],test:[['Map the material','List the core subtopics and mark difficult ones.'],['Active recall','Answer from memory instead of rereading passively.'],['Mini test','Do new questions/exercises without help on the first attempt.'],['Fix mistakes','Explain why each mistake happened, then retry without AI.']],practice:[['Recall the method','Look at one example and name the steps.'],['Your attempt','Do 2 new exercises and mark exactly where you get stuck.'],['Small hint','Ask for one hint only and continue yourself.'],['New application','Close the help and solve a similar exercise from scratch.']]};return map[goal]}
+  function baseTutor(){const z=$('zone').value;return z==='primary'?'/primary/guardian/tutor':z==='middle'?'/middle/guardian/tutor':'/high/student/tutor'}
+  function prepareSession(action){if(attached?.text){try{sessionStorage.setItem('aitools4kidsStudyDocument',JSON.stringify({name:attached.name,text:attached.text,pagesRead:attached.pagesRead,totalPages:attached.totalPages,truncated:attached.truncated,createdAt:Date.now()}))}catch(_){}}else{sessionStorage.removeItem('aitools4kidsStudyDocument');}
+    try{sessionStorage.setItem('aitools4kidsStudyAction',action||'')}catch(_){}}
+  function tutorUrl(action){const topic=selectedTopic(),goal=document.querySelector('input[name="goal"]:checked').value;const mode=action==='quiz'||action==='weakspots'||goal==='test'?'challenge':action==='flashcards'||action==='summary'||goal==='revise'?'review':'understand';const data={mode,grade:$('grade').value,subject:$('subject').value,topic:$('topicPick').value,topicText:topic,studyAction:action||''};if(isEpal()){data.schoolType='epal';if($('grade').value==='b'&&$('epalSector').value)data.sector=$('epalSector').value;if($('grade').value==='c'&&$('epalSpecialty').value)data.specialty=$('epalSpecialty').value}const p=new URLSearchParams(data);return baseTutor()+'?'+p.toString()}
+  $('makePlan').onclick=()=>{const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}const goal=document.querySelector('input[name="goal"]:checked').value,total=Number(document.querySelector('input[name="time"]:checked').value),mins=alloc(total),steps=translatedSteps(goal);$('plan').innerHTML=steps.map((s,i)=>'<div class="step"><div class="step-head"><strong>'+(i+1)+'. '+esc(s[0])+'</strong><span class="mins">'+mins[i]+'′</span></div><p>'+esc(s[1])+'</p></div>').join('');$('tutorLink').href=tutorUrl('');$('empty').classList.add('hidden');$('result').classList.remove('hidden')};
+  document.querySelectorAll('[data-action]').forEach(btn=>btn.onclick=()=>{const action=btn.dataset.action;const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}prepareSession(action);location.href=tutorUrl(action)});
+  $('tutorLink').onclick=e=>{prepareSession('');};
+  populateEpalChoices();populateGrades();localize();refreshAttachedUi();
+})();
+</script>
+</body>
+</html>

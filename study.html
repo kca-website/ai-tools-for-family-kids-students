@@ -254,10 +254,16 @@
     box.innerHTML='📘 <strong>'+esc(label)+'</strong> · '+esc(source.bookTitle||'')+link;
     box.classList.remove('hidden');
   }
+  function requiresOfficialSource(){
+    return ['physics-gymnasiou','istoria-b-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou'].includes(selectedSubjectId());
+  }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}
     const subject=selectedSubjectId(),topic=selectedTopic();
     if(!subject||!topic){sourceEvidenceUi(null);return null}
+    if(requiresOfficialSource() && /^Κεφάλαιο\s+\d+\s+—/i.test(topic)){
+      throw new Error(lang==='en'?'Choose a specific textbook subsection so the AI can use the exact source text.':'Διάλεξε συγκεκριμένη υποενότητα του βιβλίου, ώστε το AI να χρησιμοποιήσει το ακριβές κείμενο της πηγής.');
+    }
     const key=subject+'||'+topic;
     if(officialSourceCache.has(key)){
       const cached=officialSourceCache.get(key);
@@ -267,9 +273,17 @@
     try{
       const res=await fetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic),{headers:{'Accept':'application/json'}});
       const body=await res.json().catch(()=>null);
-      if(!res.ok||!body?.grounded){officialSourceCache.set(key,null);sourceEvidenceUi(null);return null}
+      if(!res.ok||!body?.grounded){
+        officialSourceCache.set(key,null);sourceEvidenceUi(null);
+        if(requiresOfficialSource()) throw new Error(lang==='en'?'The official textbook section could not be loaded. Upload the relevant PDF/notes or choose a more specific subsection.':'Δεν φορτώθηκε η επίσημη ενότητα του σχολικού βιβλίου. Ανέβασε το σχετικό PDF/σημειώσεις ή διάλεξε πιο συγκεκριμένη υποενότητα.');
+        return null
+      }
       officialSourceCache.set(key,body);sourceEvidenceUi(body);return body;
-    }catch(_){sourceEvidenceUi(null);return null}
+    }catch(err){
+      sourceEvidenceUi(null);
+      if(requiresOfficialSource()) throw err;
+      return null
+    }
   }
 
   function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}

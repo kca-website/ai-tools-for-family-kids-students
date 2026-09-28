@@ -209,19 +209,97 @@
   $('notesFile').addEventListener('change',()=>setTimeout(refreshAttachedUi,0));
 
   function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}
-  function alloc(total){const w=[.27,.23,.3,.2];let a=w.map(x=>Math.max(2,Math.round(total*x))),d=total-a.reduce((x,y)=>x+y,0);for(let i=0;d!==0;i=(i+1)%a.length){if(d>0){a[i]++;d--}else if(a[i]>2){a[i]--;d++}}return a}
-  const plans={
-    understand:[['Κατανόηση','Γράψε τι ήδη ξέρεις και βρες ποιο σημείο δεν είναι καθαρό.'],['Ανάκληση','Κλείσε την εξήγηση και πες 3 βασικές ιδέες από μνήμης.'],['Εξάσκηση','Κάνε 2–3 νέες ερωτήσεις ή ασκήσεις, με hint μόνο όταν κολλήσεις.'],['Έλεγχος χωρίς AI','Εξήγησέ το με δικά σου λόγια ή λύσε μία νέα εφαρμογή μόνος σου.']],
-    revise:[['Ανάκληση','Γράψε όσα θυμάσαι χωρίς σημειώσεις.'],['Στοχευμένες κάρτες','Κάνε flashcards μόνο στα σημεία που ξέχασες.'],['Μικτό quiz','Απάντησε πριν δεις οποιαδήποτε βοήθεια.'],['Επανέλεγχος','Ξαναδοκίμασε μόνο τα λάθη χωρίς AI.']],
-    test:[['Χάρτης ύλης','Σημείωσε τα βασικά υποθέματα και ποια σε δυσκολεύουν.'],['Active recall','Απάντησε από μνήμης αντί να ξαναδιαβάσεις παθητικά.'],['Mini τεστ','Κάνε νέες ερωτήσεις/ασκήσεις χωρίς βοήθεια στην πρώτη προσπάθεια.'],['Διόρθωση λαθών','Εξήγησε γιατί έγινε κάθε λάθος και ξαναδοκίμασε χωρίς AI.']],
-    practice:[['Θύμισε τη μέθοδο','Δες ένα παράδειγμα και ονόμασε τα βήματα.'],['Δική σου προσπάθεια','Κάνε 2 νέες ασκήσεις και σημείωσε πού ακριβώς κολλάς.'],['Μικρό hint','Ζήτησε μόνο μία υπόδειξη και συνέχισε εσύ.'],['Νέα εφαρμογή','Κλείσε τη βοήθεια και λύσε μία παρόμοια άσκηση από την αρχή.']]
-  };
-  function translatedSteps(goal){if(lang==='el')return plans[goal];const map={understand:[['Understand','Write what you know and identify the unclear point.'],['Recall','Close the explanation and state 3 key ideas from memory.'],['Practice','Do 2–3 new questions or exercises, using hints only when stuck.'],['No-AI check','Explain it in your own words or solve one new application alone.']],revise:[['Recall','Write what you remember without notes.'],['Targeted cards','Make flashcards only for things you forgot.'],['Mixed quiz','Answer before looking at any help.'],['Recheck','Retry only mistakes without AI.']],test:[['Map the material','List the core subtopics and mark difficult ones.'],['Active recall','Answer from memory instead of rereading passively.'],['Mini test','Do new questions/exercises without help on the first attempt.'],['Fix mistakes','Explain why each mistake happened, then retry without AI.']],practice:[['Recall the method','Look at one example and name the steps.'],['Your attempt','Do 2 new exercises and mark exactly where you get stuck.'],['Small hint','Ask for one hint only and continue yourself.'],['New application','Close the help and solve a similar exercise from scratch.']]};return map[goal]}
+  function selectedSubjectLabel(){const opt=$('subject').selectedOptions[0];return opt?.textContent?.trim()||$('subject').value||''}
+  function selectedGradeLabel(){const opt=$('grade').selectedOptions[0];return opt?.textContent?.trim()||$('grade').value||''}
   function baseTutor(){const z=$('zone').value;return z==='primary'?'/primary/guardian/tutor':z==='middle'?'/middle/guardian/tutor':'/high/student/tutor'}
   function prepareSession(action){if(attached?.text){try{sessionStorage.setItem('aitools4kidsStudyDocument',JSON.stringify({name:attached.name,text:attached.text,pagesRead:attached.pagesRead,totalPages:attached.totalPages,truncated:attached.truncated,createdAt:Date.now()}))}catch(_){}}else{sessionStorage.removeItem('aitools4kidsStudyDocument');}
     try{sessionStorage.setItem('aitools4kidsStudyAction',action||'')}catch(_){}}
   function tutorUrl(action){const topic=selectedTopic(),goal=document.querySelector('input[name="goal"]:checked').value;const mode=action==='quiz'||action==='weakspots'||goal==='test'?'challenge':action==='flashcards'||action==='summary'||goal==='revise'?'review':'understand';const data={mode,grade:$('grade').value,subject:$('subject').value,topic:$('topicPick').value,topicText:topic,studyAction:action||''};if(isEpal()){data.schoolType='epal';if($('grade').value==='b'&&$('epalSector').value)data.sector=$('epalSector').value;if($('grade').value==='c'&&$('epalSpecialty').value)data.specialty=$('epalSpecialty').value}const p=new URLSearchParams(data);return baseTutor()+'?'+p.toString()}
-  $('makePlan').onclick=()=>{const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}const goal=document.querySelector('input[name="goal"]:checked').value,total=Number(document.querySelector('input[name="time"]:checked').value),mins=alloc(total),steps=translatedSteps(goal);$('plan').innerHTML=steps.map((s,i)=>'<div class="step"><div class="step-head"><strong>'+(i+1)+'. '+esc(s[0])+'</strong><span class="mins">'+mins[i]+'′</span></div><p>'+esc(s[1])+'</p></div>').join('');$('tutorLink').href=tutorUrl('');$('empty').classList.add('hidden');$('result').classList.remove('hidden')};
+
+  function studyGoalLabel(goal){
+    const labels={
+      understand: lang==='en'?'Understand the topic':'Να καταλάβω το θέμα',
+      revise: lang==='en'?'Review and remember':'Επανάληψη και συγκράτηση',
+      test: lang==='en'?'Prepare for a test':'Προετοιμασία για τεστ',
+      practice: lang==='en'?'Practice and application':'Εξάσκηση και εφαρμογή'
+    };
+    return labels[goal]||goal;
+  }
+
+  function representativeDocumentText(text,maxChars=24000){
+    const full=String(text||'').trim();
+    if(full.length<=maxChars)return full;
+    const part=Math.floor(maxChars/3);
+    const midStart=Math.max(0,Math.floor(full.length/2-part/2));
+    return [full.slice(0,part),full.slice(midStart,midStart+part),full.slice(-part)].join('\n\n[...selected excerpt...]\n\n');
+  }
+
+  function parsePlanJson(text){
+    const raw=String(text||'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
+    try{return JSON.parse(raw)}catch(_){}
+    const a=raw.indexOf('{'),b=raw.lastIndexOf('}');
+    if(a>=0&&b>a){try{return JSON.parse(raw.slice(a,b+1))}catch(_){}}
+    return null;
+  }
+
+  function renderAiPlan(data,total){
+    if(!data||!Array.isArray(data.steps)||!data.steps.length)return false;
+    const title=data.title?'<div class="step"><strong>'+esc(data.title)+'</strong>'+(data.focus?'<p>'+esc(data.focus)+'</p>':'')+'</div>':'';
+    const steps=data.steps.slice(0,6).map((s,i)=>{
+      const mins=Number(s.minutes)||'';
+      return '<div class="step"><div class="step-head"><strong>'+(i+1)+'. '+esc(s.title||s.action||('Βήμα '+(i+1)))+'</strong>'+(mins?'<span class="mins">'+mins+'′</span>':'')+'</div><p>'+esc(s.action||s.description||'')+'</p></div>';
+    }).join('');
+    const final=data.final_check?'<div class="step"><div class="step-head"><strong>✓ '+esc(lang==='en'?'Final no-AI check':'Τελικός έλεγχος χωρίς AI')+'</strong></div><p>'+esc(data.final_check)+'</p></div>':'';
+    $('plan').innerHTML=title+steps+final;
+    return true;
+  }
+
+  async function buildAiPlan(){
+    const topic=selectedTopic();
+    if(!topic&&!attached){$('topicCustom').focus();return}
+    const goal=document.querySelector('input[name="goal"]:checked').value;
+    const total=Number(document.querySelector('input[name="time"]:checked').value);
+    const subject=selectedSubjectLabel(),grade=selectedGradeLabel();
+    const school=isEpal()?'ΕΠΑΛ':($('zone').value==='high'?'ΓΕΛ':$('zone').selectedOptions[0]?.textContent?.trim()||'');
+    const btn=$('makePlan');
+    const old=btn.textContent;
+    btn.disabled=true;
+    btn.textContent=lang==='en'?'AI is building your plan…':'Το AI φτιάχνει το πλάνο σου…';
+    $('empty').classList.add('hidden');$('result').classList.remove('hidden');
+    $('plan').innerHTML='<div class="step"><p>'+esc(lang==='en'?'Reading your choices and preparing a specific plan…':'Διαβάζω τις επιλογές σου και ετοιμάζω συγκεκριμένο πλάνο…')+'</p></div>';
+
+    const system=lang==='en'
+      ? 'Create a personalized learning plan for the exact Greek curriculum context supplied. Use the learner goal, available minutes and any supplied notes. Do not give a generic study template. Every step must name what the learner should actually do with THIS topic/material. Return ONLY valid JSON.'
+      : 'Φτιάξε εξατομικευμένο πλάνο μελέτης για το ακριβές πλαίσιο της ελληνικής ύλης που δίνεται. Χρησιμοποίησε τον στόχο, τον διαθέσιμο χρόνο και τυχόν σημειώσεις. ΜΗ δώσεις γενικό template μελέτης. Κάθε βήμα πρέπει να λέει τι ακριβώς θα κάνει ο μαθητής πάνω ΣΕ ΑΥΤΟ το θέμα/υλικό. Επίστρεψε ΜΟΝΟ έγκυρο JSON.';
+    const prompt=(lang==='en'
+      ? 'Build a concrete study plan.'
+      : 'Φτιάξε συγκεκριμένο πλάνο μελέτης.')+
+      '\nSchool: '+school+'\nGrade: '+grade+'\nSubject: '+subject+'\nTopic: '+topic+
+      '\nGoal: '+studyGoalLabel(goal)+'\nAvailable time: '+total+' minutes'+
+      '\nReturn this JSON shape exactly: {"title":"...","focus":"...","steps":[{"title":"...","minutes":5,"action":"..."}],"final_check":"..."}. The sum of step minutes should be approximately '+total+'. Use 3–5 steps.';
+
+    try{
+      const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        system,prompt,audience:'study_user',task:'study_plan',mode:'organize',
+        grade,subject,topic,
+        documentText:attached?.text?representativeDocumentText(attached.text):'',
+        documentName:attached?.name||''
+      })});
+      const body=await res.json().catch(()=>({}));
+      if(!res.ok) throw new Error(body?.message||'AI plan failed');
+      const parsed=parsePlanJson(body.text);
+      if(!renderAiPlan(parsed,total)){
+        $('plan').innerHTML='<div class="step"><strong>'+esc(lang==='en'?'AI study plan':'Πλάνο μελέτης από AI')+'</strong><p>'+esc(body.text||'')+'</p></div>';
+      }
+      $('tutorLink').href=tutorUrl('');
+    }catch(err){
+      $('plan').innerHTML='<div class="notice">'+esc((lang==='en'?'The AI plan could not be created right now. Try again in a moment.':'Το AI πλάνο δεν μπόρεσε να δημιουργηθεί αυτή τη στιγμή. Δοκίμασε ξανά σε λίγο.')+' '+String(err?.message||''))+'</div>';
+    }finally{
+      btn.disabled=false;btn.textContent=old;
+    }
+  }
+
+  $('makePlan').onclick=buildAiPlan;
   document.querySelectorAll('[data-action]').forEach(btn=>btn.onclick=()=>{const action=btn.dataset.action;const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}prepareSession(action);location.href=tutorUrl(action)});
   $('tutorLink').onclick=e=>{prepareSession('');};
   populateEpalChoices();populateGrades();localize();refreshAttachedUi();

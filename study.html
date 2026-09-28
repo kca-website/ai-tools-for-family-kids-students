@@ -30,6 +30,7 @@
     .material-panel{margin-top:18px;border-top:1px solid var(--border);padding-top:16px}.study-action{border:1px solid var(--border);background:#fff;border-radius:11px;padding:11px;text-align:left;cursor:pointer;font-weight:800}.study-action span{display:block;font-size:.78rem;font-weight:500;color:var(--muted);margin-top:2px}.study-action:hover{border-color:var(--blue);background:#fbfdff}
     .actions{display:grid;gap:8px;margin-top:14px}.action{display:flex;justify-content:center;text-decoration:none;border-radius:10px;padding:11px 12px;font-weight:800;border:1px solid var(--blue);background:#fff}.action.main{background:var(--green);border-color:var(--green);color:#fff}
     .principle{margin-top:14px;padding:12px;border-radius:10px;background:#f6f8fb;color:#475569;font-size:.86rem}.hidden{display:none!important}.notice{padding:10px 12px;border-radius:10px;background:#fff8e8;border:1px solid #efd8a3;color:#674b13;font-size:.84rem;margin-top:12px}
+    .ai-workspace{margin-top:16px;border:1px solid var(--border);border-radius:14px;background:#fbfdff;padding:14px}.ai-workspace__head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.ai-workspace__title{font-weight:850}.provider{font-size:.74rem;color:var(--muted);background:#eef2f7;padding:4px 8px;border-radius:999px}.ai-output{white-space:pre-wrap;background:#fff;border:1px solid var(--border);border-radius:11px;padding:13px;min-height:70px}.ai-loading{color:var(--muted)}.answer-box{display:flex;gap:8px;margin-top:10px}.answer-box textarea{min-height:52px;flex:1}.answer-box button{width:auto;margin:0;padding:10px 14px}.flash-grid{display:grid;gap:8px}.flash-card{border:1px solid var(--border);border-radius:10px;padding:10px;background:#fff}.flash-q{font-weight:800}.flash-a{margin-top:5px;color:#475569}.workspace-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.workspace-actions button{border:1px solid var(--blue);background:#fff;color:var(--blue);border-radius:9px;padding:8px 11px;font-weight:800;cursor:pointer}
     footer{margin:24px 0 8px;color:var(--muted);font-size:.82rem;text-align:center}
     @media(max-width:800px){.grid{grid-template-columns:1fr}.hero{padding:22px}.row{grid-template-columns:1fr}.goal-grid,.time-grid,.study-actions{grid-template-columns:1fr 1fr}}
     @media(max-width:480px){.goal-grid,.time-grid,.study-actions{grid-template-columns:1fr}}
@@ -94,28 +95,41 @@
       </div>
       <h3 data-el="Χρόνος" data-en="Time">Χρόνος</h3>
       <div class="time-grid"><div class="choice"><input id="t10" type="radio" name="time" value="10"><label for="t10">10′</label></div><div class="choice"><input id="t20" type="radio" name="time" value="20" checked><label for="t20">20′</label></div><div class="choice"><input id="t30" type="radio" name="time" value="30"><label for="t30">30′</label></div><div class="choice"><input id="t45" type="radio" name="time" value="45"><label for="t45">45′</label></div></div>
-      <button class="primary" id="makePlan" type="button" data-el="Φτιάξε το πλάνο μελέτης" data-en="Build my study plan">Φτιάξε το πλάνο μελέτης</button>
       </div>
     </section>
 
     <section class="card" aria-live="polite">
-      <h2 data-el="Το πλάνο σου" data-en="Your study plan">Το πλάνο σου</h2>
-      <div id="empty" class="result-empty" data-el="Διάλεξε ενότητα ή γράψε θέμα και φτιάξε το πλάνο σου." data-en="Choose a unit or enter a topic and build your plan.">Διάλεξε ενότητα ή γράψε θέμα και φτιάξε το πλάνο σου.</div>
-      <div id="result" class="hidden">
-        <div id="plan" class="plan"></div>
-        <div class="material-panel">
-          <h3 data-el="Τι να κάνει το AI πάνω σε αυτό;" data-en="What should AI do with this?">Τι να κάνει το AI πάνω σε αυτό;</h3>
+      <h2 data-el="Διάλεξε τρόπο μελέτης" data-en="Choose how to study">Διάλεξε τρόπο μελέτης</h2>
+      <div id="empty" class="result-empty" data-el="Διάλεξε ενότητα ή γράψε θέμα και μετά επίλεξε πώς θέλεις να δουλέψεις την ύλη." data-en="Choose a unit or enter a topic, then choose how you want to study it.">Διάλεξε ενότητα ή γράψε θέμα και μετά επίλεξε πώς θέλεις να δουλέψεις την ύλη.</div>
+      <div id="result">
+        <div id="plan" class="plan hidden"></div>
+        <div class="material-panel" style="margin-top:0;border-top:0;padding-top:0">
+          <h3 data-el="Μετέτρεψε την ύλη σου" data-en="Turn your material into study activities">Μετέτρεψε την ύλη σου</h3>
           <div class="study-actions">
-            <button class="study-action" data-action="explain" type="button">💡 <span data-el="Εξήγησέ το" data-en="Explain it">Εξήγησέ το</span><span data-el="με ερωτήσεις και παραδείγματα" data-en="with questions and examples">με ερωτήσεις και παραδείγματα</span></button>
-            <button class="study-action" data-action="summary" type="button">🧾 <span data-el="Σύνοψη" data-en="Summary">Σύνοψη</span><span data-el="μόνο από την ύλη/σημειώσεις" data-en="only from curriculum/notes">μόνο από την ύλη/σημειώσεις</span></button>
-            <button class="study-action" data-action="flashcards" type="button">🗂️ <span>Flashcards</span><span data-el="8 κάρτες ενεργής ανάκλησης" data-en="8 active-recall cards">8 κάρτες ενεργής ανάκλησης</span></button>
-            <button class="study-action" data-action="quiz" type="button">❓ <span>Quiz</span><span data-el="μία ερώτηση τη φορά" data-en="one question at a time">μία ερώτηση τη φορά</span></button>
-            <button class="study-action" data-action="oral" type="button">🎤 <span data-el="Προφορική εξέταση" data-en="Oral review">Προφορική εξέταση</span><span data-el="ερωτήσεις χωρίς έτοιμες απαντήσεις" data-en="questions without ready answers">ερωτήσεις χωρίς έτοιμες απαντήσεις</span></button>
-            <button class="study-action" data-action="weakspots" type="button">🎯 <span data-el="Βρες κενά" data-en="Find weak spots">Βρες κενά</span><span data-el="έλεγχος κατανόησης" data-en="understanding check">έλεγχος κατανόησης</span></button>
+            <button class="study-action" data-action="audio" type="button">🎧 <span data-el="Άκουσέ το" data-en="Listen to it">Άκουσέ το</span><span data-el="μικρό ακουστικό μάθημα από την ύλη" data-en="a short audio lesson from the material">μικρό ακουστικό μάθημα από την ύλη</span></button>
+            <button class="study-action" data-action="flashcards" type="button">🗂️ <span data-el="Κάρτες ανάκλησης" data-en="Recall cards">Κάρτες ανάκλησης</span><span data-el="8 κάρτες ενεργής ανάκλησης" data-en="8 active-recall cards">8 κάρτες ενεργής ανάκλησης</span></button>
+            <button class="study-action" data-action="quiz" type="button">❓ <span data-el="Γρήγορο Quiz" data-en="Quick Quiz">Γρήγορο Quiz</span><span data-el="μία ερώτηση τη φορά" data-en="one question at a time">μία ερώτηση τη φορά</span></button>
+            <button class="study-action" data-action="truefalse" type="button">✅ <span data-el="Σωστό ή Λάθος" data-en="True or False">Σωστό ή Λάθος</span><span data-el="γρήγορος έλεγχος βασικών εννοιών" data-en="fast concept check">γρήγορος έλεγχος βασικών εννοιών</span></button>
+            <button class="study-action" data-action="explain" type="button">💡 <span data-el="Έξυπνη εξήγηση" data-en="Smart explanation">Έξυπνη εξήγηση</span><span data-el="απλά λόγια, παραδείγματα και ερωτήσεις" data-en="clear language, examples and questions">απλά λόγια, παραδείγματα και ερωτήσεις</span></button>
+            <button class="study-action" data-action="quickreview" type="button">⚡ <span data-el="Επανάληψη 5′" data-en="5-minute review">Επανάληψη 5′</span><span data-el="μόνο τα ουσιώδη πριν το τεστ" data-en="the essentials before a test">μόνο τα ουσιώδη πριν το τεστ</span></button>
+            <button class="study-action" data-action="oral" type="button">🎤 <span data-el="Προφορική πρόβα" data-en="Oral practice">Προφορική πρόβα</span><span data-el="το AI ρωτά και περιμένει απάντηση" data-en="AI asks and waits for your answer">το AI ρωτά και περιμένει απάντηση</span></button>
+            <button class="study-action" data-action="written" type="button">✍️ <span data-el="Γραπτή πρόβα" data-en="Written practice">Γραπτή πρόβα</span><span data-el="ερωτήσεις ανάπτυξης και εφαρμογής" data-en="written and application questions">ερωτήσεις ανάπτυξης και εφαρμογής</span></button>
+            <button class="study-action" data-action="weakspots" type="button">🎯 <span data-el="Βρες τα κενά μου" data-en="Find my gaps">Βρες τα κενά μου</span><span data-el="στοχευμένες διαγνωστικές ερωτήσεις" data-en="targeted diagnostic questions">στοχευμένες διαγνωστικές ερωτήσεις</span></button>
+            <button class="study-action" data-action="plan" type="button">🧭 <span data-el="Πλάνο μελέτης" data-en="Study plan">Πλάνο μελέτης</span><span data-el="βήματα προσαρμοσμένα στον χρόνο και τον στόχο" data-en="steps tailored to your time and goal">βήματα προσαρμοσμένα στον χρόνο και τον στόχο</span></button>
           </div>
-          <div class="notice" data-el="Οι AI ενέργειες χρησιμοποιούν την υπάρχουσα AI Βοήθεια. Για Δημοτικό/Γυμνάσιο ανοίγει η διαδρομή γονέα/κηδεμόνα· στο Λύκειο η μαθητική διαδρομή." data-en="AI actions use the existing AI Help. For Primary/Middle School they open the parent/guardian route; High School uses the student route.">Οι AI ενέργειες χρησιμοποιούν την υπάρχουσα AI Βοήθεια. Για Δημοτικό/Γυμνάσιο ανοίγει η διαδρομή γονέα/κηδεμόνα· στο Λύκειο η μαθητική διαδρομή.</div>
+          <div class="notice" data-el="Όλα γίνονται εδώ, χωρίς να φεύγεις από την AI Μελέτη. Αν κάποια στιγμή η δωρεάν AI υπηρεσία δεν είναι διαθέσιμη, θα σου προτείνουμε εναλλακτική." data-en="Everything happens here without leaving AI Study. If the free AI service is temporarily unavailable, we will offer an alternative.">Όλα γίνονται εδώ, χωρίς να φεύγεις από την AI Μελέτη. Αν κάποια στιγμή η δωρεάν AI υπηρεσία δεν είναι διαθέσιμη, θα σου προτείνουμε εναλλακτική.</div>
+          <div id="aiWorkspace" class="ai-workspace hidden">
+            <div class="ai-workspace__head"><span id="workspaceTitle" class="ai-workspace__title">AI Μελέτη</span></div><span id="providerStatus" class="hidden" aria-hidden="true"></span>
+            <div id="aiOutput" class="ai-output"></div>
+            <div id="answerBox" class="answer-box hidden">
+              <textarea id="studyAnswer" placeholder="Γράψε την απάντησή σου..."></textarea>
+              <button id="sendStudyAnswer" class="primary" type="button" data-el="Απάντησε" data-en="Answer">Απάντησε</button>
+            </div>
+            <div id="audioControls" class="workspace-actions hidden"><button id="playAudioLesson" type="button" data-el="▶ Άκουσε" data-en="▶ Listen">▶ Άκουσε</button><button id="stopAudioLesson" type="button" data-el="■ Σταμάτησε" data-en="■ Stop">■ Σταμάτησε</button></div>
+            <div id="puterFallback" class="workspace-actions hidden"><button id="usePuterFallback" type="button" data-el="Συνέχισε με Puter" data-en="Continue with Puter">Συνέχισε με Puter</button></div>
+          </div>
         </div>
-        <div class="actions"><a id="tutorLink" class="action main" href="#" data-el="🤖 Άνοιξε την AI Βοήθεια" data-en="🤖 Open AI Help">🤖 Άνοιξε την AI Βοήθεια</a><a class="action" href="/xartis-ylis.html" data-el="📚 Ελληνικός Χάρτης Ύλης" data-en="📚 Greek Curriculum Map">📚 Ελληνικός Χάρτης Ύλης</a></div>
+        <div class="actions"><a class="action" href="/xartis-ylis.html" data-el="📚 Ελληνικός Χάρτης Ύλης" data-en="📚 Greek Curriculum Map">📚 Ελληνικός Χάρτης Ύλης</a></div>
         <div class="principle" data-el="Το τελευταίο βήμα γίνεται χωρίς AI. Αν δεν μπορείς να εξηγήσεις ή να εφαρμόσεις την ιδέα μόνος σου, η μελέτη δεν έχει τελειώσει ακόμη." data-en="The final step is done without AI. If you cannot explain or apply the idea on your own, studying is not finished yet.">Το τελευταίο βήμα γίνεται χωρίς AI. Αν δεν μπορείς να εξηγήσεις ή να εφαρμόσεις την ιδέα μόνος σου, η μελέτη δεν έχει τελειώσει ακόμη.</div>
       </div>
     </section>
@@ -211,11 +225,6 @@
   function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}
   function selectedSubjectLabel(){const opt=$('subject').selectedOptions[0];return opt?.textContent?.trim()||$('subject').value||''}
   function selectedGradeLabel(){const opt=$('grade').selectedOptions[0];return opt?.textContent?.trim()||$('grade').value||''}
-  function baseTutor(){const z=$('zone').value;return z==='primary'?'/primary/guardian/tutor':z==='middle'?'/middle/guardian/tutor':'/high/student/tutor'}
-  function prepareSession(action){if(attached?.text){try{sessionStorage.setItem('aitools4kidsStudyDocument',JSON.stringify({name:attached.name,text:attached.text,pagesRead:attached.pagesRead,totalPages:attached.totalPages,truncated:attached.truncated,createdAt:Date.now()}))}catch(_){}}else{sessionStorage.removeItem('aitools4kidsStudyDocument');}
-    try{sessionStorage.setItem('aitools4kidsStudyAction',action||'')}catch(_){}}
-  function tutorUrl(action){const topic=selectedTopic(),goal=document.querySelector('input[name="goal"]:checked').value;const mode=action==='quiz'||action==='weakspots'||goal==='test'?'challenge':action==='flashcards'||action==='summary'||goal==='revise'?'review':'understand';const data={mode,grade:$('grade').value,subject:$('subject').value,topic:$('topicPick').value,topicText:topic,studyAction:action||''};if(isEpal()){data.schoolType='epal';if($('grade').value==='b'&&$('epalSector').value)data.sector=$('epalSector').value;if($('grade').value==='c'&&$('epalSpecialty').value)data.specialty=$('epalSpecialty').value}const p=new URLSearchParams(data);return baseTutor()+'?'+p.toString()}
-
   function studyGoalLabel(goal){
     const labels={
       understand: lang==='en'?'Understand the topic':'Να καταλάβω το θέμα',
@@ -251,6 +260,7 @@
     }).join('');
     const final=data.final_check?'<div class="step"><div class="step-head"><strong>✓ '+esc(lang==='en'?'Final no-AI check':'Τελικός έλεγχος χωρίς AI')+'</strong></div><p>'+esc(data.final_check)+'</p></div>':'';
     $('plan').innerHTML=title+steps+final;
+    $('plan').classList.remove('hidden');
     return true;
   }
 
@@ -261,10 +271,9 @@
     const total=Number(document.querySelector('input[name="time"]:checked').value);
     const subject=selectedSubjectLabel(),grade=selectedGradeLabel();
     const school=isEpal()?'ΕΠΑΛ':($('zone').value==='high'?'ΓΕΛ':$('zone').selectedOptions[0]?.textContent?.trim()||'');
-    const btn=$('makePlan');
-    const old=btn.textContent;
-    btn.disabled=true;
-    btn.textContent=lang==='en'?'AI is building your plan…':'Το AI φτιάχνει το πλάνο σου…';
+    const btn=document.querySelector('[data-action="plan"]');
+    const old=btn?.innerHTML||'';
+    if(btn){btn.disabled=true;btn.innerHTML=lang==='en'?'⏳ <span>Building your plan…</span>':'⏳ <span>Το AI φτιάχνει το πλάνο…</span>';}
     $('empty').classList.add('hidden');$('result').classList.remove('hidden');
     $('plan').innerHTML='<div class="step"><p>'+esc(lang==='en'?'Reading your choices and preparing a specific plan…':'Διαβάζω τις επιλογές σου και ετοιμάζω συγκεκριμένο πλάνο…')+'</p></div>';
 
@@ -291,17 +300,170 @@
       if(!renderAiPlan(parsed,total)){
         $('plan').innerHTML='<div class="step"><strong>'+esc(lang==='en'?'AI study plan':'Πλάνο μελέτης από AI')+'</strong><p>'+esc(body.text||'')+'</p></div>';
       }
-      $('tutorLink').href=tutorUrl('');
     }catch(err){
       $('plan').innerHTML='<div class="notice">'+esc((lang==='en'?'The AI plan could not be created right now. Try again in a moment.':'Το AI πλάνο δεν μπόρεσε να δημιουργηθεί αυτή τη στιγμή. Δοκίμασε ξανά σε λίγο.')+' '+String(err?.message||''))+'</div>';
     }finally{
-      btn.disabled=false;btn.textContent=old;
+      if(btn){btn.disabled=false;btn.innerHTML=old;}
     }
   }
 
-  $('makePlan').onclick=buildAiPlan;
-  document.querySelectorAll('[data-action]').forEach(btn=>btn.onclick=()=>{const action=btn.dataset.action;const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}prepareSession(action);location.href=tutorUrl(action)});
-  $('tutorLink').onclick=e=>{prepareSession('');};
+  let interactiveAction='', interactiveHistory=[], lastServerPayload=null;
+
+  function actionTitle(action){
+    const el={audio:'Άκουσέ το',flashcards:'Κάρτες ανάκλησης',quiz:'Γρήγορο Quiz',truefalse:'Σωστό ή Λάθος',explain:'Έξυπνη εξήγηση',quickreview:'Επανάληψη 5′',oral:'Προφορική πρόβα',written:'Γραπτή πρόβα',weakspots:'Βρες τα κενά μου',plan:'Πλάνο μελέτης'};
+    const en={audio:'Listen to it',flashcards:'Recall cards',quiz:'Quick Quiz',truefalse:'True or False',explain:'Smart explanation',quickreview:'5-minute review',oral:'Oral practice',written:'Written practice',weakspots:'Find my gaps',plan:'Study plan'};
+    return (lang==='en'?en:el)[action]||'AI Study';
+  }
+
+  function actionConfig(action){
+    const interactive=['quiz','truefalse','oral','written','weakspots'].includes(action);
+    const systemBase=lang==='en'
+      ? 'You are the integrated AI Study coach. Stay strictly inside the selected Greek curriculum topic and/or the user supplied notes. Do not produce a ready-to-submit school assignment. Be concise, age-appropriate and learning-first.'
+      : 'Είσαι ο ενσωματωμένος βοηθός AI Μελέτης. Μείνε αυστηρά στο επιλεγμένο θέμα της ελληνικής ύλης και/ή στις σημειώσεις του χρήστη. Μην παράγεις έτοιμη εργασία προς παράδοση. Να είσαι σύντομος, κατάλληλος για την ηλικία και προσανατολισμένος στη μάθηση.';
+    const instructions={
+      audio: lang==='en'?'Write a short spoken mini-lesson for listening, about 2–3 minutes when read aloud. Natural spoken language, no markdown tables, grounded in this exact material.':'Γράψε ένα σύντομο προφορικό μικρομάθημα για ακρόαση, περίπου 2–3 λεπτά όταν διαβαστεί δυνατά. Φυσικός προφορικός λόγος, χωρίς πίνακες markdown, αυστηρά πάνω σε αυτό το υλικό.',
+      flashcards: lang==='en'?'Return ONLY valid JSON: {"cards":[{"q":"...","a":"..."}]}. Create exactly 8 active-recall flashcards grounded in this material.':'Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"cards":[{"q":"...","a":"..."}]}. Φτιάξε ακριβώς 8 κάρτες ενεργής ανάκλησης βασισμένες σε αυτό το υλικό.',
+      quiz: lang==='en'?'Run a quick quiz ONE question at a time. Ask only one question now. Do not reveal the answer before the learner attempts it.':'Κάνε γρήγορο quiz ΜΙΑ ερώτηση τη φορά. Κάνε μόνο μία ερώτηση τώρα. Μην αποκαλύψεις την απάντηση πριν προσπαθήσει ο μαθητής.',
+      truefalse: lang==='en'?'Run a True/False concept check ONE statement at a time. Ask only one statement now and wait for the learner answer before feedback.':'Κάνε έλεγχο Σωστό/Λάθος ΜΙΑ πρόταση τη φορά. Δώσε μόνο μία πρόταση τώρα και περίμενε την απάντηση πριν το feedback.',
+      explain: lang==='en'?'Explain this exact topic/material clearly with 2–3 concrete examples and short self-check questions.':'Εξήγησε αυτό ακριβώς το θέμα/υλικό καθαρά, με απλά λόγια, 2–3 συγκεκριμένα παραδείγματα και μικρές ερωτήσεις αυτοελέγχου.',
+      quickreview: lang==='en'?'Create a 5-minute review: the 5–7 most important points, 3 things commonly confused, and 3 rapid recall questions.':'Φτιάξε επανάληψη 5 λεπτών: 5–7 πιο σημαντικά σημεία, 3 σημεία που μπερδεύονται συχνά και 3 πολύ σύντομες ερωτήσεις ανάκλησης.',
+      oral: lang==='en'?'Act as a calm oral examiner for practice. Ask ONE question now, wait for the learner answer, then give brief feedback and the next question. Never grade.':'Λειτούργησε σαν ήρεμος εξεταστής προφορικής εξάσκησης. Κάνε ΜΙΑ ερώτηση τώρα, περίμενε απάντηση, μετά δώσε σύντομο feedback και επόμενη ερώτηση. Χωρίς βαθμό.',
+      written: lang==='en'?'Run written practice ONE prompt at a time. Ask one short-answer or application question now, wait for the learner response, then give formative feedback and a next question.':'Κάνε γραπτή πρόβα ΜΙΑ ερώτηση τη φορά. Δώσε τώρα μία σύντομη ερώτηση ανάπτυξης ή εφαρμογής, περίμενε την απάντηση, μετά δώσε διαμορφωτικό feedback και επόμενη ερώτηση.',
+      weakspots: lang==='en'?'Diagnose topic-specific weak spots with ONE short question at a time. Ask only one question now. After answers, identify only observed gaps, never a learner diagnosis.':'Εντόπισε κενά μόνο στο συγκεκριμένο θέμα με ΜΙΑ σύντομη ερώτηση τη φορά. Κάνε μόνο μία ερώτηση τώρα. Μετά τις απαντήσεις, ανέφερε μόνο παρατηρημένα κενά στο θέμα, ποτέ διάγνωση μαθητή.'
+    };
+    return {interactive,system:systemBase+'\n'+instructions[action],task:action==='flashcards'?'flashcards':(action==='quickreview'||action==='audio'?'guided_task':'conversation'),mode:interactive?'challenge':(action==='flashcards'||action==='quickreview'?'review':'understand')};
+  }
+
+  function studyContextPrompt(extra=''){
+    const goal=document.querySelector('input[name="goal"]:checked').value;
+    return [
+      'School level: '+($('zone').selectedOptions[0]?.textContent?.trim()||''),
+      'Grade: '+selectedGradeLabel(),
+      'Subject: '+selectedSubjectLabel(),
+      'Topic: '+selectedTopic(),
+      'Study goal: '+studyGoalLabel(goal),
+      extra
+    ].filter(Boolean).join('\n');
+  }
+
+  async function callStudyServer(action,promptOverride=''){
+    const cfg=actionConfig(action);
+    const payload={
+      system:cfg.system,
+      prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
+      audience:'study_user',task:cfg.task,mode:cfg.mode,
+      grade:selectedGradeLabel(),subject:selectedSubjectLabel(),topic:selectedTopic(),
+      documentText:attached?.text?representativeDocumentText(attached.text,action==='summary'?26000:16000):'',
+      documentName:attached?.name||''
+    };
+    lastServerPayload={action,payload};
+    const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const body=await res.json().catch(()=>({}));
+    if(!res.ok){
+      const err=new Error(body?.message||'AI request failed');
+      err.code=body?.error||''; err.fallback=body?.fallback||''; throw err;
+    }
+    $('providerStatus').textContent=[body.provider,body.model].filter(Boolean).join(' · ');
+    return body.text||'';
+  }
+
+  function renderPlain(text){$('aiOutput').innerHTML=esc(text).replace(/\n/g,'<br>')}
+  function renderFlashcards(text){
+    const raw=String(text||'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
+    let data=null;try{data=JSON.parse(raw)}catch(_){const a=raw.indexOf('{'),b=raw.lastIndexOf('}');if(a>=0&&b>a)try{data=JSON.parse(raw.slice(a,b+1))}catch(_){}}
+    if(!Array.isArray(data?.cards)){renderPlain(text);return}
+    $('aiOutput').innerHTML='<div class="flash-grid">'+data.cards.slice(0,8).map((x,i)=>'<div class="flash-card"><div class="flash-q">'+(i+1)+'. '+esc(x.q||'')+'</div><div class="flash-a">'+esc(x.a||'')+'</div></div>').join('')+'</div>';
+  }
+
+  async function runStudyAction(action){
+    if(!selectedTopic()&&!attached){$('topicCustom').focus();return}
+    if(action==='plan'){await buildAiPlan();$('plan').classList.remove('hidden');$('plan').scrollIntoView({behavior:'smooth',block:'nearest'});return}
+    interactiveAction=action; interactiveHistory=[];
+    $('workspaceTitle').textContent=actionTitle(action);
+    $('aiWorkspace').classList.remove('hidden');
+    $('answerBox').classList.add('hidden');
+    $('puterFallback').classList.add('hidden');
+    $('audioControls').classList.add('hidden');
+    $('providerStatus').textContent='';
+    $('aiOutput').innerHTML='<span class="ai-loading">'+esc(lang==='en'?'AI is preparing this…':'Το AI το ετοιμάζει…')+'</span>';
+    try{
+      const text=await callStudyServer(action);
+      if(action==='flashcards')renderFlashcards(text);else renderPlain(text);
+      if(action==='audio')$('audioControls').classList.remove('hidden');
+      if(actionConfig(action).interactive){
+        interactiveHistory.push('AI: '+text);
+        $('answerBox').classList.remove('hidden');
+        $('studyAnswer').focus();
+      }
+    }catch(err){
+      $('aiOutput').textContent=err.message||String(err);
+      if(err.fallback==='puter'||err.code==='provider_limit')$('puterFallback').classList.remove('hidden');
+    }
+    $('aiWorkspace').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  async function sendInteractiveAnswer(){
+    const answer=$('studyAnswer').value.trim();
+    if(!answer||!interactiveAction)return;
+    $('studyAnswer').value='';
+    interactiveHistory.push('LEARNER: '+answer);
+    const cfg=actionConfig(interactiveAction);
+    const continuation=(lang==='en'
+      ? 'Conversation so far:\n'+interactiveHistory.slice(-8).join('\n')+'\nRespond to the learner briefly, then ask exactly ONE next question. Do not give a grade.'
+      : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-8).join('\n')+'\nΑπάντησε σύντομα στην προσπάθεια του μαθητή και μετά κάνε ακριβώς ΜΙΑ επόμενη ερώτηση. Μη βάλεις βαθμό.');
+    $('aiOutput').innerHTML+='<br><br><strong>'+esc(lang==='en'?'You: ':'Εσύ: ')+'</strong>'+esc(answer)+'<br><br><span class="ai-loading">'+esc(lang==='en'?'AI is checking…':'Το AI ελέγχει…')+'</span>';
+    $('sendStudyAnswer').disabled=true;
+    try{
+      const text=await callStudyServer(interactiveAction,studyContextPrompt(continuation));
+      interactiveHistory.push('AI: '+text);
+      renderPlain(text);
+    }catch(err){
+      $('aiOutput').textContent=err.message||String(err);
+      if(err.fallback==='puter'||err.code==='provider_limit')$('puterFallback').classList.remove('hidden');
+    }finally{$('sendStudyAnswer').disabled=false}
+  }
+
+  function playAudioLesson(){
+    if(!('speechSynthesis' in window))return;
+    window.speechSynthesis.cancel();
+    const text=$('aiOutput').innerText.trim();
+    if(!text)return;
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang=lang==='en'?'en-US':'el-GR';
+    u.rate=.96;
+    window.speechSynthesis.speak(u);
+  }
+  function stopAudioLesson(){if('speechSynthesis' in window)window.speechSynthesis.cancel()}
+
+  function loadPuter(){
+    return new Promise((resolve,reject)=>{
+      if(window.puter?.ai)return resolve(window.puter);
+      const s=document.createElement('script');s.src='https://js.puter.com/v2/';s.onload=()=>resolve(window.puter);s.onerror=()=>reject(new Error('Puter could not load'));document.head.appendChild(s);
+    });
+  }
+
+  async function usePuterFallback(){
+    if(!lastServerPayload)return;
+    $('puterFallback').classList.add('hidden');
+    $('aiOutput').innerHTML='<span class="ai-loading">'+esc(lang==='en'?'Connecting to Puter…':'Σύνδεση με Puter…')+'</span>';
+    try{
+      const puter=await loadPuter();
+      const p=lastServerPayload.payload;
+      const doc=p.documentText?'\n\nUSER MATERIAL:\n'+p.documentText:'';
+      const result=await puter.ai.chat([{role:'system',content:p.system+doc},{role:'user',content:p.prompt}],{model:'gpt-5.6-luna'});
+      const text=typeof result==='string'?result:(result?.message?.content||result?.content||'');
+      $('providerStatus').textContent='Puter';
+      if(lastServerPayload.action==='flashcards')renderFlashcards(text);else renderPlain(text);
+      if(actionConfig(lastServerPayload.action).interactive){interactiveHistory.push('AI: '+text);$('answerBox').classList.remove('hidden')}
+    }catch(err){$('aiOutput').textContent=(lang==='en'?'Puter could not answer: ':'Το Puter δεν μπόρεσε να απαντήσει: ')+(err?.message||err)}
+  }
+
+  document.querySelectorAll('[data-action]').forEach(btn=>btn.onclick=()=>runStudyAction(btn.dataset.action));
+  $('sendStudyAnswer').onclick=sendInteractiveAnswer;
+  $('studyAnswer').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendInteractiveAnswer()}});
+  $('usePuterFallback').onclick=usePuterFallback;
+  $('playAudioLesson').onclick=playAudioLesson;
+  $('stopAudioLesson').onclick=stopAudioLesson;
   populateEpalChoices();populateGrades();localize();refreshAttachedUi();
 })();
 </script>

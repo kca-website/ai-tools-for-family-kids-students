@@ -41,6 +41,24 @@ const BOOKS = {
     title: "Ομηρικά Έπη – Ιλιάδα Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/",
     mode: "iliadSequence"
+  },
+  "glossa-a-gymnasiou": {
+    title: "Νεοελληνική Γλώσσα Α΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/",
+    mode: "modernGreekA",
+    multi: true
+  },
+  "glossa-b-gymnasiou": {
+    title: "Νεοελληνική Γλώσσα Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2298/Neoelliniki-Glossa_B-Gymnasiou_empl/",
+    mode: "modernGreekB",
+    multi: true
+  },
+  "glossa-gymnasiou": {
+    title: "Νεοελληνική Γλώσσα Γ΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/",
+    mode: "modernGreekG",
+    multi: true
   }
 };
 
@@ -80,30 +98,40 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const sourceUrl = new URL(path, book.base).toString();
-
   try {
-    const response = await fetch(sourceUrl, {
-      headers: {
-        "User-Agent": "aitools4kids.gr educational source grounding",
-        "Accept": "text/html,application/xhtml+xml"
-      },
-      redirect: "follow"
-    });
+    let sourceUrls = [];
+    let combinedText = "";
 
-    if (!response.ok) {
-      return res.status(404).json({
-        grounded: false,
-        error: "official_source_unavailable",
-        bookTitle: book.title,
-        sourceUrl,
-        message: "Η συγκεκριμένη σελίδα του επίσημου βιβλίου δεν ήταν διαθέσιμη."
-      });
+    if (book.multi) {
+      sourceUrls = await discoverUnitPages(book, path);
+      if (!sourceUrls.length) {
+        return res.status(404).json({
+          grounded: false,
+          error: "official_source_unavailable",
+          bookTitle: book.title,
+          message: "Δεν βρέθηκαν οι επίσημες υποσελίδες της συγκεκριμένης ενότητας."
+        });
+      }
+      const pages = await Promise.all(sourceUrls.slice(0, 12).map(fetchOfficialHtml));
+      combinedText = distributeOfficialPages(pages, sourceUrls, 42000);
+    } else {
+      const sourceUrl = new URL(path, book.base).toString();
+      sourceUrls = [sourceUrl];
+      const html = await fetchOfficialHtml(sourceUrl);
+      if (!html) {
+        return res.status(404).json({
+          grounded: false,
+          error: "official_source_unavailable",
+          bookTitle: book.title,
+          sourceUrl,
+          message: "Η συγκεκριμένη σελίδα του επίσημου βιβλίου δεν ήταν διαθέσιμη."
+        });
+      }
+      combinedText = htmlToText(html);
     }
 
-    const html = await response.text();
-    const text = htmlToText(html);
-    const useful = selectUsefulText(text, topic);
+    const useful = book.multi ? combinedText : selectUsefulText(combinedText, topic);
+    const sourceUrl = sourceUrls[0] || book.base;
 
     if (useful.length < 500) {
       return res.status(404).json({
@@ -111,7 +139,7 @@ module.exports = async function handler(req, res) {
         error: "source_too_short",
         bookTitle: book.title,
         sourceUrl,
-        message: "Βρέθηκε η επίσημη σελίδα, αλλά δεν εξήχθη αρκετό κείμενο για ασφαλή απάντηση."
+        message: "Βρέθηκε η επίσημη πηγή, αλλά δεν εξήχθη αρκετό κείμενο για ασφαλή απάντηση."
       });
     }
 
@@ -122,6 +150,7 @@ module.exports = async function handler(req, res) {
       topic,
       bookTitle: book.title,
       sourceUrl,
+      sourceUrls,
       text: useful.slice(0, 42000)
     });
   } catch (err) {
@@ -129,7 +158,6 @@ module.exports = async function handler(req, res) {
       grounded: false,
       error: "official_source_fetch_failed",
       bookTitle: book.title,
-      sourceUrl,
       message: "Δεν ήταν δυνατή η ανάκτηση της επίσημης σχολικής πηγής."
     });
   }
@@ -171,6 +199,23 @@ function resolveSectionPath(mode, topic) {
     return `index${String(n + 1).padStart(2, "0")}.html`;
   }
 
+  if (mode === "modernGreekA" || mode === "modernGreekG") {
+    const m = t.match(/(\d+)(?:η|ή)?\s+(?:ενότητα|ENOTHTA)/i);
+    if (!m) return "";
+    const n = Number(m[1]);
+    if (!Number.isInteger(n) || n < 1 || n > 10) return "";
+    const letter = String.fromCharCode("b".charCodeAt(0) + n - 1);
+    return `index${letter}_`;
+  }
+
+  if (mode === "modernGreekB") {
+    const m = t.match(/(\d+)(?:η|ή)?\s+ενότητα/i);
+    if (!m) return "";
+    const n = Number(m[1]);
+    if (!Number.isInteger(n) || n < 1 || n > 9) return "";
+    return `en${n}_`;
+  }
+
   if (mode === "history") {
     const chapter = (t.match(/Κεφάλαιο\s+(\d+)/i) || [])[1];
     if (!chapter) return "";
@@ -189,6 +234,78 @@ function resolveSectionPath(mode, topic) {
   }
 
   return "";
+}
+
+async function fetchOfficialHtml(url) {
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": "aitools4kids.gr educational source grounding",
+      "Accept": "text/html,application/xhtml+xml"
+    },
+    redirect: "follow"
+  });
+  return response.ok ? response.text() : "";
+}
+
+async function discoverUnitPages(book, prefix) {
+  const rootHtml = await fetchOfficialHtml(book.base);
+  if (!rootHtml) return [];
+
+  const hrefs = [];
+  const re = /href\s*=\s*["']([^"']+)["']/gi;
+  let m;
+  while ((m = re.exec(rootHtml))) {
+    const href = String(m[1] || "").trim();
+    const file = href.split(/[?#]/)[0].split("/").pop() || "";
+    if (!file.toLowerCase().startsWith(prefix.toLowerCase())) continue;
+    if (!/\.html?$/i.test(file)) continue;
+    const absolute = new URL(href, book.base).toString();
+    if (!hrefs.includes(absolute)) hrefs.push(absolute);
+  }
+
+  // Some book roots expose only a subset of links to crawlers. Probe a bounded
+  // sequence using the verified filename scheme and keep only successful pages.
+  if (!hrefs.length) {
+    const candidates = [];
+    for (let i = 0; i <= 10; i++) {
+      const ext = book.mode === "modernGreekA" ? ".htm" : ".html";
+      candidates.push(new URL(prefix + i + ext, book.base).toString());
+    }
+    const checked = await Promise.all(candidates.map(async url => {
+      try {
+        const response = await fetch(url, {
+          method: "HEAD",
+          headers: { "User-Agent": "aitools4kids.gr educational source grounding" },
+          redirect: "follow"
+        });
+        return response.ok ? url : "";
+      } catch (_) { return ""; }
+    }));
+    checked.filter(Boolean).forEach(url => hrefs.push(url));
+  }
+
+  return hrefs.slice(0, 12);
+}
+
+function distributeOfficialPages(pages, urls, maxChars) {
+  const rows = pages.map((html, i) => ({
+    url: urls[i] || "",
+    text: html ? htmlToText(html) : ""
+  })).filter(row => row.text.length >= 120);
+  if (!rows.length) return "";
+
+  const overhead = rows.reduce((n, row) => n + (row.url ? row.url.length + 24 : 0), 0);
+  const budget = Math.max(1200, maxChars - overhead);
+  const perPage = Math.max(900, Math.floor(budget / rows.length));
+
+  return rows.map(row => {
+    const label = row.url ? "[Official page: " + row.url + "]\n" : "";
+    const text = row.text;
+    if (text.length <= perPage) return label + text;
+    const head = Math.floor(perPage * 0.72);
+    const tail = perPage - head;
+    return label + text.slice(0, head) + "\n[… official page excerpt …]\n" + text.slice(-tail);
+  }).join("\n\n").slice(0, maxChars);
 }
 
 function htmlToText(html) {

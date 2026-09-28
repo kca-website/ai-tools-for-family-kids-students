@@ -85,8 +85,8 @@
   <p data-lang="en">Each AI Help reply includes 👍/👎 and “Report an error”. Rating events never include the question or answer text.</p>
 
   <h2 data-lang="el">9. Διαφάνεια AI και μοντέλα</h2><h2 data-lang="en">9. AI transparency and models</h2>
-  <p data-lang="el">Η παραγωγική server-side AI Βοήθεια χρησιμοποιεί Groq με GPT-OSS 120B ως προεπιλογή. Preview μοντέλα δεν περνούν αυτόματα στην παραγωγή· αξιολογούνται πρώτα σε ελληνικά, σχολική ακρίβεια, learning-first συμπεριφορά και σταθερότητα. Δες τη σελίδα <a href="/ai-transparency.html">Διαφάνεια AI</a>.</p>
-  <p data-lang="en">Server-side AI Help uses Groq with GPT-OSS 120B as the production default. Preview models are benchmarked before production use.</p>
+  <p data-lang="el">Η παραγωγική server-side AI Βοήθεια χρησιμοποιεί το GPT-OSS 120B με κύρια δρομολόγηση μέσω <strong>Cloudflare Workers AI</strong> και <strong>Groq ως εφεδρικό πάροχο</strong> όταν χρειάζεται. Το Puter παραμένει προαιρετική εναλλακτική. Preview μοντέλα δεν περνούν αυτόματα στην παραγωγή· αξιολογούνται πρώτα σε ελληνικά, σχολική ακρίβεια, learning-first συμπεριφορά και σταθερότητα. Δες τη σελίδα <a href="/ai-transparency.html">Διαφάνεια AI</a>.</p>
+  <p data-lang="en">Server-side AI Help uses GPT-OSS 120B with <strong>Cloudflare Workers AI as the primary route</strong> and <strong>Groq as the fallback provider</strong> when needed. Puter remains an optional alternative. Preview models are benchmarked before production use.</p>
 
   <h2 data-lang="el">10. Πώς ενημερώνουμε το περιεχόμενο</h2><h2 data-lang="en">10. How we keep content updated</h2>
   <p data-lang="el">Οι όροι, οι τιμές και οι λειτουργίες αλλάζουν συχνά. Γι’ αυτό οι σελίδες εργαλείων έχουν ημερομηνία τελευταίου ελέγχου. Οι ημερομηνίες δείχνουν πότε ελέγχθηκε η πληροφορία: δεν αποτελούν εγγύηση ότι ο πάροχος δεν άλλαξε κάτι αμέσως μετά.</p>
@@ -101,7 +101,7 @@
   <p data-lang="el">Το AI Tools for Kids δεν αποτελεί επίσημο προϊόν ή συνεργασία των παρόχων που αναφέρει. Η παρουσία ενός εργαλείου δεν είναι διαφήμιση ή εγγύηση ποιότητας. Αν στο μέλλον υπάρξει εμπορική σχέση ή χορηγία, θα πρέπει να δηλώνεται καθαρά και ξεχωριστά.</p>
   <p data-lang="en">AI Tools for Kids is not an official product or partner of the providers it mentions. Inclusion is not an advertisement or quality guarantee. Any future commercial relationship or sponsorship should be disclosed clearly and separately.</p>
 
-  <div class="footer"><span data-lang="el">Τελευταία ενημέρωση μεθοδολογίας: 25 Σεπτεμβρίου 2026 · </span><span data-lang="en">Methodology last updated: 25 September 2026 · </span><a href="/privacy-policy.html"><span data-lang="el">Πολιτική Απορρήτου</span><span data-lang="en">Privacy Policy</span></a></div>
+  <div class="footer"><span data-lang="el">Τελευταία ενημέρωση μεθοδολογίας: 28 Σεπτεμβρίου 2026 · </span><span data-lang="en">Methodology last updated: 28 September 2026 · </span><a href="/privacy-policy.html"><span data-lang="el">Πολιτική Απορρήτου</span><span data-lang="en">Privacy Policy</span></a></div>
 
   <script>(function(){const b=document.body,e=document.getElementById('el'),n=document.getElementById('en');function set(l){b.classList.toggle('lang-en',l==='en');e.classList.toggle('active',l==='el');n.classList.toggle('active',l==='en');e.setAttribute('aria-pressed',String(l==='el'));n.setAttribute('aria-pressed',String(l==='en'));document.documentElement.lang=l;try{localStorage.setItem('aitools4kids_lang',l)}catch(_){}}e.onclick=()=>set('el');n.onclick=()=>set('en');try{if(localStorage.getItem('aitools4kids_lang')==='en')set('en')}catch(_){}})();</script>
 </body>

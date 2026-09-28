@@ -11,6 +11,8 @@ const teacherSource=readFileSync('teacher-assistant.html','utf8');
 const schoolAiSource=readFileSync('school-ai-use.html','utf8');
 const licenseSource=readFileSync('LICENSE','utf8');
 const aboutSource=readFileSync('about.html','utf8');
+const methodologySource=readFileSync('methodology.html','utf8');
+const classroomSource=readFileSync('classroom.html','utf8');
 assert.match(tutorApi,/provider_limit/,'Tutor API must expose an explicit provider-limit state');
 assert.match(teacherApi,/provider_limit/,'Teacher API must expose an explicit provider-limit state');
 assert.match(teacherSource,/params\.set\('classroom','1'\)/,'Teacher deep links must enable classroom mode');
@@ -20,6 +22,10 @@ assert.match(schoolAiSource,/ΦΕΚ Β[΄']?\s*2639\/12\.05\.2026/,'School AI pa
 assert.match(schoolAiSource,/Υ\.ΠΑΙ\.Θ\.Α\.[\s\S]{0,180}DPIA|DPIA[\s\S]{0,180}Υ\.ΠΑΙ\.Θ\.Α\./,'School AI page must attribute the DPIA obligation to the Ministry');
 assert.match(licenseSource,/All rights reserved/i,'Repository must have an explicit protective LICENSE');
 assert.match(aboutSource,/Cloudflare Workers AI[\s\S]{0,160}Groq/,'About page must describe Cloudflare before Groq');
+assert.match(methodologySource,/Cloudflare Workers AI[\s\S]{0,260}Groq/,'Methodology must describe Cloudflare before Groq');
+assert.match(classroomSource,/href="\/school-ai-use\.html"/,'Classroom compatibility page must link to school AI use guidance');
+assert.match(aboutSource,/Ιωάννα Κουμάρη/,'About page must identify Ioanna Koumari');
+assert.match(aboutSource,/ελέγχονται ανά τακτά χρονικά διαστήματα από εκπαιδευτικούς/,'About page must disclose periodic educator review');
 assert.match(teacherSource,/classActivityLiveAi/,'Classroom QR must expose an explicit live-AI opt-in');
 
 try{
@@ -49,9 +55,14 @@ try{
   assert.ok(greekBadges.length===after,'Every filtered tool must expose its Greek-support badge');
   assert.ok(greekBadges.every(t=>/Ελληνικά:\s*Ναι/.test(t)),`Greek filter leaked non-verified cards: ${greekBadges.join(' | ')}`);
 
+  await page.goto(URL+'methodology.html',{waitUntil:'domcontentloaded',timeout:30000});
+  assert.match(await page.locator('h1').innerText(),/επιλέγουμε και ελέγχουμε τα εργαλεία/);
+  assert.match(await page.locator('body').innerText(),/Cloudflare Workers AI[\s\S]*Groq ως εφεδρικό πάροχο/);
+
   await page.goto(URL+'about.html',{waitUntil:'domcontentloaded',timeout:30000});
   const faq=page.locator('details');
   assert.equal(await faq.count(),6,'About/FAQ must keep six compact disclosures');
+  assert.match(await page.locator('.team').innerText(),/Ιωάννα Κουμάρη/,'About team section must include Ioanna Koumari');
   assert.equal(await page.locator('details[open]').count(),0,'FAQ disclosures must start collapsed');
 
   await page.goto(URL+'teacher-assistant.html',{waitUntil:'domcontentloaded',timeout:30000});

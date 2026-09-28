@@ -222,7 +222,20 @@ try{
 
   assert.deepEqual(errors,[],`Teacher curriculum browser errors: ${errors.join('\n')}`);
   await page.close();
-  console.log('Strict special-school teacher curriculum mapping smoke passed.');
+  
+// Regression: verified Special Lyceum language frameworks must surface despite label aliases such as "&" vs "και".
+for (const gradeId of ['b','c']) {
+  await page.selectOption('#context','specialLyc');
+  await page.selectOption('#grade',gradeId);
+  const languageOption=page.locator('#subject option').filter({hasText:'Νεοελληνική Γλώσσα'}).first();
+  assert.ok(await languageOption.count(),`Special Lyceum ${gradeId.toUpperCase()} language subject missing`);
+  await page.selectOption('#subject',await languageOption.getAttribute('value'));
+  const unitLabels=(await page.locator('#unit option').allTextContents()).map(x=>x.trim()).filter(Boolean);
+  assert.ok(unitLabels.length>=4,`Special Lyceum ${gradeId.toUpperCase()} language framework should expose verified choices`);
+  assert.ok(!unitLabels.some(x=>x.startsWith('Γράψε την ακριβή ενότητα')),`Special Lyceum ${gradeId.toUpperCase()} language must not fall back to manual-only entry`);
+}
+
+console.log('Strict special-school teacher curriculum mapping smoke passed.');
 }finally{
   await browser.close();
 }

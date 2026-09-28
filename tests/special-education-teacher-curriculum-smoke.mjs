@@ -220,6 +220,13 @@ try{
   });
   assert.equal(bridgeLeak,false,'Physical Education bridge must not be a copy of Physics');
 
+  const guidanceKeys=await page.evaluate(()=>({
+    secondForeign:specialLycGuidanceKey({id:'second-foreign-language',label:'2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)'}),
+    ancient:specialLycGuidanceKey({id:'ancient',label:'Αρχαία Ελληνική Γλώσσα και Γραμματεία'}),
+    modernGreek:specialLycGuidanceKey({id:'language',label:'Νεοελληνική Γλώσσα και Λογοτεχνία'})
+  }));
+  assert.deepEqual(guidanceKeys,{secondForeign:'second-foreign-language',ancient:'ancient',modernGreek:'language-literature'},'Special Lyceum language-like subjects must keep distinct canonical guidance keys');
+
 // Regression: verified Special Lyceum language frameworks must surface despite label aliases such as "&" vs "και".
   for (const gradeId of ['b','c']) {
     await page.selectOption('#context','specialLyc');
@@ -230,6 +237,19 @@ try{
     const unitLabels=(await page.locator('#unit option').allTextContents()).map(x=>x.trim()).filter(Boolean);
     assert.ok(unitLabels.length>=4,`Special Lyceum ${gradeId.toUpperCase()} language framework should expose verified choices`);
     assert.ok(!unitLabels.some(x=>x.startsWith('Γράψε την ακριβή ενότητα')),`Special Lyceum ${gradeId.toUpperCase()} language must not fall back to manual-only entry`);
+  }
+
+  for (const gradeId of ['a','b']) {
+    await page.selectOption('#context','specialLyc');
+    await page.selectOption('#grade',gradeId);
+    const foreignOption=page.locator('#subject option').filter({hasText:'2η Ξένη Γλώσσα'}).first();
+    assert.ok(await foreignOption.count(),`Special Lyceum ${gradeId.toUpperCase()} second foreign language missing`);
+    await page.selectOption('#subject',await foreignOption.getAttribute('value'));
+    const unitLabels=(await page.locator('#unit option').allTextContents()).map(x=>x.trim()).filter(Boolean);
+    assert.ok(unitLabels.length>=5,`Special Lyceum ${gradeId.toUpperCase()} second foreign language framework should expose verified choices`);
+    assert.ok(!unitLabels.some(x=>x.startsWith('Γράψε την ακριβή ενότητα')),`Special Lyceum ${gradeId.toUpperCase()} second foreign language must not be manual-only`);
+    const note=await page.locator('#curriculumNote').innerText();
+    assert.match(note,/επαληθευμένες επιλογές μέσα στο επίσημο πλαίσιο 2026–27/i);
   }
 
   assert.deepEqual(errors,[],`Teacher curriculum browser errors: ${errors.join('\n')}`);

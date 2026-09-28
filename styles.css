@@ -214,6 +214,19 @@ main {
   align-items: start;
 }
 
+.hero__map-pair--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1120px;
+}
+
+.hero__study-cta {
+  background: linear-gradient(120deg, #7a5aa6 0%, #5f57b8 100%);
+}
+
+.hero__study-cta:hover {
+  box-shadow: 0 10px 22px rgba(95, 87, 184, 0.30);
+}
+
 .hero__curriculum-cta {
   display: flex;
   align-items: center;
@@ -490,7 +503,8 @@ main {
   .hero__learning-loop { padding: 10px 12px; }
   .hero__learning-loop-steps { font-size: .78rem; }
   .hero__learning-loop-steps li:not(:last-child)::after { margin: 0 6px; }
-  .hero__map-pair { grid-template-columns: 1fr; }
+  .hero__map-pair,
+  .hero__map-pair--three { grid-template-columns: 1fr; }
   .hero__ai-help { grid-template-columns: 1fr; }
   .hero__ai-help-actions { grid-template-columns: 1fr; }
 }

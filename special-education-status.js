@@ -30,7 +30,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     {school:"Ειδικό Γυμνάσιο",scope:"Α΄–Γ΄ · Εργαστήρια Δεξιοτήτων — επίσημο θεματικό πλαίσιο",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"Ειδικό Λύκειο",scope:"Πληροφορική, Λατινικά, Βιολογία — 8 ακριβείς section-level χαρτογραφήσεις 2026–27",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
     {school:"Ειδικό Λύκειο",scope:"Ιστορία και Νεοελληνική Γλώσσα — επίσημα πλαίσια δεξιοτήτων/μεθοδολογίας 2026–27",curriculum:"verified",learning:"pending",quiz:"pending",tutorContext:"verified"},
-    {school:"Ειδικό Λύκειο",scope:"9 δημοσιευμένα επίσημα πεδία 2026–27 σε εκκρεμότητα ακριβούς χαρτογράφησης — Οικονομία, Αρχαία, Μαθηματικά, Θρησκευτικά, Πολιτική Παιδεία, Φιλοσοφία, Αγγλικά, 2η Ξένη Γλώσσα, Ηθική",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"verified"}
+    {school:"Ειδικό Λύκειο",scope:"3 εναπομείναντα πεδία χωρίς usable επιλογές — 2η Ξένη Γλώσσα Α΄–Β΄, Αρχαία Α΄, Ηθική Α΄–Γ΄ (μόνο Α΄ μέρος δημοσιευμένο)",curriculum:"indexed",learning:"pending",quiz:"pending",tutorContext:"verified"}
   ]
 };
 

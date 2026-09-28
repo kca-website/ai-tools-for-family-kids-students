@@ -12,6 +12,11 @@ const BOOKS = {
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
     mode: "numeric"
   },
+  "biologia-a-gymnasiou": {
+    title: "Βιολογία Α΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/",
+    mode: "biologyA"
+  },
   "biologia-b-gymnasiou": {
     title: "Βιολογία Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
@@ -69,6 +74,7 @@ const BOOKS = {
 
 const ALIASES = {
   "fysiki-b-gymnasiou": "physics-gymnasiou",
+  "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
   "biology-g-gymnasiou": "biologia-g-gymnasiou"
 };
@@ -186,9 +192,39 @@ function clean(value, max) {
 }
 
 function resolveDirectSourceUrls(subject, topic) {
-  if (subject !== "biologia-b-gymnasiou") return [];
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "biologia-a-gymnasiou") {
+    // Current 2026–27 curriculum topics only. Do not expose the whole book as this year's syllabus.
+    if (t.includes("οργανωση της ζωης") && t.includes("χαρακτηριστικ")) {
+      return [a + "index1_1.html"];
+    }
+    if (t.includes("κυτταρο") && t.includes("μοναδα της ζωης")) {
+      return [a + "index1_2.html"];
+    }
+    if (t.includes("οργανωση πολυκυτταρων οργανισμων")) {
+      return [a + "index1_3.html"];
+    }
+    if (t.includes("αλληλεπιδρασεις και προσαρμογες")) {
+      return [a + "index1_4.html"];
+    }
+    if (t.includes("φωτοσυνθεση")) {
+      return [a + "index2_1.html"];
+    }
+    if (t.includes("προσληψη ουσιων και πεψη")) {
+      return [a + "index2_2.html", a + "index2_3.html", a + "index2_4.html"];
+    }
+    if (t.includes("μεταφορα και αποβολη ουσιων")) {
+      return [a + "index3_1.html", a + "index3_2.html", a + "index3_3.html", a + "index3_4.html"];
+    }
+    if (t.includes("αναπνοη στους οργανισμους και στον ανθρωπο")) {
+      return [a + "index4_1.html", a + "index4_2.html", a + "index4_3.html", a + "index4_4.html"];
+    }
+    return [];
+  }
+
+  if (subject !== "biologia-b-gymnasiou") return [];
   const bg = "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/";
 
   if (t.includes("στηριξη και κινηση σε μονοκυτταρους οργανισμους και φυτα")) {
@@ -221,7 +257,7 @@ function resolveDirectSourceUrls(subject, topic) {
 function resolveSectionPath(mode, topic) {
   const t = String(topic || "");
 
-  if (mode === "biologyB") return "";
+  if (mode === "biologyA" || mode === "biologyB") return "";
 
   if (mode === "numeric") {
     let m = t.match(/^\s*(\d+)\.(\d+)\b/);

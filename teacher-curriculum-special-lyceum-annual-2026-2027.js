@@ -322,6 +322,17 @@
         ]),
         verificationNote:"Η επίσημη σελίδα ΙΕΠ 2026–27 επιβεβαιώνει Μαθηματικά Γενικής Παιδείας και Μαθηματικά Ομάδας Προσανατολισμού για τη Γ΄ Λυκείου Ε.Α.Ε. Η εγγραφή παραμένει framework μέχρι να τεκμηριωθούν οι πραγματικές section-level ενότητες από το επίσημο αρχείο."
       }),
+      "c|economics":Object.freeze({
+        id:"special-lyceum-c-economics-framework-2026-27",grade:"C",gradeId:"c",gradeLabel:"Γ΄ Λυκείου",
+        subject:"Οικονομία Ομάδας Προσανατολισμού Σπουδών Οικονομίας και Πληροφορικής",subjectId:"economics",sourceSubjectIds:Object.freeze(["economics","economy","oikonomia","aoth"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-source-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance-source",sourceTitle:"Οικονομία ΟΠΟΠ Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:"https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%91_%CE%95%CE%91%CE%95_2026-2027.pdf",
+        officialAnchors:Object.freeze([
+          "Οικονομία Ομάδας Προσανατολισμού Σπουδών Οικονομίας και Πληροφορικής (ΟΠΟΠ) — Γ΄ Λυκείου Ε.Α.Ε."
+        ]),
+        verificationNote:"Η επίσημη οδηγία Ε.Α.Ε. 2026–27 για την Οικονομία ΟΠΟΠ Γ΄ Λυκείου έχει δημοσιευθεί και η πηγή είναι καταγεγραμμένη. Επειδή δεν έχει ακόμη ολοκληρωθεί ασφαλής section-by-section ανάγνωση του συνημμένου PDF, η εγγραφή παραμένει framework-only και δεν παρουσιάζει κεφάλαια ή υποενότητες ως exact ύλη."
+      }),
       "a|biology":Object.freeze({
         id:"special-lyceum-a-biology-official-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
         subject:"Βιολογία",subjectId:"biology",sourceSubjectIds:Object.freeze(["biology","biologia-a-lykeiou"]),status:"verified",coverageStatus:"exact",

@@ -204,6 +204,18 @@ try{
   assert.match(ethicsNote,/μόνο το Α΄ μέρος/i,'Special Lyceum Ethics must not be presented as fully published guidance');
   assert.match(ethicsNote,/Σεπτέμβριος–Νοέμβριος 2026/i,'Special Lyceum Ethics partial-publication period must stay visible');
 
+  await page.selectOption('#grade','c');
+  const specialLycCOptions=await page.locator('#subject option').evaluateAll(opts=>opts.map(o=>({value:o.value,label:o.textContent.trim()})));
+  const economicsOption=specialLycCOptions.find(o=>/(οικονομ|econom)/i.test(o.label));
+  assert.ok(economicsOption,'Special Lyceum C must expose Economics in the Teacher Assistant');
+  await page.selectOption('#subject',economicsOption.value);
+  const specialLycEconomicsNote=await page.locator('#curriculumNote').innerText();
+  assert.match(specialLycEconomicsNote,/επίσημο πλαίσιο 2026–27/i,'Special Lyceum Economics must visibly report verified 2026-27 framework coverage');
+  assert.match(specialLycEconomicsNote,/δεν αποτελούν υποχρεωτική λίστα|framework/i,'Special Lyceum Economics must remain framework-only until exact E.A.E. sections are mapped');
+  assert.ok(await page.locator('#curriculumNote a[href*="dide.ira.sch.gr"]').count(),'Special Lyceum Economics framework must link to the published 2026-27 source');
+  const specialLycEconomicsTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(specialLycEconomicsTopics.some(x=>/Οικονομία Ομάδας Προσανατολισμού Σπουδών Οικονομίας και Πληροφορικής.*Γ΄ Λυκείου Ε\.Α\.Ε\./i.test(x)),'Special Lyceum C Economics must expose the verified OPOP course-level anchor');
+
   await page.selectOption('#context','middle');
   const generalPrompt=await page.evaluate(()=>window.promptText());
   assert.ok(!/Επίσημες αρχές διαφοροποιημένης διδασκαλίας Ε\.Α\.Ε\./.test(generalPrompt),'E.A.E. differentiation block must not be injected into the general Gymnasium context');

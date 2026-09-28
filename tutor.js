@@ -2356,6 +2356,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           body: JSON.stringify({
             system: requestMessages[0]?.content || "",
             prompt: requestMessages[1]?.content || "",
+            task: studyAction === "flashcards" ? "flashcards" : (studyAction === "quiz" || studyAction === "weakspots" ? "quiz" : (studyAction === "summary" ? "guided_task" : "conversation")),
             audience: isParentMode() ? "parent" : "high_student",
             mode: learningMode,
             grade: getSelectedGradeLabel(),

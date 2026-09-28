@@ -316,11 +316,6 @@
     const zoneGrid=document.getElementById("zoneGrid");
     if(!zoneGrid) return;
 
-    if(!zoneGrid.dataset.aiStudyOrderObserver){
-      zoneGrid.dataset.aiStudyOrderObserver="1";
-      new MutationObserver(()=>ensureAIStudyZoneCard()).observe(zoneGrid,{childList:true,subtree:true});
-    }
-
     let card=document.getElementById("homeStudyZoneCard");
     if(!card){
       card=document.createElement("button");
@@ -332,18 +327,19 @@
 
     const en=isEnglish();
     card.innerHTML=en
-      ? '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label">AI Study</p><p class="zone-card__age"><span style="display:inline-block;padding:3px 9px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-size:.78rem;font-weight:800;">New · Free</span></p><p class="zone-card__desc">Curriculum or your own notes → an AI-built plan, summary, flashcards, quiz and oral review.</p>'
-      : '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label">AI Μελέτη</p><p class="zone-card__age"><span style="display:inline-block;padding:3px 9px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-size:.78rem;font-weight:800;">Νέο · Δωρεάν</span></p><p class="zone-card__desc">Ύλη ή δικές σου σημειώσεις → πλάνο από AI, σύνοψη, flashcards, quiz και προφορική εξέταση.</p>';
+      ? '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label">AI Study</p><p class="zone-card__age"><span style="display:inline-block;padding:3px 9px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-size:.78rem;font-weight:800;">New · Free</span></p><p class="zone-card__desc">Curriculum or your own notes → plan, summary, flashcards, quiz and oral review.</p>'
+      : '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label">AI Μελέτη</p><p class="zone-card__age"><span style="display:inline-block;padding:3px 9px;border-radius:999px;background:#ede9fe;color:#5b21b6;font-size:.78rem;font-weight:800;">Νέο · Δωρεάν</span></p><p class="zone-card__desc">Ύλη ή δικές σου σημειώσεις → πλάνο, σύνοψη, flashcards, quiz και προφορική εξέταση.</p>';
 
     const cards=[...zoneGrid.querySelectorAll(".zone-card")].filter(x=>x!==card);
     const mapCard=cards.find(x=>{
       const text=(x.textContent||"").toLowerCase();
-      const href=(x.getAttribute?.("href")||"").toLowerCase();
-      return href.includes("xartis-ylis") || text.includes("ελληνικός χάρτης ύλης") || text.includes("greek curriculum map");
+      return text.includes("ελληνικός χάρτης ύλης") || text.includes("greek curriculum map");
     });
-
-    if(!mapCard) return;
-    if(card.previousElementSibling!==mapCard) mapCard.insertAdjacentElement("afterend",card);
+    if(mapCard){
+      if(card.previousElementSibling!==mapCard) mapCard.insertAdjacentElement("afterend",card);
+    }else if(!zoneGrid.contains(card)){
+      zoneGrid.appendChild(card);
+    }
   }
 
   function ensureSpecialEducationEntry(){

@@ -8,9 +8,7 @@ const indexKeys=[...indexSource.matchAll(/Object\.freeze\(\{key:"([^"]+)"/g)].ma
 assert.ok(indexKeys.length>=14,'Special Lyceum official guidance index unexpectedly small');
 assert.equal(new Set(indexKeys).size,indexKeys.length,'Special Lyceum official guidance index contains duplicate keys');
 
-const annualKeys=[...annualSource.matchAll(/"([abc])\|([^"]+)":Object\.freeze\(\{/g)].map(m=>m[2]);
-const exactSubjects=new Set(annualKeys);
-const exactToGuidance={
+const subjectToGuidance={
   language:'language-literature',
   biology:'biology',
   economics:'economics',
@@ -27,25 +25,44 @@ const exactToGuidance={
   ethics:'ethics'
 };
 
-for(const subject of exactSubjects){
-  const guidanceKey=exactToGuidance[subject]||subject;
-  assert.ok(indexKeys.includes(guidanceKey),`Exact Special Lyceum subject "${subject}" is missing from the official guidance index`);
+const entryBlocks=[...annualSource.matchAll(/"([abc])\|([^"]+)":Object\.freeze\(\{([\s\S]*?)\n\s*\}\),?/g)]
+  .map(m=>({grade:m[1],subject:m[2],body:m[3]}));
+
+assert.ok(entryBlocks.length>=14,'Special Lyceum annual map unexpectedly lost entries');
+
+const exactGuidanceKeys=new Set();
+const frameworkGuidanceKeys=new Set();
+for(const entry of entryBlocks){
+  const guidanceKey=subjectToGuidance[entry.subject]||entry.subject;
+  assert.ok(indexKeys.includes(guidanceKey),`Mapped Special Lyceum subject "${entry.subject}" is missing from the official guidance index`);
+  if(/coverageStatus:"exact"/.test(entry.body)){
+    exactGuidanceKeys.add(guidanceKey);
+  }else if(/coverageStatus:"framework"/.test(entry.body)||/frameworkOnly:true/.test(entry.body)){
+    frameworkGuidanceKeys.add(guidanceKey);
+  }else{
+    throw new Error(`Special Lyceum entry ${entry.grade}|${entry.subject} has neither exact nor framework coverage status`);
+  }
 }
 
-const exactGuidanceKeys=new Set([...exactSubjects].map(s=>exactToGuidance[s]||s));
-const pending=indexKeys.filter(k=>!exactGuidanceKeys.has(k));
-
-for(const required of ['language-literature','biology','history','informatics','latin']){
+for(const required of ['biology','informatics','latin']){
   assert.ok(exactGuidanceKeys.has(required),`Known exact Special Lyceum mapping missing: ${required}`);
 }
-
-for(const required of ['economics','ancient','math','religion','civics','philosophy','english','second-foreign-language','ethics']){
-  assert.ok(indexKeys.includes(required),`Published Special Lyceum guidance missing from index: ${required}`);
+for(const required of ['history','language-literature']){
+  assert.ok(frameworkGuidanceKeys.has(required),`Known framework Special Lyceum mapping missing: ${required}`);
+  assert.ok(!exactGuidanceKeys.has(required),`Framework-only Special Lyceum mapping must not be reported as exact: ${required}`);
 }
 
-assert.ok(pending.length>0,'Special Lyceum audit unexpectedly reports no section-level mapping backlog');
+const covered=new Set([...exactGuidanceKeys,...frameworkGuidanceKeys]);
+const pending=indexKeys.filter(k=>!covered.has(k));
+
+for(const required of ['economics','ancient','math','religion','civics','philosophy','english','second-foreign-language','ethics']){
+  assert.ok(pending.includes(required),`Published Special Lyceum guidance should remain pending until section/framework mapping is verified: ${required}`);
+}
+
+assert.ok(pending.length>0,'Special Lyceum audit unexpectedly reports no mapping backlog');
 console.log(JSON.stringify({
   officialGuidanceSubjects:indexKeys.length,
   exactSectionMapped:[...exactGuidanceKeys].sort(),
-  pendingSectionMapping:pending.sort()
+  frameworkMapped:[...frameworkGuidanceKeys].sort(),
+  pendingMapping:pending.sort()
 },null,2));

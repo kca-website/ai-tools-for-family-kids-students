@@ -1557,6 +1557,54 @@
     "annualInstructionsNoteEn": "Official Ministry decision for the 2027 Panhellenic examinations.",
     "annualInstructionsUrl": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2",
     "quizId": "biologia-g-lykeiou"
+  },
+  "archaia-glossa-a-gymnasiou": {
+    "schoolYear":"2026-2027","verificationDate":"2026-09-28","coverageStatus":"book-index-verified",
+    "coverageLabelEl":"Επίσημο σχολικό βιβλίο και περιεχόμενα επιβεβαιωμένα","coverageLabelEn":"Official textbook and contents verified",
+    "quizTitleEl":"Αρχαία Ελληνική Γλώσσα, Α' Γυμνασίου","quizTitleEn":"Ancient Greek Language, 7th Grade",
+    "officialBook":{"titleEl":"Αρχαία Ελληνική Γλώσσα Α΄ Γυμνασίου","titleEn":"Ancient Greek Language, 7th Grade","url":"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGL102/458/3005%2C12074/"},
+    "officialSectionsEl":["Ενότητα 1 — Το ταξίδι των λέξεων στον χρόνο","Ενότητα 2 — Η εκπαίδευση των παιδιών στην αρχαία Αθήνα","Ενότητα 3 — Επαγγέλματα των αρχαίων Αθηναίων","Ενότητα 4 — Ένα ταξίδι επιστημονικής φαντασίας","Ενότητα 5 — Ο πλούτος της αττικής γης"],
+    "officialSectionsEn":[],"catalogUrl":"https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp","ministryUrl":"https://www.minedu.gov.gr/defterovathmia/gymnasio",
+    "scopeNoteEl":"Οι τίτλοι προέρχονται από τα επίσημα περιεχόμενα. Ο Tutor πρέπει να διατηρεί τη σχολική ορολογία.","scopeNoteEn":"Titles come from the official textbook contents. Preserve school terminology.",
+    "annualInstructionsStatus":"official-book-index","quizId":"archaia-glossa-a-gymnasiou","zone":"middle","sourceDiscipline":"source-first textbook terminology"
+  },
+  "odysseia-a-gymnasiou": {
+    "schoolYear":"2026-2027","verificationDate":"2026-09-28","coverageStatus":"book-index-verified",
+    "coverageLabelEl":"Επίσημο σχολικό βιβλίο και 28 ενότητες επιβεβαιωμένες","coverageLabelEn":"Official textbook and 28 units verified",
+    "quizTitleEl":"Ομηρικά Έπη – Οδύσσεια, Α' Γυμνασίου","quizTitleEn":"Homeric Epics – Odyssey, 7th Grade",
+    "officialBook":{"titleEl":"Ομηρικά Έπη – Οδύσσεια Α΄ Γυμνασίου","titleEn":"Homeric Epics – Odyssey","url":"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A115/461/3014%2C12200/"},
+    "officialSectionsEl":[],"officialSectionsEn":[],"catalogUrl":"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-A115","ministryUrl":"https://www.minedu.gov.gr/defterovathmia/gymnasio",
+    "scopeNoteEl":"Η Οδύσσεια χαρτογραφείται σύμφωνα με τις 28 επίσημες ενότητες του βιβλίου.","scopeNoteEn":"The Odyssey is mapped to the textbook's 28 official units.",
+    "annualInstructionsStatus":"official-book-index","quizId":"odysseia-a-gymnasiou","zone":"middle","sourceDiscipline":"source-first textbook terminology"
+  },
+  "archaia-glossa-b-gymnasiou": {
+    "schoolYear":"2026-2027","verificationDate":"2026-09-28","coverageStatus":"book-index-verified",
+    "coverageLabelEl":"Επίσημο σχολικό βιβλίο και περιεχόμενα επιβεβαιωμένα","coverageLabelEn":"Official textbook and contents verified",
+    "quizTitleEl":"Αρχαία Ελληνική Γλώσσα, Β' Γυμνασίου","quizTitleEn":"Ancient Greek Language, 8th Grade",
+    "officialBook":{"titleEl":"Αρχαία Ελληνική Γλώσσα Β΄ Γυμνασίου","titleEn":"Ancient Greek Language, 8th Grade","url":"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B112/269/1972%2C6728/"},
+    "officialSectionsEl":["Ενότητα 1 — Πατρική δικαιοσύνη","Ενότητα 2 — Το τέχνασμα του Θεμιστοκλή","Ενότητα 3 — Το χρέος του ιστορικού","Ενότητα 4 — Οι Σεληνίτες"],
+    "officialSectionsEn":[],"catalogUrl":"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-B112","ministryUrl":"https://www.minedu.gov.gr/defterovathmia/gymnasio",
+    "scopeNoteEl":"Οι τίτλοι προέρχονται από τα επίσημα περιεχόμενα. Ο Tutor πρέπει να διατηρεί τη σχολική ορολογία.","scopeNoteEn":"Titles come from the official textbook contents. Preserve school terminology.",
+    "annualInstructionsStatus":"official-book-index","quizId":"archaia-glossa-b-gymnasiou","zone":"middle","sourceDiscipline":"source-first textbook terminology"
+  },
+  "iliada-b-gymnasiou": {
+    "schoolYear":"2026-2027","verificationDate":"2026-09-28","coverageStatus":"official-book-verified",
+    "coverageLabelEl":"Επίσημο σχολικό βιβλίο επιβεβαιωμένο","coverageLabelEn":"Official textbook verified",
+    "quizTitleEl":"Ομηρικά Έπη – Ιλιάδα, Β' Γυμνασίου","quizTitleEn":"Homeric Epics – Iliad, 8th Grade",
+    "officialBook":{"titleEl":"Ομηρικά Έπη – Ιλιάδα Β΄ Γυμνασίου","titleEn":"Homeric Epics – Iliad","url":"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B108/552/3628%2C15576/"},
+    "officialSectionsEl":[],"officialSectionsEn":[],"catalogUrl":"https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp","ministryUrl":"https://www.minedu.gov.gr/defterovathmia/gymnasio",
+    "scopeNoteEl":"Το επίσημο βιβλίο είναι επιβεβαιωμένο. Δεν προσθέτουμε τίτλους ενοτήτων που δεν έχουν ακόμη επαληθευτεί.","scopeNoteEn":"The official textbook is verified; unverified unit titles are not invented.",
+    "annualInstructionsStatus":"official-book-verified","quizId":"iliada-b-gymnasiou","zone":"middle","sourceDiscipline":"source-first textbook terminology"
+  },
+  "archaia-glossa-g-gymnasiou": {
+    "schoolYear":"2026-2027","verificationDate":"2026-09-28","coverageStatus":"book-index-verified",
+    "coverageLabelEl":"Επίσημο σχολικό βιβλίο και περιεχόμενα επιβεβαιωμένα","coverageLabelEn":"Official textbook and contents verified",
+    "quizTitleEl":"Αρχαία Ελληνική Γλώσσα, Γ' Γυμνασίου","quizTitleEn":"Ancient Greek Language, 9th Grade",
+    "officialBook":{"titleEl":"Αρχαία Ελληνική Γλώσσα Γ΄ Γυμνασίου","titleEn":"Ancient Greek Language, 9th Grade","url":"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C106/502/3267%2C13322/"},
+    "officialSectionsEl":["Ενότητα 1 — Η Ελένη και η καταστροφή της Τροίας","Ενότητα 2 — Θυσία για την πατρίδα","Ενότητα 3 — Η κατοχή της εξουσίας δεν εγγυάται την ευτυχία","Ενότητα 4 — Τα πλεονεκτήματα της ειρήνης"],
+    "officialSectionsEn":[],"catalogUrl":"https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp","ministryUrl":"https://www.minedu.gov.gr/defterovathmia/gymnasio",
+    "scopeNoteEl":"Οι τίτλοι προέρχονται από τα επίσημα περιεχόμενα. Ο Tutor πρέπει να διατηρεί τη σχολική ορολογία.","scopeNoteEn":"Titles come from the official textbook contents. Preserve school terminology.",
+    "annualInstructionsStatus":"official-book-index","quizId":"archaia-glossa-g-gymnasiou","zone":"middle","sourceDiscipline":"source-first textbook terminology"
   }
 };
   const GAP_ALIGNMENT = {

@@ -220,6 +220,13 @@ try{
   });
   assert.equal(bridgeLeak,false,'Physical Education bridge must not be a copy of Physics');
 
+  const guidanceKeys=await page.evaluate(()=>({
+    secondForeign:specialLycGuidanceKey({id:'second-foreign-language',label:'2η Ξένη Γλώσσα (Γαλλικά ή Γερμανικά)'}),
+    ancient:specialLycGuidanceKey({id:'ancient',label:'Αρχαία Ελληνική Γλώσσα και Γραμματεία'}),
+    modernGreek:specialLycGuidanceKey({id:'language',label:'Νεοελληνική Γλώσσα και Λογοτεχνία'})
+  }));
+  assert.deepEqual(guidanceKeys,{secondForeign:'second-foreign-language',ancient:'ancient',modernGreek:'language-literature'},'Special Lyceum language-like subjects must keep distinct canonical guidance keys');
+
 // Regression: verified Special Lyceum language frameworks must surface despite label aliases such as "&" vs "και".
   for (const gradeId of ['b','c']) {
     await page.selectOption('#context','specialLyc');

@@ -77,6 +77,12 @@ for(const required of ['economics','ancient','math','religion','civics','philoso
   assert.ok(pending.includes(required),`Published Special Lyceum guidance should remain pending until section/framework mapping is verified: ${required}`);
 }
 
+const ethicsIndexBlock=indexSource.match(/Object\.freeze\(\{key:"ethics"[\s\S]*?\}\)/)?.[0]||'';
+assert.ok(ethicsIndexBlock,'Special Lyceum Ethics guidance index entry is missing');
+assert.match(ethicsIndexBlock,/status:"published-part-1"/,'Special Lyceum Ethics must remain explicitly partial while only the Sep–Nov 2026 first part is published');
+assert.ok(pending.includes('ethics'),'Special Lyceum Ethics must remain pending until verified Lyceum E.A.E. topic/framework mapping is available');
+assert.ok(!exactGuidanceKeys.has('ethics')&&!frameworkGuidanceKeys.has('ethics'),'Special Lyceum Ethics must not be promoted to exact/framework coverage from Gymnasium or unrelated guidance');
+
 assert.ok(pending.length>0,'Special Lyceum audit unexpectedly reports no mapping backlog');
 console.log(JSON.stringify({
   officialGuidanceSubjects:indexKeys.length,

@@ -195,6 +195,13 @@ try{
   assert.match(specialLycMathNote,/Άλγεβρα και Γεωμετρία Γενικής Παιδείας/i,'Special Lyceum Math pending notice must expose the official grade-specific scope');
   assert.ok(await page.locator('#curriculumNote a[href*="iep.edu.gr"]').count(),'Special Lyceum Math pending status must link to an official IEP source');
 
+  const ethicsOption=specialLycAOptions.find(o=>/ηθικ/i.test(o.label));
+  assert.ok(ethicsOption,'Special Lyceum A must expose Ethics when the first official 2026-27 part is published');
+  await page.selectOption('#subject',ethicsOption.value);
+  const ethicsNote=await page.locator('#curriculumNote').innerText();
+  assert.match(ethicsNote,/μόνο το Α΄ μέρος/i,'Special Lyceum Ethics must not be presented as fully published guidance');
+  assert.match(ethicsNote,/Σεπτέμβριος–Νοέμβριος 2026/i,'Special Lyceum Ethics partial-publication period must stay visible');
+
   await page.selectOption('#context','middle');
   const generalPrompt=await page.evaluate(()=>window.promptText());
   assert.ok(!/Επίσημες αρχές διαφοροποιημένης διδασκαλίας Ε\.Α\.Ε\./.test(generalPrompt),'E.A.E. differentiation block must not be injected into the general Gymnasium context');

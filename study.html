@@ -482,7 +482,12 @@
     return body.text||'';
   }
 
-  function renderPlain(text){$('aiOutput').innerHTML=esc(text).replace(/\n/g,'<br>')}
+  function renderPlain(text){
+    const safe=esc(text)
+      .replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>')
+      .replace(/^\s*[-•]\s+/gm,'• ');
+    $('aiOutput').innerHTML=safe.replace(/\n/g,'<br>');
+  }
   function renderFlashcards(text){
     const raw=String(text||'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
     let data=null;try{data=JSON.parse(raw)}catch(_){const a=raw.indexOf('{'),b=raw.lastIndexOf('}');if(a>=0&&b>a)try{data=JSON.parse(raw.slice(a,b+1))}catch(_){}}

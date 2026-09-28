@@ -13,6 +13,11 @@ const BOOKS = {
     mode: "numeric"
   },
   "biologia-b-gymnasiou": {
+    title: "Βιολογία Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
+    mode: "biologyB"
+  },
+  "biologia-g-gymnasiou": {
     title: "Βιολογία Β΄ και Γ΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
     mode: "numeric"
@@ -64,9 +69,8 @@ const BOOKS = {
 
 const ALIASES = {
   "fysiki-b-gymnasiou": "physics-gymnasiou",
-  "biologia-g-gymnasiou": "biologia-b-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
-  "biology-g-gymnasiou": "biologia-b-gymnasiou"
+  "biology-g-gymnasiou": "biologia-g-gymnasiou"
 };
 
 module.exports = async function handler(req, res) {
@@ -88,7 +92,8 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const path = resolveSectionPath(book.mode, topic);
+  const directUrls = resolveDirectSourceUrls(subject, topic);
+  const path = directUrls.length ? "__direct__" : resolveSectionPath(book.mode, topic);
   if (!path) {
     return res.status(404).json({
       grounded: false,
@@ -102,7 +107,20 @@ module.exports = async function handler(req, res) {
     let sourceUrls = [];
     let combinedText = "";
 
-    if (book.multi) {
+    if (directUrls.length) {
+      sourceUrls = directUrls;
+      const pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
+      if (pages.some((html) => !html)) {
+        return res.status(404).json({
+          grounded: false,
+          error: "official_source_unavailable",
+          bookTitle: book.title,
+          sourceUrls,
+          message: "Μία ή περισσότερες επίσημες σελίδες της ενότητας δεν ήταν διαθέσιμες."
+        });
+      }
+      combinedText = distributeOfficialPages(pages, sourceUrls, 42000);
+    } else if (book.multi) {
       sourceUrls = await discoverUnitPages(book, path);
       if (!sourceUrls.length) {
         return res.status(404).json({
@@ -167,8 +185,43 @@ function clean(value, max) {
   return String(value || "").trim().slice(0, max);
 }
 
+function resolveDirectSourceUrls(subject, topic) {
+  if (subject !== "biologia-b-gymnasiou") return [];
+  const t = normalize(topic);
+  const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+  const bg = "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/";
+
+  if (t.includes("στηριξη και κινηση σε μονοκυτταρους οργανισμους και φυτα")) {
+    return [a + "index5_1.html", a + "index5_2.html"];
+  }
+  if (t.includes("στηριξη και κινηση σε ζωα") || t.includes("μυοσκελετικο συστημα")) {
+    return [a + "index5_3.html", a + "index5_4.html"];
+  }
+  if (t.includes("αναπαραγωγη σε μονοκυτταρους οργανισμους και φυτα")) {
+    return [a + "index6_1.html", a + "index6_2.html"];
+  }
+  if (t.includes("αναπαραγωγη στα ζωα και στον ανθρωπο")) {
+    return [a + "index6_3.html", a + "index6_4.html"];
+  }
+  if (t.includes("κυτταρο και επιπεδα οργανωσης")) {
+    return [a + "index1_2.html", a + "index1_3.html"];
+  }
+  if (t.includes("ομοιοσταση και ασθενειες")) {
+    return [bg + "index4_1.html", bg + "index4_2.html"];
+  }
+  if (t.includes("αμυντικοι μηχανισμοι του ανθρωπου")) {
+    return [bg + "index4_3.html"];
+  }
+  if (t.includes("τροπος ζωης και ασθενειες")) {
+    return [bg + "index4_4.html"];
+  }
+  return [];
+}
+
 function resolveSectionPath(mode, topic) {
   const t = String(topic || "");
+
+  if (mode === "biologyB") return "";
 
   if (mode === "numeric") {
     let m = t.match(/^\s*(\d+)\.(\d+)\b/);

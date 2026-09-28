@@ -521,35 +521,25 @@
     renderAltAi(action);
   }
 
-  function extractiveOfficialLesson(sourceText,topic,maxChars=3400){
-    let raw=String(sourceText||'')
-      .replace(/\[Official page:[^\]]+\]/gi,'\n')
-      .replace(/https?:\/\/\S+/g,' ')
-      .replace(/Image:\s*εικόνα/gi,' ')
-      .replace(/\r/g,'')
-      .replace(/[ \t]+/g,' ')
-      .replace(/ *\n */g,'\n')
-      .replace(/\n{3,}/g,'\n\n')
-      .trim();
-    if(!raw)return'';
-
-    const stop=/^(Ερωτήσεις|Προβλήματα|Δραστηριότητες|ΛΕΞΕΙΣ[- ]ΚΛΕΙΔΙΑ|ΑΣ ΣΚΕΦΤΟΥΜΕ|ΠΕΡΙΛΗΨΗ)\b/i;
-    const noisy=/^(Αρχική|Περιεχόμενα|Επόμενο|Προηγούμενο|Κεφάλαιο\s+\d+\s*$)/i;
-    const blocks=raw.split(/\n{2,}/).map(x=>x.trim()).filter(Boolean);
-    const kept=[];
-    let used=0;
-    for(const block of blocks){
-      if(stop.test(block))break;
-      if(noisy.test(block)||block.length<25)continue;
-      const piece=block.replace(/\s+/g,' ').trim();
-      if(!piece)continue;
-      const room=maxChars-used;
-      if(room<120)break;
-      kept.push(piece.slice(0,room));
-      used+=Math.min(piece.length,room)+2;
+  async function verifiedOfficialSummary(source){
+    const res=await fetch('/api/source-summary',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        sourceText:source?.text||'',
+        topic:selectedTopic(),
+        sourceTitle:source?.bookTitle||'',
+        language:lang
+      })
+    });
+    const body=await res.json().catch(()=>({}));
+    if(!res.ok||!body?.text){
+      throw new Error(body?.message||(lang==='en'?'Could not create a verified summary.':'Δεν δημιουργήθηκε επαληθευμένη σύνοψη.'));
     }
-    const body=kept.join('\n\n').trim()||raw.slice(0,maxChars);
-    return (lang==='en'?'Official-source reading – ':'Ανάγνωση από την επίσημη πηγή – ')+(topic||'')+'\n\n'+body;
+    $('providerStatus').textContent=body.verified
+      ? (lang==='en'?'Verified against official source':'Ελεγμένο πάνω στην επίσημη πηγή')
+      : (lang==='en'?'Official-source summary':'Σύνοψη επίσημης πηγής');
+    return body.text;
   }
 
   async function runStudyAction(action){
@@ -570,9 +560,7 @@
       if(action==='audio'&&!attached){
         const officialSource=await officialSchoolbookSource();
         if(officialSource?.grounded){
-          text=extractiveOfficialLesson(officialSource.text,selectedTopic());
-          if(!text)throw new Error(lang==='en'?'The official source did not contain readable text.':'Η επίσημη πηγή δεν περιείχε αναγνώσιμο κείμενο.');
-          $('providerStatus').textContent=lang==='en'?'Official textbook source':'Επίσημη σχολική πηγή';
+          text=await verifiedOfficialSummary(officialSource);
         }else{
           text=await callStudyServer(action);
         }
@@ -696,7 +684,7 @@
             }
             setAudioStatus((lang==='en'
               ?'Text-to-speech failed ('+code+'). Enable a speech engine/voice in device settings.'
-              :'Η ανάγνωση απέτυχε ('+code+'). Ενεργοποίησε μηχανή/φωνή μετατροπής κειμένου σε ομιλία στις ρυθμίσεις της συσκευής.'));
+              :'Η ανάγνωση απέτυχε ('+code+'). Η σύνοψη είναι σωστή, αλλά η συσκευή δεν εκκινεί το Text-to-Speech. Σε Android έλεγξε Ρυθμίσεις → Γενική διαχείριση/Σύστημα → Μετατροπή κειμένου σε ομιλία και ενεργοποίησε διαθέσιμη μηχανή/φωνή.'));
           };
           try{try{synth.resume()}catch(_){};synth.speak(u)}
           catch(err){

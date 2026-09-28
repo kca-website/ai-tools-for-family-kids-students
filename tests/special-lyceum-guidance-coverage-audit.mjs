@@ -65,7 +65,7 @@ for(const entry of entryBlocks){
 for(const required of ['biology','informatics','latin']){
   assert.ok(exactGuidanceKeys.has(required),`Known exact Special Lyceum mapping missing: ${required}`);
 }
-for(const required of ['history','language-literature','second-foreign-language','math','economics']){
+for(const required of ['history','language-literature','second-foreign-language','math','economics','english']){
   assert.ok(frameworkGuidanceKeys.has(required),`Known framework Special Lyceum mapping missing: ${required}`);
   assert.ok(!exactGuidanceKeys.has(required),`Framework-only Special Lyceum mapping must not be reported as exact: ${required}`);
 }
@@ -73,7 +73,7 @@ for(const required of ['history','language-literature','second-foreign-language'
 const covered=new Set([...exactGuidanceKeys,...frameworkGuidanceKeys]);
 const pending=indexKeys.filter(k=>!covered.has(k));
 
-for(const required of ['ancient','religion','civics','philosophy','english','ethics']){
+for(const required of ['ancient','religion','civics','philosophy','ethics']){
   assert.ok(pending.includes(required),`Published Special Lyceum guidance should remain pending until section/framework mapping is verified: ${required}`);
 }
 
@@ -98,6 +98,18 @@ assert.match(economicsEntries[0].body,/frameworkOnly:true/,'Special Lyceum Econo
 assert.ok(!/coverageStatus:"exact"/.test(economicsEntries[0].body),'Special Lyceum Economics must not be promoted to exact without verified section-level source extraction');
 assert.match(economicsEntries[0].body,/Οικονομία Ομάδας Προσανατολισμού Σπουδών Οικονομίας και Πληροφορικής/,'Special Lyceum Economics must expose the verified OPOP Grade C scope');
 assert.match(economicsEntries[0].body,/dide\.ira\.sch\.gr\/wp-content\/uploads\/2026\/09\//,'Special Lyceum Economics must retain the published 2026-27 source URL');
+
+const englishEntries=entryBlocks.filter(entry=>entry.subject==='english');
+assert.equal(englishEntries.length,3,'Special Lyceum English must have verified framework entries for A/B/C');
+for(const grade of ['a','b','c']){
+  const entry=englishEntries.find(item=>item.grade===grade);
+  assert.ok(entry,`Special Lyceum English framework missing grade: ${grade}`);
+  assert.match(entry.body,/coverageStatus:"framework"/,`Special Lyceum English ${grade.toUpperCase()} must remain framework-only`);
+  assert.match(entry.body,/frameworkOnly:true/,`Special Lyceum English ${grade.toUpperCase()} must explicitly declare framework-only coverage`);
+  assert.ok(!/coverageStatus:"exact"/.test(entry.body),`Special Lyceum English ${grade.toUpperCase()} must not be promoted to exact without a closed official unit list`);
+  assert.match(entry.body,/FOREIGN_LANGUAGES_PDF/,`Special Lyceum English ${grade.toUpperCase()} must retain the official 2026-27 foreign-languages source`);
+  assert.match(entry.body,/secondForeignFramework/,`Special Lyceum English ${grade.toUpperCase()} must reuse the verified common foreign-language E.A.E. framework rather than inventing Units`);
+}
 
 const ethicsIndexBlock=indexSource.match(/Object\.freeze\(\{key:"ethics"[\s\S]*?\}\)/)?.[0]||'';
 assert.ok(ethicsIndexBlock,'Special Lyceum Ethics guidance index entry is missing');

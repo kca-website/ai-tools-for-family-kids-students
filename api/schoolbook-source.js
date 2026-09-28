@@ -113,10 +113,7 @@ module.exports = async function handler(req, res) {
         });
       }
       const pages = await Promise.all(sourceUrls.slice(0, 12).map(fetchOfficialHtml));
-      combinedText = pages.filter(Boolean).map((html, i) => {
-        const label = sourceUrls[i] ? "\n\n[Official page: " + sourceUrls[i] + "]\n" : "";
-        return label + htmlToText(html);
-      }).join("\n\n");
+      combinedText = distributeOfficialPages(pages, sourceUrls, 42000);
     } else {
       const sourceUrl = new URL(path, book.base).toString();
       sourceUrls = [sourceUrl];
@@ -133,7 +130,7 @@ module.exports = async function handler(req, res) {
       combinedText = htmlToText(html);
     }
 
-    const useful = selectUsefulText(combinedText, topic);
+    const useful = book.multi ? combinedText : selectUsefulText(combinedText, topic);
     const sourceUrl = sourceUrls[0] || book.base;
 
     if (useful.length < 500) {
@@ -288,6 +285,27 @@ async function discoverUnitPages(book, prefix) {
   }
 
   return hrefs.slice(0, 12);
+}
+
+function distributeOfficialPages(pages, urls, maxChars) {
+  const rows = pages.map((html, i) => ({
+    url: urls[i] || "",
+    text: html ? htmlToText(html) : ""
+  })).filter(row => row.text.length >= 120);
+  if (!rows.length) return "";
+
+  const overhead = rows.reduce((n, row) => n + (row.url ? row.url.length + 24 : 0), 0);
+  const budget = Math.max(1200, maxChars - overhead);
+  const perPage = Math.max(900, Math.floor(budget / rows.length));
+
+  return rows.map(row => {
+    const label = row.url ? "[Official page: " + row.url + "]\n" : "";
+    const text = row.text;
+    if (text.length <= perPage) return label + text;
+    const head = Math.floor(perPage * 0.72);
+    const tail = perPage - head;
+    return label + text.slice(0, head) + "\n[… official page excerpt …]\n" + text.slice(-tail);
+  }).join("\n\n").slice(0, maxChars);
 }
 
 function htmlToText(html) {

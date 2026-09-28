@@ -15,7 +15,19 @@
     labelEn:"Special Lyceum",
     status:"verified-structure",
     schoolYear:"2026-2027",
-    verificationDate:"2026-09-20",
+    verificationDate:"2026-09-28",
+    officialTimetable:Object.freeze({
+      decision:"43941/Δ3/07-04-2026",
+      gazette:"ΦΕΚ Β΄ 2133/09-04-2026",
+      ada:"ΕΡΓΑ46ΝΚΠΔ-ΜΝΡ",
+      effectiveFrom:"2026-2027",
+      sourceUrl:"https://www.e-nomothesia.gr/kat-ekpaideuse/deuterobathmia-ekpaideuse/ya-43941-d3-2026.html",
+      grades:Object.freeze({
+        a:Object.freeze(["ancient","language-literature","religion","ethics","history","math","english","second-foreign-language","physics","chemistry","biology","physical-education","civics","informatics"]),
+        b:Object.freeze(["ancient","language-literature","math","physics","chemistry","biology","informatics","history","philosophy","religion","ethics","english","second-foreign-language","physical-education","latin"]),
+        c:Object.freeze(["religion","ethics","language-literature","history","math","english","physical-education","ancient","latin","physics","chemistry","biology","informatics","economics"])
+      })
+    }),
     sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
     sourceLabelEl:"ΙΕΠ — Ύλη και Οδηγίες Λυκείου Ε.Α.Ε. 2026–27",
     sourceLabelEn:"IEP — Special Lyceum E.A.E. 2026–27 guidance",

@@ -51,7 +51,7 @@
     <section class="card">
       <h2 data-el="Τι διαβάζεις;" data-en="What are you studying?">Τι διαβάζεις;</h2>
       <div class="row">
-        <div><label for="zone" data-el="Βαθμίδα" data-en="School level">Βαθμίδα</label><select id="zone"><option value="primary" data-el="Δημοτικό" data-en="Primary">Δημοτικό</option><option value="middle" data-el="Γυμνάσιο" data-en="Middle School">Γυμνάσιο</option><option value="high" data-el="Λύκειο" data-en="High School">Λύκειο</option></select></div>
+        <div><label for="zone" data-el="Βαθμίδα" data-en="School level">Βαθμίδα</label><select id="zone"><option value="primary" data-el="Δημοτικό" data-en="Primary">Δημοτικό</option><option value="middle" data-el="Γυμνάσιο" data-en="Middle School">Γυμνάσιο</option><option value="high" data-el="Λύκειο" data-en="High School">Λύκειο</option><option value="special" data-el="Ειδική Εκπαίδευση" data-en="Special Education">Ειδική Εκπαίδευση</option></select></div>
         <div><label for="grade" data-el="Τάξη" data-en="Grade">Τάξη</label><select id="grade"></select></div>
       </div>
       <div id="highSchoolFields" class="hidden">
@@ -60,11 +60,19 @@
         <div id="epalSectorField" class="hidden"><label for="epalSector" data-el="Τομέας ΕΠΑΛ" data-en="EPAL sector">Τομέας ΕΠΑΛ</label><select id="epalSector"></select></div>
         <div id="epalSpecialtyField" class="hidden"><label for="epalSpecialty" data-el="Ειδικότητα ΕΠΑΛ" data-en="EPAL specialty">Ειδικότητα ΕΠΑΛ</label><select id="epalSpecialty"></select></div>
       </div>
+      <div id="specialGateway" class="hidden notice">
+        <strong data-el="🏫 Ειδική Εκπαίδευση" data-en="🏫 Special Education">🏫 Ειδική Εκπαίδευση</strong><br>
+        <span data-el="Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές." data-en="Special Education uses separate adaptations, simplified quizzes and dedicated mappings. Open its dedicated route so those adaptations are preserved.">Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές.</span>
+        <div style="margin-top:10px"><a class="action main" href="/special-education.html" data-el="Άνοιξε Ειδική Εκπαίδευση →" data-en="Open Special Education →">Άνοιξε Ειδική Εκπαίδευση →</a></div>
+      </div>
+      <div id="standardStudyFields">
       <label for="subject" data-el="Μάθημα" data-en="Subject">Μάθημα</label><select id="subject"></select>
       <label for="topicPick" data-el="Ενότητα / θέμα" data-en="Unit / topic">Ενότητα / θέμα</label><select id="topicPick"></select>
       <label for="topicCustom" data-el="Ή γράψε δικό σου θέμα" data-en="Or enter your own topic">Ή γράψε δικό σου θέμα</label><textarea id="topicCustom" placeholder="π.χ. Σύγκριση δεκαδικών"></textarea>
       <p class="micro" data-el="Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη." data-en="Selections come from the site's Curriculum Map. If something is not mapped, you can enter it manually without presenting it as official curriculum.">Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη.</p>
 
+      </div>
+      <div id="standardStudyRest">
       <div class="upload">
         <strong data-el="📄 Δικές σου σημειώσεις" data-en="📄 Your own notes">📄 Δικές σου σημειώσεις</strong>
         <span class="micro" data-el="PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια." data-en="PDF with selectable text. It is read locally in your browser; only extracted text is sent to AI when you choose an AI action.">PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια.</span>
@@ -81,6 +89,7 @@
       <h3 data-el="Χρόνος" data-en="Time">Χρόνος</h3>
       <div class="time-grid"><div class="choice"><input id="t10" type="radio" name="time" value="10"><label for="t10">10′</label></div><div class="choice"><input id="t20" type="radio" name="time" value="20" checked><label for="t20">20′</label></div><div class="choice"><input id="t30" type="radio" name="time" value="30"><label for="t30">30′</label></div><div class="choice"><input id="t45" type="radio" name="time" value="45"><label for="t45">45′</label></div></div>
       <button class="primary" id="makePlan" type="button" data-el="Φτιάξε το πλάνο μελέτης" data-en="Build my study plan">Φτιάξε το πλάνο μελέτης</button>
+      </div>
     </section>
 
     <section class="card" aria-live="polite">
@@ -138,8 +147,12 @@
 
   function isEpal(){return $('zone').value==='high' && $('schoolType').value==='epal'}
   function refreshSchoolTypeFields(){
-    const high=$('zone').value==='high';
+    const z=$('zone').value,high=z==='high',special=z==='special';
     $('highSchoolFields').classList.toggle('hidden',!high);
+    $('specialGateway').classList.toggle('hidden',!special);
+    $('standardStudyFields').classList.toggle('hidden',special);
+    $('standardStudyRest').classList.toggle('hidden',special);
+    $('grade').closest('div').classList.toggle('hidden',special);
     const epal=high&&$('schoolType').value==='epal',g=$('grade').value;
     $('epalSectorField').classList.toggle('hidden',!(epal&&g==='b'));
     $('epalSpecialtyField').classList.toggle('hidden',!(epal&&g==='c'));
@@ -149,7 +162,7 @@
     $('epalSector').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose sector':'Γενική Παιδεία / διάλεξε τομέα')+'</option>'+(cat?.getSectors?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
     $('epalSpecialty').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose specialty':'Γενική Παιδεία / διάλεξε ειδικότητα')+'</option>'+(cat?.getSpecialties?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
   }
-  function populateGrades(){const z=$('zone').value;$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?'Grade '+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
+  function populateGrades(){const z=$('zone').value;if(z==='special'){refreshSchoolTypeFields();return}$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?'Grade '+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
   function subjectRows(){
     const z=$('zone').value,g=$('grade').value;
     if(isEpal()){

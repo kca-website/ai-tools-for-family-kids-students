@@ -1,6 +1,8 @@
 /**
- * Special Lyceum E.A.E. — exact annual mappings from the 2026–27 guidance.
- * Only subjects whose official PDF has been read section-by-section belong here.
+ * Special Lyceum E.A.E. — verified annual mappings from the 2026–27 guidance.
+ * coverageStatus:"exact" is reserved for section-by-section verified official guidance.
+ * coverageStatus:"framework" is used when the official 2026–27 E.A.E. guidance confirms
+ * the course/scope but the source does not yet support a safe closed section-level list.
  */
 (function(){
   "use strict";
@@ -282,6 +284,43 @@
         verificationBasis:"official-special-lyceum-annual-guidance",sourceTitle:"Ξένες Γλώσσες Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
         sourceUrl:FOREIGN_LANGUAGES_PDF,officialAnchors:secondForeignFramework,
         verificationNote:"Η επίσημη καθοδήγηση οργανώνεται με βάση επίπεδο γλωσσομάθειας, επικοινωνιακές ανάγκες και διαφοροποίηση. Οι επιλογές είναι framework διδασκαλίας και όχι κλειστή λίστα κεφαλαίων."
+      }),
+      "a|math":Object.freeze({
+        id:"special-lyceum-a-math-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"Μαθηματικά",subjectId:"math",sourceSubjectIds:Object.freeze(["math","mathematics","algebra","geometry"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance-index",sourceTitle:"Μαθηματικά Α΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
+        officialAnchors:Object.freeze([
+          "Άλγεβρα Γενικής Παιδείας — Α΄ Λυκείου Ε.Α.Ε.",
+          "Γεωμετρία Γενικής Παιδείας — Α΄ Λυκείου Ε.Α.Ε."
+        ]),
+        verificationNote:"Η επίσημη σελίδα ΙΕΠ 2026–27 επιβεβαιώνει τα δύο μαθήματα/κλάδους της Α΄ Λυκείου Ε.Α.Ε. Δεν έχει γίνει ακόμη ασφαλής section-level εξαγωγή του συνημμένου υλικού, επομένως οι επιλογές είναι course-level framework και δεν παρουσιάζονται ως κεφάλαια ή πλήρης ύλη."
+      }),
+      "b|math":Object.freeze({
+        id:"special-lyceum-b-math-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Μαθηματικά",subjectId:"math",sourceSubjectIds:Object.freeze(["math","mathematics","algebra","geometry","math-orientation"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance-index",sourceTitle:"Μαθηματικά Β΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
+        officialAnchors:Object.freeze([
+          "Άλγεβρα Γενικής Παιδείας — Β΄ Λυκείου Ε.Α.Ε.",
+          "Γεωμετρία Γενικής Παιδείας — Β΄ Λυκείου Ε.Α.Ε.",
+          "Μαθηματικά Ομάδας Προσανατολισμού — Β΄ Λυκείου Ε.Α.Ε."
+        ]),
+        verificationNote:"Η επίσημη σελίδα ΙΕΠ 2026–27 επιβεβαιώνει Άλγεβρα, Γεωμετρία και Μαθηματικά Ομάδας Προσανατολισμού για τη Β΄ Λυκείου Ε.Α.Ε. Δεν μετατρέπονται σε τεχνητή section-level ύλη πριν αναγνωστεί ασφαλώς το αντίστοιχο επίσημο υλικό."
+      }),
+      "c|math":Object.freeze({
+        id:"special-lyceum-c-math-framework-2026-27",grade:"C",gradeId:"c",gradeLabel:"Γ΄ Λυκείου",
+        subject:"Μαθηματικά",subjectId:"math",sourceSubjectIds:Object.freeze(["math","mathematics","math-general","math-orientation"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-09-28",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-special-lyceum-annual-guidance-index",sourceTitle:"Μαθηματικά Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",
+        sourceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
+        officialAnchors:Object.freeze([
+          "Μαθηματικά Γενικής Παιδείας — Γ΄ Λυκείου Ε.Α.Ε.",
+          "Μαθηματικά Ομάδας Προσανατολισμού — Γ΄ Λυκείου Ε.Α.Ε."
+        ]),
+        verificationNote:"Η επίσημη σελίδα ΙΕΠ 2026–27 επιβεβαιώνει Μαθηματικά Γενικής Παιδείας και Μαθηματικά Ομάδας Προσανατολισμού για τη Γ΄ Λυκείου Ε.Α.Ε. Η εγγραφή παραμένει framework μέχρι να τεκμηριωθούν οι πραγματικές section-level ενότητες από το επίσημο αρχείο."
       }),
       "a|biology":Object.freeze({
         id:"special-lyceum-a-biology-official-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",

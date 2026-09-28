@@ -54,6 +54,12 @@
         <div><label for="zone" data-el="Βαθμίδα" data-en="School level">Βαθμίδα</label><select id="zone"><option value="primary" data-el="Δημοτικό" data-en="Primary">Δημοτικό</option><option value="middle" data-el="Γυμνάσιο" data-en="Middle School">Γυμνάσιο</option><option value="high" data-el="Λύκειο" data-en="High School">Λύκειο</option></select></div>
         <div><label for="grade" data-el="Τάξη" data-en="Grade">Τάξη</label><select id="grade"></select></div>
       </div>
+      <div id="highSchoolFields" class="hidden">
+        <label for="schoolType" data-el="Τύπος Λυκείου" data-en="High-school type">Τύπος Λυκείου</label>
+        <select id="schoolType"><option value="gel" data-el="ΓΕΛ" data-en="General Lyceum (GEL)">ΓΕΛ</option><option value="epal" data-el="ΕΠΑΛ" data-en="Vocational Lyceum (EPAL)">ΕΠΑΛ</option></select>
+        <div id="epalSectorField" class="hidden"><label for="epalSector" data-el="Τομέας ΕΠΑΛ" data-en="EPAL sector">Τομέας ΕΠΑΛ</label><select id="epalSector"></select></div>
+        <div id="epalSpecialtyField" class="hidden"><label for="epalSpecialty" data-el="Ειδικότητα ΕΠΑΛ" data-en="EPAL specialty">Ειδικότητα ΕΠΑΛ</label><select id="epalSpecialty"></select></div>
+      </div>
       <label for="subject" data-el="Μάθημα" data-en="Subject">Μάθημα</label><select id="subject"></select>
       <label for="topicPick" data-el="Ενότητα / θέμα" data-en="Unit / topic">Ενότητα / θέμα</label><select id="topicPick"></select>
       <label for="topicCustom" data-el="Ή γράψε δικό σου θέμα" data-en="Or enter your own topic">Ή γράψε δικό σου θέμα</label><textarea id="topicCustom" placeholder="π.χ. Σύγκριση δεκαδικών"></textarea>
@@ -130,11 +136,40 @@
   function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');populateGrades();}
   $('elBtn').onclick=()=>{lang='el';localize()}; $('enBtn').onclick=()=>{lang='en';localize()};
 
-  function populateGrades(){const z=$('zone').value;$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?'Grade '+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');populateSubjects()}
-  function populateSubjects(){const r=resolver(),z=$('zone').value,g=$('grade').value,rows=r?.getSubjects?.(z,g)||[];$('subject').innerHTML=rows.length?rows.map(s=>'<option value="'+esc(s.id||s.quizId)+'">'+esc(lang==='en'?(s.subjectLabelEn||s.subjectLabelEl):(s.subjectLabelEl||s.subjectLabelEn||s.id))+'</option>').join(''):'<option value="">'+(lang==='en'?'No mapped subjects':'Δεν βρέθηκαν χαρτογραφημένα μαθήματα')+'</option>';populateTopics()}
-  function populateTopics(){const r=resolver(),z=$('zone').value,g=$('grade').value,s=$('subject').value,rows=r?.getTopics?.(z,g,s)||[];$('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.titleEl):(t.labelEl||t.titleEl||t.labelEn||t.id))+'</option>').join('')}
+  function isEpal(){return $('zone').value==='high' && $('schoolType').value==='epal'}
+  function refreshSchoolTypeFields(){
+    const high=$('zone').value==='high';
+    $('highSchoolFields').classList.toggle('hidden',!high);
+    const epal=high&&$('schoolType').value==='epal',g=$('grade').value;
+    $('epalSectorField').classList.toggle('hidden',!(epal&&g==='b'));
+    $('epalSpecialtyField').classList.toggle('hidden',!(epal&&g==='c'));
+  }
+  function populateEpalChoices(){
+    const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+    $('epalSector').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose sector':'Γενική Παιδεία / διάλεξε τομέα')+'</option>'+(cat?.getSectors?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
+    $('epalSpecialty').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose specialty':'Γενική Παιδεία / διάλεξε ειδικότητα')+'</option>'+(cat?.getSpecialties?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
+  }
+  function populateGrades(){const z=$('zone').value;$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?'Grade '+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
+  function subjectRows(){
+    const z=$('zone').value,g=$('grade').value;
+    if(isEpal()){
+      const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+      return cat?.getSubjects?.(g,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')||[];
+    }
+    return resolver()?.getSubjects?.(z,g)||[];
+  }
+  function populateSubjects(){const rows=subjectRows();$('subject').innerHTML=rows.length?rows.map(s=>'<option value="'+esc(s.id||s.quizId)+'">'+esc(lang==='en'?(s.subjectLabelEn||s.subjectLabelEl):(s.subjectLabelEl||s.subjectLabelEn||s.id))+'</option>').join(''):'<option value="">'+(lang==='en'?'No mapped subjects':'Δεν βρέθηκαν χαρτογραφημένα μαθήματα')+'</option>';populateTopics()}
+  function populateTopics(){
+    const z=$('zone').value,g=$('grade').value,s=$('subject').value;
+    let rows=[];
+    if(isEpal()){
+      const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
+      rows=cat?.getSubject?.(g,s,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')?.topics||[];
+    }else rows=resolver()?.getTopics?.(z,g,s)||[];
+    $('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.label||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.label||t.titleEl):(t.labelEl||t.label||t.titleEl||t.labelEn||t.id))+'</option>').join('');
+  }
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-  $('zone').onchange=populateGrades;$('grade').onchange=populateSubjects;$('subject').onchange=populateTopics;$('topicPick').onchange=()=>{if($('topicPick').value)$('topicCustom').value=''};
+  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=populateTopics;$('topicPick').onchange=()=>{if($('topicPick').value)$('topicCustom').value=''};
 
   $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:48000,maxPages:80});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);$('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
 
@@ -150,11 +185,11 @@
   function baseTutor(){const z=$('zone').value;return z==='primary'?'/primary/guardian/tutor':z==='middle'?'/middle/guardian/tutor':'/high/student/tutor'}
   function prepareSession(action){if(attached?.text){try{sessionStorage.setItem('aitools4kidsStudyDocument',JSON.stringify({name:attached.name,text:attached.text,pagesRead:attached.pagesRead,totalPages:attached.totalPages,truncated:attached.truncated,createdAt:Date.now()}))}catch(_){}}else{sessionStorage.removeItem('aitools4kidsStudyDocument');}
     try{sessionStorage.setItem('aitools4kidsStudyAction',action||'')}catch(_){}}
-  function tutorUrl(action){const topic=selectedTopic(),goal=document.querySelector('input[name="goal"]:checked').value;const mode=action==='quiz'||action==='weakspots'||goal==='test'?'challenge':action==='flashcards'||action==='summary'||goal==='revise'?'review':'understand';const p=new URLSearchParams({mode,grade:$('grade').value,subject:$('subject').value,topic:$('topicPick').value,topicText:topic,studyAction:action||''});return baseTutor()+'?'+p.toString()}
+  function tutorUrl(action){const topic=selectedTopic(),goal=document.querySelector('input[name="goal"]:checked').value;const mode=action==='quiz'||action==='weakspots'||goal==='test'?'challenge':action==='flashcards'||action==='summary'||goal==='revise'?'review':'understand';const data={mode,grade:$('grade').value,subject:$('subject').value,topic:$('topicPick').value,topicText:topic,studyAction:action||''};if(isEpal()){data.schoolType='epal';if($('grade').value==='b'&&$('epalSector').value)data.sector=$('epalSector').value;if($('grade').value==='c'&&$('epalSpecialty').value)data.specialty=$('epalSpecialty').value}const p=new URLSearchParams(data);return baseTutor()+'?'+p.toString()}
   $('makePlan').onclick=()=>{const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}const goal=document.querySelector('input[name="goal"]:checked').value,total=Number(document.querySelector('input[name="time"]:checked').value),mins=alloc(total),steps=translatedSteps(goal);$('plan').innerHTML=steps.map((s,i)=>'<div class="step"><div class="step-head"><strong>'+(i+1)+'. '+esc(s[0])+'</strong><span class="mins">'+mins[i]+'′</span></div><p>'+esc(s[1])+'</p></div>').join('');$('tutorLink').href=tutorUrl('');$('empty').classList.add('hidden');$('result').classList.remove('hidden')};
   document.querySelectorAll('[data-action]').forEach(btn=>btn.onclick=()=>{const action=btn.dataset.action;const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}prepareSession(action);location.href=tutorUrl(action)});
   $('tutorLink').onclick=e=>{prepareSession('');};
-  populateGrades();localize();
+  populateEpalChoices();populateGrades();localize();
 })();
 </script>
 </body>

@@ -77,6 +77,12 @@
         <strong data-el="📄 Δικές σου σημειώσεις" data-en="📄 Your own notes">📄 Δικές σου σημειώσεις</strong>
         <span class="micro" data-el="PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια." data-en="PDF with selectable text. It is read locally in your browser; only extracted text is sent to AI when you choose an AI action.">PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια.</span>
         <div class="upload-line"><label class="upload-label" for="notesFile" data-el="Ανέβασε PDF" data-en="Upload PDF">Ανέβασε PDF</label><input id="notesFile" type="file" accept="application/pdf,.pdf"><span class="upload-status" id="notesStatus" aria-live="polite"></span></div>
+        <label for="notesPaste" data-el="Ή επικόλλησε σημειώσεις" data-en="Or paste notes">Ή επικόλλησε σημειώσεις</label>
+        <textarea id="notesPaste" placeholder="Επικόλλησε εδώ σημειώσεις ή κείμενο..."></textarea>
+        <div class="upload-line">
+          <button class="upload-label" id="usePastedNotes" type="button" data-el="Χρησιμοποίησε αυτό το κείμενο" data-en="Use this text">Χρησιμοποίησε αυτό το κείμενο</button>
+          <button class="upload-label hidden" id="clearNotes" type="button" data-el="Καθάρισε σημειώσεις" data-en="Clear notes">Καθάρισε σημειώσεις</button>
+        </div>
       </div>
 
       <h3 data-el="Στόχος μελέτης" data-en="Study goal">Στόχος μελέτης</h3>
@@ -185,6 +191,22 @@
   $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=populateTopics;$('topicPick').onchange=()=>{if($('topicPick').value)$('topicCustom').value=''};
 
   $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:48000,maxPages:80});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);$('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
+  function refreshAttachedUi(){
+    const has=!!attached?.text;
+    $('clearNotes').classList.toggle('hidden',!has);
+    if(has && !String($('notesStatus').textContent||'').trim()) $('notesStatus').textContent=attached.name|| (lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες');
+  }
+  $('usePastedNotes').onclick=()=>{
+    const text=$('notesPaste').value.trim();
+    if(!text){$('notesPaste').focus();return}
+    attached={name:lang==='en'?'pasted-notes.txt':'επικολλημένες-σημειώσεις.txt',text:text.slice(0,48000),pagesRead:1,totalPages:1,truncated:text.length>48000};
+    $('notesStatus').textContent=(lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες')+(attached.truncated?(lang==='en'?' · first part used':' · χρησιμοποιήθηκε το πρώτο μέρος'):'');
+    refreshAttachedUi();
+  };
+  $('clearNotes').onclick=()=>{
+    attached=null;$('notesFile').value='';$('notesPaste').value='';$('notesStatus').textContent='';refreshAttachedUi();
+  };
+  $('notesFile').addEventListener('change',()=>setTimeout(refreshAttachedUi,0));
 
   function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}
   function alloc(total){const w=[.27,.23,.3,.2];let a=w.map(x=>Math.max(2,Math.round(total*x))),d=total-a.reduce((x,y)=>x+y,0);for(let i=0;d!==0;i=(i+1)%a.length){if(d>0){a[i]++;d--}else if(a[i]>2){a[i]--;d++}}return a}
@@ -202,7 +224,7 @@
   $('makePlan').onclick=()=>{const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}const goal=document.querySelector('input[name="goal"]:checked').value,total=Number(document.querySelector('input[name="time"]:checked').value),mins=alloc(total),steps=translatedSteps(goal);$('plan').innerHTML=steps.map((s,i)=>'<div class="step"><div class="step-head"><strong>'+(i+1)+'. '+esc(s[0])+'</strong><span class="mins">'+mins[i]+'′</span></div><p>'+esc(s[1])+'</p></div>').join('');$('tutorLink').href=tutorUrl('');$('empty').classList.add('hidden');$('result').classList.remove('hidden')};
   document.querySelectorAll('[data-action]').forEach(btn=>btn.onclick=()=>{const action=btn.dataset.action;const topic=selectedTopic();if(!topic&&!attached){$('topicCustom').focus();return}prepareSession(action);location.href=tutorUrl(action)});
   $('tutorLink').onclick=e=>{prepareSession('');};
-  populateEpalChoices();populateGrades();localize();
+  populateEpalChoices();populateGrades();localize();refreshAttachedUi();
 })();
 </script>
 </body>

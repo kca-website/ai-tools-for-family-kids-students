@@ -8,6 +8,24 @@ const indexKeys=[...indexSource.matchAll(/Object\.freeze\(\{key:"([^"]+)"/g)].ma
 assert.ok(indexKeys.length>=14,'Special Lyceum official guidance index unexpectedly small');
 assert.equal(new Set(indexKeys).size,indexKeys.length,'Special Lyceum official guidance index contains duplicate keys');
 
+
+const timetableMatch=indexSource.match(/officialTimetable:Object\.freeze\(\{([\s\S]*?)\n\s*\}\),\n\s*sourceUrl:/);
+assert.ok(timetableMatch,'Official Special Lyceum timetable metadata is missing');
+const timetable=timetableMatch[1];
+for(const token of ['43941/Δ3/07-04-2026','ΦΕΚ Β΄ 2133/09-04-2026','ΕΡΓΑ46ΝΚΠΔ-ΜΝΡ','effectiveFrom:"2026-2027"']){
+  assert.ok(timetable.includes(token),`Official timetable metadata missing: ${token}`);
+}
+const gradeScope={
+  a:['ancient','language-literature','religion','ethics','history','math','english','second-foreign-language','physics','chemistry','biology','physical-education','civics','informatics'],
+  b:['ancient','language-literature','math','physics','chemistry','biology','informatics','history','philosophy','religion','ethics','english','second-foreign-language','physical-education','latin'],
+  c:['religion','ethics','language-literature','history','math','english','physical-education','ancient','latin','physics','chemistry','biology','informatics','economics']
+};
+for(const [grade,subjects] of Object.entries(gradeScope)){
+  const row=timetable.match(new RegExp(grade+':Object\\.freeze\\(\\[([^\\]]+)\\]\\)'));
+  assert.ok(row,`Official timetable grade scope missing: ${grade}`);
+  for(const subject of subjects) assert.ok(row[1].includes('\"'+subject+'\"'),`Official timetable ${grade.toUpperCase()} missing ${subject}`);
+}
+
 const subjectToGuidance={
   language:'language-literature',
   biology:'biology',

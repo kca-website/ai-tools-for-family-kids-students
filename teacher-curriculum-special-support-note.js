@@ -66,9 +66,13 @@
       const sourceLink=source?` <a href="${source}" target="_blank" rel="noopener">Επίσημες οδηγίες ↗</a>`:"";
       const scope=String(selected.officialPendingScope||"").trim();
       const scopeLine=scope?`<br><strong>Επίσημο πεδίο για την τάξη:</strong> ${scope}.`:"";
+      const partial=String(selected.officialPendingStatus||"")==="published-part-1";
+      const publishedText=partial
+        ?"Έχει δημοσιευθεί μόνο το Α΄ μέρος των επίσημων οδηγιών 2026–27 (Σεπτέμβριος–Νοέμβριος 2026), ενώ η συνέχεια και η ακριβής section-level χαρτογράφηση παραμένουν σε εκκρεμότητα."
+        :"Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά η ακριβής section-level χαρτογράφηση δεν έχει ακόμη ολοκληρωθεί.";
       note.innerHTML=count
-        ?`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά η ακριβής section-level χαρτογράφηση δεν έχει ακόμη ολοκληρωθεί.</strong>${scopeLine} Οι ${count} επιλογές που βλέπεις είναι μόνο υποστηρικτικό πλαίσιο και δεν πρέπει να θεωρηθούν αυτούσια φετινή ύλη. Ο εκπαιδευτικός επιβεβαιώνει την πραγματική ενότητα που διδάσκει.${sourceLink}`
-        :`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά η ακριβής section-level χαρτογράφηση δεν έχει ακόμη ολοκληρωθεί.</strong>${scopeLine} Χρησιμοποίησε τον πραγματικό τίτλο κεφαλαίου/ενότητας από την επίσημη πηγή αντί να επινοηθεί ύλη.${sourceLink}`;
+        ?`<strong>◷ ${publishedText}</strong>${scopeLine} Οι ${count} επιλογές που βλέπεις είναι μόνο υποστηρικτικό πλαίσιο και δεν πρέπει να θεωρηθούν αυτούσια φετινή ύλη. Ο εκπαιδευτικός επιβεβαιώνει την πραγματική ενότητα που διδάσκει.${sourceLink}`
+        :`<strong>◷ ${publishedText}</strong>${scopeLine} Χρησιμοποίησε τον πραγματικό τίτλο κεφαλαίου/ενότητας από την επίσημη πηγή αντί να επινοηθεί ύλη.${sourceLink}`;
       return;
     }
     const entries=Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).filter(e=>entryMatches(e,c,gid,glabel,sid,slabel));

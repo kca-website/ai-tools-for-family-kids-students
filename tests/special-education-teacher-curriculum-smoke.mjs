@@ -190,10 +190,12 @@ try{
   assert.ok(mathOption,'Special Lyceum A must expose Mathematics in the Teacher Assistant');
   await page.selectOption('#subject',mathOption.value);
   const specialLycMathNote=await page.locator('#curriculumNote').innerText();
-  assert.match(specialLycMathNote,/οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί/i,'Special Lyceum Math must visibly report published 2026-27 guidance');
-  assert.match(specialLycMathNote,/υποστηρικτικό πλαίσιο/i,'Special Lyceum Math must remain support-only until exact E.A.E. sections are mapped');
-  assert.match(specialLycMathNote,/Άλγεβρα και Γεωμετρία Γενικής Παιδείας/i,'Special Lyceum Math pending notice must expose the official grade-specific scope');
-  assert.ok(await page.locator('#curriculumNote a[href*="iep.edu.gr"]').count(),'Special Lyceum Math pending status must link to an official IEP source');
+  assert.match(specialLycMathNote,/επίσημο πλαίσιο 2026–27/i,'Special Lyceum Math must visibly report verified 2026-27 framework coverage');
+  assert.match(specialLycMathNote,/δεν αποτελούν υποχρεωτική λίστα|framework/i,'Special Lyceum Math must remain framework-only until exact E.A.E. sections are mapped');
+  assert.ok(await page.locator('#curriculumNote a[href*="iep.edu.gr"]').count(),'Special Lyceum Math framework must link to the official IEP source');
+  const specialLycMathTopics=await page.locator('#unit option').allTextContents();
+  assert.ok(specialLycMathTopics.some(x=>/Άλγεβρα Γενικής Παιδείας.*Α΄ Λυκείου Ε\.Α\.Ε\./i.test(x)),'Special Lyceum A Math must expose the verified Algebra course-level anchor');
+  assert.ok(specialLycMathTopics.some(x=>/Γεωμετρία Γενικής Παιδείας.*Α΄ Λυκείου Ε\.Α\.Ε\./i.test(x)),'Special Lyceum A Math must expose the verified Geometry course-level anchor');
 
   const ethicsOption=specialLycAOptions.find(o=>/ηθικ/i.test(o.label));
   assert.ok(ethicsOption,'Special Lyceum A must expose Ethics when the first official 2026-27 part is published');

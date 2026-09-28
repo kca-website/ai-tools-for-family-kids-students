@@ -10,7 +10,7 @@ const teacherApi=readFileSync('api/teacher-assistant.js','utf8');
 const teacherSource=readFileSync('teacher-assistant.html','utf8');
 const schoolAiSource=readFileSync('school-ai-use.html','utf8');
 const licenseSource=readFileSync('LICENSE','utf8');
-const aboutSource=readFileSync('about.html','utf8');
+const aboutSource=readFileSync('about.html','utf8');\nconst methodologySource=readFileSync('methodology.html','utf8');\nconst classroomSource=readFileSync('classroom.html','utf8');
 assert.match(tutorApi,/provider_limit/,'Tutor API must expose an explicit provider-limit state');
 assert.match(teacherApi,/provider_limit/,'Teacher API must expose an explicit provider-limit state');
 assert.match(teacherSource,/params\.set\('classroom','1'\)/,'Teacher deep links must enable classroom mode');
@@ -49,9 +49,9 @@ try{
   assert.ok(greekBadges.length===after,'Every filtered tool must expose its Greek-support badge');
   assert.ok(greekBadges.every(t=>/Ελληνικά:\s*Ναι/.test(t)),`Greek filter leaked non-verified cards: ${greekBadges.join(' | ')}`);
 
-  await page.goto(URL+'about.html',{waitUntil:'domcontentloaded',timeout:30000});
+  await page.goto(URL+'methodology.html',{waitUntil:'domcontentloaded',timeout:30000});\n  assert.match(await page.locator('h1').innerText(),/επιλέγουμε και ελέγχουμε τα εργαλεία/);\n  assert.match(await page.locator('body').innerText(),/Cloudflare Workers AI[\\s\\S]*Groq ως εφεδρικό πάροχο/);\n\n  await page.goto(URL+'about.html',{waitUntil:'domcontentloaded',timeout:30000});
   const faq=page.locator('details');
-  assert.equal(await faq.count(),6,'About/FAQ must keep six compact disclosures');
+  assert.equal(await faq.count(),6,'About/FAQ must keep six compact disclosures');\n  assert.match(await page.locator('.team').innerText(),/Ιωάννα Κουμάρη/,'About team section must include Ioanna Koumari');
   assert.equal(await page.locator('details[open]').count(),0,'FAQ disclosures must start collapsed');
 
   await page.goto(URL+'teacher-assistant.html',{waitUntil:'domcontentloaded',timeout:30000});

@@ -124,6 +124,7 @@
           <div id="aiWorkspace" class="ai-workspace hidden">
             <div class="ai-workspace__head"><span id="workspaceTitle" class="ai-workspace__title">AI Μελέτη</span></div><span id="providerStatus" class="hidden" aria-hidden="true"></span>
             <div id="aiOutput" class="ai-output"></div>
+            <div id="sourceEvidence" class="notice hidden"></div>
             <div id="answerBox" class="answer-box hidden">
               <textarea id="studyAnswer" placeholder="Γράψε την απάντησή σου..."></textarea>
               <button id="sendStudyAnswer" class="primary" type="button" data-el="Απάντησε" data-en="Answer">Απάντησε</button>
@@ -172,7 +173,8 @@
 <script src="/pdf-text-reader.js"></script>
 <script>
 (() => {
-  let lang='el', attached=null;
+  let lang='el', attached=null, currentOfficialSource=null;
+  const officialSourceCache=new Map();
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
   const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']]};
   function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');populateGrades();}
@@ -215,13 +217,14 @@
     $('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.label||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.label||t.titleEl):(t.labelEl||t.label||t.titleEl||t.labelEn||t.id))+'</option>').join('');
   }
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=populateTopics;$('topicPick').onchange=()=>{if($('topicPick').value)$('topicCustom').value=''};
+  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value)$('topicCustom').value=''};
 
   $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:300000,maxPages:200});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);$('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
   function refreshAttachedUi(){
     const has=!!attached?.text;
     $('clearNotes').classList.toggle('hidden',!has);
     $('sourceModeNotice').classList.toggle('hidden',!has);
+    if(has) sourceEvidenceUi(null);
     if(has && !String($('notesStatus').textContent||'').trim()) $('notesStatus').textContent=attached.name|| (lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες');
   }
   $('usePastedNotes').onclick=()=>{
@@ -235,6 +238,39 @@
     attached=null;$('notesFile').value='';$('notesPaste').value='';$('notesStatus').textContent='';refreshAttachedUi();
   };
   $('notesFile').addEventListener('change',()=>setTimeout(refreshAttachedUi,0));
+
+  function selectedSubjectId(){return $('subject').value||''}
+  function sourceEvidenceUi(source){
+    currentOfficialSource=source||null;
+    const box=$('sourceEvidence');
+    if(!box)return;
+    if(!source?.grounded){
+      box.classList.add('hidden');
+      box.innerHTML='';
+      return;
+    }
+    const label=lang==='en'?'Based on the official school textbook':'Βασισμένο στο επίσημο σχολικό βιβλίο';
+    const link=source.sourceUrl?'<a href="'+esc(source.sourceUrl)+'" target="_blank" rel="noopener noreferrer" style="margin-left:6px">'+esc(lang==='en'?'Open source':'Άνοιγμα πηγής')+'</a>':'';
+    box.innerHTML='📘 <strong>'+esc(label)+'</strong> · '+esc(source.bookTitle||'')+link;
+    box.classList.remove('hidden');
+  }
+  async function officialSchoolbookSource(){
+    if(attached?.text){sourceEvidenceUi(null);return null}
+    const subject=selectedSubjectId(),topic=selectedTopic();
+    if(!subject||!topic){sourceEvidenceUi(null);return null}
+    const key=subject+'||'+topic;
+    if(officialSourceCache.has(key)){
+      const cached=officialSourceCache.get(key);
+      sourceEvidenceUi(cached);
+      return cached;
+    }
+    try{
+      const res=await fetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic),{headers:{'Accept':'application/json'}});
+      const body=await res.json().catch(()=>null);
+      if(!res.ok||!body?.grounded){officialSourceCache.set(key,null);sourceEvidenceUi(null);return null}
+      officialSourceCache.set(key,body);sourceEvidenceUi(body);return body;
+    }catch(_){sourceEvidenceUi(null);return null}
+  }
 
   function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}
   function selectedSubjectLabel(){const opt=$('subject').selectedOptions[0];return opt?.textContent?.trim()||$('subject').value||''}
@@ -347,11 +383,14 @@
       '\nReturn this JSON shape exactly: {"title":"...","focus":"...","steps":[{"title":"...","minutes":5,"action":"..."}],"final_check":"..."}. The sum of step minutes should be approximately '+total+'. Use 3–5 steps.';
 
     try{
+      const officialSource=attached?.text?null:await officialSchoolbookSource();
       const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         system,prompt,audience:'study_user',task:'study_plan',mode:'organize',
         grade,subject,topic,
-        documentText:attached?.text?sourceExcerpt(attached.text,prompt,28000,!topic):'',
-        documentName:attached?.name||''
+        documentText:attached?.text?sourceExcerpt(attached.text,prompt,28000,!topic):(officialSource?.text||''),
+        documentName:attached?.name||(officialSource?.bookTitle||''),
+        documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
+        documentSourceUrl:officialSource?.sourceUrl||''
       })});
       const body=await res.json().catch(()=>({}));
       if(!res.ok) throw new Error(body?.message||'AI plan failed');
@@ -407,13 +446,16 @@
 
   async function callStudyServer(action,promptOverride=''){
     const cfg=actionConfig(action);
+    const officialSource=attached?.text?null:await officialSchoolbookSource();
     const payload={
       system:cfg.system,
       prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
       audience:'study_user',task:cfg.task,mode:cfg.mode,
       grade:selectedGradeLabel(),subject:selectedSubjectLabel(),topic:selectedTopic(),
-      documentText:attached?.text?sourceExcerpt(attached.text,(promptOverride||selectedTopic()||action),action==='quickreview'?24000:20000,false):'',
-      documentName:attached?.name||''
+      documentText:attached?.text?sourceExcerpt(attached.text,(promptOverride||selectedTopic()||action),action==='quickreview'?24000:20000,false):(officialSource?.text||''),
+      documentName:attached?.name||(officialSource?.bookTitle||''),
+      documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
+      documentSourceUrl:officialSource?.sourceUrl||''
     };
     lastServerPayload={action,payload};
     const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
@@ -537,7 +579,10 @@
     try{
       const puter=await loadPuter();
       const p=lastServerPayload.payload;
-      const doc=p.documentText?'\n\nUSER MATERIAL:\n'+p.documentText:'';
+      const sourceRule=p.documentText?(p.documentKind==='official_schoolbook'
+        ?'\n\nOFFICIAL SCHOOLBOOK SOURCE — SOURCE ONLY. Use only the source below for factual claims. Do not fill gaps from model memory. If a point is unsupported, say so.\n'
+        :'\n\nUSER MATERIAL — SOURCE ONLY. Use only the material below for factual claims. Do not fill gaps from model memory.\n'):'';
+      const doc=p.documentText?sourceRule+p.documentText:'';
       const result=await puter.ai.chat([{role:'system',content:p.system+doc},{role:'user',content:p.prompt}],{model:'gpt-5.6-luna'});
       const text=typeof result==='string'?result:(result?.message?.content||result?.content||'');
       $('providerStatus').textContent='Puter';

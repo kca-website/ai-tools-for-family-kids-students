@@ -43,6 +43,21 @@ try{
   assert.ok(informaticsResolved[0].topics.some(t=>/Βασικές Έννοιες Πληροφορικής/.test(t.label)));
   assert.ok(informaticsResolved[1].topics.some(t=>/Ψηφιακός Κόσμος/.test(t.label)));
   assert.ok(informaticsResolved[2].topics.some(t=>/Πρόβλημα – Αλγόριθμος/.test(t.label)));
+  const informaticsExpected={
+    a:['Διαδίκτυο, Ιστορία του Διαδικτύου, Υπηρεσίες Διαδικτύου','Βασικές Έννοιες Πληροφορικής','Το Υλικό του Υπολογιστή','Κίνδυνοι στο Διαδίκτυο – Κανόνες Συμπεριφοράς','Επεξεργασία Κειμένου – Μορφοποίηση Γραμματοσειράς και Παραγράφου'],
+    b:['Ψηφιακός Κόσμος','Το Εσωτερικό του Υπολογιστή','Δίκτυα Υπολογιστών','Χρήση συναρτήσεων στο λογισμικό Υπολογιστικά Φύλλα','Παρουσιάσεις – Διαχείριση Διαφανειών, Εναλλαγή Διαφανειών, Κινήσεις'],
+    c:['Πρόβλημα – Αλγόριθμος','Αριθμητικές Πράξεις, Εντολές Εξόδου','Εντολές Εξόδου, Μεταβλητές','Σχεδιασμός γεωμετρικών σχημάτων – Επανάληψη – Διαδικασίες','Επιλέγοντας']
+  };
+  const legacyGenericInformatics=[
+    'Ανάλυση προβλήματος πριν από τον κώδικα',
+    'Αλγόριθμος ή διάγραμμα βημάτων',
+    'Έλεγχος και διόρθωση δικού σου κώδικα',
+    'Ψηφιακή ασφάλεια και κριτική χρήση AI'
+  ];
+  for(const row of informaticsResolved){
+    assert.deepEqual(row.topics.map(t=>t.label),informaticsExpected[row.grade],`Middle-school Informatics ${row.grade.toUpperCase()} must keep the verified official titles in source order`);
+    assert.ok(row.topics.every(t=>!legacyGenericInformatics.includes(t.label)),`Middle-school Informatics ${row.grade.toUpperCase()} must not regress to generic AI/coding prompts`);
+  }
 
   const peResolved=await page.evaluate(()=>{
     const r=window.AITOOLSKIDS_CURRICULUM_RESOLVER;

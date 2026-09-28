@@ -26,6 +26,9 @@
       curriculumCardBadge: "Ύλη 2026–27",
       curriculumCardTitle: "Ελληνικός Χάρτης Ύλης",
       curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα → AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
+      studyCardBadge: "Νέο · Δωρεάν",
+      studyCardTitle: "AI Μελέτη",
+      studyCardDesc: "Ύλη ή δικές σου σημειώσεις → εξήγηση, κάρτες, quiz, προφορική/γραπτή πρόβα, εντοπισμός κενών και πλάνο.",
       mapTitle: "🧭 Χάρτης Εξάσκησης",
       mapLead: "Δες πού χρειάζεσαι λίγη παραπάνω εξάσκηση.",
       mapDesc: "Σύντομο τεστ περίπου 2 λεπτών, χωρίς βαθμό.",
@@ -84,6 +87,9 @@
       curriculumCardBadge: "Curriculum 2026–27",
       curriculumCardTitle: "Greek Curriculum Map",
       curriculumCardDesc: "Grade → subject → real curriculum unit → AI help, practice and visual explanation.",
+      studyCardBadge: "New · Free",
+      studyCardTitle: "AI Study",
+      studyCardDesc: "Curriculum or your own notes → explanation, recall cards, quizzes, oral/written practice, gap finding and a study plan.",
       mapTitle: "🧭 Practice Map",
       mapLead: "See where a little more practice could help.",
       mapDesc: "A short check of about 2 minutes, with no grade.",
@@ -268,6 +274,31 @@
     return card;
   }
 
+  function ensureStudyCard(){
+    const grid = document.getElementById("zoneGrid");
+    if(!grid) return null;
+    let card = document.getElementById("homeStudyZoneCard");
+    if(!card){
+      card = document.createElement("a");
+      card.id = "homeStudyZoneCard";
+      card.className = "zone-card home-v8-study-card";
+      card.href = "/study.html";
+      card.innerHTML = '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label"></p><p class="zone-card__age"></p><p class="zone-card__desc"></p>';
+    }
+    const curriculum = ensureCurriculumMapCard();
+    if(curriculum?.parentElement === grid){
+      if(card.previousElementSibling !== curriculum) curriculum.insertAdjacentElement("afterend", card);
+    }else if(card.parentElement !== grid){
+      grid.appendChild(card);
+    }
+    const copy = currentCopy();
+    card.querySelector(".zone-card__label").textContent = copy.studyCardTitle;
+    card.querySelector(".zone-card__age").textContent = copy.studyCardBadge;
+    card.querySelector(".zone-card__desc").textContent = copy.studyCardDesc;
+    card.setAttribute("aria-label", `${copy.studyCardTitle}: ${copy.studyCardBadge}`);
+    return card;
+  }
+
   function helpersMarkup(){
     const c = currentCopy();
     return `
@@ -446,6 +477,7 @@
     ensureMainShell();
     ensureHigherEducationPilot();
     ensureCurriculumMapCard();
+    ensureStudyCard();
     ensureEngSection();
     document.getElementById("homeV8FooterExtra")?.remove();
     suppressLegacyInjectedBlocks();

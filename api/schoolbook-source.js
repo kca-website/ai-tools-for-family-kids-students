@@ -5,7 +5,10 @@ const BOOKS = {
   "istoria-b-gymnasiou": {
     title: "Μεσαιωνική και Νεότερη Ιστορία Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2198/Istoria_B-Gymnasiou_html-empl/",
-    mode: "history"
+    mode: "history",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
@@ -79,6 +82,62 @@ const ALIASES = {
   "biology-g-gymnasiou": "biologia-g-gymnasiou"
 };
 
+// Exact 2026-27 History B curriculum allowlist, verified against the official
+// IEP annual guidance. Parent nodes aggregate only their included descendants;
+// pages that exist in the book but are absent from this map fail closed.
+const HISTORY_B_2026_2027_PATHS = Object.freeze({
+  "1": ["index1_1_1.html", "index1_2_1.html", "index1_2_2.html"],
+  "1.1": ["index1_1_1.html"],
+  "1.1.1": ["index1_1_1.html"],
+  "1.2": ["index1_2_1.html", "index1_2_2.html"],
+  "1.2.1": ["index1_2_1.html"],
+  "1.2.2": ["index1_2_2.html"],
+  "2": ["index2_1_1.html", "index2_1_2.html", "index2_2_1.html", "index2_2_2.html"],
+  "2.1": ["index2_1_1.html", "index2_1_2.html"],
+  "2.1.1": ["index2_1_1.html"],
+  "2.1.2": ["index2_1_2.html"],
+  "2.2": ["index2_2_1.html", "index2_2_2.html"],
+  "2.2.1": ["index2_2_1.html"],
+  "2.2.2": ["index2_2_2.html"],
+  "3": ["index3_1_1.html", "index3_1_2.html", "index3_1_3.html", "index3_1_4.html", "index3_1_5.html", "index3_1_6.html", "index3_1_7.html", "index3_2_1.html", "index3_2_2.html"],
+  "3.1": ["index3_1_1.html", "index3_1_2.html", "index3_1_3.html", "index3_1_4.html", "index3_1_5.html", "index3_1_6.html", "index3_1_7.html"],
+  "3.1.1": ["index3_1_1.html"],
+  "3.1.2": ["index3_1_2.html"],
+  "3.1.3": ["index3_1_3.html"],
+  "3.1.4": ["index3_1_4.html"],
+  "3.1.5": ["index3_1_5.html"],
+  "3.1.6": ["index3_1_6.html"],
+  "3.1.7": ["index3_1_7.html"],
+  "3.2": ["index3_2_1.html", "index3_2_2.html"],
+  "3.2.1": ["index3_2_1.html"],
+  "3.2.2": ["index3_2_2.html"],
+  "4": ["index4_1_1.html", "index4_1_2.html", "index4_1_3.html", "index4_2_1.html", "index4_2_2.html", "index4_3_1.html", "index4_3_2.html"],
+  "4.1": ["index4_1_1.html", "index4_1_2.html", "index4_1_3.html"],
+  "4.1.1": ["index4_1_1.html"],
+  "4.1.2": ["index4_1_2.html"],
+  "4.1.3": ["index4_1_3.html"],
+  "4.2": ["index4_2_1.html", "index4_2_2.html"],
+  "4.2.1": ["index4_2_1.html"],
+  "4.2.2": ["index4_2_2.html"],
+  "4.3": ["index4_3_1.html", "index4_3_2.html"],
+  "4.3.1": ["index4_3_1.html"],
+  "4.3.2": ["index4_3_2.html"],
+  "5": ["index5_1.html", "index5_4.html"],
+  "5.1": ["index5_1.html"],
+  "5.4": ["index5_4.html"],
+  "6": ["index6_1_2.html", "index6_1_3.html"],
+  "6.1": ["index6_1_2.html", "index6_1_3.html"],
+  "6.1.2": ["index6_1_2.html"],
+  "6.1.3": ["index6_1_3.html"],
+  "7": ["index7_1_1.html", "index7_1_2.html", "index7_1_3.html", "index7_1_4.html", "index7_2.html"],
+  "7.1": ["index7_1_1.html", "index7_1_2.html", "index7_1_3.html", "index7_1_4.html"],
+  "7.1.1": ["index7_1_1.html"],
+  "7.1.2": ["index7_1_2.html"],
+  "7.1.3": ["index7_1_3.html"],
+  "7.1.4": ["index7_1_4.html"],
+  "7.2": ["index7_2.html"]
+});
+
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -99,6 +158,16 @@ module.exports = async function handler(req, res) {
   }
 
   const directUrls = resolveDirectSourceUrls(subject, topic);
+  if (book.officialSourceRequired && !directUrls.length) {
+    return res.status(404).json({
+      grounded: false,
+      error: "section_not_resolved",
+      bookTitle: book.title,
+      schoolYear: book.schoolYear,
+      curriculumSource: book.curriculumSource,
+      message: "Η επιλογή δεν ανήκει στην επαληθευμένη ύλη 2026–27 ή δεν έχει ακριβή αντιστοίχιση σε επίσημη σελίδα."
+    });
+  }
   const path = directUrls.length ? "__direct__" : resolveSectionPath(book.mode, topic);
   if (!path) {
     return res.status(404).json({
@@ -173,6 +242,8 @@ module.exports = async function handler(req, res) {
       subject,
       topic,
       bookTitle: book.title,
+      schoolYear: book.schoolYear || null,
+      curriculumSource: book.curriculumSource || null,
       sourceUrl,
       sourceUrls,
       text: useful.slice(0, 42000)
@@ -194,6 +265,11 @@ function clean(value, max) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "istoria-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
 
   if (subject === "biologia-a-gymnasiou") {
     // Current 2026–27 curriculum topics only. Do not expose the whole book as this year's syllabus.
@@ -306,23 +382,37 @@ function resolveSectionPath(mode, topic) {
   }
 
   if (mode === "history") {
-    const chapter = (t.match(/Κεφάλαιο\s+(\d+)/i) || [])[1];
-    if (!chapter) return "";
-
-    const roman = (t.match(/·\s*(Ι{1,3})\s*(?:·|—|$)/i) || [])[1] || "";
-    const tail = (t.match(/·\s*(\d+)\s*—/) || [])[1] || "";
-
-    const romanMap = { "Ι": 1, "ΙΙ": 2, "ΙΙΙ": 3 };
-    if (roman && tail) return `index${chapter}_${romanMap[roman.toUpperCase()]}_${tail}.html`;
-    if (roman) return `index${chapter}_${romanMap[roman.toUpperCase()]}.html`;
-
-    const direct = (t.match(/Κεφάλαιο\s+\d+\s*·\s*(\d+)\s*—/i) || [])[1];
-    if (direct) return `index${chapter}_${direct}.html`;
-
-    return `index${chapter}.html`;
+    return resolveHistoryCurriculumPaths(t)[0] || "";
   }
 
   return "";
+}
+
+function resolveHistoryCurriculumPaths(topic) {
+  const key = historyTopicKey(topic);
+  return key && HISTORY_B_2026_2027_PATHS[key]
+    ? [...HISTORY_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function historyTopicKey(topic) {
+  const value = String(topic || "");
+  const chapterMatch = value.match(/Κεφάλαιο\s+(\d+)/i);
+  if (!chapterMatch) return "";
+
+  const chapter = chapterMatch[1];
+  const beforeTitle = value.slice(chapterMatch.index + chapterMatch[0].length).split(/—/)[0];
+  const segments = [...beforeTitle.matchAll(/·\s*([ΙI]{1,3}|\d+)/gi)].map(match => match[1]);
+  if (!segments.length) return chapter;
+
+  const romanMap = { "Ι": 1, "ΙΙ": 2, "ΙΙΙ": 3, "I": 1, "II": 2, "III": 3 };
+  const first = segments[0].toUpperCase();
+  const firstNumber = romanMap[first] || (/^\d+$/.test(first) ? Number(first) : 0);
+  if (!firstNumber) return "";
+  if (segments.length === 1) return `${chapter}.${firstNumber}`;
+
+  const lesson = Number(segments[1]);
+  return Number.isInteger(lesson) && lesson > 0 ? `${chapter}.${firstNumber}.${lesson}` : "";
 }
 
 async function fetchOfficialHtml(url) {
@@ -463,3 +553,10 @@ function selectUsefulText(text, topic) {
   const start = Math.max(0, best - 4000);
   return full.slice(start, start + 42000);
 }
+
+module.exports._test = Object.freeze({
+  historyTopicKey,
+  resolveHistoryCurriculumPaths,
+  resolveSectionPath,
+  HISTORY_B_2026_2027_PATHS
+});

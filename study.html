@@ -217,6 +217,20 @@
       const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
       rows=cat?.getSubject?.(g,s,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')?.topics||[];
     }else rows=resolver()?.getTopics?.(z,g,s)||[];
+
+    // AI Study must not offer broad navigation anchors when this subject is
+    // configured to fail closed on an exact official schoolbook source.
+    // Prefer the verified textbook subsections that /api/schoolbook-source
+    // can actually resolve. Keep the original rows only when no such exact
+    // subsection exists yet, so other school levels do not disappear.
+    if(!isEpal()&&requiresOfficialSource()){
+      const exactRows=rows.filter(t=>
+        ['official-section','official-book-section'].includes(String(t?.sourceType||'')) ||
+        /^(?:official-book-section-verified|exact-section-verified|related-section-verified)$/.test(String(t?.status||''))
+      );
+      if(exactRows.length)rows=exactRows;
+    }
+
     $('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.label||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.label||t.titleEl):(t.labelEl||t.label||t.titleEl||t.labelEn||t.id))+'</option>').join('');
   }
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}

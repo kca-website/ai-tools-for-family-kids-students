@@ -658,8 +658,9 @@
     const chatgpt={name:'ChatGPT Study Mode',url:'https://chatgpt.com/studymode',el:'Καθοδηγούμενη μελέτη, βήμα-βήμα ερωτήσεις, PDF και quiz.',en:'Guided learning, step-by-step questions, PDFs and quizzes.'};
     const astra={name:'Astra AI',url:'https://astra-ai.co/el/',el:'Μετατρέπει σημειώσεις σε πλάνο, quiz, κάρτες, podcast και προσομοιώσεις.',en:'Turns notes into plans, quizzes, flashcards, podcasts and mock exams.'};
     const notebook={name:'NotebookLM',url:'https://notebooklm.google/',el:'Ισχυρό για μελέτη πάνω σε δικές σου πηγές και Audio Overviews.',en:'Strong for source-grounded study and Audio Overviews.'};
+    const daskalakos={name:'Δασκαλάκος AI',url:'https://daskalakos.ai/',el:'Ελληνικός AI δάσκαλος για Δημοτικό–Λύκειο: καθοδηγεί με ερωτήσεις, με γονικό έλεγχο.',en:'Greek AI tutor for primary to upper secondary: guides with questions, with parental controls.'};
     const quizlet={name:'Quizlet',url:'https://quizlet.com/features/ai-study-tools',el:'Εξειδικευμένο σε flashcards, practice tests και επαναληπτική εξάσκηση.',en:'Specialized in flashcards, practice tests and repeated practice.'};
-    const map={audio:[notebook,astra],flashcards:[quizlet,astra,chatgpt],quiz:[quizlet,chatgpt,astra],truefalse:[quizlet,astra],explain:[chatgpt,notebook],quickreview:[chatgpt,notebook,astra],oral:[astra,chatgpt],written:[astra,chatgpt],weakspots:[chatgpt,quizlet,astra],plan:[astra,chatgpt,notebook]};
+    const map={audio:[notebook,astra],flashcards:[quizlet,astra,chatgpt],quiz:[quizlet,chatgpt,astra],truefalse:[quizlet,astra],explain:[chatgpt,notebook,daskalakos],quickreview:[chatgpt,notebook,astra],oral:[astra,chatgpt],written:[astra,chatgpt],weakspots:[chatgpt,quizlet,astra,daskalakos],plan:[astra,chatgpt,notebook]};
     return map[action]||[chatgpt,astra];
   }
 

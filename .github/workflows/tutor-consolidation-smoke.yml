@@ -118,6 +118,9 @@ jobs:
       - name: Run shared StudyContext smoke
         run: node tests/study-context-smoke.mjs
 
+      - name: Run AI Study UX smoke
+        run: node tests/ai-study-ux-smoke.mjs
+
       - name: Run curriculum provenance smoke
         run: node tests/curriculum-provenance-smoke.mjs
 

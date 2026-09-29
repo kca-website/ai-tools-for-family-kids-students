@@ -41,10 +41,14 @@ try {
   await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
-  assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.');
+  assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI για το μάθημα, την ηλικία και αυτό που θέλεις να κάνεις. Ή χρησιμοποίησε τη δωρεάν AI Μελέτη πάνω στην επίσημη σχολική ύλη.');
 
-  assert.ok((await page.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 7, 'Homepage must expose the core age zones plus Special Education, University pilot and Curriculum Map');
+  assert.ok((await page.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 6, 'Homepage must expose the core age zones plus Special Education and the University pilot');
+  assert.equal(await page.locator('#homeV8HelpersMount a[href="/xartis-ylis.html"]').count(), 1, 'Homepage must expose the Curriculum Map in "Three ways to start"');
+  assert.equal(await page.locator('#homeV9Study a[href="/study.html"]').count(), 1, 'Homepage must expose AI Study');
+  assert.match(await page.locator('#homeV9Study').innerText(), /επίσημο σχολικό βιβλίο[\s\S]*Διαθέσιμο σε επιλεγμένα μαθήματα · η κάλυψη μεγαλώνει/, 'AI Study must keep the official-textbook coverage caveat');
+  assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').count(), 1, 'Preschool 4–6 card missing');
   assert.match(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').innerText(), /4\s*(έως|to)\s*6|4-6/i, 'Preschool card must show ages 4–6');
   assert.equal(await page.locator('#homeV8Shell #specialSchoolZoneCard').count(), 1);
@@ -90,7 +94,7 @@ try {
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => document.querySelector('#specialSchoolZoneCard')?.textContent?.includes('Special schools'));
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI tool for what you want to do and see how to use it properly. For parents, children and students 4 to 18, and educators.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI for the subject, the age and what you want to do. Or use the free AI Study on the official school curriculum.');
   assert.match(await page.locator('#specialSchoolZoneCard').innerText(), /Special schools/);
   assert.match(await page.locator('#homeVideoNew').innerText(), /New[\s\S]*Create educational videos/i, 'Homepage video promo must translate to English');
   assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
@@ -108,7 +112,7 @@ try {
   await desktop.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
   const heroWidth = await desktop.locator('#zoneSelectView .hero').evaluate((el) => el.getBoundingClientRect().width);
   assert.ok(heroWidth >= 1000 && heroWidth <= 1042, `desktop: homepage hero should use the wider ~1040px layout, got ${heroWidth}px`);
-  assert.ok((await desktop.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 7, 'desktop: expected the current navigator cards');
+  assert.ok((await desktop.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 6, 'desktop: expected the current navigator cards');
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   await desktop.close();

@@ -277,19 +277,25 @@ const MATH_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
 const PHYSICS_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
   "νομος του ωμ": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
   "ohm s law": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
+  "γ κεφαλαιο 2 ηλεκτρικο ρευμα νομος του ωμ": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
   "τυπος ταχυτητας": ["https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"],
   "speed formula": ["https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"],
+  "β 2 2 η εννοια της ταχυτητας προαπαιτουμενη γνωση": ["https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"],
   "μετατροπη ενεργειας": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"],
-  "energy transformation": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"]
+  "energy transformation": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"],
+  "γ κεφαλαιο 3 ηλεκτρικη ενεργεια": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"]
 });
 
 const CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
   "στοιχειο vs ενωση": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"],
   "element vs compound": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"],
+  "β 2 6 χημικες ενωσεις και χημικα στοιχεια προαπαιτουμενο": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"],
   "μειγμα vs ενωση": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html"],
   "mixture vs compound": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html"],
+  "β 2 6 2 μειγματα και χημικες ενωσεις προαπαιτουμενο": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html"],
   "δομη του ατομου": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"],
-  "structure of the atom": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"]
+  "structure of the atom": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"],
+  "β 2 9 υποατομικα σωματιδια δομη ατομου προαπαιτουμενο": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"]
 });
 
 const BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({

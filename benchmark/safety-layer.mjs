@@ -78,7 +78,7 @@ function chunkText(text, maxChars = 1200, overlap = 120) {
 async function groq(model, messages, maxTokens = 120) {
   if (MOCK) {
     const t = messages.map(m => m.content).join('\n').toLowerCase();
-    const malicious = /(αγνόησε|αγνοησε|ignore|χωρίς κανόνες|χωρις κανονες|system prompt|κρυφ(?:ή|ές) οδηγ(?:ία|ίες)|κρυφ(?:η|ες) οδηγ(?:ια|ιες))/i.test(t);
+    const malicious = /(αγνόησε|αγνοησε|ignore|previous instructions|χωρίς κανόνες|χωρις κανονες|system prompt|κρυφ(?:ή|ές) οδηγ(?:ία|ίες)|κρυφ(?:η|ες) οδηγ(?:ια|ιες)|νέα οδηγία|νεα οδηγια|σταμάτα να χρησιμοποιείς|σταματα να χρησιμοποιεις)/i.test(t);
     const content = model.includes('prompt-guard') ? (malicious ? 'malicious' : 'benign')
       : JSON.stringify({ violation: malicious, category: malicious ? 'prompt_injection' : null });
     return { status: 200, content, usage: { prompt_tokens: 10, completion_tokens: 2 }, latencyMs: 1 };

@@ -1936,6 +1936,98 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
+  "chem-b-gym.mixture-homogeneous": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Γράψε δύο παραδείγματα μειγμάτων από την καθημερινότητα και σημείωσε αν βλέπεις μία ενιαία φάση ή ξεχωριστά συστατικά.",
+    "descriptionEn": "Write two everyday mixture examples and note whether you see one uniform phase or distinct components.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και ζήτησε να σου δώσει τρία νέα μείγματα ένα-ένα, ώστε εσύ να τα χαρακτηρίσεις ομογενή ή ετερογενή και να εξηγήσεις γιατί.",
+    "descriptionEn": "Use AI Help or ChatGPT and ask for three new mixtures one at a time, so you classify each as homogeneous or heterogeneous and explain why.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε με δικά σου λόγια γιατί το αλατόνερο μπορεί να είναι ομογενές ενώ το νερό με λάδι όχι.",
+    "descriptionEn": "Explain in your own words why salt water can be homogeneous while water and oil are not.",
+    "toolId": null
+  }
+],
+  "chem-b-gym.solution-percent-wv": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Με βάση τον ορισμό % w/v, υπολόγισε πόσα γραμμάρια διαλυμένης ουσίας αντιστοιχούν σε 100 mL για διαλύματα 2%, 5% και 10% w/v.",
+    "descriptionEn": "Using the definition of % w/v, work out the grams of solute in 100 mL for 2%, 5% and 10% w/v solutions.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια να ελέγξει τη λογική σου χωρίς να δώσει αμέσως απάντηση: «Για 5% w/v σκέφτηκα 5 g σε 100 mL. Κάνε μου μία ερώτηση για να ελέγξω αν το κατάλαβα».",
+    "descriptionEn": "Ask AI Help to check your reasoning without giving the answer immediately: “For 5% w/v I thought 5 g in 100 mL. Ask me one question to check my understanding.”",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Φτιάξε μόνος/η ένα παράδειγμα διαλύματος με ακέραιο ποσοστό % w/v και εξήγησε ακριβώς τι σημαίνει σε 100 mL διαλύματος.",
+    "descriptionEn": "Create your own solution example with an integer % w/v and explain exactly what it means in 100 mL of solution.",
+    "toolId": null
+  }
+],
+  "chem-b-gym.element-compound": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χώρισε σε δύο στήλες τις ουσίες Ο₂, H₂O, Fe και CO₂: χημικά στοιχεία και χημικές ενώσεις. Γράψε δίπλα τον λόγο της επιλογής σου.",
+    "descriptionEn": "Split O₂, H₂O, Fe and CO₂ into two columns: chemical elements and chemical compounds. Write why you chose each.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Δώσε τις κατηγορίες σου στην AI Βοήθεια και ζήτησε να σε διορθώσει μόνο με ερώτηση, όχι με έτοιμη ταξινόμηση.",
+    "descriptionEn": "Give your classifications to AI Help and ask it to correct you only by asking a question, not by handing over the classification.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε γιατί το Ο₂ παραμένει χημικό στοιχείο, ενώ το H₂O είναι χημική ένωση.",
+    "descriptionEn": "Explain why O₂ is still a chemical element while H₂O is a chemical compound.",
+    "toolId": null
+  }
+],
+  "chem-b-gym.reactants-products": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σε μια απλή συμβολική αντίδραση Α + Β → Γ, σημείωσε ποια είναι τα αντιδρώντα και ποιο το προϊόν και εξήγησε τι σημαίνει το βέλος.",
+    "descriptionEn": "For a simple symbolic reaction A + B → C, identify the reactants and product and explain what the arrow means.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια δύο απλές χημικές εξισώσεις από το επίπεδο της Β΄ Γυμνασίου και αναγνώρισε εσύ τα αντιδρώντα και τα προϊόντα πριν δεις έλεγχο.",
+    "descriptionEn": "Ask AI Help for two simple chemical equations at 8th-grade level and identify the reactants and products yourself before checking.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Γράψε με δικά σου λόγια τον κανόνα: τι βρίσκεται αριστερά και τι δεξιά από το βέλος μιας χημικής εξίσωσης.",
+    "descriptionEn": "State the rule in your own words: what appears to the left and right of the arrow in a chemical equation.",
+    "toolId": null
+  }
+],
   "chimeia-g-gym.element-vs-compound": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",

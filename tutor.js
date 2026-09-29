@@ -931,6 +931,47 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     return opt ? opt.textContent : "";
   }
 
+  function getSharedStudyContext() {
+    const api = window.AITOOLSKIDS_STUDY_CONTEXT;
+    if (!api || !ctx) return null;
+    const gap = getCurrentGap();
+    const alignment = getOfficialGapAlignment();
+    const exactOfficial = alignment && (alignment.status === "exact-section-verified" || alignment.status === "related-section-verified");
+    const hasAttachment = !!attachedDocument?.text;
+    return api.normalize({
+      zoneId: ctx.zoneId || "",
+      roleId: ctx.roleId || "",
+      lang: ctx.lang || "el",
+      schoolType: ctx.zoneId === "high" ? (refs.schoolType?.value || "gel") : "",
+      grade: refs.grade?.value || "",
+      sector: isHighEpalMode() && refs.grade?.value === "b" ? (refs.sector?.value || "") : "",
+      specialty: isHighEpalMode() && refs.grade?.value === "c" ? (refs.specialty?.value || "") : "",
+      subject: refs.subject?.value || "",
+      topic: langValue(gap, "labelEl", "labelEn", ""),
+      gapId: gap?.id || refs.topic?.value || "",
+      learningMode: learningMode || "understand",
+      studyAction: studyAction || "",
+      sourcePolicy: api.resolveSourcePolicy({
+        hasAttachment,
+        requiresOfficial: !!exactOfficial,
+        hasCurriculumSelection: !!refs.topic?.value
+      }),
+      documentContext: hasAttachment ? {
+        kind: "user_upload",
+        name: attachedDocument.name || "",
+        pagesRead: attachedDocument.pagesRead || 0,
+        totalPages: attachedDocument.totalPages || 0,
+        truncated: !!attachedDocument.truncated
+      } : null
+    });
+  }
+
+  function publishSharedStudyContext() {
+    const api = window.AITOOLSKIDS_STUDY_CONTEXT;
+    const shared = getSharedStudyContext();
+    return api && shared ? api.publish(shared) : shared;
+  }
+
   function accessState() {
     if (!ctx) return { allowed: false, type: "blocked", message: "" };
     if (isParentMode()) {
@@ -1374,6 +1415,7 @@ ${character?.id === "pericles" ? "- PERICLES GUARD: Pericles died in 429 BCE. Th
       }[learningMode] || tr("learningModeUnderstand"))}<br><br>
       <b>${escapeHtml(tr("contextPath"))}:</b><br>${pathSummary}${officialHtml}
     `;
+    publishSharedStudyContext();
     refreshAnimationBridge();
   }
 
@@ -2237,6 +2279,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
       const doc=await window.AITOOLSKIDS_PDF.read(file,{maxChars:48000,maxPages:80});
       attachedDocument=doc;
       updatePdfAttachmentUi();
+      publishSharedStudyContext();
       if(refs.pdfStatus && !doc.truncated) refs.pdfStatus.textContent=doc.name+" · "+tr("pdfReady");
     }catch(err){
       attachedDocument=null;
@@ -2255,6 +2298,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
     attachedDocument=null;
     if(refs.pdfFile) refs.pdfFile.value="";
     updatePdfAttachmentUi();
+    publishSharedStudyContext();
   }
 
   function importStudySession(){
@@ -2493,10 +2537,13 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             subject: langValue(getCurrentSubject(), "subjectLabelEl", "subjectLabelEn", ""),
             topic: langValue(getCurrentGap(), "labelEl", "labelEn", ""),
             character: currentCharacterName(),
+            studyContext: getSharedStudyContext(),
             documentText: attachedDocument?.text
               ? pickStudyDocumentText(requestMessages[1]?.content || "").text
               : (groundedSource?.text || ""),
             documentName: attachedDocument?.name || groundedSource?.bookTitle || "",
+            documentKind: attachedDocument?.text ? "user_upload" : (groundedSource?.grounded ? "official_schoolbook" : ""),
+            documentSourceUrl: groundedSource?.sourceUrl || "",
           }),
         });
         const data = await response.json().catch(() => ({}));
@@ -3009,6 +3056,8 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     render,
     getProvider: () => providerMode,
     getConversationSnapshot: conversationSnapshot,
+    getStudyContext: getSharedStudyContext,
+    publishStudyContext: publishSharedStudyContext,
     getQualityContext: () => ({
       zone: ctx?.zoneId || "",
       role: ctx?.roleId || "",

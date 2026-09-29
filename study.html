@@ -171,6 +171,7 @@
 <script src="/general-education-book-sections-2026-2027.js"></script>
 <script src="/curriculum-resolver.js"></script>
 <script src="/pdf-text-reader.js"></script>
+<script src="/study-context.js"></script>
 <script>
 (() => {
   let lang='el', attached=null, currentOfficialSource=null;
@@ -226,6 +227,7 @@
     $('sourceModeNotice').classList.toggle('hidden',!has);
     if(has) sourceEvidenceUi(null);
     if(has && !String($('notesStatus').textContent||'').trim()) $('notesStatus').textContent=attached.name|| (lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες');
+    publishSharedStudyContext();
   }
   $('usePastedNotes').onclick=()=>{
     const text=$('notesPaste').value.trim();
@@ -255,7 +257,7 @@
     box.classList.remove('hidden');
   }
   function requiresOfficialSource(){
-    return ['physics-gymnasiou','mathimatika-a-gymnasiou','mathimatika-g-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
+    return ['physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-g-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
   }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}
@@ -289,6 +291,43 @@
   function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}
   function selectedSubjectLabel(){const opt=$('subject').selectedOptions[0];return opt?.textContent?.trim()||$('subject').value||''}
   function selectedGradeLabel(){const opt=$('grade').selectedOptions[0];return opt?.textContent?.trim()||$('grade').value||''}
+  function sharedStudyContext(studyAction=''){
+    const api=window.AITOOLSKIDS_STUDY_CONTEXT;
+    if(!api)return null;
+    const goal=document.querySelector('input[name="goal"]:checked')?.value||'understand';
+    const hasAttachment=!!attached?.text;
+    const topicId=$('topicPick').value||'';
+    return api.normalize({
+      zoneId:$('zone').value||'',
+      roleId:'student',
+      lang,
+      schoolType:$('zone').value==='high'?($('schoolType').value||'gel'):'',
+      grade:$('grade').value||'',
+      sector:isEpal()&&$('grade').value==='b'?($('epalSector').value||''):'',
+      specialty:isEpal()&&$('grade').value==='c'?($('epalSpecialty').value||''):'',
+      subject:selectedSubjectId(),
+      topic:selectedTopic(),
+      gapId:topicId,
+      learningMode:goal,
+      studyAction,
+      sourcePolicy:api.resolveSourcePolicy({
+        hasAttachment,
+        requiresOfficial:requiresOfficialSource()&&!!selectedTopic(),
+        hasCurriculumSelection:!!topicId
+      }),
+      documentContext:hasAttachment?{
+        kind:'user_upload',
+        name:attached.name||'',
+        pagesRead:attached.pagesRead||0,
+        totalPages:attached.totalPages||0,
+        truncated:!!attached.truncated
+      }:null
+    });
+  }
+  function publishSharedStudyContext(studyAction=''){
+    const api=window.AITOOLSKIDS_STUDY_CONTEXT,ctx=sharedStudyContext(studyAction);
+    return api&&ctx?api.publish(ctx):ctx;
+  }
   function studyGoalLabel(goal){
     const labels={
       understand: lang==='en'?'Understand the topic':'Να καταλάβω το θέμα',
@@ -401,6 +440,7 @@
       const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         system,prompt,audience:'study_user',task:'study_plan',mode:'organize',
         grade,subject,topic,
+        studyContext:sharedStudyContext('plan'),
         documentText:attached?.text?sourceExcerpt(attached.text,prompt,28000,!topic):(officialSource?.text||''),
         documentName:attached?.name||(officialSource?.bookTitle||''),
         documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
@@ -466,6 +506,7 @@
       prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
       audience:'study_user',task:cfg.task,mode:cfg.mode,
       grade:selectedGradeLabel(),subject:selectedSubjectLabel(),topic:selectedTopic(),
+      studyContext:sharedStudyContext(action),
       documentText:attached?.text?sourceExcerpt(attached.text,(promptOverride||selectedTopic()||action),action==='quickreview'?24000:20000,false):(officialSource?.text||''),
       documentName:attached?.name||(officialSource?.bookTitle||''),
       documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
@@ -543,6 +584,7 @@
   }
 
   async function runStudyAction(action){
+    publishSharedStudyContext(action);
     if(!selectedTopic()&&!attached){$('topicCustom').focus();return}
     if(action==='plan'){await buildAiPlan();$('plan').classList.remove('hidden');$('plan').scrollIntoView({behavior:'smooth',block:'nearest'});return}
     interactiveAction=action; interactiveHistory=[];
@@ -758,7 +800,9 @@
     try{await navigator.clipboard.writeText(currentExportText());btn.textContent=lang==='en'?'✓ Copied':'✓ Αντιγράφηκε'}catch(_){btn.textContent=lang==='en'?'Copy failed':'Δεν έγινε αντιγραφή'}
     setTimeout(()=>btn.textContent=old,1400);
   };
-  populateEpalChoices();populateGrades();localize();refreshAttachedUi();
+  ['zone','grade','schoolType','epalSector','epalSpecialty','subject','topicPick','topicCustom'].forEach(id=>$(id)?.addEventListener('change',()=>setTimeout(()=>publishSharedStudyContext(),0)));
+  document.querySelectorAll('input[name="goal"]').forEach(node=>node.addEventListener('change',()=>publishSharedStudyContext()));
+  populateEpalChoices();populateGrades();localize();refreshAttachedUi();publishSharedStudyContext();
 })();
 </script>
 </body>

@@ -22,6 +22,7 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <div class="tool">
 <label for="mode">What do you need?</label>
 <select id="mode"><option value="ask">What is this task actually asking me to do?</option><option value="break">Break a task into small steps</option><option value="first">Tell me only the first useful step</option><option value="check">Check whether I understood it</option><option value="brain">Turn messy notes into a checklist</option><option value="plan">Make a study plan for this topic</option></select>
+<div id="studyStepsUpload"></div>
 <label for="input">Enter the task, topic or your notes</label>
 <textarea id="input" placeholder="e.g. I have a Biology test on Friday: chapters 2 and 3, I mix up mitosis and meiosis, and I have about 45 minutes today."></textarea>
 <p class="help">Do not enter your name, school, phone number, health information or other personal data.</p>
@@ -33,6 +34,9 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <script src="/guided-task-assistant.js"></script>
 <script>
 (function(){
+ const G=window.AITOOLSKIDS_GUIDED, slot=document.getElementById('studyStepsUpload');
+ if(G&&slot&&G.uploadMarkup) slot.innerHTML=G.uploadMarkup('steps',true);
+ const upload=(G&&G.bindUpload&&slot)?G.bindUpload(slot,true):{get:()=>null};
  const btn=document.getElementById('go'),input=document.getElementById('input'),mode=document.getElementById('mode'),result=document.getElementById('result'),status=document.getElementById('status');
  const prompts={
   ask:"Explain in plain language what the task is asking the learner to produce, what information/skills it requires, and what NOT to do. Do not solve it.",
@@ -43,12 +47,12 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
   plan:"Create a short study plan with small blocks, starting from what the user says is difficult. Do not teach the whole topic or solve exercises."
  };
  btn.addEventListener('click',async()=>{
-  const text=input.value.trim(); if(!text){status.textContent="Enter what you need to do first.";input.focus();return;}
+  const text=input.value.trim(); const doc=upload.get(); if(!text&&!doc){status.textContent="Enter what you need to do or attach a file first.";input.focus();return;}
   btn.disabled=true;status.textContent="Organising the steps…";result.textContent="";
   try{
    const r=await fetch("/api/tutor-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
     system:"You are a study-organisation helper. Reduce cognitive load by turning tasks into small steps. Do not solve exercises or produce ready-to-submit work.",
-    prompt:prompts[mode.value]+"\n\nUser material:\n"+text,audience:"study_user",mode:"organize",task:"study_plan",subject:"Study organisation"
+    prompt:prompts[mode.value]+(text?"\n\nUser material:\n"+text:""),documentText:doc?doc.text:"",documentName:doc?doc.name:"",audience:"study_user",mode:"organize",task:"study_plan",subject:"Study organisation"
    })});
    const d=await r.json().catch(()=>({})); if(!r.ok) throw new Error(d.message||"The service could not respond.");
    result.innerHTML=window.AITOOLSKIDS_GUIDED.renderMarkdown(d.text||"No result was returned.");status.textContent="Ready.";result.focus();

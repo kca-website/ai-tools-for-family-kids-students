@@ -13,6 +13,15 @@ assert.match(html, /flashcards:14000/);
 assert.match(html, /activityNeedsDistributedSource\('plan'\)/);
 assert.match(html, /attached\?\.text\|\|officialSource\?\.text/);
 assert.doesNotMatch(html, /:\(officialSource\?\.text\|\|''\)/);
+for (const subjectId of [
+  'mathimatika-b-gymnasiou',
+  'chimeia-b-gymnasiou',
+  'geologia-geografia-b-gymnasiou',
+  'logotechnia-b-gymnasiou',
+  'english-b-gymnasiou'
+]) {
+  assert.match(html, new RegExp(`requiresOfficialSource\\(\\)[\\s\\S]{0,1200}${subjectId}`));
+}
 
 assert.match(html, /5 ερωτήσεις · μία-μία/);
 assert.match(html, /Run a 5-question quick quiz/);

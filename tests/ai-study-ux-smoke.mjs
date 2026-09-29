@@ -17,6 +17,8 @@ assert.match(html, /flashcards:6000/);
 assert.match(html, /activityNeedsDistributedSource\('plan'\)/);
 assert.match(html, /mode:'organize',activity:'plan'/);
 assert.match(html, /mode:cfg\.mode,activity:action/);
+assert.match(html, /cacheEligible:!attached\?\.text&&!!officialSource\?\.grounded/);
+assert.match(html, /cacheEligible:!promptOverride&&!attached\?\.text&&!!officialSource\?\.grounded/);
 assert.match(html, /attached\?\.text\|\|officialSource\?\.text/);
 assert.doesNotMatch(html, /:\(officialSource\?\.text\|\|''\)/);
 assert.match(html, /thriskeftika-b-gymnasiou/);

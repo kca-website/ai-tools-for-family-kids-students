@@ -1278,15 +1278,6 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolveLiteratureBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
-  if (subject === "fysiki-g-gymnasiou") {
-    const annualKey = physicsGAnnualTopicKey(topic);
-    if (annualKey) {
-      const annual = scopePhysicsGAnnualTopic(scoped, annualKey);
-      scoped = annual.text;
-      exclusions.push(...annual.exclusions);
-    }
-  }
-
   if (subject === "physics-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolvePhysicsBCurriculumPaths(topic).map(path => new URL(path, base).toString());
@@ -1802,6 +1793,15 @@ function applyCurriculumTextScope(subject, topic, text) {
     }
   }
 
+  if (subject === "fysiki-g-gymnasiou") {
+    const annualKey = physicsGAnnualTopicKey(topic);
+    if (annualKey) {
+      const annual = scopePhysicsGAnnualTopic(scoped, annualKey);
+      scoped = annual.text;
+      exclusions.push(...annual.exclusions);
+    }
+  }
+
   if (subject === "physics-gymnasiou") {
     const match = String(topic || "").match(/(?:^|[^\d])(\d+)\.(\d+)(?:[^\d]|$)/);
     const key = match ? `${Number(match[1])}.${Number(match[2])}` : "";
@@ -2067,6 +2067,7 @@ module.exports._test = Object.freeze({
   splitOfficialPageBlocks,
   selectEnglishBUnitText,
   resolveSectionPath,
+  resolveDirectSourceUrls,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,

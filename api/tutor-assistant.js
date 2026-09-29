@@ -29,12 +29,12 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'missing_prompt', message: 'Λείπει το εκπαιδευτικό πλαίσιο ή η ερώτηση.' });
   }
   const taskLimits = {
-    conversation: 700,
-    flashcards: 1800,
-    quiz: 3000,
-    slides: 2500,
-    study_plan: 1400,
-    guided_task: 1800,
+    conversation: 600,
+    flashcards: 1200,
+    quiz: 1600,
+    slides: 1600,
+    study_plan: 1000,
+    guided_task: 1100,
   };
   if (!Object.prototype.hasOwnProperty.call(taskLimits, task)) {
     return res.status(400).json({ error: 'invalid_task', message: 'Μη έγκυρος τύπος εκπαιδευτικού υλικού.' });
@@ -46,12 +46,12 @@ module.exports = async function handler(req, res) {
   // Keep source-grounded requests safely below free-provider TPM limits.
   // The browser selects useful excerpts; this is the server-side backstop.
   const sourceCharLimits = {
-    conversation: 16000,
-    flashcards: 14000,
-    quiz: 10000,
-    slides: 12000,
-    study_plan: 15000,
-    guided_task: 14000,
+    conversation: 7000,
+    flashcards: 6000,
+    quiz: 5500,
+    slides: 6000,
+    study_plan: 6500,
+    guided_task: 6000,
   };
   const rawDocumentText = String(documentText || '').trim();
   const modelDocumentText = compactSourceText(rawDocumentText, sourceCharLimits[task]);

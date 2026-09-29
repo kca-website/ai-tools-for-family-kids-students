@@ -30,15 +30,17 @@ module.exports = async function handler(req, res) {
     return res.status(413).json({ error: 'source_too_large', message: 'Η πηγή είναι πολύ μεγάλη για ασφαλή σύνοψη.' });
   }
 
+  const workingSource = compactSourceForTopic(source, selectedTopic, 6500);
+
   const claimSystem = lang === 'en'
     ? `Create a concise learner-facing summary from an official Greek schoolbook source.
 Return ONLY valid JSON in this form:
 {"claims":[{"claim":"One clear paraphrased factual sentence.","evidence":"An exact 4–24 word excerpt copied verbatim from SOURCE that directly supports the claim."}]}
 
 STRICT RULES:
-- Produce 6–10 claims in a logical learning order.
+- Produce 5–8 claims in a logical learning order.
 - Each claim must be directly entailed by its evidence and by SOURCE.
-- Evidence must be copied EXACTLY from SOURCE, not paraphrased.
+- Evidence must be copied EXACTLY from SOURCE, not paraphrased. Prefer a short 3–18 word excerpt so exact matching is reliable.
 - Preserve textbook terminology and scope.
 - Do not define, enrich, infer, generalize, explain mechanisms, add examples, or name things more specifically than SOURCE.
 - Ignore navigation, contents, unrelated exercises, image captions unrelated to the selected topic, and page chrome.
@@ -49,9 +51,9 @@ STRICT RULES:
 {"claims":[{"claim":"Μία καθαρή παραφρασμένη πραγματολογική πρόταση.","evidence":"Ακριβές απόσπασμα 4–24 λέξεων αντιγραμμένο αυτούσιο από την ΠΗΓΗ που στηρίζει άμεσα την πρόταση."}]}
 
 ΑΥΣΤΗΡΟΙ ΚΑΝΟΝΕΣ:
-- Δώσε 6–10 προτάσεις σε λογική σειρά μάθησης.
+- Δώσε 5–8 προτάσεις σε λογική σειρά μάθησης.
 - Κάθε claim πρέπει να προκύπτει άμεσα από το evidence και την ΠΗΓΗ.
-- Το evidence πρέπει να είναι ΑΚΡΙΒΩΣ αυτούσιο από την ΠΗΓΗ, όχι παράφραση.
+- Το evidence πρέπει να είναι ΑΚΡΙΒΩΣ αυτούσιο από την ΠΗΓΗ, όχι παράφραση. Προτίμησε σύντομο απόσπασμα 3–18 λέξεων ώστε να επαληθεύεται αξιόπιστα.
 - Διατήρησε την ορολογία και τα όρια του σχολικού βιβλίου.
 - Μην ορίζεις, εμπλουτίζεις, συμπεραίνεις, γενικεύεις, εξηγείς μηχανισμούς, προσθέτεις παραδείγματα ή ονομάζεις κάτι πιο συγκεκριμένα από την ΠΗΓΗ.
 - Αγνόησε πλοήγηση, περιεχόμενα, άσχετες ασκήσεις και άσχετες λεζάντες εικόνων.
@@ -67,25 +69,28 @@ STRICT RULES:
           title ? `BOOK: ${title}` : '',
           selectedTopic ? `SELECTED TOPIC: ${selectedTopic}` : '',
           'SOURCE:',
-          source,
+          workingSource,
         ].filter(Boolean).join('\n\n')
       }
     ],
-    maxTokens: 1400,
+    maxTokens: 950,
     temperature: 0,
     reasoningEffort: 'low',
   });
 
   if (!first?.ok || !first.text?.trim()) {
-    return res.status(first?.status || 502).json({
-      error: first?.error || 'summary_failed',
-      message: first?.message || 'Δεν δημιουργήθηκαν προτάσεις σύνοψης.'
+    const limited = first?.status === 429 || first?.error === 'provider_limit';
+    return res.status(limited ? 429 : (first?.status || 502)).json({
+      error: limited ? 'provider_limit' : (first?.error || 'summary_failed'),
+      message: limited
+        ? 'Η δωρεάν AI Βοήθεια έφτασε προσωρινά το όριο χρήσης της. Δοκίμασε ξανά σε λίγο.'
+        : 'Δεν δημιουργήθηκαν προτάσεις σύνοψης.'
     });
   }
 
   const proposed = parseJsonObject(first.text);
   const rawClaims = Array.isArray(proposed?.claims) ? proposed.claims.slice(0, 12) : [];
-  const sourceNorm = normalizeForEvidence(source);
+  const sourceNorm = normalizeForEvidence(workingSource);
 
   const evidenceChecked = rawClaims
     .map((row, index) => ({
@@ -95,7 +100,7 @@ STRICT RULES:
     }))
     .filter(row =>
       row.claim.length >= 12 &&
-      row.evidence.length >= 8 &&
+      row.evidence.length >= 4 &&
       sourceNorm.includes(normalizeForEvidence(row.evidence))
     );
 
@@ -142,21 +147,24 @@ For each candidate:
         content: [
           selectedTopic ? `TOPIC: ${selectedTopic}` : '',
           'SOURCE:',
-          source,
+          workingSource,
           'CANDIDATES:',
           JSON.stringify(auditPayload),
         ].filter(Boolean).join('\n\n')
       }
     ],
-    maxTokens: 900,
+    maxTokens: 450,
     temperature: 0,
     reasoningEffort: 'low',
   });
 
   if (!second?.ok || !second.text?.trim()) {
-    return res.status(second?.status || 502).json({
-      error: second?.error || 'verification_failed',
-      message: second?.message || 'Ο δεύτερος έλεγχος της σύνοψης απέτυχε.'
+    const limited = second?.status === 429 || second?.error === 'provider_limit';
+    return res.status(limited ? 429 : (second?.status || 502)).json({
+      error: limited ? 'provider_limit' : (second?.error || 'verification_failed'),
+      message: limited
+        ? 'Η δωρεάν AI Βοήθεια έφτασε προσωρινά το όριο χρήσης της. Δοκίμασε ξανά σε λίγο.'
+        : 'Ο δεύτερος έλεγχος της σύνοψης απέτυχε.'
     });
   }
 
@@ -190,6 +198,38 @@ For each candidate:
     model: second?.model || first?.model || null,
   });
 };
+
+function compactSourceForTopic(source, topic, maxChars) {
+  const full = String(source || '').trim();
+  const limit = Math.max(3000, Number(maxChars) || 6500);
+  if (full.length <= limit) return full;
+
+  const normTopic = normalizeForEvidence(topic);
+  const stop = new Set(['και','των','την','τον','της','του','στο','στη','στην','στον','για','απο','από','with','from','the','and','for','this','that']);
+  const keys = [...new Set(normTopic.split(/\s+/).filter(x => x.length >= 4 && !stop.has(x)))].slice(0, 18);
+  const chunks = [];
+  for (let i = 0; i < full.length; i += 1800) chunks.push({ index: i, text: full.slice(i, i + 2200) });
+
+  const scored = chunks.map(row => {
+    const norm = normalizeForEvidence(row.text);
+    let score = 0;
+    for (const key of keys) if (norm.includes(key)) score += key.length >= 7 ? 3 : 1;
+    return { ...row, score };
+  }).sort((a, b) => b.score - a.score || a.index - b.index);
+
+  const selected = [];
+  let used = 0;
+  const pool = scored[0]?.score > 0 ? scored : [chunks[0], chunks[Math.floor(chunks.length / 2)], chunks[chunks.length - 1]].filter(Boolean);
+  for (const row of pool) {
+    if (selected.some(x => x.index === row.index)) continue;
+    const room = limit - used;
+    if (room < 500) break;
+    const piece = row.text.slice(0, room);
+    selected.push({ index: row.index, text: piece });
+    used += piece.length;
+  }
+  return selected.sort((a, b) => a.index - b.index).map(x => x.text).join('\n\n').slice(0, limit);
+}
 
 function clean(value, max) {
   return String(value || '').replace(/\s+/g, ' ').trim().slice(0, max);

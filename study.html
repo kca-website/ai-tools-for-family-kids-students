@@ -674,14 +674,19 @@
     $('studyAnswer').value='';
     interactiveHistory.push('LEARNER: '+answer);
     const cfg=actionConfig(interactiveAction);
-    const finishing=interactiveTotal>0&&interactiveStep>=interactiveTotal;
-    const continuation=finishing
-      ? (lang==='en'
-        ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Give brief feedback on this answer, then a very short final recap of the '+interactiveTotal+'-question quiz. Do NOT ask another question and do not give a grade.'
-        : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Δώσε σύντομο feedback για αυτή την απάντηση και μετά μία πολύ σύντομη τελική ανακεφαλαίωση του quiz των '+interactiveTotal+' ερωτήσεων. ΜΗΝ κάνεις άλλη ερώτηση και μη βάλεις βαθμό.')
+    const isFiveQuestionQuiz=interactiveAction==='quiz'&&interactiveTotal===5;
+    const finishing=isFiveQuestionQuiz&&interactiveStep>=interactiveTotal;
+    const continuation=isFiveQuestionQuiz
+      ? (finishing
+        ? (lang==='en'
+          ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Give brief feedback on this answer, then a very short final recap of the '+interactiveTotal+'-question quiz. Do NOT ask another question and do not give a grade.'
+          : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Δώσε σύντομο feedback για αυτή την απάντηση και μετά μία πολύ σύντομη τελική ανακεφαλαίωση του quiz των '+interactiveTotal+' ερωτήσεων. ΜΗΝ κάνεις άλλη ερώτηση και μη βάλεις βαθμό.')
+        : (lang==='en'
+          ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Respond briefly, then ask exactly question '+(interactiveStep+1)+' of '+interactiveTotal+'. Do not give a grade.'
+          : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Απάντησε σύντομα και μετά κάνε ακριβώς την ερώτηση '+(interactiveStep+1)+' από '+interactiveTotal+'. Μη βάλεις βαθμό.'))
       : (lang==='en'
-        ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Respond briefly, then ask exactly question '+(interactiveStep+1)+' of '+interactiveTotal+'. Do not give a grade.'
-        : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Απάντησε σύντομα και μετά κάνε ακριβώς την ερώτηση '+(interactiveStep+1)+' από '+interactiveTotal+'. Μη βάλεις βαθμό.');
+        ? 'Conversation so far:\n'+interactiveHistory.slice(-8).join('\n')+'\nRespond to the learner briefly, then ask exactly ONE next question. Do not give a grade.'
+        : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-8).join('\n')+'\nΑπάντησε σύντομα στην προσπάθεια του μαθητή και μετά κάνε ακριβώς ΜΙΑ επόμενη ερώτηση. Μη βάλεις βαθμό.');
     $('aiOutput').innerHTML=quizProgressHtml()+studyMarkup((lang==='en'?'You: ':'Εσύ: ')+answer)+'<span class="ai-loading">'+esc(lang==='en'?'AI is checking…':'Το AI ελέγχει…')+'</span>';
     $('sendStudyAnswer').disabled=true;
     try{

@@ -496,6 +496,7 @@
       const officialSource=attached?.text?null:await officialSchoolbookSource();
       const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         system,prompt,audience:'study_user',task:'study_plan',mode:'organize',activity:'plan',
+        cacheEligible:!attached?.text&&!!officialSource?.grounded,
         grade,subject,topic,
         studyContext:sharedStudyContext('plan'),
         documentText:(attached?.text||officialSource?.text)
@@ -564,6 +565,7 @@
       system:cfg.system,
       prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
       audience:'study_user',task:cfg.task,mode:cfg.mode,activity:action,
+      cacheEligible:!promptOverride&&!attached?.text&&!!officialSource?.grounded,
       grade:selectedGradeLabel(),subject:selectedSubjectLabel(),topic:selectedTopic(),
       studyContext:sharedStudyContext(action),
       documentText:(attached?.text||officialSource?.text)

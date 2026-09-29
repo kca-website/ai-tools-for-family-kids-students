@@ -1817,8 +1817,7 @@ function applyCurriculumTextScope(subject, topic, text) {
   }
 
   if (subject === "physics-gymnasiou") {
-    const match = String(topic || "").match(/(?:^|[^\d])(\d+)\.(\d+)(?:[^\d]|$)/);
-    const key = match ? `${Number(match[1])}.${Number(match[2])}` : "";
+    const key = physicsBTopicKey(topic);
     const truncations = {
       "2.2": ["Δεν διδάσκεται η διανυσματική περιγραφή της ταχύτητας.", "Διανυσματική περιγραφή της ταχύτητας"],
       "3.3": ["Δεν διδάσκεται η δύναμη σε τραχιά επιφάνεια ούτε η ανάλυση δύναμης.", "Δύναμη που ασκείται σε τραχιά επιφάνεια"],

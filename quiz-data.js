@@ -2957,19 +2957,19 @@ const GAP_TAGS = {
   },
   "glossa-a-gym.opinion-vs-fact": {
     "id": "glossa-a-gym.opinion-vs-fact",
-    "labelEl": "Άποψη vs Γεγονός",
-    "labelEn": "Opinion vs Fact",
-    "explainEl": "Δεν ξεχωρίζει μια αντικειμενική πληροφορία (γεγονός) από μια προσωπική άποψη μέσα σε ένα κείμενο.",
-    "explainEn": "Doesn't distinguish an objective piece of information (fact) from a personal opinion within a text.",
+    "labelEl": "Αντικειμενική πληροφορία vs προσωπικό σχόλιο",
+    "labelEn": "Objective information vs personal comment",
+    "explainEl": "Δυσκολεύεται να ξεχωρίσει την αντικειμενική παρουσίαση μιας πληροφορίας από το προσωπικό σχόλιο ή τη συναισθηματική στάση του ομιλητή/αφηγητή.",
+    "explainEn": "Struggles to distinguish objective presentation of information from personal comment or the speaker/narrator's subjective stance.",
     "recommendedToolIds": [
       "perplexity"
     ],
     "achievementEl": "Ο Κριτής των Κειμένων",
     "achievementEn": "Text Critic",
-    "positiveMessageEl": "Ξεχωρίζεις τι είναι γεγονός και τι άποψη!",
-    "positiveMessageEn": "You tell fact from opinion!",
-    "skillTagEl": "Άποψη & Γεγονός",
-    "skillTagEn": "Opinion & Fact"
+    "positiveMessageEl": "Ξεχωρίζεις την αντικειμενική πληροφορία από το προσωπικό σχόλιο!",
+    "positiveMessageEn": "You distinguish objective information from personal comment!",
+    "skillTagEl": "Αντικειμενικότητα & Προσωπικό Σχόλιο",
+    "skillTagEn": "Objectivity & Personal Comment"
   },
   "glossa-a-gym.paragraph-argument-basic": {
     "id": "glossa-a-gym.paragraph-argument-basic",

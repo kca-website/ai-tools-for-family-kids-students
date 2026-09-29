@@ -613,29 +613,38 @@
   },
   "glossa-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "official-book-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο επιβεβαιωμένο",
-    "coverageLabelEn": "Official textbook verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι τρέχοντες διαγνωστικοί στόχοι γραμματικής και στίξης έχουν ακριβείς επίσημες πηγές",
+    "coverageLabelEn": "Current grammar and punctuation diagnostic topics have exact official sources",
     "quizTitleEl": "Νεοελληνική Γλώσσα, Γ' Γυμνασίου",
     "quizTitleEn": "Modern Greek Language, 3rd Grade Middle School",
     "officialBook": {
       "titleEl": "Νεοελληνική Γλώσσα Γ΄ Γυμνασίου",
-      "titleEn": "Νεοελληνική Γλώσσα Γ΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C107/675/"
+      "titleEn": "Modern Greek Language, G΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/"
     },
-    "officialSectionsEl": [],
+    "additionalSourceBook": {
+      "titleEl": "Γραμματική Νέας Ελληνικής Γλώσσας Α΄-Β΄-Γ΄ Γυμνασίου",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2334/Grammatiki-Neas-Ellinikis-Glossas_A-B-G-Gymnasiou_html-apli/"
+    },
+    "officialSectionsEl": [
+      "Σχολική Γραμματική · Κείμενο - Περίοδος - Πρόταση — συμφωνία ρήματος με το υποκείμενο",
+      "8η Ενότητα · Στίξη — χρήση του κόμματος σε προτάσεις",
+      "Σχολική Γραμματική · Συνοπτικοί Πίνακες — σημεία στίξης"
+    ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Έχει επιβεβαιωθεί το επίσημο σχολικό βιβλίο. Δεν έχει ακόμη ολοκληρωθεί η αντιστοίχιση όλων των quiz topics με συγκεκριμένες ενότητες του βιβλίου.",
-    "scopeNoteEn": "The official textbook is verified. Full mapping of all quiz topics to exact textbook sections is not complete yet.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Οι δύο δεξιότητες που εξετάζει σήμερα ο Χάρτης Εξάσκησης — συμφωνία υποκειμένου-ρήματος και χρήση κομμάτων — συνδέονται με τις αντίστοιχες επίσημες πηγές. Οι δύο ερωτήσεις ανά δεξιότητα μοιράζονται την ίδια πηγή και δεν παρουσιάζονται ως τέσσερις διαφορετικές ενότητες.",
+    "scopeNoteEn": "The two skills currently tested by the Practice Map—subject-verb agreement and comma usage—are connected to their exact official sources. Two questions per skill share the same source rather than being presented as four separate textbook units.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Οι οδηγίες 2026–27 έχουν δημοσιευτεί από το ΙΕΠ. Η παρούσα αντιστοίχιση αφορά τους σημερινούς διαγνωστικούς στόχους και όχι πλήρη ετήσια allowlist.",
+    "annualInstructionsNoteEn": "IEP has published 2026–27 guidance. This mapping covers current diagnostic targets, not a complete annual syllabus allowlist.",
     "quizId": "glossa-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-official-source-grounding-for-current-diagnostic-topics; shared official grammar allowed; fail closed outside mapped topics"
   },
   "physics-gymnasiou": {
   "schoolYear": "2026-2027",
@@ -846,40 +855,39 @@
   },
   "glossa-a-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "book-index-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο και περιεχόμενα επιβεβαιωμένα",
-    "coverageLabelEn": "Official textbook and contents verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι 4 τρέχοντες διαγνωστικοί στόχοι έχουν ακριβείς επίσημες πηγές",
+    "coverageLabelEn": "The 4 current diagnostic topics have exact official sources",
     "quizTitleEl": "Νεοελληνική Γλώσσα, Α' Γυμνασίου",
     "quizTitleEn": "Modern Greek Language, 7th Grade",
     "officialBook": {
       "titleEl": "Νεοελληνική Γλώσσα Α΄ Γυμνασίου",
-      "titleEn": "Νεοελληνική Γλώσσα Α΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A112/337/"
+      "titleEn": "Modern Greek Language, A΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/"
+    },
+    "additionalSourceBook": {
+      "titleEl": "Γραμματική Νέας Ελληνικής Γλώσσας Α΄-Β΄-Γ΄ Γυμνασίου",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2334/Grammatiki-Neas-Ellinikis-Glossas_A-B-G-Gymnasiou_html-apli/"
     },
     "officialSectionsEl": [
-      "Εν. 1: Επικοινωνία, κώδικες επικοινωνίας, είδη προτάσεων, λεξιλόγιο, παραγωγή λόγου",
-      "Εν. 2: Προφορικός/γραπτός λόγος, γλωσσική ποικιλία, παράγραφος",
-      "Εν. 3: Περιγραφή, αφήγηση, επιχειρηματολογία, πολυτροπικότητα",
-      "Εν. 4: Ονοματική φράση, επιθετικός προσδιορισμός, κλίση ουσιαστικών/επιθέτων, παραγωγή/σύνθεση",
-      "Εν. 5: Ρήμα, παράγωγα ρήματα, ρήμα στην αφήγηση",
-      "Εν. 6: Λειτουργίες/χρήσεις πτώσεων, παράγωγα ουσιαστικά, παράγραφος/πλαγιότιτλοι",
-      "Εν. 7: Άρθρο, παράγωγα επίθετα, περιγραφή",
-      "Εν. 8: Παρατακτική σύνδεση, ασύνδετο σχήμα, αφήγηση",
-      "Εν. 9: Συνταγματικός και παραδειγματικός άξονας",
-      "Εν. 10: Υποτακτική σύνδεση, σημεία στίξης, χρήση λεξικών"
+      "Σχολική Γραμματική · Ουσιαστικά, Επίθετα, Ρήματα, Επιρρήματα — αναγνώριση μερών του λόγου",
+      "8η Ενότητα · Αφήγηση — αντικειμενική και υποκειμενική στάση του αφηγητή",
+      "3η Ενότητα · Επιχειρηματολογία — στοιχεία και χρήση επιχειρημάτων",
+      "Σχολική Γραμματική · Ρήματα — εγκλίσεις και λειτουργία τους"
     ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Ο δείκτης βασίζεται στα επίσημα περιεχόμενα της Νεοελληνικής Γλώσσας Α΄ Γυμνασίου. Δεν πρέπει να θεωρείται ότι κάθε γενική γλωσσική έννοια που γνωρίζει το μοντέλο έχει διδαχθεί ήδη στην Α΄ Γυμνασίου.",
-    "scopeNoteEn": "The grade/subject is verified in the official 2026–27 textbook catalog. A chapter-level index has not yet been added for this quiz in our curriculum layer.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Οι σημερινοί διαγνωστικοί στόχοι χρησιμοποιούν το πραγματικό κείμενο είτε του Βιβλίου Μαθητή είτε της επίσημης κοινής Γραμματικής Α΄-Β΄-Γ΄ Γυμνασίου, ανάλογα με το θέμα. Για το παλιό label «Άποψη vs Γεγονός» η πηγή του βιβλίου στηρίζει ακριβέστερα τη διάκριση αντικειμενικής πληροφορίας από προσωπικό σχόλιο, και αυτό αποτυπώνεται πλέον στο layer.",
+    "scopeNoteEn": "Current diagnostic topics use the actual Student Book or the official shared A-B-G Gymnasium Grammar, depending on the skill. The former 'Opinion vs Fact' label is narrowed to the textbook-supported distinction between objective information and personal comment.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Οι οδηγίες 2026–27 έχουν δημοσιευτεί από το ΙΕΠ. Η παρούσα αντιστοίχιση αφορά τους σημερινούς διαγνωστικούς στόχους και δεν ισχυρίζεται πλήρη ετήσια allowlist.",
+    "annualInstructionsNoteEn": "IEP has published 2026–27 guidance. This mapping covers the current diagnostic targets and does not claim a complete annual allowlist.",
     "quizId": "glossa-a-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-official-source-grounding-for-current-diagnostic-topics; shared official grammar allowed where the Student Book defers to grammar; fail closed outside mapped topics"
   },
   "istoria-a-gymnasiou": {
     "schoolYear": "2026-2027",

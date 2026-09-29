@@ -145,10 +145,14 @@ const BOOKS = {
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "glossa-a-gymnasiou": {
-    title: "Νεοελληνική Γλώσσα Α΄ Γυμνασίου",
+    title: "Νεοελληνική Γλώσσα Α΄ Γυμνασίου / Γραμματική Α΄-Β΄-Γ΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/",
-    mode: "modernGreekA",
-    multi: true
+    mode: "modernGreekAQuiz",
+    multi: true,
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics-with-official-grammar-reference"
   },
   "glossa-b-gymnasiou": {
     title: "Νεοελληνική Γλώσσα Β΄ Γυμνασίου",
@@ -170,10 +174,14 @@ const BOOKS = {
     selectionPolicy: "beginner-or-advanced-package"
   },
   "glossa-gymnasiou": {
-    title: "Νεοελληνική Γλώσσα Γ΄ Γυμνασίου",
+    title: "Νεοελληνική Γλώσσα Γ΄ Γυμνασίου / Γραμματική Α΄-Β΄-Γ΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/",
-    mode: "modernGreekG",
-    multi: true
+    mode: "modernGreekGQuiz",
+    multi: true,
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics-with-official-grammar-reference"
   }
 };
 
@@ -240,6 +248,65 @@ const MATH_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
   "distributing a negative": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA1_4.html"],
   "πυθαγορειο με καθετη πλευρα": ["https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"],
   "pythagorean theorem finding a leg": ["https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"]
+});
+
+const OFFICIAL_GRAMMAR_BASE =
+  "https://ebooks.edu.gr/ebooks/v/html/8547/2334/Grammatiki-Neas-Ellinikis-Glossas_A-B-G-Gymnasiou_html-apli/";
+
+const GLOSSA_A_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
+  "μερη του λογου": [
+    OFFICIAL_GRAMMAR_BASE + "index_C_02.html",
+    OFFICIAL_GRAMMAR_BASE + "index_C_03.html",
+    OFFICIAL_GRAMMAR_BASE + "index_C_06.html",
+    OFFICIAL_GRAMMAR_BASE + "index_C_07.html"
+  ],
+  "parts of speech": [
+    OFFICIAL_GRAMMAR_BASE + "index_C_02.html",
+    OFFICIAL_GRAMMAR_BASE + "index_C_03.html",
+    OFFICIAL_GRAMMAR_BASE + "index_C_06.html",
+    OFFICIAL_GRAMMAR_BASE + "index_C_07.html"
+  ],
+  "αντικειμενικη πληροφορια vs προσωπικο σχολιο": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/indexi_3.htm"
+  ],
+  "objective information vs personal comment": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/indexi_3.htm"
+  ],
+  "αποψη vs γεγονος": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/indexi_3.htm"
+  ],
+  "opinion vs fact": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/indexi_3.htm"
+  ],
+  "βασικο επιχειρηματολογικο κειμενο": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/indexd_4.htm"
+  ],
+  "basic argumentative writing": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/indexd_4.htm"
+  ],
+  "εγκλιση ρηματος": [
+    OFFICIAL_GRAMMAR_BASE + "index_C_06.html"
+  ],
+  "verb mood": [
+    OFFICIAL_GRAMMAR_BASE + "index_C_06.html"
+  ]
+});
+
+const GLOSSA_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
+  "συμφωνια υποκειμενου ρηματος": [
+    OFFICIAL_GRAMMAR_BASE + "index_D_01.html"
+  ],
+  "subject verb agreement": [
+    OFFICIAL_GRAMMAR_BASE + "index_D_01.html"
+  ],
+  "χρηση κομματων": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/indexi_3.html",
+    OFFICIAL_GRAMMAR_BASE + "index_B_04.html"
+  ],
+  "comma usage": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/indexi_3.html",
+    OFFICIAL_GRAMMAR_BASE + "index_B_04.html"
+  ]
 });
 
 const HISTORY_B_2026_2027_PATHS = Object.freeze({
@@ -1082,6 +1149,14 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolveMathGQuizUrls(topic);
   }
 
+  if (subject === "glossa-a-gymnasiou") {
+    return resolveGlossaAQuizUrls(topic);
+  }
+
+  if (subject === "glossa-gymnasiou") {
+    return resolveGlossaGQuizUrls(topic);
+  }
+
   if (subject === "chimeia-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveChemistryBCurriculumPaths(topic).map(path => new URL(path, base).toString());
@@ -1231,6 +1306,16 @@ function unitNumber(topic) {
   if (!m) return 0;
   const n = Number(m[1] || m[2]);
   return Number.isInteger(n) ? n : 0;
+}
+
+function resolveGlossaAQuizUrls(topic) {
+  const key = normalize(topic);
+  return GLOSSA_A_GYM_DIAGNOSTIC_SOURCES[key] ? [...GLOSSA_A_GYM_DIAGNOSTIC_SOURCES[key]] : [];
+}
+
+function resolveGlossaGQuizUrls(topic) {
+  const key = normalize(topic);
+  return GLOSSA_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...GLOSSA_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
 }
 
 function resolveMathAQuizPaths(topic) {
@@ -1721,6 +1806,8 @@ module.exports._test = Object.freeze({
   resolveHistoryGQuizPaths,
   resolveMathAQuizPaths,
   resolveMathGQuizUrls,
+  resolveGlossaAQuizUrls,
+  resolveGlossaGQuizUrls,
   mathBTopicKey,
   resolveMathBCurriculumPaths,
   chemistryBTopicKey,
@@ -1743,6 +1830,8 @@ module.exports._test = Object.freeze({
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,
   MATH_A_GYM_DIAGNOSTIC_PATHS,
   MATH_G_GYM_DIAGNOSTIC_SOURCES,
+  GLOSSA_A_GYM_DIAGNOSTIC_SOURCES,
+  GLOSSA_G_GYM_DIAGNOSTIC_SOURCES,
   MATH_B_2026_2027_PATHS,
   CHEMISTRY_B_2026_2027_PATHS,
   GEOGRAPHY_B_2026_2027_PATHS,

@@ -1756,22 +1756,22 @@ const LEARNING_PATHS = {
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
       "titleEn": "Try it yourself first",
-      "descriptionEl": "Διάβασε ένα σύντομο άρθρο και σημείωσε ποιες προτάσεις είναι γεγονότα και ποιες είναι απόψεις. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξεχωρίζει μια αντικειμενική πληροφορία (γεγονός) από μια προσωπική άποψη μέσα σε ένα κείμενο.",
-      "descriptionEn": "Read a short article and note which sentences are facts and which are opinions. The most common trap on this topic: Doesn't distinguish objective information (a fact) from a personal opinion within a text.",
+      "descriptionEl": "Διάβασε ένα σύντομο κείμενο και σημείωσε ποια σημεία παρουσιάζουν πληροφορίες με ουδέτερο τρόπο και ποια περιέχουν προσωπικό σχόλιο ή συναίσθημα. Η πιο συχνή παγίδα είναι να θεωρεί κάθε διατύπωση το ίδιο αντικειμενική.",
+      "descriptionEn": "Read a short text and mark which parts present information neutrally and which contain personal comment or emotion. The common trap is treating every statement as equally objective.",
       "toolId": null
     },
     {
       "titleEl": "Έλεγξε με το Perplexity",
       "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Άποψη vs Γεγονός» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Opinion vs Fact\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
+      "descriptionEl": "Αναζήτησε τη διάκριση «αντικειμενική και υποκειμενική στάση στην αφήγηση» και σύγκρινε τα παραδείγματα με όσα σημείωσες, χωρίς να αντιγράψεις έτοιμη απάντηση.",
+      "descriptionEn": "Look up the distinction between objective and subjective stance in narration and compare the examples with your own notes, without copying a ready-made answer.",
       "toolId": "perplexity"
     },
     {
       "titleEl": "Δείξε ότι το κατάλαβες",
       "titleEn": "Prove you've got it",
-      "descriptionEl": "Γράψε μόνος/η μία πρόταση-γεγονός και μία πρόταση-άποψη πάνω στο ίδιο θέμα, και εξήγησε τη διαφορά τους.",
-      "descriptionEn": "Write your own fact sentence and opinion sentence on the same topic, and explain the difference between them.",
+      "descriptionEl": "Γράψε δύο προτάσεις για το ίδιο θέμα: μία ουδέτερη πληροφορία και μία με προσωπικό σχόλιο ή συναίσθημα. Εξήγησε τι αλλάζει.",
+      "descriptionEn": "Write two sentences about the same topic: one neutral piece of information and one with personal comment or emotion. Explain what changes.",
       "toolId": null
     }
   ],

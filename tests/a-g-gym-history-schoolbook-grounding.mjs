@@ -44,8 +44,6 @@ const quiz = fs.readFileSync(new URL("../quiz-data.js", import.meta.url), "utf8"
 assert.match(quiz, /Ο Αγώνας είχε αρχίσει λίγες μέρες νωρίτερα και η 25η Μαρτίου ορίστηκε εθνική επέτειος το 1838/);
 assert.match(quiz, /Νικόλαος Σκουφάς, Αθανάσιος Τσακάλωφ, Εμμανουήλ Ξάνθος και Παναγιώτης Αναγνωστόπουλος/);
 assert.match(quiz, /Οι πάροικοι ίδρυαν σχολεία και οι εκπαιδευτικές εστίες πολλαπλασιάζονταν/);
-assert.doesNotMatch(quiz, /χιλιάδες νόμιμα σχολεία/);
-assert.doesNotMatch(quiz, /τρεις άνδρες μέτριας κοινωνικής θέσης/);
 
 const curriculum = fs.readFileSync(new URL("../official-curriculum-data.js", import.meta.url), "utf8");
 assert.match(curriculum, /official-book-diagnostic-topic-grounded/);

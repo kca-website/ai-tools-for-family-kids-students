@@ -3488,6 +3488,74 @@ const GAP_TAGS = {
   "skillTagEl": "Χημικές Εξισώσεις",
   "skillTagEn": "Chemical Equations"
 },
+  "geo-b-gym.relative-vs-geographic-position": {
+  "id": "geo-b-gym.relative-vs-geographic-position",
+  "labelEl": "Σχετική και γεωγραφική θέση",
+  "labelEn": "Relative vs geographic position",
+  "explainEl": "Μπερδεύει τη σχετική θέση, που περιγράφει πού βρίσκεται κάτι σε σχέση με άλλο σημείο, με τη γεωγραφική θέση που προσδιορίζεται με συντεταγμένες.",
+  "explainEn": "Confuses relative position, which describes where something is in relation to another place, with geographic position defined by coordinates.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Χαρτογράφος της Θέσης",
+  "achievementEn": "Position Mapper",
+  "positiveMessageEl": "Ξεχωρίζεις σωστά τους δύο τρόπους εντοπισμού!",
+  "positiveMessageEn": "You distinguish the two ways of locating a place!",
+  "skillTagEl": "Θέση στον Χάρτη",
+  "skillTagEn": "Map Position"
+},
+  "geo-b-gym.plate-boundary-seismicity": {
+  "id": "geo-b-gym.plate-boundary-seismicity",
+  "labelEl": "Σεισμικότητα και λιθοσφαιρικές πλάκες",
+  "labelEn": "Seismicity and tectonic plates",
+  "explainEl": "Δεν συνδέει την έντονη σεισμικότητα της Ελλάδας με τη θέση της κοντά σε ενεργό όριο σύγκλισης λιθοσφαιρικών πλακών.",
+  "explainEn": "Does not connect Greece's strong seismicity with its location near an active convergent plate boundary.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Ερευνητής των Πλακών",
+  "achievementEn": "Plate Explorer",
+  "positiveMessageEl": "Συνδέεις σωστά τη γεωλογία με τη σεισμική δράση!",
+  "positiveMessageEn": "You connect geology with seismic activity correctly!",
+  "skillTagEl": "Σεισμοί & Πλάκες",
+  "skillTagEn": "Earthquakes & Plates"
+},
+  "geo-b-gym.mediterranean-suez": {
+  "id": "geo-b-gym.mediterranean-suez",
+  "labelEl": "Συνδέσεις της Μεσογείου",
+  "labelEn": "Mediterranean connections",
+  "explainEl": "Μπερδεύει τα φυσικά στενά με την τεχνητή Διώρυγα του Σουέζ ως συνδέσεις της Μεσογείου με άλλες θάλασσες.",
+  "explainEn": "Confuses natural straits with the man-made Suez Canal as connections between the Mediterranean and other seas.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Εξερευνητής της Μεσογείου",
+  "achievementEn": "Mediterranean Explorer",
+  "positiveMessageEl": "Γνωρίζεις πώς συνδέεται η Μεσόγειος με τον υπόλοιπο κόσμο!",
+  "positiveMessageEn": "You know how the Mediterranean connects with the wider world!",
+  "skillTagEl": "Μεσόγειος",
+  "skillTagEn": "Mediterranean"
+},
+  "geo-b-gym.production-sectors": {
+  "id": "geo-b-gym.production-sectors",
+  "labelEl": "Τομείς παραγωγής",
+  "labelEn": "Production sectors",
+  "explainEl": "Μπερδεύει πρωτογενή, δευτερογενή και τριτογενή τομέα, ειδικά όταν πρέπει να κατατάξει υπηρεσίες ή επαγγέλματα.",
+  "explainEn": "Confuses the primary, secondary and tertiary sectors, especially when classifying services or occupations.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Αναλυτής της Οικονομίας",
+  "achievementEn": "Economy Analyst",
+  "positiveMessageEl": "Κατατάσσεις σωστά τις οικονομικές δραστηριότητες!",
+  "positiveMessageEn": "You classify economic activities correctly!",
+  "skillTagEl": "Τομείς Παραγωγής",
+  "skillTagEn": "Production Sectors"
+},
   "chimeia-g-gym.element-vs-compound": {
     "id": "chimeia-g-gym.element-vs-compound",
     "labelEl": "Στοιχείο vs Ένωση",
@@ -10423,6 +10491,116 @@ const QUIZZES = {
           "textEn": "Only chemical elements that do not participate.",
           "isCorrect": false,
           "gapTag": "chem-b-gym.reactants-products"
+        }
+      ]
+    }
+  ]
+},
+    "geologia-geografia-b-gymnasiou": {
+  "id": "geologia-geografia-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Γεωλογία - Γεωγραφία, Β' Γυμνασίου",
+  "subjectLabelEn": "Geology - Geography, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης Γεωγραφίας",
+  "titleEn": "The Geography Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από την επαληθευμένη ύλη 2026–27. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+  "introEn": "4 short questions from the verified 2026–27 scope. It's not a test, there's no grade.",
+  "questions": [
+    {
+      "id": "q1-position",
+      "textEl": "Η φράση «η Φλώρινα βρίσκεται βορειοδυτικά της Κοζάνης» περιγράφει...",
+      "textEn": "The statement 'Florina lies northwest of Kozani' describes...",
+      "options": [
+        {
+          "textEl": "Σχετική θέση.",
+          "textEn": "Relative position.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Γεωγραφική θέση με συντεταγμένες.",
+          "textEn": "Geographic position by coordinates.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.relative-vs-geographic-position"
+        },
+        {
+          "textEl": "Υψόμετρο.",
+          "textEn": "Elevation.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.relative-vs-geographic-position"
+        }
+      ]
+    },
+    {
+      "id": "q2-seismicity",
+      "textEl": "Γιατί η Ελλάδα παρουσιάζει έντονη σεισμική δραστηριότητα;",
+      "textEn": "Why does Greece have strong seismic activity?",
+      "options": [
+        {
+          "textEl": "Βρίσκεται κοντά σε ενεργό όριο σύγκλισης λιθοσφαιρικών πλακών.",
+          "textEn": "It lies near an active convergent tectonic-plate boundary.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Επειδή βρίσκεται αποκλειστικά σε πεδινή περιοχή.",
+          "textEn": "Because it lies entirely on plains.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.plate-boundary-seismicity"
+        },
+        {
+          "textEl": "Επειδή όλες οι χώρες της Ευρώπης έχουν την ίδια σεισμικότητα.",
+          "textEn": "Because all European countries have the same seismicity.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.plate-boundary-seismicity"
+        }
+      ]
+    },
+    {
+      "id": "q3-suez",
+      "textEl": "Ποια σύνδεση της Μεσογείου με άλλη θάλασσα είναι τεχνητό έργο;",
+      "textEn": "Which Mediterranean connection to another sea is man-made?",
+      "options": [
+        {
+          "textEl": "Η Διώρυγα του Σουέζ.",
+          "textEn": "The Suez Canal.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Το Στενό του Γιβραλτάρ.",
+          "textEn": "The Strait of Gibraltar.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.mediterranean-suez"
+        },
+        {
+          "textEl": "Ο Βόσπορος.",
+          "textEn": "The Bosporus.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.mediterranean-suez"
+        }
+      ]
+    },
+    {
+      "id": "q4-sector",
+      "textEl": "Σε ποιον τομέα παραγωγής ανήκει κυρίως η εκπαίδευση;",
+      "textEn": "Which production sector does education mainly belong to?",
+      "options": [
+        {
+          "textEl": "Στον τριτογενή τομέα.",
+          "textEn": "The tertiary sector.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Στον πρωτογενή τομέα.",
+          "textEn": "The primary sector.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.production-sectors"
+        },
+        {
+          "textEl": "Στον δευτερογενή τομέα.",
+          "textEn": "The secondary sector.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.production-sectors"
         }
       ]
     }

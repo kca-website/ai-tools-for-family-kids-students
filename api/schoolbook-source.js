@@ -18,6 +18,14 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "chimeia-b-gymnasiou": {
+    title: "Χημεία Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/",
+    mode: "chemistryB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
@@ -85,6 +93,7 @@ const BOOKS = {
 
 const ALIASES = {
   "math-b-gymnasiou": "mathimatika-b-gymnasiou",
+  "chemistry-b-gymnasiou": "chimeia-b-gymnasiou",
   "fysiki-b-gymnasiou": "physics-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
@@ -176,6 +185,28 @@ const MATH_B_2026_2027_PATHS = Object.freeze({
   "B.4.3": ["indexB4_3.html"],
   "B.4.4": ["indexB4_4.html"],
   "B.4.6": ["indexB4_6.html"]
+});
+
+const CHEMISTRY_B_2026_2027_PATHS = Object.freeze({
+  "1.1": ["index1_1.html"],
+  "1.2": ["index1_2.html"],
+  "1.3": ["index1_3.html"],
+  "2.1": ["index2_1.html"],
+  "2.2": ["index2_2_1.html", "index2_2_2.html"],
+  "2.3": ["index2_3_1.html", "index2_3_2.html", "index2_3_3.html"],
+  "2.4": ["index2_4.html"],
+  "2.5": ["index2_5.html"],
+  "2.6": ["index2_6.html", "index2_6_2.html"],
+  "2.7": ["index2_7.html"],
+  "2.8": ["index2_8.html"],
+  "2.9": ["index2_9.html"],
+  "2.10": ["index2_10.html"],
+  "2.11": ["index2_11.html"],
+  "3.1": ["index3_1.html"],
+  "3.2": ["index3_2.html"],
+  "3.3": ["index3_3.html"],
+  "3.4": ["index3_4.html"],
+  "4.2": ["index4_2.html"]
 });
 
 module.exports = async function handler(req, res) {
@@ -314,6 +345,11 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "mathimatika-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveMathBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "chimeia-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveChemistryBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
   if (subject === "biologia-a-gymnasiou") {
@@ -479,6 +515,23 @@ function mathBTopicKey(topic) {
   return `${part}.${chapter}.${section}`;
 }
 
+function resolveChemistryBCurriculumPaths(topic) {
+  const key = chemistryBTopicKey(topic);
+  return key && CHEMISTRY_B_2026_2027_PATHS[key]
+    ? [...CHEMISTRY_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function chemistryBTopicKey(topic) {
+  const value = String(topic || "");
+  const match = value.match(/(?:Γενική\s+Ενότητα\s+\d+\s*·\s*)?(\d+)\.(\d+)/i);
+  if (!match) return "";
+  const chapter = Number(match[1]);
+  const section = Number(match[2]);
+  if (!Number.isInteger(chapter) || chapter < 1 || !Number.isInteger(section) || section < 1) return "";
+  return `${chapter}.${section}`;
+}
+
 async function fetchOfficialHtml(url) {
   const response = await fetch(url, {
     headers: {
@@ -623,7 +676,10 @@ module.exports._test = Object.freeze({
   resolveHistoryCurriculumPaths,
   mathBTopicKey,
   resolveMathBCurriculumPaths,
+  chemistryBTopicKey,
+  resolveChemistryBCurriculumPaths,
   resolveSectionPath,
   HISTORY_B_2026_2027_PATHS,
-  MATH_B_2026_2027_PATHS
+  MATH_B_2026_2027_PATHS,
+  CHEMISTRY_B_2026_2027_PATHS
 });

@@ -76,7 +76,48 @@
     return (q("videoOwnMaterial")?.value||ownMaterialText||"").trim();
   }
 
-  function buildPrompt(){
+  function normaliseSearchText(value){
+    return String(value||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9α-ω]+/gi," ").replace(/\s+/g," ").trim();
+  }
+
+  function selectRelevantMaterial(text,query,maxChars=9000){
+    const full=String(text||"").trim();
+    if(!full||full.length<=maxChars)return full;
+    const chunks=[];
+    const pageParts=full.split(/(?=\[Page\s+\d+\])/i).filter(Boolean);
+    const base=pageParts.length>1?pageParts:[full];
+    for(const part of base){
+      if(part.length<=2600){chunks.push(part);continue;}
+      for(let i=0;i<part.length;i+=2200)chunks.push(part.slice(i,i+2600));
+    }
+    const stop=new Set(["και","την","των","του","της","στο","στη","στην","για","απο","από","με","σε","να","το","τα","οι","ένα","μια","the","and","for","with","from","this","that"]);
+    const keys=[...new Set(normaliseSearchText(query).split(" ").filter(w=>w.length>=4&&!stop.has(w)))].slice(0,24);
+    const scored=chunks.map((chunk,index)=>{
+      const n=normaliseSearchText(chunk);
+      let score=0;
+      for(const k of keys) if(n.includes(k)) score+=k.length>=7?4:2;
+      return {chunk,index,score};
+    }).sort((a,b)=>b.score-a.score||a.index-b.index);
+
+    const picked=[];let used=0;
+    for(const row of scored){
+      if(used>=maxChars)break;
+      const room=maxChars-used;
+      if(room<500)break;
+      const piece=row.chunk.slice(0,room);
+      picked.push({piece,index:row.index});
+      used+=piece.length;
+    }
+    if(!picked.length)return full.slice(0,maxChars);
+    return picked.sort((a,b)=>a.index-b.index).map(x=>x.piece).join("\n\n").slice(0,maxChars);
+  }
+
+  function isContextLimitError(message){
+    const s=String(message||"").toLowerCase();
+    return s.includes("request too large")||s.includes("context")&&s.includes("limit")||s.includes("requested")&&s.includes("tokens");
+  }
+
+  function buildPrompt(sourceCharBudget=9000){
     const curriculum=(q("curriculumNote")?.innerText||"").replace(/\s+/g," ").trim();
     const context=selectedText("context");
     const grade=selectedText("grade");
@@ -91,6 +132,8 @@
     const mode=sourceMode();
     const own=ownMaterial();
     const ownInstruction=(q("videoOwnInstruction")?.value||"").trim();
+    const sourceQuery=[topic,objective,notes,ownInstruction,purpose].join(" ");
+    const selectedOwn=mode==="own"?selectRelevantMaterial(own,sourceQuery,sourceCharBudget):"";
     const ownPolicy=q("videoOwnPolicy")?.value||"exact";
 
     if(mode==="own"&&!own) throw new Error("Πρόσθεσε κείμενο ή φόρτωσε PDF/TXT πριν δημιουργήσεις βίντεο.");
@@ -103,8 +146,9 @@
   :"Μπορείς να βελτιώσεις τη σειρά, τη σαφήνεια και την προφορικότητα, αλλά ΜΗΝ προσθέσεις γεγονότα ή πληροφορίες που δεν υπάρχουν στο υλικό."}
 ΥΛΙΚΟ ΕΚΠΑΙΔΕΥΤΙΚΟΥ:
 --- ΑΡΧΗ ΥΛΙΚΟΥ ---
-${own.slice(0,28000)}
---- ΤΕΛΟΣ ΥΛΙΚΟΥ ---`
+${selectedOwn}
+--- ΤΕΛΟΣ ΥΛΙΚΟΥ ---
+${own.length>selectedOwn.length?"Σημείωση συστήματος: Το αρχείο ήταν μεγαλύτερο από το ασφαλές όριο του μοντέλου. Χρησιμοποιήθηκαν μόνο τα πιο σχετικά αποσπάσματα με βάση το θέμα, τον στόχο και τις οδηγίες του εκπαιδευτικού. Μην ισχυριστείς ότι καλύπτεις τμήματα που δεν εμφανίζονται παραπάνω.":""}`
       :`ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: Χαρτογραφημένη σχολική ύλη του aitools4kids.
 Συγκεκριμένη σχολική ενότητα: ${topic}
 Τεκμηρίωση/καθεστώς ύλης από το site: ${curriculum||"Χρησιμοποίησε μόνο την ακριβή ενότητα που δόθηκε και μην επινοήσεις επίσημη ύλη."}`;
@@ -471,7 +515,7 @@ ${sourceBlock}
     card?.classList.add("video-scene-regenerating");
     q("videoStatus").textContent=`Ξαναδημιουργία σκηνής ${index+1}…`;
     try{
-      const context=buildPrompt();
+      const context=buildPrompt(7000);
       const current=project.scenes[index];
       const prompt=`${context}
 
@@ -987,10 +1031,21 @@ ${JSON.stringify(current)}
     q("generationMessage").textContent="1/3 Σενάριο και storyboard πάνω στην επιλεγμένη ύλη.";
     try{
       const videoSystem="Είσαι εκπαιδευτικός σχεδιαστής σύντομων βίντεο για ελληνικό σχολικό πλαίσιο. Ακολουθείς αυστηρά την ενότητα και το καθεστώς ύλης που δίνει ο χρήστης. Επιστρέφεις μόνο το JSON που ζητείται, χωρίς markdown.";
-      const r=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:videoSystem,prompt:buildPrompt(),outputTokens:outputTokenBudget()})});
-      const d=await r.json();
-      if(!r.ok)throw new Error(d.message||"Αποτυχία δημιουργίας storyboard.");
-      project=extractJson(d.text);
+      const requestStoryboard=async(sourceBudget)=>{
+        const response=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:videoSystem,prompt:buildPrompt(sourceBudget),outputTokens:outputTokenBudget()})});
+        const data=await response.json().catch(()=>({}));
+        return {response,data};
+      };
+      let attempt=await requestStoryboard(9000);
+      if(!attempt.response.ok&&isContextLimitError(attempt.data?.message)){
+        q("generationMessage").textContent="Το αρχείο είναι μεγάλο. Κρατάω μόνο τα πιο σχετικά αποσπάσματα και ξαναδοκιμάζω…";
+        attempt=await requestStoryboard(6000);
+      }
+      if(!attempt.response.ok){
+        if(isContextLimitError(attempt.data?.message)) throw new Error("Το υλικό είναι πολύ μεγάλο για μία κλήση AI. Μείωσε λίγο την επιλεγμένη ύλη ή γράψε πιο συγκεκριμένο στόχο ώστε να κρατήσουμε τα σωστά αποσπάσματα.");
+        throw new Error(attempt.data?.message||"Αποτυχία δημιουργίας storyboard.");
+      }
+      project=extractJson(attempt.data.text);
       projectDirty=false;
       drawScene(project.scenes[0],0,1,0);
       renderStoryboard();

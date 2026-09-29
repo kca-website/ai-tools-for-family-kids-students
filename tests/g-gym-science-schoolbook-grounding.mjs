@@ -5,6 +5,7 @@ const source = await import("../api/schoolbook-source.js");
 const test = source.default?._test || source._test || source.default || {};
 const {
   resolvePhysicsGQuizUrls,
+  resolveDirectSourceUrls,
   physicsGAnnualTopicKey,
   scopePhysicsGAnnualTopic,
   PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES,
@@ -16,6 +17,7 @@ const {
 } = test;
 
 assert.equal(typeof resolvePhysicsGQuizUrls, "function");
+assert.equal(typeof resolveDirectSourceUrls, "function");
 assert.equal(typeof resolveChemistryGQuizUrls, "function");
 assert.equal(typeof resolveBiologyGQuizUrls, "function");
 
@@ -47,6 +49,7 @@ for (const [label, key, endings] of physicsAnnualTopics) {
   const urls = resolvePhysicsGQuizUrls(label);
   assert.equal(urls.length, endings.length);
   endings.forEach((ending, i) => assert.ok(urls[i].endsWith(ending), label + " source " + ending));
+  assert.deepEqual(resolveDirectSourceUrls("fysiki-g-gymnasiou", label), urls);
 }
 assert.equal(Object.keys(PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES).length, 16);
 
@@ -103,6 +106,14 @@ assert.equal(Object.keys(CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES).length, 9);
 assert.equal(Object.keys(BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES).length, 10);
 
 const endpoint = fs.readFileSync(new URL("../api/schoolbook-source.js", import.meta.url), "utf8");
+const directResolverStart = endpoint.indexOf("function resolveDirectSourceUrls");
+const directResolverEnd = endpoint.indexOf("function resolveMathAQuizPaths", directResolverStart);
+const directResolverBody = endpoint.slice(directResolverStart, directResolverEnd);
+assert.doesNotMatch(directResolverBody, /scopePhysicsGAnnualTopic\(scoped/);
+const scopeStart = endpoint.indexOf("function applyCurriculumTextScope");
+const scopeEnd = endpoint.indexOf("function sliceLinesBetween", scopeStart);
+const scopeBody = endpoint.slice(scopeStart, scopeEnd);
+assert.match(scopeBody, /subject === "fysiki-g-gymnasiou"[\s\S]{0,400}scopePhysicsGAnnualTopic\(scoped, annualKey\)/);
 for (const subject of ["fysiki-g-gymnasiou", "chimeia-g-gymnasiou", "biologia-g-gymnasiou"]) {
   const marker = `"${subject}": {`;
   const at = endpoint.indexOf(marker);

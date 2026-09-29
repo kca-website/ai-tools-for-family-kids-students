@@ -34,6 +34,15 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "logotechnia-b-gymnasiou": {
+    title: "Κείμενα Νεοελληνικής Λογοτεχνίας Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/",
+    mode: "literatureB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "teacher-choice-from-official-anthology"
+  },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
@@ -104,6 +113,8 @@ const ALIASES = {
   "chemistry-b-gymnasiou": "chimeia-b-gymnasiou",
   "geografia-b-gymnasiou": "geologia-geografia-b-gymnasiou",
   "geology-geography-b-gymnasiou": "geologia-geografia-b-gymnasiou",
+  "keimena-logotechnias-b-gymnasiou": "logotechnia-b-gymnasiou",
+  "neoelliniki-logotechnia-b-gymnasiou": "logotechnia-b-gymnasiou",
   "fysiki-b-gymnasiou": "physics-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
@@ -268,6 +279,419 @@ const GEOGRAPHY_B_2026_2027_PATHS = Object.freeze({
   "48": ["mat4_48.html"]
 });
 
+const LITERATURE_B_2026_2027_TEXTS = Object.freeze([
+  {
+    "path": "indexa_1.html",
+    "titles": [
+      "Πίνοντας ήλιο κορινθιακό"
+    ]
+  },
+  {
+    "path": "indexa_2.html",
+    "titles": [
+      "Ξυπνάμε και η θάλασσα ξυπνά μαζί μας"
+    ]
+  },
+  {
+    "path": "indexa_3.html",
+    "titles": [
+      "Αθήνα"
+    ]
+  },
+  {
+    "path": "indexa_4.html",
+    "titles": [
+      "Η πόλη"
+    ]
+  },
+  {
+    "path": "indexa_5.html",
+    "titles": [
+      "Χαλασμένες γειτονιές"
+    ]
+  },
+  {
+    "path": "indexa_6.html",
+    "titles": [
+      "Ένα παλιό μήνυμα για το σύγχρονο κόσμο"
+    ]
+  },
+  {
+    "path": "indexb_1.html",
+    "titles": [
+      "Ο Τάκη-Πλούμας"
+    ]
+  },
+  {
+    "path": "indexb_2.html",
+    "titles": [
+      "Η Άννα του Κλήδονα"
+    ]
+  },
+  {
+    "path": "indexb_3.html",
+    "titles": [
+      "Να 'σαι καλά, δάσκαλε!"
+    ]
+  },
+  {
+    "path": "indexb_4.html",
+    "titles": [
+      "Ο Καραγκιόζης. Ένα ελληνικό θέατρο σκιών"
+    ]
+  },
+  {
+    "path": "indexc_1.html",
+    "titles": [
+      "Η μάνα"
+    ]
+  },
+  {
+    "path": "indexc_2.html",
+    "titles": [
+      "Από το ημερολόγιο της Άννας Φρανκ"
+    ]
+  },
+  {
+    "path": "indexc_3.html",
+    "titles": [
+      "Οι Κυριακές στη θάλασσα"
+    ]
+  },
+  {
+    "path": "indexc_4.html",
+    "titles": [
+      "Νανούρισμα στο γιο μου"
+    ]
+  },
+  {
+    "path": "indexd_1.html",
+    "titles": [
+      "Στην εκκλησία"
+    ]
+  },
+  {
+    "path": "indexd_2.html",
+    "titles": [
+      "Τ' άσπρο ξωκλήσι"
+    ]
+  },
+  {
+    "path": "indexd_3.html",
+    "titles": [
+      "Κάποια Χριστούγεννα"
+    ]
+  },
+  {
+    "path": "indexd_4.html",
+    "titles": [
+      "Η ιστορία του δαχτυλιδιού"
+    ]
+  },
+  {
+    "path": "indexe_1.html",
+    "titles": [
+      "Ο Διγενής"
+    ]
+  },
+  {
+    "path": "indexe_2.html",
+    "titles": [
+      "Του Βασίλη"
+    ]
+  },
+  {
+    "path": "indexe_3.html",
+    "titles": [
+      "Εις Σάμον"
+    ]
+  },
+  {
+    "path": "indexe_4.html",
+    "titles": [
+      "Η καταστροφή των Ψαρών"
+    ]
+  },
+  {
+    "path": "indexe_5.html",
+    "titles": [
+      "Ερημωμένα χωριά"
+    ]
+  },
+  {
+    "path": "indexe_6.html",
+    "titles": [
+      "Από δόξα και θάνατο"
+    ]
+  },
+  {
+    "path": "indexe_7.html",
+    "titles": [
+      "Έξι χιλιάδες νέοι"
+    ]
+  },
+  {
+    "path": "indexe_8.html",
+    "titles": [
+      "Το συρματόπλεγμα του αίσχους"
+    ]
+  },
+  {
+    "path": "indexf_1.html",
+    "titles": [
+      "Όταν πρωτοκατέβηκα στη Σμύρνη"
+    ]
+  },
+  {
+    "path": "indexf_2.html",
+    "titles": [
+      "Πάσχα τ' Απρίλη"
+    ]
+  },
+  {
+    "path": "indexf_3.html",
+    "titles": [
+      "Χρονικό"
+    ]
+  },
+  {
+    "path": "indexf_4.html",
+    "titles": [
+      "Ένας αριθμός"
+    ]
+  },
+  {
+    "path": "indexg_1.html",
+    "titles": [
+      "Βγαίνοντας από το σχολειό"
+    ]
+  },
+  {
+    "path": "indexg_2.html",
+    "titles": [
+      "Μια Κυριακή στην Κνωσό"
+    ]
+  },
+  {
+    "path": "indexg_3.html",
+    "titles": [
+      "Η εξοχική Λευκάδα"
+    ]
+  },
+  {
+    "path": "indexg_4.html",
+    "titles": [
+      "Τόκιο"
+    ]
+  },
+  {
+    "path": "indexh_1.html",
+    "titles": [
+      "Θέλω να πα στην ξενιτιά",
+      "Θέλω να πας στην ξενιτιά",
+      "Ξενιτεμένο μου πουλί"
+    ]
+  },
+  {
+    "path": "indexh_2.html",
+    "titles": [
+      "Ο Κάσπαρ Χάουζερ στην έρημη χώρα"
+    ]
+  },
+  {
+    "path": "indexh_3.html",
+    "titles": [
+      "Η επιστροφή του Αντρέα"
+    ]
+  },
+  {
+    "path": "indexh_4.html",
+    "titles": [
+      "Για τον όρο «μετανάστες»"
+    ]
+  },
+  {
+    "path": "indexh_5.html",
+    "titles": [
+      "Γλυκό του κουταλιού"
+    ]
+  },
+  {
+    "path": "indexh_6.html",
+    "titles": [
+      "Δύο γράμματα της Χαράς"
+    ]
+  },
+  {
+    "path": "indexh_7.html",
+    "titles": [
+      "Αναμνήσεις της Κωνσταντίνας από τη Γερμανία"
+    ]
+  },
+  {
+    "path": "indexi_1.html",
+    "titles": [
+      "Καλλιπάτειρα"
+    ]
+  },
+  {
+    "path": "indexi_2.html",
+    "titles": [
+      "Η τρίπλα των ονείρων"
+    ]
+  },
+  {
+    "path": "indexi_3.html",
+    "titles": [
+      "Η τοπική ομάδα"
+    ]
+  },
+  {
+    "path": "indexi_4.html",
+    "titles": [
+      "Η εσχάτη των ποινών"
+    ]
+  },
+  {
+    "path": "indexj_1.html",
+    "titles": [
+      "Τα πουλιά δέλεαρ του Θεού"
+    ]
+  },
+  {
+    "path": "indexj_2.html",
+    "titles": [
+      "Γιατί;"
+    ]
+  },
+  {
+    "path": "indexj_3.html",
+    "titles": [
+      "Η κυρία Νίτσα"
+    ]
+  },
+  {
+    "path": "indexj_4.html",
+    "titles": [
+      "Και πάλι στο σχολείο..."
+    ]
+  },
+  {
+    "path": "indexj_5.html",
+    "titles": [
+      "Ο μικρός πρίγκιπας και η αλεπού"
+    ]
+  },
+  {
+    "path": "indexj_6.html",
+    "titles": [
+      "Μαλαισιακά τραγούδια"
+    ]
+  },
+  {
+    "path": "indexk_1.html",
+    "titles": [
+      "Θερμοπύλες"
+    ]
+  },
+  {
+    "path": "indexk_2.html",
+    "titles": [
+      "Όμως ο μπαμπάς δεν ερχόταν"
+    ]
+  },
+  {
+    "path": "indexk_3.html",
+    "titles": [
+      "Για ένα παιδί που κοιμάται"
+    ]
+  },
+  {
+    "path": "indexk_4.html",
+    "titles": [
+      "Το τραγούδι του Γιανγκ"
+    ]
+  },
+  {
+    "path": "indexl_1.html",
+    "titles": [
+      "Τι έπαιξα στο Λαύριο"
+    ]
+  },
+  {
+    "path": "indexl_2.html",
+    "titles": [
+      "Στην εποχή του τσιμέντου και της πολυκατοικίας"
+    ]
+  },
+  {
+    "path": "indexl_3.html",
+    "titles": [
+      "Γραφείον ευρέσεως εργασίας"
+    ]
+  },
+  {
+    "path": "indexl_4.html",
+    "titles": [
+      "Με το λεωφορείο"
+    ]
+  },
+  {
+    "path": "indexl_5.html",
+    "titles": [
+      "Ιστορία του λαβύρινθου"
+    ]
+  },
+  {
+    "path": "indexl_6.html",
+    "titles": [
+      "Τα λουλούδια της Χιροσίμα"
+    ]
+  },
+  {
+    "path": "indexl_7.html",
+    "titles": [
+      "Όταν πεθαίνει ένα παιδί"
+    ]
+  },
+  {
+    "path": "indexl_8.html",
+    "titles": [
+      "Στα καμένα"
+    ]
+  },
+  {
+    "path": "indexm_1.html",
+    "titles": [
+      "Οι γάτες των φορτηγών"
+    ]
+  },
+  {
+    "path": "indexm_2.html",
+    "titles": [
+      "Ο λύκος"
+    ]
+  },
+  {
+    "path": "indexm_3.html",
+    "titles": [
+      "Άνθρωποι και δελφίνια"
+    ]
+  },
+  {
+    "path": "indexm_4.html",
+    "titles": [
+      "Ο μεταξοσκώληκας"
+    ]
+  },
+  {
+    "path": "indexm_5.html",
+    "titles": [
+      "Ο σκαντζόχερος"
+    ]
+  }
+]);
+
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -417,6 +841,11 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "geologia-geografia-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveGeographyBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "logotechnia-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveLiteratureBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
   if (subject === "biologia-a-gymnasiou") {
@@ -612,6 +1041,17 @@ function geographyBTopicKey(topic) {
   if (!match) return "";
   const lesson = Number(match[1]);
   return Number.isInteger(lesson) && lesson > 0 ? String(lesson) : "";
+}
+
+function resolveLiteratureBCurriculumPaths(topic) {
+  const value = normalize(topic);
+  const matches = LITERATURE_B_2026_2027_TEXTS.filter(row =>
+    row.titles.some(title => {
+      const needle = normalize(title);
+      return needle.length >= 6 && value.includes(needle);
+    })
+  );
+  return [...new Set(matches.map(row => row.path))];
 }
 
 async function fetchOfficialHtml(url) {
@@ -827,10 +1267,12 @@ module.exports._test = Object.freeze({
   resolveChemistryBCurriculumPaths,
   geographyBTopicKey,
   resolveGeographyBCurriculumPaths,
+  resolveLiteratureBCurriculumPaths,
   resolveSectionPath,
   HISTORY_B_2026_2027_PATHS,
   MATH_B_2026_2027_PATHS,
   CHEMISTRY_B_2026_2027_PATHS,
   GEOGRAPHY_B_2026_2027_PATHS,
+  LITERATURE_B_2026_2027_TEXTS,
   applyCurriculumTextScope
 });

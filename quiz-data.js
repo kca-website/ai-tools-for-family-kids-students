@@ -3420,6 +3420,74 @@ const GAP_TAGS = {
     "skillTagEl": "Μετατροπή Ενέργειας",
     "skillTagEn": "Energy Transformation"
   },
+  "chem-b-gym.mixture-homogeneous": {
+  "id": "chem-b-gym.mixture-homogeneous",
+  "labelEl": "Ομογενές και ετερογενές μείγμα",
+  "labelEn": "Homogeneous vs heterogeneous mixture",
+  "explainEl": "Μπερδεύει ένα ομογενές μείγμα, στο οποίο δεν ξεχωρίζουν τα συστατικά του, με ένα ετερογενές μείγμα.",
+  "explainEn": "Confuses a homogeneous mixture, whose components are not visibly distinct, with a heterogeneous mixture.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Ερευνητής των Μειγμάτων",
+  "achievementEn": "Mixture Explorer",
+  "positiveMessageEl": "Ξεχωρίζεις σωστά τα είδη των μειγμάτων!",
+  "positiveMessageEn": "You can correctly distinguish types of mixtures!",
+  "skillTagEl": "Μείγματα",
+  "skillTagEn": "Mixtures"
+},
+  "chem-b-gym.solution-percent-wv": {
+  "id": "chem-b-gym.solution-percent-wv",
+  "labelEl": "Περιεκτικότητα % w/v",
+  "labelEn": "Percent concentration w/v",
+  "explainEl": "Δεν συνδέει σωστά την έκφραση % w/v με τα γραμμάρια διαλυμένης ουσίας που περιέχονται σε 100 mL διαλύματος.",
+  "explainEn": "Does not correctly connect % w/v with the grams of solute contained in 100 mL of solution.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Μετρητής των Διαλυμάτων",
+  "achievementEn": "Solution Concentration Expert",
+  "positiveMessageEl": "Διαβάζεις σωστά την περιεκτικότητα ενός διαλύματος!",
+  "positiveMessageEn": "You interpret solution concentration correctly!",
+  "skillTagEl": "Περιεκτικότητα Διαλύματος",
+  "skillTagEn": "Solution Concentration"
+},
+  "chem-b-gym.element-compound": {
+  "id": "chem-b-gym.element-compound",
+  "labelEl": "Χημικό στοιχείο και χημική ένωση",
+  "labelEn": "Chemical element vs compound",
+  "explainEl": "Μπερδεύει ένα χημικό στοιχείο με μια χημική ένωση που αποτελείται από άτομα διαφορετικών στοιχείων.",
+  "explainEn": "Confuses a chemical element with a chemical compound made of atoms of different elements.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Γνώστης των Στοιχείων",
+  "achievementEn": "Element & Compound Expert",
+  "positiveMessageEl": "Ξέρεις πότε μια ουσία είναι στοιχείο και πότε ένωση!",
+  "positiveMessageEn": "You know when a substance is an element and when it is a compound!",
+  "skillTagEl": "Στοιχεία & Ενώσεις",
+  "skillTagEn": "Elements & Compounds"
+},
+  "chem-b-gym.reactants-products": {
+  "id": "chem-b-gym.reactants-products",
+  "labelEl": "Αντιδρώντα και προϊόντα",
+  "labelEn": "Reactants and products",
+  "explainEl": "Μπερδεύει ποια σώματα είναι τα αντιδρώντα και ποια τα προϊόντα σε μια χημική εξίσωση.",
+  "explainEn": "Confuses which substances are reactants and which are products in a chemical equation.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Αναγνώστης των Αντιδράσεων",
+  "achievementEn": "Reaction Reader",
+  "positiveMessageEl": "Διαβάζεις σωστά μια χημική εξίσωση!",
+  "positiveMessageEn": "You read a chemical equation correctly!",
+  "skillTagEl": "Χημικές Εξισώσεις",
+  "skillTagEn": "Chemical Equations"
+},
   "chimeia-g-gym.element-vs-compound": {
     "id": "chimeia-g-gym.element-vs-compound",
     "labelEl": "Στοιχείο vs Ένωση",
@@ -10250,6 +10318,116 @@ const QUIZZES = {
         }
       ]
     },
+    "chimeia-b-gymnasiou": {
+  "id": "chimeia-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Χημεία, Β' Γυμνασίου",
+  "subjectLabelEn": "Chemistry, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης Χημείας",
+  "titleEn": "The Chemistry Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από την επαληθευμένη ύλη 2026–27. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+  "introEn": "4 short questions from the verified 2026–27 scope. It's not a test, there's no grade.",
+  "questions": [
+    {
+      "id": "q1-mixture",
+      "textEl": "Ποιο από τα παρακάτω είναι ομογενές μείγμα;",
+      "textEn": "Which of the following is a homogeneous mixture?",
+      "options": [
+        {
+          "textEl": "Αλατόνερο, αφού το αλάτι έχει διαλυθεί πλήρως.",
+          "textEn": "Salt water, after the salt has fully dissolved.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Νερό και λάδι.",
+          "textEn": "Water and oil.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.mixture-homogeneous"
+        },
+        {
+          "textEl": "Νερό και άμμος.",
+          "textEn": "Water and sand.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.mixture-homogeneous"
+        }
+      ]
+    },
+    {
+      "id": "q2-percent-wv",
+      "textEl": "Ένα διάλυμα 5% w/v περιέχει πόσα γραμμάρια διαλυμένης ουσίας σε 100 mL διαλύματος;",
+      "textEn": "A 5% w/v solution contains how many grams of solute in 100 mL of solution?",
+      "options": [
+        {
+          "textEl": "5 g",
+          "textEn": "5 g",
+          "isCorrect": true
+        },
+        {
+          "textEl": "50 g",
+          "textEn": "50 g",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.solution-percent-wv"
+        },
+        {
+          "textEl": "0,5 g",
+          "textEn": "0.5 g",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.solution-percent-wv"
+        }
+      ]
+    },
+    {
+      "id": "q3-element-compound",
+      "textEl": "Το νερό (H₂O) είναι...",
+      "textEn": "Water (H₂O) is...",
+      "options": [
+        {
+          "textEl": "Χημική ένωση, επειδή αποτελείται από διαφορετικά χημικά στοιχεία.",
+          "textEn": "A chemical compound, because it contains different chemical elements.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Χημικό στοιχείο.",
+          "textEn": "A chemical element.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.element-compound"
+        },
+        {
+          "textEl": "Πάντα ετερογενές μείγμα.",
+          "textEn": "Always a heterogeneous mixture.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.element-compound"
+        }
+      ]
+    },
+    {
+      "id": "q4-equation",
+      "textEl": "Σε μια χημική εξίσωση, τι γράφουμε συνήθως αριστερά από το βέλος;",
+      "textEn": "In a chemical equation, what is usually written to the left of the arrow?",
+      "options": [
+        {
+          "textEl": "Τα αντιδρώντα.",
+          "textEn": "The reactants.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Τα προϊόντα.",
+          "textEn": "The products.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.reactants-products"
+        },
+        {
+          "textEl": "Μόνο τα χημικά στοιχεία που δεν συμμετέχουν.",
+          "textEn": "Only chemical elements that do not participate.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.reactants-products"
+        }
+      ]
+    }
+  ]
+},
     "chimeia-g-gymnasiou": {
       "id": "chimeia-g-gymnasiou",
       "grades": [

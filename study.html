@@ -255,7 +255,7 @@
     box.classList.remove('hidden');
   }
   function requiresOfficialSource(){
-    return ['physics-gymnasiou','istoria-b-gymnasiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
+    return ['physics-gymnasiou','istoria-b-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
   }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}
@@ -651,6 +651,12 @@
       const primaryVoice=chooseSpeechVoice();
       const voices=synth.getVoices?.()||[];
       if(!primaryVoice&&voices.length===0&&attempt<8){setTimeout(()=>start(attempt+1),120);return}
+      if(!primaryVoice&&voices.length){
+        setAudioStatus(lang==='en'
+          ?'No English speech voice is installed on this computer. Add an English voice in the operating-system speech settings.'
+          :'Δεν βρέθηκε εγκατεστημένη ελληνική φωνή σε αυτόν τον υπολογιστή. Η ανάγνωση σταματά ώστε να μη χρησιμοποιηθεί λάθος γλώσσα. Πρόσθεσε ελληνική φωνή στις ρυθμίσεις φωνής του λειτουργικού.');
+        return;
+      }
       let index=0;
 
       const speakNext=()=>{
@@ -665,10 +671,9 @@
           if(variant===0){
             u.lang=lang==='en'?'en-US':'el-GR';
             if(primaryVoice)u.voice=primaryVoice;
-          }else if(variant===1){
-            u.lang=lang==='en'?'en':'el';
           }else{
-            u.lang='';
+            u.lang=lang==='en'?'en':'el';
+            if(primaryVoice)u.voice=primaryVoice;
           }
           u.rate=.94;u.pitch=1;u.volume=1;
           u.onstart=()=>setAudioStatus((lang==='en'?'Playing ':'Αναπαραγωγή ')+(index+1)+'/'+chunks.length);
@@ -677,7 +682,7 @@
             if(runId!==audioRunId)return;
             const code=String(e?.error||'unknown');
             if(code==='canceled'||code==='interrupted')return;
-            if(variant<2 && !['not-allowed','synthesis-unavailable'].includes(code)){
+            if(variant<1 && !['not-allowed','synthesis-unavailable'].includes(code)){
               setAudioStatus((lang==='en'?'Retrying audio… ':'Νέα προσπάθεια ανάγνωσης… ')+code);
               setTimeout(()=>speakAttempt(variant+1),180);
               return;

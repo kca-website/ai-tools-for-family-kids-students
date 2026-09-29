@@ -10,6 +10,14 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "istoria-a-lykeiou": {
+    title: "Ιστορία του Αρχαίου Κόσμου Α΄ Γενικού Λυκείου",
+    base: "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2696/Istoria_A-Lykeiou_html-empl/",
+    mode: "historyALyceum",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
+  },
   "mathimatika-b-gymnasiou": {
     title: "Μαθηματικά Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/",
@@ -955,6 +963,16 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "istoria-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "istoria-a-lykeiou") {
+    const base = BOOKS[subject].base;
+    // Exact source for the currently mapped "Περικλής και αθηναϊκή δημοκρατία"
+    // topic. Do not expose the rest of the book as if it were the selected unit.
+    if (t.includes("περικλ") && t.includes("αθηνα") && t.includes("δημοκρατ")) {
+      return [new URL("indexII2_3.html", base).toString()];
+    }
+    return [];
   }
 
   if (subject === "mathimatika-b-gymnasiou") {

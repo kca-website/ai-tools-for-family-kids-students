@@ -46,7 +46,10 @@ const BOOKS = {
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
-    mode: "numeric"
+    mode: "physicsB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "biologia-a-gymnasiou": {
     title: "Βιολογία Α΄ Γυμνασίου",
@@ -56,7 +59,10 @@ const BOOKS = {
   "biologia-b-gymnasiou": {
     title: "Βιολογία Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
-    mode: "biologyB"
+    mode: "biologyB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "biologia-g-gymnasiou": {
     title: "Βιολογία Β΄ και Γ΄ Γυμνασίου",
@@ -71,7 +77,10 @@ const BOOKS = {
   "archaia-glossa-b-gymnasiou": {
     title: "Αρχαία Ελληνική Γλώσσα Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2234/Archaia-Elliniki-Glossa_B-Gymnasiou_html-empl/",
-    mode: "unit2digit"
+    mode: "ancientGreekB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "archaia-glossa-g-gymnasiou": {
     title: "Αρχαία Ελληνική Γλώσσα Γ΄ Γυμνασίου",
@@ -86,7 +95,10 @@ const BOOKS = {
   "iliada-b-gymnasiou": {
     title: "Ομηρικά Έπη – Ιλιάδα Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/",
-    mode: "iliadSequence"
+    mode: "iliadB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "glossa-a-gymnasiou": {
     title: "Νεοελληνική Γλώσσα Α΄ Γυμνασίου",
@@ -97,8 +109,21 @@ const BOOKS = {
   "glossa-b-gymnasiou": {
     title: "Νεοελληνική Γλώσσα Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2298/Neoelliniki-Glossa_B-Gymnasiou_empl/",
-    mode: "modernGreekB",
-    multi: true
+    mode: "modernGreekBAnnual",
+    multi: true,
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "target-based-teacher-selection"
+  },
+  "english-b-gymnasiou": {
+    title: "Αγγλικά Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2320/Agglika_B-Gymnasiou-Proch_html-empl/",
+    mode: "englishB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "beginner-or-advanced-package"
   },
   "glossa-gymnasiou": {
     title: "Νεοελληνική Γλώσσα Γ΄ Γυμνασίου",
@@ -118,7 +143,9 @@ const ALIASES = {
   "fysiki-b-gymnasiou": "physics-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
-  "biology-g-gymnasiou": "biologia-g-gymnasiou"
+  "biology-g-gymnasiou": "biologia-g-gymnasiou",
+  "english-b-gymnasium": "english-b-gymnasiou",
+  "agglika-b-gymnasiou": "english-b-gymnasiou"
 };
 
 // Exact 2026-27 History B curriculum allowlist, verified against the official
@@ -692,6 +719,98 @@ const LITERATURE_B_2026_2027_TEXTS = Object.freeze([
   }
 ]);
 
+const PHYSICS_B_2026_2027_PATHS = Object.freeze({
+  "1.3": ["index1_3.html"],
+  "2.1": ["index2_1.html"],
+  "2.2": ["index2_2.html"],
+  "3.1": ["index3_1.html"],
+  "3.2": ["index3_2.html"],
+  "3.3": ["index3_3.html"],
+  "3.4": ["index3_4.html"],
+  "3.5": ["index3_5.html"],
+  "3.6": ["index3_6.html"],
+  "3.7": ["index3_7.html"],
+  "4.1": ["index4_1.html"],
+  "4.2": ["index4_2.html"],
+  "4.3": ["index4_3.html"],
+  "4.4": ["index4_4.html"],
+  "4.5": ["index4_5.html"],
+  "5.1": ["index5_1.html"],
+  "5.2": ["index5_2.html"],
+  "5.3": ["index5_3.html"],
+  "5.4": ["index5_4.html"],
+  "5.5": ["index5_5.html"],
+  "5.7": ["index5_7.html"],
+  "5.8": ["index5_8.html"],
+  "6.1": ["index6_1.html"],
+  "6.2": ["index6_2.html"],
+  "6.3": ["index6_3.html"],
+  "6.5": ["index6_5.html"]
+});
+
+const BIOLOGY_B_2026_2027_SOURCES = Object.freeze({
+  "5.1": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_1.html"],
+  "5.2": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_2.html"],
+  "5.3": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_3.html"],
+  "5.4": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_4.html"],
+  "6.1": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_1.html"],
+  "6.2": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_2.html"],
+  "6.3": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_3.html"],
+  "6.4": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_4.html"],
+  "1.2": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index1_2.html"],
+  "4.1": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_1.html"],
+  "4.2": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_2.html"],
+  "4.3": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_3.html"],
+  "4.4": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_4.html"]
+});
+
+const ANCIENT_GREEK_B_2026_2027_UNITS = Object.freeze(
+  new Set([2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 16])
+);
+
+const ILIAD_B_2026_2027_PATHS = Object.freeze({
+  "intro": ["index01.html"],
+  "a1-53": ["index02.html"],
+  "a54-306": ["index03.html"],
+  "a307-431a": ["index04.html"],
+  "a431b-612": ["index05.html"],
+  "bg121-244": ["index05.html", "index06.html"],
+  "dez369-529": ["index07.html", "index08.html", "index09.html", "index10.html"],
+  "hthi225-431": ["index11.html", "index12.html"],
+  "klmnxo": ["index13.html", "index14.html"],
+  "p1-100-684-867": ["index15.html", "index16.html"]
+});
+
+const ENGLISH_B_BEGINNER_URL =
+  "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B114/318/2134,7741/";
+const ENGLISH_B_ADVANCED_URL =
+  "https://ebooks.edu.gr/ebooks/v/html/8547/2320/Agglika_B-Gymnasiou-Proch_html-empl/";
+
+const ENGLISH_B_UNITS = Object.freeze({
+  beginner: Object.freeze({
+    1: "I'm only human",
+    2: "Making a difference",
+    3: "Technology in our lives",
+    4: "Communication",
+    5: "Change and Experience",
+    6: "What a waste!",
+    7: "Magnetism and the world we live",
+    8: "Getting around",
+    9: "Keeping up appearances",
+    10: "A Material World"
+  }),
+  advanced: Object.freeze({
+    1: "Unity in Diversity",
+    2: "Echoes of the Past",
+    3: "Time Out",
+    4: "Let's Change Our Schools",
+    5: "The Arts!",
+    6: "Healthy Living",
+    7: "Embracing Our World",
+    8: "Welcome to the World"
+  })
+});
+
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -712,7 +831,8 @@ module.exports = async function handler(req, res) {
   }
 
   const directUrls = resolveDirectSourceUrls(subject, topic);
-  if (book.officialSourceRequired && !directUrls.length) {
+  const path = directUrls.length ? "__direct__" : resolveSectionPath(book.mode, topic);
+  if (book.officialSourceRequired && !directUrls.length && !path) {
     return res.status(404).json({
       grounded: false,
       error: "section_not_resolved",
@@ -722,7 +842,6 @@ module.exports = async function handler(req, res) {
       message: "Η επιλογή δεν ανήκει στην επαληθευμένη ύλη 2026–27 ή δεν έχει ακριβή αντιστοίχιση σε επίσημη σελίδα."
     });
   }
-  const path = directUrls.length ? "__direct__" : resolveSectionPath(book.mode, topic);
   if (!path) {
     return res.status(404).json({
       grounded: false,
@@ -748,7 +867,15 @@ module.exports = async function handler(req, res) {
           message: "Μία ή περισσότερες επίσημες σελίδες της ενότητας δεν ήταν διαθέσιμες."
         });
       }
-      combinedText = distributeOfficialPages(pages, sourceUrls, 42000);
+      const needsFullDirectText =
+        subject === "english-b-gymnasiou" ||
+        (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8);
+      combinedText = needsFullDirectText
+        ? pages.map((html, i) => {
+            const label = sourceUrls[i] ? "[Official page: " + sourceUrls[i] + "]\n" : "";
+            return label + htmlToText(html);
+          }).join("\n\n")
+        : distributeOfficialPages(pages, sourceUrls, 42000);
     } else if (book.multi) {
       sourceUrls = await discoverUnitPages(book, path);
       if (!sourceUrls.length) {
@@ -778,7 +905,9 @@ module.exports = async function handler(req, res) {
     }
 
     const scoped = applyCurriculumTextScope(subject, topic, combinedText);
-    const useful = book.multi ? scoped.text : selectUsefulText(scoped.text, topic);
+    const useful = subject === "english-b-gymnasiou"
+      ? selectEnglishBUnitText(scoped.text, topic)
+      : (book.multi ? scoped.text : selectUsefulText(scoped.text, topic));
     const sourceUrl = sourceUrls[0] || book.base;
 
     if (useful.length < 500) {
@@ -848,6 +977,32 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolveLiteratureBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
+  if (subject === "physics-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolvePhysicsBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "biologia-b-gymnasiou") {
+    return resolveBiologyBCurriculumUrls(topic);
+  }
+
+  if (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8) {
+    const base = BOOKS[subject].base;
+    return [
+      new URL("index08.html", base).toString(),
+      new URL("index19a_parall.html", base).toString()
+    ];
+  }
+
+  if (subject === "iliada-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveIliadBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "english-b-gymnasiou") {
+    return resolveEnglishBCurriculumUrls(topic);
+  }
+
   if (subject === "biologia-a-gymnasiou") {
     // Current 2026–27 curriculum topics only. Do not expose the whole book as this year's syllabus.
     if (t.includes("οργανωση της ζωης") && t.includes("χαρακτηριστικ")) {
@@ -877,40 +1032,25 @@ function resolveDirectSourceUrls(subject, topic) {
     return [];
   }
 
-  if (subject !== "biologia-b-gymnasiou") return [];
-  const bg = "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/";
-
-  if (t.includes("στηριξη και κινηση σε μονοκυτταρους οργανισμους και φυτα")) {
-    return [a + "index5_1.html", a + "index5_2.html"];
-  }
-  if (t.includes("στηριξη και κινηση σε ζωα") || t.includes("μυοσκελετικο συστημα")) {
-    return [a + "index5_3.html", a + "index5_4.html"];
-  }
-  if (t.includes("αναπαραγωγη σε μονοκυτταρους οργανισμους και φυτα")) {
-    return [a + "index6_1.html", a + "index6_2.html"];
-  }
-  if (t.includes("αναπαραγωγη στα ζωα και στον ανθρωπο")) {
-    return [a + "index6_3.html", a + "index6_4.html"];
-  }
-  if (t.includes("κυτταρο και επιπεδα οργανωσης")) {
-    return [a + "index1_2.html", a + "index1_3.html"];
-  }
-  if (t.includes("ομοιοσταση και ασθενειες")) {
-    return [bg + "index4_1.html", bg + "index4_2.html"];
-  }
-  if (t.includes("αμυντικοι μηχανισμοι του ανθρωπου")) {
-    return [bg + "index4_3.html"];
-  }
-  if (t.includes("τροπος ζωης και ασθενειες")) {
-    return [bg + "index4_4.html"];
-  }
   return [];
 }
 
 function resolveSectionPath(mode, topic) {
   const t = String(topic || "");
 
-  if (mode === "biologyA" || mode === "biologyB") return "";
+  if (mode === "biologyA" || mode === "biologyB" || mode === "physicsB" || mode === "iliadB" || mode === "englishB") return "";
+
+  if (mode === "ancientGreekB") {
+    const n = unitNumber(topic);
+    if (!ANCIENT_GREEK_B_2026_2027_UNITS.has(n)) return "";
+    return `index${String(n).padStart(2, "0")}.html`;
+  }
+
+  if (mode === "modernGreekBAnnual") {
+    const n = unitNumber(topic);
+    if (!Number.isInteger(n) || n < 1 || n > 9) return "";
+    return `en${n}_`;
+  }
 
   if (mode === "numeric") {
     let m = t.match(/^\s*(\d+)\.(\d+)\b/);
@@ -963,6 +1103,93 @@ function resolveSectionPath(mode, topic) {
   }
 
   return "";
+}
+
+function unitNumber(topic) {
+  const value = String(topic || "");
+  const m = value.match(/(?:Ενότητα|ενότητα|Unit)\s*(\d+)|(\d+)(?:η|ή)?\s+(?:Ενότητα|ενότητα)/i);
+  if (!m) return 0;
+  const n = Number(m[1] || m[2]);
+  return Number.isInteger(n) ? n : 0;
+}
+
+function resolvePhysicsBCurriculumPaths(topic) {
+  const match = String(topic || "").match(/(?:^|[^\d])(\d+)\.(\d+)(?:[^\d]|$)/);
+  const key = match ? `${Number(match[1])}.${Number(match[2])}` : "";
+  return key && PHYSICS_B_2026_2027_PATHS[key]
+    ? [...PHYSICS_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function resolveBiologyBCurriculumUrls(topic) {
+  const match = String(topic || "").match(/(?:^|[^\d])(\d+)\.(\d+)(?:[^\d]|$)/);
+  const key = match ? `${Number(match[1])}.${Number(match[2])}` : "";
+  return key && BIOLOGY_B_2026_2027_SOURCES[key]
+    ? [...BIOLOGY_B_2026_2027_SOURCES[key]]
+    : [];
+}
+
+function iliadBTopicKey(topic) {
+  const t = normalize(topic);
+  if (t.includes("εισαγωγη")) return "intro";
+  if (t.includes("α 1 53")) return "a1-53";
+  if (t.includes("α 54 306")) return "a54-306";
+  if (t.includes("α 307 431")) return "a307-431a";
+  if (t.includes("α 431") && t.includes("612") && !t.includes("γ 121")) return "a431b-612";
+  if ((t.includes("β") || t.includes("ραψωδιες β")) && t.includes("γ 121") && t.includes("244")) return "bg121-244";
+  if (t.includes("δ") && t.includes("ε") && t.includes("ζ") && t.includes("369") && t.includes("529")) return "dez369-529";
+  if (t.includes("η") && t.includes("θ") && t.includes("ι") && t.includes("225") && t.includes("431")) return "hthi225-431";
+  if (t.includes("κ") && t.includes("λ") && t.includes("μ") && t.includes("ν") && t.includes("ξ") && t.includes("ο")) return "klmnxo";
+  if (t.includes("π") && t.includes("1") && t.includes("100") && t.includes("684") && t.includes("867")) return "p1-100-684-867";
+  return "";
+}
+
+function resolveIliadBCurriculumPaths(topic) {
+  const key = iliadBTopicKey(topic);
+  return key && ILIAD_B_2026_2027_PATHS[key]
+    ? [...ILIAD_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function englishBSelection(topic) {
+  const value = String(topic || "");
+  const t = normalize(value);
+  const unitMatch = value.match(/Unit\s*(\d+)/i);
+  const n = unitMatch ? Number(unitMatch[1]) : 0;
+  const level = (t.includes("αρχαρι") || t.includes("beginner"))
+    ? "beginner"
+    : ((t.includes("προχωρη") || t.includes("advanced")) ? "advanced" : "");
+  if (!level || !Number.isInteger(n) || !ENGLISH_B_UNITS[level]?.[n]) return null;
+  return { level, unit: n, title: ENGLISH_B_UNITS[level][n] };
+}
+
+function resolveEnglishBCurriculumUrls(topic) {
+  const selection = englishBSelection(topic);
+  if (!selection) return [];
+  return [selection.level === "beginner" ? ENGLISH_B_BEGINNER_URL : ENGLISH_B_ADVANCED_URL];
+}
+
+function selectEnglishBUnitText(text, topic) {
+  const full = String(text || "").trim();
+  const selection = englishBSelection(topic);
+  if (!selection) return "";
+  const marker = normalize(selection.title);
+  const lines = full.split("\n");
+  let lineIndex = lines.findIndex(line => normalize(line).includes(marker));
+  if (lineIndex < 0) return selectUsefulText(full, selection.title);
+
+  const start = Math.max(0, lineIndex - 8);
+  const unitPrefix = /^\s*(?:UNIT\s+)?\d+\b/i;
+  let end = lines.length;
+  for (let i = lineIndex + 1; i < lines.length; i++) {
+    const norm = normalize(lines[i]);
+    if (i > lineIndex + 8 && unitPrefix.test(lines[i]) && !norm.includes(marker)) {
+      end = i;
+      break;
+    }
+  }
+  const chunk = lines.slice(start, end).join("\n").trim();
+  return chunk.length >= 500 ? chunk.slice(0, 42000) : selectUsefulText(full, selection.title);
 }
 
 function resolveHistoryCurriculumPaths(topic) {
@@ -1211,7 +1438,96 @@ function applyCurriculumTextScope(subject, topic, text) {
     }
   }
 
+  if (subject === "physics-gymnasiou") {
+    const match = String(topic || "").match(/(?:^|[^\d])(\d+)\.(\d+)(?:[^\d]|$)/);
+    const key = match ? `${Number(match[1])}.${Number(match[2])}` : "";
+    const truncations = {
+      "2.2": ["Δεν διδάσκεται η διανυσματική περιγραφή της ταχύτητας.", "Διανυσματική περιγραφή της ταχύτητας"],
+      "3.3": ["Δεν διδάσκεται η δύναμη σε τραχιά επιφάνεια ούτε η ανάλυση δύναμης.", "Δύναμη που ασκείται σε τραχιά επιφάνεια"],
+      "3.5": ["Δεν διδάσκεται η ανάλυση δυνάμεων και ισορροπία ούτε το Παράδειγμα 3.2.", "Ανάλυση δυνάμεων και ισορροπία"],
+      "3.7": ["Δεν διδάσκεται το τμήμα «Εφαρμογές».", "Εφαρμογές"],
+      "4.3": ["Δεν διδάσκεται ο υπολογισμός της ατμοσφαιρικής πίεσης.", "Πώς υπολογίζουμε την ατμοσφαιρική πίεση"],
+      "5.4": ["Δεν διδάσκονται τα τμήματα «Θεμελιώδεις μορφές ενέργειας» και «Μετατροπές ενέργειας».", "Θεμελιώδεις μορφές ενέργειας"],
+      "5.8": ["Δεν διδάσκεται το τμήμα «Ισχύς και κίνηση».", "Ισχύς και κίνηση"]
+    };
+    if (truncations[key]) {
+      exclusions.push(truncations[key][0]);
+      scoped = truncateAt(scoped, truncations[key][1]);
+    }
+    if (key === "6.5") {
+      exclusions.push("Η θερμική διαστολή/συστολή προσεγγίζεται ποιοτικά· οι μαθηματικές σχέσεις δεν αποτελούν στόχο της ετήσιας οδηγίας.");
+    }
+  }
+
+  if (subject === "archaia-glossa-b-gymnasiou") {
+    const n = unitNumber(topic);
+    if (n === 7) exclusions.push("Το βασικό κείμενο της Ενότητας 7 είναι προαιρετικό· αξιοποιούνται μόνο τα μέρη που προβλέπουν οι οδηγίες.");
+    if (n === 8) {
+      exclusions.push("Το βασικό κείμενο της σελ. 60, το Β1, το Β2 και το Γ1 δεν χρησιμοποιούνται· οι οδηγίες αξιοποιούν το παράλληλο κείμενο της Ενότητας 8 και το Γ2 για άμεσο/έμμεσο αντικείμενο.");
+      scoped = scopeAncientGreekBUnit8(scoped);
+    }
+    if (n === 5) exclusions.push("Δεν διδάσκονται όλα τα υπομέρη της ενότητας· τηρούνται οι ρητές επιλογές/εξαιρέσεις των οδηγιών 2026–27.");
+    if ([12,13,16].includes(n)) exclusions.push("Διδάσκονται μόνο τα υπομέρη που ορίζουν οι ετήσιες οδηγίες 2026–27.");
+  }
+
   return { text: scoped.trim(), exclusions };
+}
+
+function scopeAncientGreekBUnit8(text) {
+  const source = String(text || "");
+  const blocks = splitOfficialPageBlocks(source);
+  const unitPage = blocks.find(block => /index08\.html/i.test(block.url));
+  const parallelPage = blocks.find(block => /index19a_parall\.html/i.test(block.url));
+
+  const kept = [];
+
+  if (unitPage) {
+    const lines = unitPage.text.split("\n");
+    const syntaxStart = lines.findIndex(line => {
+      const n = normalize(line);
+      return n.includes("γ2 συνταξη") && n.includes("αμεσο") && n.includes("εμμεσο") && n.includes("αντικειμενο");
+    });
+    if (syntaxStart >= 0) {
+      kept.push(
+        "[Official page: " + unitPage.url + "]\n" +
+        lines.slice(syntaxStart).join("\n").trim()
+      );
+    }
+  }
+
+  if (parallelPage) {
+    const lines = parallelPage.text.split("\n");
+    const start = lines.findIndex(line => normalize(line) === "ενοτητα 8");
+    let end = -1;
+    if (start >= 0) {
+      for (let i = start + 1; i < lines.length; i++) {
+        if (normalize(lines[i]) === "ενοτητα 9") {
+          end = i;
+          break;
+        }
+      }
+      const body = lines.slice(start, end >= 0 ? end : lines.length).join("\n").trim();
+      if (body) {
+        kept.push("[Official page: " + parallelPage.url + "]\n" + body);
+      }
+    }
+  }
+
+  // Fail closed: if the exact annual subparts cannot be isolated, expose no text.
+  return kept.join("\n\n").trim();
+}
+
+function splitOfficialPageBlocks(text) {
+  const source = String(text || "");
+  const marker = /\[Official page:\s*([^\]]+)\]\n?/g;
+  const matches = [...source.matchAll(marker)];
+  if (!matches.length) return [];
+
+  return matches.map((m, i) => {
+    const start = m.index + m[0].length;
+    const end = i + 1 < matches.length ? matches[i + 1].index : source.length;
+    return { url: String(m[1] || "").trim(), text: source.slice(start, end).trim() };
+  });
 }
 
 function truncateAt(text, marker) {
@@ -1268,11 +1584,25 @@ module.exports._test = Object.freeze({
   geographyBTopicKey,
   resolveGeographyBCurriculumPaths,
   resolveLiteratureBCurriculumPaths,
+  resolvePhysicsBCurriculumPaths,
+  resolveBiologyBCurriculumUrls,
+  resolveIliadBCurriculumPaths,
+  resolveEnglishBCurriculumUrls,
+  englishBSelection,
+  unitNumber,
+  scopeAncientGreekBUnit8,
+  splitOfficialPageBlocks,
+  selectEnglishBUnitText,
   resolveSectionPath,
   HISTORY_B_2026_2027_PATHS,
   MATH_B_2026_2027_PATHS,
   CHEMISTRY_B_2026_2027_PATHS,
   GEOGRAPHY_B_2026_2027_PATHS,
   LITERATURE_B_2026_2027_TEXTS,
+  PHYSICS_B_2026_2027_PATHS,
+  BIOLOGY_B_2026_2027_SOURCES,
+  ANCIENT_GREEK_B_2026_2027_UNITS,
+  ILIAD_B_2026_2027_PATHS,
+  ENGLISH_B_UNITS,
   applyCurriculumTextScope
 });

@@ -97,6 +97,12 @@ jobs:
       - name: Run annual guidance smoke
         run: node tests/annual-guidance-smoke.mjs
 
+      - name: Run remaining B Gym schoolbook grounding smoke
+        run: node tests/b-gym-remaining-schoolbook-grounding.mjs
+
+      - name: Run remaining B Gym diagnostic provenance smoke
+        run: node tests/b-gym-remaining-diagnostic-scope.mjs
+
       - name: Run curriculum provenance smoke
         run: node tests/curriculum-provenance-smoke.mjs
 

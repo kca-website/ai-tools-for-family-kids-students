@@ -1591,52 +1591,52 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-  "math-b-gym.monomial-like-terms": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Όμοιοι μονόμιοι όροι» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x²) σαν να ήταν όμοιοι όροι.",
-      "descriptionEn": "Solve 2-3 exercises on \"Like monomial terms\" by hand, writing out every step. The most common trap on this topic: Tries to add monomials with a different variable part (e.g. 3x + 2x²) as if they were like terms.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Όμοιοι μονόμιοι όροι» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Like monomial terms\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Φτιάξε μόνος/η μια νέα παράσταση με μονώνυμα, απλοποίησέ την με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
-      "descriptionEn": "Make up a new expression with monomials, simplify it by hand, then check your solution with Wolfram Alpha.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-  "math-b-gym.identity-square-sum": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ταυτότητα (α+β)²» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
-      "descriptionEn": "Solve 2-3 exercises on the \"(a+b)² identity\" by hand, writing out every step. The most common trap on this topic: Incorrectly simplifies (a+b)² to a²+b², forgetting the middle term 2ab.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Ταυτότητα (α+β)²» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Identity (a+b)²\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ανάπτυξε μόνος/η μια νέα παράσταση (α+β)² με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
-      "descriptionEn": "Expand a new (a+b)² expression by hand yourself, then check your solution with Wolfram Alpha.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
+  "math-b-gym.sqrt-positive": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χωρίς εργαλείο, βρες τις √4, √9, √25 και √49 γράφοντας ποιος μη αρνητικός αριθμός έχει τετράγωνο ίσο με τον αριθμό μέσα στη ρίζα.",
+    "descriptionEn": "Without a tool, find √4, √9, √25 and √49 by identifying the non-negative number whose square equals the number under the radical.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με το Wolfram Alpha",
+    "titleEn": "Check with Wolfram Alpha",
+    "descriptionEl": "Έλεγξε μόνο τις απαντήσεις σου στο Wolfram Alpha. Αν κάποια διαφέρει, γύρισε στη σχέση «αν √a = x, τότε x² = a» και διόρθωσέ την μόνος/η.",
+    "descriptionEn": "Use Wolfram Alpha only to check your answers. If one differs, return to “if √a = x, then x² = a” and correct it yourself.",
+    "toolId": "wolfram-alpha"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Φτιάξε δύο δικά σου παραδείγματα τετραγωνικών ριζών που δίνουν ακέραιο αποτέλεσμα και εξήγησε γιατί το σύμβολο √ δίνει τη μη αρνητική ρίζα.",
+    "descriptionEn": "Create two square-root examples with integer answers and explain why the √ symbol denotes the non-negative root.",
+    "toolId": null
+  }
+],
+  "math-b-gym.direct-proportion": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Για τη σχέση y = 3·x, συμπλήρωσε μόνος/η τις τιμές του y για x = 1, 2, 4 και 5. Μετά υπολόγισε σε κάθε ζεύγος τον λόγο y/x.",
+    "descriptionEn": "For y = 3·x, fill in y for x = 1, 2, 4 and 5. Then calculate y/x for each pair.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με το Wolfram Alpha",
+    "titleEn": "Check with Wolfram Alpha",
+    "descriptionEl": "Χρησιμοποίησε το Wolfram Alpha για να ελέγξεις τον πίνακα τιμών ή τη γραφική παράσταση της y = 3x. Σύγκρινε με τη δική σου δουλειά χωρίς να αντιγράψεις έτοιμη λύση.",
+    "descriptionEn": "Use Wolfram Alpha to check the value table or graph of y = 3x. Compare it with your own work without copying a ready-made solution.",
+    "toolId": "wolfram-alpha"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Διάλεξε μόνος/η μια άλλη τιμή του α στη y = α·x, φτιάξε τρία ζεύγη (x,y) και έλεγξε ότι ο λόγος y/x μένει σταθερός.",
+    "descriptionEn": "Choose another value of a in y = a·x, create three (x,y) pairs and verify that y/x stays constant.",
+    "toolId": null
+  }
+],
   "math-b-gym.pythagorean-application": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",

@@ -5,6 +5,7 @@
 // Only approved claims are rendered to the learner.
 
 const { generateChat, getAiStatus } = require('../ai-provider-router');
+const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 
 module.exports = async function handler(req, res) {
   const aiStatus = getAiStatus();
@@ -31,6 +32,20 @@ module.exports = async function handler(req, res) {
   }
 
   const workingSource = compactSourceForTopic(source, selectedTopic, 6500);
+  const cacheParts = {
+    kind: 'verified-source-summary',
+    route: aiStatus.smartRoutingEnabled ? 'smart' : 'legacy',
+    topic: selectedTopic,
+    title,
+    language: lang,
+    source: workingSource,
+  };
+  const cached = await getStudyCache(cacheParts);
+  if (cached?.text) {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({ ...cached, cacheHit: true });
+  }
+  const startedAt = Date.now();
 
   const claimSystem = lang === 'en'
     ? `Create a concise learner-facing summary from an official Greek schoolbook source.
@@ -187,8 +202,7 @@ For each candidate:
 
   const finalText = formatSummary(approved.map(row => row.claim), selectedTopic, lang);
 
-  res.setHeader('Cache-Control', 'no-store');
-  return res.status(200).json({
+  const responseBody = {
     text: finalText,
     verified: true,
     verification: {
@@ -198,7 +212,27 @@ For each candidate:
     },
     provider: second?.provider || first?.provider || null,
     model: second?.model || first?.model || null,
-  });
+    usage: {
+      promptTokens: Number(first?.usage?.promptTokens || 0) + Number(second?.usage?.promptTokens || 0),
+      completionTokens: Number(first?.usage?.completionTokens || 0) + Number(second?.usage?.completionTokens || 0),
+      totalTokens: Number(first?.usage?.totalTokens || 0) + Number(second?.usage?.totalTokens || 0),
+      cachedTokens: Number(first?.usage?.cachedTokens || 0) + Number(second?.usage?.cachedTokens || 0),
+    },
+  };
+  await setStudyCache(cacheParts, responseBody);
+  console.info('AI_METRIC ' + JSON.stringify({
+    event: 'ai_request',
+    task: 'source_summary',
+    activity: 'audio',
+    status: 200,
+    cacheHit: false,
+    provider: responseBody.provider || '',
+    model: responseBody.model || '',
+    latencyMs: Date.now() - startedAt,
+    ...responseBody.usage,
+  }));
+  res.setHeader('Cache-Control', 'no-store');
+  return res.status(200).json({ ...responseBody, cacheHit: false });
 };
 
 function compactSourceForTopic(source, topic, maxChars) {

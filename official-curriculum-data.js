@@ -16,18 +16,18 @@
   "sourcePolicyEl": "Μόνο ρητά καταχωρισμένες επίσημες πηγές επιτρέπουν ισχυρισμό επίσημης ευθυγράμμισης. Topic anchor ≠ επίσημος τίτλος ενότητας. Το layer διαχωρίζει βιβλίο, περιεχόμενα βιβλίου και ετήσια διδακτέα/εξεταστέα ύλη.",
   "sourcePolicyEn": "Only explicitly recorded official sources permit an official-alignment claim. A topic anchor is not an official section title. The layer separates textbook, textbook contents, and annual taught/examinable syllabus.",
   "coverageSummary": {
-    "allQuizEntries": 54,
-    "allGapEntries": 280,
+    "allQuizEntries": 55,
+    "allGapEntries": 284,
     "quizCoverageByStatus": {
       "annual-syllabus-verified": 11,
       "book-index-verified": 6,
       "catalog-verified": 3,
       "official-book-verified": 32,
-      "annual-guidance-detailed-map": 2
+      "annual-guidance-detailed-map": 3
     },
     "gapCoverageByStatus": {
       "catalog-topic-anchor": 8,
-      "exact-section-verified": 35,
+      "exact-section-verified": 39,
       "official-course-topic-anchor": 214,
       "related-section-verified": 23
     }
@@ -1148,6 +1148,75 @@
     "zone": "middle",
     "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
   },
+  "chimeia-b-gymnasiou": {
+  "schoolYear": "2026-2027",
+  "verificationDate": "2026-09-29",
+  "coverageStatus": "annual-guidance-detailed-map",
+  "coverageLabelEl": "Πλήρης αντιστοίχιση οδηγιών 2026–27 με επίσημες σελίδες βιβλίου",
+  "coverageLabelEn": "Complete 2026–27 guidance mapping to official textbook pages",
+  "quizTitleEl": "Χημεία, Β' Γυμνασίου",
+  "quizTitleEn": "Chemistry, 8th Grade",
+  "officialBook": {
+    "titleEl": "Χημεία Β΄ Γυμνασίου",
+    "titleEn": "Chemistry B Gymnasium",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/"
+  },
+  "officialSectionsEl": [
+    "Γενική Ενότητα 1 · 1.1 — Τι είναι η Χημεία και γιατί τη μελετάμε",
+    "Γενική Ενότητα 1 · 1.2 — Καταστάσεις των υλικών",
+    "Γενική Ενότητα 1 · 1.3 — Φυσικές ιδιότητες των υλικών",
+    "Γενική Ενότητα 2 · 2.1 — Το νερό στη ζωή μας",
+    "Γενική Ενότητα 2 · 2.2 — Το νερό ως διαλύτης - Μείγματα",
+    "Γενική Ενότητα 2 · 2.3 — Περιεκτικότητα διαλύματος - Εκφράσεις περιεκτικότητας",
+    "Γενική Ενότητα 2 · 2.4 — Ρύπανση του νερού",
+    "Γενική Ενότητα 2 · 2.5 — Διαχωρισμός μειγμάτων",
+    "Γενική Ενότητα 2 · 2.6 — Διάσπαση του νερού - Χημικές ενώσεις και χημικά στοιχεία",
+    "Γενική Ενότητα 2 · 2.7 — Χημική αντίδραση",
+    "Γενική Ενότητα 2 · 2.8 — Άτομα και μόρια",
+    "Γενική Ενότητα 2 · 2.9 — Υποατομικά σωματίδια - Ιόντα",
+    "Γενική Ενότητα 2 · 2.10 — Σύμβολα χημικών στοιχείων και χημικών ενώσεων (χωρίς τους χημικούς τύπους ιόντων και ιοντικών ενώσεων)",
+    "Γενική Ενότητα 2 · 2.11 — Χημική εξίσωση",
+    "Γενική Ενότητα 3 · 3.1 — Σύσταση του ατμοσφαιρικού αέρα",
+    "Γενική Ενότητα 3 · 3.2 — Οξυγόνο",
+    "Γενική Ενότητα 3 · 3.3 — Διοξείδιο του άνθρακα",
+    "Γενική Ενότητα 3 · 3.4 — Η ρύπανση του αέρα",
+    "Γενική Ενότητα 4 · 4.2 — Ρύπανση του εδάφους"
+  ],
+  "officialSectionsEn": [],
+  "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
+  "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
+  "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+  "mappedTopicsEl": [
+    "Γενική Ενότητα 1 · 1.1 — Τι είναι η Χημεία και γιατί τη μελετάμε",
+    "Γενική Ενότητα 1 · 1.2 — Καταστάσεις των υλικών",
+    "Γενική Ενότητα 1 · 1.3 — Φυσικές ιδιότητες των υλικών",
+    "Γενική Ενότητα 2 · 2.1 — Το νερό στη ζωή μας",
+    "Γενική Ενότητα 2 · 2.2 — Το νερό ως διαλύτης - Μείγματα",
+    "Γενική Ενότητα 2 · 2.3 — Περιεκτικότητα διαλύματος - Εκφράσεις περιεκτικότητας",
+    "Γενική Ενότητα 2 · 2.4 — Ρύπανση του νερού",
+    "Γενική Ενότητα 2 · 2.5 — Διαχωρισμός μειγμάτων",
+    "Γενική Ενότητα 2 · 2.6 — Διάσπαση του νερού - Χημικές ενώσεις και χημικά στοιχεία",
+    "Γενική Ενότητα 2 · 2.7 — Χημική αντίδραση",
+    "Γενική Ενότητα 2 · 2.8 — Άτομα και μόρια",
+    "Γενική Ενότητα 2 · 2.9 — Υποατομικά σωματίδια - Ιόντα",
+    "Γενική Ενότητα 2 · 2.10 — Σύμβολα χημικών στοιχείων και χημικών ενώσεων (χωρίς τους χημικούς τύπους ιόντων και ιοντικών ενώσεων)",
+    "Γενική Ενότητα 2 · 2.11 — Χημική εξίσωση",
+    "Γενική Ενότητα 3 · 3.1 — Σύσταση του ατμοσφαιρικού αέρα",
+    "Γενική Ενότητα 3 · 3.2 — Οξυγόνο",
+    "Γενική Ενότητα 3 · 3.3 — Διοξείδιο του άνθρακα",
+    "Γενική Ενότητα 3 · 3.4 — Η ρύπανση του αέρα",
+    "Γενική Ενότητα 4 · 4.2 — Ρύπανση του εδάφους"
+  ],
+  "mappedTopicsEn": [],
+  "scopeNoteEl": "Οι 19 ενότητες/παράγραφοι που περιλαμβάνονται ρητά στις οδηγίες 2026–27 έχουν αντιστοιχιστεί στο επίσημο βιβλίο. Η §4.1 δεν εκτίθεται. Στη §2.10 εξαιρείται ρητά η παράγραφος «Χημικοί τύποι ιόντων και ιοντικών ενώσεων».",
+  "scopeNoteEn": "The 19 sections explicitly included in the 2026–27 guidance are mapped to the official textbook. §4.1 is excluded. In §2.10 the paragraph on ionic formulas is explicitly excluded.",
+  "annualInstructionsStatus": "2026-27-verified",
+  "annualInstructionsNoteEl": "Section-level allowlist με fail-closed συμπεριφορά. Υλικό εκτός της ρητά δημοσιευμένης ύλης δεν χρησιμοποιείται ως γενικό fallback.",
+  "annualInstructionsNoteEn": "Section-level allowlist with fail-closed behavior. Material outside the explicitly published scope is not used as a generic fallback.",
+  "quizId": "chimeia-b-gymnasiou",
+  "zone": "middle",
+  "sourceDiscipline": "official-source-only; exact annual section allowlist; explicit subsection exclusions"
+},
   "chimeia-g-gymnasiou": {
     "schoolYear": "2026-2027",
     "verificationDate": "2026-08-29",
@@ -3692,6 +3761,54 @@
     "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/"
   },
+  "chem-b-gym.mixture-homogeneous": {
+  "topicAnchorEl": "Ομογενή και ετερογενή μείγματα",
+  "topicAnchorEn": "Homogeneous and heterogeneous mixtures",
+  "status": "exact-section-verified",
+  "sourceQuizId": "chimeia-b-gymnasiou",
+  "exactSectionEl": "Γενική Ενότητα 2 · 2.2 — Το νερό ως διαλύτης - Μείγματα",
+  "statusLabelEl": "Ακριβής ενότητα 2026–27",
+  "statusLabelEn": "Exact 2026–27 section",
+  "noteEl": "Η διάκριση ομογενούς/ετερογενούς μείγματος βρίσκεται στην §2.2.1 του επίσημου βιβλίου και η §2.2 περιλαμβάνεται στις οδηγίες 2026–27.",
+  "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_2_1.html",
+  "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+},
+  "chem-b-gym.solution-percent-wv": {
+  "topicAnchorEl": "Περιεκτικότητα % w/v",
+  "topicAnchorEn": "Percent concentration w/v",
+  "status": "exact-section-verified",
+  "sourceQuizId": "chimeia-b-gymnasiou",
+  "exactSectionEl": "Γενική Ενότητα 2 · 2.3 — Περιεκτικότητα διαλύματος - Εκφράσεις περιεκτικότητας",
+  "statusLabelEl": "Ακριβής ενότητα 2026–27",
+  "statusLabelEn": "Exact 2026–27 section",
+  "noteEl": "Η περιεκτικότητα % w/v αντιστοιχεί στην §2.3.2 του επίσημου βιβλίου, μέσα στην εγκεκριμένη §2.3.",
+  "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_3_2.html",
+  "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+},
+  "chem-b-gym.element-compound": {
+  "topicAnchorEl": "Χημικό στοιχείο και χημική ένωση",
+  "topicAnchorEn": "Chemical element and compound",
+  "status": "exact-section-verified",
+  "sourceQuizId": "chimeia-b-gymnasiou",
+  "exactSectionEl": "Γενική Ενότητα 2 · 2.6 — Διάσπαση του νερού - Χημικές ενώσεις και χημικά στοιχεία",
+  "statusLabelEl": "Ακριβής ενότητα 2026–27",
+  "statusLabelEn": "Exact 2026–27 section",
+  "noteEl": "Η διάκριση χημικού στοιχείου/χημικής ένωσης διδάσκεται στην §2.6, η οποία περιλαμβάνεται ρητά στις οδηγίες 2026–27.",
+  "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html",
+  "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+},
+  "chem-b-gym.reactants-products": {
+  "topicAnchorEl": "Αντιδρώντα και προϊόντα σε χημική εξίσωση",
+  "topicAnchorEn": "Reactants and products in a chemical equation",
+  "status": "exact-section-verified",
+  "sourceQuizId": "chimeia-b-gymnasiou",
+  "exactSectionEl": "Γενική Ενότητα 2 · 2.11 — Χημική εξίσωση",
+  "statusLabelEl": "Ακριβής ενότητα 2026–27",
+  "statusLabelEn": "Exact 2026–27 section",
+  "noteEl": "Η αναγνώριση αντιδρώντων και προϊόντων βρίσκεται στην §2.11 του επίσημου βιβλίου και είναι εντός της ύλης 2026–27.",
+  "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_11.html",
+  "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+},
   "chimeia-g-gym.element-vs-compound": {
     "topicAnchorEl": "Στοιχείο vs Ένωση",
     "topicAnchorEn": "Element vs Compound",

@@ -286,6 +286,50 @@ const PHYSICS_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
   "γ κεφαλαιο 3 ηλεκτρικη ενεργεια": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"]
 });
 
+const PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES = Object.freeze({
+  "ηλεκτρικη δυναμη φορτιο και ηλεκτρικο πεδιο": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index1.html"],
+  "electric force charge and electric field": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index1.html"],
+  "ηλεκτρικο ρευμα και κυκλωματα": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
+  "electric current and circuits": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
+  "αντισταση νομος του ohm και συνδεσμολογια": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
+  "resistance ohm s law and circuit connections": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
+  "αποτελεσματα ενεργεια και ισχυς ηλεκτρικου ρευματος": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"],
+  "effects energy and power of electric current": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"],
+  "ταλαντωσεις και εκκρεμες": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index4.html"],
+  "oscillations and the pendulum": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index4.html"],
+  "μηχανικα κυματα και ηχος": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index5.html"],
+  "mechanical waves and sound": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index5.html"],
+  "φως διαδοση και ανακλαση": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index6.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index7.html"
+  ],
+  "light propagation and reflection": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index6.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index7.html"
+  ],
+  "διαθλαση αναλυση φωτος και χρωμα": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index8.html"],
+  "refraction dispersion and colour": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index8.html"]
+});
+
+const PHYSICS_G_GYM_ANNUAL_TOPIC_KEYS = Object.freeze({
+  "ηλεκτρικη δυναμη φορτιο και ηλεκτρικο πεδιο": "electric-force-field",
+  "electric force charge and electric field": "electric-force-field",
+  "ηλεκτρικο ρευμα και κυκλωματα": "current-circuits",
+  "electric current and circuits": "current-circuits",
+  "αντισταση νομος του ohm και συνδεσμολογια": "ohm-connections",
+  "resistance ohm s law and circuit connections": "ohm-connections",
+  "αποτελεσματα ενεργεια και ισχυς ηλεκτρικου ρευματος": "effects-energy-power",
+  "effects energy and power of electric current": "effects-energy-power",
+  "ταλαντωσεις και εκκρεμες": "oscillations",
+  "oscillations and the pendulum": "oscillations",
+  "μηχανικα κυματα και ηχος": "waves-sound",
+  "mechanical waves and sound": "waves-sound",
+  "φως διαδοση και ανακλαση": "light-reflection",
+  "light propagation and reflection": "light-reflection",
+  "διαθλαση αναλυση φωτος και χρωμα": "refraction-colour",
+  "refraction dispersion and colour": "refraction-colour"
+});
+
 const CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
   "στοιχειο vs ενωση": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"],
   "element vs compound": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"],
@@ -1088,7 +1132,8 @@ module.exports = async function handler(req, res) {
       }
       const needsFullDirectText =
         subject === "english-b-gymnasiou" ||
-        (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8);
+        (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8) ||
+        (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic));
       combinedText = needsFullDirectText
         ? pages.map((html, i) => {
             const label = sourceUrls[i] ? "[Official page: " + sourceUrls[i] + "]\n" : "";
@@ -1231,6 +1276,15 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "logotechnia-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveLiteratureBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "fysiki-g-gymnasiou") {
+    const annualKey = physicsGAnnualTopicKey(topic);
+    if (annualKey) {
+      const annual = scopePhysicsGAnnualTopic(scoped, annualKey);
+      scoped = annual.text;
+      exclusions.push(...annual.exclusions);
+    }
   }
 
   if (subject === "physics-gymnasiou") {
@@ -1393,9 +1447,14 @@ function resolveMathGQuizUrls(topic) {
   return MATH_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...MATH_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
 }
 
+function physicsGAnnualTopicKey(topic) {
+  return PHYSICS_G_GYM_ANNUAL_TOPIC_KEYS[normalize(topic)] || "";
+}
+
 function resolvePhysicsGQuizUrls(topic) {
   const key = normalize(topic);
-  return PHYSICS_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...PHYSICS_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
+  if (PHYSICS_G_GYM_DIAGNOSTIC_SOURCES[key]) return [...PHYSICS_G_GYM_DIAGNOSTIC_SOURCES[key]];
+  return PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES[key] ? [...PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES[key]] : [];
 }
 
 function resolveChemistryGQuizUrls(topic) {
@@ -1778,6 +1837,103 @@ function applyCurriculumTextScope(subject, topic, text) {
   return { text: scoped.trim(), exclusions };
 }
 
+function sliceLinesBetween(text, startMarker, endMarker) {
+  const lines = String(text || "").split("\n");
+  const startNorm = normalize(startMarker);
+  const endNorm = normalize(endMarker);
+  let start = startNorm ? lines.findIndex(line => normalize(line).includes(startNorm)) : 0;
+  if (start < 0) return "";
+  let end = lines.length;
+  if (endNorm) {
+    for (let i = start + 1; i < lines.length; i++) {
+      if (normalize(lines[i]).includes(endNorm)) {
+        end = i;
+        break;
+      }
+    }
+  }
+  return lines.slice(start, end).join("\n").trim();
+}
+
+function scopePhysicsGAnnualTopic(text, key) {
+  const source = String(text || "");
+  const blocks = splitOfficialPageBlocks(source);
+  const firstText = blocks[0]?.text || source;
+  const keep = [];
+  const exclusions = [];
+  const add = value => {
+    const v = String(value || "").trim();
+    if (v) keep.push(v);
+  };
+
+  if (key === "electric-force-field") {
+    add(truncateAt(firstText, "Περιγραφή του ηλεκτρικού πεδίου"));
+    exclusions.push("Στην §1.6 διδάσκεται μόνο η υποενότητα «Ηλεκτρική δύναμη και πεδίο»· δεν χρησιμοποιούνται η περιγραφή/δυναμικές γραμμές, η ηλεκτρική θωράκιση και το ηλεκτρικό πεδίο και ενέργεια.");
+  } else if (key === "current-circuits") {
+    add(truncateAt(firstText, "2.3 Ηλεκτρικά δίπολα"));
+    exclusions.push("Η επιλογή αυτή καλύπτει την εισαγωγή, §2.1 και §2.2 της διδακτέας ύλης.");
+  } else if (key === "ohm-connections") {
+    const ohm = truncateAt(
+      sliceLinesBetween(firstText, "2.3 Ηλεκτρικά δίπολα", "2.4 Παράγοντες από τους οποίους εξαρτάται η αντίσταση"),
+      "ισχύει ο νόμος του Ωμ για κάθε ηλεκτρικό δίπολο"
+    );
+    const connections = sliceLinesBetween(firstText, "2.5 Εφαρμογές αρχών διατήρησης στη μελέτη απλών", "Ερωτήσεις");
+    add(ohm);
+    add(connections);
+    exclusions.push("Από §2.3 κρατούνται η αντίσταση του διπόλου και ο νόμος του Ohm· αφαιρούνται «Νόμος του Ωμ και μικρόκοσμος» και η μικροσκοπική ερμηνεία της αντίστασης. Η §2.4 δεν διδάσκεται.");
+    exclusions.push("Από §2.5 χρησιμοποιούνται μόνο η σύνδεση αντιστατών, η σύνδεση δύο αντιστατών σε σειρά και η παράλληλη σύνδεση.");
+  } else if (key === "effects-energy-power") {
+    const thermal = truncateAt(
+      sliceLinesBetween(firstText, "ΚΕΦΑΛΑΙΟ 3 ΗΛΕΚΤΡΙΚΗ ΕΝΕΡΓΕΙΑ", "3.2 Χημικά αποτελέσματα"),
+      "Πειραματική μελέτη του φαινομένου Τζάουλ"
+    );
+    const magnetic = sliceLinesBetween(firstText, "3.3 Μαγνητικά αποτελέσματα του ηλεκτρικού ρεύματος", "3.4 Ηλεκτρική και μηχανική ενέργεια");
+    const power = sliceLinesBetween(firstText, "3.6 Ενέργεια και ισχύς του ηλεκτρικού ρεύματος", "Ερωτήσεις");
+    add(thermal);
+    add(magnetic);
+    add(power);
+    exclusions.push("Από §3.1 δεν χρησιμοποιούνται η πειραματική μελέτη, ο νόμος του Joule και η ερμηνεία του φαινομένου Joule. Οι §3.2, §3.4 και §3.5 δεν ανήκουν στην επιλεγμένη ετήσια ενότητα.");
+  } else if (key === "oscillations") {
+    const examples = truncateAt(
+      sliceLinesBetween(firstText, "ΚΕΦΑΛΑΙΟ 4 ΤΑΛΑΝΤΩΣΕΙΣ", "4.2 Μεγέθη που χαρακτηρίζουν μια ταλάντωση"),
+      "Ποιες είναι οι προϋποθέσεις ώστε ένα σώμα να κάνει ταλάντωση"
+    );
+    const measures = sliceLinesBetween(firstText, "4.2 Μεγέθη που χαρακτηρίζουν μια ταλάντωση", "Ερωτήσεις");
+    add(examples);
+    add(measures);
+    exclusions.push("Από §4.1 χρησιμοποιούνται μόνο παραδείγματα για το τι είναι ταλάντωση· η §4.2 διδάσκεται.");
+  } else if (key === "waves-sound") {
+    add(truncateAt(firstText, "Κυματικά φαινόμενα: Ανάκλαση και διάθλαση των μηχανικών κυμάτων"));
+    add(sliceLinesBetween(firstText, "5.4 Ήχος", "Ερωτήσεις"));
+    exclusions.push("Στην §5.3 χρησιμοποιείται μόνο το πρώτο μέρος έως τη σχέση υ=λf χωρίς απόδειξη· δεν χρησιμοποιούνται οι υποενότητες ανάκλασης/διάθλασης μηχανικών κυμάτων.");
+  } else if (key === "light-reflection") {
+    const chapter6 = blocks.find(block => /index6\.html/i.test(block.url))?.text || firstText;
+    const chapter7 = blocks.find(block => /index7\.html/i.test(block.url))?.text || "";
+    add(truncateAt(chapter6, "Αρχή του ελάχιστου χρόνου"));
+    const reflection = truncateAt(
+      sliceLinesBetween(chapter7, "ΚΕΦΑΛΑΙΟ 7 ΑΝΑΚΛΑΣΗ ΤΟΥ ΦΩΤΟΣ", "7.2 Εικόνες σε καθρέφτες: είδωλα"),
+      "Ανάκλαση και αρχή του ελάχιστου χρόνου"
+    );
+    const images = sliceLinesBetween(chapter7, "7.2 Εικόνες σε καθρέφτες: είδωλα", "Καμπύλοι καθρέφτες");
+    add(reflection);
+    add(images);
+    exclusions.push("Στην §6.2 δεν χρησιμοποιείται η «Αρχή του ελαχίστου χρόνου». Στην §7.1 αφαιρείται το αντίστοιχο ένθετο και από §7.2 δεν χρησιμοποιούνται καμπύλοι/σφαιρικοί καθρέπτες και οπτικό πεδίο.");
+  } else if (key === "refraction-colour") {
+    const refraction = truncateAt(
+      sliceLinesBetween(firstText, "ΚΕΦΑΛΑΙΟ 8 ΔΙΑΘΛΑΣΗ ΤΟΥ ΦΩΤΟΣ", "8.3 Ανάλυση του φωτός"),
+      "Διάθλαση και αρχή του ελάχιστου χρόνου"
+    );
+    const dispersion = sliceLinesBetween(firstText, "Ανάλυση του λευκού φωτός", "Δείκτης διάθλασης και χρώματα του φωτός");
+    const colour = sliceLinesBetween(firstText, "8.4 Το χρώμα", "Ερωτήσεις");
+    add(refraction);
+    add(dispersion);
+    add(colour);
+    exclusions.push("Από §8.1 αφαιρούνται η αρχή του ελάχιστου χρόνου και ο νόμος της διάθλασης (Snell). Από §8.3 χρησιμοποιείται μόνο η «Ανάλυση του λευκού φωτός». Η §8.4 χρησιμοποιείται.");
+  }
+
+  return { text: keep.join("\n\n").trim(), exclusions };
+}
+
 function scopeAncientGreekBUnit8(text) {
   const source = String(text || "");
   const blocks = splitOfficialPageBlocks(source);
@@ -1897,6 +2053,9 @@ module.exports._test = Object.freeze({
   resolveLiteratureBCurriculumPaths,
   resolvePhysicsBCurriculumPaths,
   resolvePhysicsGQuizUrls,
+  physicsGAnnualTopicKey,
+  scopePhysicsGAnnualTopic,
+  PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES,
   resolveChemistryGQuizUrls,
   resolveBiologyGQuizUrls,
   resolveBiologyBCurriculumUrls,

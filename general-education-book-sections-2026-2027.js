@@ -414,42 +414,27 @@
       ]
     },
     "biologia-b-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C123/740/4844%2C22052/",
-      sections:[
-        "Η επιστήμη της Βιολογίας — Αρχές των βιολογικών επιστημών και επιστημονική μέθοδος",
-        "Κεφάλαιο 1 — Οργάνωση της ζωής - Βιολογικά συστήματα",
-        "1.1 — Τα μόρια της ζωής",
-        "1.2 — Κύτταρο: η μονάδα της ζωής",
-        "1.3 — Τα επίπεδα οργάνωσης της ζωής",
-        "Κεφάλαιο 2 — Οι οργανισμοί στο περιβάλλον τους",
-        "2.1 — Ισορροπία στα βιολογικά συστήματα",
-        "2.2 — Οργάνωση και λειτουργίες του οικοσυστήματος – Ο ρόλος της ενέργειας",
-        "2.3 — Η ανακύκλωση της ύλης σε ένα οικοσύστημα",
-        "2.4 — Παρεμβάσεις του ανθρώπου στο περιβάλλον",
-        "Κεφάλαιο 3 — Μεταβολισμός",
-        "3.1 — Άνθρωπος και ενέργεια",
-        "3.2 — Ένζυμα και μεταβολισμός",
-        "Κεφάλαιο 4 — Οι ασθένειες και οι παράγοντες που σχετίζονται με την εμφάνισή τους",
-        "4.1 — Ομοιόσταση",
-        "4.2 — Ασθένειες",
-        "4.3 — Αμυντικοί μηχανισμοί του ανθρώπινου οργανισμού",
-        "4.4 — Τρόπος ζωής και ασθένειες",
-        "Κεφάλαιο 5 — Διατήρηση και συνέχεια της ζωής",
-        "5.1 — Το γενετικό υλικό οργανώνεται σε χρωμοσώματα",
-        "5.2 — Η ροή της γενετικής πληροφορίας",
-        "5.3 — Αλληλόμορφα",
-        "5.4 — Κυτταρική διαίρεση",
-        "5.5 — Κληρονομικότητα",
-        "5.6 — Μεταλλάξεις",
-        "Κεφάλαιο 6 — Γενετική μηχανική και βιοτεχνολογία",
-        "6.1 — Εφαρμογές της βιοτεχνολογίας",
-        "6.2 — Γενετική μηχανική και βιοτεχνολογία",
-        "6.3 — Προβληματισμοί από την αξιοποίηση των επιτευμάτων της γενετικής – Βιοηθική",
-        "Κεφάλαιο 7 — Εξέλιξη",
-        "7.1 — Η εξέλιξη και οι «μαρτυρίες» της",
-        "7.2 — Η εξέλιξη του ανθρώπου"
+      "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
+      "additionalSourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/",
+      "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      "schoolYear": "2026-2027",
+      "sectionPolicy": "The 2026-27 B Gymnasium syllabus draws from two official student books. Only the explicitly listed sections are selectable; §1.2 from the B/C book is optional.",
+      "sections": [
+            "Βιβλίο Α΄ · 5.1 — Στήριξη και κίνηση στους μονοκύτταρους οργανισμούς",
+            "Βιβλίο Α΄ · 5.2 — Η στήριξη στα φυτά",
+            "Βιβλίο Α΄ · 5.3 — Η στήριξη και κίνηση στους ζωικούς οργανισμούς",
+            "Βιβλίο Α΄ · 5.4 — Το μυοσκελετικό σύστημα του ανθρώπου",
+            "Βιβλίο Α΄ · 6.1 — Η αναπαραγωγή στους μονοκύτταρους οργανισμούς",
+            "Βιβλίο Α΄ · 6.2 — Η αναπαραγωγή στα φυτά",
+            "Βιβλίο Α΄ · 6.3 — Η αναπαραγωγή στους ζωικούς οργανισμούς",
+            "Βιβλίο Α΄ · 6.4 — Η αναπαραγωγή στον άνθρωπο",
+            "Βιβλίο Β΄-Γ΄ · 1.2 — Κύτταρο: η μονάδα της ζωής (προαιρετικό)",
+            "Βιβλίο Β΄-Γ΄ · 4.1 — Ομοιόσταση",
+            "Βιβλίο Β΄-Γ΄ · 4.2 — Ασθένειες",
+            "Βιβλίο Β΄-Γ΄ · 4.3 — Αμυντικοί μηχανισμοί του ανθρώπινου οργανισμού",
+            "Βιβλίο Β΄-Γ΄ · 4.4 — Τρόπος ζωής και ασθένειες"
       ]
-    },
+},
     "glossa-a-gymnasiou":{
       sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-A112",
       sections:[
@@ -466,19 +451,22 @@
       ]
     },
     "glossa-b-gymnasiou":{
-      sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-B110",
-      sections:[
-        "1η ενότητα — Από τον τόπο μου σ' όλη την Ελλάδα",
-        "2η ενότητα — Ζούμε με την οικογένεια",
-        "3η ενότητα — Φίλοι για πάντα",
-        "4η ενότητα — Το σχολείο στο χρόνο...",
-        "5η ενότητα — Συζητώντας για την εργασία και το επάγγελμα",
-        "6η ενότητα — Παρακολουθώ, ενημερώνομαι και ψυχαγωγούμαι από διάφορες πηγές (ΜΜΕ, Διαδίκτυο κτλ.)",
-        "7η ενότητα — Βιώνοντας προβλήματα της καθημερινής ζωής",
-        "8η ενότητα — Συζητώντας για σύγχρονα κοινωνικά θέματα",
-        "9η ενότητα — Ταξίδι στο μαγικό κόσμο του διαστήματος"
+      "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2298/Neoelliniki-Glossa_B-Gymnasiou_empl/",
+      "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      "schoolYear": "2026-2027",
+      "sectionPolicy": "The 2026-27 guidance is target-based, not a fixed mandatory unit sequence. These are the official textbook units available for exact source grounding when the teacher/student selects one.",
+      "sections": [
+            "1η ενότητα — Από τον τόπο μου σ' όλη την Ελλάδα",
+            "2η ενότητα — Ζούμε με την οικογένεια",
+            "3η ενότητα — Φίλοι για πάντα",
+            "4η ενότητα — Το σχολείο στο χρόνο...",
+            "5η ενότητα — Συζητώντας για την εργασία και το επάγγελμα",
+            "6η ενότητα — Παρακολουθώ, ενημερώνομαι και ψυχαγωγούμαι από διάφορες πηγές (ΜΜΕ, Διαδίκτυο κτλ.)",
+            "7η ενότητα — Βιώνοντας προβλήματα της καθημερινής ζωής",
+            "8η ενότητα — Συζητώντας για σύγχρονα κοινωνικά θέματα",
+            "9η ενότητα — Ταξίδι στο μαγικό κόσμο του διαστήματος"
       ]
-    },
+},
     "glossa-gymnasiou":{
       sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C107",
       sections:[
@@ -493,20 +481,39 @@
       ]
     },
     "physics-gymnasiou":{
-      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
-      sections:[
-        "Κεφάλαιο 1 — Εισαγωγή",
-        "Κεφάλαιο 2 — Κινήσεις",
-        "Κεφάλαιο 3 — Δυνάμεις",
-        "Κεφάλαιο 4 — Πίεση",
-        "Κεφάλαιο 5 — Ενέργεια",
-        "Κεφάλαιο 6 — Θερμότητα",
-        "Κεφάλαιο 7 — Αλλαγές κατάστασης",
-        "7.1 — Αλλαγές κατάστασης και θερμότητα · Τήξη–Πήξη · Βρασμός–Υγροποίηση · Εξάχνωση",
-        "7.3 — Εξάτμιση και συμπύκνωση",
-        "Κεφάλαιο 8 — Διάδοση θερμότητας"
+      "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
+      "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      "schoolYear": "2026-2027",
+      "sectionPolicy": "Only the day-school sections explicitly included in the 2026-27 Physics guidance are listed. Excluded subsections are filtered or declared in the source response.",
+      "sections": [
+            "1.3 — Τα φυσικά μεγέθη και οι μονάδες τους",
+            "2.1 — Περιγραφή της κίνησης",
+            "2.2 — Η έννοια της ταχύτητας (χωρίς τη διανυσματική περιγραφή)",
+            "3.1 — Η έννοια της δύναμης",
+            "3.2 — Δύο σημαντικές δυνάμεις στον κόσμο",
+            "3.3 — Σύνθεση και ανάλυση δυνάμεων (με τις εξαιρέσεις των οδηγιών 2026–27)",
+            "3.4 — Δύναμη και ισορροπία",
+            "3.5 — Ισορροπία υλικού σημείου (με τις εξαιρέσεις των οδηγιών 2026–27)",
+            "3.6 — Δύναμη και μεταβολή της ταχύτητας",
+            "3.7 — Δύναμη και αλληλεπίδραση (χωρίς το τμήμα «Εφαρμογές»)",
+            "4.1 — Πίεση",
+            "4.2 — Υδροστατική πίεση",
+            "4.3 — Ατμοσφαιρική πίεση (χωρίς τον υπολογισμό της ατμοσφαιρικής πίεσης)",
+            "4.4 — Μετάδοση των πιέσεων στα ρευστά - Αρχή του Πασκάλ",
+            "4.5 — Άνωση - Αρχή του Αρχιμήδη",
+            "5.1 — Έργο και Ενέργεια (μόνο τα μέρη που ορίζουν οι οδηγίες 2026–27)",
+            "5.2 — Δυναμική-κινητική ενέργεια, δύο βασικές μορφές ενέργειας",
+            "5.3 — Η μηχανική ενέργεια και η διατήρησή της",
+            "5.4 — Μορφές και μετατροπές ενέργειας (με τις εξαιρέσεις των οδηγιών 2026–27)",
+            "5.5 — Διατήρηση της ενέργειας",
+            "5.7 — Απόδοση μιας μηχανής",
+            "5.8 — Ισχύς (χωρίς «Ισχύς και κίνηση»)",
+            "6.1 — Θερμόμετρα και μέτρηση θερμοκρασίας",
+            "6.2 — Θερμότητα: μια μορφή ενέργειας",
+            "6.3 — Πώς μετράμε τη θερμότητα",
+            "6.5 — Θερμική διαστολή και συστολή (ποιοτική προσέγγιση)"
       ]
-    },
+},
     "chimeia-b-gymnasiou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/",
       annualGuidanceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
@@ -800,18 +807,32 @@
       ]
     },
     "english-b-gymnasiou":{
-      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2320/Agglika_B-Gymnasiou-Proch_html-empl/",
-      sections:[
-        "Unit 1 — Unity in Diversity",
-        "Unit 2 — Echoes of the Past",
-        "Unit 3 — Time Out",
-        "Unit 4 — Let's Change Our Schools",
-        "Unit 5 — The Arts!",
-        "Unit 6 — Healthy Living",
-        "Unit 7 — Embracing Our World",
-        "Unit 8 — Welcome to the World"
+      "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2320/Agglika_B-Gymnasiou-Proch_html-empl/",
+      "beginnerSourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B114/318/2134,7741/",
+      "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      "schoolYear": "2026-2027",
+      "sectionPolicy": "The teacher selects the official Beginners or Advanced package according to the class level. Both official Student's Books are indexed; no unit is claimed mandatory across both packages.",
+      "sections": [
+            "Αρχάριοι · Unit 1 — I'm only human",
+            "Αρχάριοι · Unit 2 — Making a difference",
+            "Αρχάριοι · Unit 3 — Technology in our lives",
+            "Αρχάριοι · Unit 4 — Communication",
+            "Αρχάριοι · Unit 5 — Change and Experience",
+            "Αρχάριοι · Unit 6 — What a waste!",
+            "Αρχάριοι · Unit 7 — Magnetism and the world we live",
+            "Αρχάριοι · Unit 8 — Getting around",
+            "Αρχάριοι · Unit 9 — Keeping up appearances",
+            "Αρχάριοι · Unit 10 — A Material World",
+            "Προχωρημένοι · Unit 1 — Unity in Diversity",
+            "Προχωρημένοι · Unit 2 — Echoes of the Past",
+            "Προχωρημένοι · Unit 3 — Time Out",
+            "Προχωρημένοι · Unit 4 — Let's Change Our Schools",
+            "Προχωρημένοι · Unit 5 — The Arts!",
+            "Προχωρημένοι · Unit 6 — Healthy Living",
+            "Προχωρημένοι · Unit 7 — Embracing Our World",
+            "Προχωρημένοι · Unit 8 — Welcome to the World"
       ]
-    },
+},
     "english-g-gymnasiou":{
       sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C109/499/3246%2C21317/",
       sections:[
@@ -839,43 +860,51 @@
       sections:["Ενότητα 1 — Το ταξίδι των λέξεων στον χρόνο","Ενότητα 2 — Η εκπαίδευση των παιδιών στην αρχαία Αθήνα","Ενότητα 3 — Επαγγέλματα των αρχαίων Αθηναίων","Ενότητα 4 — Ένα ταξίδι επιστημονικής φαντασίας","Ενότητα 5 — Ο πλούτος της αττικής γης"]
     },
     "archaia-glossa-b-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B112/269/1972%2C6728/",
-      sections:["Ενότητα 1 — Πατρική δικαιοσύνη","Ενότητα 2 — Το τέχνασμα του Θεμιστοκλή","Ενότητα 3 — Το χρέος του ιστορικού","Ενότητα 4 — Οι Σεληνίτες"]
-    },
+      "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2234/Archaia-Elliniki-Glossa_B-Gymnasiou_html-empl/",
+      "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      "schoolYear": "2026-2027",
+      "sectionPolicy": "Only annual-guidance units are listed. Units 1, 10, 14, 15, 17 and 18 are excluded; several included units contain explicit subsection-level modifications.",
+      "sections": [
+            "Ενότητα 2 — Το τέχνασμα του Θεμιστοκλή",
+            "Ενότητα 3 — Το χρέος του ιστορικού",
+            "Ενότητα 4 — Οι Σεληνίτες",
+            "Ενότητα 5 — Η ελεημοσύνη βασίλισσα των αρετών",
+            "Ενότητα 6 — Η ευθύνη για την παιδεία των νέων",
+            "Ενότητα 7 — Ένας στοργικός ηγέτης (το βασικό κείμενο προαιρετικό)",
+            "Ενότητα 8 — Η γένεση της θρησκείας και της δικαιοσύνης (με ειδική διαχείριση κειμένου/υπομερών)",
+            "Ενότητα 9 — Η Καλλιπάτειρα",
+            "Ενότητα 11 — Ο σεβασμός προς τους γονείς μέλημα του νόμου",
+            "Ενότητα 12 — Τα φαινόμενα απατούν",
+            "Ενότητα 13 — Η σωστή στάση στο θέμα της τροφής",
+            "Ενότητα 16 — Μεγαλόψυχη στάση"
+      ]
+},
     "archaia-glossa-g-gymnasiou":{
       sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C106/502/3267%2C13322/",
       sections:["Ενότητα 1 — Η Ελένη και η καταστροφή της Τροίας","Ενότητα 2 — Θυσία για την πατρίδα","Ενότητα 3 — Η κατοχή της εξουσίας δεν εγγυάται την ευτυχία","Ενότητα 4 — Τα πλεονεκτήματα της ειρήνης"]
     }
 ,
     "iliada-b-gymnasiou":{
-      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/",
-      sections:[
-        "1η Ενότητα — Ραψωδία Α: Α (περίληψη) - Α (1-53)",
-        "2η Ενότητα — Ραψωδία Α: Α (54-306)",
-        "3η Ενότητα — Ραψωδία Α: Α (307-431α)",
-        "4η Ενότητα — Ραψωδία Α, Β: Α (431β-612) – Β (περίληψη)",
-        "5η Ενότητα — Ραψωδία Γ: Γ (περίληψη) – Γ (121-244)",
-        "6η Ενότητα — Ραψωδία Δ: Δ (περίληψη & ανάγνωση 422-544)",
-        "7η Ενότητα — Ραψωδία Ε: Ε (περίληψη) – Ε (274-430)",
-        "8η Ενότητα — Ραψωδία Ζ: Ζ (περίληψη) – Ζ (119-236)",
-        "9η Ενότητα — Ραψωδία Ζ: Ζ (369-529)",
-        "10η Ενότητα — Ραψωδία Η-Θ: Η (περίληψη) – Η (206-312) – Θ (περίληψη)",
-        "11η Ενότητα — Ραψωδία Ι: Ι (περίληψη) – Ι (225-431)",
-        "12η Ενότητα — Ραψωδίες Κ, Λ, Μ, Ν, Ξ (περίληψη)",
-        "13η Ενότητα — Ραψωδία Ο: Ο (περίληψη) – Ο (1-79)",
-        "14η Ενότητα — Ραψωδία Π: Π (περίληψη) - Π (1-100)",
-        "15η Ενότητα — Ραψωδία Π: Π (684-867)",
-        "16η Ενότητα — Ραψωδία Ρ: Ρ (περίληψη) - Ρ (424-458)",
-        "17η Ενότητα — Ραψωδία Σ: Σ (περίληψη) - Σ (478-616)",
-        "18η Ενότητα — Ραψωδίες Τ, Υ, Φ: Τ (περίληψη) - Τ (1-152) - Υ, Φ (περίληψη)",
-        "19η Ενότητα — Ραψωδίες Χ, Ψ: Χ (περίληψη) - Χ (247-394) - Ψ (περίληψη)",
-        "20ή Ενότητα — Ραψωδία Ω: Ω (περίληψη) - Ω (468-677)",
-        "21η Ενότητα — Ραψωδία Ω: Ω (678-805)"
+      "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/",
+      "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      "schoolYear": "2026-2027",
+      "sectionPolicy": "The selectable rows mirror the 2026-27 annual teaching groups and resolve to the exact official Iliad pages needed for each group.",
+      "sections": [
+            "Εισαγωγή — Ιλιάδα: πλαίσιο, θέμα και δομή",
+            "Ραψωδία Α — Α 1-53",
+            "Ραψωδία Α — Α 54-306",
+            "Ραψωδία Α — Α 307-431α",
+            "Ραψωδία Α — Α 431β-612",
+            "Ραψωδίες Β, Γ — Γ 121-244",
+            "Ραψωδίες Δ, Ε, Ζ — Ζ 369-529",
+            "Ραψωδίες Η, Θ, Ι — Ι 225-431",
+            "Ραψωδίες Κ, Λ, Μ, Ν, Ξ, Ο",
+            "Ραψωδία Π — Π 1-100 και Π 684-867"
       ]
-    }
+}
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.4.0",
+    version:"2.5.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

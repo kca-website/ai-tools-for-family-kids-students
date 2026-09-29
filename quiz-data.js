@@ -3097,40 +3097,40 @@ const GAP_TAGS = {
     "skillTagEl": "Σειρά σε Ερωτήσεις",
     "skillTagEn": "Question Word Order"
   },
-  "math-b-gym.monomial-like-terms": {
-    "id": "math-b-gym.monomial-like-terms",
-    "labelEl": "Όμοιοι μονόμιοι όροι",
-    "labelEn": "Like monomial terms",
-    "explainEl": "Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x² ) σαν να ήταν όμοιοι όροι.",
-    "explainEn": "Tries to add monomials with different variable parts (e.g. 3x + 2x²) as if they were like terms.",
-    "recommendedToolIds": [
-      "wolfram-alpha",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης των Μονωνύμων",
-    "achievementEn": "Monomial Expert",
-    "positiveMessageEl": "Ξέρεις ποιοι όροι μπορούν να προστεθούν μεταξύ τους!",
-    "positiveMessageEn": "You know which terms can be added together!",
-    "skillTagEl": "Μονώνυμα",
-    "skillTagEn": "Monomials"
-  },
-  "math-b-gym.identity-square-sum": {
-    "id": "math-b-gym.identity-square-sum",
-    "labelEl": "Ταυτότητα (α+β)²",
-    "labelEn": "Identity (a+b)²",
-    "explainEl": "Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
-    "explainEn": "Incorrectly simplifies (a+b)² to a²+b², forgetting the cross term 2ab.",
-    "recommendedToolIds": [
-      "wolfram-alpha",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης των Ταυτοτήτων",
-    "achievementEn": "Identity Expert",
-    "positiveMessageEl": "Δεν ξεχνάς ποτέ τον διπλό όρο!",
-    "positiveMessageEn": "You never forget the cross term!",
-    "skillTagEl": "Αλγεβρικές Ταυτότητες",
-    "skillTagEn": "Algebraic Identities"
-  },
+  "math-b-gym.sqrt-positive": {
+  "id": "math-b-gym.sqrt-positive",
+  "labelEl": "Τετραγωνική ρίζα θετικού αριθμού",
+  "labelEn": "Square root of a positive number",
+  "explainEl": "Μπερδεύει την τετραγωνική ρίζα με τη διαίρεση δια 2 ή θεωρεί ότι το σύμβολο √49 δίνει δύο τιμές. Η √49 είναι η μη αρνητική τετραγωνική ρίζα, δηλαδή 7.",
+  "explainEn": "Confuses square root with dividing by 2, or thinks √49 has two values. The symbol √49 denotes the non-negative square root, which is 7.",
+  "recommendedToolIds": [
+    "wolfram-alpha",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Εξερευνητής των Ριζών",
+  "achievementEn": "Square Root Explorer",
+  "positiveMessageEl": "Αναγνωρίζεις σωστά τις τετραγωνικές ρίζες!",
+  "positiveMessageEn": "You identify square roots correctly!",
+  "skillTagEl": "Τετραγωνικές Ρίζες",
+  "skillTagEn": "Square Roots"
+},
+  "math-b-gym.direct-proportion": {
+  "id": "math-b-gym.direct-proportion",
+  "labelEl": "Η συνάρτηση y = α·x",
+  "labelEn": "The function y = a·x",
+  "explainEl": "Δυσκολεύεται να εφαρμόσει τη σχέση y = α·x ή να αναγνωρίσει ότι στα ανάλογα ποσά ο λόγος y/x παραμένει σταθερός.",
+  "explainEn": "Struggles to apply y = a·x or recognize that for directly proportional quantities the ratio y/x stays constant.",
+  "recommendedToolIds": [
+    "wolfram-alpha",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Γνώστης των Αναλογιών",
+  "achievementEn": "Direct Proportion Expert",
+  "positiveMessageEl": "Συνδέεις σωστά τις τιμές σε ανάλογα ποσά!",
+  "positiveMessageEn": "You connect values correctly in direct proportion!",
+  "skillTagEl": "Ανάλογα Ποσά & y = α·x",
+  "skillTagEn": "Direct Proportion & y = a·x"
+},
   "math-b-gym.pythagorean-application": {
     "id": "math-b-gym.pythagorean-application",
     "labelEl": "Εφαρμογή Πυθαγορείου θεωρήματος",
@@ -9725,115 +9725,115 @@ const QUIZZES = {
       ]
     },
     "mathimatika-b-gymnasiou": {
-      "id": "mathimatika-b-gymnasiou",
-      "grades": [
-        "b"
-      ],
-      "subjectLabelEl": "Μαθηματικά, Β' Γυμνασίου",
-      "subjectLabelEn": "Math, 8th Grade",
-      "titleEl": "Ο Χάρτης Εξάσκησης",
-      "titleEn": "The Practice Map",
-      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      "introEn": "4 short questions. It's not a test, there's no grade.",
-      "questions": [
+  "id": "mathimatika-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Μαθηματικά, Β' Γυμνασίου",
+  "subjectLabelEn": "Math, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης",
+  "titleEn": "The Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από την επαληθευμένη ύλη 2026–27. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+  "introEn": "4 short questions from the verified 2026–27 scope. It's not a test, there's no grade.",
+  "questions": [
+    {
+      "id": "q1-square-root",
+      "textEl": "Πόσο είναι √49;",
+      "textEn": "What is √49?",
+      "options": [
         {
-          "id": "q1-like-terms",
-          "textEl": "Ποια από τα παρακάτω είναι όμοιοι όροι με το 3x;",
-          "textEn": "Which of the following is a like term to 3x?",
-          "options": [
-            {
-              "textEl": "5x",
-              "textEn": "5x",
-              "isCorrect": true
-            },
-            {
-              "textEl": "3x²",
-              "textEn": "3x²",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.monomial-like-terms"
-            },
-            {
-              "textEl": "3",
-              "textEn": "3",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.monomial-like-terms"
-            }
-          ]
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": true
         },
         {
-          "id": "q2-identity",
-          "textEl": "Πόσο κάνει (x+3)²;",
-          "textEn": "What is (x+3)²?",
-          "options": [
-            {
-              "textEl": "x² + 6x + 9",
-              "textEn": "x² + 6x + 9",
-              "isCorrect": true
-            },
-            {
-              "textEl": "x² + 9",
-              "textEn": "x² + 9",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.identity-square-sum"
-            },
-            {
-              "textEl": "x² + 3x + 9",
-              "textEn": "x² + 3x + 9",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.identity-square-sum"
-            }
-          ]
+          "textEl": "24,5",
+          "textEn": "24.5",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.sqrt-positive"
         },
         {
-          "id": "q3-pythagorean",
-          "textEl": "Ορθογώνιο τρίγωνο έχει κάθετες πλευρές 3 και 4. Ποια είναι η υποτείνουσα;",
-          "textEn": "A right triangle has legs 3 and 4. What is the hypotenuse?",
-          "options": [
-            {
-              "textEl": "5",
-              "textEn": "5",
-              "isCorrect": true
-            },
-            {
-              "textEl": "7",
-              "textEn": "7",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.pythagorean-application"
-            },
-            {
-              "textEl": "12",
-              "textEn": "12",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.pythagorean-application"
-            }
-          ]
-        },
-        {
-          "id": "q4-equation",
-          "textEl": "Λύσε: x + 5 = 12. Ποιο είναι το x;",
-          "textEn": "Solve: x + 5 = 12. What is x?",
-          "options": [
-            {
-              "textEl": "7",
-              "textEn": "7",
-              "isCorrect": true
-            },
-            {
-              "textEl": "17",
-              "textEn": "17",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.linear-equation-basic"
-            },
-            {
-              "textEl": "60",
-              "textEn": "60",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.linear-equation-basic"
-            }
-          ]
+          "textEl": "±7",
+          "textEn": "±7",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.sqrt-positive"
         }
       ]
     },
+    {
+      "id": "q2-direct-proportion",
+      "textEl": "Στη συνάρτηση y = 3·x, αν x = 4, πόσο είναι το y;",
+      "textEn": "For y = 3·x, if x = 4, what is y?",
+      "options": [
+        {
+          "textEl": "12",
+          "textEn": "12",
+          "isCorrect": true
+        },
+        {
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.direct-proportion"
+        },
+        {
+          "textEl": "3/4",
+          "textEn": "3/4",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.direct-proportion"
+        }
+      ]
+    },
+    {
+      "id": "q3-pythagorean",
+      "textEl": "Ορθογώνιο τρίγωνο έχει κάθετες πλευρές 3 και 4. Ποια είναι η υποτείνουσα;",
+      "textEn": "A right triangle has legs 3 and 4. What is the hypotenuse?",
+      "options": [
+        {
+          "textEl": "5",
+          "textEn": "5",
+          "isCorrect": true
+        },
+        {
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.pythagorean-application"
+        },
+        {
+          "textEl": "12",
+          "textEn": "12",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.pythagorean-application"
+        }
+      ]
+    },
+    {
+      "id": "q4-equation",
+      "textEl": "Λύσε: x + 5 = 12. Ποιο είναι το x;",
+      "textEn": "Solve: x + 5 = 12. What is x?",
+      "options": [
+        {
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": true
+        },
+        {
+          "textEl": "17",
+          "textEn": "17",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.linear-equation-basic"
+        },
+        {
+          "textEl": "60",
+          "textEn": "60",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.linear-equation-basic"
+        }
+      ]
+    }
+  ]
+},
     "glossa-b-gymnasiou": {
       "id": "glossa-b-gymnasiou",
       "grades": [

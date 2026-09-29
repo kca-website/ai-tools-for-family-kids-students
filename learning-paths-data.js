@@ -1591,52 +1591,52 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-  "math-b-gym.monomial-like-terms": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Όμοιοι μονόμιοι όροι» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x²) σαν να ήταν όμοιοι όροι.",
-      "descriptionEn": "Solve 2-3 exercises on \"Like monomial terms\" by hand, writing out every step. The most common trap on this topic: Tries to add monomials with a different variable part (e.g. 3x + 2x²) as if they were like terms.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Όμοιοι μονόμιοι όροι» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Like monomial terms\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Φτιάξε μόνος/η μια νέα παράσταση με μονώνυμα, απλοποίησέ την με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
-      "descriptionEn": "Make up a new expression with monomials, simplify it by hand, then check your solution with Wolfram Alpha.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
-  "math-b-gym.identity-square-sum": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ταυτότητα (α+β)²» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
-      "descriptionEn": "Solve 2-3 exercises on the \"(a+b)² identity\" by hand, writing out every step. The most common trap on this topic: Incorrectly simplifies (a+b)² to a²+b², forgetting the middle term 2ab.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Ταυτότητα (α+β)²» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Identity (a+b)²\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ανάπτυξε μόνος/η μια νέα παράσταση (α+β)² με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
-      "descriptionEn": "Expand a new (a+b)² expression by hand yourself, then check your solution with Wolfram Alpha.",
-      "toolId": "wolfram-alpha"
-    }
-  ],
+  "math-b-gym.sqrt-positive": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χωρίς εργαλείο, βρες τις √4, √9, √25 και √49 γράφοντας ποιος μη αρνητικός αριθμός έχει τετράγωνο ίσο με τον αριθμό μέσα στη ρίζα.",
+    "descriptionEn": "Without a tool, find √4, √9, √25 and √49 by identifying the non-negative number whose square equals the number under the radical.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με το Wolfram Alpha",
+    "titleEn": "Check with Wolfram Alpha",
+    "descriptionEl": "Έλεγξε μόνο τις απαντήσεις σου στο Wolfram Alpha. Αν κάποια διαφέρει, γύρισε στη σχέση «αν √a = x, τότε x² = a» και διόρθωσέ την μόνος/η.",
+    "descriptionEn": "Use Wolfram Alpha only to check your answers. If one differs, return to “if √a = x, then x² = a” and correct it yourself.",
+    "toolId": "wolfram-alpha"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Φτιάξε δύο δικά σου παραδείγματα τετραγωνικών ριζών που δίνουν ακέραιο αποτέλεσμα και εξήγησε γιατί το σύμβολο √ δίνει τη μη αρνητική ρίζα.",
+    "descriptionEn": "Create two square-root examples with integer answers and explain why the √ symbol denotes the non-negative root.",
+    "toolId": null
+  }
+],
+  "math-b-gym.direct-proportion": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Για τη σχέση y = 3·x, συμπλήρωσε μόνος/η τις τιμές του y για x = 1, 2, 4 και 5. Μετά υπολόγισε σε κάθε ζεύγος τον λόγο y/x.",
+    "descriptionEn": "For y = 3·x, fill in y for x = 1, 2, 4 and 5. Then calculate y/x for each pair.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με το Wolfram Alpha",
+    "titleEn": "Check with Wolfram Alpha",
+    "descriptionEl": "Χρησιμοποίησε το Wolfram Alpha για να ελέγξεις τον πίνακα τιμών ή τη γραφική παράσταση της y = 3x. Σύγκρινε με τη δική σου δουλειά χωρίς να αντιγράψεις έτοιμη λύση.",
+    "descriptionEn": "Use Wolfram Alpha to check the value table or graph of y = 3x. Compare it with your own work without copying a ready-made solution.",
+    "toolId": "wolfram-alpha"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Διάλεξε μόνος/η μια άλλη τιμή του α στη y = α·x, φτιάξε τρία ζεύγη (x,y) και έλεγξε ότι ο λόγος y/x μένει σταθερός.",
+    "descriptionEn": "Choose another value of a in y = a·x, create three (x,y) pairs and verify that y/x stays constant.",
+    "toolId": null
+  }
+],
   "math-b-gym.pythagorean-application": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
@@ -1936,6 +1936,282 @@ const LEARNING_PATHS = {
       "toolId": "wolfram-alpha"
     }
   ],
+  "chem-b-gym.mixture-homogeneous": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Γράψε δύο παραδείγματα μειγμάτων από την καθημερινότητα και σημείωσε αν βλέπεις μία ενιαία φάση ή ξεχωριστά συστατικά.",
+    "descriptionEn": "Write two everyday mixture examples and note whether you see one uniform phase or distinct components.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Χρησιμοποίησε την AI Βοήθεια ή το ChatGPT και ζήτησε να σου δώσει τρία νέα μείγματα ένα-ένα, ώστε εσύ να τα χαρακτηρίσεις ομογενή ή ετερογενή και να εξηγήσεις γιατί.",
+    "descriptionEn": "Use AI Help or ChatGPT and ask for three new mixtures one at a time, so you classify each as homogeneous or heterogeneous and explain why.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε με δικά σου λόγια γιατί το αλατόνερο μπορεί να είναι ομογενές ενώ το νερό με λάδι όχι.",
+    "descriptionEn": "Explain in your own words why salt water can be homogeneous while water and oil are not.",
+    "toolId": null
+  }
+],
+  "chem-b-gym.solution-percent-wv": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Με βάση τον ορισμό % w/v, υπολόγισε πόσα γραμμάρια διαλυμένης ουσίας αντιστοιχούν σε 100 mL για διαλύματα 2%, 5% και 10% w/v.",
+    "descriptionEn": "Using the definition of % w/v, work out the grams of solute in 100 mL for 2%, 5% and 10% w/v solutions.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια να ελέγξει τη λογική σου χωρίς να δώσει αμέσως απάντηση: «Για 5% w/v σκέφτηκα 5 g σε 100 mL. Κάνε μου μία ερώτηση για να ελέγξω αν το κατάλαβα».",
+    "descriptionEn": "Ask AI Help to check your reasoning without giving the answer immediately: “For 5% w/v I thought 5 g in 100 mL. Ask me one question to check my understanding.”",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Φτιάξε μόνος/η ένα παράδειγμα διαλύματος με ακέραιο ποσοστό % w/v και εξήγησε ακριβώς τι σημαίνει σε 100 mL διαλύματος.",
+    "descriptionEn": "Create your own solution example with an integer % w/v and explain exactly what it means in 100 mL of solution.",
+    "toolId": null
+  }
+],
+  "chem-b-gym.element-compound": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χώρισε σε δύο στήλες τις ουσίες Ο₂, H₂O, Fe και CO₂: χημικά στοιχεία και χημικές ενώσεις. Γράψε δίπλα τον λόγο της επιλογής σου.",
+    "descriptionEn": "Split O₂, H₂O, Fe and CO₂ into two columns: chemical elements and chemical compounds. Write why you chose each.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Δώσε τις κατηγορίες σου στην AI Βοήθεια και ζήτησε να σε διορθώσει μόνο με ερώτηση, όχι με έτοιμη ταξινόμηση.",
+    "descriptionEn": "Give your classifications to AI Help and ask it to correct you only by asking a question, not by handing over the classification.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε γιατί το Ο₂ παραμένει χημικό στοιχείο, ενώ το H₂O είναι χημική ένωση.",
+    "descriptionEn": "Explain why O₂ is still a chemical element while H₂O is a chemical compound.",
+    "toolId": null
+  }
+],
+  "chem-b-gym.reactants-products": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σε μια απλή συμβολική αντίδραση Α + Β → Γ, σημείωσε ποια είναι τα αντιδρώντα και ποιο το προϊόν και εξήγησε τι σημαίνει το βέλος.",
+    "descriptionEn": "For a simple symbolic reaction A + B → C, identify the reactants and product and explain what the arrow means.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια δύο απλές χημικές εξισώσεις από το επίπεδο της Β΄ Γυμνασίου και αναγνώρισε εσύ τα αντιδρώντα και τα προϊόντα πριν δεις έλεγχο.",
+    "descriptionEn": "Ask AI Help for two simple chemical equations at 8th-grade level and identify the reactants and products yourself before checking.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Γράψε με δικά σου λόγια τον κανόνα: τι βρίσκεται αριστερά και τι δεξιά από το βέλος μιας χημικής εξίσωσης.",
+    "descriptionEn": "State the rule in your own words: what appears to the left and right of the arrow in a chemical equation.",
+    "toolId": null
+  }
+],
+  "geo-b-gym.relative-vs-geographic-position": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Γράψε δύο προτάσεις για την ίδια πόλη: μία που να δίνει σχετική θέση ως προς άλλο τόπο και μία που να δίνει γεωγραφική θέση με συντεταγμένες.",
+    "descriptionEn": "Write two statements about the same city: one giving its relative position to another place and one giving its geographic position with coordinates.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια τρία παραδείγματα θέσης ένα-ένα και χαρακτήρισέ τα εσύ «σχετική» ή «γεωγραφική», εξηγώντας το κριτήριό σου.",
+    "descriptionEn": "Ask AI Help for three location examples one at a time and classify each as relative or geographic, explaining your criterion.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε με μία πρόταση γιατί το «βορειοδυτικά της Κοζάνης» δεν είναι γεωγραφική θέση με την αυστηρή έννοια.",
+    "descriptionEn": "Explain in one sentence why 'northwest of Kozani' is not a geographic position in the strict coordinate sense.",
+    "toolId": null
+  }
+],
+  "geo-b-gym.plate-boundary-seismicity": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σχεδίασε δύο πλάκες που συγκλίνουν και σημείωσε πού περιμένεις μεγαλύτερη σεισμική δραστηριότητα. Δίπλα γράψε γιατί η θέση της Ελλάδας έχει σημασία.",
+    "descriptionEn": "Sketch two converging plates and mark where you expect stronger seismic activity. Then write why Greece's position matters.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Πες στην AI Βοήθεια τη δική σου εξήγηση για τη σεισμικότητα της Ελλάδας και ζήτησε μόνο μία ερώτηση ελέγχου, όχι έτοιμη απάντηση.",
+    "descriptionEn": "Give AI Help your explanation for Greece's seismicity and ask for only one checking question, not a ready answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Σύνδεσε σε μία αλυσίδα τρεις έννοιες: «λιθοσφαιρικές πλάκες → σύγκλιση → σεισμική δραστηριότητα».",
+    "descriptionEn": "Connect three ideas in one chain: 'tectonic plates → convergence → seismic activity'.",
+    "toolId": null
+  }
+],
+  "geo-b-gym.mediterranean-suez": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χώρισε σε δύο κατηγορίες το Στενό του Γιβραλτάρ, τον Βόσπορο και τη Διώρυγα του Σουέζ: φυσικά περάσματα και τεχνητό έργο.",
+    "descriptionEn": "Sort the Strait of Gibraltar, the Bosporus and the Suez Canal into natural passages and a man-made work.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια να σου δείξει έναν απλό νοητικό χάρτη των συνδέσεων της Μεσογείου και έλεγξε αν η δική σου ταξινόμηση ταιριάζει.",
+    "descriptionEn": "Ask AI Help for a simple mental map of Mediterranean connections and check whether your classification matches.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε γιατί η λέξη «διώρυγα» είναι χρήσιμο στοιχείο για να θυμάσαι ότι το Σουέζ είναι ανθρώπινο έργο.",
+    "descriptionEn": "Explain why the word 'canal' is a useful clue for remembering that Suez is man-made.",
+    "toolId": null
+  }
+],
+  "geo-b-gym.production-sectors": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Κατάταξε μόνος/η τα επαγγέλματα ψαράς, αλλαντοποιός και δάσκαλος σε πρωτογενή, δευτερογενή και τριτογενή τομέα και αιτιολόγησε κάθε επιλογή.",
+    "descriptionEn": "Classify fisher, food processor and teacher into primary, secondary and tertiary sectors and justify each choice.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια τρία νέα επαγγέλματα, ένα για κάθε τομέα, αλλά χωρίς να σου πει την κατηγορία. Κάνε εσύ την κατάταξη.",
+    "descriptionEn": "Ask AI Help for three new occupations, one from each sector, without revealing the category. Classify them yourself.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Γράψε τον δικό σου σύντομο κανόνα: φύση = ποιος τομέας, μεταποίηση = ποιος, υπηρεσίες = ποιος.",
+    "descriptionEn": "Write your own short rule: nature = which sector, processing = which sector, services = which sector.",
+    "toolId": null
+  }
+],
+  "lit-b-gym.elytis-nature": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Ξαναδιάβασε το επίσημο κείμενο και σημείωσε τρεις εικόνες ή ενέργειες που συνδέονται με τη φύση. Δίπλα σε καθεμία γράψε τι αίσθηση ή κίνηση δημιουργεί στο ποιητικό υποκείμενο.",
+    "descriptionEn": "Reread the official text and note three images or actions connected with nature. Beside each, write what feeling or movement it creates in the poetic speaker.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Δώσε στην AI Βοήθεια τη δική σου ερμηνεία και ζήτησε: «Κάνε μου μία ερώτηση που θα με αναγκάσει να τη στηρίξω με μία συγκεκριμένη εικόνα του κειμένου. Μη μου δώσεις έτοιμη ερμηνεία.»",
+    "descriptionEn": "Give AI Help your interpretation and ask: “Ask me one question that makes me support it with a specific image from the text. Do not give me a ready interpretation.”",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Σε δύο προτάσεις εξήγησε τη σχέση του ποιητικού υποκειμένου με τη φύση και χρησιμοποίησε μία εικόνα του ποιήματος ως τεκμήριο.",
+    "descriptionEn": "In two sentences, explain the poetic speaker's relationship with nature and use one image from the poem as evidence.",
+    "toolId": null
+  }
+],
+  "lit-b-gym.anne-frank-diary-addressee": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Εντόπισε στο απόσπασμα στοιχεία που δείχνουν ότι πρόκειται για ημερολογιακή γραφή. Σημείωσε ποιος μιλά, σε ποιον απευθύνεται και ποιο στοιχείο το αποδεικνύει.",
+    "descriptionEn": "Find clues in the excerpt showing that it is diary writing. Note who speaks, whom she addresses, and what detail proves it.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια να σου κάνει μία-μία ερωτήσεις για τα χαρακτηριστικά της ημερολογιακής μορφής στο συγκεκριμένο απόσπασμα, χωρίς να σου δίνει την απάντηση.",
+    "descriptionEn": "Ask AI Help to quiz you one question at a time on the diary-form features of this specific excerpt, without giving you the answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε με δικά σου λόγια πώς το ότι η Άννα απευθύνεται στην Κίτυ κάνει το κείμενο πιο προσωπικό και εξομολογητικό.",
+    "descriptionEn": "Explain in your own words how Anne addressing Kitty makes the text more personal and confessional.",
+    "toolId": null
+  }
+],
+  "lit-b-gym.little-prince-taming": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Βρες στο κείμενο τις φράσεις γύρω από το «ημερώνω» και προσπάθησε να γράψεις έναν δικό σου ορισμό χωρίς να κοιτάξεις έτοιμη ερμηνεία.",
+    "descriptionEn": "Find the phrases around 'to tame' in the text and try to write your own definition without looking at a ready interpretation.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Πες στην AI Βοήθεια τον δικό σου ορισμό για το «ημέρωμα» και ζήτησε μία ερώτηση ή ένα αντιπαράδειγμα που θα σε βοηθήσει να τον ελέγξεις, όχι έτοιμη απάντηση.",
+    "descriptionEn": "Tell AI Help your own definition of 'taming' and ask for one question or counterexample that helps you test it, not a ready answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε πώς συνδέονται στο απόσπασμα οι έννοιες «δημιουργώ δεσμούς», «γίνεται μοναδικός» και «έχω ευθύνη».",
+    "descriptionEn": "Explain how the ideas 'create bonds', 'becomes unique', and 'have responsibility' connect in the excerpt.",
+    "toolId": null
+  }
+],
+  "lit-b-gym.thermopylae-symbolism": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χώρισε σε δύο στήλες όσα αναγνωρίζεις στο ποίημα: ιστορικές αναφορές και ιδιότητες/στάσεις ανθρώπων που επαινούνται.",
+    "descriptionEn": "Split what you notice in the poem into two columns: historical references and human qualities/actions that are praised.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια μία σωκρατική ερώτηση που να σε βοηθήσει να συνδέσεις το ιστορικό γεγονός των Θερμοπυλών με το συμβολικό νόημα του ποιήματος, χωρίς να σου πει το συμπέρασμα.",
+    "descriptionEn": "Ask AI Help for one Socratic question that helps you connect the historical Thermopylae event with the poem's symbolic meaning, without stating the conclusion.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Σε 2-3 προτάσεις εξήγησε τι μπορούν να συμβολίζουν οι «Θερμοπύλες» πέρα από τη μάχη και στήριξε την απάντησή σου σε μία στάση που επαινεί το ποίημα.",
+    "descriptionEn": "In 2-3 sentences, explain what 'Thermopylae' can symbolize beyond the battle and support your answer with one attitude praised by the poem.",
+    "toolId": null
+  }
+],
   "chimeia-g-gym.element-vs-compound": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",

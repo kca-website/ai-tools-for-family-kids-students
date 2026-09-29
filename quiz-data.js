@@ -3097,40 +3097,40 @@ const GAP_TAGS = {
     "skillTagEl": "Σειρά σε Ερωτήσεις",
     "skillTagEn": "Question Word Order"
   },
-  "math-b-gym.monomial-like-terms": {
-    "id": "math-b-gym.monomial-like-terms",
-    "labelEl": "Όμοιοι μονόμιοι όροι",
-    "labelEn": "Like monomial terms",
-    "explainEl": "Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x² ) σαν να ήταν όμοιοι όροι.",
-    "explainEn": "Tries to add monomials with different variable parts (e.g. 3x + 2x²) as if they were like terms.",
-    "recommendedToolIds": [
-      "wolfram-alpha",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης των Μονωνύμων",
-    "achievementEn": "Monomial Expert",
-    "positiveMessageEl": "Ξέρεις ποιοι όροι μπορούν να προστεθούν μεταξύ τους!",
-    "positiveMessageEn": "You know which terms can be added together!",
-    "skillTagEl": "Μονώνυμα",
-    "skillTagEn": "Monomials"
-  },
-  "math-b-gym.identity-square-sum": {
-    "id": "math-b-gym.identity-square-sum",
-    "labelEl": "Ταυτότητα (α+β)²",
-    "labelEn": "Identity (a+b)²",
-    "explainEl": "Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
-    "explainEn": "Incorrectly simplifies (a+b)² to a²+b², forgetting the cross term 2ab.",
-    "recommendedToolIds": [
-      "wolfram-alpha",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης των Ταυτοτήτων",
-    "achievementEn": "Identity Expert",
-    "positiveMessageEl": "Δεν ξεχνάς ποτέ τον διπλό όρο!",
-    "positiveMessageEn": "You never forget the cross term!",
-    "skillTagEl": "Αλγεβρικές Ταυτότητες",
-    "skillTagEn": "Algebraic Identities"
-  },
+  "math-b-gym.sqrt-positive": {
+  "id": "math-b-gym.sqrt-positive",
+  "labelEl": "Τετραγωνική ρίζα θετικού αριθμού",
+  "labelEn": "Square root of a positive number",
+  "explainEl": "Μπερδεύει την τετραγωνική ρίζα με τη διαίρεση δια 2 ή θεωρεί ότι το σύμβολο √49 δίνει δύο τιμές. Η √49 είναι η μη αρνητική τετραγωνική ρίζα, δηλαδή 7.",
+  "explainEn": "Confuses square root with dividing by 2, or thinks √49 has two values. The symbol √49 denotes the non-negative square root, which is 7.",
+  "recommendedToolIds": [
+    "wolfram-alpha",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Εξερευνητής των Ριζών",
+  "achievementEn": "Square Root Explorer",
+  "positiveMessageEl": "Αναγνωρίζεις σωστά τις τετραγωνικές ρίζες!",
+  "positiveMessageEn": "You identify square roots correctly!",
+  "skillTagEl": "Τετραγωνικές Ρίζες",
+  "skillTagEn": "Square Roots"
+},
+  "math-b-gym.direct-proportion": {
+  "id": "math-b-gym.direct-proportion",
+  "labelEl": "Η συνάρτηση y = α·x",
+  "labelEn": "The function y = a·x",
+  "explainEl": "Δυσκολεύεται να εφαρμόσει τη σχέση y = α·x ή να αναγνωρίσει ότι στα ανάλογα ποσά ο λόγος y/x παραμένει σταθερός.",
+  "explainEn": "Struggles to apply y = a·x or recognize that for directly proportional quantities the ratio y/x stays constant.",
+  "recommendedToolIds": [
+    "wolfram-alpha",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Γνώστης των Αναλογιών",
+  "achievementEn": "Direct Proportion Expert",
+  "positiveMessageEl": "Συνδέεις σωστά τις τιμές σε ανάλογα ποσά!",
+  "positiveMessageEn": "You connect values correctly in direct proportion!",
+  "skillTagEl": "Ανάλογα Ποσά & y = α·x",
+  "skillTagEn": "Direct Proportion & y = a·x"
+},
   "math-b-gym.pythagorean-application": {
     "id": "math-b-gym.pythagorean-application",
     "labelEl": "Εφαρμογή Πυθαγορείου θεωρήματος",
@@ -3420,6 +3420,210 @@ const GAP_TAGS = {
     "skillTagEl": "Μετατροπή Ενέργειας",
     "skillTagEn": "Energy Transformation"
   },
+  "chem-b-gym.mixture-homogeneous": {
+  "id": "chem-b-gym.mixture-homogeneous",
+  "labelEl": "Ομογενές και ετερογενές μείγμα",
+  "labelEn": "Homogeneous vs heterogeneous mixture",
+  "explainEl": "Μπερδεύει ένα ομογενές μείγμα, στο οποίο δεν ξεχωρίζουν τα συστατικά του, με ένα ετερογενές μείγμα.",
+  "explainEn": "Confuses a homogeneous mixture, whose components are not visibly distinct, with a heterogeneous mixture.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Ερευνητής των Μειγμάτων",
+  "achievementEn": "Mixture Explorer",
+  "positiveMessageEl": "Ξεχωρίζεις σωστά τα είδη των μειγμάτων!",
+  "positiveMessageEn": "You can correctly distinguish types of mixtures!",
+  "skillTagEl": "Μείγματα",
+  "skillTagEn": "Mixtures"
+},
+  "chem-b-gym.solution-percent-wv": {
+  "id": "chem-b-gym.solution-percent-wv",
+  "labelEl": "Περιεκτικότητα % w/v",
+  "labelEn": "Percent concentration w/v",
+  "explainEl": "Δεν συνδέει σωστά την έκφραση % w/v με τα γραμμάρια διαλυμένης ουσίας που περιέχονται σε 100 mL διαλύματος.",
+  "explainEn": "Does not correctly connect % w/v with the grams of solute contained in 100 mL of solution.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Μετρητής των Διαλυμάτων",
+  "achievementEn": "Solution Concentration Expert",
+  "positiveMessageEl": "Διαβάζεις σωστά την περιεκτικότητα ενός διαλύματος!",
+  "positiveMessageEn": "You interpret solution concentration correctly!",
+  "skillTagEl": "Περιεκτικότητα Διαλύματος",
+  "skillTagEn": "Solution Concentration"
+},
+  "chem-b-gym.element-compound": {
+  "id": "chem-b-gym.element-compound",
+  "labelEl": "Χημικό στοιχείο και χημική ένωση",
+  "labelEn": "Chemical element vs compound",
+  "explainEl": "Μπερδεύει ένα χημικό στοιχείο με μια χημική ένωση που αποτελείται από άτομα διαφορετικών στοιχείων.",
+  "explainEn": "Confuses a chemical element with a chemical compound made of atoms of different elements.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Γνώστης των Στοιχείων",
+  "achievementEn": "Element & Compound Expert",
+  "positiveMessageEl": "Ξέρεις πότε μια ουσία είναι στοιχείο και πότε ένωση!",
+  "positiveMessageEn": "You know when a substance is an element and when it is a compound!",
+  "skillTagEl": "Στοιχεία & Ενώσεις",
+  "skillTagEn": "Elements & Compounds"
+},
+  "chem-b-gym.reactants-products": {
+  "id": "chem-b-gym.reactants-products",
+  "labelEl": "Αντιδρώντα και προϊόντα",
+  "labelEn": "Reactants and products",
+  "explainEl": "Μπερδεύει ποια σώματα είναι τα αντιδρώντα και ποια τα προϊόντα σε μια χημική εξίσωση.",
+  "explainEn": "Confuses which substances are reactants and which are products in a chemical equation.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Αναγνώστης των Αντιδράσεων",
+  "achievementEn": "Reaction Reader",
+  "positiveMessageEl": "Διαβάζεις σωστά μια χημική εξίσωση!",
+  "positiveMessageEn": "You read a chemical equation correctly!",
+  "skillTagEl": "Χημικές Εξισώσεις",
+  "skillTagEn": "Chemical Equations"
+},
+  "geo-b-gym.relative-vs-geographic-position": {
+  "id": "geo-b-gym.relative-vs-geographic-position",
+  "labelEl": "Σχετική και γεωγραφική θέση",
+  "labelEn": "Relative vs geographic position",
+  "explainEl": "Μπερδεύει τη σχετική θέση, που περιγράφει πού βρίσκεται κάτι σε σχέση με άλλο σημείο, με τη γεωγραφική θέση που προσδιορίζεται με συντεταγμένες.",
+  "explainEn": "Confuses relative position, which describes where something is in relation to another place, with geographic position defined by coordinates.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Χαρτογράφος της Θέσης",
+  "achievementEn": "Position Mapper",
+  "positiveMessageEl": "Ξεχωρίζεις σωστά τους δύο τρόπους εντοπισμού!",
+  "positiveMessageEn": "You distinguish the two ways of locating a place!",
+  "skillTagEl": "Θέση στον Χάρτη",
+  "skillTagEn": "Map Position"
+},
+  "geo-b-gym.plate-boundary-seismicity": {
+  "id": "geo-b-gym.plate-boundary-seismicity",
+  "labelEl": "Σεισμικότητα και λιθοσφαιρικές πλάκες",
+  "labelEn": "Seismicity and tectonic plates",
+  "explainEl": "Δεν συνδέει την έντονη σεισμικότητα της Ελλάδας με τη θέση της κοντά σε ενεργό όριο σύγκλισης λιθοσφαιρικών πλακών.",
+  "explainEn": "Does not connect Greece's strong seismicity with its location near an active convergent plate boundary.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Ερευνητής των Πλακών",
+  "achievementEn": "Plate Explorer",
+  "positiveMessageEl": "Συνδέεις σωστά τη γεωλογία με τη σεισμική δράση!",
+  "positiveMessageEn": "You connect geology with seismic activity correctly!",
+  "skillTagEl": "Σεισμοί & Πλάκες",
+  "skillTagEn": "Earthquakes & Plates"
+},
+  "geo-b-gym.mediterranean-suez": {
+  "id": "geo-b-gym.mediterranean-suez",
+  "labelEl": "Συνδέσεις της Μεσογείου",
+  "labelEn": "Mediterranean connections",
+  "explainEl": "Μπερδεύει τα φυσικά στενά με την τεχνητή Διώρυγα του Σουέζ ως συνδέσεις της Μεσογείου με άλλες θάλασσες.",
+  "explainEn": "Confuses natural straits with the man-made Suez Canal as connections between the Mediterranean and other seas.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Εξερευνητής της Μεσογείου",
+  "achievementEn": "Mediterranean Explorer",
+  "positiveMessageEl": "Γνωρίζεις πώς συνδέεται η Μεσόγειος με τον υπόλοιπο κόσμο!",
+  "positiveMessageEn": "You know how the Mediterranean connects with the wider world!",
+  "skillTagEl": "Μεσόγειος",
+  "skillTagEn": "Mediterranean"
+},
+  "geo-b-gym.production-sectors": {
+  "id": "geo-b-gym.production-sectors",
+  "labelEl": "Τομείς παραγωγής",
+  "labelEn": "Production sectors",
+  "explainEl": "Μπερδεύει πρωτογενή, δευτερογενή και τριτογενή τομέα, ειδικά όταν πρέπει να κατατάξει υπηρεσίες ή επαγγέλματα.",
+  "explainEn": "Confuses the primary, secondary and tertiary sectors, especially when classifying services or occupations.",
+  "recommendedToolIds": [
+    "perplexity",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Αναλυτής της Οικονομίας",
+  "achievementEn": "Economy Analyst",
+  "positiveMessageEl": "Κατατάσσεις σωστά τις οικονομικές δραστηριότητες!",
+  "positiveMessageEn": "You classify economic activities correctly!",
+  "skillTagEl": "Τομείς Παραγωγής",
+  "skillTagEn": "Production Sectors"
+},
+  "lit-b-gym.elytis-nature": {
+  "id": "lit-b-gym.elytis-nature",
+  "labelEl": "Σχέση ποιητικού υποκειμένου και φύσης",
+  "labelEn": "Poetic speaker and nature",
+  "explainEl": "Δυσκολεύεται να αναγνωρίσει ότι στο «Πίνοντας ήλιο κορινθιακό» η επαφή με τη φύση παρουσιάζεται ως αναζωογονητική και δημιουργική εμπειρία.",
+  "explainEn": "Struggles to recognize that in 'Drinking Corinthian Sun' contact with nature is presented as revitalizing and creative.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Αναγνώστης της Φύσης",
+  "achievementEn": "Nature Reader",
+  "positiveMessageEl": "Συνδέεις εικόνες και νόημα στο ποίημα!",
+  "positiveMessageEn": "You connect imagery and meaning in the poem!",
+  "skillTagEl": "Ποίηση & Φύση",
+  "skillTagEn": "Poetry & Nature"
+},
+  "lit-b-gym.anne-frank-diary-addressee": {
+  "id": "lit-b-gym.anne-frank-diary-addressee",
+  "labelEl": "Ημερολογιακή μορφή και αποδέκτης",
+  "labelEn": "Diary form and addressee",
+  "explainEl": "Δεν αναγνωρίζει τον πλασματικό αποδέκτη της ημερολογιακής γραφής και τον ρόλο της άμεσης προσωπικής εξομολόγησης.",
+  "explainEn": "Does not recognize the fictional addressee of the diary entry and the role of direct personal confession.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Αναγνώστης του Ημερολογίου",
+  "achievementEn": "Diary Reader",
+  "positiveMessageEl": "Αναγνωρίζεις πώς λειτουργεί η ημερολογιακή αφήγηση!",
+  "positiveMessageEn": "You recognize how diary narration works!",
+  "skillTagEl": "Ημερολόγιο & Αφήγηση",
+  "skillTagEn": "Diary & Narration"
+},
+  "lit-b-gym.little-prince-taming": {
+  "id": "lit-b-gym.little-prince-taming",
+  "labelEl": "Το «ημέρωμα» και οι δεσμοί",
+  "labelEn": "Taming and bonds",
+  "explainEl": "Διαβάζει κυριολεκτικά το «ημέρωμα» και χάνει τον συμβολικό του ρόλο ως δημιουργία προσωπικών δεσμών και ευθύνης.",
+  "explainEn": "Reads 'taming' literally and misses its symbolic role as creating personal bonds and responsibility.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Ερμηνευτής των Συμβόλων",
+  "achievementEn": "Symbol Interpreter",
+  "positiveMessageEl": "Βλέπεις το βαθύτερο νόημα πίσω από τις λέξεις!",
+  "positiveMessageEn": "You see the deeper meaning behind the words!",
+  "skillTagEl": "Συμβολισμός & Σχέσεις",
+  "skillTagEn": "Symbolism & Relationships"
+},
+  "lit-b-gym.thermopylae-symbolism": {
+  "id": "lit-b-gym.thermopylae-symbolism",
+  "labelEl": "Ο συμβολισμός στις «Θερμοπύλες»",
+  "labelEn": "Symbolism in 'Thermopylae'",
+  "explainEl": "Περιορίζει το ποίημα μόνο στο ιστορικό γεγονός και δεν αναγνωρίζει τη συμβολική τιμή προς όσους μένουν πιστοί στο χρέος και στις αξίες τους παρά τις δυσκολίες.",
+  "explainEn": "Reduces the poem to the historical event and misses the symbolic praise of people who remain faithful to duty and values despite difficulty.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Αναγνώστης των Συμβόλων",
+  "achievementEn": "Symbolism Reader",
+  "positiveMessageEl": "Ξεχωρίζεις το ιστορικό επίπεδο από το συμβολικό!",
+  "positiveMessageEn": "You distinguish the historical level from the symbolic one!",
+  "skillTagEl": "Συμβολισμός & Αξίες",
+  "skillTagEn": "Symbolism & Values"
+},
   "chimeia-g-gym.element-vs-compound": {
     "id": "chimeia-g-gym.element-vs-compound",
     "labelEl": "Στοιχείο vs Ένωση",
@@ -9725,115 +9929,115 @@ const QUIZZES = {
       ]
     },
     "mathimatika-b-gymnasiou": {
-      "id": "mathimatika-b-gymnasiou",
-      "grades": [
-        "b"
-      ],
-      "subjectLabelEl": "Μαθηματικά, Β' Γυμνασίου",
-      "subjectLabelEn": "Math, 8th Grade",
-      "titleEl": "Ο Χάρτης Εξάσκησης",
-      "titleEn": "The Practice Map",
-      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      "introEn": "4 short questions. It's not a test, there's no grade.",
-      "questions": [
+  "id": "mathimatika-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Μαθηματικά, Β' Γυμνασίου",
+  "subjectLabelEn": "Math, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης",
+  "titleEn": "The Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από την επαληθευμένη ύλη 2026–27. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+  "introEn": "4 short questions from the verified 2026–27 scope. It's not a test, there's no grade.",
+  "questions": [
+    {
+      "id": "q1-square-root",
+      "textEl": "Πόσο είναι √49;",
+      "textEn": "What is √49?",
+      "options": [
         {
-          "id": "q1-like-terms",
-          "textEl": "Ποια από τα παρακάτω είναι όμοιοι όροι με το 3x;",
-          "textEn": "Which of the following is a like term to 3x?",
-          "options": [
-            {
-              "textEl": "5x",
-              "textEn": "5x",
-              "isCorrect": true
-            },
-            {
-              "textEl": "3x²",
-              "textEn": "3x²",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.monomial-like-terms"
-            },
-            {
-              "textEl": "3",
-              "textEn": "3",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.monomial-like-terms"
-            }
-          ]
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": true
         },
         {
-          "id": "q2-identity",
-          "textEl": "Πόσο κάνει (x+3)²;",
-          "textEn": "What is (x+3)²?",
-          "options": [
-            {
-              "textEl": "x² + 6x + 9",
-              "textEn": "x² + 6x + 9",
-              "isCorrect": true
-            },
-            {
-              "textEl": "x² + 9",
-              "textEn": "x² + 9",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.identity-square-sum"
-            },
-            {
-              "textEl": "x² + 3x + 9",
-              "textEn": "x² + 3x + 9",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.identity-square-sum"
-            }
-          ]
+          "textEl": "24,5",
+          "textEn": "24.5",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.sqrt-positive"
         },
         {
-          "id": "q3-pythagorean",
-          "textEl": "Ορθογώνιο τρίγωνο έχει κάθετες πλευρές 3 και 4. Ποια είναι η υποτείνουσα;",
-          "textEn": "A right triangle has legs 3 and 4. What is the hypotenuse?",
-          "options": [
-            {
-              "textEl": "5",
-              "textEn": "5",
-              "isCorrect": true
-            },
-            {
-              "textEl": "7",
-              "textEn": "7",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.pythagorean-application"
-            },
-            {
-              "textEl": "12",
-              "textEn": "12",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.pythagorean-application"
-            }
-          ]
-        },
-        {
-          "id": "q4-equation",
-          "textEl": "Λύσε: x + 5 = 12. Ποιο είναι το x;",
-          "textEn": "Solve: x + 5 = 12. What is x?",
-          "options": [
-            {
-              "textEl": "7",
-              "textEn": "7",
-              "isCorrect": true
-            },
-            {
-              "textEl": "17",
-              "textEn": "17",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.linear-equation-basic"
-            },
-            {
-              "textEl": "60",
-              "textEn": "60",
-              "isCorrect": false,
-              "gapTag": "math-b-gym.linear-equation-basic"
-            }
-          ]
+          "textEl": "±7",
+          "textEn": "±7",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.sqrt-positive"
         }
       ]
     },
+    {
+      "id": "q2-direct-proportion",
+      "textEl": "Στη συνάρτηση y = 3·x, αν x = 4, πόσο είναι το y;",
+      "textEn": "For y = 3·x, if x = 4, what is y?",
+      "options": [
+        {
+          "textEl": "12",
+          "textEn": "12",
+          "isCorrect": true
+        },
+        {
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.direct-proportion"
+        },
+        {
+          "textEl": "3/4",
+          "textEn": "3/4",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.direct-proportion"
+        }
+      ]
+    },
+    {
+      "id": "q3-pythagorean",
+      "textEl": "Ορθογώνιο τρίγωνο έχει κάθετες πλευρές 3 και 4. Ποια είναι η υποτείνουσα;",
+      "textEn": "A right triangle has legs 3 and 4. What is the hypotenuse?",
+      "options": [
+        {
+          "textEl": "5",
+          "textEn": "5",
+          "isCorrect": true
+        },
+        {
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.pythagorean-application"
+        },
+        {
+          "textEl": "12",
+          "textEn": "12",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.pythagorean-application"
+        }
+      ]
+    },
+    {
+      "id": "q4-equation",
+      "textEl": "Λύσε: x + 5 = 12. Ποιο είναι το x;",
+      "textEn": "Solve: x + 5 = 12. What is x?",
+      "options": [
+        {
+          "textEl": "7",
+          "textEn": "7",
+          "isCorrect": true
+        },
+        {
+          "textEl": "17",
+          "textEn": "17",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.linear-equation-basic"
+        },
+        {
+          "textEl": "60",
+          "textEn": "60",
+          "isCorrect": false,
+          "gapTag": "math-b-gym.linear-equation-basic"
+        }
+      ]
+    }
+  ]
+},
     "glossa-b-gymnasiou": {
       "id": "glossa-b-gymnasiou",
       "grades": [
@@ -10250,6 +10454,336 @@ const QUIZZES = {
         }
       ]
     },
+    "chimeia-b-gymnasiou": {
+  "id": "chimeia-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Χημεία, Β' Γυμνασίου",
+  "subjectLabelEn": "Chemistry, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης Χημείας",
+  "titleEn": "The Chemistry Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από την επαληθευμένη ύλη 2026–27. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+  "introEn": "4 short questions from the verified 2026–27 scope. It's not a test, there's no grade.",
+  "questions": [
+    {
+      "id": "q1-mixture",
+      "textEl": "Ποιο από τα παρακάτω είναι ομογενές μείγμα;",
+      "textEn": "Which of the following is a homogeneous mixture?",
+      "options": [
+        {
+          "textEl": "Αλατόνερο, αφού το αλάτι έχει διαλυθεί πλήρως.",
+          "textEn": "Salt water, after the salt has fully dissolved.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Νερό και λάδι.",
+          "textEn": "Water and oil.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.mixture-homogeneous"
+        },
+        {
+          "textEl": "Νερό και άμμος.",
+          "textEn": "Water and sand.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.mixture-homogeneous"
+        }
+      ]
+    },
+    {
+      "id": "q2-percent-wv",
+      "textEl": "Ένα διάλυμα 5% w/v περιέχει πόσα γραμμάρια διαλυμένης ουσίας σε 100 mL διαλύματος;",
+      "textEn": "A 5% w/v solution contains how many grams of solute in 100 mL of solution?",
+      "options": [
+        {
+          "textEl": "5 g",
+          "textEn": "5 g",
+          "isCorrect": true
+        },
+        {
+          "textEl": "50 g",
+          "textEn": "50 g",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.solution-percent-wv"
+        },
+        {
+          "textEl": "0,5 g",
+          "textEn": "0.5 g",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.solution-percent-wv"
+        }
+      ]
+    },
+    {
+      "id": "q3-element-compound",
+      "textEl": "Το νερό (H₂O) είναι...",
+      "textEn": "Water (H₂O) is...",
+      "options": [
+        {
+          "textEl": "Χημική ένωση, επειδή αποτελείται από διαφορετικά χημικά στοιχεία.",
+          "textEn": "A chemical compound, because it contains different chemical elements.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Χημικό στοιχείο.",
+          "textEn": "A chemical element.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.element-compound"
+        },
+        {
+          "textEl": "Πάντα ετερογενές μείγμα.",
+          "textEn": "Always a heterogeneous mixture.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.element-compound"
+        }
+      ]
+    },
+    {
+      "id": "q4-equation",
+      "textEl": "Σε μια χημική εξίσωση, τι γράφουμε συνήθως αριστερά από το βέλος;",
+      "textEn": "In a chemical equation, what is usually written to the left of the arrow?",
+      "options": [
+        {
+          "textEl": "Τα αντιδρώντα.",
+          "textEn": "The reactants.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Τα προϊόντα.",
+          "textEn": "The products.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.reactants-products"
+        },
+        {
+          "textEl": "Μόνο τα χημικά στοιχεία που δεν συμμετέχουν.",
+          "textEn": "Only chemical elements that do not participate.",
+          "isCorrect": false,
+          "gapTag": "chem-b-gym.reactants-products"
+        }
+      ]
+    }
+  ]
+},
+    "geologia-geografia-b-gymnasiou": {
+  "id": "geologia-geografia-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Γεωλογία - Γεωγραφία, Β' Γυμνασίου",
+  "subjectLabelEn": "Geology - Geography, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης Γεωγραφίας",
+  "titleEn": "The Geography Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από την επαληθευμένη ύλη 2026–27. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+  "introEn": "4 short questions from the verified 2026–27 scope. It's not a test, there's no grade.",
+  "questions": [
+    {
+      "id": "q1-position",
+      "textEl": "Η φράση «η Φλώρινα βρίσκεται βορειοδυτικά της Κοζάνης» περιγράφει...",
+      "textEn": "The statement 'Florina lies northwest of Kozani' describes...",
+      "options": [
+        {
+          "textEl": "Σχετική θέση.",
+          "textEn": "Relative position.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Γεωγραφική θέση με συντεταγμένες.",
+          "textEn": "Geographic position by coordinates.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.relative-vs-geographic-position"
+        },
+        {
+          "textEl": "Υψόμετρο.",
+          "textEn": "Elevation.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.relative-vs-geographic-position"
+        }
+      ]
+    },
+    {
+      "id": "q2-seismicity",
+      "textEl": "Γιατί η Ελλάδα παρουσιάζει έντονη σεισμική δραστηριότητα;",
+      "textEn": "Why does Greece have strong seismic activity?",
+      "options": [
+        {
+          "textEl": "Βρίσκεται κοντά σε ενεργό όριο σύγκλισης λιθοσφαιρικών πλακών.",
+          "textEn": "It lies near an active convergent tectonic-plate boundary.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Επειδή βρίσκεται αποκλειστικά σε πεδινή περιοχή.",
+          "textEn": "Because it lies entirely on plains.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.plate-boundary-seismicity"
+        },
+        {
+          "textEl": "Επειδή όλες οι χώρες της Ευρώπης έχουν την ίδια σεισμικότητα.",
+          "textEn": "Because all European countries have the same seismicity.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.plate-boundary-seismicity"
+        }
+      ]
+    },
+    {
+      "id": "q3-suez",
+      "textEl": "Ποια σύνδεση της Μεσογείου με άλλη θάλασσα είναι τεχνητό έργο;",
+      "textEn": "Which Mediterranean connection to another sea is man-made?",
+      "options": [
+        {
+          "textEl": "Η Διώρυγα του Σουέζ.",
+          "textEn": "The Suez Canal.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Το Στενό του Γιβραλτάρ.",
+          "textEn": "The Strait of Gibraltar.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.mediterranean-suez"
+        },
+        {
+          "textEl": "Ο Βόσπορος.",
+          "textEn": "The Bosporus.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.mediterranean-suez"
+        }
+      ]
+    },
+    {
+      "id": "q4-sector",
+      "textEl": "Σε ποιον τομέα παραγωγής ανήκει κυρίως η εκπαίδευση;",
+      "textEn": "Which production sector does education mainly belong to?",
+      "options": [
+        {
+          "textEl": "Στον τριτογενή τομέα.",
+          "textEn": "The tertiary sector.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Στον πρωτογενή τομέα.",
+          "textEn": "The primary sector.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.production-sectors"
+        },
+        {
+          "textEl": "Στον δευτερογενή τομέα.",
+          "textEn": "The secondary sector.",
+          "isCorrect": false,
+          "gapTag": "geo-b-gym.production-sectors"
+        }
+      ]
+    }
+  ]
+},
+    "logotechnia-b-gymnasiou": {
+  "id": "logotechnia-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Κείμενα Νεοελληνικής Λογοτεχνίας, Β' Γυμνασίου",
+  "subjectLabelEn": "Modern Greek Literature Texts, 8th Grade",
+  "titleEl": "Ο Χάρτης Ανάγνωσης Λογοτεχνίας",
+  "titleEn": "The Literature Reading Map",
+  "introEl": "4 σύντομες ερωτήσεις από κείμενα του επίσημου ανθολογίου. Οι οδηγίες 2026–27 προβλέπουν επιλογή κειμένων από τον/την εκπαιδευτικό, όχι μία ενιαία υποχρεωτική λίστα για όλους.",
+  "introEn": "4 short questions from the official anthology. The 2026–27 guidance uses teacher-selected texts rather than one mandatory list for every class.",
+  "questions": [
+    {
+      "id": "q1-elytis",
+      "textEl": "Στο «Πίνοντας ήλιο κορινθιακό», πώς παρουσιάζεται κυρίως η σχέση του ποιητικού υποκειμένου με τη φύση;",
+      "textEn": "In 'Drinking Corinthian Sun', how is the speaker's relationship with nature mainly presented?",
+      "options": [
+        {
+          "textEl": "Ως ζωντανή, αναζωογονητική επαφή που γεννά δημιουργική διάθεση.",
+          "textEn": "As a vivid, revitalizing contact that creates a creative mood.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Ως αδιαφορία και απομάκρυνση από το φυσικό τοπίο.",
+          "textEn": "As indifference and distance from nature.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.elytis-nature"
+        },
+        {
+          "textEl": "Ως αποκλειστικά επιστημονική παρατήρηση του τοπίου.",
+          "textEn": "As purely scientific observation of the landscape.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.elytis-nature"
+        }
+      ]
+    },
+    {
+      "id": "q2-anne-frank",
+      "textEl": "Στο απόσπασμα από το ημερολόγιο της Άννας Φρανκ, σε ποια απευθύνεται η Άννα όταν γράφει;",
+      "textEn": "In the Anne Frank diary excerpt, whom does Anne address when she writes?",
+      "options": [
+        {
+          "textEl": "Στην επινοημένη φίλη Κίτυ.",
+          "textEn": "Her fictional friend Kitty.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Στη Μαργκότ.",
+          "textEn": "Margot.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.anne-frank-diary-addressee"
+        },
+        {
+          "textEl": "Στον καθηγητή της.",
+          "textEn": "Her teacher.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.anne-frank-diary-addressee"
+        }
+      ]
+    },
+    {
+      "id": "q3-little-prince",
+      "textEl": "Στο «Ο μικρός πρίγκιπας και η αλεπού», τι σημαίνει κυρίως το «ημερώνω» όπως το εξηγεί η αλεπού;",
+      "textEn": "In 'The Little Prince and the Fox', what does 'to tame' mainly mean as the fox explains it?",
+      "options": [
+        {
+          "textEl": "Να δημιουργείς δεσμούς.",
+          "textEn": "To create bonds.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Να κερδίζεις σε έναν αγώνα.",
+          "textEn": "To win a contest.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.little-prince-taming"
+        },
+        {
+          "textEl": "Να μαθαίνεις σε ένα ζώο ένα τέχνασμα.",
+          "textEn": "To teach an animal a trick.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.little-prince-taming"
+        }
+      ]
+    },
+    {
+      "id": "q4-thermopylae",
+      "textEl": "Στις «Θερμοπύλες» του Καβάφη, ποιοι τιμώνται πέρα από το συγκεκριμένο ιστορικό γεγονός;",
+      "textEn": "In Cavafy's 'Thermopylae', who is honored beyond the specific historical event?",
+      "options": [
+        {
+          "textEl": "Όσοι μένουν πιστοί στο χρέος και στις αξίες τους ακόμη κι όταν προβλέπουν τη δυσκολία ή την ήττα.",
+          "textEn": "Those who remain faithful to duty and values even when they foresee hardship or defeat.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Μόνο όσοι γνωρίζουν πολλές ιστορικές ημερομηνίες.",
+          "textEn": "Only those who know many historical dates.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.thermopylae-symbolism"
+        },
+        {
+          "textEl": "Όσοι αποφεύγουν κάθε δύσκολη επιλογή.",
+          "textEn": "Those who avoid every difficult choice.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.thermopylae-symbolism"
+        }
+      ]
+    }
+  ]
+},
     "chimeia-g-gymnasiou": {
       "id": "chimeia-g-gymnasiou",
       "grades": [

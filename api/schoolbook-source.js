@@ -10,6 +10,39 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "mathimatika-b-gymnasiou": {
+    title: "Μαθηματικά Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/",
+    mode: "mathB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
+  "chimeia-b-gymnasiou": {
+    title: "Χημεία Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/",
+    mode: "chemistryB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
+  "geologia-geografia-b-gymnasiou": {
+    title: "Γεωλογία - Γεωγραφία Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2294/Geografia_B-Gymnasiou_html-empl/",
+    mode: "geographyB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
+  "logotechnia-b-gymnasiou": {
+    title: "Κείμενα Νεοελληνικής Λογοτεχνίας Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/",
+    mode: "literatureB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "teacher-choice-from-official-anthology"
+  },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
@@ -76,6 +109,12 @@ const BOOKS = {
 };
 
 const ALIASES = {
+  "math-b-gymnasiou": "mathimatika-b-gymnasiou",
+  "chemistry-b-gymnasiou": "chimeia-b-gymnasiou",
+  "geografia-b-gymnasiou": "geologia-geografia-b-gymnasiou",
+  "geology-geography-b-gymnasiou": "geologia-geografia-b-gymnasiou",
+  "keimena-logotechnias-b-gymnasiou": "logotechnia-b-gymnasiou",
+  "neoelliniki-logotechnia-b-gymnasiou": "logotechnia-b-gymnasiou",
   "fysiki-b-gymnasiou": "physics-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
@@ -137,6 +176,521 @@ const HISTORY_B_2026_2027_PATHS = Object.freeze({
   "7.1.4": ["index7_1_4.html"],
   "7.2": ["index7_2.html"]
 });
+
+const MATH_B_2026_2027_PATHS = Object.freeze({
+  "A.1.1": ["indexA1_1.html"],
+  "A.1.2": ["indexA1_2.html"],
+  "A.1.4": ["indexA1_4.html"],
+  "A.2.1": ["indexA2_1.html"],
+  "A.2.2": ["indexA2_2.html"],
+  "A.2.3": ["indexA2_3.html"],
+  "A.3.1": ["indexA3_1.html"],
+  "A.3.2": ["indexA3_2.html"],
+  "A.3.3": ["indexA3_3.html"],
+  "A.3.4": ["indexA3_4.html"],
+  "A.3.5": ["indexA3_5.html"],
+  "A.4.1": ["indexA4_1.html"],
+  "A.4.2": ["indexA4_2.html"],
+  "A.4.5": ["indexA4_5.html"],
+  "B.1.1": ["indexB1_1.html"],
+  "B.1.2": ["indexB1_2.html"],
+  "B.1.3": ["indexB1_3.html"],
+  "B.1.4": ["indexB1_4.html"],
+  "B.2.1": ["indexB2_1.html"],
+  "B.2.2": ["indexB2_2.html"],
+  "B.3.1": ["indexB3_1.html"],
+  "B.3.2": ["indexB3_2.html"],
+  "B.3.3": ["indexB3_3.html"],
+  "B.3.5": ["indexB3_5.html"],
+  "B.4.2": ["indexB4_2.html"],
+  "B.4.3": ["indexB4_3.html"],
+  "B.4.4": ["indexB4_4.html"],
+  "B.4.6": ["indexB4_6.html"]
+});
+
+const CHEMISTRY_B_2026_2027_PATHS = Object.freeze({
+  "1.1": ["index1_1.html"],
+  "1.2": ["index1_2.html"],
+  "1.3": ["index1_3.html"],
+  "2.1": ["index2_1.html"],
+  "2.2": ["index2_2_1.html", "index2_2_2.html"],
+  "2.3": ["index2_3_1.html", "index2_3_2.html", "index2_3_3.html"],
+  "2.4": ["index2_4.html"],
+  "2.5": ["index2_5.html"],
+  "2.6": ["index2_6.html", "index2_6_2.html"],
+  "2.7": ["index2_7.html"],
+  "2.8": ["index2_8.html"],
+  "2.9": ["index2_9.html"],
+  "2.10": ["index2_10.html"],
+  "2.11": ["index2_11.html"],
+  "3.1": ["index3_1.html"],
+  "3.2": ["index3_2.html"],
+  "3.3": ["index3_3.html"],
+  "3.4": ["index3_4.html"],
+  "4.2": ["index4_2.html"]
+});
+
+const GEOGRAPHY_B_2026_2027_PATHS = Object.freeze({
+  "1": ["mat1_1.html"],
+  "2": ["mat1_2.html"],
+  "3": ["mat1_3.html"],
+  "6": ["mat2_6.html"],
+  "7": ["mat2_7.html"],
+  "8": ["mat2_8.html"],
+  "9": ["mat2_9.html"],
+  "10": ["mat2_10.html"],
+  "11": ["mat2_11.html"],
+  "12": ["mat2_12.html"],
+  "13": ["mat2_13.html"],
+  "14": ["mat2_14.html"],
+  "15": ["mat2_15.html"],
+  "16": ["mat2_16.html"],
+  "17": ["mat2_17.html"],
+  "18": ["mat2_18.html"],
+  "19": ["mat2_19.html"],
+  "20": ["mat2_20.html"],
+  "21": ["mat2_21.html"],
+  "22": ["mat2_22.html"],
+  "23": ["mat2_23.html"],
+  "24": ["mat2_24.html"],
+  "25": ["mat3_25.html"],
+  "26": ["mat3_26.html"],
+  "27": ["mat3_27.html"],
+  "28": ["mat3_28.html"],
+  "29": ["mat3_29.html"],
+  "30": ["mat3_30.html"],
+  "31": ["mat3_31.html"],
+  "32": ["mat3_32.html"],
+  "33": ["mat3_33.html"],
+  "34": ["mat3_34.html"],
+  "35": ["mat3_35.html"],
+  "36": ["mat3_36.html"],
+  "37": ["mat4_37.html"],
+  "38": ["mat4_38.html"],
+  "39": ["mat4_39.html"],
+  "40": ["mat4_40.html"],
+  "41": ["mat4_41.html"],
+  "42": ["mat4_42.html"],
+  "43": ["mat4_43.html"],
+  "44": ["mat4_44.html"],
+  "45": ["mat4_45.html"],
+  "46": ["mat4_46.html"],
+  "47": ["mat4_47.html"],
+  "48": ["mat4_48.html"]
+});
+
+const LITERATURE_B_2026_2027_TEXTS = Object.freeze([
+  {
+    "path": "indexa_1.html",
+    "titles": [
+      "Πίνοντας ήλιο κορινθιακό"
+    ]
+  },
+  {
+    "path": "indexa_2.html",
+    "titles": [
+      "Ξυπνάμε και η θάλασσα ξυπνά μαζί μας"
+    ]
+  },
+  {
+    "path": "indexa_3.html",
+    "titles": [
+      "Αθήνα"
+    ]
+  },
+  {
+    "path": "indexa_4.html",
+    "titles": [
+      "Η πόλη"
+    ]
+  },
+  {
+    "path": "indexa_5.html",
+    "titles": [
+      "Χαλασμένες γειτονιές"
+    ]
+  },
+  {
+    "path": "indexa_6.html",
+    "titles": [
+      "Ένα παλιό μήνυμα για το σύγχρονο κόσμο"
+    ]
+  },
+  {
+    "path": "indexb_1.html",
+    "titles": [
+      "Ο Τάκη-Πλούμας"
+    ]
+  },
+  {
+    "path": "indexb_2.html",
+    "titles": [
+      "Η Άννα του Κλήδονα"
+    ]
+  },
+  {
+    "path": "indexb_3.html",
+    "titles": [
+      "Να 'σαι καλά, δάσκαλε!"
+    ]
+  },
+  {
+    "path": "indexb_4.html",
+    "titles": [
+      "Ο Καραγκιόζης. Ένα ελληνικό θέατρο σκιών"
+    ]
+  },
+  {
+    "path": "indexc_1.html",
+    "titles": [
+      "Η μάνα"
+    ]
+  },
+  {
+    "path": "indexc_2.html",
+    "titles": [
+      "Από το ημερολόγιο της Άννας Φρανκ"
+    ]
+  },
+  {
+    "path": "indexc_3.html",
+    "titles": [
+      "Οι Κυριακές στη θάλασσα"
+    ]
+  },
+  {
+    "path": "indexc_4.html",
+    "titles": [
+      "Νανούρισμα στο γιο μου"
+    ]
+  },
+  {
+    "path": "indexd_1.html",
+    "titles": [
+      "Στην εκκλησία"
+    ]
+  },
+  {
+    "path": "indexd_2.html",
+    "titles": [
+      "Τ' άσπρο ξωκλήσι"
+    ]
+  },
+  {
+    "path": "indexd_3.html",
+    "titles": [
+      "Κάποια Χριστούγεννα"
+    ]
+  },
+  {
+    "path": "indexd_4.html",
+    "titles": [
+      "Η ιστορία του δαχτυλιδιού"
+    ]
+  },
+  {
+    "path": "indexe_1.html",
+    "titles": [
+      "Ο Διγενής"
+    ]
+  },
+  {
+    "path": "indexe_2.html",
+    "titles": [
+      "Του Βασίλη"
+    ]
+  },
+  {
+    "path": "indexe_3.html",
+    "titles": [
+      "Εις Σάμον"
+    ]
+  },
+  {
+    "path": "indexe_4.html",
+    "titles": [
+      "Η καταστροφή των Ψαρών"
+    ]
+  },
+  {
+    "path": "indexe_5.html",
+    "titles": [
+      "Ερημωμένα χωριά"
+    ]
+  },
+  {
+    "path": "indexe_6.html",
+    "titles": [
+      "Από δόξα και θάνατο"
+    ]
+  },
+  {
+    "path": "indexe_7.html",
+    "titles": [
+      "Έξι χιλιάδες νέοι"
+    ]
+  },
+  {
+    "path": "indexe_8.html",
+    "titles": [
+      "Το συρματόπλεγμα του αίσχους"
+    ]
+  },
+  {
+    "path": "indexf_1.html",
+    "titles": [
+      "Όταν πρωτοκατέβηκα στη Σμύρνη"
+    ]
+  },
+  {
+    "path": "indexf_2.html",
+    "titles": [
+      "Πάσχα τ' Απρίλη"
+    ]
+  },
+  {
+    "path": "indexf_3.html",
+    "titles": [
+      "Χρονικό"
+    ]
+  },
+  {
+    "path": "indexf_4.html",
+    "titles": [
+      "Ένας αριθμός"
+    ]
+  },
+  {
+    "path": "indexg_1.html",
+    "titles": [
+      "Βγαίνοντας από το σχολειό"
+    ]
+  },
+  {
+    "path": "indexg_2.html",
+    "titles": [
+      "Μια Κυριακή στην Κνωσό"
+    ]
+  },
+  {
+    "path": "indexg_3.html",
+    "titles": [
+      "Η εξοχική Λευκάδα"
+    ]
+  },
+  {
+    "path": "indexg_4.html",
+    "titles": [
+      "Τόκιο"
+    ]
+  },
+  {
+    "path": "indexh_1.html",
+    "titles": [
+      "Θέλω να πα στην ξενιτιά",
+      "Θέλω να πας στην ξενιτιά",
+      "Ξενιτεμένο μου πουλί"
+    ]
+  },
+  {
+    "path": "indexh_2.html",
+    "titles": [
+      "Ο Κάσπαρ Χάουζερ στην έρημη χώρα"
+    ]
+  },
+  {
+    "path": "indexh_3.html",
+    "titles": [
+      "Η επιστροφή του Αντρέα"
+    ]
+  },
+  {
+    "path": "indexh_4.html",
+    "titles": [
+      "Για τον όρο «μετανάστες»"
+    ]
+  },
+  {
+    "path": "indexh_5.html",
+    "titles": [
+      "Γλυκό του κουταλιού"
+    ]
+  },
+  {
+    "path": "indexh_6.html",
+    "titles": [
+      "Δύο γράμματα της Χαράς"
+    ]
+  },
+  {
+    "path": "indexh_7.html",
+    "titles": [
+      "Αναμνήσεις της Κωνσταντίνας από τη Γερμανία"
+    ]
+  },
+  {
+    "path": "indexi_1.html",
+    "titles": [
+      "Καλλιπάτειρα"
+    ]
+  },
+  {
+    "path": "indexi_2.html",
+    "titles": [
+      "Η τρίπλα των ονείρων"
+    ]
+  },
+  {
+    "path": "indexi_3.html",
+    "titles": [
+      "Η τοπική ομάδα"
+    ]
+  },
+  {
+    "path": "indexi_4.html",
+    "titles": [
+      "Η εσχάτη των ποινών"
+    ]
+  },
+  {
+    "path": "indexj_1.html",
+    "titles": [
+      "Τα πουλιά δέλεαρ του Θεού"
+    ]
+  },
+  {
+    "path": "indexj_2.html",
+    "titles": [
+      "Γιατί;"
+    ]
+  },
+  {
+    "path": "indexj_3.html",
+    "titles": [
+      "Η κυρία Νίτσα"
+    ]
+  },
+  {
+    "path": "indexj_4.html",
+    "titles": [
+      "Και πάλι στο σχολείο..."
+    ]
+  },
+  {
+    "path": "indexj_5.html",
+    "titles": [
+      "Ο μικρός πρίγκιπας και η αλεπού"
+    ]
+  },
+  {
+    "path": "indexj_6.html",
+    "titles": [
+      "Μαλαισιακά τραγούδια"
+    ]
+  },
+  {
+    "path": "indexk_1.html",
+    "titles": [
+      "Θερμοπύλες"
+    ]
+  },
+  {
+    "path": "indexk_2.html",
+    "titles": [
+      "Όμως ο μπαμπάς δεν ερχόταν"
+    ]
+  },
+  {
+    "path": "indexk_3.html",
+    "titles": [
+      "Για ένα παιδί που κοιμάται"
+    ]
+  },
+  {
+    "path": "indexk_4.html",
+    "titles": [
+      "Το τραγούδι του Γιανγκ"
+    ]
+  },
+  {
+    "path": "indexl_1.html",
+    "titles": [
+      "Τι έπαιξα στο Λαύριο"
+    ]
+  },
+  {
+    "path": "indexl_2.html",
+    "titles": [
+      "Στην εποχή του τσιμέντου και της πολυκατοικίας"
+    ]
+  },
+  {
+    "path": "indexl_3.html",
+    "titles": [
+      "Γραφείον ευρέσεως εργασίας"
+    ]
+  },
+  {
+    "path": "indexl_4.html",
+    "titles": [
+      "Με το λεωφορείο"
+    ]
+  },
+  {
+    "path": "indexl_5.html",
+    "titles": [
+      "Ιστορία του λαβύρινθου"
+    ]
+  },
+  {
+    "path": "indexl_6.html",
+    "titles": [
+      "Τα λουλούδια της Χιροσίμα"
+    ]
+  },
+  {
+    "path": "indexl_7.html",
+    "titles": [
+      "Όταν πεθαίνει ένα παιδί"
+    ]
+  },
+  {
+    "path": "indexl_8.html",
+    "titles": [
+      "Στα καμένα"
+    ]
+  },
+  {
+    "path": "indexm_1.html",
+    "titles": [
+      "Οι γάτες των φορτηγών"
+    ]
+  },
+  {
+    "path": "indexm_2.html",
+    "titles": [
+      "Ο λύκος"
+    ]
+  },
+  {
+    "path": "indexm_3.html",
+    "titles": [
+      "Άνθρωποι και δελφίνια"
+    ]
+  },
+  {
+    "path": "indexm_4.html",
+    "titles": [
+      "Ο μεταξοσκώληκας"
+    ]
+  },
+  {
+    "path": "indexm_5.html",
+    "titles": [
+      "Ο σκαντζόχερος"
+    ]
+  }
+]);
 
 module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
@@ -223,7 +777,8 @@ module.exports = async function handler(req, res) {
       combinedText = htmlToText(html);
     }
 
-    const useful = book.multi ? combinedText : selectUsefulText(combinedText, topic);
+    const scoped = applyCurriculumTextScope(subject, topic, combinedText);
+    const useful = book.multi ? scoped.text : selectUsefulText(scoped.text, topic);
     const sourceUrl = sourceUrls[0] || book.base;
 
     if (useful.length < 500) {
@@ -244,6 +799,8 @@ module.exports = async function handler(req, res) {
       bookTitle: book.title,
       schoolYear: book.schoolYear || null,
       curriculumSource: book.curriculumSource || null,
+      curriculumExclusions: scoped.exclusions,
+      curriculumScopeApplied: scoped.exclusions.length > 0,
       sourceUrl,
       sourceUrls,
       text: useful.slice(0, 42000)
@@ -269,6 +826,26 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "istoria-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "mathimatika-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveMathBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "chimeia-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveChemistryBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "geologia-geografia-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveGeographyBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "logotechnia-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveLiteratureBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
   if (subject === "biologia-a-gymnasiou") {
@@ -415,6 +992,68 @@ function historyTopicKey(topic) {
   return Number.isInteger(lesson) && lesson > 0 ? `${chapter}.${firstNumber}.${lesson}` : "";
 }
 
+function resolveMathBCurriculumPaths(topic) {
+  const key = mathBTopicKey(topic);
+  return key && MATH_B_2026_2027_PATHS[key]
+    ? [...MATH_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function mathBTopicKey(topic) {
+  const value = String(topic || "");
+  const match = value.match(/Μέρος\s+([ΑAΒB])\s*·\s*(\d+)\.(\d+)/i);
+  if (!match) return "";
+
+  const part = /[ΑA]/i.test(match[1]) ? "A" : "B";
+  const chapter = Number(match[2]);
+  const section = Number(match[3]);
+  if (!Number.isInteger(chapter) || chapter < 1 || !Number.isInteger(section) || section < 1) return "";
+  return `${part}.${chapter}.${section}`;
+}
+
+function resolveChemistryBCurriculumPaths(topic) {
+  const key = chemistryBTopicKey(topic);
+  return key && CHEMISTRY_B_2026_2027_PATHS[key]
+    ? [...CHEMISTRY_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function chemistryBTopicKey(topic) {
+  const value = String(topic || "");
+  const match = value.match(/(?:Γενική\s+Ενότητα\s+\d+\s*·\s*)?(\d+)\.(\d+)/i);
+  if (!match) return "";
+  const chapter = Number(match[1]);
+  const section = Number(match[2]);
+  if (!Number.isInteger(chapter) || chapter < 1 || !Number.isInteger(section) || section < 1) return "";
+  return `${chapter}.${section}`;
+}
+
+function resolveGeographyBCurriculumPaths(topic) {
+  const key = geographyBTopicKey(topic);
+  return key && GEOGRAPHY_B_2026_2027_PATHS[key]
+    ? [...GEOGRAPHY_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function geographyBTopicKey(topic) {
+  const value = String(topic || "");
+  const match = value.match(/Μάθημα\s+(\d+)/i);
+  if (!match) return "";
+  const lesson = Number(match[1]);
+  return Number.isInteger(lesson) && lesson > 0 ? String(lesson) : "";
+}
+
+function resolveLiteratureBCurriculumPaths(topic) {
+  const value = normalize(topic);
+  const matches = LITERATURE_B_2026_2027_TEXTS.filter(row =>
+    row.titles.some(title => {
+      const needle = normalize(title);
+      return needle.length >= 6 && value.includes(needle);
+    })
+  );
+  return [...new Set(matches.map(row => row.path))];
+}
+
 async function fetchOfficialHtml(url) {
   const response = await fetch(url, {
     headers: {
@@ -530,6 +1169,71 @@ function normalize(s) {
     .trim();
 }
 
+function applyCurriculumTextScope(subject, topic, text) {
+  let scoped = String(text || "");
+  const exclusions = [];
+
+  if (subject === "mathimatika-b-gymnasiou") {
+    const key = mathBTopicKey(topic);
+
+    if (key === "A.3.2") {
+      exclusions.push("Δεν διδάσκονται η Εφαρμογή 2 της σελ. 62 και ο τύπος απόστασης δύο σημείων της σελ. 63.");
+      scoped = scoped.replace(
+        /\n2\s*\nΔίνεται το σημείο Α\(3, 2\)[\s\S]*?(?=\n4\s*\nΈχει διαπιστωθεί)/i,
+        "\n"
+      );
+    }
+    if (key === "A.3.4") {
+      exclusions.push("Δεν διδάσκονται η εξίσωση αx + βy = γ ούτε τα σημεία τομής της με τους άξονες.");
+      scoped = truncateAt(scoped, "Η εξίσωση της μορφής αx + βy = γ");
+    }
+    if (key === "A.4.1") {
+      exclusions.push("Οι έννοιες πληθυσμός, μεταβλητή, δείγμα, δειγματοληψία, δημοσκόπηση, μέγεθος και αντιπροσωπευτικότητα δείγματος εξηγούνται αλλά δεν εξετάζονται.");
+    }
+    if (key === "A.4.5") {
+      exclusions.push("Δεν διδάσκεται η μέση τιμή ομαδοποιημένης κατανομής.");
+      scoped = truncateAt(scoped, "Μέση τιμή ομαδοποιημένης κατανομής");
+    }
+    if (key === "B.2.2") {
+      exclusions.push("Δεν διδάσκεται η Παρατήρηση (β) της ενότητας 2.2.");
+      scoped = scoped.replace(
+        /β\)\s*Αν τώρα διαιρέσουμε το ημω με το συνω[\s\S]*?Άρα:\s*(?:Image\s*)?/i,
+        ""
+      );
+    }
+  }
+
+  if (subject === "chimeia-b-gymnasiou") {
+    const key = chemistryBTopicKey(topic);
+    if (key === "2.10") {
+      exclusions.push("Δεν διδάσκεται η παράγραφος «Χημικοί τύποι ιόντων και ιοντικών ενώσεων».");
+      scoped = truncateAt(scoped, "Χημικοί τύποι ιόντων και ιοντικών ενώσεων");
+    }
+  }
+
+  return { text: scoped.trim(), exclusions };
+}
+
+function truncateAt(text, marker) {
+  const source = String(text || "");
+  const i = normalize(source).indexOf(normalize(marker));
+  if (i < 0) return source;
+
+  // Normalized offsets are not exact; locate the literal marker first when possible.
+  const literal = source.toLowerCase().indexOf(String(marker).toLowerCase());
+  if (literal >= 0) return source.slice(0, literal).trim();
+
+  // Greek accents may differ; use a conservative line scan when literal matching fails.
+  const markerNorm = normalize(marker);
+  const lines = source.split("\n");
+  const kept = [];
+  for (const line of lines) {
+    if (normalize(line).includes(markerNorm)) break;
+    kept.push(line);
+  }
+  return kept.join("\n").trim();
+}
+
 function selectUsefulText(text, topic) {
   const full = String(text || "").trim();
   if (full.length <= 42000) return full;
@@ -557,6 +1261,18 @@ function selectUsefulText(text, topic) {
 module.exports._test = Object.freeze({
   historyTopicKey,
   resolveHistoryCurriculumPaths,
+  mathBTopicKey,
+  resolveMathBCurriculumPaths,
+  chemistryBTopicKey,
+  resolveChemistryBCurriculumPaths,
+  geographyBTopicKey,
+  resolveGeographyBCurriculumPaths,
+  resolveLiteratureBCurriculumPaths,
   resolveSectionPath,
-  HISTORY_B_2026_2027_PATHS
+  HISTORY_B_2026_2027_PATHS,
+  MATH_B_2026_2027_PATHS,
+  CHEMISTRY_B_2026_2027_PATHS,
+  GEOGRAPHY_B_2026_2027_PATHS,
+  LITERATURE_B_2026_2027_TEXTS,
+  applyCurriculumTextScope
 });

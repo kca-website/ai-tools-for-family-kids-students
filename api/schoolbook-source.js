@@ -10,6 +10,14 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "mathimatika-b-gymnasiou": {
+    title: "Μαθηματικά Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/",
+    mode: "mathB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
@@ -76,6 +84,7 @@ const BOOKS = {
 };
 
 const ALIASES = {
+  "math-b-gymnasiou": "mathimatika-b-gymnasiou",
   "fysiki-b-gymnasiou": "physics-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
@@ -136,6 +145,37 @@ const HISTORY_B_2026_2027_PATHS = Object.freeze({
   "7.1.3": ["index7_1_3.html"],
   "7.1.4": ["index7_1_4.html"],
   "7.2": ["index7_2.html"]
+});
+
+const MATH_B_2026_2027_PATHS = Object.freeze({
+  "A.1.1": ["indexA1_1.html"],
+  "A.1.2": ["indexA1_2.html"],
+  "A.1.4": ["indexA1_4.html"],
+  "A.2.1": ["indexA2_1.html"],
+  "A.2.2": ["indexA2_2.html"],
+  "A.2.3": ["indexA2_3.html"],
+  "A.3.1": ["indexA3_1.html"],
+  "A.3.2": ["indexA3_2.html"],
+  "A.3.3": ["indexA3_3.html"],
+  "A.3.4": ["indexA3_4.html"],
+  "A.3.5": ["indexA3_5.html"],
+  "A.4.1": ["indexA4_1.html"],
+  "A.4.2": ["indexA4_2.html"],
+  "A.4.5": ["indexA4_5.html"],
+  "B.1.1": ["indexB1_1.html"],
+  "B.1.2": ["indexB1_2.html"],
+  "B.1.3": ["indexB1_3.html"],
+  "B.1.4": ["indexB1_4.html"],
+  "B.2.1": ["indexB2_1.html"],
+  "B.2.2": ["indexB2_2.html"],
+  "B.3.1": ["indexB3_1.html"],
+  "B.3.2": ["indexB3_2.html"],
+  "B.3.3": ["indexB3_3.html"],
+  "B.3.5": ["indexB3_5.html"],
+  "B.4.2": ["indexB4_2.html"],
+  "B.4.3": ["indexB4_3.html"],
+  "B.4.4": ["indexB4_4.html"],
+  "B.4.6": ["indexB4_6.html"]
 });
 
 module.exports = async function handler(req, res) {
@@ -269,6 +309,11 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "istoria-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "mathimatika-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveMathBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
   if (subject === "biologia-a-gymnasiou") {
@@ -415,6 +460,25 @@ function historyTopicKey(topic) {
   return Number.isInteger(lesson) && lesson > 0 ? `${chapter}.${firstNumber}.${lesson}` : "";
 }
 
+function resolveMathBCurriculumPaths(topic) {
+  const key = mathBTopicKey(topic);
+  return key && MATH_B_2026_2027_PATHS[key]
+    ? [...MATH_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function mathBTopicKey(topic) {
+  const value = String(topic || "");
+  const match = value.match(/Μέρος\s+([ΑAΒB])\s*·\s*(\d+)\.(\d+)/i);
+  if (!match) return "";
+
+  const part = /[ΑA]/i.test(match[1]) ? "A" : "B";
+  const chapter = Number(match[2]);
+  const section = Number(match[3]);
+  if (!Number.isInteger(chapter) || chapter < 1 || !Number.isInteger(section) || section < 1) return "";
+  return `${part}.${chapter}.${section}`;
+}
+
 async function fetchOfficialHtml(url) {
   const response = await fetch(url, {
     headers: {
@@ -557,6 +621,9 @@ function selectUsefulText(text, topic) {
 module.exports._test = Object.freeze({
   historyTopicKey,
   resolveHistoryCurriculumPaths,
+  mathBTopicKey,
+  resolveMathBCurriculumPaths,
   resolveSectionPath,
-  HISTORY_B_2026_2027_PATHS
+  HISTORY_B_2026_2027_PATHS,
+  MATH_B_2026_2027_PATHS
 });

@@ -155,15 +155,29 @@
     return '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(kind==="pdf" ? (isEn?"Choose PDF or Word":"Επίλεξε PDF ή Word") : (isEn?"Attach file":"Ανέβασε αρχείο"))+'</label><input id="guidedPdfFile" type="file" accept="'+UPLOAD_ACCEPT+'"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span><button type="button" id="guidedPdfRemove" class="guided__upload-remove" hidden>'+(isEn?"Remove file":"Αφαίρεση αρχείου")+'</button></div>'+hint;
   }
 
-  async function readUploadFile(file,onProgress){
-    const isImage=/^image\//.test(file.type||"") || /\.(jpe?g|png|webp|gif|bmp)$/i.test(file.name||"");
-    if(isImage){
-      if(file.size>15*1024*1024) throw new Error("file_too_large");
+  function isImageFile(file){
+    return /^image\//.test(file.type||"") || /\.(jpe?g|png|webp|gif|bmp)$/i.test(file.name||"");
+  }
+
+  // Shared OCR entry point (photo or scanned PDF). Also used by AI Study.
+  async function ocrFile(file,onProgress,maxChars){
+    const limit=maxChars||UPLOAD_MAX_CHARS;
+    if(file.size>15*1024*1024) throw new Error("file_too_large");
+    if(isImageFile(file)){
       const canvas=await imageFileToCanvas(file);
       const text=await ocrCanvases([canvas],onProgress);
       if(!text) throw new Error("ocr_empty");
-      return {name:file.name||"photo.jpg",text:text.slice(0,UPLOAD_MAX_CHARS),totalPages:0,truncated:text.length>UPLOAD_MAX_CHARS,ocr:true};
+      return {name:file.name||"photo.jpg",text:text.slice(0,limit),totalPages:0,pagesRead:0,truncated:text.length>limit,ocr:true};
     }
+    if(onProgress) onProgress("scan",0);
+    const {canvases,totalPages}=await pdfPagesToCanvases(file);
+    const text=await ocrCanvases(canvases,onProgress);
+    if(!text) throw new Error("ocr_empty");
+    return {name:file.name||"document.pdf",text:text.slice(0,limit),totalPages,pagesRead:canvases.length,truncated:totalPages>canvases.length||text.length>limit,ocr:true};
+  }
+
+  async function readUploadFile(file,onProgress){
+    if(isImageFile(file)) return ocrFile(file,onProgress);
     const isPdf=file.type==="application/pdf" || /\.pdf$/i.test(file.name||"");
     if(isPdf){
       const reader=await ensurePdfReader();
@@ -172,11 +186,7 @@
       }catch(err){
         if(String(err&&err.message||err)!=="no_selectable_text") throw err;
         // Scanned PDF: read the first pages with OCR.
-        if(onProgress) onProgress("scan",0);
-        const {canvases,totalPages}=await pdfPagesToCanvases(file);
-        const text=await ocrCanvases(canvases,onProgress);
-        if(!text) throw new Error("ocr_empty");
-        return {name:file.name||"document.pdf",text:text.slice(0,UPLOAD_MAX_CHARS),totalPages,truncated:totalPages>canvases.length||text.length>UPLOAD_MAX_CHARS,ocr:true};
+        return ocrFile(file,onProgress);
       }
     }
     const isDocx=/\.docx$/i.test(file.name||"") || file.type==="application/vnd.openxmlformats-officedocument.wordprocessingml.document";
@@ -511,7 +521,7 @@
     });
   }
 
-  window.AITOOLSKIDS_GUIDED={renderMarkdown,init,uploadMarkup,bindUpload};
+  window.AITOOLSKIDS_GUIDED={renderMarkdown,init,uploadMarkup,bindUpload,ocrFile,isImageFile};
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
   else init();
 })();

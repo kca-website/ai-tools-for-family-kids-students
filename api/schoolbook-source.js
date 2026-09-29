@@ -195,6 +195,16 @@ const BOOKS = {
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
     selectionPolicy: "beginner-or-advanced-package"
   },
+  "thriskeftika-b-gymnasiou": {
+    title: "Θρησκευτικά Β΄ Γυμνασίου — Η Εκκλησία: πορεία ζωής μέσα στην ιστορία",
+    base: "https://www.ebooks.edu.gr/ebooks/d/8547/5230/21-0202-01_Thriskeutika_B-Gymnasiou_Vivlio-Mathiti.pdf",
+    mode: "religionB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.ebooks.edu.gr/ebooks/d/8547/5230/21-0202-01_Thriskeutika_B-Gymnasiou_Vivlio-Mathiti.pdf",
+    canonicalSourceUrl: "https://www.ebooks.edu.gr/ebooks/d/8547/5230/21-0202-01_Thriskeutika_B-Gymnasiou_Vivlio-Mathiti.pdf",
+    selectionPolicy: "current-official-book-chapters-grounded-in-official-source-material"
+  },
   "glossa-gymnasiou": {
     title: "Νεοελληνική Γλώσσα Γ΄ Γυμνασίου / Γραμματική Α΄-Β΄-Γ΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/",
@@ -221,8 +231,47 @@ const ALIASES = {
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
   "biology-g-gymnasiou": "biologia-g-gymnasiou",
   "english-b-gymnasium": "english-b-gymnasiou",
-  "agglika-b-gymnasiou": "english-b-gymnasiou"
+  "agglika-b-gymnasiou": "english-b-gymnasiou",
+  "religion-b-gymnasiou": "thriskeftika-b-gymnasiou",
+  "religious-studies-b-gymnasiou": "thriskeftika-b-gymnasiou"
 };
+
+const RELIGION_B_OFFICIAL_SOURCE_MATERIAL = Object.freeze({
+  1: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index1.html",
+  2: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index1.html",
+  3: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index1.html",
+  4: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index1.html",
+  5: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index1.html",
+  6: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index2.html",
+  7: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index2.html",
+  8: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index4.html",
+  9: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2308/Thriskeutika_A-Gymnasiou_html-empl/index4.html",
+  10: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2310/Thriskeutika_B-Gymnasiou_html-empl/index1.html",
+  11: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2310/Thriskeutika_B-Gymnasiou_html-empl/index1.html",
+  12: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2310/Thriskeutika_B-Gymnasiou_html-empl/index1.html",
+  13: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2310/Thriskeutika_B-Gymnasiou_html-empl/index1.html",
+  14: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2310/Thriskeutika_B-Gymnasiou_html-empl/index6.html",
+  15: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2310/Thriskeutika_B-Gymnasiou_html-empl/index6.html",
+  16: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2310/Thriskeutika_B-Gymnasiou_html-empl/index6.html"
+});
+
+// The current 2020+ B Gymnasium textbook explicitly consolidates material from
+// the earlier official A/B Gymnasium folders. These official HTML pages are
+// used as machine-readable grounding material, while the current B textbook
+// PDF remains the canonical source shown to the learner.
+function religionBTopicNumber(topic) {
+  const value = String(topic || "").trim();
+  const match = value.match(/^(\d{1,2})\s*(?:[—–-]|\.|\))/);
+  if (!match) return 0;
+  const n = Number(match[1]);
+  return Number.isInteger(n) && n >= 1 && n <= 16 ? n : 0;
+}
+
+function resolveReligionBSourceUrls(topic) {
+  const n = religionBTopicNumber(topic);
+  const url = RELIGION_B_OFFICIAL_SOURCE_MATERIAL[n];
+  return url ? [url] : [];
+}
 
 // Exact 2026-27 History B curriculum allowlist, verified against the official
 // IEP annual guidance. Parent nodes aggregate only their included descendants;
@@ -1196,6 +1245,7 @@ module.exports = async function handler(req, res) {
       curriculumScopeApplied: scoped.exclusions.length > 0,
       sourceUrl,
       sourceUrls,
+      canonicalSourceUrl: book.canonicalSourceUrl || null,
       text: useful.slice(0, 42000)
     });
   } catch (err) {
@@ -1308,6 +1358,10 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolveEnglishBCurriculumUrls(topic);
   }
 
+  if (subject === "thriskeftika-b-gymnasiou") {
+    return resolveReligionBSourceUrls(topic);
+  }
+
   if (subject === "biologia-a-gymnasiou") {
     // Current 2026–27 curriculum topics only. Do not expose the whole book as this year's syllabus.
     if (t.includes("οργανωση της ζωης") && t.includes("χαρακτηριστικ")) {
@@ -1343,7 +1397,7 @@ function resolveDirectSourceUrls(subject, topic) {
 function resolveSectionPath(mode, topic) {
   const t = String(topic || "");
 
-  if (mode === "biologyA" || mode === "biologyB" || mode === "biologyGQuiz" || mode === "physicsB" || mode === "physicsGQuiz" || mode === "chemistryGQuiz" || mode === "iliadB" || mode === "englishB") return "";
+  if (mode === "biologyA" || mode === "biologyB" || mode === "biologyGQuiz" || mode === "physicsB" || mode === "physicsGQuiz" || mode === "chemistryGQuiz" || mode === "iliadB" || mode === "englishB" || mode === "religionB") return "";
 
   if (mode === "ancientGreekB") {
     const n = unitNumber(topic);
@@ -2076,6 +2130,8 @@ module.exports._test = Object.freeze({
   resolveIliadBCurriculumPaths,
   resolveEnglishBCurriculumUrls,
   englishBSelection,
+  religionBTopicNumber,
+  resolveReligionBSourceUrls,
   unitNumber,
   scopeAncientGreekBUnit8,
   splitOfficialPageBlocks,
@@ -2101,5 +2157,6 @@ module.exports._test = Object.freeze({
   ANCIENT_GREEK_B_2026_2027_UNITS,
   ILIAD_B_2026_2027_PATHS,
   ENGLISH_B_UNITS,
+  RELIGION_B_OFFICIAL_SOURCE_MATERIAL,
   applyCurriculumTextScope
 });

@@ -119,6 +119,19 @@ for (const [topic, expected] of iliadCases) {
 }
 assert.deepEqual(t.resolveIliadBCurriculumPaths("Ραψωδία Ω — Ω 468-677"), []);
 
+// Religious Studies B: all 16 current textbook chapters are source-grounded.
+// The machine-readable grounding pages are official source materials explicitly
+// consolidated into the current B textbook; the canonical learner link is the
+// current official B Gymnasium PDF.
+for (let n = 1; n <= 16; n++) {
+  const urls = t.resolveReligionBSourceUrls(`${n} — test`);
+  assert.equal(urls.length, 1, `Religion B chapter ${n}`);
+  assert.match(urls[0], /ebooks\.edu\.gr\/ebooks\/v\/html\/8547\/(2308|2310)\//);
+}
+assert.deepEqual(t.resolveReligionBSourceUrls("17 — invalid"), []);
+assert.equal(t.religionBTopicNumber("10 — Η δύναμη της εικόνας"), 10);
+assert.equal(t.religionBTopicNumber("Η δύναμη της εικόνας"), 0);
+
 // English B requires package + Unit and supports both official packages.
 for (let n = 1; n <= 10; n++) {
   assert.equal(
@@ -148,5 +161,18 @@ assert.equal(books.get("glossa-b-gymnasiou").sections.length, 9);
 assert.equal(books.get("archaia-glossa-b-gymnasiou").sections.length, 12);
 assert.equal(books.get("iliada-b-gymnasiou").sections.length, 10);
 assert.equal(books.get("english-b-gymnasiou").sections.length, 18);
+assert.equal(books.get("thriskeftika-b-gymnasiou").sections.length, 16);
+assert.match(books.get("thriskeftika-b-gymnasiou").sourceUrl, /21-0202-01_Thriskeutika_B-Gymnasiou_Vivlio-Mathiti\.pdf/);
+
+const officialWindow = {};
+vm.runInNewContext(
+  fs.readFileSync(new URL("../official-curriculum-data.js", import.meta.url), "utf8"),
+  { window: officialWindow }
+);
+const religionOfficial = officialWindow.AITOOLSKIDS_OFFICIAL_CURRICULUM.getByQuizId("thriskeftika-b-gymnasiou");
+assert.equal(religionOfficial.coverageStatus, "book-index-verified");
+assert.equal(religionOfficial.annualInstructionsStatus, "official-book-index");
+assert.equal(religionOfficial.officialSectionsEl.length, 16);
+assert.match(religionOfficial.scopeNoteEl, /δεν παρουσιάζονται ως ετήσια εξεταστέα/);
 
 console.log("Remaining B Gym source-grounding: exact official book mappings and fail-closed scope passed.");

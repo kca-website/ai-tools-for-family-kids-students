@@ -268,12 +268,13 @@
       return;
     }
     const label=lang==='en'?'Based on the official school textbook':'Βασισμένο στο επίσημο σχολικό βιβλίο';
-    const link=source.sourceUrl?'<a href="'+esc(source.sourceUrl)+'" target="_blank" rel="noopener noreferrer" style="margin-left:6px">'+esc(lang==='en'?'Open source':'Άνοιγμα πηγής')+'</a>':'';
+    const sourceLink=source.canonicalSourceUrl||source.sourceUrl||'';
+    const link=sourceLink?'<a href="'+esc(sourceLink)+'" target="_blank" rel="noopener noreferrer" style="margin-left:6px">'+esc(lang==='en'?'Open source':'Άνοιγμα πηγής')+'</a>':'';
     box.innerHTML='📘 <strong>'+esc(label)+'</strong> · '+esc(source.bookTitle||'')+link;
     box.classList.remove('hidden');
   }
   function requiresOfficialSource(){
-    return ['physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
+    return ['physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','thriskeftika-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
   }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}

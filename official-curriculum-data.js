@@ -722,29 +722,38 @@
 },
   "mathimatika-g-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "official-book-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο επιβεβαιωμένο",
-    "coverageLabelEn": "Official textbook verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι 4 τρέχοντες διαγνωστικοί στόχοι έχουν ακριβή επίσημη πηγή",
+    "coverageLabelEn": "The 4 current diagnostic topics have exact official sources",
     "quizTitleEl": "Μαθηματικά, Γ' Γυμνασίου",
     "quizTitleEn": "Mathematics, 3rd Grade Middle School",
     "officialBook": {
       "titleEl": "Μαθηματικά Γ΄ Γυμνασίου",
-      "titleEn": "Μαθηματικά Γ΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C104/68/"
+      "titleEn": "Mathematics, G΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/"
     },
-    "officialSectionsEl": [],
+    "additionalSourceBook": {
+      "titleEl": "Μαθηματικά Β΄ Γυμνασίου — προαπαιτούμενο Πυθαγόρειο θεώρημα",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"
+    },
+    "officialSectionsEl": [
+      "Γ΄ · Α.2.1 — Η εξίσωση αx + β = 0",
+      "Γ΄ · Α.1.4 — Πολλαπλασιασμός πολυωνύμων / επιμεριστική ιδιότητα",
+      "Β΄ · Β.1.4 — Πυθαγόρειο θεώρημα (προαπαιτούμενη γνώση που εξετάζει ο διαγνωστικός στόχος)"
+    ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Έχει επιβεβαιωθεί το επίσημο σχολικό βιβλίο. Δεν έχει ακόμη ολοκληρωθεί η αντιστοίχιση όλων των quiz topics με συγκεκριμένες ενότητες του βιβλίου.",
-    "scopeNoteEn": "The official textbook is verified. Full mapping of all quiz topics to exact textbook sections is not complete yet.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Τα θέματα «πρόσημο πλην» και «ισότητα ως ισορροπία» γειώνονται στην ενότητα Α.2.1 της Γ΄, και η επιμεριστική στην Α.1.4. Ο διαγνωστικός στόχος Πυθαγορείου είναι έλεγχος προαπαιτούμενης γνώσης από τη Β΄ Γυμνασίου και γι’ αυτό χρησιμοποιεί ρητά το επίσημο Β.1.4 της Β΄ αντί να προσποιείται ότι είναι νέα ενότητα της Γ΄.",
+    "scopeNoteEn": "Minus-sign and equality-balance topics are grounded in G΄ section A.2.1, and distribution in A.1.4. The Pythagorean diagnostic is prerequisite knowledge from B΄ Gymnasium, so it explicitly uses the official B.1.4 source instead of pretending it is a new G΄ section.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Οι οδηγίες 2026–27 έχουν δημοσιευτεί από το ΙΕΠ. Η παρούσα αντιστοίχιση αφορά τους σημερινούς διαγνωστικούς στόχους και όχι πλήρη ετήσια allowlist.",
+    "annualInstructionsNoteEn": "IEP has published 2026–27 guidance. This mapping covers the current diagnostic targets, not a complete annual syllabus allowlist.",
     "quizId": "mathimatika-g-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-official-page-grounding-for-current-diagnostic-topics; prerequisite source explicitly labelled; fail closed outside mapped topics"
   },
   "istoria-g-gymnasiou": {
     "schoolYear": "2026-2027",
@@ -806,38 +815,34 @@
   },
   "mathimatika-a-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "book-index-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο και περιεχόμενα επιβεβαιωμένα",
-    "coverageLabelEn": "Official textbook and contents verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι 4 τρέχοντες διαγνωστικοί στόχοι συνδέονται με ακριβείς σελίδες του επίσημου βιβλίου",
+    "coverageLabelEn": "The 4 current diagnostic topics are grounded in exact official textbook pages",
     "quizTitleEl": "Μαθηματικά, Α' Γυμνασίου",
     "quizTitleEn": "Math, 7th Grade",
     "officialBook": {
       "titleEl": "Μαθηματικά Α΄ Γυμνασίου",
-      "titleEn": "Μαθηματικά Α΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A200/293/"
+      "titleEn": "Mathematics, A΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/"
     },
     "officialSectionsEl": [
-      "Κεφ. 1: Φυσικοί αριθμοί: διάταξη, πράξεις, δυνάμεις, διαιρετότητα, ΜΚΔ/ΕΚΠ",
-      "Κεφ. 2: Κλάσματα: έννοια, ισοδύναμα, σύγκριση, πράξεις",
-      "Κεφ. 3: Δεκαδικοί αριθμοί: διάταξη, πράξεις, στρογγυλοποίηση, μονάδες μέτρησης",
-      "Κεφ. 4: Εξισώσεις και προβλήματα",
-      "Κεφ. 5: Ποσοστά",
-      "Κεφ. 6: Λόγος, αναλογία, ανάλογα και αντιστρόφως ανάλογα ποσά",
-      "Κεφ. 7: Θετικοί/αρνητικοί (ρητοί): ευθεία ρητών, απόλυτη τιμή, αντίθετοι, σύγκριση και πράξεις",
-      "Γεωμετρία: βασικές έννοιες, γωνίες, κύκλος, συμμετρία, παράλληλες, τρίγωνα/τετράπλευρα (σύμφωνα με το βιβλίο)"
+      "Α.7.2 — Απόλυτη τιμή ρητού - Αντίθετοι ρητοί - Σύγκριση ρητών",
+      "Α.1.5 — Χαρακτήρες διαιρετότητας - ΜΚΔ - ΕΚΠ - Ανάλυση αριθμού σε γινόμενο πρώτων παραγόντων",
+      "Α.6.2 — Λόγος δύο αριθμών - Αναλογία"
     ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Ο αναλυτικός δείκτης βασίζεται στα επίσημα περιεχόμενα του βιβλίου Μαθηματικών Α΄ Γυμνασίου. Οι ετήσιες οδηγίες 2026–27 παραμένουν ξεχωριστή πηγή και δεν θεωρούνται ακόμη πλήρως ενσωματωμένες.",
-    "scopeNoteEn": "The grade/subject is verified in the official 2026–27 textbook catalog. A chapter-level index has not yet been added for this quiz in our curriculum layer.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Οι τέσσερις στόχοι του Χάρτη Εξάσκησης — διάταξη ρητών, απόλυτη τιμή, ΜΚΔ/ΕΚΠ και εισαγωγή σε αναλογίες — διαβάζουν πλέον τις ακριβείς επίσημες σελίδες του βιβλίου. Αυτό δεν αποτελεί ακόμη πλήρη allowlist της ετήσιας ύλης Μαθηματικών Α΄ Γυμνασίου 2026–27.",
+    "scopeNoteEn": "The four Practice Map targets—ordering rational numbers, absolute value, GCD/LCM and introductory proportions—now read the exact official textbook pages. This is not yet a complete 2026–27 annual syllabus allowlist.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Οι οδηγίες 2026–27 έχουν δημοσιευτεί από το ΙΕΠ. Η παρούσα αντιστοίχιση επαληθεύει τις πηγές των σημερινών διαγνωστικών θεμάτων και δεν επεκτείνει αυθαίρετα την ετήσια ύλη.",
+    "annualInstructionsNoteEn": "IEP has published 2026–27 guidance. This mapping verifies sources for the currently exposed diagnostic topics without inferring the rest of the annual syllabus.",
     "quizId": "mathimatika-a-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-official-page-grounding-for-current-diagnostic-topics; fail closed outside mapped topics"
   },
   "glossa-a-gymnasiou": {
     "schoolYear": "2026-2027",

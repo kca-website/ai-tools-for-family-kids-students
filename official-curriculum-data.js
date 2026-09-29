@@ -6,9 +6,9 @@
 (function(){
   "use strict";
   const META = {
-  "version": "2.2.0",
+  "version": "2.3.0",
   "schoolYear": "2026-2027",
-  "lastVerified": "2026-09-28",
+  "lastVerified": "2026-09-29",
   "officialCatalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
   "iepAnnualGuidanceUrl": "https://www.iep.edu.gr/yli-odigies-tropos-axiologisis/",
   "gelExamSyllabusUrl": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",
@@ -33,8 +33,8 @@
       "related-section-verified": 23
     }
   },
-  "limitationsEl": "Η v2 καλύπτει όλα τα καταχωρισμένα quiz και gapTags με source-aware status. Αυτό ΔΕΝ σημαίνει ότι 280/280 έχουν ακριβή αντιστοίχιση σε επίσημο κεφάλαιο. Τα περισσότερα είναι ασφαλή topic anchors μέχρι να γίνει section-level έλεγχος. Για ΓΕΛ έχει ενσωματωθεί η δημοσιευμένη εξεταστέα ύλη 2026–27 όπου επαληθεύτηκε. Για Δημοτικό/Γυμνάσιο οι επίσημες οδηγίες 2026–27 έχουν δημοσιευτεί και τα βιβλία/ενότητες έχουν επαληθευτεί όπου υπάρχει section-level τεκμηρίωση, αλλά η ακριβής ετήσια αντιστοίχιση δεν έχει ολοκληρωθεί παντού.",
-  "limitationsEn": "v2 covers all currently registered quizzes and gapTags with source-aware status. This does NOT mean 280/280 are exact official chapter mappings. Most are safe topic anchors pending section-level verification. Published 2026–27 GEL examinable syllabus is encoded where verified; Official 2026–27 Primary/Middle guidance has been published, but exact annual section-level alignment is not yet complete everywhere."
+  "limitationsEl": "Η v2 καλύπτει όλα τα καταχωρισμένα quiz και gapTags με source-aware status. Αυτό ΔΕΝ σημαίνει ότι όλα τα gapTags έχουν ακριβή αντιστοίχιση σε επίσημο κεφάλαιο. Τα περισσότερα είναι ασφαλή topic anchors μέχρι να γίνει section-level έλεγχος. Για ΓΕΛ έχει ενσωματωθεί η δημοσιευμένη εξεταστέα ύλη 2026–27 όπου επαληθεύτηκε. Για Δημοτικό/Γυμνάσιο οι επίσημες οδηγίες 2026–27 έχουν δημοσιευτεί και τα βιβλία/ενότητες έχουν επαληθευτεί όπου υπάρχει section-level τεκμηρίωση, αλλά η ακριβής ετήσια αντιστοίχιση δεν έχει ολοκληρωθεί παντού.",
+  "limitationsEn": "v2 covers all currently registered quizzes and gapTags with source-aware status. This does NOT mean every gapTag has an exact official chapter mapping. Most are safe topic anchors pending section-level verification. Published 2026–27 GEL examinable syllabus is encoded where verified; Official 2026–27 Primary/Middle guidance has been published, but exact annual section-level alignment is not yet complete everywhere."
 };
   const BY_QUIZ = {
   "math-a-dimotikou": {

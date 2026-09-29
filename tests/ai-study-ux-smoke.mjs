@@ -15,6 +15,8 @@ assert.match(html, /official-book-section-verified\|exact-section-verified\|rela
 assert.match(html, /if\(exactRows\.length\)rows=exactRows/);
 assert.match(html, /flashcards:6000/);
 assert.match(html, /activityNeedsDistributedSource\('plan'\)/);
+assert.match(html, /mode:'organize',activity:'plan'/);
+assert.match(html, /mode:cfg\.mode,activity:action/);
 assert.match(html, /attached\?\.text\|\|officialSource\?\.text/);
 assert.doesNotMatch(html, /:\(officialSource\?\.text\|\|''\)/);
 assert.match(html, /thriskeftika-b-gymnasiou/);

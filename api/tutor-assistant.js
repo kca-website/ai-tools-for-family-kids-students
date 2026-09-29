@@ -17,7 +17,7 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { system, prompt, audience, task = 'conversation', mode = 'understand', grade = '', subject = '', topic = '', character = '', documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
+  const { system, prompt, audience, task = 'conversation', mode = 'understand', activity = '', grade = '', subject = '', topic = '', character = '', documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
   if (!['parent', 'high_student', 'study_user'].includes(audience)) {
     return res.status(403).json({ error: 'audience_not_allowed', message: 'Η λειτουργία είναι διαθέσιμη σε γονείς όλων των βαθμίδων και σε μαθητές Λυκείου.' });
   }
@@ -98,6 +98,7 @@ ${roleRule}
     { role: 'system', content: `${fixedGuard}\n\n${system}${documentContext}` },
     { role: 'user', content: prompt },
   ];
+  const routingProfile = chooseRoutingProfile({ task, mode, activity });
 
   try {
     const result = await generateChat({
@@ -105,6 +106,7 @@ ${roleRule}
       maxTokens: taskLimits[task],
       temperature: 0.1,
       reasoningEffort: 'low',
+      modelProfile: routingProfile,
     });
     if (!result?.ok) {
       const providerMessage = String(result?.message || '');
@@ -122,7 +124,7 @@ ${roleRule}
     const text = sanitize(result.text);
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'Δεν επιστράφηκε απάντηση.' });
     res.setHeader('Cache-Control', 'no-store');
-    return res.status(200).json({ text, model: result.model || model, provider: result.provider, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl });
+    return res.status(200).json({ text, model: result.model || model, provider: result.provider, routingProfile, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl });
   } catch (err) {
     const timedOut = err?.name === 'AbortError';
     return res.status(timedOut ? 504 : 500).json({
@@ -131,6 +133,17 @@ ${roleRule}
     });
   }
 };
+
+function chooseRoutingProfile({ task, mode, activity }) {
+  const action = String(activity || '').trim().toLowerCase();
+  if (['flashcards', 'quiz', 'truefalse', 'plan'].includes(action)) return 'economy';
+  if (['explain', 'weakspots'].includes(action)) return 'quality';
+  if (['quickreview', 'audio', 'oral', 'written'].includes(action)) return 'balanced';
+  if (task === 'flashcards' || task === 'quiz' || task === 'study_plan') return 'economy';
+  if (task === 'guided_task') return 'balanced';
+  if (mode === 'organize' || mode === 'review') return 'economy';
+  return 'balanced';
+}
 
 function compactSourceText(value, maxChars) {
   const full = String(value || '').trim();

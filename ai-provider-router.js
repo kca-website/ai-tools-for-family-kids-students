@@ -1,17 +1,61 @@
 // Server-side AI provider router for aitools4kids.gr.
-// Primary: Cloudflare Workers AI. Fallback: Groq.
+// Primary pool: Cloudflare Workers AI. Fallback pool: Groq.
+// Simple grounded tasks use cheaper Cloudflare models first; difficult reasoning keeps GPT-OSS 120B first.
 // No prompts or responses are logged here.
 const DEFAULT_TIMEOUT_MS = 18000;
-const CLOUDFLARE_MODELS = new Set(['@cf/openai/gpt-oss-120b', '@cf/openai/gpt-oss-20b']);
+const CLOUDFLARE_MODELS = new Set([
+  '@cf/qwen/qwen3-30b-a3b-fp8',
+  '@cf/zai-org/glm-4.7-flash',
+  '@cf/openai/gpt-oss-20b',
+  '@cf/openai/gpt-oss-120b',
+]);
 const GROQ_MODELS = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
+const ROUTING_PROFILES = new Set(['default', 'economy', 'balanced', 'quality']);
+
+const PROFILE_MODELS = Object.freeze({
+  economy: {
+    cloudflare: [
+      '@cf/qwen/qwen3-30b-a3b-fp8',
+      '@cf/zai-org/glm-4.7-flash',
+      '@cf/openai/gpt-oss-20b',
+      '@cf/openai/gpt-oss-120b',
+    ],
+    groq: ['openai/gpt-oss-20b', 'openai/gpt-oss-120b'],
+  },
+  balanced: {
+    cloudflare: [
+      '@cf/zai-org/glm-4.7-flash',
+      '@cf/qwen/qwen3-30b-a3b-fp8',
+      '@cf/openai/gpt-oss-20b',
+      '@cf/openai/gpt-oss-120b',
+    ],
+    groq: ['openai/gpt-oss-20b', 'openai/gpt-oss-120b'],
+  },
+  quality: {
+    cloudflare: [
+      '@cf/openai/gpt-oss-120b',
+      '@cf/zai-org/glm-4.7-flash',
+      '@cf/openai/gpt-oss-20b',
+    ],
+    groq: ['openai/gpt-oss-120b', 'openai/gpt-oss-20b'],
+  },
+});
 
 function getAiStatus() {
   const providers = getProviderOrder().map((name) => ({ name, model: modelFor(name) }));
+  const routingProfiles = {};
+  for (const profile of ['economy', 'balanced', 'quality']) {
+    routingProfiles[profile] = {};
+    for (const provider of getProviderOrder()) {
+      routingProfiles[profile][provider] = modelSequenceFor(provider, profile);
+    }
+  }
   return {
     configured: providers.length > 0,
     provider: providers[0]?.name || null,
     model: providers[0]?.model || null,
     providers,
+    routingProfiles,
   };
 }
 
@@ -43,6 +87,31 @@ function modelFor(name) {
   return GROQ_MODELS.has(configured) ? configured : 'openai/gpt-oss-120b';
 }
 
+function normalizeProfile(value) {
+  const profile = String(value || 'default').trim().toLowerCase();
+  return ROUTING_PROFILES.has(profile) ? profile : 'default';
+}
+
+function configuredProfileModels(provider, profile) {
+  const key = provider === 'cloudflare'
+    ? 'CLOUDFLARE_' + profile.toUpperCase() + '_MODELS'
+    : 'GROQ_' + profile.toUpperCase() + '_MODELS';
+  const raw = String(process.env[key] || '').trim();
+  if (!raw) return [];
+  const allowed = provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS;
+  return [...new Set(raw.split(',').map(x => x.trim()).filter(x => allowed.has(x)))];
+}
+
+function modelSequenceFor(provider, profileValue) {
+  const profile = normalizeProfile(profileValue);
+  if (profile === 'default') return [modelFor(provider)];
+  const configured = configuredProfileModels(provider, profile);
+  if (configured.length) return configured;
+  const defaults = PROFILE_MODELS[profile]?.[provider] || [modelFor(provider)];
+  const allowed = provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS;
+  return [...new Set(defaults.filter(model => allowed.has(model)))];
+}
+
 async function generateChat({
   messages,
   maxTokens = 700,
@@ -51,8 +120,10 @@ async function generateChat({
   reasoningEffort = 'low',
   timeoutMs = DEFAULT_TIMEOUT_MS,
   providerOrder,
+  modelProfile = 'default',
 } = {}) {
   const order = getProviderOrder(providerOrder);
+  const profile = normalizeProfile(modelProfile);
   if (!order.length) {
     return {
       ok: false,
@@ -67,51 +138,61 @@ async function generateChat({
   const attempts = [];
   let lastResult = null;
 
+  providerLoop:
   for (const provider of order) {
-    let result;
-    try {
-      result = provider === 'cloudflare'
-        ? await callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs })
-        : await callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs });
-    } catch (error) {
-      const timedOut = error?.name === 'AbortError';
-      result = {
-        ok: false,
-        status: timedOut ? 504 : 502,
-        error: timedOut ? 'timeout' : 'provider_error',
-        message: timedOut ? 'Provider request timed out.' : 'Provider request failed.',
-        retryable: true,
+    const models = modelSequenceFor(provider, profile);
+    for (let index = 0; index < models.length; index++) {
+      const model = models[index];
+      let result;
+      try {
+        result = provider === 'cloudflare'
+          ? await callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model })
+          : await callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model });
+      } catch (error) {
+        const timedOut = error?.name === 'AbortError';
+        result = {
+          ok: false,
+          status: timedOut ? 504 : 502,
+          error: timedOut ? 'timeout' : 'provider_error',
+          message: timedOut ? 'Provider request timed out.' : 'Provider request failed.',
+          retryable: true,
+          provider,
+          model,
+        };
+      }
+
+      attempts.push({
         provider,
-        model: modelFor(provider),
-      };
+        model: result.model || model,
+        status: result.status || 0,
+        ok: !!result.ok,
+        providerCode: result.providerCode ?? null,
+      });
+
+      if (result.ok) return { ...result, attempts, modelProfile: profile };
+      lastResult = result;
+
+      if (index < models.length - 1 && shouldTryNextModel(result, provider)) continue;
+      if (shouldTryNextProvider(result)) continue providerLoop;
+      break providerLoop;
     }
-
-    attempts.push({
-      provider,
-      model: result.model || modelFor(provider),
-      status: result.status || 0,
-      ok: !!result.ok,
-    });
-
-    if (result.ok) return { ...result, attempts };
-    lastResult = result;
-    if (!result.retryable) break;
   }
 
-  return { ...(lastResult || {}), attempts };
+  return { ...(lastResult || {}), attempts, modelProfile: profile };
 }
 
-async function callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs }) {
+async function callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model }) {
   const accountId = process.env.CLOUDFLARE_LLM_ACCOUNT_ID;
   const token = process.env.CLOUDFLARE_LLM_AI_TOKEN;
-  const model = modelFor('cloudflare');
   const body = {
     messages,
     temperature,
     max_tokens: maxTokens,
-    reasoning_effort: reasoningEffort || 'low',
     options: { rejectIfBusy: true },
   };
+  if (String(model).includes('/gpt-oss-')) {
+    body.reasoning_effort = reasoningEffort || 'low';
+  }
   if (responseFormat) body.response_format = responseFormat;
 
   return postCloudflareNative({
@@ -124,8 +205,7 @@ async function callCloudflare({ messages, maxTokens, temperature, responseFormat
   });
 }
 
-async function callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs }) {
-  const model = modelFor('groq');
+async function callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model }) {
   const body = {
     model,
     messages,
@@ -167,6 +247,7 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
     const providerOk = response.ok && data?.success !== false;
     const ok = providerOk && hasText;
     const status = providerOk && !hasText ? 502 : response.status;
+    const providerCode = extractProviderCode(data);
     return {
       ok,
       status,
@@ -174,6 +255,7 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
         ? 'provider_limit'
         : (!providerOk ? 'provider_error' : (hasText ? null : 'empty_response')),
       retryable: providerOk && !hasText ? true : isRetryableStatus(response.status),
+      providerCode,
       message: providerMessage(data) || (!hasText && providerOk ? 'Provider returned an empty completion.' : ''),
       text,
       provider,
@@ -196,7 +278,6 @@ function extractCloudflareText(data) {
 
   for (const value of directCandidates) {
     if (typeof value === 'string' && value.trim()) return value;
-    // Workers AI JSON Mode may return the validated payload as an object.
     if (value && typeof value === 'object' && !Array.isArray(value)) {
       try { return JSON.stringify(value); } catch {}
     }
@@ -243,6 +324,7 @@ async function postOpenAiCompatible({ url, token, body, provider, model, timeout
         ? 'provider_limit'
         : (!response.ok ? 'provider_error' : (hasText ? null : 'empty_response')),
       retryable: !hasText && response.ok ? true : isRetryableStatus(response.status),
+      providerCode: data?.error?.code ?? null,
       message: providerMessage(data) || (!hasText && response.ok ? 'Provider returned an empty completion.' : ''),
       text,
       provider,
@@ -251,6 +333,34 @@ async function postOpenAiCompatible({ url, token, body, provider, model, timeout
   } finally {
     clearTimeout(timeout);
   }
+}
+
+function extractProviderCode(data) {
+  const raw = data?.errors?.[0]?.code ?? data?.error?.code ?? data?.code ?? null;
+  if (raw === null || raw === undefined || raw === '') return null;
+  const numeric = Number(raw);
+  return Number.isFinite(numeric) ? numeric : String(raw);
+}
+
+function isModelSpecificCloudflareCode(code) {
+  return [3040, 3041, 3042, 5007, 5016, 5018, 5035].includes(Number(code));
+}
+
+function shouldTryNextModel(result, provider) {
+  const status = Number(result?.status || 0);
+  if (provider === 'cloudflare') {
+    if (Number(result?.providerCode) === 3036) return false;
+    if (isModelSpecificCloudflareCode(result?.providerCode)) return true;
+    return status === 408 || status === 409 || status === 429 || status >= 500;
+  }
+  return status === 408 || status === 409 || status === 429 || status >= 500;
+}
+
+function shouldTryNextProvider(result) {
+  const status = Number(result?.status || 0);
+  if (isModelSpecificCloudflareCode(result?.providerCode)) return true;
+  return !!result?.retryable || status === 401 || status === 403 || status === 408 ||
+    status === 409 || status === 429 || status >= 500;
 }
 
 function isRetryableStatus(status) {
@@ -265,4 +375,4 @@ function providerMessage(data) {
     '';
 }
 
-module.exports = { generateChat, getAiStatus };
+module.exports = { generateChat, getAiStatus, modelSequenceFor };

@@ -76,6 +76,7 @@ STRICT RULES:
     maxTokens: 950,
     temperature: 0,
     reasoningEffort: 'low',
+    modelProfile: 'balanced',
   });
 
   if (!first?.ok || !first.text?.trim()) {
@@ -156,6 +157,7 @@ For each candidate:
     maxTokens: 450,
     temperature: 0,
     reasoningEffort: 'low',
+    modelProfile: 'quality',
   });
 
   if (!second?.ok || !second.text?.trim()) {

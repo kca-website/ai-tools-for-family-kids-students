@@ -234,29 +234,75 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
+  "physics.speed-definition": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Υπολόγισε μόνος/η τη μέση ταχύτητα για 60 m σε 12 s και γράψε τον κανόνα που χρησιμοποίησες.",
+    "descriptionEn": "Calculate the average speed for 60 m in 12 s and write the rule you used.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Μέση ταχύτητα». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Μέση ταχύτητα\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Μέση ταχύτητα», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Μέση ταχύτητα\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
+  "physics.pressure-force-area": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σκέψου γιατί ένα μυτερό αντικείμενο πιέζει περισσότερο από ένα πλατύ όταν ασκείται η ίδια δύναμη. Γράψε την εξήγησή σου.",
+    "descriptionEn": "Think about why a pointed object produces more pressure than a broad one when the same force is applied. Write your explanation.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Πίεση, δύναμη και επιφάνεια». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Πίεση, δύναμη και επιφάνεια\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Πίεση, δύναμη και επιφάνεια», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Πίεση, δύναμη και επιφάνεια\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
   "physics.force-motion-confusion": [
-    {
-      "titleEl": "Σκέψου ένα παράδειγμα",
-      "titleEn": "Think of an example",
-      "descriptionEl": "Πριν ψάξεις οτιδήποτε, βρες ένα καθημερινό παράδειγμα για «Δύναμη και κίνηση» και προσπάθησε να το εξηγήσεις με δικά σου λόγια. Η πιο συχνή παρανόηση σε αυτό το θέμα: Πιστεύει ότι χρειάζεται συνεχής δύναμη για να διατηρηθεί η κίνηση (Αριστοτελική αντίληψη). Χρειάζεται κατανόηση του 1ου νόμου του Νεύτωνα.",
-      "descriptionEn": "Before looking anything up, find an everyday example related to \"Force and motion\" and try to explain it in your own words. Check whether you fall into this trap: Believes continuous force is needed to maintain motion (Aristotelian view). Needs understanding of Newton's 1st law.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το Wolfram Alpha",
-      "titleEn": "Ask Wolfram Alpha",
-      "descriptionEl": "Άνοιξε το Wolfram Alpha και περιέγραψε το παράδειγμά σου. Ζήτησέ του να σε ρωτήσει «γιατί το πιστεύεις αυτό;» πριν σου δώσει την επιστημονική εξήγηση για «Δύναμη και κίνηση».",
-      "descriptionEn": "Open Wolfram Alpha and describe your example. Ask it to question your reasoning first (\"why do you think that?\") before it gives you the scientific explanation of \"Force and motion\".",
-      "toolId": "wolfram-alpha"
-    },
-    {
-      "titleEl": "Εξήγησέ το σε κάποιον",
-      "titleEn": "Explain it to someone",
-      "descriptionEl": "Εξήγησε σε έναν γονιό ή φίλο, με δικά σου λόγια, γιατί ισχύει το σωστό για «Δύναμη και κίνηση» και όχι αυτό που πίστευες πριν. Αν το εξηγήσεις καθαρά, το έμαθες.",
-      "descriptionEn": "Explain to a parent or friend, in your own words, why the correct picture of \"Force and motion\" is true, and not what you believed before. If you can explain it clearly, you've learned it.",
-      "toolId": null
-    }
-  ],
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σκέψου ένα σώμα που κινείται. Γράψε τι πιστεύεις ότι μπορεί να αλλάξει στην ταχύτητά του όταν πάνω του ασκείται συνισταμένη δύναμη.",
+    "descriptionEn": "Think of a moving object. Write what you think can change about its velocity when a net force acts on it.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Δύναμη και μεταβολή της ταχύτητας». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Δύναμη και μεταβολή της ταχύτητας\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Δύναμη και μεταβολή της ταχύτητας», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Δύναμη και μεταβολή της ταχύτητας\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
   "history.olympics-location": [
     {
       "titleEl": "Γράψε τι θυμάσαι",
@@ -304,28 +350,28 @@ const LEARNING_PATHS = {
     }
   ],
   "physics.density-mass-confusion": [
-    {
-      "titleEl": "Σκέψου ένα παράδειγμα",
-      "titleEn": "Think of an example",
-      "descriptionEl": "Πριν ψάξεις οτιδήποτε, βρες ένα καθημερινό παράδειγμα για «Πυκνότητα vs Μάζα» και προσπάθησε να το εξηγήσεις με δικά σου λόγια. Η πιο συχνή παρανόηση σε αυτό το θέμα: Μπερδεύει τη μάζα με την πυκνότητα. Πιστεύει ότι μεγάλο αντικείμενο = μεγάλη πυκνότητα. Χρειάζεται οπτικά παραδείγματα.",
-      "descriptionEn": "Before looking anything up, find an everyday example related to \"Density vs Mass\" and try to explain it in your own words. Check whether you fall into this trap: Confuses mass with density. Believes big object = high density. Needs visual examples.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Ρώτα το Wolfram Alpha",
-      "titleEn": "Ask Wolfram Alpha",
-      "descriptionEl": "Άνοιξε το Wolfram Alpha και περιέγραψε το παράδειγμά σου. Ζήτησέ του να σε ρωτήσει «γιατί το πιστεύεις αυτό;» πριν σου δώσει την επιστημονική εξήγηση για «Πυκνότητα vs Μάζα».",
-      "descriptionEn": "Open Wolfram Alpha and describe your example. Ask it to question your reasoning first (\"why do you think that?\") before it gives you the scientific explanation of \"Density vs Mass\".",
-      "toolId": "wolfram-alpha"
-    },
-    {
-      "titleEl": "Εξήγησέ το σε κάποιον",
-      "titleEn": "Explain it to someone",
-      "descriptionEl": "Εξήγησε σε έναν γονιό ή φίλο, με δικά σου λόγια, γιατί ισχύει το σωστό για «Πυκνότητα vs Μάζα» και όχι αυτό που πίστευες πριν. Αν το εξηγήσεις καθαρά, το έμαθες.",
-      "descriptionEn": "Explain to a parent or friend, in your own words, why the correct picture of \"Density vs Mass\" is true, and not what you believed before. If you can explain it clearly, you've learned it.",
-      "toolId": null
-    }
-  ],
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σύγκρινε ένα μικρό καρφί και ένα μεγαλύτερο κομμάτι από το ίδιο υλικό. Γράψε αν περιμένεις να έχουν ίδια ή διαφορετική πυκνότητα και γιατί.",
+    "descriptionEn": "Compare a small nail and a larger piece of the same material. Write whether you expect the same or different density and why.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Πυκνότητα και μάζα». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Πυκνότητα και μάζα\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Πυκνότητα και μάζα», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Πυκνότητα και μάζα\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
   "spelling.homophones": [
     {
       "titleEl": "Γράψε τις δικές σου προτάσεις",
@@ -2764,121 +2810,103 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-  "biologia-b-gym.gas-exchange-organ": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε ποιο όργανο θυμάσαι ότι κάνει την ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα, και πώς λειτουργεί με απλά λόγια. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι οι πνεύμονες είναι το όργανο όπου γίνεται η ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα, μπερδεύοντάς το με άλλο όργανο.",
-      "descriptionEn": "Write which organ you remember doing the oxygen-carbon dioxide exchange, and how it works in simple words. The most common trap on this topic: Doesn't know the lungs are where oxygen-carbon dioxide exchange happens, confusing it with another organ.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Ανταλλαγή αερίων» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Gas exchange organ\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το ChatGPT",
-      "titleEn": "Check with ChatGPT",
-      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ανταλλαγή αερίων\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
-      "descriptionEn": "Explain to ChatGPT what you understood about \"Gas exchange organ\" and ask: \"Is my explanation correct? What am I missing?\"",
-      "toolId": "chatgpt"
-    }
-  ],
-  "biologia-b-gym.heart-role": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια ποιος είναι ο κύριος ρόλος της καρδιάς. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ο κύριος ρόλος της καρδιάς είναι να αντλεί το αίμα σε όλο το σώμα, όχι κάποια άλλη λειτουργία.",
-      "descriptionEn": "Write in your own words what the heart's main role is. The most common trap on this topic: Doesn't know the heart's main role is pumping blood throughout the body, not some other function.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Ρόλος της καρδιάς» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Role of the heart\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το ChatGPT",
-      "titleEn": "Check with ChatGPT",
-      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ρόλος της καρδιάς\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
-      "descriptionEn": "Explain to ChatGPT what you understood about \"Role of the heart\" and ask: \"Is my explanation correct? What am I missing?\"",
-      "toolId": "chatgpt"
-    }
-  ],
-  "biologia-b-gym.blood-function": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Κάνε μια λίστα με όλα όσα θυμάσαι ότι μεταφέρει το αίμα στο σώμα. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι το αίμα μεταφέρει πολλά διαφορετικά πράγματα (οξυγόνο, θρεπτικά, απόβλητα), όχι μόνο ένα.",
-      "descriptionEn": "Make a list of everything you remember the blood carrying in the body. The most common trap on this topic: Doesn't know blood transports many different things (oxygen, nutrients, waste), not just one.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Λειτουργία του αίματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Function of blood\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το ChatGPT",
-      "titleEn": "Check with ChatGPT",
-      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Λειτουργία του αίματος\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
-      "descriptionEn": "Explain to ChatGPT what you understood about \"Function of blood\" and ask: \"Is my explanation correct? What am I missing?\"",
-      "toolId": "chatgpt"
-    }
-  ],
-  "biologia-b-gym.producer-definition": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε 2-3 παραδείγματα «παραγωγών» σε ένα οικοσύστημα και εξήγησε γιατί ονομάζονται έτσι. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι οι «παραγωγοί» σε ένα οικοσύστημα είναι οργανισμοί (κυρίως φυτά) που παράγουν τη δική τους τροφή.",
-      "descriptionEn": "Write 2-3 examples of 'producers' in an ecosystem and explain why they're called that. The most common trap on this topic: Doesn't know 'producers' in an ecosystem are organisms (mainly plants) that make their own food.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Παραγωγοί σε οικοσύστημα» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Producers in an ecosystem\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το ChatGPT",
-      "titleEn": "Check with ChatGPT",
-      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Παραγωγοί σε οικοσύστημα\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
-      "descriptionEn": "Explain to ChatGPT what you understood about \"Producers in an ecosystem\" and ask: \"Is my explanation correct? What am I missing?\"",
-      "toolId": "chatgpt"
-    }
-  ],
-  "biologia-b-gym.nervous-system-role": [
-    {
-      "titleEl": "Δοκίμασε πρώτα μόνος/η",
-      "titleEn": "Try it yourself first",
-      "descriptionEl": "Γράψε με δικά σου λόγια τι κάνει το νευρικό σύστημα όταν αγγίζεις κάτι πολύ ζεστό. Η πιο συχνή παγίδα σε αυτό το θέμα: Δεν ξέρει ότι ο κύριος ρόλος του νευρικού συστήματος είναι η αντίληψη ερεθισμάτων και η γρήγορη ανταπόκριση σε αυτά.",
-      "descriptionEn": "Write in your own words what the nervous system does when you touch something very hot. The most common trap on this topic: Doesn't know the nervous system's main role is perceiving stimuli and responding to them quickly.",
-      "toolId": null
-    },
-    {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Ρόλος νευρικού συστήματος» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Role of the nervous system\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
-    },
-    {
-      "titleEl": "Έλεγξε με το ChatGPT",
-      "titleEn": "Check with ChatGPT",
-      "descriptionEl": "Εξήγησε στο ChatGPT τι κατάλαβες για \"Ρόλος νευρικού συστήματος\" και ρώτα: «Είναι σωστή η εξήγησή μου; Τι μου λείπει;»",
-      "descriptionEn": "Explain to ChatGPT what you understood about \"Role of the nervous system\" and ask: \"Is my explanation correct? What am I missing?\"",
-      "toolId": "chatgpt"
-    }
-  ],
+  
+  
+  
+  
+  
+  "biologia-b-gym.musculoskeletal-system": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σχεδίασε ένα απλό χέρι και σημείωσε οστό, άρθρωση, μυ και τένοντα. Γράψε σε μία πρόταση πώς συνεργάζονται για την κίνηση.",
+    "descriptionEn": "Sketch a simple arm and label bone, joint, muscle and tendon. In one sentence explain how they work together for movement.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Μυοσκελετικό σύστημα». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Μυοσκελετικό σύστημα\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Μυοσκελετικό σύστημα», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Μυοσκελετικό σύστημα\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
+  "biologia-b-gym.plant-reproduction": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Βάλε σε σωστή σειρά τις έννοιες άνθος, γύρη, επικονίαση και γονιμοποίηση και εξήγησε με μία φράση κάθε βήμα.",
+    "descriptionEn": "Put flower, pollen, pollination and fertilization in a sensible sequence and explain each step in one phrase.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Αναπαραγωγή στα φυτά». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Αναπαραγωγή στα φυτά\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Αναπαραγωγή στα φυτά», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Αναπαραγωγή στα φυτά\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
+  "biologia-b-gym.homeostasis": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σκέψου τι κάνει το σώμα όταν ζεσταίνεσαι πολύ. Γράψε πώς αυτό το παράδειγμα συνδέεται με τη διατήρηση σχετικά σταθερών εσωτερικών συνθηκών.",
+    "descriptionEn": "Think about what your body does when you become very hot. Write how this connects with maintaining relatively stable internal conditions.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Ομοιόσταση». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Ομοιόσταση\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Ομοιόσταση», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Ομοιόσταση\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
+  "biologia-b-gym.defense-mechanisms": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Γράψε δύο τρόπους με τους οποίους ο οργανισμός μπορεί να εμποδίσει ή να αντιμετωπίσει παθογόνους παράγοντες και προσπάθησε να τους ταξινομήσεις.",
+    "descriptionEn": "Write two ways the body can block or fight pathogens and try to classify them.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με την AI Βοήθεια",
+    "titleEn": "Check with AI Help",
+    "descriptionEl": "Άνοιξε την AI Βοήθεια στην αντίστοιχη επίσημη ενότητα του σχολικού βιβλίου και εξήγησε τι κατάλαβες για «Αμυντικοί μηχανισμοί». Ζήτησε υπόδειξη ή ερώτηση ελέγχου, όχι έτοιμη λύση.",
+    "descriptionEn": "Open AI Help on the matching official textbook section and explain what you understood about \"Αμυντικοί μηχανισμοί\". Ask for a hint or checking question, not a ready-made answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Κλείσε το βοήθημα και εξήγησε με δικά σου λόγια το βασικό νόημα του θέματος «Αμυντικοί μηχανισμοί», χρησιμοποιώντας ένα δικό σου παράδειγμα.",
+    "descriptionEn": "Close the helper and explain the key idea of \"Αμυντικοί μηχανισμοί\" in your own words, using your own example.",
+    "toolId": null
+  }
+],
   "biologia-g-gym.dna-location": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",

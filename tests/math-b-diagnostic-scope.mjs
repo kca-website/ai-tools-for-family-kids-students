@@ -5,7 +5,7 @@ import vm from "node:vm";
 const quizSandbox = {};
 const quizCode = fs.readFileSync(new URL("../quiz-data.js", import.meta.url), "utf8") + "\n;globalThis.__QUIZZES = QUIZZES;";
 vm.runInNewContext(quizCode, quizSandbox);
-const quiz = quizSandbox.__QUIZZES?.["mathimatika-b-gymnasiou"];
+const quiz = quizSandbox.__QUIZZES?.middle?.["mathimatika-b-gymnasiou"];
 
 assert.ok(quiz, "Math B quiz must exist");
 assert.equal(quiz.questions.length, 4);

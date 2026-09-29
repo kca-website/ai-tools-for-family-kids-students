@@ -8,3 +8,13 @@
 
 .guided__upload-remove{border:1px solid #cbd5e1;background:#fff;color:#7c2d12;border-radius:9px;padding:7px 10px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer}.guided__upload-remove:hover{background:#fff7ed}.guided__upload-remove:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
 .guided__upload-hint{margin:0 0 10px;color:#5A6270;font-size:.82rem;line-height:1.5}
+/* Study-steps page: its own form, same look as the other guided helpers */
+.guided-assistant.tool label{display:block;font-weight:750;margin:13px 0 6px}
+.guided-assistant.tool label.guided__upload-btn{display:inline-flex;margin:0}
+.guided-assistant.tool select,.guided-assistant.tool textarea{border:1px solid #aebdd0;border-radius:11px;padding:11px 12px;color:#1f2937}
+.guided-assistant.tool textarea{min-height:130px}
+.guided-assistant.tool #go{background:#1D5D8C;border-radius:10px;padding:11px 17px;font-weight:750}
+.guided-assistant.tool #go:hover{background:#164A70}
+.guided-assistant.tool #go:focus-visible,.guided-assistant.tool select:focus-visible,.guided-assistant.tool textarea:focus-visible,.guided-assistant.tool .result:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+.guided-assistant.tool .guided__upload-remove{margin-top:0;background:#fff;color:#7c2d12;font-size:.8rem;padding:7px 10px}
+.guided-assistant.tool .result{border-color:#dce5ef;border-radius:13px}

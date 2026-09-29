@@ -11,7 +11,7 @@ a{color:var(--blue)}h1{line-height:1.15}.lead{color:var(--muted)}.tool{backgroun
 label{font-weight:700;display:block;margin:12px 0 6px}textarea,select{width:100%;font:inherit;border:1px solid #94a3b8;border-radius:10px;padding:12px;background:white}textarea{min-height:150px;resize:vertical}
 button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;background:var(--blue);color:white;cursor:pointer;margin-top:14px}button[disabled]{opacity:.55;cursor:wait}
 .help{font-size:.92rem;color:var(--muted)}.result{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px;min-height:60px}.result p{margin:.45em 0}.result ol,.result ul{margin:.55em 0 .55em 1.35em}.result li{margin:.35em 0}
-.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#e0ecff;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:700}.privacy{border-left:4px solid var(--ok);padding:10px 14px;background:#f0fdf4;margin-top:20px}
+.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#e0ecff;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:700}.privacy{border-left:4px solid #1D5D8C;padding:10px 14px;background:#EEF6FF;margin-top:20px;border-radius:8px}
 </style>  <link rel="stylesheet" href="/site-chrome.css" />
   <script defer src="/site-chrome.js"></script>
 </head><body>
@@ -19,7 +19,8 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <h1>Break study into small steps</h1>
 <p class="lead">A learning-focused version of “small tools for something that feels too big”. It does not do the assignment. It helps you identify the <strong>next small step</strong>.</p>
 <div class="badges"><span class="badge">Free</span><span class="badge">No account</span><span class="badge">Learning-first</span></div>
-<div class="tool">
+<div class="tool guided-assistant">
+<div class="guided__head"><span class="guided__spark" aria-hidden="true">✦</span><div><h2>Break it into small steps</h2><p>Type or attach the task or your notes. The helper organises them into steps; it does not solve the task.</p></div></div>
 <label for="mode">What do you need?</label>
 <select id="mode"><option value="ask">What is this task actually asking me to do?</option><option value="break">Break a task into small steps</option><option value="first">Tell me only the first useful step</option><option value="check">Check whether I understood it</option><option value="brain">Turn messy notes into a checklist</option><option value="plan">Make a study plan for this topic</option></select>
 <div id="studyStepsUpload"></div>

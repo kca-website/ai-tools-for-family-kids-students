@@ -2028,6 +2028,98 @@ const LEARNING_PATHS = {
     "toolId": null
   }
 ],
+  "geo-b-gym.relative-vs-geographic-position": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Γράψε δύο προτάσεις για την ίδια πόλη: μία που να δίνει σχετική θέση ως προς άλλο τόπο και μία που να δίνει γεωγραφική θέση με συντεταγμένες.",
+    "descriptionEn": "Write two statements about the same city: one giving its relative position to another place and one giving its geographic position with coordinates.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια τρία παραδείγματα θέσης ένα-ένα και χαρακτήρισέ τα εσύ «σχετική» ή «γεωγραφική», εξηγώντας το κριτήριό σου.",
+    "descriptionEn": "Ask AI Help for three location examples one at a time and classify each as relative or geographic, explaining your criterion.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε με μία πρόταση γιατί το «βορειοδυτικά της Κοζάνης» δεν είναι γεωγραφική θέση με την αυστηρή έννοια.",
+    "descriptionEn": "Explain in one sentence why 'northwest of Kozani' is not a geographic position in the strict coordinate sense.",
+    "toolId": null
+  }
+],
+  "geo-b-gym.plate-boundary-seismicity": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Σχεδίασε δύο πλάκες που συγκλίνουν και σημείωσε πού περιμένεις μεγαλύτερη σεισμική δραστηριότητα. Δίπλα γράψε γιατί η θέση της Ελλάδας έχει σημασία.",
+    "descriptionEn": "Sketch two converging plates and mark where you expect stronger seismic activity. Then write why Greece's position matters.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Πες στην AI Βοήθεια τη δική σου εξήγηση για τη σεισμικότητα της Ελλάδας και ζήτησε μόνο μία ερώτηση ελέγχου, όχι έτοιμη απάντηση.",
+    "descriptionEn": "Give AI Help your explanation for Greece's seismicity and ask for only one checking question, not a ready answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Σύνδεσε σε μία αλυσίδα τρεις έννοιες: «λιθοσφαιρικές πλάκες → σύγκλιση → σεισμική δραστηριότητα».",
+    "descriptionEn": "Connect three ideas in one chain: 'tectonic plates → convergence → seismic activity'.",
+    "toolId": null
+  }
+],
+  "geo-b-gym.mediterranean-suez": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χώρισε σε δύο κατηγορίες το Στενό του Γιβραλτάρ, τον Βόσπορο και τη Διώρυγα του Σουέζ: φυσικά περάσματα και τεχνητό έργο.",
+    "descriptionEn": "Sort the Strait of Gibraltar, the Bosporus and the Suez Canal into natural passages and a man-made work.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια να σου δείξει έναν απλό νοητικό χάρτη των συνδέσεων της Μεσογείου και έλεγξε αν η δική σου ταξινόμηση ταιριάζει.",
+    "descriptionEn": "Ask AI Help for a simple mental map of Mediterranean connections and check whether your classification matches.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε γιατί η λέξη «διώρυγα» είναι χρήσιμο στοιχείο για να θυμάσαι ότι το Σουέζ είναι ανθρώπινο έργο.",
+    "descriptionEn": "Explain why the word 'canal' is a useful clue for remembering that Suez is man-made.",
+    "toolId": null
+  }
+],
+  "geo-b-gym.production-sectors": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Κατάταξε μόνος/η τα επαγγέλματα ψαράς, αλλαντοποιός και δάσκαλος σε πρωτογενή, δευτερογενή και τριτογενή τομέα και αιτιολόγησε κάθε επιλογή.",
+    "descriptionEn": "Classify fisher, food processor and teacher into primary, secondary and tertiary sectors and justify each choice.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Έλεγξε με καθοδήγηση",
+    "titleEn": "Check with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια τρία νέα επαγγέλματα, ένα για κάθε τομέα, αλλά χωρίς να σου πει την κατηγορία. Κάνε εσύ την κατάταξη.",
+    "descriptionEn": "Ask AI Help for three new occupations, one from each sector, without revealing the category. Classify them yourself.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Γράψε τον δικό σου σύντομο κανόνα: φύση = ποιος τομέας, μεταποίηση = ποιος, υπηρεσίες = ποιος.",
+    "descriptionEn": "Write your own short rule: nature = which sector, processing = which sector, services = which sector.",
+    "toolId": null
+  }
+],
   "chimeia-g-gym.element-vs-compound": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",

@@ -106,6 +106,9 @@ jobs:
       - name: Run A and G Gym History schoolbook grounding smoke
         run: node tests/a-g-gym-history-schoolbook-grounding.mjs
 
+      - name: Run A and G Gym Math schoolbook grounding smoke
+        run: node tests/a-g-gym-math-schoolbook-grounding.mjs
+
       - name: Run curriculum provenance smoke
         run: node tests/curriculum-provenance-smoke.mjs
 

@@ -20,6 +20,10 @@ for (const f of fixtures) {
   assert.equal(f.payload.documentKind, 'official_schoolbook', 'fixtures must use server-resolved official sources');
   assert.ok(f.payload.subjectId && f.payload.topic, 'fixtures need subjectId + topic');
 }
+const glossa = fixtures.filter(f => f.subject === 'glossa');
+assert.equal(glossa.length, 20, 'Greek Language keeps 5 topics x 4 tasks');
+assert.ok(glossa.every(f => f.payload.subjectId === 'glossa-b-gymnasiou'), 'benchmark Greek Language must use B Gymnasium official source');
+assert.ok(glossa.every(f => f.caseId.startsWith('glossa-b:')), 'Greek Language B cases need fresh ids so obsolete A Gym failures are not resumed');
 
 execFileSync(process.execPath, [path.join(root, 'benchmark/run.mjs'), '--phase', '1', '--mock',
   '--models', '@cf/qwen/qwen3-30b-a3b-fp8,@cf/google/gemma-4-26b-a4b-it', '--out', out], { env, stdio: 'pipe' });
@@ -33,6 +37,9 @@ assert.ok(fs.readFileSync(path.join(out, 'blind-key.csv'), 'utf8').includes('@cf
 const harnessSource = fs.readFileSync(path.join(root, 'benchmark/run.mjs'), 'utf8');
 assert.match(harnessSource, /@cf\/google\/gemma-4-26b-a4b-it/);
 assert.match(harnessSource, /enable_thinking:\s*false/);
+assert.match(harnessSource, /if \(r\.httpStatus === 200\) done\.add/, 'failed provider/source calls must be retryable on resume');
+assert.match(harnessSource, /providerEnvelopeSuccess/, 'failed provider calls need response-shape diagnostics');
+assert.match(harnessSource, /currentCaseIds\.has\(r\.caseId\)/, 'reports must ignore obsolete fixture cases');
 
 execFileSync(process.execPath, [path.join(root, 'benchmark/run.mjs'), '--phase', 'safety', '--mock',
   '--models', '@cf/openai/gpt-oss-120b', '--out', out + '-safety'], { env, stdio: 'pipe' });

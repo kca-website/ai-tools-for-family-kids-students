@@ -20,7 +20,7 @@ const SUBJECTS = [
   { key: 'iliada', zone: 'middle', grade: 'b', subjectId: 'iliada-b-gymnasiou' },
   { key: 'biologia', zone: 'middle', grade: 'b', subjectId: 'biologia-b-gymnasiou' },
   { key: 'mathimatika', zone: 'middle', grade: 'b', subjectId: 'mathimatika-b-gymnasiou' },
-  { key: 'glossa', zone: 'middle', grade: 'a', subjectId: 'glossa-a-gymnasiou' },
+  { key: 'glossa', zone: 'middle', grade: 'b', subjectId: 'glossa-b-gymnasiou' },
 ];
 
 // Placeholder text only: the server ignores client text for official sources

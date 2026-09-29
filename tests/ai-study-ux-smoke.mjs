@@ -8,6 +8,11 @@ assert.doesNotMatch(html, /officialSourceCache\.set\(key\s*,\s*null\)/);
 assert.match(html, /const cached=officialSourceCache\.get\(key\);[\s\S]{0,120}cached\?\.grounded/);
 assert.match(html, /body\?\.error==='official_source_unavailable'/);
 assert.match(html, /for\(let attempt=0;attempt<2;attempt\+\+\)/);
+assert.match(html, /function activitySourceBudget\(action\)/);
+assert.match(html, /flashcards:14000/);
+assert.match(html, /activityNeedsDistributedSource\('plan'\)/);
+assert.match(html, /attached\?\.text\|\|officialSource\?\.text/);
+assert.doesNotMatch(html, /:\(officialSource\?\.text\|\|''\)/);
 
 assert.match(html, /5 ερωτήσεις · μία-μία/);
 assert.match(html, /Run a 5-question quick quiz/);

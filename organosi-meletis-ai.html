@@ -34,6 +34,7 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <option value="plan">Φτιάξε πλάνο διαβάσματος για αυτό το θέμα</option>
 </select>
 
+<div id="studyStepsUpload"></div>
 <label for="input">Γράψε την εργασία, το θέμα ή τις σημειώσεις σου</label>
 <textarea id="input" placeholder="π.χ. Έχω διαγώνισμα στη Βιολογία την Παρασκευή: κεφάλαια 2 και 3, μπερδεύω μίτωση/μείωση και έχω περίπου 45 λεπτά σήμερα."></textarea>
 <p class="help">Μην γράψεις όνομα, σχολείο, τηλέφωνο, στοιχεία υγείας ή άλλα προσωπικά δεδομένα.</p>
@@ -47,6 +48,9 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <script src="/guided-task-assistant.js"></script>
 <script>
 (function(){
+ const G=window.AITOOLSKIDS_GUIDED, slot=document.getElementById('studyStepsUpload');
+ if(G&&slot&&G.uploadMarkup) slot.innerHTML=G.uploadMarkup('steps',false);
+ const upload=(G&&G.bindUpload&&slot)?G.bindUpload(slot,false):{get:()=>null};
  const btn=document.getElementById('go'), input=document.getElementById('input'), mode=document.getElementById('mode'), result=document.getElementById('result'), status=document.getElementById('status');
  const prompts={
   ask:"Εξήγησε με απλά λόγια τι ακριβώς ζητά η άσκηση/εργασία να παραχθεί, ποιες πληροφορίες ή δεξιότητες χρειάζονται και τι ΔΕΝ πρέπει να κάνει ο μαθητής. Μη λύσεις την άσκηση.",
@@ -57,13 +61,13 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
   plan:"Φτιάξε ένα σύντομο πλάνο μελέτης με μικρά blocks, ξεκινώντας από αυτά που ο χρήστης λέει ότι δυσκολεύεται. Μη διδάξεις όλο το θέμα και μη λύσεις ασκήσεις."
  };
  btn.addEventListener('click',async()=>{
-   const text=input.value.trim();
-   if(!text){status.textContent="Γράψε πρώτα τι έχεις να κάνεις.";input.focus();return;}
+   const text=input.value.trim(); const doc=upload.get();
+   if(!text&&!doc){status.textContent="Γράψε πρώτα τι έχεις να κάνεις ή ανέβασε αρχείο.";input.focus();return;}
    btn.disabled=true; status.textContent="Οργανώνω τα βήματα…"; result.textContent="";
    try{
      const r=await fetch("/api/tutor-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
        system:"Είσαι βοηθός οργάνωσης μελέτης. Η δουλειά σου είναι να μειώνεις το γνωστικό φορτίο οργανώνοντας το task σε μικρά βήματα. Δεν λύνεις την άσκηση και δεν παράγεις έτοιμη εργασία.",
-       prompt:prompts[mode.value]+"\n\nΥλικό χρήστη:\n"+text,
+       prompt:prompts[mode.value]+(text?"\n\nΥλικό χρήστη:\n"+text:""),documentText:doc?doc.text:"",documentName:doc?doc.name:"",
        audience:"study_user",mode:"organize",task:"study_plan",subject:"Οργάνωση μελέτης"
      })});
      const d=await r.json().catch(()=>({}));

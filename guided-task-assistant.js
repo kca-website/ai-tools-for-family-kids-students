@@ -57,6 +57,70 @@
     return pdfReaderPromise;
   }
 
+
+  const UPLOAD_ACCEPT="application/pdf,.pdf,text/plain,.txt,text/markdown,.md";
+  const UPLOAD_MAX_CHARS=42000;
+
+  function uploadMarkup(kind,isEn){
+    const hint=kind==="pdf" ? "" : '<p class="guided__upload-hint">'+(isEn
+      ? "Optional: attach a PDF or text file with your material. It is read locally in your browser and only the extracted text is used."
+      : "Προαιρετικά: ανέβασε PDF ή αρχείο κειμένου με το υλικό σου. Διαβάζεται τοπικά στον browser και χρησιμοποιείται μόνο το εξαγόμενο κείμενο.")+'</p>';
+    return '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(kind==="pdf" ? (isEn?"Choose PDF":"Επίλεξε PDF") : (isEn?"Attach file":"Ανέβασε αρχείο"))+'</label><input id="guidedPdfFile" type="file" accept="'+UPLOAD_ACCEPT+'"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span><button type="button" id="guidedPdfRemove" class="guided__upload-remove" hidden>'+(isEn?"Remove file":"Αφαίρεση αρχείου")+'</button></div>'+hint;
+  }
+
+  async function readUploadFile(file){
+    const isPdf=file.type==="application/pdf" || /\.pdf$/i.test(file.name||"");
+    if(isPdf){
+      const reader=await ensurePdfReader();
+      return reader.read(file,{maxChars:UPLOAD_MAX_CHARS,maxPages:70});
+    }
+    const isText=/^text\//.test(file.type||"") || /\.(txt|md)$/i.test(file.name||"");
+    if(!isText) throw new Error("unsupported_type");
+    if(file.size>2*1024*1024) throw new Error("file_too_large");
+    const raw=(await file.text()).replace(/\r\n?/g,"\n").trim();
+    if(!raw) throw new Error("no_selectable_text");
+    return {name:file.name||"notes.txt",text:raw.slice(0,UPLOAD_MAX_CHARS),totalPages:0,truncated:raw.length>UPLOAD_MAX_CHARS};
+  }
+
+  function bindUpload(root,isEn){
+    const input=root.querySelector("#guidedPdfFile"), status=root.querySelector("#guidedPdfStatus"), remove=root.querySelector("#guidedPdfRemove");
+    let attached=null;
+    if(input){
+      input.addEventListener("change",async()=>{
+        const file=input.files&&input.files[0];
+        if(!file) return;
+        status.textContent=isEn?"Reading the file locally…":"Διαβάζω το αρχείο τοπικά…";
+        input.disabled=true;
+        try{
+          const doc=await readUploadFile(file);
+          attached=doc;
+          status.textContent=doc.name+(doc.totalPages?" · "+doc.totalPages+(isEn?" pages":" σελίδες"):"")+(doc.truncated?(isEn?" · long document, using the first readable part":" · μεγάλο αρχείο, χρησιμοποιείται το πρώτο αναγνώσιμο μέρος"):"");
+          if(remove) remove.hidden=false;
+        }catch(err){
+          attached=null;
+          if(remove) remove.hidden=true;
+          const code=String(err&&err.message||err);
+          status.textContent=code==="no_selectable_text"
+            ? (isEn?"No selectable text was found. This may be a scanned/image PDF.":"Δεν βρέθηκε επιλέξιμο κείμενο. Ίσως είναι σαρωμένο PDF/εικόνα.")
+            : code==="file_too_large"
+              ? (isEn?"The file is too large (PDF up to 15 MB, text up to 2 MB).":"Το αρχείο είναι πολύ μεγάλο (PDF έως 15 MB, κείμενο έως 2 MB).")
+              : code==="unsupported_type"
+                ? (isEn?"Use a PDF or a .txt/.md text file.":"Χρησιμοποίησε PDF ή αρχείο κειμένου .txt/.md.")
+                : (isEn?"The file could not be read.":"Δεν μπόρεσα να διαβάσω το αρχείο.");
+        }finally{input.disabled=false;}
+      });
+    }
+    if(remove){
+      remove.addEventListener("click",()=>{
+        attached=null;
+        if(input) input.value="";
+        if(status) status.textContent="";
+        remove.hidden=true;
+      });
+    }
+    return {get:()=>attached};
+  }
+
   const CONFIG={
     pdf:{
       title:"Δούλεψε πάνω στις σημειώσεις σου",
@@ -285,7 +349,7 @@
       '<label class="guided__label" for="guidedMode">'+(isEn?"What would you like to do?":"Τι θέλεις να κάνουμε;")+'</label>'+
       '<select id="guidedMode" class="guided__select">'+cfg.modes.map(x=>'<option value="'+escapeHtml(x[0])+'">'+escapeHtml(x[1])+'</option>').join("")+'</select>'+
       '<label class="guided__label" for="guidedInput">'+escapeHtml(cfg.label)+'</label>'+
-      (kind==="pdf" ? '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(isEn?"Choose PDF":"Επίλεξε PDF")+'</label><input id="guidedPdfFile" type="file" accept="application/pdf,.pdf"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span><button type="button" id="guidedPdfRemove" class="guided__upload-remove" hidden>'+(isEn?"Remove PDF":"Αφαίρεση PDF")+'</button></div>' : '')+
+      uploadMarkup(kind,isEn)+
       '<textarea id="guidedInput" class="guided__input" placeholder="'+escapeHtml(cfg.placeholder)+'"></textarea>'+
       '<p class="guided__privacy">'+(isEn?"Do not enter your name, school, phone number, health information or other personal data.":"Μην γράφεις όνομα, σχολείο, τηλέφωνο, στοιχεία υγείας ή άλλα προσωπικά δεδομένα.")+'</p>'+
       '<button id="guidedGo" class="guided__button" type="button">'+(isEn?"Help me":"Βοήθησέ με")+'</button>'+
@@ -293,44 +357,12 @@
       '<div id="guidedResult" class="guided__result" tabindex="0" aria-live="polite"><p class="guided__placeholder">'+(isEn?"The result will appear here.":"Το αποτέλεσμα θα εμφανιστεί εδώ.")+'</p></div>';
 
     const btn=root.querySelector("#guidedGo"), input=root.querySelector("#guidedInput"), mode=root.querySelector("#guidedMode"), result=root.querySelector("#guidedResult"), status=root.querySelector("#guidedStatus");
-    const pdfFile=root.querySelector("#guidedPdfFile"), pdfStatus=root.querySelector("#guidedPdfStatus"), pdfRemove=root.querySelector("#guidedPdfRemove");
-    let attachedPdf=null;
-    if(pdfFile){
-      pdfFile.addEventListener("change",async()=>{
-        const file=pdfFile.files&&pdfFile.files[0];
-        if(!file) return;
-        pdfStatus.textContent=isEn?"Reading PDF locally…":"Διαβάζω το PDF τοπικά…";
-        pdfFile.disabled=true;
-        try{
-          const reader=await ensurePdfReader();
-          const doc=await reader.read(file,{maxChars:42000,maxPages:70});
-          attachedPdf=doc;
-          pdfStatus.textContent=doc.name+" · "+doc.totalPages+(isEn?" pages":" σελίδες")+(doc.truncated?(isEn?" · long document, using the first readable part":" · μεγάλο αρχείο, χρησιμοποιείται το πρώτο αναγνώσιμο μέρος"):"");
-          if(pdfRemove) pdfRemove.hidden=false;
-        }catch(err){
-          attachedPdf=null;
-          if(pdfRemove) pdfRemove.hidden=true;
-          const code=String(err&&err.message||err);
-          pdfStatus.textContent=code==="no_selectable_text"
-            ? (isEn?"No selectable text was found. This may be a scanned/image PDF.":"Δεν βρέθηκε επιλέξιμο κείμενο. Ίσως είναι σαρωμένο PDF/εικόνα.")
-            : code==="file_too_large"
-              ? (isEn?"The PDF is too large (max 15 MB).":"Το PDF είναι πολύ μεγάλο (έως 15 MB).")
-              : (isEn?"The PDF could not be read.":"Δεν μπόρεσα να διαβάσω το PDF.");
-        }finally{pdfFile.disabled=false;}
-      });
-    }
-    if(pdfRemove){
-      pdfRemove.addEventListener("click",()=>{
-        attachedPdf=null;
-        if(pdfFile) pdfFile.value="";
-        if(pdfStatus) pdfStatus.textContent="";
-        pdfRemove.hidden=true;
-      });
-    }
+    const upload=bindUpload(root,isEn);
     btn.addEventListener("click",async()=>{
       const value=input.value.trim();
+      const attachedPdf=upload.get();
       const pdfText=attachedPdf?.text||"";
-      if(!value && !pdfText){ status.textContent=isEn?"Enter some material, a topic, or attach a PDF first.":"Γράψε λίγο υλικό/θέμα ή ανέβασε πρώτα PDF."; input.focus(); return; }
+      if(!value && !pdfText){ status.textContent=isEn?"Enter some material, a topic, or attach a file first.":"Γράψε λίγο υλικό/θέμα ή ανέβασε πρώτα αρχείο."; input.focus(); return; }
       btn.disabled=true; status.textContent=isEn?"Preparing the response…":"Ετοιμάζω την απάντηση…"; result.innerHTML='<p class="guided__placeholder">'+(isEn?"Working with what you entered…":"Δουλεύω πάνω σε αυτό που έγραψες…")+'</p>';
       try{
         const r=await fetch("/api/tutor-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
@@ -353,7 +385,7 @@
     });
   }
 
-  window.AITOOLSKIDS_GUIDED={renderMarkdown,init};
+  window.AITOOLSKIDS_GUIDED={renderMarkdown,init,uploadMarkup,bindUpload};
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init);
   else init();
 })();

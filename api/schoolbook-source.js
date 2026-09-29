@@ -294,7 +294,8 @@ module.exports = async function handler(req, res) {
       combinedText = htmlToText(html);
     }
 
-    const useful = book.multi ? combinedText : selectUsefulText(combinedText, topic);
+    const scoped = applyCurriculumTextScope(subject, topic, combinedText);
+    const useful = book.multi ? scoped.text : selectUsefulText(scoped.text, topic);
     const sourceUrl = sourceUrls[0] || book.base;
 
     if (useful.length < 500) {
@@ -315,6 +316,8 @@ module.exports = async function handler(req, res) {
       bookTitle: book.title,
       schoolYear: book.schoolYear || null,
       curriculumSource: book.curriculumSource || null,
+      curriculumExclusions: scoped.exclusions,
+      curriculumScopeApplied: scoped.exclusions.length > 0,
       sourceUrl,
       sourceUrls,
       text: useful.slice(0, 42000)
@@ -647,6 +650,71 @@ function normalize(s) {
     .trim();
 }
 
+function applyCurriculumTextScope(subject, topic, text) {
+  let scoped = String(text || "");
+  const exclusions = [];
+
+  if (subject === "mathimatika-b-gymnasiou") {
+    const key = mathBTopicKey(topic);
+
+    if (key === "A.3.2") {
+      exclusions.push("Δεν διδάσκονται η Εφαρμογή 2 της σελ. 62 και ο τύπος απόστασης δύο σημείων της σελ. 63.");
+      scoped = scoped.replace(
+        /\n2\s*\nΔίνεται το σημείο Α\(3, 2\)[\s\S]*?(?=\n4\s*\nΈχει διαπιστωθεί)/i,
+        "\n"
+      );
+    }
+    if (key === "A.3.4") {
+      exclusions.push("Δεν διδάσκονται η εξίσωση αx + βy = γ ούτε τα σημεία τομής της με τους άξονες.");
+      scoped = truncateAt(scoped, "Η εξίσωση της μορφής αx + βy = γ");
+    }
+    if (key === "A.4.1") {
+      exclusions.push("Οι έννοιες πληθυσμός, μεταβλητή, δείγμα, δειγματοληψία, δημοσκόπηση, μέγεθος και αντιπροσωπευτικότητα δείγματος εξηγούνται αλλά δεν εξετάζονται.");
+    }
+    if (key === "A.4.5") {
+      exclusions.push("Δεν διδάσκεται η μέση τιμή ομαδοποιημένης κατανομής.");
+      scoped = truncateAt(scoped, "Μέση τιμή ομαδοποιημένης κατανομής");
+    }
+    if (key === "B.2.2") {
+      exclusions.push("Δεν διδάσκεται η Παρατήρηση (β) της ενότητας 2.2.");
+      scoped = scoped.replace(
+        /β\)\s*Αν τώρα διαιρέσουμε το ημω με το συνω[\s\S]*?Άρα:\s*(?:Image\s*)?/i,
+        ""
+      );
+    }
+  }
+
+  if (subject === "chimeia-b-gymnasiou") {
+    const key = chemistryBTopicKey(topic);
+    if (key === "2.10") {
+      exclusions.push("Δεν διδάσκεται η παράγραφος «Χημικοί τύποι ιόντων και ιοντικών ενώσεων».");
+      scoped = truncateAt(scoped, "Χημικοί τύποι ιόντων και ιοντικών ενώσεων");
+    }
+  }
+
+  return { text: scoped.trim(), exclusions };
+}
+
+function truncateAt(text, marker) {
+  const source = String(text || "");
+  const i = normalize(source).indexOf(normalize(marker));
+  if (i < 0) return source;
+
+  // Normalized offsets are not exact; locate the literal marker first when possible.
+  const literal = source.toLowerCase().indexOf(String(marker).toLowerCase());
+  if (literal >= 0) return source.slice(0, literal).trim();
+
+  // Greek accents may differ; use a conservative line scan when literal matching fails.
+  const markerNorm = normalize(marker);
+  const lines = source.split("\n");
+  const kept = [];
+  for (const line of lines) {
+    if (normalize(line).includes(markerNorm)) break;
+    kept.push(line);
+  }
+  return kept.join("\n").trim();
+}
+
 function selectUsefulText(text, topic) {
   const full = String(text || "").trim();
   if (full.length <= 42000) return full;
@@ -681,5 +749,6 @@ module.exports._test = Object.freeze({
   resolveSectionPath,
   HISTORY_B_2026_2027_PATHS,
   MATH_B_2026_2027_PATHS,
-  CHEMISTRY_B_2026_2027_PATHS
+  CHEMISTRY_B_2026_2027_PATHS,
+  applyCurriculumTextScope
 });

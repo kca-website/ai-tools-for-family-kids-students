@@ -528,8 +528,10 @@
     const c = currentCopy();
     return `
       <div class="home-v9-study__copy">
-        <p class="home-v9-badge">${c.studyBadge}</p>
-        <h2 id="homeV9StudyTitle">${c.studyTitle}</h2>
+        <div class="home-v9-study__head">
+          <h2 id="homeV9StudyTitle">${c.studyTitle}</h2>
+          <p class="home-v9-badge">${c.studyBadge}</p>
+        </div>
         <div class="home-v9-study__official">
           <span class="home-v9-study__official-icon" aria-hidden="true">${ICON.book}</span>
           <span><strong>${c.studyOfficial}</strong><small>${c.studyCoverage}</small></span>

@@ -21,6 +21,21 @@ for (const key of physicsAllowed) {
 for (const key of ["1.1","2.3","4.6","5.6","6.4","7.1"]) {
   assert.deepEqual(t.resolvePhysicsBCurriculumPaths(`${key} — excluded`), [], key);
 }
+// Verified diagnostic anchors shown by AI Study must resolve even when their
+// learner-friendly label does not contain the official section number.
+const physicsDiagnosticAnchors = new Map([
+  ["Πυκνότητα και μάζα", "index1_3.html"],
+  ["Μέση ταχύτητα", "index2_2.html"],
+  ["Δύναμη και μεταβολή της ταχύτητας", "index3_6.html"],
+  ["Πίεση, δύναμη και επιφάνεια", "index4_1.html"],
+  ["Density and mass", "index1_3.html"],
+  ["Average speed", "index2_2.html"],
+  ["Force and change of velocity", "index3_6.html"],
+  ["Pressure, force and area", "index4_1.html"]
+]);
+for (const [label, expected] of physicsDiagnosticAnchors) {
+  assert.deepEqual(t.resolvePhysicsBCurriculumPaths(label), [expected], label);
+}
 
 // Biology B: exact two-book annual allowlist.
 const biologyAllowed = ["5.1","5.2","5.3","5.4","6.1","6.2","6.3","6.4","1.2","4.1","4.2","4.3","4.4"];

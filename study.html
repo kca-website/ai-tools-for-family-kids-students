@@ -404,6 +404,25 @@
     return chosen.sort((a,b)=>a.index-b.index).map(x=>x.piece).join('\n\n').slice(0,maxChars);
   }
 
+  function activitySourceBudget(action){
+    const limits={
+      flashcards:14000,
+      quiz:10000,
+      truefalse:11000,
+      explain:16000,
+      quickreview:14000,
+      audio:14000,
+      oral:12000,
+      written:12000,
+      weakspots:10000,
+      plan:15000
+    };
+    return limits[action]||14000;
+  }
+  function activityNeedsDistributedSource(action){
+    return ['flashcards','quiz','truefalse','quickreview','audio','oral','written','weakspots','plan'].includes(action);
+  }
+
   function parsePlanJson(text){
     const raw=String(text||'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
     try{return JSON.parse(raw)}catch(_){}
@@ -454,7 +473,9 @@
         system,prompt,audience:'study_user',task:'study_plan',mode:'organize',
         grade,subject,topic,
         studyContext:sharedStudyContext('plan'),
-        documentText:attached?.text?sourceExcerpt(attached.text,prompt,28000,!topic):(officialSource?.text||''),
+        documentText:(attached?.text||officialSource?.text)
+          ? sourceExcerpt(attached?.text||officialSource.text,prompt,activitySourceBudget('plan'),activityNeedsDistributedSource('plan'))
+          : '',
         documentName:attached?.name||(officialSource?.bookTitle||''),
         documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
         documentSourceUrl:officialSource?.sourceUrl||''
@@ -520,7 +541,14 @@
       audience:'study_user',task:cfg.task,mode:cfg.mode,
       grade:selectedGradeLabel(),subject:selectedSubjectLabel(),topic:selectedTopic(),
       studyContext:sharedStudyContext(action),
-      documentText:attached?.text?sourceExcerpt(attached.text,(promptOverride||selectedTopic()||action),action==='quickreview'?24000:20000,false):(officialSource?.text||''),
+      documentText:(attached?.text||officialSource?.text)
+        ? sourceExcerpt(
+            attached?.text||officialSource.text,
+            (promptOverride||selectedTopic()||action),
+            activitySourceBudget(action),
+            activityNeedsDistributedSource(action)
+          )
+        : '',
       documentName:attached?.name||(officialSource?.bookTitle||''),
       documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
       documentSourceUrl:officialSource?.sourceUrl||''

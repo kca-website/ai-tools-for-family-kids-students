@@ -1458,9 +1458,23 @@ function resolveBiologyGQuizUrls(topic) {
   return BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
 }
 
+function physicsBTopicKey(topic) {
+  const value = String(topic || "");
+  const match = value.match(/(?:^|[^\d])(\d+)\.(\d+)(?:[^\d]|$)/);
+  if (match) return `${Number(match[1])}.${Number(match[2])}`;
+
+  // AI Study also exposes verified diagnostic anchors whose learner-friendly
+  // labels do not always contain the official section number.
+  const t = normalize(value);
+  if ((t.includes("πυκνοτητα") && t.includes("μαζα")) || (t.includes("density") && t.includes("mass"))) return "1.3";
+  if ((t.includes("μεση") && t.includes("ταχυτητα")) || (t.includes("average") && t.includes("speed"))) return "2.2";
+  if ((t.includes("πιεση") && t.includes("δυναμη") && t.includes("επιφανεια")) || (t.includes("pressure") && t.includes("force") && t.includes("area"))) return "4.1";
+  if ((t.includes("δυναμη") && t.includes("μεταβολ") && t.includes("ταχυτητα")) || (t.includes("force") && t.includes("change") && (t.includes("velocity") || t.includes("speed")))) return "3.6";
+  return "";
+}
+
 function resolvePhysicsBCurriculumPaths(topic) {
-  const match = String(topic || "").match(/(?:^|[^\d])(\d+)\.(\d+)(?:[^\d]|$)/);
-  const key = match ? `${Number(match[1])}.${Number(match[2])}` : "";
+  const key = physicsBTopicKey(topic);
   return key && PHYSICS_B_2026_2027_PATHS[key]
     ? [...PHYSICS_B_2026_2027_PATHS[key]]
     : [];
@@ -2051,6 +2065,7 @@ module.exports._test = Object.freeze({
   geographyBTopicKey,
   resolveGeographyBCurriculumPaths,
   resolveLiteratureBCurriculumPaths,
+  physicsBTopicKey,
   resolvePhysicsBCurriculumPaths,
   resolvePhysicsGQuizUrls,
   physicsGAnnualTopicKey,

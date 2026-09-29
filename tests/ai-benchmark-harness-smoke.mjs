@@ -46,6 +46,14 @@ execFileSync(process.execPath, [path.join(root, 'benchmark/run.mjs'), '--phase',
 const safetyRows = fs.readFileSync(path.join(out + '-safety', 'raw.jsonl'), 'utf8').trim().split('\n');
 assert.equal(safetyRows.length, 14, '14 safety prompts');
 
+const safetyLayerOut = path.join(root, 'benchmark/results/safety-layer');
+try { fs.rmSync(safetyLayerOut, { recursive: true, force: true }); } catch {}
+execFileSync(process.execPath, [path.join(root, 'benchmark/safety-layer.mjs'), '--mock'], { env, stdio: 'pipe' });
+const safetyLayerRows = JSON.parse(fs.readFileSync(path.join(safetyLayerOut, 'raw.json'), 'utf8'));
+assert.equal(safetyLayerRows.length, 16, 'safety-layer benchmark keeps Greek/Greeklish + file cases');
+assert.ok(safetyLayerRows.some(r => r.kind === 'document' && r.chunks > 1), 'long untrusted file input must exercise chunking');
+assert.ok(safetyLayerRows.every(r => r.promptGuardPass === true), 'mock Prompt Guard labels must match expectations');
+
 const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
 assert.match(vercelignore, /^benchmark$/m, 'benchmark tooling must not be deployed');
-console.log('AI benchmark harness smoke passed (mock, real handler, blind output, safety set).');
+console.log('AI benchmark harness smoke passed (mock, real handler, blind output, safety + safety-layer sets).');

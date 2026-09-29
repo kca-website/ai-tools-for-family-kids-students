@@ -5,6 +5,9 @@ const source = await import("../api/schoolbook-source.js");
 const test = source.default?._test || source._test || source.default || {};
 const {
   resolvePhysicsGQuizUrls,
+  physicsGAnnualTopicKey,
+  scopePhysicsGAnnualTopic,
+  PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES,
   resolveChemistryGQuizUrls,
   resolveBiologyGQuizUrls,
   PHYSICS_G_GYM_DIAGNOSTIC_SOURCES,
@@ -28,6 +31,40 @@ assert.deepEqual(resolvePhysicsGQuizUrls("Τύπος ταχύτητας"), [
 assert.deepEqual(resolvePhysicsGQuizUrls("Μετατροπή ενέργειας"), [
   "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"
 ]);
+
+const physicsAnnualTopics = [
+  ["Ηλεκτρική δύναμη, φορτίο και ηλεκτρικό πεδίο", "electric-force-field", ["index1.html"]],
+  ["Ηλεκτρικό ρεύμα και κυκλώματα", "current-circuits", ["index2.html"]],
+  ["Αντίσταση, νόμος του Ohm και συνδεσμολογία", "ohm-connections", ["index2.html"]],
+  ["Αποτελέσματα, ενέργεια και ισχύς ηλεκτρικού ρεύματος", "effects-energy-power", ["index3.html"]],
+  ["Ταλαντώσεις και εκκρεμές", "oscillations", ["index4.html"]],
+  ["Μηχανικά κύματα και ήχος", "waves-sound", ["index5.html"]],
+  ["Φως, διάδοση και ανάκλαση", "light-reflection", ["index6.html", "index7.html"]],
+  ["Διάθλαση, ανάλυση φωτός και χρώμα", "refraction-colour", ["index8.html"]]
+];
+for (const [label, key, endings] of physicsAnnualTopics) {
+  assert.equal(physicsGAnnualTopicKey(label), key);
+  const urls = resolvePhysicsGQuizUrls(label);
+  assert.equal(urls.length, endings.length);
+  endings.forEach((ending, i) => assert.ok(urls[i].endsWith(ending), label + " source " + ending));
+}
+assert.equal(Object.keys(PHYSICS_G_GYM_ANNUAL_TOPIC_SOURCES).length, 16);
+
+const scopedElectricField = scopePhysicsGAnnualTopic(
+  "ΚΕΦΑΛΑΙΟ 1 ΗΛΕΚΤΡΙΚΗ ΔΥΝΑΜΗ ΚΑΙ ΦΟΡΤΙΟ\n1.1 Γνωριμία\n1.6 Το ηλεκτρικό πεδίο\nΗλεκτρική δύναμη και πεδίο\nΠεριγραφή του ηλεκτρικού πεδίου\nΔυναμικές γραμμές",
+  "electric-force-field"
+);
+assert.match(scopedElectricField.text, /Ηλεκτρική δύναμη και πεδίο/);
+assert.doesNotMatch(scopedElectricField.text, /Δυναμικές γραμμές/);
+
+const scopedOhm = scopePhysicsGAnnualTopic(
+  "2.3 Ηλεκτρικά δίπολα\nΑντίσταση του διπόλου\nΝόμος του Ωμ\nισχύει ο νόμος του Ωμ για κάθε ηλεκτρικό δίπολο;\nΝόμος του Ωμ και μικρόκοσμος\n2.4 Παράγοντες από τους οποίους εξαρτάται η αντίσταση\n2.5 Εφαρμογές αρχών διατήρησης στη μελέτη απλών\nΣύνδεση αντιστατών\nΠαράλληλη σύνδεση αντιστατών\nΕρωτήσεις\nεκτός",
+  "ohm-connections"
+);
+assert.match(scopedOhm.text, /Νόμος του Ωμ/);
+assert.match(scopedOhm.text, /Παράλληλη σύνδεση αντιστατών/);
+assert.doesNotMatch(scopedOhm.text, /Νόμος του Ωμ και μικρόκοσμος/);
+assert.doesNotMatch(scopedOhm.text, /2\.4 Παράγοντες/);
 assert.deepEqual(resolvePhysicsGQuizUrls("Άσχετο θέμα"), []);
 
 assert.deepEqual(resolveChemistryGQuizUrls("Στοιχείο vs Ένωση"), [
@@ -75,7 +112,9 @@ for (const subject of ["fysiki-g-gymnasiou", "chimeia-g-gymnasiou", "biologia-g-
 assert.match(endpoint, /selectionPolicy: "exact-current-diagnostic-prerequisites"/);
 
 const curriculum = fs.readFileSync(new URL("../official-curriculum-data.js", import.meta.url), "utf8");
-assert.match(curriculum, /Τύπος ταχύτητας[\s\S]{0,1400}προαπαιτούμενη γνώση/);
+assert.match(curriculum, /"fysiki-g-gymnasiou"[\s\S]{0,900}"coverageStatus": "annual-guidance-detailed-map"/);
+assert.match(curriculum, /"fysiki-g-gymnasiou"[\s\S]{0,4500}"mappedTopicsEl"[\s\S]{0,1800}"Διάθλαση, ανάλυση φωτός και χρώμα"/);
+assert.match(curriculum, /Τύπος ταχύτητας[\s\S]{0,1800}προαπαιτούμενη γνώση/);
 assert.match(curriculum, /Χημεία Γ΄ 2026–27[\s\S]{0,1600}προαπαιτούμενες έννοιες της Β΄/);
 assert.match(curriculum, /"biologia-g-gym\.biodiversity-definition"[\s\S]{0,900}"status":"related-section-verified"/);
 assert.match(curriculum, /"biologia-g-gym\.reproduction-purpose"[\s\S]{0,1000}"annualScopeVerified":false/);

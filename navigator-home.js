@@ -582,10 +582,11 @@
     return el;
   }
 
+  // v9.2: the site search lives in the header as a compact field.
   function placeSearchFirst(){
-    const shell = document.getElementById("homeV8Shell");
+    const mount = document.getElementById("siteHeaderSearch");
     const search = document.getElementById("homeGlobalSearch");
-    if(shell && search && shell.firstElementChild !== search) shell.insertBefore(search, shell.firstChild);
+    if(mount && search && search.parentElement !== mount) mount.appendChild(search);
   }
 
 
@@ -667,13 +668,15 @@
     }
     // v9: the task routes are the main "what do you want to do" entry point, so they start open.
     const previousToggle = needs.querySelector("#homeV8NeedsToggle");
-    const expanded = previousToggle ? previousToggle.getAttribute("aria-expanded") === "true" : true;
+    // On phones it starts collapsed to keep the page short.
+    const compact = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 700px)").matches;
+    const expanded = previousToggle ? previousToggle.getAttribute("aria-expanded") === "true" : !compact;
     needs.innerHTML = needsMarkup();
     setNeedsOpen(needs, expanded);
 
     const characters = ensureSection("homeV9Characters", "home-v9-characters", "homeV9CharactersTitle", charactersMarkup());
 
-    const order = [document.getElementById("homeGlobalSearch"), helpers, study, heading, lead, grid, needs, characters].filter(Boolean);
+    const order = [helpers, study, heading, lead, grid, needs, characters];
     const current = [...shell.children].filter((el) => order.includes(el));
     if(current.length !== order.length || current.some((el, i) => el !== order[i])){
       order.forEach((el) => shell.appendChild(el));
@@ -801,6 +804,12 @@
         apply();
       }, 0);
     });
+
+    const shellForSearch = document.getElementById("homeV8Shell");
+    if(shellForSearch && "MutationObserver" in window){
+      new MutationObserver(placeSearchFirst).observe(shellForSearch, {childList:true});
+    }
+    placeSearchFirst();
 
     const grid = document.getElementById("zoneGrid");
     if(grid && "MutationObserver" in window){

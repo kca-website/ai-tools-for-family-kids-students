@@ -160,6 +160,9 @@
     if(!body || document.getElementById("chromeHeader")) return;
     ensureFonts();
     body.classList.add("has-site-chrome");
+    // Page hook for page-specific v9 styles, e.g. /study.html -> page-study, /tools/x.html -> page-tools.
+    const parts = location.pathname.replace(/\.html$/, "").split("/").filter(Boolean);
+    if(parts.length) body.classList.add("page-" + (parts[0] === "tools" ? "tools" : parts.join("-")));
 
     const header = document.createElement("header");
     header.id = "chromeHeader";

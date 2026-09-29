@@ -379,3 +379,69 @@ body.has-site-chrome .chrome-footer :focus-visible {
     gap: 24px;
   }
 }
+
+/* ---------- Round 2: AI Study, Curriculum Map, Special Education ---------- */
+/* Flat hero with a large serif title, as on the homepage. */
+body.page-study .hero,
+body.page-xartis-ylis .hero {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+body.page-study .hero h1,
+body.page-xartis-ylis .hero h1,
+body.page-special-education .sp-hero h1 {
+  font-family: var(--chrome-serif);
+  font-size: clamp(2.2rem, 4.4vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--chrome-ink);
+}
+body.page-special-education .sp-hero {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0 0 8px;
+}
+
+/* Selected options are dark, like the homepage finder. */
+body.page-study .choice label {
+  min-height: 44px;
+  box-sizing: border-box;
+  border: 1.5px solid var(--chrome-control);
+}
+body.page-study .choice input:checked + label {
+  background: var(--chrome-ink);
+  border-color: var(--chrome-ink);
+  color: #FFFFFF;
+  box-shadow: none;
+}
+body.page-study .choice input:focus-visible + label {
+  outline: 3px solid var(--chrome-accent);
+  outline-offset: 2px;
+}
+body.page-xartis-ylis .tab {
+  border: 1.5px solid var(--chrome-control);
+  min-height: 44px;
+}
+body.page-xartis-ylis .zone-tabs .tab.active,
+body.page-xartis-ylis .role-tabs .tab.active,
+body.page-xartis-ylis .tab.active {
+  background: var(--chrome-ink);
+  border-color: var(--chrome-ink);
+  color: #FFFFFF;
+}
+body.page-xartis-ylis .topic.active {
+  border-color: var(--chrome-accent);
+  box-shadow: 0 0 0 2px rgba(29, 93, 140, 0.15);
+}
+
+/* The old one-line footer duplicates the shared footer. */
+body.page-study footer:not(#chromeFooter) {
+  display: none;
+}
+body.page-special-education .sp-hero h1 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+}

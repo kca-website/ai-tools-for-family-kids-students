@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import vm from "node:vm";
 
-const sandbox = {};
-vm.runInNewContext(fs.readFileSync(new URL("../quiz-data.js", import.meta.url), "utf8"), { window: sandbox });
-const quiz = sandbox.QUIZZES?.["mathimatika-b-gymnasiou"] || sandbox.QUIZ_DATA?.["mathimatika-b-gymnasiou"] || sandbox.AITOOLSKIDS_QUIZZES?.["mathimatika-b-gymnasiou"];
+const quizSandbox = {};
+const quizCode = fs.readFileSync(new URL("../quiz-data.js", import.meta.url), "utf8") + "\n;globalThis.__QUIZZES = QUIZZES;";
+vm.runInNewContext(quizCode, quizSandbox);
+const quiz = quizSandbox.__QUIZZES?.["mathimatika-b-gymnasiou"];
 
 assert.ok(quiz, "Math B quiz must exist");
 assert.equal(quiz.questions.length, 4);
@@ -24,9 +25,10 @@ assert.deepEqual([...tags].sort(), [
   "math-b-gym.sqrt-positive"
 ].sort());
 
-const learningWindow = {};
-vm.runInNewContext(fs.readFileSync(new URL("../learning-paths-data.js", import.meta.url), "utf8"), { window: learningWindow });
-const paths = learningWindow.LEARNING_PATHS || learningWindow.AITOOLSKIDS_LEARNING_PATHS;
+const learningSandbox = {};
+const learningCode = fs.readFileSync(new URL("../learning-paths-data.js", import.meta.url), "utf8") + "\n;globalThis.__LEARNING_PATHS = LEARNING_PATHS;";
+vm.runInNewContext(learningCode, learningSandbox);
+const paths = learningSandbox.__LEARNING_PATHS;
 for (const tag of tags) {
   assert.ok(paths?.[tag], `learning path missing for ${tag}`);
   assert.equal(paths[tag].length, 3, `learning path must have 3 steps: ${tag}`);

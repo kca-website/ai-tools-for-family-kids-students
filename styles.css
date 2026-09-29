@@ -3252,3 +3252,81 @@ main {
 .site-footer__dwrean-copy small {
   color: #CBD5E1;
 }
+
+/* v9.1 footer: three columns as approved (about · links · thanks) */
+.site-footer {
+  padding: 48px 0;
+}
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  text-align: left;
+}
+.site-footer__main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.site-footer__main p {
+  margin: 0;
+}
+.site-footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  text-align: left;
+}
+.site-footer__legal a {
+  text-decoration: none;
+}
+.site-footer__legal a:hover {
+  text-decoration: underline;
+}
+.site-footer__dwrean-badge {
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin: 0;
+}
+#methodologyFooterLinks {
+  font-size: 0.88rem !important;
+}
+@media (max-width: 760px) {
+  .site-footer__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+.site-footer__dwrean-logo img {
+  width: 150px;
+  height: auto;
+}
+.site-footer__inner {
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+@media (max-width: 760px) {
+  .site-footer__dwrean-badge {
+    margin: 0 !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+}
+.site-footer__dwrean-badge {
+  justify-self: start !important;
+}

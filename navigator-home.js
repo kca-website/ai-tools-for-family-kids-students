@@ -566,7 +566,7 @@
         <a class="home-v9-characters__cta" href="${characterRoute}">${c.charCta}</a>
       </div>
       <ul class="home-v9-characters__list">
-        ${c.chars.map(([file,name,period]) => `<li><img src="/assets/characters/${file}.png" alt="" width="132" height="132" loading="lazy" decoding="async"><strong>${name}</strong><small>${period}</small></li>`).join("")}
+        ${c.chars.map(([file,name,period]) => `<li><img src="/assets/characters/${file}.png" alt="" width="132" height="132" decoding="async"><strong>${name}</strong><small>${period}</small></li>`).join("")}
       </ul>`;
   }
 
@@ -665,7 +665,9 @@
       needs.id = "homeV8Needs";
       needs.className = "home-v8-needs";
     }
-    const expanded = needs.querySelector("#homeV8NeedsToggle")?.getAttribute("aria-expanded") === "true";
+    // v9: the task routes are the main "what do you want to do" entry point, so they start open.
+    const previousToggle = needs.querySelector("#homeV8NeedsToggle");
+    const expanded = previousToggle ? previousToggle.getAttribute("aria-expanded") === "true" : true;
     needs.innerHTML = needsMarkup();
     setNeedsOpen(needs, expanded);
 

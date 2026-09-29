@@ -186,6 +186,40 @@ const GAP_TAGS = {
     "skillTagEl": "Στίξη",
     "skillTagEn": "Punctuation"
   },
+  "physics.speed-definition": {
+  "id": "physics.speed-definition",
+  "labelEl": "Μέση ταχύτητα",
+  "labelEn": "Average speed",
+  "explainEl": "Δυσκολεύεται να συνδέσει τη μέση ταχύτητα με το πηλίκο μήκος διαδρομής προς χρονικό διάστημα.",
+  "explainEn": "Struggles to connect average speed with distance travelled divided by time interval.",
+  "recommendedToolIds": [
+    "wolfram-alpha",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Μετρητής της Κίνησης",
+  "achievementEn": "Motion Measurer",
+  "positiveMessageEl": "Υπολογίζεις σωστά πόσο γρήγορα κινείται ένα σώμα!",
+  "positiveMessageEn": "You correctly calculate how fast an object moves!",
+  "skillTagEl": "Μέση Ταχύτητα",
+  "skillTagEn": "Average Speed"
+},
+  "physics.pressure-force-area": {
+  "id": "physics.pressure-force-area",
+  "labelEl": "Πίεση, δύναμη και επιφάνεια",
+  "labelEn": "Pressure, force and area",
+  "explainEl": "Δεν αναγνωρίζει ότι, για την ίδια κάθετη δύναμη, η πίεση αυξάνεται όταν μικραίνει η επιφάνεια στην οποία ασκείται.",
+  "explainEn": "Does not recognize that for the same perpendicular force, pressure increases when the contact area becomes smaller.",
+  "recommendedToolIds": [
+    "wolfram-alpha",
+    "chatgpt"
+  ],
+  "achievementEl": "Ο Ερευνητής της Πίεσης",
+  "achievementEn": "Pressure Explorer",
+  "positiveMessageEl": "Συνδέεις σωστά δύναμη, επιφάνεια και πίεση!",
+  "positiveMessageEn": "You connect force, area and pressure correctly!",
+  "skillTagEl": "Πίεση",
+  "skillTagEn": "Pressure"
+},
   "physics.force-motion-confusion": {
     "id": "physics.force-motion-confusion",
     "labelEl": "Δύναμη και κίνηση",
@@ -4655,91 +4689,79 @@ const GAP_TAGS = {
     "skillTagEl": "Κυτταρική Μεμβράνη",
     "skillTagEn": "Cell Membrane"
   },
-  "biologia-b-gym.gas-exchange-organ": {
-    "id": "biologia-b-gym.gas-exchange-organ",
-    "labelEl": "Ανταλλαγή αερίων",
-    "labelEn": "Gas exchange organ",
-    "explainEl": "Δεν ξέρει ότι οι πνεύμονες είναι το όργανο όπου γίνεται η ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα, μπερδεύοντάς το με άλλο όργανο.",
-    "explainEn": "Doesn't know the lungs are where oxygen-carbon dioxide exchange happens, confusing it with another organ.",
-    "recommendedToolIds": [
-      "chatgpt",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης της Αναπνοής",
-    "achievementEn": "Respiration Expert",
-    "positiveMessageEl": "Ξέρεις πού γίνεται η ανταλλαγή αερίων στο σώμα σου!",
-    "positiveMessageEn": "You know where gas exchange happens in your body!",
-    "skillTagEl": "Ανταλλαγή Αερίων",
-    "skillTagEn": "Gas Exchange"
-  },
-  "biologia-b-gym.heart-role": {
-    "id": "biologia-b-gym.heart-role",
-    "labelEl": "Ρόλος της καρδιάς",
-    "labelEn": "Role of the heart",
-    "explainEl": "Δεν ξέρει ότι ο κύριος ρόλος της καρδιάς είναι να αντλεί το αίμα σε όλο το σώμα, όχι κάποια άλλη λειτουργία.",
-    "explainEn": "Doesn't know the heart's main role is pumping blood throughout the body, not some other function.",
-    "recommendedToolIds": [
-      "chatgpt",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης της Καρδιάς",
-    "achievementEn": "Heart Expert",
-    "positiveMessageEl": "Ξέρεις ακριβώς τι κάνει η καρδιά σου!",
-    "positiveMessageEn": "You know exactly what your heart does!",
-    "skillTagEl": "Ρόλος Καρδιάς",
-    "skillTagEn": "Heart Role"
-  },
-  "biologia-b-gym.blood-function": {
-    "id": "biologia-b-gym.blood-function",
-    "labelEl": "Λειτουργία του αίματος",
-    "labelEn": "Function of blood",
-    "explainEl": "Δεν ξέρει ότι το αίμα μεταφέρει πολλά διαφορετικά πράγματα (οξυγόνο, θρεπτικά, απόβλητα), όχι μόνο ένα.",
-    "explainEn": "Doesn't know blood transports many different things (oxygen, nutrients, waste), not just one.",
-    "recommendedToolIds": [
-      "chatgpt",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης του Αίματος",
-    "achievementEn": "Blood Expert",
-    "positiveMessageEl": "Ξέρεις όλα όσα μεταφέρει το αίμα σου!",
-    "positiveMessageEn": "You know everything your blood transports!",
-    "skillTagEl": "Λειτουργία Αίματος",
-    "skillTagEn": "Blood Function"
-  },
-  "biologia-b-gym.producer-definition": {
-    "id": "biologia-b-gym.producer-definition",
-    "labelEl": "Παραγωγοί σε οικοσύστημα",
-    "labelEn": "Producers in an ecosystem",
-    "explainEl": "Δεν ξέρει ότι οι «παραγωγοί» σε ένα οικοσύστημα είναι οργανισμοί (κυρίως φυτά) που παράγουν τη δική τους τροφή.",
-    "explainEn": "Doesn't know 'producers' in an ecosystem are organisms (mainly plants) that make their own food.",
-    "recommendedToolIds": [
-      "chatgpt",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης του Οικοσυστήματος",
-    "achievementEn": "Ecosystem Expert",
-    "positiveMessageEl": "Ξέρεις ποιος ρόλο παίζουν οι παραγωγοί σε ένα οικοσύστημα!",
-    "positiveMessageEn": "You know the role producers play in an ecosystem!",
-    "skillTagEl": "Παραγωγοί",
-    "skillTagEn": "Producers"
-  },
-  "biologia-b-gym.nervous-system-role": {
-    "id": "biologia-b-gym.nervous-system-role",
-    "labelEl": "Ρόλος νευρικού συστήματος",
-    "labelEn": "Role of the nervous system",
-    "explainEl": "Δεν ξέρει ότι ο κύριος ρόλος του νευρικού συστήματος είναι η αντίληψη ερεθισμάτων και η γρήγορη ανταπόκριση σε αυτά.",
-    "explainEn": "Doesn't know the nervous system's main role is perceiving stimuli and responding to them quickly.",
-    "recommendedToolIds": [
-      "chatgpt",
-      "perplexity"
-    ],
-    "achievementEl": "Ο Γνώστης του Νευρικού Συστήματος",
-    "achievementEn": "Nervous System Expert",
-    "positiveMessageEl": "Ξέρεις πώς το σώμα σου αντιδράει γρήγορα σε ερεθίσματα!",
-    "positiveMessageEn": "You know how your body reacts quickly to stimuli!",
-    "skillTagEl": "Νευρικό Σύστημα",
-    "skillTagEn": "Nervous System"
-  },
+  
+  
+  
+  
+  
+  "biologia-b-gym.musculoskeletal-system": {
+  "id": "biologia-b-gym.musculoskeletal-system",
+  "labelEl": "Μυοσκελετικό σύστημα",
+  "labelEn": "Musculoskeletal system",
+  "explainEl": "Δυσκολεύεται να συνδέσει τα οστά, τις αρθρώσεις και τους μύες με τη στήριξη και την κίνηση του ανθρώπου.",
+  "explainEn": "Struggles to connect bones, joints and muscles with human support and movement.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Ερευνητής της Κίνησης",
+  "achievementEn": "Movement Explorer",
+  "positiveMessageEl": "Κατανοείς πώς συνεργάζονται οστά και μύες!",
+  "positiveMessageEn": "You understand how bones and muscles work together!",
+  "skillTagEl": "Μυοσκελετικό Σύστημα",
+  "skillTagEn": "Musculoskeletal System"
+},
+  "biologia-b-gym.plant-reproduction": {
+  "id": "biologia-b-gym.plant-reproduction",
+  "labelEl": "Αναπαραγωγή στα φυτά",
+  "labelEn": "Plant reproduction",
+  "explainEl": "Μπερδεύει τον ρόλο του άνθους, της επικονίασης ή της γονιμοποίησης στην αναπαραγωγή των ανθόφυτων.",
+  "explainEn": "Confuses the role of the flower, pollination or fertilization in flowering-plant reproduction.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Βοτανολόγος της Αναπαραγωγής",
+  "achievementEn": "Plant Reproduction Explorer",
+  "positiveMessageEl": "Παρακολουθείς σωστά τα στάδια της αναπαραγωγής των φυτών!",
+  "positiveMessageEn": "You follow the stages of plant reproduction correctly!",
+  "skillTagEl": "Αναπαραγωγή Φυτών",
+  "skillTagEn": "Plant Reproduction"
+},
+  "biologia-b-gym.homeostasis": {
+  "id": "biologia-b-gym.homeostasis",
+  "labelEl": "Ομοιόσταση",
+  "labelEn": "Homeostasis",
+  "explainEl": "Δεν αναγνωρίζει την ομοιόσταση ως ικανότητα του οργανισμού να διατηρεί σχετικά σταθερές τις εσωτερικές του συνθήκες.",
+  "explainEn": "Does not recognize homeostasis as the organism's ability to keep internal conditions relatively stable.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Ρυθμιστής της Ισορροπίας",
+  "achievementEn": "Balance Regulator",
+  "positiveMessageEl": "Κατανοείς πώς ο οργανισμός διατηρεί την εσωτερική του ισορροπία!",
+  "positiveMessageEn": "You understand how the body maintains internal balance!",
+  "skillTagEl": "Ομοιόσταση",
+  "skillTagEn": "Homeostasis"
+},
+  "biologia-b-gym.defense-mechanisms": {
+  "id": "biologia-b-gym.defense-mechanisms",
+  "labelEl": "Αμυντικοί μηχανισμοί",
+  "labelEn": "Defense mechanisms",
+  "explainEl": "Μπερδεύει τους μηχανισμούς άμυνας του οργανισμού ή δεν ξεχωρίζει τη γενική προστασία από την ειδική ανοσολογική απόκριση.",
+  "explainEn": "Confuses the body's defense mechanisms or does not distinguish general protection from specific immune response.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Φρουρός του Οργανισμού",
+  "achievementEn": "Body Defender",
+  "positiveMessageEl": "Ξεχωρίζεις πώς προστατεύεται ο οργανισμός από παθογόνους παράγοντες!",
+  "positiveMessageEn": "You distinguish how the body protects itself from pathogens!",
+  "skillTagEl": "Άμυνα Οργανισμού",
+  "skillTagEn": "Body Defense"
+},
   "biologia-g-gym.dna-location": {
     "id": "biologia-g-gym.dna-location",
     "labelEl": "Θέση του DNA",
@@ -9049,115 +9071,115 @@ const QUIZZES = {
       ]
     },
     "physics-gymnasiou": {
-      "id": "physics-gymnasiou",
-      "grades": [
-        "b"
-      ],
-      "subjectLabelEl": "Φυσική, Β' Γυμνασίου",
-      "subjectLabelEn": "Physics, 2nd Grade Middle School",
-      "titleEl": "Ο Χάρτης Εξάσκησης Φυσικής",
-      "titleEn": "The Physics Practice Map",
-      "introEl": "4 σύντομες ερωτήσεις για δυνάμεις και κίνηση. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      "introEn": "4 short questions about forces and motion. It's not a test, there's no grade.",
-      "questions": [
+  "id": "physics-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Φυσική, Β' Γυμνασίου",
+  "subjectLabelEn": "Physics, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης Φυσικής",
+  "titleEn": "The Physics Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από επαληθευμένες ενότητες της ύλης 2026–27. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
+  "introEn": "4 short questions from verified 2026–27 sections. It's not a test, there's no grade.",
+  "questions": [
+    {
+      "id": "q1-density",
+      "textEl": "Ένα μικρό και ένα μεγάλο κομμάτι από καθαρό σίδηρο έχουν...",
+      "textEn": "A small and a large piece of pure iron have...",
+      "options": [
         {
-          "id": "q1-newton-first",
-          "textEl": "Τι συμβαίνει σε ένα αντικείμενο που κινείται αν δεν ασκηθεί δύναμη πάνω του;",
-          "textEn": "What happens to a moving object if no force is applied to it?",
-          "options": [
-            {
-              "textEl": "Συνεχίζει να κινείται με την ίδια ταχύτητα",
-              "textEn": "It continues moving at the same speed",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Σταματάει αμέσως",
-              "textEn": "It stops immediately",
-              "isCorrect": false,
-              "gapTag": "physics.force-motion-confusion"
-            },
-            {
-              "textEl": "Επιβραδύνεται σταδιακά",
-              "textEn": "It gradually slows down",
-              "isCorrect": false,
-              "gapTag": "physics.force-motion-confusion"
-            }
-          ]
+          "textEl": "Την ίδια πυκνότητα.",
+          "textEn": "The same density.",
+          "isCorrect": true
         },
         {
-          "id": "q2-density",
-          "textEl": "Ποιο αντικείμενο έχει μεγαλύτερη πυκνότητα;",
-          "textEn": "Which object has higher density?",
-          "options": [
-            {
-              "textEl": "Ένα μικρό σιδερένιο καρφί",
-              "textEn": "A small iron nail",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Ένα μεγάλο ξύλινο κουτί",
-              "textEn": "A large wooden box",
-              "isCorrect": false,
-              "gapTag": "physics.density-mass-confusion"
-            },
-            {
-              "textEl": "Έχουν την ίδια πυκνότητα",
-              "textEn": "They have the same density",
-              "isCorrect": false,
-              "gapTag": "physics.density-mass-confusion"
-            }
-          ]
+          "textEl": "Πάντα διαφορετική πυκνότητα επειδή έχουν διαφορετική μάζα.",
+          "textEn": "Always different density because their masses differ.",
+          "isCorrect": false,
+          "gapTag": "physics.density-mass-confusion"
         },
         {
-          "id": "q3-force-unit",
-          "textEl": "Ποια είναι η μονάδα μέτρησης της δύναμης;",
-          "textEn": "What is the unit of measurement for force?",
-          "options": [
-            {
-              "textEl": "Newton (N)",
-              "textEn": "Newton (N)",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Kilogram (kg)",
-              "textEn": "Kilogram (kg)",
-              "isCorrect": false,
-              "gapTag": "physics.force-motion-confusion"
-            },
-            {
-              "textEl": "Meter (m)",
-              "textEn": "Meter (m)",
-              "isCorrect": false,
-              "gapTag": "physics.force-motion-confusion"
-            }
-          ]
-        },
-        {
-          "id": "q4-density-formula",
-          "textEl": "Πώς υπολογίζεται η πυκνότητα;",
-          "textEn": "How is density calculated?",
-          "options": [
-            {
-              "textEl": "Μάζα ÷ Όγκος",
-              "textEn": "Mass ÷ Volume",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Όγκος ÷ Μάζα",
-              "textEn": "Volume ÷ Mass",
-              "isCorrect": false,
-              "gapTag": "physics.density-mass-confusion"
-            },
-            {
-              "textEl": "Μάζα × Όγκος",
-              "textEn": "Mass × Volume",
-              "isCorrect": false,
-              "gapTag": "physics.density-mass-confusion"
-            }
-          ]
+          "textEl": "Πυκνότητα που εξαρτάται μόνο από το μέγεθός τους.",
+          "textEn": "Density depending only on their size.",
+          "isCorrect": false,
+          "gapTag": "physics.density-mass-confusion"
         }
       ]
     },
+    {
+      "id": "q2-speed",
+      "textEl": "Ένας μαθητής διανύει 100 m σε 20 s. Ποια είναι η μέση ταχύτητά του;",
+      "textEn": "A student travels 100 m in 20 s. What is the average speed?",
+      "options": [
+        {
+          "textEl": "5 m/s",
+          "textEn": "5 m/s",
+          "isCorrect": true
+        },
+        {
+          "textEl": "20 m/s",
+          "textEn": "20 m/s",
+          "isCorrect": false,
+          "gapTag": "physics.speed-definition"
+        },
+        {
+          "textEl": "2000 m/s",
+          "textEn": "2000 m/s",
+          "isCorrect": false,
+          "gapTag": "physics.speed-definition"
+        }
+      ]
+    },
+    {
+      "id": "q3-force",
+      "textEl": "Τι μπορεί να προκαλέσει μια συνισταμένη δύναμη που ασκείται σε ένα σώμα;",
+      "textEn": "What can a net force acting on an object cause?",
+      "options": [
+        {
+          "textEl": "Μεταβολή της ταχύτητάς του.",
+          "textEn": "A change in its velocity.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Η ταχύτητά του να μένει υποχρεωτικά αμετάβλητη.",
+          "textEn": "Its velocity must remain unchanged.",
+          "isCorrect": false,
+          "gapTag": "physics.force-motion-confusion"
+        },
+        {
+          "textEl": "Να εξαφανιστεί η μάζα του.",
+          "textEn": "Its mass to disappear.",
+          "isCorrect": false,
+          "gapTag": "physics.force-motion-confusion"
+        }
+      ]
+    },
+    {
+      "id": "q4-pressure",
+      "textEl": "Η ίδια κάθετη δύναμη ασκείται πρώτα σε μεγάλη και μετά σε μικρότερη επιφάνεια. Πότε η πίεση είναι μεγαλύτερη;",
+      "textEn": "The same perpendicular force acts first on a large and then a smaller area. When is pressure greater?",
+      "options": [
+        {
+          "textEl": "Στη μικρότερη επιφάνεια.",
+          "textEn": "On the smaller area.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Στη μεγαλύτερη επιφάνεια.",
+          "textEn": "On the larger area.",
+          "isCorrect": false,
+          "gapTag": "physics.pressure-force-area"
+        },
+        {
+          "textEl": "Είναι πάντα μηδενική.",
+          "textEn": "It is always zero.",
+          "isCorrect": false,
+          "gapTag": "physics.pressure-force-area"
+        }
+      ]
+    }
+  ]
+},
     "mathimatika-g-gymnasiou": {
       "id": "mathimatika-g-gymnasiou",
       "grades": [
@@ -10039,115 +10061,115 @@ const QUIZZES = {
   ]
 },
     "glossa-b-gymnasiou": {
-      "id": "glossa-b-gymnasiou",
-      "grades": [
-        "b"
-      ],
-      "subjectLabelEl": "Νεοελληνική Γλώσσα, Β' Γυμνασίου",
-      "subjectLabelEn": "Modern Greek Language, 8th Grade",
-      "titleEl": "Ο Χάρτης Εξάσκησης",
-      "titleEn": "The Practice Map",
-      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      "introEn": "4 short questions. It's not a test, there's no grade.",
-      "questions": [
+  "id": "glossa-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Νεοελληνική Γλώσσα, Β' Γυμνασίου",
+  "subjectLabelEn": "Modern Greek Language, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης",
+  "titleEn": "The Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις γλωσσικού γραμματισμού. Οι οδηγίες 2026–27 είναι στοχοκεντρικές: η AI Μελέτη συνδέει τις απαντήσεις με το πραγματικό κείμενο μόνο όταν έχει επιλεγεί συγκεκριμένη ενότητα του βιβλίου.",
+  "introEn": "4 short language-literacy questions. The 2026–27 guidance is target-based: AI Study grounds answers in the actual textbook text only after a specific unit is selected.",
+  "questions": [
+    {
+      "id": "q1-intro-function",
+      "textEl": "Τι πρέπει να κάνει ο πρόλογος ενός δοκιμίου;",
+      "textEn": "What should an essay's introduction do?",
+      "options": [
         {
-          "id": "q1-intro-function",
-          "textEl": "Τι πρέπει να κάνει ο πρόλογος ενός δοκιμίου;",
-          "textEn": "What should an essay's introduction do?",
-          "options": [
-            {
-              "textEl": "Να εισάγει το θέμα και να δηλώνει τη θέση, χωρίς πλήρη ανάλυση.",
-              "textEn": "Introduce the topic and state the position, without a full analysis.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Να αναλύει όλα τα επιχειρήματα με λεπτομέρειες.",
-              "textEn": "Analyze all the arguments in detail.",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.essay-intro-function"
-            },
-            {
-              "textEl": "Να είναι το μεγαλύτερο μέρος του κειμένου.",
-              "textEn": "Be the longest part of the text.",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.essay-intro-function"
-            }
-          ]
+          "textEl": "Να εισάγει το θέμα και να δηλώνει τη θέση, χωρίς πλήρη ανάλυση.",
+          "textEn": "Introduce the topic and state the position, without a full analysis.",
+          "isCorrect": true
         },
         {
-          "id": "q2-text-purpose",
-          "textEl": "Γράφεις επιστολή διαμαρτυρίας προς τον δήμο. Τι ύφος ταιριάζει;",
-          "textEn": "You're writing a complaint letter to the municipality. What register fits?",
-          "options": [
-            {
-              "textEl": "Επίσημο, με σαφή αίτημα.",
-              "textEn": "Formal, with a clear request.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Καθημερινό, σαν να μιλάς σε φίλο.",
-              "textEn": "Casual, as if talking to a friend.",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.text-types-purpose"
-            },
-            {
-              "textEl": "Δεν έχει σημασία το ύφος.",
-              "textEn": "Register doesn't matter.",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.text-types-purpose"
-            }
-          ]
+          "textEl": "Να αναλύει όλα τα επιχειρήματα με λεπτομέρειες.",
+          "textEn": "Analyze all the arguments in detail.",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.essay-intro-function"
         },
         {
-          "id": "q3-argument-evidence",
-          "textEl": "«Το σχολείο μας χρειάζεται περισσότερο πράσινο» είναι επιχείρημα. Ποιο από τα παρακάτω είναι το τεκμήριο που το στηρίζει;",
-          "textEn": "'Our school needs more greenery' is the argument. Which is the evidence that supports it?",
-          "options": [
-            {
-              "textEl": "«Έρευνα δείχνει ότι ο πράσινος χώρος μειώνει το άγχος των μαθητών κατά 20%.»",
-              "textEn": "'Research shows green space reduces student stress by 20%.'",
-              "isCorrect": true
-            },
-            {
-              "textEl": "«Το σχολείο μας χρειάζεται περισσότερο πράσινο.»",
-              "textEn": "'Our school needs more greenery.' (the claim itself)",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.argument-vs-evidence"
-            },
-            {
-              "textEl": "«Μου αρέσει το πράσινο χρώμα.»",
-              "textEn": "'I like the color green.'",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.argument-vs-evidence"
-            }
-          ]
-        },
-        {
-          "id": "q4-summary-opinion",
-          "textEl": "Σου ζητούν περίληψη ενός άρθρου. Τι πρέπει να αποφύγεις;",
-          "textEn": "You're asked to summarize an article. What should you avoid?",
-          "options": [
-            {
-              "textEl": "Να προσθέσεις τη δική σου προσωπική άποψη πάνω στο θέμα.",
-              "textEn": "Adding your own personal opinion on the topic.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Να αναδιατυπώσεις τις κύριες ιδέες με δικά σου λόγια.",
-              "textEn": "Reformulating the main ideas in your own words.",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.summary-vs-opinion"
-            },
-            {
-              "textEl": "Να κρατήσεις μόνο τα σημαντικά σημεία.",
-              "textEn": "Keeping only the important points.",
-              "isCorrect": false,
-              "gapTag": "glossa-b-gym.summary-vs-opinion"
-            }
-          ]
+          "textEl": "Να είναι το μεγαλύτερο μέρος του κειμένου.",
+          "textEn": "Be the longest part of the text.",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.essay-intro-function"
         }
       ]
     },
+    {
+      "id": "q2-text-purpose",
+      "textEl": "Γράφεις επιστολή διαμαρτυρίας προς τον δήμο. Τι ύφος ταιριάζει;",
+      "textEn": "You're writing a complaint letter to the municipality. What register fits?",
+      "options": [
+        {
+          "textEl": "Επίσημο, με σαφή αίτημα.",
+          "textEn": "Formal, with a clear request.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Καθημερινό, σαν να μιλάς σε φίλο.",
+          "textEn": "Casual, as if talking to a friend.",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.text-types-purpose"
+        },
+        {
+          "textEl": "Δεν έχει σημασία το ύφος.",
+          "textEn": "Register doesn't matter.",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.text-types-purpose"
+        }
+      ]
+    },
+    {
+      "id": "q3-argument-evidence",
+      "textEl": "«Το σχολείο μας χρειάζεται περισσότερο πράσινο» είναι επιχείρημα. Ποιο από τα παρακάτω είναι το τεκμήριο που το στηρίζει;",
+      "textEn": "'Our school needs more greenery' is the argument. Which is the evidence that supports it?",
+      "options": [
+        {
+          "textEl": "«Έρευνα δείχνει ότι ο πράσινος χώρος μειώνει το άγχος των μαθητών κατά 20%.»",
+          "textEn": "'Research shows green space reduces student stress by 20%.'",
+          "isCorrect": true
+        },
+        {
+          "textEl": "«Το σχολείο μας χρειάζεται περισσότερο πράσινο.»",
+          "textEn": "'Our school needs more greenery.' (the claim itself)",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.argument-vs-evidence"
+        },
+        {
+          "textEl": "«Μου αρέσει το πράσινο χρώμα.»",
+          "textEn": "'I like the color green.'",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.argument-vs-evidence"
+        }
+      ]
+    },
+    {
+      "id": "q4-summary-opinion",
+      "textEl": "Σου ζητούν περίληψη ενός άρθρου. Τι πρέπει να αποφύγεις;",
+      "textEn": "You're asked to summarize an article. What should you avoid?",
+      "options": [
+        {
+          "textEl": "Να προσθέσεις τη δική σου προσωπική άποψη πάνω στο θέμα.",
+          "textEn": "Adding your own personal opinion on the topic.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Να αναδιατυπώσεις τις κύριες ιδέες με δικά σου λόγια.",
+          "textEn": "Reformulating the main ideas in your own words.",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.summary-vs-opinion"
+        },
+        {
+          "textEl": "Να κρατήσεις μόνο τα σημαντικά σημεία.",
+          "textEn": "Keeping only the important points.",
+          "isCorrect": false,
+          "gapTag": "glossa-b-gym.summary-vs-opinion"
+        }
+      ]
+    }
+  ]
+},
     "istoria-b-gymnasiou": {
       "id": "istoria-b-gymnasiou",
       "grades": [
@@ -10259,115 +10281,115 @@ const QUIZZES = {
       ]
     },
     "english-b-gymnasiou": {
-      "id": "english-b-gymnasiou",
-      "grades": [
-        "b"
-      ],
-      "subjectLabelEl": "Αγγλικά, Β' Γυμνασίου (B1)",
-      "subjectLabelEn": "English, 8th Grade (B1)",
-      "titleEl": "Ο Χάρτης Εξάσκησης Αγγλικών",
-      "titleEn": "The English Practice Map",
-      "introEl": "4 σύντομες ερωτήσεις. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      "introEn": "4 short questions. It's not a test, there's no grade.",
-      "questions": [
+  "id": "english-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Αγγλικά, Β' Γυμνασίου (B1)",
+  "subjectLabelEn": "English, 8th Grade (B1)",
+  "titleEl": "Ο Χάρτης Εξάσκησης Αγγλικών",
+  "titleEn": "The English Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις σε γραμματικά φαινόμενα που υπάρχουν στα επίσημα πακέτα Β΄ Γυμνασίου. Στην AI Μελέτη επιλέγεται πρώτα Αρχάριοι ή Προχωρημένοι και μετά το πραγματικό Unit.",
+  "introEn": "4 short questions on language features found in the official B Gymnasium packages. In AI Study, choose Beginner or Advanced first, then the actual Unit.",
+  "questions": [
+    {
+      "id": "q1-present-perfect",
+      "textEl": "'I ___ Paris. It was amazing!' (χωρίς συγκεκριμένο χρόνο). Ποιο ταιριάζει;",
+      "textEn": "'I ___ Paris. It was amazing!' (no specific time). Which fits?",
+      "options": [
         {
-          "id": "q1-present-perfect",
-          "textEl": "'I ___ Paris. It was amazing!' (χωρίς συγκεκριμένο χρόνο). Ποιο ταιριάζει;",
-          "textEn": "'I ___ Paris. It was amazing!' (no specific time). Which fits?",
-          "options": [
-            {
-              "textEl": "have visited",
-              "textEn": "have visited",
-              "isCorrect": true
-            },
-            {
-              "textEl": "visited",
-              "textEn": "visited",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.present-perfect-intro"
-            },
-            {
-              "textEl": "visit",
-              "textEn": "visit",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.present-perfect-intro"
-            }
-          ]
+          "textEl": "have visited",
+          "textEn": "have visited",
+          "isCorrect": true
         },
         {
-          "id": "q2-must-should",
-          "textEl": "'You ___ wear a seatbelt, it's the law.' Ποιο ταιριάζει;",
-          "textEn": "'You ___ wear a seatbelt, it's the law.' Which fits?",
-          "options": [
-            {
-              "textEl": "must",
-              "textEn": "must",
-              "isCorrect": true
-            },
-            {
-              "textEl": "should",
-              "textEn": "should",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.modals-obligation"
-            },
-            {
-              "textEl": "could",
-              "textEn": "could",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.modals-obligation"
-            }
-          ]
+          "textEl": "visited",
+          "textEn": "visited",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.present-perfect-intro"
         },
         {
-          "id": "q3-passive",
-          "textEl": "Δεν ξέρουμε ποιος έκτισε το κάστρο. Ποια πρόταση ταιριάζει;",
-          "textEn": "We don't know who built the castle. Which sentence fits?",
-          "options": [
-            {
-              "textEl": "'The castle was built in 1200.'",
-              "textEn": "'The castle was built in 1200.'",
-              "isCorrect": true
-            },
-            {
-              "textEl": "'Someone unknown built the castle in 1200 and we don't know who.'",
-              "textEn": "'Someone unknown built the castle in 1200 and we don't know who.'",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.passive-voice-intro"
-            },
-            {
-              "textEl": "'The castle builds in 1200.'",
-              "textEn": "'The castle builds in 1200.'",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.passive-voice-intro"
-            }
-          ]
-        },
-        {
-          "id": "q4-relative",
-          "textEl": "'The woman ___ lives next door is a doctor.' Ποιο ταιριάζει;",
-          "textEn": "'The woman ___ lives next door is a doctor.' Which fits?",
-          "options": [
-            {
-              "textEl": "who",
-              "textEn": "who",
-              "isCorrect": true
-            },
-            {
-              "textEl": "which",
-              "textEn": "which",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.relative-clauses"
-            },
-            {
-              "textEl": "what",
-              "textEn": "what",
-              "isCorrect": false,
-              "gapTag": "efl-b-gym.relative-clauses"
-            }
-          ]
+          "textEl": "visit",
+          "textEn": "visit",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.present-perfect-intro"
         }
       ]
     },
+    {
+      "id": "q2-must-should",
+      "textEl": "'You ___ wear a seatbelt, it's the law.' Ποιο ταιριάζει;",
+      "textEn": "'You ___ wear a seatbelt, it's the law.' Which fits?",
+      "options": [
+        {
+          "textEl": "must",
+          "textEn": "must",
+          "isCorrect": true
+        },
+        {
+          "textEl": "should",
+          "textEn": "should",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.modals-obligation"
+        },
+        {
+          "textEl": "could",
+          "textEn": "could",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.modals-obligation"
+        }
+      ]
+    },
+    {
+      "id": "q3-passive",
+      "textEl": "Δεν ξέρουμε ποιος έκτισε το κάστρο. Ποια πρόταση ταιριάζει;",
+      "textEn": "We don't know who built the castle. Which sentence fits?",
+      "options": [
+        {
+          "textEl": "'The castle was built in 1200.'",
+          "textEn": "'The castle was built in 1200.'",
+          "isCorrect": true
+        },
+        {
+          "textEl": "'Someone unknown built the castle in 1200 and we don't know who.'",
+          "textEn": "'Someone unknown built the castle in 1200 and we don't know who.'",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.passive-voice-intro"
+        },
+        {
+          "textEl": "'The castle builds in 1200.'",
+          "textEn": "'The castle builds in 1200.'",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.passive-voice-intro"
+        }
+      ]
+    },
+    {
+      "id": "q4-relative",
+      "textEl": "'The woman ___ lives next door is a doctor.' Ποιο ταιριάζει;",
+      "textEn": "'The woman ___ lives next door is a doctor.' Which fits?",
+      "options": [
+        {
+          "textEl": "who",
+          "textEn": "who",
+          "isCorrect": true
+        },
+        {
+          "textEl": "which",
+          "textEn": "which",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.relative-clauses"
+        },
+        {
+          "textEl": "what",
+          "textEn": "what",
+          "isCorrect": false,
+          "gapTag": "efl-b-gym.relative-clauses"
+        }
+      ]
+    }
+  ]
+},
     "fysiki-g-gymnasiou": {
       "id": "fysiki-g-gymnasiou",
       "grades": [
@@ -11005,139 +11027,115 @@ const QUIZZES = {
       ]
     },
     "biologia-b-gymnasiou": {
-      "id": "biologia-b-gymnasiou",
-      "grades": [
-        "b"
-      ],
-      "subjectLabelEl": "Βιολογία, Β' Γυμνασίου",
-      "subjectLabelEn": "Biology, 8th Grade",
-      "titleEl": "Ο Χάρτης Εξάσκησης Βιολογίας",
-      "titleEn": "The Biology Practice Map",
-      "introEl": "5 σύντομες ερωτήσεις για τα συστήματα του σώματος. Δεν είναι διαγώνισμα, δεν έχει βαθμό.",
-      "introEn": "5 short questions about body systems. It's not a test, there's no grade.",
-      "questions": [
+  "id": "biologia-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Βιολογία, Β' Γυμνασίου",
+  "subjectLabelEn": "Biology, 8th Grade",
+  "titleEl": "Ο Χάρτης Εξάσκησης Βιολογίας",
+  "titleEn": "The Biology Practice Map",
+  "introEl": "4 σύντομες ερωτήσεις από την επαληθευμένη ύλη Β΄ Γυμνασίου 2026–27, η οποία αντλείται από δύο επίσημα σχολικά βιβλία.",
+  "introEn": "4 short questions from the verified 2026–27 B Gymnasium syllabus, which draws from two official schoolbooks.",
+  "questions": [
+    {
+      "id": "q1-musculoskeletal",
+      "textEl": "Ποια δομή συνδέει συνήθως έναν μυ με ένα οστό;",
+      "textEn": "Which structure usually connects a muscle to a bone?",
+      "options": [
         {
-          "id": "q1-gas-exchange",
-          "textEl": "Ποιο όργανο είναι υπεύθυνο για την ανταλλαγή οξυγόνου-διοξειδίου του άνθρακα;",
-          "textEn": "Which organ is responsible for oxygen-carbon dioxide exchange?",
-          "options": [
-            {
-              "textEl": "Οι πνεύμονες.",
-              "textEn": "The lungs.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Η καρδιά.",
-              "textEn": "The heart.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.gas-exchange-organ"
-            },
-            {
-              "textEl": "Το συκώτι.",
-              "textEn": "The liver.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.gas-exchange-organ"
-            }
-          ]
+          "textEl": "Ο τένοντας.",
+          "textEn": "A tendon.",
+          "isCorrect": true
         },
         {
-          "id": "q2-heart-role",
-          "textEl": "Ο κύριος ρόλος της καρδιάς είναι να...",
-          "textEn": "The heart's main role is to...",
-          "options": [
-            {
-              "textEl": "Αντλεί το αίμα σε όλο το σώμα.",
-              "textEn": "Pump blood throughout the body.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Καθαρίζει το αίμα από τοξίνες.",
-              "textEn": "Clean toxins from the blood.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.heart-role"
-            },
-            {
-              "textEl": "Παράγει οξυγόνο.",
-              "textEn": "Produce oxygen.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.heart-role"
-            }
-          ]
+          "textEl": "Η αρτηρία.",
+          "textEn": "An artery.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.musculoskeletal-system"
         },
         {
-          "id": "q3-blood-function",
-          "textEl": "Τι μεταφέρει κυρίως το αίμα στο σώμα;",
-          "textEn": "What does blood mainly transport in the body?",
-          "options": [
-            {
-              "textEl": "Οξυγόνο, θρεπτικά συστατικά και απόβλητα.",
-              "textEn": "Oxygen, nutrients, and waste.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Μόνο νερό.",
-              "textEn": "Only water.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.blood-function"
-            },
-            {
-              "textEl": "Μόνο οξυγόνο.",
-              "textEn": "Only oxygen.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.blood-function"
-            }
-          ]
-        },
-        {
-          "id": "q4-producers",
-          "textEl": "Σε ένα οικοσύστημα, τι είναι οι «παραγωγοί»;",
-          "textEn": "In an ecosystem, what are 'producers'?",
-          "options": [
-            {
-              "textEl": "Οργανισμοί (κυρίως φυτά) που παράγουν τροφή μέσω φωτοσύνθεσης.",
-              "textEn": "Organisms (mainly plants) that make food through photosynthesis.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Οργανισμοί που τρώνε άλλα ζώα.",
-              "textEn": "Organisms that eat other animals.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.producer-definition"
-            },
-            {
-              "textEl": "Οργανισμοί που αποσυνθέτουν νεκρή ύλη.",
-              "textEn": "Organisms that decompose dead matter.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.producer-definition"
-            }
-          ]
-        },
-        {
-          "id": "q5-nervous-system",
-          "textEl": "Το νευρικό σύστημα βοηθάει τον οργανισμό κυρίως να...",
-          "textEn": "The nervous system mainly helps the organism to...",
-          "options": [
-            {
-              "textEl": "Αντιλαμβάνεται ερεθίσματα και ανταποκρίνεται γρήγορα.",
-              "textEn": "Perceive stimuli and respond quickly.",
-              "isCorrect": true
-            },
-            {
-              "textEl": "Παράγει ενέργεια από την τροφή.",
-              "textEn": "Produce energy from food.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.nervous-system-role"
-            },
-            {
-              "textEl": "Μεταφέρει οξυγόνο.",
-              "textEn": "Transport oxygen.",
-              "isCorrect": false,
-              "gapTag": "biologia-b-gym.nervous-system-role"
-            }
-          ]
+          "textEl": "Το νεύρο.",
+          "textEn": "A nerve.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.musculoskeletal-system"
         }
       ]
     },
+    {
+      "id": "q2-plant-reproduction",
+      "textEl": "Ποια διαδικασία μεταφέρει τη γύρη προς το στίγμα ενός άνθους;",
+      "textEn": "Which process transfers pollen to the stigma of a flower?",
+      "options": [
+        {
+          "textEl": "Η επικονίαση.",
+          "textEn": "Pollination.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Η πέψη.",
+          "textEn": "Digestion.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.plant-reproduction"
+        },
+        {
+          "textEl": "Η αναπνοή.",
+          "textEn": "Respiration.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.plant-reproduction"
+        }
+      ]
+    },
+    {
+      "id": "q3-homeostasis",
+      "textEl": "Τι περιγράφει καλύτερα η ομοιόσταση;",
+      "textEn": "What best describes homeostasis?",
+      "options": [
+        {
+          "textEl": "Τη διατήρηση σχετικά σταθερών εσωτερικών συνθηκών στον οργανισμό.",
+          "textEn": "Maintaining relatively stable internal conditions in the organism.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Τη μόνιμη αύξηση της θερμοκρασίας του σώματος.",
+          "textEn": "A permanent increase in body temperature.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.homeostasis"
+        },
+        {
+          "textEl": "Την παραγωγή τροφής με φωτοσύνθεση στον άνθρωπο.",
+          "textEn": "Producing food by photosynthesis in humans.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.homeostasis"
+        }
+      ]
+    },
+    {
+      "id": "q4-defense",
+      "textEl": "Ποιος είναι βασικός ρόλος των αμυντικών μηχανισμών του ανθρώπινου οργανισμού;",
+      "textEn": "What is a basic role of the human body's defense mechanisms?",
+      "options": [
+        {
+          "textEl": "Να προστατεύουν από παθογόνους μικροοργανισμούς και άλλους βλαπτικούς παράγοντες.",
+          "textEn": "To protect against pathogens and other harmful agents.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Να μετατρέπουν τα οστά σε μύες.",
+          "textEn": "To turn bones into muscles.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.defense-mechanisms"
+        },
+        {
+          "textEl": "Να σταματούν όλες τις λειτουργίες του οργανισμού.",
+          "textEn": "To stop all body functions.",
+          "isCorrect": false,
+          "gapTag": "biologia-b-gym.defense-mechanisms"
+        }
+      ]
+    }
+  ]
+},
     "biologia-g-gymnasiou": {
       "id": "biologia-g-gymnasiou",
       "grades": [

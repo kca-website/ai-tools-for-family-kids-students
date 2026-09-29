@@ -33,7 +33,7 @@
   <meta name="twitter:title" content="aitools4kids.gr — Μαθαίνω Έξυπνα με AI" />
   <meta name="twitter:description" content="Δωρεάν, δίγλωσσος οδηγός AI για παιδιά και μαθητές 4-18, γονείς και εκπαιδευτικούς, με Χάρτη Εξάσκησης και προαιρετική AI Βοήθεια." />
   <meta name="twitter:image" content="https://www.aitools4kids.gr/social-preview-20260926.png" />
-  <meta name="theme-color" content="#3B82C4" />
+  <meta name="theme-color" content="#1D5D8C" />
 
   <!-- Structured data για τη Google (rich results) -->
   <script type="application/ld+json">
@@ -331,7 +331,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/navigator-home.css" data-navigator-home="1" />
   <style id="navigatorHomeFirstPaintGuard">
@@ -371,12 +371,18 @@
     </div>
   </noscript>
 
+  <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Μετάβαση στο περιεχόμενο</a>
   <header class="site-header">
     <div class="site-header__inner">
-      <p class="site-title">
-        <span aria-hidden="true">🤖</span>
+      <a class="site-title" href="/">
+        <span class="site-title__mark" aria-hidden="true">ai</span>
         <span id="siteTitleText">aitools4kids.gr</span>
-      </p>
+      </a>
+      <nav class="site-nav" aria-label="Κύριο μενού" data-i18n-aria="navLabel">
+        <a class="site-nav__link" href="/#homeV8FinderTitle" data-i18n="navTools">Εργαλεία</a>
+        <a class="site-nav__link" href="/study.html" data-i18n="navStudy">AI Μελέτη</a>
+        <a class="site-nav__link" href="/#homeV8AiTitle" data-i18n="navHelp">AI Βοήθεια</a>
+      </nav>
       <div class="site-header__actions">
         <a class="classroom-menu-link" href="/teacher-assistant.html" aria-label="Για την τάξη / Classroom">
           <span aria-hidden="true">🏫</span>
@@ -384,26 +390,55 @@
         </a>
         <div class="lang-toggle" role="group" aria-label="Language switch">
           <button type="button" id="langEl" class="active" data-lang="el">ΕΛ</button>
-          <button type="button" id="langEn" data-lang="en">EN</button>
+          <button type="button" id="langEn" data-lang="en" lang="en">EN</button>
         </div>
+        <button type="button" class="site-menu-toggle" id="siteMenuToggle" aria-expanded="false" aria-controls="siteMenuPanel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+          <span data-i18n="navMenu">Μενού</span>
+        </button>
       </div>
+    </div>
+    <div class="site-menu-panel" id="siteMenuPanel" hidden>
+      <nav class="site-menu-panel__inner" aria-label="Όλες οι ενότητες" data-i18n-aria="navAllLabel">
+        <div class="site-menu-panel__group">
+          <p class="site-menu-panel__title" data-i18n="navGroupFind">Βρες το σωστό AI</p>
+          <a href="/#homeV8FinderTitle" data-i18n="navByLevel">Εργαλεία ανά βαθμίδα</a>
+          <a href="/ti-thelo-na-kano-me-ai.html" data-i18n="navWhatToDo">Τι θέλεις να κάνεις με AI;</a>
+        </div>
+        <div class="site-menu-panel__group">
+          <p class="site-menu-panel__title" data-i18n="navGroupLearn">Μάθηση</p>
+          <a href="/study.html" data-i18n="navStudy">AI Μελέτη</a>
+          <a href="/#homeV8AiTitle" data-i18n="navHelp">AI Βοήθεια</a>
+          <a href="/#homeV8MapTitle" data-i18n="navPractice">Χάρτης Εξάσκησης</a>
+          <a href="/xartis-ylis.html" data-i18n="navCurriculum">Χάρτης Ύλης 2026–27</a>
+        </div>
+        <div class="site-menu-panel__group">
+          <p class="site-menu-panel__title" data-i18n="navGroupMore">Περισσότερα</p>
+          <a href="/teacher-assistant.html" data-i18n="navClassroom">Για εκπαιδευτικούς</a>
+          <a href="/sign-language.html" data-i18n="navSignLanguage">Ελληνική Νοηματική</a>
+          <a href="/special-education.html" data-i18n="navSpecial">Ειδική Εκπαίδευση</a>
+          <a href="/higher-education-pilot.html" data-i18n="navUniversity">Φοιτητές ΑΕΙ · Πιλοτικό</a>
+        </div>
+      </nav>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" id="mainContent" tabindex="-1">
 
     <!-- ΒΗΜΑ 1: Επιλογή ζώνης -->
     <section id="zoneSelectView">
 
       <div class="hero">
+        <div class="home-v9-top" id="homeV9Top">
+        <div class="home-v9-intro">
         <h1 class="hero__title" data-i18n="heroTitle">
-          Μαθαίνω Έξυπνα με AI
+          Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.
         </h1>
         <p class="hero__subtitle" data-i18n="heroSubtitle">
-          Βρες το κατάλληλο AI εργαλείο για αυτό που θέλεις να κάνεις και δες πώς να το χρησιμοποιήσεις σωστά. Για γονείς, παιδιά και μαθητές 4 έως 18 και εκπαιδευτικούς.
+          Βρες το κατάλληλο AI για το μάθημα, την ηλικία και αυτό που θέλεις να κάνεις. Ή χρησιμοποίησε τη δωρεάν AI Μελέτη πάνω στην επίσημη σχολική ύλη.
         </p>
         <div class="hero__badges">
-          <span class="badge badge--success" data-i18n="badgeFree">Δωρεάν</span>
+          <span class="badge badge--success badge--free" data-i18n="badgeFree">Δωρεάν για όλους</span>
           <span class="badge badge--accent" data-i18n="badgeIndependent">Ανεξάρτητο</span>
           <span class="badge badge--pro" data-i18n="badgeBilingual">Δίγλωσσο EL / EN</span>
           <details class="privacy-badge-details">
@@ -413,6 +448,11 @@
             </p>
           </details>
         </div>
+        <div class="home-v9-finder" id="homeV9Finder"></div>
+        </div>
+        <div class="home-v9-principle" id="homeV9Principle"></div>
+        </div>
+        <div class="home-v9-trust" id="homeV9Trust"></div>
 
         <div class="hero__learning-loop" role="group" aria-labelledby="heroFlowLabel">
           <p id="heroFlowLabel" class="hero__learning-loop-label" data-i18n="heroFlowLabel">Η διαδρομή μάθησης</p>
@@ -506,7 +546,7 @@
       </details>
 
       <a class="home-video-new" id="homeVideoNew" href="/teacher-assistant.html?task=video#builder" aria-label="Νέο: Δημιουργία εκπαιδευτικών βίντεο">
-        <span class="home-video-new__icon" aria-hidden="true">🎥</span>
+        <span class="home-video-new__icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="3" y="6" width="13" height="12" rx="2"></rect><path d="M16 10l5-3v10l-5-3z"></path></svg></span>
         <span class="home-video-new__copy">
           <span class="home-video-new__badge" data-i18n="homeVideoNewBadge">Νέο</span>
           <strong data-i18n="homeVideoNewTitle">Δημιουργία εκπαιδευτικών βίντεο</strong>
@@ -531,7 +571,7 @@
       -->
       <section class="home-v8-eng" id="homeV8Eng" aria-labelledby="homeV8EngTitle" data-canonical-count="167">
         <div class="home-v8-eng__copy">
-          <span class="home-v8-eng__icon" aria-hidden="true">🤟</span>
+          <span class="home-v8-eng__icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M8 13V6a1.5 1.5 0 0 1 3 0v5M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6a1.5 1.5 0 0 1 3 0v7c0 4-2.5 7-6 7-2.5 0-4-1.5-5.5-4l-2-3.5a1.5 1.5 0 0 1 2.5-1.5L8 13"></path></svg></span>
           <div>
             <h2 id="homeV8EngTitle">Έννοιες στην Ελληνική Νοηματική</h2>
             <p>167 σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ</p>
@@ -712,6 +752,7 @@
   <script defer src="/tutor.js"></script>
   <script defer src="/app.js"></script>
   <script defer src="/site-postfix.js"></script>
+  <script defer src="/site-nav.js"></script>
   <script defer src="/pwa.js" data-aitools4kids-pwa="1"></script>
 
   <!-- Vercel Web Analytics -->

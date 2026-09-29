@@ -15,7 +15,7 @@
 
   const COPY = {
     el: {
-      finderTitle: "Διάλεξε ηλικιακή ζώνη και βρες το κατάλληλο εργαλείο",
+      finderTitle: "Διάλεξε βαθμίδα ή διαδρομή",
       specialTitle: "Ειδικά σχολεία",
       specialAge: "Ειδική Εκπαίδευση",
       specialDesc: "Ειδικό Γυμνάσιο, Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ.",
@@ -29,7 +29,7 @@
       studyCardBadge: "Νέο · Δωρεάν",
       studyCardTitle: "AI Μελέτη",
       studyCardDesc: "Ύλη ή δικές σου σημειώσεις → εξήγηση, κάρτες, quiz, προφορική/γραπτή πρόβα, εντοπισμός κενών και πλάνο.",
-      mapTitle: "🧭 Χάρτης Εξάσκησης",
+      mapTitle: "Χάρτης Εξάσκησης",
       mapLead: "Δες πού χρειάζεσαι λίγη παραπάνω εξάσκηση.",
       mapDesc: "Σύντομο τεστ περίπου 2 λεπτών, χωρίς βαθμό.",
       mapPrimary: "Δημοτικό",
@@ -73,10 +73,53 @@
       curriculumPrefix: "Δες και:",
       curriculumLabel: "Ελληνικός Χάρτης Ύλης 2026-27",
       methodology: "Πώς επιλέγουμε & ελέγχουμε τα εργαλεία",
-      report: "Βρήκες λάθος ή παλιωμένη πληροφορία; ↗"
+      report: "Βρήκες λάθος ή παλιωμένη πληροφορία; ↗",
+      zonesLead: "Σε κάθε βαθμίδα: εργαλεία με όριο ηλικίας, Χάρτης Εξάσκησης, μονοπάτια μάθησης και οδηγός χρήσης.",
+      otherRoutes: "Άλλες διαδρομές",
+      stepsLabel: "Ξεκίνα σε 3 βήματα",
+      stepRole: "1 · Ποιος είσαι;",
+      stepZone: "2 · Βαθμίδα ή διαδρομή",
+      stepNeed: "3 · Τι χρειάζεσαι σήμερα;",
+      roles: { guardian: "Γονιός", student: "Μαθητής / Μαθήτρια", teacher: "Εκπαιδευτικός" },
+      zones: { preschool: ["Νηπιαγωγείο","4–6"], primary: ["Δημοτικό","6–12"], middle: ["Γυμνάσιο","12–15"], high: ["Λύκειο","15–18"], special: ["Ειδική Εκπαίδευση",""] },
+      finderNeeds: { tools: "Να βρω το κατάλληλο AI", practice: "Εξάσκηση σε μάθημα", stuck: "Κόλλησα σε άσκηση", study: "Μελέτη πάνω στην ύλη" },
+      ctaTools: "Δες εργαλεία για", ctaPractice: "Χάρτης Εξάσκησης για", ctaStuck: "AI Βοήθεια για", ctaStudy: "Άνοιξε την AI Μελέτη", ctaPreschool: "Δραστηριότητες Νηπιαγωγείου", ctaSpecial: "Άνοιξε την Ειδική Εκπαίδευση",
+      notePreschool: "Στο Νηπιαγωγείο ο ενήλικας χειρίζεται το εργαλείο. Θα δεις δραστηριότητες για γονείς και εκπαιδευτικούς.",
+      notePrimaryStudent: "Στο Δημοτικό τα εργαλεία χρησιμοποιούνται μαζί με ενήλικα. Θα δεις και οδηγίες για τον γονιό.",
+      noteMiddleStudent: "Πολλά εργαλεία ζητούν 13+ ή 15+. Κάθε κάρτα δείχνει το όριο ηλικίας.",
+      noteMiddleStuck: "Η AI Βοήθεια για μαθητές Γυμνασίου ανοίγει από 13 ετών. Διάλεξε πρώτα την ηλικία σου στην επόμενη σελίδα.",
+      noteHigh: "Για ΕΠΑΛ θα διαλέξεις στη συνέχεια τάξη και, όπου χρειάζεται, τομέα ή ειδικότητα.",
+      noteSpecial: "Διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ.",
+      principleLabel: "Η διαδρομή μάθησης",
+      principleQuote: "«Δείξε μου πώς να το μάθω, όχι τη λύση.»",
+      principleSteps: [["Δυσκολία","«Δεν το καταλαβαίνω»"],["Εντοπισμός","Χάρτης Εξάσκησης"],["Εξάσκηση","σωστό εργαλείο"],["Καθοδήγηση","μία υπόδειξη τη φορά"],["Ξαναδοκιμή","χωρίς AI"]],
+      trustTools: (n) => `${n} εργαλεία με έλεγχο ορίου ηλικίας`,
+      trustGreek: "Ένδειξη υποστήριξης Ελληνικών",
+      trustMethod: "Πώς ελέγχουμε τα εργαλεία",
+      waysTitle: "Τρεις τρόποι να ξεκινήσεις",
+      waysLead: "Διάλεξε έναν. Όλοι λειτουργούν χωρίς λογαριασμό.",
+      mapCta: "Διάλεξε βαθμίδα:",
+      curriculumAction: "Άνοιξε τον Χάρτη Ύλης →",
+      aiLinksLabel: "Άνοιξε για:",
+      studyBadge: "Νέο · Δωρεάν",
+      studyTitle: "AI Μελέτη",
+      studyDesc: "Πες τι διαβάζεις και πόσο χρόνο έχεις. Πάρε mini πλάνο με κατανόηση, ανάκληση, εξάσκηση και τελικό έλεγχο χωρίς AI.",
+      studyOfficial: "Βασισμένη στο επίσημο σχολικό βιβλίο · Ύλη 2026–27",
+      studyCoverage: "Διαθέσιμο σε επιλεγμένα μαθήματα · η κάλυψη μεγαλώνει",
+      studyGoals: ["Να το καταλάβω","Επανάληψη","Γράφω τεστ","Εξάσκηση"],
+      studySteps: [["Ύλη ή σημειώσεις","Ενότητα του επίσημου βιβλίου ή δικό σου PDF"],["Κατανόηση","Απλή εξήγηση, που μπορείς και να ακούσεις"],["Εξάσκηση","Κάρτες ενεργής ανάκλησης"],["Έλεγχος","Τελική ερώτηση χωρίς AI"]],
+      studyCta: "Φτιάξε το πλάνο μελέτης σου →",
+      charBadge: "Βιωματική μάθηση",
+      charTitle: "Μίλα με έναν χαρακτήρα της Ιστορίας",
+      charDesc: "Τεκμηριωμένος διάλογος με πρόσωπα από την ύλη και μετά έλεγχος του τι πραγματικά έμαθες.",
+      charCta: "Ξεκίνα μια συζήτηση →",
+      chatLabel: "Έτσι απαντά η AI Βοήθεια",
+      chatQ: "Δεν καταλαβαίνω πώς λύνεται η 3x + 5 = 20.",
+      chatA: "Πάμε μαζί. Τι θα κάνεις πρώτα για να μείνει μόνο το 3x στη μία πλευρά;",
+      chars: [["socrates","Σωκράτης","Αρχαία Αθήνα"],["pericles","Περικλής","Χρυσός αιώνας"],["greek-revolution-1821","Αγωνιστής του 1821","Επανάσταση"]]
     },
     en: {
-      finderTitle: "Choose an age group and find the right tool",
+      finderTitle: "Choose a school level or pathway",
       specialTitle: "Special schools",
       specialAge: "Special Education",
       specialDesc: "Special Gymnasium, Special Lyceum, EN.E.E.GY.-L.",
@@ -90,7 +133,7 @@
       studyCardBadge: "New · Free",
       studyCardTitle: "AI Study",
       studyCardDesc: "Curriculum or your own notes → explanation, recall cards, quizzes, oral/written practice, gap finding and a study plan.",
-      mapTitle: "🧭 Practice Map",
+      mapTitle: "Practice Map",
       mapLead: "See where a little more practice could help.",
       mapDesc: "A short check of about 2 minutes, with no grade.",
       mapPrimary: "Primary",
@@ -134,7 +177,50 @@
       curriculumPrefix: "See also:",
       curriculumLabel: "Greek Curriculum Map 2026-27",
       methodology: "How we choose and review tools",
-      report: "Found an error or outdated information? ↗"
+      report: "Found an error or outdated information? ↗",
+      zonesLead: "In every level: age-checked tools, Practice Map, learning paths and a usage guide.",
+      otherRoutes: "Other pathways",
+      stepsLabel: "Start in 3 steps",
+      stepRole: "1 · Who are you?",
+      stepZone: "2 · Level or pathway",
+      stepNeed: "3 · What do you need today?",
+      roles: { guardian: "Parent", student: "Student", teacher: "Educator" },
+      zones: { preschool: ["Preschool","4–6"], primary: ["Primary","6–12"], middle: ["Middle School","12–15"], high: ["High School","15–18"], special: ["Special Education",""] },
+      finderNeeds: { tools: "Find the right AI", practice: "Practise a subject", stuck: "I'm stuck on an exercise", study: "Study the curriculum" },
+      ctaTools: "See tools for", ctaPractice: "Practice Map for", ctaStuck: "AI Help for", ctaStudy: "Open AI Study", ctaPreschool: "Preschool activities", ctaSpecial: "Open Special Education",
+      notePreschool: "In preschool the adult operates the tool. You will see activities for parents and educators.",
+      notePrimaryStudent: "In primary school, tools are used together with an adult. You will also see guidance for parents.",
+      noteMiddleStudent: "Many tools require 13+ or 15+. Every card shows the age limit.",
+      noteMiddleStuck: "AI Help for middle-school students opens from age 13. Choose your age first on the next page.",
+      noteHigh: "For EPAL you will then choose a grade and, where needed, a sector or specialty.",
+      noteSpecial: "Pathway for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L.",
+      principleLabel: "The learning path",
+      principleQuote: "“Show me how to learn it, not the answer.”",
+      principleSteps: [["Difficulty","“I don't get it”"],["Spot it","Practice Map"],["Practise","the right tool"],["Guidance","one hint at a time"],["Try again","without AI"]],
+      trustTools: (n) => `${n} tools with checked age limits`,
+      trustGreek: "Greek-language support shown",
+      trustMethod: "How we review tools",
+      waysTitle: "Three ways to start",
+      waysLead: "Pick one. None of them needs an account.",
+      mapCta: "Choose a level:",
+      curriculumAction: "Open the Curriculum Map →",
+      aiLinksLabel: "Open for:",
+      studyBadge: "New · Free",
+      studyTitle: "AI Study",
+      studyDesc: "Tell it what you're studying and how much time you have. Get a mini plan with understanding, recall, practice and a final check without AI.",
+      studyOfficial: "Based on the official school textbook · Curriculum 2026–27",
+      studyCoverage: "Available for selected subjects · coverage is growing",
+      studyGoals: ["Understand it","Revise","Test coming up","Practise"],
+      studySteps: [["Curriculum or notes","A unit of the official book or your own PDF"],["Understand","A simple explanation you can also listen to"],["Practise","Active-recall cards"],["Check","A final question without AI"]],
+      studyCta: "Build your study plan →",
+      charBadge: "Experiential learning",
+      charTitle: "Talk with a character from history",
+      charDesc: "A grounded dialogue with people from the curriculum, then a check of what you actually learned.",
+      charCta: "Start a conversation →",
+      chatLabel: "How AI Help answers",
+      chatQ: "I don't understand how to solve 3x + 5 = 20.",
+      chatA: "Let's do it together. What will you do first so that only 3x stays on one side?",
+      chars: [["socrates","Socrates","Ancient Athens"],["pericles","Pericles","Golden Age"],["greek-revolution-1821","Fighter of 1821","Greek Revolution"]]
     }
   };
 
@@ -254,87 +340,252 @@
     return card;
   }
 
-  function ensureCurriculumMapCard(){
-    const grid = document.getElementById("zoneGrid");
-    if(!grid) return null;
-    let card = document.getElementById("homeCurriculumMapCard");
-    if(!card){
-      card = document.createElement("a");
-      card.id = "homeCurriculumMapCard";
-      card.className = "zone-card home-v8-curriculum-card";
-      card.href = "/xartis-ylis.html";
-      card.innerHTML = '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label"></p><p class="zone-card__age"></p><p class="zone-card__desc"></p>';
-    }
-    if(card.parentElement !== grid) grid.appendChild(card);
-    const copy = currentCopy();
-    card.querySelector(".zone-card__label").textContent = copy.curriculumCardTitle;
-    card.querySelector(".zone-card__age").textContent = copy.curriculumCardBadge;
-    card.querySelector(".zone-card__desc").textContent = copy.curriculumCardDesc;
-    card.setAttribute("aria-label", `${copy.curriculumCardTitle}: ${copy.curriculumCardBadge}`);
-    return card;
+  const ICON = {
+    check: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>',
+    compass: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M15.5 8.5l-2 5-5 2 2-5z"></path></svg>',
+    map: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"></path><path d="M9 4v14M15 6v14"></path></svg>',
+    chat: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4z"></path><path d="M9 10h6"></path></svg>',
+    book: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"></path><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"></path></svg>',
+    shield: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6z"></path><path d="M12 8v5M12 16.5v.01"></path></svg>'
+  };
+
+  const svg = (d) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${d}</svg>`;
+  const NEED_ICONS = [
+    svg('<path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5"></path>'),
+    svg('<circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path>'),
+    svg('<rect x="3" y="7" width="13" height="13" rx="2"></rect><path d="M8 4h11a2 2 0 0 1 2 2v11"></path>'),
+    svg('<rect x="3" y="4" width="18" height="12" rx="1.5"></rect><path d="M12 16v4M8 20h8"></path>'),
+    svg('<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"></path><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"></path>'),
+    svg('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"></path>'),
+    svg('<path d="M4 19h5v-5h5V9h6"></path>')
+  ];
+  const LEARNING_ICONS = [
+    svg('<path d="M4 11a8 8 0 0 1 14-5l2 2M20 13a8 8 0 0 1-14 5l-2-2"></path><path d="M20 4v4h-4M4 20v-4h4"></path>'),
+    svg('<circle cx="12" cy="8" r="4"></circle><path d="M5 21c1-4 4-6 7-6s6 2 7 6"></path>'),
+    svg('<circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle>')
+  ];
+  const HAND_ICON = svg('<path d="M8 13V6a1.5 1.5 0 0 1 3 0v5M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6a1.5 1.5 0 0 1 3 0v7c0 4-2.5 7-6 7-2.5 0-4-1.5-5.5-4l-2-3.5a1.5 1.5 0 0 1 2.5-1.5L8 13"></path>');
+
+  function escapeHtml(value){
+    return String(value ?? "").replace(/[&<>"']/g, (ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   }
 
-  function ensureStudyCard(){
+  // The Curriculum Map and AI Study now live in "Three ways to start" and in their
+  // own band; the old zone-grid copies are removed so each destination appears once.
+  function removeLegacyGridCards(){
+    document.getElementById("zoneGrid")?.querySelectorAll("#homeCurriculumMapCard.zone-card, #homeStudyZoneCard").forEach((el) => el.remove());
+  }
+
+  function ensureOtherRoutesLabel(){
     const grid = document.getElementById("zoneGrid");
-    if(!grid) return null;
-    let card = document.getElementById("homeStudyZoneCard");
-    if(!card){
-      card = document.createElement("a");
-      card.id = "homeStudyZoneCard";
-      card.className = "zone-card home-v8-study-card";
-      card.href = "/study.html";
-      card.innerHTML = '<span class="zone-card__icon" aria-hidden="true">📚</span><p class="zone-card__label"></p><p class="zone-card__age"></p><p class="zone-card__desc"></p>';
+    const special = document.getElementById("specialSchoolZoneCard");
+    if(!grid || !special || special.parentElement !== grid) return;
+    let label = document.getElementById("homeV9OtherRoutes");
+    if(!label){
+      label = document.createElement("h3");
+      label.id = "homeV9OtherRoutes";
+      label.className = "home-v9-other-routes";
     }
-    const curriculum = ensureCurriculumMapCard();
-    if(curriculum?.parentElement === grid){
-      if(card.previousElementSibling !== curriculum) curriculum.insertAdjacentElement("afterend", card);
-    }else if(card.parentElement !== grid){
-      grid.appendChild(card);
+    label.textContent = currentCopy().otherRoutes;
+    if(special.previousElementSibling !== label) grid.insertBefore(label, special);
+  }
+
+  // ---------- Hero: 3-step finder ----------
+  const finderState = { role: "student", zone: "middle", need: "tools" };
+
+  function finderHref(){
+    const { role, zone, need } = finderState;
+    if(zone === "preschool") return "/preschool";
+    if(zone === "special") return "/special-education.html";
+    if(need === "study") return "/study.html";
+    if(need === "practice") return `/${zone}/guardian/quiz`;
+    if(need === "stuck"){
+      if(zone === "primary") return "/primary/guardian/tutor";
+      return `/${zone}/${role === "student" ? "student" : "guardian"}/tutor`;
     }
-    const copy = currentCopy();
-    card.querySelector(".zone-card__label").textContent = copy.studyCardTitle;
-    card.querySelector(".zone-card__age").textContent = copy.studyCardBadge;
-    card.querySelector(".zone-card__desc").textContent = copy.studyCardDesc;
-    card.setAttribute("aria-label", `${copy.studyCardTitle}: ${copy.studyCardBadge}`);
-    return card;
+    return `/${zone}/${role === "student" ? "student" : "guardian"}/tools`;
+  }
+
+  function finderCta(c){
+    const { zone, need } = finderState;
+    if(zone === "preschool") return c.ctaPreschool;
+    if(zone === "special") return c.ctaSpecial;
+    if(need === "study") return c.ctaStudy;
+    const label = c.zones[zone][0];
+    const lead = need === "practice" ? c.ctaPractice : need === "stuck" ? c.ctaStuck : c.ctaTools;
+    return `${lead} ${label}`;
+  }
+
+  function finderNote(c){
+    const { role, zone } = finderState;
+    if(zone === "preschool") return c.notePreschool;
+    if(zone === "special") return c.noteSpecial;
+    if(zone === "primary" && role === "student") return c.notePrimaryStudent;
+    if(zone === "middle" && role === "student") return finderState.need === "stuck" ? c.noteMiddleStuck : c.noteMiddleStudent;
+    if(zone === "high") return c.noteHigh;
+    return "";
+  }
+
+  function chip(kind, value, label, pressed, extra){
+    return `<button type="button" class="home-v9-chip" data-finder-${kind}="${value}" aria-pressed="${pressed ? "true" : "false"}">${extra || ""}<span>${escapeHtml(label)}</span></button>`;
+  }
+
+  function renderFinder(){
+    const mount = document.getElementById("homeV9Finder");
+    if(!mount) return;
+    const c = currentCopy();
+    const roles = Object.entries(c.roles).map(([id,label]) => chip("role", id, label, finderState.role === id)).join("");
+    const zones = Object.entries(c.zones).map(([id,[label,age]]) => chip("zone", id, label, finderState.zone === id, `<span class="home-v9-chip__dot home-v9-dot--${id}" aria-hidden="true"></span>`) .replace(`<span>${escapeHtml(label)}</span></button>`, `<span>${escapeHtml(label)}</span>${age ? `<small>${age}</small>` : ""}</button>`)).join("");
+    const needs = Object.entries(c.finderNeeds).map(([id,label]) => chip("need", id, label, finderState.need === id)).join("");
+    const note = finderNote(c);
+    mount.innerHTML = `
+      <p class="home-v9-finder__label">${c.stepsLabel}</p>
+      <div class="home-v9-finder__step" role="group" aria-label="${escapeHtml(c.stepRole)}"><span class="home-v9-finder__step-title" aria-hidden="true">${c.stepRole}</span><div class="home-v9-finder__chips">${roles}</div></div>
+      <div class="home-v9-finder__step" role="group" aria-label="${escapeHtml(c.stepZone)}"><span class="home-v9-finder__step-title" aria-hidden="true">${c.stepZone}</span><div class="home-v9-finder__chips">${zones}</div></div>
+      <div class="home-v9-finder__step" role="group" aria-label="${escapeHtml(c.stepNeed)}"><span class="home-v9-finder__step-title" aria-hidden="true">${c.stepNeed}</span><div class="home-v9-finder__chips">${needs}</div></div>
+      <p class="home-v9-finder__note" aria-live="polite"${note ? "" : " hidden"}>${note ? ICON.shield + `<span>${escapeHtml(note)}</span>` : ""}</p>
+      <a class="home-v9-finder__cta" id="homeV9FinderCta" href="${finderHref()}">${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>`;
+  }
+
+  function renderPrinciple(){
+    const mount = document.getElementById("homeV9Principle");
+    if(!mount) return;
+    const c = currentCopy();
+    mount.innerHTML = `
+      <div class="home-v9-principle__card">
+        <p class="home-v9-principle__label">${c.principleLabel}</p>
+        <p class="home-v9-principle__quote">${c.principleQuote}</p>
+        <ol class="home-v9-principle__steps">
+          ${c.principleSteps.map(([title,sub],i) => `<li${i === 2 ? ' class="is-current"' : ""}><span class="home-v9-principle__num" aria-hidden="true">${i + 1}</span><span class="home-v9-principle__title">${title}</span><span class="home-v9-principle__sub">${sub}</span></li>`).join("")}
+        </ol>
+      </div>
+      <div class="home-v9-principle__chat">
+        <p class="home-v9-principle__chat-label">${c.chatLabel}</p>
+        <p class="home-v9-principle__bubble home-v9-principle__bubble--me">${c.chatQ}</p>
+        <p class="home-v9-principle__bubble home-v9-principle__bubble--ai">${c.chatA}</p>
+      </div>`;
+  }
+
+  function renderTrust(){
+    const mount = document.getElementById("homeV9Trust");
+    if(!mount) return;
+    const c = currentCopy();
+    const meta = window.AITOOLSKIDS_SITE_META || {};
+    const items = [];
+    if(Number(meta.canonicalToolCount) > 0) items.push(c.trustTools(Number(meta.canonicalToolCount)));
+    items.push(c.trustGreek);
+    const audit = isEnglish() ? meta.toolCatalogAuditLabelEn : meta.toolCatalogAuditLabelEl;
+    mount.innerHTML = `
+      <ul class="home-v9-trust__list">${items.map((t) => `<li>${ICON.check}<span>${escapeHtml(t)}</span></li>`).join("")}</ul>
+      ${audit ? `<p class="home-v9-trust__audit">${escapeHtml(audit)} · <a href="/methodology.html">${c.trustMethod}</a></p>` : ""}`;
   }
 
   function helpersMarkup(){
     const c = currentCopy();
     return `
       <div class="home-v8-helpers">
-        <section class="home-v8-map" aria-labelledby="homeV8MapTitle">
-          <h3 id="homeV8MapTitle">${c.mapTitle}</h3>
-          <p class="home-v8-map__lead">${c.mapLead}</p>
-          <p class="home-v8-helper-desc">${c.mapDesc}</p>
-          <div class="home-v8-helper-links">
-            <a href="/primary/guardian/quiz">${c.mapPrimary}</a>
-            <a href="/middle/guardian/quiz">${c.mapMiddle}</a>
-            <a href="/high/guardian/quiz">${c.mapGel}</a>
-            <a href="#" data-epal-practice-map>${c.mapEpal}</a>
-            <a href="#" data-special-education-diagnostic>${c.mapSpecial}</a>
-          </div>
-        </section>
+        <div class="home-v9-section-head">
+          <h2 id="homeV9WaysTitle">${c.waysTitle}</h2>
+          <p>${c.waysLead}</p>
+        </div>
+        <div class="home-v9-ways">
+          <section class="home-v8-map" aria-labelledby="homeV8MapTitle">
+            <span class="home-v9-way__icon" aria-hidden="true">${ICON.compass}</span>
+            <p class="home-v9-way__eyebrow">${c.mapDesc}</p>
+            <h3 id="homeV8MapTitle">${c.mapTitle}</h3>
+            <p class="home-v8-map__lead">${c.mapLead}</p>
+            <p class="home-v9-way__links-label">${c.mapCta}</p>
+            <div class="home-v8-helper-links">
+              <a href="/primary/guardian/quiz">${c.mapPrimary}</a>
+              <a href="/middle/guardian/quiz">${c.mapMiddle}</a>
+              <a href="/high/guardian/quiz">${c.mapGel}</a>
+              <a href="#" data-epal-practice-map>${c.mapEpal}</a>
+              <a href="#" data-special-education-diagnostic>${c.mapSpecial}</a>
+            </div>
+          </section>
 
-        <section class="home-v8-ai" aria-labelledby="homeV8AiTitle">
-          <div class="home-v8-ai__badges">
-            <span>${c.aiBadgeNew}</span>
-            <span>${c.aiBadgeFree}</span>
-          </div>
-          <h3 id="homeV8AiTitle">${c.aiTitle}</h3>
-          <p class="home-v8-helper-desc">${c.aiDesc}</p>
-          <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
-            <summary title="GPT-OSS 120B · Cloudflare Workers AI → Groq · Puter optional">${c.aiTechSummary}</summary>
-            <p>${c.aiTechText} <a href="/ai-transparency.html">${c.aiTechLink}</a></p>
-          </details>
-          <div class="home-v8-helper-links home-v8-ai__links">
-            <a href="/primary/guardian/tutor">${c.aiPrimary}</a>
-            <a href="/middle/student/tutor">${c.aiMiddle}</a>
-            <a href="/high/student/tutor">${c.aiHigh}</a>
-            <a href="/middle/student/tutor">${c.aiSpecial}</a>
-          </div>
-        </section>
+          <section class="home-v9-curriculum" aria-labelledby="homeV9CurriculumTitle">
+            <span class="home-v9-way__icon" aria-hidden="true">${ICON.map}</span>
+            <p class="home-v9-way__eyebrow">${c.curriculumCardBadge}</p>
+            <h3 id="homeV9CurriculumTitle">${c.curriculumCardTitle}</h3>
+            <p class="home-v8-helper-desc">${c.curriculumCardDesc}</p>
+            <a class="home-v9-way__action" id="homeCurriculumMapCard" href="/xartis-ylis.html">${c.curriculumAction}</a>
+          </section>
+
+          <section class="home-v8-ai" aria-labelledby="homeV8AiTitle">
+            <span class="home-v9-way__icon" aria-hidden="true">${ICON.chat}</span>
+            <div class="home-v8-ai__badges">
+              <span>${c.aiBadgeNew}</span>
+              <span>${c.aiBadgeFree}</span>
+            </div>
+            <h3 id="homeV8AiTitle">${c.aiTitle}</h3>
+            <p class="home-v8-helper-desc">${c.aiDesc}</p>
+            <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
+              <summary title="GPT-OSS 120B · Cloudflare Workers AI → Groq · Puter optional">${c.aiTechSummary}</summary>
+              <p>${c.aiTechText} <a href="/ai-transparency.html">${c.aiTechLink}</a></p>
+            </details>
+            <p class="home-v9-way__links-label">${c.aiLinksLabel}</p>
+            <div class="home-v8-helper-links home-v8-ai__links">
+              <a href="/primary/guardian/tutor">${c.aiPrimary}</a>
+              <a href="/middle/student/tutor">${c.aiMiddle}</a>
+              <a href="/high/student/tutor">${c.aiHigh}</a>
+              <a href="/middle/student/tutor">${c.aiSpecial}</a>
+            </div>
+          </section>
+        </div>
       </div>`;
+  }
+
+  function studyMarkup(){
+    const c = currentCopy();
+    return `
+      <div class="home-v9-study__copy">
+        <p class="home-v9-badge">${c.studyBadge}</p>
+        <h2 id="homeV9StudyTitle">${c.studyTitle}</h2>
+        <div class="home-v9-study__official">
+          <span class="home-v9-study__official-icon" aria-hidden="true">${ICON.book}</span>
+          <span><strong>${c.studyOfficial}</strong><small>${c.studyCoverage}</small></span>
+        </div>
+        <p class="home-v9-study__desc">${c.studyDesc}</p>
+        <ul class="home-v9-study__goals">${c.studyGoals.map((g) => `<li>${g}</li>`).join("")}</ul>
+        <a class="home-v9-study__cta" href="/study.html">${c.studyCta}</a>
+      </div>
+      <ol class="home-v9-study__steps">
+        ${c.studySteps.map(([t,sub],i) => `<li${i === 1 ? ' class="is-current"' : ""}><span class="home-v9-study__num" aria-hidden="true">${i + 1}</span><span><strong>${t}</strong><small>${sub}</small></span></li>`).join("")}
+      </ol>`;
+  }
+
+  function charactersMarkup(){
+    const c = currentCopy();
+    const characterRoute = c.learningModes[1][3];
+    return `
+      <div class="home-v9-characters__copy">
+        <p class="home-v9-badge">${c.charBadge}</p>
+        <h2 id="homeV9CharactersTitle">${c.charTitle}</h2>
+        <p>${c.charDesc}</p>
+        <a class="home-v9-characters__cta" href="${characterRoute}">${c.charCta}</a>
+      </div>
+      <ul class="home-v9-characters__list">
+        ${c.chars.map(([file,name,period]) => `<li><img src="/assets/characters/${file}.png" alt="" width="132" height="132" loading="lazy" decoding="async"><strong>${name}</strong><small>${period}</small></li>`).join("")}
+      </ul>`;
+  }
+
+  function ensureSection(id, className, labelledBy, markup){
+    let el = document.getElementById(id);
+    if(!el){
+      el = document.createElement("section");
+      el.id = id;
+      el.className = className;
+      el.setAttribute("aria-labelledby", labelledBy);
+    }
+    el.innerHTML = markup;
+    return el;
+  }
+
+  function placeSearchFirst(){
+    const shell = document.getElementById("homeV8Shell");
+    const search = document.getElementById("homeGlobalSearch");
+    if(shell && search && shell.firstElementChild !== search) shell.insertBefore(search, shell.firstChild);
   }
 
 
@@ -350,16 +601,16 @@
       </button>
       <div class="home-v8-needs__body" id="homeV8NeedsBody" hidden>
         <div class="home-v8-needs__grid">
-          ${c.needs.map(([icon,title,desc,href]) => `
+          ${c.needs.map(([,title,desc,href],i) => `
             <a class="home-v8-needs-card" href="${href}">
-              <span class="home-v8-needs-card__icon" aria-hidden="true">${icon}</span>
+              <span class="home-v8-needs-card__icon" aria-hidden="true">${NEED_ICONS[i] || ""}</span>
               <span><strong>${title}</strong><small>${desc}</small></span>
             </a>`).join("")}
         </div>
         <div class="home-v8-learning-grid">
-          ${c.learningModes.map(([icon,title,desc,href]) => `
+          ${c.learningModes.map(([,title,desc,href],i) => `
             <a class="home-v8-learning-card" href="${href}">
-              <span class="home-v8-learning-card__icon" aria-hidden="true">${icon}</span>
+              <span class="home-v8-learning-card__icon" aria-hidden="true">${LEARNING_ICONS[i] || ""}</span>
               <span><strong>${title}</strong><small>${desc}</small></span>
             </a>`).join("")}
         </div>
@@ -376,31 +627,35 @@
       shell = document.createElement("div");
       shell.id = "homeV8Shell";
       shell.className = "home-v8-shell";
-      const badges = hero.querySelector(".hero__badges");
-      if(badges) badges.insertAdjacentElement("afterend", shell);
+      const anchor = document.getElementById("homeV9Trust") || hero.querySelector(".hero__badges");
+      if(anchor) anchor.insertAdjacentElement("afterend", shell);
       else hero.appendChild(shell);
-    }
-
-    let heading = document.getElementById("homeV8FinderTitle");
-    if(!heading){
-      heading = document.createElement("h2");
-      heading.id = "homeV8FinderTitle";
-      heading.className = "home-v8-finder-title";
-      shell.appendChild(heading);
-    }
-    heading.textContent = currentCopy().finderTitle;
-
-    if(grid.parentElement !== shell){
-      heading.insertAdjacentElement("afterend", grid);
     }
 
     let helpers = document.getElementById("homeV8HelpersMount");
     if(!helpers){
       helpers = document.createElement("div");
       helpers.id = "homeV8HelpersMount";
-      grid.insertAdjacentElement("afterend", helpers);
     }
     helpers.innerHTML = helpersMarkup();
+
+    const study = ensureSection("homeV9Study", "home-v9-study", "homeV9StudyTitle", studyMarkup());
+
+    let heading = document.getElementById("homeV8FinderTitle");
+    if(!heading){
+      heading = document.createElement("h2");
+      heading.id = "homeV8FinderTitle";
+      heading.className = "home-v8-finder-title";
+    }
+    heading.textContent = currentCopy().finderTitle;
+
+    let lead = document.getElementById("homeV9ZonesLead");
+    if(!lead){
+      lead = document.createElement("p");
+      lead.id = "homeV9ZonesLead";
+      lead.className = "home-v9-zones-lead";
+    }
+    lead.textContent = currentCopy().zonesLead;
 
     document.getElementById("homeV8EducatorHint")?.remove();
 
@@ -409,11 +664,18 @@
       needs = document.createElement("section");
       needs.id = "homeV8Needs";
       needs.className = "home-v8-needs";
-      helpers.insertAdjacentElement("afterend", needs);
     }
     const expanded = needs.querySelector("#homeV8NeedsToggle")?.getAttribute("aria-expanded") === "true";
     needs.innerHTML = needsMarkup();
     setNeedsOpen(needs, expanded);
+
+    const characters = ensureSection("homeV9Characters", "home-v9-characters", "homeV9CharactersTitle", charactersMarkup());
+
+    const order = [document.getElementById("homeGlobalSearch"), helpers, study, heading, lead, grid, needs, characters].filter(Boolean);
+    const current = [...shell.children].filter((el) => order.includes(el));
+    if(current.length !== order.length || current.some((el, i) => el !== order[i])){
+      order.forEach((el) => shell.appendChild(el));
+    }
 
     return shell;
   }
@@ -443,7 +705,7 @@
     const c = currentCopy();
     box.innerHTML = `
       <div class="home-v8-eng__copy">
-        <span class="home-v8-eng__icon" aria-hidden="true">🤟</span>
+        <span class="home-v8-eng__icon" aria-hidden="true">${HAND_ICON}</span>
         <div>
           <h2>${c.engTitle}</h2>
           <p>${c.engDesc}</p>
@@ -473,11 +735,14 @@
     const styleLink = ensureStyles();
     hideLegacyHomeBlocks();
     ensureAccessibilityBadge();
+    renderFinder();
+    renderPrinciple();
+    renderTrust();
     ensureSpecialSchoolCard();
     ensureMainShell();
     ensureHigherEducationPilot();
-    ensureCurriculumMapCard();
-    ensureStudyCard();
+    removeLegacyGridCards();
+    ensureOtherRoutesLabel();
     ensureEngSection();
     document.getElementById("homeV8FooterExtra")?.remove();
     suppressLegacyInjectedBlocks();
@@ -491,7 +756,18 @@
       const target = event.target instanceof Element ? event.target : null;
       if(!target) return;
 
-      const spaLink = target.closest("#homeV8Shell a[href]");
+      const finderChip = target.closest("#homeV9Finder [data-finder-role], #homeV9Finder [data-finder-zone], #homeV9Finder [data-finder-need]");
+      if(finderChip){
+        if(finderChip.dataset.finderRole) finderState.role = finderChip.dataset.finderRole;
+        if(finderChip.dataset.finderZone) finderState.zone = finderChip.dataset.finderZone;
+        if(finderChip.dataset.finderNeed) finderState.need = finderChip.dataset.finderNeed;
+        const kind = finderChip.dataset.finderRole ? "role" : finderChip.dataset.finderZone ? "zone" : "need";
+        renderFinder();
+        document.querySelector(`#homeV9Finder [data-finder-${kind}="${finderState[kind]}"]`)?.focus();
+        return;
+      }
+
+      const spaLink = target.closest("#homeV8Shell a[href], #homeV9Top a[href]");
       if(spaLink && isHome() && openSpaRoute(spaLink)){
         event.preventDefault();
         return;
@@ -529,7 +805,8 @@
       const observer = new MutationObserver(() => {
         ensureSpecialSchoolCard();
         ensureHigherEducationPilot();
-        ensureCurriculumMapCard();
+        removeLegacyGridCards();
+        ensureOtherRoutesLabel();
         suppressLegacyInjectedBlocks();
       });
       observer.observe(grid, {childList:true});
@@ -538,6 +815,7 @@
     [0, 50, 200, 550, 1200].forEach((ms) => setTimeout(() => {
       suppressLegacyInjectedBlocks();
       ensureAccessibilityBadge();
+      placeSearchFirst();
     }, ms));
   }
 

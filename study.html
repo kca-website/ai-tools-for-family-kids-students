@@ -483,8 +483,8 @@
   function actionConfig(action){
     const interactive=['quiz','truefalse','oral','written','weakspots'].includes(action);
     const systemBase=lang==='en'
-      ? 'You are the integrated AI Study coach. Stay strictly inside the selected Greek curriculum topic and/or the user supplied notes. Preserve the exact terminology, naming and level of the Greek school textbook. Never silently replace official textbook terms with colloquial or approximate synonyms. If you simplify a term, state the official term first and the plain-language explanation second. SOURCE MODE: if a PDF or pasted notes are attached, they become the sole factual source for this activity. Do not use model memory to fill, correct, reconcile or expand the source. Preserve its terminology, organization, framing and level of detail. If the learner asks something not supported by the uploaded material, explicitly say that it is not supported by the source. Do not introduce concepts that are not supported by the selected unit or supplied notes. Do not produce a ready-to-submit school assignment. Be concise, age-appropriate and learning-first.'
-      : 'Είσαι ο ενσωματωμένος βοηθός AI Μελέτης. Μείνε αυστηρά στο επιλεγμένο θέμα της ελληνικής ύλης και/ή στις σημειώσεις του χρήστη. Διατήρησε την ακριβή ορολογία, ονομασία και επίπεδο του ελληνικού σχολικού βιβλίου. ΠΟΤΕ μην αντικαθιστάς σιωπηρά επίσημο σχολικό όρο με καθημερινό ή περίπου συνώνυμο. Αν χρειάζεται απλοποίηση, γράψε πρώτα τον επίσημο όρο και μετά την απλή εξήγηση. ΛΕΙΤΟΥΡΓΙΑ ΠΗΓΗΣ: αν υπάρχει PDF ή επικολλημένες σημειώσεις, γίνονται η ΜΟΝΑΔΙΚΗ πραγματολογική πηγή για αυτή τη δραστηριότητα. Μην χρησιμοποιείς γενικές γνώσεις του μοντέλου για να συμπληρώσεις, διορθώσεις, συμφιλιώσεις ή επεκτείνεις την πηγή. Διατήρησε την ορολογία, τη δομή, το πλαίσιο και το επίπεδο λεπτομέρειας της πηγής. Αν ο μαθητής ρωτήσει κάτι που δεν υποστηρίζεται από το ανεβασμένο υλικό, πες καθαρά ότι δεν προκύπτει από την πηγή. Μην εισάγεις έννοιες που δεν στηρίζονται στην επιλεγμένη ενότητα ή στις σημειώσεις. Μην παράγεις έτοιμη εργασία προς παράδοση. Να είσαι σύντομος, κατάλληλος για την ηλικία και προσανατολισμένος στη μάθηση.';
+      ? 'You are the integrated AI Study coach. Stay strictly inside the selected Greek curriculum topic and/or the user supplied notes. Preserve the exact terminology, naming and level of the Greek school textbook. Never silently replace official textbook terms with colloquial or approximate synonyms. If you simplify a term, state the official term first and the plain-language explanation second. SOURCE MODE: if a PDF or pasted notes are attached, they become the sole factual source for this activity. Do not use model memory to fill, correct, reconcile or expand the source. Preserve its terminology, organization, framing and level of detail. If the learner asks something not supported by the uploaded material, explicitly say that it is not supported by the source. Do not introduce concepts that are not supported by the selected unit or supplied notes. Do not produce a ready-to-submit school assignment. ADAPTIVE FEEDBACK: match feedback to the learner response. Never say phrases such as "good try" when the learner explicitly says they do not know or did not attempt an answer. If the learner is unsure, give one small source-grounded hint and re-ask the SAME concept in an easier way instead of moving on. Judge understanding, not verbatim memorization, unless exact wording is genuinely part of the learning goal. Be concise, age-appropriate and learning-first.'
+      : 'Είσαι ο ενσωματωμένος βοηθός AI Μελέτης. Μείνε αυστηρά στο επιλεγμένο θέμα της ελληνικής ύλης και/ή στις σημειώσεις του χρήστη. Διατήρησε την ακριβή ορολογία, ονομασία και επίπεδο του ελληνικού σχολικού βιβλίου. ΠΟΤΕ μην αντικαθιστάς σιωπηρά επίσημο σχολικό όρο με καθημερινό ή περίπου συνώνυμο. Αν χρειάζεται απλοποίηση, γράψε πρώτα τον επίσημο όρο και μετά την απλή εξήγηση. ΛΕΙΤΟΥΡΓΙΑ ΠΗΓΗΣ: αν υπάρχει PDF ή επικολλημένες σημειώσεις, γίνονται η ΜΟΝΑΔΙΚΗ πραγματολογική πηγή για αυτή τη δραστηριότητα. Μην χρησιμοποιείς γενικές γνώσεις του μοντέλου για να συμπληρώσεις, διορθώσεις, συμφιλιώσεις ή επεκτείνεις την πηγή. Διατήρησε την ορολογία, τη δομή, το πλαίσιο και το επίπεδο λεπτομέρειας της πηγής. Αν ο μαθητής ρωτήσει κάτι που δεν υποστηρίζεται από το ανεβασμένο υλικό, πες καθαρά ότι δεν προκύπτει από την πηγή. Μην εισάγεις έννοιες που δεν στηρίζονται στην επιλεγμένη ενότητα ή στις σημειώσεις. Μην παράγεις έτοιμη εργασία προς παράδοση. ΠΡΟΣΑΡΜΟΣΤΙΚΟ FEEDBACK: το feedback πρέπει να ταιριάζει στην πραγματική απάντηση του μαθητή. Μην λες «Καλή προσπάθεια» ή αντίστοιχο όταν ο μαθητής λέει καθαρά ότι δεν ξέρει ή δεν έχει κάνει προσπάθεια. Αν δείχνει αβεβαιότητα, δώσε μία μικρή νύξη που στηρίζεται στην πηγή και ξαναρώτησε ΤΗΝ ΙΔΙΑ έννοια με πιο εύκολο τρόπο αντί να προχωρήσεις. Αξιολόγησε την κατανόηση του νοήματος και όχι την κατά λέξη απομνημόνευση, εκτός αν η ακριβής διατύπωση είναι όντως μαθησιακός στόχος. Να είσαι σύντομος, κατάλληλος για την ηλικία και προσανατολισμένος στη μάθηση.';
     const instructions={
       audio: lang==='en'?'Write a short spoken mini-lesson for listening, about 2–3 minutes when read aloud. Natural spoken language, no markdown tables. If a source is supplied, every factual sentence must be directly supported by it. Do not add terminology, causes, examples, or conclusions absent from the source, even if scientifically correct.':'Γράψε ένα σύντομο προφορικό μικρομάθημα για ακρόαση, περίπου 2–3 λεπτά όταν διαβαστεί δυνατά. Φυσικός προφορικός λόγος, χωρίς πίνακες markdown. Αν έχει δοθεί πηγή, κάθε πραγματολογική πρόταση πρέπει να υποστηρίζεται άμεσα από αυτήν. Μην προσθέτεις όρους, αιτίες, παραδείγματα ή συμπεράσματα που δεν εμφανίζονται ή δεν προκύπτουν ρητά από την πηγή, ακόμη κι αν είναι επιστημονικά σωστά.',
       flashcards: lang==='en'?'Return ONLY valid JSON: {"cards":[{"q":"...","a":"..."}]}. Create exactly 8 active-recall flashcards grounded in this material.':'Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"cards":[{"q":"...","a":"..."}]}. Φτιάξε ακριβώς 8 κάρτες ενεργής ανάκλησης βασισμένες σε αυτό το υλικό.',
@@ -492,7 +492,7 @@
       truefalse: lang==='en'?'Run a True/False concept check ONE statement at a time. Ask only one statement now and wait for the learner answer before feedback.':'Κάνε έλεγχο Σωστό/Λάθος ΜΙΑ πρόταση τη φορά. Δώσε μόνο μία πρόταση τώρα και περίμενε την απάντηση πριν το feedback.',
       explain: lang==='en'?'Explain this exact topic/material clearly with 2–3 concrete examples and short self-check questions.':'Εξήγησε αυτό ακριβώς το θέμα/υλικό καθαρά, με απλά λόγια, 2–3 συγκεκριμένα παραδείγματα και μικρές ερωτήσεις αυτοελέγχου.',
       quickreview: lang==='en'?'Create a 5-minute review: the 5–7 most important points, 3 things commonly confused, and 3 rapid recall questions.':'Φτιάξε επανάληψη 5 λεπτών: 5–7 πιο σημαντικά σημεία, 3 σημεία που μπερδεύονται συχνά και 3 πολύ σύντομες ερωτήσεις ανάκλησης.',
-      oral: lang==='en'?'Act as a calm oral examiner for practice. Ask ONE question now, wait for the learner answer, then give brief feedback and the next question. Never grade.':'Λειτούργησε σαν ήρεμος εξεταστής προφορικής εξάσκησης. Κάνε ΜΙΑ ερώτηση τώρα, περίμενε απάντηση, μετά δώσε σύντομο feedback και επόμενη ερώτηση. Χωρίς βαθμό.',
+      oral: lang==='en'?'Act as a calm oral examiner for practice. Ask ONE question now, wait for the learner answer, then give brief feedback and the next question. Accept a correct paraphrase; do not demand the textbook sentence word-for-word unless exact wording is itself the learning objective. Never grade.':'Λειτούργησε σαν ήρεμος εξεταστής προφορικής εξάσκησης. Κάνε ΜΙΑ ερώτηση τώρα, περίμενε απάντηση, μετά δώσε σύντομο feedback και επόμενη ερώτηση. Δέξου σωστή διατύπωση με δικά του λόγια· μην απαιτείς κατά λέξη αναπαραγωγή του σχολικού βιβλίου, εκτός αν αυτό είναι πραγματικά ο μαθησιακός στόχος. Χωρίς βαθμό.',
       written: lang==='en'?'Run written practice ONE prompt at a time. Ask one short-answer or application question now, wait for the learner response, then give formative feedback and a next question.':'Κάνε γραπτή πρόβα ΜΙΑ ερώτηση τη φορά. Δώσε τώρα μία σύντομη ερώτηση ανάπτυξης ή εφαρμογής, περίμενε την απάντηση, μετά δώσε διαμορφωτικό feedback και επόμενη ερώτηση.',
       weakspots: lang==='en'?'Diagnose topic-specific weak spots with ONE short question at a time. Ask only one question now. After answers, identify only observed gaps, never a learner diagnosis.':'Εντόπισε κενά μόνο στο συγκεκριμένο θέμα με ΜΙΑ σύντομη ερώτηση τη φορά. Κάνε μόνο μία ερώτηση τώρα. Μετά τις απαντήσεις, ανέφερε μόνο παρατηρημένα κενά στο θέμα, ποτέ διάγνωση μαθητή.'
     };
@@ -668,25 +668,52 @@
     $('aiWorkspace').scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 
+  function normalizedLearnerAnswer(value){
+    return String(value||'')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z0-9α-ω\s']/gi,' ')
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+  function learnerIsUnsure(value){
+    const a=normalizedLearnerAnswer(value);
+    if(!a)return false;
+    const greek=[
+      'δεν ξερω','δε ξερω','δεν γνωριζω','δε γνωριζω','δεν θυμαμαι','δε θυμαμαι',
+      'δεν ειμαι σιγουρος','δεν ειμαι σιγουρη','δεν καταλαβα','δε καταλαβα',
+      'δεν μπορω','δεν το ξερω','δεν ξερω καθολου'
+    ];
+    const english=["i don't know","i dont know",'idk','no idea','not sure',"i can't remember",'i cant remember'];
+    return greek.some(x=>a===x||a.startsWith(x+' '))||english.some(x=>a===x||a.startsWith(x+' '));
+  }
+
   async function sendInteractiveAnswer(){
     const answer=$('studyAnswer').value.trim();
     if(!answer||!interactiveAction)return;
     $('studyAnswer').value='';
     interactiveHistory.push('LEARNER: '+answer);
     const cfg=actionConfig(interactiveAction);
+    const unsure=learnerIsUnsure(answer);
     const isFiveQuestionQuiz=interactiveAction==='quiz'&&interactiveTotal===5;
-    const finishing=isFiveQuestionQuiz&&interactiveStep>=interactiveTotal;
-    const continuation=isFiveQuestionQuiz
-      ? (finishing
-        ? (lang==='en'
-          ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Give brief feedback on this answer, then a very short final recap of the '+interactiveTotal+'-question quiz. Do NOT ask another question and do not give a grade.'
-          : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Δώσε σύντομο feedback για αυτή την απάντηση και μετά μία πολύ σύντομη τελική ανακεφαλαίωση του quiz των '+interactiveTotal+' ερωτήσεων. ΜΗΝ κάνεις άλλη ερώτηση και μη βάλεις βαθμό.')
+    const finishing=isFiveQuestionQuiz&&!unsure&&interactiveStep>=interactiveTotal;
+    const uncertaintyPrompt=lang==='en'
+      ? 'Conversation so far:\n'+interactiveHistory.slice(-10).join('\n')+'\nThe learner explicitly says they do not know or are unsure. Do NOT praise the answer and do NOT move to a new concept. Give exactly one short hint grounded in the supplied source, then re-ask the SAME concept in an easier form. Prefer a two-choice question, a fill-in-the-blank, or a very short scaffold. Do not reveal the full answer unless a useful hint is impossible.'
+      : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-10).join('\n')+'\nΟ μαθητής δηλώνει καθαρά ότι δεν ξέρει ή δεν είναι σίγουρος. ΜΗΝ επαινέσεις την απάντηση και ΜΗΝ προχωρήσεις σε νέα έννοια. Δώσε ακριβώς μία μικρή νύξη που στηρίζεται στην πηγή και μετά ξαναρώτησε ΤΗΝ ΙΔΙΑ έννοια με ευκολότερο τρόπο. Προτίμησε επιλογή ανάμεσα σε 2 απαντήσεις, συμπλήρωση κενού ή πολύ σύντομη καθοδήγηση. Μην αποκαλύψεις ολόκληρη την απάντηση εκτός αν δεν γίνεται να δοθεί χρήσιμη νύξη.';
+    const continuation=unsure
+      ? uncertaintyPrompt
+      : isFiveQuestionQuiz
+        ? (finishing
+          ? (lang==='en'
+            ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Give brief feedback on this answer, then a very short final recap of the '+interactiveTotal+'-question quiz. Do NOT ask another question and do not give a grade.'
+            : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Δώσε σύντομο feedback για αυτή την απάντηση και μετά μία πολύ σύντομη τελική ανακεφαλαίωση του quiz των '+interactiveTotal+' ερωτήσεων. ΜΗΝ κάνεις άλλη ερώτηση και μη βάλεις βαθμό.')
+          : (lang==='en'
+            ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Give feedback that matches the actual answer, then ask exactly question '+(interactiveStep+1)+' of '+interactiveTotal+'. Do not use generic praise and do not give a grade.'
+            : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Δώσε feedback που ταιριάζει στην πραγματική απάντηση και μετά κάνε ακριβώς την ερώτηση '+(interactiveStep+1)+' από '+interactiveTotal+'. Μην χρησιμοποιείς γενικό επαινετικό σχόλιο και μη βάλεις βαθμό.'))
         : (lang==='en'
-          ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Respond briefly, then ask exactly question '+(interactiveStep+1)+' of '+interactiveTotal+'. Do not give a grade.'
-          : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Απάντησε σύντομα και μετά κάνε ακριβώς την ερώτηση '+(interactiveStep+1)+' από '+interactiveTotal+'. Μη βάλεις βαθμό.'))
-      : (lang==='en'
-        ? 'Conversation so far:\n'+interactiveHistory.slice(-8).join('\n')+'\nRespond to the learner briefly, then ask exactly ONE next question. Do not give a grade.'
-        : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-8).join('\n')+'\nΑπάντησε σύντομα στην προσπάθεια του μαθητή και μετά κάνε ακριβώς ΜΙΑ επόμενη ερώτηση. Μη βάλεις βαθμό.');
+          ? 'Conversation so far:\n'+interactiveHistory.slice(-8).join('\n')+'\nGive feedback that matches the learner response, then ask exactly ONE next question. Do not use generic praise and do not give a grade. Accept correct meaning in the learner own words; do not demand verbatim textbook wording unless necessary.'
+          : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-8).join('\n')+'\nΔώσε feedback που ταιριάζει στην πραγματική απάντηση του μαθητή και μετά κάνε ακριβώς ΜΙΑ επόμενη ερώτηση. Μην χρησιμοποιείς γενικό επαινετικό σχόλιο και μη βάλεις βαθμό. Δέξου σωστό νόημα με δικά του λόγια· μην απαιτείς κατά λέξη διατύπωση του βιβλίου εκτός αν είναι αναγκαίο.');
     $('aiOutput').innerHTML=quizProgressHtml()+studyMarkup((lang==='en'?'You: ':'Εσύ: ')+answer)+'<span class="ai-loading">'+esc(lang==='en'?'AI is checking…':'Το AI ελέγχει…')+'</span>';
     $('sendStudyAnswer').disabled=true;
     try{
@@ -695,7 +722,7 @@
       if(finishing){
         interactiveStep=interactiveTotal+1;
         $('answerBox').classList.add('hidden');
-      }else if(interactiveTotal){
+      }else if(interactiveTotal&&!unsure){
         interactiveStep++;
       }
       renderPlain(text);

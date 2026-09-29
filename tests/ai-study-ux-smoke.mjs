@@ -16,6 +16,15 @@ assert.match(html, /function quizProgressHtml\(\)/);
 assert.match(html, /interactiveStep\+\(lang==='en'\?' of ':' από '\)\+interactiveTotal/);
 assert.match(html, /Do NOT ask another question/);
 
+assert.match(html, /function learnerIsUnsure\(value\)/);
+assert.match(html, /'δεν ξερω'/);
+assert.match(html, /'idk'/);
+assert.match(html, /const unsure=learnerIsUnsure\(answer\)/);
+assert.match(html, /interactiveTotal&&!unsure/);
+assert.match(html, /ΜΗΝ επαινέσεις την απάντηση/);
+assert.match(html, /ξαναρώτησε ΤΗΝ ΙΔΙΑ έννοια/);
+assert.match(html, /μην απαιτείς κατά λέξη αναπαραγωγή του σχολικού βιβλίου/);
+
 assert.match(html, /function studyMarkup\(text\)/);
 assert.match(html, /class="quiz-progress"/);
 assert.match(html, /\.grid\.study-result-open/);

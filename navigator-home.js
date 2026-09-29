@@ -76,7 +76,13 @@
       report: "Βρήκες λάθος ή παλιωμένη πληροφορία; ↗",
       zonesLead: "Σε κάθε βαθμίδα: εργαλεία με όριο ηλικίας, Χάρτης Εξάσκησης, μονοπάτια μάθησης και οδηγός χρήσης.",
       otherRoutes: "Άλλες διαδρομές",
-      stepsLabel: "Ξεκίνα σε 3 βήματα",
+      stepsLabel: "Πες μας ποιος είσαι και τι χρειάζεσαι. Σε πάμε στο σωστό AI ή στη σωστή βοήθεια.",
+      moreTitle: "Ανακάλυψε περισσότερα",
+      charTile: "Μίλα με χαρακτήρα της Ιστορίας",
+      charTileDesc: "Διάλογος με πρόσωπα από την ύλη και έλεγχος του τι έμαθες.",
+      teacherTile: "Για εκπαιδευτικούς",
+      teacherTileDesc: "Φύλλα εργασίας, αξιολόγηση και βίντεο πάνω στην ύλη.",
+      teacherTileCta: "Άνοιξε →",
       stepRole: "1 · Ποιος είσαι;",
       stepZone: "2 · Βαθμίδα ή διαδρομή",
       stepNeed: "3 · Τι χρειάζεσαι σήμερα;",
@@ -177,7 +183,13 @@
       report: "Found an error or outdated information? ↗",
       zonesLead: "In every level: age-checked tools, Practice Map, learning paths and a usage guide.",
       otherRoutes: "Other pathways",
-      stepsLabel: "Start in 3 steps",
+      stepsLabel: "Tell us who you are and what you need. We take you to the right AI or the right help.",
+      moreTitle: "Discover more",
+      charTile: "Talk with a character from history",
+      charTileDesc: "A dialogue with people from the curriculum, then a check of what you learned.",
+      teacherTile: "For teachers",
+      teacherTileDesc: "Worksheets, assessment and videos built on the curriculum.",
+      teacherTileCta: "Open →",
       stepRole: "1 · Who are you?",
       stepZone: "2 · Level or pathway",
       stepNeed: "3 · What do you need today?",
@@ -335,6 +347,7 @@
   }
 
   const ICON = {
+    teacher: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4M7 9h6M7 12h4"/></svg>',
     check: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>',
     compass: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M15.5 8.5l-2 5-5 2 2-5z"></path></svg>',
     map: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"></path><path d="M9 4v14M15 6v14"></path></svg>',
@@ -452,11 +465,6 @@
         <ol class="home-v9-principle__steps">
           ${c.principleSteps.map(([title,sub],i) => `<li${i === 2 ? ' class="is-current"' : ""}><span class="home-v9-principle__num" aria-hidden="true">${i + 1}</span><span class="home-v9-principle__title">${title}</span><span class="home-v9-principle__sub">${sub}</span></li>`).join("")}
         </ol>
-      </div>
-      <div class="home-v9-principle__chat">
-        <p class="home-v9-principle__chat-label">${c.chatLabel}</p>
-        <p class="home-v9-principle__bubble home-v9-principle__bubble--me">${c.chatQ}</p>
-        <p class="home-v9-principle__bubble home-v9-principle__bubble--ai">${c.chatA}</p>
       </div>`;
   }
 
@@ -539,15 +547,41 @@
     const c = currentCopy();
     const characterRoute = c.learningModes[1][3];
     return `
-      <div class="home-v9-characters__copy">
-        <p class="home-v9-badge">${c.charBadge}</p>
-        <h2 id="homeV9CharactersTitle">${c.charTitle}</h2>
-        <p>${c.charDesc}</p>
-        <a class="home-v9-characters__cta" href="${characterRoute}">${c.charCta}</a>
-      </div>
-      <ul class="home-v9-characters__list">
-        ${c.chars.map(([file,name,period]) => `<li><img src="/assets/characters/${file}.png" alt="" width="132" height="132" decoding="async"><strong>${name}</strong><small>${period}</small></li>`).join("")}
-      </ul>`;
+      <ul class="home-v9-tile__faces" aria-hidden="true">
+        ${c.chars.map(([file]) => `<li><img src="/assets/characters/${file}.png" alt="" width="56" height="56" decoding="async"></li>`).join("")}
+      </ul>
+      <h3 id="homeV9CharactersTitle">${c.charTile}</h3>
+      <p>${c.charTileDesc}</p>
+      <a class="home-v9-tile__cta" href="${characterRoute}">${c.charCta}</a>`;
+  }
+
+  function teacherTileMarkup(){
+    const c = currentCopy();
+    return `
+      <span class="home-v9-tile__icon" aria-hidden="true">${ICON.teacher}</span>
+      <h3 id="homeV9TeacherTitle">${c.teacherTile}</h3>
+      <p>${c.teacherTileDesc}</p>
+      <a class="home-v9-tile__cta" href="/teacher-assistant.html">${c.teacherTileCta}</a>`;
+  }
+
+  // "Discover more": secondary features grouped as compact tiles (moved, not recreated).
+  function ensureMoreSection(characters){
+    let more = document.getElementById("homeV9More");
+    if(!more){
+      more = document.createElement("section");
+      more.id = "homeV9More";
+      more.className = "home-v9-more";
+      more.setAttribute("aria-labelledby", "homeV9MoreTitle");
+      more.innerHTML = `<h2 id="homeV9MoreTitle"></h2><div class="home-v9-more__grid"></div>`;
+    }
+    more.querySelector("#homeV9MoreTitle").textContent = currentCopy().moreTitle;
+    const grid = more.querySelector(".home-v9-more__grid");
+    const teacher = ensureSection("homeV9Teacher", "home-v9-tile home-v9-tile--teacher", "homeV9TeacherTitle", teacherTileMarkup());
+    characters.classList.add("home-v9-tile");
+    const tiles = [characters, document.getElementById("homeVideoNew"), document.getElementById("homeV8Eng"), teacher].filter(Boolean);
+    const current = [...grid.children];
+    if(current.length !== tiles.length || current.some((el, i) => el !== tiles[i])) tiles.forEach((el) => grid.appendChild(el));
+    return more;
   }
 
   function ensureSection(id, className, labelledBy, markup){
@@ -655,7 +689,8 @@
 
     const characters = ensureSection("homeV9Characters", "home-v9-characters", "homeV9CharactersTitle", charactersMarkup());
 
-    const order = [helpers, study, heading, lead, grid, needs, characters];
+    const more = ensureMoreSection(characters);
+    const order = [helpers, study, heading, lead, grid, needs, more];
     const current = [...shell.children].filter((el) => order.includes(el));
     if(current.length !== order.length || current.some((el, i) => el !== order[i])){
       order.forEach((el) => shell.appendChild(el));

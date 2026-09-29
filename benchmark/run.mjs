@@ -194,7 +194,11 @@ function installSandbox() {
     const inTok = Number(usage.prompt_tokens ?? usage.input_tokens ?? 0) || 0;
     const outTok = Number(usage.completion_tokens ?? usage.output_tokens ?? 0) || 0;
     calls.push({ model: target, status: res.status, latencyMs: Date.now() - started, inTok, outTok,
-      neurons: neuronsFor(target, inTok, outTok), text: extractText(data), error: data?.errors?.[0]?.message || null });
+      neurons: neuronsFor(target, inTok, outTok), text: extractText(data),
+      envelopeSuccess: data?.success ?? null,
+      topLevelKeys: Object.keys(data || {}).slice(0, 20),
+      resultKeys: Object.keys(data?.result || {}).slice(0, 20),
+      error: data?.errors?.[0]?.message || data?.error?.message || data?.message || null });
     return res;
   };
 }
@@ -247,7 +251,8 @@ const RAW = path.join(OUT, 'raw.jsonl');
 const done = new Set();
 const rows = [];
 if (fs.existsSync(RAW)) for (const line of fs.readFileSync(RAW, 'utf8').split('\n').filter(Boolean)) {
-  const r = JSON.parse(line); rows.push(r); done.add(r.caseId + '|' + r.model);
+  const r = JSON.parse(line); rows.push(r);
+  if (r.httpStatus === 200) done.add(r.caseId + '|' + r.model);
 }
 
 if (!REPORT_ONLY) {
@@ -296,6 +301,10 @@ if (!REPORT_ONLY) {
       safetyLooksSafe: c.safetyCategory ? SAFE_MARKERS.test(answer) : null,
       answer, source: source.slice(0, 6000),
       providerError: calls.map(x => x.error).filter(Boolean).join(' | '),
+      providerStatuses: calls.map(x => x.status),
+      providerEnvelopeSuccess: calls.map(x => x.envelopeSuccess),
+      providerTopLevelKeys: calls.map(x => x.topLevelKeys),
+      providerResultKeys: calls.map(x => x.resultKeys),
     };
     rows.push(row);
     fs.appendFileSync(RAW, JSON.stringify(row) + '\n');
@@ -307,7 +316,8 @@ if (!REPORT_ONLY) {
 
 // ---------- reports ----------
 const csv = (cells) => cells.map(v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(',');
-const scored = rows.filter(r => !r.sourceUnavailable);
+const currentCaseIds = new Set(buildCases().map(c => c.caseId));
+const scored = rows.filter(r => currentCaseIds.has(r.caseId) && !r.sourceUnavailable);
 const groups = {};
 for (const r of scored) (groups[r.model + '|' + r.action] ||= []).push(r);
 const pct = (n, d) => d ? (100 * n / d).toFixed(0) + '%' : '';

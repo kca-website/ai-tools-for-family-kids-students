@@ -163,6 +163,7 @@
     // Page hook for page-specific v9 styles, e.g. /study.html -> page-study, /tools/x.html -> page-tools.
     const parts = location.pathname.replace(/\.html$/, "").split("/").filter(Boolean);
     if(parts.length) body.classList.add("page-" + (parts[0] === "tools" ? "tools" : parts.join("-")));
+    if(document.querySelector('link[href*="seo-guide.css"]')) body.classList.add("page-guide");
 
     const header = document.createElement("header");
     header.id = "chromeHeader";

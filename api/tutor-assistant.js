@@ -1,6 +1,7 @@
 // Grounded, learning-first GPT-OSS proxy for Parent Helper and High-School AI Help.
 // Cloudflare Workers AI is primary; Groq is the server-side fallback.
 const { generateChat, getAiStatus } = require('../ai-provider-router');
+const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 module.exports = async function handler(req, res) {
   const aiStatus = getAiStatus();
   const model = aiStatus.model || 'openai/gpt-oss-120b';
@@ -17,7 +18,7 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { system, prompt, audience, task = 'conversation', mode = 'understand', activity = '', grade = '', subject = '', topic = '', character = '', documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
+  const { system, prompt, audience, task = 'conversation', mode = 'understand', activity = '', cacheEligible = false, grade = '', subject = '', topic = '', character = '', documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
   if (!['parent', 'high_student', 'study_user'].includes(audience)) {
     return res.status(403).json({ error: 'audience_not_allowed', message: 'Η λειτουργία είναι διαθέσιμη σε γονείς όλων των βαθμίδων και σε μαθητές Λυκείου.' });
   }
@@ -99,21 +100,53 @@ ${roleRule}
     { role: 'user', content: prompt },
   ];
   const routingProfile = chooseRoutingProfile({ task, mode, activity });
+  const startedAt = Date.now();
+  const cacheParts = cacheEligible === true && officialSchoolbook
+    ? {
+        task, mode, activity,
+        route: aiStatus.smartRoutingEnabled ? routingProfile : 'legacy',
+        system: messages[0].content,
+        prompt: messages[1].content,
+      }
+    : null;
 
   try {
-    const result = await generateChat({
+    if (cacheParts) {
+      const cached = await getStudyCache(cacheParts);
+      if (cached?.text) {
+        emitAiMetric({ task, activity, status: 200, cacheHit: true, provider: cached.provider || 'cache', model: cached.model || '', latencyMs: Date.now() - startedAt, usage: cached.usage || null });
+        res.setHeader('Cache-Control', 'no-store');
+        return res.status(200).json({ ...cached, cacheHit: true, routingProfile });
+      }
+    }
+
+    let result = await generateChat({
       messages,
       maxTokens: taskLimits[task],
       temperature: 0.1,
       reasoningEffort: 'low',
       modelProfile: routingProfile,
     });
+
+    if (result?.ok && aiStatus.smartRoutingEnabled && needsStructuredValidation({ task, activity }) && !validStructuredResult({ task, activity, text: result.text })) {
+      const retry = await generateChat({
+        messages,
+        maxTokens: taskLimits[task],
+        temperature: 0.1,
+        reasoningEffort: 'low',
+        modelProfile: 'quality',
+      });
+      if (retry?.ok && validStructuredResult({ task, activity, text: retry.text })) result = retry;
+      else result = { ...(retry || result), ok: false, status: 502, error: 'invalid_structured_result', retryable: false, message: 'Structured result validation failed.' };
+    }
+
     if (!result?.ok) {
       const providerMessage = String(result?.message || '');
       const requestLimit = /request too large|tokens per minute|\btpm\b|reduce your message size/i.test(providerMessage);
       const limited = result?.status === 429 || requestLimit;
+      emitAiMetric({ task, activity, status: limited ? 429 : 502, cacheHit: false, provider: result?.provider || '', model: result?.model || '', latencyMs: Date.now() - startedAt, usage: result?.usage || null, attempts: result?.attempts || [] });
       return res.status(limited ? 429 : 502).json({
-        error: limited ? 'provider_limit' : 'provider_error',
+        error: limited ? 'provider_limit' : (result?.error === 'invalid_structured_result' ? 'invalid_structured_result' : 'provider_error'),
         message: limited
           ? 'Η δωρεάν AI Βοήθεια έφτασε προσωρινά το όριο χρήσης της. Δοκίμασε ξανά ή χρησιμοποίησε την εναλλακτική AI.'
           : 'Η AI Βοήθεια δεν μπόρεσε να απαντήσει αυτή τη στιγμή.',
@@ -123,8 +156,11 @@ ${roleRule}
 
     const text = sanitize(result.text);
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'Δεν επιστράφηκε απάντηση.' });
+    const responseBody = { text, model: result.model || model, provider: result.provider, routingProfile, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl, usage: result.usage || null };
+    if (cacheParts) await setStudyCache(cacheParts, responseBody);
+    emitAiMetric({ task, activity, status: 200, cacheHit: false, provider: result.provider || '', model: result.model || model, latencyMs: Date.now() - startedAt, usage: result.usage || null, attempts: result.attempts || [] });
     res.setHeader('Cache-Control', 'no-store');
-    return res.status(200).json({ text, model: result.model || model, provider: result.provider, routingProfile, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl });
+    return res.status(200).json({ ...responseBody, cacheHit: false });
   } catch (err) {
     const timedOut = err?.name === 'AbortError';
     return res.status(timedOut ? 504 : 500).json({
@@ -133,6 +169,53 @@ ${roleRule}
     });
   }
 };
+
+function parseJsonObject(text) {
+  const raw = String(text || '').trim().replace(/^\`\`\`(?:json)?\s*/i, '').replace(/\s*\`\`\`$/, '');
+  try { return JSON.parse(raw); } catch (_) {}
+  const a = raw.indexOf('{'), b = raw.lastIndexOf('}');
+  if (a >= 0 && b > a) {
+    try { return JSON.parse(raw.slice(a, b + 1)); } catch (_) {}
+  }
+  return null;
+}
+
+function needsStructuredValidation({ task, activity }) {
+  return task === 'flashcards' || task === 'study_plan' || activity === 'flashcards' || activity === 'plan';
+}
+
+function validStructuredResult({ task, activity, text }) {
+  const data = parseJsonObject(text);
+  if (!data) return false;
+  if (task === 'flashcards' || activity === 'flashcards') {
+    return Array.isArray(data.cards) && data.cards.length >= 5 &&
+      data.cards.every(row => String(row?.q || '').trim() && String(row?.a || '').trim());
+  }
+  if (task === 'study_plan' || activity === 'plan') {
+    return String(data.title || '').trim().length > 0 &&
+      Array.isArray(data.steps) && data.steps.length >= 3 &&
+      data.steps.every(row => String(row?.title || '').trim() && String(row?.action || '').trim());
+  }
+  return true;
+}
+
+function emitAiMetric({ task, activity, status, cacheHit, provider, model, latencyMs, usage, attempts }) {
+  console.info('AI_METRIC ' + JSON.stringify({
+    event: 'ai_request',
+    task: String(task || ''),
+    activity: String(activity || ''),
+    status: Number(status || 0),
+    cacheHit: !!cacheHit,
+    provider: String(provider || ''),
+    model: String(model || ''),
+    latencyMs: Number(latencyMs || 0),
+    promptTokens: Number(usage?.promptTokens || 0),
+    completionTokens: Number(usage?.completionTokens || 0),
+    totalTokens: Number(usage?.totalTokens || 0),
+    cachedTokens: Number(usage?.cachedTokens || 0),
+    attempts: Array.isArray(attempts) ? attempts.map(x => ({ provider: x.provider, model: x.model, status: x.status, ok: x.ok })) : [],
+  }));
+}
 
 function chooseRoutingProfile({ task, mode, activity }) {
   const action = String(activity || '').trim().toLowerCase();

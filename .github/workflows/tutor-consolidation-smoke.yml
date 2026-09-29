@@ -103,6 +103,9 @@ jobs:
       - name: Run remaining B Gym diagnostic provenance smoke
         run: node tests/b-gym-remaining-diagnostic-scope.mjs
 
+      - name: Run A and G Gym History schoolbook grounding smoke
+        run: node tests/a-g-gym-history-schoolbook-grounding.mjs
+
       - name: Run curriculum provenance smoke
         run: node tests/curriculum-provenance-smoke.mjs
 

@@ -1261,9 +1261,9 @@
   "fysiki-g-gymnasiou": {
     "schoolYear": "2026-2027",
     "verificationDate": "2026-09-29",
-    "coverageStatus": "official-book-diagnostic-topic-grounded",
-    "coverageLabelEl": "Οι τρέχοντες διαγνωστικοί στόχοι έχουν ακριβή επίσημη πηγή",
-    "coverageLabelEn": "Current diagnostic topics have exact official sources",
+    "coverageStatus": "annual-guidance-detailed-map",
+    "coverageLabelEl": "Οι 8 θεματικές της AI Μελέτης γειώνονται στην επίσημη διδακτέα ύλη 2026–27",
+    "coverageLabelEn": "All 8 AI Study topics are grounded in the official 2026–27 taught scope",
     "quizTitleEl": "Φυσική, Γ' Γυμνασίου",
     "quizTitleEn": "Physics, 9th Grade",
     "officialBook": {
@@ -1276,22 +1276,56 @@
       "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"
     },
     "officialSectionsEl": [
-      "Γ΄ · Κεφάλαιο 2 — Ηλεκτρικό ρεύμα / Νόμος του Ωμ",
-      "Γ΄ · Κεφάλαιο 3 — Ηλεκτρική ενέργεια",
-      "Β΄ · 2.2 — Η έννοια της ταχύτητας (προαπαιτούμενη γνώση)"
+      "Ηλεκτρική δύναμη, φορτίο και ηλεκτρικό πεδίο",
+      "Ηλεκτρικό ρεύμα και κυκλώματα",
+      "Αντίσταση, νόμος του Ohm και συνδεσμολογία",
+      "Αποτελέσματα, ενέργεια και ισχύς ηλεκτρικού ρεύματος",
+      "Ταλαντώσεις και εκκρεμές",
+      "Μηχανικά κύματα και ήχος",
+      "Φως, διάδοση και ανάκλαση",
+      "Διάθλαση, ανάλυση φωτός και χρώμα"
     ],
-    "officialSectionsEn": [],
+    "officialSectionsEn": [
+      "Electric force, charge and electric field",
+      "Electric current and circuits",
+      "Resistance, Ohm's law and circuit connections",
+      "Effects, energy and power of electric current",
+      "Oscillations and the pendulum",
+      "Mechanical waves and sound",
+      "Light, propagation and reflection",
+      "Refraction, dispersion and colour"
+    ],
+    "mappedTopicsEl": [
+      "Ηλεκτρική δύναμη, φορτίο και ηλεκτρικό πεδίο",
+      "Ηλεκτρικό ρεύμα και κυκλώματα",
+      "Αντίσταση, νόμος του Ohm και συνδεσμολογία",
+      "Αποτελέσματα, ενέργεια και ισχύς ηλεκτρικού ρεύματος",
+      "Ταλαντώσεις και εκκρεμές",
+      "Μηχανικά κύματα και ήχος",
+      "Φως, διάδοση και ανάκλαση",
+      "Διάθλαση, ανάλυση φωτός και χρώμα"
+    ],
+    "mappedTopicsEn": [
+      "Electric force, charge and electric field",
+      "Electric current and circuits",
+      "Resistance, Ohm's law and circuit connections",
+      "Effects, energy and power of electric current",
+      "Oscillations and the pendulum",
+      "Mechanical waves and sound",
+      "Light, propagation and reflection",
+      "Refraction, dispersion and colour"
+    ],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
     "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
-    "scopeNoteEl": "Ο Νόμος του Ωμ και η ηλεκτρική ενέργεια γειώνονται στο επίσημο βιβλίο της Γ΄. Ο στόχος «Τύπος ταχύτητας» ελέγχει προαπαιτούμενη γνώση από τη Β΄ και χρησιμοποιεί ρητά την §2.2 της Β΄.",
-    "scopeNoteEn": "Ohm's law and electrical energy are grounded in the G΄ textbook. The speed-formula target checks prerequisite knowledge from B΄ and explicitly uses B΄ §2.2.",
-    "annualInstructionsStatus": "official-annual-guidance-published",
-    "annualInstructionsNoteEl": "Η αντιστοίχιση αφορά τους σημερινούς διαγνωστικούς στόχους, όχι πλήρη ετήσια allowlist.",
-    "annualInstructionsNoteEn": "This mapping covers the current diagnostic targets, not a complete annual syllabus allowlist.",
+    "scopeNoteEl": "Η αντιστοίχιση ακολουθεί τις οδηγίες Φυσικής Γ΄ 2026–27 και εφαρμόζει τις ρητές εξαιρέσεις μέσα στο κείμενο της πηγής: περιορισμός της §1.6, εξαιρέσεις στις §2.3/2.5, §3.1, §4.1, §5.3, §6.2, §7.1/7.2 και §8.1/8.3. Τα κεφάλαια 9–11 δεν εκτίθενται ως ετήσια θέματα AI Μελέτης. Ο διαγνωστικός στόχος «Τύπος ταχύτητας» παραμένει ρητά προαπαιτούμενη γνώση Β΄.",
+    "scopeNoteEn": "The mapping follows the 2026–27 G Gymnasium Physics guidance and applies its explicit exclusions inside the source text. Chapters 9–11 are not exposed as annual AI Study topics. The speed-formula diagnostic remains an explicitly labelled B Gymnasium prerequisite.",
+    "annualInstructionsStatus": "2026-27-verified",
+    "annualInstructionsNoteEl": "Section-aware allowlist με fail-closed συμπεριφορά και φυσική αφαίρεση εξαιρεμένης ύλης από το κείμενο που δίνεται στο AI.",
+    "annualInstructionsNoteEn": "Section-aware allowlist with fail-closed behavior; excluded material is removed from the text supplied to the AI.",
     "quizId": "fysiki-g-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "exact-official-page-grounding-for-current-diagnostics; prerequisite explicitly labelled; fail closed"
+    "sourceDiscipline": "official-source-only; annual-topic allowlist; exclusion-aware text scoping; prerequisite explicitly labelled; fail closed"
   },
   "chimeia-b-gymnasiou": {
   "schoolYear": "2026-2027",

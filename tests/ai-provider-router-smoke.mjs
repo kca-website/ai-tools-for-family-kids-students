@@ -190,7 +190,8 @@ try {
 
 assert.match(tutor, /chooseRoutingProfile/);
 assert.match(tutor, /modelProfile:\s*routingProfile/);
-assert.match(tutor, /\['flashcards', 'quiz', 'truefalse', 'plan'\]/);
+assert.match(tutor, /\['quiz', 'truefalse'\][\s\S]{0,80}return 'quality'/);
+assert.match(tutor, /\['flashcards', 'plan'\][\s\S]{0,80}return 'economy'/);
 assert.match(tutor, /\['explain', 'weakspots'\]/);
 
 console.log('AI provider router smoke passed.');

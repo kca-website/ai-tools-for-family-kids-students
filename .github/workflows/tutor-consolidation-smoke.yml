@@ -112,6 +112,9 @@ jobs:
       - name: Run A and G Gym Greek language schoolbook grounding smoke
         run: node tests/a-g-gym-language-schoolbook-grounding.mjs
 
+      - name: Run G Gym science schoolbook grounding smoke
+        run: node tests/g-gym-science-schoolbook-grounding.mjs
+
       - name: Run curriculum provenance smoke
         run: node tests/curriculum-provenance-smoke.mjs
 

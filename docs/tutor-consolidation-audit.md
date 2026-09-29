@@ -160,3 +160,46 @@ The original branch-status section above is now historical. The transitional lif
 - `tutor-extensions.css` was removed from the repository because it was not loaded by the application and had no runtime references.
 - The active tutor extensions continue to inject their existing styles, so this removal is behavior-preserving.
 - Any future stylesheet consolidation should move styles directly into the canonical loaded stylesheet path instead of keeping an unused staging CSS file.
+
+
+## 2026-09-29 — Shared StudyContext audit
+
+### Finding
+
+The current Tutor is already the correct conversational core and should not be rewritten. It resolves grade/subject/topic, diagnostic gap, learning path, official curriculum metadata, learning mode and conversation continuity, and it requests `/api/schoolbook-source` when a mapped official source is available.
+
+The remaining architecture gap is that this context is assembled inside Tutor-specific functions rather than passed as one small serializable contract between AI Study, Practice Map, Character, Flashcards, micro-lessons and learning paths.
+
+### Recommended shared contract
+
+```js
+{
+  zoneId,
+  roleId,
+  schoolType,
+  grade,
+  sector,
+  specialty,
+  subject,
+  topic,
+  gapId,
+  learningMode,
+  sourcePolicy,
+  documentContext
+}
+```
+
+This should be introduced incrementally and remain backward-compatible with the existing Tutor selectors/deep links. It is a context handoff contract, not a reason to turn the site into one large page or to rewrite the Tutor UI.
+
+### Source rules
+
+1. `/api/schoolbook-source` remains the single official-book evidence resolver.
+2. `subject + topic` must resolve to an explicit allowlisted official page or an explicitly labelled prerequisite page.
+3. Unmapped or unsafe selections fail closed. General model knowledge must not masquerade as schoolbook grounding.
+4. Earlier-grade prerequisite diagnostics are allowed, but the metadata must explicitly label the source as prerequisite knowledge.
+5. PDF precedence needs an explicit policy before deeper consolidation. At present, Tutor source retrieval is skipped when an attached document is active; this should become a deliberate `official + attachment` or `attachment override` policy rather than an implicit branch.
+6. Character, quiz generation, flashcards and summaries should consume the same resolved evidence payload instead of independently choosing educational sources.
+
+### Scope of this science batch
+
+This batch does not perform the full StudyContext migration. It applies the shared source discipline to the current G΄ Gymnasium Physics, Chemistry and Biology diagnostics and adds regression tests. The context migration should remain a separate focused batch after these source mappings are proven green.

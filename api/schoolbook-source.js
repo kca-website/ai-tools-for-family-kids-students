@@ -95,6 +95,24 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "fysiki-g-gymnasiou": {
+    title: "Φυσική Γ΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/",
+    mode: "physicsGQuiz",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics-plus-prerequisite-source"
+  },
+  "chimeia-g-gymnasiou": {
+    title: "Χημεία Γ΄ Γυμνασίου",
+    base: "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C102/223/",
+    mode: "chemistryGQuiz",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-prerequisites"
+  },
   "biologia-a-gymnasiou": {
     title: "Βιολογία Α΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/",
@@ -111,7 +129,11 @@ const BOOKS = {
   "biologia-g-gymnasiou": {
     title: "Βιολογία Β΄ και Γ΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
-    mode: "numeric"
+    mode: "biologyGQuiz",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics-plus-prerequisite-source"
   },
   "archaia-glossa-a-gymnasiou": {
     title: "Αρχαία Ελληνική Γλώσσα Α΄ Γυμνασίου",
@@ -193,6 +215,8 @@ const ALIASES = {
   "keimena-logotechnias-b-gymnasiou": "logotechnia-b-gymnasiou",
   "neoelliniki-logotechnia-b-gymnasiou": "logotechnia-b-gymnasiou",
   "fysiki-b-gymnasiou": "physics-gymnasiou",
+  "physics-g-gymnasiou": "fysiki-g-gymnasiou",
+  "chemistry-g-gymnasiou": "chimeia-g-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
   "biology-g-gymnasiou": "biologia-g-gymnasiou",
@@ -248,6 +272,37 @@ const MATH_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
   "distributing a negative": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA1_4.html"],
   "πυθαγορειο με καθετη πλευρα": ["https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"],
   "pythagorean theorem finding a leg": ["https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"]
+});
+
+const PHYSICS_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
+  "νομος του ωμ": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
+  "ohm s law": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"],
+  "τυπος ταχυτητας": ["https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"],
+  "speed formula": ["https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"],
+  "μετατροπη ενεργειας": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"],
+  "energy transformation": ["https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html"]
+});
+
+const CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
+  "στοιχειο vs ενωση": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"],
+  "element vs compound": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"],
+  "μειγμα vs ενωση": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html"],
+  "mixture vs compound": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html"],
+  "δομη του ατομου": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"],
+  "structure of the atom": ["https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"]
+});
+
+const BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
+  "θεση του dna": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_1.html"],
+  "location of dna": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_1.html"],
+  "κληρονομικοτητα απο τους γονεις": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_5.html"],
+  "inheritance from parents": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_5.html"],
+  "εννοια βιοποικιλοτητας": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index7_1.html"],
+  "concept of biodiversity": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index7_1.html"],
+  "αιτια εξαφανισης ειδους": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index7_1.html"],
+  "cause of species extinction": ["https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index7_1.html"],
+  "σκοπος αναπαραγωγης": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_1.html"],
+  "purpose of reproduction": ["https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_1.html"]
 });
 
 const OFFICIAL_GRAMMAR_BASE =
@@ -1177,6 +1232,10 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolvePhysicsBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
+  if (subject === "fysiki-g-gymnasiou") return resolvePhysicsGQuizUrls(topic);
+  if (subject === "chimeia-g-gymnasiou") return resolveChemistryGQuizUrls(topic);
+  if (subject === "biologia-g-gymnasiou") return resolveBiologyGQuizUrls(topic);
+
   if (subject === "biologia-b-gymnasiou") {
     return resolveBiologyBCurriculumUrls(topic);
   }
@@ -1233,7 +1292,7 @@ function resolveDirectSourceUrls(subject, topic) {
 function resolveSectionPath(mode, topic) {
   const t = String(topic || "");
 
-  if (mode === "biologyA" || mode === "biologyB" || mode === "physicsB" || mode === "iliadB" || mode === "englishB") return "";
+  if (mode === "biologyA" || mode === "biologyB" || mode === "biologyGQuiz" || mode === "physicsB" || mode === "physicsGQuiz" || mode === "chemistryGQuiz" || mode === "iliadB" || mode === "englishB") return "";
 
   if (mode === "ancientGreekB") {
     const n = unitNumber(topic);
@@ -1326,6 +1385,21 @@ function resolveMathAQuizPaths(topic) {
 function resolveMathGQuizUrls(topic) {
   const key = normalize(topic);
   return MATH_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...MATH_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
+}
+
+function resolvePhysicsGQuizUrls(topic) {
+  const key = normalize(topic);
+  return PHYSICS_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...PHYSICS_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
+}
+
+function resolveChemistryGQuizUrls(topic) {
+  const key = normalize(topic);
+  return CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
+}
+
+function resolveBiologyGQuizUrls(topic) {
+  const key = normalize(topic);
+  return BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
 }
 
 function resolvePhysicsBCurriculumPaths(topic) {
@@ -1816,6 +1890,9 @@ module.exports._test = Object.freeze({
   resolveGeographyBCurriculumPaths,
   resolveLiteratureBCurriculumPaths,
   resolvePhysicsBCurriculumPaths,
+  resolvePhysicsGQuizUrls,
+  resolveChemistryGQuizUrls,
+  resolveBiologyGQuizUrls,
   resolveBiologyBCurriculumUrls,
   resolveIliadBCurriculumPaths,
   resolveEnglishBCurriculumUrls,
@@ -1837,6 +1914,9 @@ module.exports._test = Object.freeze({
   GEOGRAPHY_B_2026_2027_PATHS,
   LITERATURE_B_2026_2027_TEXTS,
   PHYSICS_B_2026_2027_PATHS,
+  PHYSICS_G_GYM_DIAGNOSTIC_SOURCES,
+  CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES,
+  BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES,
   BIOLOGY_B_2026_2027_SOURCES,
   ANCIENT_GREEK_B_2026_2027_UNITS,
   ILIAD_B_2026_2027_PATHS,

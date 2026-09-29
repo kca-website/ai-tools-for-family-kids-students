@@ -58,7 +58,7 @@
   }
 
 
-  const UPLOAD_ACCEPT="application/pdf,.pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,text/plain,.txt,text/markdown,.md";
+  const UPLOAD_ACCEPT="application/pdf,.pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,text/plain,.txt,text/markdown,.md,image/*";
   const MAMMOTH_URL="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js";
   let mammothPromise=null;
   function ensureMammoth(){
@@ -76,18 +76,108 @@
   }
   const UPLOAD_MAX_CHARS=42000;
 
+  // OCR for photos and scanned PDFs. Runs in the browser; nothing is uploaded for recognition.
+  const TESSERACT_URL="https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js";
+  const OCR_MAX_PDF_PAGES=5;
+  const OCR_MAX_SIDE=2000;
+  let tesseractPromise=null;
+  function ensureTesseract(){
+    if(window.Tesseract) return Promise.resolve(window.Tesseract);
+    if(tesseractPromise) return tesseractPromise;
+    tesseractPromise=new Promise((resolve,reject)=>{
+      const s=document.createElement("script");
+      s.src=TESSERACT_URL;
+      s.async=true;
+      s.onload=()=>window.Tesseract?resolve(window.Tesseract):reject(new Error("ocr_unavailable"));
+      s.onerror=()=>{tesseractPromise=null;reject(new Error("ocr_unavailable"));};
+      document.head.appendChild(s);
+    });
+    return tesseractPromise;
+  }
+
+  async function imageFileToCanvas(file){
+    const bitmap=await createImageBitmap(file);
+    const scale=Math.min(1,OCR_MAX_SIDE/Math.max(bitmap.width,bitmap.height));
+    const canvas=document.createElement("canvas");
+    canvas.width=Math.max(1,Math.round(bitmap.width*scale));
+    canvas.height=Math.max(1,Math.round(bitmap.height*scale));
+    canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);
+    if(bitmap.close) bitmap.close();
+    return canvas;
+  }
+
+  async function pdfPagesToCanvases(file){
+    const reader=await ensurePdfReader();
+    const pdfjs=await reader.loadPdfJs();
+    const pdf=await pdfjs.getDocument({data:await file.arrayBuffer()}).promise;
+    const count=Math.min(pdf.numPages,OCR_MAX_PDF_PAGES);
+    const canvases=[];
+    for(let n=1;n<=count;n++){
+      const page=await pdf.getPage(n);
+      const base=page.getViewport({scale:1});
+      const viewport=page.getViewport({scale:Math.min(2.5,OCR_MAX_SIDE/Math.max(base.width,base.height))});
+      const canvas=document.createElement("canvas");
+      canvas.width=Math.round(viewport.width);
+      canvas.height=Math.round(viewport.height);
+      await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
+      canvases.push(canvas);
+    }
+    return {canvases,totalPages:pdf.numPages};
+  }
+
+  async function ocrCanvases(canvases,onProgress){
+    const Tesseract=await ensureTesseract();
+    let current=0;
+    const worker=await Tesseract.createWorker(["ell","eng"],1,{
+      logger:(m)=>{
+        if(!onProgress) return;
+        if(m.status==="recognizing text") onProgress("recognize",Math.round(((current+(m.progress||0))/canvases.length)*100));
+        else if(/load|initializ/i.test(m.status||"")) onProgress("load",Math.round((m.progress||0)*100));
+      }
+    });
+    try{
+      const parts=[];
+      for(current=0;current<canvases.length;current++){
+        const {data}=await worker.recognize(canvases[current]);
+        const text=String(data&&data.text||"").replace(/\u00B5/g,"μ").replace(/[ \t]+\n/g,"\n").replace(/\n{3,}/g,"\n\n").trim();
+        if(text) parts.push(canvases.length>1 ? "[Page "+(current+1)+"]\n"+text : text);
+      }
+      return parts.join("\n\n").trim();
+    }finally{
+      await worker.terminate();
+    }
+  }
+
   function uploadMarkup(kind,isEn){
     const hint=kind==="pdf" ? "" : '<p class="guided__upload-hint">'+(isEn
-      ? "Optional: attach a PDF, Word or text file with your material. It is read locally in your browser and only the extracted text is used."
-      : "Προαιρετικά: ανέβασε PDF, Word ή αρχείο κειμένου με το υλικό σου. Διαβάζεται τοπικά στον browser και χρησιμοποιείται μόνο το εξαγόμενο κείμενο.")+'</p>';
+      ? "Optional: attach a PDF, Word or text file, or a photo of your notes. It is read locally in your browser and only the extracted text is used."
+      : "Προαιρετικά: ανέβασε PDF, Word, αρχείο κειμένου ή φωτογραφία των σημειώσεών σου. Διαβάζεται τοπικά στον browser και χρησιμοποιείται μόνο το εξαγόμενο κείμενο.")+'</p>';
     return '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(kind==="pdf" ? (isEn?"Choose PDF or Word":"Επίλεξε PDF ή Word") : (isEn?"Attach file":"Ανέβασε αρχείο"))+'</label><input id="guidedPdfFile" type="file" accept="'+UPLOAD_ACCEPT+'"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span><button type="button" id="guidedPdfRemove" class="guided__upload-remove" hidden>'+(isEn?"Remove file":"Αφαίρεση αρχείου")+'</button></div>'+hint;
   }
 
-  async function readUploadFile(file){
+  async function readUploadFile(file,onProgress){
+    const isImage=/^image\//.test(file.type||"") || /\.(jpe?g|png|webp|gif|bmp)$/i.test(file.name||"");
+    if(isImage){
+      if(file.size>15*1024*1024) throw new Error("file_too_large");
+      const canvas=await imageFileToCanvas(file);
+      const text=await ocrCanvases([canvas],onProgress);
+      if(!text) throw new Error("ocr_empty");
+      return {name:file.name||"photo.jpg",text:text.slice(0,UPLOAD_MAX_CHARS),totalPages:0,truncated:text.length>UPLOAD_MAX_CHARS,ocr:true};
+    }
     const isPdf=file.type==="application/pdf" || /\.pdf$/i.test(file.name||"");
     if(isPdf){
       const reader=await ensurePdfReader();
-      return reader.read(file,{maxChars:UPLOAD_MAX_CHARS,maxPages:70});
+      try{
+        return await reader.read(file,{maxChars:UPLOAD_MAX_CHARS,maxPages:70});
+      }catch(err){
+        if(String(err&&err.message||err)!=="no_selectable_text") throw err;
+        // Scanned PDF: read the first pages with OCR.
+        if(onProgress) onProgress("scan",0);
+        const {canvases,totalPages}=await pdfPagesToCanvases(file);
+        const text=await ocrCanvases(canvases,onProgress);
+        if(!text) throw new Error("ocr_empty");
+        return {name:file.name||"document.pdf",text:text.slice(0,UPLOAD_MAX_CHARS),totalPages,truncated:totalPages>canvases.length||text.length>UPLOAD_MAX_CHARS,ocr:true};
+      }
     }
     const isDocx=/\.docx$/i.test(file.name||"") || file.type==="application/vnd.openxmlformats-officedocument.wordprocessingml.document";
     if(isDocx){
@@ -116,20 +206,32 @@
         status.textContent=isEn?"Reading the file locally…":"Διαβάζω το αρχείο τοπικά…";
         input.disabled=true;
         try{
-          const doc=await readUploadFile(file);
+          const doc=await readUploadFile(file,(stage,pct)=>{
+            status.textContent=stage==="recognize"
+              ? (isEn?"Reading the text from the image… ":"Διαβάζω το κείμενο από την εικόνα… ")+pct+"%"
+              : stage==="scan"
+                ? (isEn?"Scanned PDF: preparing text recognition…":"Σαρωμένο PDF: ετοιμάζω την αναγνώριση κειμένου…")
+                : (isEn?"Preparing text recognition (first time only, may take a moment)…":"Ετοιμάζω την αναγνώριση κειμένου (μόνο την πρώτη φορά, ίσως αργήσει λίγο)…");
+          });
           attached=doc;
-          status.textContent=doc.name+(doc.totalPages?" · "+doc.totalPages+(isEn?" pages":" σελίδες"):"")+(doc.truncated?(isEn?" · long document, using the first readable part":" · μεγάλο αρχείο, χρησιμοποιείται το πρώτο αναγνώσιμο μέρος"):"");
+          status.textContent=doc.name+(doc.totalPages?" · "+doc.totalPages+(isEn?" pages":" σελίδες"):"")
+            +(doc.ocr?(isEn?" · text read from image (OCR), may contain small errors":" · κείμενο από εικόνα (OCR), μπορεί να έχει μικρά λάθη"):"")
+            +(doc.truncated?(isEn?" · long document, using the first readable part":" · μεγάλο αρχείο, χρησιμοποιείται το πρώτο αναγνώσιμο μέρος"):"");
           if(remove) remove.hidden=false;
         }catch(err){
           attached=null;
           if(remove) remove.hidden=true;
           const code=String(err&&err.message||err);
           status.textContent=code==="no_selectable_text"
-            ? (isEn?"No selectable text was found. This may be a scanned/image PDF.":"Δεν βρέθηκε επιλέξιμο κείμενο. Ίσως είναι σαρωμένο PDF/εικόνα.")
+            ? (isEn?"No selectable text was found.":"Δεν βρέθηκε επιλέξιμο κείμενο.")
+            : code==="ocr_empty"
+              ? (isEn?"No text could be read from the image. Try a sharper, well-lit photo.":"Δεν διαβάστηκε κείμενο από την εικόνα. Δοκίμασε πιο καθαρή φωτογραφία με καλό φως.")
+            : code==="ocr_unavailable"
+              ? (isEn?"Text recognition could not load. Check your connection and try again.":"Η αναγνώριση κειμένου δεν φόρτωσε. Έλεγξε τη σύνδεση και δοκίμασε ξανά.")
             : code==="file_too_large"
-              ? (isEn?"The file is too large (PDF/Word up to 15 MB, text up to 2 MB).":"Το αρχείο είναι πολύ μεγάλο (PDF/Word έως 15 MB, κείμενο έως 2 MB).")
+              ? (isEn?"The file is too large (PDF/Word/photo up to 15 MB, text up to 2 MB).":"Το αρχείο είναι πολύ μεγάλο (PDF/Word/φωτογραφία έως 15 MB, κείμενο έως 2 MB).")
               : code==="unsupported_type"
-                ? (isEn?"Use a PDF, a Word (.docx) file or a .txt/.md text file.":"Χρησιμοποίησε PDF, Word (.docx) ή αρχείο κειμένου .txt/.md.")
+                ? (isEn?"Use a PDF, a Word (.docx) file, a .txt/.md text file or a photo.":"Χρησιμοποίησε PDF, Word (.docx), αρχείο κειμένου .txt/.md ή φωτογραφία.")
                 : (isEn?"The file could not be read.":"Δεν μπόρεσα να διαβάσω το αρχείο.");
         }finally{input.disabled=false;}
       });

@@ -748,29 +748,35 @@
   },
   "istoria-g-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "official-book-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο επιβεβαιωμένο",
-    "coverageLabelEn": "Official textbook verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι τρέχοντες διαγνωστικοί στόχοι συνδέονται με ακριβείς σελίδες του επίσημου βιβλίου",
+    "coverageLabelEn": "Current diagnostic topics are grounded in exact official textbook pages",
     "quizTitleEl": "Ιστορία, Γ' Γυμνασίου",
     "quizTitleEn": "History, 3rd Grade Middle School",
     "officialBook": {
       "titleEl": "Νεότερη και Σύγχρονη Ιστορία Γ΄ Γυμνασίου",
-      "titleEn": "Νεότερη και Σύγχρονη Ιστορία Γ΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C105/65/"
+      "titleEn": "Modern and Contemporary History, G΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5204/Istoria_G-Gymnasiou_html-empl/"
     },
-    "officialSectionsEl": [],
+    "officialSectionsEl": [
+      "Ενότητα 5 — Ο ελληνισμός από τα μέσα του 18ου αι. έως τις αρχές του 19ου αι.",
+      "Ενότητα 7 — Η Φιλική Εταιρεία και η κήρυξη της ελληνικής επανάστασης στις παραδουνάβιες ηγεμονίες",
+      "Ενότητα 8 — Η εξέλιξη της ελληνικής επανάστασης (1821-1827)",
+      "Ενότητα 9 — Πρώτες προσπάθειες των επαναστατημένων Ελλήνων για συγκρότηση κράτους"
+    ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Έχει επιβεβαιωθεί το επίσημο σχολικό βιβλίο. Δεν έχει ακόμη ολοκληρωθεί η αντιστοίχιση όλων των quiz topics με συγκεκριμένες ενότητες του βιβλίου.",
-    "scopeNoteEn": "The official textbook is verified. Full mapping of all quiz topics to exact textbook sections is not complete yet.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Οι τέσσερις στόχοι του σημερινού Χάρτη Εξάσκησης έχουν ελεγχθεί πάνω στο πραγματικό κείμενο των αντίστοιχων επίσημων ενοτήτων. Διορθώθηκαν διατυπώσεις που ήταν ευρύτερες από όσα στηρίζει το σχολικό βιβλίο. Δεν δηλώνεται ακόμη πλήρης ετήσια allowlist 2026–27.",
+    "scopeNoteEn": "The four current Practice Map topics have been checked against the actual text of their official textbook sections. Statements broader than the textbook evidence were tightened. This is not yet a complete 2026–27 annual allowlist.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Το ΙΕΠ έχει δημοσιεύσει οδηγίες Ιστορίας για το 2026–27. Η παρούσα αντιστοίχιση αφορά ακριβώς τα θέματα που εκθέτει σήμερα ο Χάρτης Εξάσκησης.",
+    "annualInstructionsNoteEn": "IEP has published 2026–27 History guidance. This mapping covers the exact topics currently exposed by the Practice Map.",
     "quizId": "istoria-g-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-official-page-grounding-for-current-diagnostic-topics; fail closed outside mapped topics"
   },
   "english-g-gymnasiou": {
     "schoolYear": "2026-2027",
@@ -872,40 +878,35 @@
   },
   "istoria-a-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "book-index-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο και περιεχόμενα επιβεβαιωμένα",
-    "coverageLabelEn": "Official textbook and contents verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι τρέχοντες διαγνωστικοί στόχοι συνδέονται με ακριβείς σελίδες του επίσημου βιβλίου",
+    "coverageLabelEn": "Current diagnostic topics are grounded in exact official textbook pages",
     "quizTitleEl": "Ιστορία, Α' Γυμνασίου (Προϊστορία - Κλασικά Χρόνια)",
     "quizTitleEn": "History, 7th Grade (Prehistory - Classical Period)",
     "officialBook": {
       "titleEl": "Αρχαία Ιστορία Α΄ Γυμνασίου",
-      "titleEn": "Αρχαία Ιστορία Α΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A105/29/"
+      "titleEn": "Ancient History, A΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2290/Istoria_A-Gymnasiou_html-empl/"
     },
     "officialSectionsEl": [
-      "Η Προϊστορία: Εποχή του Λίθου",
-      "Εποχή του Χαλκού: Εγγύς Ανατολή, Κυκλαδικός, Μινωικός και Μυκηναϊκός πολιτισμός",
-      "Ελληνικός κόσμος 1100–800 π.Χ.",
-      "Αρχαϊκή εποχή: αποικισμός, πόλη-κράτος, Σπάρτη, Αθήνα και πορεία προς τη δημοκρατία, Περσικοί πόλεμοι",
-      "Ηγεμονία της Αθήνας",
-      "Πελοποννησιακός πόλεμος και ηγεμονικοί ανταγωνισμοί",
-      "Ανάπτυξη της Μακεδονίας: Φίλιππος και Αλέξανδρος",
-      "Τέχνες και γράμματα της κλασικής εποχής",
-      "Ελληνιστικοί και ρωμαϊκοί χρόνοι",
-      "Από τη Ρώμη στο Βυζάντιο"
+      "Κεφάλαιο 2 · 2, 3 και 5 — Κυκλαδικός, Μινωικός και Μυκηναϊκός πολιτισμός",
+      "Κεφάλαιο 4 · 5 — Αθήνα: Πορεία προς τη δημοκρατία",
+      "Κεφάλαιο 6 · 1 — Τα αίτια και οι αφορμές του Πελοποννησιακού Πολέμου - Ο Αρχιδάμειος Πόλεμος",
+      "Κεφάλαιο 7 · 4 — Το έργο του Αλεξάνδρου"
     ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Ο αναλυτικός δείκτης αντιστοιχεί στα επίσημα περιεχόμενα της Αρχαίας Ιστορίας Α΄ Γυμνασίου. Ο Tutor πρέπει να μένει στην ορολογία και στο επίπεδο του σχολικού βιβλίου όταν το ερώτημα αφορά αυτές τις ενότητες.",
-    "scopeNoteEn": "The grade/subject is verified in the official 2026–27 textbook catalog. A chapter-level index has not yet been added for this quiz in our curriculum layer.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Οι τέσσερις στόχοι που εμφανίζονται σήμερα στον Χάρτη Εξάσκησης έχουν ακριβή σύνδεση με τις αντίστοιχες επίσημες σελίδες του σχολικού βιβλίου και η AI χρησιμοποιεί το πραγματικό κείμενό τους. Αυτό δεν δηλώνει ακόμη πλήρη καταγραφή κάθε ενότητας της ετήσιας ύλης 2026–27.",
+    "scopeNoteEn": "The four topics currently exposed by the Practice Map are linked to exact official textbook pages and AI uses their actual text. This does not yet claim a complete index of every section in the 2026–27 annual syllabus.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Το ΙΕΠ έχει δημοσιεύσει οδηγίες Ιστορίας για το 2026–27. Εδώ έχει επαληθευτεί η πηγή των τρεχόντων διαγνωστικών θεμάτων, όχι ακόμη πλήρης ετήσια allowlist.",
+    "annualInstructionsNoteEn": "IEP has published 2026–27 History guidance. This layer currently verifies exact sources for the exposed diagnostic topics, not yet a complete annual allowlist.",
     "quizId": "istoria-a-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-official-page-grounding-for-current-diagnostic-topics; fail closed outside mapped topics"
   },
   "english-a-gymnasiou": {
     "schoolYear": "2026-2027",

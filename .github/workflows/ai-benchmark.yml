@@ -1,0 +1,78 @@
+name: AI model benchmark (manual)
+
+# Manual only. Replays captured AI Study requests through the real handler against Cloudflare
+# Workers AI, one model at a time. Never runs on PRs and never changes production.
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: "1 = screening, 2 = finalists, safety = safety prompts"
+        required: true
+        default: "1"
+        type: choice
+        options: ["1", "2", "safety"]
+      models:
+        description: "Comma-separated Cloudflare model ids (empty = phase defaults)"
+        required: false
+        default: ""
+      max_neurons:
+        description: "Neuron budget for this run (the free pool is shared with real users)"
+        required: true
+        default: "4000"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-benchmark
+  cancel-in-progress: false
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Restore previous results (resume)
+        uses: actions/cache/restore@v4
+        with:
+          path: benchmark/results
+          key: ai-benchmark-${{ inputs.phase }}-${{ github.run_id }}
+          restore-keys: ai-benchmark-${{ inputs.phase }}-
+
+      - name: Run benchmark
+        env:
+          CLOUDFLARE_LLM_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_LLM_ACCOUNT_ID }}
+          CLOUDFLARE_LLM_AI_TOKEN: ${{ secrets.CLOUDFLARE_LLM_AI_TOKEN }}
+          BENCH_PHASE: ${{ inputs.phase }}
+          BENCH_MODELS: ${{ inputs.models }}
+          BENCH_MAX_NEURONS: ${{ inputs.max_neurons }}
+        run: |
+          case "$BENCH_MAX_NEURONS" in (*[!0-9]*|'') echo "max_neurons must be a number"; exit 1;; esac
+          if [ -n "$BENCH_MODELS" ]; then
+            node benchmark/run.mjs --phase "$BENCH_PHASE" --max-neurons "$BENCH_MAX_NEURONS" --models "$BENCH_MODELS"
+          else
+            node benchmark/run.mjs --phase "$BENCH_PHASE" --max-neurons "$BENCH_MAX_NEURONS"
+          fi
+
+      - name: Save results for the next run
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: benchmark/results
+          key: ai-benchmark-${{ inputs.phase }}-${{ github.run_id }}
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-benchmark-phase-${{ inputs.phase }}-${{ github.run_id }}
+          path: benchmark/results
+          retention-days: 30

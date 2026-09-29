@@ -124,6 +124,9 @@ jobs:
       - name: Run AI Study cache/source safety smoke
         run: node tests/study-cache-safety-smoke.mjs
 
+      - name: Run AI benchmark harness smoke (mock, no network)
+        run: node tests/ai-benchmark-harness-smoke.mjs
+
       - name: Run Ancient Greek subject dedupe smoke
         run: node tests/curriculum-resolver-subject-dedupe-smoke.mjs
 

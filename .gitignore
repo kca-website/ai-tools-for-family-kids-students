@@ -17,3 +17,6 @@ npm-debug.log*
 # Local env
 .env
 .env.local
+
+# AI benchmark results (may contain model outputs; never commit)
+benchmark/results/

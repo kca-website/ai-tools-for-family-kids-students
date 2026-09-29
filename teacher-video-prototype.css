@@ -8,7 +8,7 @@
 .video-options__grid{margin-top:14px}
 .video-options__note{margin:12px 0;color:#475467;font-size:.84rem}
 .video-create-btn{min-width:210px}
-.video-status{min-height:1.35em;margin-top:10px;color:#24594c;font-size:.88rem;font-weight:700}
+.video-status{min-height:1.35em;margin-top:10px;color:#164A70;font-size:.88rem;font-weight:700}
 .video-studio{margin-top:17px;padding-top:17px;border-top:1px solid #dfe4ea}
 .video-stage-wrap{overflow:hidden;border-radius:18px;background:#0f172a;box-shadow:0 14px 34px rgba(15,23,42,.18);aspect-ratio:16/9}
 .video-canvas{display:block;width:100%;height:100%;aspect-ratio:16/9}
@@ -28,7 +28,7 @@ body.teacher-video-active #teacherToolsDetails{margin-top:16px}
 @media print{.video-options{display:none!important}}
 
 .video-preview-progress{margin-top:12px}
-.video-preview-progress input[type="range"]{width:100%;accent-color:#2e6f5e}
+.video-preview-progress input[type="range"]{width:100%;accent-color:#1D5D8C}
 .video-preview-progress__time{display:flex;justify-content:space-between;margin-top:2px;color:#667085;font-size:.78rem;font-variant-numeric:tabular-nums}
 .video-file-preview{display:block;width:100%;margin-top:14px;border-radius:14px;background:#0f172a;aspect-ratio:16/9}
 .video-file-preview[hidden]{display:none!important}
@@ -40,7 +40,7 @@ body.teacher-video-active #teacherToolsDetails{margin-top:16px}
 .video-stage-wrap{position:relative}
 @media(max-width:620px){#videoFullscreenBtn,#videoExportBtn,#videoExportMp4Btn{min-height:46px}}
 
-.video-source-switch{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 14px;border:1px solid #d8e4df;border-radius:13px;background:#fff}
+.video-source-switch{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:14px;padding:12px 14px;border:1px solid #D6E6F5;border-radius:13px;background:#fff}
 .video-source-switch select{min-width:230px;border:1px solid #dfe4ea;border-radius:10px;padding:10px;background:#fff}
 .video-own-material{margin-top:12px;padding:15px;border:1px solid #d9d5f0;border-radius:14px;background:#faf9ff}
 .video-own-material[hidden]{display:none!important}.video-own-material__head strong{display:block}.video-own-material__head span{display:block;margin-top:3px;color:#667085;font-size:.84rem}

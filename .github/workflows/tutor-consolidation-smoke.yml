@@ -115,6 +115,9 @@ jobs:
       - name: Run G Gym science schoolbook grounding smoke
         run: node tests/g-gym-science-schoolbook-grounding.mjs
 
+      - name: Run shared StudyContext smoke
+        run: node tests/study-context-smoke.mjs
+
       - name: Run curriculum provenance smoke
         run: node tests/curriculum-provenance-smoke.mjs
 

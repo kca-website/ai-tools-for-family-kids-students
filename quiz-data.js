@@ -3556,6 +3556,74 @@ const GAP_TAGS = {
   "skillTagEl": "Τομείς Παραγωγής",
   "skillTagEn": "Production Sectors"
 },
+  "lit-b-gym.elytis-nature": {
+  "id": "lit-b-gym.elytis-nature",
+  "labelEl": "Σχέση ποιητικού υποκειμένου και φύσης",
+  "labelEn": "Poetic speaker and nature",
+  "explainEl": "Δυσκολεύεται να αναγνωρίσει ότι στο «Πίνοντας ήλιο κορινθιακό» η επαφή με τη φύση παρουσιάζεται ως αναζωογονητική και δημιουργική εμπειρία.",
+  "explainEn": "Struggles to recognize that in 'Drinking Corinthian Sun' contact with nature is presented as revitalizing and creative.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Αναγνώστης της Φύσης",
+  "achievementEn": "Nature Reader",
+  "positiveMessageEl": "Συνδέεις εικόνες και νόημα στο ποίημα!",
+  "positiveMessageEn": "You connect imagery and meaning in the poem!",
+  "skillTagEl": "Ποίηση & Φύση",
+  "skillTagEn": "Poetry & Nature"
+},
+  "lit-b-gym.anne-frank-diary-addressee": {
+  "id": "lit-b-gym.anne-frank-diary-addressee",
+  "labelEl": "Ημερολογιακή μορφή και αποδέκτης",
+  "labelEn": "Diary form and addressee",
+  "explainEl": "Δεν αναγνωρίζει τον πλασματικό αποδέκτη της ημερολογιακής γραφής και τον ρόλο της άμεσης προσωπικής εξομολόγησης.",
+  "explainEn": "Does not recognize the fictional addressee of the diary entry and the role of direct personal confession.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Αναγνώστης του Ημερολογίου",
+  "achievementEn": "Diary Reader",
+  "positiveMessageEl": "Αναγνωρίζεις πώς λειτουργεί η ημερολογιακή αφήγηση!",
+  "positiveMessageEn": "You recognize how diary narration works!",
+  "skillTagEl": "Ημερολόγιο & Αφήγηση",
+  "skillTagEn": "Diary & Narration"
+},
+  "lit-b-gym.little-prince-taming": {
+  "id": "lit-b-gym.little-prince-taming",
+  "labelEl": "Το «ημέρωμα» και οι δεσμοί",
+  "labelEn": "Taming and bonds",
+  "explainEl": "Διαβάζει κυριολεκτικά το «ημέρωμα» και χάνει τον συμβολικό του ρόλο ως δημιουργία προσωπικών δεσμών και ευθύνης.",
+  "explainEn": "Reads 'taming' literally and misses its symbolic role as creating personal bonds and responsibility.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Ερμηνευτής των Συμβόλων",
+  "achievementEn": "Symbol Interpreter",
+  "positiveMessageEl": "Βλέπεις το βαθύτερο νόημα πίσω από τις λέξεις!",
+  "positiveMessageEn": "You see the deeper meaning behind the words!",
+  "skillTagEl": "Συμβολισμός & Σχέσεις",
+  "skillTagEn": "Symbolism & Relationships"
+},
+  "lit-b-gym.thermopylae-symbolism": {
+  "id": "lit-b-gym.thermopylae-symbolism",
+  "labelEl": "Ο συμβολισμός στις «Θερμοπύλες»",
+  "labelEn": "Symbolism in 'Thermopylae'",
+  "explainEl": "Περιορίζει το ποίημα μόνο στο ιστορικό γεγονός και δεν αναγνωρίζει τη συμβολική τιμή προς όσους μένουν πιστοί στο χρέος και στις αξίες τους παρά τις δυσκολίες.",
+  "explainEn": "Reduces the poem to the historical event and misses the symbolic praise of people who remain faithful to duty and values despite difficulty.",
+  "recommendedToolIds": [
+    "chatgpt",
+    "perplexity"
+  ],
+  "achievementEl": "Ο Αναγνώστης των Συμβόλων",
+  "achievementEn": "Symbolism Reader",
+  "positiveMessageEl": "Ξεχωρίζεις το ιστορικό επίπεδο από το συμβολικό!",
+  "positiveMessageEn": "You distinguish the historical level from the symbolic one!",
+  "skillTagEl": "Συμβολισμός & Αξίες",
+  "skillTagEn": "Symbolism & Values"
+},
   "chimeia-g-gym.element-vs-compound": {
     "id": "chimeia-g-gym.element-vs-compound",
     "labelEl": "Στοιχείο vs Ένωση",
@@ -10601,6 +10669,116 @@ const QUIZZES = {
           "textEn": "The secondary sector.",
           "isCorrect": false,
           "gapTag": "geo-b-gym.production-sectors"
+        }
+      ]
+    }
+  ]
+},
+    "logotechnia-b-gymnasiou": {
+  "id": "logotechnia-b-gymnasiou",
+  "grades": [
+    "b"
+  ],
+  "subjectLabelEl": "Κείμενα Νεοελληνικής Λογοτεχνίας, Β' Γυμνασίου",
+  "subjectLabelEn": "Modern Greek Literature Texts, 8th Grade",
+  "titleEl": "Ο Χάρτης Ανάγνωσης Λογοτεχνίας",
+  "titleEn": "The Literature Reading Map",
+  "introEl": "4 σύντομες ερωτήσεις από κείμενα του επίσημου ανθολογίου. Οι οδηγίες 2026–27 προβλέπουν επιλογή κειμένων από τον/την εκπαιδευτικό, όχι μία ενιαία υποχρεωτική λίστα για όλους.",
+  "introEn": "4 short questions from the official anthology. The 2026–27 guidance uses teacher-selected texts rather than one mandatory list for every class.",
+  "questions": [
+    {
+      "id": "q1-elytis",
+      "textEl": "Στο «Πίνοντας ήλιο κορινθιακό», πώς παρουσιάζεται κυρίως η σχέση του ποιητικού υποκειμένου με τη φύση;",
+      "textEn": "In 'Drinking Corinthian Sun', how is the speaker's relationship with nature mainly presented?",
+      "options": [
+        {
+          "textEl": "Ως ζωντανή, αναζωογονητική επαφή που γεννά δημιουργική διάθεση.",
+          "textEn": "As a vivid, revitalizing contact that creates a creative mood.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Ως αδιαφορία και απομάκρυνση από το φυσικό τοπίο.",
+          "textEn": "As indifference and distance from nature.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.elytis-nature"
+        },
+        {
+          "textEl": "Ως αποκλειστικά επιστημονική παρατήρηση του τοπίου.",
+          "textEn": "As purely scientific observation of the landscape.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.elytis-nature"
+        }
+      ]
+    },
+    {
+      "id": "q2-anne-frank",
+      "textEl": "Στο απόσπασμα από το ημερολόγιο της Άννας Φρανκ, σε ποια απευθύνεται η Άννα όταν γράφει;",
+      "textEn": "In the Anne Frank diary excerpt, whom does Anne address when she writes?",
+      "options": [
+        {
+          "textEl": "Στην επινοημένη φίλη Κίτυ.",
+          "textEn": "Her fictional friend Kitty.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Στη Μαργκότ.",
+          "textEn": "Margot.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.anne-frank-diary-addressee"
+        },
+        {
+          "textEl": "Στον καθηγητή της.",
+          "textEn": "Her teacher.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.anne-frank-diary-addressee"
+        }
+      ]
+    },
+    {
+      "id": "q3-little-prince",
+      "textEl": "Στο «Ο μικρός πρίγκιπας και η αλεπού», τι σημαίνει κυρίως το «ημερώνω» όπως το εξηγεί η αλεπού;",
+      "textEn": "In 'The Little Prince and the Fox', what does 'to tame' mainly mean as the fox explains it?",
+      "options": [
+        {
+          "textEl": "Να δημιουργείς δεσμούς.",
+          "textEn": "To create bonds.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Να κερδίζεις σε έναν αγώνα.",
+          "textEn": "To win a contest.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.little-prince-taming"
+        },
+        {
+          "textEl": "Να μαθαίνεις σε ένα ζώο ένα τέχνασμα.",
+          "textEn": "To teach an animal a trick.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.little-prince-taming"
+        }
+      ]
+    },
+    {
+      "id": "q4-thermopylae",
+      "textEl": "Στις «Θερμοπύλες» του Καβάφη, ποιοι τιμώνται πέρα από το συγκεκριμένο ιστορικό γεγονός;",
+      "textEn": "In Cavafy's 'Thermopylae', who is honored beyond the specific historical event?",
+      "options": [
+        {
+          "textEl": "Όσοι μένουν πιστοί στο χρέος και στις αξίες τους ακόμη κι όταν προβλέπουν τη δυσκολία ή την ήττα.",
+          "textEn": "Those who remain faithful to duty and values even when they foresee hardship or defeat.",
+          "isCorrect": true
+        },
+        {
+          "textEl": "Μόνο όσοι γνωρίζουν πολλές ιστορικές ημερομηνίες.",
+          "textEn": "Only those who know many historical dates.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.thermopylae-symbolism"
+        },
+        {
+          "textEl": "Όσοι αποφεύγουν κάθε δύσκολη επιλογή.",
+          "textEn": "Those who avoid every difficult choice.",
+          "isCorrect": false,
+          "gapTag": "lit-b-gym.thermopylae-symbolism"
         }
       ]
     }

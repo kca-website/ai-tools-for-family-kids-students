@@ -182,6 +182,9 @@ function installSandbox() {
     if (target === PLACEHOLDER && TARGET && !WHITELIST.has(TARGET)) {
       target = TARGET;
       delete body.reasoning_effort;
+      if (target === '@cf/google/gemma-4-26b-a4b-it') {
+        body.chat_template_kwargs = { ...(body.chat_template_kwargs || {}), enable_thinking: false };
+      }
     }
     const started = Date.now();
     const res = MOCK ? mockResponse(body) : await realFetch(u.replace(/\/ai\/run\/.+$/, '/ai/run/' + target), { ...init, body: JSON.stringify(body) });

@@ -30,6 +30,9 @@ for (const row of summary.slice(1)) assert.match(row, /,8,100%,100%,0,0,/, 'mock
 const blind = fs.readFileSync(path.join(out, 'blind.csv'), 'utf8');
 assert.doesNotMatch(blind, /@cf\//, 'blind file must not reveal model ids');
 assert.ok(fs.readFileSync(path.join(out, 'blind-key.csv'), 'utf8').includes('@cf/qwen/'), 'key file maps blind ids to models');
+const harnessSource = fs.readFileSync(path.join(root, 'benchmark/run.mjs'), 'utf8');
+assert.match(harnessSource, /@cf\/google\/gemma-4-26b-a4b-it/);
+assert.match(harnessSource, /enable_thinking:\s*false/);
 
 execFileSync(process.execPath, [path.join(root, 'benchmark/run.mjs'), '--phase', 'safety', '--mock',
   '--models', '@cf/openai/gpt-oss-120b', '--out', out + '-safety'], { env, stdio: 'pipe' });

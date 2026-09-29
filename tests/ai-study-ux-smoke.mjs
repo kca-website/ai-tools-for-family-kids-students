@@ -12,7 +12,8 @@ assert.match(html, /for\(let attempt=0;attempt<2;attempt\+\+\)/);
 assert.match(html, /5 ερωτήσεις · μία-μία/);
 assert.match(html, /Run a 5-question quick quiz/);
 assert.match(html, /interactiveTotal=action==='quiz'\?5:0/);
-assert.match(html, /Question '\+interactiveStep\+\(lang==='en'\?' of ':' από '\)\+interactiveTotal/);
+assert.match(html, /function quizProgressHtml\(\)/);
+assert.match(html, /interactiveStep\+\(lang==='en'\?' of ':' από '\)\+interactiveTotal/);
 assert.match(html, /Do NOT ask another question/);
 
 assert.match(html, /function studyMarkup\(text\)/);

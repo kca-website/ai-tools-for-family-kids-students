@@ -10,6 +10,14 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "mathimatika-b-gymnasiou": {
+    title: "Μαθηματικά Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/",
+    mode: "mathB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
@@ -77,6 +85,7 @@ const BOOKS = {
 
 const ALIASES = {
   "fysiki-b-gymnasiou": "physics-gymnasiou",
+  "math-b-gymnasiou": "mathimatika-b-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
   "biology-g-gymnasiou": "biologia-g-gymnasiou"
@@ -136,6 +145,233 @@ const HISTORY_B_2026_2027_PATHS = Object.freeze({
   "7.1.3": ["index7_1_3.html"],
   "7.1.4": ["index7_1_4.html"],
   "7.2": ["index7_2.html"]
+});
+
+
+// Exact 2026-27 Mathematics B curriculum allowlist, verified against the
+// official IEP annual guidance. It includes the six explicitly prescribed
+// A-Gymnasium review sections (7.1-7.6), the listed 7.7-7.9 sections, and
+// optional sections named in the guidance. All A-Gymnasium sections are
+// non-examinable. Book sections absent from this map fail closed.
+const MATH_B_2026_2027_URLS = Object.freeze({
+  "R7.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_1.html"
+  ],
+  "R7.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_2.html"
+  ],
+  "R7.3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_3.html"
+  ],
+  "R7.4": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_4.html"
+  ],
+  "R7.5": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_5.html"
+  ],
+  "R7.6": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_6.html"
+  ],
+  "R7.7": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_7.html"
+  ],
+  "R7.8": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_8.html"
+  ],
+  "R7.9": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/indexA7_9.html"
+  ],
+  "A1.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_1.html"
+  ],
+  "A1.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_2.html"
+  ],
+  "A1.4": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_4.html"
+  ],
+  "A2.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_1.html"
+  ],
+  "A2.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_2.html"
+  ],
+  "A2.3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_3.html"
+  ],
+  "A3.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_1.html"
+  ],
+  "A3.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_2.html"
+  ],
+  "A3.3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_3.html"
+  ],
+  "A3.4": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_4.html"
+  ],
+  "A3.5": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_5.html"
+  ],
+  "A4.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_1.html"
+  ],
+  "A4.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_2.html"
+  ],
+  "A4.5": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_5.html"
+  ],
+  "B1.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_1.html"
+  ],
+  "B1.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_2.html"
+  ],
+  "B1.3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_3.html"
+  ],
+  "B1.4": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"
+  ],
+  "B2.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB2_1.html"
+  ],
+  "B2.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB2_2.html"
+  ],
+  "B3.1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_1.html"
+  ],
+  "B3.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_2.html"
+  ],
+  "B3.3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_3.html"
+  ],
+  "B3.5": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_5.html"
+  ],
+  "B4.2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_2.html"
+  ],
+  "B4.3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_3.html"
+  ],
+  "B4.4": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_4.html"
+  ],
+  "B4.6": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_6.html"
+  ],
+  "A1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_4.html"
+  ],
+  "A2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_3.html"
+  ],
+  "A3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_4.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_5.html"
+  ],
+  "A4": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_5.html"
+  ],
+  "B1": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"
+  ],
+  "B2": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB2_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB2_2.html"
+  ],
+  "B3": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_5.html"
+  ],
+  "B4": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_4.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_6.html"
+  ],
+  "PA": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_4.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_4.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_5.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA4_5.html"
+  ],
+  "PB": [
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB2_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB2_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_1.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB3_5.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_2.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_3.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_4.html",
+    "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB4_6.html"
+  ]
+});
+
+const MATH_B_2026_2027_SCOPE = Object.freeze({
+  "R7.1": "Επανάληψη από το βιβλίο Α΄ Γυμνασίου (στο πλαίσιο των 8 ωρών για τις §7.1–7.6). Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.2": "Επανάληψη από το βιβλίο Α΄ Γυμνασίου (στο πλαίσιο των 8 ωρών για τις §7.1–7.6). Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.3": "Επανάληψη από το βιβλίο Α΄ Γυμνασίου (στο πλαίσιο των 8 ωρών για τις §7.1–7.6). Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.4": "Επανάληψη από το βιβλίο Α΄ Γυμνασίου (στο πλαίσιο των 8 ωρών για τις §7.1–7.6). Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.5": "Επανάληψη από το βιβλίο Α΄ Γυμνασίου (στο πλαίσιο των 8 ωρών για τις §7.1–7.6). Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.6": "Επανάληψη από το βιβλίο Α΄ Γυμνασίου (στο πλαίσιο των 8 ωρών για τις §7.1–7.6). Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.7": "Διδάσκεται από το βιβλίο Α΄ Γυμνασίου με την τροποποίηση της ετήσιας οδηγίας. Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.8": "Διδάσκεται από το βιβλίο Α΄ Γυμνασίου. Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "R7.9": "Διδάσκεται από το βιβλίο Α΄ Γυμνασίου. Δεν αποτελεί εξεταστέα ύλη στη Β΄ Γυμνασίου.",
+  "A1.1": "Να μη διδαχθεί ο τυπικός ορισμός της «μεταβλητής» στη σελίδα 11. Η έννοια να προσεγγιστεί περιγραφικά, με έμφαση στον ρόλο και τη σημασία της.",
+  "A2.3": "Πρόσθετο/προαιρετικό περιεχόμενο. Προτείνεται να διδαχθεί ενιαία με το Μέρος Β΄ §1.4.",
+  "A3.2": "Να μη διδαχθούν η εφαρμογή 2 στη σελίδα 62 και ο τύπος της απόστασης δύο σημείων στη σελίδα 63.",
+  "A3.4": "Να μη διδαχθούν οι υποπαράγραφοι «Η εξίσωση της μορφής α·x + β·y = γ» και «Σημεία τομής της ευθείας α·x + β·y = γ με τους άξονες».",
+  "A4.1": "Οι έννοιες πληθυσμός, μεταβλητή, δείγμα, δειγματοληψία, δημοσκόπηση, μέγεθος δείγματος και αντιπροσωπευτικότητα μπορούν να εξηγηθούν, αλλά δεν αποτελούν εξεταστέα ύλη.",
+  "A4.5": "Να μη διδαχθεί η υποπαράγραφος «Μέση τιμή ομαδοποιημένης κατανομής».",
+  "B2.2": "Να μη διδαχθεί η παρατήρηση (β) στη σελίδα 143. Μπορούν να επιλεγούν ασκήσεις από την §2.3 και να χρησιμοποιηθεί ο πίνακας τριγωνομετρικών αριθμών, αλλά η §2.3 δεν αποτελεί αυτοτελή επιλεγμένη ενότητα.",
+  "B3.2": "Η υποπαράγραφος «Κατασκευή κανονικών πολυγώνων» είναι πρόσθετη/προαιρετική.",
+  "B4.4": "Πρόσθετο/προαιρετικό περιεχόμενο. Η γνωριμία με τα στερεά των §4.4 και §4.6 προβλέπεται συνολικά σε μία διδακτική ώρα με κατάλληλο υλικό.",
+  "B4.6": "Πρόσθετο/προαιρετικό περιεχόμενο. Η γνωριμία με τα στερεά των §4.4 και §4.6 προβλέπεται συνολικά σε μία διδακτική ώρα με κατάλληλο υλικό.",
+  "A1": "Ισχύει η ειδική εξαίρεση της §1.1: να μη διδαχθεί ο τυπικός ορισμός της «μεταβλητής» στη σελίδα 11.",
+  "A2": "Η §2.3 είναι πρόσθετη/προαιρετική και προτείνεται να διδαχθεί ενιαία με το Μέρος Β΄ §1.4.",
+  "A3": "Στην §3.2 να μη διδαχθούν η εφαρμογή 2 στη σελίδα 62 και ο τύπος απόστασης δύο σημείων στη σελίδα 63. Στην §3.4 να μη διδαχθούν οι υποπαράγραφοι για την εξίσωση α·x + β·y = γ και τα σημεία τομής της με τους άξονες.",
+  "A4": "Στην §4.1 οι βασικές έννοιες δειγματοληψίας μπορούν να εξηγηθούν αλλά δεν είναι εξεταστέες. Στην §4.5 να μη διδαχθεί η «Μέση τιμή ομαδοποιημένης κατανομής».",
+  "B2": "Στην §2.2 να μη διδαχθεί η παρατήρηση (β) στη σελίδα 143. Επιτρέπεται επιλογή ασκήσεων από την §2.3, αλλά η §2.3 δεν είναι αυτοτελής επιλεγμένη ενότητα.",
+  "B3": "Στην §3.2 η «Κατασκευή κανονικών πολυγώνων» είναι πρόσθετη/προαιρετική.",
+  "B4": "Οι §4.4 και §4.6 είναι πρόσθετες/προαιρετικές και η γνωριμία με τα δύο στερεά προβλέπεται συνολικά σε μία διδακτική ώρα.",
+  "PA": "Γονική επιλογή Άλγεβρας: ισχύουν όλες οι ειδικές εξαιρέσεις/σημειώσεις των §1.1, §2.3, §3.2, §3.4, §4.1 και §4.5. Μη χρησιμοποιείς εξαιρεμένο περιεχόμενο επειδή εμφανίζεται στις επίσημες σελίδες.",
+  "PB": "Γονική επιλογή Γεωμετρίας: ισχύουν οι ειδικές σημειώσεις των §2.2, §3.2, §4.4 και §4.6. Μη χρησιμοποιείς εξαιρεμένο περιεχόμενο επειδή εμφανίζεται στις επίσημες σελίδες."
 });
 
 module.exports = async function handler(req, res) {
@@ -225,6 +461,7 @@ module.exports = async function handler(req, res) {
 
     const useful = book.multi ? combinedText : selectUsefulText(combinedText, topic);
     const sourceUrl = sourceUrls[0] || book.base;
+    const curriculumScope = resolveCurriculumScope(subject, topic);
 
     if (useful.length < 500) {
       return res.status(404).json({
@@ -244,6 +481,7 @@ module.exports = async function handler(req, res) {
       bookTitle: book.title,
       schoolYear: book.schoolYear || null,
       curriculumSource: book.curriculumSource || null,
+      curriculumScope,
       sourceUrl,
       sourceUrls,
       text: useful.slice(0, 42000)
@@ -269,6 +507,10 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "istoria-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "mathimatika-b-gymnasiou") {
+    return resolveMathBCurriculumUrls(topic);
   }
 
   if (subject === "biologia-a-gymnasiou") {
@@ -386,6 +628,46 @@ function resolveSectionPath(mode, topic) {
   }
 
   return "";
+}
+
+
+function resolveMathBCurriculumUrls(topic) {
+  const key = mathBTopicKey(topic);
+  return key && MATH_B_2026_2027_URLS[key]
+    ? [...MATH_B_2026_2027_URLS[key]]
+    : [];
+}
+
+function resolveCurriculumScope(subject, topic) {
+  if (subject !== "mathimatika-b-gymnasiou") return "";
+  return resolveMathBCurriculumScope(topic);
+}
+
+function resolveMathBCurriculumScope(topic) {
+  const key = mathBTopicKey(topic);
+  if (!key || !MATH_B_2026_2027_URLS[key]) return "";
+  return MATH_B_2026_2027_SCOPE[key] ||
+    "Εντός της επαληθευμένης διδακτέας ύλης 2026–27. Χρησιμοποίησε μόνο την επιλεγμένη επίσημη ενότητα και μην επεκτείνεις το περιεχόμενο πέρα από αυτήν.";
+}
+
+function mathBTopicKey(topic) {
+  const value = String(topic || "");
+  const review = value.match(/(?:Επανάληψη\s+)?από\s+Α[΄']?\s*Γυμνασίου\s*·\s*(7\.[1-9])/i);
+  if (review) return `R${review[1]}`;
+
+  const partMatch = value.match(/Μέρος\s+([ΑAΒB])/i);
+  if (!partMatch) return "";
+  const rawPart = partMatch[1].toUpperCase();
+  const part = rawPart === "Α" || rawPart === "A" ? "A" : rawPart === "Β" || rawPart === "B" ? "B" : "";
+  if (!part) return "";
+
+  const section = (value.match(/\b\d+\.\d+\b/) || [])[0];
+  if (section) return `${part}${section}`;
+
+  const chapter = (value.match(/Κεφάλαιο\s+(\d+)/i) || [])[1];
+  if (chapter) return `${part}${chapter}`;
+
+  return `P${part}`;
 }
 
 function resolveHistoryCurriculumPaths(topic) {
@@ -557,6 +839,12 @@ function selectUsefulText(text, topic) {
 module.exports._test = Object.freeze({
   historyTopicKey,
   resolveHistoryCurriculumPaths,
+  mathBTopicKey,
+  resolveMathBCurriculumUrls,
+  resolveMathBCurriculumScope,
+  resolveCurriculumScope,
   resolveSectionPath,
-  HISTORY_B_2026_2027_PATHS
+  HISTORY_B_2026_2027_PATHS,
+  MATH_B_2026_2027_URLS,
+  MATH_B_2026_2027_SCOPE
 });

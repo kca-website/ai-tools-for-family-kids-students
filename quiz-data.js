@@ -3097,39 +3097,40 @@ const GAP_TAGS = {
     "skillTagEl": "Σειρά σε Ερωτήσεις",
     "skillTagEn": "Question Word Order"
   },
-  "math-b-gym.monomial-like-terms": {
-    "id": "math-b-gym.monomial-like-terms",
-    "labelEl": "Όμοιοι μονόμιοι όροι",
-    "labelEn": "Like monomial terms",
-    "explainEl": "Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x² ) σαν να ήταν όμοιοι όροι.",
-    "explainEn": "Tries to add monomials with different variable parts (e.g. 3x + 2x²) as if they were like terms.",
+  "math-b-gym.square-root-positive": {
+    "id": "math-b-gym.square-root-positive",
+    "labelEl": "Τετραγωνική ρίζα θετικού αριθμού",
+    "labelEn": "Square root of a positive number",
+    "explainEl": "Μπερδεύει την τετραγωνική ρίζα √a με τις δύο λύσεις της εξίσωσης x²=a. Η √a είναι η μη αρνητική ρίζα: π.χ. √49=7, ενώ x²=49 έχει λύσεις ±7.",
+    "explainEn": "Confuses √a with the two solutions of x²=a. The square root √a is the non-negative root: e.g. √49=7, while x²=49 has solutions ±7.",
     "recommendedToolIds": [
       "wolfram-alpha",
       "perplexity"
     ],
-    "achievementEl": "Ο Γνώστης των Μονωνύμων",
-    "achievementEn": "Monomial Expert",
-    "positiveMessageEl": "Ξέρεις ποιοι όροι μπορούν να προστεθούν μεταξύ τους!",
-    "positiveMessageEn": "You know which terms can be added together!",
-    "skillTagEl": "Μονώνυμα",
-    "skillTagEn": "Monomials"
+    "achievementEl": "Ο Εξερευνητής των Ριζών",
+    "achievementEn": "Square Root Explorer",
+    "positiveMessageEl": "Ξεχωρίζεις τη ρίζα από τις λύσεις μιας εξίσωσης!",
+    "positiveMessageEn": "You can tell a square root from the solutions of an equation!",
+    "skillTagEl": "Τετραγωνικές Ρίζες",
+    "skillTagEn": "Square Roots"
   },
-  "math-b-gym.identity-square-sum": {
-    "id": "math-b-gym.identity-square-sum",
-    "labelEl": "Ταυτότητα (α+β)²",
-    "labelEn": "Identity (a+b)²",
-    "explainEl": "Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
-    "explainEn": "Incorrectly simplifies (a+b)² to a²+b², forgetting the cross term 2ab.",
+  "math-b-gym.proportional-function": {
+    "id": "math-b-gym.proportional-function",
+    "labelEl": "Η συνάρτηση y = αx",
+    "labelEn": "The function y = ax",
+    "explainEl": "Στη συνάρτηση y=αx δεν εφαρμόζει σωστά τον συντελεστή α στην τιμή του x ή μπερδεύει τον πολλαπλασιασμό με πρόσθεση.",
+    "explainEn": "In y=ax, does not apply coefficient a correctly to x or confuses multiplication with addition.",
     "recommendedToolIds": [
-      "wolfram-alpha",
-      "perplexity"
+      "desmos",
+      "geogebra",
+      "wolfram-alpha"
     ],
-    "achievementEl": "Ο Γνώστης των Ταυτοτήτων",
-    "achievementEn": "Identity Expert",
-    "positiveMessageEl": "Δεν ξεχνάς ποτέ τον διπλό όρο!",
-    "positiveMessageEn": "You never forget the cross term!",
-    "skillTagEl": "Αλγεβρικές Ταυτότητες",
-    "skillTagEn": "Algebraic Identities"
+    "achievementEl": "Ο Χαρτογράφος των Συναρτήσεων",
+    "achievementEn": "Function Mapper",
+    "positiveMessageEl": "Συνδέεις σωστά τον τύπο μιας συνάρτησης με τις τιμές της!",
+    "positiveMessageEn": "You correctly connect a function rule with its values!",
+    "skillTagEl": "Συναρτήσεις",
+    "skillTagEn": "Functions"
   },
   "math-b-gym.pythagorean-application": {
     "id": "math-b-gym.pythagorean-application",
@@ -9737,50 +9738,50 @@ const QUIZZES = {
       "introEn": "4 short questions. It's not a test, there's no grade.",
       "questions": [
         {
-          "id": "q1-like-terms",
-          "textEl": "Ποια από τα παρακάτω είναι όμοιοι όροι με το 3x;",
-          "textEn": "Which of the following is a like term to 3x?",
+          "id": "q1-square-root",
+          "textEl": "Ποια είναι η τετραγωνική ρίζα √49;",
+          "textEn": "What is the square root √49?",
           "options": [
             {
-              "textEl": "5x",
-              "textEn": "5x",
+              "textEl": "7",
+              "textEn": "7",
               "isCorrect": true
             },
             {
-              "textEl": "3x²",
-              "textEn": "3x²",
+              "textEl": "±7",
+              "textEn": "±7",
               "isCorrect": false,
-              "gapTag": "math-b-gym.monomial-like-terms"
+              "gapTag": "math-b-gym.square-root-positive"
             },
             {
-              "textEl": "3",
-              "textEn": "3",
+              "textEl": "49",
+              "textEn": "49",
               "isCorrect": false,
-              "gapTag": "math-b-gym.monomial-like-terms"
+              "gapTag": "math-b-gym.square-root-positive"
             }
           ]
         },
         {
-          "id": "q2-identity",
-          "textEl": "Πόσο κάνει (x+3)²;",
-          "textEn": "What is (x+3)²?",
+          "id": "q2-proportional-function",
+          "textEl": "Στη συνάρτηση y = 3x, αν x = 4, ποια είναι η τιμή του y;",
+          "textEn": "For y = 3x, if x = 4, what is y?",
           "options": [
             {
-              "textEl": "x² + 6x + 9",
-              "textEn": "x² + 6x + 9",
+              "textEl": "12",
+              "textEn": "12",
               "isCorrect": true
             },
             {
-              "textEl": "x² + 9",
-              "textEn": "x² + 9",
+              "textEl": "7",
+              "textEn": "7",
               "isCorrect": false,
-              "gapTag": "math-b-gym.identity-square-sum"
+              "gapTag": "math-b-gym.proportional-function"
             },
             {
-              "textEl": "x² + 3x + 9",
-              "textEn": "x² + 3x + 9",
+              "textEl": "3/4",
+              "textEn": "3/4",
               "isCorrect": false,
-              "gapTag": "math-b-gym.identity-square-sum"
+              "gapTag": "math-b-gym.proportional-function"
             }
           ]
         },

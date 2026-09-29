@@ -17,10 +17,11 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI σύνοψη δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { sourceText = '', topic = '', language = 'el', sourceTitle = '' } = req.body || {};
+  const { sourceText = '', topic = '', language = 'el', sourceTitle = '', sourceScope = '' } = req.body || {};
   const source = String(sourceText || '').trim();
   const selectedTopic = String(topic || '').trim().slice(0, 600);
   const title = String(sourceTitle || '').trim().slice(0, 300);
+  const scope = String(sourceScope || '').trim().slice(0, 5000);
   const lang = language === 'en' ? 'en' : 'el';
 
   if (source.length < 300) {
@@ -29,6 +30,20 @@ module.exports = async function handler(req, res) {
   if (source.length > 50000) {
     return res.status(413).json({ error: 'source_too_large', message: 'Η πηγή είναι πολύ μεγάλη για ασφαλή σύνοψη.' });
   }
+
+  if (String(sourceScope || '').length > 5000) {
+    return res.status(413).json({ error: 'scope_too_large', message: 'Το πλαίσιο της επίσημης ύλης είναι πολύ μεγάλο.' });
+  }
+
+  const scopeGuard = scope
+    ? `
+
+AUTHORITATIVE CURRICULUM SCOPE:
+${scope}
+- Apply this scope even when excluded material is physically present in SOURCE.
+- Do not create or keep claims from content that the scope says not to teach or explicitly excludes.
+- Preserve optional/non-examinable status exactly; do not present such content as required or examinable.`
+    : '';
 
   const claimSystem = lang === 'en'
     ? `Create a concise learner-facing summary from an official Greek schoolbook source.
@@ -58,14 +73,17 @@ STRICT RULES:
 - Οι προτάσεις να είναι σύντομες και φυσικές για προφορική ανάγνωση.
 - Χωρίς markdown και χωρίς σχόλια έξω από το JSON.`;
 
+  const claimSystemScoped = claimSystem + scopeGuard;
+
   const first = await generateChat({
     messages: [
-      { role: 'system', content: claimSystem },
+      { role: 'system', content: claimSystemScoped },
       {
         role: 'user',
         content: [
           title ? `BOOK: ${title}` : '',
           selectedTopic ? `SELECTED TOPIC: ${selectedTopic}` : '',
+          scope ? `CURRICULUM SCOPE: ${scope}` : '',
           'SOURCE:',
           source,
         ].filter(Boolean).join('\n\n')
@@ -128,6 +146,8 @@ For each candidate:
 - Μην ξαναγράφεις τα claims και μην προσθέτεις γεγονότα.
 - Έλεγξε κάθε id που σου δίνεται.`;
 
+  const auditSystemScoped = auditSystem + scopeGuard;
+
   const auditPayload = evidenceChecked.map(row => ({
     id: row.id,
     claim: row.claim,
@@ -136,11 +156,12 @@ For each candidate:
 
   const second = await generateChat({
     messages: [
-      { role: 'system', content: auditSystem },
+      { role: 'system', content: auditSystemScoped },
       {
         role: 'user',
         content: [
           selectedTopic ? `TOPIC: ${selectedTopic}` : '',
+          scope ? `CURRICULUM SCOPE: ${scope}` : '',
           'SOURCE:',
           source,
           'CANDIDATES:',

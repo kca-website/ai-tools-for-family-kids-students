@@ -255,7 +255,7 @@
     box.classList.remove('hidden');
   }
   function requiresOfficialSource(){
-    return ['physics-gymnasiou','istoria-b-gymnasiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
+    return ['physics-gymnasiou','istoria-b-gymnasiou','mathimatika-b-gymnasiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
   }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}
@@ -404,7 +404,8 @@
         documentText:attached?.text?sourceExcerpt(attached.text,prompt,28000,!topic):(officialSource?.text||''),
         documentName:attached?.name||(officialSource?.bookTitle||''),
         documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
-        documentSourceUrl:officialSource?.sourceUrl||''
+        documentSourceUrl:officialSource?.sourceUrl||'',
+        documentScope:attached?.text?'':(officialSource?.curriculumScope||'')
       })});
       const body=await res.json().catch(()=>({}));
       if(!res.ok) throw new Error(body?.message||'AI plan failed');
@@ -469,7 +470,8 @@
       documentText:attached?.text?sourceExcerpt(attached.text,(promptOverride||selectedTopic()||action),action==='quickreview'?24000:20000,false):(officialSource?.text||''),
       documentName:attached?.name||(officialSource?.bookTitle||''),
       documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
-      documentSourceUrl:officialSource?.sourceUrl||''
+      documentSourceUrl:officialSource?.sourceUrl||'',
+      documentScope:attached?.text?'':(officialSource?.curriculumScope||'')
     };
     lastServerPayload={action,payload};
     const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
@@ -529,6 +531,7 @@
         sourceText:source?.text||'',
         topic:selectedTopic(),
         sourceTitle:source?.bookTitle||'',
+        sourceScope:source?.curriculumScope||'',
         language:lang
       })
     });

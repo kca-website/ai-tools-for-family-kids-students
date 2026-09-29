@@ -1591,50 +1591,50 @@ const LEARNING_PATHS = {
       "toolId": null
     }
   ],
-  "math-b-gym.monomial-like-terms": [
+  "math-b-gym.square-root-positive": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
       "titleEn": "Try it yourself first",
-      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Όμοιοι μονόμιοι όροι» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Προσπαθεί να προσθέσει μονώνυμα με διαφορετικό κύριο μέρος (π.χ. 3x + 2x²) σαν να ήταν όμοιοι όροι.",
-      "descriptionEn": "Solve 2-3 exercises on \"Like monomial terms\" by hand, writing out every step. The most common trap on this topic: Tries to add monomials with a different variable part (e.g. 3x + 2x²) as if they were like terms.",
+      "descriptionEl": "Υπολόγισε με το χέρι √16, √25 και √64 και γράψε δίπλα σε καθεμία ποιος μη αρνητικός αριθμός, όταν υψωθεί στο τετράγωνο, δίνει τον αριθμό μέσα στη ρίζα.",
+      "descriptionEn": "Calculate √16, √25 and √64 by hand and write the non-negative number whose square gives the number under each radical.",
       "toolId": null
     },
     {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Όμοιοι μονόμιοι όροι» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Like monomial terms\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
+      "titleEl": "Δες τη διαφορά",
+      "titleEn": "See the difference",
+      "descriptionEl": "Σύγκρινε τις δύο προτάσεις «√49 = ?» και «x² = 49». Εξήγησε με δικά σου λόγια γιατί η πρώτη έχει αποτέλεσμα 7, ενώ η δεύτερη έχει δύο λύσεις, 7 και -7.",
+      "descriptionEn": "Compare '√49 = ?' and 'x² = 49'. Explain in your own words why the first is 7 while the equation has two solutions, 7 and -7.",
+      "toolId": null
     },
     {
       "titleEl": "Έλεγξε με το Wolfram Alpha",
       "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Φτιάξε μόνος/η μια νέα παράσταση με μονώνυμα, απλοποίησέ την με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
-      "descriptionEn": "Make up a new expression with monomials, simplify it by hand, then check your solution with Wolfram Alpha.",
+      "descriptionEl": "Φτιάξε τρία δικά σου παραδείγματα τετραγωνικών ριζών, λύσε τα πρώτα χωρίς βοήθεια και χρησιμοποίησε το Wolfram Alpha μόνο για επαλήθευση.",
+      "descriptionEn": "Make three square-root examples of your own, solve them first without help, then use Wolfram Alpha only to verify.",
       "toolId": "wolfram-alpha"
     }
   ],
-  "math-b-gym.identity-square-sum": [
+  "math-b-gym.proportional-function": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",
       "titleEn": "Try it yourself first",
-      "descriptionEl": "Λύσε 2-3 ασκήσεις πάνω σε «Ταυτότητα (α+β)²» με το χέρι, γράφοντας κάθε βήμα στο χαρτί σου. Η πιο συχνή παγίδα σε αυτό το θέμα: Απλοποιεί λανθασμένα το (α+β)² σε α²+β², ξεχνώντας τον διπλό όρο 2αβ.",
-      "descriptionEn": "Solve 2-3 exercises on the \"(a+b)² identity\" by hand, writing out every step. The most common trap on this topic: Incorrectly simplifies (a+b)² to a²+b², forgetting the middle term 2ab.",
+      "descriptionEl": "Για τη συνάρτηση y=2x συμπλήρωσε μόνος/η τις τιμές του y όταν x=-2, -1, 0, 1 και 2.",
+      "descriptionEn": "For y=2x, fill in y by yourself when x=-2, -1, 0, 1 and 2.",
       "toolId": null
     },
     {
-      "titleEl": "Έλεγξε με το Perplexity",
-      "titleEn": "Check with Perplexity",
-      "descriptionEl": "Ψάξε το θέμα «Ταυτότητα (α+β)²» στο Perplexity και δες τι λένε οι πηγές που παραθέτει. Σύγκρινε με αυτό που έγραψες μόνος/η, χωρίς να αντιγράψεις έτοιμη απάντηση.",
-      "descriptionEn": "Search for \"Identity (a+b)²\" on Perplexity and see what the cited sources say. Compare it with what you wrote yourself, without copying a ready-made answer.",
-      "toolId": "perplexity"
+      "titleEl": "Οπτικοποίησέ το στο Desmos",
+      "titleEn": "Visualize it in Desmos",
+      "descriptionEl": "Σχεδίασε y=2x και y=3x στο Desmos. Παρατήρησε πώς αλλάζει η ευθεία όταν αλλάζει ο συντελεστής α. Μην ζητήσεις έτοιμη απάντηση: περιέγραψε πρώτα τι βλέπεις.",
+      "descriptionEn": "Plot y=2x and y=3x in Desmos. Observe how the line changes when coefficient a changes. Describe what you see before asking for help.",
+      "toolId": "desmos"
     },
     {
-      "titleEl": "Έλεγξε με το Wolfram Alpha",
-      "titleEn": "Check with Wolfram Alpha",
-      "descriptionEl": "Ανάπτυξε μόνος/η μια νέα παράσταση (α+β)² με το χέρι, και μετά έλεγξε τη λύση σου στο Wolfram Alpha.",
-      "descriptionEn": "Expand a new (a+b)² expression by hand yourself, then check your solution with Wolfram Alpha.",
-      "toolId": "wolfram-alpha"
+      "titleEl": "Δείξε ότι το κατάλαβες",
+      "titleEn": "Prove you've got it",
+      "descriptionEl": "Φτιάξε μια νέα συνάρτηση y=αx, διάλεξε τρεις τιμές του x και υπολόγισε τις αντίστοιχες τιμές του y χωρίς βοήθεια.",
+      "descriptionEn": "Create a new y=ax function, choose three x-values and calculate the matching y-values without help.",
+      "toolId": null
     }
   ],
   "math-b-gym.pythagorean-application": [

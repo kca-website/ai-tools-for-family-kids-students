@@ -32,6 +32,8 @@ jobs:
           node --check app.js
           node --check curriculum-resolver.js
           node --check general-subject-expansion-2026-2027.js
+      - name: Verify Mathematics B official grounding
+        run: node tests/math-b-schoolbook-grounding.mjs
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.55.0

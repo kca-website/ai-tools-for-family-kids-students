@@ -36,6 +36,15 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027"
   },
+  "mathimatika-a-gymnasiou": {
+    title: "Μαθηματικά Α΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/",
+    mode: "mathAQuiz",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics"
+  },
   "mathimatika-b-gymnasiou": {
     title: "Μαθηματικά Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/",
@@ -43,6 +52,15 @@ const BOOKS = {
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
+  "mathimatika-g-gymnasiou": {
+    title: "Μαθηματικά Γ΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/",
+    mode: "mathGQuiz",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics-plus-prerequisite-source"
   },
   "chimeia-b-gymnasiou": {
     title: "Χημεία Β΄ Γυμνασίου",
@@ -200,6 +218,28 @@ const HISTORY_G_GYM_DIAGNOSTIC_PATHS = Object.freeze({
   "founding of the filiki etaireia": ["index2_7.html"],
   "εκπαιδευση επι τουρκοκρατιας": ["index2_5.html"],
   "education under ottoman rule": ["index2_5.html"]
+});
+
+const MATH_A_GYM_DIAGNOSTIC_PATHS = Object.freeze({
+  "διαταξη ρητων αριθμων": ["indexA7_2.html"],
+  "ordering rational numbers": ["indexA7_2.html"],
+  "απολυτη τιμη": ["indexA7_2.html"],
+  "absolute value": ["indexA7_2.html"],
+  "μκδ vs εκπ": ["indexA1_5.html"],
+  "gcd vs lcm": ["indexA1_5.html"],
+  "εισαγωγη σε αναλογιες": ["indexA6_2.html"],
+  "introduction to proportions": ["indexA6_2.html"]
+});
+
+const MATH_G_GYM_DIAGNOSTIC_SOURCES = Object.freeze({
+  "προσημο πλην": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA2_1.html"],
+  "the minus sign": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA2_1.html"],
+  "ισοτητα ως ισορροπια": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA2_1.html"],
+  "equals as balance": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA2_1.html"],
+  "επιμεριστικη με αρνητικο": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA1_4.html"],
+  "distributing a negative": ["https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexA1_4.html"],
+  "πυθαγορειο με καθετη πλευρα": ["https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"],
+  "pythagorean theorem finding a leg": ["https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html"]
 });
 
 const HISTORY_B_2026_2027_PATHS = Object.freeze({
@@ -1028,9 +1068,18 @@ function resolveDirectSourceUrls(subject, topic) {
     return [];
   }
 
+  if (subject === "mathimatika-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveMathAQuizPaths(topic).map(path => new URL(path, base).toString());
+  }
+
   if (subject === "mathimatika-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveMathBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "mathimatika-g-gymnasiou") {
+    return resolveMathGQuizUrls(topic);
   }
 
   if (subject === "chimeia-b-gymnasiou") {
@@ -1182,6 +1231,16 @@ function unitNumber(topic) {
   if (!m) return 0;
   const n = Number(m[1] || m[2]);
   return Number.isInteger(n) ? n : 0;
+}
+
+function resolveMathAQuizPaths(topic) {
+  const key = normalize(topic);
+  return MATH_A_GYM_DIAGNOSTIC_PATHS[key] ? [...MATH_A_GYM_DIAGNOSTIC_PATHS[key]] : [];
+}
+
+function resolveMathGQuizUrls(topic) {
+  const key = normalize(topic);
+  return MATH_G_GYM_DIAGNOSTIC_SOURCES[key] ? [...MATH_G_GYM_DIAGNOSTIC_SOURCES[key]] : [];
 }
 
 function resolvePhysicsBCurriculumPaths(topic) {
@@ -1660,6 +1719,8 @@ module.exports._test = Object.freeze({
   resolveHistoryCurriculumPaths,
   resolveHistoryAQuizPaths,
   resolveHistoryGQuizPaths,
+  resolveMathAQuizPaths,
+  resolveMathGQuizUrls,
   mathBTopicKey,
   resolveMathBCurriculumPaths,
   chemistryBTopicKey,
@@ -1680,6 +1741,8 @@ module.exports._test = Object.freeze({
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,
+  MATH_A_GYM_DIAGNOSTIC_PATHS,
+  MATH_G_GYM_DIAGNOSTIC_SOURCES,
   MATH_B_2026_2027_PATHS,
   CHEMISTRY_B_2026_2027_PATHS,
   GEOGRAPHY_B_2026_2027_PATHS,

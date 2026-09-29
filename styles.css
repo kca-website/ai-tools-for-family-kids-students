@@ -2995,10 +2995,6 @@ main {
   --v9-warn-ink: #8A5A0A;
 }
 
-body {
-  line-height: 1.55;
-}
-
 :focus-visible {
   outline: 3px solid var(--v9-accent);
   outline-offset: 3px;

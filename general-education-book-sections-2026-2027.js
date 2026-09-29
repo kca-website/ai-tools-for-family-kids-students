@@ -884,6 +884,30 @@
       sections:["Ενότητα 1 — Η Ελένη και η καταστροφή της Τροίας","Ενότητα 2 — Θυσία για την πατρίδα","Ενότητα 3 — Η κατοχή της εξουσίας δεν εγγυάται την ευτυχία","Ενότητα 4 — Τα πλεονεκτήματα της ειρήνης"]
     }
 ,
+    "thriskeftika-b-gymnasiou":{
+      "sourceUrl": "https://www.ebooks.edu.gr/ebooks/d/8547/5230/21-0202-01_Thriskeutika_B-Gymnasiou_Vivlio-Mathiti.pdf",
+      "schoolYear": "2026-2027",
+      "sectionPolicy": "Current official student-textbook contents verified. These rows are book sections, not a separately published annual syllabus.",
+      "sections": [
+        "1 — Η Εκκλησία εξαπλώνεται στην οικουμένη",
+        "2 — Ιεροσόλυμα: Η πρώτη χριστιανική κοινότητα",
+        "3 — Από διώκτης των Χριστιανών, Απόστολος των Εθνών",
+        "4 — Το τέλος των διωγμών και ένα νέο ιστορικό ξεκίνημα για την Εκκλησία",
+        "5 — Η Εκκλησία οργανώνεται",
+        "6 — Ελληνισμός και Χριστιανισμός. Η συνάντηση δύο τρόπων σκέψης και ζωής",
+        "7 — Η σύνθεση Χριστιανισμού και Ελληνισμού αποτυπώνεται στην τέχνη",
+        "8 — Συζητώντας για τα όριά μας",
+        "9 — Η χριστιανική Εκκλησία αποφασίζει και ορίζει την πίστη",
+        "10 — Η δύναμη της εικόνας",
+        "11 — Η απεικόνιση του Θεού στη βιβλική παράδοση και στη ζωή της Ορθόδοξης Εκκλησίας",
+        "12 — Εικονομαχία: Η τιμητική προσκύνηση των εικόνων υπό διωγμό",
+        "13 — Η θεολογία και το κάλλος της Ορθόδοξης εικονογραφίας",
+        "14 — Μετά την Άλωση της Πόλης",
+        "15 — Η δύναμη του λαϊκού πολιτισμού",
+        "16 — Από την οικουμενική Ορθοδοξία στις εθνικές Εκκλησίες"
+      ]
+    }
+,
     "iliada-b-gymnasiou":{
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/",
       "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
@@ -904,7 +928,7 @@
 }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.5.0",
+    version:"2.6.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
     ids:Object.freeze(Object.keys(rows))

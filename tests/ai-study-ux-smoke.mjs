@@ -17,6 +17,8 @@ assert.match(html, /flashcards:14000/);
 assert.match(html, /activityNeedsDistributedSource\('plan'\)/);
 assert.match(html, /attached\?\.text\|\|officialSource\?\.text/);
 assert.doesNotMatch(html, /:\(officialSource\?\.text\|\|''\)/);
+assert.match(html, /thriskeftika-b-gymnasiou/);
+assert.match(html, /source\.canonicalSourceUrl\|\|source\.sourceUrl/);
 for (const subjectId of [
   'mathimatika-b-gymnasiou',
   'chimeia-b-gymnasiou',

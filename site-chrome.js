@@ -41,7 +41,7 @@
     if(document.querySelector('link[href*="family=Commissioner"]')) return;
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&display=swap";
+    link.href = "https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700;800&family=Noto+Serif:wght@500;600;700&display=swap";
     document.head.appendChild(link);
   }
 

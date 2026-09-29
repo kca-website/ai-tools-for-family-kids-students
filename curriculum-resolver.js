@@ -17,6 +17,14 @@
       .replace(/\s+/g," ").trim();
   }
   function cleanSubject(value){ return String(value||"").split(",")[0].trim(); }
+  function subjectKey(value){
+    const base=norm(cleanSubject(value));
+    if(
+      base.startsWith("αρχαια ελληνικη γλωσσα και γραμματεια") ||
+      base.startsWith("αρχαια ελληνικη γλωσσα")
+    ) return "αρχαια ελληνικη γλωσσα";
+    return base;
+  }
   function uniq(values){ return [...new Set((values||[]).filter(Boolean))]; }
   function topicRank(status){
     status=String(status||"");
@@ -249,7 +257,7 @@
   function getSubjects(zoneId,gradeId){
     const byName=new Map();
     function ensure(label,seed){
-      const key=norm(cleanSubject(label));
+      const key=subjectKey(label);
       if(!key) return null;
       if(!byName.has(key)) byName.set(key,Object.assign({
         id:seed?.id||"",quizId:seed?.quizId||"",subjectLabelEl:label,subjectLabelEn:seed?.subjectLabelEn||label,
@@ -275,7 +283,7 @@
       if(o?.zone && o.zone!==zoneId) return;
       const q=(typeof QUIZZES!=="undefined" && QUIZZES[zoneId])?QUIZZES[zoneId][qid]:null;
       if(q && !(q.grades||[]).includes(gradeId)) return;
-      let row=q?byName.get(norm(cleanSubject(q.subjectLabelEl||qid))):null;
+      let row=q?byName.get(subjectKey(q.subjectLabelEl||qid)):null;
       if(!row){
         const title=o?.quizTitleEl||"";
         const gradeToken=norm(title);
@@ -295,7 +303,9 @@
       const officialSections=statuses.some((s)=>/official-book-section|related-section/.test(s));
       const mode=annual?"verified-annual":framework?"verified-framework":officialSections?"verified-official-sections":topics.length?"mapped-navigation":"unmapped";
       return Object.assign({},row.catalogSubject||row.quiz||{},row,{
-        id:row.catalogSubject?.id||row.id||row.quizId,
+        id:/^archaia-glossa-[abc]-gymnasiou$/.test(String(row.quizId||""))
+          ? row.quizId
+          : (row.catalogSubject?.id||row.id||row.quizId),
         quizId:row.quizId||row.quiz?.id||row.catalogSubject?.quizId||"",
         subjectLabelEl:row.catalogSubject?.subjectLabelEl||row.quiz?.subjectLabelEl||row.subjectLabelEl,
         subjectLabelEn:row.catalogSubject?.subjectLabelEn||row.quiz?.subjectLabelEn||row.subjectLabelEn,
@@ -328,5 +338,5 @@
     return getSubject(zoneId,gradeId,subjectId)?.topics || [];
   }
 
-  window.AITOOLSKIDS_CURRICULUM_RESOLVER=Object.freeze({norm,cleanSubject,getSubjects,getSubject,getTopics,getSpecialSubjects});
+  window.AITOOLSKIDS_CURRICULUM_RESOLVER=Object.freeze({norm,cleanSubject,subjectKey,getSubjects,getSubject,getTopics,getSpecialSubjects});
 })();

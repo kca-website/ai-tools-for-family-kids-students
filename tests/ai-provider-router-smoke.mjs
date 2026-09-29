@@ -24,6 +24,9 @@ assert.match(router, /economy/);
 assert.match(router, /balanced/);
 assert.match(router, /quality/);
 assert.match(router, /providerCode/);
+assert.match(router, /SMART_AI_ROUTING_ENABLED/);
+assert.match(router, /enable_thinking:\s*false/);
+assert.match(router, /extractUsage/);
 assert.doesNotMatch(router, /console\.log\(/);
 
 for (const source of [tutor, teacher, preschool]) {
@@ -42,10 +45,12 @@ const savedEnv = {
   CLOUDFLARE_LLM_ACCOUNT_ID: process.env.CLOUDFLARE_LLM_ACCOUNT_ID,
   CLOUDFLARE_LLM_AI_TOKEN: process.env.CLOUDFLARE_LLM_AI_TOKEN,
   GROQ_API_KEY: process.env.GROQ_API_KEY,
+  SMART_AI_ROUTING_ENABLED: process.env.SMART_AI_ROUTING_ENABLED,
 };
 process.env.CLOUDFLARE_LLM_ACCOUNT_ID = 'test-account';
 process.env.CLOUDFLARE_LLM_AI_TOKEN = 'test-cloudflare-token';
 process.env.GROQ_API_KEY = 'test-groq-token';
+process.env.SMART_AI_ROUTING_ENABLED = '1';
 
 const calls = [];
 globalThis.fetch = async (url) => {

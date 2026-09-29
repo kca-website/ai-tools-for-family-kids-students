@@ -43,7 +43,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     if(!hero) return;
 
     const icon=hero.querySelector(".sp-hero__icon");
-    if(icon) icon.textContent="🏫";
+    if(icon && !icon.querySelector(".v9i")) icon.innerHTML='<span class="v9i v9i-school"></span>';
 
     const aiLink=hero.querySelector(".sp-unified-ai");
     if(!aiLink || document.getElementById("spParentGuideLink")) return;
@@ -51,7 +51,7 @@ window.SPECIAL_EDUCATION_STATUS = {
     const guide=document.createElement("a");
     guide.id="spParentGuideLink";
     guide.href="/special-education-parent-guide.html";
-    guide.textContent="👪 Οδηγός γονέα";
+    guide.innerHTML='<span class="v9i v9i-users" aria-hidden="true"></span>Οδηγός γονέα';
     guide.style.cssText="display:inline-flex;align-items:center;justify-content:center;margin:14px 0 0 8px;min-height:44px;padding:10px 15px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#334155;text-decoration:none;font-weight:800;box-sizing:border-box;";
     aiLink.insertAdjacentElement("afterend",guide);
 

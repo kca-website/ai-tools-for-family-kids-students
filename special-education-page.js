@@ -75,10 +75,10 @@
     const hasQuiz=!!(hasLearning&&Q?.[learningId]?.questions?.length);
     const studyAttr=target==="sg"?"data-open-sg-unit":"data-open-unit";
     return `<div class="sp-card-actions">
-      <a class="sp-action sp-action--ai" href="${esc(aiHref(schoolType,gradeId,subjectId,"student"))}">🤖 AI Βοήθεια</a>
-      <a class="sp-action" href="${esc(aiHref(schoolType,gradeId,subjectId,"guardian"))}">👪 Βοηθός γονέα</a>
-      ${hasLearning?`<button class="sp-action" type="button" ${studyAttr}="${esc(learningId)}" data-focus="learn">📘 Μελέτη</button>`:""}
-      ${hasQuiz?`<button class="sp-action" type="button" ${studyAttr}="${esc(learningId)}" data-focus="quiz">🧭 Μικρό τεστ</button>`:""}
+      <a class="sp-action sp-action--ai" href="${esc(aiHref(schoolType,gradeId,subjectId,"student"))}"><span class="v9i v9i-chat" aria-hidden="true"></span>AI Βοήθεια</a>
+      <a class="sp-action" href="${esc(aiHref(schoolType,gradeId,subjectId,"guardian"))}"><span class="v9i v9i-users" aria-hidden="true"></span>Βοηθός γονέα</a>
+      ${hasLearning?`<button class="sp-action" type="button" ${studyAttr}="${esc(learningId)}" data-focus="learn"><span class="v9i v9i-book" aria-hidden="true"></span>Μελέτη</button>`:""}
+      ${hasQuiz?`<button class="sp-action" type="button" ${studyAttr}="${esc(learningId)}" data-focus="quiz"><span class="v9i v9i-compass" aria-hidden="true"></span>Μικρό τεστ</button>`:""}
       ${sourceUrl?`<a class="sp-source-link" href="${esc(sourceUrl)}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a>`:""}
     </div>`;
   }
@@ -200,7 +200,7 @@
 
     const mappedBlock=mapped
       ? `<div class="sp-ready-routes"><h4>Επαληθευμένη χαρτογράφηση 2026–27</h4><p>Οι ακριβείς χαρτογραφήσεις και τα επίσημα πλαίσια εμφανίζονται χωριστά ώστε να μη συγχέεται το framework με πλήρη section-level ύλη.</p><div class="sp-subject-grid">${mapped}</div></div>`
-      : `<article class="sp-subject-card sp-subject-card--gateway"><div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade?.labelEl||"")}</span><h3>Συνέχισε στην AI Βοήθεια</h3></div><span class="sp-ready-pill">Επίσημη δομή</span></div><p>Για αυτή την τάξη δεν εμφανίζουμε ακόμη section-level χαρτογράφηση στη σελίδα. Η AI Βοήθεια ζητά το πραγματικό κεφάλαιο ή την άσκηση.</p><div class="sp-card-actions"><a class="sp-action sp-action--ai" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","student"))}">🤖 AI Βοήθεια μαθητή</a><a class="sp-action" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","guardian"))}">👪 Βοηθός γονέα</a><a class="sp-source-link" href="${esc(SL.sourceUrl||"")}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a></div></article>`;
+      : `<article class="sp-subject-card sp-subject-card--gateway"><div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(grade?.labelEl||"")}</span><h3>Συνέχισε στην AI Βοήθεια</h3></div><span class="sp-ready-pill">Επίσημη δομή</span></div><p>Για αυτή την τάξη δεν εμφανίζουμε ακόμη section-level χαρτογράφηση στη σελίδα. Η AI Βοήθεια ζητά το πραγματικό κεφάλαιο ή την άσκηση.</p><div class="sp-card-actions"><a class="sp-action sp-action--ai" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","student"))}"><span class="v9i v9i-chat" aria-hidden="true"></span>AI Βοήθεια μαθητή</a><a class="sp-action" href="${esc(aiHref("special-lyceum",selectedSpecialLyceumGrade,"","guardian"))}"><span class="v9i v9i-users" aria-hidden="true"></span>Βοηθός γονέα</a><a class="sp-source-link" href="${esc(SL.sourceUrl||"")}" target="_blank" rel="noopener">Επίσημη πηγή ↗</a></div></article>`;
 
     slProfile.innerHTML=`
       <div class="sp-choice-block"><h3>2. Διάλεξε τάξη</h3>${gradeTabs(grades,selectedSpecialLyceumGrade,"data-sl-grade")}</div>
@@ -311,8 +311,8 @@
     const base=gradeKey(c.grade);
     const gradeId=c.schoolType==="eneegyl"?`lyc-${base}`:base;
     return `<div class="sp-unit-actions">
-      <a class="sp-action sp-action--ai" href="${esc(aiHref(c.schoolType,gradeId,c.id,"student"))}">🤖 Συνέχισε με AI Βοήθεια</a>
-      <a class="sp-action" href="${esc(aiHref(c.schoolType,gradeId,c.id,"guardian"))}">👪 Μελέτη με γονέα</a>
+      <a class="sp-action sp-action--ai" href="${esc(aiHref(c.schoolType,gradeId,c.id,"student"))}"><span class="v9i v9i-chat" aria-hidden="true"></span>Συνέχισε με AI Βοήθεια</a>
+      <a class="sp-action" href="${esc(aiHref(c.schoolType,gradeId,c.id,"guardian"))}"><span class="v9i v9i-users" aria-hidden="true"></span>Μελέτη με γονέα</a>
     </div>`;
   }
 
@@ -364,8 +364,8 @@
       const guidance=strong
         ? "Το επόμενο βήμα είναι να εφαρμόσεις ό,τι κατάλαβες σε νέα παραδείγματα με καθοδήγηση, όχι να πάρεις έτοιμη λύση."
         : "Το επόμενο βήμα είναι να ξαναδείς τα σημεία που σε δυσκόλεψαν με πιο απλή εξήγηση και μία ερώτηση τη φορά.";
-      const studentLabel=strong?"🤖 Συνέχισε με AI εξάσκηση":"🤖 Εξήγησέ μου ξανά με AI";
-      return `<div class="sp-quiz-ai-next"><strong>Προτεινόμενο επόμενο βήμα</strong><p>${esc(guidance)}</p><div class="sp-unit-actions"><a class="sp-action sp-action--ai" href="${esc(studentHref)}">${studentLabel}</a><a class="sp-action" href="${esc(guardianHref)}">👪 Βοηθός γονέα</a></div></div>`;
+      const studentLabel=strong?'<span class="v9i v9i-chat" aria-hidden="true"></span>Συνέχισε με AI εξάσκηση':'<span class="v9i v9i-chat" aria-hidden="true"></span>Εξήγησέ μου ξανά με AI';
+      return `<div class="sp-quiz-ai-next"><strong>Προτεινόμενο επόμενο βήμα</strong><p>${esc(guidance)}</p><div class="sp-unit-actions"><a class="sp-action sp-action--ai" href="${esc(studentHref)}">${studentLabel}</a><a class="sp-action" href="${esc(guardianHref)}"><span class="v9i v9i-users" aria-hidden="true"></span>Βοηθός γονέα</a></div></div>`;
     };
     mount.innerHTML=`<h4>${esc(quiz.title)}</h4><p>${esc(quiz.intro)}</p><button class="sp-action sp-action--ai" type="button" data-sp-quiz-start>Ξεκίνα τις ${quiz.questions.length} ερωτήσεις</button>`;
     let idx=0,score=0,locked=false;
@@ -402,7 +402,7 @@
       const internal=String(tool.url||"").startsWith("/");
       const target=internal?"":' target="_blank" rel="noopener"';
       return `<article class="sp-tool-card">
-        <div class="sp-tool-card__top"><span class="sp-tool-card__icon" aria-hidden="true">${esc(tool.icon||"🧰")}</span><div><span class="sp-tool-card__task">${esc(tool.task)}</span><h3>${esc(tool.name)}</h3></div></div>
+        <div class="sp-tool-card__top"><span class="sp-tool-card__icon" aria-hidden="true"><span class="v9i v9i-toolbox"></span></span><div><span class="sp-tool-card__task">${esc(tool.task)}</span><h3>${esc(tool.name)}</h3></div></div>
         <p>${esc(tool.why)}</p>
         <p class="sp-tool-card__best"><strong>Χρήσιμο όταν:</strong> ${esc(tool.bestFor)}</p>
         <p class="sp-tool-card__free">${esc(tool.freeNote||"")}</p>

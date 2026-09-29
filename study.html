@@ -66,7 +66,7 @@
         <div id="epalSpecialtyField" class="hidden"><label for="epalSpecialty" data-el="Ειδικότητα ΕΠΑΛ" data-en="EPAL specialty">Ειδικότητα ΕΠΑΛ</label><select id="epalSpecialty"></select></div>
       </div>
       <div id="specialGateway" class="hidden notice">
-        <strong data-el="🏫 Ειδική Εκπαίδευση" data-en="🏫 Special Education">🏫 Ειδική Εκπαίδευση</strong><br>
+        <strong class="v9i v9i-school" data-el="Ειδική Εκπαίδευση" data-en="Special Education">Ειδική Εκπαίδευση</strong><br>
         <span data-el="Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές." data-en="Special Education uses separate adaptations, simplified quizzes and dedicated mappings. Open its dedicated route so those adaptations are preserved.">Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές.</span>
         <div style="margin-top:10px"><a class="action main" href="/special-education.html" data-el="Άνοιξε Ειδική Εκπαίδευση →" data-en="Open Special Education →">Άνοιξε Ειδική Εκπαίδευση →</a></div>
       </div>
@@ -79,7 +79,7 @@
       </div>
       <div id="standardStudyRest">
       <div class="upload">
-        <strong data-el="📄 Δικές σου σημειώσεις" data-en="📄 Your own notes">📄 Δικές σου σημειώσεις</strong>
+        <strong class="v9i v9i-file" data-el="Δικές σου σημειώσεις" data-en="Your own notes">Δικές σου σημειώσεις</strong>
         <span class="micro" data-el="PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια." data-en="PDF with selectable text. It is read locally in your browser; only extracted text is sent to AI when you choose an AI action.">PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια.</span>
         <div class="upload-line"><label class="upload-label" for="notesFile" data-el="Ανέβασε PDF" data-en="Upload PDF">Ανέβασε PDF</label><input id="notesFile" type="file" accept="application/pdf,.pdf"><span class="upload-status" id="notesStatus" aria-live="polite"></span></div>
         <label for="notesPaste" data-el="Ή επικόλλησε σημειώσεις" data-en="Or paste notes">Ή επικόλλησε σημειώσεις</label>
@@ -88,15 +88,15 @@
           <button class="upload-label" id="usePastedNotes" type="button" data-el="Χρησιμοποίησε αυτό το κείμενο" data-en="Use this text">Χρησιμοποίησε αυτό το κείμενο</button>
           <button class="upload-label hidden" id="clearNotes" type="button" data-el="Καθάρισε σημειώσεις" data-en="Clear notes">Καθάρισε σημειώσεις</button>
         </div>
-        <div id="sourceModeNotice" class="notice hidden" data-el="📄 Λειτουργία πηγής: με PDF ή σημειώσεις, το AI βασίζει απαντήσεις, quiz, κάρτες, επαναλήψεις και πλάνο μόνο σε αυτό το υλικό. Αν κάτι δεν υπάρχει στην πηγή, θα το δηλώσει αντί να το συμπληρώσει από γενικές γνώσεις." data-en="📄 Source mode: with a PDF or notes attached, AI bases answers, quizzes, cards, reviews and study plans only on that material. If something is not supported by the source, it will say so instead of filling gaps from general knowledge.">📄 Λειτουργία πηγής: με PDF ή σημειώσεις, το AI βασίζει απαντήσεις, quiz, κάρτες, επαναλήψεις και πλάνο μόνο σε αυτό το υλικό. Αν κάτι δεν υπάρχει στην πηγή, θα το δηλώσει αντί να το συμπληρώσει από γενικές γνώσεις.</div>
+        <div id="sourceModeNotice" class="v9i v9i-file notice hidden" data-el="Λειτουργία πηγής: με PDF ή σημειώσεις, το AI βασίζει απαντήσεις, quiz, κάρτες, επαναλήψεις και πλάνο μόνο σε αυτό το υλικό. Αν κάτι δεν υπάρχει στην πηγή, θα το δηλώσει αντί να το συμπληρώσει από γενικές γνώσεις." data-en="Source mode: with a PDF or notes attached, AI bases answers, quizzes, cards, reviews and study plans only on that material. If something is not supported by the source, it will say so instead of filling gaps from general knowledge.">Λειτουργία πηγής: με PDF ή σημειώσεις, το AI βασίζει απαντήσεις, quiz, κάρτες, επαναλήψεις και πλάνο μόνο σε αυτό το υλικό. Αν κάτι δεν υπάρχει στην πηγή, θα το δηλώσει αντί να το συμπληρώσει από γενικές γνώσεις.</div>
       </div>
 
       <h3 data-el="Στόχος μελέτης" data-en="Study goal">Στόχος μελέτης</h3>
       <div class="goal-grid">
-        <div class="choice"><input id="g1" type="radio" name="goal" value="understand" checked><label for="g1" data-el="💡 Να το καταλάβω" data-en="💡 Understand it">💡 Να το καταλάβω</label></div>
-        <div class="choice"><input id="g2" type="radio" name="goal" value="revise"><label for="g2" data-el="🧠 Επανάληψη" data-en="🧠 Review">🧠 Επανάληψη</label></div>
-        <div class="choice"><input id="g3" type="radio" name="goal" value="test"><label for="g3" data-el="📝 Γράφω τεστ" data-en="📝 Prepare for a test">📝 Γράφω τεστ</label></div>
-        <div class="choice"><input id="g4" type="radio" name="goal" value="practice"><label for="g4" data-el="🎯 Εξάσκηση" data-en="🎯 Practice">🎯 Εξάσκηση</label></div>
+        <div class="choice"><input id="g1" type="radio" name="goal" value="understand" checked><label class="v9i v9i-bulb" for="g1" data-el="Να το καταλάβω" data-en="Understand it">Να το καταλάβω</label></div>
+        <div class="choice"><input id="g2" type="radio" name="goal" value="revise"><label class="v9i v9i-repeat" for="g2" data-el="Επανάληψη" data-en="Review">Επανάληψη</label></div>
+        <div class="choice"><input id="g3" type="radio" name="goal" value="test"><label class="v9i v9i-pencil" for="g3" data-el="Γράφω τεστ" data-en="Prepare for a test">Γράφω τεστ</label></div>
+        <div class="choice"><input id="g4" type="radio" name="goal" value="practice"><label class="v9i v9i-target" for="g4" data-el="Εξάσκηση" data-en="Practice">Εξάσκηση</label></div>
       </div>
       <h3 data-el="Χρόνος" data-en="Time">Χρόνος</h3>
       <div class="time-grid"><div class="choice"><input id="t10" type="radio" name="time" value="10"><label for="t10">10′</label></div><div class="choice"><input id="t20" type="radio" name="time" value="20" checked><label for="t20">20′</label></div><div class="choice"><input id="t30" type="radio" name="time" value="30"><label for="t30">30′</label></div><div class="choice"><input id="t45" type="radio" name="time" value="45"><label for="t45">45′</label></div></div>
@@ -111,16 +111,16 @@
         <div class="material-panel" style="margin-top:0;border-top:0;padding-top:0">
           <h3 data-el="Μετέτρεψε την ύλη σου" data-en="Turn your material into study activities">Μετέτρεψε την ύλη σου</h3>
           <div class="study-actions">
-            <button class="study-action" data-action="audio" type="button">🎧 <span data-el="Άκουσέ το" data-en="Listen to it">Άκουσέ το</span><span data-el="μικρό ακουστικό μάθημα από την ύλη" data-en="a short audio lesson from the material">μικρό ακουστικό μάθημα από την ύλη</span></button>
-            <button class="study-action" data-action="flashcards" type="button">🗂️ <span data-el="Κάρτες ανάκλησης" data-en="Recall cards">Κάρτες ανάκλησης</span><span data-el="8 κάρτες ενεργής ανάκλησης" data-en="8 active-recall cards">8 κάρτες ενεργής ανάκλησης</span></button>
-            <button class="study-action" data-action="quiz" type="button">❓ <span data-el="Γρήγορο Quiz" data-en="Quick Quiz">Γρήγορο Quiz</span><span data-el="5 ερωτήσεις · μία-μία" data-en="5 questions · one at a time">5 ερωτήσεις · μία-μία</span></button>
-            <button class="study-action" data-action="truefalse" type="button">✅ <span data-el="Σωστό ή Λάθος" data-en="True or False">Σωστό ή Λάθος</span><span data-el="γρήγορος έλεγχος βασικών εννοιών" data-en="fast concept check">γρήγορος έλεγχος βασικών εννοιών</span></button>
-            <button class="study-action" data-action="explain" type="button">💡 <span data-el="Έξυπνη εξήγηση" data-en="Smart explanation">Έξυπνη εξήγηση</span><span data-el="απλά λόγια, παραδείγματα και ερωτήσεις" data-en="clear language, examples and questions">απλά λόγια, παραδείγματα και ερωτήσεις</span></button>
-            <button class="study-action" data-action="quickreview" type="button">⚡ <span data-el="Επανάληψη 5′" data-en="5-minute review">Επανάληψη 5′</span><span data-el="μόνο τα ουσιώδη πριν το τεστ" data-en="the essentials before a test">μόνο τα ουσιώδη πριν το τεστ</span></button>
-            <button class="study-action" data-action="oral" type="button">🎤 <span data-el="Προφορική πρόβα" data-en="Oral practice">Προφορική πρόβα</span><span data-el="το AI ρωτά και περιμένει απάντηση" data-en="AI asks and waits for your answer">το AI ρωτά και περιμένει απάντηση</span></button>
-            <button class="study-action" data-action="written" type="button">✍️ <span data-el="Γραπτή πρόβα" data-en="Written practice">Γραπτή πρόβα</span><span data-el="ερωτήσεις ανάπτυξης και εφαρμογής" data-en="written and application questions">ερωτήσεις ανάπτυξης και εφαρμογής</span></button>
-            <button class="study-action" data-action="weakspots" type="button">🎯 <span data-el="Βρες τα κενά μου" data-en="Find my gaps">Βρες τα κενά μου</span><span data-el="στοχευμένες διαγνωστικές ερωτήσεις" data-en="targeted diagnostic questions">στοχευμένες διαγνωστικές ερωτήσεις</span></button>
-            <button class="study-action" data-action="plan" type="button">🧭 <span data-el="Πλάνο μελέτης" data-en="Study plan">Πλάνο μελέτης</span><span data-el="βήματα προσαρμοσμένα στον χρόνο και τον στόχο" data-en="steps tailored to your time and goal">βήματα προσαρμοσμένα στον χρόνο και τον στόχο</span></button>
+            <button class="study-action" data-action="audio" type="button"><span class="v9i v9i-headphones" aria-hidden="true"></span><span data-el="Άκουσέ το" data-en="Listen to it">Άκουσέ το</span><span data-el="μικρό ακουστικό μάθημα από την ύλη" data-en="a short audio lesson from the material">μικρό ακουστικό μάθημα από την ύλη</span></button>
+            <button class="study-action" data-action="flashcards" type="button"><span class="v9i v9i-layers" aria-hidden="true"></span><span data-el="Κάρτες ανάκλησης" data-en="Recall cards">Κάρτες ανάκλησης</span><span data-el="8 κάρτες ενεργής ανάκλησης" data-en="8 active-recall cards">8 κάρτες ενεργής ανάκλησης</span></button>
+            <button class="study-action" data-action="quiz" type="button"><span class="v9i v9i-help" aria-hidden="true"></span><span data-el="Γρήγορο Quiz" data-en="Quick Quiz">Γρήγορο Quiz</span><span data-el="5 ερωτήσεις · μία-μία" data-en="5 questions · one at a time">5 ερωτήσεις · μία-μία</span></button>
+            <button class="study-action" data-action="truefalse" type="button"><span class="v9i v9i-check" aria-hidden="true"></span><span data-el="Σωστό ή Λάθος" data-en="True or False">Σωστό ή Λάθος</span><span data-el="γρήγορος έλεγχος βασικών εννοιών" data-en="fast concept check">γρήγορος έλεγχος βασικών εννοιών</span></button>
+            <button class="study-action" data-action="explain" type="button"><span class="v9i v9i-bulb" aria-hidden="true"></span><span data-el="Έξυπνη εξήγηση" data-en="Smart explanation">Έξυπνη εξήγηση</span><span data-el="απλά λόγια, παραδείγματα και ερωτήσεις" data-en="clear language, examples and questions">απλά λόγια, παραδείγματα και ερωτήσεις</span></button>
+            <button class="study-action" data-action="quickreview" type="button"><span class="v9i v9i-zap" aria-hidden="true"></span><span data-el="Επανάληψη 5′" data-en="5-minute review">Επανάληψη 5′</span><span data-el="μόνο τα ουσιώδη πριν το τεστ" data-en="the essentials before a test">μόνο τα ουσιώδη πριν το τεστ</span></button>
+            <button class="study-action" data-action="oral" type="button"><span class="v9i v9i-mic" aria-hidden="true"></span><span data-el="Προφορική πρόβα" data-en="Oral practice">Προφορική πρόβα</span><span data-el="το AI ρωτά και περιμένει απάντηση" data-en="AI asks and waits for your answer">το AI ρωτά και περιμένει απάντηση</span></button>
+            <button class="study-action" data-action="written" type="button"><span class="v9i v9i-pencil" aria-hidden="true"></span><span data-el="Γραπτή πρόβα" data-en="Written practice">Γραπτή πρόβα</span><span data-el="ερωτήσεις ανάπτυξης και εφαρμογής" data-en="written and application questions">ερωτήσεις ανάπτυξης και εφαρμογής</span></button>
+            <button class="study-action" data-action="weakspots" type="button"><span class="v9i v9i-target" aria-hidden="true"></span><span data-el="Βρες τα κενά μου" data-en="Find my gaps">Βρες τα κενά μου</span><span data-el="στοχευμένες διαγνωστικές ερωτήσεις" data-en="targeted diagnostic questions">στοχευμένες διαγνωστικές ερωτήσεις</span></button>
+            <button class="study-action" data-action="plan" type="button"><span class="v9i v9i-compass" aria-hidden="true"></span><span data-el="Πλάνο μελέτης" data-en="Study plan">Πλάνο μελέτης</span><span data-el="βήματα προσαρμοσμένα στον χρόνο και τον στόχο" data-en="steps tailored to your time and goal">βήματα προσαρμοσμένα στον χρόνο και τον στόχο</span></button>
           </div>
           <div class="notice" data-el="Όλα γίνονται εδώ, χωρίς να φεύγεις από την AI Μελέτη. Αν κάποια στιγμή η δωρεάν AI υπηρεσία δεν είναι διαθέσιμη, θα σου προτείνουμε εναλλακτική." data-en="Everything happens here without leaving AI Study. If the free AI service is temporarily unavailable, we will offer an alternative.">Όλα γίνονται εδώ, χωρίς να φεύγεις από την AI Μελέτη. Αν κάποια στιγμή η δωρεάν AI υπηρεσία δεν είναι διαθέσιμη, θα σου προτείνουμε εναλλακτική.</div>
           <div id="aiWorkspace" class="ai-workspace hidden">
@@ -134,9 +134,9 @@
             <div id="audioControls" class="workspace-actions hidden"><button id="playAudioLesson" type="button" data-el="▶ Άκουσε" data-en="▶ Listen">▶ Άκουσε</button><button id="stopAudioLesson" type="button" data-el="■ Σταμάτησε" data-en="■ Stop">■ Σταμάτησε</button><span id="audioStatus" role="status" aria-live="polite" style="align-self:center;font-size:.92rem"></span></div>
             <div id="puterFallback" class="workspace-actions hidden"><button id="usePuterFallback" type="button" data-el="Συνέχισε με Puter" data-en="Continue with Puter">Συνέχισε με Puter</button></div>
             <div id="resultTools" class="result-tools hidden">
-              <button id="printStudyResult" type="button" data-el="🖨️ Εκτύπωση / PDF" data-en="🖨️ Print / PDF">🖨️ Εκτύπωση / PDF</button>
-              <button id="saveStudyResult" type="button" data-el="💾 Αποθήκευση .txt" data-en="💾 Save .txt">💾 Αποθήκευση .txt</button>
-              <button id="copyStudyResult" type="button" data-el="📋 Αντιγραφή" data-en="📋 Copy">📋 Αντιγραφή</button>
+              <button class="v9i v9i-printer" id="printStudyResult" type="button" data-el="Εκτύπωση / PDF" data-en="Print / PDF">Εκτύπωση / PDF</button>
+              <button class="v9i v9i-download" id="saveStudyResult" type="button" data-el="Αποθήκευση .txt" data-en="Save .txt">Αποθήκευση .txt</button>
+              <button class="v9i v9i-copy" id="copyStudyResult" type="button" data-el="Αντιγραφή" data-en="Copy">Αντιγραφή</button>
             </div>
             <div id="altAi" class="alt-ai hidden">
               <h4 data-el="Άλλα AI που αξίζει να δοκιμάσεις για αυτή τη δουλειά" data-en="Other AI tools worth trying for this task">Άλλα AI που αξίζει να δοκιμάσεις για αυτή τη δουλειά</h4>
@@ -145,7 +145,7 @@
             </div>
           </div>
         </div>
-        <div class="actions"><a class="action" href="/xartis-ylis.html" data-el="📚 Ελληνικός Χάρτης Ύλης" data-en="📚 Greek Curriculum Map">📚 Ελληνικός Χάρτης Ύλης</a></div>
+        <div class="actions"><a class="v9i v9i-book action" href="/xartis-ylis.html" data-el="Ελληνικός Χάρτης Ύλης" data-en="Greek Curriculum Map">Ελληνικός Χάρτης Ύλης</a></div>
         <div class="principle" data-el="Το τελευταίο βήμα γίνεται χωρίς AI. Αν δεν μπορείς να εξηγήσεις ή να εφαρμόσεις την ιδέα μόνος σου, η μελέτη δεν έχει τελειώσει ακόμη." data-en="The final step is done without AI. If you cannot explain or apply the idea on your own, studying is not finished yet.">Το τελευταίο βήμα γίνεται χωρίς AI. Αν δεν μπορείς να εξηγήσεις ή να εφαρμόσεις την ιδέα μόνος σου, η μελέτη δεν έχει τελειώσει ακόμη.</div>
       </div>
     </section>
@@ -270,7 +270,7 @@
     const label=lang==='en'?'Based on the official school textbook':'Βασισμένο στο επίσημο σχολικό βιβλίο';
     const sourceLink=source.canonicalSourceUrl||source.sourceUrl||'';
     const link=sourceLink?'<a href="'+esc(sourceLink)+'" target="_blank" rel="noopener noreferrer" style="margin-left:6px">'+esc(lang==='en'?'Open source':'Άνοιγμα πηγής')+'</a>':'';
-    box.innerHTML='📘 <strong>'+esc(label)+'</strong> · '+esc(source.bookTitle||'')+link;
+    box.innerHTML='<span class="v9i v9i-book" aria-hidden="true"></span><strong>'+esc(label)+'</strong> · '+esc(source.bookTitle||'')+link;
     box.classList.remove('hidden');
   }
   function requiresOfficialSource(){

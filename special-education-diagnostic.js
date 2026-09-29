@@ -259,7 +259,7 @@
     if(typeof TOOLS==="undefined")return "";
     const ids=recommendedToolIds().filter(id=>TOOLS[id]).slice(0,3);
     if(!ids.length)return "";
-    return `<section class="spdiag__tools"><h4>${esc(t("🧰 Προτεινόμενα εργαλεία για εξάσκηση","🧰 Recommended practice tools"))}</h4>${ids.map(id=>{const tool=TOOLS[id],desc=(en()?tool.shortDescEn:tool.shortDescEl)||"";return `<a class="spdiag__tool" href="/tools/${esc(id)}.html" target="_blank" rel="noopener noreferrer">${esc(tool.name)}${desc?`<small>${esc(desc)}</small>`:""}</a>`;}).join("")}</section>`;
+    return `<section class="spdiag__tools"><h4><span class="v9i v9i-toolbox" aria-hidden="true"></span>${esc(t("Προτεινόμενα εργαλεία για εξάσκηση","Recommended practice tools"))}</h4>${ids.map(id=>{const tool=TOOLS[id],desc=(en()?tool.shortDescEn:tool.shortDescEl)||"";return `<a class="spdiag__tool" href="/tools/${esc(id)}.html" target="_blank" rel="noopener noreferrer">${esc(tool.name)}${desc?`<small>${esc(desc)}</small>`:""}</a>`;}).join("")}</section>`;
   }
   function renderResult(){
     const box=modal().querySelector("#spdiagQuiz"),score=state.score;

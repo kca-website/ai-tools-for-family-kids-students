@@ -58,14 +58,29 @@
   }
 
 
-  const UPLOAD_ACCEPT="application/pdf,.pdf,text/plain,.txt,text/markdown,.md";
+  const UPLOAD_ACCEPT="application/pdf,.pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.docx,text/plain,.txt,text/markdown,.md";
+  const MAMMOTH_URL="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js";
+  let mammothPromise=null;
+  function ensureMammoth(){
+    if(window.mammoth) return Promise.resolve(window.mammoth);
+    if(mammothPromise) return mammothPromise;
+    mammothPromise=new Promise((resolve,reject)=>{
+      const s=document.createElement("script");
+      s.src=MAMMOTH_URL;
+      s.async=true;
+      s.onload=()=>window.mammoth?resolve(window.mammoth):reject(new Error("docx reader unavailable"));
+      s.onerror=()=>{mammothPromise=null;reject(new Error("docx reader unavailable"));};
+      document.head.appendChild(s);
+    });
+    return mammothPromise;
+  }
   const UPLOAD_MAX_CHARS=42000;
 
   function uploadMarkup(kind,isEn){
     const hint=kind==="pdf" ? "" : '<p class="guided__upload-hint">'+(isEn
-      ? "Optional: attach a PDF or text file with your material. It is read locally in your browser and only the extracted text is used."
-      : "Προαιρετικά: ανέβασε PDF ή αρχείο κειμένου με το υλικό σου. Διαβάζεται τοπικά στον browser και χρησιμοποιείται μόνο το εξαγόμενο κείμενο.")+'</p>';
-    return '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(kind==="pdf" ? (isEn?"Choose PDF":"Επίλεξε PDF") : (isEn?"Attach file":"Ανέβασε αρχείο"))+'</label><input id="guidedPdfFile" type="file" accept="'+UPLOAD_ACCEPT+'"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span><button type="button" id="guidedPdfRemove" class="guided__upload-remove" hidden>'+(isEn?"Remove file":"Αφαίρεση αρχείου")+'</button></div>'+hint;
+      ? "Optional: attach a PDF, Word or text file with your material. It is read locally in your browser and only the extracted text is used."
+      : "Προαιρετικά: ανέβασε PDF, Word ή αρχείο κειμένου με το υλικό σου. Διαβάζεται τοπικά στον browser και χρησιμοποιείται μόνο το εξαγόμενο κείμενο.")+'</p>';
+    return '<div class="guided__upload"><label class="guided__upload-btn" for="guidedPdfFile">'+(kind==="pdf" ? (isEn?"Choose PDF or Word":"Επίλεξε PDF ή Word") : (isEn?"Attach file":"Ανέβασε αρχείο"))+'</label><input id="guidedPdfFile" type="file" accept="'+UPLOAD_ACCEPT+'"><span id="guidedPdfStatus" class="guided__upload-status" aria-live="polite"></span><button type="button" id="guidedPdfRemove" class="guided__upload-remove" hidden>'+(isEn?"Remove file":"Αφαίρεση αρχείου")+'</button></div>'+hint;
   }
 
   async function readUploadFile(file){
@@ -73,6 +88,15 @@
     if(isPdf){
       const reader=await ensurePdfReader();
       return reader.read(file,{maxChars:UPLOAD_MAX_CHARS,maxPages:70});
+    }
+    const isDocx=/\.docx$/i.test(file.name||"") || file.type==="application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    if(isDocx){
+      if(file.size>15*1024*1024) throw new Error("file_too_large");
+      const mammoth=await ensureMammoth();
+      const out=await mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()});
+      const raw=String(out&&out.value||"").replace(/\r\n?/g,"\n").replace(/\n{3,}/g,"\n\n").trim();
+      if(!raw) throw new Error("no_selectable_text");
+      return {name:file.name||"document.docx",text:raw.slice(0,UPLOAD_MAX_CHARS),totalPages:0,truncated:raw.length>UPLOAD_MAX_CHARS};
     }
     const isText=/^text\//.test(file.type||"") || /\.(txt|md)$/i.test(file.name||"");
     if(!isText) throw new Error("unsupported_type");
@@ -103,9 +127,9 @@
           status.textContent=code==="no_selectable_text"
             ? (isEn?"No selectable text was found. This may be a scanned/image PDF.":"Δεν βρέθηκε επιλέξιμο κείμενο. Ίσως είναι σαρωμένο PDF/εικόνα.")
             : code==="file_too_large"
-              ? (isEn?"The file is too large (PDF up to 15 MB, text up to 2 MB).":"Το αρχείο είναι πολύ μεγάλο (PDF έως 15 MB, κείμενο έως 2 MB).")
+              ? (isEn?"The file is too large (PDF/Word up to 15 MB, text up to 2 MB).":"Το αρχείο είναι πολύ μεγάλο (PDF/Word έως 15 MB, κείμενο έως 2 MB).")
               : code==="unsupported_type"
-                ? (isEn?"Use a PDF or a .txt/.md text file.":"Χρησιμοποίησε PDF ή αρχείο κειμένου .txt/.md.")
+                ? (isEn?"Use a PDF, a Word (.docx) file or a .txt/.md text file.":"Χρησιμοποίησε PDF, Word (.docx) ή αρχείο κειμένου .txt/.md.")
                 : (isEn?"The file could not be read.":"Δεν μπόρεσα να διαβάσω το αρχείο.");
         }finally{input.disabled=false;}
       });

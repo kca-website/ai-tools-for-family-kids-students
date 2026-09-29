@@ -11,7 +11,7 @@
 a{color:var(--blue)}h1{line-height:1.15}.lead{color:var(--muted)}.tool{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:22px}
 label{font-weight:700;display:block;margin:12px 0 6px}textarea,select{width:100%;font:inherit;border:1px solid #94a3b8;border-radius:10px;padding:12px;background:white}textarea{min-height:150px;resize:vertical}
 button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16px;background:var(--blue);color:white;cursor:pointer;margin-top:14px}button[disabled]{opacity:.55;cursor:wait}
-.help{font-size:.92rem;color:var(--muted)}.result{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px;min-height:60px}.result p{margin:.45em 0}.result ol,.result ul{margin:.55em 0 .55em 1.35em}.result li{margin:.35em 0}.result h4{margin:1em 0 .35em}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#e0ecff;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:700}.privacy{border-left:4px solid var(--ok);padding:10px 14px;background:#f0fdf4;margin-top:20px}
+.help{font-size:.92rem;color:var(--muted)}.result{background:white;border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px;min-height:60px}.result p{margin:.45em 0}.result ol,.result ul{margin:.55em 0 .55em 1.35em}.result li{margin:.35em 0}.result h4{margin:1em 0 .35em}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{background:#e0ecff;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:700}.privacy{border-left:4px solid #1D5D8C;padding:10px 14px;background:#EEF6FF;margin-top:20px;border-radius:8px}
 </style>
 <link rel="stylesheet" href="/guided-task-assistant.css">
   <link rel="stylesheet" href="/site-chrome.css" />
@@ -23,7 +23,8 @@ button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:11px 16p
 <p class="lead">Μια εκπαιδευτική εκδοχή της λογικής «μικρά, απλά εργαλεία για κάτι που φαίνεται μεγάλο». Δεν κάνει την εργασία. Σε βοηθά να δεις <strong>ποιο είναι το επόμενο μικρό βήμα</strong>.</p>
 <div class="badges"><span class="badge">Δωρεάν</span><span class="badge">Χωρίς λογαριασμό</span><span class="badge">Learning-first</span></div>
 
-<div class="tool">
+<div class="tool guided-assistant">
+<div class="guided__head"><span class="guided__spark" aria-hidden="true">✦</span><div><h2>Σπάσε το σε μικρά βήματα</h2><p>Γράψε ή ανέβασε την εργασία ή τις σημειώσεις σου. Ο βοηθός τα οργανώνει σε βήματα· δεν λύνει την άσκηση.</p></div></div>
 <label for="mode">Τι χρειάζεσαι;</label>
 <select id="mode">
 <option value="ask">Τι ακριβώς μου ζητά η άσκηση;</option>

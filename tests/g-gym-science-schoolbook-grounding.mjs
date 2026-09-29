@@ -19,6 +19,9 @@ assert.equal(typeof resolveBiologyGQuizUrls, "function");
 assert.deepEqual(resolvePhysicsGQuizUrls("Νόμος του Ωμ"), [
   "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"
 ]);
+assert.deepEqual(resolvePhysicsGQuizUrls("Γ΄ · Κεφάλαιο 2 — Ηλεκτρικό ρεύμα / Νόμος του Ωμ"), [
+  "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html"
+]);
 assert.deepEqual(resolvePhysicsGQuizUrls("Τύπος ταχύτητας"), [
   "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"
 ]);
@@ -34,6 +37,9 @@ assert.deepEqual(resolveChemistryGQuizUrls("Μείγμα vs Ένωση"), [
   "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html"
 ]);
 assert.deepEqual(resolveChemistryGQuizUrls("Δομή του ατόμου"), [
+  "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"
+]);
+assert.deepEqual(resolveChemistryGQuizUrls("Β΄ · 2.9 — Υποατομικά σωματίδια / δομή ατόμου (προαπαιτούμενο)"), [
   "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"
 ]);
 assert.deepEqual(resolveChemistryGQuizUrls("Άσχετο θέμα"), []);
@@ -55,8 +61,8 @@ assert.deepEqual(resolveBiologyGQuizUrls("Σκοπός αναπαραγωγής"
 ]);
 assert.deepEqual(resolveBiologyGQuizUrls("Άσχετο θέμα"), []);
 
-assert.equal(Object.keys(PHYSICS_G_GYM_DIAGNOSTIC_SOURCES).length, 6);
-assert.equal(Object.keys(CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES).length, 6);
+assert.equal(Object.keys(PHYSICS_G_GYM_DIAGNOSTIC_SOURCES).length, 9);
+assert.equal(Object.keys(CHEMISTRY_G_GYM_DIAGNOSTIC_SOURCES).length, 9);
 assert.equal(Object.keys(BIOLOGY_G_GYM_DIAGNOSTIC_SOURCES).length, 10);
 
 const endpoint = fs.readFileSync(new URL("../api/schoolbook-source.js", import.meta.url), "utf8");

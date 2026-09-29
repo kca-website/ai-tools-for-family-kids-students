@@ -121,6 +121,9 @@ jobs:
       - name: Run AI Study UX smoke
         run: node tests/ai-study-ux-smoke.mjs
 
+      - name: Run AI Study cache/source safety smoke
+        run: node tests/study-cache-safety-smoke.mjs
+
       - name: Run Ancient Greek subject dedupe smoke
         run: node tests/curriculum-resolver-subject-dedupe-smoke.mjs
 

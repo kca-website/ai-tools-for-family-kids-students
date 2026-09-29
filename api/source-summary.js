@@ -6,6 +6,7 @@
 
 const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
+const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 
 module.exports = async function handler(req, res) {
   const aiStatus = getAiStatus();
@@ -18,26 +19,47 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI σύνοψη δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { sourceText = '', topic = '', language = 'el', sourceTitle = '' } = req.body || {};
-  const source = String(sourceText || '').trim();
+  const { subjectId = '', topic = '', language = 'el', sourceTitle = '' } = req.body || {};
+  const sid = String(subjectId || '').trim().slice(0, 120);
   const selectedTopic = String(topic || '').trim().slice(0, 600);
-  const title = String(sourceTitle || '').trim().slice(0, 300);
   const lang = language === 'en' ? 'en' : 'el';
 
+  if (!sid || !selectedTopic) {
+    return res.status(400).json({
+      error: 'official_source_identity_required',
+      message: 'Λείπει η επαληθεύσιμη ταυτότητα της επίσημης σχολικής πηγής.'
+    });
+  }
+
+  let officialSource = await getStudyCache({ kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic });
+  if (!officialSource?.grounded || !officialSource?.text) {
+    const resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic);
+    if (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text) {
+      const status = Number(resolved?.status || 502);
+      return res.status(status >= 500 ? 502 : 400).json({
+        error: resolved?.body?.error || 'official_source_unavailable',
+        message: 'Δεν φορτώθηκε με ασφάλεια η επίσημη ενότητα του σχολικού βιβλίου.'
+      });
+    }
+    officialSource = resolved.body;
+    await setStudyCache({ kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic }, officialSource, 86400);
+  }
+
+  const source = String(officialSource.text || '').trim();
+  const title = String(officialSource.bookTitle || sourceTitle || '').trim().slice(0, 300);
   if (source.length < 300) {
     return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
-  }
-  if (source.length > 50000) {
-    return res.status(413).json({ error: 'source_too_large', message: 'Η πηγή είναι πολύ μεγάλη για ασφαλή σύνοψη.' });
   }
 
   const workingSource = compactSourceForTopic(source, selectedTopic, 6500);
   const cacheParts = {
     kind: 'verified-source-summary',
-    route: aiStatus.smartRoutingEnabled ? 'smart' : 'legacy',
+    promptVersion: 'verified-summary-v2',
+    subjectId: sid,
     topic: selectedTopic,
     title,
     language: lang,
+    modelRoute: routingSignature(aiStatus),
     source: workingSource,
   };
   const cached = await getStudyCache(cacheParts);
@@ -234,6 +256,16 @@ For each candidate:
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({ ...responseBody, cacheHit: false });
 };
+
+function routingSignature(aiStatus) {
+  const providers = Array.isArray(aiStatus?.providers) ? aiStatus.providers : [];
+  return providers.map(({ name, model }) => {
+    const balanced = aiStatus?.routingProfiles?.balanced?.[name] || [];
+    const quality = aiStatus?.routingProfiles?.quality?.[name] || [];
+    return name + ':balanced=' + (balanced.length ? balanced.join('>') : String(model || '')) +
+      ';quality=' + (quality.length ? quality.join('>') : String(model || ''));
+  }).join('|');
+}
 
 function compactSourceForTopic(source, topic, maxChars) {
   const full = String(source || '').trim();

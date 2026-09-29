@@ -2102,6 +2102,29 @@ function selectUsefulText(text, topic) {
   return full.slice(start, start + 42000);
 }
 
+async function resolveOfficialSchoolbookSource(rawSubject, rawTopic) {
+  let statusCode = 200;
+  let payload = null;
+  const headers = {};
+  const response = {
+    setHeader(name, value) { headers[String(name).toLowerCase()] = value; },
+    status(code) { statusCode = Number(code) || 500; return this; },
+    json(body) { payload = body; return body; },
+  };
+  await module.exports({
+    method: "GET",
+    query: { subject: rawSubject, topic: rawTopic },
+  }, response);
+  return {
+    ok: statusCode >= 200 && statusCode < 300 && payload?.grounded === true,
+    status: statusCode,
+    body: payload,
+    headers,
+  };
+}
+
+module.exports.resolveOfficialSchoolbookSource = resolveOfficialSchoolbookSource;
+
 module.exports._test = Object.freeze({
   historyTopicKey,
   resolveHistoryCurriculumPaths,

@@ -565,7 +565,11 @@ ${JSON.stringify(current)}
       }else throw new Error("Υποστηρίζονται PDF και TXT.");
       ownMaterialText=text;
       q("videoOwnMaterial").value=text;
-      status.textContent=`✓ ${file.name} · ${note}`;
+      if(q("videoSourceMode")){
+        q("videoSourceMode").value="own";
+        q("videoOwnMaterialPanel").hidden=false;
+      }
+      status.textContent=`✓ ${file.name} · ${note} · θα χρησιμοποιηθεί ως κύρια πηγή του βίντεο`;
     }catch(e){
       ownMaterialText="";
       status.textContent="Δεν διαβάστηκε το αρχείο: "+(e?.message||e);
@@ -1032,7 +1036,29 @@ ${JSON.stringify(current)}
     try{
       const videoSystem="Είσαι εκπαιδευτικός σχεδιαστής σύντομων βίντεο για ελληνικό σχολικό πλαίσιο. Ακολουθείς αυστηρά την ενότητα και το καθεστώς ύλης που δίνει ο χρήστης. Επιστρέφεις μόνο το JSON που ζητείται, χωρίς markdown.";
       const requestStoryboard=async(sourceBudget)=>{
-        const response=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:videoSystem,prompt:buildPrompt(sourceBudget),outputTokens:outputTokenBudget()})});
+        const ownMode=sourceMode()==="own";
+        const ownSource=ownMode
+          ?selectRelevantMaterial(
+              ownMaterial(),
+              [topicText(),q("videoOwnInstruction")?.value||"",q("objective")?.value||"",q("notes")?.value||"",selectedText("videoPurpose")].join(" "),
+              Math.min(12000,Math.max(6000,sourceBudget))
+            )
+          :"";
+        const sourceFile=q("videoOwnFile")?.files?.[0];
+        const strictSourceSystem=ownMode
+          ?"\nΟ εκπαιδευτικός έχει δώσει δικό του αρχείο/κείμενο. Αυτό είναι η κύρια και δεσμευτική πηγή περιεχομένου. ΜΗΝ χρησιμοποιήσεις την επιλεγμένη σχολική ενότητα για πραγματολογικό περιεχόμενο και ΜΗΝ συμπληρώσεις από γενικές γνώσεις. Η τάξη και το μάθημα χρησιμοποιούνται μόνο για επίπεδο γλώσσας και παρουσίασης."
+          :"";
+        const response=await fetch("/api/teacher-assistant",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({
+            system:videoSystem+strictSourceSystem,
+            prompt:buildPrompt(sourceBudget),
+            documentText:ownSource,
+            documentName:ownMode?(sourceFile?.name||"Υλικό εκπαιδευτικού"):"",
+            outputTokens:outputTokenBudget()
+          })
+        });
         const data=await response.json().catch(()=>({}));
         return {response,data};
       };

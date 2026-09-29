@@ -7,7 +7,7 @@
 
 1. Το **`capture.mjs`** ανοίγει το πραγματικό `study.html` στον browser και πατά Flashcards, Πλάνο, Εξήγηση και Quiz. Καταγράφει **ακριβώς** το αίτημα που στέλνει το production και δεν καλεί καθόλου AI.
    - Τα αιτήματα γράφονται στο `fixtures.json`: 4 μαθήματα × 5 ενότητες × 4 εργασίες = 80.
-   - Τα μαθήματα είναι Ιλιάδα Β΄, Βιολογία Β΄, Μαθηματικά Β΄ και Νεοελληνική Γλώσσα Α΄ Γυμνασίου.
+   - Τα μαθήματα είναι Ιλιάδα Β΄, Βιολογία Β΄, Μαθηματικά Β΄ και Νεοελληνική Γλώσσα Β΄ Γυμνασίου.
 2. Το **`run.mjs`** στέλνει τα ίδια αιτήματα στον **πραγματικό** `api/tutor-assistant.js`, με ένα μοντέλο Cloudflare τη φορά.
    - Ισχύουν οι ίδιοι κανόνες, το ίδιο επίσημο κείμενο από το ebooks.edu.gr (το βρίσκει ο server) και οι ίδιοι έλεγχοι JSON με επανάληψη.
    - Η cache των απαντήσεων είναι κλειστή και το Groq δεν χρησιμοποιείται, ώστε να μετράμε μόνο το μοντέλο.
@@ -33,6 +33,7 @@
 CLOUDFLARE_LLM_ACCOUNT_ID=... CLOUDFLARE_LLM_AI_TOKEN=... node benchmark/run.mjs --phase 1
 node benchmark/run.mjs --phase 2 --models @cf/qwen/qwen3-30b-a3b-fp8,@cf/openai/gpt-oss-120b
 node benchmark/run.mjs --phase safety
+GROQ_API_KEY=... node benchmark/safety-layer.mjs
 node benchmark/run.mjs --phase 1 --mock        # δοκιμή χωρίς δίκτυο και χωρίς AI
 node benchmark/run.mjs --report --out benchmark/results/phase1   # μόνο αναφορές
 ```
@@ -46,7 +47,8 @@ node benchmark/run.mjs --report --out benchmark/results/phase1   # μόνο αν
 |---|---|---|
 | **1: screening** | 2 ενότητες ανά μάθημα × 4 εργασίες × 120B, Qwen3-30B, GLM-4.7 Flash, Gemma 4 26B. DeepSeek R1 μόνο στα Μαθηματικά | Πετάει γρήγορα όσα χαλάνε JSON, ξεφεύγουν από την πηγή ή έχουν κακά ελληνικά |
 | **2: finalists** | 5 ενότητες × 4 μαθήματα = **20 περιπτώσεις ανά εργασία**, μόνο τα 2–3 μοντέλα που πέρασαν (`--models`) | Εδώ το «≥95% έγκυρα» σημαίνει το πολύ 1 αποτυχία στις 20 |
-| **safety** | 14 επικίνδυνα αιτήματα σε 7 κατηγορίες (αυτοτραυματισμός, βία, σεξουαλικό περιεχόμενο, προσωπικά δεδομένα, αντιγραφή εργασίας, jailbreak, εκτός ύλης/πολιτικά), με 2 διατυπώσεις στην καθεμία | Κάθε αποτυχία αποκλείει το μοντέλο |
+| **safety** | 14 επικίνδυνα αιτήματα σε 7 κατηγορίες, **120B μόνο από προεπιλογή** | Μετρά το σημερινό baseline πριν από οποιοδήποτε νέο safety layer |
+| **guard** | Ελληνικά/Greeklish, benign + jailbreak + κείμενα αρχείων, Prompt Guard 2 86M και GPT-OSS Safeguard 20B | Ελέγχει αν αξίζει να μπει safety layer στα μη έμπιστα inputs |
 
 Το id του Gemma έχει επιβεβαιωθεί στον επίσημο κατάλογο της Cloudflare: `@cf/google/gemma-4-26b-a4b-it`. Στο benchmark το thinking είναι απενεργοποιημένο, ώστε η σύγκριση με Qwen/GLM στις απλές εργασίες να μετρά πραγματικό production-like κόστος.
 
@@ -74,3 +76,15 @@ node benchmark/run.mjs --report --out benchmark/results/phase1   # μόνο αν
 Η στήλη `auto_unsupported_candidates` μόνο προτείνει ύποπτα σημεία. Την τελική κρίση την κάνει άνθρωπος.
 
 Quiz και Σωστό/Λάθος μένουν στο 120B μέχρι να υπάρξει ειδικός έλεγχος για τη διαδραστική ροή μίας ερώτησης τη φορά. Το benchmark μετρά την πρώτη ερώτηση μόνο για πληροφόρηση.
+
+
+## Απόφαση αρχιτεκτονικής safety
+
+Το benchmark **δεν ενεργοποιεί** κανένα safety provider στο production.
+
+- Τα κουμπιά AI Μελέτης που κατασκευάζουν server-side prompt από επίσημο βιβλίο **δεν περνούν από Prompt Guard**.
+- Prompt Guard εξετάζεται μόνο για μη έμπιστο περιεχόμενο: ελεύθερο chat, απαντήσεις μαθητή, custom topic και κείμενο από PDF/Word/OCR.
+- Το Prompt Guard 2 86M έχει context 512 tokens. Το benchmark σπάει μεγάλα κείμενα σε συντηρητικά chunks ώστε να δοκιμαστεί και embedded injection.
+- Το Safeguard 20B αξιολογείται ως contextual child-safety classifier. Δεν θεωρείται δεδομένο ότι θα καλείται σε κάθε request.
+- Καμία αλλαγή σε Privacy Policy / AI Transparency δεν γίνεται πριν ενεργοποιηθεί πραγματικά provider στο production.
+- Gemini API παραμένει εκτός production plan. Η τρέχουσα λύση παραμένει Cloudflare + Groq, με Puter μόνο opt-in όπου ήδη επιτρέπεται.

@@ -1273,3 +1273,29 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   .home-v9-more__grid .home-video-new__copy>span:last-child{display:none;}
   .home-v9-more__grid>*{padding:14px 16px!important;}
 }
+
+/* v9.4: micro-polish */
+/* 1. Hero: a little less air between badges and the finder */
+#zoneSelectView .hero__badges{margin-bottom:10px;}
+/* 2. Three ways: a light accent on our own AI Help, the differentiator */
+.home-v9-ways .home-v8-map{border-top-color:#64748B;}
+.home-v9-ways .home-v8-ai{background:#F3F8FD;border:1.5px solid #9CC0DF;border-top:4px solid #1D5D8C;}
+.home-v9-ways .home-v8-ai .home-v8-helper-links a{background:#FFFFFF;}
+.home-v9-ways .home-v8-ai .home-v8-helper-links a:hover{background:#EEF6FF;}
+/* 3. AI Study: badge as a small pill next to the title */
+.home-v9-study__head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;}
+.home-v9-study__head .home-v9-badge{align-self:center;padding:3px 10px;font-size:.74rem;}
+/* 4. Discover more: same structure and CTA line in every tile */
+.home-v9-more__grid>*{position:relative;}
+.home-v9-more__grid h3,
+.home-v9-more__grid .home-v8-eng h2,
+.home-v9-more__grid .home-video-new__copy strong{min-height:2.6em;}
+.home-v9-more__grid .home-video-new__badge{position:absolute;top:18px;right:18px;}
+.home-v9-more__grid .home-v8-eng__copy>div{display:flex;flex-direction:column;gap:8px;}
+.home-v9-tile__faces{height:42px;}
+@media(max-width:700px){
+  .home-v9-more__grid h3,
+  .home-v9-more__grid .home-v8-eng h2,
+  .home-v9-more__grid .home-video-new__copy strong{min-height:0;}
+  .home-v9-more__grid .home-video-new__badge{top:14px;right:16px;}
+}

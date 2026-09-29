@@ -17,7 +17,7 @@
     .eyebrow{display:inline-block;background:#fff;border:1px solid var(--border);border-radius:999px;padding:5px 10px;font-size:.82rem;font-weight:800;color:var(--green)}
     h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;margin:12px 0 10px;letter-spacing:-.04em}.hero p{max-width:800px;margin:0;color:#44505f;font-size:1.04rem}
     .learning-loop{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.learning-loop span{background:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.9);padding:7px 10px;border-radius:999px;font-size:.86rem;font-weight:700}
-    .grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 2px 10px rgba(30,50,70,.04)}
+    .grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:18px}.grid.study-result-open{grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr)}.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 2px 10px rgba(30,50,70,.04)}
     h2{font-size:1.25rem;margin:0 0 14px}h3{font-size:1rem;margin:18px 0 8px}label{display:block;font-weight:750;font-size:.9rem;margin:12px 0 6px}
     select,input,textarea{width:100%;border:1px solid #cfd8e3;border-radius:10px;padding:11px 12px;background:#fff;color:var(--ink)}textarea{min-height:74px;resize:vertical}
     .row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.goal-grid,.time-grid,.study-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
@@ -30,10 +30,10 @@
     .material-panel{margin-top:18px;border-top:1px solid var(--border);padding-top:16px}.study-action{border:1px solid var(--border);background:#fff;border-radius:11px;padding:11px;text-align:left;cursor:pointer;font-weight:800}.study-action span{display:block;font-size:.78rem;font-weight:500;color:var(--muted);margin-top:2px}.study-action:hover{border-color:var(--blue);background:#fbfdff}
     .actions{display:grid;gap:8px;margin-top:14px}.action{display:flex;justify-content:center;text-decoration:none;border-radius:10px;padding:11px 12px;font-weight:800;border:1px solid var(--blue);background:#fff}.action.main{background:var(--green);border-color:var(--green);color:#fff}
     .principle{margin-top:14px;padding:12px;border-radius:10px;background:#f6f8fb;color:#475569;font-size:.86rem}.hidden{display:none!important}.notice{padding:10px 12px;border-radius:10px;background:#fff8e8;border:1px solid #efd8a3;color:#674b13;font-size:.84rem;margin-top:12px}
-    .ai-workspace{margin-top:16px;border:1px solid var(--border);border-radius:14px;background:#fbfdff;padding:14px}.ai-workspace__head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.ai-workspace__title{font-weight:850}.provider{font-size:.74rem;color:var(--muted);background:#eef2f7;padding:4px 8px;border-radius:999px}.ai-output{white-space:pre-wrap;background:#fff;border:1px solid var(--border);border-radius:11px;padding:13px;min-height:70px}.ai-loading{color:var(--muted)}.answer-box{display:flex;gap:8px;margin-top:10px}.answer-box textarea{min-height:52px;flex:1}.answer-box button{width:auto;margin:0;padding:10px 14px}.flash-grid{display:grid;gap:8px}.flash-card{border:1px solid var(--border);border-radius:10px;padding:10px;background:#fff}.flash-q{font-weight:800}.flash-a{margin-top:5px;color:#475569}.workspace-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.workspace-actions button{border:1px solid var(--blue);background:#fff;color:var(--blue);border-radius:9px;padding:8px 11px;font-weight:800;cursor:pointer}
+    .ai-workspace{margin-top:16px;border:1px solid var(--border);border-radius:14px;background:#fbfdff;padding:14px}.ai-workspace__head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.ai-workspace__title{font-weight:850}.provider{font-size:.74rem;color:var(--muted);background:#eef2f7;padding:4px 8px;border-radius:999px}.ai-output{white-space:normal;background:#fff;border:1px solid var(--border);border-radius:11px;padding:15px;min-height:70px;line-height:1.58}.ai-output p{margin:.55em 0}.ai-output h3{font-size:1rem;margin:1.05em 0 .45em}.ai-output h4{font-size:.94rem;margin:.9em 0 .4em}.ai-output ul,.ai-output ol{margin:.55em 0 .75em;padding-left:1.35rem}.ai-output li{margin:.28em 0}.ai-output blockquote{margin:.7em 0;padding:.55em .8em;border-left:3px solid #b8c7d8;background:#f8fafc;color:#475569}.ai-output code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#f1f5f9;border-radius:5px;padding:.08em .3em}.ai-output hr{border:0;border-top:1px solid var(--border);margin:1em 0}.quiz-progress{display:inline-flex;align-items:center;border-radius:999px;background:var(--soft);color:#204f78;font-size:.8rem;font-weight:850;padding:5px 9px;margin-bottom:8px}.ai-loading{color:var(--muted)}.answer-box{display:flex;gap:8px;margin-top:10px}.answer-box textarea{min-height:52px;flex:1}.answer-box button{width:auto;margin:0;padding:10px 14px}.flash-grid{display:grid;gap:8px}.flash-card{border:1px solid var(--border);border-radius:10px;padding:10px;background:#fff}.flash-q{font-weight:800}.flash-a{margin-top:5px;color:#475569}.workspace-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.workspace-actions button{border:1px solid var(--blue);background:#fff;color:var(--blue);border-radius:9px;padding:8px 11px;font-weight:800;cursor:pointer}
     .result-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.result-tools button{border:1px solid var(--border);background:#fff;border-radius:9px;padding:8px 11px;font-weight:800;cursor:pointer;color:#334155}.alt-ai{margin-top:16px;padding-top:14px;border-top:1px solid var(--border)}.alt-ai h4{margin:0 0 8px;font-size:.95rem}.alt-ai-grid{display:grid;gap:8px}.alt-ai-card{display:block;text-decoration:none;color:inherit;border:1px solid var(--border);border-radius:10px;padding:10px;background:#fff}.alt-ai-card strong{display:block}.alt-ai-card span{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}.alt-ai-note{font-size:.76rem;color:var(--muted);margin-top:8px}
     footer{margin:24px 0 8px;color:var(--muted);font-size:.82rem;text-align:center}
-    @media(max-width:800px){.grid{grid-template-columns:1fr}.hero{padding:22px}.row{grid-template-columns:1fr}.goal-grid,.time-grid,.study-actions{grid-template-columns:1fr 1fr}}
+    @media(max-width:800px){.grid,.grid.study-result-open{grid-template-columns:1fr}.hero{padding:22px}.row{grid-template-columns:1fr}.goal-grid,.time-grid,.study-actions{grid-template-columns:1fr 1fr}}
     @media(max-width:480px){.goal-grid,.time-grid,.study-actions{grid-template-columns:1fr}}
     @media print{body *{visibility:hidden!important}.ai-workspace,.ai-workspace *{visibility:visible!important}.ai-workspace{position:absolute;left:0;top:0;width:100%;border:0;padding:0;background:#fff}.result-tools,.alt-ai,#answerBox,#puterFallback,#audioControls{display:none!important}}
   </style>
@@ -111,7 +111,7 @@
           <div class="study-actions">
             <button class="study-action" data-action="audio" type="button">🎧 <span data-el="Άκουσέ το" data-en="Listen to it">Άκουσέ το</span><span data-el="μικρό ακουστικό μάθημα από την ύλη" data-en="a short audio lesson from the material">μικρό ακουστικό μάθημα από την ύλη</span></button>
             <button class="study-action" data-action="flashcards" type="button">🗂️ <span data-el="Κάρτες ανάκλησης" data-en="Recall cards">Κάρτες ανάκλησης</span><span data-el="8 κάρτες ενεργής ανάκλησης" data-en="8 active-recall cards">8 κάρτες ενεργής ανάκλησης</span></button>
-            <button class="study-action" data-action="quiz" type="button">❓ <span data-el="Γρήγορο Quiz" data-en="Quick Quiz">Γρήγορο Quiz</span><span data-el="μία ερώτηση τη φορά" data-en="one question at a time">μία ερώτηση τη φορά</span></button>
+            <button class="study-action" data-action="quiz" type="button">❓ <span data-el="Γρήγορο Quiz" data-en="Quick Quiz">Γρήγορο Quiz</span><span data-el="5 ερωτήσεις · μία-μία" data-en="5 questions · one at a time">5 ερωτήσεις · μία-μία</span></button>
             <button class="study-action" data-action="truefalse" type="button">✅ <span data-el="Σωστό ή Λάθος" data-en="True or False">Σωστό ή Λάθος</span><span data-el="γρήγορος έλεγχος βασικών εννοιών" data-en="fast concept check">γρήγορος έλεγχος βασικών εννοιών</span></button>
             <button class="study-action" data-action="explain" type="button">💡 <span data-el="Έξυπνη εξήγηση" data-en="Smart explanation">Έξυπνη εξήγηση</span><span data-el="απλά λόγια, παραδείγματα και ερωτήσεις" data-en="clear language, examples and questions">απλά λόγια, παραδείγματα και ερωτήσεις</span></button>
             <button class="study-action" data-action="quickreview" type="button">⚡ <span data-el="Επανάληψη 5′" data-en="5-minute review">Επανάληψη 5′</span><span data-el="μόνο τα ουσιώδη πριν το τεστ" data-en="the essentials before a test">μόνο τα ουσιώδη πριν το τεστ</span></button>
@@ -267,25 +267,38 @@
       throw new Error(lang==='en'?'Choose a specific textbook subsection so the AI can use the exact source text.':'Διάλεξε συγκεκριμένη υποενότητα του βιβλίου, ώστε το AI να χρησιμοποιήσει το ακριβές κείμενο της πηγής.');
     }
     const key=subject+'||'+topic;
-    if(officialSourceCache.has(key)){
-      const cached=officialSourceCache.get(key);
+    const cached=officialSourceCache.get(key);
+    if(cached?.grounded){
       sourceEvidenceUi(cached);
       return cached;
     }
-    try{
-      const res=await fetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic),{headers:{'Accept':'application/json'}});
-      const body=await res.json().catch(()=>null);
-      if(!res.ok||!body?.grounded){
-        officialSourceCache.set(key,null);sourceEvidenceUi(null);
-        if(requiresOfficialSource()) throw new Error(lang==='en'?'The official textbook section could not be loaded. Upload the relevant PDF/notes or choose a more specific subsection.':'Δεν φορτώθηκε η επίσημη ενότητα του σχολικού βιβλίου. Ανέβασε το σχετικό PDF/σημειώσεις ή διάλεξε πιο συγκεκριμένη υποενότητα.');
-        return null
+    let lastBody=null,lastError=null;
+    for(let attempt=0;attempt<2;attempt++){
+      try{
+        const res=await fetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic),{headers:{'Accept':'application/json','Cache-Control':'no-cache'}});
+        const body=await res.json().catch(()=>null);
+        lastBody=body;
+        if(res.ok&&body?.grounded){
+          officialSourceCache.set(key,body);sourceEvidenceUi(body);return body;
+        }
+        const retryable=body?.error==='official_source_unavailable'||res.status>=500;
+        if(!retryable||attempt===1)break;
+        await new Promise(resolve=>setTimeout(resolve,220));
+      }catch(err){
+        lastError=err;
+        if(attempt===0){await new Promise(resolve=>setTimeout(resolve,220));continue}
       }
-      officialSourceCache.set(key,body);sourceEvidenceUi(body);return body;
-    }catch(err){
-      sourceEvidenceUi(null);
-      if(requiresOfficialSource()) throw err;
-      return null
     }
+    sourceEvidenceUi(null);
+    if(requiresOfficialSource()){
+      const detail=lastBody?.error==='section_not_resolved'
+        ? (lang==='en'?'This selection is not yet mapped to an exact verified schoolbook page.':'Η συγκεκριμένη επιλογή δεν έχει ακόμη ακριβή αντιστοίχιση σε επαληθευμένη σελίδα του σχολικού βιβλίου.')
+        : (lang==='en'?'The official textbook section could not be loaded. Try again in a moment.':'Δεν φορτώθηκε η επίσημη ενότητα του σχολικού βιβλίου. Δοκίμασε ξανά σε λίγο.');
+      const err=new Error(detail);
+      err.code=lastBody?.error||lastError?.name||'official_source_unavailable';
+      throw err;
+    }
+    return null
   }
 
   function selectedTopic(){const custom=$('topicCustom').value.trim();if(custom)return custom;const opt=$('topicPick').selectedOptions[0];return opt?.dataset?.label||opt?.textContent?.trim()||''}
@@ -459,7 +472,7 @@
     }
   }
 
-  let interactiveAction='', interactiveHistory=[], lastServerPayload=null;
+  let interactiveAction='', interactiveHistory=[], interactiveStep=0, interactiveTotal=0, lastServerPayload=null;
 
   function actionTitle(action){
     const el={audio:'Άκουσέ το',flashcards:'Κάρτες ανάκλησης',quiz:'Γρήγορο Quiz',truefalse:'Σωστό ή Λάθος',explain:'Έξυπνη εξήγηση',quickreview:'Επανάληψη 5′',oral:'Προφορική πρόβα',written:'Γραπτή πρόβα',weakspots:'Βρες τα κενά μου',plan:'Πλάνο μελέτης'};
@@ -475,7 +488,7 @@
     const instructions={
       audio: lang==='en'?'Write a short spoken mini-lesson for listening, about 2–3 minutes when read aloud. Natural spoken language, no markdown tables. If a source is supplied, every factual sentence must be directly supported by it. Do not add terminology, causes, examples, or conclusions absent from the source, even if scientifically correct.':'Γράψε ένα σύντομο προφορικό μικρομάθημα για ακρόαση, περίπου 2–3 λεπτά όταν διαβαστεί δυνατά. Φυσικός προφορικός λόγος, χωρίς πίνακες markdown. Αν έχει δοθεί πηγή, κάθε πραγματολογική πρόταση πρέπει να υποστηρίζεται άμεσα από αυτήν. Μην προσθέτεις όρους, αιτίες, παραδείγματα ή συμπεράσματα που δεν εμφανίζονται ή δεν προκύπτουν ρητά από την πηγή, ακόμη κι αν είναι επιστημονικά σωστά.',
       flashcards: lang==='en'?'Return ONLY valid JSON: {"cards":[{"q":"...","a":"..."}]}. Create exactly 8 active-recall flashcards grounded in this material.':'Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"cards":[{"q":"...","a":"..."}]}. Φτιάξε ακριβώς 8 κάρτες ενεργής ανάκλησης βασισμένες σε αυτό το υλικό.',
-      quiz: lang==='en'?'Run a quick quiz ONE question at a time. Ask only one question now. Do not reveal the answer before the learner attempts it.':'Κάνε γρήγορο quiz ΜΙΑ ερώτηση τη φορά. Κάνε μόνο μία ερώτηση τώρα. Μην αποκαλύψεις την απάντηση πριν προσπαθήσει ο μαθητής.',
+      quiz: lang==='en'?'Run a 5-question quick quiz, ONE question at a time. On the initial request ask the first question only. On continuation requests, follow the exact next-question number or finish instruction supplied in the prompt. Wait for the learner before each next question and do not reveal an answer before the learner attempts it. The UI displays progress, so do not add your own progress counter.':'Κάνε γρήγορο quiz 5 ερωτήσεων, ΜΙΑ ερώτηση τη φορά. Στο αρχικό αίτημα κάνε μόνο την πρώτη ερώτηση. Στα επόμενα αιτήματα ακολούθησε ακριβώς τον αριθμό της επόμενης ερώτησης ή την οδηγία ολοκλήρωσης που δίνεται στο prompt. Περίμενε την απάντηση του μαθητή πριν από κάθε επόμενη ερώτηση και μην αποκαλύπτεις απάντηση πριν προσπαθήσει. Η ένδειξη προόδου εμφανίζεται από το UI, οπότε μην γράφεις δικό σου μετρητή.',
       truefalse: lang==='en'?'Run a True/False concept check ONE statement at a time. Ask only one statement now and wait for the learner answer before feedback.':'Κάνε έλεγχο Σωστό/Λάθος ΜΙΑ πρόταση τη φορά. Δώσε μόνο μία πρόταση τώρα και περίμενε την απάντηση πριν το feedback.',
       explain: lang==='en'?'Explain this exact topic/material clearly with 2–3 concrete examples and short self-check questions.':'Εξήγησε αυτό ακριβώς το θέμα/υλικό καθαρά, με απλά λόγια, 2–3 συγκεκριμένα παραδείγματα και μικρές ερωτήσεις αυτοελέγχου.',
       quickreview: lang==='en'?'Create a 5-minute review: the 5–7 most important points, 3 things commonly confused, and 3 rapid recall questions.':'Φτιάξε επανάληψη 5 λεπτών: 5–7 πιο σημαντικά σημεία, 3 σημεία που μπερδεύονται συχνά και 3 πολύ σύντομες ερωτήσεις ανάκλησης.',
@@ -523,11 +536,39 @@
     return body.text||'';
   }
 
-  function renderPlain(text){
-    const safe=esc(text)
+  function inlineStudyMarkup(value){
+    return esc(value)
       .replace(/\*\*([^*\n]+)\*\*/g,'<strong>$1</strong>')
-      .replace(/^\s*[-•]\s+/gm,'• ');
-    $('aiOutput').innerHTML=safe.replace(/\n/g,'<br>');
+      .replace(/`([^`\n]+)`/g,'<code>$1</code>');
+  }
+  function studyMarkup(text){
+    const lines=String(text||'').replace(/^#\s+#\s+/gm,'## ').split(/\r?\n/);
+    const out=[];let list='';
+    const closeList=()=>{if(list){out.push('</'+list+'>');list=''}};
+    for(const raw of lines){
+      const line=raw.trim();
+      if(!line){closeList();continue}
+      if(/^---+$/.test(line)){closeList();out.push('<hr>');continue}
+      let m=line.match(/^(#{1,4})\s+(.+)$/);
+      if(m){closeList();out.push((m[1].length<=2?'<h3>':'<h4>')+inlineStudyMarkup(m[2])+(m[1].length<=2?'</h3>':'</h4>'));continue}
+      m=line.match(/^[-•]\s+(.+)$/);
+      if(m){if(list!=='ul'){closeList();list='ul';out.push('<ul>')}out.push('<li>'+inlineStudyMarkup(m[1])+'</li>');continue}
+      m=line.match(/^\d+[.)]\s+(.+)$/);
+      if(m){if(list!=='ol'){closeList();list='ol';out.push('<ol>')}out.push('<li>'+inlineStudyMarkup(m[1])+'</li>');continue}
+      m=line.match(/^>\s*(.+)$/);
+      if(m){closeList();out.push('<blockquote>'+inlineStudyMarkup(m[1])+'</blockquote>');continue}
+      closeList();out.push('<p>'+inlineStudyMarkup(line)+'</p>');
+    }
+    closeList();
+    return '<div class="study-rich-text">'+out.join('')+'</div>';
+  }
+  function quizProgressHtml(){
+    if(!interactiveTotal)return '';
+    if(interactiveStep>interactiveTotal)return '<div class="quiz-progress">'+esc(lang==='en'?'Completed · '+interactiveTotal+'/'+interactiveTotal:'Ολοκληρώθηκε · '+interactiveTotal+'/'+interactiveTotal)+'</div>';
+    return '<div class="quiz-progress">'+esc((lang==='en'?'Question ':'Ερώτηση ')+interactiveStep+(lang==='en'?' of ':' από ')+interactiveTotal)+'</div>';
+  }
+  function renderPlain(text){
+    $('aiOutput').innerHTML=quizProgressHtml()+studyMarkup(text);
   }
   function renderFlashcards(text){
     const raw=String(text||'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
@@ -588,8 +629,11 @@
     if(!selectedTopic()&&!attached){$('topicCustom').focus();return}
     if(action==='plan'){await buildAiPlan();$('plan').classList.remove('hidden');$('plan').scrollIntoView({behavior:'smooth',block:'nearest'});return}
     interactiveAction=action; interactiveHistory=[];
+    interactiveTotal=action==='quiz'?5:0;
+    interactiveStep=interactiveTotal?1:0;
     $('workspaceTitle').textContent=actionTitle(action);
     $('aiWorkspace').classList.remove('hidden');
+    document.querySelector('main.grid')?.classList.add('study-result-open');
     $('answerBox').classList.add('hidden');
     $('puterFallback').classList.add('hidden');
     $('audioControls').classList.add('hidden');
@@ -630,14 +674,30 @@
     $('studyAnswer').value='';
     interactiveHistory.push('LEARNER: '+answer);
     const cfg=actionConfig(interactiveAction);
-    const continuation=(lang==='en'
-      ? 'Conversation so far:\n'+interactiveHistory.slice(-8).join('\n')+'\nRespond to the learner briefly, then ask exactly ONE next question. Do not give a grade.'
-      : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-8).join('\n')+'\nΑπάντησε σύντομα στην προσπάθεια του μαθητή και μετά κάνε ακριβώς ΜΙΑ επόμενη ερώτηση. Μη βάλεις βαθμό.');
-    $('aiOutput').innerHTML+='<br><br><strong>'+esc(lang==='en'?'You: ':'Εσύ: ')+'</strong>'+esc(answer)+'<br><br><span class="ai-loading">'+esc(lang==='en'?'AI is checking…':'Το AI ελέγχει…')+'</span>';
+    const isFiveQuestionQuiz=interactiveAction==='quiz'&&interactiveTotal===5;
+    const finishing=isFiveQuestionQuiz&&interactiveStep>=interactiveTotal;
+    const continuation=isFiveQuestionQuiz
+      ? (finishing
+        ? (lang==='en'
+          ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Give brief feedback on this answer, then a very short final recap of the '+interactiveTotal+'-question quiz. Do NOT ask another question and do not give a grade.'
+          : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Δώσε σύντομο feedback για αυτή την απάντηση και μετά μία πολύ σύντομη τελική ανακεφαλαίωση του quiz των '+interactiveTotal+' ερωτήσεων. ΜΗΝ κάνεις άλλη ερώτηση και μη βάλεις βαθμό.')
+        : (lang==='en'
+          ? 'Conversation so far:\n'+interactiveHistory.slice(-12).join('\n')+'\nThis was the learner answer to question '+interactiveStep+' of '+interactiveTotal+'. Respond briefly, then ask exactly question '+(interactiveStep+1)+' of '+interactiveTotal+'. Do not give a grade.'
+          : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-12).join('\n')+'\nΑυτή ήταν η απάντηση του μαθητή στην ερώτηση '+interactiveStep+' από '+interactiveTotal+'. Απάντησε σύντομα και μετά κάνε ακριβώς την ερώτηση '+(interactiveStep+1)+' από '+interactiveTotal+'. Μη βάλεις βαθμό.'))
+      : (lang==='en'
+        ? 'Conversation so far:\n'+interactiveHistory.slice(-8).join('\n')+'\nRespond to the learner briefly, then ask exactly ONE next question. Do not give a grade.'
+        : 'Συζήτηση ως τώρα:\n'+interactiveHistory.slice(-8).join('\n')+'\nΑπάντησε σύντομα στην προσπάθεια του μαθητή και μετά κάνε ακριβώς ΜΙΑ επόμενη ερώτηση. Μη βάλεις βαθμό.');
+    $('aiOutput').innerHTML=quizProgressHtml()+studyMarkup((lang==='en'?'You: ':'Εσύ: ')+answer)+'<span class="ai-loading">'+esc(lang==='en'?'AI is checking…':'Το AI ελέγχει…')+'</span>';
     $('sendStudyAnswer').disabled=true;
     try{
       const text=await callStudyServer(interactiveAction,studyContextPrompt(continuation));
       interactiveHistory.push('AI: '+text);
+      if(finishing){
+        interactiveStep=interactiveTotal+1;
+        $('answerBox').classList.add('hidden');
+      }else if(interactiveTotal){
+        interactiveStep++;
+      }
       renderPlain(text);
     }catch(err){
       $('aiOutput').textContent=err.message||String(err);

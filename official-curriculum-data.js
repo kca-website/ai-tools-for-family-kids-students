@@ -17,21 +17,21 @@
   "sourcePolicyEn": "Only explicitly recorded official sources permit an official-alignment claim. A topic anchor is not an official section title. The layer separates textbook, textbook contents, and annual taught/examinable syllabus.",
   "coverageSummary": {
     "allQuizEntries": 57,
-    "allGapEntries": 291,
+    "allGapEntries": 293,
     "quizCoverageByStatus": {
       "annual-syllabus-verified": 11,
-      "book-index-verified": 4,
+      "book-index-verified": 5,
       "catalog-verified": 2,
-      "official-book-verified": 29,
-      "annual-guidance-detailed-map": 8,
+      "official-book-verified": 30,
+      "annual-guidance-detailed-map": 6,
       "annual-guidance-flexible-selection": 1,
       "annual-guidance-target-based-selection": 1,
       "annual-guidance-package-selection": 1
     },
     "gapCoverageByStatus": {
       "catalog-topic-anchor": 4,
-      "exact-section-verified": 57,
-      "official-course-topic-anchor": 207,
+      "exact-section-verified": 61,
+      "official-course-topic-anchor": 205,
       "related-section-verified": 23
     }
   },
@@ -2807,6 +2807,30 @@
     "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
     "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C107/675/"
   },
+  "physics.speed-definition": {
+  "topicAnchorEl": "Μέση ταχύτητα",
+  "topicAnchorEn": "Average speed",
+  "status": "exact-section-verified",
+  "sourceQuizId": "physics-gymnasiou",
+  "exactSectionEl": "2.2 — Η έννοια της ταχύτητας (πριν από τη διανυσματική περιγραφή)",
+  "statusLabelEl": "Ακριβής ενότητα 2026–27",
+  "statusLabelEn": "Exact 2026–27 section",
+  "noteEl": "Το diagnostic χρησιμοποιεί μόνο το επιτρεπόμενο τμήμα της §2.2 για μήκος διαδρομής, χρόνο και μέση ταχύτητα.",
+  "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html",
+  "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+},
+  "physics.pressure-force-area": {
+  "topicAnchorEl": "Πίεση, δύναμη και επιφάνεια",
+  "topicAnchorEn": "Pressure, force and area",
+  "status": "exact-section-verified",
+  "sourceQuizId": "physics-gymnasiou",
+  "exactSectionEl": "4.1 — Πίεση",
+  "statusLabelEl": "Ακριβής ενότητα 2026–27",
+  "statusLabelEn": "Exact 2026–27 section",
+  "noteEl": "Η σχέση της πίεσης με την κάθετη δύναμη και το εμβαδόν επιφάνειας αντιστοιχεί στην §4.1, η οποία περιλαμβάνεται στην ύλη 2026–27.",
+  "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index4_1.html",
+  "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+},
   "physics.force-motion-confusion": {
   "topicAnchorEl": "Δύναμη και μεταβολή της ταχύτητας",
   "topicAnchorEn": "Force and change of velocity",

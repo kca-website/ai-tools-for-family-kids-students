@@ -867,7 +867,15 @@ module.exports = async function handler(req, res) {
           message: "Μία ή περισσότερες επίσημες σελίδες της ενότητας δεν ήταν διαθέσιμες."
         });
       }
-      combinedText = distributeOfficialPages(pages, sourceUrls, 42000);
+      const needsFullDirectText =
+        subject === "english-b-gymnasiou" ||
+        (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8);
+      combinedText = needsFullDirectText
+        ? pages.map((html, i) => {
+            const label = sourceUrls[i] ? "[Official page: " + sourceUrls[i] + "]\n" : "";
+            return label + htmlToText(html);
+          }).join("\n\n")
+        : distributeOfficialPages(pages, sourceUrls, 42000);
     } else if (book.multi) {
       sourceUrls = await discoverUnitPages(book, path);
       if (!sourceUrls.length) {
@@ -976,6 +984,14 @@ function resolveDirectSourceUrls(subject, topic) {
 
   if (subject === "biologia-b-gymnasiou") {
     return resolveBiologyBCurriculumUrls(topic);
+  }
+
+  if (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8) {
+    const base = BOOKS[subject].base;
+    return [
+      new URL("index08.html", base).toString(),
+      new URL("index19a_parall.html", base).toString()
+    ];
   }
 
   if (subject === "iliada-b-gymnasiou") {
@@ -1446,12 +1462,72 @@ function applyCurriculumTextScope(subject, topic, text) {
   if (subject === "archaia-glossa-b-gymnasiou") {
     const n = unitNumber(topic);
     if (n === 7) exclusions.push("Το βασικό κείμενο της Ενότητας 7 είναι προαιρετικό· αξιοποιούνται μόνο τα μέρη που προβλέπουν οι οδηγίες.");
-    if (n === 8) exclusions.push("Το βασικό κείμενο της σελ. 60 δεν διδάσκεται· οι οδηγίες αξιοποιούν παράλληλο κείμενο και επιλεγμένη γραμματική/σύνταξη.");
+    if (n === 8) {
+      exclusions.push("Το βασικό κείμενο της σελ. 60, το Β1, το Β2 και το Γ1 δεν χρησιμοποιούνται· οι οδηγίες αξιοποιούν το παράλληλο κείμενο της Ενότητας 8 και το Γ2 για άμεσο/έμμεσο αντικείμενο.");
+      scoped = scopeAncientGreekBUnit8(scoped);
+    }
     if (n === 5) exclusions.push("Δεν διδάσκονται όλα τα υπομέρη της ενότητας· τηρούνται οι ρητές επιλογές/εξαιρέσεις των οδηγιών 2026–27.");
     if ([12,13,16].includes(n)) exclusions.push("Διδάσκονται μόνο τα υπομέρη που ορίζουν οι ετήσιες οδηγίες 2026–27.");
   }
 
   return { text: scoped.trim(), exclusions };
+}
+
+function scopeAncientGreekBUnit8(text) {
+  const source = String(text || "");
+  const blocks = splitOfficialPageBlocks(source);
+  const unitPage = blocks.find(block => /index08\.html/i.test(block.url));
+  const parallelPage = blocks.find(block => /index19a_parall\.html/i.test(block.url));
+
+  const kept = [];
+
+  if (unitPage) {
+    const lines = unitPage.text.split("\n");
+    const syntaxStart = lines.findIndex(line => {
+      const n = normalize(line);
+      return n.includes("γ2 συνταξη") && n.includes("αμεσο") && n.includes("εμμεσο") && n.includes("αντικειμενο");
+    });
+    if (syntaxStart >= 0) {
+      kept.push(
+        "[Official page: " + unitPage.url + "]\n" +
+        lines.slice(syntaxStart).join("\n").trim()
+      );
+    }
+  }
+
+  if (parallelPage) {
+    const lines = parallelPage.text.split("\n");
+    const start = lines.findIndex(line => normalize(line) === "ενοτητα 8");
+    let end = -1;
+    if (start >= 0) {
+      for (let i = start + 1; i < lines.length; i++) {
+        if (normalize(lines[i]) === "ενοτητα 9") {
+          end = i;
+          break;
+        }
+      }
+      const body = lines.slice(start, end >= 0 ? end : lines.length).join("\n").trim();
+      if (body) {
+        kept.push("[Official page: " + parallelPage.url + "]\n" + body);
+      }
+    }
+  }
+
+  // Fail closed: if the exact annual subparts cannot be isolated, expose no text.
+  return kept.join("\n\n").trim();
+}
+
+function splitOfficialPageBlocks(text) {
+  const source = String(text || "");
+  const marker = /\[Official page:\s*([^\]]+)\]\n?/g;
+  const matches = [...source.matchAll(marker)];
+  if (!matches.length) return [];
+
+  return matches.map((m, i) => {
+    const start = m.index + m[0].length;
+    const end = i + 1 < matches.length ? matches[i + 1].index : source.length;
+    return { url: String(m[1] || "").trim(), text: source.slice(start, end).trim() };
+  });
 }
 
 function truncateAt(text, marker) {
@@ -1514,6 +1590,9 @@ module.exports._test = Object.freeze({
   resolveEnglishBCurriculumUrls,
   englishBSelection,
   unitNumber,
+  scopeAncientGreekBUnit8,
+  splitOfficialPageBlocks,
+  selectEnglishBUnitText,
   resolveSectionPath,
   HISTORY_B_2026_2027_PATHS,
   MATH_B_2026_2027_PATHS,

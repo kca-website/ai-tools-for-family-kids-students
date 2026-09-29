@@ -91,6 +91,15 @@ const physicsScoped = t.applyCurriculumTextScope(
 assert.match(physicsScoped.text, /Επιτρεπτή μέση ταχύτητα/);
 assert.doesNotMatch(physicsScoped.text, /ΑΠΑΓΟΡΕΥΜΕΝΟ/);
 
+const physicsAliasScoped = t.applyCurriculumTextScope(
+  "physics-gymnasiou",
+  "Μέση ταχύτητα",
+  "Επιτρεπτή μέση ταχύτητα\nΔιανυσματική περιγραφή της ταχύτητας\nΑΠΑΓΟΡΕΥΜΕΝΟ"
+);
+assert.match(physicsAliasScoped.text, /Επιτρεπτή μέση ταχύτητα/);
+assert.doesNotMatch(physicsAliasScoped.text, /ΑΠΑΓΟΡΕΥΜΕΝΟ/);
+assert.match(physicsAliasScoped.exclusions.join(" "), /διανυσματική περιγραφή/);
+
 // Modern Greek B: selected official textbook unit, not a fake mandatory annual sequence.
 for (let n = 1; n <= 9; n++) {
   assert.ok(t.resolveSectionPath("modernGreekBAnnual", `${n}η ενότητα — test`), n);

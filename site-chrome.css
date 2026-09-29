@@ -520,3 +520,64 @@ body.page-tools a,
 body.page-guide a {
   overflow-wrap: anywhere;
 }
+
+/* ---------- Round 4: information pages, teachers and sign language ---------- */
+body.page-about h1,
+body.page-privacy-policy h1,
+body.page-methodology h1,
+body.page-ai-transparency h1,
+body.page-teacher-assistant .hero h1,
+body.page-sign-language .hero h1 {
+  font-family: var(--chrome-serif);
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  font-weight: 600;
+  line-height: 1.12;
+  color: var(--chrome-ink);
+}
+body.page-about h2,
+body.page-privacy-policy h2,
+body.page-methodology h2,
+body.page-ai-transparency h2 {
+  color: var(--chrome-ink);
+}
+/* A core principle is information, not a success state. */
+body.page-methodology .principle {
+  background: #EEF6FF;
+  border: 0;
+  border-left: 4px solid var(--chrome-accent);
+  border-radius: 8px;
+}
+body.page-privacy-policy .highlight:not(.warning) {
+  border-left-color: var(--chrome-accent);
+}
+body.page-teacher-assistant .hero,
+body.page-sign-language .hero {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+body.page-teacher-assistant .hero-actions a {
+  border-color: var(--chrome-line);
+  color: var(--chrome-ink);
+}
+body.page-teacher-assistant .hero-actions a:hover {
+  border-color: var(--chrome-accent);
+  color: var(--chrome-accent);
+}
+body.page-sign-language .stat {
+  background: #FFFFFF;
+  border: 1px solid var(--chrome-line);
+}
+body.page-sign-language .notice {
+  border: 1px solid var(--chrome-line);
+  border-left: 4px solid var(--chrome-accent);
+}
+body.page-sign-language .hero {
+  margin-top: 0;
+  padding-top: 8px;
+}
+body.page-teacher-assistant .hero {
+  padding-top: 8px;
+}

@@ -2120,6 +2120,98 @@ const LEARNING_PATHS = {
     "toolId": null
   }
 ],
+  "lit-b-gym.elytis-nature": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Ξαναδιάβασε το επίσημο κείμενο και σημείωσε τρεις εικόνες ή ενέργειες που συνδέονται με τη φύση. Δίπλα σε καθεμία γράψε τι αίσθηση ή κίνηση δημιουργεί στο ποιητικό υποκείμενο.",
+    "descriptionEn": "Reread the official text and note three images or actions connected with nature. Beside each, write what feeling or movement it creates in the poetic speaker.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Δώσε στην AI Βοήθεια τη δική σου ερμηνεία και ζήτησε: «Κάνε μου μία ερώτηση που θα με αναγκάσει να τη στηρίξω με μία συγκεκριμένη εικόνα του κειμένου. Μη μου δώσεις έτοιμη ερμηνεία.»",
+    "descriptionEn": "Give AI Help your interpretation and ask: “Ask me one question that makes me support it with a specific image from the text. Do not give me a ready interpretation.”",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Σε δύο προτάσεις εξήγησε τη σχέση του ποιητικού υποκειμένου με τη φύση και χρησιμοποίησε μία εικόνα του ποιήματος ως τεκμήριο.",
+    "descriptionEn": "In two sentences, explain the poetic speaker's relationship with nature and use one image from the poem as evidence.",
+    "toolId": null
+  }
+],
+  "lit-b-gym.anne-frank-diary-addressee": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Εντόπισε στο απόσπασμα στοιχεία που δείχνουν ότι πρόκειται για ημερολογιακή γραφή. Σημείωσε ποιος μιλά, σε ποιον απευθύνεται και ποιο στοιχείο το αποδεικνύει.",
+    "descriptionEn": "Find clues in the excerpt showing that it is diary writing. Note who speaks, whom she addresses, and what detail proves it.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια να σου κάνει μία-μία ερωτήσεις για τα χαρακτηριστικά της ημερολογιακής μορφής στο συγκεκριμένο απόσπασμα, χωρίς να σου δίνει την απάντηση.",
+    "descriptionEn": "Ask AI Help to quiz you one question at a time on the diary-form features of this specific excerpt, without giving you the answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε με δικά σου λόγια πώς το ότι η Άννα απευθύνεται στην Κίτυ κάνει το κείμενο πιο προσωπικό και εξομολογητικό.",
+    "descriptionEn": "Explain in your own words how Anne addressing Kitty makes the text more personal and confessional.",
+    "toolId": null
+  }
+],
+  "lit-b-gym.little-prince-taming": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Βρες στο κείμενο τις φράσεις γύρω από το «ημερώνω» και προσπάθησε να γράψεις έναν δικό σου ορισμό χωρίς να κοιτάξεις έτοιμη ερμηνεία.",
+    "descriptionEn": "Find the phrases around 'to tame' in the text and try to write your own definition without looking at a ready interpretation.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Πες στην AI Βοήθεια τον δικό σου ορισμό για το «ημέρωμα» και ζήτησε μία ερώτηση ή ένα αντιπαράδειγμα που θα σε βοηθήσει να τον ελέγξεις, όχι έτοιμη απάντηση.",
+    "descriptionEn": "Tell AI Help your own definition of 'taming' and ask for one question or counterexample that helps you test it, not a ready answer.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Εξήγησε πώς συνδέονται στο απόσπασμα οι έννοιες «δημιουργώ δεσμούς», «γίνεται μοναδικός» και «έχω ευθύνη».",
+    "descriptionEn": "Explain how the ideas 'create bonds', 'becomes unique', and 'have responsibility' connect in the excerpt.",
+    "toolId": null
+  }
+],
+  "lit-b-gym.thermopylae-symbolism": [
+  {
+    "titleEl": "Δοκίμασε πρώτα μόνος/η",
+    "titleEn": "Try it yourself first",
+    "descriptionEl": "Χώρισε σε δύο στήλες όσα αναγνωρίζεις στο ποίημα: ιστορικές αναφορές και ιδιότητες/στάσεις ανθρώπων που επαινούνται.",
+    "descriptionEn": "Split what you notice in the poem into two columns: historical references and human qualities/actions that are praised.",
+    "toolId": null
+  },
+  {
+    "titleEl": "Δούλεψέ το με καθοδήγηση",
+    "titleEn": "Work through it with guidance",
+    "descriptionEl": "Ζήτησε από την AI Βοήθεια μία σωκρατική ερώτηση που να σε βοηθήσει να συνδέσεις το ιστορικό γεγονός των Θερμοπυλών με το συμβολικό νόημα του ποιήματος, χωρίς να σου πει το συμπέρασμα.",
+    "descriptionEn": "Ask AI Help for one Socratic question that helps you connect the historical Thermopylae event with the poem's symbolic meaning, without stating the conclusion.",
+    "toolId": "chatgpt"
+  },
+  {
+    "titleEl": "Δείξε ότι το κατάλαβες",
+    "titleEn": "Prove you've got it",
+    "descriptionEl": "Σε 2-3 προτάσεις εξήγησε τι μπορούν να συμβολίζουν οι «Θερμοπύλες» πέρα από τη μάχη και στήριξε την απάντησή σου σε μία στάση που επαινεί το ποίημα.",
+    "descriptionEn": "In 2-3 sentences, explain what 'Thermopylae' can symbolize beyond the battle and support your answer with one attitude praised by the poem.",
+    "toolId": null
+  }
+],
   "chimeia-g-gym.element-vs-compound": [
     {
       "titleEl": "Δοκίμασε πρώτα μόνος/η",

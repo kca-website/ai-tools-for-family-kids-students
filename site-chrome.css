@@ -1,0 +1,381 @@
+/* Shared v9 header/footer and design tokens for every page except the
+ * homepage/app shell. Presentation only (see site-chrome.js). */
+:root {
+  --chrome-ink: #1F2430;
+  --chrome-muted: #5A6270;
+  --chrome-line: #E4E6EA;
+  --chrome-control: #64748B;
+  --chrome-accent: #1D5D8C;
+  --chrome-accent-hover: #164A70;
+  --chrome-surface-2: #EEF2F6;
+  --chrome-highlight: #E8B81A;
+  --chrome-sans: "Commissioner", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --chrome-serif: "Literata", Georgia, "Times New Roman", serif;
+  /* Page stylesheets that already use these variables pick up the v9 palette. */
+  --blue: #1D5D8C;
+  --green: #164A70;
+  --font: var(--chrome-sans);
+  --heading: var(--chrome-serif);
+}
+
+body.has-site-chrome {
+  font-family: var(--chrome-sans);
+}
+body.has-site-chrome h1 {
+  font-family: var(--chrome-serif);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+body.has-site-chrome :focus-visible {
+  outline: 3px solid var(--chrome-accent);
+  outline-offset: 3px;
+}
+body.has-site-chrome .chrome-footer :focus-visible {
+  outline-color: var(--chrome-highlight);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.has-site-chrome *,
+  body.has-site-chrome *::before,
+  body.has-site-chrome *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.chrome-replaced[hidden] {
+  display: none !important;
+}
+
+/* Full-bleed bands even when a page centres <body> itself. */
+.chrome-header,
+.chrome-footer {
+  box-sizing: border-box;
+  width: var(--chrome-vw, 100vw);
+  max-width: none;
+  margin-left: calc(50% - var(--chrome-vw, 100vw) / 2);
+  margin-right: 0;
+  font-family: var(--chrome-sans);
+  line-height: 1.5;
+}
+
+.chrome-skip {
+  position: absolute;
+  left: 16px;
+  top: -80px;
+  z-index: 1000;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--chrome-ink);
+  color: #FFFFFF !important;
+  font-family: var(--chrome-sans);
+  font-weight: 700;
+  text-decoration: none;
+}
+.chrome-skip:focus {
+  top: 12px;
+}
+
+/* Header (reset generic page rules such as `header { display:flex }`) */
+.chrome-header {
+  display: block;
+  padding: 0;
+  gap: 0;
+  text-align: left;
+  position: relative;
+  z-index: 50;
+  margin-top: calc(-1 * var(--chrome-top, 0px));
+  margin-bottom: 24px;
+  background: #FAFAF8;
+  border-bottom: 1px solid var(--chrome-line);
+  color: var(--chrome-ink);
+}
+.chrome-header__inner {
+  box-sizing: border-box;
+  max-width: 1280px;
+  min-height: 72px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.chrome-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  color: var(--chrome-ink) !important;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+.chrome-brand__mark {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--chrome-accent);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--chrome-serif);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.chrome-nav {
+  display: flex;
+  gap: 22px;
+}
+.chrome-nav a {
+  padding: 10px 0;
+  color: var(--chrome-ink) !important;
+  font-size: 0.97rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.chrome-nav a:hover {
+  color: var(--chrome-accent) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+}
+.chrome-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+.chrome-actions:empty {
+  display: none;
+}
+.chrome-actions a,
+.chrome-actions button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  margin: 0;
+  padding: 0 14px;
+  border: 1.5px solid var(--chrome-control);
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--chrome-ink) !important;
+  font-family: var(--chrome-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  cursor: pointer;
+  box-shadow: none;
+}
+.chrome-actions a:hover,
+.chrome-actions button:hover {
+  border-color: var(--chrome-accent);
+  color: var(--chrome-accent) !important;
+}
+.chrome-actions button.active,
+.chrome-actions button[aria-pressed="true"] {
+  background: var(--chrome-ink);
+  border-color: var(--chrome-ink);
+  color: #FFFFFF !important;
+}
+.chrome-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--chrome-ink);
+  color: #FFFFFF;
+  font-family: var(--chrome-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.chrome-actions:empty + .chrome-menu-toggle {
+  margin-left: auto;
+}
+.chrome-menu-toggle:hover {
+  background: #2E3545;
+}
+.chrome-menu-panel {
+  border-top: 1px solid var(--chrome-line);
+  background: #FAFAF8;
+  box-shadow: 0 18px 40px -24px rgba(31, 36, 48, 0.35);
+}
+.chrome-menu-panel[hidden] {
+  display: none;
+}
+.chrome-menu-panel__inner {
+  box-sizing: border-box;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.chrome-menu-panel__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chrome-menu-panel__title {
+  margin: 0 0 4px;
+  color: var(--chrome-muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.chrome-menu-panel__group a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--chrome-line);
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: var(--chrome-ink) !important;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+.chrome-menu-panel__group a:hover {
+  border-color: var(--chrome-accent);
+  color: var(--chrome-accent) !important;
+}
+
+@media (max-width: 1000px) {
+  .chrome-nav {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .chrome-header__inner {
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 64px;
+    padding: 10px 16px;
+  }
+  .chrome-actions {
+    order: 10;
+    flex: 1 1 100%;
+    margin-left: 0;
+  }
+  .chrome-menu-toggle {
+    margin-left: auto;
+  }
+  .chrome-menu-panel__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding: 16px;
+  }
+}
+@media (max-width: 420px) {
+  .chrome-menu-toggle {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .chrome-menu-toggle span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+
+/* Footer (reset generic page rules such as `footer { text-align:center }`) */
+.chrome-footer {
+  display: block;
+  border: 0;
+  text-align: left;
+  margin-top: 56px;
+  margin-bottom: calc(-1 * var(--chrome-bottom, 0px));
+  padding: 48px 0;
+  background: var(--chrome-ink);
+  color: #CBD5E1;
+  font-size: 0.95rem;
+}
+.chrome-footer__inner {
+  box-sizing: border-box;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+  text-align: left;
+}
+.chrome-footer p {
+  margin: 0;
+  color: #CBD5E1;
+}
+.chrome-footer__about {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chrome-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #FFFFFF !important;
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.chrome-footer__audit {
+  font-size: 0.88rem;
+}
+.chrome-footer a {
+  color: #FFFFFF !important;
+}
+.chrome-footer a:hover {
+  color: var(--chrome-highlight) !important;
+}
+.chrome-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chrome-footer__links a {
+  text-decoration: none;
+}
+.chrome-footer__links a:hover {
+  text-decoration: underline;
+}
+.chrome-footer__thanks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 0.88rem;
+}
+.chrome-footer__logo {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+.chrome-footer__logo img {
+  display: block;
+  width: 150px;
+  height: auto;
+}
+.chrome-footer__thanks small {
+  color: #CBD5E1;
+}
+@media (max-width: 760px) {
+  .chrome-footer__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}

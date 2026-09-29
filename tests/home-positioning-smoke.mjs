@@ -15,14 +15,15 @@ assert.doesNotMatch(homepageSource, /153 σχολικές έννοιες|Δες 
 async function assertNeedsToggle(page, label) {
   const toggle = page.locator('#homeV8NeedsToggle');
   const body = page.locator('#homeV8NeedsBody');
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: task routes should start open (v9 entry point)`);
-  assert.equal(await body.isVisible(), true, `${label}: open task routes body should be visible`);
-  await toggle.click();
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: toggle should collapse task routes`);
+  // Phones start collapsed (short page); desktop starts open (checked below).
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: task routes should start collapsed on phones`);
   assert.equal(await body.isHidden(), true, `${label}: collapsed task routes body should be hidden`);
   await toggle.click();
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: second toggle should expand task routes again`);
-  assert.equal(await body.isVisible(), true, `${label}: task routes body should be visible again`);
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: toggle should expand task routes`);
+  assert.equal(await body.isVisible(), true, `${label}: task routes body should become visible`);
+  await toggle.click();
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: second toggle should collapse task routes`);
+  assert.equal(await body.isHidden(), true, `${label}: task routes body should hide again`);
 }
 
 try {
@@ -114,6 +115,8 @@ try {
   assert.ok(heroWidth >= 1000 && heroWidth <= 1042, `desktop: homepage hero should use the wider ~1040px layout, got ${heroWidth}px`);
   assert.ok((await desktop.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 6, 'desktop: expected the current navigator cards');
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
+  assert.equal(await desktop.locator('#homeV8NeedsToggle').getAttribute('aria-expanded'), 'true', 'desktop: task routes should start open');
+  assert.equal(await desktop.locator('#siteHeaderSearch #homeGlobalSearchInput').count(), 1, 'desktop: site search should sit in the header');
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   await desktop.close();
 

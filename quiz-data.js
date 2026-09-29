@@ -9304,12 +9304,12 @@ const QUIZZES = {
       "questions": [
         {
           "id": "q1-agia-lavra",
-          "textEl": "Πώς ξεκίνησε επίσημα η Επανάσταση του 1821 σύμφωνα με τα ιστορικά τεκμήρια;",
-          "textEn": "According to historical evidence, how did the 1821 Revolution officially begin?",
+          "textEl": "Τι αναφέρει το σχολικό βιβλίο για την 25η Μαρτίου και την έναρξη της Επανάστασης;",
+          "textEn": "What does the textbook say about March 25 and the beginning of the Revolution?",
           "options": [
             {
-              "textEl": "Δεν υπάρχει τεκμηριωμένη «επίσημη έναρξη»· η ευλογία στην Αγία Λαύρα είναι μεταγενέστερος θρύλος.",
-              "textEn": "There is no documented 'official start': the Agia Lavra blessing is a later legend.",
+              "textEl": "Ο Αγώνας είχε αρχίσει λίγες μέρες νωρίτερα και η 25η Μαρτίου ορίστηκε εθνική επέτειος το 1838.",
+              "textEn": "The struggle had begun a few days earlier, and March 25 was designated the national anniversary in 1838.",
               "isCorrect": true
             },
             {
@@ -9352,12 +9352,12 @@ const QUIZZES = {
         },
         {
           "id": "q3-filiki-etaireia",
-          "textEl": "Ποιοι ίδρυσαν τη Φιλική Εταιρεία και πού;",
-          "textEn": "Who founded the Filiki Etaireia and where?",
+          "textEl": "Ποιοι αναφέρονται στο σχολικό βιβλίο ως πρωτεργάτες της Φιλικής Εταιρείας;",
+          "textEn": "Who does the textbook name as leading founders of the Filiki Etaireia?",
           "options": [
             {
-              "textEl": "Τρεις άνδρες μέτριας κοινωνικής θέσης (Ξάνθος, Σκουφάς, Τσακάλωφ) στην Οδησσό, το 1814.",
-              "textEn": "Three men of modest social standing (Xanthos, Skoufas, Tsakalov) in Odessa, in 1814.",
+              "textEl": "Νικόλαος Σκουφάς, Αθανάσιος Τσακάλωφ, Εμμανουήλ Ξάνθος και Παναγιώτης Αναγνωστόπουλος.",
+              "textEn": "Nikolaos Skoufas, Athanasios Tsakalov, Emmanouil Xanthos and Panagiotis Anagnostopoulos.",
               "isCorrect": true
             },
             {
@@ -9376,12 +9376,12 @@ const QUIZZES = {
         },
         {
           "id": "q4-education",
-          "textEl": "Η ελληνική εκπαίδευση κατά την Οθωμανική κυριαρχία ήταν...",
-          "textEn": "Greek-language education under Ottoman rule was...",
+          "textEl": "Τι δείχνει το σχολικό βιβλίο για την ελληνική εκπαίδευση πριν από την Επανάσταση;",
+          "textEn": "What does the textbook show about Greek education before the Revolution?",
           "options": [
             {
-              "textEl": "Νόμιμη, με χιλιάδες σχολεία να λειτουργούν επίσημα.",
-              "textEn": "Legal, with thousands of schools operating officially.",
+              "textEl": "Οι πάροικοι ίδρυαν σχολεία και οι εκπαιδευτικές εστίες πολλαπλασιάζονταν, με σημαντική στήριξη από τον παροικιακό ελληνισμό.",
+              "textEn": "Diaspora communities founded schools and educational centres multiplied, with important support from Greeks abroad.",
               "isCorrect": true
             },
             {

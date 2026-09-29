@@ -93,9 +93,6 @@
       principleLabel: "Η διαδρομή μάθησης",
       principleQuote: "«Δείξε μου πώς να το μάθω, όχι τη λύση.»",
       principleSteps: [["Δυσκολία","«Δεν το καταλαβαίνω»"],["Εντοπισμός","Χάρτης Εξάσκησης"],["Εξάσκηση","σωστό εργαλείο"],["Καθοδήγηση","μία υπόδειξη τη φορά"],["Ξαναδοκιμή","χωρίς AI"]],
-      trustTools: (n) => `${n} εργαλεία με έλεγχο ορίου ηλικίας`,
-      trustGreek: "Ένδειξη υποστήριξης Ελληνικών",
-      trustMethod: "Πώς ελέγχουμε τα εργαλεία",
       waysTitle: "Τρεις τρόποι να ξεκινήσεις",
       waysLead: "Διάλεξε έναν. Όλοι λειτουργούν χωρίς λογαριασμό.",
       mapCta: "Διάλεξε βαθμίδα:",
@@ -197,9 +194,6 @@
       principleLabel: "The learning path",
       principleQuote: "“Show me how to learn it, not the answer.”",
       principleSteps: [["Difficulty","“I don't get it”"],["Spot it","Practice Map"],["Practise","the right tool"],["Guidance","one hint at a time"],["Try again","without AI"]],
-      trustTools: (n) => `${n} tools with checked age limits`,
-      trustGreek: "Greek-language support shown",
-      trustMethod: "How we review tools",
       waysTitle: "Three ways to start",
       waysLead: "Pick one. None of them needs an account.",
       mapCta: "Choose a level:",
@@ -466,20 +460,6 @@
       </div>`;
   }
 
-  function renderTrust(){
-    const mount = document.getElementById("homeV9Trust");
-    if(!mount) return;
-    const c = currentCopy();
-    const meta = window.AITOOLSKIDS_SITE_META || {};
-    const items = [];
-    if(Number(meta.canonicalToolCount) > 0) items.push(c.trustTools(Number(meta.canonicalToolCount)));
-    items.push(c.trustGreek);
-    const audit = isEnglish() ? meta.toolCatalogAuditLabelEn : meta.toolCatalogAuditLabelEl;
-    mount.innerHTML = `
-      <ul class="home-v9-trust__list">${items.map((t) => `<li>${ICON.check}<span>${escapeHtml(t)}</span></li>`).join("")}</ul>
-      ${audit ? `<p class="home-v9-trust__audit">${escapeHtml(audit)} · <a href="/methodology.html">${c.trustMethod}</a></p>` : ""}`;
-  }
-
   function helpersMarkup(){
     const c = currentCopy();
     return `
@@ -628,7 +608,7 @@
       shell = document.createElement("div");
       shell.id = "homeV8Shell";
       shell.className = "home-v8-shell";
-      const anchor = document.getElementById("homeV9Trust") || hero.querySelector(".hero__badges");
+      const anchor = document.getElementById("homeV9Top") || hero.querySelector(".hero__badges");
       if(anchor) anchor.insertAdjacentElement("afterend", shell);
       else hero.appendChild(shell);
     }
@@ -668,9 +648,8 @@
     }
     // v9: the task routes are the main "what do you want to do" entry point, so they start open.
     const previousToggle = needs.querySelector("#homeV8NeedsToggle");
-    // On phones it starts collapsed to keep the page short.
-    const compact = typeof window.matchMedia === "function" && window.matchMedia("(max-width: 700px)").matches;
-    const expanded = previousToggle ? previousToggle.getAttribute("aria-expanded") === "true" : !compact;
+    // Starts collapsed on every screen: the visitor decides whether to open it.
+    const expanded = previousToggle ? previousToggle.getAttribute("aria-expanded") === "true" : false;
     needs.innerHTML = needsMarkup();
     setNeedsOpen(needs, expanded);
 
@@ -742,7 +721,6 @@
     ensureAccessibilityBadge();
     renderFinder();
     renderPrinciple();
-    renderTrust();
     ensureSpecialSchoolCard();
     ensureMainShell();
     ensureHigherEducationPilot();

@@ -15,8 +15,8 @@ assert.doesNotMatch(homepageSource, /153 σχολικές έννοιες|Δες 
 async function assertNeedsToggle(page, label) {
   const toggle = page.locator('#homeV8NeedsToggle');
   const body = page.locator('#homeV8NeedsBody');
-  // Phones start collapsed (short page); desktop starts open (checked below).
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: task routes should start collapsed on phones`);
+  // Starts collapsed on every screen; the visitor opens it.
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: task routes should start collapsed`);
   assert.equal(await body.isHidden(), true, `${label}: collapsed task routes body should be hidden`);
   await toggle.click();
   assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: toggle should expand task routes`);
@@ -115,7 +115,8 @@ try {
   assert.ok(heroWidth >= 1000 && heroWidth <= 1042, `desktop: homepage hero should use the wider ~1040px layout, got ${heroWidth}px`);
   assert.ok((await desktop.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 6, 'desktop: expected the current navigator cards');
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
-  assert.equal(await desktop.locator('#homeV8NeedsToggle').getAttribute('aria-expanded'), 'true', 'desktop: task routes should start open');
+  assert.equal(await desktop.locator('#homeV8NeedsToggle').getAttribute('aria-expanded'), 'false', 'desktop: task routes should start collapsed');
+  assert.equal(await desktop.locator('#homeV9Trust').count(), 0, 'desktop: audit/tool-count strip belongs only in the footer');
   assert.equal(await desktop.locator('#siteHeaderSearch #homeGlobalSearchInput').count(), 1, 'desktop: site search should sit in the header');
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   await desktop.close();

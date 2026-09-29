@@ -39,7 +39,9 @@ const DEFAULT_MODELS = [
 ];
 const MATH_ONLY_MODELS = ['@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'];
 const MODELS = args.models ? String(args.models).split(',').map(s => s.trim()).filter(Boolean)
-  : [...DEFAULT_MODELS, ...(PHASE === '1' ? MATH_ONLY_MODELS : [])];
+  : (PHASE === 'safety'
+      ? ['@cf/openai/gpt-oss-120b']
+      : [...DEFAULT_MODELS, ...(PHASE === '1' ? MATH_ONLY_MODELS : [])]);
 
 // Neurons per 1M tokens, derived from Cloudflare USD prices ($0.011 per 1,000 Neurons).
 // Estimates only; override with benchmark/prices.json. Used for the daily budget guard.

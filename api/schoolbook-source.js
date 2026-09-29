@@ -26,6 +26,14 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "geologia-geografia-b-gymnasiou": {
+    title: "Γεωλογία - Γεωγραφία Β΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2294/Geografia_B-Gymnasiou_html-empl/",
+    mode: "geographyB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
+  },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
@@ -94,6 +102,8 @@ const BOOKS = {
 const ALIASES = {
   "math-b-gymnasiou": "mathimatika-b-gymnasiou",
   "chemistry-b-gymnasiou": "chimeia-b-gymnasiou",
+  "geografia-b-gymnasiou": "geologia-geografia-b-gymnasiou",
+  "geology-geography-b-gymnasiou": "geologia-geografia-b-gymnasiou",
   "fysiki-b-gymnasiou": "physics-gymnasiou",
   "biology-a-gymnasiou": "biologia-a-gymnasiou",
   "biology-b-gymnasiou": "biologia-b-gymnasiou",
@@ -207,6 +217,55 @@ const CHEMISTRY_B_2026_2027_PATHS = Object.freeze({
   "3.3": ["index3_3.html"],
   "3.4": ["index3_4.html"],
   "4.2": ["index4_2.html"]
+});
+
+const GEOGRAPHY_B_2026_2027_PATHS = Object.freeze({
+  "1": ["mat1_1.html"],
+  "2": ["mat1_2.html"],
+  "3": ["mat1_3.html"],
+  "6": ["mat2_6.html"],
+  "7": ["mat2_7.html"],
+  "8": ["mat2_8.html"],
+  "9": ["mat2_9.html"],
+  "10": ["mat2_10.html"],
+  "11": ["mat2_11.html"],
+  "12": ["mat2_12.html"],
+  "13": ["mat2_13.html"],
+  "14": ["mat2_14.html"],
+  "15": ["mat2_15.html"],
+  "16": ["mat2_16.html"],
+  "17": ["mat2_17.html"],
+  "18": ["mat2_18.html"],
+  "19": ["mat2_19.html"],
+  "20": ["mat2_20.html"],
+  "21": ["mat2_21.html"],
+  "22": ["mat2_22.html"],
+  "23": ["mat2_23.html"],
+  "24": ["mat2_24.html"],
+  "25": ["mat3_25.html"],
+  "26": ["mat3_26.html"],
+  "27": ["mat3_27.html"],
+  "28": ["mat3_28.html"],
+  "29": ["mat3_29.html"],
+  "30": ["mat3_30.html"],
+  "31": ["mat3_31.html"],
+  "32": ["mat3_32.html"],
+  "33": ["mat3_33.html"],
+  "34": ["mat3_34.html"],
+  "35": ["mat3_35.html"],
+  "36": ["mat3_36.html"],
+  "37": ["mat4_37.html"],
+  "38": ["mat4_38.html"],
+  "39": ["mat4_39.html"],
+  "40": ["mat4_40.html"],
+  "41": ["mat4_41.html"],
+  "42": ["mat4_42.html"],
+  "43": ["mat4_43.html"],
+  "44": ["mat4_44.html"],
+  "45": ["mat4_45.html"],
+  "46": ["mat4_46.html"],
+  "47": ["mat4_47.html"],
+  "48": ["mat4_48.html"]
 });
 
 module.exports = async function handler(req, res) {
@@ -353,6 +412,11 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "chimeia-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveChemistryBCurriculumPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "geologia-geografia-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveGeographyBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
   if (subject === "biologia-a-gymnasiou") {
@@ -533,6 +597,21 @@ function chemistryBTopicKey(topic) {
   const section = Number(match[2]);
   if (!Number.isInteger(chapter) || chapter < 1 || !Number.isInteger(section) || section < 1) return "";
   return `${chapter}.${section}`;
+}
+
+function resolveGeographyBCurriculumPaths(topic) {
+  const key = geographyBTopicKey(topic);
+  return key && GEOGRAPHY_B_2026_2027_PATHS[key]
+    ? [...GEOGRAPHY_B_2026_2027_PATHS[key]]
+    : [];
+}
+
+function geographyBTopicKey(topic) {
+  const value = String(topic || "");
+  const match = value.match(/Μάθημα\s+(\d+)/i);
+  if (!match) return "";
+  const lesson = Number(match[1]);
+  return Number.isInteger(lesson) && lesson > 0 ? String(lesson) : "";
 }
 
 async function fetchOfficialHtml(url) {
@@ -746,9 +825,12 @@ module.exports._test = Object.freeze({
   resolveMathBCurriculumPaths,
   chemistryBTopicKey,
   resolveChemistryBCurriculumPaths,
+  geographyBTopicKey,
+  resolveGeographyBCurriculumPaths,
   resolveSectionPath,
   HISTORY_B_2026_2027_PATHS,
   MATH_B_2026_2027_PATHS,
   CHEMISTRY_B_2026_2027_PATHS,
+  GEOGRAPHY_B_2026_2027_PATHS,
   applyCurriculumTextScope
 });

@@ -6,8 +6,8 @@
   "use strict";
 
   const ARIA = {
-    el: { navLabel: "Κύριο μενού", navAllLabel: "Όλες οι ενότητες" },
-    en: { navLabel: "Main menu", navAllLabel: "All sections" }
+    el: { navLabel: "Κύριο μενού", navAllLabel: "Όλες οι ενότητες", footerNavLabel: "Χρήσιμοι σύνδεσμοι" },
+    en: { navLabel: "Main menu", navAllLabel: "All sections", footerNavLabel: "Useful links" }
   };
 
   function lang(){

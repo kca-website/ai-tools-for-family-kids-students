@@ -998,3 +998,19 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   #homeV8Shell #homeHigherEducationPilot .zone-card__desc{display:block;}
   .home-v9-characters__list img{width:76px;height:76px;}
 }
+
+/* v9.1: bottom of the homepage as approved (GSL + "what this is not" side by side) */
+#zoneSelectView:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px;max-width:1040px;margin:0 auto;}
+#zoneSelectView:not([hidden])>*{grid-column:1/-1;min-width:0;}
+#zoneSelectView:not([hidden])>.home-v8-eng,
+#zoneSelectView:not([hidden])>.not-guide-box{grid-column:auto;margin-top:20px;}
+#zoneSelectView>.home-v8-eng{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:16px;padding:26px 28px;}
+#zoneSelectView>.not-guide-box{padding:26px 28px;}
+@media(max-width:760px){
+  #zoneSelectView:not([hidden])>.home-v8-eng,
+  #zoneSelectView:not([hidden])>.not-guide-box{grid-column:1/-1;}
+}
+#zoneSelectView:not([hidden]){padding-bottom:56px;}
+#zoneSelectView:not([hidden])>.home-video-new,
+#zoneSelectView:not([hidden])>.home-v8-eng,
+#zoneSelectView:not([hidden])>.not-guide-box{width:auto;max-width:none;margin-left:0;margin-right:0;box-sizing:border-box;}

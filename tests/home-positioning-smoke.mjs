@@ -15,14 +15,14 @@ assert.doesNotMatch(homepageSource, /153 σχολικές έννοιες|Δες 
 async function assertNeedsToggle(page, label) {
   const toggle = page.locator('#homeV8NeedsToggle');
   const body = page.locator('#homeV8NeedsBody');
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: task routes should start collapsed`);
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: task routes should start open (v9 entry point)`);
+  assert.equal(await body.isVisible(), true, `${label}: open task routes body should be visible`);
+  await toggle.click();
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: toggle should collapse task routes`);
   assert.equal(await body.isHidden(), true, `${label}: collapsed task routes body should be hidden`);
   await toggle.click();
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: toggle should expand task routes`);
-  assert.equal(await body.isVisible(), true, `${label}: task routes body should become visible`);
-  await toggle.click();
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: second toggle should collapse task routes`);
-  assert.equal(await body.isHidden(), true, `${label}: task routes body should hide again`);
+  assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: second toggle should expand task routes again`);
+  assert.equal(await body.isVisible(), true, `${label}: task routes body should be visible again`);
 }
 
 try {

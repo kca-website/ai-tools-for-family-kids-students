@@ -81,7 +81,7 @@
       <div class="upload">
         <strong class="v9i v9i-file" data-el="Δικές σου σημειώσεις" data-en="Your own notes">Δικές σου σημειώσεις</strong>
         <span class="micro" data-el="PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια." data-en="PDF with selectable text. It is read locally in your browser; only extracted text is sent to AI when you choose an AI action.">PDF με επιλέξιμο κείμενο. Διαβάζεται τοπικά στον browser· στο AI στέλνεται μόνο το εξαγόμενο κείμενο όταν επιλέξεις AI ενέργεια.</span>
-        <div class="upload-line"><label class="upload-label" for="notesFile" data-el="Ανέβασε PDF" data-en="Upload PDF">Ανέβασε PDF</label><input id="notesFile" type="file" accept="application/pdf,.pdf"><span class="upload-status" id="notesStatus" aria-live="polite"></span></div>
+        <div class="upload-line"><label class="upload-label" for="notesFile" data-el="Ανέβασε PDF ή φωτογραφία" data-en="Upload PDF or photo">Ανέβασε PDF ή φωτογραφία</label><input id="notesFile" type="file" accept="application/pdf,.pdf,image/*"><span class="upload-status" id="notesStatus" aria-live="polite"></span></div>
         <label for="notesPaste" data-el="Ή επικόλλησε σημειώσεις" data-en="Or paste notes">Ή επικόλλησε σημειώσεις</label>
         <textarea id="notesPaste" placeholder="Επικόλλησε εδώ σημειώσεις ή κείμενο..."></textarea>
         <div class="upload-line">
@@ -173,6 +173,7 @@
 <script src="/general-education-book-sections-2026-2027.js"></script>
 <script src="/curriculum-resolver.js"></script>
 <script src="/pdf-text-reader.js"></script>
+<script src="/guided-task-assistant.js"></script>
 <script src="/study-context.js"></script>
 <script>
 (() => {
@@ -236,7 +237,14 @@
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value)$('topicCustom').value=''};
 
-  $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:300000,maxPages:200});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);$('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
+  $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;const G=window.AITOOLSKIDS_GUIDED;const isImg=G&&G.isImageFile?G.isImageFile(f):/^image\//.test(f.type||'');
+    const ocrProgress=(stage,pct)=>{$('notesStatus').textContent=stage==='recognize'?(lang==='en'?'Reading the text from the image… ':'Διαβάζω το κείμενο από την εικόνα… ')+pct+'%':stage==='scan'?(lang==='en'?'Scanned PDF: preparing text recognition…':'Σαρωμένο PDF: ετοιμάζω την αναγνώριση κειμένου…'):(lang==='en'?'Preparing text recognition (first time only, may take a moment)…':'Ετοιμάζω την αναγνώριση κειμένου (μόνο την πρώτη φορά, ίσως αργήσει λίγο)…')};
+    const ocrDone=d=>{attached=d;$('notesStatus').textContent=d.name+(d.totalPages?' · '+d.pagesRead+'/'+d.totalPages:'')+(lang==='en'?' · text read from image (OCR), may contain small errors':' · κείμενο από εικόνα (OCR), μπορεί να έχει μικρά λάθη')};
+    const ocrError=code=>code==='ocr_empty'?(lang==='en'?'No text could be read from the image. Try a sharper, well-lit photo.':'Δεν διαβάστηκε κείμενο από την εικόνα. Δοκίμασε πιο καθαρή φωτογραφία με καλό φως.'):code==='ocr_unavailable'?(lang==='en'?'Text recognition could not load. Check your connection and try again.':'Η αναγνώριση κειμένου δεν φόρτωσε. Έλεγξε τη σύνδεση και δοκίμασε ξανά.'):code==='file_too_large'?(lang==='en'?'The file is larger than 15 MB.':'Το αρχείο είναι πάνω από 15 MB.'):(lang==='en'?'Could not read the file.':'Δεν μπόρεσα να διαβάσω το αρχείο.');
+    if(isImg){if(!G||!G.ocrFile){$('notesStatus').textContent=ocrError('ocr_unavailable');return}try{ocrDone(await G.ocrFile(f,ocrProgress,300000))}catch(err){attached=null;$('notesStatus').textContent=ocrError(String(err?.message||err))}return}
+    if(!window.AITOOLSKIDS_PDF){$('notesStatus').textContent=lang==='en'?'PDF reader unavailable.':'Δεν φορτώθηκε ο PDF reader.';return}$('notesStatus').textContent=lang==='en'?'Reading locally…':'Διαβάζω το PDF τοπικά…';try{attached=await window.AITOOLSKIDS_PDF.read(f,{maxChars:300000,maxPages:200});$('notesStatus').textContent=attached.name+' · '+attached.pagesRead+'/'+attached.totalPages+(attached.truncated?(lang==='en'?' · partial text':' · μερικό κείμενο'):'')}catch(err){attached=null;const code=String(err?.message||err);
+    if(code==='no_selectable_text'&&G&&G.ocrFile){try{ocrDone(await G.ocrFile(f,ocrProgress,300000))}catch(e2){attached=null;$('notesStatus').textContent=ocrError(String(e2?.message||e2))}return}
+    $('notesStatus').textContent=code==='no_selectable_text'?(lang==='en'?'No selectable text found (possibly scanned PDF).':'Δεν βρέθηκε επιλέξιμο κείμενο (ίσως σαρωμένο PDF).'):code==='file_too_large'?(lang==='en'?'PDF is larger than 15 MB.':'Το PDF είναι πάνω από 15 MB.'):(lang==='en'?'Could not read PDF.':'Δεν μπόρεσα να διαβάσω το PDF.')}};
   function refreshAttachedUi(){
     const has=!!attached?.text;
     $('clearNotes').classList.toggle('hidden',!has);

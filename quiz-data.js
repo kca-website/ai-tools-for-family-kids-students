@@ -631,8 +631,8 @@ const GAP_TAGS = {
     "id": "history-gym.agia-lavra",
     "labelEl": "Έναρξη της Επανάστασης",
     "labelEn": "Start of the Revolution",
-    "explainEl": "Πιστεύει ότι η Επανάσταση του 1821 ξεκίνησε επίσημα με την ευλογία των όπλων στην Αγία Λαύρα, ενώ πρόκειται για μεταγενέστερο θρύλο χωρίς ιστορική τεκμηρίωση.",
-    "explainEn": "Believes the 1821 Revolution officially began with the blessing at Agia Lavra, when this is a later legend with no historical documentation.",
+    "explainEl": "Συγχέει την εθνική επέτειο της 25ης Μαρτίου με μία μοναδική ημερομηνία έναρξης. Το σχολικό βιβλίο αναφέρει ότι ο Αγώνας είχε ξεκινήσει λίγες μέρες νωρίτερα και ότι η 25η Μαρτίου ορίστηκε εθνική επέτειος το 1838.",
+    "explainEn": "Confuses the March 25 national anniversary with a single start date. The textbook states that the struggle had begun a few days earlier and that March 25 was designated the national anniversary in 1838.",
     "recommendedToolIds": [
       "chatgpt"
     ],
@@ -663,8 +663,8 @@ const GAP_TAGS = {
     "id": "history-gym.filiki-etaireia-leaders",
     "labelEl": "Ίδρυση Φιλικής Εταιρείας",
     "labelEn": "Founding of the Filiki Etaireia",
-    "explainEl": "Πιστεύει ότι η Φιλική Εταιρεία ιδρύθηκε από μεγάλους στρατιωτικούς ή πολιτικούς ηγέτες, ενώ ιδρύθηκε το 1814 στην Οδησσό από τρεις άνδρες μέτριας κοινωνικής θέσης.",
-    "explainEn": "Believes the Filiki Etaireia was founded by major military or political leaders, when it was actually founded in 1814 in Odessa by three men of modest social standing.",
+    "explainEl": "Δεν θυμάται τους πρωτεργάτες που αναφέρει το σχολικό βιβλίο για τη Φιλική Εταιρεία: Νικόλαο Σκουφά, Αθανάσιο Τσακάλωφ, Εμμανουήλ Ξάνθο και Παναγιώτη Αναγνωστόπουλο.",
+    "explainEn": "Does not recall the leading founders named by the textbook: Nikolaos Skoufas, Athanasios Tsakalov, Emmanouil Xanthos and Panagiotis Anagnostopoulos.",
     "recommendedToolIds": [
       "chatgpt"
     ],
@@ -679,8 +679,8 @@ const GAP_TAGS = {
     "id": "history-gym.kryfo-sxoleio",
     "labelEl": "Εκπαίδευση επί Τουρκοκρατίας",
     "labelEn": "Education under Ottoman rule",
-    "explainEl": "Πιστεύει ότι η ελληνική εκπαίδευση ήταν εντελώς απαγορευμένη στην Οθωμανική Αυτοκρατορία, αγνοώντας ότι λειτουργούσαν χιλιάδες νόμιμα σχολεία.",
-    "explainEn": "Believes Greek-language education was completely banned in the Ottoman Empire, unaware that thousands of legal schools operated.",
+    "explainEl": "Πιστεύει ότι δεν υπήρχαν οργανωμένες εκπαιδευτικές εστίες πριν από την Επανάσταση. Το σχολικό βιβλίο αναφέρει ίδρυση σχολείων από παροίκους και πολλαπλασιασμό εκπαιδευτικών εστιών.",
+    "explainEn": "Believes there were no organised educational centres before the Revolution. The textbook describes schools founded by diaspora communities and multiplying educational centres.",
     "recommendedToolIds": [
       "chatgpt"
     ],
@@ -9304,12 +9304,12 @@ const QUIZZES = {
       "questions": [
         {
           "id": "q1-agia-lavra",
-          "textEl": "Πώς ξεκίνησε επίσημα η Επανάσταση του 1821 σύμφωνα με τα ιστορικά τεκμήρια;",
-          "textEn": "According to historical evidence, how did the 1821 Revolution officially begin?",
+          "textEl": "Τι αναφέρει το σχολικό βιβλίο για την 25η Μαρτίου και την έναρξη της Επανάστασης;",
+          "textEn": "What does the textbook say about March 25 and the beginning of the Revolution?",
           "options": [
             {
-              "textEl": "Δεν υπάρχει τεκμηριωμένη «επίσημη έναρξη»· η ευλογία στην Αγία Λαύρα είναι μεταγενέστερος θρύλος.",
-              "textEn": "There is no documented 'official start': the Agia Lavra blessing is a later legend.",
+              "textEl": "Ο Αγώνας είχε αρχίσει λίγες μέρες νωρίτερα και η 25η Μαρτίου ορίστηκε εθνική επέτειος το 1838.",
+              "textEn": "The struggle had begun a few days earlier, and March 25 was designated the national anniversary in 1838.",
               "isCorrect": true
             },
             {
@@ -9352,12 +9352,12 @@ const QUIZZES = {
         },
         {
           "id": "q3-filiki-etaireia",
-          "textEl": "Ποιοι ίδρυσαν τη Φιλική Εταιρεία και πού;",
-          "textEn": "Who founded the Filiki Etaireia and where?",
+          "textEl": "Ποιοι αναφέρονται στο σχολικό βιβλίο ως πρωτεργάτες της Φιλικής Εταιρείας;",
+          "textEn": "Who does the textbook name as leading founders of the Filiki Etaireia?",
           "options": [
             {
-              "textEl": "Τρεις άνδρες μέτριας κοινωνικής θέσης (Ξάνθος, Σκουφάς, Τσακάλωφ) στην Οδησσό, το 1814.",
-              "textEn": "Three men of modest social standing (Xanthos, Skoufas, Tsakalov) in Odessa, in 1814.",
+              "textEl": "Νικόλαος Σκουφάς, Αθανάσιος Τσακάλωφ, Εμμανουήλ Ξάνθος και Παναγιώτης Αναγνωστόπουλος.",
+              "textEn": "Nikolaos Skoufas, Athanasios Tsakalov, Emmanouil Xanthos and Panagiotis Anagnostopoulos.",
               "isCorrect": true
             },
             {
@@ -9376,12 +9376,12 @@ const QUIZZES = {
         },
         {
           "id": "q4-education",
-          "textEl": "Η ελληνική εκπαίδευση κατά την Οθωμανική κυριαρχία ήταν...",
-          "textEn": "Greek-language education under Ottoman rule was...",
+          "textEl": "Τι δείχνει το σχολικό βιβλίο για την ελληνική εκπαίδευση πριν από την Επανάσταση;",
+          "textEn": "What does the textbook show about Greek education before the Revolution?",
           "options": [
             {
-              "textEl": "Νόμιμη, με χιλιάδες σχολεία να λειτουργούν επίσημα.",
-              "textEn": "Legal, with thousands of schools operating officially.",
+              "textEl": "Οι πάροικοι ίδρυαν σχολεία και οι εκπαιδευτικές εστίες πολλαπλασιάζονταν, με σημαντική στήριξη από τον παροικιακό ελληνισμό.",
+              "textEn": "Diaspora communities founded schools and educational centres multiplied, with important support from Greeks abroad.",
               "isCorrect": true
             },
             {

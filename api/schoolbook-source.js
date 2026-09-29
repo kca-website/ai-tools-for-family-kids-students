@@ -10,6 +10,24 @@ const BOOKS = {
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
+  "istoria-a-gymnasiou": {
+    title: "Αρχαία Ιστορία Α΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2290/Istoria_A-Gymnasiou_html-empl/",
+    mode: "historyAQuiz",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics"
+  },
+  "istoria-g-gymnasiou": {
+    title: "Νεότερη και Σύγχρονη Ιστορία Γ΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/5204/Istoria_G-Gymnasiou_html-empl/",
+    mode: "historyGQuiz",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "exact-current-diagnostic-topics"
+  },
   "istoria-a-lykeiou": {
     title: "Ιστορία του Αρχαίου Κόσμου Α΄ Γενικού Λυκείου",
     base: "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2696/Istoria_A-Lykeiou_html-empl/",
@@ -159,6 +177,31 @@ const ALIASES = {
 // Exact 2026-27 History B curriculum allowlist, verified against the official
 // IEP annual guidance. Parent nodes aggregate only their included descendants;
 // pages that exist in the book but are absent from this map fail closed.
+// Exact official textbook pages for the diagnostic topics currently exposed
+// by A΄ and G΄ Gymnasium History. The IEP 2026–27 History guidance is published,
+// but this map deliberately does NOT claim a complete annual-syllabus allowlist.
+const HISTORY_A_GYM_DIAGNOSTIC_PATHS = Object.freeze({
+  "πολιτισμοι εποχης χαλκου": ["index_02_02.html", "index_02_03.html", "index_02_05.html"],
+  "bronze age civilizations": ["index_02_02.html", "index_02_03.html", "index_02_05.html"],
+  "πορεια προς τη δημοκρατια": ["index_04_05.html"],
+  "path toward democracy": ["index_04_05.html"],
+  "πελοποννησιακος πολεμος": ["index_06_01.html"],
+  "peloponnesian war": ["index_06_01.html"],
+  "εργο μεγαλου αλεξανδρου": ["index_07_04.html"],
+  "alexander the great s legacy": ["index_07_04.html"]
+});
+
+const HISTORY_G_GYM_DIAGNOSTIC_PATHS = Object.freeze({
+  "εναρξη της επαναστασης": ["index2_8.html"],
+  "start of the revolution": ["index2_8.html"],
+  "ενοτητα κατα την επανασταση": ["index2_9.html"],
+  "unity during the revolution": ["index2_9.html"],
+  "ιδρυση φιλικης εταιρειας": ["index2_7.html"],
+  "founding of the filiki etaireia": ["index2_7.html"],
+  "εκπαιδευση επι τουρκοκρατιας": ["index2_5.html"],
+  "education under ottoman rule": ["index2_5.html"]
+});
+
 const HISTORY_B_2026_2027_PATHS = Object.freeze({
   "1": ["index1_1_1.html", "index1_2_1.html", "index1_2_2.html"],
   "1.1": ["index1_1_1.html"],
@@ -965,6 +1008,16 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
+  if (subject === "istoria-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveHistoryAQuizPaths(topic).map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "istoria-g-gymnasiou") {
+    const base = BOOKS[subject].base;
+    return resolveHistoryGQuizPaths(topic).map(path => new URL(path, base).toString());
+  }
+
   if (subject === "istoria-a-lykeiou") {
     const base = BOOKS[subject].base;
     // Exact source for the currently mapped "Περικλής και αθηναϊκή δημοκρατία"
@@ -1208,6 +1261,16 @@ function selectEnglishBUnitText(text, topic) {
   }
   const chunk = lines.slice(start, end).join("\n").trim();
   return chunk.length >= 500 ? chunk.slice(0, 42000) : selectUsefulText(full, selection.title);
+}
+
+function resolveHistoryAQuizPaths(topic) {
+  const key = normalize(topic);
+  return HISTORY_A_GYM_DIAGNOSTIC_PATHS[key] ? [...HISTORY_A_GYM_DIAGNOSTIC_PATHS[key]] : [];
+}
+
+function resolveHistoryGQuizPaths(topic) {
+  const key = normalize(topic);
+  return HISTORY_G_GYM_DIAGNOSTIC_PATHS[key] ? [...HISTORY_G_GYM_DIAGNOSTIC_PATHS[key]] : [];
 }
 
 function resolveHistoryCurriculumPaths(topic) {
@@ -1595,6 +1658,8 @@ function selectUsefulText(text, topic) {
 module.exports._test = Object.freeze({
   historyTopicKey,
   resolveHistoryCurriculumPaths,
+  resolveHistoryAQuizPaths,
+  resolveHistoryGQuizPaths,
   mathBTopicKey,
   resolveMathBCurriculumPaths,
   chemistryBTopicKey,
@@ -1613,6 +1678,8 @@ module.exports._test = Object.freeze({
   selectEnglishBUnitText,
   resolveSectionPath,
   HISTORY_B_2026_2027_PATHS,
+  HISTORY_A_GYM_DIAGNOSTIC_PATHS,
+  HISTORY_G_GYM_DIAGNOSTIC_PATHS,
   MATH_B_2026_2027_PATHS,
   CHEMISTRY_B_2026_2027_PATHS,
   GEOGRAPHY_B_2026_2027_PATHS,

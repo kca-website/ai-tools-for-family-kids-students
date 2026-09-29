@@ -12,6 +12,10 @@ const CLOUDFLARE_MODELS = new Set([
 const GROQ_MODELS = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
 const ROUTING_PROFILES = new Set(['default', 'economy', 'balanced', 'quality']);
 
+function smartRoutingEnabled() {
+  return /^(?:1|true|on)$/i.test(String(process.env.SMART_AI_ROUTING_ENABLED || '').trim());
+}
+
 const PROFILE_MODELS = Object.freeze({
   economy: {
     cloudflare: [
@@ -55,6 +59,7 @@ function getAiStatus() {
     provider: providers[0]?.name || null,
     model: providers[0]?.model || null,
     providers,
+    smartRoutingEnabled: smartRoutingEnabled(),
     routingProfiles,
   };
 }
@@ -104,7 +109,7 @@ function configuredProfileModels(provider, profile) {
 
 function modelSequenceFor(provider, profileValue) {
   const profile = normalizeProfile(profileValue);
-  if (profile === 'default') return [modelFor(provider)];
+  if (profile === 'default' || !smartRoutingEnabled()) return [modelFor(provider)];
   const configured = configuredProfileModels(provider, profile);
   if (configured.length) return configured;
   const defaults = PROFILE_MODELS[profile]?.[provider] || [modelFor(provider)];
@@ -192,6 +197,11 @@ async function callCloudflare({ messages, maxTokens, temperature, responseFormat
   };
   if (String(model).includes('/gpt-oss-')) {
     body.reasoning_effort = reasoningEffort || 'low';
+  } else if (smartRoutingEnabled() && (
+    String(model).includes('/qwen/qwen3-') ||
+    String(model).includes('/zai-org/glm-4.7-flash')
+  )) {
+    body.chat_template_kwargs = { enable_thinking: false };
   }
   if (responseFormat) body.response_format = responseFormat;
 
@@ -260,6 +270,7 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
       text,
       provider,
       model,
+      usage: extractUsage(data),
     };
   } finally {
     clearTimeout(timeout);
@@ -329,10 +340,25 @@ async function postOpenAiCompatible({ url, token, body, provider, model, timeout
       text,
       provider,
       model,
+      usage: extractUsage(data),
     };
   } finally {
     clearTimeout(timeout);
   }
+}
+
+function extractUsage(data) {
+  const usage = data?.result?.usage || data?.usage || {};
+  const promptTokens = Number(usage.prompt_tokens ?? usage.input_tokens ?? 0) || 0;
+  const completionTokens = Number(usage.completion_tokens ?? usage.output_tokens ?? 0) || 0;
+  const totalTokens = Number(usage.total_tokens ?? (promptTokens + completionTokens)) || 0;
+  const cachedTokens = Number(
+    usage.cached_tokens ??
+    usage.prompt_tokens_details?.cached_tokens ??
+    usage.input_tokens_details?.cached_tokens ??
+    0
+  ) || 0;
+  return { promptTokens, completionTokens, totalTokens, cachedTokens };
 }
 
 function extractProviderCode(data) {
@@ -375,4 +401,4 @@ function providerMessage(data) {
     '';
 }
 
-module.exports = { generateChat, getAiStatus, modelSequenceFor };
+module.exports = { generateChat, getAiStatus, modelSequenceFor, smartRoutingEnabled };

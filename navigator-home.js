@@ -463,7 +463,7 @@
         <p class="home-v9-principle__label">${c.principleLabel}</p>
         <p class="home-v9-principle__quote">${c.principleQuote}</p>
         <ol class="home-v9-principle__steps">
-          ${c.principleSteps.map(([title,sub],i) => `<li${i === 2 ? ' class="is-current"' : ""}><span class="home-v9-principle__num" aria-hidden="true">${i + 1}</span><span class="home-v9-principle__title">${title}</span><span class="home-v9-principle__sub">${sub}</span></li>`).join("")}
+          ${c.principleSteps.map(([title,sub],i) => `<li><span class="home-v9-principle__num" aria-hidden="true">${i + 1}</span><span class="home-v9-principle__title">${title}</span><span class="home-v9-principle__sub">${sub}</span></li>`).join("")}
         </ol>
       </div>`;
   }
@@ -541,7 +541,7 @@
         <a class="home-v9-study__cta" href="/study.html">${c.studyCta}</a>
       </div>
       <ol class="home-v9-study__steps">
-        ${c.studySteps.map(([t,sub],i) => `<li${i === 1 ? ' class="is-current"' : ""}><span class="home-v9-study__num" aria-hidden="true">${i + 1}</span><span><strong>${t}</strong><small>${sub}</small></span></li>`).join("")}
+        ${c.studySteps.map(([t,sub],i) => `<li><span class="home-v9-study__num" aria-hidden="true">${i + 1}</span><span><strong>${t}</strong><small>${sub}</small></span></li>`).join("")}
       </ol>`;
   }
 

@@ -1260,29 +1260,38 @@
 },
   "fysiki-g-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "official-book-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο επιβεβαιωμένο",
-    "coverageLabelEn": "Official textbook verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι τρέχοντες διαγνωστικοί στόχοι έχουν ακριβή επίσημη πηγή",
+    "coverageLabelEn": "Current diagnostic topics have exact official sources",
     "quizTitleEl": "Φυσική, Γ' Γυμνασίου",
     "quizTitleEn": "Physics, 9th Grade",
     "officialBook": {
       "titleEl": "Φυσική Γ΄ Γυμνασίου",
-      "titleEn": "Φυσική Γ΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/"
+      "titleEn": "Physics, G΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/"
     },
-    "officialSectionsEl": [],
+    "additionalSourceBook": {
+      "titleEl": "Φυσική Β΄ Γυμνασίου — προαπαιτούμενη έννοια ταχύτητας",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"
+    },
+    "officialSectionsEl": [
+      "Γ΄ · Κεφάλαιο 2 — Ηλεκτρικό ρεύμα / Νόμος του Ωμ",
+      "Γ΄ · Κεφάλαιο 3 — Ηλεκτρική ενέργεια",
+      "Β΄ · 2.2 — Η έννοια της ταχύτητας (προαπαιτούμενη γνώση)"
+    ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Έχει επιβεβαιωθεί το επίσημο σχολικό βιβλίο. Δεν έχει ακόμη ολοκληρωθεί η αντιστοίχιση όλων των quiz topics με συγκεκριμένες ενότητες του βιβλίου.",
-    "scopeNoteEn": "The official textbook is verified. Full mapping of all quiz topics to exact textbook sections is not complete yet.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Ο Νόμος του Ωμ και η ηλεκτρική ενέργεια γειώνονται στο επίσημο βιβλίο της Γ΄. Ο στόχος «Τύπος ταχύτητας» ελέγχει προαπαιτούμενη γνώση από τη Β΄ και χρησιμοποιεί ρητά την §2.2 της Β΄.",
+    "scopeNoteEn": "Ohm's law and electrical energy are grounded in the G΄ textbook. The speed-formula target checks prerequisite knowledge from B΄ and explicitly uses B΄ §2.2.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Η αντιστοίχιση αφορά τους σημερινούς διαγνωστικούς στόχους, όχι πλήρη ετήσια allowlist.",
+    "annualInstructionsNoteEn": "This mapping covers the current diagnostic targets, not a complete annual syllabus allowlist.",
     "quizId": "fysiki-g-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-official-page-grounding-for-current-diagnostics; prerequisite explicitly labelled; fail closed"
   },
   "chimeia-b-gymnasiou": {
   "schoolYear": "2026-2027",
@@ -1645,29 +1654,38 @@
 },
   "chimeia-g-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "official-book-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο επιβεβαιωμένο",
-    "coverageLabelEn": "Official textbook verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-prerequisites-grounded",
+    "coverageLabelEl": "Οι τρέχοντες διαγνωστικοί στόχοι έχουν ακριβείς prerequisite πηγές",
+    "coverageLabelEn": "Current diagnostic topics have exact prerequisite sources",
     "quizTitleEl": "Χημεία, Γ' Γυμνασίου",
     "quizTitleEn": "Chemistry, 9th Grade",
     "officialBook": {
       "titleEl": "Χημεία Γ΄ Γυμνασίου",
-      "titleEn": "Χημεία Γ΄ Γυμνασίου",
+      "titleEn": "Chemistry, G΄ Gymnasium",
       "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C102/223/"
     },
-    "officialSectionsEl": [],
+    "additionalSourceBook": {
+      "titleEl": "Χημεία Β΄ Γυμνασίου — προαπαιτούμενες βασικές έννοιες",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/"
+    },
+    "officialSectionsEl": [
+      "Β΄ · 2.6 — Χημικές ενώσεις και χημικά στοιχεία (προαπαιτούμενο)",
+      "Β΄ · 2.6.2 — Μείγματα και χημικές ενώσεις (προαπαιτούμενο)",
+      "Β΄ · 2.9 — Υποατομικά σωματίδια / δομή ατόμου (προαπαιτούμενο)"
+    ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Έχει επιβεβαιωθεί το επίσημο σχολικό βιβλίο. Δεν έχει ακόμη ολοκληρωθεί η αντιστοίχιση όλων των quiz topics με συγκεκριμένες ενότητες του βιβλίου.",
-    "scopeNoteEn": "The official textbook is verified. Full mapping of all quiz topics to exact textbook sections is not complete yet.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "Η Χημεία Γ΄ 2026–27 οργανώνεται γύρω από οξέα-βάσεις-άλατα, ταξινόμηση στοιχείων και χημεία του άνθρακα. Οι τρεις σημερινοί στόχοι του site είναι βασικές προαπαιτούμενες έννοιες της Β΄ και γειώνονται ρητά εκεί, όχι ως ενότητες της Γ΄.",
+    "scopeNoteEn": "G΄ Chemistry 2026–27 focuses on acids/bases/salts, classification of elements and carbon chemistry. The site's current diagnostics are prerequisite concepts from B΄ and are explicitly grounded there, not presented as G΄ sections.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Το mapping αφορά τα σημερινά diagnostics/prerequisites και όχι πλήρη ετήσια allowlist της Γ΄.",
+    "annualInstructionsNoteEn": "This mapping covers the current diagnostics/prerequisites, not a complete G΄ annual syllabus allowlist.",
     "quizId": "chimeia-g-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-prerequisite-source-grounding; prerequisites explicitly labelled; fail closed"
   },
   "biologia-a-gymnasiou": {
     "schoolYear": "2026-2027",
@@ -1767,37 +1785,39 @@
 },
   "biologia-g-gymnasiou": {
     "schoolYear": "2026-2027",
-    "verificationDate": "2026-08-29",
-    "coverageStatus": "book-index-verified",
-    "coverageLabelEl": "Επίσημο σχολικό βιβλίο και περιεχόμενα επιβεβαιωμένα",
-    "coverageLabelEn": "Official textbook and contents verified",
+    "verificationDate": "2026-09-29",
+    "coverageStatus": "official-book-diagnostic-topic-grounded",
+    "coverageLabelEl": "Οι τρέχοντες διαγνωστικοί στόχοι έχουν ακριβή ή ρητά σχετική επίσημη πηγή",
+    "coverageLabelEn": "Current diagnostic topics have exact or explicitly related official sources",
     "quizTitleEl": "Βιολογία, Γ' Γυμνασίου",
     "quizTitleEn": "Biology, 9th Grade",
     "officialBook": {
       "titleEl": "Βιολογία Β΄ και Γ΄ Γυμνασίου",
-      "titleEn": "Βιολογία Β΄ και Γ΄ Γυμνασίου",
-      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C103/478/"
+      "titleEn": "Biology B΄ & G΄ Gymnasium",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/"
+    },
+    "additionalSourceBook": {
+      "titleEl": "Βιολογία Α΄ Γυμνασίου — προαπαιτούμενη έννοια αναπαραγωγής",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_1.html"
     },
     "officialSectionsEl": [
-      "Κεφ. 1: Οργάνωση της ζωής: μόρια, κύτταρο, επίπεδα οργάνωσης",
-      "Κεφ. 2: Οργανισμοί στο περιβάλλον: οικοσύστημα, ενέργεια, ανακύκλωση ύλης, ανθρώπινες παρεμβάσεις",
-      "Κεφ. 3: Μεταβολισμός και ένζυμα",
-      "Κεφ. 4: Ομοιόσταση, ασθένειες, άμυνα οργανισμού, τρόπος ζωής",
-      "Κεφ. 5: Γενετικό υλικό, ροή πληροφορίας, αλληλόμορφα, κυτταρική διαίρεση, κληρονομικότητα, μεταλλάξεις",
-      "Κεφ. 6: Γενετική μηχανική, βιοτεχνολογία, βιοηθική",
-      "Κεφ. 7: Εξέλιξη και εξέλιξη του ανθρώπου"
+      "Γ΄ · 5.1 — Το γενετικό υλικό οργανώνεται σε χρωμοσώματα",
+      "Γ΄ · 5.5 — Κληρονομικότητα",
+      "Γ΄ · 7.1 — Η εξέλιξη και οι μαρτυρίες της",
+      "Α΄ · 6.1 — Αναπαραγωγή (προαπαιτούμενη βασική έννοια)"
     ],
     "officialSectionsEn": [],
     "catalogUrl": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
     "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
-    "scopeNoteEl": "Το επίσημο βιβλίο δηλώνει ότι τα παραθέματα που συνοδεύουν το βασικό κείμενο δεν αποτελούν εξεταστέα ύλη. Ο Tutor δεν πρέπει να τα παρουσιάζει ως απαιτούμενη εξεταστέα γνώση.",
-    "scopeNoteEn": "The grade/subject is verified in the official 2026–27 textbook catalog. A chapter-level index has not yet been added for this quiz in our curriculum layer.",
-    "annualInstructionsStatus": "2026-27-not-yet-indexed",
-    "annualInstructionsNoteEl": "Μην θεωρείς ότι όλο το βιβλίο είναι αυτομάτως διδακτέα ή εξεταστέα ύλη. Οι αναλυτικές ετήσιες οδηγίες 2026–27 για το συγκεκριμένο μάθημα δεν έχουν ακόμη επιβεβαιωθεί στο layer.",
-    "annualInstructionsNoteEn": "Do not assume the whole textbook is automatically taught or examinable. The detailed 2026–27 annual teaching instructions for this subject have not yet been verified in this layer.",
+    "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    "scopeNoteEl": "DNA και κληρονομικότητα γειώνονται στις §§5.1 και 5.5. Ποικιλομορφία/εξαφάνιση συνδέονται ρητά με την §7.1. Ο γενικός στόχος «σκοπός αναπαραγωγής» χρησιμοποιεί την §6.1 της Α΄ ως prerequisite.",
+    "scopeNoteEn": "DNA and heredity are grounded in §§5.1 and 5.5. Diversity/extinction are explicitly related to §7.1. The general reproduction-purpose target uses A΄ §6.1 as prerequisite.",
+    "annualInstructionsStatus": "official-annual-guidance-published",
+    "annualInstructionsNoteEl": "Η αντιστοίχιση αφορά τους σημερινούς διαγνωστικούς στόχους, όχι πλήρη ετήσια allowlist.",
+    "annualInstructionsNoteEn": "This mapping covers the current diagnostic targets, not a complete annual syllabus allowlist.",
     "quizId": "biologia-g-gymnasiou",
     "zone": "middle",
-    "sourceDiscipline": "official-source-only; no inference from topic label to official section without explicit gap alignment"
+    "sourceDiscipline": "exact-or-related-official-page-grounding; prerequisite explicitly labelled; fail closed"
   },
   "ekthesi-a-lykeiou": {
     "schoolYear": "2026-2027",
@@ -4368,34 +4388,24 @@
   "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
 },
   "physics-g-gym.ohms-law": {
-    "topicAnchorEl": "Νόμος του Ωμ",
-    "topicAnchorEn": "Ohm's Law",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "fysiki-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/"
+    "topicAnchorEl":"Νόμος του Ωμ","topicAnchorEn":"Ohm's Law","status":"exact-section-verified","sourceQuizId":"fysiki-g-gymnasiou",
+    "sectionEl":"Γ΄ · Κεφάλαιο 2 — Ηλεκτρικό ρεύμα / Νόμος του Ωμ","exactSectionEl":"Γ΄ · Κεφάλαιο 2 — Ηλεκτρικό ρεύμα / Νόμος του Ωμ","annualScopeVerified":true,
+    "statusLabelEl":"Ακριβής ενότητα Γ΄ 2026–27","statusLabelEn":"Exact G΄ 2026–27 section",
+    "noteEl":"Ο Νόμος του Ωμ βρίσκεται στο Κεφάλαιο 2 του επίσημου βιβλίου Φυσικής Γ΄.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html",
+    "annualSourceUrl":"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "physics-g-gym.speed-velocity-formula": {
-    "topicAnchorEl": "Τύπος ταχύτητας",
-    "topicAnchorEn": "Speed formula",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "fysiki-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/"
+    "topicAnchorEl":"Τύπος ταχύτητας","topicAnchorEn":"Speed formula","status":"exact-section-verified","sourceQuizId":"fysiki-g-gymnasiou",
+    "sectionEl":"Β΄ · 2.2 — Η έννοια της ταχύτητας (προαπαιτούμενη γνώση)","exactSectionEl":"Β΄ · 2.2 — Η έννοια της ταχύτητας (προαπαιτούμενη γνώση)","annualScopeVerified":false,
+    "statusLabelEl":"Ακριβής prerequisite πηγή Β΄","statusLabelEn":"Exact B΄ prerequisite source",
+    "noteEl":"Ελέγχει τη σχέση u=s/t ως προαπαιτούμενη γνώση Β΄ Γυμνασίου, όχι ως νέα ενότητα της Γ΄.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html"
   },
   "physics-g-gym.energy-transformation": {
-    "topicAnchorEl": "Μετατροπή ενέργειας",
-    "topicAnchorEn": "Energy transformation",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "fysiki-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/"
+    "topicAnchorEl":"Μετατροπή ενέργειας","topicAnchorEn":"Energy transformation","status":"exact-section-verified","sourceQuizId":"fysiki-g-gymnasiou",
+    "sectionEl":"Γ΄ · Κεφάλαιο 3 — Ηλεκτρική ενέργεια","exactSectionEl":"Γ΄ · Κεφάλαιο 3 — Ηλεκτρική ενέργεια","annualScopeVerified":true,
+    "statusLabelEl":"Ακριβής ενότητα Γ΄ 2026–27","statusLabelEn":"Exact G΄ 2026–27 section",
+    "noteEl":"Το Κεφάλαιο 3 συνδέει την ηλεκτρική ενέργεια με τις μετατροπές της.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html",
+    "annualSourceUrl":"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "chem-b-gym.mixture-homogeneous": {
   "topicAnchorEl": "Ομογενή και ετερογενή μείγματα",
@@ -4542,34 +4552,22 @@
   "annualSourceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
 },
   "chimeia-g-gym.element-vs-compound": {
-    "topicAnchorEl": "Στοιχείο vs Ένωση",
-    "topicAnchorEn": "Element vs Compound",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "chimeia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C102/223/"
+    "topicAnchorEl":"Στοιχείο vs Ένωση","topicAnchorEn":"Element vs Compound","status":"exact-section-verified","sourceQuizId":"chimeia-g-gymnasiou",
+    "sectionEl":"Β΄ · 2.6 — Χημικές ενώσεις και χημικά στοιχεία (προαπαιτούμενο)","exactSectionEl":"Β΄ · 2.6 — Χημικές ενώσεις και χημικά στοιχεία (προαπαιτούμενο)","annualScopeVerified":false,
+    "statusLabelEl":"Ακριβής prerequisite πηγή Β΄","statusLabelEn":"Exact B΄ prerequisite source",
+    "noteEl":"Βασική γνώση της Χημείας Β΄ που ελέγχεται ως prerequisite για τη Γ΄.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html"
   },
   "chimeia-g-gym.mixture-vs-compound": {
-    "topicAnchorEl": "Μείγμα vs Ένωση",
-    "topicAnchorEn": "Mixture vs Compound",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "chimeia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C102/223/"
+    "topicAnchorEl":"Μείγμα vs Ένωση","topicAnchorEn":"Mixture vs Compound","status":"exact-section-verified","sourceQuizId":"chimeia-g-gymnasiou",
+    "sectionEl":"Β΄ · 2.6.2 — Μείγματα και χημικές ενώσεις (προαπαιτούμενο)","exactSectionEl":"Β΄ · 2.6.2 — Μείγματα και χημικές ενώσεις (προαπαιτούμενο)","annualScopeVerified":false,
+    "statusLabelEl":"Ακριβής prerequisite πηγή Β΄","statusLabelEn":"Exact B΄ prerequisite source",
+    "noteEl":"Βασική γνώση της Χημείας Β΄ που ελέγχεται ως prerequisite για τη Γ΄.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html"
   },
   "chimeia-g-gym.atom-structure": {
-    "topicAnchorEl": "Δομή του ατόμου",
-    "topicAnchorEn": "Structure of the atom",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "chimeia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C102/223/"
+    "topicAnchorEl":"Δομή του ατόμου","topicAnchorEn":"Structure of the atom","status":"exact-section-verified","sourceQuizId":"chimeia-g-gymnasiou",
+    "sectionEl":"Β΄ · 2.9 — Υποατομικά σωματίδια / δομή ατόμου (προαπαιτούμενο)","exactSectionEl":"Β΄ · 2.9 — Υποατομικά σωματίδια / δομή ατόμου (προαπαιτούμενο)","annualScopeVerified":false,
+    "statusLabelEl":"Ακριβής prerequisite πηγή Β΄","statusLabelEn":"Exact B΄ prerequisite source",
+    "noteEl":"Βασική δομή ατόμου από τη Χημεία Β΄, όχι ενότητα Γ΄.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html"
   },
   "math-a-dim.ordinal-numbers": {
     "topicAnchorEl": "Τακτικοί αριθμοί",
@@ -5057,54 +5055,38 @@
   
   
   "biologia-g-gym.dna-location": {
-    "topicAnchorEl": "Θέση του DNA",
-    "topicAnchorEn": "Location of DNA",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "biologia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C103/478/"
+    "topicAnchorEl":"Θέση του DNA","topicAnchorEn":"Location of DNA","status":"exact-section-verified","sourceQuizId":"biologia-g-gymnasiou",
+    "sectionEl":"Γ΄ · 5.1 — Το γενετικό υλικό οργανώνεται σε χρωμοσώματα","exactSectionEl":"Γ΄ · 5.1 — Το γενετικό υλικό οργανώνεται σε χρωμοσώματα","annualScopeVerified":true,
+    "statusLabelEl":"Ακριβής ενότητα Γ΄ 2026–27","statusLabelEn":"Exact G΄ 2026–27 section",
+    "noteEl":"Η §5.1 εισάγει DNA, γενετικό υλικό και χρωμοσώματα.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_1.html",
+    "annualSourceUrl":"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "biologia-g-gym.inheritance-both-parents": {
-    "topicAnchorEl": "Κληρονομικότητα από τους γονείς",
-    "topicAnchorEn": "Inheritance from parents",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "biologia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C103/478/"
+    "topicAnchorEl":"Κληρονομικότητα από τους γονείς","topicAnchorEn":"Inheritance from parents","status":"exact-section-verified","sourceQuizId":"biologia-g-gymnasiou",
+    "sectionEl":"Γ΄ · 5.5 — Κληρονομικότητα","exactSectionEl":"Γ΄ · 5.5 — Κληρονομικότητα","annualScopeVerified":true,
+    "statusLabelEl":"Ακριβής ενότητα Γ΄ 2026–27","statusLabelEn":"Exact G΄ 2026–27 section",
+    "noteEl":"Η §5.5 καλύπτει άμεσα την κληρονομικότητα.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_5.html",
+    "annualSourceUrl":"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "biologia-g-gym.biodiversity-definition": {
-    "topicAnchorEl": "Έννοια βιοποικιλότητας",
-    "topicAnchorEn": "Concept of biodiversity",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "biologia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C103/478/"
+    "topicAnchorEl":"Έννοια βιοποικιλότητας","topicAnchorEn":"Concept of biodiversity","status":"related-section-verified","sourceQuizId":"biologia-g-gymnasiou",
+    "sectionEl":"Γ΄ · 7.1 — Η εξέλιξη και οι μαρτυρίες της","exactSectionEl":"Γ΄ · 7.1 — Η εξέλιξη και οι μαρτυρίες της","annualScopeVerified":true,
+    "statusLabelEl":"Σχετική επαληθευμένη ενότητα Γ΄","statusLabelEn":"Related verified G΄ section",
+    "noteEl":"Το diagnostic χρησιμοποιεί τον ευρύτερο όρο «βιοποικιλότητα». Η §7.1 πραγματεύεται την ποικιλομορφία των οργανισμών· δεν παρουσιάζουμε τον όρο ως τίτλο ενότητας.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index7_1.html",
+    "annualSourceUrl":"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "biologia-g-gym.extinction-cause": {
-    "topicAnchorEl": "Αιτία εξαφάνισης είδους",
-    "topicAnchorEn": "Cause of species extinction",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "biologia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C103/478/"
+    "topicAnchorEl":"Αιτία εξαφάνισης είδους","topicAnchorEn":"Cause of species extinction","status":"exact-section-verified","sourceQuizId":"biologia-g-gymnasiou",
+    "sectionEl":"Γ΄ · 7.1 — Η εξέλιξη και οι μαρτυρίες της","exactSectionEl":"Γ΄ · 7.1 — Η εξέλιξη και οι μαρτυρίες της","annualScopeVerified":true,
+    "statusLabelEl":"Ακριβής ενότητα Γ΄ 2026–27","statusLabelEn":"Exact G΄ 2026–27 section",
+    "noteEl":"Η §7.1 συνδέει μεταβολές/προσαρμογή με την επιβίωση και την εξαφάνιση ειδών.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index7_1.html",
+    "annualSourceUrl":"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/"
   },
   "biologia-g-gym.reproduction-purpose": {
-    "topicAnchorEl": "Σκοπός αναπαραγωγής",
-    "topicAnchorEn": "Purpose of reproduction",
-    "status": "official-course-topic-anchor",
-    "sourceQuizId": "biologia-g-gymnasiou",
-    "statusLabelEl": "Topic anchor μέσα σε επιβεβαιωμένο επίσημο μάθημα/βιβλίο",
-    "statusLabelEn": "Topic anchor within a verified official course/book",
-    "noteEl": "Το topic anchor είναι το όνομα του υπάρχοντος μαθησιακού κενού του site. Δεν αποτελεί από μόνο του επίσημο τίτλο κεφαλαίου ή απόδειξη ότι το συγκεκριμένο σημείο είναι εξεταστέο το 2026–27.",
-    "sourceUrl": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C103/478/"
+    "topicAnchorEl":"Σκοπός αναπαραγωγής","topicAnchorEn":"Purpose of reproduction","status":"exact-section-verified","sourceQuizId":"biologia-g-gymnasiou",
+    "sectionEl":"Α΄ · 6.1 — Αναπαραγωγή (προαπαιτούμενη βασική έννοια)","exactSectionEl":"Α΄ · 6.1 — Αναπαραγωγή (προαπαιτούμενη βασική έννοια)","annualScopeVerified":false,
+    "statusLabelEl":"Ακριβής prerequisite πηγή Α΄","statusLabelEn":"Exact A΄ prerequisite source",
+    "noteEl":"Η γενική λειτουργία της αναπαραγωγής διδάσκεται στη Βιολογία Α΄ και ελέγχεται εδώ ως prerequisite.","sourceUrl":"https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_1.html"
   },
   "biologia-a-lyk.homeostasis": {
     "topicAnchorEl": "Ομοιόσταση",

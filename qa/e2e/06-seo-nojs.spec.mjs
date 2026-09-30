@@ -89,7 +89,6 @@ test.describe('static SEO (JS disabled)', () => {
     expect(bad.filter((b) => !/(index|special-education-preview|classroom)\.html/.test(b))).toEqual([]);
   });
   test('apple-touch-icon and PNG manifest icons for iOS/Android install', async () => {
-    test.fail(true, 'FINDING F-19: no apple-touch-icon; manifest icons are SVG only');
     const home = rows.find((r) => r.path === '/index.html');
     expect(home.appleIcon).toBe(true);
     const m = JSON.parse(fs.readFileSync(path.join(REPO, 'manifest.webmanifest'), 'utf8'));

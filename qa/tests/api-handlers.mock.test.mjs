@@ -20,7 +20,7 @@ function mockRes() {
   const r = { code: 200, headers: {}, body: null, setHeader(k, v) { r.headers[k.toLowerCase()] = v; }, status(c) { r.code = c; return r; }, json(b) { r.body = b; return r; } };
   return r;
 }
-async function call(name, { method = 'POST', body } = {}) { const res = mockRes(); await handler(name)({ method, body, headers: {} }, res); return res; }
+async function call(name, { method = 'POST', body, headers = {} } = {}) { const res = mockRes(); await handler(name)({ method, body, headers }, res); return res; }
 const cfOk = (text = 'Μια μικρή υπόδειξη για να ξεκινήσεις.') => new Response(JSON.stringify({ success: true, result: { response: text, usage: { prompt_tokens: 5, completion_tokens: 5 } } }), { status: 200 });
 const groqOk = (text = 'groq answer') => new Response(JSON.stringify({ choices: [{ message: { content: text } }], usage: {} }), { status: 200 });
 const err = (status, message = 'boom') => new Response(JSON.stringify({ error: { message }, errors: [{ message, code: 9999 }] }), { status });
@@ -97,8 +97,18 @@ test('FINDING API-02: no server-side rate limiting – 60 rapid requests all suc
   for (let i = 0; i < 60; i++) if ((await call('tutor-assistant', { body: good })).code === 200) ok++;
   assert.equal(ok, 60);
 });
-test('FINDING API-03: audience is a client-asserted string (no auth / origin check)', async () => {
-  envOn(); mockFetch(() => cfOk()); const r = await call('tutor-assistant', { body: { ...good, audience: 'high_student' } }); assert.equal(r.code, 200);
+test('AI endpoints reject cross-site browser POSTs but allow same-origin requests', async () => {
+  envOn(); mockFetch(() => cfOk('{}'));
+  const cross = { origin: 'https://evil.example', 'sec-fetch-site': 'cross-site', 'content-type': 'application/json' };
+  const same = { origin: 'https://www.aitools4kids.gr', 'sec-fetch-site': 'same-origin', 'content-type': 'application/json' };
+
+  assert.equal((await call('tutor-assistant', { body: good, headers: cross })).code, 403);
+  assert.equal((await call('teacher-assistant', { body: { prompt: 'p', audience: 'teacher' }, headers: cross })).code, 403);
+  assert.equal((await call('preschool-activity', { body: { idea: 'δεινόσαυροι', mode: 'story', age: '5', duration: '10', place: 'home', curriculumFocus: 'auto' }, headers: cross })).code, 403);
+  assert.equal((await call('preschool-image', { body: { idea: 'ρομπότ', age: '5', mode: 'story' }, headers: cross })).code, 403);
+
+  assert.notEqual((await call('tutor-assistant', { body: good, headers: same })).code, 403);
+  assert.notEqual((await call('teacher-assistant', { body: { prompt: 'p', audience: 'teacher' }, headers: same })).code, 403);
 });
 test('teacher-assistant uses a server-owned system prompt, audience allow-list and prompt limits', async () => {
   envOn(); mockFetch(() => cfOk('x'));

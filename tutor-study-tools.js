@@ -309,10 +309,11 @@
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        system: "Create accurate, age-appropriate learning material. Follow the requested JSON schema exactly and return JSON only.",
+        context: "Create accurate, age-appropriate learning material matching the requested structure.",
         prompt,
         audience: location.pathname.includes("/parent/") ? "parent" : "high_student",
         task,
+        activity: task,
       }),
     });
     const data = await response.json().catch(() => ({}));

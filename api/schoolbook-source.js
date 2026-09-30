@@ -2006,6 +2006,12 @@ function topicLabelCandidates(topic) {
     .trim();
   variants.push(withoutUnit);
 
+  const unitPrefixMatch = raw.match(/^\s*((?:\d+\s*(?:η|ή)?\s*ενότητα)|(?:ενότητα\s*\d+))/i);
+  if (unitPrefixMatch?.[1]) variants.push(unitPrefixMatch[1]);
+
+  const periodUnitPrefixMatch = raw.match(/^\s*([Α-ΩA-Z]+[΄'’]?\s*περίοδος\s*[·—–:-]\s*[Α-ΩA-Z]+[΄'’]?\s*ενότητα)/i);
+  if (periodUnitPrefixMatch?.[1]) variants.push(periodUnitPrefixMatch[1]);
+
   const withoutChapterWord = raw
     .replace(/^\s*(?:κεφάλαιο|chapter)\s*/i, "")
     .trim();

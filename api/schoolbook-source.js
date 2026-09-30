@@ -2009,6 +2009,14 @@ function topicLabelCandidates(topic) {
   const unitPrefixMatch = raw.match(/^\s*((?:\d+\s*(?:η|ή)?\s*ενότητα)|(?:ενότητα\s*\d+))/i);
   if (unitPrefixMatch?.[1]) variants.push(unitPrefixMatch[1]);
 
+  // Same exact numeric unit, regardless of whether the official book writes
+  // "1η Ενότητα" or "Ενότητα 1η". This is deterministic normalization,
+  // not fuzzy matching: only the explicit unit number is compared.
+  const numericUnitMatch =
+    raw.match(/\bενότητα\s*(\d+)\s*(?:η|ή)?\b/i) ||
+    raw.match(/^\s*(\d+)\s*(?:η|ή)?\s*ενότητα\b/i);
+  if (numericUnitMatch?.[1]) variants.push(`ενότητα ${numericUnitMatch[1]}`);
+
   const periodUnitPrefixMatch = raw.match(/^\s*([Α-ΩA-Z]+[΄'’]?\s*περίοδος\s*[·—–:-]\s*[Α-ΩA-Z]+[΄'’]?\s*ενότητα)/i);
   if (periodUnitPrefixMatch?.[1]) variants.push(periodUnitPrefixMatch[1]);
 

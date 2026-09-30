@@ -182,6 +182,7 @@
       subjectId: subject.value, subject: subject.label,
       topicId: topic.value, topic: topic.label,
       contextText: document.getElementById("tutorContextBox")?.innerText?.trim() || "",
+      studyContext: window.AITutor?.getStudyContext?.() || null,
       conversation: tutorConversation(),
     };
   }
@@ -295,10 +296,42 @@
     return window.AITutor?.getProvider?.() === "puter" ? "puter" : "groq";
   }
 
-  async function callAI(prompt, maxTokens, temperature, task) {
+  async function loadOfficialStudySource(c) {
+    if (!c?.subjectId || !c?.topic) return null;
+    try {
+      const response = await fetch("/api/schoolbook-source?subject=" + encodeURIComponent(c.subjectId) + "&topic=" + encodeURIComponent(c.topic), {
+        headers: { "Accept": "application/json" }
+      });
+      const data = await response.json().catch(() => null);
+      if (response.ok && data?.grounded && data?.text) return data;
+      if (c.studyContext?.sourcePolicy === "official_required") {
+        const err = new Error(lang() === "en"
+          ? "A verified official schoolbook section is required for this study action."
+          : "Απαιτείται επαληθευμένη επίσημη ενότητα σχολικού βιβλίου για αυτή τη λειτουργία.");
+        err.code = "official_source_required";
+        throw err;
+      }
+      return null;
+    } catch (err) {
+      if (err?.code === "official_source_required") throw err;
+      if (c.studyContext?.sourcePolicy === "official_required") {
+        const wrapped = new Error(lang() === "en"
+          ? "The official schoolbook source could not be loaded safely."
+          : "Δεν φορτώθηκε με ασφάλεια η επίσημη σχολική πηγή.");
+        wrapped.code = "official_source_unavailable";
+        throw wrapped;
+      }
+      return null;
+    }
+  }
+
+  async function callAI(prompt, maxTokens, temperature, task, c, officialSource) {
     if (selectedProvider() === "puter") {
       if (!window.puter?.ai?.chat) throw new Error(tr("needConnect"));
-      return window.puter.ai.chat(prompt, {
+      const sourcePrompt = officialSource?.text
+        ? prompt + "\n\nOFFICIAL SCHOOLBOOK SOURCE — SOURCE FIRST. Base all factual claims on this source only. Preserve its terminology and do not fill gaps from model memory. If something is unsupported by the source, say so.\n\n" + officialSource.text
+        : prompt;
+      return window.puter.ai.chat(sourcePrompt, {
         model: MODEL,
         normalize: true,
         max_tokens: maxTokens,
@@ -311,9 +344,18 @@
       body: JSON.stringify({
         context: "Create accurate, age-appropriate learning material matching the requested structure.",
         prompt,
-        audience: location.pathname.includes("/parent/") ? "parent" : "high_student",
+        audience: officialSource ? "study_user" : (location.pathname.includes("/parent/") ? "parent" : "high_student"),
         task,
         activity: task,
+        grade: c?.grade || "",
+        subject: c?.subject || "",
+        subjectId: c?.subjectId || "",
+        topic: c?.topic || "",
+        studyContext: c?.studyContext || null,
+        documentText: officialSource?.text || "",
+        documentName: officialSource?.bookTitle || "",
+        documentKind: officialSource?.grounded ? "official_schoolbook" : "",
+        documentSourceUrl: officialSource?.sourceUrl || "",
       }),
     });
     const data = await response.json().catch(() => ({}));
@@ -475,13 +517,16 @@
     panel.querySelectorAll("[data-study-tool]").forEach((b) => { b.disabled = true; });
     setStatus(panel, type === "quiz" ? tr("generatingQuiz") : tr("generatingSlides"), false);
     try {
+      const officialSource = await loadOfficialStudySource(c);
       const prompt = type === "quiz" ? quizPrompt(c) : slidesPrompt(c);
       const examQuiz = type === "quiz" && isHighSchool(c);
       const response = await callAI(
         prompt,
         type === "quiz" ? (examQuiz ? 2200 : 1500) : 1400,
         examQuiz ? 0.18 : 0.25,
-        type
+        type,
+        c,
+        officialSource
       );
       if (type === "quiz") {
         const questions = parseQuiz(extractText(response)); saveCached(type, c, questions); renderQuiz(panel, questions, false);

@@ -74,7 +74,10 @@ try {
     {zone:"primary",grade:"st",id:"english-st-dimotikou"},
   ]);
 
-  const exactEnabled = new Set(["glossa-a-dimotikou","glossa-b-dimotikou","glossa-d-dimotikou"]);
+  const exactEnabled = new Set([
+    "glossa-a-dimotikou","glossa-b-dimotikou","glossa-c-dimotikou","glossa-d-dimotikou",
+    "glossa-e-dimotikou","science-st-dimotikou","istoria-d-dimotikou","english-st-dimotikou"
+  ]);
   let exactTotal = 0;
   let missingTotal = 0;
   for (const row of checks) {

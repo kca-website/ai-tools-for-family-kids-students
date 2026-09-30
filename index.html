@@ -348,6 +348,18 @@
   <link rel="stylesheet" href="/navigator-home.css" data-navigator-home="1" />
   <style id="navigatorHomeFirstPaintGuard">
     html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}
+    #homeBootSkeleton{display:none}
+    html.navigator-home-booting #mainContent{position:relative}
+    html.navigator-home-booting #homeBootSkeleton{display:block;position:absolute;left:0;right:0;top:28px;padding:0 20px;pointer-events:none}
+    #homeBootSkeleton i{display:block;border-radius:10px;background:linear-gradient(90deg,#e9eef4 25%,#f4f7fa 50%,#e9eef4 75%);background-size:200% 100%;animation:homeBootShimmer 1.2s linear infinite}
+    #homeBootSkeleton .t1{height:38px;width:min(640px,90%);margin-bottom:12px}
+    #homeBootSkeleton .t2{height:38px;width:min(440px,70%);margin-bottom:22px}
+    #homeBootSkeleton .l1{height:14px;width:min(560px,85%);margin-bottom:10px}
+    #homeBootSkeleton .l2{height:14px;width:min(420px,65%);margin-bottom:26px}
+    #homeBootSkeleton .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    #homeBootSkeleton .row i{height:150px}
+    @keyframes homeBootShimmer{to{background-position:-200% 0}}
+    @media (prefers-reduced-motion:reduce){#homeBootSkeleton i{animation:none}}
   </style>
   <!-- html2pdf.js ΔΕΝ φορτώνεται εδώ πια: μπλόκαρε το render σε κάθε επίσκεψη
        παρόλο που χρησιμοποιείται μόνο όταν ο χρήστης πατήσει "Κατέβασε PDF".
@@ -437,6 +449,7 @@
   </header>
 
   <main class="container" id="mainContent" tabindex="-1">
+    <div id="homeBootSkeleton" aria-hidden="true"><i class="t1"></i><i class="t2"></i><i class="l1"></i><i class="l2"></i><div class="row"><i></i><i></i><i></i></div></div>
 
     <!-- ΒΗΜΑ 1: Επιλογή ζώνης -->
     <section id="zoneSelectView">
@@ -740,35 +753,66 @@
 
   <script defer src="/data.js"></script>
   <script defer src="/curriculum-data.js"></script>
-  <script defer src="/quiz-data.js"></script>
-  <script defer src="/learning-paths-data.js"></script>
-  <script defer src="/curriculum-2026-2027-expansion.js"></script>
-  <script defer src="/general-subject-expansion-2026-2027.js"></script>
-  <script defer src="/official-curriculum-data.js"></script>
-  <script defer src="/official-annual-instructions-2026-2027.js"></script>
   <!-- curriculum/support sync verified 2026-09-18 · production-trigger -->
-  <script defer src="/gel-2026-2027-update.js"></script>
-  <script defer src="/september-2026-primary-tutor.js"></script>
-  <script defer src="/september-2026-language-tutor.js"></script>
-  <script defer src="/teacher-curriculum-epal-2026-2027.js"></script>
-  <script defer src="/teacher-curriculum-epal-c-specialties-2026-2027.js"></script>
-  <script defer src="/teacher-curriculum-epal-c-final-sectors-2026-2027.js"></script>
-  <script defer src="/teacher-curriculum-epal-panhellenic-2027.js"></script>
-  <script defer src="/epal-official-guidance-topics-2026-2027.js"></script>
-  <script defer src="/epal-student-topics-2026-2027.js"></script>
-  <script defer src="/epal-student-tutor-2026-2027.js"></script>
-  <script defer src="/guide-data.js"></script>
-  <script defer src="/accessibility-data.js"></script>
-  <script defer src="/greek-support-data.js"></script>
-  <script defer src="/environment-studies-data.js"></script>
-  <script defer src="/general-education-book-sections-2026-2027.js"></script>
-  <script defer src="/curriculum-resolver.js"></script>
-  <script defer src="/pdf-text-reader.js"></script>
-  <script defer src="/study-context.js"></script>
-  <script defer src="/tutor.js"></script>
+  <script>
+    /* Home performance: the home ("/") only needs data.js + app.js to paint. The heavy curriculum/quiz/tutor data (~3 MB) loads right after
+       the home is ready (or on the first click that leaves the home), so it no longer blocks first render. Every other path keeps the
+       original behaviour: the same scripts, in the same order, as parser-inserted defer scripts. */
+    (function(){
+      var HEAVY=["/quiz-data.js", "/learning-paths-data.js", "/curriculum-2026-2027-expansion.js", "/general-subject-expansion-2026-2027.js", "/official-curriculum-data.js", "/official-annual-instructions-2026-2027.js", "/gel-2026-2027-update.js", "/september-2026-primary-tutor.js", "/september-2026-language-tutor.js", "/teacher-curriculum-epal-2026-2027.js", "/teacher-curriculum-epal-c-specialties-2026-2027.js", "/teacher-curriculum-epal-c-final-sectors-2026-2027.js", "/teacher-curriculum-epal-panhellenic-2027.js", "/epal-official-guidance-topics-2026-2027.js", "/epal-student-topics-2026-2027.js", "/epal-student-tutor-2026-2027.js", "/guide-data.js", "/accessibility-data.js", "/greek-support-data.js", "/environment-studies-data.js", "/general-education-book-sections-2026-2027.js", "/curriculum-resolver.js", "/pdf-text-reader.js", "/study-context.js", "/tutor.js"];
+      var LATE=[["tool-audit", "/september-2026-tool-audit.js"], ["primary-tutor", "/september-2026-primary-tutor.js"], ["primary-quiz", "/september-2026-primary-quiz.js"], ["primary-simple-quiz", "/primary-simple-quiz.js"], ["language-diagnostics", "/september-2026-language-diagnostics.js"], ["language-tutor", "/september-2026-language-tutor.js"], ["epal-practice-map-v1", "/epal-practice-map.js"], ["special-education-diagnostic", "/special-education-diagnostic.js"], ["tutor-flashcards", "/tutor-flashcards.js"], ["tutor-study-tools", "/tutor-study-tools.js"], ["tutor-learning-support", "/tutor-learning-support.js"], ["tutor-feedback", "/tutor-feedback.js"], ["tutor-render-host", "/tutor-render-host.js"], ["tutor-mobile-compact", "/tutor-mobile-compact.js"], ["tutor-mobile-label-fix", "/tutor-mobile-label-fix.js"], ["report-link", "/report-link.js"]]; /* pwa.js runtime scripts that the home does not need to paint; pwa.js skips them on "/" and this loader adds them after HEAVY */
+      window.__aitools4kidsHomeLate=LATE.map(function(x){return x[0];});
+      var home=(location.pathname==="/"||location.pathname==="");
+      if(!home){
+        for(var i=0;i<HEAVY.length;i++) document.write('<script defer src="'+HEAVY[i]+'"><\/script>');
+        window.__aitools4kidsHomeLate=[];
+        return;
+      }
+      var promise=null;
+      function load(){
+        if(promise) return promise;
+        promise=new Promise(function(resolve){
+          var all=HEAVY.map(function(src){return [null,src];}).concat(LATE);
+          var pending=all.length;
+          all.forEach(function(x){
+            var s=document.createElement("script");
+            s.src=x[1]; s.async=false; /* parallel download, in-order execution */
+            if(x[0]) s.setAttribute("data-aitools4kids-runtime",x[0]);
+            s.onload=s.onerror=function(){ if(--pending===0){ window.__aitools4kidsHeavyLoaded=true; resolve(); } };
+            document.head.appendChild(s);
+          });
+        });
+        return promise;
+      }
+      window.__aitools4kidsLoadHeavy=load;
+      var started=false;
+      function start(){ if(started) return; started=true; (window.requestIdleCallback||function(f){setTimeout(f,50);})(load); }
+      var root=document.documentElement;
+      if(root.classList.contains("navigator-home-ready")) start();
+      else{
+        new MutationObserver(function(_,o){ if(root.classList.contains("navigator-home-ready")){ o.disconnect(); start(); } }).observe(root,{attributes:true,attributeFilter:["class"]});
+        setTimeout(start,6000);
+      }
+      /* Any click that could open a school zone waits for the data, then repeats itself. */
+      var replaying=false;
+      document.addEventListener("click",function(e){
+        if(window.__aitools4kidsHeavyLoaded||replaying) return;
+        var t=e.target&&e.target.closest?e.target.closest("a[href^='/primary'],a[href^='/middle'],a[href^='/high'],a[href='#'],.zone-card,#zoneGrid button,#homeV9Finder a"):null;
+        if(!t||t.closest("#langEl,#langEn")) return;
+        e.preventDefault(); e.stopImmediatePropagation();
+        load().then(function(){ replaying=true; try{ t.click(); } finally{ replaying=false; } });
+      },true);
+    })();
+  </script>
   <script defer src="/app.js"></script>
   <script defer src="/site-postfix.js"></script>
   <script defer src="/site-nav.js"></script>
+  <script>
+    /* Home only: start the home shell right after app.js instead of waiting for pwa.js to inject it (pwa.js skips scripts already present). */
+    if(location.pathname==="/"||location.pathname===""){
+      document.write('<script defer src="/pwa-core.js" data-aitools4kids-runtime="pwa-core"><\/script><script defer src="/navigator-home.js" data-aitools4kids-runtime="navigator-home"><\/script>');
+    }
+  </script>
   <script defer src="/pwa.js" data-aitools4kids-pwa="1"></script>
 
   <!-- Vercel Web Analytics -->

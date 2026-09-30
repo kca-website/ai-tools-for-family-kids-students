@@ -105,6 +105,8 @@
       if(id==="navigator-home" && !isHomepage()) return;
       if(id==="home-search" && !isHomepage()) return;
       if(id==="special-education-entry-analytics" && !isHomepage()) return;
+      // On the home, index.html loads these after the heavy data (see the loader in index.html); skip here to avoid loading them before it.
+      if(isHomepage() && Array.isArray(window.__aitools4kidsHomeLate) && window.__aitools4kidsHomeLate.includes(id)) return;
       if(document.querySelector(`script[data-aitools4kids-runtime="${id}"]`)) return;
       const script=document.createElement("script");
       script.src=src;

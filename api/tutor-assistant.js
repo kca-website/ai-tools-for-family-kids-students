@@ -374,8 +374,12 @@ function groundingSignals(text, sourceText) {
   // Proper-name-like tokens are the highest-value deterministic hallucination signal.
   // Sentence-initial teaching words are excluded through a small allow-list; ordinary
   // lowercase vocabulary is intentionally not checked to avoid false positives.
-  const proper = answer.match(/(?<![\p{L}\p{N}_])(?:[Α-ΩΆΈΉΊΌΎΏΪΫ][α-ωάέήίόύώϊϋΐΰ]{3,}|[A-Z][a-z]{3,})(?![\p{L}\p{N}_])/gu) || [];
-  for (const token of proper) {
+  const properPattern = /(?<![\p{L}\p{N}_])(?:[Α-ΩΆΈΉΊΌΎΏΪΫ][α-ωάέήίόύώϊϋΐΰ]{3,}|[A-Z][a-z]{3,})(?![\p{L}\p{N}_])/gu;
+  for (const match of answer.matchAll(properPattern)) {
+    const token = match[0];
+    const prefix = answer.slice(0, match.index).trimEnd();
+    const sentenceInitial = !prefix || /[.!?;:\n]$/.test(prefix);
+    if (sentenceInitial) continue; // ordinary sentence capitalization is not evidence of a named entity.
     const n = normalizeGroundingText(token);
     if (!n || common.has(n) || seen.has('term:'+n)) continue;
     if (!source.includes(n)) {

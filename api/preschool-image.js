@@ -136,7 +136,8 @@ module.exports = async function handler(req, res) {
 };
 
 function looksLikePersonalData(s) {
-  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)(?=$|[^\p{L}\p{N}_])/iu.test(String(s || ''));
+  const value = String(s || '').normalize('NFD').replace(/\p{M}+/gu, '').toLowerCase();
+  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλεφων\p{L}*|κινητ\p{L}*|διευθυν\p{L}*|σχολειο μου|ονομαζεται|λεγεται)(?=$|[^\p{L}\p{N}_])/iu.test(value);
 }
 
 function pictureSubject(idea) {
@@ -153,3 +154,5 @@ function pictureSubject(idea) {
   if (/ζω[αο]|animal/.test(theme)) return 'one friendly cartoon animal in a calm garden';
   return 'one friendly cartoon object inspired by the theme, with no humans';
 }
+
+module.exports._phase9Test = { looksLikePersonalData };

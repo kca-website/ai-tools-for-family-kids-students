@@ -16,8 +16,18 @@
   "use strict";
 
   // ---------- State ----------
+  const LANG_STORAGE_KEY = "aitools4kids_lang_v1";
+  function storedLanguage() {
+    try {
+      const value = localStorage.getItem(LANG_STORAGE_KEY);
+      return value === "en" ? "en" : "el";
+    } catch (_) {
+      return "el";
+    }
+  }
+
   const state = {
-    lang: "el",
+    lang: storedLanguage(),
     currentZone: null,
     currentRole: "guardian",
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "tutor" | "guide"
@@ -3153,6 +3163,7 @@ function renderToolGrid(pathTools, targetElement) {
   function setLang(lang) {
     if (lang !== "el" && lang !== "en") return;
     state.lang = lang;
+    try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (_) {}
     renderStaticStrings();
     renderZoneGrid();
     renderHeroQuizPicker();

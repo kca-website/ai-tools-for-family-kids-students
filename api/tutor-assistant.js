@@ -389,10 +389,14 @@ function groundingSignals(text, sourceText) {
   }
 
   // Numbers can materially change dates, quantities and scientific facts.
-  const numbers = answer.match(/(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)?(?![\p{L}\p{N}_])/gu) || [];
-  for (const token of numbers) {
+  const numberPattern = /(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)?(?![\p{L}\p{N}_])/gu;
+  for (const match of answer.matchAll(numberPattern)) {
+    const token = match[0];
     const n = token.replace(',', '.');
-    if (['1','2','3','4','5','8'].includes(n)) continue; // UI/task counters and requested card counts.
+    const nearby = normalizeGroundingText(answer.slice(Math.max(0, match.index - 28), match.index));
+    const taskCounter = /(?:ερωτηση|απαντηση|καρτα|βημα|question|answer|card|step)\s*$/.test(nearby) ||
+      /(?:απο|of)\s*$/.test(nearby) && Number(n) <= 20;
+    if (taskCounter) continue;
     if (seen.has('number:'+n)) continue;
     const variants = [token, token.replace('.', ','), token.replace(',', '.')];
     if (!variants.some(v => source.includes(normalizeGroundingText(v)))) {

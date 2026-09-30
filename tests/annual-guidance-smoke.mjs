@@ -59,7 +59,8 @@ try {
     session: Object.keys(sessionStorage),
     cookie: document.cookie,
   }));
-  assert.deepEqual(storage.local, []);
+  assert.deepEqual(storage.local.filter((key) => key !== 'aitools4kids_lang'), [], 'curriculum map must not persist data beyond the shared non-sensitive language preference');
+  assert.ok(storage.local.includes('aitools4kids_lang'), 'shared language preference may be stored locally');
   assert.deepEqual(storage.session, []);
   assert.equal(storage.cookie, '');
 

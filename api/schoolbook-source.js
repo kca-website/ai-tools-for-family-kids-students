@@ -2081,6 +2081,35 @@ function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
   const optionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
   while ((match = optionRe.exec(source))) addExact(match[1], match[2]);
 
+  // If a section is represented as an optgroup rather than a clickable page,
+  // match the optgroup label exactly (through the deterministic label candidates)
+  // and return only the official HTML option pages inside that one group.
+  // This preserves fail-closed behavior: zero or multiple matching groups resolve nothing.
+  if (!matches.length) {
+    const groupMatches = [];
+    const groupRe = /<optgroup\b[^>]*label\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/optgroup>/gi;
+    while ((match = groupRe.exec(source))) {
+      const groupLabelCandidates = topicLabelCandidates(decodeEntities(match[1] || ""));
+      if (!groupLabelCandidates.some((label) => wanted.has(label))) continue;
+
+      const urls = [];
+      const body = String(match[2] || "");
+      const groupOptionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
+      let optionMatch;
+      while ((optionMatch = groupOptionRe.exec(body))) {
+        const href = String(optionMatch[1] || "").trim();
+        if (!href || /^javascript:/i.test(href) || href.startsWith("#")) continue;
+        let absolute = "";
+        try { absolute = new URL(href, book.base).toString(); } catch (_) { continue; }
+        if (!officialLinkAllowed(absolute)) continue;
+        if (!/\.html?(?:$|[?#])/i.test(absolute)) continue;
+        if (!urls.includes(absolute)) urls.push(absolute);
+      }
+      if (urls.length) groupMatches.push(urls);
+    }
+    if (groupMatches.length === 1) return groupMatches[0];
+  }
+
   // Exact matching only. Ambiguity fails closed rather than choosing by similarity.
   return matches.length === 1 ? matches : [];
 }

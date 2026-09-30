@@ -23,7 +23,7 @@ test('CFG-01 uses modern routing so redirects and global headers can apply', () 
 
   const redirect = cfg.redirects?.find((r) => r.source === '/index.html');
   assert.equal(redirect?.destination, '/');
-  assert.equal(redirect?.statusCode, 301);
+  assert.equal(redirect?.permanent, true);
 
   const globalHeaders = cfg.headers?.find((r) => r.source === '/(.*)')?.headers || [];
   const headerNames = new Set(globalHeaders.map((h) => h.key.toLowerCase()));

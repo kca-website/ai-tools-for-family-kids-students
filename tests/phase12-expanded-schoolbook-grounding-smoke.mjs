@@ -13,7 +13,10 @@ const samples = [
   ["glossa-st-dimotikou","Ενότητα 1 — Ταξίδια, τόποι, μεταφορικά μέσα","ταξιδ"],
   ["istoria-e-dimotikou","Α΄ — Οι Έλληνες και οι Ρωμαίοι","ρωμα"],
   ["biologia-a-lykeiou","Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό","κύτταρ"],
-  ["english-a-gymnasiou","Unit 1 — Welcome","welcome"]
+  ["english-a-gymnasiou","Unit 1 — Welcome","welcome"],
+  ["english-d-dimotikou","Unit 1 — Back to school","school"],
+  ["english-e-dimotikou","Unit 1 — Internet friends around Europe","internet"],
+  ["istoria-c-dimotikou","Ενότητα 1 — Η δημιουργία του κόσμου","κόσμ"]
 ];
 
 for (const [subject, topic, signal] of samples) {

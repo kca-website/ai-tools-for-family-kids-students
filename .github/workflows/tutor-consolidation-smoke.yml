@@ -154,6 +154,9 @@ jobs:
       - name: Run Phase 11D EPAL grounding audit
         run: node tests/phase11d-epal-grounding-audit.mjs
 
+      - name: Run Phase 12 expanded schoolbook grounding
+        run: node tests/phase12-expanded-schoolbook-grounding-smoke.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

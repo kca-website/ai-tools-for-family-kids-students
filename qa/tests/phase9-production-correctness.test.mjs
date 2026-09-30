@@ -49,12 +49,14 @@ test('homepage boot guard is active before the first visual paint', () => {
   const html = read('index.html');
   const headStart = html.indexOf('<head>');
   const styles = html.indexOf('<link rel="stylesheet" href="/styles.css"');
-  const earlyBoot = html.indexOf('document.documentElement.classList.add("navigator-home-booting")');
+  const earlyBoot = html.indexOf('classList.add("navigator-home-booting")');
   const guardCss = html.indexOf('html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}');
 
   assert.ok(headStart >= 0 && earlyBoot > headStart, 'homepage boot class must be set in the document head');
   assert.ok(styles > earlyBoot, 'boot class must be set before external site styles can paint the legacy homepage');
   assert.ok(guardCss > earlyBoot, 'first-paint guard CSS must exist');
+  assert.match(html, /navigator-route-booting/, 'rewritten SPA routes need their own first-paint guard');
+  assert.match(html, /routeBootSkeleton/, 'rewritten SPA routes need a neutral boot cover');
 });
 
 test('view switcher uses button-group semantics instead of incomplete ARIA tabs', () => {

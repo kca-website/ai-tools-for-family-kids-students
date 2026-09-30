@@ -80,7 +80,6 @@ test.describe('static SEO (JS disabled)', () => {
     expect(home.ld.length).toBeGreaterThan(0);
   });
   test('hreflang EL↔EN alternates on pages that have a translation', async () => {
-    test.fail(true, 'FINDING F-15: no <link rel=alternate hreflang> anywhere; EN-only pages under /en/ have no EL twin link');
     const withAlt = rows.filter((r) => r.hreflang.length);
     expect(withAlt.length).toBeGreaterThan(0);
   });

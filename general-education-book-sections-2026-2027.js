@@ -963,9 +963,9 @@
 }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.6.0",
+    version:"2.7.0",
     schoolYear:"2026-2027",
-    get(id){ const row=rows[id]; return row?{sourceUrl:row.sourceUrl,sections:[...row.sections]}:null; },
+    get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))
   });
 })();

@@ -2012,6 +2012,12 @@ function topicLabelCandidates(topic) {
   const periodUnitPrefixMatch = raw.match(/^\s*([Α-ΩA-Z]+[΄'’]?\s*περίοδος\s*[·—–:-]\s*[Α-ΩA-Z]+[΄'’]?\s*ενότητα)/i);
   if (periodUnitPrefixMatch?.[1]) variants.push(periodUnitPrefixMatch[1]);
 
+  const greekLetterUnitPrefix = raw.match(/^\s*(ενότητα\s+[Α-ΩA-Z]+[΄'’]?)/i);
+  if (greekLetterUnitPrefix?.[1]) variants.push(greekLetterUnitPrefix[1]);
+
+  const greekLetterPrefix = raw.match(/^\s*([Α-ΩA-Z]+[΄'’]?)\s*[—–:-]/i);
+  if (greekLetterPrefix?.[1]) variants.push(greekLetterPrefix[1]);
+
   const withoutChapterWord = raw
     .replace(/^\s*(?:κεφάλαιο|chapter)\s*/i, "")
     .trim();

@@ -19,7 +19,9 @@ const samples = [
   ["istoria-c-dimotikou","Ενότητα 1 — Η δημιουργία του κόσμου","κόσμ"],
   ["english-g-gymnasiou","Unit 2 — Teen idols","teen"],
   ["istoria-st-dimotikou","Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)","αναγέννη"],
-  ["ekthesi-g-lykeiou","Κεφάλαιο 3 — Δίκαιος λόγος και άδικος λόγος","δίκαι"]
+  ["ekthesi-g-lykeiou","Κεφάλαιο 3 — Δίκαιος λόγος και άδικος λόγος","δίκαι"],
+  ["math-d-dimotikou","Α΄ Περίοδος · Β΄ Ενότητα","καλάβρυτα"],
+  ["english-c-dimotikou","Unit 1 — In the Fairytale Forest","forest"]
 ];
 
 for (const [subject, topic, signal] of samples) {
@@ -45,7 +47,7 @@ for (const [subject, topic] of [
   assert.notEqual(result.body?.grounded, true);
 }
 
-const stillMissing = await resolveOfficialSchoolbookSource("math-d-dimotikou","Α΄ Περίοδος · Α΄ Ενότητα");
-assert.equal(stillMissing.ok, false, "Synthetic Math D grouping must remain fail-closed until exact official section identity is mapped.");
+const mathDInvalid = await resolveOfficialSchoolbookSource("math-d-dimotikou","Α΄ Περίοδος · Δ΄ Ενότητα");
+assert.equal(mathDInvalid.ok, false, "Math D must reject a period/section grouping outside the verified 9-group map.");
 
 console.log("Phase 12 expanded exact schoolbook grounding passed.");

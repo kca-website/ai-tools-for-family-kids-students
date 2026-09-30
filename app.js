@@ -16,8 +16,18 @@
   "use strict";
 
   // ---------- State ----------
+  const LANG_STORAGE_KEY = "aitools4kids_lang";
+  function storedLanguage() {
+    try {
+      const value = localStorage.getItem(LANG_STORAGE_KEY);
+      return value === "en" ? "en" : "el";
+    } catch (_) {
+      return "el";
+    }
+  }
+
   const state = {
-    lang: "el",
+    lang: storedLanguage(),
     currentZone: null,
     currentRole: "guardian",
     currentView: "tools", // "tools" | "advanced" | "prompts" | "quiz" | "tutor" | "guide"
@@ -570,6 +580,8 @@
     });
     els.langElBtn.classList.toggle("active", state.lang === "el");
     els.langEnBtn.classList.toggle("active", state.lang === "en");
+    els.langElBtn.setAttribute("aria-pressed", String(state.lang === "el"));
+    els.langEnBtn.setAttribute("aria-pressed", String(state.lang === "en"));
     document.documentElement.lang = state.lang;
   }
 
@@ -1116,6 +1128,17 @@ function renderToolGrid(pathTools, targetElement) {
     els.viewTabQuiz.classList.toggle("active", state.currentView === "quiz");
     els.viewTabTutor.classList.toggle("active", state.currentView === "tutor");
     els.viewTabGuide.classList.toggle("active", state.currentView === "guide");
+    [
+      [els.viewTabTools, "tools"],
+      [els.viewTabAdvanced, "advanced"],
+      [els.viewTabPrompts, "prompts"],
+      [els.viewTabQuiz, "quiz"],
+      [els.viewTabTutor, "tutor"],
+      [els.viewTabGuide, "guide"],
+    ].forEach(([tab, view]) => {
+      tab.setAttribute("role", "tab");
+      tab.setAttribute("aria-selected", String(state.currentView === view));
+    });
     els.toolsView.hidden = state.currentView !== "tools";
     els.advancedView.hidden = state.currentView !== "advanced";
     els.promptsView.hidden = state.currentView !== "prompts";
@@ -3153,6 +3176,7 @@ function renderToolGrid(pathTools, targetElement) {
   function setLang(lang) {
     if (lang !== "el" && lang !== "en") return;
     state.lang = lang;
+    try { localStorage.setItem(LANG_STORAGE_KEY, lang); } catch (_) {}
     renderStaticStrings();
     renderZoneGrid();
     renderHeroQuizPicker();

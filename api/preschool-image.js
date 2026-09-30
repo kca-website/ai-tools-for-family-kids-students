@@ -1,3 +1,23 @@
+function browserRequestAllowed(req) {
+  const headers = req?.headers || {};
+  const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();
+  if (fetchSite === 'cross-site') return false;
+
+  const origin = String(headers.origin || headers.Origin || '').trim();
+  if (!origin) return true;
+
+  try {
+    const url = new URL(origin);
+    const host = url.hostname.toLowerCase();
+    if (url.protocol !== 'https:' && host !== 'localhost' && host !== '127.0.0.1') return false;
+    if (host === 'www.aitools4kids.gr' || host === 'aitools4kids.gr') return true;
+    if (host === 'localhost' || host === '127.0.0.1') return true;
+    return /^aitools4kids(?:-[a-z0-9-]+)*-kcawebsite\.vercel\.app$/.test(host);
+  } catch (_) {
+    return false;
+  }
+}
+
 module.exports = async function handler(req, res) {
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
   const token = process.env.CLOUDFLARE_AI_TOKEN;
@@ -13,6 +33,14 @@ module.exports = async function handler(req, res) {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'method_not_allowed', message: 'Method not allowed.' });
   }
+  if (!browserRequestAllowed(req)) {
+    return res.status(403).json({ error: 'cross_site_request_blocked', message: 'Cross-site requests are not allowed.' });
+  }
+  const contentType = String(req.headers?.['content-type'] || req.headers?.['Content-Type'] || '').toLowerCase();
+  if (contentType && !contentType.includes('application/json')) {
+    return res.status(415).json({ error: 'unsupported_media_type', message: 'Use application/json.' });
+  }
+
 
   if (!accountId || !token) {
     return res.status(503).json({ error: 'not_configured', message: 'Η δημιουργία εικόνας δεν είναι προσωρινά διαθέσιμη.' });
@@ -108,7 +136,7 @@ module.exports = async function handler(req, res) {
 };
 
 function looksLikePersonalData(s) {
-  return /@|https?:\/\/|\b\d{7,}\b|\b(email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)\b/i.test(s);
+  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)(?=$|[^\p{L}\p{N}_])/iu.test(String(s || ''));
 }
 
 function pictureSubject(idea) {

@@ -79,6 +79,20 @@ try {
 
   const overflow = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth));
   assert.ok(overflow <= 1, `mobile homepage has horizontal overflow: ${overflow}px`);
+
+  const smallTargets = await page.evaluate(() => [...document.querySelectorAll('button, a[href], select, input:not([type=hidden])')]
+    .filter((el) => el.offsetParent)
+    .map((el) => {
+      const r = el.getBoundingClientRect();
+      return {
+        text: (el.textContent || el.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 40),
+        width: Math.round(r.width),
+        height: Math.round(r.height),
+      };
+    })
+    .filter((item) => item.width < 24 || item.height < 24));
+  assert.ok(smallTargets.length < 6, `mobile homepage has too many targets below 24x24 CSS px: ${JSON.stringify(smallTargets.slice(0, 12))}`);
+
   assert.deepEqual(errors, [], `mobile homepage browser errors:\n${errors.join('\n')}`);
 
   // A standalone PWA can be restored directly on an internal route with no

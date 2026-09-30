@@ -1,0 +1,14 @@
+[
+  {
+    "id": "page-has-heading-one",
+    "impact": "moderate",
+    "help": "Page should contain a level-one heading",
+    "nodes": 1,
+    "sample": [
+      {
+        "target": "html",
+        "summary": "  Page must have a level-one heading"
+      }
+    ]
+  }
+]

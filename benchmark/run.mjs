@@ -211,10 +211,11 @@ function extractText(d) {
   return '';
 }
 function mockResponse(body) {
-  const sys = String(body.messages?.[0]?.content || '');
-  const text = /"cards"/.test(sys)
+  // Format instructions now live partly in the user-role request/context; the real model sees all messages.
+  const conversation = (body.messages || []).map((m) => String(m?.content || '')).join('\n\n');
+  const text = /"cards"/.test(conversation)
     ? JSON.stringify({ cards: Array.from({ length: 8 }, (_, i) => ({ q: 'Ερώτηση ' + (i + 1) + ';', a: 'Απάντηση ' + (i + 1) })) })
-    : /"steps"|πλάνο μελέτης/i.test(sys)
+    : /"steps"|πλάνο μελέτης/i.test(conversation)
       ? JSON.stringify({ title: 'Πλάνο', steps: [1, 2, 3].map(i => ({ title: 'Βήμα ' + i, action: 'Κάνε ' + i })) })
       : 'Mock απάντηση για τη μελέτη της ενότητας με αρκετό κείμενο ώστε να περάσει τον έλεγχο μήκους. Τι θυμάσαι από την ενότητα;';
   return new Response(JSON.stringify({ success: true, result: { response: text, usage: { prompt_tokens: 3000, completion_tokens: 600 } } }), { status: 200, headers: { 'Content-Type': 'application/json' } });

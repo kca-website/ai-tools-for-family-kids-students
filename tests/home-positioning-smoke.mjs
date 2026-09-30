@@ -6,7 +6,7 @@ const URL = 'http://127.0.0.1:4173/';
 const browser = await chromium.launch({ headless: true });
 
 const homepageSource = readFileSync('index.html', 'utf8');
-assert.match(homepageSource, /<html lang="el" class="navigator-home-booting">/, 'homepage boot class must exist before first paint');
+assert.doesNotMatch(homepageSource, /<html[^>]*navigator-home-booting/, 'static navigator-home-booting must not return: rewritten non-home routes must remain visible');
 assert.match(homepageSource, /navigatorHomeFirstPaintGuard/, 'homepage must ship an inline first-paint guard');
 assert.match(homepageSource, /navigator-home\.css[^>]*data-navigator-home="1"/, 'navigator CSS must load from the original head');
 assert.match(homepageSource, /id="homeV8Eng"[\s\S]*?167 σχολικές έννοιες[\s\S]*?Δες τις 167 έννοιες/, 'raw homepage HTML must expose the canonical GSL count to crawlers before JavaScript runs');

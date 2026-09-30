@@ -346,6 +346,9 @@ body.has-site-chrome .chrome-footer :focus-visible {
   gap: 10px;
 }
 .chrome-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   text-decoration: none;
 }
 .chrome-footer__links a:hover {
@@ -369,6 +372,11 @@ body.has-site-chrome .chrome-footer :focus-visible {
   display: block;
   width: 150px;
   height: auto;
+}
+.chrome-footer__thanks a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
 }
 .chrome-footer__thanks small {
   color: #CBD5E1;

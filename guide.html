@@ -44,7 +44,7 @@
   <script>
   (function(){
     'use strict';
-    var lang='el';
+    var lang=(function(){try{return localStorage.getItem('aitools4kids_lang')==='en'?'en':'el'}catch(_){return'el'}})();
     var content=document.getElementById('content');
     var copy={
       el:{k:'Οδηγός σωστής χρήσης',t:'Πώς χρησιμοποιώ σωστά το AI;',l:'Χρησιμοποίησε το AI για να καταλάβεις, να οργανώσεις και να ελέγξεις τη σκέψη σου. Όχι για να παραδώσεις έτοιμη εργασία που δεν έκανες εσύ.',top:'Ύλη & Εξάσκηση',back:'← Πίσω στην Ύλη & Εξάσκηση',foot:'Ανεξάρτητο εκπαιδευτικό έργο. Ο οδηγός αποτελεί μέρος του aitools4kids.gr.'},
@@ -61,6 +61,8 @@
       document.getElementById('footerText').textContent=c.foot;
       document.getElementById('langEl').classList.toggle('active',lang==='el');
       document.getElementById('langEn').classList.toggle('active',lang==='en');
+      document.getElementById('langEl').setAttribute('aria-pressed',String(lang==='el'));
+      document.getElementById('langEn').setAttribute('aria-pressed',String(lang==='en'));
       if(typeof GUIDE_DATA==='undefined'||!GUIDE_DATA[lang]){
         content.innerHTML='<div class="error">'+(lang==='el'?'Ο οδηγός δεν μπόρεσε να φορτωθεί.':'The guide could not be loaded.')+'</div>';
         return;
@@ -69,8 +71,8 @@
         return '<section class="section" id="'+s.id+'"><h2>'+s.title+'</h2>'+s.content+'</section>';
       }).join('');
     }
-    document.getElementById('langEl').addEventListener('click',function(){lang='el';render()});
-    document.getElementById('langEn').addEventListener('click',function(){lang='en';render()});
+    document.getElementById('langEl').addEventListener('click',function(){lang='el';try{localStorage.setItem('aitools4kids_lang',lang)}catch(_){}render()});
+    document.getElementById('langEn').addEventListener('click',function(){lang='en';try{localStorage.setItem('aitools4kids_lang',lang)}catch(_){}render()});
     render();
   })();
   </script>

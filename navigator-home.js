@@ -45,7 +45,7 @@
       aiTechText: "GPT-OSS 120B μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική.",
       aiTechLink: "Διαφάνεια AI →",
       aiPrimary: "Γονιός Δημοτικού",
-      aiMiddle: "Γυμνάσιο 13+",
+      aiMiddle: "Γονιός Γυμνασίου",
       aiHigh: "Λύκειο",
       aiSpecial: "Ειδικά σχολεία",
       needsTitle: "Τι θέλεις να κάνεις με AI;",
@@ -152,7 +152,7 @@
       aiTechText: "GPT-OSS 120B via Cloudflare Workers AI, with Groq as the fallback provider. Puter is an optional alternative.",
       aiTechLink: "AI transparency →",
       aiPrimary: "Primary parent",
-      aiMiddle: "Middle School 13+",
+      aiMiddle: "Middle School parent",
       aiHigh: "High School",
       aiSpecial: "Special schools",
       needsTitle: "What do you want to do with AI?",
@@ -515,9 +515,9 @@
             <p class="home-v9-way__links-label">${c.aiLinksLabel}</p>
             <div class="home-v8-helper-links home-v8-ai__links">
               <a href="/primary/guardian/tutor">${c.aiPrimary}</a>
-              <a href="/middle/student/tutor">${c.aiMiddle}</a>
+              <a href="/middle/guardian/tutor">${c.aiMiddle}</a>
               <a href="/high/student/tutor">${c.aiHigh}</a>
-              <a href="/middle/student/tutor">${c.aiSpecial}</a>
+              <a href="/special-education.html">${c.aiSpecial}</a>
             </div>
           </section>
         </div>

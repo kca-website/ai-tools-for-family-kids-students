@@ -502,10 +502,10 @@
       btn.disabled=true; status.textContent=isEn?"Preparing the response…":"Ετοιμάζω την απάντηση…"; result.innerHTML='<p class="guided__placeholder">'+(isEn?"Working with what you entered…":"Δουλεύω πάνω σε αυτό που έγραψες…")+'</p>';
       try{
         const r=await fetch("/api/tutor-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({
-          system:cfg.system,
+          context:cfg.system,
           prompt:cfg.prompts[mode.value]
             +(value?"\n\n"+(isEn?"User notes/question:\n":"Σημείωση/ερώτηση χρήστη:\n")+value:""),
-          audience:"study_user",mode:"organize",task:"guided_task",subject:cfg.subject,
+          audience:"study_user",mode:"organize",task:"guided_task",activity:kind,subject:cfg.subject,
           documentText:pdfText,
           documentName:attachedPdf?.name||""
         })});

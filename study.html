@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="aitools4kids.gr">
+  <meta property="og:title" content="AI Μελέτη — Προσωπικό πλάνο &amp; σημειώσεις | aitools4kids.gr">
+  <meta property="og:description" content="Δωρεάν χώρος μελέτης: διάλεξε πραγματική ενότητα από τον Ελληνικό Χάρτη Ύλης ή ανέβασε PDF σημειώσεων και συνέχισε με πλάνο, σύνοψη, flashcards, quiz και καθοδηγούμενη AI Βοήθεια.">
+  <meta property="og:image" content="https://www.aitools4kids.gr/social-preview-20260926.png">
+  <meta property="og:image:width" content="1204">
+  <meta property="og:image:height" content="644">
+  <meta property="og:image:alt" content="aitools4kids.gr — Μαθαίνω Έξυπνα με AI">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Μελέτη — Προσωπικό πλάνο &amp; σημειώσεις | aitools4kids.gr">
+  <meta name="twitter:description" content="Δωρεάν χώρος μελέτης: διάλεξε πραγματική ενότητα από τον Ελληνικό Χάρτη Ύλης ή ανέβασε PDF σημειώσεων και συνέχισε με πλάνο, σύνοψη, flashcards, quiz και καθοδηγούμενη AI Βοήθεια.">
+  <meta name="twitter:image" content="https://www.aitools4kids.gr/social-preview-20260926.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Μελέτη — Προσωπικό πλάνο & σημειώσεις | aitools4kids.gr</title>
@@ -177,12 +189,13 @@
 <script src="/study-context.js"></script>
 <script>
 (() => {
-  let lang='el', attached=null, currentOfficialSource=null;
+  let lang=(()=>{try{return localStorage.getItem('aitools4kids_lang')==='en'?'en':'el'}catch(_){return'el'}})(), attached=null, currentOfficialSource=null;
   const officialSourceCache=new Map();
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
   const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']]};
-  function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');populateGrades();}
-  $('elBtn').onclick=()=>{lang='el';localize()}; $('enBtn').onclick=()=>{lang='en';localize()};
+  function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();}
+  function saveLang(value){try{localStorage.setItem('aitools4kids_lang',value)}catch(_){}}
+  $('elBtn').onclick=()=>{lang='el';saveLang(lang);localize()}; $('enBtn').onclick=()=>{lang='en';saveLang(lang);localize()};
 
   function isEpal(){return $('zone').value==='high' && $('schoolType').value==='epal'}
   function refreshSchoolTypeFields(){
@@ -495,7 +508,7 @@
     try{
       const officialSource=attached?.text?null:await officialSchoolbookSource();
       const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-        system,prompt,audience:'study_user',task:'study_plan',mode:'organize',activity:'plan',
+        context:system,prompt,audience:'study_user',task:'study_plan',mode:'organize',activity:'plan',
         cacheEligible:!attached?.text&&!!officialSource?.grounded,
         grade,subject,subjectId:selectedSubjectId(),topic,
         studyContext:sharedStudyContext('plan'),
@@ -562,7 +575,7 @@
     const cfg=actionConfig(action);
     const officialSource=attached?.text?null:await officialSchoolbookSource();
     const payload={
-      system:cfg.system,
+      context:cfg.system,
       prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
       audience:'study_user',task:cfg.task,mode:cfg.mode,activity:action,
       cacheEligible:!promptOverride&&!attached?.text&&!!officialSource?.grounded,
@@ -751,7 +764,7 @@
       }
     }catch(err){
       $('aiOutput').textContent=err.message||String(err);
-      if(err.fallback==='puter'||err.code==='provider_limit')$('puterFallback').classList.remove('hidden');
+      if(err.fallback==='puter')$('puterFallback').classList.remove('hidden');
     }
     $('aiWorkspace').scrollIntoView({behavior:'smooth',block:'nearest'});
   }

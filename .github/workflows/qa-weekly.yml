@@ -1,0 +1,117 @@
+name: QA weekly – links + AI endpoints (production)
+
+# Weekly + manual. Checks the LIVE site: (1) external/internal link check (ΕΝΓ videos and tools catalogue reported separately),
+# (2) AI endpoints smoke (≤ 30 requests, 2 real model calls, no personal data), (3) security headers/redirects/CORS.
+# On failure it opens (or updates) ONE issue labelled `qa-weekly` and uploads the JSON reports as an artifact.
+# Never runs on PRs, never changes the site. Source: qa/ (see qa/README.md).
+on:
+  schedule:
+    - cron: "17 5 * * 1" # Mondays 05:17 UTC
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Site to test"
+        required: false
+        default: "https://www.aitools4kids.gr"
+      guardrails:
+        description: "Also run 2 guardrail probes (2 extra real model calls)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: qa-weekly
+  cancel-in-progress: false
+
+env:
+  BASE_URL: ${{ github.event.inputs.base_url || 'https://www.aitools4kids.gr' }}
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: qa
+    outputs:
+      links: ${{ steps.links.outcome }}
+      ai: ${{ steps.ai.outcome }}
+      headers: ${{ steps.headers.outcome }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: qa/package-lock.json
+      - name: Install QA dependencies (no browsers needed for these steps)
+        run: npm ci --no-audit --no-fund
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
+      - name: Link check (external + internal)
+        id: links
+        continue-on-error: true
+        run: node scripts/link-check.mjs --base="$BASE_URL"
+      - name: AI endpoints smoke (≤ 30 requests)
+        id: ai
+        continue-on-error: true
+        run: node scripts/ai-smoke.mjs --base="$BASE_URL" ${{ github.event.inputs.guardrails == 'true' && '--guardrails' || '' }}
+      - name: Security headers / redirects / CORS
+        id: headers
+        continue-on-error: true
+        run: node scripts/security-headers.mjs --base="$BASE_URL"
+      - name: Summarise
+        if: always()
+        run: |
+          {
+            echo "## QA weekly ($BASE_URL)"
+            echo "| Check | Result |"; echo "|---|---|"
+            echo "| Links | ${{ steps.links.outcome }} |"
+            echo "| AI endpoints | ${{ steps.ai.outcome }} |"
+            echo "| Security headers | ${{ steps.headers.outcome }} |"
+            for f in results/links-summary.json results/ai-smoke.json results/security-headers.json; do [ -f "$f" ] && { echo; echo "<details><summary>$f</summary>"; echo; echo '```json'; head -c 6000 "$f"; echo; echo '```'; echo "</details>"; }; done
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-weekly-results
+          path: |
+            qa/results/links-*.json
+            qa/results/ai-smoke.json
+            qa/results/security-headers.json
+          retention-days: 30
+      - name: Open / update issue when something failed
+        if: always() && (steps.links.outcome == 'failure' || steps.ai.outcome == 'failure' || steps.headers.outcome == 'failure')
+        uses: actions/github-script@v7
+        env:
+          LINKS: ${{ steps.links.outcome }}
+          AI: ${{ steps.ai.outcome }}
+          HEADERS: ${{ steps.headers.outcome }}
+        with:
+          script: |
+            const fs = require('fs');
+            const read = (f) => { try { return JSON.parse(fs.readFileSync(`qa/results/${f}`, 'utf8')); } catch { return null; } };
+            const links = read('links-summary.json'), ai = read('ai-smoke.json'), hdr = read('security-headers.json');
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const lines = [`Weekly QA run failed for ${process.env.BASE_URL} – [run](${runUrl}).`, '',
+              `| Check | Result |`, `|---|---|`, `| Links | ${process.env.LINKS} |`, `| AI endpoints | ${process.env.AI} |`, `| Security headers | ${process.env.HEADERS} |`, ''];
+            if (links) lines.push('**Links**', '```json', JSON.stringify(links.totals, null, 1), '```');
+            if (ai?.failures?.length) lines.push('**AI smoke failures**', ...ai.failures.map((f) => `- ${f}`));
+            if (ai?.warnings?.length) lines.push('**AI smoke warnings**', ...ai.warnings.map((f) => `- ${f}`));
+            if (hdr?.findings?.length) lines.push('**Security header findings**', ...hdr.findings.slice(0, 30).map((f) => `- ${f}`));
+            lines.push('', 'Reports (JSON) are attached to the run as the `qa-weekly-results` artifact. Broken ΕΝΓ links: `links-sign-language.json`; tools catalogue: `links-tools-catalog.json`.');
+            const body = lines.join('\n');
+            const title = 'QA weekly: failures on the live site';
+            const existing = await github.paginate(github.rest.issues.listForRepo, { ...context.repo, state: 'open', labels: 'qa-weekly', per_page: 20 });
+            if (existing.length) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: existing[0].number, body });
+            } else {
+              try { await github.rest.issues.createLabel({ ...context.repo, name: 'qa-weekly', color: 'b60205', description: 'Automated weekly QA failure' }); } catch (e) { /* label exists */ }
+              await github.rest.issues.create({ ...context.repo, title, body, labels: ['qa-weekly'] });
+            }
+      - name: Fail the job if any check failed
+        if: steps.links.outcome == 'failure' || steps.ai.outcome == 'failure' || steps.headers.outcome == 'failure'
+        run: exit 1

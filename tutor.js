@@ -2528,9 +2528,10 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            system: requestMessages[0]?.content || "",
+            context: requestMessages[0]?.content || "",
             prompt: requestMessages[1]?.content || "",
             task: studyAction === "flashcards" ? "flashcards" : (studyAction === "quiz" || studyAction === "weakspots" ? "quiz" : (studyAction === "summary" ? "guided_task" : "conversation")),
+            activity: studyAction || "",
             audience: isParentMode() ? "parent" : "high_student",
             mode: learningMode,
             grade: getSelectedGradeLabel(),
@@ -2825,7 +2826,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
                 <button type="button" class="tutor-animation-card__followup" id="tutorAnimationFollowup"></button>
               </div>
             </section>
-            <div class="tutor-messages" id="tutorMessages" ${staticClassroom ? "hidden" : ""}>
+            <div class="tutor-messages" id="tutorMessages" role="log" aria-live="polite" aria-relevant="additions text" ${staticClassroom ? "hidden" : ""}>
               <div class="tutor-empty" id="tutorEmptyState"><strong>${escapeHtml(tr("emptyTitle"))}</strong><br>${escapeHtml(parentMode ? tr("emptyParent") : tr("emptyStudent"))}</div>
             </div>
             <form class="tutor-composer" id="tutorForm" ${staticClassroom ? "hidden" : ""}>
@@ -2841,7 +2842,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
                 <span class="tutor-doc-upload__status" id="tutorPdfStatus" aria-live="polite"></span>
                 <button type="button" class="tutor-doc-upload__remove" id="tutorPdfRemove" hidden>${escapeHtml(tr("pdfRemove"))}</button>
               </div>
-              <textarea id="tutorInput" rows="4" disabled></textarea>
+              <textarea id="tutorInput" rows="4" aria-label="${escapeHtml(tr("placeholder"))}" disabled></textarea>
               <div class="tutor-voice-hint">${escapeHtml(isClassroomMode() ? tr("classroomVoiceHint") : tr("voiceHint"))}</div>
               <div class="tutor-composer__bottom">
                 <button type="button" class="tutor-btn tutor-btn--secondary" id="tutorSample">${escapeHtml(tr("sample"))}</button>

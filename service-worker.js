@@ -1,10 +1,13 @@
-/* AI Tools 4 Kids PWA service worker: v1.1.2 */
-const CACHE_NAME = "aitools4kids-pwa-v4";
+/* AI Tools 4 Kids PWA service worker: v1.1.3 */
+const CACHE_NAME = "aitools4kids-pwa-v5";
 const CORE = [
   "/",
   "/styles.css",
   "/manifest.webmanifest",
-  "/assets/icons/app-icon.svg"
+  "/assets/icons/app-icon.svg",
+  "/assets/icons/app-icon-192.png",
+  "/assets/icons/app-icon-512.png",
+  "/assets/icons/apple-touch-icon.png"
 ];
 
 /*
@@ -72,6 +75,8 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname === "/service-worker.js") return;
+  // Dynamic API responses must never be stored in Cache Storage.
+  if (url.pathname.startsWith("/api/")) return;
 
   if (request.mode === "navigate") {
     event.respondWith(networkFirst(request));

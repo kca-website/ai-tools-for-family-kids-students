@@ -1,0 +1,11 @@
+{
+  "claimed": {
+    "routes": 93,
+    "topics": 313
+  },
+  "iterated": {
+    "routes": 87,
+    "topics": 1073
+  },
+  "empty": []
+}

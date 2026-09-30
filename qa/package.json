@@ -1,0 +1,29 @@
+{
+  "name": "aitools4kids-qa",
+  "private": true,
+  "version": "1.0.0",
+  "description": "QA suite for aitools4kids.gr (read-only against the site code)",
+  "type": "module",
+  "scripts": {
+    "qa": "node scripts/run-qa.mjs",
+    "smoke": "node scripts/run-qa.mjs --smoke",
+    "qa:lighthouse": "node scripts/run-qa.mjs --lighthouse",
+    "inventory": "node scripts/inventory.mjs",
+    "links": "node scripts/link-check.mjs",
+    "links:sl": "node scripts/link-check.mjs --only=sl",
+    "links:tools": "node scripts/link-check.mjs --only=tools",
+    "ai-smoke": "node scripts/ai-smoke.mjs",
+    "headers": "node scripts/security-headers.mjs",
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "test:api": "node --test tests/api-handlers.mock.test.mjs tests/link-check.selftest.mjs tests/ai-smoke.selftest.mjs",
+    "e2e": "playwright test --project=chromium-desktop --project=chromium-mobile375"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@playwright/test": "1.56.1",
+    "cheerio": "^1.0.0",
+    "lighthouse": "^12.0.0",
+    "chrome-launcher": "^1.1.0"
+  },
+  "dependencies": {}
+}

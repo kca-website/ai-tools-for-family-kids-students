@@ -1,0 +1,47 @@
+{
+  "perPage": {
+    "/": [
+      "fonts.googleapis.com",
+      "cdn.jsdelivr.net"
+    ],
+    "/primary/guardian/tools": [
+      "fonts.googleapis.com",
+      "cdn.jsdelivr.net",
+      "www.google.com"
+    ],
+    "/middle/student/tools": [
+      "fonts.googleapis.com",
+      "cdn.jsdelivr.net",
+      "www.google.com"
+    ],
+    "/study.html": [
+      "fonts.googleapis.com"
+    ],
+    "/sign-language.html": [
+      "fonts.googleapis.com",
+      "commons.wikimedia.org"
+    ],
+    "/xartis-ylis.html": [
+      "fonts.googleapis.com"
+    ],
+    "/teacher-assistant.html": [
+      "fonts.googleapis.com"
+    ],
+    "/privacy-policy.html": [
+      "fonts.googleapis.com",
+      "cdn.jsdelivr.net"
+    ],
+    "/tools/chatgpt.html": [
+      "fonts.googleapis.com"
+    ]
+  },
+  "disclosed": {
+    "cdn.jsdelivr.net": true,
+    "fonts.googleapis.com": false,
+    "fonts.gstatic.com": false,
+    "www.google.com": false,
+    "commons.wikimedia.org": false,
+    "upload.wikimedia.org": false,
+    "js.puter.com": true
+  }
+}

@@ -136,6 +136,9 @@ jobs:
       - name: Run Phase 11 objective coverage audit
         run: node tests/phase11-coverage-audit.mjs
 
+      - name: Run Phase 11B additional Gymnasium schoolbook grounding
+        run: node tests/phase11b-gymnasium-grounding-smoke.mjs
+
       - name: Run Phase 11A Primary schoolbook grounding
         run: node tests/phase11-primary-schoolbook-grounding-smoke.mjs
 

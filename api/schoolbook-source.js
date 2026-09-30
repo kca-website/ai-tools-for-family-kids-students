@@ -22,6 +22,54 @@ function browserRequestAllowed(req) {
 // Official-book grounding coverage expands incrementally from verified HTML section patterns.
 
 const BOOKS = {
+  "fysiki-agogi-a-gymnasiou": {
+    title: "Φυσική Αγωγή Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "fysiki-agogi-b-gymnasiou": {
+    title: "Φυσική Αγωγή Β΄ Γυμνασίου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "fysiki-agogi-c-gymnasiou": {
+    title: "Φυσική Αγωγή Γ΄ Γυμνασίου",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "technologia-b-gymnasiou": {
+    title: "Τεχνολογία Β΄ Γυμνασίου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2194/Technologia_B-Gymnasiou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "pliroforiki-a-lykeiou": {
     title: "Εφαρμογές Πληροφορικής Α΄ Λυκείου",
     grade: "a",

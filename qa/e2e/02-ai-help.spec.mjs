@@ -133,6 +133,15 @@ test.describe('AI Help (mocked API)', () => {
     test.info().annotations.push({ type: 'middle-student-tutor', description: (await page.locator('#tutorInput').count()) ? 'AI help textarea present for Gymnasio student (13+ per policy text)' : 'not available' });
   });
 
+  test('homepage AI links use only supported routes', async ({ page }) => {
+    await page.goto('/');
+    const middle = page.locator('.home-v8-ai__links a', { hasText: 'Γονιός Γυμνασίου' });
+    const special = page.locator('.home-v8-ai__links a', { hasText: 'Ειδικά σχολεία' });
+    await expect(middle).toHaveAttribute('href', '/middle/guardian/tutor');
+    await expect(special).toHaveAttribute('href', '/special-education.html');
+    await expect(page.locator('.home-v8-ai__links a[href="/middle/student/tutor"]')).toHaveCount(0);
+  });
+
   test('personal data warning is visible next to the input', async ({ page }) => {
     await openTutor(page);
     await expect(page.locator('body')).toContainText(/Μην εισάγεις προσωπικά ή ευαίσθητα δεδομένα/);

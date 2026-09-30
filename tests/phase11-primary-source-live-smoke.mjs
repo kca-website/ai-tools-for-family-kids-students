@@ -40,10 +40,9 @@ for (const sample of samples) {
 }
 
 for (const unsupported of [
-  ["glossa-a-dimotikou","2η Ενότητα — Η παρέα"],
-  ["glossa-b-dimotikou","24 — Να σου πω τι έμαθα;"],
-  ["science-st-dimotikou","Ενέργεια"],
-  ["glossa-a-dimotikou","Ανύπαρκτη ενότητα"]
+  ["glossa-a-dimotikou","Ανύπαρκτη ενότητα"],
+  ["glossa-b-dimotikou","99 — Ανύπαρκτη ενότητα"],
+  ["science-st-dimotikou","Ανύπαρκτη ενότητα"]
 ]) {
   const result = await withTimeout(resolveOfficialSchoolbookSource(unsupported[0], unsupported[1]), 30000, unsupported.join(" / "));
   assert.equal(result.ok, false, unsupported.join(" / ") + " must fail closed until an exact source mapping exists");

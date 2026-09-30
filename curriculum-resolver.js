@@ -173,6 +173,8 @@
     const catalog=subject.catalogSubject;
     const quiz=subject.quiz;
     const official=subject.officialCurriculum;
+    const bookSections=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(subject.quizId||subject.id)||null;
+    const exactGroundedBookSections=bookSections?.groundingStatus==="schoolbook-source-exact";
     let preferCurrentCatalogTopics=false;
     if(catalog){
       const status=catalogTopicStatus(catalog);
@@ -190,7 +192,9 @@
         c.coverageStatus==="panhellenic-2027-detailed-map"
       );
       preferCurrentCatalogTopics = currentMapped && (catalog.topics||[]).some((t)=>!t?.specialSupportAction);
-      const visibleCatalogTopics=(catalog.topics||[]).filter((t)=>currentMapped || t?.specialSupportAction);
+      const visibleCatalogTopics=exactGroundedBookSections
+        ? (catalog.topics||[]).filter((t)=>t?.specialSupportAction)
+        : (catalog.topics||[]).filter((t)=>currentMapped || t?.specialSupportAction);
       visibleCatalogTopics.forEach((t)=>rows.push(Object.assign({},t,{
         id:t.id || (catalog.id+".topic."+rows.length),
         status:t.status||status,
@@ -200,8 +204,7 @@
         sourceLabelEn:c.sourceLabelEn||c.coverageLabelEn||""
       })));
     }
-    const bookSections=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(subject.quizId||subject.id)||null;
-    if(bookSections?.sections?.length && !preferCurrentCatalogTopics){
+    if(bookSections?.sections?.length && (!preferCurrentCatalogTopics || exactGroundedBookSections)){
       bookSections.sections.forEach((label,i)=>rows.push({
         id:(subject.quizId||subject.id)+".verified-book-section-"+(i+1),
         labelEl:label,labelEn:label,

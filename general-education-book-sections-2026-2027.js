@@ -17,6 +17,11 @@
     },
     "glossa-a-dimotikou":{
       sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/index.html",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "1η Ενότητα — Πού είναι ο Άρης;",
         "2η Ενότητα — Η παρέα",
@@ -32,6 +37,11 @@
     },
     "glossa-b-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "1 — Στο δρόμο για το σχολείο",
         "2 — Με το «σεις» και με «σας»",
@@ -61,6 +71,11 @@
     },
     "glossa-c-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Πάλι μαζί!",
         "Στο σπίτι και στη γειτονιά",
@@ -122,6 +137,11 @@
     },
     "glossa-d-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "1η Ενότητα — Ένα ακόμα σκαλί",
         "2η Ενότητα — Ρώτα το νερό... τι τρέχει",
@@ -175,6 +195,11 @@
     },
     "glossa-e-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Ενότητα 1 — Ο φίλος μας το περιβάλλον",
         "Ενότητα 2 — Η ζωή στην πόλη",
@@ -208,6 +233,11 @@
     },
     "istoria-d-dimotikou":{
       sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Γεωμετρικά Χρόνια",
         "Αρχαϊκά Χρόνια",
@@ -276,6 +306,11 @@
     },
     "english-st-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Unit 1 — Our Multicultural Class",
         "Unit 2 — Going shopping",

@@ -16,7 +16,8 @@ const samples = [
   ["english-a-gymnasiou","Unit 1 — Welcome","welcome"],
   ["english-d-dimotikou","Unit 1 — Back to school","school"],
   ["english-e-dimotikou","Unit 1 — Internet friends around Europe","internet"],
-  ["istoria-c-dimotikou","Ενότητα 1 — Η δημιουργία του κόσμου","κόσμ"]
+  ["istoria-c-dimotikou","Ενότητα 1 — Η δημιουργία του κόσμου","κόσμ"],
+  ["english-g-gymnasiou","Unit 2 — Teen idols","teen"]
 ];
 
 for (const [subject, topic, signal] of samples) {

@@ -3265,6 +3265,15 @@ function renderToolGrid(pathTools, targetElement) {
     renderCurrentRoute();
     applyQuizDeepLink();
 
+    // Rewritten SPA routes share index.html. Keep the neutral boot cover until
+    // the requested route has actually been rendered, then reveal on the next frame.
+    if (document.documentElement.classList.contains("navigator-route-booting")) {
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove("navigator-route-booting");
+        document.documentElement.classList.add("navigator-route-ready");
+      });
+    }
+
     // Back/forward browser buttons.
     window.addEventListener("popstate", () => {
       restoreStateFromPath(location.pathname);

@@ -271,6 +271,29 @@ const BOOKS = {
     lastVerified: "2026-09-30",
     annualScopeVerified: false
   },
+  "math-d-dimotikou": {
+    title: "Μαθηματικά Δ΄ Δημοτικού",
+    grade: "d",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+    mode: "mathDPeriodSection",
+    sectionLabels: Object.freeze([
+      "Α΄ Περίοδος · Α΄ Ενότητα",
+      "Α΄ Περίοδος · Β΄ Ενότητα",
+      "Α΄ Περίοδος · Γ΄ Ενότητα",
+      "Β΄ Περίοδος · Α΄ Ενότητα",
+      "Β΄ Περίοδος · Β΄ Ενότητα",
+      "Β΄ Περίοδος · Γ΄ Ενότητα",
+      "Γ΄ Περίοδος · Α΄ Ενότητα",
+      "Γ΄ Περίοδος · Β΄ Ενότητα",
+      "Γ΄ Περίοδος · Γ΄ Ενότητα"
+    ]),
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "math-e-dimotikou": {
     title: "Μαθηματικά Ε΄ Δημοτικού",
     grade: "e",
@@ -306,6 +329,30 @@ const BOOKS = {
       "Ενότητα 4 — Συλλογή και επεξεργασία δεδομένων",
       "Ενότητα 5 — Μετρήσεις - Μοτίβα",
       "Ενότητα 6 — Γεωμετρία"
+    ]),
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "english-c-dimotikou": {
+    title: "Αγγλικά Γ΄ Δημοτικού — Magic Book 2",
+    grade: "c",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+    mode: "linkedSection",
+    sectionLabels: Object.freeze([
+      "Pre-Unit — Magic Letters",
+      "Unit 1 — In the Fairytale Forest",
+      "Unit 2 — The story of Bella the cat",
+      "Unit 3 — The story of Pinocchio",
+      "Unit 4 — The wind and the sun",
+      "Unit 5 — Lusy's story",
+      "Unit 6 — Beauty and the Beast",
+      "Unit 7 — Planet Earth",
+      "Unit 8 — Our World",
+      "Extra Unit — Special days"
     ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
@@ -1850,6 +1897,29 @@ function clean(value, max) {
   return String(value || "").trim().slice(0, max);
 }
 
+function resolveMathDPeriodSectionUrls(topic) {
+  const key = normalize(topic);
+  const ranges = new Map([
+    [normalize("Α΄ Περίοδος · Α΄ Ενότητα"), [1, 7, 1]],
+    [normalize("Α΄ Περίοδος · Β΄ Ενότητα"), [8, 14, 1]],
+    [normalize("Α΄ Περίοδος · Γ΄ Ενότητα"), [15, 20, 1]],
+    [normalize("Β΄ Περίοδος · Α΄ Ενότητα"), [21, 26, 2]],
+    [normalize("Β΄ Περίοδος · Β΄ Ενότητα"), [27, 34, 2]],
+    [normalize("Β΄ Περίοδος · Γ΄ Ενότητα"), [35, 40, 2]],
+    [normalize("Γ΄ Περίοδος · Α΄ Ενότητα"), [41, 46, 3]],
+    [normalize("Γ΄ Περίοδος · Β΄ Ενότητα"), [47, 51, 3]],
+    [normalize("Γ΄ Περίοδος · Γ΄ Ενότητα"), [52, 56, 3]]
+  ]);
+  const range = ranges.get(key);
+  if (!range) return [];
+  const [start, end, period] = range;
+  const base = BOOKS["math-d-dimotikou"].base;
+  return Array.from({ length: end - start + 1 }, (_, i) => {
+    const chapter = start + i;
+    return new URL("index" + period + "_" + chapter + ".html", base).toString();
+  });
+}
+
 function resolveHistorySTUnitUrls(topic) {
   const wanted = normalize(topic);
   const unitMap = [
@@ -1873,6 +1943,10 @@ function resolveHistorySTUnitUrls(topic) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "math-d-dimotikou" && sectionIsAllowlisted(BOOKS[subject], topic)) {
+    return resolveMathDPeriodSectionUrls(topic);
+  }
 
   if (subject === "istoria-st-dimotikou" && sectionIsAllowlisted(BOOKS[subject], topic)) {
     return resolveHistorySTUnitUrls(topic);
@@ -3045,6 +3119,7 @@ module.exports._test = Object.freeze({
   selectEnglishBUnitText,
   resolveSectionPath,
   resolveDirectSourceUrls,
+  resolveMathDPeriodSectionUrls,
   resolveHistorySTUnitUrls,
   topicLabelCandidates,
   resolveLinkedSectionUrlsFromHtml,

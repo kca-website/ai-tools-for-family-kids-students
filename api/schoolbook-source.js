@@ -202,6 +202,138 @@ const BOOKS = {
     lastVerified: "2026-09-30",
     annualScopeVerified: false
   },
+  "math-a-dimotikou": {
+    title: "Μαθηματικά Α΄ Δημοτικού",
+    grade: "a",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "math-b-dimotikou": {
+    title: "Μαθηματικά Β΄ Δημοτικού",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "math-c-dimotikou": {
+    title: "Μαθηματικά Γ΄ Δημοτικού",
+    grade: "c",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "math-d-dimotikou": {
+    title: "Μαθηματικά Δ΄ Δημοτικού",
+    grade: "d",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "math-e-dimotikou": {
+    title: "Μαθηματικά Ε΄ Δημοτικού",
+    grade: "e",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "math-st-dimotikou": {
+    title: "Μαθηματικά ΣΤ΄ Δημοτικού",
+    grade: "st",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "science-e-dimotikou": {
+    title: "Φυσικά Ε΄ Δημοτικού",
+    grade: "e",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "glossa-st-dimotikou": {
+    title: "Γλώσσα ΣΤ΄ Δημοτικού",
+    grade: "st",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "istoria-e-dimotikou": {
+    title: "Ιστορία Ε΄ Δημοτικού",
+    grade: "e",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "biologia-a-lykeiou": {
+    title: "Βιολογία Α΄ Λυκείου",
+    grade: "a",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "english-a-gymnasiou": {
+    title: "Αγγλικά Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "istoria-b-gymnasiou": {
     title: "Μεσαιωνική και Νεότερη Ιστορία Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2198/Istoria_B-Gymnasiou_html-empl/",
@@ -1349,6 +1481,9 @@ module.exports = async function handler(req, res) {
   if (!directUrls.length && book.mode === "linkedSection") {
     directUrls = await resolveLinkedSectionUrls(book, topic);
   }
+  if (!directUrls.length && book.mode === "fullBookSection") {
+    directUrls = await resolveFullBookSectionUrls(book, topic);
+  }
   const path = directUrls.length ? "__direct__" : resolveSectionPath(book.mode, topic);
   if (book.officialSourceRequired && !directUrls.length && !path) {
     return res.status(404).json({
@@ -1386,6 +1521,7 @@ module.exports = async function handler(req, res) {
         });
       }
       const needsFullDirectText =
+        book.mode === "fullBookSection" ||
         subject === "english-b-gymnasiou" ||
         (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8) ||
         (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic));
@@ -1424,9 +1560,11 @@ module.exports = async function handler(req, res) {
     }
 
     const scoped = applyCurriculumTextScope(subject, topic, combinedText);
-    const useful = subject === "english-b-gymnasiou"
-      ? selectEnglishBUnitText(scoped.text, topic)
-      : (book.multi ? scoped.text : selectUsefulText(scoped.text, topic));
+    const useful = book.mode === "fullBookSection"
+      ? selectFullBookSectionText(scoped.text, topic)
+      : (subject === "english-b-gymnasiou"
+          ? selectEnglishBUnitText(scoped.text, topic)
+          : (book.multi ? scoped.text : selectUsefulText(scoped.text, topic)));
     const sourceUrl = sourceUrls[0] || book.base;
 
     if (useful.length < 500) {
@@ -2015,6 +2153,77 @@ async function resolveLinkedSectionUrls(book, topic) {
   return rootHtml ? resolveLinkedSectionUrlsFromHtml(book, topic, rootHtml) : [];
 }
 
+
+function sectionOrdinal(topic) {
+  const value = normalize(topic);
+  let match = value.match(/^(\d+)\s*η?\s*ενοτητα\b/);
+  if (match) return { kind: "unit", number: Number(match[1]) };
+  match = value.match(/^ενοτητα\s*(\d+)\s*η?\b/);
+  if (match) return { kind: "unit", number: Number(match[1]) };
+  match = value.match(/^unit\s*(\d+)\b/);
+  if (match) return { kind: "unit-en", number: Number(match[1]) };
+  return null;
+}
+
+function fullBookSectionMarkerRegex(identity) {
+  if (!identity?.number) return null;
+  const n = String(identity.number);
+  if (identity.kind === "unit-en") return new RegExp("\\bunit\\s+" + n + "\\b", "i");
+  return new RegExp("(?:\\bενοτητα\\s+" + n + "\\s*η?\\b|\\b" + n + "\\s*η?\\s+ενοτητα\\b)", "i");
+}
+
+function fullBookTopicKeywords(topic) {
+  const normalized = normalize(topic)
+    .replace(/^(?:\d+\s*η?\s*ενοτητα|ενοτητα\s*\d+\s*η?|unit\s*\d+)\s*/, "");
+  const stop = new Set(["και","των","τις","της","στο","στη","στην","για","με","the","and","of","in"]);
+  return normalized.split(" ").filter((word) => word.length >= 4 && !stop.has(word)).slice(0, 10);
+}
+
+function locateFullBookSection(text, topic) {
+  const full = String(text || "");
+  const normalized = normalize(full);
+  const identity = sectionOrdinal(topic);
+  const markerRe = fullBookSectionMarkerRegex(identity);
+  if (!identity || !markerRe) return null;
+
+  const marker = markerRe.exec(normalized);
+  if (!marker) return null;
+
+  const start = marker.index;
+  const keywords = fullBookTopicKeywords(topic);
+  const verifyWindow = normalized.slice(start, Math.min(normalized.length, start + 1800));
+  const required = Math.min(keywords.length, keywords.length <= 2 ? keywords.length : 2);
+  const hits = keywords.filter((word) => verifyWindow.includes(word)).length;
+  if (required > 0 && hits < required) return null;
+
+  const nextIdentity = { ...identity, number: identity.number + 1 };
+  const nextRe = fullBookSectionMarkerRegex(nextIdentity);
+  const tail = normalized.slice(start + Math.max(1, marker[0].length));
+  const next = nextRe ? nextRe.exec(tail) : null;
+  const end = next ? start + Math.max(1, marker[0].length) + next.index : Math.min(normalized.length, start + 52000);
+
+  // normalize() removes punctuation/diacritics but preserves character order closely
+  // enough for a generous original-text slice. Clamp and add a small margin.
+  return {
+    start: Math.max(0, start - 300),
+    end: Math.min(full.length, end + 300)
+  };
+}
+
+function selectFullBookSectionText(text, topic) {
+  const range = locateFullBookSection(text, topic);
+  if (!range) return "";
+  return String(text || "").slice(range.start, range.end).trim().slice(0, 42000);
+}
+
+async function resolveFullBookSectionUrls(book, topic) {
+  if (!book?.base || !officialLinkAllowed(book.base)) return [];
+  const html = await fetchOfficialHtml(book.base);
+  if (!html) return [];
+  const text = htmlToText(html);
+  return locateFullBookSection(text, topic) ? [book.base] : [];
+}
+
 async function discoverUnitPages(book, prefix) {
   const rootHtml = await fetchOfficialHtml(book.base);
   if (!rootHtml) return [];
@@ -2464,6 +2673,9 @@ module.exports._test = Object.freeze({
   topicLabelCandidates,
   resolveLinkedSectionUrlsFromHtml,
   resolveExplicitSectionUrls,
+  sectionOrdinal,
+  locateFullBookSection,
+  selectFullBookSectionText,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,

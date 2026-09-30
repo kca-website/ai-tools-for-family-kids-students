@@ -238,18 +238,6 @@ const BOOKS = {
     lastVerified: "2026-09-30",
     annualScopeVerified: false
   },
-  "math-d-dimotikou": {
-    title: "Μαθηματικά Δ΄ Δημοτικού",
-    grade: "d",
-    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
-    mode: "fullBookSection",
-    officialSourceRequired: true,
-    schoolYear: "2026-2027",
-    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
-    mappingStatus: "official-book-section-grounded",
-    lastVerified: "2026-09-30",
-    annualScopeVerified: false
-  },
   "math-e-dimotikou": {
     title: "Μαθηματικά Ε΄ Δημοτικού",
     grade: "e",
@@ -267,6 +255,14 @@ const BOOKS = {
     grade: "st",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
     mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "Ενότητα 1 — Αριθμοί και Πράξεις",
+      "Ενότητα 2 — Εξισώσεις",
+      "Ενότητα 3 — Λόγοι - αναλογίες",
+      "Ενότητα 4 — Συλλογή και επεξεργασία δεδομένων",
+      "Ενότητα 5 — Μετρήσεις - Μοτίβα",
+      "Ενότητα 6 — Γεωμετρία"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
@@ -1561,7 +1557,7 @@ module.exports = async function handler(req, res) {
 
     const scoped = applyCurriculumTextScope(subject, topic, combinedText);
     const useful = book.mode === "fullBookSection"
-      ? selectFullBookSectionText(scoped.text, topic)
+      ? selectFullBookSectionText(scoped.text, topic, book)
       : (subject === "english-b-gymnasiou"
           ? selectEnglishBUnitText(scoped.text, topic)
           : (book.multi ? scoped.text : selectUsefulText(scoped.text, topic)));
@@ -2165,53 +2161,112 @@ function sectionOrdinal(topic) {
   return null;
 }
 
-function fullBookSectionMarkerRegex(identity) {
+function fullBookSectionMarkerRegex(identity, global = false) {
   if (!identity?.number) return null;
   const n = String(identity.number);
-  if (identity.kind === "unit-en") return new RegExp("\\bunit\\s+" + n + "\\b", "i");
-  return new RegExp("(?:\\bενοτητα\\s+" + n + "\\s*η?\\b|\\b" + n + "\\s*η?\\s+ενοτητα\\b)", "i");
+  const flags = global ? "gi" : "i";
+  if (identity.kind === "unit-en") return new RegExp("\\bunit\\s+" + n + "\\b", flags);
+  return new RegExp("(?:\\bενοτητα\\s+" + n + "\\s*η?\\b|\\b" + n + "\\s*η?\\s+ενοτητα\\b)", flags);
+}
+
+function fullBookTopicBody(topic) {
+  return normalize(topic)
+    .replace(/^(?:\d+\s*η?\s*ενοτητα|ενοτητα\s*\d+\s*η?|unit\s*\d+)\s*/, "")
+    .trim();
 }
 
 function fullBookTopicKeywords(topic) {
-  const normalized = normalize(topic)
-    .replace(/^(?:\d+\s*η?\s*ενοτητα|ενοτητα\s*\d+\s*η?|unit\s*\d+)\s*/, "");
   const stop = new Set(["και","των","τις","της","στο","στη","στην","για","με","the","and","of","in"]);
-  return normalized.split(" ").filter((word) => word.length >= 4 && !stop.has(word)).slice(0, 10);
+  return fullBookTopicBody(topic).split(" ").filter((word) => word.length >= 4 && !stop.has(word)).slice(0, 10);
 }
 
-function locateFullBookSection(text, topic) {
+function allRegexIndexes(text, regex) {
+  if (!regex) return [];
+  const out = [];
+  regex.lastIndex = 0;
+  let match;
+  while ((match = regex.exec(text))) {
+    out.push({ index: match.index, length: Math.max(1, match[0].length) });
+    if (match[0].length === 0) regex.lastIndex += 1;
+  }
+  return out;
+}
+
+function sectionLabelPosition(normalizedFull, label, from = 0) {
+  const body = fullBookTopicBody(label);
+  if (!body || body.length < 4) return -1;
+  return normalizedFull.indexOf(body, from);
+}
+
+function locateFullBookSection(text, topic, book = null) {
   const full = String(text || "");
   const normalized = normalize(full);
+  if (!normalized) return null;
+
   const identity = sectionOrdinal(topic);
-  const markerRe = fullBookSectionMarkerRegex(identity);
-  if (!identity || !markerRe) return null;
-
-  const marker = markerRe.exec(normalized);
-  if (!marker) return null;
-
-  const start = marker.index;
   const keywords = fullBookTopicKeywords(topic);
-  const verifyWindow = normalized.slice(start, Math.min(normalized.length, start + 1800));
   const required = Math.min(keywords.length, keywords.length <= 2 ? keywords.length : 2);
-  const hits = keywords.filter((word) => verifyWindow.includes(word)).length;
-  if (required > 0 && hits < required) return null;
+  let starts = identity
+    ? allRegexIndexes(normalized, fullBookSectionMarkerRegex(identity, true))
+    : [];
 
-  const nextIdentity = { ...identity, number: identity.number + 1 };
-  const nextRe = fullBookSectionMarkerRegex(nextIdentity);
-  const tail = normalized.slice(start + Math.max(1, marker[0].length));
-  const next = nextRe ? nextRe.exec(tail) : null;
-  const end = next ? start + Math.max(1, marker[0].length) + next.index : Math.min(normalized.length, start + 52000);
+  // Some official books (notably ST Primary Math) use named parts rather than
+  // explicit "Ενότητα N" headings. In those cases require the exact catalog
+  // section title to occur in the official full-book text.
+  if (!starts.length) {
+    const body = fullBookTopicBody(topic);
+    if (body.length >= 4) {
+      let pos = normalized.indexOf(body);
+      while (pos >= 0) {
+        starts.push({ index: pos, length: body.length });
+        pos = normalized.indexOf(body, pos + Math.max(1, body.length));
+      }
+    }
+  }
+  if (!starts.length) return null;
 
-  // normalize() removes punctuation/diacritics but preserves character order closely
-  // enough for a generous original-text slice. Clamp and add a small margin.
+  const labels = Array.isArray(book?.sectionLabels) ? book.sectionLabels : [];
+  const currentLabelIndex = labels.findIndex((label) => normalize(label) === normalize(topic));
+  const nextLabel = currentLabelIndex >= 0 ? labels[currentLabelIndex + 1] : "";
+
+  const candidates = [];
+  for (const startRow of starts) {
+    const start = startRow.index;
+    const verifyWindow = normalized.slice(start, Math.min(normalized.length, start + 2200));
+    const hits = keywords.filter((word) => verifyWindow.includes(word)).length;
+    if (required > 0 && hits < required) continue;
+
+    let nextIndex = -1;
+    if (identity) {
+      const nextRe = fullBookSectionMarkerRegex({ ...identity, number: identity.number + 1 }, false);
+      if (nextRe) {
+        const match = nextRe.exec(normalized.slice(start + startRow.length));
+        if (match) nextIndex = start + startRow.length + match.index;
+      }
+    }
+    if (nextIndex < 0 && nextLabel) {
+      nextIndex = sectionLabelPosition(normalized, nextLabel, start + startRow.length);
+    }
+    const end = nextIndex > start
+      ? nextIndex
+      : Math.min(normalized.length, start + 52000);
+    const span = end - start;
+    if (span >= 500) candidates.push({ start, end, span });
+  }
+  if (!candidates.length) return null;
+
+  // TOC entries repeat section names but produce short spans. The actual
+  // section body is the largest exact-identity span before the next section.
+  candidates.sort((a, b) => b.span - a.span || a.start - b.start);
+  const best = candidates[0];
   return {
-    start: Math.max(0, start - 300),
-    end: Math.min(full.length, end + 300)
+    start: Math.max(0, best.start - 250),
+    end: Math.min(full.length, best.end + 250)
   };
 }
 
-function selectFullBookSectionText(text, topic) {
-  const range = locateFullBookSection(text, topic);
+function selectFullBookSectionText(text, topic, book = null) {
+  const range = locateFullBookSection(text, topic, book);
   if (!range) return "";
   return String(text || "").slice(range.start, range.end).trim().slice(0, 42000);
 }
@@ -2221,7 +2276,7 @@ async function resolveFullBookSectionUrls(book, topic) {
   const html = await fetchOfficialHtml(book.base);
   if (!html) return [];
   const text = htmlToText(html);
-  return locateFullBookSection(text, topic) ? [book.base] : [];
+  return locateFullBookSection(text, topic, book) ? [book.base] : [];
 }
 
 async function discoverUnitPages(book, prefix) {

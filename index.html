@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <script>
-    if (location.pathname === "/" || location.pathname === "") {
-      document.documentElement.classList.add("navigator-home-booting");
-    }
-  </script>
   <meta charset="UTF-8" />
   <script>
-    /* First-paint guard: keep the home hidden until navigator-home.js has built it, so the legacy static home never flashes.
-       Home ("/") only (other paths must stay visible), with a fail-open timer. Runs before first paint; needs no other script. */
-    (function(){var p=location.pathname;if(p==="/"||p===""){var h=document.documentElement;h.classList.add("navigator-home-booting");setTimeout(function(){h.classList.remove("navigator-home-booting")},4000);}})();
+    /* First-paint guards run before CSS/DOM paint.
+       - Home: hide the legacy shell until navigator-home.js has built the current homepage.
+       - Rewritten SPA routes: cover the shared index.html shell until app.js has rendered the requested route.
+       Both guards fail open so a script/network failure can never leave the page permanently hidden. */
+    (function(){
+      var p=(location.pathname||"/").replace(/\/+$/,"")||"/";
+      var h=document.documentElement;
+      var appRoute=/^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)$/.test(p);
+      if(p==="/"){
+        h.classList.add("navigator-home-booting");
+        setTimeout(function(){h.classList.remove("navigator-home-booting")},4000);
+      }else if(appRoute){
+        h.classList.add("navigator-route-booting");
+        setTimeout(function(){h.classList.remove("navigator-route-booting")},12000);
+      }
+    })();
   </script>
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -349,6 +357,19 @@
   <style id="navigatorHomeFirstPaintGuard">
     html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}
     #homeBootSkeleton{display:none}
+    #routeBootSkeleton{display:none}
+    html.navigator-route-booting body > :not(#routeBootSkeleton):not(noscript){visibility:hidden!important}
+    html.navigator-route-booting #routeBootSkeleton{
+      display:block;position:fixed;inset:0;z-index:2147483647;background:#f8fafc;
+      padding:clamp(24px,7vh,72px) max(20px,calc((100vw - 1040px)/2));pointer-events:none
+    }
+    #routeBootSkeleton .brand{display:flex;align-items:center;gap:10px;margin-bottom:38px;font:700 18px/1.2 Commissioner,system-ui,sans-serif;color:#17324d}
+    #routeBootSkeleton .mark{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#1d5d8c;color:#fff;font-weight:800}
+    #routeBootSkeleton i{display:block;border-radius:10px;background:linear-gradient(90deg,#e9eef4 25%,#f4f7fa 50%,#e9eef4 75%);background-size:200% 100%;animation:homeBootShimmer 1.2s linear infinite}
+    #routeBootSkeleton .r1{height:34px;width:min(560px,82%);margin-bottom:14px}
+    #routeBootSkeleton .r2{height:16px;width:min(420px,70%);margin-bottom:30px}
+    #routeBootSkeleton .panel{height:260px;width:min(1040px,100%);border-radius:16px}
+    @media (prefers-reduced-motion:reduce){#routeBootSkeleton i{animation:none}}
     html.navigator-home-booting #mainContent{position:relative}
     html.navigator-home-booting #homeBootSkeleton{display:block;position:absolute;left:0;right:0;top:28px;padding:0 20px;pointer-events:none}
     #homeBootSkeleton i{display:block;border-radius:10px;background:linear-gradient(90deg,#e9eef4 25%,#f4f7fa 50%,#e9eef4 75%);background-size:200% 100%;animation:homeBootShimmer 1.2s linear infinite}
@@ -366,6 +387,10 @@
        Τώρα φορτώνεται δυναμικά, on-demand, μέσα από το app.js (loadHtml2Pdf()). -->
 </head>
 <body>
+  <div id="routeBootSkeleton" aria-hidden="true">
+    <div class="brand"><span class="mark">ai</span><span>aitools4kids.gr</span></div>
+    <i class="r1"></i><i class="r2"></i><i class="panel"></i>
+  </div>
 
   <noscript>
     <div style="max-width: 640px; margin: 40px auto; padding: 24px; font-family: sans-serif; line-height: 1.6;">
@@ -787,7 +812,16 @@
       }
       window.__aitools4kidsLoadHeavy=load;
       var started=false;
-      function start(){ if(started) return; started=true; (window.requestIdleCallback||function(f){setTimeout(f,50);})(load); }
+      function start(){
+        if(started) return;
+        started=true;
+        /* Give the just-rendered home a short quiet window before the ~3 MB background bundle starts.
+           Any interaction that needs the data still calls load() immediately through the guards below. */
+        setTimeout(function(){
+          var idle=window.requestIdleCallback||function(f){setTimeout(f,50);};
+          idle(load,{timeout:1500});
+        },900);
+      }
       var root=document.documentElement;
       if(root.classList.contains("navigator-home-ready")) start();
       else{

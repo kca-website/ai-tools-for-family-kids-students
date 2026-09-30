@@ -486,6 +486,44 @@ const BOOKS = {
     lastVerified: "2026-09-30",
     annualScopeVerified: false
   },
+  "istoria-st-dimotikou": {
+    title: "Ιστορία ΣΤ΄ Δημοτικού",
+    grade: "st",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
+    mode: "historySTUnit",
+    sectionLabels: Object.freeze([
+      "Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)",
+      "Ενότητα Β — Οι Έλληνες κάτω από την οθωμανική και τη λατινική κυριαρχία (1453-1821)",
+      "Ενότητα Γ — Η Μεγάλη Επανάσταση (1821-1830)",
+      "Ενότητα Δ — Η Ελλάδα στον 19ο αιώνα",
+      "Ενότητα Ε — Η Ελλάδα στον 20ό αιώνα"
+    ]),
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "ekthesi-g-lykeiou": {
+    title: "Έκφραση - Έκθεση Γ΄ Λυκείου",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
+    mode: "linkedSection",
+    sectionLabels: Object.freeze([
+      "Κεφάλαιο 1 — Η πειθώ",
+      "Κεφάλαιο 2 — Το δοκίμιο - Το άρθρο - Η επιφυλλίδα",
+      "Κεφάλαιο 3 — Δίκαιος λόγος και άδικος λόγος",
+      "Παράρτημα 1 — Διαβάζω και γράφω",
+      "Παράρτημα 2 — Ερευνητική εργασία"
+    ]),
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "english-g-gymnasiou": {
     title: "Αγγλικά Γ΄ Γυμνασίου",
     grade: "c",
@@ -1812,9 +1850,33 @@ function clean(value, max) {
   return String(value || "").trim().slice(0, max);
 }
 
+function resolveHistorySTUnitUrls(topic) {
+  const wanted = normalize(topic);
+  const unitMap = [
+    ["ενοτητα α", 1],
+    ["ενοτητα β", 2],
+    ["ενοτητα γ", 3],
+    ["ενοτητα δ", 4],
+    ["ενοτητα ε", 5]
+  ];
+  const hit = unitMap.find(([prefix]) => wanted.startsWith(prefix));
+  if (!hit) return [];
+  const [, unitNumber] = hit;
+  const counts = { 1: 3, 2: 10, 3: 18, 4: 6, 5: 12 };
+  const count = counts[unitNumber] || 0;
+  const base = BOOKS["istoria-st-dimotikou"].base;
+  return Array.from({ length: count }, (_, i) =>
+    new URL("index" + unitNumber + "_" + (i + 1) + ".html", base).toString()
+  );
+}
+
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "istoria-st-dimotikou" && sectionIsAllowlisted(BOOKS[subject], topic)) {
+    return resolveHistorySTUnitUrls(topic);
+  }
 
   if (subject === "istoria-b-gymnasiou") {
     const base = BOOKS[subject].base;
@@ -2293,6 +2355,11 @@ function topicLabelCandidates(topic) {
     .replace(/^\s*\d+(?:[.,]\d+)*\s*[—–:.-]*\s*/i, "")
     .trim();
   variants.push(withoutLeadingNumber);
+
+  const withoutAppendix = raw
+    .replace(/^\s*(?:παράρτημα|παραρτημα|appendix)\s*\d*\s*[—–:.-]*\s*/i, "")
+    .trim();
+  variants.push(withoutAppendix);
 
   return [...new Set(variants.map(normalize).filter(Boolean))];
 }
@@ -2978,6 +3045,7 @@ module.exports._test = Object.freeze({
   selectEnglishBUnitText,
   resolveSectionPath,
   resolveDirectSourceUrls,
+  resolveHistorySTUnitUrls,
   topicLabelCandidates,
   resolveLinkedSectionUrlsFromHtml,
   resolveExplicitSectionUrls,

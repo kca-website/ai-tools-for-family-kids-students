@@ -555,7 +555,7 @@
       ]
     },
     "fysiki-g-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/2071%2C7277/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/",
       sections:[
         "Κεφάλαιο 1 — Ηλεκτρική δύναμη και φορτίο",
         "Κεφάλαιο 2 — Ηλεκτρικό ρεύμα",
@@ -625,7 +625,7 @@
       ]
 },
     "glossa-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C107",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/",
       sections:[
         "1η Ενότητα — Η Ελλάδα στον κόσμο",
         "2η Ενότητα — Γλώσσα - γλώσσες και πολιτισμοί του κόσμου",
@@ -829,7 +829,7 @@
 ]
     },
     "chimeia-g-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2208/Chimeia_G-Gymnasiou_html-empl/",
       sections:[
         "1η Ενότητα · Κεφάλαιο 1 — Τα οξέα",
         "1η Ενότητα · Κεφάλαιο 2 — Οι βάσεις",
@@ -849,7 +849,7 @@
       ]
     },
     "ekthesi-g-lykeiou":{
-      sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/handle/8547/2678",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
       sections:[
         "Κεφάλαιο 1 — Η πειθώ",
         "Κεφάλαιο 2 — Το δοκίμιο - Το άρθρο - Η επιφυλλίδα",
@@ -859,7 +859,7 @@
       ]
     },
     "biologia-a-lykeiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGL-A105",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
       sections:[
         "Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό",
         "Κεφάλαιο 2 — Πεπτικό σύστημα",
@@ -991,7 +991,7 @@
       ]
 },
     "english-g-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C109/499/3246%2C21317/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
       sections:[
         "Unit 1 — A Wonderful World",
         "Unit 2 — Teen idols",
@@ -1085,7 +1085,7 @@
 }
   };
   const api=Object.freeze({
-    version:"2.12.0",
+    version:"2.13.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

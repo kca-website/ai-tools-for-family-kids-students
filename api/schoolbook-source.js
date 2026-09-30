@@ -241,7 +241,7 @@ const BOOKS = {
   "math-e-dimotikou": {
     title: "Μαθηματικά Ε΄ Δημοτικού",
     grade: "e",
-    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
     mode: "fullBookSection",
     officialSourceRequired: true,
     schoolYear: "2026-2027",

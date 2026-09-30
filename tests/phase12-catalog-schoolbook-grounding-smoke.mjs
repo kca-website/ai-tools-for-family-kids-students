@@ -7,7 +7,15 @@ const endpoint = require("../api/schoolbook-source.js");
 const { buildCatalogBook, catalogHtmlSourceAllowed } = endpoint._test;
 
 assert.ok(catalog?.ids?.length > 0, "General education catalog must be available in Node.");
-assert.equal(catalog.version, "2.10.0");
+const versionParts = String(catalog.version || "").split(".").map(Number);
+assert.equal(versionParts.length, 3, "Catalog version must be semantic x.y.z.");
+assert.ok(versionParts.every(Number.isFinite), "Catalog version must contain numeric semantic parts.");
+assert.ok(
+  versionParts[0] > 2 ||
+    (versionParts[0] === 2 && versionParts[1] > 10) ||
+    (versionParts[0] === 2 && versionParts[1] === 10 && versionParts[2] >= 0),
+  "Catalog version must remain at or above the Phase 12 baseline 2.10.0."
+);
 
 const eligible = catalog.ids
   .map((id) => ({ id, row: catalog.get(id) }))

@@ -44,6 +44,19 @@ test('CFG-01 uses modern routing so redirects and global headers can apply', () 
   assert.ok(assets?.headers?.some((h) => h.key === 'Cache-Control' && h.value.includes('immutable')));
 });
 
+
+test('homepage boot guard is active before the first visual paint', () => {
+  const html = read('index.html');
+  const headStart = html.indexOf('<head>');
+  const styles = html.indexOf('<link rel="stylesheet" href="/styles.css"');
+  const earlyBoot = html.indexOf('document.documentElement.classList.add("navigator-home-booting")');
+  const guardCss = html.indexOf('html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}');
+
+  assert.ok(headStart >= 0 && earlyBoot > headStart, 'homepage boot class must be set in the document head');
+  assert.ok(styles > earlyBoot, 'boot class must be set before external site styles can paint the legacy homepage');
+  assert.ok(guardCss > earlyBoot, 'first-paint guard CSS must exist');
+});
+
 test('view switcher uses button-group semantics instead of incomplete ARIA tabs', () => {
   const html = read('index.html');
   const app = read('app.js');

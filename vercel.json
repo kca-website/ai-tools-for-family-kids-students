@@ -33,7 +33,7 @@
   ],
   "headers": [
     {
-      "source": "/:zone(primary|middle|high)/:role(guardian|student)/:view(tools|advanced|prompts|quiz|tutor|guide)",
+      "source": "^/(primary|middle|high)/(guardian|student)/(tools|advanced|prompts|quiz|tutor|guide)/?$",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -78,7 +78,7 @@
   ],
   "rewrites": [
     {
-      "source": "/:zone(primary|middle|high)/:role(guardian|student)/:view(tools|advanced|prompts|quiz|tutor|guide)",
+      "source": "^/(primary|middle|high)/(guardian|student)/(tools|advanced|prompts|quiz|tutor|guide)/?$",
       "destination": "/"
     },
     {

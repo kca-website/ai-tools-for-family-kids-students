@@ -1,0 +1,8 @@
+node_modules/
+test-results/
+results/html/
+results/playwright-report.json
+results/selftest-targets.json
+results/links-extracted.json
+results/explore*.png
+playwright-report/

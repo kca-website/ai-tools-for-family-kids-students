@@ -1,0 +1,4210 @@
+[
+  {
+    "profile": "desktop",
+    "path": "/about.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ποιοι είμαστε / FAQ | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/about.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/accessibility.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Προσβασιμότητα εργαλείων | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/accessibility.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/ai-ergaleia-gia-mathites.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI εργαλεία για μαθητές: δωρεάν οδηγός ανά ηλικία και μάθημα",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-ergaleia-gia-mathites.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/ai-gia-dimotiko.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για παιδιά Δημοτικού: ασφαλής και σωστή χρήση για μάθηση",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-gia-dimotiko.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/ai-gia-gymnasio.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για μαθητές Γυμνασίου: σωστή χρήση για διάβασμα και εργασίες",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-gia-gymnasio.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/ai-transparency.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Διαφάνεια AI | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-transparency.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/anagnosi-agglika-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για ανάγνωση και Αγγλικά: εργαλεία για παιδιά και μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/anagnosi-agglika-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/asfales-ai-gia-paidia.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ασφαλές AI για παιδιά: τι πρέπει να ελέγχει ένας γονιός",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/asfales-ai-gia-paidia.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/classroom.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Για εκπαιδευτικούς | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/teacher-assistant.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/dimiourgiko-ai-gia-mathites.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημιουργικό AI για μαθητές: εικόνα, project και ιδέες",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/dimiourgiko-ai-gia-mathites.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/creative-ai-for-students.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Creative AI for students: images, projects and ideas",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/creative-ai-for-students.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/flashcards-revision-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI flashcards and revision: tools for students",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/flashcards-revision-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/presentation-poster-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI for presentations, posters and infographics: student tools",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/presentation-poster-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/reading-english-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI for reading and English practice: tools for students",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/reading-english-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/research-with-sources-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI research with sources: tools for students",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/research-with-sources-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/study-pdf-with-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI for PDFs and notes: which tool should a student use?",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/study-pdf-with-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/study-steps-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Break study into small steps | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/study-steps-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/en/what-do-you-want-to-do-with-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "What do you want to do with AI? Student tool guide",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/what-do-you-want-to-do-with-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/erevna-me-piges-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για έρευνα με πηγές: εργαλεία για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/erevna-me-piges-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/flashcards-epanalipsi-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για flashcards και επανάληψη: εργαλεία για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/flashcards-epanalipsi-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/fyllo-axiologisis-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δωρεάν Φύλλο Αξιολόγησης με AI | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/fyllo-axiologisis-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/guide.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Πώς χρησιμοποιώ σωστά το AI; | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/guide.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/higher-education-pilot.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Φοιτητής · Higher Education Pilot | aitools4kids",
+    "h1": 1,
+    "canonical": null
+  },
+  {
+    "profile": "desktop",
+    "path": "/index.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "aitools4kids.gr — Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/index.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/meleti-pdf-me-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για PDF και σημειώσεις: ποιο εργαλείο να χρησιμοποιήσεις",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/meleti-pdf-me-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/methodology.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Πώς επιλέγουμε και ελέγχουμε τα εργαλεία | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/methodology.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/organosi-meletis-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Σπάσε το διάβασμα σε μικρά βήματα | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/organosi-meletis-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/parousiasi-afisa-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για παρουσίαση, αφίσα και infographic: εργαλεία για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/parousiasi-afisa-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/preschool.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Νηπιαγωγείο 4 έως 6 | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/preschool"
+  },
+  {
+    "profile": "desktop",
+    "path": "/privacy-policy.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Πολιτική Απορρήτου | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/privacy-policy.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/report-error.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Αναφορά λάθους ή παλιωμένης πληροφορίας | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/report-error.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/school-ai-use.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Χρήση AI στο σχολείο | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/school-ai-use.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/sign-language.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "commons.wikimedia.org": 6,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Σχολικές έννοιες στην Ελληνική Νοηματική Γλώσσα (ΕΝΓ) | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/sign-language.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/special-education-parent-guide.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Οδηγός γονέα για την Ειδική Εκπαίδευση | AI Tools 4 Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/special-education-parent-guide.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/special-education-preview.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ειδική Εκπαίδευση: Μαθαίνω βήμα βήμα | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/special-education.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/special-education.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ειδική Εκπαίδευση: Μαθαίνω βήμα βήμα | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/special-education.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/study.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI Μελέτη — Προσωπικό πλάνο & σημειώσεις | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/study.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/teacher-assistant.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Για εκπαιδευτικούς | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/teacher-assistant.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/ti-thelo-na-kano-me-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Τι θέλεις να κάνεις με AI; Οδηγός εργαλείων για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ti-thelo-na-kano-me-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/ai-help.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI Βοήθεια του aitools4kids.gr | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/ai-help.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/anki.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Anki — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/anki.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/autodraw.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AutoDraw: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/autodraw.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/brisk.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Brisk Teaching: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/brisk.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/canva-magic.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Canva (Magic Studio): ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/canva-magic.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/chatgpt-edu.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "ChatGPT Edu: σχολική/θεσμική πρόσβαση: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/chatgpt-edu.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/chatgpt.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "ChatGPT για παιδιά στην Ελλάδα: ηλικιακό όριο, γονική άδεια & σχολική χρήση",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/chatgpt.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/class-companion.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Class Companion: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/class-companion.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/claude-academy.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Claude Academy: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/claude-academy.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/claude.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Claude για μαθητές: επιτρέπεται σε ανηλίκους; Ηλικιακό όριο 18+",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/claude.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/codeai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "CodeAI / Code.org — AI & Coding curriculum | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/codeai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/copilot.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Copilot για παιδιά στην Ελλάδα: ηλικία, ασφάλεια & σχολική χρήση",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/copilot.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/deepl.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "DeepL — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/deepl.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/desmos.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Desmos: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/desmos.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/diffit.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Diffit: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/diffit.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/digital-tutoring.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ψηφιακό Φροντιστήριο (ΥΠΑΙΘΑ) — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/digital-tutoring.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/duolingo.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Duolingo: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/duolingo.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/eduai-digital-tutoring.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "EduAI Ψηφιακού Φροντιστηρίου — σε ανάπτυξη | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/eduai-digital-tutoring.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/elements-of-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Elements of AI (Ελληνικά): ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/elements-of-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/elicit.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Elicit: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/elicit.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/elsa-speak.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "ELSA Speak | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/elsa-speak.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/erla.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Erla: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/erla.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/formative.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Formative: online αξιολόγηση & AI ερωτήσεις | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/formative.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/gamma.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Gamma — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/gamma.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/gemini-education.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Gemini for Education | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/gemini-education.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/gemini.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Google Gemini για παιδιά στην Ελλάδα: ηλικία 15+, σχολικός λογαριασμός & ασφάλεια",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/gemini.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/geogebra.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "GeoGebra: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/geogebra.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/github-copilot.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "GitHub Copilot: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/github-copilot.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/google-arts-culture.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Google Arts & Culture Learn | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/google-arts-culture.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/google-lens.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Google Lens — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/google-lens.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/grammarly.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Grammarly: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/grammarly.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/hemingway.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Hemingway Editor: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/hemingway.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/immersive-reader.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Immersive Reader | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/immersive-reader.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/khan-academy-kids.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Khan Academy Kids: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/khan-academy-kids.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/magicschool.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "MagicSchool AI: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/magicschool.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/math-progress.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Math Progress: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/math-progress.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/mindmup.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "MindMup: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/mindmup.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/miro-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Miro AI: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/miro-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/notebooklm.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Gemini Notebook (πρώην NotebookLM): ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/notebooklm.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/notion.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Notion — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/notion.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/perplexity.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Perplexity: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/perplexity.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/phet.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "PhET Interactive Simulations | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/phet.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/photomath.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Photomath: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/photomath.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/quizlet.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Quizlet: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/quizlet.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/reading-coach.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Reading Coach: σχολική χρήση, ελληνικά & προσβασιμότητα | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/reading-coach.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/replit-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Replit AI: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/replit-ai.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/scispace.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "SciSpace — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/scispace.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/scite.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Scite: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/scite.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/scribbr.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Scribbr: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/scribbr.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/snorkl.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Snorkl: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/snorkl.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/study-learn.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Study & Learn: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/study-learn.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/symbolab.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Symbolab: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/symbolab.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/wayground.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Wayground: αξιολόγηση με AI για εκπαιδευτικούς | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/wayground.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/wolfram-alpha.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Wolfram Alpha: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/wolfram-alpha.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/tools/zotero.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Zotero — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/zotero.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/xartis-ylis.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ύλη & Εξάσκηση 2026–27 | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/xartis-ylis.html"
+  },
+  {
+    "profile": "desktop",
+    "path": "/",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "aitools4kids.gr — Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/"
+  },
+  {
+    "profile": "desktop",
+    "path": "/primary/guardian/tools",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 13
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/tools"
+  },
+  {
+    "profile": "desktop",
+    "path": "/primary/guardian/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/tutor"
+  },
+  {
+    "profile": "desktop",
+    "path": "/primary/guardian/quiz",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Χάρτης Εξάσκησης · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/quiz"
+  },
+  {
+    "profile": "desktop",
+    "path": "/primary/student/tools",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 6
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/student/tools"
+  },
+  {
+    "profile": "desktop",
+    "path": "/middle/student/tools",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 9
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Γυμνάσιο · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/middle/student/tools"
+  },
+  {
+    "profile": "desktop",
+    "path": "/middle/student/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 9
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Γυμνάσιο · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/middle/student/tutor"
+  },
+  {
+    "profile": "desktop",
+    "path": "/middle/guardian/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 2,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Γυμνάσιο · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/middle/guardian/tutor"
+  },
+  {
+    "profile": "desktop",
+    "path": "/high/student/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 2,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/high/student/tutor"
+  },
+  {
+    "profile": "desktop",
+    "path": "/high/student/tutor?mode=review",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 2,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/high/student/tutor"
+  },
+  {
+    "profile": "desktop",
+    "path": "/high/student/quiz",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · Χάρτης Εξάσκησης · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/high/student/quiz"
+  },
+  {
+    "profile": "desktop",
+    "path": "/high/guardian/guide",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · Οδηγός · aitools4kids.gr",
+    "h1": 2,
+    "canonical": "https://www.aitools4kids.gr/high/guardian/guide"
+  },
+  {
+    "profile": "desktop",
+    "path": "/primary/guardian/tutor?mode=challenge&grade=e&subject=istoria-e-dimotikou",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/tutor"
+  },
+  {
+    "profile": "desktop",
+    "path": "/preschool",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Νηπιαγωγείο 4 έως 6 | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/preschool"
+  },
+  {
+    "profile": "desktop",
+    "path": "/does-not-exist",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "aitools4kids.gr — Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/does-not-exist"
+  },
+  {
+    "profile": "desktop",
+    "path": "/primary/nobody/nothing",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 13
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/nobody/nothing"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/about.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ποιοι είμαστε / FAQ | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/about.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/accessibility.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Προσβασιμότητα εργαλείων | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/accessibility.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/ai-ergaleia-gia-mathites.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI εργαλεία για μαθητές: δωρεάν οδηγός ανά ηλικία και μάθημα",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-ergaleia-gia-mathites.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/ai-gia-dimotiko.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για παιδιά Δημοτικού: ασφαλής και σωστή χρήση για μάθηση",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-gia-dimotiko.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/ai-gia-gymnasio.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για μαθητές Γυμνασίου: σωστή χρήση για διάβασμα και εργασίες",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-gia-gymnasio.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/ai-transparency.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Διαφάνεια AI | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ai-transparency.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/anagnosi-agglika-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για ανάγνωση και Αγγλικά: εργαλεία για παιδιά και μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/anagnosi-agglika-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/asfales-ai-gia-paidia.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ασφαλές AI για παιδιά: τι πρέπει να ελέγχει ένας γονιός",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/asfales-ai-gia-paidia.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/classroom.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Για εκπαιδευτικούς | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/teacher-assistant.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/dimiourgiko-ai-gia-mathites.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημιουργικό AI για μαθητές: εικόνα, project και ιδέες",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/dimiourgiko-ai-gia-mathites.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/creative-ai-for-students.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Creative AI for students: images, projects and ideas",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/creative-ai-for-students.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/flashcards-revision-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI flashcards and revision: tools for students",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/flashcards-revision-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/presentation-poster-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI for presentations, posters and infographics: student tools",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/presentation-poster-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/reading-english-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI for reading and English practice: tools for students",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/reading-english-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/research-with-sources-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI research with sources: tools for students",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/research-with-sources-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/study-pdf-with-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI for PDFs and notes: which tool should a student use?",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/study-pdf-with-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/study-steps-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Break study into small steps | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/study-steps-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/en/what-do-you-want-to-do-with-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "What do you want to do with AI? Student tool guide",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/en/what-do-you-want-to-do-with-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/erevna-me-piges-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για έρευνα με πηγές: εργαλεία για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/erevna-me-piges-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/flashcards-epanalipsi-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για flashcards και επανάληψη: εργαλεία για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/flashcards-epanalipsi-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/fyllo-axiologisis-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δωρεάν Φύλλο Αξιολόγησης με AI | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/fyllo-axiologisis-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/guide.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Πώς χρησιμοποιώ σωστά το AI; | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/guide.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/higher-education-pilot.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Φοιτητής · Higher Education Pilot | aitools4kids",
+    "h1": 1,
+    "canonical": null
+  },
+  {
+    "profile": "mobile375",
+    "path": "/index.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "aitools4kids.gr — Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/index.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/meleti-pdf-me-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για PDF και σημειώσεις: ποιο εργαλείο να χρησιμοποιήσεις",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/meleti-pdf-me-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/methodology.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Πώς επιλέγουμε και ελέγχουμε τα εργαλεία | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/methodology.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/organosi-meletis-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Σπάσε το διάβασμα σε μικρά βήματα | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/organosi-meletis-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/parousiasi-afisa-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI για παρουσίαση, αφίσα και infographic: εργαλεία για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/parousiasi-afisa-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/preschool.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Νηπιαγωγείο 4 έως 6 | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/preschool"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/privacy-policy.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "cdn.jsdelivr.net": 1,
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Πολιτική Απορρήτου | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/privacy-policy.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/report-error.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Αναφορά λάθους ή παλιωμένης πληροφορίας | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/report-error.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/school-ai-use.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Χρήση AI στο σχολείο | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/school-ai-use.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/sign-language.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "commons.wikimedia.org": 3
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Σχολικές έννοιες στην Ελληνική Νοηματική Γλώσσα (ΕΝΓ) | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/sign-language.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/special-education-parent-guide.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Οδηγός γονέα για την Ειδική Εκπαίδευση | AI Tools 4 Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/special-education-parent-guide.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/special-education-preview.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ειδική Εκπαίδευση: Μαθαίνω βήμα βήμα | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/special-education.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/special-education.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ειδική Εκπαίδευση: Μαθαίνω βήμα βήμα | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/special-education.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/study.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI Μελέτη — Προσωπικό πλάνο & σημειώσεις | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/study.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/teacher-assistant.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Για εκπαιδευτικούς | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/teacher-assistant.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/ti-thelo-na-kano-me-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Τι θέλεις να κάνεις με AI; Οδηγός εργαλείων για μαθητές",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/ti-thelo-na-kano-me-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/ai-help.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AI Βοήθεια του aitools4kids.gr | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/ai-help.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/anki.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Anki — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/anki.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/autodraw.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "AutoDraw: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/autodraw.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/brisk.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Brisk Teaching: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/brisk.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/canva-magic.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Canva (Magic Studio): ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/canva-magic.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/chatgpt-edu.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "ChatGPT Edu: σχολική/θεσμική πρόσβαση: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/chatgpt-edu.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/chatgpt.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "ChatGPT για παιδιά στην Ελλάδα: ηλικιακό όριο, γονική άδεια & σχολική χρήση",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/chatgpt.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/class-companion.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Class Companion: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/class-companion.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/claude-academy.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Claude Academy: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/claude-academy.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/claude.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Claude για μαθητές: επιτρέπεται σε ανηλίκους; Ηλικιακό όριο 18+",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/claude.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/codeai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "CodeAI / Code.org — AI & Coding curriculum | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/codeai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/copilot.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Copilot για παιδιά στην Ελλάδα: ηλικία, ασφάλεια & σχολική χρήση",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/copilot.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/deepl.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "DeepL — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/deepl.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/desmos.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Desmos: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/desmos.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/diffit.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Diffit: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/diffit.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/digital-tutoring.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ψηφιακό Φροντιστήριο (ΥΠΑΙΘΑ) — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/digital-tutoring.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/duolingo.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Duolingo: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/duolingo.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/eduai-digital-tutoring.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "EduAI Ψηφιακού Φροντιστηρίου — σε ανάπτυξη | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/eduai-digital-tutoring.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/elements-of-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Elements of AI (Ελληνικά): ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/elements-of-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/elicit.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Elicit: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/elicit.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/elsa-speak.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "ELSA Speak | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/elsa-speak.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/erla.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Erla: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/erla.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/formative.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Formative: online αξιολόγηση & AI ερωτήσεις | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/formative.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/gamma.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Gamma — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/gamma.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/gemini-education.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Gemini for Education | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/gemini-education.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/gemini.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Google Gemini για παιδιά στην Ελλάδα: ηλικία 15+, σχολικός λογαριασμός & ασφάλεια",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/gemini.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/geogebra.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "GeoGebra: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/geogebra.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/github-copilot.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "GitHub Copilot: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/github-copilot.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/google-arts-culture.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Google Arts & Culture Learn | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/google-arts-culture.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/google-lens.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Google Lens — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/google-lens.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/grammarly.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Grammarly: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/grammarly.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/hemingway.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Hemingway Editor: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/hemingway.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/immersive-reader.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Immersive Reader | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/immersive-reader.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/khan-academy-kids.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Khan Academy Kids: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/khan-academy-kids.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/magicschool.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "MagicSchool AI: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/magicschool.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/math-progress.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Math Progress: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/math-progress.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/mindmup.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "MindMup: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/mindmup.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/miro-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Miro AI: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/miro-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/notebooklm.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Gemini Notebook (πρώην NotebookLM): ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/notebooklm.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/notion.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Notion — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/notion.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/perplexity.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Perplexity: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/perplexity.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/phet.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "PhET Interactive Simulations | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/phet.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/photomath.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Photomath: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/photomath.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/quizlet.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Quizlet: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/quizlet.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/reading-coach.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Reading Coach: σχολική χρήση, ελληνικά & προσβασιμότητα | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/reading-coach.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/replit-ai.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Replit AI: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/replit-ai.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/scispace.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "SciSpace — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/scispace.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/scite.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Scite: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/scite.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/scribbr.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Scribbr: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/scribbr.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/snorkl.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Snorkl: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/snorkl.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/study-learn.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Microsoft Study & Learn: σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/study-learn.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/symbolab.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Symbolab: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/symbolab.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/wayground.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Wayground: αξιολόγηση με AI για εκπαιδευτικούς | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/wayground.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/wolfram-alpha.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Wolfram Alpha: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/wolfram-alpha.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/tools/zotero.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Zotero — Εκπαιδευτική χρήση | AI Tools for Kids",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/tools/zotero.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/xartis-ylis.html",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Ύλη & Εξάσκηση 2026–27 | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/xartis-ylis.html"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "aitools4kids.gr — Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/primary/guardian/tools",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 4
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/tools"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/primary/guardian/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/tutor"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/primary/guardian/quiz",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Χάρτης Εξάσκησης · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/quiz"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/primary/student/tools",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 4
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/student/tools"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/middle/student/tools",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 3
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Γυμνάσιο · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/middle/student/tools"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/middle/student/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 4
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Γυμνάσιο · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/middle/student/tutor"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/middle/guardian/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 2,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Γυμνάσιο · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/middle/guardian/tutor"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/high/student/tutor",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 2,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/high/student/tutor"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/high/student/tutor?mode=review",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 2,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/high/student/tutor"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/high/student/quiz",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · Χάρτης Εξάσκησης · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/high/student/quiz"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/high/guardian/guide",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Λύκειο · Οδηγός · aitools4kids.gr",
+    "h1": 2,
+    "canonical": "https://www.aitools4kids.gr/high/guardian/guide"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/primary/guardian/tutor?mode=challenge&grade=e&subject=istoria-e-dimotikou",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · AI Βοήθεια · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/guardian/tutor"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/preschool",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Νηπιαγωγείο 4 έως 6 | aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/preschool"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/does-not-exist",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "aitools4kids.gr — Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/does-not-exist"
+  },
+  {
+    "profile": "mobile375",
+    "path": "/primary/nobody/nothing",
+    "status": 200,
+    "console": [
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "error: Failed to load resource: net::ERR_BLOCKED_BY_CLIENT.Inspector",
+      "warning: Service Worker registration blocked by Playwright"
+    ],
+    "pageErrors": [],
+    "failedInternal": [],
+    "thirdParty": {
+      "fonts.googleapis.com": 1,
+      "cdn.jsdelivr.net": 1,
+      "www.google.com": 4
+    },
+    "mixed": [],
+    "overflowX": false,
+    "title": "Δημοτικό · Εργαλεία · aitools4kids.gr",
+    "h1": 1,
+    "canonical": "https://www.aitools4kids.gr/primary/nobody/nothing"
+  }
+]

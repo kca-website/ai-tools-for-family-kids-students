@@ -1,0 +1,2699 @@
+{
+  "links": [
+    {
+      "href": "https://ebooks.edu.gr/",
+      "text": "ebooks.edu.gr ↗",
+      "concept": ""
+    },
+    {
+      "href": "https://ebooks.edu.gr/",
+      "text": "ebooks.edu.gr ↗",
+      "concept": ""
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Squares_and_circles.svg",
+      "text": "Εικόνα: Letop · Public domain",
+      "concept": "Κύκλος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Xromata/Kyklos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κύκλος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-xromata-sximata",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κύκλος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Squares_and_circles.svg",
+      "text": "Εικόνα: Letop · Public domain",
+      "concept": "Τετράγωνο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Xromata/Tetragwno.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Τετράγωνο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-xromata-sximata",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Τετράγωνο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Squares_and_circles.svg",
+      "text": "Εικόνα: Letop · Public domain",
+      "concept": "Τρίγωνο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Xromata/Trigwno.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Τρίγωνο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-xromata-sximata",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Τρίγωνο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Compass_rose1.svg",
+      "text": "Εικόνα: GTRus · CC BY-SA 4.0",
+      "concept": "Ανατολή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Kateuthinseis/Anatolika.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ανατολή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-kateuthinseis",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ανατολή"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Lightning_NOAA.jpg",
+      "text": "Εικόνα: NOAA · Public domain",
+      "concept": "Άνεμος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Weather/Anemos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Άνεμος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-stoixeia-kairou",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Άνεμος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Lightning_NOAA.jpg",
+      "text": "Εικόνα: NOAA · Public domain",
+      "concept": "Αστραπή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Weather/Astraph.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αστραπή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-stoixeia-kairou",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αστραπή"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Compass_rose1.svg",
+      "text": "Εικόνα: GTRus · CC BY-SA 4.0",
+      "concept": "Βορράς"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Kateuthinseis/Voreia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Βορράς"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-kateuthinseis",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Βορράς"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Lightning_NOAA.jpg",
+      "text": "Εικόνα: NOAA · Public domain",
+      "concept": "Βροχή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Weather/Vroxh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Βροχή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-stoixeia-kairou",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Βροχή"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Compass_rose1.svg",
+      "text": "Εικόνα: GTRus · CC BY-SA 4.0",
+      "concept": "Δύση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Kateuthinseis/Dytika.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Δύση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-kateuthinseis",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Δύση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Lightning_NOAA.jpg",
+      "text": "Εικόνα: NOAA · Public domain",
+      "concept": "Καιρικές συνθήκες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Kairikes_synthhkes.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Καιρικές συνθήκες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-stoixeia-kairou",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Καιρικές συνθήκες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Compass_rose1.svg",
+      "text": "Εικόνα: GTRus · CC BY-SA 4.0",
+      "concept": "Νότος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Kateuthinseis/Notia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Νότος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-kateuthinseis",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Νότος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Compass_rose1.svg",
+      "text": "Εικόνα: GTRus · CC BY-SA 4.0",
+      "concept": "Προσανατολισμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Prosanatolismos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Προσανατολισμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-kateuthinseis",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Προσανατολισμός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Watercycle-notext.jpg",
+      "text": "Εικόνα: USGS · Public domain",
+      "concept": "Αέρας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Epoxes/Aeras.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αέρας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αέρας"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solid_liquid_gas.svg",
+      "text": "Εικόνα: Luis J. Rodriguez Lopez · CC BY 2.5 / CC BY-SA 3.0",
+      "concept": "Αέριο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Aerio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αέριο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αέριο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Watercycle-notext.jpg",
+      "text": "Εικόνα: USGS · Public domain",
+      "concept": "Κύκλος του νερού"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Kyklos_tou_neroy.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κύκλος του νερού"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κύκλος του νερού"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Watercycle-notext.jpg",
+      "text": "Εικόνα: USGS · Public domain",
+      "concept": "Νερό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Faghta-Pota-4/Nero.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Νερό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Νερό"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solid_liquid_gas.svg",
+      "text": "Εικόνα: Luis J. Rodriguez Lopez · CC BY 2.5 / CC BY-SA 3.0",
+      "concept": "Στερεό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Stereo.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Στερεό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Στερεό"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plastic_recycling_bin_in_Reykjavik_cropped.jpg",
+      "text": "Εικόνα: Akigka · CC0",
+      "concept": "Τεχνητά υλικά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Texnhta_ylika.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Τεχνητά υλικά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Τεχνητά υλικά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solid_liquid_gas.svg",
+      "text": "Εικόνα: Luis J. Rodriguez Lopez · CC BY 2.5 / CC BY-SA 3.0",
+      "concept": "Υγρό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Ygro.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Υγρό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Υγρό"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Watercycle-notext.jpg",
+      "text": "Εικόνα: USGS · Public domain",
+      "concept": "Υδρατμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Ydratmos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Υδρατμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Υδρατμός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Wooden_Materials.jpg",
+      "text": "Εικόνα: Wikimedia Commons · φωτογραφία ξύλινων υλικών",
+      "concept": "Φυσικά υλικά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Fysika_ylika.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φυσικά υλικά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φυσικά υλικά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_of_a_Flower.svg",
+      "text": "Εικόνα: Audreyyhuang · CC BY 4.0",
+      "concept": "Άνθος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Anthos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Άνθος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Άνθος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Rosemary_herb.JPG",
+      "text": "Εικόνα: Fford · CC BY-SA 3.0",
+      "concept": "Αρωματικά φυτά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Arwmatika_fyta.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αρωματικά φυτά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αρωματικά φυτά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_Anatomy.svg",
+      "text": "Εικόνα: Bigman24225 · CC BY-SA 4.0",
+      "concept": "Βλαστός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Vlastos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Βλαστός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Βλαστός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Καρπός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Karpos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Καρπός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Καρπός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_Anatomy.svg",
+      "text": "Εικόνα: Bigman24225 · CC BY-SA 4.0",
+      "concept": "Ρίζα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Riza.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ρίζα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ρίζα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_Anatomy.svg",
+      "text": "Εικόνα: Bigman24225 · CC BY-SA 4.0",
+      "concept": "Σπόρος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Sporos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Σπόρος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Σπόρος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_Anatomy.svg",
+      "text": "Εικόνα: Bigman24225 · CC BY-SA 4.0",
+      "concept": "Φύλλο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Fyllo.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φύλλο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φύλλο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_Anatomy.svg",
+      "text": "Εικόνα: Bigman24225 · CC BY-SA 4.0",
+      "concept": "Φυτό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Fyto.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φυτό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φυτό"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_Anatomy.svg",
+      "text": "Εικόνα: Bigman24225 · CC BY-SA 4.0",
+      "concept": "Φύτρωμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Fytrwma.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φύτρωμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φύτρωμα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Landform_diagram_peak.svg",
+      "text": "Εικόνα: Sunspeanzler · CC BY-SA/GFDL",
+      "concept": "Βουνό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Vouno.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Βουνό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Βουνό"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Δάσος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Dasos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Δάσος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Δάσος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Vistula_river_map-clean.png",
+      "text": "Εικόνα: Wikimedia Commons · CC BY-SA",
+      "concept": "Εκβολές"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Ekvoles.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Εκβολές"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Εκβολές"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Coastal_topography_sketch_numbered.svg",
+      "text": "Εικόνα: Wikimedia Commons · coastal landforms",
+      "concept": "Θάλασσα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Thalassa.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Θάλασσα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Θάλασσα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Landform_diagram_valley_x.svg",
+      "text": "Εικόνα: Sunspeanzler · CC BY-SA/GFDL",
+      "concept": "Κοιλάδα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Koilada.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κοιλάδα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κοιλάδα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Coastal_topography_sketch_numbered.svg",
+      "text": "Εικόνα: Wikimedia Commons · coastal landforms",
+      "concept": "Κόλπος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Kolpos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κόλπος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κόλπος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Coastal_topography_sketch_numbered.svg",
+      "text": "Εικόνα: Wikimedia Commons · coastal landforms",
+      "concept": "Λίμνη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Limnh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Λίμνη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Λίμνη"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Coastal_topography_sketch_numbered.svg",
+      "text": "Εικόνα: Wikimedia Commons · coastal landforms",
+      "concept": "Λιμνοθάλασσα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Limnothalassa.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Λιμνοθάλασσα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Λιμνοθάλασσα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Coastal_topography_sketch_numbered.svg",
+      "text": "Εικόνα: Wikimedia Commons · coastal landforms",
+      "concept": "Νησί"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Nhsi.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Νησί"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Νησί"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Landform_diagram_peak.svg",
+      "text": "Εικόνα: Sunspeanzler · CC BY-SA/GFDL",
+      "concept": "Οροπέδιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Oropedio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Οροπέδιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Οροπέδιο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Landform_diagram_peak.svg",
+      "text": "Εικόνα: Sunspeanzler · CC BY-SA/GFDL",
+      "concept": "Οροσειρά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Oroseira.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Οροσειρά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Οροσειρά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Landform_diagram_plain.svg",
+      "text": "Εικόνα: Sunspeanzler · CC BY-SA/GFDL",
+      "concept": "Πεδιάδα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Pediada.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πεδιάδα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πεδιάδα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Vistula_river_map-clean.png",
+      "text": "Εικόνα: Wikimedia Commons · CC BY-SA",
+      "concept": "Πηγές"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Phges.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πηγές"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πηγές"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Vistula_river_map-clean.png",
+      "text": "Εικόνα: Wikimedia Commons · CC BY-SA",
+      "concept": "Ποταμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Potamos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ποταμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ποταμός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Vistula_river_map-clean.png",
+      "text": "Εικόνα: Wikimedia Commons · CC BY-SA",
+      "concept": "Ροή ποταμού"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Roh_potamoy.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ροή ποταμού"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ροή ποταμού"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Coastal_topography_sketch_numbered.svg",
+      "text": "Εικόνα: Wikimedia Commons · coastal landforms",
+      "concept": "Χερσόνησος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Xersonhsos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Χερσόνησος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Χερσόνησος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Parallel_Lines.svg",
+      "text": "Εικόνα: Wikimedia Commons · Public domain",
+      "concept": "Παράλληλες γραμμές"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Xromata/Parallhles-Grammes.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Παράλληλες γραμμές"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-xromata-sximata",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Παράλληλες γραμμές"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Map_athenian_empire_431_BC-en.svg",
+      "text": "Εικόνα: Marsyas / Once in a Blue Moon · Wikimedia Commons",
+      "concept": "Αθηναϊκή Συμμαχία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Athhnaikh_Symmaxia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αθηναϊκή Συμμαχία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αθηναϊκή Συμμαχία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:View_of_the_Pnyx_plateau_in_Athens_(50959890047).jpg",
+      "text": "Εικόνα: George E. Koronaios · Wikimedia Commons",
+      "concept": "Εκκλησία του Δήμου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Ekklhsia_tou_Dhmou.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Εκκλησία του Δήμου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Εκκλησία του Δήμου"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Map_peloponnesian_war-it.svg",
+      "text": "Εικόνα: Marsyas / Fulvio314 · Wikimedia Commons",
+      "concept": "Πελοποννησιακός Πόλεμος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Peloponnhsiakos_Polemos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πελοποννησιακός Πόλεμος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πελοποννησιακός Πόλεμος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Mail-envelope.svg",
+      "text": "Εικόνα: Amada44 · Public domain",
+      "concept": "Επιστολή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/glwssa_ab/Epistoli.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Επιστολή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-sxoleio-proswpika-antikeimena",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Επιστολή"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Volcano_scheme.svg",
+      "text": "Εικόνα: MesserWoland · CC BY-SA 3.0",
+      "concept": "Ηφαίστειο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Hfaisteio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ηφαίστειο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ηφαίστειο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldKoppen.png",
+      "text": "Εικόνα: Nothda · CC0",
+      "concept": "Κλίμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Klima.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κλίμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κλίμα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Riflessione_rifrazione.png",
+      "text": "Εικόνα: Fornaeffe · Public domain",
+      "concept": "Αδιαφανή σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Adiafanh_swmata.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αδιαφανή σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αδιαφανή σώματα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Riflessione_rifrazione.png",
+      "text": "Εικόνα: Fornaeffe · Public domain",
+      "concept": "Ανάκλαση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Anaklash.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ανάκλαση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ανάκλαση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Riflessione_rifrazione.png",
+      "text": "Εικόνα: Fornaeffe · Public domain",
+      "concept": "Αυτόφωτα σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Aftofwta_swmata.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αυτόφωτα σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αυτόφωτα σώματα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Riflessione_rifrazione.png",
+      "text": "Εικόνα: Fornaeffe · Public domain",
+      "concept": "Διαφανή σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Diafanh_Swmata.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Διαφανή σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Διαφανή σώματα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Watercycle-notext.jpg",
+      "text": "Εικόνα: USGS · Public domain",
+      "concept": "Εξάτμιση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Eksatmish.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Εξάτμιση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Εξάτμιση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Riflessione_rifrazione.png",
+      "text": "Εικόνα: Fornaeffe · Public domain",
+      "concept": "Ετερόφωτα σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Eterofwta_swmata.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ετερόφωτα σώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ετερόφωτα σώματα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Thermometer_(PSF).svg",
+      "text": "Εικόνα: Pearson Scott Foresman · Public domain",
+      "concept": "Θερμοκρασία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Thermokrasia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Θερμοκρασία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Θερμοκρασία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Thermometer_(PSF).svg",
+      "text": "Εικόνα: Pearson Scott Foresman · Public domain",
+      "concept": "Θερμόμετρα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Thermometra.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Θερμόμετρα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Θερμόμετρα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Thermometer_(PSF).svg",
+      "text": "Εικόνα: Pearson Scott Foresman · Public domain",
+      "concept": "Θερμότητα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Thermothta.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Θερμότητα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Θερμότητα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Watercycle-notext.jpg",
+      "text": "Εικόνα: USGS · Public domain",
+      "concept": "Πήξη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Phksh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πήξη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πήξη"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Riflessione_rifrazione.png",
+      "text": "Εικόνα: Fornaeffe · Public domain",
+      "concept": "Σκιά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Skia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Σκιά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Σκιά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Prisme.jpg",
+      "text": "Εικόνα: Ranveig · Public domain",
+      "concept": "Φως"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Fws.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φως"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φως"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Thermometer_(PSF).svg",
+      "text": "Εικόνα: Pearson Scott Foresman · Public domain",
+      "concept": "Celsius"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Celsius.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Celsius"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Celsius"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Αδένες πεπτικού συστήματος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Adenes_peptikoy_systhmatos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αδένες πεπτικού συστήματος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αδένες πεπτικού συστήματος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Απορρόφηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Aporrofhsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Απορρόφηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Απορρόφηση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Λεπτό έντερο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Lepto_entero.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Λεπτό έντερο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Λεπτό έντερο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Οισοφάγος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Oisofagos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Οισοφάγος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Οισοφάγος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Πάγκρεας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Pagkreas.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πάγκρεας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πάγκρεας"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Παχύ Έντερο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Paxy_Entero.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Παχύ Έντερο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Παχύ Έντερο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Πέψη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Pepsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πέψη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πέψη"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Στομάχι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Stomaxi.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Στομάχι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Στομάχι"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Συκώτι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Sykwti.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Συκώτι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Συκώτι"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Constantinople_1453.jpg",
+      "text": "Εικόνα: 15ος αιώνας · Public domain",
+      "concept": "Άλωση της Πόλης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Alwsh_ths_Polhs.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Άλωση της Πόλης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Άλωση της Πόλης"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Map_Byzantine_Empire_1025-el.svg",
+      "text": "Εικόνα: Nécropotame / Cplakidas · CC BY-SA",
+      "concept": "Βυζάντιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Vyzantio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Βυζάντιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Βυζάντιο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Map_Byzantine_Empire_1025-el.svg",
+      "text": "Εικόνα: Nécropotame / Cplakidas · CC BY-SA",
+      "concept": "Ελληνικά κράτη μετά το 1204"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Ellhnika_krath_meta_to_1204.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ελληνικά κράτη μετά το 1204"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ελληνικά κράτη μετά το 1204"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Detail._Byzantine_Emperor_Constantine_I_holds_a_model_of_the_city_of_Constantinople_and_presents_it_to_the_Virgin_Mary_(not_shown)._Southwestern_entrance_mosaic,_Hagia_Sophia,_10th_century_CE._Istanbul,_Turkey.jpg",
+      "text": "Εικόνα: Osama Shukir Muhammed Amin · CC BY-SA 4.0",
+      "concept": "Κωνσταντίνος Α΄"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Kwnstantinos_o_A.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κωνσταντίνος Α΄"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κωνσταντίνος Α΄"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Map_of_the_Roman_Empire_during_Trajan.png",
+      "text": "Εικόνα: Joyfulmapper · CC0",
+      "concept": "Ρωμαϊκή αυτοκρατορία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Rwmaikh_aftokratoria.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ρωμαϊκή αυτοκρατορία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ρωμαϊκή αυτοκρατορία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:First.Crusade.Map.jpg",
+      "text": "Εικόνα: William Shepherd (1911) · Public domain",
+      "concept": "Σταυροφορίες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Stavrofories.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Σταυροφορίες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Σταυροφορίες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Map_Byzantine_Empire_1025-el.svg",
+      "text": "Εικόνα: Nécropotame / Cplakidas · CC BY-SA",
+      "concept": "Υγρό πυρ"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Ygro_pyr.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Υγρό πυρ"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Υγρό πυρ"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Βόρειο ημισφαίριο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Voreio_hmisfairio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Βόρειο ημισφαίριο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Βόρειο ημισφαίριο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · κάνναβος παραλλήλων/μεσημβρινών",
+      "concept": "Γεωγραφικές συντεταγμένες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Gewgrafikes_syntetagmenes.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γεωγραφικές συντεταγμένες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γεωγραφικές συντεταγμένες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · κάνναβος παραλλήλων/μεσημβρινών",
+      "concept": "Γεωγραφικό μήκος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Gewgrafiko_mhkos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γεωγραφικό μήκος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γεωγραφικό μήκος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Robinson_projection_with_major_circles_of_latitude_and_prime_meridian_labeled.png",
+      "text": "Εικόνα: Wikimedia Commons · χάρτης γεωγραφικού πλάτους",
+      "concept": "Γεωγραφικό πλάτος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Gewgrafiko_platos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γεωγραφικό πλάτος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γεωγραφικό πλάτος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solar_System_graphic_by_NASA.png",
+      "text": "Εικόνα: NASA · Public domain",
+      "concept": "Ελλειπτική τροχιά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Elleiptikh_troxia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ελλειπτική τροχιά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ελλειπτική τροχιά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Έρημος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Erhmos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Έρημος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Έρημος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Ήπειρος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Hpeiros.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ήπειρος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ήπειρος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Equator_and_Prime_Meridian.svg",
+      "text": "Εικόνα: NuclearVacuum · CC BY-SA 3.0",
+      "concept": "Ισημερινός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Ishmerinos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ισημερινός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ισημερινός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Equator_and_Prime_Meridian.svg",
+      "text": "Εικόνα: NuclearVacuum · CC BY-SA 3.0",
+      "concept": "Μεσημβρινός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Meshmvrinos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Μεσημβρινός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Μεσημβρινός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Νότιο ημισφαίριο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Notio_hmisfairio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Νότιο ημισφαίριο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Νότιο ημισφαίριο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_illustrating_the_earth%27s_annual_revolution_round_the_sun,_and_its_diurnal_rotation_on_its_axis._showing_its_position_(IA_dr_diagram-illustrating-the-earths-annual-revolution-round-the-sun-and-its-d-3432014).jpg",
+      "text": "Εικόνα: J. Reynolds / J. Emslie · ιστορικό διάγραμμα",
+      "concept": "Περιστροφή της γης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Peristrofh_ths_ghs.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Περιστροφή της γης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Περιστροφή της γης"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_illustrating_the_earth%27s_annual_revolution_round_the_sun,_and_its_diurnal_rotation_on_its_axis._showing_its_position_(IA_dr_diagram-illustrating-the-earths-annual-revolution-round-the-sun-and-its-d-3432014).jpg",
+      "text": "Εικόνα: J. Reynolds / J. Emslie · ιστορικό διάγραμμα",
+      "concept": "Περιφορά της γης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Perifora_ths_ghs.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Περιφορά της γης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Περιφορά της γης"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solar_System_graphic_by_NASA.png",
+      "text": "Εικόνα: NASA · Public domain",
+      "concept": "Πλανήτες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Planhtes.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πλανήτες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πλανήτες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Πρώτος Μεσημβρινός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Prwtos_meshmvrinos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πρώτος Μεσημβρινός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πρώτος Μεσημβρινός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Landform_diagram_peak.svg",
+      "text": "Εικόνα: Sunspeanzler · CC BY-SA/GFDL",
+      "concept": "Υψόμετρο ενός τόπου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Ypsometro_enos_topou.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Υψόμετρο ενός τόπου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Υψόμετρο ενός τόπου"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solar_System_graphic_by_NASA.png",
+      "text": "Εικόνα: NASA · Public domain",
+      "concept": "Φανταστικός άξονας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia-2/Fantastikos_aksonas.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φανταστικός άξονας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φανταστικός άξονας"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:WorldCoastLine_EquiRectangular.svg",
+      "text": "Εικόνα: Wikimedia Commons · παγκόσμιος κάνναβος",
+      "concept": "Ωκεανός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Geografia/Wkeanos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ωκεανός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-geografia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ωκεανός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solid_liquid_gas.svg",
+      "text": "Εικόνα: Luis J. Rodriguez Lopez · CC BY-SA",
+      "concept": "Διοξείδιο του άνθρακα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Diokseidio_tou_anthraka.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Διοξείδιο του άνθρακα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Διοξείδιο του άνθρακα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Geometry_of_Solar_eclipses_and_Lunar_eclipses.svg",
+      "text": "Εικόνα: Scrawler · CC BY 3.0",
+      "concept": "Έκλειψη Ηλίου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Ekleipsh_hliou.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Έκλειψη Ηλίου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Έκλειψη Ηλίου"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Geometry_of_Solar_eclipses_and_Lunar_eclipses.svg",
+      "text": "Εικόνα: Scrawler · CC BY 3.0",
+      "concept": "Έκλειψη Σελήνης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Ekleipsh_selhnhs.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Έκλειψη Σελήνης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Έκλειψη Σελήνης"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Solid_liquid_gas.svg",
+      "text": "Εικόνα: Luis J. Rodriguez Lopez · CC BY-SA",
+      "concept": "Οξυγόνο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Oksygono.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Οξυγόνο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Οξυγόνο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:1900_Blood_cells.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Αίμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/vlepwkaimathainw/Aima.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αίμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αίμα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:1900_Blood_cells.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Αιμοπετάλια"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Aimopetalia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αιμοπετάλια"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αιμοπετάλια"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2301_Major_Respiratory_Organs.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Αναπνευστικό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Anapnefstiko.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αναπνευστικό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αναπνευστικό"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2301_Major_Respiratory_Organs.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Αναπνοή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Anapnoh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αναπνοή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αναπνοή"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Arterial_vs_Venous_Systems.svg",
+      "text": "Εικόνα: Wikimedia / OpenStax derivative · CC BY-SA",
+      "concept": "Αρτηρίες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Arthries.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αρτηρίες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αρτηρίες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2301_Major_Respiratory_Organs.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Βρόγχοι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Vronchoi.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Βρόγχοι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Βρόγχοι"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:1903_Shape_of_Red_Blood_Cells.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Ερυθρά Αιμοσφαίρια"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Erythra_Aimosfairia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ερυθρά Αιμοσφαίρια"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ερυθρά Αιμοσφαίρια"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2000_Human_Heart_Photo.jpg",
+      "text": "Εικόνα: OpenStax · CC BY 4.0",
+      "concept": "Καρδιά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/glwssa_ab/Kardia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Καρδιά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Καρδιά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2301_Major_Respiratory_Organs.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Κυψελίδες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Kypselides.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κυψελίδες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κυψελίδες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:1900_Blood_cells.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Λευκά Αιμοσφαίρια"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Lefka_Aimosfairia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Λευκά Αιμοσφαίρια"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Λευκά Αιμοσφαίρια"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2101_Blood_Flow_Through_the_Heart.svg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Μεγάλη Κυκλοφορία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Megalh_Kykloforia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Μεγάλη Κυκλοφορία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Μεγάλη Κυκλοφορία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2101_Blood_Flow_Through_the_Heart.svg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Μικρή Κυκλοφορία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Mikrh_Kykloforia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Μικρή Κυκλοφορία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Μικρή Κυκλοφορία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2301_Major_Respiratory_Organs.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Πνεύμονες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/vlepwkaimathainw/Pneymones.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πνεύμονες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πνεύμονες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2301_Major_Respiratory_Organs.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Τραχεία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Traxeia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Τραχεία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Τραχεία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:2401_Components_of_the_Digestive_System.jpg",
+      "text": "Εικόνα: OpenStax College · CC BY 3.0",
+      "concept": "Φάρυγγας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Faryggas.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φάρυγγας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φάρυγγας"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Arterial_vs_Venous_Systems.svg",
+      "text": "Εικόνα: Wikimedia / OpenStax derivative · CC BY-SA",
+      "concept": "Φλέβες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Fleves.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φλέβες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φλέβες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:StormingBastille.jpg",
+      "text": "Εικόνα: Storming of the Bastille · Public domain",
+      "concept": "Γαλλική Επανάσταση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Gallikh_Epanastash.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γαλλική Επανάσταση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γαλλική Επανάσταση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:The_sortie_of_Messologhi_by_Theodore_Vryzakis.jpg",
+      "text": "Εικόνα: Θεόδωρος Βρυζάκης · Public domain",
+      "concept": "Δάσκαλοι του Γένους"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Daskaloi_tou_Genous.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Δάσκαλοι του Γένους"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Δάσκαλοι του Γένους"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:The_sortie_of_Messologhi_by_Theodore_Vryzakis.jpg",
+      "text": "Εικόνα: Θεόδωρος Βρυζάκης · Public domain",
+      "concept": "Έξοδος του Μεσολογγίου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Eksodos_tou_Mesologgiou.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Έξοδος του Μεσολογγίου"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Έξοδος του Μεσολογγίου"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Cantino_planisphere_(1502).jpg",
+      "text": "Εικόνα: Cantino planisphere (1502) · Public domain",
+      "concept": "Ευρωπαίοι θαλασσοπόροι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Evrwpaioi_thalassoporoi.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ευρωπαίοι θαλασσοπόροι"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ευρωπαίοι θαλασσοπόροι"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Luther95theses.jpg",
+      "text": "Εικόνα: 95 Θέσεις του Λούθηρου · Public domain",
+      "concept": "Θρησκευτική Μεταρρύθμιση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Thrhskeftikh_Metarrythmish.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Θρησκευτική Μεταρρύθμιση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Θρησκευτική Μεταρρύθμιση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Ioannis_Kapodistrias_(1776-1831).jpg",
+      "text": "Εικόνα: Δ. Τσόκος · Public domain",
+      "concept": "Καποδίστριας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Kapodistrias.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Καποδίστριας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Καποδίστριας"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:The_sortie_of_Messologhi_by_Theodore_Vryzakis.jpg",
+      "text": "Εικόνα: Θεόδωρος Βρυζάκης · Public domain",
+      "concept": "Κλέφτες και Αρματωλοί"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Kleftes_kai_Armatoloi.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κλέφτες και Αρματωλοί"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κλέφτες και Αρματωλοί"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Portrait_de_Voltaire_dans_son_cabinet_de_travail.jpg",
+      "text": "Εικόνα: Anonymous, c. 1745–1755 · Public domain",
+      "concept": "Το κίνημα του Διαφωτισμού"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/To_kinhma_tou_Diafwtismoy.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Το κίνημα του Διαφωτισμού"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Το κίνημα του Διαφωτισμού"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Printing_press.jpg",
+      "text": "Εικόνα: ιστορικό πιεστήριο · Public domain",
+      "concept": "Τυπογραφία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Typografia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Τυπογραφία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Τυπογραφία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:The_sortie_of_Messologhi_by_Theodore_Vryzakis.jpg",
+      "text": "Εικόνα: Θεόδωρος Βρυζάκης · Public domain",
+      "concept": "Φιλέλληνες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Filellhnes.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φιλέλληνες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φιλέλληνες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Seal_of_Philiki_Etaireia.png",
+      "text": "Εικόνα: Φιλική Εταιρεία (1814) · Public domain",
+      "concept": "Φιλική Εταιρεία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Istoria/Filikh_Etaireia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φιλική Εταιρεία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-istoria",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φιλική Εταιρεία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Pollination_Diagram.svg",
+      "text": "Εικόνα: YJaredY · CC BY-SA 4.0",
+      "concept": "Αγενής Πολλαπλασιασμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Agenhs_Pollaplasiasmos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Αγενής Πολλαπλασιασμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Αγενής Πολλαπλασιασμός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_of_a_Flower.svg",
+      "text": "Εικόνα: Audreyyhuang · CC BY 4.0",
+      "concept": "Γαμέτης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Gameths.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γαμέτης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γαμέτης"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Flower_fertilisation_diagram.svg",
+      "text": "Εικόνα: Chiswick Chap · CC BY-SA 4.0",
+      "concept": "Γονιμοποίηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Gonimopoihsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γονιμοποίηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γονιμοποίηση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_of_a_Flower.svg",
+      "text": "Εικόνα: Audreyyhuang · CC BY 4.0",
+      "concept": "Γύρη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Gyrh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γύρη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γύρη"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Monocot_vs_Dicot.svg",
+      "text": "Εικόνα: Flowerpower207 · CC BY-SA 3.0",
+      "concept": "Δικοτυλήδονα φυτά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Dikotylhdona_fyta.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Δικοτυλήδονα φυτά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Δικοτυλήδονα φυτά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Pollination_Diagram.svg",
+      "text": "Εικόνα: YJaredY · CC BY-SA 4.0",
+      "concept": "Εγγενής Πολλαπλασιασμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Eggenhs_Pollaplasiamos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Εγγενής Πολλαπλασιασμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Εγγενής Πολλαπλασιασμός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Bee_pollinating_flower.png",
+      "text": "Εικόνα: TylerMascola · CC0",
+      "concept": "Επικονίαση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Epikoniash.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Επικονίαση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Επικονίαση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_cell_structure_no_text.png",
+      "text": "Εικόνα: LadyofHats · Public domain",
+      "concept": "Ιστός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Istos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ιστός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ιστός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_cell_structure_no_text.png",
+      "text": "Εικόνα: LadyofHats · Public domain",
+      "concept": "Κυτταρικό τοίχωμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Kyttariko_toixwma.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κυτταρικό τοίχωμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κυτταρικό τοίχωμα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_cell_structure_no_text.png",
+      "text": "Εικόνα: LadyofHats · Public domain",
+      "concept": "Κύτταρο φυτικό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Kyttaro_fytiko.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κύτταρο φυτικό"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κύτταρο φυτικό"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Monocot_vs_Dicot.svg",
+      "text": "Εικόνα: Flowerpower207 · CC BY-SA 3.0",
+      "concept": "Μονοκοτυλήδονα φυτά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Monokotylhdona_fyta.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Μονοκοτυλήδονα φυτά"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Μονοκοτυλήδονα φυτά"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_cell_structure_no_text.png",
+      "text": "Εικόνα: LadyofHats · Public domain",
+      "concept": "Πυρήνας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Pyrhnas.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πυρήνας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πυρήνας"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Human_skeleton_diagram_trace.svg",
+      "text": "Εικόνα: Human skeleton diagram · Public domain",
+      "concept": "Σκελετός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/koitame/Skeletos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Σκελετός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Σκελετός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Human_vertebral_column.png",
+      "text": "Εικόνα: Anatomography / Wikimedia Commons · CC BY-SA",
+      "concept": "Σπονδυλική Στήλη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Anthrwpino-Swma/Spondylikh_Sthlh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Σπονδυλική Στήλη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-anthrwpino-swma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Σπονδυλική Στήλη"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_of_a_Flower.svg",
+      "text": "Εικόνα: Audreyyhuang · CC BY 4.0",
+      "concept": "Στήμονες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Sthmones.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Στήμονες"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Στήμονες"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Plant_cell_structure_no_text.png",
+      "text": "Εικόνα: LadyofHats · Public domain",
+      "concept": "Στομάτιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Stomatio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Στομάτιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Στομάτιο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_of_a_Flower.svg",
+      "text": "Εικόνα: Audreyyhuang · CC BY 4.0",
+      "concept": "Ύπερος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Yperos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ύπερος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ύπερος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Process_of_Photosynthesis.jpg",
+      "text": "Εικόνα: Ndennis99 · CC0",
+      "concept": "Φωτοσύνθεση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Fwtosynthesh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Φωτοσύνθεση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Φωτοσύνθεση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Process_of_Photosynthesis.jpg",
+      "text": "Εικόνα: Ndennis99 · CC0",
+      "concept": "Χλωροφύλλη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Thermothta-Fws-Fush/Xlwrofyllh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Χλωροφύλλη"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-vasika-stoixeia",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Χλωροφύλλη"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:View_of_the_Pnyx_plateau_in_Athens_(50959890047).jpg",
+      "text": "Εικόνα: George E. Koronaios · Wikimedia Commons",
+      "concept": "Δημοκρατία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Dhmokratia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Δημοκρατία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Δημοκρατία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Chromosome_DNA_Gene.svg",
+      "text": "Εικόνα: Thomas Shafee · CC BY 4.0",
+      "concept": "Γονίδιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Gonidio.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Γονίδιο"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Γονίδιο"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_of_meiosis.svg",
+      "text": "Εικόνα: Ali Zifan · CC BY-SA",
+      "concept": "Μείωση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Meiwsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Μείωση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Μείωση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:DNA_Double_Helix_by_NHGRI.jpg",
+      "text": "Εικόνα: NHGRI / NIH · Public domain",
+      "concept": "Μεταλλαγή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Metallagh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Μεταλλαγή"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Μεταλλαγή"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Diagram_of_mitosis.svg",
+      "text": "Εικόνα: Mysid · CC BY-SA",
+      "concept": "Μίτωση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Mitwsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Μίτωση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Μίτωση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:NHGRI_human_male_karyotype.svg",
+      "text": "Εικόνα: NHGRI / NIH · Public domain",
+      "concept": "Χρωματοσώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/Xrwmatoswmata.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Χρωματοσώματα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Χρωματοσώματα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:DNA_Double_Helix_by_NHGRI.jpg",
+      "text": "Εικόνα: NHGRI / NIH · Public domain",
+      "concept": "DNA"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Ennoies-Fushs/DNA.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "DNA"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-ennoies-fushs",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "DNA"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Laboratory_Glassware.jpg",
+      "text": "Εικόνα: Michael Pereckas · CC BY 2.0",
+      "concept": "Πείραμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Meleth_Perivalontos/Peirama.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πείραμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-sxoleio-proswpika-antikeimena",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πείραμα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:View_of_the_Pnyx_plateau_in_Athens_(50959890047).jpg",
+      "text": "Εικόνα: George E. Koronaios · Wikimedia Commons",
+      "concept": "Άμεση δημοκρατία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Amesh_dhmokratia.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Άμεση δημοκρατία"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Άμεση δημοκρατία"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Greek_Parliament_and_Syntagma_Square.jpg",
+      "text": "Εικόνα: Annatsach · CC BY-SA 4.0",
+      "concept": "Ελληνοποίηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Ellhnopoihsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ελληνοποίηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ελληνοποίηση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Greek_Parliament_and_Syntagma_Square.jpg",
+      "text": "Εικόνα: Annatsach · CC BY-SA 4.0",
+      "concept": "Ιδιωτικοποίηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Idiwtikopoihsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Ιδιωτικοποίηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Ιδιωτικοποίηση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Internet_map_1024.jpg",
+      "text": "Εικόνα: The Opte Project · CC BY 2.5",
+      "concept": "Κοινωνία της Πληροφορίας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Koinwnia_ths_Plhroforias.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κοινωνία της Πληροφορίας"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κοινωνία της Πληροφορίας"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Greek_Parliament_and_Syntagma_Square.jpg",
+      "text": "Εικόνα: Annatsach · CC BY-SA 4.0",
+      "concept": "Κόμμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Komma.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κόμμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κόμμα"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Greek_Parliament_and_Syntagma_Square.jpg",
+      "text": "Εικόνα: Annatsach · CC BY-SA 4.0",
+      "concept": "Κράτος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Kratos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Κράτος"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Κράτος"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Internet_map_1024.jpg",
+      "text": "Εικόνα: The Opte Project · CC BY 2.5",
+      "concept": "Παραπληροφόρηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Paraplhroforhsh.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Παραπληροφόρηση"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Παραπληροφόρηση"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Euro_symbol_black.svg",
+      "text": "Εικόνα: Verdy_p · Public domain",
+      "concept": "Πληθωρισμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Plhthwrismos.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πληθωρισμός"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πληθωρισμός"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Greek_Parliament_and_Syntagma_Square.jpg",
+      "text": "Εικόνα: Annatsach · CC BY-SA 4.0",
+      "concept": "Πολίτης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Poliths.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Πολίτης"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Πολίτης"
+    },
+    {
+      "href": "https://commons.wikimedia.org/wiki/File:Greek_Parliament_and_Syntagma_Square.jpg",
+      "text": "Εικόνα: Annatsach · CC BY-SA 4.0",
+      "concept": "Σύνταγμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/videos/Politikh-zoh-me-nohma/Syntagma.webm",
+      "text": "🤟 Δες το επίσημο βίντεο ΕΝΓ ↗",
+      "concept": "Σύνταγμα"
+    },
+    {
+      "href": "https://prosvasimo.iep.edu.gr/el/lexiko-politikh-zoh-me-nohma",
+      "text": "σελίδα πηγής στο ΙΕΠ ↗",
+      "concept": "Σύνταγμα"
+    },
+    {
+      "href": "https://www.dwrean.net/",
+      "text": "",
+      "concept": ""
+    },
+    {
+      "href": "https://www.dwrean.net/2026/09/ai-tools-4-kids-ellinika-dorean-ai-ergaleia.html",
+      "text": "dwrean.net ↗",
+      "concept": ""
+    }
+  ],
+  "imgs": [
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squares%20and%20circles.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squares%20and%20circles.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squares%20and%20circles.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Compass%20rose1.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lightning%20NOAA.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lightning%20NOAA.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Compass%20rose1.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lightning%20NOAA.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Compass%20rose1.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lightning%20NOAA.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Compass%20rose1.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Compass%20rose1.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Watercycle-notext.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solid%20liquid%20gas.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Watercycle-notext.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Watercycle-notext.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solid%20liquid%20gas.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plastic%20recycling%20bin%20in%20Reykjavik%20cropped.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solid%20liquid%20gas.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Watercycle-notext.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Wooden%20Materials.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20of%20a%20Flower.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rosemary%20herb.JPG?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plant%20Anatomy.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plant%20Anatomy.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plant%20Anatomy.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plant%20Anatomy.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plant%20Anatomy.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Plant%20Anatomy.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Landform%20diagram%20peak.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Vistula%20river%20map-clean.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Coastal%20topography%20sketch%20numbered.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Landform%20diagram%20valley%20x.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Coastal%20topography%20sketch%20numbered.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Coastal%20topography%20sketch%20numbered.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Coastal%20topography%20sketch%20numbered.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Coastal%20topography%20sketch%20numbered.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Landform%20diagram%20peak.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Landform%20diagram%20peak.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Landform%20diagram%20plain.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Vistula%20river%20map-clean.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Vistula%20river%20map-clean.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Vistula%20river%20map-clean.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Coastal%20topography%20sketch%20numbered.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Parallel%20Lines.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Map%20athenian%20empire%20431%20BC-en.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/View%20of%20the%20Pnyx%20plateau%20in%20Athens%20%2850959890047%29.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Map%20peloponnesian%20war-it.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mail-envelope.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Volcano%20scheme.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldKoppen.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Riflessione%20rifrazione.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Riflessione%20rifrazione.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Riflessione%20rifrazione.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Riflessione%20rifrazione.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Watercycle-notext.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Riflessione%20rifrazione.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thermometer%20%28PSF%29.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thermometer%20%28PSF%29.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thermometer%20%28PSF%29.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Watercycle-notext.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Riflessione%20rifrazione.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Prisme.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Thermometer%20%28PSF%29.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Constantinople%201453.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Map%20Byzantine%20Empire%201025-el.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Map%20Byzantine%20Empire%201025-el.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Detail.%20Byzantine%20Emperor%20Constantine%20I%20holds%20a%20model%20of%20the%20city%20of%20Constantinople%20and%20presents%20it%20to%20the%20Virgin%20Mary%20%28not%20shown%29.%20Southwestern%20entrance%20mosaic%2C%20Hagia%20Sophia%2C%2010th%20century%20CE.%20Istanbul%2C%20Turkey.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Map%20of%20the%20Roman%20Empire%20during%20Trajan.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/First.Crusade.Map.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Map%20Byzantine%20Empire%201025-el.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Robinson%20projection%20with%20major%20circles%20of%20latitude%20and%20prime%20meridian%20labeled.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solar%20System%20graphic%20by%20NASA.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Equator%20and%20Prime%20Meridian.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Equator%20and%20Prime%20Meridian.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20illustrating%20the%20earth%27s%20annual%20revolution%20round%20the%20sun%2C%20and%20its%20diurnal%20rotation%20on%20its%20axis.%20showing%20its%20position%20%28IA%20dr%20diagram-illustrating-the-earths-annual-revolution-round-the-sun-and-its-d-3432014%29.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20illustrating%20the%20earth%27s%20annual%20revolution%20round%20the%20sun%2C%20and%20its%20diurnal%20rotation%20on%20its%20axis.%20showing%20its%20position%20%28IA%20dr%20diagram-illustrating-the-earths-annual-revolution-round-the-sun-and-its-d-3432014%29.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solar%20System%20graphic%20by%20NASA.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Landform%20diagram%20peak.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solar%20System%20graphic%20by%20NASA.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/WorldCoastLine%20EquiRectangular.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solid%20liquid%20gas.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Geometry%20of%20Solar%20eclipses%20and%20Lunar%20eclipses.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Geometry%20of%20Solar%20eclipses%20and%20Lunar%20eclipses.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Solid%20liquid%20gas.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/0/06/1900_Blood_cells.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/06/1900_Blood_cells.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2a/2301_Major_Respiratory_Organs.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2a/2301_Major_Respiratory_Organs.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/ac/Arterial_vs_Venous_Systems.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2a/2301_Major_Respiratory_Organs.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/9/97/1903_Shape_of_Red_Blood_Cells.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/ac/2000_Human_Heart_Photo.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2a/2301_Major_Respiratory_Organs.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/06/1900_Blood_cells.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/02/2101_Blood_Flow_Through_the_Heart.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/02/2101_Blood_Flow_Through_the_Heart.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2a/2301_Major_Respiratory_Organs.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2a/2301_Major_Respiratory_Organs.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/03/2401_Components_of_the_Digestive_System.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/a/ac/Arterial_vs_Venous_Systems.svg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/StormingBastille.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/The%20sortie%20of%20Messologhi%20by%20Theodore%20Vryzakis.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/The%20sortie%20of%20Messologhi%20by%20Theodore%20Vryzakis.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Cantino%20planisphere%20%281502%29.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Luther95theses.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ioannis%20Kapodistrias%20%281776-1831%29.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/The%20sortie%20of%20Messologhi%20by%20Theodore%20Vryzakis.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Portrait%20de%20Voltaire%20dans%20son%20cabinet%20de%20travail.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Printing%20press.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/The%20sortie%20of%20Messologhi%20by%20Theodore%20Vryzakis.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Seal%20of%20Philiki%20Etaireia.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Pollination%20Diagram.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20of%20a%20Flower.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c8/Flower_fertilisation_diagram.svg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20of%20a%20Flower.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Monocot%20vs%20Dicot.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Pollination%20Diagram.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/c/c3/Bee_pollinating_flower.png",
+    "https://upload.wikimedia.org/wikipedia/commons/3/38/Plant_cell_structure_no_text.png",
+    "https://upload.wikimedia.org/wikipedia/commons/3/38/Plant_cell_structure_no_text.png",
+    "https://upload.wikimedia.org/wikipedia/commons/3/38/Plant_cell_structure_no_text.png",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Monocot%20vs%20Dicot.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/3/38/Plant_cell_structure_no_text.png",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Human%20skeleton%20diagram%20trace.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Human%20vertebral%20column.png?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20of%20a%20Flower.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/3/38/Plant_cell_structure_no_text.png",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20of%20a%20Flower.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d4/Process_of_Photosynthesis.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/d/d4/Process_of_Photosynthesis.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/View%20of%20the%20Pnyx%20plateau%20in%20Athens%20%2850959890047%29.jpg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/2/2b/Chromosome_DNA_Gene.svg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20of%20meiosis.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/1/13/DNA_Double_Helix_by_NHGRI.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Diagram%20of%20mitosis.svg?width=1000",
+    "https://upload.wikimedia.org/wikipedia/commons/c/cf/NHGRI_human_male_karyotype.svg",
+    "https://upload.wikimedia.org/wikipedia/commons/1/13/DNA_Double_Helix_by_NHGRI.jpg",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Laboratory%20Glassware.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/View%20of%20the%20Pnyx%20plateau%20in%20Athens%20%2850959890047%29.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Internet%20map%201024.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Internet%20map%201024.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Euro%20symbol%20black.svg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
+    "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
+    "http://127.0.0.1:4173/assets/dwrean-logo.jpg"
+  ]
+}

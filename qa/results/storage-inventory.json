@@ -1,0 +1,83 @@
+{
+  "steps": [
+    {
+      "name": "home",
+      "cookies": [],
+      "documentCookie": "",
+      "localStorage": {},
+      "sessionStorage": {},
+      "indexedDB": [],
+      "caches": [
+        "aitools4kids-pwa-v4"
+      ],
+      "serviceWorkers": [
+        "http://127.0.0.1:4173/"
+      ]
+    },
+    {
+      "name": "primary tools",
+      "cookies": [],
+      "documentCookie": "",
+      "localStorage": {},
+      "sessionStorage": {},
+      "indexedDB": [],
+      "caches": [
+        "aitools4kids-pwa-v4"
+      ],
+      "serviceWorkers": [
+        "http://127.0.0.1:4173/"
+      ]
+    },
+    {
+      "name": "after AI Help message",
+      "cookies": [],
+      "documentCookie": "",
+      "localStorage": {},
+      "sessionStorage": {
+        "aitools4kidsStudyContextV1": "{\"createdAt\":1790753277039,\"context\":{\"version\":1,\"zoneId\":\"high\",\"roleId\":\"stud"
+      },
+      "indexedDB": [],
+      "caches": [
+        "aitools4kids-pwa-v4"
+      ],
+      "serviceWorkers": [
+        "http://127.0.0.1:4173/"
+      ]
+    },
+    {
+      "name": "study.html topic chosen",
+      "cookies": [],
+      "documentCookie": "",
+      "localStorage": {},
+      "sessionStorage": {
+        "aitools4kidsStudyContextV1": "{\"createdAt\":1790753280315,\"context\":{\"version\":1,\"zoneId\":\"primary\",\"roleId\":\"s"
+      },
+      "indexedDB": [],
+      "caches": [
+        "aitools4kids-pwa-v4"
+      ],
+      "serviceWorkers": [
+        "http://127.0.0.1:4173/"
+      ]
+    },
+    {
+      "name": "after quiz completed",
+      "cookies": [],
+      "documentCookie": "",
+      "localStorage": {
+        "aitools4kids_progress_v1": "{\"zoneId\":\"primary\",\"quizId\":\"math-e-dimotikou\",\"gapTagIds\":[],\"savedAt\":1790753"
+      },
+      "sessionStorage": {
+        "aitools4kidsStudyContextV1": "{\"createdAt\":1790753280315,\"context\":{\"version\":1,\"zoneId\":\"primary\",\"roleId\":\"s",
+        "aitools4kids_last_quiz_id_v1": "math-e-dimotikou"
+      },
+      "indexedDB": [],
+      "caches": [
+        "aitools4kids-pwa-v4"
+      ],
+      "serviceWorkers": [
+        "http://127.0.0.1:4173/"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+[
+  {
+    "path": "/",
+    "status": "ok",
+    "h1": [
+      "Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα."
+    ],
+    "visibleTextLen": 2039,
+    "links": 34,
+    "noscript": [
+      "aitools4kids.gr: Μαθαίνω Έξυπνα με AI\n      \n        Ανεξάρτητο, δωρεάν, δίγλωσσ"
+    ],
+    "zoneGridChildren": 0,
+    "zoneGridVisible": true,
+    "headings": [
+      "Ηλικιακές ζώνες",
+      "Τι θα βρεις",
+      "Δείξε μου πώς να το μάθω, όχι τη λύση",
+      "Διάλεξε ηλικιακή ζώνη",
+      "Έννοιες στην Ελληνική Νοηματική"
+    ]
+  },
+  {
+    "path": "/primary/guardian/tools",
+    "status": "ok",
+    "h1": [
+      "Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα."
+    ],
+    "visibleTextLen": 2039,
+    "links": 34,
+    "noscript": [
+      "aitools4kids.gr: Μαθαίνω Έξυπνα με AI\n      \n        Ανεξάρτητο, δωρεάν, δίγλωσσ"
+    ],
+    "zoneGridChildren": 0,
+    "zoneGridVisible": true,
+    "headings": [
+      "Ηλικιακές ζώνες",
+      "Τι θα βρεις",
+      "Δείξε μου πώς να το μάθω, όχι τη λύση",
+      "Διάλεξε ηλικιακή ζώνη",
+      "Έννοιες στην Ελληνική Νοηματική"
+    ]
+  },
+  {
+    "path": "/study.html",
+    "status": "ok",
+    "h1": [
+      "AI Μελέτη"
+    ],
+    "visibleTextLen": 1870,
+    "links": 3,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": [
+      "Τι διαβάζεις;",
+      "Διάλεξε τρόπο μελέτης"
+    ]
+  },
+  {
+    "path": "/xartis-ylis.html",
+    "status": "ok",
+    "h1": [
+      "Ύλη & Εξάσκηση"
+    ],
+    "visibleTextLen": 1145,
+    "links": 6,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": [
+      "Τι διαβάζεις τώρα;",
+      "Γιατί δεν εμφανίζουμε “όλη την ύλη” με τ"
+    ]
+  },
+  {
+    "path": "/sign-language.html",
+    "status": "ok",
+    "h1": [
+      "Σχολικές έννοιες στην Ελληνική Νοηματική Γλώσσα (Ε"
+    ],
+    "visibleTextLen": 1581,
+    "links": 8,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": [
+      "Αναζήτησε μέσα στις 167 διαθέσιμες έννοι"
+    ]
+  },
+  {
+    "path": "/teacher-assistant.html",
+    "status": "ok",
+    "h1": [
+      "Εκπαιδευτικό υλικό"
+    ],
+    "visibleTextLen": 1820,
+    "links": 17,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": [
+      "Τι θέλεις να φτιάξεις;"
+    ]
+  },
+  {
+    "path": "/guide.html",
+    "status": "ok",
+    "h1": [
+      "Πώς χρησιμοποιώ σωστά το AI;"
+    ],
+    "visibleTextLen": 333,
+    "links": 3,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": []
+  },
+  {
+    "path": "/tools/chatgpt.html",
+    "status": "ok",
+    "h1": [
+      "ChatGPT για παιδιά στην Ελλάδα: ηλικιακό όριο, γον"
+    ],
+    "visibleTextLen": 2028,
+    "links": 10,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": [
+      "Πρόσβαση & ηλικία",
+      "Πώς το προτείνουμε για σχολείο",
+      "Ελληνικά",
+      "Δεδομένα & απόρρητο",
+      "Τι να θυμάσαι",
+      "Πηγές / έλεγχος"
+    ]
+  },
+  {
+    "path": "/privacy-policy.html",
+    "status": "ok",
+    "h1": [
+      "Πολιτική Απορρήτου"
+    ],
+    "visibleTextLen": 8189,
+    "links": 8,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": [
+      "1. Ποιοι είμαστε",
+      "2. Η βασική πλατφόρμα",
+      "3. AI λειτουργίες μέσω Cloudflare Worker",
+      "4. Προαιρετική χρήση Puter",
+      "5. PDF και αρχεία μελέτης",
+      "6. AI Μελέτη και επίσημο σχολικό βιβλίο"
+    ]
+  },
+  {
+    "path": "/special-education.html",
+    "status": "ok",
+    "h1": [
+      "Ειδική Εκπαίδευση: Μαθαίνω βήμα βήμα"
+    ],
+    "visibleTextLen": 1102,
+    "links": 2,
+    "noscript": [],
+    "zoneGridChildren": null,
+    "zoneGridVisible": false,
+    "headings": [
+      "1. Διάλεξε σχολείο",
+      "Εργαλεία που μπορούν να βοηθήσουν πέρα α"
+    ]
+  }
+]

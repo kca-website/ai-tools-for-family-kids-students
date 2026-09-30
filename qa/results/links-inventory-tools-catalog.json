@@ -1,0 +1,1431 @@
+{
+  "note": "NOT CHECKED – runner had no network access to these hosts. This is the list that `npm run links` will verify.",
+  "count": 160,
+  "hosts": [
+    [
+      "support.google.com",
+      9
+    ],
+    [
+      "support.microsoft.com",
+      9
+    ],
+    [
+      "quizlet.com",
+      5
+    ],
+    [
+      "www.deepl.com",
+      4
+    ],
+    [
+      "www.canva.com",
+      4
+    ],
+    [
+      "scite.ai",
+      4
+    ],
+    [
+      "openai.com",
+      4
+    ],
+    [
+      "help.formative.com",
+      4
+    ],
+    [
+      "www.desmos.com",
+      3
+    ],
+    [
+      "blog.google",
+      3
+    ],
+    [
+      "www.symbolab.com",
+      3
+    ],
+    [
+      "elsaspeak.com",
+      3
+    ],
+    [
+      "www.briskteaching.com",
+      3
+    ],
+    [
+      "web.diffit.me",
+      3
+    ],
+    [
+      "learn.microsoft.com",
+      3
+    ],
+    [
+      "help.wayground.com",
+      3
+    ],
+    [
+      "www.zotero.org",
+      2
+    ],
+    [
+      "gamma.app",
+      2
+    ],
+    [
+      "phet.colorado.edu",
+      2
+    ],
+    [
+      "www.grammarly.com",
+      2
+    ],
+    [
+      "www.magicschool.ai",
+      2
+    ],
+    [
+      "miro.com",
+      2
+    ],
+    [
+      "hemingwayapp.com",
+      2
+    ],
+    [
+      "www.autodraw.com",
+      2
+    ],
+    [
+      "gemini.google.com",
+      2
+    ],
+    [
+      "www.perplexity.ai",
+      2
+    ],
+    [
+      "photomath.com",
+      2
+    ],
+    [
+      "www.geogebra.org",
+      2
+    ],
+    [
+      "wayground.com",
+      2
+    ],
+    [
+      "snorkl.app",
+      2
+    ],
+    [
+      "support.code.org",
+      2
+    ],
+    [
+      "help.classcompanion.com",
+      2
+    ],
+    [
+      "help.openai.com",
+      2
+    ],
+    [
+      "forums.ankiweb.net",
+      1
+    ],
+    [
+      "trust.notion.com",
+      1
+    ],
+    [
+      "help.geogebra.org",
+      1
+    ],
+    [
+      "accessibility.github.com",
+      1
+    ],
+    [
+      "khankids.zendesk.com",
+      1
+    ],
+    [
+      "www.ucl.ac.uk",
+      1
+    ],
+    [
+      "www.microsoft.com",
+      1
+    ],
+    [
+      "www.perkins.org",
+      1
+    ],
+    [
+      "trust.anthropic.com",
+      1
+    ],
+    [
+      "www.captechconsulting.com",
+      1
+    ],
+    [
+      "kb.wisc.edu",
+      1
+    ],
+    [
+      "www.berkeleyschools.net",
+      1
+    ],
+    [
+      "support.elicit.com",
+      1
+    ],
+    [
+      "docs.replit.com",
+      1
+    ],
+    [
+      "iaccessibility.net",
+      1
+    ],
+    [
+      "erla.app",
+      1
+    ],
+    [
+      "www.elementsofai.gr",
+      1
+    ],
+    [
+      "academy.claude.com",
+      1
+    ],
+    [
+      "chatgpt.com",
+      1
+    ],
+    [
+      "copilot.microsoft.com",
+      1
+    ],
+    [
+      "claude.ai",
+      1
+    ],
+    [
+      "learn.khanacademy.org",
+      1
+    ],
+    [
+      "notebook.google.com",
+      1
+    ],
+    [
+      "www.wolframalpha.com",
+      1
+    ],
+    [
+      "apps.ankiweb.net",
+      1
+    ],
+    [
+      "lens.google",
+      1
+    ],
+    [
+      "www.notion.com",
+      1
+    ],
+    [
+      "streaming.digitalschool.gov.gr",
+      1
+    ],
+    [
+      "scispace.com",
+      1
+    ],
+    [
+      "github.com",
+      1
+    ],
+    [
+      "www.duolingo.com",
+      1
+    ],
+    [
+      "coach.microsoft.com",
+      1
+    ],
+    [
+      "elicit.com",
+      1
+    ],
+    [
+      "www.scribbr.com",
+      1
+    ],
+    [
+      "replit.com",
+      1
+    ],
+    [
+      "www.mindmup.com",
+      1
+    ],
+    [
+      "artsandculture.google.com",
+      1
+    ],
+    [
+      "eur-lex.europa.eu",
+      1
+    ],
+    [
+      "juris.curia.europa.eu",
+      1
+    ],
+    [
+      "hudoc.echr.coe.int",
+      1
+    ],
+    [
+      "www.ssrn.com",
+      1
+    ],
+    [
+      "home.heinonline.org",
+      1
+    ],
+    [
+      "law.vlex.com",
+      1
+    ],
+    [
+      "www.lexisnexis.com",
+      1
+    ],
+    [
+      "legal.thomsonreuters.com",
+      1
+    ],
+    [
+      "consensus.app",
+      1
+    ],
+    [
+      "www.semanticscholar.org",
+      1
+    ],
+    [
+      "pubmed.ncbi.nlm.nih.gov",
+      1
+    ],
+    [
+      "alphafold.ebi.ac.uk",
+      1
+    ],
+    [
+      "www.uniprot.org",
+      1
+    ],
+    [
+      "blast.ncbi.nlm.nih.gov",
+      1
+    ],
+    [
+      "www.biorender.com",
+      1
+    ],
+    [
+      "colab.research.google.com",
+      1
+    ],
+    [
+      "code.org",
+      1
+    ],
+    [
+      "www.formative.com",
+      1
+    ],
+    [
+      "classcompanion.com",
+      1
+    ],
+    [
+      "www.dpa.gr",
+      1
+    ],
+    [
+      "www.anthropic.com",
+      1
+    ],
+    [
+      "help.snorkl.app",
+      1
+    ]
+  ],
+  "urls": [
+    {
+      "url": "https://www.deepl.com/accessibility",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://forums.ankiweb.net/t/accessibility-questions-using-anki-if-you-need-to-use-assistive-technology-like-screen-readers/17856",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.zotero.org/accessibility",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://support.google.com/websearch/answer/1325808",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://gamma.app/accessibility",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://trust.notion.com/controls",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://phet.colorado.edu/en/inclusive-design/accessibility-statement",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://support.google.com/gemini/answer/14620100?co=DASHER._Family%3DEducation&hl=en",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.desmos.com/acr",
+      "sources": [
+        "accessibility-data.js",
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://help.geogebra.org/hc/en-us/articles/20048444963869-Accessibility",
+      "sources": [
+        "accessibility-data.js",
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://www.canva.com/accessibility/",
+      "sources": [
+        "accessibility-data.js",
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://scite.ai/accessibility-statement",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://accessibility.github.com/conformance/github-copilot/",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.grammarly.com/accessibility-statement",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://khankids.zendesk.com/hc/en-us/articles/4914881968283-Our-Accessibility-Statement",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.magicschool.ai/accessibility",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://quizlet.com/accessibility",
+      "sources": [
+        "accessibility-data.js",
+        "tools/quizlet.html"
+      ]
+    },
+    {
+      "url": "https://www.ucl.ac.uk/accessibility/digital-accessibility-statements/microsoft-365-copilot-accessibility-statement",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.microsoft.com/en-us/education/blog/2025/05/making-learning-more-accessible-with-microsoft-education/",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.perkins.org/resource/wolfram-alpha/",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://trust.anthropic.com/",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.captechconsulting.com/technical/artificial-intelligence-accessibility-a-look-into-chatgpt",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://blog.google/company-news/outreach-and-initiatives/accessibility/android-gemini-ai-gaad-2025/",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://kb.wisc.edu/accessibility/157699",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://www.berkeleyschools.net/wp-content/uploads/2023/05/Web-Accessibility-Testing-Checklist-v3-Duolingo-1.pdf",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://support.elicit.com/en/articles/4386433",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://docs.replit.com/legal-and-security-info/web-accessibility",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://miro.com/accessibility-statement/",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://hemingwayapp.com/help/docs/readability",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://iaccessibility.net/perplexity/",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://openai.com/chatgpt/education",
+      "sources": [
+        "data.js",
+        "tools/chatgpt-edu.html"
+      ]
+    },
+    {
+      "url": "https://www.magicschool.ai",
+      "sources": [
+        "data.js",
+        "tools/magicschool.html"
+      ]
+    },
+    {
+      "url": "https://erla.app",
+      "sources": [
+        "data.js",
+        "tools/erla.html"
+      ]
+    },
+    {
+      "url": "https://www.autodraw.com",
+      "sources": [
+        "data.js",
+        "tools/autodraw.html"
+      ]
+    },
+    {
+      "url": "https://www.elementsofai.gr",
+      "sources": [
+        "data.js",
+        "tools/elements-of-ai.html"
+      ]
+    },
+    {
+      "url": "https://academy.claude.com",
+      "sources": [
+        "data.js",
+        "guide-data.js",
+        "tools/claude-academy.html"
+      ]
+    },
+    {
+      "url": "https://chatgpt.com",
+      "sources": [
+        "data.js",
+        "tools/chatgpt.html"
+      ]
+    },
+    {
+      "url": "https://gemini.google.com",
+      "sources": [
+        "data.js",
+        "tools/gemini.html"
+      ]
+    },
+    {
+      "url": "https://copilot.microsoft.com",
+      "sources": [
+        "data.js",
+        "tools/copilot.html"
+      ]
+    },
+    {
+      "url": "https://claude.ai",
+      "sources": [
+        "data.js",
+        "tools/claude.html"
+      ]
+    },
+    {
+      "url": "https://www.grammarly.com",
+      "sources": [
+        "data.js",
+        "tools/grammarly.html"
+      ]
+    },
+    {
+      "url": "https://learn.khanacademy.org/khan-academy-kids/",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js",
+        "tools/khan-academy-kids.html"
+      ]
+    },
+    {
+      "url": "https://notebook.google.com/",
+      "sources": [
+        "data.js",
+        "tools/notebooklm.html"
+      ]
+    },
+    {
+      "url": "https://www.perplexity.ai",
+      "sources": [
+        "data.js",
+        "tools/perplexity.html"
+      ]
+    },
+    {
+      "url": "https://www.wolframalpha.com",
+      "sources": [
+        "data.js",
+        "tools/wolfram-alpha.html"
+      ]
+    },
+    {
+      "url": "https://quizlet.com",
+      "sources": [
+        "data.js",
+        "tools/quizlet.html"
+      ]
+    },
+    {
+      "url": "https://www.deepl.com/translator",
+      "sources": [
+        "data.js",
+        "tools/deepl.html"
+      ]
+    },
+    {
+      "url": "https://apps.ankiweb.net/",
+      "sources": [
+        "data.js",
+        "tools/anki.html"
+      ]
+    },
+    {
+      "url": "https://www.zotero.org/",
+      "sources": [
+        "data.js",
+        "tools/zotero.html"
+      ]
+    },
+    {
+      "url": "https://lens.google/",
+      "sources": [
+        "data.js",
+        "tools/google-lens.html"
+      ]
+    },
+    {
+      "url": "https://gamma.app/",
+      "sources": [
+        "data.js",
+        "tools/gamma.html"
+      ]
+    },
+    {
+      "url": "https://www.notion.com/",
+      "sources": [
+        "data.js",
+        "tools/notion.html"
+      ]
+    },
+    {
+      "url": "https://streaming.digitalschool.gov.gr/",
+      "sources": [
+        "data.js",
+        "tools/digital-tutoring.html"
+      ]
+    },
+    {
+      "url": "https://scispace.com/",
+      "sources": [
+        "data.js",
+        "tools/scispace.html"
+      ]
+    },
+    {
+      "url": "https://photomath.com",
+      "sources": [
+        "data.js",
+        "tools/photomath.html"
+      ]
+    },
+    {
+      "url": "https://www.canva.com",
+      "sources": [
+        "data.js",
+        "tools/canva-magic.html"
+      ]
+    },
+    {
+      "url": "https://github.com/features/copilot",
+      "sources": [
+        "data.js",
+        "tools/github-copilot.html"
+      ]
+    },
+    {
+      "url": "https://www.duolingo.com",
+      "sources": [
+        "data.js",
+        "tools/duolingo.html"
+      ]
+    },
+    {
+      "url": "https://coach.microsoft.com",
+      "sources": [
+        "data.js",
+        "tools/reading-coach.html"
+      ]
+    },
+    {
+      "url": "https://www.symbolab.com",
+      "sources": [
+        "data.js",
+        "tools/symbolab.html"
+      ]
+    },
+    {
+      "url": "https://www.desmos.com",
+      "sources": [
+        "data.js",
+        "tools/desmos.html"
+      ]
+    },
+    {
+      "url": "https://www.geogebra.org",
+      "sources": [
+        "data.js",
+        "tools/geogebra.html"
+      ]
+    },
+    {
+      "url": "https://scite.ai",
+      "sources": [
+        "data.js",
+        "tools/scite.html"
+      ]
+    },
+    {
+      "url": "https://elicit.com",
+      "sources": [
+        "data.js",
+        "tools/elicit.html"
+      ]
+    },
+    {
+      "url": "https://hemingwayapp.com",
+      "sources": [
+        "data.js",
+        "tools/hemingway.html"
+      ]
+    },
+    {
+      "url": "https://www.scribbr.com",
+      "sources": [
+        "data.js",
+        "tools/scribbr.html"
+      ]
+    },
+    {
+      "url": "https://replit.com",
+      "sources": [
+        "data.js",
+        "tools/replit-ai.html"
+      ]
+    },
+    {
+      "url": "https://miro.com/ai",
+      "sources": [
+        "data.js",
+        "tools/miro-ai.html"
+      ]
+    },
+    {
+      "url": "https://www.mindmup.com",
+      "sources": [
+        "data.js",
+        "tools/mindmup.html"
+      ]
+    },
+    {
+      "url": "https://phet.colorado.edu/el/",
+      "sources": [
+        "data.js",
+        "tools/phet.html"
+      ]
+    },
+    {
+      "url": "https://artsandculture.google.com/project/education",
+      "sources": [
+        "data.js",
+        "tools/google-arts-culture.html"
+      ]
+    },
+    {
+      "url": "https://gemini.google.com/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://eur-lex.europa.eu/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://juris.curia.europa.eu/juris/recherche.jsf?language=el",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://hudoc.echr.coe.int/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://www.ssrn.com/index.cfm/en/lsn/",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://home.heinonline.org/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://law.vlex.com/vincent",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://www.lexisnexis.com/en-us/products/lexis-plus-ai.page",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://legal.thomsonreuters.com/en/products/westlaw",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://consensus.app/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://www.semanticscholar.org/",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://alphafold.ebi.ac.uk/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://www.uniprot.org/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://blast.ncbi.nlm.nih.gov/Blast.cgi",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://www.biorender.com/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://colab.research.google.com/",
+      "sources": [
+        "data.js"
+      ]
+    },
+    {
+      "url": "https://code.org/en-US/curriculum/high-school",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js",
+        "tools/codeai.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/education/learning-tools",
+      "sources": [
+        "data.js",
+        "tools/immersive-reader.html"
+      ]
+    },
+    {
+      "url": "https://elsaspeak.com/en/",
+      "sources": [
+        "data.js",
+        "tools/elsa-speak.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/education/copilot/study-learn-agent",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js",
+        "tools/study-learn.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/education/learning-accelerators/getting-started-with-math-progress",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js",
+        "special-education-support-tools-data.js",
+        "tools/math-progress.html"
+      ]
+    },
+    {
+      "url": "https://wayground.com/",
+      "sources": [
+        "data.js",
+        "tools/wayground.html"
+      ]
+    },
+    {
+      "url": "https://www.formative.com/",
+      "sources": [
+        "data.js",
+        "tools/formative.html"
+      ]
+    },
+    {
+      "url": "https://www.briskteaching.com/",
+      "sources": [
+        "data.js",
+        "tools/brisk.html"
+      ]
+    },
+    {
+      "url": "https://web.diffit.me/",
+      "sources": [
+        "data.js",
+        "special-education-support-tools-data.js",
+        "tools/diffit.html"
+      ]
+    },
+    {
+      "url": "https://snorkl.app/",
+      "sources": [
+        "data.js",
+        "special-education-support-tools-data.js",
+        "tools/snorkl.html"
+      ]
+    },
+    {
+      "url": "https://classcompanion.com/",
+      "sources": [
+        "data.js",
+        "september-2026-tool-audit.js",
+        "tools/class-companion.html"
+      ]
+    },
+    {
+      "url": "https://www.autodraw.com/",
+      "sources": [
+        "preschool.html",
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://photomath.com/terms/",
+      "sources": [
+        "report-link.js",
+        "september-2026-tool-audit.js",
+        "tools/photomath.html"
+      ]
+    },
+    {
+      "url": "https://scite.ai/terms",
+      "sources": [
+        "report-link.js",
+        "september-2026-tool-audit.js",
+        "tools/scite.html"
+      ]
+    },
+    {
+      "url": "https://www.canva.com/el_gr/politikes/terms-of-use/",
+      "sources": [
+        "report-link.js",
+        "september-2026-tool-audit.js",
+        "tools/canva-magic.html"
+      ]
+    },
+    {
+      "url": "https://quizlet.com/tos",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/quizlet.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/education/learning-accelerators/reading-coach-language-settings",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/reading-coach.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/education/learning-accelerators/getting-started-with-reading-coach",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/reading-coach.html"
+      ]
+    },
+    {
+      "url": "https://support.code.org/hc/en-us/articles/44973066394765-How-can-I-get-access-to-AI-Tutor",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/codeai.html"
+      ]
+    },
+    {
+      "url": "https://support.code.org/hc/en-us/articles/40542019587213-AI-Tutor-FAQ",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/codeai.html"
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/training/educator-center/product-guides/immersive-reader/",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/immersive-reader.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/education/learning-accelerators/languages-and-products-supported-by-immersive-reader",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/immersive-reader.html"
+      ]
+    },
+    {
+      "url": "https://elsaspeak.com/en/terms/",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/elsa-speak.html"
+      ]
+    },
+    {
+      "url": "https://elsaspeak.com/en/elsa-subscription",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/elsa-speak.html"
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/microsoft-365/education/guide/1-reference/enable-copilot-chat-for-learners",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/study-learn.html"
+      ]
+    },
+    {
+      "url": "https://www.briskteaching.com/faq",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/brisk.html"
+      ]
+    },
+    {
+      "url": "https://www.briskteaching.com/privacy/privacy-center",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/brisk.html"
+      ]
+    },
+    {
+      "url": "https://web.diffit.me/pricing",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/diffit.html"
+      ]
+    },
+    {
+      "url": "https://web.diffit.me/faq",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "special-education-support-tools-data.js",
+        "tools/diffit.html"
+      ]
+    },
+    {
+      "url": "https://snorkl.app/plans",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "special-education-support-tools-data.js",
+        "tools/snorkl.html"
+      ]
+    },
+    {
+      "url": "https://help.classcompanion.com/articles/7742025570-what-is-the-student-experience",
+      "sources": [
+        "september-2026-tool-audit.js",
+        "tools/class-companion.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/edge/use-immersive-reader-in-microsoft-edge",
+      "sources": [
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/en-us/education/languages-and-products-supported-by-immersive-reader",
+      "sources": [
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://support.google.com/docs/answer/4492226?hl=el",
+      "sources": [
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://www.desmos.com/calculator",
+      "sources": [
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://www.geogebra.org/",
+      "sources": [
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://www.canva.com/education/",
+      "sources": [
+        "special-education-support-tools-data.js"
+      ]
+    },
+    {
+      "url": "https://quizlet.com/features/ai-study-tools",
+      "sources": [
+        "study.html",
+        "tools/quizlet.html"
+      ]
+    },
+    {
+      "url": "https://www.dpa.gr/sites/default/files/2020-02/nomos_4624_2019.pdf",
+      "sources": [
+        "tools/canva-magic.html"
+      ]
+    },
+    {
+      "url": "https://openai.com/global-affairs/openai-for-greece/",
+      "sources": [
+        "tools/chatgpt-edu.html"
+      ]
+    },
+    {
+      "url": "https://openai.com/education/",
+      "sources": [
+        "tools/chatgpt-edu.html"
+      ]
+    },
+    {
+      "url": "https://openai.com/policies/terms-of-use/",
+      "sources": [
+        "tools/chatgpt.html"
+      ]
+    },
+    {
+      "url": "https://help.openai.com/en/articles/20001421",
+      "sources": [
+        "tools/chatgpt.html"
+      ]
+    },
+    {
+      "url": "https://help.openai.com/en/articles/11780217-using-study-mode-in-chatgpt",
+      "sources": [
+        "tools/chatgpt.html"
+      ]
+    },
+    {
+      "url": "https://help.classcompanion.com/articles/6591426829-how-does-the-ai-tutor-work",
+      "sources": [
+        "tools/class-companion.html"
+      ]
+    },
+    {
+      "url": "https://www.anthropic.com/transparency/voluntary-commitments",
+      "sources": [
+        "tools/claude.html"
+      ]
+    },
+    {
+      "url": "https://support.microsoft.com/el-gr/education/copilot/study-learn-agent",
+      "sources": [
+        "tools/copilot.html"
+      ]
+    },
+    {
+      "url": "https://www.deepl.com/en/terms-of-use",
+      "sources": [
+        "tools/deepl.html"
+      ]
+    },
+    {
+      "url": "https://www.deepl.com/en/privacy",
+      "sources": [
+        "tools/deepl.html"
+      ]
+    },
+    {
+      "url": "https://help.formative.com/en/articles/6827953-what-formative-plan-is-best-for-me",
+      "sources": [
+        "tools/formative.html"
+      ]
+    },
+    {
+      "url": "https://help.formative.com/en/articles/7054157-use-ai-to-generate-questions",
+      "sources": [
+        "tools/formative.html"
+      ]
+    },
+    {
+      "url": "https://help.formative.com/en/articles/2580505-print-assignments-responses-and-scores-paid-teacher-school-district-feature",
+      "sources": [
+        "tools/formative.html"
+      ]
+    },
+    {
+      "url": "https://help.formative.com/en/articles/6836962-students-account-set-up-and-login",
+      "sources": [
+        "tools/formative.html"
+      ]
+    },
+    {
+      "url": "https://support.google.com/gemini/answer/14620100",
+      "sources": [
+        "tools/gemini-education.html"
+      ]
+    },
+    {
+      "url": "https://support.google.com/accounts/answer/1350409?hl=el",
+      "sources": [
+        "tools/gemini.html",
+        "tools/notebooklm.html"
+      ]
+    },
+    {
+      "url": "https://support.google.com/gemini/answer/14620100?co=DASHER._Family%3DEducation&hl=el",
+      "sources": [
+        "tools/gemini.html"
+      ]
+    },
+    {
+      "url": "https://support.google.com/gemini/answer/16109150?hl=en",
+      "sources": [
+        "tools/gemini.html"
+      ]
+    },
+    {
+      "url": "https://support.google.com/websearch/answer/14516623?hl=el-gr",
+      "sources": [
+        "tools/google-lens.html"
+      ]
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/training/modules/support-building-mathematics-skills-math-progress/",
+      "sources": [
+        "tools/math-progress.html"
+      ]
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/new-study-tools-september-2026/",
+      "sources": [
+        "tools/notebooklm.html"
+      ]
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/",
+      "sources": [
+        "tools/notebooklm.html"
+      ]
+    },
+    {
+      "url": "https://support.google.com/notebooklm/answer/16164461?hl=en",
+      "sources": [
+        "tools/notebooklm.html"
+      ]
+    },
+    {
+      "url": "https://www.perplexity.ai/hub/legal/terms-of-service",
+      "sources": [
+        "tools/perplexity.html"
+      ]
+    },
+    {
+      "url": "https://quizlet.com/upgrade",
+      "sources": [
+        "tools/quizlet.html"
+      ]
+    },
+    {
+      "url": "https://scite.ai/policy",
+      "sources": [
+        "tools/scite.html"
+      ]
+    },
+    {
+      "url": "https://help.snorkl.app/en/articles/13336906-roles-permissions-and-data-sharing",
+      "sources": [
+        "tools/snorkl.html"
+      ]
+    },
+    {
+      "url": "https://www.symbolab.com/solver/step-by-step",
+      "sources": [
+        "tools/symbolab.html"
+      ]
+    },
+    {
+      "url": "https://www.symbolab.com/registration",
+      "sources": [
+        "tools/symbolab.html"
+      ]
+    },
+    {
+      "url": "https://help.wayground.com/support/solutions/articles/158000404038-wayground-starter-basic-plan",
+      "sources": [
+        "tools/wayground.html"
+      ]
+    },
+    {
+      "url": "https://help.wayground.com/support/solutions/articles/158000404043-free-for-schools-is-evolving-what-s-next",
+      "sources": [
+        "tools/wayground.html"
+      ]
+    },
+    {
+      "url": "https://help.wayground.com/support/solutions/articles/158000405091-wayground-ai-generate-assessments-from-prompts-documents-videos-more",
+      "sources": [
+        "tools/wayground.html"
+      ]
+    },
+    {
+      "url": "https://wayground.com/tos",
+      "sources": [
+        "tools/wayground.html"
+      ]
+    }
+  ]
+}

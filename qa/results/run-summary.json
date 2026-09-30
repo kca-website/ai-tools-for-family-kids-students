@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-30T07:24:45.747Z",
+  "at": "2026-09-30T07:30:56.360Z",
   "smoke": false,
   "steps": [
     {
@@ -17,25 +17,19 @@
     {
       "name": "Playwright – Chromium desktop",
       "status": "PASS",
-      "seconds": 141,
+      "seconds": 135,
       "exit": 0
     },
     {
       "name": "Playwright – Chromium mobile 375 px",
-      "status": "FAIL",
-      "seconds": 137,
-      "exit": 1
+      "status": "PASS",
+      "seconds": 133,
+      "exit": 0
     },
     {
       "name": "Playwright – WebKit",
       "status": "SKIPPED (WebKit not installed: npx playwright install webkit)",
       "seconds": 0
-    },
-    {
-      "name": "Crawl every page (status/console/network/overflow, desktop + 375 px)",
-      "status": "PASS",
-      "seconds": 230,
-      "exit": 0
     },
     {
       "name": "Live: security headers / redirects / CORS",

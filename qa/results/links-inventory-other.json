@@ -1,0 +1,1108 @@
+{
+  "note": "NOT CHECKED – runner had no network access to these hosts. This is the list that `npm run links` will verify.",
+  "count": 136,
+  "hosts": [
+    [
+      "eric.ed.gov",
+      14
+    ],
+    [
+      "doi.org",
+      11
+    ],
+    [
+      "www.dept.aueb.gr",
+      9
+    ],
+    [
+      "www.ds.unipi.gr",
+      6
+    ],
+    [
+      "www.cse.uoi.gr",
+      6
+    ],
+    [
+      "ice.uniwa.gr",
+      5
+    ],
+    [
+      "biology.upatras.gr",
+      5
+    ],
+    [
+      "ece.hmu.gr",
+      5
+    ],
+    [
+      "www.psych.uoa.gr",
+      3
+    ],
+    [
+      "ptpe.edc.uoc.gr",
+      3
+    ],
+    [
+      "pubmed.ncbi.nlm.nih.gov",
+      3
+    ],
+    [
+      "support.google.com",
+      3
+    ],
+    [
+      "puter.com",
+      2
+    ],
+    [
+      "www.adobe.com",
+      2
+    ],
+    [
+      "dept.aueb.gr",
+      2
+    ],
+    [
+      "www.dwrean.net",
+      2
+    ],
+    [
+      "chatgpt.com",
+      2
+    ],
+    [
+      "www.magicschool.ai",
+      2
+    ],
+    [
+      "help.openai.com",
+      2
+    ],
+    [
+      "diavgeia.gov.gr",
+      2
+    ],
+    [
+      "www.linkedin.com",
+      1
+    ],
+    [
+      "api.cloudflare.com",
+      1
+    ],
+    [
+      "api.groq.com",
+      1
+    ],
+    [
+      "developers.cloudflare.com",
+      1
+    ],
+    [
+      "console.groq.com",
+      1
+    ],
+    [
+      "play.google.com",
+      1
+    ],
+    [
+      "cdnjs.cloudflare.com",
+      1
+    ],
+    [
+      "pi-schools.gr",
+      1
+    ],
+    [
+      "repository.kallipos.gr",
+      1
+    ],
+    [
+      "knowt.com",
+      1
+    ],
+    [
+      "www.aueb.gr",
+      1
+    ],
+    [
+      "www.unipi.gr",
+      1
+    ],
+    [
+      "www.uoa.gr",
+      1
+    ],
+    [
+      "www.uniwa.gr",
+      1
+    ],
+    [
+      "www.uoc.gr",
+      1
+    ],
+    [
+      "www.uoi.gr",
+      1
+    ],
+    [
+      "www.upatras.gr",
+      1
+    ],
+    [
+      "hmu.gr",
+      1
+    ],
+    [
+      "en.psych.uoa.gr",
+      1
+    ],
+    [
+      "dergipark.org.tr",
+      1
+    ],
+    [
+      "www.tused.org",
+      1
+    ],
+    [
+      "www.researchgate.net",
+      1
+    ],
+    [
+      "huggingface.co",
+      1
+    ],
+    [
+      "www.canva.com",
+      1
+    ],
+    [
+      "bookcreator.com",
+      1
+    ],
+    [
+      "formsubmit.co",
+      1
+    ],
+    [
+      "www.taxheaven.gr",
+      1
+    ],
+    [
+      "miro.com",
+      1
+    ],
+    [
+      "www.symbolab.com",
+      1
+    ],
+    [
+      "elicit.com",
+      1
+    ],
+    [
+      "replit.com",
+      1
+    ],
+    [
+      "www.grammarly.com",
+      1
+    ],
+    [
+      "docs.github.com",
+      1
+    ],
+    [
+      "erla.app",
+      1
+    ],
+    [
+      "community.elementsofai.com",
+      1
+    ],
+    [
+      "academy.claude.com",
+      1
+    ],
+    [
+      "edu.google.com",
+      1
+    ],
+    [
+      "photomath.com",
+      1
+    ],
+    [
+      "www.perplexity.ai",
+      1
+    ],
+    [
+      "www.echr.coe.int",
+      1
+    ],
+    [
+      "help.consensus.app",
+      1
+    ],
+    [
+      "www.biorender.com",
+      1
+    ],
+    [
+      "research.google.com",
+      1
+    ],
+    [
+      "www.e-nomothesia.gr",
+      1
+    ],
+    [
+      "astra-ai.co",
+      1
+    ],
+    [
+      "notebooklm.google",
+      1
+    ],
+    [
+      "daskalakos.ai",
+      1
+    ]
+  ],
+  "urls": [
+    {
+      "url": "https://www.linkedin.com/in/kostaskoustas",
+      "sources": [
+        "about.html",
+        "index.html",
+        "privacy-policy.html"
+      ]
+    },
+    {
+      "url": "https://puter.com/terms",
+      "sources": [
+        "ai-help-trust-boundary.js",
+        "privacy-policy.html",
+        "tutor.js"
+      ]
+    },
+    {
+      "url": "https://puter.com/privacy",
+      "sources": [
+        "ai-help-trust-boundary.js",
+        "privacy-policy.html",
+        "tutor.js"
+      ]
+    },
+    {
+      "url": "https://api.cloudflare.com/client/v4/accounts/",
+      "sources": [
+        "ai-provider-router.js"
+      ]
+    },
+    {
+      "url": "https://api.groq.com/openai/v1/chat/completions",
+      "sources": [
+        "ai-provider-router.js"
+      ]
+    },
+    {
+      "url": "https://developers.cloudflare.com/workers-ai/models/gpt-oss-120b/",
+      "sources": [
+        "ai-transparency.html"
+      ]
+    },
+    {
+      "url": "https://console.groq.com/docs/models",
+      "sources": [
+        "ai-transparency.html"
+      ]
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.seekh",
+      "sources": [
+        "anagnosi-agglika-ai.html",
+        "en/reading-english-ai.html"
+      ]
+    },
+    {
+      "url": "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js",
+      "sources": [
+        "app.js"
+      ]
+    },
+    {
+      "url": "https://www.adobe.com/express/education",
+      "sources": [
+        "dimiourgiko-ai-gia-mathites.html",
+        "parousiasi-afisa-ai.html",
+        "en/creative-ai-for-students.html",
+        "en/presentation-poster-ai.html"
+      ]
+    },
+    {
+      "url": "http://pi-schools.gr/lessons/tee/health/",
+      "sources": [
+        "epal-official-guidance-topics-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://repository.kallipos.gr/handle/11419/969",
+      "sources": [
+        "epal-official-guidance-topics-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://knowt.com/",
+      "sources": [
+        "flashcards-epanalipsi-ai.html",
+        "meleti-pdf-me-ai.html",
+        "en/flashcards-revision-ai.html",
+        "en/study-pdf-with-ai.html"
+      ]
+    },
+    {
+      "url": "https://www.aueb.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.unipi.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.uoa.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.uniwa.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.uoc.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.uoi.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.upatras.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://hmu.gr/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/cs/courses",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/cs/studiesguide",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/en/cs/content/general-information",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/cs/courses/3125",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/cs/courses/3135",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/cs/courses/3531",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://dept.aueb.gr/el/node/716/mid/4157",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/econ_courses",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://dept.aueb.gr/el/econ",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/node/12684",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dept.aueb.gr/el/econ/content/%CE%B4%CE%B9%CE%AC%CF%81%CE%B8%CF%81%CF%89%CF%83%CE%B7-%CE%BA%CE%B1%CE%B9-%CF%80%CF%81%CE%BF%CE%B2%CE%BB%CE%AE%CE%BC%CE%B1%CF%84%CE%B1-%CF%84%CE%B7%CF%82-%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AE%CF%82-%CE%BF%CE%B9%CE%BA%CE%BF%CE%BD%CE%BF%CE%BC%CE%AF%CE%B1%CF%82-%CE%B6-%CE%B5%CE%BE%CE%AC%CE%BC%CE%B7%CE%BD%CE%BF-%CE%B3%CE%B9%CE%B1-%CF%84%CE%BF-%CE%B1%CE%BA%CE%B1%CE%B4-%CE%AD%CF%84%CE%BF%CF%82-2025-26",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://en.psych.uoa.gr/fileadmin/depts/psych.uoa.gr/www/uploads/study/undergraduate/student_handbook/EKPA_Psych_StudyGuide_En.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.psych.uoa.gr/class_schedule",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.psych.uoa.gr/undergraduate",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.psych.uoa.gr/student_handbook",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ds.unipi.gr/courses/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ds.unipi.gr/undergraduate/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ds.unipi.gr/documents/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ds.unipi.gr/courses/probability-theory-3/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ds.unipi.gr/courses/mathematical-analysis-linear-algebra/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ds.unipi.gr/courses/programming-c/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ptpe.edc.uoc.gr/programma-mathimaton",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ptpe.edc.uoc.gr/sites/default/files/pages/%CE%925_%CE%A0%CE%B5%CF%81%CE%B9%CE%B3%CF%81%CE%AC%CE%BC%CE%BC%CE%B1%CF%84%CE%B1%20%CE%9C%CE%B1%CE%B8%CE%B7%CE%BC%CE%AC%CF%84%CF%89%CE%BD_%CE%9F%CE%94%CE%97%CE%93%CE%9F%CE%A5%20%CE%A3%CE%A0%CE%9F%CE%A5%CE%94%CE%A9%CE%9D%20%CE%B5%CF%80%CE%B9%CE%BA_%20%CE%A3%CE%B5%CF%80%CF%84_2024.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ptpe.edc.uoc.gr/sites/default/files/pages/%CE%925_%CE%A0%CE%B5%CF%81%CE%B9%CE%B3%CF%81%CE%AC%CE%BC%CE%BC%CE%B1%CF%84%CF%89%CE%BD_%CE%9F%CE%94%CE%97%CE%93%CE%9F%CE%A5%20%CE%A3%CE%A0%CE%9F%CE%A5%CE%94%CE%A9%CE%9D%20%CE%B5%CF%80%CE%B9%CE%BA_%20%CE%A3%CE%B5%CF%80%CF%84_2024.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.cse.uoi.gr/spoudes/proptyxiakes-spoudes/genikes-plirofories-proptyxiakwn/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.cse.uoi.gr/course/%CE%B1%CF%80%CE%B5%CE%B9%CF%81%CE%BF%CF%83%CF%84%CE%B9%CE%BA%CF%8C%CF%82-%CE%BB%CE%BF%CE%B3%CE%B9%CF%83%CE%BC%CF%8C%CF%82-%CE%B9/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.cse.uoi.gr/course/%CE%B3%CF%81%CE%B1%CE%BC%CE%BC%CE%B9%CE%BA%CE%AE-%CE%AC%CE%BB%CE%B3%CE%B5%CE%B2%CF%81%CE%B1/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.cse.uoi.gr/course/%CE%B5%CE%B9%CF%83%CE%B1%CE%B3%CF%89%CE%B3%CE%AE-%CF%83%CF%84%CE%BF%CE%BD-%CF%80%CF%81%CE%BF%CE%B3%CF%81%CE%B1%CE%BC%CE%BC%CE%B1%CF%84%CE%B9%CF%83%CE%BC%CF%8C/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.cse.uoi.gr/course/%CE%B3%CE%B5%CE%BD%CE%B9%CE%BA%CE%AE-%CF%86%CF%85%CF%83%CE%B9%CE%BA%CE%AE-2/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.cse.uoi.gr/course/%CE%B5%CE%B9%CF%83%CE%B1%CE%B3%CF%89%CE%B3%CE%AE-%CF%83%CF%84%CE%BF%CF%85%CF%82-%CE%B7%CF%85-%CE%BA%CE%B1%CE%B9-%CF%83%CF%84%CE%B7%CE%BD-%CF%80%CE%BB%CE%B7%CF%81%CE%BF%CF%86%CE%BF%CF%81%CE%B9%CE%BA/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ice.uniwa.gr/education/undergraduate/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ice.uniwa.gr/education/undergraduate/courses/analysis-and-design-of-information-systems/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ice.uniwa.gr/education/undergraduate/courses/microelectronics/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ice.uniwa.gr/wp-content/uploads/2022/11/ICE-5003-%CE%91%CE%9D%CE%91%CE%9B%CE%A5%CE%A3%CE%97-KAI-%CE%A3%CE%A7%CE%95%CE%94%CE%99%CE%91%CE%A3%CE%9C%CE%9F%CE%A3-%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%91%CE%9A%CE%A9%CE%9D-%CE%A3%CE%A5%CE%A3%CE%A4%CE%97%CE%9C%CE%91%CE%A4%CE%A9%CE%9D.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ice.uniwa.gr/wp-content/uploads/2022/11/ICE-6004-%CE%9C%CE%99%CE%9A%CE%A1%CE%9F%CE%97%CE%9B%CE%95%CE%9A%CE%A4%CE%A1%CE%9F%CE%9D%CE%99%CE%9A%CE%97.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://biology.upatras.gr/program-study/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://biology.upatras.gr/study_guide/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://biology.upatras.gr/wp-content/uploads/sites/229/2022/03/Course_Outines_Biology-Dpt-2022_GRE.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://biology.upatras.gr/undergraduate-lessons/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://biology.upatras.gr/annual_timetable/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ece.hmu.gr/proptyxiakes/programma-spoydwn/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ece.hmu.gr/proptyxiakes/odigos-spoydwn/",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ece.hmu.gr/wp-content/uploads/2022/01/1.001_Logismos_1.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ece.hmu.gr/wp-content/uploads/2021/04/1_002_grammikh_algebra.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://ece.hmu.gr/wp-content/uploads/2021/10/1_004_Domimenos_Programmatismos-10-21.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.dwrean.net/",
+      "sources": [
+        "index.html",
+        "site-chrome.js"
+      ]
+    },
+    {
+      "url": "https://www.dwrean.net/2026/09/ai-tools-4-kids-ellinika-dorean-ai-ergaleia.html",
+      "sources": [
+        "index.html",
+        "site-chrome.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ794018",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ731639",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=ED299171",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ722201",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://dergipark.org.tr/en/pub/gefad/article/90744",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1002/tea.3660310503",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1124790",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1488603",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1484071",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1361657",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1115599",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ679755",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36206329/",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1029520",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1187/cbe.18-11-0225",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1187432",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1119/1.1789161",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ1401992",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1080/02635143.2023.2209866",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29351908/",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18245328/",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://eric.ed.gov/?id=EJ324431",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1103/PhysRevPhysEducRes.16.010134",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://www.tused.org/index.php/tused/article/view/61",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1007/s11165-015-9467-9",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1155/2021/6581653",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.37134/jpsmm.vol13.2.8.2023",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.33400/kuje.1721508",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1080/00219266.2019.1643765",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://doi.org/10.1080/00219266.1989.9655024",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://www.researchgate.net/publication/335964894_Students_Misconception_on_Selected_Topics_in_Genetics_A_Basis_for_the_Development_of_Animated_Lessons",
+      "sources": [
+        "misconception-evidence-data.js"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/edgetools/u2netp",
+      "sources": [
+        "preschool-image-motion.js"
+      ]
+    },
+    {
+      "url": "https://chatgpt.com/",
+      "sources": [
+        "preschool.html"
+      ]
+    },
+    {
+      "url": "https://www.canva.com/",
+      "sources": [
+        "preschool.html"
+      ]
+    },
+    {
+      "url": "https://www.adobe.com/express/",
+      "sources": [
+        "preschool.html"
+      ]
+    },
+    {
+      "url": "https://bookcreator.com/",
+      "sources": [
+        "preschool.html"
+      ]
+    },
+    {
+      "url": "https://www.magicschool.ai/",
+      "sources": [
+        "preschool.html"
+      ]
+    },
+    {
+      "url": "https://formsubmit.co/",
+      "sources": [
+        "report-error.html"
+      ]
+    },
+    {
+      "url": "https://support.google.com/notebooklm/answer/16164461",
+      "sources": [
+        "report-link.js",
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.taxheaven.gr/circulars/52802/55909-d6-07-05-2026?output=printer",
+      "sources": [
+        "school-ai-use.html"
+      ]
+    },
+    {
+      "url": "https://miro.com/legal/terms-of-service/",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.symbolab.com/terms-of-use",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://elicit.com/operations/terms",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://replit.com/terms-of-service",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.grammarly.com/terms",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.magicschool.ai/privacy-security/student-data-policy",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://erla.app/terms",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://community.elementsofai.com/terms",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://academy.claude.com/",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://help.openai.com/el-gr/articles/8357869-how-to-change-your-language-setting-in-chatgpt",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://help.openai.com/el-gr/articles/9275245-chatgpt-free-tier-faq",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://edu.google.com/ai/gemini-for-education/",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://support.google.com/gemini/answer/13575153",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://support.google.com/gemininotebook/answer/16213268",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://photomath.com/",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.echr.coe.int/hudoc-database",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://help.consensus.app/en/articles/10087865-subscription-plans",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.biorender.com/pricing",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://research.google.com/colaboratory/faq.html",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://diavgeia.gov.gr/decision/view/6%CE%9C%CE%99%CE%A646%CE%9D%CE%9A%CE%A0%CE%94-%CE%9F%CE%935",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://diavgeia.gov.gr/decision/view/%CE%A877%CE%9A46%CE%9D%CE%9A%CE%A0%CE%94-9%CE%95%CE%9B",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.e-nomothesia.gr/kat-ekpaideuse/deuterobathmia-ekpaideuse/ya-43941-d3-2026.html",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://chatgpt.com/studymode",
+      "sources": [
+        "study.html"
+      ]
+    },
+    {
+      "url": "https://astra-ai.co/el/",
+      "sources": [
+        "study.html"
+      ]
+    },
+    {
+      "url": "https://notebooklm.google/",
+      "sources": [
+        "study.html"
+      ]
+    },
+    {
+      "url": "https://daskalakos.ai/",
+      "sources": [
+        "study.html"
+      ]
+    }
+  ]
+}

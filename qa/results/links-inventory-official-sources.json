@@ -1,0 +1,2081 @@
+{
+  "note": "NOT CHECKED – runner had no network access to these hosts. This is the list that `npm run links` will verify.",
+  "count": 318,
+  "hosts": [
+    [
+      "ebooks.edu.gr",
+      98
+    ],
+    [
+      "old.ebooks.edu.gr",
+      78
+    ],
+    [
+      "www.minedu.gov.gr",
+      50
+    ],
+    [
+      "www.iep.edu.gr",
+      35
+    ],
+    [
+      "dide.ira.sch.gr",
+      21
+    ],
+    [
+      "www.ebooks.edu.gr",
+      12
+    ],
+    [
+      "elearning.iep.edu.gr",
+      5
+    ],
+    [
+      "dev.old.ebooks.edu.gr",
+      3
+    ],
+    [
+      "www.law.uoa.gr",
+      3
+    ],
+    [
+      "www.esos.gr",
+      3
+    ],
+    [
+      "digital-strategy.ec.europa.eu",
+      2
+    ],
+    [
+      "lb1.ebooks.edu.gr",
+      2
+    ],
+    [
+      "aesop.iep.edu.gr",
+      1
+    ],
+    [
+      "trapeza.iep.edu.gr",
+      1
+    ],
+    [
+      "edugpt.sch.gr",
+      1
+    ],
+    [
+      "eur-lex.europa.eu",
+      1
+    ],
+    [
+      "lb2.ebooks.edu.gr",
+      1
+    ],
+    [
+      "pde.minedu.gov.gr",
+      1
+    ]
+  ],
+  "urls": [
+    {
+      "url": "https://www.minedu.gov.gr/psifiako-frontistirio",
+      "sources": [
+        "accessibility-data.js"
+      ]
+    },
+    {
+      "url": "https://digital-strategy.ec.europa.eu/en/faqs/transparency-obligations-under-article-50-ai-act",
+      "sources": [
+        "ai-transparency.html"
+      ]
+    },
+    {
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/enforcement-ai-act",
+      "sources": [
+        "ai-transparency.html"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "curriculum-2026-2027-expansion.js",
+        "general-education-book-sections-2026-2027.js",
+        "general-subject-expansion-2026-2027.js",
+        "official-annual-instructions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "curriculum-2026-2027-expansion.js",
+        "gel-2026-2027-update.js",
+        "general-subject-expansion-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-A105/220/1607%2C5071/",
+      "sources": [
+        "environment-studies-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGL110/288/2056%2C7101/",
+      "sources": [
+        "environment-studies-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM102/524/3455%2C13984/",
+      "sources": [
+        "environment-studies-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-D108/558/3661%2C15878/",
+      "sources": [
+        "environment-studies-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v2/allcoursespdf.jsp",
+      "sources": [
+        "environment-studies-data.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/protovathmia/dimotiko",
+      "sources": [
+        "environment-studies-data.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-epa-l-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "epal-student-tutor-2026-2027.js",
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-final-sectors-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/",
+      "sources": [
+        "gel-2026-2027-update.js",
+        "september-2026-language-tutor.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/70567-29-07-26-kathorismos-exetasteas-yles-gia-ta-mathemata-ton-a-b-kai-g-taxeon-genikou-lykeiou-pou-exetazontai-graptos-stis-proagogikes-kai-apolyteries-exetaseis-gia-to-sch-etos-2026-2027",
+      "sources": [
+        "gel-2026-2027-update.js",
+        "official-curriculum-data.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2",
+      "sources": [
+        "gel-2026-2027-update.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2714/Pliroforiki_A-Lykeiou_html-empl/",
+      "sources": [
+        "gel-2026-2027-update.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2716/Pliroforiki_B-Lykeiou_html-empl/",
+      "sources": [
+        "gel-2026-2027-update.js"
+      ]
+    },
+    {
+      "url": "https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-A102",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/index.html",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-B101",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C102",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D102",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E102",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM101",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E105/157/1111%2C4055/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D101",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E103",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-C103/88/701%2C2641/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E107/154/1099%2C4022/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-F102/416/2788%2C16955/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-F114",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/2071%2C7277/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-A112",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2298/Neoelliniki-Glossa_B-Gymnasiou_empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C107",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2294/Geografia_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C102",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://lb1.ebooks.edu.gr/ebooks/handle/8547/2678",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSGL-A105",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2198/Istoria_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5204/Istoria_G-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2320/Agglika_B-Gymnasiou-Proch_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B114/318/2134,7741/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C109/499/3246%2C21317/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A115/461/3014%2C12200/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGL102/458/3005%2C12074/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2234/Archaia-Elliniki-Glossa_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C106/502/3267%2C13322/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/d/8547/5230/21-0202-01_Thriskeutika_B-Gymnasiou_Vivlio-Mathiti.pdf",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2296/Omirika-Epi-Iliada_B-Gymnasiou_empl/",
+      "sources": [
+        "general-education-book-sections-2026-2027.js",
+        "official-curriculum-data.js",
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "general-subject-expansion-2026-2027.js",
+        "official-annual-instructions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/ergastiria-dexiotiton-2-2/",
+      "sources": [
+        "general-subject-expansion-2026-2027.js",
+        "teacher-curriculum-extensions-2026-2027.js",
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/diadrastika-gymnasio/",
+      "sources": [
+        "general-subject-expansion-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2759/Pliroforiki_A-B-G-Gymnasiou_html-empl/",
+      "sources": [
+        "general-subject-expansion-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html",
+      "sources": [
+        "general-subject-expansion-2026-2027.js",
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-A101",
+      "sources": [
+        "general-subject-expansion-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2194/Technologia_B-Gymnasiou_html-empl/",
+      "sources": [
+        "general-subject-expansion-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://aesop.iep.edu.gr",
+      "sources": [
+        "guide-data.js"
+      ]
+    },
+    {
+      "url": "https://trapeza.iep.edu.gr",
+      "sources": [
+        "guide-data.js"
+      ]
+    },
+    {
+      "url": "https://www.law.uoa.gr/fileadmin/depts/law.uoa.gr/www/uploads/Sxoli/Odigos_spoudon/ODIGOS_SPOYDON_2026-2027.pdf",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.law.uoa.gr/odigos_spoydon",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.law.uoa.gr/proptychiakes_spoydes",
+      "sources": [
+        "higher-education-data.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/protovathmia/dimotiko?id=2100&view=category",
+      "sources": [
+        "official-annual-instructions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
+      "sources": [
+        "official-annual-instructions-2026-2027.js",
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-odigies-tropos-axiologisis/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-A102",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-A110",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-B101",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-B105",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C102",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C105",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C107",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-C103",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D102",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D109",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D101",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-D103",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E113",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E105",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E104",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E107",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-E103",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-F101",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM101",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-F102",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL101",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSDIM-F114",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2334/Grammatiki-Neas-Ellinikis-Glossas_A-B-G-Gymnasiou_html-apli/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexB1_4.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-C109",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2256/Neoelliniki-Glossa_A-Gymnasiou_html-empl/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2290/Istoria_A-Gymnasiou_html-empl/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-A111",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-A114",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%99%CE%A3%CE%A4%CE%9F%CE%A1%CE%99%CE%91_%CE%93%CE%A5%CE%9C%CE%9D_%CE%91%CE%92%CE%93_2026-2027.zip",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C102/223/",
+      "sources": [
+        "official-curriculum-data.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A103/477/",
+      "sources": [
+        "official-curriculum-data.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-A110",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSB105/435/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGL-C130/652/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGL-A100/490/3186,12916/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-A103",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-B134",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-A102",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-B131",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL106",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-A105",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGL-C112",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-A115",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/ebooks.php?course=DSGYM-B122",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A200/293/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A105/29/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-A112/337/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/index-3_17.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/index-5_26.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C107/675/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index4_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_6.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index1_3.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C104/68/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C105/65/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA2_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA3_3.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/indexA1_2.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_4.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_2.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_3.html",
+      "sources": [
+        "official-curriculum-data.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B110/676/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B107/371/",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index2.html",
+      "sources": [
+        "official-curriculum-data.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index3.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_2_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_3_2.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_11.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2294/Geografia_B-Gymnasiou_html-empl/mat1_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2294/Geografia_B-Gymnasiou_html-empl/mat2_9.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2294/Geografia_B-Gymnasiou_html-empl/mat2_14.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2294/Geografia_B-Gymnasiou_html-empl/mat4_37.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/indexa_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/indexc_2.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/indexj_5.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/indexk_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6_2.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_5.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index7_1.html",
+      "sources": [
+        "official-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://elearning.iep.edu.gr/course/section.php?id=5882",
+      "sources": [
+        "preschool-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://elearning.iep.edu.gr/course/section.php?id=5883",
+      "sources": [
+        "preschool-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://elearning.iep.edu.gr/course/section.php?id=5884",
+      "sources": [
+        "preschool-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://elearning.iep.edu.gr/course/section.php?id=5885",
+      "sources": [
+        "preschool-curriculum-data.js"
+      ]
+    },
+    {
+      "url": "https://elearning.iep.edu.gr/course/view.php?id=1094",
+      "sources": [
+        "preschool.html"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/64941-13-05-26-i-ellada-thespizei-gia-proti-fora-olokliromeno-plaisio-gia-tin-asfali-xrisi-tis-texnitis-noimosynis-sta-sxoleia-3",
+      "sources": [
+        "school-ai-use.html",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260828/",
+      "sources": [
+        "september-2026-language-tutor.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/protovathmia/dimotiko?catid=2100%3Amenoy-protovathmia-defterovathmia&id=70765%3Adimotiko-analytika-programmata-odigies-didaskalias&view=article",
+      "sources": [
+        "september-2026-primary-tutor.js",
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://edugpt.sch.gr/features.php",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://eur-lex.europa.eu/content/welcome/about.html?locale=en",
+      "sources": [
+        "september-2026-tool-audit.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/70835-15-09-26-enkyklioi-yle-odegies-didaskalias-mathematon-gymnasiou-e-a-e",
+      "sources": [
+        "special-education-curriculum-data.js",
+        "special-education-special-gymnasium-data.js",
+        "teacher-assistant.html",
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/70752-03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l",
+      "sources": [
+        "special-education-curriculum-data.js",
+        "special-education-diagnostic-data.js",
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A8%CE%96%CE%9D%CE%9A46%CE%9D%CE%9A%CE%A0%CE%94-4%CE%A96_%CE%96%CE%94%CE%94.pdf",
+      "sources": [
+        "special-education-curriculum-data.js",
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/70556-27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias",
+      "sources": [
+        "special-education-curriculum-data.js",
+        "special-education-sector-economy-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/04/%CE%A9%CE%A0_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95.pdf",
+      "sources": [
+        "special-education-diagnostic-data.js",
+        "special-education-special-gymnasium-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-e-a-e-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "special-education-diagnostic-data.js",
+        "special-education-special-lyceum-data.js",
+        "teacher-assistant.html",
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%91%CE%92%CE%93%CE%94_2026-2027.zip",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%9D%CE%95%CE%91-%CE%95%CE%9B%CE%9B%CE%97%CE%9D%CE%99%CE%9A%CE%91_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%9E%CE%95%CE%9D%CE%95%CE%A3-%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_2026-2027.zip",
+      "sources": [
+        "special-education-eneegyl-structure-data.js",
+        "teacher-curriculum-eneegyl-english-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%99%CE%A3%CE%A4%CE%9F%CE%A1%CE%99%CE%91_%CE%91_2026-2027.zip",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%98%CE%A1%CE%97%CE%A3%CE%9A%CE%95%CE%A5%CE%A4%CE%99%CE%9A%CE%91_%CE%91_2026-2027.zip",
+      "sources": [
+        "special-education-eneegyl-structure-data.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/protovathmia-defterovathmia/lykeio-draseis?catid=1183&id=70752%3A03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l&view=article",
+      "sources": [
+        "special-education-sector-economy-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4714/Arches-Logistikis_A-EPAL_html-apli/index1_3.html",
+      "sources": [
+        "special-education-sector-economy-data.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9D_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%91_%CE%9B%CE%9F%CE%93%CE%9F%CE%A4_%CE%91_%CE%92_%CE%95%CE%91%CE%95_2026-2027.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9D_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%91_%CE%9B%CE%9F%CE%93%CE%9F%CE%A4_%CE%93_%CE%95%CE%91%CE%95-2026-27.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%91-%CE%9BYK-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-2026-27.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%92-%CE%9B%CE%A5%CE%9A-%CE%95%CE%91%CE%95-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-2026-27.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%93-%CE%9B%CE%A5%CE%9A-%CE%95%CE%91%CE%95-%CE%A0%CE%A1%CE%9F%CE%A3%CE%91%CE%9D%CE%91%CE%A4%CE%9F%CE%9B%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-2026-27.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%91_%CE%95%CE%91%CE%95_2026-2027.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%91%CE%A1%CE%A7%CE%91%CE%99%CE%91_%CE%91%CE%92%CE%93_%CE%9B%CE%A5%CE%9A_2026-2027.zip",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%99%CE%A3%CE%A4%CE%9F%CE%A1%CE%99%CE%91_%CE%95%CE%91%CE%95_2026-2027.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97_%CE%91_%CE%9B%CE%A5%CE%9A_-%CE%95%CE%91%CE%95_2026_27.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97_%CE%92_%CE%9B%CE%A5%CE%9A_%CE%95%CE%91%CE%95_2026_27.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97-_%CE%93_%CE%9B%CE%A5%CE%9A_-%CE%95%CE%91%CE%95-%CE%A0%CE%A1%CE%9F%CE%A3%CE%91%CE%9D-2026-27.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9E%CE%95%CE%9D%CE%95%CE%A3-%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3-%CE%9B%CE%A5%CE%9A%CE%95%CE%99%CE%A9%CE%9D-EAE.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%9B%CE%91%CE%A4%CE%99%CE%9D%CE%99%CE%9A%CE%91_%CE%95%CE%91%CE%95_2026-2027.pdf",
+      "sources": [
+        "special-education-special-lyceum-data.js",
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2228/Keimena-Neoellinikis-Logotechnias_AGymnasiou_html-empl/index.html",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2246/Keimena-Neoellinikis-Logotechnias_B-Gymnasiou_html-empl/",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2218/Keimena-Neoellinikis-Logotechnias_GGymnasiou_html/index.html",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://lb2.ebooks.edu.gr/ebooks/v/html/8547/2244/Archaia-Elliniki-Glossa_A-Gymnasiou_html-empl/index.html",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2234/Archaia-Elliniki-Glossa_B-Gymnasiou_html-empl/",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2238/Archaia-Elliniki-Glossa_G-Gymnasiou_html-empl/",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2232/Omirika-Epi-Odysseia_A-Gymnasiou_html-empl/",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2342/Dramatiki-Poiisi-Evripidi-Eleni_G-Gymnasiou_empl/",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4720/Koinoniki-kai-Politiki-Agogi_G-Gymnasiou_html-apli/",
+      "sources": [
+        "special-education-special-lyceum-data.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B202/219/",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index2_1.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index5_4.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-B200/455/",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2208/Chimeia_G-Gymnasiou_html-empl/index1_3.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2208/Chimeia_G-Gymnasiou_html-empl/index2_1.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2286/Geografia_A-Gymnasiou_html-empl/",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2286/Geografia_A-Gymnasiou_html-empl/matB3_1.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2212/Mathimatika_G-Gymnasiou_html-empl/indexB2_1.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index3.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index6.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index7.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index8.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index8.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/index9.html",
+      "sources": [
+        "teacher-assistant.html"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-en-e-e-gy-l-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "teacher-curriculum-eneegyl-chemistry-2026-2027.js",
+        "teacher-curriculum-eneegyl-english-2026-2027.js",
+        "teacher-curriculum-eneegyl-math-2026-2027.js",
+        "teacher-curriculum-eneegyl-new-greek-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.esos.gr/sites/default/files/articles-2023/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91-%CE%91-%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-2026-2027.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-chemistry-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.esos.gr/sites/default/files/articles-2023/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91-%CE%92-%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-2026-2027.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-chemistry-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.esos.gr/sites/default/files/articles-2023/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91-%CE%93-%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-2026-2027.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-chemistry-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/E%CE%9E%CE%95%CE%A4%CE%91%CE%96%CE%9F%CE%9C%CE%95%CE%9D%CE%91-%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%91_%CE%95%CE%A0%CE%91%CE%9B-%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_%CE%91_2026-20271.zip",
+      "sources": [
+        "teacher-curriculum-eneegyl-english-2026-2027.js",
+        "teacher-curriculum-eneegyl-math-2026-2027.js",
+        "teacher-curriculum-eneegyl-new-greek-2026-2027.js",
+        "teacher-curriculum-eneegyl-physics-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/protovathmia-defterovathmia/enimerosi?catid=1183&id=70556%3A27-07-26-kathorismos-ton-graptos-exetazomenon-mathematon-stis-proagogikes-kai-apolyteries-exetaseis-ton-a-b-g-kai-d-taxeon-epal-pepal-kai-ton-lykeion-en-e-e-gy-l-gia-ten-trapeza-thematon-diabathmisemes-dyskolias&view=article",
+      "sources": [
+        "teacher-curriculum-eneegyl-exact-exam-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A807%CE%9C46%CE%9D%CE%9A%CE%A0%CE%94-%CE%9F%CE%A9%CE%94_%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97%CE%A3.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-informatics-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A6%CE%95%CE%9A_4239_%CE%92_2026_%CE%A5%CE%9B%CE%97_%CE%A0%CE%91%CE%9D%CE%95%CE%9B%CE%9B%CE%91%CE%94_%CE%94_%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5-%CE%9B_2026-2027.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-informatics-2026-2027.js",
+        "teacher-curriculum-eneegyl-math-2026-2027.js",
+        "teacher-curriculum-eneegyl-new-greek-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/E%CE%9E%CE%95%CE%A4%CE%91%CE%96%CE%9F%CE%9C%CE%95%CE%9D%CE%91-%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%91_%CE%95%CE%A0%CE%91%CE%9B-%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_%CE%92_2026-20271.zip",
+      "sources": [
+        "teacher-curriculum-eneegyl-math-2026-2027.js",
+        "teacher-curriculum-eneegyl-new-greek-2026-2027.js",
+        "teacher-curriculum-eneegyl-physics-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/E%CE%9E%CE%95%CE%A4%CE%91%CE%96%CE%9F%CE%9C%CE%95%CE%9D%CE%91-%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%91_%CE%95%CE%A0%CE%91%CE%9B-%CE%95%CE%9D%CE%95%CE%95%CE%93%CE%A5%CE%9B_%CE%93_2026-20271.zip",
+      "sources": [
+        "teacher-curriculum-eneegyl-math-2026-2027.js",
+        "teacher-curriculum-eneegyl-new-greek-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/protovathmia-defterovathmia/lykeio-draseis?catid=1183&id=70752:03-09-26-enkyklioi-me-ten-yle-odegies-mathematon-eneegy-l&view=article",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/9%CE%95%CE%95%CE%9D46%CE%9D%CE%9A%CE%A0%CE%94-%CE%95%CE%92%CE%A9_%CE%94%CE%99%CE%9F%CE%99%CE%9A%CE%97%CE%A3%CE%97%CE%A3_2026.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/9%CE%973%CE%A946%CE%9D%CE%9A%CE%A0%CE%94-7%CE%A5%CE%A8_%CE%94%CE%9F%CE%9C%CE%99%CE%9A%CE%A9%CE%9D.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/91%CE%A3%CE%A746%CE%9D%CE%9A%CE%A0%CE%94-7%CE%A74_%CE%A5%CE%93%CE%95%CE%99%CE%91%CE%A3.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/92%CE%97%CE%9F46%CE%9D%CE%9A%CE%A0%CE%94-%CE%A6%CE%A37_%CE%95%CE%A6%CE%91%CE%A1%CE%9C%CE%9F%CE%A3%CE%9C%CE%95%CE%9D%CE%A9.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/94%CE%A6%CE%A146%CE%9D%CE%9A%CE%A0%CE%94-0%CE%A3%CE%A9_%CE%95%CE%95%CE%A4.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A1%CE%97%CE%A5146%CE%9D%CE%9A%CE%A0%CE%94-%CE%9C1%CE%A9_%CE%9C%CE%97%CE%A7%CE%91%CE%9D%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A8%CE%A5%CE%9E946%CE%9D%CE%9A%CE%A0%CE%94-%CE%9F%CE%949_%CE%93%CE%95%CE%A9%CE%A0%CE%9F%CE%9D%CE%99%CE%91%CE%A3.pdf",
+      "sources": [
+        "teacher-curriculum-eneegyl-official-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162917_1_2026_09_08_%CE%95%CE%9E%CE%95_116898_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%93%CE%95%CE%9D_%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91%CE%A3_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A1%CE%A6%CE%A3%CE%A546%CE%9D%CE%9A%CE%A0%CE%94_%CE%96%CE%9D9.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-epa-l-kai-p-epa-l-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162643_1_2026_08_28_%CE%95%CE%9E%CE%95_111814_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%9E%CE%95%CE%9D%CE%95%CE%A3_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3_%CE%95%CE%A0%CE%91%CE%9B_%CE%A0%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%A81%CE%9A646%CE%9D%CE%9A%CE%A0%CE%94_%CE%9573.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2716/Pliroforiki_B-Lykeiou_html-empl/",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/panelladikes-eksetaseis-pistopoiitika/anakoinwseis-ell-ex?id=1593&view=category",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162082_1_2026_07_31_%CE%95%CE%9E%CE%95_103686_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97%CE%A3_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A86%CE%9B646%CE%9D%CE%9A%CE%A0%CE%94_%CE%9542.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162176_1_2026_08_04_%CE%95%CE%9E%CE%95_104811_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%97%CE%9B%CE%95%CE%9A%CE%A4%CE%A1%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91%CE%A3_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A127%CE%9846%CE%9D%CE%9A%CE%A0%CE%94_%CE%A3%CE%A73.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162642_1_2026_08_28_%CE%95%CE%9E%CE%95111822_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%94%CE%99%CE%9F%CE%99%CE%9A_%CE%BA_%CE%9F%CE%99%CE%9A%CE%9F%CE%9D_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%82_2026_27_9%CE%919%CE%9D46%CE%9D%CE%9A%CE%A0%CE%94_%CE%A13%CE%A1-1.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162059_1_2026_07_31_%CE%95%CE%9E%CE%95_103738_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%9C%CE%97%CE%A7%CE%91%CE%9D%CE%9F%CE%9B_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_6%CE%A3%CE%9D%CE%A046%CE%9D%CE%9A%CE%A0%CE%94_%CE%98%CE%A8%CE%A5.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162060_1_2026_07_31_%CE%95%CE%9E%CE%95_103630_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%93%CE%95%CE%A9%CE%A0%CE%9F%CE%9D%CE%99%CE%91%CE%A3_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A8%CE%9D2246%CE%9D%CE%9A%CE%A0%CE%94_%CE%98%CE%93%CE%A6.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162056_1_2026_07_31_%CE%95%CE%9E%CE%95_103707_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%95%CE%A6%CE%91%CE%A1%CE%9C_%CE%A4%CE%95%CE%A7%CE%9D%CE%A9%CE%9D_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_9%CE%9B%CE%A3646%CE%9D%CE%9A%CE%A0%CE%94_9%CE%92%CE%9F.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js",
+        "teacher-curriculum-special-extra-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162057_1_2026_07_31_%CE%95%CE%9E%CE%95_103669_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%B9%CE%B5%CF%82_%CE%94%CE%9F%CE%9C%CE%99%CE%9A%CE%A9%CE%9D_%CE%95%CE%A1%CE%93%CE%A9%CE%9D_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_9%CE%A43%CE%9D46%CE%9D%CE%9A%CE%A0%CE%94_%CE%A871.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-final-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2026/09/162321_1_2026_08_10_%CE%95%CE%9E%CE%95_13661_%CE%8E%CE%BB%CE%B7_%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%A5%CE%93_%CE%A0%CE%A1_%CE%95%CE%A5%CE%95%CE%9E_%CE%91_%CE%92_%CE%93_%CE%95%CE%A0%CE%91%CE%9B_%CF%83%CF%87_%CE%AD%CF%84%CE%BF%CF%85%CF%82_2026_27_%CE%91%CE%94%CE%91_%CE%A8%CE%A7%CE%A3246%CE%9D%CE%9A%CE%A0%CE%94_%CE%A44%CE%95.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-specialties-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/wp-content/uploads/2025/01/2018-08-07_3224_t_b_fek_naytiliakon.pdf",
+      "sources": [
+        "teacher-curriculum-epal-2026-2027.js",
+        "teacher-curriculum-epal-c-final-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-epa-l-p-epa-l-gia-to-scholiko-etos-2026-2027/",
+      "sources": [
+        "teacher-curriculum-epal-c-final-sectors-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/2026_07_08_%CE%95%CE%9E%CE%95_91809_%CE%A5%CE%91_%CE%8E%CE%BB%CE%B7_%CE%A0%CE%B1%CE%BD_%CE%95%CE%BE%CE%B5%CF%84_%CE%9C%CE%B1%CE%B8%CE%B7%CE%BC_%CE%93_%CF%84%CE%AC%CE%BE%CE%B7%CF%82_%CE%95%CE%A0%CE%91%CE%9B-%CE%A0%CE%95%CE%A0%CE%91%CE%9B_2026-27_%CE%A6%CE%95%CE%9A_4328%CE%92_14.07.2026.pdf",
+      "sources": [
+        "teacher-curriculum-epal-panhellenic-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/70528-17-07-26-kathorismos-didakteas-exetasteas-yles-ton-panelladikos-exetazomenon-mathematon-tes-g-taxes-ton-emeresion-kai-esperinon-epangelmatikon-lykeion-epa-l-kai-ton-protypon-epangelmatikon-lykeion-p-epa-l-gia-to-scholiko-etos-2026-2027",
+      "sources": [
+        "teacher-curriculum-epal-panhellenic-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/133",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/handle/8547/130",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js",
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/139",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/140",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/141",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2258/Mousiki_A-Gymnasiou_html-empl/",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2300/Mousiki_B-Gymnasiou_html-empl/",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2304/Mousiki_G-Gymnasiou_html-empl/",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/94",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/95",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/96",
+      "sources": [
+        "teacher-curriculum-extensions-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/5581",
+      "sources": [
+        "teacher-curriculum-special-extra-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C111",
+      "sources": [
+        "teacher-curriculum-special-extra-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%91%CE%A1%CE%A7%CE%91%CE%99%CE%91_%CE%95%CE%9B%CE%9B_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%91_%CE%93%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026_27.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_%CE%91_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95AE_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_B_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95AE_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95AE_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%93%CE%95%CE%A9%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%93%CE%95%CE%A9%CE%93%CE%A1%CE%91%CE%A6%CE%99%CE%91_%CE%91-%CE%92_%CE%93%CE%A5%CE%9C%CE%9D_EAE_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%98%CE%A1%CE%97%CE%A3%CE%9A%CE%95%CE%A5%CE%A4%CE%99%CE%9A%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%95%CE%91%CE%95_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82_%CE%94%CE%B9%CE%B4%CE%B1%CF%83%CE%BA%CE%B1%CE%BB%CE%AF%CE%B1%CF%82_%CE%97%CE%B8%CE%B9%CE%BA%CE%AE%CF%82_%CE%93%CF%85%CE%BC%CE%BD%CE%B1%CF%83%CE%AF%CF%89%CE%BD_%CE%95%CE%91%CE%95_%CE%A0%CF%81%CF%8E%CF%84%CE%BF_%CE%9C%CE%AD%CF%81%CE%BF%CF%82.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%99%CE%A3%CE%A4%CE%9F%CE%A1%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._2026-2027.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_EAE_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A4%CE%95%CE%A7%CE%9D%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3_26-27_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95%CE%91%CE%95.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_EAE_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%92_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_%CE%A5%CE%9B%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27_%CE%BD%CE%AD%CE%BF_v1.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F_%CE%95%CE%91%CE%95_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A6%CE%A5%CE%A3%CE%99%CE%9A%CE%97_%CE%91%CE%93%CE%A9%CE%93%CE%97_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95.%CE%91.%CE%95._2026-2027.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%92_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95.__26-27_.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%A7%CE%97%CE%9C%CE%95%CE%99%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95.%CE%91.%CE%95._26-27_.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9A%CE%A0%CE%91_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%95.%CE%91.%CE%95._26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9E%CE%95%CE%9D%CE%95%CE%A3_%CE%93%CE%9B%CE%A9%CE%A3%CE%A3%CE%95%CE%A3_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%A9%CE%9D_EAE_%CE%91%CE%93%CE%93%CE%9B%CE%99%CE%9A%CE%91.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9D.%CE%95._%CE%9B%CE%9F%CE%93%CE%9F%CE%A4%CE%95%CE%A7%CE%9D%CE%99%CE%91_%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3_%CE%93%CE%A5%CE%9C%CE%9D_%CE%95.%CE%91.%CE%95._26-27.docx",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/publications/docs2026/%CE%9F%CE%99%CE%9A%CE%9F%CE%9D%CE%9F%CE%9C%CE%99%CE%9A%CE%91_%CE%93_%CE%93%CE%A5%CE%9C%CE%9D%CE%91%CE%A3%CE%99%CE%9F%CE%A5_%CE%95%CE%91%CE%95_2026-2027.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2328/Oikiaki-Oikonomia_A-Gymnasiou_html-apli/index.html",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%A3%CE%9C%CE%9F%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%94%CE%99%CE%94%CE%91%CE%A3%CE%9A%CE%91%CE%9B%CE%99%CE%91%CE%A3-26-27.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%A0%CE%9B%CE%97%CE%A1%CE%9F%CE%A6%CE%9F%CE%A1%CE%99%CE%9A%CE%97-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95%CE%91%CE%95-26-27.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%93%CE%95%CE%A9%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%93%CE%95%CE%A9%CE%93%CE%A1%CE%91%CE%A6%CE%99%CE%91-%CE%91-%CE%92-%CE%93%CE%A5%CE%9C%CE%9D-EAE-%CE%9F%CE%94%CE%97%CE%93%CE%99%CE%95%CE%A3-26-27.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%91-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95AE-26-27.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-B-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95AE-26-27.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/wp-content/uploads/2026/09/%CE%92%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%99%CE%91-%CE%93-%CE%93%CE%A5%CE%9C%CE%9D-%CE%95AE-26-27.pdf",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/handle/8547/131",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.ebooks.edu.gr/ebooks/handle/8547/2217",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://ebooks.edu.gr/ebooks/handle/8547/5582",
+      "sources": [
+        "teacher-curriculum-special-gym-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260915/",
+      "sources": [
+        "teacher-curriculum-special-lyceum-annual-2026-2027.js"
+      ]
+    },
+    {
+      "url": "https://www.minedu.gov.gr/site/70694-24-08-26-enemerose-tou-ypourgikou-symbouliou-apo-ten-ypourgo-sophia-zacharake-enopsei-tes-neas-scholikes-kai-akademaikes-chronias-2",
+      "sources": [
+        "tools/eduai-digital-tutoring.html"
+      ]
+    },
+    {
+      "url": "https://pde.minedu.gov.gr/index.php?id=268&option=com_content&view=category",
+      "sources": [
+        "tools/eduai-digital-tutoring.html"
+      ]
+    }
+  ]
+}

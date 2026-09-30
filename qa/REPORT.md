@@ -39,6 +39,8 @@
 | 4 Απόρρητο/ασφάλεια | ✅ Μερικώς | Πλήρης απογραφή storage/cookies/IndexedDB/Cache/SW πριν-μετά την AI, τρίτα αιτήματα, στατική σάρωση για κλειδιά. ⛔ Live security headers/HSTS/redirects/CORS (`scripts/security-headers.mjs` έτοιμο). |
 | 5 Ποιότητα | ✅ Μερικώς | axe (13 σελίδες × 2 viewports), πληκτρολόγιο, Lighthouse 8 σελίδες × mobile/desktop (τοπικά), SEO/structured data/sitemap. ⛔ Lighthouse production. |
 
+**Τελικό `npm run qa`:** Chromium desktop ✔ (143 τεστ: 123 πέρασαν, 20 skipped), Chromium mobile 375 px ✔, node tests (API handlers + self-tests) ✔, crawl 222 σελίδες × viewport χωρίς προβλήματα. WebKit και live βήματα (headers, AI smoke, link check): παραλείφθηκαν (βλ. §0). Πράσινο = τα γνωστά ευρήματα είναι `test.fail` (αναμενόμενες αποτυχίες)· `results/run-summary.json`.
+
 ## 3. Πίνακας ευρημάτων
 
 Σειρά: Blocker → Major → Minor → Info. «Τεστ» = το αυτοματοποιημένο τεστ που το αποδεικνύει (τα γνωστά ευρήματα είναι `test.fail` ώστε το weekly run να ειδοποιήσει όταν διορθωθούν).

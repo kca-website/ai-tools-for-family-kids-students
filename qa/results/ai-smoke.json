@@ -1,0 +1,143 @@
+{
+  "base": "https://www.aitools4kids.gr",
+  "generatedAt": "2026-09-30T07:30:55.861Z",
+  "requestsUsed": 12,
+  "cap": 30,
+  "failures": [
+    "tutor status: BLOCKED by runner allow-list",
+    "teacher status: BLOCKED by runner allow-list",
+    "preschool-activity status: BLOCKED by runner allow-list",
+    "preschool-image status: BLOCKED by runner allow-list",
+    "tutor: bad audience → 403: BLOCKED by runner allow-list",
+    "tutor: empty prompt → 400: BLOCKED by runner allow-list",
+    "tutor: oversize prompt → 413: BLOCKED by runner allow-list",
+    "teacher: empty prompt → 400: BLOCKED by runner allow-list",
+    "preschool-activity: invalid age → 400: BLOCKED by runner allow-list",
+    "unsupported method → 405: BLOCKED by runner allow-list",
+    "tutor: real answer (Cloudflare→Groq): BLOCKED by runner allow-list",
+    "teacher: real answer: BLOCKED by runner allow-list"
+  ],
+  "warnings": [],
+  "log": [
+    {
+      "name": "tutor status",
+      "method": "GET",
+      "path": "/api/tutor-assistant",
+      "status": 403,
+      "ms": 41,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "teacher status",
+      "method": "GET",
+      "path": "/api/teacher-assistant",
+      "status": 403,
+      "ms": 168,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "preschool-activity status",
+      "method": "GET",
+      "path": "/api/preschool-activity",
+      "status": 403,
+      "ms": 4,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "preschool-image status",
+      "method": "GET",
+      "path": "/api/preschool-image",
+      "status": 403,
+      "ms": 5,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "tutor: bad audience → 403",
+      "method": "POST",
+      "path": "/api/tutor-assistant",
+      "status": 403,
+      "ms": 8,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "tutor: empty prompt → 400",
+      "method": "POST",
+      "path": "/api/tutor-assistant",
+      "status": 403,
+      "ms": 4,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "tutor: oversize prompt → 413",
+      "method": "POST",
+      "path": "/api/tutor-assistant",
+      "status": 403,
+      "ms": 25,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "teacher: empty prompt → 400",
+      "method": "POST",
+      "path": "/api/teacher-assistant",
+      "status": 403,
+      "ms": 160,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "preschool-activity: invalid age → 400",
+      "method": "POST",
+      "path": "/api/preschool-activity",
+      "status": 403,
+      "ms": 215,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "unsupported method → 405",
+      "method": "DELETE",
+      "path": "/api/tutor-assistant",
+      "status": 403,
+      "ms": 51,
+      "real": false,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "tutor: real answer (Cloudflare→Groq)",
+      "method": "POST",
+      "path": "/api/tutor-assistant",
+      "status": 403,
+      "ms": 11,
+      "real": true,
+      "error": null,
+      "blocked": true
+    },
+    {
+      "name": "teacher: real answer",
+      "method": "POST",
+      "path": "/api/teacher-assistant",
+      "status": 403,
+      "ms": 4,
+      "real": true,
+      "error": null,
+      "blocked": true
+    }
+  ]
+}

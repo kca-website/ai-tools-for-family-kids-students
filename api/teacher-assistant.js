@@ -1,3 +1,23 @@
+function browserRequestAllowed(req) {
+  const headers = req?.headers || {};
+  const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();
+  if (fetchSite === 'cross-site') return false;
+
+  const origin = String(headers.origin || headers.Origin || '').trim();
+  if (!origin) return true;
+
+  try {
+    const url = new URL(origin);
+    const host = url.hostname.toLowerCase();
+    if (url.protocol !== 'https:' && host !== 'localhost' && host !== '127.0.0.1') return false;
+    if (host === 'www.aitools4kids.gr' || host === 'aitools4kids.gr') return true;
+    if (host === 'localhost' || host === '127.0.0.1') return true;
+    return /^aitools4kids(?:-[a-z0-9-]+)*-kcawebsite\.vercel\.app$/.test(host);
+  } catch (_) {
+    return false;
+  }
+}
+
 // Server-side multi-provider proxy for the teacher assistant.
 const { generateChat, getAiStatus } = require('../ai-provider-router');
 const TEACHER_SYSTEM_PROMPT = `You are a teacher assistant for the Greek education context.
@@ -24,6 +44,14 @@ module.exports = async function handler(req, res) {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'Method not allowed' });
   }
+  if (!browserRequestAllowed(req)) {
+    return res.status(403).json({ error: 'cross_site_request_blocked', message: 'Cross-site requests are not allowed.' });
+  }
+  const contentType = String(req.headers?.['content-type'] || req.headers?.['Content-Type'] || '').toLowerCase();
+  if (contentType && !contentType.includes('application/json')) {
+    return res.status(415).json({ error: 'unsupported_media_type', message: 'Use application/json.' });
+  }
+
 
   if (!aiStatus.configured) {
     return res.status(503).json({

@@ -16,7 +16,15 @@ assert.match(studyTools, /audience:\s*officialSource\s*\?\s*"study_user"/);
 assert.match(studyTools, /OFFICIAL SCHOOLBOOK SOURCE — SOURCE FIRST/);
 
 assert.match(tutor, /fetchTutorOfficialSource/);
+assert.match(tutor, /verifiedSection\s*=\s*\/exact-section-verified\|related-section-verified\|official-book-section-verified\//);
+assert.match(tutor, /requiresOfficial:\s*!!exactOfficial\s*\|\|\s*verifiedSection/);
+assert.match(tutor, /sharedStudyContext\?\.sourcePolicy\s*===\s*"official_required"/);
+assert.match(tutor, /subjectId:\s*getCurrentQuiz\(\)\?\.id\s*\|\|\s*getCatalogSubject\(\)\?\.quizId/);
+
 assert.match(tutorApi, /resolveOfficialSchoolbookSource/);
+assert.match(tutorApi, /studyContext\s*=\s*null/);
+assert.match(tutorApi, /officialSourceRequired\s*=\s*requestedSourcePolicy\s*===\s*'official_required'/);
+assert.match(tutorApi, /officialSourceRequired\s*&&\s*documentKind\s*!==\s*'official_schoolbook'/);
 assert.match(tutorApi, /official_source_identity_required/);
 assert.match(tutorApi, /grounding_validation_failed/);
 assert.match(tutorApi, /groundingRepairMessages/);

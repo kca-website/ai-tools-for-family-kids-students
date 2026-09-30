@@ -17,8 +17,12 @@
     },
     "glossa-a-dimotikou":{
       sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/index.html",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundedSections:Object.freeze({
+            "1η Ενότητα — Πού είναι ο Άρης?": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html",
+            "1η Ενότητα — Πού είναι ο Άρης;": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html"
+      }),
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -37,8 +41,13 @@
     },
     "glossa-b-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundedSections:Object.freeze({
+            "1 — Στο δρόμο για το σχολείο": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexb_00.html",
+            "2 — Με το «σεις» και με «σας»": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexc_00.html",
+            "3 — Στον κόσμο των κόμικς": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexd_00.html"
+      }),
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -71,8 +80,8 @@
     },
     "glossa-c-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -137,8 +146,11 @@
     },
     "glossa-d-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundedSections:Object.freeze({
+            "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html"
+      }),
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -177,8 +189,8 @@
     },
     "science-st-dimotikou":{
       sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -200,8 +212,8 @@
     },
     "glossa-e-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -238,8 +250,8 @@
     },
     "istoria-d-dimotikou":{
       sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -311,8 +323,8 @@
     },
     "english-st-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/",
-      groundingStatus:"schoolbook-source-exact",
-      mappingStatus:"official-book-section-grounded",
+      groundingStatus:"schoolbook-structure-verified",
+      mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
       annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
       annualScopeVerified:false,
@@ -968,7 +980,7 @@
 }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.7.0",
+    version:"2.8.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

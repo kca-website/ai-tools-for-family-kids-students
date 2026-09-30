@@ -54,7 +54,8 @@ try {
       const repeated = ids.filter((id, i) => ids.indexOf(id) !== i);
       if (repeated.length) duplicates.push({ zone, grade, ids: [...new Set(repeated)] });
       for (const s of subjects) {
-        const verifiedTopics = s.topics.filter((t) => /verified|exact-section|related-section|official-book-section|annual-instructions|annual-exam|panhellenic/i.test(t.status));
+        const structureVerifiedTopics = s.topics.filter((t) => /official-book-section-source-missing|official-book-section-grounded/i.test(t.status));
+        const verifiedTopics = s.topics.filter((t) => /exact-section-verified|related-section-verified|official-book-section-grounded|annual-instructions-verified|annual-exam-syllabus-verified|panhellenic-2027-verified/i.test(t.status));
         for (const t of verifiedTopics) {
           if (!/^https:\/\//.test(t.sourceUrl)) verifiedWithoutSource.push({ zone, grade, subject: s.label, topic: t.label, status: t.status });
         }
@@ -66,6 +67,8 @@ try {
           topicMode: s.topicMode,
           topics: s.topics.length,
           verifiedTopics: verifiedTopics.length,
+          structureVerifiedTopics: structureVerifiedTopics.length,
+          groundedTopics: verifiedTopics.filter((t) => /official-book-section-grounded|exact-section-verified|related-section-verified/i.test(t.status)).length,
           sourceBackedVerifiedTopics: verifiedTopics.filter((t) => /^https:\/\//.test(t.sourceUrl)).length,
         });
       }
@@ -86,6 +89,8 @@ try {
       subjects: z.length,
       mappedSubjects: z.filter((r) => r.topics > 0).length,
       verifiedTopics: z.reduce((n, r) => n + r.verifiedTopics, 0),
+      structureVerifiedTopics: z.reduce((n, r) => n + (r.structureVerifiedTopics || 0), 0),
+      groundedTopics: z.reduce((n, r) => n + (r.groundedTopics || 0), 0),
       sourceBackedVerifiedTopics: z.reduce((n, r) => n + r.sourceBackedVerifiedTopics, 0),
       schoolbookMappedSubjects: z.filter((r) => r.schoolbookSourceMapping).length,
       unmappedSubjects: z.filter((r) => r.topics === 0).map((r) => ({ grade: r.grade, subject: r.subject })),

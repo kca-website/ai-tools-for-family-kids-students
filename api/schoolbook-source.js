@@ -26,6 +26,10 @@ const BOOKS = {
     title: "Γλώσσα Α΄ Δημοτικού",
     grade: "a",
     base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+          "1η Ενότητα — Πού είναι ο Άρης?": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html",
+          "1η Ενότητα — Πού είναι ο Άρης;": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html"
+    }),
     mode: "linkedSection",
     officialSourceRequired: true,
     schoolYear: "2026-2027",
@@ -38,6 +42,11 @@ const BOOKS = {
     title: "Γλώσσα Β΄ Δημοτικού",
     grade: "b",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+          "1 — Στο δρόμο για το σχολείο": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexb_00.html",
+          "2 — Με το «σεις» και με «σας»": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexc_00.html",
+          "3 — Στον κόσμο των κόμικς": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexd_00.html"
+    }),
     mode: "linkedSection",
     officialSourceRequired: true,
     schoolYear: "2026-2027",
@@ -62,6 +71,9 @@ const BOOKS = {
     title: "Γλώσσα Δ΄ Δημοτικού",
     grade: "d",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+          "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html"
+    }),
     mode: "linkedSection",
     officialSourceRequired: true,
     schoolYear: "2026-2027",
@@ -1886,9 +1898,21 @@ function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
   return matches.length === 1 ? matches : [];
 }
 
+function resolveExplicitSectionUrls(book, topic) {
+  const sources = book?.sectionSources || {};
+  const wanted = new Set(topicLabelCandidates(topic));
+  const matches = [];
+  for (const [label, url] of Object.entries(sources)) {
+    const candidates = topicLabelCandidates(label);
+    if (!candidates.some((candidate) => wanted.has(candidate))) continue;
+    if (!officialLinkAllowed(url)) continue;
+    if (!matches.includes(url)) matches.push(url);
+  }
+  return matches.length === 1 ? matches : [];
+}
+
 async function resolveLinkedSectionUrls(book, topic) {
-  const rootHtml = await fetchOfficialHtml(book.base);
-  return rootHtml ? resolveLinkedSectionUrlsFromHtml(book, topic, rootHtml) : [];
+  return resolveExplicitSectionUrls(book, topic);
 }
 
 async function discoverUnitPages(book, prefix) {
@@ -2339,6 +2363,7 @@ module.exports._test = Object.freeze({
   resolveDirectSourceUrls,
   topicLabelCandidates,
   resolveLinkedSectionUrlsFromHtml,
+  resolveExplicitSectionUrls,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,

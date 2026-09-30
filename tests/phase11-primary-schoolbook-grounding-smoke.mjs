@@ -49,8 +49,8 @@ try {
     const resolver = window.AITOOLSKIDS_CURRICULUM_RESOLVER;
     const books = window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027;
     return !!resolver?.getSubject &&
-      books?.get?.("glossa-a-dimotikou")?.groundingStatus === "schoolbook-source-exact" &&
-      books?.get?.("science-st-dimotikou")?.groundingStatus === "schoolbook-source-exact";
+      books?.get?.("glossa-a-dimotikou")?.groundingStatus === "schoolbook-structure-verified" &&
+      books?.get?.("science-st-dimotikou")?.groundingStatus === "schoolbook-structure-verified";
   }, { timeout: 30000 });
 
   const checks = await page.evaluate((rows) => rows.map(({zone,grade,id}) => {
@@ -72,11 +72,11 @@ try {
   ]);
 
   for (const row of checks) {
-    assert.equal(row.topicMode, "verified-official-sections", row.id + " should expose exact official book sections");
-    assert.ok(row.topics.length > 0, row.id + " should expose at least one section");
-    const officialBookTopics = row.topics.filter((t) => t.status === "official-book-section-verified" && t.sourceType === "official-book-section");
-    assert.ok(officialBookTopics.length > 0, row.id + " must expose exact official book sections");
-    assert.ok(officialBookTopics.every((t) => /^https:\/\//.test(t.sourceUrl)), row.id + " official book sections require a source URL");
+    assert.ok(row.topics.length > 0, row.id + " should expose official book structure");
+    const exact = row.topics.filter((t) => t.status === "official-book-section-grounded" && t.sourceType === "official-book-section");
+    const pending = row.topics.filter((t) => t.status === "official-book-section-source-missing");
+    assert.ok(exact.length + pending.length > 0, row.id + " should expose provenance-aware book sections");
+    assert.ok(exact.every((t) => /^https:\/\/[^/]*ebooks\.edu\.gr\//i.test(t.sourceUrl)), row.id + " grounded sections require an exact official URL");
   }
 } finally {
   await browser.close();

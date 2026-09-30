@@ -938,7 +938,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     const alignment = getOfficialGapAlignment();
     const exactOfficial = alignment && (alignment.status === "exact-section-verified" || alignment.status === "related-section-verified");
     const gapStatus = String(gap?.status || "");
-    const verifiedSection = /exact-section-verified|related-section-verified|official-book-section-verified/.test(gapStatus);
+    const verifiedSection = /exact-section-verified|related-section-verified|official-book-section-(?:verified|grounded|source-missing)/.test(gapStatus);
     const hasAttachment = !!attachedDocument?.text;
     return api.normalize({
       zoneId: ctx.zoneId || "",

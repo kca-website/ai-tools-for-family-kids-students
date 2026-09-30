@@ -6,8 +6,10 @@ const URL = 'http://127.0.0.1:4173/';
 const browser = await chromium.launch({ headless: true });
 
 const homepageSource = readFileSync('index.html', 'utf8');
-assert.doesNotMatch(homepageSource, /<html[^>]*navigator-home-booting/, 'static navigator-home-booting must not return: rewritten non-home routes must remain visible');
+assert.doesNotMatch(homepageSource, /<html[^>]*(navigator-home-booting|navigator-route-booting)/, 'boot classes must be added at runtime, never baked into the static html element');
 assert.match(homepageSource, /navigatorHomeFirstPaintGuard/, 'homepage must ship an inline first-paint guard');
+assert.match(homepageSource, /navigator-route-booting/, 'rewritten app routes must ship a first-paint guard against legacy-shell flashes');
+assert.match(homepageSource, /routeBootSkeleton/, 'rewritten app routes must have a neutral boot cover');
 assert.match(homepageSource, /navigator-home\.css[^>]*data-navigator-home="1"/, 'navigator CSS must load from the original head');
 assert.match(homepageSource, /id="homeV8Eng"[\s\S]*?167 σχολικές έννοιες[\s\S]*?Δες τις 167 έννοιες/, 'raw homepage HTML must expose the canonical GSL count to crawlers before JavaScript runs');
 assert.doesNotMatch(homepageSource, /153 σχολικές έννοιες|Δες τις 153 έννοιες/, 'raw homepage HTML must not expose the stale GSL count');

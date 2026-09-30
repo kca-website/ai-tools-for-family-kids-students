@@ -143,10 +143,6 @@
   }
 
   function normalizeAuditedSemantics(){
-    // The view switcher behaves as a button group, not as a complete ARIA tab
-    // widget (no tabpanel/arrow-key model), so remove the misleading tablist role.
-    document.getElementById("viewTabs")?.removeAttribute("role");
-
     // aria-label on a role-less div is not consistently exposed. The links retain
     // their own descriptive names, so removing the unsupported attribute is safer.
     document.querySelector(".hero__ai-help-actions")?.removeAttribute("aria-label");

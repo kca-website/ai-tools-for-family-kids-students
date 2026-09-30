@@ -155,7 +155,7 @@
   var tutorRoute={primary:'/primary/guardian/tutor',middle:'/middle/guardian/tutor',high:'/high/student/tutor'};
   var toolsRoute={primary:'/primary/guardian/tools',middle:'/middle/student/tools',high:'/high/student/tools'};
   function text(el){return lang==='el'?el.getAttribute('data-el'):el.getAttribute('data-en')}
-  function tr(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(function(el){el.textContent=text(el)});document.getElementById('langEl').classList.toggle('active',lang==='el');document.getElementById('langEn').classList.toggle('active',lang==='en');renderStats();populateSubjects()}
+  function tr(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(function(el){el.textContent=text(el)});document.getElementById('langEl').classList.toggle('active',lang==='el');document.getElementById('langEn').classList.toggle('active',lang==='en');document.getElementById('langEl').setAttribute('aria-pressed',String(lang==='el'));document.getElementById('langEn').setAttribute('aria-pressed',String(lang==='en'));renderStats();populateSubjects()}
   function subjectOf(e){var title=lang==='el'?(e.quizTitleEl||''):(e.quizTitleEn||e.quizTitleEl||'');return (title.split(',')[0]||title).trim()}
   function courseTitle(e){return lang==='el'?(e.quizTitleEl||e.quizId):(e.quizTitleEn||e.quizTitleEl||e.quizId)}
   function entryById(id){return entries.find(function(e){return e.zone===zone&&e.quizId===id})||(layer.getByQuizId?layer.getByQuizId(id):layer.byQuiz[id])||null}

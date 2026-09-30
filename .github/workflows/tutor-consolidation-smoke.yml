@@ -145,6 +145,9 @@ jobs:
       - name: Run Phase 11A live official-source grounding
         run: node tests/phase11-primary-source-live-smoke.mjs
 
+      - name: Run Phase 11C GEL Informatics schoolbook grounding
+        run: node tests/phase11-gel-informatics-grounding-smoke.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

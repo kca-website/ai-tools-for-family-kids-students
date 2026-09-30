@@ -22,6 +22,30 @@ function browserRequestAllowed(req) {
 // Official-book grounding coverage expands incrementally from verified HTML section patterns.
 
 const BOOKS = {
+  "pliroforiki-a-lykeiou": {
+    title: "Εφαρμογές Πληροφορικής Α΄ Λυκείου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2714/Pliroforiki_A-Lykeiou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "pliroforiki-b-lykeiou": {
+    title: "Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ Β΄ Λυκείου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2716/Pliroforiki_B-Lykeiou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "glossa-a-dimotikou": {
     title: "Γλώσσα Α΄ Δημοτικού",
     grade: "a",
@@ -1858,10 +1882,28 @@ async function fetchOfficialHtml(url) {
 
 function topicLabelCandidates(topic) {
   const raw = String(topic || "").trim();
-  const stripped = raw
+  const variants = [raw];
+  const withoutUnit = raw
     .replace(/^\s*(?:\d+\s*(?:η|ή)?\s*(?:ενότητα)?|ενότητα\s*\d+|unit\s*\d+|pre-unit|extra\s+unit)\s*[—–:.-]*\s*/i, "")
     .trim();
-  return [...new Set([normalize(raw), normalize(stripped)].filter(Boolean))];
+  variants.push(withoutUnit);
+
+  const withoutChapterWord = raw
+    .replace(/^\s*(?:κεφάλαιο|chapter)\s*/i, "")
+    .trim();
+  variants.push(withoutChapterWord);
+
+  const withoutChapterNumber = withoutChapterWord
+    .replace(/^\s*\d+(?:[.,]\d+)*\s*[—–:.-]*\s*/i, "")
+    .trim();
+  variants.push(withoutChapterNumber);
+
+  const withoutLeadingNumber = raw
+    .replace(/^\s*\d+(?:[.,]\d+)*\s*[—–:.-]*\s*/i, "")
+    .trim();
+  variants.push(withoutLeadingNumber);
+
+  return [...new Set(variants.map(normalize).filter(Boolean))];
 }
 
 function officialLinkAllowed(url) {

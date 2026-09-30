@@ -24,7 +24,7 @@ for (const id of supported) {
   assert.match(apiSource, new RegExp('"' + id + '"\\s*:\\s*\\{[\\s\\S]{0,900}?mode:\\s*"linkedSection"'));
   const start = sectionSource.indexOf('"' + id + '":{');
   assert.ok(start >= 0, "Missing official book-section entry for " + id);
-  assert.match(sectionSource.slice(start, start + 1000), /groundingStatus:"schoolbook-source-exact"/);
+  assert.match(sectionSource.slice(start, start + 1600), /groundingStatus:"schoolbook-structure-verified"/);
 }
 
 assert.deepEqual(topicLabelCandidates("1η Ενότητα — Πού είναι ο Άρης;").includes("που ειναι ο αρης"), true);
@@ -71,12 +71,18 @@ try {
     {zone:"primary",grade:"st",id:"english-st-dimotikou"},
   ]);
 
+  const exactEnabled = new Set(["glossa-a-dimotikou","glossa-b-dimotikou","glossa-d-dimotikou"]);
   for (const row of checks) {
-    assert.ok(row.topics.length > 0, row.id + " should expose official book structure");
+    assert.ok(row.topics.length > 0, row.id + " should expose curriculum topics or official book structure");
     const exact = row.topics.filter((t) => t.status === "official-book-section-grounded" && t.sourceType === "official-book-section");
     const pending = row.topics.filter((t) => t.status === "official-book-section-source-missing");
-    assert.ok(exact.length + pending.length > 0, row.id + " should expose provenance-aware book sections");
-    assert.ok(exact.every((t) => /^https:\/\/[^/]*ebooks\.edu\.gr\//i.test(t.sourceUrl)), row.id + " grounded sections require an exact official URL");
+    if (exactEnabled.has(row.id)) {
+      assert.ok(exact.length > 0, row.id + " should expose at least one exact grounded section");
+      assert.ok(exact.length + pending.length > 0, row.id + " should keep missing exact excerpts distinguishable");
+      assert.ok(exact.every((t) => /^https:\/\/[^/]*ebooks\.edu\.gr\//i.test(t.sourceUrl)), row.id + " grounded sections require an exact official URL");
+    } else {
+      assert.equal(exact.length, 0, row.id + " must not claim exact grounded sections before verification");
+    }
   }
 } finally {
   await browser.close();

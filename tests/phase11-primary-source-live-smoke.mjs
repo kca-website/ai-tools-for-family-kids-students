@@ -19,9 +19,12 @@ async function withTimeout(promise, ms, label) {
 const samples = [
   { subject:"glossa-a-dimotikou", topic:"1η Ενότητα — Πού είναι ο Άρης;", grade:"a", signal:"άρης" },
   { subject:"glossa-b-dimotikou", topic:"1 — Στο δρόμο για το σχολείο", grade:"b", signal:"σχολείο" },
-  { subject:"glossa-b-dimotikou", topic:"2 — Με το «σεις» και με «σας»", grade:"b", signal:"ευγεν" },
-  { subject:"glossa-b-dimotikou", topic:"3 — Στον κόσμο των κόμικς", grade:"b", signal:"κόμικ" },
-  { subject:"glossa-d-dimotikou", topic:"1η Ενότητα — Ένα ακόμα σκαλί", grade:"d", signal:"σκαλί" }
+  { subject:"glossa-c-dimotikou", topic:"Πάλι μαζί!", grade:"c", signal:"πάλι" },
+  { subject:"glossa-d-dimotikou", topic:"1η Ενότητα — Ένα ακόμα σκαλί", grade:"d", signal:"σκαλί" },
+  { subject:"glossa-e-dimotikou", topic:"Ενότητα 1 — Ο φίλος μας το περιβάλλον", grade:"e", signal:"περιβάλλον" },
+  { subject:"science-st-dimotikou", topic:"Ενέργεια", grade:"st", signal:"ενέργεια" },
+  { subject:"istoria-d-dimotikou", topic:"Γεωμετρικά Χρόνια", grade:"d", signal:"γεωμετρ" },
+  { subject:"english-st-dimotikou", topic:"Unit 1 — Our Multicultural Class", grade:"st", signal:"multicultural" }
 ];
 
 for (const sample of samples) {
@@ -42,7 +45,8 @@ for (const sample of samples) {
 for (const unsupported of [
   ["glossa-a-dimotikou","Ανύπαρκτη ενότητα"],
   ["glossa-b-dimotikou","99 — Ανύπαρκτη ενότητα"],
-  ["science-st-dimotikou","Ανύπαρκτη ενότητα"]
+  ["science-st-dimotikou","Ανύπαρκτη ενότητα"],
+  ["glossa-d-dimotikou","2η Ενότητα — Ρώτα το νερό... τι τρέχει"]
 ]) {
   const result = await withTimeout(resolveOfficialSchoolbookSource(unsupported[0], unsupported[1]), 30000, unsupported.join(" / "));
   assert.equal(result.ok, false, unsupported.join(" / ") + " must fail closed until an exact source mapping exists");

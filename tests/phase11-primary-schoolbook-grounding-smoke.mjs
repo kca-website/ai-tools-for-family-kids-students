@@ -72,10 +72,14 @@ try {
   ]);
 
   const exactEnabled = new Set(["glossa-a-dimotikou","glossa-b-dimotikou","glossa-d-dimotikou"]);
+  let exactTotal = 0;
+  let missingTotal = 0;
   for (const row of checks) {
     assert.ok(row.topics.length > 0, row.id + " should expose curriculum topics or official book structure");
     const exact = row.topics.filter((t) => t.status === "official-book-section-grounded" && t.sourceType === "official-book-section");
     const pending = row.topics.filter((t) => t.status === "official-book-section-source-missing");
+    exactTotal += exact.length;
+    missingTotal += pending.length;
     if (exactEnabled.has(row.id)) {
       assert.ok(exact.length > 0, row.id + " should expose at least one exact grounded section");
       assert.ok(exact.length + pending.length > 0, row.id + " should keep missing exact excerpts distinguishable");
@@ -84,6 +88,8 @@ try {
       assert.equal(exact.length, 0, row.id + " must not claim exact grounded sections before verification");
     }
   }
+  assert.equal(exactTotal, 101, "Phase 11A should expose only the 101 exact source mappings discovered from official navigation");
+  assert.equal(missingTotal, 9, "Nine Primary sections must remain source-missing rather than guessed");
 } finally {
   await browser.close();
 }

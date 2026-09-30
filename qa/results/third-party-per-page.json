@@ -37,11 +37,11 @@
   },
   "disclosed": {
     "cdn.jsdelivr.net": true,
-    "fonts.googleapis.com": false,
-    "fonts.gstatic.com": false,
-    "www.google.com": false,
-    "commons.wikimedia.org": false,
-    "upload.wikimedia.org": false,
+    "fonts.googleapis.com": true,
+    "fonts.gstatic.com": true,
+    "www.google.com": true,
+    "commons.wikimedia.org": true,
+    "upload.wikimedia.org": true,
     "js.puter.com": true
   }
 }

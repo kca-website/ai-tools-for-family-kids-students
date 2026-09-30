@@ -486,6 +486,30 @@ const BOOKS = {
     lastVerified: "2026-09-30",
     annualScopeVerified: false
   },
+  "english-g-gymnasiou": {
+    title: "Αγγλικά Γ΄ Γυμνασίου",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+    mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "Unit 1 — A Wonderful World",
+      "Unit 2 — Teen idols",
+      "Unit 3 — Thrills and Spills!",
+      "Unit 4 — Click on-Line!",
+      "Unit 5 — The myths we live by",
+      "Unit 6 — Keeping traditions and customs alive",
+      "Unit 7 — Shades of Meaning!",
+      "Unit 8 — Food for thought",
+      "Unit 9 — What's the weather like?",
+      "Unit 10 — Natural phenomena"
+    ]),
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "english-a-gymnasiou": {
     title: "Αγγλικά Α΄ Γυμνασίου",
     grade: "a",

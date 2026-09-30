@@ -50,6 +50,9 @@ jobs:
       - name: Run Phase 8 grounding regression tests
         run: node --test qa/tests/phase8-grounding.test.mjs
 
+      - name: Run Phase 9 production correctness tests
+        run: node --test qa/tests/phase9-production-correctness.test.mjs
+
       - name: Install Playwright and axe-core
         run: |
           npm install --no-save playwright@1.55.0 axe-core@4.10.3

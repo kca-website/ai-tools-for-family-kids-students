@@ -1878,21 +1878,28 @@ function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
   if (!wanted.size || !html || !book?.base) return [];
 
   const matches = [];
+  const addExact = (href, rawLabel) => {
+    href = String(href || "").trim();
+    if (!href || /^javascript:/i.test(href) || href.startsWith("#")) return;
+    let absolute = "";
+    try { absolute = new URL(href, book.base).toString(); } catch (_) { return; }
+    if (!officialLinkAllowed(absolute)) return;
+    if (!/\.html?(?:$|[?#])/i.test(absolute)) return;
+    const labelCandidates = topicLabelCandidates(htmlToText(rawLabel || ""));
+    if (!labelCandidates.some((label) => wanted.has(label))) return;
+    if (!matches.includes(absolute)) matches.push(absolute);
+  };
+
+  const source = String(html);
   const anchorRe = /<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let match;
-  while ((match = anchorRe.exec(String(html)))) {
-    const href = String(match[1] || "").trim();
-    if (!href || /^javascript:/i.test(href) || href.startsWith("#")) continue;
+  while ((match = anchorRe.exec(source))) addExact(match[1], match[2]);
 
-    let absolute = "";
-    try { absolute = new URL(href, book.base).toString(); } catch (_) { continue; }
-    if (!officialLinkAllowed(absolute)) continue;
-    if (!/\.html?(?:$|[?#])/i.test(absolute)) continue;
-
-    const label = normalize(htmlToText(match[2] || ""));
-    if (!wanted.has(label)) continue;
-    if (!matches.includes(absolute)) matches.push(absolute);
-  }
+  // Official enriched schoolbooks often expose their navigation as <select><option>.
+  // This is still exact extraction: option label must match the requested section,
+  // and the target must remain on the official ebooks.edu.gr domain.
+  const optionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
+  while ((match = optionRe.exec(source))) addExact(match[1], match[2]);
 
   // Exact matching only. Ambiguity fails closed rather than choosing by similarity.
   return matches.length === 1 ? matches : [];
@@ -1912,7 +1919,10 @@ function resolveExplicitSectionUrls(book, topic) {
 }
 
 async function resolveLinkedSectionUrls(book, topic) {
-  return resolveExplicitSectionUrls(book, topic);
+  const explicit = resolveExplicitSectionUrls(book, topic);
+  if (explicit.length) return explicit;
+  const rootHtml = await fetchOfficialHtml(book.base);
+  return rootHtml ? resolveLinkedSectionUrlsFromHtml(book, topic, rootHtml) : [];
 }
 
 async function discoverUnitPages(book, prefix) {

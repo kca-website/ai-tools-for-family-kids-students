@@ -16,6 +16,7 @@
     "headers": "node scripts/security-headers.mjs",
     "lighthouse": "node scripts/lighthouse.mjs",
     "test:api": "node --test tests/api-handlers.mock.test.mjs tests/link-check.selftest.mjs tests/ai-smoke.selftest.mjs",
+    "test:phase10": "node --test tests/phase10-landing-pages.test.mjs && playwright test e2e/09-phase10-landing.spec.mjs --project=chromium-desktop --project=chromium-mobile375",
     "e2e": "playwright test --project=chromium-desktop --project=chromium-mobile375"
   },
   "devDependencies": {

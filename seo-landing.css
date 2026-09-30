@@ -1,0 +1,43 @@
+/* Phase 10 SEO landing pages: additions on top of seo-guide.css.
+ * Reuses the existing tokens and components; only adds the few blocks the
+ * landing pages need (route list, tool cards, deep-link chips, FAQ).
+ * No fixed widths, so nothing can overflow at 320px. */
+.wrap>.crumb ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 8px}
+.wrap>.crumb li+li::before{content:"›";margin-right:8px;color:var(--muted)}
+.wrap>.crumb [aria-current]{color:var(--muted)}
+.hero .lead strong{color:var(--ink)}
+.routes{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.routes li{background:#fff;border:1px solid var(--border);border-radius:12px;padding:13px 15px}
+.routes strong{display:block;font-family:var(--heading);margin-bottom:2px}
+.routes p{margin:2px 0 8px;color:#374151}
+.routes a{font-weight:800}
+.tool-group{margin:18px 0 6px}
+.tool-group>p{margin:4px 0 10px}
+.tool-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;list-style:none;margin:0;padding:0}
+.tool-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px 14px;min-width:0}
+.tool-card h4{margin:0 0 4px;font-family:var(--heading);font-size:1rem;overflow-wrap:anywhere}
+.tool-card h4 a{text-decoration:none}
+.tool-card p{margin:4px 0;font-size:.92rem;color:#374151}
+.tool-card .avail{font-size:.78rem;color:var(--muted)}
+.tool-card .note{font-size:.8rem;color:#8a5a0c}
+.deeplinks{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px;padding:0;list-style:none}
+.deeplinks a{display:inline-block;border:1px solid #bfd5f1;background:#fff;border-radius:999px;padding:6px 12px;font-size:.88rem;font-weight:750;text-decoration:none}
+.deeplinks a:hover{background:var(--soft)}
+.deep-label{font-weight:800;margin:14px 0 2px;font-size:.95rem}
+.prompt-box{background:#f6fbf7;border:1px solid #cfe5d5;border-left:4px solid var(--green);border-radius:12px;padding:12px 15px;margin:14px 0}
+.prompt-box .label{font-weight:800;font-size:.85rem;color:var(--green);margin:0 0 4px}
+.prompt-box blockquote{margin:0;color:#1f2937}
+article details{background:#fff;border:1px solid var(--border);border-radius:12px;padding:0 15px;margin:10px 0}
+article summary{cursor:pointer;font-weight:800;padding:13px 0;font-family:var(--heading)}
+article details[open] summary{border-bottom:1px solid var(--border);margin-bottom:8px}
+article details p{margin:8px 0 14px}
+article details ul{margin:8px 0 14px}
+.meta-line{font-size:.83rem;color:var(--muted);margin-top:26px}
+.wrap a:focus-visible,.wrap summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:4px}
+body.has-site-chrome .page-foot{display:none}
+@media(max-width:620px){.tool-cards{grid-template-columns:1fr}}
+/* The shared chrome (site-chrome.js) swaps this legacy header for its own 73px/65px header.
+   Reserving the same height keeps the content from jumping when that happens (CLS 0). */
+.top{min-height:97px;display:flex;align-items:center;box-sizing:border-box}
+.top .top__in{width:100%}
+@media(max-width:760px){.top{min-height:65px}}

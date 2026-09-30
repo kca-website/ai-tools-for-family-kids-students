@@ -99,12 +99,10 @@ test.describe('home + routing', () => {
 
   // FINDING F-03: unknown URLs return 200 + homepage and a self-referencing canonical (soft-404).
   test('unknown URL returns a real 404', async ({ page }) => {
-    test.fail(!IS_PROD || true, 'FINDING F-03 soft-404: vercel.json catch-all "/(.*)" → "/" returns 200');
     const resp = await page.goto('/this-page-does-not-exist-' + Date.now());
     expect(resp.status()).toBe(404);
   });
   test('unknown URL is not self-canonical / is noindex', async ({ page }) => {
-    test.fail(true, 'FINDING F-03: canonical is rewritten to the bogus URL (app.js updateDocumentTitle)');
     const p = '/this-page-does-not-exist-2';
     await page.goto(p);
     await page.waitForTimeout(500);

@@ -24,7 +24,10 @@ for (const id of supported) {
   assert.match(apiSource, new RegExp('"' + id + '"\\s*:\\s*\\{[\\s\\S]{0,900}?mode:\\s*"linkedSection"'));
   const start = sectionSource.indexOf('"' + id + '":{');
   assert.ok(start >= 0, "Missing official book-section entry for " + id);
-  assert.match(sectionSource.slice(start, start + 1600), /groundingStatus:"schoolbook-structure-verified"/);
+  const next = sectionSource.indexOf('\n    "', start + id.length + 4);
+  const entry = sectionSource.slice(start, next > start ? next : sectionSource.length);
+  assert.match(entry, /groundingStatus:"schoolbook-structure-verified"/);
+  assert.match(entry, /groundedSections:Object\.freeze\(\{/);
 }
 
 assert.deepEqual(topicLabelCandidates("1η Ενότητα — Πού είναι ο Άρης;").includes("που ειναι ο αρης"), true);

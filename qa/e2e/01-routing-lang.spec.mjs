@@ -117,8 +117,8 @@ test.describe('home + routing', () => {
 const LANG_PAGES = ['/', '/primary/guardian/tools', '/xartis-ylis.html', '/study.html', '/sign-language.html', '/special-education.html', '/guide.html', '/privacy-policy.html', '/about.html', '/methodology.html', '/school-ai-use.html', '/accessibility.html'];
 // Pages whose visible text is mostly Greek DATA (official curriculum / ΕΝΓ concept names) – ratio is reported, not asserted.
 const DATA_HEAVY = new Set(['/study.html', '/sign-language.html', '/special-education.html']);
-// FINDING F-04: these pages (and the whole SPA) do not persist the EN choice; methodology/report-error/sign-language write aitools4kids_lang but the SPA ignores it.
-const LANG_NOT_PERSISTED = new Set(['/', '/primary/guardian/tools', '/xartis-ylis.html', '/study.html', '/guide.html']);
+// Pages with a language switch share the same local preference key.
+const LANG_NOT_PERSISTED = new Set();
 const visibleTextOf = (page) => page.evaluate(() => {
   const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); const out = [];
   while (w.nextNode()) { const n = w.currentNode; const el = n.parentElement; if (!el || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(el.tagName)) continue; const cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden') continue; const t = n.textContent.trim(); if (t) out.push(t); }
@@ -145,7 +145,6 @@ test.describe('EL/EN switch', () => {
       expect(qa.pageErrors).toEqual([]);
     });
     test(`${path}: EN persists after reload`, async ({ page }) => {
-      test.fail(LANG_NOT_PERSISTED.has(path), 'FINDING F-04: language choice is lost on reload / navigation');
       await page.goto(path);
       await page.waitForTimeout(500);
       const btn = enButton(page);
@@ -158,7 +157,6 @@ test.describe('EL/EN switch', () => {
     });
   }
   test('EN chosen on home survives navigation to /study.html', async ({ page }) => {
-    test.fail(true, 'FINDING F-04');
     await page.goto('/');
     await page.locator('#langEn').click();
     const link = page.locator('a[href="/study.html"]:visible').first();

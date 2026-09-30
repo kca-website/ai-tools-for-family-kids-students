@@ -4,7 +4,10 @@ const CORE = [
   "/",
   "/styles.css",
   "/manifest.webmanifest",
-  "/assets/icons/app-icon.svg"
+  "/assets/icons/app-icon.svg",
+  "/assets/icons/app-icon-192.png",
+  "/assets/icons/app-icon-512.png",
+  "/assets/icons/apple-touch-icon.png"
 ];
 
 /*

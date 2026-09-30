@@ -21,7 +21,16 @@ const samples = [
   ["istoria-st-dimotikou","Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)","αναγέννη"],
   ["ekthesi-g-lykeiou","Κεφάλαιο 3 — Δίκαιος λόγος και άδικος λόγος","δίκαι"],
   ["math-d-dimotikou","Α΄ Περίοδος · Β΄ Ενότητα","καλάβρυτα"],
-  ["english-c-dimotikou","Unit 1 — In the Fairytale Forest","forest"]
+  ["english-c-dimotikou","Unit 1 — In the Fairytale Forest","forest"],
+  ["glossa-b-dimotikou","2 — Με το «σεις» και με «σας»","ευγεν"],
+  ["glossa-d-dimotikou","2η Ενότητα — Ρώτα το νερό... τι τρέχει","νερό"],
+  ["glossa-d-dimotikou","3η Ενότητα — Το σχολείο γιορτάζει την ελευθερία και τη δημοκρατία","ελευθερ"],
+  ["glossa-d-dimotikou","4η Ενότητα — Εμένα με νοιάζει","περιβάλλον"],
+  ["glossa-d-dimotikou","5η Ενότητα — Ασφαλώς κυκλοφορώ","κυκλοφορ"],
+  ["glossa-d-dimotikou","16η Ενότητα — Ταξίδια στην Ελλάδα","ταξιδ"],
+  ["science-st-dimotikou","Αναπνευστικό σύστημα","αναπνο"],
+  ["science-st-dimotikou","Κυκλοφορικό σύστημα","καρδιά"],
+  ["glossa-e-dimotikou","Ενότητα 11 — Παιχνίδια","παιχνίδ"]
 ];
 
 for (const [subject, topic, signal] of samples) {

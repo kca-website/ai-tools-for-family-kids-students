@@ -3274,10 +3274,21 @@ function renderToolGrid(pathTools, targetElement) {
       });
     }
 
-    // Back/forward browser buttons.
+    // Back/forward browser buttons. When navigation originates from the lightweight
+    // homepage, an internal app route can arrive before the deferred curriculum/audit
+    // bundle is ready. Load that bundle first so age limits, tool priorities and tutor
+    // context are correct on the very first rendered frame.
     window.addEventListener("popstate", () => {
-      restoreStateFromPath(location.pathname);
-      renderCurrentRoute();
+      const renderRouteFromLocation = () => {
+        restoreStateFromPath(location.pathname);
+        renderCurrentRoute();
+      };
+      const appRoute = /^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)\/?$/.test(location.pathname);
+      if (appRoute && !window.__aitools4kidsHeavyLoaded && typeof window.__aitools4kidsLoadHeavy === "function") {
+        window.__aitools4kidsLoadHeavy().then(renderRouteFromLocation);
+        return;
+      }
+      renderRouteFromLocation();
     });
   }
 

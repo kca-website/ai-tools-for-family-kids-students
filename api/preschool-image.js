@@ -108,7 +108,7 @@ module.exports = async function handler(req, res) {
 };
 
 function looksLikePersonalData(s) {
-  return /@|https?:\/\/|\b\d{7,}\b|\b(email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)\b/i.test(s);
+  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)(?=$|[^\p{L}\p{N}_])/iu.test(String(s || ''));
 }
 
 function pictureSubject(idea) {

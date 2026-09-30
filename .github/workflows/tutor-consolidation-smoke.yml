@@ -130,6 +130,30 @@ jobs:
       - name: Run AI Study cache/source safety smoke
         run: node tests/study-cache-safety-smoke.mjs
 
+      - name: Run Phase 11 study-tools grounding contract
+        run: node tests/phase11-study-tools-grounding-smoke.mjs
+
+      - name: Run Phase 11 objective coverage audit
+        run: node tests/phase11-coverage-audit.mjs
+
+      - name: Run Phase 11B additional Gymnasium schoolbook grounding
+        run: node tests/phase11b-gymnasium-grounding-smoke.mjs
+
+      - name: Run Phase 11A Primary schoolbook grounding
+        run: node tests/phase11-primary-schoolbook-grounding-smoke.mjs
+
+      - name: Run Phase 11A official navigation discovery
+        run: node tests/phase11-primary-source-discovery.mjs
+
+      - name: Run Phase 11A live official-source grounding
+        run: node tests/phase11-primary-source-live-smoke.mjs
+
+      - name: Run Phase 11C GEL Informatics schoolbook grounding
+        run: node tests/phase11-gel-informatics-grounding-smoke.mjs
+
+      - name: Run Phase 11D EPAL grounding audit
+        run: node tests/phase11d-epal-grounding-audit.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

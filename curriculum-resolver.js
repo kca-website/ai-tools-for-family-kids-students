@@ -173,6 +173,9 @@
     const catalog=subject.catalogSubject;
     const quiz=subject.quiz;
     const official=subject.officialCurriculum;
+    const bookSections=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(subject.quizId||subject.id)||null;
+    const groundedSectionMap=bookSections?.groundedSections || {};
+    const hasAnyExactGroundedBookSection=Object.keys(groundedSectionMap).length>0;
     let preferCurrentCatalogTopics=false;
     if(catalog){
       const status=catalogTopicStatus(catalog);
@@ -190,7 +193,9 @@
         c.coverageStatus==="panhellenic-2027-detailed-map"
       );
       preferCurrentCatalogTopics = currentMapped && (catalog.topics||[]).some((t)=>!t?.specialSupportAction);
-      const visibleCatalogTopics=(catalog.topics||[]).filter((t)=>currentMapped || t?.specialSupportAction);
+      const visibleCatalogTopics=hasAnyExactGroundedBookSection
+        ? (catalog.topics||[]).filter((t)=>t?.specialSupportAction)
+        : (catalog.topics||[]).filter((t)=>currentMapped || t?.specialSupportAction);
       visibleCatalogTopics.forEach((t)=>rows.push(Object.assign({},t,{
         id:t.id || (catalog.id+".topic."+rows.length),
         status:t.status||status,
@@ -200,17 +205,23 @@
         sourceLabelEn:c.sourceLabelEn||c.coverageLabelEn||""
       })));
     }
-    const bookSections=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(subject.quizId||subject.id)||null;
-    if(bookSections?.sections?.length && !preferCurrentCatalogTopics){
-      bookSections.sections.forEach((label,i)=>rows.push({
-        id:(subject.quizId||subject.id)+".verified-book-section-"+(i+1),
-        labelEl:label,labelEn:label,
-        status:"official-book-section-verified",
-        sourceType:"official-book-section",
-        sourceUrl:bookSections.sourceUrl||"",
-        sourceLabelEl:"Διαδραστικά Σχολικά Βιβλία · επίσημα περιεχόμενα",
-        sourceLabelEn:"Interactive School Textbooks · official contents"
-      }));
+    if(bookSections?.sections?.length && (!preferCurrentCatalogTopics || hasAnyExactGroundedBookSection)){
+      bookSections.sections.forEach((label,i)=>{
+        const directUrl = groundedSectionMap[label] || "";
+        rows.push({
+          id:(subject.quizId||subject.id)+".verified-book-section-"+(i+1),
+          labelEl:label,labelEn:label,
+          status:directUrl ? "official-book-section-grounded" : "official-book-section-source-missing",
+          sourceType:directUrl ? "official-book-section" : "official-book-structure",
+          sourceUrl:directUrl || bookSections.sourceUrl || "",
+          sourceLabelEl:directUrl
+            ? "Διαδραστικά Σχολικά Βιβλία · ακριβής ενότητα"
+            : "Διαδραστικά Σχολικά Βιβλία · δομή βιβλίου, χωρίς exact excerpt mapping",
+          sourceLabelEn:directUrl
+            ? "Interactive School Textbooks · exact section"
+            : "Interactive School Textbooks · book structure, exact excerpt not mapped"
+        });
+      });
     }
     if(official){
       const en=official.officialSectionsEn||[];
@@ -300,7 +311,7 @@
       const statuses=topics.map((t)=>t.status||"");
       const annual=statuses.some((s)=>/annual-instructions-verified|annual-exam-syllabus-verified|panhellenic-2027-verified|exact-section/.test(s));
       const framework=statuses.some((s)=>/verified-framework/.test(s)) || row.catalogSubject?.curriculum?.frameworkOnly===true || row.catalogSubject?.curriculum?.coverageStatus==="annual-framework-verified";
-      const officialSections=statuses.some((s)=>/official-book-section|related-section/.test(s));
+      const officialSections=statuses.some((s)=>/official-book-section-grounded|related-section/.test(s));
       const mode=annual?"verified-annual":framework?"verified-framework":officialSections?"verified-official-sections":topics.length?"mapped-navigation":"unmapped";
       return Object.assign({},row.catalogSubject||row.quiz||{},row,{
         id:/^archaia-glossa-[abc]-gymnasiou$/.test(String(row.quizId||""))

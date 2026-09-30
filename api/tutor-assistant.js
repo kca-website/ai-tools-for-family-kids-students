@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { context = '', prompt, audience, task = 'conversation', mode = 'understand', activity = '', cacheEligible = false, grade = '', subject = '', subjectId = '', topic = '', character = '', documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
+  const { context = '', prompt, audience, task = 'conversation', mode = 'understand', activity = '', cacheEligible = false, grade = '', subject = '', subjectId = '', topic = '', character = '', studyContext = null, documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
   if (!['parent', 'high_student', 'study_user'].includes(audience)) {
     return res.status(403).json({ error: 'audience_not_allowed', message: 'Η λειτουργία είναι διαθέσιμη σε γονείς όλων των βαθμίδων και σε μαθητές Λυκείου.' });
   }
@@ -72,9 +72,21 @@ module.exports = async function handler(req, res) {
     return res.status(413).json({ error: 'prompt_too_large', message: 'Η συνομιλία είναι πολύ μεγάλη. Ξεκίνα νέα συζήτηση.' });
   }
 
+  const requestedSourcePolicy = studyContext && typeof studyContext === 'object'
+    ? String(studyContext.sourcePolicy || '')
+    : '';
+  const officialSourceRequired = requestedSourcePolicy === 'official_required';
+
+  if (officialSourceRequired && documentKind !== 'official_schoolbook') {
+    return res.status(422).json({
+      error: 'official_source_required',
+      message: 'Η επιλεγμένη ενότητα απαιτεί επαληθευμένη επίσημη σχολική πηγή. Δεν θα χρησιμοποιηθεί γενική γνώση ως υποκατάστατο.'
+    });
+  }
+
   let verifiedOfficialSource = null;
   if (documentKind === 'official_schoolbook') {
-    if (audience !== 'study_user' || !String(subjectId || '').trim() || !String(topic || '').trim()) {
+    if (!String(subjectId || '').trim() || !String(topic || '').trim()) {
       return res.status(400).json({
         error: 'official_source_identity_required',
         message: 'Λείπει η επαληθεύσιμη ταυτότητα της επίσημης σχολικής πηγής.'

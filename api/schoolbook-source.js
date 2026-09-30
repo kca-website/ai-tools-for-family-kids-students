@@ -22,6 +22,186 @@ function browserRequestAllowed(req) {
 // Official-book grounding coverage expands incrementally from verified HTML section patterns.
 
 const BOOKS = {
+  "fysiki-agogi-a-gymnasiou": {
+    title: "Φυσική Αγωγή Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "fysiki-agogi-b-gymnasiou": {
+    title: "Φυσική Αγωγή Β΄ Γυμνασίου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "fysiki-agogi-c-gymnasiou": {
+    title: "Φυσική Αγωγή Γ΄ Γυμνασίου",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2252/Fysiki-Agogi_A-B-GGymnasiou_html-empl/index.html",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "technologia-b-gymnasiou": {
+    title: "Τεχνολογία Β΄ Γυμνασίου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2194/Technologia_B-Gymnasiou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "pliroforiki-a-lykeiou": {
+    title: "Εφαρμογές Πληροφορικής Α΄ Λυκείου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2714/Pliroforiki_A-Lykeiou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "pliroforiki-b-lykeiou": {
+    title: "Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ Β΄ Λυκείου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2716/Pliroforiki_B-Lykeiou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "glossa-a-dimotikou": {
+    title: "Γλώσσα Α΄ Δημοτικού",
+    grade: "a",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+          "1η Ενότητα — Πού είναι ο Άρης?": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html",
+          "1η Ενότητα — Πού είναι ο Άρης;": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html"
+    }),
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "glossa-b-dimotikou": {
+    title: "Γλώσσα Β΄ Δημοτικού",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+          "1 — Στο δρόμο για το σχολείο": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexb_00.html",
+          "2 — Με το «σεις» και με «σας»": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexc_00.html",
+          "3 — Στον κόσμο των κόμικς": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexd_00.html"
+    }),
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "glossa-c-dimotikou": {
+    title: "Γλώσσα Γ΄ Δημοτικού",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "glossa-d-dimotikou": {
+    title: "Γλώσσα Δ΄ Δημοτικού",
+    grade: "d",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+          "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html"
+    }),
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "glossa-e-dimotikou": {
+    title: "Γλώσσα Ε΄ Δημοτικού",
+    grade: "e",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "science-st-dimotikou": {
+    title: "Φυσικά ΣΤ΄ Δημοτικού",
+    grade: "st",
+    base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "istoria-d-dimotikou": {
+    title: "Ιστορία Δ΄ Δημοτικού",
+    grade: "d",
+    base: "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "english-st-dimotikou": {
+    title: "Αγγλικά ΣΤ΄ Δημοτικού",
+    grade: "st",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "istoria-b-gymnasiou": {
     title: "Μεσαιωνική και Νεότερη Ιστορία Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2198/Istoria_B-Gymnasiou_html-empl/",
@@ -1165,7 +1345,10 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const directUrls = resolveDirectSourceUrls(subject, topic);
+  let directUrls = resolveDirectSourceUrls(subject, topic);
+  if (!directUrls.length && book.mode === "linkedSection") {
+    directUrls = await resolveLinkedSectionUrls(book, topic);
+  }
   const path = directUrls.length ? "__direct__" : resolveSectionPath(book.mode, topic);
   if (book.officialSourceRequired && !directUrls.length && !path) {
     return res.status(404).json({
@@ -1260,10 +1443,17 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({
       grounded: true,
       subject,
+      grade: book.grade || null,
       topic,
+      section: topic,
       bookTitle: book.title,
       schoolYear: book.schoolYear || null,
+      schoolbookSource: book.base || null,
+      annualGuidanceSource: book.curriculumSource || null,
       curriculumSource: book.curriculumSource || null,
+      mappingStatus: book.mappingStatus || "schoolbook-source-mapped",
+      lastVerified: book.lastVerified || null,
+      annualScopeVerified: book.annualScopeVerified === true,
       curriculumExclusions: scoped.exclusions,
       curriculumScopeApplied: scoped.exclusions.length > 0,
       sourceUrl,
@@ -1738,6 +1928,93 @@ async function fetchOfficialHtml(url) {
   return response.ok ? response.text() : "";
 }
 
+function topicLabelCandidates(topic) {
+  const raw = String(topic || "").trim();
+  const variants = [raw];
+  const withoutUnit = raw
+    .replace(/^\s*(?:\d+\s*(?:η|ή)?\s*(?:ενότητα)?|ενότητα\s*\d+|unit\s*\d+|pre-unit|extra\s+unit)\s*[—–:.-]*\s*/i, "")
+    .trim();
+  variants.push(withoutUnit);
+
+  const withoutChapterWord = raw
+    .replace(/^\s*(?:κεφάλαιο|chapter)\s*/i, "")
+    .trim();
+  variants.push(withoutChapterWord);
+
+  const withoutChapterNumber = withoutChapterWord
+    .replace(/^\s*\d+(?:[.,]\d+)*\s*[—–:.-]*\s*/i, "")
+    .trim();
+  variants.push(withoutChapterNumber);
+
+  const withoutLeadingNumber = raw
+    .replace(/^\s*\d+(?:[.,]\d+)*\s*[—–:.-]*\s*/i, "")
+    .trim();
+  variants.push(withoutLeadingNumber);
+
+  return [...new Set(variants.map(normalize).filter(Boolean))];
+}
+
+function officialLinkAllowed(url) {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" && /(^|\.)ebooks\.edu\.gr$/i.test(parsed.hostname);
+  } catch (_) {
+    return false;
+  }
+}
+
+function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
+  const wanted = new Set(topicLabelCandidates(topic));
+  if (!wanted.size || !html || !book?.base) return [];
+
+  const matches = [];
+  const addExact = (href, rawLabel) => {
+    href = String(href || "").trim();
+    if (!href || /^javascript:/i.test(href) || href.startsWith("#")) return;
+    let absolute = "";
+    try { absolute = new URL(href, book.base).toString(); } catch (_) { return; }
+    if (!officialLinkAllowed(absolute)) return;
+    if (!/\.html?(?:$|[?#])/i.test(absolute)) return;
+    const labelCandidates = topicLabelCandidates(htmlToText(rawLabel || ""));
+    if (!labelCandidates.some((label) => wanted.has(label))) return;
+    if (!matches.includes(absolute)) matches.push(absolute);
+  };
+
+  const source = String(html);
+  const anchorRe = /<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+  while ((match = anchorRe.exec(source))) addExact(match[1], match[2]);
+
+  // Official enriched schoolbooks often expose their navigation as <select><option>.
+  // This is still exact extraction: option label must match the requested section,
+  // and the target must remain on the official ebooks.edu.gr domain.
+  const optionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
+  while ((match = optionRe.exec(source))) addExact(match[1], match[2]);
+
+  // Exact matching only. Ambiguity fails closed rather than choosing by similarity.
+  return matches.length === 1 ? matches : [];
+}
+
+function resolveExplicitSectionUrls(book, topic) {
+  const sources = book?.sectionSources || {};
+  const wanted = new Set(topicLabelCandidates(topic));
+  const matches = [];
+  for (const [label, url] of Object.entries(sources)) {
+    const candidates = topicLabelCandidates(label);
+    if (!candidates.some((candidate) => wanted.has(candidate))) continue;
+    if (!officialLinkAllowed(url)) continue;
+    if (!matches.includes(url)) matches.push(url);
+  }
+  return matches.length === 1 ? matches : [];
+}
+
+async function resolveLinkedSectionUrls(book, topic) {
+  const explicit = resolveExplicitSectionUrls(book, topic);
+  if (explicit.length) return explicit;
+  const rootHtml = await fetchOfficialHtml(book.base);
+  return rootHtml ? resolveLinkedSectionUrlsFromHtml(book, topic, rootHtml) : [];
+}
+
 async function discoverUnitPages(book, prefix) {
   const rootHtml = await fetchOfficialHtml(book.base);
   if (!rootHtml) return [];
@@ -2184,6 +2461,9 @@ module.exports._test = Object.freeze({
   selectEnglishBUnitText,
   resolveSectionPath,
   resolveDirectSourceUrls,
+  topicLabelCandidates,
+  resolveLinkedSectionUrlsFromHtml,
+  resolveExplicitSectionUrls,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,

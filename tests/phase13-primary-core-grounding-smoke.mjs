@@ -10,10 +10,13 @@ const ids=[
   "istoria-st-dimotikou",
   "science-e-dimotikou",
   "glossa-st-dimotikou",
-  "english-c-dimotikou",
   "english-d-dimotikou",
   "english-e-dimotikou"
 ];
+
+const missingEnglishC=await endpoint.resolveOfficialSchoolbookSource("english-c-dimotikou","Unit 1 — In the Fairytale Forest");
+assert.equal(missingEnglishC.ok,false,"English C Magic Book 1 must remain fail-closed until an exact official HTML source exists");
+assert.notEqual(missingEnglishC.body?.grounded,true);
 
 const results=[];
 for(const id of ids){

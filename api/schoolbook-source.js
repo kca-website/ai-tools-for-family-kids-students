@@ -2013,8 +2013,8 @@ function topicLabelCandidates(topic) {
   // "1η Ενότητα" or "Ενότητα 1η". This is deterministic normalization,
   // not fuzzy matching: only the explicit unit number is compared.
   const numericUnitMatch =
-    raw.match(/\bενότητα\s*(\d+)\s*(?:η|ή)?\b/i) ||
-    raw.match(/^\s*(\d+)\s*(?:η|ή)?\s*ενότητα\b/i);
+    raw.match(/ενότητα\s*(\d+)\s*(?:η|ή)?(?=\s|$|[·—–:.,;\-])/i) ||
+    raw.match(/^\s*(\d+)\s*(?:η|ή)?\s*ενότητα(?=\s|$|[·—–:.,;\-])/i);
   if (numericUnitMatch?.[1]) variants.push(`ενότητα ${numericUnitMatch[1]}`);
 
   const periodUnitPrefixMatch = raw.match(/^\s*([Α-ΩA-Z]+[΄'’]?\s*περίοδος\s*[·—–:-]\s*[Α-ΩA-Z]+[΄'’]?\s*ενότητα)/i);

@@ -56,7 +56,6 @@ test.describe('static SEO (JS disabled)', () => {
     expect(r.description.length).toBeGreaterThan(50);
   });
   test('Open Graph image + Twitter card on every indexable page; image file exists and is ≥1200×630', async ({}, info) => {
-    test.fail(true, 'FINDING F-18: many pages (study, en/*, sign-language, guide…) have no og:image/twitter:card');
     const missing = rows.filter(indexable).filter((r) => !r.ogImage || !r.twitterCard).map((r) => r.path);
     info.annotations.push({ type: 'pages-without-og', description: `${missing.length}: ${missing.slice(0, 12).join(', ')}` });
     expect(missing).toEqual([]);

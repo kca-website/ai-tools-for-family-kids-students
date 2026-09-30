@@ -34,7 +34,7 @@
       "documentCookie": "",
       "localStorage": {},
       "sessionStorage": {
-        "aitools4kidsStudyContextV1": "{\"createdAt\":1790770944995,\"context\":{\"version\":1,\"zoneId\":\"high\",\"roleId\":\"stud"
+        "aitools4kidsStudyContextV1": "{\"createdAt\":1790772326119,\"context\":{\"version\":1,\"zoneId\":\"high\",\"roleId\":\"stud"
       },
       "indexedDB": [],
       "caches": [
@@ -50,7 +50,7 @@
       "documentCookie": "",
       "localStorage": {},
       "sessionStorage": {
-        "aitools4kidsStudyContextV1": "{\"createdAt\":1790770948245,\"context\":{\"version\":1,\"zoneId\":\"primary\",\"roleId\":\"s"
+        "aitools4kidsStudyContextV1": "{\"createdAt\":1790772330087,\"context\":{\"version\":1,\"zoneId\":\"primary\",\"roleId\":\"s"
       },
       "indexedDB": [],
       "caches": [
@@ -65,10 +65,10 @@
       "cookies": [],
       "documentCookie": "",
       "localStorage": {
-        "aitools4kids_progress_v1": "{\"zoneId\":\"primary\",\"quizId\":\"math-e-dimotikou\",\"gapTagIds\":[],\"savedAt\":1790770"
+        "aitools4kids_progress_v1": "{\"zoneId\":\"primary\",\"quizId\":\"math-e-dimotikou\",\"gapTagIds\":[],\"savedAt\":1790772"
       },
       "sessionStorage": {
-        "aitools4kidsStudyContextV1": "{\"createdAt\":1790770948245,\"context\":{\"version\":1,\"zoneId\":\"primary\",\"roleId\":\"s",
+        "aitools4kidsStudyContextV1": "{\"createdAt\":1790772330087,\"context\":{\"version\":1,\"zoneId\":\"primary\",\"roleId\":\"s",
         "aitools4kids_last_quiz_id_v1": "math-e-dimotikou"
       },
       "indexedDB": [],

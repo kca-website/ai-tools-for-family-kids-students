@@ -2057,6 +2057,36 @@ function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
   const wanted = new Set(topicLabelCandidates(topic));
   if (!wanted.size || !html || !book?.base) return [];
 
+  const source = String(html);
+
+  // Prefer an exact optgroup when the official navigation represents one
+  // curriculum section as a group of chapter/page links. This gives the whole
+  // selected section instead of accidentally grounding only its first page.
+  const groupMatches = [];
+  const groupRe = /<optgroup\b[^>]*label\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/optgroup>/gi;
+  let match;
+  while ((match = groupRe.exec(source))) {
+    const groupLabelCandidates = topicLabelCandidates(decodeEntities(match[1] || ""));
+    if (!groupLabelCandidates.some((label) => wanted.has(label))) continue;
+
+    const urls = [];
+    const body = String(match[2] || "");
+    const groupOptionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
+    let optionMatch;
+    while ((optionMatch = groupOptionRe.exec(body))) {
+      const href = String(optionMatch[1] || "").trim();
+      if (!href || /^javascript:/i.test(href) || href.startsWith("#")) continue;
+      let absolute = "";
+      try { absolute = new URL(href, book.base).toString(); } catch (_) { continue; }
+      if (!officialLinkAllowed(absolute)) continue;
+      if (!/\.html?(?:$|[?#])/i.test(absolute)) continue;
+      if (!urls.includes(absolute)) urls.push(absolute);
+    }
+    if (urls.length) groupMatches.push(urls);
+  }
+  if (groupMatches.length === 1) return groupMatches[0];
+  if (groupMatches.length > 1) return [];
+
   const matches = [];
   const addExact = (href, rawLabel) => {
     href = String(href || "").trim();
@@ -2070,45 +2100,11 @@ function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
     if (!matches.includes(absolute)) matches.push(absolute);
   };
 
-  const source = String(html);
   const anchorRe = /<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-  let match;
   while ((match = anchorRe.exec(source))) addExact(match[1], match[2]);
 
-  // Official enriched schoolbooks often expose their navigation as <select><option>.
-  // This is still exact extraction: option label must match the requested section,
-  // and the target must remain on the official ebooks.edu.gr domain.
   const optionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
   while ((match = optionRe.exec(source))) addExact(match[1], match[2]);
-
-  // If a section is represented as an optgroup rather than a clickable page,
-  // match the optgroup label exactly (through the deterministic label candidates)
-  // and return only the official HTML option pages inside that one group.
-  // This preserves fail-closed behavior: zero or multiple matching groups resolve nothing.
-  if (!matches.length) {
-    const groupMatches = [];
-    const groupRe = /<optgroup\b[^>]*label\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/optgroup>/gi;
-    while ((match = groupRe.exec(source))) {
-      const groupLabelCandidates = topicLabelCandidates(decodeEntities(match[1] || ""));
-      if (!groupLabelCandidates.some((label) => wanted.has(label))) continue;
-
-      const urls = [];
-      const body = String(match[2] || "");
-      const groupOptionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
-      let optionMatch;
-      while ((optionMatch = groupOptionRe.exec(body))) {
-        const href = String(optionMatch[1] || "").trim();
-        if (!href || /^javascript:/i.test(href) || href.startsWith("#")) continue;
-        let absolute = "";
-        try { absolute = new URL(href, book.base).toString(); } catch (_) { continue; }
-        if (!officialLinkAllowed(absolute)) continue;
-        if (!/\.html?(?:$|[?#])/i.test(absolute)) continue;
-        if (!urls.includes(absolute)) urls.push(absolute);
-      }
-      if (urls.length) groupMatches.push(urls);
-    }
-    if (groupMatches.length === 1) return groupMatches[0];
-  }
 
   // Exact matching only. Ambiguity fails closed rather than choosing by similarity.
   return matches.length === 1 ? matches : [];

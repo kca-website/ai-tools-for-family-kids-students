@@ -764,7 +764,7 @@
       }
     }catch(err){
       $('aiOutput').textContent=err.message||String(err);
-      if(err.fallback==='puter'||err.code==='provider_limit')$('puterFallback').classList.remove('hidden');
+      if(err.fallback==='puter')$('puterFallback').classList.remove('hidden');
     }
     $('aiWorkspace').scrollIntoView({behavior:'smooth',block:'nearest'});
   }

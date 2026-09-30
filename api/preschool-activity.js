@@ -147,7 +147,8 @@ ${modeRule}`;
 };
 
 function looksLikePersonalData(s) {
-  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλέφων|κινητό|διεύθυν|σχολείο μου|ονομάζεται|λέγεται)(?=$|[^\p{L}\p{N}_])/iu.test(String(s || ''));
+  const value = String(s || '').normalize('NFD').replace(/\p{M}+/gu, '').toLowerCase();
+  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλεφων\p{L}*|κινητ(?:ο|ου|α|ων)|διευθυνσ\p{L}*|σχολειο μου|ονομαζεται|λεγεται)(?=$|[^\p{L}\p{N}_])/iu.test(value);
 }
 function parseActivity(text, idea) {
   try {
@@ -186,3 +187,5 @@ function knownSceneType(idea) {
 function clean(s) {
   return String(s).replace(/<[^>]+>/g,'').replace(/\s{3,}/g,' ').trim().slice(0,1200);
 }
+
+module.exports._phase9Test = { looksLikePersonalData };

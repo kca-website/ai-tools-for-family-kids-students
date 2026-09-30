@@ -1136,8 +1136,9 @@ function renderToolGrid(pathTools, targetElement) {
       [els.viewTabTutor, "tutor"],
       [els.viewTabGuide, "guide"],
     ].forEach(([tab, view]) => {
-      tab.setAttribute("role", "tab");
-      tab.setAttribute("aria-selected", String(state.currentView === view));
+      tab.removeAttribute("role");
+      tab.removeAttribute("aria-selected");
+      tab.setAttribute("aria-pressed", String(state.currentView === view));
     });
     els.toolsView.hidden = state.currentView !== "tools";
     els.advancedView.hidden = state.currentView !== "advanced";

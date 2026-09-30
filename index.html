@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
+  <script>
+    if (location.pathname === "/" || location.pathname === "") {
+      document.documentElement.classList.add("navigator-home-booting");
+    }
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>aitools4kids.gr — Μαθαίνω Έξυπνα με AI | Δημοτικό, Γυμνάσιο, ΓΕΛ & ΕΠΑΛ</title>
@@ -607,7 +612,7 @@
 
       <div class="student-age-filter" id="studentAgeFilter" hidden></div>
 
-      <div class="view-tabs" id="viewTabs" role="tablist">
+      <div class="view-tabs" id="viewTabs" role="group" aria-label="Επιλογές προβολής">
         <button type="button" class="view-tab active" id="viewTabTools" data-view="tools" data-i18n="viewTabTools">Εργαλεία</button>
         <button type="button" class="view-tab" id="viewTabAdvanced" data-view="advanced" data-i18n="viewTabAdvanced">Προχωρημένα</button>
         <button type="button" class="view-tab" id="viewTabPrompts" data-view="prompts" data-i18n="viewTabPrompts">Prompt Generator</button>

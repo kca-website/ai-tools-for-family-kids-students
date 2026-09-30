@@ -17,7 +17,9 @@ const samples = [
   ["english-d-dimotikou","Unit 1 — Back to school","school"],
   ["english-e-dimotikou","Unit 1 — Internet friends around Europe","internet"],
   ["istoria-c-dimotikou","Ενότητα 1 — Η δημιουργία του κόσμου","κόσμ"],
-  ["english-g-gymnasiou","Unit 2 — Teen idols","teen"]
+  ["english-g-gymnasiou","Unit 2 — Teen idols","teen"],
+  ["istoria-st-dimotikou","Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)","αναγέννη"],
+  ["ekthesi-g-lykeiou","Κεφάλαιο 3 — Δίκαιος λόγος και άδικος λόγος","δίκαι"]
 ];
 
 for (const [subject, topic, signal] of samples) {

@@ -16,7 +16,7 @@ assert.match(studyTools, /audience:\s*officialSource\s*\?\s*"study_user"/);
 assert.match(studyTools, /OFFICIAL SCHOOLBOOK SOURCE — SOURCE FIRST/);
 
 assert.match(tutor, /fetchTutorOfficialSource/);
-assert.match(tutor, /verifiedSection\s*=\s*\/exact-section-verified\|related-section-verified\|official-book-section-verified\//);
+assert.match(tutor, /verifiedSection\s*=\s*\/exact-section-verified\|related-section-verified\|official-book-section-\(\?:verified\|grounded\|source-missing\)\//);
 assert.match(tutor, /requiresOfficial:\s*!!exactOfficial\s*\|\|\s*verifiedSection/);
 assert.match(tutor, /sharedStudyContext\?\.sourcePolicy\s*===\s*"official_required"/);
 assert.match(tutor, /subjectId:\s*getCurrentQuiz\(\)\?\.id\s*\|\|\s*getCatalogSubject\(\)\?\.quizId/);

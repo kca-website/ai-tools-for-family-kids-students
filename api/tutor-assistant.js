@@ -1,3 +1,23 @@
+function browserRequestAllowed(req) {
+  const headers = req?.headers || {};
+  const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();
+  if (fetchSite === 'cross-site') return false;
+
+  const origin = String(headers.origin || headers.Origin || '').trim();
+  if (!origin) return true; // non-browser/server-side calls do not always send Origin
+
+  try {
+    const url = new URL(origin);
+    const host = url.hostname.toLowerCase();
+    if (url.protocol !== 'https:' && host !== 'localhost' && host !== '127.0.0.1') return false;
+    if (host === 'www.aitools4kids.gr' || host === 'aitools4kids.gr') return true;
+    if (host === 'localhost' || host === '127.0.0.1') return true;
+    return /^aitools4kids(?:-[a-z0-9-]+)*-kcawebsite\.vercel\.app$/.test(host);
+  } catch (_) {
+    return false;
+  }
+}
+
 // Grounded, learning-first GPT-OSS proxy for Parent Helper and High-School AI Help.
 // Cloudflare Workers AI is primary; Groq is the server-side fallback.
 const { generateChat, getAiStatus } = require('../ai-provider-router');
@@ -14,6 +34,13 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'method_not_allowed', message: 'Method not allowed.' });
+  }
+  if (!browserRequestAllowed(req)) {
+    return res.status(403).json({ error: 'cross_site_request_blocked', message: 'Cross-site requests are not allowed.' });
+  }
+  const contentType = String(req.headers?.['content-type'] || req.headers?.['Content-Type'] || '').toLowerCase();
+  if (contentType && !contentType.includes('application/json')) {
+    return res.status(415).json({ error: 'unsupported_media_type', message: 'Use application/json.' });
   }
   if (!aiStatus.configured) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });

@@ -163,6 +163,9 @@ jobs:
       - name: Run Phase 13 remaining Primary core grounding
         run: node tests/phase13-primary-core-grounding-smoke.mjs
 
+      - name: Run Phase 13 Gymnasium and GEL HTML grounding
+        run: node tests/phase13-secondary-html-grounding-smoke.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

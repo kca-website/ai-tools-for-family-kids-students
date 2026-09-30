@@ -937,6 +937,8 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     const gap = getCurrentGap();
     const alignment = getOfficialGapAlignment();
     const exactOfficial = alignment && (alignment.status === "exact-section-verified" || alignment.status === "related-section-verified");
+    const gapStatus = String(gap?.status || "");
+    const verifiedSection = /exact-section-verified|related-section-verified|official-book-section-verified/.test(gapStatus);
     const hasAttachment = !!attachedDocument?.text;
     return api.normalize({
       zoneId: ctx.zoneId || "",
@@ -953,7 +955,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       studyAction: studyAction || "",
       sourcePolicy: api.resolveSourcePolicy({
         hasAttachment,
-        requiresOfficial: !!exactOfficial,
+        requiresOfficial: !!exactOfficial || verifiedSection,
         hasCurriculumSelection: !!refs.topic?.value
       }),
       documentContext: hasAttachment ? {
@@ -2506,6 +2508,18 @@ ${transcript}
 Now reply ONLY as the AI Tutor to the user's final message, following the tutoring rules.`;
 
       const groundedSource = await fetchTutorOfficialSource();
+      const sharedStudyContext = getSharedStudyContext();
+      if (
+        !attachedDocument?.text &&
+        sharedStudyContext?.sourcePolicy === "official_required" &&
+        !groundedSource?.text
+      ) {
+        const sourceError = new Error(ctx?.lang === "en"
+          ? "This topic requires a verified official schoolbook source, but the exact source could not be loaded safely."
+          : "Η ενότητα απαιτεί επαληθευμένη επίσημη σχολική πηγή, αλλά η ακριβής πηγή δεν φορτώθηκε με ασφάλεια.");
+        sourceError.code = "official_source_required";
+        throw sourceError;
+      }
 
       const messages = [
         { role: "system", content: buildSystemPrompt() },
@@ -2536,9 +2550,10 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
             mode: learningMode,
             grade: getSelectedGradeLabel(),
             subject: langValue(getCurrentSubject(), "subjectLabelEl", "subjectLabelEn", ""),
+            subjectId: getCurrentQuiz()?.id || getCatalogSubject()?.quizId || getCatalogSubject()?.id || "",
             topic: langValue(getCurrentGap(), "labelEl", "labelEn", ""),
             character: currentCharacterName(),
-            studyContext: getSharedStudyContext(),
+            studyContext: sharedStudyContext,
             documentText: attachedDocument?.text
               ? pickStudyDocumentText(requestMessages[1]?.content || "").text
               : (groundedSource?.text || ""),

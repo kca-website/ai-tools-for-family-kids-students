@@ -97,7 +97,6 @@ test.describe('home + routing', () => {
     expect(await page.locator('#tutorInput').count(), 'AI Help textarea must not be available to primary-age students').toBe(0);
   });
 
-  // FINDING F-03: unknown URLs return 200 + homepage and a self-referencing canonical (soft-404).
   test('unknown URL returns a real 404', async ({ page }) => {
     const resp = await page.goto('/this-page-does-not-exist-' + Date.now());
     expect(resp.status()).toBe(404);

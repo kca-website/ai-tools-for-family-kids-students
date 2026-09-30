@@ -119,13 +119,11 @@ test.describe('sitemaps / robots', () => {
     expect(problems).toEqual([]);
   });
   test('no URL is listed in more than one sitemap', async () => {
-    test.fail(true, 'FINDING F-20: teacher-assistant.html is listed in sitemap.xml and seo-sitemap.xml');
     const seen = {}; const dups = [];
     for (const u of sitemapUrls()) { if (seen[u.url]) dups.push(`${u.url} (${seen[u.url]} + ${u.file})`); seen[u.url] = u.file; }
     expect(dups).toEqual([]);
   });
   test('indexable pages missing from all sitemaps', async ({ browser, baseURL }, info) => {
-    test.fail(true, 'FINDING F-20b: study.html and preschool.html are indexable+canonical but not in any sitemap');
     await collect();
     const all = fs.readdirSync(REPO).filter((f) => /sitemap.*\.xml$/.test(f)).map(read).join('\n');
     const missing = rows.filter(indexable).filter((r) => r.path !== '/index.html' && !all.includes(`${PROD}${r.path}`)).map((r) => r.path);

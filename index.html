@@ -7,6 +7,12 @@
     }
   </script>
   <meta charset="UTF-8" />
+  <script>
+    /* First-paint guard: keep the home hidden until navigator-home.js has built it, so the legacy static home never flashes.
+       Home ("/") only (other paths must stay visible), with a fail-open timer. Runs before first paint; needs no other script. */
+    (function(){var p=location.pathname;if(p==="/"||p===""){var h=document.documentElement;h.classList.add("navigator-home-booting");setTimeout(function(){h.classList.remove("navigator-home-booting")},4000);}})();
+  </script>
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>aitools4kids.gr — Μαθαίνω Έξυπνα με AI | Δημοτικό, Γυμνάσιο, ΓΕΛ & ΕΠΑΛ</title>
   <meta name="description" content="aitools4kids.gr: ανεξάρτητος, δωρεάν ελληνικός οδηγός AI για παιδιά και μαθητές 4–18, γονείς και εκπαιδευτικούς. Βρες το κατάλληλο εργαλείο ανά μάθημα και ανάγκη, με Χάρτη Εξάσκησης, learning paths και AI Βοήθεια." />

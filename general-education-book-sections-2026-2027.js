@@ -358,7 +358,7 @@
       ]
     },
     "istoria-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E105/157/1111%2C4055/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
       sections:[
         "Α΄ — Οι Έλληνες και οι Ρωμαίοι",
         "Β΄ — Η Ρωμαϊκή Αυτοκρατορία μεταμορφώνεται",
@@ -370,7 +370,7 @@
       ]
     },
     "english-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-MB2_html-empl/",
       sections:[
         "Pre-Unit — Magic Letters",
         "Unit 1 — In the Fairytale Forest",
@@ -385,7 +385,7 @@
       ]
     },
     "english-d-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
       sections:[
         "Unit 1 — Back to school",
         "Unit 2 — What's your favourite hobby or sport?",
@@ -400,7 +400,7 @@
       ]
     },
     "english-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E103",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
       sections:[
         "Unit 1 — Internet friends around Europe",
         "Unit 2 — School life and the world around us",
@@ -447,7 +447,7 @@
       ]
     },
     "istoria-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-C103/88/701%2C2641/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Η δημιουργία του κόσμου",
         "Ενότητα 2 — Ο Ηρακλής",
@@ -462,7 +462,7 @@
       ]
     },
     "science-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E107/154/1099%2C4022/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/",
       sections:[
         "Υλικά σώματα",
         "Μίγματα",
@@ -475,7 +475,7 @@
       ]
     },
     "glossa-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-F102/416/2788%2C16955/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Ταξίδια, τόποι, μεταφορικά μέσα",
         "Ενότητα 2 — Κατοικία",
@@ -497,7 +497,7 @@
       ]
     },
     "istoria-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-F114",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
       sections:[
         "Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)",
         "Ενότητα Β — Οι Έλληνες κάτω από την οθωμανική και τη λατινική κυριαρχία (1453-1821)",
@@ -1085,7 +1085,7 @@
 }
   };
   const api=Object.freeze({
-    version:"2.11.0",
+    version:"2.12.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

@@ -64,7 +64,7 @@
     const value = options && typeof options === "object" ? options : {};
     if (value.hasAttachment) return "attachment_override";
     if (value.requiresOfficial) return "official_required";
-    if (value.hasCurriculumSelection) return "official_if_available";
+    if (value.hasCurriculumSelection) return "official_required";
     return "general_unverified";
   }
 

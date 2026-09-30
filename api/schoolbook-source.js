@@ -1,3 +1,23 @@
+function browserRequestAllowed(req) {
+  const headers = req?.headers || {};
+  const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();
+  if (fetchSite === 'cross-site') return false;
+
+  const origin = String(headers.origin || headers.Origin || '').trim();
+  if (!origin) return true;
+
+  try {
+    const url = new URL(origin);
+    const host = url.hostname.toLowerCase();
+    if (url.protocol !== 'https:' && host !== 'localhost' && host !== '127.0.0.1') return false;
+    if (host === 'www.aitools4kids.gr' || host === 'aitools4kids.gr') return true;
+    if (host === 'localhost' || host === '127.0.0.1') return true;
+    return /^aitools4kids(?:-[a-z0-9-]+)*-kcawebsite\.vercel\.app$/.test(host);
+  } catch (_) {
+    return false;
+  }
+}
+
 // Fetch a small, section-scoped excerpt from official Greek schoolbook HTML pages.
 // Official-book grounding coverage expands incrementally from verified HTML section patterns.
 
@@ -1127,6 +1147,9 @@ module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
     return res.status(405).json({ error: "method_not_allowed" });
+  }
+  if (!browserRequestAllowed(req)) {
+    return res.status(403).json({ error: "cross_site_request_blocked", message: "Cross-site requests are not allowed." });
   }
 
   const rawSubject = clean(req.query?.subject, 120);

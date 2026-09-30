@@ -18,8 +18,16 @@
     "glossa-a-dimotikou":{
       sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/index.html",
       groundedSections:Object.freeze({
-            "1η Ενότητα — Πού είναι ο Άρης?": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html",
-            "1η Ενότητα — Πού είναι ο Άρης;": "https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html"
+            "1η Ενότητα — Πού είναι ο Άρης;": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html",
+            "2η Ενότητα — Η παρέα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexc_00.html",
+            "3η Ενότητα — Μια παράσταση στην πλατεία": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexd_00.html",
+            "4η Ενότητα — Το σύννεφο έφερε βροχή": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexe_00.html",
+            "5η Ενότητα — Σκανταλιές;": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexg_00.html",
+            "6η Ενότητα — Το χαμένο κλειδί": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexh_00.html",
+            "7η Ενότητα — Καράβια": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexi_00.html",
+            "8η Ενότητα — Άνοιξη": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexj_00.html",
+            "9η Ενότητα — Ο κόσμος των βιβλίων": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexk_00.html",
+            "10η Ενότητα — Το κοχύλι": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexl_00.html"
       }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
@@ -42,9 +50,29 @@
     "glossa-b-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/",
       groundedSections:Object.freeze({
-            "1 — Στο δρόμο για το σχολείο": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexb_00.html",
-            "2 — Με το «σεις» και με «σας»": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexc_00.html",
-            "3 — Στον κόσμο των κόμικς": "https://www.ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexd_00.html"
+            "1 — Στο δρόμο για το σχολείο": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexb_00.html",
+            "3 — Στον κόσμο των κόμικς": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexd_00.html",
+            "4 — Ετοιμασίες για το ταξίδι": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexe_00.html",
+            "5 — Πάμε για ψώνια;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexf_00.html",
+            "6 — Είμαστε έτοιμοι;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexg_00.html",
+            "7 — Πώς λέμε ΟΧΙ;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexh_00.html",
+            "8 — Το ταξίδι στην Χωχαρούπα": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexi_00.html",
+            "9 — «Που λες, είδα...»": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexk_00.html",
+            "10 — ΠΡΟΣΟΧΗ! Τι λέει εκεί;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexl_00.html",
+            "11 — Τι βιβλίο είναι αυτό;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexm_00.html",
+            "12 — Ποπό! Κόσμος που περνά!": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexn_00.html",
+            "13 — Μες στο μουσείο": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexo_00.html",
+            "14 — Με προσκαλούν και προσκαλώ": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexp_00.html",
+            "15 — Αλληλογραφώ": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexq_00.html",
+            "16 — Νιώθω": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexr_00.html",
+            "17 — Εφημερίδες! Εφημερίδες": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexs_00.html",
+            "18 — Ένα βιβλίο που σε ταξιδεύει": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indext_00.html",
+            "19 — Τα μάθατε τα νέα;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexu_00.html",
+            "20 — Ποιος είναι; Τι κάνει;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexv_00.html",
+            "21 — Χρήσιμες οδηγίες": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexw_00.html",
+            "22 — Πώς γίνεται; Πώς παίζεται;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexx_00.html",
+            "23 — Για να γελάσουμε...": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexy_00.html",
+            "24 — Να σου πω τι έμαθα;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexz_00.html"
       }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
@@ -80,6 +108,22 @@
     },
     "glossa-c-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+            "Πάλι μαζί!": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexb_00.html",
+            "Στο σπίτι και στη γειτονιά": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexc_00.html",
+            "Στη γη και στη θάλασσα": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexd_00.html",
+            "Ο κόσμος γύρω μας": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexe_00.html",
+            "Η πατρίδα μας γιορτάζει": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexf_00.html",
+            "Πολιτείες ντυμένες στα λευκά": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexh_00.html",
+            "Ιστορίες του χειμώνα": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexi_00.html",
+            "Έλα στην παρέα μας!": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexj_00.html",
+            "Άνθρωποι και μηχανές": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexk_00.html",
+            "Γιορτάζω και θυμάμαι": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexl_00.html",
+            "Ήτανε μια φορά…": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexo_00.html",
+            "Του κόσμου το ψωμί": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexp_00.html",
+            "Όλοι μια αγκαλιά": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexq_00.html",
+            "Γιορτή και ξενοιασιά": "https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexr_00.html"
+      }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
@@ -147,7 +191,17 @@
     "glossa-d-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
       groundedSections:Object.freeze({
-            "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html"
+            "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html",
+            "6η Ενότητα — Ιστορίες παιδιών": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexh_00.html",
+            "7η Ενότητα — Η ελιά": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexi_00.html",
+            "8η Ενότητα — Χριστός γεννάται": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexj_00.html",
+            "9η Ενότητα — Η παράσταση αρχίζει": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexk_00.html",
+            "10η Ενότητα — Λέξεις φτερουγίζουν πέρα, ταξιδεύουν στον αγέρα": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexl_00.html",
+            "11η Ενότητα — Γελάσαμε με την ψυχή μας": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexn_00.html",
+            "12η Ενότητα — Χαίρε, ω χαίρε, Ελευθεριά!": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexo_00.html",
+            "13η Ενότητα — Όλοι διαφορετικοί, όλοι ίδιοι": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexp0_00.html",
+            "14η Ενότητα — Το ανθρώπινο θαύμα": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexq_00.html",
+            "15η Ενότητα — Χριστός Ανέστη!": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexr_00.html"
       }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
@@ -189,6 +243,19 @@
     },
     "science-st-dimotikou":{
       sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+            "Ενέργεια": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_1.html",
+            "Θερμοκρασία - Θερμότητα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_2.html",
+            "Έμβια - Άβια": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_3.html",
+            "Φυτά": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_4.html",
+            "Ζώα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_5.html",
+            "Οικοσυστήματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_6.html",
+            "Ηλεκτρομαγνητισμός": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_9.html",
+            "Φως": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_10.html",
+            "Οξέα - Βάσεις - Άλατα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_11.html",
+            "Μεταδοτικές ασθένειες": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_12.html",
+            "Αναπαραγωγικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_13.html"
+      }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
@@ -212,6 +279,24 @@
     },
     "glossa-e-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+            "Ενότητα 1 — Ο φίλος μας το περιβάλλον": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index1_01.html",
+            "Ενότητα 2 — Η ζωή στην πόλη": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index1_02.html",
+            "Ενότητα 3 — 28η Οκτωβρίου": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index1_03.html",
+            "Ενότητα 4 — Τα ζώα που ζουν κοντά μας": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index1_04.html",
+            "Ενότητα 5 — 17η Νοέμβρη": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index1_05.html",
+            "Ενότητα 6 — Οι φίλοι μας, οι φίλες μας": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index1_06.html",
+            "Ενότητα 7 — Μουσική": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_07.html",
+            "Ενότητα 8 — Χριστούγεννα": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_08.html",
+            "Ενότητα 9 — Βιβλία - βιβλιοθήκες": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_09.html",
+            "Ενότητα 10 — Μυστήρια - επιστημονική φαντασία": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_10.html",
+            "Ενότητα 12 — 25η Μαρτίου": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_12.html",
+            "Ενότητα 13 — Κατασκευές": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index3_13.html",
+            "Ενότητα 14 — Πάσχα": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index3_14.html",
+            "Ενότητα 15 — Τηλεόραση": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index3_15.html",
+            "Ενότητα 16 — Αθλήματα - σπορ": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index3_16.html",
+            "Ενότητα 17 — Ταξίδια στο διάστημα": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index3_17.html"
+      }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
@@ -250,6 +335,14 @@
     },
     "istoria-d-dimotikou":{
       sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+            "Γεωμετρικά Χρόνια": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index1_1.html",
+            "Αρχαϊκά Χρόνια": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index2_5.html",
+            "Κλασικά Χρόνια": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index3_15.html",
+            "Ελληνιστικά Χρόνια": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index4_34.html",
+            "Θέματα από την Αρχαία Ιστορία": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index5_41A.html",
+            "Θέματα Τοπικής Ιστορίας": "https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index6_43.html"
+      }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
@@ -323,6 +416,18 @@
     },
     "english-st-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+            "Unit 1 — Our Multicultural Class": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index1_1.html",
+            "Unit 2 — Going shopping": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index2_1.html",
+            "Unit 3 — Imaginary creatures": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index3_1.html",
+            "Unit 4 — The history of the aeroplane": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index4_1.html",
+            "Unit 5 — Travelling through time": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index5_1.html",
+            "Unit 6 — Me, myself and my future job": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index6_1.html",
+            "Unit 7 — Share your experiences": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index7_1.html",
+            "Unit 8 — Blow your own trumpet": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index8_1.html",
+            "Unit 9 — Earth Day everyday": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index9_1.html",
+            "Unit 10 — Time for fun": "https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index10_1.html"
+      }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
       lastVerified:"2026-09-30",
@@ -980,7 +1085,7 @@
 }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.8.0",
+    version:"2.9.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

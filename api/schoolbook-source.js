@@ -144,7 +144,12 @@ const BOOKS = {
     grade: "d",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
     sectionSources: Object.freeze({
-          "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html"
+          "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html",
+          "2η Ενότητα — Ρώτα το νερό... τι τρέχει": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexc_00.html",
+          "3η Ενότητα — Το σχολείο γιορτάζει την ελευθερία και τη δημοκρατία": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexd_00.html",
+          "4η Ενότητα — Εμένα με νοιάζει": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexe_00.html",
+          "5η Ενότητα — Ασφαλώς κυκλοφορώ": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexf_00.html",
+          "16η Ενότητα — Ταξίδια στην Ελλάδα": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexs_00.html"
     }),
     mode: "linkedSection",
     officialSourceRequired: true,
@@ -158,6 +163,9 @@ const BOOKS = {
     title: "Γλώσσα Ε΄ Δημοτικού",
     grade: "e",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+      "Ενότητα 11 — Παιχνίδια": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_11.html"
+    }),
     mode: "linkedSection",
     officialSourceRequired: true,
     schoolYear: "2026-2027",
@@ -170,6 +178,10 @@ const BOOKS = {
     title: "Φυσικά ΣΤ΄ Δημοτικού",
     grade: "st",
     base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+      "Αναπνευστικό σύστημα": "https://ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_7.html",
+      "Κυκλοφορικό σύστημα": "https://ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_8.html"
+    }),
     mode: "linkedSection",
     officialSourceRequired: true,
     schoolYear: "2026-2027",

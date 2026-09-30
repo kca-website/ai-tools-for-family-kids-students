@@ -254,6 +254,8 @@
 
     rebuildCore();
     loadSign().then(()=>{const input=document.getElementById("homeGlobalSearchInput");if(input?.value) render(input.value);});
+    // The heavy curriculum/quiz/tutor data loads after first paint on the home (loader in index.html): rebuild the index once it is there.
+    document.addEventListener("aitools4kids:heavy-loaded",()=>{rebuildCore();const input=document.getElementById("homeGlobalSearchInput");if(input?.value) render(input.value);},{once:true});
 
     const box=document.createElement("section");
     box.id="homeGlobalSearch";
@@ -284,7 +286,7 @@
         render(input.value);
       },80);
     });
-    input.addEventListener("focus",()=>{if(input.value.trim())render(input.value);});
+    input.addEventListener("focus",()=>{ if(typeof window.__aitools4kidsLoadHeavy==="function") window.__aitools4kidsLoadHeavy(); if(input.value.trim())render(input.value); });
     input.addEventListener("keydown",(e)=>{
       const links=[...box.querySelectorAll(".home-global-search__item")];
       if(e.key==="Escape"){close();input.blur();return;}

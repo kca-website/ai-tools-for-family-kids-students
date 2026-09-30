@@ -137,6 +137,17 @@ test.describe('anything that needs the data still works from the home', () => {
     expect(qa.pageErrors).toEqual([]);
   });
 
+  test('returning user with saved progress: no errors on the home, and the "continue" banner appears once the data has loaded', async ({ page, qa }) => {
+    await page.addInitScript(() => { try { localStorage.setItem('aitools4kids_progress_v1', JSON.stringify({ zoneId: 'primary', quizId: 'math-e-dimotikou', gapTagIds: [], savedAt: Date.now() })); } catch {} });
+    await page.goto('/');
+    await page.waitForFunction(() => window.__aitools4kidsHeavyLoaded === true, null, { timeout: 30_000 });
+    await expect(page.locator('#continueProgressBanner')).toBeVisible({ timeout: 8_000 });
+    await expect(page.locator('#continueProgressBanner')).toContainText(/Συνέχισε|Continue/);
+    expect(qa.pageErrors, 'QUIZZES must never be read before it exists').toEqual([]);
+    await page.locator('#continueProgressBtn').click();
+    await expect(page).toHaveURL(/\/primary\/guardian\/quiz/);
+  });
+
   test('home search finds curriculum entries once the data has loaded', async ({ page }) => {
     await page.goto('/');
     await page.waitForFunction(() => window.__aitools4kidsHeavyLoaded === true, null, { timeout: 30_000 });

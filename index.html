@@ -778,7 +778,7 @@
             var s=document.createElement("script");
             s.src=x[1]; s.async=false; /* parallel download, in-order execution */
             if(x[0]) s.setAttribute("data-aitools4kids-runtime",x[0]);
-            s.onload=s.onerror=function(){ if(--pending===0){ window.__aitools4kidsHeavyLoaded=true; resolve(); } };
+            s.onload=s.onerror=function(){ if(--pending===0){ window.__aitools4kidsHeavyLoaded=true; document.dispatchEvent(new Event("aitools4kids:heavy-loaded")); resolve(); } };
             document.head.appendChild(s);
           });
         });

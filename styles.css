@@ -3285,8 +3285,8 @@ main {
 .site-footer__legal {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin: 0;
+  gap: 2px;
+  margin: 0 !important; /* overrides the legacy margin-top:8px so the column aligns with brand and logo */
   text-align: left;
 }
 .site-footer__legal a {
@@ -3313,8 +3313,12 @@ main {
     gap: 24px;
   }
 }
+.site-footer__dwrean-logo {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+}
 .site-footer__dwrean-logo img {
-  width: 150px;
+  width: 96px;
   height: auto;
 }
 .site-footer__inner {

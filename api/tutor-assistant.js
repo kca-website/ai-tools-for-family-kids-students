@@ -217,7 +217,38 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
       else result = { ...(retry || result), ok: false, status: 502, error: 'invalid_structured_result', retryable: false, message: 'Structured result validation failed.' };
     }
 
+    if (result?.ok && officialSchoolbook) {
+      const firstSignals = groundingSignals(result.text, modelDocumentText);
+      if (firstSignals.length) {
+        const retry = await generateChat({
+          messages: groundingRepairMessages(messages, firstSignals),
+          maxTokens: taskLimits[task],
+          temperature: 0,
+          reasoningEffort: 'low',
+          modelProfile: 'quality',
+        });
+        if (retry?.ok && (!needsStructuredValidation({ task, activity }) || validStructuredResult({ task, activity, text: retry.text }))) {
+          const retrySignals = groundingSignals(retry.text, modelDocumentText);
+          if (!retrySignals.length) {
+            result = { ...retry, groundingRetry: true, groundingSignals: firstSignals };
+          } else {
+            result = { ...retry, ok: false, status: 422, error: 'grounding_validation_failed', retryable: false, groundingSignals: retrySignals };
+          }
+        } else {
+          result = { ...(retry || result), ok: false, status: 422, error: 'grounding_validation_failed', retryable: false, groundingSignals: firstSignals };
+        }
+      }
+    }
+
     if (!result?.ok) {
+      if (result?.error === 'grounding_validation_failed') {
+        emitAiMetric({ task, activity, status: 422, cacheHit: false, provider: result?.provider || '', model: result?.model || '', latencyMs: Date.now() - startedAt, usage: result?.usage || null, attempts: result?.attempts || [] });
+        return res.status(422).json({
+          error: 'grounding_validation_failed',
+          message: 'Δεν μπόρεσα να επαληθεύσω με ασφάλεια την απάντηση πάνω στη συγκεκριμένη σχολική πηγή. Δοκίμασε ξανά ή έλεγξε την επίσημη ενότητα.',
+          fallback: undefined,
+        });
+      }
       const providerMessage = String(result?.message || '');
       const requestLimit = /request too large|tokens per minute|\btpm\b|reduce your message size/i.test(providerMessage);
       const limited = result?.status === 429 || requestLimit;
@@ -227,13 +258,13 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
         message: limited
           ? 'Η δωρεάν AI Βοήθεια έφτασε προσωρινά το όριο χρήσης της. Δοκίμασε ξανά ή χρησιμοποίησε την εναλλακτική AI.'
           : 'Η AI Βοήθεια δεν μπόρεσε να απαντήσει αυτή τη στιγμή.',
-        fallback: limited ? 'puter' : undefined,
+        fallback: limited && !officialSchoolbook ? 'puter' : undefined,
       });
     }
 
     const text = sanitize(result.text);
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'Δεν επιστράφηκε απάντηση.' });
-    const responseBody = { text, model: result.model || model, provider: result.provider, routingProfile, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl, usage: result.usage || null };
+    const responseBody = { text, model: result.model || model, provider: result.provider, routingProfile, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl, groundingValidated: officialSchoolbook, groundingRetry: !!result.groundingRetry, usage: result.usage || null };
     if (cacheParts) await setStudyCache(cacheParts, responseBody);
     emitAiMetric({ task, activity, status: 200, cacheHit: false, provider: result.provider || '', model: result.model || model, latencyMs: Date.now() - startedAt, usage: result.usage || null, attempts: result.attempts || [] });
     res.setHeader('Cache-Control', 'no-store');
@@ -313,6 +344,69 @@ function validStructuredResult({ task, activity, text }) {
       data.steps.every(row => String(row?.title || '').trim() && String(row?.action || '').trim());
   }
   return true;
+}
+
+
+function normalizeGroundingText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[’‘΄]/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function groundingSignals(text, sourceText) {
+  const answer = String(text || '');
+  const source = normalizeGroundingText(sourceText);
+  if (!answer.trim() || !source) return [];
+
+  const signals = [];
+  const seen = new Set();
+  const common = new Set([
+    'AI','JSON','Quiz','True','False',
+    'Ερώτηση','Απάντηση','Σωστό','Λάθος','Ποιο','Ποια','Ποιος','Πώς','Γιατί','Τι',
+    'Θυμήσου','Σκέψου','Παράδειγμα','Παραδείγματα','Κάρτα','Κάρτες',
+    'Question','Answer','Remember','Think','Example','Examples'
+  ].map(normalizeGroundingText));
+
+  // Proper-name-like tokens are the highest-value deterministic hallucination signal.
+  // Sentence-initial teaching words are excluded through a small allow-list; ordinary
+  // lowercase vocabulary is intentionally not checked to avoid false positives.
+  const proper = answer.match(/\b(?:[Α-ΩΆΈΉΊΌΎΏΪΫ][α-ωάέήίόύώϊϋΐΰ]{3,}|[A-Z][a-z]{3,})\b/g) || [];
+  for (const token of proper) {
+    const n = normalizeGroundingText(token);
+    if (!n || common.has(n) || seen.has('term:'+n)) continue;
+    if (!source.includes(n)) {
+      seen.add('term:'+n);
+      signals.push({ type: 'unsupported_term', value: token });
+    }
+  }
+
+  // Numbers can materially change dates, quantities and scientific facts.
+  const numbers = answer.match(/(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)?(?![\p{L}\p{N}_])/gu) || [];
+  for (const token of numbers) {
+    const n = token.replace(',', '.');
+    if (['1','2','3','4','5','8'].includes(n)) continue; // UI/task counters and requested card counts.
+    if (seen.has('number:'+n)) continue;
+    const variants = [token, token.replace('.', ','), token.replace(',', '.')];
+    if (!variants.some(v => source.includes(normalizeGroundingText(v)))) {
+      seen.add('number:'+n);
+      signals.push({ type: 'unsupported_number', value: token });
+    }
+  }
+  return signals.slice(0, 12);
+}
+
+function groundingRepairMessages(messages, signals) {
+  const detail = signals.map(x => x.value).filter(Boolean).join(', ');
+  return messages.map((m, i) => i === 0 ? {
+    ...m,
+    content: m.content + '\n\nGROUNDING REPAIR (MANDATORY): A previous draft introduced source-unsupported factual tokens' +
+      (detail ? ' (' + detail + ')' : '') +
+      '. Rewrite from scratch. Every person, place, organization, date, number and factual claim must be directly supported by SOURCE MATERIAL. Do not mention the rejected tokens unless they literally occur in the source. If the source does not support a requested fact, explicitly say so.'
+  } : m);
 }
 
 function emitAiMetric({ task, activity, status, cacheHit, provider, model, latencyMs, usage, attempts }) {

@@ -177,12 +177,13 @@
 <script src="/study-context.js"></script>
 <script>
 (() => {
-  let lang='el', attached=null, currentOfficialSource=null;
+  let lang=(()=>{try{return localStorage.getItem('aitools4kids_lang')==='en'?'en':'el'}catch(_){return'el'}})(), attached=null, currentOfficialSource=null;
   const officialSourceCache=new Map();
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
   const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']]};
   function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');populateGrades();}
-  $('elBtn').onclick=()=>{lang='el';localize()}; $('enBtn').onclick=()=>{lang='en';localize()};
+  function saveLang(value){try{localStorage.setItem('aitools4kids_lang',value)}catch(_){}}
+  $('elBtn').onclick=()=>{lang='el';saveLang(lang);localize()}; $('enBtn').onclick=()=>{lang='en';saveLang(lang);localize()};
 
   function isEpal(){return $('zone').value==='high' && $('schoolType').value==='epal'}
   function refreshSchoolTypeFields(){

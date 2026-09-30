@@ -36,7 +36,7 @@ assert.equal(Object.prototype.hasOwnProperty.call(normalized.documentContext, "t
 
 assert.equal(StudyContext.resolveSourcePolicy({ hasAttachment: true, requiresOfficial: true }), "attachment_override");
 assert.equal(StudyContext.resolveSourcePolicy({ requiresOfficial: true }), "official_required");
-assert.equal(StudyContext.resolveSourcePolicy({ hasCurriculumSelection: true }), "official_if_available");
+assert.equal(StudyContext.resolveSourcePolicy({ hasCurriculumSelection: true }), "official_required");
 assert.equal(StudyContext.resolveSourcePolicy({}), "general_unverified");
 
 const fromQuery = StudyContext.fromSearchParams(

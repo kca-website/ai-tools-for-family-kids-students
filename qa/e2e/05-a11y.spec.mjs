@@ -116,7 +116,6 @@ test.describe('keyboard & focus', () => {
 
   test('touch targets on mobile are ≥ 24×24 CSS px (WCAG 2.2 SC 2.5.8) – primary nav, zone cards, language toggle', async ({ page }, info) => {
     test.skip(info.project.name.includes('desktop') || info.project.name === 'smoke', 'mobile only');
-    test.fail(true, 'FINDING F-14: footer/standalone links are 12–19 px tall on 375 px screens (WCAG 2.2 SC 2.5.8 needs 24 px or spacing)');
     await page.goto('/');
     await page.waitForTimeout(800);
     const small = await page.evaluate(() => [...document.querySelectorAll('button, a[href], select, input:not([type=hidden])')].filter((e) => e.offsetParent).map((e) => { const r = e.getBoundingClientRect(); return { txt: (e.textContent || e.getAttribute('aria-label') || '').trim().slice(0, 25), w: Math.round(r.width), h: Math.round(r.height) }; }).filter((x) => x.w < 24 || x.h < 24));

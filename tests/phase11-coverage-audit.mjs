@@ -1,6 +1,7 @@
 import { chromium } from "playwright";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { createRequire } from "node:module";
 
 const BASE = "http://127.0.0.1:4173";
 const endpointSource = fs.readFileSync(new URL("../api/schoolbook-source.js", import.meta.url), "utf8");
@@ -9,6 +10,10 @@ const schoolbookIds = [...booksBlock.matchAll(/^\s{2}"([^"]+)":\s*\{/gm)].map((m
 const aliasesBlock = endpointSource.slice(endpointSource.indexOf("const ALIASES = {"), endpointSource.indexOf("const RELIGION_B_OFFICIAL_SOURCE_MATERIAL"));
 const aliases = Object.fromEntries([...aliasesBlock.matchAll(/"([^"]+)":\s*"([^"]+)"/g)].map((m) => [m[1], m[2]]));
 const schoolbookSet = new Set([...schoolbookIds, ...Object.keys(aliases)]);
+
+const require = createRequire(import.meta.url);
+const schoolbookEndpoint = require("../api/schoolbook-source.js");
+const { buildCatalogBook } = schoolbookEndpoint._test;
 
 const browser = await chromium.launch({ headless: true });
 try {
@@ -79,7 +84,11 @@ try {
   assert.deepEqual(verifiedWithoutSource, [], "Every verified topic must carry an explicit official source URL.");
 
   for (const row of rows) {
-    row.schoolbookSourceMapping = schoolbookSet.has(row.subjectId) || schoolbookSet.has(aliases[row.subjectId]);
+    row.schoolbookSourceMapping =
+      schoolbookSet.has(row.subjectId) ||
+      schoolbookSet.has(aliases[row.subjectId]) ||
+      !!buildCatalogBook(row.subjectId) ||
+      !!buildCatalogBook(aliases[row.subjectId]);
   }
 
   const summary = {};

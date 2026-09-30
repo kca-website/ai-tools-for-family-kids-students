@@ -21,6 +21,72 @@ function browserRequestAllowed(req) {
 // Fetch a small, section-scoped excerpt from official Greek schoolbook HTML pages.
 // Official-book grounding coverage expands incrementally from verified HTML section patterns.
 
+let GENERAL_ED_BOOK_CATALOG = null;
+try {
+  GENERAL_ED_BOOK_CATALOG = require("../general-education-book-sections-2026-2027.js");
+} catch (_) {
+  GENERAL_ED_BOOK_CATALOG = null;
+}
+
+const PRIMARY_GUIDANCE_2026_2027 =
+  "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/";
+const MIDDLE_GUIDANCE_2026_2027 =
+  "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/";
+const HIGH_GUIDANCE_2026_2027 =
+  "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/";
+
+function catalogGrade(subject) {
+  const id = String(subject || "");
+  if (/-a-(?:dimotikou|gymnasiou|lykeiou)$/.test(id)) return "a";
+  if (/-b-(?:dimotikou|gymnasiou|lykeiou)$/.test(id)) return "b";
+  if (/(?:-c-|-g-)(?:dimotikou|gymnasiou|lykeiou)$/.test(id)) return "c";
+  if (/-d-dimotikou$/.test(id)) return "d";
+  if (/-e-dimotikou$/.test(id)) return "e";
+  if (/-st-dimotikou$/.test(id)) return "st";
+  return null;
+}
+
+function catalogGuidanceSource(subject, row) {
+  if (row?.annualGuidanceUrl) return row.annualGuidanceUrl;
+  const id = String(subject || "");
+  if (/-dimotikou$/.test(id)) return PRIMARY_GUIDANCE_2026_2027;
+  if (/-gymnasiou$/.test(id)) return MIDDLE_GUIDANCE_2026_2027;
+  if (/-lykeiou$/.test(id)) return HIGH_GUIDANCE_2026_2027;
+  return null;
+}
+
+function catalogHtmlSourceAllowed(url) {
+  try {
+    const parsed = new URL(String(url || ""));
+    return parsed.protocol === "https:" &&
+      /(^|\.)ebooks\.edu\.gr$/i.test(parsed.hostname) &&
+      /\/ebooks\/v\/html\//i.test(parsed.pathname);
+  } catch (_) {
+    return false;
+  }
+}
+
+function buildCatalogBook(subject) {
+  if (!GENERAL_ED_BOOK_CATALOG?.get) return null;
+  const row = GENERAL_ED_BOOK_CATALOG.get(subject);
+  if (!row?.sourceUrl || !catalogHtmlSourceAllowed(row.sourceUrl)) return null;
+  return {
+    title: row.title || subject,
+    grade: catalogGrade(subject),
+    base: row.sourceUrl,
+    sectionSources: row.groundedSections || null,
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: row.schoolYear || GENERAL_ED_BOOK_CATALOG.schoolYear || "2026-2027",
+    curriculumSource: catalogGuidanceSource(subject, row),
+    mappingStatus: row.mappingStatus || "official-book-catalog-grounded",
+    lastVerified: row.lastVerified || "2026-09-30",
+    annualScopeVerified: row.annualScopeVerified === true,
+    catalogBacked: true
+  };
+}
+
+
 const BOOKS = {
   "fysiki-agogi-a-gymnasiou": {
     title: "Φυσική Αγωγή Α΄ Γυμνασίου",
@@ -1335,7 +1401,7 @@ module.exports = async function handler(req, res) {
   const rawSubject = clean(req.query?.subject, 120);
   const topic = clean(req.query?.topic, 500);
   const subject = ALIASES[rawSubject] || rawSubject;
-  const book = BOOKS[subject];
+  const book = BOOKS[subject] || buildCatalogBook(subject);
 
   if (!book || !topic) {
     return res.status(404).json({
@@ -1931,6 +1997,10 @@ async function fetchOfficialHtml(url) {
 function topicLabelCandidates(topic) {
   const raw = String(topic || "").trim();
   const variants = [raw];
+  const withoutPageSuffix = raw
+    .replace(/\s*[\[(]?\s*page\s+\d+(?:\s*[-–]\s*\d+)?\s*[\])]?\s*$/i, "")
+    .trim();
+  variants.push(withoutPageSuffix);
   const withoutUnit = raw
     .replace(/^\s*(?:\d+\s*(?:η|ή)?\s*(?:ενότητα)?|ενότητα\s*\d+|unit\s*\d+|pre-unit|extra\s+unit)\s*[—–:.-]*\s*/i, "")
     .trim();
@@ -2464,6 +2534,8 @@ module.exports._test = Object.freeze({
   topicLabelCandidates,
   resolveLinkedSectionUrlsFromHtml,
   resolveExplicitSectionUrls,
+  buildCatalogBook,
+  catalogHtmlSourceAllowed,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,

@@ -2528,9 +2528,10 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            system: requestMessages[0]?.content || "",
+            context: requestMessages[0]?.content || "",
             prompt: requestMessages[1]?.content || "",
             task: studyAction === "flashcards" ? "flashcards" : (studyAction === "quiz" || studyAction === "weakspots" ? "quiz" : (studyAction === "summary" ? "guided_task" : "conversation")),
+            activity: studyAction || "",
             audience: isParentMode() ? "parent" : "high_student",
             mode: learningMode,
             grade: getSelectedGradeLabel(),

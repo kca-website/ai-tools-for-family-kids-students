@@ -1997,6 +1997,10 @@ async function fetchOfficialHtml(url) {
 function topicLabelCandidates(topic) {
   const raw = String(topic || "").trim();
   const variants = [raw];
+  const withoutPageSuffix = raw
+    .replace(/\s*[\[(]?\s*page\s+\d+(?:\s*[-–]\s*\d+)?\s*[\])]?\s*$/i, "")
+    .trim();
+  variants.push(withoutPageSuffix);
   const withoutUnit = raw
     .replace(/^\s*(?:\d+\s*(?:η|ή)?\s*(?:ενότητα)?|ενότητα\s*\d+|unit\s*\d+|pre-unit|extra\s+unit)\s*[—–:.-]*\s*/i, "")
     .trim();

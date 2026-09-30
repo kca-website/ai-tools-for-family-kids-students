@@ -27,7 +27,6 @@ test.describe('axe-core', () => {
   for (const [name, url] of PAGES) {
     test(`${name}: no critical WCAG violations (all recorded)`, async ({ page }, info) => {
       test.setTimeout(60_000);
-      test.fail(name === 'teacher-assistant', 'FINDING F-10: 5 <select> without accessible name (critical select-name) + contrast 4.48');
       page.on('dialog', (d) => d.dismiss());
       await page.goto(url);
       await page.waitForTimeout(1500);
@@ -82,7 +81,6 @@ test.describe('keyboard & focus', () => {
   });
 
   test('tabs of the path view expose role/aria-selected or aria-pressed state', async ({ page }, info) => {
-    test.fail(true, 'FINDING F-11: .view-tab buttons have no role=tab / aria-selected / aria-pressed / aria-current');
     await page.goto('/primary/guardian/tools');
     const s = await page.evaluate(() => [...document.querySelectorAll('.view-tab')].map((b) => ({ id: b.id, role: b.getAttribute('role'), sel: b.getAttribute('aria-selected'), pressed: b.getAttribute('aria-pressed'), current: b.getAttribute('aria-current'), active: b.classList.contains('active') })));
     info.annotations.push({ type: 'view-tabs-aria', description: JSON.stringify(s.slice(0, 2)) });
@@ -91,7 +89,6 @@ test.describe('keyboard & focus', () => {
   });
 
   test('language toggle has accessible names and state', async ({ page }) => {
-    test.fail(true, 'FINDING F-12: #langEl/#langEn expose no aria-pressed/aria-current (state only via CSS class)');
     await page.goto('/');
     const r = await page.evaluate(() => ['langEl', 'langEn'].map((id) => { const b = document.getElementById(id); return { id, name: b.getAttribute('aria-label') || b.textContent.trim(), pressed: b.getAttribute('aria-pressed'), lang: b.getAttribute('lang') }; }));
     for (const b of r) expect(b.name.length).toBeGreaterThan(0);
@@ -99,7 +96,6 @@ test.describe('keyboard & focus', () => {
   });
 
   test('AI Help: input has a label, live region announces answers, error is announced', async ({ page, mockAI }, info) => {
-    test.fail(true, 'FINDING F-13: #tutorInput has no <label>/aria-label (placeholder only) and/or chat log is not a live region');
     page.on('dialog', (d) => d.dismiss());
     await page.goto('/high/student/tutor');
     await page.selectOption('#tutorSchoolType', 'gel'); await page.selectOption('#tutorGrade', 'a'); await page.selectOption('#tutorSubject', 'algebra-a-lykeiou');

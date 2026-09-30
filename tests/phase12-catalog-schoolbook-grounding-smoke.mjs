@@ -17,9 +17,8 @@ assert.ok(
   "Catalog version must remain at or above the Phase 12 baseline 2.10.0."
 );
 
-const eligible = catalog.ids
-  .map((id) => ({ id, row: catalog.get(id) }))
-  .filter(({ row }) => catalogHtmlSourceAllowed(row?.sourceUrl));
+const catalogRows = catalog.ids.map((id) => ({ id, row: catalog.get(id) }));
+const eligible = catalogRows.filter(({ row }) => catalogHtmlSourceAllowed(row?.sourceUrl));
 
 assert.ok(eligible.length >= 10, "Expected a meaningful set of official HTML schoolbooks.");
 
@@ -31,10 +30,16 @@ for (const { id } of eligible) {
   assert.match(book.base, /^https:\/\/[^/]*ebooks\.edu\.gr\/ebooks\/v\/html\//i);
 }
 
-for (const id of ["math-a-dimotikou","math-b-dimotikou","math-c-dimotikou","math-d-dimotikou","math-e-dimotikou"]) {
-  const row = catalog.get(id);
-  if (!row) continue;
-  assert.equal(buildCatalogBook(id), null, id + " legacy identity page must remain fail-closed");
+const nonHtmlCatalogRows = catalogRows.filter(
+  ({ row }) => row?.sourceUrl && !catalogHtmlSourceAllowed(row.sourceUrl)
+);
+assert.ok(nonHtmlCatalogRows.length > 0, "Expected at least one non-HTML catalog source to exercise fail-closed behavior.");
+for (const { id, row } of nonHtmlCatalogRows) {
+  assert.equal(
+    buildCatalogBook(id),
+    null,
+    id + " must remain fail-closed while its catalog source is not an allowed official HTML book: " + row.sourceUrl
+  );
 }
 
 const live = await endpoint.resolveOfficialSchoolbookSource("english-a-gymnasiou", "Unit 1 — Welcome");
@@ -51,5 +56,6 @@ assert.notEqual(impossible.body?.grounded, true);
 console.log("PHASE12_CATALOG_GROUNDING=" + JSON.stringify({
   catalogSubjects: catalog.ids.length,
   eligibleHtmlSubjects: eligible.length,
+  nonHtmlFailClosedSubjects: nonHtmlCatalogRows.length,
   liveSample: "english-a-gymnasiou / Unit 1 — Welcome"
 }, null, 2));

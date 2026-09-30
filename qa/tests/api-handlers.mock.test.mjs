@@ -20,7 +20,7 @@ function mockRes() {
   const r = { code: 200, headers: {}, body: null, setHeader(k, v) { r.headers[k.toLowerCase()] = v; }, status(c) { r.code = c; return r; }, json(b) { r.body = b; return r; } };
   return r;
 }
-async function call(name, { method = 'POST', body, headers = {} } = {}) { const res = mockRes(); await handler(name)({ method, body, headers }, res); return res; }
+async function call(name, { method = 'POST', body, headers = {}, query = {} } = {}) { const res = mockRes(); await handler(name)({ method, body, headers, query }, res); return res; }
 const cfOk = (text = 'Μια μικρή υπόδειξη για να ξεκινήσεις.') => new Response(JSON.stringify({ success: true, result: { response: text, usage: { prompt_tokens: 5, completion_tokens: 5 } } }), { status: 200 });
 const groqOk = (text = 'groq answer') => new Response(JSON.stringify({ choices: [{ message: { content: text } }], usage: {} }), { status: 200 });
 const err = (status, message = 'boom') => new Response(JSON.stringify({ error: { message }, errors: [{ message, code: 9999 }] }), { status });
@@ -166,4 +166,10 @@ test('source-summary: GET → 405, empty body → 400', async () => {
   envOn(); mockFetch(() => cfOk());
   assert.equal((await call('source-summary', { method: 'GET' })).code, 405);
   assert.equal((await call('source-summary', { body: {} })).code, 400);
+});
+test('study source endpoints reject cross-site browser requests', async () => {
+  envOn(); mockFetch(() => cfOk('{}'));
+  const cross = { origin: 'https://evil.example', 'sec-fetch-site': 'cross-site', 'content-type': 'application/json' };
+  assert.equal((await call('source-summary', { body: { subjectId: 'x', topic: 'y' }, headers: cross })).code, 403);
+  assert.equal((await call('schoolbook-source', { method: 'GET', query: { subject: 'x', topic: 'y' }, headers: { origin: 'https://evil.example', 'sec-fetch-site': 'cross-site' } })).code, 403);
 });

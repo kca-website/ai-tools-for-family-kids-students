@@ -52,7 +52,6 @@ test.describe('storage / cookies inventory', () => {
   });
 
   test('local progress keys are the documented set and the policy mentions local quiz progress', async ({ page }) => {
-    test.fail(true, 'FINDING F-08: privacy policy §2 says only language/zone are stored locally; quiz result (quizId + gap tags) is also saved in localStorage');
     page.on('dialog', (d) => d.dismiss());
     await page.goto('/primary/guardian/quiz');
     await page.locator('.quiz-grade-card', { hasText: "Ε' Δημοτικού" }).click();
@@ -67,7 +66,6 @@ test.describe('storage / cookies inventory', () => {
   });
 
   test('service worker + Cache Storage are used (not declared in the privacy policy) and /api GET responses are cached by the SW', async ({ browser, baseURL }) => {
-    test.fail(true, 'FINDING F-09: SW staleWhileRevalidate also caches same-origin /api/* GET (status + schoolbook-source); policy does not mention SW/Cache Storage');
     const context = await browser.newContext({ serviceWorkers: 'allow' });
     const page = await context.newPage();
     await page.goto('/');
@@ -86,7 +84,6 @@ test.describe('storage / cookies inventory', () => {
 test.describe('third-party requests vs privacy policy', () => {
   const PAGES = ['/', '/primary/guardian/tools', '/middle/student/tools', '/study.html', '/sign-language.html', '/xartis-ylis.html', '/teacher-assistant.html', '/privacy-policy.html', '/tools/chatgpt.html'];
   test('undisclosed third-party hosts are contacted on page load', async ({ page, qa }) => {
-    test.fail(true, 'FINDING F-06: Google Fonts / Google favicon service / Wikimedia are contacted on load but not declared in privacy-policy.html');
     const perPage = {};
     for (const p of PAGES) {
       const before = { ...qa.thirdParty };

@@ -2415,9 +2415,41 @@ function sectionLabelPosition(normalizedFull, label, from = 0) {
   return normalizedFull.indexOf(body, from);
 }
 
+function normalizeWithOffsets(value) {
+  const input = String(value || "");
+  let text = "";
+  const offsets = [];
+  let lastWasSpace = true;
+
+  for (let i = 0; i < input.length; i++) {
+    const folded = input[i]
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    for (const ch of folded) {
+      const keep = /[a-z0-9α-ω]/i.test(ch);
+      if (keep) {
+        text += ch;
+        offsets.push(i);
+        lastWasSpace = false;
+      } else if (!lastWasSpace) {
+        text += " ";
+        offsets.push(i);
+        lastWasSpace = true;
+      }
+    }
+  }
+  if (text.endsWith(" ")) {
+    text = text.slice(0, -1);
+    offsets.pop();
+  }
+  return { text, offsets };
+}
+
 function locateFullBookSection(text, topic, book = null) {
   const full = String(text || "");
-  const normalized = normalize(full);
+  const mapped = normalizeWithOffsets(full);
+  const normalized = mapped.text;
   if (!normalized) return null;
 
   const identity = sectionOrdinal(topic);
@@ -2476,9 +2508,12 @@ function locateFullBookSection(text, topic, book = null) {
   // section body is the largest exact-identity span before the next section.
   candidates.sort((a, b) => b.span - a.span || a.start - b.start);
   const best = candidates[0];
+  const originalStart = mapped.offsets[Math.max(0, best.start)] ?? 0;
+  const originalEndIndex = mapped.offsets[Math.max(0, Math.min(mapped.offsets.length - 1, best.end - 1))];
+  const originalEnd = Number.isInteger(originalEndIndex) ? originalEndIndex + 1 : full.length;
   return {
-    start: Math.max(0, best.start - 250),
-    end: Math.min(full.length, best.end + 250)
+    start: Math.max(0, originalStart - 250),
+    end: Math.min(full.length, originalEnd + 250)
   };
 }
 
@@ -2947,6 +2982,7 @@ module.exports._test = Object.freeze({
   resolveLinkedSectionUrlsFromHtml,
   resolveExplicitSectionUrls,
   sectionOrdinal,
+  normalizeWithOffsets,
   locateFullBookSection,
   selectFullBookSectionText,
   HISTORY_B_2026_2027_PATHS,

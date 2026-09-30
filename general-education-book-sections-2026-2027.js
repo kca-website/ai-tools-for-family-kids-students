@@ -2,7 +2,23 @@
   "use strict";
   const rows={
     "math-a-dimotikou":{
-      sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-A102",
+      sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "1η Ενότητα — Οι αριθμοί μέχρι το 5 - Χώρος και σχήματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "2η Ενότητα — Πρόσθεση και ανάλυση αριθμών μέχρι το 5": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "3η Ενότητα — Οι αριθμοί μέχρι το 20 - Αθροίσματα μέχρι το 10 - Νομίσματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "4η Ενότητα — Αφαίρεση - Χάραξη γραμμών - Μοτίβα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "5η Ενότητα — Οι αριθμοί μέχρι το 50, Μονάδες και δεκάδες - Τετραγωνισμένο χαρτί": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "6η Ενότητα — Μονάδες και δεκάδες - Γεωμετρικά σχήματα - Χρόνος": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "7η Ενότητα — Χαράξεις, Παζλ - Πρόσθεση και αφαίρεση - Η υπέρβαση της δεκάδας": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "8η Ενότητα — Οι αριθμοί μέχρι το 70 - Πολλαπλασιασμός - Συμμετρία": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
+        "9η Ενότητα — Οι αριθμοί μέχρι το 100 - Πράξεις - Βάρος - Γεωμετρικά σχήματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "1η Ενότητα — Οι αριθμοί μέχρι το 5 - Χώρος και σχήματα",
         "2η Ενότητα — Πρόσθεση και ανάλυση αριθμών μέχρι το 5",
@@ -147,7 +163,23 @@
       ]
     },
     "math-b-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-B101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "1η Ενότητα — Κεφάλαια 1-8": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "2η Ενότητα — Κεφάλαια 9-15": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "3η Ενότητα — Κεφάλαια 16-23": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "4η Ενότητα — Κεφάλαια 24-28": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "5η Ενότητα — Κεφάλαια 29-33": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "6η Ενότητα — Κεφάλαια 34-40": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "7η Ενότητα — Κεφάλαια 41-44": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "8η Ενότητα — Κεφάλαια 45-50": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
+        "9η Ενότητα — Κεφάλαια 51-54": "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "1η Ενότητα — Κεφάλαια 1-8",
         "2η Ενότητα — Κεφάλαια 9-15",
@@ -161,7 +193,23 @@
       ]
     },
     "math-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C102",
+      sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "3η Ενότητα — Αριθμοί μέχρι το 3.000. Οι τέσσερις πράξεις. Χαράξεις. Ορθές γωνίες": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "4η Ενότητα — Εισαγωγή στα απλά κλάσματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "5η Ενότητα — Προσθέσεις και αφαιρέσεις. Αλγόριθμος του πολλαπλασιασμού": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "6η Ενότητα — Εισαγωγή στους δεκαδικούς αριθμούς": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "7η Ενότητα — Αριθμοί μέχρι το 7.000. Μέτρηση μάζας. Παζλ, πλακόστρωτα, μωσαϊκά, συμμετρία": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "8η Ενότητα — Πολλαπλασιασμοί και διαιρέσεις. Μοτίβα. Μέτρηση χρόνου και επιφάνειας": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
+        "9η Ενότητα — Αριθμοί μέχρι το 10.000. Κλάσματα και δεκαδικοί. Πράξεις. Γεωμετρία": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα",
         "2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα",
@@ -175,7 +223,23 @@
       ]
     },
     "math-d-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Α΄ Περίοδος · Α΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Α΄ Περίοδος · Β΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Α΄ Περίοδος · Γ΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Β΄ Περίοδος · Α΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Β΄ Περίοδος · Β΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Β΄ Περίοδος · Γ΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Γ΄ Περίοδος · Α΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Γ΄ Περίοδος · Β΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+        "Γ΄ Περίοδος · Γ΄ Ενότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Α΄ Περίοδος · Α΄ Ενότητα",
         "Α΄ Περίοδος · Β΄ Ενότητα",
@@ -228,7 +292,23 @@
       ]
     },
     "math-e-dimotikou":{
-      sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Ενότητα 1 — Μεγάλοι αριθμοί και επίλυση προβλημάτων": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 2 — Δεκαδικοί αριθμοί και στρογγυλοποίηση": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 3 — Πολλαπλασιασμοί/διαιρέσεις, κλάσματα και μέσος όρος": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 4 — Ποσοστά, περίμετρος, εμβαδό και πράξεις με κλάσματα": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 5 — Μονάδες μήκους/επιφάνειας και προβλήματα γεωμετρίας": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 6 — Διαιρετότητα, ΕΚΠ και ετερώνυμα κλάσματα": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 7 — Γωνίες, τρίγωνα και συμμετρία": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 8 — Αξιολόγηση πληροφοριών, σύνθετα προβλήματα, σμίκρυνση/μεγέθυνση": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
+        "Ενότητα 9 — Χρόνος, συμμιγείς, κύκλος και μεγάλοι αριθμοί": "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Ενότητα 1 — Μεγάλοι αριθμοί και επίλυση προβλημάτων",
         "Ενότητα 2 — Δεκαδικοί αριθμοί και στρογγυλοποίηση",
@@ -323,7 +403,20 @@
       ]
     },
     "math-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Ενότητα 1 — Αριθμοί και Πράξεις": "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
+        "Ενότητα 2 — Εξισώσεις": "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
+        "Ενότητα 3 — Λόγοι - αναλογίες": "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
+        "Ενότητα 4 — Συλλογή και επεξεργασία δεδομένων": "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
+        "Ενότητα 5 — Μετρήσεις - Μοτίβα": "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
+        "Ενότητα 6 — Γεωμετρία": "https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Ενότητα 1 — Αριθμοί και Πράξεις",
         "Ενότητα 2 — Εξισώσεις",
@@ -358,7 +451,21 @@
       ]
     },
     "istoria-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E105/157/1111%2C4055/",
+      sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Α΄ — Οι Έλληνες και οι Ρωμαίοι": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+        "Β΄ — Η Ρωμαϊκή Αυτοκρατορία μεταμορφώνεται": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+        "Γ΄ — Το βυζαντινό κράτος, μια δύναμη που μεγαλώνει": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+        "Δ΄ — Το βυζαντινό κράτος και οι γειτονικοί λαοί": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+        "Ε΄ — Η μεγάλη ακμή του βυζαντινού κράτους": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+        "ΣΤ΄ — Το Βυζάντιο παρακμάζει και υποκύπτει σε κατακτητές": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
+        "Ζ΄ — Θέματα από τη βυζαντινή ιστορία": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Α΄ — Οι Έλληνες και οι Ρωμαίοι",
         "Β΄ — Η Ρωμαϊκή Αυτοκρατορία μεταμορφώνεται",
@@ -370,7 +477,24 @@
       ]
     },
     "english-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
+      sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+      groundedSections:Object.freeze({
+        "Pre-Unit — Magic Letters": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 1 — In the Fairytale Forest": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 2 — The story of Bella the cat": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 3 — The story of Pinocchio": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 4 — The wind and the sun": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 5 — Lusy's story": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 6 — Beauty and the Beast": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 7 — Planet Earth": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Unit 8 — Our World": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+        "Extra Unit — Special days": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Pre-Unit — Magic Letters",
         "Unit 1 — In the Fairytale Forest",
@@ -385,7 +509,24 @@
       ]
     },
     "english-d-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Unit 1 — Back to school": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 2 — What's your favourite hobby or sport?": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 3 — This is where I live": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 4 — Time": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 5 — Habits and customs": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 6 — Animals": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 7 — What are you doing?": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 8 — Around the city": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 9 — The school party": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+        "Unit 10 — Enjoy your holidays": "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Unit 1 — Back to school",
         "Unit 2 — What's your favourite hobby or sport?",
@@ -400,7 +541,24 @@
       ]
     },
     "english-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E103",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Unit 1 — Internet friends around Europe": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 2 — School life and the world around us": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 3 — Places": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 4 — Christmas everywhere": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 5 — Ready for action": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 6 — Good, better, best!": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 7 — Going back in time": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 8 — All about stories": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 9 — Amazing people and places": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+        "Unit 10 — Summer is here!": "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Unit 1 — Internet friends around Europe",
         "Unit 2 — School life and the world around us",
@@ -447,7 +605,24 @@
       ]
     },
     "istoria-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-C103/88/701%2C2641/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Ενότητα 1 — Η δημιουργία του κόσμου": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 2 — Ο Ηρακλής": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 3 — Ο Θησέας": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 4 — Η Αργοναυτική εκστρατεία": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 5 — Ο Τρωικός πόλεμος": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 6 — Οι περιπέτειες του Οδυσσέα": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 7 — Η εποχή του λίθου": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 8 — Ο Κυκλαδικός πολιτισμός": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 9 — Ο Μινωικός πολιτισμός": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+        "Ενότητα 10 — Ο Μυκηναϊκός πολιτισμός": "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Ενότητα 1 — Η δημιουργία του κόσμου",
         "Ενότητα 2 — Ο Ηρακλής",
@@ -462,7 +637,22 @@
       ]
     },
     "science-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E107/154/1099%2C4022/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+      groundedSections:Object.freeze({
+        "Υλικά σώματα": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+        "Μίγματα": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+        "Ενέργεια": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+        "Πεπτικό σύστημα": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+        "Θερμότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+        "Ηλεκτρισμός": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+        "Φως": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
+        "Ήχος": "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Υλικά σώματα",
         "Μίγματα",
@@ -475,7 +665,31 @@
       ]
     },
     "glossa-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-F102/416/2788%2C16955/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Ενότητα 1 — Ταξίδια, τόποι, μεταφορικά μέσα": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 2 — Κατοικία": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 3 — 28η Οκτωβρίου": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 4 — Διατροφή": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 5 — 17η Νοέμβρη": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 6 — Η ζωή σε άλλους τόπους": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 7 — Η ζωή έξω από την πόλη": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 8 — Χριστούγεννα": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 9 — Συσκευές": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 10 — Ατυχήματα": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 11 — Συγγενικές σχέσεις": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 12 — 25η Μαρτίου": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 13 — Τρόποι ζωής και επαγγέλματα": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 14 — Πάσχα": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 15 — Κινηματογράφος - Θέατρο": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 16 — Μουσεία": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
+        "Ενότητα 17 — Πόλεμος και ειρήνη": "https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Ενότητα 1 — Ταξίδια, τόποι, μεταφορικά μέσα",
         "Ενότητα 2 — Κατοικία",
@@ -497,7 +711,19 @@
       ]
     },
     "istoria-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-F114",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
+      groundedSections:Object.freeze({
+        "Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)": "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
+        "Ενότητα Β — Οι Έλληνες κάτω από την οθωμανική και τη λατινική κυριαρχία (1453-1821)": "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
+        "Ενότητα Γ — Η Μεγάλη Επανάσταση (1821-1830)": "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
+        "Ενότητα Δ — Η Ελλάδα στον 19ο αιώνα": "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
+        "Ενότητα Ε — Η Ελλάδα στον 20ό αιώνα": "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)",
         "Ενότητα Β — Οι Έλληνες κάτω από την οθωμανική και τη λατινική κυριαρχία (1453-1821)",
@@ -849,7 +1075,19 @@
       ]
     },
     "ekthesi-g-lykeiou":{
-      sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/handle/8547/2678",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
+      groundedSections:Object.freeze({
+        "Κεφάλαιο 1 — Η πειθώ": "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
+        "Κεφάλαιο 2 — Το δοκίμιο - Το άρθρο - Η επιφυλλίδα": "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
+        "Κεφάλαιο 3 — Δίκαιος λόγος και άδικος λόγος": "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
+        "Παράρτημα 1 — Διαβάζω και γράφω": "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
+        "Παράρτημα 2 — Ερευνητική εργασία": "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Κεφάλαιο 1 — Η πειθώ",
         "Κεφάλαιο 2 — Το δοκίμιο - Το άρθρο - Η επιφυλλίδα",
@@ -859,7 +1097,26 @@
       ]
     },
     "biologia-a-lykeiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGL-A105",
+      sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+      groundedSections:Object.freeze({
+        "Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 2 — Πεπτικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 3 — Κυκλοφορικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 4 — Λεμφικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 5 — Αναπνοή": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 6 — Απέκκριση και ωσμορρύθμιση": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 7 — Ερειστικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 8 — Μυϊκό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 9 — Νευρικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 10 — Αισθητήρια όργανα - Αισθήσεις": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 11 — Ενδοκρινείς αδένες": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
+        "Κεφάλαιο 12 — Αναπαραγωγή - Ανάπτυξη": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό",
         "Κεφάλαιο 2 — Πεπτικό σύστημα",
@@ -951,6 +1208,22 @@
     },
     "english-a-gymnasiou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+      groundedSections:Object.freeze({
+        "Unit 1 — Welcome": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 2 — Junior High School Life": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 3 — Teen Matters": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 4 — Looking Back on the Past": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 5 — Times Change!": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 6 — Teens in Action": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 7 — Tomorrow and … Beyond!": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 8 — In the Papers!": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
+        "Unit 9 — Happy Summer Holidays!": "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Unit 1 — Welcome",
         "Unit 2 — Junior High School Life",
@@ -991,7 +1264,24 @@
       ]
 },
     "english-g-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C109/499/3246%2C21317/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+      groundedSections:Object.freeze({
+        "Unit 1 — A Wonderful World": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 2 — Teen idols": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 3 — Thrills and Spills!": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 4 — Click on-Line!": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 5 — The myths we live by": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 6 — Keeping traditions and customs alive": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 7 — Shades of Meaning!": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 8 — Food for thought": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 9 — What's the weather like?": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
+        "Unit 10 — Natural phenomena": "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/"
+      }),
+      groundingStatus:"schoolbook-section-grounded",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Unit 1 — A Wonderful World",
         "Unit 2 — Teen idols",
@@ -1085,7 +1375,7 @@
 }
   };
   window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027=Object.freeze({
-    version:"2.9.0",
+    version:"3.0.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

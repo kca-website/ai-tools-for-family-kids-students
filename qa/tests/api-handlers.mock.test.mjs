@@ -123,13 +123,13 @@ test('preschool-activity validation matrix', async () => {
     [{ ...base, idea: 'το email μου a@b.gr' }, 400], [{ ...base, idea: 'τηλέφωνο 6912345678' }, 400]];
   for (const [b, c] of cases) assert.equal((await call('preschool-activity', { body: b })).code, c, JSON.stringify(b).slice(0, 70));
 });
-test('FINDING API-06: Greek personal-data keywords are never blocked (JS \\b does not work with Greek letters)', async () => {
+test('Greek personal-data keywords are blocked in preschool endpoints', async () => {
   envOn(); mockFetch(() => cfOk('{}')); const base = { mode: 'story', age: '5', duration: '10', place: 'home', curriculumFocus: 'auto' };
   for (const idea of ['ονομάζεται Μαρία', 'λέγεται Νίκος', 'η διεύθυνση μου', 'το κινητό μου', 'σχολείο μου']) {
     const a = await call('preschool-activity', { body: { ...base, idea } });
-    assert.notEqual(a.body?.error, 'personal_data', 'activity: ' + idea);
+    assert.equal(a.body?.error, 'personal_data', 'activity: ' + idea);
     const i = await call('preschool-image', { body: { idea, age: '5', mode: 'story' } });
-    assert.notEqual(i.body?.error, 'personal_data', 'image: ' + idea);
+    assert.equal(i.body?.error, 'personal_data', 'image: ' + idea);
   }
 });
 test('preschool-image validation + unauthenticated paid image endpoint (no rate limit)', async () => {

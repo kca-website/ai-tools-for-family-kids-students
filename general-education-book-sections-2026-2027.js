@@ -370,7 +370,7 @@
       ]
     },
     "english-c-dimotikou":{
-      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-MB2_html-empl/",
+      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
       sections:[
         "Pre-Unit — Magic Letters",
         "Unit 1 — In the Fairytale Forest",

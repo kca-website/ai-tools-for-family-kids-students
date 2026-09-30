@@ -148,7 +148,7 @@ ${modeRule}`;
 
 function looksLikePersonalData(s) {
   const value = String(s || '').normalize('NFD').replace(/\p{M}+/gu, '').toLowerCase();
-  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλεφων\p{L}*|κινητ\p{L}*|διευθυν\p{L}*|σχολειο μου|ονομαζεται|λεγεται)(?=$|[^\p{L}\p{N}_])/iu.test(value);
+  return /@|https?:\/\/|\d{7,}|(?:^|[^\p{L}\p{N}_])(?:email|τηλεφων\p{L}*|κινητ(?:ο|ου|α|ων)|διευθυνσ\p{L}*|σχολειο μου|ονομαζεται|λεγεται)(?=$|[^\p{L}\p{N}_])/iu.test(value);
 }
 function parseActivity(text, idea) {
   try {

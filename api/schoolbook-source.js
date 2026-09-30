@@ -270,6 +270,66 @@ const BOOKS = {
     lastVerified: "2026-09-30",
     annualScopeVerified: false
   },
+  "english-d-dimotikou": {
+    title: "Αγγλικά Δ΄ Δημοτικού",
+    grade: "d",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "Unit 1 — Back to school",
+      "Unit 2 — What's your favourite hobby or sport?",
+      "Unit 3 — This is where I live",
+      "Unit 4 — Time",
+      "Unit 5 — Habits and customs",
+      "Unit 6 — Animals",
+      "Unit 7 — What are you doing?",
+      "Unit 8 — Around the city",
+      "Unit 9 — The school party",
+      "Unit 10 — Enjoy your holidays"
+    ]),
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "english-e-dimotikou": {
+    title: "Αγγλικά Ε΄ Δημοτικού",
+    grade: "e",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
+    mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "Unit 1 — Internet friends around Europe",
+      "Unit 2 — School life and the world around us",
+      "Unit 3 — Places",
+      "Unit 4 — Christmas everywhere",
+      "Unit 5 — Ready for action",
+      "Unit 6 — Good, better, best!",
+      "Unit 7 — Going back in time",
+      "Unit 8 — All about stories",
+      "Unit 9 — Amazing people and places",
+      "Unit 10 — Summer is here!"
+    ]),
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
+  "istoria-c-dimotikou": {
+    title: "Ιστορία Γ΄ Δημοτικού",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
+    mode: "linkedSection",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-09-30",
+    annualScopeVerified: false
+  },
   "science-e-dimotikou": {
     title: "Φυσικά Ε΄ Δημοτικού",
     grade: "e",

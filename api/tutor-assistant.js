@@ -367,8 +367,8 @@ function groundingSignals(text, sourceText) {
   const common = new Set([
     'AI','JSON','Quiz','True','False',
     'Ερώτηση','Απάντηση','Σωστό','Λάθος','Ποιο','Ποια','Ποιος','Πώς','Γιατί','Τι',
-    'Θυμήσου','Σκέψου','Παράδειγμα','Παραδείγματα','Κάρτα','Κάρτες',
-    'Question','Answer','Remember','Think','Example','Examples'
+    'Θυμήσου','Σκέψου','Παράδειγμα','Παραδείγματα','Κάρτα','Κάρτες','Βήμα','Πλάνο','Κάνε',
+    'Question','Answer','Remember','Think','Example','Examples','Step','Plan'
   ].map(normalizeGroundingText));
 
   // Proper-name-like tokens are the highest-value deterministic hallucination signal.
@@ -394,7 +394,7 @@ function groundingSignals(text, sourceText) {
     const token = match[0];
     const n = token.replace(',', '.');
     const nearby = normalizeGroundingText(answer.slice(Math.max(0, match.index - 28), match.index));
-    const taskCounter = /(?:ερωτηση|απαντηση|καρτα|βημα|question|answer|card|step)\s*$/.test(nearby) ||
+    const taskCounter = /(?:ερωτηση|απαντηση|καρτα|βημα|κανε|question|answer|card|step)\s*$/.test(nearby) ||
       /(?:απο|of)\s*$/.test(nearby) && Number(n) <= 20;
     if (taskCounter) continue;
     if (seen.has('number:'+n)) continue;

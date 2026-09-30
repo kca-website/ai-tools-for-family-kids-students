@@ -175,7 +175,7 @@
       ]
     },
     "math-d-dimotikou":{
-      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D102",
       sections:[
         "Α΄ Περίοδος · Α΄ Ενότητα",
         "Α΄ Περίοδος · Β΄ Ενότητα",

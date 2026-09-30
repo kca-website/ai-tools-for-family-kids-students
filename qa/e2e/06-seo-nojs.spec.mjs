@@ -154,7 +154,6 @@ test.describe('no JavaScript', () => {
   });
 
   test('home: age-zone picker ("Διάλεξε ηλικιακή ζώνη") has content without JS', async ({ browser, baseURL }) => {
-    test.fail(true, 'FINDING F-16: zone cards are JS-rendered; static HTML section is empty → crawlers/JS-off users see no zone links');
     const ctx = await browser.newContext({ javaScriptEnabled: false });
     const page = await ctx.newPage();
     await page.goto(baseURL + '/');

@@ -177,6 +177,11 @@
     },
     "science-st-dimotikou":{
       sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/",
+      groundingStatus:"schoolbook-source-exact",
+      mappingStatus:"official-book-section-grounded",
+      lastVerified:"2026-09-30",
+      annualGuidanceSource:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
+      annualScopeVerified:false,
       sections:[
         "Ενέργεια",
         "Θερμοκρασία - Θερμότητα",

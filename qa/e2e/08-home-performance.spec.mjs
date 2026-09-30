@@ -1,5 +1,5 @@
-// Home load performance contract: the home ("/") paints without the heavy curriculum/quiz/tutor data, which loads right after,
-// and every path that needs the data (zone entry, quiz, tutor, EPAL modal, search, deep links) still works.
+// Home load performance contract: the home ("/") paints without the heavy curriculum/quiz/tutor data, which loads after a short idle window,
+// and every path that needs the data (zone entry, quiz, tutor, EPAL modal, search, deep links) still works without flashing the legacy shell.
 import fs from 'node:fs';
 import path from 'node:path';
 import { test, expect } from './fixtures.mjs';
@@ -24,11 +24,12 @@ test.describe('home does not wait for the heavy data', () => {
     await page.goto('/');
     await expect(page.locator('html.navigator-home-ready')).toHaveCount(1, { timeout: 15_000 });
     await page.waitForFunction(() => window.__aitools4kidsHeavyLoaded === true, null, { timeout: 30_000 });
-    const timing = await page.evaluate(() => ({ readyAt: window.__readyAt, res: performance.getEntriesByType('resource').filter((r) => /\.js$/.test(r.name)).map((r) => [new URL(r.name).pathname.slice(1), r.responseEnd]) }));
+    const timing = await page.evaluate(() => ({ readyAt: window.__readyAt, res: performance.getEntriesByType('resource').filter((r) => /\.js$/.test(r.name)).map((r) => [new URL(r.name).pathname.slice(1), r.startTime, r.responseEnd]) }));
     for (const f of HEAVY_FILES) {
       const hit = timing.res.find(([n]) => n === f);
       expect(hit, `${f} was loaded`).toBeTruthy();
-      expect(hit[1], `${f} finished loading after the home was ready`).toBeGreaterThanOrEqual(timing.readyAt);
+      expect(hit[1], `${f} should not start immediately on the home first paint`).toBeGreaterThanOrEqual(timing.readyAt + 650);
+      expect(hit[2], `${f} finished loading after the home was ready`).toBeGreaterThanOrEqual(timing.readyAt);
     }
     expect(qa.pageErrors).toEqual([]);
   });
@@ -71,11 +72,46 @@ test.describe('home does not wait for the heavy data', () => {
     expect(await page.evaluate(() => getComputedStyle(document.getElementById('homeBootSkeleton')).display)).toBe('none');
   });
 
-  test('skeleton never shows without JavaScript or on other routes', async ({ browser, baseURL }) => {
+  test('rewritten SPA deep links never paint the legacy home before the requested route', async ({ page, context, qa }) => {
+    await throttle(context, page, { rate: 4, kbps: 1800, latency: 120 });
+    await page.addInitScript(() => {
+      const tick = () => {
+        if (!document.body) return requestAnimationFrame(tick);
+        const s = document.getElementById('routeBootSkeleton');
+        const z = document.getElementById('zoneSelectView');
+        if (!s || !z) return requestAnimationFrame(tick);
+        window.__routeFirstFrame = {
+          cls: document.documentElement.className,
+          skeleton: getComputedStyle(s).display,
+          zone: getComputedStyle(z).visibility,
+        };
+      };
+      requestAnimationFrame(tick);
+    });
+
+    for (const p of ['/high/student/tutor?schoolType=gel&grade=a&subject=istoria-a-lykeiou', '/primary/guardian/quiz', '/middle/guardian/tools']) {
+      await page.goto(p, { waitUntil: 'commit' });
+      await page.waitForFunction(() => window.__routeFirstFrame, null, { timeout: 30_000 });
+      const early = await page.evaluate(() => window.__routeFirstFrame);
+      expect(early.cls, p).toContain('navigator-route-booting');
+      expect(early.skeleton, p).toBe('block');
+      expect(early.zone, p).toBe('hidden');
+
+      await page.waitForSelector('html.navigator-route-ready', { state: 'attached', timeout: 60_000 });
+      expect(await page.evaluate(() => document.documentElement.classList.contains('navigator-route-booting')), p).toBe(false);
+      expect(await page.evaluate(() => getComputedStyle(document.getElementById('routeBootSkeleton')).display), p).toBe('none');
+    }
+    expect(qa.pageErrors).toEqual([]);
+  });
+
+  test('skeleton never shows without JavaScript or on non-app routes', async ({ browser, baseURL }) => {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
     const p = await ctx.newPage();
     await p.goto(baseURL + '/');
     expect(await p.evaluate(() => getComputedStyle(document.getElementById('homeBootSkeleton')).display)).toBe('none');
+    expect(await p.evaluate(() => getComputedStyle(document.getElementById('routeBootSkeleton')).display)).toBe('none');
+    await p.goto(baseURL + '/study.html');
+    expect(await p.evaluate(() => document.documentElement.classList.contains('navigator-route-booting'))).toBe(false);
     await ctx.close();
   });
 });

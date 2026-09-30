@@ -207,6 +207,17 @@ const BOOKS = {
     grade: "a",
     base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
     mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "1η Ενότητα — Οι αριθμοί μέχρι το 5 - Χώρος και σχήματα",
+      "2η Ενότητα — Πρόσθεση και ανάλυση αριθμών μέχρι το 5",
+      "3η Ενότητα — Οι αριθμοί μέχρι το 20 - Αθροίσματα μέχρι το 10 - Νομίσματα",
+      "4η Ενότητα — Αφαίρεση - Χάραξη γραμμών - Μοτίβα",
+      "5η Ενότητα — Οι αριθμοί μέχρι το 50, Μονάδες και δεκάδες - Τετραγωνισμένο χαρτί",
+      "6η Ενότητα — Μονάδες και δεκάδες - Γεωμετρικά σχήματα - Χρόνος",
+      "7η Ενότητα — Χαράξεις, Παζλ - Πρόσθεση και αφαίρεση - Η υπέρβαση της δεκάδας",
+      "8η Ενότητα — Οι αριθμοί μέχρι το 70 - Πολλαπλασιασμός - Συμμετρία",
+      "9η Ενότητα — Οι αριθμοί μέχρι το 100 - Πράξεις - Βάρος - Γεωμετρικά σχήματα"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
@@ -219,6 +230,17 @@ const BOOKS = {
     grade: "b",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
     mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "1η Ενότητα — Κεφάλαια 1-8",
+      "2η Ενότητα — Κεφάλαια 9-15",
+      "3η Ενότητα — Κεφάλαια 16-23",
+      "4η Ενότητα — Κεφάλαια 24-28",
+      "5η Ενότητα — Κεφάλαια 29-33",
+      "6η Ενότητα — Κεφάλαια 34-40",
+      "7η Ενότητα — Κεφάλαια 41-44",
+      "8η Ενότητα — Κεφάλαια 45-50",
+      "9η Ενότητα — Κεφάλαια 51-54"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
@@ -231,6 +253,17 @@ const BOOKS = {
     grade: "c",
     base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
     mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα",
+      "2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα",
+      "3η Ενότητα — Αριθμοί μέχρι το 3.000. Οι τέσσερις πράξεις. Χαράξεις. Ορθές γωνίες",
+      "4η Ενότητα — Εισαγωγή στα απλά κλάσματα",
+      "5η Ενότητα — Προσθέσεις και αφαιρέσεις. Αλγόριθμος του πολλαπλασιασμού",
+      "6η Ενότητα — Εισαγωγή στους δεκαδικούς αριθμούς",
+      "7η Ενότητα — Αριθμοί μέχρι το 7.000. Μέτρηση μάζας. Παζλ, πλακόστρωτα, μωσαϊκά, συμμετρία",
+      "8η Ενότητα — Πολλαπλασιασμοί και διαιρέσεις. Μοτίβα. Μέτρηση χρόνου και επιφάνειας",
+      "9η Ενότητα — Αριθμοί μέχρι το 10.000. Κλάσματα και δεκαδικοί. Πράξεις. Γεωμετρία"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
@@ -243,6 +276,17 @@ const BOOKS = {
     grade: "e",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_EDimotikou_html-empl/",
     mode: "fullBookSection",
+    sectionLabels: Object.freeze([
+      "Ενότητα 1 — Μεγάλοι αριθμοί και επίλυση προβλημάτων",
+      "Ενότητα 2 — Δεκαδικοί αριθμοί και στρογγυλοποίηση",
+      "Ενότητα 3 — Πολλαπλασιασμοί/διαιρέσεις, κλάσματα και μέσος όρος",
+      "Ενότητα 4 — Ποσοστά, περίμετρος, εμβαδό και πράξεις με κλάσματα",
+      "Ενότητα 5 — Μονάδες μήκους/επιφάνειας και προβλήματα γεωμετρίας",
+      "Ενότητα 6 — Διαιρετότητα, ΕΚΠ και ετερώνυμα κλάσματα",
+      "Ενότητα 7 — Γωνίες, τρίγωνα και συμμετρία",
+      "Ενότητα 8 — Αξιολόγηση πληροφοριών, σύνθετα προβλήματα, σμίκρυνση/μεγέθυνση",
+      "Ενότητα 9 — Χρόνος, συμμιγείς, κύκλος και μεγάλοι αριθμοί"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
@@ -323,6 +367,18 @@ const BOOKS = {
     grade: "c",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
     mode: "linkedSection",
+    sectionLabels: Object.freeze([
+      "Ενότητα 1 — Η δημιουργία του κόσμου",
+      "Ενότητα 2 — Ο Ηρακλής",
+      "Ενότητα 3 — Ο Θησέας",
+      "Ενότητα 4 — Η Αργοναυτική εκστρατεία",
+      "Ενότητα 5 — Ο Τρωικός πόλεμος",
+      "Ενότητα 6 — Οι περιπέτειες του Οδυσσέα",
+      "Ενότητα 7 — Η εποχή του λίθου",
+      "Ενότητα 8 — Ο Κυκλαδικός πολιτισμός",
+      "Ενότητα 9 — Ο Μινωικός πολιτισμός",
+      "Ενότητα 10 — Ο Μυκηναϊκός πολιτισμός"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
@@ -335,6 +391,16 @@ const BOOKS = {
     grade: "e",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/index.html",
     mode: "linkedSection",
+    sectionLabels: Object.freeze([
+      "Υλικά σώματα",
+      "Μίγματα",
+      "Ενέργεια",
+      "Πεπτικό σύστημα",
+      "Θερμότητα",
+      "Ηλεκτρισμός",
+      "Φως",
+      "Ήχος"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/",
@@ -399,6 +465,20 @@ const BOOKS = {
     grade: "a",
     base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
     mode: "linkedSection",
+    sectionLabels: Object.freeze([
+      "Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό",
+      "Κεφάλαιο 2 — Πεπτικό σύστημα",
+      "Κεφάλαιο 3 — Κυκλοφορικό σύστημα",
+      "Κεφάλαιο 4 — Λεμφικό σύστημα",
+      "Κεφάλαιο 5 — Αναπνοή",
+      "Κεφάλαιο 6 — Απέκκριση και ωσμορρύθμιση",
+      "Κεφάλαιο 7 — Ερειστικό σύστημα",
+      "Κεφάλαιο 8 — Μυϊκό σύστημα",
+      "Κεφάλαιο 9 — Νευρικό σύστημα",
+      "Κεφάλαιο 10 — Αισθητήρια όργανα - Αισθήσεις",
+      "Κεφάλαιο 11 — Ενδοκρινείς αδένες",
+      "Κεφάλαιο 12 — Αναπαραγωγή - Ανάπτυξη"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-genikou-lykeiou-gia-to-scholiko-etos-2026-2027/",
@@ -411,6 +491,17 @@ const BOOKS = {
     grade: "a",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2322/Agglika_A-Gymnasiou-Proch_html-empl/index-links.html",
     mode: "linkedSection",
+    sectionLabels: Object.freeze([
+      "Unit 1 — Welcome",
+      "Unit 2 — Junior High School Life",
+      "Unit 3 — Teen Matters",
+      "Unit 4 — Looking Back on the Past",
+      "Unit 5 — Times Change!",
+      "Unit 6 — Teens in Action",
+      "Unit 7 — Tomorrow and … Beyond!",
+      "Unit 8 — In the Papers!",
+      "Unit 9 — Happy Summer Holidays!"
+    ]),
     officialSourceRequired: true,
     schoolYear: "2026-2027",
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
@@ -2139,7 +2230,11 @@ function resolveLiteratureBCurriculumPaths(topic) {
   return [...new Set(matches.map(row => row.path))];
 }
 
+const OFFICIAL_HTML_CACHE = new Map();
+
 async function fetchOfficialHtml(url) {
+  const key = String(url || "");
+  if (OFFICIAL_HTML_CACHE.has(key)) return OFFICIAL_HTML_CACHE.get(key);
   const response = await fetch(url, {
     headers: {
       "User-Agent": "aitools4kids.gr educational source grounding",
@@ -2147,7 +2242,9 @@ async function fetchOfficialHtml(url) {
     },
     redirect: "follow"
   });
-  return response.ok ? response.text() : "";
+  const html = response.ok ? await response.text() : "";
+  if (html) OFFICIAL_HTML_CACHE.set(key, html);
+  return html;
 }
 
 function topicLabelCandidates(topic) {
@@ -2230,7 +2327,15 @@ function resolveExplicitSectionUrls(book, topic) {
   return matches.length === 1 ? matches : [];
 }
 
+function sectionIsAllowlisted(book, topic) {
+  const labels = Array.isArray(book?.sectionLabels) ? book.sectionLabels : [];
+  if (!labels.length) return true;
+  const wanted = normalize(topic);
+  return labels.some((label) => normalize(label) === wanted);
+}
+
 async function resolveLinkedSectionUrls(book, topic) {
+  if (!sectionIsAllowlisted(book, topic)) return [];
   const explicit = resolveExplicitSectionUrls(book, topic);
   if (explicit.length) return explicit;
   const rootHtml = await fetchOfficialHtml(book.base);
@@ -2360,6 +2465,7 @@ function selectFullBookSectionText(text, topic, book = null) {
 }
 
 async function resolveFullBookSectionUrls(book, topic) {
+  if (!sectionIsAllowlisted(book, topic)) return [];
   if (!book?.base || !officialLinkAllowed(book.base)) return [];
   const html = await fetchOfficialHtml(book.base);
   if (!html) return [];

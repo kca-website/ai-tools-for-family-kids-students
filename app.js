@@ -3060,7 +3060,8 @@ function renderToolGrid(pathTools, targetElement) {
   function resumeProgress() {
     const progress = loadProgress();
     if (!progress) return;
-    const zoneQuizzes = QUIZZES[progress.zoneId] || {};
+    // QUIZZES may not be loaded yet on the home (heavy data loads after first paint); the banner is re-rendered once it is.
+    const zoneQuizzes = (typeof QUIZZES !== "undefined" && QUIZZES[progress.zoneId]) || {};
     const quiz = zoneQuizzes[progress.quizId];
     if (!quiz) return; // το quiz μπορεί να έχει αφαιρεθεί/μετονομαστεί από τότε
     state.currentZone = progress.zoneId;
@@ -3089,7 +3090,8 @@ function renderToolGrid(pathTools, targetElement) {
     if (!progress) return;
     const zone = ZONES.find((z) => z.id === progress.zoneId);
     if (!zone) return;
-    const zoneQuizzes = QUIZZES[progress.zoneId] || {};
+    // QUIZZES may not be loaded yet on the home (heavy data loads after first paint); the banner is re-rendered once it is.
+    const zoneQuizzes = (typeof QUIZZES !== "undefined" && QUIZZES[progress.zoneId]) || {};
     const quiz = zoneQuizzes[progress.quizId];
     if (!quiz) return;
 
@@ -3269,6 +3271,11 @@ function renderToolGrid(pathTools, targetElement) {
       renderCurrentRoute();
     });
   }
+
+  // The home loads the heavy data after first paint (see the loader in index.html): show the "continue" banner as soon as it is there.
+  document.addEventListener("aitools4kids:heavy-loaded", () => {
+    if (!state.currentZone) renderContinueBanner();
+  });
 
   document.addEventListener("DOMContentLoaded", init);
 })();

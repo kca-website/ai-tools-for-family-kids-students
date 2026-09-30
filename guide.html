@@ -61,6 +61,8 @@
       document.getElementById('footerText').textContent=c.foot;
       document.getElementById('langEl').classList.toggle('active',lang==='el');
       document.getElementById('langEn').classList.toggle('active',lang==='en');
+      document.getElementById('langEl').setAttribute('aria-pressed',String(lang==='el'));
+      document.getElementById('langEn').setAttribute('aria-pressed',String(lang==='en'));
       if(typeof GUIDE_DATA==='undefined'||!GUIDE_DATA[lang]){
         content.innerHTML='<div class="error">'+(lang==='el'?'Ο οδηγός δεν μπόρεσε να φορτωθεί.':'The guide could not be loaded.')+'</div>';
         return;

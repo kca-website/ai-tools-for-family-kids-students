@@ -36,7 +36,6 @@ test.describe('home + routing', () => {
   });
 
   test('home → zone → refresh → browser Back shows the zone picker', async ({ page }) => {
-    test.fail(true, 'FINDING F-02: navigator-home-booting class is never removed after a non-"/" boot → #zoneSelectView stays visibility:hidden');
     await page.goto('/');
     await page.locator('button.zone-card', { hasText: 'Δημοτικό' }).click();
     await page.reload();
@@ -47,7 +46,6 @@ test.describe('home + routing', () => {
 
   for (const path of ['/index.html', '/about', '/guide', '/privacy-policy', '/nowhere/guardian/tools', '/en']) {
     test(`non-existent/extensionless URL ${path} shows readable content (not a blank page)`, async ({ page }) => {
-      test.fail(true, 'FINDING F-01: SPA fallback leaves html.navigator-home-booting → blank page under the header');
       await page.goto(path);
       await page.waitForTimeout(2500);
       await expect(page.locator('h1:visible').first()).toBeVisible();

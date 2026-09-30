@@ -2,7 +2,7 @@
   "use strict";
   const rows={
     "math-a-dimotikou":{
-      sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-A102",
+      sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
       sections:[
         "1η Ενότητα — Οι αριθμοί μέχρι το 5 - Χώρος και σχήματα",
         "2η Ενότητα — Πρόσθεση και ανάλυση αριθμών μέχρι το 5",
@@ -147,7 +147,7 @@
       ]
     },
     "math-b-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-B101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
       sections:[
         "1η Ενότητα — Κεφάλαια 1-8",
         "2η Ενότητα — Κεφάλαια 9-15",
@@ -161,7 +161,7 @@
       ]
     },
     "math-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
       sections:[
         "1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα",
         "2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα",
@@ -175,7 +175,7 @@
       ]
     },
     "math-d-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
       sections:[
         "Α΄ Περίοδος · Α΄ Ενότητα",
         "Α΄ Περίοδος · Β΄ Ενότητα",
@@ -228,7 +228,7 @@
       ]
     },
     "math-e-dimotikou":{
-      sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Μεγάλοι αριθμοί και επίλυση προβλημάτων",
         "Ενότητα 2 — Δεκαδικοί αριθμοί και στρογγυλοποίηση",
@@ -323,7 +323,7 @@
       ]
     },
     "math-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Αριθμοί και Πράξεις",
         "Ενότητα 2 — Εξισώσεις",
@@ -1085,7 +1085,7 @@
 }
   };
   const api=Object.freeze({
-    version:"2.10.0",
+    version:"2.11.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

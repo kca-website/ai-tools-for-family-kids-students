@@ -139,6 +139,9 @@ jobs:
       - name: Run Phase 11A Primary schoolbook grounding
         run: node tests/phase11-primary-schoolbook-grounding-smoke.mjs
 
+      - name: Run Phase 11A official navigation discovery
+        run: node tests/phase11-primary-source-discovery.mjs
+
       - name: Run Phase 11A live official-source grounding
         run: node tests/phase11-primary-source-live-smoke.mjs
 

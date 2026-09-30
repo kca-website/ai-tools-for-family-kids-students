@@ -3290,6 +3290,9 @@ main {
   text-align: left;
 }
 .site-footer__legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   text-decoration: none;
 }
 .site-footer__legal a:hover {

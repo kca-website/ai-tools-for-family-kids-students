@@ -71,7 +71,8 @@ assert.match(study, /'chimeia-g-gymnasiou'/);
 assert.match(tutor, /function getSharedStudyContext\(\)/);
 assert.match(tutor, /getStudyContext:\s*getSharedStudyContext/);
 assert.match(tutor, /publishStudyContext:\s*publishSharedStudyContext/);
-assert.match(tutor, /studyContext:\s*getSharedStudyContext\(\)/);
+assert.match(tutor, /const sharedStudyContext = getSharedStudyContext\(\)/);
+assert.match(tutor, /studyContext:\s*sharedStudyContext/);
 assert.match(tutor, /documentKind:\s*attachedDocument\?\.text\s*\?\s*"user_upload"\s*:\s*\(groundedSource\?\.grounded\s*\?\s*"official_schoolbook"/);
 assert.match(tutor, /documentSourceUrl:\s*groundedSource\?\.sourceUrl/);
 

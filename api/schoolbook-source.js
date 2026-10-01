@@ -1608,7 +1608,7 @@ function resolveDirectSourceUrls(subject, topic) {
   if (subject === "glossa-gymnasiou") {
     const diagnostic = resolveGlossaGQuizUrls(topic);
     if (diagnostic.length) return diagnostic;
-    const unitMatch = String(topic || "").match(/^\s*(\d+)(?:η|ή)?\s+Ενότητα\b/i);
+    const unitMatch = String(topic || "").match(/^\s*(\d+)(?:η|ή)?\s+Ενότητα(?=\s|$|[·—–:.,;\-])/i);
     const unit = unitMatch ? Number(unitMatch[1]) : 0;
     if (!Number.isInteger(unit) || unit < 1 || unit > 8) return [];
     const letter = String.fromCharCode("b".charCodeAt(0) + unit - 1);

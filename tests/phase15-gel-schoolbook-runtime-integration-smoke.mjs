@@ -37,9 +37,9 @@ assert.ok(blocked > 400);
 const liveCases = [
   ["mathimatika-a-lykeiou", "2.2 Διάταξη πραγματικών αριθμών"],
   ["geometria-a-lykeiou", "3.2–3.4 Κριτήρια ισότητας τριγώνων"],
-  ["chimeia-a-lykeiou", "2.1 Περιοδικός πίνακας"],
-  ["biologia-b-lykeiou", "1.2 Κύτταρο: η μονάδα της ζωής"],
-  ["pliroforiki-g-lykeiou", "2.1 Ανάλυση προβλήματος"],
+  ["chimeia-a-lykeiou", "2.2 Περιοδικός πίνακας"],
+  ["biologia-b-lykeiou", "Ροή ενέργειας"],
+  ["pliroforiki-g-lykeiou", "Διαδικασίες και συναρτήσεις"],
   ["chimeia-g-lykeiou", "5.5 Ρυθμιστικά διαλύματα"]
 ];
 

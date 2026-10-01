@@ -35,6 +35,13 @@ try {
   GEL_SCHOOLBOOK_SOURCE_MAP = null;
 }
 
+let OFFICIAL_PDF_TEXT = null;
+try {
+  OFFICIAL_PDF_TEXT = require("./official-pdf-text.js");
+} catch (_) {
+  OFFICIAL_PDF_TEXT = null;
+}
+
 const PRIMARY_GUIDANCE_2026_2027 =
   "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/";
 const MIDDLE_GUIDANCE_2026_2027 =
@@ -71,6 +78,10 @@ function catalogHtmlSourceAllowed(url) {
   } catch (_) {
     return false;
   }
+}
+
+function catalogPdfSourceAllowed(url) {
+  return OFFICIAL_PDF_TEXT?.officialPdfSourceAllowed?.(url) === true;
 }
 
 function buildCatalogBook(subject) {
@@ -125,15 +136,31 @@ function resolveGelInventoryTopic(subject, topic) {
     !!book?.html?.url &&
     catalogHtmlSourceAllowed(book.html.url);
 
+  const exactPdfVerified =
+    mapping?.status === "exact-pdf" &&
+    mapping?.granularity === "pdf-page" &&
+    Number.isInteger(Number(mapping?.pdfPage)) &&
+    Number(mapping.pdfPage) > 0 &&
+    !!mapping?.heading &&
+    !!mapping?.url &&
+    catalogPdfSourceAllowed(mapping.url) &&
+    !!book?.pdf?.url &&
+    catalogPdfSourceAllowed(book.pdf.url);
+
+  const runtimeMode = exactHtmlHigh
+    ? "exact-html"
+    : (exactPdfVerified ? "exact-pdf" : null);
+
   return {
     row,
     mapping,
     book,
-    runtimeEligible: exactHtmlHigh,
-    reason: exactHtmlHigh
+    runtimeEligible: !!runtimeMode,
+    runtimeMode,
+    reason: runtimeMode
       ? ""
       : (mapping?.status === "exact-pdf"
-        ? "official-pdf-page-verified-text-parser-not-enabled"
+        ? "official-pdf-page-not-runtime-safe"
         : (mapping?.status === "exact-html" && mapping?.confidence === "medium"
           ? "medium-confidence-not-activated"
           : (mapping?.reason || mapping?.status || "not-runtime-eligible")))
@@ -141,7 +168,7 @@ function resolveGelInventoryTopic(subject, topic) {
 }
 
 function buildGelInventoryBook(resolution) {
-  if (!resolution?.runtimeEligible) return null;
+  if (!resolution?.runtimeEligible || resolution?.runtimeMode !== "exact-html") return null;
   const { row, mapping, book } = resolution;
   return {
     title: book?.title || row?.labelEl || row?.subjectId || "Επίσημο σχολικό βιβλίο",

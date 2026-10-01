@@ -8,6 +8,7 @@ const groundedIds=[
   "math-a-dimotikou",
   "math-b-dimotikou",
   "math-c-dimotikou",
+  "math-d-dimotikou",
   "math-e-dimotikou",
   "math-st-dimotikou"
 ];
@@ -27,8 +28,8 @@ for(const id of groundedIds){
 
 const dRow=catalog.get("math-d-dimotikou");
 assert.ok(dRow?.sections?.length,"math-d-dimotikou must retain curriculum sections");
-const dFail=await endpoint.resolveOfficialSchoolbookSource("math-d-dimotikou",dRow.sections[0]);
-assert.equal(dFail.ok,false,"D Primary math must remain fail-closed until its period/unit labels have an exact official HTML mapping");
+const dFail=await endpoint.resolveOfficialSchoolbookSource("math-d-dimotikou","Α΄ Περίοδος · Δ΄ Ενότητα");
+assert.equal(dFail.ok,false,"An unknown D Primary math period/unit must remain fail-closed");
 assert.notEqual(dFail.body?.grounded,true);
 
 const impossible=await endpoint.resolveOfficialSchoolbookSource("math-e-dimotikou","Ενότητα 99 — Ανύπαρκτη ενότητα");
@@ -37,5 +38,5 @@ assert.notEqual(impossible.body?.grounded,true);
 
 console.log("PHASE13_PRIMARY_MATH_GROUNDING="+JSON.stringify({
   grounded:results,
-  failClosed:[{id:"math-d-dimotikou",topic:dRow.sections[0],error:dFail.body?.error}]
+  failClosed:[{id:"math-d-dimotikou",topic:"Α΄ Περίοδος · Δ΄ Ενότητα",error:dFail.body?.error}]
 },null,2));

@@ -11,11 +11,12 @@ const ids=[
   "science-e-dimotikou",
   "glossa-st-dimotikou",
   "english-d-dimotikou",
-  "english-e-dimotikou"
+  "english-e-dimotikou",
+  "english-c-dimotikou"
 ];
 
 const missingEnglishC=await endpoint.resolveOfficialSchoolbookSource("english-c-dimotikou","Unit 1 — In the Fairytale Forest");
-assert.equal(missingEnglishC.ok,false,"English C Magic Book 1 must remain fail-closed until an exact official HTML source exists");
+assert.equal(missingEnglishC.ok,false,"A Magic Book 1 label must not resolve against the verified Magic Book 2 manifestation");
 assert.notEqual(missingEnglishC.body?.grounded,true);
 
 const results=[];

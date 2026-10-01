@@ -174,20 +174,100 @@
         "9η Ενότητα — Αριθμοί μέχρι το 10.000. Κλάσματα και δεκαδικοί. Πράξεις. Γεωμετρία"
       ]
     },
-    "math-d-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D102",
-      sections:[
-        "Α΄ Περίοδος · Α΄ Ενότητα",
-        "Α΄ Περίοδος · Β΄ Ενότητα",
-        "Α΄ Περίοδος · Γ΄ Ενότητα",
-        "Β΄ Περίοδος · Α΄ Ενότητα",
-        "Β΄ Περίοδος · Β΄ Ενότητα",
-        "Β΄ Περίοδος · Γ΄ Ενότητα",
-        "Γ΄ Περίοδος · Α΄ Ενότητα",
-        "Γ΄ Περίοδος · Β΄ Ενότητα",
-        "Γ΄ Περίοδος · Γ΄ Ενότητα"
+    "math-d-dimotikou": {
+      "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/",
+      "groundedSections": {
+            "Α΄ Περίοδος · Α΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_1.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_2.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_3.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_4.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_5.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_6.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_7.html"
+            ],
+            "Α΄ Περίοδος · Β΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_8.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_9.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_10.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_11.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_12.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_13.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_14.html"
+            ],
+            "Α΄ Περίοδος · Γ΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_15.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_16.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_17.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_18.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_19.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index1_20.html"
+            ],
+            "Β΄ Περίοδος · Α΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_21.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_22.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_23.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_24.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_25.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_26.html"
+            ],
+            "Β΄ Περίοδος · Β΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_27.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_28.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_29.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_30.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_31.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_32.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_33.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_34.html"
+            ],
+            "Β΄ Περίοδος · Γ΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_35.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_36.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_37.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_38.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_39.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index2_40.html"
+            ],
+            "Γ΄ Περίοδος · Α΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_41.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_42.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_43.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_44.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_45.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_46.html"
+            ],
+            "Γ΄ Περίοδος · Β΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_47.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_48.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_49.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_50.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_51.html"
+            ],
+            "Γ΄ Περίοδος · Γ΄ Ενότητα": [
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_52.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_53.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_54.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_55.html",
+                  "https://ebooks.edu.gr/ebooks/v/html/8547/2176/Mathimatika_D-Dimotikou_html-empl/index3_56.html"
+            ]
+      },
+      "groundingStatus": "schoolbook-structure-verified",
+      "mappingStatus": "official-book-structure-verified",
+      "lastVerified": "2026-10-01",
+      "annualScopeVerified": false,
+      "sections": [
+            "Α΄ Περίοδος · Α΄ Ενότητα",
+            "Α΄ Περίοδος · Β΄ Ενότητα",
+            "Α΄ Περίοδος · Γ΄ Ενότητα",
+            "Β΄ Περίοδος · Α΄ Ενότητα",
+            "Β΄ Περίοδος · Β΄ Ενότητα",
+            "Β΄ Περίοδος · Γ΄ Ενότητα",
+            "Γ΄ Περίοδος · Α΄ Ενότητα",
+            "Γ΄ Περίοδος · Β΄ Ενότητα",
+            "Γ΄ Περίοδος · Γ΄ Ενότητα"
       ]
-    },
+},
     "glossa-d-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
       groundedSections:Object.freeze({
@@ -250,6 +330,8 @@
             "Φυτά": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_4.html",
             "Ζώα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_5.html",
             "Οικοσυστήματα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_6.html",
+            "Αναπνευστικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_7.html",
+            "Κυκλοφορικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_8.html",
             "Ηλεκτρομαγνητισμός": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_9.html",
             "Φως": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_10.html",
             "Οξέα - Βάσεις - Άλατα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_11.html",
@@ -369,21 +451,39 @@
         "Ζ΄ — Θέματα από τη βυζαντινή ιστορία"
       ]
     },
-    "english-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C107",
-      sections:[
-        "Pre-Unit — Magic Letters",
-        "Unit 1 — In the Fairytale Forest",
-        "Unit 2 — The story of Bella the cat",
-        "Unit 3 — The story of Pinocchio",
-        "Unit 4 — The wind and the sun",
-        "Unit 5 — Lusy's story",
-        "Unit 6 — Beauty and the Beast",
-        "Unit 7 — Planet Earth",
-        "Unit 8 — Our World",
-        "Extra Unit — Special days"
+    "english-c-dimotikou": {
+      "sourceUrl": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/",
+      "groundedSections": {
+            "Introduction and Magic Letterland": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index.html",
+            "Unit 1 — Kelly": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_01.html",
+            "Unit 2 — Captain Cook": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_02.html",
+            "Unit 3 — The ant and the cricket": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_03.html",
+            "Unit 4 — The weasel and the mole": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_04.html",
+            "Unit 5 — The animal school": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_05.html",
+            "Unit 6 — The emperor’s new clothes": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_06.html",
+            "Unit 7 — Arthur and his family": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_07.html",
+            "Unit 8 — Daedalus and Icarus": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_08.html",
+            "Unit 9 — Planet Recyclon": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_09.html",
+            "Unit 10 — The magic island": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2276/Agglika_G-Dimotikou-Magic-Book-2_html-empl/index_10.html"
+      },
+      "groundingStatus": "schoolbook-structure-verified",
+      "mappingStatus": "official-book-structure-verified",
+      "lastVerified": "2026-10-01",
+      "annualScopeVerified": false,
+      "sections": [
+            "Introduction and Magic Letterland",
+            "Unit 1 — Kelly",
+            "Unit 2 — Captain Cook",
+            "Unit 3 — The ant and the cricket",
+            "Unit 4 — The weasel and the mole",
+            "Unit 5 — The animal school",
+            "Unit 6 — The emperor’s new clothes",
+            "Unit 7 — Arthur and his family",
+            "Unit 8 — Daedalus and Icarus",
+            "Unit 9 — Planet Recyclon",
+            "Unit 10 — The magic island"
       ]
-    },
+},
     "english-d-dimotikou":{
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
       sections:[
@@ -1085,7 +1185,7 @@
 }
   };
   const api=Object.freeze({
-    version:"2.13.0",
+    version:"2.14.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

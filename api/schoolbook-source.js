@@ -526,6 +526,10 @@ const BOOKS = {
     title: "Φυσικά ΣΤ΄ Δημοτικού",
     grade: "st",
     base: "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/",
+    sectionSources: Object.freeze({
+      "Αναπνευστικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_7.html",
+      "Κυκλοφορικό σύστημα": "https://www.ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_8.html"
+    }),
     mode: "linkedSection",
     officialSourceRequired: true,
     schoolYear: "2026-2027",
@@ -2780,10 +2784,20 @@ function resolveExplicitSectionUrls(book, topic) {
   for (const [label, url] of Object.entries(sources)) {
     const candidates = topicLabelCandidates(label);
     if (!candidates.some((candidate) => wanted.has(candidate))) continue;
+    if (Array.isArray(url)) {
+      // A verified curriculum unit may span several chapter pages. Keep the
+      // exact allowlisted set and require every page to belong to this book.
+      if (!url.length || !url.every(value =>
+        typeof value === "string" && officialLinkAllowed(value) &&
+        sameOfficialHtmlManifestation(value, book.base)
+      )) return [];
+      matches.push([...new Set(url)]);
+      continue;
+    }
     if (!officialLinkAllowed(url)) continue;
-    if (!matches.includes(url)) matches.push(url);
+    if (!matches.some(values => values.length === 1 && values[0] === url)) matches.push([url]);
   }
-  return matches.length === 1 ? matches : [];
+  return matches.length === 1 ? matches[0] : [];
 }
 
 async function resolveLinkedSectionUrls(book, topic) {

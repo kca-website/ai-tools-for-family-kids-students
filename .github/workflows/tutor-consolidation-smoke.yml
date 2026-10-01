@@ -124,6 +124,9 @@ jobs:
       - name: Run shared StudyContext smoke
         run: node tests/study-context-smoke.mjs
 
+      - name: Run StudyContext navigation and restore smoke
+        run: node tests/study-context-navigation-smoke.mjs
+
       - name: Run AI Study UX smoke
         run: node tests/ai-study-ux-smoke.mjs
 
@@ -156,6 +159,9 @@ jobs:
 
       - name: Run Phase 12 catalog schoolbook grounding
         run: node tests/phase12-catalog-schoolbook-grounding-smoke.mjs
+
+      - name: Run reconciled Primary grounding audit
+        run: node tests/pending-primary-grounding-smoke.mjs
 
       - name: Run Phase 13 Primary math schoolbook grounding
         run: node tests/phase13-primary-math-grounding-smoke.mjs

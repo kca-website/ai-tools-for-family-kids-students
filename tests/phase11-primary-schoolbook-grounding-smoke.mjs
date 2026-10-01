@@ -94,8 +94,8 @@ try {
       assert.equal(exact.length, 0, row.id + " must not claim exact grounded sections before verification");
     }
   }
-  assert.equal(exactTotal, 101, "Phase 11A should expose only the 101 exact source mappings discovered from official navigation");
-  assert.equal(missingTotal, 9, "Nine Primary sections must remain source-missing rather than guessed");
+  assert.equal(exactTotal, 103, "Phase 11A should expose 103 exact source mappings, including the two verified Science ST chapters");
+  assert.equal(missingTotal, 7, "Seven Primary sections must remain source-missing rather than guessed");
 } finally {
   await browser.close();
 }

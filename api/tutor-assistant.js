@@ -255,6 +255,11 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
 
     if (!result?.ok) {
       if (result?.error === 'grounding_validation_failed') {
+        console.info('GROUNDING_REJECT ' + JSON.stringify({
+          task: String(task || ''),
+          activity: String(activity || ''),
+          signals: (result?.groundingSignals || []).map(x => ({ type: x?.type || '', value: String(x?.value || '').slice(0, 80) }))
+        }));
         emitAiMetric({ task, activity, status: 422, cacheHit: false, provider: result?.provider || '', model: result?.model || '', latencyMs: Date.now() - startedAt, usage: result?.usage || null, attempts: result?.attempts || [] });
         return res.status(422).json({
           error: 'grounding_validation_failed',

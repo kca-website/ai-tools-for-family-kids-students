@@ -88,6 +88,122 @@ function buildCatalogBook(subject) {
 
 
 const BOOKS = {
+  "fysiki-a-gymnasiou": {
+    title: "Η Φυσική με Πειράματα Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2314/Fysiki_A-Gymnasiou_html-empl/",
+    mode: "phase14PhysicsA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "geografia-a-gymnasiou": {
+    title: "Γεωλογία – Γεωγραφία Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2286/Geografia_A-Gymnasiou_html-empl/",
+    mode: "phase14GeographyA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "environment-a-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Α΄ Δημοτικού",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2007/Meleti-Perivallontos_A-Dimotikou_html-apli/",
+    mode: "phase14EnvironmentA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
+  "environment-b-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Β΄ Δημοτικού",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2352/Meleti-Perivallontos_B-Dimotikou_html-apli/",
+    mode: "phase14EnvironmentB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
+  "environment-c-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Γ΄ Δημοτικού",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2260/Meleti-Perivallontos_G-Dimotikou_html-empl/",
+    mode: "phase14EnvironmentC",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
+  "environment-d-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Δ΄ Δημοτικού",
+    grade: "d",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2280/Meleti-Perivallontos_D-Dimotikou_html-empl/",
+    mode: "phase14EnvironmentD",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
+  "pliroforiki-a-gymnasiou": {
+    title: "Πληροφορική Α΄, Β΄, Γ΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2759/Pliroforiki_A-B-G-Gymnasiou_html-empl/",
+    mode: "phase14InformaticsA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "pliroforiki-b-gymnasiou": {
+    title: "Πληροφορική Α΄, Β΄, Γ΄ Γυμνασίου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2759/Pliroforiki_A-B-G-Gymnasiou_html-empl/",
+    mode: "phase14InformaticsB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "pliroforiki-c-gymnasiou": {
+    title: "Πληροφορική Α΄, Β΄, Γ΄ Γυμνασίου",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2759/Pliroforiki_A-B-G-Gymnasiou_html-empl/",
+    mode: "phase14InformaticsC",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "technologia-a-gymnasiou": {
+    title: "Τεχνολογία Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2248/Technologia_A-Gymnasiou_html-empl/",
+    mode: "phase14TechnologyA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
   "fysiki-agogi-a-gymnasiou": {
     title: "Φυσική Αγωγή Α΄ Γυμνασίου",
     grade: "a",
@@ -1544,6 +1660,140 @@ function clean(value, max) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "environment-a-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Βασικές ανάγκες ζωντανών οργανισμών"), ["index7_2.html"]],
+      [normalize("Κανόνες στο σχολείο και στην ομάδα"), ["index1_1.html"]],
+      [normalize("Παρατήρηση με τις αισθήσεις"), ["index4_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "environment-b-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Τι χρειάζεται ένα φυτό"), ["index_7.html"]],
+      [normalize("Ζώα και τόπος ζωής"), ["index_6.html"]],
+      [normalize("Υπηρεσίες της κοινότητας"), ["index_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "environment-c-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Συνεργασία και κανόνες"), ["index1_1.html", "index1_2.html"]],
+      [normalize("Φυσικά χαρακτηριστικά και ανθρώπινα έργα"), ["index2_3.html"]],
+      [normalize("Τροφή και ενέργεια"), ["index5_1.html", "index5_2.html"]],
+      [normalize("Φροντίδα του περιβάλλοντος"), ["index2_4.html"]],
+      [normalize("Χάρτης και προσανατολισμός"), ["index2_5.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "environment-d-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Οικοσύστημα"), ["index3_1.html", "index3_2.html"]],
+      [normalize("Σχέσεις τροφής στο οικοσύστημα"), ["index3_2.html"]],
+      [normalize("Φυσικά χαρακτηριστικά του τόπου"), ["index1_5.html"]],
+      [normalize("Έργα και ανάγκες της κοινότητας"), ["index1_8.html", "index1_9.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "pliroforiki-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Διαδίκτυο, Ιστορία του Διαδικτύου, Υπηρεσίες Διαδικτύου"), ["indexA_4_1.html"]],
+      [normalize("Βασικές Έννοιες Πληροφορικής"), ["indexA_1_1.html"]],
+      [normalize("Το Υλικό του Υπολογιστή"), ["indexA_1_2.html"]],
+      [normalize("Επεξεργασία Κειμένου – Μορφοποίηση Γραμματοσειράς και Παραγράφου"), ["indexA_3_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "pliroforiki-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Ψηφιακός Κόσμος"), ["indexB_1_1.html"]],
+      [normalize("Το Εσωτερικό του Υπολογιστή"), ["indexB_1_2.html"]],
+      [normalize("Δίκτυα Υπολογιστών"), ["indexB_1_4.html"]],
+      [normalize("Χρήση συναρτήσεων στο λογισμικό Υπολογιστικά Φύλλα"), ["indexB_3_8.html"]],
+      [normalize("Παρουσιάσεις – Διαχείριση Διαφανειών, Εναλλαγή Διαφανειών, Κινήσεις"), ["indexB_3_9.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "pliroforiki-c-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Πρόβλημα – Αλγόριθμος"), ["indexG_1_1.html"]],
+      [normalize("Αριθμητικές Πράξεις, Εντολές Εξόδου"), ["indexG_1_2.html"]],
+      [normalize("Εντολές Εξόδου, Μεταβλητές"), ["indexG_1_2.html"]],
+      [normalize("Σχεδιασμός γεωμετρικών σχημάτων – Επανάληψη – Διαδικασίες"), ["indexG_1_2.html"]],
+      [normalize("Επιλέγοντας"), ["indexG_1_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "technologia-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Τεχνολογικό περιβάλλον και τεχνολογικοί άξονες"), ["index1.html", "index3.html"]],
+      [normalize("Επιλογή και μελέτη τεχνολογικού αντικειμένου"), ["index3.html"]],
+      [normalize("Ατομική εργασία: σχεδιασμός και κατασκευή"), ["index2.html", "index4.html"]],
+      [normalize("Τεχνικό σχέδιο, υλικά και εργαλεία"), ["index4.html", "index7.html"]],
+      [normalize("Παρουσίαση και αξιολόγηση της κατασκευής"), ["index5.html", "index6.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "fysiki-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Μετρήσεις μήκους και μέση τιμή"), "index1.html"],
+      [normalize("Μετρήσεις χρόνου και ακρίβεια"), "index2.html"],
+      [normalize("Μετρήσεις μάζας και διαγράμματα"), "index3.html"],
+      [normalize("Θερμοκρασία και βαθμονόμηση"), "index4.html"],
+      [normalize("Θερμότητα, θερμοκρασία και θερμική ισορροπία"), "index5.html"],
+      [normalize("Ηλεκτρικό βραχυκύκλωμα και ασφάλεια"), "index10.html"],
+      [normalize("Από τον ηλεκτρισμό στον μαγνητισμό"), "index11.html"],
+      [normalize("Από τον μαγνητισμό στον ηλεκτρισμό"), "index12.html"]
+    ]);
+    const path = exact.get(t);
+    return path ? [new URL(path, base).toString()] : [];
+  }
+
+  if (subject === "geografia-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Χάρτες: είδη, υπόμνημα και κλίμακα"), ["matA1_3.html", "matA1_4.html", "matA1_5.html"]],
+      [normalize("Γεωγραφικές συντεταγμένες και προσανατολισμός"), ["matA1_1.html", "matA1_2.html", "matA1_3.html"]],
+      [normalize("Η Γη στο ηλιακό σύστημα"), ["matB1_1.html"]],
+      [normalize("Λιθόσφαιρα: ανάγλυφο και τεκτονικές πλάκες"), ["matB4_2.html", "matB4_3.html", "matB4_4.html"]],
+      [normalize("Υδρόσφαιρα: ωκεανοί, θάλασσες και ποτάμια"), ["matB3_1.html", "matB3_2.html", "matB3_4.html"]],
+      [normalize("Ατμόσφαιρα, καιρός και κλίμα"), ["matB2_1.html", "matB2_2.html"]],
+      [normalize("Βιόσφαιρα και φυσικά οικοσυστήματα"), ["matB5_1.html"]],
+      [normalize("Ανθρωπογενές περιβάλλον: πληθυσμός και οικισμοί"), ["matC1_1.html", "matC1_2.html", "matC1_4.html", "matC1_5.html"]],
+      [normalize("Ήπειροι: συνθετική εργασία (προαιρετική εμβάθυνση)"), [
+        "matD1_0.html", "matD2_0.html", "matD3_0.html", "matD4_0.html",
+        "matD5_0.html", "matD6_0.html", "matD7_0.html"
+      ]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
 
   if (subject === "istoria-st-dimotikou") {
     const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/";

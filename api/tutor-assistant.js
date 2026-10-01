@@ -427,24 +427,12 @@ function groundingSignals(text, sourceText, trustedContext = '') {
     'Question','Answer','Remember','Think','Example','Examples','Step','Plan'
   ].map(normalizeGroundingText));
 
-  // Proper-name-like tokens are the highest-value deterministic hallucination signal.
-  // Sentence-initial teaching words are excluded through a small allow-list; ordinary
-  // lowercase vocabulary is intentionally not checked to avoid false positives.
-  const properPattern = /(?<![\p{L}\p{N}_])(?:[Α-ΩΆΈΉΊΌΎΏΪΫ][α-ωάέήίόύώϊϋΐΰ]{3,}|[A-Z][a-z]{3,})(?![\p{L}\p{N}_])/gu;
-  for (const match of answer.matchAll(properPattern)) {
-    const token = match[0];
-    const prefix = answer.slice(0, match.index).trimEnd();
-    const linePrefix = prefix.split(/\r?\n/).pop() || "";
-    const structuralLineStart = /^\s*(?:(?:#{1,6}|[-*•>]|\d+[.)])\s*)?(?:\*\*|__)?\s*$/.test(linePrefix);
-    const sentenceInitial = !prefix || /[.!?;:]$/.test(prefix) || structuralLineStart;
-    if (sentenceInitial) continue; // sentence/list/markdown-heading capitalization is not evidence of a named entity.
-    const n = normalizeGroundingText(token);
-    if (!n || common.has(n) || seen.has('term:'+n)) continue;
-    if (!sourceSupportsGroundingTerm(source, token)) {
-      seen.add('term:'+n);
-      signals.push({ type: 'unsupported_term', value: token });
-    }
-  }
+  // Single capitalized-word checks were intentionally removed here. In Greek,
+  // inflection, headings, imperatives and ordinary sentence starts created many
+  // false positives (for example «Διάβασε», «Καλημέρα», «Ποιοι»), causing a
+  // valid source-grounded answer to be discarded. Factual numbers remain a
+  // deterministic high-value check; source use is additionally constrained by
+  // the mandatory prompt policy and server-side official-source resolution.
 
   // Numbers can materially change dates, quantities and scientific facts.
   const numberPattern = /(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)?(?![\p{L}\p{N}_])/gu;

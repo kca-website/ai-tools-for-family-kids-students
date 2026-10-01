@@ -242,6 +242,226 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       composite: true,
     },
   };
+  Object.assign(CHARACTER_CATALOG, {
+  "solon": {
+    "id": "solon",
+    "nameEl": "Σόλων",
+    "nameEn": "Solon",
+    "periodEl": "Αθήνα · αρχαϊκοί χρόνοι",
+    "periodEn": "Archaic Athens",
+    "roleEl": "Αθηναίος νομοθέτης",
+    "roleEn": "Athenian lawgiver",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "σόλων",
+      "solon",
+      "πορεία προς τη δημοκρατία"
+    ]
+  },
+  "themistocles": {
+    "id": "themistocles",
+    "nameEl": "Θεμιστοκλής",
+    "nameEn": "Themistocles",
+    "periodEl": "Αθήνα · 5ος αιώνας π.Χ.",
+    "periodEn": "Athens · 5th century BC",
+    "roleEl": "Αθηναίος στρατηγός",
+    "roleEn": "Athenian general",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "θεμιστοκλής",
+      "themistocles",
+      "σαλαμίνα",
+      "salamis"
+    ]
+  },
+  "leonidas": {
+    "id": "leonidas",
+    "nameEl": "Λεωνίδας",
+    "nameEn": "Leonidas",
+    "periodEl": "Σπάρτη · 5ος αιώνας π.Χ.",
+    "periodEn": "Sparta · 5th century BC",
+    "roleEl": "Βασιλιάς της Σπάρτης",
+    "roleEn": "King of Sparta",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "λεωνίδας",
+      "leonidas",
+      "θερμοπύλες",
+      "thermopylae"
+    ]
+  },
+  "philip": {
+    "id": "philip",
+    "nameEl": "Φίλιππος Β΄",
+    "nameEn": "Philip II",
+    "periodEl": "Μακεδονία · 4ος αιώνας π.Χ.",
+    "periodEn": "Macedon · 4th century BC",
+    "roleEl": "Βασιλιάς της Μακεδονίας",
+    "roleEn": "King of Macedon",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "φίλιππος",
+      "philip",
+      "μακεδονία",
+      "macedonia"
+    ]
+  },
+  "constantine": {
+    "id": "constantine",
+    "nameEl": "Μέγας Κωνσταντίνος",
+    "nameEn": "Constantine the Great",
+    "periodEl": "Ρωμαϊκή Αυτοκρατορία · 4ος αιώνας μ.Χ.",
+    "periodEn": "Roman Empire · 4th century AD",
+    "roleEl": "Ρωμαίος αυτοκράτορας",
+    "roleEn": "Roman emperor",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "μέγας κωνσταντίνος",
+      "constantine the great",
+      "νέα πρωτεύουσα",
+      "new capital"
+    ]
+  },
+  "justinian": {
+    "id": "justinian",
+    "nameEl": "Ιουστινιανός",
+    "nameEn": "Justinian",
+    "periodEl": "Βυζάντιο · 6ος αιώνας μ.Χ.",
+    "periodEn": "Byzantium · 6th century AD",
+    "roleEl": "Βυζαντινός αυτοκράτορας",
+    "roleEn": "Byzantine emperor",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "ιουστινιαν",
+      "justinian",
+      "αγία σοφία",
+      "hagia sophia",
+      "στάση του νίκα",
+      "nika revolt"
+    ]
+  },
+  "heraclius": {
+    "id": "heraclius",
+    "nameEl": "Ηράκλειος",
+    "nameEn": "Heraclius",
+    "periodEl": "Βυζάντιο · 7ος αιώνας μ.Χ.",
+    "periodEn": "Byzantium · 7th century AD",
+    "roleEl": "Βυζαντινός αυτοκράτορας",
+    "roleEn": "Byzantine emperor",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "ηράκλει",
+      "heraclius"
+    ]
+  },
+  "annaKomnene": {
+    "id": "annaKomnene",
+    "nameEl": "Άννα Κομνηνή",
+    "nameEn": "Anna Komnene",
+    "periodEl": "Βυζάντιο · 11ος–12ος αιώνας",
+    "periodEn": "Byzantium · 11th–12th century",
+    "roleEl": "Βυζαντινή συγγραφέας",
+    "roleEn": "Byzantine writer",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "κομνην",
+      "komnen",
+      "comnen",
+      "άννα κομνηνή"
+    ]
+  },
+  "kolokotronis": {
+    "id": "kolokotronis",
+    "nameEl": "Θεόδωρος Κολοκοτρώνης",
+    "nameEn": "Theodoros Kolokotronis",
+    "periodEl": "Ελληνική Επανάσταση · 1821",
+    "periodEn": "Greek Revolution · 1821",
+    "roleEl": "Αγωνιστής της Ελληνικής Επανάστασης",
+    "roleEn": "Greek revolutionary",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "κολοκοτρών",
+      "kolokotron",
+      "τριπολιτσ",
+      "tripolitsa",
+      "δερβενάκ",
+      "dervenakia"
+    ]
+  },
+  "bouboulina": {
+    "id": "bouboulina",
+    "nameEl": "Λασκαρίνα Μπουμπουλίνα",
+    "nameEn": "Laskarina Bouboulina",
+    "periodEl": "Ελληνική Επανάσταση · 1821",
+    "periodEn": "Greek Revolution · 1821",
+    "roleEl": "Αγωνίστρια στον ναυτικό αγώνα",
+    "roleEn": "Participant in the naval struggle",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "μπουμπουλίν",
+      "bouboulina",
+      "αγώνας στη θάλασσα",
+      "naval struggle"
+    ]
+  },
+  "kapodistrias": {
+    "id": "kapodistrias",
+    "nameEl": "Ιωάννης Καποδίστριας",
+    "nameEn": "Ioannis Kapodistrias",
+    "periodEl": "Ελληνικό κράτος · 1828–1831",
+    "periodEn": "Greek state · 1828–1831",
+    "roleEl": "Κυβερνήτης της Ελλάδας",
+    "roleEn": "Governor of Greece",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "καποδίστρ",
+      "kapodistr",
+      "οργάνωση του κράτους",
+      "organisation of the state"
+    ]
+  },
+  "riga": {
+    "id": "riga",
+    "nameEl": "Ρήγας Βελεστινλής",
+    "nameEn": "Rigas Velestinlis",
+    "periodEl": "Τέλη 18ου αιώνα",
+    "periodEn": "Late 18th century",
+    "roleEl": "Στοχαστής και επαναστάτης",
+    "roleEn": "Thinker and revolutionary",
+    "introEl": "Συζήτησε για τη συγκεκριμένη ενότητα του βιβλίου μέσα από αυτόν τον εκπαιδευτικό ρόλο, χωρίς επινοημένα λόγια ή προσωπικές μαρτυρίες.",
+    "introEn": "Explore the selected textbook section through this educational role, without invented quotations or personal testimony.",
+    "topicIds": [],
+    "topicPatterns": [
+      "ρήγας",
+      "rigas",
+      "νεοελληνικός διαφωτισμός",
+      "greek enlightenment"
+    ]
+  }
+});
+  let selectedCharacterId = "";
   let learningMode = "understand";
   let studyAction = "";
 
@@ -1030,28 +1250,37 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     updateComposerState();
   }
 
-  function resolveCharacterForCurrentTopic() {
+  function resolveCharactersForCurrentTopic() {
     const gap = getCurrentGap();
     const subject = getCurrentSubject();
-    if (!gap) return null;
+    if (!gap) return [];
 
     const subjectText = `${subject?.id || ""} ${subject?.subjectLabelEl || ""} ${subject?.subjectLabelEn || ""}`.toLowerCase();
-    const topicText = `${gap.id || ""} ${gap.labelEl || ""} ${gap.labelEn || ""}`.toLowerCase();
+    const topicText = normalizeCharacterText(`${gap.id || ""} ${gap.labelEl || ""} ${gap.labelEn || ""}`);
 
     // Character dialogue is only for historical/literary content, never just because a topic
     // happens to sit inside a broad language/history selector.
-    const eligibleSubject = /ιστορ|history|λογοτεχν|literature/.test(subjectText);
-    if (!eligibleSubject) return null;
+    const eligibleSubject = /ιστορ|istoria|history|λογοτεχν|literature/.test(subjectText);
+    if (!eligibleSubject) return [];
 
     // Method/history-skills topics are intentionally NOT role-played.
-    if (/χρονογραμμ|διαδοχ.*γεγον|όρια.*τεκμηρ|ιστορικ.*τεκμηρ|ιστορικ.*πηγ|timeline|chronolog|historical source|source limits/.test(topicText)) {
-      return null;
+    if (/χρονογραμμ|διαδοχ.*γεγον|ορια.*τεκμηρ|ιστορικ.*τεκμηρ|ιστορικ.*πηγ|timeline|chronolog|historical source|source limits/.test(topicText)) {
+      return [];
     }
 
-    return Object.values(CHARACTER_CATALOG).find((character) => {
+    return Object.values(CHARACTER_CATALOG).filter((character) => {
       if ((character.topicIds || []).includes(gap.id)) return true;
-      return (character.topicPatterns || []).some((pattern) => topicText.includes(String(pattern).toLowerCase()));
-    }) || null;
+      return (character.topicPatterns || []).some((pattern) => topicText.includes(normalizeCharacterText(pattern)));
+    });
+  }
+
+  function normalizeCharacterText(value) {
+    return String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ς/g, "σ");
+  }
+
+  function resolveCharacterForCurrentTopic() {
+    const choices = resolveCharactersForCurrentTopic();
+    return choices.find((character) => character.id === selectedCharacterId) || choices[0] || null;
   }
 
   function renderCharacterCard() {
@@ -1062,6 +1291,8 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       refs.characterCard.innerHTML = "";
       return;
     }
+    const choices = resolveCharactersForCurrentTopic();
+    const pickerHtml = choices.length > 1 ? `<label>${ctx.lang === "en" ? "Choose a character for this section" : "Διάλεξε χαρακτήρα για την ενότητα"}<select id="tutorCharacterSelect" style="display:block;width:100%;max-width:100%;padding:10px;margin:8px 0" ${busy ? "disabled" : ""}>${choices.map((item) => `<option value="${escapeHtml(item.id)}" ${item.id === character.id ? "selected" : ""}>${escapeHtml(ctx.lang === "en" ? item.nameEn : item.nameEl)}</option>`).join("")}</select></label>` : "";
     const name = ctx.lang === "en" ? character.nameEn : character.nameEl;
     const period = ctx.lang === "en" ? character.periodEn : character.periodEl;
     const role = ctx.lang === "en" ? character.roleEn : character.roleEl;
@@ -1081,6 +1312,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       ${portraitHtml}
       <div class="tutor-character-card__body">
         <span class="tutor-character-card__badge">${escapeHtml(tr("characterCardBadge"))}</span>
+        ${pickerHtml}
         <h3>${escapeHtml(name)}</h3>
         <p class="tutor-character-card__meta">${escapeHtml(period)} · ${escapeHtml(role)}</p>
         <p class="tutor-character-card__intro">${escapeHtml(intro)}</p>
@@ -1138,7 +1370,10 @@ ${compositeRule}
 - TEMPORAL INTEGRITY: a real historical figure must never speak as if they personally witnessed, ordered or participated in events outside their lifetime. If the learner attributes such an event to the character, correct the chronology first.
 ${character?.id === "pericles" ? "- PERICLES GUARD: Pericles died in 429 BCE. The Athenian attack and destruction of Melos occurred in 416 BCE, years after his death. Never answer in first person as if Pericles took part in the Melian episode, and never confuse Melos with Mytilene." : ""}
 - Clearly say when something is uncertain or cannot be known.
-- Stay grounded in the selected curriculum/topic and reliable established facts.
+- SOURCE FIRST: historical claims must be supported by the supplied textbook section or uploaded material. Do not fill source gaps from model memory.
+- Character period: ${character?.periodEn || "selected historical period"}. If an event falls outside this period, leave role briefly and explain the chronology without claiming participation.
+- Use short, age-appropriate replies (2–4 sentences), followed by ONE question tied to the selected section.
+- After ${conversation.filter((message) => message.role === "assistant").length} completed replies in this session, keep track of the four-exchange learning check.
 - Ask the learner questions too; do not monologue.
 - After about 4 exchanges, step OUT of character and ask the learner to state 2 things learned and 1 claim to verify in the textbook/source.
 - Do not imitate a living person or present role-play as authentic testimony.`;
@@ -2252,6 +2487,8 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
 
   function setBusy(value) {
     busy = value;
+    const characterSelect = refs.characterCard?.querySelector("select");
+    if (characterSelect) characterSelect.disabled = value;
     refs.busy.textContent = value ? tr("thinking") : "";
     updateComposerState();
   }
@@ -2511,7 +2748,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       const sharedStudyContext = getSharedStudyContext();
       if (
         !attachedDocument?.text &&
-        sharedStudyContext?.sourcePolicy === "official_required" &&
+        (sharedStudyContext?.sourcePolicy === "official_required" || learningMode === "character") &&
         !groundedSource?.text
       ) {
         const sourceError = new Error(ctx?.lang === "en"
@@ -2587,6 +2824,14 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       conversation.push({ role: "assistant", content: answer });
       emitConversationUpdated();
       const answerBubble = addBubble("assistant", answer);
+      if (learningMode === "character" && groundedSource?.sourceUrl && answerBubble) {
+        const sourceLink = document.createElement("a");
+        sourceLink.href = groundedSource.sourceUrl;
+        sourceLink.target = "_blank";
+        sourceLink.rel = "noopener noreferrer";
+        sourceLink.textContent = `${ctx.lang === "en" ? "Textbook" : "Σχολικό βιβλίο"}: ${groundedSource.bookTitle || ""} · ${groundedSource.section || langValue(getCurrentGap(), "labelEl", "labelEn", "")}`;
+        answerBubble.appendChild(sourceLink);
+      }
       attachEffectivenessOffer(answerBubble);
       if (refs.autoSpeak?.checked) {
         const speakButton = answerBubble?.querySelector(".tutor-speak-btn");
@@ -2708,6 +2953,14 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
         renderLearningModePicker();
         renderContext();
       });
+    });
+    refs.characterCard?.addEventListener("change", (event) => {
+      if (event.target.id !== "tutorCharacterSelect" || busy) return;
+      if (!resolveCharactersForCurrentTopic().some((item) => item.id === event.target.value)) return;
+      selectedCharacterId = event.target.value;
+      resetConversation();
+      renderCharacterCard();
+      renderModeBox();
     });
     refs.newChat.addEventListener("click", () => resetConversation());
     refs.form?.querySelectorAll("[data-quick-action]").forEach((btn)=>btn.addEventListener("click",()=>applyQuickAction(btn.dataset.quickAction)));

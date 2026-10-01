@@ -1,0 +1,52 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const source = fs.readFileSync(require('node:path').join(__dirname, '../tutor.js'), 'utf8');
+const catalog = source.slice(source.indexOf('  const CHARACTER_CATALOG'), source.indexOf('  let learningMode'));
+const resolver = source.slice(source.indexOf('  function resolveCharactersForCurrentTopic'), source.indexOf('  function renderCharacterCard'));
+let gap = { id: '', labelEl: '' };
+let subject = { id: 'istoria-e-dimotikou' };
+const sandbox = { getCurrentGap: () => gap, getCurrentSubject: () => subject };
+vm.createContext(sandbox);
+vm.runInContext(catalog + resolver + '\nthis.lookup = resolveCharactersForCurrentTopic; this.selected = resolveCharacterForCurrentTopic; this.select = id => selectedCharacterId = id; this.count = Object.keys(CHARACTER_CATALOG).length;', sandbox);
+assert.equal(sandbox.count, 22);
+const ids = () => Array.from(sandbox.lookup(), item => item.id);
+gap.labelEl = 'Ο Ιουστινιανός μεταρρυθμίζει τη διοίκηση';
+assert.ok(ids().includes('justinian'));
+gap.labelEl = 'Η ΑΓΙΑ ΣΟΦΙΑ';
+assert.ok(ids().includes('justinian'));
+gap.labelEl = 'Πορεία προς τη δημοκρατία';
+assert.deepEqual(ids(), ['athenianCitizen', 'solon']);
+sandbox.select('solon');
+assert.equal(sandbox.selected().id, 'solon');
+gap.labelEl = 'Η Άλωση της Κωνσταντινούπολης το 1453';
+assert.equal(sandbox.selected().id, 'constantinopleResident1453');
+assert.ok(!ids().includes('justinian'));
+gap.labelEl = 'Ιστορικές πηγές και όρια τεκμηρίωσης';
+assert.equal(ids().length, 0);
+subject = { id: 'math' };
+gap.labelEl = 'Σόλων';
+assert.equal(ids().length, 0);
+subject = { id: 'history' };
+gap.labelEl = 'The naval struggle: Bouboulina';
+assert.ok(ids().includes('bouboulina'));
+console.log('History character mapping, selection and chronology-scope tests passed');
+const serverCode = fs.readFileSync(require('node:path').join(__dirname, '../api/tutor-assistant.js'), 'utf8');
+const server = { module: { exports: {} }, URL, console, require: (id) => {
+  if (id === '../ai-provider-router') return { getAiStatus: () => ({ configured: true }) };
+  if (id === '../study-runtime-cache') return {};
+  if (id === './schoolbook-source') return {};
+  throw new Error('Unexpected dependency: ' + id);
+}};
+vm.createContext(server);
+vm.runInContext(serverCode, server);
+(async () => {
+  for (const documentKind of ['', 'user_upload']) {
+    let result;
+    const res = { status(code) { this.code = code; return this; }, json(body) { result = { code: this.code, body }; return result; } };
+    await server.module.exports({ method: 'POST', headers: {}, body: { prompt: 'Μίλησέ μου ως Ιουστινιανός', audience: 'parent', mode: 'character', documentKind } }, res);
+    assert.equal(result.code, 422);
+    assert.equal(result.body.error, 'official_source_required');
+  }
+  console.log('Server rejects character dialogue without source, including empty uploads');
+})().catch(error => { console.error(error); process.exitCode = 1; });

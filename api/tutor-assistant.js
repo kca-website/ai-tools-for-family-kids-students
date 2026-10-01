@@ -75,7 +75,7 @@ module.exports = async function handler(req, res) {
   const requestedSourcePolicy = studyContext && typeof studyContext === 'object'
     ? String(studyContext.sourcePolicy || '')
     : '';
-  const officialSourceRequired = requestedSourcePolicy === 'official_required';
+  const officialSourceRequired = requestedSourcePolicy === 'official_required' || (mode === 'character' && !(documentKind === 'user_upload' && String(documentText || '').trim()));
 
   if (officialSourceRequired && documentKind !== 'official_schoolbook') {
     return res.status(422).json({
@@ -126,7 +126,11 @@ module.exports = async function handler(req, res) {
   ].filter(Boolean).join(' | ');
 
   const roleRule = mode === 'character'
-    ? `- CHARACTER MODE OVERRIDE: speak as the supplied mapped character/role directly in the dialogue. The parent route means adult supervision only; do NOT switch to parent-coaching language and do NOT say “ask/tell the child”. Character: ${character || 'mapped educational role'}.`
+    ? `- CHARACTER MODE OVERRIDE: speak as the supplied mapped character/role directly in the dialogue. The parent route means adult supervision only; do NOT switch to parent-coaching language and do NOT say “ask/tell the child”. Character: ${String(character || 'mapped educational role').slice(0, 120)}.
+- Character dialogue is an AI educational representation, never an authentic quotation or eyewitness testimony.
+- Base every historical claim on the supplied verified section or uploaded material. State explicitly when it does not support the requested detail.
+- Never invent quotations, biographies, dates or participation. Correct anachronisms before continuing; a historical figure cannot personally witness events outside their lifetime.
+- Answer in 2–4 age-appropriate sentences and ask one source-related question. After four exchanges, leave role for a short check: two things learned and one claim to verify in the source.`
     : (audience === 'parent'
       ? '- Parent mode speaks to the parent and gives one coaching step/question at a time.'
       : (audience === 'study_user'

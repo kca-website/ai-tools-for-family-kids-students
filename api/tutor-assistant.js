@@ -185,6 +185,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
     { role: 'user', content: userContent },
   ];
   const routingProfile = chooseRoutingProfile({ task, mode, activity });
+  const trustedGroundingContext = [selectedContext, taskRule].filter(Boolean).join('\n');
   const startedAt = Date.now();
   const cacheParts = cacheEligible === true && officialSchoolbook
     ? {
@@ -230,7 +231,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
     }
 
     if (result?.ok && officialSchoolbook) {
-      const firstSignals = groundingSignals(result.text, modelDocumentText);
+      const firstSignals = groundingSignals(result.text, modelDocumentText, trustedGroundingContext);
       if (firstSignals.length) {
         const retry = await generateChat({
           messages: groundingRepairMessages(messages, firstSignals),
@@ -240,7 +241,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
           modelProfile: 'quality',
         });
         if (retry?.ok && (!needsStructuredValidation({ task, activity }) || validStructuredResult({ task, activity, text: retry.text }))) {
-          const retrySignals = groundingSignals(retry.text, modelDocumentText);
+          const retrySignals = groundingSignals(retry.text, modelDocumentText, trustedGroundingContext);
           if (!retrySignals.length) {
             result = { ...retry, groundingRetry: true, groundingSignals: firstSignals };
           } else {
@@ -369,9 +370,29 @@ function normalizeGroundingText(value) {
     .trim();
 }
 
-function groundingSignals(text, sourceText) {
+function isStructuralGroundingNumber(answer, matchIndex, token) {
+  const numeric = Number(String(token || '').replace(',', '.'));
+  if (!Number.isFinite(numeric) || numeric > 20) return false;
+
+  const beforeRaw = String(answer || '').slice(Math.max(0, matchIndex - 80), matchIndex);
+  const afterRaw = String(answer || '').slice(matchIndex + String(token || '').length, matchIndex + String(token || '').length + 80);
+  const lineBefore = beforeRaw.split(/\r?\n/).pop() || '';
+
+  // Numbered list / heading markers such as "1.", "2)" or "3:" are presentation,
+  // not factual claims that need to occur in the textbook.
+  if (/^\s*$/.test(lineBefore) && /^\s*(?:[.)\]:]|[-–—])(?:\s|$)/.test(afterRaw)) return true;
+
+  // Small task-owned counts such as "3 questions", "5 minutes", "7 points",
+  // flashcards, steps, examples etc. are output structure rather than school facts.
+  const nearby = normalizeGroundingText(
+    beforeRaw.slice(-55) + ' ' + String(token || '') + ' ' + afterRaw.slice(0, 55)
+  );
+  return /(?:ερωτησ|απαντησ|καρτ|βημα|σημει|λεπτ|παραδειγμα|question|answer|card|step|point|minute|item|example)/.test(nearby);
+}
+
+function groundingSignals(text, sourceText, trustedContext = '') {
   const answer = String(text || '');
-  const source = normalizeGroundingText(sourceText);
+  const source = normalizeGroundingText([sourceText, trustedContext].filter(Boolean).join('\n'));
   if (!answer.trim() || !source) return [];
 
   const signals = [];
@@ -408,7 +429,7 @@ function groundingSignals(text, sourceText) {
     const nearby = normalizeGroundingText(answer.slice(Math.max(0, match.index - 28), match.index));
     const taskCounter = /(?:ερωτηση|απαντηση|καρτα|βημα|κανε|question|answer|card|step)\s*$/.test(nearby) ||
       /(?:απο|of)\s*$/.test(nearby) && Number(n) <= 20;
-    if (taskCounter) continue;
+    if (taskCounter || isStructuralGroundingNumber(answer, match.index, token)) continue;
     if (seen.has('number:'+n)) continue;
     const variants = [token, token.replace('.', ','), token.replace(',', '.')];
     if (!variants.some(v => source.includes(normalizeGroundingText(v)))) {
@@ -513,4 +534,4 @@ function sanitize(text) {
 }
 
 
-module.exports._phase8Test = { normalizeGroundingText, groundingSignals, groundingRepairMessages };
+module.exports._phase8Test = { normalizeGroundingText, isStructuralGroundingNumber, groundingSignals, groundingRepairMessages };

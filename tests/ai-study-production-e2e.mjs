@@ -22,6 +22,32 @@ assert.equal(source.res.status, 200, "official source endpoint must return 200")
 assert.equal(source.body?.grounded, true, "official source must be grounded");
 assert.ok(String(source.body?.text || "").length > 1000, "official source text must be substantial");
 
+
+const coverageCases = [
+  { label:"Δημοτικό · Φυσικά", subjectId:"science-st-dimotikou", topic:"Αναπνευστικό σύστημα" },
+  { label:"Γυμνάσιο · Ιστορία", subjectId:"istoria-b-gymnasiou", topic:"Κεφάλαιο 1 · Ι · 1 — Από τη Ρώμη στη Νέα Ρώμη" },
+  { label:"Γυμνάσιο · Μαθηματικά", subjectId:"mathimatika-a-gymnasiou", topic:"Κλάσματα" },
+  { label:"Γυμνάσιο · Φυσικές επιστήμες", subjectId:"fysiki-b-gymnasiou", topic:"Δυνάμεις" },
+  { label:"ΓΕΛ · Ιστορία", subjectId:"istoria-a-lykeiou", topic:"Οι πολιτισμοί της Εγγύς Ανατολής" }
+];
+
+const sourceCoverage = [];
+for (const row of coverageCases) {
+  const check = await getJson(
+    BASE + "/api/schoolbook-source?subject=" + encodeURIComponent(row.subjectId) + "&topic=" + encodeURIComponent(row.topic),
+    { headers: { "Accept": "application/json", "Cache-Control": "no-cache" } }
+  );
+  sourceCoverage.push({
+    label: row.label,
+    subjectId: row.subjectId,
+    status: check.res.status,
+    grounded: check.body?.grounded === true,
+    chars: String(check.body?.text || "").length,
+    error: check.body?.error || ""
+  });
+}
+console.table(sourceCoverage);
+
 const cases = [
   { action:"audio", task:"guided_task", mode:"understand", prompt:"Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης." },
   { action:"flashcards", task:"flashcards", mode:"review", prompt:"Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης." },

@@ -294,7 +294,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
 function serverTaskRule({ task, mode, activity }) {
   const action = String(activity || '').trim().toLowerCase();
   const rules = {
-    plan: '- Return a concrete study plan for the selected topic. Organize the learner’s own task into 3–5 actionable steps. Do not solve the school task.',
+    plan: '- Return ONLY valid JSON using shape {"title":"...","focus":"...","steps":[{"title":"...","minutes":5,"action":"..."}],"final_check":"..."}. Include 3–5 actionable steps for the selected topic. Do not solve the school task.',
     flashcards: '- Return only valid JSON with exactly 8 active-recall cards using shape {"cards":[{"q":"...","a":"..."}]}. Ground every card in the selected topic/source.',
     quiz: '- Run or generate only the requested quiz format. Never reveal an answer before an attempt when the flow is interactive.',
     truefalse: '- Run a True/False concept check one statement at a time and wait for the learner before feedback.',
@@ -390,6 +390,24 @@ function isStructuralGroundingNumber(answer, matchIndex, token) {
   return /(?:ερωτησ|απαντησ|καρτ|βημα|σημει|λεπτ|παραδειγμα|question|answer|card|step|point|minute|item|example)/.test(nearby);
 }
 
+function sourceSupportsGroundingTerm(source, token) {
+  const n = normalizeGroundingText(token);
+  if (!n) return true;
+  if (source.includes(n)) return true;
+
+  // Greek and other inflected languages frequently change only the ending of
+  // a valid textbook term/name (e.g. Κωνσταντίνος → Κωνσταντίνου). The
+  // validator is a hallucination signal, not a morphology engine, so accept a
+  // long shared lexical stem while keeping short/unrelated names exact.
+  if (n.length >= 7) {
+    const stemLength = Math.min(8, Math.max(5, n.length - 3));
+    const stem = n.slice(0, stemLength);
+    const words = source.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+    if (words.some(word => word.length >= stemLength + 1 && word.startsWith(stem))) return true;
+  }
+  return false;
+}
+
 function groundingSignals(text, sourceText, trustedContext = '') {
   const answer = String(text || '');
   const source = normalizeGroundingText([sourceText, trustedContext].filter(Boolean).join('\n'));
@@ -417,7 +435,7 @@ function groundingSignals(text, sourceText, trustedContext = '') {
     if (sentenceInitial) continue; // sentence/list/markdown-heading capitalization is not evidence of a named entity.
     const n = normalizeGroundingText(token);
     if (!n || common.has(n) || seen.has('term:'+n)) continue;
-    if (!source.includes(n)) {
+    if (!sourceSupportsGroundingTerm(source, token)) {
       seen.add('term:'+n);
       signals.push({ type: 'unsupported_term', value: token });
     }
@@ -536,4 +554,4 @@ function sanitize(text) {
 }
 
 
-module.exports._phase8Test = { normalizeGroundingText, isStructuralGroundingNumber, groundingSignals, groundingRepairMessages };
+module.exports._phase8Test = { normalizeGroundingText, sourceSupportsGroundingTerm, isStructuralGroundingNumber, groundingSignals, groundingRepairMessages };

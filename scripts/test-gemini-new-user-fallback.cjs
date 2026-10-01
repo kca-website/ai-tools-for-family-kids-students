@@ -5,11 +5,13 @@ delete process.env.GROQ_API_KEY;
 delete process.env.SMART_AI_ROUTING_ENABLED;
 const {generateChat}=require('../ai-provider-router');
 const calls=[];
+let unavailable31=false;
 global.fetch=async(url,options)=>{
   assert.ok(!url.includes('test-secret'));
   calls.push(url);
   if(url.includes('gemini-2.5-flash-lite'))return Response.json({error:{status:'NOT_FOUND',message:'This model is no longer available to new users.'}},{status:404});
-  assert.ok(url.includes('gemini-3.5-flash-lite'));
+  if(unavailable31 && url.includes('gemini-3.1-flash-lite'))return Response.json({error:{status:'NOT_FOUND',message:'Unavailable'}},{status:404});
+  assert.ok(url.includes(unavailable31 ? 'gemini-3.5-flash-lite' : 'gemini-3.1-flash-lite'));
   const body=JSON.parse(options.body);
   assert.deepEqual(body.generationConfig.thinkingConfig,{thinkingLevel:'minimal'});
   assert.equal(body.generationConfig.maxOutputTokens,600);
@@ -18,7 +20,13 @@ global.fetch=async(url,options)=>{
 (async()=>{
  const result=await generateChat({messages:[{role:'user',content:'test'}],maxTokens:600});
  assert.equal(result.ok,true);
- assert.equal(result.model,'gemini-3.5-flash-lite');
+ assert.equal(result.model,'gemini-3.1-flash-lite');
  assert.equal(calls.length,2);
- console.log('New-user Gemini 404 switches automatically to supported Flash-Lite');
+ calls.length=0;
+ unavailable31=true;
+ const lastResort=await generateChat({messages:[{role:'user',content:'test'}],maxTokens:600});
+ assert.equal(lastResort.ok,true);
+ assert.equal(lastResort.model,'gemini-3.5-flash-lite');
+ assert.equal(calls.length,3);
+ console.log('Gemini prefers cheaper 3.1 after legacy 404; 3.5 remains last resort');
 })().catch(error=>{console.error(error);process.exitCode=1});

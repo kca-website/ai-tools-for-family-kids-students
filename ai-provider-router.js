@@ -10,7 +10,7 @@ const CLOUDFLARE_MODELS = new Set([
   '@cf/openai/gpt-oss-120b',
 ]);
 const GROQ_MODELS = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
-const GEMINI_MODELS = new Set(['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'gemini-3.5-flash-lite']);
+const GEMINI_MODELS = new Set(['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite']);
 const allowedModels = provider => provider === 'gemini' ? GEMINI_MODELS : (provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS);
 const ROUTING_PROFILES = new Set(['default', 'economy', 'balanced', 'quality']);
 
@@ -118,7 +118,7 @@ function modelSequenceFor(provider, profileValue) {
   const profile = normalizeProfile(profileValue);
   if (provider === 'gemini') {
     const configured = configuredProfileModels(provider, profile);
-    return [...new Set([...(configured.length ? configured : [modelFor(provider)]), 'gemini-3.5-flash-lite'])];
+    return [...new Set([...(configured.length ? configured : [modelFor(provider)]), 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite'])];
   }
   if (profile === 'default' || !smartRoutingEnabled()) return [modelFor(provider)];
   const configured = configuredProfileModels(provider, profile);

@@ -5,6 +5,7 @@ import { chromium } from "playwright";
 const BASE="http://127.0.0.1:4173";
 const apiSource=fs.readFileSync(new URL("../api/schoolbook-source.js",import.meta.url),"utf8");
 const studyContext=fs.readFileSync(new URL("../study-context.js",import.meta.url),"utf8");
+const topicsSource=fs.readFileSync(new URL("../epal-student-topics-2026-2027.js",import.meta.url),"utf8");
 
 assert.match(studyContext,/hasCurriculumSelection\) return "official_required"/);
 

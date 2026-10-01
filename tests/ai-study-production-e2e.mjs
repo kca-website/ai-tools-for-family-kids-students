@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 // Production gate: all learner-facing actions must return a usable grounded result.
 const BASE = process.env.AITOOLSKIDS_PROD_BASE || "https://www.aitools4kids.gr";
 const subjectId = "istoria-b-gymnasiou";
-const topic = "Κεφάλαιο 1 · Ι · 1 — Από τη Ρώμη στη Νέα Ρώμη";
+const topic = "Κεφάλαιο 1 · Ι · 1 — Από τη Ρώμη στη Νέα Ρώμη";\nconst sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function getJson(url, options = {}) {
   const res = await fetch(url, options);
@@ -62,7 +62,7 @@ for (const c of cases) {
     });
     if (last.res.ok) break;
     if (attempt === 0 && [429, 502, 503, 504].includes(last.res.status)) {
-      await new Promise(r => setTimeout(r, 1500));
+      await sleep(last.res.status === 429 ? 20000 : 3000);
       continue;
     }
     break;

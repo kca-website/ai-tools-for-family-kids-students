@@ -30,13 +30,14 @@ function entrySources(entry) {
 }
 
 assert.equal(overrides.schoolYear, "2026-2027");
-assert.equal(overrides.count, 127);
-assert.equal(overrides.entries.length, 127);
+assert.equal(overrides.count, 145);
+assert.equal(overrides.entries.length, 145);
 
 const keys = new Set();
 let medium = 0;
 let manual = 0;
 let multiSource = 0;
+let discovered = 0;
 
 for (const entry of overrides.entries) {
   const key = entry.subjectId + "\n" + entry.label;
@@ -71,11 +72,28 @@ for (const entry of overrides.entries) {
     manual++;
     assert.equal(entry.sourceStatus, "needs-manual-review");
     assert.equal(source.status, "needs-manual-review");
-    for (const row of sources) {
-      const candidate = (source.candidates || []).find((candidate) =>
-        candidate.url === row.url && candidate.heading === row.heading
-      );
-      assert.ok(candidate, "manual override source must come from a recorded Phase 14 candidate: " + key);
+
+    const verifiedBook = (subject.books || []).find((book) =>
+      book.role === "primary" && book.work === entry.work && book.html?.url
+    );
+    assert.ok(verifiedBook, "manual override must target a verified official HTML book: " + key);
+
+    if (entry.sourceOrigin === "manual-official-discovery") {
+      discovered++;
+      for (const row of sources) {
+        assert.equal(
+          endpoint._test.sameOfficialHtmlManifestation(row.url, verifiedBook.html.url),
+          true,
+          "discovered source must stay inside the verified book manifestation: " + key
+        );
+      }
+    } else {
+      for (const row of sources) {
+        const candidate = (source.candidates || []).find((candidate) =>
+          candidate.url === row.url && candidate.heading === row.heading
+        );
+        assert.ok(candidate, "candidate-backed override must come from a recorded Phase 14 candidate: " + key);
+      }
     }
   }
 
@@ -88,8 +106,9 @@ for (const entry of overrides.entries) {
 }
 
 assert.equal(medium, 14);
-assert.equal(manual, 113);
-assert.equal(multiSource, 4);
+assert.equal(manual, 131);
+assert.equal(discovered, 18);
+assert.equal(multiSource, 6);
 
 // Live source audit: every unique official page must still load and contain
 // every manually accepted official heading for that page.
@@ -114,7 +133,7 @@ const workers = Array.from({ length: Math.min(6, queue.length) }, async () => {
     try {
       response = await fetch(url, {
         headers: {
-          "User-Agent": "aitools4kids.gr Phase 17-18 manual grounding audit",
+          "User-Agent": "aitools4kids.gr Phase 17-19 manual grounding audit",
           "Accept": "text/html,application/xhtml+xml"
         },
         redirect: "follow"
@@ -157,7 +176,11 @@ const representative = [
   ["biologia-b-lykeiou", "Εξέλιξη του ανθρώπου", 1],
   ["pliroforiki-g-lykeiou", "Δεδομένα και τύποι δεδομένων", 2],
   ["istoria-g-lykeiou", "Ψυχρός Πόλεμος", 2],
-  ["chimeia-g-lykeiou", "Αρχή Le Chatelier", 1]
+  ["chimeia-g-lykeiou", "Αρχή Le Chatelier", 1],
+  ["istoria-b-lykeiou", "Σχίσμα των Εκκλησιών", 1],
+  ["fysiki-b-lykeiou", "Αντιστρεπτές μεταβολές: έργο: θερμότητα: εσωτερική ενέργεια", 4],
+  ["mathimatika-g-prosanatolismou", "Ασύμπτωτες και πλήρης μελέτη συνάρτησης", 2],
+  ["fysiki-g-lykeiou", "Κίνηση φορτισμένων σωματιδίων σε μαγνητικό πεδίο", 1]
 ];
 
 const liveEndpoint = [];
@@ -179,10 +202,11 @@ for (const [subjectId, label, expectedSources] of representative) {
   assert.ok(String(result.body?.text || "").length >= 500);
 }
 
-console.log("PHASE17_18_GEL_MANUAL_OVERRIDES=" + JSON.stringify({
+console.log("PHASE17_19_GEL_MANUAL_OVERRIDES=" + JSON.stringify({
   total: overrides.count,
   medium,
   manual,
+  discovered,
   multiSource,
   uniqueOfficialPages: byUrl.size,
   liveEndpoint

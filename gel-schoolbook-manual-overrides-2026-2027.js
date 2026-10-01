@@ -1,4 +1,4 @@
-// Phase 17-18: manually verified runtime overrides for GEL 2026-2027.
+// Phase 17-19: manually verified runtime overrides for GEL 2026-2027.
 // This file deliberately does NOT modify the auto-generated Phase 14 inventory.
 // Every entry preserves the learner-facing topic label and points it to one or
 // more manually reviewed official ebooks.edu.gr HTML pages/sections.
@@ -1812,6 +1812,288 @@ const entries = Object.freeze([
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5604/Chimeia_G-Lykeiou-Thetikon-Spoudon-Spoudon-Ygeias_html-empl/index5_1.html",
     "heading": "5.1 Οξέα και βάσεις κατά Brönsted - Lowry",
     "candidateScore": 0.75
+  },
+  {
+    "subjectId": "biologia-b-lykeiou",
+    "label": "Φυσική επιλογή",
+    "sourceTopicId": "biologia-b-lykeiou.topic-21",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2379",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2724/Biologia_B-Lykeiou_html-apli/index3_1.html",
+    "heading": "3.1.3 Η θεωρία της φυσικής επιλογής"
+  },
+  {
+    "subjectId": "istoria-b-lykeiou",
+    "label": "Σχίσμα των Εκκλησιών",
+    "sourceTopicId": "istoria-b-lykeiou.topic-11",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2377",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2698/Istoria_B-Lykeiou_html-empl/index2_5.html",
+    "heading": "Το Σχίσμα μεταξύ των δύο Εκκλησιών"
+  },
+  {
+    "subjectId": "fysiki-b-lykeiou",
+    "label": "Σχέση έντασης και δυναμικού σε ομογενές ηλεκτρικό πεδίο",
+    "sourceTopicId": "fysiki-b-lykeiou.topic-12",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2425",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-ThSp_html-empl/index5_7.html",
+    "heading": "5-7 ΣΧΕΣΗ ΕΝΤΑΣΗΣ ΚΑΙ ΔΙΑΦΟΡΑΣ ΔΥΝΑΜΙΚΟΥ ΣΤΟ ΟΜΟΓΕΝΕΣ ΗΛΕΚΤΡΟΣΤΑΤΙΚΟ ΠΕΔΙΟ"
+  },
+  {
+    "subjectId": "fysiki-b-lykeiou",
+    "label": "Αντιστρεπτές μεταβολές: έργο: θερμότητα: εσωτερική ενέργεια",
+    "sourceTopicId": "fysiki-b-lykeiou.topic-22",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2425",
+    "granularity": "manual-discovered-multi-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "sources": [
+      {
+        "work": "8547/2425",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-ThSp_html-empl/index4_4.html",
+        "heading": "4-4 ΑΝΤΙΣΤΡΕΠΤΕΣ ΜΕΤΑΒΟΛΕΣ"
+      },
+      {
+        "work": "8547/2425",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-ThSp_html-empl/index4_5.html",
+        "heading": "4-5 ΕΡΓΟ ΠΑΡΑΓΟΜΕΝΟ ΑΠΟ ΑΕΡΙΟ ΚΑΤΑ ΤΗ ΔΙΑΡΚΕΙΑ ΜΕΤΑΒΟΛΩΝ ΟΓΚΟΥ"
+      },
+      {
+        "work": "8547/2425",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-ThSp_html-empl/index4_6.html",
+        "heading": "4-6 ΘΕΡΜΟΤΗΤΑ"
+      },
+      {
+        "work": "8547/2425",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-ThSp_html-empl/index4_7.html",
+        "heading": "4-7 ΕΣΩΤΕΡΙΚΗ ΕΝΕΡΓΕΙΑ"
+      }
+    ]
+  },
+  {
+    "subjectId": "fysiki-b-lykeiou",
+    "label": "Ειδικές θερμοδυναμικές μεταβολές",
+    "sourceTopicId": "fysiki-b-lykeiou.topic-24",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2425",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-ThSp_html-empl/index4_9.html",
+    "heading": "4-9 ΕΦΑΡΜΟΓΗ ΤΟΥ ΠΡΩΤΟΥ ΘΕΡΜΟΔΥΝΑΜΙΚΟΥ ΝΟΜΟΥ ΣΕ ΕΙΔΙΚΕΣ ΠΕΡΙΠΤΩΣΕΙΣ"
+  },
+  {
+    "subjectId": "archaia-g-lykeiou",
+    "label": "Πλάτωνος Πρωταγόρας: παιδεία και αρετή",
+    "sourceTopicId": "archaia-g-lykeiou.topic-3",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2398",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2660/Archaia-Ellinika-Filosofikos-Logos_G-Lykeiou-AnthrSp_html-empl/indexC_01.htm",
+    "heading": "ΠΡΩΤΑΓΟΡΑΣ"
+  },
+  {
+    "subjectId": "archaia-g-lykeiou",
+    "label": "Πλάτωνος Πολιτεία: δικαιοσύνη, παιδεία και ιδανική πολιτεία",
+    "sourceTopicId": "archaia-g-lykeiou.topic-4",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2398",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2660/Archaia-Ellinika-Filosofikos-Logos_G-Lykeiou-AnthrSp_html-empl/indexD_00.htm",
+    "heading": "ΠΟΛΙΤΕΙΑ"
+  },
+  {
+    "subjectId": "archaia-g-lykeiou",
+    "label": "Πόλη, πολίτης και πολιτειακή οργάνωση",
+    "sourceTopicId": "archaia-g-lykeiou.topic-10",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2398",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2660/Archaia-Ellinika-Filosofikos-Logos_G-Lykeiou-AnthrSp_html-empl/indexF_00.htm",
+    "heading": "ΠΟΛΙΤΙΚΑ"
+  },
+  {
+    "subjectId": "biologia-g-lykeiou",
+    "label": "Οργάνωση γενετικού υλικού",
+    "sourceTopicId": "biologia-g-lykeiou.topic-3",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2375",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2668/Biologia_B-Lykeiou_html-empl/index4_2.html",
+    "heading": "4.2 ΜΟΡΙΑΚΗ ΓΕΝΕΤΙΚΗ"
+  },
+  {
+    "subjectId": "biologia-g-lykeiou",
+    "label": "Μετάφραση και γενετικός κώδικας",
+    "sourceTopicId": "biologia-g-lykeiou.topic-6",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2375",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2668/Biologia_B-Lykeiou_html-empl/index4_2.html",
+    "heading": "ΜΕΤΑΦΡΑΣΗ"
+  },
+  {
+    "subjectId": "istoria-g-lykeiou",
+    "label": "Β΄ Παγκόσμιος Πόλεμος",
+    "sourceTopicId": "istoria-g-lykeiou.topic-12",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/5301",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5307/Istoria_G-Lykeiou_html-apli/index5_1.html",
+    "heading": "Ο Β' Παγκόσμιος πόλεμος"
+  },
+  {
+    "subjectId": "mathimatika-g-prosanatolismou",
+    "label": "Όριο συνάρτησης",
+    "sourceTopicId": "mathimatika-g-prosanatolismou.topic-5",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2433",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2732/Mathimatika_Teuxos-B_G-Lykeiou-ThSp_html-apli/indexB1_4.html",
+    "heading": "ΟΡΙΟ ΣΥΝΑΡΤΗΣΗΣ ΣΤΟ"
+  },
+  {
+    "subjectId": "mathimatika-g-prosanatolismou",
+    "label": "Ασύμπτωτες και πλήρης μελέτη συνάρτησης",
+    "sourceTopicId": "mathimatika-g-prosanatolismou.topic-17",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2433",
+    "granularity": "manual-discovered-multi-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "sources": [
+      {
+        "work": "8547/2433",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2732/Mathimatika_Teuxos-B_G-Lykeiou-ThSp_html-apli/indexB2_9.html",
+        "heading": "ΑΣΥΜΠΤΩΤΕΣ - ΚΑΝΟΝΕΣ"
+      },
+      {
+        "work": "8547/2433",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2732/Mathimatika_Teuxos-B_G-Lykeiou-ThSp_html-apli/indexB2_10.html",
+        "heading": "ΜΕΛΕΤΗ ΚΑΙ ΧΑΡΑΞΗ ΤΗΣ ΓΡΑΦΙΚΗΣ ΠΑΡΑΣΤΑΣΗΣ ΜΙΑΣ ΣΥΝΑΡΤΗΣΗΣ"
+      }
+    ]
+  },
+  {
+    "subjectId": "mathimatika-g-prosanatolismou",
+    "label": "Αρχική συνάρτηση",
+    "sourceTopicId": "mathimatika-g-prosanatolismou.topic-19",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2433",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2732/Mathimatika_Teuxos-B_G-Lykeiou-ThSp_html-apli/indexB3_1.html",
+    "heading": "Αρχική συνάρτηση"
+  },
+  {
+    "subjectId": "pliroforiki-g-lykeiou",
+    "label": "Δομή επιλογής",
+    "sourceTopicId": "pliroforiki-g-lykeiou.topic-7",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "ambiguous-title",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2411",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2718/Pliroforiki_G-Lykeiou_html-empl/index2_1.html",
+    "heading": "2.4.2 Δομή Επιλογής"
+  },
+  {
+    "subjectId": "pliroforiki-g-lykeiou",
+    "label": "Τμηματικός προγραμματισμός",
+    "sourceTopicId": "pliroforiki-g-lykeiou.topic-15",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "ambiguous-title",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2411",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2718/Pliroforiki_G-Lykeiou_html-empl/index10_1.html",
+    "heading": "10.1 Τμηματικός προγραμματισμός"
+  },
+  {
+    "subjectId": "fysiki-g-lykeiou",
+    "label": "Εξίσωση αρμονικού κύματος",
+    "sourceTopicId": "fysiki-g-lykeiou.topic-7",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2408",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2728/Fysiki-G-Lykeiou-ThSp_html-apli/index2_2.html",
+    "heading": "Η μαθηματική περιγραφή του αρμονικού κύματος"
+  },
+  {
+    "subjectId": "fysiki-g-lykeiou",
+    "label": "Κίνηση φορτισμένων σωματιδίων σε μαγνητικό πεδίο",
+    "sourceTopicId": "fysiki-g-lykeiou.topic-22",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "work": "8547/2404",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4712/Fysiki-Teuxos-B_G-Lykeiou-ThSp-SpYg_html-apli/index4.html",
+    "heading": "4-8 ΚΙΝΗΣΗ ΦΟΡΤΙΣΜΕΝΩΝ ΣΩΜΑΤΙΔΙΩΝ ΜΕΣΑ ΣΕ ΜΑΓΝΗΤΙΚΟ ΠΕΔΙΟ"
   }
 ]);
 

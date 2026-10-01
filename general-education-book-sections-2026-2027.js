@@ -51,6 +51,7 @@
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/",
       groundedSections:Object.freeze({
             "1 — Στο δρόμο για το σχολείο": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexb_00.html",
+            "2 — Με το «σεις» και με «σας»": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexc_00.html",
             "3 — Στον κόσμο των κόμικς": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexd_00.html",
             "4 — Ετοιμασίες για το ταξίδι": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexe_00.html",
             "5 — Πάμε για ψώνια;": "https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexf_00.html",
@@ -272,6 +273,10 @@
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/",
       groundedSections:Object.freeze({
             "1η Ενότητα — Ένα ακόμα σκαλί": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html",
+            "2η Ενότητα — Ρώτα το νερό... τι τρέχει": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexc_00.html",
+            "3η Ενότητα — Το σχολείο γιορτάζει την ελευθερία και τη δημοκρατία": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexd_00.html",
+            "4η Ενότητα — Εμένα με νοιάζει": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexe_00.html",
+            "5η Ενότητα — Ασφαλώς κυκλοφορώ": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexf_00.html",
             "6η Ενότητα — Ιστορίες παιδιών": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexh_00.html",
             "7η Ενότητα — Η ελιά": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexi_00.html",
             "8η Ενότητα — Χριστός γεννάται": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexj_00.html",
@@ -281,7 +286,8 @@
             "12η Ενότητα — Χαίρε, ω χαίρε, Ελευθεριά!": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexo_00.html",
             "13η Ενότητα — Όλοι διαφορετικοί, όλοι ίδιοι": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexp0_00.html",
             "14η Ενότητα — Το ανθρώπινο θαύμα": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexq_00.html",
-            "15η Ενότητα — Χριστός Ανέστη!": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexr_00.html"
+            "15η Ενότητα — Χριστός Ανέστη!": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexr_00.html",
+            "16η Ενότητα — Ταξίδια στην Ελλάδα": "https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexs_00.html"
       }),
       groundingStatus:"schoolbook-structure-verified",
       mappingStatus:"official-book-structure-verified",
@@ -372,6 +378,7 @@
             "Ενότητα 8 — Χριστούγεννα": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_08.html",
             "Ενότητα 9 — Βιβλία - βιβλιοθήκες": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_09.html",
             "Ενότητα 10 — Μυστήρια - επιστημονική φαντασία": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_10.html",
+            "Ενότητα 11 — Παιχνίδια": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_11.html",
             "Ενότητα 12 — 25η Μαρτίου": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index2_12.html",
             "Ενότητα 13 — Κατασκευές": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index3_13.html",
             "Ενότητα 14 — Πάσχα": "https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index3_14.html",

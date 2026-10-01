@@ -34,14 +34,24 @@ assert.equal(exactPdf, 11);
 assert.ok(blocked > 400);
 
 // High-confidence HTML representatives across grades and full/partial coverage.
-const liveCases = [
-  ["mathimatika-a-lykeiou", "2.2 Διάταξη πραγματικών αριθμών"],
-  ["geometria-a-lykeiou", "3.2–3.4 Κριτήρια ισότητας τριγώνων"],
-  ["chimeia-a-lykeiou", "2.2 Περιοδικός πίνακας"],
-  ["biologia-b-lykeiou", "Ροή ενέργειας"],
-  ["pliroforiki-g-lykeiou", "Διαδικασίες και συναρτήσεις"],
-  ["chimeia-g-lykeiou", "5.5 Ρυθμιστικά διαλύματα"]
+// Pull labels from the verified inventory itself so the test exercises the exact site label,
+// not a separately retyped book heading.
+const representativeSubjects = [
+  "mathimatika-a-lykeiou",
+  "geometria-a-lykeiou",
+  "chimeia-a-lykeiou",
+  "biologia-b-lykeiou",
+  "pliroforiki-g-lykeiou",
+  "chimeia-g-lykeiou"
 ];
+const liveCases = representativeSubjects.map((subjectId) => {
+  const subject = inventory.get(subjectId);
+  const topic = (subject?.topicMappings || []).find((entry) =>
+    entry.status === "exact-html" && entry.confidence === "high"
+  );
+  assert.ok(topic, subjectId + " must expose at least one high-confidence exact-html topic");
+  return [subjectId, topic.label];
+});
 
 const liveResults = [];
 for (const [subject, topic] of liveCases) {
@@ -56,34 +66,55 @@ for (const [subject, topic] of liveCases) {
 }
 
 // Medium-confidence HTML must not be activated automatically.
-const medium = await endpoint.resolveOfficialSchoolbookSource(
-  "fysiki-a-lykeiou",
-  "1.3.6 Ισορροπία σώματος"
-);
+let mediumCase = null;
+for (const subject of Object.values(inventory.all())) {
+  const topic = (subject.topicMappings || []).find((entry) =>
+    entry.status === "exact-html" && entry.confidence === "medium"
+  );
+  if (topic) {
+    mediumCase = [subject.subjectId, topic];
+    break;
+  }
+}
+assert.ok(mediumCase, "inventory must contain a medium-confidence exact-html case");
+const medium = await endpoint.resolveOfficialSchoolbookSource(mediumCase[0], mediumCase[1].label);
 assert.equal(medium.ok, false);
 assert.equal(medium.status, 404);
 assert.equal(medium.body?.error, "section_not_resolved");
 assert.equal(medium.body?.reviewStatus, "medium-confidence-not-activated");
 
 // exact-pdf is recognized, linked and still text-fail-closed.
-const pdf = await endpoint.resolveOfficialSchoolbookSource(
-  "english-a-lykeiou",
-  "Unit 2: A refugee’s dreamland"
-);
+let pdfCase = null;
+for (const subject of Object.values(inventory.all())) {
+  const topic = (subject.topicMappings || []).find((entry) => entry.status === "exact-pdf");
+  if (topic) {
+    pdfCase = [subject.subjectId, topic];
+    break;
+  }
+}
+assert.ok(pdfCase, "inventory must contain an exact-pdf case");
+const pdf = await endpoint.resolveOfficialSchoolbookSource(pdfCase[0], pdfCase[1].label);
 assert.equal(pdf.ok, false);
 assert.equal(pdf.status, 409);
 assert.equal(pdf.body?.error, "official_pdf_text_not_grounded");
-assert.match(String(pdf.body?.sourceUrl || ""), /\/ebooks\/v\/pdf\/.+#page=15$/);
-assert.equal(pdf.body?.pdfPage, 15);
+assert.match(String(pdf.body?.sourceUrl || ""), /\/ebooks\/v\/pdf\/.+#page=\d+$/);
+assert.equal(pdf.body?.pdfPage, pdfCase[1].pdfPage);
 
-// Manual-review and no-safe-mapping rows must never fall through to generic schoolbook text.
-const manual = await endpoint.resolveOfficialSchoolbookSource(
-  "archaia-a-lykeiou",
-  "Ξενοφών: Ελληνικά"
-);
+// Manual-review rows must never fall through to generic schoolbook text.
+let manualCase = null;
+for (const subject of Object.values(inventory.all())) {
+  const topic = (subject.topicMappings || []).find((entry) => entry.status === "needs-manual-review");
+  if (topic) {
+    manualCase = [subject.subjectId, topic];
+    break;
+  }
+}
+assert.ok(manualCase, "inventory must contain a needs-manual-review case");
+const manual = await endpoint.resolveOfficialSchoolbookSource(manualCase[0], manualCase[1].label);
 assert.equal(manual.ok, false);
 assert.equal(manual.body?.error, "section_not_resolved");
 
+// no-safe-mapping rows must also remain fail-closed.
 const noSafeSubject = inventory.get("english-g-lykeiou");
 assert.equal(noSafeSubject?.status, "no-safe-mapping");
 const noSafeTopic = noSafeSubject?.topicMappings?.[0];

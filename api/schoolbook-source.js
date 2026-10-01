@@ -91,6 +91,21 @@ function catalogPdfSourceAllowed(url) {
   return OFFICIAL_PDF_TEXT?.officialPdfSourceAllowed?.(url) === true;
 }
 
+function manualOverrideSources(mapping) {
+  if (!mapping) return [];
+  const explicit = Array.isArray(mapping.sources) ? mapping.sources : [];
+  const rows = explicit.length
+    ? explicit
+    : (mapping.url && mapping.heading ? [{ url: mapping.url, heading: mapping.heading, work: mapping.work || null }] : []);
+  return rows
+    .map((row) => ({
+      url: String(row?.url || "").trim(),
+      heading: String(row?.heading || "").trim(),
+      work: row?.work || mapping.work || null
+    }))
+    .filter((row) => row.url && row.heading);
+}
+
 function buildCatalogBook(subject) {
   if (!GENERAL_ED_BOOK_CATALOG?.get) return null;
   const row = GENERAL_ED_BOOK_CATALOG.get(subject);
@@ -155,11 +170,11 @@ function resolveGelInventoryTopic(subject, topic) {
     !!book?.html?.url &&
     catalogHtmlSourceAllowed(book.html.url);
 
+  const manualSources = manualOverrideSources(mapping);
   const manualHtmlVerified =
     !!manualOverride &&
-    !!mapping?.url &&
-    !!mapping?.heading &&
-    catalogHtmlSourceAllowed(mapping.url) &&
+    manualSources.length > 0 &&
+    manualSources.every((source) => catalogHtmlSourceAllowed(source.url)) &&
     !!book?.html?.url &&
     catalogHtmlSourceAllowed(book.html.url);
 
@@ -185,6 +200,7 @@ function resolveGelInventoryTopic(subject, topic) {
     row,
     inventoryMapping,
     manualOverride,
+    manualSources,
     mapping,
     book,
     runtimeEligible: !!runtimeMode,
@@ -1783,8 +1799,11 @@ module.exports = async function handler(req, res) {
   }
 
   let directUrls = resolveDirectSourceUrls(subject, topic);
-  if (!directUrls.length && ["exact-html", "manual-html"].includes(gelInventory?.runtimeMode)) {
+  if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
     directUrls = [gelInventory.mapping.url];
+  }
+  if (!directUrls.length && gelInventory?.runtimeMode === "manual-html") {
+    directUrls = (gelInventory.manualSources || []).map((source) => source.url);
   }
   if (!directUrls.length && book.mode === "linkedSection") {
     directUrls = await resolveLinkedSectionUrls(book, topic);
@@ -1829,7 +1848,28 @@ module.exports = async function handler(req, res) {
         gelInventory?.runtimeEligible &&
         gelInventory.mapping?.granularity === "section-anchor";
 
-      if (gelAnchorScoped) {
+      const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
+      if (gelManualScoped) {
+        const sources = gelInventory.manualSources || [];
+        const verified = pages.every((html, i) => {
+          const expected = sources[i]?.heading;
+          return expected && normalize(htmlToText(html)).includes(normalize(expected));
+        });
+        if (!verified) {
+          return res.status(404).json({
+            grounded: false,
+            error: "verified_manual_heading_not_resolved",
+            bookTitle: book.title,
+            sourceUrls,
+            verifiedHeadings: sources.map((source) => source.heading),
+            message: "Μία από τις χειροκίνητα επαληθευμένες επίσημες επικεφαλίδες δεν βρέθηκε πλέον στην αναμενόμενη σελίδα."
+          });
+        }
+        combinedText = pages.map((html, i) => {
+          const label = sourceUrls[i] ? "[Official verified page: " + sourceUrls[i] + "]\n" : "";
+          return label + htmlToText(html);
+        }).join("\n\n");
+      } else if (gelAnchorScoped) {
         const scopedPages = pages.map((html, i) =>
           selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping)
         );
@@ -3323,6 +3363,7 @@ module.exports._test = Object.freeze({
   resolveGelInventoryTopic,
   buildGelInventoryBook,
   GEL_MANUAL_OVERRIDES,
+  manualOverrideSources,
   catalogPdfSourceAllowed,
   gelVerifiedHeadingOffsets,
   findGelHtmlAnchorOffset,

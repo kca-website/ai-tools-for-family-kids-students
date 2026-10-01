@@ -2046,7 +2046,7 @@ function resolveHistoryEChapter(topic) {
 function selectHistoryEChapterText(html, topic) {
   const chapter = resolveHistoryEChapter(topic);
   if (!chapter) return "";
-  const headings = [...String(html).matchAll(/<h[1-3]\b[^>]*>[\s\S]*?<\/h[1-3]>/gi)];
+  const headings = [...String(html).matchAll(/<h[1-3]\b[^>]*>[\s\S]*?<\/h[1-3]>/gi)].filter(heading => /^\d+[αβ]?\./.test(htmlToText(heading[0])));
   const index = headings.findIndex(heading => normalize(htmlToText(heading[0])) === normalize(chapter.label));
   if (index < 0) return "";
   const start = headings[index].index;
@@ -3484,4 +3484,3 @@ module.exports._test = Object.freeze({
   RELIGION_B_OFFICIAL_SOURCE_MATERIAL,
   applyCurriculumTextScope
 });
-

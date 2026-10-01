@@ -1,0 +1,32 @@
+name: Phase 16 GEL PDF grounding
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'api/schoolbook-source.js'
+      - 'api/official-pdf-text.js'
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'tests/phase16-gel-pdf-grounding-smoke.mjs'
+      - 'package.json'
+      - '.github/workflows/phase16-gel-pdf-smoke.yml'
+
+jobs:
+  pdf-grounding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install runtime dependencies
+        run: npm install --no-package-lock --ignore-scripts
+
+      - name: Run Phase 16 live PDF grounding
+        run: node tests/phase16-gel-pdf-grounding-smoke.mjs

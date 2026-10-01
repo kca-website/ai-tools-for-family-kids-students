@@ -35,6 +35,13 @@ try {
   GEL_SCHOOLBOOK_SOURCE_MAP = null;
 }
 
+let OFFICIAL_PDF_TEXT = null;
+try {
+  OFFICIAL_PDF_TEXT = require("./official-pdf-text.js");
+} catch (_) {
+  OFFICIAL_PDF_TEXT = null;
+}
+
 const PRIMARY_GUIDANCE_2026_2027 =
   "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/";
 const MIDDLE_GUIDANCE_2026_2027 =
@@ -71,6 +78,10 @@ function catalogHtmlSourceAllowed(url) {
   } catch (_) {
     return false;
   }
+}
+
+function catalogPdfSourceAllowed(url) {
+  return OFFICIAL_PDF_TEXT?.officialPdfSourceAllowed?.(url) === true;
 }
 
 function buildCatalogBook(subject) {
@@ -125,15 +136,31 @@ function resolveGelInventoryTopic(subject, topic) {
     !!book?.html?.url &&
     catalogHtmlSourceAllowed(book.html.url);
 
+  const exactPdfVerified =
+    mapping?.status === "exact-pdf" &&
+    mapping?.granularity === "pdf-page" &&
+    Number.isInteger(Number(mapping?.pdfPage)) &&
+    Number(mapping.pdfPage) > 0 &&
+    !!mapping?.heading &&
+    !!mapping?.url &&
+    catalogPdfSourceAllowed(mapping.url) &&
+    !!book?.pdf?.url &&
+    catalogPdfSourceAllowed(book.pdf.url);
+
+  const runtimeMode = exactHtmlHigh
+    ? "exact-html"
+    : (exactPdfVerified ? "exact-pdf" : null);
+
   return {
     row,
     mapping,
     book,
-    runtimeEligible: exactHtmlHigh,
-    reason: exactHtmlHigh
+    runtimeEligible: !!runtimeMode,
+    runtimeMode,
+    reason: runtimeMode
       ? ""
       : (mapping?.status === "exact-pdf"
-        ? "official-pdf-page-verified-text-parser-not-enabled"
+        ? "official-pdf-page-not-runtime-safe"
         : (mapping?.status === "exact-html" && mapping?.confidence === "medium"
           ? "medium-confidence-not-activated"
           : (mapping?.reason || mapping?.status || "not-runtime-eligible")))
@@ -141,7 +168,7 @@ function resolveGelInventoryTopic(subject, topic) {
 }
 
 function buildGelInventoryBook(resolution) {
-  if (!resolution?.runtimeEligible) return null;
+  if (!resolution?.runtimeEligible || resolution?.runtimeMode !== "exact-html") return null;
   const { row, mapping, book } = resolution;
   return {
     title: book?.title || row?.labelEl || row?.subjectId || "Επίσημο σχολικό βιβλίο",
@@ -1627,6 +1654,85 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  if (gelInventory?.runtimeMode === "exact-pdf") {
+    const mapping = gelInventory.mapping;
+    const sourceUrl = mapping.url;
+    const fallbackTitle =
+      gelInventory.book?.title ||
+      gelInventory.row?.labelEl ||
+      subject;
+
+    if (!OFFICIAL_PDF_TEXT?.extractVerifiedPdfPage) {
+      return res.status(503).json({
+        grounded: false,
+        error: "official_pdf_parser_unavailable",
+        bookTitle: fallbackTitle,
+        sourceUrl,
+        pdfPage: mapping.pdfPage || null,
+        verifiedHeading: mapping.heading || null,
+        message: "Ο ασφαλής αναγνώστης της επίσημης σελίδας PDF δεν είναι διαθέσιμος."
+      });
+    }
+
+    const extracted = await OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({
+      sourceUrl,
+      pdfPage: mapping.pdfPage,
+      verifiedHeading: mapping.heading
+    });
+
+    if (!extracted?.ok) {
+      const upstreamErrors = new Set([
+        "official_pdf_binary_not_resolved",
+        "official_pdf_fetch_failed",
+        "official_pdf_text_extraction_failed",
+        "official_pdf_too_large",
+        "fetch_unavailable"
+      ]);
+      const status = upstreamErrors.has(extracted?.error) ? 502 : 404;
+      return res.status(status).json({
+        grounded: false,
+        error: extracted?.error || "official_pdf_text_not_grounded",
+        bookTitle: fallbackTitle,
+        schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
+        mappingStatus: "official-gel-inventory-exact-pdf",
+        sourceUrl,
+        pdfPage: mapping.pdfPage || null,
+        verifiedHeading: mapping.heading || null,
+        extractedChars: extracted?.extractedChars || 0,
+        message: "Η επίσημη σελίδα PDF δεν πέρασε όλους τους ελέγχους για ασφαλές text grounding."
+      });
+    }
+
+    res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=604800");
+    return res.status(200).json({
+      grounded: true,
+      subject,
+      grade: gelInventory.row?.grade || null,
+      topic,
+      section: topic,
+      bookTitle: fallbackTitle,
+      schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
+      schoolbookSource: gelInventory.book?.pdf?.url || sourceUrl,
+      annualGuidanceSource: HIGH_GUIDANCE_2026_2027,
+      curriculumSource: HIGH_GUIDANCE_2026_2027,
+      mappingStatus: "official-gel-inventory-exact-pdf",
+      lastVerified: GEL_SCHOOLBOOK_SOURCE_MAP?.generatedAt || "2026-10-01",
+      annualScopeVerified: false,
+      curriculumExclusions: [],
+      curriculumScopeApplied: false,
+      sourceUrl,
+      sourceUrls: [sourceUrl],
+      canonicalSourceUrl: null,
+      resolvedPdfUrl: extracted.resolvedPdfUrl || null,
+      pdfPage: mapping.pdfPage,
+      pdfTotalPages: extracted.totalPages || null,
+      mappingConfidence: mapping.confidence || null,
+      labelParaphrase: mapping.labelParaphrase === true,
+      verifiedHeading: mapping.heading || null,
+      text: String(extracted.text || "").slice(0, 16000)
+    });
+  }
+
   const book =
     BOOKS[subject] ||
     buildCatalogBook(subject) ||
@@ -1641,7 +1747,7 @@ module.exports = async function handler(req, res) {
   }
 
   let directUrls = resolveDirectSourceUrls(subject, topic);
-  if (!directUrls.length && gelInventory?.runtimeEligible) {
+  if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
     directUrls = [gelInventory.mapping.url];
   }
   if (!directUrls.length && book.mode === "linkedSection") {
@@ -3180,6 +3286,7 @@ module.exports._test = Object.freeze({
   catalogHtmlSourceAllowed,
   resolveGelInventoryTopic,
   buildGelInventoryBook,
+  catalogPdfSourceAllowed,
   gelVerifiedHeadingOffsets,
   findGelHtmlAnchorOffset,
   selectGelAnchoredSectionText,

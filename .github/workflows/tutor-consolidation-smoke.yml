@@ -187,6 +187,9 @@ jobs:
       - name: Run Phase 19 GEL manual official discovery audit
         run: node tests/phase19-gel-manual-discovery-smoke.mjs
 
+      - name: Run Phase 20 GEL final safe candidate audit
+        run: node tests/phase20-gel-final-safe-candidates-smoke.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

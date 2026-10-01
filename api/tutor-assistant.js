@@ -116,7 +116,7 @@ module.exports = async function handler(req, res) {
   const rawDocumentText = verifiedOfficialSource?.text
     ? String(verifiedOfficialSource.text).trim()
     : String(documentText || '').trim();
-  const modelDocumentText = compactSourceText(rawDocumentText, sourceCharLimits[task]);
+  const modelDocumentText = compactSourceText(rawDocumentText, sourceCharLimits[task], topic);
   const sourceWasCompacted = modelDocumentText.length < rawDocumentText.length;
 
   const selectedContext = [
@@ -231,7 +231,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
     }
 
     if (result?.ok && officialSchoolbook) {
-      const firstSignals = groundingSignals(result.text, modelDocumentText, trustedGroundingContext);
+      const firstSignals = groundingSignals(result.text, rawDocumentText, trustedGroundingContext);
       if (firstSignals.length) {
         const retry = await generateChat({
           messages: groundingRepairMessages(messages, firstSignals),
@@ -241,7 +241,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
           modelProfile: 'quality',
         });
         if (retry?.ok && (!needsStructuredValidation({ task, activity }) || validStructuredResult({ task, activity, text: retry.text }))) {
-          const retrySignals = groundingSignals(retry.text, modelDocumentText, trustedGroundingContext);
+          const retrySignals = groundingSignals(retry.text, rawDocumentText, trustedGroundingContext);
           if (!retrySignals.length) {
             result = { ...retry, groundingRetry: true, groundingSignals: firstSignals };
           } else {
@@ -533,21 +533,41 @@ async function loadVerifiedOfficialSource(subjectId, topic) {
   return resolved.body;
 }
 
-function compactSourceText(value, maxChars) {
+function compactSourceText(value, maxChars, query = '') {
   const full = String(value || '').trim();
   const limit = Math.max(2000, Number(maxChars) || 12000);
   if (full.length <= limit) return full;
 
   const marker = '\n[… selected source excerpt …]\n';
-  const usable = Math.max(1000, limit - marker.length * 2);
-  const part = Math.floor(usable / 3);
-  const middleStart = Math.max(0, Math.floor((full.length - part) / 2));
-  const tailStart = Math.max(0, full.length - part);
-  return [
-    full.slice(0, part),
-    full.slice(middleStart, middleStart + part),
-    full.slice(tailStart)
-  ].join(marker).slice(0, limit);
+  const normalizedQuery = normalizeGroundingText(query);
+  const stop = new Set(['και','των','την','τον','της','του','στο','στη','στην','στον','για','απο','με','σε','κεφαλαιο','chapter','the','and','for','with','from']);
+  const keys = [...new Set(normalizedQuery.split(/\s+/).filter(x => x.length >= 4 && !stop.has(x)))].slice(0, 16);
+  const chunks = [];
+  for (let i = 0; i < full.length; i += 1800) {
+    const text = full.slice(i, i + 2200);
+    const norm = normalizeGroundingText(text);
+    const score = keys.reduce((sum, key) => sum + (norm.includes(key) ? (key.length >= 7 ? 3 : 1) : 0), 0);
+    chunks.push({ index: i, text, score });
+  }
+
+  const ranked = chunks.slice().sort((a,b) => b.score - a.score || a.index - b.index);
+  const selected = [];
+  let used = 0;
+  const pool = ranked[0]?.score > 0
+    ? ranked
+    : [chunks[0], chunks[Math.floor(chunks.length / 2)], chunks[chunks.length - 1]].filter(Boolean);
+
+  for (const row of pool) {
+    if (selected.some(x => x.index === row.index)) continue;
+    const room = limit - used - (selected.length ? marker.length : 0);
+    if (room < 500) break;
+    const piece = row.text.slice(0, room);
+    selected.push({ index: row.index, text: piece });
+    used += piece.length + (selected.length > 1 ? marker.length : 0);
+    if (used >= limit) break;
+  }
+
+  return selected.sort((a,b) => a.index - b.index).map(x => x.text).join(marker).slice(0, limit);
 }
 
 function sanitize(text) {

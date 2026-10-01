@@ -201,14 +201,16 @@ function resolveGelInventoryTopic(subject, topic) {
   const exactPdfVerified =
     !manualOverride &&
     mapping?.status === "exact-pdf" &&
-    mapping?.granularity === "pdf-page" &&
+    ["pdf-page", "pdf-section"].includes(mapping?.granularity) &&
+    (mapping.granularity !== "pdf-section" || (Number.isInteger(mapping.pdfPageEnd) && mapping.pdfPageEnd >= mapping.pdfPage && mapping.pdfPageEnd-mapping.pdfPage < 20)) &&
     Number.isInteger(Number(mapping?.pdfPage)) &&
     Number(mapping.pdfPage) > 0 &&
     !!mapping?.heading &&
     !!mapping?.url &&
     catalogPdfSourceAllowed(mapping.url) &&
     !!book?.pdf?.url &&
-    catalogPdfSourceAllowed(book.pdf.url);
+    catalogPdfSourceAllowed(book.pdf.url) &&
+    new URL(mapping.url).pathname.replace(/\/+$/, "") === new URL(book.pdf.url).pathname.replace(/\/+$/, "");
 
   const runtimeMode = manualHtmlVerified
     ? "manual-html"
@@ -1769,6 +1771,8 @@ module.exports = async function handler(req, res) {
     const extracted = await OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({
       sourceUrl,
       pdfPage: mapping.pdfPage,
+      pdfPageEnd: mapping.pdfPageEnd,
+      excludedHeading: mapping.excludedHeading,
       verifiedHeading: mapping.heading
     });
 
@@ -1805,23 +1809,24 @@ module.exports = async function handler(req, res) {
       bookTitle: fallbackTitle,
       schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
       schoolbookSource: gelInventory.book?.pdf?.url || sourceUrl,
-      annualGuidanceSource: HIGH_GUIDANCE_2026_2027,
-      curriculumSource: HIGH_GUIDANCE_2026_2027,
+      annualGuidanceSource: mapping.curriculumSource || HIGH_GUIDANCE_2026_2027,
+      curriculumSource: mapping.curriculumSource || HIGH_GUIDANCE_2026_2027,
       mappingStatus: "official-gel-inventory-exact-pdf",
       lastVerified: GEL_SCHOOLBOOK_SOURCE_MAP?.generatedAt || "2026-10-01",
-      annualScopeVerified: false,
-      curriculumExclusions: [],
-      curriculumScopeApplied: false,
+      annualScopeVerified: mapping.annualScopeVerified === true,
+      curriculumExclusions: mapping.excludedHeading ? ["Οι δραστηριότητες του «Πρόσθετου Υλικού» δεν αποτελούν εξεταστέα ύλη και αφαιρούνται από το κείμενο."] : [],
+      curriculumScopeApplied: extracted.exclusionApplied === true,
       sourceUrl,
       sourceUrls: [sourceUrl],
       canonicalSourceUrl: null,
       resolvedPdfUrl: extracted.resolvedPdfUrl || null,
       pdfPage: mapping.pdfPage,
+      pdfPageEnd: mapping.pdfPageEnd || mapping.pdfPage,
       pdfTotalPages: extracted.totalPages || null,
       mappingConfidence: mapping.confidence || null,
       labelParaphrase: mapping.labelParaphrase === true,
       verifiedHeading: mapping.heading || null,
-      text: String(extracted.text || "").slice(0, 16000)
+      text: String(extracted.text || "").slice(0, 42000)
     });
   }
 

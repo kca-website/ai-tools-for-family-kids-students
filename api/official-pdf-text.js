@@ -198,9 +198,25 @@ function textContentToString(content) {
     .trim();
 }
 
+function scopeVerifiedPdfText(pageTexts, verifiedHeading, excludedHeading, minChars = MIN_GROUNDED_PAGE_CHARS) {
+  const heading = normalizePdfText(verifiedHeading);
+  if (!heading || !normalizePdfText(pageTexts[0] || "").includes(heading)) return {ok:false,error:"official_pdf_verified_heading_not_found"};
+  let text = pageTexts.join("\n\n");
+  let exclusionApplied = false;
+  if (excludedHeading === "Πρόσθετο Υλικό") {
+    const boundary = text.search(/(?:^|\s)Πρ[οό]σθετο\s+Υλικ[οό](?=\s|$)/mi);
+    if (boundary >= 0) {text = text.slice(0,boundary).trim(); exclusionApplied = true;}
+    else return {ok:false,error:"official_pdf_exclusion_heading_not_found"};
+  } else if (excludedHeading) return {ok:false,error:"official_pdf_exclusion_not_supported"};
+  if (text.length < minChars) return {ok:false,error:"official_pdf_page_text_too_short",extractedChars:text.length};
+  return {ok:true,text,exclusionApplied,extractedChars:text.length};
+}
+
 async function extractVerifiedPdfPage({
   sourceUrl,
   pdfPage,
+  pdfPageEnd,
+  excludedHeading,
   verifiedHeading,
   fetchImpl,
   maxBytes = MAX_PDF_BYTES,
@@ -213,6 +229,8 @@ async function extractVerifiedPdfPage({
   if (!Number.isInteger(pageNumber) || pageNumber < 1) {
     return { ok: false, error: "official_pdf_page_invalid" };
   }
+  const endPageNumber = Number(pdfPageEnd ?? pdfPage);
+  if (!Number.isInteger(endPageNumber) || endPageNumber < pageNumber || endPageNumber-pageNumber >= 20) return {ok:false,error:"official_pdf_page_range_invalid"};
   const heading = String(verifiedHeading || "").trim();
   if (!heading) {
     return { ok: false, error: "official_pdf_heading_missing" };
@@ -239,7 +257,7 @@ async function extractVerifiedPdfPage({
     });
     document = await loadingTask.promise;
 
-    if (pageNumber > document.numPages) {
+    if (endPageNumber > document.numPages) {
       return {
         ok: false,
         error: "official_pdf_page_out_of_range",
@@ -248,36 +266,22 @@ async function extractVerifiedPdfPage({
       };
     }
 
-    const page = await document.getPage(pageNumber);
-    const content = await page.getTextContent();
-    const text = textContentToString(content);
-    const normalizedText = normalizePdfText(text);
-    const normalizedHeading = normalizePdfText(heading);
-
-    if (!normalizedHeading || !normalizedText.includes(normalizedHeading)) {
-      return {
-        ok: false,
-        error: "official_pdf_verified_heading_not_found",
-        totalPages: document.numPages,
-        resolvedPdfUrl,
-        extractedChars: text.length
-      };
+    const pageTexts = [];
+    for (let n=pageNumber;n<=endPageNumber;n++) {
+      const page = await document.getPage(n);
+      pageTexts.push(textContentToString(await page.getTextContent()));
+      page.cleanup();
     }
-
-    if (text.length < minChars) {
-      return {
-        ok: false,
-        error: "official_pdf_page_text_too_short",
-        totalPages: document.numPages,
-        resolvedPdfUrl,
-        extractedChars: text.length
-      };
-    }
+    const scoped = scopeVerifiedPdfText(pageTexts, heading, excludedHeading, minChars);
+    if (!scoped.ok) return {...scoped,totalPages:document.numPages,resolvedPdfUrl};
+    const text = scoped.text;
 
     return {
       ok: true,
       text,
       page: pageNumber,
+      endPage:endPageNumber,
+      exclusionApplied:scoped.exclusionApplied,
       totalPages: document.numPages,
       resolvedPdfUrl,
       extractedChars: text.length
@@ -304,5 +308,6 @@ module.exports = Object.freeze({
   isPdfBytes,
   fetchOfficialPdfBytes,
   extractVerifiedPdfPage,
+  scopeVerifiedPdfText,
   textContentToString
 });

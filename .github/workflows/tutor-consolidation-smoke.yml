@@ -181,6 +181,9 @@ jobs:
       - name: Run Phase 17 GEL manual override audit
         run: node tests/phase17-gel-manual-overrides-smoke.mjs
 
+      - name: Run Phase 18 GEL grounding coverage audit
+        run: node tests/phase18-gel-grounding-coverage-smoke.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

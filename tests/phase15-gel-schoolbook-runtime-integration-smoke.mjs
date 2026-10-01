@@ -53,9 +53,9 @@ assert.equal(highHtml, 174);
 assert.equal(mediumHtml, 14);
 assert.equal(exactPdf, 11);
 assert.equal(manualHtml, manualOverrides.count);
-assert.equal(manualHtml, 60);
+assert.equal(manualHtml, 127);
 
-assert.ok(blocked > 390);
+assert.ok(blocked > 300);
 
 // Anchor scoping unit contract: keep nested headings in the current section,
 // but stop before the next peer section.

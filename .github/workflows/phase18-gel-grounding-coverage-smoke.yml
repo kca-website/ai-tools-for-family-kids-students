@@ -1,0 +1,31 @@
+name: Phase 18 GEL grounding coverage
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'gel-schoolbook-manual-overrides-2026-2027.js'
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/phase18-gel-grounding-coverage-smoke.mjs'
+      - '.github/workflows/phase18-gel-grounding-coverage-smoke.yml'
+
+jobs:
+  grounding-coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install runtime dependencies
+        run: npm install --no-package-lock --ignore-scripts
+
+      - name: Run Phase 18 GEL coverage audit
+        run: node tests/phase18-gel-grounding-coverage-smoke.mjs

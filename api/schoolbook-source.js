@@ -2799,7 +2799,7 @@ function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
   // Canonicalize only that numbering punctuation for the final provenance guard;
   // all anchor + verified-heading matching above remains strict.
   const normalizeScopedHeading = (value) =>
-    normalize(value).replace(/\\bε\\s+(\\d+)\\b/g, "ε$1");
+    normalize(value).replace(/\bε\s+(\d+)\b/g, "ε$1");
   if (!scoped || !normalizeScopedHeading(scoped).includes(normalizeScopedHeading(mapping.heading))) return "";
   return scoped;
 }

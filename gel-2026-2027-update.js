@@ -224,60 +224,52 @@
       "status": "annual-guidance-map",
       "topics": [
         [
-          "Κοινωνία και κοινωνική οργάνωση",
-          "Society and social organisation"
+          "1.1 Άνθρωπος: κοινωνικό, οικονομικό και πολιτικό ον",
+          "1.1 Human beings as social, economic and political beings"
         ],
         [
-          "Κοινωνικοποίηση και κοινωνικοί θεσμοί",
-          "Socialisation and social institutions"
+          "1.5 Η οικονομία — κοινωνία, πολιτεία και οικονομία",
+          "1.5 The economy — society, polity and economy"
         ],
         [
-          "Κοινωνικές ομάδες, ανισότητες και στερεότυπα",
-          "Social groups, inequalities and stereotypes"
+          "2.1–2.2 Η κοινωνία και τα βασικά χαρακτηριστικά της ελληνικής κοινωνίας",
+          "2.1–2.2 Society and key features of Greek society"
         ],
         [
-          "Το κράτος και οι λειτουργίες του",
-          "The state and its functions"
+          "4.4–4.5 Το κράτος και βασικά χαρακτηριστικά της ελληνικής οικονομίας",
+          "4.4–4.5 The state and key features of the Greek economy"
         ],
         [
-          "Πολίτης, πολιτειότητα και δημοκρατία",
-          "Citizenship and democracy"
+          "5.1–5.6 Βασικά οικονομικά μεγέθη: ΑΕΠ, εισόδημα και βιοτικό επίπεδο",
+          "5.1–5.6 Key economic aggregates: GDP, income and living standards"
         ],
         [
-          "Σύνταγμα και διάκριση των εξουσιών",
-          "Constitution and separation of powers"
+          "5.8 Πληθωρισμός",
+          "5.8 Inflation"
         ],
         [
-          "Ατομικά, πολιτικά και κοινωνικά δικαιώματα",
-          "Civil, political and social rights"
+          "6.1 Κοινωνικοποίηση και πολιτικοποίηση",
+          "6.1 Socialisation and political socialisation"
         ],
         [
-          "Υποχρεώσεις και ενεργός συμμετοχή του πολίτη",
-          "Duties and active citizenship"
+          "6.2.4–6.3 ΜΜΕ, πολιτικά κόμματα, μαθητικές κοινότητες και κοινωνικός έλεγχος",
+          "6.2.4–6.3 Mass media, political parties, student communities and social control"
         ],
         [
-          "Βασικές οικονομικές ανάγκες και αγαθά",
-          "Basic economic needs and goods"
+          "7.6–7.8 Φορολογική συνείδηση, κοινωνική ευαισθησία και εθελοντισμός",
+          "7.6–7.8 Tax awareness, social awareness and volunteering"
         ],
         [
-          "Παραγωγικοί συντελεστές και παραγωγή",
-          "Factors of production and production"
+          "7.10 Ο ψηφιακός πολίτης",
+          "7.10 The digital citizen"
         ],
         [
-          "Αγορά, τιμές και ανταγωνισμός",
-          "Markets, prices and competition"
+          "12.1–12.4.4 Μετανάστευση, πρόσφυγες, ιθαγένεια και δημοκρατική συμβίωση",
+          "12.1–12.4.4 Migration, refugees, citizenship and democratic coexistence"
         ],
         [
-          "Χρήμα, τράπεζες και οικονομικές συναλλαγές",
-          "Money, banks and economic transactions"
-        ],
-        [
-          "Δημόσια οικονομικά και φορολογία",
-          "Public finance and taxation"
-        ],
-        [
-          "Ευρωπαϊκή Ένωση και παγκοσμιοποίηση",
-          "European Union and globalisation"
+          "13.1–13.5 Κοινωνικά προβλήματα, φτώχεια, βία, υπερδανεισμός και δημογραφικό",
+          "13.1–13.5 Social problems, poverty, violence, over-indebtedness and demographics"
         ]
       ],
       "source": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/",

@@ -63,18 +63,18 @@ for (const subject of Object.values(inventory.all())) {
 
 assert.equal(highHtml, 223);
 assert.equal(mediumManual, 14);
-assert.equal(exactPdf, 22);
+assert.equal(exactPdf, 34);
 assert.equal(reviewedManual, 292);
 assert.equal(overrides.count, 306);
 assert.equal(remainingCandidateBacked, 5);
-assert.equal(remainingWithoutCandidate, 77);
+assert.equal(remainingWithoutCandidate, 63);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 551);
-assert.equal(blocked, 87);
-assert.equal(grounded + blocked, 638);
+assert.equal(grounded, 563);
+assert.equal(blocked, 73);
+assert.equal(grounded + blocked, 636);
 
 // Guard examples: candidates that are deliberately still ambiguous/insufficient.
 for (const [subjectId, label] of [

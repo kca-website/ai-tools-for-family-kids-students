@@ -9,6 +9,10 @@ on:
       - 'gel-schoolbook-source-map-2026-2027.js'
       - 'api/schoolbook-source.js'
       - 'tests/phase18-gel-grounding-coverage-smoke.mjs'
+      - 'tests/phase24-politiki-paideia-grounding-smoke.mjs'
+      - 'scripts/phase24/**'
+      - 'gel-2026-2027-update.js'
+      - 'scripts/phase14/gel-registry.mjs'
       - '.github/workflows/phase18-gel-grounding-coverage-smoke.yml'
 
 jobs:
@@ -29,3 +33,6 @@ jobs:
 
       - name: Run Phase 18 GEL coverage audit
         run: node tests/phase18-gel-grounding-coverage-smoke.mjs
+
+      - name: Run Phase 24 Politiki Paideia official PDF audit
+        run: PHASE24_LIVE=1 node tests/phase24-politiki-paideia-grounding-smoke.mjs

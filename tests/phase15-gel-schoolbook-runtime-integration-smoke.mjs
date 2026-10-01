@@ -4,7 +4,17 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const endpoint = require("../api/schoolbook-source.js");
 const inventory = require("../gel-schoolbook-source-map-2026-2027.js");
-const { resolveGelInventoryTopic } = endpoint._test;
+const { resolveGelInventoryTopic, selectGelAnchoredSectionText } = endpoint._test;
+
+function normalizeForSmoke(value) {
+  return String(value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9α-ω]+/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 let highHtml = 0;
 let mediumHtml = 0;
@@ -31,7 +41,27 @@ for (const subject of Object.values(inventory.all())) {
 assert.equal(highHtml, 174);
 assert.equal(mediumHtml, 14);
 assert.equal(exactPdf, 11);
+
 assert.ok(blocked > 400);
+
+// Anchor scoping unit contract: keep nested headings in the current section,
+// but stop before the next peer section.
+const syntheticHtml = [
+  '<h2 id="s21">2.1 ΠΡΩΤΗ ΕΝΟΤΗΤΑ</h2>',
+  '<p>' + 'Ακριβές περιεχόμενο ενότητας. '.repeat(40) + '</p>',
+  '<h3 id="s211">2.1.1 Υποενότητα</h3>',
+  '<p>' + 'Περιεχόμενο υποενότητας. '.repeat(25) + '</p>',
+  '<h2 id="s22">2.2 ΔΕΥΤΕΡΗ ΕΝΟΤΗΤΑ</h2>',
+  '<p>' + 'Δεν πρέπει να συμπεριληφθεί. '.repeat(30) + '</p>'
+].join('');
+const syntheticScoped = selectGelAnchoredSectionText(
+  syntheticHtml,
+  'https://ebooks.edu.gr/ebooks/v/html/example/index.html#s21',
+  { heading:'2.1 ΠΡΩΤΗ ΕΝΟΤΗΤΑ', granularity:'section-anchor' }
+);
+assert.match(syntheticScoped, /2\.1 ΠΡΩΤΗ ΕΝΟΤΗΤΑ/);
+assert.match(syntheticScoped, /2\.1\.1 Υποενότητα/);
+assert.doesNotMatch(syntheticScoped, /2\.2 ΔΕΥΤΕΡΗ ΕΝΟΤΗΤΑ/);
 
 // High-confidence HTML representatives across grades and full/partial coverage.
 // Pull labels from the verified inventory itself so the test exercises the exact site label,
@@ -122,6 +152,25 @@ assert.ok(noSafeTopic);
 const noSafe = await endpoint.resolveOfficialSchoolbookSource("english-g-lykeiou", noSafeTopic.label);
 assert.equal(noSafe.ok, false);
 assert.equal(noSafe.body?.error, "section_not_resolved");
+
+// A live section-anchor mapping must return the selected section near the start
+// and must not leak the next peer section into the grounding payload.
+const anchored = await endpoint.resolveOfficialSchoolbookSource(
+  "mathimatika-a-lykeiou",
+  "2.2 Διάταξη πραγματικών αριθμών"
+);
+assert.equal(anchored.ok, true, JSON.stringify(anchored.body));
+assert.equal(anchored.body?.mappingConfidence, "high");
+assert.match(String(anchored.body?.sourceUrl || ""), /#pragmat2$/);
+const anchoredText = String(anchored.body?.text || "");
+assert.ok(
+  normalizeForSmoke(anchoredText.slice(0, 2500)).includes(normalizeForSmoke("2.2 ΔΙΑΤΑΞΗ ΠΡΑΓΜΑΤΙΚΩΝ ΑΡΙΘΜΩΝ")),
+  "verified heading must appear near the beginning of scoped grounding text"
+);
+assert.ok(
+  !normalizeForSmoke(anchoredText).includes(normalizeForSmoke("2.3 ΑΠΟΛΥΤΗ ΤΙΜΗ ΠΡΑΓΜΑΤΙΚΟΥ ΑΡΙΘΜΟΥ")),
+  "next peer section must not leak into scoped grounding text"
+);
 
 console.log("PHASE15_GEL_RUNTIME_INTEGRATION=" + JSON.stringify({
   highHtml,

@@ -1683,16 +1683,40 @@ module.exports = async function handler(req, res) {
           message: "Μία ή περισσότερες επίσημες σελίδες της ενότητας δεν ήταν διαθέσιμες."
         });
       }
-      const needsFullDirectText =
-        subject === "english-b-gymnasiou" ||
-        (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8) ||
-        (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic));
-      combinedText = needsFullDirectText
-        ? pages.map((html, i) => {
-            const label = sourceUrls[i] ? "[Official page: " + sourceUrls[i] + "]\n" : "";
-            return label + htmlToText(html);
-          }).join("\n\n")
-        : distributeOfficialPages(pages, sourceUrls, 42000);
+      const gelAnchorScoped =
+        gelInventory?.runtimeEligible &&
+        gelInventory.mapping?.granularity === "section-anchor";
+
+      if (gelAnchorScoped) {
+        const scopedPages = pages.map((html, i) =>
+          selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping)
+        );
+        if (scopedPages.some((text) => text.length < 500)) {
+          return res.status(404).json({
+            grounded: false,
+            error: "verified_anchor_text_not_resolved",
+            bookTitle: book.title,
+            sourceUrls,
+            verifiedHeading: gelInventory.mapping?.heading || null,
+            message: "Η επαληθευμένη υποενότητα βρέθηκε, αλλά δεν απομονώθηκε αρκετό ακριβές κείμενο για ασφαλές grounding."
+          });
+        }
+        combinedText = scopedPages.map((text, i) => {
+          const label = sourceUrls[i] ? "[Official section: " + sourceUrls[i] + "]\n" : "";
+          return label + text;
+        }).join("\n\n");
+      } else {
+        const needsFullDirectText =
+          subject === "english-b-gymnasiou" ||
+          (subject === "archaia-glossa-b-gymnasiou" && unitNumber(topic) === 8) ||
+          (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic));
+        combinedText = needsFullDirectText
+          ? pages.map((html, i) => {
+              const label = sourceUrls[i] ? "[Official page: " + sourceUrls[i] + "]\n" : "";
+              return label + htmlToText(html);
+            }).join("\n\n")
+          : distributeOfficialPages(pages, sourceUrls, 42000);
+      }
     } else if (book.multi) {
       sourceUrls = await discoverUnitPages(book, path);
       if (!sourceUrls.length) {
@@ -2644,6 +2668,110 @@ function htmlToText(html) {
     .trim();
 }
 
+function gelSectionNumberInfo(value) {
+  const raw = String(value || "").replace(/\s+/g, " ").trim();
+  if (!raw || raw.length > 260) return null;
+  const match = raw.match(/^((?:\d+(?:\.\d+)+)|(?:Ε\.?\d+))\.?\s+(\S.{1,220})$/i);
+  if (!match) return null;
+  const num = String(match[1]).toUpperCase().replace(/^Ε\./, "Ε");
+  const depth = /^Ε/.test(num) ? 1 : num.split(".").length;
+  return { num, depth, title: match[2].trim() };
+}
+
+function gelVerifiedHeadingOffsets(rawHtml) {
+  // Mirrors the Phase 14 audit's linear-token heading parser, while retaining
+  // source offsets so a verified #anchor can be sliced to its own section.
+  const html = String(rawHtml || "")
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, (m) => " ".repeat(m.length))
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, (m) => " ".repeat(m.length));
+  const tokens = [];
+  const BLOCK = /^\/?(?:p|div|td|th|tr|li|ul|ol|br|h[1-6]|table|tbody|section|article|body|center|blockquote)\b/i;
+  let buf = "";
+  let anchor = null;
+  let anchorOffset = -1;
+  let textOffset = -1;
+  const flush = () => {
+    const value = decodeEntities(buf).replace(/\s+/g, " ").trim();
+    if (value) tokens.push({ text: value, anchor, offset: anchorOffset >= 0 ? anchorOffset : textOffset });
+    buf = "";
+    anchor = null;
+    anchorOffset = -1;
+    textOffset = -1;
+  };
+
+  const re = /<([^>]*)>|([^<]+)/g;
+  let match;
+  while ((match = re.exec(html))) {
+    if (match[1] !== undefined) {
+      if (BLOCK.test(match[1])) flush();
+      const anchorMatch = match[1].match(/\b(?:id|name)\s*=\s*["']([^"']+)["']/i);
+      if (anchorMatch && !anchor) {
+        anchor = decodeEntities(anchorMatch[1]);
+        anchorOffset = match.index;
+      }
+      buf += " ";
+    } else {
+      if (textOffset < 0 && String(match[2] || "").trim()) textOffset = match.index;
+      buf += match[2];
+    }
+  }
+  flush();
+
+  const out = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const direct = gelSectionNumberInfo(tokens[i].text);
+    if (direct) {
+      out.push({ ...direct, anchor: tokens[i].anchor, offset: tokens[i].offset });
+      continue;
+    }
+
+    const numberOnly = tokens[i].text.match(/^((?:\d+(?:\.\d+)+)|(?:Ε\.?\d+))\.?$/i);
+    const next = tokens[i + 1];
+    if (!numberOnly || !next || next.text.length < 2 || next.text.length > 220) continue;
+    const combined = gelSectionNumberInfo(numberOnly[1] + " " + next.text);
+    if (!combined) continue;
+    out.push({
+      ...combined,
+      anchor: tokens[i].anchor || next.anchor,
+      offset: tokens[i].offset >= 0 ? tokens[i].offset : next.offset
+    });
+  }
+
+  return out.filter((entry) => Number.isInteger(entry.offset) && entry.offset >= 0);
+}
+
+function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
+  if (!rawHtml || !sourceUrl || !mapping?.heading) return "";
+  let fragment = "";
+  try { fragment = decodeURIComponent(new URL(sourceUrl).hash.slice(1)); } catch (_) { return ""; }
+  if (!fragment || mapping?.granularity !== "section-anchor") return "";
+
+  const headings = gelVerifiedHeadingOffsets(rawHtml);
+  const verified = normalize(mapping.heading);
+  const index = headings.findIndex((entry) => {
+    if (String(entry.anchor || "") !== fragment) return false;
+    const candidate = normalize(entry.num + " " + entry.title);
+    return candidate === verified ||
+      (verified.length >= 8 && (candidate.startsWith(verified) || verified.startsWith(candidate)));
+  });
+  if (index < 0) return "";
+
+  const current = headings[index];
+  let endOffset = String(rawHtml).length;
+  for (let i = index + 1; i < headings.length; i++) {
+    const next = headings[i];
+    if (next.offset <= current.offset) continue;
+    if (next.depth <= current.depth) {
+      endOffset = next.offset;
+      break;
+    }
+  }
+
+  const scoped = htmlToText(String(rawHtml).slice(current.offset, endOffset)).trim();
+  if (!scoped || !normalize(scoped).includes(verified)) return "";
+  return scoped;
+}
+
 function decodeEntities(s) {
   const named = {
     nbsp: " ", amp: "&", lt: "<", gt: ">", quot: '"', apos: "'",
@@ -3020,6 +3148,8 @@ module.exports._test = Object.freeze({
   catalogHtmlSourceAllowed,
   resolveGelInventoryTopic,
   buildGelInventoryBook,
+  gelVerifiedHeadingOffsets,
+  selectGelAnchoredSectionText,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,

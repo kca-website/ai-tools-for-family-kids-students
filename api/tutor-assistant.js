@@ -248,7 +248,11 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
             result = { ...retry, ok: false, status: 422, error: 'grounding_validation_failed', retryable: false, groundingSignals: retrySignals };
           }
         } else {
-          result = { ...(retry || result), ok: false, status: 422, error: 'grounding_validation_failed', retryable: false, groundingSignals: firstSignals };
+          const retryLimited = retry?.status === 429 || retry?.error === 'provider_limit' ||
+            /request too large|tokens per minute|\btpm\b|rate limit/i.test(String(retry?.message || ''));
+          result = retryLimited
+            ? { ...(retry || result), ok: false, status: 429, error: 'provider_limit', retryable: true, groundingSignals: firstSignals }
+            : { ...(retry || result), ok: false, status: 422, error: 'grounding_validation_failed', retryable: false, groundingSignals: firstSignals };
         }
       }
     }
@@ -276,7 +280,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
         message: limited
           ? 'Η δωρεάν AI Βοήθεια έφτασε προσωρινά το όριο χρήσης της. Δοκίμασε ξανά ή χρησιμοποίησε την εναλλακτική AI.'
           : 'Η AI Βοήθεια δεν μπόρεσε να απαντήσει αυτή τη στιγμή.',
-        fallback: limited && !officialSchoolbook ? 'puter' : undefined,
+        fallback: limited ? 'puter' : undefined,
       });
     }
 

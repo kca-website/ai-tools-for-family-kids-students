@@ -1545,6 +1545,23 @@ function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
 
+  if (subject === "istoria-st-dimotikou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/";
+    const units = [
+      ["Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)", 1, 3],
+      ["Ενότητα Β — Οι Έλληνες κάτω από την οθωμανική και τη λατινική κυριαρχία (1453-1821)", 2, 10],
+      ["Ενότητα Γ — Η Μεγάλη Επανάσταση (1821-1830)", 3, 18],
+      ["Ενότητα Δ — Η Ελλάδα στον 19ο αιώνα", 4, 6],
+      ["Ενότητα Ε — Η Ελλάδα στον 20ό αιώνα", 5, 12]
+    ];
+    const exact = units.find(([label]) => normalize(label) === t);
+    if (!exact) return [];
+    const [, unitNumber, chapterCount] = exact;
+    return Array.from({ length: chapterCount }, (_, i) =>
+      new URL(`index${unitNumber}_${i + 1}.html`, base).toString()
+    );
+  }
+
   if (subject === "istoria-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());
@@ -1589,7 +1606,13 @@ function resolveDirectSourceUrls(subject, topic) {
   }
 
   if (subject === "glossa-gymnasiou") {
-    return resolveGlossaGQuizUrls(topic);
+    const diagnostic = resolveGlossaGQuizUrls(topic);
+    if (diagnostic.length) return diagnostic;
+    const unitMatch = String(topic || "").match(/^\s*(\d+)(?:η|ή)?\s+Ενότητα(?=\s|$|[·—–:.,;\-])/i);
+    const unit = unitMatch ? Number(unitMatch[1]) : 0;
+    if (!Number.isInteger(unit) || unit < 1 || unit > 8) return [];
+    const letter = String.fromCharCode("b".charCodeAt(0) + unit - 1);
+    return [new URL(`index${letter}_0.html`, BOOKS[subject].base).toString()];
   }
 
   if (subject === "chimeia-b-gymnasiou") {
@@ -1612,8 +1635,26 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolvePhysicsBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
-  if (subject === "fysiki-g-gymnasiou") return resolvePhysicsGQuizUrls(topic);
-  if (subject === "chimeia-g-gymnasiou") return resolveChemistryGQuizUrls(topic);
+  if (subject === "fysiki-g-gymnasiou") {
+    const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
+    const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
+    if (Number.isInteger(chapter) && chapter >= 1 && chapter <= 11) {
+      return [new URL(`index${chapter}.html`, BOOKS[subject].base).toString()];
+    }
+    return resolvePhysicsGQuizUrls(topic);
+  }
+
+  if (subject === "chimeia-g-gymnasiou") {
+    const chapterMatch = String(topic || "").match(/^\s*(\d+)(?:η|ή)?\s+Ενότητα\s*·\s*Κεφάλαιο\s+(\d+)\b/i);
+    const unit = chapterMatch ? Number(chapterMatch[1]) : 0;
+    const chapter = chapterMatch ? Number(chapterMatch[2]) : 0;
+    const maxChapter = unit === 1 ? 5 : (unit === 2 ? 6 : (unit === 3 ? 4 : 0));
+    if (maxChapter && Number.isInteger(chapter) && chapter >= 1 && chapter <= maxChapter) {
+      return [new URL(`index${unit}_${chapter}.html`, BOOKS[subject].base).toString()];
+    }
+    return resolveChemistryGQuizUrls(topic);
+  }
+
   if (subject === "biologia-g-gymnasiou") return resolveBiologyGQuizUrls(topic);
 
   if (subject === "biologia-b-gymnasiou") {
@@ -1639,6 +1680,33 @@ function resolveDirectSourceUrls(subject, topic) {
 
   if (subject === "thriskeftika-b-gymnasiou") {
     return resolveReligionBSourceUrls(topic);
+  }
+
+  if (subject === "english-g-gymnasiou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/";
+    const unitMatch = String(topic || "").match(/^\s*Unit\s+(\d+)\b/i);
+    const unit = unitMatch ? Number(unitMatch[1]) : 0;
+    if (!Number.isInteger(unit) || unit < 1 || unit > 10) return [];
+    return [1, 2, 3].map(lesson =>
+      new URL(`index${unit}_${lesson}.html`, base).toString()
+    );
+  }
+
+  if (subject === "biologia-a-lykeiou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/";
+    const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
+    const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
+    if (!Number.isInteger(chapter) || chapter < 1 || chapter > 12) return [];
+    return [new URL(`index${chapter}.html`, base).toString()];
+  }
+
+  if (subject === "ekthesi-g-lykeiou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/";
+    const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
+    const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
+    const paths = { 1: "indexa_01.html", 2: "indexc_00.html", 3: "indexf_00.html" };
+    if (paths[chapter]) return [new URL(paths[chapter], base).toString()];
+    return [];
   }
 
   if (subject === "biologia-a-gymnasiou") {
@@ -2006,6 +2074,26 @@ function topicLabelCandidates(topic) {
     .trim();
   variants.push(withoutUnit);
 
+  const unitPrefixMatch = raw.match(/^\s*((?:\d+\s*(?:η|ή)?\s*ενότητα)|(?:ενότητα\s*\d+))/i);
+  if (unitPrefixMatch?.[1]) variants.push(unitPrefixMatch[1]);
+
+  // Same exact numeric unit, regardless of whether the official book writes
+  // "1η Ενότητα" or "Ενότητα 1η". This is deterministic normalization,
+  // not fuzzy matching: only the explicit unit number is compared.
+  const numericUnitMatch =
+    raw.match(/ενότητα\s*(\d+)\s*(?:η|ή)?(?=\s|$|[·—–:.,;\-])/i) ||
+    raw.match(/^\s*(\d+)\s*(?:η|ή)?\s*ενότητα(?=\s|$|[·—–:.,;\-])/i);
+  if (numericUnitMatch?.[1]) variants.push(`ενότητα ${numericUnitMatch[1]}`);
+
+  const periodUnitPrefixMatch = raw.match(/^\s*([Α-ΩA-Z]+[΄'’]?\s*περίοδος\s*[·—–:-]\s*[Α-ΩA-Z]+[΄'’]?\s*ενότητα)/i);
+  if (periodUnitPrefixMatch?.[1]) variants.push(periodUnitPrefixMatch[1]);
+
+  const greekLetterUnitPrefix = raw.match(/^\s*(ενότητα\s+[Α-ΩA-Z]+[΄'’]?)/i);
+  if (greekLetterUnitPrefix?.[1]) variants.push(greekLetterUnitPrefix[1]);
+
+  const greekLetterPrefix = raw.match(/^\s*([Α-ΩA-Z]+[΄'’]?)\s*[—–:-]/i);
+  if (greekLetterPrefix?.[1]) variants.push(greekLetterPrefix[1]);
+
   const withoutChapterWord = raw
     .replace(/^\s*(?:κεφάλαιο|chapter)\s*/i, "")
     .trim();
@@ -2037,6 +2125,36 @@ function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
   const wanted = new Set(topicLabelCandidates(topic));
   if (!wanted.size || !html || !book?.base) return [];
 
+  const source = String(html);
+
+  // Prefer an exact optgroup when the official navigation represents one
+  // curriculum section as a group of chapter/page links. This gives the whole
+  // selected section instead of accidentally grounding only its first page.
+  const groupMatches = [];
+  const groupRe = /<optgroup\b[^>]*label\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/optgroup>/gi;
+  let match;
+  while ((match = groupRe.exec(source))) {
+    const groupLabelCandidates = topicLabelCandidates(decodeEntities(match[1] || ""));
+    if (!groupLabelCandidates.some((label) => wanted.has(label))) continue;
+
+    const urls = [];
+    const body = String(match[2] || "");
+    const groupOptionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
+    let optionMatch;
+    while ((optionMatch = groupOptionRe.exec(body))) {
+      const href = String(optionMatch[1] || "").trim();
+      if (!href || /^javascript:/i.test(href) || href.startsWith("#")) continue;
+      let absolute = "";
+      try { absolute = new URL(href, book.base).toString(); } catch (_) { continue; }
+      if (!officialLinkAllowed(absolute)) continue;
+      if (!/\.html?(?:$|[?#])/i.test(absolute)) continue;
+      if (!urls.includes(absolute)) urls.push(absolute);
+    }
+    if (urls.length) groupMatches.push(urls);
+  }
+  if (groupMatches.length === 1) return groupMatches[0];
+  if (groupMatches.length > 1) return [];
+
   const matches = [];
   const addExact = (href, rawLabel) => {
     href = String(href || "").trim();
@@ -2050,14 +2168,9 @@ function resolveLinkedSectionUrlsFromHtml(book, topic, html) {
     if (!matches.includes(absolute)) matches.push(absolute);
   };
 
-  const source = String(html);
   const anchorRe = /<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-  let match;
   while ((match = anchorRe.exec(source))) addExact(match[1], match[2]);
 
-  // Official enriched schoolbooks often expose their navigation as <select><option>.
-  // This is still exact extraction: option label must match the requested section,
-  // and the target must remain on the official ebooks.edu.gr domain.
   const optionRe = /<option\b[^>]*value\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/option>/gi;
   while ((match = optionRe.exec(source))) addExact(match[1], match[2]);
 

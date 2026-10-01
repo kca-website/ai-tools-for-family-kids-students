@@ -2,7 +2,7 @@
   "use strict";
   const rows={
     "math-a-dimotikou":{
-      sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-A102",
+      sourceUrl:"https://www.ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/",
       sections:[
         "1η Ενότητα — Οι αριθμοί μέχρι το 5 - Χώρος και σχήματα",
         "2η Ενότητα — Πρόσθεση και ανάλυση αριθμών μέχρι το 5",
@@ -147,7 +147,7 @@
       ]
     },
     "math-b-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-B101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/",
       sections:[
         "1η Ενότητα — Κεφάλαια 1-8",
         "2η Ενότητα — Κεφάλαια 9-15",
@@ -161,7 +161,7 @@
       ]
     },
     "math-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-C102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/",
       sections:[
         "1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα",
         "2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα",
@@ -228,7 +228,7 @@
       ]
     },
     "math-e-dimotikou":{
-      sourceUrl:"https://dev.old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2282/Mathimatika_E-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Μεγάλοι αριθμοί και επίλυση προβλημάτων",
         "Ενότητα 2 — Δεκαδικοί αριθμοί και στρογγυλοποίηση",
@@ -323,7 +323,7 @@
       ]
     },
     "math-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2186/Mathimatika_ST-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Αριθμοί και Πράξεις",
         "Ενότητα 2 — Εξισώσεις",
@@ -358,7 +358,7 @@
       ]
     },
     "istoria-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E105/157/1111%2C4055/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/",
       sections:[
         "Α΄ — Οι Έλληνες και οι Ρωμαίοι",
         "Β΄ — Η Ρωμαϊκή Αυτοκρατορία μεταμορφώνεται",
@@ -385,7 +385,7 @@
       ]
     },
     "english-d-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-D101",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2266/Agglika_D-Dimotikou_html-empl/",
       sections:[
         "Unit 1 — Back to school",
         "Unit 2 — What's your favourite hobby or sport?",
@@ -400,7 +400,7 @@
       ]
     },
     "english-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-E103",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2268/Agglika_E-Dimotikou_html-empl/",
       sections:[
         "Unit 1 — Internet friends around Europe",
         "Unit 2 — School life and the world around us",
@@ -447,7 +447,7 @@
       ]
     },
     "istoria-c-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-C103/88/701%2C2641/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/1999/Istoria_G-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Η δημιουργία του κόσμου",
         "Ενότητα 2 — Ο Ηρακλής",
@@ -462,7 +462,7 @@
       ]
     },
     "science-e-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-E107/154/1099%2C4022/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2190/Fysika_E-Dimotikou_html-empl/",
       sections:[
         "Υλικά σώματα",
         "Μίγματα",
@@ -475,7 +475,7 @@
       ]
     },
     "glossa-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSDIM-F102/416/2788%2C16955/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2005/Glossa_ST-Dimotikou_html-empl/",
       sections:[
         "Ενότητα 1 — Ταξίδια, τόποι, μεταφορικά μέσα",
         "Ενότητα 2 — Κατοικία",
@@ -497,7 +497,7 @@
       ]
     },
     "istoria-st-dimotikou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSDIM-F114",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/",
       sections:[
         "Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)",
         "Ενότητα Β — Οι Έλληνες κάτω από την οθωμανική και τη λατινική κυριαρχία (1453-1821)",
@@ -555,7 +555,7 @@
       ]
     },
     "fysiki-g-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C201/296/2071%2C7277/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/",
       sections:[
         "Κεφάλαιο 1 — Ηλεκτρική δύναμη και φορτίο",
         "Κεφάλαιο 2 — Ηλεκτρικό ρεύμα",
@@ -625,7 +625,7 @@
       ]
 },
     "glossa-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C107",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2216/Neoelliniki-Glossa_G-Gymnasiou_html-empl/",
       sections:[
         "1η Ενότητα — Η Ελλάδα στον κόσμο",
         "2η Ενότητα — Γλώσσα - γλώσσες και πολιτισμοί του κόσμου",
@@ -829,7 +829,7 @@
 ]
     },
     "chimeia-g-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGYM-C102",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2208/Chimeia_G-Gymnasiou_html-empl/",
       sections:[
         "1η Ενότητα · Κεφάλαιο 1 — Τα οξέα",
         "1η Ενότητα · Κεφάλαιο 2 — Οι βάσεις",
@@ -849,7 +849,7 @@
       ]
     },
     "ekthesi-g-lykeiou":{
-      sourceUrl:"https://lb1.ebooks.edu.gr/ebooks/handle/8547/2678",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/",
       sections:[
         "Κεφάλαιο 1 — Η πειθώ",
         "Κεφάλαιο 2 — Το δοκίμιο - Το άρθρο - Η επιφυλλίδα",
@@ -859,7 +859,7 @@
       ]
     },
     "biologia-a-lykeiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/new/tautotita.php?course=DSGL-A105",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/",
       sections:[
         "Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό",
         "Κεφάλαιο 2 — Πεπτικό σύστημα",
@@ -991,7 +991,7 @@
       ]
 },
     "english-g-gymnasiou":{
-      sourceUrl:"https://old.ebooks.edu.gr/modules/ebook/show.php/DSGYM-C109/499/3246%2C21317/",
+      sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/",
       sections:[
         "Unit 1 — A Wonderful World",
         "Unit 2 — Teen idols",
@@ -1085,7 +1085,7 @@
 }
   };
   const api=Object.freeze({
-    version:"2.10.0",
+    version:"2.13.0",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

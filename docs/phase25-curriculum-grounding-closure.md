@@ -32,3 +32,5 @@ This phase exists to prevent “mapped curriculum” from being confused with �
 A selectable curriculum topic that requires an official source may be answered by the tutor only when the exact source text is loaded, or when the learner supplies a document. Official annual guidance can define what is taught, but must not silently authorize model-memory answers about textbook content.
 
 Phase 25 is complete only when the combined workflow stays green and every remaining non-exact area is explicitly represented as guidance/framework/blocked rather than “exact”.
+
+The combined gate is intentionally read-only: it does not promote a topic merely because a source hub exists.

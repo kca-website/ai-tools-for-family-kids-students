@@ -66,6 +66,21 @@ assert.match(syntheticScoped, /2\.1 ΠΡΩΤΗ ΕΝΟΤΗΤΑ/);
 assert.match(syntheticScoped, /2\.1\.1 Υποενότητα/);
 assert.doesNotMatch(syntheticScoped, /2\.2 ΔΕΥΤΕΡΗ ΕΝΟΤΗΤΑ/);
 
+// Introductory GEL headings can be written as "Ε.2" in the official HTML while
+// the verified inventory canonically stores "Ε2". This punctuation difference
+// must not make an otherwise exact anchored section fail closed.
+const syntheticIntroHtml = [
+  '<a id="eis2"></a>',
+  '<h2>Ε.2 ΣΥΝΟΛΑ</h2>',
+  '<p>' + 'Ακριβές περιεχόμενο για τα σύνολα. '.repeat(45) + '</p>'
+].join('');
+const syntheticIntroScoped = selectGelAnchoredSectionText(
+  syntheticIntroHtml,
+  'https://ebooks.edu.gr/ebooks/v/html/example/index.html#eis2',
+  { heading:'Ε2 ΣΥΝΟΛΑ', granularity:'section-anchor' }
+);
+assert.match(syntheticIntroScoped, /Ε\.2 ΣΥΝΟΛΑ/);
+
 // High-confidence HTML representatives across grades and full/partial coverage.
 // Pull labels from the verified inventory itself so the test exercises the exact site label,
 // not a separately retyped book heading.

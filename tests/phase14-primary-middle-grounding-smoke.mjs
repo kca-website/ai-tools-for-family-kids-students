@@ -53,6 +53,62 @@ for (const topic of geographyGrounded) {
   assert.ok(String(live.body?.text || "").length >= 500);
 }
 
+const informatics = {
+  "pliroforiki-a-gymnasiou": [
+    "Διαδίκτυο, Ιστορία του Διαδικτύου, Υπηρεσίες Διαδικτύου",
+    "Βασικές Έννοιες Πληροφορικής",
+    "Το Υλικό του Υπολογιστή",
+    "Επεξεργασία Κειμένου – Μορφοποίηση Γραμματοσειράς και Παραγράφου"
+  ],
+  "pliroforiki-b-gymnasiou": [
+    "Ψηφιακός Κόσμος",
+    "Το Εσωτερικό του Υπολογιστή",
+    "Δίκτυα Υπολογιστών",
+    "Χρήση συναρτήσεων στο λογισμικό Υπολογιστικά Φύλλα",
+    "Παρουσιάσεις – Διαχείριση Διαφανειών, Εναλλαγή Διαφανειών, Κινήσεις"
+  ],
+  "pliroforiki-c-gymnasiou": [
+    "Πρόβλημα – Αλγόριθμος",
+    "Αριθμητικές Πράξεις, Εντολές Εξόδου",
+    "Εντολές Εξόδου, Μεταβλητές",
+    "Σχεδιασμός γεωμετρικών σχημάτων – Επανάληψη – Διαδικασίες",
+    "Επιλέγοντας"
+  ]
+};
+
+for (const [subject, topics] of Object.entries(informatics)) {
+  for (const topic of topics) {
+    const live = await endpoint.resolveOfficialSchoolbookSource(subject, topic);
+    results.push({ subject, topic, ok:live.ok, sourceUrl:live.body?.sourceUrl });
+    assert.equal(live.ok, true, subject + " / " + topic + " => " + JSON.stringify(live.body));
+    assert.equal(live.body?.grounded, true);
+    assert.ok(String(live.body?.text || "").length >= 400);
+  }
+}
+
+const informaticsSafetyFail = await endpoint.resolveOfficialSchoolbookSource(
+  "pliroforiki-a-gymnasiou",
+  "Κίνδυνοι στο Διαδίκτυο – Κανόνες Συμπεριφοράς"
+);
+assert.equal(informaticsSafetyFail.ok, false, "A Gymnasium internet-safety anchor must stay fail-closed until an exact official book page is verified.");
+assert.notEqual(informaticsSafetyFail.body?.grounded, true);
+
+const technologyTopics = [
+  "Τεχνολογικό περιβάλλον και τεχνολογικοί άξονες",
+  "Επιλογή και μελέτη τεχνολογικού αντικειμένου",
+  "Ατομική εργασία: σχεδιασμός και κατασκευή",
+  "Τεχνικό σχέδιο, υλικά και εργαλεία",
+  "Παρουσίαση και αξιολόγηση της κατασκευής"
+];
+
+for (const topic of technologyTopics) {
+  const live = await endpoint.resolveOfficialSchoolbookSource("technologia-a-gymnasiou", topic);
+  results.push({ subject:"technologia-a-gymnasiou", topic, ok:live.ok, sourceUrl:live.body?.sourceUrl, pages:live.body?.sourceUrls?.length || 0 });
+  assert.equal(live.ok, true, topic + " => " + JSON.stringify(live.body));
+  assert.equal(live.body?.grounded, true);
+  assert.ok(String(live.body?.text || "").length >= 400);
+}
+
 const impossible = await endpoint.resolveOfficialSchoolbookSource("geografia-a-gymnasiou", "Ανύπαρκτη ενότητα");
 assert.equal(impossible.ok, false);
 assert.notEqual(impossible.body?.grounded, true);
@@ -61,6 +117,7 @@ console.log("PHASE14_PRIMARY_MIDDLE_GROUNDING=" + JSON.stringify({
   exactGrounded: results,
   deliberateFailClosed: [
     "fysiki-a-gymnasiou / Μέτρηση όγκου",
-    "fysiki-a-gymnasiou / Μέτρηση πυκνότητας"
+    "fysiki-a-gymnasiou / Μέτρηση πυκνότητας",
+    "pliroforiki-a-gymnasiou / Κίνδυνοι στο Διαδίκτυο – Κανόνες Συμπεριφοράς"
   ]
 }, null, 2));

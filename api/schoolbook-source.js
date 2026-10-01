@@ -112,6 +112,54 @@ const BOOKS = {
     lastVerified: "2026-10-01",
     annualScopeVerified: true
   },
+  "pliroforiki-a-gymnasiou": {
+    title: "Πληροφορική Α΄, Β΄, Γ΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2759/Pliroforiki_A-B-G-Gymnasiou_html-empl/",
+    mode: "phase14InformaticsA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "pliroforiki-b-gymnasiou": {
+    title: "Πληροφορική Α΄, Β΄, Γ΄ Γυμνασίου",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2759/Pliroforiki_A-B-G-Gymnasiou_html-empl/",
+    mode: "phase14InformaticsB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "pliroforiki-c-gymnasiou": {
+    title: "Πληροφορική Α΄, Β΄, Γ΄ Γυμνασίου",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2759/Pliroforiki_A-B-G-Gymnasiou_html-empl/",
+    mode: "phase14InformaticsC",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "technologia-a-gymnasiou": {
+    title: "Τεχνολογία Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2248/Technologia_A-Gymnasiou_html-empl/",
+    mode: "phase14TechnologyA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
   "fysiki-agogi-a-gymnasiou": {
     title: "Φυσική Αγωγή Α΄ Γυμνασίου",
     grade: "a",
@@ -1568,6 +1616,57 @@ function clean(value, max) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "pliroforiki-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Διαδίκτυο, Ιστορία του Διαδικτύου, Υπηρεσίες Διαδικτύου"), ["indexA_4_1.html"]],
+      [normalize("Βασικές Έννοιες Πληροφορικής"), ["indexA_1_1.html"]],
+      [normalize("Το Υλικό του Υπολογιστή"), ["indexA_1_2.html"]],
+      [normalize("Επεξεργασία Κειμένου – Μορφοποίηση Γραμματοσειράς και Παραγράφου"), ["indexA_3_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "pliroforiki-b-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Ψηφιακός Κόσμος"), ["indexB_1_1.html"]],
+      [normalize("Το Εσωτερικό του Υπολογιστή"), ["indexB_1_2.html"]],
+      [normalize("Δίκτυα Υπολογιστών"), ["indexB_1_4.html"]],
+      [normalize("Χρήση συναρτήσεων στο λογισμικό Υπολογιστικά Φύλλα"), ["indexB_3_8.html"]],
+      [normalize("Παρουσιάσεις – Διαχείριση Διαφανειών, Εναλλαγή Διαφανειών, Κινήσεις"), ["indexB_3_9.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "pliroforiki-c-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Πρόβλημα – Αλγόριθμος"), ["indexG_1_1.html"]],
+      [normalize("Αριθμητικές Πράξεις, Εντολές Εξόδου"), ["indexG_1_2.html"]],
+      [normalize("Εντολές Εξόδου, Μεταβλητές"), ["indexG_1_2.html"]],
+      [normalize("Σχεδιασμός γεωμετρικών σχημάτων – Επανάληψη – Διαδικασίες"), ["indexG_1_2.html"]],
+      [normalize("Επιλέγοντας"), ["indexG_1_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "technologia-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Τεχνολογικό περιβάλλον και τεχνολογικοί άξονες"), ["index1.html", "index3.html"]],
+      [normalize("Επιλογή και μελέτη τεχνολογικού αντικειμένου"), ["index3.html"]],
+      [normalize("Ατομική εργασία: σχεδιασμός και κατασκευή"), ["index2.html", "index4.html"]],
+      [normalize("Τεχνικό σχέδιο, υλικά και εργαλεία"), ["index4.html", "index7.html"]],
+      [normalize("Παρουσίαση και αξιολόγηση της κατασκευής"), ["index5.html", "index6.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
 
   if (subject === "fysiki-a-gymnasiou") {
     const base = BOOKS[subject].base;

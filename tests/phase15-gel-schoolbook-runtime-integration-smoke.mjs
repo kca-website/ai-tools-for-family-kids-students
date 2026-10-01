@@ -55,7 +55,13 @@ assert.equal(exactPdf, 11);
 assert.equal(manualHtml, manualOverrides.count);
 assert.equal(manualHtml, 166);
 
-assert.ok(blocked > 300);
+// Every inventory topic must be accounted for even as verified manual mappings
+// reduce the blocked backlog. Medium HTML topics are counted separately above.
+const totalTopics = Object.values(inventory.all()).reduce(
+  (total, subject) => total + (subject.topicMappings || []).length, 0
+);
+assert.equal(highHtml + exactPdf + manualHtml + blocked, totalTopics);
+assert.ok(blocked > 0);
 
 // Anchor scoping unit contract: keep nested headings in the current section,
 // but stop before the next peer section.

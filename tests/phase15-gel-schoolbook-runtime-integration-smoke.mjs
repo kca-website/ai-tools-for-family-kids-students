@@ -47,11 +47,14 @@ assert.ok(blocked > 400);
 // Anchor scoping unit contract: keep nested headings in the current section,
 // but stop before the next peer section.
 const syntheticHtml = [
-  '<h2 id="s21">2.1 ΠΡΩΤΗ ΕΝΟΤΗΤΑ</h2>',
+  '<a id="s21"></a>',
+  '<h2>2.1 ΠΡΩΤΗ ΕΝΟΤΗΤΑ</h2>',
   '<p>' + 'Ακριβές περιεχόμενο ενότητας. '.repeat(40) + '</p>',
-  '<h3 id="s211">2.1.1 Υποενότητα</h3>',
+  '<a id="s211"></a>',
+  '<h3>2.1.1 Υποενότητα</h3>',
   '<p>' + 'Περιεχόμενο υποενότητας. '.repeat(25) + '</p>',
-  '<h2 id="s22">2.2 ΔΕΥΤΕΡΗ ΕΝΟΤΗΤΑ</h2>',
+  '<a id="s22"></a>',
+  '<h2>2.2 ΔΕΥΤΕΡΗ ΕΝΟΤΗΤΑ</h2>',
   '<p>' + 'Δεν πρέπει να συμπεριληφθεί. '.repeat(30) + '</p>'
 ].join('');
 const syntheticScoped = selectGelAnchoredSectionText(

@@ -19,27 +19,27 @@
   "excludedBoundaries": [
     {
       "after": "1.1 Άνθρωπος: κοινωνικό, οικονομικό και πολιτικό ον",
-      "nextExcludedStart": 12
+      "nextExcludedStart": 13
     },
     {
       "after": "5.1–5.6 Βασικά οικονομικά μεγέθη: ΑΕΠ, εισόδημα και βιοτικό επίπεδο",
-      "nextExcludedStart": 83
+      "nextExcludedStart": 84
     },
     {
       "after": "6.1 Κοινωνικοποίηση και πολιτικοποίηση",
-      "nextExcludedStart": 74
+      "nextExcludedStart": 75
     },
     {
       "after": "7.6–7.8 Φορολογική συνείδηση, κοινωνική ευαισθησία και εθελοντισμός",
-      "nextExcludedStart": 100
+      "nextExcludedStart": 101
     },
     {
       "after": "12.1–12.4.4 Μετανάστευση, πρόσφυγες, ιθαγένεια και δημοκρατική συμβίωση",
-      "nextExcludedStart": 164
+      "nextExcludedStart": 165
     },
     {
       "after": "13.1–13.5 Κοινωνικά προβλήματα, φτώχεια, βία, υπερδανεισμός και δημογραφικό",
-      "nextExcludedStart": 180
+      "nextExcludedStart": 181
     }
   ],
   "sections": [
@@ -47,96 +47,96 @@
       "label": "1.1 Άνθρωπος: κοινωνικό, οικονομικό και πολιτικό ον",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 10,
-      "endPage": 11,
+      "page": 11,
+      "endPage": 12,
       "heading": "1.1 Άνθρωπος: κοινωνικό, οικονομικό και πολιτικό ον"
     },
     {
       "label": "1.5 Η οικονομία — κοινωνία, πολιτεία και οικονομία",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 18,
-      "endPage": 20,
+      "page": 19,
+      "endPage": 21,
       "heading": "1.5 Η οικονομία"
     },
     {
       "label": "2.1–2.2 Η κοινωνία και τα βασικά χαρακτηριστικά της ελληνικής κοινωνίας",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 22,
-      "endPage": 30,
+      "page": 23,
+      "endPage": 31,
       "heading": "2.1 Από την αγροτική κοινωνία στην κοινωνία της πληροφορίας και της γνώσης"
     },
     {
       "label": "4.4–4.5 Το κράτος και βασικά χαρακτηριστικά της ελληνικής οικονομίας",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 52,
-      "endPage": 56,
+      "page": 53,
+      "endPage": 57,
       "heading": "4.4 Το κράτος ως παραγωγός και ως καταναλωτής"
     },
     {
       "label": "5.1–5.6 Βασικά οικονομικά μεγέθη: ΑΕΠ, εισόδημα και βιοτικό επίπεδο",
       "work": "8547/5582",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/5584/22-0293-01_V2_Oikonomika_G-Gymnasiou_Vivlio-Mathiti/",
-      "page": 76,
-      "endPage": 82,
+      "page": 77,
+      "endPage": 83,
       "heading": "5.1 ΕΙΣΑΓΩΓΗ"
     },
     {
       "label": "5.8 Πληθωρισμός",
       "work": "8547/5582",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/5584/22-0293-01_V2_Oikonomika_G-Gymnasiou_Vivlio-Mathiti/",
-      "page": 87,
-      "endPage": 87,
+      "page": 88,
+      "endPage": 88,
       "heading": "5.8 ΠΛΗΘΩΡΙΣΜΟΣ"
     },
     {
       "label": "6.1 Κοινωνικοποίηση και πολιτικοποίηση",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 72,
-      "endPage": 73,
+      "page": 73,
+      "endPage": 74,
       "heading": "6.1 Κοινωνικοποίηση και πολιτικοποίηση"
     },
     {
       "label": "6.2.4–6.3 ΜΜΕ, πολιτικά κόμματα, μαθητικές κοινότητες και κοινωνικός έλεγχος",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 75,
-      "endPage": 82,
+      "page": 76,
+      "endPage": 83,
       "heading": "6.2.4 Τα Μέσα Μαζικής Επικοινωνίας"
     },
     {
       "label": "7.6–7.8 Φορολογική συνείδηση, κοινωνική ευαισθησία και εθελοντισμός",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 94,
-      "endPage": 99,
+      "page": 95,
+      "endPage": 100,
       "heading": "7.6 Φορολογική συνείδηση"
     },
     {
       "label": "7.10 Ο ψηφιακός πολίτης",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 102,
-      "endPage": 103,
+      "page": 103,
+      "endPage": 104,
       "heading": "7.10 Ο ψηφιακός πολίτης"
     },
     {
       "label": "12.1–12.4.4 Μετανάστευση, πρόσφυγες, ιθαγένεια και δημοκρατική συμβίωση",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 156,
-      "endPage": 163,
+      "page": 157,
+      "endPage": 164,
       "heading": "12.1 Η μετανάστευση"
     },
     {
       "label": "13.1–13.5 Κοινωνικά προβλήματα, φτώχεια, βία, υπερδανεισμός και δημογραφικό",
       "work": "8547/2429",
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
-      "page": 170,
-      "endPage": 179,
+      "page": 171,
+      "endPage": 180,
       "heading": "13.1 Κοινωνικά προβλήματα"
     }
   ]

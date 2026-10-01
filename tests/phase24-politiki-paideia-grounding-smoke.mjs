@@ -29,13 +29,21 @@ for(const boundary of manifest.excludedBoundaries){
   assert.ok(section); assert.ok(section.endPage<boundary.nextExcludedStart,boundary.after+" crosses excluded scope");
 }
 if(process.env.PHASE24_LIVE==="1"){
+  const failures=[];
   for(const section of manifest.sections){
-    const result=await endpoint.resolveOfficialSchoolbookSource(manifest.subjectId,section.label);
-    assert.equal(result.ok,true,section.label+" => "+JSON.stringify(result.body));
-    assert.equal(result.body.grounded,true); assert.equal(result.body.mappingStatus,"official-gel-inventory-exact-pdf");
-    assert.equal(result.body.pdfPageEnd,section.endPage); assert.equal(result.body.annualScopeVerified,true);
-    assert.ok(String(result.body.text||"").length>=300);
-    assert.ok(pdf.normalizePdfText(result.body.text).includes(pdf.normalizePdfText(section.heading)),section.heading);
+    try{
+      const result=await endpoint.resolveOfficialSchoolbookSource(manifest.subjectId,section.label);
+      assert.equal(result.ok,true,section.label+" => "+JSON.stringify(result.body));
+      assert.equal(result.body.grounded,true);
+      assert.equal(result.body.mappingStatus,"official-gel-inventory-exact-pdf");
+      assert.equal(result.body.pdfPageEnd,section.endPage);
+      assert.equal(result.body.annualScopeVerified,true);
+      assert.ok(String(result.body.text||"").length>=300);
+      assert.ok(pdf.normalizePdfText(result.body.text).includes(pdf.normalizePdfText(section.heading)),section.heading);
+    }catch(error){
+      failures.push(section.label+" :: "+error.message);
+    }
   }
+  assert.deepEqual(failures,[],failures.join("\n"));
 }
 console.log("PHASE24_POLITIKI_PAIDEIA="+JSON.stringify({topics:12,books:2,live:process.env.PHASE24_LIVE==="1"}));

@@ -28,6 +28,13 @@ try {
   GENERAL_ED_BOOK_CATALOG = null;
 }
 
+let GEL_SCHOOLBOOK_SOURCE_MAP = null;
+try {
+  GEL_SCHOOLBOOK_SOURCE_MAP = require("../gel-schoolbook-source-map-2026-2027.js");
+} catch (_) {
+  GEL_SCHOOLBOOK_SOURCE_MAP = null;
+}
+
 const PRIMARY_GUIDANCE_2026_2027 =
   "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-mathimaton-protovathmias-gia-to-scholiko-etos-2026-2027/";
 const MIDDLE_GUIDANCE_2026_2027 =
@@ -83,6 +90,74 @@ function buildCatalogBook(subject) {
     lastVerified: row.lastVerified || "2026-09-30",
     annualScopeVerified: row.annualScopeVerified === true,
     catalogBacked: true
+  };
+}
+
+function resolveGelInventoryTopic(subject, topic) {
+  const row = GEL_SCHOOLBOOK_SOURCE_MAP?.get?.(subject);
+  if (!row) return null;
+
+  const rawTopic = String(topic || "").trim();
+  const matches = (row.topicMappings || []).filter((entry) =>
+    String(entry?.label || "").trim() === rawTopic
+  );
+
+  if (matches.length !== 1) {
+    return {
+      row,
+      mapping: null,
+      book: null,
+      runtimeEligible: false,
+      reason: "topic-label-not-exactly-resolved"
+    };
+  }
+
+  const mapping = matches[0];
+  const book = (row.books || []).find((entry) =>
+    entry?.role === "primary" && entry?.work === mapping?.work
+  ) || null;
+
+  const exactHtmlHigh =
+    mapping?.status === "exact-html" &&
+    mapping?.confidence === "high" &&
+    !!mapping?.url &&
+    catalogHtmlSourceAllowed(mapping.url) &&
+    !!book?.html?.url &&
+    catalogHtmlSourceAllowed(book.html.url);
+
+  return {
+    row,
+    mapping,
+    book,
+    runtimeEligible: exactHtmlHigh,
+    reason: exactHtmlHigh
+      ? ""
+      : (mapping?.status === "exact-pdf"
+        ? "official-pdf-page-verified-text-parser-not-enabled"
+        : (mapping?.status === "exact-html" && mapping?.confidence === "medium"
+          ? "medium-confidence-not-activated"
+          : (mapping?.reason || mapping?.status || "not-runtime-eligible")))
+  };
+}
+
+function buildGelInventoryBook(resolution) {
+  if (!resolution?.runtimeEligible) return null;
+  const { row, mapping, book } = resolution;
+  return {
+    title: book?.title || row?.labelEl || row?.subjectId || "Επίσημο σχολικό βιβλίο",
+    grade: row?.grade || null,
+    base: book.html.url,
+    mode: "gelInventoryExactHtml",
+    officialSourceRequired: true,
+    schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
+    curriculumSource: HIGH_GUIDANCE_2026_2027,
+    mappingStatus: "official-gel-inventory-exact-html",
+    lastVerified: GEL_SCHOOLBOOK_SOURCE_MAP?.generatedAt || "2026-10-01",
+    annualScopeVerified: false,
+    gelInventoryBacked: true,
+    mappingConfidence: mapping.confidence || null,
+    labelParaphrase: mapping.labelParaphrase === true,
+    verifiedHeading: mapping.heading || null
   };
 }
 
@@ -1517,7 +1592,45 @@ module.exports = async function handler(req, res) {
   const rawSubject = clean(req.query?.subject, 120);
   const topic = clean(req.query?.topic, 500);
   const subject = ALIASES[rawSubject] || rawSubject;
-  const book = BOOKS[subject] || buildCatalogBook(subject);
+  const gelInventory = topic ? resolveGelInventoryTopic(subject, topic) : null;
+
+  if (gelInventory && !gelInventory.runtimeEligible) {
+    const mapping = gelInventory.mapping;
+    const fallbackTitle =
+      gelInventory.book?.title ||
+      (gelInventory.row?.books || []).find((entry) => entry?.role === "primary")?.title ||
+      gelInventory.row?.labelEl ||
+      subject;
+
+    if (mapping?.status === "exact-pdf") {
+      return res.status(409).json({
+        grounded: false,
+        error: "official_pdf_text_not_grounded",
+        bookTitle: fallbackTitle,
+        schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
+        mappingStatus: "official-gel-inventory-exact-pdf",
+        sourceUrl: mapping.url || null,
+        pdfPage: mapping.pdfPage || null,
+        verifiedHeading: mapping.heading || null,
+        message: "Η επίσημη σελίδα PDF έχει επαληθευτεί, αλλά δεν υπάρχει ακόμη server-side εξαγωγή του κειμένου της συγκεκριμένης σελίδας. Δεν θα χρησιμοποιηθεί γενική γνώση ως υποκατάστατο."
+      });
+    }
+
+    return res.status(404).json({
+      grounded: false,
+      error: "section_not_resolved",
+      bookTitle: fallbackTitle,
+      schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
+      reviewStatus: gelInventory.reason,
+      inventoryStatus: mapping?.status || gelInventory.row?.status || null,
+      message: "Η επιλογή δεν έχει ακόμη ακριβή, ενεργοποιημένη αντιστοίχιση σε επίσημο κείμενο σχολικού βιβλίου."
+    });
+  }
+
+  const book =
+    BOOKS[subject] ||
+    buildCatalogBook(subject) ||
+    buildGelInventoryBook(gelInventory);
 
   if (!book || !topic) {
     return res.status(404).json({
@@ -1528,6 +1641,9 @@ module.exports = async function handler(req, res) {
   }
 
   let directUrls = resolveDirectSourceUrls(subject, topic);
+  if (!directUrls.length && gelInventory?.runtimeEligible) {
+    directUrls = [gelInventory.mapping.url];
+  }
   if (!directUrls.length && book.mode === "linkedSection") {
     directUrls = await resolveLinkedSectionUrls(book, topic);
   }
@@ -1641,6 +1757,9 @@ module.exports = async function handler(req, res) {
       sourceUrl,
       sourceUrls,
       canonicalSourceUrl: book.canonicalSourceUrl || null,
+      mappingConfidence: book.mappingConfidence || null,
+      labelParaphrase: book.labelParaphrase === true,
+      verifiedHeading: book.verifiedHeading || null,
       text: useful.slice(0, 42000)
     });
   } catch (err) {
@@ -2899,6 +3018,8 @@ module.exports._test = Object.freeze({
   resolveExplicitSectionUrls,
   buildCatalogBook,
   catalogHtmlSourceAllowed,
+  resolveGelInventoryTopic,
+  buildGelInventoryBook,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,
   HISTORY_G_GYM_DIAGNOSTIC_PATHS,

@@ -169,6 +169,12 @@ jobs:
       - name: Run Phase 14 Primary and Gymnasium strict grounding
         run: node tests/phase14-primary-middle-grounding-smoke.mjs
 
+      - name: Run Phase 14 GEL schoolbook-source inventory audit
+        run: node tests/phase14-gel-schoolbook-source-audit.mjs
+
+      - name: Run Phase 15 GEL runtime grounding integration
+        run: node tests/phase15-gel-schoolbook-runtime-integration-smoke.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-const BASE = process.env.AITOOLSKIDS_PROD_BASE || "https://www.aitools4kids.gr";
+// Production gate: all learner-facing actions must return a usable grounded result.\nconst BASE = process.env.AITOOLSKIDS_PROD_BASE || "https://www.aitools4kids.gr";
 const subjectId = "istoria-b-gymnasiou";
 const topic = "Κεφάλαιο 1 · Ι · 1 — Από τη Ρώμη στη Νέα Ρώμη";
 

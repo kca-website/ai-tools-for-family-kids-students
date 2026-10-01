@@ -123,7 +123,12 @@
         <div id="plan" class="plan hidden"></div>
         <div class="material-panel" style="margin-top:0;border-top:0;padding-top:0">
           <h3 data-el="Μετέτρεψε την ύλη σου" data-en="Turn your material into study activities">Μετέτρεψε την ύλη σου</h3>
+          <div id="studyCharacterPanel" class="hidden" style="margin-bottom:12px">
+            <label for="studyCharacter" data-el="Ιστορικός χαρακτήρας της ενότητας" data-en="Historical character for this section">Ιστορικός χαρακτήρας της ενότητας</label><select id="studyCharacter"></select>
+            <p class="micro" data-el="Εκπαιδευτική αναπαράσταση AI. Ο διάλογος βασίζεται στην επιλεγμένη πηγή, χωρίς αυθεντικές μαρτυρίες ή επινοημένα λόγια." data-en="AI educational representation. Dialogue uses the selected source, without authentic testimony or invented quotations.">Εκπαιδευτική αναπαράσταση AI. Ο διάλογος βασίζεται στην επιλεγμένη πηγή, χωρίς αυθεντικές μαρτυρίες ή επινοημένα λόγια.</p>
+            </div>
           <div class="study-actions">
+            <button class="study-action hidden" data-action="character" type="button"><span data-el="🎭 Μίλα με ιστορικό χαρακτήρα" data-en="🎭 Talk with a historical character">🎭 Μίλα με ιστορικό χαρακτήρα</span><span data-el="διάλογος πάνω στην ενότητα του βιβλίου" data-en="dialogue based on the textbook section">διάλογος πάνω στην ενότητα του βιβλίου</span></button>
             <button class="study-action" data-action="audio" type="button"><span class="v9i v9i-headphones" aria-hidden="true"></span><span data-el="Άκουσέ το" data-en="Listen to it">Άκουσέ το</span><span data-el="μικρό ακουστικό μάθημα από την ύλη" data-en="a short audio lesson from the material">μικρό ακουστικό μάθημα από την ύλη</span></button>
             <button class="study-action" data-action="flashcards" type="button"><span class="v9i v9i-layers" aria-hidden="true"></span><span data-el="Κάρτες ανάκλησης" data-en="Recall cards">Κάρτες ανάκλησης</span><span data-el="8 κάρτες ενεργής ανάκλησης" data-en="8 active-recall cards">8 κάρτες ενεργής ανάκλησης</span></button>
             <button class="study-action" data-action="quiz" type="button"><span class="v9i v9i-help" aria-hidden="true"></span><span data-el="Γρήγορο Quiz" data-en="Quick Quiz">Γρήγορο Quiz</span><span data-el="5 ερωτήσεις · μία-μία" data-en="5 questions · one at a time">5 ερωτήσεις · μία-μία</span></button>
@@ -187,6 +192,7 @@
 <script src="/curriculum-resolver.js"></script>
 <script src="/pdf-text-reader.js"></script>
 <script src="/guided-task-assistant.js"></script>
+<script src="/history-character-data.js"></script>
 <script src="/study-context.js"></script>
 <script>
 (() => {
@@ -546,20 +552,39 @@
     }
   }
 
+  let activeStudyCharacter = null;
+  function studyCharacterChoices(){
+    const normalize = value => String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ');
+    const subject=normalize(selectedSubjectLabel()+' '+selectedSubjectId()),topic=normalize(selectedTopic());
+    if(!/ιστορ|istoria|history/.test(subject) || /χρονογραμμ|ιστορικ.*πηγ|ορια.*τεκμηρ|timeline|chronolog|source limits/.test(topic))return [];
+    return (window.AITOOLSKIDS_HISTORY_CHARACTERS||[]).filter(c=>(c.topicPatterns||[]).some(p=>topic.includes(normalize(p))));
+  }
+  function refreshStudyCharacters(){
+    const choices=studyCharacterChoices(),old=$('studyCharacter').value;
+    $('studyCharacter').innerHTML=choices.map(c=>'<option value="'+esc(c.id)+'">'+esc(lang==='en'?c.nameEn:c.nameEl)+'</option>').join('');
+    if(choices.some(c=>c.id===old))$('studyCharacter').value=old;
+    $('studyCharacterPanel').classList.toggle('hidden',!choices.length);
+    document.querySelector('[data-action="character"]').classList.toggle('hidden',!choices.length);
+  }
+  document.addEventListener('change',refreshStudyCharacters);
+  $('topicCustom').addEventListener('input',refreshStudyCharacters);
+
   let interactiveAction='', interactiveHistory=[], interactiveStep=0, interactiveTotal=0, lastServerPayload=null;
 
   function actionTitle(action){
-    const el={audio:'Άκουσέ το',flashcards:'Κάρτες ανάκλησης',quiz:'Γρήγορο Quiz',truefalse:'Σωστό ή Λάθος',explain:'Έξυπνη εξήγηση',quickreview:'Επανάληψη 5′',oral:'Προφορική πρόβα',written:'Γραπτή πρόβα',weakspots:'Βρες τα κενά μου',plan:'Πλάνο μελέτης'};
-    const en={audio:'Listen to it',flashcards:'Recall cards',quiz:'Quick Quiz',truefalse:'True or False',explain:'Smart explanation',quickreview:'5-minute review',oral:'Oral practice',written:'Written practice',weakspots:'Find my gaps',plan:'Study plan'};
+    const el={character:'Διάλογος χαρακτήρα',audio:'Άκουσέ το',flashcards:'Κάρτες ανάκλησης',quiz:'Γρήγορο Quiz',truefalse:'Σωστό ή Λάθος',explain:'Έξυπνη εξήγηση',quickreview:'Επανάληψη 5′',oral:'Προφορική πρόβα',written:'Γραπτή πρόβα',weakspots:'Βρες τα κενά μου',plan:'Πλάνο μελέτης'};
+    const en={character:'Character dialogue',audio:'Listen to it',flashcards:'Recall cards',quiz:'Quick Quiz',truefalse:'True or False',explain:'Smart explanation',quickreview:'5-minute review',oral:'Oral practice',written:'Written practice',weakspots:'Find my gaps',plan:'Study plan'};
     return (lang==='en'?en:el)[action]||'AI Study';
   }
 
   function actionConfig(action){
-    const interactive=['quiz','truefalse','oral','written','weakspots'].includes(action);
+    const interactive=['character','quiz','truefalse','oral','written','weakspots'].includes(action);
     const systemBase=lang==='en'
       ? 'You are the integrated AI Study coach. Stay strictly inside the selected Greek curriculum topic and/or the user supplied notes. Preserve the exact terminology, naming and level of the Greek school textbook. Never silently replace official textbook terms with colloquial or approximate synonyms. If you simplify a term, state the official term first and the plain-language explanation second. SOURCE MODE: if a PDF or pasted notes are attached, they become the sole factual source for this activity. Do not use model memory to fill, correct, reconcile or expand the source. Preserve its terminology, organization, framing and level of detail. If the learner asks something not supported by the uploaded material, explicitly say that it is not supported by the source. Do not introduce concepts that are not supported by the selected unit or supplied notes. Do not produce a ready-to-submit school assignment. ADAPTIVE FEEDBACK: match feedback to the learner response. Never say phrases such as "good try" when the learner explicitly says they do not know or did not attempt an answer. If the learner is unsure, give one small source-grounded hint and re-ask the SAME concept in an easier way instead of moving on. Judge understanding, not verbatim memorization, unless exact wording is genuinely part of the learning goal. Be concise, age-appropriate and learning-first.'
       : 'Είσαι ο ενσωματωμένος βοηθός AI Μελέτης. Μείνε αυστηρά στο επιλεγμένο θέμα της ελληνικής ύλης και/ή στις σημειώσεις του χρήστη. Διατήρησε την ακριβή ορολογία, ονομασία και επίπεδο του ελληνικού σχολικού βιβλίου. ΠΟΤΕ μην αντικαθιστάς σιωπηρά επίσημο σχολικό όρο με καθημερινό ή περίπου συνώνυμο. Αν χρειάζεται απλοποίηση, γράψε πρώτα τον επίσημο όρο και μετά την απλή εξήγηση. ΛΕΙΤΟΥΡΓΙΑ ΠΗΓΗΣ: αν υπάρχει PDF ή επικολλημένες σημειώσεις, γίνονται η ΜΟΝΑΔΙΚΗ πραγματολογική πηγή για αυτή τη δραστηριότητα. Μην χρησιμοποιείς γενικές γνώσεις του μοντέλου για να συμπληρώσεις, διορθώσεις, συμφιλιώσεις ή επεκτείνεις την πηγή. Διατήρησε την ορολογία, τη δομή, το πλαίσιο και το επίπεδο λεπτομέρειας της πηγής. Αν ο μαθητής ρωτήσει κάτι που δεν υποστηρίζεται από το ανεβασμένο υλικό, πες καθαρά ότι δεν προκύπτει από την πηγή. Μην εισάγεις έννοιες που δεν στηρίζονται στην επιλεγμένη ενότητα ή στις σημειώσεις. Μην παράγεις έτοιμη εργασία προς παράδοση. ΠΡΟΣΑΡΜΟΣΤΙΚΟ FEEDBACK: το feedback πρέπει να ταιριάζει στην πραγματική απάντηση του μαθητή. Μην λες «Καλή προσπάθεια» ή αντίστοιχο όταν ο μαθητής λέει καθαρά ότι δεν ξέρει ή δεν έχει κάνει προσπάθεια. Αν δείχνει αβεβαιότητα, δώσε μία μικρή νύξη που στηρίζεται στην πηγή και ξαναρώτησε ΤΗΝ ΙΔΙΑ έννοια με πιο εύκολο τρόπο αντί να προχωρήσεις. Αξιολόγησε την κατανόηση του νοήματος και όχι την κατά λέξη απομνημόνευση, εκτός αν η ακριβής διατύπωση είναι όντως μαθησιακός στόχος. Να είσαι σύντομος, κατάλληλος για την ηλικία και προσανατολισμένος στη μάθηση.';
     const instructions={
+      character: 'Role-play as '+(activeStudyCharacter?.nameEn||'the selected historical role')+' ('+(activeStudyCharacter?.periodEn||'')+'). This is an AI educational representation, not an authentic quotation. '+(activeStudyCharacter?.composite?'This is a composite role; never claim personal eyewitness authority.':'Do not personally witness events outside this figure’s lifetime.')+' Base all historical claims only on the selected source. Give 2–4 short sentences and ONE question. After four AI replies leave role for a check: two things learned and one claim to verify. Completed AI replies: '+interactiveHistory.filter(m=>m.startsWith('AI:')).length,
+
       audio: lang==='en'?'Write a short spoken mini-lesson for listening, about 2–3 minutes when read aloud. Natural spoken language, no markdown tables. If a source is supplied, every factual sentence must be directly supported by it. Do not add terminology, causes, examples, or conclusions absent from the source, even if scientifically correct.':'Γράψε ένα σύντομο προφορικό μικρομάθημα για ακρόαση, περίπου 2–3 λεπτά όταν διαβαστεί δυνατά. Φυσικός προφορικός λόγος, χωρίς πίνακες markdown. Αν έχει δοθεί πηγή, κάθε πραγματολογική πρόταση πρέπει να υποστηρίζεται άμεσα από αυτήν. Μην προσθέτεις όρους, αιτίες, παραδείγματα ή συμπεράσματα που δεν εμφανίζονται ή δεν προκύπτουν ρητά από την πηγή, ακόμη κι αν είναι επιστημονικά σωστά.',
       flashcards: lang==='en'?'Return ONLY valid JSON: {"cards":[{"q":"...","a":"..."}]}. Create exactly 8 active-recall flashcards grounded in this material.':'Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"cards":[{"q":"...","a":"..."}]}. Φτιάξε ακριβώς 8 κάρτες ενεργής ανάκλησης βασισμένες σε αυτό το υλικό.',
       quiz: lang==='en'?'Run a 5-question quick quiz, ONE question at a time. On the initial request ask the first question only. On continuation requests, follow the exact next-question number or finish instruction supplied in the prompt. Wait for the learner before each next question and do not reveal an answer before the learner attempts it. The UI displays progress, so do not add your own progress counter.':'Κάνε γρήγορο quiz 5 ερωτήσεων, ΜΙΑ ερώτηση τη φορά. Στο αρχικό αίτημα κάνε μόνο την πρώτη ερώτηση. Στα επόμενα αιτήματα ακολούθησε ακριβώς τον αριθμό της επόμενης ερώτησης ή την οδηγία ολοκλήρωσης που δίνεται στο prompt. Περίμενε την απάντηση του μαθητή πριν από κάθε επόμενη ερώτηση και μην αποκαλύπτεις απάντηση πριν προσπαθήσει. Η ένδειξη προόδου εμφανίζεται από το UI, οπότε μην γράφεις δικό σου μετρητή.',
@@ -570,7 +595,7 @@
       written: lang==='en'?'Run written practice ONE prompt at a time. Ask one short-answer or application question now, wait for the learner response, then give formative feedback and a next question.':'Κάνε γραπτή πρόβα ΜΙΑ ερώτηση τη φορά. Δώσε τώρα μία σύντομη ερώτηση ανάπτυξης ή εφαρμογής, περίμενε την απάντηση, μετά δώσε διαμορφωτικό feedback και επόμενη ερώτηση.',
       weakspots: lang==='en'?'Diagnose topic-specific weak spots with ONE short question at a time. Ask only one question now. After answers, identify only observed gaps, never a learner diagnosis.':'Εντόπισε κενά μόνο στο συγκεκριμένο θέμα με ΜΙΑ σύντομη ερώτηση τη φορά. Κάνε μόνο μία ερώτηση τώρα. Μετά τις απαντήσεις, ανέφερε μόνο παρατηρημένα κενά στο θέμα, ποτέ διάγνωση μαθητή.'
     };
-    return {interactive,system:systemBase+'\n'+instructions[action],task:action==='flashcards'?'flashcards':(action==='quickreview'||action==='audio'?'guided_task':'conversation'),mode:interactive?'challenge':(action==='flashcards'||action==='quickreview'?'review':'understand')};
+    return {interactive,system:systemBase+'\n'+instructions[action],task:action==='flashcards'?'flashcards':(action==='quickreview'||action==='audio'?'guided_task':'conversation'),mode:action==='character'?'character':interactive?'challenge':(action==='flashcards'||action==='quickreview'?'review':'understand')};
   }
 
   function studyContextPrompt(extra=''){
@@ -592,7 +617,8 @@
       context:cfg.system,
       prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
       audience:'study_user',task:cfg.task,mode:cfg.mode,activity:action,
-      cacheEligible:!promptOverride&&!attached?.text&&!!officialSource?.grounded,
+      character:action==='character'?(lang==='en'?activeStudyCharacter?.nameEn:activeStudyCharacter?.nameEl):'',
+      cacheEligible:action!=='character'&&!promptOverride&&!attached?.text&&!!officialSource?.grounded,
       grade:selectedGradeLabel(),subject:selectedSubjectLabel(),subjectId:selectedSubjectId(),topic:selectedTopic(),
       studyContext:sharedStudyContext(action),
       documentText:(attached?.text||officialSource?.text)
@@ -739,6 +765,10 @@
   }
 
   async function runStudyAction(action){
+    if(action==='character'){
+      activeStudyCharacter=studyCharacterChoices().find(c=>c.id===$('studyCharacter').value)||null;
+      if(!activeStudyCharacter)return;
+    }
     publishSharedStudyContext(action);
     if(!selectedTopic()&&!attached){$('topicCustom').focus();return}
     if(action==='plan'){await buildAiPlan();$('plan').classList.remove('hidden');$('plan').scrollIntoView({behavior:'smooth',block:'nearest'});return}
@@ -989,6 +1019,7 @@
     }catch(err){$('aiOutput').textContent=(lang==='en'?'Puter could not answer: ':'Το Puter δεν μπόρεσε να απαντήσει: ')+(err?.message||err)}
   }
 
+  refreshStudyCharacters();
   document.querySelectorAll('[data-action]').forEach(btn=>btn.onclick=()=>runStudyAction(btn.dataset.action));
   $('sendStudyAnswer').onclick=sendInteractiveAnswer;
   $('studyAnswer').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendInteractiveAnswer()}});
@@ -1036,3 +1067,4 @@
 </script>
 </body>
 </html>
+

@@ -16,7 +16,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..");
 const args = process.argv.slice(2);
 const file = args.find((a) => !a.startsWith("--"));
-const PHASE = Number((args[args.indexOf("--phase") + 1]) || 22);
+const PHASE = args.includes("--phase") ? Number(args[args.indexOf("--phase") + 1]) : 22;
 const DRY = args.includes("--dry");
 if (!file) { console.error("usage: add-manual-overrides.mjs decisions.json [--phase N] [--dry]"); process.exit(2); }
 
@@ -76,8 +76,10 @@ for (const d of decisions) {
     sourceTopicId: t.topicId,
     sourceStatus: t.status,
     ...(t.reason ? { sourceReason: t.reason } : {}),
+    sourceOrigin: "manual-official-discovery",
+    discoveryPhase: PHASE,
     work: sources[0].work,
-    granularity: sources.length > 1 ? "manual-multi-page" : "manual-page",
+    granularity: "manual-discovered-page",
     reviewBasis: d.basis,
     reviewedBy: "claude-ai-review",
     reviewedAt: today,

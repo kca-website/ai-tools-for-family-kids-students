@@ -2889,8 +2889,8 @@
           "Differentiation rules"
         ],
         [
-          "Παράγωγος σύνθετης και αντίστροφης συνάρτησης",
-          "Derivative of composite and inverse functions"
+          "Παράγωγος σύνθετης συνάρτησης",
+          "Derivative of a composite function"
         ],
         [
           "Θεώρημα Rolle",

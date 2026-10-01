@@ -5,11 +5,16 @@ import fs from "node:fs";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const data = require("../../gel-schoolbook-source-map-2026-2027.js");
+// Topics already activated by manually reviewed overrides (Phases 17-20) are not listed again.
+let overrides = { entries: [] };
+try { overrides = require("../../gel-schoolbook-manual-overrides-2026-2027.js"); } catch (_) {}
+const reviewed = new Set(overrides.entries.map((e) => e.subjectId + "|" + e.label));
 const out = process.argv[2] || "docs/phase14-gel-review-sheet-2026-10-01.csv";
 const q = (s) => '"' + String(s ?? "").replace(/"/g, '""') + '"';
 const rows = [["subjectId", "topicId", "label", "status", "reason", "candidate_heading", "candidate_url", "score", "decision (approve / reject / other source)"]];
 for (const s of Object.values(data.all())) for (const t of s.topicMappings) {
   if (t.status === "exact-html" || t.status === "exact-pdf") continue;
+  if (reviewed.has(s.subjectId + "|" + t.label)) continue;
   const c = (t.candidates || [])[0] || {};
   rows.push([s.subjectId, t.topicId, t.label, t.status, t.reason, c.heading, c.url, c.score, ""]);
 }

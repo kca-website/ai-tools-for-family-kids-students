@@ -1,0 +1,31 @@
+name: Phase 20 GEL final safe candidates
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'gel-schoolbook-manual-overrides-2026-2027.js'
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/phase20-gel-final-safe-candidates-smoke.mjs'
+      - '.github/workflows/phase20-gel-final-safe-candidates-smoke.yml'
+
+jobs:
+  final-safe-candidates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install runtime dependencies
+        run: npm install --no-package-lock --ignore-scripts
+
+      - name: Run Phase 20 final candidate audit
+        run: node tests/phase20-gel-final-safe-candidates-smoke.mjs

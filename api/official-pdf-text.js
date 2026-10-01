@@ -218,22 +218,24 @@ async function extractVerifiedPdfPage({
     return { ok: false, error: "official_pdf_heading_missing" };
   }
 
-  let fetched;
-  try {
-    fetched = await fetchOfficialPdfBytes(sourceUrl, { fetchImpl, maxBytes });
-  } catch (err) {
-    return { ok: false, error: err?.message || "official_pdf_fetch_failed" };
-  }
+  const resolvedPdfUrl = stripFragment(sourceUrl);
 
   let loadingTask;
   let document;
   try {
     const pdfjs = await loadPdfJs();
+    // Use PDF.js network/range loading instead of downloading the entire
+    // schoolbook into the serverless function. These official PDFs can be
+    // tens of MB while grounding needs only one verified page.
     loadingTask = pdfjs.getDocument({
-      data: fetched.bytes,
+      url: resolvedPdfUrl,
       disableWorker: true,
+      disableRange: false,
+      disableStream: true,
+      disableAutoFetch: true,
       isEvalSupported: false,
-      useSystemFonts: true
+      useSystemFonts: true,
+      rangeChunkSize: 128 * 1024
     });
     document = await loadingTask.promise;
 
@@ -242,7 +244,7 @@ async function extractVerifiedPdfPage({
         ok: false,
         error: "official_pdf_page_out_of_range",
         totalPages: document.numPages,
-        resolvedPdfUrl: fetched.resolvedUrl
+        resolvedPdfUrl
       };
     }
 
@@ -257,7 +259,7 @@ async function extractVerifiedPdfPage({
         ok: false,
         error: "official_pdf_verified_heading_not_found",
         totalPages: document.numPages,
-        resolvedPdfUrl: fetched.resolvedUrl,
+        resolvedPdfUrl,
         extractedChars: text.length
       };
     }
@@ -267,7 +269,7 @@ async function extractVerifiedPdfPage({
         ok: false,
         error: "official_pdf_page_text_too_short",
         totalPages: document.numPages,
-        resolvedPdfUrl: fetched.resolvedUrl,
+        resolvedPdfUrl,
         extractedChars: text.length
       };
     }
@@ -277,14 +279,14 @@ async function extractVerifiedPdfPage({
       text,
       page: pageNumber,
       totalPages: document.numPages,
-      resolvedPdfUrl: fetched.resolvedUrl,
+      resolvedPdfUrl,
       extractedChars: text.length
     };
   } catch (_) {
     return {
       ok: false,
       error: "official_pdf_text_extraction_failed",
-      resolvedPdfUrl: fetched?.resolvedUrl || null
+      resolvedPdfUrl
     };
   } finally {
     try { await document?.destroy?.(); } catch (_) {}

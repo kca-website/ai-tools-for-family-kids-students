@@ -98,3 +98,6 @@ node scripts/phase14/extract-site-topics.mjs http://127.0.0.1:4173  # ανανέ
 
 ## Επόμενο βήμα (εκτός αυτού του PR)
 Σύνδεση με `/api/schoolbook-source` **μόνο** για topics με `status ∈ {exact-html, exact-pdf}`· ποτέ για `needs-manual-review` / `no-safe-mapping`. Πρώτα ανθρώπινος έλεγχος των 14 `medium` και των `labelParaphrase`.
+
+## Φύλλο ελέγχου
+`docs/phase14-gel-review-sheet-2026-10-01.csv`: τα 448 topics που δεν είναι ενεργά, με reason και (όπου υπάρχει) υποψήφιο κεφάλαιο. Συμπληρώστε τη στήλη decision· εγκεκριμένα θα περάσουν ως manual overrides, ποτέ αυτόματα. Ανανέωση: `node scripts/phase14/export-review-sheet.mjs`.

@@ -31,3 +31,10 @@ The Phase 10 generated curriculum landing page was stale after recent catalog ch
 - Draft Jev router #89 remains deferred and must not be merged without its separate provider/preview prerequisites. Smart routing, Prompt Guard and Safeguard remain disabled pending the benchmark gates.
 
 This record distinguishes completed technical work from evidence and evaluation that are still required; it does not claim full curriculum coverage or completed model qualification.
+
+## Follow-up on 1 October
+
+- Phase 22 was merged in another session before this follow-up: current GEL inventory is 540 grounded / 98 blocked / 638 total. Earlier 351/296 figures above describe the pre-Phase-22 audit.
+- Mathematics B now has 37 exact choices. The nine A-book chapter 7 sections are verified against page 1 of the official 2026–27 B-Gymnasium Mathematics guidance in the IEP ZIP. Sections 7.1–7.6 are an eight-hour review; 7.7–7.9 are taught; all nine are explicitly non-examinable. Endpoint responses correctly attribute the A book. Current B-book exclusions and diagnostic scope remain intact. The historic hierarchy headings are not exposed as separate AI topics because a heading alone is not an exact section.
+- A one-shot Phase 1 continuation is triggered only by the dedicated marker on `complete-remaining-20261001`, with a 1,000 estimated-Neuron budget, shared benchmark concurrency and existing resume cache. It has no recurring schedule and cannot change production routing. New Qwen/GLM results must use the corrected inference profile; screening completion and human grading are still separate gates.
+- Runtime metric queries did not provide per-visitor usage samples. The existing AI_METRIC records contain latency/token totals but no visitor grouping, so a legitimate per-user p95 request count cannot be calculated from them. API-02 remains a measurement prerequisite; no arbitrary daily cap has been introduced.

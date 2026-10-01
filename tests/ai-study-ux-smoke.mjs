@@ -23,6 +23,9 @@ assert.match(html, /attached\?\.text\|\|officialSource\?\.text/);
 assert.doesNotMatch(html, /:\(officialSource\?\.text\|\|''\)/);
 assert.match(html, /thriskeftika-b-gymnasiou/);
 assert.match(html, /source\.canonicalSourceUrl\|\|source\.sourceUrl/);
+assert.match(html, /state==='verification_failed'/);
+assert.match(html, /Η επίσημη πηγή φορτώθηκε, αλλά η απάντηση δεν επαληθεύτηκε/);
+assert.match(html, /body\?\.groundingValidated&&officialSource\?\.grounded/);
 for (const subjectId of [
   'mathimatika-b-gymnasiou',
   'chimeia-b-gymnasiou',

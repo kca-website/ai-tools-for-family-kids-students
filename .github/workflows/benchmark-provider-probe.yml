@@ -1,0 +1,30 @@
+name: Qwen response-shape probe (one-shot)
+on:
+  push:
+    branches: [benchmark-provider-probe-20261001]
+    paths: [benchmark/provider-probe.mjs]
+permissions:
+  contents: read
+concurrency:
+  group: ai-benchmark
+  cancel-in-progress: false
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Probe six bounded request variants; never print reasoning or credentials
+        env:
+          CLOUDFLARE_LLM_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_LLM_ACCOUNT_ID }}
+          CLOUDFLARE_LLM_AI_TOKEN: ${{ secrets.CLOUDFLARE_LLM_AI_TOKEN }}
+        run: node benchmark/provider-probe.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qwen-response-shape-probe
+          path: benchmark/results/probe
+          retention-days: 30

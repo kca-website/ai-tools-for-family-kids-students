@@ -2745,45 +2745,12 @@ function findGelHtmlAnchorOffset(rawHtml, fragment) {
   const wanted = String(fragment || "").trim();
   if (!source || !wanted) return -1;
 
-  const escaped = wanted.replace(/[.*+?^$()|[\]\\{}]/g, "\\function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
-  if (!rawHtml || !sourceUrl || !mapping?.heading) return "";
-  let fragment = "";
-  try { fragment = decodeURIComponent(new URL(sourceUrl).hash.slice(1)); } catch (_) { return ""; }
-  if (!fragment || mapping?.granularity !== "section-anchor") return "";
-
-  const headings = gelVerifiedHeadingOffsets(rawHtml);
-  const verified = normalize(mapping.heading);
-  const index = headings.findIndex((entry) => {
-    if (String(entry.anchor || "") !== fragment) return false;
-    const candidate = normalize(entry.num + " " + entry.title);
-    return candidate === verified ||
-      (verified.length >= 8 && (candidate.startsWith(verified) || verified.startsWith(candidate)));
-  });
-  if (index < 0) return "";
-
-  const current = headings[index];
-  let endOffset = String(rawHtml).length;
-  for (let i = index + 1; i < headings.length; i++) {
-    const next = headings[i];
-    if (next.offset <= current.offset) continue;
-    if (next.depth <= current.depth) {
-      endOffset = next.offset;
-      break;
-    }
-  }
-
-  const scoped = htmlToText(String(rawHtml).slice(current.offset, endOffset)).trim();
-  if (!scoped || !normalize(scoped).includes(verified)) return "";
-  return scoped;
-}
-");
-  const patterns = [
-    new RegExp("\\b(?:id|name)\\s*=\\s*[\\\"']" + escaped + "[\\\"']", "i"),
-    new RegExp("\\b(?:id|name)\\s*=\\s*" + escaped + "(?=\\s|>)", "i")
-  ];
-  for (const pattern of patterns) {
-    const match = pattern.exec(source);
-    if (match) return match.index;
+  // Match all quoted HTML id/name attributes, then compare the decoded value
+  // exactly. This avoids constructing a regex from the fragment itself.
+  const re = /\b(?:id|name)\s*=\s*["']([^"']+)["']/gi;
+  let match;
+  while ((match = re.exec(source))) {
+    if (decodeEntities(match[1]) === wanted) return match.index;
   }
   return -1;
 }
@@ -2805,9 +2772,9 @@ function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
       (verified.length >= 8 && (candidate.startsWith(verified) || verified.startsWith(candidate)));
   };
 
-  // The official ebooks markup often puts the id/name anchor in a separate
-  // element immediately before the visible heading. Resolve by proximity to
-  // the exact anchor, while still requiring the verified heading text.
+  // ebooks often puts the id/name anchor in a separate element immediately
+  // before the visible heading. Select the matching verified heading nearest
+  // to that exact anchor rather than requiring both to share one token.
   const candidates = headings
     .map((entry, index) => ({ entry, index, distance: Math.abs(entry.offset - anchorOffset) }))
     .filter((row) => matchesVerifiedHeading(row.entry) && row.distance <= 12000)

@@ -27,8 +27,9 @@
   };
 
   function isGreekLanguage(subject){
-    const s = `${subject?.subjectLabelEl || ""} ${subject?.id || ""}`.toLowerCase();
-    return /νεοελλην|γλώσσα/.test(s) && !/αγγλ|english|ξέν/.test(s);
+    // accent-insensitive; Ancient Greek and Latin are separate courses, not Modern Greek language
+    const s = `${subject?.subjectLabelEl || ""} ${subject?.id || ""}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return /νεοελλην|γλωσσα/.test(s) && !/αγγλ|english|ξεν|αρχαι|λατιν/.test(s);
   }
   function findQuizId(zone,grade){
     if (typeof QUIZZES === "undefined") return null;

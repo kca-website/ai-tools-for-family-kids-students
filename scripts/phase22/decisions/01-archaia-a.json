@@ -1,0 +1,30 @@
+[
+ {"subjectId":"archaia-a-lykeiou","label":"Θουκυδίδης: βίος, έργο, μέθοδος, δομή, γλώσσα και ύφος","basis":"Official page 'Εισαγωγή στην Αρχαία Ελληνική Ιστοριογραφία' contains the life, work, method and language of Thucydides (ΥΑ 102749 §I.Α: Εισαγωγή, Κεφ. Β΄ Θουκυδίδης).","pages":[{"work":"8547/2366","file":"indexab.html","heading":"Εισαγωγή στην Αρχαία Ελληνική Ιστοριογραφία"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Ξενοφών: βίος, έργο, ενδιαφέροντα και ιδέες","basis":"Same official introduction page contains the section on Xenophon's life and work (ΥΑ 102749 §I.Α: Εισαγωγή, Κεφ. Γ΄ Ξενοφών).","pages":[{"work":"8547/2366","file":"indexab.html","heading":"Εισαγωγή στην Αρχαία Ελληνική Ιστοριογραφία"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Θουκυδίδη Ιστορίαι Γ΄: Κερκυραϊκά, κεφ. 70–83 με τις επίσημες διακρίσεις μετάφρασης","basis":"Official pages of Thucydides Book 3 chapters 70, 71-74, 75, 76-78, 81, 82-83 (pages for ch. 79-80 excluded: not in the ΥΑ 102749 §I.Α list).","pages":[
+   {"work":"8547/2366","file":"indexb2_02.html","heading":"Οἱ γὰρ Κερκυραῖοι ἐστασίαζον"},
+   {"work":"8547/2366","file":"indexb2_03.html","heading":"Δράσαντες δὲ τοῦτο καὶ ξυγκαλέσαντες Κερκυραίους"},
+   {"work":"8547/2366","file":"indexb2_04.html","heading":"ἐπιγιγνομένῃ ἡμέρᾳ Νικόστρατος"},
+   {"work":"8547/2366","file":"indexb2_05.html","heading":"Τῆς δὲ στάσεως ἐν τούτῳ οὔσης"},
+   {"work":"8547/2366","file":"indexb2_07.html","heading":"μὲν οὖν Πελοποννήσιοι τῆς νυκτὸς εὐθὺς"},
+   {"work":"8547/2366","file":"indexb2_08.html","heading":"Σ' αυτές τις ακρότητες έφτασε ο εμφύλιος πόλεμος"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Ξενοφώντος Ελληνικά Β΄: Αιγός Ποταμοί και κατάλυση δημοκρατίας, επιλεγμένα χωρία","basis":"Official pages of Xenophon Hellenica Book 2 ch. 1 §1-32, 2 §1-4, 2 §5-23, 3 §1-16, 3 §17-56, 4 §1-17, 4 §18-23 (page 4 §24-43 excluded: not in the ΥΑ 102749 §I.Α list).","pages":[
+   {"work":"8547/2366","file":"indexa1_02.html","heading":"Ξενοφών καταγράφει τα γεγονότα"},
+   {"work":"8547/2366","file":"indexa1_03.html","heading":"Κεφαλαίο 2. §1-4"},
+   {"work":"8547/2366","file":"indexa1_04.html","heading":"Λύσανδρος με 200 πλοία ανάγκασε τις πόλεις της Λέσβου"},
+   {"work":"8547/2366","file":"indexa1_05.html","heading":"Αμέσως μετά την κατεδάφιση των τειχών"},
+   {"work":"8547/2366","file":"indexa1_06.html","heading":"Καθώς πλήθαιναν οι αυθαιρεσίες του καθεστώτος"},
+   {"work":"8547/2366","file":"indexa1_07.html","heading":"Τέτοιος στάθηκε ο θάνατος του Θηραμένη"},
+   {"work":"8547/2366","file":"indexa1_08.html","heading":"Ταῦτα δ’ εἰπὼν καὶ μεταστραφεὶς πρὸς τοὺς ἐναντίους"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Γ΄ κλίση ουσιαστικών: φωνηεντόληκτα και υγρόληκτα","basis":"Εγχειρίδιο Γλωσσικής Διδασκαλίας (official reference book named in ΙΕΠ 2026-27) units 3, 4, 5 are exactly: vowel-stem (single/double stem) and liquid-stem 3rd declension nouns.","pages":[{"work":"8547/5486","file":"index03.html"},{"work":"8547/5486","file":"index04.html"},{"work":"8547/5486","file":"index05.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Γ΄ κλίση επιθέτων και μετοχών","basis":"Εγχειρίδιο unit 6: vowel-stem, stop-stem and nasal-stem 3rd declension adjectives and participle declension.","pages":[{"work":"8547/5486","file":"index06.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Ανώμαλα παραθετικά επιθέτων","basis":"Γραμματική Οικονόμου (official reference book) ch. 17 'Παραθετικά' contains section 5 'Ανώμαλα παραθετικά (σε -ιων, -ιστος)'.","pages":[{"work":"8547/283","file":"index_02_13.html","heading":"Ανώμαλα παραθετικά"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Κτητικές αντωνυμίες","basis":"Εγχειρίδιο unit 13: possessive and reciprocal pronouns.","pages":[{"work":"8547/5486","file":"index13.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Συνηρημένα ρήματα -άω, -έω, -όω","basis":"Γραμματική Οικονόμου ch. 26 'Ρήματα Συνηρημένα ή Περισπώμενα'.","pages":[{"work":"8547/283","file":"index_02_22.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Β΄ αόριστος","basis":"Γραμματική Οικονόμου ch. 25 'Δεύτεροι Χρόνοι των Ρημάτων' (δεύτερος αόριστος).","pages":[{"work":"8547/283","file":"index_02_21.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Υγρόληκτα και ενρινόληκτα ρήματα","basis":"Εγχειρίδιο units 11-12: liquid and nasal stem verbs and their other tenses.","pages":[{"work":"8547/5486","file":"index11.html"},{"work":"8547/5486","file":"index12.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Συντελικοί χρόνοι συμφωνόληκτων ρημάτων","basis":"Γραμματική Οικονόμου ch. 23 'Σχηματισμός των Αφωνόληκτων Ρημάτων' covers the perfect (συντελικοί) tenses of stop-stem verbs (ΥΑ: συντελικών χρόνων αφωνόληκτων ρημάτων).","pages":[{"work":"8547/283","file":"index_02_19.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Κατηγορούμενο και γενική κατηγορηματική","basis":"Εγχειρίδιο unit 1: predicate, predicative genitive, adverbial and proleptic predicate.","pages":[{"work":"8547/5486","file":"index01.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Αντικείμενο άμεσο και έμμεσο: κατηγορούμενο του αντικειμένου","basis":"Εγχειρίδιο unit 2: direct and indirect object, object predicate, cognate object.","pages":[{"work":"8547/5486","file":"index02.html"}]},
+ {"subjectId":"archaia-a-lykeiou","label":"Ονοματικές, επιρρηματικές και υποθετικές προτάσεις","basis":"Εγχειρίδιο units 7-10: subordinate clauses and conditional clauses.","pages":[{"work":"8547/5486","file":"index07.html"},{"work":"8547/5486","file":"index08.html"},{"work":"8547/5486","file":"index09.html"},{"work":"8547/5486","file":"index10.html"}]}
+]

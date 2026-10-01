@@ -303,16 +303,8 @@
           "Thucydides Histories III: Corcyra, ch. 70–83 with official translation distinctions"
         ],
         [
-          "Θεματικός άξονας: δύναμη και δίκαιο: ηθική του πολέμου",
-          "Theme: power and justice: ethics of war"
-        ],
-        [
           "Ξενοφώντος Ελληνικά Β΄: Αιγός Ποταμοί και κατάλυση δημοκρατίας, επιλεγμένα χωρία",
           "Xenophon Hellenica II: Aegospotami and fall of democracy, selected passages"
-        ],
-        [
-          "Θεματικός άξονας: στρατιωτική υπεροχή και πολιτική κυριαρχία",
-          "Theme: military superiority and political domination"
         ],
         [
           "Γ΄ κλίση ουσιαστικών: φωνηεντόληκτα και υγρόληκτα",
@@ -969,44 +961,20 @@
           "Information, news and journalistic discourse"
         ],
         [
-          "Μέσα ενημέρωσης και αξιοπιστία πηγών",
-          "Media and source reliability"
+          "Μέσα μαζικής επικοινωνίας",
+          "Mass media"
         ],
         [
           "Εργασία, επάγγελμα και επαγγελματικός προσανατολισμός",
           "Work, profession and career orientation"
         ],
         [
-          "Στερεότυπα, προκαταλήψεις και κοινωνικές διακρίσεις",
-          "Stereotypes, prejudice and social discrimination"
+          "Στερεότυπες αντιλήψεις",
+          "Stereotypes"
         ],
         [
-          "Ρατσισμός και ανθρώπινα δικαιώματα",
-          "Racism and human rights"
-        ],
-        [
-          "Ελεύθερος χρόνος και ψυχαγωγία",
-          "Leisure and entertainment"
-        ],
-        [
-          "Τέχνη και πολιτισμός",
-          "Art and culture"
-        ],
-        [
-          "Επιστήμη και τεχνολογία",
-          "Science and technology"
-        ],
-        [
-          "Ψηφιακή επικοινωνία και κοινωνικά δίκτυα",
-          "Digital communication and social networks"
-        ],
-        [
-          "Περιβάλλον και βιώσιμη ανάπτυξη",
-          "Environment and sustainable development"
-        ],
-        [
-          "Επιχειρηματολογία: θέση, τεκμήρια και αντίλογος",
-          "Argumentation: claim, evidence and counterargument"
+          "Φυλετικός και κοινωνικός ρατσισμός",
+          "Racial and social racism"
         ],
         [
           "Οργάνωση παραγράφου και συνοχή κειμένου",
@@ -1246,60 +1214,68 @@
       "status": "annual-guidance-map",
       "topics": [
         [
-          "Λατινική προφορά και βασικές αρχές μετάφρασης",
-          "Latin pronunciation and basic translation principles"
+          "Εισαγωγή: η λατινική γλώσσα και η ρωμαϊκή λογοτεχνία",
+          "Introduction: the Latin language and Roman literature"
         ],
         [
-          "Κείμενα και λεξιλόγιο των διδακτικών ενοτήτων",
-          "Texts and vocabulary of the taught units"
+          "Μάθημα Ι: Ο εξόριστος ποιητής",
+          "Lesson Ι: Ο εξόριστος ποιητής"
         ],
         [
-          "Α΄ και Β΄ κλίση ουσιαστικών",
-          "First and second noun declensions"
+          "Μάθημα II: Διδώ και Αινείας",
+          "Lesson II: Διδώ και Αινείας"
         ],
         [
-          "Γ΄ κλίση ουσιαστικών",
-          "Third noun declension"
+          "Μάθημα III: Η περιπέτεια της Ανδρομέδας",
+          "Lesson III: Η περιπέτεια της Ανδρομέδας"
         ],
         [
-          "Επίθετα και συμφωνία ουσιαστικού:επιθέτου",
-          "Adjectives and noun:adjective agreement"
+          "Μάθημα IV: Τα ήθη των αρχαίων Ρωμαίων",
+          "Lesson IV: Τα ήθη των αρχαίων Ρωμαίων"
         ],
         [
-          "Αντωνυμίες",
-          "Pronouns"
+          "Μάθημα V: Ένας «λάτρης» του Βιργιλίου",
+          "Lesson V: Ένας «λάτρης» του Βιργιλίου"
         ],
         [
-          "Οριστική ενεργητικής φωνής",
-          "Active indicative"
+          "Μάθημα VI: Οι νόμοι",
+          "Lesson VI: Οι νόμοι"
         ],
         [
-          "Οριστική παθητικής φωνής",
-          "Passive indicative"
+          "Μάθημα VII: Ετοιμασίες για ξεχειμώνιασμα",
+          "Lesson VII: Ετοιμασίες για ξεχειμώνιασμα"
         ],
         [
-          "Απαρέμφατο",
-          "Infinitive"
+          "Μάθημα VIII: Όταν βγεις στο κυνήγι, πάρε μαζί σου μολύβι και χαρτί",
+          "Lesson VIII: Όταν βγεις στο κυνήγι, πάρε μαζί σου μολύβι και χαρτί"
         ],
         [
-          "Μετοχές",
-          "Participles"
+          "Μάθημα IX: Η εγκαθίδρυση της δημοκρατίας στη Ρώμη",
+          "Lesson IX: Η εγκαθίδρυση της δημοκρατίας στη Ρώμη"
         ],
         [
-          "Πτώσεις και συντακτικές λειτουργίες",
-          "Cases and syntactic functions"
+          "Μάθημα X: Η προφητεία του Δία",
+          "Lesson X: Η προφητεία του Δία"
         ],
         [
-          "Χρονικές, αιτιολογικές και αναφορικές σχέσεις",
-          "Temporal, causal and relative relations"
+          "Μάθημα XI: Η Ρώμη και η Καρχηδόνα",
+          "Lesson XI: Η Ρώμη και η Καρχηδόνα"
         ],
         [
-          "Απαρεμφατική σύνταξη",
-          "Infinitive constructions"
+          "Μάθημα XII: Ο ύπατος Αιμίλιος Παύλος και το σκυλάκι της κόρης του",
+          "Lesson XII: Ο ύπατος Αιμίλιος Παύλος και το σκυλάκι της κόρης του"
         ],
         [
-          "Μετατροπές γραμματικών τύπων μέσα στο κείμενο",
-          "Morphological transformations in context"
+          "Μάθημα XIII: Πώς η γνώση νίκησε τη δεισιδαιμονία",
+          "Lesson XIII: Πώς η γνώση νίκησε τη δεισιδαιμονία"
+        ],
+        [
+          "Μάθημα XIV: Ένα φοβερό όνειρο",
+          "Lesson XIV: Ένα φοβερό όνειρο"
+        ],
+        [
+          "Μάθημα XV: Τα ήθη των Γερμανών",
+          "Lesson XV: Τα ήθη των Γερμανών"
         ]
       ],
       "source": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/",
@@ -1313,56 +1289,28 @@
       "status": "annual-guidance-map",
       "topics": [
         [
-          "Τι είναι φιλοσοφία: φιλοσοφικά ερωτήματα",
-          "What philosophy is: philosophical questions"
+          "Τι είναι η φιλοσοφία και σε τι χρησιμεύει",
+          "What is philosophy and what is it for"
         ],
         [
-          "Επιχείρημα, προκείμενες και συμπέρασμα",
-          "Argument, premises and conclusion"
+          "Μεθοδολογία της φιλοσοφίας: επιχειρήματα και αριστοτελική λογική",
+          "Method of philosophy: arguments and Aristotelian logic"
         ],
         [
-          "Εγκυρότητα και ορθότητα συλλογισμών",
-          "Validity and soundness of reasoning"
+          "Πλάτων και Αριστοτέλης: η πηγή της γνώσης",
+          "Plato and Aristotle: the source of knowledge"
         ],
         [
-          "Γλώσσα, έννοιες και ορισμοί",
-          "Language, concepts and definitions"
+          "Ηθική φιλοσοφία: πώς πρέπει να ζούμε",
+          "Moral philosophy: how should we live"
         ],
         [
-          "Γνώση, πεποίθηση και αλήθεια",
-          "Knowledge, belief and truth"
+          "Πολιτική φιλοσοφία: πώς οργανώνουμε τις κοινωνίες",
+          "Political philosophy: how we organise societies"
         ],
         [
-          "Σκεπτικισμός και όρια της γνώσης",
-          "Scepticism and limits of knowledge"
-        ],
-        [
-          "Επιστημονική γνώση και μέθοδος",
-          "Scientific knowledge and method"
-        ],
-        [
-          "Νους, σώμα και προσωπική ταυτότητα",
-          "Mind, body and personal identity"
-        ],
-        [
-          "Ελευθερία και αιτιοκρατία",
-          "Freedom and determinism"
-        ],
-        [
-          "Ηθική πράξη και κριτήρια ορθού",
-          "Moral action and criteria of rightness"
-        ],
-        [
-          "Ωφελιμισμός, δεοντολογία και αρετή",
-          "Utilitarianism, deontology and virtue"
-        ],
-        [
-          "Δικαιοσύνη, πολιτεία και δικαιώματα",
-          "Justice, state and rights"
-        ],
-        [
-          "Αισθητική και φιλοσοφία της τέχνης",
-          "Aesthetics and philosophy of art"
+          "Αισθητική: τι είναι ωραίο, τι είναι τέχνη",
+          "Aesthetics: what is beautiful, what is art"
         ]
       ],
       "source": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/",
@@ -2057,14 +2005,6 @@
       "status": "exam-verified",
       "topics": [
         [
-          "Ευρώπη και κόσμος τον 19ο αιώνα",
-          "Europe and the world in the 19th century"
-        ],
-        [
-          "Εθνικά και φιλελεύθερα κινήματα",
-          "National and liberal movements"
-        ],
-        [
           "Ελληνική Επανάσταση και συγκρότηση ελληνικού κράτους",
           "Greek Revolution and formation of the Greek state"
         ],
@@ -2097,8 +2037,8 @@
           "Interwar period and economic crisis"
         ],
         [
-          "Φασισμός και ναζισμός",
-          "Fascism and Nazism"
+          "Φασισμός και κρίση της κοινοβουλευτικής δημοκρατίας",
+          "Fascism and the crisis of parliamentary democracy"
         ],
         [
           "Β΄ Παγκόσμιος Πόλεμος",
@@ -2115,10 +2055,6 @@
         [
           "Ψυχρός Πόλεμος",
           "Cold War"
-        ],
-        [
-          "Αποαποικιοποίηση",
-          "Decolonisation"
         ],
         [
           "Ευρωπαϊκή ενοποίηση",
@@ -2347,80 +2283,152 @@
       "status": "panhellenic-map",
       "topics": [
         [
-          "Διδαγμένα λατινικά κείμενα της εξεταστέας ύλης 2027",
-          "Taught Latin texts in the 2027 examinable syllabus"
+          "Εισαγωγή: εξέλιξη της ρωμαϊκής λογοτεχνίας (προκλασική και κλασική εποχή)",
+          "Introduction: development of Roman literature (pre-classical and classical period)"
         ],
         [
-          "Μετάφραση και νοηματική απόδοση",
-          "Translation and rendering meaning"
+          "Μάθημα XVI: Η τελευταία μάχη του Καίσαρα στη Γαλατία",
+          "Lesson XVI"
         ],
         [
-          "Λεξιλόγιο και ετυμολογικές σχέσεις",
-          "Vocabulary and etymological relations"
+          "Μάθημα XVII: Φόβος μπροστά στο άγνωστο",
+          "Lesson XVII"
         ],
         [
-          "Ουσιαστικά όλων των κλίσεων",
-          "Nouns of all declensions"
+          "Μάθημα XVIII: Ο Ηρακλής στην Ιταλία",
+          "Lesson XVIII"
         ],
         [
-          "Επίθετα και παραθετικά",
-          "Adjectives and degrees of comparison"
+          "Μάθημα XIX: Η συνωμοσία του Κατιλίνα",
+          "Lesson XIX"
         ],
         [
-          "Αντωνυμίες",
-          "Pronouns"
+          "Μάθημα XX: Πίσω από τις κουρτίνες ή πώς ο Κλαύδιος έγινε αυτοκράτορας",
+          "Lesson XX"
         ],
         [
-          "Ρήματα: χρόνοι οριστικής",
-          "Verbs: indicative tenses"
+          "Μάθημα XXI",
+          "Lesson XXI"
         ],
         [
-          "Υποτακτική",
-          "Subjunctive"
+          "Μάθημα XXII",
+          "Lesson XXII"
         ],
         [
-          "Προστακτική",
-          "Imperative"
+          "Μάθημα XXIII",
+          "Lesson XXIII"
         ],
         [
-          "Απαρέμφατο",
-          "Infinitive"
+          "Μάθημα XXIV",
+          "Lesson XXIV"
         ],
         [
-          "Μετοχές",
-          "Participles"
+          "Μάθημα XXV",
+          "Lesson XXV"
         ],
         [
-          "Γερουνδιακό και γερουνδιακός τύπος",
-          "Gerund and gerundive"
+          "Μάθημα XXVI",
+          "Lesson XXVI"
         ],
         [
-          "Σουπίνο",
-          "Supine"
+          "Μάθημα XXVII",
+          "Lesson XXVII"
         ],
         [
-          "Ακολουθία χρόνων",
-          "Sequence of tenses"
+          "Μάθημα XXVIII",
+          "Lesson XXVIII"
         ],
         [
-          "Απαρεμφατική σύνταξη",
-          "Infinitive constructions"
+          "Μάθημα XXIX",
+          "Lesson XXIX"
         ],
         [
-          "Μετοχική σύνταξη και αφαιρετική απόλυτη",
-          "Participial constructions and ablative absolute"
+          "Μάθημα XXX",
+          "Lesson XXX"
         ],
         [
-          "Δευτερεύουσες προτάσεις",
-          "Subordinate clauses"
+          "Μάθημα XXXI",
+          "Lesson XXXI"
         ],
         [
-          "Ευθύς και πλάγιος λόγος",
-          "Direct and indirect speech"
+          "Μάθημα XXXII",
+          "Lesson XXXII"
         ],
         [
-          "Μετατροπές σύνταξης",
-          "Syntactic transformations"
+          "Μάθημα XXXIII",
+          "Lesson XXXIII"
+        ],
+        [
+          "Μάθημα XXXIV",
+          "Lesson XXXIV"
+        ],
+        [
+          "Μάθημα XXXV",
+          "Lesson XXXV"
+        ],
+        [
+          "Μάθημα XXXVI",
+          "Lesson XXXVI"
+        ],
+        [
+          "Μάθημα XXXVII",
+          "Lesson XXXVII"
+        ],
+        [
+          "Μάθημα XXXVIII",
+          "Lesson XXXVIII"
+        ],
+        [
+          "Μάθημα XXXIX",
+          "Lesson XXXIX"
+        ],
+        [
+          "Μάθημα XL",
+          "Lesson XL"
+        ],
+        [
+          "Μάθημα XLI",
+          "Lesson XLI"
+        ],
+        [
+          "Μάθημα XLII",
+          "Lesson XLII"
+        ],
+        [
+          "Μάθημα XLIII",
+          "Lesson XLIII"
+        ],
+        [
+          "Μάθημα XLIV",
+          "Lesson XLIV"
+        ],
+        [
+          "Μάθημα XLV",
+          "Lesson XLV"
+        ],
+        [
+          "Μάθημα XLVI",
+          "Lesson XLVI"
+        ],
+        [
+          "Μάθημα XLVII",
+          "Lesson XLVII"
+        ],
+        [
+          "Μάθημα XLVIII",
+          "Lesson XLVIII"
+        ],
+        [
+          "Μάθημα XLIX",
+          "Lesson XLIX"
+        ],
+        [
+          "Μάθημα L",
+          "Lesson L"
+        ],
+        [
+          "Γραμματικά και συντακτικά φαινόμενα Γ΄ ΓΕΛ κατά μάθημα",
+          "Grammar and syntax phenomena of 12th grade by lesson"
         ]
       ],
       "source": "https://www.minedu.gov.gr/site/70350-07-07-26-kathorismos-exetasteas-yles-gia-to-etos-2027-gia-ta-mathemata-pou-exetazontai-panelladika-gia-ten-eisagoge-sten-tritobathmia-ekpaideuse-apophoiton-g-taxes-emeresiou-genikou-lykeiou-kai-g-taxes-esperinou-genikou-lykeiou-2",
@@ -2497,10 +2505,6 @@
           "Forced oscillations and resonance"
         ],
         [
-          "Σύνθεση ταλαντώσεων",
-          "Superposition of oscillations"
-        ],
-        [
           "Μηχανικά κύματα",
           "Mechanical waves"
         ],
@@ -2525,10 +2529,6 @@
           "Collisions: elastic and inelastic"
         ],
         [
-          "Ορμή και διατήρηση ορμής",
-          "Momentum and conservation of momentum"
-        ],
-        [
           "Στροφική κίνηση στερεού",
           "Rotational motion of a rigid body"
         ],
@@ -2547,10 +2547,6 @@
         [
           "Διατήρηση στροφορμής",
           "Conservation of angular momentum"
-        ],
-        [
-          "Έργο και ενέργεια περιστροφής",
-          "Work and rotational energy"
         ],
         [
           "Μαγνητικό πεδίο",
@@ -2604,10 +2600,6 @@
           "Balancing redox reactions"
         ],
         [
-          "Ηλεκτρόλυση και εφαρμογές",
-          "Electrolysis and applications"
-        ],
-        [
           "Ενθαλπία αντίδρασης",
           "Reaction enthalpy"
         ],
@@ -2658,14 +2650,6 @@
         [
           "Ρυθμιστικά διαλύματα",
           "Buffer solutions"
-        ],
-        [
-          "Υδρόλυση αλάτων",
-          "Salt hydrolysis"
-        ],
-        [
-          "Γινόμενο διαλυτότητας",
-          "Solubility product"
         ],
         [
           "Οργανικές αντιδράσεις προσθήκης",
@@ -2905,8 +2889,8 @@
           "Differentiation rules"
         ],
         [
-          "Παράγωγος σύνθετης και αντίστροφης συνάρτησης",
-          "Derivative of composite and inverse functions"
+          "Παράγωγος σύνθετης συνάρτησης",
+          "Derivative of a composite function"
         ],
         [
           "Θεώρημα Rolle",

@@ -1,0 +1,94 @@
+[
+ [
+  "Συναρτήσεις: πεδίο ορισμού και πράξεις",
+  "Functions: domain and operations"
+ ],
+ [
+  "Σύνθεση συναρτήσεων",
+  "Composition of functions"
+ ],
+ [
+  "Μονοτονία και 1–1 συνάρτηση",
+  "Monotonicity and one-to-one functions"
+ ],
+ [
+  "Αντίστροφη συνάρτηση",
+  "Inverse function"
+ ],
+ [
+  "Όριο συνάρτησης",
+  "Limit of a function"
+ ],
+ [
+  "Ιδιότητες και πράξεις ορίων",
+  "Properties and operations of limits"
+ ],
+ [
+  "Όρια στο άπειρο και ασύμπτωτες",
+  "Limits at infinity and asymptotes"
+ ],
+ [
+  "Συνέχεια συνάρτησης",
+  "Continuity"
+ ],
+ [
+  "Θεώρημα Bolzano",
+  "Bolzano theorem"
+ ],
+ [
+  "Έννοια παραγώγου",
+  "Concept of derivative"
+ ],
+ [
+  "Κανόνες παραγώγισης",
+  "Differentiation rules"
+ ],
+ [
+  "Παράγωγος σύνθετης συνάρτησης",
+  "Derivative of a composite function"
+ ],
+ [
+  "Θεώρημα Rolle",
+  "Rolle's theorem"
+ ],
+ [
+  "Θεώρημα Μέσης Τιμής",
+  "Mean Value Theorem"
+ ],
+ [
+  "Μονοτονία και ακρότατα μέσω παραγώγου",
+  "Monotonicity and extrema via derivatives"
+ ],
+ [
+  "Κυρτότητα: κοίλανση: σημεία καμπής",
+  "Convexity: concavity: inflection points"
+ ],
+ [
+  "Ασύμπτωτες και πλήρης μελέτη συνάρτησης",
+  "Asymptotes and complete function analysis"
+ ],
+ [
+  "Εύρεση ριζών και πλήθους λύσεων",
+  "Finding roots and number of solutions"
+ ],
+ [
+  "Αρχική συνάρτηση",
+  "Antiderivative"
+ ],
+ [
+  "Αόριστο ολοκλήρωμα",
+  "Indefinite integral"
+ ],
+ [
+  "Ορισμένο ολοκλήρωμα",
+  "Definite integral"
+ ],
+ [
+  "Θεμελιώδες θεώρημα ολοκληρωτικού λογισμού",
+  "Fundamental theorem of calculus"
+ ],
+ [
+  "Εμβαδόν χωρίου",
+  "Area of a region"
+ ]
+]

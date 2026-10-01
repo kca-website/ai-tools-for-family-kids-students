@@ -49,11 +49,11 @@ for (const subject of Object.values(inventory.all())) {
   }
 }
 
-assert.equal(highHtml, 174);
+assert.equal(highHtml, 223);
 assert.equal(mediumHtml, 14);
 assert.equal(exactPdf, 11);
 assert.equal(manualHtml, manualOverrides.count);
-assert.equal(manualHtml, 166);
+assert.equal(manualHtml, 306);
 
 // Every inventory topic must be accounted for even as verified manual mappings
 // reduce the blocked backlog. Medium HTML topics are counted separately above.

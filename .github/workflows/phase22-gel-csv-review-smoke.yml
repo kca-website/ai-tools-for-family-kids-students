@@ -1,0 +1,33 @@
+name: Phase 22 GEL CSV review
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'gel-schoolbook-manual-overrides-2026-2027.js'
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'gel-2026-2027-update.js'
+      - 'september-2026-language-tutor.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/phase22-gel-csv-review-smoke.mjs'
+      - '.github/workflows/phase22-gel-csv-review-smoke.yml'
+
+jobs:
+  gel-csv-review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install runtime dependencies
+        run: npm install --no-package-lock --ignore-scripts
+
+      - name: Run Phase 22 GEL CSV review audit
+        run: node tests/phase22-gel-csv-review-smoke.mjs

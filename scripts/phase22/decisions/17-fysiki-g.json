@@ -1,0 +1,7 @@
+[
+ {"subjectId":"fysiki-g-lykeiou","label":"Στροφική κίνηση στερεού","basis":"ΦΕΚ Β΄ 4210/13.07.2026 σ.44449: Φυσική Τεύχος Γ΄ κεφ.4 «Μηχανική στερεού σώματος», 4.1–4.8 (4.2 Οι κινήσεις των στερεών σωμάτων).","pages":[{"work":"8547/2408","file":"index4_2.html"}]},
+ {"subjectId":"fysiki-g-lykeiou","label":"Δύναμη Laplace","basis":"ΦΕΚ σ.44450: Φυσική Τεύχος Β΄ κεφ.4 «Μαγνητικό πεδίο», 4.10 Δύναμη Laplace.","pages":[{"work":"8547/2404","file":"index4.html","heading":"Laplace"}]},
+ {"subjectId":"fysiki-g-lykeiou","label":"Δύναμη Lorentz","basis":"ΦΕΚ σ.44450: Φυσική Τεύχος Β΄ κεφ.4, 4.7 Δύναμη που ασκεί το μαγνητικό πεδίο σε κινούμενο φορτίο (δύναμη Lorentz).","pages":[{"work":"8547/2404","file":"index4.html","heading":"Lorentz"}]},
+ {"subjectId":"fysiki-g-lykeiou","label":"Νόμος Faraday και κανόνας Lenz","basis":"ΦΕΚ σ.44450: Φυσική Τεύχος Β΄ κεφ.5 «Ηλεκτρομαγνητική επαγωγή» (5.2, 5.4 Ο κανόνας του Lenz).","pages":[{"work":"8547/2404","file":"index5.html","heading":"Lenz"}]},
+ {"subjectId":"fysiki-g-lykeiou","label":"Εναλλασσόμενο ρεύμα και βασικές εφαρμογές","basis":"ΦΕΚ σ.44450: Φυσική Τεύχος Β΄ κεφ.5, 5.7 Εναλλασσόμενο ρεύμα, 5.8 Ενεργός ένταση - ενεργός τάση, 5.9 Νόμος του Joule.","pages":[{"work":"8547/2404","file":"index5.html","heading":"εναλλασσόμενο"}]}
+]

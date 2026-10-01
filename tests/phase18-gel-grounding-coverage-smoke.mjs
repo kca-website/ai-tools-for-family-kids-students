@@ -61,29 +61,28 @@ for (const subject of Object.values(inventory.all())) {
   }
 }
 
-assert.equal(highHtml, 174);
+assert.equal(highHtml, 223);
 assert.equal(mediumManual, 14);
 assert.equal(exactPdf, 11);
-assert.equal(reviewedManual, 152);
-assert.equal(overrides.count, 166);
-assert.equal(remainingCandidateBacked, 6);
-assert.equal(remainingWithoutCandidate, 285);
+assert.equal(reviewedManual, 292);
+assert.equal(overrides.count, 306);
+assert.equal(remainingCandidateBacked, 5);
+assert.equal(remainingWithoutCandidate, 88);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 351);
-assert.equal(blocked, 296);
-assert.equal(grounded + blocked, 647);
+assert.equal(grounded, 540);
+assert.equal(blocked, 98);
+assert.equal(grounded + blocked, 638);
 
 // Guard examples: candidates that are deliberately still ambiguous/insufficient.
 for (const [subjectId, label] of [
   ["archaia-b-lykeiou", "Αδίδακτο πεζό κείμενο αττικής διαλέκτου"],
-  ["latinika-b-lykeiou", "Κείμενα και λεξιλόγιο των διδακτικών ενοτήτων"],
-  ["ekthesi-b-lykeiou", "Ισορροπία δοκιμίου"],
+  ["ekthesi-b-lykeiou", "Τεκμηρίωση επιχειρήματος"],
   ["ekthesi-b-lykeiou", "Κειμενικά είδη"],
-  ["latinika-g-lykeiou", "Λεξιλόγιο και ετυμολογικές σχέσεις"],
-  ["mathimatika-g-prosanatolismou", "Παράγωγος σύνθετης και αντίστροφης συνάρτησης"]
+  ["archaia-g-lykeiou", "Αδίδακτο: συντακτικό"],
+  ["english-g-lykeiou", "Αντεστραμμένη σύνταξη"]
 ]) {
   const resolved = endpoint._test.resolveGelInventoryTopic(subjectId, label);
   assert.equal(resolved?.runtimeEligible, false, subjectId + " / " + label + " must remain blocked");

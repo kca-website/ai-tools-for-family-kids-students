@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "@vercel/functions": "3.9.9"
+    "@vercel/functions": "3.9.9",
+    "pdfjs-dist": "4.10.38"
   }
 }

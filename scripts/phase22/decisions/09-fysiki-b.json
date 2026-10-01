@@ -1,0 +1,5 @@
+[
+ {"subjectId":"fysiki-b-lykeiou","label":"Ηλεκτρική δυναμική ενέργεια συστήματος φορτίων","basis":"Official book §5-6 'Η δυναμική ενέργεια πολλών σημειακών φορτίων'.","pages":[{"work":"8547/2425","file":"index5_6.html"}]},
+ {"subjectId":"fysiki-b-lykeiou","label":"Μηχανή Carnot","basis":"Official book §4-13 'Η μηχανή του Carnot' (menu label uses Latin lookalike letters; heading given is the Latin word Carnot).","pages":[{"work":"8547/2425","file":"index4_13.html","heading":"Carnot"}]},
+ {"subjectId":"fysiki-b-lykeiou","label":"Κεφάλαιο 2: Ορμή","basis":"Official book chapter 2 'Διατήρηση της ορμής' introduction page.","pages":[{"work":"8547/2425","file":"index2_0.html"}]}
+]

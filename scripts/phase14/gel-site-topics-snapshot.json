@@ -1,6 +1,6 @@
 {
  "schema": "aitools4kids.gel-site-topics-snapshot/1",
- "source": "window.AITOOLSKIDS_CURRICULUM_RESOLVER.getSubjects(\"high\", grade) at origin/main a5082ff (2026-10-01)",
+ "source": "window.AITOOLSKIDS_CURRICULUM_RESOLVER.getSubjects(\"high\", grade)",
  "subjects": [
   {
    "subjectId": "english-a-lykeiou",
@@ -137,152 +137,117 @@
    "subjectId": "archaia-a-lykeiou",
    "grade": "a",
    "label": "Αρχαία Ελληνική Γλώσσα & Γραμματεία, Α' Λυκείου",
-   "topicMode": "mapped-navigation",
+   "topicMode": "verified-annual",
    "topics": [
     {
      "id": "archaia-a-lykeiou.topic-1",
-     "label": "Επικοινωνιακή περίσταση και ύφος",
-     "status": "navigation-map"
+     "label": "Θουκυδίδης: βίος, έργο, μέθοδος, δομή, γλώσσα και ύφος",
+     "status": "annual-instructions-verified"
     },
     {
      "id": "archaia-a-lykeiou.topic-2",
-     "label": "Τρόποι ανάπτυξης παραγράφου",
-     "status": "navigation-map"
+     "label": "Ξενοφών: βίος, έργο, ενδιαφέροντα και ιδέες",
+     "status": "annual-instructions-verified"
     },
     {
      "id": "archaia-a-lykeiou.topic-3",
-     "label": "Περίληψη και ουσιώδεις πληροφορίες",
-     "status": "navigation-map"
+     "label": "Θουκυδίδη Ιστορίαι Γ΄: Κερκυραϊκά, κεφ. 70–83 με τις επίσημες διακρίσεις μετάφρασης",
+     "status": "annual-instructions-verified"
     },
     {
      "id": "archaia-a-lykeiou.topic-4",
-     "label": "Ισχυρισμός και τεκμηρίωση",
-     "status": "navigation-map"
+     "label": "Ξενοφώντος Ελληνικά Β΄: Αιγός Ποταμοί και κατάλυση δημοκρατίας, επιλεγμένα χωρία",
+     "status": "annual-instructions-verified"
     },
     {
      "id": "archaia-a-lykeiou.topic-5",
-     "label": "Γλωσσικές επιλογές και ύφος",
-     "status": "navigation-map"
-    },
-    {
-     "id": "archaia-a-lykeiou.official-section-1",
-     "label": "Θουκυδίδης: βίος, έργο, μέθοδος, δομή, γλώσσα και ύφος",
-     "status": "official-book-section-verified"
-    },
-    {
-     "id": "archaia-a-lykeiou.official-section-2",
-     "label": "Ξενοφών: βίος, έργο, ενδιαφέροντα και ιδέες",
-     "status": "official-book-section-verified"
-    },
-    {
-     "id": "archaia-a-lykeiou.official-section-3",
-     "label": "Θουκυδίδη Ιστορίαι Γ΄: Κερκυραϊκά, κεφ. 70–83 με τις επίσημες διακρίσεις μετάφρασης",
-     "status": "official-book-section-verified"
-    },
-    {
-     "id": "archaia-a-lykeiou.official-section-4",
-     "label": "Θεματικός άξονας: δύναμη και δίκαιο: ηθική του πολέμου",
-     "status": "official-book-section-verified"
-    },
-    {
-     "id": "archaia-a-lykeiou.official-section-5",
-     "label": "Ξενοφώντος Ελληνικά Β΄: Αιγός Ποταμοί και κατάλυση δημοκρατίας, επιλεγμένα χωρία",
-     "status": "official-book-section-verified"
-    },
-    {
-     "id": "archaia-a-lykeiou.official-section-6",
-     "label": "Θεματικός άξονας: στρατιωτική υπεροχή και πολιτική κυριαρχία",
-     "status": "official-book-section-verified"
-    },
-    {
-     "id": "archaia-a-lykeiou.official-section-7",
      "label": "Γ΄ κλίση ουσιαστικών: φωνηεντόληκτα και υγρόληκτα",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-8",
+     "id": "archaia-a-lykeiou.topic-6",
      "label": "Γ΄ κλίση επιθέτων και μετοχών",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-9",
+     "id": "archaia-a-lykeiou.topic-7",
      "label": "Ανώμαλα παραθετικά επιθέτων",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-10",
+     "id": "archaia-a-lykeiou.topic-8",
      "label": "Κτητικές αντωνυμίες",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-11",
+     "id": "archaia-a-lykeiou.topic-9",
      "label": "Συνηρημένα ρήματα -άω, -έω, -όω",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-12",
+     "id": "archaia-a-lykeiou.topic-10",
      "label": "Β΄ αόριστος",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-13",
+     "id": "archaia-a-lykeiou.topic-11",
      "label": "Παθητικός μέλλοντας και αόριστος",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-14",
+     "id": "archaia-a-lykeiou.topic-12",
      "label": "Υγρόληκτα και ενρινόληκτα ρήματα",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-15",
+     "id": "archaia-a-lykeiou.topic-13",
      "label": "Μέλλοντας ρημάτων σε -ίζω",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-16",
+     "id": "archaia-a-lykeiou.topic-14",
      "label": "Συντελικοί χρόνοι συμφωνόληκτων ρημάτων",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-17",
+     "id": "archaia-a-lykeiou.topic-15",
      "label": "Κατηγορούμενο και γενική κατηγορηματική",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-18",
+     "id": "archaia-a-lykeiou.topic-16",
      "label": "Αντικείμενο άμεσο και έμμεσο: κατηγορούμενο του αντικειμένου",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-19",
+     "id": "archaia-a-lykeiou.topic-17",
      "label": "Απαρέμφατο και απρόσωπη σύνταξη",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-20",
+     "id": "archaia-a-lykeiou.topic-18",
      "label": "Μετοχές και συντακτικές λειτουργίες",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-21",
+     "id": "archaia-a-lykeiou.topic-19",
      "label": "Σύγκριση και β΄ όρος σύγκρισης",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-22",
+     "id": "archaia-a-lykeiou.topic-20",
      "label": "Ονοματικοί και επιρρηματικοί προσδιορισμοί",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-23",
+     "id": "archaia-a-lykeiou.topic-21",
      "label": "Παρατακτική και υποτακτική σύνδεση",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     },
     {
-     "id": "archaia-a-lykeiou.official-section-24",
+     "id": "archaia-a-lykeiou.topic-22",
      "label": "Ονοματικές, επιρρηματικές και υποθετικές προτάσεις",
-     "status": "official-book-section-verified"
+     "status": "annual-instructions-verified"
     }
    ]
   },
@@ -1910,72 +1875,82 @@
    "topics": [
     {
      "id": "latinika-b-lykeiou.topic-1",
-     "label": "Λατινική προφορά και βασικές αρχές μετάφρασης",
+     "label": "Εισαγωγή: η λατινική γλώσσα και η ρωμαϊκή λογοτεχνία",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-2",
-     "label": "Κείμενα και λεξιλόγιο των διδακτικών ενοτήτων",
+     "label": "Μάθημα Ι: Ο εξόριστος ποιητής",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-3",
-     "label": "Α΄ και Β΄ κλίση ουσιαστικών",
+     "label": "Μάθημα II: Διδώ και Αινείας",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-4",
-     "label": "Γ΄ κλίση ουσιαστικών",
+     "label": "Μάθημα III: Η περιπέτεια της Ανδρομέδας",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-5",
-     "label": "Επίθετα και συμφωνία ουσιαστικού:επιθέτου",
+     "label": "Μάθημα IV: Τα ήθη των αρχαίων Ρωμαίων",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-6",
-     "label": "Αντωνυμίες",
+     "label": "Μάθημα V: Ένας «λάτρης» του Βιργιλίου",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-7",
-     "label": "Οριστική ενεργητικής φωνής",
+     "label": "Μάθημα VI: Οι νόμοι",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-8",
-     "label": "Οριστική παθητικής φωνής",
+     "label": "Μάθημα VII: Ετοιμασίες για ξεχειμώνιασμα",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-9",
-     "label": "Απαρέμφατο",
+     "label": "Μάθημα VIII: Όταν βγεις στο κυνήγι, πάρε μαζί σου μολύβι και χαρτί",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-10",
-     "label": "Μετοχές",
+     "label": "Μάθημα IX: Η εγκαθίδρυση της δημοκρατίας στη Ρώμη",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-11",
-     "label": "Πτώσεις και συντακτικές λειτουργίες",
+     "label": "Μάθημα X: Η προφητεία του Δία",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-12",
-     "label": "Χρονικές, αιτιολογικές και αναφορικές σχέσεις",
+     "label": "Μάθημα XI: Η Ρώμη και η Καρχηδόνα",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-13",
-     "label": "Απαρεμφατική σύνταξη",
+     "label": "Μάθημα XII: Ο ύπατος Αιμίλιος Παύλος και το σκυλάκι της κόρης του",
      "status": "navigation-map"
     },
     {
      "id": "latinika-b-lykeiou.topic-14",
-     "label": "Μετατροπές γραμματικών τύπων μέσα στο κείμενο",
+     "label": "Μάθημα XIII: Πώς η γνώση νίκησε τη δεισιδαιμονία",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-b-lykeiou.topic-15",
+     "label": "Μάθημα XIV: Ένα φοβερό όνειρο",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-b-lykeiou.topic-16",
+     "label": "Μάθημα XV: Τα ήθη των Γερμανών",
      "status": "navigation-map"
     }
    ]
@@ -2066,7 +2041,7 @@
     },
     {
      "id": "ekthesi-b-lykeiou.mapped-topic-2",
-     "label": "Μέσα ενημέρωσης και αξιοπιστία πηγών",
+     "label": "Μέσα μαζικής επικοινωνίας",
      "status": "navigation-map"
     },
     {
@@ -2076,56 +2051,26 @@
     },
     {
      "id": "ekthesi-b-lykeiou.mapped-topic-4",
-     "label": "Στερεότυπα, προκαταλήψεις και κοινωνικές διακρίσεις",
+     "label": "Στερεότυπες αντιλήψεις",
      "status": "navigation-map"
     },
     {
      "id": "ekthesi-b-lykeiou.mapped-topic-5",
-     "label": "Ρατσισμός και ανθρώπινα δικαιώματα",
+     "label": "Φυλετικός και κοινωνικός ρατσισμός",
      "status": "navigation-map"
     },
     {
      "id": "ekthesi-b-lykeiou.mapped-topic-6",
-     "label": "Ελεύθερος χρόνος και ψυχαγωγία",
-     "status": "navigation-map"
-    },
-    {
-     "id": "ekthesi-b-lykeiou.mapped-topic-7",
-     "label": "Τέχνη και πολιτισμός",
-     "status": "navigation-map"
-    },
-    {
-     "id": "ekthesi-b-lykeiou.mapped-topic-8",
-     "label": "Επιστήμη και τεχνολογία",
-     "status": "navigation-map"
-    },
-    {
-     "id": "ekthesi-b-lykeiou.mapped-topic-9",
-     "label": "Ψηφιακή επικοινωνία και κοινωνικά δίκτυα",
-     "status": "navigation-map"
-    },
-    {
-     "id": "ekthesi-b-lykeiou.mapped-topic-10",
-     "label": "Περιβάλλον και βιώσιμη ανάπτυξη",
-     "status": "navigation-map"
-    },
-    {
-     "id": "ekthesi-b-lykeiou.mapped-topic-11",
-     "label": "Επιχειρηματολογία: θέση, τεκμήρια και αντίλογος",
-     "status": "navigation-map"
-    },
-    {
-     "id": "ekthesi-b-lykeiou.mapped-topic-12",
      "label": "Οργάνωση παραγράφου και συνοχή κειμένου",
      "status": "navigation-map"
     },
     {
-     "id": "ekthesi-b-lykeiou.mapped-topic-13",
+     "id": "ekthesi-b-lykeiou.mapped-topic-7",
      "label": "Περίληψη και μετασχηματισμός πληροφοριών",
      "status": "navigation-map"
     },
     {
-     "id": "ekthesi-b-lykeiou.mapped-topic-14",
+     "id": "ekthesi-b-lykeiou.mapped-topic-8",
      "label": "Λογοτεχνική ερμηνεία με κειμενικούς δείκτες",
      "status": "navigation-map"
     },
@@ -2204,67 +2149,32 @@
    "topics": [
     {
      "id": "filosofia-b-lykeiou.topic-1",
-     "label": "Τι είναι φιλοσοφία: φιλοσοφικά ερωτήματα",
+     "label": "Τι είναι η φιλοσοφία και σε τι χρησιμεύει",
      "status": "navigation-map"
     },
     {
      "id": "filosofia-b-lykeiou.topic-2",
-     "label": "Επιχείρημα, προκείμενες και συμπέρασμα",
+     "label": "Μεθοδολογία της φιλοσοφίας: επιχειρήματα και αριστοτελική λογική",
      "status": "navigation-map"
     },
     {
      "id": "filosofia-b-lykeiou.topic-3",
-     "label": "Εγκυρότητα και ορθότητα συλλογισμών",
+     "label": "Πλάτων και Αριστοτέλης: η πηγή της γνώσης",
      "status": "navigation-map"
     },
     {
      "id": "filosofia-b-lykeiou.topic-4",
-     "label": "Γλώσσα, έννοιες και ορισμοί",
+     "label": "Ηθική φιλοσοφία: πώς πρέπει να ζούμε",
      "status": "navigation-map"
     },
     {
      "id": "filosofia-b-lykeiou.topic-5",
-     "label": "Γνώση, πεποίθηση και αλήθεια",
+     "label": "Πολιτική φιλοσοφία: πώς οργανώνουμε τις κοινωνίες",
      "status": "navigation-map"
     },
     {
      "id": "filosofia-b-lykeiou.topic-6",
-     "label": "Σκεπτικισμός και όρια της γνώσης",
-     "status": "navigation-map"
-    },
-    {
-     "id": "filosofia-b-lykeiou.topic-7",
-     "label": "Επιστημονική γνώση και μέθοδος",
-     "status": "navigation-map"
-    },
-    {
-     "id": "filosofia-b-lykeiou.topic-8",
-     "label": "Νους, σώμα και προσωπική ταυτότητα",
-     "status": "navigation-map"
-    },
-    {
-     "id": "filosofia-b-lykeiou.topic-9",
-     "label": "Ελευθερία και αιτιοκρατία",
-     "status": "navigation-map"
-    },
-    {
-     "id": "filosofia-b-lykeiou.topic-10",
-     "label": "Ηθική πράξη και κριτήρια ορθού",
-     "status": "navigation-map"
-    },
-    {
-     "id": "filosofia-b-lykeiou.topic-11",
-     "label": "Ωφελιμισμός, δεοντολογία και αρετή",
-     "status": "navigation-map"
-    },
-    {
-     "id": "filosofia-b-lykeiou.topic-12",
-     "label": "Δικαιοσύνη, πολιτεία και δικαιώματα",
-     "status": "navigation-map"
-    },
-    {
-     "id": "filosofia-b-lykeiou.topic-13",
-     "label": "Αισθητική και φιλοσοφία της τέχνης",
+     "label": "Αισθητική: τι είναι ωραίο, τι είναι τέχνη",
      "status": "navigation-map"
     }
    ]
@@ -2825,91 +2735,76 @@
    "topics": [
     {
      "id": "istoria-g-lykeiou.topic-1",
-     "label": "Ευρώπη και κόσμος τον 19ο αιώνα",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "istoria-g-lykeiou.topic-2",
-     "label": "Εθνικά και φιλελεύθερα κινήματα",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "istoria-g-lykeiou.topic-3",
      "label": "Ελληνική Επανάσταση και συγκρότηση ελληνικού κράτους",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-4",
+     "id": "istoria-g-lykeiou.topic-2",
      "label": "Βιομηχανική Επανάσταση και κοινωνικές μεταβολές",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-5",
+     "id": "istoria-g-lykeiou.topic-3",
      "label": "Ιμπεριαλισμός και αποικιοκρατία",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-6",
+     "id": "istoria-g-lykeiou.topic-4",
      "label": "Βαλκανικοί Πόλεμοι",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-7",
+     "id": "istoria-g-lykeiou.topic-5",
      "label": "Α΄ Παγκόσμιος Πόλεμος",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-8",
+     "id": "istoria-g-lykeiou.topic-6",
      "label": "Ρωσική Επανάσταση",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-9",
+     "id": "istoria-g-lykeiou.topic-7",
      "label": "Μικρασιατική Εκστρατεία και Καταστροφή",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-10",
+     "id": "istoria-g-lykeiou.topic-8",
      "label": "Μεσοπόλεμος και οικονομική κρίση",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-11",
-     "label": "Φασισμός και ναζισμός",
+     "id": "istoria-g-lykeiou.topic-9",
+     "label": "Φασισμός και κρίση της κοινοβουλευτικής δημοκρατίας",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-12",
+     "id": "istoria-g-lykeiou.topic-10",
      "label": "Β΄ Παγκόσμιος Πόλεμος",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-13",
+     "id": "istoria-g-lykeiou.topic-11",
      "label": "Κατοχή και Αντίσταση στην Ελλάδα",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-14",
+     "id": "istoria-g-lykeiou.topic-12",
      "label": "Ολοκαύτωμα",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-15",
+     "id": "istoria-g-lykeiou.topic-13",
      "label": "Ψυχρός Πόλεμος",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-16",
-     "label": "Αποαποικιοποίηση",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "istoria-g-lykeiou.topic-17",
+     "id": "istoria-g-lykeiou.topic-14",
      "label": "Ευρωπαϊκή ενοποίηση",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "istoria-g-lykeiou.topic-18",
+     "id": "istoria-g-lykeiou.topic-15",
      "label": "Ελλάδα στη μεταπολεμική περίοδο",
      "status": "annual-instructions-verified"
     }
@@ -3081,97 +2976,187 @@
    "topics": [
     {
      "id": "latinika-g-lykeiou.topic-1",
-     "label": "Διδαγμένα λατινικά κείμενα της εξεταστέας ύλης 2027",
+     "label": "Εισαγωγή: εξέλιξη της ρωμαϊκής λογοτεχνίας (προκλασική και κλασική εποχή)",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-2",
-     "label": "Μετάφραση και νοηματική απόδοση",
+     "label": "Μάθημα XVI: Η τελευταία μάχη του Καίσαρα στη Γαλατία",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-3",
-     "label": "Λεξιλόγιο και ετυμολογικές σχέσεις",
+     "label": "Μάθημα XVII: Φόβος μπροστά στο άγνωστο",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-4",
-     "label": "Ουσιαστικά όλων των κλίσεων",
+     "label": "Μάθημα XVIII: Ο Ηρακλής στην Ιταλία",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-5",
-     "label": "Επίθετα και παραθετικά",
+     "label": "Μάθημα XIX: Η συνωμοσία του Κατιλίνα",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-6",
-     "label": "Αντωνυμίες",
+     "label": "Μάθημα XX: Πίσω από τις κουρτίνες ή πώς ο Κλαύδιος έγινε αυτοκράτορας",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-7",
-     "label": "Ρήματα: χρόνοι οριστικής",
+     "label": "Μάθημα XXI",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-8",
-     "label": "Υποτακτική",
+     "label": "Μάθημα XXII",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-9",
-     "label": "Προστακτική",
+     "label": "Μάθημα XXIII",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-10",
-     "label": "Απαρέμφατο",
+     "label": "Μάθημα XXIV",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-11",
-     "label": "Μετοχές",
+     "label": "Μάθημα XXV",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-12",
-     "label": "Γερουνδιακό και γερουνδιακός τύπος",
+     "label": "Μάθημα XXVI",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-13",
-     "label": "Σουπίνο",
+     "label": "Μάθημα XXVII",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-14",
-     "label": "Ακολουθία χρόνων",
+     "label": "Μάθημα XXVIII",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-15",
-     "label": "Απαρεμφατική σύνταξη",
+     "label": "Μάθημα XXIX",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-16",
-     "label": "Μετοχική σύνταξη και αφαιρετική απόλυτη",
+     "label": "Μάθημα XXX",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-17",
-     "label": "Δευτερεύουσες προτάσεις",
+     "label": "Μάθημα XXXI",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-18",
-     "label": "Ευθύς και πλάγιος λόγος",
+     "label": "Μάθημα XXXII",
      "status": "navigation-map"
     },
     {
      "id": "latinika-g-lykeiou.topic-19",
-     "label": "Μετατροπές σύνταξης",
+     "label": "Μάθημα XXXIII",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-20",
+     "label": "Μάθημα XXXIV",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-21",
+     "label": "Μάθημα XXXV",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-22",
+     "label": "Μάθημα XXXVI",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-23",
+     "label": "Μάθημα XXXVII",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-24",
+     "label": "Μάθημα XXXVIII",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-25",
+     "label": "Μάθημα XXXIX",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-26",
+     "label": "Μάθημα XL",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-27",
+     "label": "Μάθημα XLI",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-28",
+     "label": "Μάθημα XLII",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-29",
+     "label": "Μάθημα XLIII",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-30",
+     "label": "Μάθημα XLIV",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-31",
+     "label": "Μάθημα XLV",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-32",
+     "label": "Μάθημα XLVI",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-33",
+     "label": "Μάθημα XLVII",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-34",
+     "label": "Μάθημα XLVIII",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-35",
+     "label": "Μάθημα XLIX",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-36",
+     "label": "Μάθημα L",
+     "status": "navigation-map"
+    },
+    {
+     "id": "latinika-g-lykeiou.topic-37",
+     "label": "Γραμματικά και συντακτικά φαινόμενα Γ΄ ΓΕΛ κατά μάθημα",
      "status": "navigation-map"
     }
    ]
@@ -3769,106 +3754,91 @@
     },
     {
      "id": "fysiki-g-lykeiou.topic-5",
-     "label": "Σύνθεση ταλαντώσεων",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "fysiki-g-lykeiou.topic-6",
      "label": "Μηχανικά κύματα",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-7",
+     "id": "fysiki-g-lykeiou.topic-6",
      "label": "Εξίσωση αρμονικού κύματος",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-8",
+     "id": "fysiki-g-lykeiou.topic-7",
      "label": "Συμβολή κυμάτων",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-9",
+     "id": "fysiki-g-lykeiou.topic-8",
      "label": "Στάσιμα κύματα",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-10",
+     "id": "fysiki-g-lykeiou.topic-9",
      "label": "Ηλεκτρομαγνητικά κύματα",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-11",
+     "id": "fysiki-g-lykeiou.topic-10",
      "label": "Κρούσεις: ελαστική και ανελαστική",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-12",
-     "label": "Ορμή και διατήρηση ορμής",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "fysiki-g-lykeiou.topic-13",
+     "id": "fysiki-g-lykeiou.topic-11",
      "label": "Στροφική κίνηση στερεού",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-14",
+     "id": "fysiki-g-lykeiou.topic-12",
      "label": "Ροπή δύναμης",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-15",
+     "id": "fysiki-g-lykeiou.topic-13",
      "label": "Ροπή αδράνειας",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-16",
+     "id": "fysiki-g-lykeiou.topic-14",
      "label": "Στροφορμή",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-17",
+     "id": "fysiki-g-lykeiou.topic-15",
      "label": "Διατήρηση στροφορμής",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-18",
-     "label": "Έργο και ενέργεια περιστροφής",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "fysiki-g-lykeiou.topic-19",
+     "id": "fysiki-g-lykeiou.topic-16",
      "label": "Μαγνητικό πεδίο",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-20",
+     "id": "fysiki-g-lykeiou.topic-17",
      "label": "Δύναμη Laplace",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-21",
+     "id": "fysiki-g-lykeiou.topic-18",
      "label": "Δύναμη Lorentz",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-22",
+     "id": "fysiki-g-lykeiou.topic-19",
      "label": "Κίνηση φορτισμένων σωματιδίων σε μαγνητικό πεδίο",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-23",
+     "id": "fysiki-g-lykeiou.topic-20",
      "label": "Ηλεκτρομαγνητική επαγωγή",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-24",
+     "id": "fysiki-g-lykeiou.topic-21",
      "label": "Νόμος Faraday και κανόνας Lenz",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "fysiki-g-lykeiou.topic-25",
+     "id": "fysiki-g-lykeiou.topic-22",
      "label": "Εναλλασσόμενο ρεύμα και βασικές εφαρμογές",
      "status": "annual-instructions-verified"
     }
@@ -3897,116 +3867,101 @@
     },
     {
      "id": "chimeia-g-lykeiou.topic-4",
-     "label": "Ηλεκτρόλυση και εφαρμογές",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "chimeia-g-lykeiou.topic-5",
      "label": "Ενθαλπία αντίδρασης",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-6",
+     "id": "chimeia-g-lykeiou.topic-5",
      "label": "Θερμοχημικές εξισώσεις",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-7",
+     "id": "chimeia-g-lykeiou.topic-6",
      "label": "Νόμος Hess",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-8",
+     "id": "chimeia-g-lykeiou.topic-7",
      "label": "Ταχύτητα χημικής αντίδρασης",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-9",
+     "id": "chimeia-g-lykeiou.topic-8",
      "label": "Παράγοντες που επηρεάζουν την ταχύτητα",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-10",
+     "id": "chimeia-g-lykeiou.topic-9",
      "label": "Μηχανισμός και ενέργεια ενεργοποίησης",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-11",
+     "id": "chimeia-g-lykeiou.topic-10",
      "label": "Χημική ισορροπία και δυναμικός χαρακτήρας",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-12",
+     "id": "chimeia-g-lykeiou.topic-11",
      "label": "Αρχή Le Chatelier",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-13",
+     "id": "chimeia-g-lykeiou.topic-12",
      "label": "Σταθερά χημικής ισορροπίας",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-14",
+     "id": "chimeia-g-lykeiou.topic-13",
      "label": "Οξέα και βάσεις Brønsted:Lowry",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-15",
+     "id": "chimeia-g-lykeiou.topic-14",
      "label": "Ιοντισμός οξέων και βάσεων",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-16",
+     "id": "chimeia-g-lykeiou.topic-15",
      "label": "pH και pOH",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-17",
+     "id": "chimeia-g-lykeiou.topic-16",
      "label": "Ρυθμιστικά διαλύματα",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-18",
-     "label": "Υδρόλυση αλάτων",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "chimeia-g-lykeiou.topic-19",
-     "label": "Γινόμενο διαλυτότητας",
-     "status": "annual-instructions-verified"
-    },
-    {
-     "id": "chimeia-g-lykeiou.topic-20",
+     "id": "chimeia-g-lykeiou.topic-17",
      "label": "Οργανικές αντιδράσεις προσθήκης",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-21",
+     "id": "chimeia-g-lykeiou.topic-18",
      "label": "Οργανικές αντιδράσεις υποκατάστασης",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-22",
+     "id": "chimeia-g-lykeiou.topic-19",
      "label": "Οργανικές αντιδράσεις απόσπασης",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-23",
+     "id": "chimeia-g-lykeiou.topic-20",
      "label": "Οξείδωση και αναγωγή οργανικών ενώσεων",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-24",
+     "id": "chimeia-g-lykeiou.topic-21",
      "label": "Εστεροποίηση και υδρόλυση",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-25",
+     "id": "chimeia-g-lykeiou.topic-22",
      "label": "Συνθετικές πορείες οργανικών ενώσεων",
      "status": "annual-instructions-verified"
     },
     {
-     "id": "chimeia-g-lykeiou.topic-26",
+     "id": "chimeia-g-lykeiou.topic-23",
      "label": "Πολυμερή και πολυμερισμός",
      "status": "annual-instructions-verified"
     }

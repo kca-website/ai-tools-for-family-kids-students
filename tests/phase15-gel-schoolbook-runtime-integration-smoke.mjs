@@ -29,10 +29,14 @@ for (const subject of Object.values(inventory.all())) {
     if (topic.status === "exact-html" && topic.confidence === "high") {
       highHtml++;
       assert.equal(resolved.runtimeEligible, true, subject.subjectId + " / " + topic.label);
+      assert.equal(resolved.runtimeMode, "exact-html");
+    } else if (topic.status === "exact-pdf") {
+      exactPdf++;
+      assert.equal(resolved.runtimeEligible, true, subject.subjectId + " / " + topic.label);
+      assert.equal(resolved.runtimeMode, "exact-pdf");
     } else {
       assert.equal(resolved.runtimeEligible, false, subject.subjectId + " / " + topic.label + " must stay fail-closed");
       if (topic.status === "exact-html" && topic.confidence === "medium") mediumHtml++;
-      else if (topic.status === "exact-pdf") exactPdf++;
       else blocked++;
     }
   }
@@ -131,7 +135,8 @@ assert.equal(medium.status, 404);
 assert.equal(medium.body?.error, "section_not_resolved");
 assert.equal(medium.body?.reviewStatus, "medium-confidence-not-activated");
 
-// exact-pdf is recognized, linked and still text-fail-closed.
+// exact-pdf mappings are recognized as a separate, verified runtime mode.
+// Live PDF text extraction itself is covered by the Phase 16 smoke.
 let pdfCase = null;
 for (const subject of Object.values(inventory.all())) {
   const topic = (subject.topicMappings || []).find((entry) => entry.status === "exact-pdf");
@@ -141,12 +146,10 @@ for (const subject of Object.values(inventory.all())) {
   }
 }
 assert.ok(pdfCase, "inventory must contain an exact-pdf case");
-const pdf = await endpoint.resolveOfficialSchoolbookSource(pdfCase[0], pdfCase[1].label);
-assert.equal(pdf.ok, false);
-assert.equal(pdf.status, 409);
-assert.equal(pdf.body?.error, "official_pdf_text_not_grounded");
-assert.match(String(pdf.body?.sourceUrl || ""), /\/ebooks\/v\/pdf\/.+#page=\d+$/);
-assert.equal(pdf.body?.pdfPage, pdfCase[1].pdfPage);
+const pdfResolved = resolveGelInventoryTopic(pdfCase[0], pdfCase[1].label);
+assert.equal(pdfResolved?.runtimeEligible, true);
+assert.equal(pdfResolved?.runtimeMode, "exact-pdf");
+assert.equal(pdfResolved?.mapping?.pdfPage, pdfCase[1].pdfPage);
 
 // Manual-review rows must never fall through to generic schoolbook text.
 let manualCase = null;
@@ -196,6 +199,6 @@ console.log("PHASE15_GEL_RUNTIME_INTEGRATION=" + JSON.stringify({
   exactPdf,
   blocked,
   liveResults,
-  pdfFailClosed: pdf.body?.sourceUrl,
+  pdfRuntimeMode: pdfResolved?.runtimeMode,
   mediumFailClosed: medium.body?.reviewStatus
 }, null, 2));

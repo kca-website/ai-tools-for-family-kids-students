@@ -1,4 +1,4 @@
-// Phase 17-20: manually verified runtime overrides for GEL 2026-2027.
+// Phase 17-21: manually verified runtime overrides for GEL 2026-2027.
 // This file deliberately does NOT modify the auto-generated Phase 14 inventory.
 // Every entry preserves the learner-facing topic label and points it to one or
 // more manually reviewed official ebooks.edu.gr HTML pages/sections.
@@ -2182,6 +2182,282 @@ const entries = Object.freeze([
         "heading": "Η αποκατάσταση των προσφύγων"
       }
     ]
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Βασικό οικονομικό πρόβλημα και σπανιότητα",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-1",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index1.html",
+    "heading": "κύριο οικονομικό πρόβλημα"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Παραγωγικές δυνατότητες και κόστος ευκαιρίας",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-2",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index1.html",
+    "heading": "Οι Παραγωγικές Δυνατότητες της Οικονομίας"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Καταμερισμός έργων, χρήμα και οικονομικό κύκλωμα",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-3",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index1.html",
+    "heading": "Ο Καταμερισμός των έργων"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Ζήτηση και νόμος ζήτησης",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-4",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index2.html",
+    "heading": "Νόμος ζήτησης"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Ατομική και αγοραία ζήτηση",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-5",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index2.html",
+    "heading": "Η αγοραία καμπύλη Ζήτησης"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Ελαστικότητα ζήτησης ως προς την τιμή",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-6",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index2.html",
+    "heading": "Ελαστικότητα ζήτησης ως προς την τιμή"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Παραγωγή και συντελεστές παραγωγής",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-8",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-multi-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "sources": [
+      {
+        "work": "8547/2392",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index1.html",
+        "heading": "Οι Συντελεστές της Παραγωγής"
+      },
+      {
+        "work": "8547/2392",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index3.html",
+        "heading": "Η έννοια της παραγωγής και τα χαρακτηριστικά της"
+      }
+    ]
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Βραχυχρόνια συνάρτηση παραγωγής",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-9",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index3.html",
+    "heading": "Η συνάρτηση παραγωγής"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Κόστος παραγωγής",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-10",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index3.html",
+    "heading": "Το κόστος παραγωγής στη βραχυχρόνια περίοδο"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Προσφορά και νόμος προσφοράς",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-11",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index4.html",
+    "heading": "Η καμπύλη προσφοράς"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Ελαστικότητα προσφοράς",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-12",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index4.html",
+    "heading": "Η ελαστικότητα της προσφοράς"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Ισορροπία αγοράς",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-13",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index5.html",
+    "heading": "Αλγεβρικός προσδιορισμός του σημείου ισορροπίας"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Κρατική παρέμβαση στις τιμές",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-14",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index5.html",
+    "heading": "Κρατική παρέμβαση στην αγορά"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Πραγματικό και ονομαστικό ΑΕΠ",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-16",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index7.html",
+    "heading": "Η επίδραση της μεταβολής των τιμών στο Ακαθάριστο Εγχώριο Προϊόν"
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Δείκτης τιμών και πληθωρισμός",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-17",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-multi-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "sources": [
+      {
+        "work": "8547/2392",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index7.html",
+        "heading": "Η επίδραση της μεταβολής των τιμών στο Ακαθάριστο Εγχώριο Προϊόν"
+      },
+      {
+        "work": "8547/2392",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index9.html",
+        "heading": "Ο πληθωρισμός"
+      }
+    ]
+  },
+  {
+    "subjectId": "oikonomia-g-lykeiou",
+    "label": "Ανεργία",
+    "sourceTopicId": "oikonomia-g-lykeiou.topic-18",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 21,
+    "work": "8547/2392",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 21,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index9.html",
+    "heading": "Ανεργία"
   }
 ]);
 

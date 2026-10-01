@@ -30,8 +30,8 @@ function entrySources(entry) {
 }
 
 assert.equal(overrides.schoolYear, "2026-2027");
-assert.equal(overrides.count, 150);
-assert.equal(overrides.entries.length, 150);
+assert.equal(overrides.count, 166);
+assert.equal(overrides.entries.length, 166);
 
 const keys = new Set();
 let medium = 0;
@@ -106,9 +106,9 @@ for (const entry of overrides.entries) {
 }
 
 assert.equal(medium, 14);
-assert.equal(manual, 136);
-assert.equal(discovered, 21);
-assert.equal(multiSource, 7);
+assert.equal(manual, 152);
+assert.equal(discovered, 37);
+assert.equal(multiSource, 9);
 
 // Live source audit: every unique official page must still load and contain
 // every manually accepted official heading for that page.
@@ -133,7 +133,7 @@ const workers = Array.from({ length: Math.min(6, queue.length) }, async () => {
     try {
       response = await fetch(url, {
         headers: {
-          "User-Agent": "aitools4kids.gr Phase 17-20 manual grounding audit",
+          "User-Agent": "aitools4kids.gr Phase 17-21 manual grounding audit",
           "Accept": "text/html,application/xhtml+xml"
         },
         redirect: "follow"
@@ -202,7 +202,7 @@ for (const [subjectId, label, expectedSources] of representative) {
   assert.ok(String(result.body?.text || "").length >= 500);
 }
 
-console.log("PHASE17_20_GEL_MANUAL_OVERRIDES=" + JSON.stringify({
+console.log("PHASE17_21_GEL_MANUAL_OVERRIDES=" + JSON.stringify({
   total: overrides.count,
   medium,
   manual,

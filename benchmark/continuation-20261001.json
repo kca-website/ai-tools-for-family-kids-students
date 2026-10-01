@@ -1,6 +1,8 @@
 {
   "phase": "1",
-  "maxNeuronsEstimate": 1000,
+  "maxNeuronsEstimate": 4000,
+  "stage": 2,
+  "priorRun": 36854057189,
   "productionRoutingChanges": false,
-  "purpose": "Continue corrected Phase 1 within a small shared-free-pool budget; no schedule, no automatic model promotion."
+  "purpose": "Complete remaining Phase 1 cases, resuming the prior 25 non-thinking Qwen attempts. No schedule or model promotion."
 }

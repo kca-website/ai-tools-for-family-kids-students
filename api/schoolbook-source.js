@@ -1606,7 +1606,13 @@ function resolveDirectSourceUrls(subject, topic) {
   }
 
   if (subject === "glossa-gymnasiou") {
-    return resolveGlossaGQuizUrls(topic);
+    const diagnostic = resolveGlossaGQuizUrls(topic);
+    if (diagnostic.length) return diagnostic;
+    const unitMatch = String(topic || "").match(/^\s*(\d+)(?:η|ή)?\s+Ενότητα\b/i);
+    const unit = unitMatch ? Number(unitMatch[1]) : 0;
+    if (!Number.isInteger(unit) || unit < 1 || unit > 8) return [];
+    const letter = String.fromCharCode("b".charCodeAt(0) + unit - 1);
+    return [new URL(`index${letter}_0.html`, BOOKS[subject].base).toString()];
   }
 
   if (subject === "chimeia-b-gymnasiou") {
@@ -1629,8 +1635,26 @@ function resolveDirectSourceUrls(subject, topic) {
     return resolvePhysicsBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
 
-  if (subject === "fysiki-g-gymnasiou") return resolvePhysicsGQuizUrls(topic);
-  if (subject === "chimeia-g-gymnasiou") return resolveChemistryGQuizUrls(topic);
+  if (subject === "fysiki-g-gymnasiou") {
+    const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
+    const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
+    if (Number.isInteger(chapter) && chapter >= 1 && chapter <= 11) {
+      return [new URL(`index${chapter}.html`, BOOKS[subject].base).toString()];
+    }
+    return resolvePhysicsGQuizUrls(topic);
+  }
+
+  if (subject === "chimeia-g-gymnasiou") {
+    const chapterMatch = String(topic || "").match(/^\s*(\d+)(?:η|ή)?\s+Ενότητα\s*·\s*Κεφάλαιο\s+(\d+)\b/i);
+    const unit = chapterMatch ? Number(chapterMatch[1]) : 0;
+    const chapter = chapterMatch ? Number(chapterMatch[2]) : 0;
+    const maxChapter = unit === 1 ? 5 : (unit === 2 ? 6 : (unit === 3 ? 4 : 0));
+    if (maxChapter && Number.isInteger(chapter) && chapter >= 1 && chapter <= maxChapter) {
+      return [new URL(`index${unit}_${chapter}.html`, BOOKS[subject].base).toString()];
+    }
+    return resolveChemistryGQuizUrls(topic);
+  }
+
   if (subject === "biologia-g-gymnasiou") return resolveBiologyGQuizUrls(topic);
 
   if (subject === "biologia-b-gymnasiou") {
@@ -1656,6 +1680,30 @@ function resolveDirectSourceUrls(subject, topic) {
 
   if (subject === "thriskeftika-b-gymnasiou") {
     return resolveReligionBSourceUrls(topic);
+  }
+
+  if (subject === "english-g-gymnasiou") {
+    const unitMatch = String(topic || "").match(/^\s*Unit\s+(\d+)\b/i);
+    const unit = unitMatch ? Number(unitMatch[1]) : 0;
+    if (!Number.isInteger(unit) || unit < 1 || unit > 10) return [];
+    return [1, 2, 3].map(lesson =>
+      new URL(`index${unit}_${lesson}.html`, BOOKS[subject].base).toString()
+    );
+  }
+
+  if (subject === "biologia-a-lykeiou") {
+    const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
+    const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
+    if (!Number.isInteger(chapter) || chapter < 1 || chapter > 12) return [];
+    return [new URL(`index${chapter}.html`, BOOKS[subject].base).toString()];
+  }
+
+  if (subject === "ekthesi-g-lykeiou") {
+    const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
+    const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
+    const paths = { 1: "indexa_01.html", 2: "indexc_00.html", 3: "indexf_00.html" };
+    if (paths[chapter]) return [new URL(paths[chapter], BOOKS[subject].base).toString()];
+    return [];
   }
 
   if (subject === "biologia-a-gymnasiou") {

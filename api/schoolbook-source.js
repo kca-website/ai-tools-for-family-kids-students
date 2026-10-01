@@ -35,6 +35,13 @@ try {
   GEL_SCHOOLBOOK_SOURCE_MAP = null;
 }
 
+let GEL_MANUAL_OVERRIDES = null;
+try {
+  GEL_MANUAL_OVERRIDES = require("../gel-schoolbook-manual-overrides-2026-2027.js");
+} catch (_) {
+  GEL_MANUAL_OVERRIDES = null;
+}
+
 let OFFICIAL_PDF_TEXT = null;
 try {
   OFFICIAL_PDF_TEXT = require("./official-pdf-text.js");
@@ -123,12 +130,24 @@ function resolveGelInventoryTopic(subject, topic) {
     };
   }
 
-  const mapping = matches[0];
+  const inventoryMapping = matches[0];
+  const manualOverride = GEL_MANUAL_OVERRIDES?.get?.(subject, rawTopic) || null;
+  const mapping = manualOverride
+    ? {
+        ...inventoryMapping,
+        ...manualOverride,
+        status: "manual-verified-html",
+        confidence: "manual-verified",
+        labelParaphrase: true
+      }
+    : inventoryMapping;
+
   const book = (row.books || []).find((entry) =>
     entry?.role === "primary" && entry?.work === mapping?.work
   ) || null;
 
   const exactHtmlHigh =
+    !manualOverride &&
     mapping?.status === "exact-html" &&
     mapping?.confidence === "high" &&
     !!mapping?.url &&
@@ -136,7 +155,16 @@ function resolveGelInventoryTopic(subject, topic) {
     !!book?.html?.url &&
     catalogHtmlSourceAllowed(book.html.url);
 
+  const manualHtmlVerified =
+    !!manualOverride &&
+    !!mapping?.url &&
+    !!mapping?.heading &&
+    catalogHtmlSourceAllowed(mapping.url) &&
+    !!book?.html?.url &&
+    catalogHtmlSourceAllowed(book.html.url);
+
   const exactPdfVerified =
+    !manualOverride &&
     mapping?.status === "exact-pdf" &&
     mapping?.granularity === "pdf-page" &&
     Number.isInteger(Number(mapping?.pdfPage)) &&
@@ -147,12 +175,16 @@ function resolveGelInventoryTopic(subject, topic) {
     !!book?.pdf?.url &&
     catalogPdfSourceAllowed(book.pdf.url);
 
-  const runtimeMode = exactHtmlHigh
-    ? "exact-html"
-    : (exactPdfVerified ? "exact-pdf" : null);
+  const runtimeMode = manualHtmlVerified
+    ? "manual-html"
+    : (exactHtmlHigh
+      ? "exact-html"
+      : (exactPdfVerified ? "exact-pdf" : null));
 
   return {
     row,
+    inventoryMapping,
+    manualOverride,
     mapping,
     book,
     runtimeEligible: !!runtimeMode,
@@ -161,25 +193,29 @@ function resolveGelInventoryTopic(subject, topic) {
       ? ""
       : (mapping?.status === "exact-pdf"
         ? "official-pdf-page-not-runtime-safe"
-        : (mapping?.status === "exact-html" && mapping?.confidence === "medium"
+        : (inventoryMapping?.status === "exact-html" && inventoryMapping?.confidence === "medium"
           ? "medium-confidence-not-activated"
-          : (mapping?.reason || mapping?.status || "not-runtime-eligible")))
+          : (inventoryMapping?.reason || inventoryMapping?.status || "not-runtime-eligible")))
   };
 }
 
 function buildGelInventoryBook(resolution) {
-  if (!resolution?.runtimeEligible || resolution?.runtimeMode !== "exact-html") return null;
-  const { row, mapping, book } = resolution;
+  if (!resolution?.runtimeEligible || !["exact-html", "manual-html"].includes(resolution?.runtimeMode)) return null;
+  const { row, mapping, book, runtimeMode } = resolution;
   return {
     title: book?.title || row?.labelEl || row?.subjectId || "Επίσημο σχολικό βιβλίο",
     grade: row?.grade || null,
     base: book.html.url,
-    mode: "gelInventoryExactHtml",
+    mode: runtimeMode === "manual-html" ? "gelManualVerifiedHtml" : "gelInventoryExactHtml",
     officialSourceRequired: true,
     schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
     curriculumSource: HIGH_GUIDANCE_2026_2027,
-    mappingStatus: "official-gel-inventory-exact-html",
-    lastVerified: GEL_SCHOOLBOOK_SOURCE_MAP?.generatedAt || "2026-10-01",
+    mappingStatus: runtimeMode === "manual-html"
+      ? "official-gel-manual-verified-html"
+      : "official-gel-inventory-exact-html",
+    lastVerified: runtimeMode === "manual-html"
+      ? (mapping.reviewedAt || "2026-10-01")
+      : (GEL_SCHOOLBOOK_SOURCE_MAP?.generatedAt || "2026-10-01"),
     annualScopeVerified: false,
     gelInventoryBacked: true,
     mappingConfidence: mapping.confidence || null,
@@ -1747,7 +1783,7 @@ module.exports = async function handler(req, res) {
   }
 
   let directUrls = resolveDirectSourceUrls(subject, topic);
-  if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
+  if (!directUrls.length && ["exact-html", "manual-html"].includes(gelInventory?.runtimeMode)) {
     directUrls = [gelInventory.mapping.url];
   }
   if (!directUrls.length && book.mode === "linkedSection") {
@@ -3286,6 +3322,7 @@ module.exports._test = Object.freeze({
   catalogHtmlSourceAllowed,
   resolveGelInventoryTopic,
   buildGelInventoryBook,
+  GEL_MANUAL_OVERRIDES,
   catalogPdfSourceAllowed,
   gelVerifiedHeadingOffsets,
   findGelHtmlAnchorOffset,

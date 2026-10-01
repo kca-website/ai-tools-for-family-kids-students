@@ -88,6 +88,30 @@ function buildCatalogBook(subject) {
 
 
 const BOOKS = {
+  "fysiki-a-gymnasiou": {
+    title: "Η Φυσική με Πειράματα Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2314/Fysiki_A-Gymnasiou_html-empl/",
+    mode: "phase14PhysicsA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
+  "geografia-a-gymnasiou": {
+    title: "Γεωλογία – Γεωγραφία Α΄ Γυμνασίου",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2286/Geografia_A-Gymnasiou_html-empl/",
+    mode: "phase14GeographyA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: MIDDLE_GUIDANCE_2026_2027,
+    mappingStatus: "official-book-section-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: true
+  },
   "fysiki-agogi-a-gymnasiou": {
     title: "Φυσική Αγωγή Α΄ Γυμνασίου",
     grade: "a",
@@ -1544,6 +1568,42 @@ function clean(value, max) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "fysiki-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Μετρήσεις μήκους και μέση τιμή"), "index1.html"],
+      [normalize("Μετρήσεις χρόνου και ακρίβεια"), "index2.html"],
+      [normalize("Μετρήσεις μάζας και διαγράμματα"), "index3.html"],
+      [normalize("Θερμοκρασία και βαθμονόμηση"), "index4.html"],
+      [normalize("Θερμότητα, θερμοκρασία και θερμική ισορροπία"), "index5.html"],
+      [normalize("Ηλεκτρικό βραχυκύκλωμα και ασφάλεια"), "index10.html"],
+      [normalize("Από τον ηλεκτρισμό στον μαγνητισμό"), "index11.html"],
+      [normalize("Από τον μαγνητισμό στον ηλεκτρισμό"), "index12.html"]
+    ]);
+    const path = exact.get(t);
+    return path ? [new URL(path, base).toString()] : [];
+  }
+
+  if (subject === "geografia-a-gymnasiou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Χάρτες: είδη, υπόμνημα και κλίμακα"), ["matA1_3.html", "matA1_4.html", "matA1_5.html"]],
+      [normalize("Γεωγραφικές συντεταγμένες και προσανατολισμός"), ["matA1_1.html", "matA1_2.html", "matA1_3.html"]],
+      [normalize("Η Γη στο ηλιακό σύστημα"), ["matB1_1.html"]],
+      [normalize("Λιθόσφαιρα: ανάγλυφο και τεκτονικές πλάκες"), ["matB4_2.html", "matB4_3.html", "matB4_4.html"]],
+      [normalize("Υδρόσφαιρα: ωκεανοί, θάλασσες και ποτάμια"), ["matB3_1.html", "matB3_2.html", "matB3_4.html"]],
+      [normalize("Ατμόσφαιρα, καιρός και κλίμα"), ["matB2_1.html", "matB2_2.html"]],
+      [normalize("Βιόσφαιρα και φυσικά οικοσυστήματα"), ["matB5_1.html"]],
+      [normalize("Ανθρωπογενές περιβάλλον: πληθυσμός και οικισμοί"), ["matC1_1.html", "matC1_2.html", "matC1_4.html", "matC1_5.html"]],
+      [normalize("Ήπειροι: συνθετική εργασία (προαιρετική εμβάθυνση)"), [
+        "matD1_0.html", "matD2_0.html", "matD3_0.html", "matD4_0.html",
+        "matD5_0.html", "matD6_0.html", "matD7_0.html"
+      ]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
 
   if (subject === "istoria-st-dimotikou") {
     const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/";

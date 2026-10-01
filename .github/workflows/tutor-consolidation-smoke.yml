@@ -184,6 +184,9 @@ jobs:
       - name: Run Phase 18 GEL grounding coverage audit
         run: node tests/phase18-gel-grounding-coverage-smoke.mjs
 
+      - name: Run Phase 19 GEL manual official discovery audit
+        run: node tests/phase19-gel-manual-discovery-smoke.mjs
+
       - name: Run AI benchmark harness smoke (mock, no network)
         run: node tests/ai-benchmark-harness-smoke.mjs
 

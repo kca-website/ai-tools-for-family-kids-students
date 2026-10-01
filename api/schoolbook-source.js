@@ -2039,8 +2039,8 @@ function clean(value, max) {
 }
 
 function resolveHistoryEChapter(topic) {
-  const key = normalize(String(topic || "").replace(/^\s*\d+\.\s*/, ""));
-  return HISTORY_E_CHAPTERS.find(chapter => normalize(chapter.label.replace(/^\d+\.\s*/, "")) === key) || null;
+  const key = normalize(String(topic || "").replace(/^\s*\d+[αβ]?\.\s*/, ""));
+  return HISTORY_E_CHAPTERS.find(chapter => normalize(chapter.label.replace(/^\d+[αβ]?\.\s*/, "")) === key) || null;
 }
 
 function selectHistoryEChapterText(html, topic) {

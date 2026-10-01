@@ -117,6 +117,14 @@ const chapters=[
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/index6.html"
   },
   {
+    "label": "30α. Η τέταρτη σταυροφορία και η άλωση της Κωνσταντινούπολης από τους Φράγκους",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/index6.html"
+  },
+  {
+    "label": "30β. Τα ελληνικά κράτη μετά την άλωση της Πόλης",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/index6.html"
+  },
+  {
     "label": "31. Η ανάκτηση της Πόλης από το Μιχαήλ Η’, τον Παλαιολόγο",
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2178/Istoria_E-Dimotikou_html-empl/index6.html"
   },

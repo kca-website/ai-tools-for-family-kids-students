@@ -4,6 +4,7 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const endpoint = require("../api/schoolbook-source.js");
 const inventory = require("../gel-schoolbook-source-map-2026-2027.js");
+const manualOverrides = require("../gel-schoolbook-manual-overrides-2026-2027.js");
 const { resolveGelInventoryTopic, selectGelAnchoredSectionText } = endpoint._test;
 
 function normalizeForSmoke(value) {
@@ -19,6 +20,7 @@ function normalizeForSmoke(value) {
 let highHtml = 0;
 let mediumHtml = 0;
 let exactPdf = 0;
+let manualHtml = 0;
 let blocked = 0;
 
 for (const subject of Object.values(inventory.all())) {
@@ -34,6 +36,11 @@ for (const subject of Object.values(inventory.all())) {
       exactPdf++;
       assert.equal(resolved.runtimeEligible, true, subject.subjectId + " / " + topic.label);
       assert.equal(resolved.runtimeMode, "exact-pdf");
+    } else if (resolved.runtimeMode === "manual-html") {
+      manualHtml++;
+      assert.equal(resolved.runtimeEligible, true);
+      assert.ok(resolved.manualOverride);
+      if (topic.status === "exact-html" && topic.confidence === "medium") mediumHtml++;
     } else {
       assert.equal(resolved.runtimeEligible, false, subject.subjectId + " / " + topic.label + " must stay fail-closed");
       if (topic.status === "exact-html" && topic.confidence === "medium") mediumHtml++;
@@ -45,8 +52,10 @@ for (const subject of Object.values(inventory.all())) {
 assert.equal(highHtml, 174);
 assert.equal(mediumHtml, 14);
 assert.equal(exactPdf, 11);
+assert.equal(manualHtml, manualOverrides.count);
+assert.equal(manualHtml, 60);
 
-assert.ok(blocked > 400);
+assert.ok(blocked > 390);
 
 // Anchor scoping unit contract: keep nested headings in the current section,
 // but stop before the next peer section.
@@ -117,7 +126,8 @@ for (const [subject, topic] of liveCases) {
   assert.ok(String(result.body?.text || "").length >= 500);
 }
 
-// Medium-confidence HTML must not be activated automatically.
+// All 14 medium-confidence HTML rows remain medium in the generated inventory,
+// but Phase 17 manual verification activates them through the separate override layer.
 let mediumCase = null;
 for (const subject of Object.values(inventory.all())) {
   const topic = (subject.topicMappings || []).find((entry) =>
@@ -129,11 +139,13 @@ for (const subject of Object.values(inventory.all())) {
   }
 }
 assert.ok(mediumCase, "inventory must contain a medium-confidence exact-html case");
+const mediumResolved = resolveGelInventoryTopic(mediumCase[0], mediumCase[1].label);
+assert.equal(mediumResolved?.runtimeMode, "manual-html");
+assert.ok(mediumResolved?.manualOverride);
 const medium = await endpoint.resolveOfficialSchoolbookSource(mediumCase[0], mediumCase[1].label);
-assert.equal(medium.ok, false);
-assert.equal(medium.status, 404);
-assert.equal(medium.body?.error, "section_not_resolved");
-assert.equal(medium.body?.reviewStatus, "medium-confidence-not-activated");
+assert.equal(medium.ok, true, JSON.stringify(medium.body));
+assert.equal(medium.body?.mappingStatus, "official-gel-manual-verified-html");
+assert.equal(medium.body?.mappingConfidence, "manual-verified");
 
 // exact-pdf mappings are recognized as a separate, verified runtime mode.
 // Live PDF text extraction itself is covered by the Phase 16 smoke.
@@ -151,19 +163,29 @@ assert.equal(pdfResolved?.runtimeEligible, true);
 assert.equal(pdfResolved?.runtimeMode, "exact-pdf");
 assert.equal(pdfResolved?.mapping?.pdfPage, pdfCase[1].pdfPage);
 
-// Manual-review rows must never fall through to generic schoolbook text.
+// Unreviewed manual rows must still fail closed. Reviewed rows are activated only
+// when they exist in the explicit Phase 17 override file.
 let manualCase = null;
 for (const subject of Object.values(inventory.all())) {
-  const topic = (subject.topicMappings || []).find((entry) => entry.status === "needs-manual-review");
+  const topic = (subject.topicMappings || []).find((entry) =>
+    entry.status === "needs-manual-review" &&
+    resolveGelInventoryTopic(subject.subjectId, entry.label)?.runtimeEligible === false
+  );
   if (topic) {
     manualCase = [subject.subjectId, topic];
     break;
   }
 }
-assert.ok(manualCase, "inventory must contain a needs-manual-review case");
+assert.ok(manualCase, "inventory must contain an unreviewed needs-manual-review case");
 const manual = await endpoint.resolveOfficialSchoolbookSource(manualCase[0], manualCase[1].label);
 assert.equal(manual.ok, false);
 assert.equal(manual.body?.error, "section_not_resolved");
+
+const reviewedManual = manualOverrides.entries.find((entry) => entry.sourceStatus === "needs-manual-review");
+assert.ok(reviewedManual);
+const reviewedResult = await endpoint.resolveOfficialSchoolbookSource(reviewedManual.subjectId, reviewedManual.label);
+assert.equal(reviewedResult.ok, true, JSON.stringify(reviewedResult.body));
+assert.equal(reviewedResult.body?.mappingStatus, "official-gel-manual-verified-html");
 
 // no-safe-mapping rows must also remain fail-closed.
 const noSafeSubject = inventory.get("english-g-lykeiou");
@@ -197,8 +219,9 @@ console.log("PHASE15_GEL_RUNTIME_INTEGRATION=" + JSON.stringify({
   highHtml,
   mediumHtml,
   exactPdf,
+  manualHtml,
   blocked,
   liveResults,
   pdfRuntimeMode: pdfResolved?.runtimeMode,
-  mediumFailClosed: medium.body?.reviewStatus
+  mediumManualVerified: medium.body?.mappingStatus
 }, null, 2));

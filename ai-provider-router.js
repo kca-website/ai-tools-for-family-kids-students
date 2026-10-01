@@ -1,5 +1,5 @@
 // Server-side AI provider router for aitools4kids.gr.
-// Primary pool: Cloudflare Workers AI. Fallback pool: Groq.
+// Primary pool: Cloudflare Workers AI. Fallback pools: Groq, then Gemini.
 // Simple grounded tasks use cheaper Cloudflare models first; difficult reasoning keeps GPT-OSS 120B first.
 // No prompts or responses are logged here.
 const DEFAULT_TIMEOUT_MS = 18000;
@@ -10,6 +10,8 @@ const CLOUDFLARE_MODELS = new Set([
   '@cf/openai/gpt-oss-120b',
 ]);
 const GROQ_MODELS = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
+const GEMINI_MODELS = new Set(['gemini-2.5-flash-lite', 'gemini-2.5-flash']);
+const allowedModels = provider => provider === 'gemini' ? GEMINI_MODELS : (provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS);
 const ROUTING_PROFILES = new Set(['default', 'economy', 'balanced', 'quality']);
 
 function smartRoutingEnabled() {
@@ -67,11 +69,11 @@ function getAiStatus() {
 function getProviderOrder(providerOrder) {
   const requested = (Array.isArray(providerOrder)
     ? providerOrder
-    : String(process.env.AI_PROVIDER_ORDER || 'cloudflare,groq').split(','))
+    : String(process.env.AI_PROVIDER_ORDER || 'cloudflare,groq,gemini').split(','))
     .map((value) => String(value))
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean);
-  const unique = [...new Set(requested.filter((name) => name === 'cloudflare' || name === 'groq'))];
+  const unique = [...new Set(requested.filter((name) => name === 'cloudflare' || name === 'groq' || name === 'gemini'))];
   return unique.filter(isConfigured);
 }
 
@@ -79,11 +81,16 @@ function isConfigured(name) {
   if (name === 'cloudflare') {
     return !!(process.env.CLOUDFLARE_LLM_ACCOUNT_ID && process.env.CLOUDFLARE_LLM_AI_TOKEN);
   }
+  if (name === 'gemini') return !!process.env.GEMINI_API_KEY;
   if (name === 'groq') return !!process.env.GROQ_API_KEY;
   return false;
 }
 
 function modelFor(name) {
+  if (name === 'gemini') {
+    const configured = String(process.env.GEMINI_PRODUCTION_MODEL || 'gemini-2.5-flash-lite');
+    return GEMINI_MODELS.has(configured) ? configured : 'gemini-2.5-flash-lite';
+  }
   if (name === 'cloudflare') {
     const configured = String(process.env.CLOUDFLARE_PRODUCTION_MODEL || '@cf/openai/gpt-oss-120b');
     return CLOUDFLARE_MODELS.has(configured) ? configured : '@cf/openai/gpt-oss-120b';
@@ -100,10 +107,10 @@ function normalizeProfile(value) {
 function configuredProfileModels(provider, profile) {
   const key = provider === 'cloudflare'
     ? 'CLOUDFLARE_' + profile.toUpperCase() + '_MODELS'
-    : 'GROQ_' + profile.toUpperCase() + '_MODELS';
+    : (provider === 'gemini' ? 'GEMINI_' : 'GROQ_') + profile.toUpperCase() + '_MODELS';
   const raw = String(process.env[key] || '').trim();
   if (!raw) return [];
-  const allowed = provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS;
+  const allowed = allowedModels(provider);
   return [...new Set(raw.split(',').map(x => x.trim()).filter(x => allowed.has(x)))];
 }
 
@@ -113,7 +120,7 @@ function modelSequenceFor(provider, profileValue) {
   const configured = configuredProfileModels(provider, profile);
   if (configured.length) return configured;
   const defaults = PROFILE_MODELS[profile]?.[provider] || [modelFor(provider)];
-  const allowed = provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS;
+  const allowed = allowedModels(provider);
   return [...new Set(defaults.filter(model => allowed.has(model)))];
 }
 
@@ -150,7 +157,9 @@ async function generateChat({
       const model = models[index];
       let result;
       try {
-        result = provider === 'cloudflare'
+        result = provider === 'gemini'
+          ? await callGemini({ messages, maxTokens, temperature, responseFormat, timeoutMs, model })
+          : provider === 'cloudflare'
           ? await callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model })
           : await callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model });
       } catch (error) {
@@ -184,6 +193,56 @@ async function generateChat({
   }
 
   return { ...(lastResult || {}), attempts, modelProfile: profile };
+}
+
+async function callGemini({ messages, maxTokens, temperature, responseFormat, timeoutMs, model }) {
+  const system = messages.filter(message => message.role === 'system').map(message => message.content).join('\n\n');
+  const contents = messages.filter(message => message.role !== 'system').map(message => ({
+    role: message.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: String(message.content || '') }],
+  }));
+  const generationConfig = {
+    temperature,
+    maxOutputTokens: maxTokens,
+    thinkingConfig: { thinkingBudget: 0 },
+  };
+  if (responseFormat?.type === 'json_object' || responseFormat?.type === 'json_schema') {
+    generationConfig.responseMimeType = 'application/json';
+    if (responseFormat.json_schema?.schema) generationConfig.responseJsonSchema = responseFormat.json_schema.schema;
+  }
+  const body = { contents, generationConfig };
+  if (system) body.systemInstruction = { parts: [{ text: system }] };
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
+      body: JSON.stringify(body),
+      signal: controller.signal,
+    });
+    const data = await response.json().catch(() => ({}));
+    const candidate = data?.candidates?.[0];
+    const text = (candidate?.content?.parts || []).filter(part => !part.thought && typeof part.text === 'string').map(part => part.text).join('');
+    const blocked = !!data?.promptFeedback?.blockReason || ['SAFETY', 'RECITATION', 'PROHIBITED_CONTENT'].includes(candidate?.finishReason);
+    const complete = candidate?.finishReason !== 'MAX_TOKENS';
+    const ok = response.ok && !!text.trim() && !blocked && complete;
+    const usage = data?.usageMetadata || {};
+    return {
+      ok, status: blocked ? 422 : (response.ok && !ok ? 502 : response.status),
+      error: response.status === 429 ? 'provider_limit' : (blocked ? 'content_blocked' : (ok ? null : 'provider_error')),
+      retryable: !blocked && (response.ok && !ok || isRetryableStatus(response.status) || response.status === 404),
+      providerCode: data?.error?.status || null,
+      message: data?.error?.message || (blocked ? 'Provider blocked this content.' : (!ok ? 'Provider returned an incomplete completion.' : '')),
+      text: ok ? text : '', provider: 'gemini', model,
+      usage: {
+        promptTokens: usage.promptTokenCount || 0,
+        completionTokens: (usage.candidatesTokenCount || 0) + (usage.thoughtsTokenCount || 0),
+        totalTokens: usage.totalTokenCount || 0,
+        cachedTokens: usage.cachedContentTokenCount || 0,
+      },
+    };
+  } finally { clearTimeout(timeout); }
 }
 
 async function callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model }) {

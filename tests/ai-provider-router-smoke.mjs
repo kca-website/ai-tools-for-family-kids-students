@@ -10,7 +10,7 @@ const teacher = fs.readFileSync(new URL('../api/teacher-assistant.js', import.me
 const preschool = fs.readFileSync(new URL('../api/preschool-activity.js', import.meta.url), 'utf8');
 const privacy = fs.readFileSync(new URL('../privacy-policy.html', import.meta.url), 'utf8');
 
-assert.match(router, /AI_PROVIDER_ORDER \|\| 'cloudflare,groq'/);
+assert.match(router, /AI_PROVIDER_ORDER \|\| 'cloudflare,groq,gemini'/);
 assert.match(router, /api\.cloudflare\.com\/client\/v4\/accounts/);
 assert.match(router, /api\.groq\.com\/openai\/v1\/chat\/completions/);
 assert.match(router, /rejectIfBusy:\s*true/);

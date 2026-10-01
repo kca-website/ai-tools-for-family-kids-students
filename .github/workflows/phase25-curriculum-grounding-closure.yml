@@ -1,0 +1,70 @@
+name: Phase 25 curriculum grounding closure
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'general-education-book-sections-2026-2027.js'
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'gel-schoolbook-manual-overrides-2026-2027.js'
+      - 'epal-*.js'
+      - 'teacher-curriculum-*.js'
+      - 'special-education-*.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/**'
+      - '.github/workflows/phase25-curriculum-grounding-closure.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/phase25.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          exit 1
+      - name: General curriculum inventory
+        run: node tests/phase11-coverage-audit.mjs
+      - name: Primary exact grounding
+        run: node tests/phase11-primary-schoolbook-grounding-smoke.mjs
+      - name: Gymnasium grounding
+        run: |
+          node tests/phase11b-gymnasium-grounding-smoke.mjs
+          node tests/a-g-gym-math-schoolbook-grounding.mjs
+          node tests/a-g-gym-language-schoolbook-grounding.mjs
+          node tests/a-g-gym-history-schoolbook-grounding.mjs
+          node tests/g-gym-science-schoolbook-grounding.mjs
+      - name: GEL grounding
+        run: |
+          node tests/phase18-gel-grounding-coverage-smoke.mjs
+          node tests/phase23-gel-pdf-sections-smoke.mjs
+          node tests/phase24-politiki-paideia-grounding-smoke.mjs
+      - name: EPAL source boundary
+        run: node tests/phase11d-epal-grounding-audit.mjs
+      - name: Special Education coverage boundary
+        run: |
+          node tests/special-gym-annual-mapping-smoke.mjs
+          node tests/special-lyceum-guidance-coverage-audit.mjs
+          node tests/special-education-coverage-boundary-smoke.mjs
+      - name: End-to-end source policy
+        run: |
+          node tests/study-context-smoke.mjs
+          node tests/study-context-navigation-smoke.mjs
+          node tests/phase11-study-tools-grounding-smoke.mjs

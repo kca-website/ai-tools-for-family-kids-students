@@ -1683,26 +1683,29 @@ function resolveDirectSourceUrls(subject, topic) {
   }
 
   if (subject === "english-g-gymnasiou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2324/Agglika_G-Gymnasiou_html-empl/";
     const unitMatch = String(topic || "").match(/^\s*Unit\s+(\d+)\b/i);
     const unit = unitMatch ? Number(unitMatch[1]) : 0;
     if (!Number.isInteger(unit) || unit < 1 || unit > 10) return [];
     return [1, 2, 3].map(lesson =>
-      new URL(`index${unit}_${lesson}.html`, BOOKS[subject].base).toString()
+      new URL(`index${unit}_${lesson}.html`, base).toString()
     );
   }
 
   if (subject === "biologia-a-lykeiou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2666/Biologia_A-Lykeiou_html-empl/";
     const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
     const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
     if (!Number.isInteger(chapter) || chapter < 1 || chapter > 12) return [];
-    return [new URL(`index${chapter}.html`, BOOKS[subject].base).toString()];
+    return [new URL(`index${chapter}.html`, base).toString()];
   }
 
   if (subject === "ekthesi-g-lykeiou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2678/Ekfrasi-Ekthesi_G-Lykeiou_html-empl/";
     const chapterMatch = String(topic || "").match(/^\s*Κεφάλαιο\s+(\d+)\b/i);
     const chapter = chapterMatch ? Number(chapterMatch[1]) : 0;
     const paths = { 1: "indexa_01.html", 2: "indexc_00.html", 3: "indexf_00.html" };
-    if (paths[chapter]) return [new URL(paths[chapter], BOOKS[subject].base).toString()];
+    if (paths[chapter]) return [new URL(paths[chapter], base).toString()];
     return [];
   }
 

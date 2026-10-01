@@ -1,4 +1,4 @@
-// Phase 17-19: manually verified runtime overrides for GEL 2026-2027.
+// Phase 17-20: manually verified runtime overrides for GEL 2026-2027.
 // This file deliberately does NOT modify the auto-generated Phase 14 inventory.
 // Every entry preserves the learner-facing topic label and points it to one or
 // more manually reviewed official ebooks.edu.gr HTML pages/sections.
@@ -2094,6 +2094,94 @@ const entries = Object.freeze([
     "reviewedAt": "2026-10-01",
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/4712/Fysiki-Teuxos-B_G-Lykeiou-ThSp-SpYg_html-apli/index4.html",
     "heading": "4-8 ΚΙΝΗΣΗ ΦΟΡΤΙΣΜΕΝΩΝ ΣΩΜΑΤΙΔΙΩΝ ΜΕΣΑ ΣΕ ΜΑΓΝΗΤΙΚΟ ΠΕΔΙΟ"
+  },
+  {
+    "subjectId": "fysiki-b-lykeiou",
+    "label": "Κεφάλαιο 2: Διατήρηση ορμής και κρούσεις",
+    "sourceTopicId": "physics-b-lyk.momentum-conservation",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "work": "8547/2425",
+    "granularity": "manual-page",
+    "reviewBasis": "manual-review-of-specific-recorded-candidate-against-official-page",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 20,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-Thetikon-Spoudon_html-empl/index2_0.html",
+    "heading": "2 ΔΙΑΤΗΡΗΣΗ ΤΗΣ ΟΡΜΗΣ",
+    "candidateScore": 1
+  },
+  {
+    "subjectId": "fysiki-b-lykeiou",
+    "label": "Κεφάλαιο 4: Θερμοδυναμική / 1ος θερμοδυναμικός νόμος",
+    "sourceTopicId": "physics-b-lyk.first-law-energy-balance",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "work": "8547/2425",
+    "granularity": "manual-page",
+    "reviewBasis": "manual-review-of-specific-recorded-candidate-against-official-page",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 20,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2684/Fysiki_B-Lykeiou-Thetikon-Spoudon_html-empl/index4_0.html",
+    "heading": "4 ΘΕΡΜΟΔΥΝΑΜΙΚΗ",
+    "candidateScore": 1
+  },
+  {
+    "subjectId": "biologia-g-lykeiou",
+    "label": "Γενετικά τροποποιημένοι οργανισμοί",
+    "sourceTopicId": "biologia-g-lykeiou.topic-17",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 20,
+    "work": "8547/2407",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 20,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2726/Biologia-T2_G-Lykeiou-ThSp-SpYg_html-empl/index9_1.html",
+    "heading": "9 Εφαρμογές της Βιοτεχνολογίας στη γεωργία και την κτηνοτροφία"
+  },
+  {
+    "subjectId": "biologia-g-lykeiou",
+    "label": "Βιοηθικές διαστάσεις της γενετικής τεχνολογίας",
+    "sourceTopicId": "biologia-g-lykeiou.topic-22",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 20,
+    "work": "8547/2407",
+    "granularity": "manual-discovered-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 20,
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2726/Biologia-T2_G-Lykeiou-ThSp-SpYg_html-empl/index12_1.html",
+    "heading": "Βιοηθική: Πλεονεκτήματα και μειονεκτήματα"
+  },
+  {
+    "subjectId": "istoria-g-prosanatolismou",
+    "label": "Βενιζελική οικονομική πολιτική και προσφυγική αποκατάσταση",
+    "sourceTopicId": "istoria-g-prosanatolismou.topic-12",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-equal-heading",
+    "sourceOrigin": "manual-official-discovery",
+    "discoveryPhase": 20,
+    "work": "8547/2399",
+    "granularity": "manual-discovered-multi-page",
+    "reviewBasis": "manual-second-pass-discovery-against-verified-official-book",
+    "reviewedAt": "2026-10-01",
+    "reviewPhase": 20,
+    "sources": [
+      {
+        "work": "8547/2399",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2758/Themata-Neoellinikis-Istorias_G-Lykeiou_html-apli/index1_4.html",
+        "heading": "1. Το αγροτικό ζήτημα"
+      },
+      {
+        "work": "8547/2399",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2758/Themata-Neoellinikis-Istorias_G-Lykeiou_html-apli/index3_9.html",
+        "heading": "Η αποκατάσταση των προσφύγων"
+      }
+    ]
   }
 ]);
 

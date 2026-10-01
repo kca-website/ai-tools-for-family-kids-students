@@ -338,11 +338,13 @@ for (const [subjectId, reg] of Object.entries(SUBJECT_REGISTRY)) {
     if (reg.forcedStatus === "no-safe-mapping") return { topicId: t.id, label: t.label, status: "no-safe-mapping", reason: "no-official-book-or-unit-list-for-this-subject" };
     const anchor = reg.pdfAnchors && reg.pdfAnchors[t.id];
     if (anchor) {
+      if (anchor.label && anchor.label !== t.label) throw new Error("PDF anchor label mismatch: " + t.id);
       const pdfBook = books.find((b) => b.role === "primary" && b.pdf);
       return {
         topicId: t.id, label: t.label, status: "exact-pdf",
         work: pdfBook.work, url: pdfBook.pdf.url + "#page=" + anchor.page, pdfPage: anchor.page, printedPage: anchor.printed,
-        heading: anchor.heading, granularity: "pdf-page", matchBasis: "unit-heading-on-pdf-page+official-unit-list", labelParaphrase: false
+        heading: anchor.heading, granularity: anchor.endPage ? "pdf-section" : "pdf-page",
+        ...(anchor.endPage ? {pdfPageEnd:anchor.endPage, annualScopeVerified:anchor.annualScopeVerified===true, curriculumSource:anchor.curriculumSource, excludedHeading:anchor.excludedHeading}:{}), matchBasis: "unit-heading-on-pdf-page+official-unit-list", labelParaphrase: false
       };
     }
     const m = mapTopic(t, mappable);

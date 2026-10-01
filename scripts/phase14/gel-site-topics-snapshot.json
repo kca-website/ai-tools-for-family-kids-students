@@ -3169,57 +3169,57 @@
    "topics": [
     {
      "id": "mathimatika-g-genikis.topic-1",
-     "label": "Περιγραφική στατιστική και τύποι δεδομένων",
+     "label": "Ενότητα 1.1 — Πειράματα τύχης, δειγματικός χώρος και ενδεχόμενα",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-2",
-     "label": "Πίνακες συχνοτήτων",
+     "label": "Ενότητα 1.2 — Πιθανότητες: Ορισμοί και εφαρμογές",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-3",
-     "label": "Γραφικές παραστάσεις δεδομένων",
+     "label": "Ενότητα 1.3 — Πιθανότητες και πράξεις με ενδεχόμενα",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-4",
-     "label": "Μέτρα θέσης",
+     "label": "Ενότητα 1.4 — Συνδυαστική & Πιθανότητες",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-5",
-     "label": "Μέτρα διασποράς",
+     "label": "Ενότητα 2.1 — Πληθυσμός - Δείγμα - Μεταβλητές",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-6",
-     "label": "Συνδυαστική και απαρίθμηση",
+     "label": "Ενότητα 2.2 — Παρουσίαση στατιστικών δεδομένων",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-7",
-     "label": "Έννοια πιθανότητας",
+     "label": "Ενότητα 2.3 — Μέτρα θέσης και μεταβλητότητας, θηκόγραμμα, συντελεστής μεταβλητότητας",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-8",
-     "label": "Κανόνες πιθανότητας",
+     "label": "Ενότητα 2.4 — Κανονική κατανομή και εφαρμογές",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-9",
-     "label": "Δεσμευμένη πιθανότητα",
+     "label": "Ενότητα 2.5 — Πίνακες Συνάφειας και Ραβδογράμματα",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-10",
-     "label": "Ανεξαρτησία ενδεχομένων",
+     "label": "Ενότητα 2.6 — Σύγκριση ποσοτικών χαρακτηριστικών στις κατηγορίες ενός ποιοτικού χαρακτηριστικού",
      "status": "navigation-map"
     },
     {
      "id": "mathimatika-g-genikis.topic-11",
-     "label": "Εφαρμογές στατιστικής και πιθανότητας σε πραγματικά δεδομένα",
+     "label": "Ενότητα 2.7 — Γραμμική συσχέτιση ποσοτικών μεταβλητών και διαγράμματα διασποράς",
      "status": "navigation-map"
     }
    ]

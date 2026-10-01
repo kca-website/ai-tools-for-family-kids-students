@@ -9,13 +9,15 @@ on:
       - 'api/official-pdf-text.js'
       - 'gel-schoolbook-source-map-2026-2027.js'
       - 'tests/phase16-gel-pdf-grounding-smoke.mjs'
+      - 'tests/phase23-gel-pdf-sections-smoke.mjs'
+      - 'scripts/phase23/**'
       - 'package.json'
       - '.github/workflows/phase16-gel-pdf-smoke.yml'
 
 jobs:
   pdf-grounding:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,3 +32,6 @@ jobs:
 
       - name: Run Phase 16 live PDF grounding
         run: node tests/phase16-gel-pdf-grounding-smoke.mjs
+
+      - name: Verify Humanities Mathematics PDF sections and annual exclusions
+        run: node tests/phase23-gel-pdf-sections-smoke.mjs

@@ -1,3 +1,4 @@
+import PDF_MATH_SECTIONS from "../phase23/math-humanities-pdf-sections.json" with { type: "json" };
 // Hand-curated Phase 14 registry: which official schoolbook(s) belong to each Lyceum subjectId.
 //
 // Nothing here is inferred from titles alone. Every book reference carries the official 2026-27
@@ -434,6 +435,7 @@ export const SUBJECT_REGISTRY = {
   },
   "mathimatika-g-genikis": {
     grade: "c",
+    pdfAnchors: Object.fromEntries(PDF_MATH_SECTIONS.sections.map((row,i)=>["mathimatika-g-genikis.topic-"+(i+1), {...row, annualScopeVerified:true, curriculumSource:PDF_MATH_SECTIONS.syllabusUrl, excludedHeading:PDF_MATH_SECTIONS.excludedHeading}])),
     books: [
       { work: "8547/5309", role: "primary", evidence: [
         E("ya-102749", "§V.ΣΤ — Μαθηματικά Γ΄ ΗΓΕΛ/ΕΓΕΛ (Ανθρωπιστικών Σπουδών)", "ΒΙΒΛΙΟ: «Στοιχεία Πιθανοτήτων και Στατιστικής», Γ΄ Γενικού Λυκείου, Ομάδας Προσανατολισμού Ανθρωπιστικών Σπουδών.")

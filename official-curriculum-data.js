@@ -954,7 +954,7 @@
   },
   "mathimatika-b-gymnasiou": {
   "schoolYear": "2026-2027",
-  "verificationDate": "2026-09-29",
+  "verificationDate": "2026-10-01",
   "coverageStatus": "annual-guidance-detailed-map",
   "coverageLabelEl": "Πλήρης αντιστοίχιση οδηγιών 2026–27 με επίσημες σελίδες βιβλίου",
   "coverageLabelEn": "Complete 2026–27 guidance mapping to official textbook pages",
@@ -966,6 +966,15 @@
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2196/Mathimatika_B-Gymnasiou_html-empl/"
   },
   "officialSectionsEl": [
+    "Επανάληψη από Α΄ Γυμνασίου · 7.1 — Θετικοί και Αρνητικοί Αριθμοί (Ρητοί αριθμοί) - Η ευθεία των ρητών - Τετμημένη σημείου (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.2 — Απόλυτη τιμή ρητού - Αντίθετοι ρητοί - Σύγκριση ρητών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.3 — Πρόσθεση ρητών αριθμών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.4 — Αφαίρεση ρητών αριθμών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.5 — Πολλαπλασιασμός ρητών αριθμών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.6 — Διαίρεση ρητών αριθμών (μη εξεταστέο)",
+    "Από Α΄ Γυμνασίου · 7.7 — Δεκαδική μορφή ρητών αριθμών (μη εξεταστέο)",
+    "Από Α΄ Γυμνασίου · 7.8 — Δυνάμεις ρητών αριθμών με εκθέτη φυσικό (μη εξεταστέο)",
+    "Από Α΄ Γυμνασίου · 7.9 — Δυνάμεις ρητών αριθμών με εκθέτη ακέραιο (μη εξεταστέο)",
     "Μέρος Α · 1.1 — Η έννοια της μεταβλητής - Αλγεβρικές παραστάσεις",
     "Μέρος Α · 1.2 — Εξισώσεις α' βαθμού",
     "Μέρος Α · 1.4 — Επίλυση προβλημάτων με τη χρήση εξισώσεων",
@@ -1000,6 +1009,15 @@
   "ministryUrl": "https://www.minedu.gov.gr/defterovathmia/gymnasio",
   "annualInstructionsUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
   "mappedTopicsEl": [
+    "Επανάληψη από Α΄ Γυμνασίου · 7.1 — Θετικοί και Αρνητικοί Αριθμοί (Ρητοί αριθμοί) - Η ευθεία των ρητών - Τετμημένη σημείου (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.2 — Απόλυτη τιμή ρητού - Αντίθετοι ρητοί - Σύγκριση ρητών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.3 — Πρόσθεση ρητών αριθμών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.4 — Αφαίρεση ρητών αριθμών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.5 — Πολλαπλασιασμός ρητών αριθμών (μη εξεταστέο)",
+    "Επανάληψη από Α΄ Γυμνασίου · 7.6 — Διαίρεση ρητών αριθμών (μη εξεταστέο)",
+    "Από Α΄ Γυμνασίου · 7.7 — Δεκαδική μορφή ρητών αριθμών (μη εξεταστέο)",
+    "Από Α΄ Γυμνασίου · 7.8 — Δυνάμεις ρητών αριθμών με εκθέτη φυσικό (μη εξεταστέο)",
+    "Από Α΄ Γυμνασίου · 7.9 — Δυνάμεις ρητών αριθμών με εκθέτη ακέραιο (μη εξεταστέο)",
     "Μέρος Α · 1.1 — Η έννοια της μεταβλητής - Αλγεβρικές παραστάσεις",
     "Μέρος Α · 1.2 — Εξισώσεις α' βαθμού",
     "Μέρος Α · 1.4 — Επίλυση προβλημάτων με τη χρήση εξισώσεων",
@@ -1030,14 +1048,20 @@
     "Μέρος Β · 4.6 — Η σφαίρα και τα στοιχεία της (προαιρετικό)"
   ],
   "mappedTopicsEn": [],
-  "scopeNoteEl": "Οι 28 παράγραφοι του βιβλίου Β΄ Γυμνασίου που περιλαμβάνονται ρητά στις οδηγίες 2026–27 έχουν αντιστοιχιστεί σε ακριβείς HTML σελίδες. Οι προαιρετικές 2.3 (Μέρος Α), 4.4 και 4.6 (Μέρος Β) επισημαίνονται ως προαιρετικές. Οι επαναληπτικές παράγραφοι 7.7–7.9 από το βιβλίο Α΄ Γυμνασίου δεν εκτίθενται ως εξεταστέα ύλη Β΄ Γυμνασίου.",
-  "scopeNoteEn": "The 28 B-grade textbook sections explicitly included in the 2026–27 guidance are mapped to exact official HTML pages. Optional sections are labelled. Review sections 7.7–7.9 from the A-grade book are not exposed as B-grade examinable syllabus.",
+  "scopeNoteEl": "37 ακριβείς επιλογές: 28 παράγραφοι του βιβλίου Β΄ και 9 από το κεφάλαιο 7 του βιβλίου Α΄. Οι 7.1–7.6 προβλέπονται για επανάληψη 8 ωρών και οι 7.7–7.9 για διδασκαλία. Όλες οι παράγραφοι του βιβλίου Α΄ είναι μη εξεταστέες. Οι προαιρετικές παράγραφοι του βιβλίου Β΄ επισημαίνονται και οι εξαιρέσεις εφαρμόζονται στο κείμενο.",
+  "scopeNoteEn": "37 exact selections: 28 B-grade sections and nine A-grade chapter 7 sections. Sections 7.1–7.6 are an eight-hour review; 7.7–7.9 are taught. All A-grade sections are non-examinable. B-grade optional sections and text exclusions remain enforced.",
   "annualInstructionsStatus": "2026-27-verified",
   "annualInstructionsNoteEl": "Section-level allowlist με fail-closed συμπεριφορά: παράγραφοι που υπάρχουν στο βιβλίο αλλά δεν περιλαμβάνονται στις οδηγίες 2026–27 δεν επιστρέφουν γενικό fallback.",
   "annualInstructionsNoteEn": "Section-level allowlist with fail-closed behavior: textbook sections absent from the 2026–27 guidance do not fall back to generic textbook content.",
   "quizId": "mathimatika-b-gymnasiou",
   "zone": "middle",
-  "sourceDiscipline": "official-source-only; exact annual section allowlist; excluded textbook sections fail closed"
+  "sourceDiscipline": "official-source-only; exact annual section allowlist; excluded textbook sections fail closed",
+  "officialSupportingBooks": [
+    {
+      "titleEl": "Μαθηματικά Α΄ Γυμνασίου — Κεφάλαιο 7 (μη εξεταστέο)",
+      "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/"
+    }
+  ]
 },
   "glossa-b-gymnasiou": {
   "schoolYear": "2026-2027",

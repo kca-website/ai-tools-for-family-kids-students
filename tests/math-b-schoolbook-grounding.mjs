@@ -63,7 +63,7 @@ for (const excluded of [
 const generalWindow = {};
 vm.runInNewContext(fs.readFileSync(new URL("../general-education-book-sections-2026-2027.js", import.meta.url), "utf8"), { window: generalWindow });
 const sections = generalWindow.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027.get("mathimatika-b-gymnasiou").sections;
-assert.equal(sections.length, 28);
+assert.equal(sections.length, 37);
 for (const topic of lessonCases.keys()) assert.ok(sections.includes(topic), topic);
 assert.ok(!sections.some(row => row.includes("1.3 — Επίλυση τύπων")));
 assert.ok(!sections.some(row => row.includes("3.4 — Μήκος τόξου")));
@@ -73,8 +73,8 @@ vm.runInNewContext(fs.readFileSync(new URL("../official-curriculum-data.js", imp
 const official = officialWindow.AITOOLSKIDS_OFFICIAL_CURRICULUM.getByQuizId("mathimatika-b-gymnasiou");
 assert.equal(official.annualInstructionsStatus, "2026-27-verified");
 assert.equal(official.coverageStatus, "annual-guidance-detailed-map");
-assert.equal(official.officialSectionsEl.length, 28);
-assert.equal(official.mappedTopicsEl.length, 28);
+assert.equal(official.officialSectionsEl.length, 37);
+assert.equal(official.mappedTopicsEl.length, 37);
 
 const response = {
   statusCode: 0, body: null,
@@ -86,4 +86,13 @@ await handler({ method: "GET", query: { subject: "mathimatika-b-gymnasiou", topi
 assert.equal(response.statusCode, 404);
 assert.equal(response.body.error, "section_not_resolved");
 
-console.log("Math B 2026-27 grounding integrity: 28 mapped sections, exclusions fail closed");
+for (const topic of sections.filter(t => t.includes("μη εξεταστέο"))) {
+ const result = await handler.resolveOfficialSchoolbookSource("mathimatika-b-gymnasiou", topic);
+ assert.equal(result.ok, true, topic);
+ assert.ok(result.body.text.length >= 500);
+ assert.ok(result.body.sourceUrl.includes("Mathimatika_A-Gymnasiou_html-empl/indexA7_"));
+ assert.ok(result.body.bookTitle.includes("Α΄"));
+ assert.ok(result.body.curriculumExclusions.some(t => t.includes("εξεταστέα")));
+ assert.equal(internals.resolveDirectSourceUrls("mathimatika-b-gymnasiou", topic.replace("μη εξεταστέο", "εξεταστέο")).length, 0);
+}
+console.log("Math B 2026-27 grounding integrity: 37 mapped sections, exclusions fail closed");

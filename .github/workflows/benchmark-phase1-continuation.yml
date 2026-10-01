@@ -1,0 +1,44 @@
+name: Phase 1 continuation (one-shot, bounded)
+
+on:
+  push:
+    branches: [complete-remaining-20261001]
+    paths: [benchmark/continuation-20261001.json]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ai-benchmark
+  cancel-in-progress: false
+
+jobs:
+  screening:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/cache/restore@v4
+        with:
+          path: benchmark/results
+          key: ai-benchmark-1-${{ github.run_id }}
+          restore-keys: ai-benchmark-1-
+      - name: Continue screening in the corrected inference profile
+        env:
+          CLOUDFLARE_LLM_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_LLM_ACCOUNT_ID }}
+          CLOUDFLARE_LLM_AI_TOKEN: ${{ secrets.CLOUDFLARE_LLM_AI_TOKEN }}
+        run: node benchmark/run.mjs --phase 1 --max-neurons 1000
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: benchmark/results
+          key: ai-benchmark-1-${{ github.run_id }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ai-benchmark-phase-1-${{ github.run_id }}
+          path: benchmark/results
+          retention-days: 30

@@ -38,6 +38,11 @@ jobs:
       - name: Run repository data integrity smoke
         run: node tests/repository-data-integrity-smoke.mjs
 
+      - name: Verify Mathematics B annual and supporting-book scope
+        run: |
+          node tests/math-b-schoolbook-grounding.mjs
+          node tests/math-b-diagnostic-scope.mjs
+
       - name: Run Higher Education data smoke
         run: node tests/higher-education-data-smoke.mjs
 
@@ -123,6 +128,9 @@ jobs:
 
       - name: Run shared StudyContext smoke
         run: node tests/study-context-smoke.mjs
+
+      - name: Verify Math B supporting-book navigation
+        run: node tests/math-b-review-navigation-smoke.mjs
 
       - name: Run StudyContext navigation and restore smoke
         run: node tests/study-context-navigation-smoke.mjs

@@ -1,0 +1,6 @@
+{
+  "phase": "1",
+  "maxNeuronsEstimate": 1000,
+  "productionRoutingChanges": false,
+  "purpose": "Continue corrected Phase 1 within a small shared-free-pool budget; no schedule, no automatic model promotion."
+}

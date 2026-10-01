@@ -1076,6 +1076,22 @@ const HISTORY_B_2026_2027_PATHS = Object.freeze({
   "7.2": ["index7_2.html"]
 });
 
+const MATH_B_REVIEW_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2748/Mathimatika_A-Gymnasiou_html-empl/";
+const MATH_B_REVIEW_PATHS = Object.freeze({
+  "Επανάληψη από Α΄ Γυμνασίου · 7.1 — Θετικοί και Αρνητικοί Αριθμοί (Ρητοί αριθμοί) - Η ευθεία των ρητών - Τετμημένη σημείου (μη εξεταστέο)": "indexA7_1.html",
+  "Επανάληψη από Α΄ Γυμνασίου · 7.2 — Απόλυτη τιμή ρητού - Αντίθετοι ρητοί - Σύγκριση ρητών (μη εξεταστέο)": "indexA7_2.html",
+  "Επανάληψη από Α΄ Γυμνασίου · 7.3 — Πρόσθεση ρητών αριθμών (μη εξεταστέο)": "indexA7_3.html",
+  "Επανάληψη από Α΄ Γυμνασίου · 7.4 — Αφαίρεση ρητών αριθμών (μη εξεταστέο)": "indexA7_4.html",
+  "Επανάληψη από Α΄ Γυμνασίου · 7.5 — Πολλαπλασιασμός ρητών αριθμών (μη εξεταστέο)": "indexA7_5.html",
+  "Επανάληψη από Α΄ Γυμνασίου · 7.6 — Διαίρεση ρητών αριθμών (μη εξεταστέο)": "indexA7_6.html",
+  "Από Α΄ Γυμνασίου · 7.7 — Δεκαδική μορφή ρητών αριθμών (μη εξεταστέο)": "indexA7_7.html",
+  "Από Α΄ Γυμνασίου · 7.8 — Δυνάμεις ρητών αριθμών με εκθέτη φυσικό (μη εξεταστέο)": "indexA7_8.html",
+  "Από Α΄ Γυμνασίου · 7.9 — Δυνάμεις ρητών αριθμών με εκθέτη ακέραιο (μη εξεταστέο)": "indexA7_9.html"
+});
+function mathBReviewPath(topic) {
+  return Object.hasOwn(MATH_B_REVIEW_PATHS, String(topic || "")) ? MATH_B_REVIEW_PATHS[topic] : "";
+}
+
 const MATH_B_2026_2027_PATHS = Object.freeze({
   "A.1.1": ["indexA1_1.html"],
   "A.1.2": ["indexA1_2.html"],
@@ -1809,7 +1825,9 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  const reviewPath = subject === "mathimatika-b-gymnasiou" ? mathBReviewPath(topic) : "";
   const book =
+    (reviewPath ? { ...BOOKS[subject], title: "Μαθηματικά Α΄ Γυμνασίου — επανάληψη για Β΄ (μη εξεταστέο)", base: MATH_B_REVIEW_BASE } : null) ||
     BOOKS[subject] ||
     buildCatalogBook(subject) ||
     buildGelInventoryBook(gelInventory);
@@ -2192,6 +2210,8 @@ function resolveDirectSourceUrls(subject, topic) {
   }
 
   if (subject === "mathimatika-b-gymnasiou") {
+    const reviewPath = mathBReviewPath(topic);
+    if (reviewPath) return [new URL(reviewPath, MATH_B_REVIEW_BASE).toString()];
     const base = BOOKS[subject].base;
     return resolveMathBCurriculumPaths(topic).map(path => new URL(path, base).toString());
   }
@@ -3053,6 +3073,7 @@ function applyCurriculumTextScope(subject, topic, text) {
 
   if (subject === "mathimatika-b-gymnasiou") {
     const key = mathBTopicKey(topic);
+    if (mathBReviewPath(topic)) exclusions.push("Παράγραφος από το βιβλίο Α΄ Γυμνασίου: προβλέπεται στις οδηγίες Β΄ 2026–27, αλλά δεν αποτελεί εξεταστέα ύλη.");
 
     if (key === "A.3.2") {
       exclusions.push("Δεν διδάσκονται η Εφαρμογή 2 της σελ. 62 και ο τύπος απόστασης δύο σημείων της σελ. 63.");

@@ -34,6 +34,7 @@ const cases = [
 ];
 
 const results = [];
+const failures = [];
 for (const c of cases) {
   let last = null;
   for (let attempt = 0; attempt < 2; attempt++) {
@@ -66,29 +67,40 @@ for (const c of cases) {
     break;
   }
 
-  assert.ok(last, c.action + ": no response");
-  assert.equal(last.res.status, 200, c.action + ": expected 200, got " + last.res.status + " " + (last.body?.error || ""));
-  assert.ok(String(last.body?.text || "").trim().length >= 20, c.action + ": empty/too short output");
-  assert.equal(last.body?.groundingValidated, true, c.action + ": grounding must be validated");
+  try {
+    assert.ok(last, c.action + ": no response");
+    assert.equal(last.res.status, 200, c.action + ": expected 200, got " + last.res.status + " " + (last.body?.error || "") + " " + (last.body?.message || ""));
+    assert.ok(String(last.body?.text || "").trim().length >= 20, c.action + ": empty/too short output");
+    assert.equal(last.body?.groundingValidated, true, c.action + ": grounding must be validated");
 
-  if (c.action === "flashcards") {
-    const parsed = JSON.parse(String(last.body.text).replace(/^\`\`\`(?:json)?\s*/i,"").replace(/\s*\`\`\`$/,""));
-    assert.equal(parsed.cards?.length, 8, "flashcards: expected exactly 8 cards");
-  }
-  if (c.action === "plan") {
-    const parsed = JSON.parse(String(last.body.text).replace(/^\`\`\`(?:json)?\s*/i,"").replace(/\s*\`\`\`$/,""));
-    assert.ok(Array.isArray(parsed.steps) && parsed.steps.length >= 3, "plan: expected at least 3 steps");
+    if (c.action === "flashcards") {
+      const parsed = JSON.parse(String(last.body.text).replace(/^\`\`\`(?:json)?\s*/i,"").replace(/\s*\`\`\`$/,""));
+      assert.equal(parsed.cards?.length, 8, "flashcards: expected exactly 8 cards");
+    }
+    if (c.action === "plan") {
+      const parsed = JSON.parse(String(last.body.text).replace(/^\`\`\`(?:json)?\s*/i,"").replace(/\s*\`\`\`$/,""));
+      assert.ok(Array.isArray(parsed.steps) && parsed.steps.length >= 3, "plan: expected at least 3 steps");
+    }
+  } catch (err) {
+    failures.push(c.action + ": " + err.message);
   }
 
   results.push({
     action: c.action,
-    status: last.res.status,
-    provider: last.body?.provider || "",
-    model: last.body?.model || "",
-    chars: String(last.body?.text || "").length,
-    groundingValidated: last.body?.groundingValidated === true
+    status: last?.res?.status || 0,
+    error: last?.body?.error || "",
+    provider: last?.body?.provider || "",
+    model: last?.body?.model || "",
+    chars: String(last?.body?.text || "").length,
+    groundingValidated: last?.body?.groundingValidated === true
   });
 }
 
 console.table(results);
-console.log("AI Study production E2E passed for all 10 learner actions.");
+if (failures.length) {
+  console.error("\nAI Study production E2E failures:");
+  failures.forEach(x => console.error("- " + x));
+  process.exitCode = 1;
+} else {
+  console.log("AI Study production E2E passed for all 10 learner actions.");
+}

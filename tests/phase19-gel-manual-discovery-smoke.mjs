@@ -13,7 +13,7 @@ function sources(entry) {
 }
 
 const discovered = overrides.entries.filter((entry) =>
-  entry.sourceOrigin === "manual-official-discovery"
+  entry.sourceOrigin === "manual-official-discovery" && entry.discoveryPhase !== 20
 );
 
 assert.equal(discovered.length, 18);

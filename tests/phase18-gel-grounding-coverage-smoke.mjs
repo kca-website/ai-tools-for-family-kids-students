@@ -64,23 +64,25 @@ for (const subject of Object.values(inventory.all())) {
 assert.equal(highHtml, 174);
 assert.equal(mediumManual, 14);
 assert.equal(exactPdf, 11);
-assert.equal(reviewedManual, 131);
-assert.equal(overrides.count, 145);
-assert.equal(remainingCandidateBacked, 11);
+assert.equal(reviewedManual, 136);
+assert.equal(overrides.count, 150);
+assert.equal(remainingCandidateBacked, 6);
 assert.equal(remainingWithoutCandidate, 301);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 330);
-assert.equal(blocked, 317);
+assert.equal(grounded, 335);
+assert.equal(blocked, 312);
 assert.equal(grounded + blocked, 647);
 
 // Guard examples: candidates that are deliberately still ambiguous/insufficient.
 for (const [subjectId, label] of [
   ["archaia-b-lykeiou", "Αδίδακτο πεζό κείμενο αττικής διαλέκτου"],
   ["latinika-b-lykeiou", "Κείμενα και λεξιλόγιο των διδακτικών ενοτήτων"],
+  ["ekthesi-b-lykeiou", "Ισορροπία δοκιμίου"],
   ["ekthesi-b-lykeiou", "Κειμενικά είδη"],
+  ["latinika-g-lykeiou", "Λεξιλόγιο και ετυμολογικές σχέσεις"],
   ["mathimatika-g-prosanatolismou", "Παράγωγος σύνθετης και αντίστροφης συνάρτησης"]
 ]) {
   const resolved = endpoint._test.resolveGelInventoryTopic(subjectId, label);

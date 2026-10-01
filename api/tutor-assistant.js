@@ -24,6 +24,21 @@ const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 module.exports = async function handler(req, res) {
+  // Temporary authenticated, expiring fixed-prompt model availability check.
+  if (req.method === 'POST' && req.headers['x-ai-probe']) {
+    res.setHeader('Cache-Control', 'no-store');
+    const valid = require('node:crypto').createHash('sha256').update(String(req.headers['x-ai-probe'])).digest('hex') === 'b9a2d9e142f1eab300ea09bcdde13fb6c46d1287d240dd1c8d26a576a3c9e23a';
+    if (!valid || Date.now() > 1790888327080) return res.status(404).json({error:'not_found'});
+    try {
+      const upstream = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent', {
+        method:'POST', headers:{'Content-Type':'application/json','x-goog-api-key':process.env.GEMINI_API_KEY},
+        body:JSON.stringify({contents:[{role:'user',parts:[{text:'Reply with exactly: OK'}]}],generationConfig:{maxOutputTokens:32,thinkingConfig:{thinkingLevel:'minimal'}}}),
+        signal:AbortSignal.timeout(20000)
+      });
+      const data=await upstream.json();
+      return res.status(upstream.status).json({provider:'gemini',requestedModel:'gemini-3.1-flash-lite',modelVersion:data.modelVersion || null,text:(data.candidates?.[0]?.content?.parts || []).filter(p=>!p.thought).map(p=>p.text || '').join(''),finishReason:data.candidates?.[0]?.finishReason,usage:data.usageMetadata,errorCode:data.error?.status});
+    } catch (_) { return res.status(502).json({error:'probe_failed'}); }
+  }
   const aiStatus = getAiStatus();
   const model = aiStatus.model || 'openai/gpt-oss-120b';
 

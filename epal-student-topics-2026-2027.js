@@ -40,7 +40,9 @@
       .filter(Boolean)
       .map(label=>({
         label,
-        officialExact:true,
+        officialExact:fromExamSyllabus,
+        officialCurriculumVerified:true,
+        exactTextGrounded:false,
         sourceUrl:officialSourceUrl,
         sourceKind:fromExamSyllabus?"panhellenic-2027":"annual-guidance"
       }));

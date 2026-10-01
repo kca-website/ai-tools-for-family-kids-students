@@ -2949,8 +2949,14 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     return true;
   }
 
-  function applyUrlCurriculumSelection() {
-    const params = new URLSearchParams(location.search);
+  function applyUrlCurriculumSelection(persisted) {
+    const explicit = new URLSearchParams(location.search);
+    const hasSelection = ["grade", "schoolType", "sector", "specialty", "subject", "topic", "topicText"].some(key => explicit.has(key));
+    const api = window.AITOOLSKIDS_STUDY_CONTEXT;
+    const compatible = persisted?.zoneId === ctx?.zoneId && persisted?.roleId === ctx?.roleId;
+    const params = !hasSelection && compatible && api
+      ? api.toSearchParams(persisted, explicit)
+      : explicit;
 
     if (ctx?.zoneId === "high" && params.get("schoolType") === "epal") {
       refs.schoolType.value = "epal";
@@ -3022,6 +3028,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       return;
     }
 
+    const persistedStudyContext = window.AITOOLSKIDS_STUDY_CONTEXT?.readPersisted();
     stopSpeaking();
     if (recording || micStream) cancelRecording();
     ctx = nextCtx;
@@ -3051,7 +3058,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
     populateGrades();
     renderAccessGate();
     bindEvents();
-    applyUrlCurriculumSelection();
+    applyUrlCurriculumSelection(persistedStudyContext);
     const importedAction = importStudySession();
     updateAuthUi();
     if(importedAction){

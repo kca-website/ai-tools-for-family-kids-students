@@ -188,6 +188,12 @@ function installSandbox() {
         body.chat_template_kwargs = { ...(body.chat_template_kwargs || {}), enable_thinking: false };
       }
     }
+    // The production router adds these options only when smart routing is on.
+    // The benchmark keeps that switch off, but must still compare the intended
+    // non-thinking configuration rather than consume the output budget on reasoning.
+    if (target === '@cf/qwen/qwen3-30b-a3b-fp8' || target === '@cf/zai-org/glm-4.7-flash') {
+      body.chat_template_kwargs = { ...(body.chat_template_kwargs || {}), enable_thinking: false };
+    }
     const started = Date.now();
     const res = MOCK ? mockResponse(body) : await realFetch(u.replace(/\/ai\/run\/.+$/, '/ai/run/' + target), { ...init, body: JSON.stringify(body) });
     const clone = res.clone();
@@ -200,6 +206,8 @@ function installSandbox() {
       envelopeSuccess: data?.success ?? null,
       topLevelKeys: Object.keys(data || {}).slice(0, 20),
       resultKeys: Object.keys(data?.result || {}).slice(0, 20),
+      finishReason: data?.result?.choices?.[0]?.finish_reason || data?.choices?.[0]?.finish_reason || null,
+      reasoningChars: String(data?.result?.choices?.[0]?.message?.reasoning_content || data?.choices?.[0]?.message?.reasoning_content || '').length,
       error: data?.errors?.[0]?.message || data?.error?.message || data?.message || null });
     return res;
   };
@@ -302,12 +310,14 @@ if (!REPORT_ONLY) {
       latinRatio: Number(latinRatio(visibleText(c.action, answer), c.subject).toFixed(3)),
       unsupported: unsupportedCandidates(answer, source),
       safetyLooksSafe: c.safetyCategory ? SAFE_MARKERS.test(answer) : null,
-      answer, source: source.slice(0, 6000),
+      answer, source,
       providerError: calls.map(x => x.error).filter(Boolean).join(' | '),
       providerStatuses: calls.map(x => x.status),
       providerEnvelopeSuccess: calls.map(x => x.envelopeSuccess),
       providerTopLevelKeys: calls.map(x => x.topLevelKeys),
       providerResultKeys: calls.map(x => x.resultKeys),
+      providerFinishReasons: calls.map(x => x.finishReason),
+      providerReasoningChars: calls.map(x => x.reasoningChars),
     };
     rows.push(row);
     fs.appendFileSync(RAW, JSON.stringify(row) + '\n');
@@ -320,7 +330,11 @@ if (!REPORT_ONLY) {
 // ---------- reports ----------
 const csv = (cells) => cells.map(v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(',');
 const currentCaseIds = new Set(buildCases().map(c => c.caseId));
-const scored = rows.filter(r => currentCaseIds.has(r.caseId) && !r.sourceUnavailable);
+// A resumed run may retry a failed case. Count each case/model once, using its
+// latest attempt; raw.jsonl retains every attempt for cost and failure analysis.
+const latest = new Map();
+for (const row of rows) if (currentCaseIds.has(row.caseId)) latest.set(row.caseId + '|' + row.model, row);
+const scored = [...latest.values()].filter(r => !r.sourceUnavailable);
 const groups = {};
 for (const r of scored) (groups[r.model + '|' + r.action] ||= []).push(r);
 const pct = (n, d) => d ? (100 * n / d).toFixed(0) + '%' : '';
@@ -347,7 +361,7 @@ const blind = [csv(['blind_id', 'subject', 'topic', 'action', 'official_excerpt'
 const key = [csv(['blind_id', 'model', 'caseId'])];
 shuffled.forEach(({ r }, i) => {
   const id = 'B' + String(i + 1).padStart(4, '0');
-  blind.push(csv([id, r.subject, r.topic, r.safetyCategory ? 'safety:' + r.safetyCategory : r.action, r.source.slice(0, 2500), r.answer, r.unsupported.join('; '), '', '', '', '', '', '']));
+  blind.push(csv([id, r.subject, r.topic, r.safetyCategory ? 'safety:' + r.safetyCategory : r.action, r.source, r.answer, r.unsupported.join('; '), '', '', '', '', '', '']));
   key.push(csv([id, r.model, r.caseId]));
 });
 fs.writeFileSync(path.join(OUT, 'blind.csv'), '﻿' + blind.join('\n') + '\n');

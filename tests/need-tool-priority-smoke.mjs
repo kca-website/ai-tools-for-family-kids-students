@@ -21,7 +21,15 @@ async function choose(page, subjectLabel, needLabel) {
   await need.evaluate((el) => el.click());
   await page.waitForTimeout(250);
 
-  const hrefs = await page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
+  const primary = page.locator('#toolGrid .tool-card__link');
+  const extra = page.locator('#needMoreTools .tool-card__link');
+  assert.ok(await primary.count() <= 3, 'Selected learning need shows at most three recommendations first');
+  if (await extra.count()) {
+    assert.equal(await page.locator('#needMoreTools').getAttribute('open'), null, 'Additional recommendations start collapsed');
+    await page.locator('#needMoreTools > summary').click();
+    assert.equal(await extra.first().isVisible(), true, 'Additional recommendations remain accessible');
+  }
+  const hrefs = await page.locator('#toolGrid .tool-card__link, #needMoreTools .tool-card__link').evaluateAll((links) =>
     links.map((a) => new URL(a.href).pathname)
   );
   if (!hrefs.length) {
@@ -78,7 +86,7 @@ try {
     const age13 = page.locator('#studentAgeFilter [data-student-age="13"]');
     await age13.evaluate((el) => el.click());
     await page.waitForTimeout(150);
-    hrefs = await page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
+    hrefs = await page.locator('#toolGrid .tool-card__link, #needMoreTools .tool-card__link').evaluateAll((links) =>
       links.map((a) => new URL(a.href).pathname)
     );
     assert.deepEqual(hrefs.slice(0, 5), [
@@ -109,7 +117,7 @@ try {
     const age16 = page.locator('#studentAgeFilter [data-student-age="16"]');
     await age16.evaluate((el) => el.click());
     await page.waitForTimeout(150);
-    hrefs = await page.locator('#toolGrid .tool-card__link').evaluateAll((links) =>
+    hrefs = await page.locator('#toolGrid .tool-card__link, #needMoreTools .tool-card__link').evaluateAll((links) =>
       links.map((a) => new URL(a.href).pathname)
     );
     assert.deepEqual(hrefs.slice(0, 5), [

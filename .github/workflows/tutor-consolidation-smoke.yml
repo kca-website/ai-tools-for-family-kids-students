@@ -124,6 +124,9 @@ jobs:
       - name: Run shared StudyContext smoke
         run: node tests/study-context-smoke.mjs
 
+      - name: Run StudyContext navigation and restore smoke
+        run: node tests/study-context-navigation-smoke.mjs
+
       - name: Run AI Study UX smoke
         run: node tests/ai-study-ux-smoke.mjs
 

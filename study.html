@@ -193,6 +193,7 @@
   let lang=(()=>{try{return localStorage.getItem('aitools4kids_lang')==='en'?'en':'el'}catch(_){return'el'}})(), attached=null, currentOfficialSource=null;
   const officialSourceCache=new Map();
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
+  const savedStudyContext=window.AITOOLSKIDS_STUDY_CONTEXT?.readPersisted();
   const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']]};
   function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();}
   function saveLang(value){try{localStorage.setItem('aitools4kids_lang',value)}catch(_){}}
@@ -995,7 +996,27 @@
   };
   ['zone','grade','schoolType','epalSector','epalSpecialty','subject','topicPick','topicCustom'].forEach(id=>$(id)?.addEventListener('change',()=>setTimeout(()=>publishSharedStudyContext(),0)));
   document.querySelectorAll('input[name="goal"]').forEach(node=>node.addEventListener('change',()=>publishSharedStudyContext()));
-  populateEpalChoices();populateGrades();localize();refreshAttachedUi();publishSharedStudyContext();
+  function restoreStudySelection(){
+    const api=window.AITOOLSKIDS_STUDY_CONTEXT,query=new URLSearchParams(location.search);
+    const explicit=['zone','grade','schoolType','sector','specialty','subject','topic','topicText'].some(key=>query.has(key));
+    const saved=savedStudyContext?.roleId==='student'?savedStudyContext:null;
+    const selection=explicit?api?.fromSearchParams(query.toString()):saved;
+    if(!selection)return;
+    const select=(id,value)=>{const el=$(id);if(value&&[...el.options].some(o=>o.value===value)){el.value=value;return true}return false};
+    if(!select('zone',selection.zoneId)||!grades[selection.zoneId])return;
+    select('schoolType',selection.schoolType);populateGrades();
+    select('grade',selection.grade);refreshSchoolTypeFields();
+    select('epalSector',selection.sector);select('epalSpecialty',selection.specialty);populateSubjects();
+    if(!select('subject',selection.subject))return;
+    populateTopics();
+    if(!select('topicPick',selection.gapId)){
+      const option=[...$('topicPick').options].find(o=>o.textContent.trim()===selection.topic);
+      if(option)$('topicPick').value=option.value;
+    }
+    const goal=[...document.querySelectorAll('input[name="goal"]')].find(n=>n.value===selection.learningMode);
+    if(goal)goal.checked=true;
+  }
+  populateEpalChoices();populateGrades();localize();restoreStudySelection();refreshAttachedUi();publishSharedStudyContext();
 })();
 </script>
 </body>

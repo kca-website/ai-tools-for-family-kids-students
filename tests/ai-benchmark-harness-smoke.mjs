@@ -34,12 +34,22 @@ for (const row of summary.slice(1)) assert.match(row, /,8,100%,100%,0,0,/, 'mock
 const blind = fs.readFileSync(path.join(out, 'blind.csv'), 'utf8');
 assert.doesNotMatch(blind, /@cf\//, 'blind file must not reveal model ids');
 assert.ok(fs.readFileSync(path.join(out, 'blind-key.csv'), 'utf8').includes('@cf/qwen/'), 'key file maps blind ids to models');
+const rawPath = path.join(out, 'raw.jsonl');
+const attempts = fs.readFileSync(rawPath, 'utf8').trim().split('\n').map(JSON.parse);
+const firstAttempt = attempts[0];
+const oldFailure = { ...firstAttempt, httpStatus: 502, finalValid: false, firstValid: false };
+attempts[0].source = 'Official source '.repeat(500) + 'END_OF_COMPLETE_SOURCE';
+fs.writeFileSync(rawPath, [oldFailure, ...attempts].map(row => JSON.stringify(row)).join('\n') + '\n');
+execFileSync(process.execPath, [path.join(root, 'benchmark/run.mjs'), '--phase', '1', '--report', '--out', out], { env, stdio: 'pipe' });
+const resumedSummary = fs.readFileSync(path.join(out, 'summary.csv'), 'utf8').trim().split('\n');
+for (const row of resumedSummary.slice(1)) assert.match(row, /,8,100%,100%,0,0,/, 'Retries must not inflate the case denominator: ' + row);
+assert.ok(fs.readFileSync(path.join(out, 'blind.csv'), 'utf8').includes('END_OF_COMPLETE_SOURCE'), 'Grading must see the complete captured official source');
 const harnessSource = fs.readFileSync(path.join(root, 'benchmark/run.mjs'), 'utf8');
 assert.match(harnessSource, /@cf\/google\/gemma-4-26b-a4b-it/);
 assert.match(harnessSource, /enable_thinking:\s*false/);
 assert.match(harnessSource, /if \(r\.httpStatus === 200\) done\.add/, 'failed provider/source calls must be retryable on resume');
 assert.match(harnessSource, /providerEnvelopeSuccess/, 'failed provider calls need response-shape diagnostics');
-assert.match(harnessSource, /currentCaseIds\.has\(r\.caseId\)/, 'reports must ignore obsolete fixture cases');
+assert.match(harnessSource, /currentCaseIds\.has\(row\.caseId\)/, 'reports must ignore obsolete fixture cases');
 
 execFileSync(process.execPath, [path.join(root, 'benchmark/run.mjs'), '--phase', 'safety', '--mock',
   '--models', '@cf/openai/gpt-oss-120b', '--out', out + '-safety'], { env, stdio: 'pipe' });

@@ -296,7 +296,9 @@
     box.classList.remove('hidden');
   }
   function requiresOfficialSource(){
-    return ['physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','thriskeftika-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'].includes(selectedSubjectId());
+    const existing=['physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','thriskeftika-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'];
+    const gel=["algebra-b-lykeiou","archaia-a-lykeiou","archaia-b-lykeiou","archaia-g-lykeiou","biologia-b-lykeiou","biologia-g-lykeiou","chimeia-a-lykeiou","chimeia-b-lykeiou","chimeia-g-lykeiou","ekthesi-a-lykeiou","ekthesi-b-lykeiou","english-a-lykeiou","english-b-lykeiou","filosofia-b-lykeiou","fysiki-a-lykeiou","fysiki-b-lykeiou","fysiki-g-lykeiou","geometria-a-lykeiou","geometria-b-lykeiou","istoria-b-lykeiou","istoria-g-lykeiou","istoria-g-prosanatolismou","latinika-b-lykeiou","latinika-g-lykeiou","mathimatika-a-lykeiou","mathimatika-b-prosanatolismou","mathimatika-g-genikis","mathimatika-g-prosanatolismou","oikonomia-g-lykeiou","pliroforiki-g-lykeiou","politiki-paideia-a-lykeiou","thriskeftika-a-lykeiou","thriskeftika-b-lykeiou","thriskeftika-g-lykeiou"];
+    return existing.includes(selectedSubjectId())||gel.includes(selectedSubjectId());
   }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}
@@ -332,7 +334,9 @@
     if(requiresOfficialSource()){
       const detail=lastBody?.error==='section_not_resolved'
         ? (lang==='en'?'This selection is not yet mapped to an exact verified schoolbook page.':'Η συγκεκριμένη επιλογή δεν έχει ακόμη ακριβή αντιστοίχιση σε επαληθευμένη σελίδα του σχολικού βιβλίου.')
-        : (lang==='en'?'The official textbook section could not be loaded. Try again in a moment.':'Δεν φορτώθηκε η επίσημη ενότητα του σχολικού βιβλίου. Δοκίμασε ξανά σε λίγο.');
+        : lastBody?.error==='official_pdf_text_not_grounded'
+          ? (lang==='en'?'The official PDF page is verified, but safe server-side text extraction is not enabled yet.':'Η επίσημη σελίδα PDF έχει επαληθευτεί, αλλά δεν έχει ενεργοποιηθεί ακόμη ασφαλής εξαγωγή του κειμένου της.')
+          : (lang==='en'?'The official textbook section could not be loaded. Try again in a moment.':'Δεν φορτώθηκε η επίσημη ενότητα του σχολικού βιβλίου. Δοκίμασε ξανά σε λίγο.');
       const err=new Error(detail);
       err.code=lastBody?.error||lastError?.name||'official_source_unavailable';
       throw err;

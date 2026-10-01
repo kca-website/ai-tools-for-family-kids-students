@@ -64,24 +64,24 @@ for (const subject of Object.values(inventory.all())) {
 assert.equal(highHtml, 174);
 assert.equal(mediumManual, 14);
 assert.equal(exactPdf, 11);
-assert.equal(reviewedManual, 113);
-assert.equal(overrides.count, 127);
-assert.equal(remainingCandidateBacked, 29);
+assert.equal(reviewedManual, 131);
+assert.equal(overrides.count, 145);
+assert.equal(remainingCandidateBacked, 11);
 assert.equal(remainingWithoutCandidate, 301);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 312);
-assert.equal(blocked, 335);
+assert.equal(grounded, 330);
+assert.equal(blocked, 317);
 assert.equal(grounded + blocked, 647);
 
 // Guard examples: candidates that are deliberately still ambiguous/insufficient.
 for (const [subjectId, label] of [
   ["archaia-b-lykeiou", "Αδίδακτο πεζό κείμενο αττικής διαλέκτου"],
-  ["istoria-g-lykeiou", "Β΄ Παγκόσμιος Πόλεμος"],
-  ["pliroforiki-g-lykeiou", "Τμηματικός προγραμματισμός"],
-  ["mathimatika-g-prosanatolismou", "Όριο συνάρτησης"]
+  ["latinika-b-lykeiou", "Κείμενα και λεξιλόγιο των διδακτικών ενοτήτων"],
+  ["ekthesi-b-lykeiou", "Κειμενικά είδη"],
+  ["mathimatika-g-prosanatolismou", "Παράγωγος σύνθετης και αντίστροφης συνάρτησης"]
 ]) {
   const resolved = endpoint._test.resolveGelInventoryTopic(subjectId, label);
   assert.equal(resolved?.runtimeEligible, false, subjectId + " / " + label + " must remain blocked");

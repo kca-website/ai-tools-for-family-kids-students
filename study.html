@@ -281,7 +281,7 @@
   $('notesFile').addEventListener('change',()=>setTimeout(refreshAttachedUi,0));
 
   function selectedSubjectId(){return $('subject').value||''}
-  function sourceEvidenceUi(source){
+  function sourceEvidenceUi(source,state='loaded'){
     currentOfficialSource=source||null;
     const box=$('sourceEvidence');
     if(!box)return;
@@ -290,7 +290,11 @@
       box.innerHTML='';
       return;
     }
-    const label=lang==='en'?'Based on the official school textbook':'Βασισμένο στο επίσημο σχολικό βιβλίο';
+    const label=state==='verified'
+      ? (lang==='en'?'Based on the official school textbook':'Βασισμένο στο επίσημο σχολικό βιβλίο')
+      : state==='verification_failed'
+        ? (lang==='en'?'Official source loaded, but this answer was not verified':'Η επίσημη πηγή φορτώθηκε, αλλά η απάντηση δεν επαληθεύτηκε')
+        : (lang==='en'?'Official schoolbook source loaded':'Η επίσημη σχολική πηγή φορτώθηκε');
     const sourceLink=source.canonicalSourceUrl||source.sourceUrl||'';
     const link=sourceLink?'<a href="'+esc(sourceLink)+'" target="_blank" rel="noopener noreferrer" style="margin-left:6px">'+esc(lang==='en'?'Open source':'Άνοιγμα πηγής')+'</a>':'';
     box.innerHTML='<span class="v9i v9i-book" aria-hidden="true"></span><strong>'+esc(label)+'</strong> · '+esc(source.bookTitle||'')+link;
@@ -526,7 +530,11 @@
         documentSourceUrl:officialSource?.sourceUrl||''
       })});
       const body=await res.json().catch(()=>({}));
-      if(!res.ok) throw new Error(body?.message||'AI plan failed');
+      if(!res.ok){
+        if(body?.error==='grounding_validation_failed'&&officialSource?.grounded)sourceEvidenceUi(officialSource,'verification_failed');
+        throw new Error(body?.message||'AI plan failed');
+      }
+      if(body?.groundingValidated&&officialSource?.grounded)sourceEvidenceUi(officialSource,'verified');
       const parsed=parsePlanJson(body.text);
       if(!renderAiPlan(parsed,total)){
         $('plan').innerHTML='<div class="step"><strong>'+esc(lang==='en'?'AI study plan':'Πλάνο μελέτης από AI')+'</strong><p>'+esc(body.text||'')+'</p></div>';
@@ -604,8 +612,13 @@
     const body=await res.json().catch(()=>({}));
     if(!res.ok){
       const err=new Error(body?.message||'AI request failed');
-      err.code=body?.error||''; err.fallback=body?.fallback||''; throw err;
+      err.code=body?.error||''; err.fallback=body?.fallback||'';
+      if(err.code==='grounding_validation_failed'&&officialSource?.grounded){
+        sourceEvidenceUi(officialSource,'verification_failed');
+      }
+      throw err;
     }
+    if(body?.groundingValidated&&officialSource?.grounded)sourceEvidenceUi(officialSource,'verified');
     $('providerStatus').textContent=[body.provider,body.model].filter(Boolean).join(' · ');
     return body.text||'';
   }
@@ -720,6 +733,7 @@
     $('providerStatus').textContent=body.verified
       ? (lang==='en'?'Verified against official source':'Ελεγμένο πάνω στην επίσημη πηγή')
       : (lang==='en'?'Official-source summary':'Σύνοψη επίσημης πηγής');
+    if(body.verified&&source?.grounded)sourceEvidenceUi(source,'verified');
     return body.text;
   }
 

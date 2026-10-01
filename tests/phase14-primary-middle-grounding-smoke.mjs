@@ -4,6 +4,38 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const endpoint = require("../api/schoolbook-source.js");
 
+const primaryEnvironmentGrounded = {
+  "environment-a-dimotikou": [
+    "Βασικές ανάγκες ζωντανών οργανισμών",
+    "Κανόνες στο σχολείο και στην ομάδα",
+    "Παρατήρηση με τις αισθήσεις"
+  ],
+  "environment-b-dimotikou": [
+    "Τι χρειάζεται ένα φυτό",
+    "Ζώα και τόπος ζωής",
+    "Υπηρεσίες της κοινότητας"
+  ],
+  "environment-c-dimotikou": [
+    "Συνεργασία και κανόνες",
+    "Φυσικά χαρακτηριστικά και ανθρώπινα έργα",
+    "Τροφή και ενέργεια",
+    "Φροντίδα του περιβάλλοντος",
+    "Χάρτης και προσανατολισμός"
+  ],
+  "environment-d-dimotikou": [
+    "Οικοσύστημα",
+    "Σχέσεις τροφής στο οικοσύστημα",
+    "Φυσικά χαρακτηριστικά του τόπου",
+    "Έργα και ανάγκες της κοινότητας"
+  ]
+};
+
+const primaryEnvironmentFailClosed = {
+  "environment-a-dimotikou": ["Ζωντανό ή μη ζωντανό", "Εποχές και καιρός"],
+  "environment-b-dimotikou": ["Φυσικό και ανθρωπογενές περιβάλλον", "Απορρίμματα και επαναχρησιμοποίηση"],
+  "environment-d-dimotikou": ["Φυσικοί πόροι και υπεύθυνη χρήση"]
+};
+
 const physicsGrounded = [
   "Μετρήσεις μήκους και μέση τιμή",
   "Μετρήσεις χρόνου και ακρίβεια",
@@ -28,6 +60,26 @@ const geographyGrounded = [
 ];
 
 const results = [];
+
+for (const [subject, topics] of Object.entries(primaryEnvironmentGrounded)) {
+  for (const topic of topics) {
+    const live = await endpoint.resolveOfficialSchoolbookSource(subject, topic);
+    results.push({ subject, topic, ok:live.ok, sourceUrl:live.body?.sourceUrl, pages:live.body?.sourceUrls?.length || 0 });
+    assert.equal(live.ok, true, subject + " / " + topic + " => " + JSON.stringify(live.body));
+    assert.equal(live.body?.grounded, true);
+    assert.match(String(live.body?.sourceUrl || ""), /^https:\/\/[^/]*ebooks\.edu\.gr\/ebooks\/v\/html\//i);
+    assert.ok(String(live.body?.text || "").length >= 250);
+  }
+}
+
+for (const [subject, topics] of Object.entries(primaryEnvironmentFailClosed)) {
+  for (const topic of topics) {
+    const fail = await endpoint.resolveOfficialSchoolbookSource(subject, topic);
+    assert.equal(fail.ok, false, subject + " / " + topic + " must remain fail-closed until an exact official book passage is verified.");
+    assert.notEqual(fail.body?.grounded, true);
+  }
+}
+
 
 for (const topic of physicsGrounded) {
   const live = await endpoint.resolveOfficialSchoolbookSource("fysiki-a-gymnasiou", topic);
@@ -118,6 +170,11 @@ console.log("PHASE14_PRIMARY_MIDDLE_GROUNDING=" + JSON.stringify({
   deliberateFailClosed: [
     "fysiki-a-gymnasiou / Μέτρηση όγκου",
     "fysiki-a-gymnasiou / Μέτρηση πυκνότητας",
-    "pliroforiki-a-gymnasiou / Κίνδυνοι στο Διαδίκτυο – Κανόνες Συμπεριφοράς"
+    "pliroforiki-a-gymnasiou / Κίνδυνοι στο Διαδίκτυο – Κανόνες Συμπεριφοράς",
+    "environment-a-dimotikou / Ζωντανό ή μη ζωντανό",
+    "environment-a-dimotikou / Εποχές και καιρός",
+    "environment-b-dimotikou / Φυσικό και ανθρωπογενές περιβάλλον",
+    "environment-b-dimotikou / Απορρίμματα και επαναχρησιμοποίηση",
+    "environment-d-dimotikou / Φυσικοί πόροι και υπεύθυνη χρήση"
   ]
 }, null, 2));

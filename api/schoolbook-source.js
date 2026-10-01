@@ -112,6 +112,50 @@ const BOOKS = {
     lastVerified: "2026-10-01",
     annualScopeVerified: true
   },
+  "environment-a-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Α΄ Δημοτικού",
+    grade: "a",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2007/Meleti-Perivallontos_A-Dimotikou_html-apli/",
+    mode: "phase14EnvironmentA",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
+  "environment-b-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Β΄ Δημοτικού",
+    grade: "b",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2352/Meleti-Perivallontos_B-Dimotikou_html-apli/",
+    mode: "phase14EnvironmentB",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
+  "environment-c-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Γ΄ Δημοτικού",
+    grade: "c",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2260/Meleti-Perivallontos_G-Dimotikou_html-empl/",
+    mode: "phase14EnvironmentC",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
+  "environment-d-dimotikou": {
+    title: "Μελέτη Περιβάλλοντος Δ΄ Δημοτικού",
+    grade: "d",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2280/Meleti-Perivallontos_D-Dimotikou_html-empl/",
+    mode: "phase14EnvironmentD",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    mappingStatus: "official-book-topic-anchor-grounded",
+    lastVerified: "2026-10-01",
+    annualScopeVerified: false
+  },
   "pliroforiki-a-gymnasiou": {
     title: "Πληροφορική Α΄, Β΄, Γ΄ Γυμνασίου",
     grade: "a",
@@ -1616,6 +1660,53 @@ function clean(value, max) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  if (subject === "environment-a-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Βασικές ανάγκες ζωντανών οργανισμών"), ["index7_2.html"]],
+      [normalize("Κανόνες στο σχολείο και στην ομάδα"), ["index1_1.html"]],
+      [normalize("Παρατήρηση με τις αισθήσεις"), ["index4_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "environment-b-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Τι χρειάζεται ένα φυτό"), ["index_7.html"]],
+      [normalize("Ζώα και τόπος ζωής"), ["index_6.html"]],
+      [normalize("Υπηρεσίες της κοινότητας"), ["index_2.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "environment-c-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Συνεργασία και κανόνες"), ["index1_1.html", "index1_2.html"]],
+      [normalize("Φυσικά χαρακτηριστικά και ανθρώπινα έργα"), ["index2_3.html"]],
+      [normalize("Τροφή και ενέργεια"), ["index5_1.html", "index5_2.html"]],
+      [normalize("Φροντίδα του περιβάλλοντος"), ["index2_4.html"]],
+      [normalize("Χάρτης και προσανατολισμός"), ["index2_5.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "environment-d-dimotikou") {
+    const base = BOOKS[subject].base;
+    const exact = new Map([
+      [normalize("Οικοσύστημα"), ["index3_1.html", "index3_2.html"]],
+      [normalize("Σχέσεις τροφής στο οικοσύστημα"), ["index3_2.html"]],
+      [normalize("Φυσικά χαρακτηριστικά του τόπου"), ["index1_5.html"]],
+      [normalize("Έργα και ανάγκες της κοινότητας"), ["index1_8.html", "index1_9.html"]]
+    ]);
+    const paths = exact.get(t) || [];
+    return paths.map(path => new URL(path, base).toString());
+  }
 
   if (subject === "pliroforiki-a-gymnasiou") {
     const base = BOOKS[subject].base;

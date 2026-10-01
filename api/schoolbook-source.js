@@ -2795,7 +2795,12 @@ function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
   }
 
   const scoped = htmlToText(String(rawHtml).slice(current.offset, endOffset)).trim();
-  if (!scoped || !normalize(scoped).includes(verified)) return "";
+  // The book uses both "Ε2" and "Ε.2" forms for introductory sections.
+  // Canonicalize only that numbering punctuation for the final provenance guard;
+  // all anchor + verified-heading matching above remains strict.
+  const normalizeScopedHeading = (value) =>
+    normalize(value).replace(/\\bε\\s+(\\d+)\\b/g, "ε$1");
+  if (!scoped || !normalizeScopedHeading(scoped).includes(normalizeScopedHeading(mapping.heading))) return "";
   return scoped;
 }
 

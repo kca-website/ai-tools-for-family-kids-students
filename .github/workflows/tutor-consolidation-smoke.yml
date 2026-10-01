@@ -160,6 +160,9 @@ jobs:
       - name: Run Phase 12 catalog schoolbook grounding
         run: node tests/phase12-catalog-schoolbook-grounding-smoke.mjs
 
+      - name: Run reconciled Primary grounding audit
+        run: node tests/pending-primary-grounding-smoke.mjs
+
       - name: Run Phase 13 Primary math schoolbook grounding
         run: node tests/phase13-primary-math-grounding-smoke.mjs
 

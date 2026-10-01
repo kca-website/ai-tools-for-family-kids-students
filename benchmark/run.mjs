@@ -263,6 +263,7 @@ const done = new Set();
 const rows = [];
 if (fs.existsSync(RAW)) for (const line of fs.readFileSync(RAW, 'utf8').split('\n').filter(Boolean)) {
   const r = JSON.parse(line); rows.push(r);
+  if (!matchesInferenceProfile(r)) continue;
   if (r.httpStatus === 200) done.add(r.caseId + '|' + r.model);
 }
 
@@ -302,6 +303,7 @@ if (!REPORT_ONLY) {
     spent += neurons;
     const row = {
       caseId: c.caseId, phase: PHASE, model, subject: c.subject, topic: c.topicLabel, action: c.action,
+      inferenceProfile: inferenceProfile(model),
       safetyCategory: c.safetyCategory || '',
       httpStatus: status, error: body?.error || '', sourceUnavailable: /official_source/.test(body?.error || ''),
       firstValid: validFormat(c.action, first.text), finalValid: status === 200 && validFormat(c.action, answer),
@@ -329,11 +331,18 @@ if (!REPORT_ONLY) {
 
 // ---------- reports ----------
 const csv = (cells) => cells.map(v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }).join(',');
+function inferenceProfile(model) {
+  return ['@cf/qwen/qwen3-30b-a3b-fp8', '@cf/zai-org/glm-4.7-flash'].includes(model) ? 'non-thinking-v1' : 'default';
+}
+function matchesInferenceProfile(row) {
+  const profile = inferenceProfile(row.model);
+  return profile === 'default' || row.inferenceProfile === profile;
+}
 const currentCaseIds = new Set(buildCases().map(c => c.caseId));
 // A resumed run may retry a failed case. Count each case/model once, using its
 // latest attempt; raw.jsonl retains every attempt for cost and failure analysis.
 const latest = new Map();
-for (const row of rows) if (currentCaseIds.has(row.caseId)) latest.set(row.caseId + '|' + row.model, row);
+for (const row of rows) if (currentCaseIds.has(row.caseId) && matchesInferenceProfile(row)) latest.set(row.caseId + '|' + row.model, row);
 const scored = [...latest.values()].filter(r => !r.sourceUnavailable);
 const groups = {};
 for (const r of scored) (groups[r.model + '|' + r.action] ||= []).push(r);

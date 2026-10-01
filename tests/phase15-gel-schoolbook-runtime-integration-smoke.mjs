@@ -53,9 +53,15 @@ assert.equal(highHtml, 174);
 assert.equal(mediumHtml, 14);
 assert.equal(exactPdf, 11);
 assert.equal(manualHtml, manualOverrides.count);
-assert.equal(manualHtml, 150);
+assert.equal(manualHtml, 166);
 
-assert.ok(blocked > 300);
+// Every inventory topic must be accounted for even as verified manual mappings
+// reduce the blocked backlog. Medium HTML topics are counted separately above.
+const totalTopics = Object.values(inventory.all()).reduce(
+  (total, subject) => total + (subject.topicMappings || []).length, 0
+);
+assert.equal(highHtml + exactPdf + manualHtml + blocked, totalTopics);
+assert.ok(blocked > 0);
 
 // Anchor scoping unit contract: keep nested headings in the current section,
 // but stop before the next peer section.
@@ -164,7 +170,7 @@ assert.equal(pdfResolved?.runtimeMode, "exact-pdf");
 assert.equal(pdfResolved?.mapping?.pdfPage, pdfCase[1].pdfPage);
 
 // Unreviewed manual rows must still fail closed. Reviewed rows are activated only
-// when they exist in the explicit Phase 17-20 override file.
+// when they exist in the explicit Phase 17-21 override file.
 let manualCase = null;
 for (const subject of Object.values(inventory.all())) {
   const topic = (subject.topicMappings || []).find((entry) =>

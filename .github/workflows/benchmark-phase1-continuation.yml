@@ -30,7 +30,7 @@ jobs:
         env:
           CLOUDFLARE_LLM_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_LLM_ACCOUNT_ID }}
           CLOUDFLARE_LLM_AI_TOKEN: ${{ secrets.CLOUDFLARE_LLM_AI_TOKEN }}
-        run: node benchmark/run.mjs --phase 1 --max-neurons 4000
+        run: node benchmark/run.mjs --phase 1 --max-neurons 1500 --skip-attempted --models @cf/google/gemma-4-26b-a4b-it,@cf/deepseek-ai/deepseek-r1-distill-qwen-32b
       - uses: actions/cache/save@v4
         if: always()
         with:

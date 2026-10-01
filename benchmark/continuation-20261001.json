@@ -1,8 +1,6 @@
 {
-  "phase": "1",
-  "maxNeuronsEstimate": 4000,
-  "stage": 2,
-  "priorRun": 36854057189,
-  "productionRoutingChanges": false,
-  "purpose": "Complete remaining Phase 1 cases, resuming the prior 25 non-thinking Qwen attempts. No schedule or model promotion."
+  "stage": 3,
+  "maxNeurons": 1500,
+  "priorRun": 36855028502,
+  "purpose": "Complete only unattempted Gemma and DeepSeek Phase 1 cases; no production routing change"
 }

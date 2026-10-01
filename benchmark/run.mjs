@@ -264,7 +264,7 @@ const rows = [];
 if (fs.existsSync(RAW)) for (const line of fs.readFileSync(RAW, 'utf8').split('\n').filter(Boolean)) {
   const r = JSON.parse(line); rows.push(r);
   if (!matchesInferenceProfile(r)) continue;
-  if (r.httpStatus === 200) done.add(r.caseId + '|' + r.model);
+  if (r.httpStatus === 200 || args['skip-attempted']) done.add(r.caseId + '|' + r.model);
 }
 
 if (!REPORT_ONLY) {

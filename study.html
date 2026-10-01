@@ -193,6 +193,7 @@
 <script src="/pdf-text-reader.js"></script>
 <script src="/guided-task-assistant.js"></script>
 <script src="/history-character-data.js"></script>
+<script src="/history-e-schoolbook-chapters.js"></script>
 <script src="/study-context.js"></script>
 <script>
 (() => {
@@ -240,6 +241,8 @@
       rows=cat?.getSubject?.(g,s,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')?.topics||[];
     }else rows=resolver()?.getTopics?.(z,g,s)||[];
 
+    if(s==='history-e-dimotikou'||s==='istoria-e-dimotikou') rows=(window.AITOOLSKIDS_HISTORY_E_CHAPTERS||[]).map(chapter=>({id:chapter.label,labelEl:chapter.label,labelEn:chapter.label,sourceType:'official-book-section'}));
+
     // AI Study must not offer broad navigation anchors when this subject is
     // configured to fail closed on an exact official schoolbook source.
     // Prefer the verified textbook subsections that /api/schoolbook-source
@@ -286,7 +289,7 @@
   };
   $('notesFile').addEventListener('change',()=>setTimeout(refreshAttachedUi,0));
 
-  function selectedSubjectId(){return $('subject').value||''}
+  function selectedSubjectId(){const id=$('subject').value||'';return /^history-[cdest]+-dimotikou$/.test(id)?id.replace(/^history-/, 'istoria-'):id}
   function sourceEvidenceUi(source,state='loaded'){
     currentOfficialSource=source||null;
     const box=$('sourceEvidence');
@@ -307,7 +310,7 @@
     box.classList.remove('hidden');
   }
   function requiresOfficialSource(){
-    const existing=['physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','thriskeftika-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'];
+    const existing=['istoria-e-dimotikou','physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','thriskeftika-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'];
     const gel=["algebra-b-lykeiou","archaia-a-lykeiou","archaia-b-lykeiou","archaia-g-lykeiou","biologia-b-lykeiou","biologia-g-lykeiou","chimeia-a-lykeiou","chimeia-b-lykeiou","chimeia-g-lykeiou","ekthesi-a-lykeiou","ekthesi-b-lykeiou","english-a-lykeiou","english-b-lykeiou","filosofia-b-lykeiou","fysiki-a-lykeiou","fysiki-b-lykeiou","fysiki-g-lykeiou","geometria-a-lykeiou","geometria-b-lykeiou","istoria-b-lykeiou","istoria-g-lykeiou","istoria-g-prosanatolismou","latinika-b-lykeiou","latinika-g-lykeiou","mathimatika-a-lykeiou","mathimatika-b-prosanatolismou","mathimatika-g-genikis","mathimatika-g-prosanatolismou","oikonomia-g-lykeiou","pliroforiki-g-lykeiou","politiki-paideia-a-lykeiou","thriskeftika-a-lykeiou","thriskeftika-b-lykeiou","thriskeftika-g-lykeiou"];
     return existing.includes(selectedSubjectId())||gel.includes(selectedSubjectId());
   }

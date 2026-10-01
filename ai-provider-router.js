@@ -223,6 +223,7 @@ async function callGemini({ messages, maxTokens, temperature, responseFormat, ti
     });
     const data = await response.json().catch(() => ({}));
     const candidate = data?.candidates?.[0];
+    if (!response.ok) console.warn('GEMINI_ERROR ' + JSON.stringify({status:response.status,code:data?.error?.status || '',message:String(data?.error?.message || '').replaceAll(process.env.GEMINI_API_KEY || '__none__', '[redacted]').slice(0,600)}));
     const text = (candidate?.content?.parts || []).filter(part => !part.thought && typeof part.text === 'string').map(part => part.text).join('');
     const blocked = !!data?.promptFeedback?.blockReason || ['SAFETY', 'RECITATION', 'PROHIBITED_CONTENT'].includes(candidate?.finishReason);
     const complete = candidate?.finishReason !== 'MAX_TOKENS';

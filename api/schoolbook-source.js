@@ -779,7 +779,12 @@ const BOOKS = {
   }
 };
 
+const HISTORY_E_CHAPTERS = require("../history-e-schoolbook-chapters.js");
 const ALIASES = {
+  "history-c-dimotikou": "istoria-c-dimotikou",
+  "history-d-dimotikou": "istoria-d-dimotikou",
+  "history-e-dimotikou": "istoria-e-dimotikou",
+  "history-st-dimotikou": "istoria-st-dimotikou",
   "math-b-gymnasiou": "mathimatika-b-gymnasiou",
   "chemistry-b-gymnasiou": "chimeia-b-gymnasiou",
   "geografia-b-gymnasiou": "geologia-geografia-b-gymnasiou",
@@ -1916,6 +1921,10 @@ module.exports = async function handler(req, res) {
           const label = sourceUrls[i] ? "[Official verified page: " + sourceUrls[i] + "]\n" : "";
           return label + htmlToText(html);
         }).join("\n\n");
+      } else if (subject === "istoria-e-dimotikou" && resolveHistoryEChapter(topic)) {
+        const scoped = selectHistoryEChapterText(pages[0], topic);
+        if (scoped.length < 500) return res.status(404).json({grounded:false,error:"verified_chapter_text_not_resolved"});
+        combinedText = scoped;
       } else if (gelAnchorScoped) {
         const scopedPages = pages.map((html, i) =>
           selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping)
@@ -2027,6 +2036,24 @@ module.exports = async function handler(req, res) {
 
 function clean(value, max) {
   return String(value || "").trim().slice(0, max);
+}
+
+function resolveHistoryEChapter(topic) {
+  const key = normalize(String(topic || "").replace(/^\s*\d+\.\s*/, ""));
+  return HISTORY_E_CHAPTERS.find(chapter => normalize(chapter.label.replace(/^\d+\.\s*/, "")) === key) || null;
+}
+
+function selectHistoryEChapterText(html, topic) {
+  const chapter = resolveHistoryEChapter(topic);
+  if (!chapter) return "";
+  const headings = [...String(html).matchAll(/<h[1-3]\b[^>]*>[\s\S]*?<\/h[1-3]>/gi)];
+  const index = headings.findIndex(heading => normalize(htmlToText(heading[0])) === normalize(chapter.label));
+  if (index < 0) return "";
+  const start = headings[index].index;
+  const tail = String(html).slice(start);
+  const recap = tail.search(/<h1\b/i);
+  const end = headings[index+1]?.index || (recap > 0 ? start+recap : String(html).length);
+  return htmlToText(String(html).slice(start, end));
 }
 
 function resolveDirectSourceUrls(subject, topic) {
@@ -2165,6 +2192,11 @@ function resolveDirectSourceUrls(subject, topic) {
     ]);
     const paths = exact.get(t) || [];
     return paths.map(path => new URL(path, base).toString());
+  }
+
+  if (subject === "istoria-e-dimotikou") {
+    const chapter = resolveHistoryEChapter(topic);
+    return chapter ? [chapter.url] : [];
   }
 
   if (subject === "istoria-st-dimotikou") {
@@ -3452,3 +3484,4 @@ module.exports._test = Object.freeze({
   RELIGION_B_OFFICIAL_SOURCE_MATERIAL,
   applyCurriculumTextScope
 });
+

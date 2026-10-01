@@ -728,6 +728,7 @@
     if(!res.ok||!body?.text){
       const err=new Error(body?.message||(lang==='en'?'Could not create a verified summary.':'Δεν δημιουργήθηκε επαληθευμένη σύνοψη.'));
       err.code=body?.error||'summary_failed';
+      if(err.code==='provider_limit'||res.status===429)err.fallback='puter';
       throw err;
     }
     $('providerStatus').textContent=body.verified

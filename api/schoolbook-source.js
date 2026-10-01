@@ -91,6 +91,23 @@ function catalogPdfSourceAllowed(url) {
   return OFFICIAL_PDF_TEXT?.officialPdfSourceAllowed?.(url) === true;
 }
 
+function officialHtmlManifestationKey(url) {
+  try {
+    const parsed = new URL(String(url || ""));
+    if (!catalogHtmlSourceAllowed(parsed.toString())) return "";
+    const match = parsed.pathname.match(/\/ebooks\/v\/html\/(\d+\/\d+)\//i);
+    return match ? match[1] : "";
+  } catch (_) {
+    return "";
+  }
+}
+
+function sameOfficialHtmlManifestation(sourceUrl, bookHtmlUrl) {
+  const sourceKey = officialHtmlManifestationKey(sourceUrl);
+  const bookKey = officialHtmlManifestationKey(bookHtmlUrl);
+  return !!sourceKey && sourceKey === bookKey;
+}
+
 function manualOverrideSources(mapping) {
   if (!mapping) return [];
   const explicit = Array.isArray(mapping.sources) ? mapping.sources : [];
@@ -174,9 +191,12 @@ function resolveGelInventoryTopic(subject, topic) {
   const manualHtmlVerified =
     !!manualOverride &&
     manualSources.length > 0 &&
-    manualSources.every((source) => catalogHtmlSourceAllowed(source.url)) &&
     !!book?.html?.url &&
-    catalogHtmlSourceAllowed(book.html.url);
+    catalogHtmlSourceAllowed(book.html.url) &&
+    manualSources.every((source) =>
+      catalogHtmlSourceAllowed(source.url) &&
+      sameOfficialHtmlManifestation(source.url, book.html.url)
+    );
 
   const exactPdfVerified =
     !manualOverride &&
@@ -3364,6 +3384,8 @@ module.exports._test = Object.freeze({
   buildGelInventoryBook,
   GEL_MANUAL_OVERRIDES,
   manualOverrideSources,
+  officialHtmlManifestationKey,
+  sameOfficialHtmlManifestation,
   catalogPdfSourceAllowed,
   gelVerifiedHeadingOffsets,
   findGelHtmlAnchorOffset,

@@ -357,6 +357,46 @@
         ]),
         verificationNote:"Η επίσημη οδηγία Ε.Α.Ε. 2026–27 για την Οικονομία ΟΠΟΠ Γ΄ Λυκείου έχει δημοσιευθεί και η πηγή είναι καταγεγραμμένη. Επειδή δεν έχει ακόμη ολοκληρωθεί ασφαλής section-by-section ανάγνωση του συνημμένου PDF, η εγγραφή παραμένει framework-only και δεν παρουσιάζει κεφάλαια ή υποενότητες ως exact ύλη."
       }),
+      "a|religion":Object.freeze({
+        id:"special-lyceum-a-religion-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"Θρησκευτικά",subjectId:"religion",sourceSubjectIds:Object.freeze(["religion","thriskeftika-a-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-10-01",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-iep-eae-2026-27-index",sourceTitle:"Θρησκευτικά Γενικής Παιδείας Α΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",sourceUrl:SOURCE_HUB,
+        officialAnchors:Object.freeze(["Θρησκευτικά Γενικής Παιδείας — Α΄ Λυκείου Ε.Α.Ε."]),
+        verificationNote:"Το ΙΕΠ δημοσιεύει ρητά οδηγίες 2026–27 για τα Θρησκευτικά Α΄–Γ΄ Λυκείου Ε.Α.Ε. Η εγγραφή είναι course-level framework και όχι exact σχολικό κείμενο."
+      }),
+      "b|religion":Object.freeze({
+        id:"special-lyceum-b-religion-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Θρησκευτικά",subjectId:"religion",sourceSubjectIds:Object.freeze(["religion","thriskeftika-b-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-10-01",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-iep-eae-2026-27-index",sourceTitle:"Θρησκευτικά Γενικής Παιδείας Β΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",sourceUrl:SOURCE_HUB,
+        officialAnchors:Object.freeze(["Θρησκευτικά Γενικής Παιδείας — Β΄ Λυκείου Ε.Α.Ε."]),
+        verificationNote:"Επίσημα δημοσιευμένο μάθημα/οδηγία 2026–27. Δεν προβάλλεται ως section-level exact mapping."
+      }),
+      "c|religion":Object.freeze({
+        id:"special-lyceum-c-religion-framework-2026-27",grade:"C",gradeId:"c",gradeLabel:"Γ΄ Λυκείου",
+        subject:"Θρησκευτικά",subjectId:"religion",sourceSubjectIds:Object.freeze(["religion","thriskeftika-g-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-10-01",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-iep-eae-2026-27-index",sourceTitle:"Θρησκευτικά Γενικής Παιδείας Γ΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",sourceUrl:SOURCE_HUB,
+        officialAnchors:Object.freeze(["Θρησκευτικά Γενικής Παιδείας — Γ΄ Λυκείου Ε.Α.Ε."]),
+        verificationNote:"Επίσημα δημοσιευμένο μάθημα/οδηγία 2026–27. Δεν προβάλλεται ως section-level exact mapping."
+      }),
+      "a|civics":Object.freeze({
+        id:"special-lyceum-a-civics-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"Πολιτική Παιδεία",subjectId:"civics",sourceSubjectIds:Object.freeze(["civics","politiki-paideia-a-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-10-01",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-iep-eae-2026-27-index",sourceTitle:"Πολιτική Παιδεία Γενικής Παιδείας Α΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",sourceUrl:SOURCE_HUB,
+        officialAnchors:Object.freeze(["Πολιτική Παιδεία Γενικής Παιδείας — Α΄ Λυκείου Ε.Α.Ε."]),
+        verificationNote:"Το ΙΕΠ δημοσιεύει ρητά οδηγίες 2026–27 για την Πολιτική Παιδεία Α΄ Λυκείου Ε.Α.Ε. Παραμένει framework μέχρι section-level επαλήθευση."
+      }),
+      "b|philosophy":Object.freeze({
+        id:"special-lyceum-b-philosophy-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Φιλοσοφία",subjectId:"philosophy",sourceSubjectIds:Object.freeze(["philosophy","filosofia-b-lykeiou"]),status:"verified-framework",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-10-01",annualInstructionsStatus:"framework-index-verified",
+        verificationBasis:"official-iep-eae-2026-27-index",sourceTitle:"Φιλοσοφία Γενικής Παιδείας Β΄ Λυκείου Ε.Α.Ε. — Οδηγίες 2026–27",sourceUrl:SOURCE_HUB,
+        officialAnchors:Object.freeze(["Φιλοσοφία Γενικής Παιδείας — Β΄ Λυκείου Ε.Α.Ε."]),
+        verificationNote:"Το ΙΕΠ δημοσιεύει ρητά οδηγίες 2026–27 για τη Φιλοσοφία Β΄ Λυκείου Ε.Α.Ε. Παραμένει framework μέχρι section-level επαλήθευση."
+      }),
       "a|biology":Object.freeze({
         id:"special-lyceum-a-biology-official-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
         subject:"Βιολογία",subjectId:"biology",sourceSubjectIds:Object.freeze(["biology","biologia-a-lykeiou"]),status:"verified",coverageStatus:"exact",

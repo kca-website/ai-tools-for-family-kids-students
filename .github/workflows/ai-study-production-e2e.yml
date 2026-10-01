@@ -1,0 +1,33 @@
+name: AI Study production E2E
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "study.html"
+      - "api/tutor-assistant.js"
+      - "api/source-summary.js"
+      - "api/schoolbook-source.js"
+      - "tests/ai-study-production-e2e.mjs"
+      - ".github/workflows/ai-study-production-e2e.yml"
+
+concurrency:
+  group: ai-study-production-e2e
+  cancel-in-progress: true
+
+jobs:
+  production-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Wait for production deployment
+        run: sleep 45
+      - name: Test all AI Study learner actions against production
+        env:
+          AITOOLSKIDS_PROD_BASE: https://www.aitools4kids.gr
+        run: node tests/ai-study-production-e2e.mjs

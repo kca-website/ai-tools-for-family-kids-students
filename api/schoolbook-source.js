@@ -2740,7 +2740,12 @@ function gelVerifiedHeadingOffsets(rawHtml) {
   return out.filter((entry) => Number.isInteger(entry.offset) && entry.offset >= 0);
 }
 
-function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
+function findGelHtmlAnchorOffset(rawHtml, fragment) {
+  const source = String(rawHtml || "");
+  const wanted = String(fragment || "").trim();
+  if (!source || !wanted) return -1;
+
+  const escaped = wanted.replace(/[.*+?^$()|[\]\\{}]/g, "\\function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
   if (!rawHtml || !sourceUrl || !mapping?.heading) return "";
   let fragment = "";
   try { fragment = decodeURIComponent(new URL(sourceUrl).hash.slice(1)); } catch (_) { return ""; }
@@ -2757,6 +2762,61 @@ function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
   if (index < 0) return "";
 
   const current = headings[index];
+  let endOffset = String(rawHtml).length;
+  for (let i = index + 1; i < headings.length; i++) {
+    const next = headings[i];
+    if (next.offset <= current.offset) continue;
+    if (next.depth <= current.depth) {
+      endOffset = next.offset;
+      break;
+    }
+  }
+
+  const scoped = htmlToText(String(rawHtml).slice(current.offset, endOffset)).trim();
+  if (!scoped || !normalize(scoped).includes(verified)) return "";
+  return scoped;
+}
+");
+  const patterns = [
+    new RegExp("\\b(?:id|name)\\s*=\\s*[\\\"']" + escaped + "[\\\"']", "i"),
+    new RegExp("\\b(?:id|name)\\s*=\\s*" + escaped + "(?=\\s|>)", "i")
+  ];
+  for (const pattern of patterns) {
+    const match = pattern.exec(source);
+    if (match) return match.index;
+  }
+  return -1;
+}
+
+function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
+  if (!rawHtml || !sourceUrl || !mapping?.heading) return "";
+  let fragment = "";
+  try { fragment = decodeURIComponent(new URL(sourceUrl).hash.slice(1)); } catch (_) { return ""; }
+  if (!fragment || mapping?.granularity !== "section-anchor") return "";
+
+  const anchorOffset = findGelHtmlAnchorOffset(rawHtml, fragment);
+  if (anchorOffset < 0) return "";
+
+  const headings = gelVerifiedHeadingOffsets(rawHtml);
+  const verified = normalize(mapping.heading);
+  const matchesVerifiedHeading = (entry) => {
+    const candidate = normalize(entry.num + " " + entry.title);
+    return candidate === verified ||
+      (verified.length >= 8 && (candidate.startsWith(verified) || verified.startsWith(candidate)));
+  };
+
+  // The official ebooks markup often puts the id/name anchor in a separate
+  // element immediately before the visible heading. Resolve by proximity to
+  // the exact anchor, while still requiring the verified heading text.
+  const candidates = headings
+    .map((entry, index) => ({ entry, index, distance: Math.abs(entry.offset - anchorOffset) }))
+    .filter((row) => matchesVerifiedHeading(row.entry) && row.distance <= 12000)
+    .sort((a, b) => a.distance - b.distance);
+
+  if (!candidates.length) return "";
+  const index = candidates[0].index;
+  const current = headings[index];
+
   let endOffset = String(rawHtml).length;
   for (let i = index + 1; i < headings.length; i++) {
     const next = headings[i];
@@ -3149,6 +3209,7 @@ module.exports._test = Object.freeze({
   resolveGelInventoryTopic,
   buildGelInventoryBook,
   gelVerifiedHeadingOffsets,
+  findGelHtmlAnchorOffset,
   selectGelAnchoredSectionText,
   HISTORY_B_2026_2027_PATHS,
   HISTORY_A_GYM_DIAGNOSTIC_PATHS,

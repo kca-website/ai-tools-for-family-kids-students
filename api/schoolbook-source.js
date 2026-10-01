@@ -1545,6 +1545,23 @@ function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
 
+  if (subject === "istoria-st-dimotikou") {
+    const base = "https://ebooks.edu.gr/ebooks/v/html/8547/2188/Istoria_ST-Dimotikou_html-empl/";
+    const units = [
+      ["Ενότητα Α — Οι εξελίξεις στην Ευρώπη κατά τους Νεότερους Χρόνους (μέσα 15ου αιώνα - αρχές 19ου αιώνα)", 1, 3],
+      ["Ενότητα Β — Οι Έλληνες κάτω από την οθωμανική και τη λατινική κυριαρχία (1453-1821)", 2, 10],
+      ["Ενότητα Γ — Η Μεγάλη Επανάσταση (1821-1830)", 3, 18],
+      ["Ενότητα Δ — Η Ελλάδα στον 19ο αιώνα", 4, 6],
+      ["Ενότητα Ε — Η Ελλάδα στον 20ό αιώνα", 5, 12]
+    ];
+    const exact = units.find(([label]) => normalize(label) === t);
+    if (!exact) return [];
+    const [, unitNumber, chapterCount] = exact;
+    return Array.from({ length: chapterCount }, (_, i) =>
+      new URL(`index${unitNumber}_${i + 1}.html`, base).toString()
+    );
+  }
+
   if (subject === "istoria-b-gymnasiou") {
     const base = BOOKS[subject].base;
     return resolveHistoryCurriculumPaths(topic).map(path => new URL(path, base).toString());

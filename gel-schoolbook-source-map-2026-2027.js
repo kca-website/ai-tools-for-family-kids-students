@@ -106,10 +106,10 @@
   "subjects": 35,
   "byStatus": {"exact-pdf":7,"exact-html":27,"no-safe-mapping":1},
   "topics": {
-   "total": 638,
+   "total": 636,
    "exact-html": 237,
-   "exact-pdf": 22,
-   "needs-manual-review": 374,
+   "exact-pdf": 34,
+   "needs-manual-review": 360,
    "no-safe-mapping": 5
   }
  },
@@ -176,15 +176,264 @@
    "topicMappings": [{"topicId":"ekthesi-a-lykeiou.official-section-1","label":"Γλώσσα, γλωσσική ποικιλία και οπτική γωνία","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2370","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexa_2.html","heading":"ΙΙ. Οι ποικιλίες της γλώσσας","score":1}]},{"topicId":"ekthesi-a-lykeiou.official-section-2","label":"Δημιουργικότητα της γλώσσας","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2370","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexa_4.html","heading":"IV. Η δημιουργικότητα της γλώσσας","score":1}]},{"topicId":"ekthesi-a-lykeiou.official-section-3","label":"Γλωσσομάθεια και εκμάθηση ξένων γλωσσών","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a-lykeiou.official-section-4","label":"Αναλφαβητισμός","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a-lykeiou.official-section-5","label":"Διάλογος και επικοινωνία","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2370","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexb_2.html","heading":"ΙΙ. Διάλογος","score":1}]},{"topicId":"ekthesi-a-lykeiou.official-section-6","label":"Εφηβεία","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a-lykeiou.official-section-7","label":"Αγάπη και ανθρώπινες σχέσεις","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a-lykeiou.official-section-8","label":"Ενδυμασία και μόδα","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a-lykeiou.official-section-9","label":"Γηρατειά και νεότητα","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a-lykeiou.official-section-10","label":"Κωμικό και γέλιο","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2371","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2722/Thematikoi-Kykloi_A-B-G-Lykeiou_html-apli/index_07.htm","heading":"6 Το γέλιο","score":1}]},{"topicId":"ekthesi-a-lykeiou.official-section-11","label":"Λογοτεχνία: φύλα και ταυτότητες","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a-lykeiou.official-section-12","label":"Λογοτεχνία: παράδοση και μοντερνισμός στη νεοελληνική ποίηση","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2371","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2722/Thematikoi-Kykloi_A-B-G-Lykeiou_html-apli/index_20.htm","heading":"19 Παράδοση","score":1}]},{"topicId":"ekthesi-a.topic-sentence-missing","label":"Θεματική πρόταση","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"ekthesi-a.development-method-confusion","label":"Τρόποι ανάπτυξης παραγράφου","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2369","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexB_06.html","heading":"Η' Παράγραφος","score":1}]},{"topicId":"ekthesi-a.unity-coherence","label":"Ενότητα & συνοχή παραγράφου","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2369","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexA_01.html","heading":"Ενότητες","score":1},{"work":"8547/2369","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexB_06.html","heading":"Η' Παράγραφος","score":1}]},{"topicId":"ekthesi-a.summary-length","label":"Όριο λέξεων περίληψης","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2369","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexB_07.html","heading":"Θ' Περίληψη","score":1}]},{"topicId":"neoelliniki-a-lykeiou.topic-1","label":"Επικοινωνιακή περίσταση και ύφος","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"neoelliniki-a-lykeiou.topic-3","label":"Περίληψη και ουσιώδεις πληροφορίες","status":"needs-manual-review","reason":"unnumbered-topic-no-equal-heading","candidates":[{"work":"8547/2369","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexB_07.html","heading":"Θ' Περίληψη","score":1}]},{"topicId":"neoelliniki-a-lykeiou.topic-4","label":"Ισχυρισμός και τεκμηρίωση","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"},{"topicId":"neoelliniki-a-lykeiou.topic-5","label":"Γλωσσικές επιλογές και ύφος","status":"needs-manual-review","reason":"unnumbered-topic-no-matching-heading"}]
   },
   "politiki-paideia-a-lykeiou": {
-   "subjectId": "politiki-paideia-a-lykeiou",
-   "grade": "a",
-   "labelEl": "Πολιτική Παιδεία, Α' Λυκείου",
-   "status": "exact-pdf",
-   "topicCoverage": "none",
-   "books": [{"work":"8547/2429","title":"ΠΟΛΙΤΙΚΗ ΠΑΙΔΕΙΑ","role":"primary","status":"exact-pdf","officialRootUrl":"https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/","catalogUrl":"https://ebooks.edu.gr/ebooks/handle/8547/2429","html":null,"pdf":{"manifestation":"8547/2596","url":"https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/","catalogStatus1":true},"evidence":[{"doc":"iep-politiki-paideia","loc":"επικεφαλίδα — Σχολικά εγχειρίδια","quote":"ΣΧΟΛΙΚΑ ΕΓΧΕΙΡΙΔΙΑ: 1. Πολιτική Παιδεία Α΄ Γενικού Λυκείου και ΕΠΑ.Λ., των Π. Μάραντου & Κ. Θεριανού, ΙΤΥΕ «ΔΙΟΦΑΝΤΟΣ» - Βιβλίο μαθητή.","kind":"text"}]}],
-   "unresolvedReferences": ["Οικονομικά Γ΄ Γυμνασίου (Μ. Ιωάννου-Σεργίου κ.ά., 2024) — δεύτερο εγχειρίδιο που ονομάζει το ΙΕΠ για ορισμένες ενότητες του 4ου κεφαλαίου· δεν εντοπίστηκε στον κατάλογο K09 του ebooks.edu.gr με αυτόματη αναζήτηση τίτλου."],
-   "topicSummary": {"total":14,"exact-html":0,"exact-pdf":0,"needs-manual-review":14,"no-safe-mapping":0},
-   "topicMappings": [{"topicId":"politiki-paideia-a-lykeiou.topic-1","label":"Κοινωνία και κοινωνική οργάνωση","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-2","label":"Κοινωνικοποίηση και κοινωνικοί θεσμοί","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-3","label":"Κοινωνικές ομάδες, ανισότητες και στερεότυπα","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-4","label":"Το κράτος και οι λειτουργίες του","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-5","label":"Πολίτης, πολιτειότητα και δημοκρατία","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-6","label":"Σύνταγμα και διάκριση των εξουσιών","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-7","label":"Ατομικά, πολιτικά και κοινωνικά δικαιώματα","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-8","label":"Υποχρεώσεις και ενεργός συμμετοχή του πολίτη","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-9","label":"Βασικές οικονομικές ανάγκες και αγαθά","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-10","label":"Παραγωγικοί συντελεστές και παραγωγή","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-11","label":"Αγορά, τιμές και ανταγωνισμός","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-12","label":"Χρήμα, τράπεζες και οικονομικές συναλλαγές","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-13","label":"Δημόσια οικονομικά και φορολογία","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"},{"topicId":"politiki-paideia-a-lykeiou.topic-14","label":"Ευρωπαϊκή Ένωση και παγκοσμιοποίηση","status":"needs-manual-review","reason":"pdf-only-book-no-page-anchor"}]
+    "subjectId": "politiki-paideia-a-lykeiou",
+    "grade": "a",
+    "labelEl": "Πολιτική Παιδεία, Α' Λυκείου",
+    "status": "exact-pdf",
+    "topicCoverage": "complete",
+    "books": [
+      {
+        "work": "8547/2429",
+        "title": "ΠΟΛΙΤΙΚΗ ΠΑΙΔΕΙΑ",
+        "role": "primary",
+        "status": "exact-pdf",
+        "officialRootUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
+        "catalogUrl": "https://ebooks.edu.gr/ebooks/handle/8547/2429",
+        "html": null,
+        "pdf": {
+          "manifestation": "8547/2596",
+          "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/",
+          "catalogStatus1": true
+        },
+        "evidence": [
+          {
+            "doc": "iep-politiki-paideia",
+            "loc": "επικεφαλίδα — Σχολικά εγχειρίδια",
+            "quote": "ΣΧΟΛΙΚΑ ΕΓΧΕΙΡΙΔΙΑ: 1. Πολιτική Παιδεία Α΄ Γενικού Λυκείου και ΕΠΑ.Λ., των Π. Μάραντου & Κ. Θεριανού, ΙΤΥΕ «ΔΙΟΦΑΝΤΟΣ» - Βιβλίο μαθητή.",
+            "kind": "text"
+          }
+        ]
+      },
+      {
+        "work": "8547/5582",
+        "title": "ΟΙΚΟΝΟΜΙΚΑ Γ΄ ΓΥΜΝΑΣΙΟΥ",
+        "role": "primary",
+        "status": "exact-pdf",
+        "officialRootUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/5584/22-0293-01_V2_Oikonomika_G-Gymnasiou_Vivlio-Mathiti/",
+        "catalogUrl": "https://ebooks.edu.gr/ebooks/handle/8547/5582",
+        "html": null,
+        "pdf": {
+          "manifestation": "8547/5584",
+          "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/5584/22-0293-01_V2_Oikonomika_G-Gymnasiou_Vivlio-Mathiti/",
+          "catalogStatus1": true
+        },
+        "evidence": [
+          {
+            "doc": "iep-politiki-paideia",
+            "loc": "Κεφάλαιο 5 — Βασικά Οικονομικά Μεγέθη",
+            "quote": "Οικονομικά Γ΄ Γυμνασίου",
+            "kind": "text"
+          },
+          {
+            "doc": "ebooks-pdf",
+            "loc": "PDF 22-0293-01_V2 — Κεφάλαιο 5",
+            "quote": "ΚΕΦΑΛΑΙΟ 5 – ΒΑΣΙΚΑ ΟΙΚΟΝΟΜΙΚΑ ΜΕΓΕΘΗ",
+            "kind": "pdf-content"
+          }
+        ]
+      }
+    ],
+    "topicSummary": {
+      "total": 12,
+      "exact-html": 0,
+      "exact-pdf": 12,
+      "needs-manual-review": 0,
+      "no-safe-mapping": 0
+    },
+    "topicMappings": [
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-1",
+        "label": "1.1 Άνθρωπος: κοινωνικό, οικονομικό και πολιτικό ον",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=11",
+        "pdfPage": 11,
+        "pdfPageEnd": 12,
+        "printedPage": null,
+        "heading": "1.1 Άνθρωπος: κοινωνικό, οικονομικό και πολιτικό ον",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-2",
+        "label": "1.5 Η οικονομία — κοινωνία, πολιτεία και οικονομία",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=19",
+        "pdfPage": 19,
+        "pdfPageEnd": 21,
+        "printedPage": null,
+        "heading": "1.5 Η οικονομία",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-3",
+        "label": "2.1–2.2 Η κοινωνία και τα βασικά χαρακτηριστικά της ελληνικής κοινωνίας",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=23",
+        "pdfPage": 23,
+        "pdfPageEnd": 31,
+        "printedPage": null,
+        "heading": "2.1 Από την αγροτική κοινωνία στην κοινωνία της πληροφορίας και της γνώσης",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-4",
+        "label": "4.4–4.5 Το κράτος και βασικά χαρακτηριστικά της ελληνικής οικονομίας",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=53",
+        "pdfPage": 53,
+        "pdfPageEnd": 57,
+        "printedPage": null,
+        "heading": "4.4 Το κράτος ως παραγωγός και ως καταναλωτής",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-5",
+        "label": "5.1–5.6 Βασικά οικονομικά μεγέθη: ΑΕΠ, εισόδημα και βιοτικό επίπεδο",
+        "status": "exact-pdf",
+        "work": "8547/5582",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/5584/22-0293-01_V2_Oikonomika_G-Gymnasiou_Vivlio-Mathiti/#page=77",
+        "pdfPage": 77,
+        "pdfPageEnd": 83,
+        "printedPage": null,
+        "heading": "5.1 ΕΙΣΑΓΩΓΗ",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-6",
+        "label": "5.8 Πληθωρισμός",
+        "status": "exact-pdf",
+        "work": "8547/5582",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/5584/22-0293-01_V2_Oikonomika_G-Gymnasiou_Vivlio-Mathiti/#page=88",
+        "pdfPage": 88,
+        "pdfPageEnd": 88,
+        "printedPage": null,
+        "heading": "5.8 ΠΛΗΘΩΡΙΣΜΟΣ",
+        "granularity": "pdf-page",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-7",
+        "label": "6.1 Κοινωνικοποίηση και πολιτικοποίηση",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=73",
+        "pdfPage": 73,
+        "pdfPageEnd": 74,
+        "printedPage": null,
+        "heading": "6.1 Κοινωνικοποίηση και πολιτικοποίηση",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-8",
+        "label": "6.2.4–6.3 ΜΜΕ, πολιτικά κόμματα, μαθητικές κοινότητες και κοινωνικός έλεγχος",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=77",
+        "pdfPage": 77,
+        "pdfPageEnd": 83,
+        "printedPage": null,
+        "heading": "6.2.4 Τα Μέσα Μαζικής Επικοινωνίας",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-9",
+        "label": "7.6–7.8 Φορολογική συνείδηση, κοινωνική ευαισθησία και εθελοντισμός",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=95",
+        "pdfPage": 95,
+        "pdfPageEnd": 100,
+        "printedPage": null,
+        "heading": "7.6 Φορολογική συνείδηση",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-10",
+        "label": "7.10 Ο ψηφιακός πολίτης",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=103",
+        "pdfPage": 103,
+        "pdfPageEnd": 104,
+        "printedPage": null,
+        "heading": "7.10 Ο ψηφιακός πολίτης",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-11",
+        "label": "12.1–12.4.4 Μετανάστευση, πρόσφυγες, ιθαγένεια και δημοκρατική συμβίωση",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=157",
+        "pdfPage": 157,
+        "pdfPageEnd": 164,
+        "printedPage": null,
+        "heading": "12.1 Η μετανάστευση",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      },
+      {
+        "topicId": "politiki-paideia-a-lykeiou.topic-12",
+        "label": "13.1–13.5 Κοινωνικά προβλήματα, φτώχεια, βία, υπερδανεισμός και δημογραφικό",
+        "status": "exact-pdf",
+        "work": "8547/2429",
+        "url": "https://ebooks.edu.gr/ebooks/v/pdf/8547/2596/22-0228-01_V5_Politiki-Paideia_A-Lykeiou_Vivlio-Mathiti/#page=171",
+        "pdfPage": 171,
+        "pdfPageEnd": 180,
+        "printedPage": null,
+        "heading": "13.1 Κοινωνικά προβλήματα",
+        "granularity": "pdf-section",
+        "matchBasis": "2026-27-iep-guidance+verified-official-pdf-section-range",
+        "labelParaphrase": true,
+        "annualScopeVerified": true,
+        "curriculumSource": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%A0%CE%9F%CE%9B%CE%99%CE%A4%CE%99%CE%9A%CE%97-%CE%A0%CE%91%CE%99%CE%94%CE%95%CE%99%CE%91_%CE%91_%CE%93%CE%95%CE%9B_2026-2027.zip"
+      }
+    ]
   },
   "fysiki-a-lykeiou": {
    "subjectId": "fysiki-a-lykeiou",

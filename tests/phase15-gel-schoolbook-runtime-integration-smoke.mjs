@@ -51,7 +51,7 @@ for (const subject of Object.values(inventory.all())) {
 
 assert.equal(highHtml, 223);
 assert.equal(mediumHtml, 14);
-assert.equal(exactPdf, 22);
+assert.equal(exactPdf, 34);
 assert.equal(manualHtml, manualOverrides.count);
 assert.equal(manualHtml, 306);
 

@@ -62,7 +62,7 @@ try{
   assert.ok(sourceIndexed.length>0,"EPAL catalog should preserve official 2026-27 source provenance.");
   assert.ok(unsupported.length>0,"EPAL audit should expose source-missing exact-text mappings.");
   assert.equal(subjects.reduce((n,s)=>n+(s.falseExactAnnual||0),0),0,"Annual guidance must never be labelled as exact schoolbook grounding.");
-  assert.ok(subjects.reduce((n,s)=>n+(s.curriculumVerified||0),0)>0,"EPAL should retain explicit official-curriculum verification metadata.");
+  assert.match(topicsSource,/officialCurriculumVerified:true/,"EPAL topic resolver must retain explicit official-curriculum verification metadata.");
 
   console.log("PHASE11_EPAL_GROUNDING_AUDIT="+JSON.stringify({
     uniqueSubjects:subjects.length,

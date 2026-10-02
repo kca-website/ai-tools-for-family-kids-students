@@ -11,7 +11,6 @@
         const q = url.searchParams;
         const zone = q.get('zone');
         q.delete('zone'); q.set('mode', 'character');
-        q.set('subject', q.get('subject').replace(/^history-/, 'istoria-'));
         const targetRole = zone === 'high' && role !== 'guardian' ? 'student' : 'guardian';
         const href = `/${zone}/${targetRole}/tutor?${q}`;
         const school = en ? {primary:'Primary',middle:'Middle School',high:'High School'}[zone] : {primary:'Δημοτικό',middle:'Γυμνάσιο',high:'Λύκειο'}[zone];

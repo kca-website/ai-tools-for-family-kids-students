@@ -134,3 +134,95 @@ map("middle","ancient",["ai-help","chatgpt","perplexity","notebooklm"],"Κατα
 map("high","ancient",["ai-help","chatgpt","perplexity","notebooklm"],"Κατανόηση, μορφολογία και σύνταξη χωρίς έτοιμη μετάφραση.","Comprehension, morphology and syntax without ready translation.");map("high","latin",["ai-help","chatgpt","perplexity"],"Μορφολογία, σύνταξη και κατανόηση πριν από τη μετάφραση.","Morphology, syntax and comprehension before translation.");map("high","informatics",["ai-help","replit-ai","github-copilot","notebooklm"],"Δική σου λύση πρώτα, AI για έλεγχο/debugging.","Own solution first, AI for checking/debugging.");map("high","pe",["ai-help"],"Στόχοι και αναστοχασμός· όχι ιατρικές ή εξατομικευμένες οδηγίες άσκησης.","Goals and reflection; no medical/personalised exercise prescription.");map("high","economics",["ai-help","perplexity","wolfram-alpha","notebooklm"],"Οικονομικές έννοιες, γραφήματα και τεκμηρίωση με πηγές.","Economic concepts, graphs and evidence with sources.");
 window.AITOOLSKIDS_GENERAL_SUBJECT_EXPANSION=Object.freeze({version:2,verified:"2026-09-27",sources:{primary:PRIMARY,middle:MIDDLE,high:HIGH,skills:SKILLS,informatics:INFORMATICS_IEP,informaticsBook:INFORMATICS_BOOK,physicalEducationBook:PE_BOOK,technologyABooks:Object.freeze({a:TECH_A_BOOK,b:TECH_B_BOOK})}});
 })();
+// Full tool lists + need maps for every school subject beyond the five core ones,
+// so the Tools filter (and the Curriculum Map "Which tool can help?" deep link)
+// recommends subject-specific tools instead of a generic or near-empty list.
+// Only existing TOOLS ids are used; age limits are still enforced by app.js.
+(function(){
+"use strict";
+if(typeof CURRICULUM==="undefined") return;
+const LISTS={
+  religion:{
+    primary:["ai-help","google-arts-culture","immersive-reader","autodraw"],
+    middle:["ai-help","google-arts-culture","perplexity","notebooklm","quizlet","mindmup","immersive-reader","gemini-education","copilot","chatgpt"],
+    high:["ai-help","google-arts-culture","perplexity","notebooklm","quizlet","mindmup","zotero","gemini-education","copilot","chatgpt","digital-tutoring"]
+  },
+  civics:{
+    primary:["ai-help","google-arts-culture","immersive-reader","autodraw"],
+    middle:["ai-help","perplexity","notebooklm","mindmup","quizlet","gamma","gemini-education","copilot","chatgpt"],
+    high:["ai-help","perplexity","notebooklm","mindmup","quizlet","zotero","gamma","gemini-education","copilot","chatgpt","digital-tutoring"]
+  },
+  informatics:{
+    primary:["codeai","ai-help","autodraw"],
+    middle:["codeai","ai-help","replit-ai","github-copilot","elements-of-ai","quizlet","gemini-education","copilot","chatgpt"],
+    high:["ai-help","codeai","replit-ai","github-copilot","google-colab","elements-of-ai","claude-academy","notebooklm","quizlet","gemini-education","chatgpt","digital-tutoring"]
+  },
+  technology:{
+    middle:["ai-help","phet","codeai","miro-ai","mindmup","canva-magic","gamma","perplexity","copilot","chatgpt"],
+    high:["ai-help","codeai","replit-ai","google-colab","wolfram-alpha","phet","miro-ai","gamma","perplexity","chatgpt"]
+  },
+  arts:{
+    primary:["autodraw","google-arts-culture","canva-magic","ai-help"],
+    middle:["google-arts-culture","autodraw","canva-magic","ai-help","gamma","perplexity","chatgpt"],
+    high:["google-arts-culture","canva-magic","autodraw","ai-help","gamma","perplexity","notebooklm","chatgpt"]
+  },
+  pe:{
+    primary:["ai-help","immersive-reader"],
+    middle:["ai-help","quizlet","notion","perplexity","immersive-reader","chatgpt"],
+    high:["ai-help","quizlet","notion","perplexity","notebooklm","chatgpt"]
+  },
+  skills:{
+    primary:["ai-help","autodraw","canva-magic","mindmup","immersive-reader"],
+    middle:["ai-help","mindmup","miro-ai","canva-magic","gamma","notebooklm","perplexity","notion"],
+    high:["ai-help","mindmup","miro-ai","gamma","canva-magic","notebooklm","perplexity","notion","zotero"]
+  },
+  ancient:{
+    middle:["ai-help","notebooklm","quizlet","anki","perplexity","immersive-reader","gemini-education","chatgpt"],
+    high:["ai-help","notebooklm","quizlet","anki","perplexity","gemini-education","chatgpt","digital-tutoring"]
+  },
+  latin:{
+    high:["ai-help","quizlet","anki","notebooklm","perplexity","chatgpt","digital-tutoring"]
+  },
+  economics:{
+    high:["ai-help","perplexity","wolfram-alpha","desmos","notebooklm","quizlet","chatgpt","digital-tutoring"]
+  }
+};
+const NOTES={
+  religion:["Κατανόηση ενοτήτων με σεβασμό, ιστορικό/πολιτιστικό πλαίσιο και έλεγχο πηγών.","Understanding units respectfully, with historical/cultural context and source checking."],
+  civics:["Κοινωνικά θέματα με έλεγχο πηγών, οργάνωση επιχειρημάτων και επανάληψη όρων.","Social topics with source checking, argument organisation and term revision."],
+  informatics:["Αλγόριθμοι και κώδικας: πρώτα η δική σου λύση, μετά έλεγχος και εξήγηση με AI.","Algorithms and code: your own solution first, then checking and explanation with AI."],
+  technology:["Σχεδιασμός, κατασκευές και ερευνητική μέθοδος με προσομοιώσεις και οργάνωση ιδεών.","Design, construction and research method with simulations and idea organisation."],
+  arts:["Δική σου ιδέα πρώτα· ψηφιακά/AI εργαλεία για έμπνευση, γνωριμία με έργα και παρουσίαση.","Your own idea first; digital/AI tools for inspiration, exploring artworks and presenting."],
+  pe:["Η AI δεν αντικαθιστά την άσκηση· μόνο κανόνες, θεωρία, στόχοι και αναστοχασμός.","AI never replaces exercise; only rules, theory, goals and reflection."],
+  skills:["Εργαστήρια Δεξιοτήτων: οργάνωση ιδεών, ομαδικά σχέδια δράσης και παρουσίαση.","Skills Labs: organising ideas, group action plans and presenting."],
+  ancient:["Κατανόηση, μορφολογία και σύνταξη πάνω στο πραγματικό κείμενο, χωρίς έτοιμη μετάφραση.","Comprehension, morphology and syntax on the actual text, without a ready translation."],
+  latin:["Μορφολογία, σύνταξη και λεξιλόγιο με ενεργητική επανάληψη πριν από τη μετάφραση.","Morphology, syntax and vocabulary with active recall before translating."],
+  economics:["Οικονομικές έννοιες, διαγράμματα και υπολογισμοί με έλεγχο μετά την προσπάθεια.","Economic concepts, graphs and calculations, checked after your own attempt."]
+};
+Object.keys(LISTS).forEach((subject)=>{
+  Object.keys(LISTS[subject]).forEach((zone)=>{
+    if(!CURRICULUM[zone]) return;
+    const current=CURRICULUM[zone][subject];
+    const ids=[...LISTS[subject][zone],...((current&&current.toolIds)||[])].filter((id,i,a)=>a.indexOf(id)===i);
+    CURRICULUM[zone][subject]={...(current||{}),toolIds:ids,noteEl:(current&&current.noteEl)||NOTES[subject][0],noteEn:(current&&current.noteEn)||NOTES[subject][1]};
+  });
+});
+if(typeof SUBJECTS!=="undefined"&&Array.isArray(SUBJECTS)){
+  [{id:"technology",icon:"💻",labelEl:"Τεχνολογία & Πληροφορική",labelEn:"Technology & Computing"},{id:"civics",icon:"🏛️",labelEl:"Κοινωνικές Επιστήμες",labelEn:"Social Sciences"},{id:"religion",icon:"🤝",labelEl:"Θρησκευτικά",labelEn:"Religious Studies"}]
+    .forEach((x)=>{if(!SUBJECTS.some((s)=>s.id===x.id))SUBJECTS.push(x);});
+}
+if(typeof NEED_TOOL_MAP==="undefined") return;
+const NEEDS={
+  religion:{understand:["ai-help","google-arts-culture","notebooklm","gemini-education","chatgpt"],practice:["quizlet","ai-help","chatgpt"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity","notebooklm","google-arts-culture"],revise:["quizlet","ai-help","mindmup","notebooklm","digital-tutoring"],research:["perplexity","google-arts-culture","notebooklm","zotero"],"reading-support":["immersive-reader","ai-help","notebooklm"],"step-by-step":["ai-help","mindmup","immersive-reader"]},
+  civics:{understand:["ai-help","notebooklm","gemini-education","chatgpt","google-arts-culture"],practice:["quizlet","ai-help","chatgpt"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity","notebooklm"],revise:["quizlet","ai-help","mindmup","notebooklm","digital-tutoring"],research:["perplexity","notebooklm","zotero","gamma"],"reading-support":["immersive-reader","ai-help","notebooklm"],"step-by-step":["ai-help","mindmup","immersive-reader"]},
+  informatics:{understand:["ai-help","codeai","elements-of-ai","claude-academy","gemini-education","chatgpt"],practice:["codeai","replit-ai","google-colab","ai-help","quizlet"],hint:["ai-help","chatgpt"],check:["ai-help","github-copilot","replit-ai","chatgpt"],revise:["quizlet","ai-help","notebooklm","digital-tutoring"],research:["notebooklm","elements-of-ai","claude-academy"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","codeai"]},
+  technology:{understand:["ai-help","phet","codeai","chatgpt","copilot"],practice:["codeai","replit-ai","google-colab","phet","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","wolfram-alpha","chatgpt"],revise:["ai-help","mindmup","miro-ai"],research:["perplexity","gamma","miro-ai"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","mindmup","miro-ai"]},
+  arts:{understand:["google-arts-culture","ai-help","chatgpt"],practice:["autodraw","canva-magic","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","google-arts-culture"],revise:["google-arts-culture","ai-help","notebooklm"],research:["google-arts-culture","perplexity","gamma"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","autodraw"]},
+  pe:{understand:["ai-help","chatgpt","notebooklm"],practice:["ai-help","notion"],hint:["ai-help"],check:["ai-help","perplexity"],revise:["quizlet","ai-help","notebooklm"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","notion"]},
+  skills:{understand:["ai-help","notebooklm"],practice:["ai-help","canva-magic","autodraw"],hint:["ai-help"],check:["ai-help","perplexity"],revise:["mindmup","ai-help","notion"],research:["perplexity","notebooklm","zotero","gamma"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","mindmup","miro-ai","notion"]},
+  ancient:{understand:["ai-help","notebooklm","gemini-education","chatgpt"],practice:["quizlet","anki","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity","notebooklm"],revise:["quizlet","anki","ai-help","notebooklm","digital-tutoring"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help","notebooklm"],"step-by-step":["ai-help","immersive-reader"]},
+  latin:{understand:["ai-help","notebooklm","chatgpt"],practice:["quizlet","anki","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity"],revise:["quizlet","anki","ai-help","digital-tutoring"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help"]},
+  economics:{understand:["ai-help","notebooklm","chatgpt"],practice:["quizlet","ai-help","desmos"],hint:["ai-help","chatgpt"],check:["ai-help","wolfram-alpha","desmos"],revise:["quizlet","ai-help","notebooklm","digital-tutoring"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","wolfram-alpha"]}
+};
+Object.keys(NEEDS).forEach((subject)=>{if(!NEED_TOOL_MAP[subject])NEED_TOOL_MAP[subject]=NEEDS[subject];});
+})();

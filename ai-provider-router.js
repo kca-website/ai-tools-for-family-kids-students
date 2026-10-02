@@ -137,6 +137,7 @@ async function generateChat({
   timeoutMs = DEFAULT_TIMEOUT_MS,
   providerOrder,
   modelProfile = 'default',
+  validateText,
 } = {}) {
   const order = getProviderOrder(providerOrder);
   const profile = normalizeProfile(modelProfile);
@@ -179,15 +180,20 @@ async function generateChat({
         };
       }
 
+      if (result.ok && typeof validateText === 'function' && !validateText(result.text)) {
+        result = { ...result, ok: false, status: 502, error: 'invalid_output', retryable: true };
+      }
       attempts.push({
         provider,
         model: result.model || model,
         status: result.status || 0,
         ok: !!result.ok,
         providerCode: result.providerCode ?? null,
+        error: result.error || null,
       });
 
       if (result.ok) return { ...result, attempts, modelProfile: profile };
+      console.warn('AI_PROVIDER_ATTEMPT ' + JSON.stringify(attempts[attempts.length - 1]));
       lastResult = result;
 
       if (index < models.length - 1 && shouldTryNextModel(result, provider)) continue;
@@ -320,7 +326,7 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
     const hasText = text.trim().length > 0;
     const providerOk = response.ok && data?.success !== false;
     const ok = providerOk && hasText;
-    const status = providerOk && !hasText ? 502 : response.status;
+    const status = response.ok && !ok ? 502 : response.status;
     const providerCode = extractProviderCode(data);
     return {
       ok,
@@ -328,7 +334,7 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
       error: response.status === 429
         ? 'provider_limit'
         : (!providerOk ? 'provider_error' : (hasText ? null : 'empty_response')),
-      retryable: providerOk && !hasText ? true : isRetryableStatus(response.status),
+      retryable: response.ok && !ok ? true : isRetryableStatus(response.status),
       providerCode,
       message: providerMessage(data) || (!hasText && providerOk ? 'Provider returned an empty completion.' : ''),
       text,
@@ -448,9 +454,10 @@ function shouldTryNextModel(result, provider) {
 }
 
 function shouldTryNextProvider(result) {
+  if (result?.error === 'content_blocked') return false;
   const status = Number(result?.status || 0);
   if (isModelSpecificCloudflareCode(result?.providerCode)) return true;
-  return !!result?.retryable || status === 401 || status === 403 || status === 408 ||
+  return !!result?.retryable || status === 400 || status === 413 || status === 401 || status === 403 || status === 408 ||
     status === 409 || status === 429 || status >= 500;
 }
 

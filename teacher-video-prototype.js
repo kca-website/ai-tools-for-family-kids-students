@@ -117,7 +117,7 @@
     return s.includes("request too large")||s.includes("context")&&s.includes("limit")||s.includes("requested")&&s.includes("tokens");
   }
 
-  function buildPrompt(sourceCharBudget=9000){
+  function buildPrompt(sourceCharBudget=9000,includeSource=true){
     const curriculum=(q("curriculumNote")?.innerText||"").replace(/\s+/g," ").trim();
     const context=selectedText("context");
     const grade=selectedText("grade");
@@ -146,7 +146,7 @@
   :"Μπορείς να βελτιώσεις τη σειρά, τη σαφήνεια και την προφορικότητα, αλλά ΜΗΝ προσθέσεις γεγονότα ή πληροφορίες που δεν υπάρχουν στο υλικό."}
 ΥΛΙΚΟ ΕΚΠΑΙΔΕΥΤΙΚΟΥ:
 --- ΑΡΧΗ ΥΛΙΚΟΥ ---
-${selectedOwn}
+${includeSource?selectedOwn:"Το επιλεγμένο απόσπασμα δίνεται στο συνοδευτικό USER-SUPPLIED DOCUMENT. Χρησιμοποίησε μόνο αυτό."}
 --- ΤΕΛΟΣ ΥΛΙΚΟΥ ---
 ${own.length>selectedOwn.length?"Σημείωση συστήματος: Το αρχείο ήταν μεγαλύτερο από το ασφαλές όριο του μοντέλου. Χρησιμοποιήθηκαν μόνο τα πιο σχετικά αποσπάσματα με βάση το θέμα, τον στόχο και τις οδηγίες του εκπαιδευτικού. Μην ισχυριστείς ότι καλύπτεις τμήματα που δεν εμφανίζονται παραπάνω.":""}`
       :`ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: Χαρτογραφημένη σχολική ύλη του aitools4kids.
@@ -1041,7 +1041,7 @@ ${JSON.stringify(current)}
           ?selectRelevantMaterial(
               ownMaterial(),
               [topicText(),q("videoOwnInstruction")?.value||"",q("objective")?.value||"",q("notes")?.value||"",selectedText("videoPurpose")].join(" "),
-              Math.min(12000,Math.max(6000,sourceBudget))
+              Math.min(9000,Math.max(2000,sourceBudget))
             )
           :"";
         const sourceFile=q("videoOwnFile")?.files?.[0];
@@ -1053,7 +1053,8 @@ ${JSON.stringify(current)}
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify({
             system:videoSystem+strictSourceSystem,
-            prompt:buildPrompt(sourceBudget),
+            format:"storyboard",
+            prompt:buildPrompt(sourceBudget,false),
             documentText:ownSource,
             documentName:ownMode?(sourceFile?.name||"Υλικό εκπαιδευτικού"):"",
             outputTokens:outputTokenBudget()
@@ -1062,10 +1063,10 @@ ${JSON.stringify(current)}
         const data=await response.json().catch(()=>({}));
         return {response,data};
       };
-      let attempt=await requestStoryboard(9000);
-      if(!attempt.response.ok&&isContextLimitError(attempt.data?.message)){
+      let attempt=await requestStoryboard(6000);
+      if(!attempt.response.ok&&(attempt.data?.error==="context_limit"||isContextLimitError(attempt.data?.message))){
         q("generationMessage").textContent="Το αρχείο είναι μεγάλο. Κρατάω μόνο τα πιο σχετικά αποσπάσματα και ξαναδοκιμάζω…";
-        attempt=await requestStoryboard(6000);
+        attempt=await requestStoryboard(3000);
       }
       if(!attempt.response.ok){
         if(isContextLimitError(attempt.data?.message)) throw new Error("Το υλικό είναι πολύ μεγάλο για μία κλήση AI. Μείωσε λίγο την επιλεγμένη ύλη ή γράψε πιο συγκεκριμένο στόχο ώστε να κρατήσουμε τα σωστά αποσπάσματα.");

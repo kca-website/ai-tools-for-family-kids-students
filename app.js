@@ -1909,7 +1909,7 @@ function renderToolGrid(pathTools, targetElement) {
           </article>
         `;
       }).join("");
-      gapsHtml = `<p class="quiz-gaps-found-label">${t("quizGapsFound")}</p><div class="quiz-gap-grid">${gapCards}</div>`;
+      gapsHtml = `<details class="quiz-gaps-details"><summary class="quiz-gaps-found-label" style="cursor:pointer;padding:12px 14px;border:1px solid var(--color-border);border-radius:10px;font-weight:700;">${t("quizGapsFound")} (${gapTagIds.length})</summary><div class="quiz-gap-grid" style="margin-top:12px;">${gapCards}</div></details>`;
     }
 
     const quizAiAvailable = isTutorViewAvailable(state.currentZone, state.currentRole);

@@ -811,6 +811,21 @@
       ]
     },
     "biologia-b-gymnasiou":{
+      groundedSections:Object.freeze({
+        "Βιβλίο Α΄ · 5.1 — Στήριξη και κίνηση στους μονοκύτταρους οργανισμούς": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_1.html",
+        "Βιβλίο Α΄ · 5.2 — Η στήριξη στα φυτά": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_2.html",
+        "Βιβλίο Α΄ · 5.3 — Η στήριξη και κίνηση στους ζωικούς οργανισμούς": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_3.html",
+        "Βιβλίο Α΄ · 5.4 — Το μυοσκελετικό σύστημα του ανθρώπου": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index5_4.html",
+        "Βιβλίο Α΄ · 6.1 — Η αναπαραγωγή στους μονοκύτταρους οργανισμούς": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_1.html",
+        "Βιβλίο Α΄ · 6.2 — Η αναπαραγωγή στα φυτά": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_2.html",
+        "Βιβλίο Α΄ · 6.3 — Η αναπαραγωγή στους ζωικούς οργανισμούς": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_3.html",
+        "Βιβλίο Α΄ · 6.4 — Η αναπαραγωγή στον άνθρωπο": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/index6_4.html",
+        "Βιβλίο Β΄-Γ΄ · 1.2 — Κύτταρο: η μονάδα της ζωής (προαιρετικό)": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index1_2.html",
+        "Βιβλίο Β΄-Γ΄ · 4.1 — Ομοιόσταση": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_1.html",
+        "Βιβλίο Β΄-Γ΄ · 4.2 — Ασθένειες": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_2.html",
+        "Βιβλίο Β΄-Γ΄ · 4.3 — Αμυντικοί μηχανισμοί του ανθρώπινου οργανισμού": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_3.html",
+        "Βιβλίο Β΄-Γ΄ · 4.4 — Τρόπος ζωής και ασθένειες": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/index4_4.html"
+}),
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2210/Biologia_B-G-Gymnasiou_html-empl/",
       "additionalSourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/",
       "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
@@ -878,6 +893,34 @@
       ]
     },
     "physics-gymnasiou":{
+      groundedSections:Object.freeze({
+        "1.3 — Τα φυσικά μεγέθη και οι μονάδες τους": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index1_3.html",
+        "2.1 — Περιγραφή της κίνησης": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_1.html",
+        "2.2 — Η έννοια της ταχύτητας (χωρίς τη διανυσματική περιγραφή)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index2_2.html",
+        "3.1 — Η έννοια της δύναμης": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_1.html",
+        "3.2 — Δύο σημαντικές δυνάμεις στον κόσμο": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_2.html",
+        "3.3 — Σύνθεση και ανάλυση δυνάμεων (με τις εξαιρέσεις των οδηγιών 2026–27)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_3.html",
+        "3.4 — Δύναμη και ισορροπία": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_4.html",
+        "3.5 — Ισορροπία υλικού σημείου (με τις εξαιρέσεις των οδηγιών 2026–27)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_5.html",
+        "3.6 — Δύναμη και μεταβολή της ταχύτητας": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_6.html",
+        "3.7 — Δύναμη και αλληλεπίδραση (χωρίς το τμήμα «Εφαρμογές»)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index3_7.html",
+        "4.1 — Πίεση": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index4_1.html",
+        "4.2 — Υδροστατική πίεση": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index4_2.html",
+        "4.3 — Ατμοσφαιρική πίεση (χωρίς τον υπολογισμό της ατμοσφαιρικής πίεσης)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index4_3.html",
+        "4.4 — Μετάδοση των πιέσεων στα ρευστά - Αρχή του Πασκάλ": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index4_4.html",
+        "4.5 — Άνωση - Αρχή του Αρχιμήδη": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index4_5.html",
+        "5.1 — Έργο και Ενέργεια (μόνο τα μέρη που ορίζουν οι οδηγίες 2026–27)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5_1.html",
+        "5.2 — Δυναμική-κινητική ενέργεια, δύο βασικές μορφές ενέργειας": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5_2.html",
+        "5.3 — Η μηχανική ενέργεια και η διατήρησή της": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5_3.html",
+        "5.4 — Μορφές και μετατροπές ενέργειας (με τις εξαιρέσεις των οδηγιών 2026–27)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5_4.html",
+        "5.5 — Διατήρηση της ενέργειας": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5_5.html",
+        "5.7 — Απόδοση μιας μηχανής": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5_7.html",
+        "5.8 — Ισχύς (χωρίς «Ισχύς και κίνηση»)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index5_8.html",
+        "6.1 — Θερμόμετρα και μέτρηση θερμοκρασίας": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index6_1.html",
+        "6.2 — Θερμότητα: μια μορφή ενέργειας": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index6_2.html",
+        "6.3 — Πώς μετράμε τη θερμότητα": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index6_3.html",
+        "6.5 — Θερμική διαστολή και συστολή (ποιοτική προσέγγιση)": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index6_5.html"
+}),
       "sourceUrl": "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",
       "annualGuidanceUrl": "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
       "schoolYear": "2026-2027",
@@ -912,6 +955,27 @@
       ]
 },
     "chimeia-b-gymnasiou":{
+      groundedSections:Object.freeze({
+        "Γενική Ενότητα 1 · 1.1 — Τι είναι η Χημεία και γιατί τη μελετάμε": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index1_1.html",
+        "Γενική Ενότητα 1 · 1.2 — Καταστάσεις των υλικών": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index1_2.html",
+        "Γενική Ενότητα 1 · 1.3 — Φυσικές ιδιότητες των υλικών": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index1_3.html",
+        "Γενική Ενότητα 2 · 2.1 — Το νερό στη ζωή μας": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_1.html",
+        "Γενική Ενότητα 2 · 2.2 — Το νερό ως διαλύτης - Μείγματα": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_2_1.html",
+        "Γενική Ενότητα 2 · 2.3 — Περιεκτικότητα διαλύματος - Εκφράσεις περιεκτικότητας": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_3_1.html",
+        "Γενική Ενότητα 2 · 2.4 — Ρύπανση του νερού": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_4.html",
+        "Γενική Ενότητα 2 · 2.5 — Διαχωρισμός μειγμάτων": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_5.html",
+        "Γενική Ενότητα 2 · 2.6 — Διάσπαση του νερού - Χημικές ενώσεις και χημικά στοιχεία": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_6.html",
+        "Γενική Ενότητα 2 · 2.7 — Χημική αντίδραση": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_7.html",
+        "Γενική Ενότητα 2 · 2.8 — Άτομα και μόρια": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_8.html",
+        "Γενική Ενότητα 2 · 2.9 — Υποατομικά σωματίδια - Ιόντα": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_9.html",
+        "Γενική Ενότητα 2 · 2.10 — Σύμβολα χημικών στοιχείων και χημικών ενώσεων (χωρίς τους χημικούς τύπους ιόντων και ιοντικών ενώσεων)": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_10.html",
+        "Γενική Ενότητα 2 · 2.11 — Χημική εξίσωση": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index2_11.html",
+        "Γενική Ενότητα 3 · 3.1 — Σύσταση του ατμοσφαιρικού αέρα": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index3_1.html",
+        "Γενική Ενότητα 3 · 3.2 — Οξυγόνο": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index3_2.html",
+        "Γενική Ενότητα 3 · 3.3 — Διοξείδιο του άνθρακα": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index3_3.html",
+        "Γενική Ενότητα 3 · 3.4 — Η ρύπανση του αέρα": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index3_4.html",
+        "Γενική Ενότητα 4 · 4.2 — Ρύπανση του εδάφους": "https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/index4_2.html"
+}),
       sourceUrl:"https://ebooks.edu.gr/ebooks/v/html/8547/2206/Chimeia_B-Gymnasiou_html-empl/",
       annualGuidanceUrl:"https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
       schoolYear:"2026-2027",
@@ -1325,7 +1389,7 @@
 }
   };
   const api=Object.freeze({
-    version:"2.15.0",
+    version:"2.15.1",
     schoolYear:"2026-2027",
     get(id){ const row=rows[id]; return row?Object.assign({},row,{sections:[...row.sections]}):null; },
     ids:Object.freeze(Object.keys(rows))

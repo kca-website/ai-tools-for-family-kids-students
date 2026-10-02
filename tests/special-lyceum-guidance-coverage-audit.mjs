@@ -65,7 +65,7 @@ for(const entry of entryBlocks){
 for(const required of ['biology','informatics','latin']){
   assert.ok(exactGuidanceKeys.has(required),`Known exact Special Lyceum mapping missing: ${required}`);
 }
-for(const required of ['history','language-literature','second-foreign-language','math','economics','english']){
+for(const required of ['history','language-literature','second-foreign-language','math','economics','english','ethics']){
   assert.ok(frameworkGuidanceKeys.has(required),`Known framework Special Lyceum mapping missing: ${required}`);
   assert.ok(!exactGuidanceKeys.has(required),`Framework-only Special Lyceum mapping must not be reported as exact: ${required}`);
 }
@@ -73,7 +73,7 @@ for(const required of ['history','language-literature','second-foreign-language'
 const covered=new Set([...exactGuidanceKeys,...frameworkGuidanceKeys]);
 const pending=indexKeys.filter(k=>!covered.has(k));
 
-for(const required of ['ancient','religion','civics','philosophy','ethics']){
+for(const required of ['ancient','religion','civics','philosophy']){
   assert.ok(pending.includes(required),`Published Special Lyceum guidance should remain pending until section/framework mapping is verified: ${required}`);
 }
 
@@ -114,8 +114,16 @@ for(const grade of ['a','b','c']){
 const ethicsIndexBlock=indexSource.match(/Object\.freeze\(\{key:"ethics"[\s\S]*?\}\)/)?.[0]||'';
 assert.ok(ethicsIndexBlock,'Special Lyceum Ethics guidance index entry is missing');
 assert.match(ethicsIndexBlock,/status:"published-part-1"/,'Special Lyceum Ethics must remain explicitly partial while only the Sep–Nov 2026 first part is published');
-assert.ok(pending.includes('ethics'),'Special Lyceum Ethics must remain pending until verified Lyceum E.A.E. topic/framework mapping is available');
-assert.ok(!exactGuidanceKeys.has('ethics')&&!frameworkGuidanceKeys.has('ethics'),'Special Lyceum Ethics must not be promoted to exact/framework coverage from Gymnasium or unrelated guidance');
+const ethicsEntries=entryBlocks.filter(entry=>entry.subject==='ethics');
+assert.deepEqual(ethicsEntries.map(entry=>entry.grade).sort(),['a','b'],'Only A/B Lyceum have verified first-part Ethics frameworks');
+for(const entry of ethicsEntries){
+  assert.match(entry.body,/coverageStatus:"framework"/);
+  assert.match(entry.body,/frameworkOnly:true/);
+  assert.match(entry.body,/official-lyceum-ethics-circular/,'Ethics must retain Lyceum-specific verification');
+  assert.match(entry.body,/Σεπτέμβριος–Νοέμβριος 2026/,'Ethics must retain its partial-year boundary');
+  assert.match(entry.body,/ETHICS_SOURCE/,'Ethics must retain its official source');
+}
+assert.ok(!exactGuidanceKeys.has('ethics'),'A partial-year Ethics framework must not be presented as exact full-year coverage');
 
 assert.ok(pending.length>0,'Special Lyceum audit unexpectedly reports no mapping backlog');
 console.log(JSON.stringify({

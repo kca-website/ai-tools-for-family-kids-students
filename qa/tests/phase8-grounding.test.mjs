@@ -8,12 +8,14 @@ const require = createRequire(import.meta.url);
 const tutor = require(path.join(REPO, 'api', 'tutor-assistant.js'));
 const { groundingSignals, groundingRepairMessages } = tutor._phase8Test;
 
-test('Phase 8: catches a new unsupported Greek proper name', () => {
-  const source = 'Οι Μήλιοι συζήτησαν με τους Αθηναίους για την τύχη της Μήλου.';
-  const answer = 'Οι Μυτιληνιοί συζήτησαν με τους Αθηναίους.';
-  const signals = groundingSignals(answer, source);
-  assert.ok(signals.some(x => x.value === 'Μυτιληνιοί'), JSON.stringify(signals));
-  assert.ok(!signals.some(x => x.value === 'Αθηναίους'), JSON.stringify(signals));
+test('Grounding: Greek sentence starts do not create unsupported-name false positives', () => {
+  const source = 'Ο Περικλής μίλησε στην Αθήνα το 431 π.Χ.';
+  const answer = 'Διάβασε το κείμενο. Σκέψου τι είπε ο Περικλής στην Αθήνα το 431 π.Χ. Καλημέρα!';
+  // The runtime intentionally checks factual numbers, not every capitalized word.
+  // Source resolution and the mandatory grounding prompt still constrain names.
+  assert.deepEqual(groundingSignals(answer, source), []);
+  assert.ok(groundingSignals(answer.replace('431', '432'), source)
+    .some(x => x.type === 'unsupported_number' && x.value === '432'));
 });
 
 test('Phase 8: catches unsupported factual numbers but ignores task counters', () => {

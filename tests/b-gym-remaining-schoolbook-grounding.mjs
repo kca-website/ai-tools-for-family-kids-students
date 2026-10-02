@@ -155,6 +155,34 @@ vm.runInNewContext(
   { window: bookWindow }
 );
 const books = bookWindow.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027;
+// Every selectable B science section must carry the exact source metadata used
+// by the shared resolver, not just a server-side mapping hidden from the UI.
+for (const [id, count] of [["physics-gymnasiou", 26], ["chimeia-b-gymnasiou", 19], ["biologia-b-gymnasiou", 13]]) {
+  const book = books.get(id);
+  assert.equal(Object.keys(book.groundedSections || {}).length, count, id);
+  for (const label of book.sections) {
+    const expected = id === "biologia-b-gymnasiou"
+      ? t.resolveBiologyBCurriculumUrls(label)
+      : (id === "physics-gymnasiou" ? t.resolvePhysicsBCurriculumPaths(label) : t.resolveChemistryBCurriculumPaths(label))
+        .map(path => new URL(path, book.sourceUrl).href);
+    assert.equal(book.groundedSections[label], expected[0], label);
+  }
+}
+// Reproduce the learner's first-choice failure: broad annual catalog topics
+// must give way to the exact source-grounded sections in all shared selectors.
+bookWindow.AITOOLSKIDS_TUTOR_CATALOG = {
+  getSubjects: () => ["physics-gymnasiou", "chimeia-b-gymnasiou", "biologia-b-gymnasiou"].map(id => ({
+    id, quizId: id, subjectLabelEl: id,
+    curriculum: { schoolYear: "2026-2027", annualInstructionsStatus: "2026-27-verified" },
+    topics: [{ id: id + ".broad", labelEl: "Γενικό θέμα χωρίς ακριβή αντιστοίχιση" }]
+  }))
+};
+vm.runInNewContext(fs.readFileSync(new URL("../curriculum-resolver.js", import.meta.url), "utf8"), { window: bookWindow });
+for (const [id, count] of [["physics-gymnasiou", 26], ["chimeia-b-gymnasiou", 19], ["biologia-b-gymnasiou", 13]]) {
+  const topics = bookWindow.AITOOLSKIDS_CURRICULUM_RESOLVER.getTopics("middle", "b", id);
+  assert.equal(topics.length, count, id);
+  assert.ok(topics.every(topic => topic.status === "official-book-section-grounded" && topic.sourceUrl), id);
+}
 assert.equal(books.get("physics-gymnasiou").sections.length, 26);
 assert.equal(books.get("biologia-b-gymnasiou").sections.length, 13);
 assert.equal(books.get("glossa-b-gymnasiou").sections.length, 9);

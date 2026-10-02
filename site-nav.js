@@ -29,13 +29,31 @@
     new MutationObserver(syncAriaLabels).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     if(!toggle || !panel) return;
 
+    // The panel sits inside the sticky header, so it must fit the visible viewport. 100vh on mobile
+    // browsers ignores the address bar and the header is taller than 72px with the search row, which
+    // hid the last menu entries; measure the real space instead.
+    const fitPanel = () => {
+      if(panel.hidden) return;
+      const viewport = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      const top = Math.max(0, panel.getBoundingClientRect().top);
+      panel.style.maxHeight = `${Math.max(160, Math.floor(viewport - top))}px`;
+    };
+
     const setOpen = (open, returnFocus) => {
       toggle.setAttribute("aria-expanded", String(open));
       panel.hidden = !open;
       document.body.classList.toggle("site-menu-open", open);
-      if(open) panel.querySelector("a[href]")?.focus();
-      else if(returnFocus) toggle.focus();
+      if(open){
+        fitPanel();
+        panel.querySelector("a[href]")?.focus({ preventScroll: true });
+      }else{
+        panel.style.maxHeight = "";
+        if(returnFocus) toggle.focus();
+      }
     };
+
+    window.addEventListener("resize", fitPanel);
+    window.visualViewport?.addEventListener("resize", fitPanel);
 
     toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true", false));
 

@@ -3167,6 +3167,14 @@ main {
   background: #FAFAF8;
   box-shadow: 0 18px 40px -24px rgba(31, 36, 48, 0.35);
 }
+.site-menu-panel:not([hidden]) {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.site-menu-panel__inner {
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+}
 .site-menu-panel[hidden] {
   display: none;
 }
@@ -3245,8 +3253,6 @@ main {
     grid-template-columns: minmax(0, 1fr);
     gap: 18px;
     padding: 16px;
-    max-height: calc(100vh - 72px);
-    overflow-y: auto;
   }
 }
 @media (max-width: 420px) {

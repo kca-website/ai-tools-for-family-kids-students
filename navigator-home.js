@@ -55,8 +55,7 @@
       noteMiddleStuck: "Η AI Βοήθεια για μαθητές Γυμνασίου ανοίγει από 13 ετών. Διάλεξε πρώτα την ηλικία σου στην επόμενη σελίδα.",
       noteHigh: "Για ΕΠΑΛ θα διαλέξεις στη συνέχεια τάξη και, όπου χρειάζεται, τομέα ή ειδικότητα.",
       noteSpecial: "Διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ.",
-      waysTitle: "Τρεις τρόποι να ξεκινήσεις",
-      waysLead: "Διάλεξε έναν. Όλοι λειτουργούν χωρίς λογαριασμό.",
+      waysTitle: "Γρήγορη πρόσβαση",
       aiLinksLabel: "Άνοιξε για:",
       studyBadge: "Νέο · Δωρεάν",
       studyTitle: "AI Μελέτη",
@@ -108,8 +107,7 @@
       noteMiddleStuck: "AI Help for middle-school students opens from age 13. Choose your age first on the next page.",
       noteHigh: "For EPAL you will then choose a grade and, where needed, a sector or specialty.",
       noteSpecial: "Pathway for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L.",
-      waysTitle: "Three ways to start",
-      waysLead: "Pick one. None of them needs an account.",
+      waysTitle: "Quick access",
       aiLinksLabel: "Open for:",
       studyBadge: "New · Free",
       studyTitle: "AI Study",
@@ -298,10 +296,7 @@
     const c = currentCopy();
     return `
       <div class="home-v8-helpers">
-        <div class="home-v9-section-head">
-          <h2 id="homeV9WaysTitle">${c.waysTitle}</h2>
-          <p>${c.waysLead}</p>
-        </div>
+        <h2 class="home-v9-visually-hidden" id="homeV9WaysTitle">${c.waysTitle}</h2>
         <div class="home-v9-ways">
           <section class="home-v8-ai" aria-labelledby="homeV8AiTitle">
             <span class="home-v9-way__icon" aria-hidden="true">${ICON.chat}</span>

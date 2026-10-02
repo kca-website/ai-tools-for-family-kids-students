@@ -18,7 +18,8 @@ assert.match(html, /activityNeedsDistributedSource\('plan'\)/);
 assert.match(html, /mode:'organize',activity:'plan'/);
 assert.match(html, /mode:cfg\.mode,activity:action/);
 assert.match(html, /cacheEligible:!attached\?\.text&&!!officialSource\?\.grounded/);
-assert.match(html, /cacheEligible:!promptOverride&&!attached\?\.text&&!!officialSource\?\.grounded/);
+// Historical-character conversations are intentionally never cached.
+assert.match(html, /cacheEligible:action!=='character'&&!promptOverride&&!attached\?\.text&&!!officialSource\?\.grounded/);
 assert.match(html, /attached\?\.text\|\|officialSource\?\.text/);
 assert.doesNotMatch(html, /:\(officialSource\?\.text\|\|''\)/);
 assert.match(html, /thriskeftika-b-gymnasiou/);
@@ -33,7 +34,7 @@ for (const subjectId of [
   'logotechnia-b-gymnasiou',
   'english-b-gymnasiou'
 ]) {
-  assert.match(html, new RegExp(`requiresOfficialSource\\(\\)[\\s\\S]{0,1200}${subjectId}`));
+  assert.match(html, new RegExp(`function requiresOfficialSource\\(.*?\\)\\{[\\s\\S]{0,1200}${subjectId}`));
 }
 
 assert.match(html, /5 ερωτήσεις · μία-μία/);

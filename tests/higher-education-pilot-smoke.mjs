@@ -97,6 +97,12 @@ try {
   const beforeAiUrl = page.url();
   await page.locator('[data-he-action="study-plan"]').click();
   await page.locator('#heAiInput').fill('Θέλω να οργανώσω τη μελέτη μου στη Βιοστατιστική');
+  // Source-locked AI: a book excerpt with title and chapter/pages is required first.
+  const SOURCE_NAME = 'Βιοστατιστική — Κεφ. 5, σελ. 101-110';
+  const SOURCE_TEXT = 'Συσχέτιση και παλινδρόμηση: ο συντελεστής συσχέτισης r μετρά τη γραμμική σχέση δύο μεταβλητών.';
+  await page.evaluate(() => { const d = document.querySelector('.he-source-fields'); if (d) d.open = true; });
+  await page.locator('#heSourceName').fill(SOURCE_NAME);
+  await page.locator('#heSourceText').fill(SOURCE_TEXT);
   const beforeStudy = aiRequestCount;
   await page.locator('#heAiGroq').click();
   await page.waitForTimeout(100);
@@ -118,12 +124,12 @@ try {
   assert.match(await page.locator('#hePrintArea').innerText(), /Πλάνο μελέτης/);
   assert.match(await page.locator('#hePrintArea').innerText(), /Βήμα 1/);
   assert.equal(lastAiPayload.audience, 'university_student');
-  assert.equal(lastAiPayload.documentText, '', 'request without PDF must still include a valid empty document context');
-  assert.equal(lastAiPayload.documentName, '', 'request without PDF must still include a valid empty document name');
-  assert.match(lastAiPayload.system, /SOURCE LOCK/);
-  assert.match(lastAiPayload.prompt, /ΒΙΟ_ΓΜΒ · Γενικά Μαθηματικά - Βιοστατιστική/);
-  assert.match(lastAiPayload.prompt, /Συσχέτιση και παλινδρόμηση/);
-  assert.match(lastAiPayload.prompt, /Επίσημη πηγή περιγράμματος/);
+  assert.equal(lastAiPayload.documentText, SOURCE_TEXT, 'the pasted book excerpt must be sent as the document context');
+  assert.equal(lastAiPayload.documentName, SOURCE_NAME, 'the excerpt title/pages must be sent as the document name');
+  assert.match(lastAiPayload.system, /μόνο από το διαθέσιμο απόσπασμα συγγράμματος/);
+  // Source-locked prompt: course is context; the excerpt (documentText) is the only evidence.
+  assert.match(lastAiPayload.prompt, /Μάθημα: Γενικά Μαθηματικά - Βιοστατιστική/);
+  assert.match(lastAiPayload.prompt, /Θέλω να οργανώσω τη μελέτη μου στη Βιοστατιστική/);
 
   // Neurobiology must use the official topic whitelist.
   await page.selectOption('#heYear', '4');
@@ -151,16 +157,15 @@ try {
   await page.locator('#heAiGroq').click();
   await page.waitForTimeout(100);
   assert.equal(aiRequestCount, beforeNeuro + 1, 'verified Neurobiology quiz did not call AI');
-  assert.match(lastAiPayload.system, /Κάθε ερώτηση quiz πρέπει να αντιστοιχεί άμεσα/);
-  assert.match(lastAiPayload.prompt, /ΒΙΟ_ΝΕΥ · Νευροβιολογία/);
-  assert.match(lastAiPayload.prompt, /Στόχος που επέλεξε: Να κάνω εξάσκηση/);
+  assert.match(lastAiPayload.prompt, /Δώσε μαζί με κάθε σωστή απάντηση την τεκμηρίωση από την πηγή/);
+  assert.match(lastAiPayload.prompt, /Μάθημα: Νευροβιολογία/);
+  assert.match(lastAiPayload.prompt, /Ενέργεια: Quiz/);
   assert.equal(await page.locator('#heToolsDetails').getAttribute('open'), null, 'tool recommendations should remain collapsed after quiz selection');
   await page.locator('#heToolsDetails > summary').click();
   assert.match(await page.locator('#heResult').innerText(), /Στόχος: Να κάνω εξάσκηση/);
   await page.locator('#heToolsDetails > summary').click();
 
-  assert.match(lastAiPayload.prompt, /Συναπτική διαβίβαση/);
-  assert.match(lastAiPayload.prompt, /Νευροαπεικονιστικές τεχνικές PET, MRI και fMRI/);
+  assert.match(lastAiPayload.documentText, /\S/, 'quiz must be generated from the provided excerpt');
 
   // Unverified course: no title-only quiz generation.
   await page.selectOption('#heYear', '2');
@@ -175,23 +180,29 @@ try {
 
   await page.locator('[data-he-action="quiz"]').click();
   await page.locator('#heAiInput').fill('');
+  // Title-only: no excerpt and no PDF, so generation must be blocked.
+  await page.locator('#heSourceName').fill('');
+  await page.locator('#heSourceText').fill('');
   const beforeBlocked = aiRequestCount;
   await page.locator('#heAiGroq').click();
   await page.waitForTimeout(80);
   assert.equal(aiRequestCount, beforeBlocked, 'unverified title-only quiz should be blocked');
-  assert.match(await page.locator('#heAiStatus').innerText(), /δεν έχουμε ακόμη επαληθευμένες θεματικές/i);
+  assert.match(await page.locator('#heAiStatus').innerText(), /Πρόσθεσε PDF ή απόσπασμα συγγράμματος/i);
 
   // Feedback must require the student's own material and point to the paste field.
   await page.locator('[data-he-action="feedback"]').click();
   assert.match(await page.locator('#heAiInputLabel').innerText(), /Επικόλλησε εδώ τη δουλειά σου/i);
   assert.equal(await page.locator('#heAiInput').getAttribute('aria-required'), 'true');
   assert.equal(await page.locator('#heAiInput').evaluate((el) => el.classList.contains('is-required')), true);
+  // With a source present, the remaining blocker is the student's own work.
+  await page.locator('#heSourceName').fill(SOURCE_NAME);
+  await page.locator('#heSourceText').fill(SOURCE_TEXT);
   await page.locator('#heAiInput').fill('');
   const beforeEmptyFeedback = aiRequestCount;
   await page.locator('#heAiGroq').click();
   await page.waitForTimeout(100);
   assert.equal(aiRequestCount, beforeEmptyFeedback, 'empty feedback must not call AI');
-  assert.match(await page.locator('#heAiStatus').innerText(), /χρειάζομαι πρώτα τη δική σου δουλειά/i);
+  assert.match(await page.locator('#heAiStatus').innerText(), /χρειάζομαι τη δική σου δουλειά/i);
   assert.equal(await page.evaluate(() => document.activeElement?.id), 'heAiInput', 'empty feedback must focus the paste field');
 
   await page.locator('#heAiInput').fill('Δικό μου draft: Η μοριακή βιολογία μελετά...');
@@ -208,9 +219,8 @@ try {
   await page.locator('#heAiGroq').click();
   await page.waitForTimeout(100);
   assert.equal(aiRequestCount, beforeMaterial + 1, 'student-provided material should unlock generation');
-  assert.match(lastAiPayload.system, /Χρησιμοποίησε μόνο το υλικό που έδωσε ο φοιτητής/i);
+  assert.match(lastAiPayload.system, /μόνο από το διαθέσιμο απόσπασμα συγγράμματος/i);
   assert.match(lastAiPayload.prompt, /Δευτεροστόμια, Εχινόδερμα, Χορδωτά/);
-  assert.match(lastAiPayload.prompt, /course-only-current-program/);
 
   // Computing courses should prioritize coding-specific tools.
   await page.selectOption('#heInstitution', 'aueb');

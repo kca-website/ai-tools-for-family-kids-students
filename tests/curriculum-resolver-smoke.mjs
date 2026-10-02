@@ -12,7 +12,7 @@ try{
     const r=window.AITOOLSKIDS_CURRICULUM_RESOLVER;
     const primaryA=r.getSubjects('primary','a');
     const env=primaryA.filter(s=>(s.subjectLabelEl||'').startsWith('Μελέτη Περιβάλλοντος'));
-    const mathA=r.getSubject('middle','a','math-a-gymnasiou');
+    const mathA=r.getSubject('middle','a','mathimatika-a-gymnasiou');
     const englishD=r.getSubject('primary','d','english-d-dimotikou');
     const historyCPrimary=r.getSubject('primary','c','istoria-c-dimotikou');
     const mathCGym=r.getSubject('middle','c','mathimatika-g-gymnasiou');
@@ -97,7 +97,9 @@ try{
   if(audit.primaryAEnvironmentCount!==1) throw new Error('Environment Studies duplicate remains in Primary A');
   if(audit.environmentQuizId!=='environment-a-dimotikou') throw new Error('Environment Studies quiz alias not resolved');
   if(audit.environmentTopics<3) throw new Error('Environment Studies topics missing');
-  if(!audit.mathATopics.some(x=>/Φυσικοί αριθμοί/.test(x))) throw new Error('Middle A mathematics official sections not resolved');
+  // Math A Gymnasium follows selectionPolicy 'exact-current-diagnostic-topics':
+  // it must resolve official book sections (Α.x.y codes) for the current diagnostic topics.
+  if(!audit.mathATopics.some(x=>/^Α\.\d+\.\d+ — /.test(x))) throw new Error('Middle A mathematics official sections not resolved');
   if(audit.englishDTopics.length<3) throw new Error('Primary D English topic anchors not resolved');
   if(audit.historyCPrimaryMode!=='verified-official-sections' || audit.historyCPrimaryTopics.length<10) throw new Error('Primary C History verified book sections not resolved');
   if(audit.mathCGymMode!=='verified-official-sections' || audit.mathCGymTopics.length<7) throw new Error('Middle C Mathematics verified book sections not resolved');

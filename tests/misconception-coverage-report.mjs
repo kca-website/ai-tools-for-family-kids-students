@@ -19,13 +19,14 @@ const conceptual=new Set([
   "biologia-g-lykeiou"
 ]);
 
+// Evaluate the data file instead of regex-parsing it: nested objects made the
+// old regex merge neighbouring entries and miscount coverage.
+const officialSandbox={window:{}};
+vm.runInNewContext(officialSrc,officialSandbox);
+const gapAlignment=officialSandbox.window.AITOOLSKIDS_OFFICIAL_CURRICULUM.gapAlignment;
 const rows=new Map();
-const re=/"([^"]+)":\s*\{([\s\S]*?)\n\s*\},/g;
-let match;
-while((match=re.exec(officialSrc))){
-  const id=match[1],body=match[2];
-  const status=(body.match(/"status":\s*"([^"]+)"/)||[])[1];
-  const source=(body.match(/"sourceQuizId":\s*"([^"]+)"/)||[])[1];
+for(const [id,a] of Object.entries(gapAlignment)){
+  const source=a?.sourceQuizId,status=a?.status;
   if(!source||!conceptual.has(source))continue;
   if(status!=="exact-section-verified"&&status!=="related-section-verified")continue;
   const row=rows.get(source)||{source,verified:0,evidenced:0};

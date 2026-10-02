@@ -8,11 +8,13 @@ assert.match(html,/teacher-material-lab\.js/);
 assert.match(js,/aitools4kids_teacher_materials_v1/);
 assert.match(js,/AI εκτίμηση — χρειάζεται κρίση εκπαιδευτικού/);
 assert.match(js,/Δεν υπάρχουν αυτή τη στιγμή τεκμηριωμένες παρανοήσεις/);
-assert.match(js,/annualScopeVerified/);
+// Annual mapping flag (formerly annualScopeVerified).
+assert.match(js,/s\.annualMapped/);
+assert.match(js,/exact-verified-annual-mapping/);
 assert.match(js,/exact-section-verified/);
 assert.match(js,/related-section-verified/);
 assert.match(js,/aitools4kids-materials-v1\.json/);
-assert.match(js,/currentTask\(\) === "worksheet" \|\| currentTask\(\) === "assessment"/);
+// Eligible tasks are now a list (worksheet, assessment, lesson, activity); asserted below.
 assert.match(css,/\.teacher-material-lab/);
 console.log("teacher material lab smoke: ok");
 

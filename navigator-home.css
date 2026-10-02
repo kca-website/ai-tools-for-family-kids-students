@@ -1352,3 +1352,11 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 @media(max-width:700px){
   #homeV8HelpersMount .home-v9-ways{margin-top:20px;}
 }
+/* Chips inside AI Study / educator cards sit above the main CTA. */
+.home-v9-ways .home-v9-study-way .home-v8-helper-links,
+.home-v9-ways .home-v9-teacher-way .home-v8-helper-links{margin-top:0;}
+.home-v9-ways .home-v9-study-way .home-v8-helper-links a{background:#FFF6DA;color:#1F2430;}
+.home-v9-ways .home-v9-teacher-way .home-v8-helper-links a{background:#FFFFFF;color:#1F2430;}
+.home-v9-ways .home-v9-study-way .home-v9-way__action,
+.home-v9-ways .home-v9-teacher-way .home-v9-way__action{margin-top:auto;}
+.home-v9-ways .home-v8-helper-links a>span{margin-right:4px;}

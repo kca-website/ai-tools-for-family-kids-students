@@ -3363,3 +3363,10 @@ main {
 .site-footer__dwrean-badge {
   justify-self: start !important;
 }
+
+
+/* Keep short app routes above a footer at the viewport bottom. */
+body:has(> .site-footer) { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+body:has(> .site-footer) > main { flex: 1 0 auto; }
+body > .site-footer { flex-shrink: 0; margin-top: auto; position: static; }
+@media print { body:has(> .site-footer) { display: block; min-height: 0; } }

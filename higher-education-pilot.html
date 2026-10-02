@@ -27,13 +27,13 @@
     .he-tool-badges{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px}
     .he-tool-badge{font-size:.72rem;font-weight:800;padding:3px 7px;border-radius:999px;background:#eef2f7;color:#415164}
     .he-tools-details{padding:0}
-    .he-tools-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;cursor:pointer;list-style:none}
-    .he-tools-details>summary::-webkit-details-marker{display:none}
+    .he-tools-details details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;cursor:pointer;list-style:none}
+    .he-tools-details details>summary::-webkit-details-marker{display:none}
     .he-tools-summary-copy{display:grid;gap:3px;min-width:0}
     .he-tools-summary-copy strong{font-size:1.15rem}
     .he-tools-summary-copy small{font-size:.8rem;font-weight:500;color:#64748b;line-height:1.35}
     .he-tools-arrow{flex:0 0 auto;font-size:.8rem;color:#64748b;transition:transform .18s ease}
-    .he-tools-details[open] .he-tools-arrow{transform:rotate(180deg)}
+    .he-tools-details details[open] .he-tools-arrow{transform:rotate(180deg)}
     .he-tools-body{padding:0 18px 18px;border-top:1px solid #e5eaf0}
     .he-meta{font-size:.82rem;color:#5f6c7b}
     .he-empty{color:#5f6c7b;font-style:italic}
@@ -113,7 +113,7 @@
   <link rel="stylesheet" href="/site-chrome.css" />
   <script defer src="/site-chrome.js"></script>
 </head>
-<body>
+<body class="page-higher-education-pilot">
   <main class="he-wrap">
     <nav aria-label="Κύρια πλοήγηση" style="margin-bottom:12px">
       <a href="/" style="font-weight:800;text-decoration:none">← Αρχική aitools4kids</a>
@@ -181,12 +181,21 @@
         <span id="hePdfStatus" class="he-ai-input-hint" aria-live="polite"></span>
         <button type="button" class="he-pdf-upload__remove" id="hePdfRemove" hidden>Αφαίρεση</button>
       </div>
-      <label for="heAiInput"><strong id="heAiInputLabel">Προαιρετικές λεπτομέρειες ή δικό σου υλικό</strong></label>
+      <details class="he-source-fields">
+        <summary>Πηγή απαντήσεων · σύγγραμμα / κεφάλαιο</summary>
+        <p class="he-ai-input-hint">Ανέβασε PDF ή επικόλλησε απόσπασμα του συγγράμματος. Οι απαντήσεις βασίζονται μόνο στο διαθέσιμο κείμενο. Η καταχωρισμένη θεματική δεν αντικαθιστά το βιβλίο.</p>
+        <div id="heOpenBook" hidden><button type="button" class="he-print-btn" id="heLoadBook">Φόρτωση ανοικτού συγγράμματος · ενότητα 1.2</button><p class="he-ai-input-hint">John DeNero · Composing Programs. Προτεινόμενη βιβλιογραφία του μαθήματος · <a href="https://composingprograms.com/pages/12-elements-of-programming.html" target="_blank" rel="noopener noreferrer">κείμενο και πηγή</a> · CC BY-SA 3.0. Καλύπτει μόνο τη συγκεκριμένη ενότητα.</p></div>
+        <label for="heSourceName">Τίτλος συγγράμματος · κεφάλαιο / σελίδες</label>
+        <input id="heSourceName" class="he-ai-input" maxlength="180" placeholder="π.χ. Εισαγωγή στον Προγραμματισμό · κεφ. 2, σ. 24–30">
+        <label for="heSourceText">Απόσπασμα συγγράμματος</label>
+        <textarea id="heSourceText" class="he-ai-input" maxlength="48000" placeholder="Επικόλλησε το κείμενο που θέλεις να μελετήσεις."></textarea>
+      </details>
+      <label for="heAiInput"><strong id="heAiInputLabel">Ερώτηση ή δική σου προσπάθεια</strong></label>
       <textarea id="heAiInput" class="he-ai-input" placeholder="π.χ. Δεν καταλαβαίνω τη μείωση ΙΙ / Επικόλλησε εδώ abstract, σημειώσεις, κώδικα ή δικό σου κείμενο για feedback."></textarea>
       <p class="he-ai-input-hint" id="heAiInputHint">Μπορείς να προσθέσεις σημειώσεις, εκφώνηση, απόσπασμα, κώδικα ή δικό σου draft.</p>
       <div class="he-warning" style="margin-top:12px"><strong>Όχι έτοιμη εργασία:</strong> για εργασίες η AI βοηθά με δομή, ερωτήματα, έλεγχο και feedback πάνω στη δική σου προσπάθεια. Δεν συντάσσει παραδοτέο για υποβολή.</div>
       <div class="he-ai-providers">
-        <button type="button" class="he-ai-provider" id="heAiGroq">⚡ Δημιούργησέ το εδώ · GPT-OSS 120B</button>
+        <button type="button" class="he-ai-provider" id="heAiGroq">⚡ Δημιούργησέ το από την πηγή</button>
         <button type="button" class="he-ai-provider he-puter" id="heAiPuter">☁️ Εναλλακτικά με Puter</button>
       </div>
       <div class="he-ai-status" id="heAiStatus" aria-live="polite"></div>
@@ -216,6 +225,7 @@
       <h2>Τι σημαίνει “pilot”</h2>
       <p>Τα μαθήματα και οι πηγές προστίθενται μόνο όταν υπάρχει επίσημη τεκμηρίωση. Αν δεν έχουμε πλήρη επίσημο οδηγό, το τμήμα εμφανίζεται ως μερικώς καλυμμένο αντί να συμπληρώνουμε κενά με υποθέσεις.</p>
     </section>
+    <section class="he-card"><details id="heMapping"><summary>Χαρτογράφηση όλων των καταχωρισμένων μαθημάτων</summary><p id="heMappingStatus" class="he-ai-input-hint"></p><div id="heMappingRows"></div></details></section>
   </main>
 
   <section class="he-print-area" id="hePrintArea" aria-hidden="true"></section>

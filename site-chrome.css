@@ -20,7 +20,22 @@
 
 body.has-site-chrome {
   font-family: var(--chrome-sans);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
+body.has-site-chrome > main { flex: 1 0 auto; }
+body.has-site-chrome > .chrome-header,
+body.has-site-chrome > .chrome-footer { flex-shrink: 0; }
+body.has-site-chrome > .chrome-footer { margin-top: auto; }
+.page-higher-education-pilot > .he-wrap { width: 100%; box-sizing: border-box; }
+.he-source-fields { margin: 12px 0; }
+.he-source-fields summary, #heMapping summary { cursor: pointer; font-weight: 600; }
+#heMappingRows details { padding: 10px 0; border-top: 1px solid var(--chrome-line); }
+#heMappingRows li { margin: 8px 0; }
+.he-tools-details details > summary { cursor: pointer; }
+@media print { body.has-site-chrome { display: block; min-height: 0; } }
 body.has-site-chrome h1 {
   font-family: var(--chrome-serif);
   font-weight: 600;

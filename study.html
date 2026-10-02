@@ -695,9 +695,20 @@
     const lines=String(text||'').replace(/^#\s+#\s+/gm,'## ').split(/\r?\n/);
     const out=[];let list='';
     const closeList=()=>{if(list){out.push('</'+list+'>');list=''}};
-    for(const raw of lines){
+    for(let index=0;index<lines.length;index++){
+      const raw=lines[index];
       const line=raw.trim();
       if(!line){closeList();continue}
+      const cells=value=>value.trim().replace(/^\|/,'').replace(/\|$/,'').split('|').map(cell=>cell.trim());
+      if(line.includes('|')&&index+1<lines.length&&cells(lines[index+1]).every(cell=>/^:?-{3,}:?$/.test(cell))){
+        closeList();
+        const headers=cells(line);index++;
+        const rows=[];
+        while(index+1<lines.length&&lines[index+1].trim().includes('|')){
+          const row=cells(lines[++index]);rows.push('<tr>'+headers.map((_,i)=>'<td>'+inlineStudyMarkup(row[i]||'')+'</td>').join('')+'</tr>');
+        }
+        out.push('<div style="overflow-x:auto"><table><thead><tr>'+headers.map(cell=>'<th>'+inlineStudyMarkup(cell)+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>');continue;
+      }
       if(/^---+$/.test(line)){closeList();out.push('<hr>');continue}
       let m=line.match(/^(#{1,4})\s+(.+)$/);
       if(m){closeList();out.push((m[1].length<=2?'<h3>':'<h4>')+inlineStudyMarkup(m[2])+(m[1].length<=2?'</h3>':'</h4>'));continue}

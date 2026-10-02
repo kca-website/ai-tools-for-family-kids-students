@@ -325,7 +325,8 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
     const text = extractCloudflareText(data);
     const hasText = text.trim().length > 0;
     const providerOk = response.ok && data?.success !== false;
-    const ok = providerOk && hasText;
+    const truncated = completionTruncated(data, body.max_tokens);
+    const ok = providerOk && hasText && !truncated;
     const status = response.ok && !ok ? 502 : response.status;
     const providerCode = extractProviderCode(data);
     return {
@@ -333,11 +334,11 @@ async function postCloudflareNative({ url, token, body, provider, model, timeout
       status,
       error: response.status === 429
         ? 'provider_limit'
-        : (!providerOk ? 'provider_error' : (hasText ? null : 'empty_response')),
+        : (truncated ? 'incomplete_response' : (!providerOk ? 'provider_error' : (hasText ? null : 'empty_response'))),
       retryable: response.ok && !ok ? true : isRetryableStatus(response.status),
       providerCode,
       message: providerMessage(data) || (!hasText && providerOk ? 'Provider returned an empty completion.' : ''),
-      text,
+      text: ok ? text : '',
       provider,
       model,
       usage: extractUsage(data),
@@ -396,18 +397,19 @@ async function postOpenAiCompatible({ url, token, body, provider, model, timeout
       ? data.choices[0].message.content
       : '';
     const hasText = text.trim().length > 0;
-    const ok = response.ok && hasText;
-    const status = response.ok && !hasText ? 502 : response.status;
+    const truncated = completionTruncated(data, body.max_completion_tokens);
+    const ok = response.ok && hasText && !truncated;
+    const status = response.ok && !ok ? 502 : response.status;
     return {
       ok,
       status,
       error: response.status === 429
         ? 'provider_limit'
-        : (!response.ok ? 'provider_error' : (hasText ? null : 'empty_response')),
-      retryable: !hasText && response.ok ? true : isRetryableStatus(response.status),
+        : (truncated ? 'incomplete_response' : (!response.ok ? 'provider_error' : (hasText ? null : 'empty_response'))),
+      retryable: !ok && response.ok ? true : isRetryableStatus(response.status),
       providerCode: data?.error?.code ?? null,
       message: providerMessage(data) || (!hasText && response.ok ? 'Provider returned an empty completion.' : ''),
-      text,
+      text: ok ? text : '',
       provider,
       model,
       usage: extractUsage(data),
@@ -415,6 +417,13 @@ async function postOpenAiCompatible({ url, token, body, provider, model, timeout
   } finally {
     clearTimeout(timeout);
   }
+}
+
+function completionTruncated(data, tokenLimit) {
+  const result = data?.result || data;
+  const reason = result?.choices?.[0]?.finish_reason || result?.finish_reason;
+  if (['length', 'max_tokens', 'MAX_TOKENS'].includes(reason) || result?.status === 'incomplete') return true;
+  return !reason && tokenLimit > 0 && extractUsage(data).completionTokens >= tokenLimit;
 }
 
 function extractUsage(data) {

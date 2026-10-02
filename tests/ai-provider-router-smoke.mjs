@@ -194,4 +194,54 @@ assert.match(tutor, /\['quiz', 'truefalse'\][\s\S]{0,80}return 'quality'/);
 assert.match(tutor, /\['flashcards', 'plan'\][\s\S]{0,80}return 'economy'/);
 assert.match(tutor, /\['explain', 'weakspots'\]/);
 
+
+const study = fs.readFileSync(new URL('../study.html', import.meta.url), 'utf8');
+const { runInNewContext } = await import('node:vm');
+const markupSource = study.slice(study.indexOf('  function inlineStudyMarkup('), study.indexOf('  function quizProgressHtml('));
+const render = runInNewContext(markupSource + '; studyMarkup', {
+  esc: value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+});
+const table = render('| A | B |\n| --- | --- |\n| <script> | **safe** |');
+assert.match(table, /<table>/);
+assert.match(table, /<th>A<\/th>/);
+assert.match(table, /&lt;script&gt;/);
+assert.doesNotMatch(table, /<script>/);
+assert.match(table, /<strong>safe<\/strong>/);
+
+// Truncated outputs must fail over automatically and never escape as successful text.
+process.env.CLOUDFLARE_LLM_ACCOUNT_ID = 'test-account';
+process.env.CLOUDFLARE_LLM_AI_TOKEN = 'test-token';
+process.env.GROQ_API_KEY = 'test-token';
+process.env.SMART_AI_ROUTING_ENABLED = '0';
+try {
+  const { generateChat } = require('../ai-provider-router.js');
+  for (const nativeResult of [
+    { response: 'cut off (', finish_reason: 'length' },
+    { response: 'cut off (', usage: { completion_tokens: 16 } },
+  ]) {
+    globalThis.fetch = async url => new Response(JSON.stringify(
+      String(url).includes('api.cloudflare.com')
+        ? { success: true, result: nativeResult }
+        : { choices: [{ message: { content: 'Complete answer.' }, finish_reason: 'stop' }] }
+    ), { status: 200 });
+    const result = await generateChat({ messages: [{ role: 'user', content: 'Explain.' }], providerOrder: ['cloudflare', 'groq'], maxTokens: 16 });
+    assert.equal(result.ok, true);
+    assert.equal(result.provider, 'groq');
+    assert.equal(result.text, 'Complete answer.');
+    assert.equal(result.attempts[0].error, 'incomplete_response');
+  }
+  globalThis.fetch = async () => new Response(JSON.stringify({
+    choices: [{ message: { content: 'cut off (' }, finish_reason: 'length' }],
+  }), { status: 200 });
+  const result = await generateChat({ messages: [{ role: 'user', content: 'Explain.' }], providerOrder: ['groq'], maxTokens: 16 });
+  assert.equal(result.ok, false);
+  assert.equal(result.text, '');
+} finally {
+  globalThis.fetch = originalFetch;
+  for (const [key, value] of Object.entries(savedEnv)) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
+}
+
 console.log('AI provider router smoke passed.');

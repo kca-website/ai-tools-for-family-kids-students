@@ -189,12 +189,13 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
     { role: 'user', content: userContent },
   ];
   const routingProfile = chooseRoutingProfile({ task, mode, activity });
+  const maxTokens = task === 'conversation' && activity === 'explain' ? 1200 : taskLimits[task];
   const trustedGroundingContext = [selectedContext, taskRule].filter(Boolean).join('\n');
   const startedAt = Date.now();
   const cacheParts = cacheEligible === true && officialSchoolbook
     ? {
         kind: 'official-study-response',
-        promptVersion: 'study-tutor-v3',
+        promptVersion: 'study-tutor-v4',
         task, mode, activity,
         subjectId: String(subjectId || ''),
         topic: String(topic || ''),
@@ -216,7 +217,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
 
     let result = await generateChat({
       messages,
-      maxTokens: taskLimits[task],
+      maxTokens,
       temperature: 0.1,
       reasoningEffort: 'low',
       modelProfile: routingProfile,
@@ -225,7 +226,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
     if (result?.ok && needsStructuredValidation({ task, activity }) && !validStructuredResult({ task, activity, text: result.text })) {
       const retry = await generateChat({
         messages,
-        maxTokens: taskLimits[task],
+        maxTokens,
         temperature: 0.1,
         reasoningEffort: 'low',
         modelProfile: 'quality',
@@ -239,7 +240,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
       if (firstSignals.length) {
         const retry = await generateChat({
           messages: groundingRepairMessages(messages, firstSignals),
-          maxTokens: taskLimits[task],
+          maxTokens,
           temperature: 0,
           reasoningEffort: 'low',
           modelProfile: 'quality',
@@ -311,7 +312,7 @@ function serverTaskRule({ task, mode, activity }) {
     flashcards: '- Return only valid JSON with exactly 8 active-recall cards using shape {"cards":[{"q":"...","a":"..."}]}. Ground every card in the selected topic/source.',
     quiz: '- Run or generate only the requested quiz format. Never reveal an answer before an attempt when the flow is interactive.',
     truefalse: '- Run a True/False concept check one statement at a time and wait for the learner before feedback.',
-    explain: '- Explain the exact selected topic clearly and stay within the selected/source-supported material.',
+    explain: '- Explain the exact selected topic clearly and stay within the selected/source-supported material. Keep the complete answer within 180 words: a short explanation, two brief examples and two short self-check questions. Finish every sentence. Avoid tables.',
     quickreview: '- Create a concise 5-minute review with key points, common confusions and rapid-recall questions.',
     audio: '- Write a short natural spoken mini-lesson. No tables. Keep every factual sentence source-grounded when a source is active.',
     oral: '- Act as a calm oral-practice examiner: one question at a time, brief formative feedback, no grades.',

@@ -154,7 +154,7 @@ function looksLikePersonalData(s) {
 const GENERIC_SUBJECT = 'one friendly cartoon object inspired by the theme, with no humans';
 
 const SUBJECT_DICTIONARY = [
-  [/ανεμοστροβιλ|σιφουν|τυφων|\btornado(?:s|es)?\b|\bwhirlwind(?:s|es)?\b/, 'a gentle cartoon whirlwind, a soft swirling spiral of wind lifting colorful autumn leaves above a calm meadow'],
+  [/ανεμοστροβιλ|σιφουν|τυφων|\btornado(?:s|es)?\b|\bwhirlwind(?:s|es)?\b/, 'a cute cartoon tornado: one clearly visible soft white funnel-shaped whirlwind, a spinning cone of wind touching the grass, with a few colorful leaves twirling around it, in a calm sunny meadow, friendly and not scary, nothing broken'],
   [/ανεμ|αερα(?:κι)?(?:\s|$)|\bwind(?:s|es)?\b/, 'soft swirling wind lines blowing colorful leaves and a little kite over a meadow'],
   [/καταιγιδ|μπορ|\bstorm(?:s|es)?\b/, 'a soft gray cloud with gentle raindrops and a small rainbow, calm and friendly'],
   [/βροχ|\brain(?:s|es)?\b/, 'a smiling rain cloud with gentle raindrops falling on flowers and puddles'],

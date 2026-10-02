@@ -64,6 +64,12 @@
     <div class="learning-loop"><span data-el="1 · Ύλη / σημειώσεις" data-en="1 · Curriculum / notes">1 · Ύλη / σημειώσεις</span><span data-el="2 · Κατανόηση" data-en="2 · Understand">2 · Κατανόηση</span><span data-el="3 · Εξάσκηση" data-en="3 · Practice">3 · Εξάσκηση</span><span data-el="4 · Έλεγχος" data-en="4 · Check">4 · Έλεγχος</span></div>
   </section>
 
+  <details id="historyCharacterGuide" class="card" style="margin-bottom:18px;padding:12px 16px">
+    <summary style="cursor:pointer;font-weight:800" data-el="🎭 Πού βρίσκω τους ιστορικούς χαρακτήρες;" data-en="🎭 Where can I find the historical characters?">🎭 Πού βρίσκω τους ιστορικούς χαρακτήρες;</summary>
+    <p class="micro" data-el="Πάτησε μια διαδρομή για να επιλεγούν η τάξη, η ενότητα και ο χαρακτήρας. Μετά πάτησε «Μίλα με ιστορικό χαρακτήρα»." data-en="Choose a route to select the grade, section and character. Then select “Talk with a historical character”.">Πάτησε μια διαδρομή για να επιλεγούν η τάξη, η ενότητα και ο χαρακτήρας. Μετά πάτησε «Μίλα με ιστορικό χαρακτήρα».</p>
+    <div id="historyCharacterRoutes"></div>
+  </details>
+
   <main class="grid">
     <section class="card">
       <h2 data-el="Τι διαβάζεις;" data-en="What are you studying?">Τι διαβάζεις;</h2>
@@ -202,7 +208,7 @@
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
   const savedStudyContext=window.AITOOLSKIDS_STUDY_CONTEXT?.readPersisted();
   const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']]};
-  function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();}
+  function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();renderCharacterRoutes();}
   function saveLang(value){try{localStorage.setItem('aitools4kids_lang',value)}catch(_){}}
   $('elBtn').onclick=()=>{lang='el';saveLang(lang);localize()}; $('enBtn').onclick=()=>{lang='en';saveLang(lang);localize()};
 
@@ -233,10 +239,9 @@
     return resolver()?.getSubjects?.(z,g)||[];
   }
   function populateSubjects(){const rows=subjectRows();$('subject').innerHTML=rows.length?rows.map(s=>'<option value="'+esc(s.id||s.quizId)+'">'+esc(lang==='en'?(s.subjectLabelEn||s.subjectLabelEl):(s.subjectLabelEl||s.subjectLabelEn||s.id))+'</option>').join(''):'<option value="">'+(lang==='en'?'No mapped subjects':'Δεν βρέθηκαν χαρτογραφημένα μαθήματα')+'</option>';populateTopics()}
-  function populateTopics(){
-    const z=$('zone').value,g=$('grade').value,s=$('subject').value;
+  function studyTopicsFor(z,g,s,epal=false){
     let rows=[];
-    if(isEpal()){
+    if(epal){
       const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
       rows=cat?.getSubject?.(g,s,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')?.topics||[];
     }else rows=resolver()?.getTopics?.(z,g,s)||[];
@@ -248,7 +253,7 @@
     // Prefer the verified textbook subsections that /api/schoolbook-source
     // can actually resolve. Keep the original rows only when no such exact
     // subsection exists yet, so other school levels do not disappear.
-    if(!isEpal()&&requiresOfficialSource()){
+    if(!epal&&requiresOfficialSource(s)){
       const exactRows=rows.filter(t=>
         ['official-section','official-book-section'].includes(String(t?.sourceType||'')) ||
         /^(?:official-book-section-verified|exact-section-verified|related-section-verified)$/.test(String(t?.status||''))
@@ -256,6 +261,10 @@
       if(exactRows.length)rows=exactRows;
     }
 
+    return rows;
+  }
+  function populateTopics(){
+    const rows=studyTopicsFor($('zone').value,$('grade').value,$('subject').value,isEpal());
     $('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.label||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.label||t.titleEl):(t.labelEl||t.label||t.titleEl||t.labelEn||t.id))+'</option>').join('');
   }
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
@@ -309,10 +318,10 @@
     box.innerHTML='<span class="v9i v9i-book" aria-hidden="true"></span><strong>'+esc(label)+'</strong> · '+esc(source.bookTitle||'')+link;
     box.classList.remove('hidden');
   }
-  function requiresOfficialSource(){
+  function requiresOfficialSource(subject=selectedSubjectId()){
     const existing=['istoria-e-dimotikou','physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','thriskeftika-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'];
     const gel=["algebra-b-lykeiou","archaia-a-lykeiou","archaia-b-lykeiou","archaia-g-lykeiou","biologia-b-lykeiou","biologia-g-lykeiou","chimeia-a-lykeiou","chimeia-b-lykeiou","chimeia-g-lykeiou","ekthesi-a-lykeiou","ekthesi-b-lykeiou","english-a-lykeiou","english-b-lykeiou","filosofia-b-lykeiou","fysiki-a-lykeiou","fysiki-b-lykeiou","fysiki-g-lykeiou","geometria-a-lykeiou","geometria-b-lykeiou","istoria-b-lykeiou","istoria-g-lykeiou","istoria-g-prosanatolismou","latinika-b-lykeiou","latinika-g-lykeiou","mathimatika-a-lykeiou","mathimatika-b-prosanatolismou","mathimatika-g-genikis","mathimatika-g-prosanatolismou","oikonomia-g-lykeiou","pliroforiki-g-lykeiou","politiki-paideia-a-lykeiou","thriskeftika-a-lykeiou","thriskeftika-b-lykeiou","thriskeftika-g-lykeiou"];
-    return existing.includes(selectedSubjectId())||gel.includes(selectedSubjectId());
+    return existing.includes(subject)||gel.includes(subject);
   }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}
@@ -555,13 +564,38 @@
     }
   }
 
+  function renderCharacterRoutes(){
+    const catalog=window.AITOOLSKIDS_HISTORY_CHARACTERS||[], routes=[];
+    const zoneLabels={primary:['Δημοτικό','Primary'],middle:['Γυμνάσιο','Middle School'],high:['ΓΕΛ','General Lyceum']};
+    Object.entries(grades).forEach(([zone,gradeRows])=>gradeRows.forEach(([grade,gradeLabel])=>{
+      (resolver()?.getSubjects?.(zone,grade)||[]).filter(subject=>/ιστορ|istoria|history/i.test((subject.subjectLabelEl||'')+' '+subject.id)).forEach(subject=>{
+        studyTopicsFor(zone,grade,subject.id).forEach(topic=>{
+          const label=topic.labelEl||topic.titleEl||topic.label||topic.id;
+          charactersForTopic((subject.subjectLabelEl||'')+' '+subject.id,label).forEach(character=>routes.push({zone,grade,gradeLabel,subject,topic,label,character}));
+        });
+      });
+    }));
+    const missing=[];
+    $('historyCharacterRoutes').innerHTML=catalog.map(character=>{
+      const found=routes.filter(route=>route.character.id===character.id);
+      if(!found.length){missing.push(lang==='en'?character.nameEn:character.nameEl);return ''}
+      return '<h3>'+esc(lang==='en'?character.nameEn:character.nameEl)+'</h3><ul style="margin:6px 0;padding-left:20px">'+found.map(route=>{
+        const query=new URLSearchParams({zone:route.zone,grade:route.grade,schoolType:'gel',subject:route.subject.id,topic:route.topic.id,topicText:route.label,character:character.id});
+        const path=lang==='en'?zoneLabels[route.zone][1]+' → Grade '+({a:1,b:2,c:3,d:4,e:5,st:6}[route.grade])+' → History → '+(route.topic.labelEn||route.label):zoneLabels[route.zone][0]+' → '+route.gradeLabel+' → Ιστορία → '+route.label;
+        return '<li style="margin:6px 0"><a href="/study.html?'+esc(query.toString())+'">'+esc(path)+'</a></li>';
+      }).join('')+'</ul>';
+    }).join('');
+    if(missing.length)$('historyCharacterRoutes').innerHTML+='<p class="micro">'+esc((lang==='en'?'No selectable section yet for: ':'Δεν υπάρχει ακόμη διαθέσιμη ενότητα επιλογής για: ')+missing.join(', '))+'.</p>';
+  }
+
   let activeStudyCharacter = null;
-  function studyCharacterChoices(){
+  function charactersForTopic(subjectValue,topicValue){
     const normalize = value => String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ');
-    const subject=normalize(selectedSubjectLabel()+' '+selectedSubjectId()),topic=normalize(selectedTopic());
+    const subject=normalize(subjectValue),topic=normalize(topicValue);
     if(!/ιστορ|istoria|history/.test(subject) || /χρονογραμμ|ιστορικ.*πηγ|ορια.*τεκμηρ|timeline|chronolog|source limits/.test(topic))return [];
     return (window.AITOOLSKIDS_HISTORY_CHARACTERS||[]).filter(c=>(c.topicPatterns||[]).some(p=>topic.includes(normalize(p))));
   }
+  function studyCharacterChoices(){return charactersForTopic(selectedSubjectLabel()+' '+selectedSubjectId(),selectedTopic())}
   function refreshStudyCharacters(){
     const choices=studyCharacterChoices(),old=$('studyCharacter').value;
     $('studyCharacter').innerHTML=choices.map(c=>'<option value="'+esc(c.id)+'">'+esc(lang==='en'?c.nameEn:c.nameEl)+'</option>').join('');
@@ -1065,7 +1099,10 @@
     const goal=[...document.querySelectorAll('input[name="goal"]')].find(n=>n.value===selection.learningMode);
     if(goal)goal.checked=true;
   }
-  populateEpalChoices();populateGrades();localize();restoreStudySelection();refreshAttachedUi();publishSharedStudyContext();
+  populateEpalChoices();populateGrades();localize();restoreStudySelection();refreshStudyCharacters();
+  const requestedCharacter=new URLSearchParams(location.search).get('character');
+  if(studyCharacterChoices().some(c=>c.id===requestedCharacter))$('studyCharacter').value=requestedCharacter;
+  renderCharacterRoutes();refreshAttachedUi();publishSharedStudyContext();
 })();
 </script>
 </body>

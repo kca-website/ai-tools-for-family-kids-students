@@ -101,7 +101,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       imageUrl: "/assets/characters/pericles.png",
       sourceUrl: "", sourceEl: "", sourceEn: "",
       topicIds: ["history.athens-sparta-confusion", "istoria-a-gym.peloponnesian-war-sides"],
-      topicPatterns: ["αθήνα vs σπάρτη", "αθηναϊκή δημοκρατία", "πελοποννησιακός πόλεμος", "athens vs sparta", "athenian democracy", "peloponnesian war"],
+      topicPatterns: ["αθήνα vs σπάρτη", "αθηναϊκή δημοκρατία", "πελοποννησιακός πόλεμος", "πελοποννησιακ", "athens vs sparta", "athenian democracy", "peloponnesian war"],
     },
     socrates: {
       id: "socrates",
@@ -131,7 +131,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       imageUrl: "/assets/characters/alexander.png",
       sourceUrl: "", sourceEl: "", sourceEn: "",
       topicIds: ["istoria-a-gym.alexander-legacy"],
-      topicPatterns: ["μέγας αλέξανδρος", "έργο μεγάλου αλεξάνδρου", "ελληνιστικός κόσμος", "alexander the great", "hellenistic world"],
+      topicPatterns: ["μέγας αλέξανδρος", "έργο μεγάλου αλεξάνδρου", "έργο του αλεξάνδρου", "ελληνιστικός κόσμος", "alexander the great", "hellenistic world"],
     },
     athenianCitizen: {
       id: "athenianCitizen",
@@ -178,7 +178,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       sourceEl: "",
       sourceEn: "",
       topicIds: [],
-      topicPatterns: ["βυζαντινή περίοδος", "βυζαντινή αυτοκρατορία", "byzantine period", "byzantine empire"],
+      topicPatterns: ["βυζαντινή περίοδος", "καθημερινή ζωή στο βυζάντιο", "βυζαντινή αυτοκρατορία", "byzantine period", "byzantine empire"],
       composite: true,
     },
     constantinopleResident1204: {
@@ -193,7 +193,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       introEn: "Explore the Fourth Crusade and the sack of 1204 from the viewpoint of a city resident, without invented personal testimony.",
       imageUrl: "/assets/characters/byzantine-resident.png", sourceUrl: "", sourceEl: "", sourceEn: "",
       topicIds: [],
-      topicPatterns: ["δ΄ σταυροφορία και άλωση της κωνσταντινούπολης το 1204", "άλωση της κωνσταντινούπολης το 1204", "fourth crusade", "constantinople in 1204"],
+      topicPatterns: ["δ΄ σταυροφορία και άλωση της κωνσταντινούπολης το 1204", "άλωση της κωνσταντινούπολης το 1204", "fourth crusade", "οι σταυροφορίες και η πρώτη άλωση της πόλης", "constantinople in 1204"],
       composite: true,
     },
     constantinopleResident1453: {
@@ -208,7 +208,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       introEn: "Explore the Fall of Constantinople from the viewpoint of a city resident, without invented personal testimony.",
       imageUrl: "/assets/characters/constantinople-1453-resident.png", sourceUrl: "", sourceEl: "", sourceEn: "",
       topicIds: [],
-      topicPatterns: ["άλωση της κωνσταντινούπολης το 1453", "άλωση 1453", "1453", "fall of constantinople in 1453"],
+      topicPatterns: ["άλωση της κωνσταντινούπολης το 1453", "άλωση 1453", "η άλωση της πόλης", "fall of constantinople in 1453"],
       composite: true,
     },
     renaissanceHumanist: {
@@ -438,8 +438,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     "topicPatterns": [
       "καποδίστρ",
       "kapodistr",
-      "οργάνωση του κράτους",
-      "organisation of the state"
+      "κυβερνήτης καποδίστριας"
     ]
   },
   "riga": {

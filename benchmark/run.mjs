@@ -226,7 +226,7 @@ function mockResponse(body) {
     : /"steps"|πλάνο μελέτης/i.test(conversation)
       ? JSON.stringify({ title: 'Πλάνο', steps: [1, 2, 3].map(i => ({ title: 'Βήμα ' + i, action: 'Κάνε ' + i })) })
       : 'Mock απάντηση για τη μελέτη της ενότητας με αρκετό κείμενο ώστε να περάσει τον έλεγχο μήκους. Τι θυμάσαι από την ενότητα;';
-  return new Response(JSON.stringify({ success: true, result: { response: text, usage: { prompt_tokens: 3000, completion_tokens: 600 } } }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify({ success: true, result: { response: text, finish_reason: 'stop', usage: { prompt_tokens: 3000, completion_tokens: 600 } } }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 }
 
 function forceModel(model) {

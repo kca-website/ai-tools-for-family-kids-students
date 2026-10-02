@@ -61,7 +61,8 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { prompt, audience = 'teacher', documentText = '', documentName = '', outputTokens } = req.body || {};
+    const { prompt, audience = 'teacher', documentText = '', documentName = '', outputTokens, format } = req.body || {};
+    const storyboard = format === 'storyboard';
     if (!['teacher', 'university_student'].includes(audience)) {
       return res.status(403).json({ error: 'audience_not_allowed', message: 'This endpoint is only available for educator/university learning contexts.' });
     }
@@ -118,25 +119,31 @@ module.exports = async function handler(req, res) {
 
     const result = await generateChat({
       messages: [
-        { role: 'system', content: TEACHER_SYSTEM_PROMPT + terminologyGuard + documentPolicy },
+        { role: 'system', content: (storyboard
+          ? TEACHER_SYSTEM_PROMPT.replace('- Use clean Markdown only: headings, bullets, numbered steps and Markdown tables. Do not output HTML.', '- Return only a valid JSON object with title, subtitle, learningGoal and scenes. Each scene has title, onscreen, narration, symbol and visual. No Markdown or HTML. Use supplied document as the only factual source when present; grade and subject are presentation context only.')
+          : TEACHER_SYSTEM_PROMPT) + terminologyGuard + documentPolicy },
         { role: 'user', content: documentPayload + 'USER REQUEST:\n' + prompt }
       ],
       temperature: 0.1,
       maxTokens,
       reasoningEffort: 'low',
+      responseFormat: storyboard ? { type: 'json_object' } : undefined,
+      validateText: storyboard ? validStoryboard : undefined,
     });
     if (!result?.ok) {
+      console.warn('TEACHER_AI_FAILURE ' + JSON.stringify({ attempts: result?.attempts || [], error: result?.error || 'provider_error' }));
+      const contextLimited = /request too large|context.*(?:limit|length)|requested.*tokens|too many tokens/i.test(result?.message || '');
       const limited = result?.status === 429 || result?.error === 'provider_limit';
       return res.status(limited ? 429 : 502).json({
-        error: limited ? 'provider_limit' : 'provider_error',
-        message: limited
+        error: contextLimited ? 'context_limit' : (limited ? 'provider_limit' : 'provider_error'),
+        message: contextLimited ? 'Το αίτημα ξεπέρασε το όριο κειμένου του AI.' : limited
           ? 'Η δωρεάν δημιουργία AI έφτασε προσωρινά το διαθέσιμο όριο χρήσης.'
           : 'Η δημιουργία AI δεν μπόρεσε να ολοκληρωθεί.',
         fallback: limited ? 'puter' : undefined,
       });
     }
 
-    const text = sanitizeTeacherAssistantOutput(result.text || '');
+    const text = storyboard ? result.text.trim() : sanitizeTeacherAssistantOutput(result.text || '');
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'No result returned.' });
 
     res.setHeader('Cache-Control', 'no-store');
@@ -149,6 +156,14 @@ module.exports = async function handler(req, res) {
     });
   }
 };
+
+function validStoryboard(text) {
+  try {
+    const data = JSON.parse(String(text || '').trim());
+    return Array.isArray(data.scenes) && data.scenes.length >= 3 && data.scenes.length <= 24 &&
+      data.scenes.every(scene => scene && typeof scene.title === 'string' && typeof scene.narration === 'string' && scene.narration.trim() && typeof scene.onscreen === 'string');
+  } catch (_) { return false; }
+}
 
 function sanitizeTeacherAssistantOutput(text) {
   return String(text || '')

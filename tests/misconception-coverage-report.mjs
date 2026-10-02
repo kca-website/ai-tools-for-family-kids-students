@@ -44,6 +44,6 @@ for(const row of ordered){
   assert.equal(row.evidenced,row.verified,`${row.source}: conceptual STEM misconception coverage must be 100%`);
   console.log(row);
 }
-assert.equal(totalVerified,34,"expected 34 verified conceptual STEM gaps");
-assert.equal(totalEvidenced,34,"expected all 34 conceptual STEM gaps to be research-backed");
+assert.equal(totalVerified,35,"expected 35 verified conceptual STEM gaps");
+assert.equal(totalEvidenced,35,"expected all 35 conceptual STEM gaps to be research-backed");
 console.log("conceptual STEM misconception coverage: 34/34 (100%)");

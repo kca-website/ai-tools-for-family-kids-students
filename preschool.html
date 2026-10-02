@@ -341,7 +341,7 @@
           const r = await fetch('/api/preschool-image', {
             method:'POST',
             headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({idea, age:generatedAge, mode:generatedMode})
+            body:JSON.stringify({idea, age:generatedAge, mode:generatedMode, subjectEn:(generatedActivity && generatedActivity.imageSubjectEn) || ''})
           });
           const data = await r.json().catch(() => ({}));
           if (request !== imageRequest) return;

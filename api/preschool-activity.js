@@ -67,7 +67,7 @@ module.exports = async function handler(req, res) {
 
   const system = `You create preschool activity ideas for ADULTS to do together with children ages 4 to 6.
 This is not a child chatbot. Speak to the adult, not directly to the child.
-Return ONLY valid JSON with these fields: story, words, game, make, offline, adultTip, visualTitle, visualCaption, visualEmoji1, visualEmoji2, visualEmoji3, visualBg, sceneType, sceneMood, scenePalette, sceneTitle, sceneCaption, sceneObjectCount, sceneAccent.
+Return ONLY valid JSON with these fields: story, words, game, make, offline, adultTip, visualTitle, visualCaption, visualEmoji1, visualEmoji2, visualEmoji3, visualBg, sceneType, sceneMood, scenePalette, sceneTitle, sceneCaption, sceneObjectCount, sceneAccent, imageSubjectEn.
 Rules:
 1. Greek language only.
 2. Age appropriate, playful, simple, short and concrete.
@@ -86,7 +86,8 @@ Rules:
 15. visualBg must be exactly one of: sky, mint, peach, lilac.
 16. Choose sceneType from dinosaur, robot, animals, space, castle, colors, shapes, numbers, generic according to the adult's theme, not the story details. Butterfly is animals, rocket is space, counting up to five is numbers. Unmatched themes are generic.
 17. sceneMood is calm, playful or curious. scenePalette is sky, mint, peach or lilac. sceneAccent is coral, teal, gold or violet. sceneTitle and sceneCaption are brief Greek phrases for the adult's visual card. sceneObjectCount is an integer from 1 to 5, and is 5 for counting to five. These fields describe one cartoon scene, not animation frames. No unsafe content or real people.
-18. Align the whole activity with the supplied official preschool curriculum context. Each proposed task should clearly practice at least one of those areas through play, conversation, observation, movement or creation. Do not invent official curriculum codes or claim that your wording is an official learning outcome.
+18. imageSubjectEn is a short ENGLISH noun phrase (3 to 14 words) naming EXACTLY the adult's theme as one clear picture subject for an illustrator, e.g. "a friendly cartoon dog", "a gentle swirling whirlwind lifting colorful autumn leaves in a meadow". Depict the theme itself, never a different animal or object. Make scary themes gentle (a storm becomes soft clouds and rain, a tornado becomes a gentle swirl of wind and leaves). No people, no text.
+19. Align the whole activity with the supplied official preschool curriculum context. Each proposed task should clearly practice at least one of those areas through play, conversation, observation, movement or creation. Do not invent official curriculum codes or claim that your wording is an official learning outcome.
 Official Greek Preschool Curriculum context selected by the application:
 ${curriculum.map(x => '- ' + x.field + ' > ' + x.unit + ' > ' + x.subunit).join('\n')}
 ${modeRule}`;
@@ -121,9 +122,10 @@ ${modeRule}`;
             sceneTitle:{type:'string'},
             sceneCaption:{type:'string'},
             sceneObjectCount:{type:'integer',minimum:1,maximum:5},
-            sceneAccent:{type:'string',enum:['coral','teal','gold','violet']}
+            sceneAccent:{type:'string',enum:['coral','teal','gold','violet']},
+            imageSubjectEn:{type:'string'}
           },
-          required:['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg','sceneType','sceneMood','scenePalette','sceneTitle','sceneCaption','sceneObjectCount','sceneAccent']
+          required:['story','words','game','make','offline','adultTip','visualTitle','visualCaption','visualEmoji1','visualEmoji2','visualEmoji3','visualBg','sceneType','sceneMood','scenePalette','sceneTitle','sceneCaption','sceneObjectCount','sceneAccent','imageSubjectEn']
         }
       }
     };
@@ -169,6 +171,8 @@ function parseActivity(text, idea) {
     activity.sceneCaption = clean(typeof j.sceneCaption === 'string' ? j.sceneCaption : activity.visualCaption).replace(/[—–]/g, ',').slice(0,180) || activity.visualCaption;
     activity.sceneObjectCount = activity.sceneType === 'numbers' && /(?:μέχρι\s*(?:το\s*)?5|1\s*(?:ως|έως|μεχρι|-)\s*5)/i.test(idea)
       ? 5 : Number.isInteger(j.sceneObjectCount) ? Math.max(1,Math.min(5,j.sceneObjectCount)) : 3;
+    const subjectEn = typeof j.imageSubjectEn === 'string' ? j.imageSubjectEn.replace(/\s+/g,' ').trim() : '';
+    activity.imageSubjectEn = /^[A-Za-z][A-Za-z ,'-]{2,119}$/.test(subjectEn) ? subjectEn : '';
     return activity;
   } catch { return null; }
 }

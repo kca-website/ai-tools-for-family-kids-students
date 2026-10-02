@@ -1299,3 +1299,49 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
   .home-v9-more__grid .home-video-new__copy strong{min-height:0;}
   .home-v9-more__grid .home-video-new__badge{top:14px;right:16px;}
 }
+
+/* ==========================================================================
+   v10: shorter homepage — finder → three ways → curriculum strip → more.
+   ========================================================================== */
+/* Hero: the finder sits directly under the title (no side quote any more). */
+@media(min-width:1000px){
+  .home-v9-top{
+    grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"title" "sub" "badges" "finder";
+  }
+}
+/* Educators: a distinct green card, with its description kept on mobile. */
+.home-v9-ways .home-v9-teacher-way{background:#EEF7F3;border:1.5px solid #B9D9CE;border-top:4px solid #24594C;}
+.home-v9-ways .home-v9-teacher-way .home-v9-way__icon{background:#FFFFFF;color:#24594C;}
+.home-v9-ways .home-v9-teacher-way .home-v9-way__eyebrow{color:#24594C;}
+.home-v9-ways .home-v9-teacher-way .home-v9-way__action{justify-content:center;padding:10px 16px;line-height:1.25;border-radius:12px;background:#24594C;color:#FFFFFF;text-align:center;}
+.home-v9-ways .home-v9-teacher-way .home-v9-way__action:hover{background:#1B463C;text-decoration:none;}
+.home-v9-ways .home-v9-study-way{border-top-color:#E8B81A;}
+.home-v9-study-way__official{display:flex;flex-direction:column;gap:2px;margin:0;font-size:.84rem;color:#1F2430;}
+.home-v9-study-way__official small{color:#5A6270;font-size:.8rem;}
+@media(max-width:700px){
+  .home-v9-ways .home-v9-teacher-way .home-v8-helper-desc{display:block;}
+}
+/* Greek Curriculum Map: one slim strip of its own. */
+.home-v9-curriculum-strip{display:flex;align-items:center;gap:14px;margin-top:18px;padding:14px 18px;border:1px solid var(--v9-line);border-left:4px solid #E8B81A;border-radius:var(--v9-radius);background:#FFFFFF;color:#1F2430;text-decoration:none;}
+.home-v9-curriculum-strip:hover{border-color:#1D5D8C;border-left-color:#E8B81A;}
+.home-v9-curriculum-strip__icon{flex:none;width:42px;height:42px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;background:#FFF6DA;color:#8A5A0A;}
+.home-v9-curriculum-strip__copy{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
+.home-v9-curriculum-strip__badge{font-size:.78rem;font-weight:800;color:#8A5A0A;}
+.home-v9-curriculum-strip__copy strong{font-size:1.02rem;}
+.home-v9-curriculum-strip__copy small{font-size:.85rem;color:#5A6270;}
+.home-v9-curriculum-strip__cta{flex:none;font-size:1.3rem;font-weight:800;color:#1D5D8C;}
+@media(max-width:700px){
+  .home-v9-curriculum-strip__copy small{display:none;}
+}
+/* Discover more now holds two tiles. */
+.home-v9-more__grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+@media(max-width:700px){
+  .home-v9-more__grid{grid-template-columns:minmax(0,1fr);}
+}
+/* Secondary finder link (EPAL Practice Map under the GEL one). */
+.home-v9-finder>.home-v9-finder__extra{grid-column:1/-1;justify-self:end;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px;color:#1D5D8C;font-weight:800;text-decoration:none;}
+.home-v9-finder>.home-v9-finder__extra:hover{text-decoration:underline;}
+@media(max-width:700px){
+  .home-v9-finder>.home-v9-finder__extra{justify-self:center;}
+}

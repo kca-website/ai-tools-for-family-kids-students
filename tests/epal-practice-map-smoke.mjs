@@ -29,6 +29,8 @@ try{
 
     await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
     await page.waitForFunction(()=>!!window.AITOOLSKIDS_EPAL_PRACTICE_MAP&&!!window.AITOOLSKIDS_EPAL_STUDENT_CATALOG,{timeout:30000});
+    // v10: the homepage finder offers the EPAL Practice Map for high school + practice.
+    await page.click('#homeV9Finder [data-finder-zone="high"]');await page.click('#homeV9Finder [data-finder-need="practice"]');
     assert.equal(await page.locator('[data-epal-practice-map]').count(),1,`${label}: homepage EPAL Practice Map entry missing`);
     await page.click('[data-epal-practice-map]');
     await page.waitForSelector('#epalPracticeMapModal:not([hidden])');

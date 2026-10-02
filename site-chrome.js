@@ -80,6 +80,7 @@
       </div>
       <div class="chrome-menu-panel" id="chromeMenuPanel" hidden>
         <nav class="chrome-menu-panel__inner" data-chrome-aria="allLabel">
+          <a class="chrome-menu-panel__teacher" href="/teacher-assistant.html"><span aria-hidden="true">🏫</span><span data-chrome="classroom"></span><span aria-hidden="true">→</span></a>
           <div class="chrome-menu-panel__group">
             <p class="chrome-menu-panel__title" data-chrome="groupFind"></p>
             <a href="/#homeV8FinderTitle" data-chrome="byLevel"></a>
@@ -94,7 +95,6 @@
           </div>
           <div class="chrome-menu-panel__group">
             <p class="chrome-menu-panel__title" data-chrome="groupMore"></p>
-            <a href="/teacher-assistant.html" data-chrome="classroom"></a>
             <a href="/sign-language.html" data-chrome="gsl"></a>
             <a href="/special-education.html" data-chrome="special"></a>
             <a href="/higher-education-pilot.html" data-chrome="university"></a>

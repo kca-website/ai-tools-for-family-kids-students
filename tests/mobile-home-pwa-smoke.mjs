@@ -29,9 +29,9 @@ try {
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#homeV8Shell', { state: 'visible', timeout: 10000 });
   await page.waitForFunction(() => document.body.classList.contains('pwa-standalone'), null, { timeout: 10000 });
-  await page.waitForSelector('#zoneGrid #specialSchoolZoneCard', {state:'visible',timeout:10000});
-  await page.waitForSelector('#homeV8HelpersMount .home-v8-map', {state:'visible',timeout:10000});
+  await page.waitForSelector('#homeV9Finder [data-finder-zone="special"]', {state:'visible',timeout:10000});
   await page.waitForSelector('#homeV8HelpersMount .home-v8-ai', {state:'visible',timeout:10000});
+  await page.waitForSelector('#homeV9Teacher', {state:'visible',timeout:10000});
   await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_ENTRY_ANALYTICS?.version===2,null,{timeout:10000});
 
   assert.equal((await page.textContent('#siteTitleText'))?.trim(), 'AI Tools 4 Kids', 'compact mobile site title was not restored');
@@ -39,22 +39,18 @@ try {
   assert.equal(await page.locator('#pwaMobileLauncher').isVisible(), false, 'Legacy PWA launcher must stay hidden under homepage v8');
   assert.equal(await page.locator('#pwaMobileLauncher').evaluate((el)=>el.classList.contains('home-v8-legacy')), true, 'Legacy PWA launcher must be explicitly suppressed');
 
-  assert.equal(await page.locator('#homeV8HelpersMount .home-v8-map a[href="/primary/guardian/quiz"]').count(), 1, 'Current Practice Map entry is missing');
-  assert.equal(await page.locator('#homeV8HelpersMount .home-v8-ai a[href="/high/student/tutor"]').count(), 1, 'Current AI Help high-school entry is missing');
-  assert.equal(await page.locator('#homeV8HelpersMount [data-special-education-diagnostic]').count(), 1, 'Current Special Education diagnostic entry is missing');
   assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), false, 'Legacy diagnostic entry should remain suppressed on homepage v8');
   assert.equal(await page.locator('#zoneSelectView .hero__ai-help').isVisible(), false, 'Legacy AI Help entry should remain suppressed on homepage v8');
 
-  const specialText=(await page.locator('#specialSchoolZoneCard').textContent()) || '';
-  assert.match(specialText,/Ειδικά σχολεία/,'integrated Special Education school card needs a clear label');
-  assert.match(specialText,/Ειδικό Γυμνάσιο.*Ειδικό Λύκειο.*ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./s,'integrated Special Education card must name all three school types');
-  assert.ok(specialText.includes('🏫'),'Special Education school card must use the neutral school icon');
-  assert.ok(!specialText.includes('♿'),'wheelchair icon must not be used as the Special Education symbol');
-  assert.match(await page.locator('#specialSchoolZoneCard').getAttribute('href'),/^\/special-education\.html$/,'Special Education school-grid link must use the production route');
+  // v10: Special Education is reached from the "who are you" finder (tools and the short diagnostic).
+  await page.click('#homeV9Finder [data-finder-zone="special"]');
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'),'/special-education.html','Finder Special Education route must use the production page');
+  assert.match(await page.locator('#homeV9Finder').innerText(),/Ειδικό Γυμνάσιο.*Ειδικό Λύκειο.*ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./s,'Finder must name all three Special Education school types');
+  await page.click('#homeV9Finder [data-finder-need="practice"]');
+  assert.equal(await page.locator('#homeV9FinderCta[data-special-education-diagnostic]').count(),1,'Finder practice route must open the Special Education diagnostic');
   assert.equal(await page.locator('#specialEducationHomeFeature:visible').count(),0,'standalone Special Education bottom banner must not be visible');
+  assert.equal(await page.locator('#homeV9Teacher a[href="/teacher-assistant.html"]').isVisible(),true,'Educator card must be visible on mobile');
 
-  const specialMapText=(await page.locator('#homeV8HelpersMount [data-special-education-diagnostic]').innerText()).trim();
-  assert.match(specialMapText,/Ειδικά σχολεία/,'Current Practice Map must retain a Special Education entry');
   const specialAiText=(await page.locator('#homeV8HelpersMount .home-v8-ai a').last().innerText()).trim();
   assert.match(specialAiText,/Ειδικά σχολεία/,'Current AI Help area must retain a Special Education entry');
 

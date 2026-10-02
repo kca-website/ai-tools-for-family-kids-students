@@ -73,7 +73,7 @@ assert.match(practiceMap,/questionsPerSession:3,choicesPerQuestion:2,inlineQuiz:
 assert.match(practiceMap,/verifiedTopics\(subject\)/,'Practice Map must filter to official exact topics');
 assert.doesNotMatch(practiceMap,/Θεματική υποστήριξης|Math\.random/,'Practice Map must not generate guessed topics');
 const navigator=fs.readFileSync(new URL('navigator-home.js',root),'utf8');
-assert.match(navigator,/mapGel:[^\n]*ΓΕΛ/,'Homepage Practice Map must identify GEL separately');
-assert.match(navigator,/mapEpal:[^\n]*ΕΠΑΛ/,'Homepage Practice Map must identify EPAL separately');
+assert.match(navigator,/mapGel:[^\n]*ΓΕΛ/,'Homepage finder must identify GEL separately for the Practice Map');
+assert.match(navigator,/mapEpal:[^\n]*ΕΠΑΛ/,'Homepage finder must identify EPAL separately for the Practice Map');
 
 console.log('EPAL student official-topic boundary smoke passed.');

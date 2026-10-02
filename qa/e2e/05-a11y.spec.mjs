@@ -71,11 +71,14 @@ test.describe('keyboard & focus', () => {
     expect(bad.filter((b) => !b.visible)).toEqual([]);
   });
 
-  test('zone cards are real buttons, reachable and activatable with keyboard', async ({ page }) => {
+  test('finder chips are real buttons, reachable and activatable with keyboard', async ({ page }) => {
     await page.goto('/');
     await page.waitForTimeout(800);
-    const card = page.locator('button.zone-card', { hasText: 'Δημοτικό' });
-    await card.focus();
+    for (const chip of ['[data-finder-role="guardian"]', '[data-finder-zone="primary"]', '[data-finder-need="tools"]']) {
+      await page.locator(`#homeV9Finder ${chip}`).focus();
+      await page.keyboard.press('Enter');
+    }
+    await page.locator('#homeV9FinderCta').focus();
     await page.keyboard.press('Enter');
     await expect(page).toHaveURL(/\/primary\/guardian\/tools$/);
   });

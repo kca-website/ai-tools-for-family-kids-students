@@ -15,7 +15,7 @@ const sampler = () => {
     ready: document.documentElement.classList.contains('navigator-home-ready'),
     zoneVisible: visible(document.getElementById('zoneSelectView')),
     legacyHeroCta: visible(document.querySelector('.hero__quiz-cta')),
-    zoneCards: [...document.querySelectorAll('button.zone-card')].filter(visible).length,
+    finderRoles: [...document.querySelectorAll('#homeV9Finder [data-finder-role]')].filter(visible).length,
   });
   const loop = () => { snap(); if (performance.now() - t0 < 4000) requestAnimationFrame(loop); };
   requestAnimationFrame(loop);
@@ -35,7 +35,7 @@ test.describe('home first paint', () => {
       expect(early, 'frames where the home was visible before navigator-home-ready (legacy home flash)').toEqual([]);
       expect(frames.filter((f) => f.legacyHeroCta), 'legacy hero CTA visible').toEqual([]);
       expect(frames.at(-1).zoneVisible).toBe(true);
-      expect(frames.at(-1).zoneCards).toBeGreaterThanOrEqual(4);
+      expect(frames.at(-1).finderRoles).toBeGreaterThanOrEqual(4);
     });
   }
 

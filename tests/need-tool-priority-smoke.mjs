@@ -5,7 +5,7 @@ const LOCAL = 'http://127.0.0.1:4173';
 
 async function openPath(page, path) {
   await page.goto(`${LOCAL}/`, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForSelector('#zoneGrid', { timeout: 30000 });
+  await page.waitForSelector('#zoneGrid', { state: 'attached', timeout: 30000 });
   await page.evaluate((route) => {
     history.replaceState({}, '', route);
     window.dispatchEvent(new PopStateEvent('popstate'));

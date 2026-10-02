@@ -396,13 +396,13 @@
       return;
     }
     if(action==="tools"){
-      document.getElementById("zoneGrid")?.scrollIntoView({behavior:"smooth",block:"start"});
+      (document.getElementById("homeV9Finder") || document.getElementById("zoneGrid"))?.scrollIntoView({behavior:"smooth",block:"start"});
       return;
     }
     if(action==="help"){
       const help=document.querySelector(".hero__ai-help");
       if(help && getComputedStyle(help).display!=="none") help.scrollIntoView({behavior:"smooth",block:"center"});
-      else document.getElementById("zoneGrid")?.scrollIntoView({behavior:"smooth",block:"start"});
+      else (document.getElementById("homeV8AiTitle") || document.getElementById("zoneGrid"))?.scrollIntoView({behavior:"smooth",block:"start"});
     }
   }
 

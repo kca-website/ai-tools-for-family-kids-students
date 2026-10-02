@@ -2,7 +2,7 @@
 // and every path that needs the data (zone entry, quiz, tutor, EPAL modal, search, deep links) still works without flashing the legacy shell.
 import fs from 'node:fs';
 import path from 'node:path';
-import { test, expect } from './fixtures.mjs';
+import { test, expect, openZoneFromHome } from './fixtures.mjs';
 import { REPO } from '../scripts/lib.mjs';
 
 const HEAVY_FILES = ['quiz-data.js', 'learning-paths-data.js', 'official-curriculum-data.js', 'gel-2026-2027-update.js', 'tutor.js', 'curriculum-resolver.js'];
@@ -123,7 +123,7 @@ test.describe('anything that needs the data still works from the home', () => {
     await page.goto('/', { waitUntil: 'commit' });
     await page.waitForSelector('html.navigator-home-ready', { state: 'attached', timeout: 60_000 });
     const heavyAtClick = await page.evaluate(() => window.__aitools4kidsHeavyLoaded === true);
-    await page.locator('button.zone-card', { hasText: 'Δημοτικό' }).click();
+    await openZoneFromHome(page, 'primary');
     await expect(page).toHaveURL(/\/primary\/guardian\/tools$/, { timeout: 30_000 });
     await expect(page.locator('#pathView')).toBeVisible();
     test.info().annotations.push({ type: 'heavy-loaded-at-click', description: String(heavyAtClick) });

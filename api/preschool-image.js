@@ -90,7 +90,7 @@ module.exports = async function handler(req, res) {
     'Only the named non-human subject and a simple setting. No humans, no children, no families, no portraits.',
     'Pastel colors, simple rounded shapes, warm light, clean composition, one clear focal subject.',
     'Safe and calm for ages 4 to 6. No violence, fear, weapons, medicine, fire, sharp tools or dangerous situations.',
-    'No letters, no words, no writing, no symbols or characters of any alphabet, no lanterns with writing, no logos, no watermark, no UI, no photorealism.',
+    'No letters, no words, no writing, no symbols or characters of any alphabet, no logos, no watermark, no UI, no photorealism.',
     'Square educational illustration, polished children\'s book style.'
   ].join(' ');
 

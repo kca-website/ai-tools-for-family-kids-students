@@ -131,6 +131,77 @@
   const CS_C=["Κεφάλαιο 1 — επίσημες σημειώσεις «Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ»","Κεφάλαιο 2 — επίσημες σημειώσεις «Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ»","Κεφάλαιο 3 — επίσημες σημειώσεις «Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ»"];
   const ENGLISH_A=["Unit 1","Unit 2","Unit 3","Unit 4","Unit 6","Unit 7"];
 
+  // General-education subjects: units from the official 2026–27 ΕΠΑ.Λ. general-education
+  // guidance (ΑΔΑ: ΡΦΣΥ46ΝΚΠΔ-ΖΝ9) and the foreign-languages guidance (ΑΔΑ: Ψ1Κ646ΝΚΠΔ-Ε73).
+  const BIOLOGY_A=[
+    "Κεφάλαιο 1 — Από το κύτταρο στον οργανισμό · Κύτταρα και ιστοί · Όργανα και συστήματα οργάνων",
+    "Κεφάλαιο 3 — Κυκλοφορικό σύστημα · Καρδιά · Αιμοφόρα αγγεία (εκτός «Αρτηριακή πίεση») · Αίμα",
+    "Κεφάλαιο 9 — Νευρικό σύστημα · Νευρικά κύτταρα (εκτός «Δυναμικό ηρεμίας», «Νευρική ώση», «Συνάψεις») · Περιφερικό και Κεντρικό Νευρικό Σύστημα",
+    "Κεφάλαιο 12 — Αναπαραγωγή, ανάπτυξη · Αναπαραγωγικό σύστημα (εκτός «Εμμηνορρυσιακός κύκλος») · Ανάπτυξη του εμβρύου, τοκετός (με τις ρητές εξαιρέσεις)"
+  ];
+  const CIVICS_A=[
+    "Κεφάλαιο 1 — Η κοινωνία, η πολιτεία και η οικονομία · §1.1 · §1.5 (1.5.1, 1.5.2)",
+    "Κεφάλαιο 2 — Η κοινωνία · §2.1 Από την αγροτική κοινωνία στην κοινωνία της πληροφορίας · §2.2 Βασικά χαρακτηριστικά της ελληνικής κοινωνίας",
+    "Κεφάλαιο 4 — Η οικονομία · §4.4 Το κράτος ως παραγωγός και καταναλωτής · §4.5 Βασικά χαρακτηριστικά της ελληνικής οικονομίας",
+    "Κεφάλαιο 5 (Οικονομικά Γ΄ Γυμνασίου) — Βασικά οικονομικά μεγέθη · §5.1–5.6 · §5.8 Πληθωρισμός",
+    "Κεφάλαιο 6 — Κοινωνικοποίηση και πολιτικοποίηση · §6.1 · §6.2.4–6.2.6 · §6.3 Κοινωνικός έλεγχος",
+    "Κεφάλαιο 7 — Ο ελεύθερος, υπεύθυνος και ενεργός πολίτης · §7.6 · §7.7 · §7.8 · §7.10 Ο ψηφιακός πολίτης"
+  ];
+  const RELIGION_A=[
+    "Θ.Ε.1 — Ορθόδοξη πίστη και διδασκαλία (εκτός σελ. 24–25)",
+    "Θ.Ε.2 — Το σώμα της Εκκλησίας (εκτός σελ. 57–59 και 68–70)",
+    "Θ.Ε.3 — Λατρεία και μυστήρια της Ορθόδοξης Εκκλησίας (εκτός σελ. 91–92)",
+    "Θ.Ε.4 — Διαστάσεις της χριστιανικής διδασκαλίας (εκτός σελ. 131–133, 149–152, 162–164)"
+  ];
+  const INFORMATICS_A=[
+    "Κεφάλαιο 7 — Προγραμματιστικά περιβάλλοντα, δημιουργία εφαρμογών",
+    "Κεφάλαιο 9 — μόνο §9.3 Από τον Web 1.0 στον Web X.0",
+    "Κεφάλαιο 10 — Υπηρεσίες Διαδικτύου",
+    "Κεφάλαιο 11 — HTML και CSS",
+    "Κεφάλαιο 13 — Εφαρμογές Νέφους",
+    "Κεφάλαιο 14 — μόνο §14.2 Επικοινωνία και συνεργασία από απόσταση",
+    "Κεφάλαιο 15 — Κοινωνικά Δίκτυα",
+    "Κεφάλαιο 16 — Ασφάλεια στο Διαδίκτυο"
+  ];
+  const CHEMISTRY_B=[
+    "Χημεία Α΄ Λυκείου, Κεφάλαιο 4 — Στοιχειομετρία · §4.1–4.3 · §4.4 (με τις ρητές εξαιρέσεις)",
+    "Χημεία Β΄ Λυκείου, Κεφάλαιο 1 — Γενικό μέρος οργανικής χημείας · §1.1–1.2 · §1.3 μόνο κορεσμένοι υδρογονάνθρακες · §1.4 μόνο ισομέρεια αλυσίδας",
+    "Χημεία Β΄ Λυκείου, Κεφάλαιο 2 — Πετρέλαιο, υδρογονάνθρακες · §2.1–2.2 · §2.3 Αλκάνια (εκτός «Παρασκευές», «Υποκατάσταση») · §2.4 Καυσαέρια"
+  ];
+  const RELIGION_B=[
+    "Θ.Ε.1 — Ο Θεός (εκτός σελ. 13 και 37–40)",
+    "Θ.Ε.2 — Η προσφορά του Χριστιανισμού (εκτός σελ. 42–45, 57–59, 72–76)",
+    "Θ.Ε.3 — Η χριστιανική κοινότητα σε ένα πλουραλιστικό κόσμο (εκτός σελ. 95–97, 109–112)",
+    "Θ.Ε.4 — Τα κυριότερα θρησκεύματα (εκτός σελ. 119, 134–135)"
+  ];
+  const PHYSICS_C=[
+    "Κεφάλαιο 1 — Μαγνητικά πεδία · §1.1, 1.2, 1.3.Γ, 1.4, 1.7",
+    "Κεφάλαιο 2 — Επαγωγικά φαινόμενα · §2.1–2.3 · §2.5 Κανόνας του Lenz (εκτός ερμηνείας)",
+    "Κεφάλαιο 3 — Εναλλασσόμενα ρεύματα · §3.1–3.4",
+    "Κεφάλαιο 4 — Μηχανικά κύματα · §4.1–4.4",
+    "Κεφάλαιο 5 — Σεισμικά κύματα · §5.1–5.4",
+    "Κεφάλαιο 6 — Ηχητικά κύματα · §6.1–6.7",
+    "Κεφάλαιο 7 — Ηλεκτρομαγνητικά κύματα · §7.1–7.3 (§7.3.8)",
+    "Κεφάλαιο 8 — Φως, ανάκλαση, κάτοπτρα · §8.1–8.5",
+    "Κεφάλαιο 9 — Διάθλαση, φακοί, όραση · §9.1–9.3 · §9.9–9.10 (επιγραμματικά)",
+    "Κεφάλαιο 11 — Ακτινοβολίες και περιβάλλον · §11.1–11.2 · §11.6 (επιγραμματικά) · §11.7"
+  ];
+  const CHEMISTRY_C=[
+    "Χημεία Β΄ Λυκείου, Κεφάλαιο 1 — §1.3 ονοματολογία ακόρεστων υδρογονανθράκων, αλκοολών, καρβοξυλικών οξέων · §1.4 ισομέρεια θέσης και ομόλογης σειράς",
+    "Χημεία Β΄ Λυκείου, Κεφάλαιο 2 — §2.5 Αλκένια · §2.6 Αλκίνια (με τις ρητές εξαιρέσεις) · §2.8 Ατμοσφαιρική ρύπανση",
+    "Χημεία Β΄ Λυκείου, Κεφάλαιο 3 — Αλκοόλες · §3.1–3.2 (με τις ρητές εξαιρέσεις)",
+    "Χημεία Β΄ Λυκείου, Κεφάλαιο 4 — Καρβοξυλικά οξέα · Εισαγωγή · §4.1 Αιθανικό οξύ",
+    "Χημεία και Ζωντανοί Οργανισμοί, Κεφάλαιο 1 — Εισαγωγή στη Βιοχημεία",
+    "Χημεία και Ζωντανοί Οργανισμοί, Κεφάλαιο 2 — Χημική σύσταση του κυττάρου · §2.1–2.3",
+    "Χημεία και Ζωντανοί Οργανισμοί, Κεφάλαιο 3 — Μεταβολισμός, βιοχημικές αντιδράσεις · §3.1–3.3 Ένζυμα"
+  ];
+  // Β΄ and Γ΄ share one book, taught continuously; the units are the book's own contents.
+  const ENGLISH_BC=[
+    "Unit 1 — Welcome Back","Unit 2 — Getting Away","Unit 3 — Food and Entertainment",
+    "Unit 4 — The Changing Face of Nature","Unit 5 — Stop and Reload","Unit 6 — Technology",
+    "Unit 7 — Adolescence","Unit 8 — A Sport for Everyone","Unit 9 — Go for it!","Unit 10 — Stop and Reload"
+  ];
+
   const AGRI_TOPICS={
     rural:["Κεφάλαιο 2 — Βασικές έννοιες στην οικονομική της παραγωγής γεωργικών προϊόντων","Κεφάλαιο 3 — Μορφές γεωργικών εκμεταλλεύσεων","Κεφάλαιο 4 — Παράγοντες επιλογής της παραγωγικής κατεύθυνσης","Κεφάλαιο 5 — Συντελεστές γεωργικής παραγωγής","Κεφάλαιο 6 — Παραγωγικές δαπάνες"],
     environment:["Κεφάλαιο 1 — Εισαγωγή","Κεφάλαιο 2 — Φυτική παραγωγή και περιβάλλον","Κεφάλαιο 3 — Ζωική παραγωγή και περιβάλλον","Κεφάλαιο 4 — Δάσος και περιβάλλον","Κεφάλαιο 5 — Αλιεία και περιβάλλον"],
@@ -230,12 +301,12 @@
       common("math","Μαθηματικά (Άλγεβρα + Γεωμετρία)",MATH_A,{sourceUrl:GENERAL_GUIDANCE}),
       common("physics","Φυσική",PHYSICS_A,{sourceUrl:GENERAL_GUIDANCE}),
       common("chemistry","Χημεία",CHEMISTRY_A,{sourceUrl:GENERAL_GUIDANCE}),
-      common("biology","Βιολογία",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("civics","Πολιτική Παιδεία",[],{sourceUrl:GENERAL_GUIDANCE}),
+      common("biology","Βιολογία",BIOLOGY_A,{sourceUrl:GENERAL_GUIDANCE}),
+      common("civics","Πολιτική Παιδεία",CIVICS_A,{sourceUrl:GENERAL_GUIDANCE}),
       common("history","Ιστορία",HISTORY_A,{sourceUrl:GENERAL_GUIDANCE}),
-      common("religion","Θρησκευτικά",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("pe","Φυσική Αγωγή",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("informatics","Πληροφορική",[],{sourceUrl:GENERAL_GUIDANCE}),
+      common("religion","Θρησκευτικά",RELIGION_A,{sourceUrl:GENERAL_GUIDANCE}),
+      common("pe","Φυσική Αγωγή",[],{sourceUrl:GENERAL_GUIDANCE,noClosedSyllabus:true}),
+      common("informatics","Πληροφορική",INFORMATICS_A,{sourceUrl:GENERAL_GUIDANCE}),
       common("english","Αγγλικά",ENGLISH_A,{sourceUrl:FOREIGN_LANG}),
       common("research-technology","Ερευνητική Εργασία στην Τεχνολογία",[],{sourceUrl:EPAL_GENERAL_HUB}),
       common("creative-zone","Ζώνη Δημιουργικών Δραστηριοτήτων",[],{sourceUrl:EPAL_GENERAL_HUB}),
@@ -253,21 +324,21 @@
       common("new-greek","Νέα Ελληνικά",NEW_GREEK.b,{sourceUrl:GENERAL_GUIDANCE}),
       common("math","Μαθηματικά (Άλγεβρα + Γεωμετρία)",MATH_B,{sourceUrl:GENERAL_GUIDANCE}),
       common("physics","Φυσική",PHYSICS_B,{sourceUrl:GENERAL_GUIDANCE}),
-      common("chemistry","Χημεία",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("religion","Θρησκευτικά",[],{sourceUrl:GENERAL_GUIDANCE}),
+      common("chemistry","Χημεία",CHEMISTRY_B,{sourceUrl:GENERAL_GUIDANCE}),
+      common("religion","Θρησκευτικά",RELIGION_B,{sourceUrl:GENERAL_GUIDANCE}),
       common("computer-science","Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ",CS_B,{sourceUrl:GENERAL_GUIDANCE,textbookUrl:CS_BOOK}),
-      common("pe","Φυσική Αγωγή",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("english","Αγγλικά",[],{sourceUrl:FOREIGN_LANG,continuation:true}),
+      common("pe","Φυσική Αγωγή",[],{sourceUrl:GENERAL_GUIDANCE,noClosedSyllabus:true}),
+      common("english","Αγγλικά",ENGLISH_BC,{sourceUrl:FOREIGN_LANG,continuation:true}),
       ...B_SECTOR_SUBJECTS
     ],
     c:[
       common("new-greek","Νέα Ελληνικά",NEW_GREEK.c,{sourceUrl:GENERAL_GUIDANCE}),
       common("math","Μαθηματικά (Άλγεβρα + Γεωμετρία)",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("physics","Φυσική",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("chemistry","Χημεία",[],{sourceUrl:GENERAL_GUIDANCE}),
+      common("physics","Φυσική",PHYSICS_C,{sourceUrl:GENERAL_GUIDANCE}),
+      common("chemistry","Χημεία",CHEMISTRY_C,{sourceUrl:GENERAL_GUIDANCE}),
       common("computer-science","Εισαγωγή στις Αρχές της Επιστήμης των Η/Υ",CS_C,{sourceUrl:GENERAL_GUIDANCE}),
-      common("pe","Φυσική Αγωγή",[],{sourceUrl:GENERAL_GUIDANCE}),
-      common("english","Αγγλικά",[],{sourceUrl:FOREIGN_LANG,continuation:true}),
+      common("pe","Φυσική Αγωγή",[],{sourceUrl:GENERAL_GUIDANCE,noClosedSyllabus:true}),
+      common("english","Αγγλικά",ENGLISH_BC,{sourceUrl:FOREIGN_LANG,continuation:true}),
       ...C_SECTORS.map(([id,label])=>gateway("c",id,label))
     ]
   };

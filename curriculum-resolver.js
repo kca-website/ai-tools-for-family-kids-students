@@ -51,7 +51,9 @@
       const key=norm(labelForTopic(row));
       if(!key) return;
       const current=map.get(key);
-      if(!current || topicRank(row.status)>topicRank(current.status)) map.set(key,row);
+      // A topic that is also an annual-guidance topic stays in the main group even
+      // when its book-unit duplicate carries the stronger source status.
+      if(!current || topicRank(row.status)>topicRank(current.status)) map.set(key,current && current.topicGroup!=="book" && row.topicGroup==="book" ? Object.assign({},row,{topicGroup:current.topicGroup||""}) : row);
       else if(current && !current.sourceUrl && row.sourceUrl) current.sourceUrl=row.sourceUrl;
     });
     return [...map.values()];

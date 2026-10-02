@@ -35,9 +35,11 @@ try{
         const unitOptions=await page.locator('#unit option').evaluateAll(opts=>opts.map(o=>({value:o.value,label:(o.textContent||'').trim()})));
         const units=unitOptions.map(x=>x.label).filter(Boolean);
         const customOnly=unitOptions.length===1&&unitOptions[0].value==='custom';
-        const missing=units.length===0 || customOnly || units.some(x=>x.startsWith('Δεν υπάρχει χαρτογραφημένη ενότητα')||x.startsWith('Γράψε την ακριβή ενότητα'));
-        const usable=missing?[]:units;
-        rows.push({context:ctx.label,contextId:ctx.id,grade:gr.label,gradeId:gr.id,subject:sub.label,subjectId:sub.id,topicCount:usable.length,missing,topics:usable});
+        // Officially open scope (no closed syllabus published): reported separately, not as a mapping gap.
+        const officialOpenScope=customOnly && units.some(x=>x.startsWith('Δεν έχει δημοσιευθεί επίσημη ύλη')||x.startsWith('Η Φυσική Αγωγή δεν έχει κλειστή ύλη'));
+        const missing=!officialOpenScope && (units.length===0 || customOnly || units.some(x=>x.startsWith('Δεν υπάρχει χαρτογραφημένη ενότητα')||x.startsWith('Γράψε την ακριβή ενότητα')));
+        const usable=(missing||officialOpenScope)?[]:units;
+        rows.push({context:ctx.label,contextId:ctx.id,grade:gr.label,gradeId:gr.id,subject:sub.label,subjectId:sub.id,topicCount:usable.length,missing,officialOpenScope,topics:usable});
 
         if(usable.length){
           const fp=JSON.stringify(usable);
@@ -55,17 +57,18 @@ try{
   }
 
   const missing=rows.filter(r=>r.missing);
-  const covered=rows.filter(r=>!r.missing);
+  const openScope=rows.filter(r=>r.officialOpenScope);
+  const covered=rows.filter(r=>!r.missing&&!r.officialOpenScope);
   const byContext={};
   rows.forEach(r=>{
     const k=r.context;
-    byContext[k]??={total:0,covered:0,missing:0};
+    byContext[k]??={total:0,covered:0,officialOpenScope:0,missing:0};
     byContext[k].total++;
-    if(r.missing) byContext[k].missing++; else byContext[k].covered++;
+    if(r.missing) byContext[k].missing++; else if(r.officialOpenScope) byContext[k].officialOpenScope++; else byContext[k].covered++;
   });
 
   console.log('CURRICULUM_COVERAGE_SUMMARY');
-  console.log(JSON.stringify({total:rows.length,covered:covered.length,missing:missing.length,byContext,suspiciousDuplicateCount:suspiciousDuplicates.length,pageErrors},null,2));
+  console.log(JSON.stringify({total:rows.length,covered:covered.length,officialOpenScope:openScope.length,missing:missing.length,byContext,suspiciousDuplicateCount:suspiciousDuplicates.length,pageErrors},null,2));
   console.log('CURRICULUM_MISSING_ROWS');
   console.log(JSON.stringify(missing.map(({topics,...r})=>r),null,2));
   console.log('CURRICULUM_SUSPICIOUS_DUPLICATES');

@@ -178,9 +178,47 @@
     "Τεύχος Β΄, Κεφάλαιο 9: Εφαρμογές της Βιοτεχνολογίας στη γεωργία και την κτηνοτροφία — όλες οι παράγραφοι"
   ]);
 
+  // Ηθική (for students exempt from Religious Studies), Part A Sept–Nov 2026.
+  // Unit titles from circular Φ3/120759/Δ4/15-09-2026, which assigns the official
+  // "Ψηφιακός Φάκελος Υλικού για το μάθημα της Ηθικής" Lyceum A/B folders (τεύχος 1).
+  const ETHICS_SOURCE="https://www.iep.edu.gr/ithiki/";
+  const ethicsA=Object.freeze([
+    "Ηθική (Α΄ μέρος) — 1. Τι είναι η Ηθική;",
+    "Ηθική (Α΄ μέρος) — 2. Αρετολογική Ηθική",
+    "Ηθική (Α΄ μέρος) — 3. Ηθική και συναισθήματα",
+    "Ηθική (Α΄ μέρος) — 4. Ηδονισμός/ηδονοκρατία",
+    "Ηθική (Α΄ μέρος) — 5. Γιατί να υιοθετούμε την ηθική στάση ζωής;",
+    "Ηθική (Α΄ μέρος) — 6. Ζώντας μια ευτυχισμένη ζωή"
+  ]);
+  const ethicsB=Object.freeze([
+    "Ηθική (Α΄ μέρος) — 1. Στωική Ηθική",
+    "Ηθική (Α΄ μέρος) — 2. Δίκαιο και δικαιοσύνη",
+    "Ηθική (Α΄ μέρος) — 3. Οι θεωρίες του κοινωνικού συμβολαίου",
+    "Ηθική (Α΄ μέρος) — 4. Ηθικός εγωισμός",
+    "Ηθική (Α΄ μέρος) — 5. Πολιτισμικός σχετικισμός",
+    "Ηθική (Α΄ μέρος) — 6. Ελευθερία και υπευθυνότητα",
+    "Ηθική (Α΄ μέρος) — 7. Η αγάπη για τον εαυτό μου και τους άλλους"
+  ]);
+
   const map=window.AITOOLSKIDS_SPECIAL_LYCEUM_ANNUAL_2026_2027={
     version:"1.0.0",schoolYear:"2026-2027",verificationDate:"2026-09-20",sourceHub:SOURCE_HUB,
     entries:Object.freeze({
+      "a|ethics":Object.freeze({
+        id:"special-lyceum-a-ethics-framework-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
+        subject:"Ηθική — Α΄ μέρος Σεπτέμβριος–Νοέμβριος 2026",subjectId:"ethics",sourceSubjectIds:Object.freeze(["ethics"]),status:"verified",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-10-02",annualInstructionsStatus:"verified",
+        verificationBasis:"official-lyceum-ethics-circular",sourceTitle:"Ηθική Α΄ Λυκείου — μόνο το Α΄ μέρος (Σεπτέμβριος–Νοέμβριος 2026) · Ψηφιακός Φάκελος Υλικού, τεύχος 1 (εγκύκλιος Φ3/120759/Δ4/15-09-2026)",
+        sourceUrl:ETHICS_SOURCE,officialAnchors:ethicsA,
+        verificationNote:"Ενότητες Α΄ μέρους από τον επίσημο Ψηφιακό Φάκελο Υλικού Ηθικής Α΄ Λυκείου, όπως ορίζονται στην εγκύκλιο Φ3/120759/Δ4/15-09-2026. Δεν πρόκειται για ξεχωριστή οδηγία Ε.Α.Ε.: ο εκπαιδευτικός προσαρμόζει το εύρος και τον ρυθμό στον μαθητή."
+      }),
+      "b|ethics":Object.freeze({
+        id:"special-lyceum-b-ethics-framework-2026-27",grade:"B",gradeId:"b",gradeLabel:"Β΄ Λυκείου",
+        subject:"Ηθική — Α΄ μέρος Σεπτέμβριος–Νοέμβριος 2026",subjectId:"ethics",sourceSubjectIds:Object.freeze(["ethics"]),status:"verified",coverageStatus:"framework",frameworkOnly:true,
+        schoolYear:"2026-2027",verificationDate:"2026-10-02",annualInstructionsStatus:"verified",
+        verificationBasis:"official-lyceum-ethics-circular",sourceTitle:"Ηθική Β΄ Λυκείου — μόνο το Α΄ μέρος (Σεπτέμβριος–Νοέμβριος 2026) · Ψηφιακός Φάκελος Υλικού, τεύχος 1 (εγκύκλιος Φ3/120759/Δ4/15-09-2026)",
+        sourceUrl:ETHICS_SOURCE,officialAnchors:ethicsB,
+        verificationNote:"Ενότητες Α΄ μέρους από τον επίσημο Ψηφιακό Φάκελο Υλικού Ηθικής Β΄ Λυκείου, όπως ορίζονται στην εγκύκλιο Φ3/120759/Δ4/15-09-2026. Δεν πρόκειται για ξεχωριστή οδηγία Ε.Α.Ε.: ο εκπαιδευτικός προσαρμόζει το εύρος και τον ρυθμό στον μαθητή."
+      }),
       "a|informatics":Object.freeze({
         id:"special-lyceum-a-informatics-official-2026-27",grade:"A",gradeId:"a",gradeLabel:"Α΄ Λυκείου",
         subject:"Εφαρμογές Πληροφορικής",subjectId:"informatics",sourceSubjectIds:Object.freeze(["informatics","pliroforiki-a-lykeiou"]),status:"verified",coverageStatus:"exact",

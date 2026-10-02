@@ -1095,6 +1095,9 @@
   document.querySelectorAll('input[name="goal"]').forEach(node=>node.addEventListener('change',()=>publishSharedStudyContext()));
   function restoreStudySelection(){
     const api=window.AITOOLSKIDS_STUDY_CONTEXT,query=new URLSearchParams(location.search);
+    // A bare ?mode= (e.g. the homepage goal chips) preselects the study goal even without a subject.
+    const modeGoal=[...document.querySelectorAll('input[name="goal"]')].find(n=>n.value===query.get('mode'));
+    if(modeGoal)modeGoal.checked=true;
     const explicit=['zone','grade','schoolType','sector','specialty','subject','topic','topicText'].some(key=>query.has(key));
     const saved=savedStudyContext?.roleId==='student'?savedStudyContext:null;
     const selection=explicit?api?.fromSearchParams(query.toString()):saved;

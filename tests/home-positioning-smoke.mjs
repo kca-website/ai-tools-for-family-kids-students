@@ -73,6 +73,14 @@ try {
 
   await page.click('#siteMenuToggle');
   assert.equal(await page.locator('#siteMenuPanel .site-menu-panel__teacher').isVisible(), true, 'Educators must be the first, visible menu entry on mobile');
+  const menuFit = await page.evaluate(() => {
+    const panel = document.getElementById('siteMenuPanel');
+    panel.scrollTop = panel.scrollHeight;
+    const last = [...panel.querySelectorAll('a[href]')].pop().getBoundingClientRect();
+    return { panelBottom: panel.getBoundingClientRect().bottom, lastBottom: last.bottom, viewport: window.innerHeight };
+  });
+  assert.ok(menuFit.panelBottom <= menuFit.viewport + 1, `Mobile menu must fit the visible viewport: ${JSON.stringify(menuFit)}`);
+  assert.ok(menuFit.lastBottom <= menuFit.viewport + 1, `Last mobile menu entry must be reachable: ${JSON.stringify(menuFit)}`);
   await page.click('#siteMenuToggle');
 
   await page.waitForSelector('#homeGlobalSearchInput', { state: 'visible', timeout: 10000 });

@@ -55,8 +55,11 @@
       noteMiddleStuck: "Η AI Βοήθεια για μαθητές Γυμνασίου ανοίγει από 13 ετών. Διάλεξε πρώτα την ηλικία σου στην επόμενη σελίδα.",
       noteHigh: "Για ΕΠΑΛ θα διαλέξεις στη συνέχεια τάξη και, όπου χρειάζεται, τομέα ή ειδικότητα.",
       noteSpecial: "Διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ.",
-      waysTitle: "Τρεις τρόποι να ξεκινήσεις",
-      waysLead: "Διάλεξε έναν. Όλοι λειτουργούν χωρίς λογαριασμό.",
+      waysTitle: "Γρήγορη πρόσβαση",
+      studyGoalsLabel: "Τι θέλεις;",
+      studyGoals: [["understand","🧠","Να το καταλάβω"],["revise","🔁","Επανάληψη"],["test","📝","Γράφω τεστ"],["practice","🎯","Εξάσκηση"]],
+      teacherTasksLabel: "Φτιάξε:",
+      teacherTasks: [["worksheet","📝","Φύλλο εργασίας"],["assessment","✅","Αξιολόγηση"],["lesson","🗂️","Σχέδιο μαθήματος"],["video","🎬","Βίντεο"]],
       aiLinksLabel: "Άνοιξε για:",
       studyBadge: "Νέο · Δωρεάν",
       studyTitle: "AI Μελέτη",
@@ -108,8 +111,11 @@
       noteMiddleStuck: "AI Help for middle-school students opens from age 13. Choose your age first on the next page.",
       noteHigh: "For EPAL you will then choose a grade and, where needed, a sector or specialty.",
       noteSpecial: "Pathway for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L.",
-      waysTitle: "Three ways to start",
-      waysLead: "Pick one. None of them needs an account.",
+      waysTitle: "Quick access",
+      studyGoalsLabel: "What do you need?",
+      studyGoals: [["understand","🧠","Understand it"],["revise","🔁","Review"],["test","📝","Test coming up"],["practice","🎯","Practise"]],
+      teacherTasksLabel: "Create:",
+      teacherTasks: [["worksheet","📝","Worksheet"],["assessment","✅","Assessment"],["lesson","🗂️","Lesson plan"],["video","🎬","Video"]],
       aiLinksLabel: "Open for:",
       studyBadge: "New · Free",
       studyTitle: "AI Study",
@@ -294,14 +300,14 @@
       ${practiceExtra(c)}`;
   }
 
+  // Quick-action chips inside a "three ways" card (same look as the AI Help "Open for" links).
+  const wayChips = (items, href) => items.map(([id,icon,label]) => `<a href="${href(id)}"><span aria-hidden="true">${icon}</span> ${escapeHtml(label)}</a>`).join("");
+
   function helpersMarkup(){
     const c = currentCopy();
     return `
       <div class="home-v8-helpers">
-        <div class="home-v9-section-head">
-          <h2 id="homeV9WaysTitle">${c.waysTitle}</h2>
-          <p>${c.waysLead}</p>
-        </div>
+        <h2 class="home-v9-visually-hidden" id="homeV9WaysTitle">${c.waysTitle}</h2>
         <div class="home-v9-ways">
           <section class="home-v8-ai" aria-labelledby="homeV8AiTitle">
             <span class="home-v9-way__icon" aria-hidden="true">${ICON.chat}</span>
@@ -330,6 +336,8 @@
             <h3 id="homeV9StudyTitle">${c.studyTitle}</h3>
             <p class="home-v8-helper-desc">${c.studyDesc}</p>
             <p class="home-v9-study-way__official"><strong>${c.studyOfficial}</strong><small>${c.studyCoverage}</small></p>
+            <p class="home-v9-way__links-label">${c.studyGoalsLabel}</p>
+            <div class="home-v8-helper-links">${wayChips(c.studyGoals, (id) => `/study.html?mode=${id}`)}</div>
             <a class="home-v9-way__action" href="/study.html">${c.studyCta}</a>
           </section>
 
@@ -338,6 +346,8 @@
             <p class="home-v9-way__eyebrow">${c.teacherWayEyebrow}</p>
             <h3 id="homeV9TeacherTitle">${c.teacherWayTitle}</h3>
             <p class="home-v8-helper-desc">${c.teacherWayDesc}</p>
+            <p class="home-v9-way__links-label">${c.teacherTasksLabel}</p>
+            <div class="home-v8-helper-links">${wayChips(c.teacherTasks, (id) => `/teacher-assistant.html?task=${id}#builder`)}</div>
             <a class="home-v9-way__action" href="/teacher-assistant.html">${c.teacherWayCta}</a>
           </section>
         </div>

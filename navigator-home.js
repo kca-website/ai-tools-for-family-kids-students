@@ -547,7 +547,7 @@
 
   function charactersMarkup(){
     const c = currentCopy();
-    const characterRoute = "#homeHistoryCharacters";
+    const characterRoute = "/history-characters.html";
     return `
       <ul class="home-v9-tile__faces" aria-hidden="true">
         ${c.chars.map(([file]) => `<li><img src="/assets/characters/${file}.png" alt="" width="56" height="56" decoding="async"></li>`).join("")}
@@ -692,8 +692,7 @@
     const characters = ensureSection("homeV9Characters", "home-v9-characters", "homeV9CharactersTitle", charactersMarkup());
 
     const more = ensureMoreSection(characters);
-    const historyGuide = document.getElementById("homeHistoryCharacters");
-    const order = [helpers, historyGuide, study, heading, lead, grid, needs, more].filter(Boolean);
+    const order = [helpers, study, heading, lead, grid, needs, more];
     const current = [...shell.children].filter((el) => order.includes(el));
     if(current.length !== order.length || current.some((el, i) => el !== order[i])){
       order.forEach((el) => shell.appendChild(el));

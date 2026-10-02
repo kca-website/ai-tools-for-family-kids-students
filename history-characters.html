@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Μίλα με ιστορικό χαρακτήρα | aitools4kids.gr</title>
+  <meta name="description" content="Δωρεάν διάλογος με ιστορικούς χαρακτήρες. Διάλεξε AI Μελέτη ή AI Βοήθεια / Βοήθεια Γονέα και βρες τη σωστή τάξη και ενότητα.">
+  <link rel="canonical" href="https://www.aitools4kids.gr/history-characters.html">
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#f5f8fc;color:#18334b;font:17px/1.6 system-ui,sans-serif}a{color:#176584}header,main,footer{max-width:1100px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;gap:16px}header a{font-weight:800;text-decoration:none}.language{display:flex;gap:6px}button{font:inherit;cursor:pointer;padding:7px 13px;border:1px solid #cbd8e4;border-radius:9px;background:white}button[aria-pressed=true]{background:#18334b;color:white}.badge{color:#17654f;font-weight:800}h1{font-size:clamp(28px,4vw,42px);line-height:1.2}h2{font-size:25px;margin:8px 0}.intro{max-width:780px}.paths{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}.path{padding:26px;border:1px solid #d4e0eb;background:white;border-radius:20px;box-shadow:0 6px 25px #18334b08}.number{display:inline-block;background:#eaf5f1;color:#17654f;border-radius:9px;padding:4px 12px;font-weight:800}.steps{padding-left:23px}.path details{margin-top:22px;border-top:1px solid #d4e0eb;padding-top:18px}summary{cursor:pointer;font-weight:800;color:#176584}.note{font-size:15px;color:#53697b}footer{font-size:15px}@media(max-width:720px){.paths{grid-template-columns:1fr}header,main,footer{padding:18px}.path{padding:20px}}
+  </style>
+  <script defer src="/history-character-data.js"></script>
+  <script defer src="/history-character-routes.js"></script>
+</head>
+<body>
+  <header><a href="/">aitools4kids.gr</a><div class="language" aria-label="Language"><button id="el" aria-pressed="true">ΕΛ</button><button id="en" aria-pressed="false">EN</button></div></header>
+  <main>
+    <span class="badge" data-el="Δωρεάν · Με βάση το σχολικό βιβλίο" data-en="Free · Based on the school textbook"></span>
+    <h1 data-el="Μίλα με ιστορικό χαρακτήρα" data-en="Talk to a historical character"></h1>
+    <p class="intro" data-el="Μαθητής ή γονιός; Έχεις δύο διαδρομές για να γνωρίσεις πρόσωπα και ρόλους της Ιστορίας. Διάλεξε πώς θέλεις να ξεκινήσεις και μετά την τάξη και την ενότητα." data-en="Student or parent? You have two routes to explore people and roles from history. Choose how to start, then select the grade and chapter."></p>
+    <div class="paths">
+      <section class="path" aria-labelledby="studyTitle">
+        <span class="number">1</span><h2 id="studyTitle" data-el="AI Μελέτη" data-en="AI Study"></h2>
+        <p data-el="Για τον μαθητή που θέλει να συνδυάσει τη μελέτη του κεφαλαίου με μια συζήτηση με τον χαρακτήρα. Ο γονιός μπορεί να τον βοηθήσει στη διαδρομή." data-en="For a student who wants to combine studying a chapter with talking to a character. A parent can guide them through the route."></p>
+        <ol class="steps"><li data-el="Διάλεξε χαρακτήρα και σχολική ενότητα από τις διαδρομές παρακάτω." data-en="Choose a character and chapter from the routes below."></li><li data-el="Θα ανοίξει η AI Μελέτη με έτοιμη την επιλογή τάξης, μαθήματος και χαρακτήρα." data-en="AI Study opens with the grade, subject and character already selected."></li><li data-el="Πάτησε «Μίλα με ιστορικό χαρακτήρα» και γράψε την ερώτησή σου." data-en="Press “Talk to a historical character” and write your question."></li></ol>
+        <details><summary data-el="Δες χαρακτήρες και διαδρομές μελέτης" data-en="See characters and study routes"></summary><div id="studyRoutes"></div></details>
+      </section>
+      <section class="path" aria-labelledby="helpTitle">
+        <span class="number">2</span><h2 id="helpTitle" data-el="AI Βοήθεια / Βοήθεια Γονέα" data-en="AI Help / Parent Helper"></h2>
+        <p data-el="Για να ξεκινήσεις απευθείας μια συζήτηση. Στο Δημοτικό και το Γυμνάσιο μπαίνεις ως γονιός. Στο Λύκειο μπορεί να μπει και ο μαθητής." data-en="Start a conversation directly. Primary and Middle School use the parent role. High School students can also use Student AI Help."></p>
+        <ol class="steps"><li data-el="Διάλεξε χαρακτήρα και σχολική ενότητα από τις διαδρομές παρακάτω." data-en="Choose a character and chapter from the routes below."></li><li data-el="Θα ανοίξει η σωστή AI Βοήθεια με επιλεγμένη τη λειτουργία «Χαρακτήρας»." data-en="The right AI Help page opens with Character mode selected."></li><li data-el="Γράψε την ερώτησή σου στο πλαίσιο συνομιλίας." data-en="Write your question in the chat box."></li></ol>
+        <details><summary data-el="Δες χαρακτήρες και διαδρομές AI Βοήθειας" data-en="See characters and AI Help routes"></summary><div id="helpRoutes"></div></details>
+      </section>
+    </div>
+    <p class="note" data-el="Οι χαρακτήρες είναι εκπαιδευτικές αναπαραστάσεις AI. Έλεγξε όσα συζητήσατε στο σχολικό βιβλίο. Οι διαθέσιμες διαδρομές φαίνονται κάτω από κάθε όνομα." data-en="Characters are educational AI representations. Check the discussion against the school textbook. Available routes appear under each name."></p>
+  </main>
+  <footer><a href="/" data-el="← Επιστροφή στην αρχική" data-en="← Back to home"></a></footer>
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      function render(lang){
+        document.documentElement.lang=lang;
+        document.querySelectorAll('[data-el]').forEach(el=>el.textContent=el.dataset[lang]);
+        document.getElementById('el').setAttribute('aria-pressed',lang==='el');
+        document.getElementById('en').setAttribute('aria-pressed',lang==='en');
+        document.getElementById('studyRoutes').innerHTML=window.AITOOLSKIDS_CHARACTER_GUIDE(lang,'','study');
+        document.getElementById('helpRoutes').innerHTML=window.AITOOLSKIDS_CHARACTER_GUIDE(lang);
+      }
+      document.getElementById('el').addEventListener('click',()=>render('el'));
+      document.getElementById('en').addEventListener('click',()=>render('en'));
+      render('el');
+    });
+  </script>
+</body>
+</html>

@@ -244,4 +244,5 @@ try {
   }
 }
 
+await import('./schoolbook-formula-grounding.mjs');
 console.log('AI provider router smoke passed.');

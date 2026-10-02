@@ -67,7 +67,7 @@
   <details id="historyCharacterGuide" class="card" style="margin-bottom:18px;padding:12px 16px">
     <summary style="cursor:pointer;font-weight:800" data-el="🎭 Πού βρίσκω τους ιστορικούς χαρακτήρες;" data-en="🎭 Where can I find the historical characters?">🎭 Πού βρίσκω τους ιστορικούς χαρακτήρες;</summary>
     <p class="micro" data-el="Πάτησε μια διαδρομή για να επιλεγούν η τάξη, η ενότητα και ο χαρακτήρας. Μετά πάτησε «Μίλα με ιστορικό χαρακτήρα»." data-en="Choose a route to select the grade, section and character. Then select “Talk with a historical character”.">Πάτησε μια διαδρομή για να επιλεγούν η τάξη, η ενότητα και ο χαρακτήρας. Μετά πάτησε «Μίλα με ιστορικό χαρακτήρα».</p>
-    <div id="historyCharacterRoutes"></div>
+    <div id="historyCharacterRoutes" style="max-height:440px;overflow:auto;padding-right:8px"></div>
   </details>
 
   <main class="grid">
@@ -566,11 +566,14 @@
 
   function renderCharacterRoutes(){
     const catalog=window.AITOOLSKIDS_HISTORY_CHARACTERS||[], routes=[];
+    // Routes whose official source was successfully checked on 2026-10-02.
+    const verifiedRoutes=[["istoria-a-gymnasiou", "Πελοποννησιακός Πόλεμος"], ["istoria-a-lykeiou", "Περικλής και αθηναϊκή δημοκρατία"], ["istoria-a-gymnasiou", "Έργο Μεγάλου Αλεξάνδρου"], ["istoria-a-gymnasiou", "Πορεία προς τη δημοκρατία"], ["istoria-e-dimotikou", "11. Η καθημερινή ζωή στο Βυζάντιο"], ["istoria-b-gymnasiou", "Κεφάλαιο 5 · 1 — Η καθημερινή ζωή στο Βυζάντιο"], ["istoria-b-gymnasiou", "Κεφάλαιο 4 · ΙΙ · 1 — Οι σταυροφορίες και η πρώτη άλωση της Πόλης"], ["istoria-b-lykeiou", "Δ΄ Σταυροφορία και άλωση της Κωνσταντινούπολης το 1204"], ["istoria-b-gymnasiou", "Κεφάλαιο 4 · ΙΙΙ · 2 — Η Άλωση της Πόλης"], ["istoria-b-lykeiou", "Άλωση της Κωνσταντινούπολης το 1453"], ["istoria-b-gymnasiou", "Κεφάλαιο 7 · Ι · 2 — Αναγέννηση και Ανθρωπισμός"], ["istoria-b-lykeiou", "Αναγέννηση και Ανθρωπισμός"], ["istoria-e-dimotikou", "6. Μια νέα πρωτεύουσα, η Κωνσταντινούπολη"], ["istoria-e-dimotikou", "13. Ο Ιουστινιανός μεταρρυθμίζει τη διοίκηση και τη νομοθεσία"], ["istoria-e-dimotikou", "14. Οι Δήμοι αναστατώνουν την πρωτεύουσα με τη «στάση του νίκα»"], ["istoria-e-dimotikou", "15. Η Αγία Σοφία, ένα αριστούργημα της αρχιτεκτονικής"], ["istoria-b-gymnasiou", "Κεφάλαιο 1 · ΙΙ · 1 — Ο Ιουστινιανός και το έργο του"], ["istoria-b-gymnasiou", "Κεφάλαιο 1 · ΙΙ · 2 — Ο Ηράκλειος και η δυναστεία του (610-717): Εσωτερική μεταρρύθμιση και αγώνας επιβίωσης"], ["istoria-b-gymnasiou", "Κεφάλαιο 4 · Ι · 2 — Οι Κομνηνοί και η μερική αναδιοργάνωση της αυτοκρατορίας"]];
     const zoneLabels={primary:['Δημοτικό','Primary'],middle:['Γυμνάσιο','Middle School'],high:['ΓΕΛ','General Lyceum']};
     Object.entries(grades).forEach(([zone,gradeRows])=>gradeRows.forEach(([grade,gradeLabel])=>{
       (resolver()?.getSubjects?.(zone,grade)||[]).filter(subject=>/ιστορ|istoria|history/i.test((subject.subjectLabelEl||'')+' '+subject.id)).forEach(subject=>{
         studyTopicsFor(zone,grade,subject.id).forEach(topic=>{
           const label=topic.labelEl||topic.titleEl||topic.label||topic.id;
+          if(!verifiedRoutes.some(([id,title])=>id===subject.id.replace(/^history-/,'istoria-')&&title===label))return;
           charactersForTopic((subject.subjectLabelEl||'')+' '+subject.id,label).forEach(character=>routes.push({zone,grade,gradeLabel,subject,topic,label,character}));
         });
       });
@@ -585,7 +588,7 @@
         return '<li style="margin:6px 0"><a href="/study.html?'+esc(query.toString())+'">'+esc(path)+'</a></li>';
       }).join('')+'</ul>';
     }).join('');
-    if(missing.length)$('historyCharacterRoutes').innerHTML+='<p class="micro">'+esc((lang==='en'?'No selectable section yet for: ':'Δεν υπάρχει ακόμη διαθέσιμη ενότητα επιλογής για: ')+missing.join(', '))+'.</p>';
+    if(missing.length)$('historyCharacterRoutes').innerHTML+='<p class="micro">'+esc((lang==='en'?'No verified textbook route yet for: ':'Δεν υπάρχει ακόμη επαληθευμένη διαδρομή με σχολικό βιβλίο για: ')+missing.join(', '))+'.</p>';
   }
 
   let activeStudyCharacter = null;
@@ -593,7 +596,7 @@
     const normalize = value => String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ');
     const subject=normalize(subjectValue),topic=normalize(topicValue);
     if(!/ιστορ|istoria|history/.test(subject) || /χρονογραμμ|ιστορικ.*πηγ|ορια.*τεκμηρ|timeline|chronolog|source limits/.test(topic))return [];
-    return (window.AITOOLSKIDS_HISTORY_CHARACTERS||[]).filter(c=>(c.topicPatterns||[]).some(p=>topic.includes(normalize(p))));
+    return (window.AITOOLSKIDS_HISTORY_CHARACTERS||[]).filter(c=>!(c.id==='constantinopleResident1453'&&/πρωτη αλωση|1204/.test(topic))&&(c.topicPatterns||[]).some(p=>topic.includes(normalize(p))));
   }
   function studyCharacterChoices(){return charactersForTopic(selectedSubjectLabel()+' '+selectedSubjectId(),selectedTopic())}
   function refreshStudyCharacters(){

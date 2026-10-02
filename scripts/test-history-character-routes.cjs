@@ -19,5 +19,6 @@ const characters=new Set();
 for(const link of links){const q=new URL(link,'https://www.aitools4kids.gr').searchParams;const topics=context.studyTopicsFor(q.get('zone'),q.get('grade'),q.get('subject'));assert.ok(topics.some(t=>t.id===q.get('topic')),link);assert.ok(context.charactersForTopic(q.get('subject'),q.get('topicText')).some(c=>c.id===q.get('character')),link);characters.add(q.get('character'))}
 assert.equal(context.charactersForTopic('istoria-b-gymnasiou','Εξωτερικά προβλήματα και αναδιοργάνωση του κράτους').some(c=>c.id==='kapodistrias'),false);
 assert.equal(context.charactersForTopic('istoria-b-gymnasiou','Περίοδος της κρίσης του Βυζαντίου (1025-1453)').some(c=>c.id==='constantinopleResident1453'),false);
+assert.equal(context.charactersForTopic('istoria-b-gymnasiou','Οι σταυροφορίες και η πρώτη άλωση της Πόλης').some(c=>c.id==='constantinopleResident1453'),false);
 console.log(`${links.length} selectable routes for ${characters.size} characters; no false Kapodistrias or broad 1453 match`);
 fs.writeFileSync('/tmp/verified-character-links.json',JSON.stringify(links));

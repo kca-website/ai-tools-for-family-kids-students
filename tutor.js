@@ -1269,7 +1269,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
 
     return Object.values(CHARACTER_CATALOG).filter((character) => {
       if ((character.topicIds || []).includes(gap.id)) return true;
-      return (character.topicPatterns || []).some((pattern) => topicText.includes(normalizeCharacterText(pattern)));
+      return !(character.id === 'constantinopleResident1453' && /πρωτη αλωση|1204/.test(topicText)) && (character.topicPatterns || []).some((pattern) => topicText.includes(normalizeCharacterText(pattern)));
     });
   }
 

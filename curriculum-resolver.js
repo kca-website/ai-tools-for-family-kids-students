@@ -205,10 +205,15 @@
         sourceLabelEn:c.sourceLabelEn||c.coverageLabelEn||""
       })));
     }
-    if(bookSections?.sections?.length && (!preferCurrentCatalogTopics || hasAnyExactGroundedBookSection)){
+    // Book sections are always offered. When the 2026-27 annual guidance topics
+    // take priority, they stay first and the book units follow as their own
+    // group, so a parent can still pick the exact unit the child is reading.
+    if(bookSections?.sections?.length){
+      const bookAsSecondary=preferCurrentCatalogTopics && !hasAnyExactGroundedBookSection;
       bookSections.sections.forEach((label,i)=>{
         const directUrl = groundedSectionMap[label] || "";
         rows.push({
+          topicGroup:bookAsSecondary ? "book" : "",
           id:(subject.quizId||subject.id)+".verified-book-section-"+(i+1),
           labelEl:label,labelEn:label,
           status:directUrl ? "official-book-section-grounded" : "official-book-section-source-missing",
@@ -330,8 +335,10 @@
       const key=s.quizId?("quiz:"+s.quizId):("id:"+(s.id||norm(cleanSubject(s.subjectLabelEl))));
       const current=dedup.get(key);
       if(!current){ dedup.set(key,s); return; }
-      const currentScore=(modeRank[current.topicMode]||0)*100+(current.topics||[]).length;
-      const nextScore=(modeRank[s.topicMode]||0)*100+(s.topics||[]).length;
+      // Secondary book-unit rows must not change which duplicate wins.
+      const primaryCount=(x)=>(x.topics||[]).filter((t)=>t.topicGroup!=="book").length;
+      const currentScore=(modeRank[current.topicMode]||0)*100+primaryCount(current);
+      const nextScore=(modeRank[s.topicMode]||0)*100+primaryCount(s);
       const preferred=nextScore>currentScore?s:current;
       const other=preferred===s?current:s;
       preferred.topics=mergeTopics([...(preferred.topics||[]),...(other.topics||[])]);

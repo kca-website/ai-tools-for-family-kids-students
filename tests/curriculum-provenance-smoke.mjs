@@ -89,7 +89,9 @@ try{
   assert.match(ctx,/Επίσημη βάση/i,'Tutor context must name the evidence basis');
   assert.match(ctx,/αναλυτικός χάρτης/i,'Mapped GEL content must state that it is a navigation map, not exact official section titles');
   assert.ok(await page.locator('#tutorContextBox a[href^="https://"]').count()>=1,'Tutor context must expose a clickable source link');
-  assert.equal((await page.locator('#tutorTopic option').count()),14,'A Lyceum Biology should expose all 14 documented mapped topics');
+  // Annual-guidance topics come first; official book units follow in their own group.
+  assert.equal((await page.locator('#tutorTopic optgroup').first().locator('option').count()),14,'A Lyceum Biology should expose all 14 documented mapped topics');
+  assert.match(await page.locator('#tutorTopic optgroup').nth(1).getAttribute('label'),/Όλες οι ενότητες του βιβλίου/,'Book units must be offered as a separate group');
 
   assert.deepEqual(errors,[],`Curriculum provenance browser errors: ${errors.join('\n')}`);
   await page.close();

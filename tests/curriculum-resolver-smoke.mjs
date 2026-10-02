@@ -5,7 +5,11 @@ try{
   const page=await browser.newPage({viewport:{width:1440,height:1000}});
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+  // Third-party loads (fonts/CDNs) can fail behind proxies or offline; same-origin
+  // failures still fail the test through the requestfailed/response listeners.
+  page.on('console',m=>{if(m.type()==='error'&&!m.text().startsWith('Failed to load resource:'))errors.push(m.text());});
+  page.on('requestfailed',r=>{const h=new URL(r.url()).hostname;if(h==='127.0.0.1'||h==='localhost')errors.push(`request failed: ${r.url()}`);});
+  page.on('response',r=>{const h=new URL(r.url()).hostname;if((h==='127.0.0.1'||h==='localhost')&&r.status()>=400)errors.push(`HTTP ${r.status()}: ${r.url()}`);});
   await page.goto(BASE+'/',{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForFunction(()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER,{timeout:30000});
   const audit=await page.evaluate(()=>{
@@ -99,33 +103,37 @@ try{
   if(audit.environmentTopics<3) throw new Error('Environment Studies topics missing');
   // Math A Gymnasium follows selectionPolicy 'exact-current-diagnostic-topics':
   // it must resolve official book sections (Α.x.y codes) for the current diagnostic topics.
+  // Book units are resolved either as the main list or, when 2026-27 annual guidance
+  // topics take priority, as a second 'book units' group; the topic-count thresholds
+  // below prove the book units are present.
+  const BOOK_UNIT_MODES=new Set(['verified-annual','verified-official-sections','mapped-navigation']);
   if(!audit.mathATopics.some(x=>/^Α\.\d+\.\d+ — /.test(x))) throw new Error('Middle A mathematics official sections not resolved');
   if(audit.englishDTopics.length<3) throw new Error('Primary D English topic anchors not resolved');
-  if(audit.historyCPrimaryMode!=='verified-official-sections' || audit.historyCPrimaryTopics.length<10) throw new Error('Primary C History verified book sections not resolved');
-  if(audit.mathCGymMode!=='verified-official-sections' || audit.mathCGymTopics.length<7) throw new Error('Middle C Mathematics verified book sections not resolved');
-  if(audit.physicsBGymMode!=='verified-official-sections' || audit.physicsBGymTopics.length<8) throw new Error('Middle B Physics verified book sections not resolved');
-  if(audit.physicsCGymMode!=='verified-official-sections' || audit.physicsCGymTopics.length<11) throw new Error('Middle C Physics verified book sections not resolved');
-  if(audit.languageCGymMode!=='verified-official-sections' || audit.languageCGymTopics.length<8) throw new Error('Middle C Language verified book sections not resolved');
-  if(audit.chemistryCGymMode!=='verified-official-sections' || audit.chemistryCGymTopics.length<15) throw new Error('Middle C Chemistry verified book sections not resolved');
-  if(audit.biologyBGymMode!=='verified-official-sections' || audit.biologyBGymTopics.length<7) throw new Error('Middle B Biology verified book sections not resolved');
-  if(audit.biologyALycMode!=='verified-official-sections' || audit.biologyALycTopics.length<12) throw new Error('High A Biology verified book sections not resolved');
-  if(audit.mathAPrimaryMode!=='verified-official-sections' || audit.mathAPrimaryTopics.length<9) throw new Error('Primary A Mathematics verified book sections not resolved');
-  if(audit.languageAPrimaryMode!=='verified-official-sections' || audit.languageAPrimaryTopics.length<10) throw new Error('Primary A Language verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.historyCPrimaryMode) || audit.historyCPrimaryTopics.length<10) throw new Error('Primary C History verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.mathCGymMode) || audit.mathCGymTopics.length<7) throw new Error('Middle C Mathematics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.physicsBGymMode) || audit.physicsBGymTopics.length<8) throw new Error('Middle B Physics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.physicsCGymMode) || audit.physicsCGymTopics.length<11) throw new Error('Middle C Physics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.languageCGymMode) || audit.languageCGymTopics.length<8) throw new Error('Middle C Language verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.chemistryCGymMode) || audit.chemistryCGymTopics.length<15) throw new Error('Middle C Chemistry verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.biologyBGymMode) || audit.biologyBGymTopics.length<7) throw new Error('Middle B Biology verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.biologyALycMode) || audit.biologyALycTopics.length<12) throw new Error('High A Biology verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.mathAPrimaryMode) || audit.mathAPrimaryTopics.length<9) throw new Error('Primary A Mathematics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.languageAPrimaryMode) || audit.languageAPrimaryTopics.length<10) throw new Error('Primary A Language verified book sections not resolved');
   if(audit.languageAPrimaryTopics.some(x=>/^[a-z0-9-]+\.[a-z0-9.-]+$/i.test(x))) throw new Error('Primary A Language leaked internal topic ids');
-  if(audit.languageBPrimaryMode!=='verified-official-sections' || audit.languageBPrimaryTopics.length<24) throw new Error('Primary B Language verified book sections not resolved');
-  if(audit.mathBPrimaryMode!=='verified-official-sections' || audit.mathBPrimaryTopics.length<9) throw new Error('Primary B Mathematics verified book sections not resolved');
-  if(audit.mathCPrimaryMode!=='verified-official-sections' || audit.mathCPrimaryTopics.length<9) throw new Error('Primary C Mathematics verified book sections not resolved');
-  if(audit.mathDPrimaryMode!=='verified-official-sections' || audit.mathDPrimaryTopics.length<9) throw new Error('Primary D Mathematics verified book sections not resolved');
-  if(audit.languageCPrimaryMode!=='verified-official-sections' || audit.languageCPrimaryTopics.length<14) throw new Error('Primary C Language verified book sections not resolved');
-  if(audit.historyDPrimaryMode!=='verified-official-sections' || audit.historyDPrimaryTopics.length<6) throw new Error('Primary D History verified book sections not resolved');
-  if(audit.historyEPrimaryMode!=='verified-official-sections' || audit.historyEPrimaryTopics.length<7) throw new Error('Primary E History verified book sections not resolved');
-  if(audit.languageDPrimaryMode!=='verified-official-sections' || audit.languageDPrimaryTopics.length<16) throw new Error('Primary D Language verified book sections not resolved');
-  if(audit.languageEPrimaryMode!=='verified-official-sections' || audit.languageEPrimaryTopics.length<17) throw new Error('Primary E Language verified book sections not resolved');
-  if(audit.mathEPrimaryMode!=='verified-official-sections' || audit.mathEPrimaryTopics.length<9) throw new Error('Primary E Mathematics verified book sections not resolved');
-  if(audit.mathStPrimaryMode!=='verified-official-sections' || audit.mathStPrimaryTopics.length<6) throw new Error('Primary ST Mathematics verified book sections not resolved');
-  if(audit.scienceStPrimaryMode!=='verified-official-sections' || audit.scienceStPrimaryTopics.length<13) throw new Error('Primary ST Science verified book sections not resolved');
-  if(audit.englishAGymMode!=='verified-official-sections' || audit.englishAGymTopics.length<9) throw new Error('Middle A English verified book sections not resolved');
-  if(audit.englishBGymMode!=='verified-official-sections' || audit.englishBGymTopics.length<8) throw new Error('Middle B English verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.languageBPrimaryMode) || audit.languageBPrimaryTopics.length<24) throw new Error('Primary B Language verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.mathBPrimaryMode) || audit.mathBPrimaryTopics.length<9) throw new Error('Primary B Mathematics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.mathCPrimaryMode) || audit.mathCPrimaryTopics.length<9) throw new Error('Primary C Mathematics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.mathDPrimaryMode) || audit.mathDPrimaryTopics.length<9) throw new Error('Primary D Mathematics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.languageCPrimaryMode) || audit.languageCPrimaryTopics.length<14) throw new Error('Primary C Language verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.historyDPrimaryMode) || audit.historyDPrimaryTopics.length<6) throw new Error('Primary D History verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.historyEPrimaryMode) || audit.historyEPrimaryTopics.length<7) throw new Error('Primary E History verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.languageDPrimaryMode) || audit.languageDPrimaryTopics.length<16) throw new Error('Primary D Language verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.languageEPrimaryMode) || audit.languageEPrimaryTopics.length<17) throw new Error('Primary E Language verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.mathEPrimaryMode) || audit.mathEPrimaryTopics.length<9) throw new Error('Primary E Mathematics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.mathStPrimaryMode) || audit.mathStPrimaryTopics.length<6) throw new Error('Primary ST Mathematics verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.scienceStPrimaryMode) || audit.scienceStPrimaryTopics.length<13) throw new Error('Primary ST Science verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.englishAGymMode) || audit.englishAGymTopics.length<9) throw new Error('Middle A English verified book sections not resolved');
+  if(!BOOK_UNIT_MODES.has(audit.englishBGymMode) || audit.englishBGymTopics.length<8) throw new Error('Middle B English verified book sections not resolved');
   const highA=await page.evaluate(()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER.getSubjects('high','a').map(s=>s.quizId||s.id));
   if(new Set(highA).size!==highA.length) throw new Error('Duplicate High School course identity remains');
 

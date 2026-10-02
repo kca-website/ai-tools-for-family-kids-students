@@ -1578,12 +1578,29 @@ ${character?.id === "pericles" ? "- PERICLES GUARD: Pericles died in 429 BCE. Th
     });
     const tags = catalogTopics.length ? catalogTopics.map((topic) => topic.id) : verifiedQuizTags;
     refs.topic.innerHTML = "";
-    for (const id of tags) {
-      const gap = GAP_TAGS[id] || catalogTopics.find((topic) => topic.id === id);
-      const option = document.createElement("option");
-      option.value = id;
-      option.textContent = langValue(gap, "labelEl", "labelEn", id);
-      refs.topic.appendChild(option);
+    // Annual-guidance topics first; the official book units follow in their own group.
+    const topicFor = (id) => GAP_TAGS[id] || catalogTopics.find((topic) => topic.id === id);
+    const bookIds = tags.filter((id) => catalogTopics.find((topic) => topic.id === id)?.topicGroup === "book");
+    const mainIds = tags.filter((id) => !bookIds.includes(id));
+    const grouped = bookIds.length && mainIds.length;
+    const appendOptions = (ids, parent) => {
+      for (const id of ids) {
+        const option = document.createElement("option");
+        option.value = id;
+        option.textContent = langValue(topicFor(id), "labelEl", "labelEn", id);
+        parent.appendChild(option);
+      }
+    };
+    if (grouped) {
+      const annualGroup = document.createElement("optgroup");
+      annualGroup.label = ctx.lang === "en" ? "2026-27 annual guidance" : "Ετήσιες οδηγίες 2026–27";
+      appendOptions(mainIds, annualGroup);
+      const bookGroup = document.createElement("optgroup");
+      bookGroup.label = ctx.lang === "en" ? "All units of the school book" : "Όλες οι ενότητες του βιβλίου";
+      appendOptions(bookIds, bookGroup);
+      refs.topic.append(annualGroup, bookGroup);
+    } else {
+      appendOptions(tags, refs.topic);
     }
     if (!tags.length) {
       const option = document.createElement("option");

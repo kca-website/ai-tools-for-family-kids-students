@@ -114,8 +114,16 @@ for(const grade of ['a','b','c']){
 const ethicsIndexBlock=indexSource.match(/Object\.freeze\(\{key:"ethics"[\s\S]*?\}\)/)?.[0]||'';
 assert.ok(ethicsIndexBlock,'Special Lyceum Ethics guidance index entry is missing');
 assert.match(ethicsIndexBlock,/status:"published-part-1"/,'Special Lyceum Ethics must remain explicitly partial while only the Sep–Nov 2026 first part is published');
-assert.ok(pending.includes('ethics'),'Special Lyceum Ethics must remain pending until verified Lyceum E.A.E. topic/framework mapping is available');
-assert.ok(!exactGuidanceKeys.has('ethics')&&!frameworkGuidanceKeys.has('ethics'),'Special Lyceum Ethics must not be promoted to exact/framework coverage from Gymnasium or unrelated guidance');
+assert.ok(frameworkGuidanceKeys.has('ethics')&&!exactGuidanceKeys.has('ethics'),'Ethics must retain its partial framework classification, never exact E.A.E. coverage');
+for (const grade of ['a','b']) {
+  const entry=entryBlocks.find(item=>item.grade===grade&&item.subject==='ethics');
+  assert.ok(entry, `Ethics framework missing: ${grade}`);
+  assert.match(entry.body,/verificationBasis:"official-lyceum-ethics-circular"/);
+  assert.match(entry.body,/sourceUrl:ETHICS_SOURCE/);
+  assert.match(entry.body,/frameworkOnly:true/);
+  assert.match(entry.body,/Δεν πρόκειται για ξεχωριστή οδηγία Ε\.Α\.Ε\./);
+}
+assert.ok(!entryBlocks.some(item=>item.grade==='c'&&item.subject==='ethics'),'No unverified C-grade Ethics framework should be inferred');
 
 assert.ok(pending.length>0,'Special Lyceum audit unexpectedly reports no mapping backlog');
 console.log(JSON.stringify({

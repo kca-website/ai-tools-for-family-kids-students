@@ -64,12 +64,13 @@ const cases = [
 const results = [];
 const failures = [];
 for (const c of cases) {
+  const verifiedSummary = ['audio', 'explain'].includes(c.action);
   let last = null;
   for (let attempt = 0; attempt < 2; attempt++) {
-    last = await getJson(BASE + "/api/tutor-assistant", {
+    last = await getJson(BASE + (verifiedSummary ? "/api/source-summary" : "/api/tutor-assistant"), {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({
+      body: JSON.stringify(verifiedSummary ? { subjectId, topic, language: 'el', activity: c.action } : {
         context: "Production smoke test. Return a normal learner-facing result for the requested activity.",
         prompt: c.prompt,
         audience: "study_user",
@@ -99,7 +100,8 @@ for (const c of cases) {
     assert.ok(last, c.action + ": no response");
     assert.equal(last.res.status, 200, c.action + ": expected 200, got " + last.res.status + " " + (last.body?.error || "") + " " + (last.body?.message || ""));
     assert.ok(String(last.body?.text || "").trim().length >= 20, c.action + ": empty/too short output");
-    assert.equal(last.body?.groundingValidated, true, c.action + ": grounding must be validated");
+    assert.equal(verifiedSummary ? last.body?.verified : last.body?.groundingValidated, true, c.action + ": grounding must be validated");
+    if (verifiedSummary) assert.ok(last.body?.verification?.approved >= 3, c.action + ": at least three audited claims");
 
     if (c.action === "flashcards") {
       const parsed = JSON.parse(String(last.body.text).replace(/^\`\`\`(?:json)?\s*/i,"").replace(/\s*\`\`\`$/,""));
@@ -120,7 +122,7 @@ for (const c of cases) {
     provider: last?.body?.provider || "",
     model: last?.body?.model || "",
     chars: String(last?.body?.text || "").length,
-    groundingValidated: last?.body?.groundingValidated === true
+    groundingValidated: (last?.body?.groundingValidated === true || last?.body?.verified === true)
   });
 }
 

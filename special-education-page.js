@@ -20,6 +20,7 @@
   const supportMount=document.getElementById("spSupportTools");
   const sgUnitMount=document.getElementById("spSpecialGymUnitMount");
   const unitMount=document.getElementById("spUnitMount");
+  const slUnitMount=document.getElementById("spSpecialLyceumUnitMount");
   const branchButtons=[...document.querySelectorAll(".sp-branch")];
   const backButtons=[...document.querySelectorAll(".sp-back")];
 
@@ -73,7 +74,7 @@
   function subjectActions({schoolType,gradeId,subjectId,learningId=null,sourceUrl="",target="sg"}){
     const hasLearning=!!(learningId&&C?.entries?.[learningId]?.status==="verified"&&L?.[learningId]?.status==="ready");
     const hasQuiz=!!(hasLearning&&Q?.[learningId]?.questions?.length);
-    const studyAttr=target==="sg"?"data-open-sg-unit":"data-open-unit";
+    const studyAttr=target==="sg"?"data-open-sg-unit":target==="sl"?"data-open-sl-unit":"data-open-unit";
     return `<div class="sp-card-actions">
       <a class="sp-action sp-action--ai" href="${esc(aiHref(schoolType,gradeId,subjectId,"student"))}"><span class="v9i v9i-chat" aria-hidden="true"></span>AI Βοήθεια</a>
       <a class="sp-action" href="${esc(aiHref(schoolType,gradeId,subjectId,"guardian"))}"><span class="v9i v9i-users" aria-hidden="true"></span>Βοηθός γονέα</a>
@@ -99,6 +100,7 @@
     home.hidden=false; sg.hidden=true; sl.hidden=true; en.hidden=true;
     if(sgUnitMount) sgUnitMount.innerHTML="";
     if(unitMount) unitMount.innerHTML="";
+    if(slUnitMount) slUnitMount.innerHTML="";
     branchButtons.forEach((b)=>b.classList.remove("active"));
     window.scrollTo({top:0,behavior:"smooth"});
   }
@@ -194,7 +196,7 @@
         <div class="sp-subject-card__head"><div><span class="sp-subject-grade">${esc(entry.gradeLabel||grade?.labelEl||"")}</span><h3>${esc(entry.subject)}</h3></div><span class="sp-ready-pill">${badge}</span></div>
         <p>${esc(helper)}</p>
         ${anchors}
-        ${subjectActions({schoolType:"special-lyceum",gradeId:selectedSpecialLyceumGrade,subjectId:entry.subjectId||"",learningId:entry.id,sourceUrl:entry.sourceUrl||SLA?.sourceHub||SL.sourceUrl||"",target:"en"})}
+        ${subjectActions({schoolType:"special-lyceum",gradeId:selectedSpecialLyceumGrade,subjectId:entry.subjectId||"",learningId:entry.id,sourceUrl:entry.sourceUrl||SLA?.sourceHub||SL.sourceUrl||"",target:"sl"})}
       </article>`;
     }).join("");
 
@@ -426,7 +428,9 @@
 
   slProfile?.addEventListener("click",(e)=>{
     const grade=e.target.closest("[data-sl-grade]");
-    if(grade){ selectedSpecialLyceumGrade=grade.dataset.slGrade; renderSpecialLyceumProfile(); }
+    if(grade){ selectedSpecialLyceumGrade=grade.dataset.slGrade; if(slUnitMount) slUnitMount.innerHTML=""; renderSpecialLyceumProfile(); return; }
+    const unit=e.target.closest("[data-open-sl-unit]");
+    if(unit) renderUnit(unit.dataset.openSlUnit,slUnitMount,unit.dataset.focus||"learn");
   });
 
   enProfile?.addEventListener("click",(e)=>{

@@ -3001,6 +3001,11 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
           <p>${escapeHtml(parentMode ? tr("subtitleParent") : tr("subtitleStudent"))}</p>
         </div>
 
+        <details id="tutorHistoryCharacterGuide" style="margin:0 0 18px;padding:14px;border:1px solid #cfddec;border-radius:14px;background:#f8fbff" ${new URLSearchParams(location.search).get('characters') === '1' ? 'open' : ''}>
+          <summary style="cursor:pointer;font-weight:800">${ctx.lang === 'en' ? '🎭 Talk to a historical character · all routes' : '🎭 Μίλα με ιστορικό χαρακτήρα · όλες οι διαδρομές'}</summary>
+          ${window.AITOOLSKIDS_CHARACTER_GUIDE?.(ctx.lang, ctx.roleId) || ''}
+        </details>
+
         <div class="tutor-auth-card" ${staticClassroom ? "hidden" : ""}>
           <div class="tutor-auth-card__top">
             <div>
@@ -3255,6 +3260,7 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       renderContext();
     }
 
+    selectedCharacterId = resolveCharactersForCurrentTopic().some(character => character.id === params.get("character")) ? params.get("character") : "";
     const requestedMode = params.get("mode");
     const allowedModes = new Set(["understand", "hint", "challenge", "review", "character"]);
     if (allowedModes.has(requestedMode)) {

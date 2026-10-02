@@ -132,6 +132,7 @@
       heroCurriculumCta: "Ελληνικός Χάρτης Ύλης",
       heroCurriculumCtaSub: "Τάξη → μάθημα → πραγματική ενότητα → κατάλληλη AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
       heroQuizPickPrompt: "Για ποια ζώνη;",
+      historyGuideTitle: "🎭 Μίλα με ιστορικό χαρακτήρα · δες πού θα τον βρεις",
       heroHelpBadge: "Κόλλησα εδώ",
       heroHelpTitle: "Δείξε μου πώς να το μάθω, όχι τη λύση",
       heroHelpSub: "Η AI Βοήθεια ξεκινά από τη δική σου προσπάθεια και σε καθοδηγεί με μία ερώτηση ή μικρή υπόδειξη τη φορά, χωρίς έτοιμη τελική απάντηση.",
@@ -295,6 +296,7 @@
       heroCurriculumCta: "Greek Curriculum Map",
       heroCurriculumCtaSub: "Grade → subject → real curriculum unit → suitable AI help, practice and visual explanation.",
       heroQuizPickPrompt: "For which zone?",
+      historyGuideTitle: "🎭 Talk to a historical character · find the routes",
       heroHelpBadge: "I’m stuck here",
       heroHelpTitle: "Show me how to learn it, not the answer",
       heroHelpSub: "AI Help starts from your own attempt and guides you with one question or small hint at a time, without handing over a finished answer.",
@@ -574,6 +576,8 @@
 
   // ---------- Rendering: στατικό UI κείμενο ----------
   function renderStaticStrings() {
+    const historyRoutes = document.getElementById("homeHistoryCharacterRoutes");
+    if (historyRoutes && window.AITOOLSKIDS_CHARACTER_GUIDE) historyRoutes.innerHTML = window.AITOOLSKIDS_CHARACTER_GUIDE(state.lang);
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       const key = node.getAttribute("data-i18n");
       node.textContent = t(key);
@@ -3320,3 +3324,4 @@ function renderToolGrid(pathTools, targetElement) {
 
   document.addEventListener("DOMContentLoaded", init);
 })();
+

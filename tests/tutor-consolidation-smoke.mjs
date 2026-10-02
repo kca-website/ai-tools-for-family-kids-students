@@ -311,7 +311,11 @@ try {
     const biologyTopics = await page.locator('#tutorTopic option').evaluateAll((options) =>
       options.map((option) => ({ value: option.value, text: option.textContent?.trim() || '' }))
     );
-    assert.equal(biologyTopics.length, 14, 'GEL A Biology should expose the 14 published 2026–27 mapped study topics');
+    assert.equal(biologyTopics.length, 26, 'GEL A Biology should expose 14 annual topics plus 12 separate book chapters');
+    assert.equal(await page.locator('#tutorTopic optgroup[label="Ετήσιες οδηγίες 2026–27"] option').count(), 14,
+      'The 14 annual Biology topics must remain in their own group');
+    assert.equal(await page.locator('#tutorTopic optgroup[label="Όλες οι ενότητες του βιβλίου"] option').count(), 12,
+      'The 12 supporting Biology book chapters must remain separate from annual guidance');
     assert.ok(biologyTopics.some((option) => /Κύτταρα, ιστοί, όργανα/.test(option.text)),
       'GEL A Biology mapped topics are not visible in AI Help');
     assert.ok(!biologyTopics.some((option) => /Γράψε το ακριβές κεφάλαιο/.test(option.text)),

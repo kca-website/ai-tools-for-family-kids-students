@@ -46,10 +46,11 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI σύνοψη δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { subjectId = '', topic = '', language = 'el', sourceTitle = '' } = req.body || {};
+  const { subjectId = '', topic = '', language = 'el', sourceTitle = '', activity = 'audio' } = req.body || {};
   const sid = String(subjectId || '').trim().slice(0, 120);
   const selectedTopic = String(topic || '').trim().slice(0, 600);
   const lang = language === 'en' ? 'en' : 'el';
+  const explanation = activity === 'explain';
 
   if (!sid || !selectedTopic) {
     return res.status(400).json({
@@ -81,11 +82,12 @@ module.exports = async function handler(req, res) {
   const workingSource = compactSourceForTopic(source, selectedTopic, 6500);
   const cacheParts = {
     kind: 'verified-source-summary',
-    promptVersion: 'verified-summary-v2',
+    promptVersion: 'verified-summary-v3',
     subjectId: sid,
     topic: selectedTopic,
     title,
     language: lang,
+    explanation,
     modelRoute: routingSignature(aiStatus),
     source: workingSource,
   };
@@ -124,9 +126,15 @@ STRICT RULES:
 - Οι προτάσεις να είναι σύντομες και φυσικές για προφορική ανάγνωση.
 - Χωρίς markdown και χωρίς σχόλια έξω από το JSON.`;
 
+  const explanationRule = explanation
+    ? (lang === 'en'
+      ? '\nExplain the topic in simple language within 180 words. You may include up to two examples ONLY when SOURCE explicitly describes them, each as an evidenced claim. Do not add mechanisms or details beyond the evidence.'
+      : '\nΕξήγησε το θέμα με απλά λόγια σε έως 180 λέξεις. Μπορείς να συμπεριλάβεις έως δύο παραδείγματα ΜΟΝΟ όταν η ΠΗΓΗ τα περιγράφει ρητά, καθένα ως claim με ακριβές evidence. Μην προσθέτεις μηχανισμούς ή λεπτομέρειες πέρα από το απόσπασμα.')
+    : '';
+
   const first = await generateChat({
     messages: [
-      { role: 'system', content: claimSystem },
+      { role: 'system', content: claimSystem + explanationRule },
       {
         role: 'user',
         content: [
@@ -249,7 +257,7 @@ For each candidate:
     });
   }
 
-  const finalText = formatSummary(approved.map(row => row.claim), selectedTopic, lang);
+  const finalText = formatSummary(approved.map(row => row.claim), selectedTopic, lang, explanation);
 
   const responseBody = {
     text: finalText,
@@ -272,7 +280,7 @@ For each candidate:
   console.info('AI_METRIC ' + JSON.stringify({
     event: 'ai_request',
     task: 'source_summary',
-    activity: 'audio',
+    activity: explanation ? 'explain' : 'audio',
     status: 200,
     cacheHit: false,
     provider: responseBody.provider || '',
@@ -354,14 +362,15 @@ function parseJsonObject(text) {
   return null;
 }
 
-function formatSummary(claims, topic, lang) {
+function formatSummary(claims, topic, lang, explanation = false) {
   const safeClaims = claims
     .map(x => String(x || '').trim())
     .filter(Boolean)
     .slice(0, 10);
 
+  const label = explanation ? (lang === 'en' ? 'Explanation' : 'Εξήγηση') : (lang === 'en' ? 'Summary' : 'Σύνοψη');
   const heading = topic
-    ? (lang === 'en' ? `Summary – ${topic}` : `Σύνοψη – ${topic}`)
+    ? `${label} – ${topic}`
     : (lang === 'en' ? 'Verified summary' : 'Επαληθευμένη σύνοψη');
 
   // Keep rendering deterministic: approved factual claims only, no third AI rewrite.
@@ -369,5 +378,10 @@ function formatSummary(claims, topic, lang) {
   for (let i = 0; i < safeClaims.length; i += 3) {
     paragraphs.push(safeClaims.slice(i, i + 3).join(' '));
   }
-  return heading + '\n\n' + paragraphs.join('\n\n');
+  const questions = explanation
+    ? (lang === 'en'
+      ? '\n\n## Self-check\n1. How would you explain the main idea in your own words?\n2. Which passage in the source supports your explanation?'
+      : '\n\n## Αυτοέλεγχος\n1. Πώς θα εξηγούσες τη βασική ιδέα με δικά σου λόγια;\n2. Ποιο απόσπασμα της πηγής στηρίζει την εξήγησή σου;')
+    : '';
+  return heading + '\n\n' + paragraphs.join('\n\n') + questions;
 }

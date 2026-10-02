@@ -787,7 +787,7 @@
     renderAltAi(action);
   }
 
-  async function verifiedOfficialSummary(source){
+  async function verifiedOfficialSummary(source,activity='audio'){
     const res=await fetch('/api/source-summary',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -795,7 +795,8 @@
         subjectId:selectedSubjectId(),
         topic:selectedTopic(),
         sourceTitle:source?.bookTitle||'',
-        language:lang
+        language:lang,
+        activity
       })
     });
     const body=await res.json().catch(()=>({}));
@@ -837,13 +838,13 @@
     $('aiOutput').innerHTML='<span class="ai-loading">'+esc(lang==='en'?'AI is preparing this…':'Το AI το ετοιμάζει…')+'</span>';
     try{
       let text='';
-      if(action==='audio'&&!attached){
+      if((action==='audio'||action==='explain')&&!attached){
         const officialSource=await officialSchoolbookSource();
         if(officialSource?.grounded){
           try{
-            text=await verifiedOfficialSummary(officialSource);
+            text=await verifiedOfficialSummary(officialSource,action);
           }catch(summaryErr){
-            if(/^insufficient_/.test(String(summaryErr?.code||''))){
+            if(action==='audio'&&/^insufficient_/.test(String(summaryErr?.code||''))){
               text=await callStudyServer(action);
             }else{
               throw summaryErr;

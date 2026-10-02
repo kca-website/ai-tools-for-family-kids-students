@@ -245,4 +245,5 @@ try {
 }
 
 await import('./schoolbook-formula-grounding.mjs');
+await import('./verified-explanation-smoke.mjs');
 console.log('AI provider router smoke passed.');

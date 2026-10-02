@@ -1092,11 +1092,12 @@
     select('schoolType',selection.schoolType);populateGrades();
     select('grade',selection.grade);refreshSchoolTypeFields();
     select('epalSector',selection.sector);select('epalSpecialty',selection.specialty);populateSubjects();
-    if(!select('subject',selection.subject))return;
+    if(!select('subject',selection.subject)&&!select('subject',selection.subject?.replace(/^istoria-/, 'history-')))return;
     populateTopics();
     if(!select('topicPick',selection.gapId)){
       const option=[...$('topicPick').options].find(o=>o.textContent.trim()===selection.topic);
       if(option)$('topicPick').value=option.value;
+      else if(selection.topic)$('topicCustom').value=selection.topic;
     }
     const goal=[...document.querySelectorAll('input[name="goal"]')].find(n=>n.value===selection.learningMode);
     if(goal)goal.checked=true;
@@ -1104,6 +1105,9 @@
   window.AITOOLSKIDS_LEARNING_ACTIONS = { context() {
     const ctx=publishSharedStudyContext();
     const params=window.AITOOLSKIDS_STUDY_CONTEXT?.toSearchParams(ctx)||new URLSearchParams();
+    params.set('subject',$('subject').value);
+    params.set('topic',$('topicPick').value);
+    params.set('topicText',selectedTopic());
     params.set('lang',lang);return params;
   }};
   $('studyPdfChoice').onclick=()=>{document.querySelector('.upload').scrollIntoView({behavior:'smooth',block:'center'});$('notesPaste').focus({preventScroll:true});};
@@ -1116,5 +1120,4 @@
 <script src="/learning-actions.js"></script>
 </body>
 </html>
-
 

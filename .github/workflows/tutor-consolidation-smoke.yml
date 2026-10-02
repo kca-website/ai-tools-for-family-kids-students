@@ -38,6 +38,9 @@ jobs:
       - name: Run repository data integrity smoke
         run: node tests/repository-data-integrity-smoke.mjs
 
+      - name: Verify B Gymnasium science selections resolve to exact sources
+        run: node tests/b-gym-science-selection-grounding.mjs
+
       - name: Verify Mathematics B annual and supporting-book scope
         run: |
           node tests/math-b-schoolbook-grounding.mjs

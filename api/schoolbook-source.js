@@ -1,3 +1,4 @@
+const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
   const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();
@@ -1836,7 +1837,9 @@ module.exports = async function handler(req, res) {
   }
 
   const reviewPath = subject === "mathimatika-b-gymnasiou" ? mathBReviewPath(topic) : "";
+  const characterChapter = CHARACTER_CHAPTERS.find(c=>c.subject.replace('history-','istoria-')===subject&&normalize(c.labelEl)===normalize(topic));
   const book =
+    (characterChapter ? {title:'Ιστορία '+(characterChapter.grade==='d'?'Δ΄':'ΣΤ΄')+' Δημοτικού',mode:'linkedSection',officialSourceRequired:true,annualScopeVerified:false} : null) ||
     (reviewPath ? { ...BOOKS[subject], title: "Μαθηματικά Α΄ Γυμνασίου — επανάληψη για Β΄ (μη εξεταστέο)", base: MATH_B_REVIEW_BASE } : null) ||
     BOOKS[subject] ||
     buildCatalogBook(subject) ||
@@ -1850,7 +1853,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  let directUrls = resolveDirectSourceUrls(subject, topic);
+  let directUrls = characterChapter ? [characterChapter.url] : resolveDirectSourceUrls(subject, topic);
   if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
     directUrls = [gelInventory.mapping.url];
   }
@@ -1901,7 +1904,11 @@ module.exports = async function handler(req, res) {
         gelInventory.mapping?.granularity === "section-anchor";
 
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
-      if (gelManualScoped) {
+      if(characterChapter){
+        const source=pages[0].replace(/<select\b[^>]*>[\s\S]*?<\/select>/gi,'');
+        combinedText=htmlToText(source);
+        if(!normalize(combinedText).includes(normalize(characterChapter.verifyTerm)))return res.status(404).json({grounded:false,error:'character_chapter_not_verified'});
+      } else if (gelManualScoped) {
         const sources = gelInventory.manualSources || [];
         const verified = pages.every((html, i) => {
           const expected = sources[i]?.heading;

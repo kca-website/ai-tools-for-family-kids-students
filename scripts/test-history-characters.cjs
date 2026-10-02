@@ -6,7 +6,7 @@ const catalog = source.slice(source.indexOf('  const CHARACTER_CATALOG'), source
 const resolver = source.slice(source.indexOf('  function resolveCharactersForCurrentTopic'), source.indexOf('  function renderCharacterCard'));
 let gap = { id: '', labelEl: '' };
 let subject = { id: 'istoria-e-dimotikou' };
-const sandbox = { getCurrentGap: () => gap, getCurrentSubject: () => subject };
+const sandbox = { window: {AITOOLSKIDS_CHARACTER_CHAPTERS:require("../history-character-chapters")}, getCurrentGap: () => gap, getCurrentSubject: () => subject };
 vm.createContext(sandbox);
 vm.runInContext(catalog + resolver + '\nthis.lookup = resolveCharactersForCurrentTopic; this.selected = resolveCharacterForCurrentTopic; this.select = id => selectedCharacterId = id; this.count = Object.keys(CHARACTER_CATALOG).length;', sandbox);
 assert.equal(sandbox.count, 22);

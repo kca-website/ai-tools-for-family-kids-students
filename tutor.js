@@ -1001,7 +1001,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
   function getCurrentGap() {
     const id = refs.topic?.value;
     if (!id) return null;
-    return GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getTopics?.(ctx.zoneId, refs.grade.value, refs.subject.value)?.find((topic) => topic.id === id) || (urlTopicOverride?.id === id ? urlTopicOverride : null);
+    return window.AITOOLSKIDS_CHARACTER_CHAPTERS?.find(c=>c.id===id&&(c.subject===refs.subject.value||c.subject.replace('history-','istoria-')===refs.subject.value)) || GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getTopics?.(ctx.zoneId, refs.grade.value, refs.subject.value)?.find((topic) => topic.id === id) || (urlTopicOverride?.id === id ? urlTopicOverride : null);
   }
 
   function getOfficialCurriculumEntry() {
@@ -1267,6 +1267,8 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       return [];
     }
 
+    const exact=(window.AITOOLSKIDS_CHARACTER_CHAPTERS||[]).find(c=>normalizeCharacterText(c.labelEl)===normalizeCharacterText(gap.labelEl));
+    if(exact)return Object.values(CHARACTER_CATALOG).filter(c=>exact.characters.includes(c.id));
     return Object.values(CHARACTER_CATALOG).filter((character) => {
       if ((character.topicIds || []).includes(gap.id)) return true;
       return !(character.id === 'constantinopleResident1453' && /πρωτη αλωση|1204/.test(topicText)) && (character.topicPatterns || []).some((pattern) => topicText.includes(normalizeCharacterText(pattern)));
@@ -1298,12 +1300,13 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     const intro = ctx.lang === "en" ? character.introEn : character.introEl;
     const source = ctx.lang === "en" ? character.sourceEn : character.sourceEl;
     refs.characterCard.hidden = false;
-    const portraitHtml = character.imageUrl
+    const avatarHtml = window.AITOOLSKIDS_CHARACTER_AVATAR?.(character.id,ctx.lang);
+    const portraitHtml = avatarHtml || (character.imageUrl
       ? `<div class="tutor-character-card__portrait-wrap">
           <span class="tutor-character-card__fallback" aria-hidden="true">🏛️</span>
           <img class="tutor-character-card__portrait" src="${escapeHtml(character.imageUrl)}" alt="${escapeHtml(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true" />
         </div>`
-      : `<div class="tutor-character-card__portrait-wrap tutor-character-card__portrait-wrap--generic" aria-hidden="true"><span class="tutor-character-card__generic-icon">🏛️</span></div>`;
+      : `<div class="tutor-character-card__portrait-wrap tutor-character-card__portrait-wrap--generic" aria-hidden="true"><span class="tutor-character-card__generic-icon">🏛️</span></div>`);
     const sourceHtml = character.sourceUrl
       ? `<a class="tutor-character-card__source" href="${escapeHtml(character.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tr("characterCardSource"))}: ${escapeHtml(source)} ↗</a>`
       : "";
@@ -1561,6 +1564,8 @@ ${character?.id === "pericles" ? "- PERICLES GUARD: Pericles died in 429 BCE. Th
     const quiz = getCurrentQuiz();
     const catalogSubject = getCatalogSubject();
     const resolverTopics = window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getTopics?.(ctx.zoneId, refs.grade.value, refs.subject.value) || [];
+    const extraTopics=(window.AITOOLSKIDS_CHARACTER_CHAPTERS||[]).filter(c=>c.subject===refs.subject.value||c.subject.replace('history-','istoria-')===refs.subject.value);
+    resolverTopics.push(...extraTopics.filter(c=>!resolverTopics.some(t=>t.id===c.id)));
     const allCatalogTopics = catalogSubject?.topics || [];
     // The shared resolver returns only source-backed current mappings plus
     // verified navigation anchors. Keep the older provenance gate as fallback.
@@ -2486,6 +2491,7 @@ Priority 1: make the learner think. Priority 2: give correct help. Priority 3: r
 
   function setBusy(value) {
     busy = value;
+    refs.characterCard?.querySelector(".character-avatar")?.setAttribute("data-state",value?"thinking":"idle");
     const characterSelect = refs.characterCard?.querySelector("select");
     if (characterSelect) characterSelect.disabled = value;
     refs.busy.textContent = value ? tr("thinking") : "";

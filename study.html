@@ -149,6 +149,7 @@
           <div class="notice" data-el="Όλα γίνονται εδώ, χωρίς να φεύγεις από την AI Μελέτη. Αν κάποια στιγμή η δωρεάν AI υπηρεσία δεν είναι διαθέσιμη, θα σου προτείνουμε εναλλακτική." data-en="Everything happens here without leaving AI Study. If the free AI service is temporarily unavailable, we will offer an alternative.">Όλα γίνονται εδώ, χωρίς να φεύγεις από την AI Μελέτη. Αν κάποια στιγμή η δωρεάν AI υπηρεσία δεν είναι διαθέσιμη, θα σου προτείνουμε εναλλακτική.</div>
           <div id="aiWorkspace" class="ai-workspace hidden">
             <div class="ai-workspace__head"><span id="workspaceTitle" class="ai-workspace__title">AI Μελέτη</span></div><span id="providerStatus" class="hidden" aria-hidden="true"></span>
+            <div id="studyCharacterAvatar" hidden></div>
             <div id="aiOutput" class="ai-output"></div>
             <div id="sourceEvidence" class="notice hidden"></div>
             <div id="answerBox" class="answer-box hidden">
@@ -198,6 +199,9 @@
 <script src="/curriculum-resolver.js"></script>
 <script src="/pdf-text-reader.js"></script>
 <script src="/guided-task-assistant.js"></script>
+<script src="/history-character-chapters.js"></script>
+<script src="/character-avatar.js"></script>
+<script src="/history-character-routes.js"></script>
 <script src="/history-character-data.js"></script>
 <script src="/history-e-schoolbook-chapters.js"></script>
 <script src="/study-context.js"></script>
@@ -261,7 +265,8 @@
       if(exactRows.length)rows=exactRows;
     }
 
-    return rows;
+    const extra=(window.AITOOLSKIDS_CHARACTER_CHAPTERS||[]).filter(c=>c.subject===s||c.subject.replace('history-','istoria-')===s);
+    return [...rows.filter(t=>!extra.some(c=>c.id===t.id)),...extra];
   }
   function populateTopics(){
     const rows=studyTopicsFor($('zone').value,$('grade').value,$('subject').value,isEpal());
@@ -565,6 +570,7 @@
   }
 
   function renderCharacterRoutes(){
+    if(window.AITOOLSKIDS_CHARACTER_GUIDE){$('historyCharacterRoutes').innerHTML=window.AITOOLSKIDS_CHARACTER_GUIDE(lang,'','study');return;}
     const catalog=window.AITOOLSKIDS_HISTORY_CHARACTERS||[], routes=[];
     // Routes whose official source was successfully checked on 2026-10-02.
     const verifiedRoutes=[["istoria-a-gymnasiou", "Πελοποννησιακός Πόλεμος"], ["istoria-a-lykeiou", "Περικλής και αθηναϊκή δημοκρατία"], ["istoria-a-gymnasiou", "Έργο Μεγάλου Αλεξάνδρου"], ["istoria-a-gymnasiou", "Πορεία προς τη δημοκρατία"], ["istoria-e-dimotikou", "11. Η καθημερινή ζωή στο Βυζάντιο"], ["istoria-b-gymnasiou", "Κεφάλαιο 5 · 1 — Η καθημερινή ζωή στο Βυζάντιο"], ["istoria-b-gymnasiou", "Κεφάλαιο 4 · ΙΙ · 1 — Οι σταυροφορίες και η πρώτη άλωση της Πόλης"], ["istoria-b-lykeiou", "Δ΄ Σταυροφορία και άλωση της Κωνσταντινούπολης το 1204"], ["istoria-b-gymnasiou", "Κεφάλαιο 4 · ΙΙΙ · 2 — Η Άλωση της Πόλης"], ["istoria-b-lykeiou", "Άλωση της Κωνσταντινούπολης το 1453"], ["istoria-b-gymnasiou", "Κεφάλαιο 7 · Ι · 2 — Αναγέννηση και Ανθρωπισμός"], ["istoria-b-lykeiou", "Αναγέννηση και Ανθρωπισμός"], ["istoria-e-dimotikou", "6. Μια νέα πρωτεύουσα, η Κωνσταντινούπολη"], ["istoria-e-dimotikou", "13. Ο Ιουστινιανός μεταρρυθμίζει τη διοίκηση και τη νομοθεσία"], ["istoria-e-dimotikou", "14. Οι Δήμοι αναστατώνουν την πρωτεύουσα με τη «στάση του νίκα»"], ["istoria-e-dimotikou", "15. Η Αγία Σοφία, ένα αριστούργημα της αρχιτεκτονικής"], ["istoria-b-gymnasiou", "Κεφάλαιο 1 · ΙΙ · 1 — Ο Ιουστινιανός και το έργο του"], ["istoria-b-gymnasiou", "Κεφάλαιο 1 · ΙΙ · 2 — Ο Ηράκλειος και η δυναστεία του (610-717): Εσωτερική μεταρρύθμιση και αγώνας επιβίωσης"], ["istoria-b-gymnasiou", "Κεφάλαιο 4 · Ι · 2 — Οι Κομνηνοί και η μερική αναδιοργάνωση της αυτοκρατορίας"]];
@@ -596,6 +602,8 @@
     const normalize = value => String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ς/g,'σ');
     const subject=normalize(subjectValue),topic=normalize(topicValue);
     if(!/ιστορ|istoria|history/.test(subject) || /χρονογραμμ|ιστορικ.*πηγ|ορια.*τεκμηρ|timeline|chronolog|source limits/.test(topic))return [];
+    const exact=(window.AITOOLSKIDS_CHARACTER_CHAPTERS||[]).find(c=>normalize(c.labelEl)===topic);
+    if(exact)return (window.AITOOLSKIDS_HISTORY_CHARACTERS||[]).filter(c=>exact.characters.includes(c.id));
     return (window.AITOOLSKIDS_HISTORY_CHARACTERS||[]).filter(c=>!(c.id==='constantinopleResident1453'&&/πρωτη αλωση|1204/.test(topic))&&(c.topicPatterns||[]).some(p=>topic.includes(normalize(p))));
   }
   function studyCharacterChoices(){return charactersForTopic(selectedSubjectLabel()+' '+selectedSubjectId(),selectedTopic())}
@@ -812,6 +820,8 @@
     publishSharedStudyContext(action);
     if(!selectedTopic()&&!attached){$('topicCustom').focus();return}
     if(action==='plan'){await buildAiPlan();$('plan').classList.remove('hidden');$('plan').scrollIntoView({behavior:'smooth',block:'nearest'});return}
+    $('studyCharacterAvatar').hidden=action!=='character';
+    $('studyCharacterAvatar').innerHTML=action==='character'?window.AITOOLSKIDS_CHARACTER_AVATAR?.(activeStudyCharacter.id,lang)||'':'';
     interactiveAction=action; interactiveHistory=[];
     interactiveTotal=action==='quiz'?5:0;
     interactiveStep=interactiveTotal?1:0;

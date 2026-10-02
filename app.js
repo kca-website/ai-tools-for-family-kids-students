@@ -3236,7 +3236,19 @@ function renderToolGrid(pathTools, targetElement) {
       });
     }
 
-    els.backToZones.addEventListener("click", showZoneSelectView);
+    els.backToZones.addEventListener("click", (event) => {
+      // A real user click does a clean navigation to the homepage so the
+      // first-paint guard hides the legacy zone shell until navigator-home.js
+      // has built the current homepage. Rendering the SPA zone view here made
+      // the old homepage flash briefly before the page reloaded.
+      if (event.isTrusted) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location.assign("/");
+        return;
+      }
+      showZoneSelectView();
+    });
     if (els.a11yFilterToggle) {
       els.a11yFilterToggle.addEventListener("change", () => {
         state.a11yFilterOnly = els.a11yFilterToggle.checked;

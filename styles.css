@@ -3179,6 +3179,27 @@ main {
   gap: 24px;
   box-sizing: border-box;
 }
+/* Educators: always first in the menu, so they are visible on phones where the header button is hidden. */
+.site-menu-panel__teacher {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 16px;
+  border: 1.5px solid #B9D9CE;
+  border-radius: 12px;
+  background: #EEF7F3;
+  color: #24594C !important;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+.site-menu-panel__teacher span:nth-child(2) {
+  flex: 1;
+}
+.site-menu-panel__teacher:hover {
+  border-color: #24594C;
+}
 .site-menu-panel__group {
   display: flex;
   flex-direction: column;

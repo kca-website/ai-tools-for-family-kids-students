@@ -59,3 +59,12 @@ export const test = base.extend({
   },
 });
 export { expect };
+
+// v10 homepage: school levels are opened from the "who are you" finder (parent → level → tools → CTA).
+export async function openZoneFromHome(page, zone) {
+  await page.locator('#homeV9Finder [data-finder-role="guardian"]').click();
+  await page.locator(`#homeV9Finder [data-finder-zone="${zone}"]`).click();
+  const tools = page.locator('#homeV9Finder [data-finder-need="tools"]');
+  if (await tools.count()) await tools.click();
+  await page.locator('#homeV9FinderCta').click();
+}

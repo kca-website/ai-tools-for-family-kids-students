@@ -14,18 +14,8 @@ assert.match(homepageSource, /navigator-home\.css[^>]*data-navigator-home="1"/, 
 assert.match(homepageSource, /id="homeV8Eng"[\s\S]*?167 σχολικές έννοιες[\s\S]*?Δες τις 167 έννοιες/, 'raw homepage HTML must expose the canonical GSL count to crawlers before JavaScript runs');
 assert.doesNotMatch(homepageSource, /153 σχολικές έννοιες|Δες τις 153 έννοιες/, 'raw homepage HTML must not expose the stale GSL count');
 
-async function assertNeedsToggle(page, label) {
-  const toggle = page.locator('#homeV8NeedsToggle');
-  const body = page.locator('#homeV8NeedsBody');
-  // Starts collapsed on every screen; the visitor opens it.
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: task routes should start collapsed`);
-  assert.equal(await body.isHidden(), true, `${label}: collapsed task routes body should be hidden`);
-  await toggle.click();
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'true', `${label}: toggle should expand task routes`);
-  assert.equal(await body.isVisible(), true, `${label}: task routes body should become visible`);
-  await toggle.click();
-  assert.equal(await toggle.getAttribute('aria-expanded'), 'false', `${label}: second toggle should collapse task routes`);
-  assert.equal(await body.isHidden(), true, `${label}: task routes body should hide again`);
+async function finderPick(page, kind, value) {
+  await page.click(`#homeV9Finder [data-finder-${kind}="${value}"]`);
 }
 
 try {
@@ -35,42 +25,55 @@ try {
 
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#homeV8Shell', { timeout: 10000 });
-  await page.waitForSelector('#homeHigherEducationPilot', { state: 'visible', timeout: 10000 });
-  assert.equal(await page.locator('#homeHigherEducationPilot').getAttribute('href'), '/higher-education-pilot.html');
-  assert.match(await page.locator('#homeHigherEducationPilot').innerText(), /Φοιτητές ΑΕΙ|University students/i);
-
-  await page.waitForSelector('#specialSchoolZoneCard', { timeout: 10000 });
-  await page.waitForSelector('#homeV8Needs', { timeout: 10000 });
   await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.');
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI για το μάθημα, την ηλικία και αυτό που θέλεις να κάνεις. Ή χρησιμοποίησε τη δωρεάν AI Μελέτη πάνω στην επίσημη σχολική ύλη.');
+  assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
+  assert.ok(await page.locator('#heroGslBadge').count());
 
-  assert.ok((await page.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 6, 'Homepage must expose the core age zones plus Special Education and the University pilot');
-  assert.equal(await page.locator('#homeV8HelpersMount a[href="/xartis-ylis.html"]').count(), 1, 'Homepage must expose the Curriculum Map in "Three ways to start"');
+  // v10: "who are you" finder is the single entry to school levels; the zone grid stays only as a hidden fallback.
+  const roles = await page.locator('#homeV9Finder [data-finder-role]').evaluateAll((els) => els.map((el) => el.dataset.finderRole));
+  assert.deepEqual(roles, ['guardian', 'student', 'teacher', 'university'], 'Finder must offer parent, student, educator and university student');
+  assert.equal(await page.locator('#zoneGrid').isVisible(), false, 'Zone grid must not be shown on the v10 homepage');
+  assert.equal(await page.locator('#homeV8Needs').count(), 0, '"What do you want to do with AI" block must not be on the homepage');
+  assert.equal(await page.locator('#homeV8HelpersMount .home-v8-map').count(), 0, 'Practice Map card moved into the finder');
+  assert.equal(await page.locator('#homeV9Principle').isVisible(), false, 'Principle quote duplicates the title and is hidden');
+  assert.equal(await page.locator('#homeVideoNew').isVisible(), false, 'Video promo lives in the educator tools');
+
+  await finderPick(page, 'role', 'teacher');
+  assert.equal(await page.locator('#homeV9Finder .home-v9-finder__step').count(), 1, 'Educators skip the school-level steps');
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/teacher-assistant.html', 'Educator role must open the educator tools');
+  await finderPick(page, 'role', 'university');
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/higher-education-pilot.html', 'University role must open the university pilot');
+  await finderPick(page, 'role', 'student');
+  assert.equal(await page.locator('#homeV9Finder [data-finder-zone="preschool"]').count(), 0, 'Preschool is adult-led and not offered to students');
+  await finderPick(page, 'zone', 'high');
+  await finderPick(page, 'need', 'practice');
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/high/guardian/quiz', 'High school practice must open the GEL Practice Map');
+  assert.equal(await page.locator('#homeV9Finder [data-epal-practice-map]').count(), 1, 'High school practice must also offer the EPAL Practice Map');
+  await finderPick(page, 'zone', 'special');
+  assert.equal(await page.locator('#homeV9FinderCta[data-special-education-diagnostic]').count(), 1, 'Special Education practice must open the diagnostic');
+  await finderPick(page, 'role', 'guardian');
+  await finderPick(page, 'zone', 'middle');
+  await finderPick(page, 'need', 'tools');
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/middle/guardian/tools');
+
+  // Three ways to start: AI Help, AI Study, Educators. The Curriculum Map stands on its own.
+  const ways = page.locator('#homeV8HelpersMount .home-v9-ways > section');
+  assert.equal(await ways.count(), 3);
+  assert.equal(await page.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   assert.equal(await page.locator('#homeV9Study a[href="/study.html"]').count(), 1, 'Homepage must expose AI Study');
   assert.match(await page.locator('#homeV9Study').innerText(), /επίσημο σχολικό βιβλίο[\s\S]*Διαθέσιμο σε επιλεγμένα μαθήματα · η κάλυψη μεγαλώνει/, 'AI Study must keep the official-textbook coverage caveat');
-  assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
-  assert.equal(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').count(), 1, 'Preschool 4–6 card missing');
-  assert.match(await page.locator('#homeV8Shell #zoneGrid .zone-card[data-zone="preschool"]').innerText(), /4\s*(έως|to)\s*6|4-6/i, 'Preschool card must show ages 4–6');
-  assert.equal(await page.locator('#homeV8Shell #specialSchoolZoneCard').count(), 1);
-  assert.equal(await page.locator('#specialSchoolZoneCard').getAttribute('href'), '/special-education.html');
-  assert.equal(await page.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
-  assert.equal(await page.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
-  assert.ok(await page.locator('a[href="/teacher-assistant.html"]').count(), 'Teacher assistant link missing');
-  assert.equal(await page.locator('#homeVideoNew').getAttribute('href'), '/teacher-assistant.html?task=video#builder', 'Homepage video promo must deep-link the educator video builder');
-  assert.match(await page.locator('#homeVideoNew').innerText(), /Ν(?:έ|Ε)ο?[\s\S]*Δημιουργία εκπαιδευτικών βίντεο/i, 'Homepage must surface the new educator video feature');
-  assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
-  assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);
-  assert.match(await page.locator('#homeV8NeedsToggle').innerText(), /Τι θέλεις να κάνεις με AI/);
-  assert.ok(await page.locator('#homeV8Needs a[href="/meleti-pdf-me-ai.html"]').count());
-  assert.ok(await page.locator('#homeV8Needs a[href="/erevna-me-piges-ai.html"]').count());
-  assert.ok(await page.locator('#homeV8Needs a[href="/organosi-meletis-ai.html"]').count(), 'Greek study-steps route missing');
-  assert.ok(await page.locator('#homeV8Needs a[href="/high/student/tutor?mode=review"]').count(), 'AI review route missing from unified block');
-  assert.ok(await page.locator('#homeV8Needs a[href="/high/student/tutor?mode=challenge"]').count(), 'AI challenge route missing from unified block');
-  assert.equal(await page.locator('#homeAiLearningModes').evaluate((el) => el.classList.contains('home-v8-legacy')), true, 'legacy standalone AI-learning block must be hidden');
-  assert.ok(await page.locator('#heroGslBadge').count());
+  assert.equal(await page.locator('#homeV9Teacher a[href="/teacher-assistant.html"]').isVisible(), true, 'Educator card must be visible on mobile');
+  assert.equal(await page.locator('#homeV8HelpersMount a[href="/xartis-ylis.html"]').count(), 0, 'Curriculum Map is not one of the three ways');
+  assert.equal(await page.locator('#homeCurriculumStrip').getAttribute('href'), '/xartis-ylis.html', 'Curriculum Map must keep its own strip');
+  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 2, 'Discover more keeps history characters and GSL');
+
+  await page.click('#siteMenuToggle');
+  assert.equal(await page.locator('#siteMenuPanel .site-menu-panel__teacher').isVisible(), true, 'Educators must be the first, visible menu entry on mobile');
+  await page.click('#siteMenuToggle');
 
   await page.waitForSelector('#homeGlobalSearchInput', { state: 'visible', timeout: 10000 });
   const globalSearch = page.locator('#homeGlobalSearchInput');
@@ -89,23 +92,17 @@ try {
   assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'Greek homepage GSL block must show 167 concepts');
   assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'Greek homepage GSL block must not show stale 153 count');
 
-  await assertNeedsToggle(page, 'mobile');
-
   const overflow = await page.evaluate(() => Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth));
   assert.ok(overflow <= 1, `Homepage positioning introduces horizontal overflow on mobile: ${overflow}px`);
 
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
-  await page.waitForFunction(() => document.querySelector('#specialSchoolZoneCard')?.textContent?.includes('Special schools'));
+  await page.waitForFunction(() => /University student/.test(document.querySelector('#homeV9Finder')?.textContent || ''));
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI for the subject, the age and what you want to do. Or use the free AI Study on the official school curriculum.');
-  assert.match(await page.locator('#specialSchoolZoneCard').innerText(), /Special schools/);
-  assert.match(await page.locator('#homeVideoNew').innerText(), /New[\s\S]*Create educational videos/i, 'Homepage video promo must translate to English');
-  assert.equal(await page.locator('#homeV8Needs .home-v8-needs-card').count(), 7);
-  assert.equal(await page.locator('#homeV8Needs .home-v8-learning-card').count(), 3);
-  assert.match(await page.locator('#homeV8NeedsToggle').innerText(), /What do you want to do with AI/);
-  assert.ok(await page.locator('#homeV8Needs a[href="/en/study-pdf-with-ai.html"]').count());
-  assert.ok(await page.locator('#homeV8Needs a[href="/en/research-with-sources-ai.html"]').count());
-  assert.ok(await page.locator('#homeV8Needs a[href="/en/study-steps-ai.html"]').count(), 'English study-steps route missing');
+  await finderPick(page, 'role', 'teacher');
+  assert.match(await page.locator('#homeV9FinderCta').innerText(), /Open the educator tools/);
+  assert.match(await page.locator('#homeV9Teacher').innerText(), /For educators/);
+  assert.match(await page.locator('#homeCurriculumStrip').innerText(), /Greek Curriculum Map/);
   assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'English homepage GSL block must show 167 concepts');
   assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'English homepage GSL block must not show stale 153 count');
 
@@ -115,9 +112,7 @@ try {
   await desktop.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
   const heroWidth = await desktop.locator('#zoneSelectView .hero').evaluate((el) => el.getBoundingClientRect().width);
   assert.ok(heroWidth >= 1000 && heroWidth <= 1042, `desktop: homepage hero should use the wider ~1040px layout, got ${heroWidth}px`);
-  assert.ok((await desktop.locator('#homeV8Shell #zoneGrid .zone-card').count()) >= 6, 'desktop: expected the current navigator cards');
-  assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-map').count(), 1);
-  assert.equal(await desktop.locator('#homeV8NeedsToggle').getAttribute('aria-expanded'), 'false', 'desktop: task routes should start collapsed');
+  assert.equal(await desktop.locator('#homeV8HelpersMount .home-v9-ways > section').count(), 3, 'desktop: three ways to start');
   assert.equal(await desktop.locator('#homeV9Trust').count(), 0, 'desktop: audit/tool-count strip belongs only in the footer');
   assert.equal(await desktop.locator('#siteHeaderSearch #homeGlobalSearchInput').count(), 1, 'desktop: site search should sit in the header');
   assert.equal(await desktop.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);

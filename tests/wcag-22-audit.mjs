@@ -148,7 +148,7 @@ try {
   const reports = [];
 
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForFunction(() => document.querySelectorAll('.zone-card').length >= 3, null, { timeout: 30000 });
+  await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready') && document.querySelectorAll('#homeV9Finder [data-finder-role]').length >= 4, null, { timeout: 30000 });
   reports.push(['homepage', await scan(page, 'homepage')]);
 
   await page.goto(`${LOCAL}accessibility.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
@@ -156,8 +156,13 @@ try {
   reports.push(['accessibility.html', await scan(page, 'accessibility.html')]);
 
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForSelector('.zone-card[data-zone="primary"]');
-  await page.click('.zone-card[data-zone="primary"]');
+  // v10 homepage: school levels open from the "who are you" finder.
+  await page.waitForSelector('#homeV9Finder [data-finder-zone="primary"]');
+  await page.click('#homeV9Finder [data-finder-role="guardian"]');
+  await page.click('#homeV9Finder [data-finder-zone="primary"]');
+  await page.click('#homeV9Finder [data-finder-need="tools"]');
+  await page.click('#homeV9FinderCta');
+  await page.waitForSelector('#pathView:not([hidden])');
   await page.waitForTimeout(200);
   reports.push(['primary zone', await scan(page, 'primary zone')]);
 

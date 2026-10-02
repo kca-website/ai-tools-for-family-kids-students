@@ -1,19 +1,19 @@
 // Routing, deep links (valid/invalid/empty/huge params), history, EL/EN switch.
-import { test, expect, findTranslationLeaks, greekRatio, IS_PROD } from './fixtures.mjs';
+import { test, expect, findTranslationLeaks, greekRatio, IS_PROD, openZoneFromHome } from './fixtures.mjs';
 
 test.describe('home + routing', () => {
-  test('@smoke home renders 4 zones without runtime errors', async ({ page, qa }) => {
+  test('@smoke home renders the finder (4 roles) without runtime errors', async ({ page, qa }) => {
     const resp = await page.goto('/');
     expect(resp.status()).toBe(200);
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('button.zone-card')).toHaveCount(4);
+    await expect(page.locator('#homeV9Finder [data-finder-role]')).toHaveCount(4);
     expect(qa.pageErrors, 'uncaught exceptions').toEqual([]);
     expect(qa.consoleErrors, 'console errors').toEqual([]);
   });
 
   test('@smoke choose age zone → deep link, back/forward', async ({ page, qa }) => {
     await page.goto('/');
-    await page.locator('button.zone-card', { hasText: 'Δημοτικό' }).click();
+    await openZoneFromHome(page, 'primary');
     await expect(page).toHaveURL(/\/primary\/guardian\/tools$/);
     await expect(page.locator('#pathView')).toBeVisible();
     await page.locator('#viewTabQuiz').click();
@@ -22,7 +22,7 @@ test.describe('home + routing', () => {
     await expect(page).toHaveURL(/\/primary\/guardian\/tools$/);
     await page.goBack();
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.locator('button.zone-card').first()).toBeVisible();
+    await expect(page.locator('#homeV9Finder')).toBeVisible();
     await page.goForward();
     await expect(page).toHaveURL(/\/primary\/guardian\/tools$/);
     expect(qa.pageErrors).toEqual([]);
@@ -37,11 +37,11 @@ test.describe('home + routing', () => {
 
   test('home → zone → refresh → browser Back shows the zone picker', async ({ page }) => {
     await page.goto('/');
-    await page.locator('button.zone-card', { hasText: 'Δημοτικό' }).click();
+    await openZoneFromHome(page, 'primary');
     await page.reload();
     await page.goBack();
     await expect(page).toHaveURL(/\/$/);
-    await expect(page.locator('button.zone-card').first()).toBeVisible();
+    await expect(page.locator('#homeV9Finder')).toBeVisible();
   });
 
   for (const path of ['/index.html', '/about', '/guide', '/privacy-policy', '/nowhere/guardian/tools', '/en']) {
@@ -52,10 +52,10 @@ test.describe('home + routing', () => {
     });
   }
 
-  for (const [zone, label] of [['preschool', 'Νηπιαγωγείο'], ['middle', 'Γυμνάσιο'], ['high', 'Λύκειο']]) {
-    test(`age zone card: ${zone}`, async ({ page, qa }) => {
+  for (const zone of ['preschool', 'middle', 'high']) {
+    test(`age zone from finder: ${zone}`, async ({ page, qa }) => {
       await page.goto('/');
-      await page.locator('button.zone-card', { hasText: label }).click();
+      await openZoneFromHome(page, zone);
       await page.waitForLoadState('load');
       await expect(page.locator('h1:visible, h2:visible').first()).toBeVisible();
       expect(qa.pageErrors).toEqual([]);

@@ -76,5 +76,5 @@ const source=fs.readFileSync(new URL('special-education-diagnostic-data.js',root
 assert.doesNotMatch(source,/function category\(|const Q=|basic-subject-check/,'Generic category quiz generator must not return');
 assert.doesNotMatch(source,/official-curriculum-readiness-check|Πριν ξεκινήσεις το μάθημα/,'Unrelated readiness questions must never be used as subject quizzes');
 const navigator=fs.readFileSync(new URL('navigator-home.js',root),'utf8');
-assert.match(navigator,/data-special-education-diagnostic/,'Homepage Practice Map must open the Special Education diagnostic');
+assert.match(navigator,/data-special-education-diagnostic/,'Homepage finder must open the Special Education diagnostic');
 console.log('Special Education verified-quiz boundary smoke passed.');

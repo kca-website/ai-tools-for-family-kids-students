@@ -33,9 +33,10 @@
 
   function sourceForTarget(target){
     if(!(target instanceof Element)) return null;
-    if(target.closest("#specialSchoolZoneCard")) return "school_grid";
+    // The homepage finder replaced the school grid: its Special Education CTA reports as the same entry sources.
+    if(target.closest("#specialSchoolZoneCard, #homeV9FinderCta[href='/special-education.html']:not([data-special-education-diagnostic])")) return "school_grid";
     if(target.closest("#heroHelpSpecialEducation")) return "ai_help";
-    if(target.closest("#specialEducationDiagnosticEntry")) return "diagnostic";
+    if(target.closest("#specialEducationDiagnosticEntry, #homeV9FinderCta[data-special-education-diagnostic]")) return "diagnostic";
     return null;
   }
 

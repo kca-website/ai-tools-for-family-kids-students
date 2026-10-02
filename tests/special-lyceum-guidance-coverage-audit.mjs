@@ -65,7 +65,7 @@ for(const entry of entryBlocks){
 for(const required of ['biology','informatics','latin']){
   assert.ok(exactGuidanceKeys.has(required),`Known exact Special Lyceum mapping missing: ${required}`);
 }
-for(const required of ['history','language-literature','second-foreign-language','math','economics','english']){
+for(const required of ['history','language-literature','second-foreign-language','math','economics','english','ethics']){
   assert.ok(frameworkGuidanceKeys.has(required),`Known framework Special Lyceum mapping missing: ${required}`);
   assert.ok(!exactGuidanceKeys.has(required),`Framework-only Special Lyceum mapping must not be reported as exact: ${required}`);
 }
@@ -73,7 +73,7 @@ for(const required of ['history','language-literature','second-foreign-language'
 const covered=new Set([...exactGuidanceKeys,...frameworkGuidanceKeys]);
 const pending=indexKeys.filter(k=>!covered.has(k));
 
-for(const required of ['ancient','religion','civics','philosophy','ethics']){
+for(const required of ['ancient','religion','civics','philosophy']){
   assert.ok(pending.includes(required),`Published Special Lyceum guidance should remain pending until section/framework mapping is verified: ${required}`);
 }
 

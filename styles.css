@@ -73,6 +73,15 @@ a {
   padding: 0 20px;
 }
 
+/* When the page body is a flex column (mobile PWA shell), auto side margins
+   would shrink-wrap main to its content and let wide grids push it past the
+   viewport. Keep the main container at most the viewport width. */
+body > main.container {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
 .site-header {
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface);
@@ -3362,6 +3371,9 @@ main {
 }
 .site-footer__dwrean-badge {
   justify-self: start !important;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 

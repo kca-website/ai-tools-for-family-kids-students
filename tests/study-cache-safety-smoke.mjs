@@ -10,7 +10,7 @@ assert.match(tutor, /resolveOfficialSchoolbookSource/);
 assert.match(tutor, /loadVerifiedOfficialSource\(subjectId, topic\)/);
 assert.match(tutor, /rawDocumentText = verifiedOfficialSource\?\.text/);
 assert.match(tutor, /officialSchoolbook = hasDocument && !!verifiedOfficialSource\?\.grounded/);
-assert.match(tutor, /promptVersion: 'study-tutor-v4'/);
+assert.match(tutor, /promptVersion: 'study-tutor-v5'/);
 assert.match(tutor, /modelRoute: routingSignature\(aiStatus, routingProfile\)/);
 
 const validationBlock = tutor.match(/if \(result\?\.ok && needsStructuredValidation[\s\S]{0,1200}?Structured result validation failed\./)?.[0] || '';

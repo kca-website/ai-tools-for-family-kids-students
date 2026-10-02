@@ -195,7 +195,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
   const cacheParts = cacheEligible === true && officialSchoolbook
     ? {
         kind: 'official-study-response',
-        promptVersion: 'study-tutor-v4',
+        promptVersion: 'study-tutor-v5',
         task, mode, activity,
         subjectId: String(subjectId || ''),
         topic: String(topic || ''),
@@ -312,7 +312,7 @@ function serverTaskRule({ task, mode, activity }) {
     flashcards: '- Return only valid JSON with exactly 8 active-recall cards using shape {"cards":[{"q":"...","a":"..."}]}. Ground every card in the selected topic/source.',
     quiz: '- Run or generate only the requested quiz format. Never reveal an answer before an attempt when the flow is interactive.',
     truefalse: '- Run a True/False concept check one statement at a time and wait for the learner before feedback.',
-    explain: '- Explain the exact selected topic clearly and stay within the selected/source-supported material. Keep the complete answer within 180 words: a short explanation, two brief examples and two short self-check questions. Finish every sentence. Avoid tables.',
+    explain: '- Explain the exact selected topic clearly and stay within the selected/source-supported material. Keep the complete answer within 180 words: a short explanation, up to two brief examples explicitly described in SOURCE MATERIAL and two short self-check questions. Omit examples when the source does not describe them. Do not expand mechanisms, chemical processes or scientific explanations beyond the source. Finish every sentence. Avoid tables.',
     quickreview: '- Create a concise 5-minute review with key points, common confusions and rapid-recall questions.',
     audio: '- Write a short natural spoken mini-lesson. No tables. Keep every factual sentence source-grounded when a source is active.',
     oral: '- Act as a calm oral-practice examiner: one question at a time, brief formative feedback, no grades.',
@@ -442,6 +442,21 @@ function groundingSignals(text, sourceText, trustedContext = '') {
   // valid source-grounded answer to be discarded. Factual numbers remain a
   // deterministic high-value check; source use is additionally constrained by
   // the mandatory prompt policy and server-side official-source resolution.
+
+  // A chemical formula not present in the active source must not be invented.
+  const formulaPattern = /\b(?:[A-Z][a-z]?(?:[0-9₀-₉]+|[A-Z][a-z]?)+)[⁺⁻+-]*/gu;
+  const normalizeFormula = value => normalizeGroundingText(value)
+    .replace(/[₀-₉]/g, digit => String('₀₁₂₃₄₅₆₇₈₉'.indexOf(digit)))
+    .replace(/[⁺⁻+-]/g, '');
+  const formulaSource = normalizeFormula(source).replace(/\s+/g, '');
+  for (const match of answer.matchAll(formulaPattern)) {
+    const formula = normalizeFormula(match[0]);
+    if (common.has(normalizeGroundingText(match[0])) || seen.has('formula:'+formula)) continue;
+    if (!formulaSource.includes(formula)) {
+      seen.add('formula:'+formula);
+      signals.push({ type: 'unsupported_formula', value: match[0] });
+    }
+  }
 
   // Numbers can materially change dates, quantities and scientific facts.
   const numberPattern = /(?<![\p{L}\p{N}_])\d+(?:[.,]\d+)?(?![\p{L}\p{N}_])/gu;

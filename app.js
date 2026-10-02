@@ -2988,6 +2988,16 @@ function renderToolGrid(pathTools, targetElement) {
     }
   }
 
+  // Deep link από τον Χάρτη Ύλης: /zone/role/tools?subject=history ανοίγει
+  // τα εργαλεία ήδη φιλτραρισμένα στο μάθημα που επέλεξε ο χρήστης.
+  function applySubjectDeepLink() {
+    if (state.currentView !== "tools") return;
+    const subjectId = new URLSearchParams(location.search).get("subject");
+    if (subjectId && typeof CURRICULUM !== "undefined" && CURRICULUM[state.currentZone] && CURRICULUM[state.currentZone][subjectId]) {
+      state.currentSubject = subjectId;
+    }
+  }
+
   // Ζωγραφίζει ό,τι χρειάζεται με βάση το ΤΡΕΧΟΝ state.
   // Δεν αγγίζει το URL: αυτό το κάνει ξεχωριστά το pushRoute().
   function renderCurrentRoute() {
@@ -3299,6 +3309,7 @@ function renderToolGrid(pathTools, targetElement) {
 
     // Deep link: URL όπως /primary/guardian/quiz φορτώνει κατευθείαν εκεί.
     restoreStateFromPath(location.pathname);
+    applySubjectDeepLink();
     renderCurrentRoute();
     applyQuizDeepLink();
 
@@ -3318,6 +3329,7 @@ function renderToolGrid(pathTools, targetElement) {
     window.addEventListener("popstate", () => {
       const renderRouteFromLocation = () => {
         restoreStateFromPath(location.pathname);
+        applySubjectDeepLink();
         renderCurrentRoute();
       };
       const appRoute = /^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)\/?$/.test(location.pathname);

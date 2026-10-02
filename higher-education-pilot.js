@@ -624,7 +624,7 @@
       aiInput.value.trim() ? `Ερώτηση / προσπάθεια φοιτητή:\n${aiInput.value.trim()}` : "Επίλεξε αντιπροσωπευτική έννοια από το παρεχόμενο απόσπασμα και εκτέλεσε την ενέργεια.",
       aiAction === "quiz" ? "Δώσε μαζί με κάθε σωστή απάντηση την τεκμηρίωση από την πηγή." : "Ακολούθησε το ερώτημα του φοιτητή και μόνο την επιλεγμένη ενέργεια."
     ].join("\n");
-    return { system, prompt, action: aiAction, documentText: source.text, documentName: source.name };
+    return { system, prompt, question: aiInput.value.trim(), action: aiAction, documentText: source.text, documentName: source.name };
   }
 
   function setAiBusy(busy, message) {

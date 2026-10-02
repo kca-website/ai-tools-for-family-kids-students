@@ -3,7 +3,7 @@ const routerPath = require.resolve('../ai-provider-router');
 let calls = [];
 require.cache[routerPath] = { id: routerPath, filename: routerPath, loaded: true, exports: {
   getAiStatus: () => ({ configured: true, model: 'test' }),
-  generateChat: async args => { calls.push(args); return { ok: true, text: 'Τεκμηρίωση από Πηγή Α.', provider: 'test', model: 'test' }; }
+  generateChat: async args => { calls.push(args); return { ok: true, text: args.responseFormat ? JSON.stringify({ supported: true, text: 'Τεκμηρίωση από Πηγή Α.', evidence: ['This is exact source evidence.'] }) : 'Teacher lesson plan', provider: 'test', model: 'test' }; }
 } };
 const handler = require('../api/teacher-assistant');
 async function request(body) {
@@ -16,10 +16,15 @@ async function request(body) {
   assert.equal(res.code, 422); assert.equal(calls.length, 0);
   res = await request({ audience: 'university_student', prompt: 'Explain', documentText: 'source without attribution' });
   assert.equal(res.code, 422); assert.equal(calls.length, 0);
-  res = await request({ audience: 'university_student', action: 'quiz', prompt: 'quiz', documentText: 'EXCERPT_CONTENT', documentName: 'Πηγή Α · κεφ. 2' });
+  res = await request({ audience: 'university_student', action: 'quiz', prompt: 'quiz', documentText: 'EXCERPT_CONTENT This is exact source evidence.', documentName: 'Πηγή Α · κεφ. 2' });
   assert.equal(res.code, 200); assert.equal(res.body.source.name, 'Πηγή Α · κεφ. 2');
   assert.match(calls[0].messages[0].content, /Use ONLY the supplied source text/);
   assert.match(calls[0].messages[0].content, /Requested action: quiz/);
+  assert(calls[0].validateText(JSON.stringify({ supported: true, text: 'answer', evidence: ['This is exact source evidence.'] })));
+  assert(!calls[0].validateText(JSON.stringify({ supported: true, text: 'answer', evidence: ['An invented quotation absent from source.'] })));
+  assert(calls[0].validateText(JSON.stringify({ supported: false, text: '', evidence: [] })));
+  assert(!calls[0].validateText(JSON.stringify({ supported: false, text: 'unrelated lesson', evidence: [] })));
+  assert(!calls[0].validateText('Free-form answer')); 
   assert(!calls[0].messages[0].content.includes('EXCERPT_CONTENT'));
   assert.match(calls[0].messages[1].content, /EXCERPT_CONTENT/);
   res = await request({ prompt: 'Teacher lesson plan', audience: 'teacher' });

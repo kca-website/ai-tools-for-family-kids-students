@@ -475,7 +475,7 @@
       <div class="home-v8-eng__copy">
         <span class="home-v8-eng__icon" aria-hidden="true">${HAND_ICON}</span>
         <div>
-          <h2>${c.engTitle}</h2>
+          <h2 id="homeV8EngTitle">${c.engTitle}</h2>
           <p>${c.engDesc}</p>
         </div>
       </div>

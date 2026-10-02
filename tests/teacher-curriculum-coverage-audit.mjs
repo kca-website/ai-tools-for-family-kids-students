@@ -7,7 +7,11 @@ try{
   const page=await browser.newPage({viewport:{width:1440,height:1000}});
   const pageErrors=[];
   page.on('pageerror',e=>pageErrors.push(e.message));
-  page.on('console',m=>{ if(m.type()==='error') pageErrors.push(m.text()); });
+  // Third-party loads (fonts/CDNs) can fail behind proxies or offline; same-origin
+  // failures still fail the test through the requestfailed/response listeners.
+  page.on('console',m=>{if(m.type()==='error'&&!m.text().startsWith('Failed to load resource:'))pageErrors.push(m.text());});
+  page.on('requestfailed',r=>{const h=new URL(r.url()).hostname;if(h==='127.0.0.1'||h==='localhost')pageErrors.push(`request failed: ${r.url()}`);});
+  page.on('response',r=>{const h=new URL(r.url()).hostname;if((h==='127.0.0.1'||h==='localhost')&&r.status()>=400)pageErrors.push(`HTTP ${r.status()}: ${r.url()}`);});
 
   await page.goto(`${BASE}/teacher-assistant.html`,{waitUntil:'domcontentloaded',timeout:60000});
   await page.waitForSelector('#context');

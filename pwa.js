@@ -177,7 +177,19 @@
   // curriculum/learning datasets are loaded by that integration only after a
   // Special Education school is actually selected.
   if(isTutorPath()) loadSpecialTutorUi();
-  window.addEventListener("popstate",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
+  let homepageRuntimePromise=null;
+  function restoreHomepageRuntime(){
+    if(!isHomepage())return;
+    if(!homepageRuntimePromise){
+      document.documentElement.classList.add("navigator-home-booting");
+      homepageRuntimePromise=appendScript("navigator-home","/navigator-home.js")
+        .then(()=>appendScript("home-search","/home-search.js"))
+        .catch(err=>{homepageRuntimePromise=null;document.documentElement.classList.remove("navigator-home-booting");console.error("Homepage runtime failed to load",err);});
+    }
+    homepageRuntimePromise.then(()=>window.AITOOLSKIDS_REFRESH_HOME?.());
+  }
+  window.addEventListener("popstate",()=>{if(isTutorPath())loadSpecialTutorUi();if(isHomepage())setTimeout(restoreHomepageRuntime,0);});
+  window.addEventListener("pageshow",event=>{if(event.persisted&&isHomepage())restoreHomepageRuntime();});
   document.addEventListener("aitools4kids:tutor-rendered",()=>{ if(isTutorPath()) loadSpecialTutorUi(); });
 
   // Keep the trust disclosure completely out of the normal tutor startup chain.

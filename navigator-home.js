@@ -769,6 +769,8 @@
     revealHomepage(styleLink);
   }
 
+  window.AITOOLSKIDS_REFRESH_HOME=apply;
+
   function init(){
     apply();
 
@@ -807,6 +809,8 @@
         }, 0);
       }
     });
+
+    window.addEventListener("pageshow", event => {if(event.persisted && isHome()) apply();});
 
     window.addEventListener("popstate", () => {
       setTimeout(() => {

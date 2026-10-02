@@ -562,9 +562,13 @@ $('qrBtn').onclick=renderClassQr;
 ['classActivityMode','classActivityMinutes','classActivityLiveAi','classActivityFinalCheck'].forEach(id=>$(id)?.addEventListener('change',()=>{if(!$('classQrPanel')?.hidden)renderClassQr();}));
 $('groqBtn').onclick=generateGroq;$('puterBtn').onclick=generatePuter;$('copyBtn').onclick=async()=>{await navigator.clipboard.writeText(lastText);$('copyBtn').textContent='Αντιγράφηκε';setTimeout(()=>$('copyBtn').textContent='Αντιγραφή',1200)};refreshContext();const providerDetails=$('teacherAiProviderDetails');providerDetails?.addEventListener('toggle',()=>{if(providerDetails.open&&!providerDetails.dataset.hydrated){providerDetails.dataset.hydrated='1';hydrateTeacherProviderStatus();}});const learningQuery=new URLSearchParams(location.search);
 function restoreLearningChoice(id,key,refresh){const el=$(id),value=learningQuery.get(key);if(value&&[...el.options].some(o=>o.value===value)){el.value=value;refresh?.();}}
+function restoreLearningSelection(){
 restoreLearningChoice('context','context',refreshGrades);restoreLearningChoice('grade','grade',refreshSubjects);restoreLearningChoice('subject','subject',refreshUnits);restoreLearningChoice('unit','unit');
 if(unit.value==='custom'&&learningQuery.get('topicText'))$('customUnit').value=learningQuery.get('topicText');
 const requestedTask=learningQuery.get('task');if(requestedTask)setTask(requestedTask);
+}
+restoreLearningSelection();
+window.addEventListener('load',restoreLearningSelection,{once:true});
 window.AITOOLSKIDS_LEARNING_ACTIONS={context(){const params=new URLSearchParams({context:context.value,grade:grade.value,subject:subject.value,unit:unit.value,task,topicText:unit.value==='custom'?$('customUnit').value.trim():(unit.selectedOptions[0]?.textContent||'')});return params;}};
 for(const [id,mode] of [['teacherCharacterChoice','character'],['teacherChallengeChoice','challenge']])$(id).onclick=event=>{event.preventDefault();const url=new URL(tutorDeepLink());url.searchParams.set('mode',mode);location.assign(url.pathname+url.search);};
 </script>

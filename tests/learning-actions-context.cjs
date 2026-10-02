@@ -1,0 +1,16 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync(require('node:path').join(__dirname,'../learning-actions.js'),'utf8');
+const anchor={href:'/erevna-me-piges-ai.html',getAttribute(){return this.href;},addEventListener(){}};
+let selection=new URLSearchParams({zone:'primary',grade:'e',subject:'istoria-e-dimotikou',topicText:'Βυζάντιο και κοινωνία',lang:'el'});
+const events={};
+const document={readyState:'complete',querySelectorAll(sel){return sel==='[data-learning-guide]'?[anchor]:[];},addEventListener(event,fn){events[event]=fn;}};
+vm.runInNewContext(source,{URL,URLSearchParams,location:{origin:'https://www.aitools4kids.gr',pathname:'/study.html',search:''},window:{AITOOLSKIDS_LEARNING_ACTIONS:{context:()=>selection}},document});
+let url=new URL(anchor.href,'https://www.aitools4kids.gr');
+assert.equal(url.searchParams.get('grade'),'e');assert.equal(url.searchParams.get('topicText'),'Βυζάντιο και κοινωνία');
+const back=new URL(url.searchParams.get('ctxReturn'),'https://www.aitools4kids.gr');assert.equal(back.pathname,'/study.html');assert.equal(back.searchParams.get('subject'),'istoria-e-dimotikou');
+selection=new URLSearchParams({zone:'middle',grade:'b',subject:'math',topicText:'Εξισώσεις'});events.change();
+url=new URL(anchor.href,'https://www.aitools4kids.gr');assert.equal(url.searchParams.get('grade'),'b');assert.equal(url.searchParams.get('topicText'),'Εξισώσεις');
+let created=0;
+const hostileDoc={readyState:'complete',querySelectorAll(){return[];},addEventListener(){},createElement(){created++;throw Error('Unsafe return rendered');}};
+vm.runInNewContext(source,{URL,URLSearchParams,location:{origin:'https://www.aitools4kids.gr',pathname:'/meleti-pdf-me-ai.html',search:'?ctxReturn=https%3A%2F%2Fexample.com%2Fstudy.html'},window:{},document:hostileDoc});assert.equal(created,0);
+console.log('Current selection, updated selection, encoded return URL and external-return rejection passed.');

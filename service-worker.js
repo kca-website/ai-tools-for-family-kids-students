@@ -1,5 +1,5 @@
 /* AI Tools 4 Kids PWA service worker: v1.1.3 */
-const CACHE_NAME = "aitools4kids-pwa-v5";
+const CACHE_NAME = "aitools4kids-pwa-v6";
 const CORE = [
   "/",
   "/styles.css",
@@ -45,7 +45,7 @@ self.addEventListener("activate", (event) => {
 async function networkFirst(request) {
   const cache = await caches.open(CACHE_NAME);
   try {
-    const response = await fetch(request);
+    const response = await fetch(request, {cache:"no-cache"});
     if (response && response.ok) cache.put(request, response.clone());
     return response;
   } catch (error) {

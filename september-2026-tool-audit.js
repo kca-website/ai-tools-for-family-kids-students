@@ -33,6 +33,12 @@
   patch("chatgpt-edu", {minAge:15, pending:false, minAgeNote:"Στην Ελλάδα αφορά σχολικό πιλοτικό πρόγραμμα σε επιλεγμένα λύκεια και πρόσβαση μέσω συμμετέχουσας σχολικής μονάδας.", auditSource:"https://edugpt.sch.gr/features.php"});
   patch("khan-academy-kids", {minAge:2, minAgeNote:"Σχεδιασμένο επίσημα για παιδιά 2–8 ετών. Δεν είναι γενικός generative-AI chatbot.", auditSource:"https://learn.khanacademy.org/khan-academy-kids/"});
 
+  patch("scratch", {minAge:8, minAgeNote:"Το 8+ είναι παιδαγωγική πρόταση του οδηγού, όχι όρος του παρόχου. Κάτω των 18 οι Όροι απαιτούν συμφωνία γονέα/κηδεμόνα· για νέο λογαριασμό κάτω των 16 η άδεια δίνεται μέσω email γονέα.", auditSource:"https://mitscratch.freshdesk.com/en/support/solutions/articles/4000219182-scratch-terms-of-service"});
+  patch("chrome-music-lab", {minAge:6, minAgeNote:"Το 6+ είναι παιδαγωγική πρόταση του οδηγού. Δεν απαιτείται λογαριασμός.", auditSource:"https://musiclab.chromeexperiments.com/About"});
+  patch("teachable-machine", {minAge:10, minAgeNote:"Το 10+ είναι παιδαγωγική πρόταση του οδηγού. Χωρίς λογαριασμό· τα δεδομένα εκπαίδευσης μένουν στον browser εκτός αν αποθηκεύσεις στο Google Drive.", auditSource:"https://blog.google/technology/ai/teachable-machine/"});
+
+  ["scratch","chrome-music-lab","teachable-machine"].forEach((id)=>{ if(TOOLS[id]) Object.assign(TOOLS[id],{lastReviewed:"2026-10-02",lastReviewedEl:"2 Οκτωβρίου 2026",lastReviewedEn:"2 October 2026"}); });
+
   ["chatgpt","gemini","notebooklm","copilot","claude","perplexity","phet","google-arts-culture","gemini-education","ai-help"].forEach((id)=>patch(id, {}));
 
   // Explicit nutrition facts are used only when verified from current official sources.

@@ -153,18 +153,18 @@ const LISTS={
     high:["ai-help","perplexity","notebooklm","mindmup","quizlet","zotero","gamma","gemini-education","copilot","chatgpt","digital-tutoring"]
   },
   informatics:{
-    primary:["codeai","ai-help","autodraw"],
-    middle:["codeai","ai-help","replit-ai","github-copilot","elements-of-ai","quizlet","gemini-education","copilot","chatgpt"],
-    high:["ai-help","codeai","replit-ai","github-copilot","google-colab","elements-of-ai","claude-academy","notebooklm","quizlet","gemini-education","chatgpt","digital-tutoring"]
+    primary:["scratch","codeai","teachable-machine","ai-help","autodraw"],
+    middle:["scratch","codeai","teachable-machine","ai-help","replit-ai","github-copilot","elements-of-ai","quizlet","gemini-education","copilot","chatgpt"],
+    high:["ai-help","codeai","teachable-machine","replit-ai","github-copilot","google-colab","elements-of-ai","claude-academy","notebooklm","quizlet","gemini-education","chatgpt","digital-tutoring"]
   },
   technology:{
-    middle:["ai-help","phet","codeai","miro-ai","mindmup","canva-magic","gamma","perplexity","copilot","chatgpt"],
-    high:["ai-help","codeai","replit-ai","google-colab","wolfram-alpha","phet","miro-ai","gamma","perplexity","chatgpt"]
+    middle:["ai-help","phet","scratch","teachable-machine","codeai","miro-ai","mindmup","canva-magic","gamma","perplexity","copilot","chatgpt"],
+    high:["ai-help","codeai","teachable-machine","replit-ai","google-colab","wolfram-alpha","phet","miro-ai","gamma","perplexity","chatgpt"]
   },
   arts:{
-    primary:["autodraw","google-arts-culture","canva-magic","ai-help"],
-    middle:["google-arts-culture","autodraw","canva-magic","ai-help","gamma","perplexity","chatgpt"],
-    high:["google-arts-culture","canva-magic","autodraw","ai-help","gamma","perplexity","notebooklm","chatgpt"]
+    primary:["chrome-music-lab","autodraw","google-arts-culture","canva-magic","ai-help"],
+    middle:["google-arts-culture","chrome-music-lab","autodraw","canva-magic","ai-help","gamma","perplexity","chatgpt"],
+    high:["google-arts-culture","chrome-music-lab","canva-magic","autodraw","ai-help","gamma","perplexity","notebooklm","chatgpt"]
   },
   pe:{
     primary:["ai-help","immersive-reader"],
@@ -172,8 +172,8 @@ const LISTS={
     high:["ai-help","quizlet","notion","perplexity","notebooklm","chatgpt"]
   },
   skills:{
-    primary:["ai-help","autodraw","canva-magic","mindmup","immersive-reader"],
-    middle:["ai-help","mindmup","miro-ai","canva-magic","gamma","notebooklm","perplexity","notion"],
+    primary:["ai-help","scratch","autodraw","canva-magic","mindmup","immersive-reader"],
+    middle:["ai-help","mindmup","teachable-machine","miro-ai","canva-magic","gamma","notebooklm","perplexity","notion"],
     high:["ai-help","mindmup","miro-ai","gamma","canva-magic","notebooklm","perplexity","notion","zotero"]
   },
   ancient:{
@@ -215,14 +215,29 @@ if(typeof NEED_TOOL_MAP==="undefined") return;
 const NEEDS={
   religion:{understand:["ai-help","google-arts-culture","notebooklm","gemini-education","chatgpt"],practice:["quizlet","ai-help","chatgpt"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity","notebooklm","google-arts-culture"],revise:["quizlet","ai-help","mindmup","notebooklm","digital-tutoring"],research:["perplexity","google-arts-culture","notebooklm","zotero"],"reading-support":["immersive-reader","ai-help","notebooklm"],"step-by-step":["ai-help","mindmup","immersive-reader"]},
   civics:{understand:["ai-help","notebooklm","gemini-education","chatgpt","google-arts-culture"],practice:["quizlet","ai-help","chatgpt"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity","notebooklm"],revise:["quizlet","ai-help","mindmup","notebooklm","digital-tutoring"],research:["perplexity","notebooklm","zotero","gamma"],"reading-support":["immersive-reader","ai-help","notebooklm"],"step-by-step":["ai-help","mindmup","immersive-reader"]},
-  informatics:{understand:["ai-help","codeai","elements-of-ai","claude-academy","gemini-education","chatgpt"],practice:["codeai","replit-ai","google-colab","ai-help","quizlet"],hint:["ai-help","chatgpt"],check:["ai-help","github-copilot","replit-ai","chatgpt"],revise:["quizlet","ai-help","notebooklm","digital-tutoring"],research:["notebooklm","elements-of-ai","claude-academy"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","codeai"]},
-  technology:{understand:["ai-help","phet","codeai","chatgpt","copilot"],practice:["codeai","replit-ai","google-colab","phet","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","wolfram-alpha","chatgpt"],revise:["ai-help","mindmup","miro-ai"],research:["perplexity","gamma","miro-ai"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","mindmup","miro-ai"]},
-  arts:{understand:["google-arts-culture","ai-help","chatgpt"],practice:["autodraw","canva-magic","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","google-arts-culture"],revise:["google-arts-culture","ai-help","notebooklm"],research:["google-arts-culture","perplexity","gamma"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","autodraw"]},
+  informatics:{understand:["ai-help","teachable-machine","codeai","elements-of-ai","claude-academy","gemini-education","chatgpt"],practice:["scratch","codeai","replit-ai","google-colab","teachable-machine","ai-help","quizlet"],hint:["ai-help","chatgpt"],check:["ai-help","github-copilot","replit-ai","chatgpt"],revise:["quizlet","ai-help","notebooklm","digital-tutoring"],research:["notebooklm","elements-of-ai","claude-academy"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","codeai"]},
+  technology:{understand:["ai-help","phet","teachable-machine","codeai","chatgpt","copilot"],practice:["scratch","codeai","replit-ai","google-colab","phet","teachable-machine","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","wolfram-alpha","chatgpt"],revise:["ai-help","mindmup","miro-ai"],research:["perplexity","gamma","miro-ai"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","mindmup","miro-ai"]},
+  arts:{understand:["google-arts-culture","chrome-music-lab","ai-help","chatgpt"],practice:["chrome-music-lab","autodraw","canva-magic","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","google-arts-culture"],revise:["google-arts-culture","ai-help","notebooklm"],research:["google-arts-culture","chrome-music-lab","perplexity","gamma"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","autodraw"]},
   pe:{understand:["ai-help","chatgpt","notebooklm"],practice:["ai-help","notion"],hint:["ai-help"],check:["ai-help","perplexity"],revise:["quizlet","ai-help","notebooklm"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","notion"]},
-  skills:{understand:["ai-help","notebooklm"],practice:["ai-help","canva-magic","autodraw"],hint:["ai-help"],check:["ai-help","perplexity"],revise:["mindmup","ai-help","notion"],research:["perplexity","notebooklm","zotero","gamma"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","mindmup","miro-ai","notion"]},
+  skills:{understand:["ai-help","teachable-machine","notebooklm"],practice:["ai-help","scratch","teachable-machine","canva-magic","autodraw"],hint:["ai-help"],check:["ai-help","perplexity"],revise:["mindmup","ai-help","notion"],research:["perplexity","notebooklm","zotero","gamma"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","mindmup","miro-ai","notion"]},
   ancient:{understand:["ai-help","notebooklm","gemini-education","chatgpt"],practice:["quizlet","anki","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity","notebooklm"],revise:["quizlet","anki","ai-help","notebooklm","digital-tutoring"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help","notebooklm"],"step-by-step":["ai-help","immersive-reader"]},
   latin:{understand:["ai-help","notebooklm","chatgpt"],practice:["quizlet","anki","ai-help"],hint:["ai-help","chatgpt"],check:["ai-help","perplexity"],revise:["quizlet","anki","ai-help","digital-tutoring"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help"]},
   economics:{understand:["ai-help","notebooklm","chatgpt"],practice:["quizlet","ai-help","desmos"],hint:["ai-help","chatgpt"],check:["ai-help","wolfram-alpha","desmos"],revise:["quizlet","ai-help","notebooklm","digital-tutoring"],research:["perplexity","notebooklm"],"reading-support":["immersive-reader","ai-help"],"step-by-step":["ai-help","wolfram-alpha"]}
 };
 Object.keys(NEEDS).forEach((subject)=>{if(!NEED_TOOL_MAP[subject])NEED_TOOL_MAP[subject]=NEEDS[subject];});
+// One filter for Technology & Computing: where a zone has both "technology"
+// and "informatics", fold informatics into technology so the chip row does not
+// show two overlapping computing filters. Deep links to ?subject=informatics are
+// aliased to technology by app.js.
+const uniq=(list)=>list.filter((id,i,a)=>a.indexOf(id)===i);
+["middle","high"].forEach((zone)=>{
+  const z=CURRICULUM[zone];
+  if(!z||!z.technology||!z.informatics) return;
+  z.technology={...z.technology,toolIds:uniq([...z.informatics.toolIds,...z.technology.toolIds]),noteEl:"Τεχνολογία & Πληροφορική: αλγόριθμοι, κώδικας, σχεδιασμός και κατασκευές. Πρώτα η δική σου λύση, μετά έλεγχος με AI.",noteEn:"Technology & Computing: algorithms, code, design and construction. Your own solution first, then checking with AI."};
+  delete z.informatics;
+});
+if(NEED_TOOL_MAP.technology&&NEED_TOOL_MAP.informatics){
+  const t=NEED_TOOL_MAP.technology,inf=NEED_TOOL_MAP.informatics;
+  Object.keys(inf).forEach((need)=>{t[need]=uniq([...(inf[need]||[]),...(t[need]||[])]);});
+}
 })();

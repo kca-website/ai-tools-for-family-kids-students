@@ -49,6 +49,24 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://www.aitools4kids.gr/tools/scratch.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.aitools4kids.gr/tools/chrome-music-lab.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.aitools4kids.gr/tools/teachable-machine.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://www.aitools4kids.gr/tools/autodraw.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>

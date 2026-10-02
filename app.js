@@ -2992,7 +2992,12 @@ function renderToolGrid(pathTools, targetElement) {
   // τα εργαλεία ήδη φιλτραρισμένα στο μάθημα που επέλεξε ο χρήστης.
   function applySubjectDeepLink() {
     if (state.currentView !== "tools") return;
-    const subjectId = new URLSearchParams(location.search).get("subject");
+    let subjectId = new URLSearchParams(location.search).get("subject");
+    const zoneCurriculum = typeof CURRICULUM !== "undefined" ? CURRICULUM[state.currentZone] : null;
+    // Informatics is folded into "Technology & Computing" where both exist.
+    if (subjectId === "informatics" && zoneCurriculum && !zoneCurriculum.informatics && zoneCurriculum.technology) {
+      subjectId = "technology";
+    }
     if (subjectId && typeof CURRICULUM !== "undefined" && CURRICULUM[state.currentZone] && CURRICULUM[state.currentZone][subjectId]) {
       state.currentSubject = subjectId;
     }

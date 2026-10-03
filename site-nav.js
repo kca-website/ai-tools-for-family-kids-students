@@ -56,24 +56,28 @@
       section.className="home-ai-paths-promo";
       section.setAttribute("aria-labelledby","homeAiPathsPromoTitle");
     }
-    const en=lang()==="en";
-    section.innerHTML=en ? `
-      <div class="home-ai-paths-promo__copy">
-        <div class="home-ai-paths-promo__badges"><span class="home-ai-paths-promo__badge">New · AI Paths</span><span class="home-ai-paths-promo__badge home-ai-paths-promo__badge--free">Free</span></div>
-        <h2 id="homeAiPathsPromoTitle">Can you tell when AI is wrong?</h2>
-        <p>Enter realistic situations with AI answers, suspicious messages, viral images and schoolwork. Decide what you would do, then learn how to verify it.</p>
-        <div class="home-ai-paths-promo__examples" aria-label="Example situations"><span>“AI sounds completely certain. Do you trust it?”</span><span>“Your account closes in 10 minutes. Click now?”</span></div>
-        <a class="home-ai-paths-promo__cta" href="/ai-scenarios.html">Start an AI Path <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="home-ai-paths-promo__visual" aria-hidden="true"><div class="home-ai-paths-promo__orbit"></div><div class="home-ai-paths-promo__bot"><div class="home-ai-paths-promo__face"><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--l"></i><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--r"></i><i class="home-ai-paths-promo__mouth"></i></div></div><div class="home-ai-paths-promo__bubble">Notice → Decide → Verify</div></div>` : `
-      <div class="home-ai-paths-promo__copy">
-        <div class="home-ai-paths-promo__badges"><span class="home-ai-paths-promo__badge">Νέο · AI Διαδρομές</span><span class="home-ai-paths-promo__badge home-ai-paths-promo__badge--free">Δωρεάν</span></div>
-        <h2 id="homeAiPathsPromoTitle">Ξέρεις πότε το AI κάνει λάθος;</h2>
-        <p>Μπες σε πραγματικές καταστάσεις με AI απαντήσεις, ύποπτα μηνύματα, viral εικόνες και σχολικές εργασίες. Δες τι θα έκανες και μάθε πώς να το ελέγχεις.</p>
-        <div class="home-ai-paths-promo__examples" aria-label="Παραδείγματα καταστάσεων"><span>«Το AI ακούγεται απόλυτα σίγουρο. Το πιστεύεις;»</span><span>«Ο λογαριασμός σου κλείνει σε 10 λεπτά. Πατάς;»</span></div>
-        <a class="home-ai-paths-promo__cta" href="/ai-scenarios.html">Ξεκίνα μια AI Διαδρομή <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="home-ai-paths-promo__visual" aria-hidden="true"><div class="home-ai-paths-promo__orbit"></div><div class="home-ai-paths-promo__bot"><div class="home-ai-paths-promo__face"><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--l"></i><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--r"></i><i class="home-ai-paths-promo__mouth"></i></div></div><div class="home-ai-paths-promo__bubble">Παρατήρησε → Αποφάσισε → Επαλήθευσε</div></div>`;
+    const currentLang=lang();
+    const en=currentLang==="en";
+    if(section.dataset.lang!==currentLang){
+      section.dataset.lang=currentLang;
+      section.innerHTML=en ? `
+        <div class="home-ai-paths-promo__copy">
+          <div class="home-ai-paths-promo__badges"><span class="home-ai-paths-promo__badge">New · AI Paths</span><span class="home-ai-paths-promo__badge home-ai-paths-promo__badge--free">Free</span></div>
+          <h2 id="homeAiPathsPromoTitle">Can you tell when AI is wrong?</h2>
+          <p>Enter realistic situations with AI answers, suspicious messages, viral images and schoolwork. Decide what you would do, then learn how to verify it.</p>
+          <div class="home-ai-paths-promo__examples" aria-label="Example situations"><span>“AI sounds completely certain. Do you trust it?”</span><span>“Your account closes in 10 minutes. Click now?”</span></div>
+          <a class="home-ai-paths-promo__cta" href="/ai-scenarios.html">Start an AI Path <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="home-ai-paths-promo__visual" aria-hidden="true"><div class="home-ai-paths-promo__orbit"></div><div class="home-ai-paths-promo__bot"><div class="home-ai-paths-promo__face"><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--l"></i><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--r"></i><i class="home-ai-paths-promo__mouth"></i></div></div><div class="home-ai-paths-promo__bubble">Notice → Decide → Verify</div></div>` : `
+        <div class="home-ai-paths-promo__copy">
+          <div class="home-ai-paths-promo__badges"><span class="home-ai-paths-promo__badge">Νέο · AI Διαδρομές</span><span class="home-ai-paths-promo__badge home-ai-paths-promo__badge--free">Δωρεάν</span></div>
+          <h2 id="homeAiPathsPromoTitle">Ξέρεις πότε το AI κάνει λάθος;</h2>
+          <p>Μπες σε πραγματικές καταστάσεις με AI απαντήσεις, ύποπτα μηνύματα, viral εικόνες και σχολικές εργασίες. Δες τι θα έκανες και μάθε πώς να το ελέγχεις.</p>
+          <div class="home-ai-paths-promo__examples" aria-label="Παραδείγματα καταστάσεων"><span>«Το AI ακούγεται απόλυτα σίγουρο. Το πιστεύεις;»</span><span>«Ο λογαριασμός σου κλείνει σε 10 λεπτά. Πατάς;»</span></div>
+          <a class="home-ai-paths-promo__cta" href="/ai-scenarios.html">Ξεκίνα μια AI Διαδρομή <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="home-ai-paths-promo__visual" aria-hidden="true"><div class="home-ai-paths-promo__orbit"></div><div class="home-ai-paths-promo__bot"><div class="home-ai-paths-promo__face"><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--l"></i><i class="home-ai-paths-promo__eye home-ai-paths-promo__eye--r"></i><i class="home-ai-paths-promo__mouth"></i></div></div><div class="home-ai-paths-promo__bubble">Παρατήρησε → Αποφάσισε → Επαλήθευσε</div></div>`;
+    }
     if(section.parentElement!==shell || section.nextElementSibling!==more) shell.insertBefore(section,more);
   }
 
@@ -85,8 +89,6 @@
     new MutationObserver(() => { syncAriaLabels(); ensureAiPathsPromo(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     if(location.pathname==="/" || location.pathname===""){
       [0,100,350,900,1800].forEach(ms=>setTimeout(ensureAiPathsPromo,ms));
-      const root=document.getElementById("zoneSelectView") || document.body;
-      new MutationObserver(ensureAiPathsPromo).observe(root,{childList:true,subtree:true});
     }
     if(!toggle || !panel) return;
 

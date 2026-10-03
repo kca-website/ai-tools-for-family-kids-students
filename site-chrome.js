@@ -91,7 +91,7 @@
             <p class="chrome-menu-panel__title" data-chrome="groupLearn"></p>
             <a href="/study.html" data-chrome="study"></a>
             <a href="/tools/ai-help.html" data-chrome="help"></a>
-            <a href="/#open-quiz" data-chrome="practice"></a>
+            <a href="/practice.html" data-chrome="practice"></a>
             <a href="/xartis-ylis.html" data-chrome="curriculum"></a>
             <a href="/high/student/tutor?schoolType=epal" data-chrome="epal"></a><a href="/organosi-meletis-ai.html" data-chrome="organize"></a><a href="/history-characters.html" data-chrome="characters"></a>
           </div>

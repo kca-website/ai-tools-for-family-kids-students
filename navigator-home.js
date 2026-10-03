@@ -575,23 +575,11 @@
     if(intent){
       finderState.need = intent;
       renderFinder();
-      if(shortcutSelectionMade){
-        const link=document.getElementById("homeV9FinderCta");
-        if(link && !openSpaRoute(link)) location.assign(link.href);
-      } else {
-        document.getElementById("homeV8FinderTitle")?.focus({preventScroll:true});
-        document.getElementById("homeV9Finder")?.scrollIntoView({block:"start"});
-      }
+      document.getElementById("homeV8FinderTitle")?.focus({preventScroll:true});
+      document.getElementById("homeV9Finder")?.scrollIntoView({block:"start"});
       return;
     }
-    if(!["#open-quiz", "#homeV8MapTitle"].includes(location.hash)) return;
-    const picker = document.getElementById("heroQuizPicker");
-    const button = document.getElementById("heroQuizCtaBtn");
-    if(!picker || !button) return;
-    picker.hidden = false;
-    button.setAttribute("aria-expanded", "true");
-    button.closest(".hero__quiz-cta-wrap")?.scrollIntoView({block:"start"});
-    picker.querySelector("button, a")?.focus({preventScroll:true});
+    if(["#open-quiz", "#homeV8MapTitle"].includes(location.hash)) location.replace("/practice.html");
   }
 
   function init(){

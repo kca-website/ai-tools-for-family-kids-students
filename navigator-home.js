@@ -20,7 +20,7 @@
       curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα → AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
       aiBadgeNew: "Νέο",
       aiBadgeFree: "Δωρεάν",
-      aiTitle: "Κόλλησες; Πάρε μια υπόδειξη.",
+      aiTitle: "AI Βοήθεια",
       aiDesc: "AI Βοήθεια: μία ερώτηση ή μικρή υπόδειξη τη φορά, πάνω στη δική σου προσπάθεια.",
       aiTechSummary: "ⓘ Ποιο AI χρησιμοποιείται;",
       aiTechText: "GPT-OSS 120B μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική.",
@@ -62,7 +62,7 @@
       teacherTasks: [["worksheet","📝","Φύλλο εργασίας"],["assessment","✅","Αξιολόγηση"],["lesson","🗂️","Σχέδιο μαθήματος"],["video","🎬","Βίντεο"]],
       aiLinksLabel: "Άνοιξε για:",
       studyBadge: "Νέο · Δωρεάν",
-      studyTitle: "Κατάλαβε και κάνε επανάληψη",
+      studyTitle: "AI Μελέτη",
       studyDesc: "AI Μελέτη: σχολική ενότητα ή δικές σου σημειώσεις/PDF, με εξήγηση, κάρτες, quiz και πλάνο μέσα στο site.",
       studyOfficial: "Βασισμένη στο επίσημο σχολικό βιβλίο · Ύλη 2026–27",
       studyCoverage: "Με σημειώσεις/PDF οι απαντήσεις βασίζονται στο υλικό σου. Η κάλυψη σχολικών βιβλίων είναι επιλεκτική.",
@@ -76,7 +76,7 @@
       curriculumCardDesc: "Grade → subject → real curriculum unit → AI help, practice and visual explanation.",
       aiBadgeNew: "New",
       aiBadgeFree: "Free",
-      aiTitle: "Stuck? Get a hint.",
+      aiTitle: "AI Help",
       aiDesc: "AI Help: one question or small hint at a time, building on your own attempt.",
       aiTechSummary: "ⓘ Which AI is used?",
       aiTechText: "GPT-OSS 120B via Cloudflare Workers AI, with Groq as the fallback provider. Puter is an optional alternative.",
@@ -118,7 +118,7 @@
       teacherTasks: [["worksheet","📝","Worksheet"],["assessment","✅","Assessment"],["lesson","🗂️","Lesson plan"],["video","🎬","Video"]],
       aiLinksLabel: "Open for:",
       studyBadge: "New · Free",
-      studyTitle: "Understand and revise",
+      studyTitle: "AI Study",
       studyDesc: "AI Study: a school unit or your own notes/PDF, with explanations, cards, quizzes and a study plan here on the site.",
       studyOfficial: "Based on the official school textbook · Curriculum 2026–27",
       studyCoverage: "With notes/PDF, answers are based on your material. Textbook coverage is selective.",
@@ -316,7 +316,7 @@
       ${step(c.stepRole, roles)}
       ${schoolSteps}
       <p class="home-v9-finder__note" aria-live="polite"${note ? "" : " hidden"}>${note ? ICON.shield + `<span>${escapeHtml(note)}</span>` : ""}</p>
-      <a class="home-v9-finder__cta" id="homeV9FinderCta" href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>
+      <a class="home-v9-way__action" style="grid-column:1/-1;justify-self:start" id="homeV9FinderCta" href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>
       ${practiceExtra(c)}`;
   }
 
@@ -327,8 +327,7 @@
     let entry = document.getElementById("homeIntentLinks");
     if(!entry){ entry=document.createElement("div"); entry.id="homeIntentLinks"; intro.insertBefore(entry,finder); }
     const en=isEnglish();
-    entry.innerHTML=`<div class="home-intent-actions"><a href="#homeV8FinderTitle">${en ? "Find help for your learning" : "Βρες βοήθεια για το διάβασμα"}</a><a href="/ti-thelo-na-kano-me-ai.html">${en ? "Find an AI tool for a task" : "Βρες AI εργαλείο για μια δουλειά"}</a></div>
-      <nav class="home-audience-links" aria-label="${en ? "Dedicated pathways" : "Ξεχωριστές διαδρομές"}">
+    entry.innerHTML=`<nav class="home-audience-links" aria-label="${en ? "Dedicated pathways" : "Ξεχωριστές διαδρομές"}">
         <a href="/high/student/tutor?schoolType=epal">ΕΠΑΛ</a>
         <a href="/special-education.html">${en ? "Special education" : "Ειδική Αγωγή"}</a>
         <a href="/sign-language.html">${en ? "Greek Sign Language" : "Ελληνική Νοηματική"}</a>
@@ -351,13 +350,12 @@
               <span>${c.aiBadgeNew}</span>
               <span>${c.aiBadgeFree}</span>
             </div>
-            <h3 id="homeV8AiTitle">${c.aiTitle}</h3>
+            <h3 id="homeV8AiTitle"><a href="/tools/ai-help.html">${c.aiTitle}</a></h3>
             <p class="home-v8-helper-desc">${c.aiDesc}</p>
             <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
               <summary>${c.aiTechSummary}</summary>
               <p>${c.aiTechText} <a href="/ai-transparency.html">${c.aiTechLink}</a></p>
             </details>
-            <a class="home-v9-study-way__cta" href="/tools/ai-help.html">${isEnglish() ? "Find your AI Help pathway" : "Βρες τη σωστή διαδρομή AI Βοήθειας"}</a>
             <p class="home-v9-way__links-label">${c.aiLinksLabel}</p>
             <div class="home-v8-helper-links home-v8-ai__links">
               <a href="/primary/guardian/tutor">${c.aiPrimary}</a>

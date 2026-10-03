@@ -61,7 +61,7 @@
       teacherTasksLabel: "Φτιάξε:",
       teacherTasks: [["worksheet","📝","Φύλλο εργασίας"],["assessment","✅","Αξιολόγηση"],["lesson","🗂️","Σχέδιο μαθήματος"],["video","🎬","Βίντεο"]],
       aiLinksLabel: "Άνοιξε για:",
-      studyBadge: "Νέο · Δωρεάν",
+      studyBadge: "Δωρεάν",
       studyTitle: "AI Μελέτη",
       studyDesc: "AI Μελέτη: σχολική ενότητα ή δικές σου σημειώσεις/PDF, με εξήγηση, κάρτες, quiz και πλάνο μέσα στο site.",
       studyOfficial: "Βασισμένη στο επίσημο σχολικό βιβλίο · Ύλη 2026–27",
@@ -117,7 +117,7 @@
       teacherTasksLabel: "Create:",
       teacherTasks: [["worksheet","📝","Worksheet"],["assessment","✅","Assessment"],["lesson","🗂️","Lesson plan"],["video","🎬","Video"]],
       aiLinksLabel: "Open for:",
-      studyBadge: "New · Free",
+      studyBadge: "Free",
       studyTitle: "AI Study",
       studyDesc: "AI Study: a school unit or your own notes/PDF, with explanations, cards, quizzes and a study plan here on the site.",
       studyOfficial: "Based on the official school textbook · Curriculum 2026–27",
@@ -347,7 +347,6 @@
           <section class="home-v8-ai" aria-labelledby="homeV8AiTitle">
             <span class="home-v9-way__icon" aria-hidden="true">${ICON.chat}</span>
             <div class="home-v8-ai__badges">
-              <span>${c.aiBadgeNew}</span>
               <span>${c.aiBadgeFree}</span>
             </div>
             <h3 id="homeV8AiTitle"><a href="/tools/ai-help.html">${c.aiTitle}</a></h3>
@@ -363,6 +362,9 @@
               <a href="/high/student/tutor">${c.aiHigh}</a>
               <a href="/special-education.html">${c.aiSpecial}</a>
             </div>
+            <ol aria-label="${isEnglish() ? "How AI Help works" : "Πώς λειτουργεί η AI Βοήθεια"}" style="display:flex;gap:12px;list-style:none;padding:20px 0 0;margin:auto 0 0;border-top:1px solid #d7e4ee">
+              ${(isEnglish() ? [["💬","Show your attempt"],["💡","Get a hint"],["✍️","Try again"]] : [["💬","Δείξε την προσπάθειά σου"],["💡","Πάρε μια υπόδειξη"],["✍️","Δοκίμασε ξανά"]]).map(([icon,label]) => `<li style="flex:1;min-width:0;font-size:13px;line-height:1.5"><span aria-hidden="true" style="display:block;font-size:24px;margin-bottom:8px">${icon}</span>${label}</li>`).join("")}
+            </ol>
           </section>
 
           <section class="home-v9-study-way" id="homeV9Study" aria-labelledby="homeV9StudyTitle">

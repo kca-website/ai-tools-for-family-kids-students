@@ -21,7 +21,8 @@ async function finderPick(page, kind, value) {
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
-  page.on('pageerror', (error) => errors.push(String(error)));
+  page.on('pageerror', (error) => errors.push(error.stack || String(error)));
+  page.on('response', response => {if(response.request().resourceType()==='script' && (response.headers()['content-type']||'').includes('text/html')) errors.push('Script received HTML: '+response.url());});
 
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#homeV8Shell', { timeout: 10000 });

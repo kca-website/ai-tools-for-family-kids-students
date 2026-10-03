@@ -65,6 +65,9 @@ try {
     assert.ok(await page.locator('#homeV9Study .home-v8-helper-desc').isVisible(),'Study description stays visible on mobile');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     assert.ok(overflow<=1,`${width}: horizontal overflow ${overflow}`);
+    // Language changes rebuild the homepage asynchronously. Measure the
+    // controls after the Greek content and visible layout have both returned.
+    await page.waitForFunction(()=>{const role=document.querySelector('#homeV9Finder [data-finder-role="guardian"]');return role?.textContent.includes('Γονιός') && [...document.querySelectorAll('#homeIntentLinks a, #homeV9Finder button')].every(el=>el.getBoundingClientRect().height>0);});
     const targets=await page.locator('#homeIntentLinks a, #homeV9Finder button').evaluateAll(els=>els.map(el=>({height:el.getBoundingClientRect().height,text:el.textContent})));
     assert.ok(targets.every(t=>t.height>=44),`${width}: touch targets ${JSON.stringify(targets.filter(t=>t.height<44))}`);
     await page.addScriptTag({content:axe.source});

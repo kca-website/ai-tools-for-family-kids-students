@@ -316,7 +316,7 @@
       ${step(c.stepRole, roles)}
       ${schoolSteps}
       <p class="home-v9-finder__note" aria-live="polite" hidden>${note ? ICON.shield + `<span>${escapeHtml(note)}</span>` : ""}</p>
-      <a class="home-v9-way__action" style="grid-column:1/-1;justify-self:start" id="homeV9FinderCta"${intent ? "" : " hidden"} href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>
+      <a class="home-v9-way__action" style="grid-column:1/-1;justify-self:start" id="homeV9FinderCta" href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>
       ${practiceExtra(c)}`;
   }
 

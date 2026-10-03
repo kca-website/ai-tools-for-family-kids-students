@@ -327,12 +327,16 @@
     let entry = document.getElementById("homeIntentLinks");
     if(!entry){ entry=document.createElement("div"); entry.id="homeIntentLinks"; intro.insertBefore(entry,finder); }
     const en=isEnglish();
+    let practice=document.getElementById("homePracticeEntry");
+    if(!practice){practice=document.createElement("a");practice.id="homePracticeEntry";practice.className="home-v9-way__action";practice.href="#homeV8MapTitle";practice.style.cssText="display:inline-flex;min-height:44px;align-items:center;gap:8px;margin:8px 0 16px";intro.querySelector(".hero__subtitle")?.insertAdjacentElement("afterend",practice);}
+    practice.innerHTML=`<span aria-hidden="true">🎯</span>${en ? "Where do I need practice? · Quick quizzes" : "Πού χρειάζομαι εξάσκηση; · Σύντομα κουίζ"} →`;
     entry.innerHTML=`<nav class="home-audience-links" aria-label="${en ? "Dedicated pathways" : "Ξεχωριστές διαδρομές"}">
         <a href="/high/student/tutor?schoolType=epal">ΕΠΑΛ</a>
         <a href="/special-education.html">${en ? "Special education" : "Ειδική Αγωγή"}</a>
         <a href="/sign-language.html">${en ? "Greek Sign Language" : "Ελληνική Νοηματική"}</a>
         <a href="/higher-education-pilot.html">${en ? "University students · Pilot" : "Φοιτητές · Πιλοτικό"}</a>
-      </nav>`;
+      </nav>
+`;
   }
 
   // Quick-action chips inside a "three ways" card (same look as the AI Help "Open for" links).

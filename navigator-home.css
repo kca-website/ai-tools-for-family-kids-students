@@ -1334,7 +1334,7 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 @media(max-width:700px){
   .home-v9-curriculum-strip__copy small{display:none;}
 }
-/* Discover more now holds two tiles. */
+/* Special pathways: four tiles in a 2×2 grid. */
 .home-v9-more__grid{grid-template-columns:repeat(2,minmax(0,1fr));}
 @media(max-width:700px){
   .home-v9-more__grid{grid-template-columns:minmax(0,1fr);}
@@ -1360,3 +1360,17 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 .home-v9-ways .home-v9-study-way .home-v9-way__action,
 .home-v9-ways .home-v9-teacher-way .home-v9-way__action{margin-top:auto;}
 .home-v9-ways .home-v8-helper-links a>span{margin-right:4px;}
+
+/* v11: outcome-first cards. Product names become eyebrows, the age rule sits on the AI Help card,
+   and AI Study surfaces its source-only mode for PDFs and notes. */
+.home-v9-way__rule{display:flex;align-items:flex-start;gap:8px;margin:0;padding:10px 12px;border-radius:12px;background:#F4F6F9;font-size:.82rem;line-height:1.45;color:#3F4652;}
+.home-v9-way__rule svg{flex-shrink:0;margin-top:1px;color:#1D5D8C;}
+.home-v9-study-way__pdf{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border:1.5px dashed #C9A227;border-radius:14px;background:#FFFBEA;color:#1F2430;text-decoration:none;}
+.home-v9-study-way__pdf strong{font-size:.92rem;}
+.home-v9-study-way__pdf span{font-size:.84rem;line-height:1.4;color:#5A6270;}
+.home-v9-study-way__pdf em{font-style:normal;font-size:.88rem;font-weight:800;color:#1D5D8C;}
+.home-v9-study-way__pdf:hover{border-style:solid;}
+.home-v9-study-way__pdf:hover em{text-decoration:underline;}
+/* Keep the AI Help links under their label; the age rule takes the free space instead. */
+.home-v9-ways .home-v8-ai .home-v8-helper-links{margin-top:0;}
+.home-v9-ways .home-v8-ai .home-v9-way__rule{margin-top:auto;}

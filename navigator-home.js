@@ -15,39 +15,47 @@
 
   const COPY = {
     el: {
-      curriculumCardBadge: "Ύλη 2026–27",
-      curriculumCardTitle: "Ελληνικός Χάρτης Ύλης",
-      curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα → AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
+      curriculumCardBadge: "Ελληνικός Χάρτης Ύλης · 2026–27",
+      curriculumCardTitle: "Βρες την ενότητα που διαβάζεις",
+      curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα του σχολικού βιβλίου → εξήγηση, εξάσκηση και AI βοήθεια.",
       aiBadgeNew: "Νέο",
       aiBadgeFree: "Δωρεάν",
-      aiTitle: "Η δική μας AI Βοήθεια, φτιαγμένη για τα σχολικά μαθήματα.",
-      aiDesc: "Διαφορετική από τα εργαλεία του καταλόγου. Σε καθοδηγεί με ερωτήσεις και μικρές υποδείξεις, αντί να σου δίνει έτοιμη λύση.",
+      aiName: "AI Βοήθεια",
+      aiTitle: "Κόλλησες; Πάρε μία υπόδειξη τη φορά.",
+      aiDesc: "Ξεκινά από τη δική σου προσπάθεια και σε καθοδηγεί με ερωτήσεις και μικρές υποδείξεις, χωρίς έτοιμη τελική λύση.",
       aiTechSummary: "ⓘ Ποιο AI χρησιμοποιείται;",
       aiTechText: "GPT-OSS 120B μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική.",
       aiTechLink: "Διαφάνεια AI →",
       aiPrimary: "Γονιός Δημοτικού",
       aiMiddle: "Γονιός Γυμνασίου",
-      aiHigh: "Λύκειο",
+      aiHigh: "Μαθητής Λυκείου",
       aiSpecial: "Ειδικά σχολεία",
+      aiAgeRule: "Δημοτικό: μαζί με γονέα ή εκπαιδευτικό · Γυμνάσιο: μαθητική χρήση από 13 ετών · Λύκειο: αυτόνομη μαθητική χρήση.",
       engTitle: "Έννοιες στην Ελληνική Νοηματική",
       engDesc: `${signLanguageConceptCount} σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ`,
       engLink: `Δες τις ${signLanguageConceptCount} έννοιες →`,
-      stepsLabel: "Πες μας ποιος είσαι και τι χρειάζεσαι. Σε πάμε στο σωστό AI ή στη σωστή βοήθεια.",
-      moreTitle: "Ανακάλυψε περισσότερα",
+      stepsLabel: "Ξεκίνα από αυτό που χρειάζεσαι. Εμείς διαλέγουμε τη σωστή λειτουργία ή το σωστό AI.",
+      moreTitle: "Ειδικές ανάγκες και ειδικές διαδρομές",
+      startTile: "Δεν ξέρεις από πού να αρχίσεις;",
+      startTileDesc: "Δώσε την εργασία ή τις σημειώσεις σου και πάρε μικρά, διαχειρίσιμα βήματα. Δεν λύνει την άσκηση.",
+      startTileCta: "Σπάσε το σε μικρά βήματα →",
+      supportTile: "Ειδική εκπαιδευτική υποστήριξη",
+      supportTileDesc: "Ειδικό Γυμνάσιο, Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ. και προσαρμογές γλώσσας, βημάτων και ρυθμού. Χωρίς διάγνωση.",
+      supportTileCta: "Δες τις διαδρομές →",
       charTile: "Μίλα με χαρακτήρα της Ιστορίας",
       charTileDesc: "Διάλογος με πρόσωπα από την ύλη και έλεγχος του τι έμαθες.",
       stepRole: "1 · Ποιος είσαι;",
       stepZone: "2 · Βαθμίδα ή διαδρομή",
-      stepNeed: "3 · Τι χρειάζεσαι σήμερα;",
+      stepNeed: "3 · Τι χρειάζεσαι τώρα;",
       roles: { guardian: "Γονιός", student: "Μαθητής / Μαθήτρια", teacher: "Εκπαιδευτικός", university: "Φοιτητής / Φοιτήτρια" },
-      zones: { preschool: ["Νηπιαγωγείο","4–6"], primary: ["Δημοτικό","6–12"], middle: ["Γυμνάσιο","12–15"], high: ["Λύκειο","15–18"], special: ["Ειδική Εκπαίδευση",""] },
-      finderNeeds: { tools: "Να βρω το κατάλληλο AI", practice: "Εξάσκηση σε μάθημα", stuck: "Κόλλησα σε άσκηση", study: "Μελέτη πάνω στην ύλη" },
-      ctaTools: "Δες εργαλεία για", ctaPractice: "Χάρτης Εξάσκησης για", ctaStuck: "AI Βοήθεια για", ctaStudy: "Άνοιξε την AI Μελέτη", ctaPreschool: "Δραστηριότητες Νηπιαγωγείου", ctaSpecial: "Άνοιξε την Ειδική Εκπαίδευση", ctaTeacher: "Άνοιξε τα εργαλεία για εκπαιδευτικούς", mapGel: "ΓΕΛ", mapEpal: "ΕΠΑΛ", ctaSpecialPractice: "Κάνε το μικρό διαγνωστικό", ctaUniversity: "Άνοιξε τη φοιτητική διαδρομή",
+      zones: { preschool: ["Νηπιαγωγείο","4–6 · με ενήλικα"], primary: ["Δημοτικό","6–12 · με ενήλικα"], middle: ["Γυμνάσιο","12–15 · AI Βοήθεια 13+"], high: ["Λύκειο","15–18 · αυτόνομα"], special: ["Ειδική Εκπαίδευση",""] },
+      finderNeeds: { stuck: "Κόλλησα / δεν καταλαβαίνω κάτι", practice: "Θέλω εξάσκηση", test: "Διαβάζω για τεστ", pdf: "Έχω PDF ή σημειώσεις", project: "Έχω εργασία ή project", start: "Δεν ξέρω από πού να αρχίσω", tools: "Ποιο AI εργαλείο να χρησιμοποιήσω;" },
+      ctaTools: "Δες εργαλεία για", ctaPractice: "Δες πού χρειάζεται εξάσκηση ·", ctaStuck: "Πάρε καθοδήγηση με την AI Βοήθεια ·", ctaTest: "Προετοιμάσου για το τεστ με την AI Μελέτη", ctaPdf: "Μελέτησε τις σημειώσεις σου εδώ", ctaProject: "Διάλεξε εργαλείο για την εργασία σου", ctaStart: "Σπάσε το σε μικρά βήματα", ctaPreschool: "Δραστηριότητες Νηπιαγωγείου", ctaSpecial: "Άνοιξε την Ειδική Εκπαίδευση", ctaTeacher: "Άνοιξε τα εργαλεία για εκπαιδευτικούς", mapGel: "ΓΕΛ", mapEpal: "ΕΠΑΛ", ctaSpecialPractice: "Κάνε το μικρό διαγνωστικό", ctaUniversity: "Άνοιξε τη φοιτητική διαδρομή",
       noteTeacher: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, δραστηριότητες και βίντεο πάνω στην ύλη 2026–27.",
       noteUniversity: "Πιλοτική διαδρομή για επιλεγμένα πανεπιστημιακά τμήματα, με επίσημες πηγές.",
       teacherWayEyebrow: "Για εκπαιδευτικούς",
       teacherWayTitle: "Υλικό για την τάξη σου, πάνω στην ύλη 2026–27.",
-      teacherWayDesc: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, δραστηριότητες και εκπαιδευτικά βίντεο. Εσύ ελέγχεις και προσαρμόζεις.",
+      teacherWayDesc: "Φύλλα εργασίας, αξιολόγηση, πλήρες 45λεπτο, εκπαιδευτικό βίντεο με αφήγηση και δραστηριότητα με QR για τους μαθητές. Εσύ ελέγχεις και προσαρμόζεις.",
       teacherWayCta: "Άνοιξε τα εργαλεία εκπαιδευτικού\u00a0→",
       notePreschool: "Στο Νηπιαγωγείο ο ενήλικας χειρίζεται το εργαλείο. Θα δεις δραστηριότητες για γονείς και εκπαιδευτικούς.",
       notePrimaryStudent: "Στο Δημοτικό τα εργαλεία χρησιμοποιούνται μαζί με ενήλικα. Θα δεις και οδηγίες για τον γονιό.",
@@ -55,6 +63,10 @@
       noteMiddleStuck: "Η AI Βοήθεια για μαθητές Γυμνασίου ανοίγει από 13 ετών. Διάλεξε πρώτα την ηλικία σου στην επόμενη σελίδα.",
       noteHigh: "Για ΕΠΑΛ θα διαλέξεις στη συνέχεια τάξη και, όπου χρειάζεται, τομέα ή ειδικότητα.",
       noteSpecial: "Διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ.",
+      notePdf: "Ανέβασε PDF ή φωτογραφία, ή επικόλλησε κείμενο. Εξήγηση, quiz, κάρτες και πλάνο βασίζονται μόνο σε αυτό το υλικό.",
+      noteTest: "Επανάληψη, εντοπισμός κενών και γρήγορο quiz πάνω στην ενότητα που διαβάζεις.",
+      noteProject: "Παρουσίαση, έρευνα με πηγές, αφίσα ή δημιουργικό project: διάλεξε τη δουλειά και δες ποιο εργαλείο ταιριάζει.",
+      noteStart: "Οργανώνει τη μελέτη σε μικρά βήματα και προτεραιότητες. Δεν λύνει την εργασία.",
       waysTitle: "Γρήγορη πρόσβαση",
       studyGoalsLabel: "Τι θέλεις;",
       studyGoals: [["understand","🧠","Να το καταλάβω"],["revise","🔁","Επανάληψη"],["test","📝","Γράφω τεστ"],["practice","🎯","Εξάσκηση"]],
@@ -62,8 +74,12 @@
       teacherTasks: [["worksheet","📝","Φύλλο εργασίας"],["assessment","✅","Αξιολόγηση"],["lesson","🗂️","Σχέδιο μαθήματος"],["video","🎬","Βίντεο"]],
       aiLinksLabel: "Άνοιξε για:",
       studyBadge: "Νέο · Δωρεάν",
-      studyTitle: "AI Μελέτη",
-      studyDesc: "Πες τι διαβάζεις και πόσο χρόνο έχεις. Πάρε mini πλάνο με κατανόηση, ανάκληση, εξάσκηση και τελικό έλεγχο χωρίς AI.",
+      studyName: "AI Μελέτη",
+      studyTitle: "Μελέτησε μια ενότητα ή τις δικές σου σημειώσεις.",
+      studyDesc: "Πες τι διαβάζεις και πόσο χρόνο έχεις. Πάρε εξήγηση, κάρτες, quiz και πλάνο, με τελικό έλεγχο χωρίς AI.",
+      studyPdfTitle: "Έχεις PDF ή σημειώσεις;",
+      studyPdfText: "Οι απαντήσεις βασίζονται μόνο στο υλικό σου. Αν κάτι λείπει, το λέει.",
+      studyPdfCta: "Ανέβασέ τες →",
       studyOfficial: "Βασισμένη στο επίσημο σχολικό βιβλίο · Ύλη 2026–27",
       studyCoverage: "Διαθέσιμο σε επιλεγμένα μαθήματα · η κάλυψη μεγαλώνει",
       studyCta: "Φτιάξε το πλάνο μελέτης σου →",
@@ -71,39 +87,47 @@
       chars: [["socrates","Σωκράτης","Αρχαία Αθήνα"],["pericles","Περικλής","Χρυσός αιώνας"],["greek-revolution-1821","Αγωνιστής του 1821","Επανάσταση"]]
     },
     en: {
-      curriculumCardBadge: "Curriculum 2026–27",
-      curriculumCardTitle: "Greek Curriculum Map",
-      curriculumCardDesc: "Grade → subject → real curriculum unit → AI help, practice and visual explanation.",
+      curriculumCardBadge: "Greek Curriculum Map · 2026–27",
+      curriculumCardTitle: "Find the unit you are studying",
+      curriculumCardDesc: "Grade → subject → real textbook unit → explanation, practice and AI help.",
       aiBadgeNew: "New",
       aiBadgeFree: "Free",
-      aiTitle: "Our AI Help, built for school subjects.",
-      aiDesc: "Different from the tools in the catalogue. It guides you with questions and small hints instead of giving you a ready-made answer.",
+      aiName: "AI Help",
+      aiTitle: "Stuck? Get one hint at a time.",
+      aiDesc: "It starts from your own attempt and guides you with questions and small hints, without a ready-made final answer.",
       aiTechSummary: "ⓘ Which AI is used?",
       aiTechText: "GPT-OSS 120B via Cloudflare Workers AI, with Groq as the fallback provider. Puter is an optional alternative.",
       aiTechLink: "AI transparency →",
       aiPrimary: "Primary parent",
       aiMiddle: "Middle School parent",
-      aiHigh: "High School",
+      aiHigh: "High School student",
       aiSpecial: "Special schools",
+      aiAgeRule: "Primary: with a parent or educator · Middle School: student use from age 13 · High School: independent student use.",
       engTitle: "Greek Sign Language concepts",
       engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,
       engLink: `See the ${signLanguageConceptCount} concepts →`,
-      stepsLabel: "Tell us who you are and what you need. We take you to the right AI or the right help.",
-      moreTitle: "Discover more",
+      stepsLabel: "Start from what you need. We pick the right feature or the right AI.",
+      moreTitle: "Special needs and special pathways",
+      startTile: "Not sure where to start?",
+      startTileDesc: "Give it your assignment or notes and get small, manageable steps. It does not solve the exercise.",
+      startTileCta: "Break it into small steps →",
+      supportTile: "Special educational support",
+      supportTileDesc: "Special Gymnasium, Special Lyceum, EN.E.E.GY.-L. and adapted language, steps and pace. No diagnosis.",
+      supportTileCta: "See the pathways →",
       charTile: "Talk with a character from history",
       charTileDesc: "A dialogue with people from the curriculum, then a check of what you learned.",
       stepRole: "1 · Who are you?",
       stepZone: "2 · Level or pathway",
-      stepNeed: "3 · What do you need today?",
+      stepNeed: "3 · What do you need right now?",
       roles: { guardian: "Parent", student: "Student", teacher: "Educator", university: "University student" },
-      zones: { preschool: ["Preschool","4–6"], primary: ["Primary","6–12"], middle: ["Middle School","12–15"], high: ["High School","15–18"], special: ["Special Education",""] },
-      finderNeeds: { tools: "Find the right AI", practice: "Practise a subject", stuck: "I'm stuck on an exercise", study: "Study the curriculum" },
-      ctaTools: "See tools for", ctaPractice: "Practice Map for", ctaStuck: "AI Help for", ctaStudy: "Open AI Study", ctaPreschool: "Preschool activities", ctaSpecial: "Open Special Education", ctaTeacher: "Open the educator tools", mapGel: "General Lyceum", mapEpal: "Vocational Lyceum (EPAL)", ctaSpecialPractice: "Take the short check", ctaUniversity: "Open the university pathway",
+      zones: { preschool: ["Preschool","4–6 · with an adult"], primary: ["Primary","6–12 · with an adult"], middle: ["Middle School","12–15 · AI Help 13+"], high: ["High School","15–18 · independent"], special: ["Special Education",""] },
+      finderNeeds: { stuck: "I'm stuck / I don't understand something", practice: "I want to practise", test: "I have a test coming up", pdf: "I have a PDF or notes", project: "I have an assignment or project", start: "I don't know where to start", tools: "Which AI tool should I use?" },
+      ctaTools: "See tools for", ctaPractice: "See where practice is needed ·", ctaStuck: "Get guidance with AI Help ·", ctaTest: "Prepare for the test with AI Study", ctaPdf: "Study your notes here", ctaProject: "Pick a tool for your assignment", ctaStart: "Break it into small steps", ctaPreschool: "Preschool activities", ctaSpecial: "Open Special Education", ctaTeacher: "Open the educator tools", mapGel: "General Lyceum", mapEpal: "Vocational Lyceum (EPAL)", ctaSpecialPractice: "Take the short check", ctaUniversity: "Open the university pathway",
       noteTeacher: "Worksheets, assessment, lesson plans, activities and videos built on the 2026–27 curriculum.",
       noteUniversity: "Pilot pathway for selected university departments, with official sources.",
       teacherWayEyebrow: "For educators",
       teacherWayTitle: "Material for your class, built on the 2026–27 curriculum.",
-      teacherWayDesc: "Worksheets, assessment, lesson plans, activities and educational videos. You review and adapt.",
+      teacherWayDesc: "Worksheets, assessment, a full 45-minute lesson, narrated educational video and a QR activity for students. You review and adapt.",
       teacherWayCta: "Open the educator tools\u00a0→",
       notePreschool: "In preschool the adult operates the tool. You will see activities for parents and educators.",
       notePrimaryStudent: "In primary school, tools are used together with an adult. You will also see guidance for parents.",
@@ -111,6 +135,10 @@
       noteMiddleStuck: "AI Help for middle-school students opens from age 13. Choose your age first on the next page.",
       noteHigh: "For EPAL you will then choose a grade and, where needed, a sector or specialty.",
       noteSpecial: "Pathway for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L.",
+      notePdf: "Upload a PDF or photo, or paste text. Explanations, quizzes, cards and plans are based only on that material.",
+      noteTest: "Review, gap finding and a quick quiz on the unit you are studying.",
+      noteProject: "Presentation, research with sources, poster or creative project: choose the job and see which tool fits.",
+      noteStart: "It organises your study into small steps and priorities. It does not solve the assignment.",
       waysTitle: "Quick access",
       studyGoalsLabel: "What do you need?",
       studyGoals: [["understand","🧠","Understand it"],["revise","🔁","Review"],["test","📝","Test coming up"],["practice","🎯","Practise"]],
@@ -118,8 +146,12 @@
       teacherTasks: [["worksheet","📝","Worksheet"],["assessment","✅","Assessment"],["lesson","🗂️","Lesson plan"],["video","🎬","Video"]],
       aiLinksLabel: "Open for:",
       studyBadge: "New · Free",
-      studyTitle: "AI Study",
-      studyDesc: "Tell it what you're studying and how much time you have. Get a mini plan with understanding, recall, practice and a final check without AI.",
+      studyName: "AI Study",
+      studyTitle: "Study a curriculum unit or your own notes.",
+      studyDesc: "Tell it what you're studying and how much time you have. Get an explanation, cards, a quiz and a plan, with a final check without AI.",
+      studyPdfTitle: "Have a PDF or notes?",
+      studyPdfText: "Answers are based only on your material. If something is missing, it says so.",
+      studyPdfCta: "Upload them →",
       studyOfficial: "Based on the official school textbook · Curriculum 2026–27",
       studyCoverage: "Available for selected subjects · coverage is growing",
       studyCta: "Build your study plan →",
@@ -220,7 +252,10 @@
   }
 
   // ---------- Hero: 3-step finder ----------
-  const finderState = { role: "student", zone: "middle", need: "tools" };
+  const finderState = { role: "student", zone: "middle", need: "stuck" };
+
+  // Needs that open the same destination whatever the school level (AI Study, task guides).
+  const NEED_PAGES = { test: "/study.html?mode=test", pdf: "/study.html?mode=understand#notesFile", project: "/ti-thelo-na-kano-me-ai.html", start: "/organosi-meletis-ai.html" };
 
   // Educators and university students skip the school-level steps: one choice, one destination.
   const DIRECT_ROLES = { teacher: "/teacher-assistant.html", university: "/higher-education-pilot.html" };
@@ -230,7 +265,7 @@
     if(DIRECT_ROLES[role]) return DIRECT_ROLES[role];
     if(zone === "preschool") return "/preschool";
     if(zone === "special") return "/special-education.html";
-    if(need === "study") return "/study.html";
+    if(NEED_PAGES[need]) return NEED_PAGES[need];
     if(need === "practice") return `/${zone}/guardian/quiz`;
     if(need === "stuck"){
       if(zone === "primary") return "/primary/guardian/tutor";
@@ -245,7 +280,8 @@
     if(finderState.role === "university") return c.ctaUniversity;
     if(zone === "preschool") return c.ctaPreschool;
     if(zone === "special") return need === "practice" ? c.ctaSpecialPractice : c.ctaSpecial;
-    if(need === "study") return c.ctaStudy;
+    const pageCta = { test: c.ctaTest, pdf: c.ctaPdf, project: c.ctaProject, start: c.ctaStart }[need];
+    if(pageCta) return pageCta;
     if(zone === "high" && need === "practice") return `${c.ctaPractice} ${c.mapGel}`;
     const label = c.zones[zone][0];
     const lead = need === "practice" ? c.ctaPractice : need === "stuck" ? c.ctaStuck : c.ctaTools;
@@ -258,6 +294,8 @@
     if(role === "university") return c.noteUniversity;
     if(zone === "preschool") return c.notePreschool;
     if(zone === "special") return c.noteSpecial;
+    const pageNote = { test: c.noteTest, pdf: c.notePdf, project: c.noteProject, start: c.noteStart }[finderState.need];
+    if(pageNote) return pageNote;
     if(zone === "primary" && role === "student") return c.notePrimaryStudent;
     if(zone === "middle" && role === "student") return finderState.need === "stuck" ? c.noteMiddleStuck : c.noteMiddleStudent;
     if(zone === "high") return c.noteHigh;
@@ -315,6 +353,7 @@
               <span>${c.aiBadgeNew}</span>
               <span>${c.aiBadgeFree}</span>
             </div>
+            <p class="home-v9-way__eyebrow">${c.aiName}</p>
             <h3 id="homeV8AiTitle">${c.aiTitle}</h3>
             <p class="home-v8-helper-desc">${c.aiDesc}</p>
             <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
@@ -328,13 +367,16 @@
               <a href="/high/student/tutor">${c.aiHigh}</a>
               <a href="/special-education.html">${c.aiSpecial}</a>
             </div>
+            <p class="home-v9-way__rule">${ICON.shield}<span>${c.aiAgeRule}</span></p>
           </section>
 
           <section class="home-v9-study-way" id="homeV9Study" aria-labelledby="homeV9StudyTitle">
             <span class="home-v9-way__icon" aria-hidden="true">${ICON.book}</span>
             <div class="home-v8-ai__badges"><span>${c.studyBadge}</span></div>
+            <p class="home-v9-way__eyebrow">${c.studyName}</p>
             <h3 id="homeV9StudyTitle">${c.studyTitle}</h3>
             <p class="home-v8-helper-desc">${c.studyDesc}</p>
+            <a class="home-v9-study-way__pdf" href="/study.html?mode=understand#notesFile"><strong>${c.studyPdfTitle}</strong><span>${c.studyPdfText}</span><em>${c.studyPdfCta}</em></a>
             <p class="home-v9-study-way__official"><strong>${c.studyOfficial}</strong><small>${c.studyCoverage}</small></p>
             <p class="home-v9-way__links-label">${c.studyGoalsLabel}</p>
             <div class="home-v8-helper-links">${wayChips(c.studyGoals, (id) => `/study.html?mode=${id}`)}</div>
@@ -366,6 +408,13 @@
       <a class="home-v9-tile__cta" href="${characterRoute}">${c.charCta}</a>`;
   }
 
+  function simpleTile(id, title, desc, href, cta){
+    return ensureSection(id, "home-v9-tile", `${id}Title`, `
+      <h3 id="${id}Title">${escapeHtml(title)}</h3>
+      <p>${escapeHtml(desc)}</p>
+      <a class="home-v9-tile__cta" href="${href}">${escapeHtml(cta)}</a>`);
+  }
+
   // "Discover more": secondary features grouped as compact tiles (moved, not recreated).
   function ensureMoreSection(characters){
     let more = document.getElementById("homeV9More");
@@ -379,7 +428,10 @@
     more.querySelector("#homeV9MoreTitle").textContent = currentCopy().moreTitle;
     const grid = more.querySelector(".home-v9-more__grid");
     characters.classList.add("home-v9-tile");
-    const tiles = [characters, document.getElementById("homeV8Eng")].filter(Boolean);
+    const c = currentCopy();
+    const start = simpleTile("homeV9Start", c.startTile, c.startTileDesc, "/organosi-meletis-ai.html", c.startTileCta);
+    const support = simpleTile("homeV9Support", c.supportTile, c.supportTileDesc, "/special-education.html", c.supportTileCta);
+    const tiles = [start, support, document.getElementById("homeV8Eng"), characters].filter(Boolean);
     const current = [...grid.children];
     if(current.length !== tiles.length || current.some((el, i) => el !== tiles[i])) tiles.forEach((el) => grid.appendChild(el));
     return more;

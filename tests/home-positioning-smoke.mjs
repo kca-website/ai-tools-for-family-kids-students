@@ -29,7 +29,7 @@ try {
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.');
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI για το μάθημα, την ηλικία και αυτό που θέλεις να κάνεις. Ή χρησιμοποίησε τη δωρεάν AI Μελέτη πάνω στην επίσημη σχολική ύλη.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βοήθεια για αυτό που μαθαίνεις, από την ελληνική σχολική ύλη ή τις δικές σου σημειώσεις. Ή βρες το κατάλληλο AI για τη δουλειά που έχεις.');
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.ok(await page.locator('#heroGslBadge').count());
 
@@ -60,6 +60,17 @@ try {
   await finderPick(page, 'need', 'tools');
   assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/middle/guardian/tools');
 
+  // v11: problem-first needs route to existing features without asking for feature names.
+  const needs = await page.locator('#homeV9Finder [data-finder-need]').evaluateAll((els) => els.map((el) => el.dataset.finderNeed));
+  assert.deepEqual(needs, ['stuck', 'practice', 'test', 'pdf', 'project', 'start', 'tools'], 'Finder needs must start from the problem');
+  for (const [need, href] of [['test', '/study.html?mode=test'], ['pdf', '/study.html?mode=understand#notesFile'], ['project', '/ti-thelo-na-kano-me-ai.html'], ['start', '/organosi-meletis-ai.html']]) {
+    await finderPick(page, 'need', need);
+    assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), href, `Need "${need}" must open ${href}`);
+  }
+  assert.match(await page.locator('#homeV9Finder [data-finder-zone="primary"]').innerText(), /με ενήλικα/, 'Primary chip must show the adult-supervision rule');
+  assert.match(await page.locator('#homeV8HelpersMount .home-v9-way__rule').innerText(), /Λύκειο: αυτόνομη/, 'AI Help card must state the age rule');
+  assert.equal(await page.locator('#homeV9Study a[href="/study.html?mode=understand#notesFile"]').count(), 1, 'AI Study card must surface the source-only notes mode');
+
   // Three ways to start: AI Help, AI Study, Educators. The Curriculum Map stands on its own.
   const ways = page.locator('#homeV8HelpersMount .home-v9-ways > section');
   assert.equal(await ways.count(), 3);
@@ -69,7 +80,7 @@ try {
   assert.equal(await page.locator('#homeV9Teacher a[href="/teacher-assistant.html"]').isVisible(), true, 'Educator card must be visible on mobile');
   assert.equal(await page.locator('#homeV8HelpersMount a[href="/xartis-ylis.html"]').count(), 0, 'Curriculum Map is not one of the three ways');
   assert.equal(await page.locator('#homeCurriculumStrip').getAttribute('href'), '/xartis-ylis.html', 'Curriculum Map must keep its own strip');
-  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 2, 'Discover more keeps history characters and GSL');
+  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 4, 'Special pathways: small steps, special support, GSL and history characters');
 
   await page.click('#siteMenuToggle');
   assert.equal(await page.locator('#siteMenuPanel .site-menu-panel__teacher').isVisible(), true, 'Educators must be the first, visible menu entry on mobile');
@@ -106,7 +117,7 @@ try {
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => /University student/.test(document.querySelector('#homeV9Finder')?.textContent || ''));
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI for the subject, the age and what you want to do. Or use the free AI Study on the official school curriculum.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Help with what you are learning, from the Greek school curriculum or your own notes. Or find the right AI for the job in front of you.');
   await finderPick(page, 'role', 'teacher');
   assert.match(await page.locator('#homeV9FinderCta').innerText(), /Open the educator tools/);
   assert.match(await page.locator('#homeV9Teacher').innerText(), /For educators/);

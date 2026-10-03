@@ -12,9 +12,9 @@
     el: {
       skip: "Μετάβαση στο περιεχόμενο", navLabel: "Κύριο μενού", allLabel: "Όλες οι ενότητες", footerLabel: "Χρήσιμοι σύνδεσμοι",
       tools: "Εργαλεία", study: "AI Μελέτη", help: "AI Βοήθεια", menu: "Μενού",
-      groupFind: "Βρες το σωστό AI", groupLearn: "Μάθηση", groupMore: "Περισσότερα",
-      byLevel: "Ποιος είσαι; Βρες το σωστό AI", whatToDo: "Τι θέλεις να κάνεις με AI;", practice: "Χάρτης Εξάσκησης", curriculum: "Χάρτης Ύλης 2026–27", characters: "Χαρακτήρες Ιστορίας",
-      classroom: "Για εκπαιδευτικούς", gsl: "Ελληνική Νοηματική", special: "Ειδική Εκπαίδευση", university: "Φοιτητές ΑΕΙ · Πιλοτικό",
+      groupFind: "Βρες το σωστό AI", groupLearn: "Μελέτη & εξάσκηση", groupMore: "Προσβασιμότητα & υποστήριξη",
+      byLevel: "Ξεκίνα: τι χρειάζεσαι τώρα;", whatToDo: "Ποιο AI για ποια δουλειά;", start: "Δεν ξέρω από πού να αρχίσω", studyLong: "AI Μελέτη · ενότητα ή σημειώσεις", helpLong: "AI Βοήθεια · κόλλησα", practice: "Πού χρειάζομαι εξάσκηση;", curriculum: "Βρες την ενότητα που διαβάζεις", characters: "Χαρακτήρες Ιστορίας",
+      classroom: "Για εκπαιδευτικούς", gsl: "Ελληνική Νοηματική", special: "Ειδική εκπαιδευτική υποστήριξη", a11yTools: "Προσβάσιμα εργαλεία AI", university: "Φοιτητές ΑΕΙ · Πιλοτικό",
       footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Οι λειτουργίες AI είναι προαιρετικές και τεκμηριώνονται στη Διαφάνεια AI.",
       privacy: "Πολιτική Απορρήτου", accessibility: "Προσβασιμότητα εργαλείων", transparency: "Διαφάνεια AI", school: "Χρήση AI στο σχολείο", guides: "Οδηγοί ανά βαθμίδα και μάθημα", about: "Ποιοι είμαστε / FAQ",
       methodology: "Πώς επιλέγουμε & ελέγχουμε τα εργαλεία", report: "Βρήκες λάθος ή παλιωμένη πληροφορία; ↗",
@@ -23,9 +23,9 @@
     en: {
       skip: "Skip to content", navLabel: "Main menu", allLabel: "All sections", footerLabel: "Useful links",
       tools: "Tools", study: "AI Study", help: "AI Help", menu: "Menu",
-      groupFind: "Find the right AI", groupLearn: "Learning", groupMore: "More",
-      byLevel: "Who are you? Find the right AI", whatToDo: "What do you want to do with AI?", practice: "Practice Map", curriculum: "Curriculum Map 2026–27", characters: "History characters",
-      classroom: "For educators", gsl: "Greek Sign Language", special: "Special Education", university: "University students · Pilot",
+      groupFind: "Find the right AI", groupLearn: "Study & practice", groupMore: "Accessibility & support",
+      byLevel: "Start: what do you need right now?", whatToDo: "Which AI for which job?", start: "I don't know where to start", studyLong: "AI Study · unit or notes", helpLong: "AI Help · I'm stuck", practice: "Where do I need practice?", curriculum: "Find the unit you are studying", characters: "History characters",
+      classroom: "For educators", gsl: "Greek Sign Language", special: "Special educational support", a11yTools: "Accessible AI tools", university: "University students · Pilot",
       footerText: "Independent project. It is not an official product or partnership of any AI provider. AI features are optional and documented in AI Transparency.",
       privacy: "Privacy Policy", accessibility: "Tool accessibility", transparency: "AI transparency", school: "AI use at school", guides: "Guides by level and subject", about: "About / FAQ",
       methodology: "How we select & verify tools", report: "Report outdated information ↗",
@@ -81,25 +81,29 @@
       </div>
       <div class="chrome-menu-panel" id="chromeMenuPanel" hidden>
         <nav class="chrome-menu-panel__inner" data-chrome-aria="allLabel">
-          <a class="chrome-menu-panel__teacher" href="/teacher-assistant.html"><span aria-hidden="true">🏫</span><span data-chrome="classroom"></span><span aria-hidden="true">→</span></a>
+          <div class="chrome-menu-panel__audiences">
+            <a class="chrome-menu-panel__teacher" href="/teacher-assistant.html"><span aria-hidden="true">🏫</span><span data-chrome="classroom"></span><span aria-hidden="true">→</span></a>
+            <a class="chrome-menu-panel__university" href="/higher-education-pilot.html"><span aria-hidden="true">🎓</span><span data-chrome="university"></span><span aria-hidden="true">→</span></a>
+          </div>
           <div class="chrome-menu-panel__group">
             <p class="chrome-menu-panel__title" data-chrome="groupFind"></p>
             <a href="/#homeV8FinderTitle" data-chrome="byLevel"></a>
             <a href="/ti-thelo-na-kano-me-ai.html" data-chrome="whatToDo"></a>
+            <a href="/organosi-meletis-ai.html" data-chrome="start"></a>
           </div>
           <div class="chrome-menu-panel__group">
             <p class="chrome-menu-panel__title" data-chrome="groupLearn"></p>
-            <a href="/study.html" data-chrome="study"></a>
-            <a href="/#homeV8AiTitle" data-chrome="help"></a>
+            <a href="/study.html" data-chrome="studyLong"></a>
+            <a href="/#homeV8AiTitle" data-chrome="helpLong"></a>
             <a href="/#homeV8MapTitle" data-chrome="practice"></a>
             <a href="/xartis-ylis.html" data-chrome="curriculum"></a>
             <a href="/history-characters.html" data-chrome="characters"></a>
           </div>
           <div class="chrome-menu-panel__group">
             <p class="chrome-menu-panel__title" data-chrome="groupMore"></p>
-            <a href="/sign-language.html" data-chrome="gsl"></a>
             <a href="/special-education.html" data-chrome="special"></a>
-            <a href="/higher-education-pilot.html" data-chrome="university"></a>
+            <a href="/sign-language.html" data-chrome="gsl"></a>
+            <a href="/accessibility.html" data-chrome="a11yTools"></a>
           </div>
         </nav>
       </div>`;

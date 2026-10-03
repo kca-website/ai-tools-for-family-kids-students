@@ -235,7 +235,8 @@ body.has-site-chrome .chrome-footer :focus-visible {
   gap: 24px;
 }
 /* Educators: always first in the menu, so they are visible on phones where the header button is hidden. */
-.chrome-menu-panel__teacher {
+.chrome-menu-panel__teacher,
+.chrome-menu-panel__university {
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
@@ -249,7 +250,26 @@ body.has-site-chrome .chrome-footer :focus-visible {
   font-weight: 800;
   text-decoration: none !important;
 }
-.chrome-menu-panel__teacher span:nth-child(2) {
+/* Audience shortcuts (educators, university students) sit side by side above the groups. */
+.chrome-menu-panel__audiences {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+.chrome-menu-panel__audiences > a {
+  grid-column: auto;
+}
+.chrome-menu-panel__university {
+  border-color: #C9D6EA;
+  background: #EEF3FB;
+  color: #1D4E89 !important;
+}
+.chrome-menu-panel__university:hover {
+  border-color: #1D4E89;
+}
+.chrome-menu-panel__teacher span:nth-child(2),
+.chrome-menu-panel__university span:nth-child(2) {
   flex: 1;
 }
 .chrome-menu-panel__teacher:hover {

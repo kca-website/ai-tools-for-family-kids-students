@@ -21,7 +21,8 @@ async function finderPick(page, kind, value) {
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
-  page.on('pageerror', (error) => errors.push(String(error)));
+  page.on('pageerror', (error) => errors.push(error.stack || String(error)));
+  page.on('response', response => {if(response.status()===200 && response.request().resourceType()==='script' && (response.headers()['content-type']||'').includes('text/html')) errors.push('Script received HTML: '+response.url());});
 
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#homeV8Shell', { timeout: 10000 });
@@ -29,7 +30,7 @@ try {
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.');
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Βρες το κατάλληλο AI για το μάθημα, την ηλικία και αυτό που θέλεις να κάνεις. Ή χρησιμοποίησε τη δωρεάν AI Μελέτη πάνω στην επίσημη σχολική ύλη.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Δωρεάν βοήθεια για σχολείο, γονείς και εκπαιδευτικούς. Μελέτησε μια σχολική ενότητα ή τις σημειώσεις/PDF σου εδώ, κάνε εξάσκηση ή βρες το κατάλληλο AI εργαλείο.');
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.ok(await page.locator('#heroGslBadge').count());
 
@@ -65,7 +66,7 @@ try {
   assert.equal(await ways.count(), 3);
   assert.equal(await page.locator('#homeV8HelpersMount .home-v8-ai').count(), 1);
   assert.equal(await page.locator('#homeV9Study a[href="/study.html"]').count(), 1, 'Homepage must expose AI Study');
-  assert.match(await page.locator('#homeV9Study').innerText(), /επίσημο σχολικό βιβλίο[\s\S]*Διαθέσιμο σε επιλεγμένα μαθήματα · η κάλυψη μεγαλώνει/, 'AI Study must keep the official-textbook coverage caveat');
+  assert.match(await page.locator('#homeV9Study').innerText(), /επίσημο σχολικό βιβλίο[\s\S]*Η κάλυψη σχολικών βιβλίων είναι επιλεκτική./, 'AI Study must keep the official-textbook coverage caveat');
   assert.equal(await page.locator('#homeV9Teacher a[href="/teacher-assistant.html"]').isVisible(), true, 'Educator card must be visible on mobile');
   assert.equal(await page.locator('#homeV8HelpersMount a[href="/xartis-ylis.html"]').count(), 0, 'Curriculum Map is not one of the three ways');
   assert.equal(await page.locator('#homeCurriculumStrip').getAttribute('href'), '/xartis-ylis.html', 'Curriculum Map must keep its own strip');
@@ -106,11 +107,11 @@ try {
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => /University student/.test(document.querySelector('#homeV9Finder')?.textContent || ''));
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Find the right AI for the subject, the age and what you want to do. Or use the free AI Study on the official school curriculum.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Free learning support for school, parents and educators. Study a school unit or your notes/PDF here, practise, or find the right AI tool.');
   await finderPick(page, 'role', 'teacher');
   assert.match(await page.locator('#homeV9FinderCta').innerText(), /Open the educator tools/);
   assert.match(await page.locator('#homeV9Teacher').innerText(), /For educators/);
-  assert.match(await page.locator('#homeCurriculumStrip').innerText(), /Greek Curriculum Map/);
+  assert.match(await page.locator('#homeCurriculumStrip').innerText(), /Find the unit you are studying/);
   assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'English homepage GSL block must show 167 concepts');
   assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'English homepage GSL block must not show stale 153 count');
 

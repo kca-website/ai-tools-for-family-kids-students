@@ -4,7 +4,7 @@
 
   let deferredInstallPrompt = null;
   let launchActionHandled = false;
-  const DESKTOP_TITLE = "AI Tools for Family, Kids & Students";
+  const DESKTOP_TITLE = "aitools4kids.gr";
 
   function isEnglish(){
     return !!document.getElementById("langEn")?.classList.contains("active");
@@ -395,14 +395,9 @@
       }
       return;
     }
-    if(action==="tools"){
-      (document.getElementById("homeV9Finder") || document.getElementById("zoneGrid"))?.scrollIntoView({behavior:"smooth",block:"start"});
-      return;
-    }
-    if(action==="help"){
-      const help=document.querySelector(".hero__ai-help");
-      if(help && getComputedStyle(help).display!=="none") help.scrollIntoView({behavior:"smooth",block:"center"});
-      else (document.getElementById("homeV8AiTitle") || document.getElementById("zoneGrid"))?.scrollIntoView({behavior:"smooth",block:"start"});
+    if(action==="tools" || action==="help"){
+      if(action === "help") location.assign("/tools/ai-help.html");
+      else location.hash = "open-tools";
     }
   }
 

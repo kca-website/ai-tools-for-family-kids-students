@@ -30,7 +30,7 @@ async function check(viewport,label){
   assert(homeText.includes('8 τάξεις')&&homeText.includes('4 Γυμνασίου + 4 Λυκείου'),`${label}: ENEEGYL eight-grade structure missing from home`);
   assert(!homeText.includes('♿'),`${label}: wheelchair icon must not represent Special Education`);
   assert(await page.locator('#spHome [data-branch]').count()===3,`${label}: expected three Special Education school choices`);
-  assert(await page.locator('#spHome .sp-unified-ai').isVisible(),`${label}: unified AI Help entry missing`);
+  assert(await page.locator('#spHome .sp-diagnostic-launch').isVisible(),`${label}: unified AI Help entry missing`);
 
   const supportText=await page.locator('#spSupportTools').innerText();
   assert(await page.locator('#spSupportTools .sp-tool-card').count()>=6,`${label}: support-tool recommendations missing`);

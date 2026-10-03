@@ -1360,3 +1360,34 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 .home-v9-ways .home-v9-study-way .home-v9-way__action,
 .home-v9-ways .home-v9-teacher-way .home-v9-way__action{margin-top:auto;}
 .home-v9-ways .home-v8-helper-links a>span{margin-right:4px;}
+
+/* Intent-first entry: retain existing layout and destinations. */
+#homeIntentLinks{grid-column:1/-1;margin:4px 0 8px;text-align:left;}
+.home-intent-actions,.home-audience-links{display:flex;flex-wrap:wrap;gap:8px;}
+.home-intent-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 18px;border:1px solid #1d5d8c;border-radius:12px;background:#1d5d8c;color:#fff;font-weight:700;text-decoration:none;}
+.home-intent-actions a+a{background:#fff;color:#1d5d8c;}
+.home-audience-links{margin-top:8px;}
+.home-audience-links a{display:inline-flex;align-items:center;min-height:44px;padding:6px 12px;color:#17324d;text-decoration:underline;text-underline-offset:3px;border-radius:8px;}
+#homeV8FinderTitle{scroll-margin-top:150px;}
+.home-intent-actions a:focus-visible,.home-audience-links a:focus-visible{outline:3px solid #b45309;outline-offset:3px;}
+#homeV9Finder .home-v9-chip{min-height:44px;}
+#homeV8HelpersMount .home-v8-helper-links a{min-height:44px;display:inline-flex;align-items:center;}
+.home-v9-finder__label{font-family:var(--font-heading);}
+.home-v9-curriculum-strip__copy small{display:block;}
+@media(min-width:1000px){.home-v9-top{grid-template-areas:"title" "sub" "badges" "entry" "finder";}#homeIntentLinks{grid-area:entry;margin-top:16px;}}
+@media(max-width:700px){
+  .home-intent-actions{display:grid;grid-template-columns:minmax(0,1fr);}
+  .home-intent-actions a{text-align:center;}
+  .home-v9-curriculum-strip__copy small{display:block;font-size:.85rem;}
+  #zoneSelectView .hero__title{font-size:clamp(1.75rem,7vw,2.2rem);}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important;}.home-v9-chip,.home-v9-way__action,.home-intent-actions a{transition:none!important;}}
+
+/* Keep task descriptions visible on small screens; names alone are insufficient. */
+@media(max-width:700px){.home-v9-ways .home-v8-helper-desc{display:block;}}
+.site-header__search{min-width:160px;}
+@media(max-width:760px){.site-header__search{min-width:0;}}
+.home-v9-ways .home-v8-ai__links{margin-top:0;}
+
+/* Anchor entry points must stay below the sticky site header. */
+#homeV9Finder, #homeV8FinderTitle, #homeV8AiTitle {scroll-margin-top:100px;}

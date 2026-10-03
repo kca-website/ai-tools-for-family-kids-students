@@ -29,6 +29,12 @@ export function startLocalServer(port = 0) {
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://x');
     let p = decodeURIComponent(url.pathname);
+    // Vercel supplies this script in hosted deployments. Local QA must not
+    // rewrite its missing platform asset to the HTML app shell or send telemetry.
+    if (p === '/_vercel/insights/script.js') {
+      res.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8' });
+      return res.end('/* Vercel Analytics is disabled in local QA. */');
+    }
     if (p === '/preschool') p = '/preschool.html';
     let file = path.join(REPO, p);
     const inRepo = file.startsWith(REPO) && !file.startsWith(QA_DIR) && !file.includes(`${path.sep}.git`);

@@ -11,7 +11,7 @@
   const COPY = {
     el: {
       skip: "Μετάβαση στο περιεχόμενο", navLabel: "Κύριο μενού", allLabel: "Όλες οι ενότητες", footerLabel: "Χρήσιμοι σύνδεσμοι",
-      tools: "Εργαλεία", study: "AI Μελέτη", help: "AI Βοήθεια", menu: "Μενού", task: "Βρες AI εργαλείο", studies: "Σπουδές", epal: "Μαθήματα ΕΠΑΛ", organize: "Οργάνωσε τη μελέτη σε μικρά βήματα",
+      tools: "Εργαλεία", study: "AI Μελέτη", help: "AI Βοήθεια", menu: "Μενού", task: "Βρες AI εργαλείο", studies: "Σπουδές", epal: "Μαθήματα ΕΠΑΛ", organize: "Οργάνωσε τη μελέτη σε μικρά βήματα", aiLiteracy: "AI & Ψηφιακές δεξιότητες",
       groupFind: "Βρες το σωστό AI", groupLearn: "Μάθηση", groupMore: "Προσβασιμότητα & ειδική υποστήριξη",
       byLevel: "Ποιος είσαι; Βρες το σωστό AI", whatToDo: "Τι θέλεις να κάνεις με AI;", practice: "Δες πού χρειάζεσαι εξάσκηση", curriculum: "Βρες τη σχολική ενότητα · Ύλη 2026–27", characters: "Χαρακτήρες Ιστορίας",
       classroom: "Για εκπαιδευτικούς", gsl: "Ελληνική Νοηματική", special: "Ειδική Εκπαίδευση", university: "Φοιτητές ΑΕΙ · Πιλοτικό",
@@ -22,7 +22,7 @@
     },
     en: {
       skip: "Skip to content", navLabel: "Main menu", allLabel: "All sections", footerLabel: "Useful links",
-      tools: "Tools", study: "AI Study", help: "AI Help", menu: "Menu", task: "Find an AI tool", studies: "University", epal: "EPAL subjects", organize: "Break studying into small steps",
+      tools: "Tools", study: "AI Study", help: "AI Help", menu: "Menu", task: "Find an AI tool", studies: "University", epal: "EPAL subjects", organize: "Break studying into small steps", aiLiteracy: "AI & digital skills",
       groupFind: "Find the right AI", groupLearn: "Learning", groupMore: "Accessibility & learning support",
       byLevel: "Who are you? Find the right AI", whatToDo: "What do you want to do with AI?", practice: "Find what needs practice", curriculum: "Find a school unit · Curriculum 2026–27", characters: "History characters",
       classroom: "For educators", gsl: "Greek Sign Language", special: "Special Education", university: "University students · Pilot",
@@ -50,8 +50,6 @@
     return href === "/" || href === "/index.html" || href === "./" || href === "index.html";
   }
 
-  // The page's own site header: the first header / .top / .header bar that
-  // comes before the page title and links back to the homepage.
   function findOldHeader(){
     const h1 = document.querySelector("h1");
     const candidates = document.querySelectorAll("header, .top, .header");
@@ -97,6 +95,7 @@
             <a href="/tools/ai-help.html" data-chrome="help"></a>
             <a href="/practice.html" data-chrome="practice"></a>
             <a href="/xartis-ylis.html" data-chrome="curriculum"></a>
+            <a href="/ai-scenarios.html" data-chrome="aiLiteracy"></a>
             <a href="/high/student/tutor?schoolType=epal" data-chrome="epal"></a><a href="/organosi-meletis-ai.html" data-chrome="organize"></a><a href="/history-characters.html" data-chrome="characters"></a>
           </div>
           <div class="chrome-menu-panel__group">
@@ -136,6 +135,35 @@
       </div>`;
   }
 
+  function enhanceAiPathsPage(){
+    if(location.pathname !== "/ai-scenarios.html") return;
+    const en = lang() === "en";
+    const title = en ? "AI Paths — Build better judgement with AI | aitools4kids.gr" : "AI Διαδρομές — Χρησιμοποίησε το AI με κρίση | aitools4kids.gr";
+    const description = en ? "Free interactive AI literacy paths for ages 9–18: verify AI answers, protect personal information, spot misleading content and choose the right tool." : "Δωρεάν διαδραστικές AI Διαδρομές για ηλικίες 9–18: έλεγχος απαντήσεων AI, προστασία προσωπικών δεδομένων, παραπλανητικό περιεχόμενο και σωστή επιλογή εργαλείου.";
+    document.title = title;
+    let meta = document.querySelector('meta[name="description"]');
+    if(meta) meta.setAttribute("content", description);
+    const elBtn = document.getElementById("elBtn");
+    const enBtn = document.getElementById("enBtn");
+    if(elBtn){ elBtn.setAttribute("aria-pressed", String(!en)); elBtn.setAttribute("aria-label", en ? "Switch to Greek" : "Ελληνικά"); }
+    if(enBtn){ enBtn.setAttribute("aria-pressed", String(en)); enBtn.setAttribute("aria-label", en ? "English" : "Μετάβαση στα Αγγλικά"); }
+    const ageGroup = document.querySelector(".age");
+    if(ageGroup){
+      ageGroup.setAttribute("role", "group");
+      ageGroup.setAttribute("aria-label", en ? "Choose age group" : "Διάλεξε ηλικιακή ομάδα");
+      ageGroup.querySelectorAll("button[data-age]").forEach((button) => button.setAttribute("aria-pressed", String(button.classList.contains("active"))));
+    }
+    const lab = document.getElementById("lab");
+    if(lab){ lab.setAttribute("role", "region"); lab.setAttribute("aria-label", en ? "Interactive AI path" : "Διαδραστική AI διαδρομή"); }
+    if(!document.getElementById("aiPathsA11yStyles")){
+      const style = document.createElement("style");
+      style.id = "aiPathsA11yStyles";
+      style.textContent = '.page-ai-scenarios button:focus-visible,.page-ai-scenarios a:focus-visible{outline:3px solid #f59e0b!important;outline-offset:3px}.page-ai-scenarios .option{min-height:48px}.page-ai-scenarios .age button{min-height:44px}';
+      document.head.appendChild(style);
+    }
+    document.querySelectorAll('a[href="/ai-scenarios.html"]').forEach((link) => link.setAttribute("aria-current", "page"));
+  }
+
   function applyCopy(){
     const c = COPY[lang()];
     document.querySelectorAll("[data-chrome]").forEach((node) => {
@@ -151,12 +179,12 @@
     const audit = document.querySelector("[data-chrome-audit]");
     const meta = window.AITOOLSKIDS_SITE_META;
     if(audit && meta) audit.textContent = lang() === "en" ? meta.toolCatalogAuditLabelEn : meta.toolCatalogAuditLabelEl;
+    enhanceAiPathsPage();
   }
 
   function syncViewportWidth(){
     const root = document.documentElement.style;
     root.setProperty("--chrome-vw", document.documentElement.clientWidth + "px");
-    // Pages that pad or offset <body> would leave a gap above/below the bands.
     const cs = getComputedStyle(document.body);
     root.setProperty("--chrome-top", (parseFloat(cs.marginTop) || 0) + (parseFloat(cs.paddingTop) || 0) + "px");
     root.setProperty("--chrome-bottom", (parseFloat(cs.marginBottom) || 0) + (parseFloat(cs.paddingBottom) || 0) + "px");
@@ -167,7 +195,6 @@
     if(!body || document.getElementById("chromeHeader")) return;
     ensureFonts();
     body.classList.add("has-site-chrome");
-    // Page hook for page-specific v9 styles, e.g. /study.html -> page-study, /tools/x.html -> page-tools.
     const parts = location.pathname.replace(/\.html$/, "").split("/").filter(Boolean);
     if(parts.length) body.classList.add("page-" + (parts[0] === "tools" ? "tools" : parts.join("-")));
     if(document.querySelector('link[href*="seo-guide.css"]')) body.classList.add("page-guide");
@@ -177,7 +204,6 @@
     header.className = "chrome-header";
     header.innerHTML = headerMarkup();
 
-    // Skip link target: the page's <main>, else the first element after the header.
     const main = document.querySelector("main");
     let target = main;
     if(!target){
@@ -192,7 +218,6 @@
     body.insertBefore(header, body.firstChild);
     body.insertBefore(skip, header);
 
-    // Move the page's own controls into the shared header and hide duplicates.
     const actions = document.getElementById("chromeActions");
     const old = findOldHeader();
     if(old){
@@ -205,7 +230,6 @@
       old.classList.add("chrome-replaced");
     }
     const h1 = document.querySelector("h1");
-    // "← Home" links before the page title duplicate the new header.
     document.querySelectorAll("a[href]").forEach((el) => {
       if(el.closest("#chromeHeader, #chromeFooter") || !isHomeLink(el)) return;
       if(!el.classList.contains("back") && !/^\s*←/.test(el.textContent || "")) return;

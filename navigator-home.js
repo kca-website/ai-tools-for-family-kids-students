@@ -331,7 +331,7 @@
     const quiz=document.getElementById("heroQuizCtaBtn")?.closest(".hero__quiz-cta-wrap");
     if(quiz){
       quiz.classList.remove("home-v8-legacy");
-      intro.querySelector(".hero__subtitle")?.insertAdjacentElement("afterend",quiz);
+      intro.querySelector(".hero__badges")?.insertAdjacentElement("afterend",quiz);
       const button=quiz.querySelector("#heroQuizCtaBtn");
       button.setAttribute("aria-controls","heroQuizPicker");
       button.setAttribute("aria-expanded",String(!quiz.querySelector("#heroQuizPicker").hidden));
@@ -339,13 +339,7 @@
       quiz.querySelector(".hero__quiz-cta-sub").textContent=en ? "Find what needs more practice and which tool can help." : "Δες πού χρειάζεσαι λίγη παραπάνω εξάσκηση και ποιο εργαλείο θα βοηθήσει.";
       if(!button.dataset.quizDisclosureBound){button.dataset.quizDisclosureBound="1";button.addEventListener("click",()=>queueMicrotask(()=>button.setAttribute("aria-expanded",String(!quiz.querySelector("#heroQuizPicker").hidden))));}
     }
-    entry.innerHTML=`<nav class="home-audience-links" aria-label="${en ? "Dedicated pathways" : "Ξεχωριστές διαδρομές"}">
-        <a href="/high/student/tutor?schoolType=epal">ΕΠΑΛ</a>
-        <a href="/special-education.html">${en ? "Special education" : "Ειδική Αγωγή"}</a>
-        <a href="/sign-language.html">${en ? "Greek Sign Language" : "Ελληνική Νοηματική"}</a>
-        <a href="/higher-education-pilot.html">${en ? "University students · Pilot" : "Φοιτητές · Πιλοτικό"}</a>
-      </nav>
-`;
+    entry.remove();
   }
 
   // Quick-action chips inside a "three ways" card (same look as the AI Help "Open for" links).

@@ -33,7 +33,7 @@ try {
   assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί. Για γονείς, μαθητές 6 έως 18 αλλά και εκπαιδευτικούς.');
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.ok(await page.locator('#heroGslBadge').count());
-  assert.equal(await page.locator('.hero__subtitle + .hero__quiz-cta-wrap').count(), 1, 'Quiz picker belongs directly below the hero message');
+  assert.equal(await page.locator('.hero__badges + .hero__quiz-cta-wrap').count(), 1, 'Quiz picker belongs directly below the hero badges');
   assert.equal(await page.locator('#heroQuizCtaBtn').isVisible(), true);
   await page.click('#heroQuizCtaBtn');
   assert.equal(await page.locator('#heroQuizPicker').isVisible(), true);

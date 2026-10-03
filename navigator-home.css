@@ -1391,3 +1391,8 @@ html[lang="en"] .classroom-menu-link__text::after{content:"For educators";}
 
 /* Anchor entry points must stay below the sticky site header. */
 #homeV9Finder, #homeV8FinderTitle, #homeV8AiTitle {scroll-margin-top:100px;}
+
+/* The existing quiz picker opens directly below the hero message. */
+.home-v9-intro > .hero__quiz-cta-wrap{grid-area:practice;margin:4px 0 16px;}
+.home-v9-intro .hero__quiz-cta{min-height:56px;}
+@media(min-width:1000px){.home-v9-top{grid-template-areas:"title" "sub" "practice" "badges" "entry" "finder";}}

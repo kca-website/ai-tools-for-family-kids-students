@@ -327,9 +327,18 @@
     let entry = document.getElementById("homeIntentLinks");
     if(!entry){ entry=document.createElement("div"); entry.id="homeIntentLinks"; intro.insertBefore(entry,finder); }
     const en=isEnglish();
-    let practice=document.getElementById("homePracticeEntry");
-    if(!practice){practice=document.createElement("a");practice.id="homePracticeEntry";practice.className="home-v9-way__action";practice.href="#homeV8MapTitle";practice.style.cssText="display:inline-flex;min-height:44px;align-items:center;gap:8px;margin:8px 0 16px";intro.querySelector(".hero__subtitle")?.insertAdjacentElement("afterend",practice);}
-    practice.innerHTML=`<span aria-hidden="true">🎯</span>${en ? "Where do I need practice? · Quick quizzes" : "Πού χρειάζομαι εξάσκηση; · Σύντομα κουίζ"} →`;
+    document.getElementById("homePracticeEntry")?.remove();
+    const quiz=document.getElementById("heroQuizCtaBtn")?.closest(".hero__quiz-cta-wrap");
+    if(quiz){
+      quiz.classList.remove("home-v8-legacy");
+      intro.querySelector(".hero__subtitle")?.insertAdjacentElement("afterend",quiz);
+      const button=quiz.querySelector("#heroQuizCtaBtn");
+      button.setAttribute("aria-controls","heroQuizPicker");
+      button.setAttribute("aria-expanded",String(!quiz.querySelector("#heroQuizPicker").hidden));
+      quiz.querySelector(".hero__quiz-cta-title").textContent=en ? "Take the quick quizzes · 2 minutes" : "Κάνε τα σύντομα κουίζ · 2 λεπτά";
+      quiz.querySelector(".hero__quiz-cta-sub").textContent=en ? "Find what needs more practice and which tool can help." : "Δες πού χρειάζεσαι λίγη παραπάνω εξάσκηση και ποιο εργαλείο θα βοηθήσει.";
+      if(!button.dataset.quizDisclosureBound){button.dataset.quizDisclosureBound="1";button.addEventListener("click",()=>queueMicrotask(()=>button.setAttribute("aria-expanded",String(!quiz.querySelector("#heroQuizPicker").hidden))));}
+    }
     entry.innerHTML=`<nav class="home-audience-links" aria-label="${en ? "Dedicated pathways" : "Ξεχωριστές διαδρομές"}">
         <a href="/high/student/tutor?schoolType=epal">ΕΠΑΛ</a>
         <a href="/special-education.html">${en ? "Special education" : "Ειδική Αγωγή"}</a>

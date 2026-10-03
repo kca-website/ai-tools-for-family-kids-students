@@ -66,7 +66,7 @@
   function headerMarkup(){
     return `
       <div class="chrome-header__inner">
-        <a class="chrome-brand" href="/"><span class="chrome-brand__mark" aria-hidden="true">ai</span><span>aitools4kids.gr</span></a>
+        <a class="chrome-brand" href="https://www.aitools4kids.gr/"><span class="chrome-brand__mark" aria-hidden="true">ai</span><span>aitools4kids.gr</span></a>
         <nav class="chrome-nav" data-chrome-aria="navLabel">
           <a href="/#open-tools" data-chrome="tools"></a>
           <a href="/study.html" data-chrome="study"></a>
@@ -91,7 +91,7 @@
             <p class="chrome-menu-panel__title" data-chrome="groupLearn"></p>
             <a href="/study.html" data-chrome="study"></a>
             <a href="/tools/ai-help.html" data-chrome="help"></a>
-            <a href="/#homeV8MapTitle" data-chrome="practice"></a>
+            <a href="/#open-quiz" data-chrome="practice"></a>
             <a href="/xartis-ylis.html" data-chrome="curriculum"></a>
             <a href="/high/student/tutor?schoolType=epal" data-chrome="epal"></a><a href="/organosi-meletis-ai.html" data-chrome="organize"></a><a href="/history-characters.html" data-chrome="characters"></a>
           </div>

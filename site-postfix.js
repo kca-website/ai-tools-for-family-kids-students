@@ -375,27 +375,7 @@
   }
 
   function ensureStartHere(){
-    const roleTabs=document.getElementById("roleTabs");
-    if(!roleTabs) return;
-    const {zone,role}=routeContext();
-    let box=document.getElementById("startHereGuide");
-    if(!zone || !role){ if(box) box.remove(); return; }
-    if(!box){
-      box=document.createElement("section");
-      box.id="startHereGuide";
-      box.setAttribute("role","note");
-      box.style.cssText="margin:4px 0 14px;padding:14px 16px;border:1px solid #bfdbfe;border-radius:12px;background:linear-gradient(135deg,#eff6ff,#f8fafc);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;";
-      roleTabs.insertAdjacentElement("beforebegin",box);
-    }
-    const en=isEnglish();
-    const title=en ? "Not sure where to start?" : "Δεν ξέρεις από πού να ξεκινήσεις;";
-    const text=en ? "Take the 2-minute Practice Map first. It shows what may need practice and then leads you to the relevant Learning Path." : "Ξεκίνα με τον Χάρτη Εξάσκησης των 2 λεπτών. Θα σου δείξει τι μπορεί να θέλει εξάσκηση και μετά θα σε οδηγήσει στο αντίστοιχο Μονοπάτι Μάθησης.";
-    const cta=en ? "Start the 2-minute check →" : "Άνοιξε τον Χάρτη Εξάσκησης →";
-    const href=`/${zone}/${role}/quiz`;
-    const signature=[en,zone,role].join("|");
-    if(box.dataset.signature===signature) return;
-    box.dataset.signature=signature;
-    box.innerHTML=`<div style="flex:1;min-width:min(100%,420px);"><div style="font-weight:800;color:#1f2937;margin-bottom:3px;">${title}</div><div style="font-size:.88rem;line-height:1.5;color:#475569;">${text}</div></div><a href="${href}" style="display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 14px;border-radius:9px;background:#2e6ba3;color:#fff;text-decoration:none;font-weight:800;white-space:nowrap;">${cta}</a>`;
+    document.getElementById("startHereGuide")?.remove();
   }
 
   function ensureQuizPathFlow(){

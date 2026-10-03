@@ -584,12 +584,14 @@
       }
       return;
     }
-    if(location.hash !== "#homeV8MapTitle") return;
-    if(DIRECT_ROLES[finderState.role]) finderState.role = "guardian";
-    if(finderState.zone === "preschool") finderState.zone = "primary";
-    finderState.need = "practice";
-    renderFinder();
-    document.getElementById("homeV9Finder")?.scrollIntoView({block:"start"});
+    if(!["#open-quiz", "#homeV8MapTitle"].includes(location.hash)) return;
+    const picker = document.getElementById("heroQuizPicker");
+    const button = document.getElementById("heroQuizCtaBtn");
+    if(!picker || !button) return;
+    picker.hidden = false;
+    button.setAttribute("aria-expanded", "true");
+    button.closest(".hero__quiz-cta-wrap")?.scrollIntoView({block:"start"});
+    picker.querySelector("button, a")?.focus({preventScroll:true});
   }
 
   function init(){

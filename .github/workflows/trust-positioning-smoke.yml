@@ -9,6 +9,8 @@ on:
   push:
     branches:
       - 'feature/**'
+      - 'work/**'
+      - 'preview/**'
       - main
       - fix/trust-date-positioning-20260909
   pull_request:
@@ -41,13 +43,13 @@ jobs:
 
       - name: Install Playwright
         run: |
-          npm install --no-save playwright@1.55.0
+          npm install --no-save playwright@1.55.0 axe-core@4.10.3
           npx playwright install --with-deps chromium
 
       - name: Start local static server
         shell: bash
         run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/aitools4kids-http.log 2>&1 &
+          node qa/scripts/serve.mjs > /tmp/aitools4kids-http.log 2>&1 &
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
             sleep 1
@@ -57,6 +59,12 @@ jobs:
 
       - name: Run homepage positioning smoke
         run: node tests/home-positioning-smoke.mjs
+
+      - name: Run intent-first UX journeys and accessibility checks
+        run: node tests/ux-intent-first-smoke.mjs
+
+      - name: Run AI Help guide and navigation journeys
+        run: node tests/ai-help-guide-smoke.mjs
 
       - name: Run stabilization release smoke
         run: node tests/stabilization-release-smoke.mjs

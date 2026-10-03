@@ -16,12 +16,12 @@
   const COPY = {
     el: {
       curriculumCardBadge: "Ύλη 2026–27",
-      curriculumCardTitle: "Ελληνικός Χάρτης Ύλης",
+      curriculumCardTitle: "Βρες την ενότητα που διαβάζεις",
       curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα → AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
       aiBadgeNew: "Νέο",
       aiBadgeFree: "Δωρεάν",
-      aiTitle: "Η δική μας AI Βοήθεια, φτιαγμένη για τα σχολικά μαθήματα.",
-      aiDesc: "Διαφορετική από τα εργαλεία του καταλόγου. Σε καθοδηγεί με ερωτήσεις και μικρές υποδείξεις, αντί να σου δίνει έτοιμη λύση.",
+      aiTitle: "Κόλλησες; Πάρε μια υπόδειξη.",
+      aiDesc: "AI Βοήθεια: μία ερώτηση ή μικρή υπόδειξη τη φορά, πάνω στη δική σου προσπάθεια.",
       aiTechSummary: "ⓘ Ποιο AI χρησιμοποιείται;",
       aiTechText: "GPT-OSS 120B μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική.",
       aiTechLink: "Διαφάνεια AI →",
@@ -32,7 +32,7 @@
       engTitle: "Έννοιες στην Ελληνική Νοηματική",
       engDesc: `${signLanguageConceptCount} σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ`,
       engLink: `Δες τις ${signLanguageConceptCount} έννοιες →`,
-      stepsLabel: "Πες μας ποιος είσαι και τι χρειάζεσαι. Σε πάμε στο σωστό AI ή στη σωστή βοήθεια.",
+      stepsLabel: "Τι χρειάζεσαι τώρα;",
       moreTitle: "Ανακάλυψε περισσότερα",
       charTile: "Μίλα με χαρακτήρα της Ιστορίας",
       charTileDesc: "Διάλογος με πρόσωπα από την ύλη και έλεγχος του τι έμαθες.",
@@ -40,44 +40,44 @@
       stepZone: "2 · Βαθμίδα ή διαδρομή",
       stepNeed: "3 · Τι χρειάζεσαι σήμερα;",
       roles: { guardian: "Γονιός", student: "Μαθητής / Μαθήτρια", teacher: "Εκπαιδευτικός", university: "Φοιτητής / Φοιτήτρια" },
-      zones: { preschool: ["Νηπιαγωγείο","4–6"], primary: ["Δημοτικό","6–12"], middle: ["Γυμνάσιο","12–15"], high: ["Λύκειο","15–18"], special: ["Ειδική Εκπαίδευση",""] },
-      finderNeeds: { tools: "Να βρω το κατάλληλο AI", practice: "Εξάσκηση σε μάθημα", stuck: "Κόλλησα σε άσκηση", study: "Μελέτη πάνω στην ύλη" },
+      zones: { preschool: ["Νηπιαγωγείο","4–6"], primary: ["Δημοτικό","6–12"], middle: ["Γυμνάσιο","12–15"], high: ["ΓΕΛ","15–18"], epal: ["ΕΠΑΛ","15–18"], special: ["Ειδική Εκπαίδευση",""] },
+      finderNeeds: { study: "Δεν καταλαβαίνω μια ενότητα", practice: "Θέλω εξάσκηση", stuck: "Κόλλησα σε άσκηση", pdf: "Έχω PDF ή σημειώσεις", organize: "Δεν ξέρω από πού να αρχίσω", tools: "Να βρω το κατάλληλο AI" },
       ctaTools: "Δες εργαλεία για", ctaPractice: "Χάρτης Εξάσκησης για", ctaStuck: "AI Βοήθεια για", ctaStudy: "Άνοιξε την AI Μελέτη", ctaPreschool: "Δραστηριότητες Νηπιαγωγείου", ctaSpecial: "Άνοιξε την Ειδική Εκπαίδευση", ctaTeacher: "Άνοιξε τα εργαλεία για εκπαιδευτικούς", mapGel: "ΓΕΛ", mapEpal: "ΕΠΑΛ", ctaSpecialPractice: "Κάνε το μικρό διαγνωστικό", ctaUniversity: "Άνοιξε τη φοιτητική διαδρομή",
       noteTeacher: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, δραστηριότητες και βίντεο πάνω στην ύλη 2026–27.",
       noteUniversity: "Πιλοτική διαδρομή για επιλεγμένα πανεπιστημιακά τμήματα, με επίσημες πηγές.",
       teacherWayEyebrow: "Για εκπαιδευτικούς",
       teacherWayTitle: "Υλικό για την τάξη σου, πάνω στην ύλη 2026–27.",
-      teacherWayDesc: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, δραστηριότητες και εκπαιδευτικά βίντεο. Εσύ ελέγχεις και προσαρμόζεις.",
+      teacherWayDesc: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, βίντεο και δραστηριότητες με QR για την τάξη. Εσύ ελέγχεις και προσαρμόζεις.",
       teacherWayCta: "Άνοιξε τα εργαλεία εκπαιδευτικού\u00a0→",
       notePreschool: "Στο Νηπιαγωγείο ο ενήλικας χειρίζεται το εργαλείο. Θα δεις δραστηριότητες για γονείς και εκπαιδευτικούς.",
-      notePrimaryStudent: "Στο Δημοτικό τα εργαλεία χρησιμοποιούνται μαζί με ενήλικα. Θα δεις και οδηγίες για τον γονιό.",
-      noteMiddleStudent: "Πολλά εργαλεία ζητούν 13+ ή 15+. Κάθε κάρτα δείχνει το όριο ηλικίας.",
+      notePrimaryStudent: "Δημοτικό: μαζί με γονέα ή εκπαιδευτικό. Η AI Βοήθεια ανοίγει στη διαδρομή του ενήλικα.",
+      noteMiddleStudent: "Γυμνάσιο: μαθητική AI Βοήθεια από 13 ετών. Για μικρότερη ηλικία, μαζί με γονέα. Κάθε εξωτερικό εργαλείο έχει δικό του όριο ηλικίας.",
       noteMiddleStuck: "Η AI Βοήθεια για μαθητές Γυμνασίου ανοίγει από 13 ετών. Διάλεξε πρώτα την ηλικία σου στην επόμενη σελίδα.",
-      noteHigh: "Για ΕΠΑΛ θα διαλέξεις στη συνέχεια τάξη και, όπου χρειάζεται, τομέα ή ειδικότητα.",
+      noteHigh: "Μαθητική διαδρομή Λυκείου. Στο ΕΠΑΛ επιλέγεις τάξη και, όπου χρειάζεται, τομέα ή ειδικότητα.",
       noteSpecial: "Διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ.",
       waysTitle: "Γρήγορη πρόσβαση",
       studyGoalsLabel: "Τι θέλεις;",
-      studyGoals: [["understand","🧠","Να το καταλάβω"],["revise","🔁","Επανάληψη"],["test","📝","Γράφω τεστ"],["practice","🎯","Εξάσκηση"]],
+      studyGoals: [["pdf","📄","PDF / σημειώσεις"],["understand","🧠","Να το καταλάβω"],["revise","🔁","Επανάληψη"],["test","📝","Γράφω τεστ"],["practice","🎯","Εξάσκηση"]],
       teacherTasksLabel: "Φτιάξε:",
       teacherTasks: [["worksheet","📝","Φύλλο εργασίας"],["assessment","✅","Αξιολόγηση"],["lesson","🗂️","Σχέδιο μαθήματος"],["video","🎬","Βίντεο"]],
       aiLinksLabel: "Άνοιξε για:",
       studyBadge: "Νέο · Δωρεάν",
-      studyTitle: "AI Μελέτη",
-      studyDesc: "Πες τι διαβάζεις και πόσο χρόνο έχεις. Πάρε mini πλάνο με κατανόηση, ανάκληση, εξάσκηση και τελικό έλεγχο χωρίς AI.",
+      studyTitle: "Κατάλαβε και κάνε επανάληψη",
+      studyDesc: "AI Μελέτη: σχολική ενότητα ή δικές σου σημειώσεις/PDF, με εξήγηση, κάρτες, quiz και πλάνο μέσα στο site.",
       studyOfficial: "Βασισμένη στο επίσημο σχολικό βιβλίο · Ύλη 2026–27",
-      studyCoverage: "Διαθέσιμο σε επιλεγμένα μαθήματα · η κάλυψη μεγαλώνει",
+      studyCoverage: "Με σημειώσεις/PDF οι απαντήσεις βασίζονται στο υλικό σου. Η κάλυψη σχολικών βιβλίων είναι επιλεκτική.",
       studyCta: "Φτιάξε το πλάνο μελέτης σου →",
       charCta: "Ξεκίνα μια συζήτηση →",
       chars: [["socrates","Σωκράτης","Αρχαία Αθήνα"],["pericles","Περικλής","Χρυσός αιώνας"],["greek-revolution-1821","Αγωνιστής του 1821","Επανάσταση"]]
     },
     en: {
       curriculumCardBadge: "Curriculum 2026–27",
-      curriculumCardTitle: "Greek Curriculum Map",
+      curriculumCardTitle: "Find the unit you are studying",
       curriculumCardDesc: "Grade → subject → real curriculum unit → AI help, practice and visual explanation.",
       aiBadgeNew: "New",
       aiBadgeFree: "Free",
-      aiTitle: "Our AI Help, built for school subjects.",
-      aiDesc: "Different from the tools in the catalogue. It guides you with questions and small hints instead of giving you a ready-made answer.",
+      aiTitle: "Stuck? Get a hint.",
+      aiDesc: "AI Help: one question or small hint at a time, building on your own attempt.",
       aiTechSummary: "ⓘ Which AI is used?",
       aiTechText: "GPT-OSS 120B via Cloudflare Workers AI, with Groq as the fallback provider. Puter is an optional alternative.",
       aiTechLink: "AI transparency →",
@@ -88,7 +88,7 @@
       engTitle: "Greek Sign Language concepts",
       engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,
       engLink: `See the ${signLanguageConceptCount} concepts →`,
-      stepsLabel: "Tell us who you are and what you need. We take you to the right AI or the right help.",
+      stepsLabel: "What do you need right now?",
       moreTitle: "Discover more",
       charTile: "Talk with a character from history",
       charTileDesc: "A dialogue with people from the curriculum, then a check of what you learned.",
@@ -96,32 +96,32 @@
       stepZone: "2 · Level or pathway",
       stepNeed: "3 · What do you need today?",
       roles: { guardian: "Parent", student: "Student", teacher: "Educator", university: "University student" },
-      zones: { preschool: ["Preschool","4–6"], primary: ["Primary","6–12"], middle: ["Middle School","12–15"], high: ["High School","15–18"], special: ["Special Education",""] },
-      finderNeeds: { tools: "Find the right AI", practice: "Practise a subject", stuck: "I'm stuck on an exercise", study: "Study the curriculum" },
+      zones: { preschool: ["Preschool","4–6"], primary: ["Primary","6–12"], middle: ["Middle School","12–15"], high: ["General Lyceum","15–18"], epal: ["EPAL","15–18"], special: ["Special Education",""] },
+      finderNeeds: { study: "I don't understand a unit", practice: "I want to practise", stuck: "I'm stuck on an exercise", pdf: "I have a PDF or notes", organize: "I don't know where to start", tools: "Find the right AI" },
       ctaTools: "See tools for", ctaPractice: "Practice Map for", ctaStuck: "AI Help for", ctaStudy: "Open AI Study", ctaPreschool: "Preschool activities", ctaSpecial: "Open Special Education", ctaTeacher: "Open the educator tools", mapGel: "General Lyceum", mapEpal: "Vocational Lyceum (EPAL)", ctaSpecialPractice: "Take the short check", ctaUniversity: "Open the university pathway",
       noteTeacher: "Worksheets, assessment, lesson plans, activities and videos built on the 2026–27 curriculum.",
       noteUniversity: "Pilot pathway for selected university departments, with official sources.",
       teacherWayEyebrow: "For educators",
       teacherWayTitle: "Material for your class, built on the 2026–27 curriculum.",
-      teacherWayDesc: "Worksheets, assessment, lesson plans, activities and educational videos. You review and adapt.",
+      teacherWayDesc: "Worksheets, assessment, lesson plans, videos and QR activities for your class. You review and adapt.",
       teacherWayCta: "Open the educator tools\u00a0→",
       notePreschool: "In preschool the adult operates the tool. You will see activities for parents and educators.",
-      notePrimaryStudent: "In primary school, tools are used together with an adult. You will also see guidance for parents.",
-      noteMiddleStudent: "Many tools require 13+ or 15+. Every card shows the age limit.",
+      notePrimaryStudent: "Primary school: together with a parent or educator. AI Help opens in the adult pathway.",
+      noteMiddleStudent: "Middle school: student AI Help from age 13. Younger students use it with a parent. External tools have their own age limits.",
       noteMiddleStuck: "AI Help for middle-school students opens from age 13. Choose your age first on the next page.",
       noteHigh: "For EPAL you will then choose a grade and, where needed, a sector or specialty.",
       noteSpecial: "Pathway for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L.",
       waysTitle: "Quick access",
       studyGoalsLabel: "What do you need?",
-      studyGoals: [["understand","🧠","Understand it"],["revise","🔁","Review"],["test","📝","Test coming up"],["practice","🎯","Practise"]],
+      studyGoals: [["pdf","📄","PDF / notes"],["understand","🧠","Understand it"],["revise","🔁","Review"],["test","📝","Test coming up"],["practice","🎯","Practise"]],
       teacherTasksLabel: "Create:",
       teacherTasks: [["worksheet","📝","Worksheet"],["assessment","✅","Assessment"],["lesson","🗂️","Lesson plan"],["video","🎬","Video"]],
       aiLinksLabel: "Open for:",
       studyBadge: "New · Free",
-      studyTitle: "AI Study",
-      studyDesc: "Tell it what you're studying and how much time you have. Get a mini plan with understanding, recall, practice and a final check without AI.",
+      studyTitle: "Understand and revise",
+      studyDesc: "AI Study: a school unit or your own notes/PDF, with explanations, cards, quizzes and a study plan here on the site.",
       studyOfficial: "Based on the official school textbook · Curriculum 2026–27",
-      studyCoverage: "Available for selected subjects · coverage is growing",
+      studyCoverage: "With notes/PDF, answers are based on your material. Textbook coverage is selective.",
       studyCta: "Build your study plan →",
       charCta: "Start a conversation →",
       chars: [["socrates","Socrates","Ancient Athens"],["pericles","Pericles","Golden Age"],["greek-revolution-1821","Fighter of 1821","Greek Revolution"]]
@@ -220,17 +220,29 @@
   }
 
   // ---------- Hero: 3-step finder ----------
-  const finderState = { role: "student", zone: "middle", need: "tools" };
+  let shortcutSelectionMade = false;
+  const shortcutIntent = () => location.hash === "#open-tools" ? "tools" : location.hash === "#open-help" ? "stuck" : "";
+  const finderState = { role: "student", zone: "middle", need: "study" };
 
   // Educators and university students skip the school-level steps: one choice, one destination.
+  try {
+    const saved=JSON.parse(sessionStorage.getItem("aitools4kidsShortcutSelection") || "null");
+    if(saved && ["student","guardian","teacher","university"].includes(saved.role) && ["primary","middle","high","epal","preschool","special"].includes(saved.zone)){
+      finderState.role=saved.role; finderState.zone=saved.zone; shortcutSelectionMade=true;
+    }
+  } catch {}
+
   const DIRECT_ROLES = { teacher: "/teacher-assistant.html", university: "/higher-education-pilot.html" };
 
   function finderHref(){
-    const { role, zone, need } = finderState;
+    const { role, zone } = finderState;
+    const need = shortcutIntent() || finderState.need;
     if(DIRECT_ROLES[role]) return DIRECT_ROLES[role];
     if(zone === "preschool") return "/preschool";
     if(zone === "special") return "/special-education.html";
-    if(need === "study") return "/study.html";
+    if(need === "organize") return "/organosi-meletis-ai.html";
+    if(need === "study" || need === "pdf") return `/study.html?zone=${zone === "epal" ? "high" : zone}${zone === "epal" ? "&schoolType=epal" : ""}${need === "pdf" ? "#studyNotes" : ""}`;
+    if(zone === "epal") return `/high/${role === "guardian" ? "guardian" : "student"}/${need === "tools" ? "tools" : "tutor"}?schoolType=epal`;
     if(need === "practice") return `/${zone}/guardian/quiz`;
     if(need === "stuck"){
       if(zone === "primary") return "/primary/guardian/tutor";
@@ -245,7 +257,10 @@
     if(finderState.role === "university") return c.ctaUniversity;
     if(zone === "preschool") return c.ctaPreschool;
     if(zone === "special") return need === "practice" ? c.ctaSpecialPractice : c.ctaSpecial;
+    if(need === "pdf") return isEnglish() ? "Study your PDF or notes" : "Μελέτησε το PDF ή τις σημειώσεις σου";
+    if(need === "organize") return isEnglish() ? "Break it into small steps" : "Σπάσε το διάβασμα σε μικρά βήματα";
     if(need === "study") return c.ctaStudy;
+    if(zone === "epal") return isEnglish() ? "Open EPAL subject help" : "Άνοιξε βοήθεια για τα μαθήματα ΕΠΑΛ";
     if(zone === "high" && need === "practice") return `${c.ctaPractice} ${c.mapGel}`;
     const label = c.zones[zone][0];
     const lead = need === "practice" ? c.ctaPractice : need === "stuck" ? c.ctaStuck : c.ctaTools;
@@ -259,21 +274,24 @@
     if(zone === "preschool") return c.notePreschool;
     if(zone === "special") return c.noteSpecial;
     if(zone === "primary" && role === "student") return c.notePrimaryStudent;
-    if(zone === "middle" && role === "student") return finderState.need === "stuck" ? c.noteMiddleStuck : c.noteMiddleStudent;
-    if(zone === "high") return c.noteHigh;
+    if(zone === "middle" && role === "student") return "";
+    if(zone === "high" || zone === "epal") return c.noteHigh;
     return "";
   }
 
   // The Special Education and EPAL practice checks open inline (special-education-diagnostic.js, epal-practice-map.js).
   function practiceTrigger(){
     const { role, zone, need } = finderState;
-    return !DIRECT_ROLES[role] && zone === "special" && need === "practice" ? " data-special-education-diagnostic" : "";
+    if(DIRECT_ROLES[role] || need !== "practice") return "";
+    return zone === "special" ? " data-special-education-diagnostic" : zone === "epal" ? " data-epal-practice-map" : "";
   }
 
   function practiceExtra(c){
     const { role, zone, need } = finderState;
-    if(DIRECT_ROLES[role] || zone !== "high" || need !== "practice") return "";
-    return `<a class="home-v9-finder__extra" href="#" data-epal-practice-map>${escapeHtml(`${c.ctaPractice} ${c.mapEpal}`)} <span aria-hidden="true">→</span></a>`;
+    if(DIRECT_ROLES[role] || need !== "practice" || zone === "preschool" || zone === "special") return "";
+    const exact = `<a class="home-v9-finder__extra" href="/study.html?zone=${zone === "epal" ? "high" : zone}&mode=practice${zone === "epal" ? "&schoolType=epal" : ""}">${isEnglish() ? "Know your unit? Practise that unit →" : "Ξέρεις την ενότητα; Κάνε εξάσκηση σε αυτή →"}</a>`;
+    const epal = zone === "high" ? `<a class="home-v9-finder__extra" href="/high/student/tutor?schoolType=epal" data-epal-practice-map>${escapeHtml(`${c.ctaPractice} ${c.mapEpal}`)} <span aria-hidden="true">→</span></a>` : "";
+    return exact + epal;
   }
 
   function chip(kind, value, label, pressed, extra){
@@ -290,14 +308,32 @@
     const needs = Object.entries(c.finderNeeds).map(([id,label]) => chip("need", id, label, finderState.need === id)).join("");
     const note = finderNote(c);
     const step = (title, chips) => `<div class="home-v9-finder__step" role="group" aria-label="${escapeHtml(title)}"><span class="home-v9-finder__step-title" aria-hidden="true">${title}</span><div class="home-v9-finder__chips">${chips}</div></div>`;
-    const schoolSteps = DIRECT_ROLES[finderState.role] ? "" : step(c.stepZone, zones) + step(c.stepNeed, needs);
+    const intent = shortcutIntent();
+    const schoolSteps = DIRECT_ROLES[finderState.role] ? "" : step(c.stepZone, zones) + (intent ? "" : step(c.stepNeed, needs));
+    const title = intent ? (intent === "tools" ? (isEnglish() ? "Find tools for your level" : "Εργαλεία για τη βαθμίδα σου") : (isEnglish() ? "Open AI Help" : "Άνοιξε την AI Βοήθεια")) : c.stepsLabel;
     mount.innerHTML = `
-      <p class="home-v9-finder__label" id="homeV8FinderTitle">${c.stepsLabel}</p>
+      <h2 class="home-v9-finder__label" id="homeV8FinderTitle" tabindex="-1">${title}</h2>
       ${step(c.stepRole, roles)}
       ${schoolSteps}
       <p class="home-v9-finder__note" aria-live="polite"${note ? "" : " hidden"}>${note ? ICON.shield + `<span>${escapeHtml(note)}</span>` : ""}</p>
       <a class="home-v9-finder__cta" id="homeV9FinderCta" href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>
       ${practiceExtra(c)}`;
+  }
+
+  function ensureEntryLinks(){
+    const intro = document.querySelector(".home-v9-intro");
+    const finder = document.getElementById("homeV9Finder");
+    if(!intro || !finder) return;
+    let entry = document.getElementById("homeIntentLinks");
+    if(!entry){ entry=document.createElement("div"); entry.id="homeIntentLinks"; intro.insertBefore(entry,finder); }
+    const en=isEnglish();
+    entry.innerHTML=`<div class="home-intent-actions"><a href="#homeV8FinderTitle">${en ? "Find help for your learning" : "Βρες βοήθεια για το διάβασμα"}</a><a href="/ti-thelo-na-kano-me-ai.html">${en ? "Find an AI tool for a task" : "Βρες AI εργαλείο για μια δουλειά"}</a></div>
+      <nav class="home-audience-links" aria-label="${en ? "Dedicated pathways" : "Ξεχωριστές διαδρομές"}">
+        <a href="/high/student/tutor?schoolType=epal">ΕΠΑΛ</a>
+        <a href="/special-education.html">${en ? "Special education" : "Ειδική Αγωγή"}</a>
+        <a href="/sign-language.html">${en ? "Greek Sign Language" : "Ελληνική Νοηματική"}</a>
+        <a href="/higher-education-pilot.html">${en ? "University students · Pilot" : "Φοιτητές · Πιλοτικό"}</a>
+      </nav>`;
   }
 
   // Quick-action chips inside a "three ways" card (same look as the AI Help "Open for" links).
@@ -318,9 +354,10 @@
             <h3 id="homeV8AiTitle">${c.aiTitle}</h3>
             <p class="home-v8-helper-desc">${c.aiDesc}</p>
             <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
-              <summary title="GPT-OSS 120B · Cloudflare Workers AI → Groq · Puter optional">${c.aiTechSummary}</summary>
+              <summary>${c.aiTechSummary}</summary>
               <p>${c.aiTechText} <a href="/ai-transparency.html">${c.aiTechLink}</a></p>
             </details>
+            <a class="home-v9-study-way__cta" href="/tools/ai-help.html">${isEnglish() ? "Find your AI Help pathway" : "Βρες τη σωστή διαδρομή AI Βοήθειας"}</a>
             <p class="home-v9-way__links-label">${c.aiLinksLabel}</p>
             <div class="home-v8-helper-links home-v8-ai__links">
               <a href="/primary/guardian/tutor">${c.aiPrimary}</a>
@@ -337,7 +374,7 @@
             <p class="home-v8-helper-desc">${c.studyDesc}</p>
             <p class="home-v9-study-way__official"><strong>${c.studyOfficial}</strong><small>${c.studyCoverage}</small></p>
             <p class="home-v9-way__links-label">${c.studyGoalsLabel}</p>
-            <div class="home-v8-helper-links">${wayChips(c.studyGoals, (id) => `/study.html?mode=${id}`)}</div>
+            <div class="home-v8-helper-links">${wayChips(c.studyGoals, (id) => id === "pdf" ? "/study.html#studyNotes" : `/study.html?mode=${id}`)}</div>
             <a class="home-v9-way__action" href="/study.html">${c.studyCta}</a>
           </section>
 
@@ -503,7 +540,7 @@
     if(url.origin !== location.origin || !isSpaRoute(url.pathname)) return false;
     history.pushState({}, "", url.pathname + url.search + url.hash);
     window.dispatchEvent(new PopStateEvent("popstate"));
-    window.scrollTo({top:0, behavior:"smooth"});
+    window.scrollTo({top:0, behavior:matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
     return true;
   }
 
@@ -514,6 +551,7 @@
     hideLegacyHomeBlocks();
     ensureAccessibilityBadge();
     renderFinder();
+    ensureEntryLinks();
     ensureMainShell();
     ensureEngSection();
     document.getElementById("homeV8FooterExtra")?.remove();
@@ -524,7 +562,22 @@
   window.AITOOLSKIDS_REFRESH_HOME=apply;
 
   function applyHashIntent(){
-    if(!isHome() || location.hash !== "#homeV8MapTitle") return;
+    if(!isHome()) return;
+    if(location.hash === "#open-help" || location.hash === "#homeV8AiTitle"){location.replace("/tools/ai-help.html");return;}
+    const intent = shortcutIntent();
+    if(intent){
+      finderState.need = intent;
+      renderFinder();
+      if(shortcutSelectionMade){
+        const link=document.getElementById("homeV9FinderCta");
+        if(link && !openSpaRoute(link)) location.assign(link.href);
+      } else {
+        document.getElementById("homeV8FinderTitle")?.focus({preventScroll:true});
+        document.getElementById("homeV9Finder")?.scrollIntoView({block:"start"});
+      }
+      return;
+    }
+    if(location.hash !== "#homeV8MapTitle") return;
     if(DIRECT_ROLES[finderState.role]) finderState.role = "guardian";
     if(finderState.zone === "preschool") finderState.zone = "primary";
     finderState.need = "practice";
@@ -543,10 +596,12 @@
 
       const finderChip = target.closest("#homeV9Finder [data-finder-role], #homeV9Finder [data-finder-zone], #homeV9Finder [data-finder-need]");
       if(finderChip){
+        if(finderChip.dataset.finderRole || finderChip.dataset.finderZone) shortcutSelectionMade = true;
         if(finderChip.dataset.finderRole) finderState.role = finderChip.dataset.finderRole;
         if(finderState.role === "student" && finderState.zone === "preschool") finderState.zone = "primary";
         if(finderChip.dataset.finderZone) finderState.zone = finderChip.dataset.finderZone;
         if(finderChip.dataset.finderNeed) finderState.need = finderChip.dataset.finderNeed;
+        if(shortcutSelectionMade){try {sessionStorage.setItem("aitools4kidsShortcutSelection",JSON.stringify({role:finderState.role,zone:finderState.zone}));} catch {}}
         const kind = finderChip.dataset.finderRole ? "role" : finderChip.dataset.finderZone ? "zone" : "need";
         renderFinder();
         document.querySelector(`#homeV9Finder [data-finder-${kind}="${finderState[kind]}"]`)?.focus();
@@ -554,7 +609,7 @@
       }
 
       const spaLink = target.closest("#homeV8Shell a[href], #homeV9Top a[href]");
-      if(spaLink && isHome() && openSpaRoute(spaLink)){
+      if(spaLink && !spaLink.hasAttribute("data-epal-practice-map") && !event.defaultPrevented && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0 && isHome() && openSpaRoute(spaLink)){
         event.preventDefault();
         return;
       }

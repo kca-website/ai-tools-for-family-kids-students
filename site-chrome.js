@@ -63,10 +63,14 @@
     return null;
   }
 
+  function robotMark(){
+    return '<span class="chrome-brand__mark" aria-hidden="true"><img src="/assets/icons/app-icon.svg" alt="" width="36" height="36" decoding="async" style="display:block;width:36px;height:36px;border-radius:10px"></span>';
+  }
+
   function headerMarkup(){
     return `
       <div class="chrome-header__inner">
-        <a class="chrome-brand" href="https://www.aitools4kids.gr/"><span class="chrome-brand__mark" aria-hidden="true">ai</span><span>aitools4kids.gr</span></a>
+        <a class="chrome-brand" href="https://www.aitools4kids.gr/">${robotMark()}<span>aitools4kids.gr</span></a>
         <nav class="chrome-nav" data-chrome-aria="navLabel">
           <a href="/#open-tools" data-chrome="tools"></a>
           <a href="/study.html" data-chrome="study"></a>
@@ -110,7 +114,7 @@
     return `
       <div class="chrome-footer__inner">
         <div class="chrome-footer__about">
-          <p class="chrome-footer__brand"><span class="chrome-brand__mark" aria-hidden="true">ai</span>aitools4kids.gr</p>
+          <p class="chrome-footer__brand">${robotMark()}aitools4kids.gr</p>
           <p data-chrome="footerText"></p>
           ${audit ? '<p class="chrome-footer__audit" data-chrome-audit></p>' : ""}
           <p class="chrome-footer__extra"><a href="/methodology.html" data-chrome="methodology"></a> · <a href="/report-error.html" data-chrome="report"></a></p>

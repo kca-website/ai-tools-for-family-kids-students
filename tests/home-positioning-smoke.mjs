@@ -29,10 +29,12 @@ try {
   await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
-  assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα.');
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Δωρεάν βοήθεια για σχολείο, γονείς και εκπαιδευτικούς. Μελέτησε μια σχολική ενότητα ή τις σημειώσεις/PDF σου εδώ, κάνε εξάσκηση ή βρες το κατάλληλο AI εργαλείο.');
+  assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί. Για γονείς, μαθητές 6 έως 18 αλλά και εκπαιδευτικούς.');
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.ok(await page.locator('#heroGslBadge').count());
+  assert.equal(await page.locator('.hero__subtitle + #homePracticeEntry').count(), 1, 'Practice entry belongs directly below the hero message');
+  assert.equal(await page.locator('#homePracticeEntry').getAttribute('href'), '#homeV8MapTitle');
 
   // v10: "who are you" finder is the single entry to school levels; the zone grid stays only as a hidden fallback.
   const roles = await page.locator('#homeV9Finder [data-finder-role]').evaluateAll((els) => els.map((el) => el.dataset.finderRole));
@@ -107,7 +109,7 @@ try {
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => /University student/.test(document.querySelector('#homeV9Finder')?.textContent || ''));
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Free learning support for school, parents and educators. Study a school unit or your notes/PDF here, practise, or find the right AI tool.');
+  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'See in 2 minutes where the student or the parent could use a bit more practice, and which free AI tool fits exactly there. For parents, students 6 to 18, and educators.');
   await finderPick(page, 'role', 'teacher');
   assert.match(await page.locator('#homeV9FinderCta').innerText(), /Open the educator tools/);
   assert.match(await page.locator('#homeV9Teacher').innerText(), /For educators/);

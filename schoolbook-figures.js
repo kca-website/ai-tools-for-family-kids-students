@@ -1,12 +1,14 @@
 // Preserve image-only formulas/tables as part of the official source. This is
 // optical transcription, never an invitation to calculate or add explanations.
 const cheerio = require('cheerio');
+const { scopeOfficialHtmlPage } = require('./schoolbook-section');
 const { generateChat } = require('./ai-provider-router');
 const { getStudyCache, setStudyCache } = require('./study-runtime-cache');
 const { createHash } = require('node:crypto');
 const parse = text => { try { return JSON.parse(String(text).replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'')); } catch { return null; } };
 
-async function transcribeOfficialFigures(html, pageUrl) {
+async function transcribeOfficialFigures(html, pageUrl, {topic = ''} = {}) {
+  html = scopeOfficialHtmlPage(html, topic);
   const $ = cheerio.load(html);
   const root = $('#eclass_ebook_body').length ? $('#eclass_ebook_body') : $('main,article,body').first();
   const figures = [];
@@ -18,7 +20,7 @@ async function transcribeOfficialFigures(html, pageUrl) {
     figures.push({id:'f'+(figures.length+1),url:url.href,el});
   });
   if (!figures.length) return html;
-  const key = {kind:'official-figure-transcription-v1',pageUrl,htmlHash:createHash('sha256').update(html).digest('hex')};
+  const key = {kind:'official-figure-transcription-v2',pageUrl,htmlHash:createHash('sha256').update(html).digest('hex')};
   let texts = await getStudyCache(key);
   if (!texts) {
     texts = {};
@@ -41,9 +43,9 @@ async function transcribeOfficialFigures(html, pageUrl) {
       const result = await generateChat({messages:[{role:'user',content}],providerOrder:['gemini'],maxTokens:6000,temperature:0,responseFormat:{type:'json_object'},validateText:valid,timeoutMs:30000});
       if (!result.ok || !valid(result.text)) throw new Error('official_figure_transcription_unavailable');
       const proposals = parse(result.text).figures;
-      const verification = await generateChat({messages:[{role:'user',content:[{type:'text',text:'Check these optical transcriptions against the SAME images. Reject invented text, incorrect symbols or numbers. Empty text is acceptable only for a photo, icon or image without educational text. Return ONLY JSON {"checks":[{"id":"f1","supported":true}]}, every supplied image id. Transcriptions: '+JSON.stringify(proposals)},...content.slice(1)]}],providerOrder:['gemini'],maxTokens:1200,temperature:0,responseFormat:{type:'json_object'},timeoutMs:30000,validateText:text=>{const c=parse(text)?.checks;return Array.isArray(c)&&c.length===group.length&&group.every(f=>c.filter(r=>r.id===f.id&&r.supported===true).length===1);}});
-      if (!verification.ok) throw new Error('official_figure_transcription_not_verified');
-      for (const row of proposals) texts[row.id] = row.text;
+      const verification = await generateChat({messages:[{role:'user',content:[{type:'text',text:'Independently check these optical transcriptions against the SAME images. Return corrected exact text for visible formulas, numeric tables, labels and explanatory text. Remove invented text and fix misread symbols or numbers, using only what is visible. Do not correct mathematical mistakes printed in the image or compute results. Return empty text for a photo, illustration without essential text, page number, logo or icon. Return ONLY JSON {"figures":[{"id":"f1","text":"exact optical transcription or empty string"}]}, every supplied image id. Proposed transcriptions: '+JSON.stringify(proposals)},...content.slice(1)]}],providerOrder:['gemini'],maxTokens:6000,temperature:0,responseFormat:{type:'json_object'},timeoutMs:30000,validateText:valid});
+      if (!verification.ok || !valid(verification.text)) throw new Error('official_figure_transcription_not_verified');
+      for (const row of parse(verification.text).figures) texts[row.id] = row.text;
     }
     await setStudyCache(key,texts,86400);
   }

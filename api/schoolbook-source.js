@@ -1894,8 +1894,16 @@ module.exports = async function handler(req, res) {
 
     if (directUrls.length) {
       sourceUrls = directUrls;
+      const gelAnchorScoped = gelInventory?.runtimeEligible && gelInventory.mapping?.granularity === "section-anchor";
       let pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
-      if (completeAudio) pages = await Promise.all(pages.map((html,i) => html ? transcribeOfficialFigures(html, sourceUrls[i]) : html));
+      if (completeAudio) pages = await Promise.all(pages.map((html,i) => {
+        if (!html) return html;
+        if (gelAnchorScoped) {
+          html = selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping, "html");
+          if (!html) throw new Error("section_heading_not_resolved");
+        }
+        return transcribeOfficialFigures(html, sourceUrls[i], {topic:gelAnchorScoped ? gelInventory.mapping.heading : topic});
+      }));
       if (pages.some((html) => !html)) {
         return res.status(404).json({
           grounded: false,
@@ -1905,15 +1913,10 @@ module.exports = async function handler(req, res) {
           message: "Μία ή περισσότερες επίσημες σελίδες της ενότητας δεν ήταν διαθέσιμες."
         });
       }
-      const gelAnchorScoped =
-        gelInventory?.runtimeEligible &&
-        gelInventory.mapping?.granularity === "section-anchor";
-
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
       if (completeAudio) {
         combinedText = pages.map((html, i) => {
-          const selected = gelAnchorScoped ? selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping, true) : null;
-          const text = selected !== null ? completeText(selected, topic) : extractCompletePage(html, { topic, sourceUrl: sourceUrls[i] }).text;
+          const text = extractCompletePage(html, { topic:gelAnchorScoped ? gelInventory.mapping.heading : topic, sourceUrl: sourceUrls[i] }).text;
           return "[Official page: " + sourceUrls[i] + "]\n" + text;
         }).join("\n\n");
       } else if(characterChapter){
@@ -1985,13 +1988,13 @@ module.exports = async function handler(req, res) {
         });
       }
       let pages = await Promise.all((completeAudio ? sourceUrls : sourceUrls.slice(0, 12)).map(fetchOfficialHtml));
-      if (completeAudio) pages = await Promise.all(pages.map((html,i) => html ? transcribeOfficialFigures(html, sourceUrls[i]) : html));
+      if (completeAudio) pages = await Promise.all(pages.map((html,i) => html ? transcribeOfficialFigures(html, sourceUrls[i], {topic}) : html));
       combinedText = completeAudio ? pages.map((html, i) => "[Official page: " + sourceUrls[i] + "]\n" + extractCompletePage(html, { topic, sourceUrl: sourceUrls[i] }).text).join("\n\n") : distributeOfficialPages(pages, sourceUrls, 42000);
     } else {
       const sourceUrl = new URL(path, book.base).toString();
       sourceUrls = [sourceUrl];
       let html = await fetchOfficialHtml(sourceUrl);
-      if (completeAudio && html) html = await transcribeOfficialFigures(html, sourceUrl);
+      if (completeAudio && html) html = await transcribeOfficialFigures(html, sourceUrl, {topic});
       if (!html) {
         return res.status(404).json({
           grounded: false,
@@ -3098,7 +3101,7 @@ function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping, complete = fa
   const normalizeScopedHeading = (value) =>
     normalize(value).replace(/(^|\s)ε\s+(\d+)(?=\s|$)/g, "$1ε$2");
   if (!scoped || !normalizeScopedHeading(scoped).includes(normalizeScopedHeading(mapping.heading))) return "";
-  return complete ? extractCompletePage(String(rawHtml).slice(current.offset, endOffset), {topic:mapping.heading, sourceUrl}).text : scoped;
+  return complete === "html" ? String(rawHtml).slice(current.offset, endOffset) : (complete ? extractCompletePage(String(rawHtml).slice(current.offset, endOffset), {topic:mapping.heading, sourceUrl}).text : scoped);
 }
 
 function decodeEntities(s) {

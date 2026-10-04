@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
   const explanation = activity === 'explain';
   if (!sid || !selectedTopic) return res.status(400).json({ error: 'official_source_identity_required', message: 'Λείπει η επαληθεύσιμη ταυτότητα της επίσημης σχολικής πηγής.' });
 
-  const sourceKey = { kind: activity === 'audio' ? 'official-complete-audio-source-v2' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
+  const sourceKey = { kind: activity === 'audio' ? 'official-complete-audio-source-v3' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
   try {
     let officialSource = await getStudyCache(sourceKey);
   if (!officialSource?.grounded || !officialSource?.text || (activity === 'audio' && officialSource.sourceCompleteness?.parserVersion !== COMPLETE_SOURCE_VERSION)) {

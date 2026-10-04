@@ -1,6 +1,6 @@
 // The complete-source contract used by audio. Legacy excerpts remain unchanged.
 const cheerio = require('cheerio');
-const VERSION = 'complete-section-v2';
+const VERSION = 'complete-section-v3';
 const norm = value => String(value || '').normalize('NFKD').replace(/\p{M}/gu, '').replace(/\s+/g, ' ').trim().toLowerCase();
 const reviewHeading = value => /^(?:ερωτησεις(?:\s.*)?|ασκησεις(?:\s.*)?|ερωτησεις\s*[-–]\s*ασκησεις|σταση για εμπεδωση|δραστηριοτητες|προτασεις για δραστηριοτητες|παιχνιδι αυτοαξιολογησης|αξιολογω τι εμαθα|questions|review questions|exercises)$/i.test(norm(value).replace(/^\d+\s*/, ''));
 
@@ -86,4 +86,25 @@ function completeText(text, topic) {
   const blocks = String(text || '').split(/\n+/).map(text => ({ text: text.trim(), heading: /^\d+(?:\.\d+)+\s/.test(text.trim()) })).filter(b => b.text);
   return scopeBlocks(blocks, topic, { mappedBody: true }).map(b => b.text).join('\n\n');
 }
-module.exports = { VERSION, extractCompletePage, scopeBlocks, completeText };
+function scopeOfficialHtmlPage(html, topic) {
+  const $ = cheerio.load(String(html || ''));
+  $('nav,header,footer,select,script,style,#eclass_ebook_header,.toc,#toc').remove();
+  const root = $('#eclass_ebook_body').first().length ? $('#eclass_ebook_body').first() : $('main,article,body').first();
+  const raw = root.html() || '';
+  const headingPattern = /<(h[1-6]|p)\b([^>]*)>[\s\S]*?<\/\1>/gi;
+  const headings = [];
+  for (const m of raw.matchAll(headingPattern)) {
+    if (m[1].toLowerCase() === 'p' && !/class=["'][^"']*\b(?:unit|title|subtitle_black)\b/.test(m[2])) continue;
+    const text = cheerio.load(m[0]).text().replace(/\s+/g,' ').trim();
+    headings.push({ offset:m.index, text, code:text.match(/^(\d+(?:\.\d+)*)(?=\s|[.)])/)?.[1] });
+  }
+  const code = String(topic || '').match(/\b\d+(?:\.\d+)+\b/)?.[0];
+  const title = norm(String(topic || '').split(/\s[—–]\s/).at(-1)).replace(/^\d+[.)]?\s*/,'');
+  const candidates = headings.filter(h => code ? h.code === code : title.length > 8 && norm(h.text).includes(title));
+  for (const selected of candidates) {
+    const next = headings.find(h => h.offset > selected.offset && h.code && selected.code && h.code !== selected.code && h.code.split('.').length <= selected.code.split('.').length);
+    if (next) return '<div id="eclass_ebook_body">' + raw.slice(selected.offset,next.offset) + '</div>';
+  }
+  return '<div id="eclass_ebook_body">' + raw + '</div>';
+}
+module.exports = { VERSION, extractCompletePage, scopeBlocks, completeText, scopeOfficialHtmlPage };

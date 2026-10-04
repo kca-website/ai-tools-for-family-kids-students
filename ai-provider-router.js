@@ -455,7 +455,7 @@ function isModelSpecificCloudflareCode(code) {
 
 function shouldTryNextModel(result, provider) {
   const status = Number(result?.status || 0);
-  if (provider === 'gemini') return status === 404;
+  if (provider === 'gemini') return status === 404 || result?.error === 'invalid_output' || result?.error === 'incomplete_response';
   if (provider === 'cloudflare') {
     if (Number(result?.providerCode) === 3036) return false;
     if (isModelSpecificCloudflareCode(result?.providerCode)) return true;

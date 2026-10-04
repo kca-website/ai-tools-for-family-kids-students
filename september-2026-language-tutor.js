@@ -26,11 +26,6 @@
     }
   };
 
-  // AI Study is fail-closed on an exact official schoolbook source. The skill-based
-  // annual-guidance labels above are useful for tutoring, but B Gymnasium Greek's
-  // server resolver is deliberately unit-based (1η–9η ενότητα). On /study, expose
-  // the exact official textbook units instead of offering a skill label that the
-  // source resolver cannot safely map to one textbook excerpt.
   const STUDY_B_GYM_BOOK_UNITS = [
     ["1η ενότητα — Από τον τόπο μου σ' όλη την Ελλάδα","Unit 1 — From my local area across Greece"],
     ["2η ενότητα — Ζούμε με την οικογένεια","Unit 2 — Living with the family"],
@@ -52,7 +47,6 @@
   }
 
   function isGreekLanguage(subject){
-    // accent-insensitive; Ancient Greek and Latin are separate courses, not Modern Greek language
     const s = `${subject?.subjectLabelEl || ""} ${subject?.id || ""}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return /νεοελλην|γλωσσα/.test(s) && !/αγγλ|english|ξεν|αρχαι|λατιν/.test(s);
   }
@@ -126,4 +120,47 @@
     getSubject(zoneId,gradeId,subjectId){ return (zones?.[zoneId]?.[gradeId] || []).find(x=>x.id===subjectId || x.quizId===subjectId) || null; }
   });
   window.AITOOLSKIDS_LANGUAGE_TUTOR_REFRESH = Object.freeze({updated:DATE,gradeSets:updated,mode:"data-only"});
+
+  function installPrimaryStudyReview(){
+    if(!isStudyPage() || window.__AITOOLSKIDS_PRIMARY_REVIEW__) return;
+    window.__AITOOLSKIDS_PRIMARY_REVIEW__=true;
+    const nativeFetch=window.fetch.bind(window);
+    window.fetch=async function(input,init){
+      const url=typeof input==="string"?input:String(input?.url||"");
+      const isTutor=url==="/api/tutor-assistant"||url.endsWith("/api/tutor-assistant");
+      if(!isTutor || !init || typeof init.body!=="string") return nativeFetch(input,init);
+      let payload=null;
+      try{ payload=JSON.parse(init.body); }catch(_){ return nativeFetch(input,init); }
+      const primary=payload?.audience==="study_user" && /-dimotikou$/i.test(String(payload?.subjectId||""));
+      const aiOnly=primary && payload?.documentKind!=="official_schoolbook" && payload?.documentKind!=="user_upload";
+      if(!aiOnly) return nativeFetch(input,init);
+      const safetyRule=(document.documentElement.lang||"el").startsWith("en")
+        ? "PRIMARY AI-ONLY MODE: this topic is not tied to an exact textbook excerpt. Keep only stable primary-school facts, avoid uncertain dates/numbers/names, do not invent examples that could be mistaken for textbook facts, and prefer simple wording. The answer will be independently reviewed before display."
+        : "ΛΕΙΤΟΥΡΓΙΑ ΔΗΜΟΤΙΚΟΥ ΜΕ ΕΛΕΓΧΟ AI: το θέμα δεν είναι δεμένο με ακριβές απόσπασμα σχολικού βιβλίου. Χρησιμοποίησε μόνο σταθερές γνώσεις επιπέδου Δημοτικού, απόφυγε αβέβαιες ημερομηνίες/αριθμούς/ονόματα, μην επινοείς παραδείγματα που μπορεί να εκληφθούν ως γεγονότα του βιβλίου και γράψε απλά. Η απάντηση θα περάσει από ανεξάρτητο δεύτερο έλεγχο πριν εμφανιστεί.";
+      payload.context=String(payload.context||"").trim()+"\n\n"+safetyRule;
+      const first=await nativeFetch(input,{...init,body:JSON.stringify(payload)});
+      if(!first.ok) return first;
+      const body=await first.clone().json().catch(()=>null);
+      if(!body?.text) return first;
+      const review=await nativeFetch("/api/primary-ai-review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({subjectId:payload.subjectId,subject:payload.subject,grade:payload.grade,topic:payload.topic,activity:payload.activity,language:(document.documentElement.lang||"el").startsWith("en")?"en":"el",text:body.text})});
+      const checked=await review.json().catch(()=>null);
+      if(!review.ok||!checked?.text){
+        return new Response(JSON.stringify({error:"primary_ai_review_failed",message:(document.documentElement.lang||"el").startsWith("en")?"The primary-school answer did not pass the second AI check. Please try again.":"Η απάντηση Δημοτικού δεν πέρασε τον δεύτερο έλεγχο AI. Δοκίμασε ξανά."}),{status:422,headers:{"Content-Type":"application/json"}});
+      }
+      return new Response(JSON.stringify({...body,text:checked.text,aiReviewed:true,reviewMode:checked.reviewMode||"primary-ai-second-pass"}),{status:200,headers:{"Content-Type":"application/json","Cache-Control":"no-store"}});
+    };
+  }
+  installPrimaryStudyReview();
+
+  window.AITOOLSKIDS_STUDY_GROUNDING_POLICY=Object.freeze({
+    version:"2026-10-04",
+    classify({zone,subjectId,topic}={}){
+      const z=String(zone||"");
+      const sid=String(subjectId||"");
+      const row=window.AITOOLSKIDS_GENERAL_ED_BOOK_SECTIONS_2026_2027?.get?.(sid)||null;
+      if(row?.groundedSections && Object.prototype.hasOwnProperty.call(row.groundedSections,String(topic||""))) return "official-exact";
+      if(z==="primary" || /-dimotikou$/i.test(sid)) return "primary-ai-reviewed";
+      return "official-runtime-required";
+    }
+  });
 })();

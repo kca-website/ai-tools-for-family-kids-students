@@ -79,7 +79,7 @@ jobs:
           console.log('PRIMARY_MATH_A_COMPLETE_BUNDLES=9');
           NODE
           node --check api/schoolbook-source.js
-          npm run audit:grounding > /tmp/grounding.json
+          node scripts/grounding-coverage-report.mjs > /tmp/grounding.json
           node - <<'NODE'
           const fs = require('fs');
           const r = JSON.parse(fs.readFileSync('/tmp/grounding.json','utf8'));
@@ -88,6 +88,7 @@ jobs:
             throw new Error('Math A audit did not reach 9/9: ' + JSON.stringify(mathA));
           }
           console.log('PRIMARY_MATH_A_AUDIT=' + JSON.stringify(mathA));
+          console.log('PRIMARY_TOTAL=' + r.primary.grounded + '/' + r.primary.total + '; pending=' + r.primary.pending);
           NODE
 
       - name: Commit runtime activation

@@ -3373,26 +3373,10 @@ function truncateAt(text, marker) {
 
 function selectUsefulText(text, topic) {
   const full = String(text || "").trim();
-  if (full.length <= 42000) return full;
-
-  const words = normalize(topic)
-    .split(" ")
-    .filter(w => w.length >= 4 && !["κεφαλαιο", "ενοτητα", "γυμνασιου"].includes(w))
-    .slice(0, 12);
-
-  if (!words.length) return full.slice(0, 42000);
-
-  const norm = normalize(full);
-  let best = -1;
-  for (const word of words) {
-    const i = norm.indexOf(word);
-    if (i >= 0 && (best < 0 || i < best)) best = i;
-  }
-
-  // Normalized offsets are approximate; keep a broad window around the section body.
-  if (best < 0) return full.slice(0, 42000);
-  const start = Math.max(0, best - 4000);
-  return full.slice(start, start + 42000);
+  // Do not relevance-window long already-resolved sections. Downstream study actions
+  // (especially whole-chapter audio) need the complete chapter in chronological order.
+  // The API response still applies its explicit 42k safety cap after curriculum scoping.
+  return full;
 }
 
 async function resolveOfficialSchoolbookSource(rawSubject, rawTopic) {

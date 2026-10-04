@@ -171,11 +171,36 @@
       };
     }
 
-    // The study page historically performed a preliminary /api/schoolbook-source
-    // request before asking /api/source-summary for audio. That preflight could
-    // return 404 for a valid broad textbook unit even though source-summary can
-    // resolve it safely on the server. Intercept only the built-in "audio" action
-    // and let the server be the single source-of-truth for official grounding.
+    async function primaryReviewedAudio(subjectId,topic){
+      const en=isEn();
+      const grade=document.getElementById("grade")?.selectedOptions?.[0]?.textContent?.trim()||"";
+      const subject=document.getElementById("subject")?.selectedOptions?.[0]?.textContent?.trim()||subjectId;
+      const strict=en
+        ? "Create a concise spoken mini-lesson for a primary-school learner about the selected topic. Use only stable, widely accepted primary-school facts. Avoid uncertain dates, numbers, names and advanced detail. Do not invent textbook claims. Keep it clear and age-appropriate."
+        : "Φτιάξε ένα σύντομο προφορικό μικρομάθημα για μαθητή Δημοτικού πάνω στο επιλεγμένο θέμα. Χρησιμοποίησε μόνο σταθερές και ευρέως αποδεκτές γνώσεις επιπέδου Δημοτικού. Απόφυγε αβέβαιες ημερομηνίες, αριθμούς, ονόματα και προχωρημένες λεπτομέρειες. Μην επινοείς πράγματα σαν να προέρχονται από σχολικό βιβλίο. Γράψε καθαρά και κατάλληλα για την ηλικία.";
+      const res=await fetch("/api/tutor-assistant",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          context:strict,
+          prompt:(en?"Topic: ":"Θέμα: ")+topic,
+          audience:"study_user",
+          task:"guided_task",
+          mode:"understand",
+          activity:"audio",
+          cacheEligible:false,
+          grade,subject,subjectId,topic,
+          studyContext:{sourcePolicy:"primary_ai_reviewed"},
+          documentText:"",documentName:"",documentKind:"",documentSourceUrl:""
+        })
+      });
+      const body=await res.json().catch(()=>({}));
+      if(!res.ok||!body?.text)throw new Error(body?.message||(en?"The primary-school audio lesson did not pass the AI check.":"Το ακουστικό μάθημα Δημοτικού δεν πέρασε τον έλεγχο AI."));
+      return body;
+    }
+
+    // Audio prefers exact official grounding. Primary-school topics are allowed a
+    // second-pass AI-reviewed fallback when an exact section is not mapped yet.
     async function runVerifiedAudioDirectly(button){
       const en=isEn();
       const subjectEl=document.getElementById("subject");
@@ -211,12 +236,20 @@
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify({subjectId,topic,sourceTitle:"",language:en?"en":"el",activity:"audio"})
         });
-        const body=await res.json().catch(()=>({}));
-        if(!res.ok||!body?.text)throw new Error(body?.message||(en?"Could not create the audio lesson.":"Δεν δημιουργήθηκε το ακουστικό μάθημα."));
+        let body=await res.json().catch(()=>({}));
+        let primaryFallback=false;
+        if((!res.ok||!body?.text) && /-dimotikou$/i.test(subjectId)){
+          body=await primaryReviewedAudio(subjectId,topic);
+          primaryFallback=true;
+        }else if(!res.ok||!body?.text){
+          throw new Error(body?.message||(en?"Could not create the audio lesson.":"Δεν δημιουργήθηκε το ακουστικό μάθημα."));
+        }
         output.textContent=body.text;
-        if(provider)provider.textContent=body.verified
-          ?(en?"Summary of the key ideas, checked against the official section.":"Σύνοψη των βασικών σημείων, ελεγμένη πάνω στην επίσημη ενότητα.")
-          :(en?"Official-source summary":"Σύνοψη επίσημης πηγής");
+        if(provider)provider.textContent=primaryFallback
+          ?(en?"Two-stage AI check · no exact textbook excerpt":"Έλεγχος AI δύο σταδίων · χωρίς ακριβές απόσπασμα βιβλίου")
+          : body.verified
+            ?(en?"Summary of the key ideas, checked against the official section.":"Σύνοψη των βασικών σημείων, ελεγμένη πάνω στην επίσημη ενότητα.")
+            :(en?"Official-source summary":"Σύνοψη επίσημης πηγής");
         document.getElementById("audioControls")?.classList.remove("hidden");
         document.getElementById("resultTools")?.classList.remove("hidden");
         document.getElementById("altAi")?.classList.remove("hidden");

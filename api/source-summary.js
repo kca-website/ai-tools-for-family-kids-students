@@ -83,9 +83,15 @@ module.exports = async function handler(req, res) {
   // Audio must represent the whole selected chapter, not only the most topic-dense excerpt.
   // Build a coverage-preserving source: evenly sample the chapter from beginning to end
   // when it is too large for one model request. Other activities keep topic-focused compaction.
-  const workingSource = audioLesson
-    ? compactSourceForWholeChapter(source, 15000)
-    : compactSourceForTopic(source, selectedTopic, 6500);
+  // Audio uses a map/reduce pipeline over the complete resolved chapter.
+  // Every sequential segment is summarized and verified before the final lesson is assembled.
+  if (audioLesson) {
+    return handleWholeChapterAudio({
+      req, res, source, title, sid, selectedTopic, lang, aiStatus, startedAt: Date.now()
+    });
+  }
+
+  const workingSource = compactSourceForTopic(source, selectedTopic, 6500);
   const cacheParts = {
     kind: 'verified-source-summary',
     promptVersion: 'verified-summary-v5-whole-chapter-audio',
@@ -300,6 +306,145 @@ For each candidate:
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({ ...responseBody, cacheHit: false });
 };
+
+async function handleWholeChapterAudio({ res, source, title, sid, selectedTopic, lang, aiStatus, startedAt }) {
+  const segments = splitWholeChapter(source, 5200);
+  const cacheParts = {
+    kind: 'verified-whole-chapter-audio',
+    promptVersion: 'whole-chapter-audio-v1-map-reduce',
+    subjectId: sid,
+    topic: selectedTopic,
+    title,
+    language: lang,
+    modelRoute: routingSignature(aiStatus),
+    source,
+  };
+  const cached = await getStudyCache(cacheParts);
+  if (cached?.text) {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({ ...cached, cacheHit: true });
+  }
+
+  const approvedBySegment = [];
+  let promptTokens = 0, completionTokens = 0, totalTokens = 0, cachedTokens = 0;
+  let lastProvider = null, lastModel = null;
+
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i];
+    const system = lang === 'en'
+      ? `Extract 2–5 essential learner-facing claims from this sequential PART of an official schoolbook chapter.
+Return ONLY JSON: {"claims":[{"claim":"clear paraphrased sentence","evidence":"exact 4–24 word excerpt from PART"}]}.
+Keep the important ideas and explanations needed to understand this part. Omit minor detail. Every claim must be directly supported by its exact evidence. Do not add outside knowledge.`
+      : `Εξήγαγε 2–5 ουσιώδεις προτάσεις για μαθητή από αυτό το διαδοχικό ΤΜΗΜΑ επίσημου σχολικού κεφαλαίου.
+Επίστρεψε ΜΟΝΟ JSON: {"claims":[{"claim":"καθαρή παραφρασμένη πρόταση","evidence":"ακριβές απόσπασμα 4–24 λέξεων από το ΤΜΗΜΑ"}]}.
+Κράτησε τις βασικές ιδέες και τις εξηγήσεις που χρειάζονται για να κατανοηθεί αυτό το τμήμα. Παράλειψε δευτερεύουσες λεπτομέρειες. Κάθε πρόταση πρέπει να στηρίζεται άμεσα στο ακριβές evidence. Μην προσθέτεις εξωτερική γνώση.`;
+
+    const first = await generateChat({
+      messages: [
+        { role: 'system', content: system },
+        { role: 'user', content: `CHAPTER: ${selectedTopic}\nPART ${i + 1} OF ${segments.length}:\n\n${segment}` }
+      ],
+      maxTokens: 750,
+      temperature: 0,
+      reasoningEffort: 'low',
+      modelProfile: 'balanced',
+    });
+    if (!first?.ok || !first.text?.trim()) {
+      return res.status(first?.status === 429 ? 429 : 502).json({
+        error: first?.status === 429 ? 'provider_limit' : 'summary_failed',
+        message: lang === 'en' ? 'Could not process the complete chapter.' : 'Δεν ήταν δυνατή η επεξεργασία ολόκληρου του κεφαλαίου.'
+      });
+    }
+    lastProvider = first.provider || lastProvider; lastModel = first.model || lastModel;
+    promptTokens += Number(first?.usage?.promptTokens || 0);
+    completionTokens += Number(first?.usage?.completionTokens || 0);
+    totalTokens += Number(first?.usage?.totalTokens || 0);
+    cachedTokens += Number(first?.usage?.cachedTokens || 0);
+
+    const parsed = parseJsonObject(first.text);
+    const rows = Array.isArray(parsed?.claims) ? parsed.claims.slice(0, 6) : [];
+    const norm = normalizeForEvidence(segment);
+    const safe = rows.map(row => ({
+      claim: clean(row?.claim, 650),
+      evidence: clean(row?.evidence, 500)
+    })).filter(row => row.claim.length >= 12 && row.evidence.length >= 4 && norm.includes(normalizeForEvidence(row.evidence)));
+
+    // Require representation from every non-trivial segment. This prevents a lesson
+    // that silently stops halfway through the chapter.
+    if (!safe.length) {
+      return res.status(502).json({
+        error: 'incomplete_chapter_coverage',
+        message: lang === 'en'
+          ? `Part ${i + 1} of the chapter could not be verified, so an incomplete lesson was not shown.`
+          : `Δεν επαληθεύτηκε το τμήμα ${i + 1} του κεφαλαίου, οπότε δεν εμφανίστηκε ελλιπές μάθημα.`
+      });
+    }
+    approvedBySegment.push(safe);
+  }
+
+  // Preserve at least one verified idea from every sequential segment, then add
+  // further important ideas in chapter order up to a compact spoken-lesson budget.
+  const selected = [];
+  for (const rows of approvedBySegment) selected.push(rows[0]);
+  for (const rows of approvedBySegment) {
+    for (let i = 1; i < rows.length && selected.length < 24; i++) selected.push(rows[i]);
+  }
+  const orderedClaims = selected.map(row => row.claim);
+
+  const heading = lang === 'en'
+    ? `Audio summary of the whole chapter – ${selectedTopic}`
+    : `Ακουστική περίληψη όλου του κεφαλαίου – ${selectedTopic}`;
+  const paragraphs = [];
+  for (let i = 0; i < orderedClaims.length; i += 3) paragraphs.push(orderedClaims.slice(i, i + 3).join(' '));
+  const finalText = heading + '\n\n' + paragraphs.join('\n\n');
+
+  const responseBody = {
+    text: finalText,
+    verified: true,
+    wholeChapter: true,
+    verification: {
+      segments: segments.length,
+      segmentsCovered: approvedBySegment.length,
+      approved: orderedClaims.length,
+    },
+    provider: lastProvider,
+    model: lastModel,
+    usage: { promptTokens, completionTokens, totalTokens, cachedTokens },
+  };
+  await setStudyCache(cacheParts, responseBody);
+  console.info('AI_METRIC ' + JSON.stringify({
+    event: 'ai_request', task: 'whole_chapter_audio', activity: 'audio',
+    status: 200, cacheHit: false, provider: lastProvider || '', model: lastModel || '',
+    latencyMs: Date.now() - startedAt, segments: segments.length, ...responseBody.usage
+  }));
+  res.setHeader('Cache-Control', 'no-store');
+  return res.status(200).json({ ...responseBody, cacheHit: false });
+}
+
+function splitWholeChapter(source, targetChars = 5200) {
+  const full = String(source || '').trim();
+  if (!full) return [];
+  const size = Math.max(3200, Number(targetChars) || 5200);
+  const out = [];
+  let pos = 0;
+  while (pos < full.length) {
+    let end = Math.min(full.length, pos + size);
+    if (end < full.length) {
+      const floor = pos + Math.floor(size * 0.7);
+      const candidates = [
+        full.lastIndexOf('\n\n', end),
+        full.lastIndexOf('. ', end),
+        full.lastIndexOf('; ', end),
+      ].filter(x => x >= floor);
+      if (candidates.length) end = Math.max(...candidates) + (full.slice(Math.max(...candidates), Math.max(...candidates) + 2) === '. ' ? 1 : 0);
+    }
+    const piece = full.slice(pos, end).trim();
+    if (piece) out.push(piece);
+    if (end <= pos) break;
+    pos = end;
+  }
+  return out.slice(0, 12);
+}
 
 function routingSignature(aiStatus) {
   const providers = Array.isArray(aiStatus?.providers) ? aiStatus.providers : [];

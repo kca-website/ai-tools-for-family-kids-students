@@ -89,7 +89,7 @@ module.exports = async function handler(req, res) {
 async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang, aiStatus }) {
   const cacheKey = {
     kind: 'verified-whole-chapter-audio',
-    promptVersion: 'whole-chapter-audio-v3-complete-safe',
+    promptVersion: 'whole-chapter-audio-v4-expanded-safe',
     subjectId: sid,
     topic: selectedTopic,
     title,
@@ -118,12 +118,15 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
       addUsage(usage, generated.usage);
     }
 
-    const claims = verifiedClaimsFromResponse(generated?.text, segment, 5);
-    if (claims.length) {
-      rowsBySegment.push(claims);
-    } else {
-      rowsBySegment.push(extractiveFallback(segment, 2));
+    let claims = verifiedClaimsFromResponse(generated?.text, segment, 6);
+    if (claims.length < 3) {
+      const fallback = extractiveFallback(segment, 3);
+      for (const row of fallback) {
+        if (claims.length >= 3) break;
+        if (!claims.some(x => normalizeForEvidence(x.claim) === normalizeForEvidence(row.claim))) claims.push(row);
+      }
     }
+    rowsBySegment.push(claims);
   }
 
   const covered = rowsBySegment.filter(rows => rows.length > 0).length;
@@ -136,10 +139,13 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     });
   }
 
+  const claimLimit = Math.min(32, Math.max(18, segments.length * 4));
+  const baseQuota = Math.max(2, Math.floor(claimLimit / segments.length));
+  const remainder = Math.max(0, claimLimit - baseQuota * segments.length);
   const selected = [];
-  for (const rows of rowsBySegment) if (rows[0]) selected.push(rows[0]);
-  for (const rows of rowsBySegment) {
-    for (let i = 1; i < rows.length && selected.length < 20; i++) selected.push(rows[i]);
+  for (let i = 0; i < rowsBySegment.length; i++) {
+    const quota = baseQuota + (i < remainder ? 1 : 0);
+    selected.push(...rowsBySegment[i].slice(0, quota));
   }
 
   const text = formatAudio(selected.map(x => x.claim), selectedTopic, lang);
@@ -164,15 +170,15 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
 
 async function generateSegmentClaims({ segment, index, count, selectedTopic, lang }) {
   const system = lang === 'en'
-    ? `You are summarizing ONE sequential part of an official schoolbook chapter. Return ONLY valid JSON: {"claims":[{"claim":"one clear explanatory sentence","evidence":"an exact 4-24 word excerpt copied from PART"}]}. Produce 2-4 claims. Keep the essential ideas and explanations from this part, omit secondary detail, use no outside knowledge, and copy evidence exactly.`
-    : `Συνοψίζεις ΕΝΑ διαδοχικό τμήμα επίσημου σχολικού κεφαλαίου. Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"claims":[{"claim":"μία καθαρή επεξηγηματική πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων αντιγραμμένο από το ΤΜΗΜΑ"}]}. Δώσε 2-4 claims. Κράτησε τις ουσιώδεις ιδέες και τις απαραίτητες εξηγήσεις αυτού του τμήματος, παράλειψε δευτερεύουσες λεπτομέρειες, μη χρησιμοποιείς εξωτερική γνώση και αντέγραψε το evidence ακριβώς.`;
+    ? `You are summarizing ONE sequential part of an official schoolbook chapter. Return ONLY valid JSON: {"claims":[{"claim":"one clear explanatory sentence","evidence":"an exact 4-24 word excerpt copied from PART"}]}. Produce 3-5 claims. Keep the essential ideas, definitions, relationships, causes/results and explanations that a student needs to understand this part. Omit minor detail, use no outside knowledge, and copy evidence exactly. Prefer explanatory sentences rather than telegraphic notes.`
+    : `Συνοψίζεις ΕΝΑ διαδοχικό τμήμα επίσημου σχολικού κεφαλαίου. Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"claims":[{"claim":"μία καθαρή επεξηγηματική πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων αντιγραμμένο από το ΤΜΗΜΑ"}]}. Δώσε 3-5 claims. Κράτησε τις ουσιώδεις ιδέες, ορισμούς, σχέσεις, αιτίες/αποτελέσματα και τις εξηγήσεις που χρειάζεται ο μαθητής για να κατανοήσει αυτό το τμήμα. Παράλειψε μόνο δευτερεύουσες λεπτομέρειες, μη χρησιμοποιείς εξωτερική γνώση και αντέγραψε το evidence ακριβώς. Προτίμησε επεξηγηματικές προτάσεις και όχι τηλεγραφικές σημειώσεις.`;
 
   return generateChat({
     messages: [
       { role: 'system', content: system },
       { role: 'user', content: `TOPIC: ${selectedTopic}\nPART ${index + 1} OF ${count}:\n\n${segment}` }
     ],
-    maxTokens: 650,
+    maxTokens: 850,
     temperature: 0,
     reasoningEffort: 'low',
     modelProfile: 'balanced',

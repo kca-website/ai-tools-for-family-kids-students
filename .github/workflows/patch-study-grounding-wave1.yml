@@ -37,3 +37,5 @@ jobs:
           git add general-education-book-sections-2026-2027.js
           git commit -m "Ground G Gym Math History and fix A Gym Greek source"
           git push origin HEAD:main
+
+# rerun after script syntax fix

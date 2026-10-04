@@ -19,4 +19,14 @@ function correctOfficialHtml(html, sourceUrl) {
   for (const {before, after} of mapping.replacements) result = result.split(before).join(after);
   return result;
 }
-module.exports = {correctOfficialHtml, corrections};
+// Manually read the spatial timeline; bind to its bytes so a changed image
+// cannot silently receive an old transcription. The Academy has no date label.
+const figureCorrections = [{
+  url: 'https://ebooks.edu.gr/ebooks/v/html/8547/2198/Istoria_B-Gymnasiou_html-empl/images/img17.jpg',
+  sha256: '0d841e5954304ac0828585d9db4b63106b65458b827c3fb3d8fac63d3a6cf427',
+  text: 'Χρονολόγιο 500–600. 527: Στέψη Ιουστινιανού. 529–534: Ιουστινιάνειος Κώδικας. Αναστολή Λειτουργίας Νεοπλατωνικής Ακαδημίας (χωρίς χωριστή ημερομηνία στην εικόνα). 532: Στάση Νίκα. 532–537: Οικοδόμηση Αγίας Σοφίας. 534: Καθυπόταξη Βανδάλων. 555: Καθυπόταξη Οστρογότθων. 565: Θάνατος Ιουστινιανού.'
+}];
+function correctOfficialFigure(url, sha256) {
+  return figureCorrections.find(row => row.url === url && row.sha256 === sha256)?.text ?? null;
+}
+module.exports = {correctOfficialHtml, corrections, correctOfficialFigure, figureCorrections};

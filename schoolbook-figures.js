@@ -1,6 +1,7 @@
 // Preserve image-only formulas/tables as part of the official source. This is
 // optical transcription, never an invitation to calculate or add explanations.
 const cheerio = require('cheerio');
+const { correctOfficialFigure } = require('./schoolbook-source-corrections');
 const { scopeOfficialHtmlPage } = require('./schoolbook-section');
 const { generateChat } = require('./ai-provider-router');
 const { getStudyCache, setStudyCache } = require('./study-runtime-cache');
@@ -20,20 +21,23 @@ async function transcribeOfficialFigures(html, pageUrl, {topic = ''} = {}) {
     figures.push({id:'f'+(figures.length+1),url:url.href,el});
   });
   if (!figures.length) return html;
-  const key = {kind:'official-figure-transcription-v2',pageUrl,htmlHash:createHash('sha256').update(html).digest('hex')};
+  const key = {kind:'official-figure-transcription-v3',pageUrl,htmlHash:createHash('sha256').update(html).digest('hex')};
   let texts = await getStudyCache(key);
   if (!texts) {
     texts = {};
     // Sequential batches avoid adding a burst of paid requests for book images.
     for (let i=0;i<figures.length;i+=6) {
       const group = figures.slice(i,i+6);
-      const content = [{type:'text',text:'Transcribe ONLY visible formulas, numeric tables, labels and explanatory text in these official schoolbook images. For photos, illustrations without text, icons, page numbers and logos return an empty text. Do NOT describe the photo, infer, solve, compute, correct printed values, or add facts. Preserve superscripts, fractions and symbols in readable text. Return JSON {"figures":[{"id":"f1","text":"exact optical transcription or empty string"}]}, one entry for EVERY supplied image id.'}];
+      const trusted = {};
+      const content = [{type:'text',text:'Transcribe ONLY visible formulas, numeric tables, labels and explanatory text in these official schoolbook images. For photos, illustrations without text, icons, page numbers and logos return an empty text. Do NOT describe the photo, infer, solve, compute, correct printed values, or add facts. Preserve superscripts, fractions and symbols in readable text. Preserve spatial associations: each timeline date must remain paired with its own event, each table value with its row and column labels. Do not assign an adjacent date to an undated label. Return JSON {"figures":[{"id":"f1","text":"exact optical transcription or empty string"}]}, one entry for EVERY supplied image id.'}];
       for (const figure of group) {
         const response = await fetch(figure.url,{signal:AbortSignal.timeout(15000)});
         if (!response.ok) throw new Error('official_figure_fetch_failed');
         const mimeType = response.headers.get('content-type')?.split(';')[0];
         const bytes = Buffer.from(await response.arrayBuffer());
         if (!/^image\/(?:png|jpeg|webp|gif)$/.test(mimeType || '') || bytes.length > 5000000) throw new Error('official_figure_format_not_supported');
+        const exact = correctOfficialFigure(figure.url, createHash('sha256').update(bytes).digest('hex'));
+        if (exact !== null) trusted[figure.id] = exact;
         content.push({type:'text',text:figure.id},{type:'image',mimeType,data:bytes.toString('base64')});
       }
       const valid = text => {
@@ -45,7 +49,7 @@ async function transcribeOfficialFigures(html, pageUrl, {topic = ''} = {}) {
       const proposals = parse(result.text).figures;
       const verification = await generateChat({messages:[{role:'user',content:[{type:'text',text:'Independently check these optical transcriptions against the SAME images. Return corrected exact text for visible formulas, numeric tables, labels and explanatory text. Remove invented text and fix misread symbols or numbers, using only what is visible. Do not correct mathematical mistakes printed in the image or compute results. Return empty text for a photo, illustration without essential text, page number, logo or icon. Return ONLY JSON {"figures":[{"id":"f1","text":"exact optical transcription or empty string"}]}, every supplied image id. Proposed transcriptions: '+JSON.stringify(proposals)},...content.slice(1)]}],providerOrder:['gemini'],maxTokens:6000,temperature:0,responseFormat:{type:'json_object'},timeoutMs:30000,validateText:valid});
       if (!verification.ok || !valid(verification.text)) throw new Error('official_figure_transcription_not_verified');
-      for (const row of parse(verification.text).figures) texts[row.id] = row.text;
+      for (const row of parse(verification.text).figures) texts[row.id] = trusted[row.id] ?? row.text;
     }
     await setStudyCache(key,texts,86400);
   }

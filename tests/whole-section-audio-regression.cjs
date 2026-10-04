@@ -45,3 +45,10 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  const page=fs.readFileSync(require.resolve('../study.html'),'utf8');assert.doesNotMatch(page,/if\(action==='audio'&&\/\^insufficient_/);
  console.log('PASS: body vs TOC, sibling boundaries, all sequential text, image formulas, small/medium/large, unsupported claims, full provider outage, no short-route fallback');
 })().catch(err=>{console.error(err);process.exitCode=1});
+
+const {correctOfficialFigure,figureCorrections} = require('../schoolbook-source-corrections');
+const timeline = figureCorrections[0];
+assert.match(correctOfficialFigure(timeline.url,timeline.sha256),/532: Στάση Νίκα/);
+assert.match(correctOfficialFigure(timeline.url,timeline.sha256),/Ακαδημίας \(χωρίς χωριστή ημερομηνία/);
+assert.equal(correctOfficialFigure(timeline.url,'changed-image'),null);
+assert.equal(correctOfficialFigure('https://ebooks.edu.gr/other',timeline.sha256),null);

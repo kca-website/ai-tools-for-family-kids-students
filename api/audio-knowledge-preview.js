@@ -18,12 +18,14 @@ const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 const { createKnowledgeMapLesson, VERSION } = require('../whole-section-audio-knowledge');
 
 module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+  const previewGet = req.method === 'GET' && process.env.VERCEL_ENV === 'preview';
+  if (req.method !== 'POST' && !previewGet) {
+    res.setHeader('Allow', process.env.VERCEL_ENV === 'preview' ? 'GET, POST' : 'POST');
     return res.status(405).json({ error:'method_not_allowed' });
   }
   if (!browserRequestAllowed(req)) return res.status(403).json({ error:'cross_site_request_blocked' });
-  const { subjectId = '', topic = '', language = 'el' } = req.body || {};
+  const input = previewGet ? (req.query || {}) : (req.body || {});
+  const { subjectId = '', topic = '', language = 'el' } = input;
   const sid = String(subjectId || '').trim().slice(0,120);
   const selectedTopic = String(topic || '').trim().slice(0,600);
   const lang = language === 'en' ? 'en' : 'el';

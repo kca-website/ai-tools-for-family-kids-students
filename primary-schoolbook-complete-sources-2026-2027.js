@@ -81,8 +81,7 @@ const entries = Object.freeze([
     reviewedAt: "2026-10-04"
   },
 
-  // Mathematics B Primary. The official table of contents and chapter headings
-  // identify the nine learner-facing units and their complete chapter spans.
+  // Mathematics B Primary. Official contents define the nine unit chapter spans.
   {
     subjectId: "math-b-dimotikou",
     label: "1η Ενότητα — Κεφάλαια 1-8",
@@ -114,14 +113,14 @@ const entries = Object.freeze([
   {
     subjectId: "math-b-dimotikou",
     label: "5η Ενότητα — Κεφάλαια 29-33",
-    urls: urls(MATH_B_BASE, "A5", range(29, 33)),
+    urls: urls(MATH_B_BASE, "B5", range(29, 33)),
     reviewBasis: "Official book unit 5 contents: chapters 29-33",
     reviewedAt: "2026-10-04"
   },
   {
     subjectId: "math-b-dimotikou",
     label: "6η Ενότητα — Κεφάλαια 34-40",
-    urls: urls(MATH_B_BASE, "A6", range(34, 40)),
+    urls: urls(MATH_B_BASE, "B6", range(34, 40)),
     reviewBasis: "Official book unit 6 contents: chapters 34-40",
     reviewedAt: "2026-10-04"
   },

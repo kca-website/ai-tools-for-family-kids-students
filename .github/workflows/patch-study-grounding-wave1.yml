@@ -1,0 +1,39 @@
+name: Patch Study grounding wave 1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/patch-study-grounding-wave1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply verified grounding mappings
+        run: node scripts/patch-study-grounding-wave1.mjs
+      - name: Syntax check catalog
+        run: node --check general-education-book-sections-2026-2027.js
+      - name: Commit patched catalog
+        run: |
+          if git diff --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add general-education-book-sections-2026-2027.js
+          git commit -m "Ground G Gym Math History and fix A Gym Greek source"
+          git push origin HEAD:main

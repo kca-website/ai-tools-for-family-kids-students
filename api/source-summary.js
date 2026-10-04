@@ -80,10 +80,15 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
   }
 
-  const workingSource = compactSourceForTopic(source, selectedTopic, 6500);
+  // Audio must represent the whole selected chapter, not only the most topic-dense excerpt.
+  // Build a coverage-preserving source: evenly sample the chapter from beginning to end
+  // when it is too large for one model request. Other activities keep topic-focused compaction.
+  const workingSource = audioLesson
+    ? compactSourceForWholeChapter(source, 15000)
+    : compactSourceForTopic(source, selectedTopic, 6500);
   const cacheParts = {
     kind: 'verified-source-summary',
-    promptVersion: 'verified-summary-v4-full-audio',
+    promptVersion: 'verified-summary-v5-whole-chapter-audio',
     subjectId: sid,
     topic: selectedTopic,
     title,
@@ -107,7 +112,7 @@ Return ONLY valid JSON in this form:
 
 STRICT RULES:
 - Produce ${audioLesson ? '10–16' : '5–8'} claims in a logical learning order.
-- ${audioLesson ? 'Cover the WHOLE selected chapter/section from beginning to end: include all major ideas and important details represented in SOURCE. This is a full spoken lesson, NOT a brief summary. Do not stop after the first subsection.' : 'Keep the summary concise.'}
+- ${audioLesson ? 'Cover the WHOLE selected chapter/section from beginning to end. Prioritize the main idea of every subsection and the explanations needed to understand it, rather than secondary detail. The result must be concise but representative of the entire chapter — beginning, middle, and end. Do not stop after the first subsections.' : 'Keep the summary concise.'}
 - Each claim must be directly entailed by its evidence and by SOURCE.
 - Evidence must be copied EXACTLY from SOURCE, not paraphrased. Prefer a short 3–18 word excerpt so exact matching is reliable.
 - Preserve textbook terminology and scope.
@@ -115,13 +120,13 @@ STRICT RULES:
 - Ignore navigation, contents, unrelated exercises, image captions unrelated to the selected topic, and page chrome.
 - Claims must be concise enough to be read aloud naturally.
 - No markdown, no commentary outside JSON.`
-    : `Φτιάξε σύντομη σύνοψη για μαθητή από επίσημη σχολική πηγή.
+    : `Φτιάξε σύνοψη για μαθητή από επίσημη σχολική πηγή.
 Επίστρεψε ΜΟΝΟ έγκυρο JSON με αυτή τη μορφή:
 {"claims":[{"claim":"Μία καθαρή παραφρασμένη πραγματολογική πρόταση.","evidence":"Ακριβές απόσπασμα 4–24 λέξεων αντιγραμμένο αυτούσιο από την ΠΗΓΗ που στηρίζει άμεσα την πρόταση."}]}
 
 ΑΥΣΤΗΡΟΙ ΚΑΝΟΝΕΣ:
 - Δώσε ${audioLesson ? '10–16' : '5–8'} προτάσεις σε λογική σειρά μάθησης.
-- ${audioLesson ? 'Κάλυψε ΟΛΟ το επιλεγμένο κεφάλαιο/ενότητα από την αρχή ως το τέλος: όλες τις βασικές ιδέες και τις σημαντικές λεπτομέρειες που υπάρχουν στην ΠΗΓΗ. Πρόκειται για πλήρες προφορικό μάθημα, ΟΧΙ για μικρή σύνοψη. Μη σταματήσεις στην πρώτη υποενότητα.' : 'Κράτησε τη σύνοψη σύντομη.'}
+- ${audioLesson ? 'Κάλυψε ΟΛΟ το επιλεγμένο κεφάλαιο/ενότητα από την αρχή ως το τέλος. Δώσε προτεραιότητα στις βασικές ιδέες κάθε υποενότητας και στις απαραίτητες εξηγήσεις, όχι σε δευτερεύουσες λεπτομέρειες. Η τελική μορφή πρέπει να είναι συνοπτική αλλά να αντιπροσωπεύει όλο το κεφάλαιο — αρχή, μέση και τέλος. Μη σταματήσεις στις πρώτες υποενότητες.' : 'Κράτησε τη σύνοψη σύντομη.'}
 - Κάθε claim πρέπει να προκύπτει άμεσα από το evidence και την ΠΗΓΗ.
 - Το evidence πρέπει να είναι ΑΚΡΙΒΩΣ αυτούσιο από την ΠΗΓΗ, όχι παράφραση. Προτίμησε σύντομο απόσπασμα 3–18 λέξεων ώστε να επαληθεύεται αξιόπιστα.
 - Διατήρησε την ορολογία και τα όρια του σχολικού βιβλίου.
@@ -336,6 +341,39 @@ function compactSourceForTopic(source, topic, maxChars) {
     used += piece.length;
   }
   return selected.sort((a, b) => a.index - b.index).map(x => x.text).join('\n\n').slice(0, limit);
+}
+
+function compactSourceForWholeChapter(source, maxChars) {
+  const full = String(source || '').trim();
+  const limit = Math.max(9000, Number(maxChars) || 15000);
+  if (full.length <= limit) return full;
+
+  // Preserve chapter-wide coverage instead of ranking excerpts by topic keywords.
+  // Split the complete source into sequential blocks and take a proportional excerpt
+  // from every block, so beginning, middle, and end all reach the summarizer.
+  const blockCount = Math.min(12, Math.max(6, Math.ceil(full.length / 5000)));
+  const sourceBlockSize = Math.ceil(full.length / blockCount);
+  const budgetPerBlock = Math.floor((limit - (blockCount - 1) * 2) / blockCount);
+  const pieces = [];
+
+  for (let i = 0; i < blockCount; i++) {
+    const start = i * sourceBlockSize;
+    const block = full.slice(start, Math.min(full.length, start + sourceBlockSize)).trim();
+    if (!block) continue;
+
+    if (block.length <= budgetPerBlock) {
+      pieces.push(block);
+      continue;
+    }
+
+    // Within each chronological block keep its beginning and end. This avoids
+    // systematically losing subsection transitions and later concepts.
+    const firstBudget = Math.ceil(budgetPerBlock * 0.62);
+    const lastBudget = Math.max(0, budgetPerBlock - firstBudget - 5);
+    pieces.push(block.slice(0, firstBudget) + '\n…\n' + block.slice(-lastBudget));
+  }
+
+  return pieces.join('\n\n').slice(0, limit);
 }
 
 function clean(value, max) {

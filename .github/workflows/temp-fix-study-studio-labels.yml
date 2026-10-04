@@ -1,0 +1,38 @@
+name: Temporary fix AI Study Studio labels
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/temp-fix-study-studio-labels.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Fix Studio labels
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('study-studio-extras.js')
+          s=p.read_text(encoding='utf-8')
+          old="const cfg=actions[b.dataset.action],spans=b.querySelectorAll('span');"
+          new="const cfg=actions[b.dataset.studioAction],spans=b.querySelectorAll('span');"
+          if old not in s:
+              raise SystemExit('label anchor not found')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
+          PY
+          node --check study-studio-extras.js
+          rm -f .github/workflows/temp-fix-study-studio-labels.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add study-studio-extras.js .github/workflows/temp-fix-study-studio-labels.yml
+          git commit -m "Fix AI Study Studio action labels"
+          git push origin HEAD:main

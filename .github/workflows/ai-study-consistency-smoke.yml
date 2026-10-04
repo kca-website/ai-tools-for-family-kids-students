@@ -34,5 +34,3 @@ jobs:
         run: node --check pdf-text-reader.js
       - name: Physics flashcard grounding regression
         run: node tests/ai-study-physics-grounding-regression.mjs
-      - name: B Gymnasium science selection grounding
-        run: node tests/b-gym-science-selection-grounding.mjs

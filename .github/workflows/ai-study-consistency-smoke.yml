@@ -1,0 +1,36 @@
+name: AI Study consistency smoke
+
+on:
+  pull_request:
+    paths:
+      - 'study.html'
+      - 'pdf-text-reader.js'
+      - 'api/tutor-assistant.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/ai-study-physics-grounding-regression.mjs'
+      - '.github/workflows/ai-study-consistency-smoke.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'study.html'
+      - 'pdf-text-reader.js'
+      - 'api/tutor-assistant.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/ai-study-physics-grounding-regression.mjs'
+      - '.github/workflows/ai-study-consistency-smoke.yml'
+
+jobs:
+  study-consistency:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install runtime dependencies
+        run: npm install --no-package-lock --ignore-scripts
+      - name: Check Study client syntax
+        run: node --check pdf-text-reader.js
+      - name: Physics flashcard grounding regression
+        run: node tests/ai-study-physics-grounding-regression.mjs

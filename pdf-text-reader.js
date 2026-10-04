@@ -144,6 +144,33 @@
       observer.observe(grid,{childList:true,subtree:false});
     }
 
+    // Flashcards are strict JSON and the server validates all numbers/formulae
+    // against the verified source. Some models add presentation-only prefixes
+    // such as "1.", "2." inside q/a strings. Those harmless ordinals can be
+    // mistaken for unsupported textbook facts. Prevent them at generation time;
+    // factual numbers/formulae are still checked server-side exactly as before.
+    function installStudyRequestConsistencyGuard(){
+      if(window.__AITOOLSKIDS_STUDY_FETCH_GUARD__) return;
+      window.__AITOOLSKIDS_STUDY_FETCH_GUARD__=true;
+      const nativeFetch=window.fetch.bind(window);
+      window.fetch=async function(input,init){
+        const url=typeof input==="string"?input:String(input?.url||"");
+        if((url==="/api/tutor-assistant"||url.endsWith("/api/tutor-assistant"))&&init&&typeof init.body==="string"){
+          try{
+            const payload=JSON.parse(init.body);
+            if(payload?.task==="flashcards"||payload?.activity==="flashcards"){
+              const rule=isEn()
+                ? "FLASHCARD FORMAT SAFETY: Return exactly the requested JSON shape. Do not prefix q or a text with card numbers, ordinals, list numbers or labels. Do not invent numerical examples, quantities or formula notation; use a number or formula only when it is explicitly present in the active source."
+                : "ΑΣΦΑΛΗΣ ΜΟΡΦΗ ΚΑΡΤΩΝ: Επίστρεψε ακριβώς το ζητούμενο JSON. Μην βάζεις αρίθμηση, τακτικούς αριθμούς, αριθμούς λίστας ή ετικέτες στην αρχή των πεδίων q ή a. Μην επινοείς αριθμητικά παραδείγματα, ποσότητες ή συμβολισμούς τύπων· χρησιμοποίησε αριθμό ή τύπο μόνο όταν υπάρχει ρητά στην ενεργή πηγή.";
+              payload.context=String(payload.context||"").trim()+"\n\n"+rule;
+              init={...init,body:JSON.stringify(payload)};
+            }
+          }catch(_){/* keep the original request unchanged */}
+        }
+        return nativeFetch(input,init);
+      };
+    }
+
     // The study page historically performed a preliminary /api/schoolbook-source
     // request before asking /api/source-summary for audio. That preflight could
     // return 404 for a valid broad textbook unit even though source-summary can
@@ -218,6 +245,7 @@
     }
 
     function start(){
+      installStudyRequestConsistencyGuard();
       enhanceNotebookCard();
       attachGridObserver();
       attachAudioGuard();

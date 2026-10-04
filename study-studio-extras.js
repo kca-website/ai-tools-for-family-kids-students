@@ -75,7 +75,7 @@
     block.querySelector('.study-studio-title').textContent=en?'More ways to study the same source':'Περισσότεροι τρόποι για την ίδια πηγή';
     block.querySelector('.study-studio-note').textContent=disclosureText();
     block.querySelectorAll('[data-studio-extra="1"]').forEach(b=>{
-      const cfg=actions[b.dataset.action],spans=b.querySelectorAll('span');
+      const cfg=actions[b.dataset.studioAction],spans=b.querySelectorAll('span');
       if(!cfg)return;
       if(spans[0])spans[0].textContent=en?cfg.labelEn:cfg.labelEl;
       if(spans[1])spans[1].textContent=en?cfg.subEn:cfg.subEl;

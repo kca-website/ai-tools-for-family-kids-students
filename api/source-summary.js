@@ -87,14 +87,15 @@ module.exports = async function handler(req, res) {
 };
 
 async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang, aiStatus }) {
+  const scopedSource = scopeAudioSource(source, sid, selectedTopic);
   const cacheKey = {
     kind: 'verified-whole-chapter-audio',
-    promptVersion: 'whole-chapter-audio-v4-expanded-safe',
+    promptVersion: 'whole-chapter-audio-v5-scoped-complete-deduped',
     subjectId: sid,
     topic: selectedTopic,
     title,
     language: lang,
-    source,
+    source: scopedSource,
     modelRoute: routingSignature(aiStatus),
   };
   const cached = await getStudyCache(cacheKey);
@@ -103,7 +104,7 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     return res.status(200).json({ ...cached, cacheHit: true });
   }
 
-  const segments = splitWholeChapter(source, 4600, 9);
+  const segments = splitAudioChapter(scopedSource, sid, selectedTopic);
   const rowsBySegment = [];
   let provider = null;
   let model = null;
@@ -139,7 +140,7 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     });
   }
 
-  const claimLimit = Math.min(32, Math.max(18, segments.length * 4));
+  const claimLimit = Math.min(32, Math.max(18, segments.length * 3));
   const baseQuota = Math.max(2, Math.floor(claimLimit / segments.length));
   const remainder = Math.max(0, claimLimit - baseQuota * segments.length);
   const selected = [];
@@ -147,8 +148,9 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     const quota = baseQuota + (i < remainder ? 1 : 0);
     selected.push(...rowsBySegment[i].slice(0, quota));
   }
+  const deduped = dedupeClaims(selected).slice(0, claimLimit);
 
-  const text = formatAudio(selected.map(x => x.claim), selectedTopic, lang);
+  const text = formatAudio(deduped.map(x => x.claim), selectedTopic, lang);
   const response = {
     text,
     verified: true,
@@ -156,7 +158,7 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     verification: {
       segments: segments.length,
       segmentsCovered: covered,
-      approved: selected.length,
+      approved: deduped.length,
       coverageRatio: 1,
     },
     provider,
@@ -170,15 +172,15 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
 
 async function generateSegmentClaims({ segment, index, count, selectedTopic, lang }) {
   const system = lang === 'en'
-    ? `You are summarizing ONE sequential part of an official schoolbook chapter. Return ONLY valid JSON: {"claims":[{"claim":"one clear explanatory sentence","evidence":"an exact 4-24 word excerpt copied from PART"}]}. Produce 3-5 claims. Keep the essential ideas, definitions, relationships, causes/results and explanations that a student needs to understand this part. Omit minor detail, use no outside knowledge, and copy evidence exactly. Prefer explanatory sentences rather than telegraphic notes.`
-    : `Συνοψίζεις ΕΝΑ διαδοχικό τμήμα επίσημου σχολικού κεφαλαίου. Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"claims":[{"claim":"μία καθαρή επεξηγηματική πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων αντιγραμμένο από το ΤΜΗΜΑ"}]}. Δώσε 3-5 claims. Κράτησε τις ουσιώδεις ιδέες, ορισμούς, σχέσεις, αιτίες/αποτελέσματα και τις εξηγήσεις που χρειάζεται ο μαθητής για να κατανοήσει αυτό το τμήμα. Παράλειψε μόνο δευτερεύουσες λεπτομέρειες, μη χρησιμοποιείς εξωτερική γνώση και αντέγραψε το evidence ακριβώς. Προτίμησε επεξηγηματικές προτάσεις και όχι τηλεγραφικές σημειώσεις.`;
+    ? `You are summarizing ONE sequential part of an official schoolbook chapter. Return ONLY valid JSON: {"claims":[{"claim":"one clear explanatory sentence","evidence":"an exact 4-24 word excerpt copied from PART"}]}. Produce 3-5 claims. Keep the essential ideas, definitions, relationships, causes/results, units, explicit conversion relationships and explanations that a student needs to understand this part. If PART contains a complete list or table of important items, represent the complete set rather than naming only some of them. Spell out an abbreviation the first time it is used when PART gives the full name. Do not use navigation, review questions or exercises to introduce facts from outside the selected topic. Omit only secondary detail, use no outside knowledge, and copy evidence exactly. Prefer explanatory sentences rather than telegraphic notes.`
+    : `Συνοψίζεις ΕΝΑ διαδοχικό τμήμα επίσημου σχολικού κεφαλαίου. Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"claims":[{"claim":"μία καθαρή επεξηγηματική πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων αντιγραμμένο από το ΤΜΗΜΑ"}]}. Δώσε 3-5 claims. Κράτησε τις ουσιώδεις ιδέες, ορισμούς, σχέσεις, αιτίες/αποτελέσματα, μονάδες, ρητές σχέσεις μετατροπών και τις εξηγήσεις που χρειάζεται ο μαθητής για να κατανοήσει αυτό το τμήμα. Αν το ΤΜΗΜΑ περιέχει πλήρη λίστα ή πίνακα σημαντικών στοιχείων, απόδωσε το πλήρες σύνολο και όχι μόνο μερικά παραδείγματα. Την πρώτη φορά που χρησιμοποιείς συντομογραφία, γράψε και την πλήρη ονομασία όταν αυτή υπάρχει στο ΤΜΗΜΑ. Μη χρησιμοποιείς πλοήγηση, ερωτήσεις επανάληψης ή ασκήσεις για να εισαγάγεις πληροφορίες έξω από το επιλεγμένο θέμα. Παράλειψε μόνο δευτερεύουσες λεπτομέρειες, μη χρησιμοποιείς εξωτερική γνώση και αντέγραψε το evidence ακριβώς. Προτίμησε επεξηγηματικές προτάσεις και όχι τηλεγραφικές σημειώσεις.`;
 
   return generateChat({
     messages: [
       { role: 'system', content: system },
       { role: 'user', content: `TOPIC: ${selectedTopic}\nPART ${index + 1} OF ${count}:\n\n${segment}` }
     ],
-    maxTokens: 850,
+    maxTokens: 950,
     temperature: 0,
     reasoningEffort: 'low',
     modelProfile: 'balanced',
@@ -273,6 +275,63 @@ function extractiveFallback(segment, maxSentences) {
   return out;
 }
 
+function scopeAudioSource(source, sid, topic) {
+  let full = String(source || '').trim();
+  const subject = String(sid || '').trim();
+  const selected = String(topic || '').trim();
+
+  if ((subject === 'fysiki-b-gymnasiou' || subject === 'physics-gymnasiou') && /^1\.3\b/.test(selected)) {
+    const startMarker = '1.3 Τα φυσικά μεγέθη και οι μονάδες τους';
+    const start = full.indexOf(startMarker);
+    if (start >= 0) full = full.slice(start);
+    const endMarkers = ['Ερωτήσεις', 'Παιχνίδι αυτοαξιολόγησης'];
+    const ends = endMarkers.map(marker => full.indexOf(marker)).filter(index => index > 0);
+    if (ends.length) full = full.slice(0, Math.min(...ends));
+  }
+  return full.trim();
+}
+
+function splitAudioChapter(source, sid, topic) {
+  const subject = String(sid || '').trim();
+  const selected = String(topic || '').trim();
+  if ((subject === 'fysiki-b-gymnasiou' || subject === 'physics-gymnasiou') && /^1\.3\b/.test(selected)) {
+    const semantic = splitByMarkers(source, [
+      '1.3 Τα φυσικά μεγέθη και οι μονάδες τους',
+      'Τα θεμελιώδη μεγέθη',
+      'Μέτρηση μήκους',
+      'Μέτρηση του χρόνου',
+      'Μάζα και μέτρηση της',
+      'Παράγωγα μεγέθη',
+      'Μέτρηση εμβαδού',
+      'Μέτρηση όγκου',
+      'Μέτρηση της πυκνότητας',
+      'Διεθνές Σύστημα Μονάδων',
+      'Πολλαπλάσια και υποπολλαπλάσια των μονάδων'
+    ]);
+    if (semantic.length >= 6) return semantic;
+  }
+  return splitWholeChapter(source, 4600, 9);
+}
+
+function splitByMarkers(source, markers) {
+  const full = String(source || '').trim();
+  const found = [];
+  for (const marker of markers) {
+    const index = full.indexOf(marker);
+    if (index >= 0) found.push({ index, marker });
+  }
+  found.sort((a, b) => a.index - b.index);
+  const unique = found.filter((row, i) => i === 0 || row.index !== found[i - 1].index);
+  const out = [];
+  for (let i = 0; i < unique.length; i++) {
+    const start = unique[i].index;
+    const end = i + 1 < unique.length ? unique[i + 1].index : full.length;
+    const piece = full.slice(start, end).trim();
+    if (piece.length >= 120) out.push(piece);
+  }
+  return out;
+}
+
 function splitWholeChapter(source, targetChars = 4600, maxParts = 9) {
   const full = String(source || '').trim();
   if (!full) return [];
@@ -297,6 +356,32 @@ function splitWholeChapter(source, targetChars = 4600, maxParts = 9) {
   }
   if (pos < full.length && out.length) out[out.length - 1] += '\n\n' + full.slice(pos).trim();
   return out;
+}
+
+function dedupeClaims(rows) {
+  const out = [];
+  for (const row of rows || []) {
+    const claim = String(row?.claim || '').trim();
+    if (!claim) continue;
+    if (out.some(existing => claimsTooSimilar(existing.claim, claim))) continue;
+    out.push(row);
+  }
+  return out;
+}
+
+function claimsTooSimilar(a, b) {
+  const na = normalizeForEvidence(a);
+  const nb = normalizeForEvidence(b);
+  if (!na || !nb) return false;
+  if (na === nb) return true;
+  const stop = new Set(['και','των','την','τον','της','του','στο','στη','στην','στον','για','απο','από','ένα','μια','μία','είναι','που','με','σε','τα','το']);
+  const words = value => new Set(value.split(/\s+/).map(x => x.replace(/[^\p{L}\p{N}]/gu, '')).filter(x => x.length >= 4 && !stop.has(x)));
+  const aa = words(na);
+  const bb = words(nb);
+  if (!aa.size || !bb.size) return false;
+  let overlap = 0;
+  for (const word of aa) if (bb.has(word)) overlap += 1;
+  return overlap / Math.min(aa.size, bb.size) >= 0.82;
 }
 
 function compactSourceForTopic(source, topic, maxChars) {

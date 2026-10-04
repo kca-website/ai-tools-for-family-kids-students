@@ -1,0 +1,66 @@
+name: Temporary load AI Study Studio extras
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/temp-load-study-studio-extras.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Load Studio extras
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          js = Path('study-studio-extras.js')
+          s = js.read_text(encoding='utf-8')
+          s = s.replace(
+              'b.type="button";b.className="study-action";b.dataset.action=key;b.dataset.studioExtra="1";',
+              'b.type="button";b.className="study-action";b.dataset.action="quickreview";b.dataset.studioAction=key;b.dataset.studioExtra="1";'
+          )
+          s = s.replace(
+              "const payload=JSON.parse(init.body),cfg=actions[payload?.activity];\n          if(cfg){",
+              "const payload=JSON.parse(init.body),cfg=pendingAction&&payload?.activity==='quickreview'?actions[pendingAction]:null;\n          if(cfg){"
+          )
+          s = s.replace(
+              "if(payload.studyContext&&typeof payload.studyContext==='object')payload.studyContext.studyAction=pendingAction||'studio_extra';\n            init={...init,body:JSON.stringify(payload)};",
+              "if(payload.studyContext&&typeof payload.studyContext==='object')payload.studyContext.studyAction=pendingAction||'studio_extra';\n            init={...init,body:JSON.stringify(payload)};\n            pendingAction='';"
+          )
+          s = s.replace(
+              "pendingAction=b.dataset.action||'';pendingDisclosure=true;",
+              "pendingAction=b.dataset.studioAction||'';pendingDisclosure=true;"
+          )
+          js.write_text(s, encoding='utf-8')
+
+          page = Path('study.html')
+          h = page.read_text(encoding='utf-8')
+          marker = '<script src="/study-studio-extras.js"></script>'
+          anchor = '<script src="/study-context.js"></script>'
+          if marker not in h:
+              if anchor not in h:
+                  raise SystemExit('study-context script anchor not found')
+              h = h.replace(anchor, anchor + '\n' + marker, 1)
+          page.write_text(h, encoding='utf-8')
+          PY
+          node --check study-studio-extras.js
+          rm -f .github/workflows/temp-ai-study-studio-extras.yml
+          rm -f .github/workflows/temp-load-study-studio-extras.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add study-studio-extras.js study.html .github/workflows/temp-ai-study-studio-extras.yml .github/workflows/temp-load-study-studio-extras.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Load source-grounded AI Study Studio extras"
+          git push origin HEAD:main

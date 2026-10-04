@@ -36,45 +36,52 @@
   function isEn(){return (document.documentElement.lang||"el").toLowerCase().startsWith("en")}
   function disclosureText(){
     return isEn()
-      ? "Free alternative: NotebookLM also offers these kinds of study outputs in Studio. Its Standard tier can be used free of charge with usage limits. aitools4kids.gr is independent and is not affiliated with Google or NotebookLM."
-      : "Δωρεάν εναλλακτική: το NotebookLM προσφέρει επίσης τέτοιες μορφές μελέτης μέσα από το Studio. Η Standard έκδοση χρησιμοποιείται δωρεάν με όρια χρήσης. Το aitools4kids.gr είναι ανεξάρτητο και δεν συνδέεται με τη Google ή το NotebookLM.";
+      ? "Also available free in NotebookLM: its Studio offers similar study formats, subject to usage limits. aitools4kids.gr is independent and is not affiliated with Google or NotebookLM."
+      : "Υπάρχουν δωρεάν και στο NotebookLM: το Studio προσφέρει αντίστοιχες μορφές μελέτης, με όρια χρήσης. Το aitools4kids.gr είναι ανεξάρτητο και δεν συνδέεται με τη Google ή το NotebookLM.";
   }
 
   function ensureStyles(){
     if(document.getElementById("studyStudioExtraStyles"))return;
     const style=document.createElement("style");
     style.id="studyStudioExtraStyles";
-    style.textContent='.study-studio-block{grid-column:1/-1;margin-top:4px;padding-top:12px;border-top:1px solid var(--border,#dfe6ee)}.study-studio-title{margin:0 0 4px;font-size:.92rem;font-weight:850}.study-studio-note{margin:0 0 10px;padding:9px 10px;border-radius:9px;background:#f6f8fb;color:#475569;font-size:.78rem;line-height:1.45}.study-studio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.study-studio-output-note{margin-top:12px;padding:9px 10px;border-top:1px solid var(--border,#dfe6ee);color:var(--muted,#5a6270);font-size:.78rem}.study-studio-output-note a{font-weight:800}@media(max-width:480px){.study-studio-grid{grid-template-columns:1fr}}';
+    style.textContent='.study-studio-note{grid-column:1/-1;margin:4px 0 0;padding:8px 10px;border-radius:9px;background:#f6f8fb;color:#475569;font-size:.76rem;line-height:1.4}.study-studio-output-note{margin-top:12px;padding:9px 10px;border-top:1px solid var(--border,#dfe6ee);color:var(--muted,#5a6270);font-size:.78rem}.study-studio-output-note a{font-weight:800}';
     document.head.appendChild(style);
   }
 
+  function mainActionGrid(){
+    const anchor=document.querySelector('[data-action="audio"], [data-action="flashcards"], [data-action="quickreview"], [data-action="explain"]');
+    if(!anchor)return null;
+    return anchor.closest('.study-actions.learning-choice-grid') || anchor.closest('.study-actions') || anchor.parentElement;
+  }
+
   function installActions(){
-    if(document.getElementById("studyStudioBlock"))return;
-    const moreGrid=document.querySelector('details.learning-more .study-actions.learning-choice-grid');
-    if(!moreGrid)return;
+    if(document.querySelector('[data-studio-extra="1"]'))return;
+    const grid=mainActionGrid();
+    if(!grid)return;
     ensureStyles();
-    const block=document.createElement("div");
-    block.id="studyStudioBlock";
-    block.className="study-studio-block";
-    block.innerHTML='<p class="study-studio-title"></p><p class="study-studio-note"></p><div class="study-studio-grid"></div>';
-    const grid=block.querySelector('.study-studio-grid');
     Object.entries(actions).forEach(([key,cfg])=>{
-      if(document.querySelector('[data-action="'+key+'"]'))return;
+      if(document.querySelector('[data-studio-action="'+key+'"]'))return;
       const b=document.createElement("button");
-      b.type="button";b.className="study-action";b.dataset.action="quickreview";b.dataset.studioAction=key;b.dataset.studioExtra="1";
+      b.type="button";
+      b.className="study-action";
+      b.dataset.action="quickreview";
+      b.dataset.studioAction=key;
+      b.dataset.studioExtra="1";
       b.innerHTML='<span></span><span></span>';
       grid.appendChild(b);
     });
-    moreGrid.appendChild(block);
+    const note=document.createElement('p');
+    note.id='studyStudioNotebookNote';
+    note.className='study-studio-note';
+    grid.appendChild(note);
     localize();
   }
 
   function localize(){
-    const block=document.getElementById("studyStudioBlock");if(!block)return;
     const en=isEn();
-    block.querySelector('.study-studio-title').textContent=en?'More ways to study the same source':'Περισσότεροι τρόποι για την ίδια πηγή';
-    block.querySelector('.study-studio-note').textContent=disclosureText();
-    block.querySelectorAll('[data-studio-extra="1"]').forEach(b=>{
+    const note=document.getElementById('studyStudioNotebookNote');
+    if(note)note.textContent=disclosureText();
+    document.querySelectorAll('[data-studio-extra="1"]').forEach(b=>{
       const cfg=actions[b.dataset.studioAction],spans=b.querySelectorAll('span');
       if(!cfg)return;
       if(spans[0])spans[0].textContent=en?cfg.labelEn:cfg.labelEl;
@@ -142,7 +149,8 @@
 
   document.addEventListener('click',(event)=>{
     const b=event.target?.closest?.('[data-studio-extra="1"]');if(!b)return;
-    pendingAction=b.dataset.studioAction||'';pendingDisclosure=true;
+    pendingAction=b.dataset.studioAction||'';
+    pendingDisclosure=true;
     const cfg=actions[pendingAction];
     setTimeout(()=>{
       const title=document.getElementById('workspaceTitle');if(title&&cfg)title.textContent=isEn()?cfg.titleEn:cfg.titleEl;

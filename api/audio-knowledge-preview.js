@@ -16,6 +16,7 @@ function browserRequestAllowed(req) {
 
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 const { createKnowledgeMapLesson, VERSION } = require('../whole-section-audio-knowledge');
+const { generateChat } = require('../ai-provider-router');
 
 module.exports = async function handler(req, res) {
   const previewGet = req.method === 'GET' && process.env.VERCEL_ENV === 'preview';
@@ -36,12 +37,14 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error:resolved?.body?.error || 'official_source_unavailable', message:'Δεν βρέθηκε επαληθευμένη επίσημη ενότητα.' });
     }
     const source = String(resolved.body.text || '').trim();
-    const result = await createKnowledgeMapLesson({ source, topic:selectedTopic, language:lang });
+    const freePreviewGenerate = args => generateChat({ ...args, providerOrder:['cloudflare','groq'] });
+    const result = await createKnowledgeMapLesson({ source, topic:selectedTopic, language:lang, generate:freePreviewGenerate });
     res.setHeader('Cache-Control','no-store');
     return res.status(200).json({
       ...result,
       preview:true,
       previewVersion:VERSION,
+      previewProviders:'free-only',
       sourceTitle:resolved.body.bookTitle || null,
       sourceUrl:resolved.body.sourceUrl || null,
     });

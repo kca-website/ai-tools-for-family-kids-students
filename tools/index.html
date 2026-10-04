@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Εργαλεία | aitools4kids.gr</title>
+  <meta name="description" content="Όλα τα εργαλεία του aitools4kids.gr οργανωμένα ανά ανάγκη: μελέτη, εξάσκηση, δημιουργία, εκπαιδευτικοί, προσβασιμότητα και επιλεγμένα δωρεάν AI εργαλεία.">
+  <link rel="canonical" href="https://www.aitools4kids.gr/tools/">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    :root{--tools-ink:#1f2937;--tools-muted:#64748b;--tools-line:#dbe4ee;--tools-blue:#1d5d8c;--tools-soft:#f6f9fc;--tools-card:#fff}
+    body{background:#f7f9fc;color:var(--tools-ink)}
+    .tools-shell{max-width:1160px;margin:0 auto;padding:0 20px 56px}
+    .tools-head{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--tools-line)}
+    .tools-head__in{max-width:1160px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:18px}
+    .tools-brand{display:flex;align-items:center;gap:8px;font-weight:900;text-decoration:none;color:var(--tools-ink);white-space:nowrap}.tools-brand__mark{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:#1d5d8c;color:#fff}
+    .tools-nav{display:flex;gap:6px;align-items:center;flex:1}.tools-nav a{padding:9px 11px;border-radius:9px;text-decoration:none;color:var(--tools-ink);font-weight:700;font-size:.92rem}.tools-nav a[aria-current="page"]{background:#edf5fb;color:#124e79}.tools-actions{display:flex;gap:7px}.tools-lang{border:1px solid var(--tools-line);background:#fff;border-radius:8px;padding:7px 9px;font-weight:800;cursor:pointer}.tools-lang.active{background:#202633;color:#fff}
+    .tools-hero{padding:54px 0 28px}.tools-kicker{font-size:.82rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--tools-blue)}.tools-hero h1{font-size:clamp(2rem,4vw,3.3rem);line-height:1.05;margin:8px 0 14px;max-width:820px}.tools-hero p{font-size:1.08rem;line-height:1.65;color:var(--tools-muted);max-width:790px;margin:0}.tools-hero__cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.tools-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border-radius:10px;text-decoration:none;font-weight:850;border:1px solid var(--tools-line);background:#fff;color:var(--tools-ink)}.tools-btn.primary{background:#202633;color:#fff;border-color:#202633}
+    .tools-filter{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 26px}.tools-filter button{border:1px solid var(--tools-line);background:#fff;padding:9px 12px;border-radius:999px;font-weight:750;cursor:pointer}.tools-filter button.active{background:#202633;color:#fff;border-color:#202633}
+    .tools-section{margin:34px 0}.tools-section h2{margin:0 0 5px;font-size:1.38rem}.tools-section__intro{margin:0 0 14px;color:var(--tools-muted)}
+    .tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.tool-card{display:flex;flex-direction:column;min-height:166px;padding:17px;border:1px solid var(--tools-line);border-radius:14px;background:var(--tools-card);text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(15,23,42,.025)}.tool-card:hover{border-color:#9fbfd6;transform:translateY(-1px)}.tool-card__top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.tool-card__icon{font-size:1.35rem}.tool-card__tag{font-size:.72rem;padding:4px 7px;border-radius:999px;background:#eef5fa;color:#245f87;font-weight:850}.tool-card h3{font-size:1.02rem;margin:12px 0 6px}.tool-card p{margin:0;color:var(--tools-muted);line-height:1.45;font-size:.9rem}.tool-card__go{margin-top:auto;padding-top:13px;font-weight:850;color:var(--tools-blue);font-size:.88rem}
+    .tools-note{margin:36px 0 0;padding:18px;border:1px solid #cfe0ec;border-radius:14px;background:#f2f8fc}.tools-note h2{font-size:1.08rem;margin:0 0 6px}.tools-note p{margin:0;color:#526273;line-height:1.5}.tools-note a{font-weight:850;color:#155c89}
+    footer{border-top:1px solid var(--tools-line);margin-top:48px;padding:22px 0;color:var(--tools-muted);font-size:.86rem}
+    [hidden]{display:none!important}
+    @media(max-width:900px){.tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tools-nav{display:none}}
+    @media(max-width:580px){.tools-shell{padding-left:14px;padding-right:14px}.tools-head__in{padding-left:14px;padding-right:14px}.tools-grid{grid-template-columns:1fr}.tools-hero{padding-top:36px}.tools-hero h1{font-size:2rem}}
+  </style>
+</head>
+<body>
+<header class="tools-head">
+  <div class="tools-head__in">
+    <a class="tools-brand" href="/"><span class="tools-brand__mark">ai</span><span>aitools4kids.gr</span></a>
+    <nav class="tools-nav" aria-label="Κύριο μενού">
+      <a href="/tools/" aria-current="page" data-el="Εργαλεία" data-en="Tools">Εργαλεία</a>
+      <a href="/study.html" data-el="AI Μελέτη" data-en="AI Study">AI Μελέτη</a>
+      <a href="/tools/ai-help.html" data-el="AI Βοήθεια" data-en="AI Help">AI Βοήθεια</a>
+      <a href="/#practice-map" data-el="Χάρτης Εξάσκησης" data-en="Practice Map">Χάρτης Εξάσκησης</a>
+    </nav>
+    <div class="tools-actions"><button class="tools-lang active" id="elBtn" type="button">EL</button><button class="tools-lang" id="enBtn" type="button">EN</button></div>
+  </div>
+</header>
+
+<main class="tools-shell">
+  <section class="tools-hero">
+    <div class="tools-kicker" data-el="Όλα σε ένα σημείο" data-en="Everything in one place">Όλα σε ένα σημείο</div>
+    <h1 data-el="Τι θέλεις να κάνεις; Βρες το κατάλληλο εργαλείο." data-en="What do you want to do? Find the right tool.">Τι θέλεις να κάνεις; Βρες το κατάλληλο εργαλείο.</h1>
+    <p data-el="Δεν είναι ένας ακόμη κατάλογος με δεκάδες AI. Ξεκίνα από την ανάγκη σου και διάλεξε είτε λειτουργία του aitools4kids είτε ένα επιλεγμένο εξωτερικό εργαλείο." data-en="This is not another directory of dozens of AI apps. Start with what you need and choose either an aitools4kids feature or a selected external tool.">Δεν είναι ένας ακόμη κατάλογος με δεκάδες AI. Ξεκίνα από την ανάγκη σου και διάλεξε είτε λειτουργία του aitools4kids είτε ένα επιλεγμένο εξωτερικό εργαλείο.</p>
+    <div class="tools-hero__cta">
+      <a class="tools-btn primary" href="/#open-tools" data-el="Δεν ξέρω τι χρειάζομαι · Βρες το σωστό AI" data-en="I'm not sure what I need · Find the right AI">Δεν ξέρω τι χρειάζομαι · Βρες το σωστό AI</a>
+      <a class="tools-btn" href="/study.html" data-el="Άνοιξε την AI Μελέτη" data-en="Open AI Study">Άνοιξε την AI Μελέτη</a>
+    </div>
+  </section>
+
+  <div class="tools-filter" role="group" aria-label="Φίλτρα εργαλείων">
+    <button class="active" data-filter="all" data-el="Όλα" data-en="All">Όλα</button>
+    <button data-filter="study" data-el="Μελέτη" data-en="Study">Μελέτη</button>
+    <button data-filter="practice" data-el="Εξάσκηση" data-en="Practice">Εξάσκηση</button>
+    <button data-filter="create" data-el="Δημιουργία" data-en="Create">Δημιουργία</button>
+    <button data-filter="teacher" data-el="Εκπαιδευτικοί" data-en="Educators">Εκπαιδευτικοί</button>
+    <button data-filter="access" data-el="Προσβασιμότητα" data-en="Accessibility">Προσβασιμότητα</button>
+    <button data-filter="external" data-el="Εξωτερικά AI" data-en="External AI">Εξωτερικά AI</button>
+  </div>
+
+  <section class="tools-section" data-section="study">
+    <h2 data-el="Μελέτη και κατανόηση" data-en="Study and understanding">Μελέτη και κατανόηση</h2>
+    <p class="tools-section__intro" data-el="Από σχολική ενότητα ή δικό σου PDF μέχρι ακουστική επανάληψη και οπτική οργάνωση." data-en="From a school unit or your own PDF to audio review and visual organization.">Από σχολική ενότητα ή δικό σου PDF μέχρι ακουστική επανάληψη και οπτική οργάνωση.</p>
+    <div class="tools-grid">
+      <a class="tool-card" href="/study.html" data-tags="study practice"><div class="tool-card__top"><span class="tool-card__icon">📘</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="AI Μελέτη" data-en="AI Study">AI Μελέτη</h3><p data-el="Εξήγηση, επανάληψη, κάρτες, quiz, ακουστικό μάθημα, Mind Map, infographic και διαφάνειες πάνω στην επιλεγμένη πηγή." data-en="Explanation, review, flashcards, quiz, audio lesson, Mind Map, infographic and slides from the selected source.">Εξήγηση, επανάληψη, κάρτες, quiz, ακουστικό μάθημα, Mind Map, infographic και διαφάνειες πάνω στην επιλεγμένη πηγή.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+      <a class="tool-card" href="/tools/ai-help.html" data-tags="study"><div class="tool-card__top"><span class="tool-card__icon">💬</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="AI Βοήθεια" data-en="AI Help">AI Βοήθεια</h3><p data-el="Καθοδήγηση με μικρά βήματα όταν έχεις κολλήσει, χωρίς να ξεκινά από έτοιμη τελική λύση." data-en="Step-by-step guidance when you are stuck, without starting from a ready-made final answer.">Καθοδήγηση με μικρά βήματα όταν έχεις κολλήσει, χωρίς να ξεκινά από έτοιμη τελική λύση.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+      <a class="tool-card" href="/organosi-meletis-ai.html" data-tags="study"><div class="tool-card__top"><span class="tool-card__icon">🧩</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Οργάνωση μελέτης" data-en="Study organizer">Οργάνωση μελέτης</h3><p data-el="Σπάσε τη δουλειά σε μικρά, πρακτικά βήματα όταν δεν ξέρεις από πού να αρχίσεις." data-en="Break the work into small practical steps when you do not know where to start.">Σπάσε τη δουλειά σε μικρά, πρακτικά βήματα όταν δεν ξέρεις από πού να αρχίσεις.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+    </div>
+  </section>
+
+  <section class="tools-section" data-section="practice">
+    <h2 data-el="Εξάσκηση και έλεγχος" data-en="Practice and checking">Εξάσκηση και έλεγχος</h2>
+    <p class="tools-section__intro" data-el="Για να δεις τι χρειάζεται περισσότερη δουλειά και να συνεχίσεις στο σωστό επόμενο βήμα." data-en="See what needs more work and continue to the right next step.">Για να δεις τι χρειάζεται περισσότερη δουλειά και να συνεχίσεις στο σωστό επόμενο βήμα.</p>
+    <div class="tools-grid">
+      <a class="tool-card" href="/#practice-map" data-tags="practice"><div class="tool-card__top"><span class="tool-card__icon">🎯</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Χάρτης Εξάσκησης" data-en="Practice Map">Χάρτης Εξάσκησης</h3><p data-el="Σύντομα διαγνωστικά quiz ανά βαθμίδα και μάθημα, χωρίς βαθμό ή διάγνωση μαθητή." data-en="Short diagnostic quizzes by level and subject, without grades or learner diagnosis.">Σύντομα διαγνωστικά quiz ανά βαθμίδα και μάθημα, χωρίς βαθμό ή διάγνωση μαθητή.</p><span class="tool-card__go" data-el="Δες τα quiz →" data-en="See quizzes →">Δες τα quiz →</span></a>
+      <a class="tool-card" href="/study.html?mode=practice" data-tags="practice study"><div class="tool-card__top"><span class="tool-card__icon">🃏</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Κάρτες & quiz ενότητας" data-en="Unit flashcards & quiz">Κάρτες & quiz ενότητας</h3><p data-el="Επανάληψη πάνω στη συγκεκριμένη ενότητα που διάλεξες, διαφορετική από τον διαγνωστικό Χάρτη Εξάσκησης." data-en="Review the exact unit you selected, separate from the diagnostic Practice Map.">Επανάληψη πάνω στη συγκεκριμένη ενότητα που διάλεξες, διαφορετική από τον διαγνωστικό Χάρτη Εξάσκησης.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+      <a class="tool-card" href="/learning-paths.html" data-tags="practice study"><div class="tool-card__top"><span class="tool-card__icon">🛤️</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Μονοπάτια Μάθησης" data-en="Learning Paths">Μονοπάτια Μάθησης</h3><p data-el="Μικρές ακολουθίες βημάτων που συνδέουν το κενό με εξάσκηση και επανέλεγχο." data-en="Short sequences that connect a gap with practice and a final re-check.">Μικρές ακολουθίες βημάτων που συνδέουν το κενό με εξάσκηση και επανέλεγχο.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+    </div>
+  </section>
+
+  <section class="tools-section" data-section="create">
+    <h2 data-el="Δημιουργία και οπτικοποίηση" data-en="Creation and visualization">Δημιουργία και οπτικοποίηση</h2>
+    <p class="tools-section__intro" data-el="Για παρουσίαση, ιδέες, οπτική σύνοψη και δημιουργικές δραστηριότητες." data-en="For presentations, ideas, visual summaries and creative activities.">Για παρουσίαση, ιδέες, οπτική σύνοψη και δημιουργικές δραστηριότητες.</p>
+    <div class="tools-grid">
+      <a class="tool-card" href="/study.html" data-tags="create study"><div class="tool-card__top"><span class="tool-card__icon">🧠</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3>Mind Map</h3><p data-el="Οργάνωση βασικών εννοιών και σχέσεων από την ενεργή σχολική πηγή." data-en="Organize key concepts and relationships from the active school source.">Οργάνωση βασικών εννοιών και σχέσεων από την ενεργή σχολική πηγή.</p><span class="tool-card__go" data-el="Στην AI Μελέτη →" data-en="In AI Study →">Στην AI Μελέτη →</span></a>
+      <a class="tool-card" href="/study.html" data-tags="create study"><div class="tool-card__top"><span class="tool-card__icon">📊</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3>Infographic</h3><p data-el="Συμπυκνωμένη οπτική δομή της ενότητας με βασικά σημεία και όρους." data-en="A compact visual structure of the unit with key points and terms.">Συμπυκνωμένη οπτική δομή της ενότητας με βασικά σημεία και όρους.</p><span class="tool-card__go" data-el="Στην AI Μελέτη →" data-en="In AI Study →">Στην AI Μελέτη →</span></a>
+      <a class="tool-card" href="/study.html" data-tags="create study"><div class="tool-card__top"><span class="tool-card__icon">🖥️</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Διαφάνειες" data-en="Slides">Διαφάνειες</h3><p data-el="Σκελετός διαφανειών για μελέτη της ενότητας, όχι έτοιμη σχολική εργασία." data-en="A slide scaffold for studying the unit, not a ready-to-submit assignment.">Σκελετός διαφανειών για μελέτη της ενότητας, όχι έτοιμη σχολική εργασία.</p><span class="tool-card__go" data-el="Στην AI Μελέτη →" data-en="In AI Study →">Στην AI Μελέτη →</span></a>
+      <a class="tool-card" href="/prompt-generator.html" data-tags="create"><div class="tool-card__top"><span class="tool-card__icon">✨</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3>Prompt Generator</h3><p data-el="Φτιάξε καλύτερο prompt με βάση τον στόχο σου, αντί να ξεκινάς από κενό πλαίσιο." data-en="Build a better prompt around your goal instead of starting from a blank box.">Φτιάξε καλύτερο prompt με βάση τον στόχο σου, αντί να ξεκινάς από κενό πλαίσιο.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+    </div>
+  </section>
+
+  <section class="tools-section" data-section="teacher">
+    <h2 data-el="Για εκπαιδευτικούς" data-en="For educators">Για εκπαιδευτικούς</h2>
+    <p class="tools-section__intro" data-el="Υλικό για την τάξη, με έλεγχο και προσαρμογή από τον εκπαιδευτικό." data-en="Classroom material designed to be reviewed and adapted by the educator.">Υλικό για την τάξη, με έλεγχο και προσαρμογή από τον εκπαιδευτικό.</p>
+    <div class="tools-grid">
+      <a class="tool-card" href="/teacher.html" data-tags="teacher"><div class="tool-card__top"><span class="tool-card__icon">👩‍🏫</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Εργαλεία εκπαιδευτικού" data-en="Educator tools">Εργαλεία εκπαιδευτικού</h3><p data-el="Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, δραστηριότητες και υλικό πάνω στην ύλη." data-en="Worksheets, assessment, lesson plans, activities and curriculum-aware material.">Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, δραστηριότητες και υλικό πάνω στην ύλη.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+      <a class="tool-card" href="/study.html" data-tags="teacher study"><div class="tool-card__top"><span class="tool-card__icon">📚</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="AI Μελέτη ως υλικό τάξης" data-en="AI Study for classroom use">AI Μελέτη ως υλικό τάξης</h3><p data-el="Χρησιμοποίησε σύνοψη, κάρτες, Mind Map και διαφάνειες ως αφετηρία για δικό σου υλικό." data-en="Use summaries, flashcards, Mind Maps and slides as a starting point for your own material.">Χρησιμοποίησε σύνοψη, κάρτες, Mind Map και διαφάνειες ως αφετηρία για δικό σου υλικό.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+    </div>
+  </section>
+
+  <section class="tools-section" data-section="access">
+    <h2 data-el="Προσβασιμότητα και ειδική υποστήριξη" data-en="Accessibility and additional support">Προσβασιμότητα και ειδική υποστήριξη</h2>
+    <p class="tools-section__intro" data-el="Διαδρομές και υλικό για διαφορετικές ανάγκες πρόσβασης και μάθησης." data-en="Pathways and material for different access and learning needs.">Διαδρομές και υλικό για διαφορετικές ανάγκες πρόσβασης και μάθησης.</p>
+    <div class="tools-grid">
+      <a class="tool-card" href="/special-education.html" data-tags="access"><div class="tool-card__top"><span class="tool-card__icon">♿</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Ειδική Εκπαίδευση" data-en="Special Education">Ειδική Εκπαίδευση</h3><p data-el="Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ. με προσαρμοσμένες διαδρομές." data-en="Special Gymnasium, Special Lyceum and EN.E.E.GY.-L. pathways.">Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ. με προσαρμοσμένες διαδρομές.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+      <a class="tool-card" href="/accessibility.html" data-tags="access"><div class="tool-card__top"><span class="tool-card__icon">🔎</span><span class="tool-card__tag" data-el="οδηγός" data-en="guide">οδηγός</span></div><h3 data-el="Προσβασιμότητα εργαλείων" data-en="Tool accessibility">Προσβασιμότητα εργαλείων</h3><p data-el="Στοιχεία προσβασιμότητας για τα εργαλεία που προτείνονται στον οδηγό." data-en="Accessibility information for tools recommended in the guide.">Στοιχεία προσβασιμότητας για τα εργαλεία που προτείνονται στον οδηγό.</p><span class="tool-card__go" data-el="Δες τον οδηγό →" data-en="Open guide →">Δες τον οδηγό →</span></a>
+      <a class="tool-card" href="/sign-language.html" data-tags="access"><div class="tool-card__top"><span class="tool-card__icon">🤟</span><span class="tool-card__tag" data-el="δικό μας" data-en="built-in">δικό μας</span></div><h3 data-el="Ελληνική Νοηματική" data-en="Greek Sign Language">Ελληνική Νοηματική</h3><p data-el="Σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ όπου υπάρχει." data-en="School concepts with simple explanations and official GSL video where available.">Σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ όπου υπάρχει.</p><span class="tool-card__go" data-el="Άνοιγμα →" data-en="Open →">Άνοιγμα →</span></a>
+    </div>
+  </section>
+
+  <section class="tools-section" data-section="external">
+    <h2 data-el="Επιλεγμένα εξωτερικά εργαλεία" data-en="Selected external tools">Επιλεγμένα εξωτερικά εργαλεία</h2>
+    <p class="tools-section__intro" data-el="Δεν τα βάζουμε όλα. Κρατάμε εργαλεία που καλύπτουν συγκεκριμένη ανάγκη και δείχνουμε ξεχωριστά τους όρους χρήσης τους." data-en="We do not list everything. We keep tools that solve a specific need and show their terms separately.">Δεν τα βάζουμε όλα. Κρατάμε εργαλεία που καλύπτουν συγκεκριμένη ανάγκη και δείχνουμε ξεχωριστά τους όρους χρήσης τους.</p>
+    <div class="tools-grid">
+      <a class="tool-card" href="/tools/notebooklm.html" data-tags="external study create"><div class="tool-card__top"><span class="tool-card__icon">📓</span><span class="tool-card__tag" data-el="εξωτερικό" data-en="external">εξωτερικό</span></div><h3>NotebookLM</h3><p data-el="Μελέτη πάνω στις δικές σου πηγές, με Studio για Audio Overview, κάρτες, quiz, Mind Map, infographic και άλλες μορφές." data-en="Study from your own sources, with Studio outputs such as Audio Overview, flashcards, quiz, Mind Map and infographic.">Μελέτη πάνω στις δικές σου πηγές, με Studio για Audio Overview, κάρτες, quiz, Mind Map, infographic και άλλες μορφές.</p><span class="tool-card__go" data-el="Δες την καρτέλα →" data-en="View tool page →">Δες την καρτέλα →</span></a>
+      <a class="tool-card" href="/tools/canva-magic.html" data-tags="external create teacher"><div class="tool-card__top"><span class="tool-card__icon">🎨</span><span class="tool-card__tag" data-el="εξωτερικό" data-en="external">εξωτερικό</span></div><h3>Canva Magic Studio</h3><p data-el="Παρουσιάσεις, αφίσες και οπτικό υλικό με εργαλεία AI." data-en="Presentations, posters and visual material with AI tools.">Παρουσιάσεις, αφίσες και οπτικό υλικό με εργαλεία AI.</p><span class="tool-card__go" data-el="Δες την καρτέλα →" data-en="View tool page →">Δες την καρτέλα →</span></a>
+      <a class="tool-card" href="/tools/photomath.html" data-tags="external practice"><div class="tool-card__top"><span class="tool-card__icon">➗</span><span class="tool-card__tag" data-el="εξωτερικό" data-en="external">εξωτερικό</span></div><h3>Photomath</h3><p data-el="Έλεγχος μαθηματικών βημάτων όταν χρησιμοποιείται μετά τη δική σου προσπάθεια." data-en="Check mathematical steps when used after your own attempt.">Έλεγχος μαθηματικών βημάτων όταν χρησιμοποιείται μετά τη δική σου προσπάθεια.</p><span class="tool-card__go" data-el="Δες την καρτέλα →" data-en="View tool page →">Δες την καρτέλα →</span></a>
+      <a class="tool-card" href="/tools/geogebra.html" data-tags="external practice create"><div class="tool-card__top"><span class="tool-card__icon">📐</span><span class="tool-card__tag" data-el="εξωτερικό" data-en="external">εξωτερικό</span></div><h3>GeoGebra</h3><p data-el="Δυναμικά μαθηματικά και οπτικοποίηση γεωμετρίας, άλγεβρας και συναρτήσεων." data-en="Dynamic mathematics and visualization for geometry, algebra and functions.">Δυναμικά μαθηματικά και οπτικοποίηση γεωμετρίας, άλγεβρας και συναρτήσεων.</p><span class="tool-card__go" data-el="Δες την καρτέλα →" data-en="View tool page →">Δες την καρτέλα →</span></a>
+      <a class="tool-card" href="/tools/reading-coach.html" data-tags="external practice access"><div class="tool-card__top"><span class="tool-card__icon">🔤</span><span class="tool-card__tag" data-el="εξωτερικό" data-en="external">εξωτερικό</span></div><h3>Microsoft Reading Coach</h3><p data-el="Εξάσκηση ανάγνωσης και προφοράς, όπου ταιριάζει στις ανάγκες του μαθητή." data-en="Reading and pronunciation practice where it fits the learner's needs.">Εξάσκηση ανάγνωσης και προφοράς, όπου ταιριάζει στις ανάγκες του μαθητή.</p><span class="tool-card__go" data-el="Δες την καρτέλα →" data-en="View tool page →">Δες την καρτέλα →</span></a>
+      <a class="tool-card" href="/#open-tools" data-tags="external"><div class="tool-card__top"><span class="tool-card__icon">🧭</span><span class="tool-card__tag" data-el="καθοδήγηση" data-en="guided">καθοδήγηση</span></div><h3 data-el="Βρες το σωστό AI για σένα" data-en="Find the right AI for you">Βρες το σωστό AI για σένα</h3><p data-el="Διάλεξε ρόλο και βαθμίδα για πιο στοχευμένες προτάσεις από τον υπάρχοντα οδηγό." data-en="Choose your role and level for more targeted recommendations from the existing guide.">Διάλεξε ρόλο και βαθμίδα για πιο στοχευμένες προτάσεις από τον υπάρχοντα οδηγό.</p><span class="tool-card__go" data-el="Ξεκίνα →" data-en="Start →">Ξεκίνα →</span></a>
+    </div>
+  </section>
+
+  <aside class="tools-note">
+    <h2 data-el="Γιατί υπάρχει και ο οδηγός «Βρες το σωστό AI»;" data-en="Why keep the “Find the right AI” guide too?">Γιατί υπάρχει και ο οδηγός «Βρες το σωστό AI»;</h2>
+    <p data-el="Η σελίδα Εργαλεία δείχνει συνολικά τι μπορείς να κάνεις. Ο οδηγός ρόλου/βαθμίδας παραμένει για όσους θέλουν να πάρουν πιο συγκεκριμένη πρόταση χωρίς να ψάχνουν μόνοι τους." data-en="The Tools page shows the full range of what you can do. The role/level guide remains for people who want a more specific recommendation without browsing on their own.">Η σελίδα Εργαλεία δείχνει συνολικά τι μπορείς να κάνεις. Ο οδηγός ρόλου/βαθμίδας παραμένει για όσους θέλουν να πάρουν πιο συγκεκριμένη πρόταση χωρίς να ψάχνουν μόνοι τους.</p>
+  </aside>
+
+  <footer><span data-el="aitools4kids.gr · δωρεάν, ανεξάρτητος οδηγός για μάθηση με AI" data-en="aitools4kids.gr · free, independent guide for learning with AI">aitools4kids.gr · δωρεάν, ανεξάρτητος οδηγός για μάθηση με AI</span></footer>
+</main>
+<script>
+(function(){
+  let lang='el';
+  try{lang=localStorage.getItem('aitools4kids_lang')==='en'?'en':'el'}catch(_){ }
+  const apply=()=>{
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);
+    document.getElementById('elBtn').classList.toggle('active',lang==='el');
+    document.getElementById('enBtn').classList.toggle('active',lang==='en');
+    document.title=lang==='en'?'Tools | aitools4kids.gr':'Εργαλεία | aitools4kids.gr';
+  };
+  document.getElementById('elBtn').onclick=()=>{lang='el';try{localStorage.setItem('aitools4kids_lang','el')}catch(_){}apply()};
+  document.getElementById('enBtn').onclick=()=>{lang='en';try{localStorage.setItem('aitools4kids_lang','en')}catch(_){}apply()};
+  document.querySelectorAll('[data-filter]').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===btn));
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.tools-section').forEach(sec=>sec.hidden=f!=='all'&&sec.dataset.section!==f);
+    if(f!=='all')document.querySelectorAll('.tool-card').forEach(card=>{if(card.closest('.tools-section')?.dataset.section===f)card.hidden=false});
+  });
+  apply();
+})();
+</script>
+</body>
+</html>

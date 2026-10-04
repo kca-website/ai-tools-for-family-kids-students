@@ -29,21 +29,34 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
   assert.equal(normalize(sourceUnits(source).map(u=>u.text).join(' ')),normalize(source));
   const result=await createWholeSectionLesson({source,topic:'Test',generate:async args=>{
    const input=JSON.parse(args.messages.at(-1).content);
-   return {ok:true,text:JSON.stringify(input.proposals?{checks:input.sourceUnits.map(u=>({id:u.id,supported:true,complete:true}))}:{units:input.sourceUnits.map(u=>({id:u.id,lesson:u.text,evidence:[u.text]}))})};
+   return {ok:true,text:JSON.stringify(input.proposals?{checks:input.sourceUnits.map(u=>({id:u.id,supported:true,complete:true,concise:true}))}:{units:input.sourceUnits.map(u=>({id:u.id,lesson:u.text,evidence:[u.text]}))})};
   }});
   assert.equal(result.verification.coverageRatio,1);assert.equal(result.verification.verbatimUnits,0);assert.match(result.text,new RegExp(`Μέρος ${count}\\.`));
   assert.ok(result.text.length>=source.length);assert.equal(result.verification.unitsCovered,result.verification.units);
  }
- const unsupported=await createWholeSectionLesson({source:prose,topic:'Test',generate:async args=>{
+ await assert.rejects(createWholeSectionLesson({source:prose,topic:'Test',generate:async args=>{
   const input=JSON.parse(args.messages.at(-1).content);
-  return {ok:true,text:JSON.stringify(input.proposals?{checks:input.sourceUnits.map(u=>({id:u.id,supported:false,complete:false}))}:{units:input.sourceUnits.map(u=>({id:u.id,lesson:'Ο αυθαίρετος ισχυρισμός είναι πραγματικότητα.',evidence:[u.text]}))})};
+  return {ok:true,text:JSON.stringify(input.proposals?{checks:input.sourceUnits.map(u=>({id:u.id,supported:false,complete:false,concise:false}))}:{units:input.sourceUnits.map(u=>({id:u.id,lesson:'Ο αυθαίρετος ισχυρισμός είναι πραγματικότητα.',evidence:[u.text]}))})};
+ }}),/verified_audio_summary_unavailable/);
+ await assert.rejects(createWholeSectionLesson({source:Array(25).fill(prose).join('\n\n'),topic:'Test',generate:async()=>({ok:false,status:429})}),/verified_audio_summary_unavailable/);
+ const essential = 'Τα φυτά αναπαράγονται με μονογονία ή αμφιγονία.';
+ const end = 'Μετά τη γονιμοποίηση σχηματίζεται το σπέρμα.';
+ const verbose = essential+' Ένα επιπλέον δευτερεύον παράδειγμα αφορά ένα φυτό σε μια γλάστρα. '+end+'\n\nΕικόνα 6.4. Φωτογραφία ενός κήπου.';
+ const shortened = await createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
+  const input=JSON.parse(args.messages.at(-1).content);
+  return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true}]}:{units:[{id:'u1',passages:[essential,end]}]})};
  }});
- assert.doesNotMatch(unsupported.text,/αυθαίρετος/);assert.match(unsupported.text,/ΤΕΛΟΣ/);assert.equal(unsupported.verification.verbatimUnits,1);
- const outage=await createWholeSectionLesson({source:Array(25).fill(prose).join('\n\n'),topic:'Test',generate:async()=>({ok:false,status:429})});
- assert.equal(outage.verification.coverageRatio,1);assert.equal(outage.verification.verbatimUnits,outage.verification.units);assert.equal(normalize(outage.text.split('\n\n').slice(1).join(' ')),normalize(Array(25).fill(prose).join(' ')));
+ assert.match(shortened.text,/μονογονία ή αμφιγονία/);assert.match(shortened.text,/σπέρμα/);
+ assert.doesNotMatch(shortened.text,/δευτερεύον|Φωτογραφία|Εικόνα/);
+ assert.ok(shortened.verification.compressionRatio<0.6);
+ assert.equal(shortened.mode,'verified-summary');
+ for(const failure of ['supported','complete','concise']) await assert.rejects(createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
+  const input=JSON.parse(args.messages.at(-1).content);
+  return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true,[failure]:false}]}:{units:[{id:'u1',passages:[essential,end]}]})};
+ }}),/verified_audio_summary_unavailable/);
  assert.equal(validMap(JSON.stringify({units:[]}),sourceUnits(prose)),false);
  const page=fs.readFileSync(require.resolve('../study.html'),'utf8');assert.doesNotMatch(page,/if\(action==='audio'&&\/\^insufficient_/);
- console.log('PASS: body vs TOC, sibling boundaries, all sequential text, image formulas, small/medium/large, unsupported claims, full provider outage, no short-route fallback');
+ console.log('PASS: body vs TOC, sibling boundaries, all sequential text, image formulas, small/medium/large, unsupported claims, essential-idea summary without captions or secondary examples, rejects incomplete/non-concise output, outage does not read whole book');
 })().catch(err=>{console.error(err);process.exitCode=1});
 
 const {correctOfficialFigure,figureCorrections} = require('../schoolbook-source-corrections');

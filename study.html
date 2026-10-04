@@ -810,7 +810,7 @@
       ? (lang==='en'?'Verified against official source':'Ελεγμένο πάνω στην επίσημη πηγή')
       : (lang==='en'?'Official-source summary':'Σύνοψη επίσημης πηγής');
     if(body.verified&&source?.grounded)sourceEvidenceUi(source,'verified');
-    if(activity==='audio'&&body.verification?.verbatimUnits)$('providerStatus').textContent=lang==='en'?'Checked against the official source. Some parts are read directly from the book.':'Ελεγμένο πάνω στην επίσημη πηγή. Ορισμένα μέρη διαβάζονται αυτούσια από το βιβλίο.';
+    if(activity==='audio'&&body.mode==='verified-summary')$('providerStatus').textContent=lang==='en'?'Summary of the key ideas, checked against the full official section.':'Σύνοψη των βασικών σημείων, ελεγμένη πάνω σε ολόκληρη την επίσημη ενότητα.';
     return body.text;
   }
 

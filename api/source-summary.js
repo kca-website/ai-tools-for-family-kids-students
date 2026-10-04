@@ -60,6 +60,7 @@ module.exports = async function handler(req, res) {
     return await verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation });
   } catch (err) {
     console.error('SOURCE_SUMMARY_ERROR', err?.stack || err);
+    if (String(err?.message) === 'verified_audio_summary_unavailable') return res.status(503).json({error:'verified_audio_summary_unavailable',message:lang === 'en' ? 'Could not verify a concise lesson. Please try again shortly.' : 'Δεν ολοκληρώθηκε ο έλεγχος της σύντομης αφήγησης. Δοκίμασε ξανά σε λίγο.'});
     return res.status(502).json({ error: 'summary_failed', message: lang === 'en' ? 'Could not create a verified summary.' : 'Δεν δημιουργήθηκε επαληθευμένη σύνοψη.' });
   }
 };

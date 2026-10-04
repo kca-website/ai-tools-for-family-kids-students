@@ -1,0 +1,28 @@
+name: B Gym Greek source regression
+
+on:
+  pull_request:
+    paths:
+      - 'primary-schoolbook-complete-sources-2026-2027.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/b-gym-greek-source-bundle-regression.mjs'
+      - '.github/workflows/b-gym-greek-source-regression.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'primary-schoolbook-complete-sources-2026-2027.js'
+      - 'api/schoolbook-source.js'
+      - 'tests/b-gym-greek-source-bundle-regression.mjs'
+      - '.github/workflows/b-gym-greek-source-regression.yml'
+
+jobs:
+  source-bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify B Gym Greek source bundle
+        run: node tests/b-gym-greek-source-bundle-regression.mjs

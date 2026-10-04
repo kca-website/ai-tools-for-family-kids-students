@@ -61,7 +61,7 @@
     Object.entries(actions).forEach(([key,cfg])=>{
       if(document.querySelector('[data-action="'+key+'"]'))return;
       const b=document.createElement("button");
-      b.type="button";b.className="study-action";b.dataset.action=key;b.dataset.studioExtra="1";
+      b.type="button";b.className="study-action";b.dataset.action="quickreview";b.dataset.studioAction=key;b.dataset.studioExtra="1";
       b.innerHTML='<span></span><span></span>';
       grid.appendChild(b);
     });
@@ -111,7 +111,7 @@
       const url=typeof input==='string'?input:String(input?.url||'');
       if((url==='/api/tutor-assistant'||url.endsWith('/api/tutor-assistant'))&&init&&typeof init.body==='string'){
         try{
-          const payload=JSON.parse(init.body),cfg=actions[payload?.activity];
+          const payload=JSON.parse(init.body),cfg=pendingAction&&payload?.activity==='quickreview'?actions[pendingAction]:null;
           if(cfg){
             payload.activity=cfg.serverActivity;
             payload.task='guided_task';
@@ -121,6 +121,7 @@
             payload.prompt=String(payload.prompt||'').trim()+'\n\n'+rule;
             if(payload.studyContext&&typeof payload.studyContext==='object')payload.studyContext.studyAction=pendingAction||'studio_extra';
             init={...init,body:JSON.stringify(payload)};
+            pendingAction='';
           }
         }catch(_){/* keep original request */}
       }
@@ -141,7 +142,7 @@
 
   document.addEventListener('click',(event)=>{
     const b=event.target?.closest?.('[data-studio-extra="1"]');if(!b)return;
-    pendingAction=b.dataset.action||'';pendingDisclosure=true;
+    pendingAction=b.dataset.studioAction||'';pendingDisclosure=true;
     const cfg=actions[pendingAction];
     setTimeout(()=>{
       const title=document.getElementById('workspaceTitle');if(title&&cfg)title.textContent=isEn()?cfg.titleEn:cfg.titleEl;

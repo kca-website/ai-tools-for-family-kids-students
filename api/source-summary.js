@@ -51,6 +51,7 @@ module.exports = async function handler(req, res) {
   const selectedTopic = String(topic || '').trim().slice(0, 600);
   const lang = language === 'en' ? 'en' : 'el';
   const explanation = activity === 'explain';
+  const audioLesson = activity === 'audio';
 
   if (!sid || !selectedTopic) {
     return res.status(400).json({
@@ -82,12 +83,13 @@ module.exports = async function handler(req, res) {
   const workingSource = compactSourceForTopic(source, selectedTopic, 6500);
   const cacheParts = {
     kind: 'verified-source-summary',
-    promptVersion: 'verified-summary-v3',
+    promptVersion: 'verified-summary-v4-full-audio',
     subjectId: sid,
     topic: selectedTopic,
     title,
     language: lang,
     explanation,
+    audioLesson,
     modelRoute: routingSignature(aiStatus),
     source: workingSource,
   };
@@ -104,7 +106,8 @@ Return ONLY valid JSON in this form:
 {"claims":[{"claim":"One clear paraphrased factual sentence.","evidence":"An exact 4–24 word excerpt copied verbatim from SOURCE that directly supports the claim."}]}
 
 STRICT RULES:
-- Produce 5–8 claims in a logical learning order.
+- Produce ${audioLesson ? '10–16' : '5–8'} claims in a logical learning order.
+- ${audioLesson ? 'Cover the WHOLE selected chapter/section from beginning to end: include all major ideas and important details represented in SOURCE. This is a full spoken lesson, NOT a brief summary. Do not stop after the first subsection.' : 'Keep the summary concise.'}
 - Each claim must be directly entailed by its evidence and by SOURCE.
 - Evidence must be copied EXACTLY from SOURCE, not paraphrased. Prefer a short 3–18 word excerpt so exact matching is reliable.
 - Preserve textbook terminology and scope.
@@ -117,7 +120,8 @@ STRICT RULES:
 {"claims":[{"claim":"Μία καθαρή παραφρασμένη πραγματολογική πρόταση.","evidence":"Ακριβές απόσπασμα 4–24 λέξεων αντιγραμμένο αυτούσιο από την ΠΗΓΗ που στηρίζει άμεσα την πρόταση."}]}
 
 ΑΥΣΤΗΡΟΙ ΚΑΝΟΝΕΣ:
-- Δώσε 5–8 προτάσεις σε λογική σειρά μάθησης.
+- Δώσε ${audioLesson ? '10–16' : '5–8'} προτάσεις σε λογική σειρά μάθησης.
+- ${audioLesson ? 'Κάλυψε ΟΛΟ το επιλεγμένο κεφάλαιο/ενότητα από την αρχή ως το τέλος: όλες τις βασικές ιδέες και τις σημαντικές λεπτομέρειες που υπάρχουν στην ΠΗΓΗ. Πρόκειται για πλήρες προφορικό μάθημα, ΟΧΙ για μικρή σύνοψη. Μη σταματήσεις στην πρώτη υποενότητα.' : 'Κράτησε τη σύνοψη σύντομη.'}
 - Κάθε claim πρέπει να προκύπτει άμεσα από το evidence και την ΠΗΓΗ.
 - Το evidence πρέπει να είναι ΑΚΡΙΒΩΣ αυτούσιο από την ΠΗΓΗ, όχι παράφραση. Προτίμησε σύντομο απόσπασμα 3–18 λέξεων ώστε να επαληθεύεται αξιόπιστα.
 - Διατήρησε την ορολογία και τα όρια του σχολικού βιβλίου.
@@ -145,7 +149,7 @@ STRICT RULES:
         ].filter(Boolean).join('\n\n')
       }
     ],
-    maxTokens: 950,
+    maxTokens: audioLesson ? 1700 : 950,
     temperature: 0,
     reasoningEffort: 'low',
     modelProfile: 'balanced',
@@ -162,7 +166,7 @@ STRICT RULES:
   }
 
   const proposed = parseJsonObject(first.text);
-  const rawClaims = Array.isArray(proposed?.claims) ? proposed.claims.slice(0, 12) : [];
+  const rawClaims = Array.isArray(proposed?.claims) ? proposed.claims.slice(0, audioLesson ? 20 : 12) : [];
   const sourceNorm = normalizeForEvidence(workingSource);
 
   const evidenceChecked = rawClaims
@@ -226,7 +230,7 @@ For each candidate:
         ].filter(Boolean).join('\n\n')
       }
     ],
-    maxTokens: 450,
+    maxTokens: audioLesson ? 750 : 450,
     temperature: 0,
     reasoningEffort: 'low',
     modelProfile: 'quality',
@@ -257,7 +261,7 @@ For each candidate:
     });
   }
 
-  const finalText = formatSummary(approved.map(row => row.claim), selectedTopic, lang, explanation);
+  const finalText = formatSummary(approved.map(row => row.claim), selectedTopic, lang, explanation, audioLesson);
 
   const responseBody = {
     text: finalText,
@@ -362,13 +366,13 @@ function parseJsonObject(text) {
   return null;
 }
 
-function formatSummary(claims, topic, lang, explanation = false) {
+function formatSummary(claims, topic, lang, explanation = false, audioLesson = false) {
   const safeClaims = claims
     .map(x => String(x || '').trim())
     .filter(Boolean)
-    .slice(0, 10);
+    .slice(0, audioLesson ? 18 : 10);
 
-  const label = explanation ? (lang === 'en' ? 'Explanation' : 'Εξήγηση') : (lang === 'en' ? 'Summary' : 'Σύνοψη');
+  const label = audioLesson ? (lang === 'en' ? 'Full audio lesson' : 'Πλήρες ακουστικό μάθημα') : explanation ? (lang === 'en' ? 'Explanation' : 'Εξήγηση') : (lang === 'en' ? 'Summary' : 'Σύνοψη');
   const heading = topic
     ? `${label} – ${topic}`
     : (lang === 'en' ? 'Verified summary' : 'Επαληθευμένη σύνοψη');

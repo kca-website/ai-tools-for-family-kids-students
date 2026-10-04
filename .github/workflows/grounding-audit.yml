@@ -1,0 +1,38 @@
+name: Grounding coverage audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'gel-schoolbook-manual-overrides-2026-2027.js'
+      - 'general-education-book-sections-2026-2027.js'
+      - 'scripts/grounding-coverage-report.mjs'
+      - 'package.json'
+      - '.github/workflows/grounding-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install runtime dependencies
+        run: npm install --no-package-lock --ignore-scripts
+      - name: Generate grounding report
+        run: npm run audit:grounding | tee grounding-coverage.json
+      - name: Add report to job summary
+        run: |
+          echo '## Grounding coverage' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat grounding-coverage.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grounding-coverage
+          path: grounding-coverage.json

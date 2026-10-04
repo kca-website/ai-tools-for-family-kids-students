@@ -76,9 +76,9 @@ jobs:
               throw new Error('Unsafe official URL in ' + entry.label);
             }
           }
-          require('./api/schoolbook-source.js');
           console.log('PRIMARY_MATH_A_COMPLETE_BUNDLES=9');
           NODE
+          node --check api/schoolbook-source.js
           npm run audit:grounding > /tmp/grounding.json
           node - <<'NODE'
           const fs = require('fs');

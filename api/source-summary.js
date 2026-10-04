@@ -87,10 +87,10 @@ module.exports = async function handler(req, res) {
 };
 
 async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang, aiStatus }) {
-  const scopedSource = scopeAudioSource(source, sid, selectedTopic);
+  const scopedSource = scopeToSelectedSection(source, selectedTopic);
   const cacheKey = {
     kind: 'verified-whole-chapter-audio',
-    promptVersion: 'whole-chapter-audio-v5-scoped-complete-deduped',
+    promptVersion: 'whole-chapter-audio-v6-global-detailed-coverage',
     subjectId: sid,
     topic: selectedTopic,
     title,
@@ -104,7 +104,7 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     return res.status(200).json({ ...cached, cacheHit: true });
   }
 
-  const segments = splitAudioChapter(scopedSource, sid, selectedTopic);
+  const segments = splitWholeChapter(scopedSource, 2200, 10);
   const rowsBySegment = [];
   let provider = null;
   let model = null;
@@ -112,22 +112,28 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
 
   for (let i = 0; i < segments.length; i++) {
     const segment = segments[i];
-    const generated = await generateSegmentClaims({ segment, index: i, count: segments.length, selectedTopic, lang });
+    let generated = null;
+    try {
+      generated = await generateSegmentClaims({ segment, index: i, count: segments.length, selectedTopic, lang });
+    } catch (err) {
+      console.warn('SOURCE_SUMMARY_SEGMENT_AI_ERROR', JSON.stringify({ part: i + 1, message: String(err?.message || err).slice(0, 240) }));
+    }
+
     if (generated?.ok) {
       provider = generated.provider || provider;
       model = generated.model || model;
       addUsage(usage, generated.usage);
     }
 
-    let claims = verifiedClaimsFromResponse(generated?.text, segment, 6);
-    if (claims.length < 3) {
-      const fallback = extractiveFallback(segment, 3);
+    let claims = verifiedClaimsFromResponse(generated?.text, segment, 7);
+    if (claims.length < 4) {
+      const fallback = extractiveFallback(segment, 4);
       for (const row of fallback) {
-        if (claims.length >= 3) break;
-        if (!claims.some(x => normalizeForEvidence(x.claim) === normalizeForEvidence(row.claim))) claims.push(row);
+        if (claims.length >= 4) break;
+        if (!claims.some(x => claimsTooSimilar(x.claim, row.claim))) claims.push(row);
       }
     }
-    rowsBySegment.push(claims);
+    rowsBySegment.push(dedupeClaims(claims));
   }
 
   const covered = rowsBySegment.filter(rows => rows.length > 0).length;
@@ -135,22 +141,22 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     return res.status(502).json({
       error: 'incomplete_chapter_coverage',
       message: lang === 'en'
-        ? 'The complete chapter could not be represented safely.'
-        : 'Δεν μπόρεσε να καλυφθεί με ασφάλεια ολόκληρο το κεφάλαιο.'
+        ? 'The complete selected section could not be represented safely.'
+        : 'Δεν μπόρεσε να καλυφθεί με ασφάλεια ολόκληρη η επιλεγμένη ενότητα.'
     });
   }
 
-  const claimLimit = Math.min(32, Math.max(18, segments.length * 3));
-  const baseQuota = Math.max(2, Math.floor(claimLimit / segments.length));
-  const remainder = Math.max(0, claimLimit - baseQuota * segments.length);
+  const claimLimit = Math.min(40, Math.max(12, segments.length * 5));
   const selected = [];
-  for (let i = 0; i < rowsBySegment.length; i++) {
-    const quota = baseQuota + (i < remainder ? 1 : 0);
-    selected.push(...rowsBySegment[i].slice(0, quota));
+  for (const rows of rowsBySegment) {
+    for (const row of rows) {
+      if (selected.length >= claimLimit) break;
+      if (!selected.some(x => claimsTooSimilar(x.claim, row.claim))) selected.push(row);
+    }
+    if (selected.length >= claimLimit) break;
   }
-  const deduped = dedupeClaims(selected).slice(0, claimLimit);
 
-  const text = formatAudio(deduped.map(x => x.claim), selectedTopic, lang);
+  const text = formatAudio(selected.map(x => x.claim), selectedTopic, lang);
   const response = {
     text,
     verified: true,
@@ -158,29 +164,37 @@ async function wholeChapterAudio({ res, source, title, sid, selectedTopic, lang,
     verification: {
       segments: segments.length,
       segmentsCovered: covered,
-      approved: deduped.length,
+      approved: selected.length,
       coverageRatio: 1,
+      sourceChars: source.length,
+      scopedChars: scopedSource.length,
     },
     provider,
     model,
     usage,
   };
   await setStudyCache(cacheKey, response);
+  console.info('AI_METRIC ' + JSON.stringify({
+    event: 'ai_request', task: 'whole_chapter_audio', activity: 'audio', status: 200,
+    provider: provider || '', model: model || '', segments: segments.length,
+    approved: selected.length, sourceChars: source.length, scopedChars: scopedSource.length,
+    ...usage,
+  }));
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({ ...response, cacheHit: false });
 }
 
 async function generateSegmentClaims({ segment, index, count, selectedTopic, lang }) {
   const system = lang === 'en'
-    ? `You are summarizing ONE sequential part of an official schoolbook chapter. Return ONLY valid JSON: {"claims":[{"claim":"one clear explanatory sentence","evidence":"an exact 4-24 word excerpt copied from PART"}]}. Produce 3-5 claims. Keep the essential ideas, definitions, relationships, causes/results, units, explicit conversion relationships and explanations that a student needs to understand this part. If PART contains a complete list or table of important items, represent the complete set rather than naming only some of them. Spell out an abbreviation the first time it is used when PART gives the full name. Do not use navigation, review questions or exercises to introduce facts from outside the selected topic. Omit only secondary detail, use no outside knowledge, and copy evidence exactly. Prefer explanatory sentences rather than telegraphic notes.`
-    : `Συνοψίζεις ΕΝΑ διαδοχικό τμήμα επίσημου σχολικού κεφαλαίου. Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"claims":[{"claim":"μία καθαρή επεξηγηματική πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων αντιγραμμένο από το ΤΜΗΜΑ"}]}. Δώσε 3-5 claims. Κράτησε τις ουσιώδεις ιδέες, ορισμούς, σχέσεις, αιτίες/αποτελέσματα, μονάδες, ρητές σχέσεις μετατροπών και τις εξηγήσεις που χρειάζεται ο μαθητής για να κατανοήσει αυτό το τμήμα. Αν το ΤΜΗΜΑ περιέχει πλήρη λίστα ή πίνακα σημαντικών στοιχείων, απόδωσε το πλήρες σύνολο και όχι μόνο μερικά παραδείγματα. Την πρώτη φορά που χρησιμοποιείς συντομογραφία, γράψε και την πλήρη ονομασία όταν αυτή υπάρχει στο ΤΜΗΜΑ. Μη χρησιμοποιείς πλοήγηση, ερωτήσεις επανάληψης ή ασκήσεις για να εισαγάγεις πληροφορίες έξω από το επιλεγμένο θέμα. Παράλειψε μόνο δευτερεύουσες λεπτομέρειες, μη χρησιμοποιείς εξωτερική γνώση και αντέγραψε το evidence ακριβώς. Προτίμησε επεξηγηματικές προτάσεις και όχι τηλεγραφικές σημειώσεις.`;
+    ? `You are preparing ONE sequential part of a spoken lesson from an official schoolbook. Return ONLY valid JSON: {"claims":[{"claim":"one clear explanatory sentence","evidence":"an exact 4-24 word excerpt copied from PART"}]}. Produce 4-6 claims. Cover the important ideas in this PART, including definitions, processes, relationships, causes/results, formulas, units, explicit conversions and textbook examples when they are present. Explain enough for a student to understand, not just memorize labels. Do not repeat the same idea. Do not use outside knowledge. Evidence must be copied exactly from PART.`
+    : `Ετοιμάζεις ΕΝΑ διαδοχικό τμήμα προφορικού μαθήματος από επίσημο σχολικό βιβλίο. Επίστρεψε ΜΟΝΟ έγκυρο JSON: {"claims":[{"claim":"μία καθαρή επεξηγηματική πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων αντιγραμμένο από το ΤΜΗΜΑ"}]}. Δώσε 4-6 claims. Κάλυψε τις σημαντικές ιδέες αυτού του ΤΜΗΜΑΤΟΣ, μαζί με ορισμούς, διαδικασίες, σχέσεις, αιτίες/αποτελέσματα, τύπους, μονάδες, ρητές μετατροπές και παραδείγματα του βιβλίου όταν υπάρχουν. Εξήγησε αρκετά ώστε ο μαθητής να καταλαβαίνει και όχι απλώς να απομνημονεύει ονομασίες. Μην επαναλαμβάνεις την ίδια ιδέα. Μην χρησιμοποιείς εξωτερική γνώση. Το evidence πρέπει να αντιγράφεται ακριβώς από το ΤΜΗΜΑ.`;
 
   return generateChat({
     messages: [
       { role: 'system', content: system },
       { role: 'user', content: `TOPIC: ${selectedTopic}\nPART ${index + 1} OF ${count}:\n\n${segment}` }
     ],
-    maxTokens: 950,
+    maxTokens: 1100,
     temperature: 0,
     reasoningEffort: 'low',
     modelProfile: 'balanced',
@@ -228,7 +242,7 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
   }
 
   const label = explanation ? (lang === 'en' ? 'Explanation' : 'Εξήγηση') : (lang === 'en' ? 'Summary' : 'Σύνοψη');
-  const text = `${label} – ${selectedTopic}\n\n${paragraphize(claims.map(x => x.claim))}`;
+  const text = `${label} – ${selectedTopic}\n\n${paragraphize(claims.map(x => x.claim), 3)}`;
   const response = {
     text,
     verified: true,
@@ -247,7 +261,7 @@ function verifiedClaimsFromResponse(text, source, limit) {
   const rows = Array.isArray(parsed?.claims) ? parsed.claims.slice(0, limit) : [];
   const sourceNorm = normalizeForEvidence(source);
   return rows.map(row => ({
-    claim: clean(row?.claim, 650),
+    claim: clean(row?.claim, 800),
     evidence: clean(row?.evidence, 500),
   })).filter(row =>
     row.claim.length >= 10 &&
@@ -261,89 +275,80 @@ function extractiveFallback(segment, maxSentences) {
     .replace(/\s+/g, ' ')
     .split(/(?<=[.!;·])\s+/)
     .map(s => s.trim())
-    .filter(s => s.length >= 45 && s.length <= 360)
+    .filter(s => s.length >= 35 && s.length <= 420)
     .filter(s => !/^https?:\/\//i.test(s));
   if (!sentences.length) return [];
 
-  const wanted = Math.max(1, Math.min(maxSentences || 2, sentences.length));
+  const wanted = Math.max(1, Math.min(maxSentences || 4, sentences.length));
   const out = [];
   for (let i = 0; i < wanted; i++) {
-    const idx = Math.min(sentences.length - 1, Math.floor(i * sentences.length / wanted));
-    const sentence = sentences[idx];
-    if (sentence && !out.some(x => x.claim === sentence)) out.push({ claim: sentence, evidence: sentence.slice(0, 500) });
+    const idx = wanted === 1
+      ? Math.floor(sentences.length / 2)
+      : Math.round(i * (sentences.length - 1) / (wanted - 1));
+    const sentence = sentences[Math.min(sentences.length - 1, idx)];
+    if (sentence && !out.some(x => claimsTooSimilar(x.claim, sentence))) {
+      out.push({ claim: sentence, evidence: sentence.slice(0, 500) });
+    }
   }
   return out;
 }
 
-function scopeAudioSource(source, sid, topic) {
-  let full = String(source || '').trim();
-  const subject = String(sid || '').trim();
-  const selected = String(topic || '').trim();
-
-  if ((subject === 'fysiki-b-gymnasiou' || subject === 'physics-gymnasiou') && /^1\.3\b/.test(selected)) {
-    const startMarker = '1.3 Τα φυσικά μεγέθη και οι μονάδες τους';
-    const start = full.indexOf(startMarker);
-    if (start >= 0) full = full.slice(start);
-    const endMarkers = ['Ερωτήσεις', 'Παιχνίδι αυτοαξιολόγησης'];
-    const ends = endMarkers.map(marker => full.indexOf(marker)).filter(index => index > 0);
-    if (ends.length) full = full.slice(0, Math.min(...ends));
-  }
-  return full.trim();
-}
-
-function splitAudioChapter(source, sid, topic) {
-  const subject = String(sid || '').trim();
-  const selected = String(topic || '').trim();
-  if ((subject === 'fysiki-b-gymnasiou' || subject === 'physics-gymnasiou') && /^1\.3\b/.test(selected)) {
-    const semantic = splitByMarkers(source, [
-      '1.3 Τα φυσικά μεγέθη και οι μονάδες τους',
-      'Τα θεμελιώδη μεγέθη',
-      'Μέτρηση μήκους',
-      'Μέτρηση του χρόνου',
-      'Μάζα και μέτρηση της',
-      'Παράγωγα μεγέθη',
-      'Μέτρηση εμβαδού',
-      'Μέτρηση όγκου',
-      'Μέτρηση της πυκνότητας',
-      'Διεθνές Σύστημα Μονάδων',
-      'Πολλαπλάσια και υποπολλαπλάσια των μονάδων'
-    ]);
-    if (semantic.length >= 6) return semantic;
-  }
-  return splitWholeChapter(source, 4600, 9);
-}
-
-function splitByMarkers(source, markers) {
+function scopeToSelectedSection(source, topic) {
   const full = String(source || '').trim();
-  const found = [];
-  for (const marker of markers) {
-    const index = full.indexOf(marker);
-    if (index >= 0) found.push({ index, marker });
+  if (!full) return '';
+
+  const codeMatch = String(topic || '').match(/(?:^|[^\d])(\d+\.\d+(?:\.\d+)?)(?:[^\d]|$)/);
+  let scoped = full;
+  if (codeMatch) {
+    const code = codeMatch[1];
+    const lines = full.split('\n');
+    const headingRe = new RegExp('^\\s*' + escapeRegExp(code) + '(?:\\s|[-–—.:]|$)');
+    const start = lines.findIndex(line => headingRe.test(line));
+    if (start >= 0) {
+      const depth = code.split('.').length;
+      let end = lines.length;
+      for (let i = start + 1; i < lines.length; i++) {
+        const match = lines[i].match(/^\s*(\d+(?:\.\d+)+)(?:\s|[-–—.:]|$)/);
+        if (!match || match[1] === code) continue;
+        const other = match[1].split('.');
+        if (other.length <= depth) {
+          end = i;
+          break;
+        }
+      }
+      const candidate = lines.slice(start, end).join('\n').trim();
+      if (candidate.length >= 500) scoped = candidate;
+    }
   }
-  found.sort((a, b) => a.index - b.index);
-  const unique = found.filter((row, i) => i === 0 || row.index !== found[i - 1].index);
-  const out = [];
-  for (let i = 0; i < unique.length; i++) {
-    const start = unique[i].index;
-    const end = i + 1 < unique.length ? unique[i + 1].index : full.length;
-    const piece = full.slice(start, end).trim();
-    if (piece.length >= 120) out.push(piece);
-  }
-  return out;
+
+  const tailMarkers = ['\nΕρωτήσεις', '\nΑΣΚΗΣΕΙΣ', '\nΑσκήσεις', '\nΔραστηριότητες', '\nΠαιχνίδι αυτοαξιολόγησης'];
+  const ends = tailMarkers.map(marker => scoped.indexOf(marker)).filter(i => i >= 700);
+  if (ends.length) scoped = scoped.slice(0, Math.min(...ends));
+  return scoped.trim();
 }
 
-function splitWholeChapter(source, targetChars = 4600, maxParts = 9) {
+function splitWholeChapter(source, targetChars = 2200, maxParts = 10) {
   const full = String(source || '').trim();
   if (!full) return [];
-  const desired = Math.max(1, Math.min(maxParts, Math.ceil(full.length / targetChars)));
-  const size = Math.ceil(full.length / desired);
+
+  let desired = Math.ceil(full.length / Math.max(1200, targetChars));
+  if (full.length >= 2400) desired = Math.max(2, desired);
+  if (full.length >= 4200) desired = Math.max(3, desired);
+  desired = Math.max(1, Math.min(maxParts, desired));
+
+  const approx = Math.ceil(full.length / desired);
   const out = [];
   let pos = 0;
-  while (pos < full.length && out.length < maxParts) {
-    let end = Math.min(full.length, pos + size);
+  while (pos < full.length && out.length < desired) {
+    let end = out.length === desired - 1 ? full.length : Math.min(full.length, pos + approx);
     if (end < full.length) {
-      const floor = pos + Math.floor(size * 0.72);
-      const candidates = [full.lastIndexOf('\n\n', end), full.lastIndexOf('. ', end), full.lastIndexOf('; ', end)].filter(x => x >= floor);
+      const floor = pos + Math.floor(approx * 0.65);
+      const candidates = [
+        full.lastIndexOf('\n\n', end),
+        full.lastIndexOf('. ', end),
+        full.lastIndexOf('; ', end),
+        full.lastIndexOf('· ', end),
+      ].filter(x => x >= floor);
       if (candidates.length) {
         const best = Math.max(...candidates);
         end = best + (full.slice(best, best + 2) === '. ' ? 1 : 0);
@@ -355,7 +360,7 @@ function splitWholeChapter(source, targetChars = 4600, maxParts = 9) {
     pos = end;
   }
   if (pos < full.length && out.length) out[out.length - 1] += '\n\n' + full.slice(pos).trim();
-  return out;
+  return out.filter(part => part.length >= 120);
 }
 
 function dedupeClaims(rows) {
@@ -374,14 +379,14 @@ function claimsTooSimilar(a, b) {
   const nb = normalizeForEvidence(b);
   if (!na || !nb) return false;
   if (na === nb) return true;
-  const stop = new Set(['και','των','την','τον','της','του','στο','στη','στην','στον','για','απο','από','ένα','μια','μία','είναι','που','με','σε','τα','το']);
+  const stop = new Set(['και','των','την','τον','της','του','στο','στη','στην','στον','για','απο','από','ένα','μια','μία','είναι','που','με','σε','τα','το','οι','τις']);
   const words = value => new Set(value.split(/\s+/).map(x => x.replace(/[^\p{L}\p{N}]/gu, '')).filter(x => x.length >= 4 && !stop.has(x)));
   const aa = words(na);
   const bb = words(nb);
   if (!aa.size || !bb.size) return false;
   let overlap = 0;
   for (const word of aa) if (bb.has(word)) overlap += 1;
-  return overlap / Math.min(aa.size, bb.size) >= 0.82;
+  return overlap / Math.min(aa.size, bb.size) >= 0.88;
 }
 
 function compactSourceForTopic(source, topic, maxChars) {
@@ -412,15 +417,21 @@ function compactSourceForTopic(source, topic, maxChars) {
 
 function formatAudio(claims, topic, lang) {
   const heading = lang === 'en'
-    ? `Audio summary of the whole chapter – ${topic}`
-    : `Ακουστική περίληψη όλου του κεφαλαίου – ${topic}`;
-  return `${heading}\n\n${paragraphize(claims)}`;
+    ? `Audio lesson covering the whole selected section – ${topic}`
+    : `Ακουστικό μάθημα για όλη την επιλεγμένη ενότητα – ${topic}`;
+  return `${heading}\n\n${paragraphize(claims, 2)}`;
 }
 
-function paragraphize(claims) {
+function paragraphize(claims, perParagraph = 3) {
   const paragraphs = [];
-  for (let i = 0; i < claims.length; i += 3) paragraphs.push(claims.slice(i, i + 3).join(' '));
+  for (let i = 0; i < claims.length; i += perParagraph) {
+    paragraphs.push(claims.slice(i, i + perParagraph).join(' '));
+  }
   return paragraphs.join('\n\n');
+}
+
+function escapeRegExp(value) {
+  return String(value || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function clean(value, max) {

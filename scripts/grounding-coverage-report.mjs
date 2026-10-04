@@ -73,16 +73,18 @@ function gelReport() {
 }
 
 function primaryReport() {
-  const rows = Object.values(primary.all ? primary.all() : {})
-    .filter((row) => /dimotikou/i.test(String(row?.sourceUrl || '')));
+  const ids = Array.isArray(primary.ids)
+    ? primary.ids.filter((subjectId) => /-dimotikou$/.test(subjectId))
+    : [];
 
   let grounded = 0;
   let total = 0;
   const subjects = [];
   const missing = [];
 
-  rows.forEach((row, index) => {
-    const subjectId = row.id || row.subjectId || `primary-catalog-row-${index + 1}`;
+  for (const subjectId of ids) {
+    const row = primary.get(subjectId);
+    if (!row) continue;
     const sections = Array.isArray(row.sections) ? row.sections : [];
     const groundedSections = row.groundedSections || {};
     let subjectGrounded = 0;
@@ -117,7 +119,7 @@ function primaryReport() {
       mappingStatus: row.mappingStatus || row.groundingStatus || null,
       missing: subjectMissing
     });
-  });
+  }
 
   return {
     grounded,

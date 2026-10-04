@@ -311,7 +311,7 @@ async function handleWholeChapterAudio({ res, source, title, sid, selectedTopic,
   const segments = splitWholeChapter(source, 5200);
   const cacheParts = {
     kind: 'verified-whole-chapter-audio',
-    promptVersion: 'whole-chapter-audio-v1-map-reduce',
+    promptVersion: 'whole-chapter-audio-v2-tolerant-evidence',
     subjectId: sid,
     topic: selectedTopic,
     title,
@@ -369,23 +369,29 @@ Keep the important ideas and explanations needed to understand this part. Omit m
       evidence: clean(row?.evidence, 500)
     })).filter(row => row.claim.length >= 12 && row.evidence.length >= 4 && norm.includes(normalizeForEvidence(row.evidence)));
 
-    // Require representation from every non-trivial segment. This prevents a lesson
-    // that silently stops halfway through the chapter.
-    if (!safe.length) {
-      return res.status(502).json({
-        error: 'incomplete_chapter_coverage',
-        message: lang === 'en'
-          ? `Part ${i + 1} of the chapter could not be verified, so an incomplete lesson was not shown.`
-          : `Δεν επαληθεύτηκε το τμήμα ${i + 1} του κεφαλαίου, οπότε δεν εμφανίστηκε ελλιπές μάθημα.`
-      });
-    }
+    // Keep verified claims from each segment, but do not fail the entire chapter
+    // because one segment's short verbatim evidence did not exact-match after HTML
+    // cleanup. We assess coverage after all segments have been processed.
     approvedBySegment.push(safe);
   }
 
-  // Preserve at least one verified idea from every sequential segment, then add
-  // further important ideas in chapter order up to a compact spoken-lesson budget.
+  const coveredSegments = approvedBySegment.filter(rows => rows.length > 0).length;
+  const coverageRatio = segments.length ? coveredSegments / segments.length : 0;
+  // Fail closed only when chapter-wide grounding is genuinely too sparse. A single
+  // exact-evidence miss must not invalidate otherwise verified curriculum material.
+  if (coveredSegments < Math.min(2, segments.length) || coverageRatio < 0.6) {
+    return res.status(502).json({
+      error: 'insufficient_chapter_coverage',
+      message: lang === 'en'
+        ? 'Not enough of the chapter could be verified safely.'
+        : 'Δεν επαληθεύτηκε αρκετό μέρος του κεφαλαίου για ασφαλή ακουστική περίληψη.'
+    });
+  }
+
+  // Preserve one verified idea from every successfully grounded sequential segment,
+  // then add further important ideas in chapter order.
   const selected = [];
-  for (const rows of approvedBySegment) selected.push(rows[0]);
+  for (const rows of approvedBySegment) if (rows[0]) selected.push(rows[0]);
   for (const rows of approvedBySegment) {
     for (let i = 1; i < rows.length && selected.length < 24; i++) selected.push(rows[i]);
   }
@@ -404,7 +410,7 @@ Keep the important ideas and explanations needed to understand this part. Omit m
     wholeChapter: true,
     verification: {
       segments: segments.length,
-      segmentsCovered: approvedBySegment.length,
+      segmentsCovered: coveredSegments,\n      coverageRatio: Number(coverageRatio.toFixed(2)),
       approved: orderedClaims.length,
     },
     provider: lastProvider,

@@ -12,6 +12,16 @@ assert.match(duplicate,/ΤΕΛΟΣ/);assert.doesNotMatch(duplicate,/ΑΠΑΓΟΡ
 const review = extractCompletePage(`<div id="eclass_ebook_body"><h1>1.3</h1><p>${prose}</p><p>Ερωτήσεις</p><p>Άσχετη γενική άσκηση κεφαλαίου</p></div>`,{topic:'1.3'}).text;
 assert.doesNotMatch(review,/Άσχετη/);
 const image=extractCompletePage('<div id="eclass_ebook_body"><p>τύπος <img alt="img" data-official-transcription="ρ = m / V"></p></div>').text;assert.match(image,/ρ = m \/ V/);
+const context = 'Φυτεύουμε ένα κλαδί από το γεράνι. Στη συγκεκριμένη περίπτωση, η αναπαραγωγή γίνεται με μονογονία.';
+const contextUnits = sourceUnits(context);
+assert.equal(validMap(JSON.stringify({units:[{id:'u1',passages:[context.split('. ')[1]]}]}),contextUnits),false,'An exact sentence must not lose its antecedent');
+assert.equal(validMap(JSON.stringify({units:[{id:'u1',passages:[context]}]}),contextUnits),true);
+assert.equal(validMap(JSON.stringify({units:[{id:'u1',passages:['Η γύρη είναι γαμέτης.']}]}),sourceUnits('Η γύρη περιέχει γαμέτες.')),false);
+const table = '<main><table class="small"><tr><td>Όνομα</td><td>Σύμβολο</td><td>Σχέση</td></tr><tr><td>Μίκρο</td><td>μ</td><td>1/10000000=10<sup>–6</sup></td></tr><tr><td>Μέγα</td><td>Μ</td><td>10000000=10<sup>6</sup></td></tr></table></main>';
+const tableText=extractCompletePage(table,{sourceUrl:'https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/index1_3.html'}).text;
+assert.match(tableText,/Μίκρο · μ · 1\/1000000=10\^–6/);
+assert.match(tableText,/Μέγα · Μ · 1000000=10\^6/);
+assert.match(extractCompletePage(table,{sourceUrl:'https://ebooks.edu.gr/other'}).text,/10000000/,'Corrections must not apply to unrelated sources');
 const normalize = s => s.replace(/\s+/g,' ').trim();
 (async()=>{
  for(const count of [1,8,45]){

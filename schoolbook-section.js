@@ -1,11 +1,12 @@
 // The complete-source contract used by audio. Legacy excerpts remain unchanged.
 const cheerio = require('cheerio');
-const VERSION = 'complete-section-v3';
+const { correctOfficialHtml } = require('./schoolbook-source-corrections');
+const VERSION = 'complete-section-v4';
 const norm = value => String(value || '').normalize('NFKD').replace(/\p{M}/gu, '').replace(/\s+/g, ' ').trim().toLowerCase();
 const reviewHeading = value => /^(?:ερωτησεις(?:\s.*)?|ασκησεις(?:\s.*)?|ερωτησεις\s*[-–]\s*ασκησεις|σταση για εμπεδωση|δραστηριοτητες|προτασεις για δραστηριοτητες|παιχνιδι αυτοαξιολογησης|αξιολογω τι εμαθα|questions|review questions|exercises)$/i.test(norm(value).replace(/^\d+\s*/, ''));
 
 function extractCompletePage(html, { topic = '', sourceUrl = '' } = {}) {
-  const $ = cheerio.load(String(html || ''));
+  const $ = cheerio.load(correctOfficialHtml(html, sourceUrl));
   $('script,style,noscript,svg,nav,header,footer,select,form,iframe,[role="navigation"],#eclass_ebook_header,.navigation,.toc,#toc,#table-of-contents,.table-of-contents').remove();
   let root = $('#eclass_ebook_body').first();
   const mappedBody = root.length > 0;
@@ -26,6 +27,18 @@ function extractCompletePage(html, { topic = '', sourceUrl = '' } = {}) {
     const alt = String($(el).attr('data-official-transcription') ?? '').trim();
     // Generic image labels are not transcriptions. Never invent image formulas.
     $(el).replaceWith(alt && !/^(?:img\d*|εικονα|image|photo|key)$/i.test(norm(alt)) ? ' ' + alt + ' ' : ' ');
+  });
+  // Read a data table by rows, retaining the association between a name, its
+  // symbols and values. Layout tables must continue to be walked normally.
+  root.find('table').each((_, el) => {
+    const table = $(el);
+    if (table.find('table').length || !table.hasClass('small') || table.hasClass('red')) return;
+    const rows = table.find('tr').toArray().map(tr => $(tr).children('td,th').toArray()
+      .map(cell => $(cell).text().replace(/\s+/g, ' ').trim()).filter(Boolean));
+    if (rows.length < 2 || !rows.some(row => row.length > 1)) return;
+    const replacement = $('<div></div>');
+    for (const cells of rows) if (cells.length) replacement.append($('<p></p>').text(cells.join(' · ')));
+    table.replaceWith(replacement);
   });
   const blocks = [];
   let buffer = '';

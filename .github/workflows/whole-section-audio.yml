@@ -2,9 +2,9 @@ name: Whole section audio regression
 on:
   push:
     branches: [main, 'preview/whole-section-audio-*']
-    paths: ['schoolbook-section.js', 'schoolbook-figures.js', 'whole-section-audio.js', 'ai-provider-router.js', 'api/source-summary.js', 'api/schoolbook-source.js', 'study.html', 'tests/*audio*.cjs', '.github/workflows/whole-section-audio.yml']
+    paths: ['schoolbook-source-corrections.js', 'schoolbook-section.js', 'schoolbook-figures.js', 'whole-section-audio.js', 'ai-provider-router.js', 'api/source-summary.js', 'api/schoolbook-source.js', 'study.html', 'tests/*audio*.cjs', '.github/workflows/whole-section-audio.yml']
   pull_request:
-    paths: ['schoolbook-section.js', 'schoolbook-figures.js', 'whole-section-audio.js', 'ai-provider-router.js', 'api/source-summary.js', 'api/schoolbook-source.js', 'study.html', 'tests/*audio*.cjs']
+    paths: ['schoolbook-source-corrections.js', 'schoolbook-section.js', 'schoolbook-figures.js', 'whole-section-audio.js', 'ai-provider-router.js', 'api/source-summary.js', 'api/schoolbook-source.js', 'study.html', 'tests/*audio*.cjs']
 jobs:
   regression:
     runs-on: ubuntu-latest
@@ -20,6 +20,7 @@ jobs:
           node --check api/schoolbook-source.js
           node --check ai-provider-router.js
           node --check whole-section-audio.js
+          node --check schoolbook-source-corrections.js
           node --check schoolbook-section.js
           node --check schoolbook-figures.js
           node tests/whole-section-audio-regression.cjs

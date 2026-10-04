@@ -6,7 +6,10 @@ on:
     paths:
       - 'gel-schoolbook-source-map-2026-2027.js'
       - 'gel-schoolbook-manual-overrides-2026-2027.js'
+      - 'gel-schoolbook-manual-overrides-phase25-2026-2027.js'
       - 'general-education-book-sections-2026-2027.js'
+      - 'primary-schoolbook-complete-sources-2026-2027.js'
+      - 'api/schoolbook-source.js'
       - 'scripts/grounding-coverage-report.mjs'
       - 'package.json'
       - '.github/workflows/grounding-audit.yml'
@@ -24,7 +27,7 @@ jobs:
       - name: Install runtime dependencies
         run: npm install --no-package-lock --ignore-scripts
       - name: Generate grounding report
-        run: npm run audit:grounding | tee grounding-coverage.json
+        run: node scripts/grounding-coverage-report.mjs | tee grounding-coverage.json
       - name: Add report to job summary
         run: |
           echo '## Grounding coverage' >> "$GITHUB_STEP_SUMMARY"

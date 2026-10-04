@@ -1,0 +1,48 @@
+name: Temporary Tools hub navigation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/temp-tools-hub-nav.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Point Tools navigation to the new hub
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          changed=[]
+          for p in Path('.').rglob('*.html'):
+              if '.git' in p.parts: continue
+              s=p.read_text(encoding='utf-8')
+              old=s
+              s=s.replace('href="/#open-tools" data-i18n="navTools"','href="/tools/" data-i18n="navTools"')
+              s=s.replace("href='/#open-tools' data-i18n='navTools'","href='/tools/' data-i18n='navTools'")
+              s=s.replace('href="https://www.aitools4kids.gr/#open-tools" data-i18n="navTools"','href="/tools/" data-i18n="navTools"')
+              if s!=old:
+                  p.write_text(s,encoding='utf-8'); changed.append(str(p))
+          sm=Path('sitemap.xml')
+          if sm.exists():
+              s=sm.read_text(encoding='utf-8')
+              if 'https://www.aitools4kids.gr/tools/</loc>' not in s:
+                  entry='''  <url>\n    <loc>https://www.aitools4kids.gr/tools/</loc>\n    <lastmod>2026-10-04</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>\n'''
+                  s=s.replace('</urlset>',entry+'</urlset>')
+                  sm.write_text(s,encoding='utf-8'); changed.append('sitemap.xml')
+          print('\n'.join(changed) if changed else 'No files changed')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html' '**/*.html' sitemap.xml 2>/dev/null || true
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Point Tools tab to task-based tools hub'
+          git push origin main

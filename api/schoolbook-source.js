@@ -2910,6 +2910,9 @@ async function discoverUnitPages(book, prefix, complete = false) {
   // Some book roots expose only a subset of links to crawlers. Probe a bounded
   // sequence using the verified filename scheme and keep only successful pages.
   if (!hrefs.length) {
+    // A bounded filename probe cannot establish whole-section completeness.
+    // Preserve legacy excerpt discovery, but fail closed for complete audio.
+    if (complete) throw new Error('complete_section_manifest_unavailable');
     const candidates = [];
     for (let i = 0; i <= 10; i++) {
       const ext = book.mode === "modernGreekA" ? ".htm" : ".html";

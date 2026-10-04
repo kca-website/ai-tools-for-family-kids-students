@@ -26,6 +26,31 @@
     }
   };
 
+  // AI Study is fail-closed on an exact official schoolbook source. The skill-based
+  // annual-guidance labels above are useful for tutoring, but B Gymnasium Greek's
+  // server resolver is deliberately unit-based (1η–9η ενότητα). On /study, expose
+  // the exact official textbook units instead of offering a skill label that the
+  // source resolver cannot safely map to one textbook excerpt.
+  const STUDY_B_GYM_BOOK_UNITS = [
+    ["1η ενότητα — Από τον τόπο μου σ' όλη την Ελλάδα","Unit 1 — From my local area across Greece"],
+    ["2η ενότητα — Ζούμε με την οικογένεια","Unit 2 — Living with the family"],
+    ["3η ενότητα — Φίλοι για πάντα","Unit 3 — Friends forever"],
+    ["4η ενότητα — Το σχολείο στο χρόνο...","Unit 4 — School through time..."],
+    ["5η ενότητα — Συζητώντας για την εργασία και το επάγγελμα","Unit 5 — Discussing work and professions"],
+    ["6η ενότητα — Παρακολουθώ, ενημερώνομαι και ψυχαγωγούμαι από διάφορες πηγές (ΜΜΕ, Διαδίκτυο κτλ.)","Unit 6 — Information and entertainment from media and the internet"],
+    ["7η ενότητα — Βιώνοντας προβλήματα της καθημερινής ζωής","Unit 7 — Experiencing everyday-life problems"],
+    ["8η ενότητα — Συζητώντας για σύγχρονα κοινωνικά θέματα","Unit 8 — Discussing modern social issues"],
+    ["9η ενότητα — Ταξίδι στο μαγικό κόσμο του διαστήματος","Unit 9 — A journey into the magical world of space"]
+  ];
+
+  function isStudyPage(){
+    try { return location.pathname === "/study.html" || location.pathname === "/study"; }
+    catch (_) { return false; }
+  }
+  function rowsForContext(subjectId, rows){
+    return isStudyPage() && subjectId === "glossa-b-gymnasiou" ? STUDY_B_GYM_BOOK_UNITS : rows;
+  }
+
   function isGreekLanguage(subject){
     // accent-insensitive; Ancient Greek and Latin are separate courses, not Modern Greek language
     const s = `${subject?.subjectLabelEl || ""} ${subject?.id || ""}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -54,10 +79,11 @@
         if (!isGreekLanguage(subject)) return subject;
         found = true;
         const id = subject.id || `glossa-${grade}-${zone}`;
+        const effectiveRows = rowsForContext(id, rows);
         return Object.assign({}, subject, {
           id,
           quizId: subject.quizId || findQuizId(zone,grade),
-          topics: rows.map((row,i)=>topic(id,row,i)),
+          topics: effectiveRows.map((row,i)=>topic(id,row,i)),
           curriculum: Object.assign({}, subject.curriculum || {}, {
             schoolYear:"2026-2027",
             verificationDate:DATE,
@@ -76,13 +102,14 @@
       });
       if (!found) {
         const id = `glossa-${grade}-${zone}`;
+        const effectiveRows = rowsForContext(id, rows);
         next.push({
           id,
           quizId:findQuizId(zone,grade),
           grade,
           subjectLabelEl:`Νεοελληνική Γλώσσα, ${grade.toUpperCase()}' ${zone === "middle" ? "Γυμνασίου" : "Λυκείου"}`,
           subjectLabelEn:`Modern Greek Language, ${zone === "middle" ? "Middle" : "High"} ${grade.toUpperCase()}`,
-          topics:rows.map((row,i)=>topic(id,row,i)),
+          topics:effectiveRows.map((row,i)=>topic(id,row,i)),
           curriculum:{schoolYear:"2026-2027",verificationDate:DATE,coverageStatus:"annual-guidance-detailed-map",annualInstructionsStatus:"2026-27-guidance-published",coverageLabelEl:"Θεματικός χάρτης βάσει επίσημων οδηγιών 2026–27",coverageLabelEn:"Topic map based on official 2026–27 guidance",annualInstructionsUrl:SOURCE[zone],catalogUrl:SOURCE[zone],sourceLabelEl:SOURCE_LABEL[zone],sourceLabelEn:zone==="middle"?"Official 2026–27 Middle School Modern Greek guidance":"Official 2026–27 GEL Modern Greek guidance",scopeNoteEl:"Θεματικές δεξιότητες για διάλογο και εξάσκηση βάσει της επίσημης κατεύθυνσης 2026–27 — όχι τεστ αποστήθισης γραμματικών όρων.",scopeNoteEn:"Skill-based dialogue and practice aligned with official 2026–27 guidance — not a grammar-term memorisation drill."}
         });
       }

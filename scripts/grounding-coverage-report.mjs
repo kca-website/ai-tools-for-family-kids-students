@@ -73,22 +73,60 @@ function gelReport() {
 }
 
 function primaryReport() {
-  const rows = Object.values(primary.all ? primary.all() : {});
+  const rows = Object.entries(primary.all ? primary.all() : {})
+    .filter(([subjectId]) => /-dimotikou$/.test(subjectId));
+
   let grounded = 0;
   let total = 0;
-  const pending = [];
+  const subjects = [];
+  const missing = [];
 
-  for (const row of rows) {
-    const sections = Object.entries(row.groundedSections || {});
-    if (!sections.length) continue;
-    total += sections.length;
-    for (const [label, source] of sections) {
-      if (source && /^https:\/\/[^/]*ebooks\.edu\.gr\//i.test(String(source))) grounded++;
-      else pending.push({ subjectId: row.id || row.subjectId || '', label });
+  for (const [subjectId, row] of rows) {
+    const sections = Array.isArray(row.sections) ? row.sections : [];
+    const groundedSections = row.groundedSections || {};
+    let subjectGrounded = 0;
+    const subjectMissing = [];
+
+    for (const label of sections) {
+      total++;
+      const source = groundedSections[label];
+      const isOfficialHtml = source && /^https:\/\/[^/]*ebooks\.edu\.gr\/ebooks\/v\/html\//i.test(String(source));
+      if (isOfficialHtml) {
+        grounded++;
+        subjectGrounded++;
+      } else {
+        const gap = {
+          subjectId,
+          label,
+          reason: source ? 'grounded-source-is-not-official-ebooks-html' : 'section-has-no-exact-grounded-source',
+          bookSource: row.sourceUrl || null,
+          annualScopeVerified: row.annualScopeVerified === true
+        };
+        subjectMissing.push(gap);
+        missing.push(gap);
+      }
     }
+
+    subjects.push({
+      subjectId,
+      grounded: subjectGrounded,
+      total: sections.length,
+      pending: sections.length - subjectGrounded,
+      annualScopeVerified: row.annualScopeVerified === true,
+      mappingStatus: row.mappingStatus || row.groundingStatus || null,
+      missing: subjectMissing
+    });
   }
 
-  return { grounded, total, pending: pending.length, missing: pending };
+  return {
+    grounded,
+    total,
+    pending: total - grounded,
+    subjects: subjects.length,
+    fullyGroundedSubjects: subjects.filter((row) => row.total > 0 && row.pending === 0).length,
+    subjectsWithPending: subjects.filter((row) => row.pending > 0),
+    missing
+  };
 }
 
 const report = {

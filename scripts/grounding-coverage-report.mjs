@@ -3,11 +3,12 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const gel = require('../gel-schoolbook-source-map-2026-2027.js');
 const overrides = require('../gel-schoolbook-manual-overrides-2026-2027.js');
+const phase25 = require('../gel-schoolbook-manual-overrides-phase25-2026-2027.js');
 const primary = require('../general-education-book-sections-2026-2027.js');
 
 function gelReport() {
   const overridden = new Set(
-    (overrides.entries || []).map((entry) => `${entry.subjectId}\n${entry.label}`)
+    [...(overrides.entries || []), ...(phase25.entries || [])].map((entry) => `${entry.subjectId}\n${entry.label}`)
   );
 
   const rows = [];

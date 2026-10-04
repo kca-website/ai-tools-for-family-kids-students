@@ -45,6 +45,13 @@ try {
   GEL_MANUAL_OVERRIDES = null;
 }
 
+let GEL_MANUAL_OVERRIDES_PHASE25 = null;
+try {
+  GEL_MANUAL_OVERRIDES_PHASE25 = require("../gel-schoolbook-manual-overrides-phase25-2026-2027.js");
+} catch (_) {
+  GEL_MANUAL_OVERRIDES_PHASE25 = null;
+}
+
 let OFFICIAL_PDF_TEXT = null;
 try {
   OFFICIAL_PDF_TEXT = require("./official-pdf-text.js");
@@ -166,7 +173,7 @@ function resolveGelInventoryTopic(subject, topic) {
   }
 
   const inventoryMapping = matches[0];
-  const manualOverride = GEL_MANUAL_OVERRIDES?.get?.(subject, rawTopic) || null;
+  const manualOverride = GEL_MANUAL_OVERRIDES?.get?.(subject, rawTopic) || GEL_MANUAL_OVERRIDES_PHASE25?.get?.(subject, rawTopic) || null;
   const mapping = manualOverride
     ? {
         ...inventoryMapping,

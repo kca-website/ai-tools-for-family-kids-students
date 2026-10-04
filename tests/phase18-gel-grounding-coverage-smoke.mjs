@@ -4,9 +4,10 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const inventory = require("../gel-schoolbook-source-map-2026-2027.js");
 const overrides = require("../gel-schoolbook-manual-overrides-2026-2027.js");
+const phase25 = require("../gel-schoolbook-manual-overrides-phase25-2026-2027.js");
 const endpoint = require("../api/schoolbook-source.js");
 
-const overridden = new Set(overrides.entries.map((entry) => entry.subjectId + "\n" + entry.label));
+const overridden = new Set([...overrides.entries, ...phase25.entries].map((entry) => entry.subjectId + "\n" + entry.label));
 
 let highHtml = 0;
 let mediumManual = 0;
@@ -64,17 +65,26 @@ for (const subject of Object.values(inventory.all())) {
 assert.equal(highHtml, 223);
 assert.equal(mediumManual, 14);
 assert.equal(exactPdf, 34);
-assert.equal(reviewedManual, 292);
+assert.equal(reviewedManual, 294);
 assert.equal(overrides.count, 306);
-assert.equal(remainingCandidateBacked, 5);
-assert.equal(remainingWithoutCandidate, 63);
+assert.equal(remainingCandidateBacked, 4);
+assert.equal(remainingWithoutCandidate, 62);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 563);
-assert.equal(blocked, 73);
+assert.equal(grounded, 565);
+assert.equal(blocked, 71);
 assert.equal(grounded + blocked, 636);
+
+
+for (const [subjectId, label] of [
+  ["ekthesi-a-lykeiou", "Τρόποι ανάπτυξης παραγράφου"],
+  ["oikonomia-g-lykeiou", "Διεθνές εμπόριο και οικονομικές σχέσεις"]
+]) {
+  const resolved = endpoint._test.resolveGelInventoryTopic(subjectId, label);
+  assert.equal(resolved?.runtimeMode, "manual-html", subjectId + " / " + label + " must be grounded by Phase 25");
+}
 
 // Guard examples: candidates that are deliberately still ambiguous/insufficient.
 for (const [subjectId, label] of [

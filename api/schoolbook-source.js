@@ -52,6 +52,13 @@ try {
   GEL_MANUAL_OVERRIDES_PHASE25 = null;
 }
 
+let PRIMARY_COMPLETE_SOURCES = null;
+try {
+  PRIMARY_COMPLETE_SOURCES = require("../primary-schoolbook-complete-sources-2026-2027.js");
+} catch (_) {
+  PRIMARY_COMPLETE_SOURCES = null;
+}
+
 let OFFICIAL_PDF_TEXT = null;
 try {
   OFFICIAL_PDF_TEXT = require("./official-pdf-text.js");
@@ -1866,6 +1873,12 @@ module.exports = async function handler(req, res) {
   }
 
   let directUrls = characterChapter ? [characterChapter.url] : resolveDirectSourceUrls(subject, topic);
+  if (!directUrls.length) {
+    const primaryComplete = PRIMARY_COMPLETE_SOURCES?.get?.(subject, topic) || null;
+    if (primaryComplete?.urls?.length && primaryComplete.urls.every(catalogHtmlSourceAllowed)) {
+      directUrls = [...primaryComplete.urls];
+    }
+  }
   if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
     directUrls = [gelInventory.mapping.url];
   }

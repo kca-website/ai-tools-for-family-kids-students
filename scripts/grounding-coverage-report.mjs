@@ -5,6 +5,7 @@ const gel = require('../gel-schoolbook-source-map-2026-2027.js');
 const overrides = require('../gel-schoolbook-manual-overrides-2026-2027.js');
 const phase25 = require('../gel-schoolbook-manual-overrides-phase25-2026-2027.js');
 const primary = require('../general-education-book-sections-2026-2027.js');
+const primaryComplete = require('../primary-schoolbook-complete-sources-2026-2027.js');
 
 function gelReport() {
   const overridden = new Set(
@@ -94,7 +95,11 @@ function primaryReport() {
       total++;
       const source = groundedSections[label];
       const isOfficialHtml = source && /^https:\/\/[^/]*ebooks\.edu\.gr\/ebooks\/v\/html\//i.test(String(source));
-      if (isOfficialHtml) {
+      const completeBundle = primaryComplete.get(subjectId, label);
+      const isCompleteBundle = !!completeBundle?.urls?.length && completeBundle.urls.every((url) =>
+        /^https:\/\/[^/]*ebooks\.edu\.gr\/ebooks\/v\/html\//i.test(String(url))
+      );
+      if (isOfficialHtml || isCompleteBundle) {
         grounded++;
         subjectGrounded++;
       } else {

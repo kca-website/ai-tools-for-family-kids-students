@@ -144,9 +144,83 @@
       observer.observe(grid,{childList:true,subtree:false});
     }
 
+    // The study page historically performed a preliminary /api/schoolbook-source
+    // request before asking /api/source-summary for audio. That preflight could
+    // return 404 for a valid broad textbook unit even though source-summary can
+    // resolve it safely on the server. Intercept only the built-in "audio" action
+    // and let the server be the single source-of-truth for official grounding.
+    async function runVerifiedAudioDirectly(button){
+      const en=isEn();
+      const subjectEl=document.getElementById("subject");
+      const topicPick=document.getElementById("topicPick");
+      const topicCustom=document.getElementById("topicCustom");
+      const output=document.getElementById("aiOutput");
+      const workspace=document.getElementById("aiWorkspace");
+      if(!subjectEl||!output||!workspace)return false;
+
+      let subjectId=String(subjectEl.value||"").trim();
+      if(/^history-[cdest]+-dimotikou$/.test(subjectId))subjectId=subjectId.replace(/^history-/,"istoria-");
+      const opt=topicPick?.selectedOptions?.[0];
+      const topic=String(topicCustom?.value||"").trim() || String(opt?.dataset?.label||opt?.textContent||"").trim();
+      if(!subjectId||!topic)return false;
+
+      workspace.classList.remove("hidden");
+      document.querySelector("main.grid")?.classList.add("study-result-open");
+      const title=document.getElementById("workspaceTitle");
+      if(title)title.textContent=en?"Listen to it":"Άκουσέ το";
+      output.innerHTML='<span class="ai-loading">'+(en?'AI is preparing this…':'Το AI το ετοιμάζει…')+'</span>';
+      document.getElementById("answerBox")?.classList.add("hidden");
+      document.getElementById("puterFallback")?.classList.add("hidden");
+      document.getElementById("audioControls")?.classList.add("hidden");
+      document.getElementById("resultTools")?.classList.add("hidden");
+      document.getElementById("altAi")?.classList.add("hidden");
+      const provider=document.getElementById("providerStatus");
+      if(provider)provider.textContent="";
+      if(button)button.disabled=true;
+
+      try{
+        const res=await fetch("/api/source-summary",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({subjectId,topic,sourceTitle:"",language:en?"en":"el",activity:"audio"})
+        });
+        const body=await res.json().catch(()=>({}));
+        if(!res.ok||!body?.text)throw new Error(body?.message||(en?"Could not create the audio lesson.":"Δεν δημιουργήθηκε το ακουστικό μάθημα."));
+        output.textContent=body.text;
+        if(provider)provider.textContent=body.verified
+          ?(en?"Summary of the key ideas, checked against the official section.":"Σύνοψη των βασικών σημείων, ελεγμένη πάνω στην επίσημη ενότητα.")
+          :(en?"Official-source summary":"Σύνοψη επίσημης πηγής");
+        document.getElementById("audioControls")?.classList.remove("hidden");
+        document.getElementById("resultTools")?.classList.remove("hidden");
+        document.getElementById("altAi")?.classList.remove("hidden");
+        setTimeout(enhanceNotebookCard,0);
+      }catch(err){
+        output.textContent=err?.message||String(err);
+      }finally{
+        if(button)button.disabled=false;
+        workspace.scrollIntoView({behavior:"smooth",block:"nearest"});
+      }
+      return true;
+    }
+
+    function attachAudioGuard(){
+      document.addEventListener("click",async(event)=>{
+        const button=event.target?.closest?.('[data-action="audio"]');
+        if(!button)return;
+        // Uploaded notes intentionally keep the existing client flow, because
+        // /api/source-summary is only for official schoolbook material.
+        const clearNotes=document.getElementById("clearNotes");
+        if(clearNotes&&!clearNotes.classList.contains("hidden"))return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        await runVerifiedAudioDirectly(button);
+      },true);
+    }
+
     function start(){
       enhanceNotebookCard();
       attachGridObserver();
+      attachAudioGuard();
 
       // Language changes do not need a DOM-wide childList observer.
       new MutationObserver(()=>enhanceNotebookCard()).observe(document.documentElement,{

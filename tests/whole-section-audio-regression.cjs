@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const {extractCompletePage} = require('../schoolbook-section');
-const {sourceUnits,createWholeSectionLesson,validMap} = require('../whole-section-audio');
+const {sourceUnits,sourceSentences,createWholeSectionLesson,validMap} = require('../whole-section-audio');
 const prose = 'ΑΡΧΗ. Η πρώτη ουσιώδης ιδέα εξηγεί έναν ορισμό. ΜΕΣΗ. Η δεύτερη ιδέα εξηγεί μια διαδικασία. ΤΕΛΟΣ. Η τελευταία ιδέα εξηγεί το αποτέλεσμα.';
 const toc = '<nav><h2>1.1 Επιλεγμένη</h2><h2>1.2 Γειτονική</h2></nav>';
 const html = `<html><head><title>metadata</title></head><body>${toc}<main><h2>1.0 Προηγούμενη</h2><p>ΑΠΑΓΟΡΕΥΜΕΝΟ πριν</p><h2>1.1 Επιλεγμένη</h2><p>${prose}</p><h3>1.1.1 Υποενότητα</h3><p>Επιπλέον ουσιώδης διαδικασία με στάδια.</p><h2>1.2 Γειτονική</h2><p>ΑΠΑΓΟΡΕΥΜΕΝΟ μετά</p></main></body></html>`;
@@ -42,9 +42,14 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  const essential = 'Τα φυτά αναπαράγονται με μονογονία ή αμφιγονία.';
  const end = 'Μετά τη γονιμοποίηση σχηματίζεται το σπέρμα.';
  const verbose = essential+' Ένα επιπλέον δευτερεύον παράδειγμα αφορά ένα φυτό σε μια γλάστρα. '+end+'\n\nΕικόνα 6.4. Φωτογραφία ενός κήπου.';
+ const catalog=sourceSentences(sourceUnits(verbose)[0]);
+ assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]}),sourceUnits(verbose)),true);
+ assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:['invented-id']}]}),sourceUnits(verbose)),false);
+ assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:[catalog[2].id,catalog[0].id]}]}),sourceUnits(verbose)),false);
+ assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[0].id]}]}),sourceUnits(verbose)),false);
  const shortened = await createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
   const input=JSON.parse(args.messages.at(-1).content);
-  return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true}]}:{units:[{id:'u1',passages:[essential,end]}]})};
+  return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true}]}:{units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]})};
  }});
  assert.match(shortened.text,/μονογονία ή αμφιγονία/);assert.match(shortened.text,/σπέρμα/);
  assert.doesNotMatch(shortened.text,/δευτερεύον|Φωτογραφία|Εικόνα/);
@@ -52,7 +57,7 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  assert.equal(shortened.mode,'verified-summary');
  for(const failure of ['supported','complete','concise']) await assert.rejects(createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
   const input=JSON.parse(args.messages.at(-1).content);
-  return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true,[failure]:false}]}:{units:[{id:'u1',passages:[essential,end]}]})};
+  return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true,[failure]:false}]}:{units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]})};
  }}),/verified_audio_summary_unavailable/);
  assert.equal(validMap(JSON.stringify({units:[]}),sourceUnits(prose)),false);
  const page=fs.readFileSync(require.resolve('../study.html'),'utf8');assert.doesNotMatch(page,/if\(action==='audio'&&\/\^insufficient_/);

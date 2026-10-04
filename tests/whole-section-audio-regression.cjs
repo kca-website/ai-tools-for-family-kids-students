@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const {extractCompletePage} = require('../schoolbook-section');
-const {sourceUnits,sourceSentences,createWholeSectionLesson,validMap} = require('../whole-section-audio');
+const {sourceUnits,selectedPassages,sourceSentences,createWholeSectionLesson,validMap} = require('../whole-section-audio');
 const prose = 'ΑΡΧΗ. Η πρώτη ουσιώδης ιδέα εξηγεί έναν ορισμό. ΜΕΣΗ. Η δεύτερη ιδέα εξηγεί μια διαδικασία. ΤΕΛΟΣ. Η τελευταία ιδέα εξηγεί το αποτέλεσμα.';
 const toc = '<nav><h2>1.1 Επιλεγμένη</h2><h2>1.2 Γειτονική</h2></nav>';
 const html = `<html><head><title>metadata</title></head><body>${toc}<main><h2>1.0 Προηγούμενη</h2><p>ΑΠΑΓΟΡΕΥΜΕΝΟ πριν</p><h2>1.1 Επιλεγμένη</h2><p>${prose}</p><h3>1.1.1 Υποενότητα</h3><p>Επιπλέον ουσιώδης διαδικασία με στάδια.</p><h2>1.2 Γειτονική</h2><p>ΑΠΑΓΟΡΕΥΜΕΝΟ μετά</p></main></body></html>`;
@@ -45,8 +45,12 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  const catalog=sourceSentences(sourceUnits(verbose)[0]);
  assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]}),sourceUnits(verbose)),true);
  assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:['invented-id']}]}),sourceUnits(verbose)),false);
- assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:[catalog[2].id,catalog[0].id]}]}),sourceUnits(verbose)),false);
+ assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:[catalog[2].id,catalog[0].id]}]}),sourceUnits(verbose)),true);
  assert.equal(validMap(JSON.stringify({units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[0].id]}]}),sourceUnits(verbose)),false);
+ assert.deepEqual(selectedPassages({sentenceIds:[catalog[2].id,catalog[0].id]},sourceUnits(verbose)[0]),[essential,end]);
+ const references = sourceSentences(contextUnits[0]);
+ assert.deepEqual(selectedPassages({sentenceIds:[references[1].id]},contextUnits[0]),references.map(s=>s.text));
+ assert.equal(sourceSentences({id:'u1',text:'6.10 Τα σπέρματα είναι γυμνά.'})[0].text,'Τα σπέρματα είναι γυμνά.');
  const shortened = await createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
   const input=JSON.parse(args.messages.at(-1).content);
   return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true}]}:{units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]})};

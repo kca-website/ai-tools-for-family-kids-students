@@ -51,6 +51,9 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  const references = sourceSentences(contextUnits[0]);
  assert.deepEqual(selectedPassages({sentenceIds:[references[1].id]},contextUnits[0]),references.map(s=>s.text));
  assert.equal(sourceSentences({id:'u1',text:'6.10 Τα σπέρματα είναι γυμνά.'})[0].text,'Τα σπέρματα είναι γυμνά.');
+ assert.deepEqual(sourceSentences({id:'u1',text:'ΜΕΙΓΜΑΤΑ -> ΔΙΑΛΥΤΗΣ -> ΝΕΡΟ -> ΟΥΣΙΕΣ.'}),[]);
+ assert.deepEqual(sourceSentences({id:'u1',text:'1η-5η ημέρα Περιγραφή του σχήματος.'}),[]);
+ assert.equal(sourceSentences({id:'u1',text:'ρ = m / V.'})[0].text,'ρ = m / V.');
  const shortened = await createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
   const input=JSON.parse(args.messages.at(-1).content);
   return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true}]}:{units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]})};
@@ -59,6 +62,15 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  assert.doesNotMatch(shortened.text,/δευτερεύον|Φωτογραφία|Εικόνα/);
  assert.ok(shortened.verification.compressionRatio<0.6);
  assert.equal(shortened.mode,'verified-summary');
+ const layeredSource = Array.from({length:20},(_,i)=>`Κύρια ιδέα ${i+1}: ένα ουσιώδες συμπέρασμα. ${'Δευτερεύουσες επεξηγηματικές λεπτομέρειες και επαναληπτικά παραδείγματα. '.repeat(5)}`).join('\n\n');
+ let globalReview=false;
+ const layered=await createWholeSectionLesson({source:layeredSource,topic:'Σύνοψη',generate:async args=>{
+  const input=JSON.parse(args.messages.at(-1).content);
+  if(input.sectionWide)globalReview=true;
+  return {ok:true,text:JSON.stringify(input.proposals?{checks:input.sourceUnits.map(u=>({id:u.id,supported:true,complete:true,concise:true}))}:{units:input.sourceUnits.map(u=>({id:u.id,sentenceIds:sourceSentences(u).filter(s=>!input.sectionWide||s.text.startsWith('Κύρια')).map(s=>s.id)}))})};
+ }});
+ assert.equal(globalReview,true);assert.ok(layered.verification.compressionRatio<0.3);
+ for(const i of [1,10,20])assert.match(layered.text,new RegExp('Κύρια ιδέα '+i+':'));
  for(const failure of ['supported','complete','concise']) await assert.rejects(createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
   const input=JSON.parse(args.messages.at(-1).content);
   return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true,[failure]:false}]}:{units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]})};

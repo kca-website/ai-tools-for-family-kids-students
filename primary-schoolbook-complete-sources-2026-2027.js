@@ -7,6 +7,7 @@
 
 const MATH_A_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/";
 const MATH_B_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/";
+const MATH_C_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/";
 
 function urls(base, prefix, numbers) {
   return numbers.map((number) => `${base}index${prefix}_${number}.html`);
@@ -143,6 +144,71 @@ const entries = Object.freeze([
     label: "9η Ενότητα — Κεφάλαια 51-54",
     urls: urls(MATH_B_BASE, "B9", range(51, 54)),
     reviewBasis: "Official book unit 9 contents: chapters 51-54",
+    reviewedAt: "2026-10-04"
+  }
+,
+  // Mathematics C Primary: complete official unit spans.
+  {
+    subjectId: "math-c-dimotikou",
+    label: "1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα",
+    urls: urls(MATH_C_BASE, "1", range(1, 7)),
+    reviewBasis: "Official book contents: unit chapters 1-7",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα",
+    urls: urls(MATH_C_BASE, "2", range(8, 13)),
+    reviewBasis: "Official book contents: unit chapters 8-13",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "3η Ενότητα — Αριθμοί μέχρι το 3.000. Οι τέσσερις πράξεις. Χαράξεις. Ορθές γωνίες",
+    urls: urls(MATH_C_BASE, "3", range(14, 20)),
+    reviewBasis: "Official book contents: unit chapters 14-20",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "4η Ενότητα — Εισαγωγή στα απλά κλάσματα",
+    urls: urls(MATH_C_BASE, "4", range(22, 26)),
+    reviewBasis: "Official book contents: unit chapters 22-26",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "5η Ενότητα — Προσθέσεις και αφαιρέσεις. Αλγόριθμος του πολλαπλασιασμού",
+    urls: urls(MATH_C_BASE, "5", range(27, 32)),
+    reviewBasis: "Official book contents: unit chapters 27-32",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "6η Ενότητα — Εισαγωγή στους δεκαδικούς αριθμούς",
+    urls: urls(MATH_C_BASE, "6", range(33, 38)),
+    reviewBasis: "Official book contents: unit chapters 33-38",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "7η Ενότητα — Αριθμοί μέχρι το 7.000. Μέτρηση μάζας. Παζλ, πλακόστρωτα, μωσαϊκά, συμμετρία",
+    urls: urls(MATH_C_BASE, "7", range(40, 45)),
+    reviewBasis: "Official book contents: unit chapters 40-45",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "8η Ενότητα — Πολλαπλασιασμοί και διαιρέσεις. Μοτίβα. Μέτρηση χρόνου και επιφάνειας",
+    urls: urls(MATH_C_BASE, "8", range(46, 52)),
+    reviewBasis: "Official book contents: unit chapters 46-52",
+    reviewedAt: "2026-10-04"
+  },
+  {
+    subjectId: "math-c-dimotikou",
+    label: "9η Ενότητα — Αριθμοί μέχρι το 10.000. Κλάσματα και δεκαδικοί. Πράξεις. Γεωμετρία",
+    urls: urls(MATH_C_BASE, "9", range(53, 59)),
+    reviewBasis: "Official book contents: unit chapters 53-59",
     reviewedAt: "2026-10-04"
   }
 ]);

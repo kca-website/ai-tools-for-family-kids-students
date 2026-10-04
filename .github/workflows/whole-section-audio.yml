@@ -1,0 +1,31 @@
+name: Whole section audio regression
+on:
+  push:
+    branches: [main, 'preview/whole-section-audio-*']
+    paths: ['schoolbook-section.js', 'schoolbook-figures.js', 'whole-section-audio.js', 'ai-provider-router.js', 'api/source-summary.js', 'api/schoolbook-source.js', 'study.html', 'tests/*audio*.cjs', '.github/workflows/whole-section-audio.yml']
+  pull_request:
+    paths: ['schoolbook-section.js', 'schoolbook-figures.js', 'whole-section-audio.js', 'ai-provider-router.js', 'api/source-summary.js', 'api/schoolbook-source.js', 'study.html', 'tests/*audio*.cjs']
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: |
+          node --check api/source-summary.js
+          node --check api/schoolbook-source.js
+          node --check ai-provider-router.js
+          node --check whole-section-audio.js
+          node --check schoolbook-section.js
+          node --check schoolbook-figures.js
+          node tests/whole-section-audio-regression.cjs
+          node tests/audio-provider-fallback.cjs
+          node tests/history-b-schoolbook-grounding.mjs
+          node tests/chemistry-b-schoolbook-grounding.mjs
+          node tests/b-gym-remaining-schoolbook-grounding.mjs
+          node tests/geography-b-schoolbook-grounding.mjs
+          node --test qa/tests/phase8-grounding.test.mjs qa/tests/phase9-production-correctness.test.mjs

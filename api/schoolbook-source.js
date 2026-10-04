@@ -1759,6 +1759,7 @@ module.exports = async function handler(req, res) {
 
   if (gelInventory?.runtimeMode === "exact-pdf") {
     const mapping = gelInventory.mapping;
+    if (completeAudio && mapping.granularity !== "pdf-section") return res.status(409).json({grounded:false,error:"complete_section_not_mapped",message:"Η αντιστοίχιση επαληθεύει μία σελίδα PDF, αλλά όχι τα πλήρη όρια της ενότητας."});
     const sourceUrl = mapping.url;
     const fallbackTitle =
       gelInventory.book?.title ||
@@ -1911,7 +1912,7 @@ module.exports = async function handler(req, res) {
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
       if (completeAudio) {
         combinedText = pages.map((html, i) => {
-          const selected = gelAnchorScoped ? selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping) : (subject === "istoria-e-dimotikou" && resolveHistoryEChapter(topic) ? selectHistoryEChapterText(html, topic) : null);
+          const selected = gelAnchorScoped ? selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping, true) : null;
           const text = selected !== null ? completeText(selected, topic) : extractCompletePage(html, { topic, sourceUrl: sourceUrls[i] }).text;
           return "[Official page: " + sourceUrls[i] + "]\n" + text;
         }).join("\n\n");
@@ -3051,7 +3052,7 @@ function findGelHtmlAnchorOffset(rawHtml, fragment) {
   return -1;
 }
 
-function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
+function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping, complete = false) {
   if (!rawHtml || !sourceUrl || !mapping?.heading) return "";
   let fragment = "";
   try { fragment = decodeURIComponent(new URL(sourceUrl).hash.slice(1)); } catch (_) { return ""; }
@@ -3097,7 +3098,7 @@ function selectGelAnchoredSectionText(rawHtml, sourceUrl, mapping) {
   const normalizeScopedHeading = (value) =>
     normalize(value).replace(/(^|\s)ε\s+(\d+)(?=\s|$)/g, "$1ε$2");
   if (!scoped || !normalizeScopedHeading(scoped).includes(normalizeScopedHeading(mapping.heading))) return "";
-  return scoped;
+  return complete ? extractCompletePage(String(rawHtml).slice(current.offset, endOffset), {topic:mapping.heading, sourceUrl}).text : scoped;
 }
 
 function decodeEntities(s) {

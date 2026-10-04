@@ -17,6 +17,7 @@ function browserRequestAllowed(req) {
 const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
+const { VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
 const { createWholeSectionLesson, VERSION: AUDIO_VERSION } = require('../whole-section-audio');
 
 module.exports = async function handler(req, res) {
@@ -38,10 +39,10 @@ module.exports = async function handler(req, res) {
   const explanation = activity === 'explain';
   if (!sid || !selectedTopic) return res.status(400).json({ error: 'official_source_identity_required', message: 'Λείπει η επαληθεύσιμη ταυτότητα της επίσημης σχολικής πηγής.' });
 
-  const sourceKey = { kind: activity === 'audio' ? 'official-complete-audio-source-v1' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
+  const sourceKey = { kind: activity === 'audio' ? 'official-complete-audio-source-v2' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
   try {
-  let officialSource = await getStudyCache(sourceKey);
-  if (!officialSource?.grounded || !officialSource?.text) {
+    let officialSource = await getStudyCache(sourceKey);
+  if (!officialSource?.grounded || !officialSource?.text || (activity === 'audio' && officialSource.sourceCompleteness?.parserVersion !== COMPLETE_SOURCE_VERSION)) {
     const resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: activity === 'audio' ? 'audio' : '' });
     if (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text) {
       const status = Number(resolved?.status || 502);

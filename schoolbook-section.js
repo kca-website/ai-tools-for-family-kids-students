@@ -1,8 +1,8 @@
 // The complete-source contract used by audio. Legacy excerpts remain unchanged.
 const cheerio = require('cheerio');
-const VERSION = 'complete-section-v1';
+const VERSION = 'complete-section-v2';
 const norm = value => String(value || '').normalize('NFKD').replace(/\p{M}/gu, '').replace(/\s+/g, ' ').trim().toLowerCase();
-const reviewHeading = value => /^(?:ερωτησεις(?:\s.*)?|ασκησεις(?:\s.*)?|ερωτησεις\s*[-–]\s*ασκησεις|σταση για εμπεδωση|δραστηριοτητες|προτασεις για δραστηριοτητες|παιχνιδι αυτοαξιολογησης|questions|review questions|exercises)$/i.test(norm(value));
+const reviewHeading = value => /^(?:ερωτησεις(?:\s.*)?|ασκησεις(?:\s.*)?|ερωτησεις\s*[-–]\s*ασκησεις|σταση για εμπεδωση|δραστηριοτητες|προτασεις για δραστηριοτητες|παιχνιδι αυτοαξιολογησης|αξιολογω τι εμαθα|questions|review questions|exercises)$/i.test(norm(value).replace(/^\d+\s*/, ''));
 
 function extractCompletePage(html, { topic = '', sourceUrl = '' } = {}) {
   const $ = cheerio.load(String(html || ''));
@@ -11,7 +11,7 @@ function extractCompletePage(html, { topic = '', sourceUrl = '' } = {}) {
   const mappedBody = root.length > 0;
   if (!root.length) root = $('main,article').first();
   if (!root.length) root = $('body');
-  root.find('[hidden],[aria-hidden="true"],.qs,.ref').remove();
+  root.find('[hidden],[aria-hidden="true"],.qs,.ref,.hbox,.hlet,.page-number').remove();
   root.find('[style]').each((_, el) => { if (/display\s*:\s*none/i.test($(el).attr('style') || '')) $(el).remove(); });
   // Remove TOC containers before looking for a section heading. A menu match is
   // never a candidate for the actual body, even if its number/title is identical.
@@ -23,7 +23,7 @@ function extractCompletePage(html, { topic = '', sourceUrl = '' } = {}) {
   root.find('sub').each((_, el) => $(el).replaceWith('_' + $(el).text()));
   root.find('a').each((_,el) => { if(/extras\//.test($(el).find('img').attr('src') || '')) $(el).remove(); });
   root.find('img').each((_, el) => {
-    const alt = String($(el).attr('data-official-transcription') ?? $(el).attr('alt') ?? '').trim();
+    const alt = String($(el).attr('data-official-transcription') ?? '').trim();
     // Generic image labels are not transcriptions. Never invent image formulas.
     $(el).replaceWith(alt && !/^(?:img\d*|εικονα|image|photo|key)$/i.test(norm(alt)) ? ' ' + alt + ' ' : ' ');
   });
@@ -60,7 +60,7 @@ function scopeBlocks(blocks, topic, { mappedBody = false } = {}) {
   let rows = blocks.filter(b => !/^(?:περιεχομενα|contents|ευρετηριο|index|αρχικη|επομενο|προηγουμενο)$/i.test(norm(b.text)));
   const code = String(topic).match(/\b\d+(?:\.\d+)+\b/)?.[0];
   const title = norm(String(topic).split(/\s[—–]\s/).pop()).replace(/^\d+(?:\.\d+)*[.)]?\s*/, '');
-  const headings = rows.map((b,i) => ({ ...b, i, code: b.text.match(/^\s*(\d+(?:\.\d+)+)(?=\s|[.)])/ )?.[1] })).filter(b => b.heading);
+  const headings = rows.map((b,i) => ({ ...b, i, code: b.text.match(/^\s*(\d+(?:\.\d+)*)(?=\s|[.)])/ )?.[1] })).filter(b => b.heading);
   const matches = headings.filter(b => code ? b.code === code : (title.length > 8 && norm(b.text).includes(title)));
   if (matches.length) {
     // Prefer the body occurrence followed by prose over dense TOC headings.
@@ -72,7 +72,7 @@ function scopeBlocks(blocks, topic, { mappedBody = false } = {}) {
     const c = candidates[0];
     // A mapped single-section page may put its introductory sidebar before the
     // title. Keep it; only chapter pages with sibling sections need slicing.
-    if (!mappedBody || headings.some(h => h.code && code && !h.code.startsWith(code + '.') && h.code !== code)) rows = rows.slice(c.start, c.end);
+    if (!mappedBody || c.end < rows.length || headings.some(h => h.code && code && !h.code.startsWith(code + '.') && h.code !== code)) rows = rows.slice(c.start, c.end);
   } else if (!mappedBody && headings.some(h => h.code) && code) {
     throw new Error('section_heading_not_resolved');
   }

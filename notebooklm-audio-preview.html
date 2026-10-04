@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Preview έτοιμων ακουστικών | aitools4kids.gr</title>
+<style>
+:root{--blue:#2e6ba3;--ink:#1f2430;--muted:#5a6270;--bg:#f7fafc;--card:#fff;--border:#dfe6ee;--soft:#edf6ff;--green:#1f7a4d;--amber:#9a6700}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}.shell{max-width:900px;margin:0 auto;padding:24px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.back{color:var(--blue);text-decoration:none;font-weight:800}.badge{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 10px;font-size:.8rem;font-weight:800;border:1px solid #b9d3ea;background:#fff;color:#245a84}.hero{padding:24px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(135deg,#eef6ff,#f5f8fc);margin-bottom:16px}.hero h1{margin:8px 0 8px;font-size:clamp(1.8rem,5vw,2.6rem)}.hero p{margin:0;color:#475569}.warning{margin-top:14px;padding:11px 12px;border-radius:10px;border:1px solid #f0d59a;background:#fff8e5;color:#654a10;font-size:.9rem}.controls{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.controls button{border:1px solid var(--border);background:#fff;border-radius:10px;padding:10px 13px;font-weight:800;cursor:pointer}.controls button.active{border-color:var(--blue);background:var(--soft);color:#204f78}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin:14px 0;box-shadow:0 2px 10px rgba(30,50,70,.04)}.row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}.status{font-size:.78rem;font-weight:850;border-radius:999px;padding:5px 9px;white-space:nowrap}.ready{background:#eaf7ef;color:#17633d}.fallback{background:#fff4df;color:#805500}.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.meta div{padding:10px;border:1px solid var(--border);border-radius:10px;background:#fbfdff}.meta strong{display:block;font-size:.78rem;color:var(--muted);margin-bottom:3px}.player{margin-top:16px;padding:14px;border:1px solid #cfe0ef;border-radius:12px;background:#f8fbff}.player button{border:0;border-radius:10px;padding:10px 14px;font-weight:850;cursor:pointer}.play{background:var(--blue);color:#fff}.stop{background:#fff;border:1px solid var(--border)!important;margin-left:6px}.progress{height:8px;border-radius:999px;background:#e8edf3;margin-top:13px;overflow:hidden}.progress span{display:block;height:100%;width:0;background:#7aa9d1;transition:width .2s}.small{font-size:.82rem;color:var(--muted);margin:8px 0 0}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.flow div{padding:12px;border:1px solid var(--border);border-radius:11px;background:#fff;font-size:.86rem}.flow strong{display:block;margin-bottom:3px}.code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#f3f6f9;border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto;font-size:.82rem;white-space:pre-wrap}.hidden{display:none!important}@media(max-width:700px){.meta,.flow{grid-template-columns:1fr}.row{grid-template-columns:1fr}.status{width:max-content}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="top"><a class="back" href="/study.html">← AI Μελέτη</a><span class="badge">PREVIEW · όχι live</span></div>
+  <section class="hero">
+    <span class="badge">Έτοιμα ακουστικά ανά ενότητα</span>
+    <h1>Πώς θα φαίνεται το NotebookLM audio</h1>
+    <p>Το site ελέγχει πρώτα αν υπάρχει ήδη ελεγμένο ακουστικό αρχείο για την επιλεγμένη σχολική ενότητα. Αν υπάρχει, το παίζει αμέσως. Αν δεν υπάρχει, συνεχίζει με τη σημερινή AI σύνοψη και text-to-speech.</p>
+    <div class="warning"><strong>Σημαντικό:</strong> το audio σε αυτή τη σελίδα είναι demo μέσω της φωνής του browser. Δεν παρουσιάζεται ως πραγματικό export του NotebookLM. Το πραγματικό MP3 θα μπει στο ίδιο σημείο όταν το δημιουργήσεις και το εγκρίνεις.</div>
+  </section>
+
+  <div class="controls">
+    <button id="readyMode" class="active" type="button">1. Υπάρχει έτοιμο ακουστικό</button>
+    <button id="fallbackMode" type="button">2. Δεν υπάρχει ακόμη</button>
+  </div>
+
+  <section id="readyCard" class="card">
+    <div class="row"><div><h2 style="margin:0">Βιολογία Β΄ Γυμνασίου</h2><p style="margin:4px 0 0;color:#475569">Παράδειγμα ενότητας: Αναπαραγωγή και ανάπτυξη οργανισμών</p></div><span class="status ready">✓ Έτοιμο ακουστικό βρέθηκε</span></div>
+    <div class="meta"><div><strong>Πηγή</strong>Επίσημο σχολικό βιβλίο</div><div><strong>Τύπος</strong>Ελεγμένο στατικό MP3</div><div><strong>Κόστος ακρόασης</strong>€0 ανά αναπαραγωγή</div></div>
+    <div class="player">
+      <div><strong>Ακουστικό μάθημα</strong></div>
+      <p class="small">DEMO: προσωρινή αφήγηση browser. Στην τελική έκδοση εδώ θα παίζει το πραγματικό NotebookLM export.</p>
+      <button id="play" class="play" type="button">▶ Άκουσε</button><button id="stop" class="stop" type="button">■ Σταμάτησε</button>
+      <div class="progress"><span id="bar"></span></div>
+      <p id="status" class="small" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="fallbackCard" class="card hidden">
+    <div class="row"><div><h2 style="margin:0">Χημεία Β΄ Γυμνασίου</h2><p style="margin:4px 0 0;color:#475569">Παράδειγμα ενότητας χωρίς έτοιμο αρχείο</p></div><span class="status fallback">Δεν υπάρχει έτοιμο MP3</span></div>
+    <p>Ο μαθητής δεν μένει χωρίς λειτουργία. Το κουμπί «Άκουσέ το» χρησιμοποιεί αυτόματα την υπάρχουσα ροή του aitools4kids: επίσημη πηγή → ελεγμένη σύνοψη → text-to-speech.</p>
+    <div class="code">if (READY_AUDIO[sectionId]) {
+  playStaticAudio(READY_AUDIO[sectionId]);
+} else {
+  runExistingVerifiedSummaryAndTTS();
+}</div>
+  </section>
+
+  <section class="card">
+    <h2 style="margin-top:0">Τελική ροή χωρίς API κόστος</h2>
+    <div class="flow"><div><strong>1. Επίσημη ενότητα</strong>ebooks.edu.gr / ήδη χαρτογραφημένη πηγή</div><div><strong>2. NotebookLM</strong>Δημιουργία Audio Overview και ανθρώπινος έλεγχος</div><div><strong>3. Αποθήκευση</strong><code>/audio/.../section-id.mp3</code></div><div><strong>4. Αναπαραγωγή</strong>Το site σερβίρει το ίδιο MP3 σε όλους</div></div>
+    <p class="small">Δεν υπάρχει χρέωση μοντέλου κάθε φορά που κάποιος πατά αναπαραγωγή. Το μόνο που αλλάζει αργότερα είναι ότι το demo browser voice αντικαθίσταται από το πραγματικό εγκεκριμένο αρχείο.</p>
+  </section>
+</div>
+<script>
+const demoText='Σε αυτή την προεπισκόπηση ακούς προσωρινή αφήγηση από τον browser. Στην τελική έκδοση, στο ίδιο σημείο θα παίζει το ελεγμένο ακουστικό αρχείο που θα έχει εξαχθεί από το NotebookLM για τη συγκεκριμένη σχολική ενότητα.';
+let timer=null,utterance=null,progress=0;
+const $=id=>document.getElementById(id);
+function stopDemo(){if('speechSynthesis' in window)window.speechSynthesis.cancel();clearInterval(timer);timer=null;progress=0;$('bar').style.width='0%';$('status').textContent='';}
+$('play').onclick=()=>{stopDemo();if(!('speechSynthesis' in window)){ $('status').textContent='Ο browser δεν υποστηρίζει text-to-speech.';return;}utterance=new SpeechSynthesisUtterance(demoText);utterance.lang='el-GR';utterance.rate=.95;utterance.onend=()=>{clearInterval(timer);$('bar').style.width='100%';$('status').textContent='Το demo ολοκληρώθηκε.'};window.speechSynthesis.speak(utterance);$('status').textContent='Παίζει demo αφήγηση…';timer=setInterval(()=>{progress=Math.min(94,progress+2);$('bar').style.width=progress+'%'},250)};
+$('stop').onclick=stopDemo;
+$('readyMode').onclick=()=>{stopDemo();$('readyCard').classList.remove('hidden');$('fallbackCard').classList.add('hidden');$('readyMode').classList.add('active');$('fallbackMode').classList.remove('active')};
+$('fallbackMode').onclick=()=>{stopDemo();$('readyCard').classList.add('hidden');$('fallbackCard').classList.remove('hidden');$('fallbackMode').classList.add('active');$('readyMode').classList.remove('active')};
+</script>
+</body>
+</html>

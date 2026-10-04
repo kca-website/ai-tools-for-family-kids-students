@@ -53,6 +53,7 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  assert.equal(sourceSentences({id:'u1',text:'6.10 Τα σπέρματα είναι γυμνά.'})[0].text,'Τα σπέρματα είναι γυμνά.');
  assert.deepEqual(sourceSentences({id:'u1',text:'ΜΕΙΓΜΑΤΑ -> ΔΙΑΛΥΤΗΣ -> ΝΕΡΟ -> ΟΥΣΙΕΣ.'}),[]);
  assert.deepEqual(sourceSentences({id:'u1',text:'1η-5η ημέρα Περιγραφή του σχήματος.'}),[]);
+ assert.deepEqual(sourceSentences({id:'u1',text:'Να ορίζεις τις εκφράσεις περιεκτικότητας ενός διαλύματος.'}),[]);
  assert.deepEqual(sourceSentences({id:'u1',text:'Τι συμπεραίνεις από το πείραμα;'}),[]);
  assert.deepEqual(sourceSentences({id:'u1',text:'Το διάλυμα είναι ομογενές, άρα ισχύει η αναλογία:'}),[]);
  assert.deepEqual(sourceSentences({id:'u1',text:'Όπως φανερώνει και το όνομά τους, είναι μείγματα χρωστικών.'}),[]);

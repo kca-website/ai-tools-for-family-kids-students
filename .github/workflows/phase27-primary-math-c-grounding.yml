@@ -35,72 +35,30 @@ jobs:
                   'const MATH_B_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/";\nconst MATH_C_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/";\n'
               )
           if 'subjectId: "math-c-dimotikou"' not in text:
-              block = r''',
-  // Mathematics C Primary. The official contents define these complete unit spans;
-  // assessment-only chapters 21, 39 and 60 sit between/after units and are excluded.
-  {
-    subjectId: "math-c-dimotikou",
-    label: "1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα",
-    urls: urls(MATH_C_BASE, "1", range(1, 7)),
-    reviewBasis: "Official book contents: unit 1 chapters 1-7",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα",
-    urls: urls(MATH_C_BASE, "2", range(8, 13)),
-    reviewBasis: "Official book contents: unit 2 chapters 8-13",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "3η Ενότητα — Αριθμοί μέχρι το 3.000. Οι τέσσερις πράξεις. Χαράξεις. Ορθές γωνίες",
-    urls: urls(MATH_C_BASE, "3", range(14, 20)),
-    reviewBasis: "Official book contents: unit 3 chapters 14-20",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "4η Ενότητα — Εισαγωγή στα απλά κλάσματα",
-    urls: urls(MATH_C_BASE, "4", range(22, 26)),
-    reviewBasis: "Official book contents: unit 4 chapters 22-26",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "5η Ενότητα — Προσθέσεις και αφαιρέσεις. Αλγόριθμος του πολλαπλασιασμού",
-    urls: urls(MATH_C_BASE, "5", range(27, 32)),
-    reviewBasis: "Official book contents: unit 5 chapters 27-32",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "6η Ενότητα — Εισαγωγή στους δεκαδικούς αριθμούς",
-    urls: urls(MATH_C_BASE, "6", range(33, 38)),
-    reviewBasis: "Official book contents: unit 6 chapters 33-38",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "7η Ενότητα — Αριθμοί μέχρι το 7.000. Μέτρηση μάζας. Παζλ, πλακόστρωτα, μωσαϊκά, συμμετρία",
-    urls: urls(MATH_C_BASE, "7", range(40, 45)),
-    reviewBasis: "Official book contents: unit 7 chapters 40-45",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "8η Ενότητα — Πολλαπλασιασμοί και διαιρέσεις. Μοτίβα. Μέτρηση χρόνου και επιφάνειας",
-    urls: urls(MATH_C_BASE, "8", range(46, 52)),
-    reviewBasis: "Official book contents: unit 8 chapters 46-52",
-    reviewedAt: "2026-10-04"
-  },
-  {
-    subjectId: "math-c-dimotikou",
-    label: "9η Ενότητα — Αριθμοί μέχρι το 10.000. Κλάσματα και δεκαδικοί. Πράξεις. Γεωμετρία",
-    urls: urls(MATH_C_BASE, "9", range(53, 59)),
-    reviewBasis: "Official book contents: unit 9 chapters 53-59",
-    reviewedAt: "2026-10-04"
-  }'''
+              rows = [
+                  ('1η Ενότητα — Αριθμοί μέχρι το 1.000. Οι τέσσερις πράξεις. Γεωμετρικά σχήματα', '1', 1, 7),
+                  ('2η Ενότητα — Μετρήσεις μήκους. Πράξεις αφαίρεσης και πολλαπλασιασμού. Στερεά σώματα', '2', 8, 13),
+                  ('3η Ενότητα — Αριθμοί μέχρι το 3.000. Οι τέσσερις πράξεις. Χαράξεις. Ορθές γωνίες', '3', 14, 20),
+                  ('4η Ενότητα — Εισαγωγή στα απλά κλάσματα', '4', 22, 26),
+                  ('5η Ενότητα — Προσθέσεις και αφαιρέσεις. Αλγόριθμος του πολλαπλασιασμού', '5', 27, 32),
+                  ('6η Ενότητα — Εισαγωγή στους δεκαδικούς αριθμούς', '6', 33, 38),
+                  ('7η Ενότητα — Αριθμοί μέχρι το 7.000. Μέτρηση μάζας. Παζλ, πλακόστρωτα, μωσαϊκά, συμμετρία', '7', 40, 45),
+                  ('8η Ενότητα — Πολλαπλασιασμοί και διαιρέσεις. Μοτίβα. Μέτρηση χρόνου και επιφάνειας', '8', 46, 52),
+                  ('9η Ενότητα — Αριθμοί μέχρι το 10.000. Κλάσματα και δεκαδικοί. Πράξεις. Γεωμετρία', '9', 53, 59),
+              ]
+              parts = ['', '  // Mathematics C Primary: complete official unit spans.']
+              for label, prefix, start, end in rows:
+                  parts.extend([
+                      '  {',
+                      '    subjectId: "math-c-dimotikou",',
+                      f'    label: "{label}",',
+                      f'    urls: urls(MATH_C_BASE, "{prefix}", range({start}, {end})),',
+                      f'    reviewBasis: "Official book contents: unit chapters {start}-{end}",',
+                      '    reviewedAt: "2026-10-04"',
+                      '  },'
+                  ])
+              block = '\n'.join(parts)
+              block = block[:-1] if block.endswith(',') else block
               text = text.replace('\n]);\n\nfunction get(', block + '\n]);\n\nfunction get(', 1)
           p.write_text(text, encoding='utf-8')
 
@@ -127,7 +85,7 @@ jobs:
           const missing = (r.primary.missing || []).filter(x => x.subjectId === 'math-c-dimotikou');
           if (missing.length) throw new Error('Math C pending: ' + JSON.stringify(missing));
           console.log('PRIMARY_MATH_C_AUDIT=9/9');
-          console.log(`PRIMARY_TOTAL=${r.primary.grounded}/${r.primary.total}; pending=${r.primary.pending}`);
+          console.log('PRIMARY_TOTAL=' + r.primary.grounded + '/' + r.primary.total + '; pending=' + r.primary.pending);
           NODE
 
       - name: Commit verified Math C bundles

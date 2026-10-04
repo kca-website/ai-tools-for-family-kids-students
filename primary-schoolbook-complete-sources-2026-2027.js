@@ -1,6 +1,6 @@
 "use strict";
 
-// Complete, manually verified official-page bundles for Primary School topics.
+// Complete, manually verified official-page bundles for learner-facing topics.
 // A topic is activated here only when every page needed to cover the selected
 // learner-facing unit can be identified inside the same official ebooks.edu.gr
 // book manifestation.
@@ -8,6 +8,7 @@
 const MATH_A_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2156/Mathimatika_A-Dimotikou_html-empl/";
 const MATH_B_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2164/Mathimatika_B-Dimotikou_html-empl/";
 const MATH_C_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2170/Mathimatika_G-Dimotikou_html-empl/";
+const GLOSSA_B_GYM_BASE = "https://ebooks.edu.gr/ebooks/v/html/8547/2298/Neoelliniki-Glossa_B-Gymnasiou_empl/";
 
 function urls(base, prefix, numbers) {
   return numbers.map((number) => `${base}index${prefix}_${number}.html`);
@@ -145,8 +146,8 @@ const entries = Object.freeze([
     urls: urls(MATH_B_BASE, "B9", range(51, 54)),
     reviewBasis: "Official book unit 9 contents: chapters 51-54",
     reviewedAt: "2026-10-04"
-  }
-,
+  },
+
   // Mathematics C Primary: complete official unit spans.
   {
     subjectId: "math-c-dimotikou",
@@ -209,6 +210,19 @@ const entries = Object.freeze([
     label: "9η Ενότητα — Αριθμοί μέχρι το 10.000. Κλάσματα και δεκαδικοί. Πράξεις. Γεωμετρία",
     urls: urls(MATH_C_BASE, "9", range(53, 59)),
     reviewBasis: "Official book contents: unit chapters 53-59",
+    reviewedAt: "2026-10-04"
+  },
+
+  // B Gymnasium Modern Greek: learner-facing skill bundle spanning the exact
+  // official textbook pages for relative words/clauses and wider-text cohesion.
+  {
+    subjectId: "glossa-b-gymnasiou",
+    label: "Αναφορικές λέξεις και συνοχή",
+    urls: [
+      `${GLOSSA_B_GYM_BASE}en6_3.html`,
+      `${GLOSSA_B_GYM_BASE}en4_4.html`
+    ],
+    reviewBasis: "Official B Gymnasium Greek Language pages: relative pronouns/clauses (unit 6) and cohesion of wider text (unit 4)",
     reviewedAt: "2026-10-04"
   }
 ]);

@@ -57,6 +57,9 @@ const normalize = s => s.replace(/\s+/g,' ').trim();
  assert.deepEqual(sourceSentences({id:'u1',text:'Το διάλυμα είναι ομογενές, άρα ισχύει η αναλογία:'}),[]);
  assert.deepEqual(sourceSentences({id:'u1',text:'Όπως φανερώνει και το όνομά τους, είναι μείγματα χρωστικών.'}),[]);
  assert.equal(sourceSentences({id:'u1',text:'ρ = m / V.'})[0].text,'ρ = m / V.');
+ const seeds={id:'u1',text:'Τα σπέρματα μπορεί να είναι γυμνά. Τα φυτά που διαθέτουν τέτοια σπέρματα ονομάζονται γυμνόσπερμα. Τα σπέρματα άλλων φυτών βρίσκονται μέσα σε καρπό. Τα φυτά αυτά ονομάζονται αγγειόσπερμα.'};
+ const seedRows=sourceSentences(seeds);
+ assert.deepEqual(selectedPassages({sentenceIds:[seedRows[1].id,seedRows[3].id]},seeds),seedRows.map(s=>s.text));
  const shortened = await createWholeSectionLesson({source:verbose,topic:'Φυτά',generate:async args=>{
   const input=JSON.parse(args.messages.at(-1).content);
   return {ok:true,text:JSON.stringify(input.proposals?{checks:[{id:'u1',supported:true,complete:true,concise:true}]}:{units:[{id:'u1',sentenceIds:[catalog[0].id,catalog[2].id]}]})};

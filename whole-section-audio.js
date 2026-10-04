@@ -2,26 +2,26 @@
 // their context, key-idea coverage and concision before ordered narration.
 const { generateChat, getAiStatus } = require('./ai-provider-router');
 const { createHash } = require('node:crypto');
-const VERSION = 'whole-section-summary-v13';
+const VERSION = 'whole-section-summary-v14';
 const normalize = x => String(x || '').normalize('NFKC').replace(/\s+/g, ' ').trim();
 function json(text) { try { return JSON.parse(String(text).trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'')); } catch { return null; } }
 
 function sourceUnits(source, target = 1400) {
-  const paragraphs = String(source || '').replace(/^\[Official (?:page|section|verified page):[^\n]*\]\s*$/gm,'').split(/\n\s*\n/).map(normalize).filter(x => x && !/^\[Official (?:page|section|verified page):/.test(x));
+  const rawParagraphs = String(source || '').replace(/^\[Official (?:page|section|verified page):[^\n]*\]\s*$/gm,'').split(/\n\s*\n/).map(normalize).filter(x => x && !/^\[Official (?:page|section|verified page):/.test(x));
+  const paragraphs = [];
+  for (const paragraph of rawParagraphs) {
+    const last = paragraphs.at(-1);
+    // Schoolbook layout may break a sentence at a column or image boundary.
+    // Keep a lowercase continuation attached to its unfinished preceding clause.
+    if (last && /^\p{Ll}/u.test(paragraph) && !/[.!?;·…:]["'»”’)]*$/.test(last)) paragraphs[paragraphs.length-1] += ' ' + paragraph;
+    else paragraphs.push(paragraph);
+  }
   const pieces = [];
+  const segmenter = new Intl.Segmenter('el', {granularity:'sentence'});
   for (const paragraph of paragraphs) {
     if (paragraph.length <= target * 1.5) { pieces.push(paragraph); continue; }
-    // Split only at sentence/word boundaries; every character is retained.
-    let rest = paragraph;
-    while (rest.length > target * 1.5) {
-      const prefix = rest.slice(0,target);
-      let end = Math.max(prefix.lastIndexOf('. '), prefix.lastIndexOf('; '), prefix.lastIndexOf('· '));
-      if (end < target / 2) end = prefix.lastIndexOf(' ');
-      if (end < 1) end = target;
-      else end += 1;
-      pieces.push(rest.slice(0,end).trim()); rest = rest.slice(end).trim();
-    }
-    if (rest) pieces.push(rest);
+    // The budget is soft: never cut a sentence merely to meet a character cap.
+    pieces.push(...[...segmenter.segment(paragraph)].map(p=>p.segment.trim()).filter(Boolean));
   }
   const units = [];
   let pending = '';

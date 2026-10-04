@@ -12,6 +12,12 @@ assert.match(duplicate,/ΤΕΛΟΣ/);assert.doesNotMatch(duplicate,/ΑΠΑΓΟΡ
 const review = extractCompletePage(`<div id="eclass_ebook_body"><h1>1.3</h1><p>${prose}</p><p>Ερωτήσεις</p><p>Άσχετη γενική άσκηση κεφαλαίου</p></div>`,{topic:'1.3'}).text;
 assert.doesNotMatch(review,/Άσχετη/);
 const image=extractCompletePage('<div id="eclass_ebook_body"><p>τύπος <img alt="img" data-official-transcription="ρ = m / V"></p></div>').text;assert.match(image,/ρ = m \/ V/);
+const brokenClause = 'Πάντως η σθεναρή αντίσταση των οπαδών της\n\nαρχαιας θρησκείας δεν επέτρεψε στον Κωνσταντίνο να υιοθετήσει καθαρή θρησκευτική στάση.';
+const repairedClause = sourceSentences(sourceUnits(brokenClause)[0]);
+assert.equal(repairedClause.length,1);
+assert.match(repairedClause[0].text,/οπαδών της αρχαιας θρησκείας/);
+const longSentence='Ο ορισμός '+('περιλαμβάνει όλα τα αναγκαία συμφραζόμενα '.repeat(70))+'και τελειώνει εδώ.';
+assert.equal(sourceUnits(longSentence).length,1,'A character budget must never cut a sentence');
 const context = 'Φυτεύουμε ένα κλαδί από το γεράνι. Στη συγκεκριμένη περίπτωση, η αναπαραγωγή γίνεται με μονογονία.';
 const contextUnits = sourceUnits(context);
 assert.equal(validMap(JSON.stringify({units:[{id:'u1',passages:[context.split('. ')[1]]}]}),contextUnits),false,'An exact sentence must not lose its antecedent');

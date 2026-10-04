@@ -42,19 +42,35 @@ module.exports = async function handler(req, res) {
   const sourceKey = { kind: activity === 'audio' ? 'official-complete-audio-source-v5' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
   try {
     let officialSource = await getStudyCache(sourceKey);
-  if (!officialSource?.grounded || !officialSource?.text || (activity === 'audio' && officialSource.sourceCompleteness?.parserVersion !== COMPLETE_SOURCE_VERSION)) {
-    const resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: activity === 'audio' ? 'audio' : '' });
-    if (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text) {
-      const status = Number(resolved?.status || 502);
-      return res.status(status >= 500 ? 502 : 400).json({ error: resolved?.body?.error || 'official_source_unavailable', message: 'Δεν φορτώθηκε με ασφάλεια η επίσημη ενότητα του σχολικού βιβλίου.' });
-    }
-    officialSource = resolved.body;
-    await setStudyCache(sourceKey, officialSource, 86400);
-  }
+    const needsStrictAudioRefresh = activity === 'audio' && officialSource?.sourceCompleteness?.parserVersion !== COMPLETE_SOURCE_VERSION && officialSource?.audioGroundedFallback !== true;
+    if (!officialSource?.grounded || !officialSource?.text || needsStrictAudioRefresh) {
+      let resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: activity === 'audio' ? 'audio' : '' });
 
-  const source = String(officialSource.text || '').trim();
-  const title = String(officialSource.bookTitle || sourceTitle || '').trim().slice(0, 300);
-  if (source.length < 250) return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
+      // Some older/primary-school mappings are safely grounded in the exact official
+      // ebooks.edu.gr selection but do not yet support the stricter whole-section parser.
+      // In that case the normal resolver is still an official-source-only fallback and
+      // is preferable to showing a false failure after the UI has already loaded the source.
+      if (activity === 'audio' && (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text)) {
+        const normalResolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: '' });
+        if (normalResolved?.ok && normalResolved?.body?.grounded && normalResolved?.body?.text) {
+          resolved = {
+            ...normalResolved,
+            body: { ...normalResolved.body, audioGroundedFallback: true }
+          };
+        }
+      }
+
+      if (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text) {
+        const status = Number(resolved?.status || 502);
+        return res.status(status >= 500 ? 502 : 400).json({ error: resolved?.body?.error || 'official_source_unavailable', message: 'Δεν φορτώθηκε με ασφάλεια η επίσημη ενότητα του σχολικού βιβλίου.' });
+      }
+      officialSource = resolved.body;
+      await setStudyCache(sourceKey, officialSource, 86400);
+    }
+
+    const source = String(officialSource.text || '').trim();
+    const title = String(officialSource.bookTitle || sourceTitle || '').trim().slice(0, 300);
+    if (source.length < 250) return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
 
     if (activity === 'audio') return await wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus });
     return await verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation });

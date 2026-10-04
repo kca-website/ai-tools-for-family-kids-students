@@ -1,0 +1,165 @@
+name: Phase 25 grounding progress
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/phase25-grounding-progress.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply verified supplemental mappings
+        shell: bash
+        run: |
+          cat > gel-schoolbook-manual-overrides-phase25-2026-2027.js <<'EOF'
+          "use strict";
+
+          const entries = Object.freeze([
+            {
+              subjectId: "ekthesi-a-lykeiou",
+              label: "Τρόποι ανάπτυξης παραγράφου",
+              sourceTopicId: "ekthesi-a-lykeiou.mapped-topic-9",
+              sourceStatus: "needs-manual-review",
+              sourceReason: "unnumbered-topic-no-equal-heading",
+              sourceOrigin: "manual-official-discovery",
+              discoveryPhase: 25,
+              work: "8547/2369",
+              granularity: "manual-discovered-page",
+              reviewBasis: "Official Γλωσσικές Ασκήσεις page Η΄ Παράγραφος explicitly lists the common ways of paragraph development and cross-references A/B/G Lyceum material.",
+              reviewedAt: "2026-10-04",
+              reviewPhase: 25,
+              sources: [
+                {
+                  work: "8547/2369",
+                  url: "https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexB_06.html",
+                  heading: "Η' Παράγραφος"
+                }
+              ]
+            },
+            {
+              subjectId: "oikonomia-g-lykeiou",
+              label: "Διεθνές εμπόριο και οικονομικές σχέσεις",
+              sourceTopicId: "oikonomia-g-lykeiou.topic-20",
+              sourceStatus: "needs-manual-review",
+              sourceReason: "unnumbered-topic-no-matching-heading",
+              sourceOrigin: "manual-official-discovery",
+              discoveryPhase: 25,
+              work: "8547/2392",
+              granularity: "manual-discovered-page",
+              reviewBasis: "Official Αρχές Οικονομικής Θεωρίας, Chapter 11: Διεθνείς οικονομικές σχέσεις - Ευρωπαϊκή Ένωση - Ελληνική οικονομία; the chapter explicitly covers international trade/imports/exports and international economic relations.",
+              reviewedAt: "2026-10-04",
+              reviewPhase: 25,
+              sources: [
+                {
+                  work: "8547/2392",
+                  url: "https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/index11.html",
+                  heading: "ΔΙΕΘΝΕΙΣ ΟΙΚΟΝΟΜΙΚΕΣ ΣΧΕΣΕΙΣ"
+                }
+              ]
+            }
+          ]);
+
+          function get(subjectId, label) {
+            const s = String(subjectId || "").trim();
+            const l = String(label || "").trim();
+            return entries.find((entry) => entry.subjectId === s && entry.label === l) || null;
+          }
+
+          module.exports = Object.freeze({
+            generatedAt: "2026-10-04",
+            schoolYear: "2026-2027",
+            count: entries.length,
+            entries,
+            get
+          });
+          EOF
+
+          python - <<'PY'
+          from pathlib import Path
+
+          endpoint = Path('api/schoolbook-source.js')
+          s = endpoint.read_text()
+          old = '''let GEL_MANUAL_OVERRIDES = null;\ntry {\n  GEL_MANUAL_OVERRIDES = require("../gel-schoolbook-manual-overrides-2026-2027.js");\n} catch (_) {\n  GEL_MANUAL_OVERRIDES = null;\n}\n'''
+          new = old + '''\nlet GEL_MANUAL_OVERRIDES_PHASE25 = null;\ntry {\n  GEL_MANUAL_OVERRIDES_PHASE25 = require("../gel-schoolbook-manual-overrides-phase25-2026-2027.js");\n} catch (_) {\n  GEL_MANUAL_OVERRIDES_PHASE25 = null;\n}\n'''
+          if old not in s:
+              raise SystemExit('endpoint require anchor not found')
+          s = s.replace(old, new, 1)
+          old2 = '  const manualOverride = GEL_MANUAL_OVERRIDES?.get?.(subject, rawTopic) || null;'
+          new2 = '  const manualOverride = GEL_MANUAL_OVERRIDES?.get?.(subject, rawTopic) || GEL_MANUAL_OVERRIDES_PHASE25?.get?.(subject, rawTopic) || null;'
+          if old2 not in s:
+              raise SystemExit('endpoint lookup anchor not found')
+          s = s.replace(old2, new2, 1)
+          endpoint.write_text(s)
+
+          audit = Path('scripts/grounding-coverage-report.mjs')
+          s = audit.read_text()
+          old = "const overrides = require('../gel-schoolbook-manual-overrides-2026-2027.js');\n"
+          new = old + "const phase25 = require('../gel-schoolbook-manual-overrides-phase25-2026-2027.js');\n"
+          if old not in s:
+              raise SystemExit('audit require anchor not found')
+          s = s.replace(old, new, 1)
+          old2 = "    (overrides.entries || []).map((entry) => `${entry.subjectId}\\n${entry.label}`)\n"
+          new2 = "    [...(overrides.entries || []), ...(phase25.entries || [])].map((entry) => `${entry.subjectId}\\n${entry.label}`)\n"
+          if old2 not in s:
+              raise SystemExit('audit set anchor not found')
+          s = s.replace(old2, new2, 1)
+          audit.write_text(s)
+
+          test = Path('tests/phase18-gel-grounding-coverage-smoke.mjs')
+          s = test.read_text()
+          old = 'const overrides = require("../gel-schoolbook-manual-overrides-2026-2027.js");\n'
+          new = old + 'const phase25 = require("../gel-schoolbook-manual-overrides-phase25-2026-2027.js");\n'
+          if old not in s:
+              raise SystemExit('test require anchor not found')
+          s = s.replace(old, new, 1)
+          old2 = 'const overridden = new Set(overrides.entries.map((entry) => entry.subjectId + "\\n" + entry.label));'
+          new2 = 'const overridden = new Set([...overrides.entries, ...phase25.entries].map((entry) => entry.subjectId + "\\n" + entry.label));'
+          if old2 not in s:
+              raise SystemExit('test set anchor not found')
+          s = s.replace(old2, new2, 1)
+          reps = {
+            'assert.equal(reviewedManual, 292);': 'assert.equal(reviewedManual, 294);',
+            'assert.equal(remainingCandidateBacked, 5);': 'assert.equal(remainingCandidateBacked, 4);',
+            'assert.equal(remainingWithoutCandidate, 63);': 'assert.equal(remainingWithoutCandidate, 62);',
+            'assert.equal(grounded, 563);': 'assert.equal(grounded, 565);',
+            'assert.equal(blocked, 73);': 'assert.equal(blocked, 71);'
+          }
+          for a,b in reps.items():
+              if a not in s:
+                  raise SystemExit('test count anchor missing: '+a)
+              s=s.replace(a,b,1)
+          insert = '''\nfor (const [subjectId, label] of [\n  ["ekthesi-a-lykeiou", "Τρόποι ανάπτυξης παραγράφου"],\n  ["oikonomia-g-lykeiou", "Διεθνές εμπόριο και οικονομικές σχέσεις"]\n]) {\n  const resolved = endpoint._test.resolveGelInventoryTopic(subjectId, label);\n  assert.equal(resolved?.runtimeMode, "manual-html", subjectId + " / " + label + " must be grounded by Phase 25");\n}\n'''
+          marker = '// Guard examples: candidates that are deliberately still ambiguous/insufficient.\n'
+          if marker not in s:
+              raise SystemExit('test guard marker missing')
+          s=s.replace(marker, insert+'\n'+marker,1)
+          test.write_text(s)
+          PY
+
+      - name: Install dependencies
+        run: npm install --no-package-lock --ignore-scripts
+      - name: Run grounding tests
+        run: |
+          node tests/phase18-gel-grounding-coverage-smoke.mjs
+          npm run audit:grounding
+      - name: Commit verified mappings
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gel-schoolbook-manual-overrides-phase25-2026-2027.js api/schoolbook-source.js scripts/grounding-coverage-report.mjs tests/phase18-gel-grounding-coverage-smoke.mjs
+          git diff --cached --quiet && exit 0
+          git commit -m "Ground two additional verified GEL topics"
+          git push origin main

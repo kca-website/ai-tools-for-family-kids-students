@@ -2,7 +2,7 @@
 // their context, key-idea coverage and concision before ordered narration.
 const { generateChat, getAiStatus } = require('./ai-provider-router');
 const { createHash } = require('node:crypto');
-const VERSION = 'whole-section-summary-v9';
+const VERSION = 'whole-section-summary-v10';
 const normalize = x => String(x || '').normalize('NFKC').replace(/\s+/g, ' ').trim();
 function json(text) { try { return JSON.parse(String(text).trim().replace(/^```(?:json)?\s*/i,'').replace(/\s*```$/,'')); } catch { return null; } }
 
@@ -52,7 +52,9 @@ function sourceSentences(unit) {
     }
   }
   // Diagram dumps and photo/layout labels are source evidence, not speech.
-  return rows.filter(row => (row.text.match(/(?:->|→|⇒)/g) || []).length < 3
+  return rows.filter(row => !/[?;:]$/.test(row.text)
+    && !/^Όπως φανερώνει (?:και )?το όνομά/u.test(row.text)
+    && (row.text.match(/(?:->|→|⇒)/g) || []).length < 3
     && !/^(?:Εικόνα\s+\d|Φωτογραφία|Τομή .* κατά |Σχέδιο .* κατά |(?:Κάτω|Επάνω|Αριστερά|Δεξιά),|\d{1,2}η[-–]\d{1,2}η ημέρα|\d{1,2}η ημέρα)/u.test(row.text));
 }
 function selectedPassages(row, unit) {

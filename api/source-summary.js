@@ -18,7 +18,7 @@ const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 const { VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
-const { createWholeSectionLesson, VERSION: AUDIO_VERSION } = require('../whole-section-audio');
+const { createKnowledgeMapLesson, VERSION: AUDIO_VERSION } = require('../whole-section-audio-knowledge');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -73,7 +73,7 @@ async function wholeSectionAudio({ res, source, title, sid, selectedTopic, lang,
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({ ...cached, cacheHit: true });
   }
-  const response = await createWholeSectionLesson({ source, topic: selectedTopic, language: lang });
+  const response = await createKnowledgeMapLesson({ source, topic: selectedTopic, language: lang });
   // Retry transient outages next time; do not store degraded narration for a week.
   if (!response.verification.verbatimUnits) await setStudyCache(cacheKey, response);
   res.setHeader('Cache-Control', 'no-store');

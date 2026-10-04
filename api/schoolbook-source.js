@@ -1,3 +1,5 @@
+const { transcribeOfficialFigures } = require('../schoolbook-figures');
+const { extractCompletePage, completeText, VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
@@ -1718,6 +1720,7 @@ module.exports = async function handler(req, res) {
 
   const rawSubject = clean(req.query?.subject, 120);
   const topic = clean(req.query?.topic, 500);
+  const completeAudio = req.query?.purpose === "audio";
   const subject = ALIASES[rawSubject] || rawSubject;
   const gelInventory = topic ? resolveGelInventoryTopic(subject, topic) : null;
 
@@ -1832,7 +1835,8 @@ module.exports = async function handler(req, res) {
       mappingConfidence: mapping.confidence || null,
       labelParaphrase: mapping.labelParaphrase === true,
       verifiedHeading: mapping.heading || null,
-      text: String(extracted.text || "").slice(0, 42000)
+      sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION } : undefined,
+      text: completeAudio ? completeText(extracted.text, topic) : String(extracted.text || "").slice(0, 42000)
     });
   }
 
@@ -1889,7 +1893,8 @@ module.exports = async function handler(req, res) {
 
     if (directUrls.length) {
       sourceUrls = directUrls;
-      const pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
+      let pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
+      if (completeAudio) pages = await Promise.all(pages.map((html,i) => html ? transcribeOfficialFigures(html, sourceUrls[i]) : html));
       if (pages.some((html) => !html)) {
         return res.status(404).json({
           grounded: false,
@@ -1904,7 +1909,13 @@ module.exports = async function handler(req, res) {
         gelInventory.mapping?.granularity === "section-anchor";
 
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
-      if(characterChapter){
+      if (completeAudio) {
+        combinedText = pages.map((html, i) => {
+          const selected = gelAnchorScoped ? selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping) : (subject === "istoria-e-dimotikou" && resolveHistoryEChapter(topic) ? selectHistoryEChapterText(html, topic) : null);
+          const text = selected !== null ? completeText(selected, topic) : extractCompletePage(html, { topic, sourceUrl: sourceUrls[i] }).text;
+          return "[Official page: " + sourceUrls[i] + "]\n" + text;
+        }).join("\n\n");
+      } else if(characterChapter){
         const source=pages[0].replace(/<select\b[^>]*>[\s\S]*?<\/select>/gi,'');
         combinedText=htmlToText(source);
         if(!normalize(combinedText).includes(normalize(characterChapter.verifyTerm)))return res.status(404).json({grounded:false,error:'character_chapter_not_verified'});
@@ -1963,7 +1974,7 @@ module.exports = async function handler(req, res) {
           : distributeOfficialPages(pages, sourceUrls, 42000);
       }
     } else if (book.multi) {
-      sourceUrls = await discoverUnitPages(book, path);
+      sourceUrls = await discoverUnitPages(book, path, completeAudio);
       if (!sourceUrls.length) {
         return res.status(404).json({
           grounded: false,
@@ -1972,12 +1983,14 @@ module.exports = async function handler(req, res) {
           message: "Δεν βρέθηκαν οι επίσημες υποσελίδες της συγκεκριμένης ενότητας."
         });
       }
-      const pages = await Promise.all(sourceUrls.slice(0, 12).map(fetchOfficialHtml));
-      combinedText = distributeOfficialPages(pages, sourceUrls, 42000);
+      let pages = await Promise.all((completeAudio ? sourceUrls : sourceUrls.slice(0, 12)).map(fetchOfficialHtml));
+      if (completeAudio) pages = await Promise.all(pages.map((html,i) => html ? transcribeOfficialFigures(html, sourceUrls[i]) : html));
+      combinedText = completeAudio ? pages.map((html, i) => "[Official page: " + sourceUrls[i] + "]\n" + extractCompletePage(html, { topic, sourceUrl: sourceUrls[i] }).text).join("\n\n") : distributeOfficialPages(pages, sourceUrls, 42000);
     } else {
       const sourceUrl = new URL(path, book.base).toString();
       sourceUrls = [sourceUrl];
-      const html = await fetchOfficialHtml(sourceUrl);
+      let html = await fetchOfficialHtml(sourceUrl);
+      if (completeAudio && html) html = await transcribeOfficialFigures(html, sourceUrl);
       if (!html) {
         return res.status(404).json({
           grounded: false,
@@ -1987,7 +2000,7 @@ module.exports = async function handler(req, res) {
           message: "Η συγκεκριμένη σελίδα του επίσημου βιβλίου δεν ήταν διαθέσιμη."
         });
       }
-      combinedText = htmlToText(html);
+      combinedText = completeAudio ? extractCompletePage(html, { topic, sourceUrl }).text : htmlToText(html);
     }
 
     const scoped = applyCurriculumTextScope(subject, topic, combinedText);
@@ -2029,12 +2042,15 @@ module.exports = async function handler(req, res) {
       mappingConfidence: book.mappingConfidence || null,
       labelParaphrase: book.labelParaphrase === true,
       verifiedHeading: book.verifiedHeading || null,
-      text: useful.slice(0, 42000)
+      sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION, sourceChars: useful.length, pages: sourceUrls.length } : undefined,
+      text: completeAudio ? useful : useful.slice(0, 42000)
     });
   } catch (err) {
-    return res.status(502).json({
+    const invalidScope = /section_(?:body|heading|title)|selected_section/.test(String(err?.message || ""));
+    console.warn("OFFICIAL_AUDIO_SOURCE_ERROR", JSON.stringify({subject, topic, message:String(err?.message || "").slice(0,160)}));
+    return res.status(invalidScope ? 404 : 502).json({
       grounded: false,
-      error: "official_source_fetch_failed",
+      error: invalidScope ? "selected_section_not_verified" : "official_source_fetch_failed",
       bookTitle: book.title,
       message: "Δεν ήταν δυνατή η ανάκτηση της επίσημης σχολικής πηγής."
     });
@@ -2871,7 +2887,7 @@ async function resolveLinkedSectionUrls(book, topic) {
   return rootHtml ? resolveLinkedSectionUrlsFromHtml(book, topic, rootHtml) : [];
 }
 
-async function discoverUnitPages(book, prefix) {
+async function discoverUnitPages(book, prefix, complete = false) {
   const rootHtml = await fetchOfficialHtml(book.base);
   if (!rootHtml) return [];
 
@@ -2908,7 +2924,7 @@ async function discoverUnitPages(book, prefix) {
     checked.filter(Boolean).forEach(url => hrefs.push(url));
   }
 
-  return hrefs.slice(0, 12);
+  return complete ? hrefs : hrefs.slice(0, 12);
 }
 
 function distributeOfficialPages(pages, urls, maxChars) {
@@ -3379,7 +3395,7 @@ function selectUsefulText(text, topic) {
   return full;
 }
 
-async function resolveOfficialSchoolbookSource(rawSubject, rawTopic) {
+async function resolveOfficialSchoolbookSource(rawSubject, rawTopic, { purpose = "" } = {}) {
   let statusCode = 200;
   let payload = null;
   const headers = {};
@@ -3390,7 +3406,7 @@ async function resolveOfficialSchoolbookSource(rawSubject, rawTopic) {
   };
   await module.exports({
     method: "GET",
-    query: { subject: rawSubject, topic: rawTopic },
+    query: { subject: rawSubject, topic: rawTopic, purpose },
   }, response);
   return {
     ok: statusCode >= 200 && statusCode < 300 && payload?.grounded === true,
@@ -3475,3 +3491,5 @@ module.exports._test = Object.freeze({
   RELIGION_B_OFFICIAL_SOURCE_MATERIAL,
   applyCurriculumTextScope
 });
+
+module.exports.config = { maxDuration: 300 };

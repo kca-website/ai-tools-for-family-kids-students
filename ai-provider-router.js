@@ -10,7 +10,7 @@ const CLOUDFLARE_MODELS = new Set([
   '@cf/openai/gpt-oss-120b',
 ]);
 const GROQ_MODELS = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
-const GEMINI_MODELS = new Set(['gemini-2.5-flash-lite', 'gemini-2.5-flash', 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite']);
+const GEMINI_MODELS = new Set([ 'gemini-2.5-flash', 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite']);
 const allowedModels = provider => provider === 'gemini' ? GEMINI_MODELS : (provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS);
 const ROUTING_PROFILES = new Set(['default', 'economy', 'balanced', 'quality']);
 
@@ -88,8 +88,8 @@ function isConfigured(name) {
 
 function modelFor(name) {
   if (name === 'gemini') {
-    const configured = String(process.env.GEMINI_PRODUCTION_MODEL || 'gemini-2.5-flash-lite');
-    return GEMINI_MODELS.has(configured) ? configured : 'gemini-2.5-flash-lite';
+    const configured = String(process.env.GEMINI_PRODUCTION_MODEL || 'gemini-3.1-flash-lite');
+    return GEMINI_MODELS.has(configured) ? configured : 'gemini-3.1-flash-lite';
   }
   if (name === 'cloudflare') {
     const configured = String(process.env.CLOUDFLARE_PRODUCTION_MODEL || '@cf/openai/gpt-oss-120b');
@@ -209,7 +209,9 @@ async function callGemini({ messages, maxTokens, temperature, responseFormat, ti
   const system = messages.filter(message => message.role === 'system').map(message => message.content).join('\n\n');
   const contents = messages.filter(message => message.role !== 'system').map(message => ({
     role: message.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: String(message.content || '') }],
+    parts: Array.isArray(message.content) ? message.content.map(part => part.type === 'image'
+      ? { inlineData: { mimeType: part.mimeType, data: part.data } }
+      : { text: String(part.text || '') }) : [{ text: String(message.content || '') }],
   }));
   const generationConfig = {
     temperature,

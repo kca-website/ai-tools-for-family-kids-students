@@ -17,6 +17,7 @@ function browserRequestAllowed(req) {
 const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
+const { createWholeSectionLesson, VERSION: AUDIO_VERSION } = require('../whole-section-audio');
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -37,22 +38,23 @@ module.exports = async function handler(req, res) {
   const explanation = activity === 'explain';
   if (!sid || !selectedTopic) return res.status(400).json({ error: 'official_source_identity_required', message: 'Λείπει η επαληθεύσιμη ταυτότητα της επίσημης σχολικής πηγής.' });
 
-  let officialSource = await getStudyCache({ kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic });
+  const sourceKey = { kind: activity === 'audio' ? 'official-complete-audio-source-v1' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
+  try {
+  let officialSource = await getStudyCache(sourceKey);
   if (!officialSource?.grounded || !officialSource?.text) {
-    const resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic);
+    const resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: activity === 'audio' ? 'audio' : '' });
     if (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text) {
       const status = Number(resolved?.status || 502);
       return res.status(status >= 500 ? 502 : 400).json({ error: resolved?.body?.error || 'official_source_unavailable', message: 'Δεν φορτώθηκε με ασφάλεια η επίσημη ενότητα του σχολικού βιβλίου.' });
     }
     officialSource = resolved.body;
-    await setStudyCache({ kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic }, officialSource, 86400);
+    await setStudyCache(sourceKey, officialSource, 86400);
   }
 
   const source = String(officialSource.text || '').trim();
   const title = String(officialSource.bookTitle || sourceTitle || '').trim().slice(0, 300);
   if (source.length < 250) return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
 
-  try {
     if (activity === 'audio') return await wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus });
     return await verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation });
   } catch (err) {
@@ -62,91 +64,18 @@ module.exports = async function handler(req, res) {
 };
 
 async function wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus }) {
-  const scopedSource = scopeToSelectedSection(source, selectedTopic);
-  const cacheKey = {
-    kind: 'verified-whole-chapter-audio',
-    promptVersion: 'whole-section-audio-v8-toc-safe-resilient',
-    subjectId: sid, topic: selectedTopic, title, language: lang, source: scopedSource,
-    modelRoute: routingSignature(aiStatus),
-  };
+  const cacheKey = { kind: 'verified-whole-chapter-audio', promptVersion: AUDIO_VERSION,
+    subjectId: sid, topic: selectedTopic, title, language: lang, source, modelRoute: routingSignature(aiStatus) };
   const cached = await getStudyCache(cacheKey);
-  if (cached?.text) {
+  if (cached?.text && cached?.verification?.coverageRatio === 1) {
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({ ...cached, cacheHit: true });
   }
-
-  const segments = splitWholeSection(scopedSource, 2200, 10);
-  if (!segments.length) return res.status(502).json({ error: 'empty_section', message: 'Δεν βρέθηκε επαληθεύσιμο κείμενο για την επιλεγμένη ενότητα.' });
-
-  const rowsBySegment = [];
-  let provider = null;
-  let model = null;
-  const usage = { promptTokens: 0, completionTokens: 0, totalTokens: 0, cachedTokens: 0 };
-
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i];
-    let generated = null;
-    try { generated = await generateSegmentClaims({ segment, index: i, count: segments.length, selectedTopic, lang }); }
-    catch (err) { console.warn('SOURCE_SUMMARY_SEGMENT_AI_ERROR', JSON.stringify({ part: i + 1, message: String(err?.message || err).slice(0, 240) })); }
-
-    if (generated?.ok) {
-      provider = generated.provider || provider;
-      model = generated.model || model;
-      addUsage(usage, generated.usage);
-    }
-
-    let claims = verifiedClaimsFromResponse(generated?.text, segment, 7);
-    for (const row of extractiveFallback(segment, 4)) {
-      if (claims.length >= 4) break;
-      if (!claims.some(x => claimsTooSimilar(x.claim, row.claim))) claims.push(row);
-    }
-    rowsBySegment.push(dedupeClaims(claims));
-  }
-
-  const covered = rowsBySegment.filter(rows => rows.length).length;
-  if (!covered) return res.status(502).json({ error: 'insufficient_verified_evidence', message: 'Δεν βρέθηκε αρκετό επαληθεύσιμο κείμενο από την επίσημη σχολική πηγή.' });
-
-  const claimLimit = Math.min(40, Math.max(12, segments.length * 5));
-  const selected = [];
-  for (const rows of rowsBySegment) {
-    for (const row of rows) {
-      if (selected.length >= claimLimit) break;
-      if (!selected.some(x => claimsTooSimilar(x.claim, row.claim))) selected.push(row);
-    }
-  }
-  if (!selected.length) return res.status(502).json({ error: 'insufficient_verified_evidence', message: 'Δεν βρέθηκε αρκετό επαληθεύσιμο κείμενο από την επίσημη σχολική πηγή.' });
-
-  const response = {
-    text: formatAudio(selected.map(x => x.claim), selectedTopic, lang),
-    verified: true,
-    wholeChapter: true,
-    verification: {
-      segments: segments.length,
-      segmentsCovered: covered,
-      approved: selected.length,
-      coverageRatio: Number((covered / segments.length).toFixed(2)),
-      sourceChars: source.length,
-      scopedChars: scopedSource.length,
-    },
-    provider, model, usage,
-  };
-  await setStudyCache(cacheKey, response);
-  console.info('AI_METRIC ' + JSON.stringify({ event: 'ai_request', task: 'whole_chapter_audio', activity: 'audio', status: 200, provider: provider || '', model: model || '', segments: segments.length, segmentsCovered: covered, approved: selected.length, sourceChars: source.length, scopedChars: scopedSource.length, ...usage }));
+  const response = await createWholeSectionLesson({ source, topic: selectedTopic, language: lang });
+  // Retry transient outages next time; do not store degraded narration for a week.
+  if (!response.verification.verbatimUnits) await setStudyCache(cacheKey, response);
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({ ...response, cacheHit: false });
-}
-
-async function generateSegmentClaims({ segment, index, count, selectedTopic, lang }) {
-  const system = lang === 'en'
-    ? `Prepare ONE sequential part of a spoken lesson from an official schoolbook. Return ONLY JSON: {"claims":[{"claim":"clear explanatory sentence","evidence":"exact 4-24 word excerpt copied from PART"}]}. Produce 4-6 claims. Cover the important ideas, definitions, processes, relationships, causes/results, formulas, units, conversions and textbook examples when present. Ignore tables of contents, navigation, page chrome, indexes and unrelated review material. Use no outside knowledge and do not repeat ideas.`
-    : `Ετοίμασε ΕΝΑ διαδοχικό τμήμα προφορικού μαθήματος από επίσημο σχολικό βιβλίο. Επίστρεψε ΜΟΝΟ JSON: {"claims":[{"claim":"καθαρή επεξηγηματική πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων αντιγραμμένο από το ΤΜΗΜΑ"}]}. Δώσε 4-6 claims. Κάλυψε τις σημαντικές ιδέες, ορισμούς, διαδικασίες, σχέσεις, αιτίες/αποτελέσματα, τύπους, μονάδες, μετατροπές και παραδείγματα του βιβλίου όταν υπάρχουν. Αγνόησε περιεχόμενα, πλοήγηση, στοιχεία σελίδας, ευρετήρια και άσχετο υλικό επανάληψης. Μην χρησιμοποιείς εξωτερική γνώση και μην επαναλαμβάνεις ιδέες.`;
-  return generateChat({
-    messages: [
-      { role: 'system', content: system },
-      { role: 'user', content: `TOPIC: ${selectedTopic}\nPART ${index + 1} OF ${count}:\n\n${segment}` }
-    ],
-    maxTokens: 1100, temperature: 0, reasoningEffort: 'low', modelProfile: 'balanced',
-  });
 }
 
 async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation }) {
@@ -185,71 +114,6 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
   await setStudyCache(cacheKey, response);
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({ ...response, cacheHit: false });
-}
-
-function scopeToSelectedSection(source, topic) {
-  const full = String(source || '').trim();
-  if (!full) return '';
-  const lines = full.split('\n');
-  const codeMatch = String(topic || '').match(/(?:^|[^\d])(\d+\.\d+(?:\.\d+)?)(?:[^\d]|$)/);
-  let scoped = full;
-
-  if (codeMatch) {
-    const code = codeMatch[1];
-    const depth = code.split('.').length;
-    const headingRe = new RegExp('^\\s*' + escapeRegExp(code) + '(?:\\s|[-–—.:]|$)');
-    const starts = [];
-    for (let i = 0; i < lines.length; i++) if (headingRe.test(lines[i])) starts.push(i);
-
-    const candidates = starts.map(start => {
-      let end = lines.length;
-      for (let i = start + 1; i < lines.length; i++) {
-        const m = lines[i].match(/^\s*(\d+(?:\.\d+)+)(?:\s|[-–—.:]|$)/);
-        if (!m || m[1] === code) continue;
-        if (m[1].split('.').length <= depth) { end = i; break; }
-      }
-      const text = lines.slice(start, end).join('\n').trim();
-      const prose = text.split('\n').filter(line => !looksLikeNavigationLine(line)).join(' ').replace(/\s+/g, ' ').trim();
-      const navLines = text.split('\n').filter(looksLikeNavigationLine).length;
-      const tocPenalty = /(^|\n)\s*(περιεχόμενα|contents)\b/i.test(text) ? 5000 : 0;
-      return { text, proseChars: prose.length, score: prose.length - navLines * 80 - tocPenalty };
-    }).filter(x => x.text);
-
-    candidates.sort((a, b) => b.score - a.score || b.proseChars - a.proseChars || b.text.length - a.text.length);
-    if (candidates[0]?.proseChars >= 220) scoped = candidates[0].text;
-  }
-
-  scoped = scoped.split('\n').filter((line, i) => i === 0 || !looksLikeNavigationLine(line) || line.trim().length > 110).join('\n').trim();
-  const tailMarkers = ['\nΕρωτήσεις', '\nΑΣΚΗΣΕΙΣ', '\nΑσκήσεις', '\nΔραστηριότητες', '\nΠαιχνίδι αυτοαξιολόγησης'];
-  const ends = tailMarkers.map(marker => scoped.indexOf(marker)).filter(i => i >= 500);
-  if (ends.length) scoped = scoped.slice(0, Math.min(...ends));
-  return scoped.trim();
-}
-
-function splitWholeSection(source, targetChars = 2200, maxParts = 10) {
-  const full = String(source || '').trim();
-  if (!full) return [];
-  let desired = Math.ceil(full.length / Math.max(1200, targetChars));
-  if (full.length >= 2400) desired = Math.max(2, desired);
-  if (full.length >= 4200) desired = Math.max(3, desired);
-  desired = Math.max(1, Math.min(maxParts, desired));
-  const approx = Math.ceil(full.length / desired);
-  const out = [];
-  let pos = 0;
-  while (pos < full.length && out.length < desired) {
-    let end = out.length === desired - 1 ? full.length : Math.min(full.length, pos + approx);
-    if (end < full.length) {
-      const floor = pos + Math.floor(approx * 0.65);
-      const cuts = [full.lastIndexOf('\n\n', end), full.lastIndexOf('. ', end), full.lastIndexOf('; ', end), full.lastIndexOf('· ', end)].filter(x => x >= floor);
-      if (cuts.length) { const best = Math.max(...cuts); end = best + (full.slice(best, best + 2) === '. ' ? 1 : 0); }
-    }
-    const part = full.slice(pos, end).trim();
-    if (part.length >= 80) out.push(part);
-    if (end <= pos) break;
-    pos = end;
-  }
-  if (pos < full.length && out.length) out[out.length - 1] += '\n\n' + full.slice(pos).trim();
-  return out;
 }
 
 function verifiedClaimsFromResponse(text, source, limit) {
@@ -390,3 +254,5 @@ function addUsage(target, usage) {
   target.totalTokens += u.totalTokens;
   target.cachedTokens += u.cachedTokens;
 }
+
+module.exports.config = { maxDuration: 300 };

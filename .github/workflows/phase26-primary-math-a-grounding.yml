@@ -68,12 +68,15 @@ jobs:
         run: |
           node - <<'NODE'
           const sources = require('./primary-schoolbook-complete-sources-2026-2027.js');
+          const catalog = require('./general-education-book-sections-2026-2027.js');
+          const mathA = catalog.get('math-a-dimotikou');
           if (sources.count !== 9) throw new Error('Expected 9 Math A units');
-          for (const entry of sources.entries) {
-            if (entry.subjectId !== 'math-a-dimotikou') throw new Error('Unexpected subject');
-            if (!entry.urls.length) throw new Error('Empty source bundle: ' + entry.label);
+          if (!mathA || mathA.sections.length !== 9) throw new Error('Expected 9 Math A catalog sections');
+          for (const label of mathA.sections) {
+            const entry = sources.get('math-a-dimotikou', label);
+            if (!entry?.urls?.length) throw new Error('Missing complete bundle: ' + label);
             if (!entry.urls.every(u => /^https:\/\/ebooks\.edu\.gr\/ebooks\/v\/html\/8547\/2156\//.test(u))) {
-              throw new Error('Unsafe official URL in ' + entry.label);
+              throw new Error('Unsafe official URL in ' + label);
             }
           }
           console.log('PRIMARY_MATH_A_COMPLETE_BUNDLES=9');
@@ -83,12 +86,15 @@ jobs:
           node - <<'NODE'
           const fs = require('fs');
           const r = JSON.parse(fs.readFileSync('/tmp/grounding.json','utf8'));
-          const mathA = (r.primary.subjects || []).find(x => x.subjectId === 'math-a-dimotikou');
-          if (!mathA || mathA.grounded !== 9 || mathA.pending !== 0) {
-            throw new Error('Math A audit did not reach 9/9: ' + JSON.stringify(mathA));
+          const unresolvedMathA = (r.primary.missing || []).filter(x => x.subjectId === 'math-a-dimotikou');
+          if (unresolvedMathA.length !== 0) {
+            throw new Error('Math A still has pending sections: ' + JSON.stringify(unresolvedMathA));
           }
-          console.log('PRIMARY_MATH_A_AUDIT=' + JSON.stringify(mathA));
-          console.log('PRIMARY_TOTAL=' + r.primary.grounded + '/' + r.primary.total + '; pending=' + r.primary.pending);
+          if (r.primary.grounded !== 182 || r.primary.total !== 275 || r.primary.pending !== 93) {
+            throw new Error('Unexpected Primary totals: ' + JSON.stringify({grounded:r.primary.grounded,total:r.primary.total,pending:r.primary.pending}));
+          }
+          console.log('PRIMARY_MATH_A_AUDIT=9/9');
+          console.log('PRIMARY_TOTAL=182/275; pending=93');
           NODE
 
       - name: Commit runtime activation

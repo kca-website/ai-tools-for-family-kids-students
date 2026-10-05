@@ -1,18 +1,15 @@
-module.exports = async function handler(req,res){
+const PDF=require('./official-pdf-text.js');
+module.exports=async function handler(req,res){
   if(req.method!=='GET') return res.status(405).json({error:'method_not_allowed'});
   res.setHeader('Cache-Control','no-store');
-  const base='https://ebooks.edu.gr/ebooks/v/html/8547/4722/Arches-Oikonomikis-Theorias_G-Lykeiou-SpOikPlir_html-apli/';
-  try{
-    const r=await fetch(base+'index.html',{redirect:'follow'});
-    const text=await r.text();
-    const tokens=[...new Set((text.match(/[A-Za-z0-9_./-]+\.html(?:#[A-Za-z0-9_:-]+)?/g)||[]))];
-    const lower=text.toLowerCase();
-    const needles=['διεθν','κεφαλαιο ενδεκατο','index11','index10','index9'];
-    const snippets={};
-    for(const needle of needles){
-      const i=lower.indexOf(needle.toLowerCase());
-      snippets[needle]=i>=0?text.slice(Math.max(0,i-300),Math.min(text.length,i+900)).replace(/\s+/g,' '):null;
-    }
-    return res.status(200).json({status:r.status,ok:r.ok,tokens,snippets});
-  }catch(e){return res.status(200).json({error:String(e?.message||e)})}
+  const sourceUrl='https://ebooks.edu.gr/ebooks/v/pdf/8547/2522/22-0299-01_V1_Arches-Oikonomikis-Theorias_G-Lykeiou-Spoudon-Oikonomias-Pliroforikis_Vivlio-Mathiti/';
+  const heading='2. Διεθνοποίηση της Οικονομίας';
+  const out=[];
+  for(let page=185;page<=191;page++){
+    try{
+      const r=await PDF.extractVerifiedPdfPage({sourceUrl,pdfPage:page,pdfPageEnd:page,verifiedHeading:heading,minChars:1});
+      out.push({page,ok:r?.ok||false,error:r?.error||null,text:(r?.text||'').slice(0,500),chars:r?.extractedChars||0});
+    }catch(e){out.push({page,error:String(e?.message||e)})}
+  }
+  res.status(200).json({heading,out});
 };

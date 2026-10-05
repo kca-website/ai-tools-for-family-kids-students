@@ -47,7 +47,7 @@
       const before = group.querySelector('a[href="/high/student/tutor?schoolType=epal"]') || null;
       group.insertBefore(link, before);
     }
-    link.textContent = lang() === "en" ? "AI & digital skills" : "AI & Ψηφιακές δεξιότητες";
+    link.textContent = lang() === "en" ? "AI Paths · Digital skills" : "AI Διαδρομές · Ψηφιακές δεξιότητες";
   }
 
   function ensureAiPathsStyles(){

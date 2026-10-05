@@ -2,17 +2,27 @@ const CATALOG = require('../general-education-book-sections-2026-2027.js');
 const AVAILABILITY = require('../secondary-grounding-availability-2026-2027.js');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 
-// These subjects have official mappings, but their current PDF sources are not
-// runtime-consumable in production. The learner UI hides them, so the audit
-// must report the same effective visibility instead of the raw generated list.
+// Official mappings that currently fail production source extraction are hidden
+// from AI Study until their live grounding audit passes.
 const RUNTIME_BLOCKED_SECONDARY_SUBJECTS = new Set([
   'english-a-lykeiou',
-  'english-b-lykeiou'
+  'english-b-lykeiou',
+  'mathimatika-g-genikis',
+  'politiki-paideia-a-lykeiou'
+]);
+const RUNTIME_BLOCKED_SECONDARY_TOPICS = new Map([
+  ['oikonomia-g-lykeiou', new Set(['Διεθνές εμπόριο και οικονομικές σχέσεις'])]
 ]);
 
-function visibleSectionsFor(subject) {
-  if (RUNTIME_BLOCKED_SECONDARY_SUBJECTS.has(String(subject || ''))) return [];
+function rawVisibleSectionsFor(subject) {
   return Array.isArray(AVAILABILITY.subjects?.[subject]) ? AVAILABILITY.subjects[subject] : [];
+}
+
+function visibleSectionsFor(subject) {
+  const sid = String(subject || '');
+  if (RUNTIME_BLOCKED_SECONDARY_SUBJECTS.has(sid)) return [];
+  const blocked = RUNTIME_BLOCKED_SECONDARY_TOPICS.get(sid);
+  return rawVisibleSectionsFor(sid).filter(label => !blocked?.has(String(label || '').trim()));
 }
 
 module.exports = async function handler(req, res) {
@@ -74,6 +84,7 @@ module.exports = async function handler(req, res) {
       subjects: secondaryVisibleSubjects.length,
       topics: secondaryVisibleTopics,
       runtimeBlockedSubjects: [...RUNTIME_BLOCKED_SECONDARY_SUBJECTS],
+      runtimeBlockedTopics: Object.fromEntries([...RUNTIME_BLOCKED_SECONDARY_TOPICS].map(([id,labels])=>[id,[...labels]])),
       policy: 'official-source-only-fail-closed'
     },
     subjects: rows,
@@ -96,6 +107,7 @@ function catalogRows() {
       structureOnlyCount: Math.max(0, sections.length - exactCount),
       visibleVerified,
       runtimeBlocked: RUNTIME_BLOCKED_SECONDARY_SUBJECTS.has(id),
+      runtimeBlockedTopics: Math.max(0, rawVisibleSectionsFor(id).length-visibleVerified),
       policy: level === 'primary'
         ? (exactCount === sections.length && sections.length ? 'official-exact' : 'primary-ai-reviewed-allowed')
         : 'official-runtime-required'
@@ -107,7 +119,7 @@ function sectionsForSubject(subject) {
   const row = CATALOG.get?.(subject);
   const catalogSections = Array.isArray(row?.sections) ? row.sections : [];
   const visibleSections = visibleSectionsFor(subject);
-  const rawVisibleSections = Array.isArray(AVAILABILITY.subjects?.[subject]) ? AVAILABILITY.subjects[subject] : [];
+  const rawVisibleSections = rawVisibleSectionsFor(subject);
   if (catalogSections.length) return { row, sections: catalogSections, source: 'general-book-catalog', visibleSections, rawVisibleSections };
   if (rawVisibleSections.length) return { row: null, sections: rawVisibleSections, source: 'secondary-visible-verified', visibleSections, rawVisibleSections };
   return null;
@@ -120,6 +132,7 @@ async function auditSubject(subject, live, compact) {
   const exact = row?.groundedSections || {};
   const exactCatalogSections = row ? sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)) : [];
   const runtimeBlocked = RUNTIME_BLOCKED_SECONDARY_SUBJECTS.has(subject);
+  const blockedVerifiedMappings = Math.max(0, rawVisibleSections.length-visibleSections.length);
   const base = {
     subject,
     schoolYear: CATALOG.schoolYear || AVAILABILITY.schoolYear || '2026-2027',
@@ -128,14 +141,14 @@ async function auditSubject(subject, live, compact) {
     exactCatalogMapped: exactCatalogSections.length,
     visibleVerified: visibleSections.length,
     runtimeBlocked,
-    blockedVerifiedMappings: runtimeBlocked ? rawVisibleSections.length : 0,
+    blockedVerifiedMappings,
     structureOnly: compact || !row ? undefined : sections.filter(x => !Object.prototype.hasOwnProperty.call(exact, x)),
     exactCatalogSections: compact || !row ? undefined : exactCatalogSections,
     visibleVerifiedSections: compact ? undefined : visibleSections,
   };
-  if (!live || runtimeBlocked) return clean({ ...base, liveChecked: live, runtimeChecked: 0, runtimeGrounded: 0, runtimeFailed: 0, failures: [] });
+  if (!live || runtimeBlocked || !visibleSections.length) return clean({ ...base, liveChecked: live, runtimeChecked: 0, runtimeGrounded: 0, runtimeFailed: 0, failures: [] });
 
-  const topicsToCheck = visibleSections.length ? visibleSections : sections;
+  const topicsToCheck = visibleSections;
   const results = [];
   for (const topic of topicsToCheck) {
     try {

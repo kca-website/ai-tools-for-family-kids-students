@@ -2,13 +2,10 @@
   "use strict";
   if(location.pathname!=="/study.html" && location.pathname!=="/study") return;
 
-  // Runtime safety gate. Keep only the mappings that still fail live source grounding
-  // out of the learner selector. Subjects proven clean are restored automatically.
+  // Runtime safety gate. Keep only mappings that fail live source grounding out
+  // of the learner selector. The current verified secondary inventory is clean.
   const runtimeBlockedSecondarySubjects=new Set([]);
-  const runtimeBlockedSecondaryTopics=new Map([
-    ["english-b-lykeiou",new Set(["Unit 5: Addictions"])],
-    ["oikonomia-g-lykeiou",new Set(["Διεθνές εμπόριο και οικονομικές σχέσεις"])]
-  ]);
+  const runtimeBlockedSecondaryTopics=new Map([]);
   const grounding=window.AITOOLSKIDS_SECONDARY_GROUNDING_AVAILABILITY;
   if(grounding?.has){
     window.AITOOLSKIDS_SECONDARY_GROUNDING_AVAILABILITY=Object.freeze({

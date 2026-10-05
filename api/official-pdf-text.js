@@ -236,24 +236,23 @@ async function extractVerifiedPdfPage({
     return { ok: false, error: "official_pdf_heading_missing" };
   }
 
-  const resolvedPdfUrl = stripFragment(sourceUrl);
+  let resolvedPdfUrl = stripFragment(sourceUrl);
 
   let loadingTask;
   let document;
   try {
     const pdfjs = await loadPdfJs();
-    // Use PDF.js network/range loading instead of downloading the entire
-    // schoolbook into the serverless function. These official PDFs can be
-    // tens of MB while grounding needs only one verified page.
+    // ebooks.edu.gr often exposes a directory/viewer URL rather than a direct
+    // *.pdf URL. Resolve and validate the actual PDF bytes first, then give
+    // PDF.js the bytes. This keeps grounding on the approved official host and
+    // avoids PDF.js trying to parse the HTML viewer as a PDF.
+    const resolvedPdf = await fetchOfficialPdfBytes(sourceUrl, { fetchImpl, maxBytes });
+    resolvedPdfUrl = resolvedPdf.resolvedUrl || resolvedPdfUrl;
     loadingTask = pdfjs.getDocument({
-      url: resolvedPdfUrl,
+      data: resolvedPdf.bytes,
       disableWorker: true,
-      disableRange: false,
-      disableStream: true,
-      disableAutoFetch: true,
       isEvalSupported: false,
-      useSystemFonts: true,
-      rangeChunkSize: 128 * 1024
+      useSystemFonts: true
     });
     document = await loadingTask.promise;
 
@@ -286,10 +285,10 @@ async function extractVerifiedPdfPage({
       resolvedPdfUrl,
       extractedChars: text.length
     };
-  } catch (_) {
+  } catch (err) {
     return {
       ok: false,
-      error: "official_pdf_text_extraction_failed",
+      error: err?.message === "official_pdf_too_large" ? "official_pdf_too_large" : "official_pdf_text_extraction_failed",
       resolvedPdfUrl
     };
   } finally {

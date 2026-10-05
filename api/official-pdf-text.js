@@ -120,6 +120,42 @@ function isPdfBytes(bytes) {
     bytes[3] === 0x46 && bytes[4] === 0x2d;
 }
 
+async function probePdfCandidate(candidate, fetchImpl) {
+  try {
+    const response = await fetchImpl(candidate, {
+      headers: {
+        "User-Agent": "aitools4kids.gr educational source grounding",
+        "Accept": "application/pdf,*/*;q=0.1",
+        "Range": "bytes=0-4095"
+      },
+      redirect: "follow"
+    });
+    if (!response?.ok) return null;
+    const finalUrl = response.url && officialPdfSourceAllowed(response.url)
+      ? stripFragment(response.url)
+      : candidate;
+    if (!officialPdfSourceAllowed(finalUrl)) return null;
+
+    let bytes = new Uint8Array();
+    if (response.body?.getReader) {
+      const reader = response.body.getReader();
+      try {
+        const first = await reader.read();
+        if (first?.value) bytes = first.value instanceof Uint8Array ? first.value : new Uint8Array(first.value);
+        try { await reader.cancel(); } catch (_) {}
+      } finally {
+        try { reader.releaseLock(); } catch (_) {}
+      }
+    } else {
+      const buffer = await response.arrayBuffer();
+      bytes = new Uint8Array(buffer).slice(0, 4096);
+    }
+    return isPdfBytes(bytes) ? finalUrl : null;
+  } catch (_) {
+    return null;
+  }
+}
+
 async function resolveOfficialPdfUrl(sourceUrl, options = {}) {
   const fetchImpl = options.fetchImpl || globalThis.fetch;
   if (typeof fetchImpl !== "function") throw new Error("fetch_unavailable");
@@ -128,24 +164,8 @@ async function resolveOfficialPdfUrl(sourceUrl, options = {}) {
   const candidates = conventionalPdfCandidates(sourceUrl);
   for (const candidate of candidates) {
     if (!/\.pdf$/i.test(new URL(candidate).pathname)) continue;
-    try {
-      const response = await fetchImpl(candidate, {
-        method: "HEAD",
-        headers: {
-          "User-Agent": "aitools4kids.gr educational source grounding",
-          "Accept": "application/pdf,*/*;q=0.1"
-        },
-        redirect: "follow"
-      });
-      const finalUrl = response?.url && officialPdfSourceAllowed(response.url)
-        ? stripFragment(response.url)
-        : candidate;
-      const contentType = String(response?.headers?.get?.("content-type") || "").toLowerCase();
-      if (response?.ok && officialPdfSourceAllowed(finalUrl) &&
-          (contentType.includes("application/pdf") || /\.pdf$/i.test(new URL(finalUrl).pathname))) {
-        return finalUrl;
-      }
-    } catch (_) {}
+    const probed = await probePdfCandidate(candidate, fetchImpl);
+    if (probed) return probed;
   }
 
   for (const candidate of candidates) {
@@ -163,16 +183,8 @@ async function resolveOfficialPdfUrl(sourceUrl, options = {}) {
       if (!contentType.includes("text/html") && !contentType.includes("application/xhtml")) continue;
       const html = await response.text();
       for (const discovered of discoverPdfLinks(html.slice(0, 1024 * 1024), response.url || candidate)) {
-        try {
-          const head = await fetchImpl(discovered, {
-            method: "HEAD",
-            headers: { "User-Agent": "aitools4kids.gr educational source grounding", "Accept": "application/pdf,*/*;q=0.1" },
-            redirect: "follow"
-          });
-          const finalUrl = head?.url && officialPdfSourceAllowed(head.url) ? stripFragment(head.url) : discovered;
-          const type = String(head?.headers?.get?.("content-type") || "").toLowerCase();
-          if (head?.ok && officialPdfSourceAllowed(finalUrl) && (type.includes("application/pdf") || /\.pdf$/i.test(new URL(finalUrl).pathname))) return finalUrl;
-        } catch (_) {}
+        const probed = await probePdfCandidate(discovered, fetchImpl);
+        if (probed) return probed;
       }
     } catch (_) {}
   }
@@ -365,6 +377,7 @@ module.exports = Object.freeze({
   conventionalPdfCandidates,
   discoverPdfLinks,
   isPdfBytes,
+  probePdfCandidate,
   resolveOfficialPdfUrl,
   fetchOfficialPdfBytes,
   extractVerifiedPdfPage,

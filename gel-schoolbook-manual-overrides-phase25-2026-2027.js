@@ -40,9 +40,9 @@ try {
     Object.assign(topic, {
       status: "exact-pdf",
       work: "8547/2392",
-      url: "https://ebooks.edu.gr/ebooks/v/pdf/8547/2522/22-0299-01_V1_Arches-Oikonomikis-Theorias_G-Lykeiou-Spoudon-Oikonomias-Pliroforikis_Vivlio-Mathiti/#page=187",
-      pdfPage: 187,
-      pdfPageEnd: 192,
+      url: "https://ebooks.edu.gr/ebooks/v/pdf/8547/2522/22-0299-01_V1_Arches-Oikonomikis-Theorias_G-Lykeiou-Spoudon-Oikonomias-Pliroforikis_Vivlio-Mathiti/#page=188",
+      pdfPage: 188,
+      pdfPageEnd: 193,
       heading: "2. Διεθνοποίηση της Οικονομίας",
       granularity: "pdf-section",
       matchBasis: "manual-verified-official-pdf-chapter-11",

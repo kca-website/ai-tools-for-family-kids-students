@@ -13,10 +13,24 @@ async function ensurePdfWorker() {
   await workerReady;
 }
 
+async function extractVerifiedPdfPage(args = {}) {
+  await ensurePdfWorker();
+  const first = await base.extractVerifiedPdfPage(args);
+  if (first?.ok || first?.error !== "official_pdf_page_text_too_short") return first;
+
+  const start = Number(args.pdfPage);
+  const requestedEnd = Number(args.pdfPageEnd ?? args.pdfPage);
+  if (!Number.isInteger(start) || !Number.isInteger(requestedEnd) || requestedEnd < start) return first;
+
+  // A verified unit can start on a sparse title/activity page. If the heading
+  // is verified but the page is just too short for safe grounding, extend by
+  // exactly one adjacent official page instead of weakening the minimum text
+  // threshold. The v2 extractor still enforces heading and range checks.
+  const retry = await base.extractVerifiedPdfPage({ ...args, pdfPageEnd: requestedEnd + 1 });
+  return retry?.ok ? { ...retry, autoExtendedForGrounding: true } : first;
+}
+
 module.exports = Object.freeze({
   ...base,
-  extractVerifiedPdfPage: async (args) => {
-    await ensurePdfWorker();
-    return base.extractVerifiedPdfPage(args);
-  }
+  extractVerifiedPdfPage
 });

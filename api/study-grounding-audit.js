@@ -2,15 +2,10 @@ const CATALOG = require('../general-education-book-sections-2026-2027.js');
 const AVAILABILITY = require('../secondary-grounding-availability-2026-2027.js');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 
-// Official mappings that currently fail production source extraction are hidden
-// from AI Study until their live grounding audit passes.
-const RUNTIME_BLOCKED_SECONDARY_SUBJECTS = new Set([
-  'english-a-lykeiou',
-  'english-b-lykeiou',
-  'mathimatika-g-genikis',
-  'politiki-paideia-a-lykeiou'
-]);
+// Only mappings that still fail production source extraction remain hidden.
+const RUNTIME_BLOCKED_SECONDARY_SUBJECTS = new Set([]);
 const RUNTIME_BLOCKED_SECONDARY_TOPICS = new Map([
+  ['english-b-lykeiou', new Set(['Unit 5: Addictions'])],
   ['oikonomia-g-lykeiou', new Set(['Διεθνές εμπόριο και οικονομικές σχέσεις'])]
 ]);
 

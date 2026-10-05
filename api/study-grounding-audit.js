@@ -4,10 +4,7 @@ const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 
 // Only mappings that still fail production source extraction remain hidden.
 const RUNTIME_BLOCKED_SECONDARY_SUBJECTS = new Set([]);
-const RUNTIME_BLOCKED_SECONDARY_TOPICS = new Map([
-  ['english-b-lykeiou', new Set(['Unit 5: Addictions'])],
-  ['oikonomia-g-lykeiou', new Set(['Διεθνές εμπόριο και οικονομικές σχέσεις'])]
-]);
+const RUNTIME_BLOCKED_SECONDARY_TOPICS = new Map([]);
 
 function rawVisibleSectionsFor(subject) {
   return Array.isArray(AVAILABILITY.subjects?.[subject]) ? AVAILABILITY.subjects[subject] : [];

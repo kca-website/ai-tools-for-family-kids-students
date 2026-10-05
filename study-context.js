@@ -97,6 +97,19 @@
     return labels[mode] || labels.general_ai;
   }
 
+  // A topic is selectable in strict secondary-school mode only when the
+  // shared catalogs point to an exact, runtime-consumable official excerpt.
+  // A curriculum label or a book homepage alone is not sufficient evidence.
+  function isVerifiedOfficialTopic(topic) {
+    if (!topic || typeof topic !== "object") return false;
+    const status = text(topic.status, 80);
+    const sourceType = text(topic.sourceType, 80);
+    const sourceUrl = text(topic.sourceUrl, 1000);
+    if (!sourceUrl) return false;
+    if (sourceType === "official-book-section" && status === "official-book-section-grounded") return true;
+    return /^(?:exact-section-verified|related-section-verified)$/.test(status);
+  }
+
   function fromSearchParams(search, defaults) {
     const params = new URLSearchParams(String(search || "").replace(/^\?/, ""));
     const base = Object.assign({}, defaults || {});
@@ -184,6 +197,7 @@
     resolveSourcePolicy,
     resolveSourceMode,
     sourceModeLabel,
+    isVerifiedOfficialTopic,
     fromSearchParams,
     toSearchParams,
     publish,

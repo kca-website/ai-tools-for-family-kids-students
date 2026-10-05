@@ -9,10 +9,11 @@ assert.match(html, /const cached=officialSourceCache\.get\(key\);[\s\S]{0,120}ca
 assert.match(html, /body\?\.error==='official_source_unavailable'/);
 assert.match(html, /for\(let attempt=0;attempt<2;attempt\+\+\)/);
 assert.match(html, /function activitySourceBudget\(action\)/);
-assert.match(html, /AI Study must not offer broad navigation anchors/);
-assert.match(html, /const exactRows=rows\.filter/);
-assert.match(html, /official-book-section-verified\|exact-section-verified\|related-section-verified/);
-assert.match(html, /if\(exactRows\.length\)rows=exactRows/);
+assert.match(html, /the learner must only see topics whose/);
+assert.match(html, /secondary-grounding-availability-2026-2027\.js/);
+assert.match(html, /rows=rows\.filter\(t=>isVerifiedOfficialTopic\(t,resolvedSubject\|\|s\)\)/);
+assert.match(html, /rows\.filter\(s=>\(s\.topics\|\|\[\]\)\.some\(t=>isVerifiedOfficialTopic\(t,s\)\)\)/);
+assert.match(html, /Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί/);
 assert.match(html, /flashcards:6000/);
 assert.match(html, /activityNeedsDistributedSource\('plan'\)/);
 assert.match(html, /mode:'organize',activity:'plan'/);

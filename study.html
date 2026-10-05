@@ -92,8 +92,11 @@
       <div id="standardStudyFields">
       <label for="subject" data-el="Μάθημα" data-en="Subject">Μάθημα</label><select id="subject"></select>
       <label for="topicPick" data-el="Ενότητα / θέμα" data-en="Unit / topic">Ενότητα / θέμα</label><select id="topicPick"></select>
-      <label for="topicCustom" data-el="Ή γράψε δικό σου θέμα" data-en="Or enter your own topic">Ή γράψε δικό σου θέμα</label><textarea id="topicCustom" placeholder="π.χ. Σύγκριση δεκαδικών"></textarea>
-      <p class="micro" data-el="Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη." data-en="Selections come from the site's Curriculum Map. If something is not mapped, you can enter it manually without presenting it as official curriculum.">Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη.</p>
+      <div id="customTopicFields">
+        <label for="topicCustom" data-el="Ή γράψε δικό σου θέμα" data-en="Or enter your own topic">Ή γράψε δικό σου θέμα</label><textarea id="topicCustom" placeholder="π.χ. Σύγκριση δεκαδικών"></textarea>
+        <p class="micro" data-el="Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη." data-en="Selections come from the site's Curriculum Map. If something is not mapped, you can enter it manually without presenting it as official curriculum.">Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη.</p>
+      </div>
+      <p id="secondaryGroundingNotice" class="micro hidden" data-el="Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί με την επίσημη σχολική πηγή." data-en="Only units connected to and checked against the official school source are shown.">Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί με την επίσημη σχολική πηγή.</p>
       <p class="micro">Πώς ξεχωρίζουμε επαληθευμένη ενότητα από θεματικό σημείο αναφοράς: <a href="/ai-me-elliniki-sxoliki-yli.html">AI με ελληνική σχολική ύλη</a>.</p>
 
       </div>
@@ -185,6 +188,7 @@
 <script src="/epal-student-tutor-2026-2027.js"></script>
 <script src="/environment-studies-data.js"></script>
 <script src="/general-education-book-sections-2026-2027.js"></script>
+<script src="/secondary-grounding-availability-2026-2027.js"></script>
 <script src="/curriculum-resolver.js"></script>
 <script src="/pdf-text-reader.js"></script>
 <script src="/guided-task-assistant.js"></script>
@@ -215,6 +219,10 @@
     $('standardStudyRest').classList.toggle('hidden',special);
     $('grade').closest('div').classList.toggle('hidden',special);
     const epal=high&&$('schoolType').value==='epal',g=$('grade').value;
+    const strictOfficial=z==='middle'||(high&&!epal);
+    $('customTopicFields').classList.toggle('hidden',strictOfficial);
+    $('secondaryGroundingNotice').classList.toggle('hidden',!strictOfficial);
+    if(strictOfficial)$('topicCustom').value='';
     $('epalSectorField').classList.toggle('hidden',!(epal&&g==='b'));
     $('epalSpecialtyField').classList.toggle('hidden',!(epal&&g==='c'));
   }
@@ -230,7 +238,9 @@
       const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
       return cat?.getSubjects?.(g,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')||[];
     }
-    return resolver()?.getSubjects?.(z,g)||[];
+    const rows=resolver()?.getSubjects?.(z,g)||[];
+    if(z==='middle'||z==='high')return rows.filter(s=>(s.topics||[]).some(t=>isVerifiedOfficialTopic(t,s)));
+    return rows;
   }
   function populateSubjects(){const rows=subjectRows();$('subject').innerHTML=rows.length?rows.map(s=>'<option value="'+esc(s.id||s.quizId)+'">'+esc(lang==='en'?(s.subjectLabelEn||s.subjectLabelEl):(s.subjectLabelEl||s.subjectLabelEn||s.id))+'</option>').join(''):'<option value="">'+(lang==='en'?'No mapped subjects':'Δεν βρέθηκαν χαρτογραφημένα μαθήματα')+'</option>';populateTopics()}
   function studyTopicsFor(z,g,s,epal=false){
@@ -242,21 +252,22 @@
 
     if(s==='history-e-dimotikou'||s==='istoria-e-dimotikou') rows=(window.AITOOLSKIDS_HISTORY_E_CHAPTERS||[]).map(chapter=>({id:chapter.label,labelEl:chapter.label,labelEn:chapter.label,sourceType:'official-book-section'}));
 
-    // AI Study must not offer broad navigation anchors when this subject is
-    // configured to fail closed on an exact official schoolbook source.
-    // Prefer the verified textbook subsections that /api/schoolbook-source
-    // can actually resolve. Keep the original rows only when no such exact
-    // subsection exists yet, so other school levels do not disappear.
-    if(!epal&&requiresOfficialSource(s)){
-      const exactRows=rows.filter(t=>
-        ['official-section','official-book-section'].includes(String(t?.sourceType||'')) ||
-        /^(?:official-book-section-verified|exact-section-verified|related-section-verified)$/.test(String(t?.status||''))
-      );
-      if(exactRows.length)rows=exactRows;
-    }
-
+    // In strict secondary-school mode, the learner must only see topics whose
+    // exact official source is runtime-consumable. Catalog-only labels and
+    // book homepages are not selectable grounding evidence.
     const extra=(window.AITOOLSKIDS_CHARACTER_CHAPTERS||[]).filter(c=>c.subject===s||c.subject.replace('history-','istoria-')===s);
-    return [...rows.filter(t=>!extra.some(c=>c.id===t.id)),...extra];
+    rows=[...rows.filter(t=>!extra.some(c=>c.id===t.id)),...extra];
+    const resolvedSubject=!epal?resolver()?.getSubject?.(z,g,s):null;
+    if(!epal&&(z==='middle'||z==='high'))rows=rows.filter(t=>isVerifiedOfficialTopic(t,resolvedSubject||s));
+    return rows;
+  }
+  function isVerifiedOfficialTopic(topic,subjectRef=''){
+    if(window.AITOOLSKIDS_STUDY_CONTEXT?.isVerifiedOfficialTopic?.(topic))return true;
+    const label=topic?.labelEl||topic?.titleEl||topic?.label||'';
+    const ids=typeof subjectRef==='object'
+      ? [subjectRef?.id,subjectRef?.quizId,...(subjectRef?.aliases||[])]
+      : [subjectRef];
+    return ids.some(id=>window.AITOOLSKIDS_SECONDARY_GROUNDING_AVAILABILITY?.has?.(id,label));
   }
   function populateTopics(){
     const rows=studyTopicsFor($('zone').value,$('grade').value,$('subject').value,isEpal());

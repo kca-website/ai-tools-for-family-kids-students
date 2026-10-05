@@ -1,4 +1,5 @@
 const CATALOG = require('../general-education-book-sections-2026-2027.js');
+const AVAILABILITY = require('../secondary-grounding-availability-2026-2027.js');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 
 module.exports = async function handler(req, res) {
@@ -14,10 +15,7 @@ module.exports = async function handler(req, res) {
 
   if (subjects.length) {
     const audits = [];
-    for (const id of subjects) {
-      const audit = await auditSubject(id, live, compact);
-      audits.push(audit);
-    }
+    for (const id of subjects) audits.push(await auditSubject(id, live, compact));
     return res.status(200).json({
       generatedAt: new Date().toISOString(),
       liveChecked: live,
@@ -25,6 +23,7 @@ module.exports = async function handler(req, res) {
       totals: {
         totalSections: audits.reduce((n,x)=>n+(x.totalSections||0),0),
         exactCatalogMapped: audits.reduce((n,x)=>n+(x.exactCatalogMapped||0),0),
+        visibleVerified: audits.reduce((n,x)=>n+(x.visibleVerified||0),0),
         runtimeGrounded: audits.reduce((n,x)=>n+(x.runtimeGrounded||0),0),
         runtimeFailed: audits.reduce((n,x)=>n+(x.runtimeFailed||0),0),
       }
@@ -37,24 +36,7 @@ module.exports = async function handler(req, res) {
     return res.status(200).json(audit);
   }
 
-  const rows = (CATALOG.ids || []).map(id => {
-    const row = CATALOG.get?.(id) || {};
-    const sections = Array.isArray(row.sections) ? row.sections : [];
-    const exact = row.groundedSections || {};
-    const exactCount = sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)).length;
-    const level = /-dimotikou$/i.test(id) ? 'primary' : /-gymnasiou$/i.test(id) ? 'middle' : /-lykeiou$/i.test(id) ? 'high' : 'other';
-    return {
-      subject: id,
-      level,
-      totalSections: sections.length,
-      exactCatalogMapped: exactCount,
-      structureOnlyCount: Math.max(0, sections.length - exactCount),
-      policy: level === 'primary'
-        ? (exactCount === sections.length && sections.length ? 'official-exact' : 'primary-ai-reviewed-allowed')
-        : 'official-runtime-required'
-    };
-  });
-
+  const rows = catalogRows();
   const summary = ['primary','middle','high','other'].reduce((acc, level) => {
     const subset = rows.filter(x => x.level === level);
     acc[level] = {
@@ -66,32 +48,76 @@ module.exports = async function handler(req, res) {
     return acc;
   }, {});
 
+  const secondaryVisibleSubjects = Object.keys(AVAILABILITY.subjects || {});
+  const secondaryVisibleTopics = secondaryVisibleSubjects.reduce((n,id)=>n+(AVAILABILITY.subjects[id]?.length||0),0);
+
   return res.status(200).json({
     generatedAt: new Date().toISOString(),
-    schoolYear: CATALOG.schoolYear || '2026-2027',
-    note: 'Catalog exact mappings are stronger evidence. Middle/high structure-only rows still require live runtime resolution and fail closed if grounding cannot be established. Primary structure-only rows may use AI-only mode with mandatory second-pass review.',
+    schoolYear: CATALOG.schoolYear || AVAILABILITY.schoolYear || '2026-2027',
+    note: 'Catalog exact mappings describe the general-book catalog only. secondaryVisibleVerified is the authoritative learner-facing allow-list for Gymnasium/GEL: only these runtime-consumable official-source topics are exposed in AI Study. Primary structure-only rows may use AI-only mode with mandatory second-pass review.',
     summary,
+    secondaryVisibleVerified: {
+      subjects: secondaryVisibleSubjects.length,
+      topics: secondaryVisibleTopics,
+      policy: 'official-source-only-fail-closed'
+    },
     subjects: rows,
   });
 };
 
-async function auditSubject(subject, live, compact) {
+function catalogRows() {
+  return (CATALOG.ids || []).map(id => {
+    const row = CATALOG.get?.(id) || {};
+    const sections = Array.isArray(row.sections) ? row.sections : [];
+    const exact = row.groundedSections || {};
+    const exactCount = sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)).length;
+    const level = /-dimotikou$/i.test(id) ? 'primary' : /-gymnasiou$/i.test(id) ? 'middle' : /-lykeiou$/i.test(id) ? 'high' : 'other';
+    const visibleVerified = (AVAILABILITY.subjects?.[id] || []).length;
+    return {
+      subject: id,
+      level,
+      totalSections: sections.length,
+      exactCatalogMapped: exactCount,
+      structureOnlyCount: Math.max(0, sections.length - exactCount),
+      visibleVerified,
+      policy: level === 'primary'
+        ? (exactCount === sections.length && sections.length ? 'official-exact' : 'primary-ai-reviewed-allowed')
+        : 'official-runtime-required'
+    };
+  });
+}
+
+function sectionsForSubject(subject) {
   const row = CATALOG.get?.(subject);
-  if (!row) return { subject, error: 'subject_not_found' };
-  const sections = Array.isArray(row.sections) ? row.sections : [];
-  const exact = row.groundedSections || {};
+  const catalogSections = Array.isArray(row?.sections) ? row.sections : [];
+  const visibleSections = Array.isArray(AVAILABILITY.subjects?.[subject]) ? AVAILABILITY.subjects[subject] : [];
+  if (catalogSections.length) return { row, sections: catalogSections, source: 'general-book-catalog', visibleSections };
+  if (visibleSections.length) return { row: null, sections: visibleSections, source: 'secondary-visible-verified', visibleSections };
+  return null;
+}
+
+async function auditSubject(subject, live, compact) {
+  const resolvedSubject = sectionsForSubject(subject);
+  if (!resolvedSubject) return { subject, error: 'subject_not_found' };
+  const { row, sections, source, visibleSections } = resolvedSubject;
+  const exact = row?.groundedSections || {};
+  const exactCatalogSections = row ? sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)) : [];
   const base = {
     subject,
-    schoolYear: CATALOG.schoolYear || '2026-2027',
+    schoolYear: CATALOG.schoolYear || AVAILABILITY.schoolYear || '2026-2027',
+    auditSource: source,
     totalSections: sections.length,
-    exactCatalogMapped: sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)).length,
-    structureOnly: compact ? undefined : sections.filter(x => !Object.prototype.hasOwnProperty.call(exact, x)),
-    exactCatalogSections: compact ? undefined : sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)),
+    exactCatalogMapped: exactCatalogSections.length,
+    visibleVerified: visibleSections.length,
+    structureOnly: compact || !row ? undefined : sections.filter(x => !Object.prototype.hasOwnProperty.call(exact, x)),
+    exactCatalogSections: compact || !row ? undefined : exactCatalogSections,
+    visibleVerifiedSections: compact ? undefined : visibleSections,
   };
   if (!live) return clean(base);
 
+  const topicsToCheck = visibleSections.length ? visibleSections : sections;
   const results = [];
-  for (const topic of sections) {
+  for (const topic of topicsToCheck) {
     try {
       const resolved = await resolveOfficialSchoolbookSource(subject, topic, { purpose: '' });
       results.push({
@@ -110,6 +136,7 @@ async function auditSubject(subject, live, compact) {
   return clean({
     ...base,
     liveChecked: true,
+    runtimeChecked: results.length,
     runtimeGrounded: results.length - failed.length,
     runtimeFailed: failed.length,
     failures: failed,

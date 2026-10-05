@@ -144,6 +144,13 @@
       progressScript.defer=true;
       document.head.appendChild(progressScript);
     }
+    if(!document.getElementById("aiPathsKeepsakeScript")){
+      const keepsakeScript=document.createElement("script");
+      keepsakeScript.id="aiPathsKeepsakeScript";
+      keepsakeScript.src="/ai-scenarios-keepsake.js";
+      keepsakeScript.defer=true;
+      document.head.appendChild(keepsakeScript);
+    }
     const en = lang() === "en";
     const title = en ? "AI Paths — Build better judgement with AI | aitools4kids.gr" : "AI Διαδρομές — Χρησιμοποίησε το AI με κρίση | aitools4kids.gr";
     const description = en ? "Free interactive AI literacy paths for ages 9–18: verify AI answers, protect personal information, spot misleading content and choose the right tool." : "Δωρεάν διαδραστικές AI Διαδρομές για ηλικίες 9–18: έλεγχος απαντήσεων AI, προστασία προσωπικών δεδομένων, παραπλανητικό περιεχόμενο και σωστή επιλογή εργαλείου.";

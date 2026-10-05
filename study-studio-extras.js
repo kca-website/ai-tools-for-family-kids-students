@@ -2,6 +2,22 @@
   "use strict";
   if(location.pathname!=="/study.html" && location.pathname!=="/study") return;
 
+  // Runtime safety gate. These mappings point to official PDFs, but the
+  // production resolver cannot yet extract their verified page text reliably.
+  // Keep them out of the learner selector until the live grounding audit is 0-failure.
+  const runtimeBlockedSecondarySubjects=new Set(["english-a-lykeiou","english-b-lykeiou"]);
+  const grounding=window.AITOOLSKIDS_SECONDARY_GROUNDING_AVAILABILITY;
+  if(grounding?.has){
+    window.AITOOLSKIDS_SECONDARY_GROUNDING_AVAILABILITY=Object.freeze({
+      schoolYear:grounding.schoolYear,
+      subjects:grounding.subjects,
+      has(subjectId,label){
+        if(runtimeBlockedSecondarySubjects.has(String(subjectId||"")))return false;
+        return grounding.has(subjectId,label);
+      }
+    });
+  }
+
   const actions={
     mindmap:{
       titleEl:"Mind Map ενότητας",titleEn:"Unit Mind Map",serverActivity:"summary",mode:"review",

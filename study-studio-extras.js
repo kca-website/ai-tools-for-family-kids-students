@@ -2,16 +2,11 @@
   "use strict";
   if(location.pathname!=="/study.html" && location.pathname!=="/study") return;
 
-  // Runtime safety gate. These mappings are official on paper, but the live
-  // resolver cannot currently return verified source text for them. Keep them
-  // out of the learner selector until the production grounding audit is clean.
-  const runtimeBlockedSecondarySubjects=new Set([
-    "english-a-lykeiou",
-    "english-b-lykeiou",
-    "mathimatika-g-genikis",
-    "politiki-paideia-a-lykeiou"
-  ]);
+  // Runtime safety gate. Keep only the mappings that still fail live source grounding
+  // out of the learner selector. Subjects proven clean are restored automatically.
+  const runtimeBlockedSecondarySubjects=new Set([]);
   const runtimeBlockedSecondaryTopics=new Map([
+    ["english-b-lykeiou",new Set(["Unit 5: Addictions"])],
     ["oikonomia-g-lykeiou",new Set(["Διεθνές εμπόριο και οικονομικές σχέσεις"])]
   ]);
   const grounding=window.AITOOLSKIDS_SECONDARY_GROUNDING_AVAILABILITY;

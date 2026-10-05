@@ -23,7 +23,8 @@ assert.match(tutor, /subjectId:\s*getCurrentQuiz\(\)\?\.id\s*\|\|\s*getCatalogSu
 
 assert.match(tutorApi, /resolveOfficialSchoolbookSource/);
 assert.match(tutorApi, /studyContext\s*=\s*null/);
-assert.match(tutorApi, /officialSourceRequired\s*=\s*requestedSourcePolicy\s*===\s*'official_required'/);
+assert.match(tutorApi, /effectiveSourcePolicy\s*=\s*StudyContext\.resolveSourcePolicy/);
+assert.match(tutorApi, /officialSourceRequired\s*=\s*effectiveSourcePolicy\s*===\s*'official_required'/);
 assert.match(tutorApi, /officialSourceRequired\s*&&\s*documentKind\s*!==\s*'official_schoolbook'/);
 assert.match(tutorApi, /official_source_identity_required/);
 assert.match(tutorApi, /grounding_validation_failed/);

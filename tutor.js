@@ -1174,6 +1174,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
       studyAction: studyAction || "",
       sourcePolicy: api.resolveSourcePolicy({
         hasAttachment,
+        schoolLevel: ctx.zoneId || "",
         requiresOfficial: !!exactOfficial || verifiedSection,
         hasCurriculumSelection: !!refs.topic?.value
       }),
@@ -2770,12 +2771,12 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       const sharedStudyContext = getSharedStudyContext();
       if (
         !attachedDocument?.text &&
-        (sharedStudyContext?.sourcePolicy === "official_required" || learningMode === "character") &&
+        sharedStudyContext?.sourcePolicy === "official_required" &&
         !groundedSource?.text
       ) {
-        const sourceError = new Error(ctx?.lang === "en"
-          ? "This topic requires a verified official schoolbook source, but the exact source could not be loaded safely."
-          : "Η ενότητα απαιτεί επαληθευμένη επίσημη σχολική πηγή, αλλά η ακριβής πηγή δεν φορτώθηκε με ασφάλεια.");
+        const sourceError = new Error(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.("unmapped_blocked",ctx?.lang) || (ctx?.lang === "en"
+          ? "This unit has not yet been connected to its official school source. The connection is in progress."
+          : "Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη."));
         sourceError.code = "official_source_required";
         throw sourceError;
       }

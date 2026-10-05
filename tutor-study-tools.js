@@ -305,9 +305,9 @@
       const data = await response.json().catch(() => null);
       if (response.ok && data?.grounded && data?.text) return data;
       if (c.studyContext?.sourcePolicy === "official_required") {
-        const err = new Error(lang() === "en"
-          ? "A verified official schoolbook section is required for this study action."
-          : "Απαιτείται επαληθευμένη επίσημη ενότητα σχολικού βιβλίου για αυτή τη λειτουργία.");
+        const err = new Error(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.("unmapped_blocked",lang()) || (lang() === "en"
+          ? "This unit has not yet been connected to its official school source. The connection is in progress."
+          : "Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη."));
         err.code = "official_source_required";
         throw err;
       }
@@ -315,9 +315,9 @@
     } catch (err) {
       if (err?.code === "official_source_required") throw err;
       if (c.studyContext?.sourcePolicy === "official_required") {
-        const wrapped = new Error(lang() === "en"
-          ? "The official schoolbook source could not be loaded safely."
-          : "Δεν φορτώθηκε με ασφάλεια η επίσημη σχολική πηγή.");
+        const wrapped = new Error(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.("unmapped_blocked",lang()) || (lang() === "en"
+          ? "This unit has not yet been connected to its official school source. The connection is in progress."
+          : "Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη."));
         wrapped.code = "official_source_unavailable";
         throw wrapped;
       }
@@ -533,9 +533,12 @@
       } else {
         const slides = parseSlides(extractText(response)); saveCached(type, c, slides); renderSlides(panel, slides, false);
       }
+      if (!officialSource && c.studyContext?.sourcePolicy === "official_if_available") {
+        setStatus(panel, window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.("ai_fallback",lang()) || tr("saved"), false);
+      }
     } catch (err) {
       console.error(`AI Help ${type} generation failed`, err);
-      setStatus(panel, tr("failed"), true);
+      setStatus(panel, err?.code === "official_source_required" || err?.code === "official_source_unavailable" ? err.message : tr("failed"), true);
     } finally {
       panel.dataset.busy = "0";
       panel.querySelectorAll("[data-study-tool]").forEach((b) => { b.disabled = false; });

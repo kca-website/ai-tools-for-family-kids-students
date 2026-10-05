@@ -139,7 +139,21 @@ function verifiedClaimsFromResponse(text, source, limit) {
   const rows = Array.isArray(parsed?.claims) ? parsed.claims.slice(0, limit) : [];
   const sourceNorm = normalizeForEvidence(source);
   return rows.map(row => ({ claim: clean(row?.claim, 800), evidence: clean(row?.evidence, 500) }))
-    .filter(row => row.claim.length >= 10 && row.evidence.length >= 4 && sourceNorm.includes(normalizeForEvidence(row.evidence)));
+    .filter(row => row.claim.length >= 10 && row.evidence.length >= 4 && sourceNorm.includes(normalizeForEvidence(row.evidence)) && claimMatchesEvidence(row.claim, row.evidence));
+}
+
+function claimMatchesEvidence(claim, evidence) {
+  const stop = new Set(['και','των','την','τον','της','του','στο','στη','στην','στον','για','απο','από','ένα','μια','μία','είναι','που','πως','ότι','με','σε','τα','το','οι','τις','the','and','that','with','from','this']);
+  const words = value => normalizeForEvidence(value).split(/\s+/)
+    .map(word => word.replace(/[^\p{L}\p{N}]/gu, ''))
+    .filter(word => word.length >= 5 && !stop.has(word));
+  const claimWords = words(claim);
+  const evidenceWords = words(evidence);
+  if (!claimWords.length || !evidenceWords.length) return false;
+  return claimWords.some(word => evidenceWords.some(candidate => {
+    const stemLength = Math.min(7, Math.max(5, Math.min(word.length, candidate.length) - 2));
+    return word.slice(0, stemLength) === candidate.slice(0, stemLength);
+  }));
 }
 
 function extractiveFallback(segment, maxItems) {

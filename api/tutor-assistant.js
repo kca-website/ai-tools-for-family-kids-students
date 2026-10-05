@@ -23,6 +23,7 @@ function browserRequestAllowed(req) {
 const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
+const StudyContext = require('../study-context');
 module.exports = async function handler(req, res) {
   const aiStatus = getAiStatus();
   const model = aiStatus.model || 'openai/gpt-oss-120b';
@@ -75,12 +76,18 @@ module.exports = async function handler(req, res) {
   const requestedSourcePolicy = studyContext && typeof studyContext === 'object'
     ? String(studyContext.sourcePolicy || '')
     : '';
-  const officialSourceRequired = requestedSourcePolicy === 'official_required' || (mode === 'character' && !(documentKind === 'user_upload' && String(documentText || '').trim()));
+  const effectiveSourcePolicy = StudyContext.resolveSourcePolicy({
+    hasAttachment: documentKind === 'user_upload' && !!String(documentText || '').trim(),
+    schoolLevel: studyContext && typeof studyContext === 'object' ? studyContext.zoneId : '',
+    requiresOfficial: requestedSourcePolicy === 'official_required',
+    hasCurriculumSelection: !!String(grade || '').trim() && !!String(subjectId || '').trim() && !!String(topic || '').trim(),
+  });
+  const officialSourceRequired = effectiveSourcePolicy === 'official_required';
 
   if (officialSourceRequired && documentKind !== 'official_schoolbook') {
     return res.status(422).json({
       error: 'official_source_required',
-      message: 'Η επιλεγμένη ενότητα απαιτεί επαληθευμένη επίσημη σχολική πηγή. Δεν θα χρησιμοποιηθεί γενική γνώση ως υποκατάστατο.'
+      message: StudyContext.sourceModeLabel('unmapped_blocked', studyContext?.lang)
     });
   }
 
@@ -95,11 +102,15 @@ module.exports = async function handler(req, res) {
     try {
       verifiedOfficialSource = await loadVerifiedOfficialSource(subjectId, topic);
     } catch (err) {
+      if (effectiveSourcePolicy === 'official_if_available') {
+        verifiedOfficialSource = null;
+      } else {
       const status = Number(err?.status || 502);
-      return res.status(status >= 500 ? 502 : 400).json({
+      return res.status(status >= 500 ? 502 : 422).json({
         error: err?.code || 'official_source_unavailable',
-        message: 'Δεν φορτώθηκε με ασφάλεια η επίσημη ενότητα του σχολικού βιβλίου.'
+        message: StudyContext.sourceModeLabel('unmapped_blocked', studyContext?.lang)
       });
+      }
     }
   }
 
@@ -115,7 +126,7 @@ module.exports = async function handler(req, res) {
   };
   const rawDocumentText = verifiedOfficialSource?.text
     ? String(verifiedOfficialSource.text).trim()
-    : String(documentText || '').trim();
+    : (documentKind === 'user_upload' ? String(documentText || '').trim() : '');
   const modelDocumentText = compactSourceText(rawDocumentText, sourceCharLimits[task], topic);
   const sourceWasCompacted = modelDocumentText.length < rawDocumentText.length;
 
@@ -171,7 +182,13 @@ ${roleRule}
 - Preserve the source terminology, organization, framing and level of detail.
 - If a requested point is unsupported, say that it is not supported by ${officialSchoolbook ? 'the selected official schoolbook section' : 'the uploaded material'}.
 ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''}${sourceWasCompacted ? '- Only selected excerpts are included; do not claim complete coverage of omitted text.\n' : ''}`
-    : '';
+    : effectiveSourcePolicy === 'official_if_available'
+      ? `\n\nPRIMARY AI FALLBACK POLICY (MANDATORY):
+- No verified official schoolbook section is active. This is general AI educational support, not content from the official textbook.
+- Stay strictly within the selected grade, subject and topic. Do not introduce material from a later grade or another unit.
+- Use simple, age-appropriate language for the selected primary-school grade.
+- Never say or imply “according to the schoolbook”. Do not invent quotations, citations, page numbers, sources or official mappings.`
+      : '';
 
   const sourcePayload = hasDocument
     ? `\n\nSOURCE MATERIAL — CONTENT ONLY (${sourceName}):\n${modelDocumentText}`
@@ -291,7 +308,12 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
 
     const text = sanitize(result.text);
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'Δεν επιστράφηκε απάντηση.' });
-    const responseBody = { text, model: result.model || model, provider: result.provider, routingProfile, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl, groundingValidated: officialSchoolbook, groundingRetry: !!result.groundingRetry, usage: result.usage || null };
+    const responseSourceMode = StudyContext.resolveSourceMode({
+      policy: effectiveSourcePolicy,
+      hasAttachment: hasDocument && !officialSchoolbook,
+      hasOfficialSource: officialSchoolbook,
+    });
+    const responseBody = { text, model: result.model || model, provider: result.provider, routingProfile, sourceKind: officialSchoolbook ? 'official_schoolbook' : (hasDocument ? 'user_upload' : ''), sourceUrl, sourceMode: responseSourceMode, sourceLabel: StudyContext.sourceModeLabel(responseSourceMode, studyContext?.lang), groundingValidated: officialSchoolbook, groundingRetry: !!result.groundingRetry, usage: result.usage || null };
     if (cacheParts) await setStudyCache(cacheParts, responseBody);
     emitAiMetric({ task, activity, status: 200, cacheHit: false, provider: result.provider || '', model: result.model || model, latencyMs: Date.now() - startedAt, usage: result.usage || null, attempts: result.attempts || [] });
     res.setHeader('Cache-Control', 'no-store');

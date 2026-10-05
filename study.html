@@ -298,6 +298,12 @@
     currentOfficialSource=source||null;
     const box=$('sourceEvidence');
     if(!box)return;
+    if(state==='ai_fallback'){
+      const api=window.AITOOLSKIDS_STUDY_CONTEXT;
+      box.innerHTML='<span class="v9i v9i-bulb" aria-hidden="true"></span><strong>'+esc(api?.sourceModeLabel?.('ai_fallback',lang)||(lang==='en'?'AI help adapted to the grade and selected unit':'AI βοήθεια προσαρμοσμένη στην τάξη και στην επιλεγμένη ενότητα'))+'</strong>';
+      box.classList.remove('hidden');
+      return;
+    }
     if(!source?.grounded){
       box.classList.add('hidden');
       box.innerHTML='';
@@ -318,12 +324,22 @@
     const gel=["algebra-b-lykeiou","archaia-a-lykeiou","archaia-b-lykeiou","archaia-g-lykeiou","biologia-b-lykeiou","biologia-g-lykeiou","chimeia-a-lykeiou","chimeia-b-lykeiou","chimeia-g-lykeiou","ekthesi-a-lykeiou","ekthesi-b-lykeiou","english-a-lykeiou","english-b-lykeiou","filosofia-b-lykeiou","fysiki-a-lykeiou","fysiki-b-lykeiou","fysiki-g-lykeiou","geometria-a-lykeiou","geometria-b-lykeiou","istoria-b-lykeiou","istoria-g-lykeiou","istoria-g-prosanatolismou","latinika-b-lykeiou","latinika-g-lykeiou","mathimatika-a-lykeiou","mathimatika-b-prosanatolismou","mathimatika-g-genikis","mathimatika-g-prosanatolismou","oikonomia-g-lykeiou","pliroforiki-g-lykeiou","politiki-paideia-a-lykeiou","thriskeftika-a-lykeiou","thriskeftika-b-lykeiou","thriskeftika-g-lykeiou"];
     return existing.includes(subject)||gel.includes(subject);
   }
+  function sourcePolicyForSelection(hasAttachment=!!attached?.text){
+    const api=window.AITOOLSKIDS_STUDY_CONTEXT;
+    return api?.resolveSourcePolicy?.({
+      hasAttachment,
+      schoolLevel:$('zone').value||'',
+      requiresOfficial:requiresOfficialSource()&&!!selectedTopic(),
+      hasCurriculumSelection:!!selectedTopic()
+    })||'general_unverified';
+  }
   async function officialSchoolbookSource(){
     if(attached?.text){sourceEvidenceUi(null);return null}
     const subject=selectedSubjectId(),topic=selectedTopic();
     if(!subject||!topic){sourceEvidenceUi(null);return null}
-    if(requiresOfficialSource() && /^Κεφάλαιο\s+\d+\s+—/i.test(topic)){
-      throw new Error(lang==='en'?'Choose a specific textbook subsection so the AI can use the exact source text.':'Διάλεξε συγκεκριμένη υποενότητα του βιβλίου, ώστε το AI να χρησιμοποιήσει το ακριβές κείμενο της πηγής.');
+    const sourcePolicy=sourcePolicyForSelection(false);
+    if(sourcePolicy==='official_required' && /^Κεφάλαιο\s+\d+\s+—/i.test(topic)){
+      throw new Error(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'?'This unit has not yet been connected to its official school source. The connection is in progress.':'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη.'));
     }
     const key=subject+'||'+topic;
     const cached=officialSourceCache.get(key);
@@ -349,16 +365,13 @@
       }
     }
     sourceEvidenceUi(null);
-    if(requiresOfficialSource()){
-      const detail=lastBody?.error==='section_not_resolved'
-        ? (lang==='en'?'This selection is not yet mapped to an exact verified schoolbook page.':'Η συγκεκριμένη επιλογή δεν έχει ακόμη ακριβή αντιστοίχιση σε επαληθευμένη σελίδα του σχολικού βιβλίου.')
-        : lastBody?.error==='official_pdf_text_not_grounded'
-          ? (lang==='en'?'The official PDF page is verified, but safe server-side text extraction is not enabled yet.':'Η επίσημη σελίδα PDF έχει επαληθευτεί, αλλά δεν έχει ενεργοποιηθεί ακόμη ασφαλής εξαγωγή του κειμένου της.')
-          : (lang==='en'?'The official textbook section could not be loaded. Try again in a moment.':'Δεν φορτώθηκε η επίσημη ενότητα του σχολικού βιβλίου. Δοκίμασε ξανά σε λίγο.');
+    if(sourcePolicy==='official_required'){
+      const detail=window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'?'This unit has not yet been connected to its official school source. The connection is in progress.':'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη.');
       const err=new Error(detail);
       err.code=lastBody?.error||lastError?.name||'official_source_unavailable';
       throw err;
     }
+    if(sourcePolicy==='official_if_available')sourceEvidenceUi(null,'ai_fallback');
     return null
   }
 
@@ -386,8 +399,9 @@
       studyAction,
       sourcePolicy:api.resolveSourcePolicy({
         hasAttachment,
+        schoolLevel:$('zone').value||'',
         requiresOfficial:requiresOfficialSource()&&!!selectedTopic(),
-        hasCurriculumSelection:!!topicId
+        hasCurriculumSelection:!!selectedTopic()
       }),
       documentContext:hasAttachment?{
         kind:'user_upload',
@@ -548,6 +562,7 @@
         throw new Error(body?.message||'AI plan failed');
       }
       if(body?.groundingValidated&&officialSource?.grounded)sourceEvidenceUi(officialSource,'verified');
+      else if(body?.sourceMode==='ai_fallback')sourceEvidenceUi(null,'ai_fallback');
       const parsed=parsePlanJson(body.text);
       if(!renderAiPlan(parsed,total)){
         $('plan').innerHTML='<div class="step"><strong>'+esc(lang==='en'?'AI study plan':'Πλάνο μελέτης από AI')+'</strong><p>'+esc(body.text||'')+'</p></div>';
@@ -683,6 +698,7 @@
       throw err;
     }
     if(body?.groundingValidated&&officialSource?.grounded)sourceEvidenceUi(officialSource,'verified');
+    else if(body?.sourceMode==='ai_fallback')sourceEvidenceUi(null,'ai_fallback');
     $('providerStatus').textContent=[body.provider,body.model].filter(Boolean).join(' · ');
     return body.text||'';
   }
@@ -845,7 +861,7 @@
         if(officialSource?.grounded){
           text=await verifiedOfficialSummary(officialSource,action);
         }else{
-          if(action==='audio')throw new Error(lang==='en'?'Choose a mapped official textbook section.':'Διάλεξε χαρτογραφημένη ενότητα επίσημου σχολικού βιβλίου.');
+          if(action==='audio'&&sourcePolicyForSelection(false)==='official_required')throw new Error(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'?'This unit has not yet been connected to its official school source. The connection is in progress.':'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη.'));
           text=await callStudyServer(action);
         }
       }else{
@@ -1130,4 +1146,3 @@
 <script src="/learning-actions.js"></script>
 </body>
 </html>
-

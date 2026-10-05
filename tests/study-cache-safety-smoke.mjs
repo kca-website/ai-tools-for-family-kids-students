@@ -21,7 +21,7 @@ assert.match(tutor, /data\.cards\.length === 8/);
 assert.match(tutor, /\['quiz', 'truefalse'\][\s\S]{0,100}return 'quality'/);
 assert.match(summary, /resolveOfficialSchoolbookSource/);
 assert.match(summary, /official-schoolbook-source-v1/);
-assert.match(summary, /promptVersion: 'verified-summary-v3'/);
+assert.match(summary, /promptVersion: 'verified-summary-v\d+(?:-[a-z]+)?'/);
 assert.doesNotMatch(summary, /const \{ sourceText = ''/);
 assert.match(study, /subjectId:selectedSubjectId\(\)/);
 assert.doesNotMatch(study, /sourceText:sourceExcerpt\(source\?\.text/);

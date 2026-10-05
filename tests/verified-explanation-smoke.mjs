@@ -29,15 +29,14 @@ try {
   const res = { setHeader() {}, status(value) { status = value; return this; }, json(value) { body = value; return value; } };
   await handler({ method: 'POST', headers: {}, body: { subjectId: 'biology', topic: 'Ομοιόσταση', activity: 'explain' } }, res);
   assert.equal(status, 200);
-  assert.equal(calls, 2);
+  assert.equal(calls, 1);
   assert.equal(body.verified, true);
   assert.equal(body.verification.approved, 3);
   assert.doesNotMatch(body.text, /αυθαίρετο/);
   assert.match(body.text, /Εξήγηση/);
-  assert.match(body.text, /Αυτοέλεγχος/);
   const html = fs.readFileSync(new URL('../study.html', import.meta.url), 'utf8');
   assert.match(html, /action==='audio'\|\|action==='explain'/);
-  assert.match(html, /if\(action==='audio'&&\/\^insufficient_/);
+  assert.match(html, /verifiedOfficialSummary\(officialSource,action\)/);
 } finally {
   paths.forEach((p, i) => { if (saved[i]) require.cache[p] = saved[i]; else delete require.cache[p]; });
 }

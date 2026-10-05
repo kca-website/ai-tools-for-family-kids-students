@@ -5,6 +5,7 @@ const require = createRequire(import.meta.url);
 const endpoint = require("../api/schoolbook-source.js");
 const inventory = require("../gel-schoolbook-source-map-2026-2027.js");
 const manualOverrides = require("../gel-schoolbook-manual-overrides-2026-2027.js");
+const phase25Overrides = require("../gel-schoolbook-manual-overrides-phase25-2026-2027.js");
 const { resolveGelInventoryTopic, selectGelAnchoredSectionText } = endpoint._test;
 
 function normalizeForSmoke(value) {
@@ -52,8 +53,8 @@ for (const subject of Object.values(inventory.all())) {
 assert.equal(highHtml, 223);
 assert.equal(mediumHtml, 14);
 assert.equal(exactPdf, 34);
-assert.equal(manualHtml, manualOverrides.count);
-assert.equal(manualHtml, 306);
+assert.equal(manualHtml, manualOverrides.count + phase25Overrides.count);
+assert.ok(manualHtml >= 306);
 
 // Every inventory topic must be accounted for even as verified manual mappings
 // reduce the blocked backlog. Medium HTML topics are counted separately above.

@@ -5,7 +5,7 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const StudyContext = require("../study-context.js");
 
-assert.equal(StudyContext.VERSION, 1);
+assert.equal(StudyContext.VERSION, 2);
 assert.ok(StudyContext.SOURCE_POLICIES.includes("attachment_override"));
 assert.ok(StudyContext.SOURCE_POLICIES.includes("official_required"));
 
@@ -36,8 +36,14 @@ assert.equal(Object.prototype.hasOwnProperty.call(normalized.documentContext, "t
 
 assert.equal(StudyContext.resolveSourcePolicy({ hasAttachment: true, requiresOfficial: true }), "attachment_override");
 assert.equal(StudyContext.resolveSourcePolicy({ requiresOfficial: true }), "official_required");
-assert.equal(StudyContext.resolveSourcePolicy({ hasCurriculumSelection: true }), "official_required");
+assert.equal(StudyContext.resolveSourcePolicy({ schoolLevel: "primary", requiresOfficial: true, hasCurriculumSelection: true }), "official_if_available");
+assert.equal(StudyContext.resolveSourcePolicy({ schoolLevel: "middle", hasCurriculumSelection: true }), "official_required");
+assert.equal(StudyContext.resolveSourcePolicy({ schoolLevel: "high", hasCurriculumSelection: true }), "official_required");
+assert.equal(StudyContext.resolveSourcePolicy({ hasCurriculumSelection: true }), "official_if_available");
 assert.equal(StudyContext.resolveSourcePolicy({}), "general_unverified");
+assert.equal(StudyContext.resolveSourceMode({ policy: "official_if_available" }), "ai_fallback");
+assert.equal(StudyContext.resolveSourceMode({ policy: "official_required" }), "unmapped_blocked");
+assert.match(StudyContext.sourceModeLabel("ai_fallback", "el"), /AI βοήθεια προσαρμοσμένη/);
 
 const fromQuery = StudyContext.fromSearchParams(
   "?zone=middle&role=guardian&grade=c&subject=biologia-g-gymnasiou&topic=biologia-g-gym.inheritance-both-parents&topicText=%CE%9A%CE%BB%CE%B7%CF%81%CE%BF%CE%BD%CE%BF%CE%BC%CE%B9%CE%BA%CF%8C%CF%84%CE%B7%CF%84%CE%B1&mode=review",

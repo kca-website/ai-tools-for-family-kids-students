@@ -34,19 +34,20 @@ function normalizePdfText(value) {
 function conventionalPdfCandidates(sourceUrl) {
   if (!officialPdfSourceAllowed(sourceUrl)) return [];
   const url = new URL(stripFragment(sourceUrl));
-  const out = [url.toString()];
+  const out = [];
   const cleanPath = url.pathname.replace(/\/+$/, "");
   const baseName = cleanPath.split("/").filter(Boolean).pop() || "";
 
   if (baseName && !/\.pdf$/i.test(baseName)) {
-    const inside = new URL(url.toString());
-    inside.pathname = cleanPath + "/" + baseName + ".pdf";
-    out.push(inside.toString());
-
     const sibling = new URL(url.toString());
     sibling.pathname = cleanPath + ".pdf";
     out.push(sibling.toString());
+
+    const inside = new URL(url.toString());
+    inside.pathname = cleanPath + "/" + baseName + ".pdf";
+    out.push(inside.toString());
   }
+  out.push(url.toString());
 
   return [...new Set(out.filter(officialPdfSourceAllowed))];
 }
@@ -117,6 +118,66 @@ function isPdfBytes(bytes) {
   if (!(bytes instanceof Uint8Array) || bytes.byteLength < 5) return false;
   return bytes[0] === 0x25 && bytes[1] === 0x50 && bytes[2] === 0x44 &&
     bytes[3] === 0x46 && bytes[4] === 0x2d;
+}
+
+async function resolveOfficialPdfUrl(sourceUrl, options = {}) {
+  const fetchImpl = options.fetchImpl || globalThis.fetch;
+  if (typeof fetchImpl !== "function") throw new Error("fetch_unavailable");
+  if (!officialPdfSourceAllowed(sourceUrl)) throw new Error("official_pdf_url_not_allowed");
+
+  const candidates = conventionalPdfCandidates(sourceUrl);
+  for (const candidate of candidates) {
+    if (!/\.pdf$/i.test(new URL(candidate).pathname)) continue;
+    try {
+      const response = await fetchImpl(candidate, {
+        method: "HEAD",
+        headers: {
+          "User-Agent": "aitools4kids.gr educational source grounding",
+          "Accept": "application/pdf,*/*;q=0.1"
+        },
+        redirect: "follow"
+      });
+      const finalUrl = response?.url && officialPdfSourceAllowed(response.url)
+        ? stripFragment(response.url)
+        : candidate;
+      const contentType = String(response?.headers?.get?.("content-type") || "").toLowerCase();
+      if (response?.ok && officialPdfSourceAllowed(finalUrl) &&
+          (contentType.includes("application/pdf") || /\.pdf$/i.test(new URL(finalUrl).pathname))) {
+        return finalUrl;
+      }
+    } catch (_) {}
+  }
+
+  for (const candidate of candidates) {
+    if (/\.pdf$/i.test(new URL(candidate).pathname)) continue;
+    try {
+      const response = await fetchImpl(candidate, {
+        headers: {
+          "User-Agent": "aitools4kids.gr educational source grounding",
+          "Accept": "text/html,application/xhtml+xml;q=0.9,*/*;q=0.1"
+        },
+        redirect: "follow"
+      });
+      if (!response?.ok) continue;
+      const contentType = String(response.headers?.get?.("content-type") || "").toLowerCase();
+      if (!contentType.includes("text/html") && !contentType.includes("application/xhtml")) continue;
+      const html = await response.text();
+      for (const discovered of discoverPdfLinks(html.slice(0, 1024 * 1024), response.url || candidate)) {
+        try {
+          const head = await fetchImpl(discovered, {
+            method: "HEAD",
+            headers: { "User-Agent": "aitools4kids.gr educational source grounding", "Accept": "application/pdf,*/*;q=0.1" },
+            redirect: "follow"
+          });
+          const finalUrl = head?.url && officialPdfSourceAllowed(head.url) ? stripFragment(head.url) : discovered;
+          const type = String(head?.headers?.get?.("content-type") || "").toLowerCase();
+          if (head?.ok && officialPdfSourceAllowed(finalUrl) && (type.includes("application/pdf") || /\.pdf$/i.test(new URL(finalUrl).pathname))) return finalUrl;
+        } catch (_) {}
+      }
+    } catch (_) {}
+  }
+
+  throw new Error("official_pdf_binary_not_resolved");
 }
 
 async function fetchOfficialPdfBytes(sourceUrl, options = {}) {
@@ -242,17 +303,16 @@ async function extractVerifiedPdfPage({
   let document;
   try {
     const pdfjs = await loadPdfJs();
-    // ebooks.edu.gr often exposes a directory/viewer URL rather than a direct
-    // *.pdf URL. Resolve and validate the actual PDF bytes first, then give
-    // PDF.js the bytes. This keeps grounding on the approved official host and
-    // avoids PDF.js trying to parse the HTML viewer as a PDF.
-    const resolvedPdf = await fetchOfficialPdfBytes(sourceUrl, { fetchImpl, maxBytes });
-    resolvedPdfUrl = resolvedPdf.resolvedUrl || resolvedPdfUrl;
+    resolvedPdfUrl = await resolveOfficialPdfUrl(sourceUrl, { fetchImpl });
     loadingTask = pdfjs.getDocument({
-      data: resolvedPdf.bytes,
+      url: resolvedPdfUrl,
       disableWorker: true,
+      disableRange: false,
+      disableStream: true,
+      disableAutoFetch: true,
       isEvalSupported: false,
-      useSystemFonts: true
+      useSystemFonts: true,
+      rangeChunkSize: 128 * 1024
     });
     document = await loadingTask.promise;
 
@@ -288,7 +348,7 @@ async function extractVerifiedPdfPage({
   } catch (err) {
     return {
       ok: false,
-      error: err?.message === "official_pdf_too_large" ? "official_pdf_too_large" : "official_pdf_text_extraction_failed",
+      error: err?.message === "official_pdf_binary_not_resolved" ? "official_pdf_binary_not_resolved" : "official_pdf_text_extraction_failed",
       resolvedPdfUrl
     };
   } finally {
@@ -305,6 +365,7 @@ module.exports = Object.freeze({
   conventionalPdfCandidates,
   discoverPdfLinks,
   isPdfBytes,
+  resolveOfficialPdfUrl,
   fetchOfficialPdfBytes,
   extractVerifiedPdfPage,
   scopeVerifiedPdfText,

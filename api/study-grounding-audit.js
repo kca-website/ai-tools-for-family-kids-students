@@ -2,6 +2,19 @@ const CATALOG = require('../general-education-book-sections-2026-2027.js');
 const AVAILABILITY = require('../secondary-grounding-availability-2026-2027.js');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 
+// These subjects have official mappings, but their current PDF sources are not
+// runtime-consumable in production. The learner UI hides them, so the audit
+// must report the same effective visibility instead of the raw generated list.
+const RUNTIME_BLOCKED_SECONDARY_SUBJECTS = new Set([
+  'english-a-lykeiou',
+  'english-b-lykeiou'
+]);
+
+function visibleSectionsFor(subject) {
+  if (RUNTIME_BLOCKED_SECONDARY_SUBJECTS.has(String(subject || ''))) return [];
+  return Array.isArray(AVAILABILITY.subjects?.[subject]) ? AVAILABILITY.subjects[subject] : [];
+}
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET');
@@ -48,17 +61,19 @@ module.exports = async function handler(req, res) {
     return acc;
   }, {});
 
-  const secondaryVisibleSubjects = Object.keys(AVAILABILITY.subjects || {});
-  const secondaryVisibleTopics = secondaryVisibleSubjects.reduce((n,id)=>n+(AVAILABILITY.subjects[id]?.length||0),0);
+  const secondaryVisibleSubjects = Object.keys(AVAILABILITY.subjects || {})
+    .filter(id => visibleSectionsFor(id).length > 0);
+  const secondaryVisibleTopics = secondaryVisibleSubjects.reduce((n,id)=>n+visibleSectionsFor(id).length,0);
 
   return res.status(200).json({
     generatedAt: new Date().toISOString(),
     schoolYear: CATALOG.schoolYear || AVAILABILITY.schoolYear || '2026-2027',
-    note: 'Catalog exact mappings describe the general-book catalog only. secondaryVisibleVerified is the authoritative learner-facing allow-list for Gymnasium/GEL: only these runtime-consumable official-source topics are exposed in AI Study. Primary structure-only rows may use AI-only mode with mandatory second-pass review.',
+    note: 'Catalog exact mappings describe the general-book catalog only. secondaryVisibleVerified is the effective learner-facing allow-list for Gymnasium/GEL after runtime safety blocks: only runtime-consumable official-source topics are exposed in AI Study. Primary structure-only rows may use AI-only mode with mandatory second-pass review.',
     summary,
     secondaryVisibleVerified: {
       subjects: secondaryVisibleSubjects.length,
       topics: secondaryVisibleTopics,
+      runtimeBlockedSubjects: [...RUNTIME_BLOCKED_SECONDARY_SUBJECTS],
       policy: 'official-source-only-fail-closed'
     },
     subjects: rows,
@@ -72,7 +87,7 @@ function catalogRows() {
     const exact = row.groundedSections || {};
     const exactCount = sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)).length;
     const level = /-dimotikou$/i.test(id) ? 'primary' : /-gymnasiou$/i.test(id) ? 'middle' : /-lykeiou$/i.test(id) ? 'high' : 'other';
-    const visibleVerified = (AVAILABILITY.subjects?.[id] || []).length;
+    const visibleVerified = visibleSectionsFor(id).length;
     return {
       subject: id,
       level,
@@ -80,6 +95,7 @@ function catalogRows() {
       exactCatalogMapped: exactCount,
       structureOnlyCount: Math.max(0, sections.length - exactCount),
       visibleVerified,
+      runtimeBlocked: RUNTIME_BLOCKED_SECONDARY_SUBJECTS.has(id),
       policy: level === 'primary'
         ? (exactCount === sections.length && sections.length ? 'official-exact' : 'primary-ai-reviewed-allowed')
         : 'official-runtime-required'
@@ -90,18 +106,20 @@ function catalogRows() {
 function sectionsForSubject(subject) {
   const row = CATALOG.get?.(subject);
   const catalogSections = Array.isArray(row?.sections) ? row.sections : [];
-  const visibleSections = Array.isArray(AVAILABILITY.subjects?.[subject]) ? AVAILABILITY.subjects[subject] : [];
-  if (catalogSections.length) return { row, sections: catalogSections, source: 'general-book-catalog', visibleSections };
-  if (visibleSections.length) return { row: null, sections: visibleSections, source: 'secondary-visible-verified', visibleSections };
+  const visibleSections = visibleSectionsFor(subject);
+  const rawVisibleSections = Array.isArray(AVAILABILITY.subjects?.[subject]) ? AVAILABILITY.subjects[subject] : [];
+  if (catalogSections.length) return { row, sections: catalogSections, source: 'general-book-catalog', visibleSections, rawVisibleSections };
+  if (rawVisibleSections.length) return { row: null, sections: rawVisibleSections, source: 'secondary-visible-verified', visibleSections, rawVisibleSections };
   return null;
 }
 
 async function auditSubject(subject, live, compact) {
   const resolvedSubject = sectionsForSubject(subject);
   if (!resolvedSubject) return { subject, error: 'subject_not_found' };
-  const { row, sections, source, visibleSections } = resolvedSubject;
+  const { row, sections, source, visibleSections, rawVisibleSections } = resolvedSubject;
   const exact = row?.groundedSections || {};
   const exactCatalogSections = row ? sections.filter(x => Object.prototype.hasOwnProperty.call(exact, x)) : [];
+  const runtimeBlocked = RUNTIME_BLOCKED_SECONDARY_SUBJECTS.has(subject);
   const base = {
     subject,
     schoolYear: CATALOG.schoolYear || AVAILABILITY.schoolYear || '2026-2027',
@@ -109,11 +127,13 @@ async function auditSubject(subject, live, compact) {
     totalSections: sections.length,
     exactCatalogMapped: exactCatalogSections.length,
     visibleVerified: visibleSections.length,
+    runtimeBlocked,
+    blockedVerifiedMappings: runtimeBlocked ? rawVisibleSections.length : 0,
     structureOnly: compact || !row ? undefined : sections.filter(x => !Object.prototype.hasOwnProperty.call(exact, x)),
     exactCatalogSections: compact || !row ? undefined : exactCatalogSections,
     visibleVerifiedSections: compact ? undefined : visibleSections,
   };
-  if (!live) return clean(base);
+  if (!live || runtimeBlocked) return clean({ ...base, liveChecked: live, runtimeChecked: 0, runtimeGrounded: 0, runtimeFailed: 0, failures: [] });
 
   const topicsToCheck = visibleSections.length ? visibleSections : sections;
   const results = [];

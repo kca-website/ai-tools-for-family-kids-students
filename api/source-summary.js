@@ -158,7 +158,7 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
     if (claims.length < 2) return res.status(422).json({ error: 'insufficient_verified_evidence', message: lang === 'en' ? 'Could not verify a simple lesson for this unit.' : 'Δεν επαληθεύτηκε απλό μάθημα για αυτή την ενότητα.' });
   }
   if (!simple && claims.length < 3) claims = extractiveFallback(workingSource, 6);
-  if (claims.length < 3) return res.status(502).json({ error: 'insufficient_verified_evidence', message: 'Δεν βρέθηκαν αρκετά επαληθεύσιμα σημεία από την επίσημη πηγή.' });
+  if (claims.length < (simple ? 2 : 3)) return res.status(502).json({ error: 'insufficient_verified_evidence', message: 'Δεν βρέθηκαν αρκετά επαληθεύσιμα σημεία από την επίσημη πηγή.' });
 
   const label = audio ? (lang === 'en' ? 'Audio lesson' : 'Ακουστικό μάθημα') : explanation ? (lang === 'en' ? 'Explanation' : 'Εξήγηση') : (lang === 'en' ? 'Summary' : 'Σύνοψη');
   const response = {

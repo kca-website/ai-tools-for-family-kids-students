@@ -578,43 +578,108 @@
       "topics": [
         {
           "id": "thriskeftika-a-lykeiou.topic-1",
-          "label": "Αναζήτηση νοήματος και θρησκευτική εμπειρία",
-          "status": "navigation-map"
+          "label": "1.1 Ο άνθρωπος ζει με τον Θεό",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-a-lykeiou.topic-2",
-          "label": "Ο Θεός στην ορθόδοξη χριστιανική παράδοση",
-          "status": "navigation-map"
+          "label": "1.2 Η πίστη στον Τριαδικό Θεό",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-a-lykeiou.topic-3",
-          "label": "Πρόσωπο, ελευθερία και ευθύνη",
-          "status": "navigation-map"
+          "label": "1.3 Η μεταμορφωτική δύναμη της προσευχής στην Ορθόδοξη χριστιανική παράδοση",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-a-lykeiou.topic-4",
-          "label": "Προσευχή, λατρεία και εκκλησιαστική κοινότητα",
-          "status": "navigation-map"
+          "label": "1.4 Η αγιότητα στην Ορθόδοξη χριστιανική παράδοση",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-a-lykeiou.topic-5",
-          "label": "Αγάπη, συγχώρηση και ανθρώπινες σχέσεις",
-          "status": "navigation-map"
+          "label": "1.5 Η έννοια του προσώπου στη θεολογία της Ορθόδοξης χριστιανικής παράδοσης",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-a-lykeiou.topic-6",
-          "label": "Η Εκκλησία στον σύγχρονο κόσμο",
-          "status": "navigation-map"
+          "label": "2.1 «Εις Μίαν, Αγίαν, Καθολικήν και Αποστολικήν…»",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-a-lykeiou.topic-7",
-          "label": "Διάλογος με άλλες χριστιανικές παραδόσεις και θρησκείες",
-          "status": "navigation-map"
+          "label": "2.2 Θεία Ευχαριστία: Η ταυτότητα της Εκκλησίας",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-a-lykeiou.topic-8",
-          "label": "Θρησκεία, πολιτισμός και κοινωνία",
-          "status": "navigation-map"
+          "label": "2.3 Η ενότητα της εκκλησιαστικής κοινότητας",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-9",
+          "label": "2.4 Το περιεχόμενο της σωτηρίας στον Χριστιανισμό",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-10",
+          "label": "3.1 Η λατρεία ως έκφραση πίστης",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-11",
+          "label": "3.2 Οι γιορτές στην Ορθόδοξη Εκκλησία",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-12",
+          "label": "3.3 Η γλώσσα της Ορθόδοξης χριστιανικής Παράδοσης",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-13",
+          "label": "3.4 Είσοδος και ένταξη στην Εκκλησία: Το μυστήριο του βαπτίσματος",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-14",
+          "label": "3.5 Το βαθύτερο νόημα του μυστηρίου του γάμου",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-15",
+          "label": "3.6 Μετάνοια, η υπέρβαση της αμαρτίας",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-16",
+          "label": "3.7 Η ιεροσύνη στην Ορθόδοξη Εκκλησία",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-17",
+          "label": "4.1 Χαρακτηριστικά χριστιανικού ήθους",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-18",
+          "label": "4.2 Η ελευθερία του ανθρώπου στην Ορθόδοξη χριστιανική ανθρωπολογία",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-19",
+          "label": "4.3 Η αγάπη ως πρόταση ζωής στον Χριστιανισμό",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-20",
+          "label": "4.4 Η διδασκαλία της Ορθόδοξης Εκκλησίας για την ισότητα",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-a-lykeiou.topic-21",
+          "label": "4.5 Η θεολογική χριστιανική θεώρηση για την ευθύνη",
+          "status": "official-book-unit"
         }
       ]
     },

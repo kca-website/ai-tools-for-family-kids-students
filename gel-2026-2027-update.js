@@ -379,42 +379,94 @@
       "grade": "a",
       "labelEl": "Θρησκευτικά, Α' Λυκείου",
       "labelEn": "Religious Studies, 10th Grade",
-      "status": "annual-guidance-map",
+      "status": "official-book-units",
       "topics": [
         [
-          "Αναζήτηση νοήματος και θρησκευτική εμπειρία",
-          "Search for meaning and religious experience"
+          "1.1 Ο άνθρωπος ζει με τον Θεό",
+          "1.1 Human beings live with God"
         ],
         [
-          "Ο Θεός στην ορθόδοξη χριστιανική παράδοση",
-          "God in Orthodox Christian tradition"
+          "1.2 Η πίστη στον Τριαδικό Θεό",
+          "1.2 Faith in the Triune God"
         ],
         [
-          "Πρόσωπο, ελευθερία και ευθύνη",
-          "Personhood, freedom and responsibility"
+          "1.3 Η μεταμορφωτική δύναμη της προσευχής στην Ορθόδοξη χριστιανική παράδοση",
+          "1.3 The transforming power of prayer in the Orthodox Christian tradition"
         ],
         [
-          "Προσευχή, λατρεία και εκκλησιαστική κοινότητα",
-          "Prayer, worship and church community"
+          "1.4 Η αγιότητα στην Ορθόδοξη χριστιανική παράδοση",
+          "1.4 Holiness in the Orthodox Christian tradition"
         ],
         [
-          "Αγάπη, συγχώρηση και ανθρώπινες σχέσεις",
-          "Love, forgiveness and human relationships"
+          "1.5 Η έννοια του προσώπου στη θεολογία της Ορθόδοξης χριστιανικής παράδοσης",
+          "1.5 The concept of the person in Orthodox Christian theology"
         ],
         [
-          "Η Εκκλησία στον σύγχρονο κόσμο",
-          "The Church in the modern world"
+          "2.1 «Εις Μίαν, Αγίαν, Καθολικήν και Αποστολικήν…»",
+          "2.1 “One, Holy, Catholic and Apostolic…”"
         ],
         [
-          "Διάλογος με άλλες χριστιανικές παραδόσεις και θρησκείες",
-          "Dialogue with other Christian traditions and religions"
+          "2.2 Θεία Ευχαριστία: Η ταυτότητα της Εκκλησίας",
+          "2.2 Holy Eucharist: the identity of the Church"
         ],
         [
-          "Θρησκεία, πολιτισμός και κοινωνία",
-          "Religion, culture and society"
+          "2.3 Η ενότητα της εκκλησιαστικής κοινότητας",
+          "2.3 The unity of the church community"
+        ],
+        [
+          "2.4 Το περιεχόμενο της σωτηρίας στον Χριστιανισμό",
+          "2.4 The meaning of salvation in Christianity"
+        ],
+        [
+          "3.1 Η λατρεία ως έκφραση πίστης",
+          "3.1 Worship as an expression of faith"
+        ],
+        [
+          "3.2 Οι γιορτές στην Ορθόδοξη Εκκλησία",
+          "3.2 Feasts in the Orthodox Church"
+        ],
+        [
+          "3.3 Η γλώσσα της Ορθόδοξης χριστιανικής Παράδοσης",
+          "3.3 The language of the Orthodox Christian tradition"
+        ],
+        [
+          "3.4 Είσοδος και ένταξη στην Εκκλησία: Το μυστήριο του βαπτίσματος",
+          "3.4 Entering the Church: the sacrament of baptism"
+        ],
+        [
+          "3.5 Το βαθύτερο νόημα του μυστηρίου του γάμου",
+          "3.5 The deeper meaning of the sacrament of marriage"
+        ],
+        [
+          "3.6 Μετάνοια, η υπέρβαση της αμαρτίας",
+          "3.6 Repentance, overcoming sin"
+        ],
+        [
+          "3.7 Η ιεροσύνη στην Ορθόδοξη Εκκλησία",
+          "3.7 Priesthood in the Orthodox Church"
+        ],
+        [
+          "4.1 Χαρακτηριστικά χριστιανικού ήθους",
+          "4.1 Characteristics of Christian ethos"
+        ],
+        [
+          "4.2 Η ελευθερία του ανθρώπου στην Ορθόδοξη χριστιανική ανθρωπολογία",
+          "4.2 Human freedom in Orthodox Christian anthropology"
+        ],
+        [
+          "4.3 Η αγάπη ως πρόταση ζωής στον Χριστιανισμό",
+          "4.3 Love as a way of life in Christianity"
+        ],
+        [
+          "4.4 Η διδασκαλία της Ορθόδοξης Εκκλησίας για την ισότητα",
+          "4.4 The teaching of the Orthodox Church on equality"
+        ],
+        [
+          "4.5 Η θεολογική χριστιανική θεώρηση για την ευθύνη",
+          "4.5 The Christian theological view of responsibility"
         ]
       ],
-      "source": "https://dide.ira.sch.gr/ekpedevtika-themata/ekp260810/"
+      "source": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%98%CE%A1%CE%97%CE%A3%CE%9A-%CE%A6.%CE%91._%CE%91%CE%92%CE%93_%CE%93%CE%95%CE%9B_2026-2027.pdf"
     },
     {
       "id": "fysiki-a-lykeiou",

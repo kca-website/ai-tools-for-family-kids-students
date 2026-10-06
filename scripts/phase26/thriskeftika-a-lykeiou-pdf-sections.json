@@ -1,0 +1,190 @@
+{
+  "phase": 26,
+  "subjectId": "thriskeftika-a-lykeiou",
+  "schoolYear": "2026-2027",
+  "guidanceUrl": "https://www.iep.edu.gr/wp-content/uploads/2026/09/%CE%98%CE%A1%CE%97%CE%A3%CE%9A-%CE%A6.%CE%91._%CE%91%CE%92%CE%93_%CE%93%CE%95%CE%9B_2026-2027.pdf",
+  "guidanceNote": "Υ.ΠΑΙ.Θ.Α. 106320/Δ2/07-08-2026: εφαρμόζεται το ΠΣ (ΦΕΚ 699/Β/04-03-2020)· όλες οι θεματικές ενότητες του βιβλίου «Ορθόδοξη πίστη και λατρεία» διδάσκονται, με πρόταση να μην αξιοποιηθούν συγκεκριμένες σελίδες-πηγές.",
+  "verifiedAt": "2026-10-06",
+  "book": {
+    "work": "8547/5214",
+    "title": "ΘΡΗΣΚΕΥΤΙΚΑ: ΟΡΘΟΔΟΞΗ ΠΙΣΤΗ ΚΑΙ ΛΑΤΡΕΙΑ",
+    "sourceUrl": "https://ebooks.edu.gr/ebooks/v/pdf/8547/5232/22-0287-01_V1_Thriskeutika_A-Lykeiou_Vivlio-Mathiti/",
+    "printedToPdfOffset": 1
+  },
+  "sections": [
+    {
+      "number": "1.1",
+      "label": "1.1 Ο άνθρωπος ζει με τον Θεό",
+      "labelEn": "1.1 Human beings live with God",
+      "pdfPage": 8,
+      "pdfPageEnd": 13,
+      "heading": "1.1. Ο ΑΝΘΡΩΠΟΣ ΖΕΙ ΜΕ ΤΟΝ ΘΕΟ"
+    },
+    {
+      "number": "1.2",
+      "label": "1.2 Η πίστη στον Τριαδικό Θεό",
+      "labelEn": "1.2 Faith in the Triune God",
+      "pdfPage": 14,
+      "pdfPageEnd": 21,
+      "heading": "1.2. ΠΙΣΤΗ ΣΤΟΝ ΤΡΙΑΔΙΚΟ ΘΕΟ"
+    },
+    {
+      "number": "1.3",
+      "label": "1.3 Η μεταμορφωτική δύναμη της προσευχής στην Ορθόδοξη χριστιανική παράδοση",
+      "labelEn": "1.3 The transforming power of prayer in the Orthodox Christian tradition",
+      "pdfPage": 22,
+      "pdfPageEnd": 26,
+      "heading": "1.3. Η ΜΕΤΑΜΟΡΦΩΤΙΚΗ ΔΥΝΑΜΗ ΤΗΣ ΠΡΟΣΕΥΧΗΣ ΣΤΗΝ ΟΡΘΟΔΟΞΗ ΧΡΙΣΤΙΑΝΙΚΗ",
+      "guidanceSuggestsNotUsing": "σελ. 24-25"
+    },
+    {
+      "number": "1.4",
+      "label": "1.4 Η αγιότητα στην Ορθόδοξη χριστιανική παράδοση",
+      "labelEn": "1.4 Holiness in the Orthodox Christian tradition",
+      "pdfPage": 27,
+      "pdfPageEnd": 33,
+      "heading": "1.4. Η ΑΓΙΟΤΗΤΑ ΣΤΗΝ ΟΡΘΟΔΟΞΗ ΧΡΙΣΤΙΑΝΙΚΗ ΠΑΡΑΔΟΣΗ"
+    },
+    {
+      "number": "1.5",
+      "label": "1.5 Η έννοια του προσώπου στη θεολογία της Ορθόδοξης χριστιανικής παράδοσης",
+      "labelEn": "1.5 The concept of the person in Orthodox Christian theology",
+      "pdfPage": 34,
+      "pdfPageEnd": 40,
+      "heading": "1.5. Η ΕΝΝΟΙΑ ΤΟΥ ΠΡΟΣΩΠΟΥ ΣΤΗ ΘΕΟΛΟΓΙΑ ΤΗΣ ΟΡΘΟΔΟΞΗΣ"
+    },
+    {
+      "number": "2.1",
+      "label": "2.1 «Εις Μίαν, Αγίαν, Καθολικήν και Αποστολικήν…»",
+      "labelEn": "2.1 “One, Holy, Catholic and Apostolic…”",
+      "pdfPage": 42,
+      "pdfPageEnd": 54,
+      "heading": "2.1. «ΕΙΣ ΜΙΑΝ, ΑΓΙΑΝ, ΚΑΘΟΛΙΚΗΝ ΚΑΙ ΑΠΟΣΤΟΛΙΚΗΝ…»"
+    },
+    {
+      "number": "2.2",
+      "label": "2.2 Θεία Ευχαριστία: Η ταυτότητα της Εκκλησίας",
+      "labelEn": "2.2 Holy Eucharist: the identity of the Church",
+      "pdfPage": 55,
+      "pdfPageEnd": 65,
+      "heading": "2.2. ΘΕΙΑ ΕΥΧΑΡΙΣΤΙΑ: Η ΤΑΥΤΟΤΗΤΑ ΤΗΣ ΕΚΚΛΗΣΙΑΣ",
+      "guidanceSuggestsNotUsing": "σελ. 57-59"
+    },
+    {
+      "number": "2.3",
+      "label": "2.3 Η ενότητα της εκκλησιαστικής κοινότητας",
+      "labelEn": "2.3 The unity of the church community",
+      "pdfPage": 66,
+      "pdfPageEnd": 72,
+      "heading": "2.3. Η ΕΝΟΤΗΤΑ ΤΗΣ ΕΚΚΛΗΣΙΑΣΤΙΚΗΣ ΚΟΙΝΟΤΗΤΑΣ",
+      "guidanceSuggestsNotUsing": "σελ. 68-70"
+    },
+    {
+      "number": "2.4",
+      "label": "2.4 Το περιεχόμενο της σωτηρίας στον Χριστιανισμό",
+      "labelEn": "2.4 The meaning of salvation in Christianity",
+      "pdfPage": 73,
+      "pdfPageEnd": 82,
+      "heading": "2.4. ΤΟ ΠΕΡΙΕΧΟΜΕΝΟ ΤΗΣ ΣΩΤΗΡΙΑΣ ΣΤΗΝ ΟΡΘΟΔΟΞΗ ΧΡΙΣΤΙΑΝΙΚΗ ΠΑΡΑΔΟΣΗ"
+    },
+    {
+      "number": "3.1",
+      "label": "3.1 Η λατρεία ως έκφραση πίστης",
+      "labelEn": "3.1 Worship as an expression of faith",
+      "pdfPage": 84,
+      "pdfPageEnd": 91,
+      "heading": "3.1. Η ΛΑΤΡΕΙΑ ΩΣ ΕΚΦΡΑΣΗ ΠΙΣΤΗΣ"
+    },
+    {
+      "number": "3.2",
+      "label": "3.2 Οι γιορτές στην Ορθόδοξη Εκκλησία",
+      "labelEn": "3.2 Feasts in the Orthodox Church",
+      "pdfPage": 92,
+      "pdfPageEnd": 100,
+      "heading": "3.2. ΟΙ ΓΙΟΡΤΕΣ ΣΤΗΝ ΟΡΘΟΔΟΞΗ ΕΚΚΛΗΣΙΑ",
+      "guidanceSuggestsNotUsing": "σελ. 91-92"
+    },
+    {
+      "number": "3.3",
+      "label": "3.3 Η γλώσσα της Ορθόδοξης χριστιανικής Παράδοσης",
+      "labelEn": "3.3 The language of the Orthodox Christian tradition",
+      "pdfPage": 101,
+      "pdfPageEnd": 106,
+      "heading": "3.3. Η ΓΛΩΣΣΑ ΤΗΣ ΟΡΘΟΔΟΞΗΣ ΧΡΙΣΤΙΑΝΙΚΗΣ ΠΑΡΑΔΟΣΗΣ"
+    },
+    {
+      "number": "3.4",
+      "label": "3.4 Είσοδος και ένταξη στην Εκκλησία: Το μυστήριο του βαπτίσματος",
+      "labelEn": "3.4 Entering the Church: the sacrament of baptism",
+      "pdfPage": 107,
+      "pdfPageEnd": 112,
+      "heading": "3.3. ΕΙΣΟΔΟΣ ΚΑΙ ΕΝΤΑΞΗ ΣΤΗΝ ΕΚΚΛΗΣΙΑ: ΤΟ ΜΥΣΤΗΡΙΟ ΤΟΥ",
+      "note": "Στο σώμα του βιβλίου η επικεφαλίδα τυπώνεται ως «3.3.»· ο πίνακας περιεχομένων την ορίζει 3.4 (σελ. 106)."
+    },
+    {
+      "number": "3.5",
+      "label": "3.5 Το βαθύτερο νόημα του μυστηρίου του γάμου",
+      "labelEn": "3.5 The deeper meaning of the sacrament of marriage",
+      "pdfPage": 113,
+      "pdfPageEnd": 117,
+      "heading": "3.5. ΤΟ ΒΑΘΥΤΕΡΟ ΝΟΗΜΑ ΤΟΥ ΜΥΣΤΗΡΙΟΥ ΤΟΥ ΓΑΜΟΥ"
+    },
+    {
+      "number": "3.6",
+      "label": "3.6 Μετάνοια, η υπέρβαση της αμαρτίας",
+      "labelEn": "3.6 Repentance, overcoming sin",
+      "pdfPage": 118,
+      "pdfPageEnd": 124,
+      "heading": "3.6. ΜΕΤΑΝΟΙΑ, Η ΥΠΕΡΒΑΣΗ ΤΗΣ ΑΜΑΡΤΙΑΣ"
+    },
+    {
+      "number": "3.7",
+      "label": "3.7 Η ιεροσύνη στην Ορθόδοξη Εκκλησία",
+      "labelEn": "3.7 Priesthood in the Orthodox Church",
+      "pdfPage": 125,
+      "pdfPageEnd": 130,
+      "heading": "3.7. Η ΙΕΡΟΣΥΝΗ ΣΤΗΝ ΟΡΘΟΔΟΞΗ ΕΚΚΛΗΣΙΑ"
+    },
+    {
+      "number": "4.1",
+      "label": "4.1 Χαρακτηριστικά χριστιανικού ήθους",
+      "labelEn": "4.1 Characteristics of Christian ethos",
+      "pdfPage": 132,
+      "pdfPageEnd": 140,
+      "heading": "4.1. ΧΑΡΑΚΤΗΡΙΣΤΙΚΑ ΧΡΙΣΤΙΑΝΙΚΟΥ ΗΘΟΥΣ",
+      "guidanceSuggestsNotUsing": "σελ. 131-133"
+    },
+    {
+      "number": "4.2",
+      "label": "4.2 Η ελευθερία του ανθρώπου στην Ορθόδοξη χριστιανική ανθρωπολογία",
+      "labelEn": "4.2 Human freedom in Orthodox Christian anthropology",
+      "pdfPage": 141,
+      "pdfPageEnd": 145,
+      "heading": "4.2. Η ΕΛΕΥΘΕΡΙΑ ΤΟΥ ΑΝΘΡΩΠΟΥ ΣΤΗΝ ΟΡΘΟΔΟΞΗ ΧΡΙΣΤΙΑΝΙΚΗ ΑΝΘΡΩΠΟΛΟΓΙΑ"
+    },
+    {
+      "number": "4.3",
+      "label": "4.3 Η αγάπη ως πρόταση ζωής στον Χριστιανισμό",
+      "labelEn": "4.3 Love as a way of life in Christianity",
+      "pdfPage": 146,
+      "pdfPageEnd": 153,
+      "heading": "4.3. Η ΑΓΑΠΗ ΩΣ ΠΡΟΤΑΣΗ ΖΩΗΣ ΣΤΟΝ ΧΡΙΣΤΙΑΝΙΣΜΟ"
+    },
+    {
+      "number": "4.4",
+      "label": "4.4 Η διδασκαλία της Ορθόδοξης Εκκλησίας για την ισότητα",
+      "labelEn": "4.4 The teaching of the Orthodox Church on equality",
+      "pdfPage": 154,
+      "pdfPageEnd": 160,
+      "heading": "4.4. Η ΔΙΔΑΣΚΑΛΙΑ ΤΗΣ ΟΡΘΟΔΟΞΗΣ ΕΚΚΛΗΣΙΑΣ ΓΙΑ ΤΗΝ ΙΣΟΤΗΤΑ"
+    },
+    {
+      "number": "4.5",
+      "label": "4.5 Η θεολογική χριστιανική θεώρηση για την ευθύνη",
+      "labelEn": "4.5 The Christian theological view of responsibility",
+      "pdfPage": 161,
+      "pdfPageEnd": 166,
+      "heading": "4.5. Η ΘΕΟΛΟΓΙΚΗ ΧΡΙΣΤΙΑΝΙΚΗ ΘΕΩΡΗΣΗ ΓΙΑ ΤΗΝ ΕΥΘΥΝΗ"
+    }
+  ]
+}

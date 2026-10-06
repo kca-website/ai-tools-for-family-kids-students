@@ -17,6 +17,7 @@ function browserRequestAllowed(req) {
 const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
+const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
 const { VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
 const { createKnowledgeMapLesson, VERSION: AUDIO_VERSION } = require('../whole-section-audio-knowledge');
 
@@ -72,8 +73,10 @@ module.exports = async function handler(req, res) {
     const title = String(officialSource.bookTitle || sourceTitle || '').trim().slice(0, 300);
     if (source.length < 250) return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
 
-    if (activity === 'audio') return await wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus });
-    return await verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation });
+    // Ειδικό Γυμνάσιο (Ε.Α.Ε.): short, plain-language verified lesson instead of the whole-section narration.
+    const simple = SPECIAL_SECTIONS.has(sid);
+    if (activity === 'audio' && !simple) return await wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus });
+    return await verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation, audio: activity === 'audio', simple });
   } catch (err) {
     console.error('SOURCE_SUMMARY_ERROR', err?.stack || err);
     if (String(err?.message) === 'verified_audio_summary_unavailable') return res.status(503).json({error:'verified_audio_summary_unavailable',message:lang === 'en' ? 'Could not verify a concise lesson. Please try again shortly.' : 'Δεν ολοκληρώθηκε ο έλεγχος της σύντομης αφήγησης. Δοκίμασε ξανά σε λίγο.'});
@@ -115,11 +118,13 @@ async function wholeSectionAudio({ res, source, title, sid, selectedTopic, lang,
   return verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation: false, audio: true });
 }
 
-async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation, audio = false }) {
+async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation, audio = false, simple = false }) {
   const workingSource = compactSourceForTopic(source, selectedTopic, 8000);
   const cacheKey = {
     kind: 'verified-source-summary', promptVersion: 'verified-summary-v6-safe', subjectId: sid,
     topic: selectedTopic, title, language: lang, explanation, audio, source: workingSource, modelRoute: routingSignature(aiStatus),
+    // Plain-language Ε.Α.Ε. lessons get their own entries; general-school keys stay unchanged.
+    ...(simple ? { learner: 'special-education-v1' } : {}),
   };
   const cached = await getStudyCache(cacheKey);
   if (cached?.text) {
@@ -130,8 +135,11 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
   const system = lang === 'en'
     ? `Create a concise learner-facing ${explanation ? 'explanation' : 'summary'} from an official schoolbook source. Return ONLY JSON: {"claims":[{"claim":"clear sentence","evidence":"exact 4-24 word excerpt from SOURCE"}]}. Give 5-8 claims, use only SOURCE, and copy evidence exactly.`
     : `Φτιάξε ${explanation ? 'απλή επεξήγηση' : 'σύντομη σύνοψη'} για μαθητή από επίσημη σχολική πηγή. Επίστρεψε ΜΟΝΟ JSON: {"claims":[{"claim":"καθαρή πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων από την ΠΗΓΗ"}]}. Δώσε 5-8 claims, χρησιμοποίησε μόνο την ΠΗΓΗ και αντέγραψε το evidence ακριβώς.`;
+  const plainLanguage = !simple ? '' : (lang === 'en'
+    ? ' The learner attends a Special Gymnasium (special education): give 4-6 claims, each ONE short sentence of at most 14 words with one idea, everyday words, no nested clauses; keep official terms but explain them simply.'
+    : ' Ο μαθητής φοιτά σε Ειδικό Γυμνάσιο (Ε.Α.Ε.): δώσε 4-6 claims, το καθένα ΜΙΑ σύντομη πρόταση έως 14 λέξεις με μία ιδέα, απλές καθημερινές λέξεις, χωρίς δευτερεύουσες προτάσεις· κράτα τους επίσημους όρους αλλά εξήγησέ τους απλά.');
   const result = await generateChat({
-    messages: [{ role: 'system', content: system }, { role: 'user', content: `TOPIC: ${selectedTopic}\nSOURCE:\n${workingSource}` }],
+    messages: [{ role: 'system', content: system + plainLanguage }, { role: 'user', content: `TOPIC: ${selectedTopic}\nSOURCE:\n${workingSource}` }],
     maxTokens: 950, temperature: 0, reasoningEffort: 'low', modelProfile: 'balanced',
   });
 

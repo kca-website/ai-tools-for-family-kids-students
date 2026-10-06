@@ -85,9 +85,9 @@
         <div id="epalSpecialtyField" class="hidden"><label for="epalSpecialty" data-el="Ειδικότητα ΕΠΑΛ" data-en="EPAL specialty">Ειδικότητα ΕΠΑΛ</label><select id="epalSpecialty"></select></div>
       </div>
       <div id="specialGateway" class="hidden notice">
-        <strong class="v9i v9i-school" data-el="Ειδική Εκπαίδευση" data-en="Special Education">Ειδική Εκπαίδευση</strong><br>
-        <span data-el="Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές." data-en="Special Education uses separate adaptations, simplified quizzes and dedicated mappings. Open its dedicated route so those adaptations are preserved.">Η Ειδική Αγωγή έχει ξεχωριστές προσαρμογές, απλοποιημένα quiz και ειδική χαρτογράφηση. Άνοιξέ την από τη δική της διαδρομή ώστε να μη χαθούν αυτές οι προσαρμογές.</span>
-        <div style="margin-top:10px"><a class="action main" href="/special-education.html" data-el="Άνοιξε Ειδική Εκπαίδευση →" data-en="Open Special Education →">Άνοιξε Ειδική Εκπαίδευση →</a></div>
+        <strong class="v9i v9i-school" data-el="Ειδικό Γυμνάσιο (Ε.Α.Ε.)" data-en="Special Gymnasium (special education)">Ειδικό Γυμνάσιο (Ε.Α.Ε.)</strong><br>
+        <span data-el="Οι ενότητες είναι αυτές των επίσημων οδηγιών Ε.Α.Ε. 2026–27 και η AI εξηγεί με απλά λόγια, σε μικρά βήματα. Για Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ., διαγνωστικό και εργαλεία υποστήριξης:" data-en="Units follow the official 2026–27 special-education instructions and the AI explains in plain language, in small steps. For Special Lyceum, EN.E.E.GY.-L., the diagnostic and support tools:">Οι ενότητες είναι αυτές των επίσημων οδηγιών Ε.Α.Ε. 2026–27 και η AI εξηγεί με απλά λόγια, σε μικρά βήματα. Για Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ., διαγνωστικό και εργαλεία υποστήριξης:</span>
+        <a href="/special-education.html" data-el="Ειδική Εκπαίδευση →" data-en="Special Education →">Ειδική Εκπαίδευση →</a>
       </div>
       <div id="standardStudyFields">
       <label for="subject" data-el="Μάθημα" data-en="Subject">Μάθημα</label><select id="subject"></select>
@@ -189,6 +189,7 @@
 <script src="/environment-studies-data.js"></script>
 <script src="/general-education-book-sections-2026-2027.js"></script>
 <script src="/secondary-grounding-availability-2026-2027.js"></script>
+<script src="/special-education-book-sections-2026-2027.js"></script>
 <script src="/curriculum-resolver.js"></script>
 <script src="/pdf-text-reader.js"></script>
 <script src="/guided-task-assistant.js"></script>
@@ -205,7 +206,7 @@
   const officialSourceCache=new Map();
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
   const savedStudyContext=window.AITOOLSKIDS_STUDY_CONTEXT?.readPersisted();
-  const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']]};
+  const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],special:[['a','Α΄ Ειδικού Γυμνασίου'],['b','Β΄ Ειδικού Γυμνασίου'],['c','Γ΄ Ειδικού Γυμνασίου']]};
   function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();renderCharacterRoutes();}
   function saveLang(value){try{localStorage.setItem('aitools4kids_lang',value)}catch(_){}}
   $('elBtn').onclick=()=>{lang='el';saveLang(lang);localize()}; $('enBtn').onclick=()=>{lang='en';saveLang(lang);localize()};
@@ -215,11 +216,8 @@
     const z=$('zone').value,high=z==='high',special=z==='special';
     $('highSchoolFields').classList.toggle('hidden',!high);
     $('specialGateway').classList.toggle('hidden',!special);
-    $('standardStudyFields').classList.toggle('hidden',special);
-    $('standardStudyRest').classList.toggle('hidden',special);
-    $('grade').closest('div').classList.toggle('hidden',special);
     const epal=high&&$('schoolType').value==='epal',g=$('grade').value;
-    const strictOfficial=z==='middle'||(high&&!epal);
+    const strictOfficial=z==='middle'||special||(high&&!epal);
     $('customTopicFields').classList.toggle('hidden',strictOfficial);
     $('secondaryGroundingNotice').classList.toggle('hidden',!strictOfficial);
     if(strictOfficial)$('topicCustom').value='';
@@ -231,9 +229,18 @@
     $('epalSector').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose sector':'Γενική Παιδεία / διάλεξε τομέα')+'</option>'+(cat?.getSectors?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
     $('epalSpecialty').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose specialty':'Γενική Παιδεία / διάλεξε ειδικότητα')+'</option>'+(cat?.getSpecialties?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
   }
-  function populateGrades(){const z=$('zone').value;if(z==='special'){refreshSchoolTypeFields();return}$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?'Grade '+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
+  function populateGrades(){const z=$('zone').value;$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?(z==='special'?'Special Gymnasium, grade ':'Grade ')+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
+  const specialSections=()=>window.AITOOLSKIDS_SPECIAL_BOOK_SECTIONS;
+  // Ειδικό Γυμνάσιο: same adaptations as the Special Education tutor (special-education-tutor-context.js).
+  function specialEducationGuidance(){
+    if($('zone').value!=='special')return '';
+    return lang==='en'
+      ? '\n\nSpecial education (Special Gymnasium) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz must be clearly simpler than the general school: at most 3 short questions, 2 clear options, one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
+      : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· αν φτιάχνεις quiz, να είναι σαφώς απλούστερο από του γενικού σχολείου: έως 3 σύντομες ερωτήσεις, 2 καθαρές επιλογές, μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
+  }
   function subjectRows(){
     const z=$('zone').value,g=$('grade').value;
+    if(z==='special')return (specialSections()?.subjectsForGrade?.(g)||[]).map(s=>({id:s.id,subjectLabelEl:s.labelEl,subjectLabelEn:s.labelEn}));
     if(isEpal()){
       const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
       return cat?.getSubjects?.(g,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')||[];
@@ -245,6 +252,7 @@
   function populateSubjects(){const rows=subjectRows();$('subject').innerHTML=rows.length?rows.map(s=>'<option value="'+esc(s.id||s.quizId)+'">'+esc(lang==='en'?(s.subjectLabelEn||s.subjectLabelEl):(s.subjectLabelEl||s.subjectLabelEn||s.id))+'</option>').join(''):'<option value="">'+(lang==='en'?'No mapped subjects':'Δεν βρέθηκαν χαρτογραφημένα μαθήματα')+'</option>';populateTopics()}
   function studyTopicsFor(z,g,s,epal=false){
     let rows=[];
+    if(z==='special')return (specialSections()?.labels?.(s)||[]).map(label=>({id:label,labelEl:label,labelEn:label,sourceType:'official-book-section'}));
     if(epal){
       const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
       rows=cat?.getSubject?.(g,s,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')?.topics||[];
@@ -263,6 +271,7 @@
   }
   function isVerifiedOfficialTopic(topic,subjectRef=''){
     if(window.AITOOLSKIDS_STUDY_CONTEXT?.isVerifiedOfficialTopic?.(topic))return true;
+    if(specialSections()?.get?.(typeof subjectRef==='object'?subjectRef?.id:subjectRef,topic?.labelEl||''))return true;
     const label=topic?.labelEl||topic?.titleEl||topic?.label||'';
     const ids=typeof subjectRef==='object'
       ? [subjectRef?.id,subjectRef?.quizId,...(subjectRef?.aliases||[])]
@@ -343,7 +352,7 @@
   function requiresOfficialSource(subject=selectedSubjectId()){
     const existing=['istoria-e-dimotikou','physics-gymnasiou','fysiki-g-gymnasiou','chimeia-g-gymnasiou','mathimatika-a-gymnasiou','mathimatika-b-gymnasiou','mathimatika-g-gymnasiou','chimeia-b-gymnasiou','geologia-geografia-b-gymnasiou','logotechnia-b-gymnasiou','english-b-gymnasiou','istoria-a-gymnasiou','istoria-b-gymnasiou','istoria-g-gymnasiou','istoria-a-lykeiou','biologia-a-gymnasiou','biologia-b-gymnasiou','fysiki-b-gymnasiou','biologia-g-gymnasiou','archaia-glossa-a-gymnasiou','archaia-glossa-b-gymnasiou','archaia-glossa-g-gymnasiou','odysseia-a-gymnasiou','iliada-b-gymnasiou','thriskeftika-b-gymnasiou','glossa-a-gymnasiou','glossa-b-gymnasiou','glossa-gymnasiou'];
     const gel=["algebra-b-lykeiou","archaia-a-lykeiou","archaia-b-lykeiou","archaia-g-lykeiou","biologia-b-lykeiou","biologia-g-lykeiou","chimeia-a-lykeiou","chimeia-b-lykeiou","chimeia-g-lykeiou","ekthesi-a-lykeiou","ekthesi-b-lykeiou","english-a-lykeiou","english-b-lykeiou","filosofia-b-lykeiou","fysiki-a-lykeiou","fysiki-b-lykeiou","fysiki-g-lykeiou","geometria-a-lykeiou","geometria-b-lykeiou","istoria-b-lykeiou","istoria-g-lykeiou","istoria-g-prosanatolismou","latinika-b-lykeiou","latinika-g-lykeiou","mathimatika-a-lykeiou","mathimatika-b-prosanatolismou","mathimatika-g-genikis","mathimatika-g-prosanatolismou","oikonomia-g-lykeiou","pliroforiki-g-lykeiou","politiki-paideia-a-lykeiou","thriskeftika-a-lykeiou","thriskeftika-b-lykeiou","thriskeftika-g-lykeiou"];
-    return existing.includes(subject)||gel.includes(subject);
+    return existing.includes(subject)||gel.includes(subject)||!!specialSections()?.has?.(subject);
   }
   function sourcePolicyForSelection(hasAttachment=!!attached?.text){
     const api=window.AITOOLSKIDS_STUDY_CONTEXT;
@@ -413,7 +422,7 @@
       zoneId:$('zone').value||'',
       roleId:'student',
       lang,
-      schoolType:$('zone').value==='high'?($('schoolType').value||'gel'):'',
+      schoolType:$('zone').value==='high'?($('schoolType').value||'gel'):$('zone').value==='special'?'special-gymnasium':'',
       grade:$('grade').value||'',
       sector:isEpal()&&$('grade').value==='b'?($('epalSector').value||''):'',
       specialty:isEpal()&&$('grade').value==='c'?($('epalSpecialty').value||''):'',
@@ -570,7 +579,7 @@
     try{
       const officialSource=attached?.text?null:await officialSchoolbookSource();
       const res=await timedFetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-        context:system,prompt,audience:'study_user',task:'study_plan',mode:'organize',activity:'plan',
+        context:system+specialEducationGuidance(),prompt,audience:'study_user',task:'study_plan',mode:'organize',activity:'plan',
         cacheEligible:!attached?.text&&!!officialSource?.grounded,
         grade,subject,subjectId:selectedSubjectId(),topic,
         studyContext:sharedStudyContext('plan'),
@@ -692,7 +701,7 @@
     const cfg=actionConfig(action);
     const officialSource=attached?.text?null:await officialSchoolbookSource();
     const payload={
-      context:cfg.system,
+      context:cfg.system+specialEducationGuidance(),
       prompt:promptOverride||studyContextPrompt(lang==='en'?'Start this study activity now.':'Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης.'),
       audience:'study_user',task:cfg.task,mode:cfg.mode,activity:action,
       character:action==='character'?(lang==='en'?activeStudyCharacter?.nameEn:activeStudyCharacter?.nameEl):'',

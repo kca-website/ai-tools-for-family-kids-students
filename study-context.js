@@ -69,6 +69,8 @@
     // Gymnasium and Lyceum always fail closed when the official source is missing.
     if (value.hasCurriculumSelection && schoolLevel === "primary") return "official_if_available";
     if (value.hasCurriculumSelection && (schoolLevel === "middle" || schoolLevel === "high")) return "official_required";
+    // Ειδικό Γυμνάσιο (Ε.Α.Ε.) units are book sections too: same fail-closed policy.
+    if (value.hasCurriculumSelection && schoolLevel === "special") return "official_required";
     if (value.requiresOfficial) return "official_required";
     if (value.hasCurriculumSelection) return "official_if_available";
     return "general_unverified";

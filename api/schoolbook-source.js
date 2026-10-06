@@ -3,6 +3,7 @@ const { extractCompletePage, completeText, VERSION: COMPLETE_SOURCE_VERSION } = 
 const HISTORY_A_LYCEUM = require('../history-a-lyceum-sections-2026-2027.js');
 const PRIMARY_ENVIRONMENT = require('../primary-environment-sections-2026-2027.js');
 const GYMNASIUM_SECTIONS = require('../gymnasium-book-sections-2026-2027.js');
+const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
@@ -1769,8 +1770,22 @@ module.exports = async function handler(req, res) {
   const rawSubject = clean(req.query?.subject, 200);
   const topic = clean(req.query?.topic, 500);
   const completeAudio = req.query?.purpose === "audio";
-  const subject = ALIASES[rawSubject] || rawSubject;
+  let subject = ALIASES[rawSubject] || rawSubject;
   const schoolType = clean(req.query?.schoolType, 20).toLowerCase();
+  // Ειδικό Γυμνάσιο (Ε.Α.Ε.): a unit of the official special-education instructions is answered only
+  // from the general schoolbook page(s) verified for it; anything else fails closed.
+  let specialUnit = null;
+  if (SPECIAL_SECTIONS.has(subject)) {
+    specialUnit = topic ? SPECIAL_SECTIONS.get(subject, topic) : null;
+    if (!specialUnit) {
+      return res.status(404).json({
+        grounded: false,
+        error: "source_not_mapped",
+        message: "Η ενότητα δεν έχει ακριβή αντιστοίχιση σε σελίδα επίσημου σχολικού βιβλίου."
+      });
+    }
+    subject = specialUnit.book;
+  }
   // ΕΠΑΛ requests (explicit schoolType or an epal-* subject id) are answered only from the
   // dedicated EPAL catalog; they never fall through to the ΓΕΛ/Γυμνάσιο/Δημοτικό mappings.
   if (schoolType === "epal" || /^epal-[abc]-/.test(subject)) {
@@ -1898,14 +1913,14 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const reviewPath = subject === "mathimatika-b-gymnasiou" ? mathBReviewPath(topic) : "";
-  const characterChapter = CHARACTER_CHAPTERS.find(c=>c.subject.replace('history-','istoria-')===subject&&normalize(c.labelEl)===normalize(topic));
+  const reviewPath = !specialUnit && subject === "mathimatika-b-gymnasiou" ? mathBReviewPath(topic) : "";
+  const characterChapter = !specialUnit && CHARACTER_CHAPTERS.find(c=>c.subject.replace('history-','istoria-')===subject&&normalize(c.labelEl)===normalize(topic));
   const catalogBook = buildCatalogBook(subject);
   // Prefer an exact catalog allowlist for the selected topic over older diagnostic
   // modes. This lets broad Study chapter selections use their verified official
   // page set without weakening the diagnostic resolver for other topic labels.
-  const catalogHasExactTopic = !!(catalogBook?.sectionSources && resolveExplicitSectionUrls(catalogBook, topic).length);
-  const glossaAUnitBook = subject === "glossa-a-gymnasiou" && unitNumber(topic)
+  const catalogHasExactTopic = !specialUnit && !!(catalogBook?.sectionSources && resolveExplicitSectionUrls(catalogBook, topic).length);
+  const glossaAUnitBook = !specialUnit && subject === "glossa-a-gymnasiou" && unitNumber(topic)
     ? { ...BOOKS[subject], mode: "modernGreekA", multi: true, mappingStatus: "official-book-unit-grounded" }
     : null;
   const book =
@@ -1925,7 +1940,7 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  let directUrls = characterChapter ? [characterChapter.url] : resolveDirectSourceUrls(subject, topic);
+  let directUrls = specialUnit ? specialUnit.pages.map((page) => page.url) : characterChapter ? [characterChapter.url] : resolveDirectSourceUrls(subject, topic);
   if (!directUrls.length) {
     const primaryComplete = PRIMARY_COMPLETE_SOURCES?.get?.(subject, topic) || null;
     if (primaryComplete?.urls?.length && primaryComplete.urls.every(catalogHtmlSourceAllowed)) {
@@ -1969,6 +1984,18 @@ module.exports = async function handler(req, res) {
       sourceUrls = directUrls;
       const gelAnchorScoped = gelInventory?.runtimeEligible && gelInventory.mapping?.granularity === "section-anchor";
       let pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
+      if (specialUnit && pages.every(Boolean)) {
+        pages = pages.map((html, i) => SPECIAL_SECTIONS.scopePageHtml(html, specialUnit.pages[i]));
+        if (!pages.every(Boolean)) {
+          return res.status(404).json({
+            grounded: false,
+            error: "verified_section_heading_not_resolved",
+            bookTitle: book.title,
+            sourceUrls,
+            message: "Η επαληθευμένη υποενότητα του επίσημου βιβλίου δεν βρέθηκε πλέον στην αναμενόμενη σελίδα."
+          });
+        }
+      }
       // Table-mapped chapters: keep only the page body, not the book's navigation menu.
       if ((PRIMARY_ENVIRONMENT.get(subject, topic) || GYMNASIUM_SECTIONS.urlsFor(subject, topic).length) && pages.every(Boolean)) {
         pages = pages.map((html) => HISTORY_A_LYCEUM.scopePageHtml(html, { start: "", end: "" }) || html);
@@ -2102,7 +2129,7 @@ module.exports = async function handler(req, res) {
     const scoped = applyCurriculumTextScope(subject, topic, combinedText);
     const useful = subject === "english-b-gymnasiou"
       ? selectEnglishBUnitText(scoped.text, topic)
-      : (book.multi ? scoped.text : selectUsefulText(scoped.text, topic));
+      : (book.multi || specialUnit ? scoped.text : selectUsefulText(scoped.text, topic));
     const sourceUrl = sourceUrls[0] || book.base;
 
     if (useful.length < 500) {

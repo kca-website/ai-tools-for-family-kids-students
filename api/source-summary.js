@@ -127,7 +127,7 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
     kind: 'verified-source-summary', promptVersion: 'verified-summary-v6-safe', subjectId: sid,
     topic: selectedTopic, title, language: lang, explanation, audio, source: workingSource, modelRoute: routingSignature(aiStatus),
     // Plain-language Ε.Α.Ε. lessons get their own entries; general-school keys stay unchanged.
-    ...(simple ? { learner: 'special-education-v2' } : {}),
+    ...(simple ? { learner: 'special-education-v3' } : {}),
   };
   const cached = await getStudyCache(cacheKey);
   if (cached?.text) {

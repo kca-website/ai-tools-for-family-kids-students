@@ -108,7 +108,7 @@ assert.match(study, /if\(interactiveTotal&&\$\('zone'\)\.value==='special'\)inte
 assert.doesNotMatch(study, /\$\('standardStudyFields'\)\.classList\.toggle\('hidden',special\)/, "special no longer redirects away");
 const summary = fs.readFileSync(new URL("../api/source-summary.js", import.meta.url), "utf8");
 assert.match(summary, /const simple = SPECIAL_SECTIONS\.has\(sid\);/);
-assert.match(summary, /\.\.\.\(simple \? \{ learner: 'special-education-v2' \} : \{\}\)/);
+assert.match(summary, /\.\.\.\(simple \? \{ learner: 'special-education-v3' \} : \{\}\)/);
 
 // UAT fixes: Ε.Α.Ε. lessons use the normal official text, tolerant (still verbatim) evidence matching,
 // one retry instead of raw book fragments, and the grounded tutor as the explain fallback.

@@ -34,6 +34,70 @@
     });
   }
 
+  function ensureAllToolsAccess(){
+    const en=lang()==="en";
+    const label=en?"All tools":"Όλα τα εργαλεία";
+    const title=en?"Browse all AI tools":"Δες όλα τα AI εργαλεία";
+    const desc=en?"Open the complete catalogue with search and filters.":"Άνοιξε τον πλήρη κατάλογο με αναζήτηση και φίλτρα.";
+
+    const primary=document.querySelector('.site-nav a[href="/tools/"]');
+    if(primary){
+      primary.textContent=label;
+      primary.setAttribute("aria-label",label);
+    }
+
+    const panel=document.getElementById("siteMenuPanel");
+    if(panel){
+      const findGroup=[...panel.querySelectorAll(".site-menu-panel__group")].find((group)=>group.querySelector('a[href="/#open-tools"]'));
+      if(findGroup){
+        let link=document.getElementById("siteAllToolsLink");
+        if(!link){
+          link=document.createElement("a");
+          link.id="siteAllToolsLink";
+          link.href="/tools/";
+          const titleNode=findGroup.querySelector(".site-menu-panel__title");
+          if(titleNode) titleNode.insertAdjacentElement("afterend",link);
+          else findGroup.prepend(link);
+        }
+        link.textContent=label;
+        link.setAttribute("aria-label",label);
+      }
+    }
+
+    if(location.pathname==="/" || location.pathname===""){
+      const ways=document.querySelector("#homeV8HelpersMount .home-v9-ways, #homeV8Shell .home-v9-ways");
+      if(ways){
+        let shortcut=document.getElementById("homeAllToolsShortcut");
+        if(!shortcut){
+          shortcut=document.createElement("a");
+          shortcut.id="homeAllToolsShortcut";
+          shortcut.href="/tools/";
+          shortcut.className="home-all-tools-shortcut";
+          shortcut.innerHTML='<span class="home-all-tools-shortcut__icon" aria-hidden="true">🧰</span><span class="home-all-tools-shortcut__copy"><strong></strong><small></small></span><span class="home-all-tools-shortcut__arrow" aria-hidden="true">→</span>';
+          ways.insertAdjacentElement("beforebegin",shortcut);
+        }
+        shortcut.setAttribute("aria-label",title);
+        shortcut.querySelector("strong").textContent=title;
+        shortcut.querySelector("small").textContent=desc;
+      }
+    }
+  }
+
+  function ensureAllToolsStyles(){
+    if(document.getElementById("homeAllToolsShortcutStyles")) return;
+    const style=document.createElement("style");
+    style.id="homeAllToolsShortcutStyles";
+    style.textContent=`
+      .home-all-tools-shortcut{display:flex;align-items:center;gap:12px;margin:0 0 16px;padding:14px 16px;border:1px solid #cfdde8;border-radius:14px;background:#fff;color:#1f2937!important;text-decoration:none;box-shadow:0 2px 8px rgba(15,23,42,.03)}
+      .home-all-tools-shortcut:hover{border-color:#8fb4cf;background:#f8fbfd}.home-all-tools-shortcut:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+      .home-all-tools-shortcut__icon{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:#eef6fb;font-size:1.35rem}
+      .home-all-tools-shortcut__copy{display:flex;flex-direction:column;gap:2px;min-width:0}.home-all-tools-shortcut__copy strong{font-size:.98rem}.home-all-tools-shortcut__copy small{color:#64748b;line-height:1.35}
+      .home-all-tools-shortcut__arrow{margin-left:auto;font-size:1.2rem;font-weight:900;color:#1d5d8c}
+      @media(max-width:620px){.home-all-tools-shortcut{padding:12px 13px}.home-all-tools-shortcut__copy strong{font-size:.94rem}.home-all-tools-shortcut__copy small{font-size:.78rem}}
+    `;
+    document.head.appendChild(style);
+  }
+
   function ensureAiLiteracyMenuLink(){
     const panel = document.getElementById("siteMenuPanel");
     if(!panel) return;
@@ -114,11 +178,13 @@
     const panel = document.getElementById("siteMenuPanel");
     restoreBrandRobot();
     syncAriaLabels();
+    ensureAllToolsStyles();
+    ensureAllToolsAccess();
     ensureAiLiteracyMenuLink();
     ensureAiPathsPromo();
-    new MutationObserver(() => { syncAriaLabels(); ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    new MutationObserver(() => { syncAriaLabels(); ensureAllToolsAccess(); ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     if(location.pathname==="/" || location.pathname===""){
-      [0,100,350,900,1800].forEach(ms=>setTimeout(() => { ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); },ms));
+      [0,100,350,900,1800].forEach(ms=>setTimeout(() => { ensureAllToolsAccess(); ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); },ms));
     }
     if(!toggle || !panel) return;
 

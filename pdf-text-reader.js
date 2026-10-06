@@ -171,7 +171,7 @@
       };
     }
 
-    async function primaryReviewedAudio(subjectId,topic){
+    async function primaryReviewedAudio(subjectId,topic,signal){
       const en=isEn();
       const grade=document.getElementById("grade")?.selectedOptions?.[0]?.textContent?.trim()||"";
       const subject=document.getElementById("subject")?.selectedOptions?.[0]?.textContent?.trim()||subjectId;
@@ -181,6 +181,7 @@
       const res=await fetch("/api/tutor-assistant",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
+        signal,
         body:JSON.stringify({
           context:strict,
           prompt:(en?"Topic: ":"Θέμα: ")+topic,
@@ -220,7 +221,31 @@
       document.querySelector("main.grid")?.classList.add("study-result-open");
       const title=document.getElementById("workspaceTitle");
       if(title)title.textContent=en?"Listen to it":"Άκουσέ το";
-      output.innerHTML='<span class="ai-loading">'+(en?'AI is preparing this…':'Το AI το ετοιμάζει…')+'</span>';
+      // Say up front that it can take up to a minute, with a running timer and progress bar,
+      // so the learner knows it is working and does not leave.
+      output.innerHTML='<div class="ai-loading"><strong class="ai-loading__text"></strong>'+
+        '<div class="ai-loading__bar" aria-hidden="true"><span></span></div>'+
+        '<p class="ai-loading__note" role="status">'+(en
+          ?'This can take up to 1 minute. Please keep this page open — the audio lesson is being prepared.'
+          :'Μπορεί να χρειαστεί έως 1 λεπτό. Μην κλείσεις τη σελίδα — το ακουστικό μάθημα ετοιμάζεται.')+'</p></div>';
+      const startedAt=Date.now();
+      const renderLoading=()=>{
+        const box=output.querySelector(".ai-loading");
+        const label=box?.querySelector(".ai-loading__text");
+        if(!label)return false;
+        const sec=Math.round((Date.now()-startedAt)/1000);
+        label.textContent=(en?"Preparing your audio lesson from the official textbook… ":"Το AI ετοιμάζει το ακουστικό μάθημα από το επίσημο βιβλίο… ")+sec+"″";
+        const bar=box.querySelector(".ai-loading__bar span");
+        if(bar)bar.style.width=Math.min(95,Math.round(sec/60*100))+"%";
+        const note=box.querySelector(".ai-loading__note");
+        if(note&&sec>=60&&!note.dataset.late){note.dataset.late="1";note.textContent=en?"Almost ready — long sections need a little longer.":"Σχεδόν έτοιμο — οι μεγάλες ενότητες θέλουν λίγο ακόμη.";}
+        return true;
+      };
+      renderLoading();
+      const ticker=setInterval(()=>{if(!renderLoading())clearInterval(ticker)},1000);
+      // Hard deadline: never leave the learner on an endless "preparing".
+      const controller=new AbortController();
+      const deadline=setTimeout(()=>controller.abort(),110000);
       document.getElementById("answerBox")?.classList.add("hidden");
       document.getElementById("puterFallback")?.classList.add("hidden");
       document.getElementById("audioControls")?.classList.add("hidden");
@@ -234,12 +259,13 @@
         const res=await fetch("/api/source-summary",{
           method:"POST",
           headers:{"Content-Type":"application/json"},
+          signal:controller.signal,
           body:JSON.stringify({subjectId,topic,sourceTitle:"",language:en?"en":"el",activity:"audio"})
         });
         let body=await res.json().catch(()=>({}));
         let primaryFallback=false;
         if((!res.ok||!body?.text) && /-dimotikou$/i.test(subjectId)){
-          body=await primaryReviewedAudio(subjectId,topic);
+          body=await primaryReviewedAudio(subjectId,topic,controller.signal);
           primaryFallback=true;
         }else if(!res.ok||!body?.text){
           throw new Error(body?.message||(en?"Could not create the audio lesson.":"Δεν δημιουργήθηκε το ακουστικό μάθημα."));
@@ -255,8 +281,11 @@
         document.getElementById("altAi")?.classList.remove("hidden");
         setTimeout(enhanceNotebookCard,0);
       }catch(err){
-        output.textContent=err?.message||String(err);
+        output.textContent=err?.name==="AbortError"
+          ?(en?"This took too long. Please press «Listen to it» again.":"Η προετοιμασία άργησε πολύ. Πάτησε ξανά «Άκουσέ το» για νέα προσπάθεια.")
+          :(err?.message||String(err));
       }finally{
+        clearInterval(ticker);clearTimeout(deadline);
         if(button)button.disabled=false;
         workspace.scrollIntoView({behavior:"smooth",block:"nearest"});
       }

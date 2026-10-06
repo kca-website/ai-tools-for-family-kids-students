@@ -58,4 +58,14 @@ assert.doesNotMatch(html.replace(/return await fetch\(url,\{\.\.\.opts,signal:ct
 assert.match(html, /clearInterval\(ticker\)/);
 assert.match(html, /watchdog=setTimeout/, "speech playback must not hang when the browser drops onend");
 
+// The live «Άκουσέ το» click is handled by pdf-text-reader.js: it must say up front that it can
+// take up to a minute, show a running timer, and abort instead of hanging.
+const reader = fs.readFileSync(new URL("../pdf-text-reader.js", import.meta.url), "utf8");
+assert.match(reader, /Μπορεί να χρειαστεί έως 1 λεπτό/);
+assert.match(reader, /ai-loading__bar/);
+assert.match(reader, /signal:controller\.signal/);
+assert.match(reader, /setTimeout\(\(\)=>controller\.abort\(\),\d+\)/);
+assert.match(reader, /clearInterval\(ticker\);clearTimeout\(deadline\)/);
+assert.match(html, /Μπορεί να χρειαστεί έως 1 λεπτό/);
+
 console.log(`Audio lesson latency smoke passed: ${calls} calls, max ${maxInFlight} in flight, ${elapsed}ms; deadline + fallback + client timeouts present.`);

@@ -169,6 +169,7 @@ jobs:
           node tests/audio-lesson-latency-smoke.mjs
           node tests/history-a-lyceum-grounding-smoke.mjs
           node tests/phase26-thriskeftika-a-lykeiou-grounding-smoke.mjs
+          node tests/primary-environment-grounding-smoke.mjs
 
       - name: Run Phase 12 catalog schoolbook grounding
         run: node tests/phase12-catalog-schoolbook-grounding-smoke.mjs

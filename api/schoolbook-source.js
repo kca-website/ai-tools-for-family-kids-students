@@ -1,6 +1,7 @@
 const { transcribeOfficialFigures } = require('../schoolbook-figures');
 const { extractCompletePage, completeText, VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
 const HISTORY_A_LYCEUM = require('../history-a-lyceum-sections-2026-2027.js');
+const PRIMARY_ENVIRONMENT = require('../primary-environment-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
@@ -807,6 +808,11 @@ const BOOKS = {
 
 const HISTORY_E_CHAPTERS = require("../history-e-schoolbook-chapters.js");
 const ALIASES = {
+  // AI Study lists Μελέτη Περιβάλλοντος Α΄–Δ΄ as science-*; the official books are environment-*.
+  "science-a-dimotikou": "environment-a-dimotikou",
+  "science-b-dimotikou": "environment-b-dimotikou",
+  "science-c-dimotikou": "environment-c-dimotikou",
+  "science-d-dimotikou": "environment-d-dimotikou",
   "history-c-dimotikou": "istoria-c-dimotikou",
   "history-d-dimotikou": "istoria-d-dimotikou",
   "history-e-dimotikou": "istoria-e-dimotikou",
@@ -1941,6 +1947,10 @@ module.exports = async function handler(req, res) {
       sourceUrls = directUrls;
       const gelAnchorScoped = gelInventory?.runtimeEligible && gelInventory.mapping?.granularity === "section-anchor";
       let pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
+      // Μελέτη Περιβάλλοντος chapters: keep only the page body, not the book's navigation menu.
+      if (PRIMARY_ENVIRONMENT.get(subject, topic) && pages.every(Boolean)) {
+        pages = pages.map((html) => HISTORY_A_LYCEUM.scopePageHtml(html, { start: "", end: "" }) || html);
+      }
       const historyALyceum = subject === "istoria-a-lykeiou" ? HISTORY_A_LYCEUM.get(topic) : null;
       if (historyALyceum && pages.every(Boolean)) {
         // Keep only the selected topic's subsection; fail closed if a heading moved.
@@ -2246,6 +2256,12 @@ function selectHistoryEChapterText(html, topic) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  // Μελέτη Περιβάλλοντος Α΄–Δ΄: every book chapter shown in AI Study → its own official page.
+  if (/^environment-[abcd]-dimotikou$/.test(subject)) {
+    const unit = PRIMARY_ENVIRONMENT.get(subject, topic);
+    if (unit) return [unit.url];
+  }
 
   if (subject === "environment-a-dimotikou") {
     const base = BOOKS[subject].base;

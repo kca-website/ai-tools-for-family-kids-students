@@ -6,13 +6,17 @@
  * duplicating entries that already exist in data.js. This file is loaded
  * after data.js on every school path.
  */
+if(typeof CATEGORIES!=="undefined"&&!CATEGORIES.some(function(c){return c.id==="executive-function";})){
+  CATEGORIES.push({id:"executive-function",labelEl:"Οργάνωση & εκτελεστικές λειτουργίες",labelEn:"Organization & executive functions"});
+}
+
 if(typeof TOOLS!=="undefined"){
   const additions={
     "goblin-tools":{
       id:"goblin-tools",
       name:"Goblin Tools",
       url:"https://goblin.tools/",
-      category:"organization",
+      category:"executive-function",
       logo:null,
       shortDescEl:"Μικρά AI εργαλεία για οργάνωση, διάσπαση σύνθετων εργασιών σε βήματα, διατύπωση κειμένου και διαχείριση καθημερινών δυσκολιών. Ιδιαίτερα χρήσιμο για εκτελεστικές λειτουργίες.",
       shortDescEn:"Small AI tools for organization, breaking complex tasks into steps, rewriting text and handling everyday tasks. Especially useful for executive-function support.",
@@ -41,10 +45,12 @@ if(typeof TOOLS!=="undefined"){
       shortDescEn:"AI toolkit for educators: lesson plans, worksheets, organizers, activities, rubrics, assessments, differentiation and translation of teaching materials.",
       minAgeNote:"Εργαλείο για εκπαιδευτικούς. Η επίσημη τεκμηρίωση αναφέρει μετάφραση υλικού σε 26+ γλώσσες, συμπεριλαμβανομένων των Ελληνικών.",
       schoolOnly:true,
-      isGreek:true
+      isGreek:false
     }
   };
   Object.keys(additions).forEach(function(id){if(!TOOLS[id]) TOOLS[id]=additions[id];});
+  if(TOOLS["goblin-tools"]) TOOLS["goblin-tools"].category="executive-function";
+  if(TOOLS["eduaide"]) TOOLS["eduaide"].isGreek=false;
 }
 
 function addPathTool(zone,role,item){
@@ -171,5 +177,137 @@ const ids=Array.from(new Set(baseIds.concat(Object.keys(O))));
 const I={};
 ids.forEach(id=>{const v=O[id];I[id]=Object.freeze(v?{status:v[0],noteEl:v[1],noteEn:v[1]}:{status:"unknown",noteEl:"Δεν έχει επιβεβαιωθεί επαρκώς η υποστήριξη ελληνικών για το συγκεκριμένο εργαλείο.",noteEn:"Greek-language support has not yet been sufficiently verified for this tool."});});
 window.GREEK_SUPPORT_INFO=Object.freeze(I);
-window.AITOOLSKIDS_GREEK_SUPPORT_META=Object.freeze({version:2,reviewed:"2026-10-06",canonicalCount:ids.length});
+window.AITOOLSKIDS_GREEK_SUPPORT_META=Object.freeze({version:3,reviewed:"2026-10-06",canonicalCount:ids.length});
+
+/* Catalogue UX: teacher/executive-function quick filters + Greek filter in High School. */
+const quickState={teacher:false,executive:false};
+const teacherIds=new Set(["magicschool","brisk","diffit","snorkl","questionwell","eduaide"]);
+let applying=false;
+
+function currentZone(){
+  const m=(location.pathname||"").match(/^\/(primary|middle|high)(?:\/|$)/);
+  return m?m[1]:null;
+}
+function currentRole(){
+  const m=(location.pathname||"").match(/^\/(?:primary|middle|high)\/(guardian|student)(?:\/|$)/);
+  return m?m[1]:null;
+}
+function cardToolId(card){
+  const link=card.querySelector('a.tool-card__link[href*="/tools/"]');
+  if(!link) return null;
+  const m=(link.getAttribute("href")||"").match(/\/tools\/([^/]+)\.html/);
+  return m?m[1]:null;
+}
+function isTeacherTool(id){
+  return !!(id&&(teacherIds.has(id)||(typeof TOOLS!=="undefined"&&TOOLS[id]&&TOOLS[id].schoolOnly===true)));
+}
+function isExecutiveTool(id){
+  return !!(id&&(id==="goblin-tools"||(typeof TOOLS!=="undefined"&&TOOLS[id]&&TOOLS[id].category==="executive-function")));
+}
+function greekChecked(){
+  const el=document.getElementById("greekFilterToggle");
+  return !!(el&&el.checked);
+}
+function greekCheckedAdvanced(){
+  const el=document.getElementById("greekFilterToggleAdvanced");
+  return !!(el&&el.checked);
+}
+function verifiedGreek(id){
+  return !!(id&&window.GREEK_SUPPORT_INFO&&window.GREEK_SUPPORT_INFO[id]&&window.GREEK_SUPPORT_INFO[id].status==="yes");
+}
+function lang(){
+  try{return localStorage.getItem("aitools4kids_lang")==="en"?"en":"el";}catch(_){return"el";}
+}
+function ensureQuickFilters(){
+  const grid=document.getElementById("toolGrid");
+  if(!grid) return;
+  let wrap=document.getElementById("catalogueQuickFilters");
+  if(!wrap){
+    wrap=document.createElement("div");
+    wrap.id="catalogueQuickFilters";
+    wrap.style.cssText="display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px;align-items:center;";
+    wrap.innerHTML='<button type="button" data-qf="teacher" aria-pressed="false" style="border:1px solid #cbd5e1;border-radius:999px;background:#fff;padding:7px 11px;font:inherit;cursor:pointer;"></button><button type="button" data-qf="executive" aria-pressed="false" style="border:1px solid #cbd5e1;border-radius:999px;background:#fff;padding:7px 11px;font:inherit;cursor:pointer;"></button>';
+    grid.parentNode.insertBefore(wrap,grid);
+    wrap.addEventListener("click",function(e){
+      const btn=e.target.closest("button[data-qf]");
+      if(!btn) return;
+      const key=btn.getAttribute("data-qf");
+      if(key==="teacher") quickState.teacher=!quickState.teacher;
+      if(key==="executive") quickState.executive=!quickState.executive;
+      applyCatalogueFilters();
+    });
+  }
+  const isEn=lang()==="en";
+  const teacher=wrap.querySelector('[data-qf="teacher"]');
+  const executive=wrap.querySelector('[data-qf="executive"]');
+  teacher.textContent=isEn?"For educators":"Για εκπαιδευτικούς";
+  executive.textContent=isEn?"Organization & executive functions":"Οργάνωση & εκτελεστικές λειτουργίες";
+  teacher.hidden=currentRole()!=="guardian";
+  teacher.setAttribute("aria-pressed",String(quickState.teacher));
+  executive.setAttribute("aria-pressed",String(quickState.executive));
+  [teacher,executive].forEach(function(btn){
+    const active=btn.getAttribute("aria-pressed")==="true";
+    btn.style.background=active?"#e0f2fe":"#fff";
+    btn.style.borderColor=active?"#0284c7":"#cbd5e1";
+    btn.style.fontWeight=active?"700":"400";
+  });
+}
+function applyCatalogueFilters(){
+  if(applying) return;
+  applying=true;
+  try{
+    const zone=currentZone();
+    const mainWrap=document.getElementById("greekFilterWrap");
+    const advWrap=document.getElementById("greekFilterWrapAdvanced");
+    if(zone==="high"){
+      if(mainWrap&&mainWrap.hidden) mainWrap.hidden=false;
+      if(advWrap&&advWrap.hidden) advWrap.hidden=false;
+    }
+    ensureQuickFilters();
+    const cards=Array.from(document.querySelectorAll("#toolsView .tool-card"));
+    let visible=0;
+    cards.forEach(function(card){
+      const id=cardToolId(card);
+      const okTeacher=!quickState.teacher||isTeacherTool(id);
+      const okExecutive=!quickState.executive||isExecutiveTool(id);
+      const okGreek=!(zone==="high"&&greekChecked())||verifiedGreek(id);
+      const show=okTeacher&&okExecutive&&okGreek;
+      if(card.hidden===show) card.hidden=!show;
+      if(show) visible++;
+    });
+    let empty=document.getElementById("catalogueQuickFilterEmpty");
+    if((quickState.teacher||quickState.executive||(zone==="high"&&greekChecked()))&&cards.length&&visible===0){
+      if(!empty){
+        empty=document.createElement("div");
+        empty.id="catalogueQuickFilterEmpty";
+        empty.className="empty-state";
+        const grid=document.getElementById("toolGrid");
+        if(grid) grid.insertAdjacentElement("afterend",empty);
+      }
+      empty.textContent=lang()==="en"?"No tools match these filters.":"Δεν υπάρχουν εργαλεία που να ταιριάζουν σε αυτά τα φίλτρα.";
+    }else if(empty){empty.remove();}
+
+    if(zone==="high"&&greekCheckedAdvanced()){
+      document.querySelectorAll("#advancedView .tool-card").forEach(function(card){
+        card.hidden=!verifiedGreek(cardToolId(card));
+      });
+    }
+  }finally{applying=false;}
+}
+function bootCatalogueUx(){
+  const main=document.getElementById("pathView")||document.body;
+  ["greekFilterToggle","greekFilterToggleAdvanced"].forEach(function(id){
+    const el=document.getElementById(id);
+    if(el) el.addEventListener("change",function(){setTimeout(applyCatalogueFilters,0);});
+  });
+  const observer=new MutationObserver(function(){
+    if(applying) return;
+    requestAnimationFrame(applyCatalogueFilters);
+  });
+  observer.observe(main,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden","class"]});
+  window.addEventListener("popstate",function(){setTimeout(applyCatalogueFilters,0);});
+  setTimeout(applyCatalogueFilters,0);
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",bootCatalogueUx,{once:true});
+else bootCatalogueUx();
 })();

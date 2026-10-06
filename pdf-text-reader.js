@@ -84,11 +84,11 @@
     function notebookCopy(en){
       return {
         description: en
-          ? "For deeper study, upload the schoolbook PDF. NotebookLM can find the key points, create source-grounded summaries and generate an Audio Overview."
-          : "Για ακόμη καλύτερη μελέτη, ανέβασε το PDF του σχολικού βιβλίου. Το NotebookLM μπορεί να εντοπίσει τα βασικά σημεία, να δημιουργήσει σύνοψη και Audio Overview βασισμένα στις πηγές σου.",
+          ? "For deeper study, upload the schoolbook PDF. Gemini Notebook (formerly NotebookLM) can find the key points, create source-grounded summaries and generate an Audio Overview."
+          : "Για ακόμη καλύτερη μελέτη, ανέβασε το PDF του σχολικού βιβλίου. Το Gemini Notebook (πρώην NotebookLM) μπορεί να εντοπίσει τα βασικά σημεία, να δημιουργήσει σύνοψη και Audio Overview βασισμένα στις πηγές σου.",
         details: en
-          ? '<summary>How do I use it?</summary><ol><li>Open NotebookLM and create a new notebook.</li><li>Upload the PDF of the correct schoolbook or only the pages of the unit you are studying.</li><li>Ask it to summarize the most important points of that unit.</li><li>From Studio, you can also create an Audio Overview.</li></ol><p class="notebooklm-tip"><strong>Tip:</strong> Using only the relevant unit/pages usually gives a more focused result and avoids mixing unrelated material.</p>'
-          : '<summary>Πώς το χρησιμοποιώ;</summary><ol><li>Άνοιξε το NotebookLM και δημιούργησε νέο notebook.</li><li>Ανέβασε το PDF του σωστού σχολικού βιβλίου ή μόνο τις σελίδες της ενότητας που μελετάς.</li><li>Ζήτησε να συνοψίσει τα σημαντικότερα σημεία της συγκεκριμένης ενότητας.</li><li>Από το Studio μπορείς να δημιουργήσεις και Audio Overview.</li></ol><p class="notebooklm-tip"><strong>Συμβουλή:</strong> Αν χρησιμοποιήσεις μόνο τη σχετική ενότητα/σελίδες, το αποτέλεσμα συνήθως είναι πιο συγκεκριμένο και δεν μπλέκει άσχετο υλικό.</p>'
+          ? '<summary>How do I use it?</summary><ol><li>Open Gemini Notebook (formerly NotebookLM) and create a new notebook.</li><li>Upload the PDF of the correct schoolbook or only the pages of the unit you are studying.</li><li>Ask it to summarize the most important points of that unit.</li><li>From Studio, you can also create an Audio Overview.</li></ol><p class="notebooklm-tip"><strong>Tip:</strong> Using only the relevant unit/pages usually gives a more focused result and avoids mixing unrelated material.</p>'
+          : '<summary>Πώς το χρησιμοποιώ;</summary><ol><li>Άνοιξε το Gemini Notebook (πρώην NotebookLM) και δημιούργησε νέο notebook.</li><li>Ανέβασε το PDF του σωστού σχολικού βιβλίου ή μόνο τις σελίδες της ενότητας που μελετάς.</li><li>Ζήτησε να συνοψίσει τα σημαντικότερα σημεία της συγκεκριμένης ενότητας.</li><li>Από το Studio μπορείς να δημιουργήσεις και Audio Overview.</li></ol><p class="notebooklm-tip"><strong>Συμβουλή:</strong> Αν χρησιμοποιήσεις μόνο τη σχετική ενότητα/σελίδες, το αποτέλεσμα συνήθως είναι πιο συγκεκριμένο και δεν μπλέκει άσχετο υλικό.</p>'
       };
     }
 
@@ -103,7 +103,7 @@
         const lang=en?"en":"el";
         const copy=notebookCopy(en);
 
-        grid.querySelectorAll('a.alt-ai-card[href="https://notebooklm.google/"]').forEach((card)=>{
+        grid.querySelectorAll('a.alt-ai-card[data-tool="notebooklm"], a.alt-ai-card[href="https://notebooklm.google/"]').forEach((card)=>{
           if(card.closest('.notebooklm-enhanced')) return;
           ensureNotebookStyles();
           const wrap=document.createElement("div");
@@ -282,6 +282,7 @@
         document.getElementById("audioControls")?.classList.remove("hidden");
         document.getElementById("resultTools")?.classList.remove("hidden");
         document.getElementById("altAi")?.classList.remove("hidden");
+        try{window.AITOOLSKIDS_RENDER_ALT_AI?.("audio")}catch(_){}
         setTimeout(enhanceNotebookCard,0);
       }catch(err){
         output.textContent=err?.name==="AbortError"

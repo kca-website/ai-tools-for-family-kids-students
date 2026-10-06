@@ -73,5 +73,7 @@ assert.equal(unmapped.body.error, "source_not_mapped");
 const study = fs.readFileSync(new URL("../study.html", import.meta.url), "utf8");
 assert.match(study, /\['ea','Α΄ Λυκείου ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\.'\].*\['ed','Δ΄ Λυκείου ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\.'\]\]/);
 assert.match(study, /\[0\]==='e'\?'eneegyl':'special-gymnasium'/);
+// Chapter-level Ε.Α.Ε. units («Κεφάλαιο N — …») are verified units, not unmapped chapter placeholders.
+assert.match(study, /\/\^Κεφάλαιο\\s\+\\d\+\\s\+—\/i\.test\(topic\) && !specialSections\(\)\?\.get\?\.\(subject,topic\)/);
 
 console.log(`ΕΝ.Ε.Ε.ΓΥ.-Λ. study grounding smoke passed: ${total} units (Τομέας Διοίκησης και Οικονομίας).`);

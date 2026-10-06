@@ -155,9 +155,13 @@
   }
 
   function addNotebookAlternative(){
-    const grid=document.getElementById('altAiGrid');if(!grid||grid.querySelector('a[href="https://notebooklm.google/"]'))return;
-    const a=document.createElement('a');a.className='alt-ai-card';a.href='https://notebooklm.google/';a.target='_blank';a.rel='noopener noreferrer';
-    a.innerHTML='<strong>NotebookLM</strong><span>'+(isEn()?'Free Standard tier with limits; Studio includes source-grounded study formats.':'Δωρεάν Standard έκδοση με όρια· το Studio περιλαμβάνει μορφές μελέτης πάνω σε πηγές.')+'</span>';
+    const grid=document.getElementById('altAiGrid');if(!grid||grid.querySelector('a[href="https://notebooklm.google/"],[data-tool="notebooklm"]'))return;
+    // Same age rule as the other suggestions: Gemini Notebook (NotebookLM) only where its terms allow the student's age.
+    const P=window.AITOOLSKIDS_STUDY_TOOL_PICKS,zone=document.getElementById('zone')?.value,grade=document.getElementById('grade')?.value;
+    if(P&&!P.allowed('notebooklm',P.ageFor(zone,grade)))return;
+    const nb=P?.tools?.notebooklm;
+    const a=document.createElement('a');a.className='alt-ai-card';a.dataset.tool='notebooklm';a.href=nb?.url||'https://notebooklm.google/';a.target='_blank';a.rel='noopener noreferrer';
+    a.innerHTML='<strong>'+(nb?.name||'NotebookLM')+'</strong><span>'+(isEn()?'Free Standard tier with limits; Studio includes source-grounded study formats.':'Δωρεάν Standard έκδοση με όρια· το Studio περιλαμβάνει μορφές μελέτης πάνω σε πηγές.')+'</span>';
     grid.appendChild(a);
   }
 

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
 
-// ΕΝ.Ε.Ε.ΓΥ.-Λ. in AI Study (phase 1: Τομέας Διοίκησης και Οικονομίας). Every unit is a section or chapter of the
+// ΕΝ.Ε.Ε.ΓΥ.-Λ. in AI Study (Τομέας Διοίκησης και Οικονομίας; Τομέας Υγείας-Πρόνοιας-Ευεξίας Β΄–Γ΄). Every unit is a section or chapter of the
 // official book that the 2026–27 ΕΝ.Ε.Ε.ΓΥ.-Λ. circular names for that course, with a verified PDF page range.
 const require = createRequire(import.meta.url);
 globalThis.window = globalThis;
@@ -15,9 +15,14 @@ const P = "eneegyl-official-";
 const ADM = "υπαλληλος-διοικησης-και-οικονομικων-υπηρεσιων-", TOUR = "υπαλληλος-τουριστικων-επιχειρησεων-", COM = "υπαλληλος-εμποριας-και-διαφημισης-", WH = "υπαλληλος-αποθηκης-και-συστηματων-εφοδιασμου-";
 const expected = {
   ea: { "a-αρχες-οικονομιας": 19 },
-  eb: { "b-αρχες-λογιστικης": 37, "b-εισαγωγη-στο-μαρκετινγκ": 36, "b-θεωρια-τουρισμου-και-εφαρμογες": 23, "b-εισαγωγη-στην-εφοδιαστικη-logistics": 14 },
+  eb: { "b-αρχες-λογιστικης": 37, "b-εισαγωγη-στο-μαρκετινγκ": 36, "b-θεωρια-τουρισμου-και-εφαρμογες": 23, "b-εισαγωγη-στην-εφοδιαστικη-logistics": 14,
+    "b-ανατομια-φυσιολογια-i": 5, "b-υγεια-και-διατροφη": 21, "b-μικροβιολογια-ι": 36, "b-φαρμακευτικη-τεχνολογια-ι": 12, "b-ακτινοτεχνολογια-ι": 21, "b-συγχρονη-αισθητικη-ι": 42,
+    "b-εισαγωγη-στη-φυσικοθεραπεια-ι": 48, "b-δημιουργικη-απασχοληση-στην-προσχολικη-ηλικια-i": 21, "b-οδοντοτεχνια-ι": 17, "b-νοσηλευτικη-ι": 21, "b-βασικες-εφαρμογες-κομμωτικης-ι": 13 },
   ec: { "c-στοιχεια-δικαιου-αστικο-εργατικο": 9, "c-χρηματοπιστωτικες-συναλλαγες-λογιστικα-φυλλα-excel": 67, "c-οικονομικα-μαθηματικα-στατιστικη": 32,
-    "c-αρχες-οικονομικης-θεωριας": 2, "c-αρχες-οργανωσης-και-διοικησης": 10 },
+    "c-αρχες-οικονομικης-θεωριας": 2, "c-αρχες-οργανωσης-και-διοικησης": 10,
+    "c-ανατομια-φυσιολογια-ιι": 19, "c-πρωτες-βοηθειες": 12, "c-μικροβιολογια-ι": 36, "c-υγιεινη": 7, "c-φαρμακευτικη-τεχνολογια-ι": 12, "c-ακτινοτεχνολογια-ι": 21,
+    "c-συγχρονη-αισθητικη-ι": 42, "c-εισαγωγη-στη-φυσικοθεραπεια-ι": 48, "c-δημιουργικη-απασχοληση-στην-προσχολικη-ηλικια-i": 21, "c-οδοντοτεχνια-ι": 17,
+    "c-διαπροσωπικες-σχεσεις": 46, "c-εργασιακο-περιβαλλον-τομεα": 15, "c-νοσηλευτικη-ι": 21, "c-βασικες-εφαρμογες-κομμωτικης-ι": 13 },
   ed: {
     [`d-${ADM}συγχρονο-περιβαλλον-γραφειου`]: 96, [`d-${ADM}φορολογικη-πρακτικη`]: 34, [`d-${ADM}λογιστικες-εφαρμογες`]: 16, [`d-${ADM}επικοινωνια-και-δημοσιες-σχεσεις`]: 26,
     [`d-${TOUR}οργανωση-και-λειτουργια-τουριστικων-επιχειρησ`]: 20, [`d-${TOUR}οργανωση-και-λειτουργια-ξενοδοχειακων-επιχειρ`]: 43, [`d-${TOUR}γεωγραφια-τουρισμου`]: 54, [`d-${TOUR}εφαρμογες-στον-τουρισμο`]: 11,
@@ -48,15 +53,19 @@ for (const [grade, subjects] of Object.entries(expected)) {
     total += count;
   }
 }
-assert.equal(total, 804);
+assert.equal(total, 1391);
 
 // Units follow the circular, not the whole book: excluded sections are not offered.
 const econ = M.labels(P + "a-αρχες-οικονομιας");
 assert.ok(econ.includes("Κεφ. 1 · 1. Οι ανάγκες") && !econ.some((l) => /^Κεφ\. 1 · 4\./.test(l)), "Αρχές Οικονομίας: ch.1 §4 is not in the circular");
 assert.ok(!M.labels(P + "c-οικονομικα-μαθηματικα-στατιστικη").some((l) => /^4\.9 /.test(l)), "Οικονομικά Μαθηματικά §4.9 is excluded");
 assert.ok(M.labels(P + "b-εισαγωγη-στο-μαρκετινγκ").includes("11.4 Βασικές λειτουργίες του γραφείου Μάρκετινγκ"));
-// Same course in several specialties → same units.
+// Same course in several specialties / grades → same units.
 assert.deepEqual(M.labels(`${P}d-${ADM}λογιστικες-εφαρμογες`), M.labels(`${P}d-${WH}λογιστικες-εφαρμογες`));
+assert.deepEqual(M.labels(P + "b-μικροβιολογια-ι"), M.labels(P + "c-μικροβιολογια-ι"));
+// A course taught from two books keeps both, limited to the circular's sections (Αισθητική Αγωγή: Θέατρο 1.5, 2.1–2.3).
+const creative = M.labels(P + "b-δημιουργικη-απασχοληση-στην-προσχολικη-ηλικια-i").filter((l) => l.startsWith("Αισθητική Αγωγή — Θέατρο"));
+assert.deepEqual(creative.map((l) => l.split(" · ")[1].split(" ")[0]), ["1.5", "2.1", "2.2", "2.3"]);
 
 // API: an ΕΝ.Ε.Ε.ΓΥ.-Λ. unit never falls back to an unmapped topic.
 const call = async (query) => {
@@ -76,4 +85,4 @@ assert.match(study, /\[0\]==='e'\?'eneegyl':'special-gymnasium'/);
 // Chapter-level Ε.Α.Ε. units («Κεφάλαιο N — …») are verified units, not unmapped chapter placeholders.
 assert.match(study, /\/\^Κεφάλαιο\\s\+\\d\+\\s\+—\/i\.test\(topic\) && !specialSections\(\)\?\.get\?\.\(subject,topic\)/);
 
-console.log(`ΕΝ.Ε.Ε.ΓΥ.-Λ. study grounding smoke passed: ${total} units (Τομέας Διοίκησης και Οικονομίας).`);
+console.log(`ΕΝ.Ε.Ε.ΓΥ.-Λ. study grounding smoke passed: ${total} units (Διοίκησης και Οικονομίας; Υγείας-Πρόνοιας-Ευεξίας Β΄–Γ΄).`);

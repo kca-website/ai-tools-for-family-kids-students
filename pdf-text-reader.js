@@ -267,6 +267,9 @@
         if((!res.ok||!body?.text) && /-dimotikou$/i.test(subjectId)){
           body=await primaryReviewedAudio(subjectId,topic,controller.signal);
           primaryFallback=true;
+        }else if(res.status===422&&body?.error==="insufficient_verified_evidence"&&window.AITOOLSKIDS_SPECIAL_AUDIO_FALLBACK){
+          // Ε.Α.Ε.: no simple lesson could be verified; use the grounded study tutor instead of failing.
+          body={text:await window.AITOOLSKIDS_SPECIAL_AUDIO_FALLBACK(),verified:false};
         }else if(!res.ok||!body?.text){
           throw new Error(body?.message||(en?"Could not create the audio lesson.":"Δεν δημιουργήθηκε το ακουστικό μάθημα."));
         }

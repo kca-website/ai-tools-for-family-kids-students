@@ -697,6 +697,8 @@
     ].filter(Boolean).join('\n');
   }
 
+  // Ε.Α.Ε.: grounded tutor fallback for the audio lesson when no simple lesson could be verified (pdf-text-reader.js).
+  window.AITOOLSKIDS_SPECIAL_AUDIO_FALLBACK=()=>$('zone').value==='special'?callStudyServer('audio'):Promise.reject(new Error('not_special'));
   async function callStudyServer(action,promptOverride=''){
     const cfg=actionConfig(action);
     const officialSource=attached?.text?null:await officialSchoolbookSource();

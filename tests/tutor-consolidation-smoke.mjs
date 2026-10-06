@@ -52,7 +52,20 @@ async function renderContext(page, context, lang = 'el') {
   await page.waitForTimeout(120);
 }
 
+// The tutor's mobile helpers apply classes a moment after render; compare only a settled layout
+// (two identical consecutive readings), never a mid-layout frame.
 async function snapshot(page) {
+  let previous = await rawSnapshot(page);
+  for (let i = 0; i < 20; i++) {
+    await page.waitForTimeout(100);
+    const next = await rawSnapshot(page);
+    if (JSON.stringify(next) === JSON.stringify(previous)) return next;
+    previous = next;
+  }
+  return previous;
+}
+
+async function rawSnapshot(page) {
   return page.evaluate(() => {
     const chat = document.querySelector('#tutorMount .tutor-chat');
     const flash = chat?.querySelector('.tutor-flashcards');

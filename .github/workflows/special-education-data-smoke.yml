@@ -89,6 +89,8 @@ jobs:
         run: node tests/special-education-coverage-boundary-smoke.mjs
       - name: Run Special Education homepage diagnostic smoke
         run: node tests/special-education-diagnostic-smoke.mjs
+      - name: Run Special Education quick-test book routes smoke
+        run: node tests/special-education-diagnostic-book-routes-smoke.mjs
       - name: Run Special Education AI Tutor desktop/mobile smoke
         run: node tests/special-education-tutor-smoke.mjs
       - name: Run Special Education AI Tutor action-menu smoke

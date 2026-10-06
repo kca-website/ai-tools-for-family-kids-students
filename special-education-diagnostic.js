@@ -3,7 +3,9 @@
 
   const ENTRY_ID="specialEducationDiagnosticEntry";
   const MODAL_ID="specialDiagnosticModal";
+  // quiz-data.js holds the reviewed general-education banks that the labelled support tests reuse.
   const DATA_SOURCES=[
+    "/quiz-data.js",
     "/special-education-curriculum-data.js",
     "/special-education-learning-data.js",
     "/special-education-quiz-data.js",
@@ -49,9 +51,10 @@
     if(dataPromise) return dataPromise;
     const load=(src)=>new Promise((resolve,reject)=>{
       const ready=()=>
+        (src==="/quiz-data.js"&&typeof QUIZZES!=="undefined") ||
         (src.includes("curriculum-data")&&!!window.SPECIAL_EDUCATION_CURRICULUM) ||
         (src.includes("learning-data")&&!!window.SPECIAL_EDUCATION_LEARNING) ||
-        (src.includes("quiz-data")&&!!window.SPECIAL_EDUCATION_QUIZZES) ||
+        (src.includes("special-education-quiz-data")&&!!window.SPECIAL_EDUCATION_QUIZZES) ||
         (src.includes("special-education-status")&&!!window.SPECIAL_EDUCATION_STATUS) ||
         (src.includes("special-gymnasium-data")&&!!window.SPECIAL_GYMNASIUM_2026_2027) ||
         (src.includes("assessment-policy")&&!!window.SPECIAL_EDUCATION_ASSESSMENT_POLICY) ||
@@ -180,10 +183,15 @@
   }
   function resetSubject(){const sel=modal().querySelector("#spdiagSubject");sel.disabled=true;sel.innerHTML=`<option>${t("Διάλεξε τάξη","Choose grade")}</option>`;}
   function currentSubjects(){const g=grade();if(!g)return[];const common=[...(g.subjects||[])];const selected=g.groups?.find((x)=>x.id===state.groupId);return common.concat(selected?.subjects||[]);}
+  // Common subjects of a grade are keyed without the orientation group / sector; only group subjects carry it.
+  function groupFor(subject){const g=grade();return (g?.subjects||[]).some((x)=>x.id===subject?.id)?"":state.groupId;}
   function populateSubjects(){
     const sel=modal().querySelector("#spdiagSubject"),subjects=currentSubjects();sel.innerHTML="";sel.disabled=!subjects.length;
     const first=document.createElement("option");first.value="";first.textContent=t("Διάλεξε μάθημα","Choose subject");sel.appendChild(first);
-    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;const quiz=data().quizForSelection(state.schoolId,state.gradeId,state.groupId,s);const support=/support-mapping$/.test(quiz?.scope||"");o.textContent=quiz?(support?`${s.label} · ${t("τεστ υποστήριξης","support test")}`:s.label):`${s.label} · ${t("χωρίς επαληθευμένο τεστ ακόμη","verified test not yet available")}`;o.dataset.quizReady=quiz?"1":"0";o.dataset.quizScope=support?"support":quiz?"verified":"unavailable";sel.appendChild(o);});
+    // Ready tests first, then book-based tests, then subjects without a test, each under its own heading.
+    const groups={ready:[],book:[],none:[]};
+    subjects.forEach((s)=>{const o=document.createElement("option");o.value=s.id;const quiz=data().quizForSelection(state.schoolId,state.gradeId,groupFor(s),s);const support=/support-mapping$/.test(quiz?.scope||"");const book=!quiz&&data().bookRouteForSelection?.(state.schoolId,state.gradeId,groupFor(s),s);o.textContent=quiz&&support?`${s.label} · ${t("τεστ υποστήριξης","support test")}`:s.label;o.dataset.quizReady=quiz?"1":"0";o.dataset.quizScope=support?"support":quiz?"verified":book?"book":"unavailable";groups[quiz?"ready":book?"book":"none"].push(o);});
+    [["ready",t("Έτοιμο τεστ","Ready test")],["book",t("Τεστ από το σχολικό βιβλίο (AI Μελέτη)","Test from the school book (AI Study)")],["none",t("Χωρίς τεστ ακόμη","No test yet")]].forEach(([key,label])=>{if(!groups[key].length)return;const g=document.createElement("optgroup");g.label=label;groups[key].forEach((o)=>g.appendChild(o));sel.appendChild(g);});
     state.subjectId="";sel.value="";updateStart();updateScope();
   }
   function updateScope(){
@@ -195,15 +203,21 @@
         :ready.scope==="verified-general-support-mapping"
         ?t("Υπάρχει σύντομο τεστ υποστήριξης από επαληθευμένο τεστ του ίδιου μαθήματος και της αντίστοιχης τάξης γενικής εκπαίδευσης. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικής Εκπαίδευσης.","A short support test is available from a verified general-education test for the same subject and corresponding grade. It is not presented as the full or identical Special Education syllabus.")
         :t("Υπάρχει περιορισμένο, επαληθευμένο τεστ 3 ερωτήσεων για τη συγκεκριμένη ενότητα. Δεν αποτελεί πλήρη έλεγχο της ύλης 2026–27.","A limited, verified three-question check is available for this unit. It is not a complete check of the 2026–27 syllabus."))
+      :selectedBookRoute()
+      ?(selectedBookRoute().basis==="general-lyceum-book"
+        ?t("Δεν υπάρχει ακόμη σταθερό τεστ για αυτό το μάθημα. Μπορείς να κάνεις σύντομο τεστ στην AI Μελέτη: διαλέγεις ενότητα του σχολικού βιβλίου του ίδιου μαθήματος και της ίδιας τάξης του Γενικού Λυκείου, και οι ερωτήσεις φτιάχνονται μόνο από το κείμενο της ενότητας. Αν κάτι δεν σου φαίνεται σωστό, ρώτα τον εκπαιδευτικό σου.","There is no fixed test for this subject yet. You can take a short test in AI Study: choose a unit of the school book for the same subject and grade of the General Lyceum, and the questions are written only from that unit's text. If something looks wrong, ask your teacher.")
+        :t("Δεν υπάρχει ακόμη σταθερό τεστ για αυτό το μάθημα. Μπορείς να κάνεις σύντομο τεστ στην AI Μελέτη: διαλέγεις ενότητα του επίσημου σχολικού βιβλίου και οι ερωτήσεις φτιάχνονται μόνο από το κείμενο της ενότητας. Αν κάτι δεν σου φαίνεται σωστό, ρώτα τον εκπαιδευτικό σου.","There is no fixed test for this subject yet. You can take a short test in AI Study: choose a unit of the official school book, and the questions are written only from that unit's text. If something looks wrong, ask your teacher."))
       :t("Για το επιλεγμένο μάθημα δεν υπάρχει ακόμη επαληθευμένο τεστ. Δεν εμφανίζουμε γενικές ή επινοημένες ερωτήσεις ως σχολική ύλη.","No verified test is available for the selected subject yet. Generic or invented questions are not presented as curriculum content.");
     p.innerHTML=`${esc(msg)}${src?` <a href="${esc(src)}" target="_blank" rel="noopener noreferrer">${esc(t("Επίσημη βάση 2026-27 ↗","Official 2026-27 basis ↗"))}</a>`:""}`;
   }
-  function updateStart(){const b=modal().querySelector("#spdiagStart"),quiz=selectedQuiz(),ready=!!quiz;b.disabled=!ready;b.textContent=/support-mapping$/.test(quiz?.scope||"")?t("Ξεκίνα το σύντομο τεστ υποστήριξης","Start short support test"):ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
+  function updateStart(){const b=modal().querySelector("#spdiagStart"),quiz=selectedQuiz(),ready=!!quiz,book=!quiz&&selectedBookRoute();b.disabled=!ready&&!book;b.textContent=book?t("Άνοιξε τεστ από το σχολικό βιβλίο (AI Μελέτη)","Open a test from the school book (AI Study)"):/support-mapping$/.test(quiz?.scope||"")?t("Ξεκίνα το σύντομο τεστ υποστήριξης","Start short support test"):ready?t("Ξεκίνα το επαληθευμένο τεστ","Start verified test"):t("Δεν υπάρχει ακόμη επαληθευμένο τεστ","Verified test not yet available");}
   function selectedSubject(){return currentSubjects().find((x)=>x.id===state.subjectId)||null;}
-  function selectedQuiz(){const subj=selectedSubject();return subj?data()?.quizForSelection?.(state.schoolId,state.gradeId,state.groupId,subj):null;}
+  function selectedQuiz(){const subj=selectedSubject();return subj?data()?.quizForSelection?.(state.schoolId,state.gradeId,groupFor(subj),subj):null;}
 
+  function selectedBookRoute(){const subj=selectedSubject();return subj?data()?.bookRouteForSelection?.(state.schoolId,state.gradeId,groupFor(subj),subj)||null:null;}
   function startQuiz(){
-    state.quiz=selectedQuiz();if(!state.quiz)return;state.index=0;state.score=0;state.answered=false;
+    state.quiz=selectedQuiz();
+    if(!state.quiz){const route=selectedBookRoute();if(route)location.assign(route.url);return;}state.index=0;state.score=0;state.answered=false;
     modal().querySelector("#spdiagSetup").hidden=true;modal().querySelector("#spdiagQuiz").hidden=false;renderQuestion();
   }
   function renderQuestion(){

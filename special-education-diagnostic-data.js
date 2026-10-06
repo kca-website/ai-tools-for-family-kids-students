@@ -180,6 +180,8 @@
     "special-gymnasium|b||english":["middle","english-b-gymnasiou"],
     "special-gymnasium|b||physics":["middle","physics-gymnasiou"],
     "special-gymnasium|b||biology":["middle","biologia-b-gymnasiou"],
+    "special-gymnasium|b||geography":["middle","geologia-geografia-b-gymnasiou"],
+    "special-gymnasium|b||literature":["middle","logotechnia-b-gymnasiou"],
     "special-gymnasium|c||history":["middle","istoria-g-gymnasiou"],
     "special-gymnasium|c||english":["middle","english-g-gymnasiou"],
     "special-gymnasium|c||physics":["middle","fysiki-g-gymnasiou"],
@@ -210,6 +212,9 @@
     "eneegyl|gym-b||history":["middle","istoria-b-gymnasiou"],
     "eneegyl|gym-b||english":["middle","english-b-gymnasiou"],
     "eneegyl|gym-b||biology":["middle","biologia-b-gymnasiou"],
+    "eneegyl|gym-b||chemistry":["middle","chimeia-b-gymnasiou"],
+    "eneegyl|gym-b||geography":["middle","geologia-geografia-b-gymnasiou"],
+    "eneegyl|gym-b||literature":["middle","logotechnia-b-gymnasiou"],
     "eneegyl|gym-c||language":["middle","glossa-gymnasiou"],
     "eneegyl|gym-c||math":["middle","mathimatika-g-gymnasiou"],
     "eneegyl|gym-c||physics":["middle","fysiki-g-gymnasiou"],
@@ -400,6 +405,126 @@
     return {id:`special-education-support-${quizId}`,subjectId:subject.id,subjectLabel:subject.label,scope:"verified-general-support-mapping",scopeLabel:"Σύντομο τεστ υποστήριξης από το σταθερό, επαληθευμένο τεστ του ίδιου μαθήματος και της αντίστοιχης τάξης γενικής εκπαίδευσης. Δεν παρουσιάζεται ως πλήρης ή ταυτόσημη ύλη Ειδικής Εκπαίδευσης 2026–27.",questions};
   }
 
+
+  // Subjects without a fixed test can still be practised from the official book: AI Study builds a short
+  // quiz from the text of a verified book unit. Reviewed one by one: same course and same grade only
+  // ([zone, grade, AI Study subject] + "gel" when the unit comes from the same course of the same ΓΕΛ grade).
+  const BOOK_ROUTE_BY_SELECTION=Object.freeze({
+    "special-gymnasium|a||language":["special", "a", "teacher-annual-special-gym-a-language"],
+    "special-gymnasium|a||literature":["special", "a", "teacher-annual-special-gym-a-literature"],
+    "special-gymnasium|a||ancient-language":["special", "a", "teacher-annual-special-gym-a-ancient-language"],
+    "special-gymnasium|a||ancient-translation":["special", "a", "teacher-annual-special-gym-a-ancient-translation"],
+    "special-gymnasium|a||math":["special", "a", "teacher-annual-special-gym-a-math"],
+    "special-gymnasium|a||history":["special", "a", "teacher-annual-special-gym-a-history"],
+    "special-gymnasium|a||religion":["special", "a", "teacher-annual-special-gym-a-religion-ethics"],
+    "special-gymnasium|a||physics":["special", "a", "teacher-annual-special-gym-a-physics"],
+    "special-gymnasium|a||biology":["special", "a", "teacher-annual-special-gym-a-biology"],
+    "special-gymnasium|a||geography":["special", "a", "teacher-annual-special-gym-a-geography"],
+    "special-gymnasium|b||literature":["special", "b", "teacher-annual-special-gym-b-literature"],
+    "special-gymnasium|b||ancient-language":["special", "b", "teacher-annual-special-gym-b-ancient-language"],
+    "special-gymnasium|b||ancient-translation":["special", "b", "teacher-annual-special-gym-b-ancient-translation"],
+    "special-gymnasium|b||math":["special", "b", "teacher-annual-special-gym-b-math"],
+    "special-gymnasium|b||history":["special", "b", "teacher-annual-special-gym-b-history"],
+    "special-gymnasium|b||religion":["special", "b", "teacher-annual-special-gym-b-religion-ethics"],
+    "special-gymnasium|b||physics":["special", "b", "teacher-annual-special-gym-b-physics"],
+    "special-gymnasium|b||chemistry":["special", "b", "teacher-annual-special-gym-b-chemistry"],
+    "special-gymnasium|b||biology":["special", "b", "teacher-annual-special-gym-b-biology"],
+    "special-gymnasium|b||geography":["special", "b", "teacher-annual-special-gym-b-geography"],
+    "special-gymnasium|b||social-civic":["special", "b", "teacher-annual-special-gym-b-social-civic"],
+    "special-gymnasium|c||language":["special", "c", "teacher-annual-special-gym-c-language"],
+    "special-gymnasium|c||literature":["special", "c", "teacher-annual-special-gym-c-literature"],
+    "special-gymnasium|c||ancient-language":["special", "c", "teacher-annual-special-gym-c-ancient-language"],
+    "special-gymnasium|c||ancient-translation":["special", "c", "teacher-annual-special-gym-c-ancient-translation"],
+    "special-gymnasium|c||math":["special", "c", "teacher-annual-special-gym-c-math"],
+    "special-gymnasium|c||history":["special", "c", "teacher-annual-special-gym-c-history"],
+    "special-gymnasium|c||religion":["special", "c", "teacher-annual-special-gym-c-religion-ethics"],
+    "special-gymnasium|c||physics":["special", "c", "teacher-annual-special-gym-c-physics"],
+    "special-gymnasium|c||chemistry":["special", "c", "teacher-annual-special-gym-c-chemistry"],
+    "special-gymnasium|c||biology":["special", "c", "teacher-annual-special-gym-c-biology"],
+    "special-gymnasium|c||social-civic":["special", "c", "teacher-annual-special-gym-c-social-civic"],
+    "special-lyceum|a||ancient":["high", "a", "archaia-a-lykeiou", "gel"],
+    "special-lyceum|a||new-greek":["high", "a", "ekthesi-a-lykeiou", "gel"],
+    "special-lyceum|a||religion":["high", "a", "thriskeftika-a-lykeiou", "gel"],
+    "special-lyceum|a||history":["high", "a", "istoria-a-lykeiou", "gel"],
+    "special-lyceum|a||algebra":["high", "a", "algebra-a-lykeiou", "gel"],
+    "special-lyceum|a||geometry":["high", "a", "geometria-a-lykeiou", "gel"],
+    "special-lyceum|a||english":["high", "a", "english-a-lykeiou", "gel"],
+    "special-lyceum|a||physics":["high", "a", "fysiki-a-lykeiou", "gel"],
+    "special-lyceum|a||chemistry":["high", "a", "chimeia-a-lykeiou", "gel"],
+    "special-lyceum|a||biology":["special", "la", "special-lyceum-a-biology-official-2026-27"],
+    "special-lyceum|a||civics":["high", "a", "politiki-paideia-a-lykeiou", "gel"],
+    "special-lyceum|a||informatics":["special", "la", "special-lyceum-a-informatics-official-2026-27"],
+    "special-lyceum|b||ancient":["high", "b", "archaia-b-lykeiou", "gel"],
+    "special-lyceum|b||new-greek":["high", "b", "ekthesi-b-lykeiou", "gel"],
+    "special-lyceum|b||algebra":["high", "b", "algebra-b-lykeiou", "gel"],
+    "special-lyceum|b||geometry":["high", "b", "geometria-b-lykeiou", "gel"],
+    "special-lyceum|b||chemistry":["high", "b", "chimeia-b-lykeiou", "gel"],
+    "special-lyceum|b||biology":["special", "lb", "special-lyceum-b-biology-official-2026-27"],
+    "special-lyceum|b||computer-science":["special", "lb", "special-lyceum-b-informatics-official-2026-27"],
+    "special-lyceum|b||history":["high", "b", "istoria-b-lykeiou", "gel"],
+    "special-lyceum|b||philosophy":["high", "b", "filosofia-b-lykeiou", "gel"],
+    "special-lyceum|b||religion":["high", "b", "thriskeftika-b-lykeiou", "gel"],
+    "special-lyceum|b||english":["high", "b", "english-b-lykeiou", "gel"],
+    "special-lyceum|b|humanities|latin":["special", "lb", "special-lyceum-b-latin-official-2026-27"],
+    "special-lyceum|b|sciences|orientation-physics":["high", "b", "fysiki-b-lykeiou", "gel"],
+    "special-lyceum|b|sciences|orientation-math":["high", "b", "mathimatika-b-prosanatolismou", "gel"],
+    "special-lyceum|c||religion":["high", "c", "thriskeftika-g-lykeiou", "gel"],
+    "special-lyceum|c||new-greek":["high", "c", "ekthesi-g-lykeiou", "gel"],
+    "special-lyceum|c|humanities|ancient":["high", "c", "archaia-g-lykeiou", "gel"],
+    "special-lyceum|c|humanities|history":["high", "c", "istoria-g-prosanatolismou", "gel"],
+    "special-lyceum|c|humanities|latin":["special", "lc", "special-lyceum-c-latin-official-2026-27"],
+    "special-lyceum|c|humanities|math-general":["high", "c", "mathimatika-g-genikis", "gel"],
+    "special-lyceum|c|science-health|history-general":["high", "c", "istoria-g-lykeiou", "gel"],
+    "special-lyceum|c|science-health|physics":["high", "c", "fysiki-g-lykeiou", "gel"],
+    "special-lyceum|c|science-health|chemistry":["high", "c", "chimeia-g-lykeiou", "gel"],
+    "special-lyceum|c|economy-informatics|history-general":["high", "c", "istoria-g-lykeiou", "gel"],
+    "special-lyceum|c|economy-informatics|math":["high", "c", "mathimatika-g-prosanatolismou", "gel"],
+    "special-lyceum|c|economy-informatics|informatics":["high", "c", "pliroforiki-g-lykeiou", "gel"],
+    "special-lyceum|c|economy-informatics|economics":["high", "c", "oikonomia-g-lykeiou", "gel"],
+    "eneegyl|lyc-a||economics":["special", "ea", "eneegyl-official-a-αρχες-οικονομιας"],
+    "eneegyl|lyc-b|administration-economy|accounting":["special", "eb", "eneegyl-official-b-αρχες-λογιστικης"],
+    "eneegyl|lyc-b|administration-economy|marketing":["special", "eb", "eneegyl-official-b-εισαγωγη-στο-μαρκετινγκ"],
+    "eneegyl|lyc-b|administration-economy|tourism":["special", "eb", "eneegyl-official-b-θεωρια-τουρισμου-και-εφαρμογες"],
+    "eneegyl|lyc-b|administration-economy|logistics":["special", "eb", "eneegyl-official-b-εισαγωγη-στην-εφοδιαστικη-logistics"],
+    "eneegyl|lyc-b|health|anatomy-1":["special", "eb", "eneegyl-official-b-ανατομια-φυσιολογια-i"],
+    "eneegyl|lyc-b|health|health-nutrition":["special", "eb", "eneegyl-official-b-υγεια-και-διατροφη"],
+    "eneegyl|lyc-c|administration-economy|law":["special", "ec", "eneegyl-official-c-στοιχεια-δικαιου-αστικο-εργατικο"],
+    "eneegyl|lyc-c|administration-economy|finance-sheets":["special", "ec", "eneegyl-official-c-χρηματοπιστωτικες-συναλλαγες-λογιστικα-φυλλα-excel"],
+    "eneegyl|lyc-c|administration-economy|business-math":["special", "ec", "eneegyl-official-c-οικονομικα-μαθηματικα-στατιστικη"],
+    "eneegyl|lyc-c|administration-economy|economic-theory":["special", "ec", "eneegyl-official-c-αρχες-οικονομικης-θεωριας"],
+    "eneegyl|lyc-c|administration-economy|management":["special", "ec", "eneegyl-official-c-αρχες-οργανωσης-και-διοικησης"],
+    "eneegyl|lyc-c|health|first-aid":["special", "ec", "eneegyl-official-c-πρωτες-βοηθειες"],
+    "eneegyl|lyc-c|health|relationships":["special", "ec", "eneegyl-official-c-διαπροσωπικες-σχεσεις"],
+    "eneegyl|lyc-c|health|workplace":["special", "ec", "eneegyl-official-c-εργασιακο-περιβαλλον-τομεα"],
+    "eneegyl|lyc-c|health|anatomy-2":["special", "ec", "eneegyl-official-c-ανατομια-φυσιολογια-ιι"],
+    "eneegyl|lyc-c|health|hygiene":["special", "ec", "eneegyl-official-c-υγιεινη"],
+    "eneegyl|lyc-d|admin-services|office":["special", "ed", "eneegyl-official-d-υπαλληλος-διοικησης-και-οικονομικων-υπηρεσιων-συγχρονο-περιβαλλον-γραφειου"],
+    "eneegyl|lyc-d|admin-services|tax":["special", "ed", "eneegyl-official-d-υπαλληλος-διοικησης-και-οικονομικων-υπηρεσιων-φορολογικη-πρακτικη"],
+    "eneegyl|lyc-d|admin-services|accounting-apps":["special", "ed", "eneegyl-official-d-υπαλληλος-διοικησης-και-οικονομικων-υπηρεσιων-λογιστικες-εφαρμογες"],
+    "eneegyl|lyc-d|admin-services|pr":["special", "ed", "eneegyl-official-d-υπαλληλος-διοικησης-και-οικονομικων-υπηρεσιων-επικοινωνια-και-δημοσιες-σχεσεις"],
+    "eneegyl|lyc-d|tourism-services|tourism-org":["special", "ed", "eneegyl-official-d-υπαλληλος-τουριστικων-επιχειρησεων-οργανωση-και-λειτουργια-τουριστικων-επιχειρησ"],
+    "eneegyl|lyc-d|tourism-services|hotel-org":["special", "ed", "eneegyl-official-d-υπαλληλος-τουριστικων-επιχειρησεων-οργανωση-και-λειτουργια-ξενοδοχειακων-επιχειρ"],
+    "eneegyl|lyc-d|tourism-services|tourism-geography":["special", "ed", "eneegyl-official-d-υπαλληλος-τουριστικων-επιχειρησεων-γεωγραφια-τουρισμου"],
+    "eneegyl|lyc-d|tourism-services|tourism-apps":["special", "ed", "eneegyl-official-d-υπαλληλος-τουριστικων-επιχειρησεων-εφαρμογες-στον-τουρισμο"],
+    "eneegyl|lyc-d|marketing-services|office":["special", "ed", "eneegyl-official-d-υπαλληλος-εμποριας-και-διαφημισης-συγχρονο-περιβαλλον-γραφειου"],
+    "eneegyl|lyc-d|marketing-services|pr":["special", "ed", "eneegyl-official-d-υπαλληλος-εμποριας-και-διαφημισης-επικοινωνια-και-δημοσιες-σχεσεις"],
+    "eneegyl|lyc-d|marketing-services|accounting-apps":["special", "ed", "eneegyl-official-d-υπαλληλος-εμποριας-και-διαφημισης-λογιστικες-εφαρμογες"],
+    "eneegyl|lyc-d|logistics-services|warehouses":["special", "ed", "eneegyl-official-d-υπαλληλος-αποθηκης-και-συστηματων-εφοδιασμου-οργανωση-και-διαχειριση-αποθηκων"],
+    "eneegyl|lyc-d|logistics-services|transport":["special", "ed", "eneegyl-official-d-υπαλληλος-αποθηκης-και-συστηματων-εφοδιασμου-οργανωση-και-διαχειριση-μεταφορων"],
+    "eneegyl|lyc-d|logistics-services|logistics-apps":["special", "ed", "eneegyl-official-d-υπαλληλος-αποθηκης-και-συστηματων-εφοδιασμου-εφαρμογες-εφοδιαστικης"],
+    "eneegyl|lyc-d|logistics-services|accounting-apps":["special", "ed", "eneegyl-official-d-υπαλληλος-αποθηκης-και-συστηματων-εφοδιασμου-λογιστικες-εφαρμογες"],
+    "eneegyl|lyc-d|marketing-services|advertising":["special", "ed", "eneegyl-official-d-υπαλληλος-εμποριας-και-διαφημισης-διαφημιση-εισαγωγη-δημιουργια-και-προβολη"],
+    "eneegyl|lyc-d|marketing-services|marketing-apps":["special", "ed", "eneegyl-official-d-υπαλληλος-εμποριας-και-διαφημισης-εφαρμογες-marketing"]
+  });
+  function bookRouteForSelection(schoolId,gradeId,groupId,subject){
+    const canonicalSchool={"deaf-gymnasium":"special-gymnasium","deaf-lyceum":"special-lyceum"}[schoolId]||schoolId;
+    const route=BOOK_ROUTE_BY_SELECTION[[canonicalSchool,gradeId,groupId||"",subject?.id||""].join("|")];
+    if(!route)return null;
+    const params=new URLSearchParams({zone:route[0],grade:route[1],subject:route[2],mode:"test"});
+    if(route[3]==="gel")params.set("schoolType","gel");
+    return {zone:route[0],grade:route[1],subject:route[2],basis:route[3]==="gel"?"general-lyceum-book":"special-education-book",url:"/study.html?"+params.toString()};
+  }
+
   function quizForSelection(schoolId,gradeId,groupId,subject){
     const canonicalSchool={"deaf-gymnasium":"special-gymnasium","deaf-lyceum":"special-lyceum"}[schoolId]||schoolId;
     const key=[canonicalSchool,gradeId,groupId||"",subject?.id||""].join("|");
@@ -438,7 +563,7 @@
   const DEAF_LYC={...SPECIAL_LYC,id:"deaf-lyceum",label:"Λύκειο Κωφών και Βαρηκόων",curriculumAlias:"special-lyceum",accessibility:"Ίδια επίσημη ύλη Ε.Α.Ε.· γραπτές και οπτικές οδηγίες, χωρίς αποκλειστική εξάρτηση από ήχο."};
   const SCHOOLS={"special-gymnasium":SPECIAL_GYM,"special-lyceum":SPECIAL_LYC,"deaf-gymnasium":DEAF_GYM,"deaf-lyceum":DEAF_LYC,"eneegyl":ENEEGYL};
   const availableSelectionCount=Object.entries(SCHOOLS).reduce((total,[schoolId,school])=>total+school.gradeOrder.reduce((gradeTotal,gradeId)=>{const grade=school.grades[gradeId];const common=(grade.subjects||[]).filter(subject=>quizForSelection(schoolId,gradeId,"",subject)).length;const grouped=(grade.groups||[]).reduce((sum,group)=>sum+(group.subjects||[]).filter(subject=>quizForSelection(schoolId,gradeId,group.id,subject)).length,0);return gradeTotal+common+grouped;},0),0);
-  const DATA={version:11,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","deaf-gymnasium","deaf-lyceum","eneegyl"],schools:SCHOOLS,quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος έλεγχος 3 ερωτήσεων. Ενεργοποιείται μόνο όταν υπάρχει πραγματικό τεστ του μαθήματος ή σαφώς επισημασμένο τεστ υποστήριξης."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:availableSelectionCount,quizForSelection};
+  const DATA={version:11,schoolYear:"2026-2027",verificationDate:"2026-09-19",schoolOrder:["special-gymnasium","special-lyceum","deaf-gymnasium","deaf-lyceum","eneegyl"],schools:SCHOOLS,quizPolicy:{questions:3,optionsPerQuestion:2,oneConceptAtATime:true,noTricks:true,scopeLabel:"Περιορισμένος έλεγχος 3 ερωτήσεων. Ενεργοποιείται μόνο όταν υπάρχει πραγματικό τεστ του μαθήματος ή σαφώς επισημασμένο τεστ υποστήριξης."},verifiedQuizCount:Object.keys(VERIFIED_QUIZ_BY_SELECTION).length+Object.keys(OFFICIAL_INSTRUCTION_QUIZ_BY_SELECTION).length,supportQuizCount:Object.keys(SUPPORT_QUIZ_BY_SELECTION).length+Object.keys(ADJACENT_GRADE_SUPPORT_BY_SELECTION).length,totalAvailableQuizCount:availableSelectionCount,bookRouteCount:Object.keys(BOOK_ROUTE_BY_SELECTION).length,quizForSelection,bookRouteForSelection};
 
   window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA=Object.freeze(DATA);
 })();

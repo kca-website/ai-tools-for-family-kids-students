@@ -9,6 +9,10 @@
       const plain=value.toLowerCase().replace(/[–—:.;,/\\|()[\]]/g," ").replace(/\s+/g," ").trim();
       if(/^(?:κεφαλαια?|κεφ|ενοτητες?|κεφαλαια?\s+ενοτητες?|κεφαλαιο\s+ενδεικτικες|ενοτητα\s+ωρες)$/.test(plain)) return false;
       if(/^(?:κεφαλαια?|ενοτητες?)\s*$/.test(plain)) return false;
+      // Table-header and sentence fragments split out of the official guidance tables
+      // ("Κεφάλαιο/Ενότητες", "κεφαλαίου.", "μέρος), 10.10, 10.11.") are not units.
+      if(/^(?:κεφαλαιο\s+ενοτητες(?:\s+παραγραφοι)?|κεφαλαιο\s+ενοτητα|κεφαλαιου\s+\d+|κεφαλαιο\s+ενδεικτικες|ενοτητα\s+ωρες)$/.test(plain.normalize("NFD").replace(/[\u0300-\u036f]/g,""))) return false;
+      if(/^[a-zα-ωάέήίόύώϊϋΐΰ(),.]/.test(value)) return false;
       return true;
     });
   }

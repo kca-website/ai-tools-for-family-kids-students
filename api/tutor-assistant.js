@@ -100,7 +100,7 @@ module.exports = async function handler(req, res) {
       });
     }
     try {
-      verifiedOfficialSource = await loadVerifiedOfficialSource(subjectId, topic);
+      verifiedOfficialSource = await loadVerifiedOfficialSource(subjectId, topic, studyContext);
     } catch (err) {
       if (effectiveSourcePolicy === 'official_if_available') {
         verifiedOfficialSource = null;
@@ -549,14 +549,22 @@ function routingSignature(aiStatus, routingProfile) {
   }).join('|');
 }
 
-async function loadVerifiedOfficialSource(subjectId, topic) {
-  const sid = String(subjectId || '').trim().slice(0, 120);
+async function loadVerifiedOfficialSource(subjectId, topic, studyContext = null) {
+  const sid = String(subjectId || '').trim().slice(0, 200);
   const selectedTopic = String(topic || '').trim().slice(0, 500);
-  const cacheKey = { kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
+  // ΕΠΑΛ sources are resolved from the EPAL catalog with the learner's grade/sector/specialty.
+  const ctx = studyContext && typeof studyContext === 'object' ? studyContext : {};
+  const epal = String(ctx.schoolType || '').toLowerCase() === 'epal' || /^epal-[abc]-/.test(sid);
+  const epalOptions = epal
+    ? { schoolType: 'epal', grade: String(ctx.grade || '').slice(0, 4), sector: String(ctx.sector || '').slice(0, 160), specialty: String(ctx.specialty || '').slice(0, 160) }
+    : {};
+  const cacheKey = epal
+    ? { kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic, ...epalOptions }
+    : { kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
   const cached = await getStudyCache(cacheKey);
   if (cached?.grounded === true && cached?.text) return cached;
 
-  const resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic);
+  const resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, epalOptions);
   if (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text) {
     const err = new Error('Official schoolbook source could not be verified.');
     err.status = resolved?.status || 502;

@@ -57,7 +57,9 @@ jobs:
           node tests/phase23-gel-pdf-sections-smoke.mjs
           node tests/phase24-politiki-paideia-grounding-smoke.mjs
       - name: EPAL source boundary
-        run: node tests/phase11d-epal-grounding-audit.mjs
+        run: |
+          node tests/phase11d-epal-grounding-audit.mjs
+          node tests/epal-ai-study-source-request-smoke.mjs
       - name: Special Education coverage boundary
         run: |
           node tests/special-gym-annual-mapping-smoke.mjs

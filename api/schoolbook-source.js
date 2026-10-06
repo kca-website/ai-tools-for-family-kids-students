@@ -52,6 +52,14 @@ try {
   GEL_MANUAL_OVERRIDES_PHASE25 = null;
 }
 
+// ΕΠΑΛ: separate catalog (grade / sector / specialty / course / unit → official PDF section).
+let EPAL_BOOK_CATALOG = null;
+try {
+  EPAL_BOOK_CATALOG = require("../epal-schoolbook-catalog-2026-2027.js");
+} catch (_) {
+  EPAL_BOOK_CATALOG = null;
+}
+
 let PRIMARY_COMPLETE_SOURCES = null;
 try {
   PRIMARY_COMPLETE_SOURCES = require("../primary-schoolbook-complete-sources-2026-2027.js");
@@ -1732,10 +1740,16 @@ module.exports = async function handler(req, res) {
     return res.status(403).json({ error: "cross_site_request_blocked", message: "Cross-site requests are not allowed." });
   }
 
-  const rawSubject = clean(req.query?.subject, 120);
+  const rawSubject = clean(req.query?.subject, 200);
   const topic = clean(req.query?.topic, 500);
   const completeAudio = req.query?.purpose === "audio";
   const subject = ALIASES[rawSubject] || rawSubject;
+  const schoolType = clean(req.query?.schoolType, 20).toLowerCase();
+  // ΕΠΑΛ requests (explicit schoolType or an epal-* subject id) are answered only from the
+  // dedicated EPAL catalog; they never fall through to the ΓΕΛ/Γυμνάσιο/Δημοτικό mappings.
+  if (schoolType === "epal" || /^epal-[abc]-/.test(subject)) {
+    return handleEpalSource(req, res, { subject, topic, completeAudio });
+  }
   const gelInventory = topic ? resolveGelInventoryTopic(subject, topic) : null;
 
   if (gelInventory && !gelInventory.runtimeEligible) {
@@ -2093,6 +2107,106 @@ module.exports = async function handler(req, res) {
 
 function clean(value, max) {
   return String(value || "").trim().slice(0, max);
+}
+
+const EPAL_GUIDANCE_2026_2027 = "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-epa-l-gia-to-scholiko-etos-2026-2027/";
+
+// ΕΠΑΛ unit → verified page range of the official ebooks.edu.gr PDF → exact extracted text.
+async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
+  const grade = clean(req.query?.grade, 4).toLowerCase();
+  const sector = clean(req.query?.sector, 160);
+  const specialty = clean(req.query?.specialty, 160);
+  const base = { grounded: false, schoolType: "epal", subject, topic, schoolYear: "2026-2027" };
+
+  if (!EPAL_BOOK_CATALOG?.get) {
+    return res.status(503).json({ ...base, error: "epal_catalog_unavailable", message: "Ο κατάλογος σχολικών βιβλίων ΕΠΑΛ δεν είναι διαθέσιμος." });
+  }
+  if (!topic) {
+    return res.status(404).json({ ...base, error: "source_not_mapped", message: "Δεν επιλέχθηκε ενότητα." });
+  }
+  const mapping = EPAL_BOOK_CATALOG.get(subject, topic);
+  if (!mapping) {
+    const state = EPAL_BOOK_CATALOG.status(subject, topic);
+    return res.status(404).json({
+      ...base,
+      error: "epal_source_not_mapped",
+      reviewStatus: state.reason || null,
+      subjectStatus: state.subjectStatus || null,
+      message: "Η ενότητα δεν έχει ακόμη ακριβή, επαληθευμένη αντιστοίχιση σε επίσημο σχολικό βιβλίο ΕΠΑΛ. Δεν θα χρησιμοποιηθεί γενική γνώση ως υποκατάστατο."
+    });
+  }
+  // The selected grade / sector / specialty must be one under which AI Study offers this subject.
+  const group = EPAL_BOOK_CATALOG.getGroup(subject);
+  const mismatch =
+    (grade && grade !== mapping.grade) ||
+    (sector && group.sectorIds.length && !group.sectorIds.includes(sector)) ||
+    (specialty && group.specialtyIds.length && !group.specialtyIds.includes(specialty));
+  if (mismatch) {
+    return res.status(409).json({ ...base, error: "epal_context_mismatch", message: "Η τάξη, ο τομέας ή η ειδικότητα δεν αντιστοιχούν στο επιλεγμένο μάθημα ΕΠΑΛ." });
+  }
+  if (completeAudio && (mapping.method === "marker+partial-title" || mapping.rangeCapped)) {
+    return res.status(409).json({ ...base, error: "complete_section_not_mapped", message: "Η αντιστοίχιση επαληθεύει την αρχή του κεφαλαίου, όχι τα πλήρη όρια της ενότητας." });
+  }
+  if (!OFFICIAL_PDF_TEXT?.extractVerifiedPdfPage) {
+    return res.status(503).json({ ...base, error: "official_pdf_parser_unavailable", bookTitle: mapping.bookTitle, message: "Ο ασφαλής αναγνώστης επίσημων PDF δεν είναι διαθέσιμος." });
+  }
+
+  const extracted = await OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({
+    sourceUrl: mapping.viewUrl,
+    pdfPage: mapping.pdfPage,
+    pdfPageEnd: mapping.pdfPageEnd,
+    verifiedHeading: mapping.heading,
+    maxSpan: (EPAL_BOOK_CATALOG.maxPdfSpan || 40) + 1
+  });
+  if (!extracted?.ok) {
+    const upstream = new Set(["official_pdf_binary_not_resolved", "official_pdf_fetch_failed", "official_pdf_text_extraction_failed", "official_pdf_too_large", "fetch_unavailable"]);
+    return res.status(upstream.has(extracted?.error) ? 502 : 404).json({
+      ...base,
+      error: extracted?.error || "official_pdf_text_not_grounded",
+      bookTitle: mapping.bookTitle,
+      sourceUrl: mapping.viewUrl,
+      pdfPage: mapping.pdfPage,
+      verifiedHeading: mapping.heading,
+      message: "Η επίσημη σελίδα του βιβλίου ΕΠΑΛ δεν πέρασε τον έλεγχο επικεφαλίδας/κειμένου. Δεν θα χρησιμοποιηθεί γενική γνώση ως υποκατάστατο."
+    });
+  }
+
+  res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=604800");
+  return res.status(200).json({
+    grounded: true,
+    schoolType: "epal",
+    subject,
+    grade: mapping.grade,
+    sector: sector || (mapping.sectors.length === 1 ? mapping.sectors[0] : null),
+    specialty: specialty || null,
+    course: mapping.course,
+    topic: mapping.topic,
+    section: mapping.topic,
+    bookTitle: mapping.bookTitle,
+    schoolYear: EPAL_BOOK_CATALOG.schoolYear || "2026-2027",
+    schoolbookSource: mapping.viewUrl,
+    annualGuidanceSource: EPAL_GUIDANCE_2026_2027,
+    curriculumSource: EPAL_GUIDANCE_2026_2027,
+    mappingStatus: "official-epal-pdf-section",
+    mappingMethod: mapping.method,
+    mappingConfidence: mapping.confidence,
+    rangeCapped: !!mapping.rangeCapped,
+    lastVerified: EPAL_BOOK_CATALOG.generatedAt || null,
+    annualScopeVerified: false,
+    curriculumExclusions: [],
+    curriculumScopeApplied: false,
+    sourceUrl: mapping.viewUrl,
+    sourceUrls: [mapping.viewUrl],
+    canonicalSourceUrl: mapping.downloadUrl + "#page=" + mapping.pdfPage,
+    resolvedPdfUrl: extracted.resolvedPdfUrl || null,
+    pdfPage: mapping.pdfPage,
+    pdfPageEnd: extracted.endPage || mapping.pdfPageEnd,
+    pdfTotalPages: extracted.totalPages || null,
+    labelParaphrase: false,
+    verifiedHeading: mapping.heading,
+    sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION } : undefined,
+    text: completeAudio ? completeText(extracted.text, topic) : String(extracted.text || "").slice(0, 60000)
+  });
 }
 
 function resolveHistoryEChapter(topic) {
@@ -3456,7 +3570,7 @@ function selectUsefulText(text, topic) {
   return full;
 }
 
-async function resolveOfficialSchoolbookSource(rawSubject, rawTopic, { purpose = "" } = {}) {
+async function resolveOfficialSchoolbookSource(rawSubject, rawTopic, { purpose = "", schoolType = "", grade = "", sector = "", specialty = "" } = {}) {
   let statusCode = 200;
   let payload = null;
   const headers = {};
@@ -3467,7 +3581,7 @@ async function resolveOfficialSchoolbookSource(rawSubject, rawTopic, { purpose =
   };
   await module.exports({
     method: "GET",
-    query: { subject: rawSubject, topic: rawTopic, purpose },
+    query: { subject: rawSubject, topic: rawTopic, purpose, schoolType, grade, sector, specialty },
   }, response);
   return {
     ok: statusCode >= 200 && statusCode < 300 && payload?.grounded === true,
@@ -3519,6 +3633,7 @@ module.exports._test = Object.freeze({
   resolveLinkedSectionUrlsFromHtml,
   resolveExplicitSectionUrls,
   buildCatalogBook,
+  EPAL_BOOK_CATALOG,
   catalogHtmlSourceAllowed,
   resolveGelInventoryTopic,
   buildGelInventoryBook,

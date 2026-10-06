@@ -349,10 +349,14 @@
     const subject=selectedSubjectId(),topic=selectedTopic();
     if(!subject||!topic){sourceEvidenceUi(null);return null}
     const sourcePolicy=sourcePolicyForSelection(false);
-    if(sourcePolicy==='official_required' && /^Κεφάλαιο\s+\d+\s+—/i.test(topic)){
+    const epal=isEpal();
+    if(!epal && sourcePolicy==='official_required' && /^Κεφάλαιο\s+\d+\s+—/i.test(topic)){
       throw new Error(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'?'This unit has not yet been connected to its official school source. The connection is in progress.':'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη.'));
     }
-    const key=subject+'||'+topic;
+    // ΕΠΑΛ requests carry their school type and grade / sector / specialty so the endpoint
+    // resolves them only from the dedicated EPAL schoolbook catalog.
+    const epalQuery=epal?'&schoolType=epal&grade='+encodeURIComponent($('grade').value||'')+($('grade').value==='b'&&$('epalSector').value?'&sector='+encodeURIComponent($('epalSector').value):'')+($('grade').value==='c'&&$('epalSpecialty').value?'&specialty='+encodeURIComponent($('epalSpecialty').value):''):'';
+    const key=subject+'||'+topic+epalQuery;
     const cached=officialSourceCache.get(key);
     if(cached?.grounded){
       sourceEvidenceUi(cached);
@@ -361,7 +365,7 @@
     let lastBody=null,lastError=null;
     for(let attempt=0;attempt<2;attempt++){
       try{
-        const res=await fetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic),{headers:{'Accept':'application/json','Cache-Control':'no-cache'}});
+        const res=await fetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic)+epalQuery,{headers:{'Accept':'application/json','Cache-Control':'no-cache'}});
         const body=await res.json().catch(()=>null);
         lastBody=body;
         if(res.ok&&body?.grounded){

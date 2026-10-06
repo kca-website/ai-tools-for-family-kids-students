@@ -6,6 +6,31 @@ const overrides = require('../gel-schoolbook-manual-overrides-2026-2027.js');
 const phase25 = require('../gel-schoolbook-manual-overrides-phase25-2026-2027.js');
 const primary = require('../general-education-book-sections-2026-2027.js');
 const primaryComplete = require('../primary-schoolbook-complete-sources-2026-2027.js');
+const epal = require('../epal-schoolbook-catalog-2026-2027.js');
+
+// ΕΠΑΛ: dedicated EPAL_BOOK_CATALOG (see scripts/epal/validate-epal-schoolbook-catalog.mjs for the
+// full AI Study ↔ catalog validation).
+function epalReport() {
+  const units = { mapped: 0, unmapped: 0 };
+  const unmappedByReason = {};
+  for (const group of epal.groups) {
+    units.mapped += Object.keys(group.units).length;
+    for (const reason of Object.values(group.unmapped)) {
+      if (/^(?:free-text-input|not-a-unit)/.test(reason)) continue;
+      units.unmapped += 1;
+      unmappedByReason[reason] = (unmappedByReason[reason] || 0) + 1;
+    }
+  }
+  return {
+    generatedAt: epal.generatedAt,
+    subjects: epal.groups.length,
+    books: Object.keys(epal.books).length,
+    total: units.mapped + units.unmapped,
+    grounded: units.mapped,
+    pending: units.unmapped,
+    unmappedByReason
+  };
+}
 
 function gelReport() {
   const overridden = new Set(
@@ -141,7 +166,8 @@ const report = {
   generatedAt: new Date().toISOString(),
   schoolYear: '2026-2027',
   primary: primaryReport(),
-  gel: gelReport()
+  gel: gelReport(),
+  epal: epalReport()
 };
 
 console.log(JSON.stringify(report, null, 2));

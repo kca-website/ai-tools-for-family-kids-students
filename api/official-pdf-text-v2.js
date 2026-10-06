@@ -98,11 +98,13 @@ function scope(pageTexts, heading, excludedHeading, minChars = MIN_GROUNDED_PAGE
   return {ok:true,text,extractedChars:text.length,exclusionApplied:!!excludedHeading};
 }
 
-async function extractVerifiedPdfPage({sourceUrl,pdfPage,pdfPageEnd,excludedHeading,verifiedHeading,fetchImpl,maxBytes=MAX_PDF_BYTES,minChars=MIN_GROUNDED_PAGE_CHARS}) {
+// maxSpan: GEL sections stay ≤20 pages (default); EPAL chapter sections may pass up to 41.
+async function extractVerifiedPdfPage({sourceUrl,pdfPage,pdfPageEnd,excludedHeading,verifiedHeading,fetchImpl,maxBytes=MAX_PDF_BYTES,minChars=MIN_GROUNDED_PAGE_CHARS,maxSpan=20}) {
   if (!allowed(sourceUrl)) return {ok:false,error:"official_pdf_url_not_allowed"};
   const start = Number(pdfPage), end = Number(pdfPageEnd ?? pdfPage);
+  const span = Math.min(41, Math.max(1, Number(maxSpan) || 20));
   if (!Number.isInteger(start) || start < 1) return {ok:false,error:"official_pdf_page_invalid"};
-  if (!Number.isInteger(end) || end < start || end-start >= 20) return {ok:false,error:"official_pdf_page_range_invalid"};
+  if (!Number.isInteger(end) || end < start || end-start >= span) return {ok:false,error:"official_pdf_page_range_invalid"};
   if (!String(verifiedHeading || "").trim()) return {ok:false,error:"official_pdf_heading_missing"};
   let doc, task, resolvedPdfUrl = stripHash(sourceUrl);
   try {

@@ -7,7 +7,8 @@ const study = fs.readFileSync(new URL('../study.html', import.meta.url), 'utf8')
 const schoolbook = fs.readFileSync(new URL('../api/schoolbook-source.js', import.meta.url), 'utf8');
 
 assert.match(tutor, /resolveOfficialSchoolbookSource/);
-assert.match(tutor, /loadVerifiedOfficialSource\(subjectId, topic\)/);
+// Official text is always re-resolved server-side (EPAL also passes its grade/sector/specialty context).
+assert.match(tutor, /loadVerifiedOfficialSource\(subjectId, topic(?:, studyContext)?\)/);
 assert.match(tutor, /rawDocumentText = verifiedOfficialSource\?\.text/);
 assert.match(tutor, /officialSchoolbook = hasDocument && !!verifiedOfficialSource\?\.grounded/);
 assert.match(tutor, /promptVersion: 'study-tutor-v5'/);

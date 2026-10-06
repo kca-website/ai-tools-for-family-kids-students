@@ -33,7 +33,7 @@ module.exports = async function handler(req, res) {
   if (!aiStatus.configured) return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI σύνοψη δεν είναι προσωρινά διαθέσιμη.' });
 
   const { subjectId = '', topic = '', language = 'el', sourceTitle = '', activity = 'audio' } = req.body || {};
-  const sid = String(subjectId || '').trim().slice(0, 120);
+  const sid = String(subjectId || '').trim().slice(0, 200);
   const selectedTopic = String(topic || '').trim().slice(0, 600);
   const lang = language === 'en' ? 'en' : 'el';
   const explanation = activity === 'explain';

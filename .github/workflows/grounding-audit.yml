@@ -9,6 +9,7 @@ on:
       - 'gel-schoolbook-manual-overrides-phase25-2026-2027.js'
       - 'general-education-book-sections-2026-2027.js'
       - 'primary-schoolbook-complete-sources-2026-2027.js'
+      - 'epal-schoolbook-catalog-2026-2027.js'
       - 'api/schoolbook-source.js'
       - 'scripts/grounding-coverage-report.mjs'
       - 'package.json'

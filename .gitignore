@@ -20,3 +20,4 @@ npm-debug.log*
 
 # AI benchmark results (may contain model outputs; never commit)
 benchmark/results/
+.cache/

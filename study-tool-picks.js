@@ -118,6 +118,15 @@
     "en": "Digital collections, history and science topics, plus virtual field trips. Some experiences use AI/ML, but the service is not an AI tutor.",
     "reviewed": "2026-09-24"
    },
+   "google-earth": {
+    "name": "Google Earth",
+    "url": "https://earth.google.com/web/",
+    "minAge": 6,
+    "parentAccountRequired": false,
+    "el": "Τρισδιάστατη εξερεύνηση του πλανήτη: τόποι, ανάγλυφο, χάρτες, μέτρηση αποστάσεων και έτοιμες ξεναγήσεις (Voyager). Ιδανικό για Γεωγραφία, Ιστορία και Γεωλογία.",
+    "en": "3D exploration of the planet: places, terrain, maps, distance measuring and ready-made Voyager tours. Ideal for Geography, History and Geology.",
+    "reviewed": "2026-10-06"
+   },
    "deepl": {
     "name": "DeepL",
     "url": "https://www.deepl.com/translator",
@@ -157,22 +166,25 @@
   };
   const ACTIONS = {
     audio: ["notebooklm", "immersive-reader", "astra-ai"],
-    explain: ["notebooklm", "chatgpt", "daskalakos-ai"],
+    explain: ["notebooklm", "chatgpt"],
     quickreview: ["notebooklm", "chatgpt", "astra-ai"],
     flashcards: ["quizlet", "anki", "astra-ai"],
     quiz: ["quizlet", "chatgpt", "astra-ai"],
     truefalse: ["quizlet", "astra-ai"],
     oral: ["astra-ai", "chatgpt"],
     written: ["astra-ai", "chatgpt"],
-    weakspots: ["chatgpt", "quizlet", "daskalakos-ai", "astra-ai"],
+    weakspots: ["chatgpt", "quizlet", "astra-ai"],
     plan: ["astra-ai", "chatgpt", "notebooklm"],
   };
-  const FALLBACK = ["chatgpt", "astra-ai", "daskalakos-ai"];
+  const FALLBACK = ["chatgpt", "astra-ai"];
+  // Δασκαλάκος AI is offered only for explanations of students under 13, who cannot use general AI chats.
+  const YOUNG_EXPLAIN = { action: "explain", maxAge: 12, id: "daskalakos-ai" };
   // Subject → the catalog's tool for that kind of work (matched on the subject id and its label).
   const SUBJECT_RULES = [
     [/archaia|αρχαι|ancient|latin|λατιν/, []], // classical languages: no catalog tool fits
     [/math|μαθηματ|mathimat|αλγεβρ|algebr|γεωμετρ|geometr|στατιστ|statist/, ["geogebra", "desmos"]],
     [/physic|φυσικ|fysik|chem|χημ|chimei|biolog|βιολογ|science|περιβαλλον|perivallon|environment/, ["phet"]],
+    [/geograf|γεωγραφ|γεωλογ|geolog/, ["google-earth"]],
     [/histor|ιστορ|istori|\barts?\b|τεχν|πολιτισμ|θρησκ|thriskeft|religio/, ["google-arts-culture"]],
     [/english|αγγλ|aggli|french|γαλλ|gall|german|γερμαν|germa|ξεν/, ["deepl"]],
     [/informatic|πληροφορ|pliroforik|programm|προγραμματ|coding/, ["scratch"]],
@@ -201,6 +213,7 @@
     const special = zone === "special";
     const max = special ? 2 : 3;
     const actionIds = (ACTIONS[action] || FALLBACK).filter((id) => allowed(id, age));
+    if (action === YOUNG_EXPLAIN.action && age !== null && age <= YOUNG_EXPLAIN.maxAge) actionIds.push(YOUNG_EXPLAIN.id);
     const order = [];
     if (special && allowed("immersive-reader", age)) order.push("immersive-reader");
     order.push(...actionIds.slice(0, 2));

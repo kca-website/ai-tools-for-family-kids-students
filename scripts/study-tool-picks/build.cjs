@@ -17,7 +17,7 @@ function loadCatalog() {
 }
 
 const IDS = ["notebooklm", "chatgpt", "quizlet", "anki", "astra-ai", "daskalakos-ai", "immersive-reader", "reading-coach",
-  "geogebra", "desmos", "phet", "google-arts-culture", "deepl", "scratch", "mindmup"];
+  "geogebra", "desmos", "phet", "google-arts-culture", "google-earth", "deepl", "scratch", "mindmup"];
 
 function picksData(T = loadCatalog()) {
   const tools = {};

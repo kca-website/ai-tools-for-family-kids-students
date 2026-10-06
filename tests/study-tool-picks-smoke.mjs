@@ -29,6 +29,8 @@ for (const [zone, gs] of Object.entries(grades)) for (const grade of gs) {
     for (const p of picks) {
       assert.ok((catalog[p.id].minAge || 0) <= age, `${zone}/${grade}/${action}: ${p.id} needs ${catalog[p.id].minAge}+`);
       assert.equal(p.url, catalog[p.id].url);
+      // Δασκαλάκος AI only for explanations of students under 13 (not shown everywhere).
+      if (p.id === "daskalakos-ai") assert.ok(action === "explain" && age <= 12, `${zone}/${grade}/${action}: Δασκαλάκος`);
     }
   }
 }
@@ -41,6 +43,8 @@ assert.ok(!P.pick({ action: "explain", zone: "primary", grade: "e" }).some((p) =
 assert.ok(P.pick({ action: "explain", zone: "middle", grade: "b", subject: "mathimatika-b-gymnasiou" }).some((p) => p.id === "geogebra"));
 assert.ok(P.pick({ action: "quiz", zone: "high", grade: "b", subject: "fysiki-b-lykeiou" }).some((p) => p.id === "phet"));
 assert.equal(P.pick({ action: "quiz", zone: "special", grade: "c" })[0].id, "immersive-reader");
+assert.ok(P.pick({ action: "explain", zone: "middle", grade: "b", subject: "geografia-b-gymnasiou" }).some((p) => p.id === "google-earth"));
+assert.ok(catalog["google-earth"].auditSource && catalog["google-earth"].minAgeNote);
 
 const study = fs.readFileSync(new URL("../study.html", import.meta.url), "utf8");
 assert.match(study, /<script src="\/study-tool-picks\.js"><\/script>/);

@@ -1015,6 +1015,22 @@ const TOOLS = {
     lastReviewedEn: "6 October 2026",
     isGreek: true,
   },
+  "google-earth": {
+    id: "google-earth",
+    name: "Google Earth",
+    url: "https://earth.google.com/web/",
+    category: "learning-tool",
+    logo: null,
+    minAge: 6,
+    shortDescEl: "Τρισδιάστατη εξερεύνηση του πλανήτη: τόποι, ανάγλυφο, χάρτες, μέτρηση αποστάσεων και έτοιμες ξεναγήσεις (Voyager). Ιδανικό για Γεωγραφία, Ιστορία και Γεωλογία.",
+    shortDescEn: "3D exploration of the planet: places, terrain, maps, distance measuring and ready-made Voyager tours. Ideal for Geography, History and Geology.",
+    minAgeNote: "Η εξερεύνηση γίνεται χωρίς λογαριασμό· το 6+ είναι παιδαγωγική πρόταση του aitools4kids, όχι όρος της Google. Για αποθήκευση και δημιουργία έργων χρειάζεται λογαριασμός Google (προσωπικός στην Ελλάδα: 15+). Στα σχολεία μέσω Google Workspace for Education, ως «Additional Service» που για ανήλικους απαιτεί συναίνεση γονέα. Δεν είναι chatbot AI.",
+    auditSource: "https://support.google.com/edu/classroom/answer/11081157",
+    lastReviewed: "2026-10-06",
+    lastReviewedEl: "6 Οκτωβρίου 2026",
+    lastReviewedEn: "6 October 2026",
+    isGreek: false,
+  },
 };
 
 /**

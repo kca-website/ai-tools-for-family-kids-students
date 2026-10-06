@@ -7,7 +7,16 @@
  */
 (function () {
   "use strict";
+  // On the home page the curriculum data downloads in the background; if a data file had to be
+  // re-downloaded it can arrive after this script, so run once QUIZZES / GAP_TAGS / LEARNING_PATHS exist.
+  const ready = () => typeof QUIZZES !== "undefined" && typeof GAP_TAGS !== "undefined" && typeof LEARNING_PATHS !== "undefined";
+  if (!ready()) {
+    document.addEventListener("aitools4kids:heavy-loaded", () => { if (ready()) run(); }, { once: true });
+    return;
+  }
+  run();
 
+  function run() {
   const TODAY = "2026-09-20";
   function unique(arr) { return [...new Set((arr || []).filter(Boolean))]; }
 
@@ -185,4 +194,5 @@
 
 
 
+  }
 })();

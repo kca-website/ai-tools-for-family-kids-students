@@ -991,7 +991,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     if (isHighEpalMode()) return null;
     const subject = getCatalogSubject();
     const quizId = subject?.quizId || subject?.id || refs.subject?.value;
-    return (QUIZZES[ctx.zoneId] || {})[quizId] || null;
+    return quizzesFor(ctx.zoneId)[quizId] || null;
   }
 
   function getCurrentSubject() {
@@ -1001,7 +1001,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
   function getCurrentGap() {
     const id = refs.topic?.value;
     if (!id) return null;
-    return window.AITOOLSKIDS_CHARACTER_CHAPTERS?.find(c=>c.id===id&&(c.subject===refs.subject.value||c.subject.replace('history-','istoria-')===refs.subject.value)) || GAP_TAGS[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getTopics?.(ctx.zoneId, refs.grade.value, refs.subject.value)?.find((topic) => topic.id === id) || (urlTopicOverride?.id === id ? urlTopicOverride : null);
+    return window.AITOOLSKIDS_CHARACTER_CHAPTERS?.find(c=>c.id===id&&(c.subject===refs.subject.value||c.subject.replace('history-','istoria-')===refs.subject.value)) || gapTags()[id] || getCatalogSubject()?.topics?.find((topic) => topic.id === id) || window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getTopics?.(ctx.zoneId, refs.grade.value, refs.subject.value)?.find((topic) => topic.id === id) || (urlTopicOverride?.id === id ? urlTopicOverride : null);
   }
 
   function getOfficialCurriculumEntry() {
@@ -1130,8 +1130,13 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
     return lines.join("\n");
   }
 
+  // The curriculum data files load separately; if one failed to download the tutor must degrade, not throw.
+  function gapTags() { return (typeof GAP_TAGS !== "undefined" && GAP_TAGS) || {}; }
+  function learningPaths() { return (typeof LEARNING_PATHS !== "undefined" && LEARNING_PATHS) || {}; }
+  function quizzesFor(zoneId) { return ((typeof QUIZZES !== "undefined" && QUIZZES) || {})[zoneId] || {}; }
+
   function getPathForGap(gapId) {
-    return LEARNING_PATHS[gapId] || [];
+    return learningPaths()[gapId] || [];
   }
 
   function getGapTagsForQuiz(quiz) {
@@ -1142,7 +1147,7 @@ ${cfg.finalCheck ? "- Close with ONE new independent transfer/check question. Do
         if (option.gapTag) tags.push(option.gapTag);
       }
     }
-    return unique(tags).filter((id) => GAP_TAGS[id]);
+    return unique(tags).filter((id) => gapTags()[id]);
   }
 
   function getSelectedGradeLabel() {
@@ -1446,7 +1451,7 @@ ${character?.id === "pericles" ? "- PERICLES GUARD: Pericles died in 429 BCE. Th
 
     let gradeList = sharedGrades;
     if (!gradeList.length && typeof QUIZZES !== "undefined") {
-      const ids = [...new Set(Object.values(QUIZZES[ctx.zoneId] || {}).flatMap((q) => q.grades || []))];
+      const ids = [...new Set(Object.values(quizzesFor(ctx.zoneId)).flatMap((q) => q.grades || []))];
       gradeList = ids.map((id) => {
         const labels = fallbackLabels[ctx.zoneId]?.[id] || [id, id];
         return { id, labelEl: labels[0], labelEn: labels[1] };
@@ -1517,7 +1522,7 @@ ${character?.id === "pericles" ? "- PERICLES GUARD: Pericles died in 429 BCE. Th
       if (resolver) {
         subjects = resolver.getSubjects(ctx.zoneId, gradeId) || [];
       } else {
-        const quizzes = Object.values(QUIZZES[ctx.zoneId] || {}).filter((q) => (q.grades || []).includes(gradeId));
+        const quizzes = Object.values(quizzesFor(ctx.zoneId)).filter((q) => (q.grades || []).includes(gradeId));
         const catalogSubjects = window.AITOOLSKIDS_TUTOR_CATALOG?.getSubjects?.(ctx.zoneId, gradeId) || [];
         const represented = new Set(catalogSubjects.map((subject) => subject.quizId || subject.id));
         subjects = catalogSubjects.concat(quizzes.filter((quiz) => !represented.has(quiz.id)));
@@ -1580,7 +1585,7 @@ ${character?.id === "pericles" ? "- PERICLES GUARD: Pericles died in 429 BCE. Th
     const tags = catalogTopics.length ? catalogTopics.map((topic) => topic.id) : verifiedQuizTags;
     refs.topic.innerHTML = "";
     // Annual-guidance topics first; the official book units follow in their own group.
-    const topicFor = (id) => GAP_TAGS[id] || catalogTopics.find((topic) => topic.id === id);
+    const topicFor = (id) => gapTags()[id] || catalogTopics.find((topic) => topic.id === id);
     const bookIds = tags.filter((id) => catalogTopics.find((topic) => topic.id === id)?.topicGroup === "book");
     const mainIds = tags.filter((id) => !bookIds.includes(id));
     const grouped = bookIds.length && mainIds.length;

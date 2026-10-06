@@ -809,7 +809,17 @@
             var s=document.createElement("script");
             s.src=x[1]; s.async=false; /* parallel download, in-order execution */
             if(x[0]) s.setAttribute("data-aitools4kids-runtime",x[0]);
-            s.onload=s.onerror=function(){ if(--pending===0){ window.__aitools4kidsHeavyLoaded=true; document.dispatchEvent(new Event("aitools4kids:heavy-loaded")); resolve(); } };
+            var done=function(){ if(--pending===0){ window.__aitools4kidsHeavyLoaded=true; document.dispatchEvent(new Event("aitools4kids:heavy-loaded")); resolve(); } };
+            s.onload=done;
+            /* A dropped download (flaky mobile network) is retried once before the data counts as loaded,
+               so the tutor never starts without QUIZZES / GAP_TAGS / LEARNING_PATHS. */
+            s.onerror=function(){
+              var r=document.createElement("script");
+              r.src=x[1]+(x[1].indexOf("?")<0?"?retry=1":"&retry=1"); r.async=false;
+              if(x[0]) r.setAttribute("data-aitools4kids-runtime",x[0]);
+              r.onload=r.onerror=done;
+              document.head.appendChild(r);
+            };
             document.head.appendChild(s);
           });
         });

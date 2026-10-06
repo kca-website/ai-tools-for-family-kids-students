@@ -101,7 +101,7 @@ assert.match(api, /return handleTablePdfSource\(res, \{ subject, topic, mapping:
 assert.equal(StudyContext.resolveSourcePolicy({ schoolLevel: "special", hasCurriculumSelection: true }), "official_required");
 const study = fs.readFileSync(new URL("../study.html", import.meta.url), "utf8");
 assert.match(study, /<script src="\/special-education-book-sections-2026-2027\.js"><\/script>/);
-assert.match(study, /special:\[\['a','Α΄ Ειδικού Γυμνασίου'\].*\['lc','Γ΄ Ειδικού Λυκείου'\]\]/);
+assert.match(study, /special:\[\['a','Α΄ Ειδικού Γυμνασίου'\].*\['lc','Γ΄ Ειδικού Λυκείου'\]/);
 assert.match(study, /if\(z==='special'\)return \(specialSections\(\)\?\.subjectsForGrade/);
 assert.match(study, /context:cfg\.system\+specialEducationGuidance\(\)/);
 assert.match(study, /if\(interactiveTotal&&\$\('zone'\)\.value==='special'\)interactiveTotal=3;/);

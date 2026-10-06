@@ -1768,12 +1768,12 @@ module.exports = async function handler(req, res) {
   }
 
   const rawSubject = clean(req.query?.subject, 200);
-  const topic = clean(req.query?.topic, 500);
+  let topic = clean(req.query?.topic, 500);
   const completeAudio = req.query?.purpose === "audio";
   let subject = ALIASES[rawSubject] || rawSubject;
   const schoolType = clean(req.query?.schoolType, 20).toLowerCase();
-  // Ειδικό Γυμνάσιο (Ε.Α.Ε.): a unit of the official special-education instructions is answered only
-  // from the general schoolbook page(s) verified for it; anything else fails closed.
+  // Ειδική Αγωγή (Ε.Α.Ε.): a unit of the official special-education instructions is answered only
+  // from the official schoolbook page(s) / PDF range verified for it; anything else fails closed.
   let specialUnit = null;
   if (SPECIAL_SECTIONS.has(subject)) {
     specialUnit = topic ? SPECIAL_SECTIONS.get(subject, topic) : null;
@@ -1785,6 +1785,15 @@ module.exports = async function handler(req, res) {
       });
     }
     subject = specialUnit.book;
+    const first = specialUnit.pages[0] || {};
+    if (first.route) {
+      // The general-school AI Study topic already resolves this exact unit.
+      subject = first.route.subject;
+      topic = first.route.topic;
+      specialUnit = null;
+    } else if (first.pdf) {
+      return handleTablePdfSource(res, { subject, topic, mapping: { ...first.pdf, label: specialUnit.label }, completeAudio });
+    }
   }
   // ΕΠΑΛ requests (explicit schoolType or an epal-* subject id) are answered only from the
   // dedicated EPAL catalog; they never fall through to the ΓΕΛ/Γυμνάσιο/Δημοτικό mappings.
@@ -1792,9 +1801,9 @@ module.exports = async function handler(req, res) {
     return handleEpalSource(req, res, { subject, topic, completeAudio });
   }
   // Γυμνάσιο PDF-only books with an explicit unit → page-range table.
-  const gymnasiumPdf = topic ? GYMNASIUM_SECTIONS.pdfFor(subject, topic) : null;
+  const gymnasiumPdf = topic && !specialUnit ? GYMNASIUM_SECTIONS.pdfFor(subject, topic) : null;
   if (gymnasiumPdf) return handleTablePdfSource(res, { subject, topic, mapping: gymnasiumPdf, completeAudio });
-  const gelInventory = topic ? resolveGelInventoryTopic(subject, topic) : null;
+  const gelInventory = topic && !specialUnit ? resolveGelInventoryTopic(subject, topic) : null;
 
   if (gelInventory && !gelInventory.runtimeEligible) {
     const mapping = gelInventory.mapping;
@@ -1929,6 +1938,7 @@ module.exports = async function handler(req, res) {
     (catalogHasExactTopic ? catalogBook : null) ||
     glossaAUnitBook ||
     BOOKS[subject] ||
+    (specialUnit ? { title: specialUnit.bookTitle || subject, mode: "gymnasiumTable", officialSourceRequired: true, schoolYear: "2026-2027" } : null) ||
     catalogBook ||
     buildGelInventoryBook(gelInventory);
 

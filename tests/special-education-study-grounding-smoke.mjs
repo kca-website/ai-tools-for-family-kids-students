@@ -9,37 +9,62 @@ globalThis.window = globalThis;
 for (const file of [
   "special-education-curriculum-data.js", "special-education-learning-data.js", "special-education-quiz-data.js",
   "special-education-status.js", "special-education-sector-economy-data.js", "special-education-special-gymnasium-data.js",
-  "teacher-curriculum-special-gym-annual-2026-2027.js",
+  "teacher-curriculum-special-gym-annual-2026-2027.js", "teacher-curriculum-special-lyceum-annual-2026-2027.js",
+  "special-education-special-lyceum-learning-2026-2027.js", "special-education-framework-learning-2026-2027.js",
+  "special-education-special-lyceum-data.js",
 ]) require(`../${file}`);
 const entries = window.SPECIAL_EDUCATION_CURRICULUM.entries;
 const M = require("../special-education-book-sections-2026-2027.js");
 const StudyContext = require("../study-context.js");
 const handler = require("../api/schoolbook-source.js");
 
+const G = (g, k) => `teacher-annual-special-gym-${g}-${k}`;
+const L = (g, k) => `special-lyceum-${g}-${k}-official-2026-27`;
 const expected = {
-  a: { math: 43, physics: 8, biology: 14, geography: 27, history: 24 },
-  b: { math: 27, physics: 27, chemistry: 19, biology: 13, geography: 46, history: 23 },
-  c: { math: 31, physics: 27, chemistry: 34, biology: 12, history: 37 },
+  a: { [G("a", "math")]: 43, [G("a", "physics")]: 8, [G("a", "biology")]: 14, [G("a", "geography")]: 27, [G("a", "history")]: 24,
+    [G("a", "religion-ethics")]: 7, [G("a", "ancient-language")]: 12, [G("a", "ancient-translation")]: 23, [G("a", "language")]: 5, [G("a", "literature")]: 65 },
+  b: { [G("b", "math")]: 27, [G("b", "physics")]: 27, [G("b", "chemistry")]: 19, [G("b", "biology")]: 13, [G("b", "geography")]: 46, [G("b", "history")]: 23,
+    [G("b", "religion-ethics")]: 7, [G("b", "ancient-language")]: 11, [G("b", "ancient-translation")]: 15, [G("b", "literature")]: 68, [G("b", "social-civic")]: 23 },
+  c: { [G("c", "math")]: 31, [G("c", "physics")]: 27, [G("c", "chemistry")]: 34, [G("c", "biology")]: 12, [G("c", "history")]: 37,
+    [G("c", "religion-ethics")]: 7, [G("c", "ancient-language")]: 8, [G("c", "ancient-translation")]: 16, [G("c", "language")]: 6, [G("c", "literature")]: 69, [G("c", "social-civic")]: 40 },
+  la: { [L("a", "biology")]: 13, [L("a", "informatics")]: 20 },
+  lb: { [L("b", "biology")]: 32, [L("b", "informatics")]: 8, [L("b", "latin")]: 15 },
+  lc: { [L("c", "biology")]: 16, [L("c", "latin")]: 35 },
 };
 let total = 0;
 for (const [grade, subjects] of Object.entries(expected)) {
-  assert.deepEqual(M.subjectsForGrade(grade).map((s) => s.id.split("-").pop()), Object.keys(subjects), `grade ${grade}`);
-  for (const [key, count] of Object.entries(subjects)) {
-    const id = `teacher-annual-special-gym-${grade}-${key}`;
+  assert.deepEqual(M.subjectsForGrade(grade).map((s) => s.id).sort(), Object.keys(subjects).sort(), `grade ${grade}`);
+  for (const [id, count] of Object.entries(subjects)) {
     const labels = M.labels(id);
     assert.equal(labels.length, count, id);
+    assert.equal(new Set(labels).size, count, `${id}: unique labels`);
     const anchors = entries[id].officialAnchors;
-    // Only units of the official instructions, in their official order.
-    assert.deepEqual(labels, anchors.filter((a) => labels.includes(a)), `${id}: official units in order`);
     for (const label of labels) {
       const unit = M.get(id, label);
+      // Every unit belongs to a unit of the official special-education instructions.
+      for (const anchor of [].concat(unit.anchor)) assert.ok(anchors.includes(anchor), `${id}: ${anchor}`);
       assert.ok(unit.pages.length >= 1, `${id}: ${label}`);
-      for (const page of unit.pages) assert.match(page.url, /^https:\/\/ebooks\.edu\.gr\/ebooks\/v\/html\/8547\/\d+\/[\w-]+_html-empl\/(?:index|mat)[\w]+\.html$/);
+      for (const page of unit.pages) {
+        if (page.pdf) assert.match(page.pdf.viewUrl, /^https:\/\/ebooks\.edu\.gr\/ebooks\/v\/pdf\/8547\/\d+\//);
+        else if (page.route) assert.ok(page.route.subject && page.route.topic);
+        else assert.match(page.url, /^https:\/\/ebooks\.edu\.gr\/ebooks\/v\/html\/8547\/\d+\/[^/]+\/(?:index|mat)[\w]+\.html?$/);
+      }
     }
     total += count;
   }
 }
-assert.equal(total, 412);
+assert.equal(total, 933);
+// Units that are not a single official text keep the official order.
+for (const id of [G("a", "math"), G("c", "physics"), L("b", "biology")]) {
+  const labels = M.labels(id);
+  assert.deepEqual(labels, entries[id].officialAnchors.filter((a) => labels.includes(a)), id);
+}
+// Literature: each text is listed under its official thematic unit.
+assert.deepEqual(M.get(G("a", "literature"), "Λαογραφικά · Λαϊκό παραμύθι — «Το πιο γλυκό ψωμί»").anchor, ["Λαογραφικά"]);
+// Religion: the verified PDF page range of the thematic unit.
+const rel = M.get(G("b", "religion-ethics"), entries[G("b", "religion-ethics")].officialAnchors[0]).pages[0].pdf;
+assert.deepEqual([rel.pdfPage, rel.pdfPageEnd], [7, 19]);
+assert.match(rel.heading, /^ΘΕΜΑΤΙΚΗ ΕΝΟΤΗΤΑ/);
 
 // Units the book does not contain are not invented.
 assert.equal(M.get("teacher-annual-special-gym-a-physics", "4. Μέτρηση όγκου"), null);
@@ -69,18 +94,20 @@ assert.equal(unmapped.body.error, "source_not_mapped");
 const api = fs.readFileSync(new URL("../api/schoolbook-source.js", import.meta.url), "utf8");
 assert.match(api, /let directUrls = specialUnit \? specialUnit\.pages\.map/);
 assert.match(api, /SPECIAL_SECTIONS\.scopePageHtml\(html, specialUnit\.pages\[i\]\)/);
+assert.match(api, /if \(first\.route\) \{/);
+assert.match(api, /return handleTablePdfSource\(res, \{ subject, topic, mapping: \{ \.\.\.first\.pdf, label: specialUnit\.label \}, completeAudio \}\);/);
 
 // AI Study: special zone is selectable in-page, strict official source, special-education adaptations.
 assert.equal(StudyContext.resolveSourcePolicy({ schoolLevel: "special", hasCurriculumSelection: true }), "official_required");
 const study = fs.readFileSync(new URL("../study.html", import.meta.url), "utf8");
 assert.match(study, /<script src="\/special-education-book-sections-2026-2027\.js"><\/script>/);
-assert.match(study, /special:\[\['a','Α΄ Ειδικού Γυμνασίου'\]/);
+assert.match(study, /special:\[\['a','Α΄ Ειδικού Γυμνασίου'\].*\['lc','Γ΄ Ειδικού Λυκείου'\]\]/);
 assert.match(study, /if\(z==='special'\)return \(specialSections\(\)\?\.subjectsForGrade/);
 assert.match(study, /context:cfg\.system\+specialEducationGuidance\(\)/);
 assert.match(study, /if\(interactiveTotal&&\$\('zone'\)\.value==='special'\)interactiveTotal=3;/);
 assert.doesNotMatch(study, /\$\('standardStudyFields'\)\.classList\.toggle\('hidden',special\)/, "special no longer redirects away");
 const summary = fs.readFileSync(new URL("../api/source-summary.js", import.meta.url), "utf8");
 assert.match(summary, /const simple = SPECIAL_SECTIONS\.has\(sid\);/);
-assert.match(summary, /\.\.\.\(simple \? \{ learner: 'special-education-v1' \} : \{\}\)/);
+assert.match(summary, /\.\.\.\(simple \? \{ learner: 'special-education-v2' \} : \{\}\)/);
 
-console.log(`Special education study grounding smoke passed: ${total} official Ε.Α.Ε. units across 16 Ειδικό Γυμνάσιο subjects.`);
+console.log(`Special education study grounding smoke passed: ${total} official Ε.Α.Ε. units (Ειδικό Γυμνάσιο + Ειδικό Λύκειο).`);

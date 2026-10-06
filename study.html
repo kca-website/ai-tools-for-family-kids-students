@@ -85,8 +85,8 @@
         <div id="epalSpecialtyField" class="hidden"><label for="epalSpecialty" data-el="Ειδικότητα ΕΠΑΛ" data-en="EPAL specialty">Ειδικότητα ΕΠΑΛ</label><select id="epalSpecialty"></select></div>
       </div>
       <div id="specialGateway" class="hidden notice">
-        <strong class="v9i v9i-school" data-el="Ειδικό Γυμνάσιο (Ε.Α.Ε.)" data-en="Special Gymnasium (special education)">Ειδικό Γυμνάσιο (Ε.Α.Ε.)</strong><br>
-        <span data-el="Οι ενότητες είναι αυτές των επίσημων οδηγιών Ε.Α.Ε. 2026–27 και η AI εξηγεί με απλά λόγια, σε μικρά βήματα. Για Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ., διαγνωστικό και εργαλεία υποστήριξης:" data-en="Units follow the official 2026–27 special-education instructions and the AI explains in plain language, in small steps. For Special Lyceum, EN.E.E.GY.-L., the diagnostic and support tools:">Οι ενότητες είναι αυτές των επίσημων οδηγιών Ε.Α.Ε. 2026–27 και η AI εξηγεί με απλά λόγια, σε μικρά βήματα. Για Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ., διαγνωστικό και εργαλεία υποστήριξης:</span>
+        <strong class="v9i v9i-school" data-el="Ειδικό Γυμνάσιο και Ειδικό Λύκειο (Ε.Α.Ε.)" data-en="Special Gymnasium and Special Lyceum (special education)">Ειδικό Γυμνάσιο και Ειδικό Λύκειο (Ε.Α.Ε.)</strong><br>
+        <span data-el="Οι ενότητες είναι αυτές των επίσημων οδηγιών Ε.Α.Ε. 2026–27 και η AI εξηγεί με απλά λόγια, σε μικρά βήματα. Για ΕΝ.Ε.Ε.ΓΥ.-Λ., διαγνωστικό και εργαλεία υποστήριξης:" data-en="Units follow the official 2026–27 special-education instructions and the AI explains in plain language, in small steps. For EN.E.E.GY.-L., the diagnostic and support tools:">Οι ενότητες είναι αυτές των επίσημων οδηγιών Ε.Α.Ε. 2026–27 και η AI εξηγεί με απλά λόγια, σε μικρά βήματα. Για ΕΝ.Ε.Ε.ΓΥ.-Λ., διαγνωστικό και εργαλεία υποστήριξης:</span>
         <a href="/special-education.html" data-el="Ειδική Εκπαίδευση →" data-en="Special Education →">Ειδική Εκπαίδευση →</a>
       </div>
       <div id="standardStudyFields">
@@ -206,7 +206,7 @@
   const officialSourceCache=new Map();
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
   const savedStudyContext=window.AITOOLSKIDS_STUDY_CONTEXT?.readPersisted();
-  const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],special:[['a','Α΄ Ειδικού Γυμνασίου'],['b','Β΄ Ειδικού Γυμνασίου'],['c','Γ΄ Ειδικού Γυμνασίου']]};
+  const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],special:[['a','Α΄ Ειδικού Γυμνασίου'],['b','Β΄ Ειδικού Γυμνασίου'],['c','Γ΄ Ειδικού Γυμνασίου'],['la','Α΄ Ειδικού Λυκείου'],['lb','Β΄ Ειδικού Λυκείου'],['lc','Γ΄ Ειδικού Λυκείου']]};
   function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();renderCharacterRoutes();}
   function saveLang(value){try{localStorage.setItem('aitools4kids_lang',value)}catch(_){}}
   $('elBtn').onclick=()=>{lang='el';saveLang(lang);localize()}; $('enBtn').onclick=()=>{lang='en';saveLang(lang);localize()};
@@ -229,14 +229,14 @@
     $('epalSector').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose sector':'Γενική Παιδεία / διάλεξε τομέα')+'</option>'+(cat?.getSectors?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
     $('epalSpecialty').innerHTML='<option value="">'+(lang==='en'?'General subjects / choose specialty':'Γενική Παιδεία / διάλεξε ειδικότητα')+'</option>'+(cat?.getSpecialties?.()||[]).map(x=>'<option value="'+esc(x.id)+'">'+esc(x.label)+'</option>').join('');
   }
-  function populateGrades(){const z=$('zone').value;$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?(z==='special'?'Special Gymnasium, grade ':'Grade ')+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
+  function populateGrades(){const z=$('zone').value;$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?(z==='special'?(v[0]==='l'?'Special Lyceum, grade ':'Special Gymnasium, grade '):'Grade ')+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6',la:'1',lb:'2',lc:'3'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
   const specialSections=()=>window.AITOOLSKIDS_SPECIAL_BOOK_SECTIONS;
   // Ειδικό Γυμνάσιο: same adaptations as the Special Education tutor (special-education-tutor-context.js).
   function specialEducationGuidance(){
     if($('zone').value!=='special')return '';
     return lang==='en'
-      ? '\n\nSpecial education (Special Gymnasium) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz has exactly 3 short questions (this overrides any 5-question instruction) and is clearly simpler than the general school: 2 clear options, one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
-      : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· το quiz έχει ακριβώς 3 σύντομες ερωτήσεις (αυτό υπερισχύει κάθε οδηγίας για 5 ερωτήσεις) και είναι σαφώς απλούστερο από του γενικού σχολείου: 2 καθαρές επιλογές, μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
+      ? '\n\nSpecial education (Special Gymnasium / Special Lyceum) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz has exactly 3 short questions (this overrides any 5-question instruction) and is clearly simpler than the general school: 2 clear options, one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
+      : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο / Ειδικό Λύκειο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· το quiz έχει ακριβώς 3 σύντομες ερωτήσεις (αυτό υπερισχύει κάθε οδηγίας για 5 ερωτήσεις) και είναι σαφώς απλούστερο από του γενικού σχολείου: 2 καθαρές επιλογές, μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
   }
   function subjectRows(){
     const z=$('zone').value,g=$('grade').value;
@@ -422,7 +422,7 @@
       zoneId:$('zone').value||'',
       roleId:'student',
       lang,
-      schoolType:$('zone').value==='high'?($('schoolType').value||'gel'):$('zone').value==='special'?'special-gymnasium':'',
+      schoolType:$('zone').value==='high'?($('schoolType').value||'gel'):$('zone').value==='special'?(String($('grade').value||'')[0]==='l'?'special-lyceum':'special-gymnasium'):'',
       grade:$('grade').value||'',
       sector:isEpal()&&$('grade').value==='b'?($('epalSector').value||''):'',
       specialty:isEpal()&&$('grade').value==='c'?($('epalSpecialty').value||''):'',

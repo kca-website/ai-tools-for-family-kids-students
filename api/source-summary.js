@@ -73,7 +73,7 @@ module.exports = async function handler(req, res) {
     const title = String(officialSource.bookTitle || sourceTitle || '').trim().slice(0, 300);
     if (source.length < 250) return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
 
-    // Ειδικό Γυμνάσιο (Ε.Α.Ε.): short, plain-language verified lesson instead of the whole-section narration.
+    // Ειδική Αγωγή (Ε.Α.Ε.): short, plain-language verified lesson instead of the whole-section narration.
     const simple = SPECIAL_SECTIONS.has(sid);
     if (activity === 'audio' && !simple) return await wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus });
     return await verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation, audio: activity === 'audio', simple });
@@ -124,7 +124,7 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
     kind: 'verified-source-summary', promptVersion: 'verified-summary-v6-safe', subjectId: sid,
     topic: selectedTopic, title, language: lang, explanation, audio, source: workingSource, modelRoute: routingSignature(aiStatus),
     // Plain-language Ε.Α.Ε. lessons get their own entries; general-school keys stay unchanged.
-    ...(simple ? { learner: 'special-education-v1' } : {}),
+    ...(simple ? { learner: 'special-education-v2' } : {}),
   };
   const cached = await getStudyCache(cacheKey);
   if (cached?.text) {
@@ -136,8 +136,8 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
     ? `Create a concise learner-facing ${explanation ? 'explanation' : 'summary'} from an official schoolbook source. Return ONLY JSON: {"claims":[{"claim":"clear sentence","evidence":"exact 4-24 word excerpt from SOURCE"}]}. Give 5-8 claims, use only SOURCE, and copy evidence exactly.`
     : `Φτιάξε ${explanation ? 'απλή επεξήγηση' : 'σύντομη σύνοψη'} για μαθητή από επίσημη σχολική πηγή. Επίστρεψε ΜΟΝΟ JSON: {"claims":[{"claim":"καθαρή πρόταση","evidence":"ακριβές απόσπασμα 4-24 λέξεων από την ΠΗΓΗ"}]}. Δώσε 5-8 claims, χρησιμοποίησε μόνο την ΠΗΓΗ και αντέγραψε το evidence ακριβώς.`;
   const plainLanguage = !simple ? '' : (lang === 'en'
-    ? ' The learner attends a Special Gymnasium (special education): give 4-6 claims, each ONE short sentence of at most 14 words with one idea, everyday words, no nested clauses; keep official terms but explain them simply.'
-    : ' Ο μαθητής φοιτά σε Ειδικό Γυμνάσιο (Ε.Α.Ε.): δώσε 4-6 claims, το καθένα ΜΙΑ σύντομη πρόταση έως 14 λέξεις με μία ιδέα, απλές καθημερινές λέξεις, χωρίς δευτερεύουσες προτάσεις· κράτα τους επίσημους όρους αλλά εξήγησέ τους απλά.');
+    ? ' The learner attends a special-education school (Special Gymnasium or Special Lyceum): give 4-6 claims, each ONE short sentence of at most 14 words with one idea, everyday words, no nested clauses; keep official terms but explain them simply.'
+    : ' Ο μαθητής φοιτά σε σχολείο Ε.Α.Ε. (Ειδικό Γυμνάσιο ή Ειδικό Λύκειο): δώσε 4-6 claims, το καθένα ΜΙΑ σύντομη πρόταση έως 14 λέξεις με μία ιδέα, απλές καθημερινές λέξεις, χωρίς δευτερεύουσες προτάσεις· κράτα τους επίσημους όρους αλλά εξήγησέ τους απλά.');
   const result = await generateChat({
     messages: [{ role: 'system', content: system + plainLanguage }, { role: 'user', content: `TOPIC: ${selectedTopic}\nSOURCE:\n${workingSource}` }],
     maxTokens: 950, temperature: 0, reasoningEffort: 'low', modelProfile: 'balanced',

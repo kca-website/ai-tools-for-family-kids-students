@@ -677,6 +677,24 @@ const BOOKS = {
     curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
     selectionPolicy: "teacher-choice-from-official-anthology"
   },
+  "logotechnia-a-gymnasiou": {
+    title: "Κείμενα Νεοελληνικής Λογοτεχνίας Α΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2228/Keimena-Neoellinikis-Logotechnias_A-Gymnasiou_html-empl/",
+    mode: "gymnasiumTable",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "teacher-choice-from-official-anthology"
+  },
+  "logotechnia-g-gymnasiou": {
+    title: "Κείμενα Νεοελληνικής Λογοτεχνίας Γ΄ Γυμνασίου",
+    base: "https://ebooks.edu.gr/ebooks/v/html/8547/2218/Keimena-Neoellinikis-Logotechnias_G-Gymnasiou_html-empl/",
+    mode: "gymnasiumTable",
+    officialSourceRequired: true,
+    schoolYear: "2026-2027",
+    curriculumSource: "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-gymnasiou-gia-to-scholiko-etos-2026-2027/",
+    selectionPolicy: "teacher-choice-from-official-anthology"
+  },
   "physics-gymnasiou": {
     title: "Φυσική Β΄ Γυμνασίου",
     base: "https://ebooks.edu.gr/ebooks/v/html/8547/2204/Fysiki_B-Gymnasiou_html-empl/",

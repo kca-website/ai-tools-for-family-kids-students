@@ -10,7 +10,12 @@ const availability = require("../secondary-grounding-availability-2026-2027.js")
 const expansion = fs.readFileSync(new URL("../curriculum-2026-2027-expansion.js", import.meta.url), "utf8");
 const api = fs.readFileSync(new URL("../api/schoolbook-source.js", import.meta.url), "utf8");
 
-const htmlExpected = { "biologia-a-gymnasiou": 15, "biologia-g-gymnasiou": 12, "fysiki-a-gymnasiou": 8, "geografia-a-gymnasiou": 9 };
+const htmlExpected = {
+  "biologia-a-gymnasiou": 15, "biologia-g-gymnasiou": 12, "fysiki-a-gymnasiou": 8, "geografia-a-gymnasiou": 9,
+  "chimeia-g-gymnasiou": 12, "fysiki-g-gymnasiou": 8, "mathimatika-a-gymnasiou": 3, "mathimatika-g-gymnasiou": 7,
+  "istoria-a-gymnasiou": 4, "istoria-b-gymnasiou": 4, "istoria-g-gymnasiou": 8, "geografia-b-gymnasiou": 8,
+  "logotechnia-a-gymnasiou": 65, "logotechnia-g-gymnasiou": 69,
+};
 for (const [id, count] of Object.entries(htmlExpected)) {
   const labels = G.labels(id);
   assert.equal(labels.length, count, id);
@@ -26,6 +31,22 @@ assert.equal(G.urlsFor("biologia-a-gymnasiou", "Κεφ. 4: Αναπνοή").leng
 // No invented sections: topics the book does not teach stay unmapped.
 assert.equal(G.urlsFor("fysiki-a-gymnasiou", "Μέτρηση όγκου").length, 0);
 assert.equal(G.urlsFor("biologia-a-gymnasiou", "Επιστήμη της Βιολογίας και εισαγωγή στην επιστημονική μέθοδο").length, 0);
+assert.equal(G.urlsFor("geografia-b-gymnasiou", "Η Ελλάδα μέσα στην Ευρώπη").length, 0);
+// The UI id of Γεωγραφία Β΄ resolves to the same table.
+for (const label of G.labels("geografia-b-gymnasiou")) assert.deepEqual(G.urlsFor("geologia-geografia-b-gymnasiou", label), G.urlsFor("geografia-b-gymnasiou", label));
+
+// Λογοτεχνία Α΄/Γ΄: AI Study lists exactly the anthology texts, one official page each, and the
+// Language tutor refresh must not swallow them into Νεοελληνική Γλώσσα.
+for (const id of ["logotechnia-a-gymnasiou", "logotechnia-g-gymnasiou"]) {
+  const at = expansion.indexOf(`id: "${id}"`);
+  assert.ok(at > 0, `${id} in catalog`);
+  const rows = expansion.slice(expansion.indexOf("rows: [", at), expansion.indexOf("\n        ],", at));
+  assert.deepEqual([...rows.matchAll(/\["((?:[^"\\]|\\.)+)", "/g)].map((m) => JSON.parse(`"${m[1]}"`)), G.labels(id));
+  for (const label of G.labels(id)) assert.equal(G.urlsFor(id, label).length, 1, `${id}: ${label}`);
+  assert.match(api, new RegExp(`"${id}": \\{`));
+}
+const languageTutor = fs.readFileSync(new URL("../september-2026-language-tutor.js", import.meta.url), "utf8");
+assert.match(languageTutor, /if \(\/\^logotechnia-\/\.test\(/);
 
 // Θρησκευτικά Α΄/Γ΄ Γυμνασίου: the 7 thematic units of each official PDF book.
 for (const id of ["thriskeftika-a-gymnasiou", "thriskeftika-g-gymnasiou"]) {
@@ -50,4 +71,4 @@ assert.match(api, /const gymnasiumUrls = GYMNASIUM_SECTIONS\.urlsFor\(subject, t
 assert.match(api, /GYMNASIUM_SECTIONS\.pdfFor\(subject, topic\)/);
 assert.match(api, /async function handleTablePdfSource\(/);
 
-console.log("Gymnasium book sections smoke passed: Βιολογία Α΄/Γ΄, Φυσική Α΄, Γεωγραφία Α΄, Θρησκευτικά Α΄/Γ΄.");
+console.log("Gymnasium book sections smoke passed: Βιολογία, Φυσική, Χημεία Γ΄, Μαθηματικά Α΄/Γ΄, Ιστορία Α΄–Γ΄, Γεωγραφία Α΄/Β΄, Λογοτεχνία Α΄/Γ΄, Θρησκευτικά Α΄/Γ΄.");

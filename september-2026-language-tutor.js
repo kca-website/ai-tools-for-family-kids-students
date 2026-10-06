@@ -47,6 +47,8 @@
   }
 
   function isGreekLanguage(subject){
+    // Literature anthologies are their own subjects (official book texts), not Language skills.
+    if (/^logotechnia-/.test(String(subject?.id || ""))) return false;
     const s = `${subject?.subjectLabelEl || ""} ${subject?.id || ""}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     return /νεοελλην|γλωσσα/.test(s) && !/αγγλ|english|ξεν|αρχαι|λατιν/.test(s);
   }

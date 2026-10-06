@@ -235,8 +235,8 @@
   function specialEducationGuidance(){
     if($('zone').value!=='special')return '';
     return lang==='en'
-      ? '\n\nSpecial education (Special Gymnasium) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz must be clearly simpler than the general school: at most 3 short questions, 2 clear options, one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
-      : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· αν φτιάχνεις quiz, να είναι σαφώς απλούστερο από του γενικού σχολείου: έως 3 σύντομες ερωτήσεις, 2 καθαρές επιλογές, μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
+      ? '\n\nSpecial education (Special Gymnasium) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz has exactly 3 short questions (this overrides any 5-question instruction) and is clearly simpler than the general school: 2 clear options, one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
+      : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· το quiz έχει ακριβώς 3 σύντομες ερωτήσεις (αυτό υπερισχύει κάθε οδηγίας για 5 ερωτήσεις) και είναι σαφώς απλούστερο από του γενικού σχολείου: 2 καθαρές επιλογές, μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
   }
   function subjectRows(){
     const z=$('zone').value,g=$('grade').value;
@@ -877,6 +877,7 @@
     $('studyCharacterAvatar').innerHTML=action==='character'?window.AITOOLSKIDS_CHARACTER_AVATAR?.(activeStudyCharacter.id,lang)||'':'';
     interactiveAction=action; interactiveHistory=[];
     interactiveTotal=action==='quiz'?5:0;
+    if(interactiveTotal&&$('zone').value==='special')interactiveTotal=3; // Ε.Α.Ε.: shorter, simpler quiz
     interactiveStep=interactiveTotal?1:0;
     $('workspaceTitle').textContent=actionTitle(action);
     $('aiWorkspace').classList.remove('hidden');
@@ -980,7 +981,7 @@
     interactiveHistory.push('LEARNER: '+answer);
     const cfg=actionConfig(interactiveAction);
     const unsure=learnerIsUnsure(answer);
-    const isFiveQuestionQuiz=interactiveAction==='quiz'&&interactiveTotal===5;
+    const isFiveQuestionQuiz=interactiveAction==='quiz'&&interactiveTotal>0;
     const finishing=isFiveQuestionQuiz&&!unsure&&interactiveStep>=interactiveTotal;
     const uncertaintyPrompt=lang==='en'
       ? 'Conversation so far:\n'+interactiveHistory.slice(-10).join('\n')+'\nThe learner explicitly says they do not know or are unsure. Do NOT praise the answer and do NOT move to a new concept. Give exactly one short hint grounded in the supplied source, then re-ask the SAME concept in an easier form. Prefer a two-choice question, a fill-in-the-blank, or a very short scaffold. Do not reveal the full answer unless a useful hint is impossible.'

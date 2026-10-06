@@ -1,5 +1,6 @@
 const { transcribeOfficialFigures } = require('../schoolbook-figures');
 const { extractCompletePage, completeText, VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
+const HISTORY_A_LYCEUM = require('../history-a-lyceum-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
@@ -1940,6 +1941,21 @@ module.exports = async function handler(req, res) {
       sourceUrls = directUrls;
       const gelAnchorScoped = gelInventory?.runtimeEligible && gelInventory.mapping?.granularity === "section-anchor";
       let pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
+      const historyALyceum = subject === "istoria-a-lykeiou" ? HISTORY_A_LYCEUM.get(topic) : null;
+      if (historyALyceum && pages.every(Boolean)) {
+        // Keep only the selected topic's subsection; fail closed if a heading moved.
+        pages = pages.map((html, i) => HISTORY_A_LYCEUM.scopePageHtml(html, historyALyceum.pages[i]));
+        const verified = pages.every(Boolean) && normalize(pages.map(htmlToText).join(" ")).includes(normalize(historyALyceum.verify));
+        if (!verified) {
+          return res.status(404).json({
+            grounded: false,
+            error: "verified_section_heading_not_resolved",
+            bookTitle: book.title,
+            sourceUrls,
+            message: "Η επαληθευμένη υποενότητα του επίσημου βιβλίου δεν βρέθηκε πλέον στην αναμενόμενη σελίδα."
+          });
+        }
+      }
       if (completeAudio) pages = await Promise.all(pages.map((html,i) => {
         if (!html) return html;
         if (gelAnchorScoped) {
@@ -2403,13 +2419,9 @@ function resolveDirectSourceUrls(subject, topic) {
   }
 
   if (subject === "istoria-a-lykeiou") {
-    const base = BOOKS[subject].base;
-    // Exact source for the currently mapped "Περικλής και αθηναϊκή δημοκρατία"
-    // topic. Do not expose the rest of the book as if it were the selected unit.
-    if (t.includes("περικλ") && t.includes("αθηνα") && t.includes("δημοκρατ")) {
-      return [new URL("indexII2_3.html", base).toString()];
-    }
-    return [];
+    // Every 2026–27 topic → its verified official page(s); shared pages are scoped to the
+    // topic's own subsection after fetching (HISTORY_A_LYCEUM.scopePageHtml).
+    return HISTORY_A_LYCEUM.urlsFor(topic);
   }
 
   if (subject === "mathimatika-a-gymnasiou") {

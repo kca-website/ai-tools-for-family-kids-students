@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
 
-// ΕΝ.Ε.Ε.ΓΥ.-Λ. in AI Study (Τομέας Διοίκησης και Οικονομίας; Τομέας Υγείας-Πρόνοιας-Ευεξίας Β΄–Γ΄). Every unit is a section or chapter of the
+// ΕΝ.Ε.Ε.ΓΥ.-Λ. in AI Study (Τομέας Διοίκησης και Οικονομίας; Τομέας Υγείας-Πρόνοιας-Ευεξίας Β΄–Δ΄). Every unit is a section or chapter of the
 // official book that the 2026–27 ΕΝ.Ε.Ε.ΓΥ.-Λ. circular names for that course, with a verified PDF page range.
 const require = createRequire(import.meta.url);
 globalThis.window = globalThis;
@@ -12,6 +12,7 @@ const M = require("../special-education-book-sections-2026-2027.js");
 const handler = require("../api/schoolbook-source.js");
 
 const P = "eneegyl-official-";
+const NUR = "βοηθος-νοσηλευτη-", LAB = "βοηθος-ιατρικων-βιολογικων-εργαστηριων-", BRF = "βοηθος-βρεφονηπιοκομων-";
 const ADM = "υπαλληλος-διοικησης-και-οικονομικων-υπηρεσιων-", TOUR = "υπαλληλος-τουριστικων-επιχειρησεων-", COM = "υπαλληλος-εμποριας-και-διαφημισης-", WH = "υπαλληλος-αποθηκης-και-συστηματων-εφοδιασμου-";
 const expected = {
   ea: { "a-αρχες-οικονομιας": 19 },
@@ -28,6 +29,10 @@ const expected = {
     [`d-${TOUR}οργανωση-και-λειτουργια-τουριστικων-επιχειρησ`]: 20, [`d-${TOUR}οργανωση-και-λειτουργια-ξενοδοχειακων-επιχειρ`]: 43, [`d-${TOUR}γεωγραφια-τουρισμου`]: 54, [`d-${TOUR}εφαρμογες-στον-τουρισμο`]: 11,
     [`d-${COM}συγχρονο-περιβαλλον-γραφειου`]: 96, [`d-${COM}διαφημιση-εισαγωγη-δημιουργια-και-προβολη`]: 9, [`d-${COM}επικοινωνια-και-δημοσιες-σχεσεις`]: 26, [`d-${COM}εφαρμογες-marketing`]: 54, [`d-${COM}λογιστικες-εφαρμογες`]: 16,
     [`d-${WH}οργανωση-και-διαχειριση-αποθηκων`]: 19, [`d-${WH}οργανωση-και-διαχειριση-μεταφορων`]: 10, [`d-${WH}εφαρμογες-εφοδιαστικης`]: 9, [`d-${WH}λογιστικες-εφαρμογες`]: 16,
+    [`d-${NUR}νοσηλευτικη-ii`]: 95, [`d-${NUR}χειρουργικη-τεχνικη-χειρουργειου`]: 23, [`d-${NUR}στοιχεια-μαιευτικης-γυναικολογιας`]: 10, [`d-${NUR}στοιχεια-παθολογιας`]: 14,
+    [`d-${LAB}μικροβιολογια-ιι`]: 27, [`d-${LAB}αιματολογια`]: 85, [`d-${LAB}κλινικη-βιοχημεια`]: 46, [`d-${LAB}ανοσολογια`]: 23,
+    [`d-${BRF}παιδαγωγικο-περιβαλλον-βρεφονηπιακου-σταθμου`]: 32, [`d-${BRF}αγωγη-βρεφους-νηπιου`]: 62, [`d-${BRF}στοιχεια-γενικης-και-εξελικτικης-ψυχολογιας`]: 39,
+    [`d-${BRF}δημιουργικη-απασχοληση-στην-προσχολικη-ηλικια-ιι`]: 37, [`d-${BRF}μουσικοκινητικη-αγωγη`]: 8, [`d-${BRF}λογοτεχνια-προσχολικης-ηλικιας`]: 20,
   },
 };
 let total = 0;
@@ -53,7 +58,7 @@ for (const [grade, subjects] of Object.entries(expected)) {
     total += count;
   }
 }
-assert.equal(total, 1391);
+assert.equal(total, 1912);
 
 // Units follow the circular, not the whole book: excluded sections are not offered.
 const econ = M.labels(P + "a-αρχες-οικονομιας");
@@ -63,6 +68,10 @@ assert.ok(M.labels(P + "b-εισαγωγη-στο-μαρκετινγκ").include
 // Same course in several specialties / grades → same units.
 assert.deepEqual(M.labels(`${P}d-${ADM}λογιστικες-εφαρμογες`), M.labels(`${P}d-${WH}λογιστικες-εφαρμογες`));
 assert.deepEqual(M.labels(P + "b-μικροβιολογια-ι"), M.labels(P + "c-μικροβιολογια-ι"));
+// Δ΄ Υγείας: theory and laboratory parts of one book keep their own numbering (lab chapters restart at 1).
+assert.ok(M.labels(`${P}d-${LAB}μικροβιολογια-ιι`).some((l) => l.startsWith("Εργαστηριακό κέντρο · Κεφάλαιο 5")));
+// The Πανελλαδικώς εξεταζόμενα Ανατομία-Φυσιολογία ΙΙ and Υγιεινή follow Υ.Α. 90676/Δ3 and are not offered yet.
+assert.ok(!M.subjectsForGrade("ed").some((s) => /βοηθος-νοσηλευτη-(ανατομια|υγιεινη)/.test(s.id)));
 // A course taught from two books keeps both, limited to the circular's sections (Αισθητική Αγωγή: Θέατρο 1.5, 2.1–2.3).
 const creative = M.labels(P + "b-δημιουργικη-απασχοληση-στην-προσχολικη-ηλικια-i").filter((l) => l.startsWith("Αισθητική Αγωγή — Θέατρο"));
 assert.deepEqual(creative.map((l) => l.split(" · ")[1].split(" ")[0]), ["1.5", "2.1", "2.2", "2.3"]);
@@ -85,4 +94,4 @@ assert.match(study, /\[0\]==='e'\?'eneegyl':'special-gymnasium'/);
 // Chapter-level Ε.Α.Ε. units («Κεφάλαιο N — …») are verified units, not unmapped chapter placeholders.
 assert.match(study, /\/\^Κεφάλαιο\\s\+\\d\+\\s\+—\/i\.test\(topic\) && !specialSections\(\)\?\.get\?\.\(subject,topic\)/);
 
-console.log(`ΕΝ.Ε.Ε.ΓΥ.-Λ. study grounding smoke passed: ${total} units (Διοίκησης και Οικονομίας; Υγείας-Πρόνοιας-Ευεξίας Β΄–Γ΄).`);
+console.log(`ΕΝ.Ε.Ε.ΓΥ.-Λ. study grounding smoke passed: ${total} units (Διοίκησης και Οικονομίας; Υγείας-Πρόνοιας-Ευεξίας Β΄–Δ΄).`);

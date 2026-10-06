@@ -47,7 +47,7 @@ for (const [schoolId, school] of Object.entries(data.schools)) for (const gradeI
 assert.equal(data.bookRouteForSelection("eneegyl", "lyc-b", "health", { id: "special-a" }), null);
 // Deaf schools use the same official syllabus as the Ε.Α.Ε. schools.
 assert.deepEqual(data.bookRouteForSelection("deaf-lyceum", "b", "", { id: "geometry" }), data.bookRouteForSelection("special-lyceum", "b", "", { id: "geometry" }));
-assert.ok(ready + book >= 266, `coverage dropped: ${ready}+${book}/${total}`);
+assert.ok(ready + book >= 291, `coverage dropped: ${ready}+${book}/${total}`);
 
 // AI Study keeps the Ε.Α.Ε. 3-question quiz and guidance for a ΓΕΛ unit opened from the quick test.
 const study = fs.readFileSync(new URL("study.html", root), "utf8");

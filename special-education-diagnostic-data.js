@@ -56,8 +56,8 @@
         ["biology","Βιολογία"],["pe","Φυσική Αγωγή"],["civics","Πολιτική Παιδεία"],["informatics","Εφαρμογές Πληροφορικής"]
       ])},
       b:{id:"b",label:"Β΄ Λυκείου",subjects:list(SL_COMMON_B),groupLabel:"Ομάδα Προσανατολισμού",groups:[
-        group("humanities","Ανθρωπιστικών Σπουδών",[["orientation-ancient","Αρχαία Ελληνική Γλώσσα και Γραμματεία"],["latin","Λατινικά"]]),
-        group("sciences","Θετικών Σπουδών",[["orientation-physics","Φυσική"],["orientation-math","Μαθηματικά"]])
+        group("humanities","Ανθρωπιστικών Σπουδών",[["orientation-ancient","Αρχαία Ελληνικά Προσανατολισμού"],["latin","Λατινικά"]]),
+        group("sciences","Θετικών Σπουδών",[["orientation-physics","Φυσική Προσανατολισμού"],["orientation-math","Μαθηματικά Προσανατολισμού"]])
       ]},
       c:{id:"c",label:"Γ΄ Λυκείου",subjects:list([
         ["religion","Θρησκευτικά / Ηθική"],["new-greek","Νεοελληνική Γλώσσα και Λογοτεχνία"],["english","Αγγλικά"],["pe","Φυσική Αγωγή"]
@@ -520,7 +520,7 @@
     const canonicalSchool={"deaf-gymnasium":"special-gymnasium","deaf-lyceum":"special-lyceum"}[schoolId]||schoolId;
     const route=BOOK_ROUTE_BY_SELECTION[[canonicalSchool,gradeId,groupId||"",subject?.id||""].join("|")];
     if(!route)return null;
-    const params=new URLSearchParams({zone:route[0],grade:route[1],subject:route[2],mode:"test"});
+    const params=new URLSearchParams({zone:route[0],grade:route[1],subject:route[2],mode:"test",adapt:"special"});
     if(route[3]==="gel")params.set("schoolType","gel");
     return {zone:route[0],grade:route[1],subject:route[2],basis:route[3]==="gel"?"general-lyceum-book":"special-education-book",url:"/study.html?"+params.toString()};
   }

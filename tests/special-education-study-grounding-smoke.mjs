@@ -104,7 +104,8 @@ assert.match(study, /<script src="\/special-education-book-sections-2026-2027\.j
 assert.match(study, /special:\[\['a','Α΄ Ειδικού Γυμνασίου'\].*\['lc','Γ΄ Ειδικού Λυκείου'\]/);
 assert.match(study, /if\(z==='special'\)return \(specialSections\(\)\?\.subjectsForGrade/);
 assert.match(study, /context:cfg\.system\+specialEducationGuidance\(\)/);
-assert.match(study, /if\(interactiveTotal&&\$\('zone'\)\.value==='special'\)interactiveTotal=3;/);
+assert.match(study, /if\(interactiveTotal&&specialAdaptations\(\)\)interactiveTotal=3;/);
+assert.match(study, /function specialAdaptations\(\)\{return \$\('zone'\)\.value==='special'\|\|/);
 assert.doesNotMatch(study, /\$\('standardStudyFields'\)\.classList\.toggle\('hidden',special\)/, "special no longer redirects away");
 const summary = fs.readFileSync(new URL("../api/source-summary.js", import.meta.url), "utf8");
 assert.match(summary, /const simple = SPECIAL_SECTIONS\.has\(sid\);/);

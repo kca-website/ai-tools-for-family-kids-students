@@ -233,8 +233,12 @@
   function populateGrades(){const z=$('zone').value;$('grade').innerHTML=(grades[z]||[]).map(([v,el])=>'<option value="'+v+'">'+(lang==='en'?(z==='special'?(v[0]==='l'?'Special Lyceum, grade ':v[0]==='e'?'EN.E.E.GY.-L. Lyceum, grade ':'Special Gymnasium, grade '):'Grade ')+({a:'1',b:'2',c:'3',d:'4',e:'5',st:'6',la:'1',lb:'2',lc:'3',ea:'1',eb:'2',ec:'3',ed:'4'}[v]||v):el)+'</option>').join('');refreshSchoolTypeFields();populateSubjects()}
   const specialSections=()=>window.AITOOLSKIDS_SPECIAL_BOOK_SECTIONS;
   // Ειδικό Γυμνάσιο: same adaptations as the Special Education tutor (special-education-tutor-context.js).
+  // Ε.Α.Ε. adaptations also apply when the Special Education quick test opens a ΓΕΛ book unit (?adapt=special),
+  // as long as the learner stays on the subject it opened.
+  const ADAPT_SUBJECT=(()=>{const q=new URLSearchParams(location.search);return q.get('adapt')==='special'?q.get('subject')||'':''})();
+  function specialAdaptations(){return $('zone').value==='special'||(!!ADAPT_SUBJECT&&$('subject')?.value===ADAPT_SUBJECT);}
   function specialEducationGuidance(){
-    if($('zone').value!=='special')return '';
+    if(!specialAdaptations())return '';
     return lang==='en'
       ? '\n\nSpecial education (Special Gymnasium / Special Lyceum) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz has exactly 3 short questions (this overrides any 5-question instruction) and is clearly simpler than the general school: exactly 2 options written on separate lines as "A) …" and "B) …", one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
       : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο / Ειδικό Λύκειο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· το quiz έχει ακριβώς 3 σύντομες ερωτήσεις (αυτό υπερισχύει κάθε οδηγίας για 5 ερωτήσεις) και είναι σαφώς απλούστερο από του γενικού σχολείου: ακριβώς 2 επιλογές σε ξεχωριστές γραμμές «Α) …» και «Β) …», μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
@@ -892,7 +896,7 @@
     $('studyCharacterAvatar').innerHTML=action==='character'?window.AITOOLSKIDS_CHARACTER_AVATAR?.(activeStudyCharacter.id,lang)||'':'';
     interactiveAction=action; interactiveHistory=[];
     interactiveTotal=action==='quiz'?5:0;
-    if(interactiveTotal&&$('zone').value==='special')interactiveTotal=3; // Ε.Α.Ε.: shorter, simpler quiz
+    if(interactiveTotal&&specialAdaptations())interactiveTotal=3; // Ε.Α.Ε.: shorter, simpler quiz
     interactiveStep=interactiveTotal?1:0;
     $('workspaceTitle').textContent=actionTitle(action);
     $('aiWorkspace').classList.remove('hidden');

@@ -27,6 +27,7 @@ for (const [schoolId, school] of Object.entries(data.schools)) for (const gradeI
     if (!route) continue;
     const where = `${schoolId}|${gradeId}|${groupId}|${subject.id}`;
     assert.match(route.url, /^\/study\.html\?/, where);
+    assert.equal(new URLSearchParams(route.url.split("?")[1]).get("adapt"), "special", `${where}: Ε.Α.Ε. adaptations (3 short questions)`);
     if (route.zone === "special") {
       assert.ok(M.subjectsForGrade(route.grade).some((s) => s.id === route.subject), `${where}: ${route.subject} not in AI Study grade ${route.grade}`);
       assert.ok(M.labels(route.subject).length > 0, `${where}: no book units`);
@@ -47,6 +48,13 @@ assert.equal(data.bookRouteForSelection("eneegyl", "lyc-b", "health", { id: "spe
 // Deaf schools use the same official syllabus as the Ε.Α.Ε. schools.
 assert.deepEqual(data.bookRouteForSelection("deaf-lyceum", "b", "", { id: "geometry" }), data.bookRouteForSelection("special-lyceum", "b", "", { id: "geometry" }));
 assert.ok(ready + book >= 252, `coverage dropped: ${ready}+${book}/${total}`);
+
+// AI Study keeps the Ε.Α.Ε. 3-question quiz and guidance for a ΓΕΛ unit opened from the quick test.
+const study = fs.readFileSync(new URL("study.html", root), "utf8");
+assert.match(study, /if\(interactiveTotal&&specialAdaptations\(\)\)interactiveTotal=3;/);
+assert.match(study, /function specialEducationGuidance\(\)\{\n    if\(!specialAdaptations\(\)\)return '';/);
+// Orientation courses are named as such, so they are not confused with the common course of the same name.
+assert.equal(data.schools["special-lyceum"].grades.b.groups.find((g) => g.id === "sciences").subjects.map((s) => s.label).join(" / "), ["Φυσική Προσανατολισμού", "Μαθηματικά Προσανατολισμού"].join(" / "));
 
 // ΓΕΛ routes: AI Study opens the same course with verified units to choose from.
 const base = process.env.BASE_URL || "http://127.0.0.1:4173";

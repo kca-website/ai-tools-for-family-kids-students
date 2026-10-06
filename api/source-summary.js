@@ -40,18 +40,22 @@ module.exports = async function handler(req, res) {
   const explanation = activity === 'explain';
   if (!sid || !selectedTopic) return res.status(400).json({ error: 'official_source_identity_required', message: 'Λείπει η επαληθεύσιμη ταυτότητα της επίσημης σχολικής πηγής.' });
 
-  const sourceKey = { kind: activity === 'audio' ? 'official-complete-audio-source-v5' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
+  // Ειδική Αγωγή (Ε.Α.Ε.): the short plain-language lesson needs the normal official section text,
+  // not the slower complete-audio parse (figure transcription, page markers).
+  const simple = SPECIAL_SECTIONS.has(sid);
+  const completeAudioSource = activity === 'audio' && !simple;
+  const sourceKey = { kind: completeAudioSource ? 'official-complete-audio-source-v5' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
   try {
     let officialSource = await getStudyCache(sourceKey);
-    const needsStrictAudioRefresh = activity === 'audio' && officialSource?.sourceCompleteness?.parserVersion !== COMPLETE_SOURCE_VERSION && officialSource?.audioGroundedFallback !== true;
+    const needsStrictAudioRefresh = completeAudioSource && officialSource?.sourceCompleteness?.parserVersion !== COMPLETE_SOURCE_VERSION && officialSource?.audioGroundedFallback !== true;
     if (!officialSource?.grounded || !officialSource?.text || needsStrictAudioRefresh) {
-      let resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: activity === 'audio' ? 'audio' : '' });
+      let resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: completeAudioSource ? 'audio' : '' });
 
       // Some older/primary-school mappings are safely grounded in the exact official
       // ebooks.edu.gr selection but do not yet support the stricter whole-section parser.
       // In that case the normal resolver is still an official-source-only fallback and
       // is preferable to showing a false failure after the UI has already loaded the source.
-      if (activity === 'audio' && (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text)) {
+      if (completeAudioSource && (!resolved?.ok || !resolved?.body?.grounded || !resolved?.body?.text)) {
         const normalResolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: '' });
         if (normalResolved?.ok && normalResolved?.body?.grounded && normalResolved?.body?.text) {
           resolved = {
@@ -74,7 +78,6 @@ module.exports = async function handler(req, res) {
     if (source.length < 250) return res.status(400).json({ error: 'source_too_short', message: 'Η επίσημη πηγή δεν έχει αρκετό κείμενο για ασφαλή σύνοψη.' });
 
     // Ειδική Αγωγή (Ε.Α.Ε.): short, plain-language verified lesson instead of the whole-section narration.
-    const simple = SPECIAL_SECTIONS.has(sid);
     if (activity === 'audio' && !simple) return await wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus });
     return await verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation, audio: activity === 'audio', simple });
   } catch (err) {
@@ -119,7 +122,7 @@ async function wholeSectionAudio({ res, source, title, sid, selectedTopic, lang,
 }
 
 async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation, audio = false, simple = false }) {
-  const workingSource = compactSourceForTopic(source, selectedTopic, 8000);
+  const workingSource = compactSourceForTopic(simple ? cleanSpecialSource(source) : source, selectedTopic, 8000);
   const cacheKey = {
     kind: 'verified-source-summary', promptVersion: 'verified-summary-v6-safe', subjectId: sid,
     topic: selectedTopic, title, language: lang, explanation, audio, source: workingSource, modelRoute: routingSignature(aiStatus),
@@ -143,7 +146,17 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
     maxTokens: 950, temperature: 0, reasoningEffort: 'low', modelProfile: 'balanced',
   });
 
-  let claims = verifiedClaimsFromResponse(result?.text, workingSource, 10);
+  let claims = verifiedClaimsFromResponse(result?.text, workingSource, 10, simple ? tolerantEvidenceKey : normalizeForEvidence);
+  if (simple && claims.length < 3) {
+    // Ε.Α.Ε.: never hand raw book fragments to the learner; retry once, then let the client use the grounded tutor.
+    const retry = await generateChat({
+      messages: [{ role: 'system', content: system + plainLanguage + (lang === 'en' ? ' Copy each evidence excerpt character by character from SOURCE.' : ' Αντέγραψε κάθε evidence γράμμα προς γράμμα από την ΠΗΓΗ.') }, { role: 'user', content: `TOPIC: ${selectedTopic}\nSOURCE:\n${workingSource}` }],
+      maxTokens: 950, temperature: 0.2, reasoningEffort: 'low', modelProfile: 'balanced',
+    });
+    const more = verifiedClaimsFromResponse(retry?.text, workingSource, 10, tolerantEvidenceKey);
+    if (more.length > claims.length) claims = more;
+    if (claims.length < 2) return res.status(422).json({ error: 'insufficient_verified_evidence', message: lang === 'en' ? 'Could not verify a simple lesson for this unit.' : 'Δεν επαληθεύτηκε απλό μάθημα για αυτή την ενότητα.' });
+  }
   if (claims.length < 3) claims = extractiveFallback(workingSource, 6);
   if (claims.length < 3) return res.status(502).json({ error: 'insufficient_verified_evidence', message: 'Δεν βρέθηκαν αρκετά επαληθεύσιμα σημεία από την επίσημη πηγή.' });
 
@@ -162,12 +175,33 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
   return res.status(200).json({ ...response, cacheHit: false });
 }
 
-function verifiedClaimsFromResponse(text, source, limit) {
+function verifiedClaimsFromResponse(text, source, limit, evidenceKey = normalizeForEvidence) {
   const parsed = parseJsonObject(text);
   const rows = Array.isArray(parsed?.claims) ? parsed.claims.slice(0, limit) : [];
-  const sourceNorm = normalizeForEvidence(source);
+  const sourceNorm = evidenceKey(source);
   return rows.map(row => ({ claim: clean(row?.claim, 800), evidence: clean(row?.evidence, 500) }))
-    .filter(row => row.claim.length >= 10 && row.evidence.length >= 4 && sourceNorm.includes(normalizeForEvidence(row.evidence)) && claimMatchesEvidence(row.claim, row.evidence));
+    .filter(row => row.claim.length >= 10 && row.evidence.length >= 4 && (evidenceKey === normalizeForEvidence || evidenceKey(row.evidence).length >= 12) && sourceNorm.includes(evidenceKey(row.evidence)) && claimMatchesEvidence(row.claim, row.evidence));
+}
+
+// Ε.Α.Ε. sources: drop page markers, footnote carets and leaked tooltip markup before the AI reads them.
+function cleanSpecialSource(source) {
+  return String(source || '')
+    .replace(/\[Official page: [^\]]*\]/g, ' ')
+    .replace(/[^\s"<>]{0,40}"\s*class="tooltip">/g, ' ')
+    .replace(/\^\d+/g, '')
+    .replace(/[ \t]+/g, ' ')
+    .trim();
+}
+// Evidence must still be a verbatim excerpt of the official text, compared without accents/breathings
+// (monotonic vs polytonic), Latin look-alike letters used in the e-books, verse/footnote numbers or punctuation.
+function tolerantEvidenceKey(value) {
+  const latin = { a: 'α', b: 'β', e: 'ε', h: 'η', i: 'ι', k: 'κ', m: 'μ', n: 'ν', o: 'ο', p: 'ρ', t: 'τ', x: 'χ', y: 'υ', z: 'ζ' };
+  return String(value || '').normalize('NFD').replace(/[\u0300-\u036f\u0342-\u0345]/g, '').toLowerCase()
+    .replace(/ς/g, 'σ')
+    .replace(/\^\d+/g, ' ')
+    .replace(/[a-z]/g, (ch) => latin[ch] || ch)
+    .replace(/[^\p{L}]+/gu, ' ')
+    .replace(/\s+/g, ' ').trim();
 }
 
 function claimMatchesEvidence(claim, evidence) {

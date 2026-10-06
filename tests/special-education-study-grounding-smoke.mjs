@@ -110,4 +110,13 @@ const summary = fs.readFileSync(new URL("../api/source-summary.js", import.meta.
 assert.match(summary, /const simple = SPECIAL_SECTIONS\.has\(sid\);/);
 assert.match(summary, /\.\.\.\(simple \? \{ learner: 'special-education-v2' \} : \{\}\)/);
 
+// UAT fixes: Ε.Α.Ε. lessons use the normal official text, tolerant (still verbatim) evidence matching,
+// one retry instead of raw book fragments, and the grounded tutor as the explain fallback.
+assert.match(summary, /const completeAudioSource = activity === 'audio' && !simple;/);
+assert.match(summary, /function tolerantEvidenceKey\(/);
+assert.match(summary, /if \(simple && claims\.length < 3\) \{/);
+assert.match(study, /err\.code!=='insufficient_verified_evidence'\)throw err;\s*text=await callStudyServer\(action\);/);
+const helen = await call({ subject: G("c", "ancient-translation"), topic: "Ευριπίδη, Ελένη — Πρόλογος 1–191 (αναλυτικά)" });
+if (helen.status === 200) assert.doesNotMatch(helen.body.text, /class="tooltip"|title="/, "attribute text must not leak into the official text");
+
 console.log(`Special education study grounding smoke passed: ${total} official Ε.Α.Ε. units (Ειδικό Γυμνάσιο + Ειδικό Λύκειο).`);

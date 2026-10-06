@@ -3272,6 +3272,8 @@ function htmlToText(html) {
       .replace(/<noscript\b[^>]*>[\s\S]*?<\/noscript>/gi, " ")
       .replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/gi, " ")
       .replace(/<(br|\/p|\/div|\/li|\/tr|\/h[1-6]|\/section)>/gi, "\n")
+      // Quote-aware first: attribute values (e.g. tooltips) may contain ">".
+      .replace(/<[a-zA-Z\/!](?:[^>"']|"[^"]*"|'[^']*')*>/g, " ")
       .replace(/<[^>]+>/g, " ")
   )
     .replace(/[ \t]+/g, " ")

@@ -235,8 +235,8 @@
   function specialEducationGuidance(){
     if($('zone').value!=='special')return '';
     return lang==='en'
-      ? '\n\nSpecial education (Special Gymnasium / Special Lyceum) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz has exactly 3 short questions (this overrides any 5-question instruction) and is clearly simpler than the general school: 2 clear options, one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
-      : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο / Ειδικό Λύκειο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· το quiz έχει ακριβώς 3 σύντομες ερωτήσεις (αυτό υπερισχύει κάθε οδηγίας για 5 ερωτήσεις) και είναι σαφώς απλούστερο από του γενικού σχολείου: 2 καθαρές επιλογές, μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
+      ? '\n\nSpecial education (Special Gymnasium / Special Lyceum) adaptations: use short sentences and one step at a time; give one simple concrete example first and raise difficulty gradually; ask one question at a time; any quiz has exactly 3 short questions (this overrides any 5-question instruction) and is clearly simpler than the general school: exactly 2 options written on separate lines as "A) …" and "B) …", one key idea at a time, no trick questions or complex negations. Stay strictly within the selected official unit; do not hand over finished homework.'
+      : '\n\nΠροσαρμογές Ειδικής Αγωγής (Ειδικό Γυμνάσιο / Ειδικό Λύκειο): σύντομες προτάσεις και ένα βήμα τη φορά· πρώτα ένα απλό, συγκεκριμένο παράδειγμα και μετά σταδιακά πιο δύσκολα· μία ερώτηση τη φορά· το quiz έχει ακριβώς 3 σύντομες ερωτήσεις (αυτό υπερισχύει κάθε οδηγίας για 5 ερωτήσεις) και είναι σαφώς απλούστερο από του γενικού σχολείου: ακριβώς 2 επιλογές σε ξεχωριστές γραμμές «Α) …» και «Β) …», μία βασική έννοια τη φορά, χωρίς παγίδες ή σύνθετες αρνήσεις. Μείνε αυστηρά μέσα στην επιλεγμένη επίσημη ενότητα· μη δίνεις έτοιμη εργασία.';
   }
   function subjectRows(){
     const z=$('zone').value,g=$('grade').value;
@@ -930,7 +930,12 @@
         const officialSource=await officialSchoolbookSource();
         if(officialSource?.grounded){
           loadingStep='lesson';renderLoading();
-          text=await verifiedOfficialSummary(officialSource,action);
+          try{text=await verifiedOfficialSummary(officialSource,action)}
+          catch(err){
+            // Ε.Α.Ε.: if no simple lesson could be verified, explain through the grounded tutor instead.
+            if(action!=='explain'||$('zone').value!=='special'||err.code!=='insufficient_verified_evidence')throw err;
+            text=await callStudyServer(action);
+          }
         }else{
           if(action==='audio'&&sourcePolicyForSelection(false)==='official_required')throw new Error(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'?'This unit has not yet been connected to its official school source. The connection is in progress.':'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη.'));
           text=await callStudyServer(action);

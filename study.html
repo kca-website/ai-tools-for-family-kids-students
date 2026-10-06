@@ -274,6 +274,16 @@
     $('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.label||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.label||t.titleEl):(t.labelEl||t.label||t.titleEl||t.labelEn||t.id))+'</option>').join('');
   }
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+  // Every source/AI request has a hard client deadline, so the page never stays on "preparing".
+  async function timedFetch(url,opts={},ms=60000){
+    const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),ms);
+    try{return await fetch(url,{...opts,signal:ctl.signal})}
+    catch(e){
+      if(e?.name!=='AbortError')throw e;
+      const err=new Error(lang==='en'?'This took too long. Please press the button again.':'Η προετοιμασία άργησε πολύ. Πάτησε ξανά το κουμπί για νέα προσπάθεια.');
+      err.code='client_timeout';throw err;
+    }finally{clearTimeout(t)}
+  }
   $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value)$('topicCustom').value=''};
 
   $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;const G=window.AITOOLSKIDS_GUIDED;const isImg=G&&G.isImageFile?G.isImageFile(f):/^image\//.test(f.type||'');
@@ -365,7 +375,7 @@
     let lastBody=null,lastError=null;
     for(let attempt=0;attempt<2;attempt++){
       try{
-        const res=await fetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic)+epalQuery,{headers:{'Accept':'application/json','Cache-Control':'no-cache'}});
+        const res=await timedFetch('/api/schoolbook-source?subject='+encodeURIComponent(subject)+'&topic='+encodeURIComponent(topic)+epalQuery,{headers:{'Accept':'application/json','Cache-Control':'no-cache'}},45000);
         const body=await res.json().catch(()=>null);
         lastBody=body;
         if(res.ok&&body?.grounded){
@@ -559,7 +569,7 @@
 
     try{
       const officialSource=attached?.text?null:await officialSchoolbookSource();
-      const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      const res=await timedFetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
         context:system,prompt,audience:'study_user',task:'study_plan',mode:'organize',activity:'plan',
         cacheEligible:!attached?.text&&!!officialSource?.grounded,
         grade,subject,subjectId:selectedSubjectId(),topic,
@@ -570,7 +580,7 @@
         documentName:attached?.name||(officialSource?.bookTitle||''),
         documentKind:attached?.text?'user_upload':(officialSource?.grounded?'official_schoolbook':''),
         documentSourceUrl:officialSource?.sourceUrl||''
-      })});
+      })},90000);
       const body=await res.json().catch(()=>({}));
       if(!res.ok){
         if(body?.error==='grounding_validation_failed'&&officialSource?.grounded)sourceEvidenceUi(officialSource,'verification_failed');
@@ -702,7 +712,7 @@
       documentSourceUrl:officialSource?.sourceUrl||''
     };
     lastServerPayload={action,payload};
-    const res=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const res=await timedFetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)},90000);
     const body=await res.json().catch(()=>({}));
     if(!res.ok){
       const err=new Error(body?.message||'AI request failed');
@@ -820,7 +830,7 @@
   }
 
   async function verifiedOfficialSummary(source,activity='audio'){
-    const res=await fetch('/api/source-summary',{
+    const res=await timedFetch('/api/source-summary',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
@@ -830,7 +840,7 @@
         language:lang,
         activity
       })
-    });
+    },activity==='audio'?110000:75000);
     const body=await res.json().catch(()=>({}));
     if(!res.ok||!body?.text){
       const err=new Error(body?.message||(lang==='en'?'Could not create a verified summary.':'Δεν δημιουργήθηκε επαληθευμένη σύνοψη.'));
@@ -842,7 +852,7 @@
       ? (lang==='en'?'Verified against official source':'Ελεγμένο πάνω στην επίσημη πηγή')
       : (lang==='en'?'Official-source summary':'Σύνοψη επίσημης πηγής');
     if(body.verified&&source?.grounded)sourceEvidenceUi(source,'verified');
-    if(activity==='audio'&&body.mode==='verified-summary')$('providerStatus').textContent=lang==='en'?'Summary of the key ideas, checked against the full official section.':'Σύνοψη των βασικών σημείων, ελεγμένη πάνω σε ολόκληρη την επίσημη ενότητα.';
+    if(activity==='audio'&&body.mode==='verified-summary')$('providerStatus').textContent=lang==='en'?'Short summary of the key ideas, checked against the official section.':'Σύντομη σύνοψη των βασικών σημείων, ελεγμένη πάνω στην επίσημη ενότητα.';
     return body.text;
   }
 
@@ -869,6 +879,16 @@
     $('resultTools').classList.add('hidden');
     $('altAi').classList.add('hidden');
     $('aiOutput').innerHTML='<span class="ai-loading">'+esc(lang==='en'?'AI is preparing this…':'Το AI το ετοιμάζει…')+'</span>';
+    // Visible progress: elapsed seconds, and a note when a long section takes a while.
+    const startedAt=Date.now();
+    const ticker=setInterval(()=>{
+      const node=$('aiOutput').querySelector('.ai-loading');
+      if(!node){clearInterval(ticker);return}
+      const sec=Math.round((Date.now()-startedAt)/1000);
+      const base=lang==='en'?'AI is preparing this…':'Το AI το ετοιμάζει…';
+      const slow=sec>=20?(lang==='en'?' Long section — this can take up to a minute.':' Μεγάλη ενότητα — μπορεί να χρειαστεί έως ένα λεπτό.'):'';
+      node.textContent=base+' '+sec+'″'+slow;
+    },1000);
     try{
       let text='';
       if((action==='audio'||action==='explain')&&!attached){
@@ -893,7 +913,7 @@
     }catch(err){
       $('aiOutput').textContent=err.message||String(err);
       if(err.fallback==='puter')$('puterFallback').classList.remove('hidden');
-    }
+    }finally{clearInterval(ticker)}
     $('aiWorkspace').scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 
@@ -1034,12 +1054,16 @@
             if(primaryVoice)u.voice=primaryVoice;
           }
           u.rate=.94;u.pitch=1;u.volume=1;
-          u.onstart=()=>setAudioStatus((lang==='en'?'Playing ':'Αναπαραγωγή ')+(index+1)+'/'+chunks.length);
-          u.onend=()=>{index++;setTimeout(speakNext,35)};
+          // Some browsers (Chrome) occasionally never fire onend: a watchdog moves on instead of hanging.
+          let done=false,watchdog=0;
+          const advance=()=>{if(done)return;done=true;clearTimeout(watchdog);index++;setTimeout(speakNext,35)};
+          u.onstart=()=>{setAudioStatus((lang==='en'?'Playing ':'Αναπαραγωγή ')+(index+1)+'/'+chunks.length);clearTimeout(watchdog);watchdog=setTimeout(()=>{if(runId===audioRunId&&!done){try{synth.cancel()}catch(_){}advance()}},chunks[index].length*110+6000)};
+          u.onend=advance;
           u.onerror=(e)=>{
             if(runId!==audioRunId)return;
             const code=String(e?.error||'unknown');
             if(code==='canceled'||code==='interrupted')return;
+            done=true;clearTimeout(watchdog);
             if(variant<1 && !['not-allowed','synthesis-unavailable'].includes(code)){
               setAudioStatus((lang==='en'?'Retrying audio… ':'Νέα προσπάθεια ανάγνωσης… ')+code);
               setTimeout(()=>speakAttempt(variant+1),180);

@@ -166,6 +166,7 @@ jobs:
         run: |
           node tests/phase11d-epal-grounding-audit.mjs
           node tests/epal-ai-study-source-request-smoke.mjs
+          node tests/audio-lesson-latency-smoke.mjs
 
       - name: Run Phase 12 catalog schoolbook grounding
         run: node tests/phase12-catalog-schoolbook-grounding-smoke.mjs

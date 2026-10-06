@@ -81,6 +81,10 @@ module.exports = async function handler(req, res) {
   }
 };
 
+// Full knowledge-map lesson budget. Past it (or on any failure) the learner gets the fast
+// single-pass verified summary of the same official section instead of a hanging request.
+const AUDIO_LESSON_BUDGET_MS = 55000;
+
 async function wholeSectionAudio({ res, source, title, sid, selectedTopic, lang, aiStatus }) {
   const cacheKey = { kind: 'verified-whole-chapter-audio', promptVersion: AUDIO_VERSION,
     subjectId: sid, topic: selectedTopic, title, language: lang, source, modelRoute: routingSignature(aiStatus) };
@@ -89,18 +93,33 @@ async function wholeSectionAudio({ res, source, title, sid, selectedTopic, lang,
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({ ...cached, cacheHit: true });
   }
-  const response = await createKnowledgeMapLesson({ source, topic: selectedTopic, language: lang });
-  // Retry transient outages next time; do not store degraded narration for a week.
-  if (!response.verification.verbatimUnits) await setStudyCache(cacheKey, response);
-  res.setHeader('Cache-Control', 'no-store');
-  return res.status(200).json({ ...response, cacheHit: false });
+  // A recent timeout/failure for this section: go straight to the fast path for a while.
+  const slowKey = { kind: 'whole-chapter-audio-slow', promptVersion: AUDIO_VERSION, subjectId: sid, topic: selectedTopic, language: lang };
+  if (!(await getStudyCache(slowKey))) {
+    const started = Date.now();
+    let timer;
+    try {
+      const response = await Promise.race([
+        createKnowledgeMapLesson({ source, topic: selectedTopic, language: lang, deadlineAt: started + AUDIO_LESSON_BUDGET_MS - 8000 }),
+        new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('audio_deadline_exceeded')), AUDIO_LESSON_BUDGET_MS); })
+      ]);
+      // Retry transient outages next time; do not store degraded narration for a week.
+      if (!response.verification.verbatimUnits) await setStudyCache(cacheKey, response);
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(200).json({ ...response, cacheHit: false });
+    } catch (err) {
+      console.warn('AUDIO_LESSON_FALLBACK', JSON.stringify({ subjectId: sid, reason: String(err?.message || err), ms: Date.now() - started, sourceChars: source.length }));
+      await setStudyCache(slowKey, { at: Date.now(), reason: String(err?.message || err) }, 6 * 3600);
+    } finally { clearTimeout(timer); }
+  }
+  return verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation: false, audio: true });
 }
 
-async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation }) {
+async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang, aiStatus, explanation, audio = false }) {
   const workingSource = compactSourceForTopic(source, selectedTopic, 8000);
   const cacheKey = {
     kind: 'verified-source-summary', promptVersion: 'verified-summary-v6-safe', subjectId: sid,
-    topic: selectedTopic, title, language: lang, explanation, source: workingSource, modelRoute: routingSignature(aiStatus),
+    topic: selectedTopic, title, language: lang, explanation, audio, source: workingSource, modelRoute: routingSignature(aiStatus),
   };
   const cached = await getStudyCache(cacheKey);
   if (cached?.text) {
@@ -120,10 +139,11 @@ async function verifiedSinglePass({ res, source, title, sid, selectedTopic, lang
   if (claims.length < 3) claims = extractiveFallback(workingSource, 6);
   if (claims.length < 3) return res.status(502).json({ error: 'insufficient_verified_evidence', message: 'Δεν βρέθηκαν αρκετά επαληθεύσιμα σημεία από την επίσημη πηγή.' });
 
-  const label = explanation ? (lang === 'en' ? 'Explanation' : 'Εξήγηση') : (lang === 'en' ? 'Summary' : 'Σύνοψη');
+  const label = audio ? (lang === 'en' ? 'Audio lesson' : 'Ακουστικό μάθημα') : explanation ? (lang === 'en' ? 'Explanation' : 'Εξήγηση') : (lang === 'en' ? 'Summary' : 'Σύνοψη');
   const response = {
     text: `${label} – ${selectedTopic}\n\n${paragraphize(claims.map(x => x.claim), 3)}`,
     verified: true,
+    mode: audio ? 'verified-summary' : undefined,
     provider: result?.provider || null,
     model: result?.model || null,
     verification: { approved: claims.length },

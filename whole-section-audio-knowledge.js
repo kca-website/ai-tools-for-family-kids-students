@@ -86,7 +86,21 @@ function batchUnits(units, budget = 5200) {
   return batches;
 }
 
-async function createKnowledgeMapLesson({ source, topic, language = 'el', generate = generateChat }) {
+// Runs async tasks with a small concurrency limit, keeping result order.
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let next = 0;
+  async function worker() { while (next < items.length) { const i = next++; out[i] = await fn(items[i], i); } }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return out;
+}
+
+// deadlineAt: epoch ms after which no new model call is started (the caller then falls back).
+async function createKnowledgeMapLesson({ source, topic, language = 'el', generate: rawGenerate = generateChat, deadlineAt = 0, concurrency = 4 }) {
+  const generate = (args) => {
+    if (deadlineAt && Date.now() > deadlineAt) throw new Error('audio_deadline_exceeded');
+    return rawGenerate(args);
+  };
   const units = sourceUnits(source);
   if (!units.length) throw new Error('empty_section');
   const batches = batchUnits(units);
@@ -108,9 +122,10 @@ async function createKnowledgeMapLesson({ source, topic, language = 'el', genera
 
   const ideas = [];
   let ideaCounter = 0;
-  for (const batch of batches) {
+  // Batches are independent: extract them in parallel (the slowest step of the lesson).
+  const extractedRows = await mapLimit(batches, concurrency, async (batch) => {
     const catalog = batch.flatMap(unit => sourceSentences(unit));
-    if (!catalog.length) continue;
+    if (!catalog.length) return [];
     const extracted = await generate({
       messages:[
         { role:'system', content:`You are building a source-grounded knowledge map for a school lesson in ${language === 'en' ? 'English' : 'Greek'}. Read ALL supplied sentences. Extract the knowledge a learner must understand, not sentences to quote. Return ONLY JSON {"ideas":[{"id":"k1","idea":"clear normalized meaning","type":"definition|relationship|cause|process|event|formula|principle|fact","importance":"core|supporting","evidenceIds":["u1s2"]}]}. Each idea must be supported ONLY by the supplied sentence IDs. Combine nearby sentences when they express one idea. Do not copy textbook objectives, exercise instructions, rhetorical questions, decorative captions, isolated diagram labels, bibliography or repeated examples as learning ideas. Preserve conditions, negations, dates when historically essential, formulas, causal direction and scientific relationships exactly. Mark only indispensable ideas as core; examples and elaborations are supporting. Do not add outside knowledge.` },
@@ -121,9 +136,9 @@ async function createKnowledgeMapLesson({ source, topic, language = 'el', genera
     });
     record(extracted);
     if (!extracted?.ok || !validIdeas(extracted.text, batch)) throw new Error('knowledge_extraction_failed');
-    const rows = parseJson(extracted.text).ideas;
-    for (const row of rows) ideas.push({ ...row, id:'k' + (++ideaCounter) });
-  }
+    return parseJson(extracted.text).ideas;
+  });
+  for (const rows of extractedRows) for (const row of rows) ideas.push({ ...row, id:'k' + (++ideaCounter) });
   if (!ideas.length) throw new Error('no_knowledge_ideas');
 
   const priority = await generate({
@@ -215,4 +230,4 @@ async function createKnowledgeMapLesson({ source, topic, language = 'el', genera
   return result;
 }
 
-module.exports = { VERSION, createKnowledgeMapLesson, validIdeas, validPriority, validDraft, validReview };
+module.exports = { VERSION, createKnowledgeMapLesson, mapLimit, validIdeas, validPriority, validDraft, validReview };

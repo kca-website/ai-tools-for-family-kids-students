@@ -60,7 +60,7 @@ assert.match(html, /classList\.toggle\('is-flipped'\)/);
 assert.match(html, /aria-pressed/);
 assert.match(html, /subjectId:selectedSubjectId\(\)/);
 assert.doesNotMatch(html, /sourceText:sourceExcerpt\(source\?\.text/);
-assert.match(html, /fetch\('\/api\/source-summary'/);
+assert.match(html, /(?:fetch|timedFetch)\('\/api\/source-summary'/);
 assert.match(html, /body\.mode==='verified-summary'/);
 assert.match(html, /class="quiz-progress"/);
 assert.match(html, /\.grid\.study-result-open/);

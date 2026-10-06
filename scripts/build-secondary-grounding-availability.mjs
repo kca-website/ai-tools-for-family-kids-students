@@ -7,6 +7,7 @@ const overrides = require('../gel-schoolbook-manual-overrides-2026-2027.js');
 const phase25 = require('../gel-schoolbook-manual-overrides-phase25-2026-2027.js');
 const general = require('../general-education-book-sections-2026-2027.js');
 const historyALyceum = require('../history-a-lyceum-sections-2026-2027.js');
+const gymnasiumSections = require('../gymnasium-book-sections-2026-2027.js');
 
 const manual = new Set(
   [...(overrides.entries || []), ...(phase25.entries || [])]
@@ -42,6 +43,10 @@ for (const subjectId of general.ids || []) {
 
 // Ιστορία Α΄ ΓΕΛ: explicit topic → official page/subsection table, scoped and verified at runtime.
 for (const label of historyALyceum.labels) add('istoria-a-lykeiou', label);
+// Γυμνάσιο: explicit topic → official page table, fetched and verified at runtime.
+for (const subjectId of [...Object.keys(gymnasiumSections.subjects), ...Object.keys(gymnasiumSections.pdfSubjects)]) {
+  for (const label of gymnasiumSections.labels(subjectId)) add(subjectId, label);
+}
 
 for (const labels of Object.values(subjects)) labels.sort((a, b) => a.localeCompare(b, 'el'));
 const ordered = Object.fromEntries(Object.entries(subjects).sort(([a], [b]) => a.localeCompare(b)));

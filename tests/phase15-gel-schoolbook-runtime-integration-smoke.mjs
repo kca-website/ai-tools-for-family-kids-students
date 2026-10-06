@@ -52,8 +52,8 @@ for (const subject of Object.values(inventory.all())) {
 
 assert.equal(highHtml, 223);
 assert.equal(mediumHtml, 14);
-// 34 phase-14 PDF sections + 1 phase-25 Οικονομία override + 21 phase-26 Θρησκευτικά Α΄ units.
-assert.equal(exactPdf, 56);
+// 34 phase-14 PDF sections + 1 phase-25 Οικονομία override + 62 phase-26 Θρησκευτικά Α΄/Β΄/Γ΄ units.
+assert.equal(exactPdf, 97);
 assert.equal(manualHtml, manualOverrides.count + phase25Overrides.count);
 assert.ok(manualHtml >= 306);
 

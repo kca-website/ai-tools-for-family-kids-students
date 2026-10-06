@@ -64,21 +64,21 @@ for (const subject of Object.values(inventory.all())) {
 
 assert.equal(highHtml, 223);
 assert.equal(mediumManual, 14);
-// 34 phase-14 PDF sections + 1 phase-25 Οικονομία override + 21 phase-26 Θρησκευτικά Α΄ units.
-assert.equal(exactPdf, 56);
+// 34 phase-14 PDF sections + 1 phase-25 Οικονομία override + 62 phase-26 Θρησκευτικά Α΄/Β΄/Γ΄ units.
+assert.equal(exactPdf, 97);
 // The phase-25 Οικονομία topic moved from a reviewed manual override to an exact PDF section.
 assert.equal(reviewedManual, 293);
 assert.equal(overrides.count, 306);
 assert.equal(remainingCandidateBacked, 4);
-// Phase 26 replaced 8 generic, sourceless Θρησκευτικά Α΄ labels with 21 grounded book units.
-assert.equal(remainingWithoutCandidate, 54);
+// Phase 26 replaced 26 generic, sourceless Θρησκευτικά Α΄/Β΄/Γ΄ labels with 62 grounded book units.
+assert.equal(remainingWithoutCandidate, 36);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 586);
-assert.equal(blocked, 63);
-assert.equal(grounded + blocked, 649);
+assert.equal(grounded, 627);
+assert.equal(blocked, 45);
+assert.equal(grounded + blocked, 672);
 
 
 // Phase 25: the paragraph topic is a manual HTML override; the Οικονομία chapter-11 topic was

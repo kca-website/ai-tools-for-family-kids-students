@@ -2,6 +2,7 @@ const { transcribeOfficialFigures } = require('../schoolbook-figures');
 const { extractCompletePage, completeText, VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
 const HISTORY_A_LYCEUM = require('../history-a-lyceum-sections-2026-2027.js');
 const PRIMARY_ENVIRONMENT = require('../primary-environment-sections-2026-2027.js');
+const GYMNASIUM_SECTIONS = require('../gymnasium-book-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
@@ -1757,6 +1758,9 @@ module.exports = async function handler(req, res) {
   if (schoolType === "epal" || /^epal-[abc]-/.test(subject)) {
     return handleEpalSource(req, res, { subject, topic, completeAudio });
   }
+  // Γυμνάσιο PDF-only books with an explicit unit → page-range table.
+  const gymnasiumPdf = topic ? GYMNASIUM_SECTIONS.pdfFor(subject, topic) : null;
+  if (gymnasiumPdf) return handleTablePdfSource(res, { subject, topic, mapping: gymnasiumPdf, completeAudio });
   const gelInventory = topic ? resolveGelInventoryTopic(subject, topic) : null;
 
   if (gelInventory && !gelInventory.runtimeEligible) {
@@ -1947,8 +1951,8 @@ module.exports = async function handler(req, res) {
       sourceUrls = directUrls;
       const gelAnchorScoped = gelInventory?.runtimeEligible && gelInventory.mapping?.granularity === "section-anchor";
       let pages = await Promise.all(sourceUrls.map(fetchOfficialHtml));
-      // Μελέτη Περιβάλλοντος chapters: keep only the page body, not the book's navigation menu.
-      if (PRIMARY_ENVIRONMENT.get(subject, topic) && pages.every(Boolean)) {
+      // Table-mapped chapters: keep only the page body, not the book's navigation menu.
+      if ((PRIMARY_ENVIRONMENT.get(subject, topic) || GYMNASIUM_SECTIONS.urlsFor(subject, topic).length) && pages.every(Boolean)) {
         pages = pages.map((html) => HISTORY_A_LYCEUM.scopePageHtml(html, { start: "", end: "" }) || html);
       }
       const historyALyceum = subject === "istoria-a-lykeiou" ? HISTORY_A_LYCEUM.get(topic) : null;
@@ -2138,6 +2142,56 @@ function clean(value, max) {
 const EPAL_GUIDANCE_2026_2027 = "https://www.iep.edu.gr/yli-kai-odigies-didaskalias-epa-l-gia-to-scholiko-etos-2026-2027/";
 
 // ΕΠΑΛ unit → verified page range of the official ebooks.edu.gr PDF → exact extracted text.
+// A unit of a PDF-only official book with a verified page range (gymnasium-book-sections).
+// The heading must be on the first page and the text is extracted live; otherwise fail closed.
+async function handleTablePdfSource(res, { subject, topic, mapping, completeAudio }) {
+  res.setHeader("Cache-Control", "no-store");
+  if (!OFFICIAL_PDF_TEXT?.extractVerifiedPdfPage) {
+    return res.status(503).json({ grounded: false, error: "official_pdf_parser_unavailable", bookTitle: mapping.title, message: "Ο ασφαλής αναγνώστης επίσημων PDF δεν είναι διαθέσιμος." });
+  }
+  const extracted = await OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({
+    sourceUrl: mapping.viewUrl,
+    pdfPage: mapping.pdfPage,
+    pdfPageEnd: mapping.pdfPageEnd,
+    verifiedHeading: mapping.heading,
+    maxSpan: (GYMNASIUM_SECTIONS.pdfMaxSpan || 40) + 1
+  });
+  if (!extracted?.ok) {
+    const upstream = new Set(["official_pdf_binary_not_resolved", "official_pdf_fetch_failed", "official_pdf_text_extraction_failed", "official_pdf_too_large", "fetch_unavailable"]);
+    return res.status(upstream.has(extracted?.error) ? 502 : 404).json({
+      grounded: false,
+      error: extracted?.error || "official_pdf_text_not_grounded",
+      bookTitle: mapping.title,
+      sourceUrl: mapping.viewUrl,
+      pdfPage: mapping.pdfPage,
+      verifiedHeading: mapping.heading,
+      message: "Η επίσημη σελίδα του βιβλίου δεν πέρασε τον έλεγχο επικεφαλίδας/κειμένου. Δεν θα χρησιμοποιηθεί γενική γνώση ως υποκατάστατο."
+    });
+  }
+  res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=604800");
+  return res.status(200).json({
+    grounded: true,
+    subject,
+    topic: mapping.label,
+    section: mapping.label,
+    bookTitle: mapping.title,
+    schoolYear: "2026-2027",
+    schoolbookSource: mapping.viewUrl,
+    mappingStatus: "official-pdf-section",
+    sourceUrl: mapping.viewUrl,
+    sourceUrls: [mapping.viewUrl],
+    canonicalSourceUrl: mapping.downloadUrl + "#page=" + mapping.pdfPage,
+    resolvedPdfUrl: extracted.resolvedPdfUrl || null,
+    pdfPage: mapping.pdfPage,
+    pdfPageEnd: extracted.endPage || mapping.pdfPageEnd,
+    pdfTotalPages: extracted.totalPages || null,
+    labelParaphrase: false,
+    verifiedHeading: mapping.heading,
+    sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION } : undefined,
+    text: completeAudio ? completeText(extracted.text, topic) : String(extracted.text || "").slice(0, 60000)
+  });
+}
+
 async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
   const grade = clean(req.query?.grade, 4).toLowerCase();
   const sector = clean(req.query?.sector, 160);
@@ -2256,6 +2310,10 @@ function selectHistoryEChapterText(html, topic) {
 function resolveDirectSourceUrls(subject, topic) {
   const t = normalize(topic);
   const a = "https://ebooks.edu.gr/ebooks/v/html/8547/2250/Biologia_A-Gymnasiou_html-empl/";
+
+  // Γυμνάσιο subjects with an explicit topic → page(s) table (gymnasium-book-sections-2026-2027.js).
+  const gymnasiumUrls = GYMNASIUM_SECTIONS.urlsFor(subject, topic);
+  if (gymnasiumUrls.length) return gymnasiumUrls;
 
   // Μελέτη Περιβάλλοντος Α΄–Δ΄: every book chapter shown in AI Study → its own official page.
   if (/^environment-[abcd]-dimotikou$/.test(subject)) {

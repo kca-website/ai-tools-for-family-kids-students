@@ -1709,48 +1709,148 @@
       "topics": [
         {
           "id": "thriskeftika-b-lykeiou.topic-1",
-          "label": "Θρησκεία και αναζήτηση του ιερού",
-          "status": "navigation-map"
+          "label": "1.1 Η αναζήτηση του Θεού",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-2",
-          "label": "Χριστιανισμός: πίστη, κοινότητα και παράδοση",
-          "status": "navigation-map"
+          "label": "1.2 Η αποκάλυψη του Θεού στον κόσμο",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-3",
-          "label": "Ορθόδοξη θεολογία και ανθρώπινο πρόσωπο",
-          "status": "navigation-map"
+          "label": "1.3 Ο Θεός δημιουργός του κόσμου",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-4",
-          "label": "Θρησκευτικές εκφράσεις στον πολιτισμό",
-          "status": "navigation-map"
+          "label": "1.4 Το μυστήριο του Τριαδικού Θεού",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-5",
-          "label": "Ιουδαϊσμός",
-          "status": "navigation-map"
+          "label": "1.5 Σχέση ζωής με τον Θεό στην Ορθόδοξη Εκκλησία",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-6",
-          "label": "Ισλάμ",
-          "status": "navigation-map"
+          "label": "1.6 Ιησούς Χριστός, λυτρωτής και σωτήρας",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-7",
-          "label": "Ινδουισμός και βουδισμός",
-          "status": "navigation-map"
+          "label": "1.7 Το τέλος της ζωής στην Ορθόδοξη χριστιανική παράδοση",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-8",
-          "label": "Θρησκευτικός πλουραλισμός και διάλογος",
-          "status": "navigation-map"
+          "label": "2.1 Η παράδοση της Ορθόδοξης Εκκλησίας",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-b-lykeiou.topic-9",
-          "label": "Θρησκεία, ειρήνη, βία και ανθρώπινα δικαιώματα",
-          "status": "navigation-map"
+          "label": "2.2 Η έκφραση της πίστης στην Ορθόδοξη χριστιανική παράδοση",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-10",
+          "label": "2.3 Το χριστιανικό μήνυμα και οι πανανθρώπινες αξίες",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-11",
+          "label": "2.4 Η υπεράσπιση των ανθρωπίνων δικαιωμάτων",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-12",
+          "label": "2.5 Η συγχώρηση ως υπέρβαση στον Χριστιανισμό",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-13",
+          "label": "2.6 Ο άλλος για τον χριστιανό",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-14",
+          "label": "3.1 Οι χριστιανοί στον δημόσιο χώρο",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-15",
+          "label": "3.2 Η πρόταση της Ορθόδοξης χριστιανικής παράδοσης για την υπέρβαση των στερεοτύπων",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-16",
+          "label": "3.3 Η χριστιανική κοινότητα σε ένα πολυπολιτισμικό κόσμο",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-17",
+          "label": "3.4 Ο διάλογος ως άσκηση αγάπης στην Εκκλησία",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-18",
+          "label": "3.5 Χριστιανισμός και εκκοσμίκευση",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-19",
+          "label": "3.6 Το φαινόμενο της αθεΐας",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-20",
+          "label": "3.7 Το ασύμβατο του χριστιανικού ήθους με τον φανατισμό",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-21",
+          "label": "3.8 Ο «δούλος του Θεού» ελεύθερος από κάθε δουλεία",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-22",
+          "label": "4.1 Η αρχαία Ελληνική θρησκεία",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-23",
+          "label": "4.2 Τα αφρικανικά θρησκεύματα",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-24",
+          "label": "4.3 Ο Ιουδαϊσμός",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-25",
+          "label": "4.4 Το Ισλάμ",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-26",
+          "label": "4.5 Ο Ινδουισμός",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-27",
+          "label": "4.6 Ο Βουδισμός",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-28",
+          "label": "4.7 Η Κινεζική θρησκεία",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-b-lykeiou.topic-29",
+          "label": "4.8 Η Ιαπωνική θρησκεία",
+          "status": "official-book-unit"
         }
       ]
     },
@@ -2737,48 +2837,63 @@
       "topics": [
         {
           "id": "thriskeftika-g-lykeiou.topic-1",
-          "label": "Πίστη, γνώση και επιστήμη",
-          "status": "navigation-map"
+          "label": "1.1 Επιστήμη και θρησκεία",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-2",
-          "label": "Θρησκεία και σύγχρονος άνθρωπος",
-          "status": "navigation-map"
+          "label": "1.2 Ηθική της τεχνολογίας",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-3",
-          "label": "Βιοηθικά ζητήματα",
-          "status": "navigation-map"
+          "label": "1.3 Εφαρμογές της Γενετικής",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-4",
-          "label": "Τεχνολογία και ανθρώπινη ευθύνη",
-          "status": "navigation-map"
+          "label": "1.4 Οικοθεολογία",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-5",
-          "label": "Κοινωνική δικαιοσύνη και αλληλεγγύη",
-          "status": "navigation-map"
+          "label": "2.1 Πλούτος και φτώχεια",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-6",
-          "label": "Ειρήνη, βία και θρησκεία",
-          "status": "navigation-map"
+          "label": "2.2 Η ηθική της εργασίας",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-7",
-          "label": "Οικολογία και ευθύνη για τη δημιουργία",
-          "status": "navigation-map"
+          "label": "2.3 Η μοναξιά του ανθρώπου",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-8",
-          "label": "Θρησκευτικός πλουραλισμός και διαθρησκειακός διάλογος",
-          "status": "navigation-map"
+          "label": "2.4 Η επανάσταση του Χριστιανισμού",
+          "status": "official-book-unit"
         },
         {
           "id": "thriskeftika-g-lykeiou.topic-9",
-          "label": "Ορθόδοξη μαρτυρία στον σύγχρονο κόσμο",
-          "status": "navigation-map"
+          "label": "3.1 Το όραμα της ειρήνης",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-g-lykeiou.topic-10",
+          "label": "3.2 Η ευθύνη για τη δικαιοσύνη",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-g-lykeiou.topic-11",
+          "label": "3.3 Η κατάκτηση της ευτυχίας",
+          "status": "official-book-unit"
+        },
+        {
+          "id": "thriskeftika-g-lykeiou.topic-12",
+          "label": "3.4 Η ελπίδα για τη μεταμόρφωση του κόσμου",
+          "status": "official-book-unit"
         }
       ]
     },

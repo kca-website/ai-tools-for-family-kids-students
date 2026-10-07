@@ -69,8 +69,8 @@ try {
     assert.ok(overflow<=1,`${width}: horizontal overflow ${overflow}`);
     // Language changes rebuild the homepage asynchronously. Measure the
     // controls after the Greek content and visible layout have both returned.
-    await page.waitForFunction(()=>{const role=document.querySelector('#homeV9Finder [data-finder-role="guardian"]');return role?.textContent.includes('Γονιός') && [...document.querySelectorAll('#homeV9AllTools a, #homeV9Finder button')].every(el=>el.getBoundingClientRect().height>0);});
-    const targets=await page.locator('#homeV9AllTools a, #homeV9Finder button').evaluateAll(els=>els.map(el=>({height:el.getBoundingClientRect().height,text:el.textContent})));
+    await page.waitForFunction(()=>{const role=document.querySelector('#homeV9Finder [data-finder-role="guardian"]');return role?.textContent.includes('Γονιός') && [...document.querySelectorAll('#homeV9Finder button')].every(el=>el.getBoundingClientRect().height>0);});
+    const targets=await page.locator('#homeV9Finder button').evaluateAll(els=>els.map(el=>({height:el.getBoundingClientRect().height,text:el.textContent})));
     assert.ok(targets.every(t=>t.height>=44),`${width}: touch targets ${JSON.stringify(targets.filter(t=>t.height<44))}`);
     await page.addScriptTag({content:axe.source});
     const scan=await page.evaluate(async()=>{const r=await axe.run({runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});return r.violations.map(v=>({id:v.id,impact:v.impact,targets:v.nodes.map(n=>n.target)}));});

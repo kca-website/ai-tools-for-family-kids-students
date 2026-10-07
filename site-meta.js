@@ -9,6 +9,32 @@ window.AITOOLSKIDS_SITE_META = Object.freeze({
   publicAgeRange: "4–18"
 });
 
+/** Homepage cleanup: keep the full tools catalogue only inside "Discover more". */
+(function(){
+  if(location.pathname !== "/" && location.pathname !== "") return;
+
+  function removeDuplicateAllToolsCta(){
+    document.querySelectorAll('a').forEach(function(link){
+      if(link.closest("#homeV9More")) return;
+      var text=(link.textContent || "").replace(/\s+/g," ").trim();
+      var isDuplicate = text.indexOf("Δες όλα τα AI εργαλεία") !== -1 ||
+        text.indexOf("Άνοιξε τον πλήρη κατάλογο με αναζήτηση και φίλτρα") !== -1 ||
+        text.indexOf("See all AI tools") !== -1 ||
+        text.indexOf("Open the full catalogue with search and filters") !== -1 ||
+        text.indexOf("Open the full catalog with search and filters") !== -1;
+      if(isDuplicate) link.remove();
+    });
+  }
+
+  function start(){
+    removeDuplicateAllToolsCta();
+    if(!("MutationObserver" in window)) return;
+    new MutationObserver(removeDuplicateAllToolsCta).observe(document.documentElement,{childList:true,subtree:true});
+  }
+
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded",start,{once:true});
+  else start();
+})();
 
 /** Local-only debug snapshot; no analytics or network transmission. */
 window.AITOOLSKIDS_INTEGRITY = Object.freeze({

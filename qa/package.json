@@ -17,14 +17,17 @@
     "lighthouse": "node scripts/lighthouse.mjs",
     "test:api": "node --test tests/api-handlers.mock.test.mjs tests/link-check.selftest.mjs tests/ai-smoke.selftest.mjs",
     "test:phase10": "node --test tests/phase10-landing-pages.test.mjs && playwright test e2e/09-phase10-landing.spec.mjs --project=chromium-desktop --project=chromium-mobile375",
-    "e2e": "playwright test --project=chromium-desktop --project=chromium-mobile375"
+    "e2e": "playwright test --project=chromium-desktop --project=chromium-mobile375",
+    "test:play": "node --test tests/play-adventure.test.mjs",
+    "test:play:browser": "node scripts/play-browser-qa.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.0",
     "@playwright/test": "1.56.1",
     "cheerio": "^1.0.0",
     "lighthouse": "^12.0.0",
-    "chrome-launcher": "^1.1.0"
+    "chrome-launcher": "^1.1.0",
+    "jsdom": "26.1.0"
   },
   "dependencies": {}
 }

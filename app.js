@@ -2525,7 +2525,9 @@ function renderToolGrid(pathTools, targetElement) {
       });
     }
     bindLearningActivityActions(gapId, gap, label);
+    els.pathModal.dataset.gapId = gapId;
     els.pathModalOverlay.hidden = false;
+    document.dispatchEvent(new CustomEvent("aitools4kids:path-opened",{detail:{gapId}}));
     document.body.style.overflow = "hidden";
   }
 

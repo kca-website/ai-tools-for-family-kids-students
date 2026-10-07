@@ -37,6 +37,7 @@ export function startLocalServer(port = 0) {
     }
     if (p === '/preschool') p = '/preschool.html';
     let file = path.join(REPO, p);
+    if (fs.existsSync(file) && fs.statSync(file).isDirectory()) file = path.join(file, "index.html");
     const inRepo = file.startsWith(REPO) && !file.startsWith(QA_DIR) && !file.includes(`${path.sep}.git`);
     const headers = {};
     let status = 200;

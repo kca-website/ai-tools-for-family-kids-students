@@ -1,20 +1,341 @@
 <!doctype html>
 <html lang="el">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#78d2ff">
-<title>Παίξε & Μάθε — AI Tools 4 Kids</title>
-<link rel="stylesheet" href="./game.css"><link rel="stylesheet" href="./history.css">
-</head>
-<body>
-<header class="hud"><a class="brand" href="/"><span class="logo">◆</span><span><b>AI Tools 4 Kids</b><small>Παίξε • Μάθε • Εξερεύνησε</small></span></a><div class="score"><span>⭐ <b id="stars">0</b></span><span>🪙 <b id="coins">0</b></span><span>⚡ <b id="xp">0 XP</b></span><span class="zones">🗺️ <b id="zones">0/4</b></span></div></header>
-<section id="intro" class="intro"><div class="card intro-card"><div class="avatar-preview" aria-hidden="true"><i id="previewHair" class="preview-hair"></i><span id="previewHead" class="preview-head">•ᴗ•</span><i id="previewBody" class="preview-body"></i></div><div><div class="eyebrow">Πειραματικό παιχνίδι μάθησης</div><h1>Διάλεξε ήρωα και μπες στον κόσμο</h1><p>Ξεκίνα από το <b>Math City</b>, ξεκλείδωσε το <b>Science Lab</b>, το <b>History Island</b> και ολοκλήρωσε το <b>Language Academy</b>.</p><div class="avatar-choices" aria-label="Επιλογή avatar"><button class="avatar-choice selected" data-avatar="0"><span class="avatar-dot a0"></span><b>Μπλε</b></button><button class="avatar-choice" data-avatar="1"><span class="avatar-dot a1"></span><b>Μωβ</b></button><button class="avatar-choice" data-avatar="2"><span class="avatar-dot a2"></span><b>Πράσινο</b></button></div><div class="actions"><button id="start" class="btn primary">Ξεκίνα την περιπέτεια</button><button id="how" class="btn soft">Πώς παίζεται;</button><button id="resetAll" class="btn ghost">Νέα αρχή</button></div><p id="help" hidden>Με βελάκια/WASD ή με τα κουμπιά κίνησης στο κινητό. Τα κέρματα δίνουν XP. Κάθε ολοκληρωμένη περιοχή ξεκλειδώνει την επόμενη.</p></div></div></section>
-<section id="world" class="world" hidden><canvas id="c" aria-label="Χάρτης παιχνιδιού"></canvas><div class="mission"><b id="mt">🎯 Αποστολή: Βρες το Math City</b><small id="ms">Ακολούθησε το μονοπάτι και μάζεψε νομίσματα.</small></div><div class="pad"><button data-d="up" aria-label="Πάνω">▲</button><br><button data-d="left" aria-label="Αριστερά">◀</button><button data-d="down" aria-label="Κάτω">▼</button><button data-d="right" aria-label="Δεξιά">▶</button></div><div id="toast" class="toast">+10 XP</div><button id="enter" class="btn primary enter" hidden>Μπες</button></section>
-<section id="mathModal" class="modal" hidden><div class="card quiz"><button class="close" data-close="mathModal" aria-label="Κλείσιμο">×</button><div class="top"><span class="pill math-pill">🔢 Math City</span><b id="mathCount">Αποστολή 1/6</b></div><h2 id="mathTitle">Η Πύλη των Δεκαδικών</h2><div id="compare"><p class="q">Ποιος δεκαδικός είναι μεγαλύτερος;</p><div class="doors"><button class="door red" data-i="0"><strong id="a">0,45</strong></button><button class="door blue" data-i="1"><strong id="b">0,8</strong></button></div><div id="fb" class="feedback" hidden><div id="fi">💡</div><div><h3 id="ft">Κοίτα ξανά</h3><p id="fp"></p></div></div><div id="nl" class="line" hidden><div class="track"></div><span class="tick">0</span><span id="max" class="tick r">1</span><span id="ma" class="mark"><i class="dot"></i><em></em></span><span id="mb" class="mark b"><i class="dot"></i><em></em></span></div><div class="actions"><button id="retry" class="btn soft" hidden>Δοκίμασε ξανά</button><button id="next" class="btn primary" hidden>Επόμενη αποστολή</button></div></div><div id="sort" class="sortbox" hidden><p class="q">Χτίσε τη γέφυρα: πάτησε τους αριθμούς από τον μικρότερο στον μεγαλύτερο.</p><div class="sortcards"><button class="sortcard" data-v="0.8">0,8</button><button class="sortcard" data-v="0.09">0,09</button><button class="sortcard" data-v="1.2">1,2</button></div><div id="seq" class="sequence"></div><div id="sfb" class="feedback" hidden><div>🧩</div><div><h3 id="sft"></h3><p id="sfp"></p></div></div><div class="actions"><button id="sortreset" class="btn soft" hidden>Ξανά από την αρχή</button><button id="mathFinish" class="btn primary" hidden>Άνοιξε το Science Lab</button></div></div></div></section>
-<section id="scienceModal" class="modal" hidden><div class="card quiz science-card"><button class="close" data-close="scienceModal" aria-label="Κλείσιμο">×</button><div class="top"><span class="pill science-pill">🧪 Science Lab</span><b id="scienceCount">Πείραμα 1/2</b></div><h2 id="scienceTitle">Άναψε τη λάμπα</h2><div id="circuitMission"><p class="q">Ποια 3 στοιχεία χρειάζεσαι για ένα απλό ηλεκτρικό κύκλωμα; Διάλεξέ τα από τον πάγκο.</p><div class="labbench"><button class="lab-item battery" data-part="battery"><span>🔋</span><b>Μπαταρία</b></button><button class="lab-item wire" data-part="wire"><span>〰️</span><b>Καλώδιο</b></button><button class="lab-item lamp" data-part="lamp"><span id="lampIcon">💡</span><b>Λάμπα</b></button><button class="lab-item paper" data-part="paper"><span>📄</span><b>Χαρτί</b></button></div><div id="circuitSeq" class="circuit-seq"><span>1</span><span>2</span><span>3</span></div><div id="circuitFb" class="feedback" hidden><div>⚡</div><div><h3 id="circuitFt"></h3><p id="circuitFp"></p></div></div><div class="actions"><button id="circuitReset" class="btn soft" hidden>Ξανά</button><button id="scienceNext" class="btn primary" hidden>Επόμενο πείραμα</button></div></div><div id="conductorMission" hidden><p class="q">Θέλουμε να κλείσουμε το κύκλωμα. Ποιο υλικό είναι καλός ηλεκτρικός αγωγός;</p><div class="materials"><button data-material="wood"><span>🪵</span><b>Ξύλο</b></button><button data-material="metal"><span>🥄</span><b>Μέταλλο</b></button><button data-material="plastic"><span>🧴</span><b>Πλαστικό</b></button></div><div id="materialFb" class="feedback" hidden><div id="materialIcon">🧪</div><div><h3 id="materialFt"></h3><p id="materialFp"></p></div></div><div class="actions"><button id="scienceFinish" class="btn primary" hidden>Ολοκλήρωση Science Lab</button></div></div></div></section>
-<section id="historyModal" class="modal" hidden><div class="card quiz history-card"><button class="close" data-close="historyModal" aria-label="Κλείσιμο">×</button><div class="top"><span class="pill history-pill">🏺 History Island</span><b id="historyCount">Αποστολή 1/3</b></div><h2 id="historyTitle">Ο φύλακας της Χρονοπύλης</h2><div id="historyIntro"><div class="history-scene"><div class="npc" aria-hidden="true"><i class="npc-hat"></i><span class="npc-head">•ᴗ•</span><i class="npc-body"></i></div><div class="npc-bubble"><b>Αγωνιστής του 1821</b><p id="npcText"></p><button id="npcContinue" class="btn primary">Αναλαμβάνω την αποστολή</button></div></div></div><div id="historyTimeline" hidden><p class="q">Τρεις πέτρες της χρονογραμμής βγήκαν από τη θέση τους. Πάτησέ τες από το παλαιότερο προς το νεότερο.</p><div class="time-stones"><button class="time-stone" data-year="1821"><strong>1821</strong><small>Έναρξη Ελληνικής Επανάστασης</small></button><button class="time-stone" data-year="1830"><strong>1830</strong><small>Πρωτόκολλο του Λονδίνου</small></button><button class="time-stone" data-year="1814"><strong>1814</strong><small>Ίδρυση Φιλικής Εταιρείας</small></button></div><div id="timelineSlots" class="timeline-slots"></div><div id="timelineFb" class="feedback" hidden><div>🕰️</div><div><h3 id="timelineFt"></h3><p id="timelineFp"></p></div></div><div class="actions"><button id="timelineReset" class="btn soft" hidden>Ξανά</button><button id="artifactNext" class="btn primary" hidden>Συνέχισε στο χωριό</button></div></div><div id="historyArtifact" hidden><p class="q">Στο σκηνικό εμφανίστηκε ένα αντικείμενο που δεν ανήκει στην εποχή. Ποιο είναι ο αναχρονισμός;</p><div class="artifacts"><button class="artifact" data-artifact="paper"><span>📜</span><b>Χαρτί & πένα</b></button><button class="artifact" data-artifact="bottle"><span>🧉</span><b>Παγούρι</b></button><button class="artifact" data-artifact="phone"><span>📱</span><b>Σύγχρονο κινητό</b></button></div><div id="artifactFb" class="feedback" hidden><div id="artifactIcon">🕰️</div><div><h3 id="artifactFt"></h3><p id="artifactFp"></p></div></div><div class="actions"><button id="historyFinish" class="btn primary" hidden>Ολοκλήρωση History Island</button></div><p class="history-note">Prototype ιστορικής σκέψης: η τελική παραγωγική έκδοση θα συνδέεται με την αντίστοιχη σχολική ύλη.</p></div></div></section>
-<section id="finish" class="finish" hidden><div class="card"><div class="trophy">🏆</div><div class="eyebrow" id="finishEyebrow">Περιοχή ολοκληρώθηκε</div><h1 id="finishTitle">Μπράβο!</h1><p id="finishText"></p><div class="rewards" id="finishRewards"></div><div class="actions center"><button id="back" class="btn soft">Επιστροφή στον χάρτη</button><button id="again" class="btn primary">Παίξε από την αρχή</button></div></div></section>
-<script src="./game-v3.js" defer></script>
-<script src="./game-final.js" defer></script>
-<script src="./mission-bridge.js" defer></script>
-</body></html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#78d2ff" />
+    <title>Παίξε & Μάθε — AI Tools 4 Kids</title>
+    <link rel="stylesheet" href="./game.css" />
+    <link rel="stylesheet" href="./history.css" />
+  </head>
+  <body>
+    <header class="hud">
+      <a class="brand" href="/"
+        ><span class="logo">◆</span
+        ><span
+          ><b>AI Tools 4 Kids</b><small>Παίξε • Μάθε • Εξερεύνησε</small></span
+        ></a
+      >
+      <div class="score">
+        <span>⭐ <b id="stars">0</b></span
+        ><span>🪙 <b id="coins">0</b></span
+        ><span>⚡ <b id="xp">0 XP</b></span
+        ><span class="zones">🗺️ <b id="zones">0/4</b></span>
+      </div>
+    </header>
+    <section id="intro" class="intro">
+      <div class="card intro-card">
+        <div class="avatar-preview" aria-hidden="true">
+          <i id="previewHair" class="preview-hair"></i
+          ><span id="previewHead" class="preview-head">•ᴗ•</span
+          ><i id="previewBody" class="preview-body"></i>
+        </div>
+        <div>
+          <div class="eyebrow">Πειραματικό παιχνίδι μάθησης</div>
+          <h1>Διάλεξε ήρωα και μπες στον κόσμο</h1>
+          <p>
+            Ξεκίνα από το <b>Math City</b>, ξεκλείδωσε το <b>Science Lab</b>, το
+            <b>History Island</b> και ολοκλήρωσε το <b>Language Academy</b>.
+          </p>
+          <div class="avatar-choices" aria-label="Επιλογή avatar">
+            <button class="avatar-choice selected" data-avatar="0">
+              <span class="avatar-dot a0"></span><b>Μπλε</b></button
+            ><button class="avatar-choice" data-avatar="1">
+              <span class="avatar-dot a1"></span><b>Μωβ</b></button
+            ><button class="avatar-choice" data-avatar="2">
+              <span class="avatar-dot a2"></span><b>Πράσινο</b>
+            </button>
+          </div>
+          <div class="actions">
+            <button id="start" class="btn primary">Ξεκίνα την περιπέτεια</button
+            ><button id="how" class="btn soft">Πώς παίζεται;</button
+            ><button id="resetAll" class="btn ghost">Νέα αρχή</button>
+          </div>
+          <p id="help" hidden>
+            Με βελάκια/WASD ή με τα κουμπιά κίνησης στο κινητό. Μίλα στους
+            οδηγούς με Enter, βρες τα αντικείμενα και άνοιξε τις προκλήσεις. Τα
+            κέρματα δίνουν XP. Κάθε ολοκληρωμένη περιοχή ξεκλειδώνει την
+            επόμενη.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="world" class="world" hidden>
+      <canvas
+        id="c"
+        tabindex="0"
+        aria-label="Χάρτης παιχνιδιού. Κίνηση με βέλη ή WASD, Enter για αλληλεπίδραση."
+      ></canvas>
+      <div class="mission">
+        <b id="mt">🎯 Αποστολή: Βρες το Math City</b
+        ><small id="ms">Ακολούθησε το μονοπάτι και μάζεψε νομίσματα.</small>
+      </div>
+      <div class="pad">
+        <button data-d="up" aria-label="Πάνω">▲</button><br /><button
+          data-d="left"
+          aria-label="Αριστερά"
+        >
+          ◀</button
+        ><button data-d="down" aria-label="Κάτω">▼</button
+        ><button data-d="right" aria-label="Δεξιά">▶</button>
+      </div>
+      <button id="mapBack" class="btn soft map-back" hidden>
+        ← Κεντρικός κόσμος
+      </button>
+      <div id="inventory" class="inventory" aria-live="polite"></div>
+      <dialog id="npcDialog" class="npc-dialog">
+        <h2 id="npcName"></h2>
+        <p id="npcClue"></p>
+        <button id="npcOk" class="btn primary">Πάμε!</button>
+      </dialog>
+      <div id="toast" role="status" class="toast">+10 XP</div>
+      <button id="enter" class="btn primary enter" hidden>Μπες</button>
+    </section>
+    <section id="mathModal" class="modal" hidden>
+      <div class="card quiz">
+        <button class="close" data-close="mathModal" aria-label="Κλείσιμο">
+          ×
+        </button>
+        <div class="top">
+          <span class="pill math-pill">🔢 Math City</span
+          ><b id="mathCount">Αποστολή 1/6</b>
+        </div>
+        <h2 id="mathTitle">Η Πύλη των Δεκαδικών</h2>
+        <div id="compare">
+          <p class="q">Ποιος δεκαδικός είναι μεγαλύτερος;</p>
+          <div class="doors">
+            <button class="door red" data-i="0">
+              <strong id="a">0,45</strong></button
+            ><button class="door blue" data-i="1">
+              <strong id="b">0,8</strong>
+            </button>
+          </div>
+          <div id="fb" class="feedback" hidden>
+            <div id="fi">💡</div>
+            <div>
+              <h3 id="ft">Κοίτα ξανά</h3>
+              <p id="fp"></p>
+            </div>
+          </div>
+          <div id="nl" class="line" hidden>
+            <div class="track"></div>
+            <span class="tick">0</span><span id="max" class="tick r">1</span
+            ><span id="ma" class="mark"><i class="dot"></i><em></em></span
+            ><span id="mb" class="mark b"><i class="dot"></i><em></em></span>
+          </div>
+          <div class="actions">
+            <button id="retry" class="btn soft" hidden>Δοκίμασε ξανά</button
+            ><button id="next" class="btn primary" hidden>
+              Επόμενη αποστολή
+            </button>
+          </div>
+        </div>
+        <div id="sort" class="sortbox" hidden>
+          <p class="q">
+            Χτίσε τη γέφυρα: πάτησε τους αριθμούς από τον μικρότερο στον
+            μεγαλύτερο.
+          </p>
+          <div class="sortcards">
+            <button class="sortcard" data-v="0.8">0,8</button
+            ><button class="sortcard" data-v="0.09">0,09</button
+            ><button class="sortcard" data-v="1.2">1,2</button>
+          </div>
+          <div id="seq" class="sequence"></div>
+          <div id="sfb" class="feedback" hidden>
+            <div>🧩</div>
+            <div>
+              <h3 id="sft"></h3>
+              <p id="sfp"></p>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="sortreset" class="btn soft" hidden>
+              Ξανά από την αρχή</button
+            ><button id="mathFinish" class="btn primary" hidden>
+              Άνοιξε το Science Lab
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="scienceModal" class="modal" hidden>
+      <div class="card quiz science-card">
+        <button class="close" data-close="scienceModal" aria-label="Κλείσιμο">
+          ×
+        </button>
+        <div class="top">
+          <span class="pill science-pill">🧪 Science Lab</span
+          ><b id="scienceCount">Πείραμα 1/2</b>
+        </div>
+        <h2 id="scienceTitle">Άναψε τη λάμπα</h2>
+        <div id="circuitMission">
+          <p class="q">
+            Ποια 3 στοιχεία χρειάζεσαι για ένα απλό ηλεκτρικό κύκλωμα; Διάλεξέ
+            τα από τον πάγκο.
+          </p>
+          <div class="labbench">
+            <button class="lab-item battery" data-part="battery">
+              <span>🔋</span><b>Μπαταρία</b></button
+            ><button class="lab-item wire" data-part="wire">
+              <span>〰️</span><b>Καλώδιο</b></button
+            ><button class="lab-item lamp" data-part="lamp">
+              <span id="lampIcon">💡</span><b>Λάμπα</b></button
+            ><button class="lab-item paper" data-part="paper">
+              <span>📄</span><b>Χαρτί</b>
+            </button>
+          </div>
+          <div id="circuitSeq" class="circuit-seq">
+            <span>1</span><span>2</span><span>3</span>
+          </div>
+          <div id="circuitFb" class="feedback" hidden>
+            <div>⚡</div>
+            <div>
+              <h3 id="circuitFt"></h3>
+              <p id="circuitFp"></p>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="circuitReset" class="btn soft" hidden>Ξανά</button
+            ><button id="scienceNext" class="btn primary" hidden>
+              Επόμενο πείραμα
+            </button>
+          </div>
+        </div>
+        <div id="conductorMission" hidden>
+          <p class="q">
+            Θέλουμε να κλείσουμε το κύκλωμα. Ποιο υλικό είναι καλός ηλεκτρικός
+            αγωγός;
+          </p>
+          <div class="materials">
+            <button data-material="wood"><span>🪵</span><b>Ξύλο</b></button
+            ><button data-material="metal"><span>🥄</span><b>Μέταλλο</b></button
+            ><button data-material="plastic">
+              <span>🧴</span><b>Πλαστικό</b>
+            </button>
+          </div>
+          <div id="materialFb" class="feedback" hidden>
+            <div id="materialIcon">🧪</div>
+            <div>
+              <h3 id="materialFt"></h3>
+              <p id="materialFp"></p>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="scienceFinish" class="btn primary" hidden>
+              Ολοκλήρωση Science Lab
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="historyModal" class="modal" hidden>
+      <div class="card quiz history-card">
+        <button class="close" data-close="historyModal" aria-label="Κλείσιμο">
+          ×
+        </button>
+        <div class="top">
+          <span class="pill history-pill">🏺 History Island</span
+          ><b id="historyCount">Αποστολή 1/3</b>
+        </div>
+        <h2 id="historyTitle">Ο φύλακας της Χρονοπύλης</h2>
+        <div id="historyIntro">
+          <div class="history-scene">
+            <div class="npc" aria-hidden="true">
+              <i class="npc-hat"></i><span class="npc-head">•ᴗ•</span
+              ><i class="npc-body"></i>
+            </div>
+            <div class="npc-bubble">
+              <b>Αγωνιστής του 1821</b>
+              <p id="npcText"></p>
+              <button id="npcContinue" class="btn primary">
+                Αναλαμβάνω την αποστολή
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="historyTimeline" hidden>
+          <p class="q">
+            Τρεις πέτρες της χρονογραμμής βγήκαν από τη θέση τους. Πάτησέ τες
+            από το παλαιότερο προς το νεότερο.
+          </p>
+          <div class="time-stones">
+            <button class="time-stone" data-year="1821">
+              <strong>1821</strong
+              ><small>Έναρξη Ελληνικής Επανάστασης</small></button
+            ><button class="time-stone" data-year="1830">
+              <strong>1830</strong
+              ><small>Πρωτόκολλο του Λονδίνου</small></button
+            ><button class="time-stone" data-year="1814">
+              <strong>1814</strong><small>Ίδρυση Φιλικής Εταιρείας</small>
+            </button>
+          </div>
+          <div id="timelineSlots" class="timeline-slots"></div>
+          <div id="timelineFb" class="feedback" hidden>
+            <div>🕰️</div>
+            <div>
+              <h3 id="timelineFt"></h3>
+              <p id="timelineFp"></p>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="timelineReset" class="btn soft" hidden>Ξανά</button
+            ><button id="artifactNext" class="btn primary" hidden>
+              Συνέχισε στο χωριό
+            </button>
+          </div>
+        </div>
+        <div id="historyArtifact" hidden>
+          <p class="q">
+            Στο σκηνικό εμφανίστηκε ένα αντικείμενο που δεν ανήκει στην εποχή.
+            Ποιο είναι ο αναχρονισμός;
+          </p>
+          <div class="artifacts">
+            <button class="artifact" data-artifact="paper">
+              <span>📜</span><b>Χαρτί & πένα</b></button
+            ><button class="artifact" data-artifact="bottle">
+              <span>🧉</span><b>Παγούρι</b></button
+            ><button class="artifact" data-artifact="phone">
+              <span>📱</span><b>Σύγχρονο κινητό</b>
+            </button>
+          </div>
+          <div id="artifactFb" class="feedback" hidden>
+            <div id="artifactIcon">🕰️</div>
+            <div>
+              <h3 id="artifactFt"></h3>
+              <p id="artifactFp"></p>
+            </div>
+          </div>
+          <div class="actions">
+            <button id="historyFinish" class="btn primary" hidden>
+              Ολοκλήρωση History Island
+            </button>
+          </div>
+          <p class="history-note">
+            Prototype ιστορικής σκέψης: η τελική παραγωγική έκδοση θα συνδέεται
+            με την αντίστοιχη σχολική ύλη.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="finish" class="finish" hidden>
+      <div class="card">
+        <div class="trophy">🏆</div>
+        <div class="eyebrow" id="finishEyebrow">Περιοχή ολοκληρώθηκε</div>
+        <h1 id="finishTitle">Μπράβο!</h1>
+        <p id="finishText"></p>
+        <div class="rewards" id="finishRewards"></div>
+        <div class="actions center">
+          <button id="back" class="btn soft">Επιστροφή στον χάρτη</button
+          ><button id="again" class="btn primary">Παίξε από την αρχή</button>
+        </div>
+      </div>
+    </section>
+    <script src="./world.js" defer></script>
+    <script src="./game-core.js" defer></script>
+    <script src="./mission-bridge.js" defer></script>
+  </body>
+</html>

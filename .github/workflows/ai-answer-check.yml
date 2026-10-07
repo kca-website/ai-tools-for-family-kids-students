@@ -1,0 +1,40 @@
+name: AI answer check
+on:
+  push:
+    branches: [main, 'work/ai-answer-check-20261007', 'preview/ai-answer-check-20261007']
+    paths: ['ai-answer-check*', 'api/check-ai-answer.js', 'study.html', 'tests/ai-answer-check*', '.github/workflows/ai-answer-check.yml']
+  pull_request:
+    paths: ['ai-answer-check*', 'api/check-ai-answer.js', 'study.html', 'tests/ai-answer-check*', '.github/workflows/ai-answer-check.yml']
+permissions:
+  contents: read
+jobs:
+  answer-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - name: Syntax and evidence boundary tests
+        run: |
+          node --check ai-answer-check.js
+          node --check api/check-ai-answer.js
+          node --check ai-answer-check-client.js
+          node --test tests/ai-answer-check.test.cjs
+          node tests/ai-study-source-policy-smoke.mjs
+          node tests/ai-provider-router-smoke.mjs
+          node tests/special-education-data-smoke.mjs
+          node --test qa/tests/phase8-grounding.test.mjs qa/tests/phase9-production-correctness.test.mjs
+      - name: Browser dependencies
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Local browser and existing navigation checks
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/ai-answer-check-http.log 2>&1 &
+          node tests/ai-answer-check-browser.mjs
+          node tests/mobile-home-pwa-smoke.mjs
+          node tests/home-positioning-smoke.mjs
+          node tests/study-context-navigation-smoke.mjs

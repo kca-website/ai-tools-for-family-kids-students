@@ -52,6 +52,7 @@
   <link rel="stylesheet" href="/site-chrome.css" />
   <script defer src="/site-chrome.js"></script>
 <link rel="stylesheet" href="/learning-actions.css">
+<link rel="stylesheet" href="/ai-answer-check.css">
 </head>
 <body>
 <div class="shell">
@@ -128,6 +129,18 @@
 
     <section class="card" aria-live="polite">
       <h2 data-el="Τι θέλεις να κάνεις;" data-en="What would you like to do?">Τι θέλεις να κάνεις;</h2>
+      <details id="answerCheck" class="answer-check">
+        <summary data-el="Έλεγξε την απάντηση του AI" data-en="Check an AI answer">Έλεγξε την απάντηση του AI</summary>
+        <p class="answer-check__intro" data-el="Σου απάντησε το AI; Διάλεξε τάξη, μάθημα και ενότητα αριστερά ή επάνω και επικόλλησε την απάντηση εδώ. Θα συγκρίνουμε έως 12 βασικούς ισχυρισμούς μόνο με την επίσημη σχολική ενότητα." data-en="Got an AI answer? Choose a grade, subject and unit on the left or above, then paste the answer here. We will compare up to 12 key claims only with the official textbook section.">Σου απάντησε το AI; Διάλεξε τάξη, μάθημα και ενότητα αριστερά ή επάνω και επικόλλησε την απάντηση εδώ. Θα συγκρίνουμε έως 12 βασικούς ισχυρισμούς μόνο με την επίσημη σχολική ενότητα.</p>
+        <form id="answerCheckForm">
+          <label for="answerCheckText" data-el="Η απάντηση που θέλεις να ελέγξεις" data-en="The answer you want to check">Η απάντηση που θέλεις να ελέγξεις</label>
+          <textarea id="answerCheckText" rows="6" minlength="20" maxlength="6000" required aria-describedby="answerCheckHelp"></textarea>
+          <p id="answerCheckHelp" class="answer-check__intro" data-el="Έως 6.000 χαρακτήρες, χωρίς προσωπικά στοιχεία. Το κείμενο στέλνεται στο AI μόνο όταν πατήσεις έλεγχο. PDF και σημειώσεις δεν χρησιμοποιούνται ως επίσημη πηγή σε αυτόν τον έλεγχο." data-en="Up to 6,000 characters, without personal information. The text is sent to AI only when you run the check. PDFs and notes are not used as an official source for this check.">Έως 6.000 χαρακτήρες, χωρίς προσωπικά στοιχεία. Το κείμενο στέλνεται στο AI μόνο όταν πατήσεις έλεγχο. PDF και σημειώσεις δεν χρησιμοποιούνται ως επίσημη πηγή σε αυτόν τον έλεγχο.</p>
+          <button id="answerCheckSubmit" type="submit" data-el="Έλεγξε με το σχολικό βιβλίο" data-en="Check against the textbook">Έλεγξε με το σχολικό βιβλίο</button>
+        </form>
+        <p id="answerCheckStatus" class="answer-check__status" role="status" aria-live="polite"></p>
+        <div id="answerCheckResults" class="answer-check__results" hidden></div>
+      </details>
       <div id="empty" class="result-empty" data-el="Διάλεξε ενότητα ή γράψε θέμα και μετά επίλεξε πώς θέλεις να δουλέψεις την ύλη." data-en="Choose a unit or enter a topic, then choose how you want to study it.">Διάλεξε ενότητα ή γράψε θέμα και μετά επίλεξε πώς θέλεις να δουλέψεις την ύλη.</div>
       <div id="result">
         <div id="plan" class="plan hidden"></div>
@@ -1243,5 +1256,7 @@
 })();
 </script>
 <script src="/learning-actions.js"></script>
+<script src="/ai-answer-check-client.js"></script>
 </body>
 </html>
+

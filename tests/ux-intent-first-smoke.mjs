@@ -14,10 +14,12 @@ try {
     await page.goto(base,{waitUntil:'domcontentloaded'});
     await page.waitForSelector('#homeV9FinderCta');
     await page.waitForFunction(()=>window.__aitools4kidsHeavyLoaded);
-    assert.ok(await page.locator('#homeIntentLinks a[href="/ti-thelo-na-kano-me-ai.html"]').isVisible());
-    for(const href of ['/special-education.html','/sign-language.html','/higher-education-pilot.html','/high/student/tutor?schoolType=epal']) {
-      assert.ok(await page.locator(`#homeIntentLinks a[href="${href}"]`).isVisible(),`${width}: dedicated pathway ${href}`);
-    }
+    await page.waitForLoadState('networkidle');
+    assert.ok(await page.locator('#homeV9AllTools a').isVisible(), 'All AI tools remain discoverable');
+    assert.ok(await page.locator('#homeV8HelpersMount a[href="/special-education.html"]').isVisible(), 'Special Education remains discoverable');
+    assert.ok(await page.locator('#homeV8Eng a').isVisible(), 'GSL remains discoverable');
+    assert.ok(await page.locator('#homeV9Finder [data-finder-role="university"]').isVisible());
+    assert.ok(await page.locator('#homeV9Finder [data-finder-zone="epal"]').isVisible());
     const pick=async(kind,value)=>page.locator(`[data-finder-${kind}="${value}"]`).click();
     await pick('role','guardian');await pick('zone','primary');await pick('need','stuck');
     assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'),'/primary/guardian/tutor');
@@ -60,15 +62,15 @@ try {
     assert.equal(await page.locator('#siteMenuToggle').getAttribute('aria-expanded'),'false');
     assert.equal(await page.locator('#siteMenuToggle').evaluate(el=>el===document.activeElement),true);
     await page.locator('#langEn').click();await page.waitForFunction(()=>document.documentElement.lang==='en');
-    assert.match(await page.locator('#homeIntentLinks').innerText(),/Find an AI tool/);
+    assert.match(await page.locator('#homeV9AllTools').innerText(),/AI tools/);
     await page.locator('#langEl').click();await page.waitForFunction(()=>document.documentElement.lang==='el');
     assert.ok(await page.locator('#homeV9Study .home-v8-helper-desc').isVisible(),'Study description stays visible on mobile');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     assert.ok(overflow<=1,`${width}: horizontal overflow ${overflow}`);
     // Language changes rebuild the homepage asynchronously. Measure the
     // controls after the Greek content and visible layout have both returned.
-    await page.waitForFunction(()=>{const role=document.querySelector('#homeV9Finder [data-finder-role="guardian"]');return role?.textContent.includes('Γονιός') && [...document.querySelectorAll('#homeIntentLinks a, #homeV9Finder button')].every(el=>el.getBoundingClientRect().height>0);});
-    const targets=await page.locator('#homeIntentLinks a, #homeV9Finder button').evaluateAll(els=>els.map(el=>({height:el.getBoundingClientRect().height,text:el.textContent})));
+    await page.waitForFunction(()=>{const role=document.querySelector('#homeV9Finder [data-finder-role="guardian"]');return role?.textContent.includes('Γονιός') && [...document.querySelectorAll('#homeV9AllTools a, #homeV9Finder button')].every(el=>el.getBoundingClientRect().height>0);});
+    const targets=await page.locator('#homeV9AllTools a, #homeV9Finder button').evaluateAll(els=>els.map(el=>({height:el.getBoundingClientRect().height,text:el.textContent})));
     assert.ok(targets.every(t=>t.height>=44),`${width}: touch targets ${JSON.stringify(targets.filter(t=>t.height<44))}`);
     await page.addScriptTag({content:axe.source});
     const scan=await page.evaluate(async()=>{const r=await axe.run({runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});return r.violations.map(v=>({id:v.id,impact:v.impact,targets:v.nodes.map(n=>n.target)}));});

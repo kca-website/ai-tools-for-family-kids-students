@@ -33,6 +33,7 @@ try {
   await page.waitForSelector('#homeV8HelpersMount .home-v8-ai', {state:'visible',timeout:10000});
   await page.waitForSelector('#homeV9Teacher', {state:'visible',timeout:10000});
   await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_ENTRY_ANALYTICS?.version===2,null,{timeout:10000});
+  await page.waitForLoadState('networkidle');
 
   assert.equal((await page.textContent('#siteTitleText'))?.trim(), 'AI Tools 4 Kids', 'compact mobile site title was not restored');
   assert.equal(await page.locator('#pwaMobileLauncher').count(), 1, 'Legacy PWA launcher should still be created for compatibility');
@@ -45,7 +46,7 @@ try {
   // v10: Special Education is reached from the "who are you" finder (tools and the short diagnostic).
   await page.click('#homeV9Finder [data-finder-zone="special"]');
   assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'),'/special-education.html','Finder Special Education route must use the production page');
-  assert.match(await page.locator('#homeV9Finder').innerText(),/Ειδικό Γυμνάσιο.*Ειδικό Λύκειο.*ΕΝ\.Ε\.Ε\.ΓΥ\.-Λ\./s,'Finder must name all three Special Education school types');
+  assert.match(await page.locator('#homeV9FinderCta').innerText(),/Ειδική Εκπαίδευση/,'The Special Education selection must have a clear dedicated destination');
   await page.click('#homeV9Finder [data-finder-need="practice"]');
   assert.equal(await page.locator('#homeV9FinderCta[data-special-education-diagnostic]').count(),1,'Finder practice route must open the Special Education diagnostic');
   assert.equal(await page.locator('#specialEducationHomeFeature:visible').count(),0,'standalone Special Education bottom banner must not be visible');

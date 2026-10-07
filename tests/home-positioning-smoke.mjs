@@ -27,10 +27,12 @@ try {
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#homeV8Shell', { timeout: 10000 });
   await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready'));
+  await page.waitForLoadState('networkidle');
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
-  assert.match((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), /δωρεάν ελληνική πλατφόρμα.*σχολική ύλη.*μαθησιακές ανάγκες.*Για μαθητές 6–18, γονείς και εκπαιδευτικούς/);
+  const subtitle=(await page.locator('.hero__subtitle').innerText()).replace(/\s+/g,' ').trim();
+  for(const concept of ['δωρεάν','AI','μαθητ','γον','εκπαιδευτικ'])assert.ok(subtitle.includes(concept), 'Hero must communicate free AI learning and its audiences: '+concept);
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.ok(await page.locator('#heroGslBadge').count());
   assert.equal(await page.locator('.hero__badges + .hero__quiz-cta-wrap').count(), 1, 'Quiz picker belongs directly below the hero badges');

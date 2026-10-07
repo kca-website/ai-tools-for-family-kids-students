@@ -36,6 +36,14 @@ window.AITOOLSKIDS_SITE_META = Object.freeze({
   else start();
 })();
 
+/** Load the small Play & Learn bridge without changing the core app/navigation. */
+(function(){
+  var s=document.createElement("script");
+  s.src="/play-integration.js";
+  s.async=false;
+  document.head.appendChild(s);
+})();
+
 /** Local-only debug snapshot; no analytics or network transmission. */
 window.AITOOLSKIDS_INTEGRITY = Object.freeze({
   version: "4.1.0",

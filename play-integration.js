@@ -40,9 +40,6 @@
     if(location.pathname!=="/" && location.pathname!=="") return;
     ensureStyle();
     const en=english();
-
-    /* If a dedicated AI Routes/Learning Path card exists, attach Play & Learn to it
-       instead of creating another competing feature card. */
     const headings=[...document.querySelectorAll("h2,h3,strong")];
     const pathHeading=headings.find(el=>/AI\s*Διαδρομές|Μονοπάτι\s*Μάθησης|AI\s*Routes|Learning\s*Path/i.test((el.textContent||"").trim()));
     const pathCard=pathHeading?.closest(".home-v8-learning-card,.home-v9-tile,.home-ai-mode-card,article,section");
@@ -56,8 +53,6 @@
       document.getElementById("playRouteBridge")?.remove();
       return;
     }
-
-    /* Fallback for homepage variants where AI Routes are rendered elsewhere. */
     if(document.getElementById("playRouteBridge")) return;
     const anchor=document.querySelector(".hero__learning-loop") || document.getElementById("homeV9Finder") || document.querySelector(".home-v9-intro");
     if(!anchor) return;
@@ -84,13 +79,17 @@
     const overlay=document.getElementById("pathModalOverlay");
     if(!modal || !overlay || overlay.hidden) return;
     ensureStyle();
-    modal.querySelector(".play-path-mission")?.remove();
+    const current=modal.querySelector(".play-path-mission");
     const mission=MISSIONS[activeGapId];
-    if(!mission) return;
+    if(!mission){ current?.remove(); return; }
     const en=english();
+    const signature=activeGapId+"|"+(en?"en":"el");
+    if(current?.dataset.signature===signature) return;
+    current?.remove();
     const card=document.createElement("section");
     card.className="play-path-mission";
     card.dataset.gapId=activeGapId;
+    card.dataset.signature=signature;
     card.innerHTML=`
       <div class="play-path-mission__head"><span class="play-path-mission__icon" aria-hidden="true">🎮</span><div><span class="play-path-mission__eyebrow">${en?"Game practice":"Παιχνίδι εξάσκησης"}</span><h4>${en?mission.titleEn:mission.titleEl}</h4><p>${en?mission.descEn:mission.descEl}</p></div></div>
       <a class="play-path-mission__cta" href="${mission.href}">${en?"Play this mission →":"Παίξε αυτή την αποστολή →"}</a>`;
@@ -98,10 +97,7 @@
     if(steps) steps.insertAdjacentElement("afterend",card); else modal.appendChild(card);
   }
 
-  function refresh(){
-    homeBridge();
-    pathMission();
-  }
+  function refresh(){ homeBridge(); pathMission(); }
 
   document.addEventListener("click",captureGap,true);
   document.addEventListener("click",e=>{

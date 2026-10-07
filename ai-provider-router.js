@@ -214,9 +214,8 @@ async function callGemini({ messages, maxTokens, temperature, responseFormat, ti
       : { text: String(part.text || '') }) : [{ text: String(message.content || '') }],
   }));
   const generationConfig = {
-    temperature,
     maxOutputTokens: maxTokens,
-    thinkingConfig: model.startsWith('gemini-3.') ? { thinkingLevel: 'minimal' } : { thinkingBudget: 0 },
+    thinkingConfig: { thinkingLevel: model.startsWith('gemini-2.5-') ? 'low' : 'minimal' },
   };
   if (responseFormat?.type === 'json_object' || responseFormat?.type === 'json_schema') {
     generationConfig.responseMimeType = 'application/json';

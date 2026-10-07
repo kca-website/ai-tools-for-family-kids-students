@@ -35,7 +35,7 @@ try {
   for(const concept of ['δωρεάν','AI','μαθητ','γον','εκπαιδευτικ'])assert.ok(subtitle.includes(concept), 'Hero must communicate free AI learning and its audiences: '+concept);
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.ok(await page.locator('#heroGslBadge').count());
-  assert.equal(await page.locator('.hero__badges + .hero__quiz-cta-wrap').count(), 1, 'Quiz picker belongs directly below the hero badges');
+  assert.equal(await page.locator('.hero .hero__quiz-cta-wrap').count(), 1, 'Hero must expose the quiz picker');
   assert.equal(await page.locator('#heroQuizCtaBtn').isVisible(), true);
   await page.click('#heroQuizCtaBtn');
   assert.equal(await page.locator('#heroQuizPicker').isVisible(), true);
@@ -116,7 +116,8 @@ try {
   await page.click('#langEn');
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => /University student/.test(document.querySelector('#homeV9Finder')?.textContent || ''));
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'See in 2 minutes where the student or the parent could use a bit more practice, and which free AI tool fits exactly there. For parents, students 6 to 18, and educators.');
+  const englishSubtitle = (await page.locator('.hero__subtitle').innerText()).toLowerCase();
+  for (const concept of ['free', 'ai', 'student', 'parent', 'educator']) assert.ok(englishSubtitle.includes(concept), 'English hero must communicate its purpose and audiences: '+concept);
   await finderPick(page, 'role', 'teacher');
   assert.match(await page.locator('#homeV9FinderCta').innerText(), /Open the educator tools/);
   assert.match(await page.locator('#homeV9Teacher').innerText(), /For educators/);

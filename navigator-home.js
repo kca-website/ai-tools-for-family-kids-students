@@ -1,4 +1,4 @@
-/* Homepage navigator v8.4.
+/* Homepage navigator v8.5.
  * Scope: homepage only.
  * Keeps the core app, routing, language system and school views untouched.
  * Legacy homepage injectors remain available to the rest of the app but are suppressed here.
@@ -18,6 +18,10 @@
       curriculumCardBadge: "Ύλη 2026–27",
       curriculumCardTitle: "Βρες την ενότητα που διαβάζεις",
       curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα → AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
+      curriculumCardCta: "Άνοιξε την ύλη 2026–27 →",
+      toolsTileTitle: "Δες όλα τα AI εργαλεία",
+      toolsTileDesc: "Δες όλο τον κατάλογο και βρες εργαλεία ανά ανάγκη, μάθημα και ηλικία.",
+      toolsTileCta: "Όλα τα AI εργαλεία →",
       aiBadgeNew: "Νέο",
       aiBadgeFree: "Δωρεάν",
       aiTitle: "AI Βοήθεια",
@@ -74,6 +78,10 @@
       curriculumCardBadge: "Curriculum 2026–27",
       curriculumCardTitle: "Find the unit you are studying",
       curriculumCardDesc: "Grade → subject → real curriculum unit → AI help, practice and visual explanation.",
+      curriculumCardCta: "Open the 2026–27 curriculum →",
+      toolsTileTitle: "See all AI tools",
+      toolsTileDesc: "Browse the full catalogue and find tools by need, subject and age.",
+      toolsTileCta: "All AI tools →",
       aiBadgeNew: "New",
       aiBadgeFree: "Free",
       aiTitle: "AI Help",
@@ -166,6 +174,16 @@
     }else reveal();
   }
 
+  function ensureHeroCopy(){
+    if(!isHome()) return;
+    const title=document.querySelector("#zoneSelectView .hero__title[data-i18n='heroTitle']");
+    const subtitle=document.querySelector("#zoneSelectView .hero__subtitle[data-i18n='heroSubtitle']");
+    if(!isEnglish()){
+      if(title) title.textContent="Μαθαίνω Έξυπνα με AI";
+      if(subtitle) subtitle.textContent="Η δωρεάν ελληνική πλατφόρμα που συνδέει τη σχολική ύλη, τις πραγματικές μαθησιακές ανάγκες και τα κατάλληλα AI εργαλεία. Δες πού χρειάζεται λίγο περισσότερη εξάσκηση ο μαθητής, μελέτησε με βάση τη σχολική ύλη και βρες το σωστό AI για κάθε ανάγκη. Για μαθητές 6–18, γονείς και εκπαιδευτικούς.";
+    }
+  }
+
   function ensureAccessibilityBadge(){
     const badges = document.querySelector("#zoneSelectView .hero__badges");
     if(!badges) return;
@@ -219,12 +237,10 @@
     return String(value ?? "").replace(/[&<>"']/g, (ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   }
 
-  // ---------- Hero: 3-step finder ----------
   let shortcutSelectionMade = false;
   const shortcutIntent = () => location.hash === "#open-tools" ? "tools" : location.hash === "#open-help" ? "stuck" : "";
   const finderState = { role: "student", zone: "middle", need: "study" };
 
-  // Educators and university students skip the school-level steps: one choice, one destination.
   try {
     const saved=JSON.parse(sessionStorage.getItem("aitools4kidsShortcutSelection") || "null");
     if(saved && ["student","guardian","teacher","university"].includes(saved.role) && ["primary","middle","high","epal","preschool","special"].includes(saved.zone)){
@@ -279,7 +295,6 @@
     return "";
   }
 
-  // The Special Education and EPAL practice checks open inline (special-education-diagnostic.js, epal-practice-map.js).
   function practiceTrigger(){
     const { role, zone, need } = finderState;
     if(DIRECT_ROLES[role] || need !== "practice") return "";
@@ -303,7 +318,6 @@
     if(!mount) return;
     const c = currentCopy();
     const roles = Object.entries(c.roles).map(([id,label]) => chip("role", id, label, finderState.role === id)).join("");
-    // Preschool is adult-led, so it is not offered to the student role.
     const zones = Object.entries(c.zones).filter(([id]) => !(id === "preschool" && finderState.role === "student")).map(([id,[label,age]]) => chip("zone", id, label, finderState.zone === id, `<span class="home-v9-chip__dot home-v9-dot--${id}" aria-hidden="true"></span>`) .replace(`<span>${escapeHtml(label)}</span></button>`, `<span>${escapeHtml(label)}</span>${age ? `<small>${age}</small>` : ""}</button>`)).join("");
     const needs = Object.entries(c.finderNeeds).map(([id,label]) => chip("need", id, label, finderState.need === id)).join("");
     const note = finderNote(c);
@@ -342,7 +356,6 @@
     entry.remove();
   }
 
-  // Quick-action chips inside a "three ways" card (same look as the AI Help "Open for" links).
   const wayChips = (items, href) => items.map(([id,icon,label]) => `<a href="${href(id)}"><span aria-hidden="true">${icon}</span> ${escapeHtml(label)}</a>`).join("");
 
   function helpersMarkup(){
@@ -353,9 +366,7 @@
         <div class="home-v9-ways">
           <section class="home-v8-ai" aria-labelledby="homeV8AiTitle">
             <span class="home-v9-way__icon" aria-hidden="true">${ICON.chat}</span>
-            <div class="home-v8-ai__badges">
-              <span>${c.aiBadgeFree}</span>
-            </div>
+            <div class="home-v8-ai__badges"><span>${c.aiBadgeFree}</span></div>
             <h3 id="homeV8AiTitle"><a href="/tools/ai-help.html">${c.aiTitle}</a></h3>
             <p class="home-v8-helper-desc">${c.aiDesc}</p>
             <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
@@ -410,7 +421,21 @@
       <a class="home-v9-tile__cta" href="${characterRoute}">${c.charCta}</a>`;
   }
 
-  // "Discover more": secondary features grouped as compact tiles (moved, not recreated).
+  function ensureMoreTile(id, icon, title, desc, href, cta){
+    let tile=document.getElementById(id);
+    if(!tile){
+      tile=document.createElement("section");
+      tile.id=id;
+      tile.className="home-v9-tile";
+    }
+    tile.innerHTML=`
+      <span class="home-v9-way__icon" aria-hidden="true">${icon}</span>
+      <h3>${title}</h3>
+      <p>${desc}</p>
+      <a class="home-v9-tile__cta" href="${href}">${cta}</a>`;
+    return tile;
+  }
+
   function ensureMoreSection(characters){
     let more = document.getElementById("homeV9More");
     if(!more){
@@ -420,10 +445,13 @@
       more.setAttribute("aria-labelledby", "homeV9MoreTitle");
       more.innerHTML = `<h2 id="homeV9MoreTitle"></h2><div class="home-v9-more__grid"></div>`;
     }
-    more.querySelector("#homeV9MoreTitle").textContent = currentCopy().moreTitle;
+    const c=currentCopy();
+    more.querySelector("#homeV9MoreTitle").textContent = c.moreTitle;
     const grid = more.querySelector(".home-v9-more__grid");
     characters.classList.add("home-v9-tile");
-    const tiles = [characters, document.getElementById("homeV8Eng")].filter(Boolean);
+    const toolsTile=ensureMoreTile("homeV9AllTools", ICON.chat, c.toolsTileTitle, c.toolsTileDesc, "/tools/", c.toolsTileCta);
+    const curriculumTile=ensureMoreTile("homeV9CurriculumTile", ICON.map, c.curriculumCardTitle, c.curriculumCardDesc, "/xartis-ylis.html", c.curriculumCardCta);
+    const tiles = [toolsTile, curriculumTile, characters, document.getElementById("homeV8Eng")].filter(Boolean);
     const current = [...grid.children];
     if(current.length !== tiles.length || current.some((el, i) => el !== tiles[i])) tiles.forEach((el) => grid.appendChild(el));
     return more;
@@ -441,29 +469,12 @@
     return el;
   }
 
-  // v9.2: the site search lives in the header as a compact field.
   function placeSearchFirst(){
     const mount = document.getElementById("siteHeaderSearch");
     const search = document.getElementById("homeGlobalSearch");
     if(mount && search && search.parentElement !== mount) mount.appendChild(search);
   }
 
-
-  // The Greek Curriculum Map stands on its own, as a slim strip under "Three ways to start".
-  function curriculumStripMarkup(){
-    const c = currentCopy();
-    return `
-      <span class="home-v9-curriculum-strip__icon" aria-hidden="true">${ICON.map}</span>
-      <span class="home-v9-curriculum-strip__copy">
-        <span class="home-v9-curriculum-strip__badge">${c.curriculumCardBadge}</span>
-        <strong id="homeV9CurriculumTitle">${c.curriculumCardTitle}</strong>
-        <small>${c.curriculumCardDesc}</small>
-      </span>
-      <span class="home-v9-curriculum-strip__cta" aria-hidden="true">→</span>`;
-  }
-
-  // Homepage v10: "who are you" finder → three ways to start → curriculum map → discover more.
-  // Age zones are reached from the finder, so the zone grid stays only as a hidden, crawlable fallback.
   function ensureMainShell(){
     const hero = document.querySelector("#zoneSelectView .hero");
     if(!hero) return null;
@@ -485,24 +496,16 @@
     }
     helpers.innerHTML = helpersMarkup();
 
-    let strip = document.getElementById("homeCurriculumStrip");
-    if(!strip){
-      strip = document.createElement("a");
-      strip.id = "homeCurriculumStrip";
-      strip.className = "home-v9-curriculum-strip";
-      strip.href = "/xartis-ylis.html";
-    }
-    strip.innerHTML = curriculumStripMarkup();
+    document.getElementById("homeCurriculumStrip")?.remove();
 
     const characters = ensureSection("homeV9Characters", "home-v9-characters", "homeV9CharactersTitle", charactersMarkup());
     const more = ensureMoreSection(characters);
-    const order = [helpers, strip, more];
+    const order = [helpers, more];
     const current = [...shell.children].filter((el) => order.includes(el));
     if(current.length !== order.length || current.some((el, i) => el !== order[i])){
       order.forEach((el) => shell.appendChild(el));
     }
 
-    // Blocks the v10 homepage no longer shows (each destination is reachable from the finder or the menu).
     ["homeV8Needs", "homeV8FinderTitle", "homeV9ZonesLead"].forEach((id) => {
       const el = document.getElementById(id);
       if(el && el.closest("#homeV8Shell")) el.remove();
@@ -556,11 +559,12 @@
     document.documentElement.classList.add("home-v8-active");
     const styleLink = ensureStyles();
     hideLegacyHomeBlocks();
+    ensureHeroCopy();
     ensureAccessibilityBadge();
     renderFinder();
     ensureEntryLinks();
-    ensureMainShell();
     ensureEngSection();
+    ensureMainShell();
     document.getElementById("homeV8FooterExtra")?.remove();
     suppressLegacyInjectedBlocks();
     revealHomepage(styleLink);
@@ -645,7 +649,10 @@
 
     [0, 50, 200, 550, 1200].forEach((ms) => setTimeout(() => {
       suppressLegacyInjectedBlocks();
+      ensureHeroCopy();
       ensureAccessibilityBadge();
+      ensureEngSection();
+      ensureMainShell();
       placeSearchFirst();
     }, ms));
   }
@@ -656,4 +663,3 @@
     init();
   }
 })();
-

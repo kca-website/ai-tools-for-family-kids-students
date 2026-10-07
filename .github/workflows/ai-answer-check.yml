@@ -2,9 +2,9 @@ name: AI answer check
 on:
   push:
     branches: [main, 'work/ai-answer-check-20261007', 'preview/ai-answer-check-20261007']
-    paths: ['ai-answer-check*', 'api/check-ai-answer.js', 'study.html', 'tests/ai-answer-check*', '.github/workflows/ai-answer-check.yml']
+    paths: ['ai-answer-check*', 'api/check-ai-answer.js', 'study.html', 'tests/ai-answer-check*', 'tests/home-positioning-smoke.mjs', 'tests/mobile-home-pwa-smoke.mjs', '.github/workflows/ai-answer-check.yml']
   pull_request:
-    paths: ['ai-answer-check*', 'api/check-ai-answer.js', 'study.html', 'tests/ai-answer-check*', '.github/workflows/ai-answer-check.yml']
+    paths: ['ai-answer-check*', 'api/check-ai-answer.js', 'study.html', 'tests/ai-answer-check*', 'tests/home-positioning-smoke.mjs', 'tests/mobile-home-pwa-smoke.mjs', '.github/workflows/ai-answer-check.yml']
 permissions:
   contents: read
 jobs:

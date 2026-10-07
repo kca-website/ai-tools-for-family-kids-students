@@ -30,7 +30,7 @@ try {
 
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
-  assert.equal((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), 'Δες σε 2 λεπτά πού χρειάζεται λίγη παραπάνω εξάσκηση ο μαθητής ή ο γονιός και ποιο δωρεάν AI εργαλείο ταιριάζει ακριβώς εκεί. Για γονείς, μαθητές 6 έως 18 αλλά και εκπαιδευτικούς.');
+  assert.match((await page.locator('.hero__subtitle').innerText()).replace(/\s+/g, ' ').trim(), /δωρεάν ελληνική πλατφόρμα.*σχολική ύλη.*μαθησιακές ανάγκες.*Για μαθητές 6–18, γονείς και εκπαιδευτικούς/);
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν για όλους', 'Free-for-everyone positioning must stay above the fold');
   assert.ok(await page.locator('#heroGslBadge').count());
   assert.equal(await page.locator('.hero__badges + .hero__quiz-cta-wrap').count(), 1, 'Quiz picker belongs directly below the hero badges');
@@ -75,8 +75,9 @@ try {
   assert.match(await page.locator('#homeV9Study').innerText(), /επίσημο σχολικό βιβλίο[\s\S]*Η κάλυψη σχολικών βιβλίων είναι επιλεκτική./, 'AI Study must keep the official-textbook coverage caveat');
   assert.equal(await page.locator('#homeV9Teacher a[href="/teacher-assistant.html"]').isVisible(), true, 'Educator card must be visible on mobile');
   assert.equal(await page.locator('#homeV8HelpersMount a[href="/xartis-ylis.html"]').count(), 0, 'Curriculum Map is not one of the three ways');
-  assert.equal(await page.locator('#homeCurriculumStrip').getAttribute('href'), '/xartis-ylis.html', 'Curriculum Map must keep its own strip');
-  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 2, 'Discover more keeps history characters and GSL');
+  assert.equal(await page.locator('#homeCurriculumStrip').count(), 0, 'Curriculum Map uses the discovery tile rather than a duplicate strip');
+  assert.equal(await page.locator('#homeV9CurriculumTile a').getAttribute('href'), '/xartis-ylis.html');
+  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 4, 'Discovery includes all tools, curriculum, history characters and GSL');
 
   await page.click('#siteMenuToggle');
   assert.equal(await page.locator('#siteMenuPanel .site-menu-panel__teacher').isVisible(), true, 'Educators must be the first, visible menu entry on mobile');
@@ -117,7 +118,7 @@ try {
   await finderPick(page, 'role', 'teacher');
   assert.match(await page.locator('#homeV9FinderCta').innerText(), /Open the educator tools/);
   assert.match(await page.locator('#homeV9Teacher').innerText(), /For educators/);
-  assert.match(await page.locator('#homeCurriculumStrip').innerText(), /Find the unit you are studying/);
+  assert.match(await page.locator('#homeV9CurriculumTile').innerText(), /Find the unit you are studying/);
   assert.match(await page.locator('#homeV8Eng').innerText(), /167/, 'English homepage GSL block must show 167 concepts');
   assert.doesNotMatch(await page.locator('#homeV8Eng').innerText(), /153/, 'English homepage GSL block must not show stale 153 count');
 
@@ -138,3 +139,4 @@ try {
 } finally {
   await browser.close();
 }
+

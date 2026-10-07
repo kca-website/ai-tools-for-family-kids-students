@@ -33,7 +33,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Local browser and existing navigation checks
         run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/ai-answer-check-http.log 2>&1 &
+          node qa/scripts/serve.mjs > /tmp/ai-answer-check-http.log 2>&1 &
           node tests/ai-answer-check-browser.mjs
           node tests/mobile-home-pwa-smoke.mjs
           node tests/home-positioning-smoke.mjs

@@ -39,7 +39,7 @@ try {
   assert.equal(await page.locator('#pwaMobileLauncher').isVisible(), false, 'Legacy PWA launcher must stay hidden under homepage v8');
   assert.equal(await page.locator('#pwaMobileLauncher').evaluate((el)=>el.classList.contains('home-v8-legacy')), true, 'Legacy PWA launcher must be explicitly suppressed');
 
-  assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), false, 'Legacy diagnostic entry should remain suppressed on homepage v8');
+  assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), true, 'The current homepage exposes the Practice Map below the hero badges');
   assert.equal(await page.locator('#zoneSelectView .hero__ai-help').isVisible(), false, 'Legacy AI Help entry should remain suppressed on homepage v8');
 
   // v10: Special Education is reached from the "who are you" finder (tools and the short diagnostic).
@@ -130,3 +130,4 @@ try {
 } finally {
   await browser.close();
 }
+

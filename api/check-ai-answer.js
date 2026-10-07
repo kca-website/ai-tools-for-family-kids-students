@@ -40,7 +40,7 @@ function createHandler(dependencies = {}) {
       return res.status(200).json({
         claims, scope: 'selected_claims_in_official_section',
         source: { title: String(official.bookTitle || 'Σχολικό βιβλίο').slice(0, 300), topic: body.topic.trim(), url: String(official.canonicalSourceUrl || official.sourceUrl || '').slice(0, 1200) },
-        notice: message('Ελέγχθηκαν έως 12 βασικοί ισχυρισμοί μόνο με την επιλεγμένη ενότητα. Η απουσία τεκμηρίωσης δεν σημαίνει ότι ένας ισχυρισμός είναι λάθος. Ο έλεγχος χρησιμοποιεί AI και χρειάζεται δική σου κρίση.', 'Up to 12 key claims were checked only against the selected section. Missing evidence does not mean a claim is false. This check uses AI and needs your judgement.')
+        notice: message('Ελέγχθηκαν έως 12 βασικοί ισχυρισμοί με το διαθέσιμο επίσημο κείμενο της επιλεγμένης ενότητας. Η εξαγωγή μπορεί να μην περιλαμβάνει όλη την ενότητα, εικόνες ή διαγράμματα. Η απουσία τεκμηρίωσης δεν σημαίνει ότι ένας ισχυρισμός είναι λάθος. Ο έλεγχος χρησιμοποιεί AI και χρειάζεται δική σου κρίση.', 'Up to 12 key claims were checked against the available official text of the selected section. Extraction may omit parts of the section, images or diagrams. Missing evidence does not mean a claim is false. This check uses AI and needs your judgement.')
       });
     } catch {
       // Never log the external answer, textbook text or provider error payload.

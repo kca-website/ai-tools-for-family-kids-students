@@ -28,7 +28,7 @@
     const labels = {
       supported: tr('✓ Υποστηρίζεται από την ενότητα', '✓ Supported by the section'),
       contradicted: tr('✕ Αντιφάσκει με το βιβλίο — πιθανή ανακρίβεια', '✕ Contradicts the textbook — possible inaccuracy'),
-      not_supported: tr('⚠ Δεν τεκμηριώνεται στην επιλεγμένη ενότητα', '⚠ Not established in this section'),
+      not_supported: tr('⚠ Δεν τεκμηριώνεται στο διαθέσιμο κείμενο της ενότητας', '⚠ Not established in the available section text'),
       uncertain: tr('Δεν επιβεβαιώθηκε η κατάταξη', 'Classification not confirmed')
     };
     box.append(node('h3', tr('Έλεγχος ισχυρισμών', 'Claim check')));

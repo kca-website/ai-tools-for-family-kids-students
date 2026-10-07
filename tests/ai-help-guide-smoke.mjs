@@ -22,7 +22,13 @@ try{
   await page.addScriptTag({content:axe.source});const violations=await page.evaluate(async()=>{const r=await axe.run({runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa','wcag22aa']}});return r.violations.map(v=>({id:v.id,targets:v.nodes.map(n=>n.target)}));});assert.deepEqual(violations,[]);
   await page.screenshot({path:`docs/ux-evidence/ai-help-${width}.png`,fullPage:true});
   await page.locator('[data-help-zone="epal"]').click();await page.waitForURL('**/high/guardian/tutor?schoolType=epal');
-  await page.goto('http://127.0.0.1:4173/#open-tools');await page.waitForURL(url=>url.pathname==='/high/guardian/tools');console.log('tools URL',page.url());
+  await page.goto('http://127.0.0.1:4173/#open-tools');
+  await page.waitForSelector('#homeV9FinderCta');
+  await page.locator('#homeV9Finder [data-finder-role="guardian"]').click();
+  await page.locator('#homeV9Finder [data-finder-zone="high"]').click();
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'),'/high/guardian/tools');
+  await page.locator('#homeV9FinderCta').click();
+  await page.waitForURL(url=>url.pathname==='/high/guardian/tools');console.log('tools URL',page.url());
   assert.deepEqual(errors,[]);console.log(JSON.stringify({width,overflow,axeViolations:violations.length,runtimeErrors:errors.length}));await page.close();
  }
 }finally{await browser.close();}

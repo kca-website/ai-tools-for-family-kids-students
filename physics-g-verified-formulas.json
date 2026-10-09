@@ -1,0 +1,142 @@
+{
+  "verifiedAt": "2026-10-09",
+  "sourceBase": "https://ebooks.edu.gr/ebooks/v/html/8547/2226/Fysiki_G-Gymnasiou_html-empl/",
+  "figures": {
+    "img1_32.jpg": {
+      "sha256": "bcb1bd266b5bb2eafe7e846a0c3845571ff0b38dedb4604ceede979bfac7c3dc",
+      "text": "F = K · q_1 · q_2 / r^2"
+    },
+    "img1_33.jpg": {
+      "sha256": "beee0fc950b6be7e3cc1b1e76039a11d8d6f4382be318d4a82f8a5801df45f2d",
+      "text": "K = 9 · 10^9 N · m^2 / C^2"
+    },
+    "img2_8.jpg": {
+      "sha256": "89ef1c3ffbb151a005862bb12ca8ae540f3c8c9f77f2dbf7f525d50899aa3d26",
+      "text": "I = q / t (2.1)"
+    },
+    "img2_21.jpg": {
+      "sha256": "fe7657c3ce1769b3a9dd55e6205f81165d01d663f94bdd8348e611e3e946f57e",
+      "text": "V_πηγής = E_ηλεκτρική / q (2.2)"
+    },
+    "img2_22.jpg": {
+      "sha256": "1db0da80f1f59ad2f2fdcb9dc629ab435a3bfc7d617693a09f92bdff5e65413d",
+      "text": "1 Volt = 1 Joule / 1 Coulomb ή 1 V = 1 J / 1 C"
+    },
+    "img2_28.jpg": {
+      "sha256": "79615b80ef0ee290ddb6c761fa8a056a1fd860644c71e29f595d7a35e7cf7f85",
+      "text": "V = E_ηλεκτρική / q (2.3)"
+    },
+    "img2_34.jpg": {
+      "sha256": "5c0ea9aa01f1cd58a2ec2cd53f28f59719b42eb8e3eda7f62ace4b7af3ac1d2a",
+      "text": "R = V / I (2.4)"
+    },
+    "img2_35.jpg": {
+      "sha256": "48e40bc68946a644f7f3989fff460f4d8b08aa33291fa2c091e326bfbb3ba7be",
+      "text": "1 Ohm = 1 Volt / 1 Ampere ή 1 Ω = 1 V / 1 A"
+    },
+    "img2_38.jpg": {
+      "sha256": "84a8803afc2921cb81e77e3d25e4747b87d5a2b97064d0d36a41d87a541bb702",
+      "text": "R = V / I (Volt / A = Ω)"
+    },
+    "img2_39.jpg": {
+      "sha256": "9acd39b23e187df1ab8f1c6b13686d05b3e23f720d82a8eefb80d404134a45a2",
+      "text": "I = (1 / R) · V ή V = I · R (2.5)"
+    },
+    "img2_48.jpg": {
+      "sha256": "726851b61668784701a87e90336de181d52a2cfecfebcf13de0a93be0f33e66d",
+      "text": "R = ρ · ℓ / A (2.6)"
+    },
+    "img2_64.jpg": {
+      "sha256": "163bd4dd63b07719f833ff7879e9afb8798f8673372155c4c703782d90006fcc",
+      "text": "I_1 = V_AB / R_1, I_2 = V_AB / R_2, I = V_AB / R (2.21)"
+    },
+    "img2_65.jpg": {
+      "sha256": "ef54f0efbbc8ee66863f18b2350c155c040f3d814ad83d2355584dc7fe610b39",
+      "text": "V_AB / R = V_AB / R_1 + V_AB / R_2 (7) ή 1 / R = 1 / R_1 + 1 / R_2 (2.22)"
+    },
+    "img3_4.jpg": {
+      "sha256": "d9ed3a6a0e98759087d1fa3a0ee64e2214b6e34272e71e021afce6e6b39c694f",
+      "text": "c = 4.200 J / (kg · °C)"
+    },
+    "img3_18.jpg": {
+      "sha256": "e3bbc8841071f81d5b093c57c461de112d2b8d49d055aaaecae0b0f901551979",
+      "text": "c = 4.200 J / (kg · °C)"
+    },
+    "img3_19.jpg": {
+      "sha256": "16fee501792bc593bda4ab31b13e3a7e3f5020dfa1fd058d1b77d5c86370453b",
+      "text": "Δθ = Q / (c · m), Δθ = 4032 / (4200 · 0,2) °C = 4,8 °C ή Δθ = 4,8 °C"
+    },
+    "img4_9.jpg": {
+      "sha256": "3e8b7a75c0a685389a919606d5c13a89a47d9122764d06891de2d38f400d1840",
+      "text": "συχνότητα = αριθμός ταλαντώσεων / χρονικό διάστημα ή f = N / Δt (4.1)"
+    },
+    "img5_14.jpg": {
+      "sha256": "76186d68797af6018b5868c51464241d9e2b9f9b62217a97715fde77a9d586b6",
+      "text": "λ = 150 km ή λ = 150 km · 1.000 m / km ή λ = 15 · 10^4 m. υ = 540 km / h = 540 · 1.000 m / 3.600 s = 150 m / s"
+    },
+    "img5_15.jpg": {
+      "sha256": "f2a7ef03cc44e1472b1f771943dbd694961b87294a85df02468034174d8d84f6",
+      "text": "υ_κύματος = λ · f ⇔ f = υ_κύματος / λ ⇔ f = (150 m / s) / (15 · 10^4 m) ⇔ f = 10^-3 Hz"
+    },
+    "img6_27.jpg": {
+      "sha256": "1569537f45aaa78704767c82e4bc52265008ee5b3642e412523057fd64ecca82",
+      "text": "t = 169.000 έτη · 365 ημέρες / έτος · 24 h / ημέρα · 3.600 s / h ή t = 5,33 · 10^12 s. Η απόσταση που διανύει είναι: Δx = c · t = 3 · 10^8 m / s · 5,33 · 10^12 s = 1,6 · 10^21 m"
+    },
+    "img7_27.jpg": {
+      "sha256": "895352c5b9830b72d521b3d91ad89c51e4d23a3890fbb9db2b19db35cb3124bc",
+      "text": "1 / p + 1 / p′ = 1 / f (7.1)"
+    },
+    "img7_31.jpg": {
+      "sha256": "d70a17ebf1dd9520541d54fbe1c2067585dc839fd5b7ca63d48f9cc77e27740c",
+      "text": "m = (P′Q′) / (PQ)"
+    },
+    "img7_32.jpg": {
+      "sha256": "a75734221612c8ec7f2eda13b00b441a78a718e91ef0d90d4cd9f2869df438bb",
+      "text": "m = (P′Q′) / (PQ) = -p′ / p (7.2)"
+    },
+    "img8_7.jpg": {
+      "sha256": "e6c9771b6a2d04416515b9617ea5b12d5d7345856b89d271b65d4e51d123ff6b",
+      "text": "ημ(π̂) / ημ(δ̂) = σταθερό"
+    },
+    "img8_11.jpg": {
+      "sha256": "0ce49fd2705212720a62b8f17dedde4538b1abd9bf55e85e9e15c7f1b5bc38da",
+      "text": "ημ(π̂) / ημ(δ̂) = n"
+    },
+    "img8_12.jpg": {
+      "sha256": "641fe62d5f4b456cbfc0233e3d38462668ae103665e18672ac8f56a0a455b9fc",
+      "text": "n = c / υ = ημ(π̂) / ημ(δ̂) ή ημ(π̂) / ημ(δ̂) = c_0 / c (8.1)"
+    },
+    "img8_13.jpg": {
+      "sha256": "2d13c2d3f6e59de841bd841394354e8a796c828dc641cc0a079bd1ff2361ff57",
+      "text": "ημ(π̂) / ημ(δ̂) = n_2 / n_1 (8.2)"
+    },
+    "img8_14.jpg": {
+      "sha256": "913ce007336b3388bbc814d2c555350f017a640afeb9b15ce35247e6bf3b5d56",
+      "text": "ημ(π̂) / ημ(δ̂) = 1 / n (8.3)"
+    },
+    "img8_15.jpg": {
+      "sha256": "51974bd4f6e4e64124936cba77c489bfc09eca1b8cb9c58539a1f5329d3797db",
+      "text": "Νόμος του Σνελ: ημ(π̂) / ημ(δ̂) = n"
+    },
+    "img8_19.jpg": {
+      "sha256": "30c3325935083dfe288c51d68b6a7bc4bdd171f7ed4306a0908e7f8e171b61c6",
+      "text": "ημ(π̂) / ημ(δ̂) = 1 / n ή ημ(π̂) / ημ90° = 1 / n ή ημπ_c = 1 / n (8.4)"
+    },
+    "img2_70.jpg": {
+      "sha256": "e42b7064efb24b75cdc2672892b7cd699755282dca5e30488928fabb5b9631c6",
+      "text": "I_1 = V / R_1, I_1 = 12 V / 20 Ω"
+    },
+    "img2_71.jpg": {
+      "sha256": "329cf596864a7f12e11a4ac847e14bc264d7ab09c2d848f57f31b53af45fd79a",
+      "text": "I_2 = V / R_2, I_2 = 12 V / 60 Ω"
+    },
+    "img2_73.jpg": {
+      "sha256": "de4a27adce7c12d39728e3446724b3ec46c78e2c443ae6a2ccca7fec6be7dd36",
+      "text": "1 / R = 1 / R_1 + 1 / R_2 ή 1 / R = 1 / (20 Ω) + 1 / (60 Ω) ή 1 / R = (60 Ω + 20 Ω) / ((20 Ω) · (60 Ω)) ή R = 15 Ω"
+    },
+    "img2_74.jpg": {
+      "sha256": "521e113911a227febdde2a1165b6ebad0056b9ba843fddaf86a1feaafeca37de",
+      "text": "R = V_AB / I ή R = 12 V / 0,8 A ώστε R = 15 Ω"
+    }
+  }
+}

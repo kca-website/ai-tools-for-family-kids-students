@@ -18,6 +18,7 @@ const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
+const { VERSION: PHYSICS_G_SOURCE_VERSION } = require('../physics-g-schoolbook');
 const { VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
 const { createKnowledgeMapLesson, VERSION: AUDIO_VERSION } = require('../whole-section-audio-knowledge');
 
@@ -44,10 +45,11 @@ module.exports = async function handler(req, res) {
   // not the slower complete-audio parse (figure transcription, page markers).
   const simple = SPECIAL_SECTIONS.has(sid);
   const completeAudioSource = activity === 'audio' && !simple;
-  const sourceKey = { kind: completeAudioSource ? 'official-complete-audio-source-v5' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
+  const physicsG = sid === 'fysiki-g-gymnasiou';
+  const sourceKey = { kind: physicsG ? 'official-physics-g-source-v1' : completeAudioSource ? 'official-complete-audio-source-v5' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
   try {
     let officialSource = await getStudyCache(sourceKey);
-    const needsStrictAudioRefresh = completeAudioSource && officialSource?.sourceCompleteness?.parserVersion !== COMPLETE_SOURCE_VERSION && officialSource?.audioGroundedFallback !== true;
+    const needsStrictAudioRefresh = completeAudioSource && officialSource?.sourceCompleteness?.parserVersion !== (physicsG ? PHYSICS_G_SOURCE_VERSION : COMPLETE_SOURCE_VERSION) && officialSource?.audioGroundedFallback !== true;
     if (!officialSource?.grounded || !officialSource?.text || needsStrictAudioRefresh) {
       let resolved = await resolveOfficialSchoolbookSource(sid, selectedTopic, { purpose: completeAudioSource ? 'audio' : '' });
 

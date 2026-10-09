@@ -1,5 +1,6 @@
 const { transcribeOfficialFigures } = require('../schoolbook-figures');
 const { extractCompletePage, completeText, VERSION: COMPLETE_SOURCE_VERSION } = require('../schoolbook-section');
+const { extractPhysicsGPage, VERSION: PHYSICS_G_SOURCE_VERSION } = require('../physics-g-schoolbook');
 const HISTORY_A_LYCEUM = require('../history-a-lyceum-sections-2026-2027.js');
 const PRIMARY_ENVIRONMENT = require('../primary-environment-sections-2026-2027.js');
 const GYMNASIUM_SECTIONS = require('../gymnasium-book-sections-2026-2027.js');
@@ -2025,7 +2026,8 @@ module.exports = async function handler(req, res) {
           });
         }
       }
-      if (completeAudio) pages = await Promise.all(pages.map((html,i) => {
+      const physicsAnnual = subject === 'fysiki-g-gymnasiou' && !!physicsGAnnualTopicKey(topic);
+      if (completeAudio && !physicsAnnual) pages = await Promise.all(pages.map((html,i) => {
         if (!html) return html;
         if (gelAnchorScoped) {
           html = selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping, "html");
@@ -2043,7 +2045,11 @@ module.exports = async function handler(req, res) {
         });
       }
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
-      if (completeAudio) {
+      if (physicsAnnual) {
+        combinedText = (await Promise.all(pages.map(async (html, i) =>
+          '[Official page: ' + sourceUrls[i] + ']\n' + await extractPhysicsGPage(html, sourceUrls[i])
+        ))).join('\n\n');
+      } else if (completeAudio) {
         combinedText = pages.map((html, i) => {
           const text = extractCompletePage(html, { topic:gelAnchorScoped ? gelInventory.mapping.heading : topic, sourceUrl: sourceUrls[i] }).text;
           return "[Official page: " + sourceUrls[i] + "]\n" + text;
@@ -2137,6 +2143,9 @@ module.exports = async function handler(req, res) {
     }
 
     const scoped = applyCurriculumTextScope(subject, topic, combinedText);
+    if (subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic) && /\[Unverified official formula:/.test(scoped.text)) {
+      throw new Error('selected_section_formula_not_verified');
+    }
     const useful = subject === "english-b-gymnasiou"
       ? selectEnglishBUnitText(scoped.text, topic)
       : (book.multi || specialUnit ? scoped.text : selectUsefulText(scoped.text, topic));
@@ -2166,17 +2175,22 @@ module.exports = async function handler(req, res) {
       curriculumSource: book.curriculumSource || null,
       mappingStatus: book.mappingStatus || "schoolbook-source-mapped",
       lastVerified: book.lastVerified || null,
-      annualScopeVerified: book.annualScopeVerified === true,
+      annualScopeVerified: book.annualScopeVerified === true || (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic)),
       curriculumExclusions: scoped.exclusions,
       curriculumScopeApplied: scoped.exclusions.length > 0,
+      sourceNotes: subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic) === 'waves-sound'
+        ? ['Το αριθμητικό Παράδειγμα 5.2 παραλείπεται λόγω ασυμφωνίας δεδομένων και αποτελέσματος στην επίσημη ηλεκτρονική έκδοση. Η θεωρία των κυμάτων και του ήχου διατηρείται.']
+        : undefined,
       sourceUrl,
       sourceUrls,
       canonicalSourceUrl: book.canonicalSourceUrl || null,
       mappingConfidence: book.mappingConfidence || null,
       labelParaphrase: book.labelParaphrase === true,
       verifiedHeading: book.verifiedHeading || null,
-      sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION, sourceChars: useful.length, pages: sourceUrls.length } : undefined,
-      text: completeAudio ? useful : useful.slice(0, 42000)
+      sourceCompleteness: (completeAudio || (subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic)))
+        ? { complete: true, parserVersion: subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic) ? PHYSICS_G_SOURCE_VERSION : COMPLETE_SOURCE_VERSION, sourceChars: useful.length, pages: sourceUrls.length }
+        : undefined,
+      text: completeAudio || (subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic)) ? useful : useful.slice(0, 42000)
     });
   } catch (err) {
     const invalidScope = /section_(?:body|heading|title)|selected_section/.test(String(err?.message || ""));
@@ -3561,7 +3575,11 @@ function scopePhysicsGAnnualTopic(text, key) {
   };
 
   if (key === "electric-force-field") {
-    add(truncateAt(firstText, "Περιγραφή του ηλεκτρικού πεδίου"));
+    // Coulomb is taught qualitatively, without tasks using its mathematical
+    // relation. Preserve the prose statement and force-direction discussion.
+    const qualitative = firstText.replace(/Στη γλώσσα των Μαθηματικών γράφουμε:[\s\S]*?(?=Τα διανύσματα που παριστάνουν)/, '');
+    add(truncateAt(qualitative, "Περιγραφή του ηλεκτρικού πεδίου"));
+    exclusions.push("Ο νόμος του Κουλόμπ (§1.5) διδάσκεται ποιοτικά· δεν δημιουργούνται ασκήσεις που στηρίζονται στη μαθηματική σχέση του.");
     exclusions.push("Στην §1.6 διδάσκεται μόνο η υποενότητα «Ηλεκτρική δύναμη και πεδίο»· δεν χρησιμοποιούνται η περιγραφή/δυναμικές γραμμές, η ηλεκτρική θωράκιση και το ηλεκτρικό πεδίο και ενέργεια.");
   } else if (key === "current-circuits") {
     add(truncateAt(firstText, "2.3 Ηλεκτρικά δίπολα"));
@@ -3571,14 +3589,14 @@ function scopePhysicsGAnnualTopic(text, key) {
       sliceLinesBetween(firstText, "2.3 Ηλεκτρικά δίπολα", "2.4 Παράγοντες από τους οποίους εξαρτάται η αντίσταση"),
       "ισχύει ο νόμος του Ωμ για κάθε ηλεκτρικό δίπολο"
     );
-    const connections = sliceLinesBetween(firstText, "2.5 Εφαρμογές αρχών διατήρησης στη μελέτη απλών", "Ερωτήσεις");
+    const connections = sliceLinesBetween(firstText, "Σύνδεση αντιστατών", "Ερωτήσεις");
     add(ohm);
     add(connections);
     exclusions.push("Από §2.3 κρατούνται η αντίσταση του διπόλου και ο νόμος του Ohm· αφαιρούνται «Νόμος του Ωμ και μικρόκοσμος» και η μικροσκοπική ερμηνεία της αντίστασης. Η §2.4 δεν διδάσκεται.");
     exclusions.push("Από §2.5 χρησιμοποιούνται μόνο η σύνδεση αντιστατών, η σύνδεση δύο αντιστατών σε σειρά και η παράλληλη σύνδεση.");
   } else if (key === "effects-energy-power") {
     const thermal = truncateAt(
-      sliceLinesBetween(firstText, "ΚΕΦΑΛΑΙΟ 3 ΗΛΕΚΤΡΙΚΗ ΕΝΕΡΓΕΙΑ", "3.2 Χημικά αποτελέσματα"),
+      truncateAt(firstText, "3.2 Χημικά αποτελέσματα"),
       "Πειραματική μελέτη του φαινομένου Τζάουλ"
     );
     const magnetic = sliceLinesBetween(firstText, "3.3 Μαγνητικά αποτελέσματα του ηλεκτρικού ρεύματος", "3.4 Ηλεκτρική και μηχανική ενέργεια");
@@ -3589,15 +3607,19 @@ function scopePhysicsGAnnualTopic(text, key) {
     exclusions.push("Από §3.1 δεν χρησιμοποιούνται η πειραματική μελέτη, ο νόμος του Joule και η ερμηνεία του φαινομένου Joule. Οι §3.2, §3.4 και §3.5 δεν ανήκουν στην επιλεγμένη ετήσια ενότητα.");
   } else if (key === "oscillations") {
     const examples = truncateAt(
-      sliceLinesBetween(firstText, "ΚΕΦΑΛΑΙΟ 4 ΤΑΛΑΝΤΩΣΕΙΣ", "4.2 Μεγέθη που χαρακτηρίζουν μια ταλάντωση"),
+      truncateAt(firstText, "4.2 Μεγέθη που χαρακτηρίζουν μια ταλάντωση"),
       "Ποιες είναι οι προϋποθέσεις ώστε ένα σώμα να κάνει ταλάντωση"
     );
-    const measures = sliceLinesBetween(firstText, "4.2 Μεγέθη που χαρακτηρίζουν μια ταλάντωση", "Ερωτήσεις");
+    const measures = truncateAt(sliceLinesBetween(firstText, "4.2 Μεγέθη που χαρακτηρίζουν μια ταλάντωση", "Ερωτήσεις"), "4.3 Ενέργεια και ταλάντωση");
     add(examples);
     add(measures);
-    exclusions.push("Από §4.1 χρησιμοποιούνται μόνο παραδείγματα για το τι είναι ταλάντωση· η §4.2 διδάσκεται.");
+    exclusions.push("Από §4.1 χρησιμοποιούνται μόνο παραδείγματα για το τι είναι ταλάντωση· η §4.2 διδάσκεται. Η §4.3 δεν διδάσκεται.");
   } else if (key === "waves-sound") {
-    add(truncateAt(firstText, "Κυματικά φαινόμενα: Ανάκλαση και διάθλαση των μηχανικών κυμάτων"));
+    add(truncateAt(firstText, "Πόσο γρήγορα διαδίδεται ένα κύμα"));
+    const relation = firstText.match(/προηγούμενη σχέση παίρνει τη μορφή:\s*(υ\s*=\s*λ\s*·\s*f)/i);
+    if (!relation) throw new Error('selected_section_wave_relation_not_verified');
+    add(relation[1]);
+    add(sliceLinesBetween(firstText, "Η σχέση αυτή ονομάζεται", "Η ταχύτητα:"));
     add(sliceLinesBetween(firstText, "5.4 Ήχος", "Ερωτήσεις"));
     exclusions.push("Στην §5.3 χρησιμοποιείται μόνο το πρώτο μέρος έως τη σχέση υ=λf χωρίς απόδειξη· δεν χρησιμοποιούνται οι υποενότητες ανάκλασης/διάθλασης μηχανικών κυμάτων.");
   } else if (key === "light-reflection") {
@@ -3605,7 +3627,7 @@ function scopePhysicsGAnnualTopic(text, key) {
     const chapter7 = blocks.find(block => /index7\.html/i.test(block.url))?.text || "";
     add(truncateAt(chapter6, "Αρχή του ελάχιστου χρόνου"));
     const reflection = truncateAt(
-      sliceLinesBetween(chapter7, "ΚΕΦΑΛΑΙΟ 7 ΑΝΑΚΛΑΣΗ ΤΟΥ ΦΩΤΟΣ", "7.2 Εικόνες σε καθρέφτες: είδωλα"),
+      truncateAt(chapter7, "7.2 Εικόνες σε καθρέφτες: είδωλα"),
       "Ανάκλαση και αρχή του ελάχιστου χρόνου"
     );
     const images = sliceLinesBetween(chapter7, "7.2 Εικόνες σε καθρέφτες: είδωλα", "Καμπύλοι καθρέφτες");
@@ -3614,7 +3636,7 @@ function scopePhysicsGAnnualTopic(text, key) {
     exclusions.push("Στην §6.2 δεν χρησιμοποιείται η «Αρχή του ελαχίστου χρόνου». Στην §7.1 αφαιρείται το αντίστοιχο ένθετο και από §7.2 δεν χρησιμοποιούνται καμπύλοι/σφαιρικοί καθρέπτες και οπτικό πεδίο.");
   } else if (key === "refraction-colour") {
     const refraction = truncateAt(
-      sliceLinesBetween(firstText, "ΚΕΦΑΛΑΙΟ 8 ΔΙΑΘΛΑΣΗ ΤΟΥ ΦΩΤΟΣ", "8.3 Ανάλυση του φωτός"),
+      truncateAt(firstText, "8.3 Ανάλυση του φωτός"),
       "Διάθλαση και αρχή του ελάχιστου χρόνου"
     );
     const dispersion = sliceLinesBetween(firstText, "Ανάλυση του λευκού φωτός", "Δείκτης διάθλασης και χρώματα του φωτός");

@@ -164,6 +164,9 @@ ${roleRule}
 - If curriculum evidence is missing or uncertain, say so and recommend checking the school textbook or official source.`;
 
   const taskRule = serverTaskRule({ task, mode, activity });
+  const physicsScopeRule = verifiedOfficialSource?.subject === 'fysiki-g-gymnasiou'
+    ? '\nMANDATORY PHYSICS CURRICULUM RESTRICTIONS:\n' + (verifiedOfficialSource.curriculumExclusions || []).join('\n')
+    : '';
 
   const hasDocument = !!modelDocumentText;
   const officialSchoolbook = hasDocument && !!verifiedOfficialSource?.grounded;
@@ -202,7 +205,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
   ].filter(Boolean).join('\n\n');
 
   const messages = [
-    { role: 'system', content: `${fixedGuard}\n\n${taskRule}${sourcePolicy}` },
+    { role: 'system', content: `${fixedGuard}\n\n${taskRule}${sourcePolicy}${physicsScopeRule}` },
     { role: 'user', content: userContent },
   ];
   const routingProfile = chooseRoutingProfile({ task, mode, activity });
@@ -560,7 +563,7 @@ async function loadVerifiedOfficialSource(subjectId, topic, studyContext = null)
     : {};
   const cacheKey = epal
     ? { kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic, ...epalOptions }
-    : { kind: 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
+    : { kind: sid === 'fysiki-g-gymnasiou' ? 'official-physics-g-source-v1' : 'official-schoolbook-source-v1', subjectId: sid, topic: selectedTopic };
   const cached = await getStudyCache(cacheKey);
   if (cached?.grounded === true && cached?.text) return cached;
 

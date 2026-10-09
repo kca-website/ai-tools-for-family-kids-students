@@ -452,7 +452,7 @@
     const toolsTile=ensureMoreTile("homeV9AllTools", ICON.chat, c.toolsTileTitle, c.toolsTileDesc, "/tools/", c.toolsTileCta);
     const curriculumTile=ensureMoreTile("homeV9CurriculumTile", ICON.map, c.curriculumCardTitle, c.curriculumCardDesc, "/xartis-ylis.html", c.curriculumCardCta);
     const en=isEnglish();
-    const playTile=ensureMoreTile("homeV9Play", "🎮", en?"Play & Learn":"Παίξε & Μάθε", en?"Short learning missions in a world you explore.":"Μικρές αποστολές μάθησης μέσα σε έναν κόσμο που εξερευνάς.", "/play/", en?"Enter the world":"Μπες στον κόσμο");
+    const playTile=ensureMoreTile("homeV9Play", "🎮", en?"Play & Learn":"Παίξε & Μάθε", en?"Short learning missions in a world you explore.":"Μικρές αποστολές μάθησης μέσα σε έναν κόσμο που εξερευνάς.", "/play/", en?"See the educational games →":"Δες τα εκπαιδευτικά παιχνίδια →");
     const tiles = [toolsTile, curriculumTile, characters, playTile, document.getElementById("homeV8Eng")].filter(Boolean);
     const current = [...grid.children];
     if(current.length !== tiles.length || current.some((el, i) => el !== tiles[i])) tiles.forEach((el) => grid.appendChild(el));

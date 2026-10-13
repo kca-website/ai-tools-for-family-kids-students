@@ -736,14 +736,7 @@ a.fb-link:focus-visible {
   outline: 2px solid #FFFFFF;
   outline-offset: 2px;
 }
-.footer-logo-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.footer-logo-row > a {
-  margin-bottom: 0 !important;
-}
-.chrome-footer__thanks .footer-logo-row {
-  margin-bottom: 8px;
+.site-footer__brand a.fb-link,
+.chrome-footer__brand a.fb-link {
+  margin-left: 6px;
 }

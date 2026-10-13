@@ -715,55 +715,24 @@ body.page-xartis-ylis .role-box {
   }
 }
 
-/* Facebook follow banner: full-width row at the bottom of the footer. Plain link, no Facebook SDK or tracking. */
-a.fb-banner {
-  grid-column: 1 / -1;
-  display: flex;
+/* Small Facebook icon link in the footer. Plain link, no Facebook SDK or tracking. */
+a.fb-link {
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: 14px;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   background: #1877F2;
   color: #FFFFFF !important;
   text-decoration: none !important;
-  line-height: 1.35;
 }
-a.fb-banner:hover,
-a.fb-banner:focus-visible {
+a.fb-link:hover,
+a.fb-link:focus-visible {
   background: #0F66D6;
   color: #FFFFFF !important;
 }
-a.fb-banner:focus-visible {
-  outline: 3px solid #FFFFFF;
+a.fb-link:focus-visible {
+  outline: 2px solid #FFFFFF;
   outline-offset: 2px;
-}
-.fb-banner__icon {
-  flex: 0 0 auto;
-}
-.fb-banner__copy {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-  flex: 1 1 auto;
-  font-size: 0.9rem;
-}
-.fb-banner__copy strong {
-  font-size: 1rem;
-}
-.fb-banner__cta {
-  flex: 0 0 auto;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: #FFFFFF;
-  color: #1877F2;
-  font-weight: 800;
-  font-size: 0.9rem;
-}
-@media (max-width: 600px) {
-  .fb-banner { flex-wrap: wrap; }
-  .fb-banner__copy { flex-basis: calc(100% - 42px); }
-  .fb-banner__cta { margin-left: 42px; }
 }

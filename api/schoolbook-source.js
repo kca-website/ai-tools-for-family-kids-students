@@ -1966,11 +1966,10 @@ module.exports = async function handler(req, res) {
     !!verifiedPrimaryUrls &&
     primaryComplete?.verification === "complete-section-verified";
 
-  let directUrls = verifiedPrimaryUrls
-    ? [...verifiedPrimaryUrls]
-    : specialUnit ? specialUnit.pages.map((page) => page.url)
-    : characterChapter ? [characterChapter.url]
-    : resolveDirectSourceUrls(subject, topic);
+  let directUrls = specialUnit ? specialUnit.pages.map((page) => page.url) : characterChapter ? [characterChapter.url] : resolveDirectSourceUrls(subject, topic);
+  // Preserve the legacy decision order for other subjects; only an explicitly
+  // reviewed full-unit manifest supersedes a first-page source.
+  if (verifiedPrimaryUrls) directUrls = [...verifiedPrimaryUrls];
   if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
     directUrls = [gelInventory.mapping.url];
   }

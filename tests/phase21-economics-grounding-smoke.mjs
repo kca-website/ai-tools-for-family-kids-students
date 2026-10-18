@@ -156,6 +156,12 @@ for (const label of [
   "Διεθνές εμπόριο και οικονομικές σχέσεις"
 ]) {
   const resolved = endpoint._test.resolveGelInventoryTopic("oikonomia-g-lykeiou", label);
+  const catalogEntry = inventory.get("oikonomia-g-lykeiou")?.topicMappings?.find(row => row.label === label);
+  // Loading Phase 25 manual overrides must never mutate these generated
+  // 2026–27 inventory entries into eligible exact-PDF mappings.
+  assert.equal(catalogEntry?.status, "needs-manual-review", label + " must remain unpromoted");
+  assert.equal(resolved?.mapping?.status, "needs-manual-review");
+  assert.equal(resolved?.runtimeMode, null);
   assert.equal(resolved?.runtimeEligible, false, label + " must remain fail-closed");
 }
 

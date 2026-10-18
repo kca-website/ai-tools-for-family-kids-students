@@ -36,6 +36,16 @@ for (const sample of samples) {
   assert.equal(result.body.topic, sample.topic);
   assert.equal(result.body.section, sample.topic);
   assert.equal(result.body.mappingStatus, "official-book-section-grounded");
+  // These learner-facing units span several official lesson/chapter pages;
+  // passing with only a first-page link would be a false grounding claim.
+  if (sample.subject === "istoria-d-dimotikou") {
+    assert.equal(result.body.sourceUrls.length, 4, "Geometric period must include chapters 1–4");
+    assert.match(result.body.sourceUrls[3], /index1_4\.html$/);
+  }
+  if (sample.subject === "english-st-dimotikou") {
+    assert.equal(result.body.sourceUrls.length, 3, "English Unit 1 must include its three lessons");
+    assert.match(result.body.sourceUrls[2], /index1_3\.html$/);
+  }
   assert.equal(result.body.annualScopeVerified, false);
   assert.ok(result.body.text.length >= 120, sample.subject + " source excerpt is too short");
   assert.match(result.body.sourceUrl, /^https:\/\/[^/]*ebooks\.edu\.gr\//i);

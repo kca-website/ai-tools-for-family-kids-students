@@ -1951,13 +1951,26 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  let directUrls = specialUnit ? specialUnit.pages.map((page) => page.url) : characterChapter ? [characterChapter.url] : resolveDirectSourceUrls(subject, topic);
-  if (!directUrls.length) {
-    const primaryComplete = PRIMARY_COMPLETE_SOURCES?.get?.(subject, topic) || null;
-    if (primaryComplete?.urls?.length && primaryComplete.urls.every(catalogHtmlSourceAllowed)) {
-      directUrls = [...primaryComplete.urls];
-    }
-  }
+  // An exact catalog link can identify only the FIRST page of a multi-page unit.
+  // Prefer the reviewed full-unit page bundle when one exists, and do not elevate
+  // the section-grounding status for mere book-structure / first-page mappings.
+  const primaryComplete = !specialUnit ? PRIMARY_COMPLETE_SOURCES?.get?.(subject, topic) || null : null;
+  const verifiedPrimaryUrls = primaryComplete?.urls?.length &&
+    primaryComplete.urls.every((url) =>
+      catalogHtmlSourceAllowed(url) && !!book?.base && sameOfficialHtmlManifestation(url, book.base)
+    )
+    ? primaryComplete.urls
+    : null;
+  const primarySectionFullyVerified =
+    catalogHasExactTopic &&
+    !!verifiedPrimaryUrls &&
+    primaryComplete?.verification === "complete-section-verified";
+
+  let directUrls = verifiedPrimaryUrls
+    ? [...verifiedPrimaryUrls]
+    : specialUnit ? specialUnit.pages.map((page) => page.url)
+    : characterChapter ? [characterChapter.url]
+    : resolveDirectSourceUrls(subject, topic);
   if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
     directUrls = [gelInventory.mapping.url];
   }
@@ -2042,6 +2055,17 @@ module.exports = async function handler(req, res) {
           bookTitle: book.title,
           sourceUrls,
           message: "Μία ή περισσότερες επίσημες σελίδες της ενότητας δεν ήταν διαθέσιμες."
+        });
+      }
+      // A reviewed complete-section bundle must not silently lose a page when
+      // extracting a multipart official unit (including audio/text summaries).
+      if (primarySectionFullyVerified && pages.some((html) => htmlToText(html).length < 120)) {
+        return res.status(404).json({
+          grounded: false,
+          error: "verified_section_page_content_missing",
+          bookTitle: book.title,
+          sourceUrls,
+          message: "Μία από τις επαληθευμένες σελίδες της ενότητας δεν απέδωσε αρκετό κείμενο."
         });
       }
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
@@ -2173,7 +2197,9 @@ module.exports = async function handler(req, res) {
       schoolbookSource: book.base || null,
       annualGuidanceSource: book.curriculumSource || null,
       curriculumSource: book.curriculumSource || null,
-      mappingStatus: book.mappingStatus || "schoolbook-source-mapped",
+      mappingStatus: primarySectionFullyVerified
+        ? "official-book-section-grounded"
+        : book.mappingStatus || "schoolbook-source-mapped",
       lastVerified: book.lastVerified || null,
       annualScopeVerified: book.annualScopeVerified === true || (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic)),
       curriculumExclusions: scoped.exclusions,

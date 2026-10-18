@@ -19,6 +19,80 @@ function range(start, end) {
 }
 
 const entries = Object.freeze([
+  // Exact live-grounding samples. Each entry lists every official page of the selected unit.
+  // Other catalog sections remain structure-verified until their complete page spans are reviewed.
+  {
+    subjectId: "glossa-a-dimotikou",
+    label: "1η Ενότητα — Πού είναι ο Άρης;",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/1993/Glossa_A-Dimotikou_html-empl/indexb_00.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: the first unit is the single lesson «Πού είναι ο Άρης;»",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "glossa-b-dimotikou",
+    label: "1 — Στο δρόμο για το σχολείο",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/1995/Glossa_B-Dimotikou_html-empl/indexb_00.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: this unit is contained in its dedicated HTML page",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "glossa-c-dimotikou",
+    label: "Πάλι μαζί!",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/1997/Glossa_G-Dimotikou_html-empl/indexb_00.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: the complete «Πάλι μαζί!» unit on its dedicated HTML page",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "glossa-d-dimotikou",
+    label: "1η Ενότητα — Ένα ακόμα σκαλί",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexb_00.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: first unit on its dedicated HTML page",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "glossa-d-dimotikou",
+    label: "2η Ενότητα — Ρώτα το νερό... τι τρέχει",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/2192/Glossa_D-Dimotikou_html-empl/indexc_00.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: second unit on its dedicated HTML page",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "glossa-e-dimotikou",
+    label: "Ενότητα 1 — Ο φίλος μας το περιβάλλον",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/2001/Glossa_E-Dimotikou_html-empl/index1_01.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: complete environment unit on its dedicated HTML page",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "science-st-dimotikou",
+    label: "Ενέργεια",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/2011/Fysika_ST-Dimotikou_html-empl/index_1.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: complete energy chapter on its dedicated HTML page",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "istoria-d-dimotikou",
+    label: "Γεωμετρικά Χρόνια",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index1_1.html","https://ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index1_2.html","https://ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index1_3.html","https://ebooks.edu.gr/ebooks/v/html/8547/2174/Istoria_D-Dimotikou_html-empl/index1_4.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Book contents: Geometric period consists of chapters 1-4, including the recap in chapter 4",
+    reviewedAt: "2026-10-18"
+  },
+  {
+    subjectId: "english-st-dimotikou",
+    label: "Unit 1 — Our Multicultural Class",
+    urls: ["https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index1_1.html","https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index1_2.html","https://ebooks.edu.gr/ebooks/v/html/8547/2270/Agglika_ST-Dimotikou_html-empl/index1_3.html"],
+    verification: "complete-section-verified",
+    reviewBasis: "Official table of contents: Unit 1 contains Meeting the Newcomers, At the school lab and A Geography Project",
+    reviewedAt: "2026-10-18"
+  },
   {
     subjectId: "math-a-dimotikou",
     label: "1η Ενότητα — Οι αριθμοί μέχρι το 5 - Χώρος και σχήματα",

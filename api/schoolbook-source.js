@@ -1926,6 +1926,20 @@ module.exports = async function handler(req, res) {
   const reviewPath = !specialUnit && subject === "mathimatika-b-gymnasiou" ? mathBReviewPath(topic) : "";
   const characterChapter = !specialUnit && CHARACTER_CHAPTERS.find(c=>c.subject.replace('history-','istoria-')===subject&&normalize(c.labelEl)===normalize(topic));
   const catalogBook = buildCatalogBook(subject);
+  // Chemistry B (2026–27): fail closed BEFORE linked-section catalog discovery.
+  // The generic book navigator can match "Γενική Ενότητα 4" across neighbouring
+  // lessons; a shared unit heading never makes excluded §4.1 curriculum-safe.
+  // Only sections explicitly enumerated in the verified 19-lesson allowlist
+  // may be resolved. Keep §2.10 accessible through its historical short label.
+  if (subject === "chimeia-b-gymnasiou" && !resolveChemistryBCurriculumPaths(topic).length) {
+    return res.status(404).json({
+      grounded: false,
+      error: "section_not_resolved",
+      bookTitle: catalogBook?.title || BOOKS[subject]?.title || subject,
+      schoolYear: "2026-2027",
+      message: "Η ενότητα δεν ανήκει στην επαληθευμένη διδακτέα ύλη 2026–27."
+    });
+  }
   // Prefer an exact catalog allowlist for the selected topic over older diagnostic
   // modes. This lets broad Study chapter selections use their verified official
   // page set without weakening the diagnostic resolver for other topic labels.

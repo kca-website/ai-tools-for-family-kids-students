@@ -52,8 +52,16 @@ for (const subject of Object.values(inventory.all())) {
 
 assert.equal(highHtml, 223);
 assert.equal(mediumHtml, 14);
-// 34 phase-14 PDF sections + 1 phase-25 Οικονομία override + 62 phase-26 Θρησκευτικά Α΄/Β΄/Γ΄ units.
-assert.equal(exactPdf, 97);
+// 34 phase-14 PDF sections + 62 phase-26 Θρησκευτικά units.
+// The chapter-11 Economics PDF is an out-of-scope textbook chapter and must
+// not silently enter the 2026–27 curriculum inventory as a verified lesson.
+assert.equal(exactPdf, 96);
+const excludedEconomics = resolveGelInventoryTopic(
+  "oikonomia-g-lykeiou", "Διεθνές εμπόριο και οικονομικές σχέσεις"
+);
+assert.equal(excludedEconomics?.mapping?.status, "needs-manual-review");
+assert.equal(excludedEconomics?.runtimeMode, null);
+assert.equal(excludedEconomics?.runtimeEligible, false);
 assert.equal(manualHtml, manualOverrides.count + phase25Overrides.count);
 assert.ok(manualHtml >= 306);
 

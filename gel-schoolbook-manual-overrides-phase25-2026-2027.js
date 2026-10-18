@@ -25,32 +25,15 @@ const entries = Object.freeze([
   }
 ]);
 
-// The HTML manifestation of Αρχές Οικονομικής Θεωρίας stops at chapter 10,
-// while the official PDF contains chapter 11. Promote the already manually
-// verified learner topic to an exact PDF section at runtime rather than pointing
-// to a non-existent index11.html page. This mutates only the in-memory generated
-// inventory object; the generated file remains untouched.
-try {
-  const map = require("./gel-schoolbook-source-map-2026-2027.js");
-  const row = map?.get?.("oikonomia-g-lykeiou");
-  const topic = row?.topicMappings?.find?.(
-    (entry) => entry?.label === "Διεθνές εμπόριο και οικονομικές σχέσεις"
-  );
-  if (topic) {
-    Object.assign(topic, {
-      status: "exact-pdf",
-      work: "8547/2392",
-      url: "https://ebooks.edu.gr/ebooks/v/pdf/8547/2522/22-0299-01_V1_Arches-Oikonomikis-Theorias_G-Lykeiou-Spoudon-Oikonomias-Pliroforikis_Vivlio-Mathiti/#page=188",
-      pdfPage: 188,
-      pdfPageEnd: 193,
-      heading: "2. Διεθνοποίηση της Οικονομίας",
-      granularity: "pdf-section",
-      matchBasis: "manual-verified-official-pdf-chapter-11",
-      labelParaphrase: true,
-      confidence: "high"
-    });
-  }
-} catch (_) {}
+// Chapter 11 is present in the official Economics textbook PDF but is not
+// part of the 2026–27 nationwide examinable Economics syllabus. Its aggregate
+// learner label has NOT passed current-year curriculum scope verification.
+// Do not mutate the generated inventory at module import: a verified book page
+// alone does not authorize an out-of-scope topic to become runtime-eligible.
+// Phase 21 deliberately keeps both unverified aggregate labels fail-closed.
+//
+// A future curriculum update can add an explicit, reviewed topic mapping only
+// after the annual teaching scope AND exact PDF text boundaries are verified.
 
 function get(subjectId, label) {
   const s = String(subjectId || "").trim();

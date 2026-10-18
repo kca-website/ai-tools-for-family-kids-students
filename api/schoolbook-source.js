@@ -1926,6 +1926,20 @@ module.exports = async function handler(req, res) {
   const reviewPath = !specialUnit && subject === "mathimatika-b-gymnasiou" ? mathBReviewPath(topic) : "";
   const characterChapter = !specialUnit && CHARACTER_CHAPTERS.find(c=>c.subject.replace('history-','istoria-')===subject&&normalize(c.labelEl)===normalize(topic));
   const catalogBook = buildCatalogBook(subject);
+  // Chemistry B (2026–27): fail closed BEFORE linked-section catalog discovery.
+  // The generic book navigator can match "Γενική Ενότητα 4" across neighbouring
+  // lessons; a shared unit heading never makes excluded §4.1 curriculum-safe.
+  // Only sections explicitly enumerated in the verified 19-lesson allowlist
+  // may be resolved. Keep §2.10 accessible through its historical short label.
+  if (subject === "chimeia-b-gymnasiou" && !resolveChemistryBCurriculumPaths(topic).length) {
+    return res.status(404).json({
+      grounded: false,
+      error: "section_not_resolved",
+      bookTitle: catalogBook?.title || BOOKS[subject]?.title || subject,
+      schoolYear: "2026-2027",
+      message: "Η ενότητα δεν ανήκει στην επαληθευμένη διδακτέα ύλη 2026–27."
+    });
+  }
   // Prefer an exact catalog allowlist for the selected topic over older diagnostic
   // modes. This lets broad Study chapter selections use their verified official
   // page set without weakening the diagnostic resolver for other topic labels.
@@ -1951,13 +1965,25 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  // An exact catalog link can identify only the FIRST page of a multi-page unit.
+  // Prefer the reviewed full-unit page bundle when one exists, and do not elevate
+  // the section-grounding status for mere book-structure / first-page mappings.
+  const primaryComplete = !specialUnit ? PRIMARY_COMPLETE_SOURCES?.get?.(subject, topic) || null : null;
+  const verifiedPrimaryUrls = primaryComplete?.urls?.length &&
+    primaryComplete.urls.every((url) =>
+      catalogHtmlSourceAllowed(url) && !!book?.base && sameOfficialHtmlManifestation(url, book.base)
+    )
+    ? primaryComplete.urls
+    : null;
+  const primarySectionFullyVerified =
+    catalogHasExactTopic &&
+    !!verifiedPrimaryUrls &&
+    primaryComplete?.verification === "complete-section-verified";
+
   let directUrls = specialUnit ? specialUnit.pages.map((page) => page.url) : characterChapter ? [characterChapter.url] : resolveDirectSourceUrls(subject, topic);
-  if (!directUrls.length) {
-    const primaryComplete = PRIMARY_COMPLETE_SOURCES?.get?.(subject, topic) || null;
-    if (primaryComplete?.urls?.length && primaryComplete.urls.every(catalogHtmlSourceAllowed)) {
-      directUrls = [...primaryComplete.urls];
-    }
-  }
+  // Preserve the legacy decision order for other subjects; only an explicitly
+  // reviewed full-unit manifest supersedes a first-page source.
+  if (verifiedPrimaryUrls) directUrls = [...verifiedPrimaryUrls];
   if (!directUrls.length && gelInventory?.runtimeMode === "exact-html") {
     directUrls = [gelInventory.mapping.url];
   }
@@ -2042,6 +2068,17 @@ module.exports = async function handler(req, res) {
           bookTitle: book.title,
           sourceUrls,
           message: "Μία ή περισσότερες επίσημες σελίδες της ενότητας δεν ήταν διαθέσιμες."
+        });
+      }
+      // A reviewed complete-section bundle must not silently lose a page when
+      // extracting a multipart official unit (including audio/text summaries).
+      if (primarySectionFullyVerified && pages.some((html) => htmlToText(html).length < 120)) {
+        return res.status(404).json({
+          grounded: false,
+          error: "verified_section_page_content_missing",
+          bookTitle: book.title,
+          sourceUrls,
+          message: "Μία από τις επαληθευμένες σελίδες της ενότητας δεν απέδωσε αρκετό κείμενο."
         });
       }
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
@@ -2173,7 +2210,9 @@ module.exports = async function handler(req, res) {
       schoolbookSource: book.base || null,
       annualGuidanceSource: book.curriculumSource || null,
       curriculumSource: book.curriculumSource || null,
-      mappingStatus: book.mappingStatus || "schoolbook-source-mapped",
+      mappingStatus: primarySectionFullyVerified
+        ? "official-book-section-grounded"
+        : book.mappingStatus || "schoolbook-source-mapped",
       lastVerified: book.lastVerified || null,
       annualScopeVerified: book.annualScopeVerified === true || (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic)),
       curriculumExclusions: scoped.exclusions,

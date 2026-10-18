@@ -79,7 +79,7 @@ try {
   assert.equal(await page.locator('#homeV8HelpersMount a[href="/xartis-ylis.html"]').count(), 0, 'Curriculum Map is not one of the three ways');
   assert.equal(await page.locator('#homeCurriculumStrip').count(), 0, 'Curriculum Map uses the discovery tile rather than a duplicate strip');
   assert.equal(await page.locator('#homeV9CurriculumTile a').getAttribute('href'), '/xartis-ylis.html');
-  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 4, 'Discovery includes all tools, curriculum, history characters and GSL');
+  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 5, 'Discovery includes all tools, curriculum, history characters, Play & Learn and GSL');
 
   await page.click('#siteMenuToggle');
   assert.equal(await page.locator('#siteMenuPanel .site-menu-panel__teacher').isVisible(), true, 'Educators must be the first, visible menu entry on mobile');

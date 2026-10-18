@@ -64,32 +64,39 @@ for (const subject of Object.values(inventory.all())) {
 
 assert.equal(highHtml, 223);
 assert.equal(mediumManual, 14);
-// 34 phase-14 PDF sections + 1 phase-25 Οικονομία override + 62 phase-26 Θρησκευτικά Α΄/Β΄/Γ΄ units.
-assert.equal(exactPdf, 97);
-// The phase-25 Οικονομία topic moved from a reviewed manual override to an exact PDF section.
+// 34 phase-14 PDF sections + 62 phase-26 Θρησκευτικά units. Chapter 11 of
+// Economics has not been approved within the 2026–27 examined curriculum.
+assert.equal(exactPdf, 96);
+// The Phase 25 paragraph retains its official HTML override; the unverified
+// Economics Chapter 11 remains blocked instead of being promoted on import.
 assert.equal(reviewedManual, 293);
 assert.equal(overrides.count, 306);
 assert.equal(remainingCandidateBacked, 4);
 // Phase 26 replaced 26 generic, sourceless Θρησκευτικά Α΄/Β΄/Γ΄ labels with 62 grounded book units.
-assert.equal(remainingWithoutCandidate, 36);
+assert.equal(remainingWithoutCandidate, 37);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 627);
-assert.equal(blocked, 45);
+assert.equal(grounded, 626);
+assert.equal(blocked, 46);
 assert.equal(grounded + blocked, 672);
 
 
-// Phase 25: the paragraph topic is a manual HTML override; the Οικονομία chapter-11 topic was
-// promoted to an exact PDF section (the HTML manifestation stops at chapter 10).
-for (const [subjectId, label, mode] of [
-  ["ekthesi-a-lykeiou", "Τρόποι ανάπτυξης παραγράφου", "manual-html"],
-  ["oikonomia-g-lykeiou", "Διεθνές εμπόριο και οικονομικές σχέσεις", "exact-pdf"]
-]) {
-  const resolved = endpoint._test.resolveGelInventoryTopic(subjectId, label);
-  assert.equal(resolved?.runtimeMode, mode, subjectId + " / " + label + " must be grounded by Phase 25");
-}
+// Phase 25: preserve the verified HTML paragraph override.
+const phase25Paragraph = endpoint._test.resolveGelInventoryTopic(
+  "ekthesi-a-lykeiou", "Τρόποι ανάπτυξης παραγράφου"
+);
+assert.equal(phase25Paragraph?.runtimeMode, "manual-html");
+
+// No import-time upgrade: the Chapter 11 topic remains explicitly fail-closed
+// even though the original schoolbook PDF contains that chapter.
+const excludedEconomics = endpoint._test.resolveGelInventoryTopic(
+  "oikonomia-g-lykeiou", "Διεθνές εμπόριο και οικονομικές σχέσεις"
+);
+assert.equal(excludedEconomics?.mapping?.status, "needs-manual-review");
+assert.equal(excludedEconomics?.runtimeMode, null);
+assert.equal(excludedEconomics?.runtimeEligible, false);
 
 // Guard examples: candidates that are deliberately still ambiguous/insufficient.
 for (const [subjectId, label] of [

@@ -70,8 +70,19 @@ const response = {
   status(code) { this.statusCode = code; return this; },
   json(body) { this.body = body; return this; }
 };
-await handler({ method: "GET", query: { subject: "chimeia-b-gymnasiou", topic: "Γενική Ενότητα 4 · 4.1 — Εκτός ύλης" } }, response);
-assert.equal(response.statusCode, 404);
-assert.equal(response.body.error, "section_not_resolved");
+// Exercise the real HTTP handler, not only the direct chemistry path helper:
+// broad catalog unit labels must never resolve neighbouring excluded lessons.
+for (const excludedTopic of [
+  "Γενική Ενότητα 4 · 4.1 — Εκτός ύλης",
+  "Γενική Ενότητα 4 · 4.1 — Το έδαφος και το υπέδαφος",
+  "Γενική Ενότητα 2 · 2.12 — Εκτός ύλης"
+]) {
+  response.statusCode = 0;
+  response.body = null;
+  await handler({ method: "GET", query: { subject: "chimeia-b-gymnasiou", topic: excludedTopic } }, response);
+  assert.equal(response.statusCode, 404, excludedTopic + " must fail closed");
+  assert.equal(response.body.error, "section_not_resolved");
+  assert.equal(response.body.grounded, false);
+}
 
 console.log("Chemistry B 2026-27 grounding integrity: 19 sections, fail-closed exclusions and 2.10 scope filter OK");

@@ -1,0 +1,175 @@
+/* Homepage cinematic scroll v1 (2026-10-24). Paired with home-cinema.20261024.js.
+ * Every rule is scoped to html.cine-on, which the script adds only on the homepage,
+ * after its first frame, and never under prefers-reduced-motion. Without it the page
+ * renders exactly as before.
+ *
+ * --cine-p     scene progress 0 → 1, written by JS from the scroll position
+ * --cine-e     eased progress (ease-out cubic), derived here in CSS
+ * --cine-hero  0 → 1 over the first ~85% of a viewport of scroll
+ * Only opacity, transform and clip-path change: compositor-friendly, no blur filters.
+ */
+
+html.cine-on [data-cine]:not([data-cine-done]){
+  --cine-q: calc(1 - var(--cine-p, 1));
+  --cine-e: calc(1 - var(--cine-q) * var(--cine-q) * var(--cine-q));
+  --cine-r: calc(1 - var(--cine-e));
+  opacity: var(--cine-e);
+  will-change: transform, opacity;
+}
+
+/* rise: text blocks and small groups drift up into place */
+html.cine-on [data-cine="rise"]:not([data-cine-done]){
+  transform: translate3d(0, calc(var(--cine-r) * 44px), 0);
+}
+
+/* card: content cards travel up, grow to full size and open from a framed crop */
+html.cine-on [data-cine="card"]:not([data-cine-done]){
+  transform: translate3d(0, calc(var(--cine-r) * 72px), 0) scale(calc(0.93 + 0.07 * var(--cine-e)));
+  transform-origin: 50% 100%;
+  clip-path: inset(calc(var(--cine-r) * 12%) calc(var(--cine-r) * 5%) 0 calc(var(--cine-r) * 5%) round 20px);
+}
+
+/* heading: masked line reveal, top edge first */
+html.cine-on [data-cine="heading"]:not([data-cine-done]){
+  transform: translate3d(0, calc(var(--cine-r) * 30px), 0);
+  clip-path: inset(0 0 calc(var(--cine-r) * 100%) 0);
+}
+
+/* frame: letterbox opening for the illustrated promo */
+html.cine-on [data-cine="frame"]:not([data-cine-done]){
+  transform: scale(calc(0.9 + 0.1 * var(--cine-e)));
+  clip-path: inset(calc(var(--cine-r) * 22%) calc(var(--cine-r) * 3%) round 24px);
+}
+html.cine-on [data-cine="frame"]:not([data-cine-done]) .home-ai-paths-promo__copy{
+  transform: translate3d(calc(var(--cine-r) * -56px), 0, 0);
+}
+html.cine-on [data-cine="frame"]:not([data-cine-done]) .home-ai-paths-promo__visual{
+  transform: translate3d(calc(var(--cine-r) * 64px), calc(var(--cine-r) * 18px), 0) rotate(calc(var(--cine-r) * 6deg));
+}
+
+/* Depth layers inside cards: icons and faces move on their own plane */
+html.cine-on [data-cine="card"]:not([data-cine-done]) .home-v9-way__icon,
+html.cine-on [data-cine="card"]:not([data-cine-done]) .home-v9-tile__faces{
+  transform: translate3d(0, calc(var(--cine-r) * 34px), 0) scale(calc(0.8 + 0.2 * var(--cine-e)));
+}
+
+/* Chips and step rows arrive one after another, inside the same scroll scene */
+html.cine-on [data-cine]:not([data-cine-done]) .home-v8-helper-links > *,
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__step,
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__chips > *{
+  --cine-i: 0;
+  --cine-c: clamp(0, calc((var(--cine-p, 1) - var(--cine-i) * 0.06) / 0.6), 1);
+  opacity: var(--cine-c);
+  transform: translate3d(0, calc((1 - var(--cine-c)) * 16px), 0);
+}
+html.cine-on [data-cine]:not([data-cine-done]) .home-v8-helper-links > :nth-child(2),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__step:nth-of-type(2),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__chips > :nth-child(2){--cine-i:1}
+html.cine-on [data-cine]:not([data-cine-done]) .home-v8-helper-links > :nth-child(3),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__step:nth-of-type(3),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__chips > :nth-child(3){--cine-i:2}
+html.cine-on [data-cine]:not([data-cine-done]) .home-v8-helper-links > :nth-child(4),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__step:nth-of-type(4),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__chips > :nth-child(4){--cine-i:3}
+html.cine-on [data-cine]:not([data-cine-done]) .home-v8-helper-links > :nth-child(5),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__chips > :nth-child(5){--cine-i:4}
+html.cine-on [data-cine]:not([data-cine-done]) .home-v8-helper-links > :nth-child(n+6),
+html.cine-on [data-cine]:not([data-cine-done]) .home-v9-finder__chips > :nth-child(n+6){--cine-i:5}
+
+/* At rest ([data-cine-done], the default for every scene) none of the rules above
+   match, so a resting scene has no transform, clip or layer: fixed-position popovers,
+   focus rings, shadows and the browser's scroll anchoring behave exactly as on the
+   static page. Motion styles exist only while a scene is actually mid-reveal. */
+
+/* Keyboard: a scene that holds focus is always fully legible. */
+html.cine-on [data-cine]:focus-within{
+  --cine-p: 1 !important;
+}
+
+/* Hero: the opening shot. Text lifts away slightly faster than the page while the
+   light behind it drifts the other way, giving depth as the story begins. */
+html.cine-on #zoneSelectView .hero{
+  position: relative;
+  isolation: isolate;
+}
+html.cine-on #zoneSelectView .home-v9-intro > .hero__title{
+  transform: translate3d(0, calc(var(--cine-hero, 0) * -46px), 0) scale(calc(1 - var(--cine-hero, 0) * 0.04));
+  transform-origin: 0 100%;
+  opacity: calc(1 - var(--cine-hero, 0) * 0.55);
+}
+html.cine-on #zoneSelectView .home-v9-intro > .hero__subtitle{
+  transform: translate3d(0, calc(var(--cine-hero, 0) * -26px), 0);
+  opacity: calc(1 - var(--cine-hero, 0) * 0.4);
+}
+html.cine-on #zoneSelectView .home-v9-intro > .hero__badges{
+  transform: translate3d(0, calc(var(--cine-hero, 0) * -12px), 0);
+}
+
+.cine-backdrop{
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  contain: strict;
+  overflow-anchor: none;
+}
+.cine-backdrop__glow{
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  will-change: transform;
+}
+.cine-backdrop__glow--sky{
+  width: 46vmax; height: 46vmax; right: 0; top: -16vmax;
+  background: radial-gradient(closest-side, rgba(147, 197, 253, .34), rgba(147, 197, 253, 0));
+  transform: translate3d(0, calc(var(--cine-hero, 0) * 22vh), 0) scale(calc(1 + var(--cine-hero, 0) * .18));
+}
+.cine-backdrop__glow--mint{
+  width: 40vmax; height: 40vmax; left: 0; top: 8vmax;
+  background: radial-gradient(closest-side, rgba(134, 239, 172, .26), rgba(134, 239, 172, 0));
+  transform: translate3d(0, calc(var(--cine-hero, 0) * 34vh), 0);
+}
+.cine-backdrop__glow--sun{
+  width: 26vmax; height: 26vmax; right: 20%; top: 14vmax;
+  background: radial-gradient(closest-side, rgba(253, 224, 71, .22), rgba(253, 224, 71, 0));
+  transform: translate3d(calc(var(--cine-hero, 0) * -8vw), calc(var(--cine-hero, 0) * 14vh), 0);
+}
+html.cine-on .cine-backdrop{
+  animation: cineOpen .9s cubic-bezier(.2, .7, .2, 1) both;
+}
+@keyframes cineOpen{
+  from{opacity:0; transform:scale(1.06)}
+  to{opacity:1; transform:none}
+}
+
+/* Glows are sized to fade to zero before the hero edges, so no seam appears. */
+
+/* Story progress: a thin rail under the sticky header */
+.cine-rail{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  z-index: 30;
+  pointer-events: none;
+  overflow-anchor: none;
+  background: linear-gradient(90deg, #1D5D8C, #2F8F6F 55%, #E3B341);
+  transform: scaleX(var(--cine-progress, 0));
+  transform-origin: 0 50%;
+}
+
+/* Hidden route views and print never carry motion */
+@media print{
+  html.cine-on [data-cine]:not([data-cine-done]),
+  html.cine-on [data-cine]:not([data-cine-done]) *{opacity:1 !important; transform:none !important; clip-path:none !important}
+  .cine-rail, .cine-backdrop{display:none !important}
+}
+@media (prefers-reduced-motion: reduce){
+  html.cine-on [data-cine]:not([data-cine-done]),
+  html.cine-on [data-cine]:not([data-cine-done]) *,
+  html.cine-on #zoneSelectView .hero *{opacity:1 !important; transform:none !important; clip-path:none !important}
+  .cine-rail, .cine-backdrop{display:none !important}
+}

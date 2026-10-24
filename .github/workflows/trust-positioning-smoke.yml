@@ -60,6 +60,9 @@ jobs:
       - name: Run homepage positioning smoke
         run: node tests/home-positioning-smoke.mjs
 
+      - name: Run homepage cinematic scroll smoke
+        run: node tests/home-cinema-smoke.mjs
+
       - name: Run intent-first UX journeys and accessibility checks
         run: node tests/ux-intent-first-smoke.mjs
 

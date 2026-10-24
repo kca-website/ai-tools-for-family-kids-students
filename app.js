@@ -190,6 +190,20 @@
       footerLastChecked: window.AITOOLSKIDS_SITE_META?.toolCatalogAuditLabelEl || "Τελευταίος πλήρης έλεγχος καταλόγου εργαλείων: 28 Σεπτεμβρίου 2026",
       footerPrivacyLink: "Πολιτική Απορρήτου",
       footerAccessibilityLink: "Προσβασιμότητα εργαλείων",
+      footerNavLabel: "Χρήσιμοι σύνδεσμοι",
+      footerTransparencyLink: "Διαφάνεια AI",
+      footerSchoolLink: "Χρήση AI στο σχολείο",
+      footerGuidesLink: "Οδηγοί ανά βαθμίδα και μάθημα",
+      footerAboutLink: "Ποιοι είμαστε / FAQ",
+      footerAboutHref: "/about.html",
+      footerPrivacyHref: "/privacy-policy.html",
+      footerAccessibilityHref: "/accessibility.html",
+      footerTransparencyHref: "/ai-transparency.html",
+      footerSchoolHref: "/school-ai-use.html",
+      footerGuidesHref: "/ai-ergaleia-gia-mathites.html",
+      footerThanks: "Ευχαριστίες στο",
+      footerThanksNote: "για τη δωρεάν τεχνογνωσία και το αφιέρωμα.",
+      footerThanksAria: "Ευχαριστίες στο dwrean.net",
       toolAgeLabel: "Όροι Χρήσης",
       shareToolBtn: "Μοιράσου",
       shareToolCopied: "Αντιγράφηκε!",
@@ -389,6 +403,20 @@
       footerLastChecked: window.AITOOLSKIDS_SITE_META?.toolCatalogAuditLabelEn || "Last full tool-catalog review: 5 September 2026",
       footerPrivacyLink: "Privacy Policy",
       footerAccessibilityLink: "Tool accessibility",
+      footerNavLabel: "Useful links",
+      footerTransparencyLink: "AI transparency",
+      footerSchoolLink: "AI use at school",
+      footerGuidesLink: "Guides by level and subject",
+      footerAboutLink: "About us / FAQ",
+      footerAboutHref: "/en/about.html",
+      footerPrivacyHref: "/en/privacy-policy.html",
+      footerAccessibilityHref: "/en/accessibility.html",
+      footerTransparencyHref: "/en/ai-transparency.html",
+      footerSchoolHref: "/en/school-ai-use.html",
+      footerGuidesHref: "/en/ai-tools-for-students.html",
+      footerThanks: "Thanks to",
+      footerThanksNote: "for the free know-how and the feature.",
+      footerThanksAria: "Thanks to dwrean.net",
       toolAgeLabel: "Terms of Use",
       shareToolBtn: "Share",
       shareToolCopied: "Copied!",
@@ -585,6 +613,13 @@
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       const key = node.getAttribute("data-i18n");
       node.textContent = t(key);
+    });
+    document.querySelectorAll("[data-i18n-href]").forEach((node) => {
+      node.setAttribute("href", t(node.getAttribute("data-i18n-href")));
+    });
+    document.querySelectorAll("[data-i18n-aria]").forEach((node) => {
+      const key = node.getAttribute("data-i18n-aria");
+      if (STRINGS[state.lang][key]) node.setAttribute("aria-label", STRINGS[state.lang][key]);
     });
     els.langElBtn.classList.toggle("active", state.lang === "el");
     els.langEnBtn.classList.toggle("active", state.lang === "en");

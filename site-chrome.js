@@ -16,7 +16,8 @@
       byLevel: "Ποιος είσαι; Βρες το σωστό AI", whatToDo: "Τι θέλεις να κάνεις με AI;", practice: "Δες πού χρειάζεσαι εξάσκηση", curriculum: "Βρες τη σχολική ενότητα · Ύλη 2026–27", characters: "Χαρακτήρες Ιστορίας",
       classroom: "Για εκπαιδευτικούς", gsl: "Ελληνική Νοηματική", special: "Ειδική Εκπαίδευση", university: "Φοιτητές ΑΕΙ · Πιλοτικό",
       footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Οι λειτουργίες AI είναι προαιρετικές και τεκμηριώνονται στη Διαφάνεια AI.",
-      privacy: "Πολιτική Απορρήτου", accessibility: "Προσβασιμότητα εργαλείων", transparency: "Διαφάνεια AI", school: "Χρήση AI στο σχολείο", guides: "Οδηγοί ανά βαθμίδα και μάθημα", about: "Ποιοι είμαστε / FAQ", aboutHref: "/about.html",
+      privacy: "Πολιτική Απορρήτου", accessibility: "Προσβασιμότητα εργαλείων", transparency: "Διαφάνεια AI", school: "Χρήση AI στο σχολείο", guides: "Οδηγοί ανά βαθμίδα και μάθημα", about: "Ποιοι είμαστε / FAQ",
+      privacyHref: "/privacy-policy.html", accessibilityHref: "/accessibility.html", transparencyHref: "/ai-transparency.html", schoolHref: "/school-ai-use.html", guidesHref: "/ai-ergaleia-gia-mathites.html", aboutHref: "/about.html",
       methodology: "Πώς επιλέγουμε & ελέγχουμε τα εργαλεία", report: "Βρήκες λάθος ή παλιωμένη πληροφορία; ↗",
       thanks: "Ευχαριστίες στο", thanksNote: "για τη δωρεάν τεχνογνωσία και το αφιέρωμα."
     },
@@ -27,11 +28,16 @@
       byLevel: "Who are you? Find the right AI", whatToDo: "What do you want to do with AI?", practice: "Find what needs practice", curriculum: "Find a school unit · Curriculum 2026–27", characters: "History characters",
       classroom: "For educators", gsl: "Greek Sign Language", special: "Special Education", university: "University students · Pilot",
       footerText: "Independent project. It is not an official product or partnership of any AI provider. AI features are optional and documented in AI Transparency.",
-      privacy: "Privacy Policy", accessibility: "Tool accessibility", transparency: "AI transparency", school: "AI use at school", guides: "Guides by level and subject", about: "About us / FAQ", aboutHref: "/en/about.html",
+      privacy: "Privacy Policy", accessibility: "Tool accessibility", transparency: "AI transparency", school: "AI use at school", guides: "Guides by level and subject", about: "About us / FAQ",
+      privacyHref: "/en/privacy-policy.html", accessibilityHref: "/en/accessibility.html", transparencyHref: "/en/ai-transparency.html", schoolHref: "/en/school-ai-use.html", guidesHref: "/en/ai-tools-for-students.html", aboutHref: "/en/about.html",
       methodology: "How we select & verify tools", report: "Report outdated information ↗",
       thanks: "Thanks to", thanksNote: "for the free know-how and the feature."
     }
   };
+
+  if(location.pathname.startsWith("/en/")){
+    try{ localStorage.setItem("aitools4kids_lang", "en"); }catch(_){}
+  }
 
   function lang(){
     return (document.documentElement.lang || "el").toLowerCase().startsWith("en") ? "en" : "el";
@@ -119,11 +125,11 @@
           <p class="chrome-footer__extra"><a href="/methodology.html" data-chrome="methodology"></a> · <a href="/report-error.html" data-chrome="report"></a></p>
         </div>
         <nav class="chrome-footer__links" data-chrome-aria="footerLabel">
-          <a href="/privacy-policy.html" data-chrome="privacy"></a>
-          <a href="/accessibility.html" data-chrome="accessibility"></a>
-          <a href="/ai-transparency.html" data-chrome="transparency"></a>
-          <a href="/school-ai-use.html" data-chrome="school"></a>
-          <a href="/ai-ergaleia-gia-mathites.html" data-chrome="guides"></a>
+          <a href="/privacy-policy.html" data-chrome="privacy" data-chrome-href="privacyHref"></a>
+          <a href="/accessibility.html" data-chrome="accessibility" data-chrome-href="accessibilityHref"></a>
+          <a href="/ai-transparency.html" data-chrome="transparency" data-chrome-href="transparencyHref"></a>
+          <a href="/school-ai-use.html" data-chrome="school" data-chrome-href="schoolHref"></a>
+          <a href="/ai-ergaleia-gia-mathites.html" data-chrome="guides" data-chrome-href="guidesHref"></a>
           <a href="/about.html" data-chrome="about" data-chrome-href="aboutHref"></a>
         </nav>
         <div class="chrome-footer__thanks">

@@ -16,7 +16,7 @@
       byLevel: "Ποιος είσαι; Βρες το σωστό AI", whatToDo: "Τι θέλεις να κάνεις με AI;", practice: "Δες πού χρειάζεσαι εξάσκηση", curriculum: "Βρες τη σχολική ενότητα · Ύλη 2026–27", characters: "Χαρακτήρες Ιστορίας",
       classroom: "Για εκπαιδευτικούς", gsl: "Ελληνική Νοηματική", special: "Ειδική Εκπαίδευση", university: "Φοιτητές ΑΕΙ · Πιλοτικό",
       footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Οι λειτουργίες AI είναι προαιρετικές και τεκμηριώνονται στη Διαφάνεια AI.",
-      privacy: "Πολιτική Απορρήτου", accessibility: "Προσβασιμότητα εργαλείων", transparency: "Διαφάνεια AI", school: "Χρήση AI στο σχολείο", guides: "Οδηγοί ανά βαθμίδα και μάθημα", about: "Ποιοι είμαστε / FAQ",
+      privacy: "Πολιτική Απορρήτου", accessibility: "Προσβασιμότητα εργαλείων", transparency: "Διαφάνεια AI", school: "Χρήση AI στο σχολείο", guides: "Οδηγοί ανά βαθμίδα και μάθημα", about: "Ποιοι είμαστε / FAQ", aboutHref: "/about.html",
       methodology: "Πώς επιλέγουμε & ελέγχουμε τα εργαλεία", report: "Βρήκες λάθος ή παλιωμένη πληροφορία; ↗",
       thanks: "Ευχαριστίες στο", thanksNote: "για τη δωρεάν τεχνογνωσία και το αφιέρωμα."
     },
@@ -27,7 +27,7 @@
       byLevel: "Who are you? Find the right AI", whatToDo: "What do you want to do with AI?", practice: "Find what needs practice", curriculum: "Find a school unit · Curriculum 2026–27", characters: "History characters",
       classroom: "For educators", gsl: "Greek Sign Language", special: "Special Education", university: "University students · Pilot",
       footerText: "Independent project. It is not an official product or partnership of any AI provider. AI features are optional and documented in AI Transparency.",
-      privacy: "Privacy Policy", accessibility: "Tool accessibility", transparency: "AI transparency", school: "AI use at school", guides: "Guides by level and subject", about: "About / FAQ",
+      privacy: "Privacy Policy", accessibility: "Tool accessibility", transparency: "AI transparency", school: "AI use at school", guides: "Guides by level and subject", about: "About us / FAQ", aboutHref: "/en/about.html",
       methodology: "How we select & verify tools", report: "Report outdated information ↗",
       thanks: "Thanks to", thanksNote: "for the free know-how and the feature."
     }
@@ -124,7 +124,7 @@
           <a href="/ai-transparency.html" data-chrome="transparency"></a>
           <a href="/school-ai-use.html" data-chrome="school"></a>
           <a href="/ai-ergaleia-gia-mathites.html" data-chrome="guides"></a>
-          <a href="/about.html" data-chrome="about"></a>
+          <a href="/about.html" data-chrome="about" data-chrome-href="aboutHref"></a>
         </nav>
         <div class="chrome-footer__thanks">
           <a class="chrome-footer__logo" href="https://www.dwrean.net/" target="_blank" rel="noopener noreferrer" aria-label="dwrean.net"><img src="/assets/dwrean-logo.jpg" width="150" height="48" alt="dwrean.net" loading="lazy" decoding="async"></a>
@@ -183,6 +183,10 @@
     document.querySelectorAll("[data-chrome]").forEach((node) => {
       const value = c[node.getAttribute("data-chrome")];
       if(value) node.textContent = value;
+    });
+    document.querySelectorAll("[data-chrome-href]").forEach((node) => {
+      const value = c[node.getAttribute("data-chrome-href")];
+      if(value) node.setAttribute("href", value);
     });
     document.querySelectorAll("[data-chrome-aria]").forEach((node) => {
       const value = c[node.getAttribute("data-chrome-aria")];

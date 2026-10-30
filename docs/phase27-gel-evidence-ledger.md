@@ -54,3 +54,15 @@ Starting from main `cc778e343885819a3d8e08790985dd10c323ea48`, two more *curated
 These exact pages belong to verified grade-specific textbook manifestations. `sourceCoverage: curated-examples`, `annualScopeVerified: false`; this is **not** a declaration that every possible exercise under the broad skill is covered, nor a completed independent curriculum audit. The new contract test checks both study-source and audio-purpose *source retrieval* (official-page content), not provider-backed spoken lesson generation. Do not treat a passing contract as full five-gate UAT. Remaining 36 topics stay explicitly fail-closed, including G GEL English and Economics pending distinct annual scope/program verification.
 
 Static source mapping coverage after Phase 34: **636/672**; source evidence still pending: **36/672**. Production release remains blocked until the requested full curriculum, source retrieval, AI Study, and full Listen UAT is successfully completed.
+
+## Phase 35: 11 curated official-schoolbook practice references (30/10/2026)
+
+The Phase 34 draft PR #256 source mapping inventory increases from 636/672 to **647/672**, with **25/672** entries still explicitly fail-closed. This does NOT establish full five-gate UAT.
+
+* 5 Ancient A skill labels: grammar/handbook excerpts for impersonal infinitive, participle forms and uses, comparative second term, adverbial and nominal predicatives, and conjunction categories.
+* 4 Ancient B skill labels: verified chapters from the officially catalogued **reference** Grammar (etymology, morphological categories, moods/tenses, nominal verb forms). Manual source resolution now accepts same-subject officially catalogued reference/supplementary books ONLY for explicitly reviewed source entries.
+* 2 Greek Language B skill labels: same-grade schoolbook practice on examples supporting an argument and argumentative paragraph structure.
+
+Every new mapping retains `annualScopeVerified:false` and `sourceCoverage:curated-examples`, with explicit reviewer limitations. Official source matching alone does not certify complete coverage of the broad skill. The Phase 35 test checks study and audio-purpose official text retrieval, not provider-generated explanation or spoken audio.
+
+Remaining (25): Ancient B 4, Ancient G 6, Greek A 2, Greek B 6, English G 5, Economics G 2. No unseen passage is falsely treated as an immutable schoolbook passage. English G lacks an independently verified same-grade book in this catalog; Economics G two topics lack proof of annual examinable scope. No automatic 100% promotion.

@@ -39,4 +39,4 @@ for (const [label,count,terms] of examples) {
     console.log(JSON.stringify({topic:label,purpose:purpose||"study",chars:r.body.text.length,sourceCount:count,pass:true}));
   }
 }
-assert.equal(pending.count,36);
+assert.equal(pending.count,25);

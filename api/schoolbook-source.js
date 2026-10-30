@@ -7,6 +7,7 @@ const GYMNASIUM_SECTIONS = require('../gymnasium-book-sections-2026-2027.js');
 const GEL_ENGLISH_PDF = require('../gel-english-official-pdf-units-2026-2027.js');
 const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
+const EPAL_CHEMISTRY_B_SCOPE = require('../epal-chemistry-scope.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
   const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();
@@ -2368,10 +2369,13 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
   }
 
   const verifiedRanges = epalVerifiedPageRanges(mapping, subject, topic);
+  const chemistryBScope = EPAL_CHEMISTRY_B_SCOPE.selected(mapping, subject, topic);
   const requests = verifiedRanges || [{
-    pdfPage: mapping.pdfPage,
+    // The curriculum starts at §1.1 (printed page 9), a page before the
+    // auto-generated mapping's first page. Verify it at runtime.
+    pdfPage: chemistryBScope ? 10 : mapping.pdfPage,
     pdfPageEnd: mapping.pdfPageEnd,
-    verifiedHeading: mapping.heading
+    verifiedHeading: chemistryBScope ? "οργανική" : mapping.heading
   }];
   const extractedParts = await Promise.all(requests.map(range =>
     OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({
@@ -2395,6 +2399,19 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     });
   }
 
+  const rawOfficialText = extractedParts.map(part => part.text).join("\n\n");
+  const selected = chemistryBScope
+    ? EPAL_CHEMISTRY_B_SCOPE.scope(rawOfficialText)
+    : { ok: true, text: rawOfficialText, excluded: [] };
+  if (!selected.ok) {
+    return res.status(409).json({
+      ...base,
+      error: selected.error,
+      sourceUrl: mapping.viewUrl,
+      message: "Δεν επαληθεύτηκαν όλα τα όρια της διδακτέας ύλης Χημείας Β΄ ΕΠΑΛ στο επίσημο βιβλίο. Δεν θα εμφανιστεί ανεξέλεγκτο περιεχόμενο."
+    });
+  }
+
   res.setHeader("Cache-Control", "public, s-maxage=86400, stale-while-revalidate=604800");
   return res.status(200).json({
     grounded: true,
@@ -2411,14 +2428,14 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     schoolbookSource: mapping.viewUrl,
     annualGuidanceSource: EPAL_GUIDANCE_2026_2027,
     curriculumSource: EPAL_GUIDANCE_2026_2027,
-    mappingStatus: verifiedRanges ? "official-epal-pdf-disjoint-sections" : "official-epal-pdf-section",
+    mappingStatus: chemistryBScope ? "official-epal-pdf-curriculum-scoped" : (verifiedRanges ? "official-epal-pdf-disjoint-sections" : "official-epal-pdf-section"),
     mappingMethod: mapping.method,
     mappingConfidence: mapping.confidence,
     rangeCapped: !!mapping.rangeCapped,
     lastVerified: EPAL_BOOK_CATALOG.generatedAt || null,
     annualScopeVerified: false,
-    curriculumExclusions: verifiedRanges ? ["§1.2", "§1.3", "§1.4"] : [],
-    curriculumScopeApplied: !!verifiedRanges,
+    curriculumExclusions: selected.excluded.length ? selected.excluded : (verifiedRanges ? ["§1.2", "§1.3", "§1.4"] : []),
+    curriculumScopeApplied: !!verifiedRanges || chemistryBScope,
     sourceUrl: mapping.viewUrl,
     sourceUrls: [mapping.viewUrl],
     canonicalSourceUrl: mapping.downloadUrl + "#page=" + requests[0].pdfPage,
@@ -2428,11 +2445,10 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     pdfPageRanges: verifiedRanges ? verifiedRanges.map(({ pdfPage, pdfPageEnd }) => ({ start: pdfPage, end: pdfPageEnd })) : undefined,
     pdfTotalPages: extracted.totalPages || null,
     labelParaphrase: false,
-    verifiedHeading: verifiedRanges ? verifiedRanges.map(range => range.verifiedHeading).join(" + ") : mapping.heading,
+    verifiedHeading: chemistryBScope ? requests[0].verifiedHeading : (verifiedRanges ? verifiedRanges.map(range => range.verifiedHeading).join(" + ") : mapping.heading),
     sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION } : undefined,
     text: (() => {
-      const selectedText = extractedParts.map(part => part.text).join("\n\n");
-      return completeAudio ? completeText(selectedText, topic) : selectedText.slice(0, 60000);
+      return completeAudio ? completeText(selected.text, topic) : selected.text.slice(0, 60000);
     })()
   });
 }

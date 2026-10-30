@@ -1,0 +1,50 @@
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+import { readFileSync } from "node:fs";
+const require=createRequire(import.meta.url);
+const inventory=require("../gel-schoolbook-source-map-2026-2027.js");
+const overrides=require("../gel-schoolbook-manual-overrides-2026-2027.js");
+const phase25=require("../gel-schoolbook-manual-overrides-phase25-2026-2027.js");
+const reviewed=require("../gel-unmapped-dispositions-2026-2027.js");
+const endpoint=require("../api/schoolbook-source.js");
+const availability=require("../secondary-grounding-availability-2026-2027.js");
+const existing=new Set([...overrides.entries,...phase25.entries].map(x=>x.subjectId+"\n"+x.label));
+const pending=[];
+for(const subject of Object.values(inventory.all()))for(const t of subject.topicMappings||[]){
+  if((t.status==="exact-html"&&t.confidence==="high")||t.status==="exact-pdf"||existing.has(subject.subjectId+"\n"+t.label))continue;
+  pending.push({subjectId:subject.subjectId,label:t.label,topicId:t.topicId});
+}
+assert.equal(pending.length,41);
+assert.equal(reviewed.count,41);
+const kinds={};
+for(const row of pending){
+  const item=reviewed.get(row.subjectId,row.label);
+  assert.ok(item,"Each live source gap needs an explicit decision: "+row.subjectId+" "+row.label);
+  assert.equal(item.sourceTopicId,row.topicId);
+  assert.ok(item.reason?.length>30);
+  assert.equal(item.action,"learner-supplied-source");
+  assert.equal(availability.has(row.subjectId,row.label),false,"Blocked source must not appear as source-verified lesson");
+  const r=endpoint._test.resolveGelInventoryTopic(row.subjectId,row.label);
+  assert.equal(r?.runtimeEligible,false);
+  kinds[item.reviewStatus]=(kinds[item.reviewStatus]||0)+1;
+  const response=await endpoint.resolveOfficialSchoolbookSource(row.subjectId,row.label);
+  assert.equal(response.status,404);
+  assert.equal(response.body?.grounded,false);
+  assert.equal(response.body?.mappedToVerifiedSchoolbook,false);
+  assert.equal(response.body?.reviewDisposition,item.reviewStatus);
+  assert.equal(response.body?.nextStep,"attach_source_excerpt");
+  assert.match(response.body?.message||"",/Δικές σου σημειώσεις/);
+  assert.match(response.body?.messageEn||"",/Your own notes/);
+}
+assert.equal(Object.values(kinds).reduce((a,b)=>a+b,0),41);
+assert.equal(kinds["no-confirmed-2026-27-book-unit"],5);
+assert.equal(kinds["out-of-current-verified-examinable-scope"],2);
+assert.equal(kinds["broad-literary-theme-without-verified-text"],2);
+assert.equal(kinds["practice-skill-not-exact-book-unit"],32);
+const unique=new Set(reviewed.entries.map(e=>e.subjectId+"\n"+e.label));
+assert.equal(unique.size,41);
+const html=readFileSync(new URL("../study.html",import.meta.url),"utf8");
+assert.match(html,/notesFile/);
+assert.match(html,/notesPaste/);
+assert.match(html,/lastBody\?\.messageEn/);
+console.log("GEL_UNVERIFIED_41_TRIAGED_FAIL_CLOSED",JSON.stringify(kinds));

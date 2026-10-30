@@ -16,7 +16,7 @@ const verdict = (state, reason = null, extra = {}) => ({ state, reason, ...extra
 const official = url => {
   try {
     const u = new URL(String(url || ''));
-    return u.protocol === 'https:' && ['ebooks.edu.gr', 'www.ebooks.edu.gr'].includes(u.hostname) &&
+    return u.protocol === 'https:' && (u.hostname === 'ebooks.edu.gr' || u.hostname.endsWith('.ebooks.edu.gr')) &&
       u.pathname.startsWith('/ebooks/');
   } catch { return false; }
 };

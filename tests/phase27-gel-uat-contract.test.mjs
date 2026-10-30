@@ -34,6 +34,8 @@ for (const [s, l] of [
 const url = 'https://ebooks.edu.gr/ebooks/v/html/8547/2676/book/chapter.html';
 assert.equal(verifyRetrieval(200, { grounded:true, text:'Επίσημο κείμενο. '.repeat(18), sourceUrl:url }).state,'passed');
 assert.equal(verifyRetrieval(200, { grounded:true, text:'Επίσημο κείμενο. '.repeat(18), sourceUrl:'https://example.com' }).state,'failed');
+assert.equal(verifyRetrieval(200, { grounded:true, text:'Κείμενο βιβλίου. '.repeat(18), sourceUrl:'https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2696/index.html' }).state,'passed');
+assert.equal(verifyRetrieval(200, { grounded:true, text:'Κείμενο βιβλίου. '.repeat(18), sourceUrl:'https://fakeebooks.edu.gr/ebooks/v/html/8547/2696/index.html' }).state,'failed');
 assert.equal(verifyStudy(200, { groundingValidated:true, text:'Επαληθευμένη επίσημη επεξήγηση.' }).state,'passed');
 assert.equal(verifyStudy(200, { groundingValidated:false, text:'Εξήγηση από μνήμη μοντέλου.' }).state,'failed');
 assert.equal(verifyAudio(200, { verified:true, text:'Σύνοψη με πλήρη κάλυψη. '.repeat(12),

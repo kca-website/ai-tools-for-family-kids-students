@@ -30,8 +30,8 @@ function entrySources(entry) {
 }
 
 assert.equal(overrides.schoolYear, "2026-2027");
-assert.equal(overrides.count, 327);
-assert.equal(overrides.entries.length, 327);
+assert.equal(overrides.count, 331);
+assert.equal(overrides.entries.length, 331);
 
 const keys = new Set();
 let medium = 0;
@@ -116,9 +116,9 @@ for (const entry of overrides.entries) {
 }
 
 assert.equal(medium, 14);
-assert.equal(manual, 313);
+assert.equal(manual, 317);
 assert.equal(discovered, 183);
-assert.equal(directVerified, 21);
+assert.equal(directVerified, 25);
 assert.equal(multiSource, 37);
 
 // Live source audit: every unique official page must still load and contain

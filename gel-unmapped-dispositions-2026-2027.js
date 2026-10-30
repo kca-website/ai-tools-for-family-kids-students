@@ -37,50 +37,6 @@ const entries = Object.freeze([
     "action": "learner-supplied-source"
   },
   {
-    "subjectId": "archaia-b-lykeiou",
-    "label": "Συντακτικές λειτουργίες όρων της πρότασης",
-    "sourceTopicId": "archaia-b-lykeiou.topic-14",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
-    "subjectId": "archaia-b-lykeiou",
-    "label": "Δευτερεύουσες προτάσεις",
-    "sourceTopicId": "archaia-b-lykeiou.topic-15",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
-    "subjectId": "archaia-b-lykeiou",
-    "label": "Υποθετικός λόγος και σύνθετα συντακτικά φαινόμενα",
-    "sourceTopicId": "archaia-b-lykeiou.topic-16",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
-    "subjectId": "ekthesi-b-lykeiou",
-    "label": "Λογοτεχνική ερμηνεία με κειμενικούς δείκτες",
-    "sourceTopicId": "ekthesi-b-lykeiou.mapped-topic-8",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
     "subjectId": "ekthesi-b-lykeiou",
     "label": "Τρόποι πειθούς",
     "sourceTopicId": "ekthesi-b.persuasion-modes-confusion",

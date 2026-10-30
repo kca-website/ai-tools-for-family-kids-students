@@ -65,4 +65,4 @@ for (const row of cases) {
     }));
   }
 }
-assert.equal(pending.count, 25);
+assert.equal(pending.count, 21);

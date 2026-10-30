@@ -45,4 +45,4 @@ for(const [subject,label,count,terms] of cases){
    console.log(JSON.stringify({subject,label,purpose:purpose||"study",chars:text.length,sourceCount:count,pass:true}));
  }
 }
-assert.equal(pending.count,25);
+assert.equal(pending.count,21);

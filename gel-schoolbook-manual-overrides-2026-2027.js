@@ -6202,6 +6202,90 @@ const entries = Object.freeze([
         "heading": "Παράγραφος. Ανάπτυξη με σύγκριση και αντίθεση"
       }
     ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Συντακτικές λειτουργίες όρων της πρότασης",
+    "sourceTopicId": "archaia-b-lykeiou.topic-14",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2397",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade Rhetoric book §1–3 comments identify genitive of cause, attributive participles, objects, predicatives and adverbial modifiers; curated sentence analysis example only.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+    "heading": "γλωσσικά σχόλια",
+    "sources": [
+      {
+        "work": "8547/2397",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+        "heading": "γλωσσικά σχόλια"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Δευτερεύουσες προτάσεις",
+    "sourceTopicId": "archaia-b-lykeiou.topic-15",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2397",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade Rhetoric §1–3 explicitly asks students to replace subordinate clauses with syntax equivalents; practice on one text only.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+    "heading": "Ασκήσεις",
+    "sources": [
+      {
+        "work": "8547/2397",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+        "heading": "Ασκήσεις"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Υποθετικός λόγος και σύνθετα συντακτικά φαινόμενα",
+    "sourceTopicId": "archaia-b-lykeiou.topic-16",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2397",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade Rhetoric §1–3 asks students to identify overt/implicit conditional constructions, supported by authentic ancient passage and commentary; not comprehensive conditional theory.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+    "heading": "Ασκήσεις",
+    "sources": [
+      {
+        "work": "8547/2397",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+        "heading": "Ασκήσεις"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Λογοτεχνική ερμηνεία με κειμενικούς δείκτες",
+    "sourceTopicId": "ekthesi-b-lykeiou.mapped-topic-8",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade language textbook's literary criticism example directs the reader to substantiate interpretations with distinctive passages, narrative, language and style. Curated literary reading skill; not a full fixed interpretation of a selected literary text.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+    "heading": "Λογοτεχνική κριτική",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+        "heading": "Λογοτεχνική κριτική"
+      }
+    ]
   }
 ]);
 

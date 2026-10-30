@@ -72,6 +72,7 @@ jobs:
           node tests/phase33-gel-b-language-curated-official-evidence.mjs
           node tests/phase34-gel-curated-language-official-evidence.mjs
           node tests/phase35-gel-ancient-language-curated-official-evidence.mjs
+          node tests/phase36-gel-rhetoric-evidence.mjs
       - name: Special Education coverage boundary
         run: |
           node tests/special-gym-annual-mapping-smoke.mjs
@@ -82,3 +83,6 @@ jobs:
           node tests/study-context-smoke.mjs
           node tests/study-context-navigation-smoke.mjs
           node tests/phase11-study-tools-grounding-smoke.mjs
+
+      - name: Desktop and mobile study action disclosure
+        run: node tests/phase36-study-responsive-actions.mjs

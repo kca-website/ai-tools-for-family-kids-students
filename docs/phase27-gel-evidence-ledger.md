@@ -66,3 +66,16 @@ The Phase 34 draft PR #256 source mapping inventory increases from 636/672 to **
 Every new mapping retains `annualScopeVerified:false` and `sourceCoverage:curated-examples`, with explicit reviewer limitations. Official source matching alone does not certify complete coverage of the broad skill. The Phase 35 test checks study and audio-purpose official text retrieval, not provider-generated explanation or spoken audio.
 
 Remaining (25): Ancient B 4, Ancient G 6, Greek A 2, Greek B 6, English G 5, Economics G 2. No unseen passage is falsely treated as an immutable schoolbook passage. English G lacks an independently verified same-grade book in this catalog; Economics G two topics lack proof of annual examinable scope. No automatic 100% promotion.
+
+## Phase 36: 4 additional verified B GEL textbook examples and responsive study UI (30/10/2026)
+
+Static source mappings: **651/672**. Still **21 blocked**; none promoted without authenticated textbook source.
+
+* Ancient B: one real Lysias, *Υπέρ Μαντιθέου*, §1–3 page from the officially catalogued *Ρητορικά Κείμενα Β΄*, has **grammatical case/function annotations**, a **subordinate-clauses exercise**, and an **explicit conditional-construction exercise**. This is curated passage-level practice for three broad skills, not an entire theory textbook.
+* Greek Language B: its same-grade *Έκφραση–Έκθεση* chapter on literary criticism uses concrete, quoted passages to justify analysis, giving a source-selected example for «Λογοτεχνική ερμηνεία με κειμενικούς δείκτες».
+
+The two distinct official URLs are checked by live source tests for both study and audio-source purposes; no broad curriculum annual-scope claim is added.
+
+Responsive study actions: desktop shows **every action** with no More accordion; mobile defaults to a single native `details/summary` disclosure labeled «Διάλεξε ενέργεια για την ενότητα ή τις σημειώσεις σου», opened only by student choice. EL/EN retained. Dedicated Playwright desktop/tablet/mobile action visibility checks.
+
+Unresolved 21 after Phase 36: 2 broad A literature themes, 1 B Ancient unseen passage, 5 B Greek Language broad skills, 5 G English unconfirmed grammar unit sources, 6 G Ancient passage/skill labels, 2 G Economics out-of-examinable-scope labels. These remain blocked for **official-source required** requests, with learner-provided notes/text option where applicable. Source-backed count is not a five-gate certified percentage.

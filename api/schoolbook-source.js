@@ -853,7 +853,14 @@ const ALIASES = {
   "english-b-gymnasium": "english-b-gymnasiou",
   "agglika-b-gymnasiou": "english-b-gymnasiou",
   "religion-b-gymnasiou": "thriskeftika-b-gymnasiou",
-  "religious-studies-b-gymnasiou": "thriskeftika-b-gymnasiou"
+  "religious-studies-b-gymnasiou": "thriskeftika-b-gymnasiou",
+  // The 2026–27 GEL navigation catalog uses these display ids, whereas the
+  // verified schoolbook inventories use the corresponding official/quiz ids.
+  // Resolve both at the API boundary, including links from older saved pages.
+  "algebra-a-lykeiou": "mathimatika-a-lykeiou",
+  "neoelliniki-a-lykeiou": "ekthesi-a-lykeiou",
+  "neoelliniki-b-lykeiou": "ekthesi-b-lykeiou",
+  "neoelliniki-g-lykeiou": "ekthesi-g-lykeiou"
 };
 
 const RELIGION_B_OFFICIAL_SOURCE_MATERIAL = Object.freeze({

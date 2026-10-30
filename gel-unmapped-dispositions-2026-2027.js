@@ -81,17 +81,6 @@ const entries = Object.freeze([
     "action": "learner-supplied-source"
   },
   {
-    "subjectId": "ekthesi-a-lykeiou",
-    "label": "Ισχυρισμός και τεκμηρίωση",
-    "sourceTopicId": "neoelliniki-a-lykeiou.topic-4",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
     "subjectId": "archaia-b-lykeiou",
     "label": "Αδίδακτο πεζό κείμενο αττικής διαλέκτου",
     "sourceTopicId": "archaia-b-lykeiou.topic-9",
@@ -227,17 +216,6 @@ const entries = Object.freeze([
     "subjectId": "ekthesi-b-lykeiou",
     "label": "Ισορροπία δοκιμίου",
     "sourceTopicId": "ekthesi-b.essay-structure-imbalance",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
-    "subjectId": "ekthesi-b-lykeiou",
-    "label": "Δομή κειμένου",
-    "sourceTopicId": "ekthesi.intro-conclusion-function",
     "reviewStatus": "practice-skill-not-exact-book-unit",
     "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
     "sourceStatus": "needs-manual-review",

@@ -5894,6 +5894,53 @@ const entries = Object.freeze([
         "heading": "Η οπτική γωνία του δημοσιογράφου"
       }
     ]
+  },
+  {
+    "subjectId": "ekthesi-a-lykeiou",
+    "label": "Ισχυρισμός και τεκμηρίωση",
+    "sourceTopicId": "neoelliniki-a-lykeiou.topic-4",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2370",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "The same-grade official A GEL textbook VII. Οργάνωση του λόγου explicitly explains how a personal claim is supported with arguments, reasoning, examples, and evidence, and analyzes a Demosthenes argument. Authentic full-page practice source; not a claim of complete coverage of all forms of substantiation or annual topic-level scope.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexa_7.html",
+    "heading": "VII. Οργάνωση του λόγου",
+    "sources": [
+      {
+        "work": "8547/2370",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexa_7.html",
+        "heading": "VII. Οργάνωση του λόγου"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Δομή κειμένου",
+    "sourceTopicId": "ekthesi.intro-conclusion-function",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "The same-grade B GEL textbook explicitly teaches inverted-pyramid article organization and paragraph structure (topic sentence, supporting details, closing sentence). Two curated official examples for structuring text, not comprehensive coverage of all text types, introductions/conclusions, or annual scope.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_01.htm",
+    "heading": "Η οργάνωση της είδησης",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_01.htm",
+        "heading": "Η οργάνωση της είδησης"
+      },
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexf_11.htm",
+        "heading": "Παράγραφος. Ανάπτυξη με σύγκριση και αντίθεση"
+      }
+    ]
   }
 ]);
 

@@ -1,0 +1,19 @@
+name: GEL live AI Study and audio canary
+on:
+  pull_request:
+    branches: [main]
+    paths: ['tests/phase39-gel-live-canary.mjs']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  one-real-lesson:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Real official source, tutor response, whole-section audio canary
+        run: node tests/phase39-gel-live-canary.mjs

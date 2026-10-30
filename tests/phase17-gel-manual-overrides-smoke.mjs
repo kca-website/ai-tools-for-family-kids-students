@@ -119,7 +119,7 @@ assert.equal(medium, 14);
 assert.equal(manual, 297);
 assert.equal(discovered, 183);
 assert.equal(directVerified, 5);
-assert.equal(multiSource, 28);
+assert.equal(multiSource, 29);
 
 // Live source audit: every unique official page must still load and contain
 // every manually accepted official heading for that page.

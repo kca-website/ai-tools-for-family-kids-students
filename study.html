@@ -110,8 +110,14 @@
       <label for="topicPick" data-el="Ενότητα / θέμα" data-en="Unit / topic">Ενότητα / θέμα</label><select id="topicPick"></select>
       <div id="customTopicFields">
         <label for="topicCustom" data-el="Ή γράψε δικό σου θέμα" data-en="Or enter your own topic">Ή γράψε δικό σου θέμα</label><textarea id="topicCustom" placeholder="π.χ. Σύγκριση δεκαδικών"></textarea>
+        
         <p class="micro" data-el="Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη." data-en="Selections come from the site's Curriculum Map. If something is not mapped, you can enter it manually without presenting it as official curriculum.">Οι επιλογές προέρχονται από τον ίδιο Χάρτη Ύλης του site. Αν κάτι δεν είναι χαρτογραφημένο, μπορείς να γράψεις το θέμα χωρίς να το παρουσιάζουμε ως επίσημη ύλη.</p>
       </div>
+      <div id="gelPracticeTopicWrap" class="hidden" style="margin-top:12px">
+          <label for="gelPracticeTopic" data-el="Εξάσκηση με δικό σου κείμενο (ΓΕΛ)" data-en="Practise with your own text (General Lyceum)">Εξάσκηση με δικό σου κείμενο (ΓΕΛ)</label>
+          <select id="gelPracticeTopic"></select>
+          <p class="micro" data-el="Αυτές είναι δεξιότητες ή θεματικές χωρίς επαληθευμένη αυτοτελή σχολική ενότητα. Επίλεξε τι θέλεις να εξασκήσεις και ανέβασε το πραγματικό κείμενο ή τις σημειώσεις σου παρακάτω. Δεν το παρουσιάζουμε ως επίσημο σχολικό βιβλίο." data-en="These skills and themes do not have a verified standalone textbook unit. Choose what to practise, then add the actual text or your notes below. We do not label them as official textbook units.">Αυτές είναι δεξιότητες ή θεματικές χωρίς επαληθευμένη αυτοτελή σχολική ενότητα. Επίλεξε τι θέλεις να εξασκήσεις και ανέβασε το πραγματικό κείμενο ή τις σημειώσεις σου παρακάτω. Δεν το παρουσιάζουμε ως επίσημο σχολικό βιβλίο.</p>
+        </div>
       <p id="secondaryGroundingNotice" class="micro hidden" data-el="Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί με την επίσημη σχολική πηγή." data-en="Only units connected to and checked against the official school source are shown.">Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί με την επίσημη σχολική πηγή.</p>
       <p class="micro">Πώς ξεχωρίζουμε επαληθευμένη ενότητα από θεματικό σημείο αναφοράς: <a href="/ai-me-elliniki-sxoliki-yli.html">AI με ελληνική σχολική ύλη</a>.</p>
 
@@ -221,6 +227,7 @@
 <script src="/environment-studies-data.js"></script>
 <script src="/general-education-book-sections-2026-2027.js"></script>
 <script src="/secondary-grounding-availability-2026-2027.js"></script>
+<script src="/gel-practice-only-topics-2026-2027.js"></script>
 <script src="/gel-english-official-pdf-units-2026-2027.js"></script>
 <script src="/special-education-book-sections-2026-2027.js"></script>
 <script src="/study-tool-picks.js"></script>
@@ -241,7 +248,7 @@
   const $=id=>document.getElementById(id), resolver=()=>window.AITOOLSKIDS_CURRICULUM_RESOLVER;
   const savedStudyContext=window.AITOOLSKIDS_STUDY_CONTEXT?.readPersisted();
   const grades={primary:[['a','Α΄'],['b','Β΄'],['c','Γ΄'],['d','Δ΄'],['e','Ε΄'],['st','ΣΤ΄']],middle:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],high:[['a','Α΄'],['b','Β΄'],['c','Γ΄']],special:[['a','Α΄ Ειδικού Γυμνασίου'],['b','Β΄ Ειδικού Γυμνασίου'],['c','Γ΄ Ειδικού Γυμνασίου'],['la','Α΄ Ειδικού Λυκείου'],['lb','Β΄ Ειδικού Λυκείου'],['lc','Γ΄ Ειδικού Λυκείου'],['ea','Α΄ Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ.'],['eb','Β΄ Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ.'],['ec','Γ΄ Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ.'],['ed','Δ΄ Λυκείου ΕΝ.Ε.Ε.ΓΥ.-Λ.']]};
-  function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();renderCharacterRoutes();}
+  function localize(){document.documentElement.lang=lang;document.querySelectorAll('[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);document.querySelectorAll('option[data-el][data-en]').forEach(n=>n.textContent=n.dataset[lang]);if($('gelPracticeTopic')?.options?.length){const v=$('gelPracticeTopic').value;populateGelPracticeTopics();if([...$('gelPracticeTopic').options].some(o=>o.value===v))$('gelPracticeTopic').value=v;}$('topicCustom').placeholder=lang==='el'?'π.χ. Σύγκριση δεκαδικών':'e.g. Comparing decimals';$('elBtn').classList.toggle('active',lang==='el');$('enBtn').classList.toggle('active',lang==='en');$('elBtn').setAttribute('aria-pressed',String(lang==='el'));$('enBtn').setAttribute('aria-pressed',String(lang==='en'));populateGrades();renderCharacterRoutes();}
   function saveLang(value){try{localStorage.setItem('aitools4kids_lang',value)}catch(_){}}
   $('elBtn').onclick=()=>{lang='el';saveLang(lang);localize()}; $('enBtn').onclick=()=>{lang='en';saveLang(lang);localize()};
 
@@ -323,6 +330,15 @@
   function populateTopics(){
     const rows=studyTopicsFor($('zone').value,$('grade').value,$('subject').value,isEpal());
     $('topicPick').innerHTML='<option value="">'+(lang==='en'?'Choose a unit/topic':'Διάλεξε ενότητα/θέμα')+'</option>'+rows.map(t=>'<option value="'+esc(t.id||'')+'" data-label="'+esc(t.labelEl||t.titleEl||t.label||t.id||'')+'">'+esc(lang==='en'?(t.labelEn||t.labelEl||t.label||t.titleEl):(t.labelEl||t.label||t.titleEl||t.labelEn||t.id))+'</option>').join('');
+    populateGelPracticeTopics();
+  }
+  function populateGelPracticeTopics(){
+    const allowed=$('zone').value==='high'&&!isEpal();
+    const listed=allowed?(window.AITOOLSKIDS_GEL_PRACTICE_ONLY?.forSubject?.(selectedSubjectId())||[]):[];
+    const wrap=$('gelPracticeTopicWrap'),pick=$('gelPracticeTopic');
+    wrap.classList.toggle('hidden',listed.length===0);
+    pick.innerHTML='<option value="">'+(lang==='en'?'Choose a skill for your own text':'Διάλεξε δεξιότητα για το δικό σου κείμενο')+'</option>'+
+      listed.map(entry=>'<option value="'+esc(entry.label)+'">'+esc(entry.label)+'</option>').join('');
   }
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   // Every source/AI request has a hard client deadline, so the page never stays on "preparing".
@@ -335,7 +351,17 @@
       err.code='client_timeout';throw err;
     }finally{clearTimeout(t)}
   }
-  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value)$('topicCustom').value=''};
+  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value){$('topicCustom').value='';$('gelPracticeTopic').value=''}};
+  $('gelPracticeTopic').onchange=()=>{
+    const choice=$('gelPracticeTopic').value;
+    if(!choice)return;
+    $('topicPick').value='';
+    $('topicCustom').value=choice;
+    sourceEvidenceUi(null);
+    $('aiWorkspace').classList.add('hidden');
+    document.querySelector('main.grid')?.classList.remove('study-result-open');
+    publishSharedStudyContext();
+  };
   // A result belongs to the previous selected unit. Do not keep displaying it
   // (including stale mapping errors) after the learner changes school/subject/unit.
   ['zone','grade','schoolType','epalSector','epalSpecialty','subject','topicPick'].forEach(id=>

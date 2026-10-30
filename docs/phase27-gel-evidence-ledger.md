@@ -79,3 +79,9 @@ The two distinct official URLs are checked by live source tests for both study a
 Responsive study actions: desktop shows **every action** with no More accordion; mobile defaults to a single native `details/summary` disclosure labeled «Διάλεξε ενέργεια για την ενότητα ή τις σημειώσεις σου», opened only by student choice. EL/EN retained. Dedicated Playwright desktop/tablet/mobile action visibility checks.
 
 Unresolved 21 after Phase 36: 2 broad A literature themes, 1 B Ancient unseen passage, 5 B Greek Language broad skills, 5 G English unconfirmed grammar unit sources, 6 G Ancient passage/skill labels, 2 G Economics out-of-examinable-scope labels. These remain blocked for **official-source required** requests, with learner-provided notes/text option where applicable. Source-backed count is not a five-gate certified percentage.
+
+## Phase 37: safe learner source access for 21 not source-grounded (30/10/2026)
+
+The 21 GEL labels with no verified standalone schoolbook source are selectable as **practice-with-your-own-text skills**, never misrepresented as official textbook units. Browser-facing `gel-practice-only-topics-2026-2027.js` is a projection of the unverified register. The selection writes internally to the custom topic but does not bypass GEL official source requirements: it requires authentic learner-supplied text or notes. Official-book unit pickers remain strict and curated.
+
+Browser CI verifies Ancient B unseen-text skill selection, GEL's free-form official-unit text field stays hidden, notes may be attached to enter source mode, and none of the 21 has a fake official override.

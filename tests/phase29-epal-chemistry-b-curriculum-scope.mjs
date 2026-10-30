@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const source = require("../api/schoolbook-source.js");
-const chemistry = require("../api/epal-chemistry-scope.js");
+const chemistry = require("../epal-chemistry-scope.js");
 const catalog = require("../epal-schoolbook-catalog-2026-2027.js");
 const mapping = catalog.get(chemistry.SUBJECT, chemistry.TOPIC);
 

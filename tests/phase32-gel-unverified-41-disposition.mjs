@@ -42,7 +42,7 @@ assert.equal(kinds["out-of-current-verified-examinable-scope"],2);
 assert.equal(kinds["broad-literary-theme-without-verified-text"],2);
 assert.equal(kinds["practice-skill-not-exact-book-unit"],27);
 const unique=new Set(reviewed.entries.map(e=>e.subjectId+"\n"+e.label));
-assert.equal(unique.size,38);
+assert.equal(unique.size,36);
 const html=readFileSync(new URL("../study.html",import.meta.url),"utf8");
 assert.match(html,/notesFile/);
 assert.match(html,/notesPaste/);

@@ -68,6 +68,7 @@ jobs:
           node tests/phase29-epal-chemistry-b-curriculum-scope.mjs
           node tests/phase30-epal-economics-chapters-grounding.mjs
           node tests/phase31-gel-archaia-a-grammar-grounding.mjs
+          node tests/phase32-gel-unverified-41-disposition.mjs
       - name: Special Education coverage boundary
         run: |
           node tests/special-gym-annual-mapping-smoke.mjs

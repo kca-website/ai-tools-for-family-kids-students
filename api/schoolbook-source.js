@@ -9,6 +9,7 @@ const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.j
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 const EPAL_CHEMISTRY_B_SCOPE = require('../epal-chemistry-scope.js');
 const GEL_ANCIENT_GRAMMAR_SCOPE = require('../gel-ancient-grammar-scope.js');
+const GEL_UNMAPPED_DISPOSITIONS = require('../gel-unmapped-dispositions-2026-2027.js');
 const EPAL_ECONOMICS_CHAPTERS = require('../epal-economics-verified-chapters-2026-2027.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
@@ -1842,6 +1843,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
+    const pendingReview = GEL_UNMAPPED_DISPOSITIONS.get(subject, topic);
     return res.status(404).json({
       grounded: false,
       error: "section_not_resolved",
@@ -1849,7 +1851,15 @@ module.exports = async function handler(req, res) {
       schoolYear: GEL_SCHOOLBOOK_SOURCE_MAP?.schoolYear || "2026-2027",
       reviewStatus: gelInventory.reason,
       inventoryStatus: mapping?.status || gelInventory.row?.status || null,
-      message: "Η επιλογή δεν έχει ακόμη ακριβή, ενεργοποιημένη αντιστοίχιση σε επίσημο κείμενο σχολικού βιβλίου."
+      reviewDisposition: pendingReview?.reviewStatus || null,
+      mappedToVerifiedSchoolbook: false,
+      nextStep: pendingReview ? "attach_source_excerpt" : null,
+      message: pendingReview
+        ? "Η συγκεκριμένη επιλογή έχει ελεγχθεί, αλλά δεν αποτελεί ακόμη επαληθευμένη ενότητα του επίσημου βιβλίου για το 2026–27. Επίλεξε άλλη διαθέσιμη ενότητα ή πρόσθεσε το σχετικό απόσπασμα από το σχολικό βιβλίο στις «Δικές σου σημειώσεις» για μελέτη βάσει του δικού σου κειμένου."
+        : "Η επιλογή δεν έχει ακόμη ακριβή, ενεργοποιημένη αντιστοίχιση σε επίσημο κείμενο σχολικού βιβλίου.",
+      messageEn: pendingReview
+        ? "This selection has been reviewed but is not a verified 2026–27 official textbook unit. Choose another available unit or add the relevant textbook excerpt under Your own notes to study from that supplied text."
+        : "This selection has no verified official textbook mapping yet."
     });
   }
 

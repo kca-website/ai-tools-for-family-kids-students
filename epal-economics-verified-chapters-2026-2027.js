@@ -8,7 +8,7 @@ const subjectId = "epal-a-economics";
 const baseLabel = "Κεφάλαιο 2: Το Οικονομικό Πρόβλημα";
 const chapters = Object.freeze({
   "Κεφάλαιο. 1: Βασικές Οικονομικές Έννοιες": {
-    pdfPage: 12, pdfPageEnd: 23, heading: "βασικές οικονομικές έννοιες",
+    pdfPage: 12, pdfPageEnd: 23, heading: "οι ανάγκες",
     chapter: 1, expect: ["οι ανάγκες", "αγαθά", "καταμερισμός"]
   },
   "Κεφάλαιο 4: Η προσφορά αγαθών και υπηρεσιών": {

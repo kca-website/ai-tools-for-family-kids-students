@@ -2030,6 +2030,7 @@ module.exports = async function handler(req, res) {
   try {
     let sourceUrls = [];
     let combinedText = "";
+    let gelGrammarScope = null;
 
     if (directUrls.length) {
       sourceUrls = directUrls;
@@ -2096,7 +2097,7 @@ module.exports = async function handler(req, res) {
         });
       }
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
-      const gelGrammarScope = GEL_ANCIENT_GRAMMAR_SCOPE.isScoped(
+      gelGrammarScope = GEL_ANCIENT_GRAMMAR_SCOPE.isScoped(
         subject, topic, gelInventory?.manualOverride
       ) ? GEL_ANCIENT_GRAMMAR_SCOPE.scope(
         subject, topic, gelInventory.manualOverride,

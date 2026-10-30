@@ -33,7 +33,7 @@ for (const [label,count,terms] of examples) {
     assert.match(r.body?.sourceCoverageNote||"",/Δεν τεκμηριώνουν/);
     assert.equal(r.body?.sourceUrls?.length,count);
     assert.ok(String(r.body?.text||"").length>=800);
-    const normalize = s => String(s||"").toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/ς/g,"σ");
+    const normalize = v => String(v||"").toLowerCase().normalize("NFD").split("").filter(ch => ch.charCodeAt(0) < 0x300 || ch.charCodeAt(0) > 0x36f).join("").replace(/ς/g,"σ");
     for(const term of terms)assert.ok(normalize(r.body?.text).includes(normalize(term)),label+" missing term "+term);
     if (purpose === "audio") assert.equal(r.body?.sourceCompleteness?.complete,true);
     console.log(JSON.stringify({topic:label,purpose:purpose||"study",chars:r.body.text.length,sourceCount:count,pass:true}));

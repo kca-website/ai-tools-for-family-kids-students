@@ -292,6 +292,10 @@ function buildGelInventoryBook(resolution) {
     annualScopeVerified: false,
     gelInventoryBacked: true,
     mappingConfidence: mapping.confidence || null,
+    sourceCoverage: mapping.granularity === "manual-curated-examples-not-exhaustive-unit" ? "curated-examples" : "verified-source",
+    sourceCoverageNote: mapping.granularity === "manual-curated-examples-not-exhaustive-unit"
+      ? "Επίσημα αποσπάσματα του βιβλίου με σχετικά παραδείγματα εξάσκησης. Δεν τεκμηριώνουν από μόνα τους πλήρη κάλυψη όλων των πτυχών της ευρείας δεξιότητας."
+      : null,
     labelParaphrase: mapping.labelParaphrase === true,
     verifiedHeading: mapping.heading || null
   };
@@ -2265,6 +2269,8 @@ module.exports = async function handler(req, res) {
       sourceUrls,
       canonicalSourceUrl: book.canonicalSourceUrl || null,
       mappingConfidence: book.mappingConfidence || null,
+      sourceCoverage: book.sourceCoverage || null,
+      sourceCoverageNote: book.sourceCoverageNote || null,
       labelParaphrase: book.labelParaphrase === true,
       verifiedHeading: book.verifiedHeading || null,
       sourceCompleteness: (completeAudio || (subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic)))

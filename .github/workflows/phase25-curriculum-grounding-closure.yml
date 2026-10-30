@@ -66,6 +66,7 @@ jobs:
           node tests/epal-ai-study-source-request-smoke.mjs
           node tests/phase28-epal-civics-disjoint-grounding.mjs
           node tests/phase29-epal-chemistry-b-curriculum-scope.mjs
+          node tests/phase30-epal-economics-chapters-grounding.mjs
       - name: Special Education coverage boundary
         run: |
           node tests/special-gym-annual-mapping-smoke.mjs

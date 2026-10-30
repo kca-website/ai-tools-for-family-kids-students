@@ -8,6 +8,7 @@ const GEL_ENGLISH_PDF = require('../gel-english-official-pdf-units-2026-2027.js'
 const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 const EPAL_CHEMISTRY_B_SCOPE = require('../epal-chemistry-scope.js');
+const EPAL_ECONOMICS_CHAPTERS = require('../epal-economics-verified-chapters-2026-2027.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
   const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();
@@ -2341,7 +2342,8 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
   if (!topic) {
     return res.status(404).json({ ...base, error: "source_not_mapped", message: "Δεν επιλέχθηκε ενότητα." });
   }
-  const mapping = EPAL_BOOK_CATALOG.get(subject, topic);
+  const economicsOverride = EPAL_ECONOMICS_CHAPTERS.get(EPAL_BOOK_CATALOG, subject, topic);
+  const mapping = economicsOverride || EPAL_BOOK_CATALOG.get(subject, topic);
   if (!mapping) {
     const state = EPAL_BOOK_CATALOG.status(subject, topic);
     return res.status(404).json({
@@ -2400,6 +2402,16 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
   }
 
   const rawOfficialText = extractedParts.map(part => part.text).join("\n\n");
+  const economicsVerification = economicsOverride
+    ? EPAL_ECONOMICS_CHAPTERS.verify(subject, topic, rawOfficialText)
+    : { ok: true };
+  if (!economicsVerification.ok) {
+    return res.status(409).json({
+      ...base, error: economicsVerification.error,
+      sourceUrl: mapping.viewUrl,
+      message: "Δεν επιβεβαιώθηκε το ακριβές κεφάλαιο του επίσημου βιβλίου Οικονομίας Α΄ ΕΠΑΛ. Δεν θα χρησιμοποιηθεί άσχετη σχολική ύλη."
+    });
+  }
   const selected = chemistryBScope
     ? EPAL_CHEMISTRY_B_SCOPE.scope(rawOfficialText)
     : { ok: true, text: rawOfficialText, excluded: [] };
@@ -2428,14 +2440,15 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     schoolbookSource: mapping.viewUrl,
     annualGuidanceSource: EPAL_GUIDANCE_2026_2027,
     curriculumSource: EPAL_GUIDANCE_2026_2027,
-    mappingStatus: chemistryBScope ? "official-epal-pdf-curriculum-scoped" : (verifiedRanges ? "official-epal-pdf-disjoint-sections" : "official-epal-pdf-section"),
+    mappingStatus: economicsOverride ? "official-epal-pdf-manual-verified-chapter" : (chemistryBScope ? "official-epal-pdf-curriculum-scoped" : (verifiedRanges ? "official-epal-pdf-disjoint-sections" : "official-epal-pdf-section")),
     mappingMethod: mapping.method,
     mappingConfidence: mapping.confidence,
     rangeCapped: !!mapping.rangeCapped,
-    lastVerified: EPAL_BOOK_CATALOG.generatedAt || null,
+    lastVerified: economicsOverride ? "2026-10-30" : (EPAL_BOOK_CATALOG.generatedAt || null),
     annualScopeVerified: false,
     curriculumExclusions: selected.excluded.length ? selected.excluded : (verifiedRanges ? ["§1.2", "§1.3", "§1.4"] : []),
     curriculumScopeApplied: !!verifiedRanges || chemistryBScope,
+    chapterRangeVerified: !!economicsOverride,
     sourceUrl: mapping.viewUrl,
     sourceUrls: [mapping.viewUrl],
     canonicalSourceUrl: mapping.downloadUrl + "#page=" + requests[0].pdfPage,

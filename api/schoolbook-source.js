@@ -7,7 +7,7 @@ const GYMNASIUM_SECTIONS = require('../gymnasium-book-sections-2026-2027.js');
 const GEL_ENGLISH_PDF = require('../gel-english-official-pdf-units-2026-2027.js');
 const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
-const EPAL_CHEMISTRY_B_SCOPE = require('./epal-chemistry-scope.js');
+const EPAL_CHEMISTRY_B_SCOPE = require('../epal-chemistry-scope.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
   const fetchSite = String(headers['sec-fetch-site'] || headers['Sec-Fetch-Site'] || '').toLowerCase();

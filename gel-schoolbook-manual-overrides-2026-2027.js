@@ -5816,6 +5816,84 @@ const entries = Object.freeze([
     "reviewedAt": "2026-10-30",
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_19.html",
     "heading": "23ο Κεφάλαιο: Σχηματισμός των Αφωνόληκτων Ρημάτων"
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Κειμενικά είδη",
+    "sourceTopicId": "ekthesi.text-type-ignore",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "The exact official B' Lyceum textbook compares three concrete schoolbook genres (news, biography, review), with primary text and analysis. This is a curated textbook *practice collection*, not a claim to cover all possible text genres.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexc_01.htm",
+    "heading": "Το γεγονός και το σχόλιο στην είδηση",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexc_01.htm",
+        "heading": "Το γεγονός και το σχόλιο στην είδηση"
+      },
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexe_01.htm",
+        "heading": "Βιογραφικά είδη"
+      },
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+        "heading": "Βιβλιοκριτική"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Συγκεκριμένα τεκμήρια",
+    "sourceTopicId": "ekthesi-b.evidence-generic",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "The official B' Lyceum textbook 'Βιβλιοκριτική' explicitly requires documented critical comments and asks pupils to identify how a reviewer substantiates evaluative judgments. Source is an authentic worked example of evidence use, not the complete theory of logical proof.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+    "heading": "επαρκώς τεκμηριωμένα",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+        "heading": "επαρκώς τεκμηριωμένα"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Τροπικότητα και στάση συντάκτη",
+    "sourceTopicId": "neoelliniki-b-lykeiou.topic-5",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Two official B' Lyceum sections explicitly identify subjective stance/comment in news and narrator's viewpoint, with practical exercises. Scope is stance expressed in journalistic choices, not a claim of comprehensive modal morphology.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexc_01.htm",
+    "heading": "Το γεγονός και το σχόλιο στην είδηση",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexc_01.htm",
+        "heading": "Το γεγονός και το σχόλιο στην είδηση"
+      },
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_02.htm",
+        "heading": "Η οπτική γωνία του δημοσιογράφου"
+      }
+    ]
   }
 ]);
 

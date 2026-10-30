@@ -1259,7 +1259,17 @@
     select('schoolType',selection.schoolType);populateGrades();
     select('grade',selection.grade);refreshSchoolTypeFields();
     select('epalSector',selection.sector);select('epalSpecialty',selection.specialty);populateSubjects();
-    if(!select('subject',selection.subject)&&!select('subject',selection.subject?.replace(/^istoria-/, 'history-')))return;
+    // The persisted study context stores canonical schoolbook subject IDs, while
+    // the visible dropdown can still use a catalog ID (e.g. algebra-a-lykeiou).
+    // Resolve the canonical ID back to an actual displayed option on restore.
+    const restoreSubject=()=>{
+      if(select('subject',selection.subject)||select('subject',selection.subject?.replace(/^istoria-/, 'history-')))return true;
+      const rows=resolver()?.getSubjects?.($('zone').value,$('grade').value)||[];
+      const match=rows.find(row=>(row.quizId===selection.subject||(row.aliases||[]).includes(selection.subject))&&
+        [...$('subject').options].some(option=>option.value===row.id));
+      return !!match&&select('subject',match.id);
+    };
+    if(!restoreSubject())return;
     populateTopics();
     if(!select('topicPick',selection.gapId)){
       const option=[...$('topicPick').options].find(o=>o.textContent.trim()===selection.topic);

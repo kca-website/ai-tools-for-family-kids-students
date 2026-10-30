@@ -32,6 +32,22 @@ for (const [label, expectText] of pairs) {
     assert.equal(result.body?.annualScopeVerified, false, "No unverified 2026-27 curriculum claim");
     assert.ok(String(result.body?.sourceUrl || "").includes("ebooks.edu.gr"));
     assert.match(result.body?.text || "", expectText);
+    assert.equal(result.body?.sourceScopeApplied, true, "Exact numbered paragraphs must be selected");
+    const isPassive = label === "Παθητικός μέλλοντας και αόριστος";
+    assert.deepEqual(result.body?.sourceScopeParagraphs,
+      isPassive ? ["§297", "§315–316"] : ["§295"]);
+    assert.equal(result.body?.sourceUrls?.length, isPassive ? 2 : 1);
+    assert.match(result.body?.text || "", isPassive ? /^\\[Official numbered grammar paragraph:.*\\n297\\./ : /^\\[Official numbered grammar paragraph:.*\\n295\\./);
+    if (isPassive) {
+      assert.match(result.body?.text || "", /315\\./);
+      assert.match(result.body?.text || "", /316\\./);
+      assert.doesNotMatch(result.body?.text || "", /298\\./);
+      assert.doesNotMatch(result.body?.text || "", /317\\./);
+      assert.ok(result.body?.text?.length < 5000);
+    } else {
+      assert.doesNotMatch(result.body?.text || "", /296\\./);
+      assert.ok(result.body?.text?.length < 3000);
+    }
     assert.ok(String(result.body?.text || "").length >= 800);
     if (purpose === "audio") assert.equal(result.body?.sourceCompleteness?.complete, true);
     console.log(JSON.stringify({ label, purpose:purpose||"study", length:result.body.text.length, passed:true }));

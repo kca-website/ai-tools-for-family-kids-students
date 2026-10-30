@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
@@ -51,6 +51,10 @@ jobs:
           node tests/a-g-gym-language-schoolbook-grounding.mjs
           node tests/a-g-gym-history-schoolbook-grounding.mjs
           node tests/g-gym-science-schoolbook-grounding.mjs
+      - name: GEL Phase 27 evidence ledger and safety contract
+        run: |
+          node tests/phase27-gel-uat-contract.test.mjs
+          node scripts/phase27-gel-uat.mjs --output=qa/results/phase27-gel-uat-inventory.json
       - name: GEL grounding
         run: |
           node tests/phase18-gel-grounding-coverage-smoke.mjs

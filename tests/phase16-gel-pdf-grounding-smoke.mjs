@@ -5,6 +5,7 @@ const require = createRequire(import.meta.url);
 const endpoint = require("../api/schoolbook-source.js");
 const inventory = require("../gel-schoolbook-source-map-2026-2027.js");
 const pdfTools = require("../api/official-pdf-text.js");
+const englishPdfUnits = require("../gel-english-official-pdf-units-2026-2027.js");
 
 const cases = ["english-a-lykeiou", "english-b-lykeiou"].map((subjectId) => {
   const subject = inventory.get(subjectId);
@@ -34,15 +35,21 @@ for (const [subjectId, mapping] of cases) {
   assert.equal(result.ok, true, subjectId + " / " + mapping.label + " => " + JSON.stringify(result.body));
   assert.equal(result.status, 200);
   assert.equal(result.body?.grounded, true);
-  assert.equal(result.body?.mappingStatus, "official-gel-inventory-exact-pdf");
-  assert.equal(result.body?.pdfPage, mapping.pdfPage);
-  assert.equal(result.body?.verifiedHeading, mapping.heading);
+  // English A/B: the verified multi-page unit manifest has precedence over a PDF-page fallback.
+  const manifest = englishPdfUnits.pdfFor(subjectId, mapping.label);
+  assert.ok(manifest?.annualScopeVerified, "Annual scope must be verified for this grade");
+  assert.equal(result.body?.mappingStatus, "official-pdf-section");
+  assert.equal(result.body?.pdfPage, manifest.pdfPage);
+  assert.equal(result.body?.pdfPageEnd, manifest.pdfPageEnd);
+  assert.ok(result.body.pdfPageEnd > result.body.pdfPage);
+  assert.equal(result.body?.verifiedHeading, manifest.heading);
   assert.equal(result.body?.labelParaphrase, false);
-  assert.match(String(result.body?.sourceUrl || ""), /\/ebooks\/v\/pdf\/.+#page=\d+$/);
+  assert.match(String(result.body?.sourceUrl || ""), /^https:\/\/ebooks\.edu\.gr\/ebooks\/v\/pdf\//);
+  assert.match(String(result.body?.canonicalSourceUrl || ""), new RegExp("#page=" + manifest.pdfPage + "$"));
   assert.ok(String(result.body?.text || "").length >= pdfTools.MIN_GROUNDED_PAGE_CHARS);
 
   const extracted = pdfTools.normalizePdfText(result.body?.text || "");
-  const heading = pdfTools.normalizePdfText(mapping.heading || "");
+  const heading = pdfTools.normalizePdfText(manifest.heading || "");
   assert.ok(heading && extracted.includes(heading), "verified heading must be present in extracted PDF page text");
 }
 

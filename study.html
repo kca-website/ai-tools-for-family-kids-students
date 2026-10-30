@@ -265,9 +265,9 @@
       return cat?.getSubjects?.(g,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')||[];
     }
     const rows=resolver()?.getSubjects?.(z,g)||[];
-    if(z==='middle'||z==='high')return rows.filter(s=>
-      (z==='high'&&g==='c'&&s.id==='english-g-lykeiou'&&window.AITOOLSKIDS_GEL_ENGLISH_OFFICIAL_PDF?.labels(s.id).length) ||
-      (s.topics||[]).some(t=>isVerifiedOfficialTopic(t,s)));
+    // Only subjects with a year-verified, runtime-consumable official topic are selectable.
+    // English G PDF units have annualScopeVerified:false and must not be an exception.
+    if(z==='middle'||z==='high')return rows.filter(s=>(s.topics||[]).some(t=>isVerifiedOfficialTopic(t,s)));
 
     return rows;
   }
@@ -445,9 +445,14 @@
     if(sourcePolicy==='official_required'){
       // Do not describe every failed fetch as missing curriculum mapping.
       // A 404 mapping error, a 5xx source outage and a browser timeout are different issues.
-      const detail=lastBody?.message||lastError?.message||(lang==='en'
-        ?'The official schoolbook source could not be loaded right now. Please try again.'
-        :'Δεν ήταν δυνατή η φόρτωση της επίσημης σχολικής πηγής αυτή τη στιγμή. Δοκίμασε ξανά.');
+      const unmappedError=['epal_source_not_mapped','section_not_resolved'].includes(lastBody?.error);
+      const detail=unmappedError
+        ?(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'
+          ?'This unit has not yet been connected to its official school source.'
+          :'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή.'))
+        :(lastBody?.message||lastError?.message||(lang==='en'
+          ?'The official schoolbook source could not be loaded right now. Please try again.'
+          :'Δεν ήταν δυνατή η φόρτωση της επίσημης σχολικής πηγής αυτή τη στιγμή. Δοκίμασε ξανά.'));
       const err=new Error(detail);
       err.code=lastBody?.error||lastError?.code||lastError?.name||'official_source_unavailable';
       throw err;

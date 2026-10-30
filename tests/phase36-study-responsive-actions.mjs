@@ -29,8 +29,10 @@ try {
     } else {
       assert.equal(await page.getByText('Περισσότερα',{exact:true}).count(),0);
       await page.setViewportSize({width:390,height:844});
+      await page.waitForFunction(()=>document.querySelector('#studyActionChoices')?.open===false,{timeout:10000});
       assert.equal(await panel.evaluate(el=>el.open),false,'desktop to mobile closes catalog');
       await page.setViewportSize({width:1366,height:850});
+      await page.waitForFunction(()=>document.querySelector('#studyActionChoices')?.open===true,{timeout:10000});
       assert.equal(await panel.evaluate(el=>el.open),true,'mobile to desktop restores all actions');
     }
     console.log('PHASE36_STUDY_ACTIONS_RESPONSIVE_OK',name);

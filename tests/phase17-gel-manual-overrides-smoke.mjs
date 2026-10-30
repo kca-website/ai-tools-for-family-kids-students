@@ -30,14 +30,15 @@ function entrySources(entry) {
 }
 
 assert.equal(overrides.schoolYear, "2026-2027");
-assert.equal(overrides.count, 306);
-assert.equal(overrides.entries.length, 306);
+assert.equal(overrides.count, 309);
+assert.equal(overrides.entries.length, 309);
 
 const keys = new Set();
 let medium = 0;
 let manual = 0;
 let multiSource = 0;
 let discovered = 0;
+let directVerified = 0;
 
 for (const entry of overrides.entries) {
   const key = entry.subjectId + "\n" + entry.label;
@@ -87,6 +88,15 @@ for (const entry of overrides.entries) {
           "discovered source must stay inside the verified book manifestation: " + key
         );
       }
+    } else if (entry.sourceOrigin === "verified-official-book-page-2026-10-30") {
+      directVerified++;
+      for (const row of sources) {
+        assert.equal(
+          endpoint._test.sameOfficialHtmlManifestation(row.url, verifiedBook.html.url),
+          true,
+          "verified source must belong to exact official book: " + key
+        );
+      }
     } else {
       for (const row of sources) {
         const candidate = (source.candidates || []).find((candidate) =>
@@ -106,8 +116,9 @@ for (const entry of overrides.entries) {
 }
 
 assert.equal(medium, 14);
-assert.equal(manual, 292);
+assert.equal(manual, 295);
 assert.equal(discovered, 183);
+assert.equal(directVerified, 3);
 assert.equal(multiSource, 28);
 
 // Live source audit: every unique official page must still load and contain
@@ -207,6 +218,7 @@ console.log("PHASE17_21_GEL_MANUAL_OVERRIDES=" + JSON.stringify({
   medium,
   manual,
   discovered,
+  directVerified,
   multiSource,
   uniqueOfficialPages: byUrl.size,
   liveEndpoint

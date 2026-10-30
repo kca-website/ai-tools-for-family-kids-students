@@ -450,7 +450,7 @@
         ?(window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'
           ?'This unit has not yet been connected to its official school source.'
           :'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή.'))
-        :(lastBody?.message||lastError?.message||(lang==='en'
+        :((lang==='en'?lastBody?.messageEn:lastBody?.message)||lastError?.message||(lang==='en'
           ?'The official schoolbook source could not be loaded right now. Please try again.'
           :'Δεν ήταν δυνατή η φόρτωση της επίσημης σχολικής πηγής αυτή τη στιγμή. Δοκίμασε ξανά.'));
       const err=new Error(detail);

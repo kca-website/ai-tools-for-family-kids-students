@@ -7,6 +7,8 @@ const phase25 = require('../gel-schoolbook-manual-overrides-phase25-2026-2027.js
 const primary = require('../general-education-book-sections-2026-2027.js');
 const primaryComplete = require('../primary-schoolbook-complete-sources-2026-2027.js');
 const epal = require('../epal-schoolbook-catalog-2026-2027.js');
+const gymnasium = require('../gymnasium-book-sections-2026-2027.js');
+const availability = require('../secondary-grounding-availability-2026-2027.js');
 
 // ΕΠΑΛ: dedicated EPAL_BOOK_CATALOG (see scripts/epal/validate-epal-schoolbook-catalog.mjs for the
 // full AI Study ↔ catalog validation).
@@ -162,12 +164,89 @@ function primaryReport() {
   };
 }
 
+// Static integrity is only a prerequisite for runtime grounding. The live endpoint
+// /api/study-grounding-audit?subject=...&live=1 confirms that official content
+// actually extracts successfully. Never count a catalog label as a retrieved text.
+function secondaryIntegrityReport() {
+  const overrideKeys = new Set(
+    [...(overrides.entries || []), ...(phase25.entries || [])]
+      .map(row => `${row.subjectId}\n${row.label}`)
+  );
+  const declaredMismatch = [];
+  const duplicateLabels = [];
+  let gelExpected = 0;
+  for (const subject of Object.values(gel.all())) {
+    const seen = new Set();
+    for (const topic of subject.topicMappings || []) {
+      const key = `${subject.subjectId}\n${topic.label}`;
+      if (seen.has(topic.label)) duplicateLabels.push({ subjectId:subject.subjectId, label:topic.label });
+      seen.add(topic.label);
+      const expected = (topic.status === 'exact-html' && topic.confidence === 'high') ||
+        topic.status === 'exact-pdf' || overrideKeys.has(key);
+      if (expected) gelExpected++;
+      const visible = availability.has(subject.subjectId,topic.label);
+      if (expected !== visible) declaredMismatch.push({ subjectId:subject.subjectId, label:topic.label, expected, visible });
+    }
+  }
+  const bySchoolLevel = {
+    gymnasium: { subjects:0, advertisedTopics:0 },
+    gel: { subjects:0, advertisedTopics:0 }
+  };
+  for (const [id,labels] of Object.entries(availability.subjects || {})) {
+    const level = /-gymnasiou$/i.test(id) ? 'gymnasium' : 'gel';
+    bySchoolLevel[level].subjects++;
+    bySchoolLevel[level].advertisedTopics += labels.length;
+  }
+  const gymnasiumTableMissing = [];
+  for (const id of Object.keys(gymnasium.subjects || {})) {
+    for (const topic of gymnasium.labels(id)) {
+      if (!availability.has(id,topic)) gymnasiumTableMissing.push({ subjectId:id, topic });
+    }
+  }
+  for (const id of Object.keys(gymnasium.pdfSubjects || {})) {
+    for (const topic of gymnasium.labels(id)) {
+      if (!availability.has(id,topic)) gymnasiumTableMissing.push({ subjectId:id, topic });
+    }
+  }
+  const catalogGymnasium = {
+    subjects:0, totalSections:0, advertisedSections:0, notAdvertised:[]
+  };
+  for (const id of primary.ids || []) {
+    if (!/-gymnasiou$/i.test(id)) continue;
+    const row=primary.get(id);
+    const sections=row?.sections || [];
+    catalogGymnasium.subjects++;
+    catalogGymnasium.totalSections += sections.length;
+    for (const label of sections) {
+      if (availability.has(id,label)) catalogGymnasium.advertisedSections++;
+      else catalogGymnasium.notAdvertised.push({ subjectId:id, label });
+    }
+  }
+  return {
+    policy: 'official-source-required; runtime extraction must be verified separately',
+    bySchoolLevel,
+    gelInventoryExactOrManuallyReviewed:gelExpected,
+    gelInventoryVsLearnerManifest:declaredMismatch,
+    duplicateGelLabels:duplicateLabels,
+    gymnasiumExplicitTableNotAdvertised:gymnasiumTableMissing,
+    gymnasiumGeneralCatalog:catalogGymnasium,
+    requiresLiveValidation:true
+  };
+}
+
 const report = {
   generatedAt: new Date().toISOString(),
   schoolYear: '2026-2027',
   primary: primaryReport(),
   gel: gelReport(),
-  epal: epalReport()
+  epal: epalReport(),
+  secondary: secondaryIntegrityReport()
 };
 
 console.log(JSON.stringify(report, null, 2));
+if (process.argv.includes('--strict')) {
+  const secondary = report.secondary;
+  if (secondary.gelInventoryVsLearnerManifest.length ||
+      secondary.duplicateGelLabels.length ||
+      secondary.gymnasiumExplicitTableNotAdvertised.length) process.exitCode = 1;
+}

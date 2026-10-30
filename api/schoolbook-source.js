@@ -2375,7 +2375,7 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     // auto-generated mapping's first page. Verify it at runtime.
     pdfPage: chemistryBScope ? 10 : mapping.pdfPage,
     pdfPageEnd: mapping.pdfPageEnd,
-    verifiedHeading: chemistryBScope ? "Γενικό μέρος" : mapping.heading
+    verifiedHeading: chemistryBScope ? "οργανική" : mapping.heading
   }];
   const extractedParts = await Promise.all(requests.map(range =>
     OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({

@@ -312,6 +312,15 @@
     }finally{clearTimeout(t)}
   }
   $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value)$('topicCustom').value=''};
+  // A result belongs to the previous selected unit. Do not keep displaying it
+  // (including stale mapping errors) after the learner changes school/subject/unit.
+  ['zone','grade','schoolType','epalSector','epalSpecialty','subject','topicPick'].forEach(id=>
+    $(id).addEventListener('change',()=>{
+      $('aiWorkspace').classList.add('hidden');
+      document.querySelector('main.grid')?.classList.remove('study-result-open');
+      sourceEvidenceUi(null);
+    })
+  );
 
   $('notesFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;const G=window.AITOOLSKIDS_GUIDED;const isImg=G&&G.isImageFile?G.isImageFile(f):/^image\//.test(f.type||'');
     const ocrProgress=(stage,pct)=>{$('notesStatus').textContent=stage==='recognize'?(lang==='en'?'Reading the text from the image… ':'Διαβάζω το κείμενο από την εικόνα… ')+pct+'%':stage==='scan'?(lang==='en'?'Scanned PDF: preparing text recognition…':'Σαρωμένο PDF: ετοιμάζω την αναγνώριση κειμένου…'):(lang==='en'?'Preparing text recognition (first time only, may take a moment)…':'Ετοιμάζω την αναγνώριση κειμένου (μόνο την πρώτη φορά, ίσως αργήσει λίγο)…')};
@@ -341,7 +350,18 @@
   };
   $('notesFile').addEventListener('change',()=>setTimeout(refreshAttachedUi,0));
 
-  function selectedSubjectId(){const id=$('subject').value||'';return /^history-[cdest]+-dimotikou$/.test(id)?id.replace(/^history-/, 'istoria-'):id}
+  function selectedSubjectId(){
+    const id=$('subject').value||'';
+    const normalized=/^history-[cdest]+-dimotikou$/.test(id)?id.replace(/^history-/,'istoria-'):id;
+    // The GEL course catalog can use a display id different from the official
+    // schoolbook/quiz id (e.g. algebra-a-lykeiou vs mathimatika-a-lykeiou).
+    // Keep the display id for the picker, but use the canonical id in API calls.
+    if($('zone').value==='high'&&!isEpal()){
+      const canonical=resolver()?.getSubject?.('high',$('grade').value,id)?.quizId;
+      if(canonical)return canonical;
+    }
+    return normalized;
+  }
   function sourceEvidenceUi(source,state='loaded'){
     currentOfficialSource=source||null;
     const box=$('sourceEvidence');
@@ -418,9 +438,13 @@
     }
     sourceEvidenceUi(null);
     if(sourcePolicy==='official_required'){
-      const detail=window.AITOOLSKIDS_STUDY_CONTEXT?.sourceModeLabel?.('unmapped_blocked',lang)||(lang==='en'?'This unit has not yet been connected to its official school source. The connection is in progress.':'Η συγκεκριμένη ενότητα δεν έχει συνδεθεί ακόμη με την επίσημη σχολική πηγή. Η σύνδεσή της βρίσκεται σε εξέλιξη.');
+      // Do not describe every failed fetch as missing curriculum mapping.
+      // A 404 mapping error, a 5xx source outage and a browser timeout are different issues.
+      const detail=lastBody?.message||lastError?.message||(lang==='en'
+        ?'The official schoolbook source could not be loaded right now. Please try again.'
+        :'Δεν ήταν δυνατή η φόρτωση της επίσημης σχολικής πηγής αυτή τη στιγμή. Δοκίμασε ξανά.');
       const err=new Error(detail);
-      err.code=lastBody?.error||lastError?.name||'official_source_unavailable';
+      err.code=lastBody?.error||lastError?.code||lastError?.name||'official_source_unavailable';
       throw err;
     }
     if(sourcePolicy==='official_if_available')sourceEvidenceUi(null,'ai_fallback');

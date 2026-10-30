@@ -5784,6 +5784,38 @@ const entries = Object.freeze([
     "reviewedAt": "2026-10-30",
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexn_03.htm",
     "heading": "Επισημαίνω τις διαρθρωτικές"
+  },
+  {
+    "subjectId": "archaia-a-lykeiou",
+    "label": "Παθητικός μέλλοντας και αόριστος",
+    "sourceTopicId": "archaia-a-lykeiou.topic-11",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "verified-numbered-paragraphs",
+    "reviewBasis": "The official Ancient Greek Grammar provides first passive future/aorist in §297 (chapter 23) and second passive future/aorist in §315–316 (chapter 25). Runtime source selection must verify BOTH numbered paragraphs before answering.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_19.html",
+    "heading": "23ο Κεφάλαιο: Σχηματισμός των Αφωνόληκτων Ρημάτων",
+    "sources": [
+      {"work":"8547/283","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_19.html","heading":"Παθητικός μέλλοντας α΄"},
+      {"work":"8547/283","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_21.html","heading":"Παθητικός μέλλοντας β΄"}
+    ]
+  },
+  {
+    "subjectId": "archaia-a-lykeiou",
+    "label": "Μέλλοντας ρημάτων σε -ίζω",
+    "sourceTopicId": "archaia-a-lykeiou.topic-13",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manually-verified-section-page",
+    "reviewBasis": "Official school grammar Γυμνασίου–Λυκείου, κεφ. 23 §295, explains -ίζω verbs with δ stem and the future -ιῶ/-ιοῦμαι using κομίζω examples. Not independently certified as a 2026–27 chapter.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_19.html",
+    "heading": "23ο Κεφάλαιο: Σχηματισμός των Αφωνόληκτων Ρημάτων"
   }
 ]);
 

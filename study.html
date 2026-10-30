@@ -473,7 +473,9 @@
       grade:$('grade').value||'',
       sector:isEpal()&&$('grade').value==='b'?($('epalSector').value||''):'',
       specialty:isEpal()&&$('grade').value==='c'?($('epalSpecialty').value||''):'',
-      subject:selectedSubjectId(),
+      // Cross-page navigation uses the user-visible subject ID; only official
+      // schoolbook API calls use the normalized canonical textbook ID.
+      subject:$('subject').value||selectedSubjectId(),
       topic:selectedTopic(),
       gapId:topicId,
       learningMode:goal,

@@ -8,6 +8,7 @@ const GEL_ENGLISH_PDF = require('../gel-english-official-pdf-units-2026-2027.js'
 const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 const EPAL_CHEMISTRY_B_SCOPE = require('../epal-chemistry-scope.js');
+const GEL_ANCIENT_GRAMMAR_SCOPE = require('../gel-ancient-grammar-scope.js');
 const EPAL_ECONOMICS_CHAPTERS = require('../epal-economics-verified-chapters-2026-2027.js');
 function browserRequestAllowed(req) {
   const headers = req?.headers || {};
@@ -2095,7 +2096,21 @@ module.exports = async function handler(req, res) {
         });
       }
       const gelManualScoped = gelInventory?.runtimeMode === "manual-html";
-      if (physicsAnnual) {
+      const gelGrammarScope = GEL_ANCIENT_GRAMMAR_SCOPE.isScoped(
+        subject, topic, gelInventory?.manualOverride
+      ) ? GEL_ANCIENT_GRAMMAR_SCOPE.scope(
+        subject, topic, gelInventory.manualOverride,
+        pages.map((html, i) => ({ url:sourceUrls[i], text:htmlToText(html) }))
+      ) : null;
+      if (gelGrammarScope && !gelGrammarScope.ok) {
+        return res.status(409).json({
+          grounded:false, error:gelGrammarScope.error, sourceUrls,
+          message:"Τα επιλεγμένα αριθμημένα αποσπάσματα της επίσημης Γραμματικής δεν επαληθεύτηκαν. Δεν θα εμφανιστεί ολόκληρο άσχετο κεφάλαιο."
+        });
+      }
+      if (gelGrammarScope) {
+        combinedText = gelGrammarScope.text;
+      } else if (physicsAnnual) {
         combinedText = (await Promise.all(pages.map(async (html, i) =>
           '[Official page: ' + sourceUrls[i] + ']\n' + await extractPhysicsGPage(html, sourceUrls[i])
         ))).join('\n\n');
@@ -2230,6 +2245,8 @@ module.exports = async function handler(req, res) {
       annualScopeVerified: book.annualScopeVerified === true || (subject === "fysiki-g-gymnasiou" && !!physicsGAnnualTopicKey(topic)),
       curriculumExclusions: scoped.exclusions,
       curriculumScopeApplied: scoped.exclusions.length > 0,
+      sourceScopeApplied: !!gelGrammarScope,
+      sourceScopeParagraphs: gelGrammarScope?.selectedParagraphs || undefined,
       sourceNotes: subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic) === 'waves-sound'
         ? ['Το αριθμητικό Παράδειγμα 5.2 παραλείπεται λόγω ασυμφωνίας δεδομένων και αποτελέσματος στην επίσημη ηλεκτρονική έκδοση. Η θεωρία των κυμάτων και του ήχου διατηρείται.']
         : undefined,

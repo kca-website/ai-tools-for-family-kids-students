@@ -209,8 +209,13 @@ function resolveGelInventoryTopic(subject, topic) {
       }
     : inventoryMapping;
 
+  // Only explicitly reviewed manual mappings can use official reference or
+  // supplementary works already listed for the same subject. Automatic matches
+  // still require a primary book; every source URL is manifestation-checked.
   const book = (row.books || []).find((entry) =>
-    entry?.role === "primary" && entry?.work === mapping?.work
+    entry?.work === mapping?.work && (entry?.role === "primary" ||
+    (manualOverride?.sourceOrigin === "verified-official-book-page-2026-10-30" &&
+      ["reference", "supplementary"].includes(entry?.role)))
   ) || null;
 
   const exactHtmlHigh =

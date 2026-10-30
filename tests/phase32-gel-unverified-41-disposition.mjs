@@ -14,8 +14,8 @@ for(const subject of Object.values(inventory.all()))for(const t of subject.topic
   if((t.status==="exact-html"&&t.confidence==="high")||t.status==="exact-pdf"||existing.has(subject.subjectId+"\n"+t.label))continue;
   pending.push({subjectId:subject.subjectId,label:t.label,topicId:t.topicId});
 }
-assert.equal(pending.length,38);
-assert.equal(reviewed.count,38);
+assert.equal(pending.length,21);
+assert.equal(reviewed.count,21);
 const kinds={};
 for(const row of pending){
   const item=reviewed.get(row.subjectId,row.label);
@@ -36,13 +36,13 @@ for(const row of pending){
   assert.match(response.body?.message||"",/Δικές σου σημειώσεις/);
   assert.match(response.body?.messageEn||"",/Your own notes/);
 }
-assert.equal(Object.values(kinds).reduce((a,b)=>a+b,0),38);
+assert.equal(Object.values(kinds).reduce((a,b)=>a+b,0),21);
 assert.equal(kinds["no-confirmed-2026-27-book-unit"],5);
 assert.equal(kinds["out-of-current-verified-examinable-scope"],2);
 assert.equal(kinds["broad-literary-theme-without-verified-text"],2);
-assert.equal(kinds["practice-skill-not-exact-book-unit"],29);
+assert.equal(kinds["practice-skill-not-exact-book-unit"],12);
 const unique=new Set(reviewed.entries.map(e=>e.subjectId+"\n"+e.label));
-assert.equal(unique.size,38);
+assert.equal(unique.size,21);
 const html=readFileSync(new URL("../study.html",import.meta.url),"utf8");
 assert.match(html,/notesFile/);
 assert.match(html,/notesPaste/);

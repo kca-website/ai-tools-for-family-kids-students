@@ -5894,6 +5894,398 @@ const entries = Object.freeze([
         "heading": "Η οπτική γωνία του δημοσιογράφου"
       }
     ]
+  },
+  {
+    "subjectId": "ekthesi-a-lykeiou",
+    "label": "Ισχυρισμός και τεκμηρίωση",
+    "sourceTopicId": "neoelliniki-a-lykeiou.topic-4",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2370",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "The same-grade official A GEL textbook VII. Οργάνωση του λόγου explicitly explains how a personal claim is supported with arguments, reasoning, examples, and evidence, and analyzes a Demosthenes argument. Authentic full-page practice source; not a claim of complete coverage of all forms of substantiation or annual topic-level scope.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexa_7.html",
+    "heading": "VII. Οργάνωση του λόγου",
+    "sources": [
+      {
+        "work": "8547/2370",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexa_7.html",
+        "heading": "VII. Οργάνωση του λόγου"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Δομή κειμένου",
+    "sourceTopicId": "ekthesi.intro-conclusion-function",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "The same-grade B GEL textbook explicitly teaches inverted-pyramid article organization and paragraph structure (topic sentence, supporting details, closing sentence). Two curated official examples for structuring text, not comprehensive coverage of all text types, introductions/conclusions, or annual scope.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_01.htm",
+    "heading": "Η οργάνωση της είδησης",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_01.htm",
+        "heading": "Η οργάνωση της είδησης"
+      },
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexf_11.htm",
+        "heading": "Παράγραφος. Ανάπτυξη με σύγκριση και αντίθεση"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-a-lykeiou",
+    "label": "Απαρέμφατο και απρόσωπη σύνταξη",
+    "sourceTopicId": "archaia-a-lykeiou.topic-17",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Grammar §361 documents impersonal verbs taking infinitival subjects; curated partial coverage.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_26.html",
+    "heading": "ΡΗΜΑΤΑ ΑΝΩΜΑΛΑ, ΑΠΟΘΕΤΙΚΑ ΚΑΙ ΑΠΡΟΣΩΠΑ",
+    "sources": [
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_26.html",
+        "heading": "ΡΗΜΑΤΑ ΑΝΩΜΑΛΑ, ΑΠΟΘΕΤΙΚΑ ΚΑΙ ΑΠΡΟΣΩΠΑ"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-a-lykeiou",
+    "label": "Μετοχές και συντακτικές λειτουργίες",
+    "sourceTopicId": "archaia-a-lykeiou.topic-18",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/5486",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade handbook demonstrates predicative participial use and declension; limited, curated examples.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5509/Egcheiridio-Glossikis-Didaskalias_A-LYK_html-empl/index01.html",
+    "heading": "ΣΥΜΠΛΗΡΩΜΑΤΙΚΑ ΓΙΑ ΤΟ ΚΑΤΗΓΟΡΟΥΜΕΝΟ",
+    "sources": [
+      {
+        "work": "8547/5486",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5509/Egcheiridio-Glossikis-Didaskalias_A-LYK_html-empl/index01.html",
+        "heading": "ΣΥΜΠΛΗΡΩΜΑΤΙΚΑ ΓΙΑ ΤΟ ΚΑΤΗΓΟΡΟΥΜΕΝΟ"
+      },
+      {
+        "work": "8547/5486",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5509/Egcheiridio-Glossikis-Didaskalias_A-LYK_html-empl/index06.html",
+        "heading": "Η ΚΛΙΣΗ ΤΗΣ ΜΕΤΟΧΗΣ ΤΟΥ ΠΑΘΗΤΙΚΟΥ ΑΟΡΙΣΤΟΥ"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-a-lykeiou",
+    "label": "Σύγκριση και β΄ όρος σύγκρισης",
+    "sourceTopicId": "archaia-a-lykeiou.topic-19",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Grammar chapter 17 §190 teaches comparatives including examples containing second term of comparison.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_13.html",
+    "heading": "ΠΑΡΑΘΕΤΙΚΑ",
+    "sources": [
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_13.html",
+        "heading": "ΠΑΡΑΘΕΤΙΚΑ"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-a-lykeiou",
+    "label": "Ονοματικοί και επιρρηματικοί προσδιορισμοί",
+    "sourceTopicId": "archaia-a-lykeiou.topic-20",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/5486",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade handbook unit 1 explains genitive, adverbial and anticipatory predicatives; not comprehensive adjunct syntax.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5509/Egcheiridio-Glossikis-Didaskalias_A-LYK_html-empl/index01.html",
+    "heading": "ΣΥΜΠΛΗΡΩΜΑΤΙΚΑ ΓΙΑ ΤΟ ΚΑΤΗΓΟΡΟΥΜΕΝΟ",
+    "sources": [
+      {
+        "work": "8547/5486",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/5509/Egcheiridio-Glossikis-Didaskalias_A-LYK_html-empl/index01.html",
+        "heading": "ΣΥΜΠΛΗΡΩΜΑΤΙΚΑ ΓΙΑ ΤΟ ΚΑΤΗΓΟΡΟΥΜΕΝΟ"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-a-lykeiou",
+    "label": "Παρατακτική και υποτακτική σύνδεση",
+    "sourceTopicId": "archaia-a-lykeiou.topic-21",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Official grammar chapter 31 §366–367 defines conjunctions, coordination examples and subordinating categories.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_27.html",
+    "heading": "Σύνδεσμοι",
+    "sources": [
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_27.html",
+        "heading": "Σύνδεσμοι"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Λεξιλόγιο και ετυμολογικές σχέσεις",
+    "sourceTopicId": "archaia-b-lykeiou.topic-10",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Official B GEL reference grammar chapters 32–33 show derivation and root/word family relationships; curated.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_03_01.html",
+    "heading": "ΓΕΝΙΚΑ ΓΙΑ ΤΗΝ ΠΑΡΑΓΩΓΗ ΚΑΙ ΤΗ ΣΥΝΘΕΣΗ",
+    "sources": [
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_03_01.html",
+        "heading": "ΓΕΝΙΚΑ ΓΙΑ ΤΗΝ ΠΑΡΑΓΩΓΗ ΚΑΙ ΤΗ ΣΥΝΘΕΣΗ"
+      },
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_03_02.html",
+        "heading": "ΠΑΡΑΓΩΓΗ ΤΩΝ ΛΕΞΕΩΝ"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Μορφολογία ουσιαστικών, επιθέτων και αντωνυμιών",
+    "sourceTopicId": "archaia-b-lykeiou.topic-11",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Official B GEL reference grammar chapters 7, 12, 19 define three morphological classes; not exhaustive declension coverage.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_03.html",
+    "heading": "ΟΥΣΙΑΣΤΙΚΑ",
+    "sources": [
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_03.html",
+        "heading": "ΟΥΣΙΑΣΤΙΚΑ"
+      },
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_08.html",
+        "heading": "ΕΠΙΘΕΤΑ"
+      },
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_15.html",
+        "heading": "ΑΝΤΩΝΥΜΙΕΣ"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Ρηματικοί χρόνοι και εγκλίσεις",
+    "sourceTopicId": "archaia-b-lykeiou.topic-12",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Official reference grammar chapter 20 §§250–257 defines moods and tenses, curated source.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_16.html",
+    "heading": "ΡΗΜΑ - ΣΤΟΙΧΕΙΑ ΤΟΥ ΡΗΜΑΤΟΣ",
+    "sources": [
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_16.html",
+        "heading": "ΡΗΜΑ - ΣΤΟΙΧΕΙΑ ΤΟΥ ΡΗΜΑΤΟΣ"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Απαρέμφατο και μετοχή",
+    "sourceTopicId": "archaia-b-lykeiou.topic-13",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/283",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Official reference grammar chapter 20 §251 defines infinitive and participle; syntax not exhaustive.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_16.html",
+    "heading": "ΡΗΜΑ - ΣΤΟΙΧΕΙΑ ΤΟΥ ΡΗΜΑΤΟΣ",
+    "sources": [
+      {
+        "work": "8547/283",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_16.html",
+        "heading": "ΡΗΜΑ - ΣΤΟΙΧΕΙΑ ΤΟΥ ΡΗΜΑΤΟΣ"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Τεκμηρίωση επιχειρήματος",
+    "sourceTopicId": "ekthesi.unsupported-argument",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade book teaches supporting a view with examples and adequately substantiating literary criticism; curated application, not all forms of argument.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_08.htm",
+    "heading": "Η χρήση του παραδείγματος στην ανάπτυξη παραγράφου",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_08.htm",
+        "heading": "Η χρήση του παραδείγματος στην ανάπτυξη παραγράφου"
+      },
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+        "heading": "επαρκώς τεκμηριωμένα"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Δομή επιχειρηματολογικού κειμένου",
+    "sourceTopicId": "neoelliniki-b-lykeiou.topic-1",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade book teaches topic sentence, evidence/examples and contrast for argumentative paragraphs, not an exhaustive essay genre.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_08.htm",
+    "heading": "Η χρήση του παραδείγματος στην ανάπτυξη παραγράφου",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_08.htm",
+        "heading": "Η χρήση του παραδείγματος στην ανάπτυξη παραγράφου"
+      },
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexf_11.htm",
+        "heading": "Παράγραφος. Ανάπτυξη με σύγκριση και αντίθεση"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Συντακτικές λειτουργίες όρων της πρότασης",
+    "sourceTopicId": "archaia-b-lykeiou.topic-14",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2397",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade Rhetoric book §1–3 comments identify genitive of cause, attributive participles, objects, predicatives and adverbial modifiers; curated sentence analysis example only.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+    "heading": "γλωσσικά σχόλια",
+    "sources": [
+      {
+        "work": "8547/2397",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+        "heading": "γλωσσικά σχόλια"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Δευτερεύουσες προτάσεις",
+    "sourceTopicId": "archaia-b-lykeiou.topic-15",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2397",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade Rhetoric §1–3 explicitly asks students to replace subordinate clauses with syntax equivalents; practice on one text only.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+    "heading": "Ασκήσεις",
+    "sources": [
+      {
+        "work": "8547/2397",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+        "heading": "Ασκήσεις"
+      }
+    ]
+  },
+  {
+    "subjectId": "archaia-b-lykeiou",
+    "label": "Υποθετικός λόγος και σύνθετα συντακτικά φαινόμενα",
+    "sourceTopicId": "archaia-b-lykeiou.topic-16",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2397",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade Rhetoric §1–3 asks students to identify overt/implicit conditional constructions, supported by authentic ancient passage and commentary; not comprehensive conditional theory.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+    "heading": "Ασκήσεις",
+    "sources": [
+      {
+        "work": "8547/2397",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2720/Ritorika-Keimena_B-Lykeiou-AnthrSp_html-empl/index1b_02a.html",
+        "heading": "Ασκήσεις"
+      }
+    ]
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Λογοτεχνική ερμηνεία με κειμενικούς δείκτες",
+    "sourceTopicId": "ekthesi-b-lykeiou.mapped-topic-8",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manual-curated-examples-not-exhaustive-unit",
+    "reviewBasis": "Same-grade language textbook's literary criticism example directs the reader to substantiate interpretations with distinctive passages, narrative, language and style. Curated literary reading skill; not a full fixed interpretation of a selected literary text.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+    "heading": "Λογοτεχνική κριτική",
+    "sources": [
+      {
+        "work": "8547/2376",
+        "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexi_03.htm",
+        "heading": "Λογοτεχνική κριτική"
+      }
+    ]
   }
 ]);
 

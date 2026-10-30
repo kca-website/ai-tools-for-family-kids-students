@@ -30,8 +30,8 @@ function entrySources(entry) {
 }
 
 assert.equal(overrides.schoolYear, "2026-2027");
-assert.equal(overrides.count, 314);
-assert.equal(overrides.entries.length, 314);
+assert.equal(overrides.count, 331);
+assert.equal(overrides.entries.length, 331);
 
 const keys = new Set();
 let medium = 0;
@@ -75,7 +75,7 @@ for (const entry of overrides.entries) {
     assert.equal(source.status, "needs-manual-review");
 
     const verifiedBook = (subject.books || []).find((book) =>
-      book.role === "primary" && book.work === entry.work && book.html?.url
+      (book.role === "primary" || (entry.sourceOrigin === "verified-official-book-page-2026-10-30" && ["reference","supplementary"].includes(book.role))) && book.work === entry.work && book.html?.url
     );
     assert.ok(verifiedBook, "manual override must target a verified official HTML book: " + key);
 
@@ -116,10 +116,10 @@ for (const entry of overrides.entries) {
 }
 
 assert.equal(medium, 14);
-assert.equal(manual, 300);
+assert.equal(manual, 317);
 assert.equal(discovered, 183);
-assert.equal(directVerified, 8);
-assert.equal(multiSource, 31);
+assert.equal(directVerified, 25);
+assert.equal(multiSource, 37);
 
 // Live source audit: every unique official page must still load and contain
 // every manually accepted official heading for that page.

@@ -2301,19 +2301,15 @@ async function handleTablePdfSource(res, { subject, topic, mapping, completeAudi
     mappingStatus: "official-pdf-section",
     sourceUrl: mapping.viewUrl,
     sourceUrls: [mapping.viewUrl],
-    canonicalSourceUrl: mapping.downloadUrl + "#page=" + requests[0].pdfPage,
+    canonicalSourceUrl: mapping.downloadUrl + "#page=" + mapping.pdfPage,
     resolvedPdfUrl: extracted.resolvedPdfUrl || null,
-    pdfPage: requests[0].pdfPage,
-    pdfPageEnd: requests[requests.length - 1].pdfPageEnd,
-    pdfPageRanges: verifiedRanges ? verifiedRanges.map(({ pdfPage, pdfPageEnd }) => ({ start: pdfPage, end: pdfPageEnd })) : undefined,
+    pdfPage: mapping.pdfPage,
+    pdfPageEnd: extracted.endPage || mapping.pdfPageEnd,
     pdfTotalPages: extracted.totalPages || null,
     labelParaphrase: false,
-    verifiedHeading: verifiedRanges ? verifiedRanges.map(range => range.verifiedHeading).join(" + ") : mapping.heading,
+    verifiedHeading: mapping.heading,
     sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION } : undefined,
-    text: (() => {
-      const selectedText = extractedParts.map(part => part.text).join("\n\n");
-      return completeAudio ? completeText(selectedText, topic) : selectedText.slice(0, 60000);
-    })()
+    text: completeAudio ? completeText(extracted.text, topic) : String(extracted.text || "").slice(0, 60000)
   });
 }
 
@@ -2425,15 +2421,19 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     curriculumScopeApplied: !!verifiedRanges,
     sourceUrl: mapping.viewUrl,
     sourceUrls: [mapping.viewUrl],
-    canonicalSourceUrl: mapping.downloadUrl + "#page=" + mapping.pdfPage,
+    canonicalSourceUrl: mapping.downloadUrl + "#page=" + requests[0].pdfPage,
     resolvedPdfUrl: extracted.resolvedPdfUrl || null,
-    pdfPage: mapping.pdfPage,
-    pdfPageEnd: extracted.endPage || mapping.pdfPageEnd,
+    pdfPage: requests[0].pdfPage,
+    pdfPageEnd: requests[requests.length - 1].pdfPageEnd,
+    pdfPageRanges: verifiedRanges ? verifiedRanges.map(({ pdfPage, pdfPageEnd }) => ({ start: pdfPage, end: pdfPageEnd })) : undefined,
     pdfTotalPages: extracted.totalPages || null,
     labelParaphrase: false,
-    verifiedHeading: mapping.heading,
+    verifiedHeading: verifiedRanges ? verifiedRanges.map(range => range.verifiedHeading).join(" + ") : mapping.heading,
     sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION } : undefined,
-    text: completeAudio ? completeText(extracted.text, topic) : String(extracted.text || "").slice(0, 60000)
+    text: (() => {
+      const selectedText = extractedParts.map(part => part.text).join("\n\n");
+      return completeAudio ? completeText(selectedText, topic) : selectedText.slice(0, 60000);
+    })()
   });
 }
 

@@ -5742,6 +5742,48 @@ const entries = Object.freeze([
         "heading": "σύνθετης"
       }
     ]
+  },
+  {
+    "subjectId": "ekthesi-a-lykeiou",
+    "label": "Επικοινωνιακή περίσταση και ύφος",
+    "sourceTopicId": "neoelliniki-a-lykeiou.topic-1",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2369",
+    "granularity": "manually-verified-section-page",
+    "reviewBasis": "Γλωσσικές Ασκήσεις A΄ από τις σημασίες των λέξεων, 7. Ύφος - Επίπεδα Λόγου: το επίσημο εγχειρίδιο ορίζει ρητά τη γλωσσική επικοινωνιακή περίσταση και την επιλογή κατάλληλου ύφους.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexA_07.html",
+    "heading": "7. Ύφος - Επίπεδα Λόγου"
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Επίσημο ύφος",
+    "sourceTopicId": "ekthesi.register-confusion",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2369",
+    "granularity": "manually-verified-section-page",
+    "reviewBasis": "Γλωσσικές Ασκήσεις A΄ 7. Ύφος - Επίπεδα Λόγου: η ενότητα περιέχει τον ορισμό του επίσημου επιπέδου λόγου και ασκήσεις μετατροπής ύφους.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2750/Glossikes-Askiseis_A-B-G-Lykeiou_html-apli/indexA_07.html",
+    "heading": "7. Ύφος - Επίπεδα Λόγου"
+  },
+  {
+    "subjectId": "ekthesi-b-lykeiou",
+    "label": "Δείκτες συνοχής και λογικές σχέσεις",
+    "sourceTopicId": "neoelliniki-b-lykeiou.topic-3",
+    "sourceStatus": "needs-manual-review",
+    "sourceReason": "unnumbered-topic-no-matching-heading",
+    "sourceOrigin": "verified-official-book-page-2026-10-30",
+    "work": "8547/2376",
+    "granularity": "manually-verified-section-page",
+    "reviewBasis": "Έκφραση - Έκθεση Β΄ Λυκείου: «δ) Επισημαίνω τις διαρθρωτικές λέξεις» εξηγεί πώς λέξεις/φράσεις οργανώνουν τη συνοχή του λόγου και αποκαλύπτουν τη συλλογιστική πορεία.",
+    "reviewedAt": "2026-10-30",
+    "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexn_03.htm",
+    "heading": "Επισημαίνω τις διαρθρωτικές"
   }
 ]);
 
@@ -5752,7 +5794,7 @@ function get(subjectId, label) {
 }
 
 module.exports = Object.freeze({
-  generatedAt: "2026-10-01",
+  generatedAt: "2026-10-30",
   schoolYear: "2026-2027",
   count: entries.length,
   entries,

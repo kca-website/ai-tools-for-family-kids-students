@@ -7,7 +7,7 @@ const rows = rowsFromCurrentCatalog();
 const summary = summarize(rows);
 assert.equal(rows.length, 672);
 assert.equal(manual.entries.length, 314);
-assert.deepEqual(summary.gates.mapping, { passed:634, failed:0, unverified:38 });
+assert.deepEqual(summary.gates.mapping, { passed:636, failed:0, unverified:36 });
 assert.deepEqual(summary.gates.retrieval, { passed:0, failed:0, unverified:672 });
 assert.deepEqual(summary.gates.curriculum, { passed:0, failed:0, unverified:672 });
 assert.equal(summary.completeFivePointUat, 0);

@@ -7,9 +7,9 @@ Official source content: https://ebooks.edu.gr/ .
 
 ## Important distinction
 
-The Phase 14 generated GEL inventory holds 672 topics across 35 subjects. Runtime-eligible exact mappings: **631**. Unverified and fail-closed: **41**. The 311 overrides file includes five manual matches dated 2026-10-30, two of them verified Ancient Greek A grammar skills (Chapter 23 of the official school grammar). Other GEL course catalogs and visible derived topics are not implicitly covered by these 672.
+The Phase 14 generated GEL inventory holds 672 topics across 35 subjects. Runtime-eligible official-book source mappings and curated examples: **634**. Unverified and fail-closed: **38**. The 314 overrides file includes eight manual matches dated 2026-10-30, two of them verified Ancient Greek A grammar skills (Chapter 23 of the official school grammar). Other GEL course catalogs and visible derived topics are not implicitly covered by these 672.
 
-Unverified topics by subject: Archaia A 5, Ekthesi A 3, Archaia B 8, Ekthesi B 12, English G 5, Archaia G 6, Economics G 2. Never promote generic skills, absent textbook units or out-of-scope Economics chapters solely by similarity.
+Unverified topics by subject: Archaia A 5, Ekthesi A 3, Archaia B 8, Ekthesi B 9, English G 5, Archaia G 6, Economics G 2. Never promote generic skills, absent textbook units or out-of-scope Economics chapters solely by similarity.
 
 `scripts/phase27-gel-uat.mjs` creates one evidence row per topic and five independent gates: year-specific curriculum, official source mapping, retrieval of authentic text, grounded AI Study answer, and full verified audio. A static mapping is **not** a successful 5-gate UAT. This phase does not recheck IEP scope for every topic, so all curriculum gate entries remain **unverified**.
 
@@ -34,3 +34,7 @@ Full verification uses `--limit=all` after checking provider costs and the curre
 The two newly mapped Archaia A skill topics, «Παθητικός μέλλοντας και αόριστος» and «Μέλλοντας ρημάτων σε -ίζω», use the official Ancient Greek Grammar, chapter 23 and §295 respectively: https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_19.html .
 
 They are official textbook-reference matches, not independent evidence that these precise skill labels are 2026–27 IEP chapter titles. `annualScopeVerified` remains false. The remaining 41 may include intentionally generic skills or out-of-scope labels; never reduce the count by borrowing an unrelated grade's book, promoting an unverified topic, or relabeling a missing unit. Full five-gate UAT remains open.
+
+## Phase 33: curated official B GEL language skills (30/10/2026)
+
+Three previously unmapped broad language skills now point to authentic same-grade B GEL schoolbook pages from [Έκφραση–Έκθεση Β΄](https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/): «Κειμενικά είδη» (examples from journalism, biography, book review), «Συγκεκριμένα τεκμήρια» (documented literary criticism), «Τροπικότητα και στάση συντάκτη» (journalist's viewpoint and subjective comment). This is **curated textbook example coverage**, not full or exhaustive theory of these broad skills, and `annualScopeVerified` remains false pending independent topic-level annual guidance audit. The AI Study response reports `sourceCoverage: curated-examples` explicitly. New static count: 634/672 source-reachable; 38 need exact-source evidence. Independent five-gate annual/AI/audio UAT still has not been established for the entire corpus.

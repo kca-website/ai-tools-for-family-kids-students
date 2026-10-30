@@ -57,7 +57,8 @@ export function verifyRetrieval(httpStatus, body) {
 }
 export function verifyStudy(httpStatus, body) {
   const text = String(body?.text || '').trim();
-  return httpStatus === 200 && body?.groundingValidated === true && text.length >= 20
+  return httpStatus === 200 && body?.groundingValidated === true &&
+    body?.sourceKind === 'official_schoolbook' && official(body?.sourceUrl) && text.length >= 20
     ? verdict('passed', null, { httpStatus, textChars: text.length })
     : verdict('failed', 'grounding-not-validated-in-ai-study', {
       httpStatus, textChars: text.length, error: body?.error || null });
@@ -65,9 +66,20 @@ export function verifyStudy(httpStatus, body) {
 export function verifyAudio(httpStatus, body) {
   const text = String(body?.text || '').trim();
   const v = body?.verification || {};
-  const complete = v.coverageRatio === 1 && Number.isInteger(v.units) && v.units > 0 &&
-    Number.isInteger(v.unitsCovered) && v.unitsCovered === v.units;
-  return httpStatus === 200 && body?.verified === true && complete && text.length >= 180
+  // Source units parsed and selected core ideas actually reviewed are
+  // separate concepts: a concise lesson should NOT repeat all textbook units.
+  const complete = v.coverageBasis === 'selected-core-ideas' && v.coverageRatio === 1 &&
+    Number.isInteger(v.units) && v.units > 0 &&
+    v.sourceUnitsParsed === v.units &&
+    Number.isInteger(v.unitsWithCoreEvidence) && v.unitsWithCoreEvidence >= 1 &&
+    v.unitsWithCoreEvidence <= v.units &&
+    Number.isInteger(v.ideasExtracted) && v.ideasExtracted >= 1 &&
+    Number.isInteger(v.coreIdeas) && v.coreIdeas > 0 && v.coreIdeas <= v.ideasExtracted &&
+    v.coreIdeasCovered === v.coreIdeas &&
+    typeof v.sourceHash === 'string' && /^[a-f0-9]{64}$/.test(v.sourceHash);
+  return httpStatus === 200 && body?.verified === true &&
+    body?.wholeChapter === true && body?.mode === 'verified-knowledge-synthesis' &&
+    complete && text.length >= 180
     ? verdict('passed', null, { httpStatus, textChars: text.length, coverageRatio: 1 })
     : verdict('failed', 'complete-verified-audio-summary-not-demonstrated', {
       httpStatus, textChars: text.length, coverageRatio: v.coverageRatio ?? null,

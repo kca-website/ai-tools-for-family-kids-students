@@ -2,7 +2,7 @@ const { createHash } = require('node:crypto');
 const { generateChat, getAiStatus } = require('./ai-provider-router');
 const { sourceUnits, sourceSentences } = require('./whole-section-audio');
 
-const VERSION = 'whole-section-knowledge-v1';
+const VERSION = 'whole-section-knowledge-v2-reviewed-ideas';
 
 function parseJson(text) {
   try { return JSON.parse(String(text || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '')); }
@@ -62,15 +62,23 @@ function validReview(text, sentenceCount, coreIdeas) {
   if (!Array.isArray(parsed?.coreIdeas)) return false;
   const required = new Set(coreIdeas.map(x => x.id));
   if (parsed.coreIdeas.length !== required.size) return false;
-  const covered = new Set();
+  // A verifier must evaluate each real sentence and each selected core idea
+  // exactly once. Duplicate/missing IDs previously passed the count check
+  // and could turn an incomplete lesson into a false 100% coverage claim.
+  const reviewedSentences = new Set();
   for (const row of parsed.sentences) {
-    if (typeof row?.supported !== 'boolean' || typeof row?.concise !== 'boolean') return false;
+    if (!Number.isInteger(row?.index) || row.index < 0 || row.index >= sentenceCount ||
+        reviewedSentences.has(row.index) || typeof row?.supported !== 'boolean' ||
+        typeof row?.concise !== 'boolean') return false;
+    reviewedSentences.add(row.index);
   }
+  const reviewedIdeas = new Set();
   for (const row of parsed.coreIdeas) {
-    if (!required.has(row?.id) || typeof row?.covered !== 'boolean') return false;
-    if (row.covered) covered.add(row.id);
+    if (!required.has(row?.id) || reviewedIdeas.has(row.id) ||
+        typeof row?.covered !== 'boolean') return false;
+    reviewedIdeas.add(row.id);
   }
-  return covered.size <= required.size;
+  return reviewedSentences.size === sentenceCount && reviewedIdeas.size === required.size;
 }
 
 function batchUnits(units, budget = 5200) {
@@ -171,6 +179,7 @@ async function createKnowledgeMapLesson({ source, topic, language = 'el', genera
 
   let draftRows = parseJson(draft.text).sentences.map(row => ({ text:clean(row.text, 1000), ideaIds:row.ideaIds }));
 
+  let approvedReview = null;
   for (let revision = 0; revision < 2; revision++) {
     const review = await generate({
       messages:[
@@ -185,7 +194,7 @@ async function createKnowledgeMapLesson({ source, topic, language = 'el', genera
     const checked = parseJson(review.text);
     const badSentences = checked.sentences.filter(x => !x.supported || !x.concise);
     const missingIdeas = checked.coreIdeas.filter(x => !x.covered).map(x => x.id);
-    if (!badSentences.length && !missingIdeas.length) break;
+    if (!badSentences.length && !missingIdeas.length) { approvedReview = checked; break; }
     if (revision === 1) throw new Error('knowledge_verification_failed');
     const repair = await generate({
       messages:[
@@ -200,8 +209,15 @@ async function createKnowledgeMapLesson({ source, topic, language = 'el', genera
     draftRows = parseJson(repair.text).sentences.map(row => ({ text:clean(row.text, 1000), ideaIds:row.ideaIds }));
   }
 
+  if (!approvedReview) throw new Error('knowledge_verification_failed');
   const narration = draftRows.map(x => x.text).join(' ').trim();
   if (!narration) throw new Error('empty_narration');
+  const coreIdeasCovered = approvedReview.coreIdeas.filter(x => x.covered).length;
+  const coreIdeaCoverageRatio = coreIdeas.length ? coreIdeasCovered / coreIdeas.length : 0;
+  if (coreIdeaCoverageRatio !== 1) throw new Error('incomplete_core_idea_coverage');
+  const unitIdsWithCoreEvidence = new Set(
+    coreIdeas.flatMap(x => x.evidenceIds).map(id => String(id).match(/^(u\d+)s\d+$/)?.[1]).filter(Boolean)
+  );
   const result = {
     text:(language === 'en' ? 'Audio lesson — ' : 'Ακουστικό μάθημα — ') + topic + '\n\n' + narration,
     verified:true,
@@ -214,9 +230,14 @@ async function createKnowledgeMapLesson({ source, topic, language = 'el', genera
       summaryChars:narration.length,
       compressionRatio:Number((narration.length/source.length).toFixed(3)),
       units:units.length,
+      // All source units were segmented; not every unit must be narrated.
+      sourceUnitsParsed:units.length,
+      unitsWithCoreEvidence:unitIdsWithCoreEvidence.size,
       ideasExtracted:ideas.length,
       coreIdeas:coreIdeas.length,
-      coverageRatio:1,
+      coreIdeasCovered,
+      coverageBasis:'selected-core-ideas',
+      coverageRatio:coreIdeaCoverageRatio,
       evidenceIds:[...new Set(coreIdeas.flatMap(x => x.evidenceIds))],
       coreIdeaMap:coreIdeas,
     },

@@ -47,4 +47,5 @@ const html=readFileSync(new URL("../study.html",import.meta.url),"utf8");
 assert.match(html,/notesFile/);
 assert.match(html,/notesPaste/);
 assert.match(html,/lastBody\?\.messageEn/);
+assert.match(html,/const detail=lastBody\?\.reviewDisposition/);
 console.log("GEL_UNVERIFIED_41_TRIAGED_FAIL_CLOSED",JSON.stringify(kinds));

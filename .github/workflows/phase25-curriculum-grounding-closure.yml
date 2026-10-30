@@ -88,3 +88,5 @@ jobs:
         run: node tests/phase36-study-responsive-actions.mjs
       - name: GEL remaining 21 learner supplied source workflow
         run: node tests/phase37-gel-practice-only-accessible.mjs
+      - name: GEL source and audio evidence integrity
+        run: node tests/phase38-gel-audio-evidence-contract.mjs

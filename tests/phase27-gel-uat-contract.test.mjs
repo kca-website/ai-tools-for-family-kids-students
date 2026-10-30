@@ -36,10 +36,18 @@ assert.equal(verifyRetrieval(200, { grounded:true, text:'Επίσημο κείμ
 assert.equal(verifyRetrieval(200, { grounded:true, text:'Επίσημο κείμενο. '.repeat(18), sourceUrl:'https://example.com' }).state,'failed');
 assert.equal(verifyRetrieval(200, { grounded:true, text:'Κείμενο βιβλίου. '.repeat(18), sourceUrl:'https://lb1.ebooks.edu.gr/ebooks/v/html/8547/2696/index.html' }).state,'passed');
 assert.equal(verifyRetrieval(200, { grounded:true, text:'Κείμενο βιβλίου. '.repeat(18), sourceUrl:'https://fakeebooks.edu.gr/ebooks/v/html/8547/2696/index.html' }).state,'failed');
-assert.equal(verifyStudy(200, { groundingValidated:true, text:'Επαληθευμένη επίσημη επεξήγηση.' }).state,'passed');
+assert.equal(verifyStudy(200, { groundingValidated:true, text:'Επαληθευμένη επίσημη επεξήγηση.', sourceKind:'official_schoolbook', sourceUrl:url }).state,'passed');
 assert.equal(verifyStudy(200, { groundingValidated:false, text:'Εξήγηση από μνήμη μοντέλου.' }).state,'failed');
-assert.equal(verifyAudio(200, { verified:true, text:'Σύνοψη με πλήρη κάλυψη. '.repeat(12),
-  verification:{ coverageRatio:1, units:3, unitsCovered:3 } }).state,'passed');
+const fullAudio = { verified:true, wholeChapter:true, mode:'verified-knowledge-synthesis',
+  text:'Σύνοψη όλων των βασικών ιδεών με τεκμηρίωση. '.repeat(9),
+  verification:{ coverageBasis:'selected-core-ideas', coverageRatio:1,
+    units:3, sourceUnitsParsed:3, unitsWithCoreEvidence:2,
+    ideasExtracted:7, coreIdeas:4, coreIdeasCovered:4, sourceHash:'a'.repeat(64) } };
+assert.equal(verifyAudio(200, fullAudio).state,'passed');
+assert.equal(verifyAudio(200, { ...fullAudio, verification:{...fullAudio.verification, coreIdeasCovered:3} }).state,'failed');
+assert.equal(verifyAudio(200, { ...fullAudio, verification:{...fullAudio.verification, sourceUnitsParsed:2} }).state,'failed');
 assert.equal(verifyAudio(200, { verified:true, text:'Μερική σύνοψη. '.repeat(16),
-  verification:{ coverageRatio:.5, units:3, unitsCovered:2 } }).state,'failed');
+  mode:'verified-summary', verification:{ approved:8 } }).state,'failed');
+assert.equal(verifyStudy(200, { groundingValidated:true, text:'Παραπλανητική επεξήγηση.',
+  sourceKind:'user_upload', sourceUrl:'https://example.com' }).state,'failed');
 console.log('PHASE27_GEL_UAT_CONTRACT_OK', JSON.stringify(summary.gates));

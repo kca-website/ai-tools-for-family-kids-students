@@ -2301,16 +2301,35 @@ async function handleTablePdfSource(res, { subject, topic, mapping, completeAudi
     mappingStatus: "official-pdf-section",
     sourceUrl: mapping.viewUrl,
     sourceUrls: [mapping.viewUrl],
-    canonicalSourceUrl: mapping.downloadUrl + "#page=" + mapping.pdfPage,
+    canonicalSourceUrl: mapping.downloadUrl + "#page=" + requests[0].pdfPage,
     resolvedPdfUrl: extracted.resolvedPdfUrl || null,
-    pdfPage: mapping.pdfPage,
-    pdfPageEnd: extracted.endPage || mapping.pdfPageEnd,
+    pdfPage: requests[0].pdfPage,
+    pdfPageEnd: requests[requests.length - 1].pdfPageEnd,
+    pdfPageRanges: verifiedRanges ? verifiedRanges.map(({ pdfPage, pdfPageEnd }) => ({ start: pdfPage, end: pdfPageEnd })) : undefined,
     pdfTotalPages: extracted.totalPages || null,
     labelParaphrase: false,
-    verifiedHeading: mapping.heading,
+    verifiedHeading: verifiedRanges ? verifiedRanges.map(range => range.verifiedHeading).join(" + ") : mapping.heading,
     sourceCompleteness: completeAudio ? { complete: true, parserVersion: COMPLETE_SOURCE_VERSION } : undefined,
-    text: completeAudio ? completeText(extracted.text, topic) : String(extracted.text || "").slice(0, 60000)
+    text: (() => {
+      const selectedText = extractedParts.map(part => part.text).join("\n\n");
+      return completeAudio ? completeText(selectedText, topic) : selectedText.slice(0, 60000);
+    })()
   });
+}
+
+// The 2026-27 EPAL Civics unit explicitly selects §1.1 and §1.5, which occupy
+// two nonadjacent ranges of the same official textbook. Never pass §1.2–§1.4
+// into AI Study merely because they lie between the selected pages.
+const EPAL_CIVICS_SPLIT_TOPIC = "Κεφάλαιο 1 — Η κοινωνία, η πολιτεία και η οικονομία · §1.1 · §1.5 (1.5.1, 1.5.2)";
+function epalVerifiedPageRanges(mapping, subject, topic) {
+  if (subject !== "epal-a-civics" || topic !== EPAL_CIVICS_SPLIT_TOPIC ||
+      mapping?.bookKey !== "8547-2596" || mapping?.grade !== "a") return null;
+  // Official book PDF page numbers (not printed page numbers): §1.1 pp. 11–12,
+  // §1.5 pp. 19–20. Both opening headings must be extracted and verified.
+  return [
+    { pdfPage: 11, pdfPageEnd: 12, verifiedHeading: "1.1 Άνθρωπος" },
+    { pdfPage: 19, pdfPageEnd: 20, verifiedHeading: "1.5 Η οικονομία" }
+  ];
 }
 
 async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
@@ -2352,13 +2371,21 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     return res.status(503).json({ ...base, error: "official_pdf_parser_unavailable", bookTitle: mapping.bookTitle, message: "Ο ασφαλής αναγνώστης επίσημων PDF δεν είναι διαθέσιμος." });
   }
 
-  const extracted = await OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({
-    sourceUrl: mapping.viewUrl,
+  const verifiedRanges = epalVerifiedPageRanges(mapping, subject, topic);
+  const requests = verifiedRanges || [{
     pdfPage: mapping.pdfPage,
     pdfPageEnd: mapping.pdfPageEnd,
-    verifiedHeading: mapping.heading,
-    maxSpan: (EPAL_BOOK_CATALOG.maxPdfSpan || 40) + 1
-  });
+    verifiedHeading: mapping.heading
+  }];
+  const extractedParts = await Promise.all(requests.map(range =>
+    OFFICIAL_PDF_TEXT.extractVerifiedPdfPage({
+      sourceUrl: mapping.viewUrl,
+      ...range,
+      maxSpan: (EPAL_BOOK_CATALOG.maxPdfSpan || 40) + 1
+    })
+  ));
+  // Fail closed if either of the independently verified official sections fails.
+  const extracted = extractedParts.find(part => !part?.ok) || extractedParts[0];
   if (!extracted?.ok) {
     const upstream = new Set(["official_pdf_binary_not_resolved", "official_pdf_fetch_failed", "official_pdf_text_extraction_failed", "official_pdf_too_large", "fetch_unavailable"]);
     return res.status(upstream.has(extracted?.error) ? 502 : 404).json({
@@ -2388,14 +2415,14 @@ async function handleEpalSource(req, res, { subject, topic, completeAudio }) {
     schoolbookSource: mapping.viewUrl,
     annualGuidanceSource: EPAL_GUIDANCE_2026_2027,
     curriculumSource: EPAL_GUIDANCE_2026_2027,
-    mappingStatus: "official-epal-pdf-section",
+    mappingStatus: verifiedRanges ? "official-epal-pdf-disjoint-sections" : "official-epal-pdf-section",
     mappingMethod: mapping.method,
     mappingConfidence: mapping.confidence,
     rangeCapped: !!mapping.rangeCapped,
     lastVerified: EPAL_BOOK_CATALOG.generatedAt || null,
     annualScopeVerified: false,
-    curriculumExclusions: [],
-    curriculumScopeApplied: false,
+    curriculumExclusions: verifiedRanges ? ["§1.2", "§1.3", "§1.4"] : [],
+    curriculumScopeApplied: !!verifiedRanges,
     sourceUrl: mapping.viewUrl,
     sourceUrls: [mapping.viewUrl],
     canonicalSourceUrl: mapping.downloadUrl + "#page=" + mapping.pdfPage,

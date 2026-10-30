@@ -38,3 +38,19 @@ They are official textbook-reference matches, not independent evidence that thes
 ## Phase 33: curated official B GEL language skills (30/10/2026)
 
 Three previously unmapped broad language skills now point to authentic same-grade B GEL schoolbook pages from [Έκφραση–Έκθεση Β΄](https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/): «Κειμενικά είδη» (examples from journalism, biography, book review), «Συγκεκριμένα τεκμήρια» (documented literary criticism), «Τροπικότητα και στάση συντάκτη» (journalist's viewpoint and subjective comment). This is **curated textbook example coverage**, not full or exhaustive theory of these broad skills, and `annualScopeVerified` remains false pending independent topic-level annual guidance audit. The AI Study response reports `sourceCoverage: curated-examples` explicitly. New static count: 634/672 source-reachable; 38 need exact-source evidence. Independent five-gate annual/AI/audio UAT still has not been established for the entire corpus.
+
+
+## Phase 34: two additional source-grounded language skills (30/10/2026)
+
+Starting from main `cc778e343885819a3d8e08790985dd10c323ea48`, two more *curated official-book evidence* paths were added for previously blocked skills:
+
+1. `ekthesi-a-lykeiou / Ισχυρισμός και τεκμηρίωση`: the same-grade official A GEL `Έκφραση–Έκθεση`, VII. `Οργάνωση του λόγου`, directly teaches position, reasoning, evidence, and supporting arguments:
+   https://ebooks.edu.gr/ebooks/v/html/8547/2674/Ekfrasi-Ekthesi_A-Lykeiou_html-empl/indexa_7.html
+
+2. `ekthesi-b-lykeiou / Δομή κειμένου`: two authentic official B GEL `Έκφραση–Έκθεση` chapters on news article structure and paragraph structure:
+   https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexd_01.htm
+   https://ebooks.edu.gr/ebooks/v/html/8547/2676/Ekfrasi-Ekthesi_B-Lykeiou_html-empl/indexf_11.htm
+
+These exact pages belong to verified grade-specific textbook manifestations. `sourceCoverage: curated-examples`, `annualScopeVerified: false`; this is **not** a declaration that every possible exercise under the broad skill is covered, nor a completed independent curriculum audit. The new contract test checks both study-source and audio-purpose *source retrieval* (official-page content), not provider-backed spoken lesson generation. Do not treat a passing contract as full five-gate UAT. Remaining 36 topics stay explicitly fail-closed, including G GEL English and Economics pending distinct annual scope/program verification.
+
+Static source mapping coverage after Phase 34: **636/672**; source evidence still pending: **36/672**. Production release remains blocked until the requested full curriculum, source retrieval, AI Study, and full Listen UAT is successfully completed.

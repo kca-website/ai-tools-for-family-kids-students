@@ -160,7 +160,6 @@ for (const [subjectId, label] of [
   ["archaia-b-lykeiou", "Αδίδακτο πεζό κείμενο αττικής διαλέκτου"],
   ["latinika-b-lykeiou", "Κείμενα και λεξιλόγιο των διδακτικών ενοτήτων"],
   ["ekthesi-b-lykeiou", "Ισορροπία δοκιμίου"],
-  ["ekthesi-b-lykeiou", "Κειμενικά είδη"],
   ["latinika-g-lykeiou", "Λεξιλόγιο και ετυμολογικές σχέσεις"],
   ["mathimatika-g-prosanatolismou", "Παράγωγος σύνθετης και αντίστροφης συνάρτησης"]
 ]) {

@@ -6,8 +6,8 @@ const manual = require('../gel-schoolbook-manual-overrides-2026-2027.js');
 const rows = rowsFromCurrentCatalog();
 const summary = summarize(rows);
 assert.equal(rows.length, 672);
-assert.equal(manual.entries.length, 311);
-assert.deepEqual(summary.gates.mapping, { passed:631, failed:0, unverified:41 });
+assert.equal(manual.entries.length, 314);
+assert.deepEqual(summary.gates.mapping, { passed:634, failed:0, unverified:38 });
 assert.deepEqual(summary.gates.retrieval, { passed:0, failed:0, unverified:672 });
 assert.deepEqual(summary.gates.curriculum, { passed:0, failed:0, unverified:672 });
 assert.equal(summary.completeFivePointUat, 0);
@@ -16,7 +16,7 @@ for (const r of rows.filter(r => r.mapping.state === 'unverified'))
   pending[r.subjectId] = (pending[r.subjectId] || 0) + 1;
 assert.deepEqual(pending, {
   'archaia-a-lykeiou':5, 'ekthesi-a-lykeiou':3,
-  'archaia-b-lykeiou':8, 'ekthesi-b-lykeiou':12,
+  'archaia-b-lykeiou':8, 'ekthesi-b-lykeiou':9,
   'english-g-lykeiou':5, 'archaia-g-lykeiou':6, 'oikonomia-g-lykeiou':2
 });
 for (const [s, l] of [

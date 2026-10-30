@@ -292,6 +292,10 @@ function buildGelInventoryBook(resolution) {
     annualScopeVerified: false,
     gelInventoryBacked: true,
     mappingConfidence: mapping.confidence || null,
+    sourceCoverage: mapping.granularity === "manual-curated-examples-not-exhaustive-unit" ? "curated-examples" : "verified-source",
+    sourceCoverageNote: mapping.granularity === "manual-curated-examples-not-exhaustive-unit"
+      ? "Επίσημα αποσπάσματα του βιβλίου με σχετικά παραδείγματα εξάσκησης. Δεν τεκμηριώνουν από μόνα τους πλήρη κάλυψη όλων των πτυχών της ευρείας δεξιότητας. Η ακουστική μελέτη χρησιμοποιεί το επαληθευμένο κείμενο αυτών των σελίδων, όχι απομαγνητοφώνηση μη ελεγμένων εικόνων."
+      : null,
     labelParaphrase: mapping.labelParaphrase === true,
     verifiedHeading: mapping.heading || null
   };
@@ -2078,7 +2082,8 @@ module.exports = async function handler(req, res) {
         }
       }
       const physicsAnnual = subject === 'fysiki-g-gymnasiou' && !!physicsGAnnualTopicKey(topic);
-      if (completeAudio && !physicsAnnual) pages = await Promise.all(pages.map((html,i) => {
+      const curatedGelExamples = gelInventory?.runtimeMode === 'manual-html' && gelInventory?.mapping?.granularity === 'manual-curated-examples-not-exhaustive-unit';
+      if (completeAudio && !physicsAnnual && !curatedGelExamples) pages = await Promise.all(pages.map((html,i) => {
         if (!html) return html;
         if (gelAnchorScoped) {
           html = selectGelAnchoredSectionText(html, sourceUrls[i], gelInventory.mapping, "html");
@@ -2125,7 +2130,7 @@ module.exports = async function handler(req, res) {
         combinedText = (await Promise.all(pages.map(async (html, i) =>
           '[Official page: ' + sourceUrls[i] + ']\n' + await extractPhysicsGPage(html, sourceUrls[i])
         ))).join('\n\n');
-      } else if (completeAudio) {
+      } else if (completeAudio && !curatedGelExamples) {
         combinedText = pages.map((html, i) => {
           const text = extractCompletePage(html, { topic:gelAnchorScoped ? gelInventory.mapping.heading : topic, sourceUrl: sourceUrls[i] }).text;
           return "[Official page: " + sourceUrls[i] + "]\n" + text;
@@ -2265,6 +2270,8 @@ module.exports = async function handler(req, res) {
       sourceUrls,
       canonicalSourceUrl: book.canonicalSourceUrl || null,
       mappingConfidence: book.mappingConfidence || null,
+      sourceCoverage: book.sourceCoverage || null,
+      sourceCoverageNote: book.sourceCoverageNote || null,
       labelParaphrase: book.labelParaphrase === true,
       verifiedHeading: book.verifiedHeading || null,
       sourceCompleteness: (completeAudio || (subject === 'fysiki-g-gymnasiou' && physicsGAnnualTopicKey(topic)))

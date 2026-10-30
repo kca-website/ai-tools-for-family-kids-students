@@ -26,9 +26,9 @@ assert.ok(String(source.body?.text || "").length > 1000, "official source text m
 const coverageCases = [
   { label:"Δημοτικό · Φυσικά", subjectId:"science-st-dimotikou", topic:"Αναπνευστικό σύστημα" },
   { label:"Γυμνάσιο · Ιστορία", subjectId:"istoria-b-gymnasiou", topic:"Κεφάλαιο 1 · Ι · 1 — Από τη Ρώμη στη Νέα Ρώμη" },
-  { label:"Γυμνάσιο · Μαθηματικά", subjectId:"mathimatika-a-gymnasiou", topic:"Κλάσματα" },
-  { label:"Γυμνάσιο · Φυσικές επιστήμες", subjectId:"fysiki-b-gymnasiou", topic:"Δυνάμεις" },
-  { label:"ΓΕΛ · Ιστορία", subjectId:"istoria-a-lykeiou", topic:"Οι πολιτισμοί της Εγγύς Ανατολής" }
+  { label:"Γυμνάσιο · Μαθηματικά", subjectId:"mathimatika-a-gymnasiou", topic:"Α.1.5 — Χαρακτήρες διαιρετότητας - ΜΚΔ - ΕΚΠ - Ανάλυση αριθμού σε γινόμενο πρώτων παραγόντων" },
+  { label:"Γυμνάσιο · Φυσικές επιστήμες", subjectId:"physics-gymnasiou", topic:"3.1 — Η έννοια της δύναμης" },
+  { label:"ΓΕΛ · Ιστορία", subjectId:"istoria-a-lykeiou", topic:"Αίγυπτος: πολιτισμός" }
 ];
 
 const sourceCoverage = [];
@@ -47,6 +47,11 @@ for (const row of coverageCases) {
   });
 }
 console.table(sourceCoverage);
+for(const row of sourceCoverage){
+  assert.equal(row.status,200,row.label+": official source route must be live");
+  assert.equal(row.grounded,true,row.label+": official source must be grounded");
+  assert.ok(row.chars>250,row.label+": official source text must be substantial");
+}
 
 const cases = [
   { action:"audio", task:"guided_task", mode:"understand", prompt:"Ξεκίνα τώρα αυτή τη δραστηριότητα μελέτης." },
@@ -101,7 +106,13 @@ for (const c of cases) {
     assert.equal(last.res.status, 200, c.action + ": expected 200, got " + last.res.status + " " + (last.body?.error || "") + " " + (last.body?.message || ""));
     assert.ok(String(last.body?.text || "").trim().length >= 20, c.action + ": empty/too short output");
     assert.equal(verifiedSummary ? last.body?.verified : last.body?.groundingValidated, true, c.action + ": grounding must be validated");
-    if (verifiedSummary) assert.ok(last.body?.verification?.approved >= 3, c.action + ": at least three audited claims");
+    if (verifiedSummary) {
+      const evidence=last.body?.verification||{};
+      // Whole-chapter audio validates full coverage via coverageRatio=1,
+      // whereas concise summaries expose a count of 3+ source-checked claims.
+      assert.ok(evidence.coverageRatio===1 || evidence.approved>=3,
+        c.action+": complete knowledge-map coverage or at least three audited claims");
+    }
 
     if (c.action === "flashcards") {
       const parsed = JSON.parse(String(last.body.text).replace(/^\`\`\`(?:json)?\s*/i,"").replace(/\s*\`\`\`$/,""));

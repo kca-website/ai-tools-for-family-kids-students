@@ -202,6 +202,7 @@
 <script src="/environment-studies-data.js"></script>
 <script src="/general-education-book-sections-2026-2027.js"></script>
 <script src="/secondary-grounding-availability-2026-2027.js"></script>
+<script src="/gel-english-official-pdf-units-2026-2027.js"></script>
 <script src="/special-education-book-sections-2026-2027.js"></script>
 <script src="/study-tool-picks.js"></script>
 <script src="/curriculum-resolver.js"></script>
@@ -264,13 +265,17 @@
       return cat?.getSubjects?.(g,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')||[];
     }
     const rows=resolver()?.getSubjects?.(z,g)||[];
-    if(z==='middle'||z==='high')return rows.filter(s=>(s.topics||[]).some(t=>isVerifiedOfficialTopic(t,s)));
+    if(z==='middle'||z==='high')return rows.filter(s=>
+      (z==='high'&&g==='c'&&s.id==='english-g-lykeiou'&&window.AITOOLSKIDS_GEL_ENGLISH_OFFICIAL_PDF?.labels(s.id).length) ||
+      (s.topics||[]).some(t=>isVerifiedOfficialTopic(t,s)));
+
     return rows;
   }
   function populateSubjects(){const rows=subjectRows();$('subject').innerHTML=rows.length?rows.map(s=>'<option value="'+esc(s.id||s.quizId)+'">'+esc(lang==='en'?(s.subjectLabelEn||s.subjectLabelEl):(s.subjectLabelEl||s.subjectLabelEn||s.id))+'</option>').join(''):'<option value="">'+(lang==='en'?'No mapped subjects':'Δεν βρέθηκαν χαρτογραφημένα μαθήματα')+'</option>';populateTopics()}
   function studyTopicsFor(z,g,s,epal=false){
     let rows=[];
     if(z==='special')return (specialSections()?.labels?.(s)||[]).map(label=>({id:label,labelEl:label,labelEn:label,sourceType:'official-book-section'}));
+    if(z==='high'&&g==='c'&&s==='english-g-lykeiou'&&!epal)return window.AITOOLSKIDS_GEL_ENGLISH_OFFICIAL_PDF?.topics(s)||[];
     if(epal){
       const cat=window.AITOOLSKIDS_EPAL_STUDENT_CATALOG;
       rows=cat?.getSubject?.(g,s,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')?.topics||[];
@@ -288,7 +293,7 @@
     return rows;
   }
   function isVerifiedOfficialTopic(topic,subjectRef=''){
-    if(window.AITOOLSKIDS_STUDY_CONTEXT?.isVerifiedOfficialTopic?.(topic))return true;
+    // No topic is proven grounded merely because a UI catalog marks it as official.
     if(specialSections()?.get?.(typeof subjectRef==='object'?subjectRef?.id:subjectRef,topic?.labelEl||''))return true;
     const label=topic?.labelEl||topic?.titleEl||topic?.label||'';
     const ids=typeof subjectRef==='object'

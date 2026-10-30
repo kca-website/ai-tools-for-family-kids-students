@@ -8,6 +8,7 @@ const phase25 = require('../gel-schoolbook-manual-overrides-phase25-2026-2027.js
 const general = require('../general-education-book-sections-2026-2027.js');
 const historyALyceum = require('../history-a-lyceum-sections-2026-2027.js');
 const gymnasiumSections = require('../gymnasium-book-sections-2026-2027.js');
+const gelEnglish = require('../gel-english-official-pdf-units-2026-2027.js');
 
 const manual = new Set(
   [...(overrides.entries || []), ...(phase25.entries || [])]
@@ -31,6 +32,8 @@ for (const subject of Object.values(gel.all())) {
     if (runtimeGrounded) add(subject.subjectId, topic.label);
   }
 }
+
+for(const id of Object.keys(gelEnglish.subjects))for(const label of gelEnglish.labels(id))add(id,label);
 
 for (const subjectId of general.ids || []) {
   if (!/-gymnasiou$|-lykeiou$/i.test(subjectId)) continue;

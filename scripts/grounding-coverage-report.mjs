@@ -9,6 +9,8 @@ const primaryComplete = require('../primary-schoolbook-complete-sources-2026-202
 const epal = require('../epal-schoolbook-catalog-2026-2027.js');
 const gymnasium = require('../gymnasium-book-sections-2026-2027.js');
 const availability = require('../secondary-grounding-availability-2026-2027.js');
+const gelEnglish = require('../gel-english-official-pdf-units-2026-2027.js');
+const special = require('../special-education-book-sections-2026-2027.js');
 
 // ΕΠΑΛ: dedicated EPAL_BOOK_CATALOG (see scripts/epal/validate-epal-schoolbook-catalog.mjs for the
 // full AI Study ↔ catalog validation).
@@ -234,13 +236,27 @@ function secondaryIntegrityReport() {
   };
 }
 
+function additionalCoverage(){
+ const english=[],specialMissing=[];
+ for(const id of Object.keys(gelEnglish.subjects))for(const label of gelEnglish.labels(id)){
+  const a=gelEnglish.pdfFor(id,label);
+  if(!a||!Number.isInteger(a.pdfPage)||!Number.isInteger(a.pdfPageEnd)||
+    a.pdfPageEnd<a.pdfPage||a.pdfPageEnd-a.pdfPage>40||!availability.has(id,label))english.push({id,label});
+ }
+ for(const [id,row] of Object.entries(special.subjects))for(const [label,pages] of (row.units||[])){
+  if(!Array.isArray(pages)||!pages.length||!special.get(id,label))specialMissing.push({id,label});
+ }
+ return {english:{subjects:Object.keys(gelEnglish.subjects).length,units:Object.values(gelEnglish.subjects).reduce((n,x)=>n+x.units.length,0),invalid:english},
+ special:{subjects:Object.keys(special.subjects).length,units:Object.values(special.subjects).reduce((n,x)=>n+x.units.length,0),invalid:specialMissing}};
+}
 const report = {
   generatedAt: new Date().toISOString(),
   schoolYear: '2026-2027',
   primary: primaryReport(),
   gel: gelReport(),
   epal: epalReport(),
-  secondary: secondaryIntegrityReport()
+  secondary: secondaryIntegrityReport(),
+  otherSchoolbooks: additionalCoverage()
 };
 
 console.log(JSON.stringify(report, null, 2));
@@ -248,5 +264,7 @@ if (process.argv.includes('--strict')) {
   const secondary = report.secondary;
   if (secondary.gelInventoryVsLearnerManifest.length ||
       secondary.duplicateGelLabels.length ||
-      secondary.gymnasiumExplicitTableNotAdvertised.length) process.exitCode = 1;
+      secondary.gymnasiumExplicitTableNotAdvertised.length ||
+      report.otherSchoolbooks.english.invalid.length ||
+      report.otherSchoolbooks.special.invalid.length) process.exitCode = 1;
 }

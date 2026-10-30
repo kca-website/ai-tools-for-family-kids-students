@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'api/schoolbook-source.js'
+      - 'gel-english-official-pdf-units-2026-2027.js'
+      - 'study.html'
       - 'gel-schoolbook-source-map-2026-2027.js'
       - 'gel-schoolbook-manual-overrides*.js'
       - 'gymnasium-book-sections-2026-2027.js'
@@ -14,6 +16,8 @@ on:
   pull_request:
     paths:
       - 'api/schoolbook-source.js'
+      - 'gel-english-official-pdf-units-2026-2027.js'
+      - 'study.html'
       - 'gel-schoolbook-source-map-2026-2027.js'
       - 'gel-schoolbook-manual-overrides*.js'
       - 'gymnasium-book-sections-2026-2027.js'

@@ -4,6 +4,7 @@ const { extractPhysicsGPage, VERSION: PHYSICS_G_SOURCE_VERSION } = require('../p
 const HISTORY_A_LYCEUM = require('../history-a-lyceum-sections-2026-2027.js');
 const PRIMARY_ENVIRONMENT = require('../primary-environment-sections-2026-2027.js');
 const GYMNASIUM_SECTIONS = require('../gymnasium-book-sections-2026-2027.js');
+const GEL_ENGLISH_PDF = require('../gel-english-official-pdf-units-2026-2027.js');
 const SPECIAL_SECTIONS = require('../special-education-book-sections-2026-2027.js');
 const CHARACTER_CHAPTERS = require('../history-character-chapters.js');
 function browserRequestAllowed(req) {
@@ -1808,6 +1809,9 @@ module.exports = async function handler(req, res) {
   if (schoolType === "epal" || /^epal-[abc]-/.test(subject)) {
     return handleEpalSource(req, res, { subject, topic, completeAudio });
   }
+  // English GEL: use the full official PDF chapter, not its first page.
+  const englishPdf=topic&&!specialUnit?GEL_ENGLISH_PDF.pdfFor(subject,topic):null;
+  if(englishPdf)return handleTablePdfSource(res,{subject,topic,mapping:englishPdf,completeAudio});
   // Γυμνάσιο PDF-only books with an explicit unit → page-range table.
   const gymnasiumPdf = topic && !specialUnit ? GYMNASIUM_SECTIONS.pdfFor(subject, topic) : null;
   if (gymnasiumPdf) return handleTablePdfSource(res, { subject, topic, mapping: gymnasiumPdf, completeAudio });
@@ -2291,6 +2295,8 @@ async function handleTablePdfSource(res, { subject, topic, mapping, completeAudi
     section: mapping.label,
     bookTitle: mapping.title,
     schoolYear: "2026-2027",
+    annualScopeVerified: mapping.annualScopeVerified === true,
+    curriculumSource: mapping.curriculumSource || null,
     schoolbookSource: mapping.viewUrl,
     mappingStatus: "official-pdf-section",
     sourceUrl: mapping.viewUrl,

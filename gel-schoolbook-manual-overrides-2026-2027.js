@@ -5793,11 +5793,15 @@ const entries = Object.freeze([
     "sourceReason": "unnumbered-topic-no-matching-heading",
     "sourceOrigin": "verified-official-book-page-2026-10-30",
     "work": "8547/283",
-    "granularity": "manually-verified-section-page",
-    "reviewBasis": "Official school grammar Γυμνασίου–Λυκείου, κεφ. 23, explicitly presents first passive future and aorist, as well as their inflected forms. The topic is a grammar practice skill, not an independently IEP-certified 2026–27 chapter.",
+    "granularity": "verified-numbered-paragraphs",
+    "reviewBasis": "The official Ancient Greek Grammar provides first passive future/aorist in §297 (chapter 23) and second passive future/aorist in §315–316 (chapter 25). Runtime source selection must verify BOTH numbered paragraphs before answering.",
     "reviewedAt": "2026-10-30",
     "url": "https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_19.html",
-    "heading": "23ο Κεφάλαιο: Σχηματισμός των Αφωνόληκτων Ρημάτων"
+    "heading": "23ο Κεφάλαιο: Σχηματισμός των Αφωνόληκτων Ρημάτων",
+    "sources": [
+      {"work":"8547/283","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_19.html","heading":"Παθητικός μέλλοντας α΄"},
+      {"work":"8547/283","url":"https://ebooks.edu.gr/ebooks/v/html/8547/2340/Grammatiki-Archaias-Ellinikis_Gymnasiou-Lykeiou_html-apli/index_02_21.html","heading":"Παθητικός μέλλοντας β΄"}
+    ]
   },
   {
     "subjectId": "archaia-a-lykeiou",

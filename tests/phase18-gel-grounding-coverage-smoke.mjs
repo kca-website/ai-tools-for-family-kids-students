@@ -69,17 +69,17 @@ assert.equal(mediumManual, 14);
 assert.equal(exactPdf, 96);
 // The Phase 25 paragraph retains its official HTML override; the unverified
 // Economics Chapter 11 remains blocked instead of being promoted on import.
-assert.equal(reviewedManual, 301);
-assert.equal(overrides.count, 314);
+assert.equal(reviewedManual, 303);
+assert.equal(overrides.count, 316);
 assert.equal(remainingCandidateBacked, 3);
 // Phase 26 replaced 26 generic, sourceless Θρησκευτικά Α΄/Β΄/Γ΄ labels with 62 grounded book units.
-assert.equal(remainingWithoutCandidate, 30);
+assert.equal(remainingWithoutCandidate, 28);
 assert.equal(noSafe, 5);
 
 const grounded = highHtml + mediumManual + exactPdf + reviewedManual;
 const blocked = remainingCandidateBacked + remainingWithoutCandidate + noSafe;
-assert.equal(grounded, 634);
-assert.equal(blocked, 38);
+assert.equal(grounded, 636);
+assert.equal(blocked, 36);
 assert.equal(grounded + blocked, 672);
 
 

@@ -34,7 +34,7 @@ try{
   await page.selectOption('#gelPracticeTopic',{label});
   assert.equal(await page.locator('#topicPick').inputValue(),'');
   assert.equal(await page.locator('#topicCustom').inputValue(),label);
-  const descriptions=await page.locator('#gelPracticeTopicWrap p').textContent();
+  const descriptions=await page.locator('#gelPracticeTopicWrap p.micro').textContent();
   assert.match(descriptions,/δεν|Δεν/);
   await page.locator('#notesPaste').fill('Αυτό είναι το πραγματικό κείμενο του μαθητή για την εξάσκηση.');
   await page.locator('#usePastedNotes').click();

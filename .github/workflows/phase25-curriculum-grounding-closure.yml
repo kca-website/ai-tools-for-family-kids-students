@@ -90,3 +90,5 @@ jobs:
         run: node tests/phase37-gel-practice-only-accessible.mjs
       - name: GEL source and audio evidence integrity
         run: node tests/phase38-gel-audio-evidence-contract.mjs
+      - name: GEL learner-text practice requires real source
+        run: node tests/phase39-gel-own-text-guard.mjs

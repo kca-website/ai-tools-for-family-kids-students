@@ -117,6 +117,7 @@
           <label for="gelPracticeTopic" data-el="Εξάσκηση με δικό σου κείμενο (ΓΕΛ)" data-en="Practise with your own text (General Lyceum)">Εξάσκηση με δικό σου κείμενο (ΓΕΛ)</label>
           <select id="gelPracticeTopic"></select>
           <p class="micro" data-el="Αυτές είναι δεξιότητες ή θεματικές χωρίς επαληθευμένη αυτοτελή σχολική ενότητα. Επίλεξε τι θέλεις να εξασκήσεις και ανέβασε το πραγματικό κείμενο ή τις σημειώσεις σου παρακάτω. Δεν το παρουσιάζουμε ως επίσημο σχολικό βιβλίο." data-en="These skills and themes do not have a verified standalone textbook unit. Choose what to practise, then add the actual text or your notes below. We do not label them as official textbook units.">Αυτές είναι δεξιότητες ή θεματικές χωρίς επαληθευμένη αυτοτελή σχολική ενότητα. Επίλεξε τι θέλεις να εξασκήσεις και ανέβασε το πραγματικό κείμενο ή τις σημειώσεις σου παρακάτω. Δεν το παρουσιάζουμε ως επίσημο σχολικό βιβλίο.</p>
+          <p id="gelPracticeSourcePrompt" class="notice hidden" role="status" aria-live="polite" data-el="Για αυτή τη δεξιότητα χρειάζεται πρώτα το πραγματικό κείμενο ή οι σημειώσεις σου. Πρόσθεσέ τα παρακάτω ώστε το AI να μην απαντήσει από γενικές γνώσεις." data-en="This skill needs your actual text or notes first. Add them below so AI does not answer from general knowledge.">Για αυτή τη δεξιότητα χρειάζεται πρώτα το πραγματικό κείμενο ή οι σημειώσεις σου. Πρόσθεσέ τα παρακάτω ώστε το AI να μην απαντήσει από γενικές γνώσεις.</p>
         </div>
       <p id="secondaryGroundingNotice" class="micro hidden" data-el="Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί με την επίσημη σχολική πηγή." data-en="Only units connected to and checked against the official school source are shown.">Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί με την επίσημη σχολική πηγή.</p>
       <p class="micro">Πώς ξεχωρίζουμε επαληθευμένη ενότητα από θεματικό σημείο αναφοράς: <a href="/ai-me-elliniki-sxoliki-yli.html">AI με ελληνική σχολική ύλη</a>.</p>
@@ -339,6 +340,24 @@
     wrap.classList.toggle('hidden',listed.length===0);
     pick.innerHTML='<option value="">'+(lang==='en'?'Choose a skill for your own text':'Διάλεξε δεξιότητα για το δικό σου κείμενο')+'</option>'+
       listed.map(entry=>'<option value="'+esc(entry.label)+'">'+esc(entry.label)+'</option>').join('');
+    updateGelPracticePrompt();
+  }
+  function selectedGelPractice(){
+    if($('zone').value!=='high'||isEpal())return null;
+    const label=$('gelPracticeTopic').value||$('topicCustom').value.trim();
+    return window.AITOOLSKIDS_GEL_PRACTICE_ONLY?.get?.(selectedSubjectId(),label)||null;
+  }
+  function updateGelPracticePrompt(){
+    $('gelPracticeSourcePrompt').classList.toggle('hidden',!selectedGelPractice()||!!attached?.text);
+  }
+  function ensureGelPracticeSource(){
+    if(!selectedGelPractice())return true;
+    if(!attached?.text&&$('notesPaste').value.trim())$('usePastedNotes').click();
+    if(attached?.text){updateGelPracticePrompt();return true;}
+    updateGelPracticePrompt();
+    document.querySelector('.upload')?.scrollIntoView({behavior:'smooth',block:'center'});
+    $('notesPaste').focus({preventScroll:true});
+    return false;
   }
   function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
   // Every source/AI request has a hard client deadline, so the page never stays on "preparing".
@@ -351,7 +370,7 @@
       err.code='client_timeout';throw err;
     }finally{clearTimeout(t)}
   }
-  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value){$('topicCustom').value='';$('gelPracticeTopic').value=''}};
+  $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{$('topicCustom').value='';$('gelPracticeSourcePrompt').classList.add('hidden');sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value){$('topicCustom').value='';$('gelPracticeTopic').value=''}updateGelPracticePrompt()};
   $('gelPracticeTopic').onchange=()=>{
     const choice=$('gelPracticeTopic').value;
     if(!choice)return;
@@ -360,6 +379,7 @@
     sourceEvidenceUi(null);
     $('aiWorkspace').classList.add('hidden');
     document.querySelector('main.grid')?.classList.remove('study-result-open');
+    updateGelPracticePrompt();
     publishSharedStudyContext();
   };
   // A result belongs to the previous selected unit. Do not keep displaying it
@@ -386,6 +406,7 @@
     $('sourceModeNotice').classList.toggle('hidden',!has);
     if(has) sourceEvidenceUi(null);
     if(has && !String($('notesStatus').textContent||'').trim()) $('notesStatus').textContent=attached.name|| (lang==='en'?'Pasted notes ready':'Οι σημειώσεις είναι έτοιμες');
+    updateGelPracticePrompt();
     publishSharedStudyContext();
   }
   $('usePastedNotes').onclick=()=>{
@@ -657,6 +678,7 @@
   }
 
   async function buildAiPlan(){
+    if(!ensureGelPracticeSource())return;
     const topic=selectedTopic();
     if(!topic&&!attached){$('topicCustom').focus();return}
     const goal=document.querySelector('input[name="goal"]:checked').value;
@@ -983,6 +1005,7 @@
   }
 
   async function runStudyAction(action){
+    if(!ensureGelPracticeSource())return;
     if(action==='character'){
       activeStudyCharacter=studyCharacterChoices().find(c=>c.id===$('studyCharacter').value)||null;
       if(!activeStudyCharacter)return;
@@ -1330,8 +1353,13 @@
     if(!select('topicPick',selection.gapId)){
       const option=[...$('topicPick').options].find(o=>o.textContent.trim()===selection.topic);
       if(option)$('topicPick').value=option.value;
-      else if(selection.topic)$('topicCustom').value=selection.topic;
+      else if(selection.topic){
+        $('topicCustom').value=selection.topic;
+        const practice=window.AITOOLSKIDS_GEL_PRACTICE_ONLY?.get?.(selectedSubjectId(),selection.topic);
+        if(practice&&[...$('gelPracticeTopic').options].some(o=>o.value===practice.label))$('gelPracticeTopic').value=practice.label;
+      }
     }
+    updateGelPracticePrompt();
     const goal=[...document.querySelectorAll('input[name="goal"]')].find(n=>n.value===selection.learningMode);
     if(goal)goal.checked=true;
   }

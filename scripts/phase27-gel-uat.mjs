@@ -98,9 +98,9 @@ export function summarize(rows) {
       ['curriculum','mapping','retrieval','study','audio'].every(g => r[g].state === 'passed')).length
   };
 }
-async function request(url, opts = {}) {
+async function request(url, opts = {}, timeoutMs = 45000) {
   try {
-    const response = await fetch(url, { ...opts, signal: AbortSignal.timeout(45000),
+    const response = await fetch(url, { ...opts, signal: AbortSignal.timeout(timeoutMs),
       headers: { Accept: 'application/json', ...(opts.headers || {}) } });
     const body = await response.json().catch(() => ({}));
     return { httpStatus: response.status, body };
@@ -137,7 +137,7 @@ export async function runAudit(options = {}) {
             documentName: retrieved.body.bookTitle || '',
             documentSourceUrl: retrieved.body.sourceUrl || ''
           })
-        });
+        }, 80000);
         row.study = verifyStudy(result.httpStatus, result.body);
       }
       if (options.audio) {
@@ -145,7 +145,7 @@ export async function runAudit(options = {}) {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ subjectId: row.subjectId, topic: row.topic,
             language: 'el', activity: 'audio' })
-        });
+        }, 130000);
         row.audio = verifyAudio(result.httpStatus, result.body);
       }
     }

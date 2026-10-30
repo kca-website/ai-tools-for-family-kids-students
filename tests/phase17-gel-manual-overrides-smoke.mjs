@@ -30,8 +30,8 @@ function entrySources(entry) {
 }
 
 assert.equal(overrides.schoolYear, "2026-2027");
-assert.equal(overrides.count, 311);
-assert.equal(overrides.entries.length, 311);
+assert.equal(overrides.count, 314);
+assert.equal(overrides.entries.length, 314);
 
 const keys = new Set();
 let medium = 0;
@@ -116,10 +116,10 @@ for (const entry of overrides.entries) {
 }
 
 assert.equal(medium, 14);
-assert.equal(manual, 297);
+assert.equal(manual, 300);
 assert.equal(discovered, 183);
-assert.equal(directVerified, 5);
-assert.equal(multiSource, 29);
+assert.equal(directVerified, 8);
+assert.equal(multiSource, 31);
 
 // Live source audit: every unique official page must still load and contain
 // every manually accepted official heading for that page.

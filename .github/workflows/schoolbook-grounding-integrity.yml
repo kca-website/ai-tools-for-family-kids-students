@@ -1,0 +1,41 @@
+name: Official schoolbook mapping integrity
+
+on:
+  push:
+    paths:
+      - 'api/schoolbook-source.js'
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'gel-schoolbook-manual-overrides*.js'
+      - 'gymnasium-book-sections-2026-2027.js'
+      - 'general-education-book-sections-2026-2027.js'
+      - 'secondary-grounding-availability-2026-2027.js'
+      - 'scripts/grounding-coverage-report.mjs'
+      - '.github/workflows/schoolbook-grounding-integrity.yml'
+  pull_request:
+    paths:
+      - 'api/schoolbook-source.js'
+      - 'gel-schoolbook-source-map-2026-2027.js'
+      - 'gel-schoolbook-manual-overrides*.js'
+      - 'gymnasium-book-sections-2026-2027.js'
+      - 'general-education-book-sections-2026-2027.js'
+      - 'secondary-grounding-availability-2026-2027.js'
+      - 'scripts/grounding-coverage-report.mjs'
+  workflow_dispatch:
+
+jobs:
+  validate-mappings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate textbook mapping and learner-facing manifest
+        run: node scripts/grounding-coverage-report.mjs --strict > grounding-audit.json
+      - name: Print coverage summary
+        if: always()
+        run: |
+          if [ -f grounding-audit.json ]; then
+            node -e 'const r=require("./grounding-audit.json");console.log(JSON.stringify({schoolYear:r.schoolYear,gel:{mapped:r.gel.grounded,total:r.gel.total,pending:r.gel.pending},gymnasium:r.secondary.bySchoolLevel.gymnasium,gelLearner:r.secondary.bySchoolLevel.gel,mismatches:r.secondary.gelInventoryVsLearnerManifest.length,gymnasiumTableMissing:r.secondary.gymnasiumExplicitTableNotAdvertised.length},null,2))'
+          fi

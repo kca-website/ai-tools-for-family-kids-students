@@ -37,18 +37,20 @@ for (const [label, expectText] of pairs) {
     assert.deepEqual(result.body?.sourceScopeParagraphs,
       isPassive ? ["§297", "§315–316"] : ["§295"]);
     assert.equal(result.body?.sourceUrls?.length, isPassive ? 2 : 1);
-    assert.match(result.body?.text || "", isPassive ? /^\\[Official numbered grammar paragraph:.*\\n297\\./ : /^\\[Official numbered grammar paragraph:.*\\n295\\./);
+    const t = String(result.body?.text || "");
+    assert.ok(t.startsWith("[Official numbered grammar paragraph: "));
+    assert.ok(t.includes(isPassive ? "\n297." : "\n295."));
     if (isPassive) {
-      assert.match(result.body?.text || "", /315\\./);
-      assert.match(result.body?.text || "", /316\\./);
-      assert.doesNotMatch(result.body?.text || "", /298\\./);
-      assert.doesNotMatch(result.body?.text || "", /317\\./);
-      assert.ok(result.body?.text?.length < 5000);
+      assert.ok(t.includes("\n315."), "Missing second passive future/aorist rule");
+      assert.ok(t.includes("316."), "Missing following second passive rule");
+      assert.ok(!t.includes("\n298."), "Unrelated middle perfect not allowed");
+      assert.ok(!t.includes("\n317."), "Unrelated next rule not allowed");
+      assert.ok(t.length < 5000);
     } else {
-      assert.doesNotMatch(result.body?.text || "", /296\\./);
-      assert.ok(result.body?.text?.length < 3000);
+      assert.ok(!t.includes("\n296."), "Unrelated perfect rule not allowed");
+      assert.ok(t.length < 3000);
     }
-    assert.ok(String(result.body?.text || "").length >= 800);
+    assert.ok(t.length >= 800);
     if (purpose === "audio") assert.equal(result.body?.sourceCompleteness?.complete, true);
     console.log(JSON.stringify({ label, purpose:purpose||"study", length:result.body.text.length, passed:true }));
   }

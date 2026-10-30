@@ -13,6 +13,7 @@ assert.match(html, /the learner must only see topics whose/);
 assert.match(html, /secondary-grounding-availability-2026-2027\.js/);
 assert.match(html, /rows=rows\.filter\(t=>isVerifiedOfficialTopic\(t,resolvedSubject\|\|s\)\)/);
 assert.match(html, /rows\.filter\(s=>\(s\.topics\|\|\[\]\)\.some\(t=>isVerifiedOfficialTopic\(t,s\)\)\)/);
+assert.doesNotMatch(html, /s\.id==='english-g-lykeiou'&&window\.AITOOLSKIDS_GEL_ENGLISH_OFFICIAL_PDF/, 'unverified English G year scope must not bypass the visibility guard');
 assert.match(html, /Εμφανίζονται μόνο ενότητες που έχουν συνδεθεί και ελεγχθεί/);
 assert.match(html, /flashcards:6000/);
 assert.match(html, /activityNeedsDistributedSource\('plan'\)/);

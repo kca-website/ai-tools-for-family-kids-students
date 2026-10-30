@@ -265,9 +265,9 @@
       return cat?.getSubjects?.(g,g==='b'?$('epalSector').value:'',g==='c'?$('epalSpecialty').value:'')||[];
     }
     const rows=resolver()?.getSubjects?.(z,g)||[];
-    if(z==='middle'||z==='high')return rows.filter(s=>
-      (z==='high'&&g==='c'&&s.id==='english-g-lykeiou'&&window.AITOOLSKIDS_GEL_ENGLISH_OFFICIAL_PDF?.labels(s.id).length) ||
-      (s.topics||[]).some(t=>isVerifiedOfficialTopic(t,s)));
+    // Only subjects with a year-verified, runtime-consumable official topic are selectable.
+    // English G PDF units have annualScopeVerified:false and must not be an exception.
+    if(z==='middle'||z==='high')return rows.filter(s=>(s.topics||[]).some(t=>isVerifiedOfficialTopic(t,s)));
 
     return rows;
   }

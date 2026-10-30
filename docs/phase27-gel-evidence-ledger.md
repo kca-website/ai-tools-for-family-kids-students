@@ -28,3 +28,4 @@ node scripts/phase27-gel-uat.mjs --live --study --audio --subject=istoria-b-lyke
 ```
 
 Full verification uses `--limit=all` after checking provider costs and the current annual topic register. The report records passed, failed, and unverified separately and never converts a missing live check into a success. Do not merge or release merely because the static mapping contract is green.
+\n## Annual-scope visibility fix (Phase 27)\n\n`gel-english-official-pdf-units-2026-2027.js` identifies 4 English G textbook units, but explicitly marks `annual:false` because the 2026–27 taught scope is not independently verified. `study.html` previously exempted `english-g-lykeiou` from the verified-topic visibility filter. This exemption was removed; the records remain intact, and no unverified unit is promoted.\n

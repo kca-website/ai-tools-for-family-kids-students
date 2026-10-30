@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "audit:grounding": "node scripts/grounding-coverage-report.mjs"
+    "audit:grounding": "node scripts/grounding-coverage-report.mjs",
+    "audit:grounding:strict": "node scripts/grounding-coverage-report.mjs --strict"
   },
   "dependencies": {
     "@vercel/functions": "3.9.9",

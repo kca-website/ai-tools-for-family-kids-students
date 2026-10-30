@@ -236,28 +236,6 @@ const entries = Object.freeze([
   },
   {
     "subjectId": "ekthesi-b-lykeiou",
-    "label": "Συγκεκριμένα τεκμήρια",
-    "sourceTopicId": "ekthesi-b.evidence-generic",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
-    "subjectId": "ekthesi-b-lykeiou",
-    "label": "Κειμενικά είδη",
-    "sourceTopicId": "ekthesi.text-type-ignore",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
-    "subjectId": "ekthesi-b-lykeiou",
     "label": "Δομή κειμένου",
     "sourceTopicId": "ekthesi.intro-conclusion-function",
     "reviewStatus": "practice-skill-not-exact-book-unit",
@@ -293,17 +271,6 @@ const entries = Object.freeze([
     "subjectId": "ekthesi-b-lykeiou",
     "label": "Παράφραση και ενσωμάτωση πηγής",
     "sourceTopicId": "neoelliniki-b-lykeiou.topic-4",
-    "reviewStatus": "practice-skill-not-exact-book-unit",
-    "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
-    "sourceStatus": "needs-manual-review",
-    "reviewedAt": "2026-10-30",
-    "reviewBasis": "Inventory 2026-27 verified against book manifests; non-exact labels must not be automatically promoted; pending evidence documented in Phase 27 GEL ledger.",
-    "action": "learner-supplied-source"
-  },
-  {
-    "subjectId": "ekthesi-b-lykeiou",
-    "label": "Τροπικότητα και στάση συντάκτη",
-    "sourceTopicId": "neoelliniki-b-lykeiou.topic-5",
     "reviewStatus": "practice-skill-not-exact-book-unit",
     "reason": "Πρόκειται για γενική δεξιότητα ή σύνθετο στόχο, όχι για επαληθευμένο αυτοτελές σχολικό κεφάλαιο. Χρειάζεται ακριβές απόσπασμα επίσημου βιβλίου.",
     "sourceStatus": "needs-manual-review",

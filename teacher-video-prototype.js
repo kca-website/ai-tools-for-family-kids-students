@@ -437,8 +437,14 @@ ${sourceBlock}
     }
   }
 
+  function setExportStepsStatus(message){
+    const el=q("videoExportStepsStatus");
+    if(el)el.textContent=message;
+  }
+
   function invalidateExports(){
     projectDirty=true;
+    setExportStepsStatus("Το βίντεο άλλαξε. Δημιούργησε ξανά το MP4 πριν από τη λήψη.");
     ["videoDownload","videoMp4Download","videoSaveBtn"].forEach(id=>{if(q(id))q(id).hidden=true;});
     if(q("videoFilePreview")){q("videoFilePreview").hidden=true;q("videoFilePreview").removeAttribute("src");}
     refreshVttDownload();
@@ -1010,6 +1016,7 @@ ${JSON.stringify(current)}
       a.href=audioObjectUrl;
       a.download=safeVideoFilename("webm");
       a.hidden=false;
+      setExportStepsStatus("Το WebM δημιουργήθηκε! Πάτησε «2. Λήψη έτοιμου WebM». Για MP4 απαιτείται ξεχωριστή δημιουργία.");
       const filePreview=q("videoFilePreview");
       filePreview.src=audioObjectUrl;
       filePreview.hidden=false;
@@ -1026,6 +1033,9 @@ ${JSON.stringify(current)}
     const btn=q("videoExportMp4Btn");
     if(!project)return;
     btn.disabled=true;
+    q("videoMp4Download").hidden=true;
+    q("videoMp4Download").removeAttribute("href");
+    setExportStepsStatus("Βήμα 1/2: Δημιουργείται το MP4. Περίμενε να ολοκληρωθεί πριν πατήσεις λήψη.");
     q("videoStatus").textContent="Σύνθεση MP4… Αυτό μπορεί να χρειαστεί όσο περίπου η διάρκεια του βίντεο.";
     try{
       const blob=await renderVideoBlob("mp4");
@@ -1036,11 +1046,13 @@ ${JSON.stringify(current)}
       a.href=mp4ObjectUrl;
       a.download=safeVideoFilename("mp4");
       a.hidden=false;
+      setExportStepsStatus("Βήμα 2/2: Το MP4 δημιουργήθηκε! Πάτησε τώρα «2. Λήψη έτοιμου MP4».");
       const filePreview=q("videoFilePreview");
       filePreview.src=mp4ObjectUrl;
       filePreview.hidden=false;
       q("videoStatus").textContent="Έτοιμο MP4. Μπορείς να το δεις και να το κατεβάσεις.";
     }catch(e){
+      setExportStepsStatus("Δεν δημιουργήθηκε MP4, επομένως δεν υπάρχει αρχείο για λήψη. Δοκίμασε WebM ή διαφορετικό browser.");
       q("videoStatus").textContent=(e?.message||"Δεν ολοκληρώθηκε η εξαγωγή MP4.")+" Δοκίμασε WebM αν η συσκευή δεν υποστηρίζει MP4.";
     }finally{
       btn.disabled=false;
@@ -1144,6 +1156,9 @@ ${JSON.stringify(current)}
       q("videoExportMp4Btn").title=supportedMime("mp4")?"Δημιουργία MP4 από τη συσκευή":"Ο browser δεν δηλώνει υποστήριξη εγγραφής MP4";
       q("videoDownload").hidden=true;
       q("videoMp4Download").hidden=true;
+      q("videoDownload").removeAttribute("href");
+      q("videoMp4Download").removeAttribute("href");
+      setExportStepsStatus(supportedMime("mp4")?"Το MP4 δεν έχει δημιουργηθεί ακόμη. Πρώτα πάτησε «1. Δημιούργησε MP4» και μετά «2. Λήψη έτοιμου MP4».":"Η συσκευή δεν υποστηρίζει εγγραφή MP4 εδώ. Δημιούργησε WebM και στη συνέχεια κατέβασέ το.");
       q("videoSaveBtn").hidden=true;
       q("videoFilePreview").hidden=true;
       q("videoFilePreview").removeAttribute("src");
@@ -1236,7 +1251,7 @@ ${JSON.stringify(current)}
       q("videoDownload").hidden=true;q("videoMp4Download").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;
       q("videoRefreshNarrationBtn").hidden=!(project&&q("videoNarration").value==="ai"&&!narrationAudio);
     });
-    q("videoAiVoiceProvider")?.addEventListener("change",()=>invalidateNarration(false));
+    q("videoAiVoiceProvider")?.addEventListener("change",()=>{invalidateNarration(false);invalidateExports();});
     ["videoSubtitleSize","videoSubtitleContrast"].forEach(id=>q(id)?.addEventListener("change",()=>{
       if(project)drawAtSeconds((Number(q("videoTimeline")?.value)||0)/1000*previewDurationSeconds(),previewDurationSeconds());
       q("videoDownload").hidden=true;

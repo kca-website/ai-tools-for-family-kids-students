@@ -1,4 +1,5 @@
 'use strict';
+const { collectFreeTeacherWebEvidence } = require('./teacher-free-web-evidence');
 // Google Search grounding is invoked only after explicit teacher consent.
 // An uncited AI model answer is never accepted as "web research".
 const MODELS = new Set(['gemini-3.5-flash-lite','gemini-3.1-flash-lite','gemini-2.5-flash-lite']);
@@ -9,6 +10,13 @@ function validUrl(url){
   catch(_){return false;}
 }
 async function collectTeacherWebEvidence({chapter='',subject='',grade='',context=''} = {}){
+  // Tavily -> Brave use only curated topic metadata, not the teacher's full prompt or student work.
+  const free = await collectFreeTeacherWebEvidence({chapter,subject,grade,context});
+  if (free.ok) return free;
+  if (free.status === 422 && free.message === 'Μη έγκυρο ερώτημα αναζήτησης.') return free;
+  // Preserve the existing Google-grounded teacher flow until free keys are configured.
+  // Set TEACHER_GEMINI_WEB_FALLBACK_ENABLED=false to make web search fail closed at EUR 0.
+  if (process.env.TEACHER_GEMINI_WEB_FALLBACK_ENABLED === 'false') return free;
   if(!process.env.GEMINI_API_KEY)return {ok:false,status:503,message:'Η αναζήτηση δεν είναι διαθέσιμη. Πρόσθεσε δικό σου κείμενο ή PDF.'};
   const selected=String(process.env.GEMINI_PRODUCTION_MODEL || 'gemini-3.1-flash-lite');
   const model=MODELS.has(selected)?selected:'gemini-3.1-flash-lite';

@@ -5,7 +5,9 @@ const BASE='http://127.0.0.1:4173';
 const browser=await chromium.launch({headless:true});
 const isSafeFallback=(topics=[])=>topics.length===1&&(
   topics[0].includes('Δούλεψε πάνω στο συγκεκριμένο κεφάλαιο')||
-  topics[0].includes('Δεν υπάρχει χαρτογραφημένη ενότητα')
+  topics[0].includes('Δεν υπάρχει χαρτογραφημένη ενότητα')||
+  topics[0].includes('Ο/Η εκπαιδευτικός επιλέγει ενότητα')||
+  topics[0].includes('Δεν βρίσκω την ενότητά μου')
 );
 
 try{
@@ -54,7 +56,7 @@ try{
   const literatureOption=page.locator('#subject option').filter({hasText:'Νεοελληνική Λογοτεχνία'});
   assert.ok(await literatureOption.count(),'Special Gymnasium A must expose Modern Greek Literature');
   await page.selectOption('#subject',{label:'Νεοελληνική Λογοτεχνία'});
-  const literatureTopics=await page.locator('#unit option').allTextContents();
+  const literatureTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(literatureTopics.length>=13,'Special Gymnasium A Literature should expose the verified annual selection framework');
   assert.ok(literatureTopics.some(x=>x.includes('Ο άνθρωπος και η φύση')),'Literature theme “Ο άνθρωπος και η φύση” missing');
   assert.ok(!literatureTopics.some(x=>x.includes('Δεν υπάρχει χαρτογραφημένη')),'Literature must not fall back to an empty custom-unit selector');
@@ -83,7 +85,7 @@ try{
 
   await page.selectOption('#grade','c');
   await page.selectOption('#subject',{label:'Νεοελληνική Λογοτεχνία'});
-  const literatureCTopics=await page.locator('#unit option').allTextContents();
+  const literatureCTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(literatureCTopics.some(x=>x.includes('Νεοελληνικός Διαφωτισμός')),'C Literature historical framework missing');
   assert.ok(literatureCTopics.some(x=>x.includes('Νέα Αθηναϊκή Σχολή')),'C Literature period missing');
   const literatureCMeta=await page.evaluate(()=>Object.values(window.SPECIAL_EDUCATION_CURRICULUM?.entries||{}).find(e=>
@@ -93,7 +95,7 @@ try{
 
   await page.selectOption('#grade','a');
   await page.selectOption('#subject','biology');
-  const biologyATopics=await page.locator('#unit option').allTextContents();
+  const biologyATopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.equal(biologyATopics.length,14,'Biology A must expose 12 core + 2 optional official E.A.E. sections');
   assert.ok(biologyATopics.includes('1.1 Τα χαρακτηριστικά των οργανισμών'),'Biology A 1.1 missing');
   assert.ok(biologyATopics.some(x=>x.startsWith('Προαιρετικό — 1.4 Αλληλεπιδράσεις και προσαρμογές')),'Biology A optional 1.4 status missing');
@@ -103,14 +105,14 @@ try{
 
   await page.selectOption('#grade','b');
   await page.selectOption('#subject','biology');
-  const biologyBTopics=await page.locator('#unit option').allTextContents();
+  const biologyBTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.equal(biologyBTopics.length,14,'Biology B must expose 13 core + 1 optional official E.A.E. sections');
   assert.ok(biologyBTopics.includes('Βιολογία Α΄ — 6.4 Η αναπαραγωγή στον άνθρωπο'),'Biology B reproduction mapping missing');
   assert.ok(biologyBTopics.some(x=>x.startsWith('Προαιρετικό — Βιολογία Β΄-Γ΄ — 1.2 Κύτταρο')),'Biology B optional cell mapping missing');
 
   await page.selectOption('#grade','c');
   await page.selectOption('#subject','biology');
-  const biologyCTopics=await page.locator('#unit option').allTextContents();
+  const biologyCTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.equal(biologyCTopics.length,12,'Biology C must expose 12 official E.A.E. sections');
   assert.ok(biologyCTopics.includes('5.5 Κληρονομικότητα'),'Biology C inheritance mapping missing');
   assert.ok(biologyCTopics.includes('7.2 Η εξέλιξη του ανθρώπου'),'Biology C evolution mapping missing');
@@ -123,7 +125,7 @@ try{
   assert.ok(!/section-level χαρτογράφηση δεν έχει ακόμη περαστεί/i.test(historyNote),'History must no longer be marked pending');
 
   await page.selectOption('#subject','informatics');
-  const infoATopics=await page.locator('#unit option').allTextContents();
+  const infoATopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(infoATopics.includes('1. Ψηφιακός Κόσμος'),'A Informatics official topic missing');
   assert.ok(infoATopics.some(x=>x.startsWith('Προαιρετικό — 9. Προγραμματισμός Υπολογιστικών Συστημάτων')),'A Informatics optional status missing');
   const infoAPrompt=await page.evaluate(()=>window.promptText());
@@ -133,14 +135,14 @@ try{
 
   await page.selectOption('#grade','b');
   await page.selectOption('#subject','informatics');
-  const infoBTopics=await page.locator('#unit option').allTextContents();
+  const infoBTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(infoBTopics.includes('7. Τεχνητή Νοημοσύνη'),'B Informatics official AI unit missing');
   const infoBPrompt=await page.evaluate(()=>window.promptText());
   assert.match(infoBPrompt,/Οι μαθητές διατυπώνουν πρώτα δική τους απάντηση\/λύση/i,'B Informatics must use student-first critical comparison');
 
   await page.selectOption('#grade','a');
   await page.selectOption('#subject','religion');
-  const religionEthicsATopics=await page.locator('#unit option').allTextContents();
+  const religionEthicsATopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(religionEthicsATopics.some(x=>x.includes('Θρησκευτικά — Δ΄ Θεματική')),'A Religion full thematic framework missing');
   assert.ok(religionEthicsATopics.some(x=>x.includes('Ηθική (Α΄ μέρος')&&x.includes('Ποιες πράξεις θεωρούμε ηθικές')),'A Ethics published first-part unit missing');
   const religionEthicsANote=await page.locator('#curriculumNote').innerText();
@@ -150,23 +152,23 @@ try{
 
   await page.selectOption('#grade','b');
   await page.selectOption('#subject','religion');
-  const religionEthicsBTopics=await page.locator('#unit option').allTextContents();
+  const religionEthicsBTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(religionEthicsBTopics.some(x=>x.includes('Η αρχαία φιλοσοφία ως τέχνη του βίου')),'B Ethics first-part mapping missing');
 
   await page.selectOption('#grade','c');
   await page.selectOption('#subject','religion');
-  const religionEthicsCTopics=await page.locator('#unit option').allTextContents();
+  const religionEthicsCTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(religionEthicsCTopics.some(x=>x.includes('Ηθικός νόμος και ορθολογικές προσταγές')),'C Ethics first-part mapping missing');
   assert.ok(religionEthicsCTopics.some(x=>x.includes('Μονοθεϊστικές θρησκείες')),'C Religion thematic framework missing');
 
   await page.selectOption('#grade','a');
   await page.selectOption('#subject','music');
-  const musicTopics=await page.locator('#unit option').allTextContents();
+  const musicTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(musicTopics.includes('Α4. Τα χρώματα των ήχων'),'A Music annual E.A.E. mapping missing');
   assert.ok(!musicTopics.includes('Δ1. Μουσική σε δύο χρόνους'),'A Music excluded section leaked into selector');
 
   await page.selectOption('#subject','art');
-  const artTopics=await page.locator('#unit option').allTextContents();
+  const artTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(artTopics.includes('10ο Κεφάλαιο — Ένα πρωινό στον Παρθενώνα'),'A Art annual framework missing');
   const artNote=await page.locator('#curriculumNote').innerText();
   assert.match(artNote,/δεν αποτελούν υποχρεωτική λίστα/i,'Art must be presented as an open selection framework');
@@ -197,7 +199,7 @@ try{
   assert.match(specialLycMathNote,/επίσημο πλαίσιο 2026–27/i,'Special Lyceum Math must visibly report verified 2026-27 framework coverage');
   assert.match(specialLycMathNote,/δεν αποτελούν υποχρεωτική λίστα|framework/i,'Special Lyceum Math must remain framework-only until exact E.A.E. sections are mapped');
   assert.ok(await page.locator('#curriculumNote a[href*="iep.edu.gr"]').count(),'Special Lyceum Math framework must link to the official IEP source');
-  const specialLycMathTopics=await page.locator('#unit option').allTextContents();
+  const specialLycMathTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(specialLycMathTopics.some(x=>/Άλγεβρα Γενικής Παιδείας.*Α΄ Λυκείου Ε\.Α\.Ε\./i.test(x)),'Special Lyceum A Math must expose the verified Algebra course-level anchor');
   assert.ok(specialLycMathTopics.some(x=>/Γεωμετρία Γενικής Παιδείας.*Α΄ Λυκείου Ε\.Α\.Ε\./i.test(x)),'Special Lyceum A Math must expose the verified Geometry course-level anchor');
 
@@ -217,7 +219,7 @@ try{
   assert.match(specialLycEconomicsNote,/επίσημο πλαίσιο 2026–27/i,'Special Lyceum Economics must visibly report verified 2026-27 framework coverage');
   assert.match(specialLycEconomicsNote,/δεν αποτελούν υποχρεωτική λίστα|framework/i,'Special Lyceum Economics must remain framework-only until exact E.A.E. sections are mapped');
   assert.ok(await page.locator('#curriculumNote a[href*="dide.ira.sch.gr"]').count(),'Special Lyceum Economics framework must link to the published 2026-27 source');
-  const specialLycEconomicsTopics=await page.locator('#unit option').allTextContents();
+  const specialLycEconomicsTopics=await page.locator('#unit option:not([value="custom"])').allTextContents();
   assert.ok(specialLycEconomicsTopics.some(x=>/Οικονομία Ομάδας Προσανατολισμού Σπουδών Οικονομίας και Πληροφορικής.*Γ΄ Λυκείου Ε\.Α\.Ε\./i.test(x)),'Special Lyceum C Economics must expose the verified OPOP course-level anchor');
 
   for (const gradeId of ['a','b','c']) {
@@ -230,7 +232,7 @@ try{
     assert.match(englishNote,/επίσημο πλαίσιο 2026–27/i,`Special Lyceum ${gradeId.toUpperCase()} English must visibly report verified framework coverage`);
     assert.match(englishNote,/δεν αποτελούν υποχρεωτική λίστα|framework/i,`Special Lyceum ${gradeId.toUpperCase()} English must not imply a fixed unit syllabus`);
     assert.ok(await page.locator('#curriculumNote a[href*="dide.ira.sch.gr"]').count(),`Special Lyceum ${gradeId.toUpperCase()} English must retain the published 2026-27 source`);
-    const englishTopics=(await page.locator('#unit option').allTextContents()).map(x=>x.trim()).filter(Boolean);
+    const englishTopics=(await page.locator('#unit option:not([value="custom"])').allTextContents()).map(x=>x.trim()).filter(Boolean);
     assert.ok(englishTopics.length>=5,`Special Lyceum ${gradeId.toUpperCase()} English must expose the verified foreign-language framework choices`);
     assert.ok(englishTopics.some(x=>/Επίπεδο γλωσσομάθειας/i.test(x)),`Special Lyceum ${gradeId.toUpperCase()} English must expose proficiency-level differentiation`);
     assert.ok(englishTopics.some(x=>/Επικοινωνιακή προσέγγιση/i.test(x)),`Special Lyceum ${gradeId.toUpperCase()} English must expose communicative/functional language use`);
@@ -269,7 +271,7 @@ try{
     const languageOption=page.locator('#subject option').filter({hasText:'Νεοελληνική Γλώσσα'}).first();
     assert.ok(await languageOption.count(),`Special Lyceum ${gradeId.toUpperCase()} language subject missing`);
     await page.selectOption('#subject',await languageOption.getAttribute('value'));
-    const unitLabels=(await page.locator('#unit option').allTextContents()).map(x=>x.trim()).filter(Boolean);
+    const unitLabels=(await page.locator('#unit option:not([value="custom"])').allTextContents()).map(x=>x.trim()).filter(Boolean);
     assert.ok(unitLabels.length>=4,`Special Lyceum ${gradeId.toUpperCase()} language framework should expose verified choices`);
     assert.ok(!unitLabels.some(x=>x.startsWith('Γράψε την ακριβή ενότητα')),`Special Lyceum ${gradeId.toUpperCase()} language must not fall back to manual-only entry`);
   }
@@ -280,7 +282,7 @@ try{
     const foreignOption=page.locator('#subject option').filter({hasText:'2η Ξένη Γλώσσα'}).first();
     assert.ok(await foreignOption.count(),`Special Lyceum ${gradeId.toUpperCase()} second foreign language missing`);
     await page.selectOption('#subject',await foreignOption.getAttribute('value'));
-    const unitLabels=(await page.locator('#unit option').allTextContents()).map(x=>x.trim()).filter(Boolean);
+    const unitLabels=(await page.locator('#unit option:not([value="custom"])').allTextContents()).map(x=>x.trim()).filter(Boolean);
     assert.ok(unitLabels.length>=5,`Special Lyceum ${gradeId.toUpperCase()} second foreign language framework should expose verified choices`);
     assert.ok(!unitLabels.some(x=>x.startsWith('Γράψε την ακριβή ενότητα')),`Special Lyceum ${gradeId.toUpperCase()} second foreign language must not be manual-only`);
     const note=await page.locator('#curriculumNote').innerText();

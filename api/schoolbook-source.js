@@ -3152,6 +3152,9 @@ function resolveMathBCurriculumPaths(topic) {
 
 function mathBTopicKey(topic) {
   const value = String(topic || "");
+  // Verified exact alias: the educator diagnostic label refers to official B1.4.
+  // Do not infer other unnumbered topics or annual scope from fuzzy matching.
+  if (normalize(value) === "εφαρμογη πυθαγορειου θεωρηματος") return "B.1.4";
   const match = value.match(/Μέρος\s+([ΑAΒB])\s*·\s*(\d+)\.(\d+)/i);
   if (!match) return "";
 

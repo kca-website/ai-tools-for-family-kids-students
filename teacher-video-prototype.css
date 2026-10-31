@@ -62,3 +62,8 @@ body.teacher-video-active #teacherToolsDetails{margin-top:16px}
 .video-long-notice{display:flex;gap:8px;align-items:flex-start;margin:10px 0 12px;padding:10px 12px;border:1px solid #e7d6a7;border-radius:11px;background:#fffaf0;color:#654d12;font-size:.82rem;line-height:1.4}
 .video-long-notice[hidden]{display:none!important}.video-long-notice strong{white-space:nowrap}.video-long-notice span{color:#6b5a2d}
 @media(max-width:620px){.video-long-notice{display:block}.video-long-notice strong{display:block;margin-bottom:3px}}
+
+/* A ready-to-download link must never be clickable before a real file exists. */
+.video-download[hidden]{display:none!important}
+.video-export-guide{margin:13px 0 5px;padding:12px 14px;border:1px solid #cfddec;border-radius:10px;background:#f4f9fd;color:#334155;font-size:.88rem;line-height:1.5}
+.video-export-status{margin:6px 0 0;font-size:.84rem;color:#245f8e;font-weight:700}

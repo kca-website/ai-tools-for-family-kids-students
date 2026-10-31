@@ -525,7 +525,13 @@ ${JSON.stringify(current)}
 Επέστρεψε ΜΟΝΟ JSON:
 {"title":"...","onscreen":"...","narration":"...","symbol":"...","visual":"..."}
 Να παραμένει συνεπής με τις προηγούμενες/επόμενες σκηνές και με την πηγή περιεχομένου.`;
-      const r=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:"Είσαι εκπαιδευτικός video editor. Επιστρέφεις μόνο έγκυρο JSON και δεν προσθέτεις πληροφορίες έξω από την πηγή.",prompt})});
+      const ownMode=sourceMode()==="own";
+      const ownSource=ownMode?selectRelevantMaterial(ownMaterial(),topicText(),7000):"";
+      const requestSource=ownMode
+        ?{sourceMode:"teacher_upload",documentText:ownSource,documentName:q("videoOwnFile")?.files?.[0]?.name||"Υλικό εκπαιδευτικού"}
+        :await window.AITOOLSKIDS_TEACHER_SOURCE.prepare();
+      const {sourceText,sourceUrl,...sourceFields}=requestSource;
+      const r=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,sourceMode:sourceFields.sourceMode,...sourceFields})});
       const d=await r.json();
       if(!r.ok)throw new Error(d.message||"Αποτυχία επαναδημιουργίας.");
       project.scenes[index]=extractSingleScene(d.text,index);
@@ -1045,6 +1051,10 @@ ${JSON.stringify(current)}
             )
           :"";
         const sourceFile=q("videoOwnFile")?.files?.[0];
+        const requestSource=ownMode
+          ?{sourceMode:"teacher_upload",documentText:ownSource,documentName:sourceFile?.name||"Υλικό εκπαιδευτικού"}
+          :await window.AITOOLSKIDS_TEACHER_SOURCE.prepare();
+        const {sourceText,sourceUrl,...sourceFields}=requestSource;
         const strictSourceSystem=ownMode
           ?"\nΟ εκπαιδευτικός έχει δώσει δικό του αρχείο/κείμενο. Αυτό είναι η κύρια και δεσμευτική πηγή περιεχομένου. ΜΗΝ χρησιμοποιήσεις την επιλεγμένη σχολική ενότητα για πραγματολογικό περιεχόμενο και ΜΗΝ συμπληρώσεις από γενικές γνώσεις. Η τάξη και το μάθημα χρησιμοποιούνται μόνο για επίπεδο γλώσσας και παρουσίασης."
           :"";
@@ -1055,8 +1065,7 @@ ${JSON.stringify(current)}
             system:videoSystem+strictSourceSystem,
             format:"storyboard",
             prompt:buildPrompt(sourceBudget,false),
-            documentText:ownSource,
-            documentName:ownMode?(sourceFile?.name||"Υλικό εκπαιδευτικού"):"",
+            ...sourceFields,
             outputTokens:outputTokenBudget()
           })
         });
@@ -1072,6 +1081,7 @@ ${JSON.stringify(current)}
         if(isContextLimitError(attempt.data?.message)) throw new Error("Το υλικό είναι πολύ μεγάλο για μία κλήση AI. Μείωσε λίγο την επιλεγμένη ύλη ή γράψε πιο συγκεκριμένο στόχο ώστε να κρατήσουμε τα σωστά αποσπάσματα.");
         throw new Error(attempt.data?.message||"Αποτυχία δημιουργίας storyboard.");
       }
+      if(!attempt.data?.source?.kind)throw new Error("Δεν υπάρχει επαληθευμένο καθεστώς πηγής για το βίντεο.");
       project=extractJson(attempt.data.text);
       projectDirty=false;
       drawScene(project.scenes[0],0,1,0);

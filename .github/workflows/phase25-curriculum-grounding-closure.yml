@@ -16,6 +16,9 @@ on:
       - 'special-education-*.js'
       - 'api/schoolbook-source.js'
       - 'tests/**'
+      - 'teacher-assistant.html'
+      - 'teacher-video-prototype.js'
+      - 'api/teacher-assistant.js'
       - '.github/workflows/phase25-curriculum-grounding-closure.yml'
   workflow_dispatch:
 
@@ -92,3 +95,7 @@ jobs:
         run: node tests/phase38-gel-audio-evidence-contract.mjs
       - name: GEL learner-text practice requires real source
         run: node tests/phase39-gel-own-text-guard.mjs
+      - name: Teacher real-source workflow desktop and mobile
+        run: node tests/phase40-teacher-real-source-ui.mjs
+      - name: Teacher API source re-verification contract
+        run: node tests/phase40-teacher-source-server.mjs

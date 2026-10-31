@@ -28,6 +28,7 @@ assert.equal(out.payload.groundingValidated,false);
 assert.deepEqual(out.payload.source.sources[0],{title:'Επιστημονικό αρχείο',url:'https://university.example.edu/records'});
 assert.equal(out.payload.source.annualScopeVerified,false);
 console.log('PHASE41_TEACHER_WEB_SEARCH_CONSENT_AND_PROVENANCE_OK');
+delete require.cache[evidencePath];
 const evidence=require('../teacher-web-evidence.js');
 const oldFetch=globalThis.fetch, oldKey=process.env.GEMINI_API_KEY;process.env.GEMINI_API_KEY='test-key';
 try{

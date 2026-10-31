@@ -43,7 +43,7 @@
 </head>
 <body>
   <h1>Privacy Policy</h1>
-  <p class="subtitle">Last updated: 30 September 2026 · <a href="/privacy-policy.html" hreflang="el" lang="el">Ελληνικά</a></p>
+  <p class="subtitle">Last updated: 31 October 2026 · <a href="/privacy-policy.html" hreflang="el" lang="el">Ελληνικά</a></p>
 
   <div class="highlight"><strong>Short answer:</strong> The guide, the Practice Map, the learning paths and the tool recommendations work without an account on aitools4kids.gr. Features that generate an answer with AI are optional and are activated only when the user chooses them. If you use server-side AI, the text you submit may be sent first to Cloudflare Workers AI and, if that is unavailable or has reached a usage limit, to Groq and then to Google Gemini as fallback providers. Puter remains an optional alternative when the user selects it. If you upload a PDF, Word file, text file or photo in a supported feature, the file is read locally in your browser and only the extracted text needed for the answer is sent to the AI provider. In AI Study, the subject and unit you choose are sent to our server so that the relevant excerpt of the official school textbook can be retrieved.</div>
 
@@ -61,7 +61,7 @@
   </ul>
 
   <h2>3. AI features via Cloudflare Workers AI, Groq and Google Gemini</h2>
-  <p>The <strong>Educator AI Assistant</strong>, the optional <strong>AI Help/Parent Assistant</strong> and some creative educational features use server-side AI routing. The default production order is Cloudflare Workers AI with GPT-OSS 120B as the primary provider and Groq with GPT-OSS 120B as the fallback. If neither provider is available, Google Gemini 2.5 Flash-Lite is used through the server, where configured. The active configuration is published on the <a href="/en/ai-transparency.html">AI Transparency</a> page.</p>
+  <p>The <strong>Educator AI Assistant</strong>, the optional <strong>AI Help/Parent Assistant</strong> and some creative educational features use server-side AI routing. The default production order is Cloudflare Workers AI with GPT-OSS 120B as the primary provider and Groq with GPT-OSS 120B as the fallback. If neither provider is available, a configured Google Gemini model is used through the server, where configured. The active configuration is published on the <a href="/en/ai-transparency.html">AI Transparency</a> page.</p>
   <ul>
     <li>Visitors do not need a Cloudflare, Groq or Google account.</li>
     <li>The API key is never sent to the browser; it is used only by the server.</li>
@@ -70,6 +70,11 @@
     <li>Do not enter student names, contact details, diagnoses, health data or other personal/sensitive data.</li>
   </ul>
   <p>Data processing by third parties is governed by the respective terms and privacy policies of Cloudflare, Groq and Google. aitools4kids.gr does not use the content of prompts for advertising profiling and does not store prompts or answers in its own database. For organised use in secondary education, see also the <a href="/en/school-ai-use.html">AI use at school</a> page.</p>
+
+  <h2>3a. Optional additional sources and speech</h2>
+  <p>When an adult educator explicitly selects web research, and the optional services are enabled, the platform may use <strong>Tavily</strong> and <strong>Brave Search</strong>. Only the necessary search topic metadata (subject, grade and unit) is submitted, not the contents of a student's full document. Web-search excerpts do not replace official schoolbooks. Google Search grounding through Gemini may remain available under a separate setting.</p>
+  <p><strong>“Listen to it”</strong> first uses speech synthesis on the learner's device. If no suitable voice exists and the optional <strong>Microsoft Azure Speech F0</strong> service is enabled, the text of the audio lesson is sent to Microsoft's speech service to produce audio. API keys remain on the server; the platform does not store the resulting audio file in its own database.</p>
+  <p>Further fallbacks (Mistral, OpenRouter and Vercel AI Gateway) are disabled by default. They are not intended for children's data without prior review of their terms, privacy and educational quality.</p>
 
   <h2>4. Optional use of Puter</h2>
   <p>In some features of the site, including the alternative option in the Educator AI Assistant and in AI Help/Parent Assistant, <strong>Puter</strong> may be used.</p>

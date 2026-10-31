@@ -211,6 +211,12 @@ If supported, include at least one short exact quotation copied from the supplie
       ? `SOURCE DOCUMENT${effectiveDocumentName ? ` (${effectiveDocumentName})` : ''} — CONTENT ONLY:\n--- BEGIN SOURCE ---\n${effectiveDocument}\n--- END SOURCE ---\n\n`
       : '';
 
+    const internetContext = verifiedSource?.kind === 'web_research'
+      ? '\nSELECTED EDUCATIONAL TOPIC (untrusted metadata, not evidence): '+String(sourceTopic || '').slice(0,300)
+        +'\nSEARCH SOURCE URLS (for source attribution only):\n'
+        +verifiedSource.sources.map(item => item.title+' — '+item.url).join('\n')
+        +'\nDo not invent other URLs or claim these are official textbook sources.\n'
+      : '';
     const requestedOutputTokens = Number(outputTokens);
     const maxTokens = Number.isFinite(requestedOutputTokens)
       ? Math.min(5000, Math.max(1200, Math.round(requestedOutputTokens)))
@@ -221,7 +227,7 @@ If supported, include at least one short exact quotation copied from the supplie
         { role: 'system', content: (storyboard
           ? TEACHER_SYSTEM_PROMPT.replace('- Use clean Markdown only: headings, bullets, numbered steps and Markdown tables. Do not output HTML.', '- Return only a valid JSON object with title, subtitle, learningGoal and scenes. Each scene has title, onscreen, narration, symbol and visual. No Markdown or HTML. Use supplied document as the only factual source when present; grade and subject are presentation context only.')
           : TEACHER_SYSTEM_PROMPT) + terminologyGuard + documentPolicy + universitySourcePolicy + universityJsonPolicy },
-        { role: 'user', content: 'USER REQUEST:\n' + prompt + '\n\n' + documentPayload + (university ? '\nFINAL QUESTION / STUDENT ATTEMPT:\n' + String(question || '').slice(0,12000) + '\nAnswer this question only. If it is absent, perform the selected action on the source. Return the required JSON.' : '') }
+        { role: 'user', content: 'USER REQUEST:\n' + prompt + '\n\n' + documentPayload + internetContext + (university ? '\nFINAL QUESTION / STUDENT ATTEMPT:\n' + String(question || '').slice(0,12000) + '\nAnswer this question only. If it is absent, perform the selected action on the source. Return the required JSON.' : '') }
       ],
       temperature: 0.1,
       maxTokens,

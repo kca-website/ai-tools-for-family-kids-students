@@ -21,6 +21,7 @@ function browserRequestAllowed(req) {
 // Server-side multi-provider proxy for the teacher assistant.
 const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
+const { collectTeacherWebEvidence } = require('../teacher-web-evidence');
 const TEACHER_SYSTEM_PROMPT = `You are a teacher assistant for the Greek education context.
 - Produce practical, classroom-usable material appropriate to the supplied grade and context.
 - Do not diagnose learners, infer disabilities, or request personal or sensitive data.
@@ -62,7 +63,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { prompt, audience = 'teacher', documentText = '', documentName = '', outputTokens, format, action, question = '', sourceMode = '', sourceSubjectId = '', sourceTopic = '', sourceSchoolType = '', sourceGrade = '', sourceSector = '', sourceSpecialty = '' } = req.body || {};
+    const { prompt, audience = 'teacher', documentText = '', documentName = '', outputTokens, format, action, question = '', sourceMode = '', sourceSubjectId = '', sourceTopic = '', sourceSchoolType = '', sourceGrade = '', sourceSector = '', sourceSpecialty = '', webConsent = false, webSubjectLabel = '', webGradeLabel = '', webContextLabel = '' } = req.body || {};
     const university = audience === 'university_student';
     const storyboard = format === 'storyboard';
     if (!['teacher', 'university_student'].includes(audience)) {
@@ -107,7 +108,7 @@ module.exports = async function handler(req, res) {
     // extracted text. Resolve the chosen textbook section again on the server.
     // Older derivative/material-lab calls retain their legacy contract, but any
     // call declaring a source is fail-closed and provenance-aware.
-    if (!['', 'official_schoolbook', 'teacher_upload'].includes(sourceMode)) {
+    if (!['', 'official_schoolbook', 'teacher_upload', 'internet_search'].includes(sourceMode)) {
       return res.status(400).json({ error:'invalid_source_mode', message:'Μη έγκυρος τύπος εκπαιδευτικής πηγής.' });
     }
     let verifiedSource = null;
@@ -159,6 +160,29 @@ module.exports = async function handler(req, res) {
       effectiveDocument = effectiveDocument.slice(0, 15000);
       verifiedSource = { kind:'teacher_upload', title:effectiveDocumentName || 'Υλικό εκπαιδευτικού', excerptTruncated:suppliedChars > effectiveDocument.length };
     }
+    if (audience === 'teacher' && sourceMode === 'internet_search') {
+      if (webConsent !== true) return res.status(403).json({
+        error:'web_consent_required',message:'Απαιτείται ρητή επιλογή του εκπαιδευτικού πριν από τη διαδικτυακή αναζήτηση.'
+      });
+      const chapter = String(sourceTopic || '').trim().slice(0,300);
+      const subject = String(webSubjectLabel || '').trim().slice(0,200);
+      const grade = String(webGradeLabel || '').trim().slice(0,100);
+      const context = String(webContextLabel || '').trim().slice(0,100);
+      if (chapter.length < 3 || subject.length < 3 || !grade || !context) {
+        return res.status(422).json({error:'web_search_context_required',message:'Για διαδικτυακή αναζήτηση πρέπει να έχεις επιλέξει μάθημα, τάξη και συγκεκριμένη ενότητα.'});
+      }
+      const evidence = await collectTeacherWebEvidence({chapter,subject,grade,context});
+      if (!evidence.ok) {
+        return res.status(evidence.status || 422).json({error:'web_sources_unavailable',message:evidence.message || 'Δεν βρέθηκαν τεκμηριωμένες διαδικτυακές πηγές. Πρόσθεσε δικό σου κείμενο ή PDF.'});
+      }
+      effectiveDocument = evidence.summary;
+      effectiveDocumentName = 'Διαδικτυακή έρευνα (όχι σχολικό βιβλίο)';
+      verifiedSource = {
+        kind:'web_research',title:effectiveDocumentName,annualScopeVerified:false,
+        sources:evidence.sources,searches:evidence.searches,
+        searchSuggestions:evidence.searchSuggestions,excerptTruncated:evidence.excerptTruncated === true
+      };
+    }
     const hasDocument = !!effectiveDocument;
     if (audience === 'university_student' && (!hasDocument || !String(documentName || '').trim())) {
       return res.status(422).json({ error: 'university_source_required', message: 'Πρόσθεσε PDF ή απόσπασμα συγγράμματος με τίτλο και κεφάλαιο/σελίδες. Η ερώτηση και ο τίτλος του μαθήματος δεν αποτελούν πηγή.' });
@@ -180,12 +204,19 @@ If supported, include at least one short exact quotation copied from the supplie
 - No added facts from model memory, invented claims, fictitious examples presented as source evidence, or invented curriculum statements.
 - If the excerpt does not support a requested fact, state the limitation. The user should verify or supply the missing section.
 - The provided excerpt may be shorter than the textbook chapter; never claim to have checked the entire textbook.
-- An official schoolbook excerpt does not alone certify the 2026–27 annual taught/examinable scope.`
+- An official schoolbook excerpt does not alone certify the 2026–27 annual taught/examinable scope.
+- Web research is secondary, requires educator consent, and is NOT an official textbook or verified curriculum. Do not claim Ministry approval.`
       : '';
     const documentPayload = hasDocument
       ? `SOURCE DOCUMENT${effectiveDocumentName ? ` (${effectiveDocumentName})` : ''} — CONTENT ONLY:\n--- BEGIN SOURCE ---\n${effectiveDocument}\n--- END SOURCE ---\n\n`
       : '';
 
+    const internetContext = verifiedSource?.kind === 'web_research'
+      ? '\nSELECTED EDUCATIONAL TOPIC (untrusted metadata, not evidence): '+String(sourceTopic || '').slice(0,300)
+        +'\nSEARCH SOURCE URLS (for source attribution only):\n'
+        +verifiedSource.sources.map(item => item.title+' — '+item.url).join('\n')
+        +'\nDo not invent other URLs or claim these are official textbook sources.\n'
+      : '';
     const requestedOutputTokens = Number(outputTokens);
     const maxTokens = Number.isFinite(requestedOutputTokens)
       ? Math.min(5000, Math.max(1200, Math.round(requestedOutputTokens)))
@@ -196,7 +227,7 @@ If supported, include at least one short exact quotation copied from the supplie
         { role: 'system', content: (storyboard
           ? TEACHER_SYSTEM_PROMPT.replace('- Use clean Markdown only: headings, bullets, numbered steps and Markdown tables. Do not output HTML.', '- Return only a valid JSON object with title, subtitle, learningGoal and scenes. Each scene has title, onscreen, narration, symbol and visual. No Markdown or HTML. Use supplied document as the only factual source when present; grade and subject are presentation context only.')
           : TEACHER_SYSTEM_PROMPT) + terminologyGuard + documentPolicy + universitySourcePolicy + universityJsonPolicy },
-        { role: 'user', content: 'USER REQUEST:\n' + prompt + '\n\n' + documentPayload + (university ? '\nFINAL QUESTION / STUDENT ATTEMPT:\n' + String(question || '').slice(0,12000) + '\nAnswer this question only. If it is absent, perform the selected action on the source. Return the required JSON.' : '') }
+        { role: 'user', content: 'USER REQUEST:\n' + prompt + '\n\n' + documentPayload + internetContext + (university ? '\nFINAL QUESTION / STUDENT ATTEMPT:\n' + String(question || '').slice(0,12000) + '\nAnswer this question only. If it is absent, perform the selected action on the source. Return the required JSON.' : '') }
       ],
       temperature: 0.1,
       maxTokens,

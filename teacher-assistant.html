@@ -173,6 +173,15 @@ body.ae-no-scroll{overflow:hidden}
 <div class="field full" id="teacherRealSourcePanel" style="margin:12px 0;padding:16px;border:1px solid #9ebdcb;border-radius:12px">
   <label for="teacherOwnText"><strong>Πραγματική πηγή για το εκπαιδευτικό υλικό</strong></label>
   <p class="meta">Το site αναζητά πρώτα το σωστό επίσημο σχολικό βιβλίο. Αν δεν έχει επαληθευμένη αντιστοίχιση ή διδάσκεις δική σου ενότητα, πρόσθεσε το σχετικό πραγματικό κείμενο. Χωρίς πηγή δεν παράγεται φύλλο εργασίας ή αξιολόγησης από γενικές γνώσεις AI.</p>
+  <div id="teacherOnlineFallback" hidden role="group" aria-label="Επιλογή διαδικτυακής αναζήτησης" style="margin:12px 0;padding:14px;border:1px solid #aeb7c6;border-radius:10px">
+    <strong>Δεν βρέθηκε επαληθευμένο σχολικό κείμενο.</strong>
+    <p>Επιθυμείς να αναζητήσουμε πληροφορίες από πραγματικές διαδικτυακές πηγές για τη συγκεκριμένη ενότητα; Το υλικό δεν θα χαρακτηριστεί επίσημη διδακτέα ή εξεταστέα ύλη. Εάν δεν βρεθούν πηγές, η δημιουργία θα σταματήσει.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button type="button" class="btn" id="teacherOnlineAccept">Ναι, αναζήτησε στο διαδίκτυο</button>
+      <button type="button" class="btn purple" id="teacherOnlineDecline">Όχι, θα δώσω δικό μου υλικό</button>
+    </div>
+  </div>
+  <div id="teacherWebReferences" hidden style="padding:10px 0" aria-live="polite"></div>
   <textarea id="teacherOwnText" rows="5" placeholder="Επικόλλησε πραγματικό απόσπασμα σχολικού βιβλίου ή δικές σου σημειώσεις (χωρίς προσωπικά δεδομένα μαθητών)." style="width:100%;margin-top:8px"></textarea>
   <label for="teacherOwnFile" style="display:block;margin-top:8px">Ή ανέβασε PDF / TXT (το αρχείο διαβάζεται στον browser)</label>
   <input id="teacherOwnFile" type="file" accept=".pdf,.txt,application/pdf,text/plain">
@@ -425,9 +434,11 @@ function refreshUnits(){const s=selectedSubject(),topics=uniq(s?.topics||[]),cus
   $('customUnit').value='';
   $('customUnit').placeholder=peFramework?'π.χ. Πετοσφαίριση — μανσέτα και πάσα':prelim?'Ακριβής στόχος από το ΕΠΕ (χωρίς προσωπικά δεδομένα)':'Ο πραγματικός τίτλος από το βιβλίο ή τις σημειώσεις σου.';
   if($('teacherRealSourceStatus'))$('teacherRealSourceStatus').textContent='Η πηγή θα αναζητηθεί κατά τη δημιουργία.';
+  if(typeof resetTeacherInternetChoice==='function')resetTeacherInternetChoice();
   let note='';const sourceLink=curriculumSourceLink(s);if(s?.officialPublishedPending){const link=s.officialPendingSource?` <a href="${s.officialPendingSource}" target="_blank" rel="noopener">Επίσημες οδηγίες ↗</a>`:'';note=topics.length?`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά χρειάζεται ο ακριβής τίτλος κεφαλαίου/ενότητας από την επίσημη πηγή.</strong> Οι ${topics.length} επιλογές που βλέπεις είναι μόνο υποστηρικτικό πλαίσιο· μη θεωρηθούν αυτούσια φετινή ύλη.${link}`:`<strong>◷ Οι επίσημες οδηγίες 2026–27 έχουν δημοσιευθεί, αλλά χρειάζεται ο ακριβής τίτλος κεφαλαίου/ενότητας από την επίσημη πηγή.</strong> Γράψε τον πραγματικό τίτλο κεφαλαίου/ενότητας αντί να επινοηθεί ύλη.${link}`}else if(topics.length&&s?.supportOnly){note=`<strong>ℹ ${topics.length} υποστηρικτικές επιλογές από επίσημη αναφορά.</strong> Χρησιμοποιούνται ως βοήθημα επιλογής και δεν παρουσιάζονται ως αυτούσια επίσημη ετήσια ύλη Ε.Α.Ε. 2026–27.${sourceLink}`}else if(topics.length&&s?.selectionFramework){note=`<strong>✓ ${topics.length} επαληθευμένες επιλογές μέσα στο επίσημο πλαίσιο 2026–27.</strong> Δεν αποτελούν υποχρεωτική λίστα κειμένων/ενοτήτων· ο/η εκπαιδευτικός επιλέγει σύμφωνα με τις οδηγίες του μαθήματος.${sourceLink}`}else if(topics.length&&s?.bookSections){note=`<strong>📘 ${topics.length} επαληθευμένες ενότητες από το επίσημο σχολικό βιβλίο.</strong> Οι επίσημες οδηγίες 2026–27 για το μάθημα έχουν δημοσιευθεί, αλλά οι τίτλοι του βιβλίου δεν παρουσιάζονται αυτόματα ως αυτούσια ετήσια διδακτέα ή εξεταστέα ύλη.${officialBookSourceLink(s)}${sourceLink}`}else if(topics.length&&s?.navigationMap){note=`<strong>ℹ ${topics.length} τεκμηριωμένες επιλογές από αναλυτικό χάρτη των οδηγιών 2026–27.</strong> Είναι βοήθημα πλοήγησης και δεν παρουσιάζονται ως αυτούσιοι επίσημοι τίτλοι ενοτήτων.${sourceLink}`}else if(topics.length&&s?.annualMapped){note=`<strong>✓ ${topics.length} ενότητες με ρητή αντιστοίχιση στην επίσημη ύλη/οδηγίες 2026–27.</strong> Δεν προσθέτουμε γενικές ή τεχνητές ενότητες.${sourceLink}`}else if(topics.length){note=`<strong>ℹ ${topics.length} πραγματικές χαρτογραφημένες επιλογές.</strong> Η προέλευσή τους εμφανίζεται ξεχωριστά ώστε να μη συγχέονται με ετήσια ύλη 2026–27.${sourceLink}`}else if(context.value==='specialLyc'){note='Οι επίσημες οδηγίες Λυκείου Ε.Α.Ε. 2026-27 έχουν δημοσιευθεί. Όπου χρειάζεται ακριβέστερος τίτλος από την επίσημη πηγή, το μενού ΓΕΛ χρησιμοποιείται μόνο ως υποστηρικτικό πλαίσιο και ζητάμε το ακριβές κεφάλαιο που διδάσκεις.'}else if(context.value==='specialGym'){note='Οι επίσημες οδηγίες Γυμνασίου Ε.Α.Ε. 2026-27 έχουν δημοσιευθεί. Αν το συγκεκριμένο μάθημα χρειάζεται ακριβή τίτλο από την επίσημη πηγή, δεν εμφανίζουμε ψεύτικη «γενική ενότητα» και ζητάμε τον πραγματικό τίτλο.'}else if(context.value==='eneegyl'){note='Τα μαθήματα προέρχονται από τη δομή ΕΝ.Ε.ΓΥ.-Λ. 2026-27 και, όπου υπάρχουν, οι ενότητες από τα επαληθευμένα special-education datasets. Χωρίς χαρτογράφηση ζητάμε τον πραγματικό τίτλο κεφαλαίου.'}else{note='Για αυτή την επιλογή χρησιμοποίησε τον ακριβή τίτλο κεφαλαίου/ενότητας από το βιβλίο ή την επίσημη οδηγία.'}if(s?.coverageCaveat)note+=`<br><strong>Περιορισμός κάλυψης:</strong> ${s.coverageCaveat}`;$('curriculumNote').innerHTML=note;}
 context.onchange=refreshGrades;grade.onchange=refreshSubjects;subject.onchange=()=>{refreshUnits();renderTeacherTools();};
 unit.addEventListener('change',()=>{
+  resetTeacherInternetChoice();
   $('customUnitField').hidden=unit.value!=='custom';
   $('customUnit').value='';
   $('teacherRealSourceStatus').textContent='Η πηγή θα αναζητηθεί κατά τη δημιουργία.';
@@ -557,6 +568,70 @@ function stopGeneration(){
 // resolves official schoolbook text; browser payloads never confer official status.
 function teacherTopicText(){return unit.value==='custom'?$('customUnit').value.trim():unit.selectedOptions[0]?.textContent?.trim()||'';}
 function teacherSourceStatus(message){$('teacherRealSourceStatus').textContent=message;}
+let teacherInternetConsent=false;
+let teacherLastGeneration='groq';
+function resetTeacherInternetChoice(){
+  teacherInternetConsent=false;
+  $('teacherOnlineFallback').hidden=true;
+  $('teacherWebReferences').hidden=true;
+  $('teacherWebReferences').replaceChildren();
+}
+function offerTeacherInternetChoice(message){
+  teacherInternetConsent=false;
+  $('teacherOnlineFallback').hidden=false;
+  teacherSourceStatus(message+' Μπορείς να επιλέξεις διαδικτυακές πηγές ή δικό σου κείμενο/PDF.');
+}
+function showTeacherWebReferences(info){
+  const host=$('teacherWebReferences');
+  host.replaceChildren();host.hidden=true;
+  if(info?.kind!=='web_research')return;
+  const heading=document.createElement('strong');
+  heading.textContent='Πηγές διαδικτυακής έρευνας — όχι επίσημη σχολική ύλη';
+  host.appendChild(heading);
+  const list=document.createElement('ul');
+  for(const item of info.sources||[]){
+    try{
+      const u=new URL(item.url);
+      if(u.protocol!=='https:')continue;
+      const li=document.createElement('li'),a=document.createElement('a');
+      a.href=u.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.title||u.hostname;
+      li.appendChild(a);list.appendChild(li);
+    }catch(_){}
+  }
+  host.appendChild(list);
+  if(info.searchSuggestions){
+    const frame=document.createElement('iframe');
+    frame.title='Προτεινόμενες αναζητήσεις Google';
+    frame.sandbox='allow-popups';
+    frame.loading='lazy';
+    frame.referrerPolicy='no-referrer';
+    frame.style.cssText='width:100%;max-width:580px;height:70px;border:0';
+    frame.srcdoc=info.searchSuggestions;
+    host.appendChild(frame);
+  }
+  host.hidden=false;
+}
+$('teacherOnlineAccept').addEventListener('click',()=>{
+  if(!teacherTopicText() || teacherTopicText().length<3){
+    teacherSourceStatus('Γράψε πρώτα τον συγκεκριμένο τίτλο της ενότητας.');
+    $('customUnit').focus();return;
+  }
+  teacherInternetConsent=true;$('teacherOnlineFallback').hidden=true;
+  teacherSourceStatus('Επέλεξες αναζήτηση πραγματικών διαδικτυακών πηγών. Αναζητώ…');
+  if(teacherLastGeneration==='video')$('videoCreateBtn')?.click();
+  else if(teacherLastGeneration==='puter')generateGroq();
+  else generateGroq();
+});
+$('teacherOnlineDecline').addEventListener('click',()=>{
+  resetTeacherInternetChoice();
+  teacherSourceStatus('Δεν θα γίνει αναζήτηση στο διαδίκτυο. Πρόσθεσε πραγματικό κείμενο ή PDF.');
+  $('teacherOwnText').focus();
+});
+$('customUnit').addEventListener('input',resetTeacherInternetChoice);
+$('teacherOwnText').addEventListener('input',()=>{
+  if($('teacherOwnText').value.trim())resetTeacherInternetChoice();
+});
+$('videoCreateBtn')?.addEventListener('click',()=>{teacherLastGeneration='video';},true);
 async function prepareTeacherSource(){
   const own=$('teacherOwnText').value.trim();
   const topic=teacherTopicText();
@@ -565,14 +640,25 @@ async function prepareTeacherSource(){
     teacherSourceStatus('Πηγή: πραγματικό κείμενο εκπαιδευτικού, όχι αυτόματα επαληθευμένο σχολικό βιβλίο.');
     return {sourceMode:'teacher_upload',documentText:own.slice(0,45000),documentName:$('teacherOwnFile')?.files?.[0]?.name||'Σημειώσεις εκπαιδευτικού',sourceText:own.slice(0,15000)};
   }
-  if(!topic||unit.value==='custom'){
+  if(!topic || topic.length<3){
     $('customUnitField').hidden=false;
     $('customUnit').focus();
-    throw new Error('Για ενότητα εκτός χάρτη πρόσθεσε πραγματικό κείμενο ή PDF. Δεν χρησιμοποιούμε γενικές γνώσεις AI ως σχολική πηγή.');
+    throw new Error('Γράψε συγκεκριμένο τίτλο ενότητας ώστε να βρεθούν σωστές πληροφορίες.');
+  }
+  if(teacherInternetConsent){
+    return {sourceMode:'internet_search',webConsent:true,sourceTopic:topic,
+      webSubjectLabel:subject.selectedOptions[0]?.textContent||'',
+      webGradeLabel:grade.selectedOptions[0]?.textContent||'',
+      webContextLabel:context.selectedOptions[0]?.textContent||''};
+  }
+  if(unit.value==='custom'){
+    offerTeacherInternetChoice('Για αυτή τη χειροκίνητη ενότητα δεν υπάρχει επιβεβαιωμένη σύνδεση σχολικού βιβλίου.');
+    throw new Error('Για ενότητα εκτός χάρτη διάλεξε διαδικτυακή αναζήτηση ή πρόσθεσε πραγματικό κείμενο/PDF.');
   }
   const chosen=selectedSubject();
   if(chosen?.supportOnly||chosen?.selectionFramework||chosen?.officialPublishedPending){
-    throw new Error('Η επιλογή είναι υποστηρικτικό πλαίσιο και όχι επαληθευμένη αυτοτελής σχολική ενότητα. Πρόσθεσε πραγματικό κείμενο ή PDF.');
+    offerTeacherInternetChoice('Η επιλογή είναι υποστηρικτικό πλαίσιο, όχι ακριβής επίσημη ενότητα.');
+    throw new Error('Δεν υπάρχει επαληθευμένη επίσημη ενότητα. Επίλεξε διαδικτυακή έρευνα ή δικό σου κείμενο/PDF.');
   }
   const subjectId=chosen?.quizId||chosen?.id||subject.value;
   const schoolType=context.value==='epal'?'epal':'';
@@ -585,8 +671,8 @@ async function prepareTeacherSource(){
     body=await response.json();
   }catch(_){body=null;}
   if(!response?.ok||body?.grounded!==true||!String(body?.text||'').trim()){
-    teacherSourceStatus('Δεν εντοπίστηκε επαληθευμένη πηγή. Πρόσθεσε πραγματικό κείμενο ή PDF για να συνεχίσεις.');
-    throw new Error('Δεν βρέθηκε επαληθευμένο απόσπασμα βιβλίου για αυτή την επιλογή. Πρόσθεσε το πραγματικό κείμενο ή PDF και δοκίμασε ξανά.');
+    offerTeacherInternetChoice('Δεν εντοπίστηκε επαληθευμένο απόσπασμα σχολικού βιβλίου.');
+    throw new Error('Δεν βρέθηκε επίσημο απόσπασμα. Επίλεξε διαδικτυακή έρευνα ή πρόσθεσε πραγματικό κείμενο/PDF.');
   }
   const sourceUrl=String(body.canonicalSourceUrl||body.sourceUrl||'');
   if(!/^https:\/\/(?:[a-z0-9-]+\.)?ebooks\.edu\.gr\//i.test(sourceUrl))throw new Error('Η διεύθυνση πηγής δεν επιβεβαιώθηκε ως επίσημο σχολικό βιβλίο.');
@@ -612,7 +698,7 @@ $('teacherOwnFile').addEventListener('change',async e=>{
     teacherSourceStatus('Φορτώθηκε το κείμενο από '+file.name+' · '+text.length+' χαρακτήρες. Δεν έγινε αυτόματη πιστοποίηση επίσημης ύλης.');
   }catch(error){$('teacherOwnFile').value='';teacherSourceStatus('Δεν διαβάστηκε το αρχείο: '+error.message);}
 });
-async function generateGroq(){const b=$('groqBtn');startGeneration(b);
+async function generateGroq(){teacherLastGeneration='groq';const b=$('groqBtn');startGeneration(b);
   try{
     const source=await prepareTeacherSource();
     const {sourceText,sourceUrl,...requestSource}=source;
@@ -621,15 +707,19 @@ async function generateGroq(){const b=$('groqBtn');startGeneration(b);
     if(!response.ok)throw new Error(data.message||'Δεν ολοκληρώθηκε η τεκμηριωμένη δημιουργία.');
     if(!data?.source?.kind)throw new Error('Δεν επιβεβαιώθηκε πηγή στην απάντηση του AI.');
     const provider=data.provider==='cloudflare'?'Cloudflare Workers AI':data.provider==='groq'?'Groq':data.provider||'Server-side AI';
-    show(data.text,provider+' · '+(data.model||'AI')+' · '+(data.source.kind==='official_schoolbook'?'Επίσημο βιβλίο':'Υλικό εκπαιδευτικού'));
+    show(data.text,provider+' · '+(data.model||'AI')+' · '+(data.source.kind==='official_schoolbook'?'Επίσημο βιβλίο':data.source.kind==='web_research'?'Διαδικτυακές πηγές — όχι επίσημη ύλη':'Υλικό εκπαιδευτικού'));
+    showTeacherWebReferences(data.source);
     if(data.source.url){teacherSourceStatus('Χρησιμοποιήθηκε επίσημη πηγή: '+data.source.url+' · Ετήσια ύλη πιστοποιημένη: '+(data.source.annualScopeVerified?'ναι':'όχι ανεξάρτητα'));}
-  }catch(error){$('status').textContent=error.message||'Δεν ολοκληρώθηκε.';}
+  }catch(error){$('status').textContent=error.message||'Δεν ολοκληρώθηκε.';
+    if(teacherInternetConsent){resetTeacherInternetChoice();teacherSourceStatus('Η διαδικτυακή αναζήτηση δεν ολοκληρώθηκε. Πρόσθεσε δικό σου κείμενο ή δοκίμασε ξανά με νέα επιλογή.');}
+  }
   finally{stopGeneration();}
 }
 async function hydrateTeacherProviderStatus(){const el=$('teacherAiProviderStatus');if(!el)return;try{const r=await fetch('/api/teacher-assistant',{cache:'no-store'}),d=await r.json();if(!r.ok)return;const names=(d.providers||[]).map(x=>(x.name==='cloudflare'?'Cloudflare Workers AI':x.name==='groq'?'Groq':x.name)+' · '+x.model).join(' → ');if(names)el.textContent=names;}catch(_){}}
-function loadPuter(){return new Promise((ok,fail)=>{if(window.puter)return ok();const s=document.createElement('script');s.src='https://js.puter.com/v2/';s.onload=ok;s.onerror=fail;document.head.appendChild(s)})}async function generatePuter(){const b=$('puterBtn');startGeneration(b);
+function loadPuter(){return new Promise((ok,fail)=>{if(window.puter)return ok();const s=document.createElement('script');s.src='https://js.puter.com/v2/';s.onload=ok;s.onerror=fail;document.head.appendChild(s)})}async function generatePuter(){teacherLastGeneration='puter';const b=$('puterBtn');startGeneration(b);
   try{
     const source=await prepareTeacherSource();
+    if(source.sourceMode==='internet_search'){stopGeneration();return generateGroq();}
     $('generationMessage').textContent='Φορτώνω Puter και προετοιμάζω το υλικό από την πηγή…';
     await loadPuter();
     const sourceText=String(source.sourceText||'').trim();

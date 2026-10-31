@@ -363,12 +363,16 @@
   // Every source/AI request has a hard client deadline, so the page never stays on "preparing".
   async function timedFetch(url,opts={},ms=60000){
     const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),ms);
+    const external=opts?.signal;
+    const cancel=()=>ctl.abort();
+    if(external?.aborted)ctl.abort();
+    else external?.addEventListener?.('abort',cancel,{once:true});
     try{return await fetch(url,{...opts,signal:ctl.signal})}
     catch(e){
       if(e?.name!=='AbortError')throw e;
       const err=new Error(lang==='en'?'This took too long. Please press the button again.':'Η προετοιμασία άργησε πολύ. Πάτησε ξανά το κουμπί για νέα προσπάθεια.');
       err.code='client_timeout';throw err;
-    }finally{clearTimeout(t)}
+    }finally{clearTimeout(t);external?.removeEventListener?.('abort',cancel)}
   }
   $('zone').onchange=()=>{populateGrades();refreshSchoolTypeFields()};$('grade').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('schoolType').onchange=()=>{refreshSchoolTypeFields();populateSubjects()};$('epalSector').onchange=populateSubjects;$('epalSpecialty').onchange=populateSubjects;$('subject').onchange=()=>{$('topicCustom').value='';$('gelPracticeSourcePrompt').classList.add('hidden');sourceEvidenceUi(null);populateTopics()};$('topicPick').onchange=()=>{sourceEvidenceUi(null);if($('topicPick').value){$('topicCustom').value='';$('gelPracticeTopic').value=''}updateGelPracticePrompt()};
   $('gelPracticeTopic').onchange=()=>{
@@ -1191,16 +1195,65 @@
     return voices.find(v=>String(v.lang||'').toLowerCase().startsWith(wanted))||null;
   }
   function setAudioStatus(message){const n=$('audioStatus');if(n)n.textContent=message||''}
-  function playAudioLesson(){
-    if(!('speechSynthesis' in window)||typeof SpeechSynthesisUtterance==='undefined'){
-      setAudioStatus(lang==='en'?'Text-to-speech is not available on this device.':'Η συσκευή/ο browser δεν διαθέτει ανάγνωση κειμένου.');
+  // F0-only server-side speech is used only if this device has no usable language voice.
+  let azureAudio=null,azureAbort=null,azureReject=null,azureAudioUrl=null;
+  function stopAzureAudio(){
+    if(azureAbort){azureAbort.abort();azureAbort=null}
+    if(azureAudio){azureAudio.pause();azureAudio.removeAttribute('src');azureAudio=null}
+    if(azureReject){const reject=azureReject;azureReject=null;reject(new Error('stopped'))}
+    if(azureAudioUrl){URL.revokeObjectURL(azureAudioUrl);azureAudioUrl=null}
+  }
+  async function tryAzureSpeech(runId,text){
+    const segments=audioChunks(text,3500);
+    if(!segments.length||segments.length>6){
+      setAudioStatus(lang==='en'?'This lesson is too long for the backup speech service. Install a local voice.':'Το μάθημα είναι πολύ μεγάλο για την εφεδρική αφήγηση. Χρειάζεται εγκατεστημένη φωνή στη συσκευή.');
       return;
     }
+    stopAzureAudio();
+    try{
+      for(let i=0;i<segments.length;i++){
+        if(runId!==audioRunId)return;
+        setAudioStatus((lang==='en'?'Preparing backup narration ':'Προετοιμασία εφεδρικής αφήγησης ')+(i+1)+'/'+segments.length);
+        azureAbort=new AbortController();
+        const response=await timedFetch('/api/azure-speech',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({text:segments[i],language:lang==='en'?'en':'el'}),
+          signal:azureAbort.signal,
+        },22000);
+        azureAbort=null;
+        if(!response.ok)throw new Error('speech_unavailable');
+        const blob=await response.blob();
+        if(runId!==audioRunId)return;
+        azureAudioUrl=URL.createObjectURL(blob);
+        azureAudio=new Audio(azureAudioUrl);
+        setAudioStatus((lang==='en'?'Backup narration ':'Εφεδρική αφήγηση ')+(i+1)+'/'+segments.length);
+        await new Promise((resolve,reject)=>{
+          azureReject=reject;
+          azureAudio.onended=()=>{azureReject=null;resolve()};
+          azureAudio.onerror=()=>{azureReject=null;reject(new Error('audio_playback'))};
+          azureAudio.play().catch(error=>{azureReject=null;reject(error)});
+        });
+        if(azureAudio){azureAudio.removeAttribute('src');azureAudio=null}
+        if(azureAudioUrl){URL.revokeObjectURL(azureAudioUrl);azureAudioUrl=null}
+      }
+      if(runId===audioRunId)setAudioStatus(lang==='en'?'Finished.':'Ολοκληρώθηκε.');
+    }catch(_){
+      if(runId===audioRunId)setAudioStatus(lang==='en'
+        ?'No suitable device voice or backup speech service is available.'
+        :'Δεν υπάρχει διαθέσιμη ελληνική φωνή στη συσκευή ή ενεργή εφεδρική αφήγηση.');
+    }finally{stopAzureAudio()}
+  }
+  function playAudioLesson(){
     const text=$('aiOutput').innerText.trim();
     if(!text)return;
     const chunks=audioChunks(text);
     if(!chunks.length)return;
     const runId=++audioRunId;
+    stopAzureAudio();
+    if(!('speechSynthesis' in window)||typeof SpeechSynthesisUtterance==='undefined'){
+      void tryAzureSpeech(runId,text);
+      return;
+    }
     const synth=window.speechSynthesis;
     synth.cancel();
     setAudioStatus(lang==='en'?'Preparing audio…':'Προετοιμασία ανάγνωσης…');
@@ -1210,10 +1263,8 @@
       const primaryVoice=chooseSpeechVoice();
       const voices=synth.getVoices?.()||[];
       if(!primaryVoice&&voices.length===0&&attempt<8){setTimeout(()=>start(attempt+1),120);return}
-      if(!primaryVoice&&voices.length){
-        setAudioStatus(lang==='en'
-          ?'No English speech voice is installed on this computer. Add an English voice in the operating-system speech settings.'
-          :'Δεν βρέθηκε εγκατεστημένη ελληνική φωνή σε αυτόν τον υπολογιστή. Η ανάγνωση σταματά ώστε να μη χρησιμοποιηθεί λάθος γλώσσα. Πρόσθεσε ελληνική φωνή στις ρυθμίσεις φωνής του λειτουργικού.');
+      if(!primaryVoice){
+        void tryAzureSpeech(runId,text);
         return;
       }
       let index=0;
@@ -1250,13 +1301,15 @@
               setTimeout(()=>speakAttempt(variant+1),180);
               return;
             }
+            if(index===0){void tryAzureSpeech(runId,text);return}
             setAudioStatus((lang==='en'
-              ?'Text-to-speech failed ('+code+'). Enable a speech engine/voice in device settings.'
-              :'Η ανάγνωση απέτυχε ('+code+'). Η σύνοψη είναι σωστή, αλλά η συσκευή δεν εκκινεί το Text-to-Speech. Σε Android έλεγξε Ρυθμίσεις → Γενική διαχείριση/Σύστημα → Μετατροπή κειμένου σε ομιλία και ενεργοποίησε διαθέσιμη μηχανή/φωνή.'));
+              ?'Text-to-speech stopped after a device error ('+code+').'
+              :'Η αφήγηση σταμάτησε λόγω σφάλματος της συσκευής ('+code+').'));
           };
           try{try{synth.resume()}catch(_){};synth.speak(u)}
           catch(err){
             const code=String(err?.name||'exception');
+            if(index===0){void tryAzureSpeech(runId,text);return}
             setAudioStatus((lang==='en'?'Text-to-speech failed: ':'Η ανάγνωση απέτυχε: ')+code);
           }
         };
@@ -1270,6 +1323,7 @@
   }
   function stopAudioLesson(){
     audioRunId++;
+    stopAzureAudio();
     if('speechSynthesis' in window)window.speechSynthesis.cancel();
     setAudioStatus(lang==='en'?'Stopped.':'Σταμάτησε.');
   }

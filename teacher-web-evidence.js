@@ -1,4 +1,5 @@
 'use strict';
+const { collectFreeTeacherWebEvidence } = require('./teacher-free-web-evidence');
 // Google Search grounding is invoked only after explicit teacher consent.
 // An uncited AI model answer is never accepted as "web research".
 const MODELS = new Set(['gemini-3.5-flash-lite','gemini-3.1-flash-lite','gemini-2.5-flash-lite']);
@@ -9,6 +10,18 @@ function validUrl(url){
   catch(_){return false;}
 }
 async function collectTeacherWebEvidence({chapter='',subject='',grade='',context=''} = {}){
+  // Tavily -> Brave use only curated topic metadata, not the teacher's full prompt or student work.
+  const free = await collectFreeTeacherWebEvidence({chapter,subject,grade,context});
+  if (free.ok) return free;
+  if (free.status === 422 && free.message === 'Μη έγκυρο ερώτημα αναζήτησης.') return free;
+  // Preserve the existing Google-grounded teacher flow until free keys are configured.
+  // If free search keys exist, do not silently spend on Gemini after their quota is gone.
+  // Explicit TEACHER_GEMINI_WEB_FALLBACK_ENABLED=true is required to allow paid search fallback.
+  // With no free keys, preserve the older working Gemini route unless explicitly disabled.
+  const hasFreeKey = !!(process.env.TAVILY_API_KEY || process.env.BRAVE_SEARCH_API_KEY);
+  if (process.env.GEMINI_PAID_FALLBACK_ENABLED === 'false' ||
+      process.env.TEACHER_GEMINI_WEB_FALLBACK_ENABLED === 'false' ||
+      (hasFreeKey && process.env.TEACHER_GEMINI_WEB_FALLBACK_ENABLED !== 'true')) return free;
   if(!process.env.GEMINI_API_KEY)return {ok:false,status:503,message:'Η αναζήτηση δεν είναι διαθέσιμη. Πρόσθεσε δικό σου κείμενο ή PDF.'};
   const selected=String(process.env.GEMINI_PRODUCTION_MODEL || 'gemini-3.1-flash-lite');
   const model=MODELS.has(selected)?selected:'gemini-3.1-flash-lite';

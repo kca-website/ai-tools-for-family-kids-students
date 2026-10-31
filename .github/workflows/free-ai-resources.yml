@@ -1,0 +1,40 @@
+name: Free AI resources regression
+on:
+  pull_request:
+    paths:
+      - ai-provider-router.js
+      - teacher-free-web-evidence.js
+      - teacher-web-evidence.js
+      - api/azure-speech.js
+      - study.html
+      - tests/free-ai-resources-smoke.cjs
+      - .github/workflows/free-ai-resources.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  safe-fallbacks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Check server-side syntax
+        run: |
+          node --check ai-provider-router.js
+          node --check teacher-free-web-evidence.js
+          node --check teacher-web-evidence.js
+          node --check api/azure-speech.js
+      - name: Free API / speech mocks
+        run: node tests/free-ai-resources-smoke.cjs
+      - name: Preserve existing provider fallback
+        run: |
+          node tests/ai-provider-router-smoke.mjs
+          node tests/audio-provider-fallback.cjs
+          node tests/audio-lesson-latency-smoke.mjs

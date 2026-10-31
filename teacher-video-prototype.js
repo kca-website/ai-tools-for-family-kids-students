@@ -725,7 +725,7 @@ ${JSON.stringify(current)}
       if(q("generationMessage"))q("generationMessage").textContent=`2/3 Αφήγηση ${i+1}/${chunks.length}.`;
       const audio=await window.puter.ai.txt2speech(chunks[i],{
         provider:"gemini",
-        model:"gemini-2.5-flash-preview-tts",
+        model:"gemini-3.8-flash-lite-tts",
         voice:"Kore",
         instructions:"Μίλησε στα ελληνικά καθαρά, ζεστά και φυσικά, σαν εκπαιδευτικός σε τάξη. Μέτριος ρυθμός, σαφείς παύσεις. Διατήρησε σταθερό ύφος και ταχύτητα με τα υπόλοιπα τμήματα."
       });

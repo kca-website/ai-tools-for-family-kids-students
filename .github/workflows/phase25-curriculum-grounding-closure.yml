@@ -19,6 +19,7 @@ on:
       - 'teacher-assistant.html'
       - 'teacher-video-prototype.js'
       - 'api/teacher-assistant.js'
+      - 'teacher-web-evidence.js'
       - '.github/workflows/phase25-curriculum-grounding-closure.yml'
   workflow_dispatch:
 
@@ -99,3 +100,7 @@ jobs:
         run: node tests/phase40-teacher-real-source-ui.mjs
       - name: Teacher API source re-verification contract
         run: node tests/phase40-teacher-source-server.mjs
+      - name: Teacher opt-in web search source and evidence contract
+        run: |
+          node tests/phase41-teacher-online-search-server.mjs
+          node tests/phase41-teacher-online-search-ui.mjs

@@ -168,21 +168,21 @@ try{
   const teacherSkills=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/Εργαστήρια Δεξιοτήτων/.test(o.textContent))?.value||'');
   assert.ok(teacherSkills,'Teacher material flow missing Skills Labs');
   await page.selectOption('#subject',teacherSkills);
-  const units=compact(await page.locator('#unit option').allTextContents());
+  const units=compact(await page.locator('#unit option:not([value="custom"])').allTextContents());
   assert.equal(units.length,4,'Teacher material flow must reuse the four verified framework themes');
   assert.match(await page.locator('#curriculumNote').innerText(),/επίσημο πλαίσιο 2026.?27/i,'Teacher flow must label framework scope honestly');
 
   const teacherInformatics=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/^Πληροφορική/.test((o.textContent||'').trim()))?.value||'');
   assert.ok(teacherInformatics,'Teacher material flow missing Informatics');
   await page.selectOption('#subject',teacherInformatics);
-  const informaticsTeacherUnits=compact(await page.locator('#unit option').allTextContents());
+  const informaticsTeacherUnits=compact(await page.locator('#unit option:not([value="custom"])').allTextContents());
   assert.equal(informaticsTeacherUnits.length,5,'Teacher material flow must reuse five verified Informatics A section anchors');
   assert.ok(informaticsTeacherUnits.some(x=>/Βασικές Έννοιες Πληροφορικής/.test(x)));
 
   const teacherTechnology=await page.locator('#subject option').evaluateAll(opts=>opts.find(o=>/^Τεχνολογία/.test((o.textContent||'').trim()))?.value||'');
   assert.ok(teacherTechnology,'Teacher material flow missing Technology');
   await page.selectOption('#subject',teacherTechnology);
-  const technologyTeacherUnits=compact(await page.locator('#unit option').allTextContents());
+  const technologyTeacherUnits=compact(await page.locator('#unit option:not([value="custom"])').allTextContents());
   assert.equal(technologyTeacherUnits.length,6,'Teacher material flow must reuse six verified Technology A chapters');
   assert.ok(technologyTeacherUnits.some(x=>/Συγγραφή γραπτής εργασίας/.test(x)));
 

@@ -71,6 +71,34 @@
   }
 
   function sourceMode(){return q("videoSourceMode")?.value||"curriculum";}
+  function showVideoReferences(info){
+    const host=q("videoWebReferences");
+    if(!host)return;
+    host.replaceChildren();host.hidden=true;
+    if(!info?.kind)return;
+    const label=document.createElement("strong");
+    if(info.kind==="web_research"){
+      label.textContent="Διαδικτυακές πηγές — όχι επίσημη σχολική ύλη";
+      host.appendChild(label);
+      const list=document.createElement("ul");
+      for(const entry of info.sources||[]){
+        try{
+          const url=new URL(entry.url);if(url.protocol!=="https:")continue;
+          const item=document.createElement("li"),link=document.createElement("a");
+          link.href=url.href;link.target="_blank";link.rel="noopener noreferrer";link.textContent=entry.title||url.hostname;
+          item.appendChild(link);list.appendChild(item);
+        }catch(_){}
+      }
+      host.appendChild(list);host.hidden=false;
+    }else if(info.kind==="official_schoolbook"&&info.url){
+      label.textContent="Επίσημο σχολικό βιβλίο — η σύνδεση δεν πιστοποιεί από μόνη της την ετήσια εξεταστέα ύλη";
+      const link=document.createElement("a");link.href=info.url;link.textContent=info.title||"Άνοιγμα πηγής";
+      link.target="_blank";link.rel="noopener noreferrer";host.append(label,document.createElement("p"),link);host.hidden=false;
+    }else if(info.kind==="teacher_upload"){
+      label.textContent="Πηγή: υλικό εκπαιδευτικού — όχι αυτόματα επαληθευμένο σχολικό βιβλίο";
+      host.appendChild(label);host.hidden=false;
+    }
+  }
 
   function ownMaterial(){
     return (q("videoOwnMaterial")?.value||ownMaterialText||"").trim();
@@ -117,7 +145,7 @@
     return s.includes("request too large")||s.includes("context")&&s.includes("limit")||s.includes("requested")&&s.includes("tokens");
   }
 
-  function buildPrompt(sourceCharBudget=9000,includeSource=true){
+  function buildPrompt(sourceCharBudget=9000,includeSource=true,verifiedMode=""){
     const curriculum=(q("curriculumNote")?.innerText||"").replace(/\s+/g," ").trim();
     const context=selectedText("context");
     const grade=selectedText("grade");
@@ -149,7 +177,7 @@
 ${includeSource?selectedOwn:"Το επιλεγμένο απόσπασμα δίνεται στο συνοδευτικό USER-SUPPLIED DOCUMENT. Χρησιμοποίησε μόνο αυτό."}
 --- ΤΕΛΟΣ ΥΛΙΚΟΥ ---
 ${own.length>selectedOwn.length?"Σημείωση συστήματος: Το αρχείο ήταν μεγαλύτερο από το ασφαλές όριο του μοντέλου. Χρησιμοποιήθηκαν μόνο τα πιο σχετικά αποσπάσματα με βάση το θέμα, τον στόχο και τις οδηγίες του εκπαιδευτικού. Μην ισχυριστείς ότι καλύπτεις τμήματα που δεν εμφανίζονται παραπάνω.":""}`
-      :`ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: Χαρτογραφημένη σχολική ύλη του aitools4kids.
+      :`ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: ${verifiedMode==="internet_search"?"Τεκμηριωμένες διαδικτυακές πηγές μετά από συναίνεση του εκπαιδευτικού (όχι επίσημη σχολική ύλη).":"Χαρτογραφημένη σχολική ύλη του aitools4kids."}
 Συγκεκριμένη σχολική ενότητα: ${topic}
 Τεκμηρίωση/καθεστώς ύλης από το site: ${curriculum||"Χρησιμοποίησε μόνο την ακριβή ενότητα που δόθηκε και μην επινοήσεις επίσημη ύλη."}`;
 
@@ -517,7 +545,7 @@ ${sourceBlock}
     try{
       const context=buildPrompt(7000);
       const current=project.scenes[index];
-      const prompt=`${context}
+      let prompt=`${context}
 
 Τώρα ξαναδημιούργησε ΜΟΝΟ τη σκηνή ${index+1}. Η τρέχουσα σκηνή είναι:
 ${JSON.stringify(current)}
@@ -531,10 +559,14 @@ ${JSON.stringify(current)}
         ?{sourceMode:"teacher_upload",documentText:ownSource,documentName:q("videoOwnFile")?.files?.[0]?.name||"Υλικό εκπαιδευτικού"}
         :await window.AITOOLSKIDS_TEACHER_SOURCE.prepare();
       const {sourceText,sourceUrl,...sourceFields}=requestSource;
+      if(sourceFields.sourceMode==="internet_search"){
+        prompt=prompt.replace("ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: Χαρτογραφημένη σχολική ύλη του aitools4kids.","ΠΗΓΗ ΠΕΡΙΕΧΟΜΕΝΟΥ: Τεκμηριωμένες διαδικτυακές πηγές, όχι επίσημη σχολική ύλη.");
+      }
       const r=await fetch("/api/teacher-assistant",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({prompt,sourceMode:sourceFields.sourceMode,...sourceFields})});
       const d=await r.json();
       if(!r.ok)throw new Error(d.message||"Αποτυχία επαναδημιουργίας.");
       project.scenes[index]=extractSingleScene(d.text,index);
+      showVideoReferences(d.source);
       invalidateNarration(false);
       renderStoryboard();syncPreviewAfterEdit();
       q("videoRefreshNarrationBtn").hidden=q("videoNarration")?.value!=="ai";
@@ -723,12 +755,15 @@ ${JSON.stringify(current)}
     for(let i=0;i<chunks.length;i++){
       q("videoStatus").textContent=`2/3 Δημιουργία ελληνικής αφήγησης ${i+1}/${chunks.length}…`;
       if(q("generationMessage"))q("generationMessage").textContent=`2/3 Αφήγηση ${i+1}/${chunks.length}.`;
-      const audio=await window.puter.ai.txt2speech(chunks[i],{
-        provider:"gemini",
-        model:"gemini-3.8-flash-lite-tts",
-        voice:"Kore",
+      const useOpenAi=q("videoAiVoiceProvider")?.value==="openai";
+      const opts=useOpenAi?{
+        provider:"openai",model:"gpt-4o-mini-tts",voice:"nova",
+        instructions:"Speak clearly and naturally in Greek, like a teacher. Moderate pace, clear pauses, consistent delivery."
+      }:{
+        provider:"gemini",model:"gemini-3.8-flash-lite-tts",voice:"Kore",
         instructions:"Μίλησε στα ελληνικά καθαρά, ζεστά και φυσικά, σαν εκπαιδευτικός σε τάξη. Μέτριος ρυθμός, σαφείς παύσεις. Διατήρησε σταθερό ύφος και ταχύτητα με τα υπόλοιπα τμήματα."
-      });
+      };
+      const audio=await window.puter.ai.txt2speech(chunks[i],opts);
       audioParts.push(audio);
     }
     narrationAudio=audioParts.length===1?audioParts[0]:await mergeNarrationAudio(audioParts);
@@ -1036,6 +1071,7 @@ ${JSON.stringify(current)}
     btn.disabled=true;
     q("videoStudio").hidden=true;
     q("videoStatus").textContent="1/3 Δημιουργία σεναρίου και σκηνών…";
+    showVideoReferences(null);
     q("generationProgress").hidden=false;
     q("generationTitle").textContent="Δημιουργείται το εκπαιδευτικό βίντεο…";
     q("generationMessage").textContent="1/3 Σενάριο και storyboard πάνω στην επιλεγμένη ύλη.";
@@ -1064,7 +1100,7 @@ ${JSON.stringify(current)}
           body:JSON.stringify({
             system:videoSystem+strictSourceSystem,
             format:"storyboard",
-            prompt:buildPrompt(sourceBudget,false),
+            prompt:buildPrompt(sourceBudget,false,sourceFields.sourceMode),
             ...sourceFields,
             outputTokens:outputTokenBudget()
           })
@@ -1083,6 +1119,7 @@ ${JSON.stringify(current)}
       }
       if(!attempt.data?.source?.kind)throw new Error("Δεν υπάρχει επαληθευμένο καθεστώς πηγής για το βίντεο.");
       project=extractJson(attempt.data.text);
+      showVideoReferences(attempt.data.source);
       projectDirty=false;
       drawScene(project.scenes[0],0,1,0);
       renderStoryboard();
@@ -1116,7 +1153,11 @@ ${JSON.stringify(current)}
       q("videoStatus").textContent=narrationAudio?"Έτοιμο για πλήρη προεπισκόπηση και εξαγωγή.":"Έτοιμο για πλήρη προεπισκόπηση και εξαγωγή χωρίς AI ήχο.";
       q("videoStudio").scrollIntoView({behavior:"smooth",block:"start"});
     }catch(e){
-      q("videoStatus").textContent="Δεν ολοκληρώθηκε: "+(e?.message||e);
+      if(q("videoOnlineFallback")&&!q("videoOnlineFallback").hidden){
+        q("videoStatus").textContent="Δεν ξεκίνησε διαδικτυακή αναζήτηση. Επίλεξε «Ναι» ή «Όχι» στην ερώτηση πηγών παραπάνω για να συνεχίσεις.";
+      }else{
+        q("videoStatus").textContent="Δεν ολοκληρώθηκε: "+(e?.message||e);
+      }
     }finally{
       btn.disabled=false;
       q("generationProgress").hidden=true;
@@ -1191,9 +1232,11 @@ ${JSON.stringify(current)}
       drawAtSeconds(seconds,total);
     });
     q("videoNarration")?.addEventListener("change",()=>{
+      if(q("videoAiVoiceProviderField"))q("videoAiVoiceProviderField").hidden=q("videoNarration").value!=="ai";
       q("videoDownload").hidden=true;q("videoMp4Download").hidden=true;q("videoSaveBtn").hidden=true;q("videoFilePreview").hidden=true;
       q("videoRefreshNarrationBtn").hidden=!(project&&q("videoNarration").value==="ai"&&!narrationAudio);
     });
+    q("videoAiVoiceProvider")?.addEventListener("change",()=>invalidateNarration(false));
     ["videoSubtitleSize","videoSubtitleContrast"].forEach(id=>q(id)?.addEventListener("change",()=>{
       if(project)drawAtSeconds((Number(q("videoTimeline")?.value)||0)/1000*previewDurationSeconds(),previewDurationSeconds());
       q("videoDownload").hidden=true;

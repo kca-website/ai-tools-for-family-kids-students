@@ -23,7 +23,12 @@ for(const [device,width,height] of [['desktop',1366,860],['mobile',390,844]]){
  });
  await page.goto('http://127.0.0.1:4173/teacher-assistant.html',{waitUntil:'domcontentloaded'});
  await page.waitForFunction(()=>document.querySelector('#unit')?.options?.length>0);
- assert.equal(await page.locator('#customUnitField').isHidden(),true,device+': first mapped chapter');
+ await page.selectOption('#context','gel');
+ await page.selectOption('#grade','b');
+ const biology=await page.locator('#subject option').evaluateAll(options=>options.find(x=>/Βιολογία/.test(x.textContent))?.value||'');
+ assert.ok(biology,device+': Biology B teacher subject should exist');
+ await page.selectOption('#subject',biology);
+ assert.equal(await page.locator('#customUnitField').isHidden(),true,device+': mapped subject should show official unit picker');
  assert.ok(await page.locator('#unit option[value="custom"]').count()>0,device+': missing manual option');
  await page.locator('#groqBtn').click();
  await page.waitForFunction(()=>document.querySelector('#status')?.textContent==='Έτοιμο.');

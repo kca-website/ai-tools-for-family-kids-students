@@ -11,7 +11,24 @@ const CLOUDFLARE_MODELS = new Set([
 ]);
 const GROQ_MODELS = new Set(['openai/gpt-oss-120b', 'openai/gpt-oss-20b']);
 const GEMINI_MODELS = new Set([ 'gemini-2.5-flash', 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite']);
-const allowedModels = provider => provider === 'gemini' ? GEMINI_MODELS : (provider === 'cloudflare' ? CLOUDFLARE_MODELS : GROQ_MODELS);
+// New providers are opt-in and use explicit model allowlists. No random free-model routing.
+const flag = value => /^(?:1|true|on)$/i.test(String(value || '').trim());
+const configuredIds = (key, predicate) => new Set(String(process.env[key] || '')
+  .split(',').map(x => x.trim()).filter(x => x && predicate(x)));
+const MISTRAL_MODELS = configuredIds('MISTRAL_ALLOWED_MODELS', x => /^[a-z0-9_.-]+$/i.test(x));
+const OPENROUTER_MODELS = configuredIds('OPENROUTER_FREE_MODELS',
+  x => /^[a-z0-9_.:/-]+$/i.test(x) && x.endsWith(':free'));
+const GATEWAY_MODELS = configuredIds('AI_GATEWAY_ALLOWED_MODELS',
+  x => /^[a-z0-9_.:/-]+$/i.test(x));
+const OPTIONAL_MODELS = { mistral: MISTRAL_MODELS, openrouter: OPENROUTER_MODELS, gateway: GATEWAY_MODELS };
+const allowedModels = provider => provider === 'gemini' ? GEMINI_MODELS
+  : provider === 'cloudflare' ? CLOUDFLARE_MODELS
+  : provider === 'groq' ? GROQ_MODELS
+  : OPTIONAL_MODELS[provider] || new Set();
+const BILLING_CLASS = Object.freeze({
+  cloudflare: 'recurring-free', groq: 'recurring-free', gemini: 'paid-last-resort',
+  mistral: 'experimental-free', openrouter: 'experimental-free', gateway: 'limited-credit-buffer',
+});
 const ROUTING_PROFILES = new Set(['default', 'economy', 'balanced', 'quality']);
 
 function smartRoutingEnabled() {
@@ -48,7 +65,7 @@ const PROFILE_MODELS = Object.freeze({
 });
 
 function getAiStatus() {
-  const providers = getProviderOrder().map((name) => ({ name, model: modelFor(name) }));
+  const providers = getProviderOrder().map((name) => ({ name, model: modelFor(name), billingClass: BILLING_CLASS[name] }));
   const routingProfiles = {};
   for (const profile of ['economy', 'balanced', 'quality']) {
     routingProfiles[profile] = {};
@@ -73,7 +90,7 @@ function getProviderOrder(providerOrder) {
     .map((value) => String(value))
     .map((value) => value.trim().toLowerCase())
     .filter(Boolean);
-  const unique = [...new Set(requested.filter((name) => name === 'cloudflare' || name === 'groq' || name === 'gemini'))];
+  const unique = [...new Set(requested.filter((name) => name === 'cloudflare' || name === 'groq' || name === 'gemini' || name === 'mistral' || name === 'openrouter' || name === 'gateway'))];
   return unique.filter(isConfigured);
 }
 
@@ -81,12 +98,26 @@ function isConfigured(name) {
   if (name === 'cloudflare') {
     return !!(process.env.CLOUDFLARE_LLM_ACCOUNT_ID && process.env.CLOUDFLARE_LLM_AI_TOKEN);
   }
-  if (name === 'gemini') return !!process.env.GEMINI_API_KEY;
+  if (name === 'gemini') return !!process.env.GEMINI_API_KEY &&
+    process.env.GEMINI_PAID_FALLBACK_ENABLED !== 'false';
   if (name === 'groq') return !!process.env.GROQ_API_KEY;
+  if (name === 'mistral') return flag(process.env.MISTRAL_ENABLED) &&
+    !!process.env.MISTRAL_API_KEY && MISTRAL_MODELS.size > 0;
+  if (name === 'openrouter') return flag(process.env.OPENROUTER_ENABLED) &&
+    !!process.env.OPENROUTER_API_KEY && OPENROUTER_MODELS.size > 0;
+  if (name === 'gateway') return flag(process.env.AI_GATEWAY_ENABLED) &&
+    !!process.env.AI_GATEWAY_API_KEY && GATEWAY_MODELS.size > 0;
   return false;
 }
 
 function modelFor(name) {
+  if (OPTIONAL_MODELS[name]) {
+    const allow = OPTIONAL_MODELS[name];
+    const key = name === 'mistral' ? 'MISTRAL_MODEL'
+      : name === 'openrouter' ? 'OPENROUTER_MODEL' : 'AI_GATEWAY_MODEL';
+    const requested = String(process.env[key] || '').trim();
+    return allow.has(requested) ? requested : [...allow][0] || '';
+  }
   if (name === 'gemini') {
     const configured = String(process.env.GEMINI_PRODUCTION_MODEL || 'gemini-3.1-flash-lite');
     return GEMINI_MODELS.has(configured) ? configured : 'gemini-3.1-flash-lite';
@@ -115,6 +146,7 @@ function configuredProfileModels(provider, profile) {
 }
 
 function modelSequenceFor(provider, profileValue) {
+  if (OPTIONAL_MODELS[provider]) return modelFor(provider) ? [modelFor(provider)] : [];
   const profile = normalizeProfile(profileValue);
   if (provider === 'gemini') {
     const configured = configuredProfileModels(provider, profile);
@@ -158,6 +190,10 @@ async function generateChat({
   providerLoop:
   for (const provider of order) {
     const models = modelSequenceFor(provider, profile);
+    // Optional text-only routes must not receive raw images or other multimodal payloads.
+    const multimodal = Array.isArray(messages) && messages.some(message =>
+      Array.isArray(message?.content) && message.content.some(part => part?.type === 'image'));
+    if (OPTIONAL_MODELS[provider] && multimodal) continue;
     for (let index = 0; index < models.length; index++) {
       const model = models[index];
       let result;
@@ -166,7 +202,9 @@ async function generateChat({
           ? await callGemini({ messages, maxTokens, temperature, responseFormat, timeoutMs, model })
           : provider === 'cloudflare'
           ? await callCloudflare({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model })
-          : await callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model });
+          : provider === 'groq'
+          ? await callGroq({ messages, maxTokens, temperature, responseFormat, reasoningEffort, timeoutMs, model })
+          : await callOptionalProvider({ provider, messages, maxTokens, temperature, responseFormat, timeoutMs, model });
       } catch (error) {
         const timedOut = error?.name === 'AbortError';
         result = {
@@ -309,6 +347,24 @@ async function callGroq({ messages, maxTokens, temperature, responseFormat, reas
   });
 }
 
+// Compatible vendors are always gated by explicit credentials, flags and model allowlists.
+async function callOptionalProvider({ provider, messages, maxTokens, temperature, responseFormat, timeoutMs, model }) {
+  const paths = {
+    mistral: { url: 'https://api.eu.mistral.ai/v1/chat/completions', key: process.env.MISTRAL_API_KEY },
+    openrouter: { url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY },
+    gateway: { url: 'https://ai-gateway.vercel.sh/v1/chat/completions', key: process.env.AI_GATEWAY_API_KEY },
+  };
+  const target = paths[provider];
+  if (!target || !target.key || !allowedModels(provider).has(model)) {
+    return { ok: false, status: 503, error: 'provider_not_configured', retryable: true, provider, model };
+  }
+  const body = { model, messages, temperature, max_tokens: maxTokens };
+  if (responseFormat) body.response_format = responseFormat;
+  return postOpenAiCompatible({
+    url: target.url, token: target.key, body, provider, model, timeoutMs,
+  });
+}
+
 async function postCloudflareNative({ url, token, body, provider, model, timeoutMs }) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
@@ -398,7 +454,7 @@ async function postOpenAiCompatible({ url, token, body, provider, model, timeout
       ? data.choices[0].message.content
       : '';
     const hasText = text.trim().length > 0;
-    const truncated = completionTruncated(data, body.max_completion_tokens);
+    const truncated = completionTruncated(data, body.max_completion_tokens ?? body.max_tokens);
     const ok = response.ok && hasText && !truncated;
     const status = response.ok && !ok ? 502 : response.status;
     return {

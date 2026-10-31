@@ -154,7 +154,10 @@ module.exports = async function handler(req, res) {
       return res.status(422).json({ error:'teacher_source_required', message:'Πρόσθεσε τουλάχιστον ένα πραγματικό απόσπασμα ή σημειώσεις (40 χαρακτήρες) πριν τη δημιουργία.' });
     }
     if (audience === 'teacher' && sourceMode === 'teacher_upload') {
-      verifiedSource = { kind:'teacher_upload', title:effectiveDocumentName || 'Υλικό εκπαιδευτικού', excerptTruncated:false };
+      const suppliedChars = effectiveDocument.length;
+      // Keep free-provider context bounded, disclosing that the excerpt is partial.
+      effectiveDocument = effectiveDocument.slice(0, 15000);
+      verifiedSource = { kind:'teacher_upload', title:effectiveDocumentName || 'Υλικό εκπαιδευτικού', excerptTruncated:suppliedChars > effectiveDocument.length };
     }
     const hasDocument = !!effectiveDocument;
     if (audience === 'university_student' && (!hasDocument || !String(documentName || '').trim())) {

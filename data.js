@@ -415,14 +415,14 @@ const TOOLS = {
   // ---------- ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ----------
   "google-antigravity": {
     id: "google-antigravity",
-    name: "Google Antigravity",
+    name: "Google Antigravity 2.0",
     url: "https://antigravity.google/",
     category: "coding",
     logo: null,
     minAge: 18,
     minAgeNote: "Αποκλειστικά για ενήλικους 18+. Δωρεάν ατομικό πλάνο με όρια χρήσης, τα οποία μπορεί να αλλάξουν.",
-    shortDescEl: "AI περιβάλλον ανάπτυξης εφαρμογών και ιστοσελίδων με δυνατότητα επεξεργασίας κώδικα και ελέγχων.",
-    shortDescEn: "Agent-based AI development environment for building, editing and testing websites and apps.",
+    shortDescEl: "Αυτόνομη εφαρμογή AI agents για έρευνα, αρχεία, browser, κώδικα και ψηφιακά πρωτότυπα. Το Antigravity IDE είναι ξεχωριστό εργαλείο.",
+    shortDescEn: "Standalone AI-agent app for research, files, browsers, coding and prototypes; Antigravity IDE is a separate product.",
     greekTips: "Μπορείς να δίνεις οδηγίες στα ελληνικά. Έλεγξε το παραγόμενο αποτέλεσμα και τις αλλαγές στον κώδικα.",
     isGreek: false,
   },

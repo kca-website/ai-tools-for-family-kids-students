@@ -568,10 +568,10 @@
   card.id='teacherAntigravityRecommendation';
   card.style.cssText='margin-top:14px;padding:15px;border:1px solid #d6e6f5;border-radius:12px;background:#f5f9fe';
   var title=document.createElement('strong');
-  title.textContent='Google Antigravity — Διαδραστικό εκπαιδευτικό υλικό (18+)';
+  title.textContent='Google Antigravity 2.0 — AI agents για εκπαιδευτικό υλικό (18+)';
   var description=document.createElement('p');
   description.style.margin='7px 0 10px';
-  description.textContent='Για ενήλικους εκπαιδευτικούς: quiz, προσομοιώσεις και μικρές εφαρμογές. Δωρεάν πλάνο με περιορισμούς. Ελέγξτε το αποτέλεσμα και μην εισάγετε προσωπικά στοιχεία μαθητών.';
+  description.textContent='Για ενήλικους εκπαιδευτικούς: πρωτότυπα quiz, προσομοιώσεις, εφαρμογές και έρευνα με agents. Το 2.0 διαφέρει από το IDE. Δωρεάν πλάνο με όρια· απαιτούνται έλεγχος και προστασία προσωπικών δεδομένων.';
   var link=document.createElement('a');
   link.href='/tools/google-antigravity.html';
   link.textContent='Οδηγός, prompt και περιορισμοί →';

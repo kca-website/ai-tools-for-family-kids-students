@@ -1,4 +1,4 @@
-// EduVideo Studio v0.7 - Windows portable Piper & FFmpeg bundled at build time.
+// EduVideo Studio v0.8 - Windows portable Piper & FFmpeg bundled at build time.
 //go:build windows
 package main
 import (
@@ -15,9 +15,14 @@ import (
 var script string
 func message(t, m string, icon uintptr){p:=syscall.NewLazyDLL("user32.dll").NewProc("MessageBoxW");a,_:=syscall.UTF16PtrFromString(m);b,_:=syscall.UTF16PtrFromString(t);p.Call(0,uintptr(unsafe.Pointer(a)),uintptr(unsafe.Pointer(b)),icon)}
 func main(){
+ if len(os.Args)==4 && os.Args[1]=="--pdftext" {
+  txt,err:=extractPDF(os.Args[2]);if err!=nil{fmt.Fprintln(os.Stderr,err);os.Exit(2)}
+  if err=os.WriteFile(os.Args[3],[]byte(txt),0600);err!=nil{fmt.Fprintln(os.Stderr,err);os.Exit(3)}
+  return
+ }
  
  isWorker:=len(os.Args)>=3 && os.Args[1]=="--render"
- dir:=filepath.Join(os.Getenv("LOCALAPPDATA"),"EduVideoStudio","runtime-v070")
+ dir:=filepath.Join(os.Getenv("LOCALAPPDATA"),"EduVideoStudio","runtime-v080")
  if e:=os.MkdirAll(dir,0700);e!=nil{message("EduVideo Studio",e.Error(),0x10);return}
  scriptPath:=filepath.Join(dir,"studio.ps1")
  b:=append([]byte{0xef,0xbb,0xbf},[]byte(script)...)

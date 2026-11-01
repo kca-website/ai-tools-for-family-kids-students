@@ -413,6 +413,20 @@ const TOOLS = {
   },
 
   // ---------- ΠΡΟΓΡΑΜΜΑΤΙΣΜΟΣ ----------
+  "google-antigravity": {
+    id: "google-antigravity",
+    name: "Google Antigravity",
+    url: "https://antigravity.google/",
+    category: "coding",
+    logo: null,
+    minAge: 18,
+    minAgeNote: "Αποκλειστικά για ενήλικους 18+. Δωρεάν ατομικό πλάνο με όρια χρήσης, τα οποία μπορεί να αλλάξουν.",
+    shortDescEl: "AI περιβάλλον ανάπτυξης εφαρμογών και ιστοσελίδων με δυνατότητα επεξεργασίας κώδικα και ελέγχων.",
+    shortDescEn: "Agent-based AI development environment for building, editing and testing websites and apps.",
+    greekTips: "Μπορείς να δίνεις οδηγίες στα ελληνικά. Έλεγξε το παραγόμενο αποτέλεσμα και τις αλλαγές στον κώδικα.",
+    isGreek: false,
+  },
+
   "github-copilot": {
     id: "github-copilot",
     name: "GitHub Copilot",
@@ -1719,6 +1733,16 @@ const PATHS = {
       introEl: "Στο Λύκειο το φάσμα εργαλείων είναι ευρύ, αλλά κάθε υπηρεσία έχει τους δικούς της ηλικιακούς και λογαριασμιακούς κανόνες. Η έμφαση μετατοπίζεται στη σωστή, παραγωγική χρήση για προετοιμασία εξετάσεων, έρευνα και εργασίες.",
       introEn: "In high school the range of tools is broad, but each service has its own age and account rules. The focus shifts to proper, productive use for exam prep, research, and projects.",
       tools: [
+        {
+          toolId: "google-antigravity",
+          useCaseEl: "Δημιουργία μικρών εκπαιδευτικών εφαρμογών, quiz και διαδραστικών ασκήσεων από ενήλικους εκπαιδευτικούς.",
+          useCaseEn: "Build small educational apps, quizzes and interactive activities as an adult educator.",
+          howToEl: "Δημιούργησε δοκιμαστικό project, περιέγραψε το quiz που θέλεις, ζήτησε προεπισκόπηση και έλεγξε κάθε αποτέλεσμα πριν το χρησιμοποιήσεις στην τάξη. Δες τον αναλυτικό οδηγό εργαλείου.",
+          howToEn: "Use a test project, describe the quiz, request a preview and review the result before using it in class. See the detailed tool guide.",
+          cautionEl: "Μόνο 18+. Δωρεάν πλάνο με όρια· μην ανεβάζεις προσωπικά στοιχεία μαθητών ή κωδικούς και μην επιτρέπεις αυτόματες αλλαγές σε παραγωγή.",
+          cautionEn: "18+ only. Free usage limits; never upload student personal data or credentials, or allow unchecked production changes.",
+        },
+
         {
           toolId: "ai-help",
           useCaseEl: "Βοηθός Γονέα για να υποστηρίξεις διάβασμα και κατανόηση χωρίς να κάνεις την εργασία αντί για τον μαθητή.",

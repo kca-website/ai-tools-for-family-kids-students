@@ -1,8 +1,8 @@
 # Integration test on a real Windows GitHub-hosted runner. Requires built directory.
 $ErrorActionPreference='Stop'
-$home=Join-Path $PSScriptRoot 'dist\EduVideoStudio_Windows11'
-$exe=Join-Path $home 'EduVideoStudio.exe'
-$ffmpeg=Join-Path $home 'bin\ffmpeg.exe'
+$packageRoot=Join-Path $PSScriptRoot 'dist\EduVideoStudio_Windows11'
+$exe=Join-Path $packageRoot 'EduVideoStudio.exe'
+$ffmpeg=Join-Path $packageRoot 'bin\ffmpeg.exe'
 if (!(Test-Path $exe)) { throw 'No built executable.' }
 $testRoot=Join-Path $env:RUNNER_TEMP 'eduvideo-integration'
 New-Item -ItemType Directory -Force -Path $testRoot | Out-Null

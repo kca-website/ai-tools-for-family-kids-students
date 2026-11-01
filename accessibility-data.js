@@ -19,6 +19,12 @@
  */
 
 const ACCESSIBILITY_INFO = {
+  "google-antigravity": {
+    status: "none",
+    noteEl: "Δεν έχει επαληθευτεί επίσημη ειδική δήλωση προσβασιμότητας για το Antigravity. Δεν σημαίνει ότι δεν είναι προσβάσιμο.",
+    noteEn: "No dedicated official accessibility conformance statement has been verified for Antigravity; this is not a finding of inaccessibility.",
+    sourceUrl: "",
+  },
   "digital-tutoring": {
     status: "good",
     noteEl: "Επίσημη υπηρεσία ΥΠΑΙΘΑ με ειδική μέριμνα προσβασιμότητας: τα μαθήματα Πανελλαδικών μεταδίδονται με παράλληλη διερμηνεία στην Ελληνική Νοηματική Γλώσσα και αναρτώνται υποτιτλισμένα. Η κατάταξη αφορά το εκπαιδευτικό περιεχόμενο/υπηρεσία, όχι ανεξάρτητο πλήρες WCAG audit κάθε οθόνης.",

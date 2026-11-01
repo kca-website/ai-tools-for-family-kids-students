@@ -4,6 +4,38 @@ $packageRoot=Join-Path $PSScriptRoot 'dist\EduVideoStudio_Windows11'
 $exe=Join-Path $packageRoot 'EduVideoStudio.exe'
 $ffmpeg=Join-Path $packageRoot 'bin\ffmpeg.exe'
 if (!(Test-Path $exe)) { throw 'No built executable.' }
+# Generate PDF fixtures on the Windows builder; end users do not need Python.
+& python -m pip install --disable-pip-version-check -q reportlab
+if ($LASTEXITCODE -ne 0) {throw 'Build-only ReportLab dependency installation failed.'}
+$generator=@'
+import os
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+out=os.environ["RUNNER_TEMP"]
+c=canvas.Canvas(os.path.join(out,'example.pdf'))
+c.drawString(40,780,'The water cycle explains evaporation and condensation in nature.')
+c.drawString(40,742,'Rain returns to rivers and seas.')
+c.save()
+pdfmetrics.registerFont(TTFont('GreekFont', r'C:\Windows\Fonts\arial.ttf'))
+c=canvas.Canvas(os.path.join(out,'greek.pdf'))
+c.setFont('GreekFont',15)
+c.drawString(40,780,'Ο κύκλος του νερού περιγράφει τη φυσική κυκλοφορία του νερού.')
+c.save()
+'@
+$generator | & python -
+if ($LASTEXITCODE -ne 0) {throw 'Build-only PDF fixture generation failed.'}
+# Exercise embedded PDF text extraction with both ordinary and Greek searchable PDFs.
+foreach($case in @(@{name='greek'; token='νερού'},@{name='example';token='water'})) {
+  $pdf=Join-Path $env:RUNNER_TEMP ($case.name+'.pdf')
+  $extracted=Join-Path $env:RUNNER_TEMP ('pdf-'+$case.name+'.txt')
+  if(!(Test-Path $pdf)) {throw ('Fixture not found: '+$pdf)}
+  $p=Start-Process -FilePath $exe -ArgumentList ('--pdftext "'+$pdf+'" "'+$extracted+'"') -Wait -PassThru
+  if($p.ExitCode -ne 0 -or !(Test-Path $extracted) -or !(Get-Content $extracted -Raw -Encoding UTF8).Contains($case.token)) {
+    throw ('PDF extraction failed for '+$case.name)
+  }
+  Write-Host ('PASS: searchable '+$case.name+' PDF')
+}
 $testRoot=Join-Path $env:RUNNER_TEMP 'eduvideo-integration'
 New-Item -ItemType Directory -Force -Path $testRoot | Out-Null
 
@@ -17,6 +49,7 @@ foreach ($case in $cases) {
   $mp4=Join-Path $job ('smoke-'+$case.lang+'.mp4')
   [IO.File]::WriteAllText((Join-Path $job 'narration.txt'),$case.text,[Text.Encoding]::UTF8)
   [IO.File]::WriteAllText((Join-Path $job 'lang.txt'),$case.lang,[Text.Encoding]::UTF8)
+  [IO.File]::WriteAllText((Join-Path $job 'minutes.txt'),'1',[Text.Encoding]::UTF8)
   [IO.File]::WriteAllText((Join-Path $job 'destination.txt'),$mp4,[Text.Encoding]::UTF8)
   Write-Host ('Rendering '+$case.lang+' video...')
   $child=Start-Process -FilePath $exe -ArgumentList ('--render "'+$job+'"') -PassThru -Wait
@@ -30,6 +63,8 @@ foreach ($case in $cases) {
   if (!(Test-Path $srt) -or (Get-Item $srt).Length -lt 100) {throw 'No SRT subtitles.'}
   & $ffmpeg -hide_banner -v error -i $mp4 -f null NUL
   if ($LASTEXITCODE -ne 0) {throw 'FFmpeg cannot decode the MP4.'}
-  Write-Host ('PASS: '+$case.lang+' video with SRT; size '+(Get-Item $mp4).Length)
+  $info= & $ffmpeg -hide_banner -i $mp4 2>&1 | Out-String
+  if ($info -notmatch 'Duration:\s*00:01:00\.00') {throw ('Duration not exactly 60.00 seconds for '+$case.lang+' '+$info)}
+  Write-Host ('PASS: '+$case.lang+' animated 60s MP4 with SRT; size '+(Get-Item $mp4).Length)
 }
 Write-Host 'PASS: Greek+English Windows render tests.'

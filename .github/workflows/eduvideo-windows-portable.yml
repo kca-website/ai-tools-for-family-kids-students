@@ -1,0 +1,47 @@
+name: EduVideo Studio portable Windows build
+on:
+  push:
+    branches:
+      - experiment/eduvideo-windows-portable
+    paths:
+      - 'tools/eduvideo-windows/**'
+      - '.github/workflows/eduvideo-windows-portable.yml'
+  pull_request:
+    paths:
+      - 'tools/eduvideo-windows/**'
+      - '.github/workflows/eduvideo-windows-portable.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows-portable:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: tools/eduvideo-windows
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+      - name: Build complete Windows package with engine and voices
+        shell: pwsh
+        run: ./build-windows.ps1
+      - name: Verify Greek and English MP4 on a Windows runner
+        shell: powershell
+        run: ./smoke-windows.ps1
+      - name: Produce distributable ZIP
+        shell: pwsh
+        run: |
+          $folder='dist/EduVideoStudio_Windows11'
+          if(!(Test-Path "$folder/EduVideoStudio.exe")){throw 'EXE missing'}
+          Compress-Archive -Path $folder -DestinationPath 'dist/EduVideoStudio-Windows11-complete.zip' -CompressionLevel Optimal -Force
+          Write-Host ((Get-Item 'dist/EduVideoStudio-Windows11-complete.zip').Length)
+      - name: Upload actual complete portable application
+        uses: actions/upload-artifact@v4
+        with:
+          name: EduVideoStudio-Windows11-Portable-v0.7
+          path: tools/eduvideo-windows/dist/EduVideoStudio-Windows11-complete.zip
+          if-no-files-found: error
+          retention-days: 30

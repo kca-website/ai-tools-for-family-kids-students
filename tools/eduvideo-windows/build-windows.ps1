@@ -1,4 +1,4 @@
-# EduVideo Studio v0.7 reproducible Windows build.
+# EduVideo Studio v0.8 reproducible Windows build.
 # This script is for GitHub Actions developers ONLY. The end user never runs it.
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
@@ -70,7 +70,7 @@ try {
   Push-Location $src
   try {
     $env:GOOS='windows';$env:GOARCH='amd64';$env:CGO_ENABLED='0'
-    & go build -trimpath -ldflags '-H windowsgui -s -w' -o (Join-Path $out 'EduVideoStudio.exe') launcher.go
+    & go build -trimpath -ldflags '-H windowsgui -s -w' -o (Join-Path $out 'EduVideoStudio.exe') launcher.go pdftext.go
     if ($LASTEXITCODE -ne 0) {throw 'Windows Go compilation failed.'}
   } finally {Pop-Location}
   Copy-Item (Join-Path $src 'README_FOR_WINDOWS.txt') (Join-Path $out 'ΔΙΑΒΑΣΕ_ΜΕ.txt')

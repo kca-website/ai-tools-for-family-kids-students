@@ -96,7 +96,7 @@ const TOOLS = {
   "chatgpt-edu": {
     id: "chatgpt-edu",
     name: "ChatGPT Edu (Πιλοτικό)",
-    url: "https://openai.com/chatgpt/education",
+    url: "https://openai.com/education/",
     category: "greek-program",
     logo: null,
     minAge: 12,

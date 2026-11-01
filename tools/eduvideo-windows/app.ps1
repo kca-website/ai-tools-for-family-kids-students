@@ -1,6 +1,6 @@
 # Diagnostic wrapper: show top-level PowerShell errors to the user.
 try {
-# EduVideo Studio v0.7 — Windows Forms (Windows 11 x64)
+# EduVideo Studio v0.8 — Windows Forms (Windows 11 x64)
 # Offline rendering via bundled Piper and FFmpeg; no downloads at runtime.
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Windows.Forms
@@ -16,9 +16,25 @@ function Status([string]$text) { if ($env:EDUVIDEO_JOB_DIR) { [System.IO.File]::
 function Info([string]$msg) { [System.Windows.Forms.MessageBox]::Show($form,$msg,'EduVideo Studio',[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Information) | Out-Null }
 function Warn([string]$msg) { [System.Windows.Forms.MessageBox]::Show($form,$msg,'EduVideo Studio',[System.Windows.Forms.MessageBoxButtons]::OK,[System.Windows.Forms.MessageBoxIcon]::Warning) | Out-Null }
 function Read-Material([string]$path) {
-    if ((Get-Item $path).Length -gt 8MB) { throw 'Το αρχείο ξεπερνά τα 8 MB.' }
+    if ((Get-Item $path).Length -gt 32MB) { throw 'Το αρχείο ξεπερνά τα 8 MB.' }
     $ext=[System.IO.Path]::GetExtension($path).ToLowerInvariant()
     if ($ext -eq '.txt' -or $ext -eq '.md') { return [System.IO.File]::ReadAllText($path,[System.Text.Encoding]::UTF8) }
+    if ($ext -eq '.pdf') {
+        $temp=Join-Path $root ('pdf-'+[guid]::NewGuid().ToString('N')+'.txt')
+        try {
+            $exe=$env:EDUVIDEO_BIN
+            if (!(Test-Path $exe)) {throw 'Δεν βρέθηκε ο ενσωματωμένος PDF extractor.'}
+            $psi=New-Object System.Diagnostics.ProcessStartInfo
+            $psi.FileName=$exe;$psi.Arguments='--pdftext "'+$path+'" "'+$temp+'"'
+            $psi.UseShellExecute=$false;$psi.CreateNoWindow=$true;$psi.RedirectStandardError=$true
+            $proc=[System.Diagnostics.Process]::Start($psi)
+            $err=$proc.StandardError.ReadToEnd();$proc.WaitForExit()
+            if ($proc.ExitCode -ne 0 -or !(Test-Path $temp)) {throw 'Δεν εξήχθη κείμενο από το PDF. Το PDF μπορεί να είναι σκαναρισμένο ή κρυπτογραφημένο. Απαιτείται PDF με επιλέξιμο κείμενο.'}
+            $text=[IO.File]::ReadAllText($temp,[Text.Encoding]::UTF8)
+            if ((Words $text) -lt 10) {throw 'Το PDF δεν περιέχει αρκετό επιλέξιμο κείμενο.'}
+            return $text
+        } finally {Remove-Item $temp -ErrorAction SilentlyContinue}
+    }
     if ($ext -eq '.docx') {
         $zip=[System.IO.Compression.ZipFile]::OpenRead($path)
         try {
@@ -39,7 +55,7 @@ function Read-Material([string]$path) {
             } finally { $stream.Dispose() }
         } finally { $zip.Dispose() }
     }
-    throw 'Επίλεξε TXT, MD ή DOCX. Για PDF αντέγραψε προσωρινά το κείμενο στο πεδίο ύλης.'
+    throw 'Υποστηρίζονται TXT, MD, DOCX και PDF με επιλέξιμο κείμενο.'
 }
 function Words([string]$t) { return @([regex]::Matches($t,'\S+')).Count }
 function Make-Plan([string]$source,[int]$minutes) {
@@ -143,118 +159,258 @@ function Get-Chunks([string]$text,[int]$max=80) {
     if ($line) { $results.Add($line) }
     return ,$results.ToArray()
 }
-function Draw-Scene([string]$text,[int]$index,[int]$count,[string]$file,[string]$lang,[string]$caption='') {
+function Short-Topic([string]$text,[int]$maximum=46) {
+    $words=@($text -split '\s+' | Where-Object {$_})
+    $r=($words | Select-Object -First 7) -join ' '
+    if ($r.Length -gt $maximum) {$r=$r.Substring(0,$maximum-1).TrimEnd()+'…'}
+    return $r
+}
+function Theme-Of([string]$text) {
+    if($text -match 'εξάτμ|υδρατμ|κύκλ.{0,8}νερ|βροχ|σύννεφ|evaporat|water cycle') {return 'water'}
+    if($text -match 'οικονομ|παραγωγ|συντελεστ|κεφάλαι|επιχειρηματ|economic|production') {return 'economy'}
+    if($text -match 'καρδ|αιμοφορ|πνεύμον|αρτηρ|φλέβ|κυκλοφορικ|circulat|heart|blood') {return 'heart'}
+    if($text -match 'φωτοσύνθ|χλωροφύλλ|διοξείδιο|photosynth|chlorophyll') {return 'plant'}
+    return 'concept'
+}
+function Draw-Scene([string]$text,[int]$index,[int]$count,[string]$file,[string]$lang,[string]$caption='', [double]$phase=0.0,[double]$overall=0.0) {
     $bmp=New-Object System.Drawing.Bitmap(1280,720)
     $g=[System.Drawing.Graphics]::FromImage($bmp)
     $g.SmoothingMode=[System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
     $g.TextRenderingHint=[System.Drawing.Text.TextRenderingHint]::AntiAliasGridFit
-    $rect=New-Object System.Drawing.Rectangle(0,0,1280,720)
-    $c0=[System.Drawing.Color]::FromArgb(8,20,37);$c1=[System.Drawing.Color]::FromArgb(24,54,83)
-    $brush=New-Object System.Drawing.Drawing2D.LinearGradientBrush($rect,$c0,$c1,30)
-    $g.FillRectangle($brush,$rect)
-    $teal=New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(32,207,191))
-    $white=New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(238,247,252))
-    $muted=New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(172,193,211))
-    $panel=New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(32,61,84))
-    $g.FillRectangle($teal,85,100,9,85)
-    $title=if($lang -eq 'el'){'ΕΚΠΑΙΔΕΥΤΙΚΟ ΒΙΝΤΕΟ'}else{'EDUCATIONAL VIDEO'}
-    $font1=New-Object System.Drawing.Font('Segoe UI',22,[System.Drawing.FontStyle]::Bold)
-    $font2=New-Object System.Drawing.Font('Segoe UI',31,[System.Drawing.FontStyle]::Regular)
-    $font3=New-Object System.Drawing.Font('Segoe UI',16)
-    $g.DrawString($title,$font1,$teal,110,102)
-    $g.DrawString(('SCENE {0:00} / {1:00}' -f $index,$count),$font3,$muted,1060,112)
-    $g.FillRectangle($panel,85,225,1110,340)
-    $short=$text.Trim()
-    if ($short.Length -gt 270) { $short=$short.Substring(0,267).Trim()+'…' }
-    $layout=New-Object System.Drawing.RectangleF(117,255,1040,278)
-    $g.DrawString($short,$font2,$white,$layout)
-    # Burn subtitles into frames; each caption lasts for its own timed interval.
-    if ($caption) {
-        $captionBackground=New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(218,3,15,28))
-        $captionFont=New-Object System.Drawing.Font('Segoe UI',20,[System.Drawing.FontStyle]::Bold)
-        $g.FillRectangle($captionBackground,85,565,1110,76)
-        $captionLayout=New-Object System.Drawing.RectangleF(104,574,1070,64)
-        $g.DrawString($caption,$captionFont,$white,$captionLayout)
-        $captionBackground.Dispose();$captionFont.Dispose()
+    $bg=[System.Drawing.Color]::FromArgb(10,23,39)
+    $ink=[System.Drawing.Color]::FromArgb(240,248,252)
+    $muted=[System.Drawing.Color]::FromArgb(170,199,216)
+    $teal=[System.Drawing.Color]::FromArgb(38,219,201)
+    $sky=[System.Drawing.Color]::FromArgb(72,170,236)
+    $orange=[System.Drawing.Color]::FromArgb(255,190,100)
+    $green=[System.Drawing.Color]::FromArgb(87,213,156)
+    $g.Clear($bg)
+    $whiteBrush=New-Object System.Drawing.SolidBrush($ink)
+    $secondaryBrush=New-Object System.Drawing.SolidBrush($muted)
+    $accentBrush=New-Object System.Drawing.SolidBrush($teal)
+    $blueBrush=New-Object System.Drawing.SolidBrush($sky)
+    $warmBrush=New-Object System.Drawing.SolidBrush($orange)
+    $greenBrush=New-Object System.Drawing.SolidBrush($green)
+    $panelBrush=New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(19,45,67))
+    $thinPen=New-Object System.Drawing.Pen($sky,5)
+    $thinPen.StartCap=[System.Drawing.Drawing2D.LineCap]::Round
+    $thinPen.EndCap=[System.Drawing.Drawing2D.LineCap]::Round
+    $rayPen=[System.Drawing.Pen]::new($orange,3)
+    $fSmall=New-Object System.Drawing.Font('Segoe UI',16,[System.Drawing.FontStyle]::Regular)
+    $fTag=New-Object System.Drawing.Font('Segoe UI',15,[System.Drawing.FontStyle]::Bold)
+    $fHeading=New-Object System.Drawing.Font('Segoe UI',24,[System.Drawing.FontStyle]::Bold)
+    $fTitle=New-Object System.Drawing.Font('Segoe UI',21,[System.Drawing.FontStyle]::Regular)
+    $fCaption=New-Object System.Drawing.Font('Segoe UI',18,[System.Drawing.FontStyle]::Bold)
+    try {
+        $g.FillRectangle($accentBrush,46,45,7,55)
+        $h=if($lang -eq 'el'){'ΜΑΘΑΙΝΩ ΜΕ ΚΙΝΟΥΜΕΝΑ ΔΙΑΓΡΑΜΜΑΤΑ'}else{'LEARN THROUGH ANIMATED DIAGRAMS'}
+        $g.DrawString($h,$fTag,$accentBrush,73,44)
+        $g.DrawString((Short-Topic $text 70),$fHeading,$whiteBrush,73,78)
+        $g.DrawString(('{0:00}  /  {1:00}' -f $index,$count),$fSmall,$secondaryBrush,1110,52)
+        $g.FillRectangle($panelBrush,46,158,1188,416)
+        # Teaching diagram, animated at six keyframes per second.
+        $kind=Theme-Of $text
+        $g.FillRectangle($panelBrush,56,166,1130,400)
+        switch ($kind) {
+            'water' {
+                # Light, evaporating water, clouds, rain and runoff form a continuous physical cycle.
+                $g.FillEllipse($warmBrush,198,211,91,91)
+                for($j=0;$j -lt 10;$j++){$a=($j*36)*[Math]::PI/180;$x=243+[int](66*[Math]::Cos($a));$y=255+[int](66*[Math]::Sin($a));$g.DrawLine($rayPen,$x,$y,$x+[int](14*[Math]::Cos($a)),$y+[int](14*[Math]::Sin($a)))}
+                $g.FillRectangle($blueBrush,110,492,725,52)
+                for($j=0;$j -lt 3;$j++){$x=160+$j*170+[int](18*[Math]::Sin($phase*6.28+$j));$g.FillEllipse($whiteBrush,$x,498,66,6)}
+                # Stylized white cloud
+                foreach($c in @(@(590,248,100,72),@(660,224,132,94),@(753,256,105,68))){$g.FillEllipse($whiteBrush,$c[0],$c[1],$c[2],$c[3])}
+                $g.FillRectangle($whiteBrush,605,284,233,35)
+                for($j=0;$j -lt 7;$j++){
+                    $y=320+[int]((($phase+$j/7.0)%1.0)*168)
+                    $g.FillEllipse($blueBrush,645+$j*27,$y,10,18)
+                    $x=310+[int](20*[Math]::Sin($j+$phase*5))
+                    $yy=478-[int]((($phase+$j/7.0)%1.0)*155)
+                    $g.FillEllipse($accentBrush,$x+$j*37,$yy,9,17)
+                }
+                $labA=if($lang -eq 'el'){'ΕΞΑΤΜΙΣΗ'}else{'EVAPORATION'}
+                $labB=if($lang -eq 'el'){'ΣΥΜΠΥΚΝΩΣΗ'}else{'CONDENSATION'}
+                $labC=if($lang -eq 'el'){'ΒΡΟΧΗ'}else{'RAINFALL'}
+                $g.DrawString($labA,$fTag,$accentBrush,299,348)
+                $g.DrawString($labB,$fTag,$secondaryBrush,635,201)
+                $g.DrawString($labC,$fTag,$blueBrush,690,451)
+            }
+            'economy' {
+                $items=if($lang -eq 'el'){@('ΓΗ','ΕΡΓΑΣΙΑ','ΚΕΦΑΛΑΙΟ','ΕΠΙΧΕΙΡΗΜΑΤΙΚΟΤΗΤΑ')}else{@('LAND','LABOUR','CAPITAL','ENTREPRENEURSHIP')}
+                for($j=0;$j -lt 4;$j++){
+                    $x=94+($j%2)*274;$y=215+[int][Math]::Floor($j/2)*166
+                    $g.FillRectangle($blueBrush,$x,$y,238,118)
+                    $g.DrawString($items[$j],$fTag,$whiteBrush,$x+12,$y+36)
+                    $x1=$x+238;$y1=$y+59
+                    $g.DrawLine($thinPen,$x1,$y1,748,365)
+                    $t=($phase+$j/4.0)%1.0
+                    $xx=$x1+[int]((748-$x1)*$t);$yy=$y1+[int]((365-$y1)*$t)
+                    $g.FillEllipse($warmBrush,$xx-10,$yy-10,20,20)
+                }
+                $g.FillEllipse($greenBrush,745,279,176,176)
+                $g.DrawString($(if($lang -eq 'el'){'ΠΑΡΑΓΩΓΗ'}else{'PRODUCTION'}),$fTag,$whiteBrush,756,344)
+                $g.DrawLine($thinPen,923,366,1044,366)
+                $g.DrawString($(if($lang -eq 'el'){'ΑΓΑΘΑ'}else{'GOODS'}),$fTag,$accentBrush,1044,319)
+            }
+            'heart' {
+                # Cardiovascular circulation schematic: heart, lungs and body with moving oxygen markers.
+                $red=New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(240,105,123))
+                $g.FillEllipse($red,450,294,180+[int](8*[Math]::Sin($phase*6.283)),180+[int](8*[Math]::Sin($phase*6.283)))
+                $g.DrawString($(if($lang -eq 'el'){'ΚΑΡΔΙΑ'}else{'HEART'}),$fTag,$whiteBrush,484,363)
+                $g.FillEllipse($blueBrush,137,302,190,145)
+                $g.FillEllipse($blueBrush,765,302,190,145)
+                $g.DrawString($(if($lang -eq 'el'){'ΠΝΕΥΜΟΝΕΣ'}else{'LUNGS'}),$fTag,$whiteBrush,147,346)
+                $g.DrawString($(if($lang -eq 'el'){'ΣΩΜΑ'}else{'BODY'}),$fTag,$whiteBrush,814,346)
+                $g.DrawLine($thinPen,324,369,449,369)
+                $g.DrawLine($thinPen,630,369,766,369)
+                for($j=0;$j -lt 6;$j++){$t=($phase+$j/6.0)%1.0;$xx=324+[int](444*$t);$g.FillEllipse($warmBrush,$xx,358,17,17)}
+                $red.Dispose()
+            }
+            'plant' {
+                $g.FillEllipse($warmBrush,165,213,100,100)
+                $g.FillRectangle($greenBrush,558,358,13,150)
+                $g.FillEllipse($greenBrush,424,278,175,103);$g.FillEllipse($greenBrush,568,268,170,108)
+                for($j=0;$j -lt 10;$j++){$u=($phase+$j/10.0)%1.0;$x=276+[int](290*$u);$y=272+[int](150*$u);$g.FillEllipse($accentBrush,$x,$y,13,13)}
+                $g.DrawString($(if($lang -eq 'el'){'ΗΛΙΑΚΟ ΦΩΣ'}else{'SUNLIGHT'}),$fTag,$warmBrush,140,352)
+                $g.DrawString($(if($lang -eq 'el'){'ΦΩΤΟΣΥΝΘΕΣΗ'}else{'PHOTOSYNTHESIS'}),$fTag,$whiteBrush,754,339)
+                $g.DrawString($(if($lang -eq 'el'){'ΝΕΡΟ + CO₂ → O₂'}else{'WATER + CO₂ → O₂'}),$fTag,$accentBrush,754,394)
+            }
+            default {
+                # Neutral concept map: concepts are source excerpts, not invented scientific facts.
+                $words=@([regex]::Matches($text,'[\p{L}]{5,}')|ForEach-Object {$_.Value.ToUpperInvariant()}|Select-Object -Unique -First 4)
+                while($words.Count -lt 4){$words+=$(if($lang -eq 'el'){'ΕΝΝΟΙΑ'}else{'CONCEPT'})}
+                for($j=0;$j -lt 4;$j++){
+                    $x=98+($j%2)*460;$y=218+[int][Math]::Floor($j/2)*178
+                    $g.FillRectangle($blueBrush,$x,$y,388,120)
+                    $word=$words[$j];if($word.Length -gt 19){$word=$word.Substring(0,18)+'…'}
+                    $g.DrawString($word,$fTitle,$whiteBrush,$x+15,$y+36)
+                }
+                $x=468+[int](92*[Math]::Cos($phase*2*[Math]::PI));$y=350+[int](70*[Math]::Sin($phase*2*[Math]::PI))
+                $g.FillEllipse($warmBrush,$x,$y,21,21)
+            }
+        }
+        $g.DrawString($(if($lang -eq 'el'){'ΠΗΓΗ: Η ΥΛΗ ΠΟΥ ΕΙΣΗΓΑΓΕΣ'}else{'SOURCE: THE PROVIDED MATERIAL'}),$fSmall,$secondaryBrush,75,537)
+        $g.FillRectangle($panelBrush,46,587,1188,83)
+        if($caption) {
+            $caps=$caption.Trim();if($caps.Length -gt 125){$caps=$caps.Substring(0,124)+'…'}
+            $g.DrawString($caps,$fCaption,$whiteBrush,([System.Drawing.RectangleF]::new(66,592,1140,70)))
+        }
+        $g.FillRectangle($accentBrush,46,684,[int](1188*[math]::Min(1,[math]::Max(0,$overall))),6)
+        $bmp.Save($file,[System.Drawing.Imaging.ImageFormat]::Png)
+    } finally {
+        foreach($obj in @($g,$bmp,$whiteBrush,$secondaryBrush,$accentBrush,$blueBrush,$warmBrush,$greenBrush,$panelBrush,$thinPen,$rayPen,$fSmall,$fTag,$fHeading,$fTitle,$fCaption)) {$obj.Dispose()}
     }
-    $g.FillRectangle($teal,85,650,([int](1110*$index/$count)),7)
-    $g.DrawString('EduVideo Studio · Local edition',$font3,$muted,86,664)
-    $bmp.Save($file,[System.Drawing.Imaging.ImageFormat]::Png)
-    foreach($obj in @($g,$bmp,$brush,$teal,$white,$muted,$panel,$font1,$font2,$font3)) { $obj.Dispose() }
 }
 # Export worker runs separately, keeping the form responsive.
 # Subtitles and slide changes are timed using proportional word lengths.
 # This is approximate alignment, not word-accurate forced alignment.
-function Export-Video([string]$narration,[string]$lang,[string]$output) {
+function Validate-MP4([string]$ffmpeg,[string]$file,[int]$expected) {
+    $psi=New-Object System.Diagnostics.ProcessStartInfo
+    $psi.FileName=$ffmpeg;$psi.Arguments='-hide_banner -i "'+$file+'"'
+    $psi.UseShellExecute=$false;$psi.RedirectStandardError=$true;$psi.CreateNoWindow=$true
+    $p=[System.Diagnostics.Process]::Start($psi)
+    $info=$p.StandardError.ReadToEnd();$p.WaitForExit()
+    if($info -notmatch 'Duration:\s*(\d\d):(\d\d):(\d\d\.\d+)') {throw 'Δεν ήταν δυνατό να επαληθευτεί η διάρκεια του παραγόμενου MP4.'}
+    $actual=[int]$Matches[1]*3600+[int]$Matches[2]*60+[double]::Parse($Matches[3],[Globalization.CultureInfo]::InvariantCulture)
+    if([math]::Abs($actual-$expected) -gt 0.05) {throw ('Λανθασμένη διάρκεια αρχείου: '+$actual+' δευτ. αντί για '+$expected+'.')}
+}
+function Export-Video([string]$narration,[string]$lang,[string]$output,[int]$minutes) {
     Assert-Components
+    if($minutes -notin @(1,2,3,4,5)) {throw 'Επίλεξε διάρκεια από 1 έως 5 λεπτά.'}
+    $target=$minutes*60
     $scenes=@($narration -split '(?:\r?\n){2,}' | Where-Object {$_.Trim()})
-    if ($scenes.Count -eq 0) { throw 'Δεν υπάρχει κείμενο αφήγησης.' }
-    if ($scenes.Count -gt 40) { throw 'Μέγιστο 40 σκηνές.' }
+    if ($scenes.Count -eq 0) {throw 'Δεν υπάρχει κείμενο αφήγησης.'}
+    if ($scenes.Count -gt 40) {throw 'Μέγιστο 40 σκηνές.'}
     $work=Join-Path $root ('render-'+[Guid]::NewGuid().ToString('N'))
-    [System.IO.Directory]::CreateDirectory($work)|Out-Null
+    [IO.Directory]::CreateDirectory($work)|Out-Null
     try {
         $ffmpeg=Join-Path $env:EDUVIDEO_HOME 'bin\ffmpeg.exe'
-        $sub=New-Object 'System.Collections.Generic.List[string]'
         $wavfiles=New-Object 'System.Collections.Generic.List[string]'
-        $slidefiles=New-Object 'System.Collections.Generic.List[string]'
-        $slideSeconds=New-Object 'System.Collections.Generic.List[double]'
-        $time=0.0
-        $subNo=0
+        $rawSeconds=New-Object 'System.Collections.Generic.List[double]'
+        $rawTotal=0.0
+        # Synthesize before rendering. Never cut off spoken narration to hit the duration.
         for($i=0;$i -lt $scenes.Count;$i++) {
             Status ('Αφήγηση: σκηνή {0}/{1}' -f ($i+1),$scenes.Count)
             $wave=Join-Path $work ('speech_{0:000}.wav' -f ($i+1))
             Invoke-Piper $scenes[$i] $lang $wave
             $sec=Wave-Seconds $wave
-            if($sec -gt 240){ throw 'Η σκηνή ξεπερνά τα 4 λεπτά. Χώρισε το κείμενο σε μικρότερες παραγράφους.' }
-            $wavfiles.Add($wave)
-            # Show one short caption at a time, not a 200-word paragraph.
+            if($sec -gt 240){throw 'Μία σκηνή διαρκεί πάνω από τέσσερα λεπτά. Χώρισε το κείμενο σε περισσότερες παραγράφους.'}
+            $wavfiles.Add($wave);$rawSeconds.Add($sec);$rawTotal+=$sec
+        }
+        $speed=[math]::Max(1.0,$rawTotal/($target-0.08))
+        if($speed -gt 1.25) {throw ('Το σενάριο είναι υπερβολικά μεγάλο για '+$minutes+' λεπτά. Η αφήγηση χρειάζεται '+[math]::Round($rawTotal)+' δευτ. Συντόμευσε το κείμενο και προσπάθησε ξανά. Δεν θα κοπεί η ομιλία.')}
+        $audioList=New-Object 'System.Collections.Generic.List[string]'
+        $videoList=New-Object 'System.Collections.Generic.List[string]'
+        $sub=New-Object 'System.Collections.Generic.List[string]'
+        $elapsed=0.0;$subtitleNo=0
+        $fps=6
+        $totalFrames=$fps*$target
+        $writtenFrames=0
+        $lastFrame=''
+        for($i=0;$i -lt $scenes.Count;$i++) {
+            $sec=$rawSeconds[$i]
+            $slot=if($i -eq $scenes.Count-1){$target-$elapsed}else{$target*$sec/$rawTotal}
+            $voiceEffective=[math]::Min($slot,$sec/$speed)
+            # All scene audio is padded with silence rather than abruptly truncated.
+            $wavTimed=Join-Path $work ('timed_{0:000}.wav' -f ($i+1))
+            $slotText=$slot.ToString('0.000000',$culture)
+            $speedText=$speed.ToString('0.000000',$culture)
+            $af='atempo='+$speedText+',apad,atrim=duration='+$slotText
+            Invoke-Tool $ffmpeg @('-hide_banner','-nostdin','-loglevel','error','-y','-i',$wavfiles[$i],'-af',$af,'-c:a','pcm_s16le','-ac','1',$wavTimed) 'Χρονισμός αφήγησης'
+            $audioList.Add("file '"+(($wavTimed.Replace('\','/')) -replace "'","'\''")+"'")
             $chunks=@(Get-Chunks $scenes[$i] 76)
-            if ($chunks.Count -eq 0) { $chunks=@($scenes[$i]) }
-            $weights=@($chunks | ForEach-Object { [math]::Max(1,(Words $_)) })
-            $totalWords=0.0
-            foreach($w in $weights){$totalWords+=$w}
-            $elapsed=0.0
-            for($j=0;$j -lt $chunks.Count;$j++) {
-                $duration=if($j -eq $chunks.Count-1) {$sec-$elapsed} else {$sec*$weights[$j]/$totalWords}
-                $duration=[math]::Max(0.001,$duration)
-                $slide=Join-Path $work ('slide_{0:000}_{1:000}.png' -f ($i+1),($j+1))
-                Draw-Scene $scenes[$i] ($i+1) $scenes.Count $slide $lang $chunks[$j]
-                $slidefiles.Add($slide)
-                $slideSeconds.Add($duration)
-                $subNo++
-                $sub.Add([string]$subNo)
-                $sub.Add((Srt-Time ($time+$elapsed))+' --> '+(Srt-Time ($time+$elapsed+$duration)))
+            $weights=@($chunks | ForEach-Object { [Math]::Max(1,(Words $_)) })
+            $weightSum=0.0;foreach($w in $weights){$weightSum+=$w}
+            $sofar=0.0
+            for($j=0;$j -lt $chunks.Count;$j++){
+                $d=if($j -eq $chunks.Count-1){$voiceEffective-$sofar}else{$voiceEffective*$weights[$j]/$weightSum}
+                $d=[math]::Max(.001,$d)
+                $subtitleNo++
+                $sub.Add([string]$subtitleNo)
+                $sub.Add((Srt-Time ($elapsed+$sofar))+' --> '+(Srt-Time ($elapsed+$sofar+$d)))
                 $sub.Add($chunks[$j]);$sub.Add('')
-                $elapsed+=$duration
+                $sofar+=$d
             }
-            $time+=$sec
+            $frames=if($i -eq $scenes.Count-1){$totalFrames-$writtenFrames}else{[math]::Max(1,[int][math]::Round($slot*$fps))}
+            Status ('Κινούμενα γραφικά: σκηνή {0}/{1}' -f ($i+1),$scenes.Count)
+            for($k=0;$k -lt $frames;$k++) {
+                $timeInScene=$k/$fps
+                $caption=''
+                if($timeInScene -lt $voiceEffective -and $chunks.Count -gt 0) {
+                    $captionIdx=[int][math]::Floor($timeInScene/[math]::Max(0.01,$voiceEffective)*$chunks.Count)
+                    $caption=$chunks[[math]::Min($chunks.Count-1,$captionIdx)]
+                }
+                $phase=($timeInScene/5.0)%1.0
+                $overall=($writtenFrames+$k)/[double]$totalFrames
+                $image=Join-Path $work ('anim_{0:0000}_{1:0000}.png' -f ($i+1),$k)
+                Draw-Scene $scenes[$i] ($i+1) $scenes.Count $image $lang $caption $phase $overall
+                $videoList.Add("file '"+(($image.Replace('\','/')) -replace "'","'\''")+"'")
+                $videoList.Add('duration 0.166666667')
+                $lastFrame=$image
+            }
+            $writtenFrames+=$frames
+            $elapsed+=$slot
         }
+        # A duplicated last frame ensures concat keeps the final timed interval.
+        $videoList.Add("file '"+(($lastFrame.Replace('\','/')) -replace "'","'\''")+"'")
+        [IO.File]::WriteAllLines((Join-Path $work 'audio.txt'),$audioList,[Text.UTF8Encoding]::new($false))
+        [IO.File]::WriteAllLines((Join-Path $work 'video.txt'),$videoList,[Text.UTF8Encoding]::new($false))
         $srt=Join-Path $work 'captions.srt'
-        [IO.File]::WriteAllLines($srt,$sub,([Text.UTF8Encoding]::new($true)))
-        $alist=New-Object 'System.Collections.Generic.List[string]'
-        $vlist=New-Object 'System.Collections.Generic.List[string]'
-        foreach($wave in $wavfiles){$alist.Add("file '"+(($wave.Replace('\','/')) -replace "'","'\\''")+"'")}
-        for($i=0;$i -lt $slidefiles.Count;$i++) {
-            $vlist.Add("file '"+(($slidefiles[$i].Replace('\','/')) -replace "'","'\\''")+"'")
-            $vlist.Add('duration '+$slideSeconds[$i].ToString('0.000000',$culture))
-        }
-        $vlist.Add("file '"+(($slidefiles[$slidefiles.Count-1].Replace('\','/')) -replace "'","'\\''")+"'")
-        [IO.File]::WriteAllLines((Join-Path $work 'audio.txt'),$alist,([Text.UTF8Encoding]::new($false)))
-        [IO.File]::WriteAllLines((Join-Path $work 'video.txt'),$vlist,([Text.UTF8Encoding]::new($false)))
+        [IO.File]::WriteAllLines($srt,$sub,[Text.UTF8Encoding]::new($true))
         $merged=Join-Path $work 'narration.wav'
-        Status 'Σύνθεση ήχου…'
+        Status 'Συγχρονισμός αφήγησης…'
         Invoke-Tool $ffmpeg @('-hide_banner','-nostdin','-loglevel','error','-y','-f','concat','-safe','0','-i',(Join-Path $work 'audio.txt'),'-c:a','pcm_s16le',$merged) 'Σύνθεση ήχου'
-        Status 'Παραγωγή MP4…'
-        $tmpVideo=Join-Path $work 'movie.mp4'
-        Invoke-Tool $ffmpeg @('-hide_banner','-nostdin','-loglevel','error','-y','-f','concat','-safe','0','-i',(Join-Path $work 'video.txt'),'-i',$merged,'-r','24','-c:v','libx264','-preset','veryfast','-crf','24','-pix_fmt','yuv420p','-c:a','aac','-b:a','128k','-movflags','+faststart','-shortest',$tmpVideo) 'Εξαγωγή MP4'
-        if(!(Test-Path $tmpVideo) -or (Get-Item $tmpVideo).Length -lt 5000){throw 'Παρήχθη άδειο βίντεο.'}
+        Status ('Κωδικοποίηση MP4 '+$target+' δευτερολέπτων…')
+        $tmpVideo=Join-Path $work 'lesson.mp4'
+        Invoke-Tool $ffmpeg @('-hide_banner','-nostdin','-loglevel','error','-y','-f','concat','-safe','0','-i',(Join-Path $work 'video.txt'),'-i',$merged,'-map','0:v:0','-map','1:a:0','-vsync','cfr','-r','24','-frames:v',([string]($target*24)),'-af',('apad,atrim=duration='+$target),'-c:v','libx264','-preset','veryfast','-crf','21','-pix_fmt','yuv420p','-c:a','aac','-b:a','160k','-movflags','+faststart','-t',([string]$target),$tmpVideo) 'Εξαγωγή MP4'
+        if(!(Test-Path $tmpVideo) -or (Get-Item $tmpVideo).Length -lt 10000){throw 'Παρήχθη άδειο βίντεο.'}
+        Validate-MP4 $ffmpeg $tmpVideo $target
         Copy-Item $tmpVideo $output -Force
         $outSrt=[IO.Path]::ChangeExtension($output,'.srt')
         Copy-Item $srt $outSrt -Force
-        return @{video=$output;srt=$outSrt;duration=$time}
-    }finally{Remove-Item $work -Recurse -Force -ErrorAction SilentlyContinue}
+        return @{video=$output;srt=$outSrt;duration=$target}
+    } finally {Remove-Item $work -Recurse -Force -ErrorAction SilentlyContinue}
 }
-
 # Child-process worker: the desktop window stays responsive while audio/video is generated.
 if (![string]::IsNullOrWhiteSpace($env:EDUVIDEO_JOB_DIR)) {
     try {
@@ -262,7 +418,8 @@ if (![string]::IsNullOrWhiteSpace($env:EDUVIDEO_JOB_DIR)) {
         $narration=[System.IO.File]::ReadAllText((Join-Path $j 'narration.txt'),[System.Text.Encoding]::UTF8)
         $lang=[System.IO.File]::ReadAllText((Join-Path $j 'lang.txt'),[System.Text.Encoding]::UTF8).Trim()
         $destination=[System.IO.File]::ReadAllText((Join-Path $j 'destination.txt'),[System.Text.Encoding]::UTF8).Trim()
-        $r=Export-Video $narration $lang $destination
+        $minutes=[int][IO.File]::ReadAllText((Join-Path $j 'minutes.txt'),[Text.Encoding]::UTF8).Trim()
+        $r=Export-Video $narration $lang $destination $minutes
         [System.IO.File]::WriteAllText((Join-Path $j 'success.txt'), ('Βίντεο: '+$r.video+"`r`n"+'Υπότιτλοι: '+$r.srt),[System.Text.Encoding]::UTF8)
     } catch {
         [System.IO.File]::WriteAllText((Join-Path $env:EDUVIDEO_JOB_DIR 'failure.txt'), ($_.Exception.ToString() + "`r`n" + $_.ScriptStackTrace),[System.Text.Encoding]::UTF8)
@@ -271,7 +428,7 @@ if (![string]::IsNullOrWhiteSpace($env:EDUVIDEO_JOB_DIR)) {
 }
 
 $form=New-Object System.Windows.Forms.Form
-$form.Text='EduVideo Studio · Portable MP4 v0.7'
+$form.Text='EduVideo Studio · Animated PDF MP4 v0.8'
 $form.StartPosition='CenterScreen';$form.Size=New-Object System.Drawing.Size(1150,790)
 $form.MinimumSize=New-Object System.Drawing.Size(980,710)
 $form.BackColor=[System.Drawing.Color]::FromArgb(13,27,43)
@@ -305,7 +462,7 @@ $scriptBox.Location=New-Object System.Drawing.Point(565,145);$scriptBox.Size=New
 $scriptBox.Anchor='Top,Left,Right,Bottom';$scriptBox.Font=New-Object System.Drawing.Font('Segoe UI',11)
 $form.Controls.Add($scriptBox)
 $btnOpen=New-Object System.Windows.Forms.Button
-$btnOpen.Text='Άνοιγμα TXT / Word';$btnOpen.Location=New-Object System.Drawing.Point(30,518);$btnOpen.Size=New-Object System.Drawing.Size(180,38)
+$btnOpen.Text='Άνοιγμα PDF / Word / TXT';$btnOpen.Location=New-Object System.Drawing.Point(30,518);$btnOpen.Size=New-Object System.Drawing.Size(180,38)
 $btnOpen.Anchor='Bottom,Left';$form.Controls.Add($btnOpen)
 $btnExample=New-Object System.Windows.Forms.Button
 $btnExample.Text='Παράδειγμα';$btnExample.Location=New-Object System.Drawing.Point(220,518);$btnExample.Size=New-Object System.Drawing.Size(135,38)
@@ -315,7 +472,7 @@ $lblDuration.Text='Διάρκεια';$lblDuration.Location=New-Object System.Dra
 $lblDuration.Anchor='Bottom,Left';$form.Controls.Add($lblDuration)
 $duration=New-Object System.Windows.Forms.ComboBox
 $duration.DropDownStyle='DropDownList';$duration.Location=New-Object System.Drawing.Point(123,573);$duration.Size=New-Object System.Drawing.Size(125,30)
-$duration.Items.AddRange([object[]]@('1 λεπτό','2 λεπτά','3 λεπτά','5 λεπτά'));$duration.SelectedIndex=1
+$duration.Items.AddRange([object[]]@('1 λεπτό','2 λεπτά','3 λεπτά','4 λεπτά','5 λεπτά'));$duration.SelectedIndex=1
 $duration.Anchor='Bottom,Left';$form.Controls.Add($duration)
 $lblLang=New-Object System.Windows.Forms.Label
 $lblLang.Text='Αφήγηση';$lblLang.Location=New-Object System.Drawing.Point(270,576);$lblLang.Size=New-Object System.Drawing.Size(80,26)
@@ -332,7 +489,7 @@ $btnExport.Text='Εξαγωγή MP4';$btnExport.Location=New-Object System.Drawi
 $btnExport.BackColor=[System.Drawing.Color]::FromArgb(35,170,148);$btnExport.ForeColor=[System.Drawing.Color]::White
 $btnExport.FlatStyle='Flat';$btnExport.Anchor='Bottom,Right';$form.Controls.Add($btnExport)
 $note=New-Object System.Windows.Forms.Label
-$note.Text='Η έκδοση 0.7 χρησιμοποιεί τοπική αφήγηση Piper και MP4. Η σύνθεση του σεναρίου ΔΕΝ είναι γενετική AI. TXT, MD, DOCX και επικόλληση.'
+$note.Text='v0.8 · Κινούμενα διαγράμματα · PDF με επιλέξιμο κείμενο, Word, TXT · MP4 ακριβώς 1–5 λεπτών · Χωρίς AI σενάριο ή OCR.'
 $note.ForeColor=[System.Drawing.Color]::FromArgb(155,185,199)
 $note.Location=New-Object System.Drawing.Point(30,626);$note.Size=New-Object System.Drawing.Size(1060,48)
 $note.Anchor='Bottom,Left,Right';$form.Controls.Add($note)
@@ -344,7 +501,7 @@ $lblStatus.Anchor='Bottom,Left,Right';$form.Controls.Add($lblStatus)
 
 $btnOpen.Add_Click({
     $dialog=New-Object System.Windows.Forms.OpenFileDialog
-    $dialog.Filter='Κείμενο / Word|*.txt;*.md;*.docx|Όλα|*.*'
+    $dialog.Filter='Έγγραφα|*.pdf;*.txt;*.md;*.docx|PDF|*.pdf|Όλα|*.*'
     if ($dialog.ShowDialog() -eq 'OK') {
         try { $source.Text=Read-Material $dialog.FileName;Status ('Φορτώθηκε: '+[IO.Path]::GetFileName($dialog.FileName)) }
         catch { Warn $_.Exception.Message }
@@ -356,7 +513,7 @@ $btnExample.Add_Click({
 })
 $btnPlan.Add_Click({
     try {
-        $min=@(1,2,3,5)[$duration.SelectedIndex]
+        $min=@(1,2,3,4,5)[$duration.SelectedIndex]
         $scriptBox.Text=Make-Plan $source.Text $min
         Status ('Σενάριο έτοιμο: '+(Words $scriptBox.Text)+' λέξεις. Μπορείς να το επεξεργαστείς.')
     } catch { Warn $_.Exception.Message }
@@ -415,6 +572,7 @@ $btnExport.Add_Click({
         [System.IO.File]::WriteAllText((Join-Path $job 'destination.txt'),$save.FileName,$encoding)
         $chosen=if($langChoice.SelectedIndex -eq 0){'el'}else{'en'}
         [System.IO.File]::WriteAllText((Join-Path $job 'lang.txt'),$chosen,$encoding)
+        [System.IO.File]::WriteAllText((Join-Path $job 'minutes.txt'),([string]@(1,2,3,4,5)[$duration.SelectedIndex]),$encoding)
         $btnExport.Enabled=$false;$btnPlan.Enabled=$false
         $script:jobDir=$job;$script:jobStart=[datetime]::Now
         $script:renderProcess=Start-Process -FilePath $env:EDUVIDEO_BIN -ArgumentList ('--render "'+$job+'"') -PassThru

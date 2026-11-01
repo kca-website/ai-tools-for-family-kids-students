@@ -95,9 +95,11 @@ function Invoke-Piper([string]$text,[string]$lang,[string]$wav) {
     $psi.WorkingDirectory=Split-Path $exe
     $psi.UseShellExecute=$false;$psi.CreateNoWindow=$true
     $psi.RedirectStandardInput=$true;$psi.RedirectStandardError=$true
-    $psi.StandardInputEncoding=[System.Text.UTF8Encoding]::new($false)
     $proc=[System.Diagnostics.Process]::Start($psi)
-    $proc.StandardInput.WriteLine($text)
+    $utf8=[System.Text.UTF8Encoding]::new($false)
+    $data=$utf8.GetBytes($text+"`n")
+    $proc.StandardInput.BaseStream.Write($data,0,$data.Length)
+    $proc.StandardInput.BaseStream.Flush()
     $proc.StandardInput.Close()
     $errors=$proc.StandardError.ReadToEnd()
     $proc.WaitForExit()

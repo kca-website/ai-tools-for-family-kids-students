@@ -1,0 +1,19 @@
+EduVideo Studio — 3rd-party components (developer notes)
+
+Piper TTS executable from https://github.com/rhasspy/piper/releases/tag/2023.11.14-2
+Piper core: MIT; release includes eSpeak NG GPLv3 components and other libraries.
+Source, license and attribution requirements must be preserved for redistribution.
+
+Greek voice: el_GR-rapunzelina-medium from rhasspy/piper-voices.
+Voice MODEL_CARD: Greek Single Speaker Speech Dataset CC0, trained from scratch.
+Repo: https://huggingface.co/rhasspy/piper-voices
+
+English voice: en_US-joe-medium (model card: CC0 training data; check inherited Lessac model attribution).
+
+FFmpeg binary from https://www.gyan.dev/ffmpeg/builds/
+Gyan FFmpeg essentials static builds are GPLv3. Source: https://github.com/FFmpeg/FFmpeg
+Provide complete license notices and corresponding source access/offer when distributing binaries.
+
+All third-party components are downloaded by the developer build script;
+end users should never download these individually. Verify exact upstream
+versions and all redistribution obligations before publishing a public release.

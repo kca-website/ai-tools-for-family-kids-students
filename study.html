@@ -906,11 +906,22 @@
     if(interactiveStep>interactiveTotal)return '<div class="quiz-progress">'+esc(lang==='en'?'Completed · '+interactiveTotal+'/'+interactiveTotal:'Ολοκληρώθηκε · '+interactiveTotal+'/'+interactiveTotal)+'</div>';
     return '<div class="quiz-progress">'+esc((lang==='en'?'Question ':'Ερώτηση ')+interactiveStep+(lang==='en'?' of ':' από ')+interactiveTotal)+'</div>';
   }
+  // Second client-side safety boundary, especially for the optional Puter fallback.
+  // Never render a provider transcript containing internal reasoning or role markers.
+  function assertLearnerFacingStudyText(text){
+    const value=String(text||'');
+    if(/(?:^|[\r\n])\s*analysis\s*:|\bassistant\s*(?:final|analysis)\s*:|<\/?(?:think|thinking|analysis|reasoning)\s*>|<\|(?:im_start|im_sep|start_header_id|end_header_id|eot_id|channel)\|>/i.test(value)){
+      throw new Error(lang==='en'
+        ?'The AI returned an invalid internal-format reply. Please try again.'
+        :'Το AI επέστρεψε μη έγκυρη απάντηση εσωτερικής μορφής. Δοκίμασε ξανά.');
+    }
+    return value;
+  }
   function renderPlain(text){
-    $('aiOutput').innerHTML=quizProgressHtml()+studyMarkup(text);
+    $('aiOutput').innerHTML=quizProgressHtml()+studyMarkup(assertLearnerFacingStudyText(text));
   }
   function renderFlashcards(text){
-    const raw=String(text||'').trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
+    const raw=assertLearnerFacingStudyText(text).trim().replace(/^\`\`\`(?:json)?\s*/i,'').replace(/\s*\`\`\`$/,'');
     let data=null;try{data=JSON.parse(raw)}catch(_){const a=raw.indexOf('{'),b=raw.lastIndexOf('}');if(a>=0&&b>a)try{data=JSON.parse(raw.slice(a,b+1))}catch(_){}}
     if(!Array.isArray(data?.cards)){renderPlain(text);return}
     const grid=document.createElement('div');grid.className='flash-grid';

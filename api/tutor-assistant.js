@@ -331,7 +331,9 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
       });
     }
 
-    const text = sanitize(result.text);
+    const text = activity === 'quiz_wizard'
+      ? JSON.stringify(parseJsonObject(result.text))
+      : sanitize(result.text);
     if (!text) return res.status(502).json({ error: 'empty_result', message: 'Δεν επιστράφηκε απάντηση.' });
     const responseSourceMode = StudyContext.resolveSourceMode({
       policy: effectiveSourcePolicy,

@@ -419,7 +419,7 @@ function validStructuredResult({ task, activity, text, quizCount = 5, sourceText
       data.questions.every(row => {
         if (!sourceText) return !row.evidence || typeof row.evidence === 'string';
         if (typeof row.evidence !== 'string' || row.evidence.trim().length < 16 || row.evidence.length > 180 || hasInternalReasoningLeak(row.evidence)) return false;
-        const normalized = value => String(value).normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^\\p{L}\\p{N}]+/gu, ' ').replace(/\\s+/g, ' ').trim();
+        const normalized = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').replace(/\s+/g, ' ').trim();
         return normalized(sourceText).includes(normalized(row.evidence));
       }) &&
       new Set(data.questions.map(row => row.question.trim().toLowerCase())).size === quizCount;

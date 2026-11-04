@@ -24,6 +24,7 @@ const { generateChat, getAiStatus } = require('../ai-provider-router');
 const { getStudyCache, setStudyCache } = require('../study-runtime-cache');
 const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 const StudyContext = require('../study-context');
+const { hasInternalReasoningLeak } = require('../ai-output-safety');
 module.exports = async function handler(req, res) {
   const aiStatus = getAiStatus();
   const model = aiStatus.model || 'openai/gpt-oss-120b';
@@ -47,7 +48,7 @@ module.exports = async function handler(req, res) {
     return res.status(503).json({ error: 'ai_not_configured', message: 'Η AI Βοήθεια δεν είναι προσωρινά διαθέσιμη.' });
   }
 
-  const { context = '', prompt, audience, task = 'conversation', mode = 'understand', activity = '', cacheEligible = false, grade = '', subject = '', subjectId = '', topic = '', character = '', studyContext = null, documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
+  const { context = '', prompt, audience, task = 'conversation', mode = 'understand', activity = '', quizCount = 5, cacheEligible = false, grade = '', subject = '', subjectId = '', topic = '', character = '', studyContext = null, documentText = '', documentName = '', documentKind = '', documentSourceUrl = '' } = req.body || {};
   if (!['parent', 'high_student', 'study_user'].includes(audience)) {
     return res.status(403).json({ error: 'audience_not_allowed', message: 'Η λειτουργία είναι διαθέσιμη σε γονείς όλων των βαθμίδων και σε μαθητές Λυκείου.' });
   }
@@ -58,6 +59,7 @@ module.exports = async function handler(req, res) {
   if (typeof context !== 'string' || typeof prompt !== 'string' || !prompt.trim()) {
     return res.status(400).json({ error: 'missing_prompt', message: 'Λείπει η ερώτηση ή το εκπαιδευτικό πλαίσιο δεν είναι έγκυρο.' });
   }
+  const validatedQuizCount = Number(quizCount) === 3 ? 3 : 5;
   const taskLimits = {
     conversation: 600,
     flashcards: 1200,
@@ -163,7 +165,7 @@ ${roleRule}
 - Do not diagnose, label or officially grade a learner.
 - If curriculum evidence is missing or uncertain, say so and recommend checking the school textbook or official source.`;
 
-  const taskRule = serverTaskRule({ task, mode, activity });
+  const taskRule = serverTaskRule({ task, mode, activity, quizCount: validatedQuizCount, lang: studyContext?.lang });
   const physicsScopeRule = verifiedOfficialSource?.subject === 'fysiki-g-gymnasiou'
     ? '\nMANDATORY PHYSICS CURRICULUM RESTRICTIONS:\n' + (verifiedOfficialSource.curriculumExclusions || []).join('\n')
     : '';
@@ -209,7 +211,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
     { role: 'user', content: userContent },
   ];
   const routingProfile = chooseRoutingProfile({ task, mode, activity });
-  const maxTokens = task === 'conversation' && activity === 'explain' ? 1200 : taskLimits[task];
+  const maxTokens = activity === 'quiz_wizard' ? 2400 : (task === 'conversation' && activity === 'explain' ? 1200 : taskLimits[task]);
   const trustedGroundingContext = [selectedContext, taskRule].filter(Boolean).join('\n');
   const startedAt = Date.now();
   const cacheParts = cacheEligible === true && officialSchoolbook
@@ -228,7 +230,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
   try {
     if (cacheParts) {
       const cached = await getStudyCache(cacheParts);
-      if (cached?.text) {
+      if (cached?.text && !hasInternalReasoningLeak(cached.text)) {
         emitAiMetric({ task, activity, status: 200, cacheHit: true, provider: cached.provider || 'cache', model: cached.model || '', latencyMs: Date.now() - startedAt, usage: cached.usage || null });
         res.setHeader('Cache-Control', 'no-store');
         return res.status(200).json({ ...cached, cacheHit: true, routingProfile });
@@ -243,7 +245,23 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
       modelProfile: routingProfile,
     });
 
-    if (result?.ok && needsStructuredValidation({ task, activity }) && !validStructuredResult({ task, activity, text: result.text })) {
+    if (result?.ok && hasInternalReasoningLeak(result.text)) {
+      const safeMessages = messages.map((message, i) => i === 0
+        ? { ...message, content: message.content + '\nReturn ONLY user-facing final content. NEVER include analysis, hidden reasoning, assistant role markers or internal transcript separators.' }
+        : message);
+      const retry = await generateChat({
+        messages: safeMessages,
+        maxTokens,
+        temperature: 0,
+        reasoningEffort: 'low',
+        modelProfile: 'quality',
+      });
+      result = retry?.ok && !hasInternalReasoningLeak(retry.text)
+        ? retry
+        : { ...(retry || result), ok: false, status: 502, error: 'unsafe_internal_output', retryable: false };
+    }
+
+    if (result?.ok && needsStructuredValidation({ task, activity }) && !validStructuredResult({ task, activity, text: result.text, quizCount: validatedQuizCount })) {
       const retry = await generateChat({
         messages,
         maxTokens,
@@ -251,7 +269,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
         reasoningEffort: 'low',
         modelProfile: 'quality',
       });
-      if (retry?.ok && validStructuredResult({ task, activity, text: retry.text })) result = retry;
+      if (retry?.ok && !hasInternalReasoningLeak(retry.text) && validStructuredResult({ task, activity, text: retry.text, quizCount: validatedQuizCount })) result = retry;
       else result = { ...(retry || result), ok: false, status: 502, error: 'invalid_structured_result', retryable: false, message: 'Structured result validation failed.' };
     }
 
@@ -265,7 +283,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
           reasoningEffort: 'low',
           modelProfile: 'quality',
         });
-        if (retry?.ok && (!needsStructuredValidation({ task, activity }) || validStructuredResult({ task, activity, text: retry.text }))) {
+        if (retry?.ok && !hasInternalReasoningLeak(retry.text) && (!needsStructuredValidation({ task, activity }) || validStructuredResult({ task, activity, text: retry.text, quizCount: validatedQuizCount }))) {
           const retrySignals = groundingSignals(retry.text, rawDocumentText, trustedGroundingContext);
           if (!retrySignals.length) {
             result = { ...retry, groundingRetry: true, groundingSignals: firstSignals };
@@ -280,6 +298,10 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
             : { ...(retry || result), ok: false, status: 422, error: 'grounding_validation_failed', retryable: false, groundingSignals: firstSignals };
         }
       }
+    }
+
+    if (result?.ok && hasInternalReasoningLeak(result.text)) {
+      result = { ...result, ok: false, status: 502, error: 'unsafe_internal_output', retryable: false };
     }
 
     if (!result?.ok) {
@@ -330,12 +352,13 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
   }
 };
 
-function serverTaskRule({ task, mode, activity }) {
+function serverTaskRule({ task, mode, activity, quizCount = 5, lang = 'el' }) {
   const action = String(activity || '').trim().toLowerCase();
   const rules = {
     plan: '- Return ONLY valid JSON using shape {"title":"...","focus":"...","steps":[{"title":"...","minutes":5,"action":"..."}],"final_check":"..."}. Include 3–5 actionable steps for the selected topic. Do not solve the school task.',
     flashcards: '- Return only valid JSON with exactly 8 active-recall cards using shape {"cards":[{"q":"...","a":"..."}]}. Ground every card in the selected topic/source.',
     quiz: '- Run or generate only the requested quiz format. Never reveal an answer before an attempt when the flow is interactive.',
+    quiz_wizard: '- Produce a complete quick quiz with EXACTLY ' + (quizCount === 3 ? 3 : 5) + ' DIFFERENT source-grounded short-answer questions for the selected school unit. Return ONLY a valid JSON object in this exact form: {"questions":[{"question":"...","hint":"...","answer":"...","explanation":"..."}]}. Each field is a short learner-facing string, all in ' + (lang === 'en' ? 'English' : 'Greek') + '. Every question must be answerable from the supplied source when one is active. Each hint should help without revealing the answer; the answer and explanation are shown ONLY after the quiz ends. No made-up historical facts, unrelated textbook concepts, meta text, analysis or role markers. Use short, age-appropriate wording, correct textbook terminology, and distinct learning targets.',
     truefalse: '- Run a True/False concept check one statement at a time and wait for the learner before feedback.',
     explain: '- Explain the exact selected topic clearly and stay within the selected/source-supported material. Keep the complete answer within 180 words: a short explanation, up to two brief examples explicitly described in SOURCE MATERIAL and two short self-check questions. Omit examples when the source does not describe them. Do not expand mechanisms, chemical processes or scientific explanations beyond the source. Finish every sentence. Avoid tables.',
     quickreview: '- Create a concise 5-minute review with key points, common confusions and rapid-recall questions.',
@@ -380,12 +403,21 @@ function parseJsonObject(text) {
 }
 
 function needsStructuredValidation({ task, activity }) {
-  return task === 'flashcards' || task === 'study_plan' || activity === 'flashcards' || activity === 'plan';
+  return task === 'flashcards' || task === 'study_plan' || activity === 'flashcards' || activity === 'plan' || activity === 'quiz_wizard';
 }
 
-function validStructuredResult({ task, activity, text }) {
+function validStructuredResult({ task, activity, text, quizCount = 5 }) {
+  if (hasInternalReasoningLeak(text)) return false;
   const data = parseJsonObject(text);
   if (!data) return false;
+  if (activity === 'quiz_wizard') {
+    return Array.isArray(data.questions) && data.questions.length === quizCount &&
+      data.questions.every(row => ['question','hint','answer','explanation'].every(key => {
+        const value = row?.[key];
+        return typeof value === 'string' && value.trim().length >= 5 && value.length <= 650 && !hasInternalReasoningLeak(value);
+      })) &&
+      new Set(data.questions.map(row => row.question.trim().toLowerCase())).size === quizCount;
+  }
   if (task === 'flashcards' || activity === 'flashcards') {
     return Array.isArray(data.cards) && data.cards.length === 8 &&
       data.cards.every(row => String(row?.q || '').trim() && String(row?.a || '').trim());

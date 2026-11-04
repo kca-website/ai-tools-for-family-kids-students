@@ -165,7 +165,7 @@ ${roleRule}
 - Do not diagnose, label or officially grade a learner.
 - If curriculum evidence is missing or uncertain, say so and recommend checking the school textbook or official source.`;
 
-  const taskRule = serverTaskRule({ task, mode, activity, quizCount: validatedQuizCount, lang: studyContext?.lang });
+  const taskRule = serverTaskRule({ task, mode, activity, quizCount: validatedQuizCount, lang: studyContext?.lang, sourceActive: hasDocument });
   const physicsScopeRule = verifiedOfficialSource?.subject === 'fysiki-g-gymnasiou'
     ? '\nMANDATORY PHYSICS CURRICULUM RESTRICTIONS:\n' + (verifiedOfficialSource.curriculumExclusions || []).join('\n')
     : '';
@@ -261,7 +261,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
         : { ...(retry || result), ok: false, status: 502, error: 'unsafe_internal_output', retryable: false };
     }
 
-    if (result?.ok && needsStructuredValidation({ task, activity }) && !validStructuredResult({ task, activity, text: result.text, quizCount: validatedQuizCount })) {
+    if (result?.ok && needsStructuredValidation({ task, activity }) && !validStructuredResult({ task, activity, text: result.text, quizCount: validatedQuizCount, sourceText: modelDocumentText })) {
       const retry = await generateChat({
         messages,
         maxTokens,
@@ -269,7 +269,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
         reasoningEffort: 'low',
         modelProfile: 'quality',
       });
-      if (retry?.ok && !hasInternalReasoningLeak(retry.text) && validStructuredResult({ task, activity, text: retry.text, quizCount: validatedQuizCount })) result = retry;
+      if (retry?.ok && !hasInternalReasoningLeak(retry.text) && validStructuredResult({ task, activity, text: retry.text, quizCount: validatedQuizCount, sourceText: modelDocumentText })) result = retry;
       else result = { ...(retry || result), ok: false, status: 502, error: 'invalid_structured_result', retryable: false, message: 'Structured result validation failed.' };
     }
 
@@ -283,7 +283,7 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
           reasoningEffort: 'low',
           modelProfile: 'quality',
         });
-        if (retry?.ok && !hasInternalReasoningLeak(retry.text) && (!needsStructuredValidation({ task, activity }) || validStructuredResult({ task, activity, text: retry.text, quizCount: validatedQuizCount }))) {
+        if (retry?.ok && !hasInternalReasoningLeak(retry.text) && (!needsStructuredValidation({ task, activity }) || validStructuredResult({ task, activity, text: retry.text, quizCount: validatedQuizCount, sourceText: modelDocumentText }))) {
           const retrySignals = groundingSignals(retry.text, rawDocumentText, trustedGroundingContext);
           if (!retrySignals.length) {
             result = { ...retry, groundingRetry: true, groundingSignals: firstSignals };
@@ -352,13 +352,13 @@ ${officialSchoolbook && sourceUrl ? `- Official source URL: ${sourceUrl}\n` : ''
   }
 };
 
-function serverTaskRule({ task, mode, activity, quizCount = 5, lang = 'el' }) {
+function serverTaskRule({ task, mode, activity, quizCount = 5, lang = 'el', sourceActive = false }) {
   const action = String(activity || '').trim().toLowerCase();
   const rules = {
     plan: '- Return ONLY valid JSON using shape {"title":"...","focus":"...","steps":[{"title":"...","minutes":5,"action":"..."}],"final_check":"..."}. Include 3–5 actionable steps for the selected topic. Do not solve the school task.',
     flashcards: '- Return only valid JSON with exactly 8 active-recall cards using shape {"cards":[{"q":"...","a":"..."}]}. Ground every card in the selected topic/source.',
     quiz: '- Run or generate only the requested quiz format. Never reveal an answer before an attempt when the flow is interactive.',
-    quiz_wizard: '- Produce a complete quick quiz with EXACTLY ' + (quizCount === 3 ? 3 : 5) + ' DIFFERENT source-grounded short-answer questions for the selected school unit. Return ONLY a valid JSON object in this exact form: {"questions":[{"question":"...","hint":"...","answer":"...","explanation":"..."}]}. Each field is a short learner-facing string, all in ' + (lang === 'en' ? 'English' : 'Greek') + '. Every question must be answerable from the supplied source when one is active. Each hint should help without revealing the answer; the answer and explanation are shown ONLY after the quiz ends. No made-up historical facts, unrelated textbook concepts, meta text, analysis or role markers. Use short, age-appropriate wording, correct textbook terminology, and distinct learning targets.',
+    quiz_wizard: '- Produce a complete quick quiz with EXACTLY ' + (quizCount === 3 ? 3 : 5) + ' DIFFERENT source-grounded short-answer questions for the selected school unit. Return ONLY a valid JSON object in this exact form: {"questions":[{"question":"...","hint":"...","answer":"...","explanation":"...","evidence":"..."}]}. The evidence field must be a verbatim short excerpt of the source supporting the answer when a source is active, otherwise an empty string. ' + (sourceActive ? 'Every question must include a different exact excerpt from SOURCE MATERIAL, not an invented paraphrase. ' : '') + 'Each learner-facing field is a short string, all in ' + (lang === 'en' ? 'English' : 'Greek') + '. Every question must be answerable from the supplied source when one is active. Each hint should help without revealing the answer; the answer and explanation are shown ONLY after the quiz ends. No made-up historical facts, unrelated textbook concepts, meta text, analysis or role markers. Use short, age-appropriate wording, correct textbook terminology, and distinct learning targets.',
     truefalse: '- Run a True/False concept check one statement at a time and wait for the learner before feedback.',
     explain: '- Explain the exact selected topic clearly and stay within the selected/source-supported material. Keep the complete answer within 180 words: a short explanation, up to two brief examples explicitly described in SOURCE MATERIAL and two short self-check questions. Omit examples when the source does not describe them. Do not expand mechanisms, chemical processes or scientific explanations beyond the source. Finish every sentence. Avoid tables.',
     quickreview: '- Create a concise 5-minute review with key points, common confusions and rapid-recall questions.',
@@ -406,7 +406,7 @@ function needsStructuredValidation({ task, activity }) {
   return task === 'flashcards' || task === 'study_plan' || activity === 'flashcards' || activity === 'plan' || activity === 'quiz_wizard';
 }
 
-function validStructuredResult({ task, activity, text, quizCount = 5 }) {
+function validStructuredResult({ task, activity, text, quizCount = 5, sourceText = '' }) {
   if (hasInternalReasoningLeak(text)) return false;
   const data = parseJsonObject(text);
   if (!data) return false;
@@ -416,6 +416,12 @@ function validStructuredResult({ task, activity, text, quizCount = 5 }) {
         const value = row?.[key];
         return typeof value === 'string' && value.trim().length >= 5 && value.length <= 650 && !hasInternalReasoningLeak(value);
       })) &&
+      data.questions.every(row => {
+        if (!sourceText) return !row.evidence || typeof row.evidence === 'string';
+        if (typeof row.evidence !== 'string' || row.evidence.trim().length < 16 || row.evidence.length > 180 || hasInternalReasoningLeak(row.evidence)) return false;
+        const normalized = value => String(value).normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toLowerCase().replace(/[^\\p{L}\\p{N}]+/gu, ' ').replace(/\\s+/g, ' ').trim();
+        return normalized(sourceText).includes(normalized(row.evidence));
+      }) &&
       new Set(data.questions.map(row => row.question.trim().toLowerCase())).size === quizCount;
   }
   if (task === 'flashcards' || activity === 'flashcards') {

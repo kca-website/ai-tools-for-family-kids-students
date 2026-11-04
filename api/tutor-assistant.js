@@ -165,7 +165,7 @@ ${roleRule}
 - Do not diagnose, label or officially grade a learner.
 - If curriculum evidence is missing or uncertain, say so and recommend checking the school textbook or official source.`;
 
-  const taskRule = serverTaskRule({ task, mode, activity, quizCount: validatedQuizCount, lang: studyContext?.lang, sourceActive: hasDocument });
+  const taskRule = serverTaskRule({ task, mode, activity, quizCount: validatedQuizCount, lang: studyContext?.lang, sourceActive: !!modelDocumentText });
   const physicsScopeRule = verifiedOfficialSource?.subject === 'fysiki-g-gymnasiou'
     ? '\nMANDATORY PHYSICS CURRICULUM RESTRICTIONS:\n' + (verifiedOfficialSource.curriculumExclusions || []).join('\n')
     : '';

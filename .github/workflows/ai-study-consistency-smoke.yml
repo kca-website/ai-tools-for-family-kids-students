@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'study.html'
+      - 'study-quiz.html'
+      - 'ai-output-safety.js'
+      - 'tests/study-quiz-wizard-smoke.mjs'
       - 'pdf-text-reader.js'
       - 'api/tutor-assistant.js'
       - 'api/schoolbook-source.js'
@@ -13,6 +16,9 @@ on:
     branches: [main]
     paths:
       - 'study.html'
+      - 'study-quiz.html'
+      - 'ai-output-safety.js'
+      - 'tests/study-quiz-wizard-smoke.mjs'
       - 'pdf-text-reader.js'
       - 'api/tutor-assistant.js'
       - 'api/schoolbook-source.js'
@@ -34,3 +40,5 @@ jobs:
         run: node --check pdf-text-reader.js
       - name: Physics flashcard grounding regression
         run: node tests/ai-study-physics-grounding-regression.mjs
+      - name: Quick quiz wizard and output-safety regression
+        run: node tests/study-quiz-wizard-smoke.mjs

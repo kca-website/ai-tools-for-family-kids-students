@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Γρήγορο Quiz | AI Μελέτη — aitools4kids.gr</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Γρήγορο εκπαιδευτικό Quiz 5 ερωτήσεων με υποδείξεις και ανασκόπηση στην AI Μελέτη.">
+  <meta name="theme-color" content="#2e6ba3">
+  <link rel="stylesheet" href="/site-chrome.css">
+  <style>
+    :root{--blue:#126493;--ink:#202939;--muted:#586779;--border:#d6e1eb;--background:#f5f8fc;--soft:#eaf4fb}
+    *{box-sizing:border-box}body{margin:0;background:var(--background);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.58}
+    button,textarea{font:inherit}a{color:var(--blue)}a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #f59e0b;outline-offset:3px}
+    .shell{max-width:870px;margin:auto;padding:18px 18px 65px}
+    .header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
+    .header a{font-weight:750;text-decoration:none}.logo{color:var(--muted);font-size:.88rem;font-weight:650}
+    .panel{border:1px solid var(--border);background:#fff;border-radius:19px;box-shadow:0 4px 24px rgba(40,75,110,.05);padding:clamp(18px,4vw,34px)}
+    h1{margin:0 0 5px;font-size:clamp(1.7rem,4.5vw,2.4rem);line-height:1.2}
+    h2{font-size:clamp(1.2rem,3.2vw,1.65rem);margin:12px 0 18px;line-height:1.45}
+    .sub{color:var(--muted);margin:0 0 14px}.context{font-size:.9rem;color:var(--muted);margin:4px 0 18px;overflow-wrap:anywhere}
+    .source{font-size:.84rem;border:1px solid #e7d49d;background:#fff9e9;color:#745514;padding:10px 12px;border-radius:10px;margin:12px 0 23px}
+    .source a{color:#105b87;font-weight:700}
+    .heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .counter{font-size:.9rem;font-weight:750;color:#125d89}.track{display:flex;gap:5px;margin:9px 0 26px}
+    .track div{height:7px;border-radius:8px;background:#e5edf5;flex:1}.track div.done{background:#83bcce}.track div.current{background:var(--blue)}
+    label{font-weight:750;display:block;margin:0 0 8px}
+    textarea{display:block;width:100%;min-height:126px;resize:vertical;padding:13px;border:1px solid #b8cad8;border-radius:12px;background:#fff;color:var(--ink)}
+    .hint{background:#eff7fd;border-left:4px solid #2678a6;border-radius:7px;padding:13px 15px;margin:14px 0}
+    .hint strong{display:block;margin-bottom:4px}.hint p{margin:0}
+    .hint-btn{margin-top:13px}
+    .controls{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:15px;border-top:1px solid #eaf0f5}
+    .buttons{display:flex;gap:8px;flex-wrap:wrap}
+    button{border-radius:10px;padding:11px 16px;font-weight:750;cursor:pointer;min-height:44px}
+    .primary{background:var(--blue);border:1px solid var(--blue);color:#fff}.secondary{background:#fff;border:1px solid #9db6ca;color:var(--blue)}
+    button:disabled{opacity:.45;cursor:not-allowed}.micro{font-size:.8rem;color:var(--muted);margin:18px 0 0}
+    .loading{padding:27px 0;color:#295e83}.loader{width:20px;height:20px;display:inline-block;border:3px solid #c9e1ef;border-top-color:var(--blue);border-radius:100%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:9px}@keyframes spin{to{transform:rotate(360deg)}}
+    .notice{background:#fff7e8;border:1px solid #eacb93;color:#695016;border-radius:12px;padding:13px 16px;margin:15px 0}
+    .summary{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 23px}.stat{padding:8px 13px;background:var(--soft);border-radius:9px;color:#225d7d;font-weight:800}
+    .review{margin:12px 0;border:1px solid var(--border);border-radius:12px;padding:16px}.review h3{font-size:1.02rem;margin:0 0 8px}
+    .review p{margin:6px 0}.review .field{font-size:.8rem;color:var(--muted);font-weight:800;margin-top:12px}
+    .review .answer{white-space:pre-wrap;overflow-wrap:anywhere}.review button{margin-top:10px}
+    .review small{display:block;color:var(--muted);font-size:.82rem}.footer{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+    @media(max-width:560px){.shell{padding:12px 10px 46px}.panel{border-radius:13px;padding:18px 14px}.header{margin:8px 5px 16px}.controls{position:sticky;bottom:0;z-index:2;background:#fff;margin:15px -14px -18px;padding:14px;border-radius:0 0 13px 13px;box-shadow:0 -7px 16px rgba(255,255,255,.95)}.controls button{padding:11px 12px}}
+    @media(prefers-reduced-motion:reduce){.loader{animation:none}}
+    @media print{.header,.controls,.hint-btn,.footer,.review button{display:none!important}body{background:#fff}.panel{border:0;box-shadow:none}.review{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="header">
+    <a href="/study.html" id="backLink">← AI Μελέτη</a>
+    <span class="logo">aitools4kids.gr · <span id="quickTitleSmall">Γρήγορο Quiz</span></span>
+  </header>
+  <section class="panel" aria-live="off">
+    <h1 id="title">Γρήγορο Quiz</h1>
+    <p class="sub" id="subtitle">Απάντησε με τον δικό σου ρυθμό. Μπορείς να επιστρέψεις σε κάθε ερώτηση.</p>
+    <p class="context" id="context"></p>
+    <div class="source" id="source" hidden></div>
+    <div id="loading" class="loading" role="status"><span class="loader" aria-hidden="true"></span><span id="loadingText">Ετοιμάζονται οι ερωτήσεις...</span></div>
+    <div id="error" hidden>
+      <p class="notice" id="errorText" role="alert"></p>
+      <button type="button" class="secondary" id="retry">Δοκίμασε ξανά</button>
+    </div>
+    <section id="questionView" hidden>
+      <div class="heading-row"><span class="counter" id="counter"></span><span class="counter" id="stateLabel"></span></div>
+      <div class="track" id="track" aria-hidden="true"></div>
+      <h2 id="questionText"></h2>
+      <label for="answer" id="answerLabel">Η απάντησή σου</label>
+      <textarea id="answer" placeholder="Γράψε ό,τι θυμάσαι…"></textarea>
+      <button type="button" class="secondary hint-btn" id="hintBtn">Δεν θυμάμαι — Βοήθησέ με</button>
+      <div class="hint" id="hint" hidden><strong id="hintTitle">Μικρή υπόδειξη</strong><p id="hintText"></p></div>
+      <nav class="controls" aria-label="Πλοήγηση ερωτήσεων">
+        <button type="button" id="prev" class="secondary">← Προηγούμενη</button>
+        <button type="button" id="next" class="primary">Επόμενη →</button>
+      </nav>
+    </section>
+    <section id="resultsView" hidden>
+      <h2 id="resultsHeading">Ανασκόπηση του Quiz</h2>
+      <p id="resultsIntro" class="sub"></p>
+      <div id="summary" class="summary"></div>
+      <div id="reviews"></div>
+      <div class="footer">
+        <button type="button" class="secondary" id="editQuiz">← Επιστροφή στις ερωτήσεις</button>
+        <button type="button" class="secondary" id="printQuiz">Εκτύπωση</button>
+        <a href="/study.html" id="finishLink">Επιστροφή στην AI Μελέτη</a>
+      </div>
+    </section>
+    <p class="micro" id="privacy">Οι απαντήσεις διατηρούνται μόνο όσο παραμένεις σε αυτή τη σελίδα. Δεν καταγράφεται βαθμός ούτε αποθηκεύεται ιστορικό.</p>
+  </section>
+</main>
+<script>
+(function(){
+  'use strict';
+  const KEY='aitools4kids-study-quiz-handoff-v1';
+  const $=id=>document.getElementById(id);
+  const I={
+    el:{title:'Γρήγορο Quiz',subtitle:'Απάντησε με τον δικό σου ρυθμό. Μπορείς να επιστρέψεις σε κάθε ερώτηση.',back:'← AI Μελέτη',loading:'Ετοιμάζονται οι ερωτήσεις από το επιλεγμένο υλικό…',retry:'Δοκίμασε ξανά',error:'Δεν ήταν δυνατό να προετοιμαστεί ασφαλές Quiz από την επιλεγμένη ενότητα. Δοκίμασε ξανά ή επέστρεψε στην AI Μελέτη.',missing:'Δεν υπάρχει ενεργό Quiz. Επίλεξε πρώτα τάξη, μάθημα και ενότητα στην AI Μελέτη.',question:'Ερώτηση ',of:' από ',answer:'Η απάντησή σου',placeholder:'Γράψε ό,τι θυμάσαι…',prev:'← Προηγούμενη',next:'Επόμενη →',finish:'Δες τις απαντήσεις',hint:'Δεν θυμάμαι — Βοήθησέ με',hintTitle:'Μικρή υπόδειξη',answered:'Έχεις γράψει απάντηση',notAnswered:'Μπορείς να συνεχίσεις και χωρίς απάντηση',review:'Ανασκόπηση του Quiz',reviewIntro:'Δες τι απάντησες και σύγκρινέ το με τις ενδεικτικές απαντήσεις της επιλεγμένης πηγής. Δεν δίνεται αυτόματη βαθμολογία σε ελεύθερο κείμενο.',answers:'Απαντήθηκαν',hints:'Με υπόδειξη',missed:'Χωρίς απάντηση',you:'Η απάντησή σου',example:'Ενδεικτική απάντηση',explanation:'Για να το καταλάβεις',notAttempted:'Δεν απαντήθηκε',askedHint:'Ζητήθηκε βοήθεια',returnQuestion:'Επεξεργασία ερώτησης',edit:'← Επιστροφή στις ερωτήσεις',print:'Εκτύπωση',finishLink:'Επιστροφή στην AI Μελέτη',privacy:'Οι απαντήσεις διατηρούνται μόνο όσο παραμένεις σε αυτή τη σελίδα. Δεν καταγράφεται βαθμός ούτε αποθηκεύεται ιστορικό.',official:'Βασισμένο σε επαληθευμένη επίσημη σχολική πηγή',own:'Βασισμένο στις σημειώσεις σου',fallback:'Εξάσκηση με AI χωρίς αντιστοιχισμένη επίσημη πηγή',openSource:'Άνοιγμα επίσημης πηγής'},
+    en:{title:'Quick Quiz',subtitle:'Answer at your own pace. You can return to any question.',back:'← AI Study',loading:'Preparing questions from the selected material…',retry:'Try again',error:'A safe quiz could not be prepared from the selected unit. Try again or return to AI Study.',missing:'No quiz is active. First select a grade, subject and unit in AI Study.',question:'Question ',of:' of ',answer:'Your answer',placeholder:'Write what you remember…',prev:'← Previous',next:'Next →',finish:'Review answers',hint:"I can't remember — Help me",hintTitle:'Small hint',answered:'Answer entered',notAnswered:'You may continue without answering',review:'Quiz review',reviewIntro:'Review what you wrote alongside source-based example answers. Free-text answers are not automatically graded.',answers:'Answered',hints:'Used a hint',missed:'Unanswered',you:'Your answer',example:'Example answer',explanation:'Explanation',notAttempted:'No answer given',askedHint:'Help requested',returnQuestion:'Edit question',edit:'← Return to questions',print:'Print',finishLink:'Return to AI Study',privacy:'Answers are kept only while this page is open. No scores or answer history are stored.',official:'Based on a verified official schoolbook source',own:'Based on your notes',fallback:'AI practice without a mapped official source',openSource:'Open official source'}
+  };
+  let handoff=null;
+  try{handoff=JSON.parse(sessionStorage.getItem(KEY)||'null');sessionStorage.removeItem(KEY)}catch(_){try{sessionStorage.removeItem(KEY)}catch(__){}}
+  const lang=handoff?.lang==='en'?'en':'el', t=I[lang];document.documentElement.lang=lang;
+  const texts={title:'title',subtitle:'subtitle',backLink:'back',quickTitleSmall:'title',loadingText:'loading',retry:'retry',answerLabel:'answer',prev:'prev',hintBtn:'hint',hintTitle:'hintTitle',resultsHeading:'review',editQuiz:'edit',printQuiz:'print',finishLink:'finishLink',privacy:'privacy'};
+  Object.keys(texts).forEach(id=>$(id).textContent=t[texts[id]]);
+  $('answer').placeholder=t.placeholder;
+  $('context').textContent=handoff?[handoff.grade,handoff.subject,handoff.topic].filter(Boolean).join(' · '):'';
+  let questions=[], answers=[], usedHints=[], index=0, complete=false, busy=false;
+  const show=(id,value)=>{$(id).hidden=!value};
+  const safeSourceUrl=source=>{try{const u=new URL(String(source||''));return u.protocol==='https:'?u.href:''}catch(_){return ''}};
+  function sourceDisplay(kind,url){
+    const s=$('source');s.replaceChildren();
+    let label=kind==='official_schoolbook'?t.official:kind==='user_upload'?t.own:t.fallback;
+    s.appendChild(document.createTextNode(label));
+    const link=safeSourceUrl(url);
+    if(kind==='official_schoolbook'&&link){
+      const a=document.createElement('a');a.href=link;a.target='_blank';a.rel='noopener noreferrer';a.textContent=' · '+t.openSource;s.appendChild(a);
+    }
+    show('source',true);
+  }
+  function isUnsure(text){
+    const x=String(text||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[.!?]+$/g,'').trim();
+    return /^(δεν|δε) (ξερω|θυμαμαι|γνωριζω)( καθολου)?$/.test(x)||
+      /^(i (don't|dont|do not) know|i (can't|cant|cannot) remember|not sure|no idea|idk)$/.test(x);
+  }
+  function saveCurrent(){if(!complete&&questions[index])answers[index]=$('answer').value.slice(0,3000)}
+  function draw(){
+    if(!questions.length)return;
+    show('loading',false);show('error',false);show('questionView',!complete);show('resultsView',complete);
+    if(complete){renderReview();return}
+    $('counter').textContent=t.question+(index+1)+t.of+questions.length;
+    $('questionText').textContent=questions[index].question;
+    $('answer').value=answers[index]||'';
+    $('stateLabel').textContent=answers[index].trim()?t.answered:t.notAnswered;
+    $('track').replaceChildren();
+    questions.forEach((_,i)=>{const x=document.createElement('div');if(i===index)x.className='current';else if(answers[i]?.trim()||usedHints[i])x.className='done';$('track').appendChild(x)});
+    $('hintText').textContent=questions[index].hint;show('hint',usedHints[index]);show('hintBtn',!usedHints[index]);
+    $('prev').disabled=index===0;
+    $('next').textContent=index===questions.length-1?t.finish:t.next;
+    document.title=t.title+' · '+(index+1)+'/'+questions.length+' | aitools4kids.gr';
+  }
+  function make(tag,cls,txt){const n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n}
+  function reviewField(parent,label,value){
+    parent.appendChild(make('p','field',label));
+    parent.appendChild(make('p','answer',value));
+  }
+  function renderReview(){
+    $('resultsIntro').textContent=t.reviewIntro;
+    const answered=answers.filter(a=>a.trim()&&!isUnsure(a)).length;
+    const skipped=questions.length-answered;
+    $('summary').replaceChildren();
+    [t.answers+': '+answered+'/'+questions.length,t.hints+': '+usedHints.filter(Boolean).length,t.missed+': '+skipped].forEach(s=>$('summary').appendChild(make('span','stat',s)));
+    $('reviews').replaceChildren();
+    questions.forEach((row,i)=>{
+      const box=make('article','review');box.appendChild(make('h3','',t.question+(i+1)+t.of+questions.length+': '+row.question));
+      const response=answers[i].trim();
+      reviewField(box,t.you,response&&!isUnsure(response)?response:t.notAttempted);
+      if(usedHints[i])box.appendChild(make('small','',t.askedHint));
+      reviewField(box,t.example,row.answer);
+      reviewField(box,t.explanation,row.explanation);
+      const b=make('button','secondary',t.returnQuestion);b.type='button';b.addEventListener('click',()=>{complete=false;index=i;draw();$('questionText').scrollIntoView({block:'start'});$('answer').focus({preventScroll:true})});
+      box.appendChild(b);$('reviews').appendChild(box);
+    });
+    document.title=t.review+' | aitools4kids.gr';
+  }
+  $('answer').addEventListener('input',()=>{$('stateLabel').textContent=$('answer').value.trim()?t.answered:t.notAnswered});
+  $('prev').addEventListener('click',()=>{if(index===0)return;saveCurrent();index--;draw();$('questionText').scrollIntoView({block:'start'})});
+  $('next').addEventListener('click',()=>{
+    const raw=$('answer').value.trim();
+    if(isUnsure(raw)&&!usedHints[index]){usedHints[index]=true;$('answer').value='';saveCurrent();draw();$('answer').focus();return}
+    saveCurrent();
+    if(index<questions.length-1){index++;draw();$('questionText').scrollIntoView({block:'start'});$('answer').focus({preventScroll:true})}
+    else{complete=true;draw();$('resultsHeading').scrollIntoView({block:'start'})}
+  });
+  $('hintBtn').addEventListener('click',()=>{usedHints[index]=true;if(isUnsure($('answer').value))$('answer').value='';saveCurrent();draw();$('answer').focus({preventScroll:true})});
+  $('editQuiz').addEventListener('click',()=>{complete=false;index=questions.length-1;draw();$('answer').focus()});
+  $('printQuiz').addEventListener('click',()=>window.print());
+  $('retry').addEventListener('click',prepare);
+  async function prepare(){
+    if(busy||!handoff)return;
+    busy=true;show('error',false);show('loading',true);show('questionView',false);show('resultsView',false);
+    const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),90000);
+    try{
+      const count=handoff.quizCount===3?3:5;
+      const request={
+        audience:'study_user',task:'quiz',mode:'challenge',activity:'quiz_wizard',quizCount:count,cacheEligible:false,
+        context:lang==='en'?'Produce a concise, reliable quick quiz from the selected material.':'Δημιούργησε σύντομο, αξιόπιστο quiz από την επιλεγμένη ενότητα.',
+        prompt:'Create exactly '+count+' different short-answer questions for this selected school unit. Respond ONLY with the JSON object requested by the server. Language: '+(lang==='en'?'English':'Greek')+'.',
+        grade:handoff.grade,subject:handoff.subject,subjectId:handoff.subjectId,topic:handoff.topic,
+        studyContext:handoff.studyContext,documentText:handoff.documentText||'',
+        documentName:handoff.documentName||'',documentKind:handoff.documentKind||'',
+        documentSourceUrl:handoff.documentSourceUrl||''
+      };
+      const response=await fetch('/api/tutor-assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(request),signal:controller.signal});
+      const body=await response.json().catch(()=>({}));
+      if(!response.ok||!body.text)throw Error('unsafe_or_unavailable');
+      let data;
+      try{data=JSON.parse(String(body.text).trim().replace(/^\x60\x60\x60(?:json)?\s*/i,'').replace(/\s*\x60\x60\x60$/,''))}catch(_){throw Error('invalid_quiz_json')}
+      if(!Array.isArray(data?.questions)||data.questions.length!==count||
+        !data.questions.every(q=>['question','hint','answer','explanation'].every(k=>typeof q?.[k]==='string'&&q[k].trim().length>=5&&q[k].length<=650))){
+          throw Error('invalid_quiz_shape');
+      }
+      questions=data.questions;answers=Array(count).fill('');usedHints=Array(count).fill(false);index=0;complete=false;
+      sourceDisplay(body.sourceKind||handoff.documentKind,body.sourceUrl||handoff.documentSourceUrl);
+      draw();
+    }catch(_){show('loading',false);show('error',true);$('errorText').textContent=t.error}
+    finally{clearTimeout(timeout);busy=false}
+  }
+  if(!handoff||!handoff.subjectId||!handoff.topic||!handoff.grade){
+    show('loading',false);show('error',true);$('errorText').textContent=t.missing;show('retry',false);
+  }else{prepare()}
+})();
+</script>
+</body>
+</html>

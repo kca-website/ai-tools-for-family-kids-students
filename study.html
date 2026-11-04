@@ -1004,8 +1004,44 @@
     return body.text;
   }
 
+  // The quick quiz is its own page and session. No free-text answer or quiz
+  // transcript is persisted; only the selected source excerpt is handed over once.
+  async function openStudyQuizWizard(){
+    if(!selectedTopic()&&!attached){$('topicCustom').focus();return}
+    const button=document.querySelector('[data-action="quiz"]');
+    if(button)button.disabled=true;
+    try{
+      const official=attached?.text?null:await officialSchoolbookSource();
+      const material=attached?.text||official?.text||'';
+      const quizHandoff={
+        lang,
+        quizCount:specialAdaptations()?3:5,
+        grade:selectedGradeLabel(),
+        subject:selectedSubjectLabel(),
+        subjectId:selectedSubjectId(),
+        topic:selectedTopic(),
+        studyContext:publishSharedStudyContext('quiz'),
+        documentText:material?sourceExcerpt(material,selectedTopic(),activitySourceBudget('quiz'),true):'',
+        documentName:attached?.name||official?.bookTitle||'',
+        documentKind:attached?.text?'user_upload':(official?.grounded?'official_schoolbook':''),
+        documentSourceUrl:official?.sourceUrl||official?.canonicalSourceUrl||''
+      };
+      sessionStorage.setItem('aitools4kids-study-quiz-handoff-v1',JSON.stringify(quizHandoff));
+      window.location.assign('/study-quiz.html');
+    }catch(err){
+      $('workspaceTitle').textContent=actionTitle('quiz');
+      $('aiWorkspace').classList.remove('hidden');
+      $('answerBox').classList.add('hidden');
+      $('aiOutput').textContent=String(err?.message||(lang==='en'
+        ?'This quiz could not start. Please try again.'
+        :'Το Quiz δεν μπόρεσε να ξεκινήσει. Δοκίμασε ξανά.'));
+      $('aiWorkspace').scrollIntoView({behavior:'smooth',block:'center'});
+    }finally{if(button)button.disabled=false}
+  }
+
   async function runStudyAction(action){
     if(!ensureGelPracticeSource())return;
+    if(action==='quiz'){await openStudyQuizWizard();return}
     if(action==='character'){
       activeStudyCharacter=studyCharacterChoices().find(c=>c.id===$('studyCharacter').value)||null;
       if(!activeStudyCharacter)return;

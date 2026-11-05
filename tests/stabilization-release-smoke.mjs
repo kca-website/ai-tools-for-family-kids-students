@@ -1,3 +1,4 @@
+import { pickFinder } from './lib/home-finder.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -42,9 +43,7 @@ try{
   assert.equal(await page.locator('#homeV8AiTechDetails p').isVisible(),true,'Provider/model details must become visible on demand');
   assert.match(await page.locator('#homeV8AiTechDetails').innerText(),/GPT-OSS 120B[\s\S]*Cloudflare Workers AI[\s\S]*Groq/,'AI details must reveal the model/provider chain on demand');
   await page.locator('#homeV8AiTechDetails summary').click();
-  await page.click('#homeV9Finder [data-finder-role="guardian"]');
-  await page.click('#homeV9Finder [data-finder-zone="primary"]');
-  await page.click('#homeV9Finder [data-finder-need="tools"]');
+  await pickFinder(page,{need:'tools',zone:'primary',role:'guardian'});
   await page.locator('#homeV9FinderCta').click();
   await page.waitForSelector('#pathView:not([hidden])',{timeout:10000});
   await page.waitForSelector('#greekFilterWrap:not([hidden])',{timeout:10000});

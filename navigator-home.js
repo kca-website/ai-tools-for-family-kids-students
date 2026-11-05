@@ -308,7 +308,9 @@
           <p class="home-v11-step__label" id="homeV11LevelLabel">${escapeHtml(c.levelLabel)} <small>(${escapeHtml(c.levelOptional)})</small></p>
           <div class="home-v9-finder__chips">${zones}</div>
         </div>`;
-      const roleMatters = (need === "stuck" || need === "tools") && ["middle","high","epal"].includes(finderState.zone);
+      // Ask "who will use it?" only where it changes the destination.
+      const roleMatters = (need === "tools" && ["primary","middle","high","epal"].includes(finderState.zone)) ||
+        (need === "stuck" && ["middle","high","epal"].includes(finderState.zone));
       if(roleMatters){
         const roles = Object.entries(c.roles).map(([id,label]) => chip("role", id, label, finderState.role === id)).join("");
         body += `<div class="home-v9-finder__step home-v11-step__group" role="group" aria-labelledby="homeV11RoleLabel">
@@ -402,8 +404,8 @@
       </ul>`;
   }
 
-  function ensureEngSection(slot){
-    let box = document.getElementById("homeV8Eng");
+  function ensureEngSection(slot, detached){
+    let box = document.getElementById("homeV8Eng") || detached;
     if(!box) return;
     const c = currentCopy();
     box.className = "home-v8-eng home-v11-eng";
@@ -474,8 +476,11 @@
       else hero.appendChild(shell);
     }
     ["homeV8HelpersMount", "homeV8Needs", "homeCurriculumStrip", "homeV9ZonesLead"].forEach((id) => document.getElementById(id)?.remove());
+    // Keep the crawlable GSL node alive: detach it before the pathways markup is rebuilt.
+    const eng = document.getElementById("homeV8Eng");
+    if(eng && eng.closest("#homeV11Paths")) eng.remove();
     const paths = ensureSection(shell, "homeV11Paths", "home-v11-section home-v11-paths", "homeV11PathsTitle", pathsMarkup());
-    ensureEngSection(paths.querySelector("#homeV11EngSlot"));
+    ensureEngSection(paths.querySelector("#homeV11EngSlot"), eng);
     ensureSection(shell, "homeV9More", "home-v11-section home-v9-more home-v11-more", "homeV9MoreTitle", moreMarkup());
     const trust = ensureSection(shell, "homeV11Trust", "home-v11-trust", "", trustMarkup());
     const notGuide = document.querySelector("#zoneSelectView .not-guide-box");

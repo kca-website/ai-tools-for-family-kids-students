@@ -1,3 +1,4 @@
+import { pickFinder } from './lib/home-finder.mjs';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 
@@ -15,8 +16,8 @@ try {
   }));
 
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForSelector('#homeV9Finder [data-finder-zone="primary"]');
-  await page.click('#homeV9Finder [data-finder-role="guardian"]');await page.click(`#homeV9Finder [data-finder-zone="primary"]`);await page.click('#homeV9Finder [data-finder-need="tools"]');await page.click('#homeV9FinderCta');
+  await page.waitForSelector('#homeV9Finder [data-finder-need="tools"]');
+  await pickFinder(page,{need:'tools',zone:'primary',role:'guardian'});await page.click('#homeV9FinderCta');
   await page.waitForSelector('.tool-card');
 
   const facts = page.locator('.tool-card__nutrition');

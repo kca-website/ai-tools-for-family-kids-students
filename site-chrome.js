@@ -587,8 +587,16 @@
       if(!force && key === lastKey) return;
       lastKey = key;
       refreshNav();
-      if(spaRoute()) renderContext(getBar());
-      else if(getBar()){ getBar().innerHTML = ""; getBar().hidden = true; }
+      // The visible page title of an app route is #pathZoneHeading (an h2); the only
+      // h1 lives in the hidden homepage section. Expose the route title as level 1.
+      const routeHeading = document.getElementById("pathZoneHeading");
+      if(spaRoute()){
+        renderContext(getBar());
+        if(routeHeading){ routeHeading.setAttribute("role", "heading"); routeHeading.setAttribute("aria-level", "1"); }
+      }else{
+        if(getBar()){ getBar().innerHTML = ""; getBar().hidden = true; }
+        if(routeHeading){ routeHeading.removeAttribute("role"); routeHeading.removeAttribute("aria-level"); }
+      }
     };
     refresh(true);
     exposeApi(getBar);

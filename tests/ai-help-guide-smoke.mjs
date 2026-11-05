@@ -1,3 +1,4 @@
+import { pickFinder } from './lib/home-finder.mjs';
 import {chromium} from 'playwright';
 import axe from 'axe-core';
 import assert from 'node:assert/strict';
@@ -5,7 +6,7 @@ const browser=await chromium.launch();
 try{
  for(const width of [320,390,1280]){
   const page=await browser.newPage({viewport:{width,height:900}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('http://127.0.0.1:4173/');await page.waitForSelector('#homeV9FinderCta');
+  await page.goto('http://127.0.0.1:4173/');await page.waitForSelector('#homeV9Finder [data-finder-need="stuck"]');
   assert.equal(await page.locator('.home-v9-finder__note').isVisible(),false);
   if(width<600)await page.locator('#siteMenuToggle').click();
   await page.locator('a[href="/tools/ai-help.html"]:visible').first().click();await page.waitForURL('**/tools/ai-help.html');
@@ -24,8 +25,7 @@ try{
   await page.locator('[data-help-zone="epal"]').click();await page.waitForURL('**/high/guardian/tutor?schoolType=epal');
   await page.goto('http://127.0.0.1:4173/#open-tools');
   await page.waitForSelector('#homeV9FinderCta');
-  await page.locator('#homeV9Finder [data-finder-role="guardian"]').click();
-  await page.locator('#homeV9Finder [data-finder-zone="high"]').click();
+  await pickFinder(page,{zone:'high',role:'guardian'});
   assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'),'/high/guardian/tools');
   await page.locator('#homeV9FinderCta').click();
   await page.waitForURL(url=>url.pathname==='/high/guardian/tools');console.log('tools URL',page.url());

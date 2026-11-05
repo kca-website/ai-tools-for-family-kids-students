@@ -2,11 +2,11 @@
 import { test, expect, findTranslationLeaks, greekRatio, IS_PROD, openZoneFromHome } from './fixtures.mjs';
 
 test.describe('home + routing', () => {
-  test('@smoke home renders the finder (4 roles) without runtime errors', async ({ page, qa }) => {
+  test('@smoke home renders the task finder (6 tasks) without runtime errors', async ({ page, qa }) => {
     const resp = await page.goto('/');
     expect(resp.status()).toBe(200);
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('#homeV9Finder [data-finder-role]')).toHaveCount(4);
+    await expect(page.locator('#homeV9Finder [data-finder-need]')).toHaveCount(6);
     expect(qa.pageErrors, 'uncaught exceptions').toEqual([]);
     expect(qa.consoleErrors, 'console errors').toEqual([]);
   });

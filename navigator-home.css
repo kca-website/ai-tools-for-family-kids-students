@@ -1593,3 +1593,5 @@ html.home-v11 .home-v11-trust .not-guide-box__list li::before{content:none;}
   html.home-v11 .home-v11-step .home-v9-finder__chips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
   html.home-v11 .home-v11-chip.home-v9-chip{justify-content:center;padding:8px 10px;}
 }
+/* GSL is a dedicated "Pathways for" card in v11; home-accessibility.js may re-create the old hero badge. */
+html.home-v11 .home-v11-identity #heroGslBadge{display:none!important;}

@@ -367,7 +367,6 @@
     set('[data-i18n="badgeBilingual"]', "Ελληνικά / English", "Ελληνικά / English");
     set('summary[data-i18n="badgeZeroTracking"]', "Χωρίς cookies", "No cookies");
     document.getElementById("homeEngBadge")?.remove();
-    document.getElementById("heroGslBadge")?.remove();
   }
 
   function hideLegacyHomeBlocks(){

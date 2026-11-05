@@ -363,6 +363,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700;800&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/navigator-home.css" data-navigator-home="1" />
+  <link rel="stylesheet" href="/site-chrome.css" />
   <style id="navigatorHomeFirstPaintGuard">
     html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}
     #homeBootSkeleton{display:none}
@@ -432,7 +433,7 @@
   <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Μετάβαση στο περιεχόμενο</a>
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="site-title" href="https://www.aitools4kids.gr/">
+      <a class="site-title" href="/">
         <span class="site-title__mark" aria-hidden="true">ai</span>
         <span id="siteTitleText">aitools4kids.gr</span>
       </a>
@@ -869,6 +870,7 @@
   <script defer src="/history-character-routes.js"></script>
   <script defer src="/app.js"></script>
   <script defer src="/site-postfix.js"></script>
+  <script defer src="/site-chrome.js"></script>
   <script defer src="/site-nav.js"></script>
   <script>
     /* Home only: start the home shell right after app.js instead of waiting for pwa.js to inject it (pwa.js skips scripts already present). */

@@ -178,14 +178,10 @@
     const panel = document.getElementById("siteMenuPanel");
     restoreBrandRobot();
     syncAriaLabels();
-    ensureAllToolsStyles();
-    ensureAllToolsAccess();
-    ensureAiLiteracyMenuLink();
-    ensureAiPathsPromo();
-    new MutationObserver(() => { syncAriaLabels(); ensureAllToolsAccess(); ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
-    if(location.pathname==="/" || location.pathname===""){
-      [0,100,350,900,1800].forEach(ms=>setTimeout(() => { ensureAllToolsAccess(); ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); },ms));
-    }
+    /* v11: the primary nav and the menu panel are rendered by site-chrome.js from the
+       shared information architecture; the AI Paths promo moved into the homepage
+       "Learn another way" row. The legacy helpers above stay defined but unused. */
+    new MutationObserver(() => { syncAriaLabels(); restoreBrandRobot(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     if(!toggle || !panel) return;
 
     const fitPanel = () => {

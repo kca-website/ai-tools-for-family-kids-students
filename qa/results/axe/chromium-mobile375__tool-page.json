@@ -18,7 +18,7 @@
     "nodes": 21,
     "sample": [
       {
-        "target": "h1 > span[data-lang=\"el\"]",
+        "target": "h1 > span:nth-child(1)",
         "summary": "  Some page content is not contained by landmarks"
       },
       {
@@ -26,7 +26,7 @@
         "summary": "  Some page content is not contained by landmarks"
       },
       {
-        "target": ".badge > span[data-lang=\"el\"]",
+        "target": ".badge > span:nth-child(1)",
         "summary": "  Some page content is not contained by landmarks"
       }
     ]

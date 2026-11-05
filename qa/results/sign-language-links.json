@@ -2516,11 +2516,6 @@
       "concept": "Σύνταγμα"
     },
     {
-      "href": "https://www.facebook.com/profile.php?id=61594298925270",
-      "text": "",
-      "concept": ""
-    },
-    {
       "href": "https://www.dwrean.net/",
       "text": "",
       "concept": ""
@@ -2532,7 +2527,6 @@
     }
   ],
   "imgs": [
-    "http://127.0.0.1:4173/assets/icons/app-icon.svg",
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squares%20and%20circles.svg?width=1000",
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squares%20and%20circles.svg?width=1000",
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squares%20and%20circles.svg?width=1000",
@@ -2700,7 +2694,6 @@
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/Euro%20symbol%20black.svg?width=1000",
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
     "https://commons.wikimedia.org/wiki/Special:Redirect/file/Greek%20Parliament%20and%20Syntagma%20Square.jpg?width=1000",
-    "http://127.0.0.1:4173/assets/icons/app-icon.svg",
     "http://127.0.0.1:4173/assets/dwrean-logo.jpg"
   ]
 }

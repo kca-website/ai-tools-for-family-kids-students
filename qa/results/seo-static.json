@@ -28,11 +28,7 @@
     "ogTitle": "Ποιοι είμαστε / FAQ | aitools4kids.gr",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/about.html",
-      "en=https://www.aitools4kids.gr/en/about.html",
-      "x-default=https://www.aitools4kids.gr/about.html"
-    ],
+    "hreflang": [],
     "ld": [],
     "h1": 1,
     "noscript": 0,
@@ -50,11 +46,7 @@
     "ogTitle": "",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width, initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/accessibility.html",
-      "en=https://www.aitools4kids.gr/en/accessibility.html",
-      "x-default=https://www.aitools4kids.gr/accessibility.html"
-    ],
+    "hreflang": [],
     "ld": [],
     "h1": 1,
     "noscript": 1,
@@ -72,11 +64,7 @@
     "ogTitle": "AI εργαλεία για μαθητές",
     "twitterCard": "summary",
     "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/ai-ergaleia-gia-mathites.html",
-      "en=https://www.aitools4kids.gr/en/ai-tools-for-students.html",
-      "x-default=https://www.aitools4kids.gr/ai-ergaleia-gia-mathites.html"
-    ],
+    "hreflang": [],
     "ld": [
       {
         "ok": true,
@@ -112,141 +100,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/ai-gia-ekpaideftikous.html",
-    "lang": "el",
-    "title": "AI για εκπαιδευτικούς: υλικό πάνω στην ύλη και πλαίσιο χρήσης",
-    "description": "Δωρεάν AI για εκπαιδευτικούς: φύλλα αξιολόγησης και υλικό πάνω σε χαρτογραφημένη ύλη 2026–27, καθώς και τι προβλέπει η ΚΥΑ 55909/Δ6/2026 για τη χρήση AI στο σχολείο.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-ekpaideftikous.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για εκπαιδευτικούς: υλικό πάνω στην ύλη και πλαίσιο χρήσης",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-gia-ekthesi.html",
-    "lang": "el",
-    "title": "AI για Έκθεση και Γλώσσα: βοήθεια στη σκέψη σου, όχι έτοιμο κείμενο",
-    "description": "Δωρεάν οδηγός AI για Νεοελληνική Γλώσσα, Έκθεση και Λογοτεχνία: εργαλεία για κατανόηση κειμένου, έλεγχο επιχειρημάτων και επανάληψη, χωρίς να γράφει το AI την εργασία.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-ekthesi.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για Έκθεση και Γλώσσα: βοήθεια στη σκέψη σου, όχι έτοιμο κείμενο",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-gia-epal.html",
-    "lang": "el",
-    "title": "AI για ΕΠΑΛ: βοήθεια ανά τάξη, τομέα και ειδικότητα 2026–27",
-    "description": "Δωρεάν AI Βοήθεια για μαθητές ΕΠΑΛ ανά τάξη, τομέα και ειδικότητα με πηγές ΙΕΠ 2026–27, σύντομο τεστ εξάσκησης και συνδέσεις για μελέτη και εκπαιδευτικούς.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-epal.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για ΕΠΑΛ: βοήθεια ανά τάξη, τομέα και ειδικότητα 2026–27",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-gia-fysiki-chimeia.html",
-    "lang": "el",
-    "title": "AI για Φυσική και Χημεία: προσομοιώσεις, έλεγχος και επανάληψη",
-    "description": "Δωρεάν οδηγός AI για Φυσική και Χημεία Γυμνασίου και Λυκείου: προσομοιώσεις, έλεγχος υπολογισμών και επανάληψη εννοιών, με ενότητες από τον ελληνικό Χάρτη Ύλης.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-fysiki-chimeia.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για Φυσική και Χημεία: προσομοιώσεις, έλεγχος και επανάληψη",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-gia-goneis.html",
-    "lang": "el",
-    "title": "AI για γονείς: πώς βοηθάς το παιδί χωρίς να κάνεις εσύ τη δουλειά",
-    "description": "Δωρεάν οδηγός για γονείς: Βοηθός Γονέα ανά βαθμίδα, διαγνωστικό για να δεις πού κολλά το παιδί, ηλικιακοί κανόνες και έτοιμα prompts που δεν δίνουν έτοιμη λύση.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-goneis.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για γονείς: πώς βοηθάς το παιδί χωρίς να κάνεις εσύ τη δουλειά",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/ai-gia-gymnasio.html",
     "lang": "el",
     "title": "AI για μαθητές Γυμνασίου: σωστή χρήση για διάβασμα και εργασίες",
@@ -270,159 +123,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/ai-gia-istoria.html",
-    "lang": "el",
-    "title": "AI για Ιστορία: μελέτη με πηγές και σχολικό βιβλίο, όχι έτοιμες απαντήσεις",
-    "description": "Δωρεάν οδηγός AI για Ιστορία Δημοτικού, Γυμνασίου και Λυκείου: επανάληψη ημερομηνιών, έλεγχος πηγών και μελέτη πάνω σε αποσπάσματα από επίσημο σχολικό βιβλίο.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-istoria.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για Ιστορία: μελέτη με πηγές και σχολικό βιβλίο, όχι έτοιμες απαντήσεις",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-gia-lykeio.html",
-    "lang": "el",
-    "title": "AI για μαθητές Λυκείου: μελέτη, Πανελλήνιες και εργασίες",
-    "description": "Δωρεάν οδηγός AI για ΓΕΛ και ΕΠΑΛ: διαγνωστικό, μελέτη πάνω στην ύλη 2026–27, AI Βοήθεια χωρίς λογαριασμό και εργαλεία ανά μάθημα, χωρίς έτοιμες λύσεις.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-lykeio.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για μαθητές Λυκείου: μελέτη, Πανελλήνιες και εργασίες",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-gia-mathimatika.html",
-    "lang": "el",
-    "title": "AI για Μαθηματικά: ποιο εργαλείο για εξήγηση, έλεγχο και γραφήματα",
-    "description": "Δωρεάν οδηγός AI για Μαθηματικά Δημοτικού, Γυμνασίου και Λυκείου: ποιο εργαλείο εξηγεί, ποιο ελέγχει λύση και ποιο δείχνει γραφήματα, χωρίς έτοιμες λύσεις.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-mathimatika.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για Μαθηματικά: ποιο εργαλείο για εξήγηση, έλεγχο και γραφήματα",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-gia-xenes-glosses.html",
-    "lang": "el",
-    "title": "AI για ξένες γλώσσες: εξάσκηση στα Αγγλικά χωρίς αντιγραφή",
-    "description": "Δωρεάν οδηγός AI για ξένες γλώσσες στο σχολείο: εργαλεία για εξάσκηση, λεξιλόγιο, ανάγνωση και έλεγχο κειμένου, με διαδρομές Αγγλικών από Γ΄ Δημοτικού έως Γ΄ Λυκείου.",
-    "canonical": "https://www.aitools4kids.gr/ai-gia-xenes-glosses.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI για ξένες γλώσσες: εξάσκηση στα Αγγλικά χωρίς αντιγραφή",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-me-elliniki-sxoliki-yli.html",
-    "lang": "el",
-    "title": "AI με ελληνική σχολική ύλη και βοήθεια βάσει σχολικού βιβλίου",
-    "description": "Πώς το aitools4kids.gr δένει την AI με την ελληνική ύλη 2026–27: Χάρτης Ύλης, μελέτη πάνω σε επίσημο σχολικό βιβλίο (50 βιβλία) και σαφής διάκριση επαληθευμένων ενοτήτων.",
-    "canonical": "https://www.aitools4kids.gr/ai-me-elliniki-sxoliki-yli.html",
-    "robots": "index,follow,max-image-preview:large",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI με ελληνική σχολική ύλη και βοήθεια βάσει σχολικού βιβλίου",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": [
-          "WebPage",
-          "BreadcrumbList",
-          "FAQPage"
-        ]
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/ai-scenarios.html",
-    "lang": "el",
-    "title": "AI Διαδρομές — Μάθε να χρησιμοποιείς το AI με κρίση | aitools4kids.gr",
-    "description": "Δωρεάν διαδραστικές διαδρομές AI literacy για μαθητές 9–18, με διαφορετικές καταστάσεις και δυσκολία ανά ηλικία.",
-    "canonical": "https://www.aitools4kids.gr/ai-scenarios.html",
-    "robots": "",
-    "ogImage": "",
-    "ogTitle": "",
-    "twitterCard": "",
-    "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/ai-transparency.html",
     "lang": "el",
     "title": "Διαφάνεια AI | aitools4kids.gr",
@@ -433,11 +133,7 @@
     "ogTitle": "Διαφάνεια AI | aitools4kids.gr",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/ai-transparency.html",
-      "en=https://www.aitools4kids.gr/en/ai-transparency.html",
-      "x-default=https://www.aitools4kids.gr/ai-transparency.html"
-    ],
+    "hreflang": [],
     "ld": [],
     "h1": 1,
     "noscript": 0,
@@ -530,99 +226,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/en/about.html",
-    "lang": "en",
-    "title": "About us / FAQ | aitools4kids.gr",
-    "description": "Who is behind aitools4kids.gr, why this free educational project was created, how its content is checked and key answers about AI, data and methodology.",
-    "canonical": "https://www.aitools4kids.gr/en/about.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/social-preview-20260926.png",
-    "ogTitle": "About us / FAQ | aitools4kids.gr",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/about.html",
-      "en=https://www.aitools4kids.gr/en/about.html",
-      "x-default=https://www.aitools4kids.gr/about.html"
-    ],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/en/accessibility.html",
-    "lang": "en",
-    "title": "Tool accessibility | AI Tools for Kids",
-    "description": "Accessibility research for the 43 canonical tools of aitools4kids.gr: official statements, VPAT/ACR, independent evaluations and the finding on Greek Sign Language (GSL).",
-    "canonical": "https://www.aitools4kids.gr/en/accessibility.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width, initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/accessibility.html",
-      "en=https://www.aitools4kids.gr/en/accessibility.html",
-      "x-default=https://www.aitools4kids.gr/accessibility.html"
-    ],
-    "ld": [],
-    "h1": 1,
-    "noscript": 1,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/en/ai-tools-for-students.html",
-    "lang": "en",
-    "title": "AI tools for students: a free guide by age and subject",
-    "description": "A free guide to AI tools that can help primary, lower-secondary and upper-secondary students, focusing on age, safety and good use without ready-made answers.",
-    "canonical": "https://www.aitools4kids.gr/en/ai-tools-for-students.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "AI tools for students",
-    "twitterCard": "summary",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/ai-ergaleia-gia-mathites.html",
-      "en=https://www.aitools4kids.gr/en/ai-tools-for-students.html",
-      "x-default=https://www.aitools4kids.gr/ai-ergaleia-gia-mathites.html"
-    ],
-    "ld": [
-      {
-        "ok": true,
-        "type": "Article"
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/en/ai-transparency.html",
-    "lang": "en",
-    "title": "AI Transparency | aitools4kids.gr",
-    "description": "Which AI model aitools4kids.gr uses, what data is sent and how the transparency principle is applied.",
-    "canonical": "https://www.aitools4kids.gr/en/ai-transparency.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/social-preview-20260926.png",
-    "ogTitle": "AI Transparency | aitools4kids.gr",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/ai-transparency.html",
-      "en=https://www.aitools4kids.gr/en/ai-transparency.html",
-      "x-default=https://www.aitools4kids.gr/ai-transparency.html"
-    ],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/en/creative-ai-for-students.html",
     "lang": "en",
     "title": "Creative AI for students: images, projects and ideas",
@@ -689,33 +292,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/en/privacy-policy.html",
-    "lang": "en",
-    "title": "Privacy Policy | AI Tools for Kids",
-    "description": "Privacy policy of aitools4kids.gr, including the optional AI features via Cloudflare Workers AI, Groq, Google Gemini and Puter.",
-    "canonical": "https://www.aitools4kids.gr/en/privacy-policy.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "Privacy Policy | AI Tools for Kids",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width, initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/privacy-policy.html",
-      "en=https://www.aitools4kids.gr/en/privacy-policy.html",
-      "x-default=https://www.aitools4kids.gr/privacy-policy.html"
-    ],
-    "ld": [
-      {
-        "ok": true,
-        "type": "WebPage"
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/en/reading-english-ai.html",
     "lang": "en",
     "title": "AI for reading and English practice: tools for students",
@@ -752,28 +328,6 @@
       "el=https://www.aitools4kids.gr/erevna-me-piges-ai.html",
       "en=https://www.aitools4kids.gr/en/research-with-sources-ai.html",
       "x-default=https://www.aitools4kids.gr/erevna-me-piges-ai.html"
-    ],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/en/school-ai-use.html",
-    "lang": "en",
-    "title": "AI use at school | aitools4kids.gr",
-    "description": "What Greek Joint Ministerial Decision 55909/Δ6/2026 (Government Gazette B΄ 2639/12.05.2026) provides for the use of AI systems in secondary education, and how the aitools4kids.gr classroom mode works.",
-    "canonical": "https://www.aitools4kids.gr/en/school-ai-use.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/social-preview-20260926.png",
-    "ogTitle": "AI use at school | aitools4kids.gr",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/school-ai-use.html",
-      "en=https://www.aitools4kids.gr/en/school-ai-use.html",
-      "x-default=https://www.aitools4kids.gr/school-ai-use.html"
     ],
     "ld": [],
     "h1": 1,
@@ -820,33 +374,6 @@
       "x-default=https://www.aitools4kids.gr/organosi-meletis-ai.html"
     ],
     "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/en/tools/google-antigravity.html",
-    "lang": "en",
-    "title": "Google Antigravity 2.0: AI Agents for Education and Museums | AI Tools for Kids",
-    "description": "A practical Google Antigravity 2.0 and IDE guide for educators, museum professionals, researchers and heritage organisations. Free tier, examples, setup, limitations, 18+.",
-    "canonical": "https://www.aitools4kids.gr/en/tools/google-antigravity.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image-en-antigravity.png",
-    "ogTitle": "Google Antigravity 2.0: AI Agents for Education and Museums | AI Tools for Kids",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width, initial-scale=1",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/tools/google-antigravity.html",
-      "en=https://www.aitools4kids.gr/en/tools/google-antigravity.html",
-      "x-default=https://www.aitools4kids.gr/tools/google-antigravity.html"
-    ],
-    "ld": [
-      {
-        "ok": true,
-        "type": "TechArticle"
-      }
-    ],
     "h1": 1,
     "noscript": 0,
     "appleIcon": false,
@@ -978,24 +505,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/history-characters.html",
-    "lang": "el",
-    "title": "Μίλα με ιστορικό χαρακτήρα | aitools4kids.gr",
-    "description": "Δωρεάν διάλογος με ιστορικούς χαρακτήρες. Διάλεξε AI Μελέτη ή AI Βοήθεια / Βοήθεια Γονέα και βρες τη σωστή τάξη και ενότητα.",
-    "canonical": "https://www.aitools4kids.gr/history-characters.html",
-    "robots": "",
-    "ogImage": "",
-    "ogTitle": "",
-    "twitterCard": "",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/index.html",
     "lang": "el",
     "title": "aitools4kids.gr — Μαθαίνω Έξυπνα με AI | Δημοτικό, Γυμνάσιο, ΓΕΛ & ΕΠΑΛ",
@@ -1003,7 +512,7 @@
     "canonical": "https://www.aitools4kids.gr/",
     "robots": "",
     "ogImage": "https://www.aitools4kids.gr/social-preview-20260926.png",
-    "ogTitle": "AITools4Kids | Μαθαίνω Έξυπνα με AI",
+    "ogTitle": "aitools4kids.gr — Μαθαίνω Έξυπνα με AI",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width, initial-scale=1.0",
     "hreflang": [],
@@ -1112,42 +621,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/play/index.html",
-    "lang": "el",
-    "title": "Παίξε & Μάθε — AI Tools 4 Kids",
-    "description": "",
-    "canonical": "",
-    "robots": "noindex,nofollow",
-    "ogImage": "",
-    "ogTitle": "",
-    "twitterCard": "",
-    "viewport": "width=device-width,initial-scale=1,viewport-fit=cover",
-    "hreflang": [],
-    "ld": [],
-    "h1": 2,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/practice.html",
-    "lang": "el",
-    "title": "Κουίζ εξάσκησης ανά βαθμίδα | AI Tools 4 Kids",
-    "description": "Διάλεξε Δημοτικό, Γυμνάσιο, Λύκειο, ΕΠΑΛ ή Ειδική Εκπαίδευση και ξεκίνα τα σύντομα κουίζ εξάσκησης.",
-    "canonical": "https://www.aitools4kids.gr/practice.html",
-    "robots": "",
-    "ogImage": "",
-    "ogTitle": "",
-    "twitterCard": "",
-    "viewport": "width=device-width,initial-scale=1",
-    "hreflang": [],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/preschool.html",
     "lang": "el",
     "title": "Νηπιαγωγείο 4 έως 6 | aitools4kids.gr",
@@ -1169,18 +642,14 @@
     "path": "/privacy-policy.html",
     "lang": "el",
     "title": "Πολιτική Απορρήτου | AI Tools for Kids",
-    "description": "Πολιτική απορρήτου του aitools4kids.gr, συμπεριλαμβανομένων των προαιρετικών λειτουργιών AI μέσω Cloudflare Workers AI, Groq, Google Gemini και Puter.",
+    "description": "Πολιτική απορρήτου του aitools4kids.gr, συμπεριλαμβανομένων των προαιρετικών λειτουργιών AI μέσω Cloudflare Workers AI, Groq και Puter.",
     "canonical": "https://www.aitools4kids.gr/privacy-policy.html",
     "robots": "",
     "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
     "ogTitle": "Πολιτική Απορρήτου | AI Tools for Kids",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width, initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/privacy-policy.html",
-      "en=https://www.aitools4kids.gr/en/privacy-policy.html",
-      "x-default=https://www.aitools4kids.gr/privacy-policy.html"
-    ],
+    "hreflang": [],
     "ld": [
       {
         "ok": true,
@@ -1221,11 +690,7 @@
     "ogTitle": "Χρήση AI στο σχολείο | aitools4kids.gr",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/school-ai-use.html",
-      "en=https://www.aitools4kids.gr/en/school-ai-use.html",
-      "x-default=https://www.aitools4kids.gr/school-ai-use.html"
-    ],
+    "hreflang": [],
     "ld": [],
     "h1": 1,
     "noscript": 0,
@@ -1310,24 +775,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/study-quiz.html",
-    "lang": "el",
-    "title": "Γρήγορο Quiz | AI Μελέτη — aitools4kids.gr",
-    "description": "Γρήγορο εκπαιδευτικό Quiz 5 ερωτήσεων με υποδείξεις και ανασκόπηση στην AI Μελέτη.",
-    "canonical": "",
-    "robots": "noindex,follow",
-    "ogImage": "",
-    "ogTitle": "",
-    "twitterCard": "",
-    "viewport": "width=device-width, initial-scale=1",
-    "hreflang": [],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/study.html",
     "lang": "el",
     "title": "AI Μελέτη — Προσωπικό πλάνο & σημειώσεις | aitools4kids.gr",
@@ -1393,14 +840,14 @@
   {
     "path": "/tools/ai-help.html",
     "lang": "el",
-    "title": "AI Βοήθεια · Διάλεξε τη σωστή διαδρομή | aitools4kids.gr",
-    "description": "Δωρεάν AI Βοήθεια για σχολικά μαθήματα. Διάλεξε βαθμίδα και ξεκίνα με ερωτήσεις και υποδείξεις. Διαδρομές για μαθητές, γονείς, ΕΠΑΛ και Ειδική Αγωγή.",
+    "title": "AI Βοήθεια του aitools4kids.gr | AI Tools for Kids",
+    "description": "Καθοδηγούμενος βοηθός μελέτης για το ελληνικό σχολείο, με ερωτήσεις και υποδείξεις αντί για έτοιμη λύση.",
     "canonical": "https://www.aitools4kids.gr/tools/ai-help.html",
     "robots": "",
     "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
     "ogTitle": "",
     "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1",
+    "viewport": "width=device-width,initial-scale=1.0",
     "hreflang": [],
     "ld": [],
     "h1": 1,
@@ -1522,29 +969,6 @@
     "robots": "",
     "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
     "ogTitle": "ChatGPT για παιδιά στην Ελλάδα: ηλικιακό όριο, γονική άδεια & σχολική χρήση",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": "SoftwareApplication"
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/tools/chrome-music-lab.html",
-    "lang": "el",
-    "title": "Chrome Music Lab: σχολική χρήση & περιορισμοί | AI Tools for Kids",
-    "description": "Δωρεάν διαδραστικά πειράματα μουσικής: ρυθμός, μελωδία, αρμονικές, ήχος και φάσμα. 6+ πρόταση οδηγού: παιδαγωγική πρόταση του aitools4kids, όχι επίσημο όριο του παρόχου.",
-    "canonical": "https://www.aitools4kids.gr/tools/chrome-music-lab.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "Chrome Music Lab | AI Tools for Kids",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width,initial-scale=1.0",
     "hreflang": [],
@@ -1993,33 +1417,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/tools/google-antigravity.html",
-    "lang": "el",
-    "title": "Google Antigravity 2.0: AI agents για εκπαίδευση και μουσεία | AI Tools for Kids",
-    "description": "Αναλυτικός οδηγός Google Antigravity 2.0 και Antigravity IDE για εκπαιδευτικούς, μουσειολόγους και ερευνητές. Εφαρμογές, prompt, δωρεάν πλάνο, όρια και ασφάλεια 18+.",
-    "canonical": "https://www.aitools4kids.gr/tools/google-antigravity.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "Google Antigravity 2.0: AI agents για εκπαίδευση και μουσεία | AI Tools for Kids",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width, initial-scale=1",
-    "hreflang": [
-      "el=https://www.aitools4kids.gr/tools/google-antigravity.html",
-      "en=https://www.aitools4kids.gr/en/tools/google-antigravity.html",
-      "x-default=https://www.aitools4kids.gr/tools/google-antigravity.html"
-    ],
-    "ld": [
-      {
-        "ok": true,
-        "type": "TechArticle"
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/tools/google-arts-culture.html",
     "lang": "el",
     "title": "Google Arts & Culture Learn | AI Tools for Kids",
@@ -2112,24 +1509,6 @@
     "ogTitle": "Microsoft Immersive Reader | AI Tools for Kids",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [],
-    "ld": [],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/tools/index.html",
-    "lang": "el",
-    "title": "Εργαλεία | aitools4kids.gr",
-    "description": "Όλα τα εργαλεία που προτείνει το aitools4kids.gr, οργανωμένα ανά ανάγκη: μελέτη, εξάσκηση, δημιουργία, εκπαιδευτικοί, προσβασιμότητα, έρευνα και προγραμματισμός.",
-    "canonical": "https://www.aitools4kids.gr/tools/",
-    "robots": "",
-    "ogImage": "",
-    "ogTitle": "",
-    "twitterCard": "",
-    "viewport": "width=device-width,initial-scale=1",
     "hreflang": [],
     "ld": [],
     "h1": 1,
@@ -2463,29 +1842,6 @@
     "metaRefresh": ""
   },
   {
-    "path": "/tools/scratch.html",
-    "lang": "el",
-    "title": "Scratch: σχολική χρήση & περιορισμοί | AI Tools for Kids",
-    "description": "Δωρεάν οπτικός προγραμματισμός με τουβλάκια από το MIT: φτιάχνεις ιστορίες, παιχνίδια και κινούμενα σχέδια. 8+ πρόταση οδηγού: παιδαγωγική πρόταση του aitools4kids, όχι επίσημο όριο του παρόχου.",
-    "canonical": "https://www.aitools4kids.gr/tools/scratch.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "Scratch | AI Tools for Kids",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": "SoftwareApplication"
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
     "path": "/tools/scribbr.html",
     "lang": "el",
     "title": "Scribbr: ηλικία, σχολική χρήση & περιορισμοί | AI Tools for Kids",
@@ -2553,29 +1909,6 @@
     "robots": "",
     "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
     "ogTitle": "Symbolab | AI Tools for Kids",
-    "twitterCard": "summary_large_image",
-    "viewport": "width=device-width,initial-scale=1.0",
-    "hreflang": [],
-    "ld": [
-      {
-        "ok": true,
-        "type": "SoftwareApplication"
-      }
-    ],
-    "h1": 1,
-    "noscript": 0,
-    "appleIcon": false,
-    "metaRefresh": ""
-  },
-  {
-    "path": "/tools/teachable-machine.html",
-    "lang": "el",
-    "title": "Teachable Machine: σχολική χρήση & περιορισμοί | AI Tools for Kids",
-    "description": "Εκπαιδεύεις μόνος σου ένα απλό μοντέλο AI με εικόνες, ήχους ή στάσεις σώματος, χωρίς κώδικα. 10+ πρόταση οδηγού: παιδαγωγική πρόταση του aitools4kids, όχι επίσημο όριο του παρόχου.",
-    "canonical": "https://www.aitools4kids.gr/tools/teachable-machine.html",
-    "robots": "",
-    "ogImage": "https://www.aitools4kids.gr/assets/og-image.png",
-    "ogTitle": "Teachable Machine | AI Tools for Kids",
     "twitterCard": "summary_large_image",
     "viewport": "width=device-width,initial-scale=1.0",
     "hreflang": [],

@@ -3,10 +3,10 @@
     "path": "/",
     "status": "ok",
     "h1": [
-      "Μαθαίνω Έξυπνα με AI"
+      "Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα."
     ],
-    "visibleTextLen": 3827,
-    "links": 43,
+    "visibleTextLen": 3749,
+    "links": 38,
     "noscript": [
       "aitools4kids.gr: Μαθαίνω Έξυπνα με AI\n      \n        Ανεξάρτητο, δωρεάν, δίγλωσσ"
     ],
@@ -24,10 +24,10 @@
     "path": "/primary/guardian/tools",
     "status": "ok",
     "h1": [
-      "Μαθαίνω Έξυπνα με AI"
+      "Η AI να σε βοηθά να μάθεις, όχι να λύνει για σένα."
     ],
-    "visibleTextLen": 3827,
-    "links": 43,
+    "visibleTextLen": 3749,
+    "links": 38,
     "noscript": [
       "aitools4kids.gr: Μαθαίνω Έξυπνα με AI\n      \n        Ανεξάρτητο, δωρεάν, δίγλωσσ"
     ],
@@ -47,14 +47,14 @@
     "h1": [
       "AI Μελέτη"
     ],
-    "visibleTextLen": 1665,
-    "links": 8,
+    "visibleTextLen": 1870,
+    "links": 3,
     "noscript": [],
     "zoneGridChildren": null,
     "zoneGridVisible": false,
     "headings": [
       "Τι διαβάζεις;",
-      "Τι θέλεις να κάνεις;"
+      "Διάλεξε τρόπο μελέτης"
     ]
   },
   {
@@ -63,8 +63,8 @@
     "h1": [
       "Ύλη & Εξάσκηση"
     ],
-    "visibleTextLen": 1281,
-    "links": 15,
+    "visibleTextLen": 1138,
+    "links": 6,
     "noscript": [],
     "zoneGridChildren": null,
     "zoneGridVisible": false,
@@ -94,13 +94,13 @@
     "h1": [
       "Εκπαιδευτικό υλικό"
     ],
-    "visibleTextLen": 2279,
-    "links": 26,
+    "visibleTextLen": 1820,
+    "links": 17,
     "noscript": [],
     "zoneGridChildren": null,
     "zoneGridVisible": false,
     "headings": [
-      "Τι θέλεις να κάνεις;"
+      "Τι θέλεις να φτιάξεις;"
     ]
   },
   {
@@ -109,8 +109,8 @@
     "h1": [
       "Πώς χρησιμοποιώ σωστά το AI;"
     ],
-    "visibleTextLen": 427,
-    "links": 8,
+    "visibleTextLen": 318,
+    "links": 3,
     "noscript": [],
     "zoneGridChildren": null,
     "zoneGridVisible": false,
@@ -142,8 +142,8 @@
     "h1": [
       "Πολιτική Απορρήτου"
     ],
-    "visibleTextLen": 9795,
-    "links": 9,
+    "visibleTextLen": 9588,
+    "links": 8,
     "noscript": [],
     "zoneGridChildren": null,
     "zoneGridVisible": false,
@@ -162,8 +162,8 @@
     "h1": [
       "Ειδική Εκπαίδευση: Μαθαίνω βήμα βήμα"
     ],
-    "visibleTextLen": 1389,
-    "links": 3,
+    "visibleTextLen": 1102,
+    "links": 2,
     "noscript": [],
     "zoneGridChildren": null,
     "zoneGridVisible": false,

@@ -156,7 +156,8 @@ test.describe('EL/EN switch', () => {
   test('EN chosen on home survives navigation to /study.html', async ({ page }) => {
     await page.goto('/');
     await page.locator('#langEn').click();
-    const link = page.locator('a[href="/study.html"]:visible').first();
+    await page.locator('#homeV9Finder [data-finder-need="study"]').click();
+    const link = page.locator('#homeV9FinderCta[href="/study.html"]');
     await link.scrollIntoViewIfNeeded();
     await link.click();
     await page.waitForLoadState('load');

@@ -135,11 +135,17 @@ test.describe('AI Help (mocked API)', () => {
 
   test('homepage AI links use only supported routes', async ({ page }) => {
     await page.goto('/');
-    const middle = page.locator('.home-v8-ai__links a', { hasText: 'Γονιός Γυμνασίου' });
-    const special = page.locator('.home-v8-ai__links a', { hasText: 'Ειδικά σχολεία' });
-    await expect(middle).toHaveAttribute('href', '/middle/guardian/tutor');
-    await expect(special).toHaveAttribute('href', '/special-education.html');
-    await expect(page.locator('.home-v8-ai__links a[href="/middle/student/tutor"]')).toHaveCount(0);
+    // v11: the static homepage (pathways, discovery, menu) never deep-links the 13+ student tutor;
+    // AI Help opens through the "stuck" task, where the user chooses level and who will use it.
+    await expect(page.locator('#homeV11Paths a[href="/special-education.html"]')).toHaveCount(1);
+    await expect(page.locator('#homeV8Shell a[href="/middle/student/tutor"], #siteMenuPanel a[href="/middle/student/tutor"]')).toHaveCount(0);
+    await page.locator('#homeV9Finder [data-finder-need="stuck"]').click();
+    await expect(page.locator('#homeV9FinderCta')).toHaveAttribute('href', '/tools/ai-help.html');
+    await page.locator('#homeV9Finder [data-finder-zone="middle"]').click();
+    await page.locator('#homeV9Finder [data-finder-role="guardian"]').click();
+    await expect(page.locator('#homeV9FinderCta')).toHaveAttribute('href', '/middle/guardian/tutor');
+    await page.locator('#homeV9Finder [data-finder-zone="special"]').click();
+    await expect(page.locator('#homeV9FinderCta')).toHaveAttribute('href', '/special-education.html');
   });
 
   test('personal data warning is visible next to the input', async ({ page }) => {

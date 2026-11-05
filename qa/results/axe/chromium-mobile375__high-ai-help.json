@@ -1,13 +1,13 @@
 [
   {
-    "id": "page-has-heading-one",
+    "id": "landmark-complementary-is-top-level",
     "impact": "moderate",
-    "help": "Page should contain a level-one heading",
+    "help": "Aside should not be contained in another landmark",
     "nodes": 1,
     "sample": [
       {
-        "target": "html",
-        "summary": "  Page must have a level-one heading"
+        "target": "aside",
+        "summary": "  The null landmark is contained in another landmark."
       }
     ]
   }

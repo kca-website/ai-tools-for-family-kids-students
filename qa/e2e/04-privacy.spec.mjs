@@ -59,8 +59,18 @@ test.describe('storage / cookies inventory', () => {
     for (let i = 0; i < 30; i++) { const o = page.locator('#pathView .quiz-option').first(); if (!(await o.count())) break; await o.click(); const n = page.locator('#pathView button:visible', { hasText: /Επόμενη|Τέλος|Αποτέλεσμα/ }).first(); if (await n.count()) await n.click(); }
     const snap = await snapshot(page);
     test.info().annotations.push({ type: 'local-keys', description: JSON.stringify({ ls: Object.keys(snap.localStorage), ss: Object.keys(snap.sessionStorage) }) });
-    const allowed = new Set(['aitools4kids_progress_v1', 'aitools4kids_lang', 'aitools4kids_last_quiz_id_v1']);
+    // v11: the school level/task is shared between pages in sessionStorage, as the privacy policy states
+    // ("study choices (e.g. level …) are kept temporarily in sessionStorage so they carry over between pages").
+    const allowed = new Set(['aitools4kids_progress_v1', 'aitools4kids_lang', 'aitools4kids_last_quiz_id_v1', 'aitools4kidsShortcutSelection']);
     expect(Object.keys(snap.localStorage).concat(Object.keys(snap.sessionStorage)).filter((k) => !allowed.has(k))).toEqual([]);
+    expect(Object.keys(snap.localStorage)).not.toContain('aitools4kidsShortcutSelection');
+    if (snap.sessionStorage.aitools4kidsShortcutSelection) {
+      const sel = JSON.parse(snap.sessionStorage.aitools4kidsShortcutSelection);
+      expect(Object.keys(sel).every((k) => ['role', 'zone', 'need'].includes(k)), 'only role/zone/need are kept').toBe(true);
+      expect(['', 'student', 'guardian', 'teacher', 'university', undefined]).toContain(sel.role);
+      expect(['', 'primary', 'middle', 'high', 'epal', 'preschool', 'special', undefined]).toContain(sel.zone);
+      expect(['', 'study', 'practice', 'stuck', 'organize', 'teacher', 'tools', undefined]).toContain(sel.need);
+    }
     // The policy says only "language or selected zone" are stored – quiz result (quizId + gap tags) is learning-difficulty data.
     expect(/quiz|πρόοδο|αποτέλεσμα/i.test(POLICY.slice(POLICY.indexOf('2. Η βασική πλατφόρμα'), POLICY.indexOf('3. AI λειτουργίες'))), 'policy §2 mentions local quiz progress').toBe(true);
   });

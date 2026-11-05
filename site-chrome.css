@@ -935,3 +935,8 @@ a.fb-link:focus-visible {
 .site-header .site-nav[data-ia-primary] ~ .site-header__actions .classroom-menu-link { display: none !important; }
 .site-header .site-nav[data-ia-primary] { margin-left: 4px; }
 @media (max-width: 1180px) { .site-header .site-nav[data-ia-primary] { display: none !important; } }
+
+/* CLS guard: reserve the breadcrumb bar's height before site-chrome.js runs, so inserting it
+   does not push the page down after first paint. Only on pages that actually load the script. */
+html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 55px; }
+@media (max-width: 520px) { html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 51px; } }

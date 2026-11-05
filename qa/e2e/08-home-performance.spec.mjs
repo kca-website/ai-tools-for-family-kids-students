@@ -149,7 +149,11 @@ test.describe('anything that needs the data still works from the home', () => {
   test('home → SPA link to the AI Help works and has the same tools as a deep link', async ({ page, qa }) => {
     page.on('dialog', (d) => d.dismiss());
     await page.goto('/');
-    await page.locator('a[href="/primary/guardian/tutor"]').first().click();
+    // v11: AI Help for primary opens from the "stuck" task (adult pathway).
+    await page.locator('#homeV9Finder [data-finder-need="stuck"]').click();
+    await page.locator('#homeV9Finder [data-finder-zone="primary"]').click();
+    await expect(page.locator('#homeV9FinderCta')).toHaveAttribute('href', '/primary/guardian/tutor');
+    await page.locator('#homeV9FinderCta').click();
     await expect(page).toHaveURL(/\/primary\/guardian\/tutor$/);
     await expect(page.locator('#tutorInput')).toHaveCount(1);
     const viaHome = await page.locator('.tutor-flashcards__btn, .tutor-study-tools__btn').count();

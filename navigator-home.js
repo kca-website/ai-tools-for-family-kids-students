@@ -378,7 +378,7 @@
     suppressLegacyInjectedBlocks();
   }
   function suppressLegacyInjectedBlocks(){
-    ["pwaMobileLauncher", "curriculumMapFeature", "signLanguageFeature", "specialEducationHomeFeature", "homeAiPathsPromo", "homeAllToolsShortcut"]
+    ["pwaMobileLauncher", "curriculumMapFeature", "signLanguageFeature", "specialEducationHomeFeature", "homeAllToolsShortcut"]
       .forEach((id) => document.getElementById(id)?.classList.add("home-v8-legacy"));
   }
 
@@ -427,7 +427,6 @@
         ${tile("homeV9CurriculumTile", "curriculum", m.curriculum, "/xartis-ylis.html")}
         ${tile("homeV9Characters", "characters", m.characters, "/history-characters.html", `<span class="home-v11-tile__faces" aria-hidden="true">${faces}</span>`)}
         ${tile("homeV9Play", "play", m.play, "/play/")}
-        ${tile("homeV9AiPaths", "aiPaths", m.aiPaths, "/ai-scenarios.html")}
         ${tile("homeV9AllTools", "tools", m.tools, "/tools/")}
       </ul>`;
   }

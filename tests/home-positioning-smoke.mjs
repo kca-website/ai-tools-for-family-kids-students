@@ -43,7 +43,9 @@ try {
   for (const legacy of ['#zoneGrid', '#homeV9Principle', '#homeVideoNew', '.hero__quiz-cta-wrap', '.hero__ai-help'])
     assert.equal(await page.locator(`#zoneSelectView ${legacy}, ${legacy}`).first().isVisible().catch(() => false), false, `${legacy} must stay hidden`);
   assert.equal(await page.locator('#homeV8Needs').count(), 0);
-  assert.equal(await page.locator('#homeAiPathsPromo:visible').count(), 0, 'AI Paths promo now lives in "Learn another way"');
+  await page.waitForSelector('#homeAiPathsPromo', { state: 'visible' });
+  assert.equal(await page.locator('#homeAiPathsPromo a[href="/ai-scenarios.html"]').count(), 1, 'Animated AI Paths feature stays on the homepage');
+  assert.equal(await page.evaluate(() => document.getElementById('homeAiPathsPromo')?.nextElementSibling?.id), 'homeV11Paths', 'AI Paths feature sits right after the hero, before the pathways');
 
   // Routing contract (unchanged from the previous finder whenever a level is chosen).
   await pickFinder(page, { need: 'teacher' });
@@ -73,8 +75,8 @@ try {
   for (const href of ['/ai-gia-goneis.html', '/preschool', '/high/student/tutor?schoolType=epal', '/special-education.html', '/sign-language.html', '/higher-education-pilot.html'])
     assert.ok(paths.includes(href), 'Pathway missing: ' + href);
   assert.equal(await page.locator('#homeV9CurriculumTile').getAttribute('href'), '/xartis-ylis.html');
-  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 5, 'Discovery includes curriculum, history characters, Play & Learn, AI Paths and all tools');
-  for (const href of ['/history-characters.html', '/play/', '/ai-scenarios.html', '/tools/'])
+  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 4, 'Discovery includes curriculum, history characters, Play & Learn and all tools');
+  for (const href of ['/history-characters.html', '/play/', '/tools/'])
     assert.equal(await page.locator(`#homeV9More a[href="${href}"]`).count(), 1, 'Discovery link missing: ' + href);
 
   await page.click('#siteMenuToggle');

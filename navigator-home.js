@@ -38,7 +38,7 @@
       questionHint: "Διάλεξε ένα. Θα σου δείξουμε από πού να ξεκινήσεις.",
       tasks: {
         study: ["Να διαβάσω ένα μάθημα", "Εξήγηση, σύνοψη, κάρτες, quiz"],
-        practice: ["Εξάσκηση ή τεστ", "Βρες τι θέλει δουλειά, χωρίς βαθμό"],
+        practice: ["Εξάσκηση ή τεστ", "Σύντομα κουίζ 2 λεπτών, χωρίς βαθμό"],
         stuck: ["Κόλλησα σε μια άσκηση", "Υποδείξεις βήμα βήμα"],
         organize: ["Να οργανώσω το διάβασμα", "Μικρά, εφικτά βήματα"],
         teacher: ["Είμαι εκπαιδευτικός", "Φτιάχνω υλικό για την τάξη"],
@@ -47,7 +47,7 @@
       explain: {
         study: "Η AI Μελέτη: διαλέγεις ενότητα από τη σχολική ύλη ή ανεβάζεις τις σημειώσεις σου και μετά επιλέγεις εξήγηση, σύνοψη, ακουστικό μάθημα, κάρτες ή quiz.",
         practice: "Ο Χάρτης Εξάσκησης: σύντομες ερωτήσεις που δείχνουν πού χρειάζεται λίγη παραπάνω εξάσκηση. Δεν βαθμολογεί και δεν κάνει διάγνωση.",
-        stuck: "Η AI Βοήθεια: γράφεις την άσκηση και την προσπάθειά σου και παίρνεις μία υπόδειξη τη φορά, όχι έτοιμη λύση. Για ολόκληρη ενότητα, διάλεξε «Να διαβάσω ένα μάθημα».",
+        stuck: "Η AI Βοήθεια σε καθοδηγεί, δεν δίνει έτοιμη λύση. Για ολόκληρη ενότητα, διάλεξε «Να διαβάσω ένα μάθημα».",
         organize: "Σπάει το διάβασμα σε μικρά, εφικτά βήματα, ώστε να ξέρεις τι κάνεις σήμερα και τι αύριο.",
         teacher: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος και βίντεο πάνω στην ύλη 2026–27. Εσύ ελέγχεις και προσαρμόζεις.",
         tools: "Εξωτερικά AI εργαλεία με ηλικιακά όρια, προσβασιμότητα και αναζήτηση ανά σχολική ανάγκη."
@@ -65,6 +65,10 @@
       knownUnit: "Ξέρεις την ενότητα; Κάνε εξάσκηση σε αυτή →",
       allTools: "Όλος ο κατάλογος, χωρίς φίλτρο βαθμίδας →",
       teacherLabel: "Ή πήγαινε κατευθείαν σε:",
+      studyGoalsLabel: "Τι θέλεις να κάνεις με την ενότητα;",
+      studyGoals: [["understand","Να το καταλάβω"],["revise","Επανάληψη"],["test","Γράφω τεστ"],["pdf","Έχω PDF ή σημειώσεις"]],
+      helpStepsLabel: "Πώς δουλεύει",
+      helpSteps: ["Γράψε την άσκηση και τι δοκίμασες", "Πάρε μία υπόδειξη", "Δοκίμασε ξανά μόνος/η σου"],
       teacherTasks: [["worksheet","Φύλλο εργασίας"],["assessment","Αξιολόγηση"],["lesson","Σχέδιο μαθήματος"],["video","Βίντεο"]],
       notePrimary: "Στο Δημοτικό η AI Βοήθεια ανοίγει στη διαδρομή του ενήλικα, μαζί με γονέα ή εκπαιδευτικό.",
       notePreschool: "Στο Νηπιαγωγείο ο ενήλικας χειρίζεται το εργαλείο.",
@@ -101,7 +105,7 @@
       questionHint: "Pick one. We will show you where to start.",
       tasks: {
         study: ["Study a lesson", "Explanation, summary, cards, quiz"],
-        practice: ["Practise or take a quiz", "Find what needs work, no grades"],
+        practice: ["Practise or take a quiz", "Short 2-minute quizzes, no grades"],
         stuck: ["I'm stuck on an exercise", "Step-by-step hints"],
         organize: ["Plan my studying", "Small, doable steps"],
         teacher: ["I'm an educator", "Create class material"],
@@ -110,7 +114,7 @@
       explain: {
         study: "AI Study: choose a curriculum unit or upload your notes, then pick an explanation, summary, audio lesson, cards or a quiz.",
         practice: "The Practice Map: short questions that show where a little more practice helps. It does not grade or diagnose.",
-        stuck: "AI Help: write the exercise and your attempt and get one hint at a time, not the answer. For a whole unit, choose “Study a lesson”.",
+        stuck: "AI Help guides you; it does not hand out answers. For a whole unit, choose “Study a lesson”.",
         organize: "Breaks studying into small, doable steps so you know what to do today and tomorrow.",
         teacher: "Worksheets, assessment, lesson plans and videos built on the 2026–27 curriculum. You review and adapt.",
         tools: "External AI tools with age limits, accessibility notes and search by school need."
@@ -128,6 +132,10 @@
       knownUnit: "Know your unit? Practise that unit →",
       allTools: "The whole catalogue, no level filter →",
       teacherLabel: "Or go straight to:",
+      studyGoalsLabel: "What do you want to do with the unit?",
+      studyGoals: [["understand","Understand it"],["revise","Review"],["test","Test coming up"],["pdf","I have a PDF or notes"]],
+      helpStepsLabel: "How it works",
+      helpSteps: ["Write the exercise and what you tried", "Get one hint", "Try again on your own"],
       teacherTasks: [["worksheet","Worksheet"],["assessment","Assessment"],["lesson","Lesson plan"],["video","Video"]],
       notePrimary: "In primary school, AI Help opens in the adult pathway, used together with a parent or educator.",
       notePreschool: "In preschool the adult operates the tool.",
@@ -267,9 +275,6 @@
     const { zone } = finderState;
     const need = currentNeed();
     const out = [];
-    if(need === "study" && zone !== "special" && zone !== "preschool"){
-      out.push(`<a class="home-v9-finder__extra" id="homeV11PdfLink" data-finder-pdf href="${finderHref("pdf")}">${escapeHtml(c.pdf)}</a>`);
-    }
     if(need === "practice" && zone && zone !== "preschool" && zone !== "special"){
       out.push(`<a class="home-v9-finder__extra" href="/study.html?zone=${zone === "epal" ? "high" : zone}&mode=practice${zone === "epal" ? "&schoolType=epal" : ""}">${escapeHtml(c.knownUnit)}</a>`);
       if(zone === "high") out.push(`<a class="home-v9-finder__extra" href="/high/student/tutor?schoolType=epal" data-epal-practice-map>${escapeHtml(c.ctaPracticeEpal)} <span aria-hidden="true">→</span></a>`);
@@ -319,10 +324,26 @@
         </div>`;
       }
     }
+    // Study: go straight to the study goal (same options as inside AI Study), carrying the level.
+    if(need === "study" && finderState.zone !== "special" && finderState.zone !== "preschool"){
+      const z = finderState.zone;
+      const base = z ? `/study.html?zone=${z === "epal" ? "high" : z}${z === "epal" ? "&schoolType=epal" : ""}&` : "/study.html?";
+      const links = c.studyGoals.map(([id,label]) => id === "pdf"
+        ? `<a id="homeV11PdfLink" data-finder-pdf href="${finderHref("pdf")}">${escapeHtml(label)}</a>`
+        : `<a data-study-goal="${id}" href="${base}mode=${id}">${escapeHtml(label)}</a>`).join("");
+      body += `<div class="home-v11-step__group" role="group" aria-labelledby="homeV11GoalLabel">
+          <p class="home-v11-step__label" id="homeV11GoalLabel">${escapeHtml(c.studyGoalsLabel)}</p>
+          <div class="home-v11-step__links">${links}</div>
+        </div>`;
+    }
+    // Help: the three-step promise (attempt → hint → try again) that the old AI Help card showed.
+    const helpSteps = need === "stuck" && finderState.zone !== "special" && finderState.zone !== "preschool"
+      ? `<ol class="home-v11-steps" aria-label="${escapeHtml(c.helpStepsLabel)}">${c.helpSteps.map((t, i) => `<li><span aria-hidden="true">${i + 1}</span>${escapeHtml(t)}</li>`).join("")}</ol>`
+      : "";
     const note = stepNote(c);
     return `<div class="home-v11-step ia-tone--${tone}" id="homeV11Step" data-need="${need}">
       <h3 class="home-v11-step__title" id="homeV11StepTitle" tabindex="-1">${escapeHtml(c.tasks[need][0])}</h3>
-      ${explain}${official}${body}
+      ${explain}${helpSteps}${official}${body}
       ${note ? `<p class="home-v9-finder__note home-v11-step__note" aria-live="polite">${escapeHtml(note)}</p>` : ""}
       <div class="home-v11-step__actions">
         <a class="home-v9-way__action home-v11-cta" id="homeV9FinderCta" href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>

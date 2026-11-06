@@ -57,6 +57,12 @@ try {
   assert.match(await page.locator('#homeV11Step').innerText(), /επίσημο σχολικό βιβλίο[\s\S]*Η κάλυψη σχολικών βιβλίων είναι επιλεκτική./, 'AI Study must keep the official-textbook coverage caveat');
   await pickFinder(page, { zone: 'high' });
   assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/study.html?zone=high');
+  for (const [goal, href] of [['understand', '/study.html?zone=high&mode=understand'], ['revise', '/study.html?zone=high&mode=revise'], ['test', '/study.html?zone=high&mode=test']])
+    assert.equal(await page.locator(`#homeV11Step [data-study-goal="${goal}"]`).getAttribute('href'), href, 'Study goal shortcut keeps the level: ' + goal);
+  assert.equal(await page.locator('#homeV11PdfLink').getAttribute('href'), '/study.html?zone=high#studyNotes');
+  await pickFinder(page, { need: 'stuck' });
+  assert.equal(await page.locator('#homeV11Step .home-v11-steps li').count(), 3, 'AI Help shows attempt → hint → try again');
+  await pickFinder(page, { need: 'study' });
   await pickFinder(page, { need: 'practice' });
   assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/high/guardian/quiz', 'High school practice must open the GEL Practice Map');
   assert.equal(await page.locator('#homeV9Finder [data-epal-practice-map]').count(), 1, 'High school practice must also offer the EPAL Practice Map');

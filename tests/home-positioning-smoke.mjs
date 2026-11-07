@@ -30,7 +30,7 @@ try {
   assert.equal(await page.evaluate(() => document.documentElement.classList.contains('navigator-home-booting')), false);
   assert.equal((await page.locator('.hero__title').innerText()).trim(), 'Μαθαίνω Έξυπνα με AI');
   const subtitle=(await page.locator('.hero__subtitle').innerText()).replace(/\s+/g,' ').trim();
-  for(const concept of ['δωρεάν','ai','μαθητ','γον','εκπαιδευτικ'])assert.ok(subtitle.toLowerCase().includes(concept), 'Hero must communicate free AI learning and its audiences: '+concept);
+  for(const concept of ['εξάσκηση','σχολική ύλη','ai','μαθητ','γον','εκπαιδευτικ'])assert.ok(subtitle.toLowerCase().includes(concept), 'Hero must communicate free AI learning and its audiences: '+concept);
   assert.equal((await page.locator('.hero__badges .badge--free').innerText()).trim(), 'Δωρεάν', 'Free positioning must stay above the fold');
   const identity=(await page.locator('.hero__badges').innerText()).replace(/\s+/g,' ');
   for(const word of ['Δωρεάν','Ανεξάρτητο','Ελληνικά / English','Χωρίς cookies'])assert.ok(identity.includes(word),'Discreet identity line must include: '+word);
@@ -38,7 +38,7 @@ try {
   // v11: one clear question with six task tiles; the legacy blocks stay hidden.
   assert.equal((await page.locator('#homeV8FinderTitle').innerText()).trim(), 'Τι θέλεις να κάνεις σήμερα;');
   const needs = await page.locator('#homeV9Finder [data-finder-need]').evaluateAll((els) => els.map((el) => el.dataset.finderNeed));
-  assert.deepEqual(needs, ['study', 'practice', 'stuck', 'organize', 'teacher', 'tools'], 'Homepage must offer the six core tasks');
+  assert.deepEqual(needs, ['tools', 'study', 'practice', 'stuck', 'organize', 'teacher'], 'Homepage must offer the six core tasks, finding an AI tool first');
   assert.equal(await page.locator('#homeV9FinderCta').count(), 0, 'No destination is shown before a task is chosen (progressive disclosure)');
   for (const legacy of ['#zoneGrid', '#homeV9Principle', '#homeVideoNew', '.hero__quiz-cta-wrap', '.hero__ai-help'])
     assert.equal(await page.locator(`#zoneSelectView ${legacy}, ${legacy}`).first().isVisible().catch(() => false), false, `${legacy} must stay hidden`);
@@ -123,7 +123,7 @@ try {
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => /What do you want to do today/.test(document.querySelector('#homeV9Finder')?.textContent || ''));
   const englishSubtitle = (await page.locator('.hero__subtitle').innerText()).toLowerCase();
-  for (const concept of ['free', 'ai', 'student', 'parent', 'educator']) assert.ok(englishSubtitle.includes(concept), 'English hero must communicate its purpose and audiences: '+concept);
+  for (const concept of ['practice', 'curriculum', 'ai', 'student', 'parent', 'educator']) assert.ok(englishSubtitle.includes(concept), 'English hero must communicate its purpose and audiences: '+concept);
   await pickFinder(page, { need: 'teacher' });
   assert.match(await page.locator('#homeV9FinderCta').innerText(), /Open the educator tools/);
   assert.match(await page.locator('#homeV11Paths').innerText(), /Special Education/);

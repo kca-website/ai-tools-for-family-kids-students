@@ -141,7 +141,7 @@ try {
   await page.locator('#chromeActions #enBtn').click();
   await page.waitForFunction(() => document.documentElement.lang === 'en');
   await page.waitForFunction(() => /AI Study/.test(document.querySelector('#chromeContext .ia-crumbs')?.textContent || ''));
-  assert.match(await page.locator('#chromeHeader .chrome-nav').innerText(), /Study[\s\S]*Practice[\s\S]*Homework help/);
+  assert.match(await page.locator('#chromeHeader .chrome-nav').innerText(), /AI tools[\s\S]*Study[\s\S]*Practice[\s\S]*Homework help/);
   await page.click('#chromeMenuToggle');
   assert.match(await page.locator('#chromeMenuPanel').innerText(), /What do you want to do\?[\s\S]*Pathways for/i);
   await page.close();

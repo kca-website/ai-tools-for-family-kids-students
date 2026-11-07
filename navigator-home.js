@@ -26,13 +26,14 @@
   }
   if(isHome()) document.documentElement.classList.add("home-v8-active", "home-v11");
 
-  const TASKS = ["study", "practice", "stuck", "organize", "teacher", "tools"];
+  // "Find an AI tool" is the core of the site, so it comes first.
+  const TASKS = ["tools", "study", "practice", "stuck", "organize", "teacher"];
   const TONE = { study: "study", practice: "practice", stuck: "help", organize: "organize", teacher: "teacher", tools: "tools" };
   const LEVEL_TASKS = ["study", "practice", "stuck", "tools"];
 
   const COPY = {
     el: {
-      subtitle: "Μελέτη, εξάσκηση και βοήθεια πάνω στη σχολική ύλη 2026–27, για μαθητές, γονείς και εκπαιδευτικούς. Δωρεάν, με AI που καθοδηγεί αντί να δίνει έτοιμες λύσεις.",
+      subtitle: "Δες πού χρειάζεται λίγο περισσότερη εξάσκηση ο μαθητής, μελέτησε με βάση τη σχολική ύλη και βρες το σωστό AI για κάθε ανάγκη. Για μαθητές 6–18, γονείς και εκπαιδευτικούς.",
       identity: ["Δωρεάν", "Ανεξάρτητο", "Ελληνικά / English"],
       question: "Τι θέλεις να κάνεις σήμερα;",
       questionHint: "Διάλεξε ένα. Θα σου δείξουμε από πού να ξεκινήσεις.",
@@ -99,7 +100,7 @@
       selected: "Επιλεγμένο"
     },
     en: {
-      subtitle: "Study, practice and homework help built on the Greek 2026–27 curriculum, for students, parents and educators. Free, with AI that guides instead of handing out answers.",
+      subtitle: "See where a student needs a little more practice, study from the school curriculum and find the right AI for every need. For students aged 6–18, parents and educators.",
       identity: ["Free", "Independent", "Ελληνικά / English"],
       question: "What do you want to do today?",
       questionHint: "Pick one. We will show you where to start.",

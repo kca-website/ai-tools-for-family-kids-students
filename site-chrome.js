@@ -105,9 +105,9 @@
     guides:     { href: "/ai-ergaleia-gia-mathites.html", hrefEn: "/en/ai-tools-for-students.html", tone: "neutral", el: ["Οδηγοί", "Οδηγοί ανά βαθμίδα & μάθημα", "Δημοτικό, Γυμνάσιο, Λύκειο, μαθήματα"], en: ["Guides", "Guides by level & subject", "Primary, secondary, subjects"] }
   };
 
-  const PRIMARY = ["study", "practice", "help", "tools", "teacher"];
+  const PRIMARY = ["tools", "study", "practice", "help", "teacher"];
   const GROUPS = [
-    { id: "tasks", el: "Τι θέλεις να κάνεις;", en: "What do you want to do?", items: ["study", "practice", "help", "organize", "curriculum", "tools", "teacher"] },
+    { id: "tasks", el: "Τι θέλεις να κάνεις;", en: "What do you want to do?", items: ["tools", "study", "practice", "help", "organize", "curriculum", "teacher"] },
     { id: "who", el: "Διαδρομές για", en: "Pathways for", items: ["parents", "preschool", "epal", "special", "gsl", "university"] },
     { id: "more", el: "Μάθε αλλιώς", en: "Learn another way", items: ["characters", "play", "aiPaths", "whatToDo", "guides"] }
   ];

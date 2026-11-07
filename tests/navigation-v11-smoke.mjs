@@ -116,6 +116,7 @@ try {
   await page.waitForURL('**/study.html?zone=middle');
   await page.waitForSelector('#chromeContext .ia-related');
   assert.match(await page.locator('#chromeContext .ia-related__level').innerText(), /Γυμνάσιο/);
+  assert.equal((await page.locator('#chromeContext .ia-related__title').textContent()).trim(), 'Συνέχισε στην ίδια βαθμίδα', 'the bar promises only what it carries: the level');
   await page.click('#chromeContext .ia-related a[data-ia-key="practice"]');
   await page.waitForURL('**/middle/guardian/quiz');
   await page.waitForSelector('#iaContext .ia-related a[aria-current="page"][data-ia-key="practice"]');

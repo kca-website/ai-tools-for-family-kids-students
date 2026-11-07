@@ -78,12 +78,25 @@ try {
 
   // Pathways and discovery: every audience and feature stays reachable.
   const paths = await page.locator('#homeV11Paths a').evaluateAll((els) => els.map((el) => el.getAttribute('href')));
-  for (const href of ['/ai-gia-goneis.html', '/preschool', '/high/student/tutor?schoolType=epal', '/special-education.html', '/sign-language.html', '/higher-education-pilot.html'])
+  for (const href of ['/ai-gia-goneis.html', '/preschool', '/#epal', '/special-education.html', '/sign-language.html', '/higher-education-pilot.html'])
     assert.ok(paths.includes(href), 'Pathway missing: ' + href);
   assert.equal(await page.locator('#homeV9CurriculumTile').getAttribute('href'), '/xartis-ylis.html');
-  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 4, 'Discovery includes curriculum, history characters, Play & Learn and all tools');
-  for (const href of ['/history-characters.html', '/play/', '/tools/'])
+  assert.equal(await page.locator('#homeV9More .home-v9-more__grid > *').count(), 4, 'Discovery includes curriculum, history characters, Play & Learn and educational video');
+  for (const href of ['/history-characters.html', '/play/', '/teacher-assistant.html?task=video#builder'])
     assert.equal(await page.locator(`#homeV9More a[href="${href}"]`).count(), 1, 'Discovery link missing: ' + href);
+
+  // EPAL pathway: preselects EPAL; every task then uses the EPAL routes.
+  await page.click('#homeV11Epal');
+  assert.match(await page.locator('.home-v11-question__hint').innerText(), /Διαδρομή ΕΠΑΛ/);
+  assert.equal(await page.locator('#homeV9FinderCta').count(), 0, 'EPAL pathway lets the student choose the task first');
+  await pickFinder(page, { need: 'tools' });
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/high/student/tools?schoolType=epal');
+  await pickFinder(page, { need: 'study' });
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/study.html?zone=high&schoolType=epal');
+  await pickFinder(page, { need: 'practice' });
+  assert.equal(await page.locator('#homeV9FinderCta[data-epal-practice-map]').count(), 1, 'EPAL practice opens the EPAL diagnostic');
+  await pickFinder(page, { need: 'stuck' });
+  assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'), '/high/student/tutor?schoolType=epal');
 
   await page.click('#siteMenuToggle');
   for (const href of ['/', '/study.html', '/practice.html', '/tools/ai-help.html', '/teacher-assistant.html', '/special-education.html', '/sign-language.html', '/xartis-ylis.html', '/higher-education-pilot.html'])

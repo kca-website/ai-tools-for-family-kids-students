@@ -16,7 +16,8 @@ try {
     await page.waitForSelector('#homeV9Finder [data-finder-need]');
     await page.waitForFunction(()=>window.__aitools4kidsHeavyLoaded);
     await page.waitForLoadState('networkidle');
-    assert.ok(await page.locator('#homeV9AllTools').isVisible(), 'All AI tools remain discoverable');
+    assert.ok(await page.locator('#homeV9Finder [data-finder-need="tools"]').isVisible(), 'Finding an AI tool is the first task');
+    assert.ok(await page.locator('#homeV9Video').isVisible(), 'Educational video creation stays discoverable');
     assert.ok(await page.locator('#homeV11Paths a[href="/special-education.html"]').isVisible(), 'Special Education remains discoverable');
     assert.ok(await page.locator('#homeV8Eng a').isVisible(), 'GSL remains discoverable');
     assert.ok(await page.locator('#homeV11Paths a[href="/higher-education-pilot.html"]').isVisible(), 'University pilot remains discoverable');
@@ -63,7 +64,7 @@ try {
     assert.equal(await page.locator('#siteMenuToggle').getAttribute('aria-expanded'),'false');
     assert.equal(await page.locator('#siteMenuToggle').evaluate(el=>el===document.activeElement),true);
     await page.locator('#langEn').click();await page.waitForFunction(()=>document.documentElement.lang==='en');
-    assert.match(await page.locator('#homeV9AllTools').innerText(),/AI tools/);
+    assert.match(await page.locator('#homeV9Video').innerText(),/educational video/i);
     assert.match(await page.locator('#homeV8FinderTitle').innerText(),/What do you want to do today/);
     await page.locator('#langEl').click();await page.waitForFunction(()=>document.documentElement.lang==='el');
     await page.waitForFunction(()=>document.querySelector('#homeV8FinderTitle')?.textContent.includes('Τι θέλεις'));

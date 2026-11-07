@@ -37,6 +37,7 @@
       identity: ["Δωρεάν", "Ανεξάρτητο", "Ελληνικά / English"],
       question: "Τι θέλεις να κάνεις σήμερα;",
       questionHint: "Διάλεξε ένα. Θα σου δείξουμε από πού να ξεκινήσεις.",
+      epalHint: "Διαδρομή ΕΠΑΛ: διάλεξε τι θέλεις να κάνεις. Τάξη, τομέα και ειδικότητα θα τα επιλέξεις στο επόμενο βήμα.",
       tasks: {
         study: ["Να διαβάσω ένα μάθημα", "Εξήγηση, σύνοψη, κάρτες, quiz"],
         practice: ["Εξάσκηση ή τεστ", "Σύντομα κουίζ 2 λεπτών, χωρίς βαθμό"],
@@ -91,7 +92,7 @@
         characters: ["Μίλα με χαρακτήρα της Ιστορίας", "Διάλογος με πρόσωπα από την ύλη", "Ξεκίνα μια συζήτηση →"],
         play: ["Παίξε & Μάθε", "Μικρές αποστολές μάθησης", "Δες τα παιχνίδια →"],
         aiPaths: ["Ξέρεις πότε το AI κάνει λάθος;", "AI Διαδρομές: σωστή και ασφαλής χρήση", "Ξεκίνα μια AI Διαδρομή →"],
-        tools: ["Δες όλα τα AI εργαλεία", "Ολόκληρος ο κατάλογος με αναζήτηση", "Όλα τα AI εργαλεία →"]
+        video: ["Δημιούργησε εκπαιδευτικό βίντεο", "Από την ύλη ή δικό σου κείμενο/PDF, με ελληνική αφήγηση και υπότιτλους", "Δοκίμασέ το →"]
       },
       trustTitle: "Πώς δουλεύει",
       aiTechSummary: "ⓘ Ποιο AI χρησιμοποιείται;",
@@ -104,6 +105,7 @@
       identity: ["Free", "Independent", "Ελληνικά / English"],
       question: "What do you want to do today?",
       questionHint: "Pick one. We will show you where to start.",
+      epalHint: "EPAL pathway: choose what you want to do. You will pick your grade, sector and specialty in the next step.",
       tasks: {
         study: ["Study a lesson", "Explanation, summary, cards, quiz"],
         practice: ["Practise or take a quiz", "Short 2-minute quizzes, no grades"],
@@ -158,7 +160,7 @@
         characters: ["Talk with a character from history", "A dialogue with people from the curriculum", "Start a conversation →"],
         play: ["Play & Learn", "Short learning missions", "See the games →"],
         aiPaths: ["Can you tell when AI is wrong?", "AI Paths: using AI wisely and safely", "Start an AI Path →"],
-        tools: ["See all AI tools", "The complete catalogue with search", "All AI tools →"]
+        video: ["Create an educational video", "From the curriculum or your own text/PDF, with Greek narration and subtitles", "Try it →"]
       },
       trustTitle: "How it works",
       aiTechSummary: "ⓘ Which AI is used?",
@@ -365,7 +367,7 @@
       </button></li>`).join("");
     mount.innerHTML = `
       <h2 class="home-v11-question" id="homeV8FinderTitle" tabindex="-1">${escapeHtml(c.question)}</h2>
-      <p class="home-v11-question__hint">${escapeHtml(c.questionHint)}</p>
+      <p class="home-v11-question__hint${finderState.zone === "epal" && !need ? " home-v11-question__hint--epal" : ""}">${escapeHtml(finderState.zone === "epal" && !need ? c.epalHint : c.questionHint)}</p>
       <ul class="home-v11-tasks" aria-labelledby="homeV8FinderTitle">${tiles}</ul>
       <div id="homeV11StepMount" aria-live="polite">${stepMarkup(c)}</div>`;
   }
@@ -418,7 +420,7 @@
       <ul class="home-v11-cards">
         ${card("", "parents", p.parents[0], p.parents[1], "/ai-gia-goneis.html")}
         ${card("", "preschool", p.preschool[0], p.preschool[1], "/preschool")}
-        ${card("", "epal", p.epal[0], p.epal[1], "/high/student/tutor?schoolType=epal")}
+        ${card("homeV11Epal", "epal", p.epal[0], p.epal[1], "/#epal")}
         ${card("homeV11Special", "special", p.special[0], p.special[1], "/special-education.html")}
         <li id="homeV11EngSlot"></li>
         ${card("", "university", p.university[0], p.university[1], "/higher-education-pilot.html")}
@@ -449,7 +451,7 @@
         ${tile("homeV9CurriculumTile", "curriculum", m.curriculum, "/xartis-ylis.html")}
         ${tile("homeV9Characters", "characters", m.characters, "/history-characters.html", `<span class="home-v11-tile__faces" aria-hidden="true">${faces}</span>`)}
         ${tile("homeV9Play", "play", m.play, "/play/")}
-        ${tile("homeV9AllTools", "tools", m.tools, "/tools/")}
+        ${tile("homeV9Video", "video", m.video, "/teacher-assistant.html?task=video#builder", `<span class="home-v11-tile__icon"><svg class="ia-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></span>`)}
       </ul>`;
   }
 
@@ -545,10 +547,23 @@
     }
   }
 
+  // "EPAL students" pathway: preselect EPAL and let the student choose the task
+  // (AI tools, study, practice, help). Every task then uses the existing EPAL routes.
+  function selectEpal(){
+    finderState.zone = "epal";
+    finderState.role = "student";
+    finderState.need = "";
+    saveState();
+    renderFinder();
+    document.getElementById("homeV8FinderTitle")?.focus({preventScroll:true});
+    document.getElementById("homeV9Finder")?.scrollIntoView({block:"start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+  }
+
   function applyHashIntent(){
     if(!isHome()) return;
     if(location.hash === "#open-help" || location.hash === "#homeV8AiTitle"){ location.replace("/tools/ai-help.html"); return; }
     if(["#open-quiz", "#homeV8MapTitle"].includes(location.hash)){ location.replace("/practice.html"); return; }
+    if(location.hash === "#epal"){ selectEpal(); return; }
     const intent = shortcutIntent();
     if(intent){
       finderState.need = intent;
@@ -584,6 +599,12 @@
         const value = kind === "zone" ? d.finderZone : finderState[kind];
         document.querySelector(`#homeV9Finder [data-finder-${kind}="${value}"]`)?.focus({preventScroll:true});
         if(kind === "need") revealStep();
+        return;
+      }
+
+      if(target.closest('#homeV11Epal, a[href="/#epal"]') && isHome() && !event.ctrlKey && !event.metaKey && !event.shiftKey && event.button === 0){
+        event.preventDefault();
+        selectEpal();
         return;
       }
 

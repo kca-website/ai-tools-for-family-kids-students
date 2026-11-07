@@ -1611,3 +1611,6 @@ html.home-v11 .home-v11-steps li span{display:grid;place-items:center;flex:0 0 2
   html.home-v11 .home-v11-step__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
   html.home-v11 .home-v11-step__links a{justify-content:center;text-align:center;}
 }
+/* v11.4: EPAL pathway hint */
+html.home-v11 .home-v11-question__hint--epal{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:#FFFFFF;border:1.5px solid #1D5D8C;color:#123E5E;font-weight:700;}
+html.home-v11 .home-v11-question__hint--epal::before{content:"";width:8px;height:8px;border-radius:50%;background:#1D5D8C;flex:0 0 8px;}

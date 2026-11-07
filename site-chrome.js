@@ -25,7 +25,7 @@
   const COPY = {
     el: {
       skip: "Μετάβαση στο περιεχόμενο", navLabel: "Κύριο μενού", allLabel: "Όλες οι ενότητες", footerLabel: "Χρήσιμοι σύνδεσμοι",
-      menu: "Μενού", crumbs: "Βρίσκεσαι εδώ", pageLinks: "Σε αυτή τη σελίδα", related: "Ίδιο μάθημα, άλλος τρόπος",
+      menu: "Μενού", crumbs: "Βρίσκεσαι εδώ", pageLinks: "Σε αυτή τη σελίδα", related: "Συνέχισε στην ίδια βαθμίδα", relatedNoLevel: "Άλλοι τρόποι μελέτης",
       levelPrefix: "Βαθμίδα:", levelChange: "Αλλαγή βαθμίδας", levelNone: "Όλες οι βαθμίδες",
       footerText: "Ανεξάρτητο έργο. Δεν αποτελεί επίσημο προϊόν ή συνεργασία κανενός παρόχου AI. Οι λειτουργίες AI είναι προαιρετικές και τεκμηριώνονται στη Διαφάνεια AI.",
       privacy: "Πολιτική Απορρήτου", accessibility: "Προσβασιμότητα εργαλείων", transparency: "Διαφάνεια AI", school: "Χρήση AI στο σχολείο", guides: "Οδηγοί ανά βαθμίδα και μάθημα", about: "Ποιοι είμαστε / FAQ",
@@ -35,7 +35,7 @@
     },
     en: {
       skip: "Skip to content", navLabel: "Main menu", allLabel: "All sections", footerLabel: "Useful links",
-      menu: "Menu", crumbs: "You are here", pageLinks: "On this page", related: "Same lesson, another way",
+      menu: "Menu", crumbs: "You are here", pageLinks: "On this page", related: "Continue at the same level", relatedNoLevel: "Other ways to study",
       levelPrefix: "Level:", levelChange: "Change level", levelNone: "All levels",
       footerText: "Independent project. It is not an official product or partnership of any AI provider. AI features are optional and documented in AI Transparency.",
       privacy: "Privacy Policy", accessibility: "Tool accessibility", transparency: "AI transparency", school: "AI use at school", guides: "Guides by level and subject", about: "About us / FAQ",
@@ -94,7 +94,7 @@
                   en: ["Educators", "Create class material", "Worksheets, assessment, lesson plans, videos"] },
     parents:    { href: "/ai-gia-goneis.html", tone: "neutral", el: ["Γονείς", "Γονείς", "Πώς βοηθάς χωρίς να κάνεις τη δουλειά"], en: ["Parents", "Parents", "How to help without doing the work"] },
     preschool:  { href: "/preschool", tone: "neutral", el: ["Νηπιαγωγείο", "Νηπιαγωγείο · 4–6", "Δραστηριότητες με ενήλικα"], en: ["Preschool", "Preschool · 4–6", "Adult-led activities"] },
-    epal:       { href: "/high/student/tutor?schoolType=epal", tone: "neutral", el: ["ΕΠΑΛ", "Μαθητές ΕΠΑΛ", "Τάξη, τομέας, ειδικότητα"], en: ["EPAL", "EPAL students", "Grade, sector, specialty"] },
+    epal:       { href: "/#epal", tone: "neutral", el: ["ΕΠΑΛ", "Μαθητές ΕΠΑΛ", "Τάξη, τομέας, ειδικότητα"], en: ["EPAL", "EPAL students", "Grade, sector, specialty"] },
     special:    { href: "/special-education.html", tone: "neutral", el: ["Ειδική Εκπαίδευση", "Ειδική Εκπαίδευση", "Ειδικό Γυμνάσιο, Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ."], en: ["Special Education", "Special Education", "Special Gymnasium, Special Lyceum, EN.E.E.GY.-L."] },
     gsl:        { href: "/sign-language.html", tone: "neutral", el: ["Ελληνική Νοηματική", "Ελληνική Νοηματική (ΕΝΓ)", "Σχολικές έννοιες με βίντεο ΕΝΓ"], en: ["Greek Sign Language", "Greek Sign Language (GSL)", "School concepts with GSL video"] },
     university: { href: "/higher-education-pilot.html", tone: "neutral", el: ["Φοιτητές", "Φοιτητές ΑΕΙ · Πιλοτικό", "Επιλεγμένα τμήματα, επίσημες πηγές"], en: ["University", "University students · Pilot", "Selected departments, official sources"] },
@@ -372,7 +372,7 @@
       ? `<p class="ia-related__level"><span>${esc(c.levelPrefix)} <strong>${esc(levelLabel)}</strong></span> <button type="button" class="ia-related__change" data-ia-clear-level>${esc(c.levelChange)}</button></p>`
       : "";
     return `<section class="ia-related" aria-labelledby="iaRelatedTitle">
-      <div class="ia-related__head"><h2 class="ia-related__title" id="iaRelatedTitle">${esc(c.related)}</h2>${level_}</div>
+      <div class="ia-related__head"><h2 class="ia-related__title" id="iaRelatedTitle">${esc(levelLabel ? c.related : c.relatedNoLevel)}</h2>${level_}</div>
       <ul class="ia-related__list">${links}</ul>
     </section>`;
   }

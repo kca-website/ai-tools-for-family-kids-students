@@ -740,3 +740,203 @@ a.fb-link:focus-visible {
 .chrome-footer__brand a.fb-link {
   margin-left: 6px;
 }
+
+/* =====================================================================
+ * v11 design system + task-first navigation
+ * One set of tokens for every page (inner pages and the homepage/app shell).
+ * Each learning task has a stable colour ("tone") that is reused in the
+ * menu, the homepage task tiles and the related-task bar, so people learn
+ * "blue = study, coral = practice, violet = help" without reading labels.
+ * ===================================================================== */
+:root {
+  --ui-ink: #17202B;
+  --ui-muted: #475263;
+  --ui-line: #D9E1EA;
+  --ui-bg: #F5F8FB;
+  --ui-surface: #FFFFFF;
+  --ui-brand: #1D5D8C;
+  --ui-brand-strong: #123E5E;
+  --ui-brand-tint: #E7F0F8;
+  --ui-sun: #F2B705;
+  --ui-focus: #1D5D8C;
+  --ui-radius: 14px;
+  --ui-radius-lg: 22px;
+  --ui-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 10px 28px -16px rgba(16, 24, 40, .22);
+  --ui-sans: "Commissioner", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --ui-serif: "Noto Serif", Georgia, "Times New Roman", serif;
+  --tone: #334155;
+  --tone-tint: #EEF2F6;
+}
+.ia-tone--study { --tone: #1D5D8C; --tone-tint: #E7F0F8; }
+.ia-tone--practice { --tone: #A23B10; --tone-tint: #FDEEE6; }
+.ia-tone--help { --tone: #5B3FA8; --tone-tint: #F0EBFB; }
+.ia-tone--organize { --tone: #0B6B63; --tone-tint: #E2F4F1; }
+.ia-tone--tools { --tone: #7A4F00; --tone-tint: #FFF3D6; }
+.ia-tone--teacher { --tone: #24594C; --tone-tint: #E6F2EC; }
+.ia-tone--neutral { --tone: #334155; --tone-tint: #EEF2F6; }
+
+/* Header (inner pages) */
+.chrome-header { background: #FFFFFF; margin-bottom: 0; }
+.chrome-header:has(+ .ia-context[hidden]) { margin-bottom: 24px; }
+.chrome-header__inner { gap: 14px; min-height: 68px; flex-wrap: wrap; }
+.chrome-brand { font-size: 1rem; }
+.chrome-nav { gap: 4px; margin-left: 8px; }
+.chrome-nav a.ia-primary,
+.site-header .site-nav a.ia-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  color: var(--ui-ink) !important;
+  font-family: var(--ui-sans);
+  font-size: .95rem;
+  font-weight: 650;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.chrome-nav a.ia-primary:hover,
+.site-header .site-nav a.ia-primary:hover { background: var(--tone-tint); color: var(--tone) !important; text-decoration: none !important; }
+.chrome-nav a.ia-primary[aria-current="page"],
+.site-header .site-nav a.ia-primary[aria-current="page"] { background: var(--tone-tint); color: var(--tone) !important; font-weight: 800; }
+.chrome-nav a.ia-primary[aria-current="page"]::after,
+.site-header .site-nav a.ia-primary[aria-current="page"]::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 3px; border-radius: 3px; background: var(--tone);
+}
+.site-header .site-nav { display: flex; gap: 4px; }
+.chrome-actions { flex-wrap: nowrap; gap: 6px; }
+.chrome-actions button { min-height: 40px; padding: 0 12px; }
+@media (max-width: 1120px) { .chrome-nav { display: none; } }
+@media (max-width: 760px) {
+  .chrome-header__inner { flex-wrap: nowrap; }
+  .chrome-actions { order: 0; flex: 0 1 auto; margin-left: auto; }
+  .chrome-menu-toggle { margin-left: 0; }
+}
+@media (max-width: 400px) {
+  .chrome-header__inner { gap: 6px; padding-left: 12px; padding-right: 12px; }
+  .chrome-brand { font-size: .88rem; gap: 8px; }
+  .chrome-actions button { padding: 0 9px; }
+}
+@media (max-width: 350px) { .chrome-brand__text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+
+/* Full menu (shared by inner pages and the homepage) */
+.chrome-menu-panel { overflow-y: auto; overscroll-behavior: contain; background: #FFFFFF; }
+.ia-panel,
+.site-menu-panel .ia-panel {
+  box-sizing: border-box;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 18px 20px 24px;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 14px 28px;
+  font-family: var(--ui-sans);
+}
+.ia-panel__home {
+  grid-column: 1 / -1;
+  justify-self: start;
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 14px;
+  border: 1.5px solid var(--ui-line); border-radius: 999px;
+  color: var(--ui-ink) !important; font-weight: 750; text-decoration: none !important;
+}
+.ia-panel__home:hover, .ia-panel__home[aria-current="page"] { border-color: var(--ui-brand); color: var(--ui-brand) !important; }
+.ia-panel__title {
+  margin: 0 0 8px; color: var(--ui-muted); font-size: .78rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+}
+.ia-panel__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ia-panel__link {
+  display: flex; align-items: center; gap: 12px;
+  min-height: 52px; padding: 8px 12px;
+  border: 1px solid transparent; border-radius: 12px;
+  color: var(--ui-ink) !important; text-decoration: none !important;
+}
+.ia-panel__link:hover { background: var(--tone-tint); border-color: var(--tone-tint); }
+.ia-panel__link[aria-current="page"] { background: var(--tone-tint); border-color: var(--tone); }
+.ia-panel__icon {
+  display: grid; place-items: center; flex: 0 0 38px; width: 38px; height: 38px;
+  border-radius: 11px; background: var(--tone-tint); color: var(--tone);
+}
+.ia-panel__copy { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.ia-panel__copy strong { font-size: .95rem; font-weight: 750; }
+.ia-panel__copy small { color: var(--ui-muted); font-size: .8rem; }
+@media (max-width: 900px) {
+  .ia-panel, .site-menu-panel .ia-panel { grid-template-columns: 1fr; padding: 14px 16px 22px; gap: 14px; }
+}
+
+/* Context bar: breadcrumbs, page links, related learning tasks */
+.ia-context {
+  box-sizing: border-box;
+  width: var(--chrome-vw, 100%);
+  max-width: none;
+  margin: 0 0 22px calc(50% - var(--chrome-vw, 100%) / 2);
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--ui-bg) 100%);
+  border-bottom: 1px solid var(--ui-line);
+  font-family: var(--ui-sans);
+  color: var(--ui-ink);
+}
+.ia-context[hidden] { display: none !important; }
+.ia-context--app { width: auto; margin: -8px 0 20px; background: transparent; border-bottom: 0; }
+.ia-context__inner { box-sizing: border-box; max-width: 1160px; margin: 0 auto; padding: 10px 20px 14px; }
+.ia-context--app .ia-context__inner { padding: 0; }
+.ia-context__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.ia-crumbs ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 0; margin: 0; padding: 0; font-size: .88rem; }
+.ia-crumbs li { display: inline-flex; align-items: center; min-width: 0; }
+.ia-crumbs li + li::before { content: "›"; margin: 0 8px; color: #8A94A3; font-weight: 700; }
+.ia-crumbs a { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; color: var(--ui-brand) !important; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.ia-crumbs a .ia-icon { width: 17px; height: 17px; }
+.ia-crumbs [aria-current="page"] { color: var(--ui-muted); font-weight: 600; overflow-wrap: anywhere; }
+.ia-pagelinks { display: flex; flex-wrap: wrap; gap: 6px; }
+.ia-pagelinks a {
+  display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px;
+  border: 1px solid var(--ui-line); border-radius: 999px; background: #FFFFFF;
+  color: var(--ui-ink) !important; font-size: .85rem; font-weight: 650; text-decoration: none !important;
+}
+.ia-pagelinks a:hover { border-color: var(--ui-brand); color: var(--ui-brand) !important; }
+.ia-related { margin-top: 10px; }
+.ia-related__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; margin-bottom: 8px; }
+.ia-related__title { margin: 0; font-family: var(--ui-sans) !important; font-size: .8rem !important; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--ui-muted); }
+.ia-related__level { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 0; font-size: .85rem; color: var(--ui-muted); }
+.ia-related__level strong { color: var(--ui-ink); }
+.ia-related__change {
+  min-height: 32px; padding: 0 10px; border: 1px solid var(--ui-line); border-radius: 999px; background: #FFFFFF;
+  color: var(--ui-brand); font: inherit; font-weight: 700; cursor: pointer;
+}
+.ia-related__change:hover { border-color: var(--ui-brand); }
+.ia-related__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.ia-related__link {
+  display: flex; align-items: center; gap: 10px; height: 100%; box-sizing: border-box;
+  min-height: 56px; padding: 8px 12px;
+  border: 1.5px solid var(--ui-line); border-radius: 12px; background: #FFFFFF;
+  color: var(--ui-ink) !important; text-decoration: none !important;
+}
+.ia-related__link:hover { border-color: var(--tone); }
+.ia-related__link[aria-current="page"] { border-color: var(--tone); background: var(--tone-tint); box-shadow: inset 0 -3px 0 var(--tone); }
+.ia-related__icon { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border-radius: 10px; background: var(--tone-tint); color: var(--tone); }
+.ia-related__link[aria-current="page"] .ia-related__icon { background: #FFFFFF; }
+.ia-related__copy { display: flex; flex-direction: column; min-width: 0; line-height: 1.25; }
+.ia-related__copy strong { font-size: .92rem; font-weight: 800; }
+.ia-related__copy small { color: var(--ui-muted); font-size: .76rem; }
+@media (max-width: 860px) { .ia-related__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) {
+  .ia-context__inner { padding: 8px 16px 12px; }
+  .ia-related__copy small { display: none; }
+  .ia-related__link { min-height: 48px; padding: 6px 10px; gap: 8px; }
+  .ia-related__icon { flex-basis: 30px; width: 30px; height: 30px; }
+}
+.ia-crumbs a:focus-visible, .ia-pagelinks a:focus-visible, .ia-related a:focus-visible, .ia-related button:focus-visible,
+.ia-panel a:focus-visible, .chrome-nav a:focus-visible, .site-header .site-nav a:focus-visible {
+  outline: 3px solid var(--ui-focus); outline-offset: 2px;
+}
+@media print { .ia-context, .chrome-menu-panel { display: none !important; } }
+
+/* Homepage/app-shell header uses the same primary nav; the educator pill is now the "Educators" nav item. */
+.site-header .site-nav[data-ia-primary] ~ .site-header__actions .classroom-menu-link { display: none !important; }
+.site-header .site-nav[data-ia-primary] { margin-left: 4px; }
+@media (max-width: 1180px) { .site-header .site-nav[data-ia-primary] { display: none !important; } }
+
+/* CLS guard: reserve the breadcrumb bar's height before site-chrome.js runs, so inserting it
+   does not push the page down after first paint. Only on pages that actually load the script. */
+html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 55px; }
+@media (max-width: 520px) { html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 51px; } }

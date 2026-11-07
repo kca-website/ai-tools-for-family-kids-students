@@ -1,7 +1,20 @@
-/* Homepage navigator v8.5.
- * Scope: homepage only.
- * Keeps the core app, routing, language system and school views untouched.
- * Legacy homepage injectors remain available to the rest of the app but are suppressed here.
+/* Homepage v11 — task-first.
+ * Scope: homepage only. The core app, routing, language system and school views
+ * stay untouched; legacy homepage blocks remain in the DOM (other scripts may
+ * reference them) but are hidden here.
+ *
+ * Flow:
+ *   1. "What do you want to do today?" — six task tiles (one click).
+ *   2. The destination button appears at once. A school level is an optional
+ *      accelerator: every task has a sensible level-free destination that asks
+ *      for the level itself. A role is asked only where it changes the route.
+ *   3. Pathways (parents, preschool, EPAL, special education, GSL, university)
+ *      and "Learn another way" sit below, never competing with the main task.
+ *
+ * The routing contract of the previous finder is preserved exactly whenever a
+ * level is chosen (EPAL practice → EPAL diagnostic, Special Education practice
+ * → diagnostic, primary help → adult pathway, …). The selection is shared with
+ * the rest of the site through sessionStorage "aitools4kidsShortcutSelection".
  */
 (function(){
   "use strict";
@@ -11,128 +24,149 @@
   function isHome(){
     return location.pathname === "/" || location.pathname === "";
   }
-  if(isHome()) document.documentElement.classList.add("home-v8-active");
+  if(isHome()) document.documentElement.classList.add("home-v8-active", "home-v11");
+
+  // "Find an AI tool" is the core of the site, so it comes first.
+  const TASKS = ["tools", "study", "practice", "stuck", "organize", "teacher"];
+  const TONE = { study: "study", practice: "practice", stuck: "help", organize: "organize", teacher: "teacher", tools: "tools" };
+  const LEVEL_TASKS = ["study", "practice", "stuck", "tools"];
 
   const COPY = {
     el: {
-      curriculumCardBadge: "Ύλη 2026–27",
-      curriculumCardTitle: "Βρες την ενότητα που διαβάζεις",
-      curriculumCardDesc: "Τάξη → μάθημα → πραγματική ενότητα → AI βοήθεια, εξάσκηση και οπτική εξήγηση.",
-      curriculumCardCta: "Άνοιξε την ύλη 2026–27 →",
-      toolsTileTitle: "Δες όλα τα AI εργαλεία",
-      toolsTileDesc: "Δες όλο τον κατάλογο και βρες εργαλεία ανά ανάγκη, μάθημα και ηλικία.",
-      toolsTileCta: "Όλα τα AI εργαλεία →",
-      aiBadgeNew: "Νέο",
-      aiBadgeFree: "Δωρεάν",
-      aiTitle: "AI Βοήθεια",
-      aiDesc: "AI Βοήθεια: μία ερώτηση ή μικρή υπόδειξη τη φορά, πάνω στη δική σου προσπάθεια.",
+      subtitle: "Δες πού χρειάζεται λίγο περισσότερη εξάσκηση ο μαθητής, μελέτησε με βάση τη σχολική ύλη και βρες το σωστό AI για κάθε ανάγκη. Για μαθητές 6–18, γονείς και εκπαιδευτικούς.",
+      identity: ["Δωρεάν", "Ανεξάρτητο", "Ελληνικά / English"],
+      question: "Τι θέλεις να κάνεις σήμερα;",
+      questionHint: "Διάλεξε ένα. Θα σου δείξουμε από πού να ξεκινήσεις.",
+      epalHint: "Διαδρομή ΕΠΑΛ: διάλεξε τι θέλεις να κάνεις. Τάξη, τομέα και ειδικότητα θα τα επιλέξεις στο επόμενο βήμα.",
+      tasks: {
+        study: ["Να διαβάσω ένα μάθημα", "Εξήγηση, σύνοψη, κάρτες, quiz"],
+        practice: ["Εξάσκηση ή τεστ", "Σύντομα κουίζ 2 λεπτών, χωρίς βαθμό"],
+        stuck: ["Κόλλησα σε μια άσκηση", "Υποδείξεις βήμα βήμα"],
+        organize: ["Να οργανώσω το διάβασμα", "Μικρά, εφικτά βήματα"],
+        teacher: ["Είμαι εκπαιδευτικός", "Φτιάχνω υλικό για την τάξη"],
+        tools: ["Να βρω AI εργαλείο", "Κατάλογος ανά ανάγκη και ηλικία"]
+      },
+      explain: {
+        study: "Η AI Μελέτη: διαλέγεις ενότητα από τη σχολική ύλη ή ανεβάζεις τις σημειώσεις σου και μετά επιλέγεις εξήγηση, σύνοψη, ακουστικό μάθημα, κάρτες ή quiz.",
+        practice: "Ο Χάρτης Εξάσκησης: σύντομες ερωτήσεις που δείχνουν πού χρειάζεται λίγη παραπάνω εξάσκηση. Δεν βαθμολογεί και δεν κάνει διάγνωση.",
+        stuck: "Η AI Βοήθεια σε καθοδηγεί, δεν δίνει έτοιμη λύση. Για ολόκληρη ενότητα, διάλεξε «Να διαβάσω ένα μάθημα».",
+        organize: "Σπάει το διάβασμα σε μικρά, εφικτά βήματα, ώστε να ξέρεις τι κάνεις σήμερα και τι αύριο.",
+        teacher: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος και βίντεο πάνω στην ύλη 2026–27. Εσύ ελέγχεις και προσαρμόζεις.",
+        tools: "Εξωτερικά AI εργαλεία με ηλικιακά όρια, προσβασιμότητα και αναζήτηση ανά σχολική ανάγκη."
+      },
+      studyOfficial: "Βασισμένη στο επίσημο σχολικό βιβλίο · Ύλη 2026–27. Η κάλυψη σχολικών βιβλίων είναι επιλεκτική.",
+      levelLabel: "Βαθμίδα",
+      levelOptional: "προαιρετικά, για πιο γρήγορη αρχή",
+      roleLabel: "Ποιος θα τη χρησιμοποιήσει;",
+      roles: { student: "Μαθητής / Μαθήτρια", guardian: "Γονιός" },
+      zones: { primary: ["Δημοτικό","6–12"], middle: ["Γυμνάσιο","12–15"], high: ["ΓΕΛ","15–18"], epal: ["ΕΠΑΛ","15–18"], special: ["Ειδική Εκπαίδευση",""], preschool: ["Νηπιαγωγείο","4–6"] },
+      cta: { study: "Άνοιξε την AI Μελέτη", practice: "Άνοιξε τον Χάρτη Εξάσκησης", stuck: "Άνοιξε την AI Βοήθεια", organize: "Σπάσε το διάβασμα σε μικρά βήματα", teacher: "Άνοιξε τα εργαλεία εκπαιδευτικού", tools: "Δες τα AI εργαλεία" },
+      ctaPreschool: "Δραστηριότητες Νηπιαγωγείου", ctaSpecial: "Άνοιξε την Ειδική Εκπαίδευση", ctaSpecialPractice: "Κάνε το μικρό διαγνωστικό",
+      ctaEpalHelp: "Άνοιξε βοήθεια για τα μαθήματα ΕΠΑΛ", ctaPracticeGel: "Χάρτης Εξάσκησης ΓΕΛ", ctaPracticeEpal: "Χάρτης Εξάσκησης ΕΠΑΛ",
+      pdf: "Έχω δικό μου PDF ή σημειώσεις →",
+      knownUnit: "Ξέρεις την ενότητα; Κάνε εξάσκηση σε αυτή →",
+      allTools: "Όλος ο κατάλογος, χωρίς φίλτρο βαθμίδας →",
+      teacherLabel: "Ή πήγαινε κατευθείαν σε:",
+      studyGoalsLabel: "Τι θέλεις να κάνεις με την ενότητα;",
+      studyGoals: [["understand","Να το καταλάβω"],["revise","Επανάληψη"],["test","Γράφω τεστ"],["pdf","Έχω PDF ή σημειώσεις"]],
+      helpStepsLabel: "Πώς δουλεύει",
+      helpSteps: ["Γράψε την άσκηση και τι δοκίμασες", "Πάρε μία υπόδειξη", "Δοκίμασε ξανά μόνος/η σου"],
+      teacherTasks: [["worksheet","Φύλλο εργασίας"],["assessment","Αξιολόγηση"],["lesson","Σχέδιο μαθήματος"],["video","Βίντεο"]],
+      notePrimary: "Στο Δημοτικό η AI Βοήθεια ανοίγει στη διαδρομή του ενήλικα, μαζί με γονέα ή εκπαιδευτικό.",
+      notePreschool: "Στο Νηπιαγωγείο ο ενήλικας χειρίζεται το εργαλείο.",
+      noteSpecial: "Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ., με προσαρμοσμένη γλώσσα και ρυθμό.",
+      pathsTitle: "Διαδρομές για",
+      paths: {
+        parents: ["Γονείς", "Πώς βοηθάς χωρίς να κάνεις τη δουλειά"],
+        preschool: ["Νηπιαγωγείο · 4–6", "Δραστηριότητες με ενήλικα"],
+        epal: ["Μαθητές ΕΠΑΛ", "Τάξη, τομέας, ειδικότητα"],
+        special: ["Ειδική Εκπαίδευση", "Ειδικό Γυμνάσιο, Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ."],
+        university: ["Φοιτητές ΑΕΙ · Πιλοτικό", "Επιλεγμένα τμήματα, επίσημες πηγές"]
+      },
+      engTitle: "Ελληνική Νοηματική",
+      engDesc: `${signLanguageConceptCount} σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ`,
+      engLink: `Δες τις ${signLanguageConceptCount} έννοιες →`,
+      moreTitle: "Μάθε αλλιώς",
+      more: {
+        curriculum: ["Βρες την ενότητα που διαβάζεις", "Χάρτης Ύλης 2026–27: τάξη → μάθημα → ενότητα", "Άνοιξε την ύλη 2026–27 →"],
+        characters: ["Μίλα με χαρακτήρα της Ιστορίας", "Διάλογος με πρόσωπα από την ύλη", "Ξεκίνα μια συζήτηση →"],
+        play: ["Παίξε & Μάθε", "Μικρές αποστολές μάθησης", "Δες τα παιχνίδια →"],
+        aiPaths: ["Ξέρεις πότε το AI κάνει λάθος;", "AI Διαδρομές: σωστή και ασφαλής χρήση", "Ξεκίνα μια AI Διαδρομή →"],
+        video: ["Δημιούργησε εκπαιδευτικό βίντεο", "Από την ύλη ή δικό σου κείμενο/PDF, με ελληνική αφήγηση και υπότιτλους", "Δοκίμασέ το →"]
+      },
+      trustTitle: "Πώς δουλεύει",
       aiTechSummary: "ⓘ Ποιο AI χρησιμοποιείται;",
       aiTechText: "GPT-OSS 120B μέσω Cloudflare Workers AI, με Groq ως εφεδρικό πάροχο. Το Puter είναι προαιρετική εναλλακτική.",
       aiTechLink: "Διαφάνεια AI →",
-      aiPrimary: "Γονιός Δημοτικού",
-      aiMiddle: "Γονιός Γυμνασίου",
-      aiHigh: "Λύκειο",
-      aiSpecial: "Ειδικά σχολεία",
-      engTitle: "Έννοιες στην Ελληνική Νοηματική",
-      engDesc: `${signLanguageConceptCount} σχολικές έννοιες με απλή εξήγηση και επίσημο βίντεο ΕΝΓ`,
-      engLink: `Δες τις ${signLanguageConceptCount} έννοιες →`,
-      stepsLabel: "Τι χρειάζεσαι τώρα;",
-      moreTitle: "Ανακάλυψε περισσότερα",
-      charTile: "Μίλα με χαρακτήρα της Ιστορίας",
-      charTileDesc: "Διάλογος με πρόσωπα από την ύλη και έλεγχος του τι έμαθες.",
-      stepRole: "1 · Ποιος είσαι;",
-      stepZone: "2 · Βαθμίδα ή διαδρομή",
-      stepNeed: "3 · Τι χρειάζεσαι σήμερα;",
-      roles: { guardian: "Γονιός", student: "Μαθητής / Μαθήτρια", teacher: "Εκπαιδευτικός", university: "Φοιτητής / Φοιτήτρια" },
-      zones: { preschool: ["Νηπιαγωγείο","4–6"], primary: ["Δημοτικό","6–12"], middle: ["Γυμνάσιο","12–15"], high: ["ΓΕΛ","15–18"], epal: ["ΕΠΑΛ","15–18"], special: ["Ειδική Εκπαίδευση",""] },
-      finderNeeds: { study: "Δεν καταλαβαίνω μια ενότητα", practice: "Θέλω εξάσκηση", stuck: "Κόλλησα σε άσκηση", pdf: "Έχω PDF ή σημειώσεις", organize: "Δεν ξέρω από πού να αρχίσω", tools: "Να βρω το κατάλληλο AI" },
-      ctaTools: "Δες εργαλεία για", ctaPractice: "Χάρτης Εξάσκησης για", ctaStuck: "AI Βοήθεια για", ctaStudy: "Άνοιξε την AI Μελέτη", ctaPreschool: "Δραστηριότητες Νηπιαγωγείου", ctaSpecial: "Άνοιξε την Ειδική Εκπαίδευση", ctaTeacher: "Άνοιξε τα εργαλεία για εκπαιδευτικούς", mapGel: "ΓΕΛ", mapEpal: "ΕΠΑΛ", ctaSpecialPractice: "Κάνε το μικρό διαγνωστικό", ctaUniversity: "Άνοιξε τη φοιτητική διαδρομή",
-      noteTeacher: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, δραστηριότητες και βίντεο πάνω στην ύλη 2026–27.",
-      noteUniversity: "Πιλοτική διαδρομή για επιλεγμένα πανεπιστημιακά τμήματα, με επίσημες πηγές.",
-      teacherWayEyebrow: "Για εκπαιδευτικούς",
-      teacherWayTitle: "Υλικό για την τάξη σου, πάνω στην ύλη 2026–27.",
-      teacherWayDesc: "Φύλλα εργασίας, αξιολόγηση, σχέδια μαθήματος, βίντεο και δραστηριότητες με QR για την τάξη. Εσύ ελέγχεις και προσαρμόζεις.",
-      teacherWayCta: "Άνοιξε τα εργαλεία εκπαιδευτικού\u00a0→",
-      notePreschool: "Στο Νηπιαγωγείο ο ενήλικας χειρίζεται το εργαλείο. Θα δεις δραστηριότητες για γονείς και εκπαιδευτικούς.",
-      notePrimaryStudent: "Δημοτικό: μαζί με γονέα ή εκπαιδευτικό. Η AI Βοήθεια ανοίγει στη διαδρομή του ενήλικα.",
-      noteMiddleStudent: "Γυμνάσιο: μαθητική AI Βοήθεια από 13 ετών. Για μικρότερη ηλικία, μαζί με γονέα. Κάθε εξωτερικό εργαλείο έχει δικό του όριο ηλικίας.",
-      noteMiddleStuck: "Η AI Βοήθεια για μαθητές Γυμνασίου ανοίγει από 13 ετών. Διάλεξε πρώτα την ηλικία σου στην επόμενη σελίδα.",
-      noteHigh: "Μαθητική διαδρομή Λυκείου. Στο ΕΠΑΛ επιλέγεις τάξη και, όπου χρειάζεται, τομέα ή ειδικότητα.",
-      noteSpecial: "Διαδρομή για Ειδικό Γυμνάσιο, Ειδικό Λύκειο και ΕΝ.Ε.Ε.ΓΥ.-Λ.",
-      waysTitle: "Γρήγορη πρόσβαση",
-      studyGoalsLabel: "Τι θέλεις;",
-      studyGoals: [["pdf","📄","PDF / σημειώσεις"],["understand","🧠","Να το καταλάβω"],["revise","🔁","Επανάληψη"],["test","📝","Γράφω τεστ"],["practice","🎯","Εξάσκηση"]],
-      teacherTasksLabel: "Φτιάξε:",
-      teacherTasks: [["worksheet","📝","Φύλλο εργασίας"],["assessment","✅","Αξιολόγηση"],["lesson","🗂️","Σχέδιο μαθήματος"],["video","🎬","Βίντεο"]],
-      aiLinksLabel: "Άνοιξε για:",
-      studyBadge: "Δωρεάν",
-      studyTitle: "AI Μελέτη",
-      studyDesc: "AI Μελέτη: σχολική ενότητα ή δικές σου σημειώσεις/PDF, με εξήγηση, κάρτες, quiz και πλάνο μέσα στο site.",
-      studyOfficial: "Βασισμένη στο επίσημο σχολικό βιβλίο · Ύλη 2026–27",
-      studyCoverage: "Με σημειώσεις/PDF οι απαντήσεις βασίζονται στο υλικό σου. Η κάλυψη σχολικών βιβλίων είναι επιλεκτική.",
-      studyCta: "Φτιάξε το πλάνο μελέτης σου →",
-      charCta: "Ξεκίνα μια συζήτηση →",
-      chars: [["socrates","Σωκράτης","Αρχαία Αθήνα"],["pericles","Περικλής","Χρυσός αιώνας"],["greek-revolution-1821","Αγωνιστής του 1821","Επανάσταση"]]
+      selected: "Επιλεγμένο"
     },
     en: {
-      curriculumCardBadge: "Curriculum 2026–27",
-      curriculumCardTitle: "Find the unit you are studying",
-      curriculumCardDesc: "Grade → subject → real curriculum unit → AI help, practice and visual explanation.",
-      curriculumCardCta: "Open the 2026–27 curriculum →",
-      toolsTileTitle: "See all AI tools",
-      toolsTileDesc: "Browse the full catalogue and find tools by need, subject and age.",
-      toolsTileCta: "All AI tools →",
-      aiBadgeNew: "New",
-      aiBadgeFree: "Free",
-      aiTitle: "AI Help",
-      aiDesc: "AI Help: one question or small hint at a time, building on your own attempt.",
+      subtitle: "See where a student needs a little more practice, study from the school curriculum and find the right AI for every need. For students aged 6–18, parents and educators.",
+      identity: ["Free", "Independent", "Ελληνικά / English"],
+      question: "What do you want to do today?",
+      questionHint: "Pick one. We will show you where to start.",
+      epalHint: "EPAL pathway: choose what you want to do. You will pick your grade, sector and specialty in the next step.",
+      tasks: {
+        study: ["Study a lesson", "Explanation, summary, cards, quiz"],
+        practice: ["Practise or take a quiz", "Short 2-minute quizzes, no grades"],
+        stuck: ["I'm stuck on an exercise", "Step-by-step hints"],
+        organize: ["Plan my studying", "Small, doable steps"],
+        teacher: ["I'm an educator", "Create class material"],
+        tools: ["Find an AI tool", "Catalogue by need and age"]
+      },
+      explain: {
+        study: "AI Study: choose a curriculum unit or upload your notes, then pick an explanation, summary, audio lesson, cards or a quiz.",
+        practice: "The Practice Map: short questions that show where a little more practice helps. It does not grade or diagnose.",
+        stuck: "AI Help guides you; it does not hand out answers. For a whole unit, choose “Study a lesson”.",
+        organize: "Breaks studying into small, doable steps so you know what to do today and tomorrow.",
+        teacher: "Worksheets, assessment, lesson plans and videos built on the 2026–27 curriculum. You review and adapt.",
+        tools: "External AI tools with age limits, accessibility notes and search by school need."
+      },
+      studyOfficial: "Based on the official school textbook · Curriculum 2026–27. Textbook coverage is selective.",
+      levelLabel: "Level",
+      levelOptional: "optional, for a quicker start",
+      roleLabel: "Who will use it?",
+      roles: { student: "Student", guardian: "Parent" },
+      zones: { primary: ["Primary","6–12"], middle: ["Middle School","12–15"], high: ["General Lyceum","15–18"], epal: ["EPAL","15–18"], special: ["Special Education",""], preschool: ["Preschool","4–6"] },
+      cta: { study: "Open AI Study", practice: "Open the Practice Map", stuck: "Open AI Help", organize: "Break it into small steps", teacher: "Open the educator tools", tools: "See the AI tools" },
+      ctaPreschool: "Preschool activities", ctaSpecial: "Open Special Education", ctaSpecialPractice: "Take the short check",
+      ctaEpalHelp: "Open EPAL subject help", ctaPracticeGel: "General Lyceum Practice Map", ctaPracticeEpal: "Vocational Lyceum (EPAL) Practice Map",
+      pdf: "I have my own PDF or notes →",
+      knownUnit: "Know your unit? Practise that unit →",
+      allTools: "The whole catalogue, no level filter →",
+      teacherLabel: "Or go straight to:",
+      studyGoalsLabel: "What do you want to do with the unit?",
+      studyGoals: [["understand","Understand it"],["revise","Review"],["test","Test coming up"],["pdf","I have a PDF or notes"]],
+      helpStepsLabel: "How it works",
+      helpSteps: ["Write the exercise and what you tried", "Get one hint", "Try again on your own"],
+      teacherTasks: [["worksheet","Worksheet"],["assessment","Assessment"],["lesson","Lesson plan"],["video","Video"]],
+      notePrimary: "In primary school, AI Help opens in the adult pathway, used together with a parent or educator.",
+      notePreschool: "In preschool the adult operates the tool.",
+      noteSpecial: "Special Gymnasium, Special Lyceum and EN.E.E.GY.-L., with adapted language and pace.",
+      pathsTitle: "Pathways for",
+      paths: {
+        parents: ["Parents", "How to help without doing the work"],
+        preschool: ["Preschool · 4–6", "Adult-led activities"],
+        epal: ["EPAL students", "Grade, sector, specialty"],
+        special: ["Special Education", "Special Gymnasium, Special Lyceum, EN.E.E.GY.-L."],
+        university: ["University students · Pilot", "Selected departments, official sources"]
+      },
+      engTitle: "Greek Sign Language",
+      engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,
+      engLink: `See the ${signLanguageConceptCount} concepts →`,
+      moreTitle: "Learn another way",
+      more: {
+        curriculum: ["Find the unit you are studying", "Curriculum Map 2026–27: grade → subject → unit", "Open the 2026–27 curriculum →"],
+        characters: ["Talk with a character from history", "A dialogue with people from the curriculum", "Start a conversation →"],
+        play: ["Play & Learn", "Short learning missions", "See the games →"],
+        aiPaths: ["Can you tell when AI is wrong?", "AI Paths: using AI wisely and safely", "Start an AI Path →"],
+        video: ["Create an educational video", "From the curriculum or your own text/PDF, with Greek narration and subtitles", "Try it →"]
+      },
+      trustTitle: "How it works",
       aiTechSummary: "ⓘ Which AI is used?",
       aiTechText: "GPT-OSS 120B via Cloudflare Workers AI, with Groq as the fallback provider. Puter is an optional alternative.",
       aiTechLink: "AI transparency →",
-      aiPrimary: "Primary parent",
-      aiMiddle: "Middle School parent",
-      aiHigh: "High School",
-      aiSpecial: "Special schools",
-      engTitle: "Greek Sign Language concepts",
-      engDesc: `${signLanguageConceptCount} school concepts with a simple explanation and official GSL video`,
-      engLink: `See the ${signLanguageConceptCount} concepts →`,
-      stepsLabel: "What do you need right now?",
-      moreTitle: "Discover more",
-      charTile: "Talk with a character from history",
-      charTileDesc: "A dialogue with people from the curriculum, then a check of what you learned.",
-      stepRole: "1 · Who are you?",
-      stepZone: "2 · Level or pathway",
-      stepNeed: "3 · What do you need today?",
-      roles: { guardian: "Parent", student: "Student", teacher: "Educator", university: "University student" },
-      zones: { preschool: ["Preschool","4–6"], primary: ["Primary","6–12"], middle: ["Middle School","12–15"], high: ["General Lyceum","15–18"], epal: ["EPAL","15–18"], special: ["Special Education",""] },
-      finderNeeds: { study: "I don't understand a unit", practice: "I want to practise", stuck: "I'm stuck on an exercise", pdf: "I have a PDF or notes", organize: "I don't know where to start", tools: "Find the right AI" },
-      ctaTools: "See tools for", ctaPractice: "Practice Map for", ctaStuck: "AI Help for", ctaStudy: "Open AI Study", ctaPreschool: "Preschool activities", ctaSpecial: "Open Special Education", ctaTeacher: "Open the educator tools", mapGel: "General Lyceum", mapEpal: "Vocational Lyceum (EPAL)", ctaSpecialPractice: "Take the short check", ctaUniversity: "Open the university pathway",
-      noteTeacher: "Worksheets, assessment, lesson plans, activities and videos built on the 2026–27 curriculum.",
-      noteUniversity: "Pilot pathway for selected university departments, with official sources.",
-      teacherWayEyebrow: "For educators",
-      teacherWayTitle: "Material for your class, built on the 2026–27 curriculum.",
-      teacherWayDesc: "Worksheets, assessment, lesson plans, videos and QR activities for your class. You review and adapt.",
-      teacherWayCta: "Open the educator tools\u00a0→",
-      notePreschool: "In preschool the adult operates the tool. You will see activities for parents and educators.",
-      notePrimaryStudent: "Primary school: together with a parent or educator. AI Help opens in the adult pathway.",
-      noteMiddleStudent: "Middle school: student AI Help from age 13. Younger students use it with a parent. External tools have their own age limits.",
-      noteMiddleStuck: "AI Help for middle-school students opens from age 13. Choose your age first on the next page.",
-      noteHigh: "For EPAL you will then choose a grade and, where needed, a sector or specialty.",
-      noteSpecial: "Pathway for Special Gymnasium, Special Lyceum and EN.E.E.GY.-L.",
-      waysTitle: "Quick access",
-      studyGoalsLabel: "What do you need?",
-      studyGoals: [["pdf","📄","PDF / notes"],["understand","🧠","Understand it"],["revise","🔁","Review"],["test","📝","Test coming up"],["practice","🎯","Practise"]],
-      teacherTasksLabel: "Create:",
-      teacherTasks: [["worksheet","📝","Worksheet"],["assessment","✅","Assessment"],["lesson","🗂️","Lesson plan"],["video","🎬","Video"]],
-      aiLinksLabel: "Open for:",
-      studyBadge: "Free",
-      studyTitle: "AI Study",
-      studyDesc: "AI Study: a school unit or your own notes/PDF, with explanations, cards, quizzes and a study plan here on the site.",
-      studyOfficial: "Based on the official school textbook · Curriculum 2026–27",
-      studyCoverage: "With notes/PDF, answers are based on your material. Textbook coverage is selective.",
-      studyCta: "Build your study plan →",
-      charCta: "Start a conversation →",
-      chars: [["socrates","Socrates","Ancient Athens"],["pericles","Pericles","Golden Age"],["greek-revolution-1821","Fighter of 1821","Greek Revolution"]]
+      selected: "Selected"
     }
   };
 
@@ -140,9 +174,14 @@
     return !!document.getElementById("langEn")?.classList.contains("active") ||
       (document.documentElement.lang || "").toLowerCase().startsWith("en");
   }
-
-  function currentCopy(){
-    return isEnglish() ? COPY.en : COPY.el;
+  function currentCopy(){ return isEnglish() ? COPY.en : COPY.el; }
+  function escapeHtml(value){
+    return String(value ?? "").replace(/[&<>"']/g, (ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  }
+  function icon(key){
+    const icons = window.AITOOLSKIDS_IA?.icons || {};
+    const map = { stuck: "help" };
+    return icons[map[key] || key] || "";
   }
 
   function ensureStyles(){
@@ -174,89 +213,38 @@
     }else reveal();
   }
 
-  function ensureHeroCopy(){
-    if(!isHome()) return;
-    const title=document.querySelector("#zoneSelectView .hero__title[data-i18n='heroTitle']");
-    const subtitle=document.querySelector("#zoneSelectView .hero__subtitle[data-i18n='heroSubtitle']");
-    if(!isEnglish()){
-      if(title) title.textContent="Μαθαίνω Έξυπνα με AI";
-      if(subtitle) subtitle.textContent="Η δωρεάν ελληνική πλατφόρμα που συνδέει τη σχολική ύλη, τις πραγματικές μαθησιακές ανάγκες και τα κατάλληλα AI εργαλεία. Δες πού χρειάζεται λίγο περισσότερη εξάσκηση ο μαθητής, μελέτησε με βάση τη σχολική ύλη και βρες το σωστό AI για κάθε ανάγκη. Για μαθητές 6–18, γονείς και εκπαιδευτικούς.";
-    }
-  }
-
-  function ensureAccessibilityBadge(){
-    const badges = document.querySelector("#zoneSelectView .hero__badges");
-    if(!badges) return;
-
-    document.getElementById("homeEngBadge")?.remove();
-    let badge = document.getElementById("heroGslBadge");
-    if(!badge){
-      badge = document.createElement("span");
-      badge.id = "heroGslBadge";
-      badge.className = "badge badge--accent home-eng-badge";
-      const privacy = badges.querySelector(".privacy-badge-details");
-      if(privacy) badges.insertBefore(badge, privacy);
-      else badges.appendChild(badge);
-    }
-    badge.classList.add("home-eng-badge");
-    badge.textContent = isEnglish() ? "Accessible GSL material" : "Προσβάσιμο υλικό ΕΝΓ";
-  }
-
-  function suppressLegacyInjectedBlocks(){
-    [
-      "pwaMobileLauncher",
-      "curriculumMapFeature",
-      "signLanguageFeature",
-      "specialEducationHomeFeature"
-    ].forEach((id) => document.getElementById(id)?.classList.add("home-v8-legacy"));
-  }
-
-  function hideLegacyHomeBlocks(){
-    document.querySelector("#zoneSelectView .hero__learning-loop")?.classList.add("home-v8-legacy");
-    document.querySelector("#zoneSelectView .hero__map-pair")?.classList.add("home-v8-legacy");
-    document.querySelector("#zoneSelectView .hero__quiz-cta-wrap")?.classList.add("home-v8-legacy");
-    document.querySelector("#zoneSelectView .hero__ai-help")?.classList.add("home-v8-legacy");
-    document.getElementById("homeAiLearningModes")?.classList.add("home-v8-legacy");
-    document.querySelector("#zoneSelectView > .section-heading")?.classList.add("home-v8-legacy");
-    document.querySelector("#zoneSelectView > .section-subheading")?.classList.add("home-v8-legacy");
-    suppressLegacyInjectedBlocks();
-  }
-
-  const ICON = {
-    teacher: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4M7 9h6M7 12h4"/></svg>',
-    map: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"></path><path d="M9 4v14M15 6v14"></path></svg>',
-    chat: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16v11H9l-5 4z"></path><path d="M9 10h6"></path></svg>',
-    book: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"></path><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"></path></svg>',
-    shield: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6z"></path><path d="M12 8v5M12 16.5v.01"></path></svg>'
-  };
-
-  const svg = (d) => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${d}</svg>`;
-  const HAND_ICON = svg('<path d="M8 13V6a1.5 1.5 0 0 1 3 0v5M11 11V4.5a1.5 1.5 0 0 1 3 0V11M14 11V6a1.5 1.5 0 0 1 3 0v7c0 4-2.5 7-6 7-2.5 0-4-1.5-5.5-4l-2-3.5a1.5 1.5 0 0 1 2.5-1.5L8 13"></path>');
-
-  function escapeHtml(value){
-    return String(value ?? "").replace(/[&<>"']/g, (ch) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-  }
-
-  let shortcutSelectionMade = false;
+  /* ---------- State (shared with site-chrome.js through sessionStorage) ---------- */
+  const SEL_KEY = "aitools4kidsShortcutSelection";
   const shortcutIntent = () => location.hash === "#open-tools" ? "tools" : location.hash === "#open-help" ? "stuck" : "";
-  const finderState = { role: "student", zone: "middle", need: "study" };
-
+  const finderState = { role: "student", zone: "", need: "" };
   try {
-    const saved=JSON.parse(sessionStorage.getItem("aitools4kidsShortcutSelection") || "null");
-    if(saved && ["student","guardian","teacher","university"].includes(saved.role) && ["primary","middle","high","epal","preschool","special"].includes(saved.zone)){
-      finderState.role=saved.role; finderState.zone=saved.zone; shortcutSelectionMade=true;
+    const saved = JSON.parse(sessionStorage.getItem(SEL_KEY) || "null");
+    if(saved){
+      if(["student","guardian"].includes(saved.role)) finderState.role = saved.role;
+      if(["primary","middle","high","epal","preschool","special"].includes(saved.zone)) finderState.zone = saved.zone;
+      if(TASKS.includes(saved.need) || saved.need === "pdf") finderState.need = saved.need === "pdf" ? "study" : saved.need;
     }
   } catch {}
+  function saveState(){
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(SEL_KEY) || "null") || {};
+      sessionStorage.setItem(SEL_KEY, JSON.stringify(Object.assign(saved, { role: finderState.role, zone: finderState.zone, need: finderState.need })));
+    } catch {}
+  }
+  const currentNeed = () => shortcutIntent() || finderState.need;
 
-  const DIRECT_ROLES = { teacher: "/teacher-assistant.html", university: "/higher-education-pilot.html" };
-
-  function finderHref(){
+  /* ---------- Routing contract ---------- */
+  function finderHref(needOverride){
     const { role, zone } = finderState;
-    const need = shortcutIntent() || finderState.need;
-    if(DIRECT_ROLES[role]) return DIRECT_ROLES[role];
+    const need = needOverride || currentNeed();
+    if(need === "teacher") return "/teacher-assistant.html";
     if(zone === "preschool") return "/preschool";
     if(zone === "special") return "/special-education.html";
     if(need === "organize") return "/organosi-meletis-ai.html";
+    if(!zone){
+      if(need === "pdf") return "/study.html#studyNotes";
+      return { study: "/study.html", practice: "/practice.html", stuck: "/tools/ai-help.html", tools: "/tools/" }[need] || "/study.html";
+    }
     if(need === "study" || need === "pdf") return `/study.html?zone=${zone === "epal" ? "high" : zone}${zone === "epal" ? "&schoolType=epal" : ""}${need === "pdf" ? "#studyNotes" : ""}`;
     if(zone === "epal") return `/high/${role === "guardian" ? "guardian" : "student"}/${need === "tools" ? "tools" : "tutor"}?schoolType=epal`;
     if(need === "practice") return `/${zone}/guardian/quiz`;
@@ -268,206 +256,226 @@
   }
 
   function finderCta(c){
-    const { zone, need } = finderState;
-    if(finderState.role === "teacher") return c.ctaTeacher;
-    if(finderState.role === "university") return c.ctaUniversity;
+    const { zone } = finderState;
+    const need = currentNeed();
+    if(need === "teacher") return c.cta.teacher;
     if(zone === "preschool") return c.ctaPreschool;
     if(zone === "special") return need === "practice" ? c.ctaSpecialPractice : c.ctaSpecial;
-    if(need === "pdf") return isEnglish() ? "Study your PDF or notes" : "Μελέτησε το PDF ή τις σημειώσεις σου";
-    if(need === "organize") return isEnglish() ? "Break it into small steps" : "Σπάσε το διάβασμα σε μικρά βήματα";
-    if(need === "study") return c.ctaStudy;
-    if(zone === "epal") return isEnglish() ? "Open EPAL subject help" : "Άνοιξε βοήθεια για τα μαθήματα ΕΠΑΛ";
-    if(zone === "high" && need === "practice") return `${c.ctaPractice} ${c.mapGel}`;
-    const label = c.zones[zone][0];
-    const lead = need === "practice" ? c.ctaPractice : need === "stuck" ? c.ctaStuck : c.ctaTools;
-    return `${lead} ${label}`;
-  }
-
-  function finderNote(c){
-    const { role, zone } = finderState;
-    if(role === "teacher") return c.noteTeacher;
-    if(role === "university") return c.noteUniversity;
-    if(zone === "preschool") return c.notePreschool;
-    if(zone === "special") return c.noteSpecial;
-    if(zone === "primary" && role === "student") return c.notePrimaryStudent;
-    if(zone === "middle" && role === "student") return "";
-    if(zone === "high" || zone === "epal") return c.noteHigh;
-    return "";
+    if(need === "organize") return c.cta.organize;
+    if(zone === "epal" && need !== "study" && need !== "practice" && need !== "tools") return c.ctaEpalHelp;
+    if(zone === "high" && need === "practice") return c.ctaPracticeGel;
+    const base = c.cta[need] || c.cta.study;
+    return zone ? `${base} · ${c.zones[zone][0]}` : base;
   }
 
   function practiceTrigger(){
-    const { role, zone, need } = finderState;
-    if(DIRECT_ROLES[role] || need !== "practice") return "";
+    const { zone } = finderState;
+    if(currentNeed() !== "practice") return "";
     return zone === "special" ? " data-special-education-diagnostic" : zone === "epal" ? " data-epal-practice-map" : "";
   }
 
-  function practiceExtra(c){
-    const { role, zone, need } = finderState;
-    if(DIRECT_ROLES[role] || need !== "practice" || zone === "preschool" || zone === "special") return "";
-    const exact = `<a class="home-v9-finder__extra" href="/study.html?zone=${zone === "epal" ? "high" : zone}&mode=practice${zone === "epal" ? "&schoolType=epal" : ""}">${isEnglish() ? "Know your unit? Practise that unit →" : "Ξέρεις την ενότητα; Κάνε εξάσκηση σε αυτή →"}</a>`;
-    const epal = zone === "high" ? `<a class="home-v9-finder__extra" href="/high/student/tutor?schoolType=epal" data-epal-practice-map>${escapeHtml(`${c.ctaPractice} ${c.mapEpal}`)} <span aria-hidden="true">→</span></a>` : "";
-    return exact + epal;
+  function stepExtras(c){
+    const { zone } = finderState;
+    const need = currentNeed();
+    const out = [];
+    if(need === "practice" && zone && zone !== "preschool" && zone !== "special"){
+      out.push(`<a class="home-v9-finder__extra" href="/study.html?zone=${zone === "epal" ? "high" : zone}&mode=practice${zone === "epal" ? "&schoolType=epal" : ""}">${escapeHtml(c.knownUnit)}</a>`);
+      if(zone === "high") out.push(`<a class="home-v9-finder__extra" href="/high/student/tutor?schoolType=epal" data-epal-practice-map>${escapeHtml(c.ctaPracticeEpal)} <span aria-hidden="true">→</span></a>`);
+    }
+    if(need === "tools" && zone) out.push(`<a class="home-v9-finder__extra" href="/tools/">${escapeHtml(c.allTools)}</a>`);
+    return out.join("");
   }
 
-  function chip(kind, value, label, pressed, extra){
-    return `<button type="button" class="home-v9-chip" data-finder-${kind}="${value}" aria-pressed="${pressed ? "true" : "false"}">${extra || ""}<span>${escapeHtml(label)}</span></button>`;
+  function stepNote(c){
+    const { zone } = finderState;
+    const need = currentNeed();
+    if(zone === "preschool") return c.notePreschool;
+    if(zone === "special") return c.noteSpecial;
+    if(zone === "primary" && need === "stuck") return c.notePrimary;
+    return "";
+  }
+
+  /* ---------- Rendering ---------- */
+  function chip(kind, value, label, pressed, small){
+    return `<button type="button" class="home-v9-chip home-v11-chip" data-finder-${kind}="${value}" aria-pressed="${pressed ? "true" : "false"}"><span>${escapeHtml(label)}</span>${small ? `<small>${escapeHtml(small)}</small>` : ""}</button>`;
+  }
+
+  function stepMarkup(c){
+    const need = currentNeed();
+    if(!need) return "";
+    const tone = TONE[need];
+    const explain = `<p class="home-v11-step__explain">${escapeHtml(c.explain[need])}</p>`;
+    const official = need === "study" ? `<p class="home-v11-step__official">${escapeHtml(c.studyOfficial)}</p>` : "";
+    let body = "";
+    if(need === "teacher"){
+      body = `<p class="home-v11-step__label">${escapeHtml(c.teacherLabel)}</p>
+        <div class="home-v11-step__links">${c.teacherTasks.map(([id,label]) => `<a href="/teacher-assistant.html?task=${id}#builder">${escapeHtml(label)}</a>`).join("")}</div>`;
+    }else if(LEVEL_TASKS.includes(need)){
+      const zones = Object.entries(c.zones).map(([id,[label,age]]) => chip("zone", id, label, finderState.zone === id, age)).join("");
+      body = `<div class="home-v9-finder__step home-v11-step__group" role="group" aria-labelledby="homeV11LevelLabel">
+          <p class="home-v11-step__label" id="homeV11LevelLabel">${escapeHtml(c.levelLabel)} <small>(${escapeHtml(c.levelOptional)})</small></p>
+          <div class="home-v9-finder__chips">${zones}</div>
+        </div>`;
+      // Ask "who will use it?" only where it changes the destination.
+      const roleMatters = (need === "tools" && ["primary","middle","high","epal"].includes(finderState.zone)) ||
+        (need === "stuck" && ["middle","high","epal"].includes(finderState.zone));
+      if(roleMatters){
+        const roles = Object.entries(c.roles).map(([id,label]) => chip("role", id, label, finderState.role === id)).join("");
+        body += `<div class="home-v9-finder__step home-v11-step__group" role="group" aria-labelledby="homeV11RoleLabel">
+          <p class="home-v11-step__label" id="homeV11RoleLabel">${escapeHtml(c.roleLabel)}</p>
+          <div class="home-v9-finder__chips">${roles}</div>
+        </div>`;
+      }
+    }
+    // Study: go straight to the study goal (same options as inside AI Study), carrying the level.
+    if(need === "study" && finderState.zone !== "special" && finderState.zone !== "preschool"){
+      const z = finderState.zone;
+      const base = z ? `/study.html?zone=${z === "epal" ? "high" : z}${z === "epal" ? "&schoolType=epal" : ""}&` : "/study.html?";
+      const links = c.studyGoals.map(([id,label]) => id === "pdf"
+        ? `<a id="homeV11PdfLink" data-finder-pdf href="${finderHref("pdf")}">${escapeHtml(label)}</a>`
+        : `<a data-study-goal="${id}" href="${base}mode=${id}">${escapeHtml(label)}</a>`).join("");
+      body += `<div class="home-v11-step__group" role="group" aria-labelledby="homeV11GoalLabel">
+          <p class="home-v11-step__label" id="homeV11GoalLabel">${escapeHtml(c.studyGoalsLabel)}</p>
+          <div class="home-v11-step__links">${links}</div>
+        </div>`;
+    }
+    // Help: the three-step promise (attempt → hint → try again) that the old AI Help card showed.
+    const helpSteps = need === "stuck" && finderState.zone !== "special" && finderState.zone !== "preschool"
+      ? `<ol class="home-v11-steps" aria-label="${escapeHtml(c.helpStepsLabel)}">${c.helpSteps.map((t, i) => `<li><span aria-hidden="true">${i + 1}</span>${escapeHtml(t)}</li>`).join("")}</ol>`
+      : "";
+    const note = stepNote(c);
+    return `<div class="home-v11-step ia-tone--${tone}" id="homeV11Step" data-need="${need}">
+      <h3 class="home-v11-step__title" id="homeV11StepTitle" tabindex="-1">${escapeHtml(c.tasks[need][0])}</h3>
+      ${explain}${helpSteps}${official}${body}
+      ${note ? `<p class="home-v9-finder__note home-v11-step__note" aria-live="polite">${escapeHtml(note)}</p>` : ""}
+      <div class="home-v11-step__actions">
+        <a class="home-v9-way__action home-v11-cta" id="homeV9FinderCta" href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>
+        ${stepExtras(c)}
+      </div>
+    </div>`;
   }
 
   function renderFinder(){
     const mount = document.getElementById("homeV9Finder");
     if(!mount) return;
     const c = currentCopy();
-    const roles = Object.entries(c.roles).map(([id,label]) => chip("role", id, label, finderState.role === id)).join("");
-    const zones = Object.entries(c.zones).filter(([id]) => !(id === "preschool" && finderState.role === "student")).map(([id,[label,age]]) => chip("zone", id, label, finderState.zone === id, `<span class="home-v9-chip__dot home-v9-dot--${id}" aria-hidden="true"></span>`) .replace(`<span>${escapeHtml(label)}</span></button>`, `<span>${escapeHtml(label)}</span>${age ? `<small>${age}</small>` : ""}</button>`)).join("");
-    const needs = Object.entries(c.finderNeeds).map(([id,label]) => chip("need", id, label, finderState.need === id)).join("");
-    const note = finderNote(c);
-    const step = (title, chips) => `<div class="home-v9-finder__step" role="group" aria-label="${escapeHtml(title)}"><span class="home-v9-finder__step-title" aria-hidden="true">${title}</span><div class="home-v9-finder__chips">${chips}</div></div>`;
-    const intent = shortcutIntent();
-    const schoolSteps = DIRECT_ROLES[finderState.role] ? "" : step(c.stepZone, zones) + (intent ? "" : step(c.stepNeed, needs));
-    const title = intent ? (intent === "tools" ? (isEnglish() ? "Find tools for your level" : "Εργαλεία για τη βαθμίδα σου") : (isEnglish() ? "Open AI Help" : "Άνοιξε την AI Βοήθεια")) : c.stepsLabel;
+    const need = currentNeed();
+    const tiles = TASKS.map((id) => `
+      <li><button type="button" class="home-v11-task ia-tone--${TONE[id]}" data-finder-need="${id}" aria-pressed="${need === id ? "true" : "false"}" aria-controls="homeV11StepMount">
+        <span class="home-v11-task__icon">${icon(id)}</span>
+        <span class="home-v11-task__copy"><strong>${escapeHtml(c.tasks[id][0])}</strong><small>${escapeHtml(c.tasks[id][1])}</small></span>
+      </button></li>`).join("");
     mount.innerHTML = `
-      <h2 class="home-v9-finder__label" id="homeV8FinderTitle" tabindex="-1">${title}</h2>
-      ${step(c.stepRole, roles)}
-      ${schoolSteps}
-      <p class="home-v9-finder__note" aria-live="polite" hidden>${note ? ICON.shield + `<span>${escapeHtml(note)}</span>` : ""}</p>
-      <a class="home-v9-way__action" style="grid-column:1/-1;justify-self:start" id="homeV9FinderCta" href="${finderHref()}"${practiceTrigger()}>${escapeHtml(finderCta(c))} <span aria-hidden="true">→</span></a>
-      ${practiceExtra(c)}`;
+      <h2 class="home-v11-question" id="homeV8FinderTitle" tabindex="-1">${escapeHtml(c.question)}</h2>
+      <p class="home-v11-question__hint${finderState.zone === "epal" && !need ? " home-v11-question__hint--epal" : ""}">${escapeHtml(finderState.zone === "epal" && !need ? c.epalHint : c.questionHint)}</p>
+      <ul class="home-v11-tasks" aria-labelledby="homeV8FinderTitle">${tiles}</ul>
+      <div id="homeV11StepMount" aria-live="polite">${stepMarkup(c)}</div>`;
   }
 
-  function ensureEntryLinks(){
-    const intro = document.querySelector(".home-v9-intro");
-    const finder = document.getElementById("homeV9Finder");
-    if(!intro || !finder) return;
-    let entry = document.getElementById("homeIntentLinks");
-    if(!entry){ entry=document.createElement("div"); entry.id="homeIntentLinks"; intro.insertBefore(entry,finder); }
-    const en=isEnglish();
-    document.getElementById("homePracticeEntry")?.remove();
-    const quiz=document.getElementById("heroQuizCtaBtn")?.closest(".hero__quiz-cta-wrap");
-    if(quiz){
-      quiz.classList.remove("home-v8-legacy");
-      intro.querySelector(".hero__badges")?.insertAdjacentElement("afterend",quiz);
-      const button=quiz.querySelector("#heroQuizCtaBtn");
-      button.setAttribute("aria-controls","heroQuizPicker");
-      button.setAttribute("aria-expanded",String(!quiz.querySelector("#heroQuizPicker").hidden));
-      quiz.querySelector(".hero__quiz-cta-title").textContent=en ? "Take the quick quizzes · 2 minutes" : "Κάνε τα σύντομα κουίζ · 2 λεπτά";
-      quiz.querySelector(".hero__quiz-cta-sub").textContent=en ? "Find what needs more practice and which tool can help." : "Δες πού χρειάζεσαι λίγη παραπάνω εξάσκηση και ποιο εργαλείο θα βοηθήσει.";
-      if(!button.dataset.quizDisclosureBound){button.dataset.quizDisclosureBound="1";button.addEventListener("click",()=>queueMicrotask(()=>button.setAttribute("aria-expanded",String(!quiz.querySelector("#heroQuizPicker").hidden))));}
-    }
-    entry.remove();
-  }
-
-  const wayChips = (items, href) => items.map(([id,icon,label]) => `<a href="${href(id)}"><span aria-hidden="true">${icon}</span> ${escapeHtml(label)}</a>`).join("");
-
-  function helpersMarkup(){
+  function ensureHeroCopy(){
     const c = currentCopy();
-    return `
-      <div class="home-v8-helpers">
-        <h2 class="home-v9-visually-hidden" id="homeV9WaysTitle">${c.waysTitle}</h2>
-        <div class="home-v9-ways">
-          <section class="home-v8-ai" aria-labelledby="homeV8AiTitle">
-            <span class="home-v9-way__icon" aria-hidden="true">${ICON.chat}</span>
-            <div class="home-v8-ai__badges"><span>${c.aiBadgeFree}</span></div>
-            <h3 id="homeV8AiTitle"><a href="/tools/ai-help.html">${c.aiTitle}</a></h3>
-            <p class="home-v8-helper-desc">${c.aiDesc}</p>
-            <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
-              <summary>${c.aiTechSummary}</summary>
-              <p>${c.aiTechText} <a href="/ai-transparency.html">${c.aiTechLink}</a></p>
-            </details>
-            <p class="home-v9-way__links-label">${c.aiLinksLabel}</p>
-            <div class="home-v8-helper-links home-v8-ai__links">
-              <a href="/primary/guardian/tutor">${c.aiPrimary}</a>
-              <a href="/middle/guardian/tutor">${c.aiMiddle}</a>
-              <a href="/high/student/tutor">${c.aiHigh}</a>
-              <a href="/special-education.html">${c.aiSpecial}</a>
-            </div>
-            <ol aria-label="${isEnglish() ? "How AI Help works" : "Πώς λειτουργεί η AI Βοήθεια"}" style="display:flex;gap:12px;list-style:none;padding:20px 0 0;margin:auto 0 0;border-top:1px solid #d7e4ee">
-              ${(isEnglish() ? [["💬","Show your attempt"],["💡","Get a hint"],["✍️","Try again"]] : [["💬","Δείξε την προσπάθειά σου"],["💡","Πάρε μια υπόδειξη"],["✍️","Δοκίμασε ξανά"]]).map(([icon,label]) => `<li style="flex:1;min-width:0;font-size:13px;line-height:1.5"><span aria-hidden="true" style="display:block;font-size:24px;margin-bottom:8px">${icon}</span>${label}</li>`).join("")}
-            </ol>
-          </section>
-
-          <section class="home-v9-study-way" id="homeV9Study" aria-labelledby="homeV9StudyTitle">
-            <span class="home-v9-way__icon" aria-hidden="true">${ICON.book}</span>
-            <div class="home-v8-ai__badges"><span>${c.studyBadge}</span></div>
-            <h3 id="homeV9StudyTitle">${c.studyTitle}</h3>
-            <p class="home-v8-helper-desc">${c.studyDesc}</p>
-            <p class="home-v9-study-way__official"><strong>${c.studyOfficial}</strong><small>${c.studyCoverage}</small></p>
-            <p class="home-v9-way__links-label">${c.studyGoalsLabel}</p>
-            <div class="home-v8-helper-links">${wayChips(c.studyGoals, (id) => id === "pdf" ? "/study.html#studyNotes" : `/study.html?mode=${id}`)}</div>
-            <a class="home-v9-way__action" href="/study.html">${c.studyCta}</a>
-          </section>
-
-          <section class="home-v9-teacher-way" id="homeV9Teacher" aria-labelledby="homeV9TeacherTitle">
-            <span class="home-v9-way__icon" aria-hidden="true">${ICON.teacher}</span>
-            <p class="home-v9-way__eyebrow">${c.teacherWayEyebrow}</p>
-            <h3 id="homeV9TeacherTitle">${c.teacherWayTitle}</h3>
-            <p class="home-v8-helper-desc">${c.teacherWayDesc}</p>
-            <p class="home-v9-way__links-label">${c.teacherTasksLabel}</p>
-            <div class="home-v8-helper-links">${wayChips(c.teacherTasks, (id) => `/teacher-assistant.html?task=${id}#builder`)}</div>
-            <a class="home-v9-way__action" href="/teacher-assistant.html">${c.teacherWayCta}</a>
-          </section>
-        </div>
-      </div>`;
+    const title = document.querySelector("#zoneSelectView .hero__title[data-i18n='heroTitle']");
+    const subtitle = document.querySelector("#zoneSelectView .hero__subtitle[data-i18n='heroSubtitle']");
+    if(title && !isEnglish()) title.textContent = "Μαθαίνω Έξυπνα με AI";
+    if(subtitle) subtitle.textContent = c.subtitle;
   }
 
-  function charactersMarkup(){
+  function ensureIdentity(){
+    const badges = document.querySelector("#zoneSelectView .hero__badges");
+    if(!badges) return;
+    badges.classList.add("home-v11-identity");
+    const en = isEnglish();
+    const set = (sel, el, enText) => { const node = badges.querySelector(sel); if(node && node.textContent !== (en ? enText : el)) node.textContent = en ? enText : el; };
+    set(".badge--free", "Δωρεάν", "Free");
+    set('[data-i18n="badgeIndependent"]', "Ανεξάρτητο", "Independent");
+    set('[data-i18n="badgeBilingual"]', "Ελληνικά / English", "Ελληνικά / English");
+    set('summary[data-i18n="badgeZeroTracking"]', "Χωρίς cookies", "No cookies");
+    document.getElementById("homeEngBadge")?.remove();
+  }
+
+  function hideLegacyHomeBlocks(){
+    [
+      "#zoneSelectView .hero__learning-loop", "#zoneSelectView .hero__map-pair", "#zoneSelectView .hero__quiz-cta-wrap",
+      "#zoneSelectView .hero__ai-help", "#homeAiLearningModes", "#zoneSelectView > .section-heading",
+      "#zoneSelectView > .section-subheading", "#zoneGrid", "#homeVideoNew", "#homeV9Principle"
+    ].forEach((sel) => document.querySelector(sel)?.classList.add("home-v8-legacy"));
+    suppressLegacyInjectedBlocks();
+  }
+  function suppressLegacyInjectedBlocks(){
+    ["pwaMobileLauncher", "curriculumMapFeature", "signLanguageFeature", "specialEducationHomeFeature", "homeAllToolsShortcut"]
+      .forEach((id) => document.getElementById(id)?.classList.add("home-v8-legacy"));
+  }
+
+  function card(id, key, title, desc, href, extraClass){
+    return `<li><a class="home-v11-card ${extraClass || ""}" ${id ? `id="${id}"` : ""} href="${href}">
+      <span class="home-v11-card__icon">${icon(key)}</span>
+      <span class="home-v11-card__copy"><strong>${escapeHtml(title)}</strong><small>${escapeHtml(desc)}</small></span>
+      <span class="home-v11-card__arrow" aria-hidden="true">→</span></a></li>`;
+  }
+
+  function pathsMarkup(){
     const c = currentCopy();
-    const characterRoute = "/history-characters.html";
-    return `
-      <ul class="home-v9-tile__faces" aria-hidden="true">
-        ${c.chars.map(([file]) => `<li><img src="/assets/characters/${file}.png" alt="" width="56" height="56" decoding="async"></li>`).join("")}
-      </ul>
-      <h3 id="homeV9CharactersTitle">${c.charTile}</h3>
-      <p>${c.charTileDesc}</p>
-      <a class="home-v9-tile__cta" href="${characterRoute}">${c.charCta}</a>`;
+    const p = c.paths;
+    return `<h2 class="home-v11-h2" id="homeV11PathsTitle">${escapeHtml(c.pathsTitle)}</h2>
+      <ul class="home-v11-cards">
+        ${card("", "parents", p.parents[0], p.parents[1], "/ai-gia-goneis.html")}
+        ${card("", "preschool", p.preschool[0], p.preschool[1], "/preschool")}
+        ${card("homeV11Epal", "epal", p.epal[0], p.epal[1], "/#epal")}
+        ${card("homeV11Special", "special", p.special[0], p.special[1], "/special-education.html")}
+        <li id="homeV11EngSlot"></li>
+        ${card("", "university", p.university[0], p.university[1], "/higher-education-pilot.html")}
+      </ul>`;
   }
 
-  function ensureMoreTile(id, icon, title, desc, href, cta){
-    let tile=document.getElementById(id);
-    if(!tile){
-      tile=document.createElement("section");
-      tile.id=id;
-      tile.className="home-v9-tile";
-    }
-    tile.innerHTML=`
-      <span class="home-v9-way__icon" aria-hidden="true">${icon}</span>
-      <h3>${title}</h3>
-      <p>${desc}</p>
-      <a class="home-v9-tile__cta" href="${href}">${cta}</a>`;
-    return tile;
+  function ensureEngSection(slot, detached){
+    let box = document.getElementById("homeV8Eng") || detached;
+    if(!box) return;
+    const c = currentCopy();
+    box.className = "home-v8-eng home-v11-eng";
+    box.innerHTML = `<a class="home-v11-card" href="/sign-language.html">
+        <span class="home-v11-card__icon">${icon("gsl")}</span>
+        <span class="home-v11-card__copy"><strong id="homeV8EngTitle">${escapeHtml(c.engTitle)}</strong><small>${escapeHtml(c.engDesc)}</small></span>
+        <span class="home-v11-card__link">${escapeHtml(c.engLink)}</span></a>`;
+    if(slot && box.parentElement !== slot) slot.appendChild(box);
   }
 
-  function ensureMoreSection(characters){
-    let more = document.getElementById("homeV9More");
-    if(!more){
-      more = document.createElement("section");
-      more.id = "homeV9More";
-      more.className = "home-v9-more";
-      more.setAttribute("aria-labelledby", "homeV9MoreTitle");
-      more.innerHTML = `<h2 id="homeV9MoreTitle"></h2><div class="home-v9-more__grid"></div>`;
-    }
-    const c=currentCopy();
-    more.querySelector("#homeV9MoreTitle").textContent = c.moreTitle;
-    const grid = more.querySelector(".home-v9-more__grid");
-    characters.classList.add("home-v9-tile");
-    const toolsTile=ensureMoreTile("homeV9AllTools", ICON.chat, c.toolsTileTitle, c.toolsTileDesc, "/tools/", c.toolsTileCta);
-    const curriculumTile=ensureMoreTile("homeV9CurriculumTile", ICON.map, c.curriculumCardTitle, c.curriculumCardDesc, "/xartis-ylis.html", c.curriculumCardCta);
-    const en=isEnglish();
-    const playTile=ensureMoreTile("homeV9Play", "🎮", en?"Play & Learn":"Παίξε & Μάθε", en?"Short learning missions in a world you explore.":"Μικρές αποστολές μάθησης μέσα σε έναν κόσμο που εξερευνάς.", "/play/", en?"See the educational games →":"Δες τα εκπαιδευτικά παιχνίδια →");
-    const tiles = [toolsTile, curriculumTile, characters, playTile, document.getElementById("homeV8Eng")].filter(Boolean);
-    const current = [...grid.children];
-    if(current.length !== tiles.length || current.some((el, i) => el !== tiles[i])) tiles.forEach((el) => grid.appendChild(el));
-    return more;
+  function moreMarkup(){
+    const c = currentCopy();
+    const m = c.more;
+    const faces = [["socrates"],["pericles"],["greek-revolution-1821"]].map(([f]) => `<img src="/assets/characters/${f}.png" alt="" width="28" height="28" decoding="async">`).join("");
+    const tile = (id, key, data, href, lead) => `<li><a class="home-v11-tile" id="${id}" href="${href}">
+        ${lead || `<span class="home-v11-tile__icon">${icon(key)}</span>`}
+        <strong>${escapeHtml(data[0])}</strong><small>${escapeHtml(data[1])}</small><span class="home-v9-tile__cta">${escapeHtml(data[2])}</span></a></li>`;
+    return `<h2 class="home-v11-h2" id="homeV9MoreTitle">${escapeHtml(c.moreTitle)}</h2>
+      <ul class="home-v9-more__grid home-v11-tiles">
+        ${tile("homeV9CurriculumTile", "curriculum", m.curriculum, "/xartis-ylis.html")}
+        ${tile("homeV9Characters", "characters", m.characters, "/history-characters.html", `<span class="home-v11-tile__faces" aria-hidden="true">${faces}</span>`)}
+        ${tile("homeV9Play", "play", m.play, "/play/")}
+        ${tile("homeV9Video", "video", m.video, "/teacher-assistant.html?task=video#builder", `<span class="home-v11-tile__icon"><svg class="ia-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3z"/></svg></span>`)}
+      </ul>`;
   }
 
-  function ensureSection(id, className, labelledBy, markup){
+  function trustMarkup(){
+    const c = currentCopy();
+    return `<h2 class="home-v9-visually-hidden">${escapeHtml(c.trustTitle)}</h2>
+      <details class="home-v8-ai__tech" id="homeV8AiTechDetails">
+        <summary>${escapeHtml(c.aiTechSummary)}</summary>
+        <p>${escapeHtml(c.aiTechText)} <a href="/ai-transparency.html">${escapeHtml(c.aiTechLink)}</a></p>
+      </details>`;
+  }
+
+  function ensureSection(parent, id, className, labelledBy, markup){
     let el = document.getElementById(id);
     if(!el){
       el = document.createElement("section");
       el.id = id;
       el.className = className;
-      el.setAttribute("aria-labelledby", labelledBy);
+      if(labelledBy) el.setAttribute("aria-labelledby", labelledBy);
     }
+    const keepOpen = el.querySelector("details[open]")?.id;
     el.innerHTML = markup;
+    if(keepOpen) el.querySelector("#" + keepOpen)?.setAttribute("open", "");
+    if(el.parentElement !== parent) parent.appendChild(el);
     return el;
   }
 
@@ -480,73 +488,47 @@
   function ensureMainShell(){
     const hero = document.querySelector("#zoneSelectView .hero");
     if(!hero) return null;
-
     let shell = document.getElementById("homeV8Shell");
     if(!shell){
       shell = document.createElement("div");
       shell.id = "homeV8Shell";
-      shell.className = "home-v8-shell";
-      const anchor = document.getElementById("homeV9Top") || hero.querySelector(".hero__badges");
+      shell.className = "home-v8-shell home-v11-shell";
+      const anchor = document.getElementById("homeV9Top");
       if(anchor) anchor.insertAdjacentElement("afterend", shell);
       else hero.appendChild(shell);
     }
-
-    let helpers = document.getElementById("homeV8HelpersMount");
-    if(!helpers){
-      helpers = document.createElement("div");
-      helpers.id = "homeV8HelpersMount";
-    }
-    helpers.innerHTML = helpersMarkup();
-
-    document.getElementById("homeCurriculumStrip")?.remove();
-
-    const characters = ensureSection("homeV9Characters", "home-v9-characters", "homeV9CharactersTitle", charactersMarkup());
-    const more = ensureMoreSection(characters);
-    const order = [helpers, more];
-    const current = [...shell.children].filter((el) => order.includes(el));
-    if(current.length !== order.length || current.some((el, i) => el !== order[i])){
-      order.forEach((el) => shell.appendChild(el));
-    }
-
-    ["homeV8Needs", "homeV8FinderTitle", "homeV9ZonesLead"].forEach((id) => {
-      const el = document.getElementById(id);
-      if(el && el.closest("#homeV8Shell")) el.remove();
-    });
-    ["zoneGrid", "homeVideoNew", "homeV9Principle"].forEach((id) => document.getElementById(id)?.classList.add("home-v8-legacy"));
-
+    ["homeV8HelpersMount", "homeV8Needs", "homeCurriculumStrip", "homeV9ZonesLead"].forEach((id) => document.getElementById(id)?.remove());
+    // Keep the crawlable GSL node alive: detach it before the pathways markup is rebuilt.
+    const eng = document.getElementById("homeV8Eng");
+    if(eng && eng.closest("#homeV11Paths")) eng.remove();
+    const paths = ensureSection(shell, "homeV11Paths", "home-v11-section home-v11-paths", "homeV11PathsTitle", pathsMarkup());
+    ensureEngSection(paths.querySelector("#homeV11EngSlot"), eng);
+    ensureSection(shell, "homeV9More", "home-v11-section home-v9-more home-v11-more", "homeV9MoreTitle", moreMarkup());
+    const trust = ensureSection(shell, "homeV11Trust", "home-v11-trust", "", trustMarkup());
+    const notGuide = document.querySelector("#zoneSelectView .not-guide-box");
+    if(notGuide && notGuide.parentElement !== trust) trust.insertBefore(notGuide, trust.firstChild.nextSibling);
     return shell;
   }
 
-  function ensureEngSection(){
-    const zoneSection = document.getElementById("zoneSelectView");
-    if(!zoneSection) return;
-    const notGuide = zoneSection.querySelector(".not-guide-box");
-    let box = document.getElementById("homeV8Eng");
-    if(!box){
-      box = document.createElement("section");
-      box.id = "homeV8Eng";
-      box.className = "home-v8-eng";
-      if(notGuide) notGuide.insertAdjacentElement("beforebegin", box);
-      else zoneSection.appendChild(box);
-    }
-    const c = currentCopy();
-    box.innerHTML = `
-      <div class="home-v8-eng__copy">
-        <span class="home-v8-eng__icon" aria-hidden="true">${HAND_ICON}</span>
-        <div>
-          <h2 id="homeV8EngTitle">${c.engTitle}</h2>
-          <p>${c.engDesc}</p>
-        </div>
-      </div>
-      <a href="/sign-language.html">${c.engLink}</a>`;
-
-    document.getElementById("homeV8Curriculum")?.remove();
+  function apply(){
+    if(!isHome()) return;
+    document.documentElement.classList.add("home-v8-active", "home-v11");
+    const styleLink = ensureStyles();
+    hideLegacyHomeBlocks();
+    ensureHeroCopy();
+    ensureIdentity();
+    renderFinder();
+    ensureMainShell();
+    suppressLegacyInjectedBlocks();
+    revealHomepage(styleLink);
   }
+
+  window.AITOOLSKIDS_REFRESH_HOME = apply;
+  window.AITOOLSKIDS_HOME_FINDER = { state: finderState, href: finderHref };
 
   function isSpaRoute(pathname){
     return /^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)\/?$/.test(pathname);
   }
-
   function openSpaRoute(link){
     const url = new URL(link.href, location.origin);
     if(url.origin !== location.origin || !isSpaRoute(url.pathname)) return false;
@@ -556,36 +538,41 @@
     return true;
   }
 
-  function apply(){
-    if(!isHome()) return;
-    document.documentElement.classList.add("home-v8-active");
-    const styleLink = ensureStyles();
-    hideLegacyHomeBlocks();
-    ensureHeroCopy();
-    ensureAccessibilityBadge();
-    renderFinder();
-    ensureEntryLinks();
-    ensureEngSection();
-    ensureMainShell();
-    document.getElementById("homeV8FooterExtra")?.remove();
-    suppressLegacyInjectedBlocks();
-    revealHomepage(styleLink);
+  function revealStep(){
+    const step = document.getElementById("homeV11Step");
+    if(!step) return;
+    const rect = step.getBoundingClientRect();
+    if(rect.top < 0 || rect.top > window.innerHeight - 120){
+      step.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    }
   }
 
-  window.AITOOLSKIDS_REFRESH_HOME=apply;
+  // "EPAL students" pathway: preselect EPAL and let the student choose the task
+  // (AI tools, study, practice, help). Every task then uses the existing EPAL routes.
+  function selectEpal(){
+    finderState.zone = "epal";
+    finderState.role = "student";
+    finderState.need = "";
+    saveState();
+    renderFinder();
+    document.getElementById("homeV8FinderTitle")?.focus({preventScroll:true});
+    document.getElementById("homeV9Finder")?.scrollIntoView({block:"start", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+  }
 
   function applyHashIntent(){
     if(!isHome()) return;
-    if(location.hash === "#open-help" || location.hash === "#homeV8AiTitle"){location.replace("/tools/ai-help.html");return;}
+    if(location.hash === "#open-help" || location.hash === "#homeV8AiTitle"){ location.replace("/tools/ai-help.html"); return; }
+    if(["#open-quiz", "#homeV8MapTitle"].includes(location.hash)){ location.replace("/practice.html"); return; }
+    if(location.hash === "#epal"){ selectEpal(); return; }
     const intent = shortcutIntent();
     if(intent){
       finderState.need = intent;
       renderFinder();
+    }
+    if(intent || location.hash === "#tasks"){
       document.getElementById("homeV8FinderTitle")?.focus({preventScroll:true});
       document.getElementById("homeV9Finder")?.scrollIntoView({block:"start"});
-      return;
     }
-    if(["#open-quiz", "#homeV8MapTitle"].includes(location.hash)) location.replace("/practice.html");
   }
 
   function init(){
@@ -599,38 +586,46 @@
 
       const finderChip = target.closest("#homeV9Finder [data-finder-role], #homeV9Finder [data-finder-zone], #homeV9Finder [data-finder-need]");
       if(finderChip){
-        if(finderChip.dataset.finderRole || finderChip.dataset.finderZone) shortcutSelectionMade = true;
-        if(finderChip.dataset.finderRole) finderState.role = finderChip.dataset.finderRole;
-        if(finderState.role === "student" && finderState.zone === "preschool") finderState.zone = "primary";
-        if(finderChip.dataset.finderZone) finderState.zone = finderChip.dataset.finderZone;
-        if(finderChip.dataset.finderNeed) finderState.need = finderChip.dataset.finderNeed;
-        if(shortcutSelectionMade){try {sessionStorage.setItem("aitools4kidsShortcutSelection",JSON.stringify({role:finderState.role,zone:finderState.zone}));} catch {}}
-        const kind = finderChip.dataset.finderRole ? "role" : finderChip.dataset.finderZone ? "zone" : "need";
+        const d = finderChip.dataset;
+        let kind = "need";
+        if(d.finderNeed){
+          finderState.need = d.finderNeed;
+          if(shortcutIntent()) history.replaceState(history.state, "", location.pathname + location.search);
+        }
+        if(d.finderZone){ kind = "zone"; finderState.zone = finderState.zone === d.finderZone ? "" : d.finderZone; }
+        if(d.finderRole){ kind = "role"; finderState.role = d.finderRole; }
+        saveState();
         renderFinder();
-        document.querySelector(`#homeV9Finder [data-finder-${kind}="${finderState[kind]}"]`)?.focus();
+        const value = kind === "zone" ? d.finderZone : finderState[kind];
+        document.querySelector(`#homeV9Finder [data-finder-${kind}="${value}"]`)?.focus({preventScroll:true});
+        if(kind === "need") revealStep();
+        return;
+      }
+
+      if(target.closest('#homeV11Epal, a[href="/#epal"]') && isHome() && !event.ctrlKey && !event.metaKey && !event.shiftKey && event.button === 0){
+        event.preventDefault();
+        selectEpal();
         return;
       }
 
       const spaLink = target.closest("#homeV8Shell a[href], #homeV9Top a[href]");
-      if(spaLink && !spaLink.hasAttribute("data-epal-practice-map") && !event.defaultPrevented && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0 && isHome() && openSpaRoute(spaLink)){
+      if(spaLink && !spaLink.hasAttribute("data-epal-practice-map") && !spaLink.hasAttribute("data-special-education-diagnostic") && !event.defaultPrevented && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey && event.button === 0 && isHome() && openSpaRoute(spaLink)){
         event.preventDefault();
         return;
       }
 
       if(target.closest("#langEl,#langEn,#backToZones")){
-        setTimeout(() => {
-          if(isHome()) apply();
-        }, 0);
+        setTimeout(() => { if(isHome()) apply(); }, 0);
       }
     });
 
-    window.addEventListener("pageshow", event => {if(event.persisted && isHome()) apply();});
+    window.addEventListener("pageshow", (event) => { if(event.persisted && isHome()) apply(); });
 
     window.addEventListener("popstate", () => {
       setTimeout(() => {
         if(!isHome()) return;
-        const zoneView=document.getElementById("zoneSelectView");
-        const pathView=document.getElementById("pathView");
+        const zoneView = document.getElementById("zoneSelectView");
+        const pathView = document.getElementById("pathView");
         if(zoneView?.hidden && pathView && !pathView.hidden){
           document.getElementById("backToZones")?.click();
         }
@@ -649,13 +644,13 @@
       new MutationObserver(suppressLegacyInjectedBlocks).observe(grid, {childList:true});
     }
 
-    [0, 50, 200, 550, 1200].forEach((ms) => setTimeout(() => {
+    [0, 50, 200, 550, 1200, 2000].forEach((ms) => setTimeout(() => {
+      if(!isHome()) return;
       suppressLegacyInjectedBlocks();
       ensureHeroCopy();
-      ensureAccessibilityBadge();
-      ensureEngSection();
-      ensureMainShell();
+      ensureIdentity();
       placeSearchFirst();
+      if(!document.querySelector("#homeV9Finder .home-v11-task .ia-icon") && window.AITOOLSKIDS_IA) apply();
     }, ms));
   }
 

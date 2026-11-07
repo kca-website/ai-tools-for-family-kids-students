@@ -1,3 +1,4 @@
+import { pickFinder } from './lib/home-finder.mjs';
 import { chromium } from 'playwright';
 import axe from 'axe-core';
 
@@ -148,7 +149,7 @@ try {
   const reports = [];
 
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-  await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready') && document.querySelectorAll('#homeV9Finder [data-finder-role]').length >= 4, null, { timeout: 30000 });
+  await page.waitForFunction(() => document.documentElement.classList.contains('navigator-home-ready') && document.querySelectorAll('#homeV9Finder [data-finder-need]').length >= 6, null, { timeout: 30000 });
   reports.push(['homepage', await scan(page, 'homepage')]);
 
   await page.goto(`${LOCAL}accessibility.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
@@ -157,10 +158,7 @@ try {
 
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   // v10 homepage: school levels open from the "who are you" finder.
-  await page.waitForSelector('#homeV9Finder [data-finder-zone="primary"]');
-  await page.click('#homeV9Finder [data-finder-role="guardian"]');
-  await page.click('#homeV9Finder [data-finder-zone="primary"]');
-  await page.click('#homeV9Finder [data-finder-need="tools"]');
+  await pickFinder(page,{need:'tools',zone:'primary',role:'guardian'});
   await page.click('#homeV9FinderCta');
   await page.waitForSelector('#pathView:not([hidden])');
   await page.waitForTimeout(200);

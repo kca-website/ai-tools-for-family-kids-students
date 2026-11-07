@@ -363,9 +363,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;600;700;800&family=Noto+Serif:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/navigator-home.css" data-navigator-home="1" />
+  <link rel="stylesheet" href="/site-chrome.css" />
   <style id="navigatorHomeFirstPaintGuard">
     html.navigator-home-booting #zoneSelectView{visibility:hidden!important;}
     #homeBootSkeleton{display:none}
+    .heavy-load-status{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:2147483000;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:999px;background:#17202B;color:#FFFFFF;font:700 15px/1.3 Commissioner,system-ui,sans-serif;box-shadow:0 12px 30px -12px rgba(16,24,40,.55)}
+    .heavy-load-status[hidden]{display:none}
+    .heavy-load-status span:last-child{white-space:nowrap}
+    .heavy-load-status__spin{width:18px;height:18px;flex:0 0 18px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#FFFFFF;border-radius:50%;animation:heavyLoadSpin .8s linear infinite}
+    @keyframes heavyLoadSpin{to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion:reduce){.heavy-load-status__spin{animation:none;border-top-color:rgba(255,255,255,.35);border-right-color:#FFFFFF}}
+    a.is-loading,button.is-loading{cursor:progress;opacity:.85}
     #routeBootSkeleton{display:none}
     html.navigator-route-booting body > :not(#routeBootSkeleton):not(noscript){visibility:hidden!important}
     html.navigator-route-booting #routeBootSkeleton{
@@ -432,7 +440,7 @@
   <a class="skip-link" href="#mainContent" data-i18n="skipToContent">Μετάβαση στο περιεχόμενο</a>
   <header class="site-header">
     <div class="site-header__inner">
-      <a class="site-title" href="https://www.aitools4kids.gr/">
+      <a class="site-title" href="/">
         <span class="site-title__mark" aria-hidden="true">ai</span>
         <span id="siteTitleText">aitools4kids.gr</span>
       </a>
@@ -659,7 +667,7 @@
     <!-- ΒΗΜΑ 2: Ζώνη επιλεγμένη -> επιλογή ρόλου + λίστα εργαλείων -->
     <section id="pathView" hidden>
       <p class="breadcrumb">
-        <button type="button" id="backToZones" data-i18n="backToZones">Πίσω σε όλες τις ζώνες</button>
+        <button type="button" id="backToZones" data-i18n="backToZones">← Πίσω στην αρχική</button>
       </p>
 
       <h2 class="section-heading" id="pathZoneHeading"></h2>
@@ -672,8 +680,8 @@
 
       <div class="view-tabs" id="viewTabs" role="group" aria-label="Επιλογές προβολής">
         <button type="button" class="view-tab active" id="viewTabTools" data-view="tools" data-i18n="viewTabTools">Εργαλεία</button>
-        <button type="button" class="view-tab" id="viewTabAdvanced" data-view="advanced" data-i18n="viewTabAdvanced">Προχωρημένα</button>
-        <button type="button" class="view-tab" id="viewTabPrompts" data-view="prompts" data-i18n="viewTabPrompts">Prompt Generator</button>
+        <button type="button" class="view-tab" id="viewTabAdvanced" data-view="advanced" data-i18n="viewTabAdvanced">Περισσότερα εργαλεία</button>
+        <button type="button" class="view-tab" id="viewTabPrompts" data-view="prompts" data-i18n="viewTabPrompts">Έτοιμες ερωτήσεις</button>
         <button type="button" class="view-tab" id="viewTabQuiz" data-view="quiz" data-i18n="viewTabQuiz">Χάρτης Εξάσκησης</button>
         <button type="button" class="view-tab" id="viewTabTutor" data-view="tutor" data-i18n="viewTabTutor">🤖 AI Βοήθεια</button>
         <button type="button" class="view-tab" id="viewTabGuide" data-view="guide" data-i18n="viewTabGuide">Οδηγός</button>
@@ -859,7 +867,14 @@
         var t=e.target&&e.target.closest?e.target.closest("a[href^='/primary'],a[href^='/middle'],a[href^='/high'],a[href='#'],.zone-card,#zoneGrid button,#homeV9Finder a"):null;
         if(!t||t.closest("#langEl,#langEn")) return;
         e.preventDefault(); e.stopImmediatePropagation();
-        load().then(function(){ replaying=true; try{ t.click(); } finally{ replaying=false; } });
+        /* Tell the visitor that the click worked: a polite status pill until the data is ready. */
+        var en=(document.documentElement.lang||"el").toLowerCase().indexOf("en")===0;
+        var pill=document.getElementById("heavyLoadStatus");
+        if(!pill){ pill=document.createElement("div"); pill.id="heavyLoadStatus"; pill.className="heavy-load-status"; pill.setAttribute("role","status"); pill.setAttribute("aria-live","polite"); document.body.appendChild(pill); }
+        pill.innerHTML='<span class="heavy-load-status__spin" aria-hidden="true"></span><span>'+(en?"Loading your level…":"Φορτώνει τη βαθμίδα σου…")+'</span>';
+        pill.hidden=false; t.setAttribute("aria-busy","true"); t.classList.add("is-loading");
+        var clear=function(){ pill.hidden=true; t.removeAttribute("aria-busy"); t.classList.remove("is-loading"); };
+        load().then(function(){ clear(); replaying=true; try{ t.click(); } finally{ replaying=false; } }, clear);
       },true);
     })();
   </script>
@@ -869,6 +884,7 @@
   <script defer src="/history-character-routes.js"></script>
   <script defer src="/app.js"></script>
   <script defer src="/site-postfix.js"></script>
+  <script defer src="/site-chrome.js"></script>
   <script defer src="/site-nav.js"></script>
   <script>
     /* Home only: start the home shell right after app.js instead of waiting for pwa.js to inject it (pwa.js skips scripts already present). */

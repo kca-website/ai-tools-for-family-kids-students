@@ -312,7 +312,8 @@
     document.body?.classList.toggle("pwa-mobile-ui",mobile);
     document.body?.classList.toggle("pwa-standalone",mobile && isStandalone());
     const title=document.getElementById("siteTitleText");
-    if(title) title.textContent=mobile ? "AI Tools 4 Kids" : DESKTOP_TITLE;
+    // v11: one brand name everywhere (the installed-app name in the manifest is unchanged).
+    if(title) title.textContent=DESKTOP_TITLE;
   }
 
   function ensureLauncher(){

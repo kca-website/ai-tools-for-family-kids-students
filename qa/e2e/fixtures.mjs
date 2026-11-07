@@ -60,11 +60,16 @@ export const test = base.extend({
 });
 export { expect };
 
-// v10 homepage: school levels are opened from the "who are you" finder (parent → level → tools → CTA).
+// v11 homepage: task first (find AI tools) → level → "who will use it?" (parent) → CTA.
 export async function openZoneFromHome(page, zone) {
-  await page.locator('#homeV9Finder [data-finder-role="guardian"]').click();
-  await page.locator(`#homeV9Finder [data-finder-zone="${zone}"]`).click();
-  const tools = page.locator('#homeV9Finder [data-finder-need="tools"]');
-  if (await tools.count()) await tools.click();
+  // Chrome turns history pushes made before the load event into replacements; real users click after load.
+  await page.waitForLoadState('load');
+  const press = async (sel) => { const el = page.locator(sel); if ((await el.getAttribute('aria-pressed')) !== 'true') await el.click(); };
+  await press('#homeV9Finder [data-finder-need="tools"]');
+  await press(`#homeV9Finder [data-finder-zone="${zone}"]`);
+  const guardian = page.locator('#homeV9Finder [data-finder-role="guardian"]');
+  if (await guardian.count()) await press('#homeV9Finder [data-finder-role="guardian"]');
   await page.locator('#homeV9FinderCta').click();
+  // Clicks that open a school level wait for the deferred curriculum data and then repeat (index.html loader).
+  await page.waitForURL((url) => url.pathname !== '/', { timeout: 30_000 });
 }

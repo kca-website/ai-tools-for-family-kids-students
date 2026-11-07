@@ -1,3 +1,4 @@
+import { pickFinder } from './lib/home-finder.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
@@ -9,7 +10,7 @@ async function openPicker(page){
   await page.waitForFunction(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC,{timeout:30000});
   assert.equal(await page.evaluate(()=>!!window.AITOOLSKIDS_SPECIAL_EDUCATION_DIAGNOSTIC_DATA),false,'Special Education diagnostic catalog was preloaded');
   assert.equal(await page.locator('script[src*="special-education-diagnostic-data.js"]').count(),0,'heavy diagnostic data script loaded before open');
-  await page.click('#homeV9Finder [data-finder-role="guardian"]');await page.click(`#homeV9Finder [data-finder-zone="primary"]`);await page.click('#homeV9Finder [data-finder-need="tools"]');await page.click('#homeV9FinderCta');
+  await pickFinder(page,{need:'tools',zone:'primary',role:'guardian'});await page.click('#homeV9FinderCta');
   await page.locator('#viewTabQuiz').click();
   const entry=page.locator('#quizContent [data-special-education-diagnostic]');
   await entry.waitFor({state:'visible',timeout:10000});

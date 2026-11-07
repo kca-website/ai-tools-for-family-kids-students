@@ -1,3 +1,4 @@
+import { pickFinder } from './lib/home-finder.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
@@ -36,7 +37,7 @@ try{
   assert.equal(runtime.questionsPerSession,3);
   assert.equal(runtime.choicesPerQuestion,2);
 
-  await page.click('#homeV9Finder [data-finder-role="guardian"]');await page.click(`#homeV9Finder [data-finder-zone="primary"]`);await page.click('#homeV9Finder [data-finder-need="tools"]');await page.click('#homeV9FinderCta');
+  await pickFinder(page,{need:'tools',zone:'primary',role:'guardian'});await page.click('#homeV9FinderCta');
   await page.waitForSelector('#roleTabs .role-tab',{state:'visible',timeout:10000});
   await page.locator('#roleTabs .role-tab').nth(1).click();
   await page.locator('#viewTabQuiz').click();
@@ -89,7 +90,7 @@ try{
   for(const zone of ['middle','high']){
     await page.goto(LOCAL,{waitUntil:'domcontentloaded',timeout:60000});
     await page.waitForFunction(()=>window.AITOOLSKIDS_PRIMARY_SIMPLE_QUIZ?.version>=5,null,{timeout:10000});
-    await page.click('#homeV9Finder [data-finder-role="guardian"]');await page.click(`#homeV9Finder [data-finder-zone="${zone}"]`);await page.click('#homeV9Finder [data-finder-need="tools"]');await page.click('#homeV9FinderCta');
+    await pickFinder(page,{need:'tools',zone,role:'guardian'});await page.click('#homeV9FinderCta');
     await page.waitForSelector('#roleTabs .role-tab',{state:'visible',timeout:10000});
     await page.locator('#roleTabs .role-tab').nth(1).click();
     await page.locator('#viewTabQuiz').click();

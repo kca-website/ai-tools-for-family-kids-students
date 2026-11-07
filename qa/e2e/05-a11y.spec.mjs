@@ -74,7 +74,7 @@ test.describe('keyboard & focus', () => {
   test('finder chips are real buttons, reachable and activatable with keyboard', async ({ page }) => {
     await page.goto('/');
     await page.waitForTimeout(800);
-    for (const chip of ['[data-finder-role="guardian"]', '[data-finder-zone="primary"]', '[data-finder-need="tools"]']) {
+    for (const chip of ['[data-finder-need="tools"]', '[data-finder-zone="primary"]', '[data-finder-role="guardian"]']) {
       await page.locator(`#homeV9Finder ${chip}`).focus();
       await page.keyboard.press('Enter');
     }

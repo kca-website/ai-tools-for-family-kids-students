@@ -138,7 +138,8 @@
   function ensureAiPathsPromo(){
     if(location.pathname!=="/" && location.pathname!=="") return;
     const shell=document.getElementById("homeV8Shell");
-    const more=document.getElementById("homeV9More");
+    // v11: featured section right after the hero (before "Pathways for"), so the first scroll shows it.
+    const more=document.getElementById("homeV11Paths")||document.getElementById("homeV9More");
     if(!shell || !more) return;
     ensureAiPathsStyles();
     let section=document.getElementById("homeAiPathsPromo");
@@ -178,13 +179,13 @@
     const panel = document.getElementById("siteMenuPanel");
     restoreBrandRobot();
     syncAriaLabels();
-    ensureAllToolsStyles();
-    ensureAllToolsAccess();
-    ensureAiLiteracyMenuLink();
+    /* v11: the primary nav and the menu panel are rendered by site-chrome.js from the
+       shared information architecture. The animated AI Paths promo stays on the homepage
+       as a featured section right after the hero. */
     ensureAiPathsPromo();
-    new MutationObserver(() => { syncAriaLabels(); ensureAllToolsAccess(); ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    new MutationObserver(() => { syncAriaLabels(); restoreBrandRobot(); ensureAiPathsPromo(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     if(location.pathname==="/" || location.pathname===""){
-      [0,100,350,900,1800].forEach(ms=>setTimeout(() => { ensureAllToolsAccess(); ensureAiLiteracyMenuLink(); ensureAiPathsPromo(); restoreBrandRobot(); },ms));
+      [0,100,350,900,1800].forEach(ms=>setTimeout(() => { ensureAiPathsPromo(); restoreBrandRobot(); },ms));
     }
     if(!toggle || !panel) return;
 

@@ -1,3 +1,4 @@
+import { pickFinder } from './lib/home-finder.mjs';
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
 
@@ -29,31 +30,29 @@ try {
   await page.goto(LOCAL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   await page.waitForSelector('#homeV8Shell', { state: 'visible', timeout: 10000 });
   await page.waitForFunction(() => document.body.classList.contains('pwa-standalone'), null, { timeout: 10000 });
-  await page.waitForSelector('#homeV9Finder [data-finder-zone="special"]', {state:'visible',timeout:10000});
-  await page.waitForSelector('#homeV8HelpersMount .home-v8-ai', {state:'visible',timeout:10000});
-  await page.waitForSelector('#homeV9Teacher', {state:'visible',timeout:10000});
+  await page.waitForSelector('#homeV9Finder [data-finder-need="practice"]', {state:'visible',timeout:10000});
+  await page.waitForSelector('#homeV11Special', {state:'visible',timeout:10000});
   await page.waitForFunction(()=>window.AITOOLSKIDS_SPECIAL_EDUCATION_ENTRY_ANALYTICS?.version===2,null,{timeout:10000});
   await page.waitForLoadState('networkidle');
 
-  assert.equal((await page.textContent('#siteTitleText'))?.trim(), 'AI Tools 4 Kids', 'compact mobile site title was not restored');
+  assert.equal((await page.textContent('#siteTitleText'))?.trim(), 'aitools4kids.gr', 'one brand name on every page and screen size');
   assert.equal(await page.locator('#pwaMobileLauncher').count(), 1, 'Legacy PWA launcher should still be created for compatibility');
   assert.equal(await page.locator('#pwaMobileLauncher').isVisible(), false, 'Legacy PWA launcher must stay hidden under homepage v8');
   assert.equal(await page.locator('#pwaMobileLauncher').evaluate((el)=>el.classList.contains('home-v8-legacy')), true, 'Legacy PWA launcher must be explicitly suppressed');
 
-  assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), true, 'The current homepage exposes the Practice Map below the hero badges');
+  assert.equal(await page.locator('#zoneSelectView .hero__quiz-cta-wrap').isVisible(), false, 'v11: the Practice Map is the "practice" task, not a separate hero block');
   assert.equal(await page.locator('#zoneSelectView .hero__ai-help').isVisible(), false, 'Legacy AI Help entry should remain suppressed on homepage v8');
 
-  // v10: Special Education is reached from the "who are you" finder (tools and the short diagnostic).
-  await page.click('#homeV9Finder [data-finder-zone="special"]');
+  // v11: Special Education is reached from the "Pathways for" card and from the practice/help tasks.
+  assert.equal(await page.locator('#homeV11Special').getAttribute('href'),'/special-education.html','Pathway card must use the production page');
+  await pickFinder(page,{need:'stuck',zone:'special'});
   assert.equal(await page.locator('#homeV9FinderCta').getAttribute('href'),'/special-education.html','Finder Special Education route must use the production page');
   assert.match(await page.locator('#homeV9FinderCta').innerText(),/Ειδική Εκπαίδευση/,'The Special Education selection must have a clear dedicated destination');
-  await page.click('#homeV9Finder [data-finder-need="practice"]');
+  await pickFinder(page,{need:'practice'});
   assert.equal(await page.locator('#homeV9FinderCta[data-special-education-diagnostic]').count(),1,'Finder practice route must open the Special Education diagnostic');
   assert.equal(await page.locator('#specialEducationHomeFeature:visible').count(),0,'standalone Special Education bottom banner must not be visible');
-  assert.equal(await page.locator('#homeV9Teacher a[href="/teacher-assistant.html"]').isVisible(),true,'Educator card must be visible on mobile');
-
-  const specialAiText=(await page.locator('#homeV8HelpersMount .home-v8-ai a').last().innerText()).trim();
-  assert.match(specialAiText,/Ειδικά σχολεία/,'Current AI Help area must retain a Special Education entry');
+  await pickFinder(page,{need:'teacher'});
+  assert.equal(await page.locator('#homeV9FinderCta[href="/teacher-assistant.html"]').isVisible(),true,'Educator destination must be visible on mobile');
 
   const analytics=await page.evaluate(()=>{
     const calls=[];

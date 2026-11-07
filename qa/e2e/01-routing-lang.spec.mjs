@@ -2,11 +2,11 @@
 import { test, expect, findTranslationLeaks, greekRatio, IS_PROD, openZoneFromHome } from './fixtures.mjs';
 
 test.describe('home + routing', () => {
-  test('@smoke home renders the finder (4 roles) without runtime errors', async ({ page, qa }) => {
+  test('@smoke home renders the task finder (6 tasks) without runtime errors', async ({ page, qa }) => {
     const resp = await page.goto('/');
     expect(resp.status()).toBe(200);
     await expect(page.locator('h1')).toHaveCount(1);
-    await expect(page.locator('#homeV9Finder [data-finder-role]')).toHaveCount(4);
+    await expect(page.locator('#homeV9Finder [data-finder-need]')).toHaveCount(6);
     expect(qa.pageErrors, 'uncaught exceptions').toEqual([]);
     expect(qa.consoleErrors, 'console errors').toEqual([]);
   });
@@ -156,7 +156,8 @@ test.describe('EL/EN switch', () => {
   test('EN chosen on home survives navigation to /study.html', async ({ page }) => {
     await page.goto('/');
     await page.locator('#langEn').click();
-    const link = page.locator('a[href="/study.html"]:visible').first();
+    await page.locator('#homeV9Finder [data-finder-need="study"]').click();
+    const link = page.locator('#homeV9FinderCta[href="/study.html"]');
     await link.scrollIntoViewIfNeeded();
     await link.click();
     await page.waitForLoadState('load');

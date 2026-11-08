@@ -55,15 +55,6 @@
     "en": "Turns notes and syllabus material into a study plan, quizzes, flashcards, podcasts and mock exams.",
     "reviewed": "2026-10-06"
    },
-   "daskalakos-ai": {
-    "name": "Δασκαλάκος AI",
-    "url": "https://daskalakos.ai/",
-    "minAge": 0,
-    "parentAccountRequired": true,
-    "el": "Ελληνικός AI δάσκαλος από Δημοτικό έως Λύκειο: καθοδηγεί με ερωτήσεις αντί να δίνει έτοιμη απάντηση, με γονικό έλεγχο και αναφορές προόδου.",
-    "en": "Greek AI tutor from primary to upper secondary: guides with questions instead of giving the answer, with parental controls and progress reports.",
-    "reviewed": "2026-10-06"
-   },
    "immersive-reader": {
     "name": "Microsoft Immersive Reader",
     "url": "https://support.microsoft.com/en-us/education/learning-tools",
@@ -177,8 +168,6 @@
     plan: ["astra-ai", "chatgpt", "notebooklm"],
   };
   const FALLBACK = ["chatgpt", "astra-ai"];
-  // Δασκαλάκος AI is offered only for explanations of students under 13, who cannot use general AI chats.
-  const YOUNG_EXPLAIN = { action: "explain", maxAge: 12, id: "daskalakos-ai" };
   // Subject → the catalog's tool for that kind of work (matched on the subject id and its label).
   const SUBJECT_RULES = [
     [/archaia|αρχαι|ancient|latin|λατιν/, []], // classical languages: no catalog tool fits
@@ -213,7 +202,6 @@
     const special = zone === "special";
     const max = special ? 2 : 3;
     const actionIds = (ACTIONS[action] || FALLBACK).filter((id) => allowed(id, age));
-    if (action === YOUNG_EXPLAIN.action && age !== null && age <= YOUNG_EXPLAIN.maxAge) actionIds.push(YOUNG_EXPLAIN.id);
     const order = [];
     if (special && allowed("immersive-reader", age)) order.push("immersive-reader");
     order.push(...actionIds.slice(0, 2));

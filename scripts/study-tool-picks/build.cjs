@@ -16,7 +16,7 @@ function loadCatalog() {
   return c.__T;
 }
 
-const IDS = ["notebooklm", "chatgpt", "quizlet", "anki", "astra-ai", "daskalakos-ai", "immersive-reader", "reading-coach",
+const IDS = ["notebooklm", "chatgpt", "quizlet", "anki", "astra-ai", "immersive-reader", "reading-coach",
   "geogebra", "desmos", "phet", "google-arts-culture", "google-earth", "deepl", "scratch", "mindmup"];
 
 function picksData(T = loadCatalog()) {

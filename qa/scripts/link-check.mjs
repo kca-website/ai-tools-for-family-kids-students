@@ -25,8 +25,22 @@ function add(u, file) {
   if (SKIP_HOST.test(h) || /\$\{|{{/.test(u)) return;
   if (!sources.has(u)) sources.set(u, new Set()); sources.get(u).add(file);
 }
-const dirs = ['tools', 'en'].flatMap((d) => fs.existsSync(path.join(REPO, d)) ? fs.readdirSync(path.join(REPO, d)).map((f) => path.join(REPO, d, f)) : []);
-const files = [...fs.readdirSync(REPO).filter((f) => /\.(js|html|webmanifest)$/.test(f)).map((f) => path.join(REPO, f)), ...dirs];
+// Walk nested language/tool directories and include files only (never pass a directory to readFileSync).
+const scanSourceFiles = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+  const full = path.join(dir, entry.name);
+  if (entry.isDirectory()) return scanSourceFiles(full);
+  return entry.isFile() && /\.(js|html|webmanifest)$/i.test(entry.name) ? [full] : [];
+});
+const dirs = ['tools', 'en'].flatMap((d) => {
+  const dir = path.join(REPO, d);
+  return fs.existsSync(dir) ? scanSourceFiles(dir) : [];
+});
+const files = [
+  ...fs.readdirSync(REPO, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.(js|html|webmanifest)$/i.test(entry.name))
+    .map((entry) => path.join(REPO, entry.name)),
+  ...dirs,
+];
 for (const f of files) { const txt = fs.readFileSync(f, 'utf8'); const name = path.relative(REPO, f); for (const m of txt.matchAll(URL_RE)) add(m[0], name); }
 function bucket(u, srcs) {
   const s = [...srcs];

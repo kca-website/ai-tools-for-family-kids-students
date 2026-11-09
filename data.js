@@ -366,10 +366,10 @@ const TOOLS = {
     url: "https://streaming.digitalschool.gov.gr/",
     category: "greek-program",
     logo: null,
-    minAge: 15,
-    minAgeNote: "Επίσημη δωρεάν υπηρεσία του ΥΠΑΙΘΑ. Η προετοιμασία Πανελλαδικών καλύπτει τη Γ΄ Λυκείου και αποφοίτους, με live/on-demand μαθήματα και υλικό. Ο ανακοινωμένος AI βοηθός του 2026 αφορά σε πρώτη φάση τα ειδικά μαθήματα ξένων γλωσσών και βρίσκεται σε πορεία πιλοτικής εφαρμογής.",
-    shortDescEl: "Επίσημη δωρεάν προετοιμασία Πανελλαδικών με live/on-demand μαθήματα, ασκήσεις και προσομοιώσεις. Προβλέπεται πιλοτικός AI βοηθός αρχικά για τα ειδικά μαθήματα ξένων γλωσσών.",
-    shortDescEn: "Official free Panhellenic-exam preparation with live/on-demand lessons, exercises and mock exams. A pilot AI helper is planned initially for foreign-language special subjects.",
+    minAge: 10,
+    minAgeNote: "Επίσημο δωρεάν εκπαιδευτικό υλικό από Ε΄ Δημοτικού έως Β΄ Λυκείου και ζωντανή/μαγνητοσκοπημένη προετοιμασία Πανελλαδικών για τη Γ΄ Λυκείου και αποφοίτους. Τα δημόσια βίντεο προβάλλονται χωρίς εγγραφή· για πρόσθετες ασκήσεις στο LMS απαιτούνται κωδικοί Πανελλήνιου Σχολικού Δικτύου.",
+    shortDescEl: "Δημόσιο Ψηφιακό Φροντιστήριο: δωρεάν βιντεομαθήματα από Ε΄ Δημοτικού έως Β΄ Λυκείου και live/on-demand προετοιμασία Πανελλαδικών. Επίσημη εκπαιδευτική πηγή, όχι AI chatbot.",
+    shortDescEn: "Greek public Digital Tutoring service: free recorded lessons from primary year 5 to upper-secondary year 2, plus live/on-demand Panhellenic exam preparation. An official learning resource, not an AI chatbot.",
     isGreek: true,
     greekSource: "Υπουργείο Παιδείας",
   },
@@ -1057,6 +1057,15 @@ const PATHS = {
       introEn: "At this age, every AI tool needs your account, your setup, or your direct presence. Below: which tool fits which specific schoolwork, and how the child gets access the right way.",
       tools: [
         {
+          toolId: "digital-tutoring",
+          useCaseEl: "Επίσημα δωρεάν βιντεομαθήματα για Ε΄ και ΣΤ΄ Δημοτικού, όπου υπάρχει σχετικό υλικό.",
+          useCaseEn: "Free official recorded lessons for primary years 5 and 6, where relevant material is available.",
+          howToEl: "Βρείτε μαζί το μάθημα και την ενότητα, δείτε ένα σύντομο βίντεο και ζητήστε από το παιδί να εξηγήσει όσα κατάλαβε.",
+          howToEn: "Choose a subject and topic together, watch a lesson and ask the child to explain what they learned.",
+          cautionEl: "Η πρόταση αφορά Ε΄–ΣΤ΄ Δημοτικού, όχι όλες τις τάξεις του Δημοτικού. Είναι κρατική εκπαιδευτική υπηρεσία, όχι AI chatbot.",
+          cautionEn: "This recommendation is for primary years 5–6, not every primary grade. It is a public learning service, not an AI chatbot.",
+        },
+        {
           toolId: "ai-help",
           useCaseEl: "Όταν το παιδί έχει κολλήσει σε οποιοδήποτε μάθημα, άνοιξε τον «Βοηθό Γονέα» και περιέγραψε πού δυσκολεύεται.",
           useCaseEn: "When the child is stuck in any subject, open Parent Helper and describe where they are struggling.",
@@ -1211,6 +1220,15 @@ const PATHS = {
       introEn: "You always use these tools through an account your parent or teacher set up, not on your own.",
       tools: [
         {
+          toolId: "digital-tutoring",
+          useCaseEl: "Αν είσαι στην Ε΄ ή ΣΤ΄ Δημοτικού, μπορείς να παρακολουθήσεις δωρεάν βιντεομαθήματα για επανάληψη.",
+          useCaseEn: "If you are in primary year 5 or 6, you can watch free recorded lessons to revise.",
+          howToEl: "Διάλεξε το κεφάλαιο που διαβάζεις, δες το βίντεο και δοκίμασε μετά να το εξηγήσεις με δικά σου λόγια.",
+          howToEn: "Find the topic you are studying, watch the lesson, then explain it in your own words.",
+          cautionEl: "Μόνο για ενότητες με διαθέσιμο υλικό. Η πλατφόρμα δεν είναι AI συνομιλία.",
+          cautionEn: "Only topics with available lessons. This platform is not an AI chat.",
+        },
+        {
           toolId: "ai-help",
           useCaseEl: "Αν κολλήσεις σε μάθημα, ζήτησε από γονέα/κηδεμόνα να ανοίξει μαζί σου τον «Βοηθό Γονέα» του aitools4kids.",
           useCaseEn: "If you get stuck, ask a parent/guardian to open the aitools4kids Parent Helper with you.",
@@ -1293,6 +1311,15 @@ const PATHS = {
       introEl: "Στα 13, ανοίγει η πρόσβαση στα περισσότερα mainstream AI chatbots, αλλά σχεδόν όλα απαιτούν τη δική σου συγκατάθεση μέχρι τα 17. Εδώ θα βρεις ποιο εργαλείο ταιριάζει σε ποια σχολική δουλειά, ώστε να καθοδηγήσεις τη χρήση αντί απλώς να την επιτρέψεις ή να την απαγορεύσεις.",
       introEn: "At 13, access opens up to most mainstream AI chatbots, but nearly all require your consent until age 17. Here's which tool fits which schoolwork, so you can guide the use rather than just allow or ban it.",
       tools: [
+        {
+          toolId: "digital-tutoring",
+          useCaseEl: "Δωρεάν επίσημα βιντεομαθήματα για τις τάξεις του Γυμνασίου, ως συμπλήρωμα της σχολικής μελέτης.",
+          useCaseEn: "Free official recorded lessons for lower-secondary students, complementing school study.",
+          howToEl: "Επιλέξτε την τάξη και το διαθέσιμο μάθημα, παρακολουθήστε το σχετικό βίντεο και συνεχίστε με τις ασκήσεις του σχολικού βιβλίου.",
+          howToEn: "Choose the grade and an available lesson, watch the recording, and then work through textbook exercises.",
+          cautionEl: "Η διαθεσιμότητα βίντεο διαφέρει ανά μάθημα και ενότητα. Πρόκειται για εκπαιδευτική πηγή, όχι AI chatbot.",
+          cautionEn: "Lesson availability varies by subject and topic. This is a learning resource, not an AI chatbot.",
+        },
         {
           toolId: "ai-help",
           useCaseEl: "Βοηθός Γονέα για οποιοδήποτε μάθημα, με βάση την τάξη και το επιλεγμένο θέμα.",
@@ -1516,6 +1543,15 @@ const PATHS = {
       introEl: "Ξεκινάς να χρησιμοποιείς AI πιο μόνος σου, αλλά ο γονιός σου πρέπει να δώσει άδεια για τα περισσότερα chatbots. Δες ποιο εργαλείο ταιριάζει σε ποια δουλειά.",
       introEn: "You're starting to use AI more on your own, but your parent needs to give permission for most chatbots. See which tool fits which task.",
       tools: [
+        {
+          toolId: "digital-tutoring",
+          useCaseEl: "Δωρεάν βιντεομαθήματα για να ξαναδείς μια δύσκολη ενότητα του Γυμνασίου.",
+          useCaseEn: "Free recorded lessons to revisit a difficult lower-secondary topic.",
+          howToEl: "Βρες πρώτα την ενότητα του σχολικού βιβλίου και έπειτα το αντίστοιχο διαθέσιμο βίντεο. Κράτησε λίγες σημειώσεις και κάνε μία άσκηση μόνος/η.",
+          howToEn: "Start with your textbook topic, find a matching available recording, take brief notes and try an exercise on your own.",
+          cautionEl: "Δεν υπάρχουν απαραίτητα βίντεο για κάθε ενότητα. Η υπηρεσία δεν δίνει απαντήσεις ως AI συνομιλία.",
+          cautionEn: "A recording may not exist for every topic. This service does not answer questions as an AI chatbot.",
+        },
         {
           toolId: "codeai",
           useCaseEl: "Για να μάθεις Πληροφορική και AI literacy με δομημένο, δωρεάν curriculum και projects αντί να ζητάς απλώς κώδικα από chatbot.",
@@ -1999,8 +2035,8 @@ const PATHS = {
 
         {
           toolId: "digital-tutoring",
-          useCaseEl: "Επίσημη δωρεάν προετοιμασία Πανελλαδικών: live μαθήματα, βιντεομαθήματα, ασκήσεις και διαγωνίσματα προσομοίωσης για ΓΕΛ/ΕΠΑΛ και ειδικά μαθήματα.",
-          useCaseEn: "Official free Panhellenic-exam preparation: live lessons, recordings, exercises and mock exams for GEL/EPAL and special subjects.",
+          useCaseEl: "Επίσημα δωρεάν βιντεομαθήματα για Α΄–Β΄ Λυκείου και live/on-demand προετοιμασία Πανελλαδικών της Γ΄ Λυκείου για ΓΕΛ, ΕΠΑΛ και ειδική εκπαίδευση.",
+          useCaseEn: "Free official video lessons for upper-secondary years 1–2, plus live/on-demand Panhellenic exam preparation for year 3 across general, vocational and special education.",
           howToEl: "Χρησιμοποίησέ το ως βασική επίσημη πηγή παράλληλα με το σχολείο. Ο ανακοινωμένος AI βοηθός του 2026 αφορά αρχικά ξένες γλώσσες και δεν τον παρουσιάζουμε ως ήδη διαθέσιμο για όλα τα μαθήματα.",
           howToEn: "Use it as an official study source alongside school. The announced 2026 AI helper initially targets foreign languages and is not presented as already available for every subject.",
           cautionEl: "Ξεχώρισε το ήδη λειτουργικό Ψηφιακό Φροντιστήριο από τον AI βοηθό που βρίσκεται σε πιλοτική/σταδιακή υλοποίηση.",
@@ -2286,8 +2322,8 @@ const PATHS = {
 
         {
           toolId: "digital-tutoring",
-          useCaseEl: "Για Πανελλαδικές: δωρεάν επίσημα live/on-demand μαθήματα, ασκήσεις και προσομοιώσεις εξετάσεων.",
-          useCaseEn: "For Panhellenic exams: free official live/on-demand lessons, exercises and mock exams.",
+          useCaseEl: "Για Α΄–Β΄ Λυκείου: δωρεάν βιντεομαθήματα. Για Γ΄ Λυκείου και υποψηφίους Πανελλαδικών: live/on-demand μαθήματα, ασκήσεις και προσομοιώσεις.",
+          useCaseEn: "For upper-secondary years 1–2: free recorded lessons. For year 3 and Panhellenic candidates: live/on-demand lessons, exercises and mock exams.",
           howToEl: "Ξεκίνα από το μάθημα και την ενότητα που διαβάζεις και χρησιμοποίησε τις ασκήσεις/βίντεο ως δεύτερη εξήγηση και επανάληψη.",
           howToEn: "Start from the subject and topic you are studying and use the exercises/videos for a second explanation and review.",
           cautionEl: "Ο AI βοηθός που έχει ανακοινωθεί αφορά αρχικά τα ειδικά μαθήματα ξένων γλωσσών· μην περιμένεις AI tutor σε κάθε μάθημα ακόμη.",

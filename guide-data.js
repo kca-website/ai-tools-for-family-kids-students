@@ -82,9 +82,9 @@ const GUIDE_DATA = {
       },
       {
         id: "part4",
-        title: "Μέρος 4️⃣: Επίσημες πηγές του ΙΕΠ",
+        title: "Μέρος 4️⃣: Επίσημες δημόσιες εκπαιδευτικές πηγές",
         content: `
-          <p>Το Ινστιτούτο Εκπαιδευτικής Πολιτικής (ΙΕΠ) διαθέτει δημόσιες, δωρεάν πλατφόρμες που μπορούν να συμπληρώσουν τη χρήση AI εργαλείων. Δεν χρειάζεται λογαριασμός για να τις εξερευνήσεις.</p>
+          <p>Το ΙΕΠ και το Υπουργείο Παιδείας διαθέτουν επίσημες εκπαιδευτικές πλατφόρμες που συμπληρώνουν τη χρήση εργαλείων AI. Η δημόσια παρακολούθηση βίντεο του Ψηφιακού Φροντιστηρίου δεν απαιτεί εγγραφή· για πρόσθετο υλικό στο LMS μπορεί να απαιτούνται κωδικοί ΠΣΔ.</p>
           <div class="guide-table-wrapper">
             <table class="guide-table">
               <thead><tr><th>Πλατφόρμα</th><th>Τι προσφέρει</th><th>Σύνδεσμος</th></tr></thead>
@@ -95,6 +95,11 @@ const GUIDE_DATA = {
                   <td><a href="https://aesop.iep.edu.gr" target="_blank" rel="noopener">aesop.iep.edu.gr ↗</a></td>
                 </tr>
                 <tr>
+                  <td>Δημόσιο Ψηφιακό Φροντιστήριο (ΥΠΑΙΘΑ)</td>
+                  <td>Δωρεάν βιντεομαθήματα Ε΄ Δημοτικού–Β΄ Λυκείου και ζωντανή/μαγνητοσκοπημένη προετοιμασία Πανελλαδικών της Γ΄ Λυκείου.</td>
+                  <td><a href="https://streaming.digitalschool.gov.gr/" target="_blank" rel="noopener noreferrer">streaming.digitalschool.gov.gr ↗</a></td>
+                </tr>
+                <tr>
                   <td>Τράπεζα Θεμάτων Διαβαθμισμένης Δυσκολίας</td>
                   <td>Αναζήτηση θεμάτων εξετάσεων Λυκείου ανά μάθημα, με ενδεικτικές απαντήσεις.</td>
                   <td><a href="https://trapeza.iep.edu.gr" target="_blank" rel="noopener">trapeza.iep.edu.gr ↗</a></td>
@@ -102,7 +107,7 @@ const GUIDE_DATA = {
               </tbody>
             </table>
           </div>
-          <p><strong>Σημείωση:</strong> Αυτό το εργαλείο δεν σχετίζεται με το ΙΕΠ ούτε είναι επίσημος συνεργάτης του. Οι παραπάνω σύνδεσμοι δίνονται ως χρήσιμες, δημόσια διαθέσιμες πηγές.</p>
+          <p><strong>Σημείωση:</strong> Το AI Tools 4 Kids είναι ανεξάρτητο έργο και δεν συνεργάζεται επίσημα με το ΙΕΠ ή το Υπουργείο Παιδείας. Οι σύνδεσμοι οδηγούν σε εξωτερικές επίσημες εκπαιδευτικές πηγές.</p>
         `
       },
       {
@@ -253,9 +258,9 @@ const GUIDE_DATA = {
       },
       {
         id: "part4",
-        title: "Part 4️⃣: Official IEP (Greek Institute of Educational Policy) sources",
+        title: "Part 4️⃣: Official public education resources",
         content: `
-          <p>The Institute of Educational Policy (ΙΕΠ) runs free, public platforms that can complement the use of AI tools. No account is needed to explore them.</p>
+          <p>The Greek Institute of Educational Policy (IEP) and Ministry of Education provide official resources that complement AI tools. Public Digital Tutoring videos require no registration; extra LMS materials may require Greek School Network credentials.</p>
           <div class="guide-table-wrapper">
             <table class="guide-table">
               <thead><tr><th>Platform</th><th>What it offers</th><th>Link</th></tr></thead>
@@ -266,6 +271,11 @@ const GUIDE_DATA = {
                   <td><a href="https://aesop.iep.edu.gr" target="_blank" rel="noopener">aesop.iep.edu.gr ↗</a></td>
                 </tr>
                 <tr>
+                  <td>Public Digital Tutoring (Greek Ministry of Education)</td>
+                  <td>Free recorded lessons for primary years 5–6, lower-secondary and upper-secondary years 1–2, with live/recorded Panhellenic preparation for year 3.</td>
+                  <td><a href="https://streaming.digitalschool.gov.gr/" target="_blank" rel="noopener noreferrer">streaming.digitalschool.gov.gr ↗</a></td>
+                </tr>
+                <tr>
                   <td>Graded Difficulty Question Bank</td>
                   <td>Search past high-school exam questions by subject, with indicative answers.</td>
                   <td><a href="https://trapeza.iep.edu.gr" target="_blank" rel="noopener">trapeza.iep.edu.gr ↗</a></td>
@@ -273,7 +283,7 @@ const GUIDE_DATA = {
               </tbody>
             </table>
           </div>
-          <p><strong>Note:</strong> This tool is not affiliated with ΙΕΠ nor an official partner. The links above are shared as useful, publicly available resources.</p>
+          <p><strong>Note:</strong> AI Tools 4 Kids is independent and has no official affiliation with the IEP or the Greek Ministry of Education. These links point to external official education resources.</p>
         `
       },
       {

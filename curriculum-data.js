@@ -32,7 +32,7 @@ const LEARNING_NEEDS = [
 
 const NEED_TOOL_MAP = {
   language: {
-    understand: ["reading-coach", "ai-help", "chatgpt", "gemini-education", "gemini", "claude", "notebooklm"],
+    understand: ["reading-coach", "ai-help", "digital-tutoring", "chatgpt", "gemini-education", "gemini", "claude", "notebooklm"],
     practice: ["reading-coach", "quizlet", "ai-help", "chatgpt", "anki", "digital-tutoring"],
     hint: ["ai-help", "chatgpt"],
     check: ["ai-help", "gemini-education", "chatgpt", "grammarly", "notebooklm"],
@@ -42,7 +42,7 @@ const NEED_TOOL_MAP = {
     "step-by-step": ["ai-help", "immersive-reader", "notebooklm"],
   },
   math: {
-    understand: ["ai-help", "desmos", "geogebra", "chatgpt", "gemini-education", "wolfram-alpha"],
+    understand: ["ai-help", "desmos", "digital-tutoring", "geogebra", "chatgpt", "gemini-education", "wolfram-alpha"],
     practice: ["ai-help", "desmos", "geogebra", "symbolab", "photomath", "wolfram-alpha", "digital-tutoring"],
     hint: ["ai-help", "chatgpt"],
     check: ["photomath", "symbolab", "wolfram-alpha", "geogebra", "digital-tutoring", "google-lens", "ai-help", "gemini-education"],
@@ -52,7 +52,7 @@ const NEED_TOOL_MAP = {
     "step-by-step": ["ai-help", "immersive-reader", "notebooklm"],
   },
   science: {
-    understand: ["phet", "ai-help", "chatgpt", "gemini-education", "notebooklm"],
+    understand: ["phet", "ai-help", "digital-tutoring", "chatgpt", "gemini-education", "notebooklm"],
     practice: ["phet", "quizlet", "ai-help", "wolfram-alpha", "digital-tutoring"],
     hint: ["ai-help", "chatgpt"],
     check: ["ai-help", "phet", "google-lens", "wolfram-alpha", "gemini-education", "chatgpt", "notebooklm", "digital-tutoring"],
@@ -62,7 +62,7 @@ const NEED_TOOL_MAP = {
     "step-by-step": ["ai-help", "phet", "immersive-reader", "notebooklm"],
   },
   history: {
-    understand: ["google-arts-culture", "ai-help", "chatgpt", "gemini-education", "notebooklm"],
+    understand: ["google-arts-culture", "ai-help", "digital-tutoring", "chatgpt", "gemini-education", "notebooklm"],
     practice: ["quizlet", "ai-help", "chatgpt", "anki", "digital-tutoring"],
     hint: ["ai-help", "chatgpt"],
     check: ["ai-help", "gemini-education", "google-arts-culture", "perplexity", "chatgpt", "notebooklm"],

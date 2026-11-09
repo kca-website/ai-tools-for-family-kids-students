@@ -21,7 +21,7 @@
     .tools-toolbar{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:12px;align-items:start;margin:10px 0 28px}.tools-search{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 13px;font:inherit}.tools-filter{display:flex;gap:8px;flex-wrap:wrap}.tools-filter button{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:999px;font-weight:750;cursor:pointer}.tools-filter button.active{background:#202633;color:#fff;border-color:#202633}
     .tools-section{margin:34px 0}.tools-section h2{margin:0 0 5px;font-size:1.38rem}.tools-section__intro{margin:0 0 14px;color:var(--muted)}
     .tools-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.tool-card{display:flex;flex-direction:column;min-height:168px;padding:17px;border:1px solid var(--line);border-radius:14px;background:var(--card);text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(15,23,42,.025)}.tool-card:hover{border-color:#9fbfd6;transform:translateY(-1px)}.tool-card__top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.tool-card__icon{font-size:1.35rem}.tool-card__tag{font-size:.72rem;padding:4px 7px;border-radius:999px;background:#eef5fa;color:#245f87;font-weight:850}.tool-card h3{font-size:1.02rem;margin:12px 0 6px}.tool-card p{margin:0;color:var(--muted);line-height:1.45;font-size:.9rem}.tool-card__go{margin-top:auto;padding-top:13px;font-weight:850;color:var(--blue);font-size:.88rem}
-    .tools-count{margin:0 0 8px;color:var(--muted);font-size:.9rem}.tools-note{margin:38px 0 0;padding:18px;border:1px solid #cfe0ec;border-radius:14px;background:#f2f8fc}.tools-note h2{font-size:1.08rem;margin:0 0 6px}.tools-note p{margin:0;color:#526273;line-height:1.5}.tools-note a{font-weight:850;color:#155c89}
+.tools-featured{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;border:1px solid #c2d9e9;background:#f2f8fd;border-radius:13px;padding:15px 18px;margin-top:22px}.tools-featured strong{display:block;font-size:1.05rem;color:#164d74}.tools-featured p{font-size:.92rem;margin:5px 0 0;max-width:730px}.tools-count{margin:0 0 8px;color:var(--muted);font-size:.9rem}.tools-note{margin:38px 0 0;padding:18px;border:1px solid #cfe0ec;border-radius:14px;background:#f2f8fc}.tools-note h2{font-size:1.08rem;margin:0 0 6px}.tools-note p{margin:0;color:#526273;line-height:1.5}.tools-note a{font-weight:850;color:#155c89}
     footer{border-top:1px solid var(--line);margin-top:48px;padding:22px 0;color:var(--muted);font-size:.86rem}[hidden]{display:none!important}
     @media(max-width:900px){.tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tools-nav{display:none}.tools-toolbar{grid-template-columns:1fr}}
     @media(max-width:580px){.tools-shell{padding-left:14px;padding-right:14px}.tools-head__in{padding-left:14px;padding-right:14px}.tools-grid{grid-template-columns:1fr}.tools-hero{padding-top:34px}.tools-hero h1{font-size:2rem}}
@@ -46,6 +46,7 @@
       <a class="tools-btn primary" href="/#open-tools" data-el="Δεν ξέρω τι χρειάζομαι · Βρες το σωστό AI" data-en="I'm not sure what I need · Find the right AI">Δεν ξέρω τι χρειάζομαι · Βρες το σωστό AI</a>
       <a class="tools-btn" href="/study.html" data-el="Άνοιξε την AI Μελέτη" data-en="Open AI Study">Άνοιξε την AI Μελέτη</a>
     </div>
+    <aside class="tools-featured" aria-label="Δωρεάν δημόσια εκπαιδευτική υπηρεσία"><div><strong data-el="Δημόσιο Ψηφιακό Φροντιστήριο · δωρεάν" data-en="Public Digital Tutoring · free">Δημόσιο Ψηφιακό Φροντιστήριο · δωρεάν</strong><p data-el="Βιντεομαθήματα από Ε΄ Δημοτικού έως Β΄ Λυκείου και ζωντανή προετοιμασία Πανελλαδικών Γ΄ Λυκείου (ΓΕΛ, ΕΠΑΛ, Ειδική Αγωγή). Επίσημη εκπαιδευτική πηγή, όχι AI chatbot." data-en="Recorded lessons from primary year 5 to upper-secondary year 2, plus live Panhellenic exam preparation for year 3 (general/vocational and special education). An official learning resource, not an AI chatbot.">Βιντεομαθήματα από Ε΄ Δημοτικού έως Β΄ Λυκείου και ζωντανή προετοιμασία Πανελλαδικών Γ΄ Λυκείου (ΓΕΛ, ΕΠΑΛ, Ειδική Αγωγή). Επίσημη εκπαιδευτική πηγή, όχι AI chatbot.</p></div><a class="tools-btn" href="/tools/digital-tutoring.html" data-el="Μάθε περισσότερα →" data-en="Learn more →">Μάθε περισσότερα →</a></aside>
   </section>
 
   <div class="tools-toolbar">
@@ -94,6 +95,7 @@
 
 <script>
 const externalTools = [
+  ['Ψηφιακό Φροντιστήριο (ΥΠΑΙΘΑ)','digital-tutoring.html','study practice teacher access','Δωρεάν βιντεομαθήματα Ε΄ Δημοτικού–Β΄ Λυκείου και ζωντανή προετοιμασία Πανελλαδικών Γ΄ Λυκείου.'],
   ['Anki','anki.html','study practice','Κάρτες επανάληψης και spaced repetition.'],
   ['AutoDraw','autodraw.html','create','Γρήγορο σχέδιο και εικονογράφηση με υποβοήθηση.'],
   ['Brisk Teaching','brisk.html','teacher create','Υποστήριξη εκπαιδευτικών για υλικό, ανατροφοδότηση και προσαρμογές.'],
@@ -109,9 +111,8 @@ const externalTools = [
   ['DeepL','deepl.html','study access','Μετάφραση και γλωσσική υποστήριξη.'],
   ['Desmos','desmos.html','study practice','Γραφικές παραστάσεις και διερεύνηση μαθηματικών.'],
   ['Diffit','diffit.html','teacher access study','Προσαρμογή κειμένων και εκπαιδευτικού υλικού σε διαφορετικά επίπεδα.'],
-  ['Digital Tutoring','digital-tutoring.html','study practice','Ψηφιακή υποστήριξη και καθοδηγούμενη μελέτη.'],
   ['Duolingo','duolingo.html','study practice','Εξάσκηση ξένων γλωσσών.'],
-  ['EduAI Digital Tutoring','eduai-digital-tutoring.html','study practice','Ψηφιακή εκπαιδευτική καθοδήγηση με AI.'],
+  ['EduAI — υπό ανάπτυξη','eduai-digital-tutoring.html','research','Ανακοινωμένη μελλοντική AI υπηρεσία, όχι ακόμη διαθέσιμος γενικός βοηθός μελέτης.'],
   ['Elements of AI','elements-of-ai.html','study research','Δωρεάν εισαγωγή στις βασικές έννοιες της τεχνητής νοημοσύνης.'],
   ['Elicit','elicit.html','research','Αναζήτηση και οργάνωση επιστημονικής βιβλιογραφίας.'],
   ['ELSA Speak','elsa-speak.html','study access','Εξάσκηση αγγλικής προφοράς και ομιλίας.'],
@@ -161,8 +162,15 @@ externalTools.forEach(([name,file,tags,desc])=>{
   a.className='tool-card';
   a.href='/tools/'+file;
   a.dataset.tags=tags+' external';
-  a.dataset.search=(name+' '+desc+' '+tags).toLowerCase();
+  a.dataset.search=(name+' '+desc+' '+tags+(file==='digital-tutoring.html'?' digital tutoring digital school digitalschool δωρεάν κρατικό δημόσιο φροντιστήριο πανελλαδικές βίντεο σχολείο':'')).toLowerCase();
+  if(file==='digital-tutoring.html')a.id='digital-tutoring-card';
   a.innerHTML=`<div class="tool-card__top"><span class="tool-card__icon">${icons[first]||'✨'}</span><span class="tool-card__tag">εξωτερικό</span></div><h3>${name}</h3><p>${desc}</p><span class="tool-card__go">Περισσότερα →</span>`;
+  if(file==='digital-tutoring.html'){
+    const badge=a.querySelector('.tool-card__tag'),title=a.querySelector('h3'),description=a.querySelector('p');
+    badge.textContent='δωρεάν δημόσιο';badge.setAttribute('data-el','δωρεάν δημόσιο');badge.setAttribute('data-en','free public service');
+    title.setAttribute('data-el','Ψηφιακό Φροντιστήριο (ΥΠΑΙΘΑ)');title.setAttribute('data-en','Public Digital Tutoring (Greek Ministry)');
+    description.setAttribute('data-el',desc);description.setAttribute('data-en','Free public recorded lessons from primary year 5 to upper-secondary year 2, and live Panhellenic exam preparation for year 3.');
+  }
   externalGrid.appendChild(a);
 });
 
@@ -196,6 +204,7 @@ function setLang(lang){
   document.getElementById('elBtn').classList.toggle('active',lang==='el');
   document.getElementById('enBtn').classList.toggle('active',lang==='en');
   search.placeholder=lang==='el'?'Αναζήτηση εργαλείου ή ανάγκης…':'Search tool or need…';
+  applyFilters();
 }
 document.getElementById('elBtn').addEventListener('click',()=>setLang('el'));
 document.getElementById('enBtn').addEventListener('click',()=>setLang('en'));

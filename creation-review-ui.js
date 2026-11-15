@@ -87,10 +87,10 @@ async function request(current){
  const ctl=new AbortController();controller=ctl;
  current.kind="loading";paint(current);
  try{
-  const res=await fetch("/api/creation-review",{
+  const res=await fetch("/api/tutor-assistant",{
    method:"POST",headers:{"Content-Type":"application/json"},
    cache:"no-store",credentials:"same-origin",
-   body:JSON.stringify({missionId:body.missionId,answers:body.answers,plan:body.plan,lang:body.lang}),
+   body:JSON.stringify({audience:"creation_student",activity:"creation_plan_review",missionId:body.missionId,answers:body.answers,plan:body.plan,lang:body.lang}),
    signal:ctl.signal
   });
   const data=await res.json().catch(()=>({error:"invalid_response"}));

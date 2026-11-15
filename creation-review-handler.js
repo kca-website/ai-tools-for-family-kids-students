@@ -1,9 +1,9 @@
 /* Creation Missions: private-by-default, learning-oriented review of a student's own plan.
  * Reuses configured server-side provider router. Never logs, saves or caches submitted text.
  */
-const { generateChat, getAiStatus } = require('../ai-provider-router');
-const baseMissions = require('../creation-missions-data');
-const extraMissions = require('../creation-missions-extra');
+const { generateChat, getAiStatus } = require('./ai-provider-router');
+const baseMissions = require('./creation-missions-data');
+const extraMissions = require('./creation-missions-extra');
 const missionMap = new Map([...baseMissions, ...extraMissions].map(m => [m.id,m]));
 const calls = new Map();
 const MAX_CALLS=5, WINDOW=10*60*1000, MAX_BODY=4400;

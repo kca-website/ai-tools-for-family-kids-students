@@ -10,17 +10,17 @@ const MAX_CALLS=5, WINDOW=10*60*1000, MAX_BODY=4400;
 const CATEGORIES = {
  primary: ["problem","reason","people","check"],
  middle: ["problem","reason","people","check"],
- high: ["problem","scope","schedule","risk","check"],
- epal: ["problem","scope","schedule","risk","check"]
+ high: ["problem","scope","schedule","budget","risk","check"],
+ epal: ["problem","scope","schedule","budget","risk","check"]
 };
 const TITLES={
  el:{
   problem:"Κατανόηση προβλήματος",reason:"Αιτιολόγηση επιλογής",people:"Ανάγκες και συμμετοχή",
-  check:"Τρόπος ελέγχου",scope:"Παραδοτέα και όρια έργου",schedule:"Χρονοδιάγραμμα και υπεύθυνοι",risk:"Κίνδυνοι και εναλλακτικές"
+  check:"Τρόπος ελέγχου",scope:"Παραδοτέα και όρια έργου",schedule:"Χρονοδιάγραμμα και υπεύθυνοι",budget:"Κόστος και αποθεματικό",risk:"Κίνδυνοι και εναλλακτικές"
  },
  en:{
   problem:"Problem understanding",reason:"Reasoning",people:"People and access",check:"Success measurement",
-  scope:"Scope and deliverables",schedule:"Timeline and owners",risk:"Risks and contingencies"
+  scope:"Scope and deliverables",schedule:"Timeline and owners",budget:"Budget and contingency",risk:"Risks and contingencies"
  }
 };
 const STATUS=new Set(["strong","developing","missing"]);

@@ -1,19 +1,19 @@
 /* Creation Missions pilot — deterministic educational simulation, no API calls or persistence. */
 (function(){
 "use strict";
-const missions=window.CREATION_MISSIONS;
+const missions=[...(window.CREATION_MISSIONS||[]),...(window.CREATION_MISSIONS_EXTRA||[])];
 if(!Array.isArray(missions)||!missions.length||!document.getElementById("mission"))return;
 const $=id=>document.getElementById(id);
 const p=(el,en)=>({el,en});
 const UI={
   el:{
-    choose:"Διάλεξε μια αποστολή",chooseSub:"Τέσσερις διαφορετικές προκλήσεις. Σκέψου, αποφάσισε, παρατήρησε τι αλλάζει και ξαναδοκίμασε.",age:"Ηλικίες",budget:"Εικονικός προϋπολογισμός",progress:"Πρόοδος",goal:"Αποστολή",pills:["4 αποστολές","Χωρίς λογαριασμό","Μαθαίνω από τις συνέπειες"],sketch:["Σκέφτομαι","Σχεδιάζω","Δοκιμάζω","Εξηγώ"],intro:"Η πρόκληση",introTitle:"Θα δοκιμάσεις τη δική σου λύση",introMentor:"Πριν ξεκινήσεις, σκέψου: πώς θα αποφασίσεις χωρίς να μαντεύεις;",start:"Ξεκίνα την αποστολή",stage:"Απόφαση",of:"από",select:"Τι επιλέγεις;",cost:"Κόστος",unaffordable:"Δεν επαρκεί ο προϋπολογισμός",remaining:"Υπόλοιπο",benefit:"Τι πέτυχε",risk:"Τι δεν πέτυχε",reason:"Γιατί συνέβη",improve:"Πώς θα μπορούσε να βελτιωθεί",consequences:"Η συνέπεια της επιλογής σου",basedOn:"Σύνδεση με προηγούμενη απόφαση",evidenceWarning:"Το αρχικό σου σχέδιο στηρίχθηκε σε λίγα στοιχεία. Μια νέα απόφαση μπορεί να έχει απρόβλεπτα αποτελέσματα.",inclusionWarning:"Η προηγούμενη επιλογή δυσκόλεψε τη συμμετοχή κάποιων ανθρώπων. Έλεγξε αν η επόμενη το διορθώνει.",mentor:"Βοηθός σκέψης",mentorDesc:"Καθοδηγούμενη συζήτηση με ελεγμένες απαντήσεις. Δεν είναι ζωντανό AI.",askLabel:"Γράψε μια ερώτηση για την επιλογή σου",askPlace:"Γιατί δεν πέτυχε; Πώς μπορώ να το βελτιώσω;",ask:"Ρώτησε",quick:["Γιατί;","Τι πήγε καλά;","Τι δεν πήγε καλά;","Πώς το βελτιώνω;"],initialCoach:"Διάλεξε μια απόφαση για να μπορέσουμε να συζητήσουμε τις συνέπειες.",fallbackCoach:"Μπορώ να εξηγήσω την επιλογή που έκανες. Δοκίμασε να ρωτήσεις «Γιατί;», «Τι δεν πέτυχε;» ή «Πώς το βελτιώνω;».",mic:"Μίλα",stopMic:"Σταμάτα",micMissing:"Η φωνητική υπαγόρευση δεν υποστηρίζεται από αυτόν τον browser. Μπορείς να πληκτρολογήσεις.",micPrivacy:"Το μικρόφωνο είναι προαιρετικό. Ο browser μπορεί να στείλει τη φωνή στον δικό του πάροχο για αναγνώριση· το AI Tools 4 Kids δεν αποθηκεύει ηχογράφηση.",micError:"Δεν ήταν δυνατή η αναγνώριση φωνής. Δοκίμασε πληκτρολόγηση ή έλεγξε τα δικαιώματα μικροφώνου.",micListening:"Ακούω… μίλησε και μετά πάτησε «Σταμάτα».",micReady:"Η υπαγόρευση ολοκληρώθηκε. Έλεγξε το κείμενο πριν το στείλεις.",back:"Πίσω",next:"Συνέχεια",pitchTitle:"Παρουσίασε το σχέδιό σου",pitchDesc:"Γράψε με δικά σου λόγια ποιο πρόβλημα λύνεις, ποιους βοηθάς, ποια δυσκολία αντιμετώπισες και πώς θα ελέγξεις αν πέτυχε.",pitchPlace:"Προτείνω… Επέλεξα αυτή τη λύση επειδή… Μια δυσκολία είναι… Θα ελέγξω…",pitchNote:"Ελάχιστο 20 χαρακτήρες. Δεν βαθμολογείται η ορθογραφία.",pitchPoints:["Ποιο πρόβλημα λύνεις;","Γιατί διάλεξες αυτή τη λύση;","Πώς θα ελέγξεις αν λειτουργεί;"],finish:"Δες το αποτέλεσμα",result:"Τι έμαθες από τις αποφάσεις σου;",resultOk:"Η λύση σου έχει δυνατά σημεία",resultInclusion:"Η λύση χρειάζεται καλύτερη πρόσβαση για όλους",resultEvidence:"Χρειάζεσαι περισσότερα στοιχεία πριν αποφασίσεις",resultBalanced:"Έκανες επιλογές που αξίζει να δοκιμαστούν",resultExplain:"Το αποτέλεσμα είναι ενδεικτικό και αφορά το φανταστικό σενάριο. Δεν είναι βαθμός ή πραγματική πρόβλεψη.",meters:["Λειτουργικότητα","Χρήσιμο αποτέλεσμα","Συμμετοχή όλων","Τεκμηρίωση"],metricNote:"Οι δείκτες ενημερώνονται από τις επιλεγμένες ενέργειες. Δεν μετρούν την αξία του μαθητή.",history:"Τι συνέβη σε κάθε απόφαση",myPitch:"Η δική σου πρόταση",reflectTitle:"Επόμενη σκέψη",reflect:"Ποιος θα μπορούσε να διαφωνήσει με το σχέδιο και ποια δοκιμή θα έκανε τη λύση σου πιο αξιόπιστη;",tryAgain:"Ξαναδοκίμασε άλλες επιλογές",print:"Εκτύπωση",privacy:"Οι επιλογές και τα κείμενα δεν αποστέλλονται στο site ούτε αποθηκεύονται. Η καθοδήγηση είναι προσχεδιασμένη, όχι ζωντανό AI.",policy:"Πολιτική απορρήτου",nextMission:"Άλλη αποστολή"
+    choose:"Διάλεξε μια αποστολή",chooseSub:"Οκτώ αποστολές από το Δημοτικό έως το Λύκειο και το ΕΠΑΛ. Δοκίμασε αποφάσεις και μάθε από τις συνέπειες.",age:"Ηλικίες",budget:"Εικονικός προϋπολογισμός",progress:"Πρόοδος",goal:"Αποστολή",pills:["8 αποστολές","Χωρίς λογαριασμό","Μαθαίνω από τις συνέπειες"],sketch:["Σκέφτομαι","Σχεδιάζω","Δοκιμάζω","Εξηγώ"],intro:"Η πρόκληση",introTitle:"Θα δοκιμάσεις τη δική σου λύση",introMentor:"Πριν ξεκινήσεις, σκέψου: πώς θα αποφασίσεις χωρίς να μαντεύεις;",start:"Ξεκίνα την αποστολή",stage:"Απόφαση",of:"από",select:"Τι επιλέγεις;",cost:"Κόστος",unaffordable:"Δεν επαρκεί ο προϋπολογισμός",remaining:"Υπόλοιπο",benefit:"Τι πέτυχε",risk:"Τι δεν πέτυχε",reason:"Γιατί συνέβη",improve:"Πώς θα μπορούσε να βελτιωθεί",consequences:"Η συνέπεια της επιλογής σου",basedOn:"Σύνδεση με προηγούμενη απόφαση",evidenceWarning:"Το αρχικό σου σχέδιο στηρίχθηκε σε λίγα στοιχεία. Μια νέα απόφαση μπορεί να έχει απρόβλεπτα αποτελέσματα.",inclusionWarning:"Η προηγούμενη επιλογή δυσκόλεψε τη συμμετοχή κάποιων ανθρώπων. Έλεγξε αν η επόμενη το διορθώνει.",mentor:"Βοηθός σκέψης",mentorDesc:"Καθοδηγούμενη συζήτηση με ελεγμένες απαντήσεις. Δεν είναι ζωντανό AI.",askLabel:"Γράψε μια ερώτηση για την επιλογή σου",askPlace:"Γιατί δεν πέτυχε; Πώς μπορώ να το βελτιώσω;",ask:"Ρώτησε",quick:["Γιατί;","Τι πήγε καλά;","Τι δεν πήγε καλά;","Πώς το βελτιώνω;"],initialCoach:"Διάλεξε μια απόφαση για να μπορέσουμε να συζητήσουμε τις συνέπειες.",fallbackCoach:"Μπορώ να εξηγήσω την επιλογή που έκανες. Δοκίμασε να ρωτήσεις «Γιατί;», «Τι δεν πέτυχε;» ή «Πώς το βελτιώνω;».",mic:"Μίλα",stopMic:"Σταμάτα",micMissing:"Η φωνητική υπαγόρευση δεν υποστηρίζεται από αυτόν τον browser. Μπορείς να πληκτρολογήσεις.",micPrivacy:"Το μικρόφωνο είναι προαιρετικό. Ο browser μπορεί να στείλει τη φωνή στον δικό του πάροχο για αναγνώριση· το AI Tools 4 Kids δεν αποθηκεύει ηχογράφηση.",micError:"Δεν ήταν δυνατή η αναγνώριση φωνής. Δοκίμασε πληκτρολόγηση ή έλεγξε τα δικαιώματα μικροφώνου.",micListening:"Ακούω… μίλησε και μετά πάτησε «Σταμάτα».",micReady:"Η υπαγόρευση ολοκληρώθηκε. Έλεγξε το κείμενο πριν το στείλεις.",back:"Πίσω",next:"Συνέχεια",pitchTitle:"Παρουσίασε το σχέδιό σου",pitchDesc:"Γράψε με δικά σου λόγια ποιο πρόβλημα λύνεις, ποιους βοηθάς, ποια δυσκολία αντιμετώπισες και πώς θα ελέγξεις αν πέτυχε.",pitchPlace:"Προτείνω… Επέλεξα αυτή τη λύση επειδή… Μια δυσκολία είναι… Θα ελέγξω…",pitchNote:"Ελάχιστο 20 χαρακτήρες. Δεν βαθμολογείται η ορθογραφία.",pitchPoints:["Ποιο πρόβλημα λύνεις;","Γιατί διάλεξες αυτή τη λύση;","Πώς θα ελέγξεις αν λειτουργεί;"],finish:"Δες το αποτέλεσμα",result:"Τι έμαθες από τις αποφάσεις σου;",resultOk:"Η λύση σου έχει δυνατά σημεία",resultInclusion:"Η λύση χρειάζεται καλύτερη πρόσβαση για όλους",resultEvidence:"Χρειάζεσαι περισσότερα στοιχεία πριν αποφασίσεις",resultBalanced:"Έκανες επιλογές που αξίζει να δοκιμαστούν",resultExplain:"Το αποτέλεσμα είναι ενδεικτικό και αφορά το φανταστικό σενάριο. Δεν είναι βαθμός ή πραγματική πρόβλεψη.",meters:["Λειτουργικότητα","Χρήσιμο αποτέλεσμα","Συμμετοχή όλων","Τεκμηρίωση"],metricNote:"Οι δείκτες ενημερώνονται από τις επιλεγμένες ενέργειες. Δεν μετρούν την αξία του μαθητή.",history:"Τι συνέβη σε κάθε απόφαση",myPitch:"Η δική σου πρόταση",reflectTitle:"Επόμενη σκέψη",reflect:"Ποιος θα μπορούσε να διαφωνήσει με το σχέδιο και ποια δοκιμή θα έκανε τη λύση σου πιο αξιόπιστη;",tryAgain:"Ξαναδοκίμασε άλλες επιλογές",print:"Εκτύπωση",privacy:"Οι επιλογές μένουν στη συσκευή. Αν επιλέξεις προαιρετική ανάλυση AI, η πρότασή σου και οι αποφάσεις αποστέλλονται στον πάροχο AI. Το site δεν αποθηκεύει το κείμενο.",policy:"Πολιτική απορρήτου",nextMission:"Άλλη αποστολή"
   },
   en:{
-    choose:"Choose a creation mission",chooseSub:"Four different challenges. Think, decide, see what changes, then try again.",age:"Ages",budget:"Imaginary budget",progress:"Progress",goal:"Mission",pills:["4 missions","No account","Learn from consequences"],sketch:["Think","Design","Test","Explain"],intro:"Your challenge",introTitle:"Try out your own solution",introMentor:"Before you start, how can you decide without just guessing?",start:"Start mission",stage:"Decision",of:"of",select:"What will you choose?",cost:"Cost",unaffordable:"Not enough budget",remaining:"Remaining",benefit:"What worked",risk:"What did not work",reason:"Why it happened",improve:"How to improve it",consequences:"Consequences of your choice",basedOn:"Linked to your earlier decision",evidenceWarning:"Your earlier plan relied on limited evidence. New choices may have unexpected results.",inclusionWarning:"Your earlier choice made participation harder for some people. Check whether your next step fixes that.",mentor:"Thinking coach",mentorDesc:"Guided conversation with prewritten responses, not live AI.",askLabel:"Ask about your decision",askPlace:"Why did it fail? How could I improve it?",ask:"Ask",quick:["Why?","What worked?","What didn't work?","How can I improve it?"],initialCoach:"Pick an action first, then we can discuss its consequences.",fallbackCoach:"I can explain the decision you made. Try asking 'Why?', 'What didn't work?' or 'How can I improve it?'.",mic:"Speak",stopMic:"Stop",micMissing:"Speech recognition is unavailable in this browser. You can type instead.",micPrivacy:"The microphone is optional. Your browser may send voice to its speech recognition provider; AI Tools 4 Kids does not store recordings.",micError:"Speech recognition did not work. Type instead or check microphone permissions.",micListening:"Listening… speak, then press 'Stop'.",micReady:"Dictation completed. Check the text before sending.",back:"Back",next:"Continue",pitchTitle:"Present your plan",pitchDesc:"Explain in your own words the problem, who benefits, what did not work and how you will check whether the solution works.",pitchPlace:"I propose… I chose it because… A challenge was… I will check…",pitchNote:"At least 20 characters. Spelling is not graded.",pitchPoints:["What problem are you solving?","Why this solution?","How will you test it?"],finish:"See outcome",result:"What did you learn from your choices?",resultOk:"Your idea has strong points",resultInclusion:"Your plan needs to include more people",resultEvidence:"You need stronger evidence",resultBalanced:"You made choices worth testing",resultExplain:"This outcome is illustrative and applies only to the fictional scenario. It is not a grade or a real-world prediction.",meters:["Practicality","Useful outcome","Inclusive access","Evidence"],metricNote:"Indicators change based on decisions. They do not measure student worth.",history:"What happened after each decision",myPitch:"Your proposal",reflectTitle:"Think further",reflect:"Who might disagree with your plan, and what test would make it more reliable?",tryAgain:"Try different decisions",print:"Print",privacy:"Your choices and text are not sent to the website or stored. Guidance is scripted, not live AI.",policy:"Privacy policy",nextMission:"Another mission"
+    choose:"Choose a creation mission",chooseSub:"Eight missions from primary to Lyceum and vocational education. Learn from each decision.",age:"Ages",budget:"Imaginary budget",progress:"Progress",goal:"Mission",pills:["8 missions","No account","Learn from consequences"],sketch:["Think","Design","Test","Explain"],intro:"Your challenge",introTitle:"Try out your own solution",introMentor:"Before you start, how can you decide without just guessing?",start:"Start mission",stage:"Decision",of:"of",select:"What will you choose?",cost:"Cost",unaffordable:"Not enough budget",remaining:"Remaining",benefit:"What worked",risk:"What did not work",reason:"Why it happened",improve:"How to improve it",consequences:"Consequences of your choice",basedOn:"Linked to your earlier decision",evidenceWarning:"Your earlier plan relied on limited evidence. New choices may have unexpected results.",inclusionWarning:"Your earlier choice made participation harder for some people. Check whether your next step fixes that.",mentor:"Thinking coach",mentorDesc:"Guided conversation with prewritten responses, not live AI.",askLabel:"Ask about your decision",askPlace:"Why did it fail? How could I improve it?",ask:"Ask",quick:["Why?","What worked?","What didn't work?","How can I improve it?"],initialCoach:"Pick an action first, then we can discuss its consequences.",fallbackCoach:"I can explain the decision you made. Try asking 'Why?', 'What didn't work?' or 'How can I improve it?'.",mic:"Speak",stopMic:"Stop",micMissing:"Speech recognition is unavailable in this browser. You can type instead.",micPrivacy:"The microphone is optional. Your browser may send voice to its speech recognition provider; AI Tools 4 Kids does not store recordings.",micError:"Speech recognition did not work. Type instead or check microphone permissions.",micListening:"Listening… speak, then press 'Stop'.",micReady:"Dictation completed. Check the text before sending.",back:"Back",next:"Continue",pitchTitle:"Present your plan",pitchDesc:"Explain in your own words the problem, who benefits, what did not work and how you will check whether the solution works.",pitchPlace:"I propose… I chose it because… A challenge was… I will check…",pitchNote:"At least 20 characters. Spelling is not graded.",pitchPoints:["What problem are you solving?","Why this solution?","How will you test it?"],finish:"See outcome",result:"What did you learn from your choices?",resultOk:"Your idea has strong points",resultInclusion:"Your plan needs to include more people",resultEvidence:"You need stronger evidence",resultBalanced:"You made choices worth testing",resultExplain:"This outcome is illustrative and applies only to the fictional scenario. It is not a grade or a real-world prediction.",meters:["Practicality","Useful outcome","Inclusive access","Evidence"],metricNote:"Indicators change based on decisions. They do not measure student worth.",history:"What happened after each decision",myPitch:"Your proposal",reflectTitle:"Think further",reflect:"Who might disagree with your plan, and what test would make it more reliable?",tryAgain:"Try different decisions",print:"Print",privacy:"Your choices stay on your device. If you request optional AI review, your plan and decisions are sent to an AI provider. The site does not store your text.",policy:"Privacy policy",nextMission:"Another mission"
   }
 };
-let language="el",active=missions[0],step=0,answers=[null,null,null],pitch="",chats={},recognizer=null,recognizerButton=null,recognizerStatus=null;
+let language=/^\/en\//.test(location.pathname)?"en":"el",active=missions[0],step=0,answers=[null,null,null],pitch="",chats={},levelFilter="all",recognizer=null,recognizerButton=null,recognizerStatus=null;
 const copy=()=>UI[language],tr=pair=>pair?.[language]||pair?.el||"";
 const euro=n=>n.toLocaleString(language==="el"?"el-GR":"en-GB")+" €";
 function el(tag,cls,txt){const x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined)x.textContent=txt;return x;}
@@ -40,26 +40,36 @@ function attachMic(input,parent){
  btn.setAttribute("aria-pressed","false");
  wrap.appendChild(btn);parent.appendChild(wrap);
 }
+const levels={el:{all:"Όλες",primary:"Δημοτικό",middle:"Γυμνάσιο",high:"Λύκειο",epal:"ΕΠΑΛ"},en:{all:"All",primary:"Primary",middle:"Middle school",high:"Lyceum",epal:"EPAL"}};
 function missionCard(){
  let picker=$("missionPicker");
  if(!picker){picker=el("section","mission-picker");picker.id="missionPicker";picker.setAttribute("aria-labelledby","missionPickerTitle");document.querySelector(".work").insertBefore(picker,document.querySelector(".stats"));}
  picker.replaceChildren();
  add(picker,el("h2","",copy().choose)).id="missionPickerTitle";
  add(picker,el("p","muted",copy().chooseSub));
- const grid=add(picker,el("div","mission-grid"));
- missions.forEach(m=>{
+ const filters=add(picker,el("div","mission-filters"));
+  for(const level of ["all","primary","middle","high","epal"]){
+   const b=button(levels[language][level],"mission-filter",()=>{
+    levelFilter=level;
+    const available=missions.filter(m=>level==="all"||m.level===level);
+    if(!available.some(m=>m.id===active.id))chooseMission(available[0].id);
+    else render(false);
+   });b.setAttribute("aria-pressed",String(levelFilter===level));filters.appendChild(b);
+  }
+  const grid=add(picker,el("div","mission-grid"));
+ missions.filter(m=>levelFilter==="all"||m.level===levelFilter).forEach(m=>{
   const selected=m.id===active.id;
   const b=button("","mission-tile",()=>chooseMission(m.id));b.setAttribute("aria-pressed",String(selected));
   add(b,el("span","mission-icon",m.symbol));
   const text=add(b,el("span","mission-tile__copy"));add(text,el("strong","",tr(m.title)));add(text,el("small","",tr(m.summary)));
-  add(b,el("span","mission-age",copy().age+" "+m.ages));
+  add(b,el("span","mission-age",tr(m.grade)||copy().age+" "+m.ages));
   add(grid,b);
  });
 }
 function setupPage(){
  const c=copy();document.documentElement.lang=language;
  document.title=(language==="el"?"Αποστολές Δημιουργίας":"Creation Missions")+" | AI Tools 4 Kids";
- $("pilot").textContent=language==="el"?"Πιλοτικό εργαστήριο · 4 αποστολές":"Pilot studio · 4 missions";
+ $("pilot").textContent=language==="el"?"Πιλοτικό εργαστήριο · 8 αποστολές":"Pilot studio · 8 missions";
  $("heroTitle").textContent=language==="el"?"Σκέψου. Δημιούργησε. Δοκίμασε.":"Think. Create. Test.";
  $("heroText").textContent=language==="el"?"Αντιμετώπισε πραγματικές προκλήσεις, δες τις συνέπειες των αποφάσεών σου και εξήγησε πώς θα βελτίωνες τη λύση σου.":"Face realistic challenges, see the consequences of your decisions and explain how you would improve your solution.";
  for(let i=0;i<3;i++)$("pill"+i).textContent=c.pills[i];
@@ -72,7 +82,7 @@ function setupPage(){
 }
 function chooseMission(id){
  const chosen=missions.find(x=>x.id===id);if(!chosen)return;
- stopMic();active=chosen;step=0;answers=[null,null,null];pitch="";chats={};
+ stopMic();window.CREATION_REVIEW_WIDGET?.clear();active=chosen;step=0;answers=[null,null,null];pitch="";chats={};
  try{const u=new URL(location.href);u.searchParams.set("mission",id);history.replaceState(null,"",u.pathname+u.search+u.hash);}catch(_){}
  render(true);
 }
@@ -159,7 +169,7 @@ function renderDecision(){
    const b=button("","option",()=>{
     stopMic();
     answers[i]=j;for(let k=i+1;k<3;k++)answers[k]=null;
-    pitch="";chats={};render(false);$("choice"+j).focus();
+    pitch="";chats={};window.CREATION_REVIEW_WIDGET?.clear();render(false);$("choice"+j).focus();
    });
    b.id="choice"+j;b.disabled=o.cost>budget;b.setAttribute("aria-pressed",String(answers[i]===j));
    const row=add(b,el("span","option-title"));add(row,el("strong","",tr(o.title)));add(row,el("span","price",euro(o.cost)));
@@ -183,7 +193,7 @@ function renderPitch(){
  const meta=add(body,el("div","entry-meta"));meta.id="pitchHelp";add(meta,el("span","",c.pitchNote));const count=add(meta,el("span","",pitch.length+" / 1000"));field.setAttribute("aria-describedby","pitchHelp");
  const mic=add(body,el("div","pitch-mic"));attachMic(field,mic);
  const next=controls(body,()=>{pitch=field.value;go(3);},()=>{if(pitch.trim().length>=20)go(5);},pitch.trim().length>=20,c.finish);
- field.addEventListener("input",()=>{pitch=field.value;count.textContent=pitch.length+" / 1000";next.disabled=pitch.trim().length<20;});
+ field.addEventListener("input",()=>{window.CREATION_REVIEW_WIDGET?.clear();pitch=field.value;count.textContent=pitch.length+" / 1000";next.disabled=pitch.trim().length<20;});
 }
 function renderResult(){
  const c=copy(),v=values(),title=v[2]<=1?c.resultInclusion:v[3]<=1?c.resultEvidence:v[0]>=3&&v[1]>=3?c.resultBalanced:c.resultOk;
@@ -201,8 +211,9 @@ function renderResult(){
  add(recap,el("strong","",c.remaining+": "+euro(active.budget-spent())));
  const userPitch=add(body,el("div","report"));add(userPitch,el("h3","",c.myPitch));add(userPitch,el("p","proposal",pitch));
  const reflection=add(body,el("div","outcome"));add(reflection,el("strong","",c.reflectTitle));add(reflection,el("p","",c.reflect));
+ window.CREATION_REVIEW_WIDGET?.render(body,{missionId:active.id,answers:[...answers],plan:pitch,lang:language,onEdit:()=>go(4)});
  const row=add(body,el("div","actions"));
- add(row,button(c.tryAgain,"btn sub",()=>{answers=[null,null,null];pitch="";chats={};go(0);}));
+ add(row,button(c.tryAgain,"btn sub",()=>{answers=[null,null,null];pitch="";chats={};window.CREATION_REVIEW_WIDGET?.clear();go(0);}));
  add(row,button(c.print,"btn main",()=>window.print()));
  add(row,button(c.nextMission,"btn sub",()=>{const i=missions.indexOf(active);chooseMission(missions[(i+1)%missions.length].id);}));
 }
@@ -222,8 +233,8 @@ function render(focus){
  else renderResult();
  if(focus){const heading=$("stepHeading");heading.tabIndex=-1;heading.focus({preventScroll:true});$("mission").scrollIntoView({block:"start",behavior:"auto"});}
 }
-$("el").addEventListener("click",()=>{if(language==="el")return;language="el";chats={};render(false);});
-$("en").addEventListener("click",()=>{if(language==="en")return;language="en";chats={};render(false);});
+$("el").addEventListener("click",()=>{if(language==="el")return;language="el";chats={};window.CREATION_REVIEW_WIDGET?.clear();try{history.replaceState(null,"","/creation-mission.html"+location.search+location.hash);}catch(_){}render(false);});
+$("en").addEventListener("click",()=>{if(language==="en")return;language="en";chats={};window.CREATION_REVIEW_WIDGET?.clear();try{history.replaceState(null,"","/en/creation-mission.html"+location.search+location.hash);}catch(_){}render(false);});
 try{const param=new URLSearchParams(location.search).get("mission");const match=missions.find(m=>m.id===param);if(match)active=match;}catch(_){}
 window.addEventListener("pagehide",stopMic);
 render(false);

@@ -26,15 +26,11 @@ const TITLES={
 const STATUS=new Set(["strong","developing","missing"]);
 const PIIPattern=/(?:[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|https?:\/\/\S+|\b(?:\+?\d[\d\s().-]{7,}\d)\b)/i;
 function browserAllowed(req){
- const h=req.headers||{}, origin=String(h.origin||h.Origin||"").trim();
- if(String(h["sec-fetch-site"]||"").toLowerCase()==="cross-site") return false;
+ const h=req.headers||{},origin=String(h.origin||h.Origin||"").trim().toLowerCase();
+ if(String(h["sec-fetch-site"]||"").toLowerCase()==="cross-site")return false;
  if(!origin)return true;
- try{
-  const u=new URL(origin),host=u.hostname.toLowerCase();
-  if((host==="localhost"||host==="127.0.0.1")&&(u.protocol==="http:"||u.protocol==="https:"))return true;
-  if(u.protocol!=="https:")return false;
-  return host==="www.aitools4kids.gr"||host==="aitools4kids.gr"||/^aitools4kids(?:-[a-z0-9-]+)*-kcawebsite\.vercel\.app$/.test(host);
- }catch{return false;}
+ return /^https:\/\/(?:www\.aitools4kids\.gr|aitools4kids\.gr|aitools4kids(?:-[a-z0-9-]+)*-kcawebsite\.vercel\.app)$/.test(origin)||
+  /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d{2,5})?$/.test(origin);
 }
 function limited(req){
  const h=req.headers||{};

@@ -11,7 +11,7 @@ const s=(el,en,elPrompt,enPrompt,options)=>({
 });
 const missions=[
 {
- id:"canteen",symbol:"🥪",ages:"12–15",budget:100,
+ id:"canteen",level:"middle",grade:p("Α΄–Γ΄ Γυμνασίου","Middle school"),symbol:"🥪",ages:"12–15",budget:100,
  title:p("Βελτίωσε το σχολικό κυλικείο","Improve the school canteen"),
  summary:p("Σκέψου σαν σχεδιαστής προϊόντος: μείωσε τις ουρές και βελτίωσε τις επιλογές φαγητού.","Think like a product designer: shorten queues and improve food choices."),
  problem:p("Στο κυλικείο υπάρχουν μεγάλες ουρές και λίγες υγιεινές επιλογές. Έχεις 100 εικονικά ευρώ. Πώς θα βοηθήσεις τους μαθητές χωρίς να αφήσεις κανέναν απέξω;","The canteen has long queues and few healthy options. You have 100 imaginary euros. How can you help without excluding anyone?"),
@@ -38,7 +38,7 @@ const missions=[
  ]
 },
 {
- id:"yard",symbol:"🌱",ages:"9–12",budget:80,
+ id:"yard",level:"primary",grade:p("Δ΄–ΣΤ΄ Δημοτικού","Primary grades 4–6"),symbol:"🌱",ages:"9–12",budget:80,
  title:p("Κάνε την αυλή πιο καθαρή","Make the schoolyard cleaner"),
  summary:p("Δοκίμασε ιδέες για μια καθαρή αυλή, χωρίς να σπαταλήσεις τους διαθέσιμους πόρους.","Test ideas for a cleaner playground without wasting resources."),
  problem:p("Η αυλή γεμίζει χαρτιά και πλαστικά μετά το διάλειμμα. Έχεις 80 εικονικά ευρώ για να προτείνεις μια λύση που να λειτουργεί για όλους.","The schoolyard has litter after break. You have 80 imaginary euros to propose a solution that works for everyone."),
@@ -62,7 +62,7 @@ const missions=[
  ]
 },
 {
- id:"app",symbol:"📱",ages:"15–18",budget:120,
+ id:"app",level:"high",grade:p("Α΄–Γ΄ Λυκείου","Lyceum grades 1–3"),symbol:"📱",ages:"15–18",budget:120,
  title:p("Σχεδίασε μια εφαρμογή για όλους","Design an app for everyone"),
  summary:p("Γίνε σχεδιαστής ψηφιακού προϊόντος και ανακάλυψε γιατί η προσβασιμότητα αλλάζει τις αποφάσεις.","Become a digital product designer and explore how accessibility changes decisions."),
  problem:p("Το σχολείο θέλει μια εφαρμογή για εργασίες και ανακοινώσεις. Έχεις 120 εικονικά ευρώ. Πρέπει να είναι χρήσιμη, κατανοητή και προσβάσιμη ακόμη και χωρίς συνεχή σύνδεση.","The school wants an app for homework and announcements. You have 120 imaginary euros. It needs to be useful, clear and accessible even without a constant connection."),
@@ -86,7 +86,7 @@ const missions=[
  ]
 },
 {
- id:"festival",symbol:"🎭",ages:"12–18",budget:90,
+ id:"festival",level:"middle",grade:p("Γ΄ Γυμνασίου – Λύκειο","Middle school – Lyceum"),symbol:"🎭",ages:"12–18",budget:90,
  title:p("Οργάνωσε μια σχολική γιορτή","Plan an inclusive school festival"),
  summary:p("Οργάνωσε μια γιορτή με λίγους πόρους και πολλές διαφορετικές ανάγκες.","Plan a festival with limited resources and many different needs."),
  problem:p("Το σχολείο οργανώνει γιορτή. Έχεις 90 εικονικά ευρώ και θέλεις να συμμετέχουν όσο γίνεται περισσότεροι μαθητές, ακόμη κι όσοι έχουν διαφορετικές ανάγκες πρόσβασης.","Your school is holding a festival. You have 90 imaginary euros and want as many students as possible to participate, including those with different access needs."),
@@ -110,5 +110,6 @@ const missions=[
  ]
 }
 ];
-window.CREATION_MISSIONS=Object.freeze(missions);
+if(typeof module!=="undefined" && module.exports) module.exports=missions;
+if(typeof window!=="undefined") window.CREATION_MISSIONS=Object.freeze(missions);
 })();

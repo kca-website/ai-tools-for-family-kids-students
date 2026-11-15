@@ -222,8 +222,8 @@ function render(focus){
  else renderResult();
  if(focus){const heading=$("stepHeading");heading.tabIndex=-1;heading.focus({preventScroll:true});$("mission").scrollIntoView({block:"start",behavior:"auto"});}
 }
-$("el").addEventListener("click",()=>{if(language==="el")return;language="el";render(false);});
-$("en").addEventListener("click",()=>{if(language==="en")return;language="en";render(false);});
+$("el").addEventListener("click",()=>{if(language==="el")return;language="el";chats={};render(false);});
+$("en").addEventListener("click",()=>{if(language==="en")return;language="en";chats={};render(false);});
 try{const param=new URLSearchParams(location.search).get("mission");const match=missions.find(m=>m.id===param);if(match)active=match;}catch(_){}
 window.addEventListener("pagehide",stopMic);
 render(false);

@@ -114,8 +114,8 @@ function chatResponse(question,choice){
  const c=copy();if(!choice)return c.initialCoach;
  const outcome=choice.outcome[language],q=question.toLocaleLowerCase(language==="el"?"el-GR":"en");
  if(/γιατ|αιτ|λόγ|why|reason/.test(q))return outcome[2];
- if(/πέτυχ|καλ|όφελ|worked|good|success/.test(q))return outcome[0];
  if(/απέτυχ|δεν |λάθ|κίνδ|problem|fail|wrong|risk|didn/.test(q))return outcome[1]+" "+outcome[2];
+ if(/πέτυχ|καλ|όφελ|worked|good|success/.test(q))return outcome[0];
  if(/βελτι|διορθ|άλλ|επόμε|πώς|how|improv|fix|next/.test(q))return outcome[3];
  return c.fallbackCoach;
 }

@@ -41,7 +41,7 @@ try {
   response = await page.goto(`${LOCAL}/accessibility.html`, { waitUntil: 'domcontentloaded', timeout: 60000 });
   assert(response?.ok(), `accessibility.html returned ${response?.status()}`);
   await page.waitForSelector('#a11yTableBody tr');
-  await page.waitForFunction(() => document.querySelectorAll('#a11yTableBody tr').length >= 43, null, { timeout: 30000 });
+  await page.waitForFunction(() => document.querySelectorAll('#a11yTableBody tr').length >= 44, null, { timeout: 30000 });
 
   const accessibilityText = await page.locator('body').innerText();
   assert(accessibilityText.includes('Κύριο εύρημα: Ελληνική Νοηματική Γλώσσα (ΕΝΓ)'), 'Accessibility page missing ENG finding heading');
@@ -52,7 +52,10 @@ try {
   assert((await page.locator('a[href="/methodology.html"]').count()) >= 1, 'Accessibility page does not link to methodology');
 
   const rowCount = await page.locator('#a11yTableBody tr').count();
-  assert(rowCount === 43, `Expected 43 documented accessibility rows, got ${rowCount}`);
+  // The 2026 research report retains its original 43-tool scope, while the live
+  // accessibility inventory now has a 44th entry (Google Antigravity).
+  // Count the complete displayed table without rewriting the original report.
+  assert(rowCount === 44, `Expected 44 current accessibility rows, got ${rowCount}`);
 
   if (pageErrors.length) {
     throw new Error(`Page errors during methodology/ENG smoke:\n${pageErrors.join('\n')}`);

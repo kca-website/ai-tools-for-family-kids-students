@@ -26,6 +26,11 @@ const { resolveOfficialSchoolbookSource } = require('./schoolbook-source');
 const StudyContext = require('../study-context');
 const { hasInternalReasoningLeak } = require('../ai-output-safety');
 module.exports = async function handler(req, res) {
+  // Opt-in Creation Missions review; isolated from existing tutor and study tasks.
+  if (req.method === 'POST' && req.body?.audience === 'creation_student' && req.body?.activity === 'creation_plan_review') {
+    return require('../creation-review-handler')(req, res);
+  }
+
   const aiStatus = getAiStatus();
   const model = aiStatus.model || 'openai/gpt-oss-120b';
 

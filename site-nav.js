@@ -174,6 +174,29 @@
     if(section.parentElement!==shell || section.nextElementSibling!==more) shell.insertBefore(section,more);
   }
 
+  /* Small secondary homepage link to the creation missions pilot. */
+  function ensureCreationMissionsPromo(){
+    if(location.pathname!=="/" && location.pathname!=="") return;
+    const shell=document.getElementById("homeV8Shell");
+    const anchor=document.getElementById("homeV11Paths")||document.getElementById("homeV9More");
+    if(!shell||!anchor||anchor.parentElement!==shell) return;
+    if(!document.getElementById("homeCreationMissionsStyles")){
+      const style=document.createElement("style");style.id="homeCreationMissionsStyles";
+      style.textContent=".home-creation-missions{margin:18px 0 26px;border:1px solid #cde1dc;border-radius:18px;padding:18px 20px;background:linear-gradient(120deg,#f1faf5,#f5faff);display:flex;align-items:center;justify-content:space-between;gap:22px}.home-creation-missions__intro{max-width:680px;min-width:0}.home-creation-missions__eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#247b69}.home-creation-missions h2{margin:4px 0 6px;font-size:clamp(1.08rem,2vw,1.32rem);line-height:1.3;color:#182b39}.home-creation-missions p{margin:0;color:#526579;font-size:.89rem;line-height:1.55}.home-creation-missions__action{border-radius:11px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;padding:11px 15px;font-weight:800;color:#fff!important;background:#236b65;text-decoration:none}.home-creation-missions__action:hover{background:#19544f}.home-creation-missions__action:focus-visible{outline:3px solid #efa72a;outline-offset:3px}@media(max-width:680px){.home-creation-missions{display:block;padding:17px}.home-creation-missions__action{width:100%;margin-top:14px;white-space:normal;text-align:center}}";document.head.appendChild(style);
+    }
+    let section=document.getElementById("homeCreationMissionsPromo");
+    if(!section){
+      section=document.createElement("section");section.id="homeCreationMissionsPromo";
+      section.className="home-creation-missions";section.setAttribute("aria-labelledby","homeCreationMissionsTitle");
+    }
+    const currentLang=lang();
+    if(section.dataset.lang!==currentLang){
+      section.dataset.lang=currentLang;
+      section.innerHTML=currentLang==="en"?"<div class=\"home-creation-missions__intro\"><span class=\"home-creation-missions__eyebrow\">Try it · 8 missions</span><h2 id=\"homeCreationMissionsTitle\">You decide. What happens next?</h2><p>Improve a canteen, a schoolyard, an app or a festival. See what worked, what did not, and why. No grades.</p></div><a class=\"home-creation-missions__action\" href=\"/en/creation-mission.html\">Explore missions</a>":"<div class=\"home-creation-missions__intro\"><span class=\"home-creation-missions__eyebrow\">Δοκίμασε · 8 αποστολές</span><h2 id=\"homeCreationMissionsTitle\">Εσύ αποφασίζεις. Τι συμβαίνει μετά;</h2><p>Βελτίωσε το κυλικείο, την αυλή, μια εφαρμογή ή μια σχολική γιορτή. Δες τι πέτυχε, τι δεν πέτυχε και γιατί. Χωρίς βαθμούς.</p></div><a class=\"home-creation-missions__action\" href=\"/creation-mission.html\">Δες τις αποστολές</a>";
+    }
+    if(section.parentElement!==shell||section.previousElementSibling!==anchor) shell.insertBefore(section,anchor.nextSibling);
+  }
+
   function init(){
     const toggle = document.getElementById("siteMenuToggle");
     const panel = document.getElementById("siteMenuPanel");
@@ -183,9 +206,10 @@
        shared information architecture. The animated AI Paths promo stays on the homepage
        as a featured section right after the hero. */
     ensureAiPathsPromo();
-    new MutationObserver(() => { syncAriaLabels(); restoreBrandRobot(); ensureAiPathsPromo(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    ensureCreationMissionsPromo();
+    new MutationObserver(() => { syncAriaLabels(); restoreBrandRobot(); ensureAiPathsPromo(); ensureCreationMissionsPromo(); }).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     if(location.pathname==="/" || location.pathname===""){
-      [0,100,350,900,1800].forEach(ms=>setTimeout(() => { ensureAiPathsPromo(); restoreBrandRobot(); },ms));
+      [0,100,350,900,1800].forEach(ms=>setTimeout(() => { ensureAiPathsPromo(); ensureCreationMissionsPromo(); restoreBrandRobot(); },ms));
     }
     if(!toggle || !panel) return;
 

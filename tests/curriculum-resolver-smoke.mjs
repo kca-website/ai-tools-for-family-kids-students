@@ -112,7 +112,15 @@ try{
   if(!BOOK_UNIT_MODES.has(audit.historyCPrimaryMode) || audit.historyCPrimaryTopics.length<10) throw new Error('Primary C History verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.mathCGymMode) || audit.mathCGymTopics.length<7) throw new Error('Middle C Mathematics verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.physicsBGymMode) || audit.physicsBGymTopics.length<8) throw new Error('Middle B Physics verified book sections not resolved');
-  if(!BOOK_UNIT_MODES.has(audit.physicsCGymMode) || audit.physicsCGymTopics.length<11) throw new Error('Middle C Physics verified book sections not resolved');
+  // 2026-27 IEP guidance (ΦΥΣΙΚΗ_ΑΒΓ_ΓΥΜΝ_2026-2027, pp. 26-36) teaches eight units of the
+  // official book; chapters 9-11 (lenses, nucleus, nuclear reactions) are out of scope.
+  // See docs/physics-g-study-source-2026-10-09.md and tests/physics-g-complete-source.cjs.
+  const PHYSICS_C_GYM_2026_27_UNITS=[
+    'Ηλεκτρική δύναμη, φορτίο και ηλεκτρικό πεδίο','Ηλεκτρικό ρεύμα και κυκλώματα',
+    'Αντίσταση, νόμος του Ohm και συνδεσμολογία','Αποτελέσματα, ενέργεια και ισχύς ηλεκτρικού ρεύματος',
+    'Ταλαντώσεις και εκκρεμές','Μηχανικά κύματα και ήχος','Φως, διάδοση και ανάκλαση','Διάθλαση, ανάλυση φωτός και χρώμα'
+  ];
+  if(!BOOK_UNIT_MODES.has(audit.physicsCGymMode) || JSON.stringify(audit.physicsCGymTopics)!==JSON.stringify(PHYSICS_C_GYM_2026_27_UNITS)) throw new Error('Middle C Physics verified book sections not resolved: '+JSON.stringify(audit.physicsCGymTopics));
   if(!BOOK_UNIT_MODES.has(audit.languageCGymMode) || audit.languageCGymTopics.length<8) throw new Error('Middle C Language verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.chemistryCGymMode) || audit.chemistryCGymTopics.length<15) throw new Error('Middle C Chemistry verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.biologyBGymMode) || audit.biologyBGymTopics.length<7) throw new Error('Middle B Biology verified book sections not resolved');

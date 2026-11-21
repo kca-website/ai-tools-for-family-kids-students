@@ -69,9 +69,28 @@ assert.match(html, /rows\.filter\(s=>\(s\.topics\|\|\[\]\)\.some\(t=>isVerifiedO
 assert.match(html, /customTopicFields'\)\.classList\.toggle\('hidden',strictOfficial\)/);
 assert.doesNotMatch(html, /if\(exactRows\.length\)rows=exactRows/);
 
+// The committed manifest must be exactly what the builder produces from the
+// current source tables; a stale manifest can expose units the 2026-27 guidance
+// no longer includes (e.g. Physics G chapters 9-11 after the eight-unit scope).
+const { output: rebuiltManifest } = await import('../scripts/build-secondary-grounding-availability.mjs');
+assert.equal(
+  fs.readFileSync(new URL('../secondary-grounding-availability-2026-2027.js', import.meta.url), 'utf8'),
+  rebuiltManifest,
+  'secondary-grounding-availability-2026-2027.js is stale: run node scripts/build-secondary-grounding-availability.mjs'
+);
+assert.deepEqual(
+  availability.subjects['fysiki-g-gymnasiou'],
+  [...general.get('fysiki-g-gymnasiou').sections].sort((a, b) => a.localeCompare(b, 'el')),
+  'Physics G exposes exactly the eight 2026-27 taught units'
+);
+
+// Pinned totals: change them only together with a reviewed source-table change.
+// 72 subjects / 1378 topics = de-duplicated union of overlapping sources: GEL exact-html/high (223), GEL exact-pdf (96),
+// GEL manual overrides (332), GEL English PDF units (15), general secondary book
+// sections (459), History A GEL (26) and Gymnasium page/PDF tables (246).
 const subjectCount = Object.keys(availability.subjects).length;
 const topicCount = Object.values(availability.subjects).reduce((sum, labels) => sum + labels.length, 0);
-assert.equal(subjectCount, 56);
-assert.equal(topicCount, 1027);
+assert.equal(subjectCount, 72);
+assert.equal(topicCount, 1378);
 
 console.log(`Secondary visible-grounding policy passed: ${topicCount} verified options, zero pending options exposed.`);

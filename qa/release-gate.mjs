@@ -13,6 +13,7 @@ const rows=[];
 const env={...process.env};
 for(const k of Object.keys(env)) if(/(?:API_KEY|AI_TOKEN|LLM_ACCOUNT_ID|AI_PROVIDER_ORDER|BASE_URL)/i.test(k)) delete env[k];
 const run=(id,args,{cwd=root,timeout=120000,json=null}={})=>{
+  console.log('START '+id);
   const started=Date.now();
   const r=spawnSync(process.execPath,args,{cwd,env,encoding:'utf8',timeout,maxBuffer:64*1024*1024});
   const out=r.stdout||'',err=r.stderr||'';
@@ -33,6 +34,7 @@ if(mode==='offline'){
     run('syntax-'+f.replaceAll('/','__'),['--check',f]);
   }
   run('schoolbook-mapping-integrity',['scripts/grounding-coverage-report.mjs','--strict'],{json:'grounding-audit.json'});
+  run('g-gym-science-schoolbook-grounding',['tests/g-gym-science-schoolbook-grounding.mjs']);
   const staticTests=[
     'quality-upgrade-smoke.mjs','brand-case-smoke.mjs',
     'repository-data-integrity-smoke.mjs',
@@ -58,19 +60,38 @@ if(mode==='offline'){
   const reportPath=path.join(cwd,'results','playwright-report.json');
   try{
     const report=JSON.parse(fs.readFileSync(reportPath,'utf8'));
-    let expectedFailures=0,skipped=0,executed=0;
+    let expectedFailures=0,skipped=0,executed=0,knownOutOfScope=0,unexpected=0;
+    const diagnostics=[];
+    const clean=s=>String(s||'').replace(/\x1b\[[0-9;]*m/g,'').slice(0,2000);
     function walk(suites){
       for(const s of suites||[]){
         for(const spec of s.specs||[])for(const t of spec.tests||[]){
+          const title=spec.title||'', file=spec.file||s.file||'', project=t.projectName||'';
           if(t.expectedStatus==='failed') expectedFailures++;
-          if(t.expectedStatus==='skipped'||t.status==='skipped'||!t.results?.length) skipped++;
-          else executed++;
+          if(t.expectedStatus==='skipped'||t.status==='skipped'||!t.results?.length) {
+            // Only the explicit real-deployment-only suite and desktop-only exclusion
+            // of a mobile touch-target test are out of scope here. All other skips fail.
+            const known=(file.endsWith('04-privacy.spec.mjs') && /^GET \/.* is not served$/.test(title))
+              || (file.endsWith('05-a11y.spec.mjs') && project==='chromium-desktop' && title.startsWith('touch targets on mobile'));
+            if(known) knownOutOfScope++;
+            else {skipped++; diagnostics.push({file,title,project,status:'unexpected-skip',annotations:t.annotations});}
+          } else {
+            executed++;
+            if(t.status==='unexpected'||t.status==='flaky'||t.results.some(r=>r.status==='failed'||r.status==='timedOut'||r.status==='interrupted')){
+              unexpected++;
+              diagnostics.push({file,title,project,status:t.status,errors:t.results.flatMap(r=>(r.errors||[]).map(e=>clean(e.message||e.stack)))});
+            }
+          }
         }
         walk(s.suites);
       }
     }
     walk(report.suites);
-    rows.push({id:'playwright-completeness',status:executed>0&&expectedFailures===0&&skipped===0?'PASS':'FAIL',executed,expectedFailures,skipped});
+    const counts={executed,expectedFailures,skipped,knownOutOfScope,unexpected,stats:report.stats};
+    fs.writeFileSync(path.join(dir,'browser-diagnostics.json'),JSON.stringify({counts,diagnostics},null,2));
+    console.log('BROWSER_COUNTS '+JSON.stringify(counts));
+    for(const d of diagnostics) console.log('BROWSER_DIAGNOSTIC '+JSON.stringify(d));
+    rows.push({id:'playwright-completeness',status:executed>0&&expectedFailures===0&&skipped===0&&unexpected===0?'PASS':'FAIL',...counts});
   }catch(e){rows.push({id:'playwright-completeness',status:'FAIL',error:String(e.message)});}
   // Modern standalone tests use the same local server started by CI.
   for(const f of ['curriculum-resolver-smoke.mjs','ai-help-trust-boundary-smoke.mjs','phase39-gel-own-text-guard.mjs','phase40-teacher-real-source-ui.mjs','phase41-teacher-online-search-ui.mjs','navigation-v11-smoke.mjs','mobile-home-pwa-smoke.mjs','curriculum-cross-surface-parity-smoke.mjs']){

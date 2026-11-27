@@ -26,3 +26,7 @@ Manual runtime audit: select offset and limit (max 50 requests), retrieve each s
 - Configure required status and Vercel production promotion checks with the owner. Never use a green workflow alone as evidence of all site functions passing.
 
 The entire qa directory is already excluded from Vercel via .vercelignore.
+
+## First baseline run
+
+201 checks passed and five failed. Three browser-only tests were mistakenly classified as offline; they now run in the browser job. GitHub ubuntu-latest had moved to Ubuntu 26.04, unsupported by the pinned Playwright version; browser CI is now pinned to Ubuntu 24.04. Gemini fallback test expected a retired model and request field; it now verifies the current model and thinkingLevel contract, still testing both quota failures and response safety. The generated SEO landing-page drift remains a failing check pending review; do not overwrite edited pages blindly. Initial inventory: 7,172 mapped candidate rows, 459 explicit primary/EPAL gaps (including aliases), not live-verified coverage.

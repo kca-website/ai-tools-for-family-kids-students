@@ -32,13 +32,13 @@ if(mode==='offline'){
   run('schoolbook-mapping-integrity',['scripts/grounding-coverage-report.mjs','--strict'],{json:'grounding-audit.json'});
   const staticTests=[
     'quality-upgrade-smoke.mjs','brand-case-smoke.mjs',
-    'repository-data-integrity-smoke.mjs','curriculum-resolver-smoke.mjs',
-    'ai-study-source-policy-smoke.mjs','ai-help-trust-boundary-smoke.mjs',
+    'repository-data-integrity-smoke.mjs',
+    'ai-study-source-policy-smoke.mjs',
     'ai-answer-check.test.cjs','verified-explanation-smoke.mjs',
     'ai-provider-router-smoke.mjs','gemini-fallback.mjs',
     'whole-section-audio-regression.cjs','audio-provider-fallback.cjs',
     'special-education-data-smoke.mjs','eneegyl-study-grounding-smoke.mjs',
-    'phase11d-epal-grounding-audit.mjs','phase39-gel-own-text-guard.mjs',
+    'phase11d-epal-grounding-audit.mjs',
     'phase40-teacher-source-server.mjs','phase41-teacher-online-search-server.mjs',
     'teacher-material-lab-smoke.mjs','preschool-curriculum-smoke.mjs',
     'higher-education-data-smoke.mjs','university-source-contract.cjs',
@@ -70,7 +70,7 @@ if(mode==='offline'){
     rows.push({id:'playwright-completeness',status:executed>0&&expectedFailures===0&&skipped===0?'PASS':'FAIL',executed,expectedFailures,skipped});
   }catch(e){rows.push({id:'playwright-completeness',status:'FAIL',error:String(e.message)});}
   // Modern standalone tests use the same local server started by CI.
-  for(const f of ['phase40-teacher-real-source-ui.mjs','phase41-teacher-online-search-ui.mjs','navigation-v11-smoke.mjs','mobile-home-pwa-smoke.mjs','curriculum-cross-surface-parity-smoke.mjs']){
+  for(const f of ['curriculum-resolver-smoke.mjs','ai-help-trust-boundary-smoke.mjs','phase39-gel-own-text-guard.mjs','phase40-teacher-real-source-ui.mjs','phase41-teacher-online-search-ui.mjs','navigation-v11-smoke.mjs','mobile-home-pwa-smoke.mjs','curriculum-cross-surface-parity-smoke.mjs']){
     run(f,['tests/'+f],{timeout:240000});
   }
 }

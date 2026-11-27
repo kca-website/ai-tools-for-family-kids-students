@@ -6,6 +6,7 @@ process.env.CLOUDFLARE_LLM_AI_TOKEN = 'test';
 process.env.GROQ_API_KEY = 'test';
 process.env.GEMINI_API_KEY = 'test-secret';
 delete process.env.AI_PROVIDER_ORDER;
+process.env.GEMINI_PRODUCTION_MODEL = 'gemini-3.1-flash-lite';
 assert.deepEqual(getAiStatus().providers.map(p => p.name), ['cloudflare', 'groq', 'gemini']);
 let calls = [];
 let finishReason = 'STOP';
@@ -17,7 +18,8 @@ globalThis.fetch = async (url, options) => {
   assert.ok(!url.includes('test-secret'));
   assert.equal(body.systemInstruction.parts[0].text, 'School source rules');
   assert.deepEqual(body.contents.map(c => c.role), ['user', 'model', 'user']);
-  assert.equal(body.generationConfig.thinkingConfig.thinkingBudget, 0);
+  assert.equal(body.generationConfig.thinkingConfig.thinkingLevel, 'minimal');
+  assert.equal('thinkingBudget' in body.generationConfig.thinkingConfig, false);
   assert.equal(body.generationConfig.maxOutputTokens, 100);
   assert.equal(body.generationConfig.responseMimeType, 'application/json');
   return Response.json({ candidates: [{ finishReason, content: { parts: [{ thought: true, text: 'hidden' }, { text: '{"answer":"4"}' }] } }], usageMetadata: { promptTokenCount: 20, candidatesTokenCount: 5, totalTokenCount: 25 } });
@@ -26,7 +28,7 @@ const request = { messages: [{ role: 'system', content: 'School source rules' },
 const result = await generateChat(request);
 assert.equal(result.provider, 'gemini');
 assert.equal(result.ok, true);
-assert.equal(result.model, 'gemini-2.5-flash-lite');
+assert.equal(result.model, 'gemini-3.1-flash-lite');
 assert.equal(result.text, '{"answer":"4"}');
 assert.equal(result.usage.totalTokens, 25);
 assert.equal(calls.length, 3);

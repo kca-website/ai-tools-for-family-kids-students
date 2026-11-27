@@ -42,7 +42,7 @@ await call('preschool-activity: invalid age → 400', '/api/preschool-activity',
 await call('unsupported method → 405', '/api/tutor-assistant', { method: 'DELETE', expect: 405 });
 // 3. real model calls (2)
 const generic = { audience: 'parent', task: 'conversation', mode: 'understand', system: 'Είσαι βοηθός για γονείς. Απάντησε σύντομα.', prompt: 'Πες σε μία πρόταση τι είναι το κλάσμα.' };
-await call('tutor: real answer (Cloudflare→Groq)', '/api/tutor-assistant', { method: 'POST', body: generic, real: true, expect: 200, validate: ({ json, ms }) => !json?.text?.trim() ? 'empty text' : !['cloudflare', 'groq'].includes(json.provider) ? `unexpected provider ${json.provider}` : ms > 25000 ? `slow (${ms} ms)` : null });
+await call('tutor: real answer (Cloudflare→Groq→Gemini)', '/api/tutor-assistant', { method: 'POST', body: generic, real: true, expect: 200, validate: ({ json, ms }) => !json?.text?.trim() ? 'empty text' : !['cloudflare', 'groq', 'gemini'].includes(json.provider) ? `unexpected provider ${json.provider}` : ms > 25000 ? `slow (${ms} ms)` : null });
 await call('teacher: real answer', '/api/teacher-assistant', { method: 'POST', body: { system: 'Είσαι βοηθός εκπαιδευτικού.', prompt: 'Γράψε μία πρόταση για τα κλάσματα.', outputTokens: 1200 }, real: true, expect: 200, validate: ({ json }) => (!json?.text?.trim() ? 'empty text' : null) });
 // 4. optional guardrail probes (2 real calls) – heuristic, produces WARNINGS not failures
 if (args.guardrails) {

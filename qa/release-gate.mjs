@@ -49,6 +49,7 @@ if(mode==='offline'){
   for(const f of qaTests) run('qa-'+f,['--test','tests/'+f],{cwd:path.join(root,'qa'),timeout:180000});
 }else{
   const cwd=path.join(root,'qa');
+  fs.rmSync(path.join(cwd,'results','playwright-report.json'),{force:true});
   run('playwright-full',['node_modules/@playwright/test/cli.js','test','--project=chromium-desktop','--project=chromium-mobile375','--retries=0'],{cwd,timeout:900000});
   // Playwright may return zero for an expected failure. That is not proof of readiness.
   const reportPath=path.join(cwd,'results','playwright-report.json');
@@ -68,6 +69,10 @@ if(mode==='offline'){
     walk(report.suites);
     rows.push({id:'playwright-completeness',status:executed>0&&expectedFailures===0&&skipped===0?'PASS':'FAIL',executed,expectedFailures,skipped});
   }catch(e){rows.push({id:'playwright-completeness',status:'FAIL',error:String(e.message)});}
+  // Modern standalone tests use the same local server started by CI.
+  for(const f of ['phase40-teacher-real-source-ui.mjs','phase41-teacher-online-search-ui.mjs','navigation-v11-smoke.mjs','mobile-home-pwa-smoke.mjs','curriculum-cross-surface-parity-smoke.mjs']){
+    run(f,['tests/'+f],{timeout:240000});
+  }
 }
 const summary={mode,generatedAt:new Date().toISOString(),pass:rows.filter(r=>r.status==='PASS').length,fail:rows.filter(r=>r.status==='FAIL').length,rows};
 fs.writeFileSync(path.join(dir,mode+'-summary.json'),JSON.stringify(summary,null,2));

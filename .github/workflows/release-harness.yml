@@ -36,7 +36,7 @@ jobs:
           if-no-files-found: error
   browser:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -47,6 +47,14 @@ jobs:
       - name: Install Chromium
         working-directory: qa
         run: npx playwright install --with-deps chromium
+      - name: Start local routing server and expose browser test dependencies
+        run: |
+          test -e node_modules/playwright || ln -s ../qa/node_modules/playwright node_modules/playwright
+          test -e node_modules/axe-core || ln -s ../qa/node_modules/axe-core node_modules/axe-core
+          node qa/scripts/serve.mjs >/tmp/release-harness-server.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/release-harness-server.log
+          exit 1
       - name: Desktop and mobile functional regressions
         run: node qa/release-gate.mjs browser
       - uses: actions/upload-artifact@v4

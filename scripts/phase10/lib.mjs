@@ -84,7 +84,7 @@ export function availability(d, id) {
   for (const z of ['primary', 'middle', 'high']) {
     const st = d.PATHS[z].student.tools.some((t) => t.toolId === id);
     const gd = d.PATHS[z].guardian.tools.some((t) => t.toolId === id);
-    if (st) out.push(ZONE_LABEL[z]);
+    if (st) out.push(id === 'digital-tutoring' && z === 'primary' ? 'Δημοτικό (Ε΄–ΣΤ΄)' : ZONE_LABEL[z]);
     else if (gd) out.push(`${ZONE_LABEL[z]} (μέσω γονιού/εκπαιδευτικού)`);
   }
   return out;

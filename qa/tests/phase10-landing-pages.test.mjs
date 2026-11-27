@@ -224,3 +224,21 @@ test('claims stay honest: only shipped features are named, limits are stated', (
   for (const s of LANDING) assert.doesNotMatch(t(s), /Khanmigo|εγγυάται 100%|100% ασφαλές|ΑΕΙ[^.]*πλήρης κάλυψη/i, s);
   assert.match(t('ai-gia-lykeio'), /μερική/);
 });
+
+
+test('EPAL SEO specialty lists contain exactly the specialties of each sector', () => {
+  const d = loadData();
+  const $ = load('ai-gia-epal');
+  const seen = new Set();
+  const rows = $('.disclosure details').toArray();
+  assert.equal(rows.length, 9);
+  for (const row of rows) {
+    const sector = $(row).find('summary').text();
+    const expected = d.epal.sectors.find(s => s.label === sector)?.specialties;
+    assert.ok(expected?.length, sector);
+    const actual = $(row).find('p').eq(1).text().replace(/^Ειδικότητες \(Γ΄\): /, '').replace(/\.$/, '').split(' · ');
+    assert.deepEqual(actual, expected, sector);
+    for (const label of actual) { assert.ok(!seen.has(label), 'duplicate specialty: '+label); seen.add(label); }
+  }
+  assert.equal(seen.size, d.epal.specialtyCount);
+});

@@ -30,3 +30,7 @@ The entire qa directory is already excluded from Vercel via .vercelignore.
 ## First baseline run
 
 201 checks passed and five failed. Three browser-only tests were mistakenly classified as offline; they now run in the browser job. GitHub ubuntu-latest had moved to Ubuntu 26.04, unsupported by the pinned Playwright version; browser CI is now pinned to Ubuntu 24.04. Gemini fallback test expected a retired model and request field; it now verifies the current model and thinkingLevel contract, still testing both quota failures and response safety. The generated SEO landing-page drift remains a failing check pending review; do not overwrite edited pages blindly. Initial inventory: 7,172 mapped candidate rows, 459 explicit primary/EPAL gaps (including aliases), not live-verified coverage.
+
+## Second baseline
+
+202 offline checks passed; one SEO generator consistency check failed. The Playwright install and local server succeeded on Ubuntu 24.04. Ten published quick-answer asides were missing from the source generator; preserved them in the template. The EPAL landing page also listed all 35 specialties under every sector because getSpecialties ignores arguments. The generator and the published candidate page now filter by actual sector, with a regression check. Review any remaining generator drift separately.

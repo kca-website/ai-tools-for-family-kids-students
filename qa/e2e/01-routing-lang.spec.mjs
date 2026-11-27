@@ -107,7 +107,8 @@ test.describe('home + routing', () => {
     await page.waitForTimeout(500);
     const canonical = await page.evaluate(() => document.querySelector('link[rel=canonical]')?.href);
     const robots = await page.evaluate(() => document.querySelector('meta[name=robots]')?.content || '');
-    expect(canonical?.endsWith(p) && !/noindex/.test(robots)).toBe(false);
+    expect(robots).toMatch(/noindex/i);
+    expect(Boolean(canonical?.endsWith(p))).toBe(false);
   });
 });
 

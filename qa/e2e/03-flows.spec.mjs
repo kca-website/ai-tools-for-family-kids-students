@@ -51,25 +51,27 @@ test.describe('Practice Map (Χάρτης Εξάσκησης)', () => {
   test('EPAL practice map opens from home, closes with Esc and button', async ({ page }) => {
     dismissDialogs(page);
     await page.goto('/');
-    await page.locator('#chromeMenuToggle').click();
-    await page.locator('#chromeMenuPanel a[href="/practice.html"]').first().click();
+    await page.locator('#siteMenuToggle').click();
+    await page.locator('#siteMenuPanel a[href="/practice.html"]').first().click();
     await page.waitForURL('**/practice.html');
     await page.locator('[data-epal-practice-map]').click();
     await expect(page.locator('#epmapGo')).toBeVisible();
     await page.keyboard.press('Escape');
-    const closedByEsc = await page.locator('#epmapGo').isHidden();
-    test.info().annotations.push({ type: 'epal-modal', description: `closes with Esc: ${closedByEsc}; no URL change: ${new URL(page.url()).pathname === '/'}` });
+    await expect(page.locator('#epmapGo')).toBeHidden();
+    const closedByEsc = true;
+    test.info().annotations.push({ type: 'epal-modal', description: `closes with Esc: ${closedByEsc}; no URL change: ${new URL(page.url()).pathname === '/practice.html'}` });
     expect(closedByEsc,'EPAL modal closes with Escape').toBe(true);
     await page.locator('[data-epal-practice-map]').click();
     await page.locator('.epmap__close').click();
     await expect(page.locator('#epmapGo')).toBeHidden();
   });
 
-  test('EPAL practice map can generate a short test', async ({ page, qa }) => {
+  test('EPAL practice map can generate a short test', async ({ page, qa, mockAI }) => {
+    mockAI.json={questions:[1,2,3].map(i=>({q:'Δοκιμαστική ερώτηση '+i,options:['Σωστό','Λάθος'],correct:0,explanation:'Συνθετικό παράδειγμα ελέγχου.'}))};
     dismissDialogs(page);
     await page.goto('/');
-    await page.locator('#chromeMenuToggle').click();
-    await page.locator('#chromeMenuPanel a[href="/practice.html"]').first().click();
+    await page.locator('#siteMenuToggle').click();
+    await page.locator('#siteMenuPanel a[href="/practice.html"]').first().click();
     await page.waitForURL('**/practice.html');
     await page.locator('[data-epal-practice-map]').click();
     await page.selectOption('#epmapGrade', { index: 1 });
@@ -78,7 +80,10 @@ test.describe('Practice Map (Χάρτης Εξάσκησης)', () => {
     if (await page.locator('#epmapTopic option').count() > 1) await page.selectOption('#epmapTopic', { index: 1 });
     await expect(page.locator('#epmapGo')).toBeEnabled();
     await page.locator('#epmapGo').click();
-    await page.waitForTimeout(800);
+    await expect(page.locator('#epmapQuiz')).toBeVisible();
+    for(let i=0;i<3;i++){await page.locator('.epmap__answer').first().click();await page.locator('.epmap__next').click();}
+    await expect(page.locator('.epmap__score')).toHaveText('3/3');
+    expect(mockAI.calls.filter(c=>c.method==='POST'&&c.path==='/api/tutor-assistant')).toHaveLength(1);
     expect(qa.pageErrors).toEqual([]);
     await expect(page.locator('body')).not.toContainText(/undefined|\[object/);
   });

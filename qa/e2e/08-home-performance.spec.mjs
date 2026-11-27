@@ -100,6 +100,7 @@ test.describe('home does not wait for the heavy data', () => {
       expect(early.zone, p).toBe('hidden');
 
       await page.waitForSelector('html.navigator-route-ready', { state: 'attached', timeout: 60_000 });
+      await expect(page.locator('#pathView')).toBeVisible();
       expect(await page.evaluate(() => document.documentElement.classList.contains('navigator-route-booting')), p).toBe(false);
       expect(await page.evaluate(() => getComputedStyle(document.getElementById('routeBootSkeleton')).display), p).toBe('none');
     }
@@ -169,8 +170,8 @@ test.describe('anything that needs the data still works from the home', () => {
   test('EPAL practice map opens from the home right away and can generate a test', async ({ page, qa }) => {
     page.on('dialog', (d) => d.dismiss());
     await page.goto('/');
-    await page.locator('#chromeMenuToggle').click();
-    await page.locator('#chromeMenuPanel a[href="/practice.html"]').first().click();
+    await page.locator('#siteMenuToggle').click();
+    await page.locator('#siteMenuPanel a[href="/practice.html"]').first().click();
     await page.waitForURL('**/practice.html');
     await page.locator('[data-epal-practice-map]').click();
     await expect(page.locator('#epmapGo')).toBeVisible({ timeout: 30_000 });

@@ -73,6 +73,8 @@ test.describe('home does not wait for the heavy data', () => {
   });
 
   test('rewritten SPA deep links never paint the legacy home before the requested route', async ({ page, context, qa }) => {
+    // Three sequential throttled navigations each retain their existing 60s ready deadline.
+    test.setTimeout(240_000);
     await throttle(context, page, { rate: 4, kbps: 1800, latency: 120 });
     await page.addInitScript(() => {
       const tick = () => {
@@ -167,7 +169,10 @@ test.describe('anything that needs the data still works from the home', () => {
   test('EPAL practice map opens from the home right away and can generate a test', async ({ page, qa }) => {
     page.on('dialog', (d) => d.dismiss());
     await page.goto('/');
-    await page.locator('a[href="#"]', { hasText: 'ΕΠΑΛ' }).first().click();
+    await page.locator('#chromeMenuToggle').click();
+    await page.locator('#chromeMenuPanel a[href="/practice.html"]').first().click();
+    await page.waitForURL('**/practice.html');
+    await page.locator('[data-epal-practice-map]').click();
     await expect(page.locator('#epmapGo')).toBeVisible({ timeout: 30_000 });
     await page.selectOption('#epmapGrade', { index: 1 });
     if (await page.locator('#epmapTrack option').count() > 1) await page.selectOption('#epmapTrack', { index: 1 });

@@ -51,18 +51,27 @@ test.describe('Practice Map (Χάρτης Εξάσκησης)', () => {
   test('EPAL practice map opens from home, closes with Esc and button', async ({ page }) => {
     dismissDialogs(page);
     await page.goto('/');
-    await page.locator('a[href="#"]', { hasText: 'ΕΠΑΛ' }).first().click();
+    await page.locator('#chromeMenuToggle').click();
+    await page.locator('#chromeMenuPanel a[href="/practice.html"]').first().click();
+    await page.waitForURL('**/practice.html');
+    await page.locator('[data-epal-practice-map]').click();
     await expect(page.locator('#epmapGo')).toBeVisible();
     await page.keyboard.press('Escape');
     const closedByEsc = await page.locator('#epmapGo').isHidden();
     test.info().annotations.push({ type: 'epal-modal', description: `closes with Esc: ${closedByEsc}; no URL change: ${new URL(page.url()).pathname === '/'}` });
-    if (!closedByEsc) { await page.locator('.epmap__close').click(); await expect(page.locator('#epmapGo')).toBeHidden(); }
+    expect(closedByEsc,'EPAL modal closes with Escape').toBe(true);
+    await page.locator('[data-epal-practice-map]').click();
+    await page.locator('.epmap__close').click();
+    await expect(page.locator('#epmapGo')).toBeHidden();
   });
 
   test('EPAL practice map can generate a short test', async ({ page, qa }) => {
     dismissDialogs(page);
     await page.goto('/');
-    await page.locator('a[href="#"]', { hasText: 'ΕΠΑΛ' }).first().click();
+    await page.locator('#chromeMenuToggle').click();
+    await page.locator('#chromeMenuPanel a[href="/practice.html"]').first().click();
+    await page.waitForURL('**/practice.html');
+    await page.locator('[data-epal-practice-map]').click();
     await page.selectOption('#epmapGrade', { index: 1 });
     if (await page.locator('#epmapTrack option').count() > 1) await page.selectOption('#epmapTrack', { index: 1 });
     await page.selectOption('#epmapSubject', { index: 1 });
@@ -103,7 +112,8 @@ test.describe('AI Study (study.html) – study plan', () => {
     await page.selectOption('#topicPick', { index: 1 });
     await page.locator('.choice', { hasText: 'Επανάληψη' }).first().click();
     await page.locator('.choice', { hasText: '20′' }).first().click();
-    await page.locator('.study-action', { hasText: 'Πλάνο μελέτης' }).click();
+    if (!(await page.locator('[data-action="plan"]').isVisible())) await page.locator('#studyActionChoices summary').click();
+    await page.locator('[data-action="plan"]').click();
     await expect(page.locator('body')).toContainText('Πλάνο δοκιμής', { timeout: 8000 });
     const post = mockAI.calls.find((c) => c.method === 'POST');
     expect(post?.path).toMatch(/tutor-assistant/);
@@ -137,7 +147,8 @@ test.describe('AI Study (study.html) – study plan', () => {
       mockAI.mode = mode;
       await page.goto('/study.html');
       await page.selectOption('#topicPick', { index: 1 });
-      await page.locator('.study-action', { hasText: 'Πλάνο μελέτης' }).click();
+      if (!(await page.locator('[data-action="plan"]').isVisible())) await page.locator('#studyActionChoices summary').click();
+    await page.locator('[data-action="plan"]').click();
       await page.waitForTimeout(1200);
       await expect(page.locator('body')).not.toContainText(/undefined|\[object Object\]/);
     }
@@ -187,7 +198,7 @@ test.describe('Curriculum Map (xartis-ylis.html)', () => {
     await page.goto('/xartis-ylis.html');
     await page.locator('button.tab, [role=tab]', { hasText: 'Ειδικά σχολεία' }).first().click();
     await expect(page.locator('main')).toContainText('ΕΠΑΛ');
-    for (const href of ['/high/student/tutor', '/special-education.html']) await expect(page.locator(`main a[href="${href}"]`)).toHaveCount(1);
+    for (const href of ['/high/student/tutor?schoolType=epal', '/special-education.html']) await expect(page.locator(`main a[href="${href}"]`)).toHaveCount(1);
   });
 
   test('deep link from a topic to AI Help carries subject + topic', async ({ page }) => {

@@ -1,5 +1,10 @@
 name: Schoolbook runtime coverage (bounded batch)
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'qa/grounding-runtime.mjs'
+      - '.github/workflows/release-grounding-live.yml'
   workflow_dispatch:
     inputs:
       offset:
@@ -28,10 +33,15 @@ jobs:
         env:
           OFFSET: ${{ inputs.offset }}
           LIMIT: ${{ inputs.limit }}
-        run: node qa/grounding-runtime.mjs --offset="$OFFSET" --limit="$LIMIT"
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            node qa/grounding-runtime.mjs --sample-per-level=2
+          else
+            node qa/grounding-runtime.mjs --offset="$OFFSET" --limit="$LIMIT"
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: schoolbook-runtime-${{ inputs.offset }}
+          name: schoolbook-runtime-${{ github.run_id }}
           path: qa/results/release-gate/
           if-no-files-found: error

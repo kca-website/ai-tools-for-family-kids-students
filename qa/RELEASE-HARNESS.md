@@ -34,3 +34,7 @@ The entire qa directory is already excluded from Vercel via .vercelignore.
 ## Second baseline
 
 202 offline checks passed; one SEO generator consistency check failed. The Playwright install and local server succeeded on Ubuntu 24.04. Ten published quick-answer asides were missing from the source generator; preserved them in the template. The EPAL landing page also listed all 35 specialties under every sector because getSpecialties ignores arguments. The generator and the published candidate page now filter by actual sector, with a regression check. Review any remaining generator drift separately.
+
+## Third baseline follow-up
+
+Four SEO pages now match generated output, including EPAL. The EPAL specialty assertion compared a VM-realm array with a host-realm array; normalize the expected array without changing the equality check. Added semantic drift output for the six remaining pages and a small source-retrieval canary (two rows per mapped level, no AI generation request) on pull requests changing the audit. The inventory also records GEL reviewed unresolved topics that are still absent from the learner manifest. These counts do not claim complete curriculum coverage.

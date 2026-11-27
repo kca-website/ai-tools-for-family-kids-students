@@ -21,7 +21,10 @@ const run=(id,args,{cwd=root,timeout=120000,json=null}={})=>{
   const ok=r.status===0&&!r.error;
   rows.push({id,status:ok?'PASS':'FAIL',exit:r.status,signal:r.signal,seconds:Math.round((Date.now()-started)/1000)});
   console.log((ok?'PASS ':'FAIL ')+id);
-  if(!ok) console.error((out+'\n'+err).slice(-2000));
+  if(!ok) {
+    for (const line of out.split('\n').filter(l=>l.includes('SEO_DRIFT '))) console.log(line);
+    console.error((out+'\n'+err).slice(-3000));
+  }
 };
 if(mode==='offline'){
   const paths=spawnSync('git',['ls-files','-z'],{cwd:root,encoding:'utf8'});

@@ -42,8 +42,14 @@ export function startLocalServer(port = 0) {
     const headers = {};
     let status = 200;
     if (!(inRepo && fs.existsSync(file) && fs.statSync(file).isFile())) {
-      if (/^\/(primary|middle|high)\//.test(p)) headers['X-Robots-Tag'] = 'noindex, follow';
-      file = path.join(REPO, 'index.html'); // catch-all -> "/" with status 200 (soft-404)
+      if (/^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)$/.test(p)) {
+        headers['X-Robots-Tag'] = 'noindex, follow';
+        file = path.join(REPO, 'index.html');
+      } else {
+        status = 404;
+        headers['X-Robots-Tag'] = 'noindex, nofollow';
+        file = path.join(REPO, '404.html');
+      }
     }
     if (p.startsWith('/api/')) {
       // Static server has no functions. GET returns a stub status (with no-store like the real handlers); everything else 405.

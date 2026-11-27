@@ -46,6 +46,11 @@ export const test = base.extend({
       const req = route.request(); const u = new URL(req.url());
       let body = null; try { body = req.postDataJSON(); } catch {}
       state.calls.push({ path: u.pathname, method: req.method(), body });
+      // Model responses and retrieval are separate contracts. Fail closed on missing source.
+      if (u.pathname === '/api/schoolbook-source') {
+        const subject=u.searchParams.get('subject'), topic=u.searchParams.get('topic');
+        return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(subject&&topic?{grounded:true,text:'Συνθετικό κείμενο ελέγχου σχολικής πηγής.',bookTitle:'Mock textbook',section:topic,sourceUrl:'https://ebooks.edu.gr/ebooks/mock-fixture'}:{grounded:false,text:''})});
+      }
       if (state.delay) await new Promise((r) => setTimeout(r, state.delay));
       if (req.method() === 'GET') return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ configured: true, provider: 'cloudflare', model: '@cf/openai/gpt-oss-120b', providers: [{ name: 'cloudflare', model: '@cf/openai/gpt-oss-120b' }, { name: 'groq', model: 'openai/gpt-oss-120b' }] }) });
       if (state.mode === 'timeout') return route.abort('timedout');

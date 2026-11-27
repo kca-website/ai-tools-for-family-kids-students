@@ -245,7 +245,7 @@ export const subjectPages = [
             deep: [
               rowPrimary(primaryLinks('glossa')),
               rowMiddle([['Νεοελληνική Γλώσσα Α΄', P('middle', 'a', 'glossa-a-gymnasiou')], ['Λογοτεχνία Β΄', P('middle', 'b', 'logotechnia-b-gymnasiou')], ['Νεοελληνική Γλώσσα Γ΄', P('middle', 'c', 'glossa-gymnasiou')]]),
-              rowHigh([['Νεοελληνική Γλώσσα Α΄', P('high', 'a', 'neoelliniki-a-lykeiou')], ['Έκθεση Β΄', P('high', 'b', 'ekthesi-b-lykeiou')], ['Έκθεση Γ΄', P('high', 'c', 'ekthesi-g-lykeiou')]]),
+              rowHigh([['Νεοελληνική Γλώσσα Α΄', P('high', 'a', 'ekthesi-a-lykeiou')], ['Έκθεση Β΄', P('high', 'b', 'ekthesi-b-lykeiou')], ['Έκθεση Γ΄', P('high', 'c', 'ekthesi-g-lykeiou')]]),
             ],
           },
         ],

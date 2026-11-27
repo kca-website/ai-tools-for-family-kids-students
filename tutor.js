@@ -3262,7 +3262,12 @@ Now reply ONLY as the AI Tutor to the user's final message, following the tutori
       }
     }
 
-    if (selectUrlValue(refs.subject, params.get("subject"))) {
+    const requestedSubject = params.get("subject");
+    const resolvedSubject = !isHighEpalMode() && requestedSubject
+      ? window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getSubject?.(ctx.zoneId, refs.grade.value, requestedSubject)
+      : null;
+    if (selectUrlValue(refs.subject, requestedSubject) ||
+        (resolvedSubject && selectUrlValue(refs.subject, resolvedSubject.id))) {
       populateTopics();
     }
     let topicSelected = selectUrlValue(refs.topic, params.get("topic")) ||

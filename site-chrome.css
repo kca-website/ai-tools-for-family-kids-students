@@ -940,3 +940,10 @@ a.fb-link:focus-visible {
    does not push the page down after first paint. Only on pages that actually load the script. */
 html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 55px; }
 @media (max-width: 520px) { html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 51px; } }
+
+/* Narrow viewports: let long breadcrumb labels shrink and wrap inside the flex row. */
+@media (max-width: 400px) {
+  .ia-context__row > *, .ia-crumbs, .ia-crumbs ol { min-width: 0; max-width: 100%; }
+  .ia-crumbs li { max-width: 100%; flex-wrap: wrap; }
+  .ia-crumbs [aria-current="page"] { min-width: 0; overflow-wrap: anywhere; }
+}

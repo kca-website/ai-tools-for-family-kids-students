@@ -114,9 +114,9 @@ test.describe('home + routing', () => {
 
 const LANG_PAGES = ['/', '/primary/guardian/tools', '/xartis-ylis.html', '/study.html', '/sign-language.html', '/special-education.html', '/guide.html', '/privacy-policy.html', '/about.html', '/methodology.html', '/school-ai-use.html', '/accessibility.html'];
 // Pages whose visible text is mostly Greek DATA (official curriculum / ΕΝΓ concept names) – ratio is reported, not asserted.
-const DATA_HEAVY = new Set(['/study.html', '/sign-language.html', '/special-education.html']);
+const DATA_HEAVY = new Set(['/study.html', '/sign-language.html']);
 // Pages with a language switch share the same local preference key.
-const EN_PAGE_ROUTES = new Set(['/privacy-policy.html','/about.html','/school-ai-use.html','/accessibility.html']);
+const EN_PAGE_ROUTES = new Set(['/privacy-policy.html','/about.html','/school-ai-use.html','/accessibility.html','/special-education.html']);
 const visibleTextOf = (page) => page.evaluate(() => {
   const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); const out = [];
   while (w.nextNode()) { const n = w.currentNode; const el = n.parentElement; if (!el || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(el.tagName)) continue; const cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden') continue; const t = n.textContent.trim(); if (t) out.push(t); }
@@ -156,6 +156,19 @@ test.describe('EL/EN switch', () => {
       expect(await page.evaluate(() => document.documentElement.lang)).toBe('en');
     });
   }
+  test('Special Education English overview declares Greek curriculum and opens each real school pathway', async ({page,qa})=>{
+    await page.goto('/en/special-education.html');
+    await expect(page.locator('#languageNote')).toBeVisible();
+    await expect(page.locator('main')).toContainText('currently in Greek');
+    for(const [branch,section] of [['special-gymnasium','spSpecialGymnasium'],['special-lyceum','spSpecialLyceum'],['eneegyl','spEneegyl']]){
+      await page.goto('/en/special-education.html');
+      await page.locator('main a[href="/special-education.html?branch='+branch+'"]').click();
+      await expect(page.locator('#'+section)).toBeVisible();
+      await expect(page.locator('#spHome')).toBeHidden();
+      await expect(page.locator('#'+section+' .sp-grade-tab').first()).toBeVisible();
+    }
+    expect(qa.pageErrors).toEqual([]);
+  });
   test('EN chosen on home survives navigation to /study.html', async ({ page }) => {
     await page.goto('/');
     await page.locator('#langEn').click();

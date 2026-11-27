@@ -175,8 +175,13 @@ test.describe('EL/EN switch', () => {
     await page.locator('#homeV9Finder [data-finder-need="study"]').click();
     const link = page.locator('#homeV9FinderCta[href="/study.html"]');
     await link.scrollIntoViewIfNeeded();
-    await link.click();
-    await page.waitForLoadState('load');
-    expect(await page.evaluate(() => document.documentElement.lang)).toBe('en');
+    // The home loader can replay the click asynchronously after loading its
+    // heavy data. A generic waitForLoadState may resolve on the old document.
+    await Promise.all([
+      page.waitForURL(u => u.pathname === '/study.html', {waitUntil:'domcontentloaded',timeout:30000}),
+      link.click()
+    ]);
+    await expect(page.locator('html')).toHaveAttribute('lang','en');
+    await expect(page.locator('main')).toBeVisible();
   });
 });

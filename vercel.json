@@ -121,5 +121,7 @@
       "source": "/preschool",
       "destination": "/preschool.html"
     }
-  ]
+  ],
+  "buildCommand": "node scripts/build-public-site.mjs",
+  "outputDirectory": "dist-public"
 }

@@ -38,3 +38,5 @@ The entire qa directory is already excluded from Vercel via .vercelignore.
 ## Third baseline follow-up
 
 Four SEO pages now match generated output, including EPAL. The EPAL specialty assertion compared a VM-realm array with a host-realm array; normalize the expected array without changing the equality check. Added semantic drift output for the six remaining pages and a small source-retrieval canary (two rows per mapped level, no AI generation request) on pull requests changing the audit. The inventory also records GEL reviewed unresolved topics that are still absent from the learner manifest. These counts do not claim complete curriculum coverage.
+
+Corrected the public curriculum landing page and its generator to describe the actual grade-specific source policy. Removed the misleading count of legacy resolver records as a complete book count, deduplicated the illustrative title list, and identified the old exercise-map numbers as a dated snapshot rather than current runtime coverage.

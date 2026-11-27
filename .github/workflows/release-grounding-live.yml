@@ -1,0 +1,37 @@
+name: Schoolbook runtime coverage (bounded batch)
+on:
+  workflow_dispatch:
+    inputs:
+      offset:
+        description: First row (zero-based) from runtime inventory
+        default: '0'
+        required: true
+      limit:
+        description: Number of source requests (1–50, no AI calls)
+        default: '20'
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: schoolbook-runtime-coverage
+  cancel-in-progress: false
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify retrieval of real official source text
+        env:
+          OFFSET: ${{ inputs.offset }}
+          LIMIT: ${{ inputs.limit }}
+        run: node qa/grounding-runtime.mjs --offset="$OFFSET" --limit="$LIMIT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: schoolbook-runtime-${{ inputs.offset }}
+          path: qa/results/release-gate/
+          if-no-files-found: error

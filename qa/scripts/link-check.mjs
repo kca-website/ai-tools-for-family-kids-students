@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { REPO, RESULTS, PROD, walkHtml, rel, write } from './lib.mjs';
+import { extractHttpUrls } from './link-url-extract.mjs';
 
 const args = Object.fromEntries(process.argv.slice(2).map((a) => { const [k, v] = a.replace(/^--/, '').split('='); return [k, v ?? true]; }));
 const BASE = (args.base || process.env.BASE_URL || PROD).replace(/\/$/, '');
@@ -15,13 +16,11 @@ const STRICT_EXTERNAL = Boolean(args['strict-external']);
 const UA = 'Mozilla/5.0 (compatible; aitools4kids-linkcheck/1.1; +https://www.aitools4kids.gr/report-error.html)';
 
 // ---------- extraction ----------
-const URL_RE = /https?:\/\/[^\s"'`<>)\\\]}]+/g;
-const clean = (u) => u.replace(/[.,;:!?]+$/, '').replace(/&amp;/g, '&');
 // API endpoints are operational targets, not user-facing hyperlinks. They are tested by ai-smoke.mjs.
 const SKIP_HOST = /^(www\.w3\.org|schema\.org|localhost|127\.0\.0\.1|example\.com|cdn\.jsdelivr\.net|fonts\.(googleapis|gstatic)\.com|js\.puter\.com|api\.groq\.com|generativelanguage\.googleapis\.com)$/;
 const sources = new Map();
 function add(u, file) {
-  u = clean(u); let h; try { h = new URL(u).hostname; } catch { return; }
+  let h; try { h = new URL(u).hostname; } catch { return; }
   if (SKIP_HOST.test(h) || /\$\{|{{/.test(u)) return;
   if (!sources.has(u)) sources.set(u, new Set()); sources.get(u).add(file);
 }
@@ -41,7 +40,7 @@ const files = [
     .map((entry) => path.join(REPO, entry.name)),
   ...dirs,
 ];
-for (const f of files) { const txt = fs.readFileSync(f, 'utf8'); const name = path.relative(REPO, f); for (const m of txt.matchAll(URL_RE)) add(m[0], name); }
+for (const f of files) { const txt = fs.readFileSync(f, 'utf8'); const name = path.relative(REPO, f); for (const url of extractHttpUrls(txt)) add(url, name); }
 function bucket(u, srcs) {
   const s = [...srcs];
   if (s.some((f) => /^sign-language/.test(f)) || /prosvasimo\.iep\.edu\.gr|commons\.wikimedia\.org|upload\.wikimedia\.org/.test(u)) return 'sl';

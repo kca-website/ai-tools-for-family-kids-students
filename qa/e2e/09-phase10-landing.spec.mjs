@@ -28,7 +28,7 @@ test.describe('phase 10 landing pages', () => {
       await page.waitForTimeout(600);
       for (const width of [null, 320]) {
         if (width) await page.setViewportSize({ width, height: 700 });
-        const over = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth, wide: [...document.querySelectorAll('main *')].filter((e) => e.getBoundingClientRect().right > document.documentElement.clientWidth + 1).map((e) => e.tagName + '.' + e.className).slice(0, 5) }));
+        const over = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth, wide: [...document.querySelectorAll('body *')].filter((e) => e.getBoundingClientRect().right > document.documentElement.clientWidth + 1).map((e) => e.tagName + '.' + e.className).slice(0, 5) }));
         expect(over.sw, `scrollWidth ${over.sw} > ${over.cw} (${over.wide.join(', ')})`).toBeLessThanOrEqual(over.cw);
       }
     });
@@ -94,7 +94,9 @@ test.describe('phase 10 landing pages', () => {
       try {
         await page.waitForFunction((w) => {
           const g = document.querySelector('#tutorGrade')?.value; const s = document.querySelector('#tutorSubject')?.value; const t = document.querySelector('#tutorSchoolType')?.value;
-          return g === w.grade && (!w.subject || s === w.subject) && (!w.schoolType || t === w.schoolType);
+          const zone=location.pathname.split('/')[1];
+          const alias=t!=='epal' && w.subject ? window.AITOOLSKIDS_CURRICULUM_RESOLVER?.getSubject?.(zone,g,w.subject) : null;
+          return g === w.grade && (!w.subject || s === w.subject || (alias && s === alias.id)) && (!w.schoolType || t === w.schoolType);
         }, want, { timeout: 8000 });
       } catch {
         const got = await page.evaluate(() => ({ grade: document.querySelector('#tutorGrade')?.value, subject: document.querySelector('#tutorSubject')?.value, schoolType: document.querySelector('#tutorSchoolType')?.value }));

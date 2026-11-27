@@ -444,4 +444,6 @@
   renderSpecialLyceumProfile();
   renderEneegylProfile();
   renderSupportTools();
+  const requestedBranch=new URLSearchParams(location.search).get("branch");
+  if(["special-gymnasium","special-lyceum","eneegyl"].includes(requestedBranch)) showBranch(requestedBranch);
 })();

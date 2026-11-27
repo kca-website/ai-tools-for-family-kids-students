@@ -98,6 +98,7 @@ try{
       englishBGymTopics:englishBGym?.topics?.map(t=>t.labelEl)||[]
     };
   });
+  console.log('RESOLVER_AUDIT '+JSON.stringify(audit));
   if(audit.primaryAEnvironmentCount!==1) throw new Error('Environment Studies duplicate remains in Primary A');
   if(audit.environmentQuizId!=='environment-a-dimotikou') throw new Error('Environment Studies quiz alias not resolved');
   if(audit.environmentTopics<3) throw new Error('Environment Studies topics missing');
@@ -112,7 +113,16 @@ try{
   if(!BOOK_UNIT_MODES.has(audit.historyCPrimaryMode) || audit.historyCPrimaryTopics.length<10) throw new Error('Primary C History verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.mathCGymMode) || audit.mathCGymTopics.length<7) throw new Error('Middle C Mathematics verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.physicsBGymMode) || audit.physicsBGymTopics.length<8) throw new Error('Middle B Physics verified book sections not resolved');
-  if(!BOOK_UNIT_MODES.has(audit.physicsCGymMode) || audit.physicsCGymTopics.length<11) throw new Error('Middle C Physics verified book sections not resolved');
+  // G Gym Physics was narrowed to the eight verified annual themes on 2026-09-29.
+  // Do not require excluded textbook chapters merely to reach an old count.
+  const physicsAnnual=[
+    'Ηλεκτρική δύναμη, φορτίο και ηλεκτρικό πεδίο','Ηλεκτρικό ρεύμα και κυκλώματα',
+    'Αντίσταση, νόμος του Ohm και συνδεσμολογία','Αποτελέσματα, ενέργεια και ισχύς ηλεκτρικού ρεύματος',
+    'Ταλαντώσεις και εκκρεμές','Μηχανικά κύματα και ήχος',
+    'Φως, διάδοση και ανάκλαση','Διάθλαση, ανάλυση φωτός και χρώμα'
+  ];
+  const missingPhysics=physicsAnnual.filter(label=>!audit.physicsCGymTopics.includes(label));
+  if(!BOOK_UNIT_MODES.has(audit.physicsCGymMode) || missingPhysics.length) throw new Error('Middle C Physics verified annual topics not resolved: '+JSON.stringify({mode:audit.physicsCGymMode,missingPhysics,actual:audit.physicsCGymTopics}));
   if(!BOOK_UNIT_MODES.has(audit.languageCGymMode) || audit.languageCGymTopics.length<8) throw new Error('Middle C Language verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.chemistryCGymMode) || audit.chemistryCGymTopics.length<15) throw new Error('Middle C Chemistry verified book sections not resolved');
   if(!BOOK_UNIT_MODES.has(audit.biologyBGymMode) || audit.biologyBGymTopics.length<7) throw new Error('Middle B Biology verified book sections not resolved');

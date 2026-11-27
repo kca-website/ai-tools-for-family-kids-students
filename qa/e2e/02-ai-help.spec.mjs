@@ -26,7 +26,9 @@ test.describe('AI Help (mocked API)', () => {
     expect(post.body.audience).toBe('high_student');
     expect(post.body.prompt).toContain('Πώς λύνω 3x + 5 = 20;'); // client sends the whole conversation each turn
     // Data minimisation: only curriculum context + prompt (no ids, no user profile).
-    const allowed = new Set(['studyContext', 'system', 'prompt', 'audience', 'task', 'mode', 'activity', 'cacheEligible', 'grade', 'subject', 'subjectId', 'topic', 'character', 'documentText', 'documentName', 'documentKind', 'documentSourceUrl']);
+    expect(post.body.documentKind).toBe('official_schoolbook');
+    expect(post.body.documentText).toBe('Συνθετικό κείμενο ελέγχου σχολικής πηγής.');
+    const allowed = new Set(['studyContext', 'system', 'context', 'prompt', 'audience', 'task', 'mode', 'activity', 'cacheEligible', 'grade', 'subject', 'subjectId', 'topic', 'character', 'documentText', 'documentName', 'documentKind', 'documentSourceUrl']);
     expect(Object.keys(post.body).filter((k) => !allowed.has(k)), 'unexpected fields sent to the server').toEqual([]);
     expect(qa.pageErrors).toEqual([]);
   });
@@ -74,6 +76,7 @@ test.describe('AI Help (mocked API)', () => {
       if (b.prompt.length > 16000) return route.fulfill({ status: 413, contentType: 'application/json', body: JSON.stringify({ error: 'prompt_too_large', message: 'Η συνομιλία είναι πολύ μεγάλη. Ξεκίνα νέα συζήτηση.' }) });
       return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ text: 'ok', provider: 'mock', model: 'mock' }) });
     });
+    await context.route('**/api/schoolbook-source**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({grounded:true,text:'Συνθετικό κείμενο ελέγχου.',sourceUrl:'https://ebooks.edu.gr/ebooks/mock-fixture'})}));
     await openTutor(page);
     await page.locator('#tutorInput').fill('α'.repeat(20000));
     await page.locator('#tutorSend').click();

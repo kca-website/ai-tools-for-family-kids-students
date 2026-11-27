@@ -1,7 +1,7 @@
 name: QA weekly – links + AI endpoints (production)
 
 # Weekly + manual. Checks the LIVE site: (1) external/internal link check (ΕΝΓ videos and tools catalogue reported separately),
-# (2) AI endpoints smoke (≤ 30 requests, 2 real model calls, no personal data), (3) security headers/redirects/CORS.
+# (2) AI endpoints smoke (≤ 30 requests, 2 real model calls + 2 scheduled guardrail probes, no personal data), (3) security headers/redirects/CORS.
 # On failure it opens (or updates) ONE issue labelled `qa-weekly` and uploads the JSON reports as an artifact.
 # Never runs on PRs, never changes the site. Source: qa/ (see qa/README.md).
 on:
@@ -58,7 +58,7 @@ jobs:
       - name: AI endpoints smoke (≤ 30 requests)
         id: ai
         continue-on-error: true
-        run: node scripts/ai-smoke.mjs --base="$BASE_URL" ${{ github.event.inputs.guardrails == 'true' && '--guardrails' || '' }}
+        run: node scripts/ai-smoke.mjs --base="$BASE_URL" ${{ (github.event_name == 'schedule' || github.event.inputs.guardrails == 'true') && '--guardrails' || '' }}
       - name: Security headers / redirects / CORS
         id: headers
         continue-on-error: true

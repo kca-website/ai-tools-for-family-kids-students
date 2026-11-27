@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { test, expect, IS_PROD } from './fixtures.mjs';
-import { RESULTS, REPO } from '../scripts/lib.mjs';
+import { RESULTS, REPO, walkHtml } from '../scripts/lib.mjs';
 
 const snapshot = (page) => page.evaluate(async () => ({
   documentCookie: document.cookie,
@@ -119,26 +119,28 @@ test.describe('third-party requests vs privacy policy', () => {
     for (const f of fs.readdirSync(path.join(REPO, 'tools'))) { const t = fs.readFileSync(path.join(REPO, 'tools', f), 'utf8'); for (const r of re) if (r.test(t)) hits.push('tools/' + f); }
     expect(hits).toEqual([]);
     // process.env must only be read in /api and the router (server side), never in files loaded by the browser
-    const browserFiles = files.filter((f) => f.endsWith('.js') && f !== 'ai-provider-router.js');
+    const serverOnly = new Set(['ai-provider-router.js','teacher-web-evidence.js']);
+    const browserFiles = files.filter((f) => f.endsWith('.js') && !serverOnly.has(f));
     const leaks = browserFiles.filter((f) => /process\.env\./.test(fs.readFileSync(path.join(REPO, f), 'utf8')));
     expect(leaks).toEqual([]);
   });
 
-  test('ai-provider-router.js is not referenced by any HTML page (server-only file)', async () => {
-    const htmls = fs.readdirSync(REPO).filter((f) => f.endsWith('.html'));
-    const refs = htmls.filter((f) => /ai-provider-router\.js/.test(fs.readFileSync(path.join(REPO, f), 'utf8')));
+  test('server-only AI provider and teacher retrieval modules are not referenced by any HTML page', async () => {
+    const refs = walkHtml().filter((f) => /(?:ai-provider-router|teacher-web-evidence)\.js/.test(fs.readFileSync(f, 'utf8')));
     expect(refs).toEqual([]);
+    const handler = fs.readFileSync(path.join(REPO,'api','teacher-assistant.js'),'utf8');
+    expect(handler).toContain("require('../teacher-web-evidence')");
   });
 });
 
 test.describe('server-side files are not downloadable as static assets (production only)', () => {
   test.skip(!IS_PROD, 'needs the real Vercel deployment');
-  for (const p of ['/ai-provider-router.js', '/api/tutor-assistant.js', '/study-runtime-cache.js', '/benchmark/run.mjs', '/.git/config', '/.env', '/package.json', '/vercel.json', '/qa/REPORT.md']) {
+  for (const p of ['/ai-provider-router.js', '/teacher-web-evidence.js', '/api/tutor-assistant.js', '/study-runtime-cache.js', '/benchmark/run.mjs', '/.git/config', '/.env', '/package.json', '/vercel.json', '/qa/REPORT.md']) {
     test(`GET ${p} is not served`, async ({ request }) => {
       const r = await request.get(p, { maxRedirects: 0 });
       const body = await r.text();
       test.info().annotations.push({ type: 'status', description: String(r.status()) });
-      expect(/process\.env|CLOUDFLARE_|GROQ_API_KEY|\[core\]/.test(body), `${p} leaks source/config`).toBe(false);
+      expect(/process\.env|CLOUDFLARE_|GROQ_API_KEY|GEMINI_API_KEY|\[core\]/.test(body), `${p} leaks source/config`).toBe(false);
     });
   }
 });

@@ -3361,7 +3361,7 @@ function renderToolGrid(pathTools, targetElement) {
 
     // Rewritten SPA routes share index.html. Keep the neutral boot cover until
     // the requested route has actually been rendered, then reveal on the next frame.
-    if (document.documentElement.classList.contains("navigator-route-booting")) {
+    if (/^\/(primary|middle|high)\/(guardian|student)\/(tools|advanced|prompts|quiz|tutor|guide)\/?$/.test(location.pathname)) {
       requestAnimationFrame(() => {
         document.documentElement.classList.remove("navigator-route-booting");
         document.documentElement.classList.add("navigator-route-ready");

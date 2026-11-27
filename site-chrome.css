@@ -66,9 +66,9 @@ body.has-site-chrome .chrome-footer :focus-visible {
 .chrome-header,
 .chrome-footer {
   box-sizing: border-box;
-  width: var(--chrome-vw, 100vw);
+  width: min(var(--chrome-vw, 100vw), 100vw);
   max-width: none;
-  margin-left: calc(50% - var(--chrome-vw, 100vw) / 2);
+  margin-left: calc(50% - min(var(--chrome-vw, 100vw), 100vw) / 2);
   margin-right: 0;
   font-family: var(--chrome-sans);
   line-height: 1.5;
@@ -868,9 +868,9 @@ a.fb-link:focus-visible {
 /* Context bar: breadcrumbs, page links, related learning tasks */
 .ia-context {
   box-sizing: border-box;
-  width: var(--chrome-vw, 100%);
+  width: min(var(--chrome-vw, 100%), 100vw);
   max-width: none;
-  margin: 0 0 22px calc(50% - var(--chrome-vw, 100%) / 2);
+  margin: 0 0 22px calc(50% - min(var(--chrome-vw, 100%), 100vw) / 2);
   background: linear-gradient(180deg, #FFFFFF 0%, var(--ui-bg) 100%);
   border-bottom: 1px solid var(--ui-line);
   font-family: var(--ui-sans);
@@ -940,3 +940,10 @@ a.fb-link:focus-visible {
    does not push the page down after first paint. Only on pages that actually load the script. */
 html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 55px; }
 @media (max-width: 520px) { html:has(script[src$="/site-chrome.js"]) body:not(.has-site-chrome):not(.no-ia-reserve) { padding-top: 51px; } }
+
+/* Narrow viewports: let long breadcrumb labels shrink and wrap inside the flex row. */
+@media (max-width: 400px) {
+  .ia-context__row > *, .ia-crumbs, .ia-crumbs ol { min-width: 0; max-width: 100%; }
+  .ia-crumbs li { max-width: 100%; flex-wrap: wrap; }
+  .ia-crumbs [aria-current="page"] { min-width: 0; overflow-wrap: anywhere; }
+}

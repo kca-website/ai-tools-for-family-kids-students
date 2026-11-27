@@ -14,6 +14,20 @@ export const SITE_NAME = 'AI Tools for Family, Kids & Students';
 export const MODIFIED = '2026-09-30';
 export const OG_IMAGE = `${ORIGIN}/assets/og-image.png`;
 
+// Authored quick answers kept in the source generator (previously added directly to HTML).
+const QUICK_ANSWERS = {
+  "ai-gia-lykeio": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Για μαθητές Λυκείου και ΕΠΑΛ, το aitools4kids.gr συνδέει την ελληνική σχολική ύλη με AI Μελέτη, επανάληψη και εργαλεία AI ανά μάθημα, με στόχο οργανωμένη εξάσκηση και υπεύθυνη χρήση.</p></aside>",
+  "ai-gia-epal": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Για μαθητές ΕΠΑΛ, το aitools4kids.gr οργανώνει την AI βοήθεια ανά τάξη, τομέα ή ειδικότητα και σχολική ανάγκη, ώστε η μελέτη να ξεκινά από την πραγματική ύλη και όχι από μια γενική απάντηση chatbot.</p><p>Για δωρεάν βιντεομαθήματα Α΄–Β΄ ΕΠΑΛ και προετοιμασία Πανελλαδικών στη Γ΄, δες επίσης το <a href=\"/tools/digital-tutoring.html\">Δημόσιο Ψηφιακό Φροντιστήριο</a> του Υπουργείου Παιδείας.</p></aside>",
+  "ai-gia-goneis": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr βοηθά γονείς να επιλέγουν κατάλληλα AI εργαλεία ανά ηλικία και σχολική ανάγκη και να καθοδηγούν τη χρήση τους χωρίς να υποκαθίσταται η προσπάθεια του παιδιού.</p></aside>",
+  "ai-gia-ekpaideftikous": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr προσφέρει σε εκπαιδευτικούς δωρεάν υλικό και εργαλεία AI συνδεδεμένα με την ελληνική σχολική ύλη, για προετοιμασία μαθήματος, εξάσκηση, αξιολόγηση και υπεύθυνη χρήση στην τάξη.</p></aside>",
+  "ai-me-elliniki-sxoliki-yli": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr συνδέει εργαλεία AI με την επίσημη ελληνική σχολική ύλη και τα σχολικά βιβλία, ώστε η μελέτη και η εξάσκηση να βασίζονται σε συγκεκριμένες ενότητες αντί για γενικές απαντήσεις.</p></aside>",
+  "ai-gia-mathimatika": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr βοηθά μαθητές να χρησιμοποιούν AI στα Μαθηματικά για κατανόηση, υπόδειξη, έλεγχο και εξάσκηση, με προσωπική προσπάθεια πριν από την AI και χωρίς έτοιμη λύση ως πρώτο βήμα.</p></aside>",
+  "ai-gia-ekthesi": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr βοηθά στη Γλώσσα και την Έκθεση με ιδέες, ερωτήσεις, δομή και ανατροφοδότηση πάνω στη δική σου προσπάθεια, χωρίς να μετατρέπει το AI σε μηχανή έτοιμων σχολικών κειμένων.</p></aside>",
+  "ai-gia-istoria": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr βοηθά τους μαθητές να χρησιμοποιούν AI στην Ιστορία πάνω στη σχολική ύλη, με έλεγχο πηγών και έμφαση στην κατανόηση αντί στην αντιγραφή έτοιμων απαντήσεων.</p></aside>",
+  "ai-gia-fysiki-chimeia": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr συνδέει τη Φυσική και τη Χημεία με AI εξηγήσεις, εξάσκηση και έλεγχο πάνω στη σχολική ύλη, ώστε ο μαθητής να καταλαβαίνει τη διαδικασία και όχι απλώς να βλέπει το τελικό αποτέλεσμα.</p></aside>",
+  "ai-gia-xenes-glosses": "<aside class=\"quick-answer\" aria-label=\"Σύντομη απάντηση\"><strong>Σύντομη απάντηση</strong><p>Το aitools4kids.gr προτείνει εργαλεία AI για ξένες γλώσσες ανά ηλικία και ανάγκη, όπως κατανόηση, λεξιλόγιο, γραφή, προφορά και εξάσκηση, με έλεγχο των όρων χρήσης κάθε υπηρεσίας.</p></aside>"
+};
+
 const read = (p) => fs.readFileSync(path.join(REPO, p), 'utf8');
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -51,7 +65,7 @@ export function loadData() {
       return {
         label: sec.label,
         courses: all.filter((l) => l.startsWith(`${sec.id} · `)).map((l) => strip(l, sec.id)),
-        specialties: cat.getSpecialties(sec.id).map((x) => x.specialty),
+        specialties: cat.getSpecialties().filter((x) => x.sector === sec.id).map((x) => x.specialty),
       };
     }),
     specialtyCount: cat.getSpecialties().length,
@@ -70,7 +84,7 @@ export function availability(d, id) {
   for (const z of ['primary', 'middle', 'high']) {
     const st = d.PATHS[z].student.tools.some((t) => t.toolId === id);
     const gd = d.PATHS[z].guardian.tools.some((t) => t.toolId === id);
-    if (st) out.push(ZONE_LABEL[z]);
+    if (st) out.push(id === 'digital-tutoring' && z === 'primary' ? 'Δημοτικό (Ε΄–ΣΤ΄)' : ZONE_LABEL[z]);
     else if (gd) out.push(`${ZONE_LABEL[z]} (μέσω γονιού/εκπαιδευτικού)`);
   }
   return out;
@@ -182,7 +196,7 @@ ${jsonLd({ '@context': 'https://schema.org', '@graph': graph })}
 </head><body><header class="top"><div class="top__in"><a class="brand" href="/">🤖 ${esc(SITE_NAME)}</a><a class="home" href="/">Αρχική</a></div></header>
 <main class="wrap" id="main">${crumbHtml}
 <section class="hero"><div class="kicker">${esc(spec.kicker)}</div><h1>${esc(spec.h1)}</h1><p class="lead">${spec.lead}</p><ul class="chips" aria-label="Βασικά στοιχεία" style="list-style:none;padding:0">${spec.chips.map((c) => `<li class="chip">${esc(c)}</li>`).join('')}</ul></section>
-<article><div class="toc"><strong>${spec.quick.title}</strong><ul>${spec.quick.bullets.map((b) => `<li>${b}</li>`).join('')}</ul><div class="buttons"><a class="btn" href="${esc(spec.quick.cta[1])}">${spec.quick.cta[0]}</a></div></div>
+${QUICK_ANSWERS[spec.slug] || ''}<article><div class="toc"><strong>${spec.quick.title}</strong><ul>${spec.quick.bullets.map((b) => `<li>${b}</li>`).join('')}</ul><div class="buttons"><a class="btn" href="${esc(spec.quick.cta[1])}">${spec.quick.cta[0]}</a></div></div>
 ${sections}${faqHtml}${cta}<section class="related"><h2>Σχετικές σελίδες</h2><div class="related-grid">${related}</div></section>
 <p class="meta-line">Τελευταία ενημέρωση: ${MODIFIED.split('-').reverse().join('/')}. ${spec.metaNote || 'Ανεξάρτητο, δωρεάν εκπαιδευτικό έργο· δεν αποτελεί επίσημο προϊόν κανενός παρόχου AI.'}</p></article></main>
 <footer class="page-foot wrap"><div class="footer-links"><a href="/">Αρχική</a><a href="/methodology.html">Μεθοδολογία</a><a href="/ai-transparency.html">Διαφάνεια AI</a><a href="/accessibility.html">Προσβασιμότητα</a><a href="/privacy-policy.html">Πολιτική Απορρήτου</a></div></footer>

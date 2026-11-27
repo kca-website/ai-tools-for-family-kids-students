@@ -29,7 +29,19 @@ test('generator output matches the committed pages and sitemap (data-driven clai
   const { xml, idx } = buildSitemap(LANDING);
   if (read('seo-sitemap.xml') !== xml) stale.push('seo-sitemap.xml');
   if (read('sitemap-index.xml') !== idx) stale.push('sitemap-index.xml');
-  assert.deepEqual(stale, [], 'stale files: run `node scripts/phase10/build.mjs`');
+  // Print only changed semantic fragments; do not silently regenerate published content.
+  if (stale.length) {
+    for (const p of pages.filter(p => stale.includes(p.file))) {
+      const current = read(p.file);
+      const oldParts = current.split(/(?<=>)(?=<)/);
+      const newParts = p.html.split(/(?<=>)(?=<)/);
+      const oldSet = new Set(oldParts), newSet = new Set(newParts);
+      const removed = oldParts.filter(x => !newSet.has(x));
+      const added = newParts.filter(x => !oldSet.has(x));
+      console.log('SEO_DRIFT '+JSON.stringify({file:p.file,removed,added}));
+    }
+  }
+  assert.deepEqual(stale, [], 'stale files: review SEO_DRIFT output and reconcile source before regenerating');
 });
 
 test('every landing page: lang, exactly one H1, title/description length, no accidental noindex', () => {
@@ -223,4 +235,22 @@ test('claims stay honest: only shipped features are named, limits are stated', (
   assert.match(t('ai-gia-ekpaideftikous'), /Δεν πρόκειται για νομική συμβουλή/);
   for (const s of LANDING) assert.doesNotMatch(t(s), /Khanmigo|εγγυάται 100%|100% ασφαλές|ΑΕΙ[^.]*πλήρης κάλυψη/i, s);
   assert.match(t('ai-gia-lykeio'), /μερική/);
+});
+
+
+test('EPAL SEO specialty lists contain exactly the specialties of each sector', () => {
+  const d = loadData();
+  const $ = load('ai-gia-epal');
+  const seen = new Set();
+  const rows = $('.disclosure details').toArray();
+  assert.equal(rows.length, 9);
+  for (const row of rows) {
+    const sector = $(row).find('summary').text();
+    const expected = d.epal.sectors.find(s => s.label === sector)?.specialties;
+    assert.ok(expected?.length, sector);
+    const actual = $(row).find('p').eq(1).text().replace(/^Ειδικότητες \(Γ΄\): /, '').replace(/\.$/, '').split(' · ');
+    assert.deepEqual(actual, Array.from(expected), sector);
+    for (const label of actual) { assert.ok(!seen.has(label), 'duplicate specialty: '+label); seen.add(label); }
+  }
+  assert.equal(seen.size, d.epal.specialtyCount);
 });

@@ -26,7 +26,7 @@ async function collect() {
   return rows;
 }
 const indexable = (r) => !/noindex/i.test(r.robots);
-const expectedCanonical = (p) => (p === '/index.html' ? `${PROD}/` : `${PROD}${p}`);
+const expectedCanonical = (p) => `${PROD}${p.replace(/\/index\.html$/, '/')}`;
 
 test.describe('static SEO (JS disabled)', () => {
   test.beforeEach(async () => { await collect(); });
@@ -110,7 +110,7 @@ test.describe('sitemaps / robots', () => {
     await collect();
     const problems = [];
     for (const { url } of sitemapUrls()) {
-      const p = url.replace(PROD, '') || '/'; const row = rows.find((r) => r.path === (p === '/' ? '/index.html' : p));
+      const p = url.replace(PROD, '') || '/'; const row = rows.find((r) => r.path === (p.endsWith('/') ? p+'index.html' : p));
       if (!row) problems.push(`${url}: no such file`); else if (!indexable(row)) problems.push(`${url}: noindex page listed in sitemap`);
     }
     expect(problems).toEqual([]);
@@ -123,7 +123,7 @@ test.describe('sitemaps / robots', () => {
   test('indexable pages missing from all sitemaps', async ({ browser, baseURL }, info) => {
     await collect();
     const all = fs.readdirSync(REPO).filter((f) => /sitemap.*\.xml$/.test(f)).map(read).join('\n');
-    const missing = rows.filter(indexable).filter((r) => r.path !== '/index.html' && !all.includes(`${PROD}${r.path}`)).map((r) => r.path);
+    const missing = rows.filter(indexable).filter((r) => r.path !== '/index.html' && !all.includes(expectedCanonical(r.path)) && !(r.path === '/preschool.html' && all.includes(PROD+'/preschool'))).map((r) => r.path);
     info.annotations.push({ type: 'not-in-sitemap', description: missing.join(', ') });
     expect(missing).toEqual([]);
   });

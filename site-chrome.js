@@ -95,7 +95,7 @@
     parents:    { href: "/ai-gia-goneis.html", tone: "neutral", el: ["Γονείς", "Γονείς", "Πώς βοηθάς χωρίς να κάνεις τη δουλειά"], en: ["Parents", "Parents", "How to help without doing the work"] },
     preschool:  { href: "/preschool", tone: "neutral", el: ["Νηπιαγωγείο", "Νηπιαγωγείο · 4–6", "Δραστηριότητες με ενήλικα"], en: ["Preschool", "Preschool · 4–6", "Adult-led activities"] },
     epal:       { href: "/#epal", tone: "neutral", el: ["ΕΠΑΛ", "Μαθητές ΕΠΑΛ", "Τάξη, τομέας, ειδικότητα"], en: ["EPAL", "EPAL students", "Grade, sector, specialty"] },
-    special:    { href: "/special-education.html", tone: "neutral", el: ["Ειδική Εκπαίδευση", "Ειδική Εκπαίδευση", "Ειδικό Γυμνάσιο, Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ."], en: ["Special Education", "Special Education", "Special Gymnasium, Special Lyceum, EN.E.E.GY.-L."] },
+    special:    { href: "/special-education.html", hrefEn: "/en/special-education.html", tone: "neutral", el: ["Ειδική Εκπαίδευση", "Ειδική Εκπαίδευση", "Ειδικό Γυμνάσιο, Ειδικό Λύκειο, ΕΝ.Ε.Ε.ΓΥ.-Λ."], en: ["Special Education", "Special Education", "Special Gymnasium, Special Lyceum, EN.E.E.GY.-L."] },
     gsl:        { href: "/sign-language.html", tone: "neutral", el: ["Ελληνική Νοηματική", "Ελληνική Νοηματική (ΕΝΓ)", "Σχολικές έννοιες με βίντεο ΕΝΓ"], en: ["Greek Sign Language", "Greek Sign Language (GSL)", "School concepts with GSL video"] },
     university: { href: "/higher-education-pilot.html", tone: "neutral", el: ["Φοιτητές", "Φοιτητές ΑΕΙ · Πιλοτικό", "Επιλεγμένα τμήματα, επίσημες πηγές"], en: ["University", "University students · Pilot", "Selected departments, official sources"] },
     characters: { href: "/history-characters.html", tone: "neutral", el: ["Χαρακτήρες Ιστορίας", "Χαρακτήρες Ιστορίας", "Διάλογος με πρόσωπα της ύλης"], en: ["History characters", "History characters", "Talk with people from the curriculum"] },
@@ -224,7 +224,7 @@
     const z = level && level.zone;
     const r = level && level.role === "guardian" ? "guardian" : "student";
     if(key === "organize") return ITEMS.organize.href;
-    if(z === "special") return ITEMS.special.href;
+    if(z === "special") return itemHref("special");
     if(z === "preschool") return ITEMS.preschool.href;
     if(key === "study"){
       if(!z) return ITEMS.study.href;

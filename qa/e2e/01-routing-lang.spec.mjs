@@ -107,32 +107,35 @@ test.describe('home + routing', () => {
     await page.waitForTimeout(500);
     const canonical = await page.evaluate(() => document.querySelector('link[rel=canonical]')?.href);
     const robots = await page.evaluate(() => document.querySelector('meta[name=robots]')?.content || '');
-    expect(canonical?.endsWith(p) && !/noindex/.test(robots)).toBe(false);
+    expect(robots).toMatch(/noindex/i);
+    expect(Boolean(canonical?.endsWith(p))).toBe(false);
   });
 });
 
 const LANG_PAGES = ['/', '/primary/guardian/tools', '/xartis-ylis.html', '/study.html', '/sign-language.html', '/special-education.html', '/guide.html', '/privacy-policy.html', '/about.html', '/methodology.html', '/school-ai-use.html', '/accessibility.html'];
 // Pages whose visible text is mostly Greek DATA (official curriculum / ΕΝΓ concept names) – ratio is reported, not asserted.
-const DATA_HEAVY = new Set(['/study.html', '/sign-language.html', '/special-education.html']);
+const DATA_HEAVY = new Set(['/study.html', '/sign-language.html']);
 // Pages with a language switch share the same local preference key.
-const LANG_NOT_PERSISTED = new Set();
+const EN_PAGE_ROUTES = new Set(['/privacy-policy.html','/about.html','/school-ai-use.html','/accessibility.html','/special-education.html']);
 const visibleTextOf = (page) => page.evaluate(() => {
   const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); const out = [];
   while (w.nextNode()) { const n = w.currentNode; const el = n.parentElement; if (!el || ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(el.tagName)) continue; const cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden') continue; const t = n.textContent.trim(); if (t) out.push(t); }
   return out.join('\n');
 });
-const enButton = (page) => page.locator('#langEn, #enBtn, button[data-lang="en"], button:text-is("EN")').first();
+const enButton = (page,path) => EN_PAGE_ROUTES.has(path)
+  ? page.locator('a[hreflang="en"][href="/en'+path+'"]').first()
+  : page.locator('#langEn, #enBtn, button[data-lang="en"], button:text-is("EN")').first();
 test.describe('EL/EN switch', () => {
   for (const path of LANG_PAGES) {
     test(`${path}: EN keeps route, sets <html lang>, no i18n keys`, async ({ page, qa }) => {
       await page.goto(path);
       await page.waitForTimeout(500);
       const before = await page.evaluate(() => location.pathname + location.search);
-      const btn = enButton(page);
-      test.skip(await btn.count() === 0, 'no language switch on this page');
+      const btn = enButton(page,path);
+      expect(await btn.count(),path+' must expose an English language control or translated page').toBeGreaterThan(0);
       await btn.click();
       await page.waitForTimeout(600);
-      expect(await page.evaluate(() => location.pathname + location.search), 'route must not change').toBe(before);
+      expect(await page.evaluate(() => location.pathname + location.search), 'correct language route').toBe(EN_PAGE_ROUTES.has(path)?'/en'+path:before);
       const text = await visibleTextOf(page);
       expect(findTranslationLeaks(text), 'raw translation keys / undefined').toEqual([]);
       const ratio = greekRatio(text);
@@ -144,8 +147,8 @@ test.describe('EL/EN switch', () => {
     test(`${path}: EN persists after reload`, async ({ page }) => {
       await page.goto(path);
       await page.waitForTimeout(500);
-      const btn = enButton(page);
-      test.skip(await btn.count() === 0, 'no language switch on this page');
+      const btn = enButton(page,path);
+      expect(await btn.count(),path+' must expose an English language control or translated page').toBeGreaterThan(0);
       await btn.click();
       await page.waitForTimeout(400);
       await page.reload();
@@ -153,14 +156,32 @@ test.describe('EL/EN switch', () => {
       expect(await page.evaluate(() => document.documentElement.lang)).toBe('en');
     });
   }
+  test('Special Education English overview declares Greek curriculum and opens each real school pathway', async ({page,qa})=>{
+    await page.goto('/en/special-education.html');
+    await expect(page.locator('#languageNote')).toBeVisible();
+    await expect(page.locator('main')).toContainText('currently in Greek');
+    for(const [branch,section] of [['special-gymnasium','spSpecialGymnasium'],['special-lyceum','spSpecialLyceum'],['eneegyl','spEneegyl']]){
+      await page.goto('/en/special-education.html');
+      await page.locator('main a[href="/special-education.html?branch='+branch+'"]').click();
+      await expect(page.locator('#'+section)).toBeVisible();
+      await expect(page.locator('#spHome')).toBeHidden();
+      await expect(page.locator('#'+section+' .sp-grade-tab').first()).toBeVisible();
+    }
+    expect(qa.pageErrors).toEqual([]);
+  });
   test('EN chosen on home survives navigation to /study.html', async ({ page }) => {
     await page.goto('/');
     await page.locator('#langEn').click();
     await page.locator('#homeV9Finder [data-finder-need="study"]').click();
     const link = page.locator('#homeV9FinderCta[href="/study.html"]');
     await link.scrollIntoViewIfNeeded();
-    await link.click();
-    await page.waitForLoadState('load');
-    expect(await page.evaluate(() => document.documentElement.lang)).toBe('en');
+    // The home loader can replay the click asynchronously after loading its
+    // heavy data. A generic waitForLoadState may resolve on the old document.
+    await Promise.all([
+      page.waitForURL(u => u.pathname === '/study.html', {waitUntil:'domcontentloaded',timeout:30000}),
+      link.click()
+    ]);
+    await expect(page.locator('html')).toHaveAttribute('lang','en');
+    await expect(page.locator('main')).toBeVisible();
   });
 });

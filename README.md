@@ -1,5 +1,21 @@
 # aitools4kids.gr
 
+## English overview
+
+**AI Tools 4 Kids** is an independent, free bilingual (Greek/English) educational platform for children, students, parents and teachers. It combines age-aware tool discovery, curriculum-based practice and guided AI learning.
+
+- **Product:** study assistance, teacher tools, AI literacy scenarios, special education pathways and Greek Sign Language resources.
+- **Architecture:** vanilla JavaScript frontend; Vercel Functions; server-side model routing across Cloudflare Workers AI, Groq and Gemini, with optional Puter.
+- **Grounding:** official schoolbook retrieval, source-based answer checking and grounding coverage audit scripts. Coverage and accuracy remain subject to ongoing verification.
+- **Quality:** see the existing deployment and methodology documentation for project-specific checks and known limitations.
+- **My role:** product design, educational content and research, AI-assisted development, testing and deployment.
+
+[Live platform](https://www.aitools4kids.gr/) · [Methodology](https://www.aitools4kids.gr/methodology.html)
+
+The source is publicly visible for inspection; it is not offered under a permissive open-source license. See the existing license section.
+
+## Ελληνική τεκμηρίωση
+
 Το **aitools4kids.gr — Μαθαίνω Έξυπνα με AI** είναι ανεξάρτητο, δωρεάν, δίγλωσσο (EL/EN) εργαλείο για **γονείς, παιδιά και μαθητές 4–18 και εκπαιδευτικούς**.
 
 Ο στόχος είναι να βοηθά τον χρήστη να καταλάβει:
